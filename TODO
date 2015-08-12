@@ -1,0 +1,12 @@
+Local game configuration
+Allow config to be downloaded from CourtSpot
+Write results to CourtSpot
+Who's on left/Who's serving/Who's receiving (test out best UX)
+simple Counter
+undo
+shuttle counter (optional)
+cards/injuries etc. (!)
+automatic timers
+always re-calc current state
+
+test various network errors
