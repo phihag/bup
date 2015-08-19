@@ -1,0 +1,58 @@
+html, body {
+	font-family: 'DroidSans', sans-serif;
+}
+
+.default-invisible {
+	display: none;
+}
+
+.slim_form fieldset {
+	border: none;
+}
+
+.setup_players>div {
+	float: left;
+}
+.setup_players:after {
+	clear: both;
+}
+.setup_players_vs {	
+	margin: 0 10px;
+}
+
+#court {
+	width: 88vh; max-width: 100%;
+	height: 40vh;
+	font-size: 3vh;
+	margin: 0 auto;
+	background-image: url(static/icons/court_small.svg);
+	background-size: 100%;
+	background-repeat: no-repeat;
+	position: relative;
+}
+#court_left_top, #court_left_bottom, #court_right_top, #court_right_bottom {
+	position: absolute;
+	text-align: center;
+	font-size: inherit;
+}
+
+#court_left_top {
+	left: 0%;
+	right: 50%;
+	top: 22.5%;
+}
+#court_left_bottom {
+	left: 0%;
+	right: 50%;
+	bottom: 22.5%;
+}
+#court_right_top {
+	left: 50%;
+	right: 0%;
+	top: 22.5%;
+}
+#court_right_bottom {
+	left: 50%;
+	right: 0%;
+	bottom: 22.5%;
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Badminton Umpire Panel</title>
+	<link rel="stylesheet" href="bup.css" />
+</head>
+<body>
+
+<div id="setup" class="default-invisible">
+<h3>Spiel konfigurieren</h3>
+<form id="setup_manual_form" class="slim_form">
+
+<fieldset>
+<label><input type="radio" name="gametype" value="singles" checked="checked" />Einzel</label>
+<label><input type="radio" name="gametype" value="doubles" />Doppel</label>
+</fieldset>
+
+<fieldset class="setup_players" id="setup_players_singles">
+<div>
+<input type="text" name="team1_player" autofocus="autofocus" />
+</div>
+<div class="setup_players_vs">
+vs
+</div>
+<div>
+<input type="text" name="team2_player" />
+</div>
+</fieldset>
+
+<fieldset class="setup_players default-invisible" id="setup_players_doubles">
+<div>
+<input type="text" name="team1_player1" autofocus="autofocus" /><br/>
+<input type="text" name="team1_player2" />
+</div>
+<div class="setup_players_vs">
+vs
+</div>
+<div>
+<input type="text" name="team2_player1" /><br/>
+<input type="text" name="team2_player2" />
+</div>
+</fieldset>
+
+<button>Spiel starten</button>
+</form>
+</div>
+
+<div id="game" class="default-invisible">
+
+<div id="court">
+<div id="court_left_top"></div>
+<div id="court_left_bottom"></div>
+<div id="court_right_top"></div>
+<div id="court_right_bottom"></div>
+</div>
+
+
+<button disabled="disabled" id="left_score">+1</button>
+<button disabled="disabled" id="right_score">+1</button>
+
+</div>
+
+<script src="libs/jquery.min.js"></script>
+<script src="bup.js"></script>
+</body>
+</html>
