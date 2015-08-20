@@ -1,5 +1,6 @@
 html, body {
 	font-family: 'DroidSans', sans-serif;
+	background: #f7f7fa;
 }
 
 .default-invisible {
@@ -29,6 +30,7 @@ html, body {
 	background-size: 100%;
 	background-repeat: no-repeat;
 	position: relative;
+	border: 1px solid #e0e0e0;
 }
 #court_left_top, #court_left_bottom, #court_right_top, #court_right_bottom {
 	position: absolute;
