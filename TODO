@@ -1,4 +1,6 @@
 show score
+	highlight won
+	highlight serving
 multiple games
 simple score, count
 	show service over
@@ -58,3 +60,4 @@ show undo text hint during start
 larger hitbox for buttons
 store time of changes; analyze how long each point took
 test red card after game
+animate changing server sides and changing sides after game

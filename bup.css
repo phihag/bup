@@ -117,3 +117,10 @@ html, body, button {
 	font-size: 10vh;
 	white-space: pre;
 }
+
+.score_finished-game {
+	font-size: 10vh;
+}
+.score_current-game {
+	font-size: 15vh;
+}

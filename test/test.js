@@ -396,6 +396,34 @@ _describe('calc_state', function() {
 		assert.equal(s.court.player_right_even, null);
 		assert.equal(s.court.left_serving, true);
 		assert.equal(s.court.serving_downwards, true);
+
+		s = state_after([{
+			'type': 'pick_side', // Alice picks left
+			'team1_left': true,
+		}, {
+			'type': 'pick_server', // Alice serves
+			'team_id': 0,
+			'player_id': 0,
+		}, {
+			'type': 'love-all'
+		}, {
+			'type': 'score',
+			'side': 'right'
+		}, {
+			'type': 'score',
+			'side': 'left'
+		}], SINGLES_SETUP);
+		assert.equal(s.game.team1_serving, true);
+		assert.deepEqual(s.game.score, [1, 1]);
+		assert.equal(s.game.service_over, true);
+		assert.equal(s.game.teams_player1_even[0], false);
+		assert.equal(s.game.teams_player1_even[1], false);
+		assert.equal(s.court.player_left_odd.name, 'Alice');
+		assert.equal(s.court.player_left_even, null);
+		assert.equal(s.court.player_right_odd.name, 'Bob');
+		assert.equal(s.court.player_right_even, null);
+		assert.equal(s.court.left_serving, true);
+		assert.equal(s.court.serving_downwards, true);
 	});
 
 	_it('Game start and basic counting (doubles)', function() {

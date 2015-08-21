@@ -75,11 +75,9 @@ function calc_state(s) {
 				s.game.start_receiver_player_id = 0;
 			}
 			s.game.team1_serving = s.game.start_server_team_id == 0;
-			console.log("setting server: ", press.team_id, s.game.start_server_team_id);
 			break;
 		case 'pick_receiver':
 			s.game.start_receiver_player_id = press.player_id;
-			console.log("setting receiver: ", press.team_id);
 			s.game.teams_player1_even[press.team_id] = s.game.start_receiver_player_id == 0;
 			break;
 		case 'love-all':
@@ -96,8 +94,9 @@ function calc_state(s) {
 					s.game.teams_player1_even[team_index] = !s.game.teams_player1_even[team_index];
 				}
 			} else {
-				s.game.teams_player1_even[team_index] = !s.game.teams_player1_even[team_index];
-				s.game.teams_player1_even[1 - team_index] = s.game.teams_player1_even[team_index];
+				var even_score = s.game.score[team_index] % 2 == 0;
+				s.game.teams_player1_even[team_index] = even_score;
+				s.game.teams_player1_even[1 - team_index] = even_score;
 			}
 			s.game.team1_serving = team1_scored;
 			break;
@@ -183,6 +182,27 @@ function render() {
 		buttons.removeAttr('disabled');
 	} else {
 		buttons.attr('disabled', 'disabled');
+	}
+
+	$('#score_table').empty();
+	if (state.game.team1_left !== null) {
+		var _add_game = function(game) {
+			var tr = $('<tr>');
+			if (game.finished) {
+				tr.addClass('score_finished-game');
+			} else {
+				tr.addClass('score_current-game');
+			}
+			var left = $('<td>');
+			left.text(game.score[state.game.team1_left ? 0 : 1]);
+			tr.append(left);
+			var right = $('<td>');
+			right.text(game.score[state.game.team1_left ? 1 : 0]);
+			tr.append(right);
+			$('#score_table').append(tr);
+		};
+		state.match.finished_games.forEach(_add_game);
+		_add_game(state.game);
 	}
 
 	function _add_player_pick(container, type, team_id, player_id) {
