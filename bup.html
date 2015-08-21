@@ -49,17 +49,32 @@ vs
 <div id="game" class="default-invisible">
 
 <div id="court">
-<div id="court_left_top"></div>
-<div id="court_left_bottom"></div>
-<div id="court_right_top"></div>
-<div id="court_right_bottom"></div>
+<div id="court_arrow" class="default-invisible"></div>
+<div id="court_left_odd"></div>
+<div id="court_left_even"></div>
+<div id="court_right_even"></div>
+<div id="court_right_odd"></div>
 </div>
 
 
 <button disabled="disabled" id="left_score">+1</button>
 <button disabled="disabled" id="right_score">+1</button>
-
 </div>
+
+<div id="pick_side" class="pick_dialog default-invisible">
+<span>Spieler auf der linken Seite</span>
+<button id="pick_side_team1"></button>
+<button id="pick_side_team2"></button>
+</div>
+
+<div id="pick_server" class="pick_dialog default-invisible">
+<span>Aufschläger</span>
+</div>
+
+<div id="pick_receiver" class="pick_dialog default-invisible">
+<span>Rückschläger</span>
+</div>
+
 
 <script src="libs/jquery.min.js"></script>
 <script src="bup.js"></script>

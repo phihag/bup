@@ -1,6 +1,8 @@
-exception button (cards / R)
+server/receiver arrow
 
-simple Counter
+Who's on left/Who's serving/Who's receiving (test out best UX)
+basic design
+	simple Counter
 bake in rules
 support for doubles
 undo
@@ -11,12 +13,12 @@ add settings
 	shuttle counter
 Allow config to be downloaded from CourtSpot
 Write results to CourtSpot
-Who's on left/Who's serving/Who's receiving (test out best UX)
 shuttle counter (optional)
 cards/injuries etc.
 	yellow card button
 	red card button
 	black card button
+	character buttons
 automatic timers
 negative timers (add option for that)
 
@@ -30,8 +32,9 @@ Make it an offline web application
 Installable on Android
 automatically go to full screen
 
-touch interface
-
+test touch interface
+test touch latency
+prevent double touches
 
 injury timer
 generate umpire scoresheet (PDF)
@@ -47,3 +50,4 @@ allow changing player names during game (warn if )
 allow red/yellow/black cards before/after game
 online: source other live tickers
 strange counting (new in Bundesliga)
+make buttons keyboard-usable

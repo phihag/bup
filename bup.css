@@ -1,6 +1,7 @@
 html, body {
 	font-family: 'DroidSans', sans-serif;
 	background: #f7f7fa;
+	font-size: 16px;
 }
 
 .default-invisible {
@@ -32,29 +33,60 @@ html, body {
 	position: relative;
 	border: 1px solid #e0e0e0;
 }
-#court_left_top, #court_left_bottom, #court_right_top, #court_right_bottom {
+#court_left_even, #court_left_odd, #court_right_even, #court_right_odd {
 	position: absolute;
 	text-align: center;
 	font-size: inherit;
 }
 
-#court_left_top {
+#court_left_odd {
 	left: 0%;
 	right: 50%;
 	top: 22.5%;
 }
-#court_left_bottom {
+#court_left_even {
 	left: 0%;
 	right: 50%;
 	bottom: 22.5%;
 }
-#court_right_top {
+#court_right_even {
 	left: 50%;
 	right: 0%;
 	top: 22.5%;
 }
-#court_right_bottom {
+#court_right_odd {
 	left: 50%;
 	right: 0%;
 	bottom: 22.5%;
+}
+
+#court_arrow {
+	position: absolute;
+	left: 50%; top: 50%;
+	margin-left: -7.5vh; margin-top: -7.5vh;
+	width: 15vh; height: 15vh;
+	background-image: url(static/icons/court_arrow.svg);
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+
+.pick_dialog {
+	position: absolute;
+	bottom: 0;
+	left: 0; right: 0;
+	text-align: center;
+	width: 20em;
+	font-size: 200%;
+	margin: 0 auto;
+	padding: 1em 1em 0 1em;
+	background: rgba(255, 255, 255, 0.9);
+	border-top-left-radius: 4vh;
+	border-top-right-radius: 4vh;
+}
+.pick_dialog button {
+	font-size: inherit;
+	display: block;
+	margin: 1em 0.5em 0.5em 0.5em;
+	width: 19em;
+	padding: 0.5em 0;
 }
