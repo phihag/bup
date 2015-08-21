@@ -1,7 +1,9 @@
 html, body {
-	font-family: 'DroidSans', sans-serif;
 	background: #f7f7fa;
 	font-size: 16px;
+}
+html, body, button {
+	font-family: 'Droid Sans';
 }
 
 .default-invisible {
@@ -22,7 +24,10 @@ html, body {
 	margin: 0 10px;
 }
 
+#court_container {
+}
 #court {
+	position: relative;
 	width: 88vh; max-width: 100%;
 	height: 40vh;
 	font-size: 3vh;
@@ -30,7 +35,6 @@ html, body {
 	background-image: url(static/icons/court_small.svg);
 	background-size: 100%;
 	background-repeat: no-repeat;
-	position: relative;
 	border: 1px solid #e0e0e0;
 }
 #court_left_even, #court_left_odd, #court_right_even, #court_right_odd {
@@ -78,7 +82,7 @@ html, body {
 	width: 20em;
 	font-size: 200%;
 	margin: 0 auto;
-	padding: 1em 1em 0 1em;
+	padding: 0 1em 1em 1em;
 	background: rgba(255, 255, 255, 0.9);
 	border-top-left-radius: 4vh;
 	border-top-right-radius: 4vh;
@@ -89,4 +93,27 @@ html, body {
 	margin: 1em 0.5em 0.5em 0.5em;
 	width: 19em;
 	padding: 0.5em 0;
+}
+
+#left_score, #right_score {
+	position: absolute;
+	font-size: 15vh;
+	padding: 4vh;
+	bottom: 5vh;
+}
+#left_score {
+	left: 3vw;
+}
+#right_score {
+	right: 3vw;
+}
+
+#love-all {
+	position: absolute;
+	bottom: 5vh;
+	left: 50%;
+	width: 80vh;
+	margin-left: -40vh;
+	font-size: 10vh;
+	white-space: pre;
 }

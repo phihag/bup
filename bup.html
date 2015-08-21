@@ -7,6 +7,12 @@
 </head>
 <body>
 
+<div id="score">
+<table id="score_table">
+
+</table>
+</div>
+
 <div id="setup" class="default-invisible">
 <h3>Spiel konfigurieren</h3>
 <form id="setup_manual_form" class="slim_form">
@@ -46,8 +52,10 @@ vs
 </form>
 </div>
 
+
 <div id="game" class="default-invisible">
 
+<div id="court_container">
 <div id="court">
 <div id="court_arrow" class="default-invisible"></div>
 <div id="court_left_odd"></div>
@@ -55,11 +63,13 @@ vs
 <div id="court_right_even"></div>
 <div id="court_right_odd"></div>
 </div>
+</div>
 
 
 <button disabled="disabled" id="left_score">+1</button>
+<button class="default-invisible" id="love-all">0 beide
+Bitte spielen</button>
 <button disabled="disabled" id="right_score">+1</button>
-</div>
 
 <div id="pick_side" class="pick_dialog default-invisible">
 <span>Spieler auf der linken Seite</span>
@@ -75,6 +85,7 @@ vs
 <span>Rückschläger</span>
 </div>
 
+</div>
 
 <script src="libs/jquery.min.js"></script>
 <script src="bup.js"></script>

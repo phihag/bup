@@ -39,17 +39,22 @@ function calc_state(s) {
 		s = state;
 	}
 
+	s.match = {
+		finished_games: [],
+		finished: false
+	};
 	s.game = {
 		start_team1_left: null,
 		start_server_team_id: null,
 		start_server_player_id: null,
 		start_receiver_player_id: null,
 
+		score: [null, null],
+		team1_serving: null,
+		service_over: null,
 		team1_left: null,
 		teams_player1_even: [null, null],
-		team1_score: null,
-		team2_score: null,
-		team1_serving: null,
+
 		finished: false,
 	};
 	s.presses.forEach(function(press) {
@@ -70,10 +75,31 @@ function calc_state(s) {
 				s.game.start_receiver_player_id = 0;
 			}
 			s.game.team1_serving = s.game.start_server_team_id == 0;
+			console.log("setting server: ", press.team_id, s.game.start_server_team_id);
 			break;
 		case 'pick_receiver':
 			s.game.start_receiver_player_id = press.player_id;
+			console.log("setting receiver: ", press.team_id);
 			s.game.teams_player1_even[press.team_id] = s.game.start_receiver_player_id == 0;
+			break;
+		case 'love-all':
+			s.game.score = [0, 0];
+			s.game.service_over = false;
+			break;
+		case 'score':
+			var team1_scored = (s.game.team1_left == (press.side == 'left'));
+			s.game.service_over = team1_scored != s.game.team1_serving;
+			var team_index = team1_scored ? 0 : 1;
+			s.game.score[team_index] += 1;
+			if (s.setup.is_doubles) {
+				if (! s.game.service_over) {
+					s.game.teams_player1_even[team_index] = !s.game.teams_player1_even[team_index];
+				}
+			} else {
+				s.game.teams_player1_even[team_index] = !s.game.teams_player1_even[team_index];
+				s.game.teams_player1_even[1 - team_index] = s.game.teams_player1_even[team_index];
+			}
+			s.game.team1_serving = team1_scored;
 			break;
 		}
 	});
@@ -107,15 +133,17 @@ function calc_state(s) {
 				(s.game.teams_player1_even[1] ? 'odd' : 'even')] = s.setup.teams[1].players[1];
 		}
 	}
+
 	if ((! s.game.finished) && (s.game.team1_serving !== null) && (s.game.team1_left !== null)) {
 		s.court.left_serving = s.game.team1_serving == s.game.team1_left;
-		if (s.team1_score === null) {
+		if (s.game.score[0] === null) {
 			s.court.serving_downwards = ! s.court.left_serving;
 		} else {
-			var score = s.game.team1_serving ? s.team1_score : s.team2_score;
-			s.court.serving_downwards = (score % 2 == 0) == s.court.left_serving;
+			var score = s.game.score[s.game.team1_serving ? 0 : 1];
+			s.court.serving_downwards = (score % 2 == 0) != s.court.left_serving;
 		}
 	}
+
 	return s;
 }
 
@@ -132,7 +160,29 @@ function render() {
 		$('#court_arrow').hide();
 	} else {
 		$('#court_arrow').show();
-		// TODO rotate arrow here
+		var transform_css = ('scale(' +
+			(state.court.left_serving ? '-1' : '1') + ',' +
+			(state.court.serving_downwards ? '1' : '-1') + ')'
+		);
+		$('#court_arrow').css({
+			'transform': transform_css,
+			'-ms-transform': transform_css,
+			'-webkit-transform': transform_css,
+		});
+	}
+
+	if ((state.game.start_server_player_id !== null) && (state.game.start_server_player_id !== null) && (state.game.score[0] === null)) {
+		$('#love-all').show();
+	} else {
+		$('#love-all').hide();
+	}
+
+	var score_enabled = (state.game.score[0] !== null);
+	var buttons = $('#left_score,#right_score');
+	if (score_enabled) {
+		buttons.removeAttr('disabled');
+	} else {
+		buttons.attr('disabled', 'disabled');
 	}
 
 	function _add_player_pick(container, type, team_id, player_id) {
@@ -148,7 +198,6 @@ function render() {
 		});
 		container.append(btn);
 	}
-
 	$('#pick_side').hide();
 	$('#pick_server').hide();
 	$('#pick_receiver').hide();
@@ -240,6 +289,24 @@ function ui_init() {
 			team1_left: false,
 		});
 	});
+	$('#love-all').on('click', function() {
+		on_press({
+			type: 'love-all'
+		});
+	});
+	$('#left_score').on('click', function() {
+		on_press({
+			type: 'score',
+			side: 'left'
+		});
+	});
+	$('#right_score').on('click', function() {
+		on_press({
+			type: 'score',
+			side: 'right'
+		});
+	});
+
 
 	show_setup();
 }
@@ -248,7 +315,7 @@ if (typeof $ !== 'undefined') {
 	$(ui_init);
 }
 
-if (typeof module !== "undefined") {
+if (typeof module !== 'undefined') {
 	module.exports = {
 		init_state: init_state,
 		calc_state: calc_state,

@@ -1,12 +1,11 @@
-server/receiver arrow
-
-Who's on left/Who's serving/Who's receiving (test out best UX)
-basic design
-	simple Counter
-bake in rules
-support for doubles
+show score
+multiple games
+simple score, count
+	show service over
+	show game point
+	show match point
+	show interval
 undo
-	show text undo during start
 
 add settings
 	show full pronounciation
@@ -19,7 +18,11 @@ cards/injuries etc.
 	red card button
 	black card button
 	character buttons
+	walkover at start of game
+	test that yellow card can only given out once per side
 automatic timers
+	at start of game
+	at 11
 negative timers (add option for that)
 
 live web interface
@@ -46,8 +49,12 @@ show what was undone
 support for team names
 team names in pronounciation
 support for team flags
-allow changing player names during game (warn if )
+allow changing player names during game (warn if discipline is changed)
 allow red/yellow/black cards before/after game
 online: source other live tickers
-strange counting (new in Bundesliga)
-make buttons keyboard-usable
+strange counting (new suggestions in Bundesliga, 5x11 etc.)
+make everything buttons keyboard-usable; shortcuts etc.
+show undo text hint during start
+larger hitbox for buttons
+store time of changes; analyze how long each point took
+test red card after game
