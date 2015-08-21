@@ -2,7 +2,7 @@ language: node_js
 node_js:
   - 0.10
 install:
-	- make deps
+  - make deps
 notifications:
   email:
     - phihag@phihag.de
