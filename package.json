@@ -13,7 +13,8 @@
 	"dependencies": {
 	},
 	"devDependencies": {
-		"jsdom": "<4"
+		"jsdom": "<4",
+		"mocha": "*"
 	},
 	"private": true
 }
