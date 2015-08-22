@@ -1,6 +1,3 @@
-show score
-	highlight won
-	highlight serving
 multiple games
 simple score, count
 	show service over
@@ -61,3 +58,6 @@ larger hitbox for buttons
 store time of changes; analyze how long each point took
 test red card after game
 animate changing server sides and changing sides after game
+bump font size of names
+find a better font for score display
+score: numbers of past sets closer together

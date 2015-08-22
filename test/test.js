@@ -24,7 +24,8 @@ _describe('calc_state', function() {
 		}, {
 			players: [{name: 'Bob'}]
 		}],
-		is_doubles: false
+		is_doubles: false,
+		counting: '3x21'
 	};
 	var DOUBLES_SETUP = {
 		teams: [{
@@ -32,7 +33,8 @@ _describe('calc_state', function() {
 		}, {
 			players: [{name: 'Bob'}, {name: 'Birgit'}]
 		}],
-		is_doubles: true
+		is_doubles: true,
+		counting: '3x21'
 	};
 	function state_after(presses, setup) {
 		var state = {};

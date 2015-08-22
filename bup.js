@@ -40,9 +40,18 @@ function calc_state(s) {
 	}
 
 	s.match = {
-		finished_games: [],
+		finished_games: [{score: [21, 23], finished: true}, {score: [21, 19], finished: true}],
 		finished: false
 	};
+
+	switch (s.setup.counting) {
+	case '3x21':
+		s.match.max_games = 3;
+		break;
+	default:
+		throw new Error('Invalid counting scheme ' + s.setup.counting);
+	}
+
 	s.game = {
 		start_team1_left: null,
 		start_server_team_id: null,
@@ -185,24 +194,61 @@ function render() {
 	}
 
 	$('#score_table').empty();
-	if (state.game.team1_left !== null) {
-		var _add_game = function(game) {
-			var tr = $('<tr>');
-			if (game.finished) {
-				tr.addClass('score_finished-game');
-			} else {
-				tr.addClass('score_current-game');
+	var _add_game = function(game, is_current) {
+		var points;
+		var tr = $('<tr>');
+		if (!game) {
+			tr.addClass('score_future-game');
+		} else if (is_current) {
+			tr.addClass('score_current-game');
+		} else {
+			tr.addClass('score_finished-game');
+		}
+		var left = $('<td class="score score_left">');
+		if (game) {
+			points = game.score[state.game.team1_left ? 0 : 1];
+			if (points === null) {
+				left.addClass('score_empty');
+				points = 0;
 			}
-			var left = $('<td>');
-			left.text(game.score[state.game.team1_left ? 0 : 1]);
-			tr.append(left);
-			var right = $('<td>');
-			right.text(game.score[state.game.team1_left ? 1 : 0]);
-			tr.append(right);
-			$('#score_table').append(tr);
-		};
-		state.match.finished_games.forEach(_add_game);
-		_add_game(state.game);
+			if (game.finished) {
+				if ((game.score[0] > game.score[1]) == state.game.team1_left) {
+					left.addClass('score_won');
+				}
+			} else if ((game.team1_serving !== null) && (game.team1_serving == state.game.team1_left)) {
+				left.addClass('score_serving');
+			}
+			left.text(points);
+		}
+		tr.append(left);
+		var right = $('<td class="score score_right">');
+		if (game) {
+			points = game.score[state.game.team1_left ? 1 : 0];
+			if (points === null) {
+				right.addClass('score_empty');
+				points = 0;
+			}
+			if (game.finished) {
+				if ((game.score[0] > game.score[1]) != state.game.team1_left) {
+					right.addClass('score_won');
+				}
+			} else if ((game.team1_serving !== null) && (game.team1_serving != state.game.team1_left)) {
+				right.addClass('score_serving');
+			}
+			right.text(points);
+		}
+		tr.append(right);
+		$('#score_table').append(tr);
+	};
+
+	for (var i = 0;i < state.match.max_games;i++) {
+		if (i < state.match.finished_games.length) {
+			_add_game(state.match.finished_games[i]);
+		} else if (i == state.match.finished_games.length) {
+			_add_game(state.game, true);
+		} else {
+			_add_game(null);
+		}
 	}
 
 	function _add_player_pick(container, type, team_id, player_id) {
@@ -280,6 +326,7 @@ function ui_init() {
 		var team1, team2;
 		var setup = {
 			is_doubles: $('#setup_manual_form [name="gametype"]:checked').val() == 'doubles',
+			counting: '3x21'
 		};
 
 		if (setup.is_doubles) {

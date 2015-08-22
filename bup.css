@@ -1,6 +1,7 @@
 html, body {
 	background: #f7f7fa;
 	font-size: 16px;
+	margin: 0; padding: 0;
 }
 html, body, button {
 	font-family: 'Droid Sans';
@@ -30,12 +31,12 @@ html, body, button {
 	position: relative;
 	width: 88vh; max-width: 100%;
 	height: 40vh;
-	font-size: 3vh;
+	font-size: 4vh;
 	margin: 0 auto;
 	background-image: url(static/icons/court_small.svg);
 	background-size: 100%;
 	background-repeat: no-repeat;
-	border: 1px solid #e0e0e0;
+	border: 1px solid #dadada;
 }
 #court_left_even, #court_left_odd, #court_right_even, #court_right_odd {
 	position: absolute;
@@ -118,9 +119,65 @@ html, body, button {
 	white-space: pre;
 }
 
-.score_finished-game {
-	font-size: 10vh;
+#score {
+	text-align: center;
+}
+#score_table {
+	background: #fcfcff;
+	display: inline-table;
+	margin-bottom: 1vh;
+	border-collapse: separate;
+    border-spacing: 0;
+}
+#score_table tr>td:first-child {
+	border-left: 1px solid #dadada;
+}
+#score_table tr>td:last-child {
+	border-right: 1px solid #dadada;
+}
+#score_table tr:last-child td {
+	border-bottom: 1px solid #dadada;
+}
+#score_table, #score_table tr:last-child td:first-child {
+	border-bottom-left-radius: 2vh;
+}
+#score_table, #score_table tr:last-child td:last-child {
+	border-bottom-right-radius: 2vh;
+}
+
+.score_finished-game td.score, .score_future-game td.score, .score_current-game td.score {
+	vertical-align: middle;
+	padding: 0 2vh;
+	min-width: 1.4em;
+	color: #444444;
+}
+.score_finished-game, .score_future-game {
+	font-size: 5vh;
+	height: 7vh;
 }
 .score_current-game {
 	font-size: 15vh;
+	height: 15vh;
+	line-height: 15vh;
+}
+.score_empty {
+	color: rgba(0, 0, 0, 0.02);
+}
+.score_won {
+	color: #000000 !important;
+}
+.score_serving {
+	color: #e86100 !important;
+}
+.score_left {
+	text-align: right;
+}
+.score_right {
+	text-align: left;
+}
+.score_current-game>td.score_left {
+	padding-right: 3vh;
+}
+.score_current-game>td.score_right {
+	padding-left: 3vh;
 }
