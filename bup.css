@@ -80,10 +80,11 @@ html, body, button {
 	bottom: 0;
 	left: 0; right: 0;
 	text-align: center;
-	width: 20em;
-	font-size: 200%;
+	width: 40vw;
+	min-width: 20em;
+	font-size: 4vh;
 	margin: 0 auto;
-	padding: 0 1em 1em 1em;
+	padding: 2vh 2vw 0 2vw;
 	background: rgba(255, 255, 255, 0.9);
 	border-top-left-radius: 4vh;
 	border-top-right-radius: 4vh;
@@ -91,9 +92,13 @@ html, body, button {
 .pick_dialog button {
 	font-size: inherit;
 	display: block;
-	margin: 1em 0.5em 0.5em 0.5em;
-	width: 19em;
+	margin: 4vh 0 4vh 0;
+	width: 100%;
 	padding: 0.5em 0;
+	white-space: pre-wrap;
+}
+.pick_dialog button+button {
+	margin-top: 6vh;
 }
 
 #left_score, #right_score {
@@ -110,16 +115,6 @@ html, body, button {
 }
 #right_score {
 	right: 3vw;
-}
-
-#love-all {
-	position: absolute;
-	bottom: 5vh;
-	left: 50%;
-	width: 80vh;
-	margin-left: -40vh;
-	font-size: 10vh;
-	white-space: pre;
 }
 
 #score {
@@ -148,20 +143,28 @@ html, body, button {
 	border-bottom-right-radius: 2vh;
 }
 
+.score_announcements td {
+	font-size: 2vh;
+	height: 3vh;
+	vertical-align: middle;
+}
+span.score_announcement+span.score_announcement {
+	padding-left: 0.8em;
+}
 .score_finished-game td.score, .score_future-game td.score, .score_current-game td.score {
 	vertical-align: middle;
 	padding: 0 2vh;
-	min-width: 1.4em;
+	min-width: 2em;
 	color: #444444;
 }
 .score_finished-game, .score_future-game {
-	font-size: 5vh;
-	height: 7vh;
+	font-size: 3vh;
+	line-height: 3vh;
+	height: 3.5vh;
 }
 .score_current-game {
-	font-size: 15vh;
-	height: 15vh;
-	line-height: 15vh;
+	font-size: 8vh;
+	height: 8vh;
 }
 .score_empty {
 	color: rgba(0, 0, 0, 0.05) !important;
@@ -186,12 +189,4 @@ html, body, button {
 }
 .score_current-game>td.score_right {
 	padding-left: 3vh;
-}
-.score_announcements td {
-	font-size: 3vh;
-	height: 4vh;
-	vertical-align: middle;
-}
-span.score_announcement+span.score_announcement {
-	padding-left: 0.8em;
 }

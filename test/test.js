@@ -65,6 +65,7 @@ _describe('calc_state', function() {
 		assert.equal(s.game.start_team1_left, null);
 		assert.equal(s.game.team1_left, null);
 		assert.equal(s.game.finished, false);
+		assert.equal(s.game.team1_won, null);
 		assert.equal(s.game.score[0], null);
 		assert.equal(s.game.score[1], null);
 		assert.equal(s.game.interval, null);
@@ -85,6 +86,7 @@ _describe('calc_state', function() {
 		assert.equal(s.game.start_team1_left, null);
 		assert.equal(s.game.team1_left, null);
 		assert.equal(s.game.finished, false);
+		assert.equal(s.game.team1_won, null);
 		assert.equal(s.game.score[0], null);
 		assert.equal(s.game.score[1], null);
 		assert.equal(s.game.interval, null);
@@ -572,6 +574,7 @@ _describe('calc_state', function() {
 		assert.equal(s.court.left_serving, false);
 		assert.equal(s.court.serving_downwards, false);
 		assert.equal(s.game.interval, true);
+		assert.equal(s.game.change_sides, false);
 
 		presses.push({
 			'type': 'score',
@@ -606,7 +609,7 @@ _describe('calc_state', function() {
 		assert.equal(s.game.interval, false);
 	});
 
-	_it('Gamepoint and Game', function() {
+	_it('Correct announcements', function() {
 		var presses = [{
 			'type': 'pick_side', // Alice picks left
 			'team1_left': true,
@@ -660,6 +663,7 @@ _describe('calc_state', function() {
 		assert.equal(s.game.game, true);
 		assert.equal(s.game.matchpoint, false);
 		assert.equal(s.game.finished, true);
+		assert.equal(s.game.team1_won, true);
 		assert.equal(s.game.team1_serving, null);
 		assert.equal(s.court.left_serving, null);
 		assert.equal(s.court.serving_downwards, null);
@@ -677,6 +681,7 @@ _describe('calc_state', function() {
 		assert.equal(s.game.game, false);
 		assert.equal(s.game.matchpoint, false);
 		assert.equal(s.game.finished, false);
+		assert.equal(s.game.team1_won, null);
 		assert.equal(s.court.left_serving, false);
 		assert.equal(s.court.serving_downwards, true);
 
@@ -693,6 +698,7 @@ _describe('calc_state', function() {
 		assert.equal(s.game.game, false);
 		assert.equal(s.game.matchpoint, false);
 		assert.equal(s.game.finished, false);
+		assert.equal(s.game.team1_won, null);
 		assert.equal(s.court.left_serving, false);
 		assert.equal(s.court.serving_downwards, false);
 
@@ -710,6 +716,7 @@ _describe('calc_state', function() {
 		assert.equal(s.game.game, true);
 		assert.equal(s.game.matchpoint, false);
 		assert.equal(s.game.finished, true);
+		assert.equal(s.game.team1_won, false);
 		assert.equal(s.court.left_serving, null);
 		assert.equal(s.court.serving_downwards, null);
 
@@ -810,6 +817,7 @@ _describe('calc_state', function() {
 		assert.equal(s.game.game, false);
 		assert.equal(s.game.matchpoint, false);
 		assert.equal(s.game.finished, false);
+		assert.equal(s.game.team1_won, null);
 		assert.equal(s.court.left_serving, true);
 		assert.equal(s.court.serving_downwards, true);
 
@@ -827,6 +835,7 @@ _describe('calc_state', function() {
 		assert.equal(s.game.game, true);
 		assert.equal(s.game.matchpoint, false);
 		assert.equal(s.game.finished, true);
+		assert.equal(s.game.team1_won, true);
 		assert.equal(s.court.left_serving, null);
 		assert.equal(s.court.serving_downwards, null);
 
@@ -842,6 +851,7 @@ _describe('calc_state', function() {
 		assert.equal(s.game.game, false);
 		assert.equal(s.game.matchpoint, false);
 		assert.equal(s.game.finished, false);
+		assert.equal(s.game.team1_won, null);
 		assert.equal(s.game.team1_serving, false);
 		assert.equal(s.court.left_serving, false);
 		assert.equal(s.court.serving_downwards, false);
@@ -859,6 +869,7 @@ _describe('calc_state', function() {
 		assert.equal(s.game.game, true);
 		assert.equal(s.game.matchpoint, false);
 		assert.equal(s.game.finished, true);
+		assert.equal(s.game.team1_won, false);
 		assert.equal(s.game.team1_serving, null);
 		assert.equal(s.court.left_serving, null);
 		assert.equal(s.court.serving_downwards, null);
@@ -875,9 +886,9 @@ _describe('calc_state', function() {
 		assert.equal(s.game.game, true);
 		assert.equal(s.game.matchpoint, false);
 		assert.equal(s.game.finished, true);
+		assert.equal(s.game.team1_won, true);
 		assert.equal(s.game.team1_serving, null);
 		assert.equal(s.court.left_serving, null);
 		assert.equal(s.court.serving_downwards, null);
 	});
-
 });
