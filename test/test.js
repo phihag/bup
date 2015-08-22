@@ -18,17 +18,21 @@ var _it = ((typeof it == 'undefined') ?
 
 
 function _press_score(presses, left_score, right_score) {
-	while (left_score-- > 0) {
-		presses.push({
-			type: 'score',
-			side: 'left'
-		});
-	}
-	while (right_score-- > 0) {
-		presses.push({
-			type: 'score',
-			side: 'right'
-		});
+	while ((left_score > 0) || (right_score > 0)) {
+		if (left_score > 0) {
+			presses.push({
+				type: 'score',
+				side: 'left'
+			});
+			left_score--;
+		}
+		if (right_score > 0) {
+			presses.push({
+				type: 'score',
+				side: 'right'
+			});
+			right_score--;
+		}
 	}
 }
 
@@ -896,6 +900,7 @@ _describe('calc_state', function() {
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.deepEqual(s.match.finished_games[0].score, [30, 29]);
+		assert.deepEqual(s.match.game_score, [1, 0]);
 		assert.deepEqual(s.game.score, [null, null]);
 		assert.equal(s.game.service_over, null);
 		assert.equal(s.game.interval, null);
@@ -908,5 +913,429 @@ _describe('calc_state', function() {
 		assert.equal(s.court.left_serving, false);
 		assert.equal(s.court.serving_downwards, true);
 
+		presses.push({
+			'type': 'love-all'
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(s.game.score, [0, 0]);
+		assert.equal(s.game.service_over, false);
+		assert.equal(s.game.interval, false);
+		assert.equal(s.game.gamepoint, false);
+		assert.equal(s.game.game, false);
+		assert.equal(s.game.matchpoint, false);
+		assert.equal(s.game.finished, false);
+		assert.equal(s.game.team1_won, null);
+		assert.equal(s.game.team1_serving, true);
+		assert.equal(s.court.left_serving, false);
+		assert.equal(s.court.serving_downwards, true);
+		assert.equal(s.court.player_left_odd, null);
+		assert.equal(s.court.player_left_even.name, 'Bob');
+		assert.equal(s.court.player_right_odd, null);
+		assert.equal(s.court.player_right_even.name, 'Alice');
+
+		_press_score(presses, 9, 9);
+		presses.push({
+			'type': 'score',
+			'side': 'left'
+		});
+		presses.push({
+			'type': 'score',
+			'side': 'right'
+		});
+		presses.push({
+			'type': 'score',
+			'side': 'right'
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(s.game.score, [11, 10]);
+		assert.equal(s.game.service_over, false);
+		assert.equal(s.game.interval, true);
+		assert.equal(s.game.change_sides, false);
+		assert.equal(s.game.gamepoint, false);
+		assert.equal(s.game.game, false);
+		assert.equal(s.game.matchpoint, false);
+		assert.equal(s.game.finished, false);
+		assert.equal(s.game.team1_won, null);
+		assert.equal(s.game.team1_serving, true);
+		assert.equal(s.court.left_serving, false);
+		assert.equal(s.court.serving_downwards, false);
+		assert.equal(s.court.player_left_odd.name, 'Bob');
+		assert.equal(s.court.player_left_even, null);
+		assert.equal(s.court.player_right_odd.name, 'Alice');
+		assert.equal(s.court.player_right_even, null);
+
+		_press_score(presses, 9, 7);
+		presses.push({
+			'type': 'score',
+			'side': 'right'
+		});
+		presses.push({
+			'type': 'score',
+			'side': 'left'
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(s.game.score, [19, 20]);
+		assert.equal(s.game.service_over, true);
+		assert.equal(s.game.interval, false);
+		assert.equal(s.game.change_sides, false);
+		assert.equal(s.game.gamepoint, true);
+		assert.equal(s.game.game, false);
+		assert.equal(s.game.matchpoint, false);
+		assert.equal(s.game.finished, false);
+		assert.equal(s.game.team1_won, null);
+		assert.equal(s.game.team1_serving, false);
+		assert.equal(s.court.left_serving, true);
+		assert.equal(s.court.serving_downwards, false);
+		assert.equal(s.court.player_left_odd, null);
+		assert.equal(s.court.player_left_even.name, 'Bob');
+		assert.equal(s.court.player_right_odd, null);
+		assert.equal(s.court.player_right_even.name, 'Alice');
+
+		presses.push({
+			'type': 'score',
+			'side': 'right'
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(s.game.score, [20, 20]);
+		assert.equal(s.game.service_over, true);
+		assert.equal(s.game.interval, false);
+		assert.equal(s.game.change_sides, false);
+		assert.equal(s.game.gamepoint, false);
+		assert.equal(s.game.game, false);
+		assert.equal(s.game.matchpoint, false);
+		assert.equal(s.game.finished, false);
+		assert.equal(s.game.team1_won, null);
+		assert.equal(s.game.team1_serving, true);
+		assert.equal(s.court.left_serving, false);
+		assert.equal(s.court.serving_downwards, true);
+		assert.equal(s.court.player_left_odd, null);
+		assert.equal(s.court.player_left_even.name, 'Bob');
+		assert.equal(s.court.player_right_odd, null);
+		assert.equal(s.court.player_right_even.name, 'Alice');
+
+		presses.push({
+			'type': 'score',
+			'side': 'right'
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(s.game.score, [21, 20]);
+		assert.equal(s.game.service_over, false);
+		assert.equal(s.game.interval, false);
+		assert.equal(s.game.change_sides, false);
+		assert.equal(s.game.gamepoint, false);
+		assert.equal(s.game.game, false);
+		assert.equal(s.game.matchpoint, false);
+		assert.equal(s.game.finished, false);
+		assert.equal(s.game.team1_won, null);
+		assert.equal(s.game.team1_serving, true);
+		assert.equal(s.court.left_serving, false);
+		assert.equal(s.court.serving_downwards, false);
+		assert.equal(s.court.player_left_odd.name, 'Bob');
+		assert.equal(s.court.player_left_even, null);
+		assert.equal(s.court.player_right_odd.name, 'Alice');
+		assert.equal(s.court.player_right_even, null);
+
+		presses.push({
+			'type': 'score',
+			'side': 'left'
+		});
+		_press_score(presses, 6, 6);
+		presses.push({
+			'type': 'score',
+			'side': 'left'
+		});
+		presses.push({
+			'type': 'score',
+			'side': 'right'
+		});
+		presses.push({
+			'type': 'score',
+			'side': 'right'
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(s.game.score, [29, 28]);
+		assert.equal(s.game.service_over, false);
+		assert.equal(s.game.interval, false);
+		assert.equal(s.game.change_sides, false);
+		assert.equal(s.game.gamepoint, false);
+		assert.equal(s.game.game, false);
+		assert.equal(s.game.matchpoint, true);
+		assert.equal(s.game.finished, false);
+		assert.equal(s.game.team1_won, null);
+		assert.equal(s.game.team1_serving, true);
+		assert.equal(s.court.left_serving, false);
+		assert.equal(s.court.serving_downwards, false);
+		assert.equal(s.court.player_left_odd.name, 'Bob');
+		assert.equal(s.court.player_left_even, null);
+		assert.equal(s.court.player_right_odd.name, 'Alice');
+		assert.equal(s.court.player_right_even, null);
+
+		presses.push({
+			'type': 'score',
+			'side': 'left'
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(s.game.score, [29, 29]);
+		assert.equal(s.game.service_over, true);
+		assert.equal(s.game.interval, false);
+		assert.equal(s.game.change_sides, false);
+		assert.equal(s.game.gamepoint, true);
+		assert.equal(s.game.game, false);
+		assert.equal(s.game.matchpoint, false);
+		assert.equal(s.game.finished, false);
+		assert.equal(s.game.team1_won, null);
+		assert.equal(s.game.team1_serving, false);
+		assert.equal(s.court.left_serving, true);
+		assert.equal(s.court.serving_downwards, true);
+		assert.equal(s.court.player_left_odd.name, 'Bob');
+		assert.equal(s.court.player_left_even, null);
+		assert.equal(s.court.player_right_odd.name, 'Alice');
+		assert.equal(s.court.player_right_even, null);
+
+		presses.push({
+			'type': 'score',
+			'side': 'left'
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(s.game.score, [29, 30]);
+		assert.equal(s.game.service_over, null);
+		assert.equal(s.game.interval, false);
+		assert.equal(s.game.change_sides, false);
+		assert.equal(s.game.gamepoint, false);
+		assert.equal(s.game.game, true);
+		assert.equal(s.game.matchpoint, false);
+		assert.equal(s.game.finished, true);
+		assert.equal(s.game.team1_won, false);
+		assert.equal(s.game.team1_serving, null);
+		assert.equal(s.court.left_serving, null);
+		assert.equal(s.court.serving_downwards, null);
+
+		presses.push({
+			'type': 'postgame-confirm'
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(s.match.finished_games[0].score, [30, 29]);
+		assert.deepEqual(s.match.finished_games[1].score, [29, 30]);
+		assert.deepEqual(s.match.game_score, [1, 1]);
+		assert.deepEqual(s.game.score, [null, null]);
+		assert.equal(s.game.service_over, null);
+		assert.equal(s.game.interval, null);
+		assert.equal(s.game.change_sides, null);
+		assert.equal(s.game.gamepoint, null);
+		assert.equal(s.game.game, null);
+		assert.equal(s.game.matchpoint, null);
+		assert.equal(s.game.finished, false);
+		assert.equal(s.game.team1_won, null);
+		assert.equal(s.game.team1_serving, false);
+		assert.equal(s.court.left_serving, false);
+		assert.equal(s.court.serving_downwards, true);
+
+		presses.push({
+			'type': 'love-all'
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(s.match.finished_games[0].score, [30, 29]);
+		assert.deepEqual(s.match.finished_games[1].score, [29, 30]);
+		assert.deepEqual(s.match.game_score, [1, 1]);
+		assert.deepEqual(s.game.score, [0, 0]);
+		assert.equal(s.game.service_over, false);
+		assert.equal(s.game.interval, false);
+		assert.equal(s.game.change_sides, false);
+		assert.equal(s.game.gamepoint, false);
+		assert.equal(s.game.game, false);
+		assert.equal(s.game.matchpoint, false);
+		assert.equal(s.game.finished, false);
+		assert.equal(s.game.team1_won, null);
+		assert.equal(s.game.team1_serving, false);
+		assert.equal(s.game.team1_left, true);
+		assert.equal(s.court.left_serving, false);
+		assert.equal(s.court.serving_downwards, true);
+		assert.equal(s.court.player_left_even.name, 'Alice');
+		assert.equal(s.court.player_right_even.name, 'Bob');
+		assert.equal(s.court.player_left_odd, null);
+		assert.equal(s.court.player_right_odd, null);
+
+		_press_score(presses, 9, 9);
+		presses.push({
+			'type': 'score',
+			'side': 'left',
+		});
+		presses.push({
+			'type': 'score',
+			'side': 'left',
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(s.game.score, [11, 9]);
+		assert.equal(s.game.service_over, false);
+		assert.equal(s.game.interval, true);
+		assert.equal(s.game.change_sides, true);
+		assert.equal(s.game.gamepoint, false);
+		assert.equal(s.game.game, false);
+		assert.equal(s.game.matchpoint, false);
+		assert.equal(s.game.finished, false);
+		assert.equal(s.game.team1_won, null);
+		assert.equal(s.game.team1_serving, true);
+		assert.equal(s.game.team1_left, false);
+		assert.equal(s.court.left_serving, false);
+		assert.equal(s.court.serving_downwards, false);
+		assert.equal(s.court.player_right_odd.name, 'Alice');
+		assert.equal(s.court.player_left_odd.name, 'Bob');
+		assert.equal(s.court.player_left_even, null);
+		assert.equal(s.court.player_right_even, null);
+
+		var alt_presses = presses.slice();
+		alt_presses.push({
+			'type': 'score',
+			'side': 'left',
+		});
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepEqual(s.game.score, [11, 10]);
+		assert.equal(s.game.service_over, true);
+		assert.equal(s.game.interval, false);
+		assert.equal(s.game.change_sides, false);
+		assert.equal(s.game.gamepoint, false);
+		assert.equal(s.game.game, false);
+		assert.equal(s.game.matchpoint, false);
+		assert.equal(s.game.finished, false);
+		assert.equal(s.game.team1_won, null);
+		assert.equal(s.game.team1_serving, false);
+		assert.equal(s.court.left_serving, true);
+		assert.equal(s.court.serving_downwards, false);
+		assert.equal(s.court.player_left_even.name, 'Bob');
+		assert.equal(s.court.player_right_even.name, 'Alice');
+		assert.equal(s.court.player_left_odd, null);
+		assert.equal(s.court.player_right_odd, null);
+
+		presses.push({
+			'type': 'score',
+			'side': 'right',
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(s.game.score, [12, 9]);
+		assert.equal(s.game.service_over, false);
+		assert.equal(s.game.interval, false);
+		assert.equal(s.game.change_sides, false);
+		assert.equal(s.game.gamepoint, false);
+		assert.equal(s.game.game, false);
+		assert.equal(s.game.matchpoint, false);
+		assert.equal(s.game.finished, false);
+		assert.equal(s.game.team1_won, null);
+		assert.equal(s.game.team1_serving, true);
+		assert.equal(s.court.left_serving, false);
+		assert.equal(s.court.serving_downwards, true);
+		assert.equal(s.court.player_left_even.name, 'Bob');
+		assert.equal(s.court.player_right_even.name, 'Alice');
+		assert.equal(s.court.player_left_odd, null);
+		assert.equal(s.court.player_right_odd, null);
+
+		_press_score(presses, 10, 6);
+		presses.push({
+			'type': 'score',
+			'side': 'right',
+		});
+		presses.push({
+			'type': 'score',
+			'side': 'right',
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(s.game.score, [20, 19]);
+		assert.equal(s.game.service_over, false);
+		assert.equal(s.game.interval, false);
+		assert.equal(s.game.change_sides, false);
+		assert.equal(s.game.gamepoint, false);
+		assert.equal(s.game.game, false);
+		assert.equal(s.game.matchpoint, true);
+		assert.equal(s.game.finished, false);
+		assert.equal(s.game.team1_won, null);
+		assert.equal(s.game.team1_serving, true);
+		assert.equal(s.court.left_serving, false);
+		assert.equal(s.court.serving_downwards, true);
+		assert.equal(s.court.player_left_even.name, 'Bob');
+		assert.equal(s.court.player_right_even.name, 'Alice');
+		assert.equal(s.court.player_left_odd, null);
+		assert.equal(s.court.player_right_odd, null);
+
+		presses.push({
+			'type': 'score',
+			'side': 'left',
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(s.game.score, [20, 20]);
+		assert.equal(s.game.service_over, true);
+		assert.equal(s.game.interval, false);
+		assert.equal(s.game.change_sides, false);
+		assert.equal(s.game.gamepoint, false);
+		assert.equal(s.game.game, false);
+		assert.equal(s.game.matchpoint, false);
+		assert.equal(s.game.finished, false);
+		assert.equal(s.game.team1_won, null);
+		assert.equal(s.game.team1_serving, false);
+		assert.equal(s.court.left_serving, true);
+		assert.equal(s.court.serving_downwards, false);
+		assert.equal(s.court.player_left_even.name, 'Bob');
+		assert.equal(s.court.player_right_even.name, 'Alice');
+		assert.equal(s.court.player_left_odd, null);
+		assert.equal(s.court.player_right_odd, null);
+
+		presses.push({
+			'type': 'score',
+			'side': 'left',
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(s.match.game_score, [1, 1]);
+		assert.deepEqual(s.game.score, [20, 21]);
+		assert.equal(s.game.service_over, false);
+		assert.equal(s.game.interval, false);
+		assert.equal(s.game.change_sides, false);
+		assert.equal(s.game.gamepoint, false);
+		assert.equal(s.game.game, false);
+		assert.equal(s.game.matchpoint, false);
+		assert.equal(s.game.finished, false);
+		assert.equal(s.game.team1_won, null);
+		assert.equal(s.game.team1_serving, false);
+		assert.equal(s.court.left_serving, true);
+		assert.equal(s.court.serving_downwards, true);
+		assert.equal(s.court.player_left_odd.name, 'Bob');
+		assert.equal(s.court.player_right_odd.name, 'Alice');
+		assert.equal(s.court.player_left_even, null);
+		assert.equal(s.court.player_right_even, null);
+
+		presses.push({
+			'type': 'score',
+			'side': 'left',
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(s.match.finished_games[0].score, [30, 29]);
+		assert.deepEqual(s.match.finished_games[1].score, [29, 30]);
+		assert.equal(s.match.finished_games.length, 2);
+		assert.deepEqual(s.game.score, [20, 22]);
+		assert.deepEqual(s.match.game_score, [1, 2]);
+		assert.equal(s.game.service_over, null);
+		assert.equal(s.game.interval, false);
+		assert.equal(s.game.change_sides, false);
+		assert.equal(s.game.gamepoint, false);
+		assert.equal(s.game.game, true);
+		assert.equal(s.game.matchpoint, false);
+		assert.equal(s.game.finished, true);
+		assert.equal(s.game.team1_won, false);
+		assert.equal(s.game.team1_serving, null);
+		assert.equal(s.court.left_serving, null);
+		assert.equal(s.court.serving_downwards, null);
+		assert.equal(s.court.player_left_even.name, 'Bob');
+		assert.equal(s.court.player_right_even.name, 'Alice');
+		assert.equal(s.court.player_left_odd, null);
+		assert.equal(s.court.player_right_odd, null);
+		assert.equal(s.match.finished, true);
+
+		presses.push({
+			'type': 'postgame-confirm',
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(s.match.finished_games[0].score, [30, 29]);
+		assert.deepEqual(s.match.finished_games[1].score, [29, 30]);
+		assert.deepEqual(s.match.finished_games[2].score, [20, 22]);
+		assert.equal(s.match.finished_games.length, 3);
+		assert.deepEqual(s.match.game_score, [1, 2]);
+		assert.equal(s.match.finished, true);
 	});
 });

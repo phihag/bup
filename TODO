@@ -1,13 +1,9 @@
-write a test for change at 11 in final game
+write a full match for doubles
 undo
+	flatten_undo
+	tests
 do something after game (save game)
-
-add settings
-	show full pronounciation
-	shuttle counter
-Allow config to be downloaded from CourtSpot
-Write results to CourtSpot
-shuttle counter (optional)
+backup game during run
 cards/injuries etc.
 	yellow card button
 	red card button
@@ -18,6 +14,13 @@ cards/injuries etc.
 automatic timers
 	at start of game
 	at 11
+
+add settings
+	show full pronounciation
+	shuttle counter
+Allow config to be downloaded from CourtSpot
+Write results to CourtSpot
+shuttle counter (optional)
 negative timers (add option for that)
 
 live web interface
@@ -57,3 +60,4 @@ animate changing server sides and changing sides after game
 bump font size of names
 find a better font for score display
 score: numbers of past sets closer together
+metadata (game start time etc.)

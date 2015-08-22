@@ -156,6 +156,14 @@ function calc_state(s) {
 				s.game.team1_serving = null;
 				s.game.service_over = null;
 			}
+
+			s.game.interval = (
+				(s.game.score[team_index] === 11) && (s.game.score[1 - team_index] < 11)
+			);
+			s.game.change_sides = (s.game.interval && s.match.finished_games.length == 2);
+			if (s.game.change_sides) {
+				s.game.team1_left = ! s.game.team1_left;
+			}
 			break;
 		case 'postgame-confirm':
 			s.match.finished_games.push(s.game);
@@ -168,9 +176,6 @@ function calc_state(s) {
 		s.game.interval = true;
 	} else if ((s.game.score[1] === 11) && (s.game.score[0] < 11) && (!s.game.team1_serving)) {
 		s.game.interval = true;
-	}
-	if (s.game.interval && s.match.finished_games.length == 2) {
-		s.game.change_sides = true;
 	}
 
 	if (! s.game.finished) {
