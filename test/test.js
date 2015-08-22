@@ -609,7 +609,7 @@ _describe('calc_state', function() {
 		assert.equal(s.game.interval, false);
 	});
 
-	_it('Correct announcements', function() {
+	_it('Correct announcements (singles)', function() {
 		var presses = [{
 			'type': 'pick_side', // Alice picks left
 			'team1_left': true,
@@ -657,7 +657,7 @@ _describe('calc_state', function() {
 		});
 		s = state_after(won_presses, SINGLES_SETUP);
 		assert.deepEqual(s.game.score, [21, 19]);
-		assert.equal(s.game.service_over, false);
+		assert.equal(s.game.service_over, null);
 		assert.equal(s.game.interval, false);
 		assert.equal(s.game.gamepoint, false);
 		assert.equal(s.game.game, true);
@@ -710,7 +710,7 @@ _describe('calc_state', function() {
 		s = state_after(won_presses, SINGLES_SETUP);
 		assert.equal(s.game.team1_serving, null);
 		assert.deepEqual(s.game.score, [20, 22]);
-		assert.equal(s.game.service_over, false);
+		assert.equal(s.game.service_over, null);
 		assert.equal(s.game.interval, false);
 		assert.equal(s.game.gamepoint, false);
 		assert.equal(s.game.game, true);
@@ -829,7 +829,7 @@ _describe('calc_state', function() {
 		s = state_after(won_presses, SINGLES_SETUP);
 		assert.equal(s.game.team1_serving, null);
 		assert.deepEqual(s.game.score, [30, 28]);
-		assert.equal(s.game.service_over, false);
+		assert.equal(s.game.service_over, null);
 		assert.equal(s.game.interval, false);
 		assert.equal(s.game.gamepoint, false);
 		assert.equal(s.game.game, true);
@@ -863,7 +863,7 @@ _describe('calc_state', function() {
 		}); // 29-30
 		s = state_after(won_presses, SINGLES_SETUP);
 		assert.deepEqual(s.game.score, [29, 30]);
-		assert.equal(s.game.service_over, false);
+		assert.equal(s.game.service_over, null);
 		assert.equal(s.game.interval, false);
 		assert.equal(s.game.gamepoint, false);
 		assert.equal(s.game.game, true);
@@ -880,7 +880,7 @@ _describe('calc_state', function() {
 		}); // 30-29
 		s = state_after(presses, SINGLES_SETUP);
 		assert.deepEqual(s.game.score, [30, 29]);
-		assert.equal(s.game.service_over, true); // TODO check this at badminton central (http://www.badmintoncentral.com/forums/showthread.php/156797)
+		assert.equal(s.game.service_over, null);
 		assert.equal(s.game.interval, false);
 		assert.equal(s.game.gamepoint, false);
 		assert.equal(s.game.game, true);
@@ -890,5 +890,23 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_serving, null);
 		assert.equal(s.court.left_serving, null);
 		assert.equal(s.court.serving_downwards, null);
+
+		presses.push({
+			'type': 'postgame-confirm'
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(s.match.finished_games[0].score, [30, 29]);
+		assert.deepEqual(s.game.score, [null, null]);
+		assert.equal(s.game.service_over, null);
+		assert.equal(s.game.interval, null);
+		assert.equal(s.game.gamepoint, null);
+		assert.equal(s.game.game, null);
+		assert.equal(s.game.matchpoint, null);
+		assert.equal(s.game.finished, false);
+		assert.equal(s.game.team1_won, null);
+		assert.equal(s.game.team1_serving, true);
+		assert.equal(s.court.left_serving, false);
+		assert.equal(s.court.serving_downwards, true);
+
 	});
 });

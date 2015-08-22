@@ -154,6 +154,7 @@ function calc_state(s) {
 					s.match.finished = true;
 				}
 				s.game.team1_serving = null;
+				s.game.service_over = null;
 			}
 			break;
 		case 'postgame-confirm':
