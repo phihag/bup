@@ -40,7 +40,8 @@ function calc_state(s) {
 	}
 
 	s.match = {
-		finished_games: [{score: [21, 23], finished: true}, {score: [21, 19], finished: true}],
+		finished_games: [],
+		game_score: [0, 0],
 		finished: false
 	};
 
@@ -60,9 +61,14 @@ function calc_state(s) {
 
 		score: [null, null],
 		team1_serving: null,
-		service_over: null,
 		team1_left: null,
 		teams_player1_even: [null, null],
+
+		service_over: null,
+		interval: null,
+		gamepoint: null,
+		game: null,
+		matchpoint: null,
 
 		finished: false,
 	};
@@ -92,6 +98,10 @@ function calc_state(s) {
 		case 'love-all':
 			s.game.score = [0, 0];
 			s.game.service_over = false;
+			s.game.interval = false;
+			s.game.matchpoint = false;
+			s.game.gamepoint = false;
+			s.game.game = false;
 			break;
 		case 'score':
 			var team1_scored = (s.game.team1_left == (press.side == 'left'));
@@ -108,9 +118,52 @@ function calc_state(s) {
 				s.game.teams_player1_even[1 - team_index] = even_score;
 			}
 			s.game.team1_serving = team1_scored;
+
+			var team1_won = (
+				((s.game.score[0] == 21) && (s.game.score[1] < 20)) ||
+				((s.game.score[0] > 21) && (s.game.score[1] < s.game.score[0] - 1)) ||
+				(s.game.score[0] == 30)
+			);
+			var team2_won = (
+				((s.game.score[1] == 21) && (s.game.score[0] < 20)) ||
+				((s.game.score[1] > 21) && (s.game.score[0] < s.game.score[1] - 1)) ||
+				(s.game.score[1] == 30)
+			);
+			if (team1_won) {
+				s.match.game_score[0]++;
+			} else if (team2_won) {
+				s.match.game_score[1]++;
+			}
+			if (team1_won || team2_won) {
+				s.game.game = true;
+				s.game.finished = true;
+				s.game.team1_serving = null;
+			}
 			break;
 		}
 	});
+
+	if ((s.game.score[0] === 11) && (s.game.score[1] < 11) && (s.game.team1_serving)) {
+		s.game.interval = true;
+	} else if ((s.game.score[1] === 11) && (s.game.score[0] < 11) && (!s.game.team1_serving)) {
+		s.game.interval = true;
+	}
+
+	if (! s.game.finished) {
+		if ((s.game.team1_serving) && (((s.game.score[0] === 20) && (s.game.score[1] < 20)) || (s.game.score[0] == 29))) {
+			if (s.match.game_score[0] == 0) {
+				s.game.gamepoint = true;
+			} else {
+				s.game.matchpoint = true;
+			}
+		} else if ((!s.game.team1_serving) && (((s.game.score[1] === 20) && (s.game.score[0] < 20)) || (s.game.score[1] == 29))) {
+			if (s.match.game_score[1] == 0) {
+				s.game.gamepoint = true;
+			} else {
+				s.game.matchpoint = true;
+			}
+		}
+	}
 
 	s.court = {
 		player_left_odd: null,
@@ -185,7 +238,7 @@ function render() {
 		$('#love-all').hide();
 	}
 
-	var score_enabled = (state.game.score[0] !== null);
+	var score_enabled = (state.game.score[0] !== null) && (! state.game.finished);
 	var buttons = $('#left_score,#right_score');
 	if (score_enabled) {
 		buttons.removeAttr('disabled');
@@ -195,6 +248,34 @@ function render() {
 
 	$('#score_table').empty();
 	var _add_game = function(game, is_current) {
+		if (is_current) {
+			var ann_tr = $('<tr class="score_announcements">');
+			var ann_td = $('<td colspan="2"></td>');
+			var _add_ann = function (text) {
+				var ann_span = $('<span class="score_announcement">')
+				ann_span.text(text);
+				ann_td.append(ann_span);
+			}
+			if (state.game.service_over) {
+				_add_ann('Aufschlagwechsel');
+			}
+			if (state.game.gamepoint) {
+				_add_ann('Satzpunkt');
+			}
+			if (state.game.matchpoint) {
+				_add_ann('Spielpunkt');
+			}
+			if (state.game.interval) {
+				_add_ann('Pause');
+			}
+			// Rendering fix for empty cells not being rendered correctly
+			if (ann_td.children().length == 0) {
+				ann_td.text('\xA0');
+			}
+			ann_tr.append(ann_td);
+			$('#score_table').append(ann_tr);
+		}
+
 		var points;
 		var tr = $('<tr>');
 		if (!game) {
@@ -240,7 +321,6 @@ function render() {
 		tr.append(right);
 		$('#score_table').append(tr);
 	};
-
 	for (var i = 0;i < state.match.max_games;i++) {
 		if (i < state.match.finished_games.length) {
 			_add_game(state.match.finished_games[i]);
