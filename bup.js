@@ -34,7 +34,7 @@ function init_state(s, setup) {
 	return s;
 }
 
-function make_game_state(previous_game) {
+function make_game_state(s, previous_game) {
 	var res = {
 		start_team1_left: (previous_game ? !previous_game.start_team1_left : null),
 		start_server_team_id: (previous_game ? (previous_game.team1_won ? 0 : 1) : null),
@@ -56,7 +56,7 @@ function make_game_state(previous_game) {
 		team1_won: null
 	};
 	res.team1_left = res.start_team1_left;
-	if (!state.setup.is_doubles) {
+	if (!s.setup.is_doubles) {
 		if (previous_game) {
 			res.start_server_player_id = 0;
 			res.start_receiver_player_id = 0;
@@ -85,7 +85,7 @@ function calc_state(s) {
 		throw new Error('Invalid counting scheme ' + s.setup.counting);
 	}
 
-	s.game = make_game_state();
+	s.game = make_game_state(s);
 	s.presses.forEach(function(press) {
 		switch (press.type) {
 		case 'pick_side':
@@ -158,7 +158,7 @@ function calc_state(s) {
 			break;
 		case 'postgame-confirm':
 			s.match.finished_games.push(s.game);
-			s.game = make_game_state(s.game);
+			s.game = make_game_state(s, s.game);
 			break;
 		}
 	});
@@ -197,7 +197,7 @@ function calc_state(s) {
 		left_serving: null,
 		serving_downwards: null,
 	};
-	if (s.game.teams_player1_even[0] !== null) {
+	if ((s.game.team1_left !== null) && (s.game.teams_player1_even[0] !== null)) {
 		s.court[
 			'player_' + (s.game.team1_left ? 'left' : 'right') + '_' +
 			(s.game.teams_player1_even[0] ? 'even' : 'odd')] = s.setup.teams[0].players[0];
@@ -207,7 +207,7 @@ function calc_state(s) {
 				(s.game.teams_player1_even[0] ? 'odd' : 'even')] = s.setup.teams[0].players[1];
 		}
 	}
-	if (s.game.teams_player1_even[1] !== null) {
+	if ((s.game.team1_left !== null) && (s.game.teams_player1_even[1] !== null)) {
 		s.court[
 			'player_' + (s.game.team1_left ? 'right' : 'left') + '_' +
 			(s.game.teams_player1_even[1] ? 'even' : 'odd')] = s.setup.teams[1].players[0];
