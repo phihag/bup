@@ -120,16 +120,6 @@ function calc_state(s) {
 			s.game.service_over = team1_scored != s.game.team1_serving;
 			var team_index = team1_scored ? 0 : 1;
 			s.game.score[team_index] += 1;
-			if (s.setup.is_doubles) {
-				if (! s.game.service_over) {
-					s.game.teams_player1_even[team_index] = !s.game.teams_player1_even[team_index];
-				}
-			} else {
-				var even_score = s.game.score[team_index] % 2 == 0;
-				s.game.teams_player1_even[team_index] = even_score;
-				s.game.teams_player1_even[1 - team_index] = even_score;
-			}
-			s.game.team1_serving = team1_scored;
 
 			var team1_won = (
 				((s.game.score[0] == 21) && (s.game.score[1] < 20)) ||
@@ -155,6 +145,17 @@ function calc_state(s) {
 				}
 				s.game.team1_serving = null;
 				s.game.service_over = null;
+			} else {
+				if (s.setup.is_doubles) {
+					if (! s.game.service_over) {
+						s.game.teams_player1_even[team_index] = !s.game.teams_player1_even[team_index];
+					}
+				} else {
+					var even_score = s.game.score[team_index] % 2 == 0;
+					s.game.teams_player1_even[team_index] = even_score;
+					s.game.teams_player1_even[1 - team_index] = even_score;
+				}
+				s.game.team1_serving = team1_scored;
 			}
 
 			s.game.interval = (
@@ -169,6 +170,8 @@ function calc_state(s) {
 			s.match.finished_games.push(s.game);
 			s.game = make_game_state(s, s.game);
 			break;
+		default:
+			throw new Error('Unsupported press type ' + press.type);
 		}
 	});
 

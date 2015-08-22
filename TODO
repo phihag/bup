@@ -1,10 +1,11 @@
-write a full match for doubles
 undo
 	flatten_undo
 	tests
-do something after game (save game)
+do something after game (save game / start new one
 backup game during run
 cards/injuries etc.
+	exception button
+	dialog and cancel option
 	yellow card button
 	red card button
 	black card button
