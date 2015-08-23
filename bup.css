@@ -206,14 +206,34 @@ span.score_announcement+span.score_announcement {
 	background-size: 100%;
 	background-repeat: no-repeat;
 }
-.topleft_buttons {
+.topleft_buttons, .topright_buttons {
 	position: absolute;
+	z-index: 1000;
 }
+.topleft_buttons {
+	left: 0; top: 0;
+}
+.topright_buttons {
+	right: 0; top: 0;
+}
+
 .topleft_buttons>button {
 	margin: 1vh 0 0 1vh;
 }
 .topleft_buttons>button+button {
 	margin-left: 7vh;
+}
+.topright_buttons>button {
+	margin: 1vh 1vh 0 0;
+}
+.topright_buttons>button+button {
+	margin-left: 7vh;
+}
+#button_settings>div {
+	background-image: url(static/icons/settings.svg);
+}
+#button_exception>div {
+	background-image: url(static/icons/exception.svg);
 }
 #button_undo>div {
 	background-image: url(static/icons/undo.svg);

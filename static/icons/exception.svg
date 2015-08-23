@@ -15,7 +15,7 @@
    id="svg4138"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="exceptions.svg">
+   sodipodi:docname="exception.svg">
   <defs
      id="defs4140" />
   <sodipodi:namedview
@@ -26,8 +26,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="13.158327"
-     inkscape:cx="36.143553"
-     inkscape:cy="32.792932"
+     inkscape:cx="24.895923"
+     inkscape:cy="32.640937"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -49,7 +49,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -60,33 +60,33 @@
      transform="translate(-277.64891,-453.61149)">
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:4.14201307px;line-height:100%;font-family:'Droid Sans';-inkscape-font-specification:'Droid Sans';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="293.52777"
-       y="469.81152"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.49657393px;line-height:100%;font-family:'Droid Sans';-inkscape-font-specification:'Droid Sans';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       x="293.64554"
+       y="469.87375"
        id="text4707"
        sodipodi:linespacing="100%"><tspan
          sodipodi:role="line"
          id="tspan4709"
-         x="293.52777"
-         y="469.81152"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:19.88166428px;font-family:'Arial Black';-inkscape-font-specification:'Arial Black, '">R</tspan></text>
+         x="293.64554"
+         y="469.87375"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.78355598px;font-family:'Arial Black';-inkscape-font-specification:'Arial Black, '">R</tspan></text>
     <rect
        style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#ffd10d;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:8;marker:none;enable-background:accumulate"
        id="rect3004"
-       width="12.550222"
-       height="16.733612"
-       x="288.91553"
-       y="468.1084"
-       rx="0.97612727"
-       ry="0.97612727" />
+       width="10.594554"
+       height="14.126057"
+       x="289.75201"
+       y="468.43604"
+       rx="0.82401991"
+       ry="0.82401991" />
     <rect
        style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#ff1717;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:8;marker:none;enable-background:accumulate"
        id="rect3004-6"
-       width="13.348197"
-       height="17.797577"
-       x="279.52615"
-       y="458.04694"
-       rx="1.0381919"
-       ry="1.0381919" />
+       width="11.268182"
+       height="15.024227"
+       x="281.82574"
+       y="459.94241"
+       rx="0.87641317"
+       ry="0.87641317" />
   </g>
 </svg>
