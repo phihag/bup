@@ -15,8 +15,12 @@ function start_game(setup) {
 	render();
 }
 
-function on_press(press) {
-	state.presses.push(press);
+function on_press(press, s) {
+	if (s === undefined) {
+		s = state;
+	}
+
+	s.presses.push(press);
 	calc_state();
 	render();
 }
@@ -86,7 +90,8 @@ function calc_state(s) {
 	}
 
 	s.game = make_game_state(s);
-	s.presses.forEach(function(press) {
+	calc_undo(s);
+	s.flattened_presses.forEach(function(press) {
 		switch (press.type) {
 		case 'pick_side':
 			s.game.start_team1_left = press.team1_left;
@@ -170,6 +175,7 @@ function calc_state(s) {
 			s.match.finished_games.push(s.game);
 			s.game = make_game_state(s, s.game);
 			break;
+		case 'undo':
 		default:
 			throw new Error('Unsupported press type ' + press.type);
 		}
@@ -240,22 +246,26 @@ function calc_state(s) {
 	return s;
 }
 
-function render() {
+function render(s) {
+	if (s === undefined) {
+		s = state;
+	}
+
 	function _court_show_player(key) {
-		var p = state.court['player_' + key];
+		var p = s.court['player_' + key];
 		$('#court_' + key).text(p === null ? '' : p.name);
 	}
 	_court_show_player('left_odd');
 	_court_show_player('left_even');
 	_court_show_player('right_even');
 	_court_show_player('right_odd');
-	if (state.court.left_serving == null) {
+	if (s.court.left_serving == null) {
 		$('#court_arrow').hide();
 	} else {
 		$('#court_arrow').show();
 		var transform_css = ('scale(' +
-			(state.court.left_serving ? '-1' : '1') + ',' +
-			(state.court.serving_downwards ? '1' : '-1') + ')'
+			(s.court.left_serving ? '-1' : '1') + ',' +
+			(s.court.serving_downwards ? '1' : '-1') + ')'
 		);
 		$('#court_arrow').css({
 			'transform': transform_css,
@@ -265,9 +275,9 @@ function render() {
 	}
 
 	var prematch = (
-		(state.game.start_server_player_id !== null) &&
-		(state.game.start_receiver_player_id !== null) &&
-		(state.game.score[0] === null));
+		(s.game.start_server_player_id !== null) &&
+		(s.game.start_receiver_player_id !== null) &&
+		(s.game.score[0] === null));
 	if (prematch) {
 		$('#love-all-dialog').show();
 		$('#love-all').text(loveall_announcement());
@@ -275,25 +285,45 @@ function render() {
 		$('#love-all-dialog').hide();
 	}
 
-	if (state.match.finished) {
+	if (s.match.finished) {
 		$('#postmatch-confirm-dialog').show();
 		$('#postmatch-confirm').text(postgame_announcement());
 	} else {
 		$('#postmatch-confirm-dialog').hide();
 	}
-	if (!state.match.finished && state.game.finished) {
+	if (!s.match.finished && s.game.finished) {
 		$('#postgame-confirm-dialog').show();
 		$('#postgame-confirm').text(postgame_announcement());
 	} else {
 		$('#postgame-confirm-dialog').hide();
 	}
 
-	var score_enabled = (state.game.score[0] !== null) && (! state.game.finished);
+	var score_enabled = (s.game.score[0] !== null) && (! s.game.finished);
 	var buttons = $('#left_score,#right_score');
 	if (score_enabled) {
 		buttons.removeAttr('disabled');
+		buttons.removeClass('half-invisible');
 	} else {
 		buttons.attr('disabled', 'disabled');
+		buttons.addClass('half-invisible');
+	}
+
+	var undo = $('#button_undo');
+	if (s.undo_possible) {
+		undo.removeAttr('disabled');
+		undo.removeClass('half-invisible');
+	} else {
+		undo.attr('disabled', 'disabled');
+		undo.addClass('half-invisible');
+	}
+
+	var redo = $('#button_redo');
+	if (s.redo_possible) {
+		redo.removeAttr('disabled');
+		redo.removeClass('nearly-invisible');
+	} else {
+		redo.attr('disabled', 'disabled');
+		redo.addClass('nearly-invisible');
 	}
 
 	$('#score_table').empty();
@@ -306,22 +336,22 @@ function render() {
 				ann_span.text(text);
 				ann_td.append(ann_span);
 			}
-			if (state.game.service_over) {
+			if (s.game.service_over) {
 				_add_ann('Aufschlagwechsel');
 			}
-			if (state.game.gamepoint) {
+			if (s.game.gamepoint) {
 				_add_ann('Satzpunkt');
 			}
-			if (state.game.matchpoint) {
+			if (s.game.matchpoint) {
 				_add_ann('Spielpunkt');
 			}
-			if (state.game.interval) {
+			if (s.game.interval) {
 				_add_ann('Pause');
 			}
-			if (state.game.change_sides) {
+			if (s.game.change_sides) {
 				_add_ann('Seiten wechseln');
 			}
-			if (state.game.game) {
+			if (s.game.game) {
 				_add_ann('Satz');
 			}
 			// Rendering fix for empty cells not being rendered correctly
@@ -343,16 +373,16 @@ function render() {
 		}
 		var left = $('<td class="score score_left">');
 		if (game) {
-			points = game.score[state.game.team1_left ? 0 : 1];
+			points = game.score[s.game.team1_left ? 0 : 1];
 			if (points === null) {
 				left.addClass('score_empty');
 				points = 0;
 			}
 			if (game.finished) {
-				if (game.team1_won == state.game.team1_left) {
+				if (game.team1_won == s.game.team1_left) {
 					left.addClass('score_won');
 				}
-			} else if ((game.team1_serving !== null) && (game.team1_serving == state.game.team1_left)) {
+			} else if ((game.team1_serving !== null) && (game.team1_serving == s.game.team1_left)) {
 				left.addClass('score_serving');
 			}
 			left.text(points);
@@ -360,16 +390,16 @@ function render() {
 		tr.append(left);
 		var right = $('<td class="score score_right">');
 		if (game) {
-			points = game.score[state.game.team1_left ? 1 : 0];
+			points = game.score[s.game.team1_left ? 1 : 0];
 			if (points === null) {
 				right.addClass('score_empty');
 				points = 0;
 			}
 			if (game.finished) {
-				if (game.team1_won != state.game.team1_left) {
+				if (game.team1_won != s.game.team1_left) {
 					right.addClass('score_won');
 				}
-			} else if ((game.team1_serving !== null) && (game.team1_serving != state.game.team1_left)) {
+			} else if ((game.team1_serving !== null) && (game.team1_serving != s.game.team1_left)) {
 				right.addClass('score_serving');
 			}
 			right.text(points);
@@ -377,18 +407,18 @@ function render() {
 		tr.append(right);
 		$('#score_table').append(tr);
 	};
-	for (var i = 0;i < state.match.max_games;i++) {
-		if (i < state.match.finished_games.length) {
-			_add_game(state.match.finished_games[i]);
-		} else if (i == state.match.finished_games.length) {
-			_add_game(state.game, true);
+	for (var i = 0;i < s.match.max_games;i++) {
+		if (i < s.match.finished_games.length) {
+			_add_game(s.match.finished_games[i]);
+		} else if (i == s.match.finished_games.length) {
+			_add_game(s.game, true);
 		} else {
 			_add_game(null);
 		}
 	}
 
 	function _add_player_pick(container, type, team_id, player_id) {
-		var player = state.setup.teams[team_id].players[player_id];
+		var player = s.setup.teams[team_id].players[player_id];
 		var btn = $('<button>');
 		btn.text(player.name);
 		btn.on('click', function() {
@@ -403,38 +433,68 @@ function render() {
 	$('#pick_side').hide();
 	$('#pick_server').hide();
 	$('#pick_receiver').hide();
-	if (state.game.start_team1_left === null) {
+	if (s.game.start_team1_left === null) {
 		$('#pick_side').show();
-		if (state.setup.is_doubles) {
+		if (s.setup.is_doubles) {
 			$('#pick_side_team1').text(
-				state.setup.teams[0].players[0].name + ' / ' +
-				state.setup.teams[0].players[1].name);
+				s.setup.teams[0].players[0].name + ' / ' +
+				s.setup.teams[0].players[1].name);
 			$('#pick_side_team2').text(
-				state.setup.teams[1].players[0].name + ' / ' +
-				state.setup.teams[1].players[1].name);
+				s.setup.teams[1].players[0].name + ' / ' +
+				s.setup.teams[1].players[1].name);
 		} else {
-			$('#pick_side_team1').text(state.setup.teams[0].players[0].name);
-			$('#pick_side_team2').text(state.setup.teams[1].players[0].name);
+			$('#pick_side_team1').text(s.setup.teams[0].players[0].name);
+			$('#pick_side_team2').text(s.setup.teams[1].players[0].name);
 		}
-	} else if (state.game.start_server_player_id === null) {
+	} else if (s.game.start_server_player_id === null) {
 		$('#pick_server button').remove();
 
-		var team_indices = (state.game.start_server_team_id === null) ? [0, 1] : [state.game.start_server_team_id];
+		var team_indices = (s.game.start_server_team_id === null) ? [0, 1] : [s.game.start_server_team_id];
 		team_indices.forEach(function(ti) {
 			_add_player_pick($('#pick_server'), 'pick_server', ti, 0);
-			if (state.setup.is_doubles) {
+			if (s.setup.is_doubles) {
 				_add_player_pick($('#pick_server'), 'pick_server', ti, 1);
 			}
 		});
 
 		$('#pick_server').show();
-	} else if (state.game.start_receiver_player_id === null) {
+	} else if (s.game.start_receiver_player_id === null) {
 		$('#pick_receiver button').remove();
-		var team_id = (state.game.start_server_team_id == 1) ? 0 : 1;
+		var team_id = (s.game.start_server_team_id == 1) ? 0 : 1;
 		_add_player_pick($('#pick_receiver'), 'pick_receiver', team_id, 0);
 		_add_player_pick($('#pick_receiver'), 'pick_receiver', team_id, 1);
 		$('#pick_receiver').show();
 	}
+}
+
+function calc_undo(s) {
+	s.flattened_presses = [];
+	s.redo_stack = [];
+	s.undo_possible = false;
+	s.redo_possible = false;
+	s.presses.forEach(function(press) {
+		if (press.type == 'undo') {
+			if (! s.undo_possible) {
+				throw new Error('Nothing to undo');
+			}
+			var last_press = s.flattened_presses.pop();
+			s.redo_stack.push(last_press);
+		} else if (press.type == 'redo') {
+			if (! s.redo_possible) {
+				throw new Error('Nothing to redo');
+			}
+			var p = s.redo_stack.pop();
+			s.flattened_presses.push(p);
+		} else {
+			if (s.redo_stack.length > 0) {
+				s.redo_stack = [];
+			}
+			s.flattened_presses.push(press);
+		}
+
+		s.undo_possible = s.flattened_presses.length > 0;
+		s.redo_possible = s.redo_stack.length > 0;
+	});
 }
 
 function loveall_announcement(s) {
@@ -559,6 +619,16 @@ function ui_init() {
 		on_press({
 			type: 'score',
 			side: 'right'
+		});
+	});
+	$('#button_undo').on('click', function() {
+		on_press({
+			type: 'undo',
+		});
+	});
+	$('#button_redo').on('click', function() {
+		on_press({
+			type: 'redo',
 		});
 	});
 

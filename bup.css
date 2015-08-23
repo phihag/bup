@@ -105,16 +105,13 @@ html, body, button {
 	position: absolute;
 	font-size: 15vh;
 	padding: 4vh;
-	bottom: 5vh;
-}
-#left_score[disabled], #right_score[disabled] {
-	opacity: 0.3;
+	bottom: 1vh;
 }
 #left_score {
-	left: 3vw;
+	left: 1vh;
 }
 #right_score {
-	right: 3vw;
+	right: 1vh;
 }
 
 #score {
@@ -189,4 +186,38 @@ span.score_announcement+span.score_announcement {
 }
 .score_current-game>td.score_right {
 	padding-left: 3vh;
+}
+
+.half-invisible {
+	opacity: 0.3;
+}
+.nearly-invisible {
+	opacity: 0.05;
+}
+
+.image-button {
+	width: 12vh;
+	height: 12vh;
+	position: relative;
+}
+.image-button>div {
+	position: absolute;
+	left: 0; right: 0; top: 0; bottom: 0;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
+.topleft_buttons {
+	position: absolute;
+}
+.topleft_buttons>button {
+	margin: 1vh 0 0 1vh;
+}
+.topleft_buttons>button+button {
+	margin-left: 7vh;
+}
+#button_undo>div {
+	background-image: url(static/icons/undo.svg);
+}
+#button_redo>div {
+	background-image: url(static/icons/redo.svg);
 }

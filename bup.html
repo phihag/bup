@@ -48,9 +48,13 @@ vs
 
 
 <div id="game" class="default-invisible">
+<div class="topleft_buttons">
+<button id="button_undo" title="Rückgängig" disabled="disabled" class="image-button half-invisible"><div></div></button>
+<button id="button_redo" title="Wiederholen" disabled="disabled" class="image-button nearly-invisible"><div></div></button>
+</div>
+
 <div id="score">
 <table id="score_table">
-
 </table>
 </div>
 
@@ -65,8 +69,8 @@ vs
 </div>
 
 
-<button disabled="disabled" id="left_score">+1</button>
-<button disabled="disabled" id="right_score">+1</button>
+<button disabled="disabled" id="left_score" class="half-invisible">+1</button>
+<button disabled="disabled" id="right_score" class="half-invisible">+1</button>
 
 <div id="love-all-dialog" class="pick_dialog" class="default-invisible">
 <button id="love-all"></button>
