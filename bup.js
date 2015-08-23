@@ -205,6 +205,7 @@ function calc_state(s) {
 		finished_games: [],
 		game_score: [0, 0],
 		finished: false,
+		marks: [],
 		finish_confirmed: false,
 	};
 
@@ -297,6 +298,10 @@ function calc_state(s) {
 			if (s.game.change_sides) {
 				s.game.team1_left = ! s.game.team1_left;
 			}
+
+			if (s.match.marks.length > 0) {
+				s.match.marks = [];
+			}
 			break;
 		case 'postgame-confirm':
 			if (s.match.finished) {
@@ -315,7 +320,9 @@ function calc_state(s) {
 			s.match.finished_games.push(s.game);
 			s.match.finish_confirmed = true;
 			break;
-		case 'undo':
+		case 'mark':
+			s.match.marks.push(press);
+			break;
 		default:
 			throw new Error('Unsupported press type ' + press.type);
 		}
@@ -489,6 +496,11 @@ function render(s) {
 			}
 			if (s.game.game) {
 				_add_ann('Satz');
+			}
+			if (s.match.marks.length > 0) {
+				s.match.marks.forEach(function(mark_press) {
+					_add_ann(mark_press.char);
+				});
 			}
 			// Rendering fix for empty cells not being rendered correctly
 			if (ann_td.children().length == 0) {
@@ -870,6 +882,35 @@ function ui_init() {
 	$('.exception_dialog>.cancel-button').on('click', function() {
 		ui_hide_exception_dialog();
 	});
+	$('#exception_referee').on('click', function() {
+		on_press({
+			'type': 'mark',
+			'char': 'R'
+		});
+		ui_hide_exception_dialog();
+	});
+	$('#exception_interruption').on('click', function() {
+		on_press({
+			'type': 'mark',
+			'char': 'U'
+		});
+		ui_hide_exception_dialog();
+	});
+	$('#exception_correction').on('click', function() {
+		on_press({
+			'type': 'mark',
+			'char': 'C'
+		});
+		ui_hide_exception_dialog();
+	});
+	$('#exception_overrule').on('click', function() {
+		on_press({
+			'type': 'mark',
+			'char': 'O'
+		});
+		ui_hide_exception_dialog();
+	});
+
 
 	Mousetrap.bind('e', function() {
 		if (state.initialized) {
