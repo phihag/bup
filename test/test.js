@@ -1341,7 +1341,7 @@ _describe('calc_state', function() {
 		assert.equal(s.match.finished, true);
 
 		presses.push({
-			'type': 'postgame-confirm',
+			'type': 'postmatch-confirm',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.deepEqual(s.match.finished_games[0].score, [30, 29]);
@@ -1707,7 +1707,7 @@ _describe('calc_state', function() {
 		assert.deepEqual(s.match.finished_games[0].score, [21, 19]);
 
 		alt_presses.push({
-			'type': 'postgame-confirm',
+			'type': 'postmatch-confirm',
 		});
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(s.match.finished, true);
@@ -2085,9 +2085,8 @@ _describe('calc_state', function() {
 		assert.deepEqual(s.match.finished_games[0].score, [21, 19]);
 		assert.deepEqual(s.match.finished_games[1].score, [19, 21]);
 
-
 		presses.push({
-			'type': 'postgame-confirm',
+			'type': 'postmatch-confirm',
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(s.match.finished, true);

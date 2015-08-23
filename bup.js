@@ -172,8 +172,17 @@ function calc_state(s) {
 			}
 			break;
 		case 'postgame-confirm':
+			if (s.match.finished) {
+				throw new Error('Match finished, but game instead of matched confirmed.');
+			}
 			s.match.finished_games.push(s.game);
 			s.game = make_game_state(s, s.game);
+			break;
+		case 'postmatch-confirm':
+			if (!s.match.finished) {
+				throw new Error('Match not finished, but match end confirmed.');
+			}
+			s.match.finished_games.push(s.game);
 			break;
 		case 'undo':
 		default:
