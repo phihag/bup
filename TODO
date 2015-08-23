@@ -60,3 +60,6 @@ unify setup/settings
 better design for settings
 improve error showing
 improve load match style
+switch core implementation to a single mode, one of ['pick_server', 'pick_receiver', 'love-all', 'score', 'postgame-confirm', 'postmatch-confirm']
+	only accept those inputs
+	raise error (and test it) that only those are accepted

@@ -80,6 +80,7 @@ _describe('calc_state', function() {
 		assert.equal(s.game.matchpoint, null);
 		assert.equal(s.game.game, null);
 		assert.equal(s.match.finished, false);
+		assert.equal(s.match.finish_confirmed, false);
 		assert.deepEqual(s.match.game_score, [0, 0]);
 		assert.equal(s.court.player_left_odd, null);
 		assert.equal(s.court.player_left_even, null);
@@ -101,6 +102,7 @@ _describe('calc_state', function() {
 		assert.equal(s.game.matchpoint, null);
 		assert.equal(s.game.game, null);
 		assert.equal(s.match.finished, false);
+		assert.equal(s.match.finish_confirmed, false);
 		assert.deepEqual(s.match.game_score, [0, 0]);
 		assert.equal(s.court.player_left_odd, null);
 		assert.equal(s.court.player_left_even, null);
@@ -1705,12 +1707,14 @@ _describe('calc_state', function() {
 		assert.deepEqual(s.match.game_score, [2, 0]);
 		assert.equal(s.match.finished_games.length, 1);
 		assert.deepEqual(s.match.finished_games[0].score, [21, 19]);
+		assert.equal(s.match.finish_confirmed, false);
 
 		alt_presses.push({
 			'type': 'postmatch-confirm',
 		});
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(s.match.finished, true);
+		assert.equal(s.match.finish_confirmed, true);
 		assert.deepEqual(s.match.game_score, [2, 0]);
 		assert.equal(s.match.finished_games.length, 2);
 		assert.deepEqual(s.match.finished_games[0].score, [21, 19]);
@@ -2062,6 +2066,7 @@ _describe('calc_state', function() {
 			'side': 'right'
 		});
 		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(s.match.finish_confirmed, false);
 		assert.deepEqual(s.game.score, [18, 21]);
 		assert.equal(s.game.service_over, null);
 		assert.equal(s.game.interval, false);
@@ -2090,6 +2095,7 @@ _describe('calc_state', function() {
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(s.match.finished, true);
+		assert.equal(s.match.finish_confirmed, true);
 		assert.deepEqual(s.match.game_score, [1, 2]);
 		assert.equal(s.match.finished_games.length, 3);
 		assert.deepEqual(s.match.finished_games[0].score, [21, 19]);

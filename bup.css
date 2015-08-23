@@ -200,6 +200,12 @@ span.score_announcement+span.score_announcement {
 	height: 12vh;
 	position: relative;
 }
+.image-button.textsize-button {
+	font-size: inherit;
+	width: 1em;
+	height: 1em;
+	margin-left: 0.5em;
+}
 .image-button>span {
 	position: absolute;
 	left: 0; right: 0; top: 0; bottom: 0;
@@ -265,11 +271,17 @@ span.score_announcement+span.score_announcement {
 }
 
 
+.setup_loadmatch_list {
+	margin: 0;
+	font-size: 20px;
+}
 .load_match_link {
 	display: inline-block;
 	cursor: pointer;
 	text-decoration: underline;
 	color: blue;
-	font-size: 2vh;
 	padding: 0.3vh 0;
+}
+.button_delete>span {
+	background-image: url(static/icons/delete.svg);
 }

@@ -18,10 +18,7 @@ function show_error(msg, e) {
 	console.error(msg, e);
 }
 
-function show_settings() {
-	$('#settings_wrapper').show();
-	Mousetrap.bind('escape', hide_settings);
-
+function ui_settings_load_list() {
 	var matches = load_matches();
 	$('.setup_loadmatch_none').toggle(matches.length == 0);
 	var match_list = $('.setup_loadmatch_list');
@@ -60,8 +57,20 @@ function show_settings() {
 			hide_settings(true);
 		});
 		li.append(a);
+		var del_btn = $('<button class="button_delete image-button textsize-button"><span></span></button>');
+		del_btn.on('click', function() {
+			delete_match(m.metadata.id);
+			ui_settings_load_list();
+		});
+		li.append(del_btn);
 		match_list.append(li);
 	});
+}
+
+function show_settings() {
+	$('#settings_wrapper').show();
+	Mousetrap.bind('escape', hide_settings);
+	ui_settings_load_list();
 }
 
 function hide_settings(force) {
@@ -158,7 +167,8 @@ function calc_state(s) {
 	s.match = {
 		finished_games: [],
 		game_score: [0, 0],
-		finished: false
+		finished: false,
+		finish_confirmed: false,
 	};
 
 	switch (s.setup.counting) {
@@ -262,7 +272,11 @@ function calc_state(s) {
 			if (!s.match.finished) {
 				throw new Error('Match not finished, but match end confirmed.');
 			}
+			if (s.match.finish_confirmed) {
+				throw new Error('Match already confirmed.');
+			}
 			s.match.finished_games.push(s.game);
+			s.match.finish_confirmed = true;
 			break;
 		case 'undo':
 		default:
@@ -670,9 +684,8 @@ function load_matches() {
 }
 
 function delete_match(match_id) {
-	window.localStorage.removetem('bup_match_' + s.metadata.id);
+	window.localStorage.removeItem('bup_match_' + match_id);
 }
-
 
 function settings_load() {
 	var s = window.localStorage.getItem('bup_settings');
