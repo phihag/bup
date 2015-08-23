@@ -14,6 +14,7 @@ install-libs:
 force-install-libs:
 	mkdir -p libs
 	wget https://code.jquery.com/jquery-2.1.4.min.js -O libs/jquery.min.js
+	wget https://craig.global.ssl.fastly.net/js/mousetrap/mousetrap.min.js -O libs/mousetrap.min.js
 	touch libs/.completed
 
 deps: install-libs

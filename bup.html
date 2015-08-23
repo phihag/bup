@@ -7,55 +7,15 @@
 </head>
 <body>
 
-<div id="setup" class="default-invisible">
-<h3>Spiel konfigurieren</h3>
-<form id="setup_manual_form" class="slim_form">
-
-<fieldset>
-<label><input type="radio" name="gametype" value="singles" checked="checked" />Einzel</label>
-<label><input type="radio" name="gametype" value="doubles" />Doppel</label>
-</fieldset>
-
-<fieldset class="setup_players" id="setup_players_singles">
-<div>
-<input type="text" name="team1_player" autofocus="autofocus" />
-</div>
-<div class="setup_players_vs">
-vs
-</div>
-<div>
-<input type="text" name="team2_player" />
-</div>
-</fieldset>
-
-<fieldset class="setup_players default-invisible" id="setup_players_doubles">
-<div>
-<input type="text" name="team1_player1" autofocus="autofocus" /><br/>
-<input type="text" name="team1_player2" />
-</div>
-<div class="setup_players_vs">
-vs
-</div>
-<div>
-<input type="text" name="team2_player1" /><br/>
-<input type="text" name="team2_player2" />
-</div>
-</fieldset>
-
-<button>Spiel starten</button>
-</form>
-</div>
-
-
-<div id="game" class="default-invisible">
+<div id="game">
 <div class="topleft_buttons">
-<button id="button_settings" title="Konfiguration" class="image-button"><div></div></button>
-<button id="button_exception" title="Situation" class="image-button"><div></div></button>
+<button id="button_undo" title="Rückgängig" disabled="disabled" class="image-button half-invisible"><span></span></button>
+<button id="button_redo" title="Wiederholen" disabled="disabled" class="image-button nearly-invisible"><span></span></button>
 </div>
 
 <div class="topright_buttons">
-<button id="button_undo" title="Rückgängig" disabled="disabled" class="image-button half-invisible"><div></div></button>
-<button id="button_redo" title="Wiederholen" disabled="disabled" class="image-button nearly-invisible"><div></div></button>
+<button id="button_exception" title="Situation" class="image-button"><span></span></button>
+<button id="button_settings" title="Konfiguration" class="image-button"><span></span></button>
 </div>
 
 <div id="score">
@@ -77,15 +37,15 @@ vs
 <button disabled="disabled" id="left_score" class="half-invisible">+1</button>
 <button disabled="disabled" id="right_score" class="half-invisible">+1</button>
 
-<div id="love-all-dialog" class="pick_dialog" class="default-invisible">
+<div id="love-all-dialog" class="pick_dialog default-invisible">
 <button id="love-all"></button>
 </div>
 
-<div id="postgame-confirm-dialog" class="pick_dialog" class="default-invisible">
+<div id="postgame-confirm-dialog" class="pick_dialog default-invisible">
 <button id="postgame-confirm"></button>
 </div>
 
-<div id="postmatch-confirm-dialog" class="pick_dialog" class="default-invisible">
+<div id="postmatch-confirm-dialog" class="pick_dialog default-invisible">
 <button id="postmatch-confirm"></button>
 </div>
 
@@ -105,7 +65,63 @@ vs
 
 </div>
 
+<div id="settings_wrapper" class="default-invisible">
+<div class="settings_container">
+
+<div class="setup">
+	<h2>Neues Spiel</h2>
+	<form id="setup_manual_form" class="slim_form">
+	<fieldset>
+	<label><input type="radio" name="gametype" value="singles" checked="checked" />Einzel</label>
+	<label><input type="radio" name="gametype" value="doubles" />Doppel</label>
+	</fieldset>
+
+	<fieldset class="setup_players" id="setup_players_singles">
+	<div>
+	<input type="text" name="team1_player" autofocus="autofocus" />
+	</div>
+	<div class="setup_players_vs">
+	vs
+	</div>
+	<div>
+	<input type="text" name="team2_player" />
+	</div>
+	</fieldset>
+	<fieldset class="setup_players default-invisible" id="setup_players_doubles">
+	<div>
+	<input type="text" name="team1_player1" autofocus="autofocus" /><br/>
+	<input type="text" name="team1_player2" />
+	</div>
+	<div class="setup_players_vs">
+	vs
+	</div>
+	<div>
+	<input type="text" name="team2_player1" /><br/>
+	<input type="text" name="team2_player2" />
+	</div>
+	</fieldset>
+
+	<button>Spiel starten</button>
+	</form>
+
+	<h2>Spiel fortführen</h2>
+
+	<div class="setup_loadmatch_none">Keine gespeicherten Spiele vorhanden!</div>
+
+	<ul class="setup_loadmatch_list">
+	</ul>
+</div>
+
+<div class="settings">
+<h2>Einstellungen</h2>
+<label><input type="checkbox" name="save_finished_matches" />Abgeschlossene Spiele speichern</label>
+</div>
+
+</div>
+</div>
+
 <script src="libs/jquery.min.js"></script>
+<script src="libs/mousetrap.min.js"></script>
 <script src="bup.js"></script>
 </body>
 </html>

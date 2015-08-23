@@ -1,18 +1,87 @@
 "use strict";
 
-var state = {};
+var state = {
+	initialized: false
+};
+var settings = {
+	save_finished_matches: true
+};
 
-function show_setup() {
-	$('#setup').show();
+function _uuid() {
+	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+	    var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+    	return v.toString(16);
+	});
 }
 
-function start_game(setup) {
-	$('#setup').hide();
-	$('#game').show();
+function show_error(msg, e) {
+	console.error(msg, e);
+}
 
+function show_settings() {
+	$('#settings_wrapper').show();
+	Mousetrap.bind('escape', hide_settings);
+
+	var matches = load_matches();
+	$('.setup_loadmatch_none').toggle(matches.length == 0);
+	var match_list = $('.setup_loadmatch_list');
+	match_list.empty();
+	match_list.toggle(matches.length > 0);
+	matches.sort(function(m1, m2) {
+		var time1 = m1.metadata.updated;
+		var time2 = m2.metadata.updated;
+		if (time1 > time2) {
+			return 1;
+		} else if (time1 < time2) {
+			return -1;
+		} else {
+			return 0;
+		}
+	});
+	matches.forEach(function(m) {
+		if (state.metadata && m.metadata.id == state.metadata.id) {
+			return;
+		}
+
+		var li = $('<li>');
+		var a = $('<span class="load_match_link">');
+		var match_name;
+		if (m.setup.is_doubles) {
+			match_name = m.setup.teams[0].players[0].name + '/' + m.setup.teams[0].players[1].name + ' vs ' + m.setup.teams[1].players[0].name + '/' + m.setup.teams[1].players[1].name;
+		} else {
+			match_name = m.setup.teams[0].players[0].name + ' vs ' + m.setup.teams[1].players[0].name;
+		}
+		var d = new Date(m.metadata.updated);
+		var time_str = '' + d.getDate() + '.' + (d.getMonth()+1) + '.' + d.getFullYear() + ' ' + d.getHours() + ':' + d.getMinutes();
+		a.text(match_name + ', ' + time_str);
+		a.on('click', function(e) {
+			e.preventDefault();
+			resume_match(m);
+			hide_settings(true);
+		});
+		li.append(a);
+		match_list.append(li);
+	});
+}
+
+function hide_settings(force) {
+	if (!force && !state.initialized) {
+		return;
+	}
+	Mousetrap.unbind('escape');
+	$('#settings_wrapper').hide();
+}
+
+function resume_match(s) {
+	state = s;
+	calc_state(state);
+	render(state);
+}
+
+function start_match(setup) {
 	init_state(state, setup);
-	calc_state();
-	render();
+	calc_state(state);
+	render(state);
 }
 
 function on_press(press, s) {
@@ -20,18 +89,25 @@ function on_press(press, s) {
 		s = state;
 	}
 
+	press.timestamp = Date.now();
 	s.presses.push(press);
-	calc_state();
-	render();
+	calc_state(s);
+	render(s);
+	store_match(s);
 }
 
 function init_state(s, setup) {
-	if (s === undefined) {
-		s = state;
-	}
-
+	var now = Date.now();
+	s.metadata = {
+		id: _uuid(),
+		start: now,
+		updated: now,
+	};
+	s.initialized = true;
 	s.setup = setup;
 	s.presses = [];
+
+	delete s.match;
 	delete s.game;
 	delete s.court;
 
@@ -73,6 +149,10 @@ function make_game_state(s, previous_game) {
 function calc_state(s) {
 	if (s === undefined) {
 		s = state;
+	}
+
+	if (s.presses.length > 0) {
+		s.metadata.updated = s.presses[s.presses.length - 1].timestamp;
 	}
 
 	s.match = {
@@ -256,10 +336,6 @@ function calc_state(s) {
 }
 
 function render(s) {
-	if (s === undefined) {
-		s = state;
-	}
-
 	function _court_show_player(key) {
 		var p = s.court['player_' + key];
 		$('#court_' + key).text(p === null ? '' : p.name);
@@ -443,7 +519,7 @@ function render(s) {
 	$('#pick_server').hide();
 	$('#pick_receiver').hide();
 	if (s.game.start_team1_left === null) {
-		$('#pick_side').show();
+		ui_show_picker($('#pick_side'));
 		if (s.setup.is_doubles) {
 			$('#pick_side_team1').text(
 				s.setup.teams[0].players[0].name + ' / ' +
@@ -466,13 +542,13 @@ function render(s) {
 			}
 		});
 
-		$('#pick_server').show();
+		ui_show_picker($('#pick_server'));
 	} else if (s.game.start_receiver_player_id === null) {
 		$('#pick_receiver button').remove();
 		var team_id = (s.game.start_server_team_id == 1) ? 0 : 1;
 		_add_player_pick($('#pick_receiver'), 'pick_receiver', team_id, 0);
 		_add_player_pick($('#pick_receiver'), 'pick_receiver', team_id, 1);
-		$('#pick_receiver').show();
+		ui_show_picker($('#pick_receiver'));
 	}
 }
 
@@ -554,12 +630,90 @@ function postgame_announcement(s) {
 	return res;
 }
 
+function ui_show_picker(obj) {
+	obj.show();
+	var first_button = obj.find('button:first');
+	first_button.addClass('auto-focused');
+	first_button.focus();
+	var kill_special_treatment = function() {
+		first_button.removeClass('auto-focused');
+		first_button.off('blur', kill_special_treatment);
+	};
+	first_button.on('blur', kill_special_treatment);
+}
+
+function store_match(s) {
+	var cleaned_s = {
+		metadata: s.metadata,
+		setup: s.setup,
+		presses: s.presses,
+	};
+	try {
+		window.localStorage.setItem('bup_match_' + s.metadata.id, JSON.stringify(cleaned_s));
+	} catch(e) {
+		show_error('Failed to store match ' + s.metadata.id, e);
+	}
+}
+
+function load_matches() {
+	var res = [];
+	for (var i = 0;i < window.localStorage.length;i++) {
+		var k = window.localStorage.key(i);
+		if (! k.match(/^bup_match_/)) {
+			continue;
+		}
+
+		var m = JSON.parse(window.localStorage.getItem(k));
+		res.push(m);
+	}
+	return res;
+}
+
+function delete_match(match_id) {
+	window.localStorage.removetem('bup_match_' + s.metadata.id);
+}
+
+
+function settings_load() {
+	var s = window.localStorage.getItem('bup_settings');
+	if (s) {
+		settings = JSON.parse(s);
+	}
+}
+
+function settings_store() {
+	window.localStorage.setItem('bup_settings', JSON.stringify(settings));
+}
+
+function init() {
+	settings_load();
+}
+
+function ui_init_settings() {
+	var checkboxes = ['save_finished_matches'];
+	checkboxes.forEach(function(name) {
+		var box = $('.settings [name="' + name + '"]');
+		box.prop('checked', settings[name]);
+		box.on('change', function() {
+			settings[name] = box.prop('checked');
+			settings_store();
+		});
+	});
+}
+
 function ui_init() {
 	$('#setup_manual_form [name="gametype"]').on('change', function() {
 		var new_type = $('#setup_manual_form [name="gametype"]:checked').val();
 		var is_doubles = new_type == 'doubles';
 		$('#setup_manual_form #setup_players_singles').toggle(!is_doubles);
 		$('#setup_manual_form #setup_players_doubles').toggle(is_doubles);
+	});
+
+	$('#settings_wrapper').on('click', function(e) {
+		if (e.target != this) {
+			return;
+		}
+		hide_settings();
 	});
 
 	$('#setup_manual_form').on('submit', function(e) {
@@ -594,7 +748,8 @@ function ui_init() {
 			'players': team2,
 		}];
 
-		start_game(setup);
+		hide_settings(true);
+		start_match(setup);
 	});
 	$('#pick_side_team1').on('click', function() {
 		on_press({
@@ -616,6 +771,11 @@ function ui_init() {
 	$('#postgame-confirm').on('click', function() {
 		on_press({
 			type: 'postgame-confirm'
+		});
+	});
+	$('#postmatch-confirm').on('click', function() {
+		on_press({
+			type: 'postmatch-confirm'
 		});
 	});
 	$('#left_score').on('click', function() {
@@ -641,11 +801,16 @@ function ui_init() {
 		});
 	});
 
+	$('#button_settings').on('click', function() {
+		show_settings();
+	});
 
-	show_setup();
+	ui_init_settings();
+	show_settings();
 }
 
 if (typeof $ !== 'undefined') {
+	init();
 	$(ui_init);
 }
 

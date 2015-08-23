@@ -200,7 +200,7 @@ span.score_announcement+span.score_announcement {
 	height: 12vh;
 	position: relative;
 }
-.image-button>div {
+.image-button>span {
 	position: absolute;
 	left: 0; right: 0; top: 0; bottom: 0;
 	background-size: 100%;
@@ -229,15 +229,44 @@ span.score_announcement+span.score_announcement {
 .topright_buttons>button+button {
 	margin-left: 7vh;
 }
-#button_settings>div {
+#button_settings>span {
 	background-image: url(static/icons/settings.svg);
 }
-#button_exception>div {
+#button_exception>span {
 	background-image: url(static/icons/exception.svg);
 }
-#button_undo>div {
+#button_undo>span {
 	background-image: url(static/icons/undo.svg);
 }
-#button_redo>div {
+#button_redo>span {
 	background-image: url(static/icons/redo.svg);
+}
+
+#settings_wrapper {
+	position: fixed;
+	left: 0; right: 0;
+	top: 0; bottom: 0;
+	background: rgba(0, 0, 0, 0.8);
+	z-index: 10000;
+}
+.settings_container {
+	background: #ffffff;
+	border-radius: 4vh;
+	padding: 3vh;
+}
+.settings_container>div {
+}
+.settings_container h2 {
+	margin: 0;
+}
+
+.auto-focused:focus {
+	outline: none;
+}
+
+
+.load_match_link {
+	cursor: pointer;
+	text-decoration: underline;
+	color: blue;
 }

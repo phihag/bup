@@ -1,5 +1,4 @@
 do something after game (save game / start new one)
-backup game during run
 cards/injuries etc.
 	dialog and cancel option
 	yellow card button
@@ -35,11 +34,11 @@ test touch latency
 prevent double touches
 
 injury timer
-generate umpire scoresheet (PDF)
+generate umpire scoresheet to print
 settings: game and other configuration (put in one pseudo-tab)
 multiple languages
+	change in settings
 
-redo
 show what was undone
 support for team names
 team names in pronounciation
@@ -54,8 +53,10 @@ larger hitbox for buttons
 store time of changes; analyze how long each point took
 test red card after game
 animate changing server sides and changing sides after game
-bump font size of names
 find a better font for score display
 score: numbers of past sets closer together
 metadata (game start time etc.)
-multiple languages; change in settings
+unify setup/settings
+better design for settings
+improve error showing
+improve load match style
