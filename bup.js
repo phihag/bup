@@ -31,9 +31,9 @@ function show_settings() {
 		var time1 = m1.metadata.updated;
 		var time2 = m2.metadata.updated;
 		if (time1 > time2) {
-			return 1;
-		} else if (time1 < time2) {
 			return -1;
+		} else if (time1 < time2) {
+			return 1;
 		} else {
 			return 0;
 		}

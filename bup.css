@@ -266,7 +266,10 @@ span.score_announcement+span.score_announcement {
 
 
 .load_match_link {
+	display: inline-block;
 	cursor: pointer;
 	text-decoration: underline;
 	color: blue;
+	font-size: 2vh;
+	padding: 0.3vh 0;
 }
