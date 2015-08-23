@@ -82,7 +82,9 @@ function ui_settings_load_list() {
 
 function show_settings() {
 	$('#settings_wrapper').show();
-	Mousetrap.bind('escape', hide_settings);
+	Mousetrap.bind('escape', function() {
+		hide_settings();
+	});
 	ui_settings_load_list();
 }
 
@@ -114,8 +116,17 @@ function on_press(press, s) {
 	press.timestamp = Date.now();
 	s.presses.push(press);
 	calc_state(s);
-	render(s);
-	store_match(s);
+
+	if (s.match.finish_confirmed) {
+		if (! settings.save_finished_matches) {
+			delete_match(s.metadata.id);
+		}
+		s.initialized = false;
+		show_settings();
+	} else {
+		store_match(s);
+		render(s);
+	}
 }
 
 function init_state(s, setup) {
@@ -670,10 +681,14 @@ function ui_show_picker(obj) {
 }
 
 function store_match(s) {
+	var presses = s.presses;
+	if (presses && presses[presses.length - 1].type == 'postmatch-confirm') {
+		presses = presses.slice(0, presses.length - 1);
+	}
 	var cleaned_s = {
 		metadata: s.metadata,
 		setup: s.setup,
-		presses: s.presses,
+		presses: presses,
 	};
 	try {
 		window.localStorage.setItem('bup_match_' + s.metadata.id, JSON.stringify(cleaned_s));
