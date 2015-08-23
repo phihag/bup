@@ -534,7 +534,7 @@ function postgame_announcement(s) {
 			return str;
 		}, '');
 
-		res = 'Das Spiel wurde gewonnen von ' + winner_name + ' mit ' + previous_scores + winner_score + '-' + loser_score;
+		res = 'Das Spiel wurde gewonnen von ' + winner_name + ' mit\n' + previous_scores + winner_score + '-' + loser_score;
 	} else if (s.match.finished_games.length == 0) {
 		res = 'Der erste Satz wurde gewonnen von ' + winner_name + ' mit ' + winner_score + '-' + loser_score;
 	} else if (s.match.finished_games.length == 1) {
