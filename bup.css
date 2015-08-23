@@ -75,7 +75,7 @@ html, body, button {
 	background-repeat: no-repeat;
 }
 
-.pick_dialog {
+.pick_dialog, .exception_dialog {
 	position: absolute;
 	bottom: 0;
 	left: 0; right: 0;
@@ -248,7 +248,7 @@ span.score_announcement+span.score_announcement {
 	background-image: url(static/icons/redo.svg);
 }
 
-#settings_wrapper {
+.modal-wrapper {
 	position: fixed;
 	left: 0; right: 0;
 	top: 0; bottom: 0;
@@ -284,4 +284,41 @@ span.score_announcement+span.score_announcement {
 }
 .button_delete>span {
 	background-image: url(static/icons/delete.svg);
+}
+
+.exception_dialog {
+	vertical-align: top;
+	text-align: center;
+}
+.exception_dialog>div {
+	display: inline-block;
+	text-align: center;
+	font-size: 3vh;
+	vertical-align: top;
+	margin: 2vh;
+}
+.exception_dialog>div>span {
+	white-space: pre-wrap;
+}
+.exception_dialog>div>button {
+	width: 20vh;
+	height: 20vh;
+	font-size: 16vh;
+	display: block;
+}
+#exception_yellow>span {
+	background-image: url(static/icons/exception_yellow.svg);
+}
+#exception_red>span {
+	background-image: url(static/icons/exception_red.svg);
+}
+#exception_black>span {
+	background-image: url(static/icons/exception_black.svg);
+}
+.cancel-button {
+	display: block;
+	width: 100%;
+	margin: 2vh 0 1vh 0;
+	padding: 1vh 0 !important;
+	font-size: 6vh;
 }

@@ -80,6 +80,18 @@ function ui_settings_load_list() {
 	});
 }
 
+function ui_show_exception_dialog() {
+	$('#exception_wrapper').show();
+	Mousetrap.bind('escape', function() {
+		ui_hide_exception_dialog();
+	});
+}
+
+function ui_hide_exception_dialog() {
+	Mousetrap.unbind('escape');
+	$('#exception_wrapper').hide();
+}
+
 function show_settings() {
 	$('#settings_wrapper').show();
 	Mousetrap.bind('escape', function() {
@@ -98,6 +110,7 @@ function hide_settings(force) {
 
 function resume_match(s) {
 	state = s;
+	state.initialized = true;
 	calc_state(state);
 	render(state);
 }
@@ -756,6 +769,12 @@ function ui_init() {
 		}
 		hide_settings();
 	});
+	$('#exception_wrapper').on('click', function(e) {
+		if (e.target != this) {
+			return;
+		}
+		ui_hide_exception_dialog();
+	});
 
 	$('#setup_manual_form').on('submit', function(e) {
 		e.preventDefault();
@@ -844,6 +863,23 @@ function ui_init() {
 
 	$('#button_settings').on('click', function() {
 		show_settings();
+	});
+	$('#button_exception').on('click', function() {
+		ui_show_exception_dialog();
+	});
+	$('.exception_dialog>.cancel-button').on('click', function() {
+		ui_hide_exception_dialog();
+	});
+
+	Mousetrap.bind('e', function() {
+		if (state.initialized) {
+			ui_show_exception_dialog();
+		}
+	});
+	Mousetrap.bind('s', function() {
+		if (state.initialized) {
+			show_settings();
+		}
 	});
 
 	ui_init_settings();

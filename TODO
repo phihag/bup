@@ -1,10 +1,8 @@
 cards/injuries etc.
-	dialog and cancel option
 	yellow card button
 	red card button
 	black card button
 	character buttons
-	walkover at start of game
 	test that yellow card can only given out once per side
 automatic timers
 	at start of game
@@ -63,3 +61,4 @@ switch core implementation to a single mode, one of ['pick_server', 'pick_receiv
 	only accept those inputs
 	raise error (and test it) that only those are accepted
 autofocus love-all buttons and the like
+test e and s shortcuts together
