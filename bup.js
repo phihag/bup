@@ -7,6 +7,20 @@ var settings = {
 	save_finished_matches: true
 };
 
+function _get_time_str(d) {
+	var add_zeroes = function(n) {
+		if (n < 10) {
+			return '0' + n;
+		} else {
+			return '' + n;
+		}
+	};
+
+	return (
+		add_zeroes(d.getDate()) + '.' + add_zeroes(d.getMonth()+1) + '.' + d.getFullYear() + ' ' +
+		add_zeroes(d.getHours()) + ':' + add_zeroes(d.getMinutes()));
+}
+
 function _uuid() {
 	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
 	    var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
@@ -49,8 +63,7 @@ function ui_settings_load_list() {
 			match_name = m.setup.teams[0].players[0].name + ' vs ' + m.setup.teams[1].players[0].name;
 		}
 		var d = new Date(m.metadata.updated);
-		var time_str = '' + d.getDate() + '.' + (d.getMonth()+1) + '.' + d.getFullYear() + ' ' + d.getHours() + ':' + d.getMinutes();
-		a.text(match_name + ', ' + time_str);
+		a.text(match_name + ', ' + _get_time_str(d));
 		a.on('click', function(e) {
 			e.preventDefault();
 			resume_match(m);
