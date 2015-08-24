@@ -7,18 +7,19 @@ var settings = {
 	save_finished_matches: true
 };
 
-function _get_time_str(d) {
-	var add_zeroes = function(n) {
-		if (n < 10) {
-			return '0' + n;
-		} else {
-			return '' + n;
-		}
-	};
+function _add_zeroes(n) {
+	if (n < 10) {
+		return '0' + n;
+	} else {
+		return '' + n;
+	}
+};
 
+
+function _get_time_str(d) {
 	return (
-		add_zeroes(d.getDate()) + '.' + add_zeroes(d.getMonth()+1) + '.' + d.getFullYear() + ' ' +
-		add_zeroes(d.getHours()) + ':' + add_zeroes(d.getMinutes()));
+		_add_zeroes(d.getDate()) + '.' + _add_zeroes(d.getMonth()+1) + '.' + d.getFullYear() + ' ' +
+		_add_zeroes(d.getHours()) + ':' + _add_zeroes(d.getMinutes()));
 }
 
 function _uuid() {
@@ -217,6 +218,7 @@ function init_state(s, setup) {
 	s.initialized = true;
 	s.setup = setup;
 	s.presses = [];
+	s.timer = false;
 
 	delete s.match;
 	delete s.game;
@@ -257,7 +259,7 @@ function make_game_state(s, previous_game) {
 	return res;
 }
 
-function score(s, team_id) {
+function score(s, team_id, timestamp) {
 	var team1_scored = team_id == 0;
 	s.game.service_over = team1_scored != s.game.team1_serving;
 	s.game.score[team_id] += 1;
@@ -302,6 +304,21 @@ function score(s, team_id) {
 	s.game.interval = (
 		(s.game.score[team_id] === 11) && (s.game.score[1 - team_id] < 11)
 	);
+
+	if (s.game.interval) {
+		s.timer = {
+			start: timestamp,
+			duration: 60 * 1000,
+		};
+	} else if (s.game.finished && !s.match.finished) {
+		s.timer = {
+			start: timestamp,
+			duration: 120 * 1000,
+		};
+	} else {
+		s.timer = false;
+	}
+
 	s.game.change_sides = (s.game.interval && s.match.finished_games.length == 2);
 	if (s.game.change_sides) {
 		s.game.team1_left = ! s.game.team1_left;
@@ -341,6 +358,10 @@ function calc_state(s) {
 		case 'pick_side':
 			s.game.start_team1_left = press.team1_left;
 			s.game.team1_left = s.game.start_team1_left;
+			s.timer = {
+				start: press.timestamp,
+				duration: 120 * 1000,
+			};
 			break;
 		case 'pick_server':
 			s.game.start_server_team_id = press.team_id;
@@ -367,7 +388,7 @@ function calc_state(s) {
 			break;
 		case 'score':
 			var team1_scored = (s.game.team1_left == (press.side == 'left'));
-			score(s, (team1_scored ? 0 : 1));
+			score(s, (team1_scored ? 0 : 1), press.timestamp);
 			break;
 		case 'postgame-confirm':
 			if (s.match.finished) {
@@ -401,7 +422,7 @@ function calc_state(s) {
 			press.char = 'F';
 			s.match.marks.push(press);
 			if (! s.match.finished) {
-				score(s, 1 - press.team_id);
+				score(s, 1 - press.team_id, press.timestamp);
 			}
 			break;
 		case 'injury':
@@ -416,6 +437,7 @@ function calc_state(s) {
 			s.match.finished = true;
 			s.game.team1_serving = null;
 			s.game.service_over = null;
+			s.timer = false;
 			break;
 		case 'disqualified':
 			press.char = 'Disqualifiziert';
@@ -425,6 +447,7 @@ function calc_state(s) {
 			s.match.finished = true;
 			s.game.team1_serving = null;
 			s.game.service_over = null;
+			s.timer = false;
 			break;
 		default:
 			throw new Error('Unsupported press type ' + press.type);
@@ -570,6 +593,12 @@ function render(s) {
 	} else {
 		redo.attr('disabled', 'disabled');
 		redo.addClass('nearly-invisible');
+	}
+
+	if (s.timer) {
+		ui_set_timer(s.timer);
+	} else {
+		ui_remove_timer();
 	}
 
 	$('#score_table').empty();
@@ -857,6 +886,43 @@ function ui_init_settings() {
 	});
 }
 
+var ui_timer = null;
+function ui_set_timer(timer) {
+	if (ui_timer) {
+		window.clearTimeout(ui_timer);
+	}
+	$('.timer_container').show();
+	ui_update_timer();
+}
+
+function ui_update_timer() {
+	if (! state.timer) {
+		ui_remove_timer();
+		return;
+	}
+	var remaining = state.timer.start + state.timer.duration - Date.now();
+	if (remaining <= 0) {
+		ui_remove_timer();
+		return;
+	}
+
+	var remaining_val = Math.floor(remaining / 1000);
+	if (remaining_val >= 60) {
+		remaining_val = Math.floor(remaining_val / 60) + ':' + _add_zeroes(remaining_val % 60);
+	}
+	$('.timer').text(remaining_val);
+	var remaining_ms = Math.max(10, remaining % 1000);
+	ui_timer = window.setTimeout(ui_update_timer, remaining_ms);
+}
+
+function ui_remove_timer() {
+	if (ui_timer) {
+		window.clearTimeout(ui_timer);
+		ui_timer = null;
+		$('.timer_container').fadeOut(300);
+	}
+}
+
 function ui_init() {
 	$('#setup_manual_form [name="gametype"]').on('change', function() {
 		var new_type = $('#setup_manual_form [name="gametype"]:checked').val();
@@ -875,7 +941,7 @@ function ui_init() {
 		if (e.target != this) {
 			return;
 		}
-		ui_hide_exception_dialog();
+ 		ui_hide_exception_dialog();
 	});
 
 	$('#setup_manual_form').on('submit', function(e) {
