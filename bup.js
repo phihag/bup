@@ -92,7 +92,11 @@ function show_error(msg, e) {
 	console.error(msg, e);
 }
 
-function ui_settings_load_list() {
+function ui_settings_load_list(s) {
+	if (s === undefined) {
+		s = state;
+	}
+
 	var matches = load_matches();
 	$('.setup_loadmatch_none').toggle(matches.length == 0);
 	var match_list = $('.setup_loadmatch_list');
@@ -110,7 +114,7 @@ function ui_settings_load_list() {
 		}
 	});
 	matches.forEach(function(m) {
-		if (state.metadata && m.metadata.id == state.metadata.id) {
+		if (s.metadata && m.metadata.id == s.metadata.id) {
 			return;
 		}
 
@@ -194,6 +198,7 @@ function on_press(press, s) {
 		if (! settings.save_finished_matches) {
 			delete_match(s.metadata.id);
 		}
+		s.metadata = {};
 		s.initialized = false;
 		show_settings();
 	} else {
@@ -252,6 +257,61 @@ function make_game_state(s, previous_game) {
 	return res;
 }
 
+function score(s, team_id) {
+	var team1_scored = team_id == 0;
+	s.game.service_over = team1_scored != s.game.team1_serving;
+	s.game.score[team_id] += 1;
+
+	var team1_won = (
+		((s.game.score[0] == 21) && (s.game.score[1] < 20)) ||
+		((s.game.score[0] > 21) && (s.game.score[1] < s.game.score[0] - 1)) ||
+		(s.game.score[0] == 30)
+	);
+	var team2_won = (
+		((s.game.score[1] == 21) && (s.game.score[0] < 20)) ||
+		((s.game.score[1] > 21) && (s.game.score[0] < s.game.score[1] - 1)) ||
+		(s.game.score[1] == 30)
+	);
+	if (team1_won) {
+		s.match.game_score[0]++;
+	} else if (team2_won) {
+		s.match.game_score[1]++;
+	}
+	if (team1_won || team2_won) {
+		s.game.team1_won = team1_won;
+		s.game.game = true;
+		s.game.finished = true;
+		if (s.match.game_score[team_id] == 2) {
+			s.match.finished = true;
+		}
+		s.game.team1_serving = null;
+		s.game.service_over = null;
+	} else {
+		if (s.setup.is_doubles) {
+			if (! s.game.service_over) {
+				s.game.teams_player1_even[team_id] = !s.game.teams_player1_even[team_id];
+			}
+		} else {
+			var even_score = s.game.score[team_id] % 2 == 0;
+			s.game.teams_player1_even[team_id] = even_score;
+			s.game.teams_player1_even[1 - team_id] = even_score;
+		}
+		s.game.team1_serving = team1_scored;
+	}
+
+	s.game.interval = (
+		(s.game.score[team_id] === 11) && (s.game.score[1 - team_id] < 11)
+	);
+	s.game.change_sides = (s.game.interval && s.match.finished_games.length == 2);
+	if (s.game.change_sides) {
+		s.game.team1_left = ! s.game.team1_left;
+	}
+
+	if (s.match.marks.length > 0) {
+		s.match.marks = [];
+	}
+}
+
 function calc_state(s) {
 	if (s.presses.length > 0) {
 		s.metadata.updated = s.presses[s.presses.length - 1].timestamp;
@@ -307,58 +367,7 @@ function calc_state(s) {
 			break;
 		case 'score':
 			var team1_scored = (s.game.team1_left == (press.side == 'left'));
-			s.game.service_over = team1_scored != s.game.team1_serving;
-			var team_index = team1_scored ? 0 : 1;
-			s.game.score[team_index] += 1;
-
-			var team1_won = (
-				((s.game.score[0] == 21) && (s.game.score[1] < 20)) ||
-				((s.game.score[0] > 21) && (s.game.score[1] < s.game.score[0] - 1)) ||
-				(s.game.score[0] == 30)
-			);
-			var team2_won = (
-				((s.game.score[1] == 21) && (s.game.score[0] < 20)) ||
-				((s.game.score[1] > 21) && (s.game.score[0] < s.game.score[1] - 1)) ||
-				(s.game.score[1] == 30)
-			);
-			if (team1_won) {
-				s.match.game_score[0]++;
-			} else if (team2_won) {
-				s.match.game_score[1]++;
-			}
-			if (team1_won || team2_won) {
-				s.game.team1_won = team1_won;
-				s.game.game = true;
-				s.game.finished = true;
-				if (s.match.game_score[team_index] == 2) {
-					s.match.finished = true;
-				}
-				s.game.team1_serving = null;
-				s.game.service_over = null;
-			} else {
-				if (s.setup.is_doubles) {
-					if (! s.game.service_over) {
-						s.game.teams_player1_even[team_index] = !s.game.teams_player1_even[team_index];
-					}
-				} else {
-					var even_score = s.game.score[team_index] % 2 == 0;
-					s.game.teams_player1_even[team_index] = even_score;
-					s.game.teams_player1_even[1 - team_index] = even_score;
-				}
-				s.game.team1_serving = team1_scored;
-			}
-
-			s.game.interval = (
-				(s.game.score[team_index] === 11) && (s.game.score[1 - team_index] < 11)
-			);
-			s.game.change_sides = (s.game.interval && s.match.finished_games.length == 2);
-			if (s.game.change_sides) {
-				s.game.team1_left = ! s.game.team1_left;
-			}
-
-			if (s.match.marks.length > 0) {
-				s.match.marks = [];
-			}
+			score(s, (team1_scored ? 0 : 1));
 			break;
 		case 'postgame-confirm':
 			if (s.match.finished) {
@@ -388,9 +397,34 @@ function calc_state(s) {
 			s.match.marks.push(press);
 			s.match.carded[press.team_id] = true;
 			break;
+		case 'red-card':
+			press.char = 'F';
+			s.match.marks.push(press);
+			if (! s.match.finished) {
+				score(s, 1 - press.team_id);
+			}
+			break;
 		case 'injury':
 			press.char = 'V';
 			s.match.marks.push(press);
+			break;
+		case 'retired':
+			press.char = 'A';
+			s.match.marks.push(press);
+			s.game.team1_won = press.team_id != 0;
+			s.game.finished = true;
+			s.match.finished = true;
+			s.game.team1_serving = null;
+			s.game.service_over = null;
+			break;
+		case 'disqualified':
+			press.char = 'Disqualifiziert';
+			s.match.marks.push(press);
+			s.game.team1_won = press.team_id != 0;
+			s.game.finished = true;
+			s.match.finished = true;
+			s.game.team1_serving = null;
+			s.game.service_over = null;
 			break;
 		default:
 			throw new Error('Unsupported press type ' + press.type);
@@ -454,8 +488,8 @@ function calc_state(s) {
 		if (s.game.score[0] === null) {
 			s.court.serving_downwards = ! s.court.left_serving;
 		} else {
-			var score = s.game.score[s.game.team1_serving ? 0 : 1];
-			s.court.serving_downwards = (score % 2 == 0) != s.court.left_serving;
+			var serving_score = s.game.score[s.game.team1_serving ? 0 : 1];
+			s.court.serving_downwards = (serving_score % 2 == 0) != s.court.left_serving;
 		}
 	}
 
@@ -978,9 +1012,21 @@ function ui_init() {
 			}
 		);
 	});
+	$('#exception_red').on('click', function() {
+		ui_hide_exception_dialog();
+		_ui_make_player_pick(state, 'Fehlerwarnung (rote Karte)', 'red-card', ui_show_exception_dialog);
+	});
 	$('#exception_injury').on('click', function() {
 		ui_hide_exception_dialog();
 		_ui_make_player_pick(state, 'Verletzung', 'injury', ui_show_exception_dialog);
+	});
+	$('#exception_retired').on('click', function() {
+		ui_hide_exception_dialog();
+		_ui_make_player_pick(state, 'Aufgegeben', 'retired', ui_show_exception_dialog);
+	});
+	$('#exception_black').on('click', function() {
+		ui_hide_exception_dialog();
+		_ui_make_player_pick(state, 'Disqualifiziert (schwarze Karte)', 'disqualified', ui_show_exception_dialog);
 	});
 
 

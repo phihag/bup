@@ -1,7 +1,3 @@
-cards/injuries etc.
-	red card button
-	black card button
-	retired
 automatic timers
 	at start of game
 	at 11
@@ -61,8 +57,10 @@ switch core implementation to a single mode, one of ['pick_server', 'pick_receiv
 autofocus love-all buttons and the like
 test e and s shortcuts together
 write a general test for cards
-test red card at beginning and after end of game
+test red card at beginning and after end of game/match
 make every button keyboard usable
 	1-4 for dialogs of players
 	keys for warnings etc. (after pressing e)
 	undo/redo (Ctrl+Z/Y)
+prevent retired after game
+show text in difficult situations (retired etc.)
