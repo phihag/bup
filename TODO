@@ -1,5 +1,3 @@
-firefox: work if localStorage is not set
-add an event_name to match tournament_name
 set up from liveaw
 	read current gamestate
 push changes to liveaw

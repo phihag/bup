@@ -1052,6 +1052,7 @@ function ui_init() {
 			'name': _formval('team2_name', (setup.team_competition ? (setup.is_doubles ? 'CD team' : 'Right team') : null)).name,
 		}];
 		setup.match_name = _formval('match_name');
+		setup.event_name = _formval('event_name');
 		setup.tournament_name = _formval('tournament_name');
 
 		hide_settings(true);
