@@ -726,7 +726,7 @@ function render(s) {
 		var team_indices = (s.game.start_server_team_id === null) ? [0, 1] : [s.game.start_server_team_id];
 		team_indices.forEach(function(ti) {
 			var namefunc = null;
-			if (s.setup.team_competition) {
+			if (s.setup.team_competition && (team_indices.length > 1)) {
 				if (s.setup.is_doubles) {
 					namefunc = function(player) {
 						return player.name + ' [' + s.setup.teams[ti].name + ']'
