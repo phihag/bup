@@ -28,6 +28,66 @@ function _uuid() {
 	});
 }
 
+function _ui_make_player_pick(s, label, type, on_cancel, modify_button) {
+	var kill_dialog = function() {
+		Mousetrap.unbind('escape');
+		dlg_wrapper.remove();
+	};
+	var cancel = function() {
+		kill_dialog();
+		on_cancel();
+	}
+
+	Mousetrap.bind('escape', cancel);
+	var dlg_wrapper = $('<div class="modal-wrapper">');
+	dlg_wrapper.on('click', cancel);
+	var dlg = $('<div class="pick_dialog">');
+	dlg.appendTo(dlg_wrapper);
+
+	var label_span = $('<span>');
+	label_span.text(label);
+	label_span.appendTo(dlg);
+
+	var team_indices = [0, 1]
+	team_indices.forEach(function(ti) {
+		var btn = _ui_add_player_pick(s, dlg, type, ti, 0, kill_dialog);
+		if (modify_button) {
+			modify_button(btn, ti, 0);
+		}
+		if (s.setup.is_doubles) {
+			btn = _ui_add_player_pick(s, dlg, type, ti, 1, kill_dialog);
+			if (modify_button) {
+				modify_button(btn, ti, 1);
+			}
+		}
+	});
+
+	var cancel_btn = $('<button class="cancel-button">Abbrechen</button>');
+	cancel_btn.on('click', cancel);
+	cancel_btn.appendTo(dlg);
+
+	$('#game').append(dlg_wrapper);
+}
+
+function _ui_add_player_pick(s, container, type, team_id, player_id, on_click) {
+	var player = s.setup.teams[team_id].players[player_id];
+	var btn = $('<button>');
+	btn.text(player.name);
+	btn.on('click', function() {
+		var press = {
+			type: type,
+			team_id: team_id,
+			player_id: player_id,
+		};
+		if (on_click) {
+			on_click(press);
+		}
+		on_press(press);
+	});
+	container.append(btn);
+	return btn;
+}
+
 function show_error(msg, e) {
 	console.error(msg, e);
 }
@@ -193,10 +253,6 @@ function make_game_state(s, previous_game) {
 }
 
 function calc_state(s) {
-	if (s === undefined) {
-		s = state;
-	}
-
 	if (s.presses.length > 0) {
 		s.metadata.updated = s.presses[s.presses.length - 1].timestamp;
 	}
@@ -207,6 +263,7 @@ function calc_state(s) {
 		finished: false,
 		marks: [],
 		finish_confirmed: false,
+		carded: [false, false]
 	};
 
 	switch (s.setup.counting) {
@@ -321,6 +378,18 @@ function calc_state(s) {
 			s.match.finish_confirmed = true;
 			break;
 		case 'mark':
+			s.match.marks.push(press);
+			break;
+		case 'yellow-card':
+			if (s.match.carded[press.team_id]) {
+				throw new Error('Gelbe Karte wurde bereits an diese Seite vergeben');
+			}
+			press.char = 'W';
+			s.match.marks.push(press);
+			s.match.carded[press.team_id] = true;
+			break;
+		case 'injury':
+			press.char = 'V';
 			s.match.marks.push(press);
 			break;
 		default:
@@ -565,19 +634,6 @@ function render(s) {
 		}
 	}
 
-	function _add_player_pick(container, type, team_id, player_id) {
-		var player = s.setup.teams[team_id].players[player_id];
-		var btn = $('<button>');
-		btn.text(player.name);
-		btn.on('click', function() {
-			on_press({
-				type: type,
-				team_id: team_id,
-				player_id: player_id,
-			});
-		});
-		container.append(btn);
-	}
 	$('#pick_side').hide();
 	$('#pick_server').hide();
 	$('#pick_receiver').hide();
@@ -599,9 +655,9 @@ function render(s) {
 
 		var team_indices = (s.game.start_server_team_id === null) ? [0, 1] : [s.game.start_server_team_id];
 		team_indices.forEach(function(ti) {
-			_add_player_pick($('#pick_server'), 'pick_server', ti, 0);
+			_ui_add_player_pick(s, $('#pick_server'), 'pick_server', ti, 0);
 			if (s.setup.is_doubles) {
-				_add_player_pick($('#pick_server'), 'pick_server', ti, 1);
+				_ui_add_player_pick(s, $('#pick_server'), 'pick_server', ti, 1);
 			}
 		});
 
@@ -609,8 +665,8 @@ function render(s) {
 	} else if (s.game.start_receiver_player_id === null) {
 		$('#pick_receiver button').remove();
 		var team_id = (s.game.start_server_team_id == 1) ? 0 : 1;
-		_add_player_pick($('#pick_receiver'), 'pick_receiver', team_id, 0);
-		_add_player_pick($('#pick_receiver'), 'pick_receiver', team_id, 1);
+		_ui_add_player_pick(s, $('#pick_receiver'), 'pick_receiver', team_id, 0);
+		_ui_add_player_pick(s, $('#pick_receiver'), 'pick_receiver', team_id, 1);
 		ui_show_picker($('#pick_receiver'));
 	}
 }
@@ -909,6 +965,22 @@ function ui_init() {
 			'char': 'O'
 		});
 		ui_hide_exception_dialog();
+	});
+	$('#exception_yellow').on('click', function() {
+		ui_hide_exception_dialog();
+		_ui_make_player_pick(
+			state, 'Verwarnung (Gelbe Karte)', 'yellow-card', ui_show_exception_dialog,
+			function(btn, team_id, player_id) {
+				if (state.match.carded[team_id]) {
+					btn.prepend('<span class="yellow-card-image"></span>');
+					btn.attr('disabled', 'disabled');
+				}
+			}
+		);
+	});
+	$('#exception_injury').on('click', function() {
+		ui_hide_exception_dialog();
+		_ui_make_player_pick(state, 'Verletzung', 'injury', ui_show_exception_dialog);
 	});
 
 

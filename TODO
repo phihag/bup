@@ -1,9 +1,7 @@
 cards/injuries etc.
-	yellow card button
 	red card button
 	black card button
-	character buttons
-	test that yellow card can only given out once per side
+	retired
 automatic timers
 	at start of game
 	at 11
@@ -62,3 +60,9 @@ switch core implementation to a single mode, one of ['pick_server', 'pick_receiv
 	raise error (and test it) that only those are accepted
 autofocus love-all buttons and the like
 test e and s shortcuts together
+write a general test for cards
+test red card at beginning and after end of game
+make every button keyboard usable
+	1-4 for dialogs of players
+	keys for warnings etc. (after pressing e)
+	undo/redo (Ctrl+Z/Y)

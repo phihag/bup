@@ -315,10 +315,21 @@ span.score_announcement+span.score_announcement {
 #exception_black>span {
 	background-image: url(static/icons/exception_black.svg);
 }
-.cancel-button {
+.cancel-button, .pick_dialog button.cancel-button {
 	display: block;
 	width: 100%;
 	margin: 2vh 0 1vh 0;
 	padding: 1vh 0 !important;
 	font-size: 6vh;
+}
+
+.yellow-card-image {
+	text-align: middle;
+	margin-right: 0.4em;
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	background-image: url(static/icons/yellow-card.svg);
+	background-repeat: no-repeat;
+	background-size: 100%;
 }
