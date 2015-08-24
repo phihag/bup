@@ -105,6 +105,9 @@ function ui_settings_load_list(s) {
 	}
 
 	var matches = load_matches();
+	matches = matches.filter(function() {
+		return (!s.metadata || m.metadata.id != s.metadata.id);
+	});
 	$('.setup_loadmatch_none').toggle(matches.length == 0);
 	var match_list = $('.setup_loadmatch_list');
 	match_list.empty();
@@ -121,10 +124,6 @@ function ui_settings_load_list(s) {
 		}
 	});
 	matches.forEach(function(m) {
-		if (s.metadata && m.metadata.id == s.metadata.id) {
-			return;
-		}
-
 		var li = $('<li>');
 		var a = $('<span class="load_match_link">');
 		var match_name;
