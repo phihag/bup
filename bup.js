@@ -70,10 +70,16 @@ function _ui_make_player_pick(s, label, type, on_cancel, modify_button) {
 	$('#game').append(dlg_wrapper);
 }
 
-function _ui_add_player_pick(s, container, type, team_id, player_id, on_click) {
+function _ui_add_player_pick(s, container, type, team_id, player_id, on_click, namefunc) {
+	if (! namefunc) {
+		namefunc = function(player) {
+			return player.name;
+		};
+	}
+
 	var player = s.setup.teams[team_id].players[player_id];
 	var btn = $('<button>');
-	btn.text(player.name);
+	btn.text(namefunc(player));
 	btn.on('click', function() {
 		var press = {
 			type: type,
@@ -528,6 +534,16 @@ function render(s) {
 	_court_show_player('left_even');
 	_court_show_player('right_even');
 	_court_show_player('right_odd');
+
+	if (s.setup.team_competition && (s.game.team1_left !== null)) {
+		$('#court_left_team, #court_right_team').show();
+		var left_index = s.game.team1_left ? 0 : 1;
+		$('#court_left_team').text(s.setup.teams[left_index].name);
+		$('#court_right_team').text(s.setup.teams[1 - left_index].name);
+	} else {
+		$('#court_left_team, #court_right_team').hide();
+	}
+
 	if (s.court.left_serving == null) {
 		$('#court_arrow').hide();
 	} else {
@@ -702,25 +718,30 @@ function render(s) {
 	$('#pick_receiver').hide();
 	if (s.game.start_team1_left === null) {
 		ui_show_picker($('#pick_side'));
-		if (s.setup.is_doubles) {
-			$('#pick_side_team1').text(
-				s.setup.teams[0].players[0].name + ' / ' +
-				s.setup.teams[0].players[1].name);
-			$('#pick_side_team2').text(
-				s.setup.teams[1].players[0].name + ' / ' +
-				s.setup.teams[1].players[1].name);
-		} else {
-			$('#pick_side_team1').text(s.setup.teams[0].players[0].name);
-			$('#pick_side_team2').text(s.setup.teams[1].players[0].name);
-		}
+
+		$('#pick_side_team1').text(calc_teamtext_internal(s, 0));
+		$('#pick_side_team2').text(calc_teamtext_internal(s, 1));
 	} else if (s.game.start_server_player_id === null) {
 		$('#pick_server button').remove();
 
 		var team_indices = (s.game.start_server_team_id === null) ? [0, 1] : [s.game.start_server_team_id];
 		team_indices.forEach(function(ti) {
-			_ui_add_player_pick(s, $('#pick_server'), 'pick_server', ti, 0);
+			var namefunc = null;
+			if (s.setup.team_competition) {
+				if (s.setup.is_doubles) {
+					namefunc = function(player) {
+						return player.name + ' [' + s.setup.teams[ti].name + ']'
+					};
+				} else {
+					namefunc = function(player) {
+						return s.setup.teams[ti].name + ' (' + player.name + ')'
+					};
+				}
+			}
+
+			_ui_add_player_pick(s, $('#pick_server'), 'pick_server', ti, 0, null, namefunc);
 			if (s.setup.is_doubles) {
-				_ui_add_player_pick(s, $('#pick_server'), 'pick_server', ti, 1);
+				_ui_add_player_pick(s, $('#pick_server'), 'pick_server', ti, 1, null, namefunc);
 			}
 		});
 
@@ -789,10 +810,14 @@ function postgame_announcement(s) {
 	var loser_score = s.game.score[1 - winner_index];
 	var winner = s.setup.teams[winner_index];
 	var winner_name;
-	if (s.setup.is_doubles) {
-		winner_name = winner.players[0].name + ' / ' + winner.players[1].name;
+	if (s.setup.team_competition) {
+		winner_name = winner.name;
 	} else {
-		winner_name = winner.players[0].name;
+		if (s.setup.is_doubles) {
+			winner_name = winner.players[0].name + ' / ' + winner.players[1].name;
+		} else {
+			winner_name = winner.players[0].name;
+		}
 	}
 	var res = '';
 	if (s.match.finished) {
@@ -811,6 +836,25 @@ function postgame_announcement(s) {
 	}
 	return res;
 }
+
+// Team name as presented to the umpire
+function calc_teamtext_internal(s, team_id) {
+	var player_names;
+	if (s.setup.is_doubles) {
+		player_names = (
+			s.setup.teams[team_id].players[0].name + ' / ' +
+			s.setup.teams[team_id].players[1].name);
+	} else {
+		player_names = s.setup.teams[team_id].players[0].name;
+	}
+
+	if (s.setup.team_competition) {
+		return s.setup.teams[team_id].name + ' (' + player_names + ')';
+	} else {
+		return player_names;
+	}
+}
+
 
 function ui_show_picker(obj) {
 	obj.show();
@@ -928,8 +972,16 @@ function ui_init() {
 	$('#setup_manual_form [name="gametype"]').on('change', function() {
 		var new_type = $('#setup_manual_form [name="gametype"]:checked').val();
 		var is_doubles = new_type == 'doubles';
-		$('#setup_manual_form #setup_players_singles').toggle(!is_doubles);
-		$('#setup_manual_form #setup_players_doubles').toggle(is_doubles);
+		$('#setup_manual_form .only-doubles').toggle(is_doubles);
+
+		$('.setup_players_manual [data-doubles-rowspan]').each(function(_, cell) {
+			var $cell = $(cell);
+			if (! $cell.attr('data-singles-rowspan')) {
+				$cell.attr('data-singles-rowspan', $cell.attr('rowspan'));
+			}
+
+			$cell.attr('rowspan', $cell.attr(is_doubles ? 'data-doubles-rowspan' : 'data-singles-rowspan'));
+		});
 	});
 
 	$('#settings_wrapper').on('click', function(e) {
@@ -948,7 +1000,7 @@ function ui_init() {
 	$('#setup_manual_form').on('submit', function(e) {
 		e.preventDefault();
 
-		function _player(input_name, def) {
+		function _formval(input_name, def) {
 			var name = $('#setup_manual_form [name="' + input_name + '"]').val();
 			if (! name) {
 				name = def;
@@ -965,17 +1017,22 @@ function ui_init() {
 		};
 
 		if (setup.is_doubles) {
-			team1 = [_player('team1_player1', 'Left A'), _player('team1_player2', 'Left B')];
-			team2 = [_player('team2_player1', 'Right C'), _player('team2_player2', 'Right D')];
+			team1 = [_formval('team1_player1', 'Left A'), _formval('team1_player2', 'Left B')];
+			team2 = [_formval('team2_player1', 'Right C'), _formval('team2_player2', 'Right D')];
 		} else {
-			team1 = [_player('team1_player', 'Left')];
-			team2 = [_player('team2_player', 'Right')];
+			team1 = [_formval('team1_player1', 'Left')];
+			team2 = [_formval('team2_player1', 'Right')];
 		}
+		setup.team_competition = $('#setup_manual_form [name="team_competition"]').prop('checked');
 		setup.teams = [{
 			'players': team1,
+			'name': _formval('team1_name', (setup.team_competition ? (setup.is_doubles ? 'AB team' : 'Left team') : null)).name,
 		}, {
 			'players': team2,
+			'name': _formval('team2_name', (setup.team_competition ? (setup.is_doubles ? 'CD team' : 'Right team') : null)).name,
 		}];
+		setup.match_name = _formval('match_name');
+		setup.tournament_name = _formval('tournament_name');
 
 		hide_settings(true);
 		start_match(setup);

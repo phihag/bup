@@ -1,9 +1,8 @@
-support for team names
 live web interface
 Allow config to be downloaded from CourtSpot
 Write results to CourtSpot
-shuttle counter (optional)
 
+shuttle counter (optional)
 add settings
 	show full pronounciation
 	shuttle counter
@@ -22,7 +21,6 @@ prevent double touches
 
 injury timer
 generate umpire scoresheet to print
-settings: game and other configuration (put in one pseudo-tab)
 multiple languages
 	change in settings
 negative timers (add option for that)
@@ -61,3 +59,5 @@ prevent retired after game
 show text in difficult situations (retired etc.)
 write a test for timers
 support for game names (HE1 and the like)
+test black card before game start
+set window title (include match_name)

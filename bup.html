@@ -27,8 +27,10 @@
 <div id="court">
 <div id="court_arrow" class="default-invisible"></div>
 <div id="court_left_odd"></div>
+<div id="court_left_team"></div>
 <div id="court_left_even"></div>
 <div id="court_right_even"></div>
+<div id="court_right_team"></div>
 <div id="court_right_odd"></div>
 </div>
 </div>
@@ -121,36 +123,49 @@ Linienrichter</span>
 	<h2>Neues Spiel</h2>
 	<form id="setup_manual_form" class="slim_form">
 	<fieldset>
-	<label><input type="radio" name="gametype" value="singles" checked="checked" />Einzel</label>
-	<label><input type="radio" name="gametype" value="doubles" />Doppel</label>
+	<label><input type="radio" name="gametype" value="singles" tabindex="1" checked="checked" />Einzel</label>
+	<label><input type="radio" name="gametype" value="doubles" tabindex="2" />Doppel</label>
 	</fieldset>
 
-	<fieldset class="setup_players" id="setup_players_singles">
-	<div>
-	<input type="text" name="team1_player" autofocus="autofocus" />
-	</div>
-	<div class="setup_players_vs">
-	vs
-	</div>
-	<div>
-	<input type="text" name="team2_player" />
-	</div>
-	</fieldset>
-	<fieldset class="setup_players default-invisible" id="setup_players_doubles">
-	<div>
-	<input type="text" name="team1_player1" autofocus="autofocus" /><br/>
-	<input type="text" name="team1_player2" />
-	</div>
-	<div class="setup_players_vs">
-	vs
-	</div>
-	<div>
-	<input type="text" name="team2_player1" /><br/>
-	<input type="text" name="team2_player2" />
-	</div>
-	</fieldset>
+	<table class="setup_players_manual">
+	<tbody>
 
-	<button>Spiel starten</button>
+	<tr>
+		<th class="setup_players_players" rowspan="1" data-doubles-rowspan="2">Spieler</th>
+		<td><input type="text" name="team1_player1" size="30" tabindex="11" autofocus="autofocus" /></td>
+		<td class="setup_players_vs" rowspan="2" data-doubles-rowspan="3">vs</td>
+		<td><input type="text" name="team2_player1" size="30" tabindex="21" /></td>
+	</tr>
+
+	<tr class="only-doubles default-invisible">
+		<td><input type="text" name="team1_player2" size="30" tabindex="12" /></td>
+		<td><input type="text" name="team2_player2" size="30" tabindex="22" /></td>
+	</tr>
+
+	<tr>
+		<th>Team</th>
+		<td><input type="text" name="team1_name" tabindex="31" size="30" placeholder="z.B. 1. BC Bischmisheim 1" /></td>
+		<td><input type="text" name="team2_name" tabindex="32" size="30" placeholder="z.B. 1. BV Mülheim 1"/></td>
+	</tr>
+
+	<tr>
+		<th>Spiel</th>
+		<td colspan="3"><input type="text" name="match_name" tabindex="41" placeholder="z.B. HE1 oder Halbfinale" /></td>
+	</tr>
+	<tr>
+		<th>Turnier</th>
+		<td colspan="3"><input type="text" name="tournament_name" tabindex="42" placeholder="z.B. 1. Bundesliga 2015" /></td>
+	</tr>
+
+	<tr>
+		<th></th>
+		<td colspan="3"><label><input type="checkbox" name="team_competition" tabindex="51" />Mannschaftswettbewerb</label></td>
+	</tr>
+
+	</tbody>
+	</table>
+
+	<button tabindex="101">Spiel starten</button>
 	</form>
 
 	<h2>Spiel fortführen</h2>

@@ -15,15 +15,27 @@ html, body, button {
 	border: none;
 }
 
-.setup_players>div {
-	float: left;
+.setup_players_manual {
+	border-spacing: 0;
 }
-.setup_players:after {
-	clear: both;
+.setup_players_manual td, .setup_players_manual th {
+	padding-top: 0.4em;
+	padding-bottom: 0.4em;
 }
-.setup_players_vs {	
-	margin: 0 10px;
+.setup_players_manual input {
+	padding-left: 0.4em;
 }
+#setup_manual_form th {
+	text-align: left;
+	padding-right: 0.5em;
+}
+.setup_players_vs {
+	padding: 0 1em;
+}
+#setup_manual_form td[colspan="3"] input[type="text"] {
+	width: 100%; width: calc(100% - 0.4em - 2px);
+}
+
 
 #court_container {
 }
@@ -38,16 +50,25 @@ html, body, button {
 	background-repeat: no-repeat;
 	border: 1px solid #dadada;
 }
-#court_left_even, #court_left_odd, #court_right_even, #court_right_odd {
+#court_left_even, #court_left_odd, #court_right_even, #court_right_odd, #court_right_team, #court_left_team {
 	position: absolute;
 	text-align: center;
 	font-size: inherit;
+}
+#court_right_team, #court_left_team  {
+	color: #555555;
+	font-size: 3vh;
+	top: 50%; top: calc(50% - 2vh);
 }
 
 #court_left_odd {
 	left: 0%;
 	right: 50%;
 	top: 22.5%;
+}
+#court_left_team {
+	left: 0%;
+	right: 50%;
 }
 #court_left_even {
 	left: 0%;
@@ -59,11 +80,16 @@ html, body, button {
 	right: 0%;
 	top: 22.5%;
 }
+#court_right_team {
+	left: 50%;
+	right: 0%;
+}
 #court_right_odd {
 	left: 50%;
 	right: 0%;
 	bottom: 22.5%;
 }
+
 
 #court_arrow {
 	position: absolute;
