@@ -901,16 +901,17 @@ function ui_update_timer() {
 		return;
 	}
 	var remaining = state.timer.start + state.timer.duration - Date.now();
+	var remaining_val = Math.round(remaining / 1000);
+	if (remaining_val >= 60) {
+		remaining_val = Math.floor(remaining_val / 60) + ':' + _add_zeroes(remaining_val % 60);
+	}
+
+	$('.timer').text(remaining_val);
 	if (remaining <= 0) {
 		ui_remove_timer();
 		return;
 	}
 
-	var remaining_val = Math.floor(remaining / 1000);
-	if (remaining_val >= 60) {
-		remaining_val = Math.floor(remaining_val / 60) + ':' + _add_zeroes(remaining_val % 60);
-	}
-	$('.timer').text(remaining_val);
 	var remaining_ms = Math.max(10, remaining % 1000);
 	ui_timer = window.setTimeout(ui_update_timer, remaining_ms);
 }
@@ -919,7 +920,7 @@ function ui_remove_timer() {
 	if (ui_timer) {
 		window.clearTimeout(ui_timer);
 		ui_timer = null;
-		$('.timer_container').fadeOut(300);
+		$('.timer_container').fadeOut(500);
 	}
 }
 
