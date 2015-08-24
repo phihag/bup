@@ -1,6 +1,11 @@
-live web interface
+firefox: work if localStorage is not set
+add an event_name to match tournament_name
+set up from liveaw
+	read current gamestate
+push changes to liveaw
 Allow config to be downloaded from CourtSpot
 Write results to CourtSpot
+support courtspot *and* aw at the same time
 
 shuttle counter (optional)
 add settings
@@ -61,3 +66,5 @@ write a test for timers
 support for game names (HE1 and the like)
 test black card before game start
 set window title (include match_name)
+remove "mit" from text
+up/down keys to switch between options; left-right for punishments

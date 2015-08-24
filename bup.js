@@ -105,7 +105,7 @@ function ui_settings_load_list(s) {
 	}
 
 	var matches = load_matches();
-	matches = matches.filter(function() {
+	matches = matches.filter(function(m) {
 		return (!s.metadata || m.metadata.id != s.metadata.id);
 	});
 	$('.setup_loadmatch_none').toggle(matches.length == 0);
@@ -868,6 +868,11 @@ function ui_show_picker(obj) {
 }
 
 function store_match(s) {
+	if (! window.localStorage) {
+		show_error('localStorage unavailable');
+		return;
+	}
+
 	var presses = s.presses;
 	if (presses && presses[presses.length - 1].type == 'postmatch-confirm') {
 		presses = presses.slice(0, presses.length - 1);
@@ -885,6 +890,11 @@ function store_match(s) {
 }
 
 function load_matches() {
+	if (! window.localStorage) {
+		show_error('localStorage unavailable');
+		return;
+	}
+
 	var res = [];
 	for (var i = 0;i < window.localStorage.length;i++) {
 		var k = window.localStorage.key(i);
@@ -903,6 +913,12 @@ function delete_match(match_id) {
 }
 
 function settings_load() {
+	if (! window.localStorage) {
+		show_error('localStorage unavailable');
+		return;
+	}
+
+
 	var s = window.localStorage.getItem('bup_settings');
 	if (s) {
 		settings = JSON.parse(s);
@@ -910,6 +926,11 @@ function settings_load() {
 }
 
 function settings_store() {
+	if (! window.localStorage) {
+		show_error('localStorage unavailable');
+		return;
+	}
+
 	window.localStorage.setItem('bup_settings', JSON.stringify(settings));
 }
 
