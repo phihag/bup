@@ -376,3 +376,15 @@ span.score_announcement+span.score_announcement {
 .timer {
 
 }
+
+#waitprogress_message {
+	background: #ffffff;
+	border: 1vmin solid rgba(80, 80, 80, 0.9);
+	font-size: 250%;
+	padding: 0.5em 1em;
+	border-radius: 1em;
+
+	position: absolute;
+	top: 50%; left: 50%;
+	transform: translate(-50%, -50%);
+}

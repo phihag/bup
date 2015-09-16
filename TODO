@@ -1,3 +1,5 @@
+connect to liveaw
+	test that auth works
 set up from liveaw
 	read current gamestate
 push changes to liveaw
@@ -5,10 +7,12 @@ Allow config to be downloaded from CourtSpot
 Write results to CourtSpot
 support courtspot *and* aw at the same time
 
+handle liveaw login failure
 shuttle counter (optional)
 add settings
 	show full pronounciation
 	shuttle counter
+add mobile meta tags for correct rendering
 check and improve style on tablet
 check and improve style on phone
 check and improve style on more phones
@@ -22,6 +26,7 @@ test touch interface
 test touch latency
 prevent double touches
 
+test without websocket support
 injury timer
 generate umpire scoresheet to print
 multiple languages
@@ -66,3 +71,4 @@ test black card before game start
 set window title (include match_name)
 remove "mit" from text
 up/down keys to switch between options; left-right for punishments
+display mode (tap anywhere to exit)

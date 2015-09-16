@@ -7,6 +7,20 @@ var settings = {
 	save_finished_matches: true
 };
 
+function _parse_query_string(qs) {
+	// http://stackoverflow.com/a/2880929/35070
+	var pl     = /\+/g;
+	var search = /([^&=]+)=?([^&]*)/g;
+	var decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); };
+
+	var res = {};
+	var match;
+	while (match = search.exec(qs)) {
+		res[decode(match[1])] = decode(match[2]);
+	}
+	return res;
+}
+
 function _add_zeroes(n) {
 	if (n < 10) {
 		return '0' + n;
@@ -28,6 +42,68 @@ function _uuid() {
     	return v.toString(16);
 	});
 }
+
+function liveaw_contact(cb) {
+	var wsurl = (location.protocol === 'https:' ? 'wss' : 'ws') + '://' + location.hostname + (location.port ? ':' + location.port: '')  + '/ws/bup';
+	var ws = new WebSocket(wsurl, 'liveaw-bup');
+	ws.onopen = function() {
+		cb(null, ws);
+	};
+	ws.onmessage = function(ws_message) {
+		console.log('<-', ws_message.data);
+		var msg = JSON.parse(ws_message.data);
+		if (! msg.request_id) {
+			// Not an answer, ignore for now
+			return;
+		}
+		if (state.liveaw.handlers[msg.request_id]) {
+			if (! state.liveaw.handlers[msg.request_id](msg)) {
+				delete state.liveaw.handlers[msg.request_id];
+			}
+		} else {
+			show_error('No handler for request ' + msg.request_id);
+		}
+	};
+}
+
+function _liveaw_request(msg, cb) {
+	msg.request_id = state.liveaw.next_request_id;
+	state.liveaw.next_request_id++;
+	state.liveaw.handlers[msg.request_id] = cb;
+	state.liveaw.ws.send(JSON.stringify(msg));
+}
+
+function liveaw_init(liveaw_matchid) {
+	state = {
+		initialized: false,
+		liveaw: {
+			matchid: liveaw_matchid,
+			handlers: {},
+			next_request_id: 1,
+		},
+	};
+
+	ui_waitprogress('Kontaktiere liveaw');
+	liveaw_contact(function(err, ws) {
+		if (err) {
+			ui_show_error(err, msg);
+			show_settings();
+			return;
+		}
+
+		ui_waitprogress('Lade Match-Setup');
+		state.liveaw.ws = ws;
+		_liveaw_request({
+			type: 'subscribe',
+			matchid: liveaw_matchid,
+		}, function(response) {
+			ui_waitprogress_stop();
+			console.log('SUBSCRIBED', response);
+			start_match(response.setup);
+		});
+	});
+}
+
 
 function _ui_make_player_pick(s, label, type, on_cancel, modify_button) {
 	var kill_dialog = function() {
@@ -97,6 +173,19 @@ function _ui_add_player_pick(s, container, type, team_id, player_id, on_click, n
 
 function show_error(msg, e) {
 	console.error(msg, e);
+}
+
+function ui_show_error(msg) {
+	alert(msg);
+}
+
+function ui_waitprogress(msg) {
+	$('#waitprogress_message').text(msg);
+	$('#waitprogress_wrapper').show();
+}
+
+function ui_waitprogress_stop() {
+	$('#waitprogress_wrapper').hide();
 }
 
 function ui_settings_load_list(s) {
@@ -1020,14 +1109,18 @@ function ui_init() {
 	$('#setup_manual_form').on('submit', function(e) {
 		e.preventDefault();
 
-		function _formval(input_name, def) {
-			var name = $('#setup_manual_form [name="' + input_name + '"]').val();
-			if (! name) {
-				name = def;
-			}
+		function _player_formval(input_name, def) {
 			return {
-				'name': name
+				name: _formval(input_name, def)
 			};
+		}
+
+		function _formval(input_name, def) {
+			var val = $('#setup_manual_form [name="' + input_name + '"]').val();
+			if (! val) {
+				val = def;
+			}
+			return val;
 		}
 
 		var team1, team2;
@@ -1037,11 +1130,11 @@ function ui_init() {
 		};
 
 		if (setup.is_doubles) {
-			team1 = [_formval('team1_player1', 'Left A'), _formval('team1_player2', 'Left B')];
-			team2 = [_formval('team2_player1', 'Right C'), _formval('team2_player2', 'Right D')];
+			team1 = [_player_formval('team1_player1', 'Left A'), _player_formval('team1_player2', 'Left B')];
+			team2 = [_player_formval('team2_player1', 'Right C'), _player_formval('team2_player2', 'Right D')];
 		} else {
-			team1 = [_formval('team1_player1', 'Left')];
-			team2 = [_formval('team2_player1', 'Right')];
+			team1 = [_player_formval('team1_player1', 'Left')];
+			team2 = [_player_formval('team2_player1', 'Right')];
 		}
 		setup.team_competition = $('#setup_manual_form [name="team_competition"]').prop('checked');
 		setup.teams = [{
@@ -1187,7 +1280,13 @@ function ui_init() {
 	});
 
 	ui_init_settings();
-	show_settings();
+
+	var hash_query = _parse_query_string(window.location.hash.substr(1));
+	if (hash_query.liveaw_matchid) {
+		liveaw_init(hash_query.liveaw_matchid);
+	} else {
+		show_settings();
+	}
 }
 
 if (typeof $ !== 'undefined') {
