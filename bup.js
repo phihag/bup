@@ -94,12 +94,16 @@ function liveaw_init(liveaw_matchid) {
 		ui_waitprogress('Lade Match-Setup');
 		state.liveaw.ws = ws;
 		_liveaw_request({
-			type: 'subscribe',
+			type: 'get_setup&subscribe',
 			matchid: liveaw_matchid,
 		}, function(response) {
-			ui_waitprogress_stop();
-			console.log('SUBSCRIBED', response);
-			start_match(response.setup);
+			if (response.type == 'setup') {
+				ui_waitprogress_stop();
+				start_match(response.setup);
+			} else if (response.type == 'update') {
+				console.log('getting presses');
+			}
+			return true;
 		});
 	});
 }

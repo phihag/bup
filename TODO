@@ -4,10 +4,15 @@ set up from liveaw
 	read current gamestate
 push changes to liveaw
 Allow config to be downloaded from CourtSpot
+show event_name
+
 Write results to CourtSpot
 support courtspot *and* aw at the same time
 
+undo breaks timr (can be negative)
+pronounciation when giving up (match won by?)
 handle liveaw login failure
+allow starting new game during liveaw?
 shuttle counter (optional)
 add settings
 	show full pronounciation
@@ -72,3 +77,4 @@ set window title (include match_name)
 remove "mit" from text
 up/down keys to switch between options; left-right for punishments
 display mode (tap anywhere to exit)
+color change at 20s
