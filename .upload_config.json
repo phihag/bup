@@ -1,0 +1,11 @@
+{
+  "remotes": [
+    {
+      "host": "aufschlagwechsel.de",
+      "port": 622,
+      "dir": "/hosts/aufschlagwechsel.de/bup/",
+      "username": "phihag",
+      "php_baseurl": "https://aufschlagwechsel.de/bup/"
+    }
+  ]
+}
