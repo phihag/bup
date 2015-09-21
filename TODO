@@ -1,13 +1,10 @@
-set up from liveaw
-	read current gamestate
-push changes to liveaw
+undo breaks timer (can be negative)
+
 Allow config to be downloaded from CourtSpot
 show event_name
-
 Write results to CourtSpot
 support courtspot *and* aw at the same time
 
-undo breaks timer (can be negative)
 pronounciation when giving up (match won by?)
 handle liveaw login failure
 allow starting new game during liveaw?
@@ -22,7 +19,7 @@ test various network errors
 create a logo (favicon/...)
 Make it an offline web application
 Installable on Android
-automatically go to full screen
+liveaw: handle differences between two instances
 
 test touch interface
 test touch latency

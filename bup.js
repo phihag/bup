@@ -73,13 +73,14 @@ function _liveaw_request(msg, cb) {
 	state.liveaw.ws.send(JSON.stringify(msg));
 }
 
-function liveaw_init(liveaw_matchid) {
+function liveaw_init(liveaw_match_id) {
 	state = {
 		initialized: false,
 		liveaw: {
-			matchid: liveaw_matchid,
+			match_id: liveaw_match_id,
 			handlers: {},
 			next_request_id: 1,
+			common_state: [],
 		},
 	};
 
@@ -95,19 +96,34 @@ function liveaw_init(liveaw_matchid) {
 		state.liveaw.ws = ws;
 		_liveaw_request({
 			type: 'get_setup&subscribe',
-			matchid: liveaw_matchid,
+			match_id: liveaw_match_id,
 		}, function(response) {
 			if (response.type == 'setup') {
 				ui_waitprogress_stop();
 				start_match(response.setup);
-			} else if (response.type == 'update') {
-				console.log('getting presses');
+			} else if (response.type == 'current_presses') {
+				// TODO test more here
+				if (state.presses < response.presses) {
+					state.presses = response.presses;
+					on_presses_change(state);
+				}
 			}
 			return true;
 		});
 	});
 }
 
+function network_send_press(s, press) {
+	if (s.liveaw && s.liveaw.match_id) {
+		_liveaw_request({
+			type: 'set-presses',
+			match_id: s.liveaw.match_id,
+			presses: s.presses,
+		}, function() {
+
+		});
+	}
+}
 
 function _ui_make_player_pick(s, label, type, on_cancel, modify_button) {
 	var kill_dialog = function() {
@@ -361,8 +377,13 @@ function on_press(press, s) {
 
 	press.timestamp = Date.now();
 	s.presses.push(press);
-	calc_state(s);
 
+	network_send_press(s, press);
+	on_presses_change(s);
+}
+
+function on_presses_change(s) {
+	calc_state(s);
 	if (s.match.finish_confirmed) {
 		if (! settings.save_finished_matches) {
 			delete_match(s.metadata.id);
@@ -1081,7 +1102,6 @@ function settings_load() {
 		return;
 	}
 
-
 	var s = window.localStorage.getItem('bup_settings');
 	if (s) {
 		settings = JSON.parse(s);
@@ -1362,8 +1382,8 @@ function ui_init() {
 	ui_init_settings();
 
 	var hash_query = _parse_query_string(window.location.hash.substr(1));
-	if (hash_query.liveaw_matchid) {
-		liveaw_init(hash_query.liveaw_matchid);
+	if (hash_query.liveaw_match_id) {
+		liveaw_init(hash_query.liveaw_match_id);
 	} else {
 		show_settings();
 	}
