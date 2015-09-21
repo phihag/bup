@@ -166,20 +166,16 @@ html, body, button {
 	margin-bottom: 1vh;
 	border-collapse: separate;
     border-spacing: 0;
+
+	margin-top: -2vh;
+	padding-top: 2vh;
+	border-radius: 2vh;
+	border: 1px solid #dadada;
 }
-#score_table tr>td:first-child {
-	border-left: 1px solid #dadada;
-}
-#score_table tr>td:last-child {
-	border-right: 1px solid #dadada;
-}
-#score_table tr:last-child td {
-	border-bottom: 1px solid #dadada;
-}
-#score_table, #score_table tr:last-child td:first-child {
+#score_table tr:last-child td:first-child {
 	border-bottom-left-radius: 2vh;
 }
-#score_table, #score_table tr:last-child td:last-child {
+#score_table tr:last-child td:last-child {
 	border-bottom-right-radius: 2vh;
 }
 
@@ -256,14 +252,13 @@ span.score_announcement+span.score_announcement {
 	background-repeat: no-repeat;
 }
 .topleft_buttons, .topright_buttons {
-	position: absolute;
 	z-index: 1000;
 }
 .topleft_buttons {
-	left: 0; top: 0;
+	float: left;
 }
 .topright_buttons {
-	right: 0; top: 0;
+	float: right;
 }
 
 .topleft_buttons>button {
