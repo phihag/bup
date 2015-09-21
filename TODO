@@ -1,3 +1,6 @@
+fix intergame panels in portrait
+fix clock in portraits
+
 Allow config to be downloaded from CourtSpot
 Write results to CourtSpot
 support courtspot *and* aw at the same time
