@@ -1144,8 +1144,10 @@ function ui_set_timer(timer) {
 	if (ui_timer) {
 		window.clearTimeout(ui_timer);
 	}
-	$('.timer_container').show();
-	ui_update_timer();
+
+	if (ui_update_timer()) {
+		$('.timer_container').show();
+	}
 }
 
 function ui_update_timer() {
@@ -1153,12 +1155,13 @@ function ui_update_timer() {
 		ui_remove_timer();
 		return;
 	}
+
 	var remaining = state.timer.start + state.timer.duration - Date.now();
+	remaining = Math.max(0, remaining);
 	var remaining_val = Math.round(remaining / 1000);
 	if (remaining_val >= 60) {
 		remaining_val = Math.floor(remaining_val / 60) + ':' + _add_zeroes(remaining_val % 60);
 	}
-
 	$('.timer').text(remaining_val);
 	if (remaining <= 0) {
 		ui_remove_timer();
@@ -1167,6 +1170,7 @@ function ui_update_timer() {
 
 	var remaining_ms = Math.max(10, remaining % 1000);
 	ui_timer = window.setTimeout(ui_update_timer, remaining_ms);
+	return true;
 }
 
 function ui_remove_timer() {

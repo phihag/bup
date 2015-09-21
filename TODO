@@ -1,4 +1,4 @@
-undo breaks timer (can be negative)
+save liveaw games under matchid
 
 Allow config to be downloaded from CourtSpot
 show event_name
@@ -71,4 +71,5 @@ set window title (include match_name)
 remove "mit" from text
 up/down keys to switch between options; left-right for punishments
 display mode (tap anywhere to exit)
-color change at 20s
+color change at 20s in timeouts
+timer should continue during cards
