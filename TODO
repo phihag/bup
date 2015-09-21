@@ -1,5 +1,3 @@
-connect to liveaw
-	test that auth works
 set up from liveaw
 	read current gamestate
 push changes to liveaw
@@ -9,7 +7,7 @@ show event_name
 Write results to CourtSpot
 support courtspot *and* aw at the same time
 
-undo breaks timr (can be negative)
+undo breaks timer (can be negative)
 pronounciation when giving up (match won by?)
 handle liveaw login failure
 allow starting new game during liveaw?
@@ -17,7 +15,6 @@ shuttle counter (optional)
 add settings
 	show full pronounciation
 	shuttle counter
-add mobile meta tags for correct rendering
 check and improve style on tablet
 check and improve style on phone
 check and improve style on more phones

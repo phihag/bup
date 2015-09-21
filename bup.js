@@ -179,6 +179,76 @@ function show_error(msg, e) {
 	console.error(msg, e);
 }
 
+function _ui_fullscreen_supported() {
+	return (
+		document.fullscreenEnabled ||
+		document.webkitFullscreenEnabled ||
+		document.mozFullScreenEnabled ||
+		document.msFullscreenEnabled
+	);
+}
+
+function _ui_fullscreen_active() {
+	return (
+		document.fullscreenElement ||
+		document.webkitFullscreenElement ||
+		document.mozFullScreenElement ||
+		document.msFullscreenElement
+	);
+}
+
+function _ui_fullscreen_start() {
+	var doc = document.documentElement;
+	if (doc.requestFullscreen) {
+		doc.requestFullscreen();
+	} else if (doc.webkitRequestFullscreen) {
+		doc.webkitRequestFullscreen(doc.ALLOW_KEYBOARD_INPUT);
+	} else if (doc.mozRequestFullScreen) {
+		doc.mozRequestFullScreen();
+	} else if (doc.msRequestFullscreen) {
+		doc.msRequestFullscreen();
+	}
+}
+
+function _ui_fullscreen_stop() {
+	if (document.exitFullscreen) {
+		document.exitFullscreen();
+	} else if (document.webkitExitFullscreen) {
+		document.webkitExitFullscreen();
+	} else if (document.mozCancelFullScreen) {
+		document.mozCancelFullScreen();
+	} else if (document.msExitFullscreen) {
+		document.msExitFullscreen();
+	}
+}
+
+function ui_fullscreen_toggle() {
+	var supported = _ui_fullscreen_supported();
+	if (! supported) {
+		return;
+	}
+	if (_ui_fullscreen_active()) {
+		_ui_fullscreen_stop();
+	} else {
+		_ui_fullscreen_start();
+	}
+}
+
+function ui_fullscreen_init() {
+	$(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange', function() {
+		$('.fullscreen_button').text(
+			_ui_fullscreen_active() ? 'Vollbildmodus verlassen' : 'Vollbildmodus'
+		);
+	});
+
+	if (! _ui_fullscreen_supported()) {
+		$('.fullscreen_button').attr({
+			disabled: 'disabled',
+			title: 'Vollbildmodus wird auf diesem Browser nicht unterstützt'
+		});
+	}
+}
+
 function ui_show_error(msg) {
 	alert(msg);
 }
@@ -1041,6 +1111,12 @@ function ui_init_settings() {
 			settings_store();
 		});
 	});
+
+	ui_fullscreen_init();
+	$('.fullscreen_button').on('click', function() {
+		ui_fullscreen_toggle();
+	});
+
 }
 
 var ui_timer = null;
