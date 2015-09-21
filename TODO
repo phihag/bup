@@ -1,5 +1,4 @@
 Allow config to be downloaded from CourtSpot
-show event_name
 Write results to CourtSpot
 support courtspot *and* aw at the same time
 

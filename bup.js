@@ -727,6 +727,8 @@ function render(s) {
 		$('#court_left_team, #court_right_team').hide();
 	}
 
+	$('#court_match_name').text(s.setup.match_name ? s.setup.match_name : '');
+
 	if (s.court.left_serving == null) {
 		$('#court_arrow').hide();
 	} else {
