@@ -50,6 +50,9 @@ html, body, button {
 	background-repeat: no-repeat;
 	border: 1px solid #dadada;
 }
+#court span {
+	background: rgba(194, 211, 194, 0.4);
+}
 #court_left_even, #court_left_odd, #court_right_even, #court_right_odd, #court_right_team, #court_left_team, #court_match_name {
 	position: absolute;
 	text-align: center;
@@ -58,7 +61,10 @@ html, body, button {
 #court_right_team, #court_left_team  {
 	color: #555555;
 	font-size: 3vh;
-	top: 50%; top: calc(50% - 2vh);
+	top: 50%; transform: translate(0, -50%);
+}
+#court>#court_match_name>span {
+	background: rgba(194, 211, 194, 0.8);
 }
 #court_match_name {
 	color: #555555;

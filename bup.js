@@ -711,7 +711,7 @@ function calc_state(s) {
 function render(s) {
 	function _court_show_player(key) {
 		var p = s.court['player_' + key];
-		$('#court_' + key).text(p === null ? '' : p.name);
+		$('#court_' + key + '>span').text(p === null ? '' : p.name);
 	}
 	_court_show_player('left_odd');
 	_court_show_player('left_even');
@@ -721,13 +721,13 @@ function render(s) {
 	if (s.setup.team_competition && (s.game.team1_left !== null)) {
 		$('#court_left_team, #court_right_team').show();
 		var left_index = s.game.team1_left ? 0 : 1;
-		$('#court_left_team').text(s.setup.teams[left_index].name);
-		$('#court_right_team').text(s.setup.teams[1 - left_index].name);
+		$('#court_left_team>span').text(s.setup.teams[left_index].name);
+		$('#court_right_team>span').text(s.setup.teams[1 - left_index].name);
 	} else {
 		$('#court_left_team, #court_right_team').hide();
 	}
 
-	$('#court_match_name').text(s.setup.match_name ? s.setup.match_name : '');
+	$('#court_match_name>span').text(s.setup.match_name ? s.setup.match_name : '');
 
 	if (s.court.left_serving == null) {
 		$('#court_arrow').hide();

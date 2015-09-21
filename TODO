@@ -1,3 +1,9 @@
+let court take as much space as possible
+check and improve style on landscape tablet
+check and improve style on portrait tablet
+check and improve style on landscape phone
+check and improve style on portrait phone
+
 Allow config to be downloaded from CourtSpot
 Write results to CourtSpot
 support courtspot *and* aw at the same time
@@ -9,8 +15,6 @@ shuttle counter (optional)
 add settings
 	show full pronounciation
 	shuttle counter
-check and improve style on tablet
-check and improve style on phone
 check and improve style on more phones
 test various network errors
 create a logo (favicon/...)
@@ -44,7 +48,6 @@ animate changing server sides and changing sides after game
 find a better font for score display
 score: numbers of past sets closer together
 metadata (game start time etc.)
-unify setup/settings
 better design for settings
 improve error showing
 improve load match style
