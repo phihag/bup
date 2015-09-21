@@ -400,7 +400,7 @@ function on_presses_change(s) {
 function init_state(s, setup) {
 	var now = Date.now();
 	s.metadata = {
-		id: _uuid(),
+		id: setup.match_id ? setup.match_id : _uuid(),
 		start: now,
 		updated: now,
 	};
