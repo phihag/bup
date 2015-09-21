@@ -253,6 +253,7 @@ span.score_announcement+span.score_announcement {
 }
 .topleft_buttons, .topright_buttons {
 	z-index: 1000;
+	margin-bottom: 4vh;
 }
 .topleft_buttons {
 	float: left;
@@ -261,17 +262,20 @@ span.score_announcement+span.score_announcement {
 	float: right;
 }
 
+.topleft_buttons>button+button, .topright_buttons>button+button {
+	margin-left: 7vh;
+}
+@media all and (orientation: portrait) {
+	.topleft_buttons>button+button, .topright_buttons>button+button {
+		margin-left: 4vh;
+	}
+}
+
 .topleft_buttons>button {
 	margin: 1vh 0 0 1vh;
 }
-.topleft_buttons>button+button {
-	margin-left: 7vh;
-}
 .topright_buttons>button {
 	margin: 1vh 1vh 0 0;
-}
-.topright_buttons>button+button {
-	margin-left: 7vh;
 }
 #button_settings>span {
 	background-image: url(static/icons/settings.svg);
