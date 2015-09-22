@@ -132,6 +132,7 @@ html, body, button {
 	background: rgba(255, 255, 255, 0.9);
 	border-top-left-radius: 4vh;
 	border-top-right-radius: 4vh;
+	z-index: 100;
 }
 .pick_dialog button {
 	font-size: inherit;
@@ -246,6 +247,8 @@ span.score_announcement+span.score_announcement {
 	font-size: inherit;
 	width: 1em;
 	height: 1em;
+	min-width: 1em;
+	min-height: 1em;
 	margin-left: 0.5em;
 }
 .image-button>span {
@@ -340,17 +343,17 @@ span.score_announcement+span.score_announcement {
 .exception_dialog>div {
 	display: inline-block;
 	text-align: center;
-	font-size: 3vh;
+	font-size: 3vmin;
 	vertical-align: top;
-	margin: 2vh;
+	margin: 2vmin;
 }
 .exception_dialog>div>span {
 	white-space: pre-wrap;
 }
 .exception_dialog>div>button {
-	width: 20vh;
-	height: 20vh;
-	font-size: 16vh;
+	width: 20vmin;
+	height: 20vmin;
+	font-size: 16vmin;
 	display: block;
 }
 #exception_yellow>span {
@@ -384,13 +387,13 @@ span.score_announcement+span.score_announcement {
 .timer_container {
 	position: absolute;
 	right: 0;
-	top: 20vh;
+	top: 14vh;
 	background: rgba(255, 255, 255, 0.7);
 	border-top-left-radius: 2vh;
 	border-bottom-left-radius: 2vh;
 	padding: 2vh 3vh 2vh 4vh;
 
-	font-size: 20vh;
+	font-size: 20vmin;
 	min-width: 1.5em;
 	text-align: right;
 }
