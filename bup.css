@@ -57,7 +57,7 @@ html, body, button {
 #court span {
 	background: rgba(194, 211, 194, 0.4);
 }
-#court_left_even, #court_left_odd, #court_right_even, #court_right_odd, #court_right_team, #court_left_team, #court_match_name {
+#court_left_even, #court_left_odd, #court_right_even, #court_right_odd, #court_right_team, #court_left_team, #court_match_name, #court_court_name {
 	position: absolute;
 	text-align: center;
 	font-size: inherit;
@@ -67,13 +67,21 @@ html, body, button {
 	font-size: 5vmin;
 	top: 50%; transform: translate(0, -50%);
 }
-#court>#court_match_name>span {
+
+#court>#court_court_name>span, #court>#court_match_name>span {
 	background: rgba(194, 211, 194, 0.8);
+}
+#court_court_name {
+	color: #555555;
+	font-size: 5vmin;
+	top: 1%;
+	left: 50%;
+	transform: translate(-50%, 0);
 }
 #court_match_name {
 	color: #555555;
 	font-size: 5vmin;
-	bottom: 2%;
+	bottom: 1%;
 	left: 50%;
 	transform: translate(-50%, 0);
 }
@@ -309,6 +317,9 @@ span.score_announcement+span.score_announcement {
 	border-radius: 4vh;
 	padding: 3vh;
 	display: inline-block;
+	position: absolute;
+	left: 50%; top: 50%;
+	transform: translate(-50%, -50%);
 }
 .settings_container>div {
 }

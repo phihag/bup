@@ -1,7 +1,18 @@
+show court name
+start with doubles
+Demo mode if nothing is set
+generate umpire scoresheet to print
+	fetch PDF
+	show correct scoresheet
+	configure print CSS
+
+embed in CourtSpot
 Allow config to be downloaded from CourtSpot
 Write results to CourtSpot
-support courtspot *and* aw at the same time
 
+disqualification at game start
+	write test
+	test
 pronounciation when giving up (match won by?)
 handle liveaw login failure
 allow starting new game during liveaw?
@@ -22,7 +33,6 @@ prevent double touches
 
 test without websocket support
 injury timer
-generate umpire scoresheet to print
 multiple languages
 	change in settings
 negative timers (add option for that)
@@ -67,3 +77,4 @@ up/down keys to switch between options; left-right for punishments
 display mode (tap anywhere to exit)
 color change at 20s in timeouts
 timer should continue during cards
+support multiple networks at the same time

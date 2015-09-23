@@ -728,6 +728,7 @@ function render(s) {
 	}
 
 	$('#court_match_name>span').text(s.setup.match_name ? s.setup.match_name : '');
+	$('#court_court_name>span').text(s.setup.court_name ? s.setup.court_name : '');
 
 	if (s.court.left_serving == null) {
 		$('#court_arrow').hide();
@@ -1253,6 +1254,7 @@ function ui_init() {
 		setup.match_name = _formval('match_name');
 		setup.event_name = _formval('event_name');
 		setup.tournament_name = _formval('tournament_name');
+		setup.court_name = _formval('court_name');
 
 		hide_settings(true);
 		start_match(setup);
