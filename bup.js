@@ -728,7 +728,7 @@ function render(s) {
 	}
 
 	$('#court_match_name>span').text(s.setup.match_name ? s.setup.match_name : '');
-	$('#court_court_name>span').text(s.setup.court_name ? s.setup.court_name : '');
+	$('#court_court_name>span').text(s.setup.court_name ? 'Feld ' + s.setup.court_name : '');
 
 	if (s.court.left_serving == null) {
 		$('#court_arrow').hide();
@@ -1192,10 +1192,6 @@ function ui_init() {
 
 		$('.setup_players_manual [data-doubles-rowspan]').each(function(_, cell) {
 			var $cell = $(cell);
-			if (! $cell.attr('data-singles-rowspan')) {
-				$cell.attr('data-singles-rowspan', $cell.attr('rowspan'));
-			}
-
 			$cell.attr('rowspan', $cell.attr(is_doubles ? 'data-doubles-rowspan' : 'data-singles-rowspan'));
 		});
 	});
@@ -1236,25 +1232,57 @@ function ui_init() {
 			counting: '3x21'
 		};
 
-		if (setup.is_doubles) {
-			team1 = [_player_formval('team1_player1', 'Left A'), _player_formval('team1_player2', 'Left B')];
-			team2 = [_player_formval('team2_player1', 'Right C'), _player_formval('team2_player2', 'Right D')];
-		} else {
-			team1 = [_player_formval('team1_player1', 'Left')];
-			team2 = [_player_formval('team2_player1', 'Right')];
-		}
 		setup.team_competition = $('#setup_manual_form [name="team_competition"]').prop('checked');
-		setup.teams = [{
-			'players': team1,
-			'name': _formval('team1_name', (setup.team_competition ? (setup.is_doubles ? 'AB team' : 'Left team') : null)),
-		}, {
-			'players': team2,
-			'name': _formval('team2_name', (setup.team_competition ? (setup.is_doubles ? 'CD team' : 'Right team') : null)),
-		}];
 		setup.match_name = _formval('match_name');
 		setup.event_name = _formval('event_name');
 		setup.tournament_name = _formval('tournament_name');
 		setup.court_name = _formval('court_name');
+
+		if (setup.is_doubles &&
+				!_formval('team1_player1') && !_formval('team1_player2') &&
+				!_formval('team2_player1') && !_formval('team2_player2') &&
+				!_formval('team1_name') && !_formval('team2_name') &&
+				!setup.match_name &&
+				!setup.event_name &&
+				!setup.tournament_name &&
+				!setup.court_name) {
+			// Demo mode
+			setup.teams = [{
+				name: '1.BC Beuel 1',
+				players: [{
+					name: 'Max Weißkirchen'
+				}, {
+					name: 'Birgit Michels'
+				}]
+			}, {
+				name: '1.BC Sbr.-Bischmisheim 1',
+				players: [{
+					name: 'Michael Fuchs'
+				}, {
+					name: 'Samantha Barning'
+				}]
+			}];
+			setup.match_name = 'GD';
+			setup.event_name = 'Demo';
+			setup.tournament_name = 'Demo';
+			setup.court_name = '1';
+			setup.team_competition = true;
+		} else {
+			if (setup.is_doubles) {
+				team1 = [_player_formval('team1_player1', 'Left A'), _player_formval('team1_player2', 'Left B')];
+				team2 = [_player_formval('team2_player1', 'Right C'), _player_formval('team2_player2', 'Right D')];
+			} else {
+				team1 = [_player_formval('team1_player1', 'Left')];
+				team2 = [_player_formval('team2_player1', 'Right')];
+			}
+			setup.teams = [{
+				'players': team1,
+				'name': _formval('team1_name', (setup.team_competition ? (setup.is_doubles ? 'AB team' : 'Left team') : null)),
+			}, {
+				'players': team2,
+				'name': _formval('team2_name', (setup.team_competition ? (setup.is_doubles ? 'CD team' : 'Right team') : null)),
+			}];
+		}
 
 		hide_settings(true);
 		start_match(setup);

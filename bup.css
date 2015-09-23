@@ -124,6 +124,7 @@ html, body, button {
 	background-image: url(static/icons/court_arrow.svg);
 	background-size: 100%;
 	background-repeat: no-repeat;
+	z-index: 101;
 }
 
 .pick_dialog, .exception_dialog {

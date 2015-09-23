@@ -128,25 +128,31 @@ Linienrichter</span>
 <div id="settings_wrapper" class="modal-wrapper default-invisible">
 <div class="settings_container">
 
+<div class="extended_options default-invisible">
+	<h2 class="extopts_current_game">Aktuelles Spiel</h2>
+
+	<button class="scoresheet_button">Schiedsrichterzettel</button>
+</div>
+
 <div class="setup">
 	<h2>Neues Spiel</h2>
 	<form id="setup_manual_form" class="slim_form">
 	<fieldset>
-	<label><input type="radio" name="gametype" value="singles" tabindex="1" checked="checked" />Einzel</label>
-	<label><input type="radio" name="gametype" value="doubles" tabindex="2" />Doppel</label>
+	<label><input type="radio" name="gametype" value="singles" tabindex="1" />Einzel</label>
+	<label><input type="radio" name="gametype" value="doubles" tabindex="2" checked="checked" />Doppel</label>
 	</fieldset>
 
 	<table class="setup_players_manual">
 	<tbody>
 
 	<tr>
-		<th class="setup_players_players" rowspan="1" data-doubles-rowspan="2">Spieler</th>
+		<th class="setup_players_players" rowspan="2" data-singles-rowspan="1" data-doubles-rowspan="2">Spieler</th>
 		<td><input type="text" name="team1_player1" size="30" tabindex="11" autofocus="autofocus" /></td>
-		<td class="setup_players_vs" rowspan="2" data-doubles-rowspan="3">vs</td>
+		<td class="setup_players_vs" rowspan="3" data-singles-rowspan="3" data-doubles-rowspan="3">vs</td>
 		<td><input type="text" name="team2_player1" size="30" tabindex="21" /></td>
 	</tr>
 
-	<tr class="only-doubles default-invisible">
+	<tr class="only-doubles">
 		<td><input type="text" name="team1_player2" size="30" tabindex="12" /></td>
 		<td><input type="text" name="team2_player2" size="30" tabindex="22" /></td>
 	</tr>

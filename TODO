@@ -1,5 +1,3 @@
-show court name
-start with doubles
 Demo mode if nothing is set
 generate umpire scoresheet to print
 	fetch PDF
@@ -78,3 +76,4 @@ display mode (tap anywhere to exit)
 color change at 20s in timeouts
 timer should continue during cards
 support multiple networks at the same time
+use court name in 20s announcements
