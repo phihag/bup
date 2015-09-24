@@ -1,6 +1,5 @@
 generate umpire scoresheet to print
-	server/receiver marks
-	scores
+	other scores
 	exceptions
 	shading
 	referee/umpire signature line
@@ -9,6 +8,7 @@ generate umpire scoresheet to print
 	circle game result
 	disqualified
 	dash at 20/20
+	relative font size
 	precise positioning of everything
 	test singles
 	test results after undo
@@ -19,6 +19,13 @@ shuttle counter
 embed in CourtSpot
 Allow config to be downloaded from CourtSpot
 Write results to CourtSpot
+
+LICENSE
+CONTRIBUTING (-> assign copyright form)
+badmintonticker.de
+better fullscreen flow (force fullscreen as a setting)
+
+settings -> scoresheet -> Esc  breaks settings escape
 
 disqualification at game start
 	write test
@@ -90,3 +97,5 @@ support multiple networks at the same time
 use court name in 20s announcements
 check scoresheet from liveaw (all there?)
 umpire / service judge name (also in scoresheet)
+shortcuts u/r undo/redo
+check scoresheet with a profiler

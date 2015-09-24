@@ -375,6 +375,53 @@ function ui_hide_exception_dialog() {
 	$('#exception_wrapper').hide();
 }
 
+function _scoresheet_parse_match(state) {
+	var games = [];
+
+	var s = {
+		initialized: state.initialized,
+		scoresheet_game: {
+			states: [],
+		},
+	};
+	init_state(s, state.setup);
+	s.presses = state.presses;
+
+	_init_calc(s);
+	calc_undo(s);
+	s.flattened_presses.forEach(function(press) {
+		switch (press.type) {
+		case 'pick_server':
+			s.scoresheet_game.server_row = press.team_id * 2 + press.player_id;
+			if (! s.setup.is_doubles) {
+				s.scoresheet_game.receiver_row = (1 - press.team_id) * 2;
+			}
+			break;
+		case 'pick_receiver':
+			s.scoresheet_game.receiver_row = press.team_id * 2 + press.player_id;
+			break;
+		case 'postgame-confirm':
+			games.push(s.scoresheet_game);
+			s.scoresheet_game = {
+				states: [],
+			};
+			if (! s.setup.is_doubles) {
+				if (s.game.team1_won) {
+					s.scoresheet_game.server_row = 0;
+					s.scoresheet_game.receiver_row = 2;
+				} else {
+					s.scoresheet_game.server_row = 2;
+					s.scoresheet_game.receiver_row = 0;
+				}
+			}
+			break;
+		}
+		calc_press(s, press);
+	});
+	games.push(s.scoresheet_game);
+	return games;
+}
+
 function scoresheet_show() {
 	if (!state.initialized) {
 		return; // Called on start with Shift+S
@@ -437,12 +484,6 @@ function scoresheet_show() {
 	}
 
 	// Big table(s)
-	var all_games = [];
-	if (state.match && state.match.finished_games) {
-		all_games.push.apply(all_games, state.match.finished_games);
-	}
-	all_games.push(state.game);
-	var game_idx = 0;
 	var all_players;
 	if (state.setup.is_doubles) {
 		all_players = [
@@ -460,8 +501,13 @@ function scoresheet_show() {
 		];
 	}
 
+	var parsed_games = _scoresheet_parse_match(state);
+	var game_idx = 0;
+	var state_idx = -1;
+
 	$('.scoresheet_table_container').empty();
 	for (var i = 0;i < 6;i++) {
+		var g = (game_idx < parsed_games.length) ? parsed_games[game_idx] : null;
 		var row = $('<table class="scoresheet_row">');
 		var tbody = $('<tbody>');
 		row.append(tbody);
@@ -475,18 +521,32 @@ function scoresheet_show() {
 			tr.append(name);
 
 			var server_marks = $('<td class="scoresheet_row_server_marks">');
-
+			if (g && (state_idx == -1)) {
+				if (g.server_row === row_idx) {
+					server_marks.text('A');
+				}
+				if ((g.receiver_row === row_idx) && state.setup.is_doubles) {
+					server_marks.text('R');
+				}
+			}
 			tr.append(server_marks);
-1
+
 			for (var col_idx = 0;col_idx < 35;col_idx++) {
 				var td = $('<td>');
-
+				if (g) {
+					if ((state_idx == -1) && ((g.server_row === row_idx) || (g.receiver_row === row_idx))) {
+						state_idx++;
+						td.text('0');
+					}
+				}
 				tr.append(td);
 			}
 
 			tbody.append(tr);
+			state_idx = -1;
 		}
 
+		game_idx++;
 		$('.scoresheet_table_container').append(row);
 	}
 
@@ -723,11 +783,108 @@ function score(s, team_id, timestamp) {
 	}
 }
 
-function calc_state(s) {
-	if (s.presses.length > 0) {
-		s.metadata.updated = s.presses[s.presses.length - 1].timestamp;
+function calc_press(s, press) {
+	switch (press.type) {
+	case 'pick_side':
+		s.game.start_team1_left = press.team1_left;
+		s.game.team1_left = s.game.start_team1_left;
+		s.timer = {
+			start: press.timestamp,
+			duration: 120 * 1000,
+		};
+		break;
+	case 'pick_server':
+		s.game.start_server_team_id = press.team_id;
+		s.game.start_server_player_id = press.player_id;
+		if (s.setup.is_doubles) {
+			s.game.teams_player1_even[s.game.start_server_team_id] = s.game.start_server_player_id == 0;
+		} else {
+			s.game.start_receiver_player_id = 0;
+		}
+		s.game.team1_serving = s.game.start_server_team_id == 0;
+		break;
+	case 'pick_receiver':
+		s.game.start_receiver_player_id = press.player_id;
+		s.game.teams_player1_even[press.team_id] = s.game.start_receiver_player_id == 0;
+		break;
+	case 'love-all':
+		s.game.score = [0, 0];
+		s.game.service_over = false;
+		s.game.interval = false;
+		s.game.change_sides = false;
+		s.game.matchpoint = false;
+		s.game.gamepoint = false;
+		s.game.game = false;
+		break;
+	case 'score':
+		var team1_scored = (s.game.team1_left == (press.side == 'left'));
+		score(s, (team1_scored ? 0 : 1), press.timestamp);
+		break;
+	case 'postgame-confirm':
+		if (s.match.finished) {
+			throw new Error('Match finished, but game instead of matched confirmed.');
+		}
+		s.match.finished_games.push(s.game);
+		s.game = make_game_state(s, s.game);
+		break;
+	case 'postmatch-confirm':
+		if (!s.match.finished) {
+			throw new Error('Match not finished, but match end confirmed.');
+		}
+		if (s.match.finish_confirmed) {
+			throw new Error('Match already confirmed.');
+		}
+		s.match.finished_games.push(s.game);
+		s.match.finish_confirmed = true;
+		break;
+	case 'mark':
+		s.match.marks.push(press);
+		break;
+	case 'yellow-card':
+		if (s.match.carded[press.team_id]) {
+			throw new Error('Gelbe Karte wurde bereits an diese Seite vergeben');
+		}
+		press.char = 'W';
+		s.match.marks.push(press);
+		s.match.carded[press.team_id] = true;
+		break;
+	case 'red-card':
+		press.char = 'F';
+		s.match.marks.push(press);
+		if (! s.match.finished) {
+			score(s, 1 - press.team_id, press.timestamp);
+		}
+		break;
+	case 'injury':
+		press.char = 'V';
+		s.match.marks.push(press);
+		break;
+	case 'retired':
+		press.char = 'A';
+		s.match.marks.push(press);
+		s.game.team1_won = press.team_id != 0;
+		s.game.finished = true;
+		s.match.finished = true;
+		s.game.team1_serving = null;
+		s.game.service_over = null;
+		s.timer = false;
+		break;
+	case 'disqualified':
+		press.char = 'Disqualifiziert';
+		s.match.marks.push(press);
+		s.game.team1_won = press.team_id != 0;
+		s.game.finished = true;
+		s.match.finished = true;
+		s.game.team1_serving = null;
+		s.game.service_over = null;
+		s.timer = false;
+		break;
+	default:
+		throw new Error('Unsupported press type ' + press.type);
 	}
+}
 
+function _init_calc(s) {
 	s.match = {
 		finished_games: [],
 		game_score: [0, 0],
@@ -746,106 +903,17 @@ function calc_state(s) {
 	}
 
 	s.game = make_game_state(s);
+}
+
+function calc_state(s) {
+	if (s.presses.length > 0) {
+		s.metadata.updated = s.presses[s.presses.length - 1].timestamp;
+	}
+
+	_init_calc(s);
 	calc_undo(s);
 	s.flattened_presses.forEach(function(press) {
-		switch (press.type) {
-		case 'pick_side':
-			s.game.start_team1_left = press.team1_left;
-			s.game.team1_left = s.game.start_team1_left;
-			s.timer = {
-				start: press.timestamp,
-				duration: 120 * 1000,
-			};
-			break;
-		case 'pick_server':
-			s.game.start_server_team_id = press.team_id;
-			s.game.start_server_player_id = press.player_id;
-			if (s.setup.is_doubles) {
-				s.game.teams_player1_even[s.game.start_server_team_id] = s.game.start_server_player_id == 0;
-			} else {
-				s.game.start_receiver_player_id = 0;
-			}
-			s.game.team1_serving = s.game.start_server_team_id == 0;
-			break;
-		case 'pick_receiver':
-			s.game.start_receiver_player_id = press.player_id;
-			s.game.teams_player1_even[press.team_id] = s.game.start_receiver_player_id == 0;
-			break;
-		case 'love-all':
-			s.game.score = [0, 0];
-			s.game.service_over = false;
-			s.game.interval = false;
-			s.game.change_sides = false;
-			s.game.matchpoint = false;
-			s.game.gamepoint = false;
-			s.game.game = false;
-			break;
-		case 'score':
-			var team1_scored = (s.game.team1_left == (press.side == 'left'));
-			score(s, (team1_scored ? 0 : 1), press.timestamp);
-			break;
-		case 'postgame-confirm':
-			if (s.match.finished) {
-				throw new Error('Match finished, but game instead of matched confirmed.');
-			}
-			s.match.finished_games.push(s.game);
-			s.game = make_game_state(s, s.game);
-			break;
-		case 'postmatch-confirm':
-			if (!s.match.finished) {
-				throw new Error('Match not finished, but match end confirmed.');
-			}
-			if (s.match.finish_confirmed) {
-				throw new Error('Match already confirmed.');
-			}
-			s.match.finished_games.push(s.game);
-			s.match.finish_confirmed = true;
-			break;
-		case 'mark':
-			s.match.marks.push(press);
-			break;
-		case 'yellow-card':
-			if (s.match.carded[press.team_id]) {
-				throw new Error('Gelbe Karte wurde bereits an diese Seite vergeben');
-			}
-			press.char = 'W';
-			s.match.marks.push(press);
-			s.match.carded[press.team_id] = true;
-			break;
-		case 'red-card':
-			press.char = 'F';
-			s.match.marks.push(press);
-			if (! s.match.finished) {
-				score(s, 1 - press.team_id, press.timestamp);
-			}
-			break;
-		case 'injury':
-			press.char = 'V';
-			s.match.marks.push(press);
-			break;
-		case 'retired':
-			press.char = 'A';
-			s.match.marks.push(press);
-			s.game.team1_won = press.team_id != 0;
-			s.game.finished = true;
-			s.match.finished = true;
-			s.game.team1_serving = null;
-			s.game.service_over = null;
-			s.timer = false;
-			break;
-		case 'disqualified':
-			press.char = 'Disqualifiziert';
-			s.match.marks.push(press);
-			s.game.team1_won = press.team_id != 0;
-			s.game.finished = true;
-			s.match.finished = true;
-			s.game.team1_serving = null;
-			s.game.service_over = null;
-			s.timer = false;
-			break;
-		default:
-			throw new Error('Unsupported press type ' + press.type);
-		}
+		calc_press(s, press);
 	});
 
 	if ((s.game.score[0] === 11) && (s.game.score[1] < 11) && (s.game.team1_serving)) {
