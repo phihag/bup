@@ -1,8 +1,27 @@
-Demo mode if nothing is set
 generate umpire scoresheet to print
-	fetch PDF
-	show correct scoresheet
-	configure print CSS
+	metadata right
+		lines
+		empty umpire/service judge name
+		court name
+		start
+		end
+		duration
+	tables
+	player names in tables
+	shading
+	server/receiver
+	scores
+	show game result
+	left/right in center table
+	exceptions
+	referee/umpire signature line
+	shuttle counter
+	circle who won on top
+	precise positioning of everything
+	uncomment TODOs
+	test results after undo
+	test printing
+shuttle counter
 
 embed in CourtSpot
 Allow config to be downloaded from CourtSpot
@@ -14,7 +33,6 @@ disqualification at game start
 pronounciation when giving up (match won by?)
 handle liveaw login failure
 allow starting new game during liveaw?
-shuttle counter (optional)
 add settings
 	show full pronounciation
 	shuttle counter
@@ -77,3 +95,5 @@ color change at 20s in timeouts
 timer should continue during cards
 support multiple networks at the same time
 use court name in 20s announcements
+check scoresheet from liveaw (all there?)
+umpire / service judge name (also in scoresheet)

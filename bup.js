@@ -29,11 +29,26 @@ function _add_zeroes(n) {
 	}
 };
 
+function _format_duration(ms) {
+	var mins = parseInt(Math.ceil(ms / 60000), 10);
+	return (parseInt(Math.floor(mins / 60), 10)) + ':' + _add_zeroes(mins % 60);
+}
 
 function _get_time_str(d) {
-	return (
-		_add_zeroes(d.getDate()) + '.' + _add_zeroes(d.getMonth()+1) + '.' + d.getFullYear() + ' ' +
-		_add_zeroes(d.getHours()) + ':' + _add_zeroes(d.getMinutes()));
+	return _add_zeroes(d.getHours()) + ':' + _add_zeroes(d.getMinutes());
+}
+
+function _get_date_str(d) {
+	return _add_zeroes(d.getDate()) + '.' + _add_zeroes(d.getMonth()+1) + '.' + d.getFullYear();
+}
+
+function _get_datetime_str(d) {
+	return _get_date_str(d) + ' ' + _get_time_str(d);
+}
+
+function _human_date_str(d) {
+	var WEEKDAYS = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
+	return WEEKDAYS[d.getDay()] + ' ' + _get_date_str(d);
 }
 
 function _uuid() {
@@ -42,6 +57,7 @@ function _uuid() {
     	return v.toString(16);
 	});
 }
+
 
 function liveaw_contact(cb) {
 	var wsurl = (location.protocol === 'https:' ? 'wss' : 'ws') + '://' + location.hostname + (location.port ? ':' + location.port: '')  + '/ws/bup';
@@ -312,7 +328,7 @@ function ui_settings_load_list(s) {
 			match_name = m.setup.teams[0].players[0].name + ' vs ' + m.setup.teams[1].players[0].name;
 		}
 		var d = new Date(m.metadata.updated);
-		a.text(match_name + ', ' + _get_time_str(d));
+		a.text(match_name + ', ' + _get_datetime_str(d));
 		a.on('click', function(e) {
 			e.preventDefault();
 			resume_match(m);
@@ -341,12 +357,110 @@ function ui_hide_exception_dialog() {
 	$('#exception_wrapper').hide();
 }
 
+function scoresheet_show() {
+	if (!state.initialized) {
+		return; // Called on start with Shift+S
+	}
+
+	function _set_right(key, val) {
+		if (!val) {
+			val = '\xA0';
+		}
+		$('.scoresheet_' + key).text(val);
+	}
+
+	$('.scoresheet_tournament_name').text(state.setup.tournament_name);
+	$('.scoresheet_event_name').text(state.setup.event_name);
+	$('.scoresheet_match_name').text(state.setup.match_name);
+	var match_date = new Date(state.metadata.start);
+	$('.scoresheet_date_value').text(_human_date_str(match_date));
+
+	_set_right('court_name', state.setup.court_name);
+
+	_set_right('begin_value', state.metadata.start ? _get_time_str(new Date(state.metadata.start)) : '');
+	if (state.match.finished) {
+		_set_right('end_value', state.metadata.updated ? _get_time_str(new Date(state.metadata.updated)) : '');
+		_set_right('duration_value', state.metadata.updated ? '\xA0' + _format_duration(state.metadata.updated - state.metadata.start) : '');
+	} else {
+		_set_right('end_value', null);
+		_set_right('duration_value', null);
+	}
+
+
+	$('.scoresheet_results_team1_player1').text(state.setup.teams[0].players[0].name);
+	$('.scoresheet_results_team1_player2').text(state.setup.is_doubles ? state.setup.teams[0].players[1].name : '');
+	$('.scoresheet_results_team1_name').text(state.setup.teams[0].name);
+	$('.scoresheet_results_team2_player1').text(state.setup.teams[1].players[0].name);
+	$('.scoresheet_results_team2_player2').text(state.setup.is_doubles ? state.setup.teams[1].players[1].name: '');
+	$('.scoresheet_results_team2_name').text(state.setup.teams[1].name);
+
+	var side1_str = '';
+	var side2_str = '';
+	var first_game = null;
+	if (state.match && state.match.finished_games.length > 0) {
+		first_game = state.match.finished_games[0];
+	} else {
+		first_game = state.game;
+	}
+	if (first_game && first_game.start_team1_left !== undefined) {
+		if (first_game.start_team1_left) {
+			side1_str = 'L';
+			side2_str = 'R';
+		} else {
+			side1_str = 'R';
+			side2_str = 'L';
+		}
+	}
+	$('.scoresheet_results_team1_side').text(side1_str);	
+	$('.scoresheet_results_team2_side').text(side2_str);	
+
+	if (state.match) {
+		var all_games = state.match.finished_games.slice();
+		if (state.match.finished && state.match.finished_games.length == 2) {
+			all_games.push(state.game);
+		}
+
+		all_games.forEach(function(g, i) {
+			$('.scoresheet_results_team1_score' + (i + 1)).text(g.score[0]);
+			$('.scoresheet_results_team2_score' + (i + 1)).text(g.score[1]);
+		});
+
+
+	}
+
+
+	var settings_visible = $('#settings_wrapper').is(':visible');
+	$('.scoresheet').attr('data-settings-visible', settings_visible ? 'true' : 'false');
+	if (settings_visible) {
+		$('#settings_wrapper').hide();
+	}
+	$('#game').hide();
+	$('.scoresheet').show();
+
+	Mousetrap.bind('escape', function() {
+		scoresheet_hide();
+	});
+
+	// window.print(); //  TODO
+}
+
+function scoresheet_hide() {
+	$('.scoresheet').hide();
+	$('#game').show();
+	if ($('.scoresheet').attr('data-settings-visible') === 'true') {
+		$('#settings_wrapper').show();
+	}
+}
+
+
 function show_settings() {
 	$('#settings_wrapper').show();
 	Mousetrap.bind('escape', function() {
 		hide_settings();
 	});
 	ui_settings_load_list();
+	$('.extended_options').toggle(state.initialized);
+
 }
 
 function hide_settings(force) {
@@ -1139,7 +1253,6 @@ function ui_init_settings() {
 	$('.fullscreen_button').on('click', function() {
 		ui_fullscreen_toggle();
 	});
-
 }
 
 var ui_timer = null;
@@ -1185,6 +1298,9 @@ function ui_remove_timer() {
 }
 
 function ui_init() {
+	$('.scoresheet_button').on('click', scoresheet_show);
+	// $('.scoresheet').on('click', scoresheet_hide); TODO
+
 	$('#setup_manual_form [name="gametype"]').on('change', function() {
 		var new_type = $('#setup_manual_form [name="gametype"]:checked').val();
 		var is_doubles = new_type == 'doubles';
@@ -1263,7 +1379,7 @@ function ui_init() {
 				}]
 			}];
 			setup.match_name = 'GD';
-			setup.event_name = 'Demo';
+			setup.event_name = 'BCB - BCB (Demo)';
 			setup.tournament_name = 'Demo';
 			setup.court_name = '1';
 			setup.team_competition = true;
@@ -1414,6 +1530,9 @@ function ui_init() {
 			show_settings();
 		}
 	});
+	Mousetrap.bind('shift+s', function() {
+		scoresheet_show();
+	});
 
 	ui_init_settings();
 
@@ -1434,5 +1553,7 @@ if (typeof module !== 'undefined') {
 	module.exports = {
 		init_state: init_state,
 		calc_state: calc_state,
+		// For testing only
+		_format_duration: _format_duration,
 	};
 }

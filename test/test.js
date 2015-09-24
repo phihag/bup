@@ -2306,3 +2306,11 @@ _describe('calc_state', function() {
 		assert.equal(s.court.player_right_odd.name, 'Alice');
 	});
 });
+
+
+_describe('helper functions', function() {
+	it('format_duration', function() {
+		assert.equal(bup._format_duration(4980000), '1:23');
+		assert.equal(bup._format_duration(301234), '0:05');
+	});
+});
