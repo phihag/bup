@@ -1,25 +1,18 @@
 generate umpire scoresheet to print
-	metadata right
-		lines
-		empty umpire/service judge name
-		court name
-		start
-		end
-		duration
-	tables
-	player names in tables
-	shading
-	server/receiver
+	server/receiver marks
 	scores
-	show game result
-	left/right in center table
 	exceptions
+	shading
 	referee/umpire signature line
 	shuttle counter
 	circle who won on top
+	circle game result
+	disqualified
+	dash at 20/20
 	precise positioning of everything
-	uncomment TODOs
+	test singles
 	test results after undo
+	uncomment TODOs
 	test printing
 shuttle counter
 

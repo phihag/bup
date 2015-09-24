@@ -449,8 +449,10 @@ span.score_announcement+span.score_announcement {
 }
 .scoresheet_event_label, .scoresheet_match_label, .scoresheet_date_label,
 .scoresheet_results_top_label,
-.scoresheet_court_label, .scoresheet_umpire_label, .scoresheet_servicejudge_label, .scoresheet_begin_label, .scoresheet_end_label, .scoresheet_duration_label {
+.scoresheet_court_label, .scoresheet_umpire_label, .scoresheet_servicejudge_label, .scoresheet_begin_label, .scoresheet_end_label, .scoresheet_duration_label,
+.scoresheet_row_player_name {
 	font-size: 80%;
+	font-weight: normal;
 }
 
 .scoresheet_tournament_name {
@@ -491,7 +493,7 @@ span.score_announcement+span.score_announcement {
 .scoresheet_results_team1_score1, .scoresheet_results_team1_score2, .scoresheet_results_team1_score3,
 .scoresheet_results_team2_score1, .scoresheet_results_team2_score2, .scoresheet_results_team2_score3 {
 	width: 1.2em;
-	text-align: right;
+	text-align: center;
 }
 .scoresheet_results_team1_side, .scoresheet_results_team2_side {
 	border: 2px solid #000;
@@ -507,7 +509,7 @@ span.score_announcement+span.score_announcement {
 
 .scoresheet_results_team1_player1, .scoresheet_results_team2_player1 {
 	border-top: 2px solid #000;
-	border-bottom: 1px solid #000;
+	border-bottom: 1px dashed #000;
 }
 .scoresheet_results_team1_name, .scoresheet_results_team2_name {
 	border-top: 2px solid #000;
@@ -564,7 +566,11 @@ span.score_announcement+span.score_announcement {
 	width: 10em;
 	border-bottom: 2px dotted #000;
 }
-
+.scoresheet_begin_value>span, .scoresheet_end_value>span, .scoresheet_duration_value>span {
+	display: inline-block;
+	min-width: 2.7em;
+	text-align: right;
+}
 
 
 .scoresheet_court_label, .scoresheet_court_name {
@@ -584,4 +590,38 @@ span.score_announcement+span.score_announcement {
 }
 .scoresheet_duration_label, .scoresheet_duration_value {
 	top: 12%;
+}
+
+.scoresheet_table_container {
+	top: 14%;
+	left: 0;
+}
+.scoresheet_row {
+	border: 2px solid #000;
+	border-spacing: 0;
+}
+.scoresheet_row+.scoresheet_row {
+	margin-top: 0.2em;
+}
+th.scoresheet_row_player_name {
+	text-align: left;
+	border-bottom: 1px solid #000;
+}
+.scoresheet_row td {
+	width: 1em;
+	height: 0.8em;
+	padding: 0;
+	margin: 0;
+	text-align: center;
+	border-left: 1px solid #000;
+	border-bottom: 1px solid #000;
+}
+.scoresheet_row>tbody>tr:nth-child(2)>* {
+	border-bottom: 2px solid #000;
+}
+.scoresheet_row>tbody>tr>td::last-child {
+	border-bottom: 2px solid #000;
+}
+.scoresheet_row_server_marks {
+	border-right: 1px solid #000;
 }

@@ -2309,8 +2309,13 @@ _describe('calc_state', function() {
 
 
 _describe('helper functions', function() {
-	it('format_duration', function() {
-		assert.equal(bup._format_duration(4980000), '1:23');
-		assert.equal(bup._format_duration(301234), '0:05');
+	it('duration_str', function() {
+		assert.equal(bup._duration_str(1420084800000, 1420093200000), '2:20');
+		assert.equal(bup._duration_str(1420109940000, 1420110660000), '0:12');
+		assert.equal(bup._duration_str(1420149600000, 1420155720000), '1:42'); // new day in CET
+		assert.equal(bup._duration_str(1420153260000, 1420171380000), '5:02'); // new day in UTC
+		assert.equal(bup._duration_str(1420110059000, 1420111201000), '0:20');
+		assert.equal(bup._duration_str(1420110001000, 1420111259000), '0:20');
+		assert.equal(bup._duration_str(1420110660000, 1420110710000), '0:00');
 	});
 });

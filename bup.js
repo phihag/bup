@@ -29,9 +29,27 @@ function _add_zeroes(n) {
 	}
 };
 
-function _format_duration(ms) {
-	var mins = parseInt(Math.ceil(ms / 60000), 10);
-	return (parseInt(Math.floor(mins / 60), 10)) + ':' + _add_zeroes(mins % 60);
+function _duration_str(start_timestamp, end_timestamp) {
+	var start = new Date(start_timestamp);
+	var end = new Date(end_timestamp);
+
+	/*
+	Since we're not showing seconds, we pretend to calculate in minutes:
+	start:      10:00:59 | 10:00:01
+	end:        11:12:01 | 11:12:59
+	precise:     1:11:02 |  1:12:58
+	our result:  1:12    |  1:12
+	*/
+
+	start.setSeconds(0);
+	end.setSeconds(0);
+	start.setMilliseconds(0);
+	end.setMilliseconds(0);
+
+	var diff_ms = end.getTime() - start.getTime();
+	var mins = Math.round(diff_ms / 60000);
+	var hours = (mins - (mins % 60)) / 60;
+	return hours + ':' + _add_zeroes(mins % 60);
 }
 
 function _get_time_str(d) {
@@ -362,30 +380,22 @@ function scoresheet_show() {
 		return; // Called on start with Shift+S
 	}
 
-	function _set_right(key, val) {
-		if (!val) {
-			val = '\xA0';
-		}
-		$('.scoresheet_' + key).text(val);
-	}
-
 	$('.scoresheet_tournament_name').text(state.setup.tournament_name);
 	$('.scoresheet_event_name').text(state.setup.event_name);
 	$('.scoresheet_match_name').text(state.setup.match_name);
 	var match_date = new Date(state.metadata.start);
 	$('.scoresheet_date_value').text(_human_date_str(match_date));
 
-	_set_right('court_name', state.setup.court_name);
+	$('.scoresheet_court_name>span').text(state.setup.court_name);
 
-	_set_right('begin_value', state.metadata.start ? _get_time_str(new Date(state.metadata.start)) : '');
+	$('.scoresheet_begin_value>span').text(state.metadata.start ? _get_time_str(new Date(state.metadata.start)) : '');
 	if (state.match.finished) {
-		_set_right('end_value', state.metadata.updated ? _get_time_str(new Date(state.metadata.updated)) : '');
-		_set_right('duration_value', state.metadata.updated ? '\xA0' + _format_duration(state.metadata.updated - state.metadata.start) : '');
+		$('.scoresheet_end_value>span').text(state.metadata.updated ? _get_time_str(new Date(state.metadata.updated)) : '');
+		$('.scoresheet_duration_value>span').text(state.metadata.updated ? _duration_str(state.metadata.start, state.metadata.updated) : '');
 	} else {
-		_set_right('end_value', null);
-		_set_right('duration_value', null);
+		$('.scoresheet_end_value>span').text(null);
+		$('.scoresheet_duration_value>span').text(null);
 	}
-
 
 	$('.scoresheet_results_team1_player1').text(state.setup.teams[0].players[0].name);
 	$('.scoresheet_results_team1_player2').text(state.setup.is_doubles ? state.setup.teams[0].players[1].name : '');
@@ -415,17 +425,69 @@ function scoresheet_show() {
 	$('.scoresheet_results_team2_side').text(side2_str);	
 
 	if (state.match) {
-		var all_games = state.match.finished_games.slice();
-		if (state.match.finished && state.match.finished_games.length == 2) {
-			all_games.push(state.game);
+		var all_finished_games = state.match.finished_games.slice();
+		if (state.match.finished) {
+			all_finished_games.push(state.game);
 		}
 
-		all_games.forEach(function(g, i) {
+		all_finished_games.forEach(function(g, i) {
 			$('.scoresheet_results_team1_score' + (i + 1)).text(g.score[0]);
 			$('.scoresheet_results_team2_score' + (i + 1)).text(g.score[1]);
 		});
+	}
 
+	// Big table(s)
+	var all_games = [];
+	if (state.match && state.match.finished_games) {
+		all_games.push.apply(all_games, state.match.finished_games);
+	}
+	all_games.push(state.game);
+	var game_idx = 0;
+	var all_players;
+	if (state.setup.is_doubles) {
+		all_players = [
+			state.setup.teams[0].players[0],
+			state.setup.teams[0].players[1],
+			state.setup.teams[1].players[0],
+			state.setup.teams[1].players[1]
+		];
+	} else {
+		all_players = [
+			state.setup.teams[0].players[0],
+			null,
+			state.setup.teams[1].players[0],
+			null,
+		];
+	}
 
+	$('.scoresheet_table_container').empty();
+	for (var i = 0;i < 6;i++) {
+		var row = $('<table class="scoresheet_row">');
+		var tbody = $('<tbody>');
+		row.append(tbody);
+
+		for (var row_idx = 0;row_idx < 4;row_idx++) {
+			var tr = $('<tr>');
+			var name = $('<th class="scoresheet_row_player_name">');
+			if (all_players[row_idx]) {
+				name.text(all_players[row_idx].name);
+			}
+			tr.append(name);
+
+			var server_marks = $('<td class="scoresheet_row_server_marks">');
+
+			tr.append(server_marks);
+1
+			for (var col_idx = 0;col_idx < 35;col_idx++) {
+				var td = $('<td>');
+
+				tr.append(td);
+			}
+
+			tbody.append(tr);
+		}
+
+		$('.scoresheet_table_container').append(row);
 	}
 
 
@@ -452,6 +514,35 @@ function scoresheet_hide() {
 	}
 }
 
+function demo_match_start() {
+	var setup = {
+		counting: '3x21',
+		is_doubles: true,
+		teams: [{
+			name: '1.BC Beuel 1',
+			players: [{
+				name: 'Max Weißkirchen'
+			}, {
+				name: 'Birgit Michels'
+			}]
+		}, {
+			name: '1.BC Sbr.-Bischmisheim 1',
+			players: [{
+				name: 'Michael Fuchs'
+			}, {
+				name: 'Samantha Barning'
+			}]
+		}],
+		match_name: 'GD',
+		event_name: 'BCB - BCB (Demo)',
+		tournament_name: 'Demo',
+		court_name: '1',
+		team_competition: true,
+	};
+
+	hide_settings(true);
+	start_match(setup);
+}
 
 function show_settings() {
 	$('#settings_wrapper').show();
@@ -1363,42 +1454,23 @@ function ui_init() {
 				!setup.tournament_name &&
 				!setup.court_name) {
 			// Demo mode
-			setup.teams = [{
-				name: '1.BC Beuel 1',
-				players: [{
-					name: 'Max Weißkirchen'
-				}, {
-					name: 'Birgit Michels'
-				}]
-			}, {
-				name: '1.BC Sbr.-Bischmisheim 1',
-				players: [{
-					name: 'Michael Fuchs'
-				}, {
-					name: 'Samantha Barning'
-				}]
-			}];
-			setup.match_name = 'GD';
-			setup.event_name = 'BCB - BCB (Demo)';
-			setup.tournament_name = 'Demo';
-			setup.court_name = '1';
-			setup.team_competition = true;
-		} else {
-			if (setup.is_doubles) {
-				team1 = [_player_formval('team1_player1', 'Left A'), _player_formval('team1_player2', 'Left B')];
-				team2 = [_player_formval('team2_player1', 'Right C'), _player_formval('team2_player2', 'Right D')];
-			} else {
-				team1 = [_player_formval('team1_player1', 'Left')];
-				team2 = [_player_formval('team2_player1', 'Right')];
-			}
-			setup.teams = [{
-				'players': team1,
-				'name': _formval('team1_name', (setup.team_competition ? (setup.is_doubles ? 'AB team' : 'Left team') : null)),
-			}, {
-				'players': team2,
-				'name': _formval('team2_name', (setup.team_competition ? (setup.is_doubles ? 'CD team' : 'Right team') : null)),
-			}];
+			return demo_match_start();
 		}
+
+		if (setup.is_doubles) {
+			team1 = [_player_formval('team1_player1', 'Left A'), _player_formval('team1_player2', 'Left B')];
+			team2 = [_player_formval('team2_player1', 'Right C'), _player_formval('team2_player2', 'Right D')];
+		} else {
+			team1 = [_player_formval('team1_player1', 'Left')];
+			team2 = [_player_formval('team2_player1', 'Right')];
+		}
+		setup.teams = [{
+			'players': team1,
+			'name': _formval('team1_name', (setup.team_competition ? (setup.is_doubles ? 'AB team' : 'Left team') : null)),
+		}, {
+			'players': team2,
+			'name': _formval('team2_name', (setup.team_competition ? (setup.is_doubles ? 'CD team' : 'Right team') : null)),
+		}];
 
 		hide_settings(true);
 		start_match(setup);
@@ -1539,6 +1611,8 @@ function ui_init() {
 	var hash_query = _parse_query_string(window.location.hash.substr(1));
 	if (hash_query.liveaw_match_id) {
 		liveaw_init(hash_query.liveaw_match_id);
+	} else if (typeof hash_query.demo !== 'undefined') {
+		demo_match_start();
 	} else {
 		show_settings();
 	}
@@ -1554,6 +1628,6 @@ if (typeof module !== 'undefined') {
 		init_state: init_state,
 		calc_state: calc_state,
 		// For testing only
-		_format_duration: _format_duration,
+		_duration_str: _duration_str,
 	};
 }
