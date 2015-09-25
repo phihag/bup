@@ -604,12 +604,13 @@ span.score_announcement+span.score_announcement {
 	margin-top: 0.2em;
 }
 th.scoresheet_row_player_name {
+	width: 15em;
 	text-align: left;
 	border-bottom: 1px solid #000;
 }
 .scoresheet_row td {
-	width: 1em;
-	height: 0.8em;
+	width: 1.5em;
+	height: 1.2em;
 	padding: 0;
 	margin: 0;
 	text-align: center;

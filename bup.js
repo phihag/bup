@@ -381,7 +381,8 @@ function _scoresheet_parse_match(state) {
 	var s = {
 		initialized: state.initialized,
 		scoresheet_game: {
-			states: [],
+			table: [],
+			servers: [null, null],
 		},
 	};
 	init_state(s, state.setup);
@@ -393,17 +394,21 @@ function _scoresheet_parse_match(state) {
 		switch (press.type) {
 		case 'pick_server':
 			s.scoresheet_game.server_row = press.team_id * 2 + press.player_id;
+			s.scoresheet_game.servers[press.team_id] = press.player_id;
 			if (! s.setup.is_doubles) {
 				s.scoresheet_game.receiver_row = (1 - press.team_id) * 2;
+				s.scoresheet_game.servers[1 - press.team_id] = 0;
 			}
 			break;
 		case 'pick_receiver':
 			s.scoresheet_game.receiver_row = press.team_id * 2 + press.player_id;
+			s.scoresheet_game.servers[press.team_id] = press.player_id;
 			break;
 		case 'postgame-confirm':
 			games.push(s.scoresheet_game);
 			s.scoresheet_game = {
-				states: [],
+				table: [],
+				servers: [null, null],
 			};
 			if (! s.setup.is_doubles) {
 				if (s.game.team1_won) {
@@ -415,6 +420,18 @@ function _scoresheet_parse_match(state) {
 				}
 			}
 			break;
+		case 'score':
+			var score_team = (s.game.team1_left == (press.side == 'left')) ? 0 : 1;
+			if (s.game.team1_serving != (score_team == 0)) {
+				// Service over
+				if (s.setup.is_doubles) {
+					s.scoresheet_game.servers[score_team] = 1 - s.scoresheet_game.servers[score_team];
+				}
+			}
+			s.scoresheet_game.table.push({
+				row: 2 * score_team + s.scoresheet_game.servers[score_team],
+				val: s.game.score[score_team] + 1,
+			});
 		}
 		calc_press(s, press);
 	});
@@ -503,7 +520,8 @@ function scoresheet_show() {
 
 	var parsed_games = _scoresheet_parse_match(state);
 	var game_idx = 0;
-	var state_idx = -1;
+	var table_idx_init = -1;
+	var table_idx;
 
 	$('.scoresheet_table_container').empty();
 	for (var i = 0;i < 6;i++) {
@@ -513,6 +531,7 @@ function scoresheet_show() {
 		row.append(tbody);
 
 		for (var row_idx = 0;row_idx < 4;row_idx++) {
+			table_idx = table_idx_init;
 			var tr = $('<tr>');
 			var name = $('<th class="scoresheet_row_player_name">');
 			if (all_players[row_idx]) {
@@ -521,7 +540,7 @@ function scoresheet_show() {
 			tr.append(name);
 
 			var server_marks = $('<td class="scoresheet_row_server_marks">');
-			if (g && (state_idx == -1)) {
+			if (g && (table_idx == -1)) {
 				if (g.server_row === row_idx) {
 					server_marks.text('A');
 				}
@@ -534,19 +553,24 @@ function scoresheet_show() {
 			for (var col_idx = 0;col_idx < 35;col_idx++) {
 				var td = $('<td>');
 				if (g) {
-					if ((state_idx == -1) && ((g.server_row === row_idx) || (g.receiver_row === row_idx))) {
-						state_idx++;
+					if ((table_idx == -1) && ((g.server_row === row_idx) || (g.receiver_row === row_idx))) {
 						td.text('0');
+					} else if ((table_idx >= 0) && (table_idx < g.table.length) && (g.table[table_idx].row == row_idx)) {
+						td.text(g.table[table_idx].val);
 					}
+					table_idx++;
 				}
 				tr.append(td);
 			}
 
 			tbody.append(tr);
-			state_idx = -1;
 		}
 
-		game_idx++;
+		if (g && (table_idx < g.table.length)) {
+			table_idx_init = table_idx;
+		} else {
+			game_idx++;
+		}
 		$('.scoresheet_table_container').append(row);
 	}
 
