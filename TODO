@@ -1,13 +1,18 @@
 generate umpire scoresheet to print
-	mark exceptions
+	overrule
+	change
+	referee
+	Unterbrechung
 	yellow card
+	resign
 	red card
+	disqualified
+
 	shading
 	referee/umpire signature line
 	shuttle counter
 	circle who won on top
 	circle game result
-	disqualified
 	dash at 20/20
 	relative font size
 	precise positioning of everything
@@ -27,6 +32,12 @@ badmintonticker.de
 better fullscreen flow (force fullscreen as a setting / as a hash)
 
 settings -> scoresheet -> Esc  breaks settings escape
+
+make dist (copy into dist/ subfolder, minify css/js, combine js)
+make upload (upload based on dist)
+split js files
+
+write UX documentation
 
 disqualification at game start
 	write test
@@ -86,7 +97,6 @@ make every button keyboard usable
 prevent retired after game
 show text in difficult situations (retired etc.)
 write a test for timers
-support for game names (HE1 and the like)
 test black card before game start
 set window title (include match_name)
 remove "mit" from text
@@ -99,4 +109,4 @@ use court name in 20s announcements
 check scoresheet from liveaw (all there?)
 umpire / service judge name (also in scoresheet)
 shortcuts u/r undo/redo
-check scoresheet with a profiler
+add tests for scoresheet helper functions

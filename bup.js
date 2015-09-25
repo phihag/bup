@@ -432,8 +432,17 @@ function _scoresheet_parse_match(state) {
 				row: 2 * score_team + s.scoresheet_game.servers[score_team],
 				val: s.game.score[score_team] + 1,
 			});
+			break;
 		}
 		calc_press(s, press);
+		switch (press.type) {
+		case 'injury':
+			s.scoresheet_game.table.push({
+				row: 2 * press.team_id + press.player_id,
+				val: 'V',
+			});
+			break;
+		}
 	});
 	games.push(s.scoresheet_game);
 	return games;
