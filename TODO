@@ -1,11 +1,5 @@
 generate umpire scoresheet to print
-	overrule
-	change
-	referee
-	Unterbrechung
-	yellow card
 	resign
-	red card
 	disqualified
 
 	shading
@@ -13,7 +7,7 @@ generate umpire scoresheet to print
 	shuttle counter
 	circle who won on top
 	circle game result
-	dash at 20/20
+	resign as game result
 	relative font size
 	precise positioning of everything
 	test singles
@@ -59,6 +53,9 @@ test touch interface
 test touch latency
 prevent double touches
 
+block overrule when unavailable
+	add a title
+	add a notice when clicked (+1 first)
 test without websocket support
 injury timer
 multiple languages
@@ -110,3 +107,5 @@ check scoresheet from liveaw (all there?)
 umpire / service judge name (also in scoresheet)
 shortcuts u/r undo/redo
 add tests for scoresheet helper functions
+add a test for overrule and other marks / cards
+show F mark on top after red cards

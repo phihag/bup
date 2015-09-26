@@ -626,3 +626,14 @@ th.scoresheet_row_player_name {
 .scoresheet_row_server_marks {
 	border-right: 1px solid #000;
 }
+.scoresheet_20all {
+	position: relative;
+}
+.scoresheet_20all_dash {
+	background-image: url(static/scoresheet_20all_dash.svg);
+	background-size: 100% 100%;
+	position: absolute;
+	left: 0; top: 0;
+	width: 1.5em;
+	height: 4.8em; height: calc(4.8em + 3px);
+}

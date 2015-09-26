@@ -383,6 +383,7 @@ function _scoresheet_parse_match(state) {
 		scoresheet_game: {
 			table: [],
 			servers: [null, null],
+			reached_20_all: false,
 		},
 	};
 	init_state(s, state.setup);
@@ -428,20 +429,101 @@ function _scoresheet_parse_match(state) {
 					s.scoresheet_game.servers[score_team] = 1 - s.scoresheet_game.servers[score_team];
 				}
 			}
-			s.scoresheet_game.table.push({
-				row: 2 * score_team + s.scoresheet_game.servers[score_team],
-				val: s.game.score[score_team] + 1,
-			});
+			var c = {};
+			c[2 * score_team + s.scoresheet_game.servers[score_team]] = s.game.score[score_team] + 1;
+			s.scoresheet_game.table.push(c);
+			break;
+		case 'red-card':
+			var score_team = 1 - press.team_id;
+			if (s.game.team1_serving != (score_team == 0)) {
+				// Service over
+				if (s.setup.is_doubles) {
+					s.scoresheet_game.servers[score_team] = 1 - s.scoresheet_game.servers[score_team];
+				}
+			}
+			var c = {};
+			c[2 * score_team + s.scoresheet_game.servers[score_team]] = s.game.score[score_team] + 1;
+			c[2 * press.team_id + press.player_id] = 'F';
+			s.scoresheet_game.table.push(c);
 			break;
 		}
+		
 		calc_press(s, press);
+
 		switch (press.type) {
 		case 'injury':
+			var c = {};
+			c[2 * press.team_id + press.player_id] = press.char;
+			s.scoresheet_game.table.push(c);
+			break;
+		case 'overrule':
+			var row = -1;
+			// Find correct row
+			if (s.scoresheet_game.table.length > 0) {
+				var prev_cell = s.scoresheet_game.table[s.scoresheet_game.table.length - 1];
+				for (var i = 0;i < 4;i++) {
+					if (prev_cell[i] && (typeof prev_cell[i] == 'number')) {
+						if (i == 0) {
+							row = 1;
+						} else if (i == 1) {
+							row = 0;
+						} else if (i == 2) {
+							row = 3;
+						} else if (i == 3) {
+							row = 2;
+						}
+						break;
+					}
+				}
+
+				if ((row === -1) || (typeof prev_cell[row] !== 'undefined')) {
+					var CANDIDATES = [1, 3, 0, 2];
+					for (var i = 0;i < CANDIDATES.length;i++) {
+						if (typeof prev_cell[CANDIDATES[i]] === 'undefined') {
+							row = CANDIDATES[i];
+							break;
+						}
+					}
+				}
+
+				prev_cell[row] = press.char;
+			}
+			break;
+		case 'referee':
+			var row = 1;
+			// Guess row
+			if (s.scoresheet_game.table.length > 0) {
+				var prev_cell = s.scoresheet_game.table[s.scoresheet_game.table.length - 1];
+				for (var i = 0;i < 4;i++) {
+					if (prev_cell[i] && (typeof prev_cell[i] == 'string')) {
+						row = i;
+						break;
+					}
+				}
+			}
+
+			var c = {};
+			c[row] = press.char;
+			s.scoresheet_game.table.push(c);
+			break;
+		case 'interruption':
+		case 'correction':
 			s.scoresheet_game.table.push({
-				row: 2 * press.team_id + press.player_id,
-				val: 'V',
+				'1': press.char,
 			});
 			break;
+		case 'yellow-card':
+			var c = {};
+			c[2 * press.team_id + press.player_id] = press.char;
+			s.scoresheet_game.table.push(c);
+			break;
+		}
+
+		if ((s.game.score[0] == 20) && (s.game.score[1] == 20) && !s.scoresheet_game.reached_20_all) {
+			s.scoresheet_game.reached_20_all = true;
+			s.scoresheet_game.table.push({
+				dash: true,
+			});
 		}
 	});
 	games.push(s.scoresheet_game);
@@ -564,8 +646,14 @@ function scoresheet_show() {
 				if (g) {
 					if ((table_idx == -1) && ((g.server_row === row_idx) || (g.receiver_row === row_idx))) {
 						td.text('0');
-					} else if ((table_idx >= 0) && (table_idx < g.table.length) && (g.table[table_idx].row == row_idx)) {
-						td.text(g.table[table_idx].val);
+					} else if ((table_idx >= 0) && (table_idx < g.table.length)) {
+						if (typeof g.table[table_idx][row_idx] !== 'undefined') {
+							td.text(g.table[table_idx][row_idx]);
+						} else if (g.table[table_idx].dash && (row_idx == 0)) {
+							td.addClass('scoresheet_20all');
+							var dash = $('<div class="scoresheet_20all_dash"></div>');
+							td.append(dash);
+						}
 					}
 					table_idx++;
 				}
@@ -579,6 +667,7 @@ function scoresheet_show() {
 			table_idx_init = table_idx;
 		} else {
 			game_idx++;
+			table_idx_init = -1;
 		}
 		$('.scoresheet_table_container').append(row);
 	}
@@ -870,7 +959,23 @@ function calc_press(s, press) {
 		s.match.finished_games.push(s.game);
 		s.match.finish_confirmed = true;
 		break;
-	case 'mark':
+	case 'overrule':
+		press.char = 'O';
+		s.match.marks.push(press);
+		break;
+	case 'referee':
+		press.char = 'R';
+		s.match.marks.push(press);
+		break;
+	case 'correction':
+		press.char = 'C';
+		s.match.marks.push(press);
+		break;
+	case 'interruption':
+		press.char = 'U';
+		s.match.marks.push(press);
+		break;
+	case 'mark': // Deprecated
 		s.match.marks.push(press);
 		break;
 	case 'yellow-card':
@@ -1637,29 +1742,25 @@ function ui_init() {
 	});
 	$('#exception_referee').on('click', function() {
 		on_press({
-			'type': 'mark',
-			'char': 'R'
+			type: 'referee',
 		});
 		ui_hide_exception_dialog();
 	});
 	$('#exception_interruption').on('click', function() {
 		on_press({
-			'type': 'mark',
-			'char': 'U'
+			type: 'interruption',
 		});
 		ui_hide_exception_dialog();
 	});
 	$('#exception_correction').on('click', function() {
 		on_press({
-			'type': 'mark',
-			'char': 'C'
+			type: 'correction',
 		});
 		ui_hide_exception_dialog();
 	});
 	$('#exception_overrule').on('click', function() {
 		on_press({
-			'type': 'mark',
-			'char': 'O'
+			'type': 'overrule',
 		});
 		ui_hide_exception_dialog();
 	});
