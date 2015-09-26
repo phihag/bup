@@ -517,6 +517,11 @@ function _scoresheet_parse_match(state) {
 			c[2 * press.team_id + press.player_id] = press.char;
 			s.scoresheet_game.table.push(c);
 			break;
+		case 'retired':
+			var c = {};
+			c[2 * press.team_id + press.player_id] = 'A';
+			s.scoresheet_game.table.push(c);
+			break;
 		}
 
 		if ((s.game.score[0] == 20) && (s.game.score[1] == 20) && !s.scoresheet_game.reached_20_all) {
@@ -558,6 +563,11 @@ function scoresheet_show() {
 	$('.scoresheet_results_team2_player1').text(state.setup.teams[1].players[0].name);
 	$('.scoresheet_results_team2_player2').text(state.setup.is_doubles ? state.setup.teams[1].players[1].name: '');
 	$('.scoresheet_results_team2_name').text(state.setup.teams[1].name);
+
+	if (state.match.finished) {
+		$('.scoresheet_results_circle_team1_container>.scoresheet_results_circle').toggle(state.match.team1_won);
+		$('.scoresheet_results_circle_team2_container>.scoresheet_results_circle').toggle(! state.match.team1_won);
+	}
 
 	var side1_str = '';
 	var side2_str = '';

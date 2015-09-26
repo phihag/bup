@@ -637,3 +637,17 @@ th.scoresheet_row_player_name {
 	width: 1.5em;
 	height: 4.8em; height: calc(4.8em + 3px);
 }
+
+.scoresheet_results_circle_team1_container, .scoresheet_results_circle_team2_container {
+	position: relative;
+}
+
+.scoresheet_results_circle {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 6em;
+	background-image: url(static/scoresheet_results_circle.svg);
+	background-size: 100% 100%;
+}

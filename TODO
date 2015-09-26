@@ -1,11 +1,13 @@
-add test for disqualified
 generate umpire scoresheet to print
 	circle who won on top
 	circle game result
-	resign
+
+	retiring
 	disqualified
 
-	resign as game result
+	retired as game result
+	disqualified as game result
+
 	disqualified as game result
 	shading
 	referee/umpire signature line
@@ -112,3 +114,4 @@ add tests for scoresheet helper functions
 add a test for overrule and other marks / cards
 show F mark on top after red cards
 eliminate uses of match.game_score; use match.team1_won instead
+title for all buttons
