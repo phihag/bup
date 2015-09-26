@@ -861,6 +861,7 @@ function score(s, team_id, timestamp) {
 		s.game.finished = true;
 		if (s.match.game_score[team_id] == 2) {
 			s.match.finished = true;
+			s.match.team1_won = team1_won;
 		}
 		s.game.team1_serving = null;
 		s.game.service_over = null;
@@ -1001,6 +1002,7 @@ function calc_press(s, press) {
 		press.char = 'A';
 		s.match.marks.push(press);
 		s.game.team1_won = press.team_id != 0;
+		s.match.team1_won = s.game.team1_won;
 		s.game.finished = true;
 		s.match.finished = true;
 		s.game.team1_serving = null;
@@ -1010,8 +1012,9 @@ function calc_press(s, press) {
 	case 'disqualified':
 		press.char = 'Disqualifiziert';
 		s.match.marks.push(press);
-		s.game.team1_won = press.team_id != 0;
 		s.game.finished = true;
+		s.game.team1_won = press.team_id != 0;
+		s.match.team1_won = s.game.team1_won;
 		s.match.finished = true;
 		s.game.team1_serving = null;
 		s.game.service_over = null;
@@ -1029,7 +1032,8 @@ function _init_calc(s) {
 		finished: false,
 		marks: [],
 		finish_confirmed: false,
-		carded: [false, false]
+		carded: [false, false],
+		team1_won: null,
 	};
 
 	switch (s.setup.counting) {
