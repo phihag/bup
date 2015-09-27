@@ -375,16 +375,21 @@ function ui_hide_exception_dialog() {
 	$('#exception_wrapper').hide();
 }
 
-function _scoresheet_parse_match(state) {
+function _scoresheet_parse_match(state, col_count) {
+	function _make_scoresheet_game() {
+		return {
+			table: [{zeroes: true}],
+			servers: [null, null],
+			reached_20_all: false,
+			finished: false,
+		};
+	}
+
 	var games = [];
 
 	var s = {
 		initialized: state.initialized,
-		scoresheet_game: {
-			table: [],
-			servers: [null, null],
-			reached_20_all: false,
-		},
+		scoresheet_game: _make_scoresheet_game(),
 	};
 	init_state(s, state.setup);
 	s.presses = state.presses;
@@ -407,10 +412,7 @@ function _scoresheet_parse_match(state) {
 			break;
 		case 'postgame-confirm':
 			games.push(s.scoresheet_game);
-			s.scoresheet_game = {
-				table: [],
-				servers: [null, null],
-			};
+			s.scoresheet_game = _make_scoresheet_game();
 			if (! s.setup.is_doubles) {
 				if (s.game.team1_won) {
 					s.scoresheet_game.server_row = 0;
@@ -530,6 +532,27 @@ function _scoresheet_parse_match(state) {
 				dash: true,
 			});
 		}
+
+		if (s.game.finished && !s.scoresheet_game.finished) {
+			s.scoresheet_game.finished = true;
+			var CIRCLE_SIZE = 3;
+			var circle_space;
+			if ((s.scoresheet_game.table.length <= col_count) && (s.scoresheet_game.table.length + CIRCLE_SIZE > col_count)) {
+				// Fill the entire row
+				circle_space = col_count - s.scoresheet_game.table.length;
+				console.log("circle space[1]: ", circle_space, 'table len:', s.scoresheet_game.table.length, 'col_count: ', col_count);
+			} else {
+				circle_space = Math.min(2, col_count - (s.scoresheet_game.table.length % col_count) - CIRCLE_SIZE);
+				console.log("circle space[2]: ", circle_space, 'table len:', s.scoresheet_game.table.length, 'col_count: ', col_count);
+			}
+			for (var i = 0;i < circle_space;i++) {
+				s.scoresheet_game.table.push({});
+			}
+
+			s.scoresheet_game.table.push({
+				game_result: s.game.score,
+			});
+		}
 	});
 	games.push(s.scoresheet_game);
 	return games;
@@ -564,10 +587,8 @@ function scoresheet_show() {
 	$('.scoresheet_results_team2_player2').text(state.setup.is_doubles ? state.setup.teams[1].players[1].name: '');
 	$('.scoresheet_results_team2_name').text(state.setup.teams[1].name);
 
-	if (state.match.finished) {
-		$('.scoresheet_results_circle_team1_container>.scoresheet_results_circle').toggle(state.match.team1_won);
-		$('.scoresheet_results_circle_team2_container>.scoresheet_results_circle').toggle(! state.match.team1_won);
-	}
+	$('.scoresheet_results_circle_team1_container>.scoresheet_results_circle').toggle(state.match.finished && state.match.team1_won);
+	$('.scoresheet_results_circle_team2_container>.scoresheet_results_circle').toggle(state.match.finished && !state.match.team1_won);
 
 	var side1_str = '';
 	var side2_str = '';
@@ -619,9 +640,10 @@ function scoresheet_show() {
 		];
 	}
 
-	var parsed_games = _scoresheet_parse_match(state);
+	var SCORESHEET_COL_COUNT = 35;
+	var parsed_games = _scoresheet_parse_match(state, SCORESHEET_COL_COUNT);
 	var game_idx = 0;
-	var table_idx_init = -1;
+	var table_idx_init = 0;
 	var table_idx;
 
 	$('.scoresheet_table_container').empty();
@@ -641,7 +663,7 @@ function scoresheet_show() {
 			tr.append(name);
 
 			var server_marks = $('<td class="scoresheet_row_server_marks">');
-			if (g && (table_idx == -1)) {
+			if (g && (table_idx == 0)) {
 				if (g.server_row === row_idx) {
 					server_marks.text('A');
 				}
@@ -651,19 +673,27 @@ function scoresheet_show() {
 			}
 			tr.append(server_marks);
 
-			for (var col_idx = 0;col_idx < 35;col_idx++) {
+			for (var col_idx = 0;col_idx < SCORESHEET_COL_COUNT;col_idx++) {
 				var td = $('<td>');
-				if (g) {
-					if ((table_idx == -1) && ((g.server_row === row_idx) || (g.receiver_row === row_idx))) {
+				if (g && (table_idx < g.table.length)) {
+					if (typeof g.table[table_idx][row_idx] !== 'undefined') {
+						td.text(g.table[table_idx][row_idx]);
+					} else if (g.table[table_idx].zeroes && ((g.server_row === row_idx) || (g.receiver_row === row_idx))) {
 						td.text('0');
-					} else if ((table_idx >= 0) && (table_idx < g.table.length)) {
-						if (typeof g.table[table_idx][row_idx] !== 'undefined') {
-							td.text(g.table[table_idx][row_idx]);
-						} else if (g.table[table_idx].dash && (row_idx == 0)) {
-							td.addClass('scoresheet_20all');
-							var dash = $('<div class="scoresheet_20all_dash"></div>');
-							td.append(dash);
-						}
+					} else if (g.table[table_idx].dash && (row_idx == 0)) {
+						td.addClass('scoresheet_20all');
+						var dash = $('<div class="scoresheet_20all_dash"></div>');
+						td.append(dash);
+					} else if (g.table[table_idx].game_result && (row_idx == 0)) {
+						td.addClass('scoresheet_game_result');
+						var circle = $('<div class="scoresheet_game_circle">');
+						td.append(circle);
+						var top_score = $('<div class="scoresheet_game_score_top">');
+						top_score.text(g.table[table_idx].game_result[0]);
+						td.append(top_score);
+						var bottom_score = $('<div class="scoresheet_game_score_bottom">');
+						bottom_score.text(g.table[table_idx].game_result[1]);
+						td.append(bottom_score);
 					}
 					table_idx++;
 				}
@@ -677,7 +707,7 @@ function scoresheet_show() {
 			table_idx_init = table_idx;
 		} else {
 			game_idx++;
-			table_idx_init = -1;
+			table_idx_init = 0;
 		}
 		$('.scoresheet_table_container').append(row);
 	}

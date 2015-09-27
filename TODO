@@ -1,5 +1,4 @@
 generate umpire scoresheet to print
-	circle who won on top
 	circle game result
 
 	retiring
@@ -8,7 +7,6 @@ generate umpire scoresheet to print
 	retired as game result
 	disqualified as game result
 
-	disqualified as game result
 	shading
 	referee/umpire signature line
 	shuttle counter
@@ -19,6 +17,9 @@ generate umpire scoresheet to print
 	uncomment TODOs
 	test printing
 shuttle counter
+
+fullscreen setting, ask on load
+&fs in hash to override fullscreen setting
 
 embed in CourtSpot
 Allow config to be downloaded from CourtSpot
@@ -115,3 +116,4 @@ add a test for overrule and other marks / cards
 show F mark on top after red cards
 eliminate uses of match.game_score; use match.team1_won instead
 title for all buttons
+scoresheet: begin and end on different days

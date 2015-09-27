@@ -651,3 +651,24 @@ th.scoresheet_row_player_name {
 	background-image: url(static/scoresheet_results_circle.svg);
 	background-size: 100% 100%;
 }
+
+.scoresheet_game_result {
+	position: relative;
+}
+.scoresheet_game_circle {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 4.5em;
+	height: 5em;
+	background-image: url(static/scoresheet_game_circle.svg);
+	background-size: 100% 100%;
+}
+.scoresheet_game_score_top {
+	position: absolute;
+	left: 1.5em; top: 1em;
+}
+.scoresheet_game_score_bottom {
+	position: absolute;
+	left: 1.9em; top: 2.8em;
+}
