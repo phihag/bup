@@ -79,6 +79,7 @@ _describe('calc_state', function() {
 		assert.equal(s.game.gamepoint, null);
 		assert.equal(s.game.matchpoint, null);
 		assert.equal(s.game.game, null);
+		assert.strictEqual(s.game.won_by_score, null);
 		assert.equal(s.match.finished, false);
 		assert.strictEqual(s.match.team1_won, null);
 		assert.equal(s.match.finish_confirmed, false);
@@ -102,6 +103,7 @@ _describe('calc_state', function() {
 		assert.equal(s.game.gamepoint, null);
 		assert.equal(s.game.matchpoint, null);
 		assert.equal(s.game.game, null);
+		assert.strictEqual(s.game.won_by_score, null);
 		assert.equal(s.match.finished, false);
 		assert.strictEqual(s.match.team1_won, null);
 		assert.equal(s.match.finish_confirmed, false);
@@ -847,6 +849,7 @@ _describe('calc_state', function() {
 		assert.equal(s.game.matchpoint, false);
 		assert.equal(s.game.finished, true);
 		assert.equal(s.game.team1_won, true);
+		assert.strictEqual(s.game.won_by_score, true);
 		assert.equal(s.court.left_serving, null);
 		assert.equal(s.court.serving_downwards, null);
 
@@ -864,6 +867,7 @@ _describe('calc_state', function() {
 		assert.equal(s.game.finished, false);
 		assert.equal(s.game.team1_won, null);
 		assert.equal(s.game.team1_serving, false);
+		assert.strictEqual(s.game.won_by_score, null);
 		assert.equal(s.court.left_serving, false);
 		assert.equal(s.court.serving_downwards, false);
 
@@ -884,6 +888,7 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_won, false);
 		assert.equal(s.game.team1_serving, null);
 		assert.equal(s.game.team1_left, true);
+		assert.strictEqual(s.game.won_by_score, true);
 		assert.equal(s.court.left_serving, null);
 		assert.equal(s.court.serving_downwards, null);
 		assert.equal(s.court.player_left_odd.name, 'Alice');
@@ -906,6 +911,7 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_won, true);
 		assert.equal(s.game.team1_serving, null);
 		assert.equal(s.game.team1_left, true);
+		assert.strictEqual(s.game.won_by_score, true);
 		assert.equal(s.court.left_serving, null);
 		assert.equal(s.court.serving_downwards, null);
 		assert.equal(s.court.player_left_odd.name, 'Alice');
@@ -918,6 +924,7 @@ _describe('calc_state', function() {
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.deepEqual(s.match.finished_games[0].score, [30, 29]);
+		assert.strictEqual(s.match.finished_games[0].won_by_score, true);
 		assert.deepEqual(s.match.game_score, [1, 0]);
 		assert.deepEqual(s.game.score, [null, null]);
 		assert.equal(s.game.service_over, null);
@@ -1125,6 +1132,7 @@ _describe('calc_state', function() {
 		assert.equal(s.game.finished, true);
 		assert.equal(s.game.team1_won, false);
 		assert.equal(s.game.team1_serving, null);
+		assert.strictEqual(s.game.won_by_score, true);
 		assert.equal(s.court.left_serving, null);
 		assert.equal(s.court.serving_downwards, null);
 
@@ -1134,6 +1142,7 @@ _describe('calc_state', function() {
 		s = state_after(presses, SINGLES_SETUP);
 		assert.deepEqual(s.match.finished_games[0].score, [30, 29]);
 		assert.deepEqual(s.match.finished_games[1].score, [29, 30]);
+		assert.strictEqual(s.match.finished_games[1].won_by_score, true);
 		assert.deepEqual(s.match.game_score, [1, 1]);
 		assert.deepEqual(s.game.score, [null, null]);
 		assert.equal(s.game.service_over, null);
@@ -1337,6 +1346,7 @@ _describe('calc_state', function() {
 		assert.equal(s.game.finished, true);
 		assert.equal(s.game.team1_won, false);
 		assert.equal(s.game.team1_serving, null);
+		assert.strictEqual(s.game.won_by_score, true);
 		assert.equal(s.court.left_serving, null);
 		assert.equal(s.court.serving_downwards, null);
 		assert.equal(s.court.player_left_odd.name, 'Bob');
@@ -1350,6 +1360,7 @@ _describe('calc_state', function() {
 			'type': 'postmatch-confirm',
 		});
 		s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(s.game.won_by_score, true);
 		assert.deepEqual(s.match.finished_games[0].score, [30, 29]);
 		assert.deepEqual(s.match.finished_games[1].score, [29, 30]);
 		assert.deepEqual(s.match.finished_games[2].score, [20, 22]);
@@ -2362,6 +2373,7 @@ _describe('calc_state', function() {
 		assert.strictEqual(s.match.finished, true);
 		assert.strictEqual(s.match.team1_won, true);
 		assert.deepEqual(s.game.score, [2, 1]);
+		assert.strictEqual(s.game.won_by_score, false);
 
 		presses_retired = presses.slice();
 		presses_retired.push({
@@ -2373,6 +2385,7 @@ _describe('calc_state', function() {
 		assert.strictEqual(s.match.finished, true);
 		assert.strictEqual(s.match.team1_won, true);
 		assert.deepEqual(s.game.score, [2, 1]);
+		assert.strictEqual(s.game.won_by_score, false);
 
 		presses_retired = presses.slice();
 		presses_retired.push({
@@ -2384,6 +2397,7 @@ _describe('calc_state', function() {
 		assert.strictEqual(s.match.finished, true);
 		assert.strictEqual(s.match.team1_won, false);
 		assert.deepEqual(s.game.score, [2, 1]);
+		assert.strictEqual(s.game.won_by_score, false);
 
 		presses_retired = presses.slice();
 		presses_retired.push({
@@ -2395,6 +2409,7 @@ _describe('calc_state', function() {
 		assert.strictEqual(s.match.finished, true);
 		assert.strictEqual(s.match.team1_won, false);
 		assert.deepEqual(s.game.score, [2, 1]);
+		assert.strictEqual(s.game.won_by_score, false);
 	});
 
 	_it('Disqualification', function() {
@@ -2432,6 +2447,7 @@ _describe('calc_state', function() {
 		assert.strictEqual(s.match.finished, true);
 		assert.strictEqual(s.match.team1_won, true);
 		assert.deepEqual(s.game.score, [3, 1]);
+		assert.strictEqual(s.game.won_by_score, false);
 
 		presses_disqualified = presses.slice();
 		presses_disqualified.push({
@@ -2443,6 +2459,7 @@ _describe('calc_state', function() {
 		assert.strictEqual(s.match.finished, true);
 		assert.strictEqual(s.match.team1_won, true);
 		assert.deepEqual(s.game.score, [3, 1]);
+		assert.strictEqual(s.game.won_by_score, false);
 
 		presses_disqualified = presses.slice();
 		presses_disqualified.push({
@@ -2454,6 +2471,7 @@ _describe('calc_state', function() {
 		assert.strictEqual(s.match.finished, true);
 		assert.strictEqual(s.match.team1_won, false);
 		assert.deepEqual(s.game.score, [3, 1]);
+		assert.strictEqual(s.game.won_by_score, false);
 
 		presses_disqualified = presses.slice();
 		presses_disqualified.push({
@@ -2465,6 +2483,7 @@ _describe('calc_state', function() {
 		assert.strictEqual(s.match.finished, true);
 		assert.strictEqual(s.match.team1_won, false);
 		assert.deepEqual(s.game.score, [3, 1]);
+		assert.strictEqual(s.game.won_by_score, false);
 	});
 
 });

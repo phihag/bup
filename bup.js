@@ -524,6 +524,13 @@ function _scoresheet_parse_match(state, col_count) {
 			c[2 * press.team_id + press.player_id] = 'A';
 			s.scoresheet_game.table.push(c);
 			break;
+		case 'disqualified':
+			var c = {
+				absolute_text: true,
+			};
+			c[2 * press.team_id + press.player_id] = 'Disqualifiziert';
+			s.scoresheet_game.table.push(c);
+			break;
 		}
 
 		if ((s.game.score[0] == 20) && (s.game.score[1] == 20) && !s.scoresheet_game.reached_20_all) {
@@ -533,17 +540,15 @@ function _scoresheet_parse_match(state, col_count) {
 			});
 		}
 
-		if (s.game.finished && !s.scoresheet_game.finished) {
+		if (s.game.finished && !s.scoresheet_game.finished && s.game.won_by_score) {
 			s.scoresheet_game.finished = true;
 			var CIRCLE_SIZE = 3;
 			var circle_space;
 			if ((s.scoresheet_game.table.length <= col_count) && (s.scoresheet_game.table.length + CIRCLE_SIZE > col_count)) {
 				// Fill the entire row
 				circle_space = col_count - s.scoresheet_game.table.length;
-				console.log("circle space[1]: ", circle_space, 'table len:', s.scoresheet_game.table.length, 'col_count: ', col_count);
 			} else {
-				circle_space = Math.min(2, col_count - (s.scoresheet_game.table.length % col_count) - CIRCLE_SIZE);
-				console.log("circle space[2]: ", circle_space, 'table len:', s.scoresheet_game.table.length, 'col_count: ', col_count);
+				circle_space = Math.min(1, col_count - (s.scoresheet_game.table.length % col_count) - CIRCLE_SIZE);
 			}
 			for (var i = 0;i < circle_space;i++) {
 				s.scoresheet_game.table.push({});
@@ -676,23 +681,31 @@ function scoresheet_show() {
 			for (var col_idx = 0;col_idx < SCORESHEET_COL_COUNT;col_idx++) {
 				var td = $('<td>');
 				if (g && (table_idx < g.table.length)) {
-					if (typeof g.table[table_idx][row_idx] !== 'undefined') {
-						td.text(g.table[table_idx][row_idx]);
-					} else if (g.table[table_idx].zeroes && ((g.server_row === row_idx) || (g.receiver_row === row_idx))) {
+					var cell = g.table[table_idx];
+					if (typeof cell[row_idx] !== 'undefined') {
+						if (cell.absolute_text) {
+							td.addClass('scoresheet_absolute_text');
+							var span = $('<span>');
+							span.text(cell[row_idx]);
+							td.append(span);
+						} else {
+							td.text(cell[row_idx]);
+						}
+					} else if (cell.zeroes && ((g.server_row === row_idx) || (g.receiver_row === row_idx))) {
 						td.text('0');
-					} else if (g.table[table_idx].dash && (row_idx == 0)) {
+					} else if (cell.dash && (row_idx == 0)) {
 						td.addClass('scoresheet_20all');
 						var dash = $('<div class="scoresheet_20all_dash"></div>');
 						td.append(dash);
-					} else if (g.table[table_idx].game_result && (row_idx == 0)) {
+					} else if (cell.game_result && (row_idx == 0)) {
 						td.addClass('scoresheet_game_result');
 						var circle = $('<div class="scoresheet_game_circle">');
 						td.append(circle);
 						var top_score = $('<div class="scoresheet_game_score_top">');
-						top_score.text(g.table[table_idx].game_result[0]);
+						top_score.text(cell.game_result[0]);
 						td.append(top_score);
 						var bottom_score = $('<div class="scoresheet_game_score_bottom">');
-						bottom_score.text(g.table[table_idx].game_result[1]);
+						bottom_score.text(cell.game_result[1]);
 						td.append(bottom_score);
 					}
 					table_idx++;
@@ -862,7 +875,8 @@ function make_game_state(s, previous_game) {
 		matchpoint: null,
 
 		finished: false,
-		team1_won: null
+		team1_won: null,
+		won_by_score: null,
 	};
 	res.team1_left = res.start_team1_left;
 	if (!s.setup.is_doubles) {
@@ -896,6 +910,7 @@ function score(s, team_id, timestamp) {
 		s.match.game_score[1]++;
 	}
 	if (team1_won || team2_won) {
+		s.game.won_by_score = true;
 		s.game.team1_won = team1_won;
 		s.game.game = true;
 		s.game.finished = true;
@@ -1043,6 +1058,7 @@ function calc_press(s, press) {
 		s.match.marks.push(press);
 		s.game.team1_won = press.team_id != 0;
 		s.match.team1_won = s.game.team1_won;
+		s.game.won_by_score = false;
 		s.game.finished = true;
 		s.match.finished = true;
 		s.game.team1_serving = null;
@@ -1052,6 +1068,7 @@ function calc_press(s, press) {
 	case 'disqualified':
 		press.char = 'Disqualifiziert';
 		s.match.marks.push(press);
+		s.game.won_by_score = false;
 		s.game.finished = true;
 		s.game.team1_won = press.team_id != 0;
 		s.match.team1_won = s.game.team1_won;

@@ -1,14 +1,7 @@
 generate umpire scoresheet to print
-	circle game result
-
-	retiring
-	disqualified
-
-	retired as game result
-	disqualified as game result
-
-	shading
 	referee/umpire signature line
+	shading
+
 	shuttle counter
 	relative font size
 	precise positioning of everything
@@ -16,10 +9,12 @@ generate umpire scoresheet to print
 	test results after undo
 	uncomment TODOs
 	test printing
-shuttle counter
 
 fullscreen setting, ask on load
 &fs in hash to override fullscreen setting
+
+add badmintonticker.de support
+read current result from courtspot
 
 embed in CourtSpot
 Allow config to be downloaded from CourtSpot
@@ -27,7 +22,6 @@ Write results to CourtSpot
 
 LICENSE
 CONTRIBUTING (-> assign copyright form)
-badmintonticker.de
 better fullscreen flow (force fullscreen as a setting / as a hash)
 
 settings -> scoresheet -> Esc  breaks settings escape

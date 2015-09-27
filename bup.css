@@ -672,3 +672,11 @@ th.scoresheet_row_player_name {
 	position: absolute;
 	left: 1.9em; top: 2.8em;
 }
+.scoresheet_absolute_text {
+	position: relative;
+}
+.scoresheet_absolute_text>* {
+	position: absolute;
+	left: 0.2em; top: 0;
+	background: rgba(255, 255, 255, 0.7);
+}
