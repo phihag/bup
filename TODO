@@ -1,5 +1,5 @@
 generate umpire scoresheet to print
-	shuttle counter
+	test printing
 	relative font size
 	precise positioning of everything
 	test singles
@@ -10,8 +10,11 @@ generate umpire scoresheet to print
 fullscreen setting, ask on load
 &fs in hash to override fullscreen setting
 
+shuttle counter
+	show in scoresheet
+
 add badmintonticker.de support
-read current result from courtspot
+read current result from badmintonticker
 
 embed in CourtSpot
 Allow config to be downloaded from CourtSpot

@@ -595,6 +595,12 @@ function scoresheet_show() {
 	$('.scoresheet_results_circle_team1_container>.scoresheet_results_circle').toggle(state.match.finished && state.match.team1_won);
 	$('.scoresheet_results_circle_team2_container>.scoresheet_results_circle').toggle(state.match.finished && !state.match.team1_won);
 
+	var shuttle_counter_active = (typeof state.match.shuttle_count == 'number');
+	$('.scoresheet_shuttle_counter').toggle(shuttle_counter_active);
+	if (shuttle_counter_active) {
+		$('.scoresheet_shuttle_counter_value').text(state.match.shuttle_count);
+	}
+
 	var side1_str = '';
 	var side2_str = '';
 	var first_game = null;
@@ -1094,6 +1100,7 @@ function _init_calc(s) {
 		finish_confirmed: false,
 		carded: [false, false],
 		team1_won: null,
+		shuttle_count: 42,
 	};
 
 	switch (s.setup.counting) {

@@ -450,7 +450,8 @@ span.score_announcement+span.score_announcement {
 .scoresheet_event_label, .scoresheet_match_label, .scoresheet_date_label,
 .scoresheet_results_top_label,
 .scoresheet_court_label, .scoresheet_umpire_label, .scoresheet_servicejudge_label, .scoresheet_begin_label, .scoresheet_end_label, .scoresheet_duration_label,
-.scoresheet_row_player_name {
+.scoresheet_row_player_name,
+.scoresheet_shuttle_counter_label {
 	font-size: 80%;
 	font-weight: normal;
 }
@@ -692,4 +693,13 @@ tr.scoresheet_shaded .scoresheet_absolute_text>* {
 }
 .scoresheet_shaded {
 	background: #C0C0C0;
+}
+
+.scoresheet_shuttle_counter {
+	position: absolute;
+	left: 70%;
+	top: 11%;
+}
+.scoresheet_shuttle_counter_value {
+	margin-left: 0.5em;
 }
