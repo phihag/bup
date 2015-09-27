@@ -661,6 +661,9 @@ function scoresheet_show() {
 		for (var row_idx = 0;row_idx < 4;row_idx++) {
 			table_idx = table_idx_init;
 			var tr = $('<tr>');
+			if (row_idx >= 2) {
+				tr.addClass('scoresheet_shaded');
+			}
 			var name = $('<th class="scoresheet_row_player_name">');
 			if (all_players[row_idx]) {
 				name.text(all_players[row_idx].name);
