@@ -1,11 +1,6 @@
 generate umpire scoresheet to print
-	test printing
-	relative font size
-	precise positioning of everything
-	test singles
-	test results after undo
+	switch to svg
 	uncomment TODOs
-	test printing
 
 fullscreen setting, ask on load
 &fs in hash to override fullscreen setting

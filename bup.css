@@ -616,6 +616,9 @@ th.scoresheet_row_player_name {
 	text-align: center;
 	border-left: 1px solid #000;
 	border-bottom: 1px solid #000;
+
+	/* Make chromium printing respect the width as well */
+	min-width: 1.5em;
 }
 .scoresheet_row>tbody>tr:nth-child(2)>* {
 	border-bottom: 2px solid #000;
