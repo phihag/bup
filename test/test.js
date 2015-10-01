@@ -2,6 +2,7 @@
 
 var assert = require('assert');
 var jsdom = require('jsdom');
+var _ = require('underscore');
 
 var jQuery = require('../libs/jquery.min.js');
 var bup = require('../bup.js');
@@ -39,33 +40,34 @@ function _press_score(presses, left_score, right_score) {
 	}
 }
 
-_describe('calc_state', function() {
-	var SINGLES_SETUP = {
-		teams: [{
-			players: [{name: 'Alice'}]
-		}, {
-			players: [{name: 'Bob'}]
-		}],
-		is_doubles: false,
-		counting: '3x21'
-	};
-	var DOUBLES_SETUP = {
-		teams: [{
-			players: [{name: 'Andrew'}, {name: 'Alice'}]
-		}, {
-			players: [{name: 'Bob'}, {name: 'Birgit'}]
-		}],
-		is_doubles: true,
-		counting: '3x21'
-	};
-	function state_after(presses, setup) {
-		var state = {};
-		bup.init_state(state, setup);
-		state.presses = presses;
-		bup.calc_state(state);
-		return state;
-	}
+var SINGLES_SETUP = {
+	teams: [{
+		players: [{name: 'Alice'}]
+	}, {
+		players: [{name: 'Bob'}]
+	}],
+	is_doubles: false,
+	counting: '3x21'
+};
+var DOUBLES_SETUP = {
+	teams: [{
+		players: [{name: 'Andrew'}, {name: 'Alice'}]
+	}, {
+		players: [{name: 'Bob'}, {name: 'Birgit'}]
+	}],
+	is_doubles: true,
+	counting: '3x21'
+};
 
+function state_after(presses, setup) {
+	var state = {};
+	bup.init_state(state, setup);
+	state.presses = presses;
+	bup.calc_state(state);
+	return state;
+}
+
+_describe('calc_state', function() {
 	_it('Initial properties', function() {
 		var s = state_after([], DOUBLES_SETUP);
 		assert.equal(s.setup.is_doubles, true);
@@ -2486,6 +2488,832 @@ _describe('calc_state', function() {
 		assert.strictEqual(s.game.won_by_score, false);
 	});
 
+});
+
+_describe('scoresheet generation', function() {
+	function _scoresheet_cells(presses, setup) {
+		var state = state_after(presses, setup);
+		return bup._scoresheet_parse_match(state, 35);
+	}
+
+	function _assert_cell(cells, cell) {
+		assert(cells.some(function(c) {
+			return _.isEqual(cell, c);
+		}), 'Cannot find cell ' + JSON.stringify(cell) + ' in ' + JSON.stringify(cells, undefined, 2));
+	}
+
+	_it('0-0 in third game', function() {
+		var presses = [{
+			'type': 'pick_side', // Andrew&Alice pick left
+			'team1_left': true,
+		}];
+		presses.push({
+			'type': 'pick_server', // Andrew serves
+			'team_id': 0,
+			'player_id': 0,
+		});
+		presses.push({
+			'type': 'pick_receiver', // Bob receives
+			'team_id': 1,
+			'player_id': 0,
+		});
+		presses.push({
+			'type': 'love-all'
+		});
+		_press_score(presses, 21, 0);
+		presses.push({
+			'type': 'postgame-confirm'
+		});
+
+		presses.push({
+			'type': 'pick_server', // Andrew serves
+			'team_id': 0,
+			'player_id': 0,
+		});
+		presses.push({
+			'type': 'pick_receiver', // Bob receives
+			'team_id': 1,
+			'player_id': 0,
+		});
+		presses.push({
+			'type': 'love-all'
+		});
+		_press_score(presses, 21, 0);
+		presses.push({
+			'type': 'postgame-confirm'
+		});
+
+		presses.push({
+			'type': 'pick_server', // Bob serves
+			'team_id': 1,
+			'player_id': 0,
+		});
+		presses.push({
+			'type': 'pick_receiver', // Andrew receives
+			'team_id': 0,
+			'player_id': 0,
+		});
+		presses.push({
+			'type': 'love-all'
+		});
+
+		var cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		cells.forEach(function(c) {
+			assert.equal(typeof c.table, 'number', JSON.stringify(c) + ' is missing a table value');
+			assert(! isNaN(c.table), JSON.stringify(c) + ' has NaN table value');
+			assert.equal(typeof c.col, 'number', JSON.stringify(c) + ' is missing a col value');
+			assert(! isNaN(c.table), JSON.stringify(c) + ' has NaN col value');
+		});
+		_assert_cell(cells, {
+			table: 2,
+			col: -1,
+			row: 0,
+			val: 'R'
+		});
+		_assert_cell(cells, {
+			table: 2,
+			col: -1,
+			row: 2,
+			val: 'A'
+		});
+		_assert_cell(cells, {
+			table: 2,
+			col: 0,
+			row: 0,
+			val: 0
+		});
+		_assert_cell(cells, {
+			table: 2,
+			col: 0,
+			row: 2,
+			val: 0
+		});
+	});
+
+	_it('overrule', function() {
+		var presses = [{
+			'type': 'pick_side', // Andrew&Alice pick left
+			'team1_left': true,
+		}];
+		presses.push({
+			'type': 'pick_server', // Andrew serves
+			'team_id': 0,
+			'player_id': 0,
+		});
+		presses.push({
+			'type': 'pick_receiver', // Bob receives
+			'team_id': 1,
+			'player_id': 0,
+		});
+		presses.push({
+			'type': 'love-all'
+		});
+		presses.push({
+			type: 'score',
+			side: 'left'
+		});
+		presses.push({
+			type: 'overrule',
+		});
+
+		var cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 0,
+			row: 0,
+			val: 0
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 1,
+			row: 0,
+			val: 1
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 1,
+			row: 1,
+			val: 'O'
+		});
+
+		presses.push({
+			type: 'score',
+			side: 'right'
+		});
+		presses.push({
+			type: 'overrule',
+		});
+		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 2,
+			row: 3,
+			val: 1
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 2,
+			row: 2,
+			val: 'O'
+		});
+
+		presses.push({
+			type: 'score',
+			side: 'left'
+		});
+		presses.push({
+			type: 'referee',  // to ask how overruling works
+		});
+		presses.push({
+			type: 'overrule',
+		});
+		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 3,
+			row: 1,
+			val: 2
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 3,
+			row: 0,
+			val: 'O'
+		});
+	});
+
+	_it('injuries', function() {
+		var presses = [];
+		presses.push({
+			'type': 'pick_side', // Andrew&Alice pick left
+			'team1_left': true,
+		});
+		presses.push({
+			'type': 'pick_server', // Andrew serves
+			'team_id': 0,
+			'player_id': 0,
+		});
+		presses.push({
+			'type': 'pick_receiver', // Bob receives
+			'team_id': 1,
+			'player_id': 0,
+		});
+		presses.push({
+			'type': 'love-all'
+		});
+		presses.push({
+			type: 'injury',
+			team_id: 0,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'referee',
+		});
+
+		var cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 1,
+			row: 0,
+			val: 'V'
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 2,
+			row: 0,
+			val: 'R'
+		});
+
+		presses.push({
+			type: 'injury',
+			team_id: 1,
+			player_id: 1,
+		});
+		presses.push({
+			type: 'referee',
+		});
+		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 3,
+			row: 3,
+			val: 'V'
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 4,
+			row: 3,
+			val: 'R'
+		});
+
+		presses.push({
+			type: 'injury',
+			team_id: 1,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'referee',
+		});
+		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 5,
+			row: 2,
+			val: 'V'
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 6,
+			row: 2,
+			val: 'R'
+		});
+	});
+
+	_it('yellow card', function() {
+		var base_presses = [];
+		base_presses.push({
+			'type': 'pick_side', // Andrew&Alice pick left
+			'team1_left': true,
+		});
+		base_presses.push({
+			'type': 'pick_server', // Alice serves
+			'team_id': 0,
+			'player_id': 1,
+		});
+		base_presses.push({
+			'type': 'pick_receiver', // Bob receives
+			'team_id': 1,
+			'player_id': 0,
+		});
+		base_presses.push({
+			'type': 'love-all'
+		});
+		var presses = base_presses.slice();
+		presses.push({
+			type: 'yellow-card',
+			team_id: 0,
+			player_id: 1,
+		});
+		presses.push({
+			type: 'referee',
+		});
+
+		var cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 1,
+			row: 1,
+			val: 'W'
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 2,
+			row: 1,
+			val: 'R'
+		});
+
+		presses.push({
+			type: 'yellow-card',
+			team_id: 1,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'referee',
+		});
+		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 3,
+			row: 2,
+			val: 'W'
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 4,
+			row: 2,
+			val: 'R'
+		});
+
+		presses = base_presses.slice();
+		presses.push({
+			type: 'yellow-card',
+			team_id: 0,
+			player_id: 1,
+		});
+		presses.push({
+			type: 'score',
+			side: 'left'
+		});
+		presses.push({
+			type: 'score',
+			side: 'left'
+		});
+		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 1,
+			row: 1,
+			val: 'W'
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 2,
+			row: 1,
+			val: 1
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 3,
+			row: 1,
+			val: 2
+		});
+	});
+
+	_it('referee', function() {
+		var presses = [];
+		presses.push({
+			'type': 'pick_side', // Andrew&Alice pick left
+			'team1_left': true,
+		});
+		presses.push({
+			'type': 'pick_server', // Birgit serves
+			'team_id': 1,
+			'player_id': 1,
+		});
+		presses.push({
+			'type': 'pick_receiver', // Alice receives
+			'team_id': 0,
+			'player_id': 1,
+		});
+		presses.push({
+			'type': 'love-all'
+		});
+		presses.push({
+			type: 'referee', // Because of leaking roof
+		});
+
+		var cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 1,
+			row: 1,
+			val: 'R'
+		});
+	});
+
+	_it('interruption', function() {
+		var presses = [];
+		presses.push({
+			'type': 'pick_side', // Andrew&Alice pick left
+			'team1_left': true,
+		});
+		presses.push({
+			'type': 'pick_server', // Andrew serves
+			'team_id': 0,
+			'player_id': 0,
+		});
+		presses.push({
+			'type': 'pick_receiver', // Bob receives
+			'team_id': 1,
+			'player_id': 0,
+		});
+		presses.push({
+			'type': 'love-all'
+		});
+		presses.push({
+			type: 'score',
+			side: 'right',
+		});
+		presses.push({
+			type: 'interruption',
+		});
+		presses.push({
+			type: 'referee',
+		});
+
+		var cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 1,
+			row: 3,
+			val: 1
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 2,
+			row: 1,
+			val: 'U'
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 3,
+			row: 1,
+			val: 'R'
+		});
+	});
+
+	_it('correction', function() {
+		var presses = [];
+		presses.push({
+			'type': 'pick_side', // Andrew&Alice pick left
+			'team1_left': true,
+		});
+		presses.push({
+			'type': 'pick_server', // Andrew serves
+			'team_id': 0,
+			'player_id': 0,
+		});
+		presses.push({
+			'type': 'pick_receiver', // Bob receives
+			'team_id': 1,
+			'player_id': 0,
+		});
+		presses.push({
+			'type': 'love-all'
+		});
+		presses.push({
+			type: 'score',
+			side: 'left',
+		});
+		presses.push({
+			type: 'correction',
+		});
+		presses.push({
+			type: 'referee',
+		});
+		presses.push({
+			type: 'score',
+			side: 'right',
+		});
+
+		var cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 1,
+			row: 0,
+			val: 1
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 2,
+			row: 1,
+			val: 'C'
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 3,
+			row: 1,
+			val: 'R'
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 4,
+			row: 3,
+			val: 1
+		});
+	});
+
+	_it('red card', function() {
+		var presses = [];
+		presses.push({
+			'type': 'pick_side', // Andrew&Alice pick left
+			'team1_left': true,
+		});
+		presses.push({
+			'type': 'pick_server', // Alice serves
+			'team_id': 0,
+			'player_id': 1,
+		});
+		presses.push({
+			'type': 'pick_receiver', // Bob receives
+			'team_id': 1,
+			'player_id': 0,
+		});
+		presses.push({
+			'type': 'love-all'
+		});
+		presses.push({
+			type: 'red-card',
+			team_id: 0,
+			player_id: 1,
+		});
+		presses.push({
+			type: 'referee',
+		});
+		presses.push({
+			type: 'red-card',
+			team_id: 0,
+			player_id: 0,
+		});
+
+		var cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 1,
+			row: 1,
+			val: 'F'
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 1,
+			row: 3,
+			val: 1
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 2,
+			row: 1,
+			val: 'R'
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 3,
+			row: 0,
+			val: 'F'
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 3,
+			row: 3,
+			val: 2
+		});
+
+		presses.push({
+			type: 'red-card',
+			team_id: 1,
+			player_id: 1,
+		});
+		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 4,
+			row: 3,
+			val: 'F'
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 4,
+			row: 0,
+			val: 1
+		});
+	});
+
+	_it('red card in singles', function() {
+		var presses = [];
+		presses.push({
+			'type': 'pick_side', // Alice picks left
+			'team1_left': true,
+		});
+		presses.push({
+			'type': 'pick_server', // Alice serves
+			'team_id': 0,
+			'player_id': 0,
+		});
+		presses.push({
+			'type': 'love-all'
+		});
+		presses.push({
+			type: 'red-card',
+			team_id: 1,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'referee',
+		});
+		presses.push({
+			type: 'red-card',
+			team_id: 1,
+			player_id: 0,
+		});
+
+		var cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 1,
+			row: 2,
+			val: 'F'
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 1,
+			row: 0,
+			val: 1
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 2,
+			row: 2,
+			val: 'R'
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 3,
+			row: 2,
+			val: 'F'
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 3,
+			row: 0,
+			val: 2
+		});
+
+		presses.push({
+			type: 'red-card',
+			team_id: 0,
+			player_id: 0,
+		});
+		cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 4,
+			row: 0,
+			val: 'F'
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 4,
+			row: 2,
+			val: 1
+		});
+
+		presses.push({
+			type: 'red-card',
+			team_id: 1,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'referee',
+		});
+		cells = _scoresheet_cells(presses, SINGLES_SETUP);
+
+		_assert_cell(cells, {
+			table: 0,
+			col: 5,
+			row: 2,
+			val: 'F'
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 5,
+			row: 0,
+			val: 3
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 6,
+			row: 2,
+			val: 'R'
+		});
+	});
+
+	_it('retired', function() {
+		var base_presses = [];
+		base_presses.push({
+			'type': 'pick_side', // Andrew&Alice pick left
+			'team1_left': true,
+		});
+		base_presses.push({
+			'type': 'pick_server', // Andrew serves
+			'team_id': 0,
+			'player_id': 0,
+		});
+		base_presses.push({
+			'type': 'pick_receiver', // Bob receives
+			'team_id': 1,
+			'player_id': 0,
+		});
+		base_presses.push({
+			'type': 'love-all'
+		});
+		base_presses.push({
+			type: 'score',
+			side: 'left',
+		});
+
+		var presses = base_presses.slice();
+		presses.push({
+			type: 'retired',
+			team_id: 1,
+			player_id: 1,
+		});
+		var cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 2,
+			row: 3,
+			val: 'A'
+		});
+
+		presses = base_presses.slice();
+		presses.push({
+			type: 'retired',
+			team_id: 0,
+			player_id: 0,
+		});
+		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 2,
+			row: 0,
+			val: 'A'
+		});
+	});
+
+	_it('disqualified', function() {
+		var base_presses = [];
+		base_presses.push({
+			'type': 'pick_side', // Andrew&Alice pick left
+			'team1_left': true,
+		});
+		base_presses.push({
+			'type': 'pick_server', // Andrew serves
+			'team_id': 0,
+			'player_id': 0,
+		});
+		base_presses.push({
+			'type': 'pick_receiver', // Bob receives
+			'team_id': 1,
+			'player_id': 0,
+		});
+		base_presses.push({
+			'type': 'love-all'
+		});
+		base_presses.push({
+			type: 'score',
+			side: 'left',
+		});
+
+		var presses = base_presses.slice();
+		presses.push({
+			type: 'disqualified',
+			team_id: 1,
+			player_id: 0,
+		});
+		var cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 2,
+			row: 2,
+			type: 'longtext',
+			val: 'Disqualifiziert'
+		});
+
+		presses = base_presses.slice();
+		presses.push({
+			type: 'disqualified',
+			team_id: 0,
+			player_id: 1,
+		});
+		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 2,
+			row: 1,
+			type: 'longtext',
+			val: 'Disqualifiziert'
+		});
+	});	
 });
 
 

@@ -207,86 +207,120 @@ Linienrichter</span>
 	<div id="waitprogress_message"></div>
 </div>
 
-<div class="scoresheet default-invisible">
-	<div class="scoresheet_tournament_name"></div>
+<div class="scoresheet_container default-invisible">
+	<svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="scoresheet" height="210mm" width="297mm" viewBox="0 0 297 210" style="font-family: Verdana;">
+		<style>
+		text {font-size: 4px;}
+		text.small-text, text.table_name {font-size: 3px;}
+		.divider-line {stroke: #000; stroke-width: 0.2;}
+		.box {stroke: #000; stroke-width: 0.5; fill: none;}
+		.shade,.box.shaded,.table_longtext_background.shaded {fill: #d0d0d0;}
+		.scoresheet_results_circle_team1,.scoresheet_results_circle_team2 {
+			stroke: #000; stroke-width: 0.6; fill: none;
+		}
+		.dashed-line {
+			stroke: #000; stroke-width: 0.4; stroke-dasharray: 0.4, 0.4;
+		}
+		.table {
+			stroke: #000; stroke-width: 0.35; fill: none;
+		}
+		.table_line {
+			stroke: #000; stroke-width: 0.1;
+		}
+		.table_20all_dash {
+			stroke: #000; stroke-width: 0.4;
+		}
+		.table_thick-line {
+			stroke: #000; stroke-width: 0.35;
+		}
+		.table_game_result {
+			stroke: #000; stroke-width: 0.4; fill: none;
+		}
+		.table_longtext_background {
+			fill: #fff;
+			opacity: 0.75;
+		}
+		</style>
 
-	<div class="scoresheet_event_label">Event:</div>
-	<div class="scoresheet_event_name"></div>
+		<!-- top left -->
+		<text class="scoresheet_tournament_name"  font-weight="bold" x="15" y="13"></text>
+		<text class="scoresheet_event_label small-text" x="15" y="24.5">Event:</text>
+		<text class="scoresheet_event_name" x="29" y="25"></text>
+		<text class="scoresheet_match_label small-text" x="15" y="31.5">Spiel:</text>
+		<text class="scoresheet_match_name" x="29" y="32"></text>
+		<text class="scoresheet_date_label small-text" x="15" y="38.5">Datum:</text>
+		<text class="scoresheet_date_value" x="29" y="39"></text>
 
-	<div class="scoresheet_match_label">Spiel:</div>
-	<div class="scoresheet_match_name"></div>
+		<!-- left name box -->
+		<rect class="box" x="72" y="20" width="5" height="7" />
+		<rect class="box" x="77" y="20" width="59" height="21" />
+		<line class="divider-line" x1="77" x2="136" y1="27" y2="27" />
+		<line class="divider-line" x1="77" x2="136" y1="34" y2="34" />
+		<text class="scoresheet_results_team1_side" x="74.5" y="25" text-anchor="middle"></text>
+		<text class="scoresheet_results_team1_player1" x="78" y="25"></text>
+		<text class="scoresheet_results_team1_player2" x="78" y="32"></text>
+		<text class="scoresheet_results_team1_name" x="78" y="39"></text>
+		<ellipse class="scoresheet_results_circle_team1" visibility="hidden" cx="100" cy="30" rx="28" ry="13" />
 
-	<div class="scoresheet_date_label">Datum:</div>
-	<div class="scoresheet_date_value"></div>
+		<!-- score box -->
+		<text class="small-text" x="148.5" y="19" text-anchor="middle">Satzergebnis</text>
+		<rect class="box" x="138" width="21" y="20" height="21" />
+		<line class="divider-line" x1="138" x2="159" y1="27" y2="27" />
+		<line class="divider-line" x1="138" x2="159" y1="34" y2="34" />
+		<text x="148.5" y="25" text-anchor="middle">:</text>
+		<text x="148.5" y="32" text-anchor="middle">:</text>
+		<text x="148.5" y="39" text-anchor="middle">:</text>
 
-	<table class="scoresheet_results">
-	<tbody>
-	<tr class="scoresheet_results_top">
-		<td class="scoresheet_results_circle_team1_container" colspan="3"><div class="scoresheet_results_circle default-invisible"></div></td>
-		<td class="scoresheet_results_top_label" colspan="3">Satzergebnis</td>
-		<td class="scoresheet_results_circle_team2_container" colspan="3"><div class="scoresheet_results_circle default-invisible"></div></td>
-	<tr>
-		<td class="scoresheet_results_team1_side"></td>
-		<td class="scoresheet_results_team1_player1"></td>
-		<td class="scoresheet_results_spacing"></td>
-		<td class="scoresheet_results_team1_score1"></td>
-		<td class="scoresheet_results_vs">:</td>
-		<td class="scoresheet_results_team2_score1"></td>
-		<td class="scoresheet_results_spacing"></td>
-		<td class="scoresheet_results_team2_player1 scoresheet_shaded"></td>
-		<td class="scoresheet_results_team2_side scoresheet_shaded"></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td class="scoresheet_results_team1_player2"></td>
-		<td class="scoresheet_results_spacing"></td>
-		<td class="scoresheet_results_team1_score2"></td>
-		<td class="scoresheet_results_vs">:</td>
-		<td class="scoresheet_results_team2_score2"></td>
-		<td class="scoresheet_results_spacing"></td>
-		<td class="scoresheet_results_team2_player2 scoresheet_shaded"></td>
-		<td></td>
-	</tr>
-	<tr>
-		<td></td>
-		<td class="scoresheet_results_team1_name"></td>
-		<td class="scoresheet_results_spacing"></td>
-		<td class="scoresheet_results_team1_score3"></td>
-		<td class="scoresheet_results_vs">:</td>
-		<td class="scoresheet_results_team2_score3"></td>
-		<td class="scoresheet_results_spacing"></td>
-		<td class="scoresheet_results_team2_name scoresheet_shaded"></td>
-		<td></td>
-	</tr>
-	</tbody>
-	</table>
+		<text class="scoresheet_results_team1_score1" x="143" y="25" text-anchor="middle"></text>
+		<text class="scoresheet_results_team1_score2" x="143" y="32" text-anchor="middle"></text>
+		<text class="scoresheet_results_team1_score3" x="143" y="39" text-anchor="middle"></text>
+		<text class="scoresheet_results_team2_score1" x="154" y="25" text-anchor="middle"></text>
+		<text class="scoresheet_results_team2_score2" x="154" y="32" text-anchor="middle"></text>
+		<text class="scoresheet_results_team2_score3" x="154" y="39" text-anchor="middle"></text>
 
-	<div class="scoresheet_court_label">Feld:</div>
-	<div class="scoresheet_court_name"><span></span>&nbsp;</div>
+		<!-- right name box -->
+		<rect class="box shaded" x="220" y="20" width="5" height="7" />
+		<rect class="box shaded" x="161" y="20" width="59" height="21" />
+		<line class="divider-line" x1="161" x2="220" y1="27" y2="27" />
+		<line class="divider-line" x1="161" x2="220" y1="34" y2="34" />
+		<text class="scoresheet_results_team2_side" x="222.5" y="25" text-anchor="middle"></text>
+		<text class="scoresheet_results_team2_player1" x="162" y="25"></text>
+		<text class="scoresheet_results_team2_player2" x="162" y="32"></text>
+		<text class="scoresheet_results_team2_name" x="162" y="39"></text>
+		<ellipse class="scoresheet_results_circle_team2" visibility="hidden" cx="189" cy="30" rx="28" ry="13" />
 
-	<div class="scoresheet_umpire_label">Schiedsrichter:</div>
-	<div class="scoresheet_umpire_name"><span></span>&nbsp;</div>
+		<!-- top right information about match -->
+		<text class="small-text" x="226" y="15">Feld:</text>
+		<line class="dashed-line" x1="251" x2="282" y1="15" y2="15"/>
+		<text class="scoresheet_court_name" x="252" y="14"></text>
+		<text class="small-text" x="226" y="22">Schiedsrichter:</text>
+		<line class="dashed-line" x1="251" x2="282" y1="22" y2="22"/>
+		<text class="scoresheet_umpire_name" x="252" y="21"></text>
+		<text class="small-text" x="226" y="29">Aufschlagrichter:</text>
+		<line class="dashed-line" x1="251" x2="282" y1="29" y2="29"/>
+		<text class="scoresheet_servicejudge_name" x="252" y="28"></text>
+		<text class="small-text" x="226" y="36">Beginn:</text>
+		<line class="dashed-line" x1="251" x2="282" y1="36" y2="36"/>
+		<text class="scoresheet_begin_value" x="252" y="35"></text>
+		<text class="small-text" x="226" y="43">Ende:</text>
+		<line class="dashed-line" x1="251" x2="282" y1="43" y2="43"/>
+		<text class="scoresheet_end_value" x="252" y="42"></text>
+		<text class="small-text" x="226" y="50">Dauer:</text>
+		<line class="dashed-line" x1="251" x2="282" y1="50" y2="50"/>
+		<text class="scoresheet_duration_value" x="252" y="49"></text>
 
-	<div class="scoresheet_servicejudge_label">Aufschlagrichter:</div>
-	<div class="scoresheet_servicejudge_name"><span></span>&nbsp;</div>
+		<g class="scoresheet_shuttle_counter">
+			<text class="small-text" x="202" y="50" text-anchor="end">Federbälle:</text>
+			<text class="scoresheet_shuttle_counter_value" x="205" y="50"></text>
+		</g>
 
-	<div class="scoresheet_begin_label">Beginn:</div>
-	<div class="scoresheet_begin_value"><span></span>&nbsp;</div>
+		<g class="scoresheet_table_container"></g>
 
-	<div class="scoresheet_end_label">Ende:</div>
-	<div class="scoresheet_end_value"><span></span>&nbsp;</div>
-
-	<div class="scoresheet_duration_label">Dauer:</div>
-	<div class="scoresheet_duration_value"><span></span>&nbsp;</div>
-
-	<div class="scoresheet_shuttle_counter"><span class="scoresheet_shuttle_counter_label">Shuttles:</span><span class="scoresheet_shuttle_counter_value"></span></div>
-
-	<div class="scoresheet_table_container"></div>
-
-	<div class="scoresheet_signature_row">
-		<span>Schiedsrichter:</span><span class="signature_line"></span>
-		<span>Referee:</span><span class="signature_line"></span>
-	</div>
+		<text class="small-text" x="118" y="200">Schiedsrichter:</text>
+		<line class="dashed-line" x1="142" x2="202" y1="200" y2="200" />
+		<text class="small-text" x="207" y="200">Referee:</text>
+		<line class="dashed-line" x1="222" x2="282" y1="200" y2="200" />
+	</svg>
 </div>
 
 <script src="libs/jquery.min.js"></script>
