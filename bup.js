@@ -887,7 +887,7 @@ function scoresheet_show() {
 			ellipse.setAttribute('ry', ry);
 			t.appendChild(ellipse);
 
-			var ANGLE = 10;
+			var ANGLE = 7;
 			var line = document.createElementNS("http://www.w3.org/2000/svg", 'line');
 			line.setAttribute('class', 'table_game_result');
 			line.setAttribute('x1', cx - rx * Math.cos(ANGLE * Math.PI / 180));
