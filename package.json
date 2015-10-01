@@ -14,7 +14,8 @@
 	},
 	"devDependencies": {
 		"jsdom": "<4",
-		"mocha": "*"
+		"mocha": "*",
+		"underscore": "*"
 	},
 	"private": true
 }
