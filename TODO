@@ -1,11 +1,4 @@
 generate umpire scoresheet to print
-	align score box
-		text
-		:
-		lines+box
-
-	style (multiple iterations via inkscape)
-	remove fancy attributes (->PDF)
 	button to print
 	generate PDF
 	uncomment TODOs (printing...)
