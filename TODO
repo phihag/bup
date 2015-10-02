@@ -13,7 +13,6 @@ LICENSE
 CONTRIBUTING (-> assign copyright form)
 better fullscreen flow (force fullscreen as a setting / as a hash)
 
-settings -> scoresheet -> Esc  breaks settings escape
 C: rules in RTTO 8.8
 	select side in dialog
 	add that in scoresheet (and tests ...)

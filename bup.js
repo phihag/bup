@@ -97,7 +97,9 @@ function _svg_align_hcenter(text, hcenter) {
 var _ui_esc_stack = [];
 function ui_esc_stack_push(cancel) {
 	_ui_esc_stack.push(cancel);
-	Mousetrap.bind('escape', cancel);
+	Mousetrap.bind('escape', function() {
+		cancel();
+	});
 }
 
 function ui_esc_stack_pop() {
@@ -110,7 +112,9 @@ function ui_esc_stack_pop() {
 	Mousetrap.unbind('escape');
 	var cancel = _ui_esc_stack[_ui_esc_stack.length - 1];
 	if (_ui_esc_stack.length > 0) {
-		Mousetrap.bind('escape', cancel);
+		Mousetrap.bind('escape', function() {
+			cancel();
+		});
 	}
 }
 
@@ -695,9 +699,7 @@ function scoresheet_show() {
 	}
 	$('#game').hide();
 	$('.scoresheet_container').show();
-	Mousetrap.bind('escape', function() {
-		scoresheet_hide();
-	});
+	ui_esc_stack_push(scoresheet_hide);
 
 	// Set text fields
 	$('.scoresheet_tournament_name').text(state.setup.tournament_name);
@@ -968,6 +970,7 @@ function scoresheet_show() {
 }
 
 function scoresheet_hide() {
+	ui_esc_stack_pop();
 	$('.scoresheet_container').hide();
 	$('#game').show();
 	if ($('.scoresheet_container').attr('data-settings-visible') === 'true') {
