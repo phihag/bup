@@ -11,6 +11,7 @@ shuttle counter
 	button
 	functionality
 	show in scoresheet
+	test that no value in scoresheet if unconfigured
 
 add badmintonticker.de support
 read current result from badmintonticker
@@ -116,3 +117,5 @@ display mode for multiple courts (via WebRTC)
 WebRTC bootstrapping without Internet (QR code? UDP multicast?)
 write more automated tests for scoresheet generation (singles..., 20all dash, disqualified etc.)
 add test for retired-then-referee
+icons for scoresheet butotns
+scoresheet button after game end

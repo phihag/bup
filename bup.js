@@ -1864,7 +1864,10 @@ function ui_remove_timer() {
 
 function ui_init() {
 	$('.scoresheet_button').on('click', scoresheet_show);
-	// $('.scoresheet').on('click', scoresheet_hide); TODO
+	$('.scoresheet_button_back').on('click', scoresheet_hide);
+	$('.scoresheet_button_print').on('click', function() {
+		window.print();
+	});
 
 	$('#setup_manual_form [name="gametype"]').on('change', function() {
 		var new_type = $('#setup_manual_form [name="gametype"]:checked').val();

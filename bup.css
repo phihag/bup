@@ -2,6 +2,7 @@ html, body {
 	background: #f7f7fa;
 	font-size: 16px;
 	margin: 0; padding: 0;
+	width: 100%; height: 100%;
 }
 html, body, button {
 	font-family: 'Droid Sans';
@@ -425,27 +426,57 @@ span.score_announcement+span.score_announcement {
 	transform: translate(-50%, -50%);
 }
 
+.scoresheet_container>.scoresheet_buttons {
+	position: absolute;
+	font-size: 3vw;
+	z-index: 100;
+	bottom: 0.1vmin;
+	padding: 0 0.1vmin;
+	left: 0; right: 0;
+}
+.scoresheet_container>.scoresheet_buttons>button {
+	margin: 0;
+	font-size: inherit;
+	padding: 0.1em 0.1em;
+	min-width: 7em;
+	opacity: 0.9;
+}
+.scoresheet_container>.scoresheet_buttons>button+button {
+	margin-left: 2vw;
+}
+.scoresheet_button_back {
+	display: block;
+	float: right;
+}
 
+@media tv,projection,handheld,screen {
+	.scoresheet {
+		position: absolute;
+		left: 0; top: 0;
+		width: 100vw;
+		height: 70.71067811865474vw; /* 100 / √2  (ratio of DIN A) */
+		max-width: 141.4213562373095vh;
+		max-height: 100vh;
+	}
+}
 @media print{
 	@page {
 		size: landscape; size: landscape A4;
+		margin: 0;
 	}
 
 	body,html {
 		background: #ffffff;
 	}
-}
-.scoresheet_container {
-	background: #ffffff;
-	position: absolute;
-	left: 0; top: 0;
-	width: 100vw;
-	height: 70.71067811865474vw; /* 100 / √2  (ratio of DIN A) */
-	max-width: 141.4213562373095vh;
-	max-height: 100vh;
-}
-.scoresheet {
-	position: absolute;
-	top: 0; left: 0;
-	width: 100%; height: 100%;
+
+	.scoresheet {
+		position: absolute;
+		top: 0; left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.only-screen {
+		display: none;
+	}
 }
