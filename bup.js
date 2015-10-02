@@ -952,6 +952,10 @@ function scoresheet_hide() {
 	}
 }
 
+function jspdf_loaded() {
+	document.querySelector('.scoresheet_button_pdf').removeAttribute('disabled');
+}
+
 function demo_match_start() {
 	var setup = {
 		counting: '3x21',
@@ -1860,6 +1864,12 @@ function ui_remove_timer() {
 }
 
 function ui_init() {
+	if (typeof jsPDFx != 'undefined') {
+		jspdf_loaded();
+	} else {
+		$('#script_jspdf').on('load', jspdf_loaded);
+	}
+
 	$('.scoresheet_button').on('click', scoresheet_show);
 	$('.scoresheet_button_back').on('click', scoresheet_hide);
 	$('.scoresheet_button_print').on('click', function() {
