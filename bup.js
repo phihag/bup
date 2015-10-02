@@ -1218,8 +1218,9 @@ function pronounciation(s) {
 	if (!s.game.finished && (s.game.score[0] !== null)) {
 		var first_score = s.game.score[s.game.team1_serving ? 0 : 1];
 		var second_score = s.game.score[s.game.team1_serving ? 1 : 0];
-		var score_str = (first_score == second_score) ? (first_score + ' beide') : (first_score + '-' + second_score);
-		return (s.game.service_over ? 'Aufschlagwechsel. ' : '') + score_str;
+		var point_str = (s.game.gamepoint ? ' Satzpunkt' : (s.game.matchpoint ? 'Spielpunkt' : ''))
+		var score_str = (first_score == second_score) ? (first_score + point_str + ' beide') : (first_score + (point_str ? (point_str + ' ') : '-') + second_score);
+		return (s.game.service_over ? 'Aufschlagwechsel. ' : '') + score_str + (s.game.interval ? ' Pause' : '');
 	}
 
 	return null;

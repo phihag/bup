@@ -10,6 +10,7 @@ var DOUBLES_TEAM_SETUP = test_utils.DOUBLES_TEAM_SETUP;
 var SINGLES_SETUP = test_utils.SINGLES_SETUP;
 var SINGLES_TEAM_SETUP = test_utils.SINGLES_TEAM_SETUP;
 var state_after = test_utils.state_after;
+var press_score = test_utils.press_score;
 
 var bup = require('../bup.js');
 
@@ -512,6 +513,71 @@ _describe('pronounciation', function() {
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(bup.pronounciation(s), 'Aufschlagwechsel. 5 beide');
+	});
+
+	_it('Pause / game point', function() {
+		var presses = [{
+			type: 'pick_side', // Alice picks right
+			team1_left: true,
+		}, {
+			type: 'pick_server', // Bob serves
+			team_id: 1,
+			player_id: 0,
+		}, {
+			type: 'love-all'
+		}];
+		press_score(presses, 9, 9);
+		presses.push({
+			'type': 'score',
+			'side': 'left'
+		});
+		presses.push({
+			'type': 'score',
+			'side': 'left'
+		});
+		var s = state_after(presses, SINGLES_SETUP);
+		assert.equal(bup.pronounciation(s), '11-9 Pause');
+
+		press_score(presses, 8, 9);
+		presses.push({
+			'type': 'score',
+			'side': 'right'
+		});
+		var alt_presses = presses.slice();
+		presses.push({
+			'type': 'score',
+			'side': 'left'
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.equal(bup.pronounciation(s), 'Aufschlagwechsel. 20 Satzpunkt 19');
+
+		alt_presses.push({
+			'type': 'score',
+			'side': 'right'
+		});
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.equal(bup.pronounciation(s), '20 Satzpunkt 19');
+
+		presses.push({
+			'type': 'score',
+			'side': 'right'
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.equal(bup.pronounciation(s), 'Aufschlagwechsel. 20 beide');
+
+		presses.push({
+			'type': 'score',
+			'side': 'right'
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.equal(bup.pronounciation(s), '21-20');
+
+		presses.push({
+			'type': 'score',
+			'side': 'left'
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.equal(bup.pronounciation(s), 'Aufschlagwechsel. 21 beide');
 	});
 
 });
