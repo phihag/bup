@@ -61,6 +61,10 @@ function _get_datetime_str(d) {
 	return _get_date_str(d) + ' ' + _get_time_str(d);
 }
 
+function _iso8601(d) {
+	return d.getFullYear() + '-' + _add_zeroes(d.getMonth()+1) + '-' + _add_zeroes(d.getDate());
+}
+
 function _human_date_str(d) {
 	var WEEKDAYS = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
 	return WEEKDAYS[d.getDay()] + ' ' + _get_date_str(d);
@@ -950,6 +954,26 @@ function scoresheet_hide() {
 	if ($('.scoresheet_container').attr('data-settings-visible') === 'true') {
 		$('#settings_wrapper').show();
 	}
+}
+
+function _svg_to_pdf(svg, pdf) {
+	// TODO render the PDF
+}
+
+function scoresheet_pdf() {
+	var doc = new jsPDF('landscape', 'mm', 'a4');
+	_svg_to_pdf(document.getElementsByClassName('scoresheet')[0], doc);
+
+	var filename = _iso8601(new Date(state.metadata.start));
+	if (state.setup.match_name) {
+		filename += ' ' + state.setup.match_name;
+	}
+	if (state.setup.is_doubles) {
+		filename += ' ' + state.setup.teams[0].players[0].name + ',' + state.setup.teams[0].players[1].name + ' vs ' + state.setup.teams[1].players[0].name + ',' + state.setup.teams[1].players[1].name;
+	} else {
+		match_name = state.setup.teams[0].players[0].name + ' vs ' + state.setup.teams[1].players[0].name;
+	}
+	doc.save(filename + '.pdf');
 }
 
 function jspdf_loaded() {
@@ -1871,6 +1895,7 @@ function ui_init() {
 	}
 
 	$('.scoresheet_button').on('click', scoresheet_show);
+	$('.scoresheet_button_pdf').on('click', scoresheet_pdf);
 	$('.scoresheet_button_back').on('click', scoresheet_hide);
 	$('.scoresheet_button_print').on('click', function() {
 		window.print();

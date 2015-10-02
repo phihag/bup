@@ -1,6 +1,11 @@
 generate umpire scoresheet to print
-	button to print
 	generate PDF
+		determine filename
+		render helper
+		render lines
+		render rects (incl. fill)
+		render rest
+
 	uncomment TODOs (printing...)
 
 fullscreen setting, ask on load
