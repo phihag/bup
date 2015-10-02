@@ -937,13 +937,11 @@ function scoresheet_show() {
 		default:
 			var text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
 			text.appendChild(document.createTextNode(cell.val));
+			text.setAttribute('x', cols_left + cell.col * cell_width + cell_width / 2);
+			text.setAttribute('text-anchor', 'middle');
 			t.appendChild(text);
 
 			_svg_align_vcenter(text, table_top + cell.row * cell_height + cell_height / 2);
-			var bb = text.getBBox();
-			text.setAttribute('x', (
-				cols_left + cell.col * cell_width + Math.max(0, (cell_width - bb.width) / 2)
-			));
 		}
 	});
 }
@@ -958,11 +956,132 @@ function scoresheet_hide() {
 
 function _svg_to_pdf(svg, pdf) {
 	// TODO render the PDF
+	var nodes = svg.querySelectorAll('*');
+	for (var i = 0;i < nodes.length;i++) {
+		var n = nodes[i];
+		var style = window.getComputedStyle(n);
+
+		var stroke_width = parseFloat(style['stroke-width']);
+		pdf.setLineWidth(stroke_width);
+		var m = style['fill'].match(/^rgb\(([0-9]+),\s*([0-9]+),\s*([0-9]+)\)$/);
+		if (m) {
+			var r = parseInt(m[1], 10);
+			var g = parseInt(m[2], 10);
+			var b = parseInt(m[3], 10);
+			pdf.setFillColor(r, g, b);
+		}
+
+		var mode = '';
+		if (style.fill != 'none') {
+			mode += 'F';
+		}
+		if ((style.stroke != 'none') && (stroke_width > 0)) {
+			mode += 'D';
+		}
+
+		switch (n.tagName.toLowerCase()) {
+		case 'line':
+			var x1 = parseFloat(n.getAttribute('x1'));
+			var x2 = parseFloat(n.getAttribute('x2'));
+			var y1 = parseFloat(n.getAttribute('y1'));
+			var y2 = parseFloat(n.getAttribute('y2'));
+
+			m = style['stroke-dasharray'].match(/^([0-9.]+)\s*px,\s*([0-9.]+)\s*px$/);
+			if (m) {
+				var dash_len = parseFloat(m[1]);
+				var gap_len = parseFloat(m[2]);
+				var x = x1;
+				var y = y1;
+
+				// Normalize vector
+				var vector_len = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+				var dx = (x2 - x1) / vector_len;
+				var dy = (y2 - y1) / vector_len;
+				var remaining_len = vector_len;
+				while (remaining_len > 0) {
+					dash_len = Math.min(dash_len, remaining_len);
+					var next_x = x + dx * dash_len;
+					var next_y = y + dy * dash_len;
+					pdf.line(x, y, next_x, next_y);
+					remaining_len -= dash_len;
+					x = next_x + dx * gap_len;
+					y = next_y + dy * gap_len;
+					remaining_len -= gap_len;
+				}
+			} else {
+				pdf.line(x1, y1, x2, y2);
+			}
+			break;
+		case 'rect':
+			var x = parseFloat(n.getAttribute('x'));
+			var y = parseFloat(n.getAttribute('y'));
+			var width = parseFloat(n.getAttribute('width'));
+			var height = parseFloat(n.getAttribute('height'));
+			pdf.rect(x, y, width, height, mode);
+			break;
+		case 'ellipse':
+			var cx = parseFloat(n.getAttribute('cx'));
+			var cy = parseFloat(n.getAttribute('cy'));
+			var rx = parseFloat(n.getAttribute('rx'));
+			var ry = parseFloat(n.getAttribute('ry'));
+			pdf.ellipse(cx, cy, rx, ry, mode);
+			break;
+		case 'text':
+			var x = parseFloat(n.getAttribute('x'));
+			var y = parseFloat(n.getAttribute('y'));
+
+			switch (style['text-anchor']) {
+			case 'middle':
+				var bb = n.getBBox();
+				x -= bb.width / 2;
+				break;
+			case 'end':
+				var bb = n.getBBox();
+				x -= bb.width;
+				break;
+			}
+
+			pdf.setFontStyle((style['font-weight'] == 'bold') ? 'bold' : 'normal');
+			pdf.setFontSize(72 / 25.4 * parseFloat(style['font-size']));
+
+			var str = $(n).text();
+			pdf.text(x, y, str);
+			break;
+		}
+	}
+
+	var title = _get_date_str(new Date(state.metadata.start));
+	if (state.setup.match_name) {
+		title += ' ' + state.setup.match_name;
+	}
+	if (state.setup.is_doubles) {
+		title += ' ' + state.setup.teams[0].players[0].name + '/' + state.setup.teams[0].players[1].name + ' vs ' + state.setup.teams[1].players[0].name + '/' + state.setup.teams[1].players[1].name;
+	} else {
+		title += state.setup.teams[0].players[0].name + ' vs ' + state.setup.teams[1].players[0].name;
+	}
+	var props = {
+		title: title,
+		subject: 'Schiedsrichterzettel',
+		creator: 'bup (https://github.com/phihag/bup/)'
+	};
+	if (state.setup.umpire && state.setup.umpire.name) {
+		props.author = state.setup.umpire.name;
+	}
+	pdf.setProperties(props);
 }
 
 function scoresheet_pdf() {
-	var doc = new jsPDF('landscape', 'mm', 'a4');
-	_svg_to_pdf(document.getElementsByClassName('scoresheet')[0], doc);
+	var pdf = new jsPDF({
+		orientation: 'landscape',
+		unit: 'mm',
+		format: 'a4',
+		autoAddFonts: false,
+	});
+	pdf.addFont('Helvetica', 'helvetica', 'normal');
+	pdf.addFont('Helvetica-Bold', 'helvetica', 'bold');
+	pdf.setFont('helvetica', 'normal');
+
+	_svg_to_pdf(document.getElementsByClassName('scoresheet')[0], pdf);
 
 	var filename = _iso8601(new Date(state.metadata.start));
 	if (state.setup.match_name) {
@@ -971,9 +1090,9 @@ function scoresheet_pdf() {
 	if (state.setup.is_doubles) {
 		filename += ' ' + state.setup.teams[0].players[0].name + ',' + state.setup.teams[0].players[1].name + ' vs ' + state.setup.teams[1].players[0].name + ',' + state.setup.teams[1].players[1].name;
 	} else {
-		match_name = state.setup.teams[0].players[0].name + ' vs ' + state.setup.teams[1].players[0].name;
+		filename += state.setup.teams[0].players[0].name + ' vs ' + state.setup.teams[1].players[0].name;
 	}
-	doc.save(filename + '.pdf');
+	pdf.save(filename + '.pdf');
 }
 
 function jspdf_loaded() {
@@ -1308,6 +1427,9 @@ function calc_press(s, press) {
 		s.game.service_over = null;
 		s.timer = false;
 		break;
+	case 'shuttle':
+		s.match.shuttle_count++;
+		break;
 	default:
 		throw new Error('Unsupported press type ' + press.type);
 	}
@@ -1322,7 +1444,7 @@ function _init_calc(s) {
 		finish_confirmed: false,
 		carded: [false, false],
 		team1_won: null,
-		shuttle_count: 42,
+		shuttle_count: 0,
 	};
 
 	switch (s.setup.counting) {
@@ -1433,6 +1555,8 @@ function render(s) {
 
 	$('#court_match_name>span').text(s.setup.match_name ? s.setup.match_name : '');
 	$('#court_court_name>span').text(s.setup.court_name ? 'Feld ' + s.setup.court_name : '');
+
+	$('#shuttle_counter_value').text(s.match.shuttle_count);
 
 	if (s.court.left_serving == null) {
 		$('#court_arrow').hide();
@@ -2066,6 +2190,11 @@ function ui_init() {
 			'type': 'overrule',
 		});
 		ui_hide_exception_dialog();
+	});
+	$('#button_shuttle').on('click', function() {
+		on_press({
+			'type': 'shuttle',
+		});
 	});
 	$('#exception_yellow').on('click', function() {
 		ui_hide_exception_dialog();

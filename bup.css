@@ -44,7 +44,7 @@ html, body, button {
 	position: relative;
 	width: 132vh;
 	height: 60vh;
-	max-width: 100vw;
+	max-width: 100vw; max-width: calc(100vw - 2px); /* border */
 	max-height: 45.45vw;
 	margin: 0 auto;
 
@@ -125,7 +125,7 @@ html, body, button {
 	background-image: url(static/icons/court_arrow.svg);
 	background-size: 100%;
 	background-repeat: no-repeat;
-	z-index: 101;
+	z-index: 50;
 }
 
 .pick_dialog, .exception_dialog {
@@ -202,7 +202,7 @@ span.score_announcement+span.score_announcement {
 .score_finished-game td.score, .score_future-game td.score, .score_current-game td.score {
 	vertical-align: middle;
 	padding: 0 2vh;
-	min-width: 2em;
+	min-width: 1.6em;
 	color: #444444;
 }
 .score_finished-game, .score_future-game {
@@ -233,33 +233,40 @@ span.score_announcement+span.score_announcement {
 	text-align: left;
 }
 .score_current-game>td.score_left {
+	padding-left: 0;
 	padding-right: 3vh;
 }
 .score_current-game>td.score_right {
 	padding-left: 3vh;
+	padding-right: 0;
 }
 
 .half-invisible {
 	opacity: 0.3;
 }
 .nearly-invisible {
-	opacity: 0.05;
+	opacity: 0.02;
 }
 
-.image-button {
-	width: 12vmin;
-	height: 12vmin;
-	min-width: 10vh;
-	min-height: 10vh;
-	position: relative;
-}
-.image-button.textsize-button {
+.textsize-button {
 	font-size: inherit;
 	width: 1em;
 	height: 1em;
 	min-width: 1em;
 	min-height: 1em;
 	margin-left: 0.5em;
+}
+
+.topleft_buttons>*,.topright_buttons>* {
+	width: 12vmin;
+	height: 12vmin;
+	min-width: 10vh;
+	min-height: 10vh;
+	position: relative;
+	vertical-align: top;
+}
+.image-button {
+	position: relative;
 }
 .image-button>span {
 	position: absolute;
@@ -278,19 +285,31 @@ span.score_announcement+span.score_announcement {
 	float: right;
 }
 
-.topleft_buttons>button+button, .topright_buttons>button+button {
+.topleft_buttons>*:not(:first-child), .topright_buttons>*:not(:first-child) {
 	margin-left: 7vh;
 }
 @media all and (orientation: portrait) {
-	.topleft_buttons>button+button, .topright_buttons>button+button {
+	.topleft_buttons>*:not(:first-child), .topright_buttons>*:not(:first-child) {
 		margin-left: 3vh;
 	}
 }
+#shuttle_counter_value {
+	font-size: 6vmin;
+	position: absolute;
+	top: 50%; transform: translate(0, -50%);
+	right: 47%;
+	text-align: right;
+}
+#button_redo {
+	position: absolute;
+	left: 30vmin;
+	top: 0;
+}
 
-.topleft_buttons>button {
+.topleft_buttons>* {
 	margin: 1vh 0 0 1vh;
 }
-.topright_buttons>button {
+.topright_buttons>* {
 	margin: 1vh 1vh 0 0;
 }
 #button_settings>span {
@@ -305,6 +324,12 @@ span.score_announcement+span.score_announcement {
 #button_redo>span {
 	background-image: url(static/icons/redo.svg);
 }
+#button_shuttle>span {
+	background-image: url(static/icons/shuttle-button.svg);
+}
+
+
+
 
 .modal-wrapper {
 	position: fixed;

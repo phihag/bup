@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 	<title>Badminton Umpire Panel</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 	<meta name="mobile-web-app-capable" content="yes">
 	<link rel="stylesheet" href="bup.css" />
 </head>
@@ -12,11 +12,15 @@
 <div id="game">
 <div class="topleft_buttons">
 <button id="button_undo" title="Rückgängig" disabled="disabled" class="image-button half-invisible"><span></span></button>
+<button id="button_exception" title="Situation" class="image-button"><span></span></button>
 <button id="button_redo" title="Wiederholen" disabled="disabled" class="image-button nearly-invisible"><span></span></button>
 </div>
 
 <div class="topright_buttons">
-<button id="button_exception" title="Situation" class="image-button"><span></span></button>
+
+<button id="button_shuttle" title="Federball +1" class="image-button">
+	<div id="shuttle_counter_value"></div>
+	<span></span></button>
 <button id="button_settings" title="Konfiguration" class="image-button"><span></span></button>
 </div>
 
@@ -208,7 +212,7 @@ Linienrichter</span>
 </div>
 
 <div class="scoresheet_container default-invisible">
-	<svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="scoresheet" viewBox="0 0 297 210" style="font-family: Verdana;">
+	<svg xmlns="http://www.w3.org/2000/svg" version="1.1" class="scoresheet" viewBox="0 0 297 210" style="font-family: Helvetica;">
 		<style>
 		text {font-size: 4px;}
 		text.small-text, text.table_name {font-size: 3px;}
@@ -290,28 +294,28 @@ Linienrichter</span>
 		<ellipse class="scoresheet_results_circle_team2" visibility="hidden" cx="189" cy="30" rx="28" ry="13" />
 
 		<!-- top right information about match -->
-		<text class="small-text" x="226" y="15">Feld:</text>
-		<line class="dashed-line" x1="253" x2="282" y1="15.5" y2="15.5"/>
-		<text class="scoresheet_court_name" x="254" y="14"></text>
-		<text class="small-text" x="226" y="22">Schiedsrichter:</text>
-		<line class="dashed-line" x1="253" x2="282" y1="22.5" y2="22.5"/>
-		<text class="scoresheet_umpire_name" x="254" y="21"></text>
-		<text class="small-text" x="226" y="29">Aufschlagrichter:</text>
-		<line class="dashed-line" x1="253" x2="282" y1="29.5" y2="29.5"/>
-		<text class="scoresheet_servicejudge_name" x="254" y="28"></text>
-		<text class="small-text" x="226" y="36">Beginn:</text>
-		<line class="dashed-line" x1="253" x2="282" y1="36.5" y2="36.5"/>
-		<text class="scoresheet_begin_value" x="254" y="35"></text>
-		<text class="small-text" x="226" y="43">Ende:</text>
-		<line class="dashed-line" x1="253" x2="282" y1="43.5" y2="43.5"/>
-		<text class="scoresheet_end_value" x="254" y="42"></text>
-		<text class="small-text" x="226" y="50">Dauer:</text>
-		<line class="dashed-line" x1="253" x2="282" y1="50.5" y2="50.5"/>
-		<text class="scoresheet_duration_value" x="254" y="49"></text>
+		<text class="small-text" x="228" y="15">Feld:</text>
+		<line class="dashed-line" x1="252" x2="282" y1="15.5" y2="15.5"/>
+		<text class="scoresheet_court_name" x="253" y="14"></text>
+		<text class="small-text" x="228" y="22">Schiedsrichter:</text>
+		<line class="dashed-line" x1="252" x2="282" y1="22.5" y2="22.5"/>
+		<text class="scoresheet_umpire_name" x="253" y="21"></text>
+		<text class="small-text" x="228" y="29">Aufschlagrichter:</text>
+		<line class="dashed-line" x1="252" x2="282" y1="29.5" y2="29.5"/>
+		<text class="scoresheet_servicejudge_name" x="253" y="28"></text>
+		<text class="small-text" x="228" y="36">Beginn:</text>
+		<line class="dashed-line" x1="252" x2="282" y1="36.5" y2="36.5"/>
+		<text class="scoresheet_begin_value" x="253" y="35"></text>
+		<text class="small-text" x="228" y="43">Ende:</text>
+		<line class="dashed-line" x1="252" x2="282" y1="43.5" y2="43.5"/>
+		<text class="scoresheet_end_value" x="253" y="42"></text>
+		<text class="small-text" x="228" y="50">Dauer:</text>
+		<line class="dashed-line" x1="252" x2="282" y1="50.5" y2="50.5"/>
+		<text class="scoresheet_duration_value" x="253" y="49"></text>
 
 		<g class="scoresheet_shuttle_counter">
 			<text class="small-text" x="202" y="50" text-anchor="end">Federbälle:</text>
-			<text class="scoresheet_shuttle_counter_value" x="205" y="50"></text>
+			<text class="scoresheet_shuttle_counter_value" x="205" y="50.5"></text>
 		</g>
 
 		<g class="scoresheet_table_container"></g>

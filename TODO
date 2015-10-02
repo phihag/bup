@@ -1,30 +1,22 @@
-generate umpire scoresheet to print
-	generate PDF
-		determine filename
-		render helper
-		render lines
-		render rects (incl. fill)
-		render rest
-
-	uncomment TODOs (printing...)
-
-fullscreen setting, ask on load
-&fs in hash to override fullscreen setting
-
 shuttle counter
-	display
-	button
 	functionality
 	show in scoresheet
 	test that no value in scoresheet if unconfigured
 
-add badmintonticker.de support
-read current result from badmintonticker
+better design for settings on mobiles
+better design for exceptions on mobiles
+
+fullscreen setting, ask on load
+&fs in hash to override fullscreen setting
 
 embed in CourtSpot
 Allow config to be downloaded from CourtSpot
 Write results to CourtSpot
 
+add badmintonticker.de support
+read current result from badmintonticker
+
+add pronounciation
 LICENSE
 CONTRIBUTING (-> assign copyright form)
 better fullscreen flow (force fullscreen as a setting / as a hash)
@@ -33,6 +25,7 @@ settings -> scoresheet -> Esc  breaks settings escape
 C: rules in RTTO 8.8
 	select side in dialog
 	add that in scoresheet (and tests ...)
+
 
 make dist (copy into dist/ subfolder, minify css/js, combine js)
 make upload (upload based on dist)
@@ -124,3 +117,4 @@ write more automated tests for scoresheet generation (singles..., 20all dash, di
 add test for retired-then-referee
 icons for scoresheet butotns
 scoresheet button after game end
+test for shuttle
