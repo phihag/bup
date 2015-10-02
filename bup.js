@@ -4,7 +4,8 @@ var state = {
 	initialized: false
 };
 var settings = {
-	save_finished_matches: true
+	save_finished_matches: true,
+	go_fullscreen: false,
 };
 
 function _parse_query_string(qs) {
@@ -93,6 +94,26 @@ function _svg_align_hcenter(text, hcenter) {
 	text.setAttribute('x', cur_x - (text_center - hcenter));
 }
 
+var _ui_esc_stack = [];
+function ui_esc_stack_push(cancel) {
+	_ui_esc_stack.push(cancel);
+	Mousetrap.bind('escape', cancel);
+}
+
+function ui_esc_stack_pop() {
+	if (_ui_esc_stack.length == 0) {
+		show_error('Empty escape stack');
+		return;
+	}
+
+	_ui_esc_stack.pop();
+	Mousetrap.unbind('escape');
+	var cancel = _ui_esc_stack[_ui_esc_stack.length - 1];
+	if (_ui_esc_stack.length > 0) {
+		Mousetrap.bind('escape', cancel);
+	}
+}
+
 function liveaw_contact(cb) {
 	var wsurl = (location.protocol === 'https:' ? 'wss' : 'ws') + '://' + location.hostname + (location.port ? ':' + location.port: '')  + '/ws/bup';
 	var ws = new WebSocket(wsurl, 'liveaw-bup');
@@ -177,7 +198,7 @@ function network_send_press(s, press) {
 
 function _ui_make_player_pick(s, label, type, on_cancel, modify_button) {
 	var kill_dialog = function() {
-		Mousetrap.unbind('escape');
+		ui_esc_stack_pop();
 		dlg_wrapper.remove();
 	};
 	var cancel = function() {
@@ -185,7 +206,7 @@ function _ui_make_player_pick(s, label, type, on_cancel, modify_button) {
 		on_cancel();
 	}
 
-	Mousetrap.bind('escape', cancel);
+	ui_esc_stack_push(cancel);
 	var dlg_wrapper = $('<div class="modal-wrapper">');
 	dlg_wrapper.on('click', cancel);
 	var dlg = $('<div class="pick_dialog">');
@@ -381,13 +402,13 @@ function ui_settings_load_list(s) {
 
 function ui_show_exception_dialog() {
 	$('#exception_wrapper').show();
-	Mousetrap.bind('escape', function() {
+	ui_esc_stack_push(function() {
 		ui_hide_exception_dialog();
 	});
 }
 
 function ui_hide_exception_dialog() {
-	Mousetrap.unbind('escape');
+	ui_esc_stack_pop();
 	$('#exception_wrapper').hide();
 }
 
@@ -1131,7 +1152,7 @@ function demo_match_start() {
 
 function show_settings() {
 	$('#settings_wrapper').show();
-	Mousetrap.bind('escape', function() {
+	ui_esc_stack_push(function() {
 		hide_settings();
 	});
 	ui_settings_load_list();
@@ -1143,7 +1164,7 @@ function hide_settings(force) {
 	if (!force && !state.initialized) {
 		return;
 	}
-	Mousetrap.unbind('escape');
+	ui_esc_stack_pop();
 	$('#settings_wrapper').hide();
 }
 
@@ -1953,7 +1974,7 @@ function init() {
 }
 
 function ui_init_settings() {
-	var checkboxes = ['save_finished_matches'];
+	var checkboxes = ['save_finished_matches', 'go_fullscreen'];
 	checkboxes.forEach(function(name) {
 		var box = $('.settings [name="' + name + '"]');
 		box.prop('checked', settings[name]);
@@ -2249,6 +2270,28 @@ function ui_init() {
 		demo_match_start();
 	} else {
 		show_settings();
+	}
+
+	if (settings.go_fullscreen && _ui_fullscreen_supported()) {
+		var go_fullscreen_hide = function() {
+			ui_esc_stack_pop();
+			$('#go_fullscreen_wrapper').hide();
+		}
+
+		$('.go_fullscreen_normal').on('click', function(e) {
+			e.preventDefault();
+			go_fullscreen_hide();
+			return false;
+		});
+		$('.go_fullscreen_go').on('click', function(e) {
+			e.preventDefault();
+			go_fullscreen_hide();
+			_ui_fullscreen_start();
+			return false;
+		});
+		ui_esc_stack_push(go_fullscreen_hide);
+		$('#go_fullscreen_wrapper').on('click', go_fullscreen_hide);
+		$('#go_fullscreen_wrapper').show();
 	}
 }
 

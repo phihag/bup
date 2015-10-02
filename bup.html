@@ -201,7 +201,7 @@ Linienrichter</span>
 <div class="settings">
 <h2>Einstellungen</h2>
 <label><input type="checkbox" name="save_finished_matches" />Abgeschlossene Spiele speichern</label>
-<button class="fullscreen_button">Vollbildmodus</button>
+<label><input type="checkbox" name="go_fullscreen" />Vollbildmodus beim Start anfragen <button class="fullscreen_button">Vollbildmodus</button></label>
 </div>
 
 </div>
@@ -337,6 +337,15 @@ Linienrichter</span>
 			Zurück
 		</button>
 	</div>
+</div>
+
+<div id="go_fullscreen_wrapper" class="modal-wrapper default-invisible">
+<div id="go_fullscreen" class="pick_dialog">
+<button class="go_fullscreen_go">
+<span class="go_fullscreen_go_icon"></span>
+<span>Vollbildmodus</span></button>
+<button class="go_fullscreen_normal">Normalbildmodus</button>
+</div>
 </div>
 
 <script src="libs/jquery.min.js"></script>

@@ -1,22 +1,14 @@
-shuttle counter
-	functionality
-	show in scoresheet
-	test that no value in scoresheet if unconfigured
-
-better design for settings on mobiles
-better design for exceptions on mobiles
-
-fullscreen setting, ask on load
-&fs in hash to override fullscreen setting
+add pronounciation
 
 embed in CourtSpot
 Allow config to be downloaded from CourtSpot
 Write results to CourtSpot
 
+
 add badmintonticker.de support
 read current result from badmintonticker
 
-add pronounciation
+better design for settings on mobiles
 LICENSE
 CONTRIBUTING (-> assign copyright form)
 better fullscreen flow (force fullscreen as a setting / as a hash)
@@ -42,6 +34,7 @@ allow starting new game during liveaw?
 add settings
 	show full pronounciation
 	shuttle counter
+		test that no value in scoresheet if unconfigured
 check and improve style on more phones
 test various network errors
 create a logo (favicon/...)
@@ -118,3 +111,6 @@ add test for retired-then-referee
 icons for scoresheet butotns
 scoresheet button after game end
 test for shuttle
+nice icon for go_fullscreen dialog
+detect if already in F11 fullscreen before showing fullscreen dialog
+&fs in hash to override fullscreen setting

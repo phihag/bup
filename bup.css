@@ -288,9 +288,17 @@ span.score_announcement+span.score_announcement {
 .topleft_buttons>*:not(:first-child), .topright_buttons>*:not(:first-child) {
 	margin-left: 7vh;
 }
+#button_redo {
+	position: absolute;
+	left: 30vmin;
+	top: 0;
+}
 @media all and (orientation: portrait) {
 	.topleft_buttons>*:not(:first-child), .topright_buttons>*:not(:first-child) {
 		margin-left: 3vh;
+	}
+	#button_redo {
+		left: 38vmin;
 	}
 }
 #shuttle_counter_value {
@@ -299,11 +307,6 @@ span.score_announcement+span.score_announcement {
 	top: 50%; transform: translate(0, -50%);
 	right: 47%;
 	text-align: right;
-}
-#button_redo {
-	position: absolute;
-	left: 30vmin;
-	top: 0;
 }
 
 .topleft_buttons>* {
@@ -329,8 +332,6 @@ span.score_announcement+span.score_announcement {
 }
 
 
-
-
 .modal-wrapper {
 	position: fixed;
 	left: 0; right: 0;
@@ -348,10 +349,11 @@ span.score_announcement+span.score_announcement {
 	left: 50%; top: 50%;
 	transform: translate(-50%, -50%);
 }
-.settings_container>div {
-}
 .settings_container h2 {
 	margin: 0;
+}
+.settings label {
+	display: block;
 }
 
 .auto-focused:focus {
@@ -435,9 +437,19 @@ span.score_announcement+span.score_announcement {
 	min-width: 1.5em;
 	text-align: right;
 }
-.timer {
 
+.go_fullscreen_go>span {
+	display: block;
+	margin: 0 auto;
 }
+.go_fullscreen_go_icon {
+	width: 20vmin;
+	height: 20vmin;
+	background-image: url(static/icons/go_fullscreen.svg);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+
 
 #waitprogress_message {
 	background: #ffffff;
