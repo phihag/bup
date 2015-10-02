@@ -27,6 +27,6 @@ test:
 
 clean:
 	rm -rf -- libs
-	@npm clean
+	rm -rf -- node_modules
 
 .PHONY: default help deps test clean install-libs force-install-libs

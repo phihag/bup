@@ -1171,6 +1171,60 @@ function hide_settings(force) {
 	$('#settings_wrapper').hide();
 }
 
+function _pronounciation_prematch_team(s, team_id) {
+	var team = s.setup.teams[team_id];
+	var res = '';
+	if (s.setup.team_competition) {
+		res = team.name + ', vertreten durch ';
+	}
+	if (s.setup.is_doubles) {
+		res += team.players[0].name + ' / ' + team.players[1].name;
+	} else {
+		res += team.players[0].name;
+	}
+	return res;
+}
+
+function pronounciation(s) {
+	if (s.match.announce_prematch) {
+		var serving_team_id = s.game.team1_serving ? 0 : 1;
+		var receiving_team_id = 1 - serving_team_id;
+
+		var serving_player_id = s.game.teams_player1_even[serving_team_id] ? 0 : 1;
+		var receiving_player_id = s.game.teams_player1_even[receiving_team_id] ? 0 : 1;
+
+		var server_name = s.setup.teams[serving_team_id].players[serving_player_id].name;
+		var receiver_name = s.setup.teams[receiving_team_id].players[receiving_player_id].name;
+
+		if (s.setup.team_competition) {
+			return (
+				'Meine Damen und Herren:\n' +
+				'Zu meiner ' + (s.game.team1_left ? 'Rechten' : 'Linken') + ', ' + _pronounciation_prematch_team(s, 1) + ',\n' +
+				'und zu meiner ' + (s.game.team1_left ? 'Linken' : 'Rechten') + ', ' + _pronounciation_prematch_team(s, 0) + '.\n' +
+				s.setup.teams[serving_team_id].name + ' schlägt auf' + (s.setup.is_doubles ? (', ' + server_name + ' zu ' + receiver_name) : '') + '.\n' +
+				'0 beide. Bitte spielen.'
+			);
+		} else {
+			return (
+				'Meine Damen und Herren:\n' +
+				'Zu meiner Rechten, ' + _pronounciation_prematch_team(s, (s.game.team1_left ? 1 : 0)) + ',\n' +
+				'und zu meiner Linken, ' + _pronounciation_prematch_team(s, (s.game.team1_left ? 0 : 1)) + '.\n' +
+				server_name + ' schlägt auf' + (s.setup.is_doubles ? (' zu ' + receiver_name) : '') + '.\n' +
+				'0 beide. Bitte spielen.'
+			);
+		}
+	}
+
+	if (!s.game.finished && (s.game.score[0] !== null)) {
+		var first_score = s.game.score[s.game.team1_serving ? 0 : 1];
+		var second_score = s.game.score[s.game.team1_serving ? 1 : 0];
+		var score_str = (first_score == second_score) ? (first_score + ' beide') : (first_score + '-' + second_score);
+		return (s.game.service_over ? 'Aufschlagwechsel. ' : '') + score_str;
+	}
+
+	return null;
+}
+
 function resume_match(s) {
 	state = s;
 	state.initialized = true;
@@ -1469,6 +1523,7 @@ function _init_calc(s) {
 		carded: [false, false],
 		team1_won: null,
 		shuttle_count: 0,
+		announce_prematch: null,
 	};
 
 	switch (s.setup.counting) {
@@ -1555,6 +1610,11 @@ function calc_state(s) {
 		}
 	}
 
+	s.match.announce_prematch = (
+		(s.game.start_server_player_id !== null) &&
+		(s.game.start_receiver_player_id !== null) &&
+		(s.game.score[0] === null));
+
 	return s;
 }
 
@@ -1597,11 +1657,7 @@ function render(s) {
 		});
 	}
 
-	var prematch = (
-		(s.game.start_server_player_id !== null) &&
-		(s.game.start_receiver_player_id !== null) &&
-		(s.game.score[0] === null));
-	if (prematch) {
+	if (s.match.announce_prematch) {
 		$('#love-all-dialog').show();
 		$('#love-all').text(loveall_announcement());
 	} else {
@@ -2308,6 +2364,7 @@ if (typeof module !== 'undefined') {
 		init_state: init_state,
 		calc_state: calc_state,
 		// For testing only
+		pronounciation: pronounciation,
 		_duration_str: _duration_str,
 		_scoresheet_parse_match: _scoresheet_parse_match,
 	};
