@@ -14,7 +14,7 @@ var state_after = test_utils.state_after;
 var bup = require('../bup.js');
 
 _describe('pronounciation', function() {
-	_it('Doubles start of match', function() {
+	_it('Start of match (singles)', function() {
 		var presses = [];
 		var s = state_after(presses, DOUBLES_SETUP);
 		assert.strictEqual(bup.pronounciation(s), null);
@@ -94,7 +94,89 @@ _describe('pronounciation', function() {
 		);
 	});
 
-	_it('Doubles start of match in a team competition', function() {
+	_it('Start of match (singles)', function() {
+		var presses = [];
+		var s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(bup.pronounciation(s), null);
+
+		presses.push({
+			type: 'pick_side', // Alice picks left
+			team1_left: true,
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(bup.pronounciation(s), null);
+
+		presses.push({
+			type: 'pick_server', // Alice serves
+			team_id: 0,
+			player_id: 0,
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(
+			bup.pronounciation(s),
+			'Meine Damen und Herren:\n' +
+			'Zu meiner Rechten, Bob,\n' +
+			'und zu meiner Linken, Alice.\n' +
+			'Alice schlägt auf.\n' +
+			'0 beide. Bitte spielen.'
+		);
+
+		presses = [{
+			type: 'pick_side', // Alice picks right
+			team1_left: false,
+		}, {
+			type: 'pick_server', // Alice serves
+			team_id: 0,
+			player_id: 0,
+		}];
+		s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(
+			bup.pronounciation(s),
+			'Meine Damen und Herren:\n' +
+			'Zu meiner Rechten, Alice,\n' +
+			'und zu meiner Linken, Bob.\n' +
+			'Alice schlägt auf.\n' +
+			'0 beide. Bitte spielen.'
+		);
+
+		presses = [{
+			type: 'pick_side', // Alice picks left
+			team1_left: true,
+		}, {
+			type: 'pick_server', // Bob serves
+			team_id: 1,
+			player_id: 0,
+		}];
+		s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(
+			bup.pronounciation(s),
+			'Meine Damen und Herren:\n' +
+			'Zu meiner Rechten, Bob,\n' +
+			'und zu meiner Linken, Alice.\n' +
+			'Bob schlägt auf.\n' +
+			'0 beide. Bitte spielen.'
+		);
+
+		presses = [{
+			type: 'pick_side', // Alice picks right
+			team1_left: false,
+		}, {
+			type: 'pick_server', // Bob serves
+			team_id: 1,
+			player_id: 0,
+		}];
+		s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(
+			bup.pronounciation(s),
+			'Meine Damen und Herren:\n' +
+			'Zu meiner Rechten, Alice,\n' +
+			'und zu meiner Linken, Bob.\n' +
+			'Bob schlägt auf.\n' +
+			'0 beide. Bitte spielen.'
+		);
+	});
+
+	_it('Start of match in a team competition (doubles)', function() {
 		var presses = [{
 			type: 'pick_side', // Andrew&Alice pick left
 			team1_left: true,
@@ -180,6 +262,88 @@ _describe('pronounciation', function() {
 			'Zu meiner Rechten, B team, vertreten durch Bob / Birgit,\n' +
 			'und zu meiner Linken, A team, vertreten durch Andrew / Alice.\n' +
 			'B team schlägt auf, Birgit zu Andrew.\n' +
+			'0 beide. Bitte spielen.'
+		);
+	});
+
+	_it('Match start in a team competition (singles)', function() {
+		var presses = [];
+		var s = state_after(presses, SINGLES_TEAM_SETUP);
+		assert.strictEqual(bup.pronounciation(s), null);
+
+		presses.push({
+			type: 'pick_side', // Alice picks left
+			team1_left: true,
+		});
+		s = state_after(presses, SINGLES_TEAM_SETUP);
+		assert.strictEqual(bup.pronounciation(s), null);
+
+		presses.push({
+			type: 'pick_server', // Alice serves
+			team_id: 0,
+			player_id: 0,
+		});
+		s = state_after(presses, SINGLES_TEAM_SETUP);
+		assert.strictEqual(
+			bup.pronounciation(s),
+			'Meine Damen und Herren:\n' +
+			'Zu meiner Rechten, B team, vertreten durch Bob,\n' +
+			'und zu meiner Linken, A team, vertreten durch Alice.\n' +
+			'A team schlägt auf.\n' +
+			'0 beide. Bitte spielen.'
+		);
+
+		presses = [{
+			type: 'pick_side', // Alice picks right
+			team1_left: false,
+		}, {
+			type: 'pick_server', // Alice serves
+			team_id: 0,
+			player_id: 0,
+		}];
+		s = state_after(presses, SINGLES_TEAM_SETUP);
+		assert.strictEqual(
+			bup.pronounciation(s),
+			'Meine Damen und Herren:\n' +
+			'Zu meiner Linken, B team, vertreten durch Bob,\n' +
+			'und zu meiner Rechten, A team, vertreten durch Alice.\n' +
+			'A team schlägt auf.\n' +
+			'0 beide. Bitte spielen.'
+		);
+
+		presses = [{
+			type: 'pick_side', // Alice picks left
+			team1_left: true,
+		}, {
+			type: 'pick_server', // Bob serves
+			team_id: 1,
+			player_id: 0,
+		}];
+		s = state_after(presses, SINGLES_TEAM_SETUP);
+		assert.strictEqual(
+			bup.pronounciation(s),
+			'Meine Damen und Herren:\n' +
+			'Zu meiner Rechten, B team, vertreten durch Bob,\n' +
+			'und zu meiner Linken, A team, vertreten durch Alice.\n' +
+			'B team schlägt auf.\n' +
+			'0 beide. Bitte spielen.'
+		);
+
+		presses = [{
+			type: 'pick_side', // Alice picks right
+			team1_left: false,
+		}, {
+			type: 'pick_server', // Bob serves
+			team_id: 1,
+			player_id: 0,
+		}];
+		s = state_after(presses, SINGLES_TEAM_SETUP);
+		assert.strictEqual(
+			bup.pronounciation(s),
+			'Meine Damen und Herren:\n' +
+			'Zu meiner Linken, B team, vertreten durch Bob,\n' +
+			'und zu meiner Rechten, A team, vertreten durch Alice.\n' +
+			'B team schlägt auf.\n' +
 			'0 beide. Bitte spielen.'
 		);
 	});
