@@ -15,9 +15,9 @@ function _parse_query_string(qs) {
 	var decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); };
 
 	var res = {};
-	var match;
-	while (match = search.exec(qs)) {
-		res[decode(match[1])] = decode(match[2]);
+	var m;
+	while (m = search.exec(qs)) {
+		res[decode(m[1])] = decode(m[2]);
 	}
 	return res;
 }
@@ -1234,6 +1234,24 @@ function _pronounciation_prematch_team(s, team_id) {
 }
 
 function pronounciation(s) {
+	var mark_str = '';
+	s.match.marks.forEach(function(mark) {
+		switch (mark.type) {
+		case 'yellow-card':
+			mark_str += s.setup.teams[mark.team_id].players[mark.player_id].name + ', Verwarnung wegen unsportlichen Verhaltens.\n';
+			break;
+		case 'red-card':
+			mark_str += s.setup.teams[mark.team_id].players[mark.player_id].name + ', Fehler wegen unsportlichen Verhaltens.\n';
+			break;
+		case 'disqualified':
+			mark_str += s.setup.teams[mark.team_id].players[mark.player_id].name + ', disqualifiziert wegen unsportlichen Verhaltens.\n';
+			break;
+		case 'retired':
+			mark_str += s.setup.teams[mark.team_id].players[mark.player_id].name + ' gibt auf.\n';
+			break;
+		}
+	});
+
 	if (s.match.announce_pregame) {
 		if (s.match.finished_games.length > 0) {
 			return loveall_announcement(s);
@@ -1268,11 +1286,11 @@ function pronounciation(s) {
 	}
 
 	if (s.game.finished) {
-		return 'Satz.\n' + postgame_announcement(s);
+		return mark_str + (s.game.won_by_score ? 'Satz.\n' : '') + postgame_announcement(s);
 	}
 
 	if (!s.game.finished && (s.game.score[0] !== null)) {
-		if ((s.game.score[0] === 0) && (s.game.score[1] === 0)) {
+		if ((s.game.score[0] === 0) && (s.game.score[1] === 0) && !mark_str) {
 			return null;  // Special case, we just showed the long text. Time to focus on the game.
 		}
 
@@ -1280,7 +1298,11 @@ function pronounciation(s) {
 		var second_score = s.game.score[s.game.team1_serving ? 1 : 0];
 		var point_str = (s.game.gamepoint ? ' Satzpunkt' : (s.game.matchpoint ? ' Spielpunkt' : ''))
 		var score_str = (first_score == second_score) ? (first_score + point_str + ' beide') : (first_score + (point_str ? (point_str + ' ') : '-') + second_score);
-		return (s.game.service_over ? 'Aufschlagwechsel. ' : '') + score_str + (s.game.interval ? ' Pause' : '') + (s.game.change_sides ? '. Bitte Seiten wechseln' : '');
+		return mark_str + (s.game.service_over ? 'Aufschlagwechsel. ' : '') + score_str + (s.game.interval ? ' Pause' : '') + (s.game.change_sides ? '. Bitte die Spielfeldseiten wechseln' : '');
+	}
+
+	if (mark_str) {
+		return mark_str.trim();
 	}
 
 	return null;
@@ -1378,7 +1400,7 @@ function make_game_state(s, previous_game) {
 	return res;
 }
 
-function score(s, team_id, timestamp) {
+function score(s, team_id, press) {
 	var team1_scored = team_id == 0;
 	s.game.service_over = team1_scored != s.game.team1_serving;
 	s.game.score[team_id] += 1;
@@ -1428,12 +1450,12 @@ function score(s, team_id, timestamp) {
 
 	if (s.game.interval) {
 		s.timer = {
-			start: timestamp,
+			start: press.timestamp,
 			duration: 60 * 1000,
 		};
 	} else if (s.game.finished && !s.match.finished) {
 		s.timer = {
-			start: timestamp,
+			start: press.timestamp,
 			duration: 120 * 1000,
 		};
 	} else {
@@ -1445,7 +1467,7 @@ function score(s, team_id, timestamp) {
 		s.game.team1_left = ! s.game.team1_left;
 	}
 
-	if (s.match.marks.length > 0) {
+	if ((press.type != 'red-card') && (s.match.marks.length > 0)) {
 		s.match.marks = [];
 	}
 }
@@ -1485,7 +1507,7 @@ function calc_press(s, press) {
 		break;
 	case 'score':
 		var team1_scored = (s.game.team1_left == (press.side == 'left'));
-		score(s, (team1_scored ? 0 : 1), press.timestamp);
+		score(s, (team1_scored ? 0 : 1), press);
 		break;
 	case 'postgame-confirm':
 		if (s.match.finished) {
@@ -1533,10 +1555,10 @@ function calc_press(s, press) {
 		break;
 	case 'red-card':
 		press.char = 'F';
-		s.match.marks.push(press);
 		if (! s.match.finished) {
-			score(s, 1 - press.team_id, press.timestamp);
+			score(s, 1 - press.team_id, press);
 		}
+		s.match.marks.push(press);
 		break;
 	case 'injury':
 		press.char = 'V';
@@ -1556,6 +1578,7 @@ function calc_press(s, press) {
 		break;
 	case 'disqualified':
 		press.char = 'Disqualifiziert';
+		s.match.marks = [];  // Red cards do not matter now
 		s.match.marks.push(press);
 		s.game.won_by_score = false;
 		s.game.finished = true;
@@ -1801,8 +1824,8 @@ function render(s) {
 				_add_ann('Satz');
 			}
 			if (s.match.marks.length > 0) {
-				s.match.marks.forEach(function(mark_press) {
-					_add_ann(mark_press.char);
+				s.match.marks.forEach(function(e_press) {
+					_add_ann(e_press.char);
 				});
 			}
 			// Rendering fix for empty cells not being rendered correctly

@@ -1,9 +1,4 @@
-add pronounciation
-	yellow card
-	resigned
-	red card
-	disqualification
-	display pronounciation
+display pronounciation
 
 embed in CourtSpot
 Allow config to be downloaded from CourtSpot
@@ -11,7 +6,6 @@ Write results to CourtSpot
 
 re-style settings with columns
 only show 4 games to resume
-
 
 add badmintonticker.de support
 read current result from badmintonticker
@@ -36,8 +30,6 @@ disqualification at game start
 	write test
 	test
 pronounciation when giving up (match won by?)
-handle liveaw login failure
-allow starting new game during liveaw?
 add settings
 	show full pronounciation
 	shuttle counter
@@ -53,13 +45,15 @@ test touch interface
 test touch latency
 prevent double touches
 
+multiple languages
+	icons
+	change in settings
+
 block overrule when unavailable
 	add a title
 	add a notice when clicked (+1 first)
 test without websocket support
 injury timer
-multiple languages
-	change in settings
 negative timers (add option for that)
 show what was undone
 team names in pronounciation
@@ -104,7 +98,6 @@ use court name in 20s announcements
 check scoresheet from liveaw (all there?)
 umpire / service judge name (also in scoresheet)
 shortcuts u/r undo/redo
-add tests for scoresheet helper functions
 add a test for overrule and other marks / cards
 show F mark on top after red cards
 eliminate uses of match.game_score; use match.team1_won instead
@@ -124,3 +117,6 @@ icons for print and PDF
 If long pronounciation ends with short one, short pronounciation in larger font-size
 "bitte spielen" after timer expires at 11
 "court 1, 20 seconds"  after timer expires at 11 / new game
+test that cards lead to an exceptions entry in match
+test pronounciation for cards at beginning and end of match
+move press.char to a helper function

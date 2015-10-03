@@ -848,7 +848,7 @@ _describe('pronounciation', function() {
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(bup.pronounciation(s),
-			'Aufschlagwechsel. 11-10 Pause. Bitte Seiten wechseln');
+			'Aufschlagwechsel. 11-10 Pause. Bitte die Spielfeldseiten wechseln');
 
 		presses.push({
 			type: 'score',
@@ -933,5 +933,184 @@ _describe('pronounciation', function() {
 		assert.equal(bup.pronounciation(s),
 			'Satz.\n' +
 			'Das Spiel wurde gewonnen von A team mit 21-23 30-29 21-19');
+	});
+
+	_it('cards', function() {
+		var presses = [{
+			type: 'pick_side', // Andrew&Alice pick left
+			team1_left: true,
+		}, {
+			type: 'pick_server', // Bob serves  (player 0 so it works in singles as well)
+			team_id: 1,
+			player_id: 0,
+		}, {
+			type: 'pick_receiver', // Andrew receives (player 0 so it works in singles as well)
+			team_id: 0,
+			player_id: 0,
+		}, {
+			type: 'love-all'
+		}];
+
+		presses.push({
+			type: 'yellow-card',
+			team_id: 0,
+			player_id: 0,
+		});
+		var s = state_after(presses, DOUBLES_TEAM_SETUP);
+		assert.equal(bup.pronounciation(s),
+			'Andrew, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'0 beide');
+
+		presses.push({
+			type: 'score',
+			side: 'left'
+		});
+		presses.push({
+			type: 'red-card',
+			team_id: 0,
+			player_id: 1,
+		});
+		s = state_after(presses, DOUBLES_TEAM_SETUP);
+		assert.equal(bup.pronounciation(s),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 1 beide');
+
+		presses.push({
+			type: 'score',
+			side: 'right'
+		});
+		presses.push({
+			type: 'yellow-card',
+			team_id: 1,
+			player_id: 1,
+		});
+		s = state_after(presses, DOUBLES_TEAM_SETUP);
+		assert.equal(bup.pronounciation(s),
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'2-1');
+
+		presses.push({
+			type: 'red-card',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(presses, DOUBLES_TEAM_SETUP);
+		assert.equal(bup.pronounciation(s),
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 2 beide');
+
+		presses.push({
+			type: 'score',
+			side: 'right'
+		});
+		presses.push({
+			type: 'score',
+			side: 'left'
+		});
+		presses.push({
+			type: 'red-card',
+			team_id: 0,
+			player_id: 1,
+		});
+		s = state_after(presses, DOUBLES_TEAM_SETUP);
+		assert.equal(bup.pronounciation(s),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 4-3');
+
+		presses.push({
+			type: 'red-card',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(presses, DOUBLES_TEAM_SETUP);
+		assert.equal(bup.pronounciation(s),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 4 beide');
+
+		presses.push({
+			type: 'disqualified',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(bup.pronounciation(s),
+			'Bob, disqualifiziert wegen unsportlichen Verhaltens.\n' +
+			'Das Spiel wurde gewonnen von Andrew und Alice mit 4-4');
+
+		s = state_after(presses, DOUBLES_TEAM_SETUP);
+		assert.equal(bup.pronounciation(s),
+			'Bob, disqualifiziert wegen unsportlichen Verhaltens.\n' +
+			'Das Spiel wurde gewonnen von A team mit 4-4');
+	});
+
+	_it('retiring', function() {
+		var presses = [{
+			type: 'pick_side', // Andrew&Alice pick left
+			team1_left: true,
+		}, {
+			type: 'pick_server', // Birgit serves
+			team_id: 1,
+			player_id: 1,
+		}, {
+			type: 'pick_receiver', // Andrew receives
+			team_id: 0,
+			player_id: 0,
+		}, {
+			type: 'love-all'
+		}];
+
+		var alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'retired',
+			team_id: 1,
+			player_id: 0
+		});
+		var s = state_after(alt_presses, DOUBLES_SETUP);
+		assert.equal(bup.pronounciation(s),
+			'Bob gibt auf.\n' +
+			'Das Spiel wurde gewonnen von Andrew und Alice mit 0-0');
+
+		alt_presses = presses.slice();
+		press_score(alt_presses, 3, 2);
+		alt_presses.push({
+			type: 'retired',
+			team_id: 0,
+			player_id: 1
+		});
+		s = state_after(alt_presses, DOUBLES_TEAM_SETUP);
+		assert.equal(bup.pronounciation(s),
+			'Alice gibt auf.\n' +
+			'Das Spiel wurde gewonnen von B team mit 2-3');
+
+		press_score(presses, 21, 19);
+		presses.push({
+			type: 'postgame-confirm',
+		});
+		presses.push({
+			type: 'pick_server', // Alice serves
+			team_id: 0,
+			player_id: 1,
+		});
+		presses.push({
+			type: 'pick_receiver', // Bob receives
+			team_id: 1,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'love-all'
+		});
+		press_score(presses, 2, 2);
+
+		presses.push({
+			type: 'retired',
+			team_id: 0,
+			player_id: 0,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(bup.pronounciation(s),
+			'Andrew gibt auf.\n' +
+			'Das Spiel wurde gewonnen von Bob und Birgit mit 19-21 2-2');
 	});
 });
