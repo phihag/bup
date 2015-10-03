@@ -32,7 +32,7 @@ _describe('calc_state', function() {
 		assert.strictEqual(s.match.team1_won, null);
 		assert.equal(s.match.finish_confirmed, false);
 		assert.deepEqual(s.match.game_score, [0, 0]);
-		assert.equal(s.match.announce_prematch, false);
+		assert.equal(s.match.announce_pregame, false);
 		assert.equal(s.court.player_left_odd, null);
 		assert.equal(s.court.player_left_even, null);
 		assert.equal(s.court.player_right_odd, null);
@@ -57,7 +57,7 @@ _describe('calc_state', function() {
 		assert.strictEqual(s.match.team1_won, null);
 		assert.equal(s.match.finish_confirmed, false);
 		assert.deepEqual(s.match.game_score, [0, 0]);
-		assert.equal(s.match.announce_prematch, false);
+		assert.equal(s.match.announce_pregame, false);
 		assert.equal(s.court.player_left_odd, null);
 		assert.equal(s.court.player_left_even, null);
 		assert.equal(s.court.player_right_odd, null);

@@ -1,17 +1,16 @@
 add pronounciation
-	test for 11 (pause)
-	Spielpunkt / Satzpunkt
-	(at 29)
-	test for end of game at a team competition
-	test that end is correct
 	resigned
 	yellow card
 	red card
 	disqualification
+	display pronounciation
 
 embed in CourtSpot
 Allow config to be downloaded from CourtSpot
 Write results to CourtSpot
+
+re-style settings with columns
+only show 4 games to resume
 
 
 add badmintonticker.de support
@@ -96,7 +95,6 @@ show text in difficult situations (retired etc.)
 write a test for timers
 test black card before game start
 set window title (include match_name)
-remove "mit" from text
 up/down keys to switch between options; left-right for punishments
 display mode (tap anywhere to exit)
 color change at 20s in timeouts
@@ -122,3 +120,7 @@ test for shuttle
 nice icon for go_fullscreen dialog
 detect if already in F11 fullscreen before showing fullscreen dialog
 &fs in hash to override fullscreen setting
+icons for print and PDF
+If long pronounciation ends with short one, short pronounciation in larger font-size
+"bitte spielen" after timer expires at 11
+"court 1, 20 seconds"  after timer expires at 11 / new game

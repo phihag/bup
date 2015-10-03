@@ -1171,6 +1171,54 @@ function hide_settings(force) {
 	$('#settings_wrapper').hide();
 }
 
+function loveall_announcement(s) {
+	var prefix = '';
+	if (s.match.finished_games.length == 1) {
+		prefix = 'Zweiter Satz. ';
+	} else if (s.match.finished_games.length == 2) {
+		prefix = 'Entscheidungssatz. '
+	}
+
+	return prefix + '0 beide.\nBitte spielen';
+}
+
+function postgame_announcement(s) {
+	if (s === undefined) {
+		s = state;
+	}
+
+	var winner_index = s.game.team1_won ? 0 : 1;
+	var winner_score = s.game.score[winner_index];
+	var loser_score = s.game.score[1 - winner_index];
+	var winner = s.setup.teams[winner_index];
+	var winner_name;
+	if (s.setup.team_competition) {
+		winner_name = winner.name;
+	} else {
+		if (s.setup.is_doubles) {
+			winner_name = winner.players[0].name + ' und ' + winner.players[1].name;
+		} else {
+			winner_name = winner.players[0].name;
+		}
+	}
+	var res = '';
+	if (s.match.finished) {
+		var previous_scores = s.match.finished_games.reduce(function(str, game) {
+			str += game.score[winner_index] + '-' + game.score[1 - winner_index] + ' ';
+			return str;
+		}, '');
+
+		res = 'Das Spiel wurde gewonnen von ' + winner_name + ' mit ' + previous_scores + winner_score + '-' + loser_score;
+	} else if (s.match.finished_games.length == 0) {
+		res = 'Der erste Satz wurde gewonnen von ' + winner_name + ' mit ' + winner_score + '-' + loser_score;
+	} else if (s.match.finished_games.length == 1) {
+		res = 'Der zweite Satz wurde gewonnen von ' + winner_name + ' mit ' + winner_score + '-' + loser_score + '; einen Satz beide';
+	} else {
+		throw new Error('Won third game but match not finished?')
+	}
+	return res;
+}
+
 function _pronounciation_prematch_team(s, team_id) {
 	var team = s.setup.teams[team_id];
 	var res = '';
@@ -1178,7 +1226,7 @@ function _pronounciation_prematch_team(s, team_id) {
 		res = team.name + ', vertreten durch ';
 	}
 	if (s.setup.is_doubles) {
-		res += team.players[0].name + ' / ' + team.players[1].name;
+		res += team.players[0].name + ' und ' + team.players[1].name;
 	} else {
 		res += team.players[0].name;
 	}
@@ -1186,7 +1234,11 @@ function _pronounciation_prematch_team(s, team_id) {
 }
 
 function pronounciation(s) {
-	if (s.match.announce_prematch) {
+	if (s.match.announce_pregame) {
+		if (s.match.finished_games.length > 0) {
+			return loveall_announcement(s);
+		}
+
 		var serving_team_id = s.game.team1_serving ? 0 : 1;
 		var receiving_team_id = 1 - serving_team_id;
 
@@ -1202,7 +1254,7 @@ function pronounciation(s) {
 				'Zu meiner ' + (s.game.team1_left ? 'Rechten' : 'Linken') + ', ' + _pronounciation_prematch_team(s, 1) + ',\n' +
 				'und zu meiner ' + (s.game.team1_left ? 'Linken' : 'Rechten') + ', ' + _pronounciation_prematch_team(s, 0) + '.\n' +
 				s.setup.teams[serving_team_id].name + ' schlägt auf' + (s.setup.is_doubles ? (', ' + server_name + ' zu ' + receiver_name) : '') + '.\n' +
-				'0 beide. Bitte spielen.'
+				loveall_announcement(s)
 			);
 		} else {
 			return (
@@ -1210,17 +1262,25 @@ function pronounciation(s) {
 				'Zu meiner Rechten, ' + _pronounciation_prematch_team(s, (s.game.team1_left ? 1 : 0)) + ',\n' +
 				'und zu meiner Linken, ' + _pronounciation_prematch_team(s, (s.game.team1_left ? 0 : 1)) + '.\n' +
 				server_name + ' schlägt auf' + (s.setup.is_doubles ? (' zu ' + receiver_name) : '') + '.\n' +
-				'0 beide. Bitte spielen.'
+				loveall_announcement(s)
 			);
 		}
 	}
 
+	if (s.game.finished) {
+		return 'Satz.\n' + postgame_announcement(s);
+	}
+
 	if (!s.game.finished && (s.game.score[0] !== null)) {
+		if ((s.game.score[0] === 0) && (s.game.score[1] === 0)) {
+			return null;  // Special case, we just showed the long text. Time to focus on the game.
+		}
+
 		var first_score = s.game.score[s.game.team1_serving ? 0 : 1];
 		var second_score = s.game.score[s.game.team1_serving ? 1 : 0];
-		var point_str = (s.game.gamepoint ? ' Satzpunkt' : (s.game.matchpoint ? 'Spielpunkt' : ''))
+		var point_str = (s.game.gamepoint ? ' Satzpunkt' : (s.game.matchpoint ? ' Spielpunkt' : ''))
 		var score_str = (first_score == second_score) ? (first_score + point_str + ' beide') : (first_score + (point_str ? (point_str + ' ') : '-') + second_score);
-		return (s.game.service_over ? 'Aufschlagwechsel. ' : '') + score_str + (s.game.interval ? ' Pause' : '');
+		return (s.game.service_over ? 'Aufschlagwechsel. ' : '') + score_str + (s.game.interval ? ' Pause' : '') + (s.game.change_sides ? '. Bitte Seiten wechseln' : '');
 	}
 
 	return null;
@@ -1524,7 +1584,7 @@ function _init_calc(s) {
 		carded: [false, false],
 		team1_won: null,
 		shuttle_count: 0,
-		announce_prematch: null,
+		announce_pregame: null,
 	};
 
 	switch (s.setup.counting) {
@@ -1611,7 +1671,7 @@ function calc_state(s) {
 		}
 	}
 
-	s.match.announce_prematch = (
+	s.match.announce_pregame = (
 		(s.game.start_server_player_id !== null) &&
 		(s.game.start_receiver_player_id !== null) &&
 		(s.game.score[0] === null));
@@ -1658,9 +1718,9 @@ function render(s) {
 		});
 	}
 
-	if (s.match.announce_prematch) {
+	if (s.match.announce_pregame) {
 		$('#love-all-dialog').show();
-		$('#love-all').text(loveall_announcement());
+		$('#love-all').text(loveall_announcement(s));
 	} else {
 		$('#love-all-dialog').hide();
 	}
@@ -1878,58 +1938,6 @@ function calc_undo(s) {
 		s.undo_possible = s.flattened_presses.length > 0;
 		s.redo_possible = s.redo_stack.length > 0;
 	});
-}
-
-function loveall_announcement(s) {
-	if (s === undefined) {
-		s = state;
-	}
-
-	var prefix = '';
-	if (s.match.finished_games == 1) {
-		prefix = 'Zweiter Satz, ';
-	} else if (s.match.finished_games == 2) {
-		prefix = 'Entscheidungssatz, '
-	}
-
-	return prefix + '0 beide.\nBitte spielen';
-}
-
-function postgame_announcement(s) {
-	if (s === undefined) {
-		s = state;
-	}
-
-	var winner_index = s.game.team1_won ? 0 : 1;
-	var winner_score = s.game.score[winner_index];
-	var loser_score = s.game.score[1 - winner_index];
-	var winner = s.setup.teams[winner_index];
-	var winner_name;
-	if (s.setup.team_competition) {
-		winner_name = winner.name;
-	} else {
-		if (s.setup.is_doubles) {
-			winner_name = winner.players[0].name + ' / ' + winner.players[1].name;
-		} else {
-			winner_name = winner.players[0].name;
-		}
-	}
-	var res = '';
-	if (s.match.finished) {
-		var previous_scores = s.match.finished_games.reduce(function(str, game) {
-			str += game.score[winner_index] + '-' + game.score[1 - winner_index] + ' ';
-			return str;
-		}, '');
-
-		res = 'Das Spiel wurde gewonnen von ' + winner_name + ' mit\n' + previous_scores + winner_score + '-' + loser_score;
-	} else if (s.match.finished_games.length == 0) {
-		res = 'Der erste Satz wurde gewonnen von ' + winner_name + ' mit ' + winner_score + '-' + loser_score;
-	} else if (s.match.finished_games.length == 1) {
-		res = 'Der zweite Satz wurde gewonnen von ' + winner_name + ' mit ' + winner_score + '-' + loser_score + '; einen Satz beide';
-	} else {
-		throw new Error('Won third game but match not finished?')
-	}
-	return res;
 }
 
 // Team name as presented to the umpire
