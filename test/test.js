@@ -2,9 +2,9 @@
 
 var assert = require('assert');
 
-var test_utils = require('./test_utils');
-var _describe = test_utils._describe;
-var _it = test_utils._it;
+var tutils = require('./tutils');
+var _describe = tutils._describe;
+var _it = tutils._it;
 
 var bup = require('../bup.js');
 

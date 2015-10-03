@@ -3,13 +3,13 @@
 var assert = require('assert');
 var _ = require('underscore');
 
-var test_utils = require('./test_utils');
-var _describe = test_utils._describe;
-var _it = test_utils._it;
-var DOUBLES_SETUP = test_utils.DOUBLES_SETUP;
-var SINGLES_SETUP = test_utils.SINGLES_SETUP;
-var press_score = test_utils.press_score;
-var state_after = test_utils.state_after;
+var tutils = require('./tutils');
+var _describe = tutils._describe;
+var _it = tutils._it;
+var DOUBLES_SETUP = tutils.DOUBLES_SETUP;
+var SINGLES_SETUP = tutils.SINGLES_SETUP;
+var press_score = tutils.press_score;
+var state_after = tutils.state_after;
 
 var bup = require('../bup');
 
