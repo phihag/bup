@@ -6,6 +6,7 @@ var state = {
 var settings = {
 	save_finished_matches: true,
 	go_fullscreen: false,
+	show_pronounciation: true,
 };
 
 function _parse_query_string(qs) {
@@ -1154,7 +1155,13 @@ function demo_match_start() {
 }
 
 function show_settings() {
-	$('#settings_wrapper').show();
+	var wrapper = $('#settings_wrapper');
+	if (wrapper.attr('data-settings-visible') == 'true') {
+		return;
+	}
+	wrapper.attr('data-settings-visible', 'true');
+
+	wrapper.show();
 	ui_esc_stack_push(function() {
 		hide_settings();
 	});
@@ -1167,8 +1174,14 @@ function hide_settings(force) {
 	if (!force && !state.initialized) {
 		return;
 	}
+	var wrapper = $('#settings_wrapper');
+	if (wrapper.attr('data-settings-visible') == 'false') {
+		return;
+	}
+
+	wrapper.hide();
 	ui_esc_stack_pop();
-	$('#settings_wrapper').hide();
+	wrapper.attr('data-settings-visible', 'false');
 }
 
 function loveall_announcement(s) {
@@ -1699,6 +1712,8 @@ function calc_state(s) {
 }
 
 function render(s) {
+	var dialog_active = false;  // Is there anything to pick in the bottom?
+
 	function _court_show_player(key) {
 		var p = s.court['player_' + key];
 		$('#court_' + key + '>span').text(p === null ? '' : p.name);
@@ -1707,6 +1722,7 @@ function render(s) {
 	_court_show_player('left_even');
 	_court_show_player('right_even');
 	_court_show_player('right_odd');
+
 
 	if (s.setup.team_competition && (s.game.team1_left !== null)) {
 		$('#court_left_team, #court_right_team').show();
@@ -1738,23 +1754,26 @@ function render(s) {
 	}
 
 	if (s.match.announce_pregame) {
+		dialog_active = true;
 		$('#love-all-dialog').show();
-		$('#love-all').text(loveall_announcement(s));
+		$('#love-all').text(settings.show_pronounciation ? pronounciation(s) : loveall_announcement(s));
 	} else {
 		$('#love-all-dialog').hide();
 	}
 
 	if (s.match.finished) {
+		dialog_active = true;
 		$('#postmatch-confirm-dialog').show();
-		$('#postmatch-confirm').text(postgame_announcement(s));
+		$('#postmatch-confirm').text(settings.show_pronounciation ? pronounciation(s) : postgame_announcement(s));
 		$('.postmatch_options').show();
 	} else {
 		$('#postmatch-confirm-dialog').hide();
 		$('.postmatch_options').hide();
 	}
 	if (!s.match.finished && s.game.finished) {
+		dialog_active = true;
 		$('#postgame-confirm-dialog').show();
-		$('#postgame-confirm').text(postgame_announcement(s));
+		$('#postgame-confirm').text(settings.show_pronounciation ? pronounciation(s) : postgame_announcement(s));
 	} else {
 		$('#postgame-confirm-dialog').hide();
 	}
@@ -1893,6 +1912,7 @@ function render(s) {
 	$('#pick_server').hide();
 	$('#pick_receiver').hide();
 	if (s.game.start_team1_left === null) {
+		dialog_active = true;
 		ui_show_picker($('#pick_side'));
 
 		$('#pick_side_team1').text(calc_teamtext_internal(s, 0));
@@ -1921,13 +1941,27 @@ function render(s) {
 			}
 		});
 
+		dialog_active = true;
 		ui_show_picker($('#pick_server'));
 	} else if (s.game.start_receiver_player_id === null) {
 		$('#pick_receiver button').remove();
+		dialog_active = true;
 		var team_id = (s.game.start_server_team_id == 1) ? 0 : 1;
 		_ui_add_player_pick(s, $('#pick_receiver'), 'pick_receiver', team_id, 0);
 		_ui_add_player_pick(s, $('#pick_receiver'), 'pick_receiver', team_id, 1);
 		ui_show_picker($('#pick_receiver'));
+	}
+
+	if (settings.show_pronounciation && !dialog_active) {
+		var pronounciation_text = pronounciation(s);
+		if (pronounciation_text) {
+			$('#pronounciation>span').text(pronounciation_text);
+			$('#pronounciation').show();
+		} else {
+			$('#pronounciation').hide();
+		}
+	} else {
+		$('#pronounciation').hide();
 	}
 }
 
@@ -2063,12 +2097,15 @@ function init() {
 }
 
 function ui_init_settings() {
-	var checkboxes = ['save_finished_matches', 'go_fullscreen'];
+	var checkboxes = ['save_finished_matches', 'go_fullscreen', 'show_pronounciation'];
 	checkboxes.forEach(function(name) {
 		var box = $('.settings [name="' + name + '"]');
 		box.prop('checked', settings[name]);
 		box.on('change', function() {
 			settings[name] = box.prop('checked');
+			if (name === 'show_pronounciation') {
+				render(state);
+			}
 			settings_store();
 		});
 	});

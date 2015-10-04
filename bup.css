@@ -128,7 +128,7 @@ html, body, button {
 	z-index: 50;
 }
 
-.pick_dialog, .exception_dialog {
+.pick_dialog, .exception_dialog, #pronounciation {
 	position: absolute;
 	bottom: 0;
 	left: 0; right: 0;
@@ -154,6 +154,16 @@ html, body, button {
 }
 .pick_dialog button+button {
 	margin-top: 6vh;
+}
+
+#pronounciation {
+	padding-top: 0;
+}
+#pronounciation>span {
+	display: block;
+	color: #444;
+	white-space: pre-wrap;
+	padding: 2vh 0 2vh 0;
 }
 
 #left_score, #right_score {
