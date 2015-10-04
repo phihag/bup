@@ -201,6 +201,44 @@ function network_send_press(s, press) {
 	}
 }
 
+function _ui_make_team_pick(s, label, type, on_cancel, modify_button) {
+	var kill_dialog = function() {
+		ui_esc_stack_pop();
+		dlg_wrapper.remove();
+	};
+	var cancel = function() {
+		kill_dialog();
+		on_cancel();
+	}
+
+	ui_esc_stack_push(cancel);
+	var dlg_wrapper = $('<div class="modal-wrapper">');
+	dlg_wrapper.on('click', cancel);
+	var dlg = $('<div class="pick_dialog">');
+	dlg.appendTo(dlg_wrapper);
+
+	var label_span = $('<span>');
+	label_span.text(label);
+	label_span.appendTo(dlg);
+
+	var team_indices = [0, 1]
+	team_indices.forEach(function(ti) {
+		var btn = _ui_add_player_pick(s, dlg, type, ti, null, kill_dialog, function() {
+			return calc_teamtext_internal(s, ti);
+		});
+		if (modify_button) {
+			modify_button(btn, ti);
+		}
+	});
+
+	var cancel_btn = $('<button class="cancel-button">Abbrechen</button>');
+	cancel_btn.on('click', cancel);
+	cancel_btn.appendTo(dlg);
+
+	$('#game').append(dlg_wrapper);
+}
+
+
 function _ui_make_player_pick(s, label, type, on_cancel, modify_button) {
 	var kill_dialog = function() {
 		ui_esc_stack_pop();
@@ -256,8 +294,10 @@ function _ui_add_player_pick(s, container, type, team_id, player_id, on_click, n
 		var press = {
 			type: type,
 			team_id: team_id,
-			player_id: player_id,
 		};
+		if (player_id !== null) {
+			press.player_id = player_id;
+		}
 		if (on_click) {
 			on_click(press);
 		}
@@ -507,7 +547,8 @@ function _scoresheet_parse_match(state, col_count) {
 			s.scoresheet_game.cells.push({
 				col: s.scoresheet_game.col_idx,
 				row: 2 * s.scoresheet_game.serving_team + s.scoresheet_game.servers[s.scoresheet_game.serving_team],
-				val: 0
+				val: 0,
+				type: 'score',
 			});
 			var receiving_team = 1 - s.scoresheet_game.serving_team;
 			var receiver_row = (
@@ -517,7 +558,8 @@ function _scoresheet_parse_match(state, col_count) {
 			s.scoresheet_game.cells.push({
 				col: s.scoresheet_game.col_idx,
 				row: receiver_row,
-				val: 0
+				val: 0,
+				type: 'score',
 			});
 			s.scoresheet_game.col_idx++;
 			break;
@@ -543,6 +585,7 @@ function _scoresheet_parse_match(state, col_count) {
 				col: s.scoresheet_game.col_idx,
 				row: 2 * score_team + s.scoresheet_game.servers[score_team],
 				val: s.game.score[score_team] + 1,
+				type: 'score',
 			});
 			s.scoresheet_game.col_idx++;
 			break;
@@ -558,6 +601,7 @@ function _scoresheet_parse_match(state, col_count) {
 				table: table_idx,
 				col: s.scoresheet_game.col_idx,
 				row: 2 * score_team + s.scoresheet_game.servers[score_team],
+				type: 'score',
 				val: s.game.score[score_team] + 1,
 			});
 			s.scoresheet_game.cells.push({
@@ -586,7 +630,7 @@ function _scoresheet_parse_match(state, col_count) {
 			var found = false;
 			for (var i = s.scoresheet_game.cells.length - 1;i >= 0;i--) {
 				var prev_cell = s.scoresheet_game.cells[i];
-				if (typeof prev_cell.val == 'number') {
+				if (prev_cell.type == 'score') {
 					s.scoresheet_game.cells.push({
 						table: table_idx,
 						row: ({0:1, 1:0, 2: 3, 3:2})[prev_cell.row],
@@ -627,7 +671,6 @@ function _scoresheet_parse_match(state, col_count) {
 			s.scoresheet_game.col_idx++;
 			break;
 		case 'interruption':
-		case 'correction':
 			s.scoresheet_game.cells.push({
 				table: table_idx,
 				row: 1,
@@ -635,6 +678,38 @@ function _scoresheet_parse_match(state, col_count) {
 				val: press.char,
 			});
 			s.scoresheet_game.col_idx++;
+			break;
+		case 'correction':
+			for (var i = s.scoresheet_game.cells.length - 1;i >= 0;i--) {
+				var prev_cell = s.scoresheet_game.cells[i];
+				if (prev_cell.type == 'score') {
+					var row;
+					if ((prev_cell.row < 2) == (press.team_id == 0)) {
+						// server's mistake
+						row = ({0:1, 1:0, 2:3, 3:2})[prev_cell.row];
+					} else {
+						// receiver's mistake
+						row = ({0:3, 1:3, 2:0, 3:0})[prev_cell.row];
+					}
+					s.scoresheet_game.cells.push({
+						table: table_idx,
+						row: row,
+						col: prev_cell.col,
+						val: press.char,
+					});
+					found = true;
+					break;
+				}
+			}
+			if (! found) {
+				s.scoresheet_game.cells.push({
+					table: table_idx,
+					row: 1,
+					col: s.scoresheet_game.col_idx,
+					val: press.char,
+				});
+				s.scoresheet_game.col_idx++;
+			}
 			break;
 		case 'yellow-card':
 			s.scoresheet_game.cells.push({
@@ -957,6 +1032,7 @@ function scoresheet_show() {
 			bg.setAttribute('width', bb.width);
 			bg.setAttribute('height', bb.height - 2 * padding);
 			break;
+		case 'score':
 		case 'text':
 		default:
 			var text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
@@ -2328,10 +2404,10 @@ function ui_init() {
 		ui_hide_exception_dialog();
 	});
 	$('#exception_correction').on('click', function() {
-		on_press({
-			type: 'correction',
-		});
 		ui_hide_exception_dialog();
+		_ui_make_team_pick(
+			state, 'Vertauschung Aufschlagfeld', 'correction', ui_show_exception_dialog
+		);
 	});
 	$('#exception_overrule').on('click', function() {
 		on_press({

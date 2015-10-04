@@ -103,13 +103,15 @@ _describe('scoresheet generation', function() {
 			table: 2,
 			col: 0,
 			row: 0,
-			val: 0
+			val: 0,
+			type: 'score',
 		});
 		_assert_cell(cells, {
 			table: 2,
 			col: 0,
 			row: 2,
-			val: 0
+			val: 0,
+			type: 'score',
 		});
 	});
 
@@ -144,13 +146,15 @@ _describe('scoresheet generation', function() {
 			table: 0,
 			col: 0,
 			row: 0,
-			val: 0
+			val: 0,
+			type: 'score',
 		});
 		_assert_cell(cells, {
 			table: 0,
 			col: 1,
 			row: 0,
-			val: 1
+			val: 1,
+			type: 'score',
 		});
 		_assert_cell(cells, {
 			table: 0,
@@ -171,7 +175,8 @@ _describe('scoresheet generation', function() {
 			table: 0,
 			col: 2,
 			row: 3,
-			val: 1
+			val: 1,
+			type: 'score',
 		});
 		_assert_cell(cells, {
 			table: 0,
@@ -195,7 +200,8 @@ _describe('scoresheet generation', function() {
 			table: 0,
 			col: 3,
 			row: 1,
-			val: 2
+			val: 2,
+			type: 'score',
 		});
 		_assert_cell(cells, {
 			table: 0,
@@ -382,13 +388,15 @@ _describe('scoresheet generation', function() {
 			table: 0,
 			col: 2,
 			row: 1,
-			val: 1
+			val: 1,
+			type: 'score',
 		});
 		_assert_cell(cells, {
 			table: 0,
 			col: 3,
 			row: 1,
-			val: 2
+			val: 2,
+			type: 'score',
 		});
 	});
 
@@ -459,7 +467,8 @@ _describe('scoresheet generation', function() {
 			table: 0,
 			col: 1,
 			row: 3,
-			val: 1
+			val: 1,
+			type: 'score',
 		});
 		_assert_cell(cells, {
 			table: 0,
@@ -472,67 +481,6 @@ _describe('scoresheet generation', function() {
 			col: 3,
 			row: 1,
 			val: 'R'
-		});
-	});
-
-	_it('correction', function() {
-		var presses = [];
-		presses.push({
-			'type': 'pick_side', // Andrew&Alice pick left
-			'team1_left': true,
-		});
-		presses.push({
-			'type': 'pick_server', // Andrew serves
-			'team_id': 0,
-			'player_id': 0,
-		});
-		presses.push({
-			'type': 'pick_receiver', // Bob receives
-			'team_id': 1,
-			'player_id': 0,
-		});
-		presses.push({
-			'type': 'love-all'
-		});
-		presses.push({
-			type: 'score',
-			side: 'left',
-		});
-		presses.push({
-			type: 'correction',
-		});
-		presses.push({
-			type: 'referee',
-		});
-		presses.push({
-			type: 'score',
-			side: 'right',
-		});
-
-		var cells = _scoresheet_cells(presses, DOUBLES_SETUP);
-		_assert_cell(cells, {
-			table: 0,
-			col: 1,
-			row: 0,
-			val: 1
-		});
-		_assert_cell(cells, {
-			table: 0,
-			col: 2,
-			row: 1,
-			val: 'C'
-		});
-		_assert_cell(cells, {
-			table: 0,
-			col: 3,
-			row: 1,
-			val: 'R'
-		});
-		_assert_cell(cells, {
-			table: 0,
-			col: 4,
-			row: 3,
-			val: 1
 		});
 	});
 
@@ -580,7 +528,8 @@ _describe('scoresheet generation', function() {
 			table: 0,
 			col: 1,
 			row: 3,
-			val: 1
+			val: 1,
+			type: 'score',
 		});
 		_assert_cell(cells, {
 			table: 0,
@@ -598,7 +547,8 @@ _describe('scoresheet generation', function() {
 			table: 0,
 			col: 3,
 			row: 3,
-			val: 2
+			val: 2,
+			type: 'score',
 		});
 
 		presses.push({
@@ -617,7 +567,8 @@ _describe('scoresheet generation', function() {
 			table: 0,
 			col: 4,
 			row: 0,
-			val: 1
+			val: 1,
+			type: 'score',
 		});
 	});
 
@@ -660,7 +611,8 @@ _describe('scoresheet generation', function() {
 			table: 0,
 			col: 1,
 			row: 0,
-			val: 1
+			val: 1,
+			type: 'score',
 		});
 		_assert_cell(cells, {
 			table: 0,
@@ -678,7 +630,8 @@ _describe('scoresheet generation', function() {
 			table: 0,
 			col: 3,
 			row: 0,
-			val: 2
+			val: 2,
+			type: 'score',
 		});
 
 		presses.push({
@@ -697,7 +650,8 @@ _describe('scoresheet generation', function() {
 			table: 0,
 			col: 4,
 			row: 2,
-			val: 1
+			val: 1,
+			type: 'score',
 		});
 
 		presses.push({
@@ -720,7 +674,8 @@ _describe('scoresheet generation', function() {
 			table: 0,
 			col: 5,
 			row: 0,
-			val: 3
+			val: 3,
+			type: 'score',
 		});
 		_assert_cell(cells, {
 			table: 0,
@@ -837,4 +792,309 @@ _describe('scoresheet generation', function() {
 			val: 'Disqualifiziert'
 		});
 	});	
+
+	_it('correction (service court error)', function() {
+		var presses = [{
+			type: 'pick_side', // Andrew&Alice pick left
+			team1_left: true,
+		}];
+		presses.push({
+			type: 'pick_server', // Andrew serves
+			team_id: 0,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'pick_receiver', // Bob receives
+			team_id: 1,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'love-all'
+		});
+
+		presses.push({
+			type: 'score',
+			side: 'right'
+		});
+		presses.push({
+			type: 'score',
+			side: 'left'
+		});
+		presses.push({
+			type: 'correction',
+			team_id: 0,
+		});
+		var cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 1,
+			row: 3,
+			type: 'score',
+			val: 1
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 2,
+			row: 1,
+			type: 'score',
+			val: 1
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 2,
+			row: 0,
+			val: 'C'
+		});
+
+		presses.push({
+			type: 'score',
+			side: 'right'
+		});
+		presses.push({
+			type: 'score',
+			side: 'left'
+		});
+		presses.push({
+			type: 'correction',
+			team_id: 0,
+		});
+		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 3,
+			row: 2,
+			type: 'score',
+			val: 2
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 4,
+			row: 0,
+			type: 'score',
+			val: 2
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 4,
+			row: 1,
+			val: 'C'
+		});
+
+		presses.push({
+			type: 'score',
+			side: 'right'
+		});
+		presses.push({
+			type: 'score',
+			side: 'right'
+		});
+		presses.push({
+			type: 'correction',
+			team_id: 1,
+		});
+		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 5,
+			row: 3,
+			type: 'score',
+			val: 3
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 6,
+			row: 3,
+			type: 'score',
+			val: 4
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 6,
+			row: 2,
+			val: 'C'
+		});
+
+		presses.push({
+			type: 'score',
+			side: 'left'
+		});
+		presses.push({
+			type: 'score',
+			side: 'right'
+		});
+		presses.push({
+			type: 'correction',
+			team_id: 1,
+		});
+		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 7,
+			row: 1,
+			type: 'score',
+			val: 3
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 8,
+			row: 2,
+			type: 'score',
+			val: 5
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 8,
+			row: 3,
+			val: 'C'
+		});
+
+		// Now against the receiver
+		presses.push({
+			type: 'score',
+			side: 'left'
+		});
+		presses.push({
+			type: 'score',
+			side: 'right'
+		});
+		presses.push({
+			type: 'score',
+			side: 'right'
+		});
+		presses.push({
+			type: 'correction',
+			team_id: 0,
+		});
+		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 9,
+			row: 0,
+			type: 'score',
+			val: 4
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 10,
+			row: 3,
+			type: 'score',
+			val: 6
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 11,
+			row: 3,
+			type: 'score',
+			val: 7
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 11,
+			row: 0,
+			val: 'C'
+		});
+
+		presses.push({
+			type: 'score',
+			side: 'left'
+		});
+		presses.push({
+			type: 'score',
+			side: 'right'
+		});
+		presses.push({
+			type: 'correction',
+			team_id: 0,
+		});
+		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 12,
+			row: 1,
+			type: 'score',
+			val: 5
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 13,
+			row: 2,
+			type: 'score',
+			val: 8
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 13,
+			row: 0,
+			val: 'C'
+		});
+
+		presses.push({
+			type: 'score',
+			side: 'left'
+		});
+		presses.push({
+			type: 'score',
+			side: 'left'
+		});
+		presses.push({
+			type: 'correction',
+			team_id: 1,
+		});
+		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 14,
+			row: 0,
+			type: 'score',
+			val: 6
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 15,
+			row: 0,
+			type: 'score',
+			val: 7
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 15,
+			row: 3,
+			val: 'C'
+		});
+
+		presses.push({
+			type: 'score',
+			side: 'right'
+		});
+		presses.push({
+			type: 'score',
+			side: 'left'
+		});
+		presses.push({
+			type: 'correction',
+			team_id: 1,
+		});
+		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 16,
+			row: 3,
+			type: 'score',
+			val: 9
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 17,
+			row: 1,
+			type: 'score',
+			val: 8
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 17,
+			row: 3,
+			val: 'C'
+		});
+
+	});
 });
