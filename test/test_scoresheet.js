@@ -685,6 +685,77 @@ _describe('scoresheet generation', function() {
 		});
 	});
 
+	_it('red card after match', function() {
+		var presses = [];
+		presses.push({
+			type: 'pick_side', // Andrew&Alice pick left
+			team1_left: true,
+		});
+		presses.push({
+			type: 'pick_server', // Alice serves
+			team_id: 0,
+			player_id: 1,
+		});
+		presses.push({
+			type: 'pick_receiver', // Bob receives
+			team_id: 1,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'love-all'
+		});
+		press_score(presses, 21, 5);
+		presses.push({
+			type: 'postgame-confirm'
+		});
+		presses.push({
+			type: 'pick_server', // Alice serves
+			team_id: 0,
+			player_id: 1,
+		});
+		presses.push({
+			type: 'pick_receiver', // Bob receives
+			team_id: 1,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'love-all',
+		});
+		press_score(presses, 0, 21);
+		presses.push({  // Red card against Bob after he lost 21-0
+			type: 'red-card',
+			team_id: 1,
+			player_id: 0,
+		});
+
+		var cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 1,
+			col: 20,
+			row: 1,
+			type: 'score',
+			val: 20,
+		});
+		_assert_cell(cells, {
+			table: 1,
+			col: 21,
+			row: 1,
+			type: 'score',
+			val: 21,
+		});
+		_assert_cell(cells, {
+			table: 1,
+			col: 22,
+			row: 2,
+			val: 'F',
+		});
+		cells.forEach(function(cell) {
+			if (cell.type == 'score') {
+				assert(cell.val <= 21);
+			}
+		});
+	});
+
 	_it('retired', function() {
 		var base_presses = [];
 		base_presses.push({

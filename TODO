@@ -1,5 +1,3 @@
-scoresheet red card after match
-
 embed in CourtSpot
 Download game config from courtspot
 Write results to CourtSpot
@@ -91,25 +89,19 @@ color change at 20s in timeouts
 timer should continue during cards
 support multiple networks at the same time
 use court name in 20s announcements
-check scoresheet from liveaw (all there?)
 umpire / service judge name (also in scoresheet)
 shortcuts u/r undo/redo
-add a test for overrule and other marks / cards
-show F mark on top after red cards
 eliminate uses of match.game_score; use match.team1_won instead
-title for all buttons
+title for all buttonsr
 scoresheet: begin and end on different days
 display mode for multiple courts (via WebRTC)
 WebRTC bootstrapping without Internet (QR code? UDP multicast?)
 write more automated tests for scoresheet generation (singles..., 20all dash, disqualified etc.)
 add test for retired-then-referee
-icons for scoresheet butotns
-scoresheet button after game end
+icons for scoresheet (PDF/print/back) buttons
 test for shuttle
-nice icon for go_fullscreen dialog
 detect if already in F11 fullscreen before showing fullscreen dialog
 &fs in hash to override fullscreen setting
-icons for print and PDF
 If long pronounciation ends with short one, short pronounciation in larger font-size
 "bitte spielen" after timer expires at 11
 "court 1, 20 seconds"  after timer expires at 11 / new game
@@ -118,4 +110,6 @@ test pronounciation for cards at beginning and end of match
 move press.char to a helper function
 remove #pick_side in favor of _ui_make_team_pick
 test correction in scoresheet at very beginning of set
+move scoresheet press handling after state_calc (and use servers of game)
+test red card (scoresheet/pronounciation) before any game (before match end)
 -> Demo Jörg H, Manuel, Susanne

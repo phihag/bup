@@ -590,20 +590,22 @@ function _scoresheet_parse_match(state, col_count) {
 			s.scoresheet_game.col_idx++;
 			break;
 		case 'red-card':
-			var score_team = 1 - press.team_id;
-			if (s.game.team1_serving != (score_team == 0)) {
-				// Service over
-				if (s.setup.is_doubles) {
-					s.scoresheet_game.servers[score_team] = 1 - s.scoresheet_game.servers[score_team];
+			if (! s.game.finished) {
+				var score_team = 1 - press.team_id;
+				if (s.game.team1_serving != (score_team == 0)) {
+					// Service over
+					if (s.setup.is_doubles) {
+						s.scoresheet_game.servers[score_team] = 1 - s.scoresheet_game.servers[score_team];
+					}
 				}
+				s.scoresheet_game.cells.push({
+					table: table_idx,
+					col: s.scoresheet_game.col_idx,
+					row: 2 * score_team + s.scoresheet_game.servers[score_team],
+					type: 'score',
+					val: s.game.score[score_team] + 1,
+				});
 			}
-			s.scoresheet_game.cells.push({
-				table: table_idx,
-				col: s.scoresheet_game.col_idx,
-				row: 2 * score_team + s.scoresheet_game.servers[score_team],
-				type: 'score',
-				val: s.game.score[score_team] + 1,
-			});
 			s.scoresheet_game.cells.push({
 				table: table_idx,
 				col: s.scoresheet_game.col_idx,
