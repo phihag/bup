@@ -499,6 +499,9 @@ span.score_announcement+span.score_announcement {
 	float: right;
 }
 
+.scoresheet {
+	background: #fff;
+}
 @media tv,projection,handheld,screen {
 	.scoresheet {
 		position: absolute;
