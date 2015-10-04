@@ -733,7 +733,7 @@ function scoresheet_show() {
 
 	var shuttle_counter_active = (typeof state.match.shuttle_count == 'number');
 	$('.scoresheet_shuttle_counter').attr('visibility', shuttle_counter_active ? 'visible' : 'hidden');
-	$('.scoresheet_shuttle_counter_value').text(state.match.shuttle_count);
+	$('.scoresheet_shuttle_counter_value').text(state.match.shuttle_count ? state.match.shuttle_count : '');
 
 	var side1_str = '';
 	var side2_str = '';
@@ -1183,10 +1183,6 @@ function loveall_announcement(s) {
 }
 
 function postgame_announcement(s) {
-	if (s === undefined) {
-		s = state;
-	}
-
 	var winner_index = s.game.team1_won ? 0 : 1;
 	var winner_score = s.game.score[winner_index];
 	var loser_score = s.game.score[1 - winner_index];
@@ -1750,13 +1746,15 @@ function render(s) {
 
 	if (s.match.finished) {
 		$('#postmatch-confirm-dialog').show();
-		$('#postmatch-confirm').text(postgame_announcement());
+		$('#postmatch-confirm').text(postgame_announcement(s));
+		$('.postmatch_options').show();
 	} else {
 		$('#postmatch-confirm-dialog').hide();
+		$('.postmatch_options').hide();
 	}
 	if (!s.match.finished && s.game.finished) {
 		$('#postgame-confirm-dialog').show();
-		$('#postgame-confirm').text(postgame_announcement());
+		$('#postgame-confirm').text(postgame_announcement(s));
 	} else {
 		$('#postgame-confirm-dialog').hide();
 	}
@@ -2130,6 +2128,7 @@ function ui_init() {
 		$('#script_jspdf').on('load', jspdf_loaded);
 	}
 
+	$('.postmatch_scoresheet_button').on('click', scoresheet_show);
 	$('.scoresheet_button').on('click', scoresheet_show);
 	$('.scoresheet_button_pdf').on('click', scoresheet_pdf);
 	$('.scoresheet_button_back').on('click', scoresheet_hide);

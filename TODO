@@ -1,7 +1,8 @@
+show scoresheet button at end of game
 display pronounciation
 
 embed in CourtSpot
-Allow config to be downloaded from CourtSpot
+Download game config from courtspot
 Write results to CourtSpot
 
 re-style settings with columns
@@ -120,3 +121,4 @@ If long pronounciation ends with short one, short pronounciation in larger font-
 test that cards lead to an exceptions entry in match
 test pronounciation for cards at beginning and end of match
 move press.char to a helper function
+-> Demo Jörg H, Manuel, Susanne
