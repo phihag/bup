@@ -1166,6 +1166,95 @@ _describe('scoresheet generation', function() {
 			row: 3,
 			val: 'C'
 		});
+	});
+
+	_it('server mark in second game in singles', function() {
+		var presses = [{
+			type: 'pick_side', // Alice picks left
+			team1_left: true,
+		}];
+		presses.push({
+			type: 'pick_server', // Bob serves
+			team_id: 1,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'love-all'
+		});
+		var cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: -1,
+			row: 2,
+			val: 'A'
+		});
+
+		press_score(presses, 21, 5);
+		presses.push({
+			type: 'postgame-confirm'
+		});
+
+		presses.push({
+			type: 'love-all'
+		});
+		presses.push({
+			type: 'score',
+			side: 'right'
+		});
+		cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		cells.forEach(function(cell) {
+			assert(cell.val != 'R');
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: -1,
+			row: 2,
+			val: 'A'
+		});
+		_assert_cell(cells, {
+			table: 1,
+			col: 0,
+			row: 0,
+			type: 'score',
+			val: 0
+		});
+		_assert_cell(cells, {
+			table: 1,
+			col: 1,
+			row: 0,
+			type: 'score',
+			val: 1
+		});
+		_assert_cell(cells, {
+			table: 1,
+			col: 0,
+			row: 2,
+			type: 'score',
+			val: 0
+		});
+		_assert_cell(cells, {
+			table: 1,
+			col: -1,
+			row: 0,
+			val: 'A'
+		});
+
+
+		press_score(presses, 21, 4);
+		presses.push({
+			type: 'postgame-confirm'
+		});
+
+		presses.push({
+			type: 'love-all'
+		});
+		cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		_assert_cell(cells, {
+			table: 2,
+			col: -1,
+			row: 2,
+			val: 'A'
+		});
 
 	});
 });

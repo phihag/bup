@@ -265,6 +265,7 @@ span.score_announcement+span.score_announcement {
 	min-width: 1em;
 	min-height: 1em;
 	margin-left: 0.5em;
+	vertical-align: middle;
 }
 
 .topleft_buttons>*,.topright_buttons>* {

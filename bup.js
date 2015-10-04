@@ -570,6 +570,11 @@ function _scoresheet_parse_match(state, col_count) {
 			if (! s.setup.is_doubles) {
 				s.scoresheet_game.servers = [0, 0];
 				s.scoresheet_game.serving_team = s.game.team1_won ? 0 : 1;
+				s.scoresheet_game.cells.push({
+					col: -1,
+					row: 2 * s.scoresheet_game.serving_team,
+					val: 'A'
+				});
 			}
 			// In doubles we'll get future pick-server and pick-receiver events
 			break;
@@ -599,7 +604,6 @@ function _scoresheet_parse_match(state, col_count) {
 					}
 				}
 				s.scoresheet_game.cells.push({
-					table: table_idx,
 					col: s.scoresheet_game.col_idx,
 					row: 2 * score_team + s.scoresheet_game.servers[score_team],
 					type: 'score',
@@ -607,7 +611,6 @@ function _scoresheet_parse_match(state, col_count) {
 				});
 			}
 			s.scoresheet_game.cells.push({
-				table: table_idx,
 				col: s.scoresheet_game.col_idx,
 				row: 2 * press.team_id + press.player_id,
 				val: press.char,
@@ -621,7 +624,6 @@ function _scoresheet_parse_match(state, col_count) {
 		switch (press.type) {
 		case 'injury':
 			s.scoresheet_game.cells.push({
-				table: table_idx,
 				col: s.scoresheet_game.col_idx,
 				row: 2 * press.team_id + press.player_id,
 				val: press.char,
@@ -634,7 +636,6 @@ function _scoresheet_parse_match(state, col_count) {
 				var prev_cell = s.scoresheet_game.cells[i];
 				if (prev_cell.type == 'score') {
 					s.scoresheet_game.cells.push({
-						table: table_idx,
 						row: ({0:1, 1:0, 2: 3, 3:2})[prev_cell.row],
 						col: prev_cell.col,
 						val: press.char,
@@ -645,7 +646,6 @@ function _scoresheet_parse_match(state, col_count) {
 			}
 			if (! found) {
 				s.scoresheet_game.cells.push({
-					table: table_idx,
 					row: 1,
 					col: s.scoresheet_game.col_idx,
 					val: press.char,
@@ -665,7 +665,6 @@ function _scoresheet_parse_match(state, col_count) {
 			}
 
 			s.scoresheet_game.cells.push({
-				table: table_idx,
 				row: row,
 				col: s.scoresheet_game.col_idx,
 				val: press.char,
@@ -674,7 +673,6 @@ function _scoresheet_parse_match(state, col_count) {
 			break;
 		case 'interruption':
 			s.scoresheet_game.cells.push({
-				table: table_idx,
 				row: 1,
 				col: s.scoresheet_game.col_idx,
 				val: press.char,
@@ -694,7 +692,6 @@ function _scoresheet_parse_match(state, col_count) {
 						row = ({0:3, 1:3, 2:0, 3:0})[prev_cell.row];
 					}
 					s.scoresheet_game.cells.push({
-						table: table_idx,
 						row: row,
 						col: prev_cell.col,
 						val: press.char,
@@ -705,7 +702,6 @@ function _scoresheet_parse_match(state, col_count) {
 			}
 			if (! found) {
 				s.scoresheet_game.cells.push({
-					table: table_idx,
 					row: 1,
 					col: s.scoresheet_game.col_idx,
 					val: press.char,
@@ -715,7 +711,6 @@ function _scoresheet_parse_match(state, col_count) {
 			break;
 		case 'yellow-card':
 			s.scoresheet_game.cells.push({
-				table: table_idx,
 				row: 2 * press.team_id + press.player_id,
 				col: s.scoresheet_game.col_idx,
 				val: press.char,
@@ -724,7 +719,6 @@ function _scoresheet_parse_match(state, col_count) {
 			break;
 		case 'retired':
 			s.scoresheet_game.cells.push({
-				table: table_idx,
 				row: 2 * press.team_id + press.player_id,
 				col: s.scoresheet_game.col_idx,
 				val: press.char,
@@ -734,7 +728,6 @@ function _scoresheet_parse_match(state, col_count) {
 		case 'disqualified':
 			s.scoresheet_game.cells.push({
 				type: 'longtext',
-				table: table_idx,
 				row: 2 * press.team_id + press.player_id,
 				col: s.scoresheet_game.col_idx,
 				val: 'Disqualifiziert',
