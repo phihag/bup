@@ -1,5 +1,3 @@
-test IE
-
 embed in CourtSpot
 Download game config from courtspot
 Write results to CourtSpot
@@ -87,7 +85,6 @@ test black card before game start
 set window title (include match_name)
 up/down keys to switch between options; left-right for punishments
 display mode (tap anywhere to exit)
-color change at 20s in timeouts
 timer should continue during cards
 support multiple networks at the same time
 use court name in 20s announcements
@@ -114,4 +111,5 @@ remove #pick_side in favor of _ui_make_team_pick
 test correction in scoresheet at very beginning of set
 move scoresheet press handling after state_calc (and use servers of game)
 test red card (scoresheet/pronounciation) before any game (before match end)
+undo without redo back to start should reset begin in umpire scoresheet
 -> Demo Jörg H, Manuel, Susanne

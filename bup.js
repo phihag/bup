@@ -1532,11 +1532,13 @@ function score(s, team_id, press) {
 		s.timer = {
 			start: press.timestamp,
 			duration: 60 * 1000,
+			exigent: 20499,
 		};
 	} else if (s.game.finished && !s.match.finished) {
 		s.timer = {
 			start: press.timestamp,
 			duration: 120 * 1000,
+			exigent: 20499,
 		};
 	} else {
 		s.timer = false;
@@ -2210,7 +2212,13 @@ function ui_update_timer() {
 	if (remaining_val >= 60) {
 		remaining_val = Math.floor(remaining_val / 60) + ':' + _add_zeroes(remaining_val % 60);
 	}
-	$('.timer').text(remaining_val);
+	var timer_el = $('.timer');
+	timer_el.text(remaining_val);
+	if (state.timer.exigent && (remaining <= state.timer.exigent)) {
+		timer_el.addClass('timer_exigent');
+	} else {
+		timer_el.removeClass('timer_exigent');
+	}
 	if (remaining <= 0) {
 		ui_remove_timer();
 		return;
