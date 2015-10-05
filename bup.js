@@ -1200,14 +1200,14 @@ function demo_match_start() {
 		counting: '3x21',
 		is_doubles: true,
 		teams: [{
-			name: '1.BC Beuel 1',
+			name: '1.BC Beuel',
 			players: [{
 				name: 'Max Weißkirchen'
 			}, {
 				name: 'Birgit Michels'
 			}]
 		}, {
-			name: '1.BC Sbr.-Bischmisheim 1',
+			name: '1.BC Sbr.-Bischmisheim',
 			players: [{
 				name: 'Michael Fuchs'
 			}, {
