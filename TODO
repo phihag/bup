@@ -3,6 +3,7 @@ Download game config from courtspot
 Write results to CourtSpot
 
 IE kill scoresheet scrollbars
+IE fix PDF output
 
 re-style settings with columns
 only show 4 games to resume
@@ -16,6 +17,7 @@ LICENSE
 CONTRIBUTING (-> assign copyright form)
 better fullscreen flow (force fullscreen as a setting / as a hash)
 
+offline webapp Manifest (only in production)
 make dist (copy into dist/ subfolder, minify css/js, combine js)
 make upload (upload based on dist)
 split js files
