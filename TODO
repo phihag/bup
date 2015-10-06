@@ -1,6 +1,36 @@
-embed in CourtSpot
-Download game config from courtspot
+Download court list from CourtSpot
+	start game with click on button
+
+show loading icon while we load from CourtSpot
 Write results to CourtSpot
+
+refresh button to refresh matches now
+add network_timeout setting
+refresh automatically every 5s it's displayed
+CourtSpot: test various network outages
+network_matches: hide resume?
+CourtSpot
+	display our current court in settings (+ CourtSpot)
+	allow changing which court we're on (in settings / by click/touch on court name)
+message Ulf wegen JSON string (to resume)
+Improve CourtSpot
+	resume from courtspot?
+	show a warning when starting a game that's already running
+
+make dist (copy into dist/ subfolder, minify css/js, combine js)
+split js files
+make upload (upload based on dist)
+offline webapp Manifest (only in production)
+	reloading
+
+add badmintonticker.de support
+	set up proxy to test
+	read matches (once with transparent reload when going to seconds)
+	reload button
+	read current result from badmintonticker
+
+document network error cases
+animation in hide_settings (go to top-right icon)
 
 IE kill scoresheet scrollbars
 IE fix PDF output
@@ -8,19 +38,12 @@ IE fix PDF output
 re-style settings with columns
 only show 4 games to resume
 
-add badmintonticker.de support
-read current result from badmintonticker
 
 move shuttle counter away from shuttle counter button in landscape mode
 better design for settings on mobiles
 LICENSE
 CONTRIBUTING (-> assign copyright form)
 better fullscreen flow (force fullscreen as a setting / as a hash)
-
-offline webapp Manifest (only in production)
-make dist (copy into dist/ subfolder, minify css/js, combine js)
-make upload (upload based on dist)
-split js files
 
 write UX documentation
 
@@ -116,4 +139,9 @@ test correction in scoresheet at very beginning of set
 move scoresheet press handling after state_calc (and use servers of game)
 test red card (scoresheet/pronounciation) before any game (before match end)
 undo without redo back to start should reset begin in umpire scoresheet
+cursor for buttons?
+loading bup.. text for very slow connections
+network: add an option to change court
+network: color/opacity in match list by state
+preload images (if not Manifest)
 -> Demo Jörg H, Manuel, Susanne

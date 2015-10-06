@@ -79,6 +79,14 @@ function _uuid() {
 	});
 }
 
+function _xml_get_text(node, element_name) {
+	var els = node.getElementsByTagName(element_name);
+	if ((els.length > 0) && (els[0].childNodes.length > 0)) {
+		return els[0].childNodes[0].nodeValue;
+	}
+	return null;
+}
+
 function _svg_align_vcenter(text, vcenter) {
 	var bbox = text.getBBox();
 	var text_center = bbox.y + bbox.height / 2;
@@ -189,6 +197,121 @@ function liveaw_init(liveaw_match_id) {
 	});
 }
 
+function _courtspot_request(s, path, cb) {
+	var url = s.courtspot.baseurl + path;
+	$.ajax(url, {
+		dataType: 'xml',
+	}).done(function(doc) {
+		cb(null, doc);
+	});
+}
+
+function courtspot_list_matches(s, cb) {
+	_courtspot_request(s, 'php/dbabfrage.php', function(err, xml_doc) {
+		if (err) {
+			return cb(err);
+		}
+
+		function _get_player(match_node, key) {
+			var res = {
+				firstname: _xml_get_text(match_node, key + 'VN'),
+				lastname: _xml_get_text(match_node, key + 'NN'),
+			};
+			if (res.firstname) {
+				if (res.lastname) {
+					res.name = res.firstname + ' ' + res.lastname;
+				} else {
+					res.name = res.firstname;
+				}
+			} else {
+				if (res.lastname) {
+					res.name = res.lastname;
+				} else {
+					return null;
+				}
+			}
+			return res;
+		}
+
+		function _get_team(match_node, v_node, key) {
+			var player1 = _get_player(match_node, key + 'spieler1');
+			var players = [];
+			if (player1) {
+				players.push(player1);
+				var player2 = _get_player(match_node, key + 'spieler2');
+				if (player2) {
+					players.push(player2);
+				}
+			}
+			return {
+				name: v_node ? _xml_get_text(v_node, key) : null,
+				players: players,
+			};
+		}
+
+		function _get_score(match_node, key) {
+			var score_str = _xml_get_text(match_node, key);
+			return score_str ? parseInt(score_str, 10) : -1;
+		}
+
+		var matches = [];
+		var v_node = xml_doc.getElementsByTagName('VERWALTUNG')[0];
+		var match_nodes = xml_doc.getElementsByTagName('Spiel');
+		for (var i = 0;i < match_nodes.length;i++) {
+			var match_node = match_nodes[i];
+			var home_team = _get_team(match_node, v_node, 'Heim');
+			var away_team = _get_team(match_node, v_node, 'Gast');
+
+			var match_name = _xml_get_text(match_node, 'Art');
+
+			if (!match_name || (home_team.players.length < 1) || (away_team.players.length < 1)) {
+				continue;
+			}
+
+			var network_score = [];
+			for (var game_idx = 1;game_idx <= 3;game_idx++) {
+				var home_score = _get_score(match_node, 'HeimSatz' + game_idx);
+				var away_score = _get_score(match_node, 'GastSatz' + game_idx);
+				if ((home_score >= 0) && (away_score >= 0)) {
+					network_score.push([home_score, away_score]);
+				}
+			}
+
+			matches.push({
+				setup: {
+					counting: '3x21',
+					is_doubles: home_team.players.length == 2,
+					match_name: match_name,
+					teams: [home_team, away_team],
+					courtspot_id: match_name,
+					team_competition: true,
+				},
+				network_score: network_score,
+			});
+		}
+		cb(err, matches);
+	});
+}
+
+function courtspot_init(s, court_name) {
+	var baseurl = '../../';
+	var m = window.location.pathname.match(/^(.*\/)[^\/]+\/bup(?:\/(?:bup\.html)?)?$/);
+	if (m) {
+		baseurl = m[1];
+	}
+
+	s.courtspot = {
+		baseurl: baseurl,
+		court: court_name,
+		api: {
+			list_matches: courtspot_list_matches,
+		},
+	};
+	$('.setup_network_container').show();
+
+	show_settings();
+}
+
 function network_send_press(s, press) {
 	if (s.liveaw && s.liveaw.match_id) {
 		_liveaw_request({
@@ -199,6 +322,63 @@ function network_send_press(s, press) {
 
 		});
 	}
+}
+
+function ui_network_list_matches(s, network_type) {
+	var container = $('#setup_network_matches');
+	if (!network_type) {
+		network_type = container.attr('data-network-type');
+	}
+
+	s[network_type].api.list_matches(s, function(err, matches) {
+		container.empty(); // TODO better transition if we're updating?
+		matches.forEach(function(match) {
+			var btn = $('<button class="setup_network_match">');
+			var match_name = $('<span class="setup_network_match_match_name">');
+			match_name.text(match.setup.match_name);
+			btn.append(match_name);
+
+			var _players_str = function(team) {
+				return team.players.map(function(p) {
+					return p.name;
+				}).join('/');
+			};
+
+			var _score_text = function(network_score) {
+				if (!network_score) {
+					return '';
+				}
+
+				if ((network_score.length == 1) && (network_score[0][0] == 0) && (network_score[0][1] == 0)) {
+					return '';
+				}
+
+				return network_score.map(function(network_game) {
+					return network_game[0] + '-' + network_game[1];
+				}).join(' ');
+			};
+
+			var home_players = $('<span class="setup_network_match_home_players">');
+			home_players.text(_players_str(match.setup.teams[0]));
+			btn.append(home_players);
+
+			var away_players = $('<span class="setup_network_match_away_players">');
+			away_players.text(_players_str(match.setup.teams[1]));
+			btn.append(away_players);
+
+			var score = $('<span class="setup_network_match_score">');
+			var score_text = _score_text(match.network_score);
+			score.text(score_text ? score_text : '\xA0');
+			btn.append(score);
+
+			btn.on('click', function() {
+				start_match(match.setup);
+				hide_settings();
+			});
+
+			container.append(btn);
+		});
+	});
 }
 
 function _ui_make_team_pick(s, label, type, on_cancel, modify_button) {
@@ -1233,6 +1413,16 @@ function show_settings() {
 	wrapper.attr('data-settings-visible', 'true');
 
 	wrapper.show();
+	if (state.courtspot) {
+		$('.setup_network_container').show();
+		$('.setup_show_manual').show();
+		$('#setup_manual_form').hide();
+		$('#setup_network_matches').attr('data-network-type', 'courtspot');
+		ui_network_list_matches(state);
+	} else {
+		$('.setup_network_container').hide();
+		$('#setup_manual_form').show();
+	}
 	ui_esc_stack_push(function() {
 		hide_settings();
 	});
@@ -2183,6 +2373,13 @@ function ui_init_settings() {
 		});
 	});
 
+	$('.setup_show_manual').click(function(e) {
+		e.preventDefault();
+		$('.setup_show_manual').hide();
+		$('#setup_manual_form').show(200);
+		return false;
+	});
+
 	ui_fullscreen_init();
 	$('.fullscreen_button').on('click', function() {
 		ui_fullscreen_toggle();
@@ -2472,6 +2669,8 @@ function ui_init() {
 	var hash_query = _parse_query_string(window.location.hash.substr(1));
 	if (hash_query.liveaw_match_id) {
 		liveaw_init(hash_query.liveaw_match_id);
+	} else if (hash_query.courtspot_court) {
+		courtspot_init(state, hash_query.courtspot_court);
 	} else if (typeof hash_query.demo !== 'undefined') {
 		demo_match_start();
 	} else {
