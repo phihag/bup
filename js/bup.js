@@ -830,6 +830,13 @@ function scoresheet_show() {
 		return; // Called on start with Shift+S
 	}
 
+	function _text(search, str) {
+		if (!str) {
+			str = '';
+		}
+		$(search).text(str);
+	}
+
 	// Show SVG before modifying it, otherwise getBBox won't work
 	var settings_visible = $('#settings_wrapper').is(':visible');
 	$('.scoresheet_container').attr('data-settings-visible', settings_visible ? 'true' : 'false');
@@ -841,29 +848,29 @@ function scoresheet_show() {
 	ui_esc_stack_push(scoresheet_hide);
 
 	// Set text fields
-	$('.scoresheet_tournament_name').text(state.setup.tournament_name);
-	$('.scoresheet_event_name').text(state.setup.event_name);
-	$('.scoresheet_match_name').text(state.setup.match_name);
+	_text('.scoresheet_tournament_name', state.setup.tournament_name);
+	_text('.scoresheet_event_name', state.setup.event_name);
+	_text('.scoresheet_match_name', state.setup.match_name);
 	var match_date = new Date(state.metadata.start);
-	$('.scoresheet_date_value').text(_human_date_str(match_date));
+	_text('.scoresheet_date_value', _human_date_str(match_date));
 
-	$('.scoresheet_court_name').text(state.setup.court_name);
+	_text('.scoresheet_court_name', state.setup.court_name);
 
-	$('.scoresheet_begin_value').text(state.metadata.start ? _get_time_str(new Date(state.metadata.start)) : '');
+	_text('.scoresheet_begin_value', state.metadata.start ? _get_time_str(new Date(state.metadata.start)) : '');
 	if (state.match.finished) {
-		$('.scoresheet_end_value').text(state.metadata.updated ? _get_time_str(new Date(state.metadata.updated)) : '');
-		$('.scoresheet_duration_value').text(state.metadata.updated ? _duration_str(state.metadata.start, state.metadata.updated) : '');
+		_text('.scoresheet_end_value', state.metadata.updated ? _get_time_str(new Date(state.metadata.updated)) : '');
+		_text('.scoresheet_duration_value', state.metadata.updated ? _duration_str(state.metadata.start, state.metadata.updated) : '');
 	} else {
-		$('.scoresheet_end_value').text(null);
-		$('.scoresheet_duration_value').text(null);
+		_text('.scoresheet_end_value', null);
+		_text('.scoresheet_duration_value', null);
 	}
 
-	$('.scoresheet_results_team1_player1').text(state.setup.teams[0].players[0].name);
-	$('.scoresheet_results_team1_player2').text(state.setup.is_doubles ? state.setup.teams[0].players[1].name : '');
-	$('.scoresheet_results_team1_name').text(state.setup.teams[0].name);
-	$('.scoresheet_results_team2_player1').text(state.setup.teams[1].players[0].name);
-	$('.scoresheet_results_team2_player2').text(state.setup.is_doubles ? state.setup.teams[1].players[1].name: '');
-	$('.scoresheet_results_team2_name').text(state.setup.teams[1].name);
+	_text('.scoresheet_results_team1_player1', state.setup.teams[0].players[0].name);
+	_text('.scoresheet_results_team1_player2', state.setup.is_doubles ? state.setup.teams[0].players[1].name : '');
+	_text('.scoresheet_results_team1_name', state.setup.teams[0].name);
+	_text('.scoresheet_results_team2_player1', state.setup.teams[1].players[0].name);
+	_text('.scoresheet_results_team2_player2', state.setup.is_doubles ? state.setup.teams[1].players[1].name: '');
+	_text('.scoresheet_results_team2_name', state.setup.teams[1].name);
 
 	$('.scoresheet_results_circle_team1').attr('visibility',
 		(state.match.finished && state.match.team1_won) ? 'visible' : 'hidden');
@@ -872,7 +879,7 @@ function scoresheet_show() {
 
 	var shuttle_counter_active = (typeof state.match.shuttle_count == 'number');
 	$('.scoresheet_shuttle_counter').attr('visibility', shuttle_counter_active ? 'visible' : 'hidden');
-	$('.scoresheet_shuttle_counter_value').text(state.match.shuttle_count ? state.match.shuttle_count : '');
+	_text('.scoresheet_shuttle_counter_value', state.match.shuttle_count ? state.match.shuttle_count : '');
 
 	var side1_str = '';
 	var side2_str = '';
@@ -891,8 +898,8 @@ function scoresheet_show() {
 			side2_str = 'L';
 		}
 	}
-	$('.scoresheet_results_team1_side').text(side1_str);	
-	$('.scoresheet_results_team2_side').text(side2_str);	
+	_text('.scoresheet_results_team1_side', side1_str);	
+	_text('.scoresheet_results_team2_side', side2_str);	
 
 	if (state.match) {
 		var all_finished_games = state.match.finished_games.slice();
