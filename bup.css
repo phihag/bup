@@ -66,7 +66,7 @@ html, body, button {
 
 	font-size: 6vmin;
 	margin: 0 auto;
-	background-image: url(static/icons/court_small.svg);
+	background-image: url(icons/court_small.svg);
 	background-size: 100%;
 	background-repeat: no-repeat;
 	border: 1px solid #dadada;
@@ -138,7 +138,7 @@ html, body, button {
 	left: 50%; top: 50%;
 	margin-left: -7.5vh; margin-top: -7.5vh;
 	width: 15vh; height: 15vh;
-	background-image: url(static/icons/court_arrow.svg);
+	background-image: url(icons/court_arrow.svg);
 	background-size: 100%;
 	background-repeat: no-repeat;
 	z-index: 50;
@@ -343,19 +343,19 @@ span.score_announcement+span.score_announcement {
 	margin: 1vh 1vh 0 0;
 }
 #button_settings>span {
-	background-image: url(static/icons/settings.svg);
+	background-image: url(icons/settings.svg);
 }
 #button_exception>span {
-	background-image: url(static/icons/exception.svg);
+	background-image: url(icons/exception.svg);
 }
 #button_undo>span {
-	background-image: url(static/icons/undo.svg);
+	background-image: url(icons/undo.svg);
 }
 #button_redo>span {
-	background-image: url(static/icons/redo.svg);
+	background-image: url(icons/redo.svg);
 }
 #button_shuttle>span {
-	background-image: url(static/icons/shuttle-button.svg);
+	background-image: url(icons/shuttle-button.svg);
 }
 
 
@@ -406,7 +406,7 @@ span.score_announcement+span.score_announcement {
 	padding: 0.3vh 0;
 }
 .button_delete>span {
-	background-image: url(static/icons/delete.svg);
+	background-image: url(icons/delete.svg);
 }
 
 .exception_dialog {
@@ -430,13 +430,13 @@ span.score_announcement+span.score_announcement {
 	display: block;
 }
 #exception_yellow>span {
-	background-image: url(static/icons/exception_yellow.svg);
+	background-image: url(icons/exception_yellow.svg);
 }
 #exception_red>span {
-	background-image: url(static/icons/exception_red.svg);
+	background-image: url(icons/exception_red.svg);
 }
 #exception_black>span {
-	background-image: url(static/icons/exception_black.svg);
+	background-image: url(icons/exception_black.svg);
 }
 .cancel-button, .pick_dialog button.cancel-button {
 	display: block;
@@ -452,7 +452,7 @@ span.score_announcement+span.score_announcement {
 	display: inline-block;
 	width: 1em;
 	height: 1em;
-	background-image: url(static/icons/yellow-card.svg);
+	background-image: url(icons/yellow-card.svg);
 	background-repeat: no-repeat;
 	background-size: 100%;
 }
@@ -506,7 +506,7 @@ span.score_announcement+span.score_announcement {
 .go_fullscreen_go_icon {
 	width: 20vmin;
 	height: 20vmin;
-	background-image: url(static/icons/go_fullscreen.svg);
+	background-image: url(icons/go_fullscreen.svg);
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 }

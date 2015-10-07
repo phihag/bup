@@ -184,7 +184,7 @@ function liveaw_init(liveaw_match_id) {
 		}, function(response) {
 			if (response.type == 'setup') {
 				ui_waitprogress_stop();
-				start_match(response.setup);
+				start_match(state, response.setup);
 			} else if (response.type == 'current_presses') {
 				// TODO test more here
 				if (state.presses < response.presses) {
@@ -197,121 +197,6 @@ function liveaw_init(liveaw_match_id) {
 	});
 }
 
-function _courtspot_request(s, path, cb) {
-	var url = s.courtspot.baseurl + path;
-	$.ajax(url, {
-		dataType: 'xml',
-	}).done(function(doc) {
-		cb(null, doc);
-	});
-}
-
-function courtspot_list_matches(s, cb) {
-	_courtspot_request(s, 'php/dbabfrage.php', function(err, xml_doc) {
-		if (err) {
-			return cb(err);
-		}
-
-		function _get_player(match_node, key) {
-			var res = {
-				firstname: _xml_get_text(match_node, key + 'VN'),
-				lastname: _xml_get_text(match_node, key + 'NN'),
-			};
-			if (res.firstname) {
-				if (res.lastname) {
-					res.name = res.firstname + ' ' + res.lastname;
-				} else {
-					res.name = res.firstname;
-				}
-			} else {
-				if (res.lastname) {
-					res.name = res.lastname;
-				} else {
-					return null;
-				}
-			}
-			return res;
-		}
-
-		function _get_team(match_node, v_node, key) {
-			var player1 = _get_player(match_node, key + 'spieler1');
-			var players = [];
-			if (player1) {
-				players.push(player1);
-				var player2 = _get_player(match_node, key + 'spieler2');
-				if (player2) {
-					players.push(player2);
-				}
-			}
-			return {
-				name: v_node ? _xml_get_text(v_node, key) : null,
-				players: players,
-			};
-		}
-
-		function _get_score(match_node, key) {
-			var score_str = _xml_get_text(match_node, key);
-			return score_str ? parseInt(score_str, 10) : -1;
-		}
-
-		var matches = [];
-		var v_node = xml_doc.getElementsByTagName('VERWALTUNG')[0];
-		var match_nodes = xml_doc.getElementsByTagName('Spiel');
-		for (var i = 0;i < match_nodes.length;i++) {
-			var match_node = match_nodes[i];
-			var home_team = _get_team(match_node, v_node, 'Heim');
-			var away_team = _get_team(match_node, v_node, 'Gast');
-
-			var match_name = _xml_get_text(match_node, 'Art');
-
-			if (!match_name || (home_team.players.length < 1) || (away_team.players.length < 1)) {
-				continue;
-			}
-
-			var network_score = [];
-			for (var game_idx = 1;game_idx <= 3;game_idx++) {
-				var home_score = _get_score(match_node, 'HeimSatz' + game_idx);
-				var away_score = _get_score(match_node, 'GastSatz' + game_idx);
-				if ((home_score >= 0) && (away_score >= 0)) {
-					network_score.push([home_score, away_score]);
-				}
-			}
-
-			matches.push({
-				setup: {
-					counting: '3x21',
-					is_doubles: home_team.players.length == 2,
-					match_name: match_name,
-					teams: [home_team, away_team],
-					courtspot_id: match_name,
-					team_competition: true,
-				},
-				network_score: network_score,
-			});
-		}
-		cb(err, matches);
-	});
-}
-
-function courtspot_init(s, court_name) {
-	var baseurl = '../../';
-	var m = window.location.pathname.match(/^(.*\/)[^\/]+\/bup(?:\/(?:bup\.html)?)?$/);
-	if (m) {
-		baseurl = m[1];
-	}
-
-	s.courtspot = {
-		baseurl: baseurl,
-		court: court_name,
-		api: {
-			list_matches: courtspot_list_matches,
-		},
-	};
-	$('.setup_network_container').show();
-
-	show_settings();
-}
-
 function network_send_press(s, press) {
 	if (s.liveaw && s.liveaw.match_id) {
 		_liveaw_request({
@@ -321,6 +206,9 @@ function network_send_press(s, press) {
 		}, function() {
 
 		});
+	}
+	if (s.courtspot && s.setup.courtspot_match_id) {
+		courtspot.send_press(s, press);
 	}
 }
 
@@ -372,7 +260,7 @@ function ui_network_list_matches(s, network_type) {
 			btn.append(score);
 
 			btn.on('click', function() {
-				start_match(match.setup);
+				courtspot.start_cs_match(s, match.setup);
 				hide_settings();
 			});
 
@@ -1402,7 +1290,7 @@ function demo_match_start() {
 	};
 
 	hide_settings(true);
-	start_match(setup);
+	start_match(state, setup);
 }
 
 function show_settings() {
@@ -1585,10 +1473,10 @@ function resume_match(s) {
 	render(state);
 }
 
-function start_match(setup) {
-	init_state(state, setup);
-	calc_state(state);
-	render(state);
+function start_match(s, setup) {
+	init_state(s, setup);
+	calc_state(s);
+	render(s);
 }
 
 function on_press(press, s) {
@@ -1599,8 +1487,8 @@ function on_press(press, s) {
 	press.timestamp = Date.now();
 	s.presses.push(press);
 
-	network_send_press(s, press);
 	on_presses_change(s);
+	network_send_press(s, press);
 }
 
 function on_presses_change(s) {
@@ -2530,7 +2418,7 @@ function ui_init() {
 		}];
 
 		hide_settings(true);
-		start_match(setup);
+		start_match(state, setup);
 	});
 	$('#pick_side_team1').on('click', function() {
 		on_press({
@@ -2670,7 +2558,7 @@ function ui_init() {
 	if (hash_query.liveaw_match_id) {
 		liveaw_init(hash_query.liveaw_match_id);
 	} else if (hash_query.courtspot_court) {
-		courtspot_init(state, hash_query.courtspot_court);
+		courtspot.ui_init(state, hash_query.courtspot_court);
 	} else if (typeof hash_query.demo !== 'undefined') {
 		demo_match_start();
 	} else {

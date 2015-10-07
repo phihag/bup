@@ -11,8 +11,7 @@ var SINGLES_SETUP = tutils.SINGLES_SETUP;
 var SINGLES_TEAM_SETUP = tutils.SINGLES_TEAM_SETUP;
 var state_after = tutils.state_after;
 var press_score = tutils.press_score;
-
-var bup = require('../bup.js');
+var bup = tutils.bup;
 
 _describe('pronounciation', function() {
 	_it('Start of match (singles)', function() {

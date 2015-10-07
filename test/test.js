@@ -5,8 +5,8 @@ var assert = require('assert');
 var tutils = require('./tutils');
 var _describe = tutils._describe;
 var _it = tutils._it;
+var bup = tutils.bup;
 
-var bup = require('../bup.js');
 
 _describe('helper functions', function() {
 	_it('duration_str', function() {

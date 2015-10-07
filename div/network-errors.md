@@ -3,6 +3,9 @@ This document lists all network errors to test for, and whether/how they are han
 TODO: List more here
 TODO: Think about race conditions
 
+TODO Game already started by another instance of bup/ticker software
+	CourtSpot: Does switching sides work correctly?
+
 Authentication failure
 ======================
 

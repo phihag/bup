@@ -2,7 +2,7 @@
 
 var _ = require('underscore');
 
-var bup = require('../bup');
+var bup = require('../js/bup');
 
 // Trivial runner
 var _describe = ((typeof describe == 'undefined') ?
@@ -73,6 +73,7 @@ function press_score(presses, left_score, right_score) {
 }
 
 module.exports = {
+	bup: bup,
 	_describe: _describe,
 	_it: _it,
 	SINGLES_SETUP: SINGLES_SETUP,

@@ -10,8 +10,8 @@ var DOUBLES_SETUP = tutils.DOUBLES_SETUP;
 var SINGLES_SETUP = tutils.SINGLES_SETUP;
 var press_score = tutils.press_score;
 var state_after = tutils.state_after;
+var bup = tutils.bup;
 
-var bup = require('../bup');
 
 _describe('scoresheet generation', function() {
 	function _scoresheet_cells(presses, setup) {
