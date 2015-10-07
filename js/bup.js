@@ -831,6 +831,10 @@ function scoresheet_show() {
 		return; // Called on start with Shift+S
 	}
 
+	if (typeof jsPDF != 'undefined') {
+		scoresheet_jspdf_loaded();
+	}
+
 	function _text(search, str) {
 		if (!str) {
 			str = '';
@@ -1136,13 +1140,20 @@ function _svg_to_pdf(svg, pdf) {
 
 		var stroke_width = parseFloat(style['stroke-width']);
 		pdf.setLineWidth(stroke_width);
-		var m = style['fill'].match(/^rgb\(([0-9]+),\s*([0-9]+),\s*([0-9]+)\)$/);
-		if (m) {
-			var r = parseInt(m[1], 10);
-			var g = parseInt(m[2], 10);
-			var b = parseInt(m[3], 10);
-			pdf.setFillColor(r, g, b);
+		var m = style['fill'].match(/^rgb\(([0-9]+),\s*([0-9]+),\s*([0-9]+)\)|\#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/);
+		var r = 0;
+		var g = 0;
+		var b = 0;
+		if (m && m[1]) {
+			r = parseInt(m[1], 10);
+			g = parseInt(m[2], 10);
+			b = parseInt(m[3], 10);
+		} else if (m && m[4]) {
+			r = parseInt(m[4], 16);
+			g = parseInt(m[5], 16);
+			b = parseInt(m[6], 16);
 		}
+		pdf.setFillColor(r, g, b);
 
 		var mode = '';
 		if (style.fill != 'none') {
@@ -1268,7 +1279,7 @@ function scoresheet_pdf() {
 	pdf.save(filename + '.pdf');
 }
 
-function jspdf_loaded() {
+function scoresheet_jspdf_loaded() {
 	document.querySelector('.scoresheet_button_pdf').removeAttribute('disabled');
 }
 
@@ -2342,11 +2353,7 @@ function ui_remove_timer() {
 }
 
 function ui_init() {
-	if (typeof jsPDFx != 'undefined') {
-		jspdf_loaded();
-	} else {
-		$('#script_jspdf').on('load', jspdf_loaded);
-	}
+	$('#script_jspdf').on('load', scoresheet_jspdf_loaded);
 
 	$('.postmatch_scoresheet_button').on('click', scoresheet_show);
 	$('.scoresheet_button').on('click', scoresheet_show);
