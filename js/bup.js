@@ -7,6 +7,7 @@ var settings = {
 	save_finished_matches: true,
 	go_fullscreen: false,
 	show_pronounciation: true,
+	umpire_name: '',
 };
 
 function _parse_query_string(qs) {
@@ -855,6 +856,7 @@ function scoresheet_show() {
 	_text('.scoresheet_date_value', _human_date_str(match_date));
 
 	_text('.scoresheet_court_name', state.setup.court_name);
+	_text('.scoresheet_umpire_name', settings.umpire_name);
 
 	_text('.scoresheet_begin_value', state.metadata.start ? _get_time_str(new Date(state.metadata.start)) : '');
 	if (state.match.finished) {
@@ -2264,6 +2266,16 @@ function ui_init_settings() {
 			if (name === 'show_pronounciation') {
 				render(state);
 			}
+			settings_store();
+		});
+	});
+
+	var textfields = ['umpire_name'];
+	textfields.forEach(function(name) {
+		var input = $('.settings [name="' + name + '"]');
+		input.val(settings[name] ? settings[name] : '');
+		input.on('change input', function() {
+			settings[name] = input.val();
 			settings_store();
 		});
 	});
