@@ -2348,7 +2348,7 @@ function ui_init() {
 		});
 	});
 
-	$('#settings_wrapper').on('click', function(e) {
+	$('.settings_layout').on('click', function(e) {
 		if (e.target != this) {
 			return;
 		}

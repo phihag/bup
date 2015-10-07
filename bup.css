@@ -367,14 +367,17 @@ span.score_announcement+span.score_announcement {
 	z-index: 10000;
 	overflow: auto;
 }
-#settings_wrapper {
+.settings_layout {
+	position: absolute;
+	left: 0; right: 0;
+	top: 0; bottom: 0;
+	overflow: auto;
 	display: -webkit-flex;
 	display: flex;
 	-webkit-align-items: center;
 	align-items: center;
 	-webkit-justify-content: center;
 	justify-content: center;
-
 }
 .settings_container {
 	text-align: left;

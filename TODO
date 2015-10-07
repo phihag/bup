@@ -5,6 +5,7 @@ Button "bitte spielen" mehr betonen (icon?)
 scoresheet: slim down circle to 2 if necessary
 keys to change sides / change ends
 edit mode to change sides / change ends
+back to game button in settings
 
 make courtspot an object-like thingy/function
 calc local cs_state
