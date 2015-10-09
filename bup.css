@@ -187,6 +187,7 @@ html, body, button {
 	font-size: 15vh;
 	padding: 4vh;
 	bottom: 1vh;
+	z-index: 200;
 }
 #left_score {
 	left: 1vh;

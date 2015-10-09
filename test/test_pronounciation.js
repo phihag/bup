@@ -1044,6 +1044,354 @@ _describe('pronounciation', function() {
 			'Das Spiel wurde gewonnen von A team mit 4-4');
 	});
 
+	_it('cards at beginning of match', function() {
+		var presses = [];
+		var s = state_after(presses, DOUBLES_TEAM_SETUP);
+		assert.strictEqual(bup.pronounciation(s), null);
+
+		var yellow_card = {
+			type: 'yellow-card',
+			team_id: 0,
+			player_id: 0,
+		};
+		presses.push(yellow_card);
+		s = state_after(presses, DOUBLES_TEAM_SETUP);
+		assert.equal(bup.pronounciation(s),
+			'Andrew, Verwarnung wegen unsportlichen Verhaltens.');
+		var red_card = {
+			type: 'red-card',
+			team_id: 1,
+			player_id: 0,
+		};
+		presses.push(red_card);
+		s = state_after(presses, DOUBLES_TEAM_SETUP);
+		assert.equal(bup.pronounciation(s),
+			'Andrew, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.');
+		assert.strictEqual(s.match.carded[0], true);
+		assert.deepEqual(s.match.pending_red_cards, []); // See RTTO 3.7.7
+
+		presses.push({
+			type: 'pick_side', // Andrew&Alice pick left
+			team1_left: true,
+		});
+		presses.push({
+			type: 'pick_server', // Alice serves
+			team_id: 0,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'pick_receiver', // Birgit receives
+			team_id: 1,
+			player_id: 1,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.match.carded[0], true);
+		assert.deepEqual(s.match.pending_red_cards, []); // See RTTO 3.7.7
+		assert.deepEqual(s.game.score, [0, 0]);
+		assert.equal(s.game.started, false);
+		assert.equal(bup.pronounciation(s),
+			'Andrew, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Meine Damen und Herren:\n' +
+			'Zu meiner Rechten, Bob und Birgit,\n' +
+			'und zu meiner Linken, Andrew und Alice.\n' +
+			'Andrew schlägt auf zu Birgit.\n' +
+			'0 beide.\n' +
+			'Bitte spielen');
+		s = state_after(presses, DOUBLES_TEAM_SETUP);
+		assert.equal(bup.pronounciation(s),
+			'Andrew, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Meine Damen und Herren:\n' +
+			'Zu meiner Rechten, B team, vertreten durch Bob und Birgit,\n' +
+			'und zu meiner Linken, A team, vertreten durch Andrew und Alice.\n' +
+			'A team schlägt auf, Andrew zu Birgit.\n' +
+			'0 beide.\n' +
+			'Bitte spielen');
+
+		presses.push({
+			type: 'red-card',
+			team_id: 0,
+			player_id: 1,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(bup.pronounciation(s),
+			'Andrew, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Meine Damen und Herren:\n' +
+			'Zu meiner Rechten, Bob und Birgit,\n' +
+			'und zu meiner Linken, Andrew und Alice.\n' +
+			'Andrew schlägt auf zu Birgit.\n' +
+			'0 beide.\n' +
+			'Bitte spielen');
+		s = state_after(presses, DOUBLES_TEAM_SETUP);
+		assert.equal(bup.pronounciation(s),
+			'Andrew, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Meine Damen und Herren:\n' +
+			'Zu meiner Rechten, B team, vertreten durch Bob und Birgit,\n' +
+			'und zu meiner Linken, A team, vertreten durch Andrew und Alice.\n' +
+			'A team schlägt auf, Andrew zu Birgit.\n' +
+			'0 beide.\n' +
+			'Bitte spielen');
+
+		presses.push({
+			type: 'love-all'
+		});
+		s = state_after(presses, DOUBLES_TEAM_SETUP);
+		assert.strictEqual(bup.pronounciation(s), null);
+	});
+
+	_it('cards after games', function() {
+		var presses = [];
+		presses.push({
+			type: 'pick_side', // Andrew&Alice pick left
+			team1_left: true,
+		});
+		presses.push({
+			type: 'pick_server', // Bob serves  (player 0 so it works in singles as well)
+			team_id: 1,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'pick_receiver', // Andrew receives (player 0 so it works in singles as well)
+			team_id: 0,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'love-all'
+		});
+		press_score(presses, 21, 19);
+		var card_birgit = {
+			type: 'red-card',
+			team_id: 1,
+			player_id: 1,
+		};
+		presses.push(card_birgit);
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.game.score, [21, 19]);
+		assert.deepEqual(s.match.pending_red_cards, [card_birgit]);
+		assert.equal(bup.pronounciation(s),
+			'Satz.\n' +
+			'Birgit, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Der erste Satz wurde gewonnen von Andrew und Alice mit 21-19');
+
+		presses.push({
+			type: 'postgame-confirm',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.match.pending_red_cards, []);
+
+		presses.push({
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 1,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.match.pending_red_cards, []);
+		assert.equal(bup.pronounciation(s),
+			'Birgit, Fehler wegen unsportlichen Verhaltens.');
+
+		presses.push({
+			type: 'pick_receiver',
+			team_id: 0,
+			player_id: 0,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.match.pending_red_cards, []);
+		assert.equal(bup.pronounciation(s),
+			'Birgit, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Zweiter Satz. 1-0.\n' +
+			'Bitte spielen');
+
+		presses.push({
+			type: 'love-all'
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.game.score, [1, 0]);
+		assert.strictEqual(bup.pronounciation(s), '1-0');
+
+		press_score(presses, 19, 18);
+		press_score(presses, 2, 0);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.game.score, [19, 21]);
+
+		var card_alice = {
+			type: 'red-card',
+			team_id: 0,
+			player_id: 1,
+		};
+		presses.push(card_alice);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.match.pending_red_cards, [card_alice]);
+		assert.equal(bup.pronounciation(s),
+			'Satz.\n' +
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Der zweite Satz wurde gewonnen von Bob und Birgit mit 21-19; einen Satz beide');
+		assert.deepEqual(s.game.score, [19, 21]);
+
+		presses.push({
+			type: 'postgame-confirm'
+		});
+		presses.push({
+			type: 'red-card',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.game.score, [1, 1]);
+		assert.equal(bup.pronounciation(s),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.');
+
+		presses.push({
+			type: 'pick_server',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.game.score, [1, 1]);
+		assert.equal(bup.pronounciation(s),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.');
+
+		presses.push({
+			type: 'pick_receiver',
+			team_id: 0,
+			player_id: 0,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.game.score, [1, 1]);
+		assert.equal(bup.pronounciation(s),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Entscheidungssatz. Aufschlagwechsel. 1 beide.\n' +
+			'Bitte spielen'
+		);
+
+		presses.push({
+			type: 'love-all',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.game.score, [1, 1]);
+		assert.equal(bup.pronounciation(s),
+			'Aufschlagwechsel. 1 beide'
+		);
+
+		// Card after match
+		press_score(presses, 9, 9);
+		presses.push({
+			type: 'score',
+			side: 'left',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.game.score, [11, 10]);
+		press_score(presses, 2, 10);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.game.score, [21, 12]);
+		assert.equal(bup.pronounciation(s),
+			'Satz.\n' +
+			'Das Spiel wurde gewonnen von Andrew und Alice mit 21-19 19-21 21-12'
+		);
+
+		presses.push({
+			type: 'red-card',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.game.score, [21, 12]);
+		assert.equal(bup.pronounciation(s),
+			'Satz.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Das Spiel wurde gewonnen von Andrew und Alice mit 21-19 19-21 21-12'
+		);
+
+		presses.push({
+			type: 'red-card',
+			team_id: 0,
+			player_id: 1,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.game.score, [21, 12]);
+		assert.equal(bup.pronounciation(s),
+			'Satz.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Das Spiel wurde gewonnen von Andrew und Alice mit 21-19 19-21 21-12'
+		);
+	});
+
+	_it('service over by red card at beginning of game', function() {
+		var presses = [];
+		presses.push({
+			type: 'pick_side', // Andrew&Alice pick left
+			team1_left: true,
+		});
+		presses.push({
+			type: 'pick_server', // Alice serves
+			team_id: 0,
+			player_id: 1,
+		});
+		presses.push({
+			type: 'pick_receiver', // Bob receives
+			team_id: 1,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'love-all'
+		});
+		press_score(presses, 21, 19);
+
+		var card_alice = {
+			type: 'red-card',
+			team_id: 0,
+			player_id: 0,
+		};
+		presses.push(card_alice);
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.game.score, [21, 19]);
+		assert.deepEqual(s.match.pending_red_cards, [card_alice]);
+		assert.equal(bup.pronounciation(s),
+			'Satz.\n' +
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Der erste Satz wurde gewonnen von Andrew und Alice mit 21-19');
+
+		presses.push({
+			type: 'postgame-confirm',
+		});
+		presses.push({
+			type: 'pick_server', // Alice serves
+			team_id: 0,
+			player_id: 1,
+		});
+		presses.push({
+			type: 'pick_receiver', // Bob receives
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.game.score, [0, 1]);
+		assert.equal(s.game.service_over, true);
+		assert.equal(s.game.team1_serving, false);
+		assert.equal(bup.pronounciation(s),
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Zweiter Satz. Aufschlagwechsel. 1-0.\n' +
+			'Bitte spielen');
+
+		presses.push({
+			type: 'love-all',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.game.score, [0, 1]);
+		assert.equal(s.game.team1_serving, false);
+		assert.equal(bup.pronounciation(s),
+			'Aufschlagwechsel. 1-0');
+	});
+
 	_it('retiring', function() {
 		var presses = [{
 			type: 'pick_side', // Andrew&Alice pick left

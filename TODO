@@ -1,17 +1,16 @@
-red cards in between games
-	write test for card at very beginning of match
-red card before 0:0
-red card after match
-fix settings on smartphone
-fix scoresheet buttons on smartphone
-scoresheet: handle long event names
-
-Button "bitte spielen" mehr betonen (icon?)
 scoresheet: slim down circle to 2 if necessary
 scoresheet: reserve space for disqualified
-scoresheet: test that we don't overshoot 6
+scoresheet: test that we don't overshoot 6 rows
 edit mode to change sides / change ends
+Button "bitte spielen" mehr betonen (icon?)
 back to game button in settings
+allow timer restart
+fix settings on smartphone
+fix scoresheet buttons on smartphone
+official wording (dots after Bitte spielen etc.)
+retiring at game start before picking anything
+
+retest Manuel's notes
 
 CourtSpot
 	make courtspot an object-like thingy/function
@@ -41,7 +40,6 @@ CourtSpot
 		test retiring
 		resume from courtspot?
 		show a warning when starting a game that's already running
-
 
 
 
@@ -174,6 +172,7 @@ loading bup.. text for very slow connections
 network: add an option to change court
 network: color/opacity in match list by state
 preload images (if not Manifest)
+scoresheet: add a test for red cards before / in between games
 Schiedsrichterzettel auch im Bundesliga-Design
 Schiedsrichterzettel größer machen (button schiedsrichterzettel)
 mock courtspot and write automated tests
