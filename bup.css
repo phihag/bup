@@ -133,7 +133,7 @@ html, body, button {
 }
 
 
-#court_arrow {
+#court_arrow, .editmode_arrow {
 	position: absolute;
 	left: 50%; top: 50%;
 	margin-left: -7.5vh; margin-top: -7.5vh;
@@ -584,4 +584,43 @@ span.score_announcement+span.score_announcement {
 	.only-screen {
 		display: none;
 	}
+}
+
+
+.editmode_change-ends, .editmode_switch_left, .editmode_switch_right, .editmode_leave {
+	position: absolute;
+	background-position: center;
+	background-size: 80% 80%;
+	background-repeat: no-repeat;
+	z-index: 80;
+}
+.editmode_leave {
+	background-image: url(icons/checkmark.svg);
+	bottom: 10%;
+	left: 50%;
+	transform: translate(-50%, 0);
+	font-size: 5vmin;
+	width: 15vmin;
+	height: 15vmin;
+}
+.editmode_change-ends {
+	background-image: url(icons/change-ends.svg);
+	top: 25%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 14vmin;
+	height: 10vmin;
+}
+.editmode_switch_left,.editmode_switch_right {
+	background-image: url(icons/change-sides.svg);
+	top: 50%;
+	transform: translate(0%, -50%);
+	width: 10vmin;
+	height: 14vmin;
+}
+.editmode_switch_left {
+	left: 0.5%;
+}
+.editmode_switch_right {
+	right: 0.5%;
 }

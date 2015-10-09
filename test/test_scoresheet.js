@@ -828,12 +828,12 @@ _describe('scoresheet generation', function() {
 		base_presses.push({
 			'type': 'love-all'
 		});
-		base_presses.push({
+
+		var presses = base_presses.slice();
+		presses.push({
 			type: 'score',
 			side: 'left',
 		});
-
-		var presses = base_presses.slice();
 		presses.push({
 			type: 'disqualified',
 			team_id: 1,
@@ -845,7 +845,8 @@ _describe('scoresheet generation', function() {
 			col: 2,
 			row: 2,
 			type: 'longtext',
-			val: 'Disqualifiziert'
+			val: 'Disqualifiziert',
+			width: 4,
 		});
 
 		presses = base_presses.slice();
@@ -857,10 +858,11 @@ _describe('scoresheet generation', function() {
 		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
 		_assert_cell(cells, {
 			table: 0,
-			col: 2,
+			col: 1,
 			row: 1,
 			type: 'longtext',
-			val: 'Disqualifiziert'
+			val: 'Disqualifiziert',
+			width: 4,
 		});
 	});	
 
@@ -1255,6 +1257,46 @@ _describe('scoresheet generation', function() {
 			row: 2,
 			val: 'A'
 		});
+
+	});
+
+	_it('aesthetic considerations for final circle', function() {
+		var start_presses = [{
+			type: 'pick_side', // Alice picks left
+			team1_left: true,
+		}, {
+			type: 'pick_server', // Bob serves
+			team_id: 1,
+			player_id: 0,
+		}, {
+			type: 'love-all'
+		}];
+
+		// 21-10 should fit comfortably into the line
+		var presses = start_presses.slice();
+		press_score(presses, 21, 10);
+		var cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 32,
+			type: 'circle',
+			score: [21, 10],
+			width: 3
+		});
+
+		// 21-11 should fit in one line
+		// By German rules see Anweisungen für Technische Offizielle §8
+		var presses = start_presses.slice();
+		press_score(presses, 21, 11);
+		var cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 33,
+			type: 'circle',
+			score: [21, 11],
+			width: 2
+		});
+
 
 	});
 });

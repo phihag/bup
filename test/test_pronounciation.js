@@ -1460,4 +1460,178 @@ _describe('pronounciation', function() {
 			'Andrew gibt auf.\n' +
 			'Das Spiel wurde gewonnen von Bob und Birgit mit 19-21 2-2');
 	});
+
+	_it('retired at game start', function() {
+		var presses = []
+		var alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'retired',
+			team_id: 1,
+			player_id: 0
+		});
+		var s = state_after(alt_presses, DOUBLES_SETUP);
+		assert.equal(bup.pronounciation(s),
+			'Bob gibt auf.\n' +
+			'Das Spiel wurde gewonnen von Andrew und Alice mit 0-0');
+
+		presses.push({
+			type: 'pick_side', // Andrew&Alice pick left
+			team1_left: true,
+		});
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'retired',
+			team_id: 0,
+			player_id: 0
+		});
+		s = state_after(alt_presses, DOUBLES_SETUP);
+		assert.equal(bup.pronounciation(s),
+			'Andrew gibt auf.\n' +
+			'Das Spiel wurde gewonnen von Bob und Birgit mit 0-0');
+
+		presses.push({
+			type: 'pick_server', // Birgit serves
+			team_id: 1,
+			player_id: 1,
+		});
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'retired',
+			team_id: 1,
+			player_id: 1
+		});
+		s = state_after(alt_presses, DOUBLES_SETUP);
+		assert.equal(bup.pronounciation(s),
+			'Birgit gibt auf.\n' +
+			'Das Spiel wurde gewonnen von Andrew und Alice mit 0-0');
+
+		presses.push({
+			type: 'pick_receiver', // Andrew receives
+			team_id: 0,
+			player_id: 0,
+		});
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'retired',
+			team_id: 0,
+			player_id: 1
+		});
+		s = state_after(alt_presses, DOUBLES_SETUP);
+		assert.equal(bup.pronounciation(s),
+			'Alice gibt auf.\n' +
+			'Das Spiel wurde gewonnen von Bob und Birgit mit 0-0');
+
+		presses.push({
+			type: 'love-all'
+		});
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'retired',
+			team_id: 0,
+			player_id: 0
+		});
+		s = state_after(alt_presses, DOUBLES_SETUP);
+		assert.equal(bup.pronounciation(s),
+			'Andrew gibt auf.\n' +
+			'Das Spiel wurde gewonnen von Bob und Birgit mit 0-0');
+
+		press_score(presses, 21, 19);
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'retired',
+			team_id: 0,
+			player_id: 0
+		});
+		s = state_after(alt_presses, DOUBLES_SETUP);
+		assert.equal(bup.pronounciation(s),
+			'Andrew gibt auf.\n' +
+			'Das Spiel wurde gewonnen von Bob und Birgit mit 19-21');
+	});
+
+	_it('disqualified at game start', function() {
+		var presses = []
+		var alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 1,
+			player_id: 0
+		});
+		var s = state_after(alt_presses, DOUBLES_SETUP);
+		assert.equal(bup.pronounciation(s),
+			'Bob, disqualifiziert wegen unsportlichen Verhaltens.\n' +
+			'Das Spiel wurde gewonnen von Andrew und Alice mit 0-0');
+
+		presses.push({
+			type: 'pick_side', // Andrew&Alice pick left
+			team1_left: true,
+		});
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 0,
+			player_id: 0
+		});
+		s = state_after(alt_presses, DOUBLES_SETUP);
+		assert.equal(bup.pronounciation(s),
+			'Andrew, disqualifiziert wegen unsportlichen Verhaltens.\n' +
+			'Das Spiel wurde gewonnen von Bob und Birgit mit 0-0');
+
+		presses.push({
+			type: 'pick_server', // Birgit serves
+			team_id: 1,
+			player_id: 1,
+		});
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 1,
+			player_id: 1
+		});
+		s = state_after(alt_presses, DOUBLES_SETUP);
+		assert.equal(bup.pronounciation(s),
+			'Birgit, disqualifiziert wegen unsportlichen Verhaltens.\n' +
+			'Das Spiel wurde gewonnen von Andrew und Alice mit 0-0');
+
+		presses.push({
+			type: 'pick_receiver', // Andrew receives
+			team_id: 0,
+			player_id: 0,
+		});
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 0,
+			player_id: 1
+		});
+		s = state_after(alt_presses, DOUBLES_SETUP);
+		assert.equal(bup.pronounciation(s),
+			'Alice, disqualifiziert wegen unsportlichen Verhaltens.\n' +
+			'Das Spiel wurde gewonnen von Bob und Birgit mit 0-0');
+
+		presses.push({
+			type: 'love-all'
+		});
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 0,
+			player_id: 0
+		});
+		s = state_after(alt_presses, DOUBLES_SETUP);
+		assert.equal(bup.pronounciation(s),
+			'Andrew, disqualifiziert wegen unsportlichen Verhaltens.\n' +
+			'Das Spiel wurde gewonnen von Bob und Birgit mit 0-0');
+
+		press_score(presses, 21, 19);
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 0,
+			player_id: 0
+		});
+		s = state_after(alt_presses, DOUBLES_SETUP);
+		assert.equal(bup.pronounciation(s),
+			'Andrew, disqualifiziert wegen unsportlichen Verhaltens.\n' +
+			'Das Spiel wurde gewonnen von Bob und Birgit mit 19-21');
+	});
 });
