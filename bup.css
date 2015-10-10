@@ -267,6 +267,25 @@ span.score_announcement+span.score_announcement {
 	padding-left: 3vh;
 	padding-right: 0;
 }
+.score>input {
+	max-width: 1.9em;
+	vertical-align: top;
+	font-size: 2vh;
+	max-height: 3vh;
+}
+.score_current-game>.score>input {
+	font-size: 7.5vh;
+	max-height: 8vh;
+}
+.score_future-game>.score>input {
+	visibility: hidden;
+}
+#game.editmode .score_left {
+	padding-right: 1.5vh;
+}
+#game.editmode .score_right {
+	padding-left: 1.5vh;
+}
 
 .half-invisible {
 	opacity: 0.3;

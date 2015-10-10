@@ -1,5 +1,6 @@
 "use strict";
 
+var DOUBLE_CLICK_TIMEOUT = 1500;
 var state = {
 	initialized: false
 };
@@ -1160,7 +1161,6 @@ function scoresheet_hide() {
 }
 
 function _svg_to_pdf(svg, pdf) {
-	// TODO render the PDF
 	var nodes = svg.querySelectorAll('*');
 	for (var i = 0;i < nodes.length;i++) {
 		var n = nodes[i];
@@ -1939,6 +1939,115 @@ function calc_state(s) {
 	return s;
 }
 
+function render_score_display(s) {
+	$('#score_table').empty();
+	var _add_game = function(game, game_index, is_current) {
+		if (is_current) {
+			var ann_tr = $('<tr class="score_announcements">');
+			var ann_td = $('<td colspan="2"></td>');
+			var _add_ann = function (text) {
+				var ann_span = $('<span class="score_announcement">')
+				ann_span.text(text);
+				ann_td.append(ann_span);
+			}
+			if (s.game.service_over) {
+				_add_ann('Aufschlagwechsel');
+			}
+			if (s.game.gamepoint) {
+				_add_ann('Satzpunkt');
+			}
+			if (s.game.matchpoint) {
+				_add_ann('Spielpunkt');
+			}
+			if (s.game.interval) {
+				_add_ann('Pause');
+			}
+			if (s.game.change_sides) {
+				_add_ann('Seiten wechseln');
+			}
+			if (s.game.game) {
+				_add_ann('Satz');
+			}
+			if (s.match.marks.length > 0) {
+				s.match.marks.forEach(function(e_press) {
+					_add_ann(e_press.char);
+				});
+			}
+			// Rendering fix for empty cells not being rendered correctly
+			if (ann_td.children().length == 0) {
+				ann_td.text('\xA0');
+			}
+			ann_tr.append(ann_td);
+			$('#score_table').append(ann_tr);
+		}
+
+		var points;
+		var tr = $('<tr>');
+		if (!game) {
+			tr.addClass('score_future-game');
+		} else if (is_current) {
+			tr.addClass('score_current-game');
+		} else {
+			tr.addClass('score_finished-game');
+		}
+		var left = $('<td class="score score_left">');
+		var left_input = $('<input type="number" size="2" min="0" max="30" class="default-invisible" value="0">');
+		left_input.attr('id', 'editmode_score_left_' + game_index);
+		left.append(left_input);
+		if (game) {
+			if (! game.started && !game.finished) {
+				left.addClass('score_empty');
+			}
+			if (game.finished) {
+				if (game.team1_won == s.game.team1_left) {
+					left.addClass('score_won');
+				}
+			} else if ((game.team1_serving !== null) && (game.team1_serving == s.game.team1_left)) { 
+				left.addClass('score_serving');
+			}
+
+			var left_text = $('<span>');
+			left.append(left_text);
+			points = game.score[s.game.team1_left ? 0 : 1];
+			left_input.val(points);
+			left_text.text(points);
+		}
+		tr.append(left);
+		var right = $('<td class="score score_right">');
+		var right_input = $('<input type="number" size="2" min="0" max="30" class="default-invisible" value="0">');
+		right_input.attr('id', 'editmode_score_right_' + game_index);
+		right.append(right_input);
+		if (game) {
+			if (! game.started && !game.finished) {
+				right.addClass('score_empty');
+			}
+			if (game.finished) {
+				if (game.team1_won != s.game.team1_left) {
+					right.addClass('score_won');
+				}
+			} else if ((game.team1_serving !== null) && (game.team1_serving != s.game.team1_left)) {
+				right.addClass('score_serving');
+			}
+			var right_text = $('<span>');
+			right.append(right_text);
+			points = game.score[s.game.team1_left ? 1 : 0];
+			right_text.text(points);
+			right_input.val(points);
+		}
+		tr.append(right);
+		$('#score_table').append(tr);
+	};
+	for (var i = 0;i < s.match.max_games;i++) {
+		if (i < s.match.finished_games.length) {
+			_add_game(s.match.finished_games[i], i);
+		} else if (i == s.match.finished_games.length) {
+			_add_game(s.game, i, true);
+		} else {
+			_add_game(null, i);
+		}
+	}
+}
+
 function render(s) {
 	var dialog_active = false;  // Is there anything to pick in the bottom?
 
@@ -2040,99 +2149,7 @@ function render(s) {
 		ui_remove_timer();
 	}
 
-	$('#score_table').empty();
-	var _add_game = function(game, is_current) {
-		if (is_current) {
-			var ann_tr = $('<tr class="score_announcements">');
-			var ann_td = $('<td colspan="2"></td>');
-			var _add_ann = function (text) {
-				var ann_span = $('<span class="score_announcement">')
-				ann_span.text(text);
-				ann_td.append(ann_span);
-			}
-			if (s.game.service_over) {
-				_add_ann('Aufschlagwechsel');
-			}
-			if (s.game.gamepoint) {
-				_add_ann('Satzpunkt');
-			}
-			if (s.game.matchpoint) {
-				_add_ann('Spielpunkt');
-			}
-			if (s.game.interval) {
-				_add_ann('Pause');
-			}
-			if (s.game.change_sides) {
-				_add_ann('Seiten wechseln');
-			}
-			if (s.game.game) {
-				_add_ann('Satz');
-			}
-			if (s.match.marks.length > 0) {
-				s.match.marks.forEach(function(e_press) {
-					_add_ann(e_press.char);
-				});
-			}
-			// Rendering fix for empty cells not being rendered correctly
-			if (ann_td.children().length == 0) {
-				ann_td.text('\xA0');
-			}
-			ann_tr.append(ann_td);
-			$('#score_table').append(ann_tr);
-		}
-
-		var points;
-		var tr = $('<tr>');
-		if (!game) {
-			tr.addClass('score_future-game');
-		} else if (is_current) {
-			tr.addClass('score_current-game');
-		} else {
-			tr.addClass('score_finished-game');
-		}
-		var left = $('<td class="score score_left">');
-		if (game) {
-			points = game.score[s.game.team1_left ? 0 : 1];
-			if (! game.started && !game.finished) {
-				left.addClass('score_empty');
-			}
-			if (game.finished) {
-				if (game.team1_won == s.game.team1_left) {
-					left.addClass('score_won');
-				}
-			} else if ((game.team1_serving !== null) && (game.team1_serving == s.game.team1_left)) { 
-				left.addClass('score_serving');
-			}
-			left.text(points);
-		}
-		tr.append(left);
-		var right = $('<td class="score score_right">');
-		if (game) {
-			points = game.score[s.game.team1_left ? 1 : 0];
-			if (! game.started && !game.finished) {
-				right.addClass('score_empty');
-			}
-			if (game.finished) {
-				if (game.team1_won != s.game.team1_left) {
-					right.addClass('score_won');
-				}
-			} else if ((game.team1_serving !== null) && (game.team1_serving != s.game.team1_left)) {
-				right.addClass('score_serving');
-			}
-			right.text(points);
-		}
-		tr.append(right);
-		$('#score_table').append(tr);
-	};
-	for (var i = 0;i < s.match.max_games;i++) {
-		if (i < s.match.finished_games.length) {
-			_add_game(s.match.finished_games[i]);
-		} else if (i == s.match.finished_games.length) {
-			_add_game(s.game, true);
-		} else {
-			_add_game(null);
-		}
-	}
+	render_score_display(s);
 
 	$('#pick_side').hide();
 	$('#pick_server').hide();
@@ -2363,30 +2380,43 @@ function ui_init_settings() {
 
 var _editmode_last_click = 0;
 function editmode_enter() {
-	_editmode_last_click = 0;
 	$('.editmode_leave,.editmode_arrow,.editmode_change-ends,.editmode_switch_left,.editmode_switch_right').show();
 	$('.editmode_ok').attr('disabled', 'disabled');
+	$('.editmode_button').text('Manuelles Bearbeiten abbrechen');
+	$('#score td.score input').show();
+	$('#score td.score span').hide();
+	$('#game').addClass('editmode');
 }
 
 function editmode_leave() {
+	$('#game').removeClass('editmode');
 	$('.editmode_leave,.editmode_arrow,.editmode_change-ends,.editmode_switch_left,.editmode_switch_right').hide();
-}
-
-function editmode_apply() {
-
+	$('.editmode_button').text('Manuell bearbeiten');
+	$('#score td.score input').hide();
+	$('#score td.score span').show();
 }
 
 function editmode_init() {
+	$('.editmode_button').on('click', function() {
+		if ($('#game').hasClass('editmode')) {
+			editmode_leave();
+		} else {
+			editmode_enter();
+		}
+		hide_settings();
+	});
 	$('#court').on('click', function(e) {
 		if (e.target.tagName.toLowerCase() == 'button') {
 			return;
 		}
 
-		var now = new Date().getTime();
-		if (now - _editmode_last_click < 1500) {
+		var now = Date.now();
+		if (now - _editmode_last_click < DOUBLE_CLICK_TIMEOUT) {
+			_editmode_last_click = 0;
 			editmode_enter();
+		} else {
+			_editmode_last_click = now;
 		}
-		_editmode_last_click = now;
 		return true;
 	});
 
@@ -2467,10 +2497,6 @@ function ui_remove_timer() {
 
 function ui_init() {
 	$('#script_jspdf').on('load', scoresheet_jspdf_loaded);
-	$('.editmode_button').on('click', function() {
-		hide_settings();
-		editmode_enter();
-	});
 	editmode_init();
 	$('.backtogame_button').on('click', function() {
 		hide_settings();
