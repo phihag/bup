@@ -1940,11 +1940,100 @@ function calc_state(s) {
 }
 
 function render_score_display(s) {
-	$('#score_table').empty();
-	var _add_game = function(game, game_index, is_current) {
+	function _init(s) {
+		console.log('initialized');
+		$('#score_table').empty();
+
+		var ann_tr = $('<tr class="score_announcements">');
+		var ann_td = $('<td colspan="2"></td>');
+		ann_tr.append(ann_td);
+		$('#score_table').attr('data-game-count', s.match.max_games);
+		$('#score_table').append(ann_tr);
+
+		for (var game_index = 0;game_index < s.match.max_games;game_index++) {
+			var tr = $('<tr>');
+			tr.attr('id', 'score_game_' + game_index);
+			$('#score_table').append(tr);
+
+			var left = $('<td class="score score_left">');
+			var left_input = $('<input type="number" size="2" min="0" max="30" class="default-invisible" value="0">');
+			left.append(left_input);
+			var left_text = $('<span>');
+			left.append(left_text);
+			tr.append(left);
+
+			var right = $('<td class="score score_right">');
+			var right_input = $('<input type="number" size="2" min="0" max="30" class="default-invisible" value="0">');
+			right.append(right_input);
+			var right_text = $('<span>');
+			right.append(right_text);
+			tr.append(right);
+		}
+	}
+
+	if (parseInt($('#score_table').attr('data-game-count'), 10) != s.match.max_games) {
+		_init(s);
+	}
+
+	var _set_game = function(game, game_index, is_current) {
+		var tr = $('#score_game_' + game_index);
+
+		tr.attr('class', '');
+		if (!game) {
+			tr.addClass('score_future-game');
+		} else if (is_current) {
+			tr.addClass('score_current-game');
+		} else {
+			tr.addClass('score_finished-game');
+		}
+
+		var left = tr.children('.score_left');
+		var left_input = left.children('input');
+		left.attr('class', 'score score_left');
+		if (game) {
+			if (! game.started && !game.finished) {
+				left.addClass('score_empty');
+			}
+			if (game.finished) {
+				if (game.team1_won == s.game.team1_left) {
+					left.addClass('score_won');
+				}
+			} else if ((game.team1_serving !== null) && (game.team1_serving == s.game.team1_left)) { 
+				left.addClass('score_serving');
+			}
+
+			var left_text = left.children('span');
+			var points = game.score[s.game.team1_left ? 0 : 1];
+			left_input.val(points);
+			left_text.text(points);
+		}
+
+		var right = tr.children('.score_right');
+		var right_input = right.children('input');
+		right.attr('class', 'score score_right');
+		if (game) {
+			if (! game.started && !game.finished) {
+				right.addClass('score_empty');
+			}
+			if (game.finished) {
+				if (game.team1_won != s.game.team1_left) {
+					right.addClass('score_won');
+				}
+			} else if ((game.team1_serving !== null) && (game.team1_serving != s.game.team1_left)) {
+				right.addClass('score_serving');
+			}
+
+			var right_text = right.children('span');
+			var points = game.score[s.game.team1_left ? 1 : 0];
+			right_input.val(points);
+			right_text.text(points);
+		}
+
 		if (is_current) {
-			var ann_tr = $('<tr class="score_announcements">');
-			var ann_td = $('<td colspan="2"></td>');
+			var ann_tr = $('tr.score_announcements');
+			ann_tr.insertBefore(tr);
+			var ann_td = ann_tr.children('td');
+			ann_td.empty();
 			var _add_ann = function (text) {
 				var ann_span = $('<span class="score_announcement">')
 				ann_span.text(text);
@@ -1977,73 +2066,15 @@ function render_score_display(s) {
 			if (ann_td.children().length == 0) {
 				ann_td.text('\xA0');
 			}
-			ann_tr.append(ann_td);
-			$('#score_table').append(ann_tr);
 		}
-
-		var points;
-		var tr = $('<tr>');
-		if (!game) {
-			tr.addClass('score_future-game');
-		} else if (is_current) {
-			tr.addClass('score_current-game');
-		} else {
-			tr.addClass('score_finished-game');
-		}
-		var left = $('<td class="score score_left">');
-		var left_input = $('<input type="number" size="2" min="0" max="30" class="default-invisible" value="0">');
-		left_input.attr('id', 'editmode_score_left_' + game_index);
-		left.append(left_input);
-		if (game) {
-			if (! game.started && !game.finished) {
-				left.addClass('score_empty');
-			}
-			if (game.finished) {
-				if (game.team1_won == s.game.team1_left) {
-					left.addClass('score_won');
-				}
-			} else if ((game.team1_serving !== null) && (game.team1_serving == s.game.team1_left)) { 
-				left.addClass('score_serving');
-			}
-
-			var left_text = $('<span>');
-			left.append(left_text);
-			points = game.score[s.game.team1_left ? 0 : 1];
-			left_input.val(points);
-			left_text.text(points);
-		}
-		tr.append(left);
-		var right = $('<td class="score score_right">');
-		var right_input = $('<input type="number" size="2" min="0" max="30" class="default-invisible" value="0">');
-		right_input.attr('id', 'editmode_score_right_' + game_index);
-		right.append(right_input);
-		if (game) {
-			if (! game.started && !game.finished) {
-				right.addClass('score_empty');
-			}
-			if (game.finished) {
-				if (game.team1_won != s.game.team1_left) {
-					right.addClass('score_won');
-				}
-			} else if ((game.team1_serving !== null) && (game.team1_serving != s.game.team1_left)) {
-				right.addClass('score_serving');
-			}
-			var right_text = $('<span>');
-			right.append(right_text);
-			points = game.score[s.game.team1_left ? 1 : 0];
-			right_text.text(points);
-			right_input.val(points);
-		}
-		tr.append(right);
-		$('#score_table').append(tr);
 	};
 	for (var i = 0;i < s.match.max_games;i++) {
 		if (i < s.match.finished_games.length) {
-			_add_game(s.match.finished_games[i], i);
+			_set_game(s.match.finished_games[i], i, false);
 		} else if (i == s.match.finished_games.length) {
-			_add_game(s.game, i, true);
+			_set_game(s.game, i, true);
 		} else {
-			_add_game(null, i);
+			_set_game(null, i, false);
 		}
 	}
 }
