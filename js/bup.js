@@ -9,6 +9,8 @@ var settings = {
 	go_fullscreen: false,
 	show_pronounciation: true,
 	umpire_name: '',
+	court_id: '',
+	court_description: '',
 };
 
 function _parse_query_string(qs) {
@@ -51,6 +53,12 @@ function _duration_str(start_timestamp, end_timestamp) {
 	var mins = Math.round(diff_ms / 60000);
 	var hours = (mins - (mins % 60)) / 60;
 	return hours + ':' + _add_zeroes(mins % 60);
+}
+
+function _multiline_regexp(regs, options) {
+    return new RegExp(regs.map(
+        function(reg){ return reg.source; }
+    ).join(''), options);
 }
 
 function _get_time_str(d) {
@@ -136,7 +144,6 @@ function liveaw_contact(cb) {
 		cb(null, ws);
 	};
 	ws.onmessage = function(ws_message) {
-		console.log('<-', ws_message.data);
 		var msg = JSON.parse(ws_message.data);
 		if (! msg.request_id) {
 			// Not an answer, ignore for now
@@ -211,6 +218,9 @@ function network_send_press(s, press) {
 	if (s.courtspot && s.setup.courtspot_match_id) {
 		courtspot.send_press(s, press);
 	}
+	if (s.btde && s.setup.btde_match_id) {
+		s.btde.send_press(s, press);
+	}
 }
 
 function ui_network_list_matches(s, network_type) {
@@ -219,7 +229,7 @@ function ui_network_list_matches(s, network_type) {
 		network_type = container.attr('data-network-type');
 	}
 
-	s[network_type].api.list_matches(s, function(err, matches) {
+	s[network_type].list_matches(s, function(err, matches) {
 		container.empty(); // TODO better transition if we're updating?
 		matches.forEach(function(match) {
 			var btn = $('<button class="setup_network_match">');
@@ -261,13 +271,63 @@ function ui_network_list_matches(s, network_type) {
 			btn.append(score);
 
 			btn.on('click', function() {
-				courtspot.start_cs_match(s, match.setup);
+				start_match(s, match.setup);
 				hide_settings();
 			});
 
 			container.append(btn);
 		});
 	});
+}
+
+function _ui_make_pick(label, values, on_pick, on_cancel, container) {
+	if (! container) {
+		container = $('.bottom-ui');
+	}
+
+	var kill_dialog = function() {
+		ui_esc_stack_pop();
+		dlg_wrapper.remove();
+	};
+	var cancel = function() {
+		if (! on_cancel) {
+			return;  // No cancelling allowed
+		}
+		kill_dialog();
+		on_cancel();
+	}
+	ui_esc_stack_push(cancel);
+
+	var dlg_wrapper = $('<div class="modal-wrapper">');
+	dlg_wrapper.on('click', function(e) {
+		if (e.target == dlg_wrapper[0]) {
+			cancel();
+		}
+	});
+	var dlg = $('<div class="pick_dialog">');
+	dlg.appendTo(dlg_wrapper);
+
+	var label_span = $('<span>');
+	label_span.text(label);
+	label_span.appendTo(dlg);
+
+	values.forEach(function(v) {
+		var btn = $('<button>');
+		btn.text(v.label);
+		btn.on('click', function() {
+			kill_dialog();
+			on_pick(v);
+		});
+		dlg.append(btn);
+	});
+
+	if (on_cancel) {
+		var cancel_btn = $('<button class="cancel-button">Abbrechen</button>');
+		cancel_btn.on('click', cancel);
+		cancel_btn.appendTo(dlg);
+	}
+
+	container.append(dlg_wrapper);
 }
 
 function _ui_make_team_pick(s, label, type, on_cancel, modify_button) {
@@ -282,7 +342,11 @@ function _ui_make_team_pick(s, label, type, on_cancel, modify_button) {
 
 	ui_esc_stack_push(cancel);
 	var dlg_wrapper = $('<div class="modal-wrapper">');
-	dlg_wrapper.on('click', cancel);
+	dlg_wrapper.on('click', function(e) {
+		if (e.target == dlg_wrapper[0]) {
+			cancel();
+		}
+	});
 	var dlg = $('<div class="pick_dialog">');
 	dlg.appendTo(dlg_wrapper);
 
@@ -888,7 +952,7 @@ function scoresheet_show() {
 	var match_date = new Date(state.metadata.start);
 	_text('.scoresheet_date_value', _human_date_str(match_date));
 
-	_text('.scoresheet_court_name', state.setup.court_name);
+	_text('.scoresheet_court_id', settings.court_id);
 	_text('.scoresheet_umpire_name', settings.umpire_name);
 
 	_text('.scoresheet_begin_value', state.metadata.start ? _get_time_str(new Date(state.metadata.start)) : '');
@@ -1335,7 +1399,6 @@ function demo_match_start() {
 		match_name: 'GD',
 		event_name: 'BCB - BCB (Demo)',
 		tournament_name: 'Demo',
-		court_name: '1',
 		team_competition: true,
 	};
 
@@ -1356,6 +1419,12 @@ function show_settings() {
 		$('.setup_show_manual').show();
 		$('#setup_manual_form').hide();
 		$('#setup_network_matches').attr('data-network-type', 'courtspot');
+		ui_network_list_matches(state);
+	} else if (state.btde) {
+		$('.setup_network_container').show();
+		$('.setup_show_manual').show();
+		$('#setup_manual_form').hide();
+		$('#setup_network_matches').attr('data-network-type', 'btde');
 		ui_network_list_matches(state);
 	} else {
 		$('.setup_network_container').hide();
@@ -1534,6 +1603,9 @@ function start_match(s, setup) {
 	init_state(s, setup);
 	calc_state(s);
 	render(s);
+	network_send_press(s, {
+		type: '_start_match'
+	});
 }
 
 function on_press(press, s) {
@@ -1941,7 +2013,6 @@ function calc_state(s) {
 
 function render_score_display(s) {
 	function _init(s) {
-		console.log('initialized');
 		$('#score_table').empty();
 
 		var ann_tr = $('<tr class="score_announcements">');
@@ -2079,6 +2150,21 @@ function render_score_display(s) {
 	}
 }
 
+function render_court_str() {
+	var court_str = '';
+	if (settings.court_id) {
+		court_str = 'Feld ' + settings.court_id;
+	}
+	if (settings.court_description) {
+		if (court_str) {
+			court_str += '(' + settings.court_description + ')';
+		} else {
+			court_str += 'Feld ' + settings.court_description;
+		}
+	}
+	$('#court_court_str>span').text(court_str);
+}
+
 function render(s) {
 	var dialog_active = false;  // Is there anything to pick in the bottom?
 
@@ -2102,7 +2188,7 @@ function render(s) {
 	}
 
 	$('#court_match_name>span').text(s.setup.match_name ? s.setup.match_name : '');
-	$('#court_court_name>span').text(s.setup.court_name ? 'Feld ' + s.setup.court_name : '');
+	render_court_str();
 
 	$('#shuttle_counter_value').text(s.match.shuttle_count);
 
@@ -2372,11 +2458,25 @@ function init() {
 	settings_load();
 }
 
-function ui_init_settings() {
-	var checkboxes = ['save_finished_matches', 'go_fullscreen', 'show_pronounciation'];
-	checkboxes.forEach(function(name) {
+
+var _settings_checkboxes = ['save_finished_matches', 'go_fullscreen', 'show_pronounciation'];
+var _settings_textfields = ['umpire_name', 'court_id', 'court_description'];
+function ui_settings_update() {
+	_settings_checkboxes.forEach(function(name) {
 		var box = $('.settings [name="' + name + '"]');
 		box.prop('checked', settings[name]);
+	});
+
+	_settings_textfields.forEach(function(name) {
+		var input = $('.settings [name="' + name + '"]');
+		input.val(settings[name] ? settings[name] : '');
+	});
+	render_court_str();
+}
+
+function ui_init_settings() {
+	_settings_checkboxes.forEach(function(name) {
+		var box = $('.settings [name="' + name + '"]');
 		box.on('change', function() {
 			settings[name] = box.prop('checked');
 			if (name === 'show_pronounciation') {
@@ -2386,17 +2486,15 @@ function ui_init_settings() {
 		});
 	});
 
-	var textfields = ['umpire_name'];
-	textfields.forEach(function(name) {
+	_settings_textfields.forEach(function(name) {
 		var input = $('.settings [name="' + name + '"]');
-		input.val(settings[name] ? settings[name] : '');
 		input.on('change input', function() {
 			settings[name] = input.val();
 			settings_store();
 		});
 	});
 
-	$('.setup_show_manual').click(function(e) {
+	$('.setup_show_manual').on('click', function(e) {
 		e.preventDefault();
 		$('.setup_show_manual').hide();
 		$('#setup_manual_form').show(200);
@@ -2407,6 +2505,8 @@ function ui_init_settings() {
 	$('.fullscreen_button').on('click', function() {
 		ui_fullscreen_toggle();
 	});
+
+	ui_settings_update();
 }
 
 var _editmode_last_click = 0;
@@ -2592,7 +2692,6 @@ function ui_init() {
 		setup.match_name = _formval('match_name');
 		setup.event_name = _formval('event_name');
 		setup.tournament_name = _formval('tournament_name');
-		setup.court_name = _formval('court_name');
 
 		if (setup.is_doubles &&
 				!_formval('team1_player1') && !_formval('team1_player2') &&
@@ -2600,8 +2699,7 @@ function ui_init() {
 				!_formval('team1_name') && !_formval('team2_name') &&
 				!setup.match_name &&
 				!setup.event_name &&
-				!setup.tournament_name &&
-				!setup.court_name) {
+				!setup.tournament_name) {
 			// Demo mode
 			return demo_match_start();
 		}
@@ -2768,7 +2866,10 @@ function ui_init() {
 		liveaw_init(hash_query.liveaw_match_id);
 	} else if (hash_query.courtspot_court) {
 		courtspot.ui_init(state, hash_query.courtspot_court);
-	} else if (typeof hash_query.demo !== 'undefined') {
+	} else if (hash_query.btde !== undefined) {
+		state.btde = btde();
+		state.btde.ui_init(state);
+	} else if (hash_query.demo !== undefined) {
 		demo_match_start();
 	} else {
 		show_settings();

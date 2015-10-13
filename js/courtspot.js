@@ -201,9 +201,7 @@ function init(s, baseurl, court_name) {
 	s.courtspot = {
 		baseurl: baseurl,
 		court_name: court_name,
-		api: {
-			list_matches: courtspot_list_matches,
-		},
+		list_matches: courtspot_list_matches,
 	};
 }
 

@@ -41,8 +41,8 @@ html, body, button {
 	margin: 0 -1.5vmin;
 }
 .setup_network_match {
-	font-size: 3vmin;
-	min-width: 16em;
+	font-size: 2vmin;
+	min-width: 20em;
 	margin: 1.5vmin;
 	padding: 1vmin 0vmin 1vmin 0vmin;
 }
@@ -74,7 +74,7 @@ html, body, button {
 #court span {
 	background: rgba(194, 211, 194, 0.4);
 }
-#court_left_even, #court_left_odd, #court_right_even, #court_right_odd, #court_right_team, #court_left_team, #court_match_name, #court_court_name {
+#court_left_even, #court_left_odd, #court_right_even, #court_right_odd, #court_right_team, #court_left_team, #court_match_name, #court_court_str {
 	position: absolute;
 	text-align: center;
 	font-size: inherit;
@@ -85,10 +85,10 @@ html, body, button {
 	top: 50%; transform: translate(0, -50%);
 }
 
-#court>#court_court_name>span, #court>#court_match_name>span {
+#court>#court_court_str>span, #court>#court_match_name>span {
 	background: rgba(194, 211, 194, 0.8);
 }
-#court_court_name {
+#court_court_str {
 	color: #555555;
 	font-size: 5vmin;
 	top: 1%;
@@ -289,6 +289,7 @@ span.score_announcement+span.score_announcement {
 
 .half-invisible {
 	opacity: 0.3;
+	z-index: 0 !important;
 }
 .nearly-invisible {
 	opacity: 0.02;
@@ -408,7 +409,7 @@ span.score_announcement+span.score_announcement {
 .settings_container h2 {
 	margin: 0;
 }
-.settings label {
+.settings>label {
 	display: block;
 }
 

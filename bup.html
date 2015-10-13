@@ -36,7 +36,7 @@
 
 <div id="court_container">
 <div id="court">
-<div id="court_court_name"><span></span></div>
+<div id="court_court_str"><span></span></div>
 <div id="court_arrow" class="default-invisible"></div>
 <div id="court_left_odd"><span></span></div>
 <div id="court_left_team"><span></span></div>
@@ -204,10 +204,6 @@ Linienrichter</span>
 		<th>Turnier</th>
 		<td colspan="3"><input type="text" name="tournament_name" tabindex="43" placeholder="z.B. 1. Bundesliga 2015/2016" /></td>
 	</tr>
-	<tr>
-		<th>Feld</th>
-		<td colspan="3"><input type="text" name="court_name" tabindex="44" placeholder="z.B. 1 oder rechts" /></td>
-	</tr>
     <tr>
         <th></th>
         <td colspan="3"><label><input type="checkbox" name="team_competition" tabindex="51" />Mannschaftswettbewerb</label></td>
@@ -228,6 +224,7 @@ Linienrichter</span>
 
 <div class="settings">
 <h2>Einstellungen</h2>
+<div><label>Feld Nr. <input type="text" name="court_id" size="2" /></label> <label>(<input type="text" name="court_description" size="8" placeholder="z.B. rechts" />)</label></div>
 <label>Schiedsrichter-Name: <input type="text" name="umpire_name" size="32" /></label>
 <label><input type="checkbox" name="save_finished_matches" />Abgeschlossene Spiele speichern</label>
 <label><input type="checkbox" name="show_pronounciation" />Ansagen anzeigen</label>
@@ -326,7 +323,7 @@ Linienrichter</span>
 		<!-- top right information about match -->
 		<text class="small-text" x="228" y="15">Feld:</text>
 		<line class="dashed-line" x1="252" x2="282" y1="15.5" y2="15.5"/>
-		<text class="scoresheet_court_name" x="253" y="14"></text>
+		<text class="scoresheet_court_id" x="253" y="14"></text>
 		<text class="small-text" x="228" y="22">Schiedsrichter:</text>
 		<line class="dashed-line" x1="252" x2="282" y1="22.5" y2="22.5"/>
 		<text class="small-text scoresheet_umpire_name" x="253" y="21"></text>
@@ -381,6 +378,7 @@ Linienrichter</span>
 <script src="libs/jquery.min.js"></script>
 <script src="libs/mousetrap.min.js"></script>
 <script src="js/courtspot.js"></script>
+<script src="js/btde.js"></script>
 <script src="js/bup.js"></script>
 <script src="libs/jspdf.min.js" async="async" id="script_jspdf"></script>
 </body>
