@@ -1,19 +1,29 @@
+write a test for network_calc_score
+make dist (copy into dist/ subfolder, minify css/js, combine js)
+	write bup.html as index.html
 add badmintonticker.de support
-	read current result
-	login
-	show loading / error in list
-	read matches (once with transparent reload when going to settings)
+	improve loading dialog when login fails
+	login successful: resend state
+	test retiring
+	read current result from badmintonticker (initialize network_score)
 	reload button
 	show team names in <h2>Spiele</h2>
+
+split js files
+make upload (upload based on dist)
+
+badmintonticker improve
+	mail w/ court problems
+	send cb for current request later
+	show loading / error in list
+	read matches (once with transparent reload when going to settings)
 	handle network errors
-	read current result from badmintonticker (initialize network_score)
-	test retiring
+	initialize matches as they are
 	show court name / court description
 	test local restoring (pick a correct ID)
 	support names without comma when reading player list
 
 test updating court ID settings (should trigger rerender)
-write a test for network_calc_score
 edit mode to change sides / change ends
 	don't rerender score display (in order to be able to change and immediately render that)
 	implement edit score
@@ -71,11 +81,6 @@ CourtSpot
 		show a warning when starting a game that's already running
 
 
-
-make dist (copy into dist/ subfolder, minify css/js, combine js)
-	write bup.html as index.html
-split js files
-make upload (upload based on dist)
 offline webapp Manifest (only in production)
 	reloading
 
@@ -204,6 +209,7 @@ Schiedsrichterzettel auch im Bundesliga-Design
 Schiedsrichterzettel größer machen (button schiedsrichterzettel)
 limit available courts when network is in use
 mock courtspot and write automated tests
+show login status (spinning something)
 dynamically create favicon (score? match name? court name?)
 setting for current court
 -> Demo Jörg H, Manuel, Susanne

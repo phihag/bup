@@ -146,6 +146,9 @@ Linienrichter</span>
 <div class="settings_layout">
 <div class="settings_container">
 
+<div class="settings_login_container default-invisible">
+</div>
+
 <div class="extended_options default-invisible">
 	<h2 class="extopts_current_game">Aktuelles Spiel</h2>
 
@@ -158,7 +161,7 @@ Linienrichter</span>
 	<div class="setup_network_container default-invisible">
 	<h2>Spiele</h2>
 	<div id="setup_network_matches">
-
+	<div class="setup_network_matches_loading"><div class="loading-icon"></div><span>Lade Spiele ...</span></div>
 	</div>
 
 	<a href="#" class="setup_show_manual">Spiel manuell eintragen ...</a>
@@ -229,6 +232,7 @@ Linienrichter</span>
 <label><input type="checkbox" name="save_finished_matches" />Abgeschlossene Spiele speichern</label>
 <label><input type="checkbox" name="show_pronounciation" />Ansagen anzeigen</label>
 <label><input type="checkbox" name="go_fullscreen" />Vollbildmodus beim Start anfragen <button class="fullscreen_button">Vollbildmodus</button></label>
+<label>Netzwerk-Timeout: <input type="number" name="network_timeout" min="1" value="1000" max="600000" /></label>
 </div>
 
 </div>

@@ -53,6 +53,12 @@ html, body, button {
 	display: block;
 	text-align: center;
 }
+.setup_network_matches_loading>* {
+	vertical-align: middle;
+}
+.setup_network_matches_loading>.loading-icon {
+	display: inline-block;
+}
 
 #court_container {
 }
@@ -391,7 +397,7 @@ span.score_announcement+span.score_announcement {
 .settings_layout {
 	position: absolute;
 	left: 0; right: 0;
-	top: 0; bottom: 0;
+	top: 0;
 	overflow: auto;
 	display: -webkit-flex;
 	display: flex;
@@ -643,4 +649,27 @@ span.score_announcement+span.score_announcement {
 }
 .editmode_switch_right {
 	right: 0.5%;
+}
+
+
+.login_button {
+	position: relative;
+}
+.login_error {
+	color: red;
+	font-weight: bold;
+}
+
+.loading-icon {
+	background-image: url(icons/loading.gif);
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	width: 2em;
+	height: 2em;
+}
+button>.loading-icon {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }

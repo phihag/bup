@@ -11,6 +11,7 @@ var settings = {
 	umpire_name: '',
 	court_id: '',
 	court_description: '',
+	network_timeout: 5000,
 };
 
 function _parse_query_string(qs) {
@@ -2441,7 +2442,8 @@ function settings_load() {
 
 	var s = window.localStorage.getItem('bup_settings');
 	if (s) {
-		settings = JSON.parse(s);
+		var new_settings = JSON.parse(s);
+		settings = $.extend(settings, new_settings);
 	}
 }
 
@@ -2460,7 +2462,7 @@ function init() {
 
 
 var _settings_checkboxes = ['save_finished_matches', 'go_fullscreen', 'show_pronounciation'];
-var _settings_textfields = ['umpire_name', 'court_id', 'court_description'];
+var _settings_textfields = ['umpire_name', 'court_id', 'court_description', 'network_timeout'];
 function ui_settings_update() {
 	_settings_checkboxes.forEach(function(name) {
 		var box = $('.settings [name="' + name + '"]');

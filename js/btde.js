@@ -9,10 +9,78 @@ var ALL_COURTS = [{
 	court_description: 'rechts'
 }];
 
+function ui_hide_login() {
+	$('.settings_login_container').hide();
+}
+
+function ui_show_login() {
+	var login_container = $('.settings_login_container');
+	login_container.show();
+	login_container.empty();
+
+	var login_form = $('<form class="settings_login">');
+	login_form.append($('<h2>Login badmintonticker</h2>'));
+	login_form.append($('<div class="login_error"></div>'));
+	login_form.append($('<input name="benutzer" type="text" placeholder="Benutzername">'));
+	login_form.append($('<input name="passwort" type="password" placeholder="Passwort">'));
+	var login_button = $('<button class="login_button"/>');
+	login_form.append(login_button);
+	var loading_icon = $('<div class="default-invisible loading-icon" />');
+	login_button.append(loading_icon);
+	login_button.append($('<span>Anmelden</span>'));
+	login_container.append(login_form);
+	login_form.on('submit', function(e) {
+		e.preventDefault();
+		loading_icon.show();
+		login_button.attr('disabled', 'disabled');
+
+		$.ajax({
+			dataType: 'text',
+			url: baseurl + 'login/',
+			method: 'POST',
+			data: login_form.serializeArray(),
+			contentType: 'application/x-www-form-urlencoded',
+			timeout: settings.network_timeout,
+		}).done(function(res) {
+			loading_icon.hide();
+			login_button.removeAttr('disabled');
+
+			var m = /<div class="login">\s*<p class="rot">([^<]*)</.exec(res);
+			var msg = 'Login fehlgeschlagen';
+			if (m) {
+				msg = m[1];
+			} else if (/<div class="logout">/.exec(res)) {
+				// Successful
+				ui_hide_login();
+
+				// resend pending requests
+				ui_network_list_matches();
+
+				return;
+			}
+
+			$('.login_error').text(msg);
+		}).fail(function(xhr) {
+			var code = xhr.status;
+			loading_icon.hide();
+			login_button.removeAttr('disabled');
+			$('.login_error').text('Login fehlgeschlagen (Fehler ' + code + ')');
+		});
+
+		return false;
+	});
+}
+
 function _request(options, cb) {
 	// TODO test for login
 	options.dataType = 'text';
+	options.timeout = settings.network_timeout;
 	$.ajax(options).done(function(res) {
+		if (/<div class="login">/.exec(res)) {
+			ui_show_login();
+			// TODO redo request
+			return;
+		}
 		return cb(res);
 	});
 }
