@@ -1,8 +1,7 @@
-add badmintonticker.de support
-	login successful: resend state (including court)
+improve badmintonticker.de support
 	mail w/ court problems
-	send cb for current request later
-	read matches (once with transparent reload when going to settings)
+	login successful: resend state (including court)
+	login during match
 	handle network errors
 	initialize matches as they are
 	support names without comma when reading player list

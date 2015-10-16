@@ -265,7 +265,7 @@ function network_send_press(s, press) {
 	}
 }
 
-function ui_network_list_matches(s, network_type) {
+function ui_network_list_matches(s, network_type, silent) {
 	function _install_reload() {
 		var event_container = $('.setup_network_heading');
 		if (event_container.find('.setup_network_matches_reload').length > 0) {
@@ -273,7 +273,7 @@ function ui_network_list_matches(s, network_type) {
 		}
 		var reload_button = $('<button class="setup_network_matches_reload"></button>');
 		reload_button.on('click', function() {
-			ui_network_list_matches(s, network_type);
+			ui_network_list_matches(s, network_type, silent);
 		});
 		event_container.append(reload_button);
 	}
@@ -284,7 +284,8 @@ function ui_network_list_matches(s, network_type) {
 	}
 
 	_install_reload();
-	if (container.find('.setup_network_matches_loading').length == 0) {
+
+	if (!silent && container.find('.setup_network_matches_loading').length == 0) {
 		var loading = $('<div class="setup_network_matches_loading"><div class="loading-icon"></div><span>Lade Spiele ...</span></div>');
 		container.append(loading);
 	}
@@ -1472,6 +1473,7 @@ function demo_match_start() {
 	start_match(state, setup);
 }
 
+var _network_reload_interval = null;
 function show_settings() {
 	var wrapper = $('#settings_wrapper');
 	if (wrapper.attr('data-settings-visible') == 'true') {
@@ -1492,6 +1494,11 @@ function show_settings() {
 		$('#setup_manual_form').hide();
 		$('#setup_network_matches').attr('data-network-type', 'btde');
 		ui_network_list_matches(state);
+		if (_network_reload_interval === null) {
+			_network_reload_interval = window.setInterval(function() {
+				ui_network_list_matches(state, 'btde', true);
+			}, 10000);
+		}
 	} else {
 		$('.setup_network_container').hide();
 		$('#setup_manual_form').show();
@@ -1507,10 +1514,15 @@ function hide_settings(force) {
 	if (!force && !state.initialized) {
 		return;
 	}
+	if (_network_reload_interval) {
+		window.clearInterval(_network_reload_interval);
+		_network_reload_interval = null;
+	}
 	var wrapper = $('#settings_wrapper');
 	if (wrapper.attr('data-settings-visible') == 'false') {
 		return;
 	}
+
 
 	wrapper.hide();
 	ui_esc_stack_pop();
