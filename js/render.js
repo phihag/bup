@@ -201,7 +201,7 @@ function ui_render(s) {
 	if (s.match.announce_pregame) {
 		dialog_active = true;
 		$('#love-all-dialog').show();
-		$('#love-all').text(settings.show_pronounciation ? pronounciation(s) : loveall_announcement(s));
+		$('#love-all').text(settings.show_pronounciation ? pronounciation.pronounce(s) : pronounciation.loveall_announcement(s));
 	} else {
 		$('#love-all-dialog').hide();
 	}
@@ -209,7 +209,7 @@ function ui_render(s) {
 	if (s.match.finished) {
 		dialog_active = true;
 		$('#postmatch-confirm-dialog').show();
-		$('#postmatch-confirm').text(settings.show_pronounciation ? pronounciation(s) : postgame_announcement(s));
+		$('#postmatch-confirm').text(settings.show_pronounciation ? pronounciation.pronounce(s) : pronounciation.postgame_announcement(s));
 		$('.postmatch_options').show();
 	} else {
 		$('#postmatch-confirm-dialog').hide();
@@ -218,7 +218,7 @@ function ui_render(s) {
 	if (!s.match.finished && s.game.finished) {
 		dialog_active = true;
 		$('#postgame-confirm-dialog').show();
-		$('#postgame-confirm').text(settings.show_pronounciation ? pronounciation(s) : postgame_announcement(s));
+		$('#postgame-confirm').text(settings.show_pronounciation ? pronounciation.pronounce(s) : pronounciation.postgame_announcement(s));
 	} else {
 		$('#postgame-confirm-dialog').hide();
 	}
@@ -306,7 +306,7 @@ function ui_render(s) {
 	}
 
 	if (settings.show_pronounciation && !dialog_active) {
-		var pronounciation_text = pronounciation(s);
+		var pronounciation_text = pronounciation.pronounce(s);
 		if (pronounciation_text) {
 			$('#pronounciation>span').text(pronounciation_text);
 			$('#pronounciation').show();

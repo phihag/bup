@@ -31,13 +31,14 @@ dist:
 	uglifyjs \
 		"libs/jquery.min.js" "libs/mousetrap.min.js" \
 		"js/utils.js" \
+		"js/pronounciation.js" \
 		"js/liveaw.js" \
 		"js/courtspot.js" \
 		"js/btde.js" \
-		"libs/calc.js" \
-		"libs/render.js" \
-		"libs/scoresheet.js" \
-		"libs/network.js" \
+		"js/calc.js" \
+		"js/render.js" \
+		"js/scoresheet.js" \
+		"js/network.js" \
 		"js/bup.js" \
 		-m -c -o dist/bup/bup.dist.js
 	cp libs/jspdf.min.js dist/bup/jspdf.dist.js
