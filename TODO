@@ -31,6 +31,7 @@ fix scoresheet buttons on smartphone
 animation for settings (go to top right)
 fix display without vw (see Manuel, https://github.com/saabi/vminpoly)
 save manually created games immediately?
+gzip in dist with correct htaccess
 
 retest Manuel's notes
 
