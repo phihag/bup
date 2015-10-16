@@ -23,7 +23,7 @@ deps: install-libs
 	npm install
 
 dist:
-	rm -rf dist
+	rm -rf -- dist
 	mkdir -p dist/bup
 	node div/make_dist.js bup.html dist/bup/index.html
 	<bup.css cleancss -o dist/bup/bup.min.css
@@ -31,6 +31,7 @@ dist:
 	uglifyjs "libs/jquery.min.js" "libs/mousetrap.min.js" "js/courtspot.js" "js/btde.js" "js/bup.js" -m -c -o dist/bup/bup.dist.js
 	cp libs/jspdf.min.js dist/bup/jspdf.dist.js
 	cp -r icons dist/bup/
+	cd dist && zip bup.zip bup/ -r
 
 upload: dist
 	cp div/dist_upload_config.json dist/.upload_config.json
@@ -43,5 +44,6 @@ test:
 clean:
 	rm -rf -- libs
 	rm -rf -- node_modules
+	rm -rf -- dist
 
 .PHONY: default help deps test clean install-libs force-install-libs upload dist
