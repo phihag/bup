@@ -4,6 +4,8 @@ var assert = require('assert');
 
 var tutils = require('./tutils');
 var bup = tutils.bup;
+var _describe = tutils._describe;
+var _it = tutils._it;
 var SINGLES_SETUP = tutils.SINGLES_SETUP;
 var press_score = tutils.press_score;
 var state_after = tutils.state_after;
@@ -12,14 +14,14 @@ _describe('network functions', function() {
 	_it('network_calc_score', function() {
 		var presses = [];
 		var s = state_after(presses, SINGLES_SETUP);
-		assert.deepEqual(bup.network_calc_score(s), [[]]);
+		assert.deepEqual(bup.network_calc_score(s), []);
 
 		presses.push({
 			type: 'pick_side',
 			team1_left: true,
 		});
 		s = state_after(presses, SINGLES_SETUP);
-		assert.deepEqual(bup.network_calc_score(s), [[]]);
+		assert.deepEqual(bup.network_calc_score(s), []);
 
 		presses.push({
 			type: 'pick_server',
@@ -27,7 +29,7 @@ _describe('network functions', function() {
 			player_id: 0,
 		});
 		s = state_after(presses, SINGLES_SETUP);
-		assert.deepEqual(bup.network_calc_score(s), [[]]);
+		assert.deepEqual(bup.network_calc_score(s), []);
 
 		presses.push({
 			type: 'love-all',
@@ -91,7 +93,7 @@ _describe('network functions', function() {
 		assert.deepEqual(bup.network_calc_score(s), [[8, 21], [21, 17], [21, 23]]);
 	});
 
-	_it('network_calc_score with red cards before match / game', function() {
+	_it('network_calc_score with red cards before second game', function() {
 		var presses = [{
 			type: 'pick_side',
 			team1_left: false,
@@ -100,21 +102,12 @@ _describe('network functions', function() {
 			team_id: 0,
 			player_id: 0,
 		}, {
-			type: 'red-card',
-			team_id: 0,
-			player_id: 0,
-		}];
-		// Show state before love all if red cards have been given
-		var s = state_after(presses, SINGLES_SETUP);
-		assert.deepEqual(bup.network_calc_score(s), [[0, 1]]);
-
-		presses.push({
 			type: 'love-all',
-		});
-		s = state_after(presses, SINGLES_SETUP);
-		assert.deepEqual(bup.network_calc_score(s), [[0, 1]]);
+		}];
+		var s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(bup.network_calc_score(s), [[0, 0]]);
 
-		press_score(presses, 5, 21);
+		press_score(presses, 6, 21);
 		s = state_after(presses, SINGLES_SETUP);
 		assert.deepEqual(bup.network_calc_score(s), [[21, 6]]);
 
@@ -136,8 +129,8 @@ _describe('network functions', function() {
 		assert.deepEqual(bup.network_calc_score(s), [[21, 6], [1, 0]]);
 	});
 
-	_it('network_calc_score with disqualification', function() {
-		var presses = [{
+	_it('network_calc_score with retiring / disqualification', function() {
+		var base_presses = [{
 			type: 'pick_side',
 			team1_left: false,
 		}, {
@@ -149,23 +142,78 @@ _describe('network functions', function() {
 			team_id: 0,
 			player_id: 0,
 		}];
-		// Show state before love all if red cards have been given
-		var s = state_after(presses, SINGLES_SETUP);
-		assert.deepEqual(bup.network_calc_score(s), [[0, 1]]);
+		press_score(base_presses, 5, 7);
+		var s = state_after(base_presses, SINGLES_SETUP);
+		assert.deepEqual(bup.network_calc_score(s), [[7, 5]]);
 
+		var presses = base_presses.slice();
 		presses.push({
-			type: 'love-all',
+			type: 'disqualified',
+			team_id: 0,
+			player_id: 0,
 		});
-	});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(bup.network_calc_score(s), [[7, 21], [0, 21]]);
 
-	_it('network_calc_score with retiring', function() {
-		var presses = [{
+		presses = base_presses.slice();
+		presses.push({
 			type: 'retired',
 			team_id: 0,
 			player_id: 0,
-		}];
-		var s = state_after(presses, SINGLES_SETUP);
-		assert.deepEqual(bup.network_calc_score(s), [[0, 21], [0, 21]]);
-	});
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(bup.network_calc_score(s), [[7, 21], [0, 21]]);
 
+		press_score(base_presses, 2, 0);
+		press_score(base_presses, 18, 18);
+		s = state_after(base_presses, SINGLES_SETUP);
+		assert.deepEqual(bup.network_calc_score(s), [[25, 25]]);
+
+		presses = base_presses.slice();
+		presses.push({
+			type: 'disqualified',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(bup.network_calc_score(s), [[27, 25], [21, 0]]);
+
+		presses = base_presses.slice();
+		presses.push({
+			type: 'retired',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(bup.network_calc_score(s), [[27, 25], [21, 0]]);
+
+		press_score(base_presses, 0, 2);
+		base_presses.push({
+			type: 'postgame-confirm',
+		});
+		base_presses.push({
+			type: 'love-all',
+		});
+		presses = base_presses.slice();
+		press_score(presses, 29, 29);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(bup.network_calc_score(s), [[27, 25], [29, 29]]);
+
+		presses.push({
+			type: 'disqualified',
+			team_id: 0,
+			player_id: 0,
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(bup.network_calc_score(s), [[27, 25], [29, 30], [0, 21]]);
+
+		presses = [];
+		presses.push({
+			type: 'retired',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(bup.network_calc_score(s), [[21, 0], [21, 0]]);
+	});
 });

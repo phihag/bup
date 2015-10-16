@@ -20,7 +20,8 @@ function ui_show_login() {
 
 	var login_form = $('<form class="settings_login">');
 	login_form.append($('<h2>Login badmintonticker</h2>'));
-	login_form.append($('<div class="login_error"></div>'));
+	var login_error = $('<div class="network_error"></div>');
+	login_form.append(login_error);
 	login_form.append($('<input name="benutzer" type="text" placeholder="Benutzername">'));
 	login_form.append($('<input name="passwort" type="password" placeholder="Passwort">'));
 	var login_button = $('<button class="login_button"/>');
@@ -54,17 +55,18 @@ function ui_show_login() {
 				ui_hide_login();
 
 				// resend pending requests
-				ui_network_list_matches();
+				$('#setup_network_matches .network_error').remove();
+				ui_network_list_matches(state);
 
 				return;
 			}
 
-			$('.login_error').text(msg);
+			login_error.text(msg);
 		}).fail(function(xhr) {
 			var code = xhr.status;
 			loading_icon.hide();
 			login_button.removeAttr('disabled');
-			$('.login_error').text('Login fehlgeschlagen (Fehler ' + code + ')');
+			login_error.text('Login fehlgeschlagen (Fehler ' + code + ')');
 		});
 
 		return false;
@@ -72,27 +74,16 @@ function ui_show_login() {
 }
 
 function _request(options, cb) {
-	// TODO test for login
 	options.dataType = 'text';
 	options.timeout = settings.network_timeout;
 	$.ajax(options).done(function(res) {
 		if (/<div class="login">/.exec(res)) {
 			ui_show_login();
-			// TODO redo request
-			return;
+			// TODO redo requests
+			return cb('Login erforderlich', res);
 		}
-		return cb(res);
+		return cb(null, res);
 	});
-}
-
-function network_calc_score(s) {
-	var score = [];
-	s.match.finished_games.forEach(function(fg) {
-		score.push(fg);
-	});
-	score.push(s.game.score);
-	// TODO resigning/retiring belongs here
-	return score;
 }
 
 function send_press(s, press) {
@@ -142,7 +133,11 @@ function list_matches(s, cb) {
 
 	_request({
 		url: baseurl + 'login/punkte.php',
-	}, function(html) {
+	}, function(err, html) {
+		if (err) {
+			return cb(err);
+		}
+
 		var m = /<table style="width:720px;">([\s\S]*?)<\/table>/.exec(html);
 		if (! m) {
 			return cb(null, []);

@@ -161,7 +161,6 @@ Linienrichter</span>
 	<div class="setup_network_container default-invisible">
 	<h2>Spiele</h2>
 	<div id="setup_network_matches">
-	<div class="setup_network_matches_loading"><div class="loading-icon"></div><span>Lade Spiele ...</span></div>
 	</div>
 
 	<a href="#" class="setup_show_manual">Spiel manuell eintragen ...</a>
@@ -227,7 +226,7 @@ Linienrichter</span>
 
 <div class="settings">
 <h2>Einstellungen</h2>
-<div><label>Feld Nr. <input type="text" name="court_id" size="2" /></label> <label>(<input type="text" name="court_description" size="8" placeholder="z.B. rechts" />)</label></div>
+<div><label>Feld Nr. <input type="number" name="court_id" min="1" /></label> <label>(<input type="text" name="court_description" size="8" placeholder="z.B. rechts" />)</label></div>
 <label>Schiedsrichter-Name: <input type="text" name="umpire_name" size="32" /></label>
 <label><input type="checkbox" name="save_finished_matches" />Abgeschlossene Spiele speichern</label>
 <label><input type="checkbox" name="show_pronounciation" />Ansagen anzeigen</label>

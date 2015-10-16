@@ -206,6 +206,46 @@ function liveaw_init(liveaw_match_id) {
 	});
 }
 
+function network_calc_score(s) {
+	function _finish_score(score, team1_won) {
+		var winner = team1_won ? 0 : 1;
+		if (score[1 - winner] >= 29) {
+			score[winner] = 30;
+		} else if (score[1 - winner] >= 20) {
+			score[winner] = score[1 - winner] + 2;
+		} else {
+			score[winner] = 21;
+		}
+	}
+
+	var scores = [];
+	s.match.finished_games.forEach(function(fg) {
+		scores.push(fg.score);
+	});
+	if (s.game.started || (s.game.score[0] != 0) || (s.game.score[1] != 0)) {
+		scores.push(s.game.score);
+	}
+	if (s.match.finished && !s.match.won_by_score) {
+		if (scores.length > 0) {
+			_finish_score(scores[scores.length - 1], s.match.team1_won);
+		}
+
+		var won_games = 0;
+		scores.forEach(function(score) {
+			if ((score[0] >= score[1]) == s.match.team1_won) {
+				won_games++;
+			}
+		});
+		for (;won_games < 2;won_games++) {
+			var new_score = [0, 0];
+			_finish_score(new_score, s.match.team1_won);
+			scores.push(new_score);
+		}
+	}
+
+	return scores;
+}
+
 function network_send_press(s, press) {
 	if (s.liveaw && s.liveaw.match_id) {
 		_liveaw_request({
@@ -230,8 +270,21 @@ function ui_network_list_matches(s, network_type) {
 		network_type = container.attr('data-network-type');
 	}
 
+	if (container.find('.setup_network_matches_loading').length == 0) {
+		var loading = $('<div class="setup_network_matches_loading"><div class="loading-icon"></div><span>Lade Spiele ...</span></div>');
+		container.append(loading);
+	}
+
 	s[network_type].list_matches(s, function(err, matches) {
 		container.empty(); // TODO better transition if we're updating?
+
+		if (err) {
+			var err_msg = $('<div class="network_error">');
+			err_msg.text(err);
+			container.append(err_msg);
+			return;
+		}
+
 		matches.forEach(function(match) {
 			var btn = $('<button class="setup_network_match">');
 			var match_name = $('<span class="setup_network_match_match_name">');
@@ -1436,7 +1489,6 @@ function show_settings() {
 	});
 	ui_settings_load_list();
 	$('.extended_options').toggle(state.initialized);
-
 }
 
 function hide_settings(force) {
@@ -2911,6 +2963,7 @@ if (typeof module !== 'undefined') {
 		calc_state: calc_state,
 		// For testing only
 		pronounciation: pronounciation,
+		network_calc_score: network_calc_score,
 		_duration_str: _duration_str,
 		_scoresheet_parse_match: _scoresheet_parse_match,
 	};

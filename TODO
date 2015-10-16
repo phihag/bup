@@ -1,9 +1,8 @@
-write a test for network_calc_score
 make dist (copy into dist/ subfolder, minify css/js, combine js)
 	write bup.html as index.html
 add badmintonticker.de support
-	improve loading dialog when login fails
-	login successful: resend state
+	show loading icon during login
+	login successful: resend state (including court)
 	test retiring
 	read current result from badmintonticker (initialize network_score)
 	reload button

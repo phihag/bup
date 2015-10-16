@@ -57,11 +57,13 @@ html, body, button {
 	vertical-align: middle;
 }
 .setup_network_matches_loading>.loading-icon {
+	margin-left: 1.5vmin;
 	display: inline-block;
 }
-
-#court_container {
+#setup_network_matches>.network_error {
+	margin-left: 1.5vmin;
 }
+
 #court {
 	position: relative;
 	width: 132vh;
@@ -418,6 +420,9 @@ span.score_announcement+span.score_announcement {
 .settings>label {
 	display: block;
 }
+input[name="court_id"] {
+	max-width: 3em;
+}
 
 .auto-focused:focus {
 	outline: none;
@@ -655,7 +660,7 @@ span.score_announcement+span.score_announcement {
 .login_button {
 	position: relative;
 }
-.login_error {
+.network_error {
 	color: red;
 	font-weight: bold;
 }
