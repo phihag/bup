@@ -1,5 +1,7 @@
+two circles in PDF when disqualified!
+resuming doesn't work anymore!
+
 improve badmintonticker.de support
-	mail w/ court problems
 	desync UI
 		login
 		show error code / explaining text
@@ -9,7 +11,7 @@ improve badmintonticker.de support
 	login during match
 	initialize matches as they are
 	support names without comma when reading player list
-	hide login if no longer required
+	hide login if no longer required (because login in another tab)
 	transmit court change during match
 
 edit mode to change sides / change ends
@@ -28,10 +30,9 @@ Button "bitte spielen" mehr betonen (icon?)
 allow timer restart
 fix settings on smartphone
 fix scoresheet buttons on smartphone
-animation for settings (go to top right)
+CSS animation for settings (go to top right)
 fix display without vw (see Manuel, https://github.com/saabi/vminpoly)
 save manually created games immediately?
-gzip in dist with correct htaccess
 
 retest Manuel's notes
 
@@ -94,9 +95,7 @@ write UX documentation
 disqualification at game start
 	write test
 	test
-pronounciation when giving up (match won by?)
 add settings
-	show full pronounciation
 	shuttle counter
 		test that no value in scoresheet if unconfigured
 check and improve style on more phones
@@ -104,13 +103,12 @@ test various network errors
 create a logo (favicon/...)
 Make it an offline web application
 Installable on Android
-liveaw: handle differences between two instances
 
 test touch interface
 test touch latency
 prevent double touches
 
-multiple languages
+i18n
 	icons
 	change in settings
 
@@ -119,6 +117,7 @@ block overrule when unavailable
 	add a notice when clicked (+1 first)
 test without websocket support
 injury timer
+	in scoresheet (if not disqualified / retired afterwards)
 negative timers (add option for that)
 show what was undone
 team names in pronounciation
@@ -189,7 +188,6 @@ network: add an option to change court
 network: color/opacity in match list by state
 preload images (if not Manifest)
 let _ui_make_player_pick and _ui_make_team pick use _ui_make_pick
-scoresheet: add a test for red cards before / in between games
 ui for network_update_interval
 Schiedsrichterzettel auch im Bundesliga-Design
 Schiedsrichterzettel größer machen (button schiedsrichterzettel)
@@ -201,7 +199,11 @@ move uglifyjs call to helper script in div/
 replace s.scoresheet_game with sg to save space
 move settings into its own module
 move _network_reload_interval to network
+rename default-invisible to invisible and remove/add CSS class instead of show/hide/toggle
 restart network_reload_interval on manual reload
+expose network_reload_interval in UI
+gzip icons in dist with correct htaccess to save CPU compression power
+use https://github.com/svg/svgo
 badmintonticker.de mock / testing
 -> Demo Jörg H, Manuel, Susanne
 -> Jens Köster fragen wegen zweimal gelbe Karte

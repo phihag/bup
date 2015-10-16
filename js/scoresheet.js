@@ -653,9 +653,13 @@ function _svg_to_pdf(svg, pdf) {
 		var n = nodes[i];
 		var style = window.getComputedStyle(n);
 
+		if (style.visibility === 'hidden') {
+			continue;
+		}
+
 		var mode = '';
 		if (style.fill != 'none') {
-			var m = style['fill'].match(/^rgb\(([0-9]+),\s*([0-9]+),\s*([0-9]+)\)|\#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/);
+			var m = style.fill.match(/^rgb\(([0-9]+),\s*([0-9]+),\s*([0-9]+)\)|\#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/);
 			var r = 0;
 			var g = 0;
 			var b = 0;
