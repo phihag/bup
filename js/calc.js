@@ -2,19 +2,21 @@
 
 var calc = (function() {
 
-function init_state(s, setup) {
-	if (setup) {
+function init_state(s, setup, presses) {
+	if (!presses || !s.metadata) {
 		var now = Date.now();
 		s.metadata = {
 			id: setup.match_id ? setup.match_id : utils.uuid(),
 			start: now,
 			updated: now,
 		};
+	}
+	if (setup) {
 		s.setup = setup;
 	}
 
 	s.initialized = true;
-	s.presses = [];
+	s.presses = presses ? presses : [];
 	s.timer = false;
 	s.remote = {};
 

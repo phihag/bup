@@ -508,10 +508,10 @@ function hide_settings(force) {
 }
 
 function resume_match(s) {
-	state = s;
-	calc.init_state(s, null);
+	calc.init_state(s, null, s.presses);
 	calc.state(s);
-	render.ui_render(state);
+	state = s;
+	render.ui_render(s);
 }
 
 function start_match(s, setup) {
