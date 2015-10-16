@@ -212,6 +212,8 @@ function list_matches(s, cb) {
 				}
 			}
 
+			var match_id = 'btde_' + _iso8601(new Date()) + '_' + m[1] + '_' + home_team_name + '-' + away_team_name;
+
 			matches.push({
 				setup: {
 					counting: '3x21',
@@ -220,6 +222,7 @@ function list_matches(s, cb) {
 					teams: [home_team, away_team],
 					btde_match_id: m[6],
 					team_competition: true,
+					match_id: match_id,
 				},
 				network_score: network_score,
 			});

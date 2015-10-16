@@ -4,6 +4,7 @@ var DOUBLE_CLICK_TIMEOUT = 1500;
 var state = {
 	initialized: false
 };
+var networks = {};
 var settings = {
 	save_finished_matches: true,
 	go_fullscreen: false,
@@ -259,8 +260,8 @@ function network_send_press(s, press) {
 	if (s.courtspot && s.setup.courtspot_match_id) {
 		courtspot.send_press(s, press);
 	}
-	if (s.btde && s.setup.btde_match_id) {
-		s.btde.send_press(s, press);
+	if (networks.btde && s.setup.btde_match_id) {
+		networks.btde.send_press(s, press);
 	}
 }
 
@@ -288,7 +289,7 @@ function ui_network_list_matches(s, network_type) {
 		container.append(loading);
 	}
 
-	s[network_type].list_matches(s, function(err, event) {
+	networks[network_type].list_matches(s, function(err, event) {
 		container.empty(); // TODO better transition if we're updating?
 		_install_reload();
 
@@ -1485,7 +1486,7 @@ function show_settings() {
 		$('#setup_manual_form').hide();
 		$('#setup_network_matches').attr('data-network-type', 'courtspot');
 		ui_network_list_matches(state);
-	} else if (state.btde) {
+	} else if (networks.btde) {
 		$('.setup_network_container').show();
 		$('.setup_show_manual').show();
 		$('#setup_manual_form').hide();
@@ -2935,8 +2936,8 @@ function ui_init() {
 	} else if (hash_query.courtspot_court) {
 		courtspot.ui_init(state, hash_query.courtspot_court);
 	} else if (hash_query.btde !== undefined) {
-		state.btde = btde();
-		state.btde.ui_init(state);
+		networks.btde = btde();
+		networks.btde.ui_init(state);
 	} else if (hash_query.demo !== undefined) {
 		demo_match_start();
 	} else {

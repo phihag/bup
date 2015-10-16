@@ -5,8 +5,8 @@ add badmintonticker.de support
 	read matches (once with transparent reload when going to settings)
 	handle network errors
 	initialize matches as they are
-	test local restoring (pick a correct ID)
 	support names without comma when reading player list
+	transmit court change during match
 
 edit mode to change sides / change ends
 	don't rerender score display (in order to be able to change and immediately render that)
