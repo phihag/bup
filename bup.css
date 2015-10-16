@@ -63,6 +63,9 @@ html, body, button {
 #setup_network_matches>.network_error {
 	margin-left: 1.5vmin;
 }
+.setup_network_match_score {
+	font-style: italic;
+}
 
 #court {
 	position: relative;

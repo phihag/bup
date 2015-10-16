@@ -200,6 +200,18 @@ function list_matches(s, cb) {
 				away_team.players.push(away_p2);
 			}
 
+			var network_score = [];
+			for (var game_idx = 0;game_idx < 3;game_idx++) {
+				var home_score_str = m[7 + game_idx];
+				var away_score_str = m[14 + game_idx];
+				if (home_score_str !== '' && away_score_str !== '') {
+					network_score.push([
+						parseInt(home_score_str, 10),
+						parseInt(away_score_str, 10)
+					]);
+				}
+			}
+
 			matches.push({
 				setup: {
 					counting: '3x21',
@@ -208,10 +220,15 @@ function list_matches(s, cb) {
 					teams: [home_team, away_team],
 					btde_match_id: m[6],
 					team_competition: true,
-				}
+				},
+				network_score: network_score,
 			});
 		}
-		return cb(null, matches);
+		var event = {
+			event_name: home_team_name + ' - ' + away_team_name,
+			matches: matches,
+		};
+		return cb(null, event);
 	});
 }
 

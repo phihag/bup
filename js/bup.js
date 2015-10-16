@@ -275,7 +275,7 @@ function ui_network_list_matches(s, network_type) {
 		container.append(loading);
 	}
 
-	s[network_type].list_matches(s, function(err, matches) {
+	s[network_type].list_matches(s, function(err, event) {
 		container.empty(); // TODO better transition if we're updating?
 
 		if (err) {
@@ -285,7 +285,9 @@ function ui_network_list_matches(s, network_type) {
 			return;
 		}
 
-		matches.forEach(function(match) {
+		$('.setup_network_event').text(event.event_name ? event.event_name : 'Spiele');
+
+		event.matches.forEach(function(match) {
 			var btn = $('<button class="setup_network_match">');
 			var match_name = $('<span class="setup_network_match_match_name">');
 			match_name.text(match.setup.match_name);
@@ -2539,6 +2541,9 @@ function ui_init_settings() {
 		var input = $('.settings [name="' + name + '"]');
 		input.on('change input', function() {
 			settings[name] = input.val();
+			if ((name === 'court_id') || (name === 'court_description')) {
+				render_court_str();
+			}
 			settings_store();
 		});
 	});

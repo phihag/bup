@@ -1,25 +1,15 @@
 add badmintonticker.de support
 	login successful: resend state (including court)
-	test retiring
-	read current result from badmintonticker (initialize network_score)
-	reload button
-	show team names in <h2>Spiele</h2>
-
-split js files
-make upload (upload based on dist)
-
-badmintonticker improve
+	reload button for match overview
 	mail w/ court problems
 	send cb for current request later
-	show loading / error in list
 	read matches (once with transparent reload when going to settings)
 	handle network errors
 	initialize matches as they are
-	show court name / court description
 	test local restoring (pick a correct ID)
 	support names without comma when reading player list
+	mock / testing
 
-test updating court ID settings (should trigger rerender)
 edit mode to change sides / change ends
 	don't rerender score display (in order to be able to change and immediately render that)
 	implement edit score
