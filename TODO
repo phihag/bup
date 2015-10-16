@@ -1,7 +1,7 @@
 make dist (copy into dist/ subfolder, minify css/js, combine js)
 	write bup.html as index.html
+more spaces in PDF file name / title
 add badmintonticker.de support
-	show loading icon during login
 	login successful: resend state (including court)
 	test retiring
 	read current result from badmintonticker (initialize network_score)

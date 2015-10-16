@@ -36,10 +36,6 @@ function _courtspot_write(s, path) {
 	_courtspot_write_queue_work();
 }
 
-function _courtspot_get_state(s) {
-	
-}
-
 function _courtspot_send_init(s) {
 	// Move the game to this court
 	_courtspot_write(s,

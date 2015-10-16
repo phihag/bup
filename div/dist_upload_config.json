@@ -3,9 +3,9 @@
     {
       "host": "aufschlagwechsel.de",
       "port": 622,
-      "dir": "/hosts/aufschlagwechsel.de/bup/",
+      "dir": "/hosts/aufschlagwechsel.de/",
       "username": "phihag",
-      "php_baseurl": "https://aufschlagwechsel.de/bup/"
+      "php_baseurl": "https://aufschlagwechsel.de/"
     }
   ]
 }

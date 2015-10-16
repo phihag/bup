@@ -129,8 +129,6 @@ function send_press(s, press) {
 }
 
 function list_matches(s, cb) {
-	var matches = [];
-
 	_request({
 		url: baseurl + 'login/punkte.php',
 	}, function(err, html) {

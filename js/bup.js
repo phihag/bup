@@ -1381,25 +1381,19 @@ function _svg_to_pdf(svg, pdf) {
 			break;
 		}
 	}
+}
 
-	var title = _get_date_str(new Date(state.metadata.start));
+function _scoresheet_match_title(s, sep) {
+	var title = _get_date_str(new Date(state.metadata.start)) + ' ';
 	if (state.setup.match_name) {
-		title += ' ' + state.setup.match_name;
+		title += state.setup.match_name + ' ';
 	}
 	if (state.setup.is_doubles) {
-		title += ' ' + state.setup.teams[0].players[0].name + '/' + state.setup.teams[0].players[1].name + ' vs ' + state.setup.teams[1].players[0].name + '/' + state.setup.teams[1].players[1].name;
+		title += state.setup.teams[0].players[0].name + sep + state.setup.teams[0].players[1].name + ' vs ' + state.setup.teams[1].players[0].name + sep + state.setup.teams[1].players[1].name;
 	} else {
 		title += state.setup.teams[0].players[0].name + ' vs ' + state.setup.teams[1].players[0].name;
 	}
-	var props = {
-		title: title,
-		subject: 'Schiedsrichterzettel',
-		creator: 'bup (https://github.com/phihag/bup/)'
-	};
-	if (state.setup.umpire && state.setup.umpire.name) {
-		props.author = state.setup.umpire.name;
-	}
-	pdf.setProperties(props);
+	return title;
 }
 
 function scoresheet_pdf() {
@@ -1415,16 +1409,17 @@ function scoresheet_pdf() {
 
 	_svg_to_pdf(document.getElementsByClassName('scoresheet')[0], pdf);
 
-	var filename = _iso8601(new Date(state.metadata.start));
-	if (state.setup.match_name) {
-		filename += ' ' + state.setup.match_name;
+	var props = {
+		title: _scoresheet_match_title(s, '/'),
+		subject: 'Schiedsrichterzettel',
+		creator: 'bup (https://github.com/phihag/bup/)'
+	};
+	if (state.setup.umpire && state.setup.umpire.name) {
+		props.author = state.setup.umpire.name;
 	}
-	if (state.setup.is_doubles) {
-		filename += ' ' + state.setup.teams[0].players[0].name + ',' + state.setup.teams[0].players[1].name + ' vs ' + state.setup.teams[1].players[0].name + ',' + state.setup.teams[1].players[1].name;
-	} else {
-		filename += state.setup.teams[0].players[0].name + ' vs ' + state.setup.teams[1].players[0].name;
-	}
-	pdf.save(filename + '.pdf');
+	pdf.setProperties(props);
+
+	pdf.save(_scoresheet_match_title(s, ',') + '.pdf');
 }
 
 function scoresheet_jspdf_loaded() {

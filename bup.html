@@ -5,7 +5,12 @@
 	<title>Badminton Umpire Panel</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 	<meta name="mobile-web-app-capable" content="yes">
+<!--@DEV-->
 	<link rel="stylesheet" href="bup.css" />
+<!--/@DEV-->
+<!--@PRODUCTION
+	<link rel="stylesheet" href="bup.min.css" />
+-->
 </head>
 <body>
 
@@ -378,11 +383,19 @@ Linienrichter</span>
 </div>
 </div>
 
+<!--@DEV-->
 <script src="libs/jquery.min.js"></script>
 <script src="libs/mousetrap.min.js"></script>
 <script src="js/courtspot.js"></script>
 <script src="js/btde.js"></script>
 <script src="js/bup.js"></script>
 <script src="libs/jspdf.min.js" async="async" id="script_jspdf"></script>
+<!--/@DEV-->
+
+<!--@PRODUCTION
+<script src="bup.dist.js"></script>
+<script src="jspdf.dist.js" async="async" id="script_jspdf"></script>
+-->
+
 </body>
 </html>
