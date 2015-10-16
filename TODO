@@ -1,12 +1,15 @@
 improve badmintonticker.de support
 	mail w/ court problems
 	desync UI
-	indicate network problems to umpire
+		login
+		show error code / explaining text
+		click to resync
 	login successful: resend state (including court)
+	login successful without state.remote
 	login during match
-	handle network errors
 	initialize matches as they are
 	support names without comma when reading player list
+	hide login if no longer required
 	transmit court change during match
 
 edit mode to change sides / change ends
@@ -180,12 +183,13 @@ move scoresheet press handling after state_calc (and use servers of game)
 test red card (scoresheet/pronounciation) before any game (before match end)
 undo without redo back to start should reset begin in umpire scoresheet
 cursor for buttons?
-loading bup.. text for very slow connections
+loading bup.. teaser in HTML for very slow connections
 network: add an option to change court
 network: color/opacity in match list by state
 preload images (if not Manifest)
 let _ui_make_player_pick and _ui_make_team pick use _ui_make_pick
 scoresheet: add a test for red cards before / in between games
+ui for network_update_interval
 Schiedsrichterzettel auch im Bundesliga-Design
 Schiedsrichterzettel größer machen (button schiedsrichterzettel)
 limit available courts when network is in use
@@ -194,6 +198,9 @@ show login status (spinning something)
 dynamically create favicon (score? match name? court name?)
 move uglifyjs call to helper script in div/
 replace s.scoresheet_game with sg to save space
+move settings into its own module
+move _network_reload_interval to network
+restart network_reload_interval on manual reload
 badmintonticker.de mock / testing
 -> Demo Jörg H, Manuel, Susanne
 -> Jens Köster fragen wegen zweimal gelbe Karte

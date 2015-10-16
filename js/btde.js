@@ -57,7 +57,9 @@ function ui_show_login() {
 
 				// resend pending requests
 				network.ui_list_matches(state);
-				sync();
+				if (state.initialized) {
+					sync(state);
+				}
 
 				return;
 			}
@@ -85,12 +87,13 @@ function _request(options, cb) {
 				msg: 'Login erforderlich',
 			}, res);
 		}
+		network.on_success();
 		return cb(null, res);
 	}).fail(function(xhr) {
 		return cb({
 			type: 'network-error',
-			status: xhr.status(),
-			msg: 'Netzwerk-Fehler (Code ' + xhr.status() + ')',
+			status: xhr.status,
+			msg: 'Netzwerk-Fehler (Code ' + xhr.status + ')',
 		});
 	});
 }

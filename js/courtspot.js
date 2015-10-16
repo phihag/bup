@@ -1,5 +1,13 @@
 var courtspot = (function() {
 
+function _xml_get_text(node, element_name) {
+	var els = node.getElementsByTagName(element_name);
+	if ((els.length > 0) && (els[0].childNodes.length > 0)) {
+		return els[0].childNodes[0].nodeValue;
+	}
+	return null;
+}
+
 function _courtspot_request_xml(s, path, cb) {
 	var url = s.courtspot.baseurl + path;
 	$.ajax(url, {

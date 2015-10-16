@@ -13,6 +13,7 @@ var settings = {
 	court_id: '',
 	court_description: '',
 	network_timeout: 5000,
+	network_update_interval: 5000,
 };
 
 function _parse_query_string(qs) {
@@ -82,14 +83,6 @@ function _iso8601(d) {
 function _human_date_str(d) {
 	var WEEKDAYS = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
 	return WEEKDAYS[d.getDay()] + ' ' + _get_date_str(d);
-}
-
-function _xml_get_text(node, element_name) {
-	var els = node.getElementsByTagName(element_name);
-	if ((els.length > 0) && (els[0].childNodes.length > 0)) {
-		return els[0].childNodes[0].nodeValue;
-	}
-	return null;
 }
 
 var _ui_esc_stack = [];
@@ -483,7 +476,7 @@ function show_settings() {
 		if (_network_reload_interval === null) {
 			_network_reload_interval = window.setInterval(function() {
 				network.ui_list_matches(state, 'btde', true);
-			}, 10000);
+			}, settings.network_update_interval);
 		}
 	} else {
 		$('.setup_network_container').hide();
@@ -509,7 +502,6 @@ function hide_settings(force) {
 		return;
 	}
 
-
 	wrapper.hide();
 	ui_esc_stack_pop();
 	wrapper.attr('data-settings-visible', 'false');
@@ -517,7 +509,7 @@ function hide_settings(force) {
 
 function resume_match(s) {
 	state = s;
-	s.initialized = true;
+	calc.init_state(s, null);
 	calc.state(s);
 	render.ui_render(state);
 }

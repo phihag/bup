@@ -1,6 +1,16 @@
 'use strict';
 var network = (function() {
 
+function determine_network_type() {
+	if (networks.btde) {
+		return 'btde';
+	} else if (networks.courtspot) {
+		return 'courtspot';
+	}
+
+	return null;
+}
+
 function calc_score(s) {
 	function _finish_score(score, team1_won) {
 		var winner = team1_won ? 0 : 1;
@@ -73,13 +83,13 @@ function ui_list_matches(s, network_type, silent) {
 		event_container.append(reload_button);
 	}
 
-	var container = $('#setup_network_matches');
 	if (!network_type) {
-		network_type = container.attr('data-network-type');
+		network_type = determine_network_type();
 	}
 
 	_install_reload();
 
+	var container = $('#setup_network_matches');
 	if (!silent && container.find('.setup_network_matches_loading').length == 0) {
 		var loading = $('<div class="setup_network_matches_loading"><div class="loading-icon"></div><span>Lade Spiele ...</span></div>');
 		container.append(loading);
@@ -147,18 +157,41 @@ function ui_list_matches(s, network_type, silent) {
 	});
 }
 
+var erroneous = false;
+var resync_interval = null;
+
 function on_error(err) {
-	// TODO show button / indicator
+	erroneous = true;
+	$('.network_desync_container').show();
+	if (! resync_interval) {
+		resync_interval = window.setInterval(
+			function() {
+				var network_type = determine_network_type();
+				networks[network_type].sync(state);
+			}, settings.network_update_interval
+		);
+	}
+	// TODO click to sync immediately
+	// TODO show error code
 	// TODO does showing a login help?
-	// TODO reschedule re-sync
 }
 
+// Successful request, hide error messages
+function on_success() {
+	erroneous = false;
+	if (resync_interval) {
+		window.clearInterval(resync_interval);
+		resync_interval = null;
+	}
+	$('.network_desync_container').hide();
+}
 
 return {
 	calc_score: calc_score,
 	on_error: on_error,
-	ui_list_matches: ui_list_matches,
+	on_success: on_success,
 	send_press: send_press,
+	ui_list_matches: ui_list_matches,
 };
 
 

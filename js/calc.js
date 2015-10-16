@@ -3,14 +3,17 @@
 var calc = (function() {
 
 function init_state(s, setup) {
-	var now = Date.now();
-	s.metadata = {
-		id: setup.match_id ? setup.match_id : utils.uuid(),
-		start: now,
-		updated: now,
-	};
+	if (setup) {
+		var now = Date.now();
+		s.metadata = {
+			id: setup.match_id ? setup.match_id : utils.uuid(),
+			start: now,
+			updated: now,
+		};
+		s.setup = setup;
+	}
+
 	s.initialized = true;
-	s.setup = setup;
 	s.presses = [];
 	s.timer = false;
 	s.remote = {};
@@ -18,8 +21,6 @@ function init_state(s, setup) {
 	delete s.match;
 	delete s.game;
 	delete s.court;
-
-	return s;
 }
 
 function make_game_state(s, previous_game) {

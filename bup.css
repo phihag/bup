@@ -673,9 +673,25 @@ input[name="court_id"] {
 .login_button {
 	position: relative;
 }
+.network_desync_container {
+	position: absolute;
+	top: 16vh;
+	left: 0;
+	padding: 2vmin;
+	background: rgba(255, 255, 255, 0.9);
+	border-top-right-radius: 1vmin;
+	border-bottom-right-radius: 1vmin;
+}
 .network_error {
 	color: red;
 	font-weight: bold;
+}
+.network_desync_image {
+	background-image: url(icons/desync.svg);
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	width: 10vmin;
+	height: 10vmin;	
 }
 
 .loading-icon {
