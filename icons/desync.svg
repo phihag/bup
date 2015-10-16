@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   id="svg4101"
+   sodipodi:docname="desync.svg"
+   viewBox="0 0 31.999999 31.999999"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   width="32"
+   height="32">
+  <defs
+     id="defs18" />
+  <sodipodi:namedview
+     id="base"
+     bordercolor="#666666"
+     inkscape:pageshadow="2"
+     inkscape:window-y="0"
+     fit-margin-left="0"
+     pagecolor="#ffffff"
+     fit-margin-top="0"
+     inkscape:window-maximized="1"
+     inkscape:zoom="11.313709"
+     inkscape:window-x="0"
+     inkscape:window-height="1033"
+     showgrid="false"
+     borderopacity="1.0"
+     inkscape:current-layer="layer1"
+     inkscape:cx="15.065266"
+     inkscape:cy="17.783416"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:pageopacity="0.0"
+     inkscape:document-units="px" />
+  <g
+     id="layer1"
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     transform="translate(-317.72,-445.96001)">
+    <g
+       transform="matrix(0.42539402,-0.02978833,0.02978833,0.42539402,127.71207,222.29894)"
+       id="g4046"
+       style="opacity:0.03999999">
+      <path
+         d="m 443.65,563.57 c -1.0519,-0.0129 -2.107,0.0598 -3.1274,0.18048 l 0.06,2.7509 c 0.99036,-0.12733 2.0099,-0.19417 3.0337,-0.18162 12.831,0.15709 23.11,11.577 22.939,25.533 -0.002,0.17643 -10e-4,0.35569 -0.007,0.53121 l 2.5006,-0.0319 c 0.004,-0.15699 0.004,-0.31113 0.006,-0.46872 0.18944,-15.473 -11.18,-28.139 -25.405,-28.313 z"
+         inkscape:connector-curvature="0"
+         style="fill:#000000;stroke-width:0"
+         id="path3194" />
+      <path
+         d="m 442.9,570.53 c -0.79783,-0.01 -1.598,0.0454 -2.372,0.13688 l 0.0455,2.5283 c 0.75111,-0.0966 1.5244,-0.14725 2.3008,-0.13774 9.7311,0.11913 16.959,8.3382 16.83,18.923 -0.002,0.1338 -10e-4,0.26976 -0.005,0.40289 l 2.4647,-0.0242 c 0.003,-0.11907 0.003,-0.23598 0.004,-0.35547 0.14368,-11.735 -8.4793,-21.341 -19.268,-21.474 z"
+         inkscape:connector-curvature="0"
+         style="fill:#000000;stroke-width:0"
+         sodipodi:nodetypes="cccscccccc"
+         id="path3194-4" />
+      <path
+         d="m 442.21,576.89 c -0.56577,-0.007 -1.1332,0.0322 -1.6821,0.0971 l 0.0323,2.4266 c 0.53265,-0.0685 1.081,-0.10442 1.6316,-0.0977 6.9008,0.46331 10.914,5.09 11.138,12.786 -10e-4,0.0949 -7.7e-4,0.19129 -0.003,0.28572 l 2.5445,-0.0171 c 0.002,-0.0845 0.002,-0.16735 0.003,-0.25208 0.10189,-8.322 -6.0131,-15.134 -13.664,-15.228 z"
+         inkscape:connector-curvature="0"
+         style="fill:#000000;stroke-width:0"
+         sodipodi:nodetypes="cccccccccc"
+         id="path3194-0" />
+    </g>
+    <path
+       id="path4401"
+       style="fill:#000000"
+       inkscape:connector-curvature="0"
+       d="m 325.80591,468.92654 c -0.92021,2.93146 -1.77702,5.86111 -3.28938,8.7931 5.4674,-0.008 6.62027,-0.0258 12.08775,-0.0339 -0.9802,-1.88727 -2.00406,-5.88543 -2.62918,-7.77304 -2.29023,-0.39512 -3.62598,-1.04942 -5.58853,-2.72762 z"
+       sodipodi:nodetypes="cccccc" />
+    <path
+       id="path3423-9-5"
+       style="fill:#000000"
+       inkscape:connector-curvature="0"
+       d="m 322.5628,452.40192 c -1.80784,5.56629 -0.0581,11.90156 4.83135,15.69751 4.88974,3.79609 11.45045,3.9177 16.39499,0.78603 l -21.22642,-16.48344 z m 0.78053,2.59294 c 0,0 -0.5922,3.73003 0,0 z"
+       sodipodi:nodetypes="ccccccc" />
+    <g
+       id="g4055"
+       transform="matrix(0.29602158,0.20513415,-0.20513415,0.29602158,328.04135,194.76528)">
+      <rect
+         id="rect4051"
+         style="fill:#000000;stroke-width:0"
+         height="8.0811996"
+         width="3.283"
+         y="594.76001"
+         x="431.59" />
+      <ellipse
+         id="path4053"
+         style="fill:#000000;stroke-width:0"
+         cx="433.22916"
+         cy="594.00549"
+         rx="3.4092648"
+         ry="3.7880721" />
+    </g>
+    <path
+       style="color:#000000;display:inline;overflow:visible;visibility:visible;opacity:1;fill:#b1130d;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:4;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;marker:none;enable-background:accumulate"
+       d="m 334.66422,447.30514 c -0.18902,0.10007 -0.26002,0.3307 -0.16,0.5197 l 2.41461,4.56252 -4.56254,2.4146 c -0.189,0.10007 -0.26002,0.33068 -0.16,0.51971 l 0.81584,1.54158 c 0.10007,0.18899 0.33071,0.26001 0.51971,0.15999 l 4.56254,-2.41458 2.41457,4.56252 c 0.10008,0.189 0.33068,0.26002 0.51972,0.16001 l 1.54157,-0.81586 c 0.18901,-0.10008 0.26225,-0.33188 0.16177,-0.52104 l -2.41461,-4.56251 4.56031,-2.41343 c 0.189,-0.10007 0.26224,-0.33186 0.16175,-0.52103 l -0.81583,-1.54156 c -0.10008,-0.18901 -0.33294,-0.25887 -0.5218,-0.1593 l -4.56032,2.41341 -2.41457,-4.5625 c -0.10008,-0.18901 -0.33293,-0.25886 -0.52179,-0.1593 l -1.54158,0.81585 z"
+       id="rect4161"
+       inkscape:connector-curvature="0" />
+  </g>
+  <metadata
+     id="metadata16">
+    <rdf:RDF>
+      <cc:Work>
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <cc:license
+           rdf:resource="http://creativecommons.org/publicdomain/zero/1.0/" />
+        <dc:publisher>
+          <cc:Agent
+             rdf:about="http://openclipart.org/">
+            <dc:title>Openclipart</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:title>Satellite Dish Icon</dc:title>
+        <dc:date>2011-06-19T23:55:53</dc:date>
+        <dc:description>Satellite Dish</dc:description>
+        <dc:source>https://openclipart.org/detail/146155/satellite-dish-icon-by-marauder</dc:source>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>marauder</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>Space</rdf:li>
+            <rdf:li>comic</rdf:li>
+            <rdf:li>cosmic</rdf:li>
+            <rdf:li>icon</rdf:li>
+            <rdf:li>satellite</rdf:li>
+            <rdf:li>science fiction</rdf:li>
+            <rdf:li>space</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/publicdomain/zero/1.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+</svg>

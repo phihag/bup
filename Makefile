@@ -28,7 +28,18 @@ dist:
 	node div/make_dist.js bup.html dist/bup/index.html
 	<bup.css cleancss -o dist/bup/bup.min.css
 	cp div/dist_htaccess dist/bup/.htaccess
-	uglifyjs "libs/jquery.min.js" "libs/mousetrap.min.js" "js/courtspot.js" "js/btde.js" "js/bup.js" -m -c -o dist/bup/bup.dist.js
+	uglifyjs \
+		"libs/jquery.min.js" "libs/mousetrap.min.js" \
+		"js/utils.js" \
+		"js/liveaw.js" \
+		"js/courtspot.js" \
+		"js/btde.js" \
+		"libs/calc.js" \
+		"libs/render.js" \
+		"libs/scoresheet.js" \
+		"libs/network.js" \
+		"js/bup.js" \
+		-m -c -o dist/bup/bup.dist.js
 	cp libs/jspdf.min.js dist/bup/jspdf.dist.js
 	cp -r icons dist/bup/
 	cd dist && zip bup.zip bup/ -r

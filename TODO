@@ -1,5 +1,7 @@
 improve badmintonticker.de support
 	mail w/ court problems
+	desync UI
+	indicate network problems to umpire
 	login successful: resend state (including court)
 	login during match
 	handle network errors
@@ -26,7 +28,6 @@ fix scoresheet buttons on smartphone
 animation for settings (go to top right)
 fix display without vw (see Manuel, https://github.com/saabi/vminpoly)
 save manually created games immediately?
-bei Aufgabe / Disqualifikation auf 21 auffüllen?
 
 retest Manuel's notes
 
@@ -191,6 +192,8 @@ limit available courts when network is in use
 mock courtspot and write automated tests
 show login status (spinning something)
 dynamically create favicon (score? match name? court name?)
+move uglifyjs call to helper script in div/
+replace s.scoresheet_game with sg to save space
 badmintonticker.de mock / testing
 -> Demo Jörg H, Manuel, Susanne
 -> Jens Köster fragen wegen zweimal gelbe Karte

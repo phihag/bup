@@ -44,9 +44,9 @@ DOUBLES_TEAM_SETUP.team_competition = true;
 
 function state_after(presses, setup) {
 	var state = {};
-	bup.init_state(state, setup);
+	bup.calc.init_state(state, setup);
 	state.presses = presses;
-	bup.calc_state(state);
+	bup.calc.state(state);
 	return state;
 }
 

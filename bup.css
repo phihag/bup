@@ -396,7 +396,7 @@ span.score_announcement+span.score_announcement {
 #button_redo>span {
 	background-image: url(icons/redo.svg);
 }
-#button_shuttle>span {
+#button_shuttle>span.button_icon {
 	background-image: url(icons/shuttle-button.svg);
 }
 

@@ -25,7 +25,7 @@
 
 <button id="button_shuttle" title="Federball +1" class="image-button">
 	<div id="shuttle_counter_value"></div>
-	<span></span></button>
+	<span class="button_icon"></span></button>
 <button id="button_settings" title="Konfiguration" class="image-button"><span></span></button>
 </div>
 
@@ -144,6 +144,10 @@ Linienrichter</span>
 
 <div id="pronounciation" class="default-invisible"><span></span></div>
 
+<div class="network_desnyc_container default-invisible">
+	<button class="network_desync image-button"><span></span></div>
+</div>
+
 </div>
 </div>
 
@@ -235,7 +239,7 @@ Linienrichter</span>
 <label>Schiedsrichter-Name: <input type="text" name="umpire_name" size="32" /></label>
 <label><input type="checkbox" name="save_finished_matches" />Abgeschlossene Spiele speichern</label>
 <label><input type="checkbox" name="show_pronounciation" />Ansagen anzeigen</label>
-<label><input type="checkbox" name="go_fullscreen" />Vollbildmodus beim Start anfragen <button class="fullscreen_button">Vollbildmodus</button></label>
+<div><label><input type="checkbox" name="go_fullscreen" />Vollbildmodus beim Start anfragen</label> <button class="fullscreen_button">Vollbildmodus</button></div>
 <label>Netzwerk-Timeout: <input type="number" name="network_timeout" min="1" value="1000" max="600000" /></label>
 </div>
 
@@ -386,6 +390,12 @@ Linienrichter</span>
 <!--@DEV-->
 <script src="libs/jquery.min.js"></script>
 <script src="libs/mousetrap.min.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/calc.js"></script>
+<script src="js/render.js"></script>
+<script src="js/scoresheet.js"></script>
+<script src="js/network.js"></script>
+<script src="js/liveaw.js"></script>
 <script src="js/courtspot.js"></script>
 <script src="js/btde.js"></script>
 <script src="js/bup.js"></script>

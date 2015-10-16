@@ -52,11 +52,12 @@ function ui_show_login() {
 				msg = m[1];
 			} else if (/<div class="logout">/.exec(res)) {
 				// Successful
+				$('#setup_network_matches .network_error').remove();
 				ui_hide_login();
 
 				// resend pending requests
-				$('#setup_network_matches .network_error').remove();
-				ui_network_list_matches(state);
+				network.ui_list_matches(state);
+				sync();
 
 				return;
 			}
@@ -79,31 +80,41 @@ function _request(options, cb) {
 	$.ajax(options).done(function(res) {
 		if (/<div class="login">/.exec(res)) {
 			ui_show_login();
-			// TODO redo requests
-			return cb('Login erforderlich', res);
+			return cb({
+				type: 'login-required',
+				msg: 'Login erforderlich',
+			}, res);
 		}
 		return cb(null, res);
+	}).fail(function(xhr) {
+		return cb({
+			type: 'network-error',
+			status: xhr.status(),
+			msg: 'Netzwerk-Fehler (Code ' + xhr.status() + ')',
+		});
 	});
 }
 
-function send_press(s, press) {
-	if (press.type == '_start_match') {
-		var post_data = {
-			spiel: s.setup.btde_match_id,
-			feld: settings.court_id,
-		};
-		_request({
-			method: 'POST',
-			url: baseurl + 'login/write.php',
-			data: $.param(post_data),
-			contentType: "application/x-www-form-urlencoded",
-		}, function() {
+function send_court(s) {
+	var post_data = {
+		spiel: s.setup.btde_match_id,
+		feld: settings.court_id,
+	};
+	_request({
+		method: 'POST',
+		url: baseurl + 'login/write.php',
+		data: $.param(post_data),
+		contentType: "application/x-www-form-urlencoded",
+	}, function(err) {
+		if (err) {
+			return network.on_error(err);
+		}
+		s.remote.btde_court = post_data.feld;
+	});
+}
 
-		});
-		return;
-	}
-
-	var netscore = network_calc_score(s);
+function send_score(s) {
+	var netscore = network.calc_score(s);
 	var post_data = {
 		id: s.setup.btde_match_id,
 		feld: settings.court_id,
@@ -123,9 +134,30 @@ function send_press(s, press) {
 		url: baseurl + 'login/write.php',
 		data: JSON.stringify(post_data),
 		contentType: "application/json; charset=utf-8",
-	}, function() {
-
+	}, function(err) {
+		if (err) {
+			return network.on_error(err);
+		}
+		s.remote.btde_score = netscore;
 	});
+}
+
+function sync(s) {
+	if (settings.court_id !== s.remote.btde_court) {
+		send_court(s);
+	}
+	var netscore = network.calc_score(s);
+	if (JSON.stringify(netscore) !== JSON.stringify(s.remote.btde_score)) {
+		send_score(s);
+	}
+}
+
+function send_press(s, press) {
+	if (press.type == '_start_match') {
+		// Only set court, someone may just be looking at the court
+		return send_court(s);
+	}
+	sync(s);
 }
 
 function list_matches(s, cb) {
@@ -265,6 +297,7 @@ return {
 	ui_init: ui_init,
 	send_press: send_press,
 	list_matches: list_matches,
+	sync: sync,
 }
 
 });
