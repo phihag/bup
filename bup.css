@@ -66,6 +66,16 @@ html, body, button {
 .setup_network_match_score {
 	font-style: italic;
 }
+.setup_network_matches_reload {
+	display: inline-block;
+	vertical-align: middle;
+	margin: 0 0 0 1vmin;
+	background-image: url(icons/reload.svg);
+	width: 4vmin;
+	height: 4vmin;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
 
 #court {
 	position: relative;

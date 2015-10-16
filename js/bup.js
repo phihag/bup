@@ -265,11 +265,24 @@ function network_send_press(s, press) {
 }
 
 function ui_network_list_matches(s, network_type) {
+	function _install_reload() {
+		var event_container = $('.setup_network_heading');
+		if (event_container.find('.setup_network_matches_reload').length > 0) {
+			return;
+		}
+		var reload_button = $('<button class="setup_network_matches_reload"></button>');
+		reload_button.on('click', function() {
+			ui_network_list_matches(s, network_type);
+		});
+		event_container.append(reload_button);
+	}
+
 	var container = $('#setup_network_matches');
 	if (!network_type) {
 		network_type = container.attr('data-network-type');
 	}
 
+	_install_reload();
 	if (container.find('.setup_network_matches_loading').length == 0) {
 		var loading = $('<div class="setup_network_matches_loading"><div class="loading-icon"></div><span>Lade Spiele ...</span></div>');
 		container.append(loading);
@@ -277,6 +290,7 @@ function ui_network_list_matches(s, network_type) {
 
 	s[network_type].list_matches(s, function(err, event) {
 		container.empty(); // TODO better transition if we're updating?
+		_install_reload();
 
 		if (err) {
 			var err_msg = $('<div class="network_error">');

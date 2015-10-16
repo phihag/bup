@@ -1,6 +1,5 @@
 add badmintonticker.de support
 	login successful: resend state (including court)
-	reload button for match overview
 	mail w/ court problems
 	send cb for current request later
 	read matches (once with transparent reload when going to settings)
@@ -8,7 +7,6 @@ add badmintonticker.de support
 	initialize matches as they are
 	test local restoring (pick a correct ID)
 	support names without comma when reading player list
-	mock / testing
 
 edit mode to change sides / change ends
 	don't rerender score display (in order to be able to change and immediately render that)
@@ -30,9 +28,6 @@ animation for settings (go to top right)
 fix display without vw (see Manuel, https://github.com/saabi/vminpoly)
 save manually created games immediately?
 bei Aufgabe / Disqualifikation auf 21 auffüllen?
-move court name to settings
-support court change for btde
-
 
 retest Manuel's notes
 
@@ -197,7 +192,7 @@ limit available courts when network is in use
 mock courtspot and write automated tests
 show login status (spinning something)
 dynamically create favicon (score? match name? court name?)
-setting for current court
+badmintonticker.de mock / testing
 -> Demo Jörg H, Manuel, Susanne
 -> Jens Köster fragen wegen zweimal gelbe Karte
 -> Jens Köster fragen wegen C
