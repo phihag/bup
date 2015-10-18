@@ -684,10 +684,13 @@ function ui_init_settings() {
 
 	_settings_textfields.forEach(function(name) {
 		var input = $('.settings [name="' + name + '"]');
-		input.on('change input', function() {
+		input.on('change input', function(e) {
 			settings[name] = input.val();
 			if ((name === 'court_id') || (name === 'court_description')) {
 				render.ui_court_str();
+				if (e.type == 'change') {
+					network.resync();
+				}
 			}
 			settings_store();
 		});

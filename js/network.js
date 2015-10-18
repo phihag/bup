@@ -95,7 +95,11 @@ function ui_list_matches(s, silent) {
 		container.append(loading);
 	}
 
-	get_netw().list_matches(s, function(err, event) {
+	var netw = get_netw();
+	if (!netw) {
+		return;
+	}
+	netw.list_matches(s, function(err, event) {
 		container.empty(); // TODO better transition if we're updating?
 		_install_reload();
 
@@ -157,11 +161,14 @@ function ui_list_matches(s, silent) {
 	});
 }
 
-
-
 function resync() {
+	var netw = get_netw();
+	if (! netw) {
+		return;
+	}
+
 	if (state.initialized) {
-		get_netw().sync(state);
+		netw.sync(state);
 	}
 
 	ui_list_matches(state, true);
@@ -215,6 +222,7 @@ return {
 	send_press: send_press,
 	ui_list_matches: ui_list_matches,
 	ui_init: ui_init,
+	resync: resync,
 };
 
 

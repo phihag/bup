@@ -73,10 +73,14 @@ function _request(options, cb) {
 		network.on_success();
 		return cb(null, res);
 	}).fail(function(xhr) {
+		var msg = ((xhr.status == 0) ?
+			'badmintonticker nicht erreichbar' :
+			('Netzwerk-Fehler (Code ' + xhr.status + ')')
+		);
 		return cb({
 			type: 'network-error',
 			status: xhr.status,
-			msg: 'Netzwerk-Fehler (Code ' + xhr.status + ')',
+			msg: msg,
 		});
 	});
 }
