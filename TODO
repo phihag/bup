@@ -1,5 +1,5 @@
 improve badmintonticker.de support
-	do not delete match list when update fails
+ 	automatically update match list
 
 	initialize matches as they are
 	support names without comma when reading player list

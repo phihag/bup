@@ -89,10 +89,10 @@ function ui_list_matches(s, silent) {
 
 	_install_reload();
 
-	var container = $('#setup_network_matches');
-	if (!silent && container.find('.setup_network_matches_loading').length == 0) {
+	var status_container = $('.setup_network_status');
+	if (!silent && status_container.find('.setup_network_matches_loading').length == 0) {
 		var loading = $('<div class="setup_network_matches_loading"><div class="loading-icon"></div><span>Lade Spiele ...</span></div>');
-		container.append(loading);
+		status_container.append(loading);
 	}
 
 	var netw = get_netw();
@@ -100,16 +100,17 @@ function ui_list_matches(s, silent) {
 		return;
 	}
 	netw.list_matches(s, function(err, event) {
-		container.empty(); // TODO better transition if we're updating?
-		_install_reload();
-
+		status_container.empty();
 		if (err) {
 			var err_msg = $('<div class="network_error">');
 			err_msg.text(err.msg);
-			container.append(err_msg);
+			status_container.append(err_msg);
 			return on_error(err);
 		}
 
+		var container = $('#setup_network_matches');
+		container.empty(); // TODO better transition if we're updating?
+		_install_reload();
 		$('.setup_network_event').text(event.event_name ? event.event_name : 'Spiele');
 
 		event.matches.forEach(function(match) {
@@ -161,6 +162,11 @@ function ui_list_matches(s, silent) {
 	});
 }
 
+
+var erroneous = false;
+var login_rendered = false;
+var resync_timeout = null;
+
 function resync() {
 	var netw = get_netw();
 	if (! netw) {
@@ -170,19 +176,22 @@ function resync() {
 	if (state.initialized) {
 		netw.sync(state);
 	}
-
 	ui_list_matches(state, true);
-}
 
-var erroneous = false;
-var login_rendered = false;
-var resync_interval = null;
+	if (resync_timeout !== null) {
+		window.clearTimeout(resync_timeout);
+		resync_timeout = null;
+	}
+	if (erroneous) {
+		resync_timeout = window.setTimeout(resync, settings.network_update_interval);
+	}
+}
 
 function on_error(err) {
 	erroneous = true;
 	$('.network_desync_container').show();
-	if (! resync_interval) {
-		resync_interval = window.setInterval(resync, settings.network_update_interval);
+	if (! resync_timeout) {
+		resync_timeout = window.setTimeout(resync, settings.network_update_interval);
 	}
 
 	if ((err.type == 'login-required') && !login_rendered) {
@@ -197,6 +206,7 @@ function on_error(err) {
 
 // Successful request, hide error messages
 function on_success() {
+	var was_erroneous = erroneous;
 	erroneous = false;
 	if (login_rendered) {
 		$('.settings_network_login_container').empty();
@@ -204,9 +214,7 @@ function on_success() {
 		login_rendered = false;
 	}
 	$('.network_desync_container').hide();
-	if (resync_interval) {
-		window.clearInterval(resync_interval);
-		resync_interval = null;
+	if (was_erroneous) {
 		resync();
 	}
 }
