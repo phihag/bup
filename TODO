@@ -1,6 +1,5 @@
 improve badmintonticker.de support
 	initialize matches as they are
-	support names without comma when reading player list
 
 edit mode to change sides / change ends
 	don't rerender score display (in order to be able to change and immediately render that)
@@ -198,8 +197,8 @@ rename default-invisible to invisible and remove/add CSS class instead of show/h
 restart network_reload_interval on manual reload
 expose network_reload_interval in UI
 gzip icons in dist with correct htaccess to save CPU compression power
-use https://github.com/svg/svgo
 badmintonticker.de mock / testing
+badmintonticker.de: support names without comma when reading player list
 restart network resync interval if network settings change
 -> Demo Jörg H, Manuel, Susanne
 -> Jens Köster fragen wegen zweimal gelbe Karte

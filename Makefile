@@ -2,10 +2,13 @@ default: help
 
 help:
 	@echo 'make targets:'
-	@echo '  help          This message'
 	@echo '  deps          Download and install all dependencies (for compiling / testing / CLI operation)'
+	@echo '  dist          Create distribution files'
 	@echo '  test          Run tests'
+	@echo '  upload        Upload to demo page'
+
 	@echo '  clean         Remove temporary files'
+	@echo '  help          This message'
 
 
 install-libs:
@@ -42,7 +45,7 @@ dist:
 		"js/bup.js" \
 		-m -c -o dist/bup/bup.dist.js
 	cp libs/jspdf.min.js dist/bup/jspdf.dist.js
-	cp -r icons dist/bup/
+	svgo -f icons/ -o dist/bup/icons/
 	cd dist && zip bup.zip bup/ -r
 
 upload: dist
