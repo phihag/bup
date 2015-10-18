@@ -74,20 +74,96 @@ function send_press(s, press) {
 	}
 }
 
-function ui_list_matches(s, silent) {
-	function _install_reload() {
-		var event_container = $('.setup_network_heading');
-		if (event_container.find('.setup_network_matches_reload').length > 0) {
-			return;
-		}
-		var reload_button = $('<button class="setup_network_matches_reload"></button>');
-		reload_button.on('click', function() {
-			ui_list_matches(s, silent);
-		});
-		event_container.append(reload_button);
+var _network_list_timeout = null;
+function _stop_list_matches() {
+	if (_network_list_timeout !== null) {
+		window.clearTimeout(_network_list_timeout);
+		_network_list_timeout = null;
+	}
+}
+
+function _start_list_matches(s) {
+	_stop_list_matches();
+
+	if (erroneous) {
+		// Let the normal resync procedure handle it
+		return;
 	}
 
-	_install_reload();
+	_network_list_timeout = setTimeout(function() {
+		ui_list_matches(s, true);
+	}, settings.network_update_interval);
+}
+
+function _matchlist_install_reload_button(s) {
+	var event_container = $('.setup_network_heading');
+	if (event_container.find('.setup_network_matches_reload').length > 0) {
+		return;
+	}
+	var reload_button = $('<button class="setup_network_matches_reload"></button>');
+	reload_button.on('click', function() {
+		ui_list_matches(s);
+	});
+	event_container.append(reload_button);
+}
+
+function ui_render_matchlist(s, event) {
+	var container = $('#setup_network_matches');
+	container.empty(); // TODO better transition if we're updating?
+	$('.setup_network_event').text(event.event_name ? event.event_name : 'Spiele');
+
+	event.matches.forEach(function(match) {
+		var btn = $('<button class="setup_network_match">');
+		var match_name = $('<span class="setup_network_match_match_name">');
+		match_name.text(match.setup.match_name);
+		btn.append(match_name);
+
+		var _players_str = function(team) {
+			return team.players.map(function(p) {
+				return p.name;
+			}).join('/');
+		};
+
+		var _score_text = function(network_score) {
+			if (!network_score) {
+				return '';
+			}
+
+			if ((network_score.length == 1) && (network_score[0][0] == 0) && (network_score[0][1] == 0)) {
+				return '';
+			}
+
+			return network_score.map(function(network_game) {
+				return network_game[0] + '-' + network_game[1];
+			}).join(' ');
+		};
+
+		var home_players = $('<span class="setup_network_match_home_players">');
+		home_players.text(_players_str(match.setup.teams[0]));
+		btn.append(home_players);
+
+		var away_players = $('<span class="setup_network_match_away_players">');
+		away_players.text(_players_str(match.setup.teams[1]));
+		btn.append(away_players);
+
+		var score = $('<span class="setup_network_match_score">');
+		var score_text = _score_text(match.network_score);
+		score.text(score_text ? score_text : '\xA0');
+		btn.append(score);
+
+		btn.on('click', function() {
+			start_match(s, match.setup);
+			hide_settings();
+		});
+
+		container.append(btn);
+	});
+}
+
+// Returns a callback to be called when the list is no longer required
+function ui_list_matches(s, silent) {
+	_matchlist_install_reload_button(s);
+	_start_list_matches(s);
 
 	var status_container = $('.setup_network_status');
 	if (!silent && status_container.find('.setup_network_matches_loading').length == 0) {
@@ -101,6 +177,7 @@ function ui_list_matches(s, silent) {
 	}
 	netw.list_matches(s, function(err, event) {
 		status_container.empty();
+		_matchlist_install_reload_button(s);
 		if (err) {
 			var err_msg = $('<div class="network_error">');
 			err_msg.text(err.msg);
@@ -108,58 +185,10 @@ function ui_list_matches(s, silent) {
 			return on_error(err);
 		}
 
-		var container = $('#setup_network_matches');
-		container.empty(); // TODO better transition if we're updating?
-		_install_reload();
-		$('.setup_network_event').text(event.event_name ? event.event_name : 'Spiele');
-
-		event.matches.forEach(function(match) {
-			var btn = $('<button class="setup_network_match">');
-			var match_name = $('<span class="setup_network_match_match_name">');
-			match_name.text(match.setup.match_name);
-			btn.append(match_name);
-
-			var _players_str = function(team) {
-				return team.players.map(function(p) {
-					return p.name;
-				}).join('/');
-			};
-
-			var _score_text = function(network_score) {
-				if (!network_score) {
-					return '';
-				}
-
-				if ((network_score.length == 1) && (network_score[0][0] == 0) && (network_score[0][1] == 0)) {
-					return '';
-				}
-
-				return network_score.map(function(network_game) {
-					return network_game[0] + '-' + network_game[1];
-				}).join(' ');
-			};
-
-			var home_players = $('<span class="setup_network_match_home_players">');
-			home_players.text(_players_str(match.setup.teams[0]));
-			btn.append(home_players);
-
-			var away_players = $('<span class="setup_network_match_away_players">');
-			away_players.text(_players_str(match.setup.teams[1]));
-			btn.append(away_players);
-
-			var score = $('<span class="setup_network_match_score">');
-			var score_text = _score_text(match.network_score);
-			score.text(score_text ? score_text : '\xA0');
-			btn.append(score);
-
-			btn.on('click', function() {
-				start_match(s, match.setup);
-				hide_settings();
-			});
-
-			container.append(btn);
-		});
+		ui_render_matchlist(s, event);
 	});
+
+	return _stop_list_matches;
 }
 
 

@@ -452,7 +452,7 @@ function demo_match_start() {
 	start_match(state, setup);
 }
 
-var _network_reload_interval = null;
+var _network_hide_cb = null;
 function show_settings() {
 	var wrapper = $('#settings_wrapper');
 	if (wrapper.attr('data-settings-visible') == 'true') {
@@ -466,13 +466,13 @@ function show_settings() {
 		$('.setup_show_manual').show();
 		$('#setup_manual_form').hide();
 		$('#setup_network_matches').attr('data-network-type', 'courtspot');
-		network.ui_list_matches(state);
+		_network_hide_cb = network.ui_list_matches(state);
 	} else if (networks.btde) {
 		$('.setup_network_container').show();
 		$('.setup_show_manual').show();
 		$('#setup_manual_form').hide();
 		$('#setup_network_matches').attr('data-network-type', 'btde');
-		network.ui_list_matches(state);
+		_network_hide_cb = network.ui_list_matches(state);
 	} else {
 		$('.setup_network_container').hide();
 		$('#setup_manual_form').show();
@@ -488,9 +488,9 @@ function hide_settings(force) {
 	if (!force && !state.initialized) {
 		return;
 	}
-	if (_network_reload_interval) {
-		window.clearInterval(_network_reload_interval);
-		_network_reload_interval = null;
+	if (_network_hide_cb) {
+		_network_hide_cb();
+		_network_hide_cb = null;
 	}
 	var wrapper = $('#settings_wrapper');
 	if (wrapper.attr('data-settings-visible') == 'false') {
