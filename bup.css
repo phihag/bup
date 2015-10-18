@@ -687,11 +687,15 @@ input[name="court_id"] {
 	font-weight: bold;
 }
 .network_desync_image {
+	float: left;
 	background-image: url(icons/desync.svg);
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
 	width: 10vmin;
 	height: 10vmin;	
+}
+.network_desync_login_container h2 {
+	margin: 0 0 1vh 0;
 }
 
 .loading-icon {

@@ -12,8 +12,8 @@ var settings = {
 	umpire_name: '',
 	court_id: '',
 	court_description: '',
-	network_timeout: 5000,
-	network_update_interval: 5000,
+	network_timeout: 10000,
+	network_update_interval: 10000,
 };
 
 function _parse_query_string(qs) {
@@ -473,11 +473,6 @@ function show_settings() {
 		$('#setup_manual_form').hide();
 		$('#setup_network_matches').attr('data-network-type', 'btde');
 		network.ui_list_matches(state);
-		if (_network_reload_interval === null) {
-			_network_reload_interval = window.setInterval(function() {
-				network.ui_list_matches(state, 'btde', true);
-			}, settings.network_update_interval);
-		}
 	} else {
 		$('.setup_network_container').hide();
 		$('#setup_manual_form').show();
@@ -654,7 +649,8 @@ function init() {
 
 
 var _settings_checkboxes = ['save_finished_matches', 'go_fullscreen', 'show_pronounciation'];
-var _settings_textfields = ['umpire_name', 'court_id', 'court_description', 'network_timeout'];
+var _settings_textfields = ['umpire_name', 'court_id', 'court_description'];
+var _settings_numberfields = ['network_timeout', 'network_update_interval'];
 function ui_settings_update() {
 	_settings_checkboxes.forEach(function(name) {
 		var box = $('.settings [name="' + name + '"]');
@@ -665,6 +661,12 @@ function ui_settings_update() {
 		var input = $('.settings [name="' + name + '"]');
 		input.val(settings[name] ? settings[name] : '');
 	});
+
+	_settings_numberfields.forEach(function(name) {
+		var input = $('.settings [name="' + name + '"]');
+		input.val(settings[name] ? settings[name] : '');
+	});
+
 	render.ui_court_str();
 }
 
@@ -687,6 +689,14 @@ function ui_init_settings() {
 			if ((name === 'court_id') || (name === 'court_description')) {
 				render.ui_court_str();
 			}
+			settings_store();
+		});
+	});
+
+	_settings_numberfields.forEach(function(name) {
+		var input = $('.settings [name="' + name + '"]');
+		input.on('change input', function() {
+			settings[name] = parseInt(input.val(), 10);
 			settings_store();
 		});
 	});
@@ -831,6 +841,7 @@ function ui_init() {
 	});
 
 	scoresheet.ui_init();
+	network.ui_init();
 
 	$('#setup_manual_form [name="gametype"]').on('change', function() {
 		var new_type = $('#setup_manual_form [name="gametype"]:checked').val();

@@ -60,6 +60,7 @@
 
 <div class="network_desync_container default-invisible">
 	<div class="network_desync_image" title="Fehler bei der Netzwerk-Übertragung"></div>
+	<div class="network_desync_login_container"></div>
 </div>
 
 
@@ -156,7 +157,7 @@ Linienrichter</span>
 <div class="settings_layout">
 <div class="settings_container">
 
-<div class="settings_login_container default-invisible">
+<div class="settings_network_login_container">
 </div>
 
 <div class="extended_options default-invisible">
@@ -241,7 +242,8 @@ Linienrichter</span>
 <label><input type="checkbox" name="save_finished_matches" />Abgeschlossene Spiele speichern</label>
 <label><input type="checkbox" name="show_pronounciation" />Ansagen anzeigen</label>
 <div><label><input type="checkbox" name="go_fullscreen" />Vollbildmodus beim Start anfragen</label> <button class="fullscreen_button">Vollbildmodus</button></div>
-<label>Netzwerk-Timeout: <input type="number" name="network_timeout" min="1" value="1000" max="600000" /></label>
+<label>Netzwerk-Timeout (ms): <input type="number" name="network_timeout" min="1" value="1000" max="600000" /></label>
+<label>Netzwerk-Wiederholungszeit (ms): <input type="number" name="network_update_interval" min="1" value="10000" max="600000" /></label>
 </div>
 
 </div>

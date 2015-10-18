@@ -1,11 +1,9 @@
 improve badmintonticker.de support
+	automatically reload match list
 	desync UI
 		login
 		show error code / explaining text
 		click to resync
-	login successful: resend state (including court)
-	login successful without state.remote
-	login during match
 	initialize matches as they are
 	support names without comma when reading player list
 	hide login if no longer required (because login in another tab)
@@ -30,6 +28,7 @@ fix scoresheet buttons on smartphone
 CSS animation for settings (go to top right)
 fix display without vw (see Manuel, https://github.com/saabi/vminpoly)
 save manually created games immediately?
+
 
 retest Manuel's notes
 
@@ -63,6 +62,11 @@ CourtSpot
 		resume from courtspot?
 		show a warning when starting a game that's already running
 
+improve touch behavior (listen to touchstart instead of click)
+	utils.bind_click
+	actually change
+	test on various mobiles
+	prevent runnning at gestures
 
 offline webapp Manifest (only in production)
 	reloading
@@ -202,6 +206,7 @@ expose network_reload_interval in UI
 gzip icons in dist with correct htaccess to save CPU compression power
 use https://github.com/svg/svgo
 badmintonticker.de mock / testing
+restart network resync interval if network settings change
 -> Demo Jörg H, Manuel, Susanne
 -> Jens Köster fragen wegen zweimal gelbe Karte
 -> Jens Köster fragen wegen C

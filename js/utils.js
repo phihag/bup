@@ -9,8 +9,13 @@ function uuid() {
 	});
 }
 
+function on_click(node, callback) {
+	node.on('click', callback);
+}
+
 return {
 	uuid: uuid,
+	on_click: on_click,
 }
 })();
 

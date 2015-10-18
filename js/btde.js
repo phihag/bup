@@ -9,15 +9,7 @@ var ALL_COURTS = [{
 	court_description: 'rechts'
 }];
 
-function ui_hide_login() {
-	$('.settings_login_container').hide();
-}
-
-function ui_show_login() {
-	var login_container = $('.settings_login_container');
-	login_container.show();
-	login_container.empty();
-
+function ui_render_login(container, s) {
 	var login_form = $('<form class="settings_login">');
 	login_form.append($('<h2>Login badmintonticker</h2>'));
 	var login_error = $('<div class="network_error"></div>');
@@ -29,7 +21,7 @@ function ui_show_login() {
 	var loading_icon = $('<div class="default-invisible loading-icon" />');
 	login_button.append(loading_icon);
 	login_button.append($('<span>Anmelden</span>'));
-	login_container.append(login_form);
+	container.append(login_form);
 	login_form.on('submit', function(e) {
 		e.preventDefault();
 		loading_icon.show();
@@ -52,15 +44,7 @@ function ui_show_login() {
 				msg = m[1];
 			} else if (/<div class="logout">/.exec(res)) {
 				// Successful
-				$('#setup_network_matches .network_error').remove();
-				ui_hide_login();
-
-				// resend pending requests
-				network.ui_list_matches(state);
-				if (state.initialized) {
-					sync(state);
-				}
-
+				network.on_success();
 				return;
 			}
 
@@ -81,7 +65,6 @@ function _request(options, cb) {
 	options.timeout = settings.network_timeout;
 	$.ajax(options).done(function(res) {
 		if (/<div class="login">/.exec(res)) {
-			ui_show_login();
 			return cb({
 				type: 'login-required',
 				msg: 'Login erforderlich',
@@ -163,6 +146,105 @@ function send_press(s, press) {
 	sync(s);
 }
 
+function _parse_match_list(html) {
+	var m = /<table style="width:720px;">([\s\S]*?)<\/table>/.exec(html);
+	if (! m) {
+		return {};
+	}
+
+	var table_html = m[1];
+
+	m = /<td colspan="3">([^<]+?)\s*[0-9]+\s*:\s*[0-9]+\s*([^<]+?)<\/td>/.exec(table_html);
+	var home_team_name = null;
+	var away_team_name = null;
+	if (m) {
+		home_team_name = m[1];
+		away_team_name = m[2];
+	}
+
+	var matches = [];
+	var game_re = _multiline_regexp([
+		/<td rowspan="2">([^<]+)<\/td>\s*/,
+		/<td>([^\/,<]+),\s*([^\/,<]+)(?:\/([^\/,<]+),\s*([^\/,<]+))?<\/td>\s*/,
+		/<td><input type="number" name="Satz1([^"]+)" placeholder="([0-9]*)"><\/td>\s*/,
+		/<td><input type="number" name="Satz2[^"]+" placeholder="([0-9]*)"><\/td>\s*/,
+		/<td><input type="number" name="Satz3[^"]+" placeholder="([0-9]*)"><\/td>\s*/,
+		/<\/tr>\s*<tr>\s*/,
+		/<td>([^\/,<]+),\s*([^\/,<]+)(?:\/([^\/,<]+),\s*([^\/,<]+))?<\/td>\s*/,
+		/<td><input type="number" name="Satz4[^"]+" placeholder="([0-9]*)"><\/td>\s*/,
+		/<td><input type="number" name="Satz5[^"]+" placeholder="([0-9]*)"><\/td>\s*/,
+		/<td><input type="number" name="Satz6[^"]+" placeholder="([0-9]*)"><\/td>\s*/,
+	], 'g');
+	while (m = game_re.exec(table_html)) {
+		var home_p1 = {
+			firstname: m[3],
+			lastname: m[2],
+		};
+		home_p1.name = home_p1.firstname + ' ' + home_p1.lastname;
+		var home_team = {
+			name: home_team_name,
+			players: [home_p1],
+		};
+		if (m[4]) {
+			var home_p2 = {
+				firstname: m[5],
+				lastname: m[4],
+			};
+			home_p2.name = home_p2.firstname + ' ' + home_p2.lastname;
+			home_team.players.push(home_p2);
+		}
+
+		var away_p1 = {
+			firstname: m[11],
+			lastname: m[10],
+		};
+		away_p1.name = away_p1.firstname + ' ' + away_p1.lastname;
+		var away_team = {
+			name: away_team_name,
+			players: [away_p1],
+		};
+		if (m[12]) {
+			var away_p2 = {
+				firstname: m[13],
+				lastname: m[12],
+			};
+			away_p2.name = away_p2.firstname + ' ' + away_p2.lastname;
+			away_team.players.push(away_p2);
+		}
+
+		var network_score = [];
+		for (var game_idx = 0;game_idx < 3;game_idx++) {
+			var home_score_str = m[7 + game_idx];
+			var away_score_str = m[14 + game_idx];
+			if (home_score_str !== '' && away_score_str !== '') {
+				network_score.push([
+					parseInt(home_score_str, 10),
+					parseInt(away_score_str, 10)
+				]);
+			}
+		}
+
+		var match_id = 'btde_' + _iso8601(new Date()) + '_' + m[1] + '_' + home_team_name + '-' + away_team_name;
+
+		matches.push({
+			setup: {
+				counting: '3x21',
+				match_name: m[1],
+				is_doubles: home_team.players.length == 2,
+				teams: [home_team, away_team],
+				btde_match_id: m[6],
+				team_competition: true,
+				match_id: match_id,
+			},
+			network_score: network_score,
+		});
+	}
+	return {
+		event_name: home_team_name + ' - ' + away_team_name,
+		matches: matches,
+	};
+}
+
 function list_matches(s, cb) {
 	_request({
 		url: baseurl + 'login/punkte.php',
@@ -171,102 +253,7 @@ function list_matches(s, cb) {
 			return cb(err);
 		}
 
-		var m = /<table style="width:720px;">([\s\S]*?)<\/table>/.exec(html);
-		if (! m) {
-			return cb(null, []);
-		}
-		var table_html = m[1];
-
-		m = /<td colspan="3">([^<]+?)\s*[0-9]+\s*:\s*[0-9]+\s*([^<]+?)<\/td>/.exec(table_html);
-		var home_team_name = null;
-		var away_team_name = null;
-		if (m) {
-			home_team_name = m[1];
-			away_team_name = m[2];
-		}
-
-		var matches = [];
-		var game_re = _multiline_regexp([
-			/<td rowspan="2">([^<]+)<\/td>\s*/,
-			/<td>([^\/,<]+),\s*([^\/,<]+)(?:\/([^\/,<]+),\s*([^\/,<]+))?<\/td>\s*/,
-			/<td><input type="number" name="Satz1([^"]+)" placeholder="([0-9]*)"><\/td>\s*/,
-			/<td><input type="number" name="Satz2[^"]+" placeholder="([0-9]*)"><\/td>\s*/,
-			/<td><input type="number" name="Satz3[^"]+" placeholder="([0-9]*)"><\/td>\s*/,
-			/<\/tr>\s*<tr>\s*/,
-			/<td>([^\/,<]+),\s*([^\/,<]+)(?:\/([^\/,<]+),\s*([^\/,<]+))?<\/td>\s*/,
-			/<td><input type="number" name="Satz4[^"]+" placeholder="([0-9]*)"><\/td>\s*/,
-			/<td><input type="number" name="Satz5[^"]+" placeholder="([0-9]*)"><\/td>\s*/,
-			/<td><input type="number" name="Satz6[^"]+" placeholder="([0-9]*)"><\/td>\s*/,
-		], 'g');
-		while (m = game_re.exec(table_html)) {
-			var home_p1 = {
-				firstname: m[3],
-				lastname: m[2],
-			};
-			home_p1.name = home_p1.firstname + ' ' + home_p1.lastname;
-			var home_team = {
-				name: home_team_name,
-				players: [home_p1],
-			};
-			if (m[4]) {
-				var home_p2 = {
-					firstname: m[5],
-					lastname: m[4],
-				};
-				home_p2.name = home_p2.firstname + ' ' + home_p2.lastname;
-				home_team.players.push(home_p2);
-			}
-
-			var away_p1 = {
-				firstname: m[11],
-				lastname: m[10],
-			};
-			away_p1.name = away_p1.firstname + ' ' + away_p1.lastname;
-			var away_team = {
-				name: away_team_name,
-				players: [away_p1],
-			};
-			if (m[12]) {
-				var away_p2 = {
-					firstname: m[13],
-					lastname: m[12],
-				};
-				away_p2.name = away_p2.firstname + ' ' + away_p2.lastname;
-				away_team.players.push(away_p2);
-			}
-
-			var network_score = [];
-			for (var game_idx = 0;game_idx < 3;game_idx++) {
-				var home_score_str = m[7 + game_idx];
-				var away_score_str = m[14 + game_idx];
-				if (home_score_str !== '' && away_score_str !== '') {
-					network_score.push([
-						parseInt(home_score_str, 10),
-						parseInt(away_score_str, 10)
-					]);
-				}
-			}
-
-			var match_id = 'btde_' + _iso8601(new Date()) + '_' + m[1] + '_' + home_team_name + '-' + away_team_name;
-
-			matches.push({
-				setup: {
-					counting: '3x21',
-					match_name: m[1],
-					is_doubles: home_team.players.length == 2,
-					teams: [home_team, away_team],
-					btde_match_id: m[6],
-					team_competition: true,
-					match_id: match_id,
-				},
-				network_score: network_score,
-			});
-		}
-		var event = {
-			event_name: home_team_name + ' - ' + away_team_name,
-			matches: matches,
-		};
-		return cb(null, event);
+		return cb(null, _parse_match_list(html));
 	});
 }
 
@@ -298,6 +285,7 @@ function ui_init() {
 
 return {
 	ui_init: ui_init,
+	ui_render_login: ui_render_login,
 	send_press: send_press,
 	list_matches: list_matches,
 	sync: sync,
