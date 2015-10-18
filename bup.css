@@ -697,6 +697,13 @@ input[name="court_id"] {
 .network_desync_login_container h2 {
 	margin: 0 0 1vh 0;
 }
+.network_desync_errmsg {
+	text-align: center;
+	clear: left;
+	color: red;
+	font-weight: bold;
+	padding: 1vmin 0 0 0;
+}
 
 .loading-icon {
 	background-image: url(icons/loading.gif);

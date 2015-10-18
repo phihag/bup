@@ -185,8 +185,7 @@ function on_error(err) {
 		netw.ui_render_login($('.network_desync_login_container'), state);
 	}
 
-	// TODO click to sync immediately
-	// TODO show error code
+	$('.network_desync_errmsg').text(err.msg);
 }
 
 // Successful request, hide error messages
