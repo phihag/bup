@@ -1,18 +1,8 @@
 'use strict';
 var network = (function() {
 
-function determine_network_type() {
-	if (networks.btde) {
-		return 'btde';
-	} else if (networks.courtspot) {
-		return 'courtspot';
-	}
-
-	return null;
-}
-
 function get_netw() {
-	return networks[determine_network_type()];
+	return networks.btde || networks.courtspot;
 }
 
 function calc_score(s) {
