@@ -50,12 +50,6 @@ function _duration_str(start_timestamp, end_timestamp) {
 	return hours + ':' + utils.add_zeroes(mins % 60);
 }
 
-function _multiline_regexp(regs, options) {
-    return new RegExp(regs.map(
-        function(reg){ return reg.source; }
-    ).join(''), options);
-}
-
 var _ui_esc_stack = [];
 function ui_esc_stack_push(cancel) {
 	_ui_esc_stack.push(cancel);

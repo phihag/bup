@@ -167,7 +167,7 @@ function _parse_match_list(html) {
 	}
 
 	var matches = [];
-	var game_re = _multiline_regexp([
+	var game_re = utils.multiline_regexp([
 		/<td rowspan="2">([^<]+)<\/td>\s*/,
 		/<td>([^\/,<]+),\s*([^\/,<]+)(?:\/([^\/,<]+),\s*([^\/,<]+))?<\/td>\s*/,
 		/<td><input type="number" name="Satz1([^"]+)" placeholder="([0-9]*)"><\/td>\s*/,

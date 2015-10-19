@@ -45,6 +45,11 @@ function add_zeroes(n) {
 	}
 };
 
+function multiline_regexp(regs, options) {
+    return new RegExp(regs.map(
+        function(reg){ return reg.source; }
+    ).join(''), options);
+}
 
 return {
 	uuid: uuid,
@@ -55,6 +60,7 @@ return {
 	datetime_str: datetime_str,
 	human_date_str: human_date_str,
 	add_zeroes: add_zeroes,
+	multiline_regexp: multiline_regexp,
 }
 })();
 
