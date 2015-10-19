@@ -380,7 +380,7 @@ function ui_show() {
 	_text('.scoresheet_begin_value', state.metadata.start ? utils.time_str(state.metadata.start) : '');
 	if (state.match.finished) {
 		_text('.scoresheet_end_value', state.metadata.updated ? utils.time_str(state.metadata.updated) : '');
-		_text('.scoresheet_duration_value', state.metadata.updated ? _duration_str(state.metadata.start, state.metadata.updated) : '');
+		_text('.scoresheet_duration_value', state.metadata.updated ? utils.duration_str(state.metadata.start, state.metadata.updated) : '');
 	} else {
 		_text('.scoresheet_end_value', null);
 		_text('.scoresheet_duration_value', null);

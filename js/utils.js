@@ -65,6 +65,26 @@ function multiline_regexp(regs, options) {
     ).join(''), options);
 }
 
+function duration_str(start_timestamp, end_timestamp) {
+	var start = new Date(start_timestamp);
+	var end = new Date(end_timestamp);
+
+	// Since we're not showing seconds, we pretend to calculate in minutes:
+	// start:      10:00:59 | 10:00:01
+	// end:        11:12:01 | 11:12:59
+	// precise:     1:11:02 |  1:12:58
+	// our result:  1:12    |  1:12
+	start.setSeconds(0);
+	end.setSeconds(0);
+	start.setMilliseconds(0);
+	end.setMilliseconds(0);
+
+	var diff_ms = end.getTime() - start.getTime();
+	var mins = Math.round(diff_ms / 60000);
+	var hours = (mins - (mins % 60)) / 60;
+	return hours + ':' + utils.add_zeroes(mins % 60);
+}
+
 return {
 	uuid: uuid,
 	on_click: on_click,
@@ -76,6 +96,7 @@ return {
 	add_zeroes: add_zeroes,
 	multiline_regexp: multiline_regexp,
 	parse_query_string: parse_query_string,
+	duration_str: duration_str,
 }
 })();
 

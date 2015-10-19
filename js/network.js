@@ -16,8 +16,7 @@ function get_netw() {
 }
 
 function calc_score(s) {
-	function _finish_score(orig_score, team1_won) {
-		var score = orig_score.slice();
+	function _finish_score(score, team1_won) {
 		var winner = team1_won ? 0 : 1;
 		if (score[1 - winner] >= 29) {
 			score[winner] = 30;
@@ -30,10 +29,10 @@ function calc_score(s) {
 
 	var scores = [];
 	s.match.finished_games.forEach(function(fg) {
-		scores.push(fg.score);
+		scores.push(fg.score.slice());
 	});
 	if (s.game.started || (s.game.score[0] != 0) || (s.game.score[1] != 0)) {
-		scores.push(s.game.score);
+		scores.push(s.game.score.slice());
 	}
 	if (s.match.finished && !s.match.won_by_score) {
 		if (scores.length > 0) {
