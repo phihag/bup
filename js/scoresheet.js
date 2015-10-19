@@ -372,15 +372,14 @@ function ui_show() {
 
 
 	_text('.scoresheet_match_name', state.setup.match_name);
-	var match_date = new Date(state.metadata.start);
-	_text('.scoresheet_date_value', _human_date_str(match_date));
+	_text('.scoresheet_date_value', utils.human_date_str(state.metadata.start));
 
 	_text('.scoresheet_court_id', settings.court_id);
 	_text('.scoresheet_umpire_name', settings.umpire_name);
 
-	_text('.scoresheet_begin_value', state.metadata.start ? _get_time_str(new Date(state.metadata.start)) : '');
+	_text('.scoresheet_begin_value', state.metadata.start ? utils.time_str(state.metadata.start) : '');
 	if (state.match.finished) {
-		_text('.scoresheet_end_value', state.metadata.updated ? _get_time_str(new Date(state.metadata.updated)) : '');
+		_text('.scoresheet_end_value', state.metadata.updated ? utils.time_str(state.metadata.updated) : '');
 		_text('.scoresheet_duration_value', state.metadata.updated ? _duration_str(state.metadata.start, state.metadata.updated) : '');
 	} else {
 		_text('.scoresheet_end_value', null);
@@ -757,7 +756,7 @@ function _svg_to_pdf(svg, pdf) {
 }
 
 function _match_title(s, sep) {
-	var title = _get_date_str(new Date(state.metadata.start)) + ' ';
+	var title = utils.date_str(state.metadata.start) + ' ';
 	if (state.setup.match_name) {
 		title += state.setup.match_name + ' ';
 	}
@@ -823,5 +822,7 @@ return {
 
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
+	var utils = require('./utils');
+
 	module.exports = scoresheet;
 }

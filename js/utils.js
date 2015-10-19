@@ -13,9 +13,48 @@ function on_click(node, callback) {
 	node.on('click', callback);
 }
 
+function iso8601(d) {
+	return d.getFullYear() + '-' + add_zeroes(d.getMonth()+1) + '-' + add_zeroes(d.getDate());
+}
+
+function date_str(ts) {
+	var d = new Date(ts);
+	return add_zeroes(d.getDate()) + '.' + add_zeroes(d.getMonth()+1) + '.' + d.getFullYear();
+}
+
+function time_str(ts) {
+	var d = new Date(ts);
+	return add_zeroes(d.getHours()) + ':' + add_zeroes(d.getMinutes());
+}
+
+function datetime_str(ts) {
+	return date_str(ts) + ' ' + time_str(ts);
+}
+
+function human_date_str(ts) {
+	var d = new Date(ts);
+	var WEEKDAYS = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
+	return WEEKDAYS[d.getDay()] + ' ' + utils.date_str(d);
+}
+
+function add_zeroes(n) {
+	if (n < 10) {
+		return '0' + n;
+	} else {
+		return '' + n;
+	}
+};
+
+
 return {
 	uuid: uuid,
 	on_click: on_click,
+	iso8601: iso8601,
+	time_str: time_str,
+	date_str: date_str,
+	datetime_str: datetime_str,
+	human_date_str: human_date_str,
+	add_zeroes: add_zeroes,
 }
 })();
 

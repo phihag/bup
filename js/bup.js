@@ -1,6 +1,6 @@
 "use strict";
 
-var DOUBLE_CLICK_TIMEOUT = 1500;
+var DOUBLE_CLICK_TIMEOUT = 1000;
 var state = {
 	initialized: false
 };
@@ -30,14 +30,6 @@ function _parse_query_string(qs) {
 	return res;
 }
 
-function _add_zeroes(n) {
-	if (n < 10) {
-		return '0' + n;
-	} else {
-		return '' + n;
-	}
-};
-
 function _duration_str(start_timestamp, end_timestamp) {
 	var start = new Date(start_timestamp);
 	var end = new Date(end_timestamp);
@@ -55,34 +47,13 @@ function _duration_str(start_timestamp, end_timestamp) {
 	var diff_ms = end.getTime() - start.getTime();
 	var mins = Math.round(diff_ms / 60000);
 	var hours = (mins - (mins % 60)) / 60;
-	return hours + ':' + _add_zeroes(mins % 60);
+	return hours + ':' + utils.add_zeroes(mins % 60);
 }
 
 function _multiline_regexp(regs, options) {
     return new RegExp(regs.map(
         function(reg){ return reg.source; }
     ).join(''), options);
-}
-
-function _get_time_str(d) {
-	return _add_zeroes(d.getHours()) + ':' + _add_zeroes(d.getMinutes());
-}
-
-function _get_date_str(d) {
-	return _add_zeroes(d.getDate()) + '.' + _add_zeroes(d.getMonth()+1) + '.' + d.getFullYear();
-}
-
-function _get_datetime_str(d) {
-	return _get_date_str(d) + ' ' + _get_time_str(d);
-}
-
-function _iso8601(d) {
-	return d.getFullYear() + '-' + _add_zeroes(d.getMonth()+1) + '-' + _add_zeroes(d.getDate());
-}
-
-function _human_date_str(d) {
-	var WEEKDAYS = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
-	return WEEKDAYS[d.getDay()] + ' ' + _get_date_str(d);
 }
 
 var _ui_esc_stack = [];
@@ -393,8 +364,7 @@ function ui_settings_load_list(s) {
 		} else {
 			match_name = m.setup.teams[0].players[0].name + ' vs ' + m.setup.teams[1].players[0].name;
 		}
-		var d = new Date(m.metadata.updated);
-		a.text(match_name + ', ' + _get_datetime_str(d));
+		a.text(match_name + ', ' + utils.datetime_str(m.metadata.updated));
 		a.on('click', function(e) {
 			e.preventDefault();
 			resume_match(m);
@@ -809,7 +779,7 @@ function ui_update_timer() {
 	remaining = Math.max(0, remaining);
 	var remaining_val = Math.round(remaining / 1000);
 	if (remaining_val >= 60) {
-		remaining_val = Math.floor(remaining_val / 60) + ':' + _add_zeroes(remaining_val % 60);
+		remaining_val = Math.floor(remaining_val / 60) + ':' + utils.add_zeroes(remaining_val % 60);
 	}
 	var timer_el = $('.timer');
 	timer_el.text(remaining_val);

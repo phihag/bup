@@ -25,12 +25,16 @@ deps: install-libs
 	(node --version && npm --version) >/dev/null 2>/dev/null || sudo apt-get install nodejs npm
 	npm install
 
-dist:
+cleandist:
 	rm -rf -- dist
+
+dist: cleandist
 	mkdir -p dist/bup
 	node div/make_dist.js bup.html dist/bup/index.html
 	<bup.css cleancss -o dist/bup/bup.min.css
 	cp div/dist_htaccess dist/bup/.htaccess
+	svgo -f icons/ -o dist/bup/icons/
+	cp libs/jspdf.min.js dist/bup/jspdf.dist.js
 	uglifyjs \
 		"libs/jquery.min.js" "libs/mousetrap.min.js" \
 		"js/utils.js" \
@@ -44,9 +48,7 @@ dist:
 		"js/network.js" \
 		"js/bup.js" \
 		-m -c -o dist/bup/bup.dist.js
-	cp libs/jspdf.min.js dist/bup/jspdf.dist.js
-	svgo -f icons/ -o dist/bup/icons/
-	cd dist && zip bup.zip bup/ -r
+	cd dist && zip bup.zip bup/ -rq
 
 upload: dist
 	cp div/dist_upload_config.json dist/.upload_config.json
@@ -56,9 +58,8 @@ upload: dist
 test:
 	@npm test
 
-clean:
+clean: cleandist
 	rm -rf -- libs
 	rm -rf -- node_modules
-	rm -rf -- dist
 
-.PHONY: default help deps test clean install-libs force-install-libs upload dist
+.PHONY: default help deps test clean install-libs force-install-libs upload dist cleandist

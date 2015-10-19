@@ -1,18 +1,22 @@
-improve badmintonticker.de support
-	initialize matches as they are
-
 edit mode to change sides / change ends
-	don't rerender score display (in order to be able to change and immediately render that)
-	implement edit score
+	cause press on input / change of score numbers
+	grow / shrink visible scores (without destroying values)
+	write automated tests for editing
+		ends change should switch score
+		clear service over
+		set game point / match point
+		test scoresheet with manual modifications
+	coalesce score presses
 	edit score: automatically hide/show further games
 	test edit mode at start of match/game
 	keep focus when editing score
-	write automated tests for editing
-		clear service over
-		set game point / match point
 	disable serve switch when not serving (game.finished)
 	disable end switch when not picked
 	disable side switch when not picked
+improve badmintonticker.de support
+	ask whether to initialize at current score when score > 0,0
+	(3 Options: Start at 23-21 19-21 11-2 | Start at 0-0 | Abbrechen)
+	send a second mail (btde support complete, other improvements coming)
 Button "bitte spielen" mehr betonen (icon?)
 allow timer restart
 fix settings on smartphone
@@ -20,7 +24,6 @@ fix scoresheet buttons on smartphone
 CSS animation for settings (go to top right)
 fix display without vw (see Manuel, https://github.com/saabi/vminpoly)
 save manually created games immediately?
-
 
 retest Manuel's notes
 
@@ -199,7 +202,9 @@ expose network_reload_interval in UI
 gzip icons in dist with correct htaccess to save CPU compression power
 badmintonticker.de mock / testing
 badmintonticker.de: support names without comma when reading player list
+investigate high GPU usage (transparency?)
 restart network resync interval if network settings change
+manual editing in portrait (maybe distinguish by aspect ratio?)
 -> Demo Jörg H, Manuel, Susanne
 -> Jens Köster fragen wegen zweimal gelbe Karte
 -> Jens Köster fragen wegen C

@@ -16,7 +16,8 @@ function get_netw() {
 }
 
 function calc_score(s) {
-	function _finish_score(score, team1_won) {
+	function _finish_score(orig_score, team1_won) {
+		var score = orig_score.slice();
 		var winner = team1_won ? 0 : 1;
 		if (score[1 - winner] >= 29) {
 			score[winner] = 30;

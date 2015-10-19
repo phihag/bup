@@ -228,7 +228,7 @@ function _parse_match_list(html) {
 			}
 		}
 
-		var match_id = 'btde_' + _iso8601(new Date()) + '_' + m[1] + '_' + home_team_name + '-' + away_team_name;
+		var match_id = 'btde_' + utils.iso8601(new Date()) + '_' + m[1] + '_' + home_team_name + '-' + away_team_name;
 
 		matches.push({
 			setup: {
@@ -296,3 +296,10 @@ return {
 }
 
 });
+
+
+if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var utils = require('./utils');
+
+	module.exports = btde;
+}
