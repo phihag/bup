@@ -16,20 +16,6 @@ var settings = {
 	network_update_interval: 10000,
 };
 
-function _parse_query_string(qs) {
-	// http://stackoverflow.com/a/2880929/35070
-	var pl     = /\+/g;
-	var search = /([^&=]+)=?([^&]*)/g;
-	var decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); };
-
-	var res = {};
-	var m;
-	while (m = search.exec(qs)) {
-		res[decode(m[1])] = decode(m[2]);
-	}
-	return res;
-}
-
 function _duration_str(start_timestamp, end_timestamp) {
 	var start = new Date(start_timestamp);
 	var end = new Date(end_timestamp);
@@ -1030,7 +1016,7 @@ function ui_init() {
 
 	ui_init_settings();
 
-	var hash_query = _parse_query_string(window.location.hash.substr(1));
+	var hash_query = utils.parse_query_string(window.location.hash.substr(1));
 	if (hash_query.liveaw_match_id) {
 		liveaw_init(hash_query.liveaw_match_id);
 	} else if (hash_query.courtspot_court) {

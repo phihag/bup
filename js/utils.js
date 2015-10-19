@@ -43,7 +43,21 @@ function add_zeroes(n) {
 	} else {
 		return '' + n;
 	}
-};
+}
+
+function parse_query_string(qs) {
+	// http://stackoverflow.com/a/2880929/35070
+	var pl     = /\+/g;
+	var search = /([^&=]+)=?([^&]*)/g;
+	var decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); };
+
+	var res = {};
+	var m;
+	while (m = search.exec(qs)) {
+		res[decode(m[1])] = decode(m[2]);
+	}
+	return res;
+}
 
 function multiline_regexp(regs, options) {
     return new RegExp(regs.map(
@@ -61,6 +75,7 @@ return {
 	human_date_str: human_date_str,
 	add_zeroes: add_zeroes,
 	multiline_regexp: multiline_regexp,
+	parse_query_string: parse_query_string,
 }
 })();
 
