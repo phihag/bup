@@ -2,6 +2,77 @@
 
 var calc = (function() {
 
+function _is_winner(candidate, other) {
+	return (
+		((candidate == 21) && (other < 20)) ||
+		((candidate > 21) && (candidate <= 30) && (other == candidate - 2)) ||
+		(candidate == 30) && (other == 29)
+	);
+}
+
+
+// Returns:
+//  'inprogress' for game in progress
+//  'invalid' if the score can't happen
+//  'left' if left side won this game
+//  'right' if right side won this game
+function game_winner(left_score, right_score) {
+	if (_is_winner(left_score, right_score)) {
+		return 'left';
+	}
+	if (_is_winner(right_score, left_score)) {
+		return 'right';
+	}
+	if ((left_score < 21) && (right_score < 21)) {
+		return 'inprogress';
+	}
+	if ((left_score < 30) && (right_score >= left_score - 1) && (right_score <= left_score + 1)) {
+		return 'inprogress';
+	}
+	return 'invalid';
+}
+
+function match_winner(input_scores) {
+	var score = [0, 0];
+	for (var i = 0;i < input_scores.length;i++) {
+		var iscore = input_scores[i];
+		switch (iscore.winner) {
+		case 'left':
+			score[0]++;
+			if (score[0] >= 2) {
+				return 'left';
+			}
+			break;
+		case 'right':
+			score[1]++;
+			if (score[1] >= 2) {
+				return 'right';
+			}
+			break;
+		case 'inprogress':
+			return 'inprogress';
+		case 'invalid':
+			return 'invalid';
+		}
+	}
+	return 'inprogress';
+}
+
+function calc_game_score(games) {
+	var res = [0, 0];
+	games.forEach(function(g) {
+		var winner = game_winner(g.score[0], g.score[1]);
+		if (winner === 'left') {
+			res[0]++;
+		} else if (winner === 'right') {
+			res[1]++;
+		} else {
+			throw new Error('Invalid status for a finished game: ' + winner);
+		}
+	});
+	return res;
+}
+
 function init_state(s, setup, presses) {
 	if (!presses || !s.metadata) {
 		var now = Date.now();
@@ -59,21 +130,9 @@ function make_game_state(s, previous_game) {
 	return res;
 }
 
-function score(s, team_id, press) {
-	var team1_scored = team_id == 0;
-	s.game.service_over = team1_scored != s.game.team1_serving;
-	s.game.score[team_id] += 1;
-
-	var team1_won = (
-		((s.game.score[0] == 21) && (s.game.score[1] < 20)) ||
-		((s.game.score[0] > 21) && (s.game.score[1] < s.game.score[0] - 1)) ||
-		(s.game.score[0] == 30)
-	);
-	var team2_won = (
-		((s.game.score[1] == 21) && (s.game.score[0] < 20)) ||
-		((s.game.score[1] > 21) && (s.game.score[0] < s.game.score[1] - 1)) ||
-		(s.game.score[1] == 30)
-	);
+function recalc_after_score(s, team_id, press) {
+	var team1_won = _is_winner(s.game.score[0], s.game.score[1]);
+	var team2_won = _is_winner(s.game.score[1], s.game.score[0]);
 	if (team1_won) {
 		s.match.game_score[0]++;
 	} else if (team2_won) {
@@ -84,13 +143,13 @@ function score(s, team_id, press) {
 		s.game.team1_won = team1_won;
 		s.game.game = true;
 		s.game.finished = true;
-		if (s.match.game_score[team_id] == 2) {
+		if (s.match.game_score[team1_won ? 0 : 1] == 2) {
 			s.match.finished = true;
 			s.match.team1_won = team1_won;
 		}
 		s.game.team1_serving = null;
 		s.game.service_over = null;
-	} else {
+	} else if (! press.type.match(/^editmode_.*/)) {
 		if (s.game.teams_player1_even[0] !== null) { // red card before beginning of game
 			if (s.setup.is_doubles) {
 				if (! s.game.service_over) {
@@ -102,12 +161,14 @@ function score(s, team_id, press) {
 				s.game.teams_player1_even[1 - team_id] = even_score;
 			}
 		}
-		s.game.team1_serving = team1_scored;
+		s.game.team1_serving = team_id == 0;
 	}
 
-	s.game.interval = (
-		(s.game.score[team_id] === 11) && (s.game.score[1 - team_id] < 11)
-	);
+	if (team_id !== null) {
+		s.game.interval = (
+			(s.game.score[team_id] === 11) && (s.game.score[1 - team_id] < 11)
+		);
+	}
 
 	if (s.game.interval) {
 		s.timer = {
@@ -121,18 +182,27 @@ function score(s, team_id, press) {
 			duration: 120 * 1000,
 			exigent: 20499,
 		};
-	} else if (press.type == 'score') {
-		// Only interrupt timers on regular scores, not red cards or so
+	} else if (press.type != 'red-card') {
+		// Do not interrupt timers on red cards
 		s.timer = false;
-	}
-
-	s.game.change_sides = (s.game.interval && s.match.finished_games.length == 2);
-	if (s.game.change_sides) {
-		s.game.team1_left = ! s.game.team1_left;
 	}
 
 	if ((press.type != 'red-card') && (s.match.marks.length > 0)) {
 		s.match.marks = [];
+	}
+
+}
+
+function score(s, team_id, press) {
+	var team1_scored = team_id == 0;
+	s.game.service_over = team1_scored != s.game.team1_serving;
+	s.game.score[team_id] += 1;
+
+	recalc_after_score(s, team_id, press);
+
+	s.game.change_sides = (s.game.interval && s.match.finished_games.length == 2);
+	if (s.game.change_sides) {
+		s.game.team1_left = ! s.game.team1_left;
 	}
 }
 
@@ -145,22 +215,31 @@ function calc_press(s, press) {
 			start: press.timestamp,
 			duration: 120 * 1000,
 		};
+		if (((s.game.score[0] > 0) || (s.game.score[1] > 0)) && s.game.team1_left) {
+			// A score > 0 is only possible in case of a manually edited score.
+			// Even red cards don't have that effect, see RTTO 3.7.7.
+			// Therefore, switch sides if team 1 is right.)
+			s.game.score = [s.game.score[1], s.game.score[0]];
+			s.match.finished_games.forEach(function(g, i) {
+				s.match.finished_games[i].score = [g.score[1], g.score[0]];
+			});
+		}
 		break;
 	case 'pick_server':
 		s.game.start_server_team_id = press.team_id;
 		s.game.start_server_player_id = press.player_id;
 		if (s.setup.is_doubles) {
-			s.game.teams_player1_even[s.game.start_server_team_id] = s.game.start_server_player_id == s.game.score[s.game.start_server_team_id];
+			s.game.teams_player1_even[s.game.start_server_team_id] = s.game.start_server_player_id == (s.game.score[s.game.start_server_team_id] % 2);
 		} else {
 			s.game.start_receiver_player_id = 0;
 		}
-		if (s.match.finished_games.length == 0) {
+		if (s.game.team1_serving === null) {
 			s.game.team1_serving = s.game.start_server_team_id == 0;
 		}
 		break;
 	case 'pick_receiver':
 		s.game.start_receiver_player_id = press.player_id;
-		s.game.teams_player1_even[press.team_id] = s.game.start_receiver_player_id == s.game.score[s.game.start_server_team_id];
+		s.game.teams_player1_even[press.team_id] = s.game.start_receiver_player_id == (s.game.score[s.game.start_server_team_id] % 2);
 		break;
 	case 'love-all':
 		s.game.started = true;
@@ -271,8 +350,35 @@ function calc_press(s, press) {
 		s.game.teams_player1_even[team_id] = ! s.game.teams_player1_even[team_id];
 		break;
 	case 'editmode_change-serve':
+		if (s.game.team1_serving !== null) {
+			s.game.team1_serving = !s.game.team1_serving;
+			recalc_after_score(s, s.game.team1_serving ? 0 : 1, press);
+		}
+		break;
+	case 'editmode_set-score':
+		s.game.score = press.score.slice();
 		s.game.service_over = false;
-		s.game.team1_serving = !s.game.team1_serving;
+		s.game.finished = false;
+		s.game.game = false;
+		s.game.won_by_score = null;
+		s.game.team1_won = null;
+		s.match.finished = false;
+		s.match.team1_won = null;
+		recalc_after_score(s, s.game.team1_serving ? 0 : 1, press);
+		break;
+	case 'editmode_set-finished_games':
+		s.match.finished_games = press.scores.map(function(score) {
+			return {
+				synthetic: true,
+				finished: true,
+				team1_won: _is_winner(score[0], score[1]),
+				score: score,
+			};
+		});
+		s.match.finished = false;
+		s.match.team1_won = null;
+		s.match.game_score = calc_game_score(s.match.finished_games);
+		recalc_after_score(s, null, press);
 		break;
 	default:
 		throw new Error('Unsupported press type ' + press.type);
@@ -419,6 +525,8 @@ return {
 	state: state,
 	undo: undo,
 	calc_press: calc_press,
+	game_winner: game_winner,
+	match_winner: match_winner,
 }
 
 })();

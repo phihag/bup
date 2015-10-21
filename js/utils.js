@@ -2,6 +2,13 @@
 
 var utils = (function() {
 
+function qsEach(selector, func) {
+	var nodes = document.querySelectorAll(selector);
+	for (var i = 0;i < nodes.length;i++) {
+		func(nodes[i], i);
+	}
+}
+
 function uuid() {
 	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
 		var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
@@ -85,6 +92,29 @@ function duration_str(start_timestamp, end_timestamp) {
 	return hours + ':' + utils.add_zeroes(mins % 60);
 }
 
+function visible(node, visible) {
+	if (visible) {
+		$(node).show();
+	} else {
+		$(node).hide();
+	}
+}
+
+function de_jq(node) {
+	if (typeof node.getAttribute === 'undefined') {
+		// jQuery node
+		return node[0];
+	}
+	return node;
+}
+
+function set_class(node, class_name) {
+	node = de_jq(node);
+	if (node.getAttribute('class') != class_name) {
+		node.setAttribute('class', class_name);
+	}
+}
+
 return {
 	uuid: uuid,
 	on_click: on_click,
@@ -97,6 +127,9 @@ return {
 	multiline_regexp: multiline_regexp,
 	parse_query_string: parse_query_string,
 	duration_str: duration_str,
+	visible: visible,
+	qsEach: qsEach,
+	set_class: set_class,
 }
 })();
 

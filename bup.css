@@ -258,6 +258,9 @@ span.score_announcement+span.score_announcement {
 	line-height: 3vh;
 	height: 3.5vh;
 }
+.score_future-game>td.score>span {
+	visibility: hidden;
+}
 .score_current-game {
 	font-size: 8vh;
 	height: 8vh;
@@ -667,6 +670,9 @@ input[name="court_id"] {
 }
 .editmode_switch_right {
 	right: 0.5%;
+}
+.editmode_score {
+	z-index: 2000;
 }
 
 

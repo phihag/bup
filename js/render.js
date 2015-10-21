@@ -22,6 +22,7 @@ function _score_display_init(s) {
 			'data-game-index': game_index,
 			'data-team-side': 'left',
 		});
+		left_input.on('input', editmode_change_score);
 		left.append(left_input);
 		var left_text = $('<span>');
 		left.append(left_text);
@@ -33,6 +34,7 @@ function _score_display_init(s) {
 			'data-game-index': game_index,
 			'data-team-side': 'right',
 		});
+		right_input.on('input', editmode_change_score);
 		right.append(right_input);
 		var right_text = $('<span>');
 		right.append(right_text);
@@ -47,15 +49,15 @@ function _score_display_set_game(s, game, game_index, is_current) {
 		}
 	}
 
+	var editmode_active = $('#game').hasClass('editmode');
 	var tr = $('#score_game_' + game_index);
 
-	tr.attr('class', '');
 	if (!game) {
-		tr.addClass('score_future-game');
+		utils.set_class(tr, 'score_future-game');
 	} else if (is_current) {
-		tr.addClass('score_current-game');
+		utils.set_class(tr, 'score_current-game');
 	} else {
-		tr.addClass('score_finished-game');
+		utils.set_class(tr, 'score_finished-game');
 	}
 
 	var left = tr.children('.score_left');
@@ -77,6 +79,9 @@ function _score_display_set_game(s, game, game_index, is_current) {
 		var points = game.score[s.game.team1_left ? 0 : 1];
 		_val(left_input, points);
 		left_text.text(points);
+		if (editmode_active) {
+			utils.visible(left_input, true);
+		}
 	}
 
 	var right = tr.children('.score_right');
@@ -98,6 +103,9 @@ function _score_display_set_game(s, game, game_index, is_current) {
 		var points = game.score[s.game.team1_left ? 1 : 0];
 		_val(right_input, points);
 		right_text.text(points);
+		if (editmode_active) {
+			utils.visible(right_input, true);
+		}
 	}
 
 	if (is_current) {
@@ -197,7 +205,7 @@ function ui_render(s) {
 
 	$('#shuttle_counter_value').text(s.match.shuttle_count);
 
-	if (s.court.left_serving == null) {
+	if (s.court.left_serving === null) {
 		$('#court_arrow').hide();
 	} else {
 		$('#court_arrow').show();

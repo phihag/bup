@@ -1285,7 +1285,7 @@ _describe('scoresheet generation', function() {
 		});
 
 		// 21-11 should fit in one line
-		// By German rules see Anweisungen für Technische Offizielle §8
+		// In German rules see Anweisungen für Technische Offizielle §8
 		var presses = start_presses.slice();
 		press_score(presses, 21, 11);
 		var cells = _scoresheet_cells(presses, SINGLES_SETUP);
@@ -1296,7 +1296,23 @@ _describe('scoresheet generation', function() {
 			score: [21, 11],
 			width: 2
 		});
+	});
 
+	_it('editmode', function() {
+		var start_presses = []
+		presses.push({
+			type: 'editmode_set-score',
+			score: [12, 5],
+		});
+		var cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 32,
+			type: 'circle',
+			score: [21, 10],
+			width: 3
+		});
 
+		// TODO what if we change left/right later?
 	});
 });

@@ -498,7 +498,6 @@ function ui_show_picker(obj) {
 	obj.show();
 	var first_button = obj.find('button:first');
 	first_button.addClass('auto-focused');
-	first_button.focus();
 	var kill_special_treatment = function() {
 		first_button.removeClass('auto-focused');
 		first_button.off('blur', kill_special_treatment);
@@ -637,6 +636,7 @@ function ui_init_settings() {
 	$('.setup_show_manual').on('click', function(e) {
 		e.preventDefault();
 		$('.setup_show_manual').hide();
+		// TODO use a CSS animation here
 		$('#setup_manual_form').show(200);
 		return false;
 	});
@@ -691,31 +691,112 @@ function editmode_init() {
 		return true;
 	});
 
-	$('.editmode_leave').on('click', function() {
+	utils.on_click($('.editmode_leave'), function() {
 		editmode_leave();
 	});
-	$('.editmode_change-ends').on('click', function() {
+	utils.on_click($('.editmode_change-ends'), function() {
 		on_press({
 			type: 'editmode_change-ends'
 		});
 	});
-	$('.editmode_switch_left').on('click', function() {
+	utils.on_click($('.editmode_switch_left'), function() {
 		on_press({
 			type: 'editmode_switch-sides',
 			side: 'left'
 		});
 	});
-	$('.editmode_switch_right').on('click', function() {
+	utils.on_click($('.editmode_switch_right'), function() {
 		on_press({
 			type: 'editmode_switch-sides',
 			side: 'right'
 		});
 	});
-	$('.editmode_arrow').on('click', function() {
+	utils.on_click($('.editmode_arrow'), function() {
 		on_press({
 			type: 'editmode_change-serve',
 		});
 	});
+}
+
+function editmode_hide_inputs(since_game) {
+	utils.qsEach('.editmode_score', function(n) {
+		var game_index = parseInt(n.getAttribute('data-game-index'), 10);
+		utils.visible(n, game_index < since_game);
+	});
+}
+
+function editmode_read_input() {
+	var res = [];
+	for (var game_index = 0;game_index < state.match.max_games;game_index++) {
+		var left_str = $('.editmode_score[data-game-index="' + game_index + '"][data-team-side="left"]').val();
+		var left_val = parseInt(left_str, 10);
+		if (isNaN(left_val)) {
+			left_val = 0;
+		}
+
+		var right_str = $('.editmode_score[data-game-index="' + game_index + '"][data-team-side="right"]').val();
+		var right_val = parseInt(right_str, 10);
+		if (isNaN(right_val)) {
+			right_val = 0;
+		}
+
+		var winner = calc.game_winner(left_val, right_val);
+		var team1_val = state.game.team1_left ? left_val : right_val;
+		var team2_val = state.game.team1_left ? right_val : left_val;
+		res.push({
+			winner: winner,
+			left: left_val,
+			right: right_val,
+			score: [team1_val, team2_val],
+		});
+
+		if ((winner == 'invalid') || (winner == 'inprogress')) {
+			return res;
+		}
+
+		var match_winner = calc.match_winner(res);
+		if (match_winner != 'inprogress') {
+			return res;
+		}
+	}
+
+	return res;
+}
+
+function editmode_change_score() {
+	var input_scores = editmode_read_input();
+	editmode_hide_inputs(input_scores.length);
+
+	if (input_scores[input_scores.length - 1].winner == 'invalid') {
+		// TODO red background or so
+		return;
+	}
+
+	var finished_inputs = input_scores.slice(0, input_scores.length - 1);
+	var is_changed = (finished_inputs.length != state.match.finished_games.length);
+	if (! is_changed) {
+		is_changed = finished_inputs.some(function(fi, game_index) {
+			var fg = state.match.finished_games[game_index];
+			return (fg.score[0] != fi.score[0]) || (fg.score[1] != fi.score[1]);
+		});
+	}
+	if (is_changed) {
+		var new_scores = finished_inputs.map(function(fi) {
+			return fi.score;
+		});
+		on_press({
+			type: 'editmode_set-finished_games',
+			scores: new_scores,
+		});
+	}
+
+	var new_score = input_scores[input_scores.length - 1].score;
+	if ((new_score[0] != state.game.score[0]) || (new_score[1] != state.game.score[1])) {
+		on_press({
+			type: 'editmode_set-score',
+			score: new_score,
+		});
+	}
 }
 
 var ui_timer = null;

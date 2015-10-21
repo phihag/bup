@@ -71,8 +71,8 @@ _describe('calc_state', function() {
 
 	_it('Choosing sides (singles)', function() {
 		var s = state_after([{
-			'type': 'pick_side',
-			'team1_left': true,
+			type: 'pick_side',
+			team1_left: true,
 		}], SINGLES_SETUP);
 		assert.equal(s.game.team1_serving, null);
 		assert.equal(s.court.player_left_odd, null);
@@ -83,12 +83,12 @@ _describe('calc_state', function() {
 		assert.equal(s.court.serving_downwards, null);
 
 		s = state_after([{
-			'type': 'pick_side',
-			'team1_left': false, // Alice picks right
+			type: 'pick_side',
+			team1_left: false, // Alice picks right
 		}, {
-			'type': 'pick_server', // Bob serves
-			'team_id': 1,
-			'player_id': 0
+			type: 'pick_server', // Bob serves
+			team_id: 1,
+			player_id: 0,
 		}], SINGLES_SETUP);
 		assert.equal(s.game.team1_serving, false);
 		assert.equal(s.court.player_left_odd, null);
@@ -99,12 +99,12 @@ _describe('calc_state', function() {
 		assert.equal(s.court.serving_downwards, false);
 
 		s = state_after([{
-			'type': 'pick_side',
-			'team1_left': false, // Alice picks right
+			type: 'pick_side',
+			team1_left: false, // Alice picks right
 		}, {
-			'type': 'pick_server', // Alice serves
-			'team_id': 0,
-			'player_id': 0
+			type: 'pick_server', // Alice serves
+			team_id: 0,
+			player_id: 0,
 		}], SINGLES_SETUP);
 		assert.equal(s.game.team1_serving, true);
 		assert.equal(s.court.player_left_odd, null);
@@ -115,12 +115,12 @@ _describe('calc_state', function() {
 		assert.equal(s.court.serving_downwards, true);
 
 		s = state_after([{
-			'type': 'pick_side',
-			'team1_left': true, // Alice picks left
+			type: 'pick_side',
+			team1_left: true, // Alice picks left
 		}, {
-			'type': 'pick_server', // Alice serves
-			'team_id': 0,
-			'player_id': 0
+			type: 'pick_server', // Alice serves
+			team_id: 0,
+			player_id: 0
 		}], SINGLES_SETUP);
 		assert.equal(s.game.team1_serving, true);
 		assert.equal(s.court.player_left_odd, null);
@@ -131,12 +131,12 @@ _describe('calc_state', function() {
 		assert.equal(s.court.serving_downwards, false);
 
 		s = state_after([{
-			'type': 'pick_side',
-			'team1_left': true, // Alice picks left
+			type: 'pick_side',
+			team1_left: true, // Alice picks left
 		}, {
-			'type': 'pick_server', // Bob serves
-			'team_id': 1,
-			'player_id': 0
+			type: 'pick_server', // Bob serves
+			team_id: 1,
+			player_id: 0
 		}], SINGLES_SETUP);
 		assert.equal(s.game.team1_serving, false);
 		assert.equal(s.court.player_left_odd, null);
@@ -149,8 +149,8 @@ _describe('calc_state', function() {
 
 	_it('Choosing sides (doubles)', function() {
 		var s = state_after([{
-			'type': 'pick_side',
-			'team1_left': true,
+			type: 'pick_side',
+			team1_left: true,
 		}], DOUBLES_SETUP);
 		assert.equal(s.game.team1_serving, null);
 		assert.equal(s.court.player_left_odd, null);
@@ -161,12 +161,12 @@ _describe('calc_state', function() {
 		assert.equal(s.court.serving_downwards, null);
 
 		s = state_after([{
-			'type': 'pick_side',
-			'team1_left': false, // Andrew&Alice pick right
+			type: 'pick_side',
+			team1_left: false, // Andrew&Alice pick right
 		}, {
-			'type': 'pick_server', // Bob serves
-			'team_id': 1,
-			'player_id': 0
+			type: 'pick_server', // Bob serves
+			team_id: 1,
+			player_id: 0
 		}], DOUBLES_SETUP);
 		assert.equal(s.game.team1_serving, false);
 		assert.equal(s.court.player_left_odd.name, 'Birgit');
@@ -177,16 +177,16 @@ _describe('calc_state', function() {
 		assert.equal(s.court.serving_downwards, false);
 
 		s = state_after([{
-			'type': 'pick_side',
-			'team1_left': false, // Andrew&Alice pick right
+			type: 'pick_side',
+			team1_left: false, // Andrew&Alice pick right
 		}, {
-			'type': 'pick_server', // Birgit serves
-			'team_id': 1,
-			'player_id': 1
+			type: 'pick_server', // Birgit serves
+			team_id: 1,
+			player_id: 1
 		}, {
-			'type': 'pick_receiver', // Andrew receives
-			'team_id': 0,
-			'player_id': 0,
+			type: 'pick_receiver', // Andrew receives
+			team_id: 0,
+			player_id: 0,
 		}], DOUBLES_SETUP);
 		assert.equal(s.game.team1_serving, false);
 		assert.equal(s.game.teams_player1_even[0], true);
@@ -199,16 +199,16 @@ _describe('calc_state', function() {
 		assert.equal(s.court.serving_downwards, false);
 
 		s = state_after([{
-			'type': 'pick_side',
-			'team1_left': false, // Andrew&Alice pick right
+			type: 'pick_side',
+			team1_left: false, // Andrew&Alice pick right
 		}, {
-			'type': 'pick_server', // Alice serves
-			'team_id': 0,
-			'player_id': 1
+			type: 'pick_server', // Alice serves
+			team_id: 0,
+			player_id: 1
 		}, {
-			'type': 'pick_receiver', // Birgit receives
-			'team_id': 1,
-			'player_id': 1,
+			type: 'pick_receiver', // Birgit receives
+			team_id: 1,
+			player_id: 1,
 		}], DOUBLES_SETUP);
 		assert.equal(s.game.team1_serving, true);
 		assert.equal(s.game.teams_player1_even[0], false);
@@ -221,16 +221,16 @@ _describe('calc_state', function() {
 		assert.equal(s.court.serving_downwards, true);
 
 		s = state_after([{
-			'type': 'pick_side',
-			'team1_left': false, // Andrew&Alice pick right
+			type: 'pick_side',
+			team1_left: false, // Andrew&Alice pick right
 		}, {
-			'type': 'pick_server', // Andrew serves
-			'team_id': 0,
-			'player_id': 0
+			type: 'pick_server', // Andrew serves
+			team_id: 0,
+			player_id: 0
 		}, {
-			'type': 'pick_receiver', // Birgit receives
-			'team_id': 1,
-			'player_id': 1,
+			type: 'pick_receiver', // Birgit receives
+			team_id: 1,
+			player_id: 1,
 		}], DOUBLES_SETUP);
 		assert.equal(s.game.team1_serving, true);
 		assert.equal(s.game.teams_player1_even[0], true);
@@ -243,16 +243,16 @@ _describe('calc_state', function() {
 		assert.equal(s.court.serving_downwards, true);
 
 		s = state_after([{
-			'type': 'pick_side',
-			'team1_left': false, // Andrew&Alice pick right
+			type: 'pick_side',
+			team1_left: false, // Andrew&Alice pick right
 		}, {
-			'type': 'pick_server', // Bob serves
-			'team_id': 1,
-			'player_id': 0
+			type: 'pick_server', // Bob serves
+			team_id: 1,
+			player_id: 0
 		}, {
-			'type': 'pick_receiver', // Andrew receives
-			'team_id': 0,
-			'player_id': 0,
+			type: 'pick_receiver', // Andrew receives
+			team_id: 0,
+			player_id: 0,
 		}], DOUBLES_SETUP);
 		assert.equal(s.game.team1_serving, false);
 		assert.equal(s.game.teams_player1_even[0], true);
@@ -265,16 +265,16 @@ _describe('calc_state', function() {
 		assert.equal(s.court.serving_downwards, false);
 
 		s = state_after([{
-			'type': 'pick_side',
-			'team1_left': true, // Andrew&Alice pick left
+			type: 'pick_side',
+			team1_left: true, // Andrew&Alice pick left
 		}, {
-			'type': 'pick_server', // Birgit serves
-			'team_id': 1,
-			'player_id': 1
+			type: 'pick_server', // Birgit serves
+			team_id: 1,
+			player_id: 1
 		}, {
-			'type': 'pick_receiver', // Alice receives
-			'team_id': 0,
-			'player_id': 1,
+			type: 'pick_receiver', // Alice receives
+			team_id: 0,
+			player_id: 1,
 		}], DOUBLES_SETUP);
 		assert.equal(s.game.team1_serving, false);
 		assert.equal(s.court.player_left_odd.name, 'Andrew');
@@ -285,16 +285,16 @@ _describe('calc_state', function() {
 		assert.equal(s.court.serving_downwards, true);
 
 		s = state_after([{
-			'type': 'pick_side',
-			'team1_left': true, // Andrew&Alice pick left
+			type: 'pick_side',
+			team1_left: true, // Andrew&Alice pick left
 		}, {
-			'type': 'pick_server', // Andrew serves
-			'team_id': 0,
-			'player_id': 0
+			type: 'pick_server', // Andrew serves
+			team_id: 0,
+			player_id: 0
 		}, {
-			'type': 'pick_receiver', // Birgit receives
-			'team_id': 1,
-			'player_id': 1,
+			type: 'pick_receiver', // Birgit receives
+			team_id: 1,
+			player_id: 1,
 		}], DOUBLES_SETUP);
 		assert.equal(s.game.team1_serving, true);
 		assert.equal(s.game.teams_player1_even[0], true);
@@ -309,14 +309,14 @@ _describe('calc_state', function() {
 
 	_it('Game start and basic counting (singles)', function() {
 		var s = state_after([{
-			'type': 'pick_side', // Alice picks right
-			'team1_left': false,
+			type: 'pick_side', // Alice picks right
+			team1_left: false,
 		}, {
-			'type': 'pick_server', // Alice serves
-			'team_id': 0,
-			'player_id': 0,
+			type: 'pick_server', // Alice serves
+			team_id: 0,
+			player_id: 0,
 		}, {
-			'type': 'love-all'
+			type: 'love-all'
 		}], SINGLES_SETUP);
 		assert.equal(s.game.team1_serving, true);
 		assert.equal(s.game.service_over, false);
@@ -333,28 +333,28 @@ _describe('calc_state', function() {
 		assert.equal(s.game.game, false);
 
 		s = state_after([{
-			'type': 'pick_side', // Alice picks right
-			'team1_left': false,
+			type: 'pick_side', // Alice picks right
+			team1_left: false,
 		}, {
-			'type': 'pick_server', // Alice serves
-			'team_id': 0,
-			'player_id': 0,
+			type: 'pick_server', // Alice serves
+			team_id: 0,
+			player_id: 0,
 		}, {
-			'type': 'love-all'
+			type: 'love-all'
 		}, {
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		}, {
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		}, {
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		}, {
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		}, {
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		}], SINGLES_SETUP);
 		assert.equal(s.game.team1_serving, false);
@@ -372,22 +372,22 @@ _describe('calc_state', function() {
 		assert.equal(s.game.game, false);
 
 		s = state_after([{
-			'type': 'pick_side', // Alice picks left
-			'team1_left': true,
+			type: 'pick_side', // Alice picks left
+			team1_left: true,
 		}, {
-			'type': 'pick_server', // Bob serves
-			'team_id': 1,
-			'player_id': 0,
+			type: 'pick_server', // Bob serves
+			team_id: 1,
+			player_id: 0,
 		}, {
-			'type': 'love-all'
+			type: 'love-all'
 		}, {
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		}, {
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		}, {
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		}], SINGLES_SETUP);
 		assert.equal(s.game.team1_serving, true);
@@ -401,19 +401,19 @@ _describe('calc_state', function() {
 		assert.equal(s.court.serving_downwards, true);
 
 		s = state_after([{
-			'type': 'pick_side', // Alice picks left
-			'team1_left': true,
+			type: 'pick_side', // Alice picks left
+			team1_left: true,
 		}, {
-			'type': 'pick_server', // Alice serves
-			'team_id': 0,
-			'player_id': 0,
+			type: 'pick_server', // Alice serves
+			team_id: 0,
+			player_id: 0,
 		}, {
-			'type': 'love-all'
+			type: 'love-all'
 		}, {
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		}, {
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		}], SINGLES_SETUP);
 		assert.equal(s.game.team1_serving, true);
@@ -431,18 +431,18 @@ _describe('calc_state', function() {
 
 	_it('Game start and basic counting (doubles)', function() {
 		var s = state_after([{
-			'type': 'pick_side', // Andrew&Alice pick right
-			'team1_left': false,
+			type: 'pick_side', // Andrew&Alice pick right
+			team1_left: false,
 		}, {
-			'type': 'pick_server', // Alice serves
-			'team_id': 0,
-			'player_id': 1,
+			type: 'pick_server', // Alice serves
+			team_id: 0,
+			player_id: 1,
 		}, {
-			'type': 'pick_receiver', // Bob receives
-			'team_id': 1,
-			'player_id': 0,
+			type: 'pick_receiver', // Bob receives
+			team_id: 1,
+			player_id: 0,
 		}, {
-			'type': 'love-all'
+			type: 'love-all'
 		}], DOUBLES_SETUP);
 		assert.equal(s.game.team1_serving, true);
 		assert.equal(s.game.service_over, false);
@@ -455,32 +455,32 @@ _describe('calc_state', function() {
 		assert.equal(s.court.serving_downwards, true);
 
 		var s = state_after([{
-			'type': 'pick_side', // Andrew&Alice pick right
-			'team1_left': false,
+			type: 'pick_side', // Andrew&Alice pick right
+			team1_left: false,
 		}, {
-			'type': 'pick_server', // Andrew serves
-			'team_id': 0,
-			'player_id': 0,
+			type: 'pick_server', // Andrew serves
+			team_id: 0,
+			player_id: 0,
 		}, {
-			'type': 'pick_receiver', // Bob receives
-			'team_id': 1,
-			'player_id': 0,
+			type: 'pick_receiver', // Bob receives
+			team_id: 1,
+			player_id: 0,
 		}, {
-			'type': 'love-all'
+			type: 'love-all'
 		}, {
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		}, {
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		}, {
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		}, {
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		}, {
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		}], DOUBLES_SETUP);
 		assert.equal(s.game.team1_serving, false);
@@ -496,18 +496,18 @@ _describe('calc_state', function() {
 
 	_it('Interval', function() {
 		var presses = [{
-			'type': 'pick_side', // Alice picks right
-			'team1_left': false,
+			type: 'pick_side', // Alice picks right
+			team1_left: false,
 		}, {
-			'type': 'pick_server', // Bob serves
-			'team_id': 1,
-			'player_id': 0,
+			type: 'pick_server', // Bob serves
+			team_id: 1,
+			player_id: 0,
 		}, {
-			'type': 'love-all'
+			type: 'love-all'
 		}];
 		press_score(presses, 9, 9);
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		});
 		var s = state_after(presses, SINGLES_SETUP);
@@ -522,11 +522,11 @@ _describe('calc_state', function() {
 		assert.equal(s.game.interval, false);
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		});
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		});
 		s = state_after(presses, SINGLES_SETUP);
@@ -543,7 +543,7 @@ _describe('calc_state', function() {
 		assert.equal(s.game.change_sides, false);
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		});
 		s = state_after(presses, SINGLES_SETUP);
@@ -559,7 +559,7 @@ _describe('calc_state', function() {
 		assert.equal(s.game.interval, false);
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		});
 		s = state_after(presses, SINGLES_SETUP);
@@ -577,18 +577,18 @@ _describe('calc_state', function() {
 
 	_it('Correct announcements (singles)', function() {
 		var presses = [{
-			'type': 'pick_side', // Alice picks left
-			'team1_left': true,
+			type: 'pick_side', // Alice picks left
+			team1_left: true,
 		}, {
-			'type': 'pick_server', // Alice serves
-			'team_id': 0,
-			'player_id': 0,
+			type: 'pick_server', // Alice serves
+			team_id: 0,
+			player_id: 0,
 		}, {
-			'type': 'love-all'
+			type: 'love-all'
 		}];
 		press_score(presses, 18, 19);
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		});
 		var s = state_after(presses, SINGLES_SETUP);
@@ -601,7 +601,7 @@ _describe('calc_state', function() {
 		assert.equal(s.game.matchpoint, false);
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		});
 		s = state_after(presses, SINGLES_SETUP);
@@ -618,7 +618,7 @@ _describe('calc_state', function() {
 
 		var won_presses = presses.slice();
 		won_presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		});
 		s = state_after(won_presses, SINGLES_SETUP);
@@ -635,7 +635,7 @@ _describe('calc_state', function() {
 		assert.equal(s.court.serving_downwards, null);
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		});
 		s = state_after(presses, SINGLES_SETUP);
@@ -652,7 +652,7 @@ _describe('calc_state', function() {
 		assert.equal(s.court.serving_downwards, true);
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		});
 		s = state_after(presses, SINGLES_SETUP);
@@ -670,7 +670,7 @@ _describe('calc_state', function() {
 
 		won_presses = presses.slice();
 		won_presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		});
 		s = state_after(won_presses, SINGLES_SETUP);
@@ -687,43 +687,43 @@ _describe('calc_state', function() {
 		assert.equal(s.court.serving_downwards, null);
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		}); // 21-21
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		}); // 22-21
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		}); // 22-22
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		}); // 22-23
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		}); // 23-23
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		}); // 24-23
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		}); // 24-24
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		}); // 24-25
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		}); // 25-25
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		}); // 25-26
 		s = state_after(presses, SINGLES_SETUP);
@@ -739,23 +739,23 @@ _describe('calc_state', function() {
 		assert.equal(s.court.serving_downwards, true);
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		}); // 26-26
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		}); // 26-27
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		}); // 27-27
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		}); // 27-28
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		}); // 28-28
 		s = state_after(presses, SINGLES_SETUP);
@@ -771,7 +771,7 @@ _describe('calc_state', function() {
 		assert.equal(s.court.serving_downwards, false);
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		}); // 29-28
 		s = state_after(presses, SINGLES_SETUP);
@@ -789,7 +789,7 @@ _describe('calc_state', function() {
 
 		won_presses = presses.slice();
 		won_presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		}); // 30-28
 		s = state_after(won_presses, SINGLES_SETUP);
@@ -807,7 +807,7 @@ _describe('calc_state', function() {
 		assert.equal(s.court.serving_downwards, null);
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		}); // 29-29
 		s = state_after(presses, SINGLES_SETUP);
@@ -827,7 +827,7 @@ _describe('calc_state', function() {
 
 		won_presses = presses.slice();
 		won_presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		}); // 29-30
 		s = state_after(won_presses, SINGLES_SETUP);
@@ -850,7 +850,7 @@ _describe('calc_state', function() {
 		assert.equal(s.court.player_right_even, null);
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		}); // 30-29
 		s = state_after(presses, SINGLES_SETUP);
@@ -873,7 +873,7 @@ _describe('calc_state', function() {
 		assert.equal(s.court.player_right_even, null);
 
 		presses.push({
-			'type': 'postgame-confirm'
+			type: 'postgame-confirm'
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.deepEqual(s.match.finished_games[0].score, [30, 29]);
@@ -893,7 +893,7 @@ _describe('calc_state', function() {
 		assert.equal(s.court.serving_downwards, true);
 
 		presses.push({
-			'type': 'love-all'
+			type: 'love-all'
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.deepEqual(s.game.score, [0, 0]);
@@ -915,15 +915,15 @@ _describe('calc_state', function() {
 
 		press_score(presses, 9, 9);
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		});
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		});
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		});
 		s = state_after(presses, SINGLES_SETUP);
@@ -946,11 +946,11 @@ _describe('calc_state', function() {
 
 		press_score(presses, 9, 7);
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		});
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		});
 		s = state_after(presses, SINGLES_SETUP);
@@ -972,7 +972,7 @@ _describe('calc_state', function() {
 		assert.equal(s.court.player_right_even.name, 'Alice');
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		});
 		s = state_after(presses, SINGLES_SETUP);
@@ -994,7 +994,7 @@ _describe('calc_state', function() {
 		assert.equal(s.court.player_right_even.name, 'Alice');
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		});
 		s = state_after(presses, SINGLES_SETUP);
@@ -1016,20 +1016,20 @@ _describe('calc_state', function() {
 		assert.equal(s.court.player_right_even, null);
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		});
 		press_score(presses, 6, 6);
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		});
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		});
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		});
 		s = state_after(presses, SINGLES_SETUP);
@@ -1051,7 +1051,7 @@ _describe('calc_state', function() {
 		assert.equal(s.court.player_right_even, null);
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		});
 		s = state_after(presses, SINGLES_SETUP);
@@ -1073,7 +1073,7 @@ _describe('calc_state', function() {
 		assert.equal(s.court.player_right_even, null);
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		});
 		s = state_after(presses, SINGLES_SETUP);
@@ -1092,7 +1092,7 @@ _describe('calc_state', function() {
 		assert.equal(s.court.serving_downwards, null);
 
 		presses.push({
-			'type': 'postgame-confirm'
+			type: 'postgame-confirm'
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.deepEqual(s.match.finished_games[0].score, [30, 29]);
@@ -1114,7 +1114,7 @@ _describe('calc_state', function() {
 		assert.equal(s.court.serving_downwards, true);
 
 		presses.push({
-			'type': 'love-all'
+			type: 'love-all'
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.deepEqual(s.match.finished_games[0].score, [30, 29]);
@@ -1141,11 +1141,11 @@ _describe('calc_state', function() {
 
 		press_score(presses, 9, 9);
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left',
 		});
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left',
 		});
 		s = state_after(presses, SINGLES_SETUP);
@@ -1169,7 +1169,7 @@ _describe('calc_state', function() {
 
 		var alt_presses = presses.slice();
 		alt_presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left',
 		});
 		s = state_after(alt_presses, SINGLES_SETUP);
@@ -1191,7 +1191,7 @@ _describe('calc_state', function() {
 		assert.equal(s.court.player_right_odd, null);
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right',
 		});
 		s = state_after(presses, SINGLES_SETUP);
@@ -1214,11 +1214,11 @@ _describe('calc_state', function() {
 
 		press_score(presses, 10, 6);
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right',
 		});
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right',
 		});
 		s = state_after(presses, SINGLES_SETUP);
@@ -1240,7 +1240,7 @@ _describe('calc_state', function() {
 		assert.equal(s.court.player_right_odd, null);
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left',
 		});
 		s = state_after(presses, SINGLES_SETUP);
@@ -1262,7 +1262,7 @@ _describe('calc_state', function() {
 		assert.equal(s.court.player_right_odd, null);
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left',
 		});
 		s = state_after(presses, SINGLES_SETUP);
@@ -1285,7 +1285,7 @@ _describe('calc_state', function() {
 		assert.equal(s.court.player_right_even, null);
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left',
 		});
 		s = state_after(presses, SINGLES_SETUP);
@@ -1314,7 +1314,7 @@ _describe('calc_state', function() {
 		assert.strictEqual(s.match.team1_won, false);
 
 		presses.push({
-			'type': 'postmatch-confirm',
+			type: 'postmatch-confirm',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.strictEqual(s.game.won_by_score, true);
@@ -1328,26 +1328,26 @@ _describe('calc_state', function() {
 
 	_it('Correct announcements (doubles)', function() {
 		var presses = [{
-			'type': 'pick_side', // Andrew&Alice pick right
-			'team1_left': false,
+			type: 'pick_side', // Andrew&Alice pick right
+			team1_left: false,
 		}, {
-			'type': 'pick_server', // Alice serves
-			'team_id': 0,
-			'player_id': 1,
+			type: 'pick_server', // Alice serves
+			team_id: 0,
+			player_id: 1,
 		}, {
-			'type': 'pick_receiver', // Bob receives
-			'team_id': 1,
-			'player_id': 0,
+			type: 'pick_receiver', // Bob receives
+			team_id: 1,
+			player_id: 0,
 		}, {
-			'type': 'love-all'
+			type: 'love-all'
 		}];
 		press_score(presses, 18, 18);
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		});
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		});
 		var s = state_after(presses, DOUBLES_SETUP);
@@ -1373,7 +1373,7 @@ _describe('calc_state', function() {
 		assert.equal(s.court.player_right_odd.name, 'Andrew');
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		});
 		s = state_after(presses, DOUBLES_SETUP);
@@ -1398,7 +1398,7 @@ _describe('calc_state', function() {
 		assert.equal(s.court.player_right_even.name, 'Andrew');
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		});
 		s = state_after(presses, DOUBLES_SETUP);
@@ -1424,7 +1424,7 @@ _describe('calc_state', function() {
 		assert.equal(s.match.finished_games.length, 0);
 
 		presses.push({
-			'type': 'postgame-confirm',
+			type: 'postgame-confirm',
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.deepEqual(s.game.score, [0, 0]);
@@ -1451,9 +1451,9 @@ _describe('calc_state', function() {
 		assert.deepEqual(s.match.finished_games[0].score, [21, 19]);
 
 		presses.push({
-			'type': 'pick_server',
-			'team_id': 0,
-			'player_id': 0, // Andrew serves
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0, // Andrew serves
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.deepEqual(s.game.score, [0, 0]);
@@ -1480,9 +1480,9 @@ _describe('calc_state', function() {
 		assert.deepEqual(s.match.finished_games[0].score, [21, 19]);
 
 		presses.push({
-			'type': 'pick_receiver',
-			'team_id': 1,
-			'player_id': 0, // Bob receives
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 0, // Bob receives
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.deepEqual(s.game.score, [0, 0]);
@@ -1509,7 +1509,7 @@ _describe('calc_state', function() {
 		assert.deepEqual(s.match.finished_games[0].score, [21, 19]);
 
 		presses.push({
-			'type': 'love-all',
+			type: 'love-all',
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.deepEqual(s.game.score, [0, 0]);
@@ -1536,12 +1536,12 @@ _describe('calc_state', function() {
 		assert.deepEqual(s.match.finished_games[0].score, [21, 19]);
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		});
 		press_score(presses, 17, 17);
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		});
 		s = state_after(presses, DOUBLES_SETUP);
@@ -1568,15 +1568,15 @@ _describe('calc_state', function() {
 		assert.deepEqual(s.match.finished_games[0].score, [21, 19]);
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		});
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		});
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		});
 		s = state_after(presses, DOUBLES_SETUP);
@@ -1604,7 +1604,7 @@ _describe('calc_state', function() {
 
 		var alt_presses = presses.slice();
 		alt_presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		});
 		s = state_after(alt_presses, DOUBLES_SETUP);
@@ -1631,7 +1631,7 @@ _describe('calc_state', function() {
 		assert.deepEqual(s.match.finished_games[0].score, [21, 19]);
 
 		alt_presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		});
 		s = state_after(alt_presses, DOUBLES_SETUP);
@@ -1658,7 +1658,7 @@ _describe('calc_state', function() {
 		assert.deepEqual(s.match.finished_games[0].score, [21, 19]);
 
 		alt_presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		});
 		s = state_after(alt_presses, DOUBLES_SETUP);
@@ -1687,7 +1687,7 @@ _describe('calc_state', function() {
 		assert.equal(s.match.finish_confirmed, false);
 
 		alt_presses.push({
-			'type': 'postmatch-confirm',
+			type: 'postmatch-confirm',
 		});
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(s.match.finished, true);
@@ -1699,7 +1699,7 @@ _describe('calc_state', function() {
 		assert.deepEqual(s.match.finished_games[1].score, [22, 20]);
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		});
 		s = state_after(presses, DOUBLES_SETUP);
@@ -1727,7 +1727,7 @@ _describe('calc_state', function() {
 		assert.deepEqual(s.match.finished_games[0].score, [21, 19]);
 
 		presses.push({
-			'type': 'postgame-confirm',
+			type: 'postgame-confirm',
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.deepEqual(s.game.score, [0, 0]);
@@ -1755,9 +1755,9 @@ _describe('calc_state', function() {
 		assert.deepEqual(s.match.finished_games[1].score, [19, 21]);
 
 		presses.push({
-			'type': 'pick_server',
-			'team_id': 1,
-			'player_id': 1, // Birgit serves
+			type: 'pick_server',
+			team_id: 1,
+			player_id: 1, // Birgit serves
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.deepEqual(s.game.score, [0, 0]);
@@ -1785,9 +1785,9 @@ _describe('calc_state', function() {
 		assert.deepEqual(s.match.finished_games[1].score, [19, 21]);
 
 		presses.push({
-			'type': 'pick_receiver',
-			'team_id': 0,
-			'player_id': 1, // Alice receives
+			type: 'pick_receiver',
+			team_id: 0,
+			player_id: 1, // Alice receives
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.deepEqual(s.game.score, [0, 0]);
@@ -1815,7 +1815,7 @@ _describe('calc_state', function() {
 		assert.deepEqual(s.match.finished_games[1].score, [19, 21]);
 
 		presses.push({
-			'type': 'love-all',
+			type: 'love-all',
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.deepEqual(s.game.score, [0, 0]);
@@ -1842,12 +1842,12 @@ _describe('calc_state', function() {
 		assert.deepEqual(s.match.finished_games[1].score, [19, 21]);
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		});
 		press_score(presses, 8, 8);
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		});
 		s = state_after(presses, DOUBLES_SETUP);
@@ -1875,7 +1875,7 @@ _describe('calc_state', function() {
 		assert.deepEqual(s.match.finished_games[1].score, [19, 21]);
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		});
 		s = state_after(presses, DOUBLES_SETUP);
@@ -1903,7 +1903,7 @@ _describe('calc_state', function() {
 		assert.deepEqual(s.match.finished_games[1].score, [19, 21]);
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		});
 		s = state_after(presses, DOUBLES_SETUP);
@@ -1931,7 +1931,7 @@ _describe('calc_state', function() {
 		assert.deepEqual(s.match.finished_games[1].score, [19, 21]);
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		});
 		s = state_after(presses, DOUBLES_SETUP);
@@ -1960,7 +1960,7 @@ _describe('calc_state', function() {
 
 		press_score(presses, 7, 7);
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		});
 		s = state_after(presses, DOUBLES_SETUP);
@@ -1988,7 +1988,7 @@ _describe('calc_state', function() {
 		assert.deepEqual(s.match.finished_games[1].score, [19, 21]);
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		});
 		s = state_after(presses, DOUBLES_SETUP);
@@ -2016,7 +2016,7 @@ _describe('calc_state', function() {
 		assert.deepEqual(s.match.finished_games[1].score, [19, 21]);
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		});
 		s = state_after(presses, DOUBLES_SETUP);
@@ -2045,7 +2045,7 @@ _describe('calc_state', function() {
 		assert.deepEqual(s.match.finished_games[1].score, [19, 21]);
 
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		});
 		s = state_after(presses, DOUBLES_SETUP);
@@ -2075,7 +2075,7 @@ _describe('calc_state', function() {
 		assert.deepEqual(s.match.finished_games[1].score, [19, 21]);
 
 		presses.push({
-			'type': 'postmatch-confirm',
+			type: 'postmatch-confirm',
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(s.match.finished, true);
@@ -2094,8 +2094,8 @@ _describe('calc_state', function() {
 		assert.equal(s.redo_possible, false);
 
 		var presses = [{
-			'type': 'pick_side', // Andrew&Alice pick right
-			'team1_left': false,
+			type: 'pick_side', // Andrew&Alice pick right
+			team1_left: false,
 		}];
 		var s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(s.undo_possible, true);
@@ -2103,7 +2103,7 @@ _describe('calc_state', function() {
 
 		var presses_test = presses.slice();
 		presses_test.push({
-			'type': 'undo'
+			type: 'undo'
 		});
 		s = state_after(presses_test, DOUBLES_SETUP);
 		assert.equal(s.undo_possible, false);
@@ -2111,7 +2111,7 @@ _describe('calc_state', function() {
 		assert.deepEqual(s.flattened_presses, []);
 
 		presses_test.push({
-			'type': 'redo'
+			type: 'redo'
 		});
 		s = state_after(presses_test, DOUBLES_SETUP);
 		assert.equal(s.undo_possible, true);
@@ -2119,38 +2119,38 @@ _describe('calc_state', function() {
 		assert.deepEqual(s.flattened_presses, presses);
 
 		presses.push({
-			'type': 'pick_server', // Birgit serves
-			'team_id': 1,
-			'player_id': 1,
+			type: 'pick_server', // Birgit serves
+			team_id: 1,
+			player_id: 1,
 		});
 		presses.push({
-			'type': 'pick_receiver', // Andrew receives
-			'team_id': 0,
-			'player_id': 0,
+			type: 'pick_receiver', // Andrew receives
+			team_id: 0,
+			player_id: 0,
 		});
 		presses.push({
-			'type': 'love-all'
+			type: 'love-all'
 		});
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		});
 		var presses_backup = presses.slice();
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		});
 		var presses_backup2 = presses.slice();
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		});
 		var presses_backup3 = presses.slice();
 		presses.push({
-			'type': 'undo',
+			type: 'undo',
 		});
 		presses.push({
-			'type': 'undo',
+			type: 'undo',
 		});
 
 		s = state_after(presses, DOUBLES_SETUP);
@@ -2179,7 +2179,7 @@ _describe('calc_state', function() {
 		assert.equal(s.court.player_right_odd.name, 'Alice');
 
 		presses.push({
-			'type': 'redo',
+			type: 'redo',
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(s.undo_possible, true);
@@ -2207,7 +2207,7 @@ _describe('calc_state', function() {
 		assert.equal(s.court.player_right_odd.name, 'Alice');
 
 		presses.push({
-			'type': 'undo',
+			type: 'undo',
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(s.undo_possible, true);
@@ -2235,7 +2235,7 @@ _describe('calc_state', function() {
 		assert.equal(s.court.player_right_odd.name, 'Alice');
 
 		presses.push({
-			'type': 'redo',
+			type: 'redo',
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(s.undo_possible, true);
@@ -2263,7 +2263,7 @@ _describe('calc_state', function() {
 		assert.equal(s.court.player_right_odd.name, 'Alice');
 
 		presses.push({
-			'type': 'redo',
+			type: 'redo',
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(s.undo_possible, true);
@@ -2293,32 +2293,32 @@ _describe('calc_state', function() {
 
 	_it('Retiring', function() {
 		var presses = [{
-			'type': 'pick_side', // Andrew&Alice pick left
-			'team1_left': true,
+			type: 'pick_side', // Andrew&Alice pick left
+			team1_left: true,
 		}];
 		presses.push({
-			'type': 'pick_server', // Andrew serves
-			'team_id': 0,
-			'player_id': 0,
+			type: 'pick_server', // Andrew serves
+			team_id: 0,
+			player_id: 0,
 		});
 		presses.push({
-			'type': 'pick_receiver', // Bob receives
-			'team_id': 1,
-			'player_id': 0,
+			type: 'pick_receiver', // Bob receives
+			team_id: 1,
+			player_id: 0,
 		});
 		presses.push({
-			'type': 'love-all'
+			type: 'love-all'
 		});
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'right'
 		});
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		});
 		presses.push({
-			'type': 'score',
+			type: 'score',
 			'side': 'left'
 		});
 
@@ -2378,21 +2378,21 @@ _describe('calc_state', function() {
 
 	_it('Disqualification', function() {
 		var presses = [{
-			'type': 'pick_side', // Andrew&Alice pick left
-			'team1_left': true,
+			type: 'pick_side', // Andrew&Alice pick left
+			team1_left: true,
 		}];
 		presses.push({
-			'type': 'pick_server', // Andrew serves
-			'team_id': 0,
-			'player_id': 0,
+			type: 'pick_server', // Andrew serves
+			team_id: 0,
+			player_id: 0,
 		});
 		presses.push({
-			'type': 'pick_receiver', // Bob receives
-			'team_id': 1,
-			'player_id': 0,
+			type: 'pick_receiver', // Bob receives
+			team_id: 1,
+			player_id: 0,
 		});
 		presses.push({
-			'type': 'love-all'
+			type: 'love-all'
 		});
 		press_score(presses, 3, 1);
 
@@ -2448,5 +2448,72 @@ _describe('calc_state', function() {
 		assert.strictEqual(s.match.team1_won, false);
 		assert.deepEqual(s.game.score, [3, 1]);
 		assert.strictEqual(s.game.won_by_score, false);
+	});
+
+	_it('timer should continue after red card at 11', function() {
+		var presses = [{
+			type: 'pick_side', // Andrew&Alice pick left
+			team1_left: true,
+		}];
+		presses.push({
+			type: 'pick_server', // Andrew serves
+			team_id: 0,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'pick_receiver', // Bob receives
+			team_id: 1,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'love-all'
+		});
+		press_score(presses, 1, 0);
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert(!s.timer);
+
+		press_score(presses, 10, 5);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert(s.timer);
+
+		presses.push({
+			type: 'red-card',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert(s.timer);
+
+		presses.push({
+			type: 'red-card',
+			team_id: 0,
+			player_id: 1,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert(s.timer);
+
+		press_score(presses, 0, 1);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert(! s.timer);
+	});
+});
+
+_describe('calc helper functions', function() {
+	_it('game_winner', function() {
+		assert.equal(bup.calc.game_winner(21, 19), 'left');
+		assert.equal(bup.calc.game_winner(19, 21), 'right');
+		assert.equal(bup.calc.game_winner(22, 20), 'left');
+		assert.equal(bup.calc.game_winner(25, 27), 'right');
+		assert.equal(bup.calc.game_winner(29, 30), 'right');
+		assert.equal(bup.calc.game_winner(28, 30), 'right');
+		assert.equal(bup.calc.game_winner(0, 0), 'inprogress');
+		assert.equal(bup.calc.game_winner(20, 19), 'inprogress');
+		assert.equal(bup.calc.game_winner(25, 26), 'inprogress');
+		assert.equal(bup.calc.game_winner(29, 29), 'inprogress');
+		assert.equal(bup.calc.game_winner(22, 19), 'invalid');
+		assert.equal(bup.calc.game_winner(32, 30), 'invalid');
+		assert.equal(bup.calc.game_winner(30, 31), 'invalid');
+		assert.equal(bup.calc.game_winner(30, 30), 'invalid');
+		assert.equal(bup.calc.game_winner(28, 25), 'invalid');
 	});
 });
