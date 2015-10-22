@@ -1298,21 +1298,90 @@ _describe('scoresheet generation', function() {
 		});
 	});
 
-	_it('editmode', function() {
-		var start_presses = []
+	_it('editmode set-score', function() {
+		var presses = [];
 		presses.push({
 			type: 'editmode_set-score',
 			score: [12, 5],
+			by_side: false,
+		});
+		presses.push({
+			type: 'pick_side',
+			team1_left: true,
+		});
+		presses.push({
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'pick_server',
+			team_id: 1,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'love-all',
 		});
 		var cells = _scoresheet_cells(presses, DOUBLES_SETUP);
 		_assert_cell(cells, {
 			table: 0,
-			col: 32,
-			type: 'circle',
-			score: [21, 10],
-			width: 3
+			col: 0,
+			type: 'editmode-sign',
+			editmode_related: true,
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 0,
+			row: 0,
+			type: 'score',
+			val: 12,
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 0,
+			row: 2,
+			type: 'score',
+			val: 5,
 		});
 
-		// TODO what if we change left/right later?
+		press_score(presses, 0, 1);
+		presses.push({
+			type: 'editmode_set-score',
+			score: [20, 4],
+		});
+		presses.push({
+			type: 'editmode_set-score',
+			score: [2, 14],
+		});
+		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 1,
+			row: 3,
+			type: 'score',
+			val: 6,
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 2,
+			type: 'editmode-sign',
+			editmode_related: true,
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 2,
+			row: 0,
+			type: 'score',
+			val: 2,
+			editmode_related: true,
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 2,
+			row: 3,
+			type: 'score',
+			val: 14,
+			editmode_related: true,
+		});
 	});
 });

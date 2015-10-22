@@ -1,5 +1,5 @@
-'use strict';
 var network = (function() {
+'use strict';
 
 function get_netw() {
 	return networks.btde || networks.courtspot;
@@ -21,7 +21,7 @@ function calc_score(s) {
 	s.match.finished_games.forEach(function(fg) {
 		scores.push(fg.score.slice());
 	});
-	if (s.game.started || (s.game.score[0] != 0) || (s.game.score[1] != 0)) {
+	if (s.game.started || (s.game.score[0] > 0) || (s.game.score[1] > 0)) {
 		scores.push(s.game.score.slice());
 	}
 	if (s.match.finished && !s.match.won_by_score) {
@@ -119,7 +119,7 @@ function ui_render_matchlist(s, event) {
 				return '';
 			}
 
-			if ((network_score.length == 1) && (network_score[0][0] == 0) && (network_score[0][1] == 0)) {
+			if ((network_score.length == 1) && (network_score[0][0] === 0) && (network_score[0][1] === 0)) {
 				return '';
 			}
 
@@ -156,7 +156,7 @@ function ui_list_matches(s, silent) {
 	_start_list_matches(s);
 
 	var status_container = $('.setup_network_status');
-	if (!silent && status_container.find('.setup_network_matches_loading').length == 0) {
+	if (!silent && status_container.find('.setup_network_matches_loading').length === 0) {
 		var loading = $('<div class="setup_network_matches_loading"><div class="loading-icon"></div><span>Lade Spiele ...</span></div>');
 		status_container.append(loading);
 	}

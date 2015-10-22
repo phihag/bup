@@ -1,0 +1,8 @@
+{
+	"newcap": false,
+	"jquery": true,
+	"globals": {
+		"document": false,
+		"window": false
+	}
+}

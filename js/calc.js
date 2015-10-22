@@ -1,6 +1,5 @@
-'use strict';
-
 var calc = (function() {
+'use strict';
 
 function _is_winner(candidate, other) {
 	return (
@@ -156,12 +155,12 @@ function recalc_after_score(s, team_id, press) {
 					s.game.teams_player1_even[team_id] = !s.game.teams_player1_even[team_id];
 				}
 			} else {
-				var even_score = s.game.score[team_id] % 2 == 0;
+				var even_score = (s.game.score[team_id] % 2) === 0;
 				s.game.teams_player1_even[team_id] = even_score;
 				s.game.teams_player1_even[1 - team_id] = even_score;
 			}
 		}
-		s.game.team1_serving = team_id == 0;
+		s.game.team1_serving = team_id === 0;
 	}
 
 	if (team_id !== null) {
@@ -194,7 +193,7 @@ function recalc_after_score(s, team_id, press) {
 }
 
 function score(s, team_id, press) {
-	var team1_scored = team_id == 0;
+	var team1_scored = team_id === 0;
 	s.game.service_over = team1_scored != s.game.team1_serving;
 	s.game.score[team_id] += 1;
 
@@ -218,10 +217,16 @@ function calc_press(s, press) {
 		if (((s.game.score[0] > 0) || (s.game.score[1] > 0)) && s.game.team1_left) {
 			// A score > 0 is only possible in case of a manually edited score.
 			// Even red cards don't have that effect, see RTTO 3.7.7.
-			// Therefore, switch sides if team 1 is right.)
-			s.game.score = [s.game.score[1], s.game.score[0]];
+			// Therefore, switch ends if team 1 is right.
+
+			if (s.game.editmode_set_score_by_side) {
+				// (If the edited score was intended to be by end instead of by team)
+				s.game.score = [s.game.score[1], s.game.score[0]];
+			}
 			s.match.finished_games.forEach(function(g, i) {
-				s.match.finished_games[i].score = [g.score[1], g.score[0]];
+				if (g.editmode_set_finished_score_by_side) {
+					s.match.finished_games[i].score = [g.score[1], g.score[0]];
+				}
 			});
 		}
 		break;
@@ -234,7 +239,7 @@ function calc_press(s, press) {
 			s.game.start_receiver_player_id = 0;
 		}
 		if (s.game.team1_serving === null) {
-			s.game.team1_serving = s.game.start_server_team_id == 0;
+			s.game.team1_serving = s.game.start_server_team_id === 0;
 		}
 		break;
 	case 'pick_receiver':
@@ -297,7 +302,7 @@ function calc_press(s, press) {
 	case 'red-card':
 		press.char = 'F';
 		if (! s.match.finished) {
-			if ((! s.game.started) && (s.match.finished_games.length == 0)) { // Before match
+			if ((! s.game.started) && (s.match.finished_games.length === 0)) { // Before match
 				// See RTTO 3.7.7:
 				// Misconduct before and after the match (...)
 				// shall have no effect on the score of the match.
@@ -317,7 +322,7 @@ function calc_press(s, press) {
 	case 'retired':
 		press.char = 'A';
 		s.match.marks.push(press);
-		s.game.team1_won = press.team_id != 0;
+		s.game.team1_won = press.team_id !== 0;
 		s.match.team1_won = s.game.team1_won;
 		s.game.won_by_score = false;
 		s.game.finished = true;
@@ -332,7 +337,7 @@ function calc_press(s, press) {
 		s.match.marks.push(press);
 		s.game.won_by_score = false;
 		s.game.finished = true;
-		s.game.team1_won = press.team_id != 0;
+		s.game.team1_won = press.team_id !== 0;
 		s.match.team1_won = s.game.team1_won;
 		s.match.finished = true;
 		s.game.team1_serving = null;
@@ -364,6 +369,7 @@ function calc_press(s, press) {
 		s.game.team1_won = null;
 		s.match.finished = false;
 		s.match.team1_won = null;
+		s.game.editmode_set_score_by_side = !! press.by_side;
 		recalc_after_score(s, s.game.team1_serving ? 0 : 1, press);
 		break;
 	case 'editmode_set-finished_games':
@@ -373,6 +379,7 @@ function calc_press(s, press) {
 				finished: true,
 				team1_won: _is_winner(score[0], score[1]),
 				score: score,
+				editmode_set_finished_score_by_side: !! press.by_side,
 			};
 		});
 		s.match.finished = false;
@@ -429,13 +436,13 @@ function state(s) {
 
 	if (! s.game.finished) {
 		if ((s.game.team1_serving) && (((s.game.score[0] === 20) && (s.game.score[1] < 20)) || (s.game.score[0] == 29))) {
-			if (s.match.game_score[0] == 0) {
+			if (s.match.game_score[0] === 0) {
 				s.game.gamepoint = true;
 			} else {
 				s.game.matchpoint = true;
 			}
 		} else if ((!s.game.team1_serving) && (((s.game.score[1] === 20) && (s.game.score[0] < 20)) || (s.game.score[1] == 29))) {
-			if (s.match.game_score[1] == 0) {
+			if (s.match.game_score[1] === 0) {
 				s.game.gamepoint = true;
 			} else {
 				s.game.matchpoint = true;
@@ -476,7 +483,7 @@ function state(s) {
 	if ((! s.game.finished) && (s.game.team1_serving !== null) && (s.game.team1_left !== null)) {
 		s.court.left_serving = s.game.team1_serving == s.game.team1_left;
 		var serving_score = s.game.score[s.game.team1_serving ? 0 : 1];
-		s.court.serving_downwards = (serving_score % 2 == 0) != s.court.left_serving;
+		s.court.serving_downwards = (serving_score % 2 === 0) != s.court.left_serving;
 	}
 
 	s.match.announce_pregame = (
@@ -527,7 +534,7 @@ return {
 	calc_press: calc_press,
 	game_winner: game_winner,
 	match_winner: match_winner,
-}
+};
 
 })();
 

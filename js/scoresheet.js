@@ -1,6 +1,6 @@
+var scoresheet = (function() {
 'use strict';
 
-var scoresheet = (function() {
 function _svg_align_vcenter(text, vcenter) {
 	var bbox = text.getBBox();
 	var text_center = bbox.y + bbox.height / 2;
@@ -15,6 +15,20 @@ function _svg_align_hcenter(text, hcenter) {
 	var x_str = text.getAttribute('x');
 	var cur_x = (x_str) ? parseFloat(text.getAttribute('x')) : 0;
 	text.setAttribute('x', cur_x - (text_center - hcenter));
+}
+
+function _svg_el(tagName, attrs, parent, text) {
+	var el = document.createElementNS('http://www.w3.org/2000/svg', tagName);
+	for (var key in attrs) {
+		if (attrs.hasOwnProperty(key)) {
+			el.setAttribute(key, attrs[key]);
+		}
+	}
+	if ((text !== undefined) && (text !== null) && (text !== '')) {
+		el.appendChild(document.createTextNode(text));
+	}
+	parent.appendChild(el);
+	return el;
 }
 
 function _parse_match(state, col_count) {
@@ -90,6 +104,47 @@ function _parse_match(state, col_count) {
 	calc.init_calc(s);
 	calc.undo(s);
 	s.flattened_presses.forEach(function(press) {
+		// Since using "let" would break on a lot of browser, define these variables here
+		var score_team;
+		var prev_cell;
+		var row;
+
+		function _clean_editmode() {
+			while (s.scoresheet_game.cells.length > 0 && s.scoresheet_game.cells[s.scoresheet_game.cells.length - 1].editmode_related) {
+				var c = s.scoresheet_game.cells.pop();
+				s.scoresheet_game.col_idx = c.col;
+			}
+		}
+
+		function _loveall(extra_attrs) {
+			var cell = {
+				type: 'score',
+				col: s.scoresheet_game.col_idx,
+				row: 2 * s.scoresheet_game.serving_team + s.scoresheet_game.servers[s.scoresheet_game.serving_team],
+				val: s.game.score[s.scoresheet_game.serving_team],
+			};
+			if (extra_attrs) {
+				utils.obj_update(cell, extra_attrs);
+			}
+			s.scoresheet_game.cells.push(cell);
+			var receiving_team = 1 - s.scoresheet_game.serving_team;
+			var receiver_row = (
+				2 * receiving_team +
+				(s.setup.is_doubles ? s.scoresheet_game.servers[receiving_team] : 0)
+			);
+			cell = {
+				type: 'score',
+				col: s.scoresheet_game.col_idx,
+				row: receiver_row,
+				val: s.game.score[1 - s.scoresheet_game.serving_team],
+			};
+			if (extra_attrs) {
+				utils.obj_update(cell, extra_attrs);
+			}
+			s.scoresheet_game.cells.push(cell);
+			s.scoresheet_game.col_idx++;
+		}
+
 		switch (press.type) {
 		case 'pick_server':
 			s.scoresheet_game.servers[press.team_id] = press.player_id;
@@ -115,24 +170,7 @@ function _parse_match(state, col_count) {
 			});
 			break;
 		case 'love-all':
-			s.scoresheet_game.cells.push({
-				col: s.scoresheet_game.col_idx,
-				row: 2 * s.scoresheet_game.serving_team + s.scoresheet_game.servers[s.scoresheet_game.serving_team],
-				val: s.game.score[s.scoresheet_game.serving_team],
-				type: 'score',
-			});
-			var receiving_team = 1 - s.scoresheet_game.serving_team;
-			var receiver_row = (
-				2 * receiving_team +
-				(s.setup.is_doubles ? s.scoresheet_game.servers[receiving_team] : 0)
-			);
-			s.scoresheet_game.cells.push({
-				col: s.scoresheet_game.col_idx,
-				row: receiver_row,
-				val: s.game.score[1 - s.scoresheet_game.serving_team],
-				type: 'score',
-			});
-			s.scoresheet_game.col_idx++;
+			_loveall();
 			break;
 		case 'postgame-confirm':
 			_layout(s.scoresheet_game);
@@ -150,8 +188,8 @@ function _parse_match(state, col_count) {
 			// In doubles we'll get future pick-server and pick-receiver events
 			break;
 		case 'score':
-			var score_team = (s.game.team1_left == (press.side == 'left')) ? 0 : 1;
-			if (s.game.team1_serving != (score_team == 0)) {
+			score_team = (s.game.team1_left == (press.side == 'left')) ? 0 : 1;
+			if (s.game.team1_serving != (score_team === 0)) {
 				// Service over
 				if (s.setup.is_doubles) {
 					s.scoresheet_game.servers[score_team] = 1 - s.scoresheet_game.servers[score_team];
@@ -167,8 +205,8 @@ function _parse_match(state, col_count) {
 			break;
 		case 'red-card':
 			if (! s.game.finished) {
-				var score_team = 1 - press.team_id;
-				if (s.game.team1_serving != (score_team == 0)) {
+				score_team = 1 - press.team_id;
+				if (s.game.team1_serving != (score_team === 0)) {
 					// Service over
 					if (s.setup.is_doubles) {
 						s.scoresheet_game.servers[score_team] = 1 - s.scoresheet_game.servers[score_team];
@@ -204,7 +242,7 @@ function _parse_match(state, col_count) {
 		case 'overrule':
 			var found = false;
 			for (var i = s.scoresheet_game.cells.length - 1;i >= 0;i--) {
-				var prev_cell = s.scoresheet_game.cells[i];
+				prev_cell = s.scoresheet_game.cells[i];
 				if (prev_cell.type == 'score') {
 					s.scoresheet_game.cells.push({
 						row: ({0:1, 1:0, 2: 3, 3:2})[prev_cell.row],
@@ -227,9 +265,9 @@ function _parse_match(state, col_count) {
 			break;
 		case 'referee':
 			// Guess row
-			var row = 1;
+			row = 1;
 			if (s.scoresheet_game.cells.length > 0) {
-				var prev_cell = s.scoresheet_game.cells[s.scoresheet_game.cells.length - 1];
+				prev_cell = s.scoresheet_game.cells[s.scoresheet_game.cells.length - 1];
 				if ((typeof prev_cell.val == 'string') && (typeof prev_cell.row == 'number')) {
 					row = prev_cell.row;
 				}
@@ -251,11 +289,10 @@ function _parse_match(state, col_count) {
 			s.scoresheet_game.col_idx++;
 			break;
 		case 'correction':
-			for (var i = s.scoresheet_game.cells.length - 1;i >= 0;i--) {
-				var prev_cell = s.scoresheet_game.cells[i];
+			for (var search_col_idx = s.scoresheet_game.cells.length - 1;search_col_idx >= 0;search_col_idx--) {
+				prev_cell = s.scoresheet_game.cells[search_col_idx];
 				if (prev_cell.type == 'score') {
-					var row;
-					if ((prev_cell.row < 2) == (press.team_id == 0)) {
+					if ((prev_cell.row < 2) == (press.team_id === 0)) {
 						// server's mistake
 						row = ({0:1, 1:0, 2:3, 3:2})[prev_cell.row];
 					} else {
@@ -308,6 +345,17 @@ function _parse_match(state, col_count) {
 			s.scoresheet_game.circle = 'suppressed';
 			s.scoresheet_game.cells.push(cell);
 			s.scoresheet_game.col_idx += cell.width;
+			break;
+		case 'editmode_set-score':
+			_clean_editmode();
+			s.scoresheet_game.cells.push({
+				col: s.scoresheet_game.col_idx,
+				type: 'editmode-sign',
+				editmode_related: true,
+			});
+			if (s.scoresheet_game.serving_team !== null) {
+				_loveall({editmode_related: true});
+			}
 			break;
 		}
 
@@ -434,8 +482,6 @@ function ui_show() {
 		});
 	}
 
-
-
 	// Big table(s)
 	var all_players;
 	if (state.setup.is_doubles) {
@@ -468,87 +514,89 @@ function ui_show() {
 	var cell_width = (table_width - (cols_left - table_left)) / SCORESHEET_COL_COUNT;
 	var cell_height = table_height / 4;
 	for (var table_idx = 0;table_idx < 6;table_idx++) {
+		// Due to absence of let, declare vars here
+		var text;
+
 		var table_top = 57 + 22 * table_idx;
 
-		var shade = document.createElementNS("http://www.w3.org/2000/svg", "rect")
-		shade.setAttribute('class', 'shade');
-		shade.setAttribute('x', table_left);
-		shade.setAttribute('y', table_top + table_height / 2);
-		shade.setAttribute('width', table_width);
-		shade.setAttribute('height', table_height / 2);
-		t.appendChild(shade);
 
-		var rect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
-		rect.setAttribute('class', 'table');
-		rect.setAttribute('x', table_left);
-		rect.setAttribute('y', table_top);
-		rect.setAttribute('width', table_width);
-		rect.setAttribute('height', table_height);
-		t.appendChild(rect);
+		_svg_el('rect', {
+			'class': 'shade',
+			'x': table_left,
+			'y': table_top + table_height / 2,
+			'width': table_width,
+			'height': table_height / 2,
+		}, t);
+
+		_svg_el('rect', {
+			'class': 'table',
+			'x': table_left,
+			'y': table_top,
+			'width': table_width,
+			'height': table_height,
+		}, t);
 
 		// Horizontal lines
-		var line = document.createElementNS("http://www.w3.org/2000/svg", 'line');
-		line.setAttribute('class', 'table_line');
-		line.setAttribute('x1', table_left);
-		line.setAttribute('x2', table_left + table_width);
-		line.setAttribute('y1', table_top + cell_height);
-		line.setAttribute('y2', table_top + cell_height);
-		t.appendChild(line);
-
-		line = document.createElementNS("http://www.w3.org/2000/svg", 'line');
-		line.setAttribute('class', 'table_thick-line');
-		line.setAttribute('x1', table_left);
-		line.setAttribute('x2', table_left + table_width);
-		line.setAttribute('y1', table_top + 2 * cell_height);
-		line.setAttribute('y2', table_top + 2 * cell_height);
-		t.appendChild(line);
-
-		line = document.createElementNS("http://www.w3.org/2000/svg", 'line');
-		line.setAttribute('class', 'table_line');
-		line.setAttribute('x1', table_left);
-		line.setAttribute('x2', table_left + table_width);
-		line.setAttribute('y1', table_top + 3 * cell_height);
-		line.setAttribute('y2', table_top + 3 * cell_height);
-		t.appendChild(line);
+		_svg_el('line', {
+			'class': 'table_line',
+			'x1': table_left,
+			'x2': table_left + table_width,
+			'y1': table_top + cell_height,
+			'y2': table_top + cell_height,
+		}, t);
+		_svg_el('line', {
+			'class': 'table_thick-line',
+			'x1': table_left,
+			'x2': table_left + table_width,
+			'y1': table_top + 2 * cell_height,
+			'y2': table_top + 2 * cell_height,
+		}, t);
+		_svg_el('line', {
+			'class': 'table_line',
+			'x1': table_left,
+			'x2': table_left + table_width,
+			'y1': table_top + 3 * cell_height,
+			'y2': table_top + 3 * cell_height,
+		}, t);
 
 		// First vertical divider line for Server/Receiver marks
-		line = document.createElementNS("http://www.w3.org/2000/svg", 'line');
-		line.setAttribute('class', 'table_line');
-		line.setAttribute('x1', cols_left - cell_width);
-		line.setAttribute('x2', cols_left - cell_width);
-		line.setAttribute('y1', table_top);
-		line.setAttribute('y2', table_top + table_height);
-		t.appendChild(line);
+		_svg_el('line', {
+			'class': 'table_line',
+			'x1': cols_left - cell_width,
+			'x2': cols_left - cell_width,
+			'y1': table_top,
+			'y2': table_top + table_height,
+		}, t);
 
-		line = document.createElementNS("http://www.w3.org/2000/svg", 'line');
-		line.setAttribute('class', 'table_thick-line');
-		line.setAttribute('x1', cols_left);
-		line.setAttribute('x2', cols_left);
-		line.setAttribute('y1', table_top);
-		line.setAttribute('y2', table_top + table_height);
-		t.appendChild(line);
+		_svg_el('line', {
+			'class': 'table_thick-line',
+			'x1': cols_left,
+			'x2': cols_left,
+			'y1': table_top,
+			'y2': table_top + table_height,
+		}, t);
 
-		all_players.forEach(function(player, i) {
+		for (var player_idx = 0;player_idx < all_players.length;player_idx++) {
+			var player = all_players[player_idx];
 			if (! player) {
 				return;
 			}
 
-			var text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
-			text.setAttribute('class', 'table_name');
-			text.setAttribute('x', table_left + padding_left);
-			text.appendChild(document.createTextNode(player.name));
-			t.appendChild(text);
-			_svg_align_vcenter(text, table_top + i * cell_height + cell_height / 2);
-		});
+			text = _svg_el('text', {
+				'class': 'table_name',
+				'x': table_left + padding_left,
+			}, t, player.name);
+			_svg_align_vcenter(text, table_top + player_idx * cell_height + cell_height / 2);
+		}
 
 		for (var i = 1;i < SCORESHEET_COL_COUNT;i++) {
-			line = document.createElementNS("http://www.w3.org/2000/svg", 'line');
-			line.setAttribute('class', 'table_line');
-			line.setAttribute('x1', cols_left + i * cell_width);
-			line.setAttribute('x2', cols_left + i * cell_width);
-			line.setAttribute('y1', table_top);
-			line.setAttribute('y2', table_top + table_height);
-			t.appendChild(line);
+			_svg_el('line', {
+				'class': 'table_line',
+				'x1': cols_left + i * cell_width,
+				'x2': cols_left + i * cell_width,
+				'y1': table_top,
+				'y2': table_top + table_height,
+			}, t);
 		}
 	}
 
@@ -557,48 +605,44 @@ function ui_show() {
 
 		switch (cell.type) {
 		case 'dash':
-			var line = document.createElementNS("http://www.w3.org/2000/svg", 'line');
-			line.setAttribute('class', 'table_20all_dash');
-			line.setAttribute('x1', cols_left + cell.col * cell_width);
-			line.setAttribute('x2', cols_left + cell.col * cell_width + cell_width);
-			line.setAttribute('y1', table_top + table_height);
-			line.setAttribute('y2', table_top);
-			t.appendChild(line);
+			_svg_el('line', {
+				'class': 'table_20all_dash',
+				'x1': cols_left + cell.col * cell_width,
+				'x2': cols_left + cell.col * cell_width + cell_width,
+				'y1': table_top + table_height,
+				'y2': table_top,
+			}, t);
 			break;
 		case 'circle':
 			var cx = cols_left + cell.col * cell_width + cell.width * cell_width / 2;
 			var cy = table_top + table_height / 2;
 			var rx = 1.8 * cell_width / 2;
-			var ry = table_height / 2;
-			var ellipse = document.createElementNS("http://www.w3.org/2000/svg", 'ellipse');
-			ellipse.setAttribute('class', 'table_game_result');
-			ellipse.setAttribute('cx', cx);
-			ellipse.setAttribute('rx', rx);
-			ellipse.setAttribute('cy', cy);
-			ellipse.setAttribute('ry', ry);
-			t.appendChild(ellipse);
+			var ry = 0.94 * table_height / 2;
+			_svg_el('ellipse', {
+				'class': 'table_game_result',
+				'cx': cx,
+				'rx': rx,
+				'cy': cy,
+				'ry': ry,
+			}, t);
 
 			var ANGLE = 7;
-			var line = document.createElementNS("http://www.w3.org/2000/svg", 'line');
-			line.setAttribute('class', 'table_game_result');
-			line.setAttribute('x1', cx - rx * Math.cos(ANGLE * Math.PI / 180));
-			line.setAttribute('x2', cx + rx * Math.cos(ANGLE * Math.PI / 180));
-			line.setAttribute('y1', cy + ry * Math.sin(ANGLE * Math.PI / 180));
-			line.setAttribute('y2', cy - ry * Math.sin(ANGLE * Math.PI / 180));
-			t.appendChild(line);
+			_svg_el('line', {
+				'class': 'table_game_result',
+				'x1': cx - rx * Math.cos(ANGLE * Math.PI / 180),
+				'x2': cx + rx * Math.cos(ANGLE * Math.PI / 180),
+				'y1': cy + ry * Math.sin(ANGLE * Math.PI / 180),
+				'y2': cy - ry * Math.sin(ANGLE * Math.PI / 180),
+			}, t);
 
 			var TEXT_CENTER_FACTOR = 0.35;
-			var text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
-			text.appendChild(document.createTextNode(cell.score[0]));
-			t.appendChild(text);
+			var text = _svg_el('text', {}, t, cell.score[0]);
 			var cx_top = cx + TEXT_CENTER_FACTOR * rx * Math.cos((90 + ANGLE) * Math.PI / 180);
 			var cy_top = cy - TEXT_CENTER_FACTOR * ry * Math.sin((90 + ANGLE) * Math.PI / 180);
 			_svg_align_vcenter(text, cy_top);
 			_svg_align_hcenter(text, cx_top);
 
-			text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
-			text.appendChild(document.createTextNode(cell.score[1]));
-			t.appendChild(text);
+			text = _svg_el('text', {}, t, cell.score[1]);
 			var cx_bottom = cx - TEXT_CENTER_FACTOR * rx * Math.cos((90 + ANGLE) * Math.PI / 180);
 			var cy_bottom = cy + TEXT_CENTER_FACTOR * ry * Math.sin((90 + ANGLE) * Math.PI / 180);
 			_svg_align_vcenter(text, cy_bottom);
@@ -606,14 +650,13 @@ function ui_show() {
 
 			break;
 		case 'longtext':
-			var bg = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
-			bg.setAttribute('class', (cell.row > 1) ? 'table_longtext_background shaded' : 'table_longtext_background');
-			t.appendChild(bg);
+			var bg = _svg_el('rect', {
+				'class': ((cell.row > 1) ? 'table_longtext_background shaded' : 'table_longtext_background'),
+			}, t);
 
-			var text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
-			text.setAttribute('x', cols_left + cell.col * cell_width + padding_left);
-			text.appendChild(document.createTextNode(cell.val));
-			t.appendChild(text);
+			text = _svg_el('text', {
+				'x': cols_left + cell.col * cell_width + padding_left,
+			}, t, cell.val);
 			_svg_align_vcenter(text, table_top + cell.row * cell_height + cell_height / 2);
 
 			var padding = 0.3;
@@ -623,15 +666,30 @@ function ui_show() {
 			bg.setAttribute('width', bb.width);
 			bg.setAttribute('height', bb.height - 2 * padding);
 			break;
+		case 'editmode-sign':
+			var EDITMODE_SIGN_LINE_COUNT = 15;
+			var EDITMODE_SIGN_XR = 0.15;
+			var cell_left = cols_left + cell.col * cell_width;
+			var sign_top = table_top;
+			var sign_height = 4 * cell_height;
+			var path_data = 'M ' + (cell_left - EDITMODE_SIGN_XR * cell_width) + ' ' + sign_top + ' L';
+			for (var i = 0;i < EDITMODE_SIGN_LINE_COUNT;i++) {
+				path_data += ' ' + (cell_left + ((i % 2 == 1) ? -1 : 1) * EDITMODE_SIGN_XR * cell_width) + ' ' + (sign_top + sign_height * (i + 1) / EDITMODE_SIGN_LINE_COUNT);
+			}
+			_svg_el('path', {
+				'class': 'editmode-sign',
+				'd': path_data
+			}, t);
+			break;
 		case 'score':
+			/* falls through */
 		case 'text':
+			/* falls through */
 		default:
-			var text = document.createElementNS("http://www.w3.org/2000/svg", 'text');
-			text.appendChild(document.createTextNode(cell.val));
-			text.setAttribute('x', cols_left + cell.col * cell_width + cell_width / 2);
-			text.setAttribute('text-anchor', 'middle');
-			t.appendChild(text);
-
+			text = _svg_el('text', {
+				'x': cols_left + cell.col * cell_width + cell_width / 2,
+				'text-anchor': 'middle',
+			}, t, cell.val);
 			_svg_align_vcenter(text, table_top + cell.row * cell_height + cell_height / 2);
 		}
 	});
@@ -649,6 +707,11 @@ function ui_hide() {
 function _svg_to_pdf(svg, pdf) {
 	var nodes = svg.querySelectorAll('*');
 	for (var i = 0;i < nodes.length;i++) {
+		// Due to absence of let, declare vars here
+		var x;
+		var y;
+		var m;
+
 		var n = nodes[i];
 		var style = window.getComputedStyle(n);
 
@@ -658,7 +721,7 @@ function _svg_to_pdf(svg, pdf) {
 
 		var mode = '';
 		if (style.fill != 'none') {
-			var m = style.fill.match(/^rgb\(([0-9]+),\s*([0-9]+),\s*([0-9]+)\)|\#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/);
+			m = style.fill.match(/^rgb\(([0-9]+),\s*([0-9]+),\s*([0-9]+)\)|\#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/);
 			var r = 0;
 			var g = 0;
 			var b = 0;
@@ -694,8 +757,8 @@ function _svg_to_pdf(svg, pdf) {
 			if (m) {
 				var dash_len = parseFloat(m[1]);
 				var gap_len = parseFloat(m[2]);
-				var x = x1;
-				var y = y1;
+				x = x1;
+				y = y1;
 
 				// Normalize vector
 				var vector_len = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
@@ -717,8 +780,8 @@ function _svg_to_pdf(svg, pdf) {
 			}
 			break;
 		case 'rect':
-			var x = parseFloat(n.getAttribute('x'));
-			var y = parseFloat(n.getAttribute('y'));
+			x = parseFloat(n.getAttribute('x'));
+			y = parseFloat(n.getAttribute('y'));
 			var width = parseFloat(n.getAttribute('width'));
 			var height = parseFloat(n.getAttribute('height'));
 			pdf.rect(x, y, width, height, mode);
@@ -730,18 +793,30 @@ function _svg_to_pdf(svg, pdf) {
 			var ry = parseFloat(n.getAttribute('ry'));
 			pdf.ellipse(cx, cy, rx, ry, mode);
 			break;
+		case 'path':
+			m = /^M\s*([0-9.]+)\s+([0-9.]+)\s+L\s*((?:[0-9.]+\s+[0-9.]+(?:$|\s+))+)$/.exec(n.getAttribute('d'));
+			if (m) {
+				x = parseFloat(m[1]);
+				y = parseFloat(m[2]);
+
+				var lines = m[3].split(/\s+/).map(parseFloat);
+				for (var j = 0;j < lines.length;j+=2) {
+					pdf.line(x, y, lines[j], lines[j+1]);
+					x = lines[j];
+					y = lines[j+1];
+				}
+			}
+			break;
 		case 'text':
-			var x = parseFloat(n.getAttribute('x'));
-			var y = parseFloat(n.getAttribute('y'));
+			x = parseFloat(n.getAttribute('x'));
+			y = parseFloat(n.getAttribute('y'));
 
 			switch (style['text-anchor']) {
 			case 'middle':
-				var bb = n.getBBox();
-				x -= bb.width / 2;
+				x -= n.getBBox().width / 2;
 				break;
 			case 'end':
-				var bb = n.getBBox();
-				x -= bb.width;
+				x -= n.getBBox().width;
 				break;
 			}
 

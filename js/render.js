@@ -1,6 +1,5 @@
-'use strict';
-
 var render = (function() {
+'use strict';
 
 function _score_display_init(s) {
 	$('#score_table').empty();
@@ -76,9 +75,9 @@ function _score_display_set_game(s, game, game_index, is_current) {
 		}
 
 		var left_text = left.children('span');
-		var points = game.score[s.game.team1_left ? 0 : 1];
-		_val(left_input, points);
-		left_text.text(points);
+		var left_points = game.score[s.game.team1_left ? 0 : 1];
+		_val(left_input, left_points);
+		left_text.text(left_points);
 		if (editmode_active) {
 			utils.visible(left_input, true);
 		}
@@ -100,9 +99,9 @@ function _score_display_set_game(s, game, game_index, is_current) {
 		}
 
 		var right_text = right.children('span');
-		var points = game.score[s.game.team1_left ? 1 : 0];
-		_val(right_input, points);
-		right_text.text(points);
+		var right_points = game.score[s.game.team1_left ? 1 : 0];
+		_val(right_input, right_points);
+		right_text.text(right_points);
 		if (editmode_active) {
 			utils.visible(right_input, true);
 		}
@@ -114,10 +113,10 @@ function _score_display_set_game(s, game, game_index, is_current) {
 		var ann_td = ann_tr.children('td');
 		ann_td.empty();
 		var _add_ann = function (text) {
-			var ann_span = $('<span class="score_announcement">')
+			var ann_span = $('<span class="score_announcement">');
 			ann_span.text(text);
 			ann_td.append(ann_span);
-		}
+		};
 		if (s.game.service_over) {
 			_add_ann('Aufschlagwechsel');
 		}
@@ -142,7 +141,7 @@ function _score_display_set_game(s, game, game_index, is_current) {
 			});
 		}
 		// Rendering fix for empty cells not being rendered correctly
-		if (ann_td.children().length == 0) {
+		if (ann_td.children().length === 0) {
 			ann_td.text('\xA0');
 		}
 	}
@@ -300,11 +299,11 @@ function ui_render(s) {
 				if (s.setup.team_competition && (team_indices.length > 1)) {
 					if (s.setup.is_doubles) {
 						namefunc = function(player) {
-							return player.name + ' [' + s.setup.teams[ti].name + ']'
+							return player.name + ' [' + s.setup.teams[ti].name + ']';
 						};
 					} else {
 						namefunc = function(player) {
-							return s.setup.teams[ti].name + ' (' + player.name + ')'
+							return s.setup.teams[ti].name + ' (' + player.name + ')';
 						};
 					}
 				}
@@ -343,7 +342,7 @@ function ui_render(s) {
 return {
 	ui_render: ui_render,
 	ui_court_str: ui_court_str,
-}
+};
 
 })();
 

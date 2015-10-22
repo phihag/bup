@@ -1,6 +1,5 @@
-'use strict';
-
 var utils = (function() {
+'use strict';
 
 function qsEach(selector, func) {
 	var nodes = document.querySelectorAll(selector);
@@ -60,7 +59,7 @@ function parse_query_string(qs) {
 
 	var res = {};
 	var m;
-	while (m = search.exec(qs)) {
+	while ((m = search.exec(qs)) !== null) {
 		res[decode(m[1])] = decode(m[2]);
 	}
 	return res;
@@ -92,8 +91,8 @@ function duration_str(start_timestamp, end_timestamp) {
 	return hours + ':' + utils.add_zeroes(mins % 60);
 }
 
-function visible(node, visible) {
-	if (visible) {
+function visible(node, val) {
+	if (val) {
 		$(node).show();
 	} else {
 		$(node).hide();
@@ -115,6 +114,12 @@ function set_class(node, class_name) {
 	}
 }
 
+function obj_update(obj, other) {
+	for (var key in other) {
+		obj[key] = other[key];
+	}
+}
+
 return {
 	uuid: uuid,
 	on_click: on_click,
@@ -130,7 +135,8 @@ return {
 	visible: visible,
 	qsEach: qsEach,
 	set_class: set_class,
-}
+	obj_update: obj_update,
+};
 })();
 
 if (typeof module !== 'undefined') {

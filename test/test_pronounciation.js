@@ -1464,7 +1464,7 @@ _describe('pronounciation', function() {
 	});
 
 	_it('retired at game start', function() {
-		var presses = []
+		var presses = [];
 		var alt_presses = presses.slice();
 		alt_presses.push({
 			type: 'retired',
@@ -1551,7 +1551,7 @@ _describe('pronounciation', function() {
 	});
 
 	_it('disqualified at game start', function() {
-		var presses = []
+		var presses = [];
 		var alt_presses = presses.slice();
 		alt_presses.push({
 			type: 'disqualified',

@@ -1,4 +1,6 @@
 var btde = (function(baseurl) {
+'use strict';
+
 var ALL_COURTS = [{
 	label: '1 (links)',
 	court_id: '1',
@@ -73,7 +75,7 @@ function _request(options, cb) {
 		network.on_success();
 		return cb(null, res);
 	}).fail(function(xhr) {
-		var msg = ((xhr.status == 0) ?
+		var msg = ((xhr.status === 0) ?
 			'badmintonticker nicht erreichbar' :
 			('Netzwerk-Fehler (Code ' + xhr.status + ')')
 		);
@@ -179,7 +181,7 @@ function _parse_match_list(html) {
 		/<td><input type="number" name="Satz5[^"]+" placeholder="([0-9]*)"><\/td>\s*/,
 		/<td><input type="number" name="Satz6[^"]+" placeholder="([0-9]*)"><\/td>\s*/,
 	], 'g');
-	while (m = game_re.exec(table_html)) {
+	while ((m = game_re.exec(table_html)) !== null) {
 		var home_p1 = {
 			firstname: m[3],
 			lastname: m[2],
@@ -275,7 +277,7 @@ function ui_init() {
 
 	var configured = ALL_COURTS.some(function(c) {
 		return settings.court_id == c.court_id && settings.court_description == c.court_description;
-	})
+	});
 	if (! configured) {
 		_ui_make_pick('Feld auswählen', ALL_COURTS, function(c) {
 			settings.court_id = c.court_id;
@@ -293,7 +295,7 @@ return {
 	send_press: send_press,
 	list_matches: list_matches,
 	sync: sync,
-}
+};
 
 });
 

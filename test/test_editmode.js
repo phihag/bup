@@ -284,11 +284,59 @@ _describe('editmode', function() {
 		assert.strictEqual(s.match.team1_won, null);
 	});
 
-	_it('score setting before beginning of game', function() {
+	_it('score setting before beginning of match (without by_side)', function() {
 		var presses = [];
 		presses.push({
 			type: 'editmode_set-score',
 			score: [5, 2],
+		});
+
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.game.score, [5, 2]);
+		assert.strictEqual(s.game.start_team1_left, null);
+		assert.strictEqual(s.game.team1_left, null);
+		assert.strictEqual(s.game.team1_serving, null);
+		assert.strictEqual(s.game.finished, false);
+		assert.strictEqual(s.game.team1_won, null);
+		assert.strictEqual(s.game.started, false);
+		assert.strictEqual(s.match.announce_pregame, false);
+
+		var alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'pick_side',
+			team1_left: false,
+		});
+		s = state_after(alt_presses, DOUBLES_SETUP);
+		assert.deepEqual(s.game.score, [5, 2]);
+		assert.strictEqual(s.game.start_team1_left, false);
+		assert.strictEqual(s.game.team1_left, false);
+		assert.strictEqual(s.game.team1_serving, null);
+		assert.strictEqual(s.game.finished, false);
+		assert.strictEqual(s.game.team1_won, null);
+		assert.strictEqual(s.game.started, false);
+		assert.strictEqual(s.match.announce_pregame, false);
+
+		presses.push({
+			type: 'pick_side',
+			team1_left: true,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.game.score, [5, 2]);
+		assert.strictEqual(s.game.start_team1_left, true);
+		assert.strictEqual(s.game.team1_left, true);
+		assert.strictEqual(s.game.team1_serving, null);
+		assert.strictEqual(s.game.finished, false);
+		assert.strictEqual(s.game.team1_won, null);
+		assert.strictEqual(s.game.started, false);
+		assert.strictEqual(s.match.announce_pregame, false);
+	});
+
+	_it('score setting before beginning of match (with by_side)', function() {
+		var presses = [];
+		presses.push({
+			type: 'editmode_set-score',
+			score: [5, 2],
+			by_side: true,
 		});
 
 		var s = state_after(presses, DOUBLES_SETUP);
@@ -579,7 +627,63 @@ _describe('editmode', function() {
 		assert.strictEqual(s.match.team1_won, null);
 	});
 
-	_it('entering multiple games and then selecting side', function() {
+	_it('entering multiple games and then selecting side (with by_side)', function() {
+		var presses = [];
+		presses.push({
+			type: 'editmode_set-finished_games',
+			scores: [[21, 17]],
+			by_side: true,
+		});
+		presses.push({
+			type: 'editmode_set-score',
+			score: [5, 2],
+			by_side: true,
+		});
+
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.match.finished_games[0].score, [21, 17]);
+		assert.deepEqual(s.game.score, [5, 2]);
+		assert.strictEqual(s.game.start_team1_left, null);
+		assert.strictEqual(s.game.team1_left, null);
+		assert.strictEqual(s.game.team1_serving, null);
+		assert.strictEqual(s.game.finished, false);
+		assert.strictEqual(s.game.team1_won, null);
+		assert.strictEqual(s.game.started, false);
+		assert.strictEqual(s.match.announce_pregame, false);
+
+		var alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'pick_side',
+			team1_left: false,
+		});
+		s = state_after(alt_presses, DOUBLES_SETUP);
+		assert.deepEqual(s.match.finished_games[0].score, [21, 17]);
+		assert.deepEqual(s.game.score, [5, 2]);
+		assert.strictEqual(s.game.start_team1_left, false);
+		assert.strictEqual(s.game.team1_left, false);
+		assert.strictEqual(s.game.team1_serving, null);
+		assert.strictEqual(s.game.finished, false);
+		assert.strictEqual(s.game.team1_won, null);
+		assert.strictEqual(s.game.started, false);
+		assert.strictEqual(s.match.announce_pregame, false);
+
+		presses.push({
+			type: 'pick_side',
+			team1_left: true,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.game.score, [2, 5]);
+		assert.deepEqual(s.match.finished_games[0].score, [17, 21]);
+		assert.strictEqual(s.game.start_team1_left, true);
+		assert.strictEqual(s.game.team1_left, true);
+		assert.strictEqual(s.game.team1_serving, null);
+		assert.strictEqual(s.game.finished, false);
+		assert.strictEqual(s.game.team1_won, null);
+		assert.strictEqual(s.game.started, false);
+		assert.strictEqual(s.match.announce_pregame, false);
+	});
+
+	_it('entering multiple games and then selecting side (without by_side)', function() {
 		var presses = [];
 		presses.push({
 			type: 'editmode_set-finished_games',
@@ -622,8 +726,8 @@ _describe('editmode', function() {
 			team1_left: true,
 		});
 		s = state_after(presses, DOUBLES_SETUP);
-		assert.deepEqual(s.game.score, [2, 5]);
-		assert.deepEqual(s.match.finished_games[0].score, [17, 21]);
+		assert.deepEqual(s.game.score, [5, 2]);
+		assert.deepEqual(s.match.finished_games[0].score, [21, 17]);
 		assert.strictEqual(s.game.start_team1_left, true);
 		assert.strictEqual(s.game.team1_left, true);
 		assert.strictEqual(s.game.team1_serving, null);

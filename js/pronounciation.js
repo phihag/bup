@@ -1,13 +1,12 @@
-'use strict';
-
 var pronounciation = (function() {
+'use strict';
 
 function loveall_announcement(s) {
 	var prefix = '';
 	if (s.match.finished_games.length == 1) {
 		prefix = 'Zweiter Satz. ';
 	} else if (s.match.finished_games.length == 2) {
-		prefix = 'Entscheidungssatz. '
+		prefix = 'Entscheidungssatz. ';
 	}
 
 	return prefix + _pronounciation_score(s) + '.\nBitte spielen';
@@ -36,12 +35,12 @@ function postgame_announcement(s) {
 		}, '');
 
 		res = 'Das Spiel wurde gewonnen von ' + winner_name + ' mit ' + previous_scores + winner_score + '-' + loser_score;
-	} else if (s.match.finished_games.length == 0) {
+	} else if (s.match.finished_games.length === 0) {
 		res = 'Der erste Satz wurde gewonnen von ' + winner_name + ' mit ' + winner_score + '-' + loser_score;
 	} else if (s.match.finished_games.length == 1) {
 		res = 'Der zweite Satz wurde gewonnen von ' + winner_name + ' mit ' + winner_score + '-' + loser_score + '; einen Satz beide';
 	} else {
-		throw new Error('Won third game but match not finished?')
+		throw new Error('Won third game but match not finished?');
 	}
 	return res;
 }
@@ -63,10 +62,10 @@ function _prematch_team(s, team_id) {
 function _pronounciation_score(s) {
 	var first_score = s.game.score[s.game.team1_serving ? 0 : 1];
 	var second_score = s.game.score[s.game.team1_serving ? 1 : 0];
-	var point_str = (s.game.gamepoint ? ' Satzpunkt' : (s.game.matchpoint ? ' Spielpunkt' : ''))
+	var point_str = (s.game.gamepoint ? ' Satzpunkt' : (s.game.matchpoint ? ' Spielpunkt' : ''));
 	var score_str = (first_score == second_score) ? (first_score + point_str + ' beide') : (first_score + (point_str ? (point_str + ' ') : '-') + second_score);
 	var service_over_str = (s.game.service_over ? 'Aufschlagwechsel. ' : '');
-	var interval_str = (s.game.interval ? ' Pause' : '') + (s.game.change_sides ? '. Bitte die Spielfeldseiten wechseln' : '')
+	var interval_str = (s.game.interval ? ' Pause' : '') + (s.game.change_sides ? '. Bitte die Spielfeldseiten wechseln' : '');
 	return service_over_str + score_str + interval_str;
 }
 

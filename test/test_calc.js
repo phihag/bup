@@ -2496,6 +2496,42 @@ _describe('calc_state', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert(! s.timer);
 	});
+
+	_it('editmode with synthetic game', function() {
+		var presses = [];
+		presses.push({
+			type: 'pick_side', // Alice picks left
+			team1_left: true,
+		});
+		presses.push({
+			type: 'pick_server', // Alice serves
+			team_id: 0,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'love-all'
+		});
+		press_score(21, 15);
+		presses.push({
+			type: 'postgame-confirm'
+		});
+		press_score(22, 20);
+		presses.push({
+			type: 'postgame-confirm'
+		});
+		press_score(5, 3);
+		var s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(s.match.finished_games.length, 2);
+		assert.deepEqual(s.match.finished_games[0], [21, 15]);
+		assert.deepEqual(s.match.finished_games[1], [22, 20]);
+		assert.deepEqual(s.game.score, [5, 3]);
+
+		// oops, we noticed it should be 16 in first game
+		presses.push({
+			type: 'editmode_set-finished-games',
+			scores: [[]]
+		});
+	});
 });
 
 _describe('calc helper functions', function() {

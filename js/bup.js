@@ -25,7 +25,7 @@ function ui_esc_stack_push(cancel) {
 }
 
 function ui_esc_stack_pop() {
-	if (_ui_esc_stack.length == 0) {
+	if (_ui_esc_stack.length === 0) {
 		show_error('Empty escape stack');
 		return;
 	}
@@ -55,7 +55,7 @@ function _ui_make_pick(label, values, on_pick, on_cancel, container) {
 		}
 		kill_dialog();
 		on_cancel();
-	}
+	};
 	ui_esc_stack_push(cancel);
 
 	var dlg_wrapper = $('<div class="modal-wrapper">');
@@ -98,7 +98,7 @@ function _ui_make_team_pick(s, label, type, on_cancel, modify_button) {
 	var cancel = function() {
 		kill_dialog();
 		on_cancel();
-	}
+	};
 
 	ui_esc_stack_push(cancel);
 	var dlg_wrapper = $('<div class="modal-wrapper">');
@@ -114,7 +114,7 @@ function _ui_make_team_pick(s, label, type, on_cancel, modify_button) {
 	label_span.text(label);
 	label_span.appendTo(dlg);
 
-	var team_indices = [0, 1]
+	var team_indices = [0, 1];
 	team_indices.forEach(function(ti) {
 		var btn = _ui_add_player_pick(s, dlg, type, ti, null, kill_dialog, function() {
 			return calc_teamtext_internal(s, ti);
@@ -140,7 +140,7 @@ function _ui_make_player_pick(s, label, type, on_cancel, modify_button) {
 	var cancel = function() {
 		kill_dialog();
 		on_cancel();
-	}
+	};
 
 	ui_esc_stack_push(cancel);
 	var dlg_wrapper = $('<div class="modal-wrapper">');
@@ -156,7 +156,7 @@ function _ui_make_player_pick(s, label, type, on_cancel, modify_button) {
 	label_span.text(label);
 	label_span.appendTo(dlg);
 
-	var team_indices = [0, 1]
+	var team_indices = [0, 1];
 	team_indices.forEach(function(ti) {
 		var btn = _ui_add_player_pick(s, dlg, type, ti, 0, kill_dialog);
 		if (modify_button) {
@@ -300,7 +300,7 @@ function ui_settings_load_list(s) {
 	matches = matches.filter(function(m) {
 		return (!s.metadata || m.metadata.id != s.metadata.id);
 	});
-	$('.setup_loadmatch_none').toggle(matches.length == 0);
+	$('.setup_loadmatch_none').toggle(matches.length === 0);
 	var match_list = $('.setup_loadmatch_list');
 	match_list.empty();
 	match_list.toggle(matches.length > 0);
@@ -787,6 +787,7 @@ function editmode_change_score() {
 		on_press({
 			type: 'editmode_set-finished_games',
 			scores: new_scores,
+			by_side: true,
 		});
 	}
 
@@ -795,6 +796,7 @@ function editmode_change_score() {
 		on_press({
 			type: 'editmode_set-score',
 			score: new_score,
+			by_side: true,
 		});
 	}
 }
@@ -1095,7 +1097,7 @@ function ui_init() {
 		var go_fullscreen_hide = function() {
 			ui_esc_stack_pop();
 			$('#go_fullscreen_wrapper').hide();
-		}
+		};
 
 		$('.go_fullscreen_normal').on('click', function(e) {
 			e.preventDefault();
