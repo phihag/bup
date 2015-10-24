@@ -9,6 +9,16 @@ function _is_winner(candidate, other) {
 	);
 }
 
+// Returns null if score cannot be mapped
+function lr2score(s, lrscore) {
+	if ((lrscore.left === undefined) || (lrscore.right === undefined)) {
+		throw new Error('Score expressed as side, but side information missing');
+	}
+	if (typeof s.game.team1_left == 'boolean') {
+		return (s.game.team1_left) ? [lrscore.left, lrscore.right] : [lrscore.right, lrscore.left];
+	}
+	return null;
+}
 
 // Returns:
 //  'inprogress' for game in progress
@@ -214,17 +224,13 @@ function calc_press(s, press) {
 			start: press.timestamp,
 			duration: 120 * 1000,
 		};
-		if (((s.match.finished_games.length > 0) || (s.game.score[0] > 0) || (s.game.score[1] > 0)) && s.game.team1_left) {
-			// A score > 0 is only possible in case of a manually edited score.
-			// Even red cards don't have that effect, see RTTO 3.7.7.
-			// Therefore, switch ends if team 1 is right.
-
-			if (s.game.editmode_set_score_by_side) {
+		if (! s.game.team1_left) {
+			if (s.game.editmode_by_side) {
 				// (If the edited score was intended to be by end instead of by team)
 				s.game.score = [s.game.score[1], s.game.score[0]];
 			}
 			s.match.finished_games.forEach(function(g, i) {
-				if (g.editmode_set_finished_score_by_side) {
+				if (g.editmode_by_side) {
 					s.match.finished_games[i].score = [g.score[1], g.score[0]];
 				}
 			});
@@ -361,7 +367,18 @@ function calc_press(s, press) {
 		}
 		break;
 	case 'editmode_set-score':
-		s.game.score = press.score.slice();
+		s.game.editmode_by_side = !! press.by_side;
+		var new_score;
+		if (press.by_side) {
+			new_score = lr2score(s, press.score);
+			if (new_score === null) {
+				new_score = [press.score.left, press.score.right];
+			}
+		} else {
+			new_score = press.score.slice();
+		}
+
+		s.game.score = new_score;
 		s.game.service_over = false;
 		s.game.finished = false;
 		s.game.game = false;
@@ -369,21 +386,30 @@ function calc_press(s, press) {
 		s.game.team1_won = null;
 		s.match.finished = false;
 		s.match.team1_won = null;
-		s.game.editmode_set_score_by_side = !! press.by_side;
 		recalc_after_score(s, s.game.team1_serving ? 0 : 1, press);
 		break;
 	case 'editmode_set-finished_games':
 		s.match.finished_games = press.scores.map(function(score, i) {
-			if (s.match.finished_games[i] && utils.deep_equal(s.match.finished_games[i].score, score)) {
+			var new_score;
+			if (press.by_side) {
+				new_score = lr2score(s, score);
+				if (new_score === null) {
+					new_score = [score.left, score.right];
+				}
+			} else {
+				new_score = score;
+			}
+
+			if (s.match.finished_games[i] && utils.deep_equal(s.match.finished_games[i].score, new_score)) {
 				return s.match.finished_games[i];
 			}
 
 			return {
 				synthetic: true,
 				finished: true,
-				team1_won: _is_winner(score[0], score[1]),
-				score: score,
-				editmode_set_finished_score_by_side: !! press.by_side,
+				team1_won: _is_winner(new_score[0], new_score[1]),
+				score: new_score,
+				editmode_by_side: !! press.by_side,
 			};
 		});
 		s.match.finished = false;
@@ -538,6 +564,7 @@ return {
 	calc_press: calc_press,
 	game_winner: game_winner,
 	match_winner: match_winner,
+	lr2score: lr2score,
 };
 
 })();

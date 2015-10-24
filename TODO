@@ -1,3 +1,6 @@
+test that a natural game stays natural in scoresheet
+test by_side after side choice
+scoresheet: second game is there after deleting it
 scoresheet: finished games (in doubles) with byside = true
 scoresheet: if finished_games does not change then no edit sign
 scoresheet: delete deleted games

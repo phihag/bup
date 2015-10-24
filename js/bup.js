@@ -649,158 +649,6 @@ function ui_init_settings() {
 	ui_settings_update();
 }
 
-var _editmode_last_click = 0;
-function editmode_enter() {
-	$('.editmode_leave,.editmode_arrow,.editmode_change-ends,.editmode_switch_left,.editmode_switch_right').show();
-	$('.editmode_ok').attr('disabled', 'disabled');
-	$('.editmode_button').text('Manuelles Bearbeiten abbrechen');
-	$('#score td.score input').show();
-	$('#score td.score span').hide();
-	$('#game').addClass('editmode');
-}
-
-function editmode_leave() {
-	$('#game').removeClass('editmode');
-	$('.editmode_leave,.editmode_arrow,.editmode_change-ends,.editmode_switch_left,.editmode_switch_right').hide();
-	$('.editmode_button').text('Manuell bearbeiten');
-	$('#score td.score input').hide();
-	$('#score td.score span').show();
-}
-
-function editmode_init() {
-	$('.editmode_button').on('click', function() {
-		if ($('#game').hasClass('editmode')) {
-			editmode_leave();
-		} else {
-			editmode_enter();
-		}
-		hide_settings();
-	});
-	$('#court').on('click', function(e) {
-		if (e.target.tagName.toLowerCase() == 'button') {
-			return;
-		}
-
-		var now = Date.now();
-		if (now - _editmode_last_click < DOUBLE_CLICK_TIMEOUT) {
-			_editmode_last_click = 0;
-			editmode_enter();
-		} else {
-			_editmode_last_click = now;
-		}
-		return true;
-	});
-
-	utils.on_click($('.editmode_leave'), function() {
-		editmode_leave();
-	});
-	utils.on_click($('.editmode_change-ends'), function() {
-		on_press({
-			type: 'editmode_change-ends'
-		});
-	});
-	utils.on_click($('.editmode_switch_left'), function() {
-		on_press({
-			type: 'editmode_switch-sides',
-			side: 'left'
-		});
-	});
-	utils.on_click($('.editmode_switch_right'), function() {
-		on_press({
-			type: 'editmode_switch-sides',
-			side: 'right'
-		});
-	});
-	utils.on_click($('.editmode_arrow'), function() {
-		on_press({
-			type: 'editmode_change-serve',
-		});
-	});
-}
-
-function editmode_hide_inputs(since_game) {
-	utils.qsEach('.editmode_score', function(n) {
-		var game_index = parseInt(n.getAttribute('data-game-index'), 10);
-		utils.visible(n, game_index < since_game);
-	});
-}
-
-function editmode_read_input() {
-	var res = [];
-	for (var game_index = 0;game_index < state.match.max_games;game_index++) {
-		var left_str = $('.editmode_score[data-game-index="' + game_index + '"][data-team-side="left"]').val();
-		var left_val = parseInt(left_str, 10);
-		if (isNaN(left_val)) {
-			left_val = 0;
-		}
-
-		var right_str = $('.editmode_score[data-game-index="' + game_index + '"][data-team-side="right"]').val();
-		var right_val = parseInt(right_str, 10);
-		if (isNaN(right_val)) {
-			right_val = 0;
-		}
-
-		var winner = calc.game_winner(left_val, right_val);
-		var team1_val = state.game.team1_left ? left_val : right_val;
-		var team2_val = state.game.team1_left ? right_val : left_val;
-		res.push({
-			winner: winner,
-			left: left_val,
-			right: right_val,
-			score: [team1_val, team2_val],
-		});
-
-		if ((winner == 'invalid') || (winner == 'inprogress')) {
-			return res;
-		}
-
-		var match_winner = calc.match_winner(res);
-		if (match_winner != 'inprogress') {
-			return res;
-		}
-	}
-
-	return res;
-}
-
-function editmode_change_score() {
-	var input_scores = editmode_read_input();
-	editmode_hide_inputs(input_scores.length);
-
-	if (input_scores[input_scores.length - 1].winner == 'invalid') {
-		// TODO red background or so
-		return;
-	}
-
-	var finished_inputs = input_scores.slice(0, input_scores.length - 1);
-	var is_changed = (finished_inputs.length != state.match.finished_games.length);
-	if (! is_changed) {
-		is_changed = finished_inputs.some(function(fi, game_index) {
-			var fg = state.match.finished_games[game_index];
-			return (fg.score[0] != fi.score[0]) || (fg.score[1] != fi.score[1]);
-		});
-	}
-	if (is_changed) {
-		var new_scores = finished_inputs.map(function(fi) {
-			return fi.score;
-		});
-		on_press({
-			type: 'editmode_set-finished_games',
-			scores: new_scores,
-			by_side: true,
-		});
-	}
-
-	var new_score = input_scores[input_scores.length - 1].score;
-	if ((new_score[0] != state.game.score[0]) || (new_score[1] != state.game.score[1])) {
-		on_press({
-			type: 'editmode_set-score',
-			score: new_score,
-			by_side: true,
-		});
-	}
-}
-
 var ui_timer = null;
 function ui_set_timer(timer) {
 	if (ui_timer) {
@@ -851,7 +699,7 @@ function ui_remove_timer() {
 
 function ui_init() {
 	$('#script_jspdf').on('load', scoresheet.jspdf_loaded);
-	editmode_init();
+	editmode.ui_init();
 	$('.backtogame_button').on('click', function() {
 		hide_settings();
 	});
@@ -1070,7 +918,7 @@ function ui_init() {
 	});
 	Mousetrap.bind('e', function() {
 		if (state.initialized) {
-			editmode_enter();
+			editmode.enter();
 		}
 	});
 	Mousetrap.bind('shift+s', function() {
@@ -1124,6 +972,7 @@ if (typeof $ !== 'undefined') {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var utils = require('./utils');
 	var calc = require('./calc');
+	var editmode = require('./editmode');
 	var render = require('./render');
 	var scoresheet = require('./scoresheet');
 	var network = require('./network');

@@ -1465,7 +1465,13 @@ _describe('scoresheet generation', function() {
 		var presses = [];
 		presses.push({
 			type: 'editmode_set-finished_games',
-			scores: [[12, 21], [25, 23]],
+			scores: [{
+				left: 12,
+				right: 21,
+			}, {
+				left: 25,
+				right: 23,
+			}],
 			by_side: true,
 		});
 		var cells = _scoresheet_cells(presses, DOUBLES_SETUP);
@@ -1598,6 +1604,8 @@ _describe('scoresheet generation', function() {
 			team1_left: false,
 		});
 		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.match.finished_games[0].score, [21, 12]);
 		_assert_cell(cells, {
 			table: 0,
 			col: 0,

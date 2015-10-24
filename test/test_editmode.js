@@ -335,7 +335,7 @@ _describe('editmode', function() {
 		var presses = [];
 		presses.push({
 			type: 'editmode_set-score',
-			score: [5, 2],
+			score: {left: 5, right: 2},
 			by_side: true,
 		});
 
@@ -355,7 +355,7 @@ _describe('editmode', function() {
 			team1_left: false,
 		});
 		s = state_after(alt_presses, DOUBLES_SETUP);
-		assert.deepEqual(s.game.score, [5, 2]);
+		assert.deepEqual(s.game.score, [2, 5]);
 		assert.strictEqual(s.game.start_team1_left, false);
 		assert.strictEqual(s.game.team1_left, false);
 		assert.strictEqual(s.game.team1_serving, null);
@@ -369,7 +369,7 @@ _describe('editmode', function() {
 			team1_left: true,
 		});
 		s = state_after(presses, DOUBLES_SETUP);
-		assert.deepEqual(s.game.score, [2, 5]);
+		assert.deepEqual(s.game.score, [5, 2]);
 		assert.strictEqual(s.game.start_team1_left, true);
 		assert.strictEqual(s.game.team1_left, true);
 		assert.strictEqual(s.game.team1_serving, null);
@@ -385,15 +385,49 @@ _describe('editmode', function() {
 			player_id: 0,
 		});
 		s = state_after(alt_presses, DOUBLES_SETUP);
-		assert.deepEqual(s.game.score, [2, 5]);
+		assert.deepEqual(s.game.score, [5, 2]);
 		assert.strictEqual(s.game.start_team1_left, true);
 		assert.strictEqual(s.game.team1_left, true);
 		assert.strictEqual(s.game.team1_serving, false);
 		assert.strictEqual(s.game.finished, false);
 		assert.strictEqual(s.game.team1_won, null);
 		assert.strictEqual(s.game.started, false);
-		// Bob should be on the left
-		assert.strictEqual(s.game.teams_player1_even[1], false);
+		// Bob should be on the right
+		assert.strictEqual(s.game.teams_player1_even[1], true);
+
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		});
+		s = state_after(alt_presses, DOUBLES_SETUP);
+		assert.deepEqual(s.game.score, [5, 2]);
+		assert.strictEqual(s.game.start_team1_left, true);
+		assert.strictEqual(s.game.team1_left, true);
+		assert.strictEqual(s.game.team1_serving, true);
+		assert.strictEqual(s.game.finished, false);
+		assert.strictEqual(s.game.team1_won, null);
+		assert.strictEqual(s.game.started, false);
+		// Andrew should be on the left
+		assert.strictEqual(s.game.teams_player1_even[0], false);
+
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 1,
+		});
+		s = state_after(alt_presses, DOUBLES_SETUP);
+		assert.deepEqual(s.game.score, [5, 2]);
+		assert.strictEqual(s.game.start_team1_left, true);
+		assert.strictEqual(s.game.team1_left, true);
+		assert.strictEqual(s.game.team1_serving, true);
+		assert.strictEqual(s.game.finished, false);
+		assert.strictEqual(s.game.team1_won, null);
+		assert.strictEqual(s.game.started, false);
+		// Alice should be on the left
+		assert.strictEqual(s.game.teams_player1_even[0], true);
 
 		presses.push({
 			type: 'pick_server',
@@ -401,15 +435,15 @@ _describe('editmode', function() {
 			player_id: 1,
 		});
 		s = state_after(presses, DOUBLES_SETUP);
-		assert.deepEqual(s.game.score, [2, 5]);
+		assert.deepEqual(s.game.score, [5, 2]);
 		assert.strictEqual(s.game.start_team1_left, true);
 		assert.strictEqual(s.game.team1_left, true);
 		assert.strictEqual(s.game.team1_serving, false);
 		assert.strictEqual(s.game.finished, false);
 		assert.strictEqual(s.game.team1_won, null);
 		assert.strictEqual(s.game.started, false);
-		// Birgit should be on the left
-		assert.strictEqual(s.game.teams_player1_even[1], true);
+		// Birgit should be on the right
+		assert.strictEqual(s.game.teams_player1_even[1], false);
 
 		alt_presses = presses.slice();
 		alt_presses.push({
@@ -419,7 +453,8 @@ _describe('editmode', function() {
 		});
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		// Andrew should be on the right
-		assert.strictEqual(s.game.teams_player1_even[0], false);
+		assert.deepEqual(s.game.score, [5, 2]);
+		assert.strictEqual(s.game.teams_player1_even[0], true);
 
 		presses.push({
 			type: 'pick_receiver',
@@ -428,7 +463,7 @@ _describe('editmode', function() {
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		// Alice should be on the right
-		assert.strictEqual(s.game.teams_player1_even[0], true);
+		assert.strictEqual(s.game.teams_player1_even[0], false);
 
 	});
 
@@ -631,7 +666,10 @@ _describe('editmode', function() {
 		var presses = [];
 		presses.push({
 			type: 'editmode_set-finished_games',
-			scores: [[21, 17]],
+			scores: [{
+				left: 21,
+				right: 17,
+			}],
 			by_side: true,
 		});
 		var s = state_after(presses, DOUBLES_SETUP);
@@ -651,7 +689,7 @@ _describe('editmode', function() {
 			team1_left: false,
 		});
 		s = state_after(alt_presses, DOUBLES_SETUP);
-		assert.deepEqual(s.match.finished_games[0].score, [21, 17]);
+		assert.deepEqual(s.match.finished_games[0].score, [17, 21]);
 		assert.deepEqual(s.game.score, [0, 0]);
 		assert.strictEqual(s.game.start_team1_left, false);
 		assert.strictEqual(s.game.team1_left, false);
@@ -668,7 +706,7 @@ _describe('editmode', function() {
 		});
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.deepEqual(s.game.score, [0, 0]);
-		assert.deepEqual(s.match.finished_games[0].score, [17, 21]);
+		assert.deepEqual(s.match.finished_games[0].score, [21, 17]);
 		assert.strictEqual(s.game.start_team1_left, true);
 		assert.strictEqual(s.game.team1_left, true);
 		assert.strictEqual(s.game.team1_serving, null);
@@ -679,7 +717,10 @@ _describe('editmode', function() {
 
 		presses.push({
 			type: 'editmode_set-score',
-			score: [5, 2],
+			score: {
+				left: 5,
+				right: 2,
+			},
 			by_side: true,
 		});
 
@@ -700,8 +741,8 @@ _describe('editmode', function() {
 			team1_left: false,
 		});
 		s = state_after(alt_presses, DOUBLES_SETUP);
-		assert.deepEqual(s.match.finished_games[0].score, [21, 17]);
-		assert.deepEqual(s.game.score, [5, 2]);
+		assert.deepEqual(s.match.finished_games[0].score, [17, 21]);
+		assert.deepEqual(s.game.score, [2, 5]);
 		assert.strictEqual(s.game.start_team1_left, false);
 		assert.strictEqual(s.game.team1_left, false);
 		assert.strictEqual(s.game.team1_serving, null);
@@ -715,8 +756,8 @@ _describe('editmode', function() {
 			team1_left: true,
 		});
 		s = state_after(presses, DOUBLES_SETUP);
-		assert.deepEqual(s.game.score, [2, 5]);
-		assert.deepEqual(s.match.finished_games[0].score, [17, 21]);
+		assert.deepEqual(s.game.score, [5, 2]);
+		assert.deepEqual(s.match.finished_games[0].score, [21, 17]);
 		assert.strictEqual(s.game.start_team1_left, true);
 		assert.strictEqual(s.game.team1_left, true);
 		assert.strictEqual(s.game.team1_serving, null);
@@ -724,6 +765,28 @@ _describe('editmode', function() {
 		assert.strictEqual(s.game.team1_won, null);
 		assert.strictEqual(s.game.started, false);
 		assert.strictEqual(s.match.announce_pregame, false);
+
+		presses.push({
+			type: 'editmode_set-finished_games',
+			scores: [{
+				left: 26,
+				right: 28,
+			}],
+			by_side: true,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.match.finished_games[0].score, [26, 28]);
+
+		alt_presses.push({
+			type: 'editmode_set-finished_games',
+			scores: [{
+				left: 26,
+				right: 28,
+			}],
+			by_side: true,
+		});
+		s = state_after(alt_presses, DOUBLES_SETUP);
+		assert.deepEqual(s.match.finished_games[0].score, [28, 26]);
 	});
 
 	_it('entering multiple games and then selecting side (without by_side)', function() {
@@ -731,6 +794,7 @@ _describe('editmode', function() {
 		presses.push({
 			type: 'editmode_set-finished_games',
 			scores: [[21, 17]],
+			by_side: false,
 		});
 		presses.push({
 			type: 'editmode_set-score',
