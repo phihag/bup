@@ -1385,7 +1385,7 @@ _describe('scoresheet generation', function() {
 		});
 	});
 
-	_it('editmode set-finished_games', function() {
+	_it('editmode set-finished_games without by_side', function() {
 		var presses = [];
 		presses.push({
 			type: 'editmode_set-finished_games',
@@ -1459,23 +1459,228 @@ _describe('scoresheet generation', function() {
 		});
 		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
 		assert.equal(cells.length, 0);
+	});
 
+	_it('editmode set-finished_games with by_side', function() {
+		var presses = [];
 		presses.push({
+			type: 'editmode_set-finished_games',
+			scores: [[12, 21], [25, 23]],
+			by_side: true,
+		});
+		var cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 0,
+			type: 'editmode-sign',
+			editmode_related: true,
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 0,
+			row: 0,
+			type: 'score',
+			val: 12,
+			editmode_related: true,
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 0,
+			row: 2,
+			type: 'score',
+			val: 21,
+			editmode_related: true,
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 3,
+			type: 'circle',
+			score: [12, 21],
+			width: 3,
+		});
+		_assert_cell(cells, {
+			table: 1,
+			col: 0,
+			type: 'editmode-sign',
+			editmode_related: true,
+		});
+		_assert_cell(cells, {
+			table: 1,
+			col: 0,
+			row: 0,
+			type: 'score',
+			val: 25,
+			editmode_related: true,
+		});
+		_assert_cell(cells, {
+			table: 1,
+			col: 0,
+			row: 2,
+			type: 'score',
+			val: 23,
+			editmode_related: true,
+		});
+		_assert_cell(cells, {
+			table: 1,
+			col: 3,
+			type: 'circle',
+			score: [25, 23],
+			width: 3,
+		});
+
+		var alt_presses = presses.slice();
+		alt_presses.push({
 			type: 'pick_side',
 			team1_left: true,
 		});
-		presses.push({
-			type: 'pick_server',
-			team_id: 0,
-			player_id: 0,
+		cells = _scoresheet_cells(alt_presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 0,
+			type: 'editmode-sign',
+			editmode_related: true,
 		});
-		presses.push({
-			type: 'pick_server',
-			team_id: 1,
-			player_id: 0,
+		_assert_cell(cells, {
+			table: 0,
+			col: 0,
+			row: 0,
+			type: 'score',
+			val: 12,
+			editmode_related: true,
 		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 0,
+			row: 2,
+			type: 'score',
+			val: 21,
+			editmode_related: true,
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 3,
+			type: 'circle',
+			score: [12, 21],
+			width: 3,
+		});
+		_assert_cell(cells, {
+			table: 1,
+			col: 0,
+			type: 'editmode-sign',
+			editmode_related: true,
+		});
+		_assert_cell(cells, {
+			table: 1,
+			col: 0,
+			row: 0,
+			type: 'score',
+			val: 25,
+			editmode_related: true,
+		});
+		_assert_cell(cells, {
+			table: 1,
+			col: 0,
+			row: 2,
+			type: 'score',
+			val: 23,
+			editmode_related: true,
+		});
+		_assert_cell(cells, {
+			table: 1,
+			col: 3,
+			type: 'circle',
+			score: [25, 23],
+			width: 3,
+		});
+
 		presses.push({
-			type: 'love-all',
+			type: 'pick_side',
+			team1_left: false,
+		});
+		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 0,
+			type: 'editmode-sign',
+			editmode_related: true,
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 0,
+			row: 0,
+			type: 'score',
+			val: 21,
+			editmode_related: true,
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 0,
+			row: 2,
+			type: 'score',
+			val: 12,
+			editmode_related: true,
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 3,
+			type: 'circle',
+			score: [21, 12],
+			width: 3,
+		});
+		_assert_cell(cells, {
+			table: 1,
+			col: 0,
+			type: 'editmode-sign',
+			editmode_related: true,
+		});
+		_assert_cell(cells, {
+			table: 1,
+			col: 0,
+			row: 0,
+			type: 'score',
+			val: 23,
+			editmode_related: true,
+		});
+		_assert_cell(cells, {
+			table: 1,
+			col: 0,
+			row: 2,
+			type: 'score',
+			val: 25,
+			editmode_related: true,
+		});
+		_assert_cell(cells, {
+			table: 1,
+			col: 3,
+			type: 'circle',
+			score: [23, 25],
+			width: 3,
+		});
+	});
+
+	_it('setting past games multiple times', function() {
+		var presses = [{
+			"type": "editmode_set-finished_games",
+			"scores": [[4, 21], [21, 0]],
+		}, {
+			"type": "editmode_set-finished_games",
+			"scores": [[4, 21], [21, 5]],
+		}];
+
+		var cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		_assert_cell(cells, {
+			type: 'circle',
+			table: 0,
+			col: 3,
+			score: [4, 21],
+			width: 3,
+		});
+		_assert_cell(cells, {
+			type: 'circle',
+			table: 1,
+			col: 3,
+			score: [21, 5],
+			width: 3,
 		});
 
 	});

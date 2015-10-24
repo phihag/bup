@@ -214,7 +214,7 @@ function calc_press(s, press) {
 			start: press.timestamp,
 			duration: 120 * 1000,
 		};
-		if (((s.game.score[0] > 0) || (s.game.score[1] > 0)) && s.game.team1_left) {
+		if (((s.match.finished_games.length > 0) || (s.game.score[0] > 0) || (s.game.score[1] > 0)) && s.game.team1_left) {
 			// A score > 0 is only possible in case of a manually edited score.
 			// Even red cards don't have that effect, see RTTO 3.7.7.
 			// Therefore, switch ends if team 1 is right.

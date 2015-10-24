@@ -634,13 +634,56 @@ _describe('editmode', function() {
 			scores: [[21, 17]],
 			by_side: true,
 		});
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.match.finished_games[0].score, [21, 17]);
+		assert.deepEqual(s.game.score, [0, 0]);
+		assert.strictEqual(s.game.start_team1_left, null);
+		assert.strictEqual(s.game.team1_left, null);
+		assert.strictEqual(s.game.team1_serving, null);
+		assert.strictEqual(s.game.finished, false);
+		assert.strictEqual(s.game.team1_won, null);
+		assert.strictEqual(s.game.started, false);
+		assert.strictEqual(s.match.announce_pregame, false);
+
+		var alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'pick_side',
+			team1_left: false,
+		});
+		s = state_after(alt_presses, DOUBLES_SETUP);
+		assert.deepEqual(s.match.finished_games[0].score, [21, 17]);
+		assert.deepEqual(s.game.score, [0, 0]);
+		assert.strictEqual(s.game.start_team1_left, false);
+		assert.strictEqual(s.game.team1_left, false);
+		assert.strictEqual(s.game.team1_serving, null);
+		assert.strictEqual(s.game.finished, false);
+		assert.strictEqual(s.game.team1_won, null);
+		assert.strictEqual(s.game.started, false);
+		assert.strictEqual(s.match.announce_pregame, false);
+
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'pick_side',
+			team1_left: true,
+		});
+		s = state_after(alt_presses, DOUBLES_SETUP);
+		assert.deepEqual(s.game.score, [0, 0]);
+		assert.deepEqual(s.match.finished_games[0].score, [17, 21]);
+		assert.strictEqual(s.game.start_team1_left, true);
+		assert.strictEqual(s.game.team1_left, true);
+		assert.strictEqual(s.game.team1_serving, null);
+		assert.strictEqual(s.game.finished, false);
+		assert.strictEqual(s.game.team1_won, null);
+		assert.strictEqual(s.game.started, false);
+		assert.strictEqual(s.match.announce_pregame, false);
+
 		presses.push({
 			type: 'editmode_set-score',
 			score: [5, 2],
 			by_side: true,
 		});
 
-		var s = state_after(presses, DOUBLES_SETUP);
+		s = state_after(presses, DOUBLES_SETUP);
 		assert.deepEqual(s.match.finished_games[0].score, [21, 17]);
 		assert.deepEqual(s.game.score, [5, 2]);
 		assert.strictEqual(s.game.start_team1_left, null);
@@ -651,7 +694,7 @@ _describe('editmode', function() {
 		assert.strictEqual(s.game.started, false);
 		assert.strictEqual(s.match.announce_pregame, false);
 
-		var alt_presses = presses.slice();
+		alt_presses = presses.slice();
 		alt_presses.push({
 			type: 'pick_side',
 			team1_left: false,

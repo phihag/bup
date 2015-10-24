@@ -366,8 +366,8 @@ function _parse_match(state, col_count) {
 				var sgame = s.scoresheet_games[i];
 				if (!sgame) {
 					sgame = _make_scoresheet_game();
-					sgame.circle = fgame.score.slice();
 				}
+				sgame.circle = fgame.score.slice();
 				if (sgame.serving_team === null) {
 					sgame.serving_team = 0;
 				}
