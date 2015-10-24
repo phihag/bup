@@ -373,7 +373,11 @@ function calc_press(s, press) {
 		recalc_after_score(s, s.game.team1_serving ? 0 : 1, press);
 		break;
 	case 'editmode_set-finished_games':
-		s.match.finished_games = press.scores.map(function(score) {
+		s.match.finished_games = press.scores.map(function(score, i) {
+			if (s.match.finished_games[i] && utils.deep_equal(s.match.finished_games[i].score, score)) {
+				return s.match.finished_games[i];
+			}
+
 			return {
 				synthetic: true,
 				finished: true,

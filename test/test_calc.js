@@ -454,7 +454,7 @@ _describe('calc_state', function() {
 		assert.equal(s.court.left_serving, false);
 		assert.equal(s.court.serving_downwards, true);
 
-		var s = state_after([{
+		s = state_after([{
 			type: 'pick_side', // Andrew&Alice pick right
 			team1_left: false,
 		}, {
@@ -2097,7 +2097,7 @@ _describe('calc_state', function() {
 			type: 'pick_side', // Andrew&Alice pick right
 			team1_left: false,
 		}];
-		var s = state_after(presses, DOUBLES_SETUP);
+		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(s.undo_possible, true);
 		assert.equal(s.redo_possible, false);
 
@@ -2511,26 +2511,35 @@ _describe('calc_state', function() {
 		presses.push({
 			type: 'love-all'
 		});
-		press_score(21, 15);
+		press_score(presses, 21, 15);
 		presses.push({
 			type: 'postgame-confirm'
 		});
-		press_score(22, 20);
+		press_score(presses, 22, 20);
 		presses.push({
 			type: 'postgame-confirm'
 		});
-		press_score(5, 3);
+		press_score(presses, 5, 3);
 		var s = state_after(presses, SINGLES_SETUP);
 		assert.strictEqual(s.match.finished_games.length, 2);
-		assert.deepEqual(s.match.finished_games[0], [21, 15]);
-		assert.deepEqual(s.match.finished_games[1], [22, 20]);
+		assert.deepEqual(s.match.finished_games[0].score, [21, 15]);
+		assert.deepEqual(s.match.finished_games[1].score, [20, 22]);
+		assert(! s.match.finished_games[0].synthetic);
+		assert(! s.match.finished_games[1].synthetic);
 		assert.deepEqual(s.game.score, [5, 3]);
 
 		// oops, we noticed it should be 16 in first game
 		presses.push({
-			type: 'editmode_set-finished-games',
-			scores: [[]]
+			type: 'editmode_set-finished_games',
+			scores: [[21, 16], [20, 22]],
 		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(s.match.finished_games.length, 2);
+		assert.deepEqual(s.match.finished_games[0].score, [21, 16]);
+		assert.deepEqual(s.match.finished_games[1].score, [20, 22]);
+		assert(s.match.finished_games[0].synthetic);
+		assert(! s.match.finished_games[1].synthetic);
+		assert.deepEqual(s.game.score, [5, 3]);
 	});
 });
 

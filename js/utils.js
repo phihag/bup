@@ -120,6 +120,27 @@ function obj_update(obj, other) {
 	}
 }
 
+function deep_equal(x, y) {
+	if (x === y) {
+		return true;
+	}
+	if ((typeof x == 'object') && (typeof y == 'object')) {
+		var key_count = 0;
+		for (var k in x) {
+			if (! deep_equal(x[k], y[k])) {
+				return false;
+			}
+			key_count++;
+		}
+
+		for (k in y) {
+			key_count--;
+		}
+		return key_count == 0;
+	}
+	return false;
+}
+
 return {
 	uuid: uuid,
 	on_click: on_click,
@@ -136,6 +157,7 @@ return {
 	qsEach: qsEach,
 	set_class: set_class,
 	obj_update: obj_update,
+	deep_equal: deep_equal,
 };
 })();
 

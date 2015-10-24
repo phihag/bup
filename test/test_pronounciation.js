@@ -684,7 +684,7 @@ _describe('pronounciation', function() {
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), '19 beide');
 
-		var alt_presses = presses.slice();
+		alt_presses = presses.slice();
 		alt_presses.push({
 			type: 'score',
 			side: 'left'

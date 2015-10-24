@@ -1,12 +1,8 @@
-test that only changed historical games become synthetic
 scoresheet: delete deleted games
+scoresheet: show inserted games
 scoresheet: sides missing in top header when first action is editmode
 edit mode to change sides / change ends
-	set score *without* side dependency
-	scoresheet manual notification (zagged line)
-		score afterwards
-		support finished_games
-
+	scoresheet with finished_games
 	write automated tests for editing
 		test side change
 		test scoresheet with manual modifications (zagged line)
@@ -212,7 +208,8 @@ restart network resync interval if network settings change
 use deep equality instead of checking score[0] == ..score[0] && score[1] == ..score[1]
 manual editing in portrait (maybe distinguish by aspect ratio?)
 test svg_path_lines
-enable jshint
+enable jshint in make test
+minify HTML
 move manual editing confirm button to bottom (with white border) and give it a text "Übernehmen"
 -> Demo Jörg H, Manuel, Susanne
 -> Jens Köster fragen wegen zweimal gelbe Karte

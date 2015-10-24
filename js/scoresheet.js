@@ -31,10 +31,10 @@ function _svg_el(tagName, attrs, parent, text) {
 	return el;
 }
 
-function _parse_match(state, col_count) {
+function _layout(games, col_count) {
 	var table_idx = 0;
 	var cells = [];
-	function _layout(game) {
+	games.forEach(function(game) {
 		var max_table = table_idx;
 		var max_col = 0;
 		game.cells.forEach(function(cell) {
@@ -80,8 +80,18 @@ function _parse_match(state, col_count) {
 		}
 
 		table_idx = max_table + 1;
-	}
+	});
+	return cells;
+}
 
+function _clean_editmode(s) {
+	while (s.scoresheet_game.cells.length > 0 && s.scoresheet_game.cells[s.scoresheet_game.cells.length - 1].editmode_related) {
+		var c = s.scoresheet_game.cells.pop();
+		s.scoresheet_game.col_idx = c.col;
+	}
+}
+
+function _parse_match(state, col_count) {
 	function _make_scoresheet_game() {
 		return {
 			score: [0, 0],
@@ -98,6 +108,7 @@ function _parse_match(state, col_count) {
 	var s = {
 		initialized: state.initialized,
 		scoresheet_game: _make_scoresheet_game(),
+		scoresheet_games: [],
 	};
 	calc.init_state(s, state.setup);
 	s.presses = state.presses;
@@ -108,13 +119,6 @@ function _parse_match(state, col_count) {
 		var score_team;
 		var prev_cell;
 		var row;
-
-		function _clean_editmode() {
-			while (s.scoresheet_game.cells.length > 0 && s.scoresheet_game.cells[s.scoresheet_game.cells.length - 1].editmode_related) {
-				var c = s.scoresheet_game.cells.pop();
-				s.scoresheet_game.col_idx = c.col;
-			}
-		}
 
 		function _loveall(extra_attrs) {
 			var cell = {
@@ -173,7 +177,7 @@ function _parse_match(state, col_count) {
 			_loveall();
 			break;
 		case 'postgame-confirm':
-			_layout(s.scoresheet_game);
+			s.scoresheet_games.push(s.scoresheet_game);
 			s.scoresheet_game = _make_scoresheet_game();
 
 			if (! s.setup.is_doubles) {
@@ -347,7 +351,7 @@ function _parse_match(state, col_count) {
 			s.scoresheet_game.col_idx += cell.width;
 			break;
 		case 'editmode_set-score':
-			_clean_editmode();
+			_clean_editmode(s);
 			s.scoresheet_game.cells.push({
 				col: s.scoresheet_game.col_idx,
 				type: 'editmode-sign',
@@ -374,10 +378,10 @@ function _parse_match(state, col_count) {
 	});
 
 	if (s.scoresheet_game.cells.length > 0) {
-		_layout(s.scoresheet_game);
+		s.scoresheet_games.push(s.scoresheet_game);
 	}
 
-	return cells;
+	return _layout(s.scoresheet_games, col_count);
 }
 
 function ui_show() {

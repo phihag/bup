@@ -588,7 +588,7 @@ _describe('editmode', function() {
 		var s = state_after(presses, DOUBLES_SETUP);
 		assert.deepEqual(s.game.score, [13, 21]);
 		assert.deepEqual(s.match.finished_games[0].score, [12, 21]);
-		assert.strictEqual(s.match.finished_games[0].finished, true)
+		assert.strictEqual(s.match.finished_games[0].finished, true);
 		assert.strictEqual(s.game.finished, true);
 		assert.strictEqual(s.game.game, true);
 		assert.strictEqual(s.game.won_by_score, true);
@@ -604,7 +604,7 @@ _describe('editmode', function() {
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.deepEqual(s.game.score, [13, 12]);
 		assert.deepEqual(s.match.finished_games[0].score, [12, 21]);
-		assert.strictEqual(s.match.finished_games[0].finished, true)
+		assert.strictEqual(s.match.finished_games[0].finished, true);
 		assert.strictEqual(s.game.finished, false);
 		assert.strictEqual(s.game.game, false);
 		assert.strictEqual(s.game.won_by_score, null);
