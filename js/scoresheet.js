@@ -84,10 +84,10 @@ function _layout(games, col_count) {
 	return cells;
 }
 
-function _clean_editmode(s) {
-	while (s.scoresheet_game.cells.length > 0 && s.scoresheet_game.cells[s.scoresheet_game.cells.length - 1].editmode_related) {
-		var c = s.scoresheet_game.cells.pop();
-		s.scoresheet_game.col_idx = c.col;
+function _clean_editmode(sgame) {
+	while (sgame.cells.length > 0 && sgame.cells[sgame.cells.length - 1].editmode_related) {
+		var c = sgame.cells.pop();
+		sgame.col_idx = c.col;
 	}
 }
 
@@ -120,33 +120,33 @@ function _parse_match(state, col_count) {
 		var prev_cell;
 		var row;
 
-		function _loveall(extra_attrs) {
+		function _loveall(game, sgame, extra_attrs) {
 			var cell = {
 				type: 'score',
-				col: s.scoresheet_game.col_idx,
-				row: 2 * s.scoresheet_game.serving_team + s.scoresheet_game.servers[s.scoresheet_game.serving_team],
-				val: s.game.score[s.scoresheet_game.serving_team],
+				col: sgame.col_idx,
+				row: 2 * sgame.serving_team + sgame.servers[sgame.serving_team],
+				val: game.score[sgame.serving_team],
 			};
 			if (extra_attrs) {
 				utils.obj_update(cell, extra_attrs);
 			}
-			s.scoresheet_game.cells.push(cell);
-			var receiving_team = 1 - s.scoresheet_game.serving_team;
+			sgame.cells.push(cell);
+			var receiving_team = 1 - sgame.serving_team;
 			var receiver_row = (
 				2 * receiving_team +
-				(s.setup.is_doubles ? s.scoresheet_game.servers[receiving_team] : 0)
+				(s.setup.is_doubles ? sgame.servers[receiving_team] : 0)
 			);
 			cell = {
 				type: 'score',
-				col: s.scoresheet_game.col_idx,
+				col: sgame.col_idx,
 				row: receiver_row,
-				val: s.game.score[1 - s.scoresheet_game.serving_team],
+				val: game.score[1 - sgame.serving_team],
 			};
 			if (extra_attrs) {
 				utils.obj_update(cell, extra_attrs);
 			}
-			s.scoresheet_game.cells.push(cell);
-			s.scoresheet_game.col_idx++;
+			sgame.cells.push(cell);
+			sgame.col_idx++;
 		}
 
 		switch (press.type) {
@@ -174,7 +174,7 @@ function _parse_match(state, col_count) {
 			});
 			break;
 		case 'love-all':
-			_loveall();
+			_loveall(s.game, s.scoresheet_game);
 			break;
 		case 'postgame-confirm':
 			s.scoresheet_games.push(s.scoresheet_game);
@@ -351,15 +351,41 @@ function _parse_match(state, col_count) {
 			s.scoresheet_game.col_idx += cell.width;
 			break;
 		case 'editmode_set-score':
-			_clean_editmode(s);
+			_clean_editmode(s.scoresheet_game);
 			s.scoresheet_game.cells.push({
 				col: s.scoresheet_game.col_idx,
 				type: 'editmode-sign',
 				editmode_related: true,
 			});
 			if (s.scoresheet_game.serving_team !== null) {
-				_loveall({editmode_related: true});
+				_loveall(s.game, s.scoresheet_game, {editmode_related: true});
 			}
+			break;
+		case 'editmode_set-finished_games':
+			s.scoresheet_games = s.match.finished_games.map(function(fgame, i) {
+				var sgame = s.scoresheet_games[i];
+				if (!sgame) {
+					sgame = _make_scoresheet_game();
+					sgame.circle = fgame.score.slice();
+				}
+				if (sgame.serving_team === null) {
+					sgame.serving_team = 0;
+				}
+				if (sgame.servers[0] === null) {
+					sgame.servers[0] = 0;
+				}
+				if (sgame.servers[1] === null) {
+					sgame.servers[1] = 0;
+				}
+				_clean_editmode(sgame);
+				sgame.cells.push({
+					col: sgame.col_idx,
+					type: 'editmode-sign',
+					editmode_related: true,
+				});
+				_loveall(fgame, sgame, {editmode_related: true});
+				return sgame;
+			});
 			break;
 		}
 
@@ -493,7 +519,7 @@ function ui_show() {
 			state.setup.teams[0].players[0],
 			state.setup.teams[0].players[1],
 			state.setup.teams[1].players[0],
-			state.setup.teams[1].players[1]
+			state.setup.teams[1].players[1],
 		];
 	} else {
 		all_players = [
@@ -583,7 +609,7 @@ function ui_show() {
 		for (var player_idx = 0;player_idx < all_players.length;player_idx++) {
 			var player = all_players[player_idx];
 			if (! player) {
-				return;
+				continue;
 			}
 
 			text = _svg_el('text', {

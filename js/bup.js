@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 var DOUBLE_CLICK_TIMEOUT = 1000;
 var state = {

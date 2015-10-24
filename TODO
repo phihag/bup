@@ -1,3 +1,6 @@
+singles scoresheet is completely broken
+scoresheet: finished games (in doubles) with byside = true
+scoresheet: (ui) is 21-0 (wrong)
 scoresheet: delete deleted games
 scoresheet: show inserted games
 scoresheet: sides missing in top header when first action is editmode

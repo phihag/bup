@@ -55,7 +55,7 @@ function parse_query_string(qs) {
 	// http://stackoverflow.com/a/2880929/35070
 	var pl     = /\+/g;
 	var search = /([^&=]+)=?([^&]*)/g;
-	var decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); };
+	var decode = function (s) { return decodeURIComponent(s.replace(pl, ' ')); };
 
 	var res = {};
 	var m;

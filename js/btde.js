@@ -4,14 +4,14 @@ var btde = (function(baseurl) {
 var ALL_COURTS = [{
 	label: '1 (links)',
 	court_id: '1',
-	court_description: 'links'
+	court_description: 'links',
 }, {
 	label: '2 (rechts)',
 	court_id: '2',
-	court_description: 'rechts'
+	court_description: 'rechts',
 }];
 
-function ui_render_login(container, s) {
+function ui_render_login(container) {
 	var login_form = $('<form class="settings_login">');
 	login_form.append($('<h2>Login badmintonticker</h2>'));
 	var login_error = $('<div class="network_error"></div>');
@@ -96,7 +96,7 @@ function send_court(s) {
 		method: 'POST',
 		url: baseurl + 'login/write.php',
 		data: $.param(post_data),
-		contentType: "application/x-www-form-urlencoded",
+		contentType: 'application/x-www-form-urlencoded',
 	}, function(err) {
 		if (err) {
 			return network.on_error(err);
@@ -125,7 +125,7 @@ function send_score(s) {
 		method: 'POST',
 		url: baseurl + 'login/write.php',
 		data: JSON.stringify(post_data),
-		contentType: "application/json; charset=utf-8",
+		contentType: 'application/json; charset=utf-8',
 	}, function(err) {
 		if (err) {
 			return network.on_error(err);
@@ -225,7 +225,7 @@ function _parse_match_list(html) {
 			if (home_score_str !== '' && away_score_str !== '') {
 				network_score.push([
 					parseInt(home_score_str, 10),
-					parseInt(away_score_str, 10)
+					parseInt(away_score_str, 10),
 				]);
 			}
 		}

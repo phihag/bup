@@ -216,8 +216,8 @@ function on_error(err) {
 	if ((err.type == 'login-required') && !login_rendered) {
 		login_rendered = true;
 		var netw = get_netw();
-		netw.ui_render_login($('.settings_network_login_container'), state);
-		netw.ui_render_login($('.network_desync_login_container'), state);
+		netw.ui_render_login($('.settings_network_login_container'));
+		netw.ui_render_login($('.network_desync_login_container'));
 	}
 
 	$('.network_desync_errmsg').text(err.msg);

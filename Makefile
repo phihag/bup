@@ -58,6 +58,7 @@ upload: dist
 test:
 	@npm test
 	@# jshint js/*.js
+	@# eslint js/*.js
 
 clean: cleandist
 	rm -rf -- libs
