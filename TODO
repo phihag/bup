@@ -1,4 +1,5 @@
 scoresheet: sides missing in top header when first action is editmode
+	=> test that start_team1_left is maintained after editing a game
 test ending match with edit
 edit mode to change sides / change ends
 	scoresheet with finished_games
@@ -25,7 +26,7 @@ fix scoresheet buttons on smartphone
 CSS animation for settings (go to top right)
 fix display without vw (see Manuel, https://github.com/saabi/vminpoly)
 save manually created games immediately?
-scoresheet: vcenter shuttles
+scoresheet: vcenter shuttle counter
 
 retest Manuel's notes
 
