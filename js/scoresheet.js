@@ -508,6 +508,7 @@ function ui_show() {
 			side1_str = 'R';
 			side2_str = 'L';
 		}
+		// TODO handle case where first game is synthetic (should be copied over)
 	}
 	_text('.scoresheet_results_team1_side', side1_str);	
 	_text('.scoresheet_results_team2_side', side2_str);	
@@ -518,10 +519,11 @@ function ui_show() {
 			all_finished_games.push(state.game);
 		}
 
-		all_finished_games.forEach(function(g, i) {
-			$('.scoresheet_results_team1_score' + (i + 1)).text(g.score[0]);
-			$('.scoresheet_results_team2_score' + (i + 1)).text(g.score[1]);
-		});
+		for (var i = 0;i < state.match.max_games;i++) {
+			var g = all_finished_games[i];
+			_text('.scoresheet_results_team1_score' + (i + 1), g ? g.score[0] : '');
+			_text('.scoresheet_results_team2_score' + (i + 1), g ? g.score[1] : '');
+		}
 	}
 
 	// Big table(s)

@@ -1,12 +1,5 @@
-test by_side after side choice
-scoresheet: second game is there (on top) after deleting it
-scoresheet: finished games (in doubles) with byside = true
-scoresheet: if finished_games does not change then no edit sign
-scoresheet: delete deleted games
-scoresheet: show inserted games
 scoresheet: sides missing in top header when first action is editmode
-test ending game with edit
-L/R at top of scoresheet
+test ending match with edit
 edit mode to change sides / change ends
 	scoresheet with finished_games
 	write automated tests for editing
