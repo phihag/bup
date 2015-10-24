@@ -27,57 +27,57 @@ _describe('scoresheet generation', function() {
 
 	_it('0-0 in third game', function() {
 		var presses = [{
-			'type': 'pick_side', // Andrew&Alice pick left
-			'team1_left': true,
+			type: 'pick_side', // Andrew&Alice pick left
+			team1_left: true,
 		}];
 		presses.push({
-			'type': 'pick_server', // Andrew serves
-			'team_id': 0,
-			'player_id': 0,
+			type: 'pick_server', // Andrew serves
+			team_id: 0,
+			player_id: 0,
 		});
 		presses.push({
-			'type': 'pick_receiver', // Bob receives
-			'team_id': 1,
-			'player_id': 0,
+			type: 'pick_receiver', // Bob receives
+			team_id: 1,
+			player_id: 0,
 		});
 		presses.push({
-			'type': 'love-all'
-		});
-		press_score(presses, 21, 0);
-		presses.push({
-			'type': 'postgame-confirm'
-		});
-
-		presses.push({
-			'type': 'pick_server', // Andrew serves
-			'team_id': 0,
-			'player_id': 0,
-		});
-		presses.push({
-			'type': 'pick_receiver', // Bob receives
-			'team_id': 1,
-			'player_id': 0,
-		});
-		presses.push({
-			'type': 'love-all'
+			type: 'love-all'
 		});
 		press_score(presses, 21, 0);
 		presses.push({
-			'type': 'postgame-confirm'
+			type: 'postgame-confirm'
 		});
 
 		presses.push({
-			'type': 'pick_server', // Bob serves
-			'team_id': 1,
-			'player_id': 0,
+			type: 'pick_server', // Andrew serves
+			team_id: 0,
+			player_id: 0,
 		});
 		presses.push({
-			'type': 'pick_receiver', // Andrew receives
-			'team_id': 0,
-			'player_id': 0,
+			type: 'pick_receiver', // Bob receives
+			team_id: 1,
+			player_id: 0,
 		});
 		presses.push({
-			'type': 'love-all'
+			type: 'love-all'
+		});
+		press_score(presses, 21, 0);
+		presses.push({
+			type: 'postgame-confirm'
+		});
+
+		presses.push({
+			type: 'pick_server', // Bob serves
+			team_id: 1,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'pick_receiver', // Andrew receives
+			team_id: 0,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'love-all'
 		});
 
 		var cells = _scoresheet_cells(presses, DOUBLES_SETUP);
@@ -117,21 +117,21 @@ _describe('scoresheet generation', function() {
 
 	_it('overrule', function() {
 		var presses = [{
-			'type': 'pick_side', // Andrew&Alice pick left
-			'team1_left': true,
+			type: 'pick_side', // Andrew&Alice pick left
+			team1_left: true,
 		}];
 		presses.push({
-			'type': 'pick_server', // Andrew serves
-			'team_id': 0,
-			'player_id': 0,
+			type: 'pick_server', // Andrew serves
+			team_id: 0,
+			player_id: 0,
 		});
 		presses.push({
-			'type': 'pick_receiver', // Bob receives
-			'team_id': 1,
-			'player_id': 0,
+			type: 'pick_receiver', // Bob receives
+			team_id: 1,
+			player_id: 0,
 		});
 		presses.push({
-			'type': 'love-all'
+			type: 'love-all'
 		});
 		presses.push({
 			type: 'score',
@@ -214,21 +214,21 @@ _describe('scoresheet generation', function() {
 	_it('injuries', function() {
 		var presses = [];
 		presses.push({
-			'type': 'pick_side', // Andrew&Alice pick left
-			'team1_left': true,
+			type: 'pick_side', // Andrew&Alice pick left
+			team1_left: true,
 		});
 		presses.push({
-			'type': 'pick_server', // Andrew serves
-			'team_id': 0,
-			'player_id': 0,
+			type: 'pick_server', // Andrew serves
+			team_id: 0,
+			player_id: 0,
 		});
 		presses.push({
-			'type': 'pick_receiver', // Bob receives
-			'team_id': 1,
-			'player_id': 0,
+			type: 'pick_receiver', // Bob receives
+			team_id: 1,
+			player_id: 0,
 		});
 		presses.push({
-			'type': 'love-all'
+			type: 'love-all'
 		});
 		presses.push({
 			type: 'injury',
@@ -301,21 +301,21 @@ _describe('scoresheet generation', function() {
 	_it('yellow card', function() {
 		var base_presses = [];
 		base_presses.push({
-			'type': 'pick_side', // Andrew&Alice pick left
-			'team1_left': true,
+			type: 'pick_side', // Andrew&Alice pick left
+			team1_left: true,
 		});
 		base_presses.push({
-			'type': 'pick_server', // Alice serves
-			'team_id': 0,
-			'player_id': 1,
+			type: 'pick_server', // Alice serves
+			team_id: 0,
+			player_id: 1,
 		});
 		base_presses.push({
-			'type': 'pick_receiver', // Bob receives
-			'team_id': 1,
-			'player_id': 0,
+			type: 'pick_receiver', // Bob receives
+			team_id: 1,
+			player_id: 0,
 		});
 		base_presses.push({
-			'type': 'love-all'
+			type: 'love-all'
 		});
 		var presses = base_presses.slice();
 		presses.push({
@@ -403,21 +403,21 @@ _describe('scoresheet generation', function() {
 	_it('referee', function() {
 		var presses = [];
 		presses.push({
-			'type': 'pick_side', // Andrew&Alice pick left
-			'team1_left': true,
+			type: 'pick_side', // Andrew&Alice pick left
+			team1_left: true,
 		});
 		presses.push({
-			'type': 'pick_server', // Birgit serves
-			'team_id': 1,
-			'player_id': 1,
+			type: 'pick_server', // Birgit serves
+			team_id: 1,
+			player_id: 1,
 		});
 		presses.push({
-			'type': 'pick_receiver', // Alice receives
-			'team_id': 0,
-			'player_id': 1,
+			type: 'pick_receiver', // Alice receives
+			team_id: 0,
+			player_id: 1,
 		});
 		presses.push({
-			'type': 'love-all'
+			type: 'love-all'
 		});
 		presses.push({
 			type: 'referee', // Because of leaking roof
@@ -435,21 +435,21 @@ _describe('scoresheet generation', function() {
 	_it('interruption', function() {
 		var presses = [];
 		presses.push({
-			'type': 'pick_side', // Andrew&Alice pick left
-			'team1_left': true,
+			type: 'pick_side', // Andrew&Alice pick left
+			team1_left: true,
 		});
 		presses.push({
-			'type': 'pick_server', // Andrew serves
-			'team_id': 0,
-			'player_id': 0,
+			type: 'pick_server', // Andrew serves
+			team_id: 0,
+			player_id: 0,
 		});
 		presses.push({
-			'type': 'pick_receiver', // Bob receives
-			'team_id': 1,
-			'player_id': 0,
+			type: 'pick_receiver', // Bob receives
+			team_id: 1,
+			player_id: 0,
 		});
 		presses.push({
-			'type': 'love-all'
+			type: 'love-all'
 		});
 		presses.push({
 			type: 'score',
@@ -487,21 +487,21 @@ _describe('scoresheet generation', function() {
 	_it('red card', function() {
 		var presses = [];
 		presses.push({
-			'type': 'pick_side', // Andrew&Alice pick left
-			'team1_left': true,
+			type: 'pick_side', // Andrew&Alice pick left
+			team1_left: true,
 		});
 		presses.push({
-			'type': 'pick_server', // Alice serves
-			'team_id': 0,
-			'player_id': 1,
+			type: 'pick_server', // Alice serves
+			team_id: 0,
+			player_id: 1,
 		});
 		presses.push({
-			'type': 'pick_receiver', // Bob receives
-			'team_id': 1,
-			'player_id': 0,
+			type: 'pick_receiver', // Bob receives
+			team_id: 1,
+			player_id: 0,
 		});
 		presses.push({
-			'type': 'love-all'
+			type: 'love-all'
 		});
 		presses.push({
 			type: 'red-card',
@@ -575,16 +575,16 @@ _describe('scoresheet generation', function() {
 	_it('red card in singles', function() {
 		var presses = [];
 		presses.push({
-			'type': 'pick_side', // Alice picks left
-			'team1_left': true,
+			type: 'pick_side', // Alice picks left
+			team1_left: true,
 		});
 		presses.push({
-			'type': 'pick_server', // Alice serves
-			'team_id': 0,
-			'player_id': 0,
+			type: 'pick_server', // Alice serves
+			team_id: 0,
+			player_id: 0,
 		});
 		presses.push({
-			'type': 'love-all'
+			type: 'love-all'
 		});
 		presses.push({
 			type: 'red-card',
@@ -759,21 +759,21 @@ _describe('scoresheet generation', function() {
 	_it('retired', function() {
 		var base_presses = [];
 		base_presses.push({
-			'type': 'pick_side', // Andrew&Alice pick left
-			'team1_left': true,
+			type: 'pick_side', // Andrew&Alice pick left
+			team1_left: true,
 		});
 		base_presses.push({
-			'type': 'pick_server', // Andrew serves
-			'team_id': 0,
-			'player_id': 0,
+			type: 'pick_server', // Andrew serves
+			team_id: 0,
+			player_id: 0,
 		});
 		base_presses.push({
-			'type': 'pick_receiver', // Bob receives
-			'team_id': 1,
-			'player_id': 0,
+			type: 'pick_receiver', // Bob receives
+			team_id: 1,
+			player_id: 0,
 		});
 		base_presses.push({
-			'type': 'love-all'
+			type: 'love-all'
 		});
 		base_presses.push({
 			type: 'score',
@@ -812,21 +812,21 @@ _describe('scoresheet generation', function() {
 	_it('disqualified', function() {
 		var base_presses = [];
 		base_presses.push({
-			'type': 'pick_side', // Andrew&Alice pick left
-			'team1_left': true,
+			type: 'pick_side', // Andrew&Alice pick left
+			team1_left: true,
 		});
 		base_presses.push({
-			'type': 'pick_server', // Andrew serves
-			'team_id': 0,
-			'player_id': 0,
+			type: 'pick_server', // Andrew serves
+			team_id: 0,
+			player_id: 0,
 		});
 		base_presses.push({
-			'type': 'pick_receiver', // Bob receives
-			'team_id': 1,
-			'player_id': 0,
+			type: 'pick_receiver', // Bob receives
+			team_id: 1,
+			player_id: 0,
 		});
 		base_presses.push({
-			'type': 'love-all'
+			type: 'love-all'
 		});
 
 		var presses = base_presses.slice();
@@ -1690,6 +1690,40 @@ _describe('scoresheet generation', function() {
 			score: [21, 5],
 			width: 3,
 		});
+	});
+
+	_it('a natural game should stay that way', function() {
+		var presses = [];
+		presses.push({
+			type: 'pick_side', // Andrew&Alice pick left
+			team1_left: true,
+		});
+		presses.push({
+			type: 'pick_server', // Andrew serves
+			team_id: 0,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'pick_receiver', // Bob receives
+			team_id: 1,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'love-all'
+		});
+		press_score(presses, 21, 7);
+		presses.push({
+			type: 'postgame-confirm'
+		});
+
+		presses.push({
+			type: 'editmode_set-finished_games',
+			scores: [[21, 7], [12, 21]],
+		});
+		var cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		assert(! cells.some(function(cell) {
+			return cell.table == 0 && cell.type == 'editmode-sign';
+		}));
 
 	});
 });

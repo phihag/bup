@@ -964,11 +964,6 @@ function ui_init() {
 	}
 }
 
-if (typeof $ !== 'undefined') {
-	init();
-	$(ui_init);
-}
-
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var utils = require('./utils');
 	var calc = require('./calc');
@@ -985,4 +980,9 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 		network: network,
 		scoresheet: scoresheet,
 	};
+}
+
+if (typeof $ !== 'undefined') {
+	init();
+	$(ui_init);
 }

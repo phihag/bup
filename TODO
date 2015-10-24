@@ -1,6 +1,5 @@
-test that a natural game stays natural in scoresheet
 test by_side after side choice
-scoresheet: second game is there after deleting it
+scoresheet: second game is there (on top) after deleting it
 scoresheet: finished games (in doubles) with byside = true
 scoresheet: if finished_games does not change then no edit sign
 scoresheet: delete deleted games
@@ -217,6 +216,7 @@ manual editing in portrait (maybe distinguish by aspect ratio?)
 test svg_path_lines
 enable jshint in make test
 minify HTML
+remove JS stubs with /*@PRODUCTION*/ comments
 move manual editing confirm button to bottom (with white border) and give it a text "Übernehmen"
 -> Demo Jörg H, Manuel, Susanne
 -> Jens Köster fragen wegen zweimal gelbe Karte

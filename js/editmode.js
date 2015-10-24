@@ -112,7 +112,7 @@ function read_input() {
 	return res;
 }
 
-function editmode_change_score() {
+function change_score() {
 	var input_scores = read_input();
 	hide_inputs(input_scores.length);
 
@@ -153,6 +153,7 @@ return {
 	enter: enter,
 	leave: leave,
 	ui_init: ui_init,
+	change_score: change_score,
 };
 
 })();

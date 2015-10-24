@@ -396,6 +396,9 @@ function _parse_match(state, col_count) {
 			return;
 		}
 		var fgame = s.match.finished_games[i];
+		if (!fgame.synthetic) {
+			return;
+		}
 		sgame.circle = fgame.score;
 		if (sgame.serving_team === null) {
 			sgame.serving_team = 0;

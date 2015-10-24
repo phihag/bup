@@ -21,7 +21,7 @@ function _score_display_init(s) {
 			'data-game-index': game_index,
 			'data-team-side': 'left',
 		});
-		left_input.on('input', editmode_change_score);
+		left_input.on('input', editmode.change_score);
 		left.append(left_input);
 		var left_text = $('<span>');
 		left.append(left_text);
@@ -33,7 +33,7 @@ function _score_display_init(s) {
 			'data-game-index': game_index,
 			'data-team-side': 'right',
 		});
-		right_input.on('input', editmode_change_score);
+		right_input.on('input', editmode.change_score);
 		right.append(right_input);
 		var right_text = $('<span>');
 		right.append(right_text);
@@ -346,6 +346,8 @@ return {
 
 })();
 
-if (typeof module !== 'undefined') {
+if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var editmode = require('./editmode');
+
 	module.exports = render;
 }

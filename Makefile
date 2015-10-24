@@ -39,6 +39,7 @@ dist: cleandist
 		"libs/jquery.min.js" "libs/mousetrap.min.js" \
 		"js/utils.js" \
 		"js/pronounciation.js" \
+		"js/editmode.js" \
 		"js/liveaw.js" \
 		"js/courtspot.js" \
 		"js/btde.js" \
