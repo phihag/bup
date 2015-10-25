@@ -391,17 +391,10 @@ function show_settings() {
 	wrapper.attr('data-settings-visible', 'true');
 
 	wrapper.show();
-	if (state.courtspot) {
+	if (networks.courtspot || networks.btde) {
 		$('.setup_network_container').show();
 		$('.setup_show_manual').show();
 		$('#setup_manual_form').hide();
-		$('#setup_network_matches').attr('data-network-type', 'courtspot');
-		_network_hide_cb = network.ui_list_matches(state);
-	} else if (networks.btde) {
-		$('.setup_network_container').show();
-		$('.setup_show_manual').show();
-		$('#setup_manual_form').hide();
-		$('#setup_network_matches').attr('data-network-type', 'btde');
 		_network_hide_cb = network.ui_list_matches(state);
 	} else {
 		$('.setup_network_container').hide();
@@ -928,10 +921,16 @@ function ui_init() {
 	ui_init_settings();
 
 	var hash_query = utils.parse_query_string(window.location.hash.substr(1));
+	if (hash_query.court) {
+		// TODO make sure this is only for the current session, only overwrite settings when necessary
+		settings.court_id = hash_query.court;
+	}
+
 	if (hash_query.liveaw_match_id) {
 		liveaw_init(hash_query.liveaw_match_id);
-	} else if (hash_query.courtspot_court) {
-		courtspot.ui_init(state, hash_query.courtspot_court);
+	} else if (hash_query.courtspot !== undefined) {
+		networks.courtspot = courtspot();
+		networks.courtspot.ui_init(state);
 	} else if (hash_query.btde !== undefined) {
 		networks.btde = btde();
 		networks.btde.ui_init(state);

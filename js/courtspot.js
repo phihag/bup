@@ -1,4 +1,7 @@
-var courtspot = (function() {
+function courtspot() {
+'use strict';
+
+var baseurl = '../../';
 
 function _xml_get_text(node, element_name) {
 	var els = node.getElementsByTagName(element_name);
@@ -8,8 +11,8 @@ function _xml_get_text(node, element_name) {
 	return null;
 }
 
-function _courtspot_request_xml(s, path, cb) {
-	var url = s.courtspot.baseurl + path;
+function _request_xml(s, path, cb) {
+	var url = baseurl + path;
 	$.ajax(url, {
 		dataType: 'xml',
 	}).done(function(doc) {
@@ -109,13 +112,8 @@ function send_press(s, press) {
 	}
 }
 
-function start_cs_match(s, setup) {
-	setup.court_name = s.courtspot.court_name;
-	start_match(s, setup);
-}
-
-function courtspot_list_matches(s, cb) {
-	_courtspot_request_xml(s, 'php/dbabfrage.php', function(err, xml_doc) {
+function list_matches(s, cb) {
+	_request_xml(s, 'php/dbabfrage.php', function(err, xml_doc) {
 		if (err) {
 			return cb(err);
 		}
@@ -185,11 +183,12 @@ function courtspot_list_matches(s, cb) {
 				}
 			}
 
+			var match_id = 'btde_' + utils.iso8601(new Date()) + '_' + match_name + '_' + home_team.name + '-' + away_team.name;
 			matches.push({
 				setup: {
 					counting: '3x21',
-					is_doubles: home_team.players.length == 2,
 					match_name: match_name,
+					is_doubles: home_team.players.length == 2,
 					teams: [home_team, away_team],
 					courtspot_match_id: match_name,
 					team_competition: true,
@@ -197,36 +196,32 @@ function courtspot_list_matches(s, cb) {
 				network_score: network_score,
 			});
 		}
-		cb(err, matches);
+
+		var event = {
+			event_name: home_team.name + ' - ' + away_team.name,
+			matches: matches,
+		};
+		cb(err, event);
 	});
 }
 
-function init(s, baseurl, court_name) {
-	s.courtspot = {
-		baseurl: baseurl,
-		court_name: court_name,
-		list_matches: courtspot_list_matches,
-	};
-}
-
-function ui_init(s, court_name) {
-	var baseurl = '../../';
+function ui_init(s) {
 	var m = window.location.pathname.match(/^(.*\/)[^\/]+\/bup(?:\/(?:bup\.html)?)?$/);
 	if (m) {
 		baseurl = m[1];
 	}
 
-	init(s, baseurl, court_name);
 	$('.setup_network_container').show();
 	show_settings();
 }
 
 return {
 	ui_init: ui_init,
-	send_press: send_press,
-	start_cs_match: start_cs_match,
-	// For testing only
-	init: init,
+	list_matches: list_matches,
+};
+
 }
 
-})();
+if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	module.exports = courtspot;
+}
