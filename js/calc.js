@@ -400,13 +400,15 @@ function calc_press(s, press) {
 				new_score = score;
 			}
 
-			if (s.match.finished_games[i] && utils.deep_equal(s.match.finished_games[i].score, new_score)) {
-				return s.match.finished_games[i];
+			var fgame = s.match.finished_games[i];
+			if (fgame && utils.deep_equal(fgame.score, new_score)) {
+				return fgame;
 			}
 
 			return {
 				synthetic: true,
 				finished: true,
+				start_team1_left: (fgame ? fgame.start_team1_left : null),
 				team1_won: _is_winner(new_score[0], new_score[1]),
 				score: new_score,
 				editmode_by_side: !! press.by_side,

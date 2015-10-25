@@ -843,4 +843,41 @@ _describe('editmode', function() {
 		assert.strictEqual(s.game.started, false);
 		assert.strictEqual(s.match.announce_pregame, false);
 	});
+
+	_it('set-finished_games should not overwrite sides', function() {
+		var presses = [];
+		presses.push({
+			type: 'pick_side',
+			team1_left: true,
+		});
+		presses.push({
+			type: 'pick_server',
+			team_id: 1,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'love-all',
+		});
+		press_score(presses, 21, 17);
+		presses.push({
+			type: 'postgame-confirm',
+		});
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.match.finished_games[0].start_team1_left, true);
+
+		presses.push({
+			type: 'editmode_set-finished_games',
+			scores: [[21, 18]],
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.match.finished_games[0].start_team1_left, true);
+
+		presses = [];
+		presses.push({
+			type: 'editmode_set-finished_games',
+			scores: [[21, 18]],
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.match.finished_games[0].start_team1_left, null);
+	});
 });
