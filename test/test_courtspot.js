@@ -141,6 +141,14 @@ _describe('courtspot', function() {
 		), [
 			'reset',
 		]);
+		assert.deepEqual(courtspot.calc_actions(
+			make_local([[30, 29], [0, 0]]), {
+				score: [[30, 29], [0, 0], [1, 0]],
+			}
+		), [
+			'reset',
+		]);
+
 	});
 
 	_it('calc_actions score - undos', function() {
