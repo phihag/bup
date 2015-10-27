@@ -50,48 +50,60 @@ function fetch_state(s, cb) {
 }
 
 function calc_actions(s, remote_state) {
-	var res = [];
-	var local_score = network.calc_score(s);
+	var local_score = network.calc_score(s, true);
 	var remote_score = remote_state.score;
-	var game_idx;
+	if (remote_score.length == 0) {
+		remote_score = [[0, 0]];
+	}
 
-	var undos = 0;
+	if (local_score.length < remote_score.length) {
+		return ['reset'];
+	}
 
 	// Look for historical games that don't match
+	var game_idx;
 	for (game_idx = 0;game_idx < remote_score.length - 1;game_idx++) {
-		var diff1 = remote_score[0] - local_score[0];
-		var diff2 = remote_score[1] - local_score[1];
-		if ((diff1 > 0) || (diff2 > 0)) {
-			undos += Math.max(diff1, 0) + Math.max(diff2, 0);
-			for (var i = game_idx + 1;i < remote_score.length;i++) {
-				undos += remote_score[i][0] + remote_score[i][1];
-			}
+		if (
+				(remote_score[game_idx][0] != local_score[game_idx][0]) ||
+				(remote_score[game_idx][1] != local_score[game_idx][1])) {
+			return ['reset'];
 		}
 	}
 
-	// Undo all games that are farther than the most-advanced of ours
-	if (undos == 0) {
-		for (game_idx = fgames.length + 1;game_idx < s.match.max_games;game_idx++) {
-			remote_score = remote_state.score[game_idx];
-			if (remote_score) {
-				undos += remote_score[0] + remote_score[1];
-			}
-		}
-		// Undo all points from the current game that are farther than ours
-		remote_score = remote_state.score[fgames.length];
-		if (remote_score) {
-			undos += Math.max(0, remote_score[0] - s.game.score[0]) + Math.max(0, remote_score[1] - s.game.score[1]);
-		}
-	}
-
+	// Undo the newest remote game if needed
+	var diff1 = remote_score[remote_score.length - 1][0] - local_score[remote_score.length - 1][0];
+	var diff2 = remote_score[remote_score.length - 1][1] - local_score[remote_score.length - 1][1];
+	var undos = Math.max(0, diff1) + Math.max(0, diff2);
 	if (undos > 0) {
-		res = utils.repeat('undo', undos);
-		res.push('resync');
-		return res;
+		return utils.repeat('undo', undos);
 	}
 
-	// TODO check if previous games are correct
+	// At this point, our local score >= remote score
+	var actions = [];
+	for (game_idx = remote_score.length - 1;game_idx < local_score.length;game_idx++) {
+		var rscore = (game_idx < remote_score.length) ? remote_score[game_idx] : [0, 0];
+		var lscore = local_score[game_idx];
+		while ((rscore[0] < lscore[0]) && (rscore[0] < 20)) {
+			actions.push('+1-home');
+			rscore[0]++;
+		}
+		while ((rscore[1] < lscore[1]) && (rscore[1] < 20)) {
+			actions.push('+1-away');
+			rscore[1]++;
+		}
 
+		while ((rscore[0] < lscore[0]) || (rscore[1] < lscore[1])) {
+			if (rscore[0] < lscore[0]) {
+				actions.push('+1-home');
+				rscore[0]++;
+			}
+			if (rscore[1] < lscore[1]) {
+				actions.push('+1-away');
+				rscore[1]++;
+			}
+		}
+	}
+	return actions;
 }
 
 function request_action(action) {
@@ -103,6 +115,8 @@ function request_action(action) {
 			'&art=' + encodeURIComponent(s.setup.match_name)
 		);
 		break;
+	default:
+		throw new Error('Invalid CourtSpot action ' + action);
 	}
 }
 
@@ -119,6 +133,7 @@ function sync(s) {
 		var actions = calc_actions(s, remote_state);
 		console.log('actions:', actions);
 		// TODO compare with local state
+		// TODO if actions.length > 0  resync afterwards
 	});
 }
 

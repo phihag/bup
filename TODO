@@ -1,12 +1,12 @@
-code coverage
 CourtSpot
 	calc local cs_state
 	calc cs_actions
 
-	Anzeige alles after game end
+	Anzeige alles after game end?
 	remote state += server
 	remote state += sides
 
+	determine network_score and show it in list
 	read status before writing game start
 	write game start to CourtSpot
 	write side pick to CourtSpot
@@ -156,6 +156,7 @@ test black card before game start
 set window title (include match_name)
 up/down keys to switch between options; left-right for punishments
 display mode (tap anywhere to exit)
+	replay game in slow motion (in display mode)
 support multiple networks at the same time
 use court name in 20s announcements
 shortcuts u/r undo/redo

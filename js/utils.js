@@ -6,7 +6,7 @@ function repeat(val, len) {
 	while (len--) {
 		res.push(val);
 	}
-	return;
+	return res;
 }
 
 function qsEach(selector, func) {

@@ -217,6 +217,12 @@ _describe('network', function() {
 		assert.deepEqual(bup.network.calc_score(s), [[21, 0], [21, 0]]);
 	});
 
+	_it('calc_score with always_zero', function() {
+		var s = state_after([], SINGLES_SETUP);
+		assert.deepEqual(bup.network.calc_score(s), []);
+		assert.deepEqual(bup.network.calc_score(s, true), [[0, 0]]);
+	});
+
 	_it('network_score with state_at', function() {
 		function _assert_network_score(scores) {
 			var s = tutils.state_at(scores);

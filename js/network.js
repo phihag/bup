@@ -5,7 +5,7 @@ function get_netw() {
 	return networks.btde || networks.courtspot;
 }
 
-function calc_score(s) {
+function calc_score(s, always_zero) {
 	function _finish_score(score, team1_won) {
 		var winner = team1_won ? 0 : 1;
 		if (score[1 - winner] >= 29) {
@@ -21,7 +21,7 @@ function calc_score(s) {
 	s.match.finished_games.forEach(function(fg) {
 		scores.push(fg.score.slice());
 	});
-	if (s.game.started || (s.game.score[0] > 0) || (s.game.score[1] > 0)) {
+	if (s.game.started || (s.game.score[0] > 0) || (s.game.score[1] > 0) || always_zero) {
 		scores.push(s.game.score.slice());
 	}
 	if (s.match.finished && !s.match.won_by_score) {
