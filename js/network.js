@@ -56,8 +56,8 @@ function send_press(s, press) {
 
 		});
 	}
-	if (s.courtspot && s.setup.courtspot_match_id) {
-		courtspot.send_press(s, press);
+	if (networks.courtspot && s.setup.courtspot_match_id) {
+		networks.courtspot.send_press(s, press);
 	}
 	if (networks.btde && s.setup.btde_match_id) {
 		networks.btde.send_press(s, press);

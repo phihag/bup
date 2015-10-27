@@ -426,6 +426,7 @@ function hide_settings(force) {
 }
 
 function resume_match(s) {
+	s.settings = settings;
 	calc.init_state(s, null, s.presses);
 	calc.state(s);
 	state = s;
@@ -567,6 +568,7 @@ function settings_store() {
 
 function init() {
 	settings_load();
+	state.settings = settings;
 }
 
 
@@ -970,14 +972,16 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var render = require('./render');
 	var scoresheet = require('./scoresheet');
 	var network = require('./network');
+	var courtspot = require('./courtspot');
 	var pronounciation = require('./pronounciation');
 
 	module.exports = {
-		utils: utils,
 		calc: calc,
-		pronounciation: pronounciation,
+		courtspot: courtspot,
 		network: network,
+		pronounciation: pronounciation,
 		scoresheet: scoresheet,
+		utils: utils,
 	};
 }
 

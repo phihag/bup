@@ -1,6 +1,14 @@
 var utils = (function() {
 'use strict';
 
+function repeat(val, len) {
+	var res = [];
+	while (len--) {
+		res.push(val);
+	}
+	return;
+}
+
 function qsEach(selector, func) {
 	var nodes = document.querySelectorAll(selector);
 	for (var i = 0;i < nodes.length;i++) {
@@ -158,6 +166,7 @@ return {
 	set_class: set_class,
 	obj_update: obj_update,
 	deep_equal: deep_equal,
+	repeat: repeat,
 };
 })();
 

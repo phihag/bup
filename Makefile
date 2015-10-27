@@ -61,8 +61,16 @@ test:
 	@# jshint js/*.js
 	@# eslint js/*.js
 
+coverage:
+	istanbul cover _mocha -- -R spec
+
+coverage-display: coverage
+	xdg-open coverage/lcov-report/js/index.html
+
+cd: coverage-display
+
 clean: cleandist
 	rm -rf -- libs
 	rm -rf -- node_modules
 
-.PHONY: default help deps test clean install-libs force-install-libs upload dist cleandist
+.PHONY: default help deps test clean install-libs force-install-libs upload dist cleandist coverage coverage-display cd

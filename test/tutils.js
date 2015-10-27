@@ -42,12 +42,41 @@ DOUBLES_TEAM_SETUP.teams[0].name = 'A team';
 DOUBLES_TEAM_SETUP.teams[1].name = 'B team';
 DOUBLES_TEAM_SETUP.team_competition = true;
 
-function state_after(presses, setup) {
+function state_after(presses, setup, settings) {
 	var state = {};
 	bup.calc.init_state(state, setup);
 	state.presses = presses;
 	bup.calc.state(state);
 	return state;
+}
+
+function state_at(network_score, setup, settings) {
+	if (! setup) {
+		setup = DOUBLES_SETUP;
+	}
+	var presses = [{
+		type: 'pick_side',
+		team1_left: true,
+	}, {
+		type: 'pick_server',
+		team_id: 0,
+		player_id: 0,
+	}, {
+		type: 'pick_receiver',
+		team_id: 1,
+		player_id: 0,
+	}, {
+		type: 'love-all',
+	}, {
+		type: 'editmode_set-finished_games',
+		scores: network_score.slice(0, network_score.length - 1),
+		by_side: false,
+	}, {
+		type: 'editmode_set-score',
+		score: network_score[network_score.length - 1],
+		by_side: false,
+	}];
+	return state_after(presses, setup, settings);
 }
 
 /**
@@ -73,13 +102,14 @@ function press_score(presses, left_score, right_score) {
 }
 
 module.exports = {
-	bup: bup,
+	DOUBLES_SETUP: DOUBLES_SETUP,
+	SINGLES_SETUP: SINGLES_SETUP,
+	DOUBLES_TEAM_SETUP: DOUBLES_TEAM_SETUP,
+	SINGLES_TEAM_SETUP: SINGLES_TEAM_SETUP,
 	_describe: _describe,
 	_it: _it,
-	SINGLES_SETUP: SINGLES_SETUP,
-	SINGLES_TEAM_SETUP: SINGLES_TEAM_SETUP,
-	DOUBLES_SETUP: DOUBLES_SETUP,
-	DOUBLES_TEAM_SETUP: DOUBLES_TEAM_SETUP,
-	state_after: state_after,
+	bup: bup,
 	press_score: press_score,
+	state_after: state_after,
+	state_at: state_at,
 };

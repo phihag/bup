@@ -297,9 +297,6 @@ function calc_press(s, press) {
 		press.char = 'U';
 		s.match.marks.push(press);
 		break;
-	case 'mark': // Deprecated
-		s.match.marks.push(press);
-		break;
 	case 'yellow-card':
 		press.char = 'W';
 		s.match.marks.push(press);

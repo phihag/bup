@@ -1,8 +1,12 @@
+code coverage
 CourtSpot
-
 	calc local cs_state
-	fetch remote cs_state
 	calc cs_actions
+
+	Anzeige alles after game end
+	remote state += server
+	remote state += sides
+
 	read status before writing game start
 	write game start to CourtSpot
 	write side pick to CourtSpot
@@ -10,14 +14,20 @@ CourtSpot
 	Write presses to CourtSpot
 	switch to anzeige=punkte on postgame-confirm/postmatch-confirm
 	show loading icon while we load from CourtSpot
-	refresh button to refresh matches now
 	CourtSpot: test various network outages
 	network_matches: hide resume?
+	ask on resuming whether to use copy
 	CourtSpot
 		display our current court in settings (+ CourtSpot)
 		allow changing which court we're on (in settings / by click/touch on court name)
-	message Ulf about JSON string (to resume)
+	test perspective (umpires stand at the sides of the hall, looking at each other)
 
+move settings into an own module
+ban raw access to settings, use s.settings
+make sure we only transmit btde games when they are btde (not when we start a demo game)
+	but do when we load a btde game
+make sure we only transmit courtspot games when they are btde (not when we start a demo game)
+	but do when we load a courtspot game
 test ending match with edit
 edit mode to change sides / change ends
 	scoresheet with finished_games
@@ -50,7 +60,6 @@ retest Manuel's notes
 
 write div/LICENSE.commercial.de
 	include in dist
-option for double-click editmode (default off)
 improve touch behavior (listen to touchstart instead of click)
 	utils.bind_click
 	actually change
@@ -60,9 +69,12 @@ improve touch behavior (listen to touchstart instead of click)
 offline webapp Manifest (only in production)
 	reloading
 
-allow changing court
-setting for current court
 
+
+
+
+
+option for double-click editmode (default off)
 test our resuming with courtspot / badmintonticker connection
 document network error cases
 animation in hide_settings (go to top-right icon)

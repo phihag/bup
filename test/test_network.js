@@ -216,4 +216,17 @@ _describe('network', function() {
 		s = state_after(presses, SINGLES_SETUP);
 		assert.deepEqual(bup.network.calc_score(s), [[21, 0], [21, 0]]);
 	});
+
+	_it('network_score with state_at', function() {
+		function _assert_network_score(scores) {
+			var s = tutils.state_at(scores);
+			assert.deepEqual(bup.network.calc_score(s), scores);
+		}
+
+		_assert_network_score([[12, 13]]);
+		_assert_network_score([[0, 0]]);
+		_assert_network_score([[21, 23], [21, 5]]);
+		_assert_network_score([[21, 23], [9, 5]]);
+		_assert_network_score([[21, 23], [21, 5], [30, 29]]);
+	});
 });

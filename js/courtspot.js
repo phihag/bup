@@ -1,7 +1,5 @@
-function courtspot() {
+function courtspot(baseurl) {
 'use strict';
-
-var baseurl = '../../';
 
 function _xml_get_text(node, element_name) {
 	var els = node.getElementsByTagName(element_name);
@@ -11,58 +9,167 @@ function _xml_get_text(node, element_name) {
 	return null;
 }
 
-function _request_xml(s, path, cb) {
-	var url = baseurl + path;
-	$.ajax(url, {
+function _request(s, options, cb) {
+	options.timeout = s.settings.network_timeout;
+	$.ajax(options).done(function(res) {
+		network.on_success();
+		return cb(null, res);
+	}).fail(function(xhr) {
+		var msg = ((xhr.status === 0) ?
+			'badmintonticker nicht erreichbar' :
+			('Netzwerk-Fehler (Code ' + xhr.status + ')')
+		);
+		return cb({
+			type: 'network-error',
+			status: xhr.status,
+			msg: msg,
+		});
+	});
+}
+
+function fetch_state(s, cb) {
+	var data_url = (baseurl +
+		'php/dbClientAbfrage.php?' +
+		'court=' + encodeURIComponent(s.settings.court_id) +
+		'&art=' + encodeURIComponent(s.setup.match_name)
+	);
+	_request(s, {
+		url: data_url,
 		dataType: 'xml',
-	}).done(function(doc) {
-		cb(null, doc);
+	}, function(err, response) {
+		if (err) {
+			return cb(err);
+		}
+		var match_node = response.getElementsByTagName('COURT')[0];
+
+		var cs_state = {
+			score: _parse_score(match_node),
+		};
+		cb(err, cs_state);
 	});
 }
 
-var _courtspot_write_queue = [];
-var _courtspot_write_running = false;
-function _courtspot_write_queue_work() {
-	if (_courtspot_write_running) {
-		return;
+function calc_actions(s, remote_state) {
+	var res = [];
+	var local_score = network.calc_score(s);
+	var remote_score = remote_state.score;
+	var game_idx;
+
+	var undos = 0;
+
+	// Look for historical games that don't match
+	for (game_idx = 0;game_idx < remote_score.length - 1;game_idx++) {
+		var diff1 = remote_score[0] - local_score[0];
+		var diff2 = remote_score[1] - local_score[1];
+		if ((diff1 > 0) || (diff2 > 0)) {
+			undos += Math.max(diff1, 0) + Math.max(diff2, 0);
+			for (var i = game_idx + 1;i < remote_score.length;i++) {
+				undos += remote_score[i][0] + remote_score[i][1];
+			}
+		}
 	}
-	// TODO handle errors and re-send
-	if (_courtspot_write_queue.length == 0) {
-		_courtspot_write_running = false;
-		return;
+
+	// Undo all games that are farther than the most-advanced of ours
+	if (undos == 0) {
+		for (game_idx = fgames.length + 1;game_idx < s.match.max_games;game_idx++) {
+			remote_score = remote_state.score[game_idx];
+			if (remote_score) {
+				undos += remote_score[0] + remote_score[1];
+			}
+		}
+		// Undo all points from the current game that are farther than ours
+		remote_score = remote_state.score[fgames.length];
+		if (remote_score) {
+			undos += Math.max(0, remote_score[0] - s.game.score[0]) + Math.max(0, remote_score[1] - s.game.score[1]);
+		}
 	}
 
-	_courtspot_write_running = true;
-	var task = _courtspot_write_queue.shift();
-	var url = task.s.courtspot.baseurl + task.path;
-	$.ajax(url).done(function() {
-		_courtspot_write_running = false;
-		return _courtspot_write_queue_work();
-	});
-}
-function _courtspot_write(s, path) {
-	_courtspot_write_queue.push({
-		s: s, path: path
-	});
-	_courtspot_write_queue_work();
+	if (undos > 0) {
+		res = utils.repeat('undo', undos);
+		res.push('resync');
+		return res;
+	}
+
+	// TODO check if previous games are correct
+
 }
 
+function request_action(action) {
+	switch (action) {
+	case 'undo':
+		var TODO = (baseurl +
+			'php/dbStandEintrag.php?befehl=minusEins' +
+			'&court=' + encodeURIComponent(s.settings.court_id) +
+			'&art=' + encodeURIComponent(s.setup.match_name)
+		);
+		break;
+	}
+}
+
+function sync(s) {
+	if (!s.remote.initialized) {
+		return _courtspot_send_init(s);
+	}
+
+	fetch_state(s, function(err, remote_state) {
+		if (err) {
+			return network.on_error(err);
+		}
+		console.log('remote_state:', remote_state);
+		var actions = calc_actions(s, remote_state);
+		console.log('actions:', actions);
+		// TODO compare with local state
+	});
+}
+
+// Move the game to this court and reset score
 function _courtspot_send_init(s) {
-	// Move the game to this court
-	_courtspot_write(s,
+	if (s.remote.initializing) {
+		return;  // Do not send requests twice
+	}
+
+	s.remote.initializing = true;
+	var init1_url = (baseurl +
 		'php/dbClientEintrag.php?befehl=artSetzen' +
 		'&wert=' + encodeURIComponent(s.setup.match_name) +
-		'&court=' + encodeURIComponent(s.courtspot.court_name));
-	_courtspot_write(s,
-		'php/dbStandEintrag.php?befehl=nullnull&verein=Heim&satz=1' + 
-		'&court=' + encodeURIComponent(s.courtspot.court_name) +
-		'&art=' + encodeURIComponent(s.setup.match_name));
+		'&court=' + encodeURIComponent(s.settings.court_id));
+	_request(s, {url: init1_url}, function(err) {
+		if (err) {
+			s.remote.initializing = false;
+			return network.on_error(err);
+		}
 
+		var init2_url = (baseurl +
+			'php/dbStandEintrag.php?befehl=nullnull&verein=Heim&satz=1' + 
+			'&court=' + encodeURIComponent(s.settings.court_id) +
+			'&art=' + encodeURIComponent(s.setup.match_name));
+		_request(s, {url: init2_url}, function(err) {
+			if (err) {
+				s.remote.initializing = false;
+				return network.on_error(err);
+			}
+
+			var init3_url = (baseurl +
+				'php/dbClientEintrag.php?befehl=anzeigeSetzen&wert=alles' +
+				'&court=' + encodeURIComponent(s.settings.court_id));
+			_request(s, {url: init3_url}, function(err) {
+				if (err) {
+					s.remote.initializing = false;
+					return network.on_error(err);
+				}
+				s.remote.initializing = false;
+				s.remote.initialized = true;
+			});
+		});
+	});
+}
+
+/*
 	// Switch sides if necessary
 	if (! s.game.team1_left) {
 		_courtspot_write(s,
 			'php/dbClientEintrag.php?befehl=Seitenwechsel&wert=abc' + 
-			'&court=' + encodeURIComponent(s.courtspot.court_name)
+			'&court=' + encodeURIComponent(s.remote.court_name)
 		);
 	}
 
@@ -71,14 +178,14 @@ function _courtspot_send_init(s) {
 		_courtspot_write(s,
 			'php/dbClientEintrag.php?befehl=Spielerwechsel' + 
 			'&wert=heim' +
-			'&court=' + encodeURIComponent(s.courtspot.court_name)
+			'&court=' + encodeURIComponent(s.remote.court_name)
 		);
 	}
 	if (! s.game.teams_player1_even[1]) {
 		_courtspot_write(s,
 			'php/dbClientEintrag.php?befehl=Spielerwechsel' + 
 			'&wert=gast' +
-			'&court=' + encodeURIComponent(s.courtspot.court_name)
+			'&court=' + encodeURIComponent(s.remote.court_name)
 		);
 	}
 
@@ -86,34 +193,45 @@ function _courtspot_send_init(s) {
 	_courtspot_write(s,
 		'php/dbClientEintrag.php?befehl=aufgabeSetzen' + 
 		'&wert=' + ((s.game.team1_serving == s.game.team1_left) ? 1 : 4) +
-		'&court=' + encodeURIComponent(s.courtspot.court_name)
+		'&court=' + encodeURIComponent(s.remote.court_name)
 	);
 
 	// Activate display
 	_courtspot_write(s,
 		'php/dbClientEintrag.php?befehl=anzeigeSetzen' + 
 		'&wert=alles' +
-		'&court=' + encodeURIComponent(s.courtspot.court_name)
+		'&court=' + encodeURIComponent(s.remote.court_name)
 	);
 }
+*/
 
 function send_press(s, press) {
-	switch (press.type) {
-	case 'pick_server':
-		if ((s.match.finished_games.length == 0) && !s.setup.is_doubles) {
-			_courtspot_send_init(s);
-		}
-		break;
-	case 'pick_receiver':
-		if ((s.match.finished_games.length == 0) && s.setup.is_doubles) {
-			_courtspot_send_init(s);
-		}
-		break;
+	return sync(s);
+}
+
+function _parse_score(match_node) {
+	function _get_score(key) {
+		var score_str = _xml_get_text(match_node, key);
+		return score_str ? parseInt(score_str, 10) : -1;
 	}
+
+	var res = [];
+	for (var game_idx = 1;game_idx <= 3;game_idx++) {
+		var home_score = _get_score(match_node, 'HeimSatz' + game_idx);
+		var away_score = _get_score(match_node, 'GastSatz' + game_idx);
+		if ((home_score >= 0) && (away_score >= 0)) {
+			res.push([home_score, away_score]);
+		}
+	}
+	return res;
 }
 
 function list_matches(s, cb) {
-	_request_xml(s, 'php/dbabfrage.php', function(err, xml_doc) {
+	var options = {
+		url: baseurl + 'php/dbabfrage.php',
+		dataType: 'xml',
+	};
+	_request(s, options, function(err, xml_doc) {
 		if (err) {
 			return cb(err);
 		}
@@ -155,11 +273,6 @@ function list_matches(s, cb) {
 			};
 		}
 
-		function _get_score(match_node, key) {
-			var score_str = _xml_get_text(match_node, key);
-			return score_str ? parseInt(score_str, 10) : -1;
-		}
-
 		var matches = [];
 		var v_node = xml_doc.getElementsByTagName('VERWALTUNG')[0];
 		var match_nodes = xml_doc.getElementsByTagName('Spiel');
@@ -174,14 +287,7 @@ function list_matches(s, cb) {
 				continue;
 			}
 
-			var network_score = [];
-			for (var game_idx = 1;game_idx <= 3;game_idx++) {
-				var home_score = _get_score(match_node, 'HeimSatz' + game_idx);
-				var away_score = _get_score(match_node, 'GastSatz' + game_idx);
-				if ((home_score >= 0) && (away_score >= 0)) {
-					network_score.push([home_score, away_score]);
-				}
-			}
+			var network_score = _parse_score(match_node);
 
 			var match_id = 'btde_' + utils.iso8601(new Date()) + '_' + match_name + '_' + home_team.name + '-' + away_team.name;
 			matches.push({
@@ -206,7 +312,11 @@ function list_matches(s, cb) {
 }
 
 function ui_init(s) {
-	var m = window.location.pathname.match(/^(.*\/)[^\/]+\/bup(?:\/(?:bup\.html)?)?$/);
+	if (!baseurl) {
+		baseurl = '../../';
+	}
+
+	var m = window.location.pathname.match(/^(.*\/)html\/bup(?:\/(?:bup\.html)?)?$/);
 	if (m) {
 		baseurl = m[1];
 	}
@@ -218,10 +328,15 @@ function ui_init(s) {
 return {
 	ui_init: ui_init,
 	list_matches: list_matches,
+	send_press: send_press,
+	calc_actions: calc_actions,
 };
 
 }
 
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var network = require('./network');
+	var utils = require('./utils');
+
 	module.exports = courtspot;
 }
