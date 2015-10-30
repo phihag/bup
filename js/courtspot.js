@@ -12,7 +12,6 @@ function _xml_get_text(node, element_name) {
 function _request(s, options, cb) {
 	options.timeout = s.settings.network_timeout;
 	$.ajax(options).done(function(res) {
-		network.on_success();
 		return cb(null, res);
 	}).fail(function(xhr) {
 		var msg = ((xhr.status === 0) ?
@@ -25,6 +24,24 @@ function _request(s, options, cb) {
 			msg: msg,
 		});
 	});
+}
+
+
+function _parse_score(match_node) {
+	function _get_score(key) {
+		var score_str = _xml_get_text(match_node, key);
+		return score_str ? parseInt(score_str, 10) : -1;
+	}
+
+	var res = [];
+	for (var game_idx = 1;game_idx <= 3;game_idx++) {
+		var home_score = _get_score(match_node, 'HeimSatz' + game_idx);
+		var away_score = _get_score(match_node, 'GastSatz' + game_idx);
+		if ((home_score >= 0) && (away_score >= 0)) {
+			res.push([home_score, away_score]);
+		}
+	}
+	return res;
 }
 
 function fetch_state(s, cb) {
@@ -49,235 +66,47 @@ function fetch_state(s, cb) {
 	});
 }
 
-function calc_actions(s, remote_state) {
-	var local_score = network.calc_score(s, true);
-	var remote_score = remote_state.score;
-	if (remote_score.length == 0) {
-		remote_score = [[0, 0]];
+function sync(s) {
+	var netscore = network.calc_score(s);
+
+	// CourtSpot requires us to set the team currently serving.
+	// Calculate that from match winner or actual game details.
+	var cs_team1 = (s.match.team1_won === null) ? s.game.team1_serving : s.match.team1_won;
+
+	var game_score = s.match.game_score;
+	var server_num = (s.court.left_serving ? 1 : 3) + (s.court.serving_downwards ? 1 : 0);
+
+	var data = {
+		'Detail': 'alles',
+		'Satz': netscore.length,
+		'gewonnenHeim': game_score[0],
+		'gewonnenGast': game_score[1],
+		'team_links': (s.game.team1_left ? 'heim' : 'gast'),
+		'linksheim': (state.game.teams_player1_even[0] ? 'Spieler2' : 'Spieler1'),
+		'linksgast': (state.game.teams_player1_even[1] ? 'Spieler2' : 'Spieler1'),
+		'aufschlag': server_num,
+	};
+	for (var i = 0;i < s.match.max_games;i++) {
+		data['HeimSatz' + (i+1)] = (i < netscore.length) ? netscore[i][0] : -1;
+		data['GastSatz' + (i+1)] = (i < netscore.length) ? netscore[i][1] : -1;
 	}
 
-	if (local_score.length < remote_score.length) {
-		return [['reset']];
-	}
-
-	// Look for historical games that don't match
-	var game_idx;
-	for (game_idx = 0;game_idx < remote_score.length - 1;game_idx++) {
-		if (
-				(remote_score[game_idx][0] != local_score[game_idx][0]) ||
-				(remote_score[game_idx][1] != local_score[game_idx][1])) {
-			return [['reset']];
-		}
-	}
-
-	// Undo the newest remote game if needed
-	var diff1 = remote_score[remote_score.length - 1][0] - local_score[remote_score.length - 1][0];
-	var diff2 = remote_score[remote_score.length - 1][1] - local_score[remote_score.length - 1][1];
-	var undos = Math.max(0, diff1) + Math.max(0, diff2);
-	if (undos > 0) {
-		return utils.repeat(['undo'], undos);
-	}
-
-	// At this point, our local score >= remote score
-	var actions = [];
-	for (game_idx = remote_score.length - 1;game_idx < local_score.length;game_idx++) {
-		var rscore = (game_idx < remote_score.length) ? remote_score[game_idx] : [0, 0];
-		var lscore = local_score[game_idx];
-		while ((rscore[0] < lscore[0]) && (rscore[0] < 20)) {
-			actions.push(['+1', 'home', game_idx]);
-			rscore[0]++;
-		}
-		while ((rscore[1] < lscore[1]) && (rscore[1] < 20)) {
-			actions.push(['+1', 'away', game_idx]);
-			rscore[1]++;
-		}
-
-		while ((rscore[0] < lscore[0]) || (rscore[1] < lscore[1])) {
-			if (rscore[0] < lscore[0]) {
-				actions.push(['+1', 'home', game_idx]);
-				rscore[0]++;
-			}
-			if (rscore[1] < lscore[1]) {
-				actions.push(['+1', 'away', game_idx]);
-				rscore[1]++;
-			}
-		}
-	}
-	return actions;
-}
-
-// Move the game to this court and reset score
-function _reset(s, cb) {
-	var init1_url = (baseurl +
-		'php/dbClientEintrag.php?befehl=artSetzen' +
-		'&wert=' + encodeURIComponent(s.setup.match_name) +
-		'&court=' + encodeURIComponent(s.settings.court_id));
-	_request(s, {url: init1_url}, function(err) {
-		if (err) {
-			return cb(err);
-		}
-
-		var init2_url = (baseurl +
-			'php/dbStandEintrag.php?befehl=nullnull&verein=Heim&satz=1' + 
-			'&court=' + encodeURIComponent(s.settings.court_id) +
-			'&art=' + encodeURIComponent(s.setup.match_name));
-		_request(s, {url: init2_url}, function(err) {
-			if (err) {
-				return cb(err);
-			}
-
-			var init3_url = (baseurl +
-				'php/dbClientEintrag.php?befehl=anzeigeSetzen&wert=alles' +
-				'&court=' + encodeURIComponent(s.settings.court_id));
-			_request(s, {url: init3_url}, function(err) {
-				if (!err) {
-					s.remote.initialized = true;
-				}
-				cb(err);
-			});
-		});
-	});
-}
-
-function _request_action(s, action, cb) {
-	var url;
-
-	switch (action[0]) {
-	case 'undo':
-		url = (baseurl +
-			'php/dbStandEintrag.php?befehl=minusEins' +
-			'&court=' + encodeURIComponent(s.settings.court_id) +
-			'&art=' + encodeURIComponent(s.setup.match_name)
-		);
-		break;
-	case '+1':
-		url = (baseurl +
-			'php/dbStandEintrag.php?befehl=plusEins' +
+	var request_url = (
+		baseurl + 'php/dbStandEintrag.php?befehl=setzen' + 
 			'&court=' + encodeURIComponent(s.settings.court_id) +
 			'&art=' + encodeURIComponent(s.setup.match_name) +
-			'&satz=' + encodeURIComponent(action[2]) +
-			'&verein=' + ({'home': 'Heim', 'away': 'Gast'}[action[1]])
-		);
-		break;
-	case 'reset':
-		return _reset(s, cb);
-	default:
-		return cb(new Error('Invalid CourtSpot action ' + action));
-	}
-
-	_request(s, {url: url}, cb);
-}
-
-function _request_actions(s, actions) {
-	if (actions.length == 0) {
-		s.remote.syncing = false;
-		// resync
-		sync(s);
-		return;
-	}
-
-	var a = actions.shift();
-	_request_action(s, a, function(err) {
-		if (err) {
-			s.remote.syncing = false;
-			network.on_error(err);
-			return;
-		}
-
-		_request_actions(s, actions);
+			'&verein=' + encodeURIComponent(cs_team1 ? 'heim' : 'gast'));
+	_request(s, {
+		method: 'POST',
+		data: data,
+		url: request_url,
+	}, function(err) {
+		network.errstate('courtspot.set', err);
 	});
 }
-
-function sync(s) {
-	if (s.remote.syncing) {
-		return; // Still requests to send before we actually resync
-	}
-
-	if (!s.remote.initialized) {
-		s.remote.syncing = true;
-		return _request_actions(s, [['reset']], function(err) {
-			if (err) {
-				network.on_error(err);
-			}
-		});
-	}
-
-	fetch_state(s, function(err, remote_state) {
-		if (err) {
-			return network.on_error(err);
-		}
-		console.log('remote_state: ' + JSON.stringify(remote_state, null, 2));
-		var actions = calc_actions(s, remote_state);
-		if (actions.length == 0) {
-			return;  // We are synchronized
-		}
-
-		s.remote.syncing = true;
-		_request_actions(s, actions);
-	});
-}
-
-
-/*
-	// Switch sides if necessary
-	if (! s.game.team1_left) {
-		_courtspot_write(s,
-			'php/dbClientEintrag.php?befehl=Seitenwechsel&wert=abc' + 
-			'&court=' + encodeURIComponent(s.remote.court_name)
-		);
-	}
-
-	// Set player positions
-	if (! s.game.teams_player1_even[0]) {
-		_courtspot_write(s,
-			'php/dbClientEintrag.php?befehl=Spielerwechsel' + 
-			'&wert=heim' +
-			'&court=' + encodeURIComponent(s.remote.court_name)
-		);
-	}
-	if (! s.game.teams_player1_even[1]) {
-		_courtspot_write(s,
-			'php/dbClientEintrag.php?befehl=Spielerwechsel' + 
-			'&wert=gast' +
-			'&court=' + encodeURIComponent(s.remote.court_name)
-		);
-	}
-
-	// Set server
-	_courtspot_write(s,
-		'php/dbClientEintrag.php?befehl=aufgabeSetzen' + 
-		'&wert=' + ((s.game.team1_serving == s.game.team1_left) ? 1 : 4) +
-		'&court=' + encodeURIComponent(s.remote.court_name)
-	);
-
-	// Activate display
-	_courtspot_write(s,
-		'php/dbClientEintrag.php?befehl=anzeigeSetzen' + 
-		'&wert=alles' +
-		'&court=' + encodeURIComponent(s.remote.court_name)
-	);
-}
-*/
 
 function send_press(s, press) {
-	return sync(s);
-}
-
-function _parse_score(match_node) {
-	function _get_score(key) {
-		var score_str = _xml_get_text(match_node, key);
-		return score_str ? parseInt(score_str, 10) : -1;
-	}
-
-	var res = [];
-	for (var game_idx = 1;game_idx <= 3;game_idx++) {
-		var home_score = _get_score(match_node, 'HeimSatz' + game_idx);
-		var away_score = _get_score(match_node, 'GastSatz' + game_idx);
-		if ((home_score >= 0) && (away_score >= 0)) {
-			res.push([home_score, away_score]);
-		}
-	}
-	return res;
+	sync(s);
 }
 
 function list_matches(s, cb) {
@@ -383,7 +212,6 @@ return {
 	ui_init: ui_init,
 	list_matches: list_matches,
 	send_press: send_press,
-	calc_actions: calc_actions,
 	sync: sync,
 };
 

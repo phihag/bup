@@ -438,7 +438,7 @@ function start_match(s, setup) {
 	calc.state(s);
 	render.ui_render(s);
 	network.send_press(s, {
-		type: '_start_match'
+		type: '_start_match',
 	});
 }
 

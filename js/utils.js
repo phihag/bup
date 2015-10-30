@@ -16,6 +16,25 @@ function qsEach(selector, func) {
 	}
 }
 
+function values(obj) {
+	var res = [];
+	for (var key in obj) {
+		if (Object.prototype.hasOwnProperty.call(obj, key)) {
+			res.push(obj[key]);
+		}
+	}
+	return res;
+}
+
+function any(ar) {
+	for (var i = 0;i < ar.length;i++) {
+		if (ar[i]) {
+			return true;
+		}
+	}
+	return false;
+}
+
 function uuid() {
 	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
 		var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
@@ -167,6 +186,8 @@ return {
 	obj_update: obj_update,
 	deep_equal: deep_equal,
 	repeat: repeat,
+	values: values,
+	any: any,
 };
 })();
 

@@ -46,16 +46,22 @@ function ui_render_login(container) {
 				msg = m[1];
 			} else if (/<div class="logout">/.exec(res)) {
 				// Successful
-				network.on_success();
+				errstate('btde.login', null);
 				return;
 			}
 
 			login_error.text(msg);
+			errstate('btde.login', {
+				msg: 'Login fehlgeschlagen',
+			});
 		}).fail(function(xhr) {
 			var code = xhr.status;
 			loading_icon.hide();
 			login_button.removeAttr('disabled');
 			login_error.text('Login fehlgeschlagen (Fehler ' + code + ')');
+			errstate('btde.login', {
+				msg: 'Login fehlgeschlagen (Fehler ' + code + ')',
+			});
 		});
 
 		return false;
@@ -98,10 +104,10 @@ function send_court(s) {
 		data: $.param(post_data),
 		contentType: 'application/x-www-form-urlencoded',
 	}, function(err) {
-		if (err) {
-			return network.on_error(err);
+		network.errstate('btde.login', err);
+		if (! err) {
+			s.remote.btde_court = post_data.feld;
 		}
-		s.remote.btde_court = post_data.feld;
 	});
 }
 
@@ -127,10 +133,10 @@ function send_score(s) {
 		data: JSON.stringify(post_data),
 		contentType: 'application/json; charset=utf-8',
 	}, function(err) {
-		if (err) {
-			return network.on_error(err);
+		network.errstate('btde.write', err);
+		if (!err) {
+			s.remote.btde_score = netscore;
 		}
-		s.remote.btde_score = netscore;
 	});
 }
 

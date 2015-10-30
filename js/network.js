@@ -168,11 +168,12 @@ function ui_list_matches(s, silent) {
 	netw.list_matches(s, function(err, event) {
 		status_container.empty();
 		_matchlist_install_reload_button(s);
+		errstate('list_matches', err);
 		if (err) {
 			var err_msg = $('<div class="network_error">');
 			err_msg.text(err.msg);
 			status_container.append(err_msg);
-			return on_error(err);
+			return;
 		}
 
 		ui_render_matchlist(s, event);
@@ -182,9 +183,19 @@ function ui_list_matches(s, silent) {
 }
 
 
-var erroneous = false;
+// Map of component => error status (true: currently faulty)
+var erroneous = {};
+
 var login_rendered = false;
 var resync_timeout = null;
+
+function schedule_resync() {
+	if (resync_timeout !== null) {
+		window.clearTimeout(resync_timeout);
+		resync_timeout = null;
+	}
+	resync_timeout = window.setTimeout(resync, Math.max(settings.network_update_interval, 100));
+}
 
 function resync() {
 	var netw = get_netw();
@@ -202,39 +213,42 @@ function resync() {
 		resync_timeout = null;
 	}
 	if (erroneous) {
-		resync_timeout = window.setTimeout(resync, settings.network_update_interval);
+		schedule_resync();
 	}
 }
 
-function on_error(err) {
-	erroneous = true;
-	$('.network_desync_container').show();
-	if (! resync_timeout) {
-		resync_timeout = window.setTimeout(resync, settings.network_update_interval);
-	}
+function errstate(component, err) {
+	if (err) {
+		erroneous[component] = true;
 
-	if ((err.type == 'login-required') && !login_rendered) {
-		login_rendered = true;
-		var netw = get_netw();
-		netw.ui_render_login($('.settings_network_login_container'));
-		netw.ui_render_login($('.network_desync_login_container'));
-	}
+		$('.network_desync_container').show();
+		if (resync_timeout === null) {
+			schedule_resync();
+		}
 
-	$('.network_desync_errmsg').text(err.msg);
-}
+		if ((err.type == 'login-required') && !login_rendered) {
+			login_rendered = true;
+			var netw = get_netw();
+			netw.ui_render_login($('.settings_network_login_container'));
+			netw.ui_render_login($('.network_desync_login_container'));
+		}
 
-// Successful request, hide error messages
-function on_success() {
-	var was_erroneous = erroneous;
-	erroneous = false;
-	if (login_rendered) {
-		$('.settings_network_login_container').empty();
-		$('.network_desync_login_container').empty();
-		login_rendered = false;
-	}
-	$('.network_desync_container').hide();
-	if (was_erroneous) {
-		resync();
+		$('.network_desync_errmsg').text(err.msg);
+	} else {
+		var was_erroneous = erroneous[component];
+		erroneous[component] = false;
+
+		if (login_rendered && component.indexOf('login') >= 0) {
+			$('.settings_network_login_container').empty();
+			$('.network_desync_login_container').empty();
+			login_rendered = false;
+		}
+		if (! utils.any(utils.values(erroneous))) {
+			$('.network_desync_container').hide();
+		}
+		if (was_erroneous) {
+			resync();
+		}
 	}
 }
 
@@ -244,12 +258,11 @@ function ui_init() {
 
 return {
 	calc_score: calc_score,
-	on_error: on_error,
-	on_success: on_success,
 	send_press: send_press,
 	ui_list_matches: ui_list_matches,
 	ui_init: ui_init,
 	resync: resync,
+	errstate: errstate,
 };
 
 

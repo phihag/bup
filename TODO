@@ -1,5 +1,6 @@
 CourtSpot
-	undo instead of reset
+	TODO server
+
 	on error thousands of dbAbfrage when clicking sync
 	Anzeige alles after game end?
 	remote state += server
@@ -20,6 +21,9 @@ CourtSpot
 		display our current court in settings (+ CourtSpot)
 		allow changing which court we're on (in settings / by click/touch on court name)
 	test perspective (umpires stand at the sides of the hall, looking at each other)
+
+btde
+	check that using modern errstate
 
 move settings into an own module
 ban raw access to settings, use s.settings

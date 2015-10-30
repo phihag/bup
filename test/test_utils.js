@@ -36,4 +36,17 @@ _describe('helper functions', function() {
 		assert.deepEqual(bup.utils.repeat(1, 0), []);
 		assert.deepEqual(bup.utils.repeat('abc', 3), ['abc', 'abc', 'abc']);
 	});
+
+	_it('values', function() {
+		assert.deepEqual(bup.utils.values({
+			'x': 1,
+		}), [1]);
+	});
+
+	_it('any', function() {
+		assert.equal(bup.utils.any([]), false);
+		assert.equal(bup.utils.any([false, 0, '']), false);
+		assert.equal(bup.utils.any([2]), true);
+		assert.equal(bup.utils.any([1, 2]), true);
+	});
 });
