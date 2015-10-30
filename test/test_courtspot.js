@@ -22,107 +22,123 @@ _describe('courtspot', function() {
 				score: []
 			}
 		), [
-			'+1-home',
-			'+1-away',
-			'+1-away',
+			['+1', 'home', 0],
+			['+1', 'away', 0],
+			['+1', 'away', 0],
 		]);
 		assert.deepEqual(courtspot.calc_actions(
 			make_local([[1, 0]]), {
 				score: []
 			}
 		), [
-			'+1-home'
+			['+1', 'home', 0],
 		]);
 		assert.deepEqual(courtspot.calc_actions(
 			make_local([[5, 4]]), {
 				score: [[1, 1]]
 			}
 		), [
-			'+1-home',
-			'+1-home',
-			'+1-home',
-			'+1-home',
-			'+1-away',
-			'+1-away',
-			'+1-away',
+			['+1', 'home', 0],
+			['+1', 'home', 0],
+			['+1', 'home', 0],
+			['+1', 'home', 0],
+			['+1', 'away', 0],
+			['+1', 'away', 0],
+			['+1', 'away', 0],
 		]);
 		assert.deepEqual(courtspot.calc_actions(
 			make_local([[17, 20]]), {
 				score: [[17, 19]]
 			}
 		), [
-			'+1-away'
+			['+1', 'away', 0],
 		]);
 		assert.deepEqual(courtspot.calc_actions(
 			make_local([[17, 21]]), {
 				score: [[16, 20]]
 			}
 		), [
-			'+1-home',
-			'+1-away',
+			['+1', 'home', 0],
+			['+1', 'away', 0],
 		]);
 		assert.deepEqual(courtspot.calc_actions(
 			make_local([[21, 17]]), {
 				score: [[20, 16]]
 			}
 		), [
-			'+1-away',
-			'+1-home',
+			['+1', 'away', 0],
+			['+1', 'home', 0],
 		]);
 		assert.deepEqual(courtspot.calc_actions(
 			make_local([[23, 23]]), {
 				score: [[19, 19]]
 			}
 		), [
-			'+1-home',
-			'+1-away',
-			'+1-home',
-			'+1-away',
-			'+1-home',
-			'+1-away',
-			'+1-home',
-			'+1-away',
+			['+1', 'home', 0],
+			['+1', 'away', 0],
+			['+1', 'home', 0],
+			['+1', 'away', 0],
+			['+1', 'home', 0],
+			['+1', 'away', 0],
+			['+1', 'home', 0],
+			['+1', 'away', 0],
 		]);
 		assert.deepEqual(courtspot.calc_actions(
 			make_local([[23, 23]]), {
 				score: [[19, 16]]
 			}
 		), [
-			'+1-home',
-			'+1-away',
-			'+1-away',
-			'+1-away',
-			'+1-away',
-			'+1-home',
-			'+1-away',
-			'+1-home',
-			'+1-away',
-			'+1-home',
-			'+1-away',
+			['+1', 'home', 0],
+			['+1', 'away', 0],
+			['+1', 'away', 0],
+			['+1', 'away', 0],
+			['+1', 'away', 0],
+			['+1', 'home', 0],
+			['+1', 'away', 0],
+			['+1', 'home', 0],
+			['+1', 'away', 0],
+			['+1', 'home', 0],
+			['+1', 'away', 0],
 		]);
 		assert.deepEqual(courtspot.calc_actions(
 			make_local([[23, 23]]), {
 				score: [[16, 19]]
 			}
 		), [
-			'+1-home',
-			'+1-home',
-			'+1-home',
-			'+1-home',
-			'+1-away',
-			'+1-home',
-			'+1-away',
-			'+1-home',
-			'+1-away',
-			'+1-home',
-			'+1-away',
+			['+1', 'home', 0],
+			['+1', 'home', 0],
+			['+1', 'home', 0],
+			['+1', 'home', 0],
+			['+1', 'away', 0],
+			['+1', 'home', 0],
+			['+1', 'away', 0],
+			['+1', 'home', 0],
+			['+1', 'away', 0],
+			['+1', 'home', 0],
+			['+1', 'away', 0],
 		]);
 		assert.deepEqual(courtspot.calc_actions(
 			make_local([[17, 20]]), {
-				score: [[17, 19]]
+				score: [[17, 19]],
 			}
 		), [
-			'+1-away'
+			['+1', 'away', 0],
+		]);
+		assert.deepEqual(courtspot.calc_actions(
+			make_local([[17, 21], [2, 5]]), {
+				score: [[16, 19]],
+			}
+		), [
+			['+1', 'home', 0],
+			['+1', 'away', 0],
+			['+1', 'away', 0],
+			['+1', 'home', 1],
+			['+1', 'home', 1],
+			['+1', 'away', 1],
+			['+1', 'away', 1],
+			['+1', 'away', 1],
+			['+1', 'away', 1],
+			['+1', 'away', 1],
 		]);
 	});
 
@@ -132,21 +148,21 @@ _describe('courtspot', function() {
 				score: [[18, 21], [0, 0]]
 			}
 		), [
-			'reset',
+			['reset'],
 		]);
 		assert.deepEqual(courtspot.calc_actions(
 			make_local([[23, 21], [2, 3]]), {
 				score: [[19, 21], [1, 0]]
 			}
 		), [
-			'reset',
+			['reset'],
 		]);
 		assert.deepEqual(courtspot.calc_actions(
 			make_local([[30, 29], [0, 0]]), {
 				score: [[30, 29], [0, 0], [1, 0]],
 			}
 		), [
-			'reset',
+			['reset'],
 		]);
 
 	});
@@ -156,16 +172,16 @@ _describe('courtspot', function() {
 			make_local([[5, 5]]), {
 				score: [[12, 12]]
 			}
-		), bup.utils.repeat('undo', 14));
+		), bup.utils.repeat(['undo'], 14));
 
 		assert.deepEqual(courtspot.calc_actions(
 			make_local([[15, 21], [2, 3]]), {
 				score: [[18, 20]]
 			}
 		), [
-			'undo',
-			'undo',
-			'undo',
+			['undo'],
+			['undo'],
+			['undo'],
 		]);
 	});
 

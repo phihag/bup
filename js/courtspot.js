@@ -57,7 +57,7 @@ function calc_actions(s, remote_state) {
 	}
 
 	if (local_score.length < remote_score.length) {
-		return ['reset'];
+		return [['reset']];
 	}
 
 	// Look for historical games that don't match
@@ -66,7 +66,7 @@ function calc_actions(s, remote_state) {
 		if (
 				(remote_score[game_idx][0] != local_score[game_idx][0]) ||
 				(remote_score[game_idx][1] != local_score[game_idx][1])) {
-			return ['reset'];
+			return [['reset']];
 		}
 	}
 
@@ -75,7 +75,7 @@ function calc_actions(s, remote_state) {
 	var diff2 = remote_score[remote_score.length - 1][1] - local_score[remote_score.length - 1][1];
 	var undos = Math.max(0, diff1) + Math.max(0, diff2);
 	if (undos > 0) {
-		return utils.repeat('undo', undos);
+		return utils.repeat(['undo'], undos);
 	}
 
 	// At this point, our local score >= remote score
@@ -84,21 +84,21 @@ function calc_actions(s, remote_state) {
 		var rscore = (game_idx < remote_score.length) ? remote_score[game_idx] : [0, 0];
 		var lscore = local_score[game_idx];
 		while ((rscore[0] < lscore[0]) && (rscore[0] < 20)) {
-			actions.push('+1-home');
+			actions.push(['+1', 'home', game_idx]);
 			rscore[0]++;
 		}
 		while ((rscore[1] < lscore[1]) && (rscore[1] < 20)) {
-			actions.push('+1-away');
+			actions.push(['+1', 'away', game_idx]);
 			rscore[1]++;
 		}
 
 		while ((rscore[0] < lscore[0]) || (rscore[1] < lscore[1])) {
 			if (rscore[0] < lscore[0]) {
-				actions.push('+1-home');
+				actions.push(['+1', 'home', game_idx]);
 				rscore[0]++;
 			}
 			if (rscore[1] < lscore[1]) {
-				actions.push('+1-away');
+				actions.push(['+1', 'away', game_idx]);
 				rscore[1]++;
 			}
 		}
@@ -106,52 +106,15 @@ function calc_actions(s, remote_state) {
 	return actions;
 }
 
-function request_action(action) {
-	switch (action) {
-	case 'undo':
-		var TODO = (baseurl +
-			'php/dbStandEintrag.php?befehl=minusEins' +
-			'&court=' + encodeURIComponent(s.settings.court_id) +
-			'&art=' + encodeURIComponent(s.setup.match_name)
-		);
-		break;
-	default:
-		throw new Error('Invalid CourtSpot action ' + action);
-	}
-}
-
-function sync(s) {
-	if (!s.remote.initialized) {
-		return _courtspot_send_init(s);
-	}
-
-	fetch_state(s, function(err, remote_state) {
-		if (err) {
-			return network.on_error(err);
-		}
-		console.log('remote_state:', remote_state);
-		var actions = calc_actions(s, remote_state);
-		console.log('actions:', actions);
-		// TODO compare with local state
-		// TODO if actions.length > 0  resync afterwards
-	});
-}
-
 // Move the game to this court and reset score
-function _courtspot_send_init(s) {
-	if (s.remote.initializing) {
-		return;  // Do not send requests twice
-	}
-
-	s.remote.initializing = true;
+function _reset(s, cb) {
 	var init1_url = (baseurl +
 		'php/dbClientEintrag.php?befehl=artSetzen' +
 		'&wert=' + encodeURIComponent(s.setup.match_name) +
 		'&court=' + encodeURIComponent(s.settings.court_id));
 	_request(s, {url: init1_url}, function(err) {
 		if (err) {
-			s.remote.initializing = false;
-			return network.on_error(err);
+			return cb(err);
 		}
 
 		var init2_url = (baseurl +
@@ -160,24 +123,100 @@ function _courtspot_send_init(s) {
 			'&art=' + encodeURIComponent(s.setup.match_name));
 		_request(s, {url: init2_url}, function(err) {
 			if (err) {
-				s.remote.initializing = false;
-				return network.on_error(err);
+				return cb(err);
 			}
 
 			var init3_url = (baseurl +
 				'php/dbClientEintrag.php?befehl=anzeigeSetzen&wert=alles' +
 				'&court=' + encodeURIComponent(s.settings.court_id));
 			_request(s, {url: init3_url}, function(err) {
-				if (err) {
-					s.remote.initializing = false;
-					return network.on_error(err);
+				if (!err) {
+					s.remote.initialized = true;
 				}
-				s.remote.initializing = false;
-				s.remote.initialized = true;
+				cb(err);
 			});
 		});
 	});
 }
+
+function _request_action(s, action, cb) {
+	var url;
+
+	switch (action[0]) {
+	case 'undo':
+		url = (baseurl +
+			'php/dbStandEintrag.php?befehl=minusEins' +
+			'&court=' + encodeURIComponent(s.settings.court_id) +
+			'&art=' + encodeURIComponent(s.setup.match_name)
+		);
+		break;
+	case '+1':
+		url = (baseurl +
+			'php/dbStandEintrag.php?befehl=plusEins' +
+			'&court=' + encodeURIComponent(s.settings.court_id) +
+			'&art=' + encodeURIComponent(s.setup.match_name) +
+			'&satz=' + encodeURIComponent(action[2]) +
+			'&verein=' + ({'home': 'Heim', 'away': 'Gast'}[action[1]])
+		);
+		break;
+	case 'reset':
+		return _reset(s, cb);
+	default:
+		return cb(new Error('Invalid CourtSpot action ' + action));
+	}
+
+	_request(s, {url: url}, cb);
+}
+
+function _request_actions(s, actions) {
+	if (actions.length == 0) {
+		s.remote.syncing = false;
+		// resync
+		sync(s);
+		return;
+	}
+
+	var a = actions.shift();
+	_request_action(s, a, function(err) {
+		if (err) {
+			s.remote.syncing = false;
+			network.on_error(err);
+			return;
+		}
+
+		_request_actions(s, actions);
+	});
+}
+
+function sync(s) {
+	if (s.remote.syncing) {
+		return; // Still requests to send before we actually resync
+	}
+
+	if (!s.remote.initialized) {
+		s.remote.syncing = true;
+		return _request_actions(s, [['reset']], function(err) {
+			if (err) {
+				network.on_error(err);
+			}
+		});
+	}
+
+	fetch_state(s, function(err, remote_state) {
+		if (err) {
+			return network.on_error(err);
+		}
+		console.log('remote_state: ' + JSON.stringify(remote_state, null, 2));
+		var actions = calc_actions(s, remote_state);
+		if (actions.length == 0) {
+			return;  // We are synchronized
+		}
+
+		s.remote.syncing = true;
+		_request_actions(s, actions);
+	});
+}
+
 
 /*
 	// Switch sides if necessary
@@ -345,6 +384,7 @@ return {
 	list_matches: list_matches,
 	send_press: send_press,
 	calc_actions: calc_actions,
+	sync: sync,
 };
 
 }

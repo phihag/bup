@@ -1,7 +1,6 @@
 CourtSpot
-	calc local cs_state
-	calc cs_actions
-
+	undo instead of reset
+	on error thousands of dbAbfrage when clicking sync
 	Anzeige alles after game end?
 	remote state += server
 	remote state += sides
@@ -69,6 +68,7 @@ improve touch behavior (listen to touchstart instead of click)
 offline webapp Manifest (only in production)
 	reloading
 
+alternate match opening
 
 
 
