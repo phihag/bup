@@ -1,12 +1,9 @@
 CourtSpot
-	do not query dbabfrage after changing court
-	correct error handling in server
 	resume with correct position
 	determine network_score and show it in list
-	read status before writing game start
-	CourtSpot: test various network outages
+	test various network outages
+	correct error handling in server
 	ask on resuming whether
-	test perspective (umpires stand at the sides of the hall, looking at each other)
 
 btde
 	check that using modern errstate

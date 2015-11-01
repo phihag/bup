@@ -28,7 +28,7 @@ function _request(s, options, cb) {
 
 
 function _parse_score(match_node) {
-	function _get_score(key) {
+	function _get_score(match_node, key) {
 		var score_str = _xml_get_text(match_node, key);
 		return score_str ? parseInt(score_str, 10) : -1;
 	}
