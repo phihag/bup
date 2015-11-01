@@ -74,17 +74,21 @@ function sync(s) {
 	var cs_team1 = (s.match.team1_won === null) ? s.game.team1_serving : s.match.team1_won;
 
 	var game_score = s.match.game_score;
-	var server_num = (s.court.left_serving ? 1 : 3) + (s.court.serving_downwards ? 1 : 0);
+	var serve_is_determined = (
+		(s.game.team1_serving !== null) &&
+		(state.game.teams_player1_even[0] !== null) &&
+		(state.game.teams_player1_even[1] !== null));
 
 	var data = {
-		'Detail': 'alles',
+		'Detail': (serve_is_determined ? 'alles' : 'punkte'),
 		'Satz': netscore.length,
 		'gewonnenHeim': game_score[0],
 		'gewonnenGast': game_score[1],
 		'team_links': (s.game.team1_left ? 'heim' : 'gast'),
-		'linksheim': (state.game.teams_player1_even[0] ? 'Spieler2' : 'Spieler1'),
-		'linksgast': (state.game.teams_player1_even[1] ? 'Spieler2' : 'Spieler1'),
-		'aufschlag': server_num,
+		'team_aufschlag': (s.game.team1_serving ? 'Heim' : 'Gast'),
+		'aufschlag_score': s.game.score[s.game.team1_serving ? 0 : 1],
+		'heim_spieler1_links': (s.game.teams_player1_even[0] ? 'false' : 'true'),
+		'gast_spieler1_links': (s.game.teams_player1_even[1] ? 'false' : 'true'),
 	};
 	for (var i = 0;i < s.match.max_games;i++) {
 		data['HeimSatz' + (i+1)] = (i < netscore.length) ? netscore[i][0] : -1;

@@ -1,25 +1,12 @@
 CourtSpot
-	TODO server
-
-	on error thousands of dbAbfrage when clicking sync
-	Anzeige alles after game end?
-	remote state += server
-	remote state += sides
-
+	position is wrong
+	set to points on match finish
+	correct error handling in server
+	resume with correct position
 	determine network_score and show it in list
 	read status before writing game start
-	write game start to CourtSpot
-	write side pick to CourtSpot
-	write server pick to CourtSpot
-	Write presses to CourtSpot
-	switch to anzeige=punkte on postgame-confirm/postmatch-confirm
-	show loading icon while we load from CourtSpot
 	CourtSpot: test various network outages
-	network_matches: hide resume?
-	ask on resuming whether to use copy
-	CourtSpot
-		display our current court in settings (+ CourtSpot)
-		allow changing which court we're on (in settings / by click/touch on court name)
+	ask on resuming whether
 	test perspective (umpires stand at the sides of the hall, looking at each other)
 
 btde
@@ -206,7 +193,11 @@ small color animation when any value (score / shuttle count) changes
 rename default-invisible to invisible and remove/add CSS class instead of show/hide/toggle
 restart network_reload_interval on manual reload
 expose network_reload_interval in UI
-gzip icons in dist with correct htaccess to save CPU compression power
+support events
+	offline event creation
+	download current day events from live.aw (to pre-fill league / teams / players)
+	synchronize in local network
+gzip icons in dist with correct htaccess to save CPU compression power?
 badmintonticker.de mock / testing
 badmintonticker.de: support names without comma when reading player list
 investigate high GPU usage (transparency?)
