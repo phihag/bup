@@ -44,28 +44,6 @@ function _parse_score(match_node) {
 	return res;
 }
 
-function fetch_state(s, cb) {
-	var data_url = (baseurl +
-		'php/dbClientAbfrage.php?' +
-		'court=' + encodeURIComponent(s.settings.court_id) +
-		'&art=' + encodeURIComponent(s.setup.match_name)
-	);
-	_request(s, {
-		url: data_url,
-		dataType: 'xml',
-	}, function(err, response) {
-		if (err) {
-			return cb(err);
-		}
-		var match_node = response.getElementsByTagName('COURT')[0];
-
-		var cs_state = {
-			score: _parse_score(match_node),
-		};
-		cb(err, cs_state);
-	});
-}
-
 var _outstanding_requests = 0;
 function sync(s) {
 	var netscore = network.calc_score(s);
