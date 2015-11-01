@@ -104,6 +104,7 @@ function sync(s) {
 
 	var request_url = (
 		baseurl + 'php/dbStandEintrag.php?befehl=setzen' + 
+			'&lfdnum=0' +
 			'&court=' + encodeURIComponent(data.court) +
 			'&art=' + encodeURIComponent(data.art) +
 			'&verein=' + encodeURIComponent(data.verein)

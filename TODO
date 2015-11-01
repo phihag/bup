@@ -1,5 +1,6 @@
 CourtSpot
 	resume with correct position
+	handle finished game separately
 	determine network_score and show it in list
 	test various network outages
 	correct error handling in server
