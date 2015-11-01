@@ -926,6 +926,12 @@ function ui_init() {
 	if (hash_query.court) {
 		// TODO make sure this is only for the current session, only overwrite settings when necessary
 		settings.court_id = hash_query.court;
+		if (settings.court_id == '1') {
+			settings.court_description = 'links';
+		} else if (settings.court_id == '2') {
+			settings.court_description = 'rechts';
+		}
+		ui_settings_update();
 	}
 
 	if (hash_query.liveaw_match_id) {
