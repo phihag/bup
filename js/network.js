@@ -100,6 +100,21 @@ function _matchlist_install_reload_button(s) {
 	event_container.append(reload_button);
 }
 
+
+function _score_text(network_score) {
+	if (!network_score) {
+		return '';
+	}
+
+	if ((network_score.length == 1) && (network_score[0][0] === 0) && (network_score[0][1] === 0)) {
+		return '';
+	}
+
+	return network_score.map(function(network_game) {
+		return network_game[0] + '-' + network_game[1];
+	}).join(' ');
+};
+
 function ui_render_matchlist(s, event) {
 	var container = $('#setup_network_matches');
 	container.empty(); // TODO better transition if we're updating?
@@ -117,20 +132,6 @@ function ui_render_matchlist(s, event) {
 			}).join('/');
 		};
 
-		var _score_text = function(network_score) {
-			if (!network_score) {
-				return '';
-			}
-
-			if ((network_score.length == 1) && (network_score[0][0] === 0) && (network_score[0][1] === 0)) {
-				return '';
-			}
-
-			return network_score.map(function(network_game) {
-				return network_game[0] + '-' + network_game[1];
-			}).join(' ');
-		};
-
 		var home_players = $('<span class="setup_network_match_home_players">');
 		home_players.text(_players_str(match.setup.teams[0]));
 		btn.append(home_players);
@@ -145,8 +146,48 @@ function ui_render_matchlist(s, event) {
 		btn.append(score);
 
 		btn.on('click', function() {
+			hide_settings(true);
+
+			if (match.network_score) {
+				var netscore = match.network_score;
+				var mwinner = calc.match_winner(netscore);
+
+				if ((mwinner == 'inprogress') && calc.match_started(netscore)) {
+					_ui_make_pick('Das Spiel ' + pronounciation.match_str(match.setup) + ' wurde bereits angefangen', [{
+						label: 'Spiel bei ' + _score_text(netscore) + ' fortsetzen',
+						key: 'resume',
+					}, {
+						label: 'Spiel bei 0-0 starten',
+						key: 'restart',
+					}], function(pick) {
+						start_match(s, match.setup);
+						if (pick.key == 'resume') {
+							if (netscore.length > 1) {
+								on_press({
+									type: 'editmode_set-finished_games',
+									scores: netscore.slice(0, netscore.length - 1),
+									by_side: false,
+								});
+							}
+							on_press({
+								type: 'editmode_set-score',
+								score: netscore[netscore.length - 1],
+								by_side: false,
+							});
+						}
+					}, show_settings);
+					return;
+				}
+				if (mwinner == 'left' || mwinner == 'right') {
+					_ui_make_pick('Das Spiel ' + pronounciation.match_str(match.setup) + ' ist bereits beendet (' + _score_text(netscore) + ')!', [{
+						label: 'Spiel bei 0-0 neu starten',
+					}], function(pick) {
+						start_match(s, match.setup);
+					}, show_settings);
+					return;
+				}
+			}
 			start_match(s, match.setup);
-			hide_settings();
 		});
 
 		container.append(btn);
@@ -275,6 +316,8 @@ return {
 
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var utils = require('./utils');
+	var calc = require('./calc');
+	var pronounciation = require('./pronounciation');
 
 	module.exports = network;
 }

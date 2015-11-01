@@ -5,6 +5,7 @@ var assert = require('assert');
 var tutils = require('./tutils');
 var _describe = tutils._describe;
 var _it = tutils._it;
+var SINGLES_SETUP = tutils.SINGLES_SETUP;
 var DOUBLES_SETUP = tutils.DOUBLES_SETUP;
 var press_score = tutils.press_score;
 var state_after = tutils.state_after;
@@ -879,5 +880,29 @@ _describe('editmode', function() {
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.strictEqual(s.match.finished_games[0].start_team1_left, null);
+	});
+
+	_it('set-score in singles should initialize correctly', function() {
+		var presses = [{
+			type: 'editmode_set-score',
+			score: [3, 0],
+		    by_side: false,
+		}, {
+			type: 'pick_side',
+			team1_left: true,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		}];
+
+		var s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(s.game.score, [3, 0]);
+		assert.strictEqual(s.court.player_left_odd.name, 'Alice');
+		assert.strictEqual(s.court.player_left_even, null);
+		assert.strictEqual(s.court.player_right_odd.name, 'Bob');
+		assert.strictEqual(s.court.player_right_even, null);
+		assert.strictEqual(s.court.left_serving, true);
+		assert.strictEqual(s.court.serving_downwards, true);
 	});
 });

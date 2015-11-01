@@ -185,13 +185,14 @@ function list_matches(s, cb) {
 
 			var network_score = _parse_score(match_node);
 
-			var match_id = 'btde_' + utils.iso8601(new Date()) + '_' + match_name + '_' + home_team.name + '-' + away_team.name;
+			var match_id = 'courtspot_' + utils.iso8601(new Date()) + '_' + match_name + '_' + home_team.name + '-' + away_team.name;
 			matches.push({
 				setup: {
 					counting: '3x21',
 					match_name: match_name,
 					is_doubles: home_team.players.length == 2,
 					teams: [home_team, away_team],
+					match_id: match_id,
 					courtspot_match_id: match_name,
 					team_competition: true,
 				},

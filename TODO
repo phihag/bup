@@ -1,16 +1,16 @@
 CourtSpot
-	resume with correct position
-	handle finished game separately
-	determine network_score and show it in list
+	set correct match ID
+	handle finished matches with a different message
 	test various network outages
 	correct error handling in server
 	ask on resuming whether
-
 btde
 	check that using modern errstate
+	check new api
 
+score input is broken at start of game
 move settings into an own module
-ban raw access to settings, use s.settings
+
 make sure we only transmit btde games when they are btde (not when we start a demo game)
 	but do when we load a btde game
 make sure we only transmit courtspot games when they are btde (not when we start a demo game)
@@ -43,6 +43,8 @@ fix display without vw (see Manuel, https://github.com/saabi/vminpoly)
 save manually created games immediately?
 scoresheet: vcenter shuttle counter
 
+
+
 retest Manuel's notes
 
 write div/LICENSE.commercial.de
@@ -57,9 +59,9 @@ offline webapp Manifest (only in production)
 	reloading
 
 alternate match opening
-
-
-
+	CG generated toss
+	icon for toss
+network: notify if clicked game is locally present (hide network if score is identically there)
 
 
 option for double-click editmode (default off)
@@ -202,12 +204,14 @@ editing score (this / previous game) after retiring / disqualification
 restart network resync interval if network settings change
 use deep equality instead of checking score[0] == ..score[0] && score[1] == ..score[1]
 manual editing in portrait (maybe distinguish by aspect ratio?)
+CourtSpot: resume with correct position (if it's one of the courts)
 test svg_path_lines
 enable jshint in make test
 minify HTML
 remove JS stubs with /*@PRODUCTION*/ comments
 function btde instead of var btde = function
 move manual editing confirm button to bottom (with white border) and give it a text "Übernehmen"
--> Demo Jörg H, Manuel, Susanne
+ban raw access to settings, use s.settings
+-> Demo Jörg H, Manuel, Susanne, Werner Durow
 -> Jens Köster fragen wegen zweimal gelbe Karte
 -> Jens Köster fragen wegen C

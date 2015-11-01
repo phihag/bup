@@ -1,6 +1,10 @@
 var calc = (function() {
 'use strict';
 
+function match_started(game_scores) {
+	return (game_scores.length > 0) && ((game_scores[0][0] > 0) || (game_scores[0][1] > 0));
+}
+
 function _is_winner(candidate, other) {
 	return (
 		((candidate == 21) && (other < 20)) ||
@@ -45,7 +49,8 @@ function match_winner(input_scores) {
 	var score = [0, 0];
 	for (var i = 0;i < input_scores.length;i++) {
 		var iscore = input_scores[i];
-		switch (iscore.winner) {
+		var winner = (iscore.winner ? iscore.winner : game_winner(iscore[0], iscore[1]));
+		switch (winner) {
 		case 'left':
 			score[0]++;
 			if (score[0] >= 2) {
@@ -243,6 +248,8 @@ function calc_press(s, press) {
 			s.game.teams_player1_even[s.game.start_server_team_id] = s.game.start_server_player_id == (s.game.score[s.game.start_server_team_id] % 2);
 		} else {
 			s.game.start_receiver_player_id = 0;
+			s.game.teams_player1_even[s.game.start_server_team_id] = (s.game.score[s.game.start_server_team_id] % 2) == 0;
+			s.game.teams_player1_even[1 - s.game.start_server_team_id] = s.game.teams_player1_even[s.game.start_server_team_id];
 		}
 		if (s.game.team1_serving === null) {
 			s.game.team1_serving = s.game.start_server_team_id === 0;
@@ -564,6 +571,7 @@ return {
 	game_winner: game_winner,
 	match_winner: match_winner,
 	lr2score: lr2score,
+	match_started: match_started,
 };
 
 })();

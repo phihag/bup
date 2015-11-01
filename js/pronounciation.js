@@ -1,6 +1,14 @@
 var pronounciation = (function() {
 'use strict';
 
+function match_str(setup) {
+	if (setup.is_doubles) {
+		return setup.teams[0].players[0].name + '/' + setup.teams[0].players[1].name + ' vs ' + setup.teams[1].players[0].name + '/' + setup.teams[1].players[1].name;
+	} else {
+		return setup.teams[0].players[0].name + ' vs ' + setup.teams[1].players[0].name;
+	}
+}
+
 function loveall_announcement(s) {
 	var prefix = '';
 	if (s.match.finished_games.length == 1) {
@@ -145,6 +153,7 @@ return {
 	pronounce: pronounce,
 	loveall_announcement: loveall_announcement,
 	postgame_announcement: postgame_announcement,
+	match_str: match_str,
 };
 
 })();

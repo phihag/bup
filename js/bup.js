@@ -318,13 +318,7 @@ function ui_settings_load_list(s) {
 	matches.forEach(function(m) {
 		var li = $('<li>');
 		var a = $('<span class="load_match_link">');
-		var match_name;
-		if (m.setup.is_doubles) {
-			match_name = m.setup.teams[0].players[0].name + '/' + m.setup.teams[0].players[1].name + ' vs ' + m.setup.teams[1].players[0].name + '/' + m.setup.teams[1].players[1].name;
-		} else {
-			match_name = m.setup.teams[0].players[0].name + ' vs ' + m.setup.teams[1].players[0].name;
-		}
-		a.text(match_name + ', ' + utils.datetime_str(m.metadata.updated));
+		a.text(pronounciation.match_str(m.setup) + ', ' + utils.datetime_str(m.metadata.updated));
 		a.on('click', function(e) {
 			e.preventDefault();
 			resume_match(m);
