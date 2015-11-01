@@ -15,7 +15,7 @@ function _request(s, options, cb) {
 		return cb(null, res);
 	}).fail(function(xhr) {
 		var msg = ((xhr.status === 0) ?
-			'badmintonticker nicht erreichbar' :
+			'CourtSpot nicht erreichbar' :
 			('Netzwerk-Fehler (Code ' + xhr.status + ')')
 		);
 		return cb({
@@ -66,6 +66,7 @@ function fetch_state(s, cb) {
 	});
 }
 
+var _outstanding_requests = 0;
 function sync(s) {
 	var netscore = network.calc_score(s);
 
@@ -97,14 +98,13 @@ function sync(s) {
 		data['HeimSatz' + (i+1)] = (i < netscore.length) ? netscore[i][0] : -1;
 		data['GastSatz' + (i+1)] = (i < netscore.length) ? netscore[i][1] : -1;
 	}
-	if (utils.deep_equal(data, s.remote.courtspot_data)) {
+	if (utils.deep_equal(data, s.remote.courtspot_data) && (_outstanding_requests == 0)) {
 		return;
 	}
-	s.remote.courtspot_data = data;
+	_outstanding_requests++;
 
 	var request_url = (
 		baseurl + 'php/dbStandEintrag.php?befehl=setzen' + 
-			'&lfdnum=0' +
 			'&court=' + encodeURIComponent(data.court) +
 			'&art=' + encodeURIComponent(data.art) +
 			'&verein=' + encodeURIComponent(data.verein)
@@ -112,9 +112,30 @@ function sync(s) {
 	_request(s, {
 		method: 'POST',
 		data: data,
+		dataType: 'text',
 		url: request_url,
-	}, function(err) {
+	}, function(err, content) {
+		_outstanding_requests--;
+
+		if (!err) {
+			try {
+				var res = JSON.parse(content);
+				if (res.status != 'ok') {
+					err = {
+						msg: 'CourtSpot-Aktualisierung fehlgeschlagen!',
+					};
+				}
+			} catch (e) {
+				err = {
+					msg: 'CourtSpot-Aktualisierung fehlgeschlagen: Server-Fehler erkannt',
+				};
+			}
+		}
+
 		network.errstate('courtspot.set', err);
+		if (!err) {
+			s.remote.courtspot_data = data;
+		}
 	});
 }
 
@@ -124,7 +145,7 @@ function send_press(s, press) {
 
 function list_matches(s, cb) {
 	var options = {
-		url: baseurl + 'php/dbabfrage.php',
+		url: baseurl + 'php/dbabfrage.php?lfdnum=-1',
 		dataType: 'xml',
 	};
 	_request(s, options, function(err, xml_doc) {

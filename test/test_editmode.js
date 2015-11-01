@@ -9,6 +9,7 @@ var SINGLES_SETUP = tutils.SINGLES_SETUP;
 var DOUBLES_SETUP = tutils.DOUBLES_SETUP;
 var press_score = tutils.press_score;
 var state_after = tutils.state_after;
+var bup = tutils.bup;
 
 
 _describe('editmode', function() {
@@ -904,5 +905,14 @@ _describe('editmode', function() {
 		assert.strictEqual(s.court.player_right_even, null);
 		assert.strictEqual(s.court.left_serving, true);
 		assert.strictEqual(s.court.serving_downwards, true);
+		assert.strictEqual(
+			bup.pronounciation.pronounce(s),
+			'Meine Damen und Herren:\n' +
+			'Zu meiner Rechten, Bob,\n' +
+			'und zu meiner Linken, Alice.\n' +
+			'Alice schlägt auf.\n' +
+			'3-0.\n' +
+			'Bitte spielen'
+		);
 	});
 });

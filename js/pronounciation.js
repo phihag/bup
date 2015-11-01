@@ -104,8 +104,9 @@ function pronounce(s) {
 		var serving_team_id = s.game.team1_serving ? 0 : 1;
 		var receiving_team_id = 1 - serving_team_id;
 
-		var serving_player_id = s.game.teams_player1_even[serving_team_id] ? 0 : 1;
-		var receiving_player_id = s.game.teams_player1_even[receiving_team_id] ? 0 : 1;
+		var server_score_side = s.game.score[serving_team_id] % 2;
+		var serving_player_id = s.game.teams_player1_even[serving_team_id] ? server_score_side : (1 - server_score_side);
+		var receiving_player_id = s.game.teams_player1_even[receiving_team_id] ? server_score_side : (1 - server_score_side);
 
 		var server_name = s.setup.teams[serving_team_id].players[serving_player_id].name;
 		var receiver_name = s.setup.teams[receiving_team_id].players[receiving_player_id].name;

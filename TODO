@@ -1,9 +1,3 @@
-CourtSpot
-	set correct match ID
-	handle finished matches with a different message
-	test various network outages
-	correct error handling in server
-	ask on resuming whether
 btde
 	check that using modern errstate
 	check new api
