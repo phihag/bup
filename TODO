@@ -1,6 +1,5 @@
 CourtSpot
-	position is wrong
-	set to points on match finish
+	do not query dbabfrage after changing court
 	correct error handling in server
 	resume with correct position
 	determine network_score and show it in list

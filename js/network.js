@@ -73,7 +73,10 @@ function _stop_list_matches() {
 }
 
 function _start_list_matches(s) {
-	_stop_list_matches();
+	if (_network_list_timeout !== null) {
+		window.clearTimeout(_network_list_timeout);
+		_network_list_timeout = null;
+	}
 
 	if (erroneous) {
 		// Let the normal resync procedure handle it
@@ -151,9 +154,11 @@ function ui_render_matchlist(s, event) {
 }
 
 // Returns a callback to be called when the list is no longer required
-function ui_list_matches(s, silent) {
+function ui_list_matches(s, silent, no_timer) {
 	_matchlist_install_reload_button(s);
-	_start_list_matches(s);
+	if (! no_timer) {
+		_start_list_matches(s);
+	}
 
 	var status_container = $('.setup_network_status');
 	if (!silent && status_container.find('.setup_network_matches_loading').length === 0) {
@@ -206,13 +211,13 @@ function resync() {
 	if (state.initialized) {
 		netw.sync(state);
 	}
-	ui_list_matches(state, true);
+	ui_list_matches(state, true, true);
 
 	if (resync_timeout !== null) {
 		window.clearTimeout(resync_timeout);
 		resync_timeout = null;
 	}
-	if (erroneous) {
+	if (utils.any(utils.values(erroneous))) {
 		schedule_resync();
 	}
 }

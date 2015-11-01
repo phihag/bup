@@ -89,17 +89,25 @@ function sync(s) {
 		'aufschlag_score': s.game.score[s.game.team1_serving ? 0 : 1],
 		'heim_spieler1_links': (s.game.teams_player1_even[0] ? 'false' : 'true'),
 		'gast_spieler1_links': (s.game.teams_player1_even[1] ? 'false' : 'true'),
+		'court': s.settings.court_id,
+		'art': s.setup.match_name,
+		'verein': (cs_team1 ? 'heim' : 'gast'),
 	};
 	for (var i = 0;i < s.match.max_games;i++) {
 		data['HeimSatz' + (i+1)] = (i < netscore.length) ? netscore[i][0] : -1;
 		data['GastSatz' + (i+1)] = (i < netscore.length) ? netscore[i][1] : -1;
 	}
+	if (utils.deep_equal(data, s.remote.courtspot_data)) {
+		return;
+	}
+	s.remote.courtspot_data = data;
 
 	var request_url = (
 		baseurl + 'php/dbStandEintrag.php?befehl=setzen' + 
-			'&court=' + encodeURIComponent(s.settings.court_id) +
-			'&art=' + encodeURIComponent(s.setup.match_name) +
-			'&verein=' + encodeURIComponent(cs_team1 ? 'heim' : 'gast'));
+			'&court=' + encodeURIComponent(data.court) +
+			'&art=' + encodeURIComponent(data.art) +
+			'&verein=' + encodeURIComponent(data.verein)
+	);
 	_request(s, {
 		method: 'POST',
 		data: data,
