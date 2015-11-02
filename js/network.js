@@ -281,10 +281,16 @@ function errstate(component, err) {
 
 		$('.network_desync_errmsg').text(err.msg);
 	} else {
-		var was_erroneous = erroneous[component];
-		erroneous[component] = false;
+		var was_erroneous;
+		if (component == 'all') {
+			was_erroneous = true;
+			erroneous = {};
+		} else {
+			was_erroneous = erroneous[component];
+			erroneous[component] = false;
+		}
 
-		if (login_rendered && component.indexOf('login') >= 0) {
+		if (login_rendered && (component.indexOf('login') >= 0) || (component == 'all')) {
 			$('.settings_network_login_container').empty();
 			$('.network_desync_login_container').empty();
 			login_rendered = false;

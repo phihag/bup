@@ -46,7 +46,7 @@ function ui_render_login(container) {
 				msg = m[1];
 			} else if (/<div class="logout">/.exec(res)) {
 				// Successful
-				network.errstate('btde.login', null);
+				network.errstate('all', null);
 				return;
 			}
 

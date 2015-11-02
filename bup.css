@@ -42,6 +42,14 @@ html, body, button {
 	}
 }
 
+@media screen and (orientation: portrait) {
+	.settings_login>button, .settings_login>input {
+		display: block;
+		font-size: 7vmin;
+		margin: 2vmin auto 2vmin auto;
+	}
+}
+
 
 .setup_players_manual {
 	border-spacing: 0;
@@ -627,6 +635,17 @@ input[name="court_id"] {
 	float: right;
 }
 
+@media screen and (orientation: portrait) {
+	.scoresheet_container>.scoresheet_buttons>button {
+		float: none;
+		display: block;
+		min-width: 80%;
+		margin: 5vmin auto !important;
+		font-size: 10vmin;
+		padding: 1vmin 0;
+	}
+}
+
 .scoresheet {
 	background: #fff;
 }
@@ -755,7 +774,7 @@ button>.loading-icon {
 }
 
 
-@media screen and (max-aspect-ratio: 2/3) {
+@media screen and (max-aspect-ratio: 3/4) {
 	#left_score, #right_score {
 		font-size: 20vmin;
 		padding: 1vmin;

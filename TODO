@@ -188,6 +188,7 @@ editing score (this / previous game) after retiring / disqualification
 restart network resync interval if network settings change
 use deep equality instead of checking score[0] == ..score[0] && score[1] == ..score[1]
 manual editing in portrait (maybe distinguish by aspect ratio?)
+capture back button (warning if leaving while game is running)
 CourtSpot: resume with correct position (if it's one of the courts)
 test svg_path_lines
 enable jshint in make test
