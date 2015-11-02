@@ -129,6 +129,7 @@ function sync(s) {
 	}
 }
 
+/* s, press */
 function send_press(s) {
 	sync(s);
 }

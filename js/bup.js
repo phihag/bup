@@ -410,15 +410,15 @@ function hide_settings(force) {
 }
 
 function resume_match(s) {
-	calc.init_state(s, null, s.presses);
+	calc.init_state(s, null, s.presses, true);
 	calc.state(s);
 	s.settings = state.settings;
 	state = s;
 	render.ui_render(s);
 }
 
-function start_match(s, setup) {
-	calc.init_state(s, setup);
+function start_match(s, setup, init_presses) {
+	calc.init_state(s, setup, init_presses);
 	calc.state(s);
 	render.ui_render(s);
 	network.send_press(s, {

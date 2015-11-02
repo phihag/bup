@@ -44,6 +44,12 @@ function _parse_score(match_node) {
 	return res;
 }
 
+function prepare_match(current_settings, match) {
+	if (typeof match.courtspot.heim_oben == 'boolean') {
+		match.network_team1_left = match.courtspot.heim_oben == (current_settings.court_id == 1);
+	}
+}
+
 var _outstanding_requests = 0;
 function sync(s) {
 	var netscore = network.calc_score(s);
@@ -123,96 +129,19 @@ function send_press(s) {
 
 function list_matches(s, cb) {
 	var options = {
-		url: baseurl + 'php/dbabfrage.php?lfdnum=-1',
-		dataType: 'xml',
+		url: baseurl + 'php/bupabfrage.php',
+		dataType: 'json',
 	};
-	_request(s, options, function(err, xml_doc) {
+	_request(s, options, function(err, event) {
 		if (err) {
 			return cb(err);
 		}
-
-		function _get_player(match_node, key) {
-			var res = {
-				firstname: _xml_get_text(match_node, key + 'VN'),
-				lastname: _xml_get_text(match_node, key + 'NN'),
-			};
-			if (res.firstname) {
-				if (res.lastname) {
-					res.name = res.firstname + ' ' + res.lastname;
-				} else {
-					res.name = res.firstname;
-				}
-			} else {
-				if (res.lastname) {
-					res.name = res.lastname;
-				} else {
-					return null;
-				}
-			}
-			return res;
-		}
-
-		function _get_team(match_node, v_node, key) {
-			var player1 = _get_player(match_node, key + 'spieler1');
-			var players = [];
-			if (player1) {
-				players.push(player1);
-				var player2 = _get_player(match_node, key + 'spieler2');
-				if (player2) {
-					players.push(player2);
-				}
-			}
-			return {
-				name: v_node ? _xml_get_text(v_node, key) : null,
-				players: players,
-			};
-		}
-
-		var matches = [];
-		var v_node = xml_doc.getElementsByTagName('VERWALTUNG')[0];
-		var match_nodes = xml_doc.getElementsByTagName('Spiel');
-		var home_team_name = null;
-		var away_team_name = null;
-		for (var i = 0;i < match_nodes.length;i++) {
-			var match_node = match_nodes[i];
-			var home_team = _get_team(match_node, v_node, 'Heim');
-			if (!home_team_name) {
-				home_team_name = home_team.name;
-			}
-			var away_team = _get_team(match_node, v_node, 'Gast');
-			if (!away_team_name) {
-				away_team_name = away_team.name;
-			}
-
-			var match_name = _xml_get_text(match_node, 'Art');
-
-			if (!match_name || (home_team.players.length < 1) || (away_team.players.length < 1)) {
-				continue;
-			}
-
-			var network_score = _parse_score(match_node);
-
-			var match_id = 'courtspot_' + utils.iso8601(new Date()) + '_' + match_name + '_' + home_team.name + '-' + away_team.name;
-			matches.push({
-				setup: {
-					counting: '3x21',
-					match_name: match_name,
-					is_doubles: home_team.players.length == 2,
-					teams: [home_team, away_team],
-					match_id: match_id,
-					courtspot_match_id: match_name,
-					team_competition: true,
-				},
-				network_score: network_score,
+		if (event.status != 'ok') {
+			return cb({
+				msg: 'Spiel-Daten konnten nicht gelesen werden',
 			});
 		}
 
-		var event = {
-			matches: matches,
-		};
-		if (home_team_name && away_team_name) {
-			event.event_name = home_team_name + ' - ' + away_team_name;
-		}
 		cb(err, event);
 	});
 }
@@ -236,6 +165,7 @@ return {
 	list_matches: list_matches,
 	send_press: send_press,
 	sync: sync,
+	prepare_match: prepare_match,
 };
 
 }

@@ -1,3 +1,10 @@
+show version in UI
+courtspot
+	compose mail
+	send mail
+
+
+
 score input is broken at start of game
 
 move ui helpers into an own module
@@ -33,7 +40,9 @@ offline webapp Manifest (only in production)
 	serve manifest file with correct MIME type
 	automatically update if updateready event is shortly after app start and not yet initialized
 
-scrap useless code before uglifying
+scrap useless code (module definitions) before uglifying
+check whether we have a copy of a network game to resume from, offer it
+	offer both network and local version if they differ
 
 save manually created games immediately?
 improve touch behavior (listen to touchstart instead of click)
@@ -100,6 +109,7 @@ negative timers (add option for that)
 show what was undone
 team names in pronounciation
 support for team flags
+support for player portraits
 allow changing player names during game (warn if discipline is changed)
 allow red/yellow/black cards before/after game
 strange counting (new suggestions in Bundesliga, 5x11 etc.)
@@ -109,8 +119,6 @@ larger hitbox for buttons
 store time of changes; analyze how long each point took
 test red card after game
 animate changing server sides and changing sides after game
-find a better font for score display
-score: numbers of past sets closer together
 metadata (game start time etc.)
 better design for settings
 improve error showing
@@ -168,7 +176,6 @@ ui for network_update_interval
 Schiedsrichterzettel auch im Bundesliga-Design
 limit available courts when network is in use
 mock courtspot and write automated tests
-show login status (spinning something)
 dynamically create favicon (score? match name? court name?)
 move uglifyjs call to helper script in div/
 replace s.scoresheet_game with sg to save space
@@ -194,6 +201,7 @@ capture back button (warning if leaving while game is running)
 CourtSpot: resume with correct position (if it's one of the courts)
 improve settings display on smartphone
 test svg_path_lines
+test that singles with pick_receiver works just fine
 enable jshint in make test
 minify HTML
 remove JS stubs with /*@PRODUCTION*/ comments

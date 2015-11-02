@@ -87,8 +87,8 @@ function calc_game_score(games) {
 	return res;
 }
 
-function init_state(s, setup, presses) {
-	if (!presses || !s.metadata) {
+function init_state(s, setup, presses, keep_metadata) {
+	if (! keep_metadata) {
 		var now = Date.now();
 		s.metadata = {
 			id: setup.match_id ? setup.match_id : utils.uuid(),
@@ -225,10 +225,12 @@ function calc_press(s, press) {
 	case 'pick_side':
 		s.game.start_team1_left = press.team1_left;
 		s.game.team1_left = s.game.start_team1_left;
-		s.timer = {
-			start: press.timestamp,
-			duration: 120 * 1000,
-		};
+		if (!s.game.started) {
+			s.timer = {
+				start: press.timestamp,
+				duration: 120 * 1000,
+			};
+		}
 		if (! s.game.team1_left) {
 			if (s.game.editmode_by_side) {
 				// (If the edited score was intended to be by end instead of by team)

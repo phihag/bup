@@ -136,6 +136,11 @@ function ui_render_matchlist(s, event) {
 		btn.append(score);
 
 		btn.on('click', function() {
+			var netw = get_netw();
+			if (netw.prepare_match) {
+				netw.prepare_match(state.settings, match);
+			}
+
 			hide_settings(true);
 
 			if (match.network_score) {
@@ -150,21 +155,56 @@ function ui_render_matchlist(s, event) {
 						label: 'Spiel bei 0-0 starten',
 						key: 'restart',
 					}], function(pick) {
-						start_match(s, match.setup);
+						var presses = [];
 						if (pick.key == 'resume') {
+							var current_game = netscore[netscore.length - 1];
+
 							if (netscore.length > 1) {
-								on_press({
+								presses.push({
 									type: 'editmode_set-finished_games',
 									scores: netscore.slice(0, netscore.length - 1),
 									by_side: false,
 								});
 							}
-							on_press({
+							presses.push({
 								type: 'editmode_set-score',
-								score: netscore[netscore.length - 1],
+								score: current_game,
 								by_side: false,
 							});
+							presses.push({
+								type: 'love-all',
+							});
+
+							if (typeof match.network_team1_left == 'boolean') {
+								presses.push({
+									type: 'pick_side',
+									team1_left: match.network_team1_left,
+								});
+							}
+							if ((typeof match.network_team1_serving == 'boolean') && match.network_teams_player1_even) {
+								var serving_team = match.network_team1_serving ? 0 : 1;
+								var serving_even = (current_game[serving_team] % 2) == 0;
+
+								var serving_player = 0;
+								var receiving_player = 0;
+								if (match.setup.is_doubles) {
+									serving_player = (match.network_teams_player1_even[serving_team] == serving_even) ? 0 : 1;
+									receiving_player = (match.network_teams_player1_even[1 - serving_team] == serving_even) ? 0 : 1;
+								}
+
+								presses.push({
+									type: 'pick_server',
+									team_id: serving_team,
+									player_id: serving_player,
+								});
+								presses.push({
+									type: 'pick_receiver',
+									team_id: 1 - serving_team,
+									player_id: receiving_player,
+								});
+							}
 						}
+						start_match(s, match.setup, presses);
 					}, show_settings);
 					return;
 				}
