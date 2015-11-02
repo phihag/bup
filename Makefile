@@ -49,6 +49,10 @@ dist: cleandist
 		"js/network.js" \
 		"js/bup.js" \
 		-m -c -o dist/bup/bup.dist.js
+	mkdir -p dist/bup/dist
+	cp \
+		div/courtspot_screenshot_links.png \
+		div/courtspot_screenshot_rechts.png \
 	cd dist && zip bup.zip bup/ -rq
 
 upload: dist
