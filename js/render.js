@@ -162,16 +162,16 @@ function render_score_display(s) {
 	}
 }
 
-function ui_court_str() {
+function ui_court_str(s) {
 	var court_str = '';
 	if (settings.court_id) {
-		court_str = 'Feld ' + settings.court_id;
+		court_str = 'Feld ' + s.settings.court_id;
 	}
 	if (settings.court_description) {
 		if (court_str) {
-			court_str += '(' + settings.court_description + ')';
+			court_str += '(' + s.settings.court_description + ')';
 		} else {
-			court_str += 'Feld ' + settings.court_description;
+			court_str += 'Feld ' + s.settings.court_description;
 		}
 	}
 	$('#court_court_str>span').text(court_str);
@@ -200,7 +200,7 @@ function ui_render(s) {
 	}
 
 	$('#court_match_name>span').text(s.setup.match_name ? s.setup.match_name : '');
-	ui_court_str();
+	ui_court_str(s);
 
 	$('#shuttle_counter_value').text(s.match.shuttle_count);
 

@@ -585,7 +585,7 @@ function ui_settings_update() {
 		input.val(settings[name] ? settings[name] : '');
 	});
 
-	render.ui_court_str();
+	render.ui_court_str(state);
 }
 
 function ui_init_settings() {
