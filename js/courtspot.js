@@ -1,14 +1,6 @@
 function courtspot(baseurl) {
 'use strict';
 
-function _xml_get_text(node, element_name) {
-	var els = node.getElementsByTagName(element_name);
-	if ((els.length > 0) && (els[0].childNodes.length > 0)) {
-		return els[0].childNodes[0].nodeValue;
-	}
-	return null;
-}
-
 function _request(s, options, cb) {
 	options.timeout = s.settings.network_timeout;
 	$.ajax(options).done(function(res) {
@@ -24,24 +16,6 @@ function _request(s, options, cb) {
 			msg: msg,
 		});
 	});
-}
-
-
-function _parse_score(match_node) {
-	function _get_score(match_node, key) {
-		var score_str = _xml_get_text(match_node, key);
-		return score_str ? parseInt(score_str, 10) : -1;
-	}
-
-	var res = [];
-	for (var game_idx = 1;game_idx <= 3;game_idx++) {
-		var home_score = _get_score(match_node, 'HeimSatz' + game_idx);
-		var away_score = _get_score(match_node, 'GastSatz' + game_idx);
-		if ((home_score >= 0) && (away_score >= 0)) {
-			res.push([home_score, away_score]);
-		}
-	}
-	return res;
 }
 
 function prepare_match(current_settings, match) {
