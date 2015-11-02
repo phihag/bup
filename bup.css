@@ -370,7 +370,9 @@ span.score_announcement+span.score_announcement {
 		margin-left: 3vh;
 	}
 	#button_redo {
-		left: 38vmin;
+		left: 0;
+		top: 18vh;
+		margin-left: 1vh !important;
 	}
 }
 #shuttle_counter_value {
