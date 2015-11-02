@@ -1,8 +1,4 @@
-make sure we only transmit btde games when they are btde (not when we start a demo game)
-	but do when we load a btde game
-btde
-	check that using modern errstate
-	check new api
+fix settings on smartphone
 
 score input is broken at start of game
 move settings into an own module
@@ -27,14 +23,13 @@ improve badmintonticker.de support
 	send a second mail (btde support complete, other improvements coming)
 Button "bitte spielen" mehr betonen (icon?)
 allow timer restart
-fix settings on smartphone
 fix scoresheet buttons on smartphone
+
+
+
 CSS animation for settings (go to top right)
 fix display without vw (see Manuel, https://github.com/saabi/vminpoly)
 scoresheet: vcenter shuttle counter
-
-
-
 retest Manuel's notes
 
 save manually created games immediately?
