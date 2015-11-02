@@ -263,7 +263,7 @@ function ui_fullscreen_init() {
 	if (! _ui_fullscreen_supported()) {
 		$('.fullscreen_button').attr({
 			disabled: 'disabled',
-			title: 'Vollbildmodus wird auf diesem Browser nicht unterstützt'
+			title: 'Vollbildmodus wird von diesem Browser nicht unterstützt',
 		});
 	}
 }
@@ -412,6 +412,7 @@ function hide_settings(force) {
 function resume_match(s) {
 	calc.init_state(s, null, s.presses);
 	calc.state(s);
+	s.settings = state.settings;
 	state = s;
 	render.ui_render(s);
 }
