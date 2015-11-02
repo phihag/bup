@@ -1,6 +1,8 @@
 score input is broken at start of game
+
 move ui helpers into an own module
-move settings into an own module
+move timers into an own module
+move more settings into an own module
 test ending match with edit
 edit mode to change sides / change ends
 	scoresheet with finished_games
@@ -30,6 +32,8 @@ offline webapp Manifest (only in production)
 	make sure network requests work
 	serve manifest file with correct MIME type
 	automatically update if updateready event is shortly after app start and not yet initialized
+
+scrap useless code before uglifying
 
 save manually created games immediately?
 improve touch behavior (listen to touchstart instead of click)
