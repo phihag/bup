@@ -68,9 +68,9 @@ function ui_render_login(container) {
 	});
 }
 
-function _request(options, cb) {
+function _request(s, options, cb) {
 	options.dataType = 'text';
-	options.timeout = settings.network_timeout;
+	options.timeout = s.settings.network_timeout;
 	$.ajax(options).done(function(res) {
 		if (/<div class="login">/.exec(res)) {
 			return cb({
@@ -92,33 +92,15 @@ function _request(options, cb) {
 	});
 }
 
-function send_court(s) {
-	var post_data = {
-		spiel: s.setup.btde_match_id,
-		feld: settings.court_id,
-	};
-	_request({
-		method: 'POST',
-		url: baseurl + 'login/write.php',
-		data: $.param(post_data),
-		contentType: 'application/x-www-form-urlencoded',
-	}, function(err) {
-		if (! err) {
-			s.remote.btde_court = post_data.feld;
-		}
-		network.errstate('btde.court', err);
-	});
-}
-
 function send_score(s) {
 	var netscore = network.calc_score(s);
 	var post_data = {
 		id: s.setup.btde_match_id,
-		feld: settings.court_id,
+		feld: s.settings.court_id,
 	};
 	netscore.forEach(function(score, game_idx) {
-		post_data['satz' + (game_idx + 1)] = score[0];
-		post_data['satz' + (3 + game_idx + 1)] = score[1];
+		post_data['satz' + (game_idx + 1)] = '' + score[0];
+		post_data['satz' + (3 + game_idx + 1)] = '' + score[1];
 	});
 	for (var i = 1;i <= 6;i++) {
 		if (post_data['satz' + i] === undefined) {
@@ -126,7 +108,7 @@ function send_score(s) {
 		}
 	}
 
-	_request({
+	_request(s, {
 		method: 'POST',
 		url: baseurl + 'login/write.php',
 		data: JSON.stringify(post_data),
@@ -134,26 +116,20 @@ function send_score(s) {
 	}, function(err) {
 		if (!err) {
 			s.remote.btde_score = netscore;
+			s.remote.btde_court = s.settings.court_id;
 		}
 		network.errstate('btde.score', err);
 	});
 }
 
 function sync(s) {
-	if (settings.court_id !== s.remote.btde_court) {
-		send_court(s);
-	}
 	var netscore = network.calc_score(s);
-	if (JSON.stringify(netscore) !== JSON.stringify(s.remote.btde_score)) {
+	if ((s.settings.court_id != s.remote.btde_court) || !utils.deep_equal(netscore, s.remote.btde_score)) {
 		send_score(s);
 	}
 }
 
 function send_press(s, press) {
-	if (press.type == '_start_match') {
-		// Only set court, someone may just be looking at the court
-		return send_court(s);
-	}
 	sync(s);
 }
 
@@ -257,7 +233,7 @@ function _parse_match_list(html) {
 }
 
 function list_matches(s, cb) {
-	_request({
+	_request(s, {
 		url: baseurl + 'login/punkte.php',
 	}, function(err, html) {
 		if (err) {
