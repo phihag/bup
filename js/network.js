@@ -85,7 +85,7 @@ function _start_list_matches(s) {
 
 	_network_list_timeout = setTimeout(function() {
 		ui_list_matches(s, true);
-	}, settings.network_update_interval);
+	}, s.settings.network_update_interval);
 }
 
 function _matchlist_install_reload_button(s) {
@@ -100,7 +100,6 @@ function _matchlist_install_reload_button(s) {
 	event_container.append(reload_button);
 }
 
-
 function _score_text(network_score) {
 	if (!network_score) {
 		return '';
@@ -113,7 +112,7 @@ function _score_text(network_score) {
 	return network_score.map(function(network_game) {
 		return network_game[0] + '-' + network_game[1];
 	}).join(' ');
-};
+}
 
 function ui_render_matchlist(s, event) {
 	var container = $('#setup_network_matches');
@@ -240,7 +239,7 @@ function schedule_resync() {
 		window.clearTimeout(resync_timeout);
 		resync_timeout = null;
 	}
-	resync_timeout = window.setTimeout(resync, Math.max(settings.network_update_interval, 100));
+	resync_timeout = window.setTimeout(resync, Math.max(state.settings.network_update_interval, 100));
 }
 
 function resync() {

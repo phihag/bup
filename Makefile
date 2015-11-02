@@ -45,6 +45,7 @@ dist: cleandist
 		"js/btde.js" \
 		"js/calc.js" \
 		"js/render.js" \
+		"js/settings.js" \
 		"js/scoresheet.js" \
 		"js/network.js" \
 		"js/bup.js" \

@@ -5,16 +5,6 @@ var state = {
 	initialized: false
 };
 var networks = {};
-var settings = {
-	save_finished_matches: true,
-	go_fullscreen: false,
-	show_pronounciation: true,
-	umpire_name: '',
-	court_id: '',
-	court_description: '',
-	network_timeout: 10000,
-	network_update_interval: 10000,
-};
 
 var _ui_esc_stack = [];
 function ui_esc_stack_push(cancel) {
@@ -420,7 +410,6 @@ function hide_settings(force) {
 }
 
 function resume_match(s) {
-	s.settings = settings;
 	calc.init_state(s, null, s.presses);
 	calc.state(s);
 	state = s;
@@ -451,7 +440,7 @@ function on_press(press, s) {
 function on_presses_change(s) {
 	calc.state(s);
 	if (s.match.finish_confirmed) {
-		if (! settings.save_finished_matches) {
+		if (! s.settings.save_finished_matches) {
 			delete_match(s.metadata.id);
 		}
 		s.metadata = {};
@@ -538,31 +527,8 @@ function delete_match(match_id) {
 	window.localStorage.removeItem('bup_match_' + match_id);
 }
 
-function settings_load() {
-	if (! window.localStorage) {
-		show_error('localStorage unavailable');
-		return;
-	}
-
-	var s = window.localStorage.getItem('bup_settings');
-	if (s) {
-		var new_settings = JSON.parse(s);
-		settings = $.extend(settings, new_settings);
-	}
-}
-
-function settings_store() {
-	if (! window.localStorage) {
-		show_error('localStorage unavailable');
-		return;
-	}
-
-	window.localStorage.setItem('bup_settings', JSON.stringify(settings));
-}
-
 function init() {
-	settings_load();
-	state.settings = settings;
+	state.settings = settings.load();
 }
 
 
@@ -572,17 +538,17 @@ var _settings_numberfields = ['network_timeout', 'network_update_interval'];
 function ui_settings_update() {
 	_settings_checkboxes.forEach(function(name) {
 		var box = $('.settings [name="' + name + '"]');
-		box.prop('checked', settings[name]);
+		box.prop('checked', state.settings[name]);
 	});
 
 	_settings_textfields.forEach(function(name) {
 		var input = $('.settings [name="' + name + '"]');
-		input.val(settings[name] ? settings[name] : '');
+		input.val(state.settings[name] ? state.settings[name] : '');
 	});
 
 	_settings_numberfields.forEach(function(name) {
 		var input = $('.settings [name="' + name + '"]');
-		input.val(settings[name] ? settings[name] : '');
+		input.val(state.settings[name] ? state.settings[name] : '');
 	});
 
 	render.ui_court_str(state);
@@ -592,33 +558,33 @@ function ui_init_settings() {
 	_settings_checkboxes.forEach(function(name) {
 		var box = $('.settings [name="' + name + '"]');
 		box.on('change', function() {
-			settings[name] = box.prop('checked');
+			state.settings[name] = box.prop('checked');
 			if ((name === 'show_pronounciation') && (state.initialized)) {
 				render.ui_render(state);
 			}
-			settings_store();
+			settings.store(state);
 		});
 	});
 
 	_settings_textfields.forEach(function(name) {
 		var input = $('.settings [name="' + name + '"]');
 		input.on('change input', function(e) {
-			settings[name] = input.val();
+			state.settings[name] = input.val();
 			if ((name === 'court_id') || (name === 'court_description')) {
-				render.ui_court_str();
+				render.ui_court_str(state);
 				if (e.type == 'change') {
 					network.resync();
 				}
 			}
-			settings_store();
+			settings.store(state);
 		});
 	});
 
 	_settings_numberfields.forEach(function(name) {
 		var input = $('.settings [name="' + name + '"]');
 		input.on('change input', function() {
-			settings[name] = parseInt(input.val(), 10);
-			settings_store();
+			state.settings[name] = parseInt(input.val(), 10);
+			settings.store(state);
 		});
 	});
 
@@ -915,22 +881,19 @@ function ui_init() {
 	});
 
 	ui_init_settings();
-
 	var hash_query = utils.parse_query_string(window.location.hash.substr(1));
 	if (hash_query.court) {
 		// TODO make sure this is only for the current session, only overwrite settings when necessary
-		settings.court_id = hash_query.court;
-		if (settings.court_id == '1') {
-			settings.court_description = 'links';
-		} else if (settings.court_id == '2') {
-			settings.court_description = 'rechts';
+		state.settings.court_id = hash_query.court;
+		if (state.settings.court_id == '1') {
+			state.settings.court_description = 'links';
+		} else if (state.settings.court_id == '2') {
+			state.settings.court_description = 'rechts';
 		}
 		ui_settings_update();
 	}
 
-	if (hash_query.liveaw_match_id) {
-		liveaw_init(hash_query.liveaw_match_id);
-	} else if (hash_query.courtspot !== undefined) {
+	if (hash_query.courtspot !== undefined) {
 		networks.courtspot = courtspot();
 		networks.courtspot.ui_init(state);
 	} else if (hash_query.btde !== undefined) {
@@ -942,7 +905,7 @@ function ui_init() {
 		show_settings();
 	}
 
-	if (settings.go_fullscreen && _ui_fullscreen_supported()) {
+	if (state.settings.go_fullscreen && _ui_fullscreen_supported()) {
 		var go_fullscreen_hide = function() {
 			ui_esc_stack_pop();
 			$('#go_fullscreen_wrapper').hide();
@@ -972,6 +935,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var render = require('./render');
 	var scoresheet = require('./scoresheet');
 	var network = require('./network');
+	var btde = require('./btde');
 	var courtspot = require('./courtspot');
 	var pronounciation = require('./pronounciation');
 

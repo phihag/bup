@@ -1,3 +1,4 @@
+/*
 'use strict';
 
 function liveaw_contact(cb) {
@@ -67,3 +68,4 @@ function liveaw_init(liveaw_match_id) {
 		});
 	});
 }
+*/

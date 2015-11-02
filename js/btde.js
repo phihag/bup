@@ -35,7 +35,7 @@ function ui_render_login(container) {
 			method: 'POST',
 			data: login_form.serializeArray(),
 			contentType: 'application/x-www-form-urlencoded',
-			timeout: settings.network_timeout,
+			timeout: state.settings.network_timeout,
 		}).done(function(res) {
 			loading_icon.hide();
 			login_button.removeAttr('disabled');
@@ -257,13 +257,13 @@ function ui_init() {
 	show_settings();
 
 	var configured = ALL_COURTS.some(function(c) {
-		return settings.court_id == c.court_id && settings.court_description == c.court_description;
+		return state.settings.court_id == c.court_id && state.settings.court_description == c.court_description;
 	});
 	if (! configured) {
 		_ui_make_pick('Feld auswählen', ALL_COURTS, function(c) {
-			settings.court_id = c.court_id;
-			settings.court_description = c.court_description;
-			settings_store();
+			state.settings.court_id = c.court_id;
+			state.settings.court_description = c.court_description;
+			settings.store(state);
 			ui_settings_update();
 		}, false, $('body'));
 	}

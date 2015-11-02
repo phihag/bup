@@ -464,8 +464,8 @@ function ui_show() {
 	_text('.scoresheet_match_name', state.setup.match_name);
 	_text('.scoresheet_date_value', utils.human_date_str(state.metadata.start));
 
-	_text('.scoresheet_court_id', settings.court_id);
-	_text('.scoresheet_umpire_name', settings.umpire_name);
+	_text('.scoresheet_court_id', state.settings.court_id);
+	_text('.scoresheet_umpire_name', state.settings.umpire_name);
 
 	_text('.scoresheet_begin_value', state.metadata.start ? utils.time_str(state.metadata.start) : '');
 	if (state.match.finished) {
@@ -633,11 +633,11 @@ function ui_show() {
 			_svg_align_vcenter(text, table_top + player_idx * cell_height + cell_height / 2);
 		}
 
-		for (var i = 1;i < SCORESHEET_COL_COUNT;i++) {
+		for (var col_idx = 1;col_idx < SCORESHEET_COL_COUNT;col_idx++) {
 			_svg_el('line', {
 				'class': 'table_line',
-				'x1': cols_left + i * cell_width,
-				'x2': cols_left + i * cell_width,
+				'x1': cols_left + col_idx * cell_width,
+				'x2': cols_left + col_idx * cell_width,
 				'y1': table_top,
 				'y2': table_top + table_height,
 			}, t);

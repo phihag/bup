@@ -248,7 +248,7 @@ function calc_press(s, press) {
 			s.game.teams_player1_even[s.game.start_server_team_id] = s.game.start_server_player_id == (s.game.score[s.game.start_server_team_id] % 2);
 		} else {
 			s.game.start_receiver_player_id = 0;
-			s.game.teams_player1_even[s.game.start_server_team_id] = (s.game.score[s.game.start_server_team_id] % 2) == 0;
+			s.game.teams_player1_even[s.game.start_server_team_id] = (s.game.score[s.game.start_server_team_id] % 2) === 0;
 			s.game.teams_player1_even[1 - s.game.start_server_team_id] = s.game.teams_player1_even[s.game.start_server_team_id];
 		}
 		if (s.game.team1_serving === null) {

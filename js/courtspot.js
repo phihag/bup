@@ -76,7 +76,7 @@ function sync(s) {
 		data['HeimSatz' + (i+1)] = (i < netscore.length) ? netscore[i][0] : -1;
 		data['GastSatz' + (i+1)] = (i < netscore.length) ? netscore[i][1] : -1;
 	}
-	if (utils.deep_equal(data, s.remote.courtspot_data) && (_outstanding_requests == 0)) {
+	if (utils.deep_equal(data, s.remote.courtspot_data) && (_outstanding_requests === 0)) {
 		return;
 	}
 	_outstanding_requests++;
@@ -171,10 +171,18 @@ function list_matches(s, cb) {
 		var matches = [];
 		var v_node = xml_doc.getElementsByTagName('VERWALTUNG')[0];
 		var match_nodes = xml_doc.getElementsByTagName('Spiel');
+		var home_team_name = null;
+		var away_team_name = null;
 		for (var i = 0;i < match_nodes.length;i++) {
 			var match_node = match_nodes[i];
 			var home_team = _get_team(match_node, v_node, 'Heim');
+			if (!home_team_name) {
+				home_team_name = home_team.name;
+			}
 			var away_team = _get_team(match_node, v_node, 'Gast');
+			if (!away_team_name) {
+				away_team_name = away_team.name;
+			}
 
 			var match_name = _xml_get_text(match_node, 'Art');
 
@@ -200,9 +208,11 @@ function list_matches(s, cb) {
 		}
 
 		var event = {
-			event_name: home_team.name + ' - ' + away_team.name,
 			matches: matches,
 		};
+		if (home_team_name && away_team_name) {
+			event.event_name = home_team_name + ' - ' + away_team_name;
+		}
 		cb(err, event);
 	});
 }

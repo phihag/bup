@@ -3,6 +3,8 @@
 	"jquery": true,
 	"globals": {
 		"document": false,
-		"window": false
+		"window": false,
+		"Mousetrap": false,
+		"require": false
 	}
 }

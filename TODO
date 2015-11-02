@@ -1,4 +1,5 @@
 score input is broken at start of game
+move ui helpers into an own module
 move settings into an own module
 test ending match with edit
 edit mode to change sides / change ends

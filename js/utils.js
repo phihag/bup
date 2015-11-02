@@ -163,7 +163,7 @@ function deep_equal(x, y) {
 		for (k in y) {
 			key_count--;
 		}
-		return key_count == 0;
+		return key_count === 0;
 	}
 	return false;
 }
