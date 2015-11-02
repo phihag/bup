@@ -200,21 +200,21 @@ html, body, button {
 	display: block;
 	color: #444;
 	white-space: pre-wrap;
-	padding: 2vh 0 2vh 0;
+	padding: 2vmin 0 2vmin 0;
 }
 
 #left_score, #right_score {
 	position: absolute;
-	font-size: 15vh;
-	padding: 4vh;
-	bottom: 1vh;
+	font-size: 15vmin;
+	padding: 4vmin;
+	bottom: 1vmin;
 	z-index: 200;
 }
 #left_score {
-	left: 1vh;
+	left: 1vmin;
 }
 #right_score {
-	right: 1vh;
+	right: 1vmin;
 }
 
 #score {
@@ -723,4 +723,28 @@ button>.loading-icon {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+}
+
+
+@media screen and (max-aspect-ratio: 2/3) {
+	#left_score, #right_score {
+		font-size: 20vmin;
+		padding: 1vmin;
+		bottom: 0;
+		width: 25vmin;
+		height: 25vmin;
+	}
+
+	#pronounciation {
+		bottom: 25vmin;
+	}
+
+	.timer_container {
+		position: absolute;
+		left: 0; right: 0;
+		top: auto;
+		bottom: 0;
+		text-align: center;
+		font-size: 16vmin;
+	}
 }
