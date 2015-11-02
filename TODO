@@ -38,8 +38,6 @@ scoresheet: vcenter shuttle counter
 retest Manuel's notes
 
 save manually created games immediately?
-write div/LICENSE.commercial.de
-	include in dist
 improve touch behavior (listen to touchstart instead of click)
 	utils.bind_click
 	actually change
