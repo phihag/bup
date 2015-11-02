@@ -160,7 +160,7 @@ function _parse_match(state, col_count) {
 			s.scoresheet_game.cells.push({
 				col: -1,
 				row: press.team_id * 2 + press.player_id,
-				val: 'A'
+				val: 'A',
 			});
 			break;
 		case 'pick_receiver':
@@ -170,7 +170,7 @@ function _parse_match(state, col_count) {
 			s.scoresheet_game.cells.push({
 				col: -1,
 				row: 2 * press.team_id + press.player_id,
-				val: 'R'
+				val: 'R',
 			});
 			break;
 		case 'love-all':
@@ -186,7 +186,7 @@ function _parse_match(state, col_count) {
 				s.scoresheet_game.cells.push({
 					col: -1,
 					row: 2 * s.scoresheet_game.serving_team,
-					val: 'A'
+					val: 'A',
 				});
 			}
 			// In doubles we'll get future pick-server and pick-receiver events
@@ -722,7 +722,7 @@ function ui_show() {
 			}
 			_svg_el('path', {
 				'class': 'editmode-sign',
-				'd': path_data
+				'd': path_data,
 			}, t);
 			break;
 		case 'score':
@@ -903,7 +903,7 @@ function ui_pdf() {
 	var props = {
 		title: _match_title(state, '/'),
 		subject: 'Schiedsrichterzettel',
-		creator: 'bup (https://github.com/phihag/bup/)'
+		creator: 'bup (https://github.com/phihag/bup/)',
 	};
 	if (state.setup.umpire && state.setup.umpire.name) {
 		props.author = state.setup.umpire.name;

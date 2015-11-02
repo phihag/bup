@@ -2,7 +2,7 @@
 
 var DOUBLE_CLICK_TIMEOUT = 1000;
 var state = {
-	initialized: false
+	initialized: false,
 };
 var networks = {};
 
@@ -344,17 +344,17 @@ function demo_match_start() {
 		teams: [{
 			name: '1.BC Beuel',
 			players: [{
-				name: 'Max Weißkirchen'
+				name: 'Max Weißkirchen',
 			}, {
-				name: 'Birgit Michels'
-			}]
+				name: 'Birgit Michels',
+			}],
 		}, {
 			name: '1.BC Sbr.-Bischmisheim',
 			players: [{
-				name: 'Michael Fuchs'
+				name: 'Michael Fuchs',
 			}, {
-				name: 'Samantha Barning'
-			}]
+				name: 'Samantha Barning',
+			}],
 		}],
 		match_name: 'GD',
 		event_name: 'BCB - BCB (Demo)',
@@ -684,7 +684,7 @@ function ui_init() {
 		if (e.target != this) {
 			return;
 		}
- 		ui_hide_exception_dialog();
+		ui_hide_exception_dialog();
 	});
 
 	$('#setup_manual_form').on('submit', function(e) {
@@ -692,7 +692,7 @@ function ui_init() {
 
 		function _player_formval(input_name, def) {
 			return {
-				name: _formval(input_name, def)
+				name: _formval(input_name, def),
 			};
 		}
 
@@ -707,7 +707,7 @@ function ui_init() {
 		var team1, team2;
 		var setup = {
 			is_doubles: $('#setup_manual_form [name="gametype"]:checked').val() == 'doubles',
-			counting: '3x21'
+			counting: '3x21',
 		};
 
 		setup.team_competition = $('#setup_manual_form [name="team_competition"]').prop('checked');
@@ -758,29 +758,29 @@ function ui_init() {
 	});
 	$('#love-all').on('click', function() {
 		on_press({
-			type: 'love-all'
+			type: 'love-all',
 		});
 	});
 	$('#postgame-confirm').on('click', function() {
 		on_press({
-			type: 'postgame-confirm'
+			type: 'postgame-confirm',
 		});
 	});
 	$('#postmatch-confirm').on('click', function() {
 		on_press({
-			type: 'postmatch-confirm'
+			type: 'postmatch-confirm',
 		});
 	});
 	$('#left_score').on('click', function() {
 		on_press({
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		});
 	});
 	$('#right_score').on('click', function() {
 		on_press({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 	});
 	$('#button_undo').on('click', function() {
@@ -836,7 +836,7 @@ function ui_init() {
 		ui_hide_exception_dialog();
 		_ui_make_player_pick(
 			state, 'Verwarnung (Gelbe Karte)', 'yellow-card', ui_show_exception_dialog,
-			function(btn, team_id, player_id) {
+			function(btn, team_id) {
 				if (state.match.carded[team_id]) {
 					btn.prepend('<span class="yellow-card-image"></span>');
 					btn.attr('disabled', 'disabled');

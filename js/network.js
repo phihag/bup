@@ -47,15 +47,6 @@ function calc_score(s, always_zero) {
 
 
 function send_press(s, press) {
-	if (s.liveaw && s.liveaw.match_id) {
-		_liveaw_request({
-			type: 'set-presses',
-			match_id: s.liveaw.match_id,
-			presses: s.presses,
-		}, function() {
-
-		});
-	}
 	if (networks.courtspot && s.setup.courtspot_match_id) {
 		networks.courtspot.send_press(s, press);
 	}
@@ -180,7 +171,7 @@ function ui_render_matchlist(s, event) {
 				if (mwinner == 'left' || mwinner == 'right') {
 					_ui_make_pick('Das Spiel ' + pronounciation.match_str(match.setup) + ' ist bereits beendet (' + _score_text(netscore) + ')!', [{
 						label: 'Spiel bei 0-0 neu starten',
-					}], function(pick) {
+					}], function() {
 						start_match(s, match.setup);
 					}, show_settings);
 					return;

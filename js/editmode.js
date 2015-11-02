@@ -48,19 +48,19 @@ function ui_init() {
 	});
 	utils.on_click($('.editmode_change-ends'), function() {
 		on_press({
-			type: 'editmode_change-ends'
+			type: 'editmode_change-ends',
 		});
 	});
 	utils.on_click($('.editmode_switch_left'), function() {
 		on_press({
 			type: 'editmode_switch-sides',
-			side: 'left'
+			side: 'left',
 		});
 	});
 	utils.on_click($('.editmode_switch_right'), function() {
 		on_press({
 			type: 'editmode_switch-sides',
-			side: 'right'
+			side: 'right',
 		});
 	});
 	utils.on_click($('.editmode_arrow'), function() {
