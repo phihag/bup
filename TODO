@@ -1,10 +1,11 @@
-show version in UI
 courtspot
 	compose mail
 	send mail
+fix btde
 
 
-
+show version in UI (compile in in make_dist.js)
+error with confirmed presses (see file)
 score input is broken at start of game
 
 move ui helpers into an own module
@@ -177,7 +178,6 @@ Schiedsrichterzettel auch im Bundesliga-Design
 limit available courts when network is in use
 mock courtspot and write automated tests
 dynamically create favicon (score? match name? court name?)
-move uglifyjs call to helper script in div/
 replace s.scoresheet_game with sg to save space
 move settings into its own module
 move _network_reload_interval to network

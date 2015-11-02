@@ -30,26 +30,11 @@ cleandist:
 
 dist: cleandist
 	mkdir -p dist/bup
-	node div/make_dist.js bup.html dist/bup/index.html
+	node div/make_dist.js bup.html dist/bup/index.html dist/bup/bup.dist.js
 	<bup.css cleancss -o dist/bup/bup.min.css
 	cp div/dist_htaccess dist/bup/.htaccess
 	svgo -f icons/ -o dist/bup/icons/
 	cp libs/jspdf.min.js dist/bup/jspdf.dist.js
-	uglifyjs \
-		"libs/jquery.min.js" "libs/mousetrap.min.js" \
-		"js/utils.js" \
-		"js/pronounciation.js" \
-		"js/editmode.js" \
-		"js/liveaw.js" \
-		"js/courtspot.js" \
-		"js/btde.js" \
-		"js/calc.js" \
-		"js/render.js" \
-		"js/settings.js" \
-		"js/scoresheet.js" \
-		"js/network.js" \
-		"js/bup.js" \
-		-m -c -o dist/bup/bup.dist.js
 	mkdir -p dist/bup/div/
 	date '+%Y.%m.%d' > dist/bup/div/version.txt
 	cp \
