@@ -4,7 +4,7 @@ test resuming from courtspot
 new btde protocol
 
 test editmode serve change (in singles does not seem to reposition?)
-show version in UI (compile in in make_dist.js)
+show version in UI (compile it in make_dist.js)
 error with confirmed presses (see file)
 score input is broken at start of game
 Abgeschlossene Spiele speichern does not work?

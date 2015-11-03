@@ -95,11 +95,10 @@ function _request(s, options, cb) {
 function send_score(s) {
 	var netscore = network.calc_score(s);
 
-	/* // badminticker requirements - show 0:0 before match start
+	// badminticker requirements - show 0:0 before match start
 	if (netscore.length === 0) {
 		netscore = [[0, 0]];
 	}
-	*/
 
 	var post_data = {
 		id: s.setup.btde_match_id,
