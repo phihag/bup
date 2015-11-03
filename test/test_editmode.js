@@ -958,4 +958,5 @@ _describe('editmode', function() {
 		assert.deepEqual(s.match.finished_games[1].score, [21, 4]);
 		assert.strictEqual(s.match.finished, true);
 	});
+
 });

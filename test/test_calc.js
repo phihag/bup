@@ -2541,17 +2541,6 @@ _describe('calc_state', function() {
 		assert(! s.match.finished_games[1].synthetic);
 		assert.deepEqual(s.game.score, [5, 3]);
 	});
-
-	_it('love-all before side picking should not start timer', function() {
-		var presses = [{
-			type: 'love-all',
-		}, {
-			type: 'pick_side',
-			team1_left: true,
-		}];
-		var s = state_after(presses, SINGLES_SETUP);
-		assert(!s.timer);
-	});
 });
 
 _describe('calc helper functions', function() {

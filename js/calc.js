@@ -225,7 +225,7 @@ function calc_press(s, press) {
 	case 'pick_side':
 		s.game.start_team1_left = press.team1_left;
 		s.game.team1_left = s.game.start_team1_left;
-		if (!s.game.started) {
+		if (!s.setup.resumed) {
 			s.timer = {
 				start: press.timestamp,
 				duration: 120 * 1000,
@@ -420,6 +420,7 @@ function calc_press(s, press) {
 				editmode_by_side: !! press.by_side,
 			};
 		});
+
 		s.match.finished = false;
 		s.match.team1_won = null;
 		s.match.game_score = calc_game_score(s.match.finished_games);

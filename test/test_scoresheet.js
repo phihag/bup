@@ -59,11 +59,11 @@ _describe('scoresheet generation', function() {
 			player_id: 0,
 		});
 		presses.push({
-			type: 'love-all'
+			type: 'love-all',
 		});
 		press_score(presses, 21, 0);
 		presses.push({
-			type: 'postgame-confirm'
+			type: 'postgame-confirm',
 		});
 
 		presses.push({
@@ -1709,11 +1709,11 @@ _describe('scoresheet generation', function() {
 			player_id: 0,
 		});
 		presses.push({
-			type: 'love-all'
+			type: 'love-all',
 		});
 		press_score(presses, 21, 7);
 		presses.push({
-			type: 'postgame-confirm'
+			type: 'postgame-confirm',
 		});
 
 		presses.push({
@@ -1724,6 +1724,5 @@ _describe('scoresheet generation', function() {
 		assert(! cells.some(function(cell) {
 			return cell.table == 0 && cell.type == 'editmode-sign';
 		}));
-
 	});
 });

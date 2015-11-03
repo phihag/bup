@@ -21,7 +21,7 @@ function calc_score(s, always_zero) {
 	s.match.finished_games.forEach(function(fg) {
 		scores.push(fg.score.slice());
 	});
-	if (s.game.started || (s.game.score[0] > 0) || (s.game.score[1] > 0) || always_zero) {
+	if (! s.match.finish_confirmed && ((s.game.started || (s.game.score[0] > 0) || (s.game.score[1] > 0) || always_zero))) {
 		scores.push(s.game.score.slice());
 	}
 	if (s.match.finished && !s.match.won_by_score) {
@@ -158,6 +158,7 @@ function ui_render_matchlist(s, event) {
 						var presses = [];
 						if (pick.key == 'resume') {
 							var current_game = netscore[netscore.length - 1];
+							match.setup.resumed = true;
 
 							if (netscore.length > 1) {
 								presses.push({
@@ -170,9 +171,6 @@ function ui_render_matchlist(s, event) {
 								type: 'editmode_set-score',
 								score: current_game,
 								by_side: false,
-							});
-							presses.push({
-								type: 'love-all',
 							});
 
 							if (typeof match.network_team1_left == 'boolean') {

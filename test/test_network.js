@@ -2,6 +2,8 @@
 
 var assert = require('assert');
 
+var _ = require('underscore');
+
 var tutils = require('./tutils');
 var bup = tutils.bup;
 var _describe = tutils._describe;
@@ -223,6 +225,42 @@ _describe('network', function() {
 		assert.deepEqual(bup.network.calc_score(s, true), [[0, 0]]);
 	});
 
+	_it('calc_score after match end', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		}, {
+			type: 'love-all'
+		}, {
+			type: 'editmode_set-finished_games',
+			scores: [[21, 18]],
+		}];
+		var s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(s.match.finished_games.length, 1);
+		assert.deepEqual(s.match.finished_games[0].score, [21, 18]);
+		assert.deepEqual(s.match.game_score, [1, 0]);
+		assert.deepEqual(bup.network.calc_score(s), [[21, 18], [0, 0]]);
+
+		press_score(presses, 21, 12);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(s.match.finished_games.length, 1);
+		assert.deepEqual(s.match.finished_games[0].score, [21, 18]);
+		assert.deepEqual(s.match.game_score, [2, 0]);
+		assert.strictEqual(s.match.finished, true);
+
+		assert.deepEqual(bup.network.calc_score(s), [[21, 18], [21, 12]]);
+
+		presses.push({
+			type: 'postmatch-confirm',
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(bup.network.calc_score(s), [[21, 18], [21, 12]]);
+	});
+
 	_it('network_score with state_at', function() {
 		function _assert_network_score(scores) {
 			var s = tutils.state_at(scores);
@@ -234,5 +272,17 @@ _describe('network', function() {
 		_assert_network_score([[21, 23], [21, 5]]);
 		_assert_network_score([[21, 23], [9, 5]]);
 		_assert_network_score([[21, 23], [21, 5], [30, 29]]);
+	});
+
+	_it('no timer in resumed matches', function() {
+		var setup = _.clone(SINGLES_SETUP);
+		setup.resumed = true;
+
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}];
+		var s = state_after(presses, setup);
+		assert(!s.timer);
 	});
 });
