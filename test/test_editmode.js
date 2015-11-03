@@ -959,4 +959,26 @@ _describe('editmode', function() {
 		assert.strictEqual(s.match.finished, true);
 	});
 
+	_it('no timer in resumed matches', function() {
+		var presses = [{
+			type: 'editmode_set-score',
+			score: [2, 5],
+			resumed: true,
+		}, {
+			type: 'pick_side',
+			team1_left: true,
+		}];
+		var s = state_after(presses, SINGLES_SETUP);
+		assert(!s.timer);
+		assert(!s.game.announce_pregame);
+
+		presses.push({
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert(!s.timer);
+		assert(!s.game.announce_pregame);
+	});
 });

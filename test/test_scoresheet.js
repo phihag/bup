@@ -1725,4 +1725,78 @@ _describe('scoresheet generation', function() {
 			return cell.table == 0 && cell.type == 'editmode-sign';
 		}));
 	});
+
+	_it('correctly show resumed matches', function() {
+		var presses = [{
+			type: 'editmode_set-score',
+			score: [2, 5],
+			resumed: true,
+		}];
+
+		var cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		_assert_cell(cells, {
+			type: 'score',
+			table: 0,
+			col: 0,
+			row: 0,
+			val: 2,
+			editmode_related: true,
+		});
+		_assert_cell(cells, {
+			type: 'score',
+			table: 0,
+			col: 0,
+			row: 2,
+			val: 5,
+			editmode_related: true,
+		});
+
+		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			type: 'score',
+			table: 0,
+			col: 0,
+			row: 0,
+			val: 2,
+			editmode_related: true,
+		});
+		_assert_cell(cells, {
+			type: 'score',
+			table: 0,
+			col: 0,
+			row: 2,
+			val: 5,
+			editmode_related: true,
+		});
+/* TODO
+		presses.push({
+			type: 'pick_server',
+			team_id: 1,
+			player_id: 1,
+		});
+		presses.push({
+			type: 'pick_receiver',
+			team_id: 0,
+			player_id: 1,
+		});
+		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		assert.equal(cells.length, 3);
+		_assert_cell(cells, {
+			type: 'score',
+			table: 0,
+			col: 0,
+			row: 1,
+			val: 2,
+			editmode_related: true,
+		});
+		_assert_cell(cells, {
+			type: 'score',
+			table: 0,
+			col: 0,
+			row: 3,
+			val: 5,
+			editmode_related: true,
+		});
+*/
+	});
 });

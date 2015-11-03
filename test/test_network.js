@@ -273,16 +273,4 @@ _describe('network', function() {
 		_assert_network_score([[21, 23], [9, 5]]);
 		_assert_network_score([[21, 23], [21, 5], [30, 29]]);
 	});
-
-	_it('no timer in resumed matches', function() {
-		var setup = _.clone(SINGLES_SETUP);
-		setup.resumed = true;
-
-		var presses = [{
-			type: 'pick_side',
-			team1_left: true,
-		}];
-		var s = state_after(presses, setup);
-		assert(!s.timer);
-	});
 });

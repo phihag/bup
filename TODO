@@ -1,7 +1,8 @@
 btde zero
 answer btde mail
 
-
+scoresheet should look nice immediately after picking sides and resuming
+do not show love-all dialog when resuming
 new btde protocol
 
 test editmode serve change (in singles does not seem to reposition?)

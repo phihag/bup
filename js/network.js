@@ -158,7 +158,6 @@ function ui_render_matchlist(s, event) {
 						var presses = [];
 						if (pick.key == 'resume') {
 							var current_game = netscore[netscore.length - 1];
-							match.setup.resumed = true;
 
 							if (netscore.length > 1) {
 								presses.push({

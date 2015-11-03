@@ -92,20 +92,28 @@ function _clean_editmode(sgame) {
 }
 
 function _loveall(s, game, sgame, extra_attrs) {
+	var serving_team = (sgame.serving_team === null) ? 0 : sgame.serving_team;
+	var server_row = (
+		((sgame.serving_team === null) || (sgame.servers[serving_team] === null)) ?
+		0 :
+		2 * sgame.serving_team + sgame.servers[sgame.serving_team]
+	);
+
 	var cell = {
 		type: 'score',
 		col: sgame.col_idx,
-		row: 2 * sgame.serving_team + sgame.servers[sgame.serving_team],
-		val: game.score[sgame.serving_team],
+		row: server_row,
+		val: game.score[serving_team],
 	};
 	if (extra_attrs) {
 		utils.obj_update(cell, extra_attrs);
 	}
 	sgame.cells.push(cell);
-	var receiving_team = 1 - sgame.serving_team;
+	var receiving_team = 1 - serving_team;
 	var receiver_row = (
-		2 * receiving_team +
-		(s.setup.is_doubles ? sgame.servers[receiving_team] : 0)
+		((sgame.serving_team === null) || (sgame.servers[receiving_team] === null)) ?
+		2 :
+		2 * receiving_team + (s.setup.is_doubles ? sgame.servers[receiving_team] : 0)
 	);
 	cell = {
 		type: 'score',
@@ -357,7 +365,7 @@ function _parse_match(state, col_count) {
 				type: 'editmode-sign',
 				editmode_related: true,
 			});
-			if (s.scoresheet_game.serving_team !== null) {
+			if ((s.scoresheet_game.serving_team !== null) || press.resumed) {
 				_loveall(s, s.game, s.scoresheet_game, {editmode_related: true});
 			}
 			break;
