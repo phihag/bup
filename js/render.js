@@ -273,7 +273,7 @@ function ui_render(s) {
 	}
 
 	if (s.timer) {
-		ui_set_timer(s.timer);
+		ui_set_timer();
 	} else {
 		ui_remove_timer();
 	}
@@ -288,8 +288,8 @@ function ui_render(s) {
 			dialog_active = true;
 			ui_show_picker($('#pick_side'));
 
-			$('#pick_side_team1').text(calc_teamtext_internal(s, 0));
-			$('#pick_side_team2').text(calc_teamtext_internal(s, 1));
+			$('#pick_side_team1').text(pronounciation.teamtext_internal(s, 0));
+			$('#pick_side_team2').text(pronounciation.teamtext_internal(s, 1));
 		} else if (s.game.start_server_player_id === null) {
 			$('#pick_server button').remove();
 
@@ -348,6 +348,7 @@ return {
 
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var editmode = require('./editmode');
+	var pronounciation = require('./pronounciation');
 
 	module.exports = render;
 }

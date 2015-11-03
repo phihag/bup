@@ -120,7 +120,8 @@ function list_matches(s, cb) {
 	});
 }
 
-function ui_init(s) {
+/* Paramter (unused:) s */
+function ui_init() {
 	if (!baseurl) {
 		baseurl = '../../';
 	}

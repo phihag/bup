@@ -107,7 +107,7 @@ function _ui_make_team_pick(s, label, type, on_cancel, modify_button) {
 	var team_indices = [0, 1];
 	team_indices.forEach(function(ti) {
 		var btn = _ui_add_player_pick(s, dlg, type, ti, null, kill_dialog, function() {
-			return calc_teamtext_internal(s, ti);
+			return pronounciation.teamtext_internal(s, ti);
 		});
 		if (modify_button) {
 			modify_button(btn, ti);
@@ -453,25 +453,6 @@ function on_presses_change(s) {
 	}
 }
 
-// Team name as presented to the umpire
-function calc_teamtext_internal(s, team_id) {
-	var player_names;
-	if (s.setup.is_doubles) {
-		player_names = (
-			s.setup.teams[team_id].players[0].name + ' / ' +
-			s.setup.teams[team_id].players[1].name);
-	} else {
-		player_names = s.setup.teams[team_id].players[0].name;
-	}
-
-	if (s.setup.team_competition) {
-		return s.setup.teams[team_id].name + ' (' + player_names + ')';
-	} else {
-		return player_names;
-	}
-}
-
-
 function ui_show_picker(obj) {
 	obj.show();
 	var first_button = obj.find('button:first');
@@ -606,7 +587,7 @@ function ui_init_settings() {
 }
 
 var ui_timer = null;
-function ui_set_timer(timer) {
+function ui_set_timer() {
 	if (ui_timer) {
 		window.clearTimeout(ui_timer);
 	}

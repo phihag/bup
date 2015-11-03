@@ -9,6 +9,24 @@ function match_str(setup) {
 	}
 }
 
+// Team name as presented to the umpire
+function teamtext_internal(s, team_id) {
+	var player_names;
+	if (s.setup.is_doubles) {
+		player_names = (
+			s.setup.teams[team_id].players[0].name + ' / ' +
+			s.setup.teams[team_id].players[1].name);
+	} else {
+		player_names = s.setup.teams[team_id].players[0].name;
+	}
+
+	if (s.setup.team_competition) {
+		return s.setup.teams[team_id].name + ' (' + player_names + ')';
+	} else {
+		return player_names;
+	}
+}
+
 function loveall_announcement(s) {
 	var prefix = '';
 	if (s.match.finished_games.length == 1) {
@@ -155,6 +173,7 @@ return {
 	loveall_announcement: loveall_announcement,
 	postgame_announcement: postgame_announcement,
 	match_str: match_str,
+	teamtext_internal: teamtext_internal,
 };
 
 })();

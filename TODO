@@ -1,12 +1,10 @@
-courtspot
-	compose mail
-	send mail
 fix btde
 
 
 show version in UI (compile in in make_dist.js)
 error with confirmed presses (see file)
 score input is broken at start of game
+new btde protocol
 
 move ui helpers into an own module
 move timers into an own module
@@ -198,7 +196,6 @@ restart network resync interval if network settings change
 use deep equality instead of checking score[0] == ..score[0] && score[1] == ..score[1]
 manual editing in portrait (maybe distinguish by aspect ratio?)
 capture back button (warning if leaving while game is running)
-CourtSpot: resume with correct position (if it's one of the courts)
 improve settings display on smartphone
 test svg_path_lines
 test that singles with pick_receiver works just fine

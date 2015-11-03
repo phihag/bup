@@ -183,7 +183,7 @@ function ui_render_matchlist(s, event) {
 							}
 							if ((typeof match.network_team1_serving == 'boolean') && match.network_teams_player1_even) {
 								var serving_team = match.network_team1_serving ? 0 : 1;
-								var serving_even = (current_game[serving_team] % 2) == 0;
+								var serving_even = (current_game[serving_team] % 2) === 0;
 
 								var serving_player = 0;
 								var receiving_player = 0;

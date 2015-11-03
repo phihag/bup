@@ -915,4 +915,47 @@ _describe('editmode', function() {
 			'Bitte spielen'
 		);
 	});
+
+	_it('crash with postmatch-confirm', function() {
+		var presses = [{
+			"team1_left" : true,
+			"type" : "pick_side"
+		}, {
+			"player_id" : 0,
+			"type" : "pick_server",
+			"team_id" : 0
+		}, {
+			"type" : "love-all",
+		}, {
+			"type" : "editmode_set-finished_games",
+			"scores": [{
+				"left": 21,
+				"right": 5,
+			}],
+			"by_side" : true,
+		}, {
+			"type" : "editmode_set-score",
+			"score" : {
+				"left" : 21,
+				"right": 4,
+			},
+			"by_side" : true
+		}];
+
+		var s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(s.match.finished_games.length, 1);
+		assert.deepEqual(s.match.finished_games[0].score, [21, 5]);
+		assert.deepEqual(s.game.score, [21, 4]);
+		assert.strictEqual(s.game.finished, true);
+		assert.strictEqual(s.match.finished, true);
+
+		presses.push({
+			type: 'postmatch-confirm',
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(s.match.finished_games.length, 2);
+		assert.deepEqual(s.match.finished_games[0].score, [21, 5]);
+		assert.deepEqual(s.match.finished_games[1].score, [21, 4]);
+		assert.strictEqual(s.match.finished, true);
+	});
 });
