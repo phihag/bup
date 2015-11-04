@@ -913,6 +913,7 @@ function ui_init() {
 	}
 }
 
+/* @DEV */
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var utils = require('./utils');
 	var calc = require('./calc');
@@ -935,6 +936,9 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 }
 
 if (typeof $ !== 'undefined') {
+/*/@DEV*/
 	init();
 	$(ui_init);
+/*@DEV*/
 }
+/*/@DEV*/

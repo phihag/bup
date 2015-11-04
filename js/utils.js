@@ -191,6 +191,8 @@ return {
 };
 })();
 
+/*@DEV*/
 if (typeof module !== 'undefined') {
 	module.exports = utils;
 }
+/*/@DEV*/

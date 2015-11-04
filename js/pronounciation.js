@@ -178,6 +178,8 @@ return {
 
 })();
 
+/*@DEV*/
 if (typeof module !== 'undefined') {
 	module.exports = pronounciation;
 }
+/*/@DEV*/

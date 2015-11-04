@@ -3,10 +3,10 @@ do not show love-all dialog when resuming
 new btde protocol
 
 test editmode serve change (in singles does not seem to reposition?)
-error with confirmed presses (see file)
 score input is broken at start of game
 Abgeschlossene Spiele speichern does not work?
 
+manual game creation on smartphones
 move ui helpers into an own module
 move timers into an own module (timer.set, handle !press.timestamp)
 move more settings into an own module
@@ -40,7 +40,6 @@ offline webapp Manifest (only in production)
 	serve manifest file with correct MIME type
 	automatically update if updateready event is shortly after app start and not yet initialized
 
-scrap useless code (module definitions) before uglifying
 check whether we have a copy of a network game to resume from, offer it
 	offer both network and local version if they differ
 

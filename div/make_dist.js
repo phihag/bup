@@ -127,6 +127,7 @@ function main() {
 						return g1 + version + g2;
 					}
 				);
+				js = js.replace(/\/\*\s*@DEV\s*\*\/[\s\S]*?\/\*\s*\/@DEV\s*\*\//g, '');
 				return js;
 			}, cb);
 		},

@@ -145,9 +145,11 @@ return {
 
 }
 
+/*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var network = require('./network');
 	var utils = require('./utils');
 
 	module.exports = courtspot;
 }
+/*/@DEV*/

@@ -43,6 +43,8 @@ return {
 
 })();
 
+/*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	module.exports = settings;
 }
+/*/@DEV*/

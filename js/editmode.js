@@ -158,9 +158,11 @@ return {
 
 })();
 
+/*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var utils = require('./utils');
 	var calc = require('./calc');
 
 	module.exports = editmode;
 }
+/*/@DEV*/

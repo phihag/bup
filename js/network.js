@@ -348,6 +348,7 @@ return {
 
 })();
 
+/*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var utils = require('./utils');
 	var calc = require('./calc');
@@ -355,3 +356,4 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 
 	module.exports = network;
 }
+/*/@DEV*/

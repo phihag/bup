@@ -346,9 +346,11 @@ return {
 
 })();
 
+/*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var editmode = require('./editmode');
 	var pronounciation = require('./pronounciation');
 
 	module.exports = render;
 }
+/*/@DEV*/
