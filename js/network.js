@@ -170,6 +170,7 @@ function ui_render_matchlist(s, event) {
 								type: 'editmode_set-score',
 								score: current_game,
 								by_side: false,
+								resumed: true,
 							});
 
 							if (typeof match.network_team1_left == 'boolean') {

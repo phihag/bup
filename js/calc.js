@@ -387,6 +387,7 @@ function calc_press(s, press) {
 		if (press.resumed) {
 			s.game.started = true;
 		}
+
 		s.game.score = new_score;
 		s.game.service_over = false;
 		s.game.finished = false;

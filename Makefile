@@ -30,13 +30,14 @@ cleandist:
 
 dist: cleandist
 	mkdir -p dist/bup
-	node div/make_dist.js bup.html dist/bup/index.html dist/bup/bup.dist.js
-	<bup.css cleancss -o dist/bup/bup.min.css
-	cp div/dist_htaccess dist/bup/.htaccess
-	svgo -f icons/ -o dist/bup/icons/
+
+	node div/make_dist.js bup.html dist/bup/index.html dist/bup/bup.dist.js dist/tmp
 	cp libs/jspdf.min.js dist/bup/jspdf.dist.js
+	<bup.css cleancss -o dist/bup/bup.min.css
+	svgo -f icons/ -o dist/bup/icons/
+
+	cp div/dist_htaccess dist/bup/.htaccess
 	mkdir -p dist/bup/div/
-	date '+%Y.%m.%d' > dist/bup/div/version.txt
 	cp \
 		div/courtspot_screenshot_links.png \
 		div/courtspot_screenshot_rechts.png \

@@ -462,6 +462,7 @@ span.score_announcement+span.score_announcement {
 	justify-content: center;
 }
 .settings_container {
+	position: relative;
 	text-align: left;
 	background: #ffffff;
 	border-radius: 4vh;
@@ -771,6 +772,13 @@ button>.loading-icon {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+}
+
+#version {
+	color: #ddd;
+	position: absolute;
+	right: 4vh;
+	bottom: 2vh;
 }
 
 

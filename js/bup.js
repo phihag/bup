@@ -635,6 +635,9 @@ function ui_remove_timer() {
 }
 
 function ui_init() {
+	var bup_version = 'dev';
+	$('#version').text(bup_version);
+
 	$('#script_jspdf').on('load', scoresheet.jspdf_loaded);
 	editmode.ui_init();
 	$('.backtogame_button').on('click', function() {
