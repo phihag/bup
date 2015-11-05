@@ -15,7 +15,9 @@
 		"jsdom": "*",
 		"mocha": "*",
 		"underscore": "*",
-		"async": "*"
+		"async": "*",
+		"jshint": "*",
+		"eslint": "*"
 	},
 	"private": true
 }
