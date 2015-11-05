@@ -26,7 +26,7 @@ function ui_init() {
 		} else {
 			enter();
 		}
-		hide_settings();
+		settings.hide();
 	});
 	$('#court').on('click', function(e) {
 		if (e.target.tagName.toLowerCase() == 'button') {
@@ -34,7 +34,7 @@ function ui_init() {
 		}
 
 		var now = Date.now();
-		if (now - last_click < DOUBLE_CLICK_TIMEOUT) {
+		if (now - last_click < state.settings.double_click_timeout) {
 			last_click = 0;
 			enter();
 		} else {
@@ -162,6 +162,7 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var utils = require('./utils');
 	var calc = require('./calc');
+	var settings = require('./settings');
 
 	module.exports = editmode;
 }

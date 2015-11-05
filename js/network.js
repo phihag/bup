@@ -141,7 +141,7 @@ function ui_render_matchlist(s, event) {
 				netw.prepare_match(state.settings, match);
 			}
 
-			hide_settings(true);
+			settings.hide(true);
 
 			if (match.network_score) {
 				var netscore = match.network_score;
@@ -203,7 +203,7 @@ function ui_render_matchlist(s, event) {
 							}
 						}
 						start_match(s, match.setup, presses);
-					}, show_settings);
+					}, settings.show);
 					return;
 				}
 				if (mwinner == 'left' || mwinner == 'right') {
@@ -211,7 +211,7 @@ function ui_render_matchlist(s, event) {
 						label: 'Spiel bei 0-0 neu starten',
 					}], function() {
 						start_match(s, match.setup);
-					}, show_settings);
+					}, settings.show);
 					return;
 				}
 			}
@@ -353,6 +353,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var utils = require('./utils');
 	var calc = require('./calc');
 	var pronounciation = require('./pronounciation');
+	var settings = require('./settings');
 
 	module.exports = network;
 }

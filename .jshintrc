@@ -4,7 +4,10 @@
 	"globals": {
 		"document": false,
 		"window": false,
+
 		"Mousetrap": false,
-		"require": false
+
+		"require": false,
+		"module": false
 	}
 }

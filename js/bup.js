@@ -1,6 +1,5 @@
 'use strict';
 
-var DOUBLE_CLICK_TIMEOUT = 1000;
 var state = {
 	initialized: false,
 };
@@ -312,7 +311,7 @@ function ui_settings_load_list(s) {
 		a.on('click', function(e) {
 			e.preventDefault();
 			resume_match(m);
-			hide_settings(true);
+			settings.hide(true);
 		});
 		li.append(a);
 		var del_btn = $('<button class="button_delete image-button textsize-button"><span></span></button>');
@@ -362,51 +361,8 @@ function demo_match_start() {
 		team_competition: true,
 	};
 
-	hide_settings(true);
+	settings.hide(true);
 	start_match(state, setup);
-}
-
-var _network_hide_cb = null;
-function show_settings() {
-	var wrapper = $('#settings_wrapper');
-	if (wrapper.attr('data-settings-visible') == 'true') {
-		return;
-	}
-	wrapper.attr('data-settings-visible', 'true');
-
-	wrapper.show();
-	if (networks.courtspot || networks.btde) {
-		$('.setup_network_container').show();
-		$('.setup_show_manual').show();
-		$('#setup_manual_form').hide();
-		_network_hide_cb = network.ui_list_matches(state);
-	} else {
-		$('.setup_network_container').hide();
-		$('#setup_manual_form').show();
-	}
-	ui_esc_stack_push(function() {
-		hide_settings();
-	});
-	ui_settings_load_list();
-	$('.extended_options').toggle(state.initialized);
-}
-
-function hide_settings(force) {
-	if (!force && !state.initialized) {
-		return;
-	}
-	if (_network_hide_cb) {
-		_network_hide_cb();
-		_network_hide_cb = null;
-	}
-	var wrapper = $('#settings_wrapper');
-	if (wrapper.attr('data-settings-visible') == 'false') {
-		return;
-	}
-
-	wrapper.hide();
-	ui_esc_stack_pop();
-	wrapper.attr('data-settings-visible', 'false');
 }
 
 function resume_match(s) {
@@ -446,7 +402,7 @@ function on_presses_change(s) {
 		}
 		s.metadata = {};
 		s.initialized = false;
-		show_settings();
+		settings.show();
 	} else {
 		store_match(s);
 		render.ui_render(s);
@@ -641,7 +597,7 @@ function ui_init() {
 	$('#script_jspdf').on('load', scoresheet.jspdf_loaded);
 	editmode.ui_init();
 	$('.backtogame_button').on('click', function() {
-		hide_settings();
+		settings.hide();
 	});
 
 	scoresheet.ui_init();
@@ -662,7 +618,7 @@ function ui_init() {
 		if (e.target != this) {
 			return;
 		}
-		hide_settings();
+		settings.hide();
 	});
 	$('#exception_wrapper').on('click', function(e) {
 		if (e.target != this) {
@@ -725,7 +681,7 @@ function ui_init() {
 			'name': _formval('team2_name', (setup.team_competition ? (setup.is_doubles ? 'CD team' : 'Right team') : null)),
 		}];
 
-		hide_settings(true);
+		settings.hide(true);
 		start_match(state, setup);
 	});
 	$('#pick_side_team1').on('click', function() {
@@ -779,7 +735,7 @@ function ui_init() {
 	});
 
 	$('#button_settings').on('click', function() {
-		show_settings();
+		settings.show();
 	});
 	$('#button_exception').on('click', function() {
 		ui_show_exception_dialog();
@@ -853,7 +809,7 @@ function ui_init() {
 	});
 	Mousetrap.bind('s', function() {
 		if (state.initialized) {
-			show_settings();
+			settings.show();
 		}
 	});
 	Mousetrap.bind('e', function() {
@@ -887,7 +843,7 @@ function ui_init() {
 	} else if (hash_query.demo !== undefined) {
 		demo_match_start();
 	} else {
-		show_settings();
+		settings.show();
 	}
 
 	if (state.settings.go_fullscreen && _ui_fullscreen_supported()) {
@@ -923,6 +879,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var network = require('./network');
 	var btde = require('./btde');
 	var courtspot = require('./courtspot');
+	var settings = require('./settings');
 	var pronounciation = require('./pronounciation');
 
 	module.exports = {

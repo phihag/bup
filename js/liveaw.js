@@ -45,7 +45,7 @@ function liveaw_init(liveaw_match_id) {
 	liveaw_contact(function(err, ws) {
 		if (err) {
 			ui_show_error(err, msg);
-			show_settings();
+			settings.show();
 			return;
 		}
 

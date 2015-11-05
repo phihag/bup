@@ -132,7 +132,7 @@ function ui_init() {
 	}
 
 	$('.setup_network_container').show();
-	show_settings();
+	settings.show();
 }
 
 return {

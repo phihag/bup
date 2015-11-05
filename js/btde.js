@@ -236,7 +236,7 @@ function ui_init() {
 	}
 
 	$('.setup_network_container').show();
-	show_settings();
+	settings.show();
 
 	var configured = ALL_COURTS.some(function(c) {
 		return state.settings.court_id == c.court_id && state.settings.court_description == c.court_description;
