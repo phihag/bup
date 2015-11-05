@@ -533,7 +533,7 @@ function ui_show() {
 	} else {
 		first_game = state.game;
 	}
-	if (first_game && first_game.start_team1_left !== undefined) {
+	if (first_game && first_game.start_team1_left !== null) {
 		if (first_game.start_team1_left) {
 			side1_str = 'L';
 			side2_str = 'R';
