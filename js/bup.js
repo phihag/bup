@@ -48,6 +48,7 @@ function ui_init() {
 	});
 
 	$('#setup_manual_form').on('submit', function(e) {
+		var foo = "test_travis";
 		e.preventDefault();
 
 		function _player_formval(input_name, def) {

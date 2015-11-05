@@ -1,8 +1,10 @@
 language: node_js
 node_js:
-  - 0.10
+  - "4.1"
 install:
   - make deps
+before_script:
+  - make lint
 notifications:
   email:
     - phihag@phihag.de
