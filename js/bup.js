@@ -1,14 +1,14 @@
-'use strict';
-
 var state = {
 	initialized: false,
 };
 var networks = {};
 
+(function() {
+'use strict';
+
 function init() {
 	state.settings = settings.load();
 }
-
 
 function ui_init() {
 	var bup_version = 'dev';
@@ -137,6 +137,17 @@ function ui_init() {
 	}
 }
 
+/*@DEV*/
+if (typeof $ !== 'undefined') {
+/*/@DEV*/
+	init();
+	$(ui_init);
+/*@DEV*/
+}
+/*/@DEV*/
+
+})();
+
 /* @DEV */
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var utils = require('./utils');
@@ -160,12 +171,5 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 		scoresheet: scoresheet,
 		utils: utils,
 	};
-}
-
-if (typeof $ !== 'undefined') {
-/*/@DEV*/
-	init();
-	$(ui_init);
-/*@DEV*/
 }
 /*/@DEV*/

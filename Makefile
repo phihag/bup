@@ -52,8 +52,8 @@ upload: dist
 
 test:
 	@npm test
-	@# jshint js/*.js
-	@# eslint js/*.js
+	@jshint js/*.js
+	@eslint js/*.js
 
 coverage:
 	istanbul cover _mocha -- -R spec
