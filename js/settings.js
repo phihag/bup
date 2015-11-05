@@ -15,8 +15,7 @@ var default_settings = {
 
 function load() {
 	if (! window.localStorage) {
-		show_error('localStorage unavailable');
-		return;
+		return default_settings;
 	}
 
 	var json_str = window.localStorage.getItem('bup_settings');
@@ -30,7 +29,6 @@ function load() {
 
 function store(s) {
 	if (! window.localStorage) {
-		show_error('localStorage unavailable');
 		return;
 	}
 
@@ -55,10 +53,10 @@ function show() {
 		$('.setup_network_container').hide();
 		$('#setup_manual_form').show();
 	}
-	ui_esc_stack_push(function() {
+	uiu.esc_stack_push(function() {
 		settings.hide();
 	});
-	ui_settings_load_list();
+	match_storage.ui_init();
 	$('.extended_options').toggle(state.initialized);
 }
 
@@ -76,22 +74,99 @@ function hide(force) {
 	}
 
 	wrapper.hide();
-	ui_esc_stack_pop();
+	uiu.esc_stack_pop();
 	wrapper.attr('data-settings-visible', 'false');
 }
 
+var _settings_checkboxes = ['save_finished_matches', 'go_fullscreen', 'show_pronounciation'];
+var _settings_textfields = ['umpire_name', 'court_id', 'court_description'];
+var _settings_numberfields = ['network_timeout', 'network_update_interval'];
+function update() {
+	_settings_checkboxes.forEach(function(name) {
+		var box = $('.settings [name="' + name + '"]');
+		box.prop('checked', state.settings[name]);
+	});
+
+	_settings_textfields.forEach(function(name) {
+		var input = $('.settings [name="' + name + '"]');
+		input.val(state.settings[name] ? state.settings[name] : '');
+	});
+
+	_settings_numberfields.forEach(function(name) {
+		var input = $('.settings [name="' + name + '"]');
+		input.val(state.settings[name] ? state.settings[name] : '');
+	});
+
+	render.ui_court_str(state);
+}
+
+
+
+function ui_init() {
+	_settings_checkboxes.forEach(function(name) {
+		var box = $('.settings [name="' + name + '"]');
+		box.on('change', function() {
+			state.settings[name] = box.prop('checked');
+			if ((name === 'show_pronounciation') && (state.initialized)) {
+				render.ui_render(state);
+			}
+			settings.store(state);
+		});
+	});
+
+	_settings_textfields.forEach(function(name) {
+		var input = $('.settings [name="' + name + '"]');
+		input.on('change input', function(e) {
+			state.settings[name] = input.val();
+			if ((name === 'court_id') || (name === 'court_description')) {
+				render.ui_court_str(state);
+				if (e.type == 'change') {
+					network.resync();
+				}
+			}
+			settings.store(state);
+		});
+	});
+
+	_settings_numberfields.forEach(function(name) {
+		var input = $('.settings [name="' + name + '"]');
+		input.on('change input', function() {
+			state.settings[name] = parseInt(input.val(), 10);
+			settings.store(state);
+		});
+	});
+
+	$('.setup_show_manual').on('click', function(e) {
+		e.preventDefault();
+		$('.setup_show_manual').hide();
+		// TODO use a CSS animation here
+		$('#setup_manual_form').show(200);
+		return false;
+	});
+
+	fullscreen.ui_init();
+
+	update();
+}
 
 return {
 	load: load,
 	store: store,
+	update: update,
 	show: show,
 	hide: hide,
+	ui_init: ui_init,
 };
 
 })();
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var fullscreen = require('./fullscreen');
+	var render = require('./render');
+	var uiu = require('./uiu');
+	var match_storage = require('./match_storage');
+
 	module.exports = settings;
 }
 /*/@DEV*/

@@ -265,7 +265,8 @@ _describe('btde', function() {
 			]
 		};
 
-		var ml = bup.btde()._parse_match_list(doc);
+		var date = new Date(2015, 10, 5);
+		var ml = bup.btde()._parse_match_list(doc, date);
 		assert.deepStrictEqual(ml, expected);
 	});
 });

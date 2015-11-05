@@ -479,7 +479,7 @@ function ui_show() {
 	}
 	$('#game').hide();
 	$('.scoresheet_container').show();
-	ui_esc_stack_push(ui_hide);
+	uiu.esc_stack_push(ui_hide);
 
 	// Set text fields
 	_text('.scoresheet_tournament_name', state.setup.tournament_name);
@@ -773,7 +773,7 @@ function ui_show() {
 }
 
 function ui_hide() {
-	ui_esc_stack_pop();
+	uiu.esc_stack_pop();
 	$('.scoresheet_container').hide();
 	$('#game').show();
 	if ($('.scoresheet_container').attr('data-settings-visible') === 'true') {
@@ -976,6 +976,7 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
 	var utils = require('./utils');
+	var uiu = require('./uiu');
 
 	module.exports = scoresheet;
 }

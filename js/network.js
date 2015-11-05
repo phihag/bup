@@ -148,7 +148,7 @@ function ui_render_matchlist(s, event) {
 				var mwinner = calc.match_winner(netscore);
 
 				if ((mwinner == 'inprogress') && calc.match_started(netscore)) {
-					_ui_make_pick('Das Spiel ' + pronounciation.match_str(match.setup) + ' wurde bereits angefangen', [{
+					uiu.make_pick('Das Spiel ' + pronounciation.match_str(match.setup) + ' wurde bereits angefangen', [{
 						label: 'Spiel bei ' + _score_text(netscore) + ' fortsetzen',
 						key: 'resume',
 					}, {
@@ -202,20 +202,20 @@ function ui_render_matchlist(s, event) {
 								});
 							}
 						}
-						start_match(s, match.setup, presses);
+						control.start_match(s, match.setup, presses);
 					}, settings.show);
 					return;
 				}
 				if (mwinner == 'left' || mwinner == 'right') {
-					_ui_make_pick('Das Spiel ' + pronounciation.match_str(match.setup) + ' ist bereits beendet (' + _score_text(netscore) + ')!', [{
+					uiu.make_pick('Das Spiel ' + pronounciation.match_str(match.setup) + ' ist bereits beendet (' + _score_text(netscore) + ')!', [{
 						label: 'Spiel bei 0-0 neu starten',
 					}], function() {
-						start_match(s, match.setup);
+						control.start_match(s, match.setup);
 					}, settings.show);
 					return;
 				}
 			}
-			start_match(s, match.setup);
+			control.start_match(s, match.setup);
 		});
 
 		container.append(btn);
@@ -352,6 +352,8 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var utils = require('./utils');
 	var calc = require('./calc');
+	var uiu = require('./uiu');
+	var control = require('./control');
 	var pronounciation = require('./pronounciation');
 	var settings = require('./settings');
 

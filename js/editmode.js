@@ -1,4 +1,5 @@
 var editmode = (function() {
+'use strict';
 
 var last_click = 0;
 
@@ -47,24 +48,24 @@ function ui_init() {
 		leave();
 	});
 	utils.on_click($('.editmode_change-ends'), function() {
-		on_press({
+		control.on_press({
 			type: 'editmode_change-ends',
 		});
 	});
 	utils.on_click($('.editmode_switch_left'), function() {
-		on_press({
+		control.on_press({
 			type: 'editmode_switch-sides',
 			side: 'left',
 		});
 	});
 	utils.on_click($('.editmode_switch_right'), function() {
-		on_press({
+		control.on_press({
 			type: 'editmode_switch-sides',
 			side: 'right',
 		});
 	});
 	utils.on_click($('.editmode_arrow'), function() {
-		on_press({
+		control.on_press({
 			type: 'editmode_change-serve',
 		});
 	});
@@ -131,7 +132,7 @@ function change_score() {
 		});
 	}
 	if (is_changed) {
-		on_press({
+		control.on_press({
 			type: 'editmode_set-finished_games',
 			scores: finished_inputs,
 			by_side: true,
@@ -141,7 +142,7 @@ function change_score() {
 	var game_input = input_scores[input_scores.length - 1];
 	var new_score = calc.lr2score(state, game_input);
 	if (! utils.deep_equal(new_score, state.game.score)) {
-		on_press({
+		control.on_press({
 			type: 'editmode_set-score',
 			score: game_input,
 			by_side: true,
@@ -162,6 +163,7 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var utils = require('./utils');
 	var calc = require('./calc');
+	var control = require('./control');
 	var settings = require('./settings');
 
 	module.exports = editmode;

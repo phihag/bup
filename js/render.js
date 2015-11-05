@@ -273,9 +273,9 @@ function ui_render(s) {
 	}
 
 	if (s.timer) {
-		ui_set_timer();
+		timer.set();
 	} else {
-		ui_remove_timer();
+		timer.remove();
 	}
 
 	render_score_display(s);
@@ -286,7 +286,7 @@ function ui_render(s) {
 	if (!s.match.finished) {
 		if (s.game.start_team1_left === null) {
 			dialog_active = true;
-			ui_show_picker($('#pick_side'));
+			uiu.show_picker($('#pick_side'));
 
 			$('#pick_side_team1').text(pronounciation.teamtext_internal(s, 0));
 			$('#pick_side_team2').text(pronounciation.teamtext_internal(s, 1));
@@ -308,21 +308,21 @@ function ui_render(s) {
 					}
 				}
 
-				_ui_add_player_pick(s, $('#pick_server'), 'pick_server', ti, 0, null, namefunc);
+				uiu.add_player_pick(s, $('#pick_server'), 'pick_server', ti, 0, null, namefunc);
 				if (s.setup.is_doubles) {
-					_ui_add_player_pick(s, $('#pick_server'), 'pick_server', ti, 1, null, namefunc);
+					uiu.add_player_pick(s, $('#pick_server'), 'pick_server', ti, 1, null, namefunc);
 				}
 			});
 
 			dialog_active = true;
-			ui_show_picker($('#pick_server'));
+			uiu.show_picker($('#pick_server'));
 		} else if (s.game.start_receiver_player_id === null) {
 			$('#pick_receiver button').remove();
 			dialog_active = true;
 			var team_id = (s.game.start_server_team_id == 1) ? 0 : 1;
-			_ui_add_player_pick(s, $('#pick_receiver'), 'pick_receiver', team_id, 0);
-			_ui_add_player_pick(s, $('#pick_receiver'), 'pick_receiver', team_id, 1);
-			ui_show_picker($('#pick_receiver'));
+			uiu.add_player_pick(s, $('#pick_receiver'), 'pick_receiver', team_id, 0);
+			uiu.add_player_pick(s, $('#pick_receiver'), 'pick_receiver', team_id, 1);
+			uiu.show_picker($('#pick_receiver'));
 		}
 	}
 
@@ -349,7 +349,9 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var editmode = require('./editmode');
+	var uiu = require('./uiu');
 	var pronounciation = require('./pronounciation');
+	var timer = require('./timer');
 
 	module.exports = render;
 }

@@ -158,7 +158,7 @@ function _parse_players(s) {
 	return res;
 }
 
-function _parse_match_list(doc) {
+function _parse_match_list(doc, now) {
 	var event_data = doc[0];
 	var home_team_name = event_data.heim;
 	var away_team_name = event_data.gast;
@@ -185,7 +185,7 @@ function _parse_match_list(doc) {
 			}
 		}
 
-		var match_id = 'btde_' + utils.iso8601(new Date()) + '_' + match.dis + '_' + home_team_name + '-' + away_team_name;
+		var match_id = 'btde_' + utils.iso8601(now) + '_' + match.dis + '_' + home_team_name + '-' + away_team_name;
 
 		return {
 			setup: {
@@ -222,7 +222,7 @@ function list_matches(s, cb) {
 				msg: 'badmintonticker-Aktualisierung fehlgeschlagen: Server-Fehler erkannt',
 			});
 		}
-		return cb(null, _parse_match_list(doc));
+		return cb(null, _parse_match_list(doc, new Date()));
 	});
 }
 
@@ -242,11 +242,11 @@ function ui_init() {
 		return state.settings.court_id == c.court_id && state.settings.court_description == c.court_description;
 	});
 	if (! configured) {
-		_ui_make_pick('Feld auswählen', ALL_COURTS, function(c) {
+		uiu.make_pick('Feld auswählen', ALL_COURTS, function(c) {
 			state.settings.court_id = c.court_id;
 			state.settings.court_description = c.court_description;
 			settings.store(state);
-			ui_settings_update();
+			settings.update();
 		}, false, $('body'));
 	}
 }
@@ -267,6 +267,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var utils = require('./utils');
+	var uiu = require('./uiu');
 
 	module.exports = btde;
 }

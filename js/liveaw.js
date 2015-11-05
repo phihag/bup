@@ -18,7 +18,7 @@ function liveaw_contact(cb) {
 				delete state.liveaw.handlers[msg.request_id];
 			}
 		} else {
-			show_error('No handler for request ' + msg.request_id);
+			control.show_error('No handler for request ' + msg.request_id);
 		}
 	};
 }
@@ -44,7 +44,7 @@ function liveaw_init(liveaw_match_id) {
 	ui_waitprogress('Kontaktiere liveaw');
 	liveaw_contact(function(err, ws) {
 		if (err) {
-			ui_show_error(err, msg);
+			control.show_error(err, msg);
 			settings.show();
 			return;
 		}
