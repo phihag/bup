@@ -1752,6 +1752,7 @@ _describe('scoresheet generation', function() {
 		});
 
 		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		assert.equal(cells.length, 3);
 		_assert_cell(cells, {
 			type: 'score',
 			table: 0,
@@ -1768,19 +1769,38 @@ _describe('scoresheet generation', function() {
 			val: 5,
 			editmode_related: true,
 		});
-/* TODO
+
 		presses.push({
 			type: 'pick_server',
 			team_id: 1,
 			player_id: 1,
 		});
+		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		assert.equal(cells.length, 4);
+		_assert_cell(cells, {
+			type: 'score',
+			table: 0,
+			col: 0,
+			row: 0,
+			val: 2,
+			editmode_related: true,
+		});
+		_assert_cell(cells, {
+			type: 'score',
+			table: 0,
+			col: 0,
+			row: 3,
+			val: 5,
+			editmode_related: true,
+		});
+
 		presses.push({
 			type: 'pick_receiver',
 			team_id: 0,
 			player_id: 1,
 		});
 		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
-		assert.equal(cells.length, 3);
+		assert.equal(cells.length, 5);
 		_assert_cell(cells, {
 			type: 'score',
 			table: 0,
@@ -1797,6 +1817,5 @@ _describe('scoresheet generation', function() {
 			val: 5,
 			editmode_related: true,
 		});
-*/
 	});
 });

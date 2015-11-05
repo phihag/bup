@@ -927,6 +927,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 
 	module.exports = {
 		calc: calc,
+		btde: btde,
 		courtspot: courtspot,
 		network: network,
 		pronounciation: pronounciation,

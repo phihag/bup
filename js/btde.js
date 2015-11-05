@@ -140,76 +140,43 @@ function send_press(s) {
 	sync(s);
 }
 
-function _parse_match_list(html) {
-	var m = /<table style="width:720px;">([\s\S]*?)<\/table>/.exec(html);
-	if (! m) {
-		return {};
+function _parse_player(firstname, lastname) {
+	return {
+		firstname: firstname,
+		lastname: lastname,
+		name: firstname + ' ' + lastname,
+	};
+}
+
+function _parse_players(s) {
+	var m = /^([^,~]+),\s*([^,~]+)(?:~([^,~]+),\s*([^,~]+))?$/.exec(s);
+
+	var res = [_parse_player(m[2], m[1])];
+	if (m[3]) {
+		res.push(_parse_player(m[4], m[3]));
 	}
+	return res;
+}
 
-	var table_html = m[1];
+function _parse_match_list(doc) {
+	var event_data = doc[0];
+	var home_team_name = event_data.heim;
+	var away_team_name = event_data.gast;
 
-	m = /<td colspan="3">([^<]+?)\s*[0-9]+\s*:\s*[0-9]+\s*([^<]+?)<\/td>/.exec(table_html);
-	var home_team_name = null;
-	var away_team_name = null;
-	if (m) {
-		home_team_name = m[1];
-		away_team_name = m[2];
-	}
-
-	var matches = [];
-	var game_re = utils.multiline_regexp([
-		/<td rowspan="2">([^<]+)<\/td>\s*/,
-		/<td>([^\/,<]+),\s*([^\/,<]+)(?:\/([^\/,<]+),\s*([^\/,<]+))?<\/td>\s*/,
-		/<td><input type="number" name="Satz1([^"]+)" placeholder="([0-9]*)"><\/td>\s*/,
-		/<td><input type="number" name="Satz2[^"]+" placeholder="([0-9]*)"><\/td>\s*/,
-		/<td><input type="number" name="Satz3[^"]+" placeholder="([0-9]*)"><\/td>\s*/,
-		/<\/tr>\s*<tr>\s*/,
-		/<td>([^\/,<]+),\s*([^\/,<]+)(?:\/([^\/,<]+),\s*([^\/,<]+))?<\/td>\s*/,
-		/<td><input type="number" name="Satz4[^"]+" placeholder="([0-9]*)"><\/td>\s*/,
-		/<td><input type="number" name="Satz5[^"]+" placeholder="([0-9]*)"><\/td>\s*/,
-		/<td><input type="number" name="Satz6[^"]+" placeholder="([0-9]*)"><\/td>\s*/,
-	], 'g');
-	while ((m = game_re.exec(table_html)) !== null) {
-		var home_p1 = {
-			firstname: m[3],
-			lastname: m[2],
-		};
-		home_p1.name = home_p1.firstname + ' ' + home_p1.lastname;
+	var matches = doc.slice(1, doc.length - 1).map(function(match) {
 		var home_team = {
+			players: _parse_players(match.heim),
 			name: home_team_name,
-			players: [home_p1],
 		};
-		if (m[4]) {
-			var home_p2 = {
-				firstname: m[5],
-				lastname: m[4],
-			};
-			home_p2.name = home_p2.firstname + ' ' + home_p2.lastname;
-			home_team.players.push(home_p2);
-		}
-
-		var away_p1 = {
-			firstname: m[11],
-			lastname: m[10],
-		};
-		away_p1.name = away_p1.firstname + ' ' + away_p1.lastname;
 		var away_team = {
+			players: _parse_players(match.gast),
 			name: away_team_name,
-			players: [away_p1],
 		};
-		if (m[12]) {
-			var away_p2 = {
-				firstname: m[13],
-				lastname: m[12],
-			};
-			away_p2.name = away_p2.firstname + ' ' + away_p2.lastname;
-			away_team.players.push(away_p2);
-		}
 
 		var network_score = [];
 		for (var game_idx = 0;game_idx < 3;game_idx++) {
-			var home_score_str = m[7 + game_idx];
-			var away_score_str = m[14 + game_idx];
+			var home_score_str = match['satz' + (1 + game_idx)];
+			var away_score_str = match['satz' + (4 + game_idx)];
 			if (home_score_str !== '' && away_score_str !== '') {
 				network_score.push([
 					parseInt(home_score_str, 10),
@@ -218,21 +185,21 @@ function _parse_match_list(html) {
 			}
 		}
 
-		var match_id = 'btde_' + utils.iso8601(new Date()) + '_' + m[1] + '_' + home_team_name + '-' + away_team_name;
+		var match_id = 'btde_' + utils.iso8601(new Date()) + '_' + match.dis + '_' + home_team_name + '-' + away_team_name;
 
-		matches.push({
+		return {
 			setup: {
 				counting: '3x21',
-				match_name: m[1],
+				match_name: match.dis,
 				is_doubles: home_team.players.length == 2,
 				teams: [home_team, away_team],
-				btde_match_id: m[6],
+				btde_match_id: match.id,
 				team_competition: true,
 				match_id: match_id,
 			},
 			network_score: network_score,
-		});
-	}
+		};
+	});
 	return {
 		event_name: home_team_name + ' - ' + away_team_name,
 		matches: matches,
@@ -241,13 +208,26 @@ function _parse_match_list(html) {
 
 function list_matches(s, cb) {
 	_request(s, {
-		url: baseurl + 'login/punkte.php',
-	}, function(err, html) {
+		url: baseurl + 'login/write.php?id=all',
+	}, function(err, json) {
 		if (err) {
 			return cb(err);
 		}
 
-		return cb(null, _parse_match_list(html));
+		var doc;
+		try {
+			doc = JSON.parse(content);
+			if (doc.status != 'ok') {
+				return cb({
+					msg: 'badmintonticker-Aktualisierung fehlgeschlagen!',
+				});
+			}
+		} catch (e) {
+			return cb({
+				msg: 'badmintonticker-Aktualisierung fehlgeschlagen: Server-Fehler erkannt',
+			});
+		}
+		return cb(null, _parse_match_list(doc));
 	});
 }
 
@@ -283,6 +263,8 @@ return {
 	send_press: send_press,
 	list_matches: list_matches,
 	sync: sync,
+	// Testing only
+	_parse_match_list: _parse_match_list,
 };
 
 });

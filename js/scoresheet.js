@@ -128,6 +128,22 @@ function _loveall(s, game, sgame, extra_attrs) {
 	sgame.col_idx++;
 }
 
+function _correct_editmode_score(sgame, incorrect_row, correct_row) {
+	for (var i = sgame.cells.length - 1;i >= 0;i--) {
+		var cell = sgame.cells[i];
+		if (cell.type != 'score') {
+			continue;
+		}
+		if (!cell.editmode_related) {
+			break;
+		}
+		if (cell.row == incorrect_row) {
+			cell.row = correct_row;
+			break;
+		}
+	}
+}
+
 function _make_scoresheet_game() {
 	return {
 		score: [0, 0],
@@ -159,6 +175,11 @@ function _parse_match(state, col_count) {
 
 		switch (press.type) {
 		case 'pick_server':
+			_correct_editmode_score(
+				s.scoresheet_game,
+				press.team_id * 2 + (1 - press.player_id),
+				press.team_id * 2 + press.player_id);
+
 			s.scoresheet_game.servers[press.team_id] = press.player_id;
 			if (! s.setup.is_doubles) {
 				s.scoresheet_game.servers[1 - press.team_id] = 0;
@@ -174,6 +195,10 @@ function _parse_match(state, col_count) {
 		case 'pick_receiver':
 			if (s.setup.is_doubles) {
 				s.scoresheet_game.servers[press.team_id] = press.player_id;
+				_correct_editmode_score(
+					s.scoresheet_game,
+					press.team_id * 2 + (1 - press.player_id),
+					press.team_id * 2 + press.player_id);
 			}
 			s.scoresheet_game.cells.push({
 				col: -1,

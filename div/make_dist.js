@@ -137,12 +137,10 @@ function main() {
 			});
 		},
 		function (tmp_files, cb) {
-			// async.each(tmp_files, fs.unlink, cb);
-			cb();
+			async.each(tmp_files, fs.unlink, cb);
 		},
 		function (cb) {
-			// fs.rmdir(tmp_dir, cb);
-			cb();
+			fs.rmdir(tmp_dir, cb);
 		},
 	], function (err) {
 		if (err) {
