@@ -216,12 +216,7 @@ function list_matches(s, cb) {
 
 		var doc;
 		try {
-			doc = JSON.parse(content);
-			if (doc.status != 'ok') {
-				return cb({
-					msg: 'badmintonticker-Aktualisierung fehlgeschlagen!',
-				});
-			}
+			doc = JSON.parse(json);
 		} catch (e) {
 			return cb({
 				msg: 'badmintonticker-Aktualisierung fehlgeschlagen: Server-Fehler erkannt',
