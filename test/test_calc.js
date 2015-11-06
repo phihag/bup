@@ -34,12 +34,12 @@ _describe('calc_state', function() {
 		assert.equal(s.match.finish_confirmed, false);
 		assert.deepEqual(s.match.game_score, [0, 0]);
 		assert.equal(s.match.announce_pregame, false);
-		assert.equal(s.court.player_left_odd, null);
-		assert.equal(s.court.player_left_even, null);
-		assert.equal(s.court.player_right_odd, null);
-		assert.equal(s.court.player_right_even, null);
-		assert.equal(s.court.left_serving, null);
-		assert.equal(s.court.serving_downwards, null);
+		assert.strictEqual(s.court.player_left_odd, null);
+		assert.strictEqual(s.court.player_left_even, null);
+		assert.strictEqual(s.court.player_right_odd, null);
+		assert.strictEqual(s.court.player_right_even, null);
+		assert.strictEqual(s.court.left_serving, null);
+		assert.strictEqual(s.court.serving_downwards, null);
 
 		s = state_after([], SINGLES_SETUP);
 		assert.equal(s.setup.is_doubles, false);

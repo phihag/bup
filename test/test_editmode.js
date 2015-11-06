@@ -207,7 +207,6 @@ _describe('editmode', function() {
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.deepEqual(s.game.score, [11, 7]);
 		assert.strictEqual(s.game.team1_serving, false);
-		assert(! s.timer);
 
 		presses.push({
 			type: 'editmode_set-score',
@@ -215,7 +214,6 @@ _describe('editmode', function() {
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.strictEqual(s.game.team1_serving, true);
-		assert(! s.timer);
 		assert.deepEqual(s.game.score, [7, 11]);
 
 		presses.push({
@@ -981,4 +979,76 @@ _describe('editmode', function() {
 		assert(!s.timer);
 		assert(!s.game.announce_pregame);
 	});
+
+	_it('serve switching should fix position in singles', function() {
+		var presses = [];
+		presses.push({
+			type: 'pick_side',
+			team1_left: true,
+		});
+		presses.push({
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'love-all',
+		});
+		press_score(presses, 2, 2);
+		var s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(s.game.teams_player1_even[0], true);
+		assert.strictEqual(s.game.teams_player1_even[1], true);
+
+		press_score(presses, 0, 1);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(s.game.team1_serving, false);
+		assert.strictEqual(s.game.teams_player1_even[0], false);
+		assert.strictEqual(s.game.teams_player1_even[1], false);
+
+		presses.push({
+			type: 'editmode_change-serve',
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(s.game.team1_serving, true);
+		assert.strictEqual(s.game.teams_player1_even[0], true);
+		assert.strictEqual(s.game.teams_player1_even[1], true);
+
+		presses.push({
+			type: 'editmode_change-serve',
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(s.game.team1_serving, false);
+		assert.strictEqual(s.game.teams_player1_even[0], false);
+		assert.strictEqual(s.game.teams_player1_even[1], false);
+	});
+
+	_it('timer should continue after serve switching', function() {
+		var presses = [];
+		presses.push({
+			type: 'pick_side',
+			team1_left: true,
+		});
+		presses.push({
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'pick_receiver',
+			team_id: 0,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'love-all',
+		});
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert(s.timer);
+
+		presses.push({
+			type: 'editmode_change-serve',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert(s.timer);
+	});
+
 });

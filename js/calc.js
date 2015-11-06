@@ -369,7 +369,10 @@ function calc_press(s, press) {
 	case 'editmode_change-serve':
 		if (s.game.team1_serving !== null) {
 			s.game.team1_serving = !s.game.team1_serving;
-			recalc_after_score(s, s.game.team1_serving ? 0 : 1, press);
+		}
+		if (!s.setup.is_doubles) {
+			var side = (s.game.score[s.game.team1_serving ? 0 : 1] % 2) === 0;
+			s.game.teams_player1_even = [side, side];
 		}
 		break;
 	case 'editmode_set-score':

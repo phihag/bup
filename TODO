@@ -1,8 +1,5 @@
-test editmode serve change (in singles does not seem to reposition?)
-
 score input is broken at start of game
 test that undo cures errors
-
 manual game creation on smartphones
 test ending match with edit
 edit mode to change sides / change ends
