@@ -433,6 +433,15 @@ function calc_press(s, press) {
 		s.match.game_score = calc_game_score(s.match.finished_games);
 		recalc_after_score(s, null, press);
 		break;
+	case 'timer_restart':
+		if (s.timer) {
+			s.timer = {
+				start: press.timestamp,
+				duration: s.timer.duration,
+				exigent: s.timer.exigent,
+			};
+		}
+		break;
 	default:
 		throw new Error('Unsupported press type ' + press.type);
 	}

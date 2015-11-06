@@ -49,15 +49,26 @@ function remove() {
 	}
 }
 
+function ui_init() {
+	$('.timer_restart').click(function() {
+		control.on_press({
+			type: 'timer_restart',
+		});
+	});
+}
+
 return {
 	set: set,
 	remove: remove,
+	ui_init: ui_init,
 };
 
 })();
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var control = require('./control');
+
 	module.exports = timer;
 }
 /*/@DEV*/

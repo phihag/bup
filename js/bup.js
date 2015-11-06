@@ -22,6 +22,7 @@ function ui_init() {
 
 	scoresheet.ui_init();
 	network.ui_init();
+	timer.ui_init();
 
 	$('#setup_manual_form [name="gametype"]').on('change', function() {
 		var new_type = $('#setup_manual_form [name="gametype"]:checked').val();
@@ -152,6 +153,7 @@ if (typeof $ !== 'undefined') {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var utils = require('./utils');
 	var calc = require('./calc');
+	var timer = require('./timer');
 	var editmode = require('./editmode');
 	var fullscreen = require('./fullscreen');
 	var scoresheet = require('./scoresheet');

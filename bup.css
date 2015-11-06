@@ -549,7 +549,7 @@ input[name="court_id"] {
 .postmatch_options,.timer_container {
 	position: absolute;
 	right: 0;
-	top: 15vh;
+	top: 18vh;
 	background: rgba(255, 255, 255, 0.7);
 	border-top-left-radius: 2vh;
 	border-bottom-left-radius: 2vh;
@@ -557,8 +557,23 @@ input[name="court_id"] {
 	text-align: right;
 }
 .timer_container {
-	padding: 2vh 3vh 2vh 4vh;
+	padding: 2vh 3vh 2vh 1vh;
 	font-size: 20vmin;
+	cursor: pointer;
+}
+.timer {
+	display: inline-block;
+	min-width: 2em;
+}
+.timer_restart {
+	display: block;
+	float: left;
+	vertical-align: middle;
+	width: 22vmin;
+	height: 22vmin;
+	background-image: url(icons/timer_restart.svg);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
 }
 .timer_exigent {
 	color: #de0000;
@@ -809,6 +824,11 @@ button>.loading-icon {
 		bottom: 0;
 		text-align: center;
 		font-size: 16vmin;
+	}
+
+	.timer_restart {
+		display: inline-block;
+		float: none;
 	}
 }
 
