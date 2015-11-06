@@ -87,6 +87,7 @@ function ui_init() {
 return {
 	ui_init: ui_init,
 	store: store,
+	remove: remove,
 };
 
 })();
