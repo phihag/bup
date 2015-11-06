@@ -1,5 +1,4 @@
 score input is broken at start of game
-
 manual game creation on smartphones
 test ending match with edit
 edit mode to change sides / change ends
@@ -13,8 +12,6 @@ edit mode to change sides / change ends
 	disable end switch when not picked
 	disable side switch when not picked
 Button "bitte spielen" mehr betonen (icon?)
-
-CSS animation for settings (go to top right)
 fix display without vw (see Manuel, https://github.com/saabi/vminpoly)
 retest Manuel's notes
 
@@ -165,7 +162,7 @@ support events
 	synchronize in local network
 gzip icons in dist with correct htaccess to save CPU compression power?
 badmintonticker.de mock / testing
-handle !press.timestamp in timers (when resuming)
+CSS animation for settings (go to top right)
 badmintonticker.de: support names without comma when reading player list
 investigate high GPU usage (transparency?)
 editing score (this / previous game) after retiring / disqualification
