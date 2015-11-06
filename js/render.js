@@ -49,6 +49,7 @@ function _score_display_set_game(s, game, game_index, is_current) {
 	}
 
 	var editmode_active = $('#game').hasClass('editmode');
+	var editmode_score_active = editmode_active && (s.game.team1_left !== null);
 	var tr = $('#score_game_' + game_index);
 
 	if (!game) {
@@ -79,7 +80,7 @@ function _score_display_set_game(s, game, game_index, is_current) {
 		_val(left_input, left_points);
 		left_text.text(left_points);
 		if (editmode_active) {
-			utils.visible(left_input, true);
+			utils.visible(left_input, editmode_score_active);
 		}
 	}
 
@@ -103,7 +104,7 @@ function _score_display_set_game(s, game, game_index, is_current) {
 		_val(right_input, right_points);
 		right_text.text(right_points);
 		if (editmode_active) {
-			utils.visible(right_input, true);
+			utils.visible(right_input, editmode_score_active);
 		}
 	}
 

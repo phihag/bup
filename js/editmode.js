@@ -7,16 +7,16 @@ function enter() {
 	$('.editmode_leave,.editmode_arrow,.editmode_change-ends,.editmode_switch_left,.editmode_switch_right').show();
 	$('.editmode_ok').attr('disabled', 'disabled');
 	$('.editmode_button').text('Manuelles Bearbeiten abbrechen');
-	$('#score td.score input').show();
 	$('#score td.score span').hide();
 	$('#game').addClass('editmode');
+	hide_inputs((state.game.team1_left === null) ? 0 : (state.match.finished_games.length + 1));
 }
 
 function leave() {
 	$('#game').removeClass('editmode');
 	$('.editmode_leave,.editmode_arrow,.editmode_change-ends,.editmode_switch_left,.editmode_switch_right').hide();
 	$('.editmode_button').text('Manuell bearbeiten');
-	$('#score td.score input').hide();
+	hide_inputs(0);
 	$('#score td.score span').show();
 }
 
@@ -116,8 +116,7 @@ function read_input() {
 
 function change_score() {
 	var input_scores = read_input();
-	hide_inputs(input_scores.length);
-
+	hide_inputs((state.game.team1_left === null) ? 0 : input_scores.length);
 	if (input_scores[input_scores.length - 1].winner == 'invalid') {
 		$('.editmode_score[data-game-index="' + (input_scores.length - 1) + '"]').addClass('editmode_invalid');
 		return;
