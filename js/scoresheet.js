@@ -465,7 +465,7 @@ function ui_show() {
 	}
 
 	function _text(search, str) {
-		if (!str) {
+		if (str !== 0 && !str) {
 			str = '';
 		}
 		$(search).text(str);

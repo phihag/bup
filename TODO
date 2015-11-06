@@ -1,4 +1,3 @@
-scoresheet top is broken at 21:0
 test editmode serve change (in singles does not seem to reposition?)
 
 score input is broken at start of game
@@ -24,7 +23,6 @@ allow timer restart
 
 CSS animation for settings (go to top right)
 fix display without vw (see Manuel, https://github.com/saabi/vminpoly)
-scoresheet: vcenter shuttle counter
 retest Manuel's notes
 
 offline webapp Manifest (only in production)
