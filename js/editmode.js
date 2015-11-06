@@ -73,6 +73,7 @@ function ui_init() {
 
 function hide_inputs(since_game) {
 	utils.qsEach('.editmode_score', function(n) {
+		$(n).removeClass('editmode_invalid');
 		var game_index = parseInt(n.getAttribute('data-game-index'), 10);
 		utils.visible(n, game_index < since_game);
 	});
@@ -118,7 +119,7 @@ function change_score() {
 	hide_inputs(input_scores.length);
 
 	if (input_scores[input_scores.length - 1].winner == 'invalid') {
-		// TODO red background or so
+		$('.editmode_score[data-game-index="' + (input_scores.length - 1) + '"]').addClass('editmode_invalid');
 		return;
 	}
 

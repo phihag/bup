@@ -739,6 +739,9 @@ input[name="court_id"] {
 .editmode_score {
 	z-index: 2000;
 }
+.editmode_invalid {
+	background: #ff5555;
+}
 
 
 .login_button {
