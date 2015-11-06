@@ -147,17 +147,15 @@ function make_game_state(s, previous_game) {
 function recalc_after_score(s, team_id, press) {
 	var team1_won = _is_winner(s.game.score[0], s.game.score[1]);
 	var team2_won = _is_winner(s.game.score[1], s.game.score[0]);
-	if (team1_won) {
-		s.match.game_score[0]++;
-	} else if (team2_won) {
-		s.match.game_score[1]++;
-	}
 	if (team1_won || team2_won) {
+		var winner_idx = team1_won ? 0 : 1;
+		s.match.game_score = calc_game_score(s.match.finished_games);
+		s.match.game_score[winner_idx]++;
 		s.game.won_by_score = true;
 		s.game.team1_won = team1_won;
 		s.game.game = true;
 		s.game.finished = true;
-		if (s.match.game_score[team1_won ? 0 : 1] == 2) {
+		if (s.match.game_score[winner_idx] == 2) {
 			s.match.finished = true;
 			s.match.team1_won = team1_won;
 		}

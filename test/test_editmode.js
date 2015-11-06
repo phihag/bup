@@ -1051,4 +1051,48 @@ _describe('editmode', function() {
 		assert(s.timer);
 	});
 
+	_it('ending and un-ending a match with a score edit', function() {
+		var presses = [{
+			type: "pick_side",
+			team1_left: true,
+		}, {
+			type: "pick_server",
+			team_id: 1,
+			player_id: 0,
+		}, {
+			type: "pick_receiver",
+			team_id: 0,
+			player_id: 0,
+		}, {
+			type: "love-all",
+		}, {
+			type: "editmode_set-finished_games",
+			scores: [[21, 0]],
+		}, {
+			type: "editmode_set-score",
+			score: [21, 5],
+		}];
+
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.game.finished, true);
+		assert.strictEqual(s.game.won_by_score, true);
+		assert.strictEqual(s.match.finished, true);
+
+		presses.push({
+			type: "editmode_set-score",
+			score: [19, 2],
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.game.finished, false);
+		assert.strictEqual(s.game.won_by_score, null);
+		assert.strictEqual(s.match.finished, false);
+
+		press_score(presses, 2, 0);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.game.score, [21, 2]);
+		assert.strictEqual(s.game.finished, true);
+		assert.strictEqual(s.game.won_by_score, true);
+		assert.deepEqual(s.match.game_score, [2, 0]);
+		assert.strictEqual(s.match.finished, true);
+	});
 });
