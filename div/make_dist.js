@@ -84,6 +84,7 @@ function main() {
 	transform_file(in_fn, out_fn, function(html) {
 		html = html.replace(/<!--@DEV-->[\s\S]*?<!--\/@DEV-->/g, '');
 		html = html.replace(/<!--@PRODUCTION([\s\S]*?)-->/g, function(m, m1) {return m1;});
+		html = html.replace(/PRODUCTIONATTR-/g, '');
 		return html;
 	}, function() {});
 

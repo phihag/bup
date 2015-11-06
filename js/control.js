@@ -30,17 +30,34 @@ function demo_match_start() {
 	start_match(state, setup);
 }
 
+function set_current(s) {
+	var hval = window.location.hash;
+	hval = hval.replace(/[#&]g=[^&]*/, '');
+	if (!hval.match(/^#/)) {
+		hval = '#' + hval;
+	}
+	if (hval.length > 1) {
+		hval += '&';
+	}
+	hval += 'g=' + encodeURIComponent(s.metadata.id);
+
+	window.location.hash = hval;
+}
+
 function resume_match(s) {
 	calc.init_state(s, null, s.presses, true);
 	calc.state(s);
 	s.settings = state.settings;
 	state = s;
+	set_current();
 	render.ui_render(s);
+	// Do not explicitly send anything to the network - we're just looking
 }
 
 function start_match(s, setup, init_presses) {
 	calc.init_state(s, setup, init_presses);
 	calc.state(s);
+	set_current(s);
 	render.ui_render(s);
 	network.send_press(s, {
 		type: '_start_match',
@@ -214,6 +231,16 @@ function init_shortcuts() {
 	});
 }
 
+function onhashchange() {
+	
+}
+
+function ui_init() {
+	init_buttons();
+	init_shortcuts();
+	window.addEventListener('hashchange', onhashchange, false);
+}
+
 function ui_show_exception_dialog() {
 	$('#exception_wrapper').show();
 	uiu.esc_stack_push(function() {
@@ -233,8 +260,7 @@ return {
 	demo_match_start: demo_match_start,
 	start_match: start_match,
 	resume_match: resume_match,
-	init_buttons: init_buttons,
-	init_shortcuts: init_shortcuts,
+	ui_init: ui_init,
 	hide_exception_dialog: hide_exception_dialog,
 };
 

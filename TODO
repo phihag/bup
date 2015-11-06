@@ -1,3 +1,13 @@
+offline webapp Manifest (only in production)
+	include game ID in URL (make sure resume works)
+	detect hashchange?
+	generate file from a script make_manifest
+	make sure network requests to CourtSpot etc. work
+	serve manifest file with correct MIME type
+	automatically update if updateready event is shortly after app start and not yet initialized
+	ask to update in settings
+	ask to update now otherwise
+
 manual game creation on smartphones
 edit mode to change sides / change ends
 	write automated tests for editing
@@ -11,13 +21,6 @@ edit mode to change sides / change ends
 Button "bitte spielen" mehr betonen (icon?)
 fix display without vw (see Manuel, https://github.com/saabi/vminpoly)
 retest Manuel's notes
-
-offline webapp Manifest (only in production)
-	include game ID in URL (make sure resume works)
-	generate file from a script make_manifest
-	make sure network requests work
-	serve manifest file with correct MIME type
-	automatically update if updateready event is shortly after app start and not yet initialized
 
 check whether we have a copy of a network game to resume from, offer it
 	offer both network and local version if they differ

@@ -101,8 +101,11 @@ function update() {
 }
 
 
-
 function ui_init() {
+	$('.backtogame_button').on('click', function() {
+		hide();
+	});
+
 	_settings_checkboxes.forEach(function(name) {
 		var box = $('.settings [name="' + name + '"]');
 		box.on('change', function() {
