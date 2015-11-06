@@ -559,13 +559,14 @@ input[name="court_id"] {
 .timer_container {
 	padding: 2vh 3vh 2vh 1vh;
 	font-size: 20vmin;
-	cursor: pointer;
+	z-index: 60;
 }
 .timer {
 	display: inline-block;
 	min-width: 2em;
 }
 .timer_restart {
+	cursor: pointer;
 	display: block;
 	float: left;
 	vertical-align: middle;

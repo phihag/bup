@@ -18,6 +18,12 @@ function update() {
 		return;
 	}
 
+	if (!state.timer.start) {
+		// For example after resuming a game
+		remove();
+		return;
+	}
+
 	var remaining = state.timer.start + state.timer.duration - Date.now();
 	remaining = Math.max(0, remaining);
 	var remaining_val = Math.round(remaining / 1000);
