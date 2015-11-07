@@ -1,12 +1,16 @@
+work out switches between games via hash
 offline webapp Manifest (only in production)
 	include game ID in URL (make sure resume works)
+	resume settings state
+	resume into network matches
+	hash should be empty after match
+	init match if hash present
 	detect hashchange?
 	generate file from a script make_manifest
 	make sure network requests to CourtSpot etc. work
 	serve manifest file with correct MIME type
 	automatically update if updateready event is shortly after app start and not yet initialized
 	ask to update in settings
-	ask to update now otherwise
 
 manual game creation on smartphones
 edit mode to change sides / change ends

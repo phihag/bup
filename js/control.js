@@ -31,15 +31,17 @@ function demo_match_start() {
 }
 
 function set_current(s) {
+	return;  // TODO
+	console.log('setting current match to ', s);
 	var hval = window.location.hash;
-	hval = hval.replace(/[#&]g=[^&]*/, '');
+	hval = hval.replace(/[#&]m=[^&]*/, '');
 	if (!hval.match(/^#/)) {
 		hval = '#' + hval;
 	}
 	if (hval.length > 1) {
 		hval += '&';
 	}
-	hval += 'g=' + encodeURIComponent(s.metadata.id);
+	hval += 'm=' + encodeURIComponent(s.metadata.id);
 
 	window.location.hash = hval;
 }
@@ -49,7 +51,7 @@ function resume_match(s) {
 	calc.state(s);
 	s.settings = state.settings;
 	state = s;
-	set_current();
+	set_current(s);
 	render.ui_render(s);
 	// Do not explicitly send anything to the network - we're just looking
 }
@@ -62,6 +64,23 @@ function start_match(s, setup, init_presses) {
 	network.send_press(s, {
 		type: '_start_match',
 	});
+}
+
+// Prepare to show another match
+function stop_match(s) {
+	if (s.destructors) {
+		s.destructors.forEach(function(destructor) {
+			destructor(s);
+		});
+		delete s.destructors;
+	}
+}
+
+function install_destructor(s, destructor) {
+	if (! s.destructors) {
+		s.destructors = [];
+	}
+	s.destructors.push(destructor);
 }
 
 function on_press(press, s) {
@@ -232,7 +251,23 @@ function init_shortcuts() {
 }
 
 function onhashchange() {
-	
+	return; // TODO
+	var qs = utils.parse_query_string(window.location.hash.substr(1));
+	if ((qs.m && !state.metadata) || (qs.m != state.metadata.id)) {
+		// Load match
+		var m = match_storage.get(qs.m);
+		if (m) {
+			resume_match(m);
+			settings.hide(true);
+			return;
+		}
+
+		m = network.match_by_id(qs.m);
+		if (m) {
+			network.enter_match(m);
+			return;
+		}
+	}
 }
 
 function ui_init() {
@@ -262,6 +297,8 @@ return {
 	resume_match: resume_match,
 	ui_init: ui_init,
 	hide_exception_dialog: hide_exception_dialog,
+	stop_match: stop_match,
+	install_destructor: install_destructor,
 };
 
 })();

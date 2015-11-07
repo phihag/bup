@@ -21,6 +21,7 @@ function esc_stack_pop() {
 	}
 }
 
+// Returns a function to cancel the dialog
 function make_pick(label, values, on_pick, on_cancel, container) {
 	if (! container) {
 		container = $('.bottom-ui');
@@ -69,6 +70,8 @@ function make_pick(label, values, on_pick, on_cancel, container) {
 	}
 
 	container.append(dlg_wrapper);
+
+	return cancel;
 }
 
 function make_team_pick(s, label, type, on_cancel, modify_button) {

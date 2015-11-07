@@ -1,6 +1,8 @@
 var network = (function() {
 'use strict';
 
+var online_event = null;
+
 function get_netw() {
 	return networks.btde || networks.courtspot;
 }
@@ -105,6 +107,92 @@ function _score_text(network_score) {
 	}).join(' ');
 }
 
+// Start or resume (depends on user interaction) the match
+function enter_match(match) {
+	var netw = get_netw();
+	if (netw.prepare_match) {
+		netw.prepare_match(state.settings, match);
+	}
+
+	settings.hide(true);
+	control.stop_match(state);
+
+	if (match.network_score) {
+		var netscore = match.network_score;
+		var mwinner = calc.match_winner(netscore);
+
+		if ((mwinner == 'inprogress') && calc.match_started(netscore)) {
+			control.install_destructor(state, uiu.make_pick('Das Spiel ' + pronounciation.match_str(match.setup) + ' wurde bereits angefangen', [{
+				label: 'Spiel bei ' + _score_text(netscore) + ' fortsetzen',
+				key: 'resume',
+			}, {
+				label: 'Spiel bei 0-0 starten',
+				key: 'restart',
+			}], function(pick) {
+				var presses = [];
+				if (pick.key == 'resume') {
+					var current_game = netscore[netscore.length - 1];
+
+					if (netscore.length > 1) {
+						presses.push({
+							type: 'editmode_set-finished_games',
+							scores: netscore.slice(0, netscore.length - 1),
+							by_side: false,
+						});
+					}
+					presses.push({
+						type: 'editmode_set-score',
+						score: current_game,
+						by_side: false,
+						resumed: true,
+					});
+
+					if (typeof match.network_team1_left == 'boolean') {
+						presses.push({
+							type: 'pick_side',
+							team1_left: match.network_team1_left,
+						});
+					}
+					if ((typeof match.network_team1_serving == 'boolean') && match.network_teams_player1_even) {
+						var serving_team = match.network_team1_serving ? 0 : 1;
+						var serving_even = (current_game[serving_team] % 2) === 0;
+
+						var serving_player = 0;
+						var receiving_player = 0;
+						if (match.setup.is_doubles) {
+							serving_player = (match.network_teams_player1_even[serving_team] == serving_even) ? 0 : 1;
+							receiving_player = (match.network_teams_player1_even[1 - serving_team] == serving_even) ? 0 : 1;
+						}
+
+						presses.push({
+							type: 'pick_server',
+							team_id: serving_team,
+							player_id: serving_player,
+						});
+						presses.push({
+							type: 'pick_receiver',
+							team_id: 1 - serving_team,
+							player_id: receiving_player,
+						});
+					}
+				}
+				control.start_match(s, match.setup, presses);
+			}, settings.show));
+			return;
+		}
+		if (mwinner == 'left' || mwinner == 'right') {
+			uiu.make_pick('Das Spiel ' + pronounciation.match_str(match.setup) + ' ist bereits beendet (' + _score_text(netscore) + ')!', [{
+				label: 'Spiel bei 0-0 neu starten',
+			}], function() {
+				control.start_match(s, match.setup);
+			}, settings.show);
+			return;
+		}
+	}
+	control.start_match(s, match.setup);
+
+}
+
 function ui_render_matchlist(s, event) {
 	var container = $('#setup_network_matches');
 	container.empty(); // TODO better transition if we're updating?
@@ -136,86 +224,7 @@ function ui_render_matchlist(s, event) {
 		btn.append(score);
 
 		btn.on('click', function() {
-			var netw = get_netw();
-			if (netw.prepare_match) {
-				netw.prepare_match(state.settings, match);
-			}
-
-			settings.hide(true);
-
-			if (match.network_score) {
-				var netscore = match.network_score;
-				var mwinner = calc.match_winner(netscore);
-
-				if ((mwinner == 'inprogress') && calc.match_started(netscore)) {
-					uiu.make_pick('Das Spiel ' + pronounciation.match_str(match.setup) + ' wurde bereits angefangen', [{
-						label: 'Spiel bei ' + _score_text(netscore) + ' fortsetzen',
-						key: 'resume',
-					}, {
-						label: 'Spiel bei 0-0 starten',
-						key: 'restart',
-					}], function(pick) {
-						var presses = [];
-						if (pick.key == 'resume') {
-							var current_game = netscore[netscore.length - 1];
-
-							if (netscore.length > 1) {
-								presses.push({
-									type: 'editmode_set-finished_games',
-									scores: netscore.slice(0, netscore.length - 1),
-									by_side: false,
-								});
-							}
-							presses.push({
-								type: 'editmode_set-score',
-								score: current_game,
-								by_side: false,
-								resumed: true,
-							});
-
-							if (typeof match.network_team1_left == 'boolean') {
-								presses.push({
-									type: 'pick_side',
-									team1_left: match.network_team1_left,
-								});
-							}
-							if ((typeof match.network_team1_serving == 'boolean') && match.network_teams_player1_even) {
-								var serving_team = match.network_team1_serving ? 0 : 1;
-								var serving_even = (current_game[serving_team] % 2) === 0;
-
-								var serving_player = 0;
-								var receiving_player = 0;
-								if (match.setup.is_doubles) {
-									serving_player = (match.network_teams_player1_even[serving_team] == serving_even) ? 0 : 1;
-									receiving_player = (match.network_teams_player1_even[1 - serving_team] == serving_even) ? 0 : 1;
-								}
-
-								presses.push({
-									type: 'pick_server',
-									team_id: serving_team,
-									player_id: serving_player,
-								});
-								presses.push({
-									type: 'pick_receiver',
-									team_id: 1 - serving_team,
-									player_id: receiving_player,
-								});
-							}
-						}
-						control.start_match(s, match.setup, presses);
-					}, settings.show);
-					return;
-				}
-				if (mwinner == 'left' || mwinner == 'right') {
-					uiu.make_pick('Das Spiel ' + pronounciation.match_str(match.setup) + ' ist bereits beendet (' + _score_text(netscore) + ')!', [{
-						label: 'Spiel bei 0-0 neu starten',
-					}], function() {
-						control.start_match(s, match.setup);
-					}, settings.show);
-					return;
-				}
-			}
-			control.start_match(s, match.setup);
+			enter_match(match);
 		});
 
 		container.append(btn);
@@ -250,6 +259,7 @@ function ui_list_matches(s, silent, no_timer) {
 			return;
 		}
 
+		online_event = event;
 		ui_render_matchlist(s, event);
 	});
 
@@ -336,6 +346,19 @@ function ui_init() {
 	utils.on_click($('.network_desync_image'), resync);
 }
 
+function match_by_id(id) {
+	if (! online_event) {
+		return;
+	}
+
+	for (var i = 0;i < online_event.matches.length;i++) {
+		var m = online_event.matches[i];
+		if (m.setup.match_id == id) {
+			return m;
+		}
+	}
+}
+
 return {
 	calc_score: calc_score,
 	send_press: send_press,
@@ -343,6 +366,8 @@ return {
 	ui_init: ui_init,
 	resync: resync,
 	errstate: errstate,
+	match_by_id: match_by_id,
+	enter_match: enter_match,
 };
 
 

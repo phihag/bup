@@ -40,6 +40,19 @@ function load() {
 	return res;
 }
 
+function get(match_id) {
+	if (! window.localStorage) {
+		return;
+	}
+	var k = 'bup_match_' + match_id;
+
+	try {
+		return JSON.parse(window.localStorage.getItem(k));
+	} catch(e) {
+		// Ignore
+	}
+}
+
 function remove(match_id) {
 	window.localStorage.removeItem('bup_match_' + match_id);
 }
@@ -88,6 +101,7 @@ return {
 	ui_init: ui_init,
 	store: store,
 	remove: remove,
+	get: get,
 };
 
 })();
