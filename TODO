@@ -1,3 +1,5 @@
+send new btde URL
+
 work out switches between games via hash
 offline webapp Manifest (only in production)
 	include game ID in URL (make sure resume works)
