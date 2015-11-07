@@ -230,7 +230,7 @@ function ui_init() {
 	if (!baseurl) {
 		baseurl = '../';
 	}
-	var m = window.location.pathname.match(/^(.*\/)[^\/]+\/bup(?:\/(?:bup\.html)?)?$/);
+	var m = window.location.pathname.match(/^(.*\/)bup\/(?:bup\.html|index\.html)?$/);
 	if (m) {
 		baseurl = m[1];
 	}
