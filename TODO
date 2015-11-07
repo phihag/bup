@@ -1,5 +1,7 @@
 send new btde URL
 
+btde: match list should be refreshed automatically when settings are open
+
 work out switches between games via hash
 offline webapp Manifest (only in production)
 	include game ID in URL (make sure resume works)

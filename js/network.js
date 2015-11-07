@@ -176,7 +176,7 @@ function enter_match(match) {
 						});
 					}
 				}
-				control.start_match(s, match.setup, presses);
+				control.start_match(state, match.setup, presses);
 			}, settings.show);
 			return;
 		}
@@ -184,7 +184,7 @@ function enter_match(match) {
 			uiu.make_pick('Das Spiel ' + pronounciation.match_str(match.setup) + ' ist bereits beendet (' + _score_text(netscore) + ')!', [{
 				label: 'Spiel bei 0-0 neu starten',
 			}], function() {
-				control.start_match(s, match.setup);
+				control.start_match(state, match.setup);
 			}, settings.show);
 			return;
 		}
