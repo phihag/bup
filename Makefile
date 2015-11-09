@@ -35,7 +35,7 @@ dist: cleandist
 	cp libs/jspdf.min.js dist/bup/jspdf.dist.js
 	<bup.css cleancss -o dist/bup/bup.min.css
 	svgo -f icons/ -o dist/bup/icons/
-	cp icons/*.gif dist/bup/icons/
+	cp icons/*.gif icons/*.png dist/bup/icons/
 
 	cp div/dist_htaccess dist/bup/.htaccess
 	mkdir -p dist/bup/div/
