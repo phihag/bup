@@ -1,4 +1,3 @@
-btde: match list should be refreshed automatically when settings are open
 international RTTO 3.7.2 for red cards before game
 
 work out switches between games via hash
@@ -15,6 +14,7 @@ offline webapp Manifest (only in production)
 	automatically update if updateready event is shortly after app start and not yet initialized
 	ask to update in settings
 
+check and remove all dead code
 manual game creation on smartphones
 edit mode to change sides / change ends
 	write automated tests for editing

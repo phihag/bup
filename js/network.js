@@ -71,7 +71,7 @@ function _start_list_matches(s) {
 		_network_list_timeout = null;
 	}
 
-	if (erroneous) {
+	if (erroneous['list_matches']) {
 		// Let the normal resync procedure handle it
 		return;
 	}
