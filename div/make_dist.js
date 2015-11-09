@@ -98,7 +98,7 @@ function main() {
 					return cb(err);
 				}
 				var d = new Date();
-				var version_date = d.getFullYear() + '.' + add_zeroes(d.getMonth()) + '.' + add_zeroes(d.getDay());
+				var version_date = d.getFullYear() + '.' + add_zeroes(d.getMonth() + 1) + '.' + add_zeroes(d.getDay());
 				var version = version_date + '.' + rev;
 				cb(err, version);
 			});
