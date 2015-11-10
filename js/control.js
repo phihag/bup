@@ -31,8 +31,6 @@ function demo_match_start() {
 }
 
 function set_current(s) {
-	return;  // TODO
-	console.log('setting current match to ', s);
 	var hval = window.location.hash;
 	hval = hval.replace(/[#&]m=[^&]*/, '');
 	if (!hval.match(/^#/)) {
@@ -42,8 +40,9 @@ function set_current(s) {
 		hval += '&';
 	}
 	hval += 'm=' + encodeURIComponent(s.metadata.id);
-
 	window.location.hash = hval;
+
+	// TODO set title
 }
 
 function resume_match(s) {
@@ -251,9 +250,8 @@ function init_shortcuts() {
 }
 
 function onhashchange() {
-	return; // TODO
 	var qs = utils.parse_query_string(window.location.hash.substr(1));
-	if ((qs.m && !state.metadata) || (qs.m != state.metadata.id)) {
+	if ((qs.m && !state.metadata) || (state.metadata && qs.m != state.metadata.id)) {
 		// Load match
 		var m = match_storage.get(qs.m);
 		if (m) {
@@ -268,6 +266,7 @@ function onhashchange() {
 			return;
 		}
 	}
+	settings.show();
 }
 
 function ui_init() {
