@@ -14,6 +14,7 @@ function ui_init() {
 	var bup_version = 'dev';
 	$('#version').text(bup_version);
 
+	appcache.ui_init();
 	$('#script_jspdf').on('load', scoresheet.jspdf_loaded);
 
 	editmode.ui_init();
@@ -65,6 +66,7 @@ if (typeof $ !== 'undefined') {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var utils = require('./utils');
 	var calc = require('./calc');
+	var appcache = require('./appcache');
 	var timer = require('./timer');
 	var editmode = require('./editmode');
 	var fullscreen = require('./fullscreen');

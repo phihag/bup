@@ -168,6 +168,7 @@ improve settings display on smartphone
 test svg_path_lines
 test that singles with pick_receiver works just fine
 minify HTML
+implement service workers as well as appcache
 convert static (in HTML) pickers to team_pick / player_pick etc.
 remove JS stubs with /*@PRODUCTION*/ comments
 function btde instead of var btde = function

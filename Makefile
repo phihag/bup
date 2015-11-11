@@ -28,8 +28,10 @@ deps: install-libs
 cleandist:
 	rm -rf -- dist
 
-manifest:
-	node div/make_manifest.js dist/bup/ div/bup.manifest.in dist/bup/bup.manifest
+manifest: appcache-manifest
+
+appcache-manifest:
+	node div/make_manifest.js dist/bup/ div/bup.appcache.in dist/bup/bup.appcache
 
 dist: cleandist
 	mkdir -p dist/bup
@@ -47,7 +49,7 @@ dist: cleandist
 		div/LICENSE.commercial.de \
 		--target-directory dist/bup/div/
 
-	$(MAKE) manifest
+	$(MAKE) appcache-manifest
 
 	cd dist && zip bup.zip bup/ -rq
 
@@ -79,4 +81,4 @@ clean: cleandist
 	rm -rf -- libs
 	rm -rf -- node_modules
 
-.PHONY: default help deps test clean install-libs force-install-libs upload dist cleandist coverage coverage-display cd lint jshint eslint manifest
+.PHONY: default help deps test clean install-libs force-install-libs upload dist cleandist coverage coverage-display cd lint jshint eslint appcache-manifest manifest
