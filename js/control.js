@@ -327,6 +327,7 @@ return {
 	install_destructor: install_destructor,
 	uninstall_destructor: uninstall_destructor,
 	load_by_hash: load_by_hash,
+	set_current: set_current,
 };
 
 })();

@@ -103,6 +103,7 @@ function update() {
 
 function ui_init() {
 	$('.backtogame_button').on('click', function() {
+		control.set_current(state);
 		hide();
 	});
 

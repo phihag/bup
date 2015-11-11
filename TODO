@@ -1,4 +1,3 @@
-back to game should set current game
 kill dialogs when switching matches via hash
 offline webapp Manifest (only in production)
 	amend hash with &update
