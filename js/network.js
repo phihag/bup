@@ -122,7 +122,7 @@ function enter_match(match) {
 		var mwinner = calc.match_winner(netscore);
 
 		if ((mwinner == 'inprogress') && calc.match_started(netscore)) {
-			var kill_pick = uiu.make_pick('Das Spiel ' + pronounciation.match_str(match.setup) + ' wurde bereits angefangen', [{
+			uiu.make_pick('Das Spiel ' + pronounciation.match_str(match.setup) + ' wurde bereits angefangen', [{
 				label: 'Spiel bei ' + _score_text(netscore) + ' fortsetzen',
 				key: 'resume',
 			}, {
@@ -189,8 +189,7 @@ function enter_match(match) {
 			return;
 		}
 	}
-	control.start_match(s, match.setup);
-
+	control.start_match(state, match.setup);
 }
 
 function ui_render_matchlist(s, event) {

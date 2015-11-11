@@ -256,8 +256,9 @@ function onhashchange() {
 	*/
 }
 
-function set_current(s) {
+function set_current() {
 	/* TODO
+function set_current(s) {
 	var hval = window.location.hash;
 	hval = hval.replace(new RegExp('[#&]m=[^&]*'), '');
 	if (!hval.match(/^#/)) {
