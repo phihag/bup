@@ -1,12 +1,12 @@
-'use strict';
 
 var assert = require('assert');
-
 var tutils = require('./tutils');
 var _describe = tutils._describe;
 var _it = tutils._it;
 var bup = tutils.bup;
 
+(function() {
+'use strict';
 
 _describe('helper functions', function() {
 	_it('duration_str', function() {
@@ -50,3 +50,5 @@ _describe('helper functions', function() {
 		assert.equal(bup.utils.any([1, 2]), true);
 	});
 });
+
+})();

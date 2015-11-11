@@ -1,10 +1,11 @@
-'use strict';
-
 var async = require('async');
 var crypto = require('crypto');
 var fs = require('fs');
 var parse_appcache_manifest = require('parse-appcache-manifest');
 var path = require('path');
+
+(function() {
+'use strict';
 
 function determine_svg_files(dist_dir, cb) {
 	var icon_dir = path.join(dist_dir, 'icons');
@@ -98,3 +99,5 @@ function main() {
 }
 
 main();
+
+})();

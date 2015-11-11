@@ -1,5 +1,3 @@
-'use strict';
-
 var assert = require('assert');
 var _ = require('underscore');
 
@@ -12,6 +10,8 @@ var press_score = tutils.press_score;
 var state_after = tutils.state_after;
 var bup = tutils.bup;
 
+(function() {
+'use strict';
 
 _describe('scoresheet generation', function() {
 	function _scoresheet_cells(presses, setup) {
@@ -1286,9 +1286,9 @@ _describe('scoresheet generation', function() {
 
 		// 21-11 should fit in one line
 		// In German rules see Anweisungen für Technische Offizielle §8
-		var presses = start_presses.slice();
+		presses = start_presses.slice();
 		press_score(presses, 21, 11);
-		var cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		cells = _scoresheet_cells(presses, SINGLES_SETUP);
 		_assert_cell(cells, {
 			table: 0,
 			col: 33,
@@ -1722,7 +1722,7 @@ _describe('scoresheet generation', function() {
 		});
 		var cells = _scoresheet_cells(presses, SINGLES_SETUP);
 		assert(! cells.some(function(cell) {
-			return cell.table == 0 && cell.type == 'editmode-sign';
+			return cell.table === 0 && cell.type == 'editmode-sign';
 		}));
 	});
 
@@ -1819,3 +1819,5 @@ _describe('scoresheet generation', function() {
 		});
 	});
 });
+
+})();

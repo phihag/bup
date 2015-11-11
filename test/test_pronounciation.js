@@ -1,5 +1,3 @@
-'use strict';
-
 var assert = require('assert');
 
 var tutils = require('./tutils');
@@ -14,6 +12,9 @@ var press_score = tutils.press_score;
 var bup = tutils.bup;
 
 var pronounce = bup.pronounciation.pronounce;
+
+(function() {
+'use strict';
 
 _describe('pronounciation', function() {
 	_it('Start of match (singles)', function() {
@@ -1637,3 +1638,5 @@ _describe('pronounciation', function() {
 			'Das Spiel wurde gewonnen von Bob und Birgit mit 19-21');
 	});
 });
+
+})();

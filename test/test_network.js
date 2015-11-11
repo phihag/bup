@@ -1,4 +1,3 @@
-'use strict';
 
 var assert = require('assert');
 
@@ -11,6 +10,9 @@ var _it = tutils._it;
 var SINGLES_SETUP = tutils.SINGLES_SETUP;
 var press_score = tutils.press_score;
 var state_after = tutils.state_after;
+
+(function() {
+'use strict';
 
 _describe('network', function() {
 	_it('calc_score', function() {
@@ -274,3 +276,5 @@ _describe('network', function() {
 		_assert_network_score([[21, 23], [21, 5], [30, 29]]);
 	});
 });
+
+})();

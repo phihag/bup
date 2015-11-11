@@ -1,5 +1,3 @@
-'use strict';
-
 var assert = require('assert');
 
 var tutils = require('./tutils');
@@ -11,6 +9,8 @@ var press_score = tutils.press_score;
 var state_after = tutils.state_after;
 var bup = tutils.bup;
 
+(function() {
+'use strict';
 
 _describe('calc_state', function() {
 	_it('Initial properties', function() {
@@ -2562,3 +2562,5 @@ _describe('calc helper functions', function() {
 		assert.equal(bup.calc.game_winner(28, 25), 'invalid');
 	});
 });
+
+})();

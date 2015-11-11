@@ -1,10 +1,11 @@
-'use strict';
-
 var async = require('async');
 var child_process = require('child_process');
 var fs = require('fs');
 var path = require('path');
 var process = require('process');
+
+(function() {
+'use strict';
 
 function add_zeroes(n) {
 	if (n < 10) {
@@ -15,7 +16,7 @@ function add_zeroes(n) {
 }
 
 function git_rev(cb) {
-	child_process.exec('git rev-parse --short HEAD', function (error, stdout, stderr) {
+	child_process.exec('git rev-parse --short HEAD', function (error, stdout) {
 		cb(error, stdout.trim());
 	});
 }
@@ -27,10 +28,10 @@ function uglify(js_files, jsdist_fn, cb) {
 	args.push('-o');
 	args.push(jsdist_fn);
 
-	var uglify = child_process.spawn('uglifyjs', args, {
-		stdio: 'inherit'
+	var uglify_proc = child_process.spawn('uglifyjs', args, {
+		stdio: 'inherit',
 	});
-	uglify.on('close', function (code) {
+	uglify_proc.on('close', function (code) {
 		if (code === 0) {
 			cb(null);
 		} else {
@@ -57,7 +58,7 @@ function transform_files(in_files, out_dir, func, cb) {
 	async.map(in_files, function(fn, cb) {
 		var out_fn = path.join(out_dir, path.basename(fn));
 		transform_file(fn, out_fn, func, function(err) {
-			cb(err, out_fn)
+			cb(err, out_fn);
 		});
 	}, function(err, out_files) {
 		return cb(err, out_files);
@@ -65,7 +66,7 @@ function transform_files(in_files, out_dir, func, cb) {
 }
 
 function ensure_mkdir(path, cb) {
-	 fs.mkdir(path, 0o700, function(err) {
+	fs.mkdir(path, 0x1c0, function(err) {
 		if (err && err.code == 'EEXIST') {
 			return cb(null);
 		}
@@ -113,10 +114,10 @@ function main() {
 			var script_files = [];
 			var dev_re = /<!--@DEV-->([\s\S]*?)<!--\/@DEV-->/g;
 			var dev_m;
-			while (dev_m = dev_re.exec(html)) {
+			while ((dev_m = dev_re.exec(html))) {
 				var script_re = /<script src="([^"]+)"><\/script>/g;
 				var script_m;
-				while (script_m = script_re.exec(dev_m[1])) {
+				while ((script_m = script_re.exec(dev_m[1]))) {
 					script_files.push(script_m[1]);
 				}
 			}
@@ -151,3 +152,5 @@ function main() {
 }
 
 main();
+
+})();

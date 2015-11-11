@@ -1,7 +1,4 @@
-'use strict';
-
 var _ = require('underscore');
-
 var bup = require('../js/bup');
 
 // Trivial runner
@@ -14,6 +11,8 @@ var _it = ((typeof it == 'undefined') ?
 	it
 );
 
+(function() {
+'use strict';
 
 var SINGLES_SETUP = {
 	teams: [{
@@ -113,3 +112,5 @@ module.exports = {
 	state_after: state_after,
 	state_at: state_at,
 };
+
+})();
