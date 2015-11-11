@@ -111,6 +111,7 @@ function calc_resume_presses(s, match) {
 	var netscore = match.network_score;
 	var current_game = netscore[netscore.length - 1];
 
+	var presses = [];
 	if (netscore.length > 1) {
 		presses.push({
 			type: 'editmode_set-finished_games',

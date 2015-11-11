@@ -1,8 +1,8 @@
+back to game should set current game
 kill dialogs when switching matches via hash
 offline webapp Manifest (only in production)
-	amend hash with &settings
+	amend hash with &update
 	include game ID in URL (make sure resume works)
-	resume settings state
 	resume into network matches
 	hash should be empty after match
 	init match if hash present
