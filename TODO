@@ -1,9 +1,5 @@
-kill network dialogs when switching matches via hash
 offline webapp Manifest (only in production)
 	amend hash with &update
-	include game ID in URL (make sure resume works)
-	resume into network matches
-	hash should be empty after match
 	generate file from a script make_manifest
 	make sure network requests to CourtSpot etc. work
 	serve manifest file with correct MIME type

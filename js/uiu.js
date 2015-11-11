@@ -22,7 +22,7 @@ function esc_stack_pop() {
 }
 
 // Returns a function to cancel the dialog
-function make_pick(label, values, on_pick, on_cancel, container) {
+function make_pick(s, label, values, on_pick, on_cancel, container) {
 	if (! container) {
 		container = $('.bottom-ui');
 	}
@@ -31,12 +31,16 @@ function make_pick(label, values, on_pick, on_cancel, container) {
 		uiu.esc_stack_pop();
 		dlg_wrapper.remove();
 	};
-	control.install_destructor(state, kill_dialog);
+	if (s) {
+		control.install_destructor(s, kill_dialog);
+	}
 	var cancel = function() {
 		if (! on_cancel) {
 			return;  // No cancelling allowed
 		}
-		control.uninstall_destructor(state, kill_dialog);
+		if (s) {
+			control.uninstall_destructor(s, kill_dialog);
+		}
 		kill_dialog();
 		on_cancel();
 	};
@@ -88,7 +92,7 @@ function make_team_pick(s, label, press_type, on_cancel, modify_button) {
 		};
 	});
 
-	make_pick(label, values, function(v) {
+	make_pick(s, label, values, function(v) {
 		control.on_press({
 			type: press_type,
 			team_id: v.team_id,
@@ -111,7 +115,7 @@ function make_player_pick(s, label, press_type, on_cancel, modify_button) {
 		});
 	});
 
-	make_pick(label, values, function(v) {
+	make_pick(s, label, values, function(v) {
 		control.on_press({
 			type: press_type,
 			team_id: v.team_id,

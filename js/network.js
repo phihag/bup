@@ -171,7 +171,7 @@ function enter_match(match) {
 		var mwinner = calc.match_winner(netscore);
 
 		if ((mwinner == 'inprogress') && calc.match_started(netscore)) {
-			uiu.make_pick('Das Spiel ' + pronounciation.match_str(match.setup) + ' wurde bereits angefangen', [{
+			uiu.make_pick(state, 'Das Spiel ' + pronounciation.match_str(match.setup) + ' wurde bereits angefangen', [{
 				label: 'Spiel bei ' + _score_text(netscore) + ' fortsetzen',
 				key: 'resume',
 			}, {
@@ -188,7 +188,7 @@ function enter_match(match) {
 		}
 
 		if (mwinner == 'left' || mwinner == 'right') {
-			uiu.make_pick('Das Spiel ' + pronounciation.match_str(match.setup) + ' ist bereits beendet (' + _score_text(netscore) + ')!', [{
+			uiu.make_pick(state, 'Das Spiel ' + pronounciation.match_str(match.setup) + ' ist bereits beendet (' + _score_text(netscore) + ')!', [{
 				label: 'Spiel bei 0-0 neu starten',
 			}], function() {
 				control.start_match(state, match.setup);

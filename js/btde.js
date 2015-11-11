@@ -268,7 +268,7 @@ function ui_init() {
 		return state.settings.court_id == c.court_id && state.settings.court_description == c.court_description;
 	});
 	if (! configured) {
-		uiu.make_pick('Feld auswählen', ALL_COURTS, function(c) {
+		uiu.make_pick(null, 'Feld auswählen', ALL_COURTS, function(c) {
 			state.settings.court_id = c.court_id;
 			state.settings.court_description = c.court_description;
 			settings.store(state);
