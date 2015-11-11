@@ -6,7 +6,6 @@ offline webapp Manifest (only in production)
 	automatically update if updateready event is shortly after app start and not yet initialized
 	ask to update in settings
 
-pick dialogs: distance between abort and buttons should be the same
 btde: Enter player names upon start if some are missing (if incomplete)
 international RTTO 3.7.2 for red cards before game
 manual game creation on smartphones
