@@ -107,6 +107,55 @@ function _score_text(network_score) {
 	}).join(' ');
 }
 
+function calc_resume_presses(s, match) {
+	var netscore = match.network_score;
+	var current_game = netscore[netscore.length - 1];
+
+	if (netscore.length > 1) {
+		presses.push({
+			type: 'editmode_set-finished_games',
+			scores: netscore.slice(0, netscore.length - 1),
+			by_side: false,
+		});
+	}
+	presses.push({
+		type: 'editmode_set-score',
+		score: current_game,
+		by_side: false,
+		resumed: true,
+	});
+
+	if (typeof match.network_team1_left == 'boolean') {
+		presses.push({
+			type: 'pick_side',
+			team1_left: match.network_team1_left,
+		});
+	}
+	if ((typeof match.network_team1_serving == 'boolean') && match.network_teams_player1_even) {
+		var serving_team = match.network_team1_serving ? 0 : 1;
+		var serving_even = (current_game[serving_team] % 2) === 0;
+
+		var serving_player = 0;
+		var receiving_player = 0;
+		if (match.setup.is_doubles) {
+			serving_player = (match.network_teams_player1_even[serving_team] == serving_even) ? 0 : 1;
+			receiving_player = (match.network_teams_player1_even[1 - serving_team] == serving_even) ? 0 : 1;
+		}
+
+		presses.push({
+			type: 'pick_server',
+			team_id: serving_team,
+			player_id: serving_player,
+		});
+		presses.push({
+			type: 'pick_receiver',
+			team_id: 1 - serving_team,
+			player_id: receiving_player,
+		});
+	}
+	return presses;
+}
+
 // Start or resume (depends on user interaction) the match
 function enter_match(match) {
 	var netw = get_netw();
@@ -115,71 +164,33 @@ function enter_match(match) {
 	}
 
 	settings.hide(true);
-	control.stop_match(state);
 
 	if (match.network_score) {
 		var netscore = match.network_score;
 		var mwinner = calc.match_winner(netscore);
 
 		if ((mwinner == 'inprogress') && calc.match_started(netscore)) {
-			uiu.make_pick('Das Spiel ' + pronounciation.match_str(match.setup) + ' wurde bereits angefangen', [{
+			var kill_pick = uiu.make_pick('Das Spiel ' + pronounciation.match_str(match.setup) + ' wurde bereits angefangen', [{
 				label: 'Spiel bei ' + _score_text(netscore) + ' fortsetzen',
 				key: 'resume',
 			}, {
 				label: 'Spiel bei 0-0 starten',
 				key: 'restart',
 			}], function(pick) {
-				var presses = [];
+				var presses = undefined;
 				if (pick.key == 'resume') {
-					var current_game = netscore[netscore.length - 1];
-
-					if (netscore.length > 1) {
-						presses.push({
-							type: 'editmode_set-finished_games',
-							scores: netscore.slice(0, netscore.length - 1),
-							by_side: false,
-						});
-					}
-					presses.push({
-						type: 'editmode_set-score',
-						score: current_game,
-						by_side: false,
-						resumed: true,
-					});
-
-					if (typeof match.network_team1_left == 'boolean') {
-						presses.push({
-							type: 'pick_side',
-							team1_left: match.network_team1_left,
-						});
-					}
-					if ((typeof match.network_team1_serving == 'boolean') && match.network_teams_player1_even) {
-						var serving_team = match.network_team1_serving ? 0 : 1;
-						var serving_even = (current_game[serving_team] % 2) === 0;
-
-						var serving_player = 0;
-						var receiving_player = 0;
-						if (match.setup.is_doubles) {
-							serving_player = (match.network_teams_player1_even[serving_team] == serving_even) ? 0 : 1;
-							receiving_player = (match.network_teams_player1_even[1 - serving_team] == serving_even) ? 0 : 1;
-						}
-
-						presses.push({
-							type: 'pick_server',
-							team_id: serving_team,
-							player_id: serving_player,
-						});
-						presses.push({
-							type: 'pick_receiver',
-							team_id: 1 - serving_team,
-							player_id: receiving_player,
-						});
-					}
+					presses = calc_resume_presses(state, match);
 				}
+				control.uninstall_destructor(state, kill_pick);
 				control.start_match(state, match.setup, presses);
-			}, settings.show);
+			}, function() {
+				control.uninstall_destructor(state, kill_pick);
+				settings.show();
+			});
+			control.install_destructor(state, kill_pick);
 			return;
 		}
+
 		if (mwinner == 'left' || mwinner == 'right') {
 			uiu.make_pick('Das Spiel ' + pronounciation.match_str(match.setup) + ' ist bereits beendet (' + _score_text(netscore) + ')!', [{
 				label: 'Spiel bei 0-0 neu starten',

@@ -1,10 +1,6 @@
 var btde = (function(baseurl) {
 'use strict';
 
-function _guess_is_doubles(match_name) {
-	return /HD|MX|GD|DD/.match(match_name);
-}
-
 var ALL_COURTS = [{
 	label: '1 (links)',
 	court_id: '1',
@@ -267,7 +263,6 @@ function ui_init() {
 	}
 
 	$('.setup_network_container').show();
-	settings.show();
 
 	var configured = ALL_COURTS.some(function(c) {
 		return state.settings.court_id == c.court_id && state.settings.court_description == c.court_description;
@@ -291,7 +286,6 @@ return {
 	sync: sync,
 	// Testing only
 	_parse_match_list: _parse_match_list,
-	_guess_is_doubles: _guess_is_doubles,
 };
 
 });

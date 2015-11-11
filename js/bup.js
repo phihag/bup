@@ -41,10 +41,12 @@ function ui_init() {
 	} else if (hash_query.btde !== undefined) {
 		networks.btde = btde();
 		networks.btde.ui_init(state);
-	} else if (hash_query.demo !== undefined) {
+	}
+
+	if (hash_query.demo !== undefined) {
 		control.demo_match_start();
 	} else {
-		settings.show();
+		control.load_by_hash();
 	}
 
 	if (state.settings.go_fullscreen) {

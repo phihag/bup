@@ -15,7 +15,6 @@ offline webapp Manifest (only in production)
 
 pick dialogs: distance between abort and buttons should be the same
 btde: Enter player names upon start if some are missing (if incomplete)
-check and remove all dead code
 international RTTO 3.7.2 for red cards before game
 manual game creation on smartphones
 edit mode to change sides / change ends

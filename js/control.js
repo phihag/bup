@@ -31,6 +31,7 @@ function demo_match_start() {
 }
 
 function resume_match(s) {
+	stop_match(state);
 	calc.init_state(s, null, s.presses, true);
 	calc.state(s);
 	s.settings = state.settings;
@@ -41,6 +42,7 @@ function resume_match(s) {
 }
 
 function start_match(s, setup, init_presses) {
+	stop_match(state);
 	calc.init_state(s, setup, init_presses);
 	calc.state(s);
 	set_current(s);
@@ -50,7 +52,7 @@ function start_match(s, setup, init_presses) {
 	});
 }
 
-// Prepare to show another match
+// Prepare to show another match, close all dialogs etc. (do not destroy rest of the display)
 function stop_match(s) {
 	if (s.destructors) {
 		s.destructors.forEach(function(destructor) {
@@ -66,6 +68,19 @@ function install_destructor(s, destructor) {
 	}
 	s.destructors.push(destructor);
 }
+
+function uninstall_destructor(s, destructor) {
+	if (! s.destructors) {
+		// Already fired
+		return;
+	}
+	for (var i = s.destructors.length - 1;i >= 0;i--) {
+		if (s.destructors[i] === destructor) {
+			s.destructors.splice(i, 1);
+		}
+	}
+}
+
 
 function on_press(press, s) {
 	if (s === undefined) {
@@ -234,42 +249,47 @@ function init_shortcuts() {
 	});
 }
 
-function onhashchange() {
-	/* TODO
+function load_by_hash() {
 	var qs = utils.parse_query_string(window.location.hash.substr(1));
-	if ((qs.m && !state.metadata) || (state.metadata && qs.m != state.metadata.id)) {
+	if (state.metadata && (qs.m == state.metadata.id)) {
+		settings.hide();
+		return;
+	}
+	if (qs.m) {
 		// Load match
 		var m = match_storage.get(qs.m);
 		if (m) {
-			resume_match(m);
 			settings.hide(true);
+			resume_match(m);
 			return;
 		}
 
 		m = network.match_by_id(qs.m);
 		if (m) {
+			settings.hide(true);
 			network.enter_match(m);
 			return;
 		}
+	} else {
+		settings.show();
 	}
-	settings.show();
-	*/
 }
 
-function set_current() {
-	/* TODO
 function set_current(s) {
 	var hval = window.location.hash;
-	hval = hval.replace(new RegExp('[#&]m=[^&]*'), '');
-	if (!hval.match(/^#/)) {
-		hval = '#' + hval;
+	var match_id = s.metadata.id;
+
+	if (utils.parse_query_string(hval.substr(1)).m !== match_id) {
+		hval = hval.replace(new RegExp('[#&]m=[^&]*'), '');
+		if (!hval.match(/^#/)) {
+			hval = '#' + hval;
+		}
+		if (hval.length > 1) {
+			hval += '&';
+		}
+		hval += 'm=' + encodeURIComponent(match_id);
+		window.location.hash = hval;
 	}
-	if (hval.length > 1) {
-		hval += '&';
-	}
-	hval += 'm=' + encodeURIComponent(s.metadata.id);
-	window.location.hash = hval;
-	*/
 
 	// TODO set title
 }
@@ -277,10 +297,11 @@ function set_current(s) {
 function ui_init() {
 	init_buttons();
 	init_shortcuts();
-	window.addEventListener('hashchange', onhashchange, false);
+	window.addEventListener('hashchange', load_by_hash, false);
 }
 
 function ui_show_exception_dialog() {
+	install_destructor(state, hide_exception_dialog);
 	$('#exception_wrapper').show();
 	uiu.esc_stack_push(function() {
 		hide_exception_dialog();
@@ -288,6 +309,7 @@ function ui_show_exception_dialog() {
 }
 
 function hide_exception_dialog() {
+	uninstall_destructor(state, hide_exception_dialog);
 	uiu.esc_stack_pop();
 	$('#exception_wrapper').hide();
 }
@@ -303,6 +325,8 @@ return {
 	hide_exception_dialog: hide_exception_dialog,
 	stop_match: stop_match,
 	install_destructor: install_destructor,
+	uninstall_destructor: uninstall_destructor,
+	load_by_hash: load_by_hash,
 };
 
 })();
