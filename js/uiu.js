@@ -31,10 +31,12 @@ function make_pick(label, values, on_pick, on_cancel, container) {
 		uiu.esc_stack_pop();
 		dlg_wrapper.remove();
 	};
+	control.install_destructor(state, kill_dialog);
 	var cancel = function() {
 		if (! on_cancel) {
 			return;  // No cancelling allowed
 		}
+		control.uninstall_destructor(state, kill_dialog);
 		kill_dialog();
 		on_cancel();
 	};
@@ -60,6 +62,9 @@ function make_pick(label, values, on_pick, on_cancel, container) {
 			kill_dialog();
 			on_pick(v);
 		});
+		if (v.modify_button) {
+			v.modify_button(btn, v);
+		}
 		dlg.append(btn);
 	});
 
@@ -71,121 +76,48 @@ function make_pick(label, values, on_pick, on_cancel, container) {
 
 	container.append(dlg_wrapper);
 
-	return cancel;
+	return kill_dialog;
 }
 
-function make_team_pick(s, label, type, on_cancel, modify_button) {
-	var kill_dialog = function() {
-		uiu.esc_stack_pop();
-		dlg_wrapper.remove();
-	};
-	var cancel = function() {
-		kill_dialog();
-		on_cancel();
-	};
-
-	uiu.esc_stack_push(cancel);
-	var dlg_wrapper = $('<div class="modal-wrapper">');
-	dlg_wrapper.on('click', function(e) {
-		if (e.target == dlg_wrapper[0]) {
-			cancel();
-		}
+function make_team_pick(s, label, press_type, on_cancel, modify_button) {
+	var values = [0, 1].map(function(ti) {
+		return {
+			label: pronounciation.teamtext_internal(s, ti),
+			modify_button: modify_button,
+			team_id: ti,
+		};
 	});
-	var dlg = $('<div class="pick_dialog">');
-	dlg.appendTo(dlg_wrapper);
 
-	var label_span = $('<span>');
-	label_span.text(label);
-	label_span.appendTo(dlg);
-
-	var team_indices = [0, 1];
-	team_indices.forEach(function(ti) {
-		var btn = add_player_pick(s, dlg, type, ti, null, kill_dialog, function() {
-			return pronounciation.teamtext_internal(s, ti);
+	make_pick(label, values, function(v) {
+		control.on_press({
+			type: press_type,
+			team_id: v.team_id,
 		});
-		if (modify_button) {
-			modify_button(btn, ti);
-		}
-	});
-
-	var cancel_btn = $('<button class="cancel-button">Abbrechen</button>');
-	cancel_btn.on('click', cancel);
-	cancel_btn.appendTo(dlg);
-
-	$('.bottom-ui').append(dlg_wrapper);
+	}, on_cancel);
 }
 
 
-function make_player_pick(s, label, type, on_cancel, modify_button) {
-	var kill_dialog = function() {
-		uiu.esc_stack_pop();
-		dlg_wrapper.remove();
-	};
-	var cancel = function() {
-		kill_dialog();
-		on_cancel();
-	};
-
-	uiu.esc_stack_push(cancel);
-	var dlg_wrapper = $('<div class="modal-wrapper">');
-	dlg_wrapper.on('click', function(e) {
-		if (e.target == dlg_wrapper[0]) {
-			cancel();
-		}
-	});
-	var dlg = $('<div class="pick_dialog">');
-	dlg.appendTo(dlg_wrapper);
-
-	var label_span = $('<span>');
-	label_span.text(label);
-	label_span.appendTo(dlg);
-
-	var team_indices = [0, 1];
-	team_indices.forEach(function(ti) {
-		var btn = add_player_pick(s, dlg, type, ti, 0, kill_dialog);
-		if (modify_button) {
-			modify_button(btn, ti, 0);
-		}
-		if (s.setup.is_doubles) {
-			btn = add_player_pick(s, dlg, type, ti, 1, kill_dialog);
-			if (modify_button) {
-				modify_button(btn, ti, 1);
-			}
-		}
+function make_player_pick(s, label, press_type, on_cancel, modify_button) {
+	var values = [];
+	[0, 1].forEach(function(team_id) {
+		var player_ids = s.setup.is_doubles ? [0, 1] : [0];
+		player_ids.forEach(function(player_id) {
+			values.push({
+				label: s.setup.teams[team_id].players[player_id].name,
+				modify_button: modify_button,
+				team_id: team_id,
+				player_id: player_id,
+			});
+		});
 	});
 
-	var cancel_btn = $('<button class="cancel-button">Abbrechen</button>');
-	cancel_btn.on('click', cancel);
-	cancel_btn.appendTo(dlg);
-
-	$('.bottom-ui').append(dlg_wrapper);
-}
-
-function add_player_pick(s, container, type, team_id, player_id, on_click, namefunc) {
-	if (! namefunc) {
-		namefunc = function(player) {
-			return player.name;
-		};
-	}
-
-	var player = s.setup.teams[team_id].players[player_id];
-	var btn = $('<button>');
-	btn.text(namefunc(player));
-	btn.on('click', function() {
-		var press = {
-			type: type,
-			team_id: team_id,
-		};
-		if (player_id !== null) {
-			press.player_id = player_id;
-		}
-		if (on_click) {
-			on_click(press);
-		}
-		control.on_press(press);
-	});
-	container.append(btn);
-	return btn;
+	make_pick(label, values, function(v) {
+		control.on_press({
+			type: press_type,
+			team_id: v.team_id,
+			player_id: v.player_id,
+		});
+	}, on_cancel);
 }
 
 function show_picker(obj) {
@@ -197,6 +129,34 @@ function show_picker(obj) {
 		first_button.off('blur', kill_special_treatment);
 	};
 	first_button.on('blur', kill_special_treatment);
+}
+
+// TODO remove this function in favor of using one of the pick_* functions in the first place
+function add_player_pick(s, container, type, team_id, player_id, on_click, namefunc) {
+       if (! namefunc) {
+               namefunc = function(player) {
+                       return player.name;
+               };
+       }
+
+       var player = s.setup.teams[team_id].players[player_id];
+       var btn = $('<button>');
+       btn.text(namefunc(player));
+       btn.on('click', function() {
+               var press = {
+                       type: type,
+                       team_id: team_id,
+               };
+               if (player_id !== null) {
+                       press.player_id = player_id;
+               }
+               if (on_click) {
+                       on_click(press);
+               }
+               control.on_press(press);
+       });
+       container.append(btn);
+       return btn;
 }
 
 return {

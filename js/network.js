@@ -171,7 +171,7 @@ function enter_match(match) {
 		var mwinner = calc.match_winner(netscore);
 
 		if ((mwinner == 'inprogress') && calc.match_started(netscore)) {
-			var kill_pick = uiu.make_pick('Das Spiel ' + pronounciation.match_str(match.setup) + ' wurde bereits angefangen', [{
+			uiu.make_pick('Das Spiel ' + pronounciation.match_str(match.setup) + ' wurde bereits angefangen', [{
 				label: 'Spiel bei ' + _score_text(netscore) + ' fortsetzen',
 				key: 'resume',
 			}, {
@@ -182,13 +182,8 @@ function enter_match(match) {
 				if (pick.key == 'resume') {
 					presses = calc_resume_presses(state, match);
 				}
-				control.uninstall_destructor(state, kill_pick);
 				control.start_match(state, match.setup, presses);
-			}, function() {
-				control.uninstall_destructor(state, kill_pick);
-				settings.show();
-			});
-			control.install_destructor(state, kill_pick);
+			}, settings.show);
 			return;
 		}
 

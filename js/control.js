@@ -204,8 +204,8 @@ function init_buttons() {
 		hide_exception_dialog();
 		uiu.make_player_pick(
 			state, 'Verwarnung (Gelbe Karte)', 'yellow-card', ui_show_exception_dialog,
-			function(btn, team_id) {
-				if (state.match.carded[team_id]) {
+			function(btn, v) {
+				if (state.match.carded[v.team_id]) {
 					btn.prepend('<span class="yellow-card-image"></span>');
 					btn.attr('disabled', 'disabled');
 				}
@@ -274,7 +274,11 @@ function load_by_hash() {
 		}
 	}
 
-	settings.show();
+	if (qs.demo !== undefined) {
+		demo_match_start();
+	} else {
+		settings.show();
+	}
 }
 
 function set_current(s) {

@@ -56,7 +56,6 @@ IE fix PDF output
 re-style settings with columns
 only show 4 games to resume
 
-
 move shuttle counter away from shuttle counter button in landscape mode
 better design for settings on mobiles
 CONTRIBUTING (-> assign copyright form)
@@ -111,8 +110,6 @@ make every button keyboard usable
 	keys for warnings etc. (after pressing e)
 	undo/redo (Ctrl+Z/Y)
 prevent retired after game
-show text in difficult situations (retired etc.)
-write a test for timers
 test black card before game start
 set window title (include match_name)
 up/down keys to switch between options; left-right for punishments
@@ -147,8 +144,6 @@ cursor for buttons?
 loading bup.. teaser in HTML for very slow connections
 network: add an option to change court
 network: color/opacity in match list by state
-preload images (if not Manifest)
-let _ui_make_player_pick and _ui_make_team pick use _ui_make_pick
 Schiedsrichterzettel auch im Bundesliga-Design
 limit available courts when network is in use
 mock courtspot and write automated tests
@@ -177,13 +172,11 @@ capture back button (warning if leaving while game is running)
 improve settings display on smartphone
 test svg_path_lines
 test that singles with pick_receiver works just fine
-enable jshint in make test
 minify HTML
 convert static (in HTML) pickers to team_pick / player_pick etc.
 remove JS stubs with /*@PRODUCTION*/ comments
 function btde instead of var btde = function
 move manual editing confirm button to bottom (with white border) and give it a text "Übernehmen"
-ban raw access to settings, use s.settings
 -> Demo Jörg H, Manuel, Susanne, Werner Durow
 -> Jens Köster fragen wegen zweimal gelbe Karte
 -> Jens Köster fragen wegen C

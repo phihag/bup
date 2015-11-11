@@ -43,11 +43,7 @@ function ui_init() {
 		networks.btde.ui_init(state);
 	}
 
-	if (hash_query.demo !== undefined) {
-		control.demo_match_start();
-	} else {
-		control.load_by_hash();
-	}
+	control.load_by_hash();
 
 	if (state.settings.go_fullscreen) {
 		fullscreen.autostart();
