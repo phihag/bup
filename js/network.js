@@ -200,14 +200,30 @@ function ui_render_matchlist(s, event) {
 
 	event.matches.forEach(function(match) {
 		var btn = $('<button class="setup_network_match">');
+		if (match.setup.incomplete) {
+			btn.attr('disabled', 'disabled');
+		}
+
 		var match_name = $('<span class="setup_network_match_match_name">');
 		match_name.text(match.setup.match_name);
 		btn.append(match_name);
 
 		var _players_str = function(team) {
-			return team.players.map(function(p) {
-				return p.name;
-			}).join('/');
+			if (match.setup.is_doubles) {
+				if (team.players.length === 0) {
+					return 'N.N. / N.N.';
+				} else if (team.players.length == 1) {
+					return team.players[0].name + ' / N.N.';
+				} else {
+					return team.players[0].name + ' / ' + team.players[1].name;
+				}
+			} else {
+				if (team.players.length === 0) {
+					return 'N.N.';
+				} else {
+					return team.players[0].name;
+				}
+			}
 		};
 
 		var home_players = $('<span class="setup_network_match_home_players">');

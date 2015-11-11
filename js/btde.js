@@ -1,6 +1,10 @@
 var btde = (function(baseurl) {
 'use strict';
 
+function _guess_is_doubles(match_name) {
+	return /HD|MX|GD|DD/.match(match_name);
+}
+
 var ALL_COURTS = [{
 	label: '1 (links)',
 	court_id: '1',
@@ -140,20 +144,42 @@ function send_press(s) {
 	sync(s);
 }
 
-function _parse_player(firstname, lastname) {
-	return {
-		firstname: firstname,
-		lastname: lastname,
-		name: firstname + ' ' + lastname,
-	};
+function _parse_player(s) {
+	var m = /^([^,]+),\s*([^,]+)$/.exec(s);
+
+	if (m) {
+		return {
+			firstname: m[2],
+			lastname: m[1],
+			name: m[2] + ' ' + m[1],
+		};
+	} else {
+		m = /^(\S+)\s(\S+)$/.exec(s);
+		if (m) {
+			return {
+				firstname: m[1],
+				lastname: m[2],
+				name: m[1] + ' ' + m[2],
+			};
+		} else {
+			return {
+				name: s,
+			};
+		}
+	}
 }
 
 function _parse_players(s) {
-	var m = /^([^,~]+),\s*([^,~]+)(?:~([^,~]+),\s*([^,~]+))?$/.exec(s);
+	var m = /^([^~]*)(?:~(.*))?$/.exec(s);
+	var res = [];
 
-	var res = [_parse_player(m[2], m[1])];
-	if (m[3]) {
-		res.push(_parse_player(m[4], m[3]));
+	if (m) {
+		if (m[1]) {
+			res.push(_parse_player(m[1]));
+		}
+		if (m[2]) {
+			res.push(_parse_player(m[2]));
+		}
 	}
 	return res;
 }
@@ -163,7 +189,8 @@ function _parse_match_list(doc, now) {
 	var home_team_name = event_data.heim;
 	var away_team_name = event_data.gast;
 
-	var matches = doc.slice(1, doc.length - 1).map(function(match) {
+	var matches = doc.slice(1, doc.length).map(function(match) {
+		var is_doubles = /~/.test(match.heim) && /~/.test(match.gast);
 		var home_team = {
 			players: _parse_players(match.heim),
 			name: home_team_name,
@@ -172,6 +199,9 @@ function _parse_match_list(doc, now) {
 			players: _parse_players(match.gast),
 			name: away_team_name,
 		};
+		var incomplete = (
+			(home_team.players.length != away_team.players.length) ||
+			(home_team.players.length != (is_doubles ? 2 : 1)));
 
 		var network_score = [];
 		for (var game_idx = 0;game_idx < 3;game_idx++) {
@@ -191,11 +221,12 @@ function _parse_match_list(doc, now) {
 			setup: {
 				counting: '3x21',
 				match_name: match.dis,
-				is_doubles: home_team.players.length == 2,
+				is_doubles: is_doubles,
 				teams: [home_team, away_team],
 				btde_match_id: match.id,
 				team_competition: true,
 				match_id: match_id,
+				incomplete: incomplete,
 			},
 			network_score: network_score,
 		};
@@ -260,6 +291,7 @@ return {
 	sync: sync,
 	// Testing only
 	_parse_match_list: _parse_match_list,
+	_guess_is_doubles: _guess_is_doubles,
 };
 
 });

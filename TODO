@@ -1,5 +1,6 @@
-work out switches between games via hash
+kill dialogs when switching matches via hash
 offline webapp Manifest (only in production)
+	amend hash with &settings
 	include game ID in URL (make sure resume works)
 	resume settings state
 	resume into network matches
@@ -12,6 +13,7 @@ offline webapp Manifest (only in production)
 	automatically update if updateready event is shortly after app start and not yet initialized
 	ask to update in settings
 
+btde: Enter player names upon start
 pick dialogs: distance between abort and buttons should be the same
 check and remove all dead code
 international RTTO 3.7.2 for red cards before game

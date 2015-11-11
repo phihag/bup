@@ -30,21 +30,6 @@ function demo_match_start() {
 	start_match(state, setup);
 }
 
-function set_current(s) {
-	var hval = window.location.hash;
-	hval = hval.replace(/[#&]m=[^&]*/, '');
-	if (!hval.match(/^#/)) {
-		hval = '#' + hval;
-	}
-	if (hval.length > 1) {
-		hval += '&';
-	}
-	hval += 'm=' + encodeURIComponent(s.metadata.id);
-	window.location.hash = hval;
-
-	// TODO set title
-}
-
 function resume_match(s) {
 	calc.init_state(s, null, s.presses, true);
 	calc.state(s);
@@ -250,6 +235,7 @@ function init_shortcuts() {
 }
 
 function onhashchange() {
+	/* TODO
 	var qs = utils.parse_query_string(window.location.hash.substr(1));
 	if ((qs.m && !state.metadata) || (state.metadata && qs.m != state.metadata.id)) {
 		// Load match
@@ -267,6 +253,24 @@ function onhashchange() {
 		}
 	}
 	settings.show();
+	*/
+}
+
+function set_current(s) {
+	/* TODO
+	var hval = window.location.hash;
+	hval = hval.replace(new RegExp('[#&]m=[^&]*'), '');
+	if (!hval.match(/^#/)) {
+		hval = '#' + hval;
+	}
+	if (hval.length > 1) {
+		hval += '&';
+	}
+	hval += 'm=' + encodeURIComponent(s.metadata.id);
+	window.location.hash = hval;
+	*/
+
+	// TODO set title
 }
 
 function ui_init() {
