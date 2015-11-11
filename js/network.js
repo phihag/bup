@@ -178,7 +178,7 @@ function enter_match(match) {
 				label: 'Spiel bei 0-0 starten',
 				key: 'restart',
 			}], function(pick) {
-				var presses = undefined;
+				var presses = null;
 				if (pick.key == 'resume') {
 					presses = calc_resume_presses(state, match);
 				}

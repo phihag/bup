@@ -170,6 +170,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var render = require('./render');
 	var uiu = require('./uiu');
 	var match_storage = require('./match_storage');
+	var control = require('./control');
 
 	module.exports = settings;
 }

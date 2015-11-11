@@ -103,6 +103,7 @@ function on_presses_change(s) {
 		s.metadata = {};
 		s.initialized = false;
 		settings.show();
+		set_current(null);
 	} else {
 		match_storage.store(s);
 		render.ui_render(s);
@@ -270,25 +271,26 @@ function load_by_hash() {
 			network.enter_match(m);
 			return;
 		}
-	} else {
-		settings.show();
 	}
+
+	settings.show();
 }
 
 function set_current(s) {
-	var hval = window.location.hash;
-	var match_id = s.metadata.id;
+	var hval = window.location.hash.substr(1);
+	var qs = utils.parse_query_string(hval);
+	hval = hval.replace(/[#&]m=[^&]*/g, '');
 
-	if (utils.parse_query_string(hval.substr(1)).m !== match_id) {
-		hval = hval.replace(new RegExp('[#&]m=[^&]*'), '');
-		if (!hval.match(/^#/)) {
-			hval = '#' + hval;
+	if (s === null) {
+		if (hval != window.location.hash.substr(1)) {
+			window.location.hash = hval;
 		}
+	} else if (qs.m !== s.metadata.id) {
 		if (hval.length > 1) {
 			hval += '&';
 		}
-		hval += 'm=' + encodeURIComponent(match_id);
-		window.location.hash = hval;
+		hval += 'm=' + encodeURIComponent(s.metadata.id);
+		window.location.hash = '#' + hval;
 	}
 
 	// TODO set title
