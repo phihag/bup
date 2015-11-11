@@ -54,8 +54,12 @@ upload: dist
 test:
 	@npm test
 
-lint:
+lint: jshint eslint
+
+jshint:
 	@jshint js/*.js
+
+eslint:
 	@eslint js/*.js
 
 coverage:
@@ -70,4 +74,4 @@ clean: cleandist
 	rm -rf -- libs
 	rm -rf -- node_modules
 
-.PHONY: default help deps test clean install-libs force-install-libs upload dist cleandist coverage coverage-display cd lint
+.PHONY: default help deps test clean install-libs force-install-libs upload dist cleandist coverage coverage-display cd lint jshint eslint
