@@ -47,11 +47,16 @@ function update() {
 	return true;
 }
 
-function remove() {
+function remove(immediately) {
 	if (ui_timer) {
 		window.clearTimeout(ui_timer);
 		ui_timer = null;
-		$('.timer_container').fadeOut(500);
+		var container = $('.timer_container');
+		if (immediately) {
+			container.hide();
+		} else {
+			container.fadeOut(500);
+		}
 	}
 }
 
