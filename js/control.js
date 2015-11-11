@@ -347,6 +347,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
 	var match_storage = require('./match_storage');
 	var editmode = require('./editmode');
+	var timer = require('./timer');
 
 	module.exports = control;
 }
