@@ -28,6 +28,9 @@ deps: install-libs
 cleandist:
 	rm -rf -- dist
 
+manifest:
+	node div/make_manifest.js dist/bup/ div/bup.manifest.in dist/bup/bup.manifest
+
 dist: cleandist
 	mkdir -p dist/bup
 
@@ -36,7 +39,6 @@ dist: cleandist
 	<bup.css cleancss -o dist/bup/bup.min.css
 	svgo -f icons/ -o dist/bup/icons/
 	cp icons/*.gif icons/*.png dist/bup/icons/
-
 	cp div/dist_htaccess dist/bup/.htaccess
 	mkdir -p dist/bup/div/
 	cp \
@@ -44,6 +46,9 @@ dist: cleandist
 		div/courtspot_screenshot_rechts.png \
 		div/LICENSE.commercial.de \
 		--target-directory dist/bup/div/
+
+	$(MAKE) manifest
+
 	cd dist && zip bup.zip bup/ -rq
 
 upload: dist
@@ -74,4 +79,4 @@ clean: cleandist
 	rm -rf -- libs
 	rm -rf -- node_modules
 
-.PHONY: default help deps test clean install-libs force-install-libs upload dist cleandist coverage coverage-display cd lint jshint eslint
+.PHONY: default help deps test clean install-libs force-install-libs upload dist cleandist coverage coverage-display cd lint jshint eslint manifest

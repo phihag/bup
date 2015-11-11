@@ -17,7 +17,8 @@
 		"underscore": "*",
 		"async": "*",
 		"jshint": "*",
-		"eslint": "*"
+		"eslint": "*",
+		"parse-appcache-manifest": "*"
 	},
 	"private": true
 }

@@ -1,0 +1,13 @@
+CACHE MANIFEST
+
+# @checksum
+
+CACHE:
+index.html
+icons/favicon.png
+icons/loading.gif
+bup.min.css
+bup.dist.js
+
+@svgfiles
+
