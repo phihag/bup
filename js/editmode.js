@@ -190,6 +190,13 @@ function render(s) {
 	} else {
 		switch_sides.removeAttr('disabled');
 	}
+
+	var switch_serve = $('.editmode_arrow');
+	if ((s.game.team1_left === null) || (s.game.finished)) {
+		switch_serve.attr('disabled', 'disabled');
+	} else {
+		switch_serve.removeAttr('disabled');
+	}
 }
 
 return {

@@ -742,7 +742,7 @@ input[name="court_id"] {
 .editmode_invalid {
 	background: #ff5555;
 }
-.editmode_change-ends[disabled], .editmode_switch_left[disabled], .editmode_switch_right[disabled] {
+.editmode_change-ends[disabled], .editmode_switch_left[disabled], .editmode_switch_right[disabled], .editmode_arrow[disabled] {
 	opacity: 0.9;
 	-webkit-filter: grayscale(70%);
     filter: grayscale(70%);
