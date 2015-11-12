@@ -1,10 +1,7 @@
 offline webapp Manifest (only in production)
-	amend hash with &update
-	generate file from a script make_manifest
+	amend hash with &updated before reloading -> show a notification
 	make sure network requests to CourtSpot etc. work
-	serve manifest file with correct MIME type
 	automatically update if updateready event is shortly after app start and not yet initialized
-	ask to update in settings
 
 btde: Enter player names upon start if some are missing (if incomplete)
 international RTTO 3.7.2 for red cards before game

@@ -1,2 +1,3 @@
 DirectoryIndex index.html
 
+AddType text/cache-manifest .appcache

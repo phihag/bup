@@ -8,6 +8,10 @@ function ui_init() {
 
 	$('.appcache_update_button').on('click', function() {
 		window.location.reload();
+		// TODO set &updated to allow for a notification
+	});
+	$('.appcache_later_button').on('click', function() {
+		$('.appcache_update_ingame').hide();
 	});
 
 	window.applicationCache.addEventListener('updateready', function(e) {
@@ -16,6 +20,7 @@ function ui_init() {
 		}
 
 		$('.appcache_update').show();
+		$('.appcache_update_ingame').show();
 	}, false);
 }
 

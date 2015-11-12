@@ -815,6 +815,20 @@ button>.loading-icon {
 	font-size: 5vh;
 	padding: 1vh 2vh;
 }
+.appcache_update_ingame {
+	background: rgba(255, 255, 255, 0.95);
+	font-size: 4vh;
+	z-index: 10000;
+	position: absolute;
+	top: 0; left: 0; right: 0;
+	padding: 4vh 2vmin 5vh 2vmin;
+	text-align: center;
+}
+.appcache_update_ingame>button {
+	font-size: 5vh;
+	padding: 3vh 3vh;
+	margin: 3vh 4vmin;
+}
 
 @media screen and (max-aspect-ratio: 3/4) {
 	#left_score, #right_score {
@@ -841,6 +855,13 @@ button>.loading-icon {
 	.timer_restart {
 		display: inline-block;
 		float: none;
+		width: 12vmin;
+		height: 12vmin;
+		margin-right: 0;
+	}
+
+	.timer {
+		min-width: 1.8em;
 	}
 }
 
