@@ -9,7 +9,7 @@ function enter() {
 	$('.editmode_button').text('Manuelles Bearbeiten abbrechen');
 	$('#score td.score span').hide();
 	$('#game').addClass('editmode');
-	hide_inputs((state.game.team1_left === null) ? 0 : (state.match.finished_games.length + 1));
+	render(state);
 }
 
 function leave() {
@@ -150,11 +150,47 @@ function change_score() {
 	}
 }
 
+function render(s) {
+	var editmode_active = $('#game').hasClass('editmode');
+	if (!editmode_active) {
+		return;
+	}
+
+	hide_inputs((s.game.team1_left === null) ? 0 : (s.match.finished_games.length + 1));
+
+	var left_active = false;
+	var right_active = false;
+	if (s.game.team1_left !== null) {
+		var left_team = s.game.team1_left ? 0 : 1;
+		left_active = s.game.teams_player1_even[left_team] !== null;
+		right_active = s.game.teams_player1_even[1 - left_team] !== null;
+	}
+
+	var switch_left = $('.editmode_switch_left');
+	if (! s.setup.is_doubles) {
+		switch_left.hide();
+	} else if (left_active) {
+		switch_left.removeAttr('disabled');
+	} else {
+		switch_left.attr('disabled', 'disabled');
+	}
+
+	var switch_right = $('.editmode_switch_right');
+	if (! s.setup.is_doubles) {
+		switch_right.hide();
+	} else if (right_active) {
+		switch_right.removeAttr('disabled');
+	} else {
+		switch_right.attr('disabled', 'disabled');
+	}
+}
+
 return {
 	enter: enter,
 	leave: leave,
 	ui_init: ui_init,
 	change_score: change_score,
+	render: render,
 };
 
 })();

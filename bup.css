@@ -559,7 +559,7 @@ input[name="court_id"] {
 .timer_container {
 	padding: 2vh 3vh 2vh 1vh;
 	font-size: 20vmin;
-	z-index: 60;
+	z-index: 200;
 }
 .timer {
 	display: inline-block;
@@ -741,6 +741,11 @@ input[name="court_id"] {
 }
 .editmode_invalid {
 	background: #ff5555;
+}
+.editmode_change-ends[disabled], .editmode_switch_left[disabled], .editmode_switch_right[disabled] {
+	opacity: 0.9;
+	-webkit-filter: grayscale(70%);
+    filter: grayscale(70%);
 }
 
 

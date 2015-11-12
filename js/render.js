@@ -181,6 +181,8 @@ function ui_court_str(s) {
 function ui_render(s) {
 	var dialog_active = false;  // Is there anything to pick in the bottom?
 
+	editmode.render(s);
+
 	function _court_show_player(key) {
 		var p = s.court['player_' + key];
 		$('#court_' + key + '>span').text(p === null ? '' : p.name);

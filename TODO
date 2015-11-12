@@ -1,14 +1,12 @@
-international RTTO 3.7.2 for red cards before game
-manual game creation on smartphones
 edit mode to change sides / change ends
 	write automated tests for editing
 		test ends change
 		ends change should switch score
 
-	show red if value is invalid
 	disable serve switch when not serving (game.finished) (bottom dialog takes over)
 	disable end switch when not picked
-	disable side switch when not picked
+international RTTO 3.7.2 for red cards before game
+manual game creation on smartphones
 Button "bitte spielen" mehr betonen (icon?)
 fix display without vw (see Manuel, https://github.com/saabi/vminpoly)
 retest Manuel's notes
