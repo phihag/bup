@@ -820,7 +820,7 @@ button>.loading-icon {
 	font-size: 5vh;
 	padding: 1vh 2vh;
 }
-.appcache_update_ingame, .appcache_updated_wrapper {
+.appcache_update_ingame, .appcache_updated_wrapper, .appcache_updating_wrapper {
 	background: rgba(255, 255, 255, 0.95);
 	font-size: 4vh;
 	z-index: 10000;

@@ -1,8 +1,6 @@
 
 var assert = require('assert');
 
-var _ = require('underscore');
-
 var tutils = require('./tutils');
 var bup = tutils.bup;
 var _describe = tutils._describe;
@@ -236,7 +234,7 @@ _describe('network', function() {
 			team_id: 0,
 			player_id: 0,
 		}, {
-			type: 'love-all'
+			type: 'love-all',
 		}, {
 			type: 'editmode_set-finished_games',
 			scores: [[21, 18]],

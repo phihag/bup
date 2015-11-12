@@ -5,8 +5,8 @@ help:
 	@echo '  deps          Download and install all dependencies (for compiling / testing / CLI operation)'
 	@echo '  dist          Create distribution files'
 	@echo '  test          Run tests'
+	@echo '  lint          Verify source code quality'
 	@echo '  upload        Upload to demo page'
-
 	@echo '  clean         Remove temporary files'
 	@echo '  help          This message'
 
@@ -64,10 +64,10 @@ test:
 lint: jshint eslint
 
 jshint:
-	@jshint js/*.js div/*.js
+	@jshint js/*.js div/*.js test/*.js
 
 eslint:
-	@eslint js/*.js div/*.js
+	@eslint js/*.js div/*.js test/*.js
 
 coverage:
 	istanbul cover _mocha -- -R spec

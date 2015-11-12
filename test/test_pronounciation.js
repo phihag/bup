@@ -40,7 +40,7 @@ _describe('pronounciation', function() {
 		presses.push({
 			type: 'pick_receiver', // Birgit receives
 			team_id: 1,
-			player_id: 1
+			player_id: 1,
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.strictEqual(
@@ -63,7 +63,7 @@ _describe('pronounciation', function() {
 		}, {
 			type: 'pick_receiver', // Birgit receives
 			team_id: 1,
-			player_id: 1
+			player_id: 1,
 		}];
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.strictEqual(
@@ -86,7 +86,7 @@ _describe('pronounciation', function() {
 		}, {
 			type: 'pick_receiver', // Alice receives
 			team_id: 0,
-			player_id: 1
+			player_id: 1,
 		}];
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.strictEqual(
@@ -197,7 +197,7 @@ _describe('pronounciation', function() {
 		}, {
 			type: 'pick_receiver', // Birgit receives
 			team_id: 1,
-			player_id: 1
+			player_id: 1,
 		}];
 		var s = state_after(presses, DOUBLES_TEAM_SETUP);
 		assert.strictEqual(
@@ -220,7 +220,7 @@ _describe('pronounciation', function() {
 		}, {
 			type: 'pick_receiver', // Birgit receives
 			team_id: 1,
-			player_id: 1
+			player_id: 1,
 		}];
 		s = state_after(presses, DOUBLES_TEAM_SETUP);
 		assert.strictEqual(
@@ -243,7 +243,7 @@ _describe('pronounciation', function() {
 		}, {
 			type: 'pick_receiver', // Andrew receives
 			team_id: 0,
-			player_id: 0
+			player_id: 0,
 		}];
 		s = state_after(presses, DOUBLES_TEAM_SETUP);
 		assert.strictEqual(
@@ -266,7 +266,7 @@ _describe('pronounciation', function() {
 		}, {
 			type: 'pick_receiver', // Andrew receives
 			team_id: 0,
-			player_id: 0
+			player_id: 0,
 		}];
 		s = state_after(presses, DOUBLES_TEAM_SETUP);
 		assert.strictEqual(
@@ -377,75 +377,75 @@ _describe('pronounciation', function() {
 		}, {
 			type: 'pick_receiver', // Birgit receives
 			team_id: 1,
-			player_id: 1
+			player_id: 1,
 		}, {
-			type: 'love-all'
+			type: 'love-all',
 		}, {
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		}];
 		var s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce(s), '1-0');
 
 		presses.push({
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce(s), '2-0');
 
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce(s), 'Aufschlagwechsel. 1-2');
 
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce(s), '2 beide');
 
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce(s), '3-2');
 
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce(s), '4-2');
 
 		presses.push({
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce(s), 'Aufschlagwechsel. 3-4');
 
 		presses.push({
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce(s), '4 beide');
 
 		presses.push({
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce(s), '5-4');
 
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce(s), 'Aufschlagwechsel. 5 beide');
@@ -460,73 +460,73 @@ _describe('pronounciation', function() {
 			team_id: 1,
 			player_id: 0,
 		}, {
-			type: 'love-all'
+			type: 'love-all',
 		}, {
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		}];
 		var s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), '1-0');
 
 		presses.push({
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), '2-0');
 
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), 'Aufschlagwechsel. 1-2');
 
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), '2 beide');
 
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), '3-2');
 
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), '4-2');
 
 		presses.push({
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), 'Aufschlagwechsel. 3-4');
 
 		presses.push({
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), '4 beide');
 
 		presses.push({
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), '5-4');
 
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), 'Aufschlagwechsel. 5 beide');
@@ -545,16 +545,16 @@ _describe('pronounciation', function() {
 			team_id: 0,
 			player_id: 0,
 		}, {
-			type: 'love-all'
+			type: 'love-all',
 		}];
 		press_score(presses, 9, 9);
 		presses.push({
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		});
 		presses.push({
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		});
 		var s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), '11-9 Pause');
@@ -562,54 +562,54 @@ _describe('pronounciation', function() {
 		press_score(presses, 8, 9);
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		var alt_presses = presses.slice();
 		presses.push({
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), 'Aufschlagwechsel. 20 Satzpunkt 19');
 
 		alt_presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		s = state_after(alt_presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), '20 Satzpunkt 19');
 
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), 'Aufschlagwechsel. 20 beide');
 
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), '21-20');
 
 		presses.push({
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), 'Aufschlagwechsel. 21 beide');
 
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), 'Aufschlagwechsel. 22-21');
 
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s),
@@ -660,15 +660,15 @@ _describe('pronounciation', function() {
 		press_score(presses, 9, 9);
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		presses.push({
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		});
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), 'Aufschlagwechsel. 11-10 Pause');
@@ -676,11 +676,11 @@ _describe('pronounciation', function() {
 		press_score(presses, 9, 6);
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), '19 beide');
@@ -688,49 +688,49 @@ _describe('pronounciation', function() {
 		alt_presses = presses.slice();
 		alt_presses.push({
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		});
 		s = state_after(alt_presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), 'Aufschlagwechsel. 20 Spielpunkt 19');
 
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), '20 Satzpunkt 19');
 
 		presses.push({
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce(s), 'Aufschlagwechsel. 20 beide');
 
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), 'Aufschlagwechsel. 21-20');
 
 		presses.push({
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		});
 		s = state_after(presses, SINGLES_TEAM_SETUP);
 		assert.equal(pronounce(s), 'Aufschlagwechsel. 21 beide');
 
 		presses.push({
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		});
 		s = state_after(presses, DOUBLES_TEAM_SETUP);
 		assert.equal(pronounce(s), '22-21');
 
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), 'Aufschlagwechsel. 22 beide');
@@ -738,11 +738,11 @@ _describe('pronounciation', function() {
 		press_score(presses, 5, 5);
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		presses.push({
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), 'Aufschlagwechsel. 28 beide');
@@ -750,21 +750,21 @@ _describe('pronounciation', function() {
 		alt_presses = presses.slice();
 		alt_presses.push({
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		});
 		s = state_after(alt_presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), '29 Spielpunkt 28');
 
 		alt_presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		s = state_after(alt_presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), 'Aufschlagwechsel. 29 Satzpunkt beide');
 
 		alt_presses.push({
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		});
 		s = state_after(alt_presses, SINGLES_SETUP);
 		assert.equal(pronounce(s),
@@ -773,21 +773,21 @@ _describe('pronounciation', function() {
 
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), 'Aufschlagwechsel. 29 Satzpunkt 28');
 
 		presses.push({
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), 'Aufschlagwechsel. 29 Spielpunkt beide');
 
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		s = state_after(presses, SINGLES_TEAM_SETUP);
 		assert.equal(pronounce(s),
@@ -838,15 +838,15 @@ _describe('pronounciation', function() {
 		press_score(presses, 9, 9);
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		presses.push({
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		});
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s),
@@ -854,7 +854,7 @@ _describe('pronounciation', function() {
 
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s),
@@ -863,18 +863,18 @@ _describe('pronounciation', function() {
 		press_score(presses, 7, 7);
 		presses.push({
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		});
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), 'Aufschlagwechsel. 19 beide');
 
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), '20 Spielpunkt 19');
@@ -882,21 +882,21 @@ _describe('pronounciation', function() {
 		alt_presses = presses.slice();
 		alt_presses.push({
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		});
 		s = state_after(alt_presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), 'Aufschlagwechsel. 20 beide');
 
 		alt_presses.push({
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		});
 		s = state_after(alt_presses, SINGLES_SETUP);
 		assert.equal(pronounce(s), '21-20');
 
 		alt_presses.push({
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		});
 		s = state_after(alt_presses, DOUBLES_TEAM_SETUP);
 		assert.equal(pronounce(s),
@@ -917,7 +917,7 @@ _describe('pronounciation', function() {
 
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce(s),
@@ -950,7 +950,7 @@ _describe('pronounciation', function() {
 			team_id: 0,
 			player_id: 0,
 		}, {
-			type: 'love-all'
+			type: 'love-all',
 		}];
 
 		presses.push({
@@ -965,7 +965,7 @@ _describe('pronounciation', function() {
 
 		presses.push({
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		});
 		presses.push({
 			type: 'red-card',
@@ -979,7 +979,7 @@ _describe('pronounciation', function() {
 
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		presses.push({
 			type: 'yellow-card',
@@ -1004,11 +1004,11 @@ _describe('pronounciation', function() {
 
 		presses.push({
 			type: 'score',
-			side: 'right'
+			side: 'right',
 		});
 		presses.push({
 			type: 'score',
-			side: 'left'
+			side: 'left',
 		});
 		presses.push({
 			type: 'red-card',
@@ -1142,7 +1142,7 @@ _describe('pronounciation', function() {
 			'Bitte spielen');
 
 		presses.push({
-			type: 'love-all'
+			type: 'love-all',
 		});
 		s = state_after(presses, DOUBLES_TEAM_SETUP);
 		assert.strictEqual(pronounce(s), null);
@@ -1165,7 +1165,7 @@ _describe('pronounciation', function() {
 			player_id: 0,
 		});
 		presses.push({
-			type: 'love-all'
+			type: 'love-all',
 		});
 		press_score(presses, 21, 19);
 		var card_birgit = {
@@ -1211,7 +1211,7 @@ _describe('pronounciation', function() {
 			'Bitte spielen');
 
 		presses.push({
-			type: 'love-all'
+			type: 'love-all',
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.deepEqual(s.game.score, [1, 0]);
@@ -1237,7 +1237,7 @@ _describe('pronounciation', function() {
 		assert.deepEqual(s.game.score, [19, 21]);
 
 		presses.push({
-			type: 'postgame-confirm'
+			type: 'postgame-confirm',
 		});
 		presses.push({
 			type: 'red-card',
@@ -1345,7 +1345,7 @@ _describe('pronounciation', function() {
 			player_id: 0,
 		});
 		presses.push({
-			type: 'love-all'
+			type: 'love-all',
 		});
 		press_score(presses, 21, 19);
 
@@ -1408,14 +1408,14 @@ _describe('pronounciation', function() {
 			team_id: 0,
 			player_id: 0,
 		}, {
-			type: 'love-all'
+			type: 'love-all',
 		}];
 
 		var alt_presses = presses.slice();
 		alt_presses.push({
 			type: 'retired',
 			team_id: 1,
-			player_id: 0
+			player_id: 0,
 		});
 		var s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce(s),
@@ -1427,7 +1427,7 @@ _describe('pronounciation', function() {
 		alt_presses.push({
 			type: 'retired',
 			team_id: 0,
-			player_id: 1
+			player_id: 1,
 		});
 		s = state_after(alt_presses, DOUBLES_TEAM_SETUP);
 		assert.equal(pronounce(s),
@@ -1449,7 +1449,7 @@ _describe('pronounciation', function() {
 			player_id: 0,
 		});
 		presses.push({
-			type: 'love-all'
+			type: 'love-all',
 		});
 		press_score(presses, 2, 2);
 
@@ -1470,7 +1470,7 @@ _describe('pronounciation', function() {
 		alt_presses.push({
 			type: 'retired',
 			team_id: 1,
-			player_id: 0
+			player_id: 0,
 		});
 		var s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce(s),
@@ -1485,7 +1485,7 @@ _describe('pronounciation', function() {
 		alt_presses.push({
 			type: 'retired',
 			team_id: 0,
-			player_id: 0
+			player_id: 0,
 		});
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce(s),
@@ -1501,7 +1501,7 @@ _describe('pronounciation', function() {
 		alt_presses.push({
 			type: 'retired',
 			team_id: 1,
-			player_id: 1
+			player_id: 1,
 		});
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce(s),
@@ -1517,7 +1517,7 @@ _describe('pronounciation', function() {
 		alt_presses.push({
 			type: 'retired',
 			team_id: 0,
-			player_id: 1
+			player_id: 1,
 		});
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce(s),
@@ -1525,13 +1525,13 @@ _describe('pronounciation', function() {
 			'Das Spiel wurde gewonnen von Bob und Birgit mit 0-0');
 
 		presses.push({
-			type: 'love-all'
+			type: 'love-all',
 		});
 		alt_presses = presses.slice();
 		alt_presses.push({
 			type: 'retired',
 			team_id: 0,
-			player_id: 0
+			player_id: 0,
 		});
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce(s),
@@ -1543,7 +1543,7 @@ _describe('pronounciation', function() {
 		alt_presses.push({
 			type: 'retired',
 			team_id: 0,
-			player_id: 0
+			player_id: 0,
 		});
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce(s),
@@ -1557,7 +1557,7 @@ _describe('pronounciation', function() {
 		alt_presses.push({
 			type: 'disqualified',
 			team_id: 1,
-			player_id: 0
+			player_id: 0,
 		});
 		var s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce(s),
@@ -1572,7 +1572,7 @@ _describe('pronounciation', function() {
 		alt_presses.push({
 			type: 'disqualified',
 			team_id: 0,
-			player_id: 0
+			player_id: 0,
 		});
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce(s),
@@ -1588,7 +1588,7 @@ _describe('pronounciation', function() {
 		alt_presses.push({
 			type: 'disqualified',
 			team_id: 1,
-			player_id: 1
+			player_id: 1,
 		});
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce(s),
@@ -1604,7 +1604,7 @@ _describe('pronounciation', function() {
 		alt_presses.push({
 			type: 'disqualified',
 			team_id: 0,
-			player_id: 1
+			player_id: 1,
 		});
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce(s),
@@ -1612,13 +1612,13 @@ _describe('pronounciation', function() {
 			'Das Spiel wurde gewonnen von Bob und Birgit mit 0-0');
 
 		presses.push({
-			type: 'love-all'
+			type: 'love-all',
 		});
 		alt_presses = presses.slice();
 		alt_presses.push({
 			type: 'disqualified',
 			team_id: 0,
-			player_id: 0
+			player_id: 0,
 		});
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce(s),
@@ -1630,7 +1630,7 @@ _describe('pronounciation', function() {
 		alt_presses.push({
 			type: 'disqualified',
 			team_id: 0,
-			player_id: 0
+			player_id: 0,
 		});
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce(s),
