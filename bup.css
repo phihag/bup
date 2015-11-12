@@ -807,6 +807,14 @@ button>.loading-icon {
 	bottom: 2vh;
 }
 
+.appcache_update {
+	font-size: 5vh;
+	margin-bottom: 4vh;
+}
+.appcache_update>button {
+	font-size: 5vh;
+	padding: 1vh 2vh;
+}
 
 @media screen and (max-aspect-ratio: 3/4) {
 	#left_score, #right_score {
