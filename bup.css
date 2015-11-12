@@ -800,7 +800,7 @@ button>.loading-icon {
 	transform: translate(-50%, -50%);
 }
 
-#version {
+.version {
 	color: #ddd;
 	position: absolute;
 	right: 4vh;
@@ -815,7 +815,7 @@ button>.loading-icon {
 	font-size: 5vh;
 	padding: 1vh 2vh;
 }
-.appcache_update_ingame {
+.appcache_update_ingame, .appcache_updated_wrapper {
 	background: rgba(255, 255, 255, 0.95);
 	font-size: 4vh;
 	z-index: 10000;
@@ -828,6 +828,9 @@ button>.loading-icon {
 	font-size: 5vh;
 	padding: 3vh 3vh;
 	margin: 3vh 4vmin;
+}
+.appcache_updated_version {
+	font-family: monospace;
 }
 
 @media screen and (max-aspect-ratio: 3/4) {

@@ -1,8 +1,3 @@
-offline webapp Manifest (only in production)
-	amend hash with &updated before reloading -> show a notification
-	make sure network requests to CourtSpot etc. work
-	automatically update if updateready event is shortly after app start and not yet initialized
-
 btde: Enter player names upon start if some are missing (if incomplete)
 international RTTO 3.7.2 for red cards before game
 manual game creation on smartphones
@@ -112,6 +107,7 @@ use court name in 20s announcements
 shortcuts u/r undo/redo
 eliminate uses of match.game_score; use match.team1_won instead
 title for all buttons
+make buttons larger in landscape on smartphones
 scoresheet: begin and end on different days
 display mode for multiple courts (via WebRTC)
 WebRTC bootstrapping without Internet (QR code? UDP multicast?)
@@ -133,6 +129,7 @@ move scoresheet press handling after state_calc (and use servers of game)
 test red card (scoresheet/pronounciation) before any game (before match end)
 undo without redo back to start should reset begin in umpire scoresheet
 cursor for buttons?
+split CSS in multiple files
 loading bup.. teaser in HTML for very slow connections
 network: add an option to change court
 network: color/opacity in match list by state
@@ -162,6 +159,7 @@ use deep equality instead of checking score[0] == ..score[0] && score[1] == ..sc
 manual editing in portrait (maybe distinguish by aspect ratio?)
 capture back button (warning if leaving while game is running)
 improve settings display on smartphone
+investigate performance of timers
 test svg_path_lines
 test that singles with pick_receiver works just fine
 minify HTML

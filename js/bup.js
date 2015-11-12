@@ -12,7 +12,7 @@ function init() {
 
 function ui_init() {
 	var bup_version = 'dev';
-	$('#version').text(bup_version);
+	$('.version').text(bup_version);
 
 	appcache.ui_init();
 	$('#script_jspdf').on('load', scoresheet.jspdf_loaded);
@@ -48,6 +48,10 @@ function ui_init() {
 
 	if (state.settings.go_fullscreen) {
 		fullscreen.autostart();
+	}
+
+	if (hash_query.updated !== undefined) {
+		appcache.on_post_update(bup_version);
 	}
 }
 
