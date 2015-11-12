@@ -183,6 +183,13 @@ function render(s) {
 	} else {
 		switch_right.attr('disabled', 'disabled');
 	}
+
+	var switch_sides = $('.editmode_change-ends');
+	if (s.game.team1_left === null) {
+		switch_sides.attr('disabled', 'disabled');
+	} else {
+		switch_sides.removeAttr('disabled');
+	}
 }
 
 return {

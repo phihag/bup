@@ -6,7 +6,6 @@ edit mode to change sides / change ends
 		ends change should switch score
 
 	disable serve switch when not serving (game.finished) (bottom dialog takes over)
-	disable end switch when not picked
 international RTTO 3.7.2 for red cards before game
 manual game creation on smartphones
 Button "bitte spielen" mehr betonen (icon?)
