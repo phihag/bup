@@ -41,7 +41,7 @@ function ui_init() {
 		networks.courtspot.ui_init(state);
 	} else if (hash_query.btde !== undefined) {
 		networks.btde = btde();
-		networks.btde.ui_init(state);
+		networks.btde.ui_init(state, hash_query);
 	}
 
 	control.load_by_hash();

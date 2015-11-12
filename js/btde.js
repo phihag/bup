@@ -253,7 +253,7 @@ function list_matches(s, cb) {
 	});
 }
 
-function ui_init() {
+function ui_init(s, hash_query) {
 	if (!baseurl) {
 		baseurl = '../';
 	}
@@ -264,14 +264,14 @@ function ui_init() {
 
 	$('.setup_network_container').show();
 
-	var configured = ALL_COURTS.some(function(c) {
-		return state.settings.court_id == c.court_id && state.settings.court_description == c.court_description;
+	var configured = (hash_query.select_court === undefined) && ALL_COURTS.some(function(c) {
+		return s.settings.court_id == c.court_id && s.settings.court_description == c.court_description;
 	});
 	if (! configured) {
 		uiu.make_pick(null, 'Feld auswählen', ALL_COURTS, function(c) {
-			state.settings.court_id = c.court_id;
-			state.settings.court_description = c.court_description;
-			settings.store(state);
+			s.settings.court_id = c.court_id;
+			s.settings.court_description = c.court_description;
+			settings.store(s);
 			settings.update();
 		}, false, $('body'));
 	}
