@@ -1,6 +1,9 @@
 var _ = require('underscore');
 var bup = require('../js/bup');
 
+// Make linter happy
+/*global describe:false, it:false*/
+
 // Trivial runner
 var _describe = ((typeof describe == 'undefined') ?
 	function(s, f) {f();} :
@@ -21,7 +24,7 @@ var SINGLES_SETUP = {
 		players: [{name: 'Bob'}],
 	}],
 	is_doubles: false,
-	counting: '3x21'
+	counting: '3x21',
 };
 var SINGLES_TEAM_SETUP = _.clone(SINGLES_SETUP);
 SINGLES_TEAM_SETUP.teams[0].name = 'A team';
@@ -34,7 +37,7 @@ var DOUBLES_SETUP = {
 		players: [{name: 'Bob'}, {name: 'Birgit'}],
 	}],
 	is_doubles: true,
-	counting: '3x21'
+	counting: '3x21',
 };
 var DOUBLES_TEAM_SETUP = _.clone(DOUBLES_SETUP);
 DOUBLES_TEAM_SETUP.teams[0].name = 'A team';
@@ -43,6 +46,7 @@ DOUBLES_TEAM_SETUP.team_competition = true;
 
 function state_after(presses, setup, settings) {
 	var state = {};
+	state.settings = settings;
 	bup.calc.init_state(state, setup);
 	state.presses = presses;
 	bup.calc.state(state);
@@ -86,14 +90,14 @@ function press_score(presses, left_score, right_score) {
 		if (left_score > 0) {
 			presses.push({
 				type: 'score',
-				side: 'left'
+				side: 'left',
 			});
 			left_score--;
 		}
 		if (right_score > 0) {
 			presses.push({
 				type: 'score',
-				side: 'right'
+				side: 'right',
 			});
 			right_score--;
 		}

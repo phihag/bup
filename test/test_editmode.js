@@ -1095,6 +1095,418 @@ _describe('editmode', function() {
 		assert.deepEqual(s.match.game_score, [2, 0]);
 		assert.strictEqual(s.match.finished, true);
 	});
+
+	_it('serve switching failure', function() {
+		var presses = [{
+		"type": "pick_side",
+		"team1_left": true,
+		"timestamp": 1447303961976
+	},
+	{
+		"type": "pick_server",
+		"team_id": 0,
+		"player_id": 0,
+		"timestamp": 1447303964364
+	},
+	{
+		"type": "pick_receiver",
+		"team_id": 1,
+		"player_id": 0,
+		"timestamp": 1447303965523
+	},
+	{
+		"type": "love-all",
+		"timestamp": 1447303965898
+	},
+	{
+		"type": "editmode_set-score",
+		"score": {
+			"winner": "inprogress",
+			"left": 2,
+			"right": 0
+		},
+		"by_side": true,
+		"timestamp": 1447303976647
+	},
+	{
+		"type": "editmode_set-finished_games",
+		"scores": [
+			{
+				"winner": "left",
+				"left": 21,
+				"right": 0
+			}
+		],
+		"by_side": true,
+		"timestamp": 1447303976759
+	},
+	{
+		"type": "editmode_set-score",
+		"score": {
+			"winner": "inprogress",
+			"left": 0,
+			"right": 0
+		},
+		"by_side": true,
+		"timestamp": 1447303976767
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447303980820
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447303981526
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447303981741
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447303981977
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447303982419
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447303982590
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447303982830
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447303983115
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447303983294
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447303983547
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447303983773
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447303986829
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447303989125
+	},
+	{
+		"type": "editmode_set-score",
+		"score": {
+			"winner": "inprogress",
+			"left": 0,
+			"right": 5
+		},
+		"by_side": true,
+		"timestamp": 1447303995548
+	},
+	{
+		"type": "editmode_set-score",
+		"score": {
+			"winner": "inprogress",
+			"left": 2,
+			"right": 5
+		},
+		"by_side": true,
+		"timestamp": 1447303997414
+	},
+	{
+		"type": "editmode_set-score",
+		"score": {
+			"winner": "left",
+			"left": 21,
+			"right": 5
+		},
+		"by_side": true,
+		"timestamp": 1447303997516
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447303999059
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447303999811
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447304000014
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447304000205
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447304000397
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447304000566
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447304000747
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447304000908
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447304001074
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447304001248
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447304001418
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447304001598
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447304001779
+	},
+	{
+		"type": "editmode_set-score",
+		"score": {
+			"winner": "inprogress",
+			"left": 20,
+			"right": 5
+		},
+		"by_side": true,
+		"timestamp": 1447304007973
+	},
+	{
+		"type": "editmode_set-score",
+		"score": {
+			"winner": "inprogress",
+			"left": 19,
+			"right": 5
+		},
+		"by_side": true,
+		"timestamp": 1447304021969
+	},
+	{
+		"type": "editmode_set-score",
+		"score": {
+			"winner": "inprogress",
+			"left": 18,
+			"right": 5
+		},
+		"by_side": true,
+		"timestamp": 1447304022143
+	},
+	{
+		"type": "editmode_set-score",
+		"score": {
+			"winner": "inprogress",
+			"left": 17,
+			"right": 5
+		},
+		"by_side": true,
+		"timestamp": 1447304022299
+	},
+	{
+		"type": "score",
+		"side": "right",
+		"timestamp": 1447304023536
+	},
+	{
+		"type": "score",
+		"side": "right",
+		"timestamp": 1447304023733
+	},
+	{
+		"type": "score",
+		"side": "right",
+		"timestamp": 1447304023881
+	},
+	{
+		"type": "score",
+		"side": "right",
+		"timestamp": 1447304024029
+	},
+	{
+		"type": "score",
+		"side": "right",
+		"timestamp": 1447304024166
+	},
+	{
+		"type": "score",
+		"side": "right",
+		"timestamp": 1447304024354
+	},
+	{
+		"type": "score",
+		"side": "right",
+		"timestamp": 1447304024543
+	},
+	{
+		"type": "score",
+		"side": "right",
+		"timestamp": 1447304024638
+	},
+	{
+		"type": "score",
+		"side": "right",
+		"timestamp": 1447304024796
+	},
+	{
+		"type": "score",
+		"side": "right",
+		"timestamp": 1447304024965
+	},
+	{
+		"type": "score",
+		"side": "right",
+		"timestamp": 1447304025125
+	},
+	{
+		"type": "score",
+		"side": "right",
+		"timestamp": 1447304025337
+	},
+	{
+		"type": "score",
+		"side": "right",
+		"timestamp": 1447304025512
+	},
+	{
+		"type": "score",
+		"side": "right",
+		"timestamp": 1447304025705
+	},
+	{
+		"type": "score",
+		"side": "right",
+		"timestamp": 1447304025853
+	},
+	{
+		"type": "score",
+		"side": "right",
+		"timestamp": 1447304028050
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447304028934
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447304029591
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447304029848
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447304030004
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447304030198
+	},
+	{
+		"type": "editmode_change-ends",
+		"timestamp": 1447304036905
+	},
+	{
+		"type": "editmode_change-ends",
+		"timestamp": 1447304037972
+	},
+	{
+		"type": "editmode_change-ends",
+		"timestamp": 1447304038661
+	},
+	{
+		"type": "editmode_change-ends",
+		"timestamp": 1447304039424
+	},
+	{
+		"type": "editmode_change-ends",
+		"timestamp": 1447304124115
+	},
+	{
+		"type": "editmode_set-score",
+		"score": {
+			"winner": "inprogress",
+			"left": 0,
+			"right": 17
+		},
+		"by_side": true,
+		"timestamp": 1447304136751
+	},
+	{
+		"type": "editmode_set-score",
+		"score": {
+			"winner": "inprogress",
+			"left": 0,
+			"right": 0
+		},
+		"by_side": true,
+		"timestamp": 1447304137887
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447304673044
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447304674079
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447304674278
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447304674466
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447304674651
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447304674815
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447304675396
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447304675630
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447304676487
+	},
+	{
+		"type": "editmode_change-serve",
+		"timestamp": 1447304692207
+	}
+]; 
+		// TODO test somethign
+	});
 });
 
 })();
