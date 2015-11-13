@@ -298,11 +298,20 @@ function set_current(s) {
 		window.location.hash = '#' + hval;
 	}
 
-	if (s === null) {
-		
-	} else {
-		
+	var title = '';
+	if (s) {
+		if (s.setup.match_name) {
+			title += s.setup.match_name + ' - ';
+		}
+		if (state.setup.is_doubles) {
+			title += state.setup.teams[0].players[0].name + ' / ' + state.setup.teams[0].players[1].name + ' vs ' + state.setup.teams[1].players[0].name + ' / ' + state.setup.teams[1].players[1].name;
+		} else {
+			title += state.setup.teams[0].players[0].name + ' vs ' + state.setup.teams[1].players[0].name;
+		}
+		title += ' - ';
 	}
+	title += 'Badminton Umpire Panel';
+	document.title = title;
 }
 
 function ui_init() {
