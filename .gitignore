@@ -2,3 +2,5 @@ node_modules
 libs
 dist
 coverage
+mail.*
+

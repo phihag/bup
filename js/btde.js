@@ -1,4 +1,4 @@
-var btde = (function(baseurl) {
+function btde(baseurl) {
 'use strict';
 
 var ALL_COURTS = [{
@@ -288,7 +288,7 @@ return {
 	_parse_match_list: _parse_match_list,
 };
 
-});
+}
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {

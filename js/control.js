@@ -298,7 +298,11 @@ function set_current(s) {
 		window.location.hash = '#' + hval;
 	}
 
-	// TODO set title
+	if (s === null) {
+		
+	} else {
+		
+	}
 }
 
 function ui_init() {

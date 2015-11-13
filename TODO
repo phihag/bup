@@ -1,21 +1,19 @@
-switching failure
-send mail to Ulf, Marius, Manuel
-	Marius: &select_court
-
-update automatically when downloading in first second
+set window title (include match_name)
 edit mode to change sides / change ends
 	write automated tests for editing
-		test score change
 		test player side change
 		test ends change
 		ends change should switch score
-
-	disable serve switch when not serving (game.finished) (bottom dialog takes over)
+ 	disable serve switch when not serving (game.finished) (bottom dialog takes over)
 international RTTO 3.7.2 for red cards before game
 manual game creation on smartphones
+button proportions on various smartphones and tablets
 Button "bitte spielen" mehr betonen (icon?)
 fix display without vw (see Manuel, https://github.com/saabi/vminpoly)
 retest Manuel's notes
+send mail to Ulf, Marius, Manuel, Werner Durow, Jörg, Susanne
+
+liveaw 2.0 (RL Manuel + Benedikt)
 
 check whether we have a copy of a network game to resume from, offer it
 	offer both network and local version if they differ
@@ -102,7 +100,6 @@ make every button keyboard usable
 	undo/redo (Ctrl+Z/Y)
 prevent retired after game
 test black card before game start
-set window title (include match_name)
 up/down keys to switch between options; left-right for punishments
 display mode (tap anywhere to exit)
 	replay game in slow motion / real time (in display mode)
@@ -159,7 +156,6 @@ badmintonticker.de: support names without comma when reading player list
 investigate high GPU usage (transparency?)
 editing score (this / previous game) after retiring / disqualification
 restart network resync interval if network settings change
-use deep equality instead of checking score[0] == ..score[0] && score[1] == ..score[1]
 manual editing in portrait (maybe distinguish by aspect ratio?)
 capture back button (warning if leaving while game is running)
 improve settings display on smartphone
@@ -169,9 +165,8 @@ test that singles with pick_receiver works just fine
 minify HTML
 implement service workers as well as appcache
 convert static (in HTML) pickers to team_pick / player_pick etc.
-remove JS stubs with /*@PRODUCTION*/ comments
-function btde instead of var btde = function
 move manual editing confirm button to bottom (with white border) and give it a text "Übernehmen"
+click court name to get into change court dialog (show button in editmode)
 -> Demo Jörg H, Manuel, Susanne, Werner Durow
 -> Jens Köster fragen wegen zweimal gelbe Karte
 -> Jens Köster fragen wegen C

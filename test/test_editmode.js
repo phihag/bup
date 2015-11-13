@@ -1096,7 +1096,7 @@ _describe('editmode', function() {
 		assert.strictEqual(s.match.finished, true);
 	});
 
-	_it('serve switching failure', function() {
+	_it('setting score and unsetting it again', function() {
 		var presses = [{
 			type: 'pick_side',
 			team1_left: true,
@@ -1104,298 +1104,84 @@ _describe('editmode', function() {
 			type: 'pick_server',
 			team_id: 0,
 			player_id: 0,
-		},
-		{
+		}, {
 			type: 'pick_receiver',
 			team_id: 1,
 			player_id: 0,
-		},
-		{
+		}, {
 			type: 'love-all',
-		},
-		{
-			type: 'editmode_set-score',
-			score: {
-				left: 2,
-				right: 0,
-			},
-			by_side: true,
-		},
-		{
-			type: 'editmode_set-finished_games',
-			scores: [{
-				left: 21,
-				right: 0,
-			}],
-			by_side: true,
-		},
-		{
-			type: 'editmode_set-score',
-			score: {
-				left: 0,
-				right: 0,
-			},
-			by_side: true,
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_set-score',
-			score: {
-				left: 0,
-				right: 5,
-			},
-			by_side: true,
-		},
-		{
-			type: 'editmode_set-score',
-			score: {
-				left: 2,
-				right: 5,
-			},
-			by_side: true,
-		},
-		{
-			type: 'editmode_set-score',
-			score: {
-				left: 21,
-				right: 5,
-			},
-			by_side: true,
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_set-score',
-			score: {
-				left: 20,
-				right: 5,
-			},
-			by_side: true,
-		},
-		{
-			type: 'editmode_set-score',
-			score: {
-				left: 19,
-				right: 5,
-			},
-			by_side: true,
-		},
-		{
-			type: 'editmode_set-score',
-			score: {
-				left: 18,
-				right: 5,
-			},
-			by_side: true,
-		},
-		{
-			type: 'editmode_set-score',
-			score: {
-				left: 17,
-				right: 5,
-			},
-			by_side: true,
-		},
-		{
-			type: 'score',
-			side: 'right',
-		},
-		{
-			type: 'score',
-			side: 'right',
-		},
-		{
-			type: 'score',
-			side: 'right',
-		},
-		{
-			type: 'score',
-			side: 'right',
-		},
-		{
-			type: 'score',
-			side: 'right',
-		},
-		{
-			type: 'score',
-			side: 'right',
-		},
-		{
-			type: 'score',
-			side: 'right',
-		},
-		{
-			type: 'score',
-			side: 'right',
-		},
-		{
-			type: 'score',
-			side: 'right',
-		},
-		{
-			type: 'score',
-			side: 'right',
-		},
-		{
-			type: 'score',
-			side: 'right',
-		},
-		{
-			type: 'score',
-			side: 'right',
-		},
-		{
-			type: 'score',
-			side: 'right',
-		},
-		{
-			type: 'score',
-			side: 'right',
-		},
-		{
-			type: 'score',
-			side: 'right',
-		},
-		{
-			type: 'score',
-			side: 'right',
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_change-serve',
-		},
-		{
-			type: 'editmode_change-ends',
-		},
-		{
-			type: 'editmode_change-ends',
-		},
-		{
-			type: 'editmode_change-ends',
-		},
-		{
-			type: 'editmode_change-ends',
-		},
-		{
-			type: 'editmode_change-ends',
-		},
-		{
-			type: 'editmode_set-score',
-			score: {
-				left: 0,
-				right: 17,
-			},
-			by_side: true,
-		},
-		{
-			type: 'editmode_set-score',
-			score: {
-				left: 0,
-				right: 0,
-			},
-			by_side: true,
-		},
-		];
-
+		}];
 		var s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.match.finished_games.length, 0);
 		assert.deepEqual(s.game.score, [0, 0]);
 		assert.strictEqual(s.game.team1_serving, true);
-		assert.strictEqual(s.court.serving_downwards, true);
+		assert.strictEqual(s.game.teams_player1_even[0], true);
+		assert.strictEqual(s.game.teams_player1_even[1], true);
+		assert.strictEqual(s.court.serving_downwards, false);
+		assert.strictEqual(s.court.left_serving, true);
 
+		presses.push({
+			type: 'editmode_set-score',
+			score: [21, 5],
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.match.finished_games.length, 0);
+		assert.deepEqual(s.game.score, [21, 5]);
+		assert.strictEqual(s.game.team1_serving, null);
+		assert.strictEqual(s.game.teams_player1_even[0], true);
+		assert.strictEqual(s.game.teams_player1_even[1], true);
+		assert.strictEqual(s.court.serving_downwards, null);
+		assert.strictEqual(s.court.left_serving, null);
+
+		presses.push({
+			type: 'editmode_set-score',
+			score: [0, 0],
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.match.finished_games.length, 0);
+		assert.deepEqual(s.game.score, [0, 0]);
+		assert.strictEqual(s.game.team1_serving, true);
+		assert.strictEqual(s.game.teams_player1_even[0], true);
+		assert.strictEqual(s.game.teams_player1_even[1], true);
+		assert.strictEqual(s.court.serving_downwards, false);
+		assert.strictEqual(s.court.left_serving, true);
+
+		presses.push({
+			type: 'editmode_set-score',
+			score: [2, 4],
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.match.finished_games.length, 0);
+		assert.deepEqual(s.game.score, [2, 4]);
+		assert.strictEqual(s.game.teams_player1_even[0], true);
+		assert.strictEqual(s.game.teams_player1_even[1], true);
+		assert.strictEqual(s.game.team1_serving, true);
+		assert.strictEqual(s.court.serving_downwards, false);
+		assert.strictEqual(s.court.left_serving, true);
 
 		presses.push({
 			type: 'editmode_change-serve',
 		});
 		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.match.finished_games.length, 0);
+		assert.deepEqual(s.game.score, [2, 4]);
+		assert.strictEqual(s.game.teams_player1_even[0], true);
+		assert.strictEqual(s.game.teams_player1_even[1], true);
+		assert.strictEqual(s.game.team1_serving, false);
+		assert.strictEqual(s.court.serving_downwards, true);
+		assert.strictEqual(s.court.left_serving, false);
 
-		// TODO test somethign
-
+		presses.push({
+			type: 'editmode_change-serve',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.match.finished_games.length, 0);
+		assert.deepEqual(s.game.score, [2, 4]);
+		assert.strictEqual(s.game.teams_player1_even[0], true);
+		assert.strictEqual(s.game.teams_player1_even[1], true);
+		assert.strictEqual(s.game.team1_serving, true);
+		assert.strictEqual(s.court.serving_downwards, false);
+		assert.strictEqual(s.court.left_serving, true);
 	});
 });
 

@@ -159,6 +159,9 @@ function recalc_after_score(s, team_id, press) {
 			s.match.finished = true;
 			s.match.team1_won = team1_won;
 		}
+		if (s.game.team1_serving !== null) {
+			s.game.team1_serving_last = s.game.team1_serving;
+		}
 		s.game.team1_serving = null;
 		s.game.service_over = null;
 	} else if (! press.type.match(/^editmode_.*/)) {
@@ -397,6 +400,9 @@ function calc_press(s, press) {
 		s.game.team1_won = null;
 		s.match.finished = false;
 		s.match.team1_won = null;
+		if ((s.game.team1_serving === null) && (s.game.team1_serving_last !== undefined)) {
+			s.game.team1_serving = s.game.team1_serving_last;
+		}
 		recalc_after_score(s, s.game.team1_serving ? 0 : 1, press);
 		break;
 	case 'editmode_set-finished_games':
