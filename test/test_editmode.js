@@ -910,7 +910,7 @@ _describe('editmode', function() {
 			'und zu meiner Linken, Alice.\n' +
 			'Alice schlägt auf.\n' +
 			'3-0.\n' +
-			'Bitte spielen'
+			'Bitte spielen.'
 		);
 	});
 

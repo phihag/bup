@@ -35,7 +35,7 @@ function loveall_announcement(s) {
 		prefix = 'Entscheidungssatz. ';
 	}
 
-	return prefix + _pronounciation_score(s) + '.\nBitte spielen';
+	return prefix + '0 beide.\nBitte spielen';
 }
 
 function postgame_announcement(s) {
@@ -114,11 +114,7 @@ function pronounce(s) {
 		}
 	});
 
-	if (s.match.announce_pregame) {
-		if (s.match.finished_games.length > 0) {
-			return mark_str + loveall_announcement(s);
-		}
-
+	if (s.match.announce_pregame && s.match.finished_games.length === 0) {
 		var serving_team_id = s.game.team1_serving ? 0 : 1;
 		var receiving_team_id = 1 - serving_team_id;
 
@@ -136,7 +132,7 @@ function pronounce(s) {
 				'Zu meiner ' + (s.game.team1_left ? 'Rechten' : 'Linken') + ', ' + _prematch_team(s, 1) + ',\n' +
 				'und zu meiner ' + (s.game.team1_left ? 'Linken' : 'Rechten') + ', ' + _prematch_team(s, 0) + '.\n' +
 				s.setup.teams[serving_team_id].name + ' schlägt auf' + (s.setup.is_doubles ? (', ' + server_name + ' zu ' + receiver_name) : '') + '.\n' +
-				loveall_announcement(s)
+				_pronounciation_score(s) + '.\nBitte spielen.'
 			);
 		} else {
 			return (
@@ -145,9 +141,30 @@ function pronounce(s) {
 				'Zu meiner Rechten, ' + _prematch_team(s, (s.game.team1_left ? 1 : 0)) + ',\n' +
 				'und zu meiner Linken, ' + _prematch_team(s, (s.game.team1_left ? 0 : 1)) + '.\n' +
 				server_name + ' schlägt auf' + (s.setup.is_doubles ? (' zu ' + receiver_name) : '') + '.\n' +
-				loveall_announcement(s)
+				_pronounciation_score(s) + '.\nBitte spielen.'
 			);
 		}
+	}
+
+	if (s.match.announce_pregame) {
+		var res = '';
+		switch (s.match.finished_games.length) {
+		case 1:
+			res = 'Zweiter Satz.';
+			break;
+		case 2:
+			res = 'Entscheidungssatz.';
+			break;
+		}
+
+		res += ' 0 beide.';
+		if (mark_str) {
+			res += '\n' + mark_str + _pronounciation_score(s) + '. ';
+		} else {
+			res += '\n';
+		}
+		res += 'Bitte spielen.';
+		return res;
 	}
 
 	if (s.game.finished) {

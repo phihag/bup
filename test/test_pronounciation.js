@@ -50,7 +50,7 @@ _describe('pronounciation', function() {
 			'und zu meiner Linken, Andrew und Alice.\n' +
 			'Andrew schlägt auf zu Birgit.\n' +
 			'0 beide.\n' +
-			'Bitte spielen'
+			'Bitte spielen.'
 		);
 
 		presses = [{
@@ -73,7 +73,7 @@ _describe('pronounciation', function() {
 			'und zu meiner Linken, Bob und Birgit.\n' +
 			'Alice schlägt auf zu Birgit.\n' +
 			'0 beide.\n' +
-			'Bitte spielen'
+			'Bitte spielen.'
 		);
 
 		presses = [{
@@ -96,7 +96,7 @@ _describe('pronounciation', function() {
 			'und zu meiner Linken, Andrew und Alice.\n' +
 			'Bob schlägt auf zu Alice.\n' +
 			'0 beide.\n' +
-			'Bitte spielen'
+			'Bitte spielen.'
 		);
 	});
 
@@ -125,7 +125,7 @@ _describe('pronounciation', function() {
 			'und zu meiner Linken, Alice.\n' +
 			'Alice schlägt auf.\n' +
 			'0 beide.\n' +
-			'Bitte spielen'
+			'Bitte spielen.'
 		);
 
 		presses = [{
@@ -144,7 +144,7 @@ _describe('pronounciation', function() {
 			'und zu meiner Linken, Bob.\n' +
 			'Alice schlägt auf.\n' +
 			'0 beide.\n' +
-			'Bitte spielen'
+			'Bitte spielen.'
 		);
 
 		presses = [{
@@ -163,7 +163,7 @@ _describe('pronounciation', function() {
 			'und zu meiner Linken, Alice.\n' +
 			'Bob schlägt auf.\n' +
 			'0 beide.\n' +
-			'Bitte spielen'
+			'Bitte spielen.'
 		);
 
 		presses = [{
@@ -182,7 +182,7 @@ _describe('pronounciation', function() {
 			'und zu meiner Linken, Bob.\n' +
 			'Bob schlägt auf.\n' +
 			'0 beide.\n' +
-			'Bitte spielen'
+			'Bitte spielen.'
 		);
 	});
 
@@ -207,7 +207,7 @@ _describe('pronounciation', function() {
 			'und zu meiner Linken, A team, vertreten durch Andrew und Alice.\n' +
 			'A team schlägt auf, Alice zu Birgit.\n' +
 			'0 beide.\n' +
-			'Bitte spielen'
+			'Bitte spielen.'
 		);
 
 		presses = [{
@@ -230,7 +230,7 @@ _describe('pronounciation', function() {
 			'und zu meiner Rechten, A team, vertreten durch Andrew und Alice.\n' +
 			'A team schlägt auf, Alice zu Birgit.\n' +
 			'0 beide.\n' +
-			'Bitte spielen'
+			'Bitte spielen.'
 		);
 
 		presses = [{
@@ -253,7 +253,7 @@ _describe('pronounciation', function() {
 			'und zu meiner Rechten, A team, vertreten durch Andrew und Alice.\n' +
 			'B team schlägt auf, Bob zu Andrew.\n' +
 			'0 beide.\n' +
-			'Bitte spielen'
+			'Bitte spielen.'
 		);
 
 		presses = [{
@@ -276,7 +276,7 @@ _describe('pronounciation', function() {
 			'und zu meiner Linken, A team, vertreten durch Andrew und Alice.\n' +
 			'B team schlägt auf, Birgit zu Andrew.\n' +
 			'0 beide.\n' +
-			'Bitte spielen'
+			'Bitte spielen.'
 		);
 	});
 
@@ -305,7 +305,7 @@ _describe('pronounciation', function() {
 			'und zu meiner Linken, A team, vertreten durch Alice.\n' +
 			'A team schlägt auf.\n' +
 			'0 beide.\n' +
-			'Bitte spielen'
+			'Bitte spielen.'
 		);
 
 		presses = [{
@@ -324,7 +324,7 @@ _describe('pronounciation', function() {
 			'und zu meiner Rechten, A team, vertreten durch Alice.\n' +
 			'A team schlägt auf.\n' +
 			'0 beide.\n' +
-			'Bitte spielen'
+			'Bitte spielen.'
 		);
 
 		presses = [{
@@ -343,7 +343,7 @@ _describe('pronounciation', function() {
 			'und zu meiner Linken, A team, vertreten durch Alice.\n' +
 			'B team schlägt auf.\n' +
 			'0 beide.\n' +
-			'Bitte spielen'
+			'Bitte spielen.'
 		);
 
 		presses = [{
@@ -362,7 +362,7 @@ _describe('pronounciation', function() {
 			'und zu meiner Rechten, A team, vertreten durch Alice.\n' +
 			'B team schlägt auf.\n' +
 			'0 beide.\n' +
-			'Bitte spielen'
+			'Bitte spielen.'
 		);
 	});
 
@@ -649,7 +649,7 @@ _describe('pronounciation', function() {
 		});
 		s = state_after(presses, DOUBLES_TEAM_SETUP);
 		assert.strictEqual(pronounce(s),
-			'Zweiter Satz. 0 beide.\nBitte spielen');
+			'Zweiter Satz. 0 beide.\nBitte spielen.');
 
 		presses.push({
 			type: 'love-all',
@@ -827,7 +827,7 @@ _describe('pronounciation', function() {
 		});
 		s = state_after(presses, SINGLES_TEAM_SETUP);
 		assert.equal(pronounce(s),
-			'Entscheidungssatz. 0 beide.\nBitte spielen');
+			'Entscheidungssatz. 0 beide.\nBitte spielen.');
 		
 		presses.push({
 			type: 'love-all',
@@ -1101,7 +1101,7 @@ _describe('pronounciation', function() {
 			'und zu meiner Linken, Andrew und Alice.\n' +
 			'Andrew schlägt auf zu Birgit.\n' +
 			'0 beide.\n' +
-			'Bitte spielen');
+			'Bitte spielen.');
 		s = state_after(presses, DOUBLES_TEAM_SETUP);
 		assert.equal(pronounce(s),
 			'Andrew, Verwarnung wegen unsportlichen Verhaltens.\n' +
@@ -1111,7 +1111,7 @@ _describe('pronounciation', function() {
 			'und zu meiner Linken, A team, vertreten durch Andrew und Alice.\n' +
 			'A team schlägt auf, Andrew zu Birgit.\n' +
 			'0 beide.\n' +
-			'Bitte spielen');
+			'Bitte spielen.');
 
 		presses.push({
 			type: 'red-card',
@@ -1128,7 +1128,7 @@ _describe('pronounciation', function() {
 			'und zu meiner Linken, Andrew und Alice.\n' +
 			'Andrew schlägt auf zu Birgit.\n' +
 			'0 beide.\n' +
-			'Bitte spielen');
+			'Bitte spielen.');
 		s = state_after(presses, DOUBLES_TEAM_SETUP);
 		assert.equal(pronounce(s),
 			'Andrew, Verwarnung wegen unsportlichen Verhaltens.\n' +
@@ -1139,7 +1139,7 @@ _describe('pronounciation', function() {
 			'und zu meiner Linken, A team, vertreten durch Andrew und Alice.\n' +
 			'A team schlägt auf, Andrew zu Birgit.\n' +
 			'0 beide.\n' +
-			'Bitte spielen');
+			'Bitte spielen.');
 
 		presses.push({
 			type: 'love-all',
@@ -1206,9 +1206,9 @@ _describe('pronounciation', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.deepEqual(s.match.pending_red_cards, []);
 		assert.equal(pronounce(s),
+			'Zweiter Satz. 0 beide.\n' +
 			'Birgit, Fehler wegen unsportlichen Verhaltens.\n' +
-			'Zweiter Satz. 1-0.\n' +
-			'Bitte spielen');
+			'1-0. Bitte spielen.');
 
 		presses.push({
 			type: 'love-all',
@@ -1269,10 +1269,10 @@ _describe('pronounciation', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.deepEqual(s.game.score, [1, 1]);
 		assert.equal(pronounce(s),
+			'Entscheidungssatz. 0 beide.\n' +
 			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
-			'Entscheidungssatz. Aufschlagwechsel. 1 beide.\n' +
-			'Bitte spielen'
+			'Aufschlagwechsel. 1 beide. Bitte spielen.'
 		);
 
 		presses.push({
@@ -1380,10 +1380,11 @@ _describe('pronounciation', function() {
 		assert.deepEqual(s.game.score, [0, 1]);
 		assert.equal(s.game.service_over, true);
 		assert.equal(s.game.team1_serving, false);
+		// See RTT 3.7.2
 		assert.equal(pronounce(s),
+			'Zweiter Satz. 0 beide.\n' +
 			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
-			'Zweiter Satz. Aufschlagwechsel. 1-0.\n' +
-			'Bitte spielen');
+			'Aufschlagwechsel. 1-0. Bitte spielen.');
 
 		presses.push({
 			type: 'love-all',
