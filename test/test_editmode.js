@@ -1223,6 +1223,52 @@ _describe('editmode', function() {
 			'3-5'
 		);
 	});
+
+	_it('synthetic games overwriting natural ones', function() {
+		var presses = [];
+		presses.push({
+			type: 'pick_side', // Alice picks left
+			team1_left: true,
+		});
+		presses.push({
+			type: 'pick_server', // Alice serves
+			team_id: 0,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'love-all',
+		});
+		press_score(presses, 21, 15);
+		presses.push({
+			type: 'postgame-confirm',
+		});
+		press_score(presses, 22, 20);
+		presses.push({
+			type: 'postgame-confirm',
+		});
+		press_score(presses, 5, 3);
+		var s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(s.match.finished_games.length, 2);
+		assert.deepEqual(s.match.finished_games[0].score, [21, 15]);
+		assert.deepEqual(s.match.finished_games[1].score, [20, 22]);
+		assert(! s.match.finished_games[0].synthetic);
+		assert(! s.match.finished_games[1].synthetic);
+		assert.deepEqual(s.game.score, [5, 3]);
+
+		// oops, we noticed it should be 16 in first game
+		presses.push({
+			type: 'editmode_set-finished_games',
+			scores: [[21, 16], [20, 22]],
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(s.match.finished_games.length, 2);
+		assert.deepEqual(s.match.finished_games[0].score, [21, 16]);
+		assert.deepEqual(s.match.finished_games[1].score, [20, 22]);
+		assert(s.match.finished_games[0].synthetic);
+		assert(! s.match.finished_games[1].synthetic);
+		assert.deepEqual(s.game.score, [5, 3]);
+	});
+
 });
 
 })();
