@@ -2472,7 +2472,8 @@ _describe('calc_state', function() {
 		var s = state_after(presses, DOUBLES_SETUP);
 		assert(!s.timer);
 
-		press_score(presses, 10, 5);
+		press_score(presses, 9, 5);
+		press_score(presses, 1, 0);
 		s = state_after(presses, DOUBLES_SETUP);
 		assert(s.timer);
 

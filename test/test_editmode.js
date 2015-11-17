@@ -1183,6 +1183,46 @@ _describe('editmode', function() {
 		assert.strictEqual(s.court.serving_downwards, false);
 		assert.strictEqual(s.court.left_serving, true);
 	});
+
+
+	_it('editing away from an interval', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		}, {
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 0,
+		}, {
+			type: 'love-all',
+		}];
+		press_score(presses, 10, 0);
+		presses.push({
+			type: 'red-card',
+			team_id: 1,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'red-card',
+			team_id: 1,
+			player_id: 1,
+		});
+
+		presses.push({
+			type: 'editmode_set-score',
+			score: [3, 5],
+		});
+
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(
+			bup.pronounciation.pronounce(s),
+			'3-5'
+		);
+	});
 });
 
 })();

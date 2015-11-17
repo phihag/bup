@@ -179,26 +179,37 @@ function recalc_after_score(s, team_id, press) {
 		s.game.team1_serving = team_id === 0;
 	}
 
+	var is_interval = null;
 	if (team_id !== null) {
-		s.game.interval = (
+		is_interval = (
 			(s.game.score[team_id] === 11) && (s.game.score[1 - team_id] < 11)
 		);
+		if (is_interval) { // First time
+			s.game.interval_score = s.game.score.slice();
+			s.game.interval_service_over = s.game.service_over;
+			s.game.interval_team1_serving = s.game.team1_serving;
+			s.game.interval_marks = s.match.marks.slice();
+			if (press.type == 'red-card') {
+				s.game.interval_marks.push(press);
+			}
+			s.timer = {
+				start: press.timestamp,
+				duration: 60 * 1000,
+				exigent: 20499,
+			};
+		}
+		if ((press.type != 'red-card') || is_interval) {
+			s.game.interval = is_interval;
+		}
 	}
 
-	if (s.game.interval) {
-		s.timer = {
-			start: press.timestamp,
-			duration: 60 * 1000,
-			exigent: 20499,
-		};
-	} else if (s.game.finished && !s.match.finished) {
+	if (s.game.finished && !s.match.finished) {
 		s.timer = {
 			start: press.timestamp,
 			duration: 120 * 1000,
 			exigent: 20499,
 		};
-	} else if (press.type != 'red-card') {
-		// Do not interrupt timers on red cards
+	} else if (! s.game.interval) {
 		s.timer = false;
 	}
 

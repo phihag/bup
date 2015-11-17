@@ -1638,6 +1638,170 @@ _describe('pronounciation', function() {
 			'Andrew, disqualifiziert wegen unsportlichen Verhaltens.\n' +
 			'Das Spiel wurde gewonnen von Bob und Birgit mit 19-21');
 	});
+
+	_it('red card at interval (RTTO 3.7.2 after November 9th 2015)', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		}, {
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 0,
+		}, {
+			type: 'love-all',
+		}];
+		var base_presses = presses.slice();
+
+		press_score(presses, 9, 7);
+		press_score(presses, 2, 0);
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.game.interval, true);
+		assert.deepEqual(s.game.score, [11, 7]);
+		assert.equal(pronounce(s),
+			'11-7 Pause');
+
+		presses.push({
+			type: 'red-card',
+			team_id: 1,
+			player_id: 1,
+		});
+
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.game.interval, true);
+		assert.deepEqual(s.game.score, [12, 7]);
+		assert.deepEqual(s.game.interval_score, [11, 7]);
+		assert.equal(pronounce(s),
+			'11-7 Pause.\n' +
+			'Birgit, Fehler wegen unsportlichen Verhaltens.\n' +
+			'12-7. Bitte spielen.');
+
+		presses = base_presses.slice();
+		press_score(presses, 9, 7);
+		press_score(presses, 2, 0);
+		presses.push({
+			type: 'red-card',
+			team_id: 0,
+			player_id: 1,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.game.interval, true);
+		assert.deepEqual(s.game.score, [11, 8]);
+		assert.deepEqual(s.game.interval_score, [11, 7]);
+		assert.equal(pronounce(s),
+			'11-7 Pause.\n' +
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 8-11. Bitte spielen.');
+
+		presses.push({
+			type: 'red-card',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.game.interval, true);
+		assert.deepEqual(s.game.score, [12, 8]);
+		assert.deepEqual(s.game.interval_score, [11, 7]);
+		assert.equal(pronounce(s),
+			'11-7 Pause.\n' +
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 12-8. Bitte spielen.');
+	});
+
+	_it('Getting to the interval with a red card', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		}, {
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 0,
+		}, {
+			type: 'love-all',
+		}];
+		press_score(presses, 9, 10);
+		press_score(presses, 1, 0);
+		var first_red_card = {
+			type: 'red-card',
+			team_id: 0,
+			player_id: 0,
+		};
+		presses.push(first_red_card);
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.game.interval, true);
+		assert.deepEqual(s.game.score, [10, 11]);
+		assert.deepEqual(s.match.marks, [
+			first_red_card,
+		]);
+		assert.equal(pronounce(s),
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 11-10 Pause');
+
+		var referee = {
+			type: 'referee',
+		};
+		presses.push(referee);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.game.interval, true);
+		assert.deepEqual(s.game.score, [10, 11]);
+		assert.deepEqual(s.match.marks, [
+			first_red_card,
+			referee,
+		]);
+		assert.equal(pronounce(s),
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 11-10 Pause');
+		var sav_presses = presses.slice();
+
+		var second_red_card = {
+			type: 'red-card',
+			team_id: 1,
+			player_id: 0,
+		};
+		presses.push(second_red_card);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.game.interval, true);
+		assert.deepEqual(s.game.score, [11, 11]);
+		assert.deepEqual(s.match.marks, [
+			first_red_card,
+			referee,
+			second_red_card,
+		]);
+		assert.equal(pronounce(s),
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 11-10 Pause.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 11 beide. Bitte spielen.');
+
+		var red_card2b = {
+			type: 'red-card',
+			team_id: 0,
+			player_id: 1,
+		};
+		presses = sav_presses.slice();
+		presses.push(red_card2b);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.game.interval, true);
+		assert.deepEqual(s.game.score, [10, 12]);
+		assert.deepEqual(s.match.marks, [
+			first_red_card,
+			referee,
+			red_card2b,
+		]);
+		assert.equal(pronounce(s),
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 11-10 Pause.\n' +
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'12-10. Bitte spielen.');
+	});
 });
 
 })();

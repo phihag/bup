@@ -1,4 +1,5 @@
-international RTTO 3.7.2 at 11
+test ending game/match with red card and pronounciation
+
 
 edit mode to change sides / change ends
 	write automated tests for editing
@@ -14,6 +15,7 @@ retest Manuel's notes
 send mail to Ulf, Marius, Manuel, Werner Durow, Jörg, Susanne
 
 liveaw 2.0 (RL Manuel + Benedikt)
+	import
 
 check whether we have a copy of a network game to resume from, offer it
 	offer both network and local version if they differ
@@ -165,6 +167,7 @@ test that singles with pick_receiver works just fine
 minify HTML
 implement service workers as well as appcache
 convert static (in HTML) pickers to team_pick / player_pick etc.
+consider eliminating love-all
 move manual editing confirm button to bottom (with white border) and give it a text "Übernehmen"
 click court name to get into change court dialog (show button in editmode)
 -> Demo Jörg H, Manuel, Susanne, Werner Durow

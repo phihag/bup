@@ -85,34 +85,51 @@ function _prematch_team(s, team_id) {
 	return res;
 }
 
-function _pronounciation_score(s) {
-	var first_score = s.game.score[s.game.team1_serving ? 0 : 1];
-	var second_score = s.game.score[s.game.team1_serving ? 1 : 0];
+function _pronounciation_score(s, score, team1_serving, service_over) {
+	if (score === undefined) {
+		score = s.game.score;
+	}
+	if (team1_serving === undefined) {
+		team1_serving = s.game.team1_serving;
+	}
+	if (service_over === undefined) {
+		service_over = s.game.service_over;
+	}
+	var first_score = score[team1_serving ? 0 : 1];
+	var second_score = score[team1_serving ? 1 : 0];
 	var point_str = (s.game.gamepoint ? ' Satzpunkt' : (s.game.matchpoint ? ' Spielpunkt' : ''));
-	var score_str = (first_score == second_score) ? (first_score + point_str + ' beide') : (first_score + (point_str ? (point_str + ' ') : '-') + second_score);
-	var service_over_str = (s.game.service_over ? 'Aufschlagwechsel. ' : '');
-	var interval_str = (s.game.interval ? ' Pause' : '') + (s.game.change_sides ? '. Bitte die Spielfeldseiten wechseln' : '');
-	return service_over_str + score_str + interval_str;
+	var score_str = (
+		(first_score == second_score) ?
+		(first_score + point_str + ' beide') :
+		(first_score + (point_str ? (point_str + ' ') : '-') + second_score)
+	);
+	var service_over_str = (service_over ? 'Aufschlagwechsel. ' : '');
+	return service_over_str + score_str;
 }
 
-function pronounce(s) {
-	var mark_str = '';
-	s.match.marks.forEach(function(mark) {
+function marks2str(s, marks) {
+	var res = '';
+	marks.forEach(function(mark) {
 		switch (mark.type) {
 		case 'yellow-card':
-			mark_str += s.setup.teams[mark.team_id].players[mark.player_id].name + ', Verwarnung wegen unsportlichen Verhaltens.\n';
+			res += s.setup.teams[mark.team_id].players[mark.player_id].name + ', Verwarnung wegen unsportlichen Verhaltens.\n';
 			break;
 		case 'red-card':
-			mark_str += s.setup.teams[mark.team_id].players[mark.player_id].name + ', Fehler wegen unsportlichen Verhaltens.\n';
+			res += s.setup.teams[mark.team_id].players[mark.player_id].name + ', Fehler wegen unsportlichen Verhaltens.\n';
 			break;
 		case 'disqualified':
-			mark_str += s.setup.teams[mark.team_id].players[mark.player_id].name + ', disqualifiziert wegen unsportlichen Verhaltens.\n';
+			res += s.setup.teams[mark.team_id].players[mark.player_id].name + ', disqualifiziert wegen unsportlichen Verhaltens.\n';
 			break;
 		case 'retired':
-			mark_str += s.setup.teams[mark.team_id].players[mark.player_id].name + ' gibt auf.\n';
+			res += s.setup.teams[mark.team_id].players[mark.player_id].name + ' gibt auf.\n';
 			break;
 		}
 	});
+	return res;
+}
+
+function pronounce(s) {
+	var mark_str = marks2str(s, s.match.marks);
 
 	if (s.match.announce_pregame && s.match.finished_games.length === 0) {
 		var serving_team_id = s.game.team1_serving ? 0 : 1;
@@ -144,9 +161,7 @@ function pronounce(s) {
 				_pronounciation_score(s) + '.\nBitte spielen.'
 			);
 		}
-	}
-
-	if (s.match.announce_pregame) {
+	} else if (s.match.announce_pregame) {
 		var res = '';
 		switch (s.match.finished_games.length) {
 		case 1:
@@ -175,7 +190,28 @@ function pronounce(s) {
 		if ((s.game.score[0] === 0) && (s.game.score[1] === 0) && !mark_str) {
 			return null;  // Special case at 0-0, we just showed the long text. Time to focus on the game.
 		}
-		return mark_str + _pronounciation_score(s);
+
+		var interval_str = (s.game.interval ? ' Pause' : '') + (s.game.change_sides ? '. Bitte die Spielfeldseiten wechseln' : '');
+		if (s.game.interval && mark_str) {
+			var pre_mark_str = marks2str(s, s.game.interval_marks);
+			var post_interval_marks = s.match.marks.slice(s.game.interval_marks.length);
+
+			if (post_interval_marks.length > 0) {
+				var post_mark_str = marks2str(s, post_interval_marks);
+				if (post_mark_str) {
+					// Only use extended form if it's more than just a referee call
+					return (
+						pre_mark_str +
+						_pronounciation_score(s, s.game.interval_score, s.game.interval_team1_serving, s.game.interval_service_over) +
+						interval_str + '.\n' +
+						post_mark_str +
+						_pronounciation_score(s) + '. Bitte spielen.'
+					);
+				}
+			}
+		}
+
+		return mark_str + _pronounciation_score(s) + interval_str;
 	}
 
 	if (mark_str) {
