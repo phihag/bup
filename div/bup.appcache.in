@@ -6,7 +6,7 @@ CACHE:
 index.html
 icons/favicon.png
 icons/loading.gif
-bup.min.css
+bup.dist.css
 bup.dist.js
 jspdf.dist.js
 

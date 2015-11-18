@@ -36,9 +36,9 @@ appcache-manifest:
 dist: cleandist
 	mkdir -p dist/bup
 
-	node div/make_dist.js bup.html dist/bup/index.html dist/bup/bup.dist.js dist/tmp
+	node div/make_dist.js . dist/bup/ dist/tmp
+
 	cp libs/jspdf.min.js dist/bup/jspdf.dist.js
-	<bup.css cleancss -o dist/bup/bup.min.css
 	svgo -f icons/ -o dist/bup/icons/
 	cp icons/*.gif icons/*.png dist/bup/icons/
 	cp div/dist_htaccess dist/bup/.htaccess
@@ -64,10 +64,10 @@ test:
 lint: jshint eslint
 
 jshint:
-	@jshint js/*.js div/*.js test/*.js
+	@jshint js/*.js div/*.js test/*.js div/*.js
 
 eslint:
-	@eslint js/*.js div/*.js test/*.js
+	@eslint js/*.js div/*.js test/*.js div/*.js
 
 coverage:
 	istanbul cover _mocha -- -R spec

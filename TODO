@@ -1,7 +1,6 @@
-manual game creation on smartphones
-split singles / doubles in divs
+manual game creation on smartphones (and tablets and desktops)
 
-settings font size on smartphones
+timer overlay is broken on smartphone
 button proportions on various smartphones and tablets
 fix display without vw (see Manuel, https://github.com/saabi/vminpoly)
 retest Manuel's notes
@@ -125,11 +124,11 @@ move scoresheet press handling after state_calc (and use servers of game)
 test red card (scoresheet/pronounciation) before any game (before match end)
 undo without redo back to start should reset begin in umpire scoresheet
 cursor for buttons?
-split CSS in multiple files
 loading bup.. teaser in HTML for very slow connections
 network: color/opacity in match list by state
 Schiedsrichterzettel auch im Bundesliga-Design
 limit available courts when network is in use
+move scoresheet SVG into separate file
 mock courtspot and write automated tests
 dynamically create favicon (score? match name? court name?)
 replace s.scoresheet_game with sg to save space
@@ -158,6 +157,7 @@ Button "bitte spielen" mehr betonen (icon?)
 test that singles with pick_receiver works just fine
 minify HTML
 implement service workers as well as appcache
+CSS: check that we combine media rules in practice with cleancss
 convert static (in HTML) pickers to team_pick / player_pick etc.
 consider eliminating love-all
 move manual editing confirm button to bottom (with white border) and give it a text "Übernehmen"

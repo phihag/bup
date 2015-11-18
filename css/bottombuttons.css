@@ -1,0 +1,37 @@
+#pronounciation {
+	padding-top: 0;
+}
+#pronounciation>span {
+	display: block;
+	color: #444;
+	white-space: pre-wrap;
+	padding: 2vmin 0 2vmin 0;
+}
+
+#left_score, #right_score {
+	position: absolute;
+	font-size: 15vmin;
+	padding: 4vmin;
+	bottom: 1vmin;
+	z-index: 200;
+}
+#left_score {
+	left: 1vmin;
+}
+#right_score {
+	right: 1vmin;
+}
+
+@media screen and (max-aspect-ratio: 3/4) {
+	#left_score, #right_score {
+		font-size: 20vmin;
+		padding: 1vmin;
+		bottom: 0;
+		width: 25vmin;
+		height: 25vmin;
+	}
+
+	#pronounciation {
+		bottom: 25vmin;
+	}
+}

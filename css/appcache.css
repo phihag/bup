@@ -1,0 +1,25 @@
+.appcache_update {
+	font-size: 5vh;
+	margin-bottom: 4vh;
+}
+.appcache_update>button {
+	font-size: 5vh;
+	padding: 1vh 2vh;
+}
+.appcache_update_ingame, .appcache_updated_wrapper, .appcache_updating_wrapper {
+	background: rgba(255, 255, 255, 0.95);
+	font-size: 4vh;
+	z-index: 10000;
+	position: absolute;
+	top: 0; left: 0; right: 0;
+	padding: 4vh 2vmin 5vh 2vmin;
+	text-align: center;
+}
+.appcache_update_ingame>button {
+	font-size: 5vh;
+	padding: 3vh 3vh;
+	margin: 3vh 4vmin;
+}
+.appcache_updated_version {
+	font-family: monospace;
+}

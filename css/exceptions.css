@@ -1,0 +1,41 @@
+
+.exception_dialog {
+	vertical-align: top;
+	text-align: center;
+}
+.exception_dialog>div {
+	display: inline-block;
+	text-align: center;
+	font-size: 3vmin;
+	vertical-align: top;
+	margin: 2vmin;
+}
+.exception_dialog>div>span {
+	white-space: pre-wrap;
+}
+.exception_dialog>div>button {
+	width: 20vmin;
+	height: 20vmin;
+	font-size: 16vmin;
+	display: block;
+}
+#exception_yellow>span {
+	background-image: url(../icons/exception_yellow.svg);
+}
+#exception_red>span {
+	background-image: url(../icons/exception_red.svg);
+}
+#exception_black>span {
+	background-image: url(../icons/exception_black.svg);
+}
+
+.yellow-card-image {
+	text-align: middle;
+	margin-right: 0.4em;
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	background-image: url(../icons/yellow-card.svg);
+	background-repeat: no-repeat;
+	background-size: 100%;
+}

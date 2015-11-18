@@ -7,10 +7,21 @@
 	<meta name="mobile-web-app-capable" content="yes">
 	<link rel="shortcut icon" type="image/png" href="icons/favicon.png"/>
 <!--@DEV-->
+	<link rel="stylesheet" href="css/settings.css" />
+	<link rel="stylesheet" href="css/editmode.css" />
+	<link rel="stylesheet" href="css/scoresheet.css" />
+	<link rel="stylesheet" href="css/court.css" />
+	<link rel="stylesheet" href="css/score.css" />
+	<link rel="stylesheet" href="css/appcache.css" />
+	<link rel="stylesheet" href="css/timer.css" />
+	<link rel="stylesheet" href="css/network.css" />
+	<link rel="stylesheet" href="css/exceptions.css" />
+	<link rel="stylesheet" href="css/topbuttons.css" />
+	<link rel="stylesheet" href="css/bottombuttons.css" />
 	<link rel="stylesheet" href="bup.css" />
 <!--/@DEV-->
 <!--@PRODUCTION
-	<link rel="stylesheet" href="bup.min.css" />
+	<link rel="stylesheet" href="bup.dist.css" />
 -->
 </head>
 <body>
@@ -168,8 +179,8 @@ Linienrichter</span>
 <div class="settings_network_login_container">
 </div>
 
-<div class="extended_options default-invisible">
-	<h2 class="extopts_current_game">Aktuelles Spiel</h2>
+<div class="ingame_options default-invisible">
+	<h2>Aktuelles Spiel</h2>
 
 	<button class="backtogame_button">Zurück zum Spiel</button>
 	<button class="scoresheet_button">Schiedsrichterzettel</button>
@@ -194,25 +205,25 @@ Linienrichter</span>
 
 	<table class="setup_players_manual">
 	<tbody>
-
 	<tr>
-		<th class="setup_players_players" rowspan="2" data-singles-rowspan="1" data-doubles-rowspan="2">Spieler</th>
-		<td><input type="text" name="team1_player1" size="30" tabindex="11" autofocus="autofocus" /></td>
-		<td class="setup_players_vs" rowspan="3" data-singles-rowspan="3" data-doubles-rowspan="3">vs</td>
-		<td><input type="text" name="team2_player1" size="30" tabindex="21" /></td>
-	</tr>
+		<th>Spieler</th>
+		<td><div class="setup_manual_teams">
+			<div class="setup_manual_team">
+				<input type="text" name="team1_player1" tabindex="11" autofocus="autofocus" />
+				<input type="text" name="team1_player2" tabindex="12" class="only-doubles" />
+				<input type="text" name="team1_name" tabindex="31"  placeholder="z.B. 1. BC Bischmisheim 1" />
+			</div>
 
-	<tr class="only-doubles">
-		<td><input type="text" name="team1_player2" size="30" tabindex="12" /></td>
-		<td><input type="text" name="team2_player2" size="30" tabindex="22" /></td>
-	</tr>
+			<div class="setup_manual_vs">vs</div>
 
-	<tr>
-		<th>Team</th>
-		<td><input type="text" name="team1_name" tabindex="31" size="30" placeholder="z.B. 1. BC Bischmisheim 1" /></td>
-		<td><input type="text" name="team2_name" tabindex="32" size="30" placeholder="z.B. 1. BV Mülheim 1"/></td>
+			<div class="setup_manual_team">
+				<input type="text" name="team2_player1" tabindex="21" />
+				<input type="text" name="team2_player2" tabindex="22" class="only-doubles" />
+				<input type="text" name="team2_name" tabindex="32" placeholder="z.B. 1. BV Mülheim 1"/>
+			</div>
+			</div>
+		</td>
 	</tr>
-
 	<tr>
 		<th>Spiel</th>
 		<td colspan="3"><input type="text" name="match_name" tabindex="41" placeholder="z.B. HE1 oder Halbfinale" /></td>
@@ -245,8 +256,8 @@ Linienrichter</span>
 
 <div class="settings">
 <h2>Einstellungen</h2>
-<div><label>Feld Nr. <input type="number" name="court_id" min="1" /></label> <label>(<input type="text" name="court_description" size="8" placeholder="z.B. rechts" />)</label></div>
-<label>Schiedsrichter-Name: <input type="text" name="umpire_name" size="32" /></label>
+<div><label>Feld <input type="text" name="court_description" size="8" placeholder="z.B. rechts" /></label> <label>Nummer <input type="number" name="court_id" min="1" /></label></div>
+<label>Schiedsrichter-Name: <input type="text" name="umpire_name" /></label>
 <label><input type="checkbox" name="save_finished_matches" />Abgeschlossene Spiele speichern</label>
 <label><input type="checkbox" name="show_pronounciation" />Ansagen anzeigen</label>
 <div><label><input type="checkbox" name="go_fullscreen" />Vollbildmodus beim Start anfragen</label> <button class="fullscreen_button">Vollbildmodus</button></div>

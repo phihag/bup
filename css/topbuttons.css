@@ -1,0 +1,66 @@
+.topleft_buttons>*,.topright_buttons>* {
+	width: 12vmin;
+	height: 12vmin;
+	min-width: 10vh;
+	min-height: 10vh;
+	position: relative;
+	vertical-align: top;
+}
+.topleft_buttons, .topright_buttons {
+	z-index: 1000;
+	margin-bottom: 4vh;
+}
+.topleft_buttons {
+	float: left;
+}
+.topright_buttons {
+	float: right;
+}
+
+.topleft_buttons>*:not(:first-child), .topright_buttons>*:not(:first-child) {
+	margin-left: 7vh;
+}
+#button_redo {
+	position: absolute;
+	left: 30vmin;
+	top: 0;
+}
+@media all and (orientation: portrait) {
+	.topleft_buttons>*:not(:first-child), .topright_buttons>*:not(:first-child) {
+		margin-left: 3vh;
+	}
+	#button_redo {
+		left: 0;
+		top: 18vh;
+		margin-left: 1vh !important;
+	}
+}
+#shuttle_counter_value {
+	font-size: 6vmin;
+	position: absolute;
+	top: 50%; transform: translate(0, -50%);
+	right: 47%;
+	text-align: right;
+}
+
+.topleft_buttons>* {
+	margin: 1vh 0 0 1vh;
+}
+.topright_buttons>* {
+	margin: 1vh 1vh 0 0;
+}
+#button_settings>span {
+	background-image: url(../icons/settings.svg);
+}
+#button_exception>span {
+	background-image: url(../icons/exception.svg);
+}
+#button_undo>span {
+	background-image: url(../icons/undo.svg);
+}
+#button_redo>span {
+	background-image: url(../icons/redo.svg);
+}
+#button_shuttle>span.button_icon {
+	background-image: url(../icons/shuttle-button.svg);
+}

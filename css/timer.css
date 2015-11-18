@@ -1,0 +1,62 @@
+.timer_container {
+	padding: 2vh 3vh 2vh 1vh;
+	font-size: 20vmin;
+	z-index: 200;
+}
+.timer {
+	display: inline-block;
+	min-width: 2em;
+}
+.timer_restart {
+	cursor: pointer;
+	display: block;
+	float: left;
+	vertical-align: middle;
+	width: 22vmin;
+	height: 22vmin;
+	background-image: url(../icons/timer_restart.svg);
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+}
+.timer_exigent {
+	color: #de0000;
+	animation-duration: 6s;
+	animation-name: timer_exigent_color;
+}
+@keyframes timer_exigent_color {
+	from {
+		color: #000;
+	}
+
+	to {
+		color: #DE0000;
+	}
+}
+
+
+/*
+TODO: need to test this
+@media screen and (max-aspect-ratio: 3/4) {
+	.timer_container {
+		position: absolute;
+		left: 0; right: 0;
+		top: auto;
+		bottom: 0;
+		text-align: center;
+		font-size: 16vmin;
+	}
+
+	.timer_restart {
+		display: inline-block;
+		float: none;
+		width: 12vmin;
+		height: 12vmin;
+		margin-right: 0;
+	}
+
+	.timer {
+		min-width: 1.8em;
+	}
+}
+
+*/

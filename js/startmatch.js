@@ -2,17 +2,6 @@ var startmatch = (function() {
 'use strict';
 
 function ui_init() {	
-	$('#setup_manual_form [name="gametype"]').on('change', function() {
-		var new_type = $('#setup_manual_form [name="gametype"]:checked').val();
-		var is_doubles = new_type == 'doubles';
-		$('#setup_manual_form .only-doubles').toggle(is_doubles);
-
-		$('.setup_players_manual [data-doubles-rowspan]').each(function(_, cell) {
-			var $cell = $(cell);
-			$cell.attr('rowspan', $cell.attr(is_doubles ? 'data-doubles-rowspan' : 'data-singles-rowspan'));
-		});
-	});
-
 	$('.settings_layout').on('click', function(e) {
 		if (e.target != this) {
 			return;

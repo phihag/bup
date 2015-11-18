@@ -1,0 +1,94 @@
+
+#score {
+	text-align: center;
+}
+#score_table {
+	background: #fcfcff;
+	display: inline-table;
+	margin-bottom: 1vh;
+	border-collapse: separate;
+    border-spacing: 0;
+
+	margin-top: -2vh;
+	padding-top: 2vh;
+	border-radius: 2vh;
+	border: 1px solid #dadada;
+}
+#score_table tr:last-child td:first-child {
+	border-bottom-left-radius: 2vh;
+}
+#score_table tr:last-child td:last-child {
+	border-bottom-right-radius: 2vh;
+}
+
+.score_announcements td {
+	font-size: 2vh;
+	height: 3vh;
+	vertical-align: middle;
+}
+span.score_announcement+span.score_announcement {
+	padding-left: 0.8em;
+}
+.score_finished-game td.score, .score_future-game td.score, .score_current-game td.score {
+	vertical-align: middle;
+	padding: 0 2vh;
+	min-width: 1.6em;
+	color: #444444;
+}
+.score_finished-game, .score_future-game {
+	font-size: 3vh;
+	line-height: 3vh;
+	height: 3.5vh;
+}
+.score_future-game>td.score>span {
+	visibility: hidden;
+}
+.score_current-game {
+	font-size: 8vh;
+	height: 8vh;
+}
+.score_empty {
+	color: rgba(0, 0, 0, 0.05) !important;
+}
+.score_empty.score_serving {
+	color: rgba(232, 97, 0, 0.2) !important;
+}
+.score_won {
+	color: #000000 !important;
+}
+.score_serving {
+	color: #e86100 !important;
+}
+.score_left {
+	text-align: right;
+}
+.score_right {
+	text-align: left;
+}
+.score_current-game>td.score_left {
+	padding-left: 0;
+	padding-right: 3vh;
+}
+.score_current-game>td.score_right {
+	padding-left: 3vh;
+	padding-right: 0;
+}
+.score>input {
+	max-width: 1.9em;
+	vertical-align: top;
+	font-size: 2vh;
+	max-height: 3vh;
+}
+.score_current-game>.score>input {
+	font-size: 7.5vh;
+	max-height: 8vh;
+}
+.score_future-game>.score>input {
+	visibility: hidden;
+}
+#game.editmode .score_left {
+	padding-right: 1.5vh;
+}
+#game.editmode .score_right {
+	padding-left: 1.5vh;
+}

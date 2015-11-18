@@ -1,0 +1,87 @@
+#court {
+	position: relative;
+	width: 132vh;
+	height: 60vh;
+	max-width: 100vw; max-width: calc(100vw - 2px); /* border */
+	max-height: 45.45vw;
+	margin: 0 auto;
+
+	font-size: 6vmin;
+	margin: 0 auto;
+	background-image: url(../icons/court_small.svg);
+	background-size: 100%;
+	background-repeat: no-repeat;
+	border: 1px solid #dadada;
+}
+#court span {
+	background: rgba(194, 211, 194, 0.4);
+}
+#court_left_even, #court_left_odd, #court_right_even, #court_right_odd, #court_right_team, #court_left_team, #court_match_name, #court_court_str {
+	position: absolute;
+	text-align: center;
+	font-size: inherit;
+}
+#court_right_team, #court_left_team  {
+	color: #555555;
+	font-size: 5vmin;
+	top: 50%; transform: translate(0, -50%);
+}
+
+#court>#court_court_str>span, #court>#court_match_name>span {
+	background: rgba(194, 211, 194, 0.8);
+}
+#court_court_str {
+	color: #555555;
+	font-size: 5vmin;
+	top: 1%;
+	left: 50%;
+	transform: translate(-50%, 0);
+}
+#court_match_name {
+	color: #555555;
+	font-size: 5vmin;
+	bottom: 1%;
+	left: 50%;
+	transform: translate(-50%, 0);
+}
+
+#court_left_odd {
+	left: 0%;
+	right: 50%;
+	bottom: 65.5%;
+}
+#court_left_team {
+	left: 0%;
+	right: 50%;
+}
+#court_left_even {
+	left: 0%;
+	right: 50%;
+	top: 65.5%;
+}
+#court_right_even {
+	left: 50%;
+	right: 0%;
+	bottom: 65.5%;
+}
+#court_right_team {
+	left: 50%;
+	right: 0%;
+}
+#court_right_odd {
+	left: 50%;
+	right: 0%;
+	top: 65.5%;
+}
+
+
+#court_arrow, .editmode_arrow {
+	position: absolute;
+	left: 50%; top: 50%;
+	margin-left: -7.5vh; margin-top: -7.5vh;
+	width: 15vh; height: 15vh;
+	background-image: url(../icons/court_arrow.svg);
+	background-size: 100%;
+	background-repeat: no-repeat;
+	z-index: 50;
+}

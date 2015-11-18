@@ -57,7 +57,7 @@ function show() {
 		settings.hide();
 	});
 	match_storage.ui_init();
-	$('.extended_options').toggle(state.initialized);
+	$('.ingame_options').toggle(state.initialized);
 }
 
 function hide(force) {
@@ -102,6 +102,12 @@ function update() {
 
 
 function ui_init() {
+	$('#setup_manual_form [name="gametype"]').on('change', function() {
+		var new_type = $('#setup_manual_form [name="gametype"]:checked').val();
+		var is_doubles = new_type == 'doubles';
+		$('#setup_manual_form .only-doubles').toggle(is_doubles);
+	});
+
 	$('.backtogame_button').on('click', function() {
 		control.set_current(state);
 		hide();

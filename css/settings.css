@@ -1,0 +1,135 @@
+.settings_layout {
+	position: absolute;
+	left: 0; right: 0;
+	top: 0;
+	overflow: auto;
+	display: -webkit-flex;
+	display: flex;
+	-webkit-align-items: center;
+	align-items: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+}
+.settings_container {
+	position: relative;
+	text-align: left;
+	background: #ffffff;
+	border-radius: 4vmin;
+	padding: 1vh 3vw 2vh 3vw;
+
+	font-size: 18px;
+}
+.settings_container input, .settings_container button {
+	font-size: inherit;
+}
+.settings_container input[type="checkbox"] {
+	height: 1em;
+	width: 1em;
+}
+.settings_container h2 {
+	margin: 0.5em 0 0.1em 0;
+	font-size: 140%;
+}
+
+.ingame_options {
+	text-align: center;
+}
+.ingame_options>h2 {
+	text-align: left;
+}
+.ingame_options>button {
+	display: inline-block;
+	font-size: 5vmin;
+	padding: 0.1em;
+	min-width: 10em;
+	margin: 0.2em;
+	user-select: none;
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+@media screen and (orientation: portrait) {
+	.ingame_options>button {
+		font-size: 7vmin;
+		margin: 0.3em 0 0.3em 0;
+	}
+}
+
+.setup_manual_teams:after {
+	/* Set line-height to height, so that we can vertically center with vertical-align: middle; */
+	content: '';
+	display: inline-block;
+	height: 100%;
+	vertical-align: middle;
+}
+.setup_manual_teams>* {
+	vertical-align: middle;
+	display: inline-block;
+}
+.setup_manual_vs {
+	text-align: center;
+}
+.setup_manual_team>input {
+	display: block;
+}
+.setup_manual_team>input+input {
+	margin-top: 0.5em;
+}
+
+
+
+.setup_loadmatch_list {
+	margin: 0;
+}
+.load_match_link {
+	display: inline-block;
+	cursor: pointer;
+	text-decoration: underline;
+	color: blue;
+	padding: 0.3vh 0;
+}
+.button_delete>span {
+	background-image: url(../icons/delete.svg);
+}
+
+.settings>label {
+	display: block;
+}
+input[name="court_id"] {
+	max-width: 3em;
+}
+
+
+
+.version {
+	color: #ddd;
+	position: absolute;
+	right: 1em;
+	bottom: 0.5em;
+}
+
+/* Smartphones */
+@media screen and (max-device-width:480px) {
+	.settings_container {
+		border-radius: 0;
+	}
+	.setup_manual_teams>* {
+		display: block;
+		width: 100%;
+	}
+
+	#setup_network_matches {
+		text-align: center;
+	}
+	.setup_network_match {
+		font-size: 4vmin;
+	}
+	.setup_network_match_match_name {
+		font-size: 6vmin;
+	}
+	.setup_network_matches_reload {
+		width: 1em;
+		height: 1em;
+	}
+}
