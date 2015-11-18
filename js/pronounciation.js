@@ -183,7 +183,20 @@ function pronounce(s) {
 	}
 
 	if (s.game.finished) {
-		return (s.game.won_by_score ? 'Satz.\n' : '') + mark_str + postgame_announcement(s);
+		var pre_mark_str = mark_str;
+		var post_mark_str = '';
+		if (s.game.final_marks) {
+			pre_mark_str = marks2str(s, s.game.final_marks);
+			var post_marks = s.match.marks.slice(s.game.final_marks.length);
+			post_mark_str = marks2str(s, post_marks);
+		}
+
+		return (
+			pre_mark_str +
+			(s.game.won_by_score ? 'Satz.\n' : '') +
+			(post_mark_str ? (post_mark_str) : '') +
+			postgame_announcement(s)
+		);
 	}
 
 	if (!s.game.finished && s.game.started) {

@@ -153,6 +153,12 @@ function recalc_after_score(s, team_id, press) {
 		s.match.game_score[winner_idx]++;
 		s.game.won_by_score = true;
 		s.game.team1_won = team1_won;
+		if (!s.game.game) {
+			s.game.final_marks = s.match.marks.slice();
+			if (press.type == 'red-card') {
+				s.game.final_marks.push(press);
+			}
+		}
 		s.game.game = true;
 		s.game.finished = true;
 		if (s.match.game_score[winner_idx] == 2) {
@@ -285,6 +291,7 @@ function calc_press(s, press) {
 		if (s.match.finished) {
 			throw new Error('Match finished, but game instead of matched confirmed.');
 		}
+		s.match.marks = s.match.marks.slice(s.game.final_marks.length);
 		s.match.finished_games.push(s.game);
 		s.game = make_game_state(s, s.game);
 		s.match.pending_red_cards.forEach(function(red_card_press) {
@@ -409,6 +416,7 @@ function calc_press(s, press) {
 		s.game.game = false;
 		s.game.won_by_score = null;
 		s.game.team1_won = null;
+		s.game.final_marks = [];
 		s.match.finished = false;
 		s.match.team1_won = null;
 		if ((s.game.team1_serving === null) && (s.game.team1_serving_last !== undefined)) {

@@ -1132,6 +1132,8 @@ _describe('editmode', function() {
 		assert.strictEqual(s.game.teams_player1_even[1], true);
 		assert.strictEqual(s.court.serving_downwards, null);
 		assert.strictEqual(s.court.left_serving, null);
+		assert.strictEqual(s.game.game, true);
+		assert.strictEqual(s.game.team1_won, true);
 
 		presses.push({
 			type: 'editmode_set-score',
@@ -1145,6 +1147,8 @@ _describe('editmode', function() {
 		assert.strictEqual(s.game.teams_player1_even[1], true);
 		assert.strictEqual(s.court.serving_downwards, false);
 		assert.strictEqual(s.court.left_serving, true);
+		assert.strictEqual(s.game.game, false);
+		assert.strictEqual(s.game.team1_won, null);
 
 		presses.push({
 			type: 'editmode_set-score',

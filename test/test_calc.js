@@ -2497,6 +2497,75 @@ _describe('calc_state', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert(! s.timer);
 	});
+
+	_it('delete marks correctly', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		}, {
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 0,
+		}, {
+			type: 'love-all',
+		}];
+		press_score(presses, 10, 5);
+		var referee = {
+			type: 'referee',
+		};
+		presses.push(referee);
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.match.marks, [
+			referee,
+		]);
+
+		var sav_presses = presses.slice();
+		press_score(presses, 1, 0);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.match.marks, []);
+
+		presses = sav_presses.slice();
+		var red_card = {
+			type: 'red-card',
+			team_id: 1,
+			player_id: 0,
+		};
+		presses.push(red_card);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.match.marks, [
+			referee,
+			red_card,
+		]);
+
+		press_score(presses, 10, 5);
+		presses.push(referee);
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.match.marks, [
+			referee,
+		]);
+
+		sav_presses = presses.slice();
+		press_score(presses, 1, 0);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.match.marks, []);
+
+		presses = sav_presses.slice();
+		var red_card = {
+			type: 'red-card',
+			team_id: 1,
+			player_id: 0,
+		};
+		presses.push(red_card);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.match.marks, [
+			referee,
+			red_card,
+		]);
+	});
 });
 
 _describe('calc helper functions', function() {

@@ -937,7 +937,7 @@ _describe('pronounciation', function() {
 			'Das Spiel wurde gewonnen von A team mit 21-23 30-29 21-19');
 	});
 
-	_it('cards', function() {
+	_it('cards basics', function() {
 		var presses = [{
 			type: 'pick_side', // Andrew&Alice pick left
 			team1_left: true,
@@ -1801,6 +1801,193 @@ _describe('pronounciation', function() {
 			'Aufschlagwechsel. 11-10 Pause.\n' +
 			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
 			'12-10. Bitte spielen.');
+	});
+
+	_it('ending game / match with a red card', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		}, {
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 0,
+		}, {
+			type: 'love-all',
+		}];
+		press_score(presses, 19, 14);
+		press_score(presses, 1, 0);
+		presses.push({
+			type: 'red-card',
+			team_id: 0,
+			player_id: 0,
+		});
+		var s = state_after(presses, SINGLES_SETUP);
+		assert.equal(pronounce(s),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 15-20');
+		assert.ok(! s.timer);
+		press_score(presses, 0, 1);
+		var sav_presses = presses.slice();
+
+		var red_card1 = {
+			type: 'red-card',
+			team_id: 1,
+			player_id: 0,
+			timestamp: 1,
+		};
+		presses.push(red_card1);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(s.match.marks, [
+			red_card1,
+		]);
+		assert.equal(pronounce(s),
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Satz.\n' +
+			'Der erste Satz wurde gewonnen von Alice mit 21-16');
+		assert.strictEqual(s.timer.start, red_card1.timestamp);
+
+		var referee = {
+			type: 'referee',
+			timestamp: 2,
+		};
+		presses.push(referee);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(s.match.marks, [
+			red_card1,
+			referee,
+		]);
+		assert.equal(pronounce(s),
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Satz.\n' +
+			'Der erste Satz wurde gewonnen von Alice mit 21-16');
+		assert.strictEqual(s.timer.start, red_card1.timestamp);
+
+		var red_card2 = {
+			type: 'red-card',
+			team_id: 0,
+			player_id: 0,
+			timestamp: 3,
+		};
+		presses.push(red_card2);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(s.match.marks, [
+			red_card1,
+			referee,
+			red_card2,
+		]);
+		assert.deepEqual(s.game.score, [21, 16]);
+		assert.equal(pronounce(s),
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Satz.\n' +
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Der erste Satz wurde gewonnen von Alice mit 21-16');
+		assert.strictEqual(s.timer.start, red_card1.timestamp);
+
+		presses.push({
+			type: 'postgame-confirm',
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(s.match.marks, [
+			referee,
+			red_card2,
+		]);
+		assert.deepEqual(s.game.score, [0, 1]);
+		assert.equal(pronounce(s),
+			'Zweiter Satz. 0 beide.\n' +
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 1-0. Bitte spielen.');
+		assert.ok(! s.timer);
+
+		var injury = {
+			type: 'injury',
+			team_id: 0,
+			player_id: 0,
+			timestamp: 5,
+		};
+		presses.push(injury);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(s.match.marks, [
+			referee,
+			red_card2,
+			injury,
+		]);
+		assert.deepEqual(s.game.score, [0, 1]);
+		assert.equal(pronounce(s),
+			'Zweiter Satz. 0 beide.\n' +
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 1-0. Bitte spielen.');
+		assert.ok(! s.timer);
+
+		presses.push({
+			type: 'love-all',
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(s.match.marks, []);
+		assert.deepEqual(s.game.score, [0, 1]);
+		assert.strictEqual(pronounce(s), 'Aufschlagwechsel. 1-0');
+		assert.ok(! s.timer);
+
+		// Test at end of match
+		presses = sav_presses.slice();
+		presses.push({
+			type: 'editmode_set-finished_games',
+			scores: [[21, 23], [30, 29]],
+		});
+		presses.push(red_card1);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(s.match.marks, [
+			red_card1,
+		]);
+		assert.equal(pronounce(s),
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Satz.\n' +
+			'Das Spiel wurde gewonnen von Alice mit 21-23 30-29 21-16');
+		assert.ok(! s.timer);
+
+		var yellow_card = {
+			type: 'yellow-card',
+			team_id: 0,
+			player_id: 0,
+			timestamp: 5,
+		};
+		presses.push(yellow_card);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(s.match.marks, [
+			red_card1,
+			yellow_card,
+		]);
+		assert.equal(pronounce(s),
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Satz.\n' +
+			'Alice, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'Das Spiel wurde gewonnen von Alice mit 21-23 30-29 21-16');
+		assert.ok(! s.timer);
+
+		presses.push(red_card2);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepEqual(s.match.marks, [
+			red_card1,
+			yellow_card,
+			red_card2,
+		]);
+		assert.deepEqual(s.game.score, [21, 16]);
+		assert.equal(pronounce(s),
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Satz.\n' +
+			'Alice, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Das Spiel wurde gewonnen von Alice mit 21-23 30-29 21-16');
+		assert.ok(! s.timer);
+
+		presses.push({
+			type: 'postmatch-confirm',
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.ok(! s.timer);
 	});
 });
 
