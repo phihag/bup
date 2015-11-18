@@ -206,18 +206,18 @@ function pronounce(s) {
 
 		var interval_str = (s.game.interval ? ' Pause' : '') + (s.game.change_sides ? '. Bitte die Spielfeldseiten wechseln' : '');
 		if (s.game.interval && mark_str) {
-			var pre_mark_str = marks2str(s, s.game.interval_marks);
+			var interval_pre_mark_str = marks2str(s, s.game.interval_marks);
 			var post_interval_marks = s.match.marks.slice(s.game.interval_marks.length);
 
 			if (post_interval_marks.length > 0) {
-				var post_mark_str = marks2str(s, post_interval_marks);
-				if (post_mark_str) {
+				var interval_post_mark_str = marks2str(s, post_interval_marks);
+				if (interval_post_mark_str) {
 					// Only use extended form if it's more than just a referee call
 					return (
-						pre_mark_str +
+						interval_pre_mark_str +
 						_pronounciation_score(s, s.game.interval_score, s.game.interval_team1_serving, s.game.interval_service_over) +
 						interval_str + '.\n' +
-						post_mark_str +
+						interval_post_mark_str +
 						_pronounciation_score(s) + '. Bitte spielen.'
 					);
 				}

@@ -425,8 +425,8 @@ function calc_press(s, press) {
 		recalc_after_score(s, s.game.team1_serving ? 0 : 1, press);
 
 		if (!s.setup.is_doubles) {
-			var side = (s.game.score[s.game.team1_serving ? 0 : 1] % 2) === 0;
-			s.game.teams_player1_even = [side, side];
+			var serving_side = (s.game.score[s.game.team1_serving ? 0 : 1] % 2) === 0;
+			s.game.teams_player1_even = [serving_side, serving_side];
 		}
 		break;
 	case 'editmode_set-finished_games':

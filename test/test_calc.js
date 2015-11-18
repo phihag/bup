@@ -2543,7 +2543,7 @@ _describe('calc_state', function() {
 
 		press_score(presses, 10, 5);
 		presses.push(referee);
-		var s = state_after(presses, DOUBLES_SETUP);
+		s = state_after(presses, DOUBLES_SETUP);
 		assert.deepEqual(s.match.marks, [
 			referee,
 		]);
@@ -2554,16 +2554,17 @@ _describe('calc_state', function() {
 		assert.deepEqual(s.match.marks, []);
 
 		presses = sav_presses.slice();
-		var red_card = {
+		var red_card2 = {
 			type: 'red-card',
 			team_id: 1,
 			player_id: 0,
+			timestamp: 99,
 		};
-		presses.push(red_card);
+		presses.push(red_card2);
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.deepEqual(s.match.marks, [
 			referee,
-			red_card,
+			red_card2,
 		]);
 	});
 });

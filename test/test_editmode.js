@@ -1273,7 +1273,7 @@ _describe('editmode', function() {
 		assert.deepEqual(s.game.score, [5, 3]);
 	});
 
-	_it('player side switching', function() {
+	_it('player side and ends switching', function() {
 		var presses = [{
 			type: 'pick_side',
 			team1_left: true,
@@ -1392,6 +1392,17 @@ _describe('editmode', function() {
 		assert.equal(s.court.player_left_odd.name, 'Bob');
 		assert.equal(s.court.player_right_even.name, 'Alice');
 		assert.equal(s.court.player_right_odd.name, 'Andrew');
+
+		presses.push({
+			type: 'editmode_change-ends',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(s.game.teams_player1_even[0], false);
+		assert.equal(s.game.teams_player1_even[1], false);
+		assert.equal(s.court.player_left_even.name, 'Alice');
+		assert.equal(s.court.player_left_odd.name, 'Andrew');
+		assert.equal(s.court.player_right_even.name, 'Birgit');
+		assert.equal(s.court.player_right_odd.name, 'Bob');
 	});
 
 	_it('score setting in singles should update sides', function() {
