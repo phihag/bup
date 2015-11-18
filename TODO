@@ -1,9 +1,10 @@
 manual game creation on smartphones
 button proportions on various smartphones and tablets
-Button "bitte spielen" mehr betonen (icon?)
 fix display without vw (see Manuel, https://github.com/saabi/vminpoly)
 retest Manuel's notes
-send mail to Ulf, Marius, Manuel, Werner Durow, Jörg, Susanne
+mail to Ulf, Marius, Manuel, Werner Durow, Jörg, Susanne
+	write Mails
+	send mails
 
 liveaw 2.0 (RL Manuel + Benedikt)
 	import
@@ -29,7 +30,6 @@ network: notify if clicked game is locally present (hide network if score is ide
 
 
 option for double-click editmode (default off)
-test our resuming with courtspot / badmintonticker connection
 document network error cases
 animation in hide_settings (go to top-right icon)
 
@@ -65,7 +65,6 @@ i18n
 block overrule when unavailable
 	add a title
 	add a notice when clicked (+1 first)
-test without websocket support
 injury timer
 	in scoresheet (if not disqualified / retired afterwards)
 negative timers (add option for that)
@@ -105,7 +104,7 @@ eliminate uses of match.game_score; use match.team1_won instead
 title for all buttons
 make buttons larger in landscape on smartphones
 scoresheet: begin and end on different days
-display mode for multiple courts (via WebRTC)
+display mode for multiple courts (via WebRTC, requires a network)
 WebRTC bootstrapping without Internet (QR code? UDP multicast?)
 write more automated tests for scoresheet generation (singles..., 20all dash, disqualified etc.)
 add test for retired-then-referee
@@ -127,7 +126,6 @@ undo without redo back to start should reset begin in umpire scoresheet
 cursor for buttons?
 split CSS in multiple files
 loading bup.. teaser in HTML for very slow connections
-network: add an option to change court
 network: color/opacity in match list by state
 Schiedsrichterzettel auch im Bundesliga-Design
 limit available courts when network is in use
@@ -147,15 +145,14 @@ support events
 gzip icons in dist with correct htaccess to save CPU compression power?
 badmintonticker.de mock / testing
 CSS animation for settings (go to top right)
-badmintonticker.de: support names without comma when reading player list
 investigate high GPU usage (transparency?)
 editing score (this / previous game) after retiring / disqualification
 restart network resync interval if network settings change
 manual editing in portrait (maybe distinguish by aspect ratio?)
-capture back button (warning if leaving while game is running)
 improve settings display on smartphone
 investigate performance of timers
 test svg_path_lines
+Button "bitte spielen" mehr betonen (icon?)
 test that singles with pick_receiver works just fine
 minify HTML
 implement service workers as well as appcache
