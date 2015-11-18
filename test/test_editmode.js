@@ -15,21 +15,21 @@ var bup = tutils.bup;
 _describe('editmode', function() {
 	_it('serve switching', function() {
 		var presses = [{
-			'type': 'pick_side', // Andrew&Alice pick left
-			'team1_left': true,
+			type: 'pick_side', // Andrew&Alice pick left
+			team1_left: true,
 		}];
 		presses.push({
-			'type': 'pick_server', // Alice serves
-			'team_id': 0,
-			'player_id': 1,
+			type: 'pick_server', // Alice serves
+			team_id: 0,
+			player_id: 1,
 		});
 		presses.push({
-			'type': 'pick_receiver', // Bob receives
-			'team_id': 1,
-			'player_id': 0,
+			type: 'pick_receiver', // Bob receives
+			team_id: 1,
+			player_id: 0,
 		});
 		presses.push({
-			'type': 'love-all',
+			type: 'love-all',
 		});
 		press_score(presses, 2, 0);
 		press_score(presses, 0, 1);
@@ -48,7 +48,7 @@ _describe('editmode', function() {
 
 		// Umpire notices wrong order of the last two points, but decides to use manual editing instead of undo
 		presses.push({
-			'type': 'editmode_change-serve',
+			type: 'editmode_change-serve',
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(s.game.team1_serving, false);
@@ -70,54 +70,54 @@ _describe('editmode', function() {
 
 	_it('serve switching at beginning of game', function() {
 		var presses = [{
-			'type': 'pick_side', // Andrew&Alice pick left
-			'team1_left': true,
+			type: 'pick_side', // Andrew&Alice pick left
+			team1_left: true,
 		}];
 		var s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(s.game.team1_serving, null);
 
 		presses.push({
-			'type': 'editmode_change-serve',
+			type: 'editmode_change-serve',
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(s.game.team1_serving, null);
 
 		presses.push({
-			'type': 'pick_server', // Alice serves
-			'team_id': 0,
-			'player_id': 1,
+			type: 'pick_server', // Alice serves
+			team_id: 0,
+			player_id: 1,
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(s.game.team1_serving, true);
 
 		presses.push({
-			'type': 'editmode_change-serve',
+			type: 'editmode_change-serve',
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(s.game.team1_serving, false);
 
 		presses.push({
-			'type': 'editmode_change-serve',
+			type: 'editmode_change-serve',
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(s.game.team1_serving, true);
 
 		presses.push({
-			'type': 'editmode_change-serve',
+			type: 'editmode_change-serve',
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(s.game.team1_serving, false);
 
 		presses.push({
-			'type': 'pick_receiver', // Alice receives
-			'team_id': 1,
-			'player_id': 1,
+			type: 'pick_receiver', // Alice receives
+			team_id: 1,
+			player_id: 1,
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(s.game.team1_serving, false);
 
 		presses.push({
-			'type': 'love-all',
+			type: 'love-all',
 		});
 
 		s = state_after(presses, DOUBLES_SETUP);
@@ -202,7 +202,7 @@ _describe('editmode', function() {
 
 		var alt_presses = presses.slice();
 		alt_presses.push({
-			'type': 'editmode_change-serve',
+			type: 'editmode_change-serve',
 		});
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.deepEqual(s.game.score, [11, 7]);
@@ -1273,6 +1273,159 @@ _describe('editmode', function() {
 		assert.deepEqual(s.game.score, [5, 3]);
 	});
 
+	_it('player side switching', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}, {
+			type: 'pick_server',
+			team_id: 1,
+			player_id: 1,
+		}, {
+			type: 'pick_receiver',
+			team_id: 0,
+			player_id: 0,
+		}, {
+			type: 'love-all',
+		}];
+
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(s.game.teams_player1_even[0], true);
+		assert.equal(s.game.teams_player1_even[1], false);
+		assert.equal(s.court.player_left_even.name, 'Andrew');
+		assert.equal(s.court.player_left_odd.name, 'Alice');
+		assert.equal(s.court.player_right_even.name, 'Birgit');
+		assert.equal(s.court.player_right_odd.name, 'Bob');
+
+		// Umpire notices wrong player is serving, uses edit
+		presses.push({
+			type: 'editmode_switch-sides',
+			side: 'left',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(s.game.teams_player1_even[0], false);
+		assert.equal(s.game.teams_player1_even[1], false);
+		assert.equal(s.court.player_left_even.name, 'Alice');
+		assert.equal(s.court.player_left_odd.name, 'Andrew');
+		assert.equal(s.court.player_right_even.name, 'Birgit');
+		assert.equal(s.court.player_right_odd.name, 'Bob');
+
+		presses.push({
+			type: 'editmode_switch-sides',
+			side: 'right',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(s.game.teams_player1_even[0], false);
+		assert.equal(s.game.teams_player1_even[1], true);
+		assert.equal(s.court.player_left_even.name, 'Alice');
+		assert.equal(s.court.player_left_odd.name, 'Andrew');
+		assert.equal(s.court.player_right_even.name, 'Bob');
+		assert.equal(s.court.player_right_odd.name, 'Birgit');
+
+		presses.push({
+			type: 'editmode_switch-sides',
+			side: 'right',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(s.game.teams_player1_even[0], false);
+		assert.equal(s.game.teams_player1_even[1], false);
+		assert.equal(s.court.player_left_even.name, 'Alice');
+		assert.equal(s.court.player_left_odd.name, 'Andrew');
+		assert.equal(s.court.player_right_even.name, 'Birgit');
+		assert.equal(s.court.player_right_odd.name, 'Bob');
+
+		presses.push({
+			type: 'editmode_switch-sides',
+			side: 'left',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(s.game.teams_player1_even[0], true);
+		assert.equal(s.game.teams_player1_even[1], false);
+		assert.equal(s.court.player_left_even.name, 'Andrew');
+		assert.equal(s.court.player_left_odd.name, 'Alice');
+		assert.equal(s.court.player_right_even.name, 'Birgit');
+		assert.equal(s.court.player_right_odd.name, 'Bob');
+
+		presses.push({
+			type: 'editmode_change-ends',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(s.game.teams_player1_even[0], true);
+		assert.equal(s.game.teams_player1_even[1], false);
+		assert.equal(s.court.player_left_even.name, 'Birgit');
+		assert.equal(s.court.player_left_odd.name, 'Bob');
+		assert.equal(s.court.player_right_even.name, 'Andrew');
+		assert.equal(s.court.player_right_odd.name, 'Alice');
+
+		presses.push({
+			type: 'editmode_switch-sides',
+			side: 'left',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(s.game.teams_player1_even[0], true);
+		assert.equal(s.game.teams_player1_even[1], true);
+		assert.equal(s.court.player_left_even.name, 'Bob');
+		assert.equal(s.court.player_left_odd.name, 'Birgit');
+		assert.equal(s.court.player_right_even.name, 'Andrew');
+		assert.equal(s.court.player_right_odd.name, 'Alice');
+
+		presses.push({
+			type: 'editmode_switch-sides',
+			side: 'left',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(s.game.teams_player1_even[0], true);
+		assert.equal(s.game.teams_player1_even[1], false);
+		assert.equal(s.court.player_left_even.name, 'Birgit');
+		assert.equal(s.court.player_left_odd.name, 'Bob');
+		assert.equal(s.court.player_right_even.name, 'Andrew');
+		assert.equal(s.court.player_right_odd.name, 'Alice');
+
+		presses.push({
+			type: 'editmode_switch-sides',
+			side: 'right',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(s.game.teams_player1_even[0], false);
+		assert.equal(s.game.teams_player1_even[1], false);
+		assert.equal(s.court.player_left_even.name, 'Birgit');
+		assert.equal(s.court.player_left_odd.name, 'Bob');
+		assert.equal(s.court.player_right_even.name, 'Alice');
+		assert.equal(s.court.player_right_odd.name, 'Andrew');
+	});
+
+	_it('score setting in singles should update sides', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}, {
+			type: 'pick_server',
+			team_id: 1,
+			player_id: 0,
+		}, {
+			type: 'love-all',
+		}];
+
+		var s = state_after(presses, SINGLES_SETUP);
+		assert.equal(s.game.teams_player1_even[0], true);
+		assert.equal(s.game.teams_player1_even[1], true);
+		assert.equal(s.court.player_left_even.name, 'Alice');
+		assert.equal(s.court.player_left_odd, null);
+		assert.equal(s.court.player_right_even.name, 'Bob');
+		assert.equal(s.court.player_right_odd, null);
+
+		presses.push({
+			type: 'editmode_set-score',
+			score: [5, 3],
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.equal(s.game.teams_player1_even[0], false);
+		assert.equal(s.game.teams_player1_even[1], false);
+		assert.equal(s.court.player_left_even, null);
+		assert.equal(s.court.player_left_odd.name, 'Alice');
+		assert.equal(s.court.player_right_even, null);
+		assert.equal(s.court.player_right_odd.name, 'Bob');
+	});
 });
 
 })();

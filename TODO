@@ -1,9 +1,5 @@
-edit mode to change sides / change ends
-	write automated tests for editing
-		test player side change
-		test ends change
-		ends change should switch score
- 	disable serve switch when not serving (game.finished) (bottom dialog takes over)
+test that player side change fails in singles
+	test ends change
 manual game creation on smartphones
 button proportions on various smartphones and tablets
 Button "bitte spielen" mehr betonen (icon?)
@@ -14,6 +10,8 @@ send mail to Ulf, Marius, Manuel, Werner Durow, Jörg, Susanne
 liveaw 2.0 (RL Manuel + Benedikt)
 	import
 
+error handling + reporting (automated)
+feedback form
 check whether we have a copy of a network game to resume from, offer it
 	offer both network and local version if they differ
 

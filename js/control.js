@@ -55,6 +55,7 @@ function start_match(s, setup, init_presses) {
 // Prepare to show another match, close all dialogs etc. (do not destroy rest of the display)
 function stop_match(s) {
 	timer.remove(true);
+	editmode.leave();
 	if (s.destructors) {
 		s.destructors.forEach(function(destructor) {
 			destructor(s);
