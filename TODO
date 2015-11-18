@@ -1,4 +1,7 @@
 manual game creation on smartphones
+split singles / doubles in divs
+
+settings font size on smartphones
 button proportions on various smartphones and tablets
 fix display without vw (see Manuel, https://github.com/saabi/vminpoly)
 retest Manuel's notes
@@ -78,7 +81,6 @@ make everything buttons keyboard-usable; shortcuts etc.
 show undo text hint during start
 larger hitbox for buttons
 store time of changes; analyze how long each point took
-test red card after game
 animate changing server sides and changing sides after game
 improve error showing
 improve load match style
@@ -93,7 +95,6 @@ make every button keyboard usable
 	keys for warnings etc. (after pressing e)
 	undo/redo (Ctrl+Z/Y)
 prevent retired after game
-test black card before game start
 up/down keys to switch between options; left-right for punishments
 display mode (tap anywhere to exit)
 	replay game in slow motion / real time (in display mode)
@@ -109,7 +110,7 @@ WebRTC bootstrapping without Internet (QR code? UDP multicast?)
 write more automated tests for scoresheet generation (singles..., 20all dash, disqualified etc.)
 add test for retired-then-referee
 icons for scoresheet (PDF/print/back) buttons
-test for shuttle
+test for shuttle counter
 detect if already in F11 fullscreen before showing fullscreen dialog
 &fs in hash to override fullscreen setting
 If long pronounciation ends with short one, short pronounciation in larger font-size
@@ -147,6 +148,7 @@ badmintonticker.de mock / testing
 CSS animation for settings (go to top right)
 investigate high GPU usage (transparency?)
 editing score (this / previous game) after retiring / disqualification
+test black card before game start
 restart network resync interval if network settings change
 manual editing in portrait (maybe distinguish by aspect ratio?)
 improve settings display on smartphone

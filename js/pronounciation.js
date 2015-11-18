@@ -27,6 +27,7 @@ function teamtext_internal(s, team_id) {
 	}
 }
 
+// Simplified announcement for minimal buttons
 function loveall_announcement(s) {
 	var prefix = '';
 	if (s.match.finished_games.length == 1) {
