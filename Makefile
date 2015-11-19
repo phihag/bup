@@ -56,7 +56,7 @@ dist: cleandist
 upload: dist
 	cp div/dist_upload_config.json dist/.upload_config.json
 	cp div/dist_public dist/.public
-	$(MAKE upload-run)
+	$(MAKE) upload-run
 
 upload-run:
 	cd dist && upload
