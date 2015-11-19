@@ -455,10 +455,17 @@ function _parse_match(state, col_count) {
 	return _layout(s.scoresheet_games, col_count);
 }
 
-function ui_show() {
+function show() {
 	if (!state.initialized) {
 		return; // Called on start with Shift+S
 	}
+
+	if (state.ui.scoresheet_visible) {
+		return;
+	}
+	state.ui.scoresheet_visible = true;
+
+	control.set_current(state);
 
 	if (typeof jsPDF != 'undefined') {
 		jspdf_loaded();
@@ -472,14 +479,10 @@ function ui_show() {
 	}
 
 	// Show SVG before modifying it, otherwise getBBox won't work
-	var settings_visible = $('#settings_wrapper').is(':visible');
-	$('.scoresheet_container').attr('data-settings-visible', settings_visible ? 'true' : 'false');
-	if (settings_visible) {
-		$('#settings_wrapper').hide();
-	}
+	settings.hide();
 	$('#game').hide();
 	$('.scoresheet_container').show();
-	uiu.esc_stack_push(ui_hide);
+	uiu.esc_stack_push(hide);
 
 	// Set text fields
 	_text('.scoresheet_tournament_name', state.setup.tournament_name);
@@ -772,13 +775,16 @@ function ui_show() {
 	});
 }
 
-function ui_hide() {
+function hide() {
+	if (! state.ui.scoresheet_visible) {
+		return;
+	}
+	state.ui.scoresheet_visible = false;
+	control.set_current(state);
+
 	uiu.esc_stack_pop();
 	$('.scoresheet_container').hide();
 	$('#game').show();
-	if ($('.scoresheet_container').attr('data-settings-visible') === 'true') {
-		$('#settings_wrapper').show();
-	}
 }
 
 function _svg_to_pdf(svg, pdf) {
@@ -951,10 +957,10 @@ function jspdf_loaded() {
 }
 
 function ui_init() {
-	$('.postmatch_scoresheet_button').on('click', ui_show);
-	$('.scoresheet_button').on('click', ui_show);
+	$('.postmatch_scoresheet_button').on('click', show);
+	$('.scoresheet_button').on('click', show);
 	$('.scoresheet_button_pdf').on('click', ui_pdf);
-	$('.scoresheet_button_back').on('click', ui_hide);
+	$('.scoresheet_button_back').on('click', hide);
 	$('.scoresheet_button_print').on('click', function() {
 		window.print();
 	});
@@ -964,8 +970,8 @@ function ui_init() {
 return {
 	jspdf_loaded: jspdf_loaded,
 	ui_init: ui_init,
-	ui_hide: ui_hide,
-	ui_show: ui_show,
+	hide: hide,
+	show: show,
 	// For testing only
 	_parse_match: _parse_match,
 };
@@ -976,6 +982,7 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
 	var utils = require('./utils');
+	var control = require('./control');
 	var uiu = require('./uiu');
 
 	module.exports = scoresheet;

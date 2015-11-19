@@ -45,7 +45,8 @@ function ui_init() {
 		networks.btde.ui_init(state, hash_query);
 	}
 
-	control.load_by_hash();
+	buphistory.ui_init();
+	buphistory.kickoff();
 
 	if (state.settings.go_fullscreen) {
 		fullscreen.autostart();
@@ -75,6 +76,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var timer = require('./timer');
 	var editmode = require('./editmode');
 	var fullscreen = require('./fullscreen');
+	var buphistory = require('./buphistory');
 	var scoresheet = require('./scoresheet');
 	var network = require('./network');
 	var btde = require('./btde');

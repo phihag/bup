@@ -41,6 +41,8 @@ function show() {
 		return;
 	}
 	state.ui.settings_visible = true;
+	control.set_current(state);
+	scoresheet.hide();
 
 	$('#settings_wrapper').show();
 	if (networks.courtspot || networks.btde) {
@@ -63,15 +65,16 @@ function hide(force) {
 	if (!force && !state.initialized) {
 		return;
 	}
+	if (! state.ui.settings_visible) {
+		return;
+	}
 	if (_network_hide_cb) {
 		_network_hide_cb();
 		_network_hide_cb = null;
 	}
-	if (! state.ui.settings_visible) {
-		return;
-	}
 
 	state.ui.settings_visible = false;
+	control.set_current(state);
 	$('#settings_wrapper').hide();
 	uiu.esc_stack_pop();
 }

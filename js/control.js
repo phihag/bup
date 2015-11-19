@@ -106,7 +106,7 @@ function on_presses_change(s) {
 		s.metadata = {};
 		s.initialized = false;
 		settings.show();
-		set_current(null);
+		set_current(s);
 	} else {
 		match_storage.store(s);
 		render.ui_render(s);
@@ -249,59 +249,15 @@ function init_shortcuts() {
 		}
 	});
 	Mousetrap.bind('shift+s', function() {
-		scoresheet.ui_show();
+		scoresheet.show();
 	});
 }
 
-function load_by_hash() {
-	var qs = utils.parse_query_string(window.location.hash.substr(1));
-	if (state.metadata && (qs.m == state.metadata.id)) {
-		settings.hide();
-		return;
-	}
-	if (qs.m) {
-		// Load match
-		var m = match_storage.get(qs.m);
-		if (m) {
-			settings.hide(true);
-			resume_match(m);
-			return;
-		}
-
-		m = network.match_by_id(qs.m);
-		if (m) {
-			settings.hide(true);
-			network.enter_match(m);
-			return;
-		}
-	}
-
-	if (qs.demo !== undefined) {
-		demo_match_start();
-	} else {
-		settings.show();
-	}
-}
-
 function set_current(s) {
-	var hval = window.location.hash.substr(1);
-	var qs = utils.parse_query_string(hval);
-	hval = hval.replace(/(?:^|&)(?:m)(?:=[^&]*)?(?=&|$)/g, '');
-
-	if (s === null) {
-		if (hval != window.location.hash.substr(1)) {
-			window.location.hash = hval;
-		}
-	} else if (qs.m !== s.metadata.id) {
-		if (hval.length > 1) {
-			hval += '&';
-		}
-		hval += 'm=' + encodeURIComponent(s.metadata.id);
-		window.location.hash = '#' + hval;
-	}
+	buphistory.record(s);
 
 	var title = '';
-	if (s) {
+	if (s.initialized) {
 		if (s.setup.match_name) {
 			title += s.setup.match_name + ' - ';
 		}
@@ -319,7 +275,6 @@ function set_current(s) {
 function ui_init() {
 	init_buttons();
 	init_shortcuts();
-	window.addEventListener('hashchange', load_by_hash, false);
 }
 
 function ui_show_exception_dialog() {
@@ -348,7 +303,6 @@ return {
 	stop_match: stop_match,
 	install_destructor: install_destructor,
 	uninstall_destructor: uninstall_destructor,
-	load_by_hash: load_by_hash,
 	set_current: set_current,
 };
 
@@ -363,6 +317,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var match_storage = require('./match_storage');
 	var editmode = require('./editmode');
 	var timer = require('./timer');
+	var buphistory = require('./buphistory');
 
 	module.exports = control;
 }

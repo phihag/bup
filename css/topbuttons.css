@@ -20,8 +20,8 @@
 .topleft_buttons>*,.topright_buttons>*, #button_redo {
 	width: 85px;
 	height: 85px;
-	min-width: 18vmin;
-	min-height: 18vmin;
+	min-width: 16vmin;
+	min-height: 16vmin;
 	max-width: 22vmin;
 	max-height: 22vmin;
 
@@ -55,6 +55,12 @@
 		margin-left: 10px;
 		margin-left: 3vmin;
 	}*
+}
+@media screen and (min-aspect-ratio: 15/10) {
+	.topleft_buttons>*,.topright_buttons>*, #button_redo {
+		min-width: 18vmin;
+		min-height: 18vmin;
+	}
 }
 
 #shuttle_counter_value {
