@@ -54,3 +54,21 @@ button>.loading-icon {
 	transform: translate(-50%, -50%);
 }
 
+
+
+/* Smartphones */
+@media screen and (max-device-width:480px) {
+	#setup_network_matches {
+		text-align: center;
+	}
+	.setup_network_match {
+		font-size: 4vmin;
+	}
+	.setup_network_match_match_name {
+		font-size: 6vmin;
+	}
+	.setup_network_matches_reload {
+		width: 1em;
+		height: 1em;
+	}
+}

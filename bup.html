@@ -198,52 +198,52 @@ Linienrichter</span>
 
 	<form id="setup_manual_form" class="slim_form">
 	<h2>Neues Spiel</h2>
-	<fieldset>
+	<fieldset class="setup_manual_discipline">
 	<label><input type="radio" name="gametype" value="singles" tabindex="1" />Einzel</label>
 	<label><input type="radio" name="gametype" value="doubles" tabindex="2" checked="checked" />Doppel</label>
 	</fieldset>
 
-	<table class="setup_players_manual">
+	<div class="setup_manual_teams">
+		<div class="setup_manual_team">
+			<div><input type="text" name="team1_player1" tabindex="11" /></div>
+			<div><input type="text" name="team1_player2" tabindex="12" class="only-doubles" /></div>
+			<div><input type="text" name="team1_name" tabindex="31"  placeholder="z.B. 1. BC Bischmisheim 1" /></div>
+		</div>
+
+		<div class="setup_manual_vs">vs</div>
+
+		<div class="setup_manual_team">
+			<div><input type="text" name="team2_player1" tabindex="21" /></div>
+			<div><input type="text" name="team2_player2" tabindex="22" class="only-doubles" /></div>
+			<div><input type="text" name="team2_name" tabindex="32" placeholder="z.B. 1. BV Mülheim 1"/></div>
+		</div>
+	</div>
+
+	<table class="setup_manual_details">
 	<tbody>
 	<tr>
-		<th>Spieler</th>
-		<td><div class="setup_manual_teams">
-			<div class="setup_manual_team">
-				<input type="text" name="team1_player1" tabindex="11" autofocus="autofocus" />
-				<input type="text" name="team1_player2" tabindex="12" class="only-doubles" />
-				<input type="text" name="team1_name" tabindex="31"  placeholder="z.B. 1. BC Bischmisheim 1" />
-			</div>
-
-			<div class="setup_manual_vs">vs</div>
-
-			<div class="setup_manual_team">
-				<input type="text" name="team2_player1" tabindex="21" />
-				<input type="text" name="team2_player2" tabindex="22" class="only-doubles" />
-				<input type="text" name="team2_name" tabindex="32" placeholder="z.B. 1. BV Mülheim 1"/>
-			</div>
-			</div>
-		</td>
-	</tr>
-	<tr>
 		<th>Spiel</th>
-		<td colspan="3"><input type="text" name="match_name" tabindex="41" placeholder="z.B. HE1 oder Halbfinale" /></td>
+		<td><input type="text" name="match_name" tabindex="41" placeholder="z.B. HE1 oder Halbfinale" /></td>
 	</tr>
 	<tr>
 		<th>Event</th>
-		<td colspan="3"><input type="text" name="event_name" tabindex="42" placeholder="z.B. BCB vs BVM oder HD-A" /></td>
+		<td><input type="text" name="event_name" tabindex="42" placeholder="z.B. BCB vs BVM oder HD-A" /></td>
 	</tr>
 	<tr>
 		<th>Turnier</th>
-		<td colspan="3"><input type="text" name="tournament_name" tabindex="43" placeholder="z.B. 1. Bundesliga 2015/2016" /></td>
+		<td><input type="text" name="tournament_name" tabindex="43" placeholder="z.B. 1. Bundesliga 2015/2016" /></td>
 	</tr>
     <tr>
         <th></th>
-        <td colspan="3"><label><input type="checkbox" name="team_competition" tabindex="51" />Mannschaftswettbewerb</label></td>
+        <td><label><input type="checkbox" name="team_competition" tabindex="51" />Mannschaftswettbewerb</label></td>
     </tr>
 	</tbody>
 	</table>
 
-	<button tabindex="101">Spiel starten</button>
+	<div class="setup_manual_start_container">
+		<button tabindex="101" class="setup_manual_start">Spiel starten</button>
+	</div>
+
 	</form>
 
 	<h2>Spiel fortführen</h2>
@@ -257,7 +257,7 @@ Linienrichter</span>
 <div class="settings">
 <h2>Einstellungen</h2>
 <div><label>Feld <input type="text" name="court_description" size="8" placeholder="z.B. rechts" /></label> <label>Nummer <input type="number" name="court_id" min="1" /></label></div>
-<label>Schiedsrichter-Name: <input type="text" name="umpire_name" /></label>
+<label>Schiedsrichter: <input type="text" name="umpire_name" /></label>
 <label><input type="checkbox" name="save_finished_matches" />Abgeschlossene Spiele speichern</label>
 <label><input type="checkbox" name="show_pronounciation" />Ansagen anzeigen</label>
 <div><label><input type="checkbox" name="go_fullscreen" />Vollbildmodus beim Start anfragen</label> <button class="fullscreen_button">Vollbildmodus</button></div>

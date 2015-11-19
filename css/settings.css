@@ -9,15 +9,15 @@
 	align-items: center;
 	-webkit-justify-content: center;
 	justify-content: center;
+
+	font-size: 18px;
 }
 .settings_container {
 	position: relative;
 	text-align: left;
 	background: #ffffff;
-	border-radius: 4vmin;
-	padding: 1vh 3vw 2vh 3vw;
-
-	font-size: 18px;
+	border-radius: 1em;
+	padding: 0 1em 1em 1em;
 }
 .settings_container input, .settings_container button {
 	font-size: inherit;
@@ -31,6 +31,10 @@
 	font-size: 140%;
 }
 
+.setup_manual_discipline>label+label {
+	margin-left: 1.5em;
+}
+
 .ingame_options {
 	text-align: center;
 }
@@ -39,23 +43,20 @@
 }
 .ingame_options>button {
 	display: inline-block;
-	font-size: 5vmin;
+	font-size: 150%;
 	padding: 0.1em;
 	min-width: 10em;
-	margin: 0.2em;
+	margin: 0.3em 0.2em;
 	user-select: none;
 	-webkit-touch-callout: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
 }
-@media screen and (orientation: portrait) {
-	.ingame_options>button {
-		font-size: 7vmin;
-		margin: 0.3em 0 0.3em 0;
-	}
-}
 
+.setup_manual_teams {
+	margin-bottom: 0.5em;
+}
 .setup_manual_teams:after {
 	/* Set line-height to height, so that we can vertically center with vertical-align: middle; */
 	content: '';
@@ -70,13 +71,26 @@
 .setup_manual_vs {
 	text-align: center;
 }
-.setup_manual_team>input {
-	display: block;
-}
-.setup_manual_team>input+input {
+.setup_manual_team>div+div {
 	margin-top: 0.5em;
 }
+.setup_manual_team>div>input {
+	display: inline-block;
+	margin: 0.25em 0 0.25em 0;
+}
 
+.setup_manual_details input[type="text"] {
+	min-width: 17em;
+}
+.setup_manual_details th, .setup_manual_details th {
+	padding: 0.5em 0;
+}
+.settings_container button.setup_manual_start {
+	font-size: 150%;
+	padding: 0.1em 0.5em;
+	margin: 0.4em 0;
+	min-width: 10em;
+}
 
 
 .setup_loadmatch_list {
@@ -87,7 +101,7 @@
 	cursor: pointer;
 	text-decoration: underline;
 	color: blue;
-	padding: 0.3vh 0;
+	padding: 0.1em 0;
 }
 .button_delete>span {
 	background-image: url(../icons/delete.svg);
@@ -101,7 +115,6 @@ input[name="court_id"] {
 }
 
 
-
 .version {
 	color: #ddd;
 	position: absolute;
@@ -110,26 +123,33 @@ input[name="court_id"] {
 }
 
 /* Smartphones */
-@media screen and (max-device-width:480px) {
+@media screen and (max-width:480px) {
 	.settings_container {
 		border-radius: 0;
 	}
 	.setup_manual_teams>* {
 		display: block;
 		width: 100%;
-	}
-
-	#setup_network_matches {
 		text-align: center;
 	}
-	.setup_network_match {
-		font-size: 4vmin;
+	.setup_manual_team>div>input {
+		width: 90%;
 	}
-	.setup_network_match_match_name {
-		font-size: 6vmin;
+
+	.setup_manual_details input[type="text"] {
+		min-width: unset;
 	}
-	.setup_network_matches_reload {
-		width: 1em;
-		height: 1em;
+	.setup_manual_teams:after {
+		display: none;
+	}
+	.setup_manual_discipline {
+		text-align: center;
+	}
+	.setup_manual_discipline>label+label {
+		margin-left: 3em;
+	}
+	.setup_manual_start_container {
+		text-align: center;
 	}
 }
+
