@@ -1,5 +1,6 @@
 var state = {
 	initialized: false,
+	ui: {},
 };
 var networks = {};
 

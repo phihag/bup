@@ -37,13 +37,12 @@ function store(s) {
 
 var _network_hide_cb = null;
 function show() {
-	var wrapper = $('#settings_wrapper');
-	if (wrapper.attr('data-settings-visible') == 'true') {
+	if (state.ui.settings_visible) {
 		return;
 	}
-	wrapper.attr('data-settings-visible', 'true');
+	state.ui.settings_visible = true;
 
-	wrapper.show();
+	$('#settings_wrapper').show();
 	if (networks.courtspot || networks.btde) {
 		$('.setup_network_container').show();
 		$('.setup_show_manual').show();
@@ -68,14 +67,13 @@ function hide(force) {
 		_network_hide_cb();
 		_network_hide_cb = null;
 	}
-	var wrapper = $('#settings_wrapper');
-	if (wrapper.attr('data-settings-visible') == 'false') {
+	if (! state.ui.settings_visible) {
 		return;
 	}
 
-	wrapper.hide();
+	state.ui.settings_visible = false;
+	$('#settings_wrapper').hide();
 	uiu.esc_stack_pop();
-	wrapper.attr('data-settings-visible', 'false');
 }
 
 var _settings_checkboxes = ['save_finished_matches', 'go_fullscreen', 'show_pronounciation'];

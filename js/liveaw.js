@@ -31,17 +31,6 @@ function _liveaw_request(msg, cb) {
 }
 
 function liveaw_init(liveaw_match_id) {
-	state = {
-		initialized: false,
-		liveaw: {
-			match_id: liveaw_match_id,
-			handlers: {},
-			next_request_id: 1,
-			common_state: [],
-		},
-	};
-
-	ui_waitprogress('Kontaktiere liveaw');
 	liveaw_contact(function(err, ws) {
 		if (err) {
 			control.show_error(err, msg);

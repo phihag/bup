@@ -24,7 +24,7 @@
 	right: 0; /* legacy */
 	right: 1vmin;
 }
-@media screen and (min-aspect-ratio: 4/5) {
+@media screen and (min-aspect-ratio: 18/10) {
 	#left_score, #right_score {
 		font-size: 22vmin;
 	}

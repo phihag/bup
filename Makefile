@@ -56,6 +56,9 @@ dist: cleandist
 upload: dist
 	cp div/dist_upload_config.json dist/.upload_config.json
 	cp div/dist_public dist/.public
+	$(MAKE upload-run)
+
+upload-run:
 	cd dist && upload
 
 test:
@@ -81,4 +84,4 @@ clean: cleandist
 	rm -rf -- libs
 	rm -rf -- node_modules
 
-.PHONY: default help deps test clean install-libs force-install-libs upload dist cleandist coverage coverage-display cd lint jshint eslint appcache-manifest manifest
+.PHONY: default help deps test clean install-libs force-install-libs upload dist cleandist coverage coverage-display cd lint jshint eslint appcache-manifest manifest upload-run

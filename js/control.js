@@ -35,6 +35,7 @@ function resume_match(s) {
 	calc.init_state(s, null, s.presses, true);
 	calc.state(s);
 	s.settings = state.settings;
+	s.ui = state.ui;
 	state = s;
 	set_current(s);
 	render.ui_render(s);
@@ -285,7 +286,7 @@ function load_by_hash() {
 function set_current(s) {
 	var hval = window.location.hash.substr(1);
 	var qs = utils.parse_query_string(hval);
-	hval = hval.replace(/(?:^|&)m=[^&]*/g, '');
+	hval = hval.replace(/(?:^|&)(?:m)(?:=[^&]*)?(?=&|$)/g, '');
 
 	if (s === null) {
 		if (hval != window.location.hash.substr(1)) {

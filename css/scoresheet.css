@@ -1,19 +1,21 @@
-.scoresheet_container>.scoresheet_buttons {
+.scoresheet_buttons {
 	position: absolute;
-	font-size: 3vw;
+	font-size: 24px; /* legacy */
+	font-size: 4vmin;
 	z-index: 100;
+	bottom: 0; /* legacy */
 	bottom: 0.1vmin;
 	padding: 0 0.1vmin;
 	left: 0; right: 0;
 }
-.scoresheet_container>.scoresheet_buttons>button {
+.scoresheet_buttons>button {
 	margin: 0;
 	font-size: inherit;
 	padding: 0.1em 0.1em;
 	min-width: 7em;
 	opacity: 0.9;
 }
-.scoresheet_container>.scoresheet_buttons>button+button {
+.scoresheet_buttons>button+button {
 	margin-left: 2vw;
 }
 .scoresheet_button_back {
@@ -22,13 +24,31 @@
 }
 
 @media screen and (orientation: portrait) {
-	.scoresheet_container>.scoresheet_buttons>button {
+	.scoresheet_buttons>button {
 		float: none;
 		display: block;
 		min-width: 80%;
-		margin: 5vmin auto !important;
+		margin: 4vmin auto !important;
 		font-size: 10vmin;
 		padding: 1vmin 0;
+	}
+}
+@media screen and (min-aspect-ratio: 16/10) {
+	.scoresheet_buttons {
+		top: auto;
+		bottom: 0;
+		left: auto;
+		right: 0;
+	}
+	.scoresheet_buttons>button {
+		display: block;
+		float: none;
+		font-size: 8vmin;
+		margin: 0 1vmin 10vh 0 !important;
+		padding: 3vmin 0;
+	}
+	.scoresheet_buttons>button:last-child {
+		margin-bottom: 1vmin !important;
 	}
 }
 
@@ -39,6 +59,7 @@
 	.scoresheet {
 		position: absolute;
 		left: 0; top: 0;
+		width: 100%; /* legacy */
 		width: 100vw;
 		height: 70.71067811865474vw; /* 100 / √2  (ratio of DIN A) */
 		max-width: 141.4213562373095vh;

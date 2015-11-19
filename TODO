@@ -1,6 +1,8 @@
-do not update after very very first updateready event
+scoresheet buttons
 go back from settings with android back
 go back from scoresheet with android back
+
+check aufschlagwechsel.de with devtools
 
 retest Manuel's notes
 mail to Ulf, Marius, Manuel, Werner Durow, Jörg, Susanne
@@ -8,7 +10,6 @@ mail to Ulf, Marius, Manuel, Werner Durow, Jörg, Susanne
 		Ulf: iPhone
 	send mails
 
-hide restart button
 liveaw 2.0 (RL Manuel + Benedikt)
 	import
 custom lint: look for [ \t]\n in source files
@@ -156,6 +157,7 @@ manual editing in portrait (maybe distinguish by aspect ratio?)
 improve settings display on smartphone
 investigate performance of timers
 test svg_path_lines
+move editmode_active into state.ui
 Button "bitte spielen" mehr betonen (icon?)
 test that singles with pick_receiver works just fine
 minify HTML
