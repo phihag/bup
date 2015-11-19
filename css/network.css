@@ -5,10 +5,10 @@
 	position: absolute;
 	top: 16vh;
 	left: 0;
-	padding: 2vmin;
+	padding: 0.8em 1em;
 	background: rgba(255, 255, 255, 0.9);
-	border-top-right-radius: 1vmin;
-	border-bottom-right-radius: 1vmin;
+	border-top-right-radius: 0.8em;
+	border-bottom-right-radius: 0.8em;
 }
 .network_error {
 	color: red;
@@ -19,8 +19,8 @@
 	background-image: url(../icons/desync.svg);
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
-	width: 10vmin;
-	height: 10vmin;	
+	width: 5em;
+	height: 5em;
 }
 .network_desync_image_preload {
 	position: absolute;
@@ -37,7 +37,7 @@
 	clear: left;
 	color: red;
 	font-weight: bold;
-	padding: 1vmin 0 0 0;
+	padding: 1em 0 0 0;
 }
 
 .loading-icon {
@@ -54,21 +54,68 @@ button>.loading-icon {
 	transform: translate(-50%, -50%);
 }
 
+@media screen and (orientation: portrait) {
+	.settings_login>button, .settings_login>input {
+		display: block;
+		margin: 1em auto 1em auto;
+	}
+}
+
+
+#setup_network_matches {
+	margin: 0 -1em;
+}
+.setup_network_match {
+	min-width: 18em;
+	max-width: 90%;
+	margin: 1em;
+	padding: 0.5em 0 0.5em 0;
+}
+.setup_network_match_match_name {
+	font-size: 180%;
+}
+.setup_network_match>span {
+	display: block;
+	text-align: center;
+}
+.setup_network_matches_loading>* {
+	vertical-align: middle;
+}
+.setup_network_matches_loading>.loading-icon {
+	margin-left: 1.5vmin;
+	display: inline-block;
+}
+#setup_network_matches>.network_error {
+	margin-left: 1.5vmin;
+}
+.setup_network_match_score {
+	font-style: italic;
+}
+
+
+.setup_network_heading:after {
+	/* Set line-height to height, so that we can vertically center with vertical-align: middle; */
+	content: '';
+	display: inline-block;
+	height: 100%;
+}
+.setup_network_heading>* {
+	vertical-align: middle;
+}
+.setup_network_matches_reload {
+	display: inline-block;
+	margin: 0 0 0 0.6em;
+	background-image: url(../icons/reload.svg);
+	width: 1em;
+	height: 1em;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
 
 
 /* Smartphones */
 @media screen and (max-device-width:480px) {
 	#setup_network_matches {
 		text-align: center;
-	}
-	.setup_network_match {
-		font-size: 4vmin;
-	}
-	.setup_network_match_match_name {
-		font-size: 6vmin;
-	}
-	.setup_network_matches_reload {
-		width: 1em;
-		height: 1em;
 	}
 }

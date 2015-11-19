@@ -17,7 +17,7 @@
 	text-align: left;
 	background: #ffffff;
 	border-radius: 1em;
-	padding: 0 1em 1em 1em;
+	padding: 0 2em 1em 2em;
 }
 .settings_container input, .settings_container button {
 	font-size: inherit;
@@ -62,7 +62,6 @@
 	content: '';
 	display: inline-block;
 	height: 100%;
-	vertical-align: middle;
 }
 .setup_manual_teams>* {
 	vertical-align: middle;
@@ -90,6 +89,11 @@
 	padding: 0.1em 0.5em;
 	margin: 0.4em 0;
 	min-width: 10em;
+}
+
+#setup_manual_form th {
+	text-align: left;
+	padding-right: 0.2em;
 }
 
 
@@ -126,6 +130,8 @@ input[name="court_id"] {
 @media screen and (max-width:480px) {
 	.settings_container {
 		border-radius: 0;
+		padding-left: 1em;
+		padding-right: 1em;
 	}
 	.setup_manual_teams>* {
 		display: block;

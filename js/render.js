@@ -266,14 +266,7 @@ function ui_render(s) {
 		undo.addClass('half-invisible');
 	}
 
-	var redo = $('#button_redo');
-	if (s.redo_possible) {
-		redo.removeAttr('disabled');
-		redo.removeClass('nearly-invisible');
-	} else {
-		redo.attr('disabled', 'disabled');
-		redo.addClass('nearly-invisible');
-	}
+	$('#button_redo').toggle(s.redo_possible);
 
 	if (s.timer) {
 		timer.set();

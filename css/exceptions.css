@@ -1,19 +1,22 @@
 
 .exception_dialog {
 	vertical-align: top;
-	text-align: center;
 }
 .exception_dialog>div {
 	display: inline-block;
 	text-align: center;
 	font-size: 3vmin;
 	vertical-align: top;
-	margin: 2vmin;
+	margin: 2vmin 2vmin 0 2vmin;
 }
 .exception_dialog>div>span {
 	white-space: pre-wrap;
 }
 .exception_dialog>div>button {
+	/* legacy (for now) */
+	width: 50px;
+	height: 50px;
+
 	width: 20vmin;
 	height: 20vmin;
 	font-size: 16vmin;

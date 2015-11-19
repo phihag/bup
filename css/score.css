@@ -9,9 +9,8 @@
 	border-collapse: separate;
     border-spacing: 0;
 
-	margin-top: -2vh;
-	padding-top: 2vh;
-	border-radius: 2vh;
+    border-bottom-left-radius: 2vh;
+	border-bottom-right-radius: 2vh;
 	border: 1px solid #dadada;
 }
 #score_table tr:last-child td:first-child {
@@ -22,6 +21,7 @@
 }
 
 .score_announcements td {
+	font-size: 8px;
 	font-size: 2vh;
 	height: 3vh;
 	vertical-align: middle;
@@ -36,6 +36,7 @@ span.score_announcement+span.score_announcement {
 	color: #444444;
 }
 .score_finished-game, .score_future-game {
+	font-size: 12px;
 	font-size: 3vh;
 	line-height: 3vh;
 	height: 3.5vh;
@@ -44,6 +45,7 @@ span.score_announcement+span.score_announcement {
 	visibility: hidden;
 }
 .score_current-game {
+	font-size: 32px;
 	font-size: 8vh;
 	height: 8vh;
 }

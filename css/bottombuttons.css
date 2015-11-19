@@ -10,16 +10,52 @@
 
 #left_score, #right_score {
 	position: absolute;
+	font-size: 80px; /* legacy (for now) */
 	font-size: 15vmin;
 	padding: 4vmin;
 	bottom: 1vmin;
 	z-index: 200;
 }
 #left_score {
+	left: 0; /* legacy */
 	left: 1vmin;
 }
 #right_score {
+	right: 0; /* legacy */
 	right: 1vmin;
+}
+@media screen and (min-aspect-ratio: 4/5) {
+	#left_score, #right_score {
+		font-size: 22vmin;
+	}
+}
+
+.pick_dialog, .exception_dialog, #pronounciation {
+	position: absolute;
+	bottom: 0;
+	left: 0; right: 0;
+	text-align: center;
+	width: 40%;
+	min-width: 80vmin;
+	max-width: 100%;
+	font-size: 5vmin;
+	margin: 0 auto;
+	padding: 2% 2% 0 2%;
+	background: rgba(255, 255, 255, 0.9);
+	border-top-left-radius: 1em;
+	border-top-right-radius: 1em;
+	z-index: 100;
+}
+.pick_dialog button {
+	font-size: inherit;
+	display: block;
+	margin: 1em 0 1em 0;
+	width: 100%;
+	padding: 0.5em 0;
+	white-space: pre-wrap;
+}
+.pick_dialog button+button {
+	margin-top: 1.5em;
 }
 
 @media screen and (max-aspect-ratio: 3/4) {

@@ -26,7 +26,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="13.158327"
-     inkscape:cx="24.895923"
+     inkscape:cx="12.736322"
      inkscape:cy="32.640937"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -58,18 +58,11 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-277.64891,-453.61149)">
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.49657393px;line-height:100%;font-family:'Droid Sans';-inkscape-font-specification:'Droid Sans';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="293.64554"
-       y="469.87375"
-       id="text4707"
-       sodipodi:linespacing="100%"><tspan
-         sodipodi:role="line"
-         id="tspan4709"
-         x="293.64554"
-         y="469.87375"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.78355598px;font-family:'Arial Black';-inkscape-font-specification:'Arial Black, '">R</tspan></text>
+    <path
+       inkscape:connector-curvature="0"
+       id="path4138"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.78355598px;line-height:100%;font-family:'Arial Black';-inkscape-font-specification:'Arial Black, ';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 294.92397,469.87375 0,-12.01401 6.1873,0 q 1.72097,0 2.63063,0.29502 0.90965,0.29503 1.46692,1.09814 0.55726,0.79493 0.55726,1.94224 0,0.9998 -0.42614,1.72917 -0.42615,0.72117 -1.1719,1.1719 -0.47531,0.28682 -1.30302,0.47531 0.6638,0.22127 0.96702,0.44254 0.20488,0.14751 0.59005,0.63102 0.39336,0.48351 0.52449,0.74575 l 1.79472,3.48292 -4.19589,0 -1.98321,-3.6714 q -0.37698,-0.71298 -0.672,-0.92605 -0.40156,-0.27863 -0.90965,-0.27863 l -0.32781,0 0,4.87608 -3.72877,0 z m 3.72877,-7.14612 1.56527,0 q 0.25404,0 0.98341,-0.16391 0.36878,-0.0737 0.59824,-0.37697 0.23766,-0.30322 0.23766,-0.69658 0,-0.58186 -0.36878,-0.89327 -0.36878,-0.31141 -1.38497,-0.31141 l -1.63083,0 0,2.44214 z" />
     <rect
        style="color:#000000;display:inline;overflow:visible;visibility:visible;fill:#ffd10d;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:8;marker:none;enable-background:accumulate"
        id="rect3004"

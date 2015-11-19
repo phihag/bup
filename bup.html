@@ -28,18 +28,20 @@
 
 <div id="game">
 <div class="topleft_buttons">
-<button id="button_undo" title="Rückgängig" disabled="disabled" class="image-button half-invisible"><span></span></button>
-<button id="button_exception" title="Situation" class="image-button"><span></span></button>
-<button id="button_redo" title="Wiederholen" disabled="disabled" class="image-button nearly-invisible"><span></span></button>
-</div>
+	<!-- careful not to insert spaces in between buttons-->
+<button id="button_undo" title="Rückgängig" disabled="disabled" class="image-button half-invisible"><span></span></button
+><button id="button_exception" title="Situation" class="image-button"><span></span></button
+></div>
 
 <div class="topright_buttons">
 
 <button id="button_shuttle" title="Federball +1" class="image-button">
 	<div id="shuttle_counter_value"></div>
-	<span class="button_icon"></span></button>
-<button id="button_settings" title="Konfiguration" class="image-button"><span></span></button>
+	<span class="button_icon"></span></button
+><button id="button_settings" title="Konfiguration" class="image-button"><span></span></button>
 </div>
+
+<button id="button_redo" title="Wiederholen" class="image-button default-invisible"><span></span></button>
 
 <div id="score">
 <table id="score_table">
@@ -51,7 +53,6 @@
 </table>
 </div>
 
-<div id="court_container">
 <div id="court">
 <div id="court_court_str"><span></span></div>
 <div id="court_arrow" class="default-invisible"></div>
@@ -67,7 +68,6 @@
 <button class="editmode_switch_left default-invisible"></button>
 <button class="editmode_switch_right default-invisible"></button>
 <button class="editmode_leave default-invisible"></button>
-</div>
 </div>
 
 <div class="network_desync_container default-invisible">

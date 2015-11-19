@@ -32,31 +32,3 @@
 		color: #DE0000;
 	}
 }
-
-
-/*
-TODO: need to test this
-@media screen and (max-aspect-ratio: 3/4) {
-	.timer_container {
-		position: absolute;
-		left: 0; right: 0;
-		top: auto;
-		bottom: 0;
-		text-align: center;
-		font-size: 16vmin;
-	}
-
-	.timer_restart {
-		display: inline-block;
-		float: none;
-		width: 12vmin;
-		height: 12vmin;
-		margin-right: 0;
-	}
-
-	.timer {
-		min-width: 1.8em;
-	}
-}
-
-*/

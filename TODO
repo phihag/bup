@@ -1,14 +1,18 @@
-timer overlay is broken on smartphone
-test network stuff on smartphones
-button proportions on various smartphones and tablets
-fix display without vw (see Manuel, https://github.com/saabi/vminpoly)
+do not update after very very first updateready event
+go back from settings with android back
+go back from scoresheet with android back
+
 retest Manuel's notes
 mail to Ulf, Marius, Manuel, Werner Durow, Jörg, Susanne
 	write Mails
+		Ulf: iPhone
 	send mails
 
+hide restart button
 liveaw 2.0 (RL Manuel + Benedikt)
 	import
+custom lint: look for [ \t]\n in source files
+
 
 error handling + reporting (automated)
 feedback form

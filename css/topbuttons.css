@@ -1,40 +1,62 @@
-.topleft_buttons>*,.topright_buttons>* {
-	width: 12vmin;
-	height: 12vmin;
-	min-width: 10vh;
-	min-height: 10vh;
-	position: relative;
-	vertical-align: top;
-}
 .topleft_buttons, .topright_buttons {
 	z-index: 1000;
-	margin-bottom: 4vh;
+	margin-top: 1vmin;
+	margin-bottom: 4vmin;
 }
 .topleft_buttons {
 	float: left;
+	margin-left: 1vmin;
 }
 .topright_buttons {
 	float: right;
+	margin-right: 1vmin;
+}
+@media all and (max-width: 480px) {
+	.topleft_buttons, .topright_buttons {
+		margin: 0;
+	}
 }
 
-.topleft_buttons>*:not(:first-child), .topright_buttons>*:not(:first-child) {
-	margin-left: 7vh;
+.topleft_buttons>*,.topright_buttons>*, #button_redo {
+	width: 85px;
+	height: 85px;
+	min-width: 18vmin;
+	min-height: 18vmin;
+	max-width: 22vmin;
+	max-height: 22vmin;
+
+	position: relative;
+	vertical-align: top;
+	margin: 0;
+
+	margin-left: 40px;
+	margin-left: 7vmin;
+}
+.topleft_buttons>*:first-child, .topright_buttons>*:first-child {
+	margin-left: 0;
 }
 #button_redo {
 	position: absolute;
-	left: 30vmin;
-	top: 0;
+	top: 80px; /* legacy */
+	top: 25vmin;
+	left: 0;
+	margin: 0 0 0 1vmin;
+	z-index: 10;
 }
-@media all and (orientation: portrait) {
-	.topleft_buttons>*:not(:first-child), .topright_buttons>*:not(:first-child) {
-		margin-left: 3vh;
+@media all and (max-width: 480px) {
+	.topleft_buttons>*,.topright_buttons>*,#button_redo {
+		margin: 0;
 	}
-	#button_redo {
-		left: 0;
-		top: 18vh;
-		margin-left: 1vh !important;
+	.topleft_buttons>*:not(:last-child) {
+		margin-right: 10px;
+		margin-right: 3vmin;
 	}
+	.topright_buttons>*:not(:first-child) {
+		margin-left: 10px;
+		margin-left: 3vmin;
+	}*
 }
+
 #shuttle_counter_value {
 	font-size: 6vmin;
 	position: absolute;
@@ -43,12 +65,6 @@
 	text-align: right;
 }
 
-.topleft_buttons>* {
-	margin: 1vh 0 0 1vh;
-}
-.topright_buttons>* {
-	margin: 1vh 1vh 0 0;
-}
 #button_settings>span {
 	background-image: url(../icons/settings.svg);
 }
@@ -64,3 +80,4 @@
 #button_shuttle>span.button_icon {
 	background-image: url(../icons/shuttle-button.svg);
 }
+

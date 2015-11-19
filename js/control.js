@@ -285,7 +285,7 @@ function load_by_hash() {
 function set_current(s) {
 	var hval = window.location.hash.substr(1);
 	var qs = utils.parse_query_string(hval);
-	hval = hval.replace(/[#&]m=[^&]*/g, '');
+	hval = hval.replace(/(?:^|&)m=[^&]*/g, '');
 
 	if (s === null) {
 		if (hval != window.location.hash.substr(1)) {
