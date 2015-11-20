@@ -1,5 +1,8 @@
+suspension pronounciation
+implement proper suspension mechanisms, retire interruption
+	scoresheeet
 generate chars on demand instead of in calc_state
-Manuell bearbeiten in en
+manual edit UI on smartphones
 
 send mails
 	send Ulf
@@ -9,9 +12,6 @@ send mails
 	send Jörg
 	send Susanne
 
-suspension pronounciation
-implement proper suspension mechanisms, retire interruption
-	scoresheeet
 
 ask for feedback from BC
 
@@ -165,7 +165,6 @@ minify HTML
 implement service workers as well as appcache
 rename interruption suspension
 CSS: check that we combine media rules in practice with cleancss
-eliminate i18n exceptions.*-mark in favor of mark:
 convert static (in HTML) pickers to team_pick / player_pick etc.
 consider eliminating love-all
 move manual editing confirm button to bottom (with white border) and give it a text "Übernehmen"
