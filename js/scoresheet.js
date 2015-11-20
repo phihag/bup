@@ -163,6 +163,8 @@ function _parse_match(state, col_count) {
 		scoresheet_game: _make_scoresheet_game(),
 		scoresheet_games: [],
 		settings: state.settings,
+		lang: state.lang,
+		_: state._,
 	};
 	calc.init_state(s, state.setup);
 	s.presses = state.presses;
@@ -364,12 +366,17 @@ function _parse_match(state, col_count) {
 			s.scoresheet_game.col_idx++;
 			break;
 		case 'retired':
-			s.scoresheet_game.cells.push({
+			var retired_cell = {
 				row: 2 * press.team_id + press.player_id,
 				col: s.scoresheet_game.col_idx,
 				val: press.char,
-			});
-			if (s.settings.lang == 'de') {
+			};
+			if (press.char.length > 1) {
+				retired_cell.type = 'longtext';
+				retired_cell.width = 2;
+			}
+			s.scoresheet_game.cells.push(retired_cell);
+			if (s.lang == 'de') {
 				// Why suppressed? See below under disqualified
 				s.scoresheet_game.circle = 'suppressed';
 			}
@@ -385,7 +392,7 @@ function _parse_match(state, col_count) {
 			};
 			// Example after German RTTO shows no circle if player is disqualified, so suppress the circle
 			// Internationally, do include a circle (BWF Umpire Training manual January 2015 page 41/42)
-			if (s.settings.lang == 'de') {
+			if (s.lang == 'de') {
 				s.scoresheet_game.circle = 'suppressed';
 			}
 			s.scoresheet_game.cells.push(cell);
@@ -949,7 +956,7 @@ function ui_pdf() {
 
 	var props = {
 		title: _match_title(state, '/'),
-		subject: 'Schiedsrichterzettel',
+		subject: state._('Score Sheet'),
 		creator: 'bup (https://github.com/phihag/bup/)',
 	};
 	if (state.setup.umpire && state.setup.umpire.name) {

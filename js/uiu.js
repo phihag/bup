@@ -73,7 +73,8 @@ function make_pick(s, label, values, on_pick, on_cancel, container) {
 	});
 
 	if (on_cancel) {
-		var cancel_btn = $('<button class="cancel-button">Abbrechen</button>');
+		var cancel_btn = $('<button class="cancel-button"></button>');
+		cancel_btn.text(s._('button:Cancel'));
 		cancel_btn.on('click', cancel);
 		cancel_btn.appendTo(dlg);
 	}

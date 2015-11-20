@@ -29,14 +29,9 @@ function teamtext_internal(s, team_id) {
 
 // Simplified announcement for minimal buttons
 function loveall_announcement(s) {
-	var prefix = '';
-	if (s.match.finished_games.length == 1) {
-		prefix = 'Zweiter Satz. ';
-	} else if (s.match.finished_games.length == 2) {
-		prefix = 'Entscheidungssatz. ';
-	}
-
-	return prefix + '0 beide.\nBitte spielen';
+	return s._('loveall_play.' + s.match.finished_games.length, {
+		mark_extra: '',
+	});
 }
 
 function postgame_announcement(s) {
@@ -49,7 +44,7 @@ function postgame_announcement(s) {
 		winner_name = winner.name;
 	} else {
 		if (s.setup.is_doubles) {
-			winner_name = winner.players[0].name + ' und ' + winner.players[1].name;
+			winner_name = winner.players[0].name + s._('wonby.and') + winner.players[1].name;
 		} else {
 			winner_name = winner.players[0].name;
 		}
@@ -61,11 +56,18 @@ function postgame_announcement(s) {
 			return str;
 		}, '');
 
-		res = 'Das Spiel wurde gewonnen von ' + winner_name + ' mit ' + previous_scores + winner_score + '-' + loser_score;
-	} else if (s.match.finished_games.length === 0) {
-		res = 'Der erste Satz wurde gewonnen von ' + winner_name + ' mit ' + winner_score + '-' + loser_score;
-	} else if (s.match.finished_games.length == 1) {
-		res = 'Der zweite Satz wurde gewonnen von ' + winner_name + ' mit ' + winner_score + '-' + loser_score + '; einen Satz beide';
+		res = s._('wonby.match', {
+			winner_name: winner_name,
+			previous_scores: previous_scores,
+			winner_score: winner_score,
+			loser_score: loser_score,
+		});
+	} else if (s.match.finished_games.length <= 1) {
+		res = s._('wonby.' + (1 + s.match.finished_games.length), {
+			winner_name: winner_name,
+			winner_score: winner_score,
+			loser_score: loser_score,
+		});
 	} else {
 		throw new Error('Won third game but match not finished?');
 	}
@@ -76,10 +78,13 @@ function _prematch_team(s, team_id) {
 	var team = s.setup.teams[team_id];
 	var res = '';
 	if (s.setup.team_competition) {
-		res = team.name + ', vertreten durch ';
+		res = team.name + s._('onmyleft.representedby');
 	}
 	if (s.setup.is_doubles) {
-		res += team.players[0].name + ' und ' + team.players[1].name;
+		res += s._('onmyleft.team.doubles', {
+			p1: team.players[0].name,
+			p2: team.players[1].name,
+		});
 	} else {
 		res += team.players[0].name;
 	}
@@ -98,31 +103,44 @@ function _pronounciation_score(s, score, team1_serving, service_over) {
 	}
 	var first_score = score[team1_serving ? 0 : 1];
 	var second_score = score[team1_serving ? 1 : 0];
-	var point_str = (s.game.gamepoint ? ' Satzpunkt' : (s.game.matchpoint ? ' Spielpunkt' : ''));
+	if (s.lang == 'en') {
+		if (first_score === 0) {
+			first_score = 'Love';
+		}
+		if (second_score === 0) {
+			second_score = 'Love';
+		}
+	}
+	var point_str = (s.game.gamepoint ? (' ' + s._('game point')) : (s.game.matchpoint ? (' ' + s._('match point')) : ''));
 	var score_str = (
 		(first_score == second_score) ?
-		(first_score + point_str + ' beide') :
+		(first_score + point_str + ' ' + s._('score.all')) :
 		(first_score + (point_str ? (point_str + ' ') : '-') + second_score)
 	);
-	var service_over_str = (service_over ? 'Aufschlagwechsel. ' : '');
+	var service_over_str = (service_over ? s._('score.service_over') : '');
 	return service_over_str + score_str;
 }
 
-function marks2str(s, marks) {
+function marks2str(s, marks, during_interval) {
 	var res = '';
 	marks.forEach(function(mark) {
+		var d = {};
+		if ((mark.team_id !== undefined) && (mark.player_id !== undefined)) {
+			d.player_name = s.setup.teams[mark.team_id].players[mark.player_id].name;
+		}
+
 		switch (mark.type) {
 		case 'yellow-card':
-			res += s.setup.teams[mark.team_id].players[mark.player_id].name + ', Verwarnung wegen unsportlichen Verhaltens.\n';
+			res += s._('card.yellow', d);
 			break;
 		case 'red-card':
-			res += s.setup.teams[mark.team_id].players[mark.player_id].name + ', Fehler wegen unsportlichen Verhaltens.\n';
+			res += s._('card.red' + (during_interval ? '.interval' : ''), d);
 			break;
 		case 'disqualified':
-			res += s.setup.teams[mark.team_id].players[mark.player_id].name + ', disqualifiziert wegen unsportlichen Verhaltens.\n';
+			res += s._('card.black', d);
 			break;
 		case 'retired':
-			res += s.setup.teams[mark.team_id].players[mark.player_id].name + ' gibt auf.\n';
+			res += s._('card.retired', d);
 			break;
 		}
 	});
@@ -143,44 +161,48 @@ function pronounce(s) {
 		var server_name = s.setup.teams[serving_team_id].players[serving_player_id].name;
 		var receiver_name = s.setup.teams[receiving_team_id].players[receiving_player_id].name;
 
+		var d; // Can't use let :(
 		if (s.setup.team_competition) {
+			var serving_str = (
+				s.setup.is_doubles ?
+				(s.setup.is_doubles ? (', ' + server_name + s._('onmyleft.serve.to') + receiver_name) : '') :
+				''
+			);
+			d = {
+				away_team: _prematch_team(s, 1),
+				home_team: _prematch_team(s, 0),
+				serving_team: s.setup.teams[serving_team_id].name,
+				serving_str: serving_str,
+				score: _pronounciation_score(s),
+			};
+
 			return (
 				mark_str +
-				'Meine Damen und Herren:\n' +
-				'Zu meiner ' + (s.game.team1_left ? 'Rechten' : 'Linken') + ', ' + _prematch_team(s, 1) + ',\n' +
-				'und zu meiner ' + (s.game.team1_left ? 'Linken' : 'Rechten') + ', ' + _prematch_team(s, 0) + '.\n' +
-				s.setup.teams[serving_team_id].name + ' schlägt auf' + (s.setup.is_doubles ? (', ' + server_name + ' zu ' + receiver_name) : '') + '.\n' +
-				_pronounciation_score(s) + '.\nBitte spielen.'
+				s._(s.game.team1_left ? 'onmyleft.home_team' : 'onmyleft.away_team', d)
 			);
 		} else {
-			return (
-				mark_str +
-				'Meine Damen und Herren:\n' +
-				'Zu meiner Rechten, ' + _prematch_team(s, (s.game.team1_left ? 1 : 0)) + ',\n' +
-				'und zu meiner Linken, ' + _prematch_team(s, (s.game.team1_left ? 0 : 1)) + '.\n' +
-				server_name + ' schlägt auf' + (s.setup.is_doubles ? (' zu ' + receiver_name) : '') + '.\n' +
-				_pronounciation_score(s) + '.\nBitte spielen.'
-			);
+			var receiver_str = (s.setup.is_doubles ?
+				s._('onmyleft.serveto', {receiver: receiver_name}) : '');
+
+			d = {
+				right_team: _prematch_team(s, (s.game.team1_left ? 1 : 0)),
+				left_team: _prematch_team(s, (s.game.team1_left ? 0 : 1)),
+				server: server_name,
+				receiver_str: receiver_str,
+				score: _pronounciation_score(s),
+			};
+
+			return mark_str + s._('onmyleft', d);
 		}
 	} else if (s.match.announce_pregame) {
-		var res = '';
-		switch (s.match.finished_games.length) {
-		case 1:
-			res = 'Zweiter Satz.';
-			break;
-		case 2:
-			res = 'Entscheidungssatz.';
-			break;
-		}
-
-		res += ' 0 beide.';
 		if (mark_str) {
-			res += '\n' + mark_str + _pronounciation_score(s) + '. ';
+			return s._('loveall_play.' + s.match.finished_games.length + '.mark', {
+				mark_str: marks2str(s, s.match.marks, true),
+				score: _pronounciation_score(s),
+			});
 		} else {
-			res += '\n';
+			return s._('loveall_play.' + s.match.finished_games.length);
 		}
-		res += 'Bitte spielen.';
-		return res;
 	}
 
 	if (s.game.finished) {
@@ -189,12 +211,12 @@ function pronounce(s) {
 		if (s.game.final_marks) {
 			pre_mark_str = marks2str(s, s.game.final_marks);
 			var post_marks = s.match.marks.slice(s.game.final_marks.length);
-			post_mark_str = marks2str(s, post_marks);
+			post_mark_str = marks2str(s, post_marks, true);
 		}
 
 		return (
 			pre_mark_str +
-			(s.game.won_by_score ? 'Satz.\n' : '') +
+			(s.game.won_by_score ? s._('game(won)') + '.\n' : '') +
 			(post_mark_str ? (post_mark_str) : '') +
 			postgame_announcement(s)
 		);
@@ -205,13 +227,13 @@ function pronounce(s) {
 			return null;  // Special case at 0-0, we just showed the long text. Time to focus on the game.
 		}
 
-		var interval_str = (s.game.interval ? ' Pause' : '') + (s.game.change_sides ? '. Bitte die Spielfeldseiten wechseln' : '');
+		var interval_str = (s.game.interval ? ' ' + s._('Interval') : '') + (s.game.change_sides ? s._('change_ends') : '');
 		if (s.game.interval && mark_str) {
 			var interval_pre_mark_str = marks2str(s, s.game.interval_marks);
 			var post_interval_marks = s.match.marks.slice(s.game.interval_marks.length);
 
 			if (post_interval_marks.length > 0) {
-				var interval_post_mark_str = marks2str(s, post_interval_marks);
+				var interval_post_mark_str = marks2str(s, post_interval_marks, true);
 				if (interval_post_mark_str) {
 					// Only use extended form if it's more than just a referee call
 					return (
@@ -219,7 +241,8 @@ function pronounce(s) {
 						_pronounciation_score(s, s.game.interval_score, s.game.interval_team1_serving, s.game.interval_service_over) +
 						interval_str + '.\n' +
 						interval_post_mark_str +
-						_pronounciation_score(s) + '. Bitte spielen.'
+						_pronounciation_score(s) +
+						s._('card.play')
 					);
 				}
 			}
@@ -229,7 +252,11 @@ function pronounce(s) {
 	}
 
 	if (mark_str) {
-		return mark_str.trim();
+		if (s.game.started && !s.game.finished) {
+			return mark_str.trim();
+		} else {
+			return marks2str(s, s.match.marks, true).trim();
+		}
 	}
 
 	return null;

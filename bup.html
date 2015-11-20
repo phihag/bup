@@ -29,19 +29,19 @@
 <div id="game">
 <div class="topleft_buttons">
 	<!-- careful not to insert spaces in between buttons-->
-<button id="button_undo" title="Rückgängig" disabled="disabled" class="image-button half-invisible"><span></span></button
-><button id="button_exception" title="Situation" class="image-button"><span></span></button
+<button id="button_undo" data-i18n-title="button:undo" disabled="disabled" class="image-button half-invisible"><span></span></button
+><button id="button_exception" data-i18n-title="button:exception" class="image-button"><span></span></button
 ></div>
 
 <div class="topright_buttons">
 
-<button id="button_shuttle" title="Federball +1" class="image-button">
+<button id="button_shuttle" data-i18n-title="button:shuttle" class="image-button">
 	<div id="shuttle_counter_value"></div>
 	<span class="button_icon"></span></button
-><button id="button_settings" title="Konfiguration" class="image-button"><span></span></button>
+><button id="button_settings" data-i18n-title="button:settings" class="image-button"><span></span></button>
 </div>
 
-<button id="button_redo" title="Wiederholen" class="image-button default-invisible"><span></span></button>
+<button id="button_redo" data-i18n-title="button:redo" class="image-button default-invisible"><span></span></button>
 
 <div id="score">
 <table id="score_table">
@@ -71,7 +71,7 @@
 </div>
 
 <div class="network_desync_container default-invisible">
-	<div class="network_desync_image" title="Fehler bei der Netzwerk-Übertragung"></div>
+	<div class="network_desync_image" data-i18n-title="network:error"></div>
 	<div class="network_desync_login_container"></div>
 	<div class="network_desync_errmsg"></div>
 </div>
@@ -112,59 +112,57 @@
 <div id="exception_wrapper" class="modal-wrapper default-invisible">
 <div class="exception_dialog">
 	<div>
-	<button id="exception_yellow" title="Gelbe Karte" class="image-button"><span></span></button>
-	<span>Verwarnung</span>
+	<button id="exception_yellow" data-i18n-title="exceptions:yellow-card-title" class="image-button"><span></span></button>
+	<span data-i18n="exceptions:yellow-card"></span>
 	</div>
 	<div>
-	<button id="exception_red" title="Rote Karte" class="image-button"><span></span></button>
-	<span>Fehlerwarnung</span>
+	<button id="exception_red" data-i18n-title="exceptions:red-card-title" class="image-button"><span></span></button>
+	<span data-i18n="exceptions:red-card"></span>
 	</div>
 	<div>
-	<button id="exception_referee" title="Referee">R</button>
-	<span>Referee</span>
+	<button id="exception_referee" data-i18n-title="exceptions:referee-title" data-i18n="exceptions:referee-mark"></button>
+	<span data-i18n="exceptions:referee"></span>
 	</div>
 	<div>
-	<button id="exception_interruption" title="Unterbrechung">U</button>
-	<span>Unterbrechung</span>
+	<button id="exception_interruption" data-i18n-title="exceptions:interruption-title" data-i18n="exceptions:interruption-mark"></button>
+	<span data-i18n="exceptions:interruption"></span>
 	</div>
 	<div>
-	<button id="exception_injury" title="Verletzung">V</button>
-	<span>Verletzung</span>
+	<button id="exception_injury" data-i18n-title="exceptions:injury-title" data-i18n="exceptions:injury-mark"></button>
+	<span data-i18n="exceptions:injury"></span>
 	</div>
 	<div>
-	<button id="exception_black" title="Disqualifiziert" class="image-button"><span></span></button>
-	<span>Disqualifiziert</span>
+	<button id="exception_black" data-i18n-title="exceptions:black-card-title" class="image-button"><span></span></button>
+	<span data-i18n="exceptions:black-card"></span>
 	</div>
 	<div>
-	<button id="exception_retired" title="Aufgabe">A</button>
-	<span>Aufgabe</span>
+	<button id="exception_retired" data-i18n-title="exceptions:retired-title" class="image-button"><span></span></button>
+	<span data-i18n="exceptions:retired"></span>
 	</div>
 	<div>
-	<button id="exception_correction" title="Korrektur">C</button>
-	<span>Vertauschung
-Aufschlagfeld</span>
+	<button id="exception_correction" data-i18n-title="exceptions:correction-title" data-i18n="exceptions:correction-mark"></button>
+	<span data-i18n="exceptions:correction"></span>
 	</div>
 	<div>
-	<button id="exception_overrule" title="Overrule">O</button>
-	<span>Korrektur
-Linienrichter</span>
+	<button id="exception_overrule" data-i18n-title="exceptions:overrule-title" data-i18n="exceptions:overrule-mark"></button>
+	<span data-i18n="exceptions:overrule"></span>
 	</div>
 
-	<button class="cancel-button">Abbrechen</button>
+	<button class="cancel-button" data-i18n="button:Cancel"></button>
 </div>
 </div>
 
 <div class="timer_container default-invisible">
-	<span class="timer_restart"></span><span class="timer"></span>
+	<span class="timer_restart" data-i18n-title="timer:restart"></span><span class="timer"></span>
 </div>
 
 <div class="postmatch_options default-invisible">
-<button class="postmatch_scoresheet_button">Schiedsrichterzettel</button>
+<button class="postmatch_scoresheet_button" data-i18n="Score Sheet"></button>
 </div>
 
 <div id="pronounciation" class="default-invisible"><span></span></div>
 
-<div class="appcache_update_ingame default-invisible"><div>Eine neue Version des Schiedsrichter-Panels ist verfügbar.</div><button type="button" class="appcache_update_button">Jetzt aktualisieren</button> <button type="button" class="appcache_later_button">Später</button></div>
+<div class="appcache_update_ingame default-invisible"><div data-i18n="bup.update_available"></div><button type="button" class="appcache_update_button" data-i18n="bup.update_now"></button> <button type="button" class="appcache_later_button" data-i18n="bup.update_later"></button></div>
 
 
 </div>
@@ -174,40 +172,40 @@ Linienrichter</span>
 <div class="settings_layout">
 <div class="settings_container">
 
-<div class="appcache_update default-invisible">Eine neue Version des Schiedsrichter-Panels ist verfügbar. <button class="appcache_update_button">Jetzt aktualisieren</button></div>
+<div class="appcache_update default-invisible"><span data-i18n="bup.update_available"></span> <button class="appcache_update_button" data-i18n="bup.update_later"></button></div>
 
 <div class="settings_network_login_container">
 </div>
 
 <div class="ingame_options default-invisible">
-	<h2>Aktuelles Spiel</h2>
+	<h2 data-i18n="settings:Current Match"></h2>
 
-	<button class="backtogame_button">Zurück zum Spiel</button>
-	<button class="scoresheet_button">Schiedsrichterzettel</button>
-	<button class="editmode_button">Manuell bearbeiten</button>
+	<button class="backtogame_button" data-i18n="settings:Back to Match"></button>
+	<button class="scoresheet_button" data-i18n="Score Sheet"></button>
+	<button class="editmode_button" data-i18n="settings:Edit Manually"></button>
 </div>
 
 <div class="setup">
 	<div class="setup_network_container default-invisible">
-	<h2 class="setup_network_heading"><span class="setup_network_event">Spiele</span></h2>
+	<h2 class="setup_network_heading"><span class="setup_network_event" data-i18n="settings:Matches"></span></h2>
 	<div id="setup_network_matches"></div>
 	<div class="setup_network_status"></div>
 
-	<a href="#" class="setup_show_manual">Spiel manuell eintragen ...</a>
+	<a href="#" class="setup_show_manual" data-i18n="settings:Custom match details"></a>
 	</div>
 
 	<form id="setup_manual_form" class="slim_form">
-	<h2>Neues Spiel</h2>
+	<h2 data-i18n="settings:New match"></h2>
 	<fieldset class="setup_manual_discipline">
-	<label><input type="radio" name="gametype" value="singles" tabindex="1" />Einzel</label>
-	<label><input type="radio" name="gametype" value="doubles" tabindex="2" checked="checked" />Doppel</label>
+	<label><input type="radio" name="gametype" value="singles" tabindex="1" /><span data-i18n="settings:Singles"></span></label>
+	<label><input type="radio" name="gametype" value="doubles" tabindex="2" checked="checked"/><span data-i18n="settings:Doubles"></span></label>
 	</fieldset>
 
 	<div class="setup_manual_teams">
 		<div class="setup_manual_team">
 			<div><input type="text" name="team1_player1" tabindex="11" /></div>
 			<div><input type="text" name="team1_player2" tabindex="12" class="only-doubles" /></div>
-			<div><input type="text" name="team1_name" tabindex="31"  placeholder="z.B. 1. BC Bischmisheim 1" /></div>
+			<div><input type="text" name="team1_name" tabindex="31" data-i18n-placeholder="settings:team1-placeholder" /></div>
 		</div>
 
 		<div class="setup_manual_vs">vs</div>
@@ -215,57 +213,58 @@ Linienrichter</span>
 		<div class="setup_manual_team">
 			<div><input type="text" name="team2_player1" tabindex="21" /></div>
 			<div><input type="text" name="team2_player2" tabindex="22" class="only-doubles" /></div>
-			<div><input type="text" name="team2_name" tabindex="32" placeholder="z.B. 1. BV Mülheim 1"/></div>
+			<div><input type="text" name="team2_name" tabindex="32" data-i18n-placeholder="settings:team2-placeholder"/></div>
 		</div>
 	</div>
 
 	<table class="setup_manual_details">
 	<tbody>
 	<tr>
-		<th>Spiel</th>
-		<td><input type="text" name="match_name" tabindex="41" placeholder="z.B. HE1 oder Halbfinale" /></td>
+		<th data-i18n="settings:match_name-label"></th>
+		<td><input type="text" name="match_name" tabindex="41" data-i18n-placeholder="settings:match_name-placeholder" /></td>
 	</tr>
 	<tr>
-		<th>Event</th>
-		<td><input type="text" name="event_name" tabindex="42" placeholder="z.B. BCB vs BVM oder HD-A" /></td>
+		<th data-i18n="settings:event-label"></th>
+		<td><input type="text" name="event_name" tabindex="42" data-i18n-placeholder="settings:event_name-placeholder" /></td>
 	</tr>
 	<tr>
-		<th>Turnier</th>
-		<td><input type="text" name="tournament_name" tabindex="43" placeholder="z.B. 1. Bundesliga 2015/2016" /></td>
+		<th data-i18n="settings:tournament_name-label"></th>
+		<td><input type="text" name="tournament_name" tabindex="43" data-i18n-placeholder="settings:tournament_name-placeholder" /></td>
 	</tr>
     <tr>
         <th></th>
-        <td><label><input type="checkbox" name="team_competition" tabindex="51" />Mannschaftswettbewerb</label></td>
+        <td><label><span data-i18n="settings:team_competition"></span> <input type="checkbox" name="team_competition" tabindex="51"/></label></td>
     </tr>
 	</tbody>
 	</table>
 
 	<div class="setup_manual_start_container">
-		<button tabindex="101" class="setup_manual_start">Spiel starten</button>
+		<button tabindex="101" class="setup_manual_start" data-i18n="settings:Start Match"></button>
 	</div>
 
 	</form>
 
-	<h2>Spiel fortführen</h2>
+	<h2 data-i18n="settings:Resume Match"></h2>
 
-	<div class="setup_loadmatch_none">Keine gespeicherten Spiele vorhanden!</div>
+	<div class="setup_loadmatch_none" data-i18n="settings:loadmatch_none"></div>
 
 	<ul class="setup_loadmatch_list">
 	</ul>
 </div>
 
 <div class="settings">
-<h2>Einstellungen</h2>
-<div><label>Feld <input type="text" name="court_description" size="8" placeholder="z.B. rechts" /></label> <label>Nummer <input type="number" name="court_id" min="1" /></label></div>
-<label>Schiedsrichter: <input type="text" name="umpire_name" /></label>
-<label><input type="checkbox" name="save_finished_matches" />Abgeschlossene Spiele speichern</label>
-<label><input type="checkbox" name="show_pronounciation" />Ansagen anzeigen</label>
-<div><label><input type="checkbox" name="go_fullscreen" />Vollbildmodus beim Start anfragen</label> <button class="fullscreen_button">Vollbildmodus</button></div>
-<label>Netzwerk-Timeout (ms): <input type="number" name="network_timeout" min="1" value="1000" max="600000" /></label>
-<label>Netzwerk-Wiederholungszeit (ms): <input type="number" name="network_update_interval" min="1" value="10000" max="600000" /></label>
+<h2 data-i18n="settings:Settings"></h2>
+<div><label><span data-i18n="settings:Court Description"></span> <input type="text" name="court_description" size="8" data-i18n-placeholder="settings:Court Description.placeholder" /></label> <span data-i18n="settings:Court Number"></span> <label> <input type="number" name="court_id" min="1" /></label></div>
+<label><span data-i18n="settings:Umpire"></span>: <input type="text" name="umpire_name" /></label>
+<label><span data-i18n="settings:Language"></span>: <select size="1" class="settings_language" name="language"></select></label>
+<label><input type="checkbox" name="save_finished_matches" /> <span data-i18n="settings:Store Completed Games"></span></label>
+<label><input type="checkbox" name="show_pronounciation" /> <span data-i18n="settings:Show Pronounciation"></span></label>
+<div><label><input type="checkbox" name="go_fullscreen" /> <span data-i18n="settings:Request Fullscreen on Startup"></span></label> <button class="fullscreen_button" data-i18n="settings:Go Fullscreen"></button></div>
+<label><span data-i18n="settings:Network Timeout"></span>: <input type="number" name="network_timeout" min="1" value="1000" max="600000" /></label>
+<label><span data-i18n="settings:Network Repeat Interval"></span>: <input type="number" name="network_update_interval" min="1" value="10000" max="600000" /></label>
 </div>
 
-<div class="version">Skript-Fehler</div>
+<div class="version">[script error]</div>
 </div>
 </div>
 </div>
@@ -311,9 +310,9 @@ Linienrichter</span>
 		<!-- top left -->
 		<text class="scoresheet_tournament_name"  font-weight="bold" x="15" y="13"></text>
 		<text class="scoresheet_event_name" y="13"></text>
-		<text class="scoresheet_match_label small-text" x="15" y="31.5">Spiel:</text>
+		<text class="scoresheet_match_label small-text" x="15" y="31.5" data-i18n="scoresheet:Match"></text>
 		<text class="scoresheet_match_name" x="29" y="32"></text>
-		<text class="scoresheet_date_label small-text" x="15" y="38.5">Datum:</text>
+		<text class="scoresheet_date_label small-text" x="15" y="38.5" data-i18n="scoresheet:Date"></text>
 		<text class="scoresheet_date_value" x="29" y="39"></text>
 
 		<!-- left name box -->
@@ -328,7 +327,7 @@ Linienrichter</span>
 		<ellipse class="scoresheet_results_circle_team1" visibility="hidden" cx="100" cy="30" rx="28" ry="13" />
 
 		<!-- score box -->
-		<text class="small-text" x="148.5" y="19" text-anchor="middle">Satzergebnis</text>
+		<text class="small-text" x="148.5" y="19" text-anchor="middle" data-i18n="scoresheet:points"></text>
 		<rect class="box" x="138" width="21" y="20" height="21" />
 		<line class="divider-line" x1="138" x2="159" y1="27" y2="27" />
 		<line class="divider-line" x1="138" x2="159" y1="34" y2="34" />
@@ -355,49 +354,43 @@ Linienrichter</span>
 		<ellipse class="scoresheet_results_circle_team2" visibility="hidden" cx="189" cy="30" rx="28" ry="13" />
 
 		<!-- top right information about match -->
-		<text class="small-text" x="228" y="15">Feld:</text>
+		<text class="small-text" x="228" y="15" data-i18n="scoresheet:Court"></text>
 		<line class="dashed-line" x1="252" x2="282" y1="15.5" y2="15.5"/>
 		<text class="scoresheet_court_id" x="253" y="14"></text>
-		<text class="small-text" x="228" y="22">Schiedsrichter:</text>
+		<text class="small-text" x="228" y="22" data-i18n="scoresheet:Umpire"></text>
 		<line class="dashed-line" x1="252" x2="282" y1="22.5" y2="22.5"/>
 		<text class="small-text scoresheet_umpire_name" x="253" y="21"></text>
-		<text class="small-text" x="228" y="29">Aufschlagrichter:</text>
+		<text class="small-text" x="228" y="29" data-i18n="scoresheet:Service judge"></text>
 		<line class="dashed-line" x1="252" x2="282" y1="29.5" y2="29.5"/>
 		<text class="scoresheet_servicejudge_name" x="253" y="28"></text>
-		<text class="small-text" x="228" y="36">Beginn:</text>
+		<text class="small-text" x="228" y="36" data-i18n="scoresheet:Begin"></text>
 		<line class="dashed-line" x1="252" x2="282" y1="36.5" y2="36.5"/>
 		<text class="scoresheet_begin_value" x="253" y="35"></text>
-		<text class="small-text" x="228" y="43">Ende:</text>
+		<text class="small-text" x="228" y="43" data-i18n="scoresheet:End"></text>
 		<line class="dashed-line" x1="252" x2="282" y1="43.5" y2="43.5"/>
 		<text class="scoresheet_end_value" x="253" y="42"></text>
-		<text class="small-text" x="228" y="50">Dauer:</text>
+		<text class="small-text" x="228" y="50" data-i18n="scoresheet:Duration"></text>
 		<line class="dashed-line" x1="252" x2="282" y1="50.5" y2="50.5"/>
 		<text class="scoresheet_duration_value" x="253" y="49"></text>
 
 		<g class="scoresheet_shuttle_counter">
-			<text class="small-text" x="202" y="50" text-anchor="end">Federbälle:</text>
+			<text class="small-text" x="202" y="50" text-anchor="end" data-i18n="scoresheet:Shuttles"></text>
 			<text class="scoresheet_shuttle_counter_value" x="205" y="50.5"></text>
 		</g>
 
 		<g class="scoresheet_table_container"></g>
 
-		<text class="small-text" x="118" y="200">Schiedsrichter:</text>
+		<text class="small-text" x="118" y="200" data-i18n="scoresheet:Umpire"></text>
 		<line class="dashed-line" x1="142" x2="202" y1="200.5" y2="200.5" />
-		<text class="small-text" x="207" y="200">Referee:</text>
+		<text class="small-text" x="207" y="200" data-i18n="scoresheet:Referee"></text>
 		<line class="dashed-line" x1="222" x2="282" y1="200.5" y2="200.5" />
 	</svg>
 
 	<div class="scoresheet_buttons only-screen">
 		<!-- careful with spacing -->
-		<button class="scoresheet_button_print">
-			Ausdrucken
-		</button
-		><button class="scoresheet_button_pdf" disabled="disabled">
-			PDF
-		</button
-		><button class="scoresheet_button_back">
-			Zurück
-		</button>
+		<button class="scoresheet_button_print" data-i18n="scoresheet:button:print"></button
+		><button class="scoresheet_button_pdf" disabled="disabled" data-i18n="scoresheet:button:pdf"></button
+		><button class="scoresheet_button_back" data-i18n="scoresheet:button:back"></button>
 	</div>
 </div>
 
@@ -405,14 +398,14 @@ Linienrichter</span>
 <div id="go_fullscreen" class="pick_dialog">
 <button class="go_fullscreen_go">
 <span class="go_fullscreen_go_icon"></span>
-<span>Vollbildmodus</span></button>
-<button class="go_fullscreen_normal">Normalbildmodus</button>
+<span data-i18n="fullscreen:go"></span></button>
+<button class="go_fullscreen_normal" data-i18n="fullscreen:no"></button>
 </div>
 </div>
 
-<div class="appcache_updated_wrapper default-invisible">Version <span class="appcache_updated_version">(unbekannt)</span></div>
+<div class="appcache_updated_wrapper default-invisible"><span data-i18n="bup.updated.version"></span> <span class="appcache_updated_version"></span></div>
 
-<div class="appcache_updating_wrapper default-invisible">Aktualisiere ...</div>
+<div class="appcache_updating_wrapper default-invisible" data-i18n="bup.updating"></div>
 
 
 <!--@DEV-->
@@ -420,6 +413,9 @@ Linienrichter</span>
 <script src="libs/mousetrap.min.js"></script>
 
 <script src="js/utils.js"></script>
+<script src="js/i18n.js"></script>
+<script src="js/i18n_de.js"></script>
+<script src="js/i18n_en.js"></script>
 <script src="js/uiu.js"></script>
 <script src="js/buphistory.js"></script>
 <script src="js/control.js"></script>

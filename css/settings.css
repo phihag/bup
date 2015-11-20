@@ -117,7 +117,9 @@
 input[name="court_id"] {
 	max-width: 3em;
 }
-
+.settings_language {
+	min-width: 8em;
+}
 
 .version {
 	color: #ddd;

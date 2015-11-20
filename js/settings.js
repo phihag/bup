@@ -83,6 +83,8 @@ function hide(force) {
 var _settings_checkboxes = ['save_finished_matches', 'go_fullscreen', 'show_pronounciation'];
 var _settings_textfields = ['umpire_name', 'court_id', 'court_description'];
 var _settings_numberfields = ['network_timeout', 'network_update_interval'];
+var _settings_selects = ['language'];
+
 function update() {
 	_settings_checkboxes.forEach(function(name) {
 		var box = $('.settings [name="' + name + '"]');
@@ -99,6 +101,12 @@ function update() {
 		input.val(state.settings[name] ? state.settings[name] : '');
 	});
 
+	_settings_selects.forEach(function(name) {
+		var select = $('.settings [name="' + name + '"]');
+		select.val(state.settings[name]);
+	});
+
+	i18n.ui_update_state(state);
 	render.ui_court_str(state);
 }
 
@@ -148,6 +156,18 @@ function ui_init() {
 		});
 	});
 
+	_settings_selects.forEach(function(name) {
+		var select = $('.settings [name="' + name + '"]');
+		select.on('change', function() {
+			state.settings[name] = select.val();
+			settings.store(state);
+			if (name == 'language') {
+				i18n.ui_update_state(state);
+			}
+		});
+	});
+
+
 	$('.setup_show_manual').on('click', function(e) {
 		e.preventDefault();
 		$('.setup_show_manual').hide();
@@ -178,6 +198,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var render = require('./render');
 	var uiu = require('./uiu');
 	var match_storage = require('./match_storage');
+	var i18n = require('./i18n');
 	var control = require('./control');
 
 	module.exports = settings;

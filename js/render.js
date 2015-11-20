@@ -119,22 +119,22 @@ function _score_display_set_game(s, game, game_index, is_current) {
 			ann_td.append(ann_span);
 		};
 		if (s.game.service_over) {
-			_add_ann('Aufschlagwechsel');
+			_add_ann(s._('scoredisplay:Service Over'));
 		}
 		if (s.game.gamepoint) {
-			_add_ann('Satzpunkt');
+			_add_ann(s._('scoredisplay:Game Point'));
 		}
 		if (s.game.matchpoint) {
-			_add_ann('Spielpunkt');
+			_add_ann(s._('scoredisplay:Match Point'));
 		}
 		if (s.game.interval) {
-			_add_ann('Pause');
+			_add_ann(s._('scoredisplay:Interval'));
 		}
 		if (s.game.change_sides) {
-			_add_ann('Seiten wechseln');
+			_add_ann(s._('scoredisplay:Change Ends'));
 		}
 		if (s.game.game) {
-			_add_ann('Satz');
+			_add_ann(s._('scoredisplay:Game'));
 		}
 		if (s.match.marks.length > 0) {
 			s.match.marks.forEach(function(e_press) {
@@ -166,13 +166,13 @@ function render_score_display(s) {
 function ui_court_str(s) {
 	var court_str = '';
 	if (s.settings.court_id) {
-		court_str = 'Feld ' + s.settings.court_id;
+		court_str = s._('Court') + ' ' + s.settings.court_id;
 	}
 	if (s.settings.court_description) {
 		if (court_str) {
 			court_str += '(' + s.settings.court_description + ')';
 		} else {
-			court_str += 'Feld ' + s.settings.court_description;
+			court_str += s._('Court') + ' ' + s.settings.court_description;
 		}
 	}
 	$('#court_court_str>span').text(court_str);
@@ -180,6 +180,11 @@ function ui_court_str(s) {
 
 function ui_render(s) {
 	var dialog_active = false;  // Is there anything to pick in the bottom?
+
+	if (!s.initialized) {
+		// Nothing to render really
+		return;
+	}
 
 	editmode.render(s);
 

@@ -58,14 +58,14 @@ function toggle() {
 function ui_init() {
 	$(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange', function() {
 		$('.fullscreen_button').text(
-			active() ? 'Vollbildmodus verlassen' : 'Vollbildmodus'
+			state._(active() ? 'settings:Leave Fullscreen' : 'settings:Go Fullscreen')
 		);
 	});
 
 	if (! supported()) {
 		$('.fullscreen_button').attr({
 			disabled: 'disabled',
-			title: 'Vollbildmodus wird von diesem Browser nicht unterstützt',
+			title: state._('fullscreen:unsupported'),
 		});
 	}
 	$('.fullscreen_button').on('click', function() {

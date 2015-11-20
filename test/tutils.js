@@ -14,6 +14,7 @@ var _it = ((typeof it == 'undefined') ?
 	it
 );
 
+
 (function() {
 'use strict';
 
@@ -47,6 +48,7 @@ DOUBLES_TEAM_SETUP.team_competition = true;
 function state_after(presses, setup, settings) {
 	var state = {};
 	state.settings = settings;
+	bup.i18n.update_state(state, (settings ? settings.language : 'de'));
 	bup.calc.init_state(state, setup);
 	state.presses = presses;
 	bup.calc.state(state);

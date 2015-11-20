@@ -310,28 +310,28 @@ function calc_press(s, press) {
 		s.match.finish_confirmed = true;
 		break;
 	case 'overrule':
-		press.char = 'O';
+		press.char = s._('mark:overrule');
 		s.match.marks.push(press);
 		break;
 	case 'referee':
-		press.char = 'R';
+		press.char = s._('mark:referee');
 		s.match.marks.push(press);
 		break;
 	case 'correction':
-		press.char = 'C';
+		press.char = s._('mark:correction');
 		s.match.marks.push(press);
 		break;
 	case 'interruption':
-		press.char = 'U';
+		press.char = s._('mark:interruption');
 		s.match.marks.push(press);
 		break;
 	case 'yellow-card':
-		press.char = 'W';
+		press.char = s._('mark:yellow-card');
 		s.match.marks.push(press);
 		s.match.carded[press.team_id] = true;
 		break;
 	case 'red-card':
-		press.char = 'F';
+		press.char = s._('mark:red-card');
 		if (! s.match.finished) {
 			if ((! s.game.started) && (s.match.finished_games.length === 0)) { // Before match
 				// See RTTO 3.7.7:
@@ -347,11 +347,11 @@ function calc_press(s, press) {
 		s.match.marks.push(press);
 		break;
 	case 'injury':
-		press.char = 'V';
+		press.char = s._('mark:injury');
 		s.match.marks.push(press);
 		break;
 	case 'retired':
-		press.char = 'A';
+		press.char = s._('mark:retired');
 		s.match.marks.push(press);
 		s.game.team1_won = press.team_id !== 0;
 		s.match.team1_won = s.game.team1_won;
@@ -363,7 +363,7 @@ function calc_press(s, press) {
 		s.timer = false;
 		break;
 	case 'disqualified':
-		press.char = 'Disqualifiziert';
+		press.char = s._('mark:disqualified');
 		s.match.marks = [];  // Red cards do not matter now
 		s.match.marks.push(press);
 		s.game.won_by_score = false;

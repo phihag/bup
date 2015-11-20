@@ -6,25 +6,14 @@ send mails
 	send Jörg
 	send Susanne
 
-i18n
-	UI (world icon -> include in dist)
-	create i18n module and two language modules
-	autodetect with navigator.languages (not in IE!) | navigator.language
-	i18n.onchange -> rerender JS stuff
-	prepare
-	for JS texts
-	extend pronounciation tests
-	different marks
-	different exception icons
-	apply for HTML
-	apply for scoresheet SVG
-
 ask for feedback from BC
 
 liveaw 2.0 (RL Manuel + Benedikt)
 	import
 custom lint: look for [ \t]\n in source files
 
+suspension pronounciation
+generate chars on demand instead of in calc_state
 
 error handling + reporting (automated)
 feedback form
@@ -168,7 +157,9 @@ Button "bitte spielen" mehr betonen (icon?)
 test that singles with pick_receiver works just fine
 minify HTML
 implement service workers as well as appcache
+rename interruption suspension
 CSS: check that we combine media rules in practice with cleancss
+eliminate i18n exceptions.*-mark in favor of mark:
 convert static (in HTML) pickers to team_pick / player_pick etc.
 consider eliminating love-all
 move manual editing confirm button to bottom (with white border) and give it a text "Übernehmen"

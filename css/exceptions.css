@@ -31,6 +31,9 @@
 #exception_black>span {
 	background-image: url(../icons/exception_black.svg);
 }
+#exception_retired>span {
+	background-image: url(../icons/exception_retired.svg);
+}
 
 .yellow-card-image {
 	text-align: middle;

@@ -31,11 +31,13 @@ function demo_match_start() {
 }
 
 function resume_match(s) {
+	s._ = state._;
+	s.lang = state.lang;
+	s.settings = state.settings;
+	s.ui = state.ui;
 	stop_match(state);
 	calc.init_state(s, null, s.presses, true);
 	calc.state(s);
-	s.settings = state.settings;
-	s.ui = state.ui;
 	state = s;
 	set_current(s);
 	render.ui_render(s);
@@ -188,7 +190,7 @@ function init_buttons() {
 	$('#exception_correction').on('click', function() {
 		hide_exception_dialog();
 		uiu.make_team_pick(
-			state, 'Vertauschung Aufschlagfeld', 'correction', ui_show_exception_dialog
+			state, state._('exceptions:dialog:correction'), 'correction', ui_show_exception_dialog
 		);
 	});
 	$('#exception_overrule').on('click', function() {
@@ -205,7 +207,7 @@ function init_buttons() {
 	$('#exception_yellow').on('click', function() {
 		hide_exception_dialog();
 		uiu.make_player_pick(
-			state, 'Verwarnung (Gelbe Karte)', 'yellow-card', ui_show_exception_dialog,
+			state, state._('exceptions:dialog:yellow-card'), 'yellow-card', ui_show_exception_dialog,
 			function(btn, v) {
 				if (state.match.carded[v.team_id]) {
 					btn.prepend('<span class="yellow-card-image"></span>');
@@ -216,19 +218,19 @@ function init_buttons() {
 	});
 	$('#exception_red').on('click', function() {
 		hide_exception_dialog();
-		uiu.make_player_pick(state, 'Fehlerwarnung (rote Karte)', 'red-card', ui_show_exception_dialog);
+		uiu.make_player_pick(state, state._('exceptions:dialog:red-card'), 'red-card', ui_show_exception_dialog);
 	});
 	$('#exception_injury').on('click', function() {
 		hide_exception_dialog();
-		uiu.make_player_pick(state, 'Verletzung', 'injury', ui_show_exception_dialog);
+		uiu.make_player_pick(state, state._('exceptions:dialog:injury'), 'injury', ui_show_exception_dialog);
 	});
 	$('#exception_retired').on('click', function() {
 		hide_exception_dialog();
-		uiu.make_player_pick(state, 'Aufgegeben', 'retired', ui_show_exception_dialog);
+		uiu.make_player_pick(state, state._('exceptions:dialog:retired'), 'retired', ui_show_exception_dialog);
 	});
 	$('#exception_black').on('click', function() {
 		hide_exception_dialog();
-		uiu.make_player_pick(state, 'Disqualifiziert (schwarze Karte)', 'disqualified', ui_show_exception_dialog);
+		uiu.make_player_pick(state, state._('exceptions:dialog:black-card'), 'disqualified', ui_show_exception_dialog);
 	});
 }
 
@@ -250,6 +252,12 @@ function init_shortcuts() {
 	});
 	Mousetrap.bind('shift+s', function() {
 		scoresheet.show();
+	});
+	Mousetrap.bind('shift+e', function() {
+		i18n.ui_update_state(state, 'en');
+	});
+	Mousetrap.bind('shift+d', function() {
+		i18n.ui_update_state(state, 'de');
 	});
 }
 
@@ -310,6 +318,7 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var i18n = require('./i18n');
 	var uiu = require('./uiu');
 	var network = require('./network');
 	var render = require('./render');

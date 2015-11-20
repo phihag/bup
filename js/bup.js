@@ -8,10 +8,14 @@ var networks = {};
 'use strict';
 
 function init() {
+	i18n.init();
+	i18n.ui_update_state(state);
 	state.settings = settings.load();
 }
 
 function ui_init() {
+	i18n.ui_init();
+
 	var bup_version = 'dev';
 	$('.version').text(bup_version);
 
@@ -71,6 +75,7 @@ if (typeof $ !== 'undefined') {
 /* @DEV */
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var utils = require('./utils');
+	var i18n = require('./i18n');
 	var calc = require('./calc');
 	var appcache = require('./appcache');
 	var timer = require('./timer');
@@ -87,9 +92,10 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var startmatch = require('./startmatch');
 
 	module.exports = {
-		calc: calc,
 		btde: btde,
+		calc: calc,
 		courtspot: courtspot,
+		i18n: i18n,
 		network: network,
 		pronounciation: pronounciation,
 		scoresheet: scoresheet,
