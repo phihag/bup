@@ -91,7 +91,6 @@ function ui_update_state(s, code) {
 function translate(s, str, data) {
 	var lang = languages[s.lang];
 	if (! lang) {
-		console.log('LANG NOT FOUND', s.lang);
 		return 'Invalid Language [' + s.lang + ']:>> ' + str + ' <<';
 	}
 	var res = lang[str];
