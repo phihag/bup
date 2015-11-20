@@ -47,7 +47,9 @@ function record(s) {
 		hval += 'settings';
 	}
 
-	if (hval != orig_hval) {
+	var orig_qs = utils.parse_query_string(orig_hval);
+	var new_qs = utils.parse_query_string(hval);
+	if (! utils.deep_equal(orig_qs, new_qs)) {
 		window.location.hash = '#' + hval;
 	}
 }

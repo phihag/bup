@@ -43,8 +43,10 @@ function on_post_update(new_version) {
 	$('.appcache_updated_wrapper').show().fadeOut(2500);
 
 	var hash = window.location.hash;
-	hash = hash.replace(/[#&]updated/g, '');
-	window.location.replace(hash ? hash : '#');
+	hash = hash.replace(/([&#])updated(?=&|$)/g, function(_, g1) {
+		return (g1 == '#') ? g1 : '';
+	});
+	window.location.replace(hash);
 }
 
 return {
