@@ -12,6 +12,7 @@ liveaw 2.0 (RL Manuel + Benedikt)
 	import
 custom lint: look for [ \t]\n in source files
 
+settings: Fix vertical align of checkboxes
 suspension pronounciation
 generate chars on demand instead of in calc_state
 
