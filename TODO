@@ -1,12 +1,14 @@
-construction is wrong when updating (ends at &settings)
-
-mail to Ulf, Marius, Manuel, Werner Durow, Jörg, Susanne
-	write Mails
-		Ulf: iPhone
-	send mails
+send mails
+	send Ulf
+	send Marius
+	send Manuel
+	send Werner
+	send Jörg
+	send Susanne
 
 i18n
 	UI (world icon -> include in dist)
+	create i18n module and two language modules
 	autodetect with navigator.languages (not in IE!) | navigator.language
 	i18n.onchange -> rerender JS stuff
 	prepare
