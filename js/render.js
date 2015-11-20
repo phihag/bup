@@ -138,7 +138,7 @@ function _score_display_set_game(s, game, game_index, is_current) {
 		}
 		if (s.match.marks.length > 0) {
 			s.match.marks.forEach(function(e_press) {
-				_add_ann(e_press.char);
+				_add_ann(calc.press_char(s, e_press));
 			});
 		}
 		// Rendering fix for empty cells not being rendered correctly

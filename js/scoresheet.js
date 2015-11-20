@@ -262,7 +262,7 @@ function _parse_match(state, col_count) {
 			s.scoresheet_game.cells.push({
 				col: s.scoresheet_game.col_idx,
 				row: 2 * press.team_id + press.player_id,
-				val: press.char,
+				val: calc.press_char(s, press),
 			});
 			s.scoresheet_game.col_idx++;
 			break;
@@ -275,7 +275,7 @@ function _parse_match(state, col_count) {
 			s.scoresheet_game.cells.push({
 				col: s.scoresheet_game.col_idx,
 				row: 2 * press.team_id + press.player_id,
-				val: press.char,
+				val: calc.press_char(s, press),
 			});
 			s.scoresheet_game.col_idx++;
 			break;
@@ -287,7 +287,7 @@ function _parse_match(state, col_count) {
 					s.scoresheet_game.cells.push({
 						row: ({0:1, 1:0, 2: 3, 3:2})[prev_cell.row],
 						col: prev_cell.col,
-						val: press.char,
+						val: calc.press_char(s, press),
 					});
 					found = true;
 					break;
@@ -297,7 +297,7 @@ function _parse_match(state, col_count) {
 				s.scoresheet_game.cells.push({
 					row: 1,
 					col: s.scoresheet_game.col_idx,
-					val: press.char,
+					val: calc.press_char(s, press),
 				});
 				s.scoresheet_game.col_idx++;
 			}
@@ -316,7 +316,7 @@ function _parse_match(state, col_count) {
 			s.scoresheet_game.cells.push({
 				row: row,
 				col: s.scoresheet_game.col_idx,
-				val: press.char,
+				val: calc.press_char(s, press),
 			});
 			s.scoresheet_game.col_idx++;
 			break;
@@ -324,7 +324,7 @@ function _parse_match(state, col_count) {
 			s.scoresheet_game.cells.push({
 				row: 1,
 				col: s.scoresheet_game.col_idx,
-				val: press.char,
+				val: calc.press_char(s, press),
 			});
 			s.scoresheet_game.col_idx++;
 			break;
@@ -342,7 +342,7 @@ function _parse_match(state, col_count) {
 					s.scoresheet_game.cells.push({
 						row: row,
 						col: prev_cell.col,
-						val: press.char,
+						val: calc.press_char(s, press),
 					});
 					found = true;
 					break;
@@ -352,7 +352,7 @@ function _parse_match(state, col_count) {
 				s.scoresheet_game.cells.push({
 					row: 1,
 					col: s.scoresheet_game.col_idx,
-					val: press.char,
+					val: calc.press_char(s, press),
 				});
 				s.scoresheet_game.col_idx++;
 			}
@@ -361,17 +361,18 @@ function _parse_match(state, col_count) {
 			s.scoresheet_game.cells.push({
 				row: 2 * press.team_id + press.player_id,
 				col: s.scoresheet_game.col_idx,
-				val: press.char,
+				val: calc.press_char(s, press),
 			});
 			s.scoresheet_game.col_idx++;
 			break;
 		case 'retired':
+			var press_char = calc.press_char(s, press);
 			var retired_cell = {
 				row: 2 * press.team_id + press.player_id,
 				col: s.scoresheet_game.col_idx,
-				val: press.char,
+				val: press_char,
 			};
-			if (press.char.length > 1) {
+			if (press_char.length > 1) {
 				retired_cell.type = 'longtext';
 				retired_cell.width = 2;
 			}

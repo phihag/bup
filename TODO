@@ -1,7 +1,6 @@
 suspension pronounciation
 implement proper suspension mechanisms, retire interruption
 	scoresheeet
-generate chars on demand instead of in calc_state
 manual edit UI on smartphones
 
 send mails
