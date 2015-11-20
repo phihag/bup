@@ -20,6 +20,7 @@ var i18n_de = {
 'button:exception': 'Situation',
 'button:shuttle': 'Federball +1',
 'button:redo': 'Wiederholen',
+'button:Unsuspend': 'Spiel fortsetzen',
 
 
 'onmyleft.home_team': 'Meine Damen und Herren:\nZu meiner Rechten, {away_team},\nund zu meiner Linken, {home_team}.\n{serving_team} schlägt auf{serving_str}.\n{score}.\nBitte spielen.',
@@ -40,6 +41,8 @@ var i18n_de = {
 'wonby.match': 'Das Spiel wurde gewonnen von {winner_name} mit {previous_scores}{winner_score}-{loser_score}',
 'wonby.and': ' und ',
 'game(won)': 'Satz',
+'match suspended': 'Das Spiel ist unterbrochen',
+'ready to unsuspend': 'Sind Sie spielbereit?\n',
 
 'loveall_play.0': '0 beide.\nBitte spielen.',
 'loveall_play.1': 'Zweiter Satz. 0 beide.\nBitte spielen.',
@@ -115,8 +118,8 @@ var i18n_de = {
 'exceptions:black-card': 'Disqualifiziert',
 'exceptions:referee-title': 'Referee',
 'exceptions:referee': 'Referee',
-'exceptions:interruption-title': 'Unterbrechung',
-'exceptions:interruption': 'Unterbrechung',
+'exceptions:suspension-title': 'Unterbrechung',
+'exceptions:suspension': 'Unterbrechung',
 'exceptions:injury-title': 'Verletzung',
 'exceptions:injury': 'Verletzung',
 'exceptions:retired-title': 'Aufgabe',
@@ -135,7 +138,7 @@ var i18n_de = {
 
 'mark:overrule': 'O',
 'mark:referee': 'R',
-'mark:interruption': 'U',
+'mark:suspension': 'U',
 'mark:correction': 'C',
 'mark:yellow-card': 'W',
 'mark:red-card': 'F',

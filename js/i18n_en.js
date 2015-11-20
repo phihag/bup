@@ -20,6 +20,7 @@ var i18n_en = {
 'button:exception': 'Situation',
 'button:shuttle': 'Shuttle Counter +1',
 'button:redo': 'Redo',
+'button:Unsuspend': 'Resume Play',
 
 'onmyleft.home_team': 'Ladies and Gentlemen:\nOn my right, {away_team},\nand on my left, {home_team}.\n{serving_team} to serve{serving_str}.\n{score}.\nPlay.',
 'onmyleft.away_team': 'Ladies and Gentlemen:\nOn my left, {away_team},\nand on my right, {home_team}.\n{serving_team} to serve{serving_str}.\n{score}.\nPlay.',
@@ -39,6 +40,8 @@ var i18n_en = {
 'wonby.match': 'Match won by {winner_name} {previous_scores}{winner_score}-{loser_score}',
 'wonby.and': ' and ',
 'game(won)': 'Game',
+'match suspended': 'Play is suspended',
+'ready to unsuspend': 'Are you ready?\n',
 
 'loveall_play.0': 'love all; play',
 'loveall_play.1': 'Second game; love all; play',
@@ -114,8 +117,8 @@ var i18n_en = {
 'exceptions:black-card': 'Disqualified',
 'exceptions:referee-title': 'Referee',
 'exceptions:referee': 'Referee',
-'exceptions:interruption-title': 'Suspension',
-'exceptions:interruption': 'Suspension',
+'exceptions:suspension-title': 'Suspension',
+'exceptions:suspension': 'Suspension',
 'exceptions:injury-title': 'Injury',
 'exceptions:injury': 'Injury',
 'exceptions:retired-title': 'A player resigns',
@@ -134,7 +137,7 @@ var i18n_en = {
 
 'mark:overrule': 'O',
 'mark:referee': 'R',
-'mark:interruption': 'S',
+'mark:suspension': 'S',
 'mark:correction': 'C',
 'mark:yellow-card': 'W',
 'mark:red-card': 'F',

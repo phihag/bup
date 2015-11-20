@@ -432,7 +432,7 @@ _describe('scoresheet generation', function() {
 		});
 	});
 
-	_it('interruption', function() {
+	_it('suspension', function() {
 		var presses = [];
 		presses.push({
 			type: 'pick_side', // Andrew&Alice pick left
@@ -456,7 +456,8 @@ _describe('scoresheet generation', function() {
 			side: 'right',
 		});
 		presses.push({
-			type: 'interruption',
+			type: 'suspension',
+			timestamp: 1000000,
 		});
 		presses.push({
 			type: 'referee',
@@ -473,15 +474,50 @@ _describe('scoresheet generation', function() {
 		_assert_cell(cells, {
 			table: 0,
 			col: 2,
-			row: 1,
+			row: 0,
 			val: 'U',
+			_suspension_timestamp: 1000000,
 		});
 		_assert_cell(cells, {
 			table: 0,
 			col: 3,
-			row: 1,
+			row: 0,
 			val: 'R',
 		});
+
+		presses.push({
+			type: 'resume',
+			timestamp: 1519000,
+		});
+		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			table: 0,
+			col: 1,
+			row: 3,
+			val: 1,
+			type: 'score',
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 2,
+			row: 0,
+			val: 'U',
+			_suspension_timestamp: 1000000,
+		});
+		_assert_cell(cells, {
+			type: 'vertical-text',
+			table: 0,
+			col: 2,
+			row: 3,
+			val: '8:39',
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 3,
+			row: 0,
+			val: 'R',
+		});
+
 	});
 
 	_it('red card', function() {

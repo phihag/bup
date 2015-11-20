@@ -3,6 +3,8 @@ var timer = (function() {
 
 var ui_timer = null;
 function set() {
+	$('.timer_restart').toggle(! state.timer.upwards);
+
 	if (ui_timer) {
 		window.clearTimeout(ui_timer);
 	}
@@ -24,26 +26,32 @@ function update() {
 		return;
 	}
 
-	var remaining = state.timer.start + state.timer.duration - Date.now();
-	remaining = Math.max(0, remaining);
-	var remaining_val = Math.round(remaining / 1000);
-	if (remaining_val >= 60) {
-		remaining_val = Math.floor(remaining_val / 60) + ':' + utils.add_zeroes(remaining_val % 60);
-	}
 	var timer_el = $('.timer');
-	timer_el.text(remaining_val);
-	if (state.timer.exigent && (remaining <= state.timer.exigent)) {
-		timer_el.addClass('timer_exigent');
+	if (state.timer.upwards) {
+		var val = utils.duration_secs(state.timer.start, Date.now());
+		timer_el.text(val);
+		ui_timer = window.setTimeout(update, 1000);
 	} else {
-		timer_el.removeClass('timer_exigent');
-	}
-	if (remaining <= 0) {
-		remove();
-		return;
-	}
+		var remaining = state.timer.start + state.timer.duration - Date.now();
+		remaining = Math.max(0, remaining);
+		var remaining_val = Math.round(remaining / 1000);
+		if (remaining_val >= 60) {
+			remaining_val = Math.floor(remaining_val / 60) + ':' + utils.add_zeroes(remaining_val % 60);
+		}
+		timer_el.text(remaining_val);
 
-	var remaining_ms = Math.max(10, remaining % 1000);
-	ui_timer = window.setTimeout(update, remaining_ms);
+		if (state.timer.exigent && (remaining <= state.timer.exigent)) {
+			timer_el.addClass('timer_exigent');
+		} else {
+			timer_el.removeClass('timer_exigent');
+		}
+		if (remaining <= 0) {
+			remove();
+			return;
+		}
+		var remaining_ms = Math.max(10, remaining % 1000);
+		ui_timer = window.setTimeout(update, remaining_ms);
+	}
 	return true;
 }
 

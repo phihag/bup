@@ -222,6 +222,18 @@ function pronounce(s) {
 		);
 	}
 
+	if (s.match.suspended) {
+		return s._('match suspended');
+	}
+
+	if (s.match.just_unsuspended)  {
+		return (
+			mark_str + s._('ready to unsuspend') +
+			_pronounciation_score(s, undefined, undefined, false) +
+			s._('card.play')
+		);
+	}
+
 	if (!s.game.finished && s.game.started) {
 		if ((s.game.score[0] === 0) && (s.game.score[1] === 0) && !mark_str) {
 			return null;  // Special case at 0-0, we just showed the long text. Time to focus on the game.

@@ -181,9 +181,9 @@ function init_buttons() {
 		});
 		hide_exception_dialog();
 	});
-	$('#exception_interruption').on('click', function() {
+	$('#exception_suspension').on('click', function() {
 		on_press({
-			type: 'interruption',
+			type: 'suspension',
 		});
 		hide_exception_dialog();
 	});
@@ -202,6 +202,11 @@ function init_buttons() {
 	$('#button_shuttle').on('click', function() {
 		on_press({
 			'type': 'shuttle',
+		});
+	});
+	$('#suspension-resume').on('click', function() {
+		on_press({
+			'type': 'resume',
 		});
 	});
 	$('#exception_yellow').on('click', function() {

@@ -2504,8 +2504,78 @@ _describe('pronounciation', function() {
 		s = state_after(presses, SINGLES_SETUP);
 		assert.ok(! s.timer);
 	});
-});
 
+
+	_it('suspending match', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		}, {
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 0,
+		}, {
+			type: 'love-all',
+		}];
+		press_score(presses, 4, 1);
+		press_score(presses, 0, 1);
+		press_score(presses, 1, 0);
+
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.match.suspended, false);
+		assert.strictEqual(s.match.just_unsuspended, false);
+		assert.equal(pronounce_de(s),
+			'Aufschlagwechsel. 5-2');
+		assert.equal(pronounce_en(s),
+			'Service over. 5-2');
+
+		presses.push({
+			type: 'suspension',
+			timestamp: 1000,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.match.suspended, true);
+		assert.strictEqual(s.match.just_unsuspended, false);
+		assert.deepEqual(s.timer, {
+			start: 1000,
+			upwards: true,
+		});
+		assert.equal(pronounce_de(s),
+			'Das Spiel ist unterbrochen');
+		assert.equal(pronounce_en(s),
+			'Play is suspended');
+
+		presses.push({
+			type: 'resume',
+			timestamp: 1242,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.match.suspended, false);
+		assert.strictEqual(s.match.just_unsuspended, true);
+		assert.strictEqual(s.timer, false);
+		assert.equal(pronounce_de(s),
+			'Sind Sie spielbereit?\n' +
+			'5-2. Bitte spielen.');
+		assert.equal(pronounce_en(s),
+			'Are you ready?\n' +
+			'5-2. Play.');
+
+		press_score(presses, 0, 1);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.match.suspended, false);
+		assert.strictEqual(s.match.just_unsuspended, false);
+		assert.strictEqual(s.timer, false);
+		assert.equal(pronounce_de(s),
+			'Aufschlagwechsel. 3-5');
+		assert.equal(pronounce_en(s),
+			'Service over. 3-5');
+
+	});
+});
 
 
 })();

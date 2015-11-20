@@ -11,8 +11,6 @@ var _PRESSES_WITH_CHAR = [
 	'retired',
 	'suspension',
 	'yellow-card',
-
-	'interruption',
 ];
 function press_char(s, press) {
 	if (_PRESSES_WITH_CHAR.indexOf(press.type) >= 0) {
@@ -240,6 +238,7 @@ function recalc_after_score(s, team_id, press) {
 
 	if ((press.type != 'red-card') && (s.match.marks.length > 0)) {
 		s.match.marks = [];
+		s.match.just_unsuspended = false;
 	}
 
 }
@@ -337,9 +336,6 @@ function calc_press(s, press) {
 	case 'correction':
 		s.match.marks.push(press);
 		break;
-	case 'interruption':
-		s.match.marks.push(press);
-		break;
 	case 'yellow-card':
 		s.match.marks.push(press);
 		s.match.carded[press.team_id] = true;
@@ -384,6 +380,23 @@ function calc_press(s, press) {
 		s.game.team1_serving = null;
 		s.game.service_over = null;
 		s.timer = false;
+		break;
+	case 'suspension':
+		if (s.match.suspended) {
+			return; // Ignore double suspension
+		}
+		s.match.marks.push(press);
+		s.match.suspended = true;
+		s.match.suspended_timer = s.timer;
+		s.timer = {
+			start: press.timestamp,
+			upwards: true,
+		};
+		break;
+	case 'resume':
+		s.match.suspended = false;
+		s.match.just_unsuspended = true;
+		s.timer = s.match.suspended_timer;
 		break;
 	case 'shuttle':
 		s.match.shuttle_count++;
@@ -490,6 +503,8 @@ function init_calc(s) {
 		finished_games: [],
 		game_score: [0, 0],
 		finished: false,
+		suspended: false,
+		just_unsuspended: false,
 		marks: [],
 		finish_confirmed: false,
 		carded: [false, false],

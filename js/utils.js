@@ -98,7 +98,7 @@ function multiline_regexp(regs, options) {
     ).join(''), options);
 }
 
-function duration_str(start_timestamp, end_timestamp) {
+function duration_mins(start_timestamp, end_timestamp) {
 	var start = new Date(start_timestamp);
 	var end = new Date(end_timestamp);
 
@@ -116,6 +116,20 @@ function duration_str(start_timestamp, end_timestamp) {
 	var mins = Math.round(diff_ms / 60000);
 	var hours = (mins - (mins % 60)) / 60;
 	return hours + ':' + utils.add_zeroes(mins % 60);
+}
+
+function duration_secs(start_timestamp, end_timestamp) {
+	var diff_s = Math.round((end_timestamp - start_timestamp) / 1000);
+	var secs = diff_s % 60;
+	var diff_mins = (diff_s - secs) / 60;
+	var mins = diff_mins % 60;
+	var hours = (diff_mins - mins) / 60;
+
+	if (hours) {
+		return hours + ':' + utils.add_zeroes(mins) + ':' + utils.add_zeroes(secs);
+	} else {
+		return mins + ':' + utils.add_zeroes(secs);
+	}
 }
 
 function visible(node, val) {
@@ -179,7 +193,8 @@ return {
 	add_zeroes: add_zeroes,
 	multiline_regexp: multiline_regexp,
 	parse_query_string: parse_query_string,
-	duration_str: duration_str,
+	duration_mins: duration_mins,
+	duration_secs: duration_secs,
 	visible: visible,
 	qsEach: qsEach,
 	set_class: set_class,

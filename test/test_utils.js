@@ -9,14 +9,20 @@ var bup = tutils.bup;
 'use strict';
 
 _describe('helper functions', function() {
-	_it('duration_str', function() {
-		assert.equal(bup.utils.duration_str(1420084800000, 1420093200000), '2:20');
-		assert.equal(bup.utils.duration_str(1420109940000, 1420110660000), '0:12');
-		assert.equal(bup.utils.duration_str(1420149600000, 1420155720000), '1:42'); // new day in CET
-		assert.equal(bup.utils.duration_str(1420153260000, 1420171380000), '5:02'); // new day in UTC
-		assert.equal(bup.utils.duration_str(1420110059000, 1420111201000), '0:20');
-		assert.equal(bup.utils.duration_str(1420110001000, 1420111259000), '0:20');
-		assert.equal(bup.utils.duration_str(1420110660000, 1420110710000), '0:00');
+	_it('duration_mins', function() {
+		assert.equal(bup.utils.duration_mins(1420084800000, 1420093200000), '2:20');
+		assert.equal(bup.utils.duration_mins(1420109940000, 1420110660000), '0:12');
+		assert.equal(bup.utils.duration_mins(1420149600000, 1420155720000), '1:42'); // new day in CET
+		assert.equal(bup.utils.duration_mins(1420153260000, 1420171380000), '5:02'); // new day in UTC
+		assert.equal(bup.utils.duration_mins(1420110059000, 1420111201000), '0:20');
+		assert.equal(bup.utils.duration_mins(1420110001000, 1420111259000), '0:20');
+		assert.equal(bup.utils.duration_mins(1420110660000, 1420110710000), '0:00');
+	});
+
+	_it('duration_secs', function() {
+		assert.equal(bup.utils.duration_secs(0, 1005), '0:01');
+		assert.equal(bup.utils.duration_secs(0, 62070), '1:02');
+		assert.equal(bup.utils.duration_secs(0, 18129090), '5:02:09');
 	});
 
 	_it('deep_equal', function() {

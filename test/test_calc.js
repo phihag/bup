@@ -29,6 +29,8 @@ _describe('calc_state', function() {
 		assert.equal(s.game.game, false);
 		assert.strictEqual(s.game.won_by_score, null);
 		assert.equal(s.match.finished, false);
+		assert.strictEqual(s.match.suspended, false);
+		assert.strictEqual(s.match.just_unsuspended, false);
 		assert.strictEqual(s.match.team1_won, null);
 		assert.deepEqual(s.match.pending_red_cards, []);
 		assert.equal(s.match.finish_confirmed, false);
@@ -55,6 +57,8 @@ _describe('calc_state', function() {
 		assert.equal(s.game.matchpoint, false);
 		assert.equal(s.game.game, false);
 		assert.strictEqual(s.game.won_by_score, null);
+		assert.strictEqual(s.match.suspended, false);
+		assert.strictEqual(s.match.just_unsuspended, false);
 		assert.equal(s.match.finished, false);
 		assert.deepEqual(s.match.pending_red_cards, []);
 		assert.strictEqual(s.match.team1_won, null);

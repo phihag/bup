@@ -1,8 +1,6 @@
-suspension pronounciation
-implement proper suspension mechanisms, retire interruption
-	scoresheeet
 manual edit UI on smartphones
 
+update mails with suspension
 send mails
 	send Ulf
 	send Marius
@@ -11,9 +9,11 @@ send mails
 	send Jörg
 	send Susanne
 
-
 ask for feedback from BC
 
+grey out suspended button when already suspended
+
+test short suspend in interval (let remaining time flow)
 liveaw 2.0 (RL Manuel + Benedikt)
 	import
 custom lint: look for [ \t]\n in source files

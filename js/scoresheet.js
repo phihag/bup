@@ -320,14 +320,6 @@ function _parse_match(state, col_count) {
 			});
 			s.scoresheet_game.col_idx++;
 			break;
-		case 'interruption':
-			s.scoresheet_game.cells.push({
-				row: 1,
-				col: s.scoresheet_game.col_idx,
-				val: calc.press_char(s, press),
-			});
-			s.scoresheet_game.col_idx++;
-			break;
 		case 'correction':
 			for (var search_col_idx = s.scoresheet_game.cells.length - 1;search_col_idx >= 0;search_col_idx--) {
 				prev_cell = s.scoresheet_game.cells[search_col_idx];
@@ -398,6 +390,31 @@ function _parse_match(state, col_count) {
 			}
 			s.scoresheet_game.cells.push(cell);
 			s.scoresheet_game.col_idx += cell.width;
+			break;
+		case 'suspension':
+			s.scoresheet_game.cells.push({
+				row: 0,
+				col: s.scoresheet_game.col_idx,
+				val: calc.press_char(s, press),
+				_suspension_timestamp: press.timestamp,
+			});
+			s.scoresheet_game.col_idx++;
+			break;
+		case 'resume':
+			for (var search_col_idx2 = s.scoresheet_game.cells.length - 1;search_col_idx2 >= 0;search_col_idx2--) {
+				prev_cell = s.scoresheet_game.cells[search_col_idx2];
+				if (prev_cell._suspension_timestamp === undefined) {
+					continue;
+				}
+
+				s.scoresheet_game.cells.push({
+					type: 'vertical-text',
+					col: prev_cell.col,
+					row: 3,
+					val: utils.duration_secs(prev_cell._suspension_timestamp, press.timestamp),
+				});
+				break;
+			}
 			break;
 		case 'editmode_set-score':
 			_clean_editmode(s.scoresheet_game);
@@ -522,7 +539,7 @@ function show() {
 	_text('.scoresheet_begin_value', state.metadata.start ? utils.time_str(state.metadata.start) : '');
 	if (state.match.finished) {
 		_text('.scoresheet_end_value', state.metadata.updated ? utils.time_str(state.metadata.updated) : '');
-		_text('.scoresheet_duration_value', state.metadata.updated ? utils.duration_str(state.metadata.start, state.metadata.updated) : '');
+		_text('.scoresheet_duration_value', state.metadata.updated ? utils.duration_mins(state.metadata.start, state.metadata.updated) : '');
 	} else {
 		_text('.scoresheet_end_value', null);
 		_text('.scoresheet_duration_value', null);
@@ -762,6 +779,14 @@ function show() {
 			bg.setAttribute('width', bb.width);
 			bg.setAttribute('height', bb.height - 2 * padding);
 			break;
+		case 'vertical-text':
+			text = _svg_el('text', {}, t, cell.val);
+			var corex = cols_left + cell.col * cell_width + cell_width / 2;
+			var corey = table_top + cell.row * cell_height - cell_height / 2;
+			_svg_align_hcenter(text, corex);
+			_svg_align_vcenter(text, corey);
+			text.setAttribute('transform', 'rotate(-90 ' + corex + ',' + corey + ')');
+			break;
 		case 'editmode-sign':
 			var EDITMODE_SIGN_LINE_COUNT = 15;
 			var EDITMODE_SIGN_XR = 0.15;
@@ -921,9 +946,30 @@ function _svg_to_pdf(svg, pdf) {
 
 			pdf.setFontStyle((style['font-weight'] == 'bold') ? 'bold' : 'normal');
 			pdf.setFontSize(72 / 25.4 * parseFloat(style['font-size']));
-
 			var str = $(n).text();
-			pdf.text(x, y, str);
+
+			var transform = n.getAttribute('transform');
+			if (transform) {
+				var transform_m = transform.match(/^rotate\(\s*(-?[0-9.]+)\s+(-?[0-9.]+),(-?[0-9.]+)\)$/);
+				if (!transform_m) {
+					pdf.text(x, y, str);
+					break;
+				}
+
+				var angle = parseFloat(transform_m[1]);
+				var corex = parseFloat(transform_m[2]);
+				var corey = parseFloat(transform_m[3]);
+
+				var diffx = x - corex;
+				var diffy = y - corey;
+
+				var nx = corex + diffx * Math.cos(angle * Math.PI / 180) - diffy * Math.sin(angle * Math.PI / 180);
+				var ny = corey + diffx * Math.sin(angle * Math.PI / 180) + diffy * Math.cos(angle * Math.PI / 180);
+				pdf.text(nx, ny, str, null, -angle);
+			} else {
+				pdf.text(x, y, str);
+			}
+
 			break;
 		}
 	}

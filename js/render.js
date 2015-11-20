@@ -252,7 +252,18 @@ function ui_render(s) {
 		$('#postgame-confirm-dialog').hide();
 	}
 
-	var score_enabled = s.game.started && !s.game.finished;
+	if (s.match.suspended) {
+		dialog_active = true;
+		$('#suspension-resume-dialog').show();
+		$('#suspension-resume').text(
+			(s.settings.show_pronounciation ? (pronounciation.pronounce(s) + '.\n\n') : '') +
+			s._('button:Unsuspend')
+		);
+	} else {
+		$('#suspension-resume-dialog').hide();
+	}
+
+	var score_enabled = s.game.started && !s.game.finished && !s.match.suspended;
 	var buttons = $('#left_score,#right_score');
 	if (score_enabled) {
 		buttons.removeAttr('disabled');
@@ -349,10 +360,11 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var calc = require('./calc');
 	var editmode = require('./editmode');
-	var uiu = require('./uiu');
 	var pronounciation = require('./pronounciation');
 	var timer = require('./timer');
+	var uiu = require('./uiu');
 
 	module.exports = render;
 }
