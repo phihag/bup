@@ -1,3 +1,6 @@
+generate chars on demand instead of in calc_state
+Manuell bearbeiten in en
+
 send mails
 	send Ulf
 	send Marius
@@ -6,15 +9,16 @@ send mails
 	send Jörg
 	send Susanne
 
+suspension pronounciation
+implement proper suspension mechanisms, retire interruption
+	scoresheeet
+
 ask for feedback from BC
 
 liveaw 2.0 (RL Manuel + Benedikt)
 	import
 custom lint: look for [ \t]\n in source files
 
-settings: Fix vertical align of checkboxes
-suspension pronounciation
-generate chars on demand instead of in calc_state
 
 error handling + reporting (automated)
 feedback form
@@ -153,6 +157,7 @@ manual editing in portrait (maybe distinguish by aspect ratio?)
 improve settings display on smartphone
 investigate performance of timers
 test svg_path_lines
+test for english chars on scoresheet
 move editmode_active into state.ui
 Button "bitte spielen" mehr betonen (icon?)
 test that singles with pick_receiver works just fine

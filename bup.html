@@ -96,17 +96,17 @@
 </div>
 
 <div id="pick_side" class="pick_dialog default-invisible">
-<span>Spieler auf der linken Seite</span>
+<span data-i18n="dialog-left"></span>
 <button id="pick_side_team1"></button>
 <button id="pick_side_team2"></button>
 </div>
 
 <div id="pick_server" class="pick_dialog default-invisible">
-<span>Aufschläger</span>
+<span data-i18n="dialog-server"></span>
 </div>
 
 <div id="pick_receiver" class="pick_dialog default-invisible">
-<span>Rückschläger</span>
+<span data-i18n="dialog-receiver"></span>
 </div>
 
 <div id="exception_wrapper" class="modal-wrapper default-invisible">
@@ -233,7 +233,7 @@
 	</tr>
     <tr>
         <th></th>
-        <td><label><input type="checkbox" name="team_competition" tabindex="51"/> <span data-i18n="settings:team_competition"></span></label></td>
+        <td><label><input type="checkbox" name="team_competition" tabindex="51"/><span data-i18n="settings:team_competition"></span></label></td>
     </tr>
 	</tbody>
 	</table>
@@ -257,9 +257,9 @@
 <div><label><span data-i18n="settings:Court Description"></span> <input type="text" name="court_description" size="8" data-i18n-placeholder="settings:Court Description.placeholder" /></label> <span data-i18n="settings:Court Number"></span> <label> <input type="number" name="court_id" min="1" /></label></div>
 <label><span data-i18n="settings:Umpire"></span>: <input type="text" name="umpire_name" /></label>
 <label><span data-i18n="settings:Language"></span>: <select size="1" class="settings_language" name="language"></select></label>
-<label><input type="checkbox" name="save_finished_matches" /> <span data-i18n="settings:Store Completed Games"></span></label>
-<label><input type="checkbox" name="show_pronounciation" /> <span data-i18n="settings:Show Pronounciation"></span></label>
-<div><label><input type="checkbox" name="go_fullscreen" /> <span data-i18n="settings:Request Fullscreen on Startup"></span></label> <button class="fullscreen_button" data-i18n="settings:Go Fullscreen"></button></div>
+<label><input type="checkbox" name="save_finished_matches" /><span data-i18n="settings:Store Completed Games"></span></label>
+<label><input type="checkbox" name="show_pronounciation" /><span data-i18n="settings:Show Pronounciation"></span></label>
+<div><label><input type="checkbox" name="go_fullscreen" /><span data-i18n="settings:Request Fullscreen on Startup"></span></label> <button class="fullscreen_button" data-i18n="settings:Go Fullscreen"></button></div>
 <label><span data-i18n="settings:Network Timeout"></span>: <input type="number" name="network_timeout" min="1" value="1000" max="600000" /></label>
 <label><span data-i18n="settings:Network Repeat Interval"></span>: <input type="number" name="network_update_interval" min="1" value="10000" max="600000" /></label>
 </div>

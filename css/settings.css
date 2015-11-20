@@ -18,21 +18,40 @@
 	background: #ffffff;
 	border-radius: 1em;
 	padding: 0 2em 1em 2em;
+	max-width: calc(100vw-2em-2em);
+	overflow: hidden;
 }
 .settings_container input, .settings_container button {
 	font-size: inherit;
 }
 .settings_container input[type="checkbox"] {
-	height: 1em;
-	width: 1em;
+	height: 0.8em;
+	width: 0.8em;
 }
 .settings_container h2 {
 	margin: 0.5em 0 0.1em 0;
 	font-size: 140%;
 }
 
+.setup_manual_discipline {
+	padding-left: 0;
+	padding-right: 0;
+}
+.setup_manual_discipline input {
+	margin-left: 0;
+}
 .setup_manual_discipline>label+label {
 	margin-left: 1.5em;
+}
+
+.settings_container label:before {
+	/* Set line-height to height, so that we can vertically center with vertical-align: middle; */
+	content: '';
+	display: inline-block;
+	height: 100%;
+}
+.settings_container label>* {
+	vertical-align: middle;
 }
 
 .ingame_options {
@@ -112,7 +131,10 @@
 }
 
 .settings>label {
-	display: block;
+	display: block;	
+}
+.settings>div, .settings>label {
+	padding: 0.3em 0 0.3em 0;
 }
 input[name="court_id"] {
 	max-width: 3em;
@@ -161,3 +183,8 @@ input[name="court_id"] {
 	}
 }
 
+@media screen and (max-width:480px), screen and (max-height:480px) {
+	.ingame_options>h2 {
+		display: none;
+	}
+}
