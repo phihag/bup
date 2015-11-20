@@ -162,6 +162,7 @@ function _parse_match(state, col_count) {
 		initialized: state.initialized,
 		scoresheet_game: _make_scoresheet_game(),
 		scoresheet_games: [],
+		settings: state.settings,
 	};
 	calc.init_state(s, state.setup);
 	s.presses = state.presses;
@@ -368,7 +369,10 @@ function _parse_match(state, col_count) {
 				col: s.scoresheet_game.col_idx,
 				val: press.char,
 			});
-			s.scoresheet_game.circle = 'suppressed';
+			if (s.settings.lang == 'de') {
+				// Why suppressed? See below under disqualified
+				s.scoresheet_game.circle = 'suppressed';
+			}
 			s.scoresheet_game.col_idx++;
 			break;
 		case 'disqualified':
@@ -379,7 +383,11 @@ function _parse_match(state, col_count) {
 				val: 'Disqualifiziert',
 				width: 4,
 			};
-			s.scoresheet_game.circle = 'suppressed';
+			// Example after German RTTO shows no circle if player is disqualified, so suppress the circle
+			// Internationally, do include a circle (BWF Umpire Training manual January 2015 page 41/42)
+			if (s.settings.lang == 'de') {
+				s.scoresheet_game.circle = 'suppressed';
+			}
 			s.scoresheet_game.cells.push(cell);
 			s.scoresheet_game.col_idx += cell.width;
 			break;
@@ -415,7 +423,7 @@ function _parse_match(state, col_count) {
 			s.scoresheet_game.col_idx++;
 		}
 
-		if (s.game.finished && !s.scoresheet_game.circle && s.game.won_by_score) {
+		if (s.game.finished && !s.scoresheet_game.circle) {
 			s.scoresheet_game.circle = s.game.score;
 		}
 	});

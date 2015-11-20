@@ -1,10 +1,22 @@
-check aufschlagwechsel.de with devtools
-
 retest Manuel's notes
 mail to Ulf, Marius, Manuel, Werner Durow, Jörg, Susanne
 	write Mails
 		Ulf: iPhone
 	send mails
+
+i18n
+	UI (world icon -> include in dist)
+	autodetect with navigator.languages (not in IE!) | navigator.language
+	i18n.onchange -> rerender JS stuff
+	prepare
+	for JS texts
+	extend pronounciation tests
+	different marks
+	different exception icons
+	apply for HTML
+	apply for scoresheet SVG
+
+ask for feedback from BC
 
 liveaw 2.0 (RL Manuel + Benedikt)
 	import
@@ -59,10 +71,6 @@ Installable on Android
 test touch interface
 test touch latency
 prevent double touches
-
-i18n
-	icons
-	change in settings
 
 block overrule when unavailable
 	add a title
@@ -136,7 +144,6 @@ move _network_reload_interval to network
 small color animation when any value (score / shuttle count) changes
 rename default-invisible to invisible and remove/add CSS class instead of show/hide/toggle
 restart network_reload_interval on manual reload
-support Puffin?
 expose network_reload_interval in UI
 support events
 	offline event creation

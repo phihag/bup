@@ -11,6 +11,7 @@ var default_settings = {
 	network_timeout: 10000,
 	network_update_interval: 10000,
 	double_click_timeout: 1000,
+	lang: 'de',
 };
 
 function load() {
