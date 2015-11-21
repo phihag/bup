@@ -31,6 +31,10 @@ function ui_init() {
 	settings.ui_init();
 
 	var hash_query = utils.parse_query_string(window.location.hash.substr(1));
+	if (hash_query.lang) {
+		state.settings.language = hash_query.lang;
+		settings.update();
+	}
 	if (hash_query.court) {
 		// TODO make sure this is only for the current session, only overwrite settings when necessary
 		state.settings.court_id = hash_query.court;

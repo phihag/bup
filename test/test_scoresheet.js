@@ -474,14 +474,14 @@ _describe('scoresheet generation', function() {
 		_assert_cell(cells, {
 			table: 0,
 			col: 2,
-			row: 0,
+			row: 1,
 			val: 'U',
 			_suspension_timestamp: 1000000,
 		});
 		_assert_cell(cells, {
 			table: 0,
 			col: 3,
-			row: 0,
+			row: 1,
 			val: 'R',
 		});
 
@@ -500,7 +500,7 @@ _describe('scoresheet generation', function() {
 		_assert_cell(cells, {
 			table: 0,
 			col: 2,
-			row: 0,
+			row: 1,
 			val: 'U',
 			_suspension_timestamp: 1000000,
 		});
@@ -508,13 +508,13 @@ _describe('scoresheet generation', function() {
 			type: 'vertical-text',
 			table: 0,
 			col: 2,
-			row: 3,
+			row: 2.5,
 			val: '8:39',
 		});
 		_assert_cell(cells, {
 			table: 0,
 			col: 3,
-			row: 0,
+			row: 1,
 			val: 'R',
 		});
 

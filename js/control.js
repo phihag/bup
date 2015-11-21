@@ -292,6 +292,7 @@ function ui_init() {
 
 function ui_show_exception_dialog() {
 	install_destructor(state, hide_exception_dialog);
+	render.exception_dialog(state);
 	$('#exception_wrapper').show();
 	uiu.esc_stack_push(function() {
 		hide_exception_dialog();

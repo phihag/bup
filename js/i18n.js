@@ -29,6 +29,10 @@ function detect_lang() {
 	return 'en';
 }
 
+function is_supported(lcode) {
+	return !! ((lcode == 'auto') || languages[lcode]);
+}
+
 function init() {
 	register_lang(i18n_de);
 	register_lang(i18n_en);
@@ -115,6 +119,7 @@ simple_translate.init = init;
 simple_translate.ui_init = ui_init;
 simple_translate.update_state = update_state;
 simple_translate.ui_update_state = ui_update_state;
+simple_translate.is_supported = is_supported;
 simple_translate.register_lang = register_lang;
 // Testing only
 simple_translate.languages = languages;

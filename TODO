@@ -1,4 +1,5 @@
-update mails with suspension
+grey out suspended button when already suspended
+
 send mails
 	send Ulf
 	send Marius
@@ -9,7 +10,6 @@ send mails
 
 ask for feedback from BC
 
-grey out suspended button when already suspended
 
 test short suspend in interval (let remaining time flow)
 liveaw 2.0 (RL Manuel + Benedikt)
@@ -50,7 +50,7 @@ only show 4 games to resume
 move shuttle counter away from shuttle counter button in landscape mode
 better design for settings on mobiles
 CONTRIBUTING (-> assign copyright form)
-better fullscreen flow (force fullscreen as a setting / as a hash)
+Installable on Android
 
 write UX documentation
 
@@ -58,9 +58,7 @@ disqualification at game start
 	write test
 	test
 add shuttle counter settings
-check and improve style on more phones
 test various network errors
-Installable on Android
 
 test touch interface
 test touch latency
@@ -76,7 +74,6 @@ show what was undone
 support for team flags
 support for player portraits
 allow changing player names during game (warn if discipline is changed)
-allow red/yellow/black cards before/after game
 strange counting (new suggestions in Bundesliga, 5x11 etc.)
 make everything buttons keyboard-usable; shortcuts etc.
 show undo text hint during start
@@ -118,8 +115,6 @@ If long pronounciation ends with short one, short pronounciation in larger font-
 "bitte spielen" after timer expires at 11
 "court 1, 20 seconds"  after timer expires at 11 / new game
 test that cards lead to an exceptions entry in match
-test pronounciation for cards at beginning and end of match
-move press.char to a helper function
 remove #pick_side in favor of _ui_make_team_pick
 test correction in scoresheet at very beginning of set
 move scoresheet press handling after state_calc (and use servers of game)
@@ -137,8 +132,6 @@ replace s.scoresheet_game with sg to save space
 move _network_reload_interval to network
 small color animation when any value (score / shuttle count) changes
 rename default-invisible to invisible and remove/add CSS class instead of show/hide/toggle
-restart network_reload_interval on manual reload
-expose network_reload_interval in UI
 support events
 	offline event creation
 	download current day events from live.aw (to pre-fill league / teams / players)

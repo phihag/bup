@@ -393,7 +393,7 @@ function _parse_match(state, col_count) {
 			break;
 		case 'suspension':
 			s.scoresheet_game.cells.push({
-				row: 0,
+				row: 1,
 				col: s.scoresheet_game.col_idx,
 				val: calc.press_char(s, press),
 				_suspension_timestamp: press.timestamp,
@@ -410,7 +410,7 @@ function _parse_match(state, col_count) {
 				s.scoresheet_game.cells.push({
 					type: 'vertical-text',
 					col: prev_cell.col,
-					row: 3,
+					row: 2.5,
 					val: utils.duration_secs(prev_cell._suspension_timestamp, press.timestamp),
 				});
 				break;
@@ -782,7 +782,7 @@ function show() {
 		case 'vertical-text':
 			text = _svg_el('text', {}, t, cell.val);
 			var corex = cols_left + cell.col * cell_width + cell_width / 2;
-			var corey = table_top + cell.row * cell_height - cell_height / 2;
+			var corey = table_top + cell.row * cell_height + cell_height / 2;
 			_svg_align_hcenter(text, corex);
 			_svg_align_vcenter(text, corey);
 			text.setAttribute('transform', 'rotate(-90 ' + corex + ',' + corey + ')');

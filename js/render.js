@@ -1,6 +1,19 @@
 var render = (function() {
 'use strict';
 
+function exception_dialog(s) {
+	// Be careful not to restrict exotic scenarios such as disqualification after match end
+	var sc = $('.exception_suspension_container');
+	var button = sc.find('button');
+	if (s.match.suspended) {
+		sc.addClass('half-invisible');
+		button.attr('disabled', 'disabled');
+	} else {
+		sc.removeClass('half-invisible');
+		button.removeAttr('disabled');
+	}
+}
+
 function _score_display_init(s) {
 	$('#score_table').empty();
 
@@ -354,6 +367,7 @@ function ui_render(s) {
 return {
 	ui_render: ui_render,
 	ui_court_str: ui_court_str,
+	exception_dialog: exception_dialog,
 };
 
 })();
