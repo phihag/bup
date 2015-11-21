@@ -104,6 +104,7 @@ var i18n_de = {
 'settings:Language': 'Sprache',
 'settings:Store Completed Games': 'Abgeschlossene Spiele speichern',
 'settings:Show Pronounciation': 'Ansagen anzeigen',
+'settings:Negative Timers': 'Stoppuhr läuft bis zum nächsten Punkt (auch negative)',
 'settings:Request Fullscreen on Startup': 'Vollbildmodus beim Start anfragen',
 'settings:Go Fullscreen': 'Vollbildmodus',
 'settings:Leave Fullscreen': 'Vollbildmodus verlassen',

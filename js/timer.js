@@ -33,10 +33,15 @@ function update() {
 		ui_timer = window.setTimeout(update, 1000);
 	} else {
 		var remaining = state.timer.start + state.timer.duration - Date.now();
-		remaining = Math.max(0, remaining);
-		var remaining_val = Math.round(remaining / 1000);
-		if (remaining_val >= 60) {
-			remaining_val = Math.floor(remaining_val / 60) + ':' + utils.add_zeroes(remaining_val % 60);
+		var remaining_val;
+		if (state.settings.negative_timers && (remaining < 0)) {
+			remaining_val = '-' + utils.duration_secs(0, -remaining);
+		} else {
+			remaining = Math.max(0, remaining);
+			remaining_val = Math.round(remaining / 1000);
+			if (remaining_val >= 60) {
+				remaining_val = Math.floor(remaining_val / 60) + ':' + utils.add_zeroes(remaining_val % 60);
+			}
 		}
 		timer_el.text(remaining_val);
 
@@ -45,6 +50,11 @@ function update() {
 		} else {
 			timer_el.removeClass('timer_exigent');
 		}
+		if ((remaining <= 0) && (state.settings.negative_timers)) {
+			ui_timer = window.setTimeout(update, 1000);
+			return true;
+		}
+
 		if (remaining <= 0) {
 			remove();
 			return;

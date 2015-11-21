@@ -1,3 +1,5 @@
+add shuttle counter settings
+
 send mails
 	send Ulf
 	send Marius
@@ -18,11 +20,6 @@ check whether we have a copy of a network game to resume from, offer it
 	offer both network and local version if they differ
 
 save manually created games immediately?
-improve touch behavior (listen to touchstart instead of click)
-	utils.bind_click
-	actually change
-	test on various mobiles
-	prevent runnning at gestures
 
 clean up / hide automatically generated games?
 
@@ -52,19 +49,14 @@ write UX documentation
 disqualification at game start
 	write test
 	test
-add shuttle counter settings
 test various network errors
 
 test touch interface
 test touch latency
 prevent double touches
 
-block overrule when unavailable
-	add a title
-	add a notice when clicked (+1 first)
 injury timer
 	in scoresheet (if not disqualified / retired afterwards)
-negative timers (add option for that)
 show what was undone
 support for team flags
 support for player portraits
@@ -87,7 +79,6 @@ make every button keyboard usable
 	1-4 for dialogs of players
 	keys for warnings etc. (after pressing e)
 	undo/redo (Ctrl+Z/Y)
-prevent retired after game
 up/down keys to switch between options; left-right for punishments
 display mode (tap anywhere to exit)
 	replay game in slow motion / real time (in display mode)

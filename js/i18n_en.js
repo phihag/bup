@@ -103,6 +103,7 @@ var i18n_en = {
 'settings:Language': 'Language',
 'settings:Store Completed Games': 'store completed games',
 'settings:Show Pronounciation': 'show pronounciation',
+'settings:Negative Timers': 'Timers go into negative',
 'settings:Request Fullscreen on Startup': 'Request fullscreen on startup',
 'settings:Go Fullscreen': 'go fullscreen',
 'settings:Leave Fullscreen': 'leave Fullscreen',

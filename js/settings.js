@@ -11,6 +11,7 @@ var default_settings = {
 	network_timeout: 10000,
 	network_update_interval: 10000,
 	double_click_timeout: 1000,
+	negative_timers: false,
 	lang: 'de',
 };
 
@@ -80,7 +81,7 @@ function hide(force) {
 	uiu.esc_stack_pop();
 }
 
-var _settings_checkboxes = ['save_finished_matches', 'go_fullscreen', 'show_pronounciation'];
+var _settings_checkboxes = ['save_finished_matches', 'go_fullscreen', 'show_pronounciation', 'negative_timers'];
 var _settings_textfields = ['umpire_name', 'court_id', 'court_description'];
 var _settings_numberfields = ['network_timeout', 'network_update_interval'];
 var _settings_selects = ['language'];
