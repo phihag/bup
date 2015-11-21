@@ -6,6 +6,15 @@ send mails
 	send Jörg
 	send Susanne
 
+create service worker
+Installable on Android
+	create service worker (should cache)
+	create app icon
+	render app icon to pngs
+	create manifest
+	https://developers.google.com/web/updates/2015/03/increasing-engagement-with-app-install-banners-in-chrome-for-android?hl=en
+	test that it doesn't break when not TLS
+
 ask for feedback from BC
 
 liveaw 2.0 (RL Manuel + Benedikt)
@@ -40,7 +49,6 @@ only show 4 games to resume
 move shuttle counter away from shuttle counter button in landscape mode
 better design for settings on mobiles
 CONTRIBUTING (-> assign copyright form)
-Installable on Android
 
 write UX documentation
 
@@ -102,7 +110,6 @@ test that cards lead to an exceptions entry in match
 remove #pick_side in favor of _ui_make_team_pick
 test correction in scoresheet at very beginning of set
 move scoresheet press handling after state_calc (and use servers of game)
-test red card (scoresheet/pronounciation) before any game (before match end)
 undo without redo back to start should reset begin in umpire scoresheet
 cursor for buttons?
 loading bup.. teaser in HTML for very slow connections
@@ -137,7 +144,6 @@ Button "bitte spielen" mehr betonen (icon?)
 test that singles with pick_receiver works just fine
 minify HTML
 implement service workers as well as appcache
-rename interruption suspension
 CSS: check that we combine media rules in practice with cleancss
 convert static (in HTML) pickers to team_pick / player_pick etc.
 consider eliminating love-all
