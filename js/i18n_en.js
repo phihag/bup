@@ -43,6 +43,16 @@ var i18n_en = {
 'match suspended': 'Play is suspended',
 'ready to unsuspend': 'Are you ready?\n',
 
+'demo:team1': 'Denmark',
+'demo:player1.1': 'Joachim Fischer Nielsen',
+'demo:player1.2': 'Christinna Pedersen',
+'demo:team2': 'China',
+'demo:player2.1': 'Zhang Nan',
+'demo:player2.2': 'Zhao Yunlei',
+'demo:match_name': 'Finals',
+'demo:event_name': 'MX',
+'demo:tournament_name': 'Demo',
+
 'loveall_play.0': 'love all; play',
 'loveall_play.1': 'Second game; love all; play',
 'loveall_play.2': 'Final game; love all; play',

@@ -6,23 +6,23 @@ function demo_match_start() {
 		counting: '3x21',
 		is_doubles: true,
 		teams: [{
-			name: '1.BC Beuel',
+			name: state._('demo:team1'),
 			players: [{
-				name: 'Max Weißkirchen',
+				name: state._('demo:player1.1'),
 			}, {
-				name: 'Birgit Michels',
+				name: state._('demo:player1.2'),
 			}],
 		}, {
-			name: '1.BC Sbr.-Bischmisheim',
+			name: state._('demo:team2'),
 			players: [{
-				name: 'Michael Fuchs',
+				name: state._('demo:player2.1'),
 			}, {
-				name: 'Samantha Barning',
+				name: state._('demo:player2.2'),
 			}],
 		}],
-		match_name: 'GD',
-		event_name: 'BCB - BCB (Demo)',
-		tournament_name: 'Demo',
+		match_name: state._('demo:match_name'),
+		event_name: state._('demo:event_name'),
+		tournament_name: state._('demo:tournament_name'),
 		team_competition: true,
 	};
 

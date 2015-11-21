@@ -1,11 +1,3 @@
-send mails
-	send Ulf
-	send Marius
-	send Manuel
-	send Werner
-	send Jörg
-	send Susanne
-
 create service worker
 Installable on Android
 	create service worker (should cache)
@@ -15,8 +7,7 @@ Installable on Android
 	https://developers.google.com/web/updates/2015/03/increasing-engagement-with-app-install-banners-in-chrome-for-android?hl=en
 	test that it doesn't break when not TLS
 
-ask for feedback from BC
-
+btde: Partial matches
 liveaw 2.0 (RL Manuel + Benedikt)
 	import
 custom lint: look for [ \t]\n in source files

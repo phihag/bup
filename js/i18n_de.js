@@ -44,6 +44,17 @@ var i18n_de = {
 'match suspended': 'Das Spiel ist unterbrochen',
 'ready to unsuspend': 'Sind Sie spielbereit?\n',
 
+'demo:team1': '1. BC Beuel',
+'demo:player1.1': 'Max Weißkirchen',
+'demo:player1.2': 'Birgit Michels',
+'demo:team2': '1.BC Sbr.-Bischmisheim',
+'demo:player2.1': 'Michael Fuchs',
+'demo:player2.2': 'Samantha Barning',
+'demo:match_name': 'GD',
+'demo:event_name': 'BCB - BCB (Demo)',
+'demo:tournament_name': 'Demo',
+
+
 'loveall_play.0': '0 beide.\nBitte spielen.',
 'loveall_play.1': 'Zweiter Satz. 0 beide.\nBitte spielen.',
 'loveall_play.2': 'Entscheidungssatz. 0 beide.\nBitte spielen.',
