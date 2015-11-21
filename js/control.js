@@ -94,6 +94,9 @@ function on_press(press, s) {
 
 	press.timestamp = Date.now();
 	s.presses.push(press);
+	if (s.settings && s.settings.umpire_name) {
+		s.metadata.umpire_name = s.settings.umpire_name;
+	}
 
 	on_presses_change(s);
 	network.send_press(s, press);

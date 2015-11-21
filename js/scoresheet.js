@@ -534,7 +534,7 @@ function show() {
 	_text('.scoresheet_date_value', utils.human_date_str(state.metadata.start));
 
 	_text('.scoresheet_court_id', state.settings.court_id);
-	_text('.scoresheet_umpire_name', state.settings.umpire_name);
+	_text('.scoresheet_umpire_name', state.metadata.umpire_name);
 
 	_text('.scoresheet_begin_value', state.metadata.start ? utils.time_str(state.metadata.start) : '');
 	if (state.match.finished) {
@@ -1006,8 +1006,8 @@ function ui_pdf() {
 		subject: state._('Score Sheet'),
 		creator: 'bup (https://github.com/phihag/bup/)',
 	};
-	if (state.setup.umpire && state.setup.umpire.name) {
-		props.author = state.setup.umpire.name;
+	if (state.metadata.umpire_name) {
+		props.author = state.metadata.umpire_name;
 	}
 	pdf.setProperties(props);
 
