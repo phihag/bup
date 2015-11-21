@@ -63,6 +63,9 @@
 	}
 }
 
+.hide_shuttle_counter {
+	visibility: hidden;
+}
 #shuttle_counter_value {
 	font-size: 6vmin;
 	position: absolute;

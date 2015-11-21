@@ -557,7 +557,7 @@ function show() {
 	$('.scoresheet_results_circle_team2').attr('visibility',
 		(state.match.finished && !state.match.team1_won) ? 'visible' : 'hidden');
 
-	var shuttle_counter_active = (typeof state.match.shuttle_count == 'number');
+	var shuttle_counter_active = (typeof state.match.shuttle_count == 'number') && (state.settings.shuttle_counter);
 	$('.scoresheet_shuttle_counter').attr('visibility', shuttle_counter_active ? 'visible' : 'hidden');
 	_text('.scoresheet_shuttle_counter_value', state.match.shuttle_count ? state.match.shuttle_count : '');
 

@@ -14,6 +14,14 @@ function exception_dialog(s) {
 	}
 }
 
+function shuttle_counter(s) {
+	if (state.settings.shuttle_counter) {
+		$('#button_shuttle').removeClass('hide_shuttle_counter');
+	} else {
+		$('#button_shuttle').addClass('hide_shuttle_counter');
+	}
+}
+
 function _score_display_init(s) {
 	$('#score_table').empty();
 
@@ -368,6 +376,7 @@ return {
 	ui_render: ui_render,
 	ui_court_str: ui_court_str,
 	exception_dialog: exception_dialog,
+	shuttle_counter: shuttle_counter,
 };
 
 })();

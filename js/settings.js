@@ -12,6 +12,7 @@ var default_settings = {
 	network_update_interval: 10000,
 	double_click_timeout: 1000,
 	negative_timers: false,
+	shuttle_counter: true,
 	lang: 'de',
 };
 
@@ -81,7 +82,7 @@ function hide(force) {
 	uiu.esc_stack_pop();
 }
 
-var _settings_checkboxes = ['save_finished_matches', 'go_fullscreen', 'show_pronounciation', 'negative_timers'];
+var _settings_checkboxes = ['save_finished_matches', 'go_fullscreen', 'show_pronounciation', 'negative_timers', 'shuttle_counter'];
 var _settings_textfields = ['umpire_name', 'court_id', 'court_description'];
 var _settings_numberfields = ['network_timeout', 'network_update_interval'];
 var _settings_selects = ['language'];
@@ -109,6 +110,7 @@ function update() {
 
 	i18n.ui_update_state(state);
 	render.ui_court_str(state);
+	render.shuttle_counter(state);
 }
 
 
@@ -130,6 +132,9 @@ function ui_init() {
 			state.settings[name] = box.prop('checked');
 			if ((name === 'show_pronounciation') && (state.initialized)) {
 				render.ui_render(state);
+			}
+			if (name === 'shuttle_counter') {
+				render.shuttle_counter(state);
 			}
 			settings.store(state);
 		});
