@@ -15,7 +15,7 @@ function exception_dialog(s) {
 }
 
 function shuttle_counter(s) {
-	if (state.settings.shuttle_counter) {
+	if (s.settings.shuttle_counter) {
 		$('#button_shuttle').removeClass('hide_shuttle_counter');
 	} else {
 		$('#button_shuttle').addClass('hide_shuttle_counter');
