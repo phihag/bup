@@ -2571,6 +2571,66 @@ _describe('calc_state', function() {
 			red_card2,
 		]);
 	});
+
+	_it('suspending match in interval', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		}, {
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 0,
+		}, {
+			type: 'love-all',
+		}];
+		press_score(presses, 10, 2);
+		press_score(presses, 0, 1);
+		presses.push({
+			type: 'score',
+			side: 'left',
+			timestamp: 1000,
+		});
+
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert.deepEqual(s.game.score, [11, 3]);
+		assert.strictEqual(s.match.suspended, false);
+		assert.strictEqual(s.match.just_unsuspended, false);
+		assert.ok(!s.timer.upwards);
+		assert.strictEqual(s.timer.start, 1000);
+		assert.strictEqual(s.timer.duration, 60000);
+
+		presses.push({
+			type: 'suspension',
+			timestamp: 1010,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.match.suspended, true);
+		assert.strictEqual(s.match.just_unsuspended, false);
+		assert.deepEqual(s.timer, {
+			start: 1010,
+			upwards: true,
+		});
+
+		presses.push({
+			type: 'resume',
+			timestamp: 1020,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.match.suspended, false);
+		assert.strictEqual(s.match.just_unsuspended, true);
+		assert.strictEqual(s.timer.start, 1000);
+		assert.strictEqual(s.timer.duration, 60000);
+
+		press_score(presses, 1, 0);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.match.suspended, false);
+		assert.strictEqual(s.match.just_unsuspended, false);
+		assert.strictEqual(s.timer, false);
+	});
 });
 
 _describe('calc helper functions', function() {
