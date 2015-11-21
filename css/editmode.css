@@ -46,3 +46,16 @@
 	-webkit-filter: grayscale(70%);
     filter: grayscale(70%);
 }
+
+/* Smartphones */
+@media screen and (max-width:480px), screen and (max-height:480px) {
+	.editmode_change-ends {
+		top: 0;
+		left: 50%;
+		transform: translate(-50%, 0);
+	}
+	.editmode_leave {
+		bottom: 0;
+		transform: translate(-50%, 0);
+	}
+}
