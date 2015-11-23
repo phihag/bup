@@ -10,6 +10,7 @@ var networks = {};
 function init() {
 	i18n.init();
 	i18n.ui_update_state(state);
+	register_sworker();
 	state.settings = settings.load();
 }
 
@@ -94,6 +95,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var pronounciation = require('./pronounciation');
 	var control = require('./control');
 	var startmatch = require('./startmatch');
+	var register_sworker = require('./register_sworker');
 
 	module.exports = {
 		btde: btde,

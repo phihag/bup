@@ -185,7 +185,17 @@ function main() {
 		html = html.replace(/<!--@PRODUCTION([\s\S]*?)-->/g, function(m, m1) {return m1;});
 		html = html.replace(/PRODUCTIONATTR-/g, '');
 		return html;
-	}, function() {});
+	}, function(err) {
+		if (err) {
+			throw err;
+		}
+	});
+
+	uglify([path.join(dev_dir, 'cachesw.js')], path.join(dist_dir, 'cachesw.js'), function(err) {
+		if (err) {
+			throw err;
+		}
+	});
 
 	async.waterfall([
 		function(cb) {
@@ -197,7 +207,7 @@ function main() {
 					return cb(err);
 				}
 				var d = new Date();
-				var version_date = d.getFullYear() + '.' + add_zeroes(d.getMonth() + 1) + '.' + add_zeroes(d.getDay());
+				var version_date = d.getFullYear() + '.' + add_zeroes(d.getMonth() + 1) + '.' + add_zeroes(d.getDate());
 				var version = version_date + '.' + rev;
 				cb(err, version);
 			});

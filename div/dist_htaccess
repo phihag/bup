@@ -1,3 +1,9 @@
 DirectoryIndex index.html
 
 AddType text/cache-manifest .appcache
+
+<filesMatch "^cachesw.js$">
+<IfModule mod_headers.c>
+Header set Cache-Control "no-cache"
+</IfModule>
+</filesMatch>

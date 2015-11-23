@@ -1,6 +1,12 @@
-create service worker
+version is wrong!
+collect file names to cache
+cache file names
+when fetching, use cache 
+add polyfill https://github.com/coonsta/cache-polyfill ?
+test cache in practice (shut down server)
+disable worker in dev
+
 Installable on Android
-	create service worker (should cache)
 	create app icon
 	render app icon to pngs
 	create manifest
