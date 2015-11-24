@@ -192,7 +192,7 @@ function _parse_match(state, col_count) {
 			s.scoresheet_game.cells.push({
 				col: -1,
 				row: press.team_id * 2 + press.player_id,
-				val: 'A',
+				val: s._('scoresheet:server'),
 			});
 			break;
 		case 'pick_receiver':
@@ -206,7 +206,7 @@ function _parse_match(state, col_count) {
 			s.scoresheet_game.cells.push({
 				col: -1,
 				row: 2 * press.team_id + press.player_id,
-				val: 'R',
+				val: s._('scoresheet:receiver'),
 			});
 			break;
 		case 'love-all':
@@ -222,7 +222,7 @@ function _parse_match(state, col_count) {
 				s.scoresheet_game.cells.push({
 					col: -1,
 					row: 2 * s.scoresheet_game.serving_team,
-					val: 'A',
+					val: s._('scoresheet:server'),
 				});
 			}
 			// In doubles we'll get future pick-server and pick-receiver events
@@ -534,7 +534,8 @@ function show() {
 	_text('.scoresheet_date_value', utils.human_date_str(state.metadata.start));
 
 	_text('.scoresheet_court_id', state.settings.court_id);
-	_text('.scoresheet_umpire_name', state.metadata.umpire_name);
+	_text('.scoresheet_umpire_name', state.metadata.umpire_name ? state.metadata.umpire_name : state.settings.umpire_name);
+	_text('.scoresheet_service_judge_name', state.metadata.service_judge_name ? state.metadata.service_judge_name : state.settings.service_judge_name);
 
 	_text('.scoresheet_begin_value', state.metadata.start ? utils.time_str(state.metadata.start) : '');
 	if (state.match.finished) {

@@ -287,10 +287,14 @@ function ui_render(s) {
 	var score_enabled = s.game.started && !s.game.finished && !s.match.suspended;
 	var buttons = $('#left_score,#right_score');
 	if (score_enabled) {
-		buttons.removeAttr('disabled');
+		buttons.removeAttr('data-render-disabled');
 		buttons.removeClass('half-invisible');
+		if (! buttons.attr('data-block-disabled')) {
+			buttons.removeAttr('disabled');
+		}
 	} else {
 		buttons.attr('disabled', 'disabled');
+		buttons.attr('data-render-disabled', 'disabled');
 		buttons.addClass('half-invisible');
 	}
 

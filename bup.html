@@ -261,12 +261,14 @@
 <h2 data-i18n="settings:Settings"></h2>
 <div><label><span data-i18n="settings:Court Description"></span> <input type="text" name="court_description" size="8" data-i18n-placeholder="settings:Court Description.placeholder" /></label> <span data-i18n="settings:Court Number"></span> <label> <input type="number" name="court_id" min="1" /></label></div>
 <label><span data-i18n="settings:Umpire"></span>: <input type="text" name="umpire_name" /></label>
+<label><span data-i18n="settings:Service judge"></span>: <input type="text" name="service_judge_name" /></label>
 <label><span data-i18n="settings:Language"></span>: <select size="1" class="settings_language" name="language"></select></label>
 <label><input type="checkbox" name="save_finished_matches" /><span data-i18n="settings:Store Completed Games"></span></label>
 <label><input type="checkbox" name="shuttle_counter" /><span data-i18n="settings:Shuttle Counter"></span></label>
 <label><input type="checkbox" name="show_pronounciation" /><span data-i18n="settings:Show Pronounciation"></span></label>
 <label><input type="checkbox" name="negative_timers" /><span data-i18n="settings:Negative Timers"></span></label>
 <div><label><input type="checkbox" name="go_fullscreen" /><span data-i18n="settings:Request Fullscreen on Startup"></span></label> <button class="fullscreen_button" data-i18n="settings:Go Fullscreen"></button></div>
+<label><span data-i18n="settings:Button Block Timeout"></span>: <input type="number" name="button_block_timeout" min="0" value="1500" max="5000" /></label>
 <label><span data-i18n="settings:Network Timeout"></span>: <input type="number" name="network_timeout" min="1" value="1000" max="600000" /></label>
 <label><span data-i18n="settings:Network Repeat Interval"></span>: <input type="number" name="network_update_interval" min="1" value="10000" max="600000" /></label>
 </div>
@@ -369,7 +371,7 @@
 		<text class="small-text scoresheet_umpire_name" x="253" y="21"></text>
 		<text class="small-text" x="228" y="29" data-i18n="scoresheet:Service judge"></text>
 		<line class="dashed-line" x1="252" x2="282" y1="29.5" y2="29.5"/>
-		<text class="scoresheet_servicejudge_name" x="253" y="28"></text>
+		<text class="small-text scoresheet_service_judge_name" x="253" y="28"></text>
 		<text class="small-text" x="228" y="36" data-i18n="scoresheet:Begin"></text>
 		<line class="dashed-line" x1="252" x2="282" y1="36.5" y2="36.5"/>
 		<text class="scoresheet_begin_value" x="253" y="35"></text>

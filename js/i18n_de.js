@@ -112,6 +112,7 @@ var i18n_de = {
 'settings:Court Description.placeholder': 'z.B. rechts',
 'settings:Court Number': 'Nummer',
 'settings:Umpire': 'Schiedsrichter',
+'settings:Service judge': 'Aufschlagrichter',
 'settings:Language': 'Sprache',
 'settings:Store Completed Games': 'Abgeschlossene Spiele speichern',
 'settings:Show Pronounciation': 'Ansagen anzeigen',
@@ -120,6 +121,7 @@ var i18n_de = {
 'settings:Request Fullscreen on Startup': 'Vollbildmodus beim Start anfragen',
 'settings:Go Fullscreen': 'Vollbildmodus',
 'settings:Leave Fullscreen': 'Vollbildmodus verlassen',
+'settings:Button Block Timeout': 'Doppel-Touch-Sperre (ms)',
 'settings:Network Timeout': 'Netzwerk-Timeout (ms)',
 'settings:Network Repeat Interval': 'Netzwerk-Wiederholungszeit (ms)',
 
@@ -173,6 +175,8 @@ var i18n_de = {
 'scoresheet:button:print': 'Ausdrucken',
 'scoresheet:button:pdf': 'PDF',
 'scoresheet:button:back': 'Zurück',
+'scoresheet:server': 'A',
+'scoresheet:receiver': 'R',
 
 };
 

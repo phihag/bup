@@ -6,6 +6,8 @@ var _describe = tutils._describe;
 var _it = tutils._it;
 var DOUBLES_SETUP = tutils.DOUBLES_SETUP;
 var SINGLES_SETUP = tutils.SINGLES_SETUP;
+var DOUBLES_SETUP_EN = tutils.DOUBLES_SETUP_EN;
+var SINGLES_SETUP_EN = tutils.SINGLES_SETUP_EN;
 var press_score = tutils.press_score;
 var state_after = tutils.state_after;
 var bup = tutils.bup;
@@ -1853,6 +1855,92 @@ _describe('scoresheet generation', function() {
 			val: 5,
 			editmode_related: true,
 		});
+	});
+
+	_it('English symbols', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}];
+		presses.push({
+			type: 'pick_server',
+			team_id: 1,
+			player_id: 0,
+		});
+
+		var cells = _scoresheet_cells(presses, SINGLES_SETUP_EN);
+		assert.equal(cells.length, 1);
+		_assert_cell(cells, {
+			table: 0,
+			col: -1,
+			row: 2,
+			val: 'S',
+		});
+
+		presses.push({
+			type: 'pick_receiver',
+			team_id: 0,
+			player_id: 0,
+		});
+		cells = _scoresheet_cells(presses, DOUBLES_SETUP_EN);
+		assert.equal(cells.length, 2);
+		_assert_cell(cells, {
+			table: 0,
+			col: -1,
+			row: 2,
+			val: 'S',
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: -1,
+			row: 0,
+			val: 'R',
+		});
+
+		presses.push({
+			type: 'love-all',
+		});
+		cells = _scoresheet_cells(presses, DOUBLES_SETUP_EN);
+		assert.equal(cells.length, 4);
+		_assert_cell(cells, {
+			table: 0,
+			col: -1,
+			row: 2,
+			val: 'S',
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: -1,
+			row: 0,
+			val: 'R',
+		});
+
+		var sav_presses = presses.slice();
+		press_score(presses, 21, 4);
+		presses.push({
+			type: 'postgame-confirm',
+		});
+		cells = _scoresheet_cells(presses, SINGLES_SETUP_EN);
+		_assert_cell(cells, {
+			table: 1,
+			col: -1,
+			row: 0,
+			val: 'S',
+		});
+
+		presses = sav_presses.slice();
+		press_score(presses, 4, 21);
+		presses.push({
+			type: 'postgame-confirm',
+		});
+		cells = _scoresheet_cells(presses, SINGLES_SETUP_EN);
+		_assert_cell(cells, {
+			table: 1,
+			col: -1,
+			row: 2,
+			val: 'S',
+		});
+
 	});
 });
 

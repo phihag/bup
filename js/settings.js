@@ -6,14 +6,16 @@ var default_settings = {
 	go_fullscreen: false,
 	show_pronounciation: true,
 	umpire_name: '',
+	service_judge_name: '',
 	court_id: '',
 	court_description: '',
 	network_timeout: 10000,
 	network_update_interval: 10000,
 	double_click_timeout: 1000,
+	button_block_timeout: 1200,
 	negative_timers: false,
 	shuttle_counter: true,
-	lang: 'de',
+	lang: 'auto',
 };
 
 function load() {
@@ -83,8 +85,8 @@ function hide(force) {
 }
 
 var _settings_checkboxes = ['save_finished_matches', 'go_fullscreen', 'show_pronounciation', 'negative_timers', 'shuttle_counter'];
-var _settings_textfields = ['umpire_name', 'court_id', 'court_description'];
-var _settings_numberfields = ['network_timeout', 'network_update_interval'];
+var _settings_textfields = ['umpire_name', 'service_judge_name', 'court_id', 'court_description'];
+var _settings_numberfields = ['network_timeout', 'network_update_interval', 'button_block_timeout'];
 var _settings_selects = ['language'];
 
 function update() {

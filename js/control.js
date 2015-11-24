@@ -96,6 +96,7 @@ function on_press(press, s) {
 	s.presses.push(press);
 	if (s.settings && s.settings.umpire_name) {
 		s.metadata.umpire_name = s.settings.umpire_name;
+		s.metadata.service_judge_name = s.settings.service_judge_name;
 	}
 
 	on_presses_change(s);
@@ -116,6 +117,20 @@ function on_presses_change(s) {
 		match_storage.store(s);
 		render.ui_render(s);
 	}
+}
+
+function block_score_buttons() {
+	$('#right_score,#left_score').attr({
+		'data-block-disabled': 'disabled',
+		'disabled': 'disabled',
+	});
+	window.setTimeout(function() {
+		var buttons = $('#right_score,#left_score');
+		buttons.removeAttr('data-block-disabled');
+		if (! buttons.attr('data-render-disabled')) {
+			buttons.removeAttr('disabled');
+		}
+	}, state.settings.button_block_timeout);
 }
 
 function init_buttons() {
@@ -147,12 +162,14 @@ function init_buttons() {
 		});
 	});
 	$('#left_score').on('click', function() {
+		block_score_buttons();
 		on_press({
 			type: 'score',
 			side: 'left',
 		});
 	});
 	$('#right_score').on('click', function() {
+		block_score_buttons();
 		on_press({
 			type: 'score',
 			side: 'right',

@@ -110,14 +110,16 @@ var i18n_en = {
 'settings:Court Description.placeholder': 'e.g. right',
 'settings:Court Number': 'Number',
 'settings:Umpire': 'Umpire',
+'settings:Service judge': 'Service judge',
 'settings:Language': 'Language',
 'settings:Store Completed Games': 'Store completed games',
-'settings:Show Pronounciation': 'Show pronounciation',
+'settings:Show Pronounciation': 'Show announcements',
 'settings:Negative Timers': 'Timers go into negative',
 'settings:Shuttle Counter': 'Show shuttle counter',
 'settings:Request Fullscreen on Startup': 'Request fullscreen on startup',
 'settings:Go Fullscreen': 'Go fullscreen',
 'settings:Leave Fullscreen': 'Leave Fullscreen',
+'settings:Button Block Timeout': 'Double press protection (ms)',
 'settings:Network Timeout': 'Network timeout (ms)',
 'settings:Network Repeat Interval': 'Network repeat interval (ms)',
 
@@ -171,6 +173,8 @@ var i18n_en = {
 'scoresheet:button:print': 'Print',
 'scoresheet:button:pdf': 'PDF',
 'scoresheet:button:back': 'Back',
+'scoresheet:server': 'S',
+'scoresheet:receiver': 'R',
 
 };
 

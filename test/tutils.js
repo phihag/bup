@@ -45,10 +45,15 @@ DOUBLES_TEAM_SETUP.teams[0].name = 'A team';
 DOUBLES_TEAM_SETUP.teams[1].name = 'B team';
 DOUBLES_TEAM_SETUP.team_competition = true;
 
+var DOUBLES_SETUP_EN = _.clone(DOUBLES_SETUP);
+DOUBLES_SETUP_EN.force_language = 'en';
+var SINGLES_SETUP_EN = _.clone(SINGLES_SETUP);
+SINGLES_SETUP_EN.force_language = 'en';
+
 function state_after(presses, setup, settings) {
 	var state = {};
 	state.settings = settings;
-	bup.i18n.update_state(state, (settings ? settings.language : 'de'));
+	bup.i18n.update_state(state, (settings ? settings.language : (setup.force_language ? setup.force_language : 'de')));
 	bup.calc.init_state(state, setup);
 	state.presses = presses;
 	bup.calc.state(state);
@@ -111,6 +116,8 @@ module.exports = {
 	SINGLES_SETUP: SINGLES_SETUP,
 	DOUBLES_TEAM_SETUP: DOUBLES_TEAM_SETUP,
 	SINGLES_TEAM_SETUP: SINGLES_TEAM_SETUP,
+	SINGLES_SETUP_EN: SINGLES_SETUP_EN,
+	DOUBLES_SETUP_EN: DOUBLES_SETUP_EN,
 	_describe: _describe,
 	_it: _it,
 	bup: bup,
