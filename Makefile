@@ -19,6 +19,8 @@ force-install-libs:
 	wget https://code.jquery.com/jquery-2.1.4.min.js -O libs/jquery.min.js
 	wget https://craig.global.ssl.fastly.net/js/mousetrap/mousetrap.min.js -O libs/mousetrap.min.js
 	wget https://raw.githubusercontent.com/phihag/jsPDF/dist/dist/jspdf.min.js -O libs/jspdf.min.js
+	wget https://raw.githubusercontent.com/phihag/pdfform.js/dist/dist/pdfform.dist.js -O libs/pdfform.dist.js
+	wget https://raw.githubusercontent.com/eligrey/FileSaver.js/master/FileSaver.min.js -O libs/FileSaver.min.js
 	touch libs/.completed
 
 deps: install-libs
@@ -47,6 +49,8 @@ dist: cleandist
 		div/courtspot_screenshot_links.png \
 		div/courtspot_screenshot_rechts.png \
 		div/LICENSE.commercial.de \
+		div/Spielberichtsbogen_1BL.pdf \
+		div/Spielberichtsbogen_2BL.pdf \
 		--target-directory dist/bup/div/
 
 	$(MAKE) appcache-manifest

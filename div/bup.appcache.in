@@ -9,6 +9,7 @@ icons/loading.gif
 bup.dist.css
 bup.dist.js
 jspdf.dist.js
+pdfform.dist.js
 
 @svgfiles
 

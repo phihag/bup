@@ -1,3 +1,13 @@
+event sheet
+	last updated
+	Spielreihenfolge
+	Aufstellungen
+	Punkte
+	Sätze
+	Spiele
+dist
+mail ulf
+
 no stored matches is not shown after last match is removed!
 service worker
 	collect file names to cache
@@ -13,6 +23,8 @@ Installable on Android
 	create manifest
 	https://developers.google.com/web/updates/2015/03/increasing-engagement-with-app-install-banners-in-chrome-for-android?hl=en
 	test that it doesn't break when not TLS
+
+yourscore.info
 
 btde: Partial matches
 liveaw 2.0 (RL Manuel + Benedikt)

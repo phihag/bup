@@ -44,6 +44,15 @@ function resume_match(s) {
 	// Do not explicitly send anything to the network - we're just looking
 }
 
+// Start the match, but a dialog is still blocking the whole thing
+function start_match_dialog(s, setup) {
+	stop_match(state);
+	calc.init_state(s, setup);
+	calc.state(s);
+	set_current(s);
+	render.ui_render(s);
+}
+
 function start_match(s, setup, init_presses) {
 	stop_match(state);
 	calc.init_state(s, setup, init_presses);
@@ -331,6 +340,7 @@ return {
 	on_presses_change: on_presses_change,
 	demo_match_start: demo_match_start,
 	start_match: start_match,
+	start_match_dialog: start_match_dialog,
 	resume_match: resume_match,
 	ui_init: ui_init,
 	hide_exception_dialog: hide_exception_dialog,

@@ -165,6 +165,7 @@ function enter_match(match) {
 	}
 
 	settings.hide(true);
+	control.start_match_dialog(state, match.setup);
 
 	if (match.network_score) {
 		var netscore = match.network_score;
@@ -279,6 +280,12 @@ function ui_list_matches(s, silent, no_timer) {
 			err_msg.text(err.msg);
 			status_container.append(err_msg);
 			return;
+		}
+
+		if (event.eventsheets) {
+			eventsheet.render_buttons(event);
+		} else {
+			eventsheet.hide();
 		}
 
 		online_event = event;
@@ -401,6 +408,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
 	var uiu = require('./uiu');
 	var control = require('./control');
+	var eventsheet = require('./eventsheet');
 	var pronounciation = require('./pronounciation');
 	var settings = require('./settings');
 

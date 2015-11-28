@@ -22,6 +22,7 @@ function ui_init() {
 
 	appcache.ui_init();
 	$('#script_jspdf').on('load', scoresheet.jspdf_loaded);
+	$('#script_pdfform').on('load', eventsheet.pdfform_loaded);
 
 	editmode.ui_init();
 	scoresheet.ui_init();
@@ -88,6 +89,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var fullscreen = require('./fullscreen');
 	var buphistory = require('./buphistory');
 	var scoresheet = require('./scoresheet');
+	var eventsheet = require('./eventsheet');
 	var network = require('./network');
 	var btde = require('./btde');
 	var courtspot = require('./courtspot');

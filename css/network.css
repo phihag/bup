@@ -112,6 +112,10 @@ button>.loading-icon {
 	background-repeat: no-repeat;
 }
 
+.setup_eventsheets {
+	display: inline-block;
+	margin-right: 2em;
+}
 
 /* Smartphones */
 @media screen and (max-device-width:480px) {

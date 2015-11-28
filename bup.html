@@ -196,7 +196,10 @@
 	<div id="setup_network_matches"></div>
 	<div class="setup_network_status"></div>
 
-	<a href="#" class="setup_show_manual" data-i18n="settings:Custom match details"></a>
+	<div>
+		<div class="setup_eventsheets default-invisible"></div>
+		<a href="#" class="setup_show_manual" data-i18n="settings:Custom match details"></a>
+	</div>
 	</div>
 
 	<form id="setup_manual_form" class="slim_form">
@@ -420,6 +423,7 @@
 <!--@DEV-->
 <script src="libs/jquery.min.js"></script>
 <script src="libs/mousetrap.min.js"></script>
+<script src="libs/FileSaver.min.js"></script>
 
 <script src="js/utils.js"></script>
 <script src="js/i18n.js"></script>
@@ -437,6 +441,7 @@
 <script src="js/render.js"></script>
 <script src="js/startmatch.js"></script>
 <script src="js/scoresheet.js"></script>
+<script src="js/eventsheet.js"></script>
 <script src="js/editmode.js"></script>
 <script src="js/network.js"></script>
 <script src="js/liveaw.js"></script>
@@ -448,11 +453,13 @@
 <script src="js/bup.js"></script>
 
 <script src="libs/jspdf.min.js" async="async" id="script_jspdf"></script>
+<script src="libs/pdfform.dist.js" async="async" id="script_pdfform"></script>
 <!--/@DEV-->
 
 <!--@PRODUCTION
 <script src="bup.dist.js"></script>
 <script src="jspdf.dist.js" async="async" id="script_jspdf"></script>
+<script src="pdfform.dist.js" async="async" id="script_pdfform"></script>
 -->
 
 </body>
