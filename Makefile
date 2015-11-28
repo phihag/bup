@@ -41,6 +41,7 @@ dist: cleandist
 	node div/make_dist.js . dist/bup/ dist/tmp
 
 	cp libs/jspdf.min.js dist/bup/jspdf.dist.js
+	cp libs/pdfform.dist.js dist/bup/pdfform.dist.js
 	svgo -f icons/ -o dist/bup/icons/
 	cp icons/*.gif icons/*.png dist/bup/icons/
 	cp div/dist_htaccess dist/bup/.htaccess
