@@ -27,6 +27,8 @@
         "$": 1,
         "jsPDF": 1,
         "Mousetrap": 1,
+        "pdfform": 1,
+        "saveAs": 1,
 
         " (module names) ": 1,
         "utils": 1,

@@ -178,6 +178,7 @@ var i18n_de = {
 'scoresheet:server': 'A',
 'scoresheet:receiver': 'R',
 
+'eventsheet:draw': 'Unentschieden',
 };
 
 /*@DEV*/

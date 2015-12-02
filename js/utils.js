@@ -182,6 +182,18 @@ function deep_equal(x, y) {
 	return false;
 }
 
+function reverse_every(ar, every) {
+	var res = [];
+	for (var i = 0;i < ar.length;i += every) {
+		for (var j = every - 1;j >= 0;j--) {
+			if (i + j < ar.length) {
+				res.push(ar[i + j]);
+			}
+		}
+	}
+	return res;
+}
+
 return {
 	uuid: uuid,
 	on_click: on_click,
@@ -203,6 +215,7 @@ return {
 	repeat: repeat,
 	values: values,
 	any: any,
+	reverse_every: reverse_every,
 };
 })();
 

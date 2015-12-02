@@ -176,6 +176,7 @@ var i18n_en = {
 'scoresheet:server': 'S',
 'scoresheet:receiver': 'R',
 
+'eventsheet:draw': 'Draw',
 };
 
 /*@DEV*/

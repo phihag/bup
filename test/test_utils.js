@@ -1,4 +1,3 @@
-
 var assert = require('assert');
 var tutils = require('./tutils');
 var _describe = tutils._describe;
@@ -54,6 +53,18 @@ _describe('helper functions', function() {
 		assert.equal(bup.utils.any([false, 0, '']), false);
 		assert.equal(bup.utils.any([2]), true);
 		assert.equal(bup.utils.any([1, 2]), true);
+	});
+
+	_it('reverse_every', function() {
+		assert.deepStrictEqual(
+			bup.utils.reverse_every(['a', 'b', 'c', 'd', 'e', 'f'], 2),
+			['b', 'a', 'd', 'c', 'f', 'e']);
+		assert.deepStrictEqual(
+			bup.utils.reverse_every(['a', 'b', 'c', 'd', 'e', 'f'], 3),
+			['c', 'b', 'a', 'f', 'e', 'd']);
+		assert.deepStrictEqual(
+			bup.utils.reverse_every(['a', 'b', 'c', 'd', 'e', 'f'], 4),
+			['d', 'c', 'b', 'a', 'f', 'e']);
 	});
 });
 

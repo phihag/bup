@@ -55,7 +55,6 @@ function record(s) {
 }
 
 function load_by_hash() {
-	console.log('loading by hash ' + window.location.hash);
 	var qs = utils.parse_query_string(window.location.hash.substr(1));
 	if (state.metadata && (qs.m == state.metadata.id)) {
 		is_loading = true;

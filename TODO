@@ -1,14 +1,10 @@
 event sheet
-	last updated
-	Spielreihenfolge
-	Aufstellungen
-	Punkte
-	Sätze
-	Spiele
+	event sheet dialog for various stuff
+URL to get event sheet directly
 dist
 mail ulf
 
-no stored matches is not shown after last match is removed!
+"no stored matches" is not shown after last match is removed!
 service worker
 	collect file names to cache
 	cache file names
@@ -39,6 +35,7 @@ check whether we have a copy of a network game to resume from, offer it
 save manually created games immediately?
 
 clean up / hide automatically generated games?
+	after certain time?
 
 alternate match opening
 	CG generated toss
@@ -153,6 +150,7 @@ move editmode_active into state.ui
 Button "bitte spielen" mehr betonen (icon?)
 test that singles with pick_receiver works just fine
 minify HTML
+test failure of eventsheet download
 implement service workers as well as appcache
 CSS: check that we combine media rules in practice with cleancss
 convert static (in HTML) pickers to team_pick / player_pick etc.
@@ -160,5 +158,4 @@ consider eliminating love-all
 move manual editing confirm button to bottom (with white border) and give it a text "Übernehmen"
 click court name to get into change court dialog (show button in editmode)
 -> Demo Jörg H, Manuel, Susanne, Werner Durow
--> Jens Köster fragen wegen zweimal gelbe Karte
--> Jens Köster fragen wegen C
+
