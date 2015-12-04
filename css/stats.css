@@ -1,0 +1,36 @@
+.stats_layout {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	font-size: 24px;
+	text-align: center;
+	background: rgba(0, 0, 0, 0.9);
+	z-index: 2000;
+}
+
+.stats_container {
+	display: inline-block;
+	background: #fff;
+	border-bottom-right-radius: 1em;
+	border-bottom-left-radius: 1em;
+	text-align: center;
+	padding: 1em 1em;
+}
+
+.stats_table>thead>tr>th {
+	padding: 0 0.4em;
+}
+.stats_table>tbody>tr>th {
+	text-align: left;
+}
+.stats_table>tbody>tr>td {
+	text-align: right;
+}
+
+
+.stats_match_name {
+	margin: 0 0 1em 0;
+	font-size: 80%;
+}

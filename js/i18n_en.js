@@ -6,6 +6,7 @@ var i18n_en = {
 'Automatic': 'Automatic',
 'Court': 'Court',
 'Score Sheet': 'Score Sheet',
+'Statistics': 'Statistiken',
 'dialog-left': 'Left court side',
 'dialog-server': 'Server',
 'dialog-receiver': 'Receiver',
@@ -188,7 +189,17 @@ var i18n_en = {
 'eventsheet:Notes': 'Notes:',
 'eventsheet:Protest': 'Protest:',
 'eventsheet:back': 'Back',
+'eventsheet:Event Sheet': 'Event Report',
 
+'stats:game': 'Game {number}',
+'stats:match': 'Match',
+'stats:back': 'Back',
+'stats:points': 'Points',
+'stats:points_lr': 'Points left/right',
+'stats:shuttles': 'Shuttles',
+'stats:duration': 'Duration',
+'stats:avg_rally_length': '⌀ Rally length',
+'stats:serves': '#Serves {player_name}',
 };
 
 /*@DEV*/

@@ -15,6 +15,12 @@ function load_ui_by_hash_qs(qs) {
 	} else {
 		settings.hide(true);
 	}
+
+	if (qs.stats !== undefined) {
+		stats.show();
+	} else {
+		stats.hide();
+	}
 }
 
 var is_loading = false;
@@ -26,7 +32,7 @@ function record(s) {
 
 	var orig_hval = window.location.hash.substr(1);
 	var hval = orig_hval;
-	hval = hval.replace(/(?:^|&)(?:m|settings|scoresheet|eventsheet)(?:=[^&]*)?(?=&|$)/g, '');
+	hval = hval.replace(/(?:^|&)(?:m|settings|scoresheet|eventsheet|stats)(?:=[^&]*)?(?=&|$)/g, '');
 	hval = hval.replace(/^&+|&+$/g, '');
 
 	if (s.initialized) {
@@ -51,6 +57,11 @@ function record(s) {
 			hval += '&';
 		}
 		hval += 'settings';
+	} else if (s.ui.stats_visible) {
+		if (hval.length > 1) {
+			hval += '&';
+		}
+		hval += 'stats';
 	}
 
 	var orig_qs = utils.parse_query_string(orig_hval);
@@ -121,6 +132,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var eventsheet = require('./eventsheet');
 	var network = require('./network');
 	var settings = require('./settings');
+	var stats = require('./stats');
 	var match_storage = require('./match_storage');
 
 	module.exports = buphistory;

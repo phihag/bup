@@ -19,6 +19,7 @@
 	<link rel="stylesheet" href="css/exceptions.css" />
 	<link rel="stylesheet" href="css/topbuttons.css" />
 	<link rel="stylesheet" href="css/bottombuttons.css" />
+	<link rel="stylesheet" href="css/stats.css" />
 	<link rel="stylesheet" href="bup.css" />
 <!--/@DEV-->
 <!--@PRODUCTION
@@ -164,6 +165,7 @@
 
 <div class="postmatch_options default-invisible">
 <button class="postmatch_scoresheet_button" data-i18n="Score Sheet"></button>
+<button class="postmatch_stats_button" data-i18n="Statistics"></button>
 </div>
 
 <div id="pronounciation" class="default-invisible"><span></span></div>
@@ -432,6 +434,22 @@
 </div>
 </div>
 
+<div class="stats_layout default-invisible">
+<div class="stats_container">
+
+<h3 class="stats_match_name"></h3>
+
+<table class="stats_table">
+<thead><tr></tr><thead>
+<tbody>
+
+</tbody>
+</table>
+
+<a href="#" class="stats_back" data-i18n="stats:back"></a>
+</div>
+</div>
+
 <div class="appcache_updated_wrapper default-invisible"><span data-i18n="bup.updated.version"></span> <span class="appcache_updated_version"></span></div>
 
 <div class="appcache_updating_wrapper default-invisible" data-i18n="bup.updating"></div>
@@ -455,7 +473,9 @@
 <script src="js/fullscreen.js"></script>
 <script src="js/settings.js"></script>
 <script src="js/calc.js"></script>
+<script src="js/svg2pdf.js"></script>
 <script src="js/pronounciation.js"></script>
+<script src="js/stats.js"></script>
 <script src="js/render.js"></script>
 <script src="js/startmatch.js"></script>
 <script src="js/scoresheet.js"></script>

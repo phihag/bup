@@ -48,6 +48,7 @@ function show() {
 	state.ui.settings_visible = true;
 	control.set_current(state);
 	scoresheet.hide();
+	stats.hide();
 
 	$('#settings_wrapper').show();
 	if (networks.courtspot || networks.btde) {
@@ -207,6 +208,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var uiu = require('./uiu');
 	var match_storage = require('./match_storage');
 	var i18n = require('./i18n');
+	var stats = require('./stats');
 	var control = require('./control');
 
 	module.exports = settings;

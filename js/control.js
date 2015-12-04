@@ -279,6 +279,11 @@ function init_shortcuts() {
 			settings.show();
 		}
 	});
+	Mousetrap.bind('a', function() {
+		if (state.initialized) {
+			stats.show();
+		}
+	});
 	Mousetrap.bind('e', function() {
 		if (state.initialized) {
 			editmode.enter();
@@ -303,10 +308,10 @@ function set_current(s) {
 		if (s.setup.match_name) {
 			title += s.setup.match_name + ' - ';
 		}
-		if (state.setup.is_doubles) {
-			title += state.setup.teams[0].players[0].name + ' / ' + state.setup.teams[0].players[1].name + ' vs ' + state.setup.teams[1].players[0].name + ' / ' + state.setup.teams[1].players[1].name;
+		if (s.setup.is_doubles) {
+			title += s.setup.teams[0].players[0].name + ' / ' + s.setup.teams[0].players[1].name + ' vs ' + s.setup.teams[1].players[0].name + ' / ' + s.setup.teams[1].players[1].name;
 		} else {
-			title += state.setup.teams[0].players[0].name + ' vs ' + state.setup.teams[1].players[0].name;
+			title += s.setup.teams[0].players[0].name + ' vs ' + s.setup.teams[1].players[0].name;
 		}
 		title += ' - ';
 	}
@@ -363,6 +368,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var editmode = require('./editmode');
 	var timer = require('./timer');
 	var buphistory = require('./buphistory');
+	var stats = require('./stats');
 
 	module.exports = control;
 }

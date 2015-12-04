@@ -6,6 +6,7 @@ var i18n_de = {
 'Automatic': 'Automatisch',
 'Court': 'Feld',
 'Score Sheet': 'Schiedsrichterzettel',
+'Statistics': 'Spiel-Statistiken',
 'dialog-left': 'Spieler auf der linken Seite',
 'dialog-server': 'Aufschläger',
 'dialog-receiver': 'Rückschläger',
@@ -187,9 +188,20 @@ var i18n_de = {
 'eventsheet:Matchday': 'Spieltag:',
 'eventsheet:Start Time': 'Startzeit:',
 'eventsheet:Backup Players': 'Vorhergesehene Ersatzspieler:',
-'eventsheet:Notes': 'Besondere Vorkomnisse:',
+'eventsheet:Notes': 'Besondere Vorkommnisse:',
 'eventsheet:Protest': 'Protest:',
 'eventsheet:back': 'Zurück',
+'eventsheet:Event Sheet': 'Spielbericht',
+
+'stats:game': '{number}. Satz',
+'stats:match': 'Spiel',
+'stats:back': 'Zurück',
+'stats:points': 'Punkte',
+'stats:points_lr': 'Punkte links/rechts',
+'stats:shuttles': 'Bälle',
+'stats:duration': 'Dauer',
+'stats:avg_rally_length': '⌀ Ballwechsel-Länge',
+'stats:serves': 'Aufschläge {player_name}',
 
 };
 

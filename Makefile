@@ -52,6 +52,7 @@ dist: cleandist
 		div/LICENSE.commercial.de \
 		div/Spielberichtsbogen_1BL.pdf \
 		div/Spielberichtsbogen_2BL.pdf \
+		div/Spielbericht_RLW.svg \
 		--target-directory dist/bup/div/
 
 	$(MAKE) appcache-manifest

@@ -202,6 +202,12 @@ function map_dict(fields, func) {
 	return res;
 }
 
+function sum(ar) {
+	return ar.reduce(function(x, y) {
+		return x + y;
+	}, 0);
+}
+
 return {
 	add_zeroes: add_zeroes,
 	any: any,
@@ -221,6 +227,7 @@ return {
 	repeat: repeat,
 	reverse_every: reverse_every,
 	set_class: set_class,
+	sum: sum,
 	time_str: time_str,
 	uuid: uuid,
 	values: values,

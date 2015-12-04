@@ -87,8 +87,13 @@ html, body, button {
 	padding: 3vh 1vh 3vh 3vh;
 }
 .postmatch_options>button {
-	padding: 1.5vmin;
+	padding: 1.7vmin;
 	font-size: 5vmin;
+	min-width: 10em;
+	display: block;
+}
+.postmatch_options>button+button {
+	margin-top: 1em;
 }
 @media all and (orientation: portrait) {
 	.postmatch_options {

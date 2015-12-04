@@ -32,6 +32,7 @@ function ui_init() {
 	startmatch.ui_init();
 	settings.ui_init();
 	eventsheet.ui_init();
+	stats.ui_init();
 
 	var hash_query = utils.parse_query_string(window.location.hash.substr(1));
 	if (hash_query.lang) {
@@ -98,6 +99,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var pronounciation = require('./pronounciation');
 	var control = require('./control');
 	var startmatch = require('./startmatch');
+	var stats = require('./stats');
 	var register_sworker = require('./register_sworker');
 
 	module.exports = {
@@ -109,6 +111,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 		pronounciation: pronounciation,
 		scoresheet: scoresheet,
 		utils: utils,
+		stats: stats,
 	};
 }
 /*/@DEV*/

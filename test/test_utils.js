@@ -55,6 +55,12 @@ _describe('helper functions', function() {
 		assert.equal(bup.utils.any([1, 2]), true);
 	});
 
+	_it('sum', function() {
+		assert.strictEqual(bup.utils.sum([]), 0);
+		assert.strictEqual(bup.utils.sum([1, 2, 3]), 6);
+		assert.strictEqual(bup.utils.sum([2]), 2);
+	});
+
 	_it('reverse_every', function() {
 		assert.deepStrictEqual(
 			bup.utils.reverse_every(['a', 'b', 'c', 'd', 'e', 'f'], 2),

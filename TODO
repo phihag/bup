@@ -1,6 +1,10 @@
-match statistics at match end
-	average number of succesful serves
-	average points duration
+eventsheet RLW
+	set actual values
+	remove current values
+mail Ulf
+
+match statistics
+	UI on mobile
 
 "no stored matches" is not shown after last match is removed!
 service worker
