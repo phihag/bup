@@ -118,6 +118,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
+	var eventsheet = require('./eventsheet');
 	var network = require('./network');
 	var settings = require('./settings');
 	var match_storage = require('./match_storage');

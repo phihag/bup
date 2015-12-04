@@ -291,7 +291,7 @@ function render_buttons(new_event) {
 		var link = $('<a href="#" class="eventsheet_link">');
 		link.on('click', function(e) {
 			e.preventDefault();
-			show_dialog(es.key, true);
+			show_dialog(es.key);
 			return false;
 		});
 		link.text(es.label);
@@ -304,10 +304,10 @@ function hide() {
 }
 
 function ui_init() {
-	var form = $('.eventsheet_form').on('submit', function(e) {
+	var form = $('.eventsheet_form');
+	form.on('submit', function(e) {
 		e.preventDefault();
 		var es_key = $('.eventsheet_container').attr('data-eventsheet_key');
-		var form = $('.eventsheet_form');
 		var fields = ['umpires', 'location', 'matchday', 'starttime', 'notes', 'backup_players', 'protest'];
 		var extra_data = utils.map_dict(fields, function(field) {
 			return form.find('[name="' + field + '"]').val();
@@ -388,7 +388,7 @@ function resolve_key(es_key) {
 	return event.eventsheets[0].key;
 }
 
-function show_dialog(es_key, from_bup) {
+function show_dialog(es_key) {
 	state.ui.eventsheet = es_key;
 	settings.hide(true);
 	$('#game').hide();
