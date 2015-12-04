@@ -13,7 +13,9 @@ var i18n_de = {
 'fullscreen:go': 'Vollbildmodus',
 'fullscreen:no': 'Normalbildmodus',
 'timer:restart': 'Stoppuhr neu starten',
+
 'network:error': 'Fehler bei der Netzwerk-Übertragung',
+'network:error:unconfigured': 'Keine Netzwerk-Anbindung vorhanden!',
 
 'button:undo': 'Rückgängig',
 'button:settings': 'Konfiguration',
@@ -179,6 +181,16 @@ var i18n_de = {
 'scoresheet:receiver': 'R',
 
 'eventsheet:draw': 'Unentschieden',
+'eventsheet:Generate': 'Spielbericht generieren',
+'eventsheet:Umpires': 'Schiedsrichter:',
+'eventsheet:Location': 'Austragungsstätte:',
+'eventsheet:Matchday': 'Spieltag:',
+'eventsheet:Start Time': 'Startzeit:',
+'eventsheet:Backup Players': 'Vorhergesehene Ersatzspieler:',
+'eventsheet:Notes': 'Besondere Vorkomnisse:',
+'eventsheet:Protest': 'Protest:',
+'eventsheet:back': 'Zurück',
+
 };
 
 /*@DEV*/

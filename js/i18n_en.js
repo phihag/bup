@@ -13,7 +13,9 @@ var i18n_en = {
 'fullscreen:go': 'Go fullscreen',
 'fullscreen:no': 'Normal screen',
 'timer:restart': 'Restart timer',
+
 'network:error': 'Network transmission error',
+'network:error:unconfigured': 'Network connection not configured',
 
 'button:undo': 'Undo',
 'button:settings': 'Configuration',
@@ -177,6 +179,16 @@ var i18n_en = {
 'scoresheet:receiver': 'R',
 
 'eventsheet:draw': 'Draw',
+'eventsheet:Generate': 'Generate Report',
+'eventsheet:Umpires': 'Umpires:',
+'eventsheet:Location': 'Location:',
+'eventsheet:Matchday': 'Match day:',
+'eventsheet:Start Time': 'Start time:',
+'eventsheet:Backup Players': 'Backup players:',
+'eventsheet:Notes': 'Notes:',
+'eventsheet:Protest': 'Protest:',
+'eventsheet:back': 'Back',
+
 };
 
 /*@DEV*/

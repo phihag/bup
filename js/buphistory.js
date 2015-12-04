@@ -26,7 +26,8 @@ function record(s) {
 
 	var orig_hval = window.location.hash.substr(1);
 	var hval = orig_hval;
-	hval = hval.replace(/(?:^|&)(?:m|settings|scoresheet)(?:=[^&]*)?(?=&|$)/g, '');
+	hval = hval.replace(/(?:^|&)(?:m|settings|scoresheet|eventsheet)(?:=[^&]*)?(?=&|$)/g, '');
+	hval = hval.replace(/^&+|&+$/g, '');
 
 	if (s.initialized) {
 		if (hval.length > 1) {
@@ -40,6 +41,11 @@ function record(s) {
 			hval += '&';
 		}
 		hval += 'scoresheet';
+	} else if (s.ui.eventsheet) {
+		if (hval.length > 1) {
+			hval += '&';
+		}
+		hval += 'eventsheet=' + encodeURIComponent(s.ui.eventsheet);
 	} else if (s.ui.settings_visible) {
 		if (hval.length > 1) {
 			hval += '&';
@@ -62,6 +68,12 @@ function load_by_hash() {
 		is_loading = false;
 		return;
 	}
+
+	if (qs.eventsheet) {
+		eventsheet.show_dialog(qs.eventsheet);
+		return;
+	}
+
 	if (qs.m) {
 		// Load match
 		var m = match_storage.get(qs.m);

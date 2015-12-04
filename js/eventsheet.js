@@ -95,7 +95,7 @@ function get_match_order(matches) {
 	});
 }
 
-function render_bundesliga(es_key, ui8r) {
+function render_bundesliga(es_key, ui8r, extra_data) {
 	var i; // "let" is not available even in modern browsers
 	var match_order;
 	if (es_key == '1BL') {
@@ -205,15 +205,18 @@ function render_bundesliga(es_key, ui8r) {
 	var fields = {
 		'Textfeld1': [event.home_team_name],
 		'Textfeld2': [event.away_team_name],
-		'Textfeld3': ['TODO Schiedsrichter'],
-		'Textfeld4': ['TODO Austragungsstätte'],
+		'Textfeld3': [extra_data.umpires],
+		'Textfeld4': [extra_data.location],
 		'Textfeld5': (last_update ? [utils.date_str(last_update * 1000)] : []),
-		'Textfeld6': ['TODO Start'],
+		'Textfeld6': [extra_data.starttime],
 		'Textfeld7': (last_update ? [utils.time_str(last_update * 1000)] : []),
-		'Textfeld8': ['TODO Spieltag'],
+		'Textfeld8': [extra_data.matchday],
 		'Textfeld9': player_names,
 		'Textfeld10': points_scores_all,
 		'Textfeld11': [event_winner_str(event, match_score_home, match_score_away)],
+		'Textfeld12': [extra_data.backup_players],
+		'Textfeld13': [extra_data.notes],
+		'Textfeld14': [undefined, undefined, undefined, extra_data.protest, (extra_data.protest ? utils.time_str(Date.now()) : '')],
 		'NumerischesFeld1': get_match_order(matches),
 		'NumerischesFeld2': scores,
 		'Kontrollkästchen1': [true],
@@ -226,28 +229,31 @@ function render_bundesliga(es_key, ui8r) {
 	saveAs(blob, filename);
 }
 
-function render(es_key, ui8r) {
+function render(es_key, ui8r, extra_data) {
 	switch(es_key) {
 	case '1BL':
 	case '2BLN':
 	case '2BLS':
-		return render_bundesliga(es_key, ui8r);
+		return render_bundesliga(es_key, ui8r, extra_data);
 	default:
 	throw new Error('Unsupported eventsheet key ' + es_key);
 	}
 }
 
-function prepare_render(btn, es_key) {
+function prepare_render(btn, es_key, extra_data) {
 	var progress = $('<div class="loading-icon" />');
 	btn.append(progress);
 	download(es_key, function(ui8r) {
 		progress.remove();
-		render(es_key, ui8r);
+		render(es_key, ui8r, extra_data);
 	});
 }
 
 function download(es_key, callback) {
 	if (files[es_key]) {
+		if (!callback) {
+			return;
+		}
 		return callback(files[es_key]);
 	}
 
@@ -280,13 +286,14 @@ function render_buttons(new_event) {
 	var container = $('.setup_eventsheets');
 	container.empty();
 	event.eventsheets.forEach(function(es) {
-		download(es.key);
-		var btn = $('<button role="button" class="eventsheet_button">');
-		btn.on('click', function() {
-			prepare_render(btn, es.key);
+		var link = $('<a href="#" class="eventsheet_link">');
+		link.on('click', function(e) {
+			e.preventDefault();
+			show_dialog(es.key, true);
+			return false;
 		});
-		btn.text(es.label);
-		container.append(btn);
+		link.text(es.label);
+		container.append(link);
 	});
 }
 
@@ -294,10 +301,126 @@ function hide() {
 	$('.setup_eventsheets').empty();
 }
 
+function ui_init() {
+	var form = $('.eventsheet_form').on('submit', function(e) {
+		e.preventDefault();
+		var es_key = $('.eventsheet_container').attr('data-eventsheet_key');
+		var form = $('.eventsheet_form');
+		var fields = ['umpires', 'location', 'matchday', 'starttime', 'notes', 'backup_players', 'protest'];
+		var extra_data = utils.map_dict(fields, function(field) {
+			return form.find('[name="' + field + '"]').val();
+		});
+
+		prepare_render($('.eventsheet_generate_button'), es_key, extra_data);
+		return false;
+	});
+
+	$('.eventsheet_reload').on('click', function() {
+		dialog_fetch();
+	});
+
+	$('.eventsheet_back').on('click', function(e) {
+		e.preventDefault();
+		var from_bup = $('.eventsheet_container').attr('data-eventsheet_from_bup') === 'true';
+		if (from_bup) {
+			hide_dialog();
+		} else {
+			window.history.back();
+		}
+		return false;
+	});
+
+	if (window.localStorage) {
+		var location_field = $('.eventsheet_form [name="location"]');
+		try {
+			var location = window.localStorage.getItem('bup_eventsheet_location');
+			location_field.val(location);
+		} catch(e) {
+			// Ignore error
+		}
+
+		location_field.on('input change', function() {
+			var location = $(this).val();
+			try {
+				window.localStorage.setItem('bup_eventsheet_location', location);
+			} catch(e) {
+				// Ignore error
+			}
+		});
+	}
+}
+
+function dialog_fetch() {
+	utils.visible('.eventsheet_generate_loading_icon', !event);
+	var btn = $('.eventsheet_generate_button');
+	if (event) {
+		btn.removeAttr('disabled');
+	} else {
+		btn.attr('disabled', 'disabled');
+		network.list_matches(state, function(err, ev) {
+			utils.visible('.eventsheet_generate_loading_icon', false);
+			if (err) {
+				$('.eventsheet_error_message').text(err.msg);
+				utils.visible('.eventsheet_error', true);
+				return;
+			}
+			event = ev;
+			var container = $('.eventsheet_container');
+			var es_key = container.attr('data-eventsheet_key');
+			es_key = resolve_key(es_key);
+			container.attr('data-eventsheet_key', es_key);
+			btn.removeAttr('disabled');
+		});
+	}
+}
+
+function resolve_key(es_key) {
+	if (es_key != 'BL-auto') {
+		return es_key;
+	}
+
+	if (!event) {
+		return es_key; // Need to resolve again later
+	}
+
+	return event.eventsheets[0].key;
+}
+
+function show_dialog(es_key, from_bup) {
+	state.ui.eventsheet = es_key;
+	settings.hide(true);
+	$('#game').hide();
+
+	if (es_key == 'BL-auto') {
+		es_key = resolve_key(es_key);
+	}
+
+	if (es_key != 'BL-auto') {
+		download(es_key);
+	}
+
+	var container = $('.eventsheet_container');
+	container.attr('data-eventsheet_key', es_key);
+	container.attr('data-eventsheet_from_bup', from_bup ? 'true' : 'false');
+	container.removeClass('default-invisible');
+
+	dialog_fetch();
+}
+
+function hide_dialog() {
+	state.ui.eventsheet = null;
+	var container = $('.eventsheet_container');
+	container.addClass('default-invisible');
+	$('#game').show();
+	settings.show();
+}
+
 return {
 	pdfform_loaded: pdfform_loaded,
 	render_buttons: render_buttons,
 	hide: hide,
+	ui_init: ui_init,
+	show_dialog: show_dialog,
 };
 
 })();

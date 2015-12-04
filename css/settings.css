@@ -73,6 +73,10 @@
     -ms-user-select: none;
 }
 
+.setup_show_manual {
+	display: inline-block;
+}
+
 .setup_manual_teams {
 	margin-bottom: 0.5em;
 }

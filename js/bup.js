@@ -31,6 +31,7 @@ function ui_init() {
 	control.ui_init();
 	startmatch.ui_init();
 	settings.ui_init();
+	eventsheet.ui_init();
 
 	var hash_query = utils.parse_query_string(window.location.hash.substr(1));
 	if (hash_query.lang) {

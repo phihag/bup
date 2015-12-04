@@ -254,6 +254,16 @@ function ui_render_matchlist(s, event) {
 	});
 }
 
+function list_matches(s, callback) {
+	var netw = get_netw();
+	if (!netw) {
+		return callback({
+			msg: state._('network:error:unconfigured'),
+		});
+	}
+	netw.list_matches(s, callback);
+}
+
 // Returns a callback to be called when the list is no longer required
 function ui_list_matches(s, silent, no_timer) {
 	_matchlist_install_reload_button(s);
@@ -397,6 +407,7 @@ return {
 	errstate: errstate,
 	match_by_id: match_by_id,
 	enter_match: enter_match,
+	list_matches: list_matches,
 };
 
 

@@ -1,9 +1,3 @@
-event sheet
-	event sheet dialog for various stuff
-URL to get event sheet directly
-dist
-mail ulf
-
 "no stored matches" is not shown after last match is removed!
 service worker
 	collect file names to cache
@@ -21,6 +15,11 @@ Installable on Android
 	test that it doesn't break when not TLS
 
 yourscore.info
+
+match statistics at match end
+	average number of succesful serves
+	average points duration
+replay?
 
 btde: Partial matches
 liveaw 2.0 (RL Manuel + Benedikt)
@@ -155,6 +154,7 @@ implement service workers as well as appcache
 CSS: check that we combine media rules in practice with cleancss
 convert static (in HTML) pickers to team_pick / player_pick etc.
 consider eliminating love-all
+better loading screen
 move manual editing confirm button to bottom (with white border) and give it a text "Übernehmen"
 click court name to get into change court dialog (show button in editmode)
 -> Demo Jörg H, Manuel, Susanne, Werner Durow

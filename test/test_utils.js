@@ -66,6 +66,19 @@ _describe('helper functions', function() {
 			bup.utils.reverse_every(['a', 'b', 'c', 'd', 'e', 'f'], 4),
 			['d', 'c', 'b', 'a', 'f', 'e']);
 	});
+
+	_it('map_dict', function() {
+		assert.deepStrictEqual(
+			bup.utils.map_dict(['a', 'b', 'c'], function(s) {
+				return s.toUpperCase();
+			}),
+			{
+				'a': 'A',
+				'b': 'B',
+				'c': 'C',
+			}
+		);
+	});
 });
 
 })();

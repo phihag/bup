@@ -8,6 +8,10 @@ html, body, button {
 	font-family: 'Droid Sans', Arial, sans-serif;
 }
 
+:visited {
+	color: #0000ee;
+}
+
 #game {
 	height: 100%;
 }

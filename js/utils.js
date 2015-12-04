@@ -194,28 +194,37 @@ function reverse_every(ar, every) {
 	return res;
 }
 
+function map_dict(fields, func) {
+	var res = {};
+	fields.forEach(function(f) {
+		res[f] = func(f);
+	});
+	return res;
+}
+
 return {
-	uuid: uuid,
-	on_click: on_click,
-	iso8601: iso8601,
-	time_str: time_str,
+	add_zeroes: add_zeroes,
+	any: any,
 	date_str: date_str,
 	datetime_str: datetime_str,
-	human_date_str: human_date_str,
-	add_zeroes: add_zeroes,
-	multiline_regexp: multiline_regexp,
-	parse_query_string: parse_query_string,
+	deep_equal: deep_equal,
 	duration_mins: duration_mins,
 	duration_secs: duration_secs,
-	visible: visible,
-	qsEach: qsEach,
-	set_class: set_class,
+	human_date_str: human_date_str,
+	iso8601: iso8601,
+	map_dict: map_dict,
+	multiline_regexp: multiline_regexp,
 	obj_update: obj_update,
-	deep_equal: deep_equal,
+	on_click: on_click,
+	parse_query_string: parse_query_string,
+	qsEach: qsEach,
 	repeat: repeat,
-	values: values,
-	any: any,
 	reverse_every: reverse_every,
+	set_class: set_class,
+	time_str: time_str,
+	uuid: uuid,
+	values: values,
+	visible: visible,
 };
 })();
 

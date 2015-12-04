@@ -14,6 +14,7 @@ function determine_svg_files(dist_dir, cb) {
 			return cb(err);
 		}
 
+		files.sort();
 		var svg_basename_files = files.filter(function(fn) {
 			return fn.match(/\.svg$/);
 		});
