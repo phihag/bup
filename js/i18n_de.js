@@ -198,7 +198,7 @@ var i18n_de = {
 'stats:back': 'Zurück',
 'stats:points': 'Punkte',
 'stats:points_lr': 'Punkte links/rechts',
-'stats:shuttles': 'Bälle',
+'stats:shuttles': 'Federbälle',
 'stats:duration': 'Dauer',
 'stats:avg_rally_length': '⌀ Ballwechsel-Länge',
 'stats:serves': 'Aufschläge {player_name}',
