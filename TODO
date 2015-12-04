@@ -1,3 +1,7 @@
+match statistics at match end
+	average number of succesful serves
+	average points duration
+
 "no stored matches" is not shown after last match is removed!
 service worker
 	collect file names to cache
@@ -16,11 +20,7 @@ Installable on Android
 
 yourscore.info
 
-match statistics at match end
-	average number of succesful serves
-	average points duration
 replay?
-
 btde: Partial matches
 liveaw 2.0 (RL Manuel + Benedikt)
 	import
@@ -97,13 +97,11 @@ display mode (tap anywhere to exit)
 support multiple networks at the same time
 use court name in 20s announcements
 shortcuts u/r undo/redo
-eliminate uses of match.game_score; use match.team1_won instead
 title for all buttons
 make buttons larger in landscape on smartphones
 scoresheet: begin and end on different days
 display mode for multiple courts (via WebRTC, requires a network)
 WebRTC bootstrapping without Internet (QR code? UDP multicast?)
-write more automated tests for scoresheet generation (singles..., 20all dash, disqualified etc.)
 add test for retired-then-referee
 icons for scoresheet (PDF/print/back) buttons
 test for shuttle counter

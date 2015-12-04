@@ -9,6 +9,7 @@ var URLS = {
 var files = {};
 
 var event;
+var ui_current_eventsheets;
 
 function pdfform_loaded() {
 	$('.setup_eventsheets').removeClass('default-invisible');
@@ -273,7 +274,7 @@ function download(es_key, callback) {
 }
 
 function render_buttons(new_event) {
-	if (event && utils.deep_equal(event.eventsheets, new_event.eventsheets)) {
+	if (event && utils.deep_equal(ui_current_eventsheets, new_event.eventsheets)) {
 		event = new_event;
 		return;  // No need to reconfigure containers
 	}
@@ -285,6 +286,7 @@ function render_buttons(new_event) {
 
 	var container = $('.setup_eventsheets');
 	container.empty();
+	ui_current_eventsheets = event.eventsheets;
 	event.eventsheets.forEach(function(es) {
 		var link = $('<a href="#" class="eventsheet_link">');
 		link.on('click', function(e) {
@@ -321,7 +323,7 @@ function ui_init() {
 
 	$('.eventsheet_back').on('click', function(e) {
 		e.preventDefault();
-		var from_bup = $('.eventsheet_container').attr('data-eventsheet_from_bup') === 'true';
+		var from_bup = $('.eventsheet_container').attr('data-eventsheet_key') != 'BL-direct';
 		if (from_bup) {
 			hide_dialog();
 		} else {
@@ -375,7 +377,7 @@ function dialog_fetch() {
 }
 
 function resolve_key(es_key) {
-	if (es_key != 'BL-auto') {
+	if ((es_key != 'BL-auto') && (es_key != 'BL-direct')) {
 		return es_key;
 	}
 
@@ -391,17 +393,14 @@ function show_dialog(es_key, from_bup) {
 	settings.hide(true);
 	$('#game').hide();
 
-	if (es_key == 'BL-auto') {
-		es_key = resolve_key(es_key);
-	}
+	es_key = resolve_key(es_key);
 
-	if (es_key != 'BL-auto') {
+	if ((es_key != 'BL-auto') && (es_key != 'BL-direct')) {
 		download(es_key);
 	}
 
 	var container = $('.eventsheet_container');
 	container.attr('data-eventsheet_key', es_key);
-	container.attr('data-eventsheet_from_bup', from_bup ? 'true' : 'false');
 	container.removeClass('default-invisible');
 
 	dialog_fetch();
