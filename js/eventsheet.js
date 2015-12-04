@@ -571,6 +571,7 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
 	var utils = require('./utils');
+	var svg2pdf = require('./svg2pdf');
 
 	module.exports = eventsheet;
 }
