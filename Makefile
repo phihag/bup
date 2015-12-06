@@ -57,6 +57,7 @@ dist: cleandist
 
 	$(MAKE) appcache-manifest
 
+	find dist -exec touch --date "$$(git log -1 --date=iso | sed -n -e 's/Date:\s*\([0-9 :-]*\)+.*/\1/p')" '{}' ';'
 	cd dist && zip bup.zip bup/ -rq
 
 upload: dist

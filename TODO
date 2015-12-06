@@ -1,6 +1,10 @@
+simple P2P
+	bootstrapping (liveaw, when same IP => connect)
+	list connected nodes in settings
+	actually transfer data
+
 match statistics
 	UI on mobile
-
 "no stored matches" is not shown after last match is removed!
 service worker
 	collect file names to cache
@@ -9,11 +13,6 @@ service worker
 	add polyfill https://github.com/coonsta/cache-polyfill ?
 	test cache in practice (shut down server)
 	disable worker in dev
-
-simple P2P
-	bootstrapping (when same IP => connect)
-	list connected nodes in settings
-	actually transfer 
 
 Installable on Android
 	create app icon
