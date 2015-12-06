@@ -2,7 +2,9 @@ var report_problem = (function() {
 'use strict';
 
 var REPORT_URL = 'https://aufschlagwechsel.de/bupbug/';
-var last_error = 'none';
+var last_error = '-';
+var reported_count = 0;
+
 
 function get_info() {
 	return {
@@ -24,11 +26,16 @@ function report(errobj) {
 		return;
 	}
 
+	reported_count++;
+	if (reported_count > 3) {
+		return;
+	}
+
 	var json_report = JSON.stringify(errobj);
 
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', REPORT_URL, true);
-	xhr.setRequestHeader('Content-type', 'text/plain');  // To pass as a simple CORS request
+	xhr.setRequestHeader('Content-type', 'text/plain');  // To be a simple CORS request
 	xhr.send(json_report);
 }
 

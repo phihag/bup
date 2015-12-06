@@ -12,7 +12,8 @@ service worker
 
 simple P2P
 	bootstrapping (when same IP => connect)
-	
+	list connected nodes in settings
+	actually transfer 
 
 Installable on Android
 	create app icon
