@@ -15,6 +15,10 @@ var i18n_en = {
 'fullscreen:no': 'Normal screen',
 'timer:restart': 'Restart timer',
 
+'report problem': 'Report problem/suggestion',
+'report:subject': 'Problem with bup',
+'report:body': 'I encountered the following problem with the umpire panel:\n\n\n\n\nTechnische Informationen:\nWeb browser: {ua}\nURL: {url}\Window size: {size}\nError object: {last_error}\n',
+
 'network:error': 'Network transmission error',
 'network:error:unconfigured': 'Network connection not configured',
 

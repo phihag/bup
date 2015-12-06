@@ -42,6 +42,7 @@
         "state": 1,
         "settings": 1,
         "networks": 1,
+        "bup_version": 1
     },
     "extends": "eslint:recommended"
 }

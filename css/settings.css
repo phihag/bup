@@ -147,12 +147,28 @@ input[name="court_id"] {
 	min-width: 8em;
 }
 
-.version {
+.settings_footer {
 	color: #ddd;
 	position: absolute;
 	right: 1em;
 	bottom: 0.5em;
 }
+.settings_report_problem {
+	display: inline-block;
+	margin-right: 1em;
+}
+@media screen and (max-width:800px) {
+	.settings_footer {
+		position: static;
+		right: auto; bottom: auto;
+		margin: 1em 0 0 0;
+	}
+	.settings_footer>.version {
+		display: block;
+		float: right;
+	}
+}
+
 
 /* Smartphones */
 @media screen and (max-width:480px) {

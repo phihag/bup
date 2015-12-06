@@ -10,6 +10,10 @@ service worker
 	test cache in practice (shut down server)
 	disable worker in dev
 
+simple P2P
+	bootstrapping (when same IP => connect)
+	
+
 Installable on Android
 	create app icon
 	render app icon to pngs
@@ -25,8 +29,6 @@ liveaw 2.0 (RL Manuel + Benedikt)
 	import
 custom lint: look for [ \t]\n in source files
 
-error handling + reporting (automated)
-feedback form
 check whether we have a copy of a network game to resume from, offer it
 	offer both network and local version if they differ
 

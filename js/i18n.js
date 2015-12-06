@@ -90,6 +90,7 @@ function ui_update_state(s, code) {
 	update_state(s, code);
 	render.ui_render(s);
 	translate_html();
+	report_problem.update();
 }
 
 function translate(s, str, data) {
@@ -130,6 +131,7 @@ return simple_translate;
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var utils = require('./utils');
 	var render = require('./render');
+	var report_problem = require('./report_problem');
 
 	var i18n_de = require('./i18n_de');
 	i18n.register_lang(i18n_de);

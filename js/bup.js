@@ -3,6 +3,7 @@ var state = {
 	ui: {},
 };
 var networks = {};
+var bup_version = 'dev';
 
 (function() {
 'use strict';
@@ -17,13 +18,13 @@ function init() {
 function ui_init() {
 	i18n.ui_init();
 
-	var bup_version = 'dev';
 	$('.version').text(bup_version);
 
 	appcache.ui_init();
 	$('#script_jspdf').on('load', scoresheet.jspdf_loaded);
 	$('#script_pdfform').on('load', eventsheet.pdfform_loaded);
 
+	report_problem.ui_init();
 	editmode.ui_init();
 	scoresheet.ui_init();
 	network.ui_init();
@@ -100,6 +101,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
 	var startmatch = require('./startmatch');
 	var stats = require('./stats');
+	var report_problem = require('./report_problem');
 	var register_sworker = require('./register_sworker');
 
 	module.exports = {
