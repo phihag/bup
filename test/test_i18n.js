@@ -9,7 +9,7 @@ var _it = tutils._it;
 'use strict';
 
 function _match_all(rex, s, group) {
-	rex.lastIndex = 0
+	rex.lastIndex = 0;
 	var res = [];
 	var m;
 	while ((m = rex.exec(s))) {
