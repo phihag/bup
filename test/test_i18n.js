@@ -30,7 +30,6 @@ _describe('i18n', function() {
 			assert.deepEqual(expect_keys, keys);
 
 			for (var k in lang) {
-				var v = lang[k];
 				var rex = /(\{[^}]+\})/g;
 				var expected_templates = _match_all(rex, languages[0][k], 1);
 				var got_templates = _match_all(rex, lang[k], 1);
