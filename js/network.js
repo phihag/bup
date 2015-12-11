@@ -1,8 +1,6 @@
 var network = (function() {
 'use strict';
 
-var online_event = null;
-
 function get_netw() {
 	return networks.btde || networks.courtspot;
 }
@@ -171,12 +169,17 @@ function enter_match(match) {
 		var netscore = match.network_score;
 		var mwinner = calc.match_winner(netscore);
 
+		var on_cancel = function() {
+			control.stop_match(state);
+			settings.show();
+		};
+
 		if ((mwinner == 'inprogress') && calc.match_started(netscore)) {
-			uiu.make_pick(state, 'Das Spiel ' + pronounciation.match_str(match.setup) + ' wurde bereits angefangen', [{
-				label: 'Spiel bei ' + _score_text(netscore) + ' fortsetzen',
+			uiu.make_pick(state, state._('network:in progress').replace('{match}', pronounciation.match_str(match.setup)), [{
+				label: state._('network:resume match').replace('{score}', _score_text(netscore)),
 				key: 'resume',
 			}, {
-				label: 'Spiel bei 0-0 starten',
+				label: state._('network:restart match'),
 				key: 'restart',
 			}], function(pick) {
 				var presses = null;
@@ -184,16 +187,16 @@ function enter_match(match) {
 					presses = calc_resume_presses(state, match);
 				}
 				control.start_match(state, match.setup, presses);
-			}, settings.show);
+			}, on_cancel);
 			return;
 		}
 
 		if (mwinner == 'left' || mwinner == 'right') {
-			uiu.make_pick(state, 'Das Spiel ' + pronounciation.match_str(match.setup) + ' ist bereits beendet (' + _score_text(netscore) + ')!', [{
-				label: 'Spiel bei 0-0 neu starten',
+			uiu.make_pick(state, state._('network:match finished').replace('{score}', _score_text(netscore)).replace('{match}', pronounciation.match_str(match.setup)), [{
+				label: state._('network:restart match'),
 			}], function() {
 				control.start_match(state, match.setup);
-			}, settings.show);
+			}, on_cancel);
 			return;
 		}
 	}
@@ -203,7 +206,7 @@ function enter_match(match) {
 function ui_render_matchlist(s, event) {
 	var container = $('#setup_network_matches');
 	container.empty(); // TODO better transition if we're updating?
-	$('.setup_network_event').text(event.event_name ? event.event_name : 'Spiele');
+	$('.setup_network_event').text(event.event_name ? event.event_name : s._('network:Matches'));
 
 	event.matches.forEach(function(match) {
 		var btn = $('<button class="setup_network_match">');
@@ -292,13 +295,13 @@ function ui_list_matches(s, silent, no_timer) {
 			return;
 		}
 
+		s.event = event;
 		if (event.eventsheets) {
-			eventsheet.render_buttons(event);
+			eventsheet.render_links(s);
 		} else {
 			eventsheet.hide();
 		}
 
-		online_event = event;
 		ui_render_matchlist(s, event);
 	});
 
@@ -386,12 +389,12 @@ function ui_init() {
 }
 
 function match_by_id(id) {
-	if (! online_event) {
+	if (! state.event) {
 		return;
 	}
 
-	for (var i = 0;i < online_event.matches.length;i++) {
-		var m = online_event.matches[i];
+	for (var i = 0;i < state.event.matches.length;i++) {
+		var m = state.event.matches[i];
 		if (m.setup.match_id == id) {
 			return m;
 		}

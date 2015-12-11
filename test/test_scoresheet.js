@@ -17,8 +17,8 @@ var bup = tutils.bup;
 
 _describe('scoresheet generation', function() {
 	function _scoresheet_cells(presses, setup) {
-		var state = state_after(presses, setup);
-		return bup.scoresheet._parse_match(state, 35);
+		var s = state_after(presses, setup);
+		return bup.scoresheet._parse_match(s, 35);
 	}
 
 	function _assert_cell(cells, cell) {

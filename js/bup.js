@@ -50,6 +50,10 @@ function ui_init() {
 		}
 		settings.update();
 	}
+	if (hash_query.p2p !== undefined) {
+		networks.p2p = p2p();
+		networks.p2p.ui_init(state);
+	}
 	if (hash_query.courtspot !== undefined) {
 		networks.courtspot = courtspot();
 		networks.courtspot.ui_init(state);
@@ -101,6 +105,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
 	var startmatch = require('./startmatch');
 	var stats = require('./stats');
+	var p2p = require('./p2p');
 	var report_problem = require('./report_problem');
 	var register_sworker = require('./register_sworker');
 

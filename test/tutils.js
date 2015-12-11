@@ -51,13 +51,13 @@ var SINGLES_SETUP_EN = _.clone(SINGLES_SETUP);
 SINGLES_SETUP_EN.force_language = 'en';
 
 function state_after(presses, setup, settings) {
-	var state = {};
-	state.settings = settings;
-	bup.i18n.update_state(state, (settings ? settings.language : (setup.force_language ? setup.force_language : 'de')));
-	bup.calc.init_state(state, setup);
-	state.presses = presses;
-	bup.calc.state(state);
-	return state;
+	var s = {};
+	s.settings = settings;
+	bup.i18n.update_state(s, (settings ? settings.language : (setup.force_language ? setup.force_language : 'de')));
+	bup.calc.init_state(s, setup);
+	s.presses = presses;
+	bup.calc.state(s);
+	return s;
 }
 
 function state_at(network_score, setup, settings) {

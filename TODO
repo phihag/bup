@@ -1,11 +1,13 @@
 simple P2P
 	bootstrapping (liveaw, when same IP => connect)
+	mandate event ID?
 	list connected nodes in settings
 	actually transfer data
 
 match statistics
 	UI on mobile
 "no stored matches" is not shown after last match is removed!
+automatically delete old matches after 1 day|*week|month
 service worker
 	collect file names to cache
 	cache file names

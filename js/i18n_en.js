@@ -17,10 +17,15 @@ var i18n_en = {
 
 'report problem': 'Report problem/suggestion',
 'report:subject': 'Problem with bup',
-'report:body': 'I encountered the following problem with the umpire panel:\n\n\n\n\nTechnische Informationen:\nWeb browser: {ua}\nURL: {url}\Window size: {size}\nError object: {last_error}\n',
+'report:body': 'I encountered the following problem with the umpire panel:\n\n\n\n\nTechnical Information:\nWeb browser: {ua}\nURL: {url}\Window size: {size}\nError object: {last_error}\n',
 
 'network:error': 'Network transmission error',
 'network:error:unconfigured': 'Network connection not configured',
+'network:Matches': 'Matches',
+'network:restart match': 'Restart match at 0-0',
+'network:resume match': 'Resume match at {score}',
+'network:in progress': 'Match {match} has already been started',
+'network:match finished': 'Match {match} already finished ({score})!',
 
 'button:undo': 'Undo',
 'button:settings': 'Configuration',

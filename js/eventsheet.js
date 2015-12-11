@@ -9,8 +9,7 @@ var URLS = {
 };
 var files = {};
 
-var event;
-var ui_current_eventsheets;
+var ui_current_eventsheets = null;
 
 function pdfform_loaded() {
 	$('.setup_eventsheets').removeClass('default-invisible');
@@ -51,12 +50,12 @@ function calc_matchscore(netscore) {
 	}
 }
 
-function event_winner_str(event, match_score_home, match_score_away) {
-	var needed_to_win = event.matches.length / 2;
+function event_winner_str(ev, match_score_home, match_score_away) {
+	var needed_to_win = ev.matches.length / 2;
 	if (match_score_home > needed_to_win) {
-		return event.home_team_name;
+		return ev.home_team_name;
 	} else if (match_score_away > needed_to_win) {
-		return event.away_team_name;
+		return ev.away_team_name;
 	} else if ((match_score_home == needed_to_win) && (match_score_away == needed_to_win)) {
 		return state._('eventsheet:draw');
 	} else {
@@ -107,15 +106,15 @@ function calc_last_update(matches) {
 	return last_update;
 }
 
-function order_matches(event, match_order) {
+function order_matches(ev, match_order) {
 	var matches = [];
-	event.matches.forEach(function(m) {
+	ev.matches.forEach(function(m) {
 		matches[match_order.indexOf(m.setup.courtspot_match_id)] = m;
 	});
 	return matches;
 }
 
-function render_bundesliga(es_key, ui8r, extra_data) {
+function render_bundesliga(ev, es_key, ui8r, extra_data) {
 	var i; // "let" is not available even in modern browsers
 	var match_order;
 	if (es_key == '1BL') {
@@ -124,7 +123,7 @@ function render_bundesliga(es_key, ui8r, extra_data) {
 		match_order = ['1.HD', 'DD', '2.HD', '1.HE', 'DE', 'GD', '2.HE', '3.HE'];
 	}
 
-	var matches = order_matches(event, match_order);
+	var matches = order_matches(ev, match_order);
 	var last_update = calc_last_update(matches);
 
 	var player_names = [];
@@ -215,8 +214,8 @@ function render_bundesliga(es_key, ui8r, extra_data) {
 	}
 
 	var fields = {
-		'Textfeld1': [event.home_team_name],
-		'Textfeld2': [event.away_team_name],
+		'Textfeld1': [ev.home_team_name],
+		'Textfeld2': [ev.away_team_name],
 		'Textfeld3': [extra_data.umpires],
 		'Textfeld4': [extra_data.location],
 		'Textfeld5': (last_update ? [utils.date_str(last_update * 1000)] : []),
@@ -225,7 +224,7 @@ function render_bundesliga(es_key, ui8r, extra_data) {
 		'Textfeld8': [extra_data.matchday],
 		'Textfeld9': player_names,
 		'Textfeld10': points_scores_all,
-		'Textfeld11': [event_winner_str(event, match_score_home, match_score_away)],
+		'Textfeld11': [event_winner_str(ev, match_score_home, match_score_away)],
 		'Textfeld12': [extra_data.backup_players],
 		'Textfeld13': [extra_data.notes],
 		'Textfeld14': [undefined, undefined, undefined, extra_data.protest, (extra_data.protest ? utils.time_str(Date.now()) : '')],
@@ -236,7 +235,7 @@ function render_bundesliga(es_key, ui8r, extra_data) {
 		'Optionsfeldliste': checkboxes,
 	};
 	var res_pdf = pdfform.transform(ui8r, fields);
-	var filename = 'Spielbericht ' + event.event_name + (last_update ? (' ' + utils.date_str(last_update * 1000)) : '') + '.pdf';
+	var filename = 'Spielbericht ' + ev.event_name + (last_update ? (' ' + utils.date_str(last_update * 1000)) : '') + '.pdf';
 	var blob = new Blob([res_pdf], {type: 'application/pdf'});
 	saveAs(blob, filename);
 }
@@ -256,14 +255,14 @@ function _svg_text(svg, id, val) {
 	}
 }
 
-function render_svg(es_key, ui8r, extra_data) {
+function render_svg(ev, es_key, ui8r, extra_data) {
 	var xml_str = (new TextDecoder('utf-8')).decode(ui8r);
 	var svg_doc = (new DOMParser()).parseFromString(xml_str, 'image/svg+xml');
 	var svg = svg_doc.getElementsByTagName('svg')[0];
 
 	var match_order = ['1.HD', '2.HD', 'DD', '1.HE', '2.HE', '3.HE', 'DE', 'GD'];
-	var matches = order_matches(event, match_order);
-	var last_update = calc_last_update(event.matches);
+	var matches = order_matches(ev, match_order);
+	var last_update = calc_last_update(ev.matches);
 
 	var body = document.getElementsByTagName('body')[0];
 	var container = $('<div style="position: absolute; left: -999px; top: -999px; width: 297px; height: 210px;">');
@@ -271,7 +270,7 @@ function render_svg(es_key, ui8r, extra_data) {
 	body.appendChild(container[0]);
 
 	var props = {
-		title: ('Spielbericht ' + event.event_name + (last_update ? (' ' + utils.date_str(last_update * 1000)) : '')),
+		title: ('Spielbericht ' + ev.event_name + (last_update ? (' ' + utils.date_str(last_update * 1000)) : '')),
 		subject: state._('Event Sheet'),
 		creator: 'bup (https://phihag.de/bup/)',
 	};
@@ -349,35 +348,35 @@ function render_svg(es_key, ui8r, extra_data) {
 	_svg_text(svg, 'sum_matches0', sum_matches[0]);
 	_svg_text(svg, 'sum_matches1', sum_matches[1]);
 
-	var winner_str = event_winner_str(event, sum_matches[0], sum_matches[1]);
+	var winner_str = event_winner_str(ev, sum_matches[0], sum_matches[1]);
 	_svg_text(svg, 'winner', winner_str);
 
 	_svg_text(svg, 'starttime', extra_data.starttime);
 	_svg_text(svg, 'date', (last_update ? utils.date_str(last_update * 1000) : ''));
 	_svg_text(svg, 'matchday', extra_data.matchday);
-	_svg_text(svg, 'home_team_name', event.home_team_name);
-	_svg_text(svg, 'away_team_name', event.away_team_name);
-	_svg_text(svg, 'tournament_name', event.tournament_name);
+	_svg_text(svg, 'home_team_name', ev.home_team_name);
+	_svg_text(svg, 'away_team_name', ev.away_team_name);
+	_svg_text(svg, 'tournament_name', ev.tournament_name);
 	_svg_text(svg, 'location', extra_data.location);
 	_svg_text(svg, 'notes', extra_data.notes);
 	_svg_text(svg, 'backup_players', extra_data.backup_players);
 	_svg_text(svg, 'protest', extra_data.protest);
 	_svg_text(svg, 'umpires', extra_data.umpires);
 
-	var filename = 'Spielbericht ' + event.event_name + (last_update ? (' ' + utils.date_str(last_update * 1000)) : '') + '.pdf';
+	var filename = 'Spielbericht ' + ev.event_name + (last_update ? (' ' + utils.date_str(last_update * 1000)) : '') + '.pdf';
 	svg2pdf.save(svg, props, filename);
 
 	container.remove();
 }
 
-function render(es_key, ui8r, extra_data) {
+function render(ev, es_key, ui8r, extra_data) {
 	switch(es_key) {
 	case '1BL':
 	case '2BLN':
 	case '2BLS':
-		return render_bundesliga(es_key, ui8r, extra_data);
+		return render_bundesliga(ev, es_key, ui8r, extra_data);
 	case 'RLW':
-		return render_svg(es_key, ui8r, extra_data);
+		return render_svg(ev, es_key, ui8r, extra_data);
 	default:
 	throw new Error('Unsupported eventsheet key ' + es_key);
 	}
@@ -388,7 +387,7 @@ function prepare_render(btn, es_key, extra_data) {
 	btn.append(progress);
 	download(es_key, function(ui8r) {
 		progress.remove();
-		render(es_key, ui8r, extra_data);
+		render(state.event, es_key, ui8r, extra_data);
 	});
 }
 
@@ -415,12 +414,12 @@ function download(es_key, callback) {
 	xhr.send();
 }
 
-function render_buttons(new_event) {
-	if (event && utils.deep_equal(ui_current_eventsheets, new_event.eventsheets)) {
-		event = new_event;
+function render_links(s) {
+	var ev = s.event;
+
+	if (utils.deep_equal(ui_current_eventsheets, ev.eventsheets)) {
 		return;  // No need to reconfigure containers
 	}
-	event = new_event;
 
 	if (typeof pdfform != 'undefined') {
 		pdfform_loaded();
@@ -428,8 +427,8 @@ function render_buttons(new_event) {
 
 	var container = $('.setup_eventsheets');
 	container.empty();
-	ui_current_eventsheets = event.eventsheets;
-	event.eventsheets.forEach(function(es) {
+	ui_current_eventsheets = ev.eventsheets;
+	ev.eventsheets.forEach(function(es) {
 		var link = $('<a href="#" class="eventsheet_link">');
 		link.on('click', function(e) {
 			e.preventDefault();
@@ -495,9 +494,9 @@ function ui_init() {
 }
 
 function dialog_fetch() {
-	utils.visible('.eventsheet_generate_loading_icon', !event);
+	utils.visible('.eventsheet_generate_loading_icon', !state.event);
 	var btn = $('.eventsheet_generate_button');
-	if (event) {
+	if (state.event) {
 		btn.removeAttr('disabled');
 	} else {
 		btn.attr('disabled', 'disabled');
@@ -508,7 +507,7 @@ function dialog_fetch() {
 				utils.visible('.eventsheet_error', true);
 				return;
 			}
-			event = ev;
+			state.event = ev;
 
 			var container = $('.eventsheet_container');
 			var es_key = container.attr('data-eventsheet_key');
@@ -520,15 +519,17 @@ function dialog_fetch() {
 }
 
 function resolve_key(es_key) {
+	var ev = state.event;
+
 	if (es_key != 'auto-direct') {
 		return es_key;
 	}
 
-	if (!event) {
+	if (!ev) {
 		return es_key; // Need to resolve again later
 	}
 
-	return event.eventsheets[0].key;
+	return ev.eventsheets[0].key;
 }
 
 function show_dialog(es_key) {
@@ -559,7 +560,7 @@ function hide_dialog() {
 
 return {
 	pdfform_loaded: pdfform_loaded,
-	render_buttons: render_buttons,
+	render_links: render_links,
 	hide: hide,
 	ui_init: ui_init,
 	show_dialog: show_dialog,

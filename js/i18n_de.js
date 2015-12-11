@@ -19,10 +19,13 @@ var i18n_de = {
 'report:subject': 'Problem mit bup',
 'report:body': 'Das Schiedsrichter-Panel hat folgendes Problem:\n\n\n\n\nTechnische Informationen:\nWebbrowser: {ua}\nURL: {url}\nGröße: {size}\nLetzer Fehler: {last_error}\n',
 
-
-
 'network:error': 'Fehler bei der Netzwerk-Übertragung',
 'network:error:unconfigured': 'Keine Netzwerk-Anbindung vorhanden!',
+'network:Matches': 'Spiele',
+'network:restart match': 'Spiel bei 0-0 neu starten',
+'network:resume match': 'Spiel bei {score} fortsetzen',
+'network:in progress': 'Das Spiel {match} wurde bereits angefangen',
+'network:match finished': 'Das Spiel {match} ist bereits beendet ({score})!',
 
 'button:undo': 'Rückgängig',
 'button:settings': 'Konfiguration',

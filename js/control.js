@@ -31,16 +31,13 @@ function demo_match_start() {
 }
 
 function resume_match(s) {
-	s._ = state._;
-	s.lang = state.lang;
-	s.settings = state.settings;
-	s.ui = state.ui;
 	stop_match(state);
-	calc.init_state(s, null, s.presses, true);
-	calc.state(s);
-	state = s;
-	set_current(s);
-	render.ui_render(s);
+	state.setup = s.setup;
+	state.metadata = s.metadata;
+	calc.init_state(state, null, s.presses, true);
+	calc.state(state);
+	set_current(state);
+	render.ui_render(state);
 	// Do not explicitly send anything to the network - we're just looking
 }
 
@@ -74,6 +71,13 @@ function stop_match(s) {
 		});
 		delete s.destructors;
 	}
+	delete s.presses;
+	delete s.metadata;
+	delete s.remote;
+	delete s.match;
+	delete s.game;
+	delete s.court;
+	s.initialized = false;
 }
 
 function install_destructor(s, destructor) {
