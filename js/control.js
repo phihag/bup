@@ -48,7 +48,7 @@ function empty_match_start() {
 
 	settings.hide(true);
 	start_match(state, setup, [], {
-		id: 'empty'
+		id: 'empty',
 	});
 }
 
