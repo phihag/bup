@@ -1,4 +1,3 @@
-var _ = require('underscore');
 var bup = require('../js/bup');
 
 // Make linter happy
@@ -18,6 +17,11 @@ var _it = ((typeof it == 'undefined') ?
 (function() {
 'use strict';
 
+function _deep_clone(obj) {
+	return JSON.parse(JSON.stringify(obj));
+}
+
+
 var SINGLES_SETUP = {
 	teams: [{
 		players: [{name: 'Alice'}],
@@ -27,7 +31,7 @@ var SINGLES_SETUP = {
 	is_doubles: false,
 	counting: '3x21',
 };
-var SINGLES_TEAM_SETUP = _.clone(SINGLES_SETUP);
+var SINGLES_TEAM_SETUP = _deep_clone(SINGLES_SETUP);
 SINGLES_TEAM_SETUP.teams[0].name = 'A team';
 SINGLES_TEAM_SETUP.teams[1].name = 'B team';
 SINGLES_TEAM_SETUP.team_competition = true;
@@ -40,14 +44,14 @@ var DOUBLES_SETUP = {
 	is_doubles: true,
 	counting: '3x21',
 };
-var DOUBLES_TEAM_SETUP = _.clone(DOUBLES_SETUP);
+var DOUBLES_TEAM_SETUP = _deep_clone(DOUBLES_SETUP);
 DOUBLES_TEAM_SETUP.teams[0].name = 'A team';
 DOUBLES_TEAM_SETUP.teams[1].name = 'B team';
 DOUBLES_TEAM_SETUP.team_competition = true;
 
-var DOUBLES_SETUP_EN = _.clone(DOUBLES_SETUP);
+var DOUBLES_SETUP_EN = _deep_clone(DOUBLES_SETUP);
 DOUBLES_SETUP_EN.force_language = 'en';
-var SINGLES_SETUP_EN = _.clone(SINGLES_SETUP);
+var SINGLES_SETUP_EN = _deep_clone(SINGLES_SETUP);
 SINGLES_SETUP_EN.force_language = 'en';
 
 function state_after(presses, setup, settings) {

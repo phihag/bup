@@ -88,6 +88,9 @@ function _prematch_team(s, team_id) {
 	} else {
 		res += team.players[0].name;
 	}
+	if (team.name && !s.setup.team_competition) {
+		res += ', ' + team.name;
+	}
 	return res;
 }
 

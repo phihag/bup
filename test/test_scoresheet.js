@@ -1,5 +1,4 @@
 var assert = require('assert');
-var _ = require('underscore');
 
 var tutils = require('./tutils');
 var _describe = tutils._describe;
@@ -23,7 +22,7 @@ _describe('scoresheet generation', function() {
 
 	function _assert_cell(cells, cell) {
 		assert(cells.some(function(c) {
-			return _.isEqual(cell, c);
+			return bup.utils.deep_equal(cell, c);
 		}), 'Cannot find cell ' + JSON.stringify(cell) + ' in ' + JSON.stringify(cells, undefined, 2));
 	}
 

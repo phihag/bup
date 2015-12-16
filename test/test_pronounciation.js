@@ -2505,7 +2505,6 @@ _describe('pronounciation', function() {
 		assert.ok(! s.timer);
 	});
 
-
 	_it('suspending match', function() {
 		var presses = [{
 			type: 'pick_side',
@@ -2575,7 +2574,47 @@ _describe('pronounciation', function() {
 			'Service over. 3-5');
 
 	});
-});
 
+	_it('team name in love-all', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: false,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		}];
+
+		var setup = {
+			teams: [{
+				name: 'Germany',
+				players: [{name: 'Marc Zwiebler'}],
+			}, {
+				players: [{name: 'Chen Long'}],
+				name: 'China',
+			}],
+			is_doubles: false,
+			counting: '3x21',
+		};
+		var s = state_after(presses, setup);
+
+		assert.equal(pronounce_de(s),
+			'Meine Damen und Herren:\n' +
+			'Zu meiner Rechten, Marc Zwiebler, Germany,\n' +
+			'und zu meiner Linken, Chen Long, China.\n' +
+			'Marc Zwiebler schlägt auf.\n' +
+			'0 beide.\n' +
+			'Bitte spielen.'
+		);
+		assert.equal(pronounce_en(s),
+			'Ladies and Gentlemen:\n' +
+			'On my right, Marc Zwiebler, Germany,\n' +
+			'and on my left, Chen Long, China.\n' +
+			'Marc Zwiebler to serve.\n' +
+			'Love all.\n' +
+			'Play.'
+		);
+	});
+});
 
 })();
