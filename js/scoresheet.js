@@ -533,7 +533,7 @@ function show() {
 
 
 	_text('.scoresheet_match_name', state.setup.match_name);
-	_text('.scoresheet_date_value', utils.human_date_str(state.metadata.start));
+	_text('.scoresheet_date_value', state.metadata.start ? utils.human_date_str(state.metadata.start) : '');
 
 	_text('.scoresheet_court_id', state.settings.court_id);
 	_text('.scoresheet_umpire_name', state.metadata.umpire_name ? state.metadata.umpire_name : state.settings.umpire_name);
@@ -832,14 +832,22 @@ function hide() {
 }
 
 function _match_title(s, sep) {
-	var title = utils.date_str(state.metadata.start) + ' ';
+	var title = '';
+	if (state.metadata.start) {
+		title += utils.date_str(state.metadata.start) + ' ';
+	}
 	if (state.setup.match_name) {
 		title += state.setup.match_name + ' ';
 	}
-	if (state.setup.is_doubles) {
-		title += state.setup.teams[0].players[0].name + sep + state.setup.teams[0].players[1].name + ' vs ' + state.setup.teams[1].players[0].name + sep + state.setup.teams[1].players[1].name;
-	} else {
-		title += state.setup.teams[0].players[0].name + ' vs ' + state.setup.teams[1].players[0].name;
+	if (state.setup.teams[0].players[0].name || state.setup.teams[1].players[0].name) {
+		if (state.setup.is_doubles) {
+			title += state.setup.teams[0].players[0].name + sep + state.setup.teams[0].players[1].name + ' vs ' + state.setup.teams[1].players[0].name + sep + state.setup.teams[1].players[1].name;
+		} else {
+			title += state.setup.teams[0].players[0].name + ' vs ' + state.setup.teams[1].players[0].name;
+		}
+	}
+	if (!title) {
+		title = state._('scoresheet:Empty Scoresheet');
 	}
 	return title;
 }

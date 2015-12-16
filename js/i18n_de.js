@@ -189,6 +189,7 @@ var i18n_de = {
 'scoresheet:button:back': 'Zurück',
 'scoresheet:server': 'A',
 'scoresheet:receiver': 'R',
+'scoresheet:Empty Scoresheet': 'Schiedsrichterzettel',
 
 'eventsheet:draw': 'Unentschieden',
 'eventsheet:Generate': 'Spielbericht generieren',

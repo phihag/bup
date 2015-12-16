@@ -30,6 +30,28 @@ function demo_match_start() {
 	start_match(state, setup);
 }
 
+function empty_match_start() {
+	var setup = {
+		counting: '3x21',
+		is_doubles: false,
+		teams: [{
+			players: [{
+				name: '',
+			}],
+		}, {
+			players: [{
+				name: '',
+			}],
+		}],
+		team_competition: false,
+	};
+
+	settings.hide(true);
+	start_match(state, setup, [], {
+		id: 'empty'
+	});
+}
+
 function resume_match(s) {
 	stop_match(state);
 	state.setup = s.setup;
@@ -50,9 +72,12 @@ function start_match_dialog(s, setup) {
 	render.ui_render(s);
 }
 
-function start_match(s, setup, init_presses) {
+function start_match(s, setup, init_presses, metadata) {
 	stop_match(state);
-	calc.init_state(s, setup, init_presses);
+	if (metadata) {
+		state.metadata = metadata;
+	}
+	calc.init_state(s, setup, init_presses, !!metadata);
 	calc.state(s);
 	set_current(s);
 	render.ui_render(s);
@@ -348,6 +373,7 @@ return {
 	on_press: on_press,
 	on_presses_change: on_presses_change,
 	demo_match_start: demo_match_start,
+	empty_match_start: empty_match_start,
 	start_match: start_match,
 	start_match_dialog: start_match_dialog,
 	resume_match: resume_match,

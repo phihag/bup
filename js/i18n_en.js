@@ -187,6 +187,7 @@ var i18n_en = {
 'scoresheet:button:back': 'Back',
 'scoresheet:server': 'S',
 'scoresheet:receiver': 'R',
+'scoresheet:Empty Scoresheet': 'Scoresheet',
 
 'eventsheet:draw': 'Draw',
 'eventsheet:Generate': 'Generate Report',

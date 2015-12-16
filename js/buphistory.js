@@ -108,7 +108,17 @@ function load_by_hash() {
 
 	// no match to load, so always no settings and no scoresheet
 	if (qs.demo !== undefined) {
+		is_loading = true;
 		control.demo_match_start();
+		load_ui_by_hash_qs(qs);
+		is_loading = false;
+		record(state);
+	} else if (qs.empty_match !== undefined) {
+		is_loading = true;
+		control.empty_match_start();
+		load_ui_by_hash_qs(qs);
+		is_loading = false;
+		record(state);
 	} else {
 		settings.show();
 	}
