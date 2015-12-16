@@ -18,7 +18,9 @@
 		"async": "*",
 		"jshint": "*",
 		"eslint": "*",
-		"parse-appcache-manifest": "*"
+		"parse-appcache-manifest": "*",
+		"wrtc": "*",
+		"ws": "*"
 	},
 	"private": true
 }

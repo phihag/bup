@@ -1,13 +1,14 @@
 simple P2P
-	bootstrapping (liveaw, when same IP => connect)
-	mandate event ID?
+	on event change register for event ID
 	list connected nodes in settings
 	actually transfer data
+	handle P2P in browsers that don't support it!
 
 match statistics
 	UI on mobile
 "no stored matches" is not shown after last match is removed!
 automatically delete old matches after 1 day|*week|month
+"Loading bup" message -> preconfigure HTML
 service worker
 	collect file names to cache
 	cache file names
@@ -22,6 +23,14 @@ Installable on Android
 	create manifest
 	https://developers.google.com/web/updates/2015/03/increasing-engagement-with-app-install-banners-in-chrome-for-android?hl=en
 	test that it doesn't break when not TLS
+
+improve P2P
+	reconnect when changing network
+	handle WebSocket stop
+	automatically get the current event from IP
+	encrypt (retrieve signature from event host)
+	write test cases
+
 
 yourscore.info
 
@@ -158,5 +167,7 @@ consider eliminating love-all
 better loading screen
 move manual editing confirm button to bottom (with white border) and give it a text "Übernehmen"
 click court name to get into change court dialog (show button in editmode)
+allow challenges
+	failsafe (http://www.badmintoncentral.com/forums/showthread.php/160170-sub-standard-umpire-gave-a-free-point-to-Okuhara-in-first-set?p=2413636#post2413636)
 -> Demo Jörg H, Manuel, Susanne, Werner Durow
 

@@ -74,10 +74,10 @@ test:
 lint: jshint eslint
 
 jshint:
-	@jshint js/*.js div/*.js test/*.js div/*.js cachesw.js
+	@jshint js/ div/*.js test/ div/*.js cachesw.js
 
 eslint:
-	@eslint js/*.js div/*.js test/*.js div/*.js cachesw.js
+	@eslint js/ div/*.js test/ div/*.js cachesw.js
 
 coverage:
 	istanbul cover _mocha -- -R spec

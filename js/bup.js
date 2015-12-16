@@ -119,6 +119,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 		scoresheet: scoresheet,
 		utils: utils,
 		stats: stats,
+		p2p: p2p,
 	};
 }
 /*/@DEV*/
