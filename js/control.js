@@ -318,6 +318,13 @@ function init_shortcuts() {
 			editmode.enter();
 		}
 	});
+	Mousetrap.bind('p', function() {
+		state.settings.show_pronounciation = ! state.settings.show_pronounciation;
+		if (state.initialized) {
+			render.ui_render(state);
+		}
+		settings.store(state);
+	});
 	Mousetrap.bind('shift+s', function() {
 		scoresheet.show();
 	});
