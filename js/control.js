@@ -318,7 +318,7 @@ function init_shortcuts() {
 			editmode.enter();
 		}
 	});
-	Mousetrap.bind('p', function() {
+	Mousetrap.bind('a', function() {
 		state.settings.show_pronounciation = ! state.settings.show_pronounciation;
 		if (state.initialized) {
 			render.ui_render(state);
