@@ -16,6 +16,7 @@ var i18n_de = {
 'timer:restart': 'Stoppuhr neu starten',
 
 'report problem': 'Problem/Anregung melden',
+'report:test': 'Diagnose-Funktion testen',
 'report:subject': 'Problem mit bup',
 'report:body': 'Das Schiedsrichter-Panel hat folgendes Problem:\n\n\n\n\nTechnische Informationen:\nWebbrowser: {ua}\nURL: {url}\nGröße: {size}\nLetzer Fehler: {last_error}\n',
 

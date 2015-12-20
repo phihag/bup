@@ -14,10 +14,11 @@ function get_info() {
 		bup_version: bup_version,
 		size: document.documentElement.clientWidth + 'x' + document.documentElement.clientHeight,
 		last_error: last_error,
+		reported_count: reported_count,
 	};
 }
 
-function report(errobj) {
+function report(info_obj) {
 	var is_dev = false;
 	/*@DEV*/
 	is_dev = true;
@@ -31,7 +32,7 @@ function report(errobj) {
 		return;
 	}
 
-	var json_report = JSON.stringify(errobj);
+	var json_report = JSON.stringify(info_obj);
 
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', REPORT_URL, true);
@@ -65,12 +66,18 @@ function on_error(msg, script_url, line, col, err) {
 		last_error.stack = err.stack;
 	}
 	update();
-	report(last_error);
+	report(get_info());
 }
 
 function ui_init() {
 	update();
 	window.onerror = on_error;
+	$('.version').on('click', function() {
+		$('.settings_test_reporting').show();
+	});
+	$('.settings_test_reporting').on('click', function() {
+		throw new Error('test error reporting');
+	});
 }
 
 return {

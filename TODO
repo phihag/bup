@@ -1,5 +1,6 @@
+stats + längster Ballwechsel
 function to test error reporting
-remove love-all
+highlight love-all; move pronounciation above it
 
 simple P2P
 	rework protocol: set-events; setup_connection(candidates)
