@@ -1,0 +1,45 @@
+var assert = require('assert');
+var async = require('async');
+
+var tutils = require('./tutils');
+var bup = tutils.bup;
+var _describe = tutils._describe;
+var _it = tutils._it;
+
+var liveaw_server = require('./mock/liveaw_server.js');
+
+(function() {
+'use strict';
+
+_describe('p2p', function() {
+	var ws_module = require('ws');
+	var wrtc = require('wrtc');
+
+	_it('test connection and basic communication', function(done) {
+		async.waterfall([
+		function(cb) { // Start liveaw
+			liveaw_server.serve(cb);
+		},
+		function(port, cb) { // Start p2p
+			var s1 = {
+				event: {
+					id: 'testevent-p2p-' + port,
+				},
+			};
+			var client1 = bup.p2p(s1, 'ws://[::1]:' + port + '/ws/bup-p2p', [], wrtc, ws_module);
+			client1.init();
+
+			var s2 = {
+				event: {
+					id: 'testevent-p2p-' + port,
+				},
+			};
+			var client2 = bup.p2p(s2, 'ws://[::1]:' + port + '/ws/bup-p2p', [], wrtc, ws_module);
+			client2.init();
+		}], function(err) {
+			done(err);
+		});
+	});
+});
+
+})();
