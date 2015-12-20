@@ -1,9 +1,17 @@
+function to test error reporting
+remove love-all
+
 simple P2P
+	rework protocol: set-events; setup_connection(candidates)
+	test between 3 nodes with candidates&offer
+	check if websocket connected, then send current event registration + ice candidates
 	on event change register for event ID
 	list connected nodes in settings
 	actually transfer data
 	handle P2P in browsers that don't support it!
+	autodetect event from LAN
 
+highlight or hide middle center buttons
 match statistics
 	UI on mobile
 "no stored matches" is not shown after last match is removed!
@@ -25,6 +33,8 @@ Installable on Android
 	test that it doesn't break when not TLS
 
 improve P2P
+	install error handling functions
+	btde: set state.event.id
 	reconnect when changing network
 	handle WebSocket stop
 	automatically get the current event from IP

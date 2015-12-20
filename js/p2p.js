@@ -1,40 +1,74 @@
-var p2p = (function(signalling_wsurl, wrtc, WebSocket) {
-'use strict';
+var p2p = (function(s, signalling_wsurl, ice_servers, wrtc, WebSocket) {
+'use strict';	
+
+if (!s) {
+	s = state;
+}
 
 if (!signalling_wsurl) {
 	signalling_wsurl = 'wss://live.aufschlagwechsel.de/ws/bup-p2p';
 }
-
 if (!wrtc) {
 	wrtc = window;
 }
 if (!WebSocket) {
 	WebSocket = window.WebSocket;
 }
+if (!ice_servers) {
+	ice_servers = [/*{
+		url: 'stun:stun.l.google.com:19302',
+	}*/];
+}
 
 var RTCPeerConnection = wrtc.RTCPeerConnection || wrtc.mozRTCPeerConnection || wrtc.webkitRTCPeerConnection;
 
-var events = {};
 var candidates = [];
+var request_id = 1;
 var signalling_sock;
+var connections = {};
 
 function signalling_connect() {
 	signalling_sock = new WebSocket(signalling_wsurl, 'bup-p2p');
-	signalling_sock.onmessage = function(data, flags) {
-		console.log('got message: ', data, flags);
+	signalling_sock.onmessage = function(e) {
+		var msg = JSON.parse(e.data);
+		switch (msg.type) {
+		case 'node-notification':
+			connect_to(msg.node_id, msg.candidates);
+			break;
+		// TODO display 'error' messages
+		}
 	};
+	signalling_sock.onopen = signalling_update;
 	// TODO on connected send all candidates
 	// TODO on close renew
 }
 
-function send_candidates() {
-	if (!signalling_sock) {
+function signalling_update() {
+	if ((! signalling_sock) || (signalling_sock.readyState != 1)) { // 1 = OPEN
+		// As soon as the connection is open we will send the current state
 		return;
 	}
-	signalling_sock.send({
-		type: 'set-candidates',
-		candidates: candidates,
+
+	request_id++;
+	var events_ar = [];
+	if (s.event && s.event.id) {
+		events_ar = [s.event.id];
+	}
+
+	var d = JSON.stringify({
+		type: 'set-events',
+		request_id: request_id,
+		event_ids: events_ar,
 	});
+	signalling_sock.send(d);
+}
+
+function connect_to(node_id, candidates) {
+	if (connections[node_id]) {
+		return;
+	}
+
+	// TODO make connection!
 }
 
 function on_candidate(e) {
@@ -42,17 +76,13 @@ function on_candidate(e) {
 		return;  // End of candidate list
 	}
 
-	candidates.push(e.candidate);
-	send_candidates();
+	candidates.push(e.candidate.candidate);
+	signalling_update();
 }
 
 function setup() {
 	var servers = {
-		iceServers: [/*{
-			url: 'stun:stun.l.google.com:19302',
-		}, {
-			urls: 'stun:stun.services.mozilla.com'
-		}*/],
+		iceServers: ice_servers,
 	};
 	var media_constraints = {
 		optional: [{
