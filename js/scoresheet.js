@@ -801,8 +801,41 @@ function render(s, svg) {
 	});
 }
 
-function event_render() {
-	console.log('would render', state.event, 'now');
+function event_render_one($container, matches_to_render) {
+	if (matches_to_render.length == 0) {
+		event_render_finished($container);
+		return;
+	}
+
+	var match = matches_to_render.shift();
+	make_sheet_node('international', function(doc) {
+		var docEl = doc.documentElement;
+		var svg = document.importNode(docEl, true);
+		svg.setAttribute('class', 'scoresheet');
+		$container.append(svg);
+	
+		var s = {
+			settings: state.settings,
+			_: state._,
+			lang: state.lang,
+		};
+		calc.init_state(s, match.setup);
+		calc.state(s);
+		state.new_s = s;
+
+		render(s, svg);
+
+		event_render_one($container, matches_to_render);
+	});
+}
+
+function event_render($container) {
+	var matches_to_render = state.event.matches.slice();
+	event_render_one($container, matches_to_render);
+}
+
+function event_render_finished($container) {
+	utils.visible('.scoresheet_loading-icon', false);
 }
 
 function event_show() {
@@ -828,17 +861,16 @@ function event_show() {
 	$container.show();
 
 	if (state.event) {
-		event_render();
+		event_render($container);
 	} else {
 		network.list_matches(state, function(err, ev) {
-			utils.visible('.scoresheet_loading-icon', false);
 			if (err) {
 				$('.scoresheet_error_message').text(err.msg);
 				utils.visible('.scoresheet_error_message', true);
 				return;
 			}
 			state.event = ev;
-			event_render();
+			event_render($container);
 		});
 	}
 }
@@ -870,7 +902,7 @@ function show() {
 	$container.show();
 	make_sheet_node('international', function(doc) {
 		var docEl = doc.documentElement;
-		docEl.setAttribute('class', 'scoresheet');
+		docEl.setAttribute('class', 'scoresheet single_scoresheet');
 		var svg = document.importNode(docEl, true);
 		$container.append(svg);
 		render(state, svg);

@@ -12,15 +12,19 @@ function load_ui_by_hash_qs(qs) {
 
 	if (qs.settings !== undefined) {
 		settings.show();
+		return;
 	} else {
 		settings.hide(true);
 	}
 
 	if (qs.stats !== undefined) {
 		stats.show();
+		return;
 	} else {
 		stats.hide();
 	}
+
+	utils.visible('#game', true);
 }
 
 var is_loading = false;

@@ -28,7 +28,7 @@
 </head>
 <body>
 
-<div id="game">
+<div id="game" class="default-invisible">
 <div class="topleft_buttons">
 	<!-- careful not to insert spaces in between buttons-->
 <button id="button_undo" data-i18n-title="button:undo" disabled="disabled" class="image-button half-invisible"><span></span></button
@@ -201,7 +201,10 @@
 
 	<div>
 		<div class="setup_eventsheets default-invisible"></div>
+<!--@DEV-->
+TODO: unhide this in production
 		<a href="#" class="setup_event_scoresheets" data-i18n="settings:Event Scoresheets"></a>
+<!--/@DEV-->
 		<a href="#" class="setup_show_manual" data-i18n="settings:Custom match details"></a>
 	</div>
 	</div>

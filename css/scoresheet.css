@@ -1,5 +1,5 @@
 .scoresheet_buttons {
-	position: absolute;
+	position: absolute; position: fixed;
 	font-size: 24px; /* legacy */
 	font-size: 4vmin;
 	z-index: 100;
@@ -56,7 +56,7 @@
 	background: #fff;
 }
 @media tv,projection,handheld,screen {
-	.scoresheet {
+	.single_scoresheet {
 		position: absolute;
 		left: 0; top: 0;
 		width: 100%; /* legacy */
@@ -76,7 +76,7 @@
 		background: #ffffff;
 	}
 
-	.scoresheet {
+	.single_scoresheet {
 		position: absolute;
 		top: 0; left: 0;
 		width: 100%;
