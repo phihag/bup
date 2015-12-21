@@ -32,7 +32,7 @@ function record(s) {
 
 	var orig_hval = window.location.hash.substr(1);
 	var hval = orig_hval;
-	hval = hval.replace(/(?:^|&)(?:m|settings|scoresheet|eventsheet|stats)(?:=[^&]*)?(?=&|$)/g, '');
+	hval = hval.replace(/(?:^|&)(?:m|settings|event_scoresheets|scoresheet|eventsheet|stats)(?:=[^&]*)?(?=&|$)/g, '');
 	hval = hval.replace(/^&+|&+$/g, '');
 
 	if (s.initialized) {
@@ -47,6 +47,11 @@ function record(s) {
 			hval += '&';
 		}
 		hval += 'scoresheet';
+	} else if (s.ui.event_scoresheets_visible) {
+		if (hval.length > 1) {
+			hval += '&';
+		}
+		hval += 'event_scoresheets';
 	} else if (s.ui.eventsheet) {
 		if (hval.length > 1) {
 			hval += '&';
@@ -82,6 +87,11 @@ function load_by_hash() {
 
 	if (qs.eventsheet) {
 		eventsheet.show_dialog(qs.eventsheet);
+		return;
+	}
+
+	if (typeof qs.event_scoresheets != 'undefined') {
+		scoresheet.event_show();
 		return;
 	}
 

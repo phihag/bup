@@ -801,6 +801,10 @@ function render(s, svg) {
 	});
 }
 
+function event_render() {
+	console.log('would render', state.event, 'now');
+}
+
 function event_show() {
 	if (state.ui.event_scoresheets_visible) {
 		return;
@@ -812,7 +816,7 @@ function event_show() {
 		jspdf_loaded();
 	}
 
-	settings.hide();
+	settings.hide(true);
 	stats.hide();
 	$('#game').hide();
 	uiu.esc_stack_push(hide);
@@ -820,10 +824,23 @@ function event_show() {
 	var $container = $('.scoresheet_container');
 	$container.addClass('event_scoresheet_container');
 	$container.children('.scoresheet').remove();
-	$container.find('.scoresheet_loading-icon').show();
+	utils.visible('.scoresheet_loading-icon', true);
 	$container.show();
 
-	console.log(state.event);
+	if (state.event) {
+		event_render();
+	} else {
+		network.list_matches(state, function(err, ev) {
+			utils.visible('.scoresheet_loading-icon', false);
+			if (err) {
+				$('.scoresheet_error_message').text(err.msg);
+				utils.visible('.scoresheet_error_message', true);
+				return;
+			}
+			state.event = ev;
+			event_render();
+		});
+	}
 }
 
 function show() {
@@ -849,7 +866,7 @@ function show() {
 
 	var $container = $('.scoresheet_container');
 	$container.children('.scoresheet').remove();
-	$container.find('.scoresheet_loading-icon').show();
+	utils.visible('.scoresheet_loading-icon', true);
 	$container.show();
 	make_sheet_node('international', function(doc) {
 		var docEl = doc.documentElement;
@@ -857,7 +874,7 @@ function show() {
 		var svg = document.importNode(docEl, true);
 		$container.append(svg);
 		render(state, svg);
-		$container.find('.scoresheet_loading-icon').hide();
+		utils.visible('.scoresheet_loading-icon', false);
 	});
 }
 
