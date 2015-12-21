@@ -1,15 +1,9 @@
-no text in scoresheets!
-game to event scoresheet with shift+s fails, only works from settings
-all sheets
-	hide link temporarily?
-	remove 9th page in print
-	without umpire name
-	to print
-	in PDF
-	link to this form from outside
 mail btde
 
-scoresheet rendering is too slow!
+don't crash on bupbt (player missing in setup, fixup?)
+game to event scoresheet with shift+s fails, only works from settings
+event scoresheet as PDF!
+scoresheet rendering is slow!
 court selection by clicking on court name (if restricted courts)
 move pronounciation above love-all? / highlight love-all?
 love-all should cancel timer

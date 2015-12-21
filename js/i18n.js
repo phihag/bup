@@ -41,15 +41,15 @@ function init() {
 	update_state(state, auto_code);
 }
 
-function translate_html() {
-	$('*[data-i18n]').each(function(_, n) {
-		$(n).text(translate(state, n.getAttribute('data-i18n')));
+function translate_nodes(root, s) {
+	root.find('*[data-i18n]').each(function(_, n) {
+		$(n).text(translate(s, n.getAttribute('data-i18n')));
 	});
-	$('*[data-i18n-placeholder]').each(function(_, n) {
-		$(n).attr('placeholder', translate(state, n.getAttribute('data-i18n-placeholder')));
+	root.find('*[data-i18n-placeholder]').each(function(_, n) {
+		$(n).attr('placeholder', translate(s, n.getAttribute('data-i18n-placeholder')));
 	});
-	$('*[data-i18n-title]').each(function(_, n) {
-		$(n).attr('title', translate(state, n.getAttribute('data-i18n-title')));
+	root.find('*[data-i18n-title]').each(function(_, n) {
+		$(n).attr('title', translate(s, n.getAttribute('data-i18n-title')));
 	});
 }
 
@@ -65,7 +65,7 @@ function ui_init() {
 		option.text(lang._name);
 		select.append(option);
 	});
-	translate_html();
+	translate_nodes($('html'), state);
 }
 
 function update_state(s, code) {
@@ -89,7 +89,7 @@ function update_state(s, code) {
 function ui_update_state(s, code) {
 	update_state(s, code);
 	render.ui_render(s);
-	translate_html();
+	translate_nodes($('html'), s);
 	report_problem.update();
 }
 
@@ -122,6 +122,7 @@ simple_translate.update_state = update_state;
 simple_translate.ui_update_state = ui_update_state;
 simple_translate.is_supported = is_supported;
 simple_translate.register_lang = register_lang;
+simple_translate.translate_nodes = translate_nodes;
 // Testing only
 simple_translate.languages = languages;
 return simple_translate;

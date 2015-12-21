@@ -488,7 +488,7 @@ function _parse_match(state, col_count) {
 	return _layout(s.scoresheet_games, col_count);
 }
 
-function render(s, svg) {
+function render(s, svg, without_metadata) {
 	var $svg = $(svg);
 
 	function _text(search, str) {
@@ -518,11 +518,11 @@ function render(s, svg) {
 	_text('.scoresheet_match_name', s.setup.match_name);
 	_text('.scoresheet_date_value', s.metadata.start ? utils.human_date_str(s.metadata.start) : '');
 
-	_text('.scoresheet_court_id', s.settings.court_id);
-	_text('.scoresheet_umpire_name', s.metadata.umpire_name ? s.metadata.umpire_name : s.settings.umpire_name);
-	_text('.scoresheet_service_judge_name', s.metadata.service_judge_name ? s.metadata.service_judge_name : s.settings.service_judge_name);
+	_text('.scoresheet_court_id', (without_metadata ? '' : s.settings.court_id));
+	_text('.scoresheet_umpire_name', s.metadata.umpire_name ? s.metadata.umpire_name : (without_metadata ? '' : s.settings.umpire_name));
+	_text('.scoresheet_service_judge_name', s.metadata.service_judge_name ? s.metadata.service_judge_name : (without_metadata ? '' : s.settings.service_judge_name));
 
-	_text('.scoresheet_begin_value', s.metadata.start ? utils.time_str(s.metadata.start) : '');
+	_text('.scoresheet_begin_value', (s.metadata.start && ! without_metadata) ? utils.time_str(s.metadata.start) : '');
 	if (s.match.finished) {
 		_text('.scoresheet_end_value', s.metadata.updated ? utils.time_str(s.metadata.updated) : '');
 		_text('.scoresheet_duration_value', s.metadata.updated ? utils.duration_mins(s.metadata.start, s.metadata.updated) : '');
@@ -801,41 +801,29 @@ function render(s, svg) {
 	});
 }
 
-function event_render_one($container, matches_to_render) {
-	if (matches_to_render.length == 0) {
-		event_render_finished($container);
-		return;
-	}
-
-	var match = matches_to_render.shift();
+function event_render($container) {
 	make_sheet_node('international', function(doc) {
 		var docEl = doc.documentElement;
-		var svg = document.importNode(docEl, true);
-		svg.setAttribute('class', 'scoresheet');
-		$container.append(svg);
-	
-		var s = {
-			settings: state.settings,
-			_: state._,
-			lang: state.lang,
-		};
-		calc.init_state(s, match.setup);
-		calc.state(s);
-		state.new_s = s;
 
-		render(s, svg);
+		state.event.matches.forEach(function(match) {
+			var svg = document.importNode(docEl, true);
+			svg.setAttribute('class', 'scoresheet');
+			$container.append(svg);
 
-		event_render_one($container, matches_to_render);
+			var s = {
+				settings: state.settings,
+				_: state._,
+				lang: state.lang,
+			};
+			calc.init_state(s, match.setup);
+			calc.state(s);
+			state.new_s = s;
+
+			render(s, svg, true);
+		});
+
+		utils.visible('.scoresheet_loading-icon', false);
 	});
-}
-
-function event_render($container) {
-	var matches_to_render = state.event.matches.slice();
-	event_render_one($container, matches_to_render);
-}
-
-function event_render_finished($container) {
-	utils.visible('.scoresheet_loading-icon', false);
 }
 
 function event_show() {
@@ -991,6 +979,7 @@ function load_sheet(key, callback) {
 function make_sheet_node(key, callback) {
 	load_sheet(key, function(xml) {
 		var doc = $.parseXML(xml);
+		i18n.translate_nodes($(doc), state);
 		callback(doc);
 	});
 }
