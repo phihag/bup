@@ -99,9 +99,25 @@
 	transform: translate(-50%, 0);
 	top: 20%;
 }
+.scoresheet_error {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 0);
+	top: 40%;
+}
+.scoresheet_reload {
+	display: inline-block;
+	background-image: url(../icons/reload.svg);
+	margin-left: 1em;
+	width: 2em;
+	height: 2em;
+	background-size: 100%;
+	background-repeat: no-repeat;
+}
 
 
-/* TODO: Remove this */
+
+/* TODO: Remove this once PDF multi-page scoresheets work */
 .event_scoresheet_container .scoresheet_button_pdf {
 	display: none;
 }

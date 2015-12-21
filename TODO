@@ -1,3 +1,4 @@
+
 mail btde
 
 don't crash on bupbt (player missing in setup, fixup?)
@@ -188,6 +189,7 @@ click court name to get into change court dialog (show button in editmode)
 scoresheet: show loading dialog
 scoresheet: deal and notify failures of loading SVG
 unify scoresheet and eventsheet downloading
+demo event
 allow challenges
 	failsafe (http://www.badmintoncentral.com/forums/showthread.php/160170-sub-standard-umpire-gave-a-free-point-to-Okuhara-in-first-set?p=2413636#post2413636)
 -> Demo Jörg H, Manuel, Susanne, Werner Durow

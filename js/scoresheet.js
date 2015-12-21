@@ -826,6 +826,19 @@ function event_render($container) {
 	});
 }
 
+function event_list_matches($container) {
+	network.list_matches(state, function(err, ev) {
+		if (err) {
+			$('.scoresheet_error_message').text(err.msg);
+			utils.visible('.scoresheet_error', true);
+			utils.visible('.scoresheet_loading-icon', false);
+			return;
+		}
+		state.event = ev;
+		event_render($container);
+	});
+}
+
 function event_show() {
 	if (state.ui.event_scoresheets_visible) {
 		return;
@@ -851,15 +864,7 @@ function event_show() {
 	if (state.event) {
 		event_render($container);
 	} else {
-		network.list_matches(state, function(err, ev) {
-			if (err) {
-				$('.scoresheet_error_message').text(err.msg);
-				utils.visible('.scoresheet_error_message', true);
-				return;
-			}
-			state.event = ev;
-			event_render($container);
-		});
+		event_list_matches($container);
 	}
 }
 
@@ -998,6 +1003,9 @@ function ui_init() {
 		e.preventDefault();
 		event_show();
 		return false;
+	});
+	$('.scoresheet_reload').on('click', function(e) {
+		event_list_matches($('.scoresheet_container'));
 	});
 
 	load_sheet('international');
