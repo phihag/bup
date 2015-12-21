@@ -1,7 +1,4 @@
-
-mail btde
-
-don't crash on bupbt (player missing in setup, fixup?)
+don't crash on bupbt shift+S (player missing in setup, fixup?)
 game to event scoresheet with shift+s fails, only works from settings
 event scoresheet as PDF!
 scoresheet rendering is slow!
