@@ -818,7 +818,11 @@ function event_show() {
 	$('#game').hide();
 	uiu.esc_stack_push(hide);
 
-	var $container = $('.event_scoresheets_container');
+	var $container = $('.scoresheet_container');
+	$container.addClass('event_scoresheet_container');
+	$container.children('.scoresheet').remove();
+	$container.show();
+
 }
 
 function show() {
@@ -913,7 +917,7 @@ var URLS = {
 var files = {};
 function load_sheet(key, callback) {
 	if (key in files) {
-		return files[key];
+		return callback(files[key]);
 	}
 
 	var url = URLS[key];

@@ -303,7 +303,7 @@ function init_shortcuts() {
 			ui_show_exception_dialog();
 		}
 	});
-	Mousetrap.bind('s', function() {
+	Mousetrap.bind('m', function() {
 		if (state.initialized) {
 			settings.show();
 		}
@@ -325,8 +325,11 @@ function init_shortcuts() {
 		}
 		settings.store(state);
 	});
-	Mousetrap.bind('shift+s', function() {
+	Mousetrap.bind('s', function() {
 		scoresheet.show();
+	});
+	Mousetrap.bind('shift+s', function() {
+		scoresheet.event_show();
 	});
 	Mousetrap.bind('shift+e', function() {
 		i18n.ui_update_state(state, 'en');
