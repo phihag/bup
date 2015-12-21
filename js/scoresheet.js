@@ -488,89 +488,68 @@ function _parse_match(state, col_count) {
 	return _layout(s.scoresheet_games, col_count);
 }
 
-function show() {
-	if (!state.initialized) {
-		return; // Called on start with Shift+S
-	}
-
-	if (state.ui.scoresheet_visible) {
-		return;
-	}
-	state.ui.scoresheet_visible = true;
-
-	control.set_current(state);
-
-	if (typeof jsPDF != 'undefined') {
-		jspdf_loaded();
-	}
-
+function render(s, $container) {
 	function _text(search, str) {
 		if (str !== 0 && !str) {
 			str = '';
 		}
-		$(search).text(str);
+		$container.find(search).text(str);
 	}
-
-	settings.hide();
-	stats.hide();
-	$('#game').hide();
-
 	// Show SVG before modifying it, otherwise getBBox won't work
-	$('.scoresheet_container').show();
-	uiu.esc_stack_push(hide);
+	$container.show();
 
 	// Set text fields
-	_text('.scoresheet_tournament_name', state.setup.tournament_name);
+	_text('.scoresheet_tournament_name', s.setup.tournament_name);
 
 	// Special handling for event name
-	var tname_bbox = $('.scoresheet_tournament_name')[0].getBBox();
-	$('.scoresheet_event_name').attr('x', tname_bbox.x + tname_bbox.width + 4);
-	var event_name = state.setup.event_name;
-	if (!event_name && state.setup.team_competition && state.setup.teams[0].name && state.setup.teams[1].name) {
-		event_name = state.setup.teams[0].name + ' - ' + state.setup.teams[1].name;
+	var tname_bbox = $container.find('.scoresheet_tournament_name')[0].getBBox();
+	$container.find('.scoresheet_event_name').attr('x', tname_bbox.x + tname_bbox.width + 4);
+	var event_name = s.setup.event_name;
+	if (!event_name && s.setup.team_competition && s.setup.teams[0].name && s.setup.teams[1].name) {
+		event_name = s.setup.teams[0].name + ' - ' + s.setup.teams[1].name;
 	}
 	_text('.scoresheet_event_name', event_name);
 
 
-	_text('.scoresheet_match_name', state.setup.match_name);
-	_text('.scoresheet_date_value', state.metadata.start ? utils.human_date_str(state.metadata.start) : '');
+	_text('.scoresheet_match_name', s.setup.match_name);
+	_text('.scoresheet_date_value', s.metadata.start ? utils.human_date_str(s.metadata.start) : '');
 
-	_text('.scoresheet_court_id', state.settings.court_id);
-	_text('.scoresheet_umpire_name', state.metadata.umpire_name ? state.metadata.umpire_name : state.settings.umpire_name);
-	_text('.scoresheet_service_judge_name', state.metadata.service_judge_name ? state.metadata.service_judge_name : state.settings.service_judge_name);
+	_text('.scoresheet_court_id', s.settings.court_id);
+	_text('.scoresheet_umpire_name', s.metadata.umpire_name ? s.metadata.umpire_name : s.settings.umpire_name);
+	_text('.scoresheet_service_judge_name', s.metadata.service_judge_name ? s.metadata.service_judge_name : s.settings.service_judge_name);
 
-	_text('.scoresheet_begin_value', state.metadata.start ? utils.time_str(state.metadata.start) : '');
-	if (state.match.finished) {
-		_text('.scoresheet_end_value', state.metadata.updated ? utils.time_str(state.metadata.updated) : '');
-		_text('.scoresheet_duration_value', state.metadata.updated ? utils.duration_mins(state.metadata.start, state.metadata.updated) : '');
+	_text('.scoresheet_begin_value', s.metadata.start ? utils.time_str(s.metadata.start) : '');
+	if (s.match.finished) {
+		_text('.scoresheet_end_value', s.metadata.updated ? utils.time_str(s.metadata.updated) : '');
+		_text('.scoresheet_duration_value', s.metadata.updated ? utils.duration_mins(s.metadata.start, s.metadata.updated) : '');
 	} else {
 		_text('.scoresheet_end_value', null);
 		_text('.scoresheet_duration_value', null);
 	}
 
-	_text('.scoresheet_results_team1_player1', state.setup.teams[0].players[0].name);
-	_text('.scoresheet_results_team1_player2', state.setup.is_doubles ? state.setup.teams[0].players[1].name : '');
-	_text('.scoresheet_results_team1_name', state.setup.teams[0].name);
-	_text('.scoresheet_results_team2_player1', state.setup.teams[1].players[0].name);
-	_text('.scoresheet_results_team2_player2', state.setup.is_doubles ? state.setup.teams[1].players[1].name: '');
-	_text('.scoresheet_results_team2_name', state.setup.teams[1].name);
+	_text('.scoresheet_results_team1_player1', s.setup.teams[0].players[0].name);
+	_text('.scoresheet_results_team1_player2', s.setup.is_doubles ? s.setup.teams[0].players[1].name : '');
+	_text('.scoresheet_results_team1_name', s.setup.teams[0].name);
+	_text('.scoresheet_results_team2_player1', s.setup.teams[1].players[0].name);
+	_text('.scoresheet_results_team2_player2', s.setup.is_doubles ? s.setup.teams[1].players[1].name: '');
+	_text('.scoresheet_results_team2_name', s.setup.teams[1].name);
 
-	$('.scoresheet_results_circle_team1').attr('visibility',
-		(state.match.finished && state.match.team1_won) ? 'visible' : 'hidden');
-	$('.scoresheet_results_circle_team2').attr('visibility',
-		(state.match.finished && !state.match.team1_won) ? 'visible' : 'hidden');
+	$container.find('.scoresheet_results_circle_team1').attr('visibility',
+		(s.match.finished && s.match.team1_won) ? 'visible' : 'hidden');
+	$container.find('.scoresheet_results_circle_team2').attr('visibility',
+		(s.match.finished && !s.match.team1_won) ? 'visible' : 'hidden');
 
-	var shuttle_counter_active = (typeof state.match.shuttle_count == 'number') && (state.settings.shuttle_counter);
+	var shuttle_counter_active = (typeof s.match.shuttle_count == 'number') && (s.settings.shuttle_counter);
 	$('.scoresheet_shuttle_counter').attr('visibility', shuttle_counter_active ? 'visible' : 'hidden');
-	_text('.scoresheet_shuttle_counter_value', state.match.shuttle_count ? state.match.shuttle_count : '');
+	_text('.scoresheet_shuttle_counter_value', s.match.shuttle_count ? s.match.shuttle_count : '');
 
 	var side1_str = '';
 	var side2_str = '';
 	var first_game = null;
-	if (state.match && state.match.finished_games.length > 0) {
-		first_game = state.match.finished_games[0];
+	if (s.match && s.match.finished_games.length > 0) {
+		first_game = s.match.finished_games[0];
 	} else {
-		first_game = state.game;
+		first_game = s.game;
 	}
 	if (first_game && first_game.start_team1_left !== null) {
 		if (first_game.start_team1_left) {
@@ -585,13 +564,13 @@ function show() {
 	_text('.scoresheet_results_team1_side', side1_str);	
 	_text('.scoresheet_results_team2_side', side2_str);	
 
-	if (state.match) {
-		var all_finished_games = state.match.finished_games.slice();
-		if (state.match.finished) {
-			all_finished_games.push(state.game);
+	if (s.match) {
+		var all_finished_games = s.match.finished_games.slice();
+		if (s.match.finished) {
+			all_finished_games.push(s.game);
 		}
 
-		for (var i = 0;i < state.match.max_games;i++) {
+		for (var i = 0;i < s.match.max_games;i++) {
 			var g = all_finished_games[i];
 			_text('.scoresheet_results_team1_score' + (i + 1), g ? g.score[0] : '');
 			_text('.scoresheet_results_team2_score' + (i + 1), g ? g.score[1] : '');
@@ -600,25 +579,25 @@ function show() {
 
 	// Big table(s)
 	var all_players;
-	if (state.setup.is_doubles) {
+	if (s.setup.is_doubles) {
 		all_players = [
-			state.setup.teams[0].players[0],
-			state.setup.teams[0].players[1],
-			state.setup.teams[1].players[0],
-			state.setup.teams[1].players[1],
+			s.setup.teams[0].players[0],
+			s.setup.teams[0].players[1],
+			s.setup.teams[1].players[0],
+			s.setup.teams[1].players[1],
 		];
 	} else {
 		all_players = [
-			state.setup.teams[0].players[0],
+			s.setup.teams[0].players[0],
 			null,
-			state.setup.teams[1].players[0],
+			s.setup.teams[1].players[0],
 			null,
 		];
 	}
 
 	var SCORESHEET_COL_COUNT = 35;
-	var cells = _parse_match(state, SCORESHEET_COL_COUNT);
-	var $t = $('.scoresheet_table_container');
+	var cells = _parse_match(s, SCORESHEET_COL_COUNT);
+	var $t = $container.find('.scoresheet_table_container');
 	$t.empty();
 	var t = $t[0];
 
@@ -634,7 +613,6 @@ function show() {
 		var text;
 
 		var table_top = 57 + 22 * table_idx;
-
 
 		_svg_el('rect', {
 			'class': 'shade',
@@ -817,6 +795,31 @@ function show() {
 			_svg_align_vcenter(text, table_top + cell.row * cell_height + cell_height / 2);
 		}
 	});
+}
+
+function show() {
+	if (!state.initialized) {
+		return; // Called on start with Shift+S
+	}
+
+	if (state.ui.scoresheet_visible) {
+		return;
+	}
+	state.ui.scoresheet_visible = true;
+
+	control.set_current(state);
+
+	if (typeof jsPDF != 'undefined') {
+		jspdf_loaded();
+	}
+
+	settings.hide();
+	stats.hide();
+	$('#game').hide();
+	uiu.esc_stack_push(hide);
+
+	var $container = $('.scoresheet_container');
+	render(state, $container);
 }
 
 function hide() {
