@@ -212,6 +212,9 @@ var i18n_de = {
 'stats:shuttles': 'Federbälle',
 'stats:duration': 'Dauer',
 'stats:avg_rally_length': '⌀ Ballwechsel-Länge',
+'stats:longest_rally': 'Längster Ballwechsel',
+'stats:longest rally (game)': ' ({score})',
+'stats:longest rally (match)': ' ({score} im {game}. Satz)',
 'stats:serves': 'Aufschläge {player_name}',
 
 };

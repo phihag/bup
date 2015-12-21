@@ -1,7 +1,11 @@
 stats + längster Ballwechsel
-function to test error reporting
-highlight love-all; move pronounciation above it
+test stats without anything (should not be broken)
+move pronounciation above love-all
+highlight love-all
+allow scrolling stats on small screens
+mail btde
 
+click on match button should go to match if it is currently running
 simple P2P
 	rework protocol: set-events; setup_connection(candidates)
 	test between 3 nodes with candidates&offer

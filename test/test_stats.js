@@ -50,6 +50,9 @@ _describe('stats', function() {
 			st[0].rally_lengths,
 			[10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000]);
 		assert.strictEqual(st[0].avg_rally_length, '0:10');
+		assert.strictEqual(st[0].longest_rally_length, 10000);
+		assert.strictEqual(st[0].longest_rally, '0:10');
+		assert.strictEqual(st[0].longest_rally_desc, '0:10 (0-0)');
 		assert.deepStrictEqual(
 			st[0].serves,
 			[[11, 0], [0, 0]]
@@ -58,6 +61,9 @@ _describe('stats', function() {
 		assert.strictEqual(st[1].points_lr, '10/1');
 		assert.strictEqual(st[1].duration, '1:50');
 		assert.strictEqual(st[1].avg_rally_length, '0:10');
+		assert.strictEqual(st[1].longest_rally_length, 10000);
+		assert.strictEqual(st[1].longest_rally, '0:10');
+		assert.strictEqual(st[1].longest_rally_desc, '0:10 (0-0 im 1. Satz)');
 
 		presses.push({
 			type: 'score',
@@ -74,6 +80,10 @@ _describe('stats', function() {
 			st[0].rally_lengths,
 			[10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 20000]);
 		assert.strictEqual(st[0].avg_rally_length, '0:11');
+		assert.strictEqual(st[0].longest_rally_length, 20000);
+		assert.strictEqual(st[0].longest_rally, '0:20');
+		assert.strictEqual(st[0].longest_rally_desc, '0:20 (1-10)');
+
 		assert.deepStrictEqual(
 			st[0].serves,
 			[[11, 0], [0, 1]]
@@ -82,6 +92,9 @@ _describe('stats', function() {
 		assert.strictEqual(st[1].points_lr, '11/1');
 		assert.strictEqual(st[1].duration, '2:10');
 		assert.strictEqual(st[1].avg_rally_length, '0:11');
+		assert.strictEqual(st[1].longest_rally_length, 20000);
+		assert.strictEqual(st[1].longest_rally, '0:20');
+		assert.strictEqual(st[1].longest_rally_desc, '0:20 (1-10 im 1. Satz)');
 
 		presses.push({
 			type: 'score',

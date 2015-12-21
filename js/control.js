@@ -308,7 +308,7 @@ function init_shortcuts() {
 			settings.show();
 		}
 	});
-	Mousetrap.bind('a', function() {
+	Mousetrap.bind('shift+a', function() {
 		if (state.initialized) {
 			stats.show();
 		}

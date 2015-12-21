@@ -58,15 +58,33 @@ function calc_stats(s) {
 			}
 			break;
 		case 'score':
+			var server_team_id = scopy.game.team1_serving ? 0 : 1;
+
 			current_game.points_lr_ar[p.side == 'left' ? 0 : 1]++;
 			mstats.points_lr_ar[p.side == 'left' ? 0 : 1]++;
 			if (!scopy.game.interval && current_game.rally_start) {
 				var rally_length = p.timestamp - current_game.rally_start;
 				current_game.rally_lengths.push(rally_length);
 				mstats.rally_lengths.push(rally_length);
+
+				if ((!current_game.longest_rally_length) || (rally_length > current_game.longest_rally_length)) {
+					var score = scopy.game.score;
+					var score_str = score[server_team_id] + '-' + score[1 - server_team_id];
+					current_game.longest_rally_length = rally_length;
+					current_game.longest_rally_desc = (
+						utils.duration_secs(0, rally_length) +
+						s._('stats:longest rally (game)').replace('{score}', score_str)
+					);
+				}
+				if ((!mstats.longest_rally_length) || (rally_length > mstats.longest_rally_length)) {
+					mstats.longest_rally_length = rally_length;
+					mstats.longest_rally_desc = (
+						utils.duration_secs(0, rally_length) +
+						s._('stats:longest rally (match)').replace('{score}', score_str).replace('{game}', (current_game_idx + 1))
+					);
+				}
 			}
 
-			var server_team_id = scopy.game.team1_serving ? 0 : 1;
 			var server_player_id = 0;
 			if (scopy.setup.is_doubles) {
 				// Find out which of the players served
@@ -99,6 +117,9 @@ function calc_stats(s) {
 			col.avg_rally_length = utils.duration_secs(
 				0, utils.sum(col.rally_lengths) / col.rally_lengths.length
 			);
+			col.longest_rally = utils.duration_secs(
+				0, col.longest_rally_length
+			);
 		}
 
 		col.serves.forEach(function(players, team_id) {
@@ -130,7 +151,7 @@ function calc_stats(s) {
 	var keys = [].concat(
 		['points', 'points_lr'],
 		server_keys,
-		['shuttles', 'duration', 'avg_rally_length']
+		['shuttles', 'duration', 'avg_rally_length', 'longest_rally']
 	);
 
 	return {
@@ -190,6 +211,9 @@ function show() {
 
 		stats.cols.forEach(function(st) {
 			var td = $('<td>');
+			if (k == 'longest_rally') {
+				td.attr('title', st.longest_rally_desc);
+			}
 			tr.append(td);
 			td.text(st[k]);
 		});

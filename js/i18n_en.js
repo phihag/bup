@@ -16,6 +16,7 @@ var i18n_en = {
 'timer:restart': 'Restart timer',
 
 'report problem': 'Report problem/suggestion',
+'report:test': 'Test diagnostics',
 'report:subject': 'Problem with bup',
 'report:body': 'I encountered the following problem with the umpire panel:\n\n\n\n\nTechnical Information:\nWeb browser: {ua}\nURL: {url}\Window size: {size}\nError object: {last_error}\n',
 
@@ -209,7 +210,11 @@ var i18n_en = {
 'stats:shuttles': 'Shuttles',
 'stats:duration': 'Duration',
 'stats:avg_rally_length': '⌀ Rally length',
+'stats:longest_rally': 'Longest rally',
 'stats:serves': '#Serves {player_name}',
+'stats:longest rally (game)': ' ({score})',
+'stats:longest rally (match)': ' (game {game} at {score})',
+
 };
 
 /*@DEV*/
