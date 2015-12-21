@@ -1,11 +1,13 @@
 all sheets
 	to print
 	in PDF
-	link to all scoresheets
+	link to this form outside
+	without umpire name
 mail btde
 
 court selection by clicking on court name (if restricted courts)
 move pronounciation above love-all? / highlight love-all?
+love-all should cancel timer
 
 click on match button should go to match if it is currently running
 simple P2P
@@ -184,6 +186,9 @@ consider eliminating love-all
 better loading screen
 move manual editing confirm button to bottom (with white border) and give it a text "Übernehmen"
 click court name to get into change court dialog (show button in editmode)
+scoresheet: show loading dialog
+scoresheet: deal and notify failures of loading SVG
+unify scoresheet and eventsheet downloading
 allow challenges
 	failsafe (http://www.badmintoncentral.com/forums/showthread.php/160170-sub-standard-umpire-gave-a-free-point-to-Okuhara-in-first-set?p=2413636#post2413636)
 -> Demo Jörg H, Manuel, Susanne, Werner Durow

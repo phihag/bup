@@ -32,14 +32,16 @@ function signalling_connect() {
 	signalling_sock.onmessage = function(e) {
 		var msg = JSON.parse(e.data);
 		switch (msg.type) {
-		case 'node-notification':
+		case 'node-available':
 			connect_to(msg.node_id, msg.candidates);
+			break;
+		case 'connection-request':
+			// 
 			break;
 		// TODO display 'error' messages
 		}
 	};
 	signalling_sock.onopen = signalling_update;
-	// TODO on connected send all candidates
 	// TODO on close renew
 }
 
@@ -80,7 +82,7 @@ function on_candidate(e) {
 	signalling_update();
 }
 
-function setup() {
+function setup_connection() {
 	var servers = {
 		iceServers: ice_servers,
 	};
@@ -104,7 +106,6 @@ function setup() {
 
 function init() {
 	signalling_connect();
-	setup();
 }
 
 /* Arguments: s (state) */

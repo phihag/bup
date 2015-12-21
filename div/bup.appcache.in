@@ -10,6 +10,7 @@ bup.dist.css
 bup.dist.js
 jspdf.dist.js
 pdfform.dist.js
+div/scoresheet_international.svg
 
 @svgfiles
 

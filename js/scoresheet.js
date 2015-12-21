@@ -488,22 +488,26 @@ function _parse_match(state, col_count) {
 	return _layout(s.scoresheet_games, col_count);
 }
 
-function render(s, $container) {
+function render(s, svg) {
+	var $svg = $(svg);
+
 	function _text(search, str) {
 		if (str !== 0 && !str) {
 			str = '';
 		}
-		$container.find(search).text(str);
+		$svg.find(search).text(str);
 	}
+
 	// Show SVG before modifying it, otherwise getBBox won't work
-	$container.show();
+	$svg.show();
 
 	// Set text fields
 	_text('.scoresheet_tournament_name', s.setup.tournament_name);
 
-	// Special handling for event name
-	var tname_bbox = $container.find('.scoresheet_tournament_name')[0].getBBox();
-	$container.find('.scoresheet_event_name').attr('x', tname_bbox.x + tname_bbox.width + 4);
+	// Special handling for event name: Move it just to the right of the tournament name
+	state.svg = $svg;
+	var tname_bbox = $svg.find('.scoresheet_tournament_name')[0].getBBox();
+	$svg.find('.scoresheet_event_name').attr('x', tname_bbox.x + tname_bbox.width + 4);
 	var event_name = s.setup.event_name;
 	if (!event_name && s.setup.team_competition && s.setup.teams[0].name && s.setup.teams[1].name) {
 		event_name = s.setup.teams[0].name + ' - ' + s.setup.teams[1].name;
@@ -534,9 +538,9 @@ function render(s, $container) {
 	_text('.scoresheet_results_team2_player2', s.setup.is_doubles ? s.setup.teams[1].players[1].name: '');
 	_text('.scoresheet_results_team2_name', s.setup.teams[1].name);
 
-	$container.find('.scoresheet_results_circle_team1').attr('visibility',
+	$svg.find('.scoresheet_results_circle_team1').attr('visibility',
 		(s.match.finished && s.match.team1_won) ? 'visible' : 'hidden');
-	$container.find('.scoresheet_results_circle_team2').attr('visibility',
+	$svg.find('.scoresheet_results_circle_team2').attr('visibility',
 		(s.match.finished && !s.match.team1_won) ? 'visible' : 'hidden');
 
 	var shuttle_counter_active = (typeof s.match.shuttle_count == 'number') && (s.settings.shuttle_counter);
@@ -597,7 +601,7 @@ function render(s, $container) {
 
 	var SCORESHEET_COL_COUNT = 35;
 	var cells = _parse_match(s, SCORESHEET_COL_COUNT);
-	var $t = $container.find('.scoresheet_table_container');
+	var $t = $svg.find('.scoresheet_table_container');
 	$t.empty();
 	var t = $t[0];
 
@@ -797,6 +801,26 @@ function render(s, $container) {
 	});
 }
 
+function event_show() {
+	if (state.ui.event_scoresheets_visible) {
+		return;
+	}
+	state.ui.event_scoresheets_visible = true;
+	control.set_current(state);
+
+	if (typeof jsPDF != 'undefined') {
+		jspdf_loaded();
+	}
+
+	settings.hide();
+	stats.hide();
+	hide();
+	$('#game').hide();
+	uiu.esc_stack_push(hide);
+
+	var $container = $('.event_scoresheets_container');
+}
+
 function show() {
 	if (!state.initialized) {
 		return; // Called on start with Shift+S
@@ -819,7 +843,15 @@ function show() {
 	uiu.esc_stack_push(hide);
 
 	var $container = $('.scoresheet_container');
-	render(state, $container);
+	$container.children('.scoresheet').remove();
+	$container.show();
+	make_sheet_node('international', function(doc) {
+		var docEl = doc.documentElement;
+		docEl.setAttribute('class', 'scoresheet');
+		var svg = document.importNode(docEl, true);
+		$container.append(svg);
+		render(state, svg);
+	});
 }
 
 function hide() {
@@ -830,7 +862,9 @@ function hide() {
 	control.set_current(state);
 
 	uiu.esc_stack_pop();
-	$('.scoresheet_container').hide();
+	var $container = $('.scoresheet_container');
+	$container.hide();
+	$container.children('.scoresheet').remove();
 	$('#game').show();
 }
 
@@ -873,6 +907,36 @@ function jspdf_loaded() {
 	document.querySelector('.scoresheet_button_pdf').removeAttribute('disabled');
 }
 
+var URLS = {
+	'international': 'div/scoresheet_international.svg',
+};
+var files = {};
+function load_sheet(key, callback) {
+	if (key in files) {
+		return files[key];
+	}
+
+	var url = URLS[key];
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', url, true);
+	xhr.responseType = 'text';
+
+	xhr.onload = function() {
+		files[key] = this.response;
+		if (callback) {
+			callback(files[key]);
+		}
+	};
+	xhr.send();
+}
+
+function make_sheet_node(key, callback) {
+	load_sheet(key, function(xml) {
+		var doc = $.parseXML(xml);
+		callback(doc);
+	});
+}
+
 function ui_init() {
 	$('.postmatch_scoresheet_button').on('click', show);
 	$('.scoresheet_button').on('click', show);
@@ -882,6 +946,7 @@ function ui_init() {
 		window.print();
 	});
 
+	load_sheet('international');
 }
 
 return {
