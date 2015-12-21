@@ -101,6 +101,7 @@ var i18n_en = {
 'settings:Edit Manually': 'Manual edit',
 'settings:Abort Manual Edit': 'Manuelles Bearbeiten abbrechen',
 'settings:Matches': 'Matches',
+'settings:Event Scoresheets': 'Scoresheets',
 'settings:Custom match details': 'Custom match details ...',
 'settings:New match': 'Create match',
 'settings:Singles': 'Singles',

@@ -814,7 +814,6 @@ function event_show() {
 
 	settings.hide();
 	stats.hide();
-	hide();
 	$('#game').hide();
 	uiu.esc_stack_push(hide);
 
@@ -859,10 +858,12 @@ function show() {
 }
 
 function hide() {
-	if (! state.ui.scoresheet_visible) {
+	if ((!state.ui.scoresheet_visible) && (!state.ui.event_scoresheets_visible)) {
 		return;
 	}
+
 	state.ui.scoresheet_visible = false;
+	state.ui.event_scoresheets_visible = false;
 	control.set_current(state);
 
 	uiu.esc_stack_pop();
@@ -945,9 +946,16 @@ function ui_init() {
 	$('.postmatch_scoresheet_button').on('click', show);
 	$('.scoresheet_button').on('click', show);
 	$('.scoresheet_button_pdf').on('click', ui_pdf);
-	$('.scoresheet_button_back').on('click', hide);
+	$('.scoresheet_button_back').on('click', function() {
+		hide();
+	});
 	$('.scoresheet_button_print').on('click', function() {
 		window.print();
+	});
+	$('.setup_event_scoresheets').on('click', function(e) {
+		e.preventDefault();
+		event_show();
+		return false;
 	});
 
 	load_sheet('international');
@@ -958,6 +966,7 @@ return {
 	ui_init: ui_init,
 	hide: hide,
 	show: show,
+	event_show: event_show,
 	// For testing only
 	_parse_match: _parse_match,
 };

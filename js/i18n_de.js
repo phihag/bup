@@ -103,6 +103,7 @@ var i18n_de = {
 'settings:Edit Manually': 'Manuell Bearbeiten',
 'settings:Abort Manual Edit': 'Manuelles Bearbeiten abbrechen',
 'settings:Matches': 'Spiele',
+'settings:Event Scoresheets': 'Schiedsrichterzettel',
 'settings:Custom match details': 'Spiel manuell eintragen ...',
 'settings:New match': 'Neues Spiel',
 'settings:Singles': 'Einzel',
