@@ -87,3 +87,10 @@
 		display: none;
 	}
 }
+
+.scoresheet_loading-icon.loading-icon {
+	position: absolute;
+	left: 50%;
+	transform: translate(-50%, 0);
+	top: 20%;
+}

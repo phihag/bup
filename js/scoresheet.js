@@ -820,8 +820,10 @@ function event_show() {
 	var $container = $('.scoresheet_container');
 	$container.addClass('event_scoresheet_container');
 	$container.children('.scoresheet').remove();
+	$container.find('.scoresheet_loading-icon').show();
 	$container.show();
 
+	console.log(state.event);
 }
 
 function show() {
@@ -847,6 +849,7 @@ function show() {
 
 	var $container = $('.scoresheet_container');
 	$container.children('.scoresheet').remove();
+	$container.find('.scoresheet_loading-icon').show();
 	$container.show();
 	make_sheet_node('international', function(doc) {
 		var docEl = doc.documentElement;
@@ -854,6 +857,7 @@ function show() {
 		var svg = document.importNode(docEl, true);
 		$container.append(svg);
 		render(state, svg);
+		$container.find('.scoresheet_loading-icon').hide();
 	});
 }
 
