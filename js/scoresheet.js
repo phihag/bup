@@ -1022,6 +1022,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
 	var stats = require('./stats');
 	var uiu = require('./uiu');
+	var i18n = require('./i18n');
 	var svg2pdf = require('./svg2pdf');
 
 	module.exports = scoresheet;

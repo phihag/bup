@@ -67,9 +67,9 @@ function calc_stats(s) {
 				current_game.rally_lengths.push(rally_length);
 				mstats.rally_lengths.push(rally_length);
 
+				var score = scopy.game.score;
+				var score_str = score[server_team_id] + '-' + score[1 - server_team_id];
 				if ((!current_game.longest_rally_length) || (rally_length > current_game.longest_rally_length)) {
-					var score = scopy.game.score;
-					var score_str = score[server_team_id] + '-' + score[1 - server_team_id];
 					current_game.longest_rally_length = rally_length;
 					current_game.longest_rally_desc = (
 						utils.duration_secs(0, rally_length) +
