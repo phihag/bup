@@ -111,6 +111,10 @@ button>.loading-icon {
 	background-size: 100%;
 	background-repeat: no-repeat;
 }
+.setup_linkline a:not(:last-child), .setup_linkline>div>a {
+	display: inline-block;
+	margin-right: 2em;
+}
 
 /* Smartphones */
 @media screen and (max-device-width:480px) {

@@ -1,12 +1,5 @@
 don't crash on bupbt shift+S (player missing in setup, fixup?)
-game to event scoresheet with shift+s fails, only works from settings
-event scoresheet as PDF!
-scoresheet rendering is slow!
-court selection by clicking on court name (if restricted courts)
-move pronounciation above love-all? / highlight love-all?
-love-all should cancel timer
 
-click on match button should go to match if it is currently running
 simple P2P
 	rework protocol: set-events; setup_connection(candidates)
 	test between 3 nodes with candidates&offer
@@ -16,6 +9,15 @@ simple P2P
 	actually transfer data
 	handle P2P in browsers that don't support it!
 	autodetect event from LAN
+
+&print for tvr
+game to event scoresheet with shift+s fails, only works from settings
+event scoresheet as PDF!
+scoresheet rendering is slow!
+court selection by clicking on court name (if restricted courts, otherwise other court selection)
+move pronounciation above love-all? / highlight love-all?
+love-all should cancel timer
+click on match button should go to match if it is currently running (associate events with presses locally)
 
 highlight or hide middle center buttons
 match statistics

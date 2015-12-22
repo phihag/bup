@@ -73,14 +73,6 @@
     -ms-user-select: none;
 }
 
-.setup_show_manual {
-	display: inline-block;
-}
-.setup_event_scoresheets {
-	display: inline-block;
-	margin-right: 2em;
-}
-
 .setup_manual_teams {
 	margin-bottom: 0.5em;
 }
