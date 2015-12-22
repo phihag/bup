@@ -192,6 +192,7 @@ var i18n_de = {
 'scoresheet:server': 'A',
 'scoresheet:receiver': 'R',
 'scoresheet:Empty Scoresheet': 'Schiedsrichterzettel',
+'scoresheet:[Event Scoresheet Filename]': 'Schiedsrichterzettel {event_name}',
 
 'eventsheet:draw': 'Unentschieden',
 'eventsheet:Generate': 'Spielbericht generieren',

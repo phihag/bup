@@ -190,6 +190,7 @@ var i18n_en = {
 'scoresheet:server': 'S',
 'scoresheet:receiver': 'R',
 'scoresheet:Empty Scoresheet': 'Scoresheet',
+'scoresheet:[Event Scoresheet Filename]': 'Scoresheets {event_name}',
 
 'eventsheet:draw': 'Draw',
 'eventsheet:Generate': 'Generate Report',

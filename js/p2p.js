@@ -22,18 +22,18 @@ if (!ice_servers) {
 
 var RTCPeerConnection = wrtc.RTCPeerConnection || wrtc.mozRTCPeerConnection || wrtc.webkitRTCPeerConnection;
 
-var candidates = [];
 var request_id = 1;
 var signalling_sock;
 var connections = {};
 
 function signalling_connect() {
-	signalling_sock = new WebSocket(signalling_wsurl, 'bup-p2p');
+	signalling_sock = new WebSocket(signalling_wsurl, 'bup-p2p-signalling');
 	signalling_sock.onmessage = function(e) {
 		var msg = JSON.parse(e.data);
+		console.log('got message: ', msg);
 		switch (msg.type) {
-		case 'node-available':
-			connect_to(msg.node_id, msg.candidates);
+		case 'peer-available':
+			connect_to(msg.node_id);
 			break;
 		case 'connection-request':
 			// 

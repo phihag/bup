@@ -825,9 +825,9 @@ function event_render($container) {
 
 function event_list_matches($container) {
 	network.list_matches(state, function(err, ev) {
+		utils.visible_qs('.scoresheet_error', !!err);
 		if (err) {
 			$('.scoresheet_error_message').text(err.msg);
-			utils.visible_qs('.scoresheet_error', true);
 			utils.visible_qs('.scoresheet_loading-icon', false);
 			return;
 		}
@@ -938,17 +938,27 @@ function _match_title(s, sep) {
 }
 
 function ui_pdf() {
-	var svg_node = document.getElementsByClassName('scoresheet')[0];
+	var svg_nodes = document.querySelectorAll('.scoresheet_container>.scoresheet');
 	var props = {
-		title: _match_title(state, '/'),
+		title: (
+			(state.ui.event_scoresheets_visible) ?
+			(state._('scoresheet:[Event Scoresheet Filename]').replace('{event_name}', state.event.event_name) + '.pdf') :
+			_match_title(state, '/')),
 		subject: state._('Score Sheet'),
 		creator: 'bup (https://phihag.de/bup/)',
 	};
-	if (state.metadata.umpire_name) {
+	if (state.metadata && state.metadata.umpire_name) {
 		props.author = state.metadata.umpire_name;
+	} else if (state.settings.umpire_name) {
+		props.author = state.settings.umpire_name;
 	}
-	var filename = _match_title(state, ',') + '.pdf';
-	svg2pdf.save(svg_node, props, filename);
+	console.log('UI:', state.ui);
+	var filename = (
+		(state.ui.event_scoresheets_visible) ?
+		(state._('scoresheet:[Event Scoresheet Filename]') + state.event.event_name + '.pdf') :
+		(_match_title(state, ',') + '.pdf')
+	);
+	svg2pdf.save(svg_nodes, props, filename);
 }
 
 function jspdf_loaded() {

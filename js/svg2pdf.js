@@ -1,7 +1,7 @@
 var svg2pdf = (function() {
 'use strict';
 
-function render(svg, pdf) {
+function render_page(svg, pdf) {
 	var nodes = svg.querySelectorAll('*');
 	for (var i = 0;i < nodes.length;i++) {
 		// Due to absence of let, declare vars here
@@ -148,7 +148,7 @@ function render(svg, pdf) {
 	}
 }
 
-function make(svg_node, props) {
+function make(svg_nodes, props) {
 	var pdf = new jsPDF({
 		orientation: 'landscape',
 		unit: 'mm',
@@ -159,7 +159,12 @@ function make(svg_node, props) {
 	pdf.addFont('Helvetica-Bold', 'helvetica', 'bold');
 	pdf.setFont('helvetica', 'normal');
 
-	render(svg_node, pdf);
+	for (var i = 0;i < svg_nodes.length;i++) {
+		if (i > 0) {
+			pdf.addPage();
+		}
+		render_page(svg_nodes[i], pdf);
+	}
 	pdf.setProperties(props);
 	return pdf;
 }

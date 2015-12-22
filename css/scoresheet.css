@@ -114,10 +114,3 @@
 	background-size: 100%;
 	background-repeat: no-repeat;
 }
-
-
-
-/* TODO: Remove this once PDF multi-page scoresheets work */
-.event_scoresheet_container .scoresheet_button_pdf {
-	display: none;
-}

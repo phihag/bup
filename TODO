@@ -8,10 +8,8 @@ simple P2P
 	handle P2P in browsers that don't support it!
 	autodetect event from LAN
 
-replace $('#game').show | hide with render.show|hide
 &print for scoresheet / event scoresheet / eventsheet
 event scoresheet should show current state if known (associate mstate, survive event reloads)
-event scoresheet as PDF
 demo event (with eventsheet & current state)
 court selection by clicking on court name (if restricted courts, otherwise other court selection)
 move pronounciation above love-all? / highlight love-all?
@@ -24,6 +22,7 @@ match statistics: UI on mobile
 automatically delete old matches after 1 day|*week|month
 "Loading bup" message -> preconfigure HTML
 event scoresheets -> back goes through multiple hashes (trace hash changes)
+write a manual (A5)
 service worker
 	collect file names to cache
 	cache file names
@@ -187,6 +186,7 @@ click court name to get into change court dialog (show button in editmode)
 scoresheet: show loading dialog
 scoresheet: deal and notify failures of loading SVG
 unify scoresheet and eventsheet downloading
+display mode: until match start show preview (Refrath gegen ...)
 demo event
 allow challenges
 	failsafe (http://www.badmintoncentral.com/forums/showthread.php/160170-sub-standard-umpire-gave-a-free-point-to-Okuhara-in-first-set?p=2413636#post2413636)

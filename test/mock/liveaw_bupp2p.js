@@ -15,6 +15,15 @@ function _is_string_array(ar) {
 	return true;
 }
 
+function _any_matching(ar1, ar2) {
+	for (var i = 0;i < ar1.length;i++) {
+		if (ar2.indexOf(ar1[i]) >= 0) {
+			return true;
+		}
+	}
+	return false;
+}
+
 function _send_error(ws, emsg, request_id) {
 	var msg = {
 		type: 'error',
@@ -38,16 +47,20 @@ function _send(ws, msg) {
 function send_peerlist(ws) {
 	var event_ids = ws.bup_event_ids;
 	all_nodes.forEach(function(node) {
-		if ((node === ws) || (!node.event_ids)) {
+		if ((node === ws) || (!node.bup_event_ids)) {
 			return;
 		}
 
+		if (! _any_matching(event_ids, node.bup_event_ids)) {
+			return false;
+		}
+
 		_send(node, {
-			type: 'peer-notification',
+			type: 'peer-available',
 			node_id: ws.bup_node_id,
-			candidates: candidates,
 			event_ids: ws.event_ids,
 		});
+		// TODO notify the other way round, too?
 	});
 }
 
@@ -95,6 +108,7 @@ function handle(ws) {
 				ws.bup_event_ids = msg.event_ids;
 				send_peerlist(ws);
 			}
+			console.log('set an event, current nodes: ', all_nodes.length);
 			break;
 		default:
 			return _send_error(ws, 'Unsupported msg type ' + msg.type, msg.request_id);

@@ -364,7 +364,7 @@ function render_svg(ev, es_key, ui8r, extra_data) {
 	_svg_text(svg, 'umpires', extra_data.umpires);
 
 	var filename = 'Spielbericht ' + ev.event_name + (last_update ? (' ' + utils.date_str(last_update * 1000)) : '') + '.pdf';
-	svg2pdf.save(svg, props, filename);
+	svg2pdf.save([svg], props, filename);
 
 	container.remove();
 }
