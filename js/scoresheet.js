@@ -488,7 +488,7 @@ function _parse_match(state, col_count) {
 	return _layout(s.scoresheet_games, col_count);
 }
 
-function render(s, svg, without_metadata) {
+function sheet_render(s, svg, without_metadata) {
 	var $svg = $(svg);
 
 	function _text(search, str) {
@@ -502,7 +502,6 @@ function render(s, svg, without_metadata) {
 	_text('.scoresheet_tournament_name', s.setup.tournament_name);
 
 	// Special handling for event name: Move it just to the right of the tournament name
-	state.svg = $svg;
 	var tname_bbox = $svg.find('.scoresheet_tournament_name')[0].getBBox();
 	$svg.find('.scoresheet_event_name').attr('x', tname_bbox.x + tname_bbox.width + 4);
 	var event_name = s.setup.event_name;
@@ -817,7 +816,7 @@ function event_render($container) {
 			calc.state(s);
 			state.new_s = s;
 
-			render(s, svg, true);
+			sheet_render(s, svg, true);
 		});
 
 		utils.visible('.scoresheet_loading-icon', false);
@@ -850,7 +849,7 @@ function event_show() {
 
 	settings.hide(true);
 	stats.hide();
-	$('#game').hide();
+	render.hide();
 	uiu.esc_stack_push(hide);
 
 	var $container = $('.scoresheet_container');
@@ -884,7 +883,7 @@ function show() {
 
 	settings.hide();
 	stats.hide();
-	$('#game').hide();
+	render.hide();
 	uiu.esc_stack_push(hide);
 
 	var $container = $('.scoresheet_container');
@@ -896,7 +895,7 @@ function show() {
 		docEl.setAttribute('class', 'scoresheet single_scoresheet');
 		var svg = document.importNode(docEl, true);
 		$container.append(svg);
-		render(state, svg);
+		sheet_render(state, svg);
 		utils.visible('.scoresheet_loading-icon', false);
 	});
 }
@@ -1026,6 +1025,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
 	var utils = require('./utils');
 	var control = require('./control');
+	var render = require('./render');
 	var stats = require('./stats');
 	var uiu = require('./uiu');
 	var i18n = require('./i18n');

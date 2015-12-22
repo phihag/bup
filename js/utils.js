@@ -149,6 +149,15 @@ function visible(node, val) {
 	}
 }
 
+function visible_qs(qs, val) {
+	var node = document.querySelector(qs);
+	if (! node) {
+		report_problem.on_silent_error('Expected to find qs  ' + qs + ' , but no node matching.');
+		return;
+	}
+	visible(node, val);
+}
+
 function de_jq(node) {
 	if (typeof node.getAttribute === 'undefined') {
 		// jQuery node
@@ -242,6 +251,7 @@ return {
 	uuid: uuid,
 	values: values,
 	visible: visible,
+	visible_qs: visible_qs,
 };
 })();
 

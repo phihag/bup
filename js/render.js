@@ -376,11 +376,21 @@ function ui_render(s) {
 	}
 }
 
+function show() {
+	utils.visible_qs('#game', true);
+}
+
+function hide() {
+	utils.visible_qs('#game', false);
+}
+
 return {
 	ui_render: ui_render,
 	ui_court_str: ui_court_str,
 	exception_dialog: exception_dialog,
 	shuttle_counter: shuttle_counter,
+	show: show,
+	hide: hide,
 };
 
 })();

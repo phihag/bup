@@ -1,3 +1,5 @@
+game to event scoresheet with shift+s fails, only works from settings
+
 simple P2P
 	rework protocol: set-events; setup_connection(candidates)
 	test between 3 nodes with candidates&offer
@@ -8,8 +10,8 @@ simple P2P
 	handle P2P in browsers that don't support it!
 	autodetect event from LAN
 
+replace $('#game').show | hide with render.show|hide
 &print for scoresheet / event scoresheet / eventsheet
-game to event scoresheet with shift+s fails, only works from settings
 event scoresheet should show current state if known (associate mstate, survive event reloads)
 event scoresheet as PDF
 demo event (with eventsheet & current state)
@@ -23,6 +25,7 @@ match statistics: UI on mobile
 "no stored matches" is not shown after last match is removed!
 automatically delete old matches after 1 day|*week|month
 "Loading bup" message -> preconfigure HTML
+event scoresheets -> back goes through multiple hashes (trace hash changes)
 service worker
 	collect file names to cache
 	cache file names

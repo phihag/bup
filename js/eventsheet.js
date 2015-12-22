@@ -535,7 +535,7 @@ function resolve_key(es_key) {
 function show_dialog(es_key) {
 	state.ui.eventsheet = es_key;
 	settings.hide(true);
-	$('#game').hide();
+	render.hide();
 
 	es_key = resolve_key(es_key);
 
