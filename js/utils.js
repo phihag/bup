@@ -43,7 +43,16 @@ function uuid() {
 }
 
 function on_click(node, callback) {
-	node.on('click', callback);
+	node.addEventListener('click', callback, false);
+}
+
+function on_click_qs(qs, callback) {
+	var node = document.querySelector(qs);
+	if (! node) {
+		report_problem.on_silent_error('Expected to find qs  ' + qs + ' , but no node matching.');
+		return;
+	}
+	return on_click(node, callback);
 }
 
 function iso8601(d) {
@@ -222,6 +231,7 @@ return {
 	multiline_regexp: multiline_regexp,
 	obj_update: obj_update,
 	on_click: on_click,
+	on_click_qs: on_click_qs,
 	parse_query_string: parse_query_string,
 	qsEach: qsEach,
 	repeat: repeat,
@@ -236,7 +246,9 @@ return {
 })();
 
 /*@DEV*/
-if (typeof module !== 'undefined') {
+if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var report_problem = require('./report_problem');
+
 	module.exports = utils;
 }
 /*/@DEV*/

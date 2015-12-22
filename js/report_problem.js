@@ -69,6 +69,16 @@ function on_error(msg, script_url, line, col, err) {
 	report(get_info());
 }
 
+function on_silent_error(msg) {
+	console.error(msg); // eslint-disable-line no-console
+	last_error = {
+		msg: msg,
+		type: 'silent-error',
+	};
+	update();
+	report(get_info());
+}
+
 function ui_init() {
 	update();
 	window.onerror = on_error;
@@ -84,6 +94,7 @@ return {
 	update: update,
 	ui_init: ui_init,
 	report: report,
+	on_silent_error: on_silent_error,
 };
 
 })();

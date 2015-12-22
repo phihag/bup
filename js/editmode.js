@@ -46,27 +46,27 @@ function ui_init() {
 		return true;
 	});
 
-	utils.on_click($('.editmode_leave'), function() {
+	utils.on_click_qs('.editmode_leave', function() {
 		leave();
 	});
-	utils.on_click($('.editmode_change-ends'), function() {
+	utils.on_click_qs('.editmode_change-ends', function() {
 		control.on_press({
 			type: 'editmode_change-ends',
 		});
 	});
-	utils.on_click($('.editmode_switch_left'), function() {
+	utils.on_click_qs('.editmode_switch_left', function() {
 		control.on_press({
 			type: 'editmode_switch-sides',
 			side: 'left',
 		});
 	});
-	utils.on_click($('.editmode_switch_right'), function() {
+	utils.on_click_qs('.editmode_switch_right', function() {
 		control.on_press({
 			type: 'editmode_switch-sides',
 			side: 'right',
 		});
 	});
-	utils.on_click($('.editmode_arrow'), function() {
+	utils.on_click_qs('.editmode_arrow', function() {
 		control.on_press({
 			type: 'editmode_change-serve',
 		});

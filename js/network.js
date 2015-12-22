@@ -385,7 +385,7 @@ function errstate(component, err) {
 }
 
 function ui_init() {
-	utils.on_click($('.network_desync_image'), resync);
+	utils.on_click_qs('.network_desync_image', resync);
 }
 
 function match_by_id(id) {

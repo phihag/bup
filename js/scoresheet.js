@@ -997,12 +997,12 @@ function ui_init() {
 	$('.scoresheet_button_print').on('click', function() {
 		window.print();
 	});
-	$('.setup_event_scoresheets').on('click', function(e) {
+	utils.on_click_qs('.setup_event_scoresheets', function(e) {
 		e.preventDefault();
 		event_show();
 		return false;
 	});
-	$('.scoresheet_reload').on('click', function(e) {
+	$('.scoresheet_reload').on('click', function() {
 		event_list_matches($('.scoresheet_container'));
 	});
 

@@ -10,7 +10,9 @@ simple P2P
 
 &print for scoresheet / event scoresheet / eventsheet
 game to event scoresheet with shift+s fails, only works from settings
+event scoresheet should show current state if known (associate mstate, survive event reloads)
 event scoresheet as PDF
+demo event (with eventsheet & current state)
 court selection by clicking on court name (if restricted courts, otherwise other court selection)
 move pronounciation above love-all? / highlight love-all?
 love-all should cancel timer
