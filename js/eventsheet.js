@@ -369,7 +369,7 @@ function render_svg(ev, es_key, ui8r, extra_data) {
 	container.remove();
 }
 
-function render(ev, es_key, ui8r, extra_data) {
+function es_render(ev, es_key, ui8r, extra_data) {
 	switch(es_key) {
 	case '1BL':
 	case '2BLN':
@@ -387,7 +387,7 @@ function prepare_render(btn, es_key, extra_data) {
 	btn.append(progress);
 	download(es_key, function(ui8r) {
 		progress.remove();
-		render(state.event, es_key, ui8r, extra_data);
+		es_render(state.event, es_key, ui8r, extra_data);
 	});
 }
 
@@ -494,17 +494,17 @@ function ui_init() {
 }
 
 function dialog_fetch() {
-	utils.visible('.eventsheet_generate_loading_icon', !state.event);
+	utils.visible_qs('.eventsheet_generate_loading_icon', !state.event);
 	var btn = $('.eventsheet_generate_button');
 	if (state.event) {
 		btn.removeAttr('disabled');
 	} else {
 		btn.attr('disabled', 'disabled');
 		network.list_matches(state, function(err, ev) {
-			utils.visible('.eventsheet_generate_loading_icon', false);
+			utils.visible_qs('.eventsheet_generate_loading_icon', false);
 			if (err) {
 				$('.eventsheet_error_message').text(err.msg);
-				utils.visible('.eventsheet_error', true);
+				utils.visible_qs('.eventsheet_error', true);
 				return;
 			}
 			state.event = ev;
@@ -554,7 +554,6 @@ function hide_dialog() {
 	state.ui.eventsheet = null;
 	var container = $('.eventsheet_container');
 	container.addClass('default-invisible');
-	$('#game').show();
 	settings.show();
 }
 
@@ -572,6 +571,7 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
 	var utils = require('./utils');
+	var render = require('./render');
 	var svg2pdf = require('./svg2pdf');
 
 	module.exports = eventsheet;

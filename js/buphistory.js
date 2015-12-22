@@ -24,7 +24,7 @@ function load_ui_by_hash_qs(qs) {
 		stats.hide();
 	}
 
-	utils.visible('#game', true);
+	render.show();
 }
 
 var is_loading = false;
@@ -82,12 +82,6 @@ function record(s) {
 
 function load_by_hash() {
 	var qs = utils.parse_query_string(window.location.hash.substr(1));
-	if (state.metadata && (qs.m == state.metadata.id)) {
-		is_loading = true;
-		load_ui_by_hash_qs(qs);
-		is_loading = false;
-		return;
-	}
 
 	if (qs.eventsheet) {
 		eventsheet.show_dialog(qs.eventsheet);
@@ -96,6 +90,13 @@ function load_by_hash() {
 
 	if (typeof qs.event_scoresheets != 'undefined') {
 		scoresheet.event_show();
+		return;
+	}
+
+	if (state.metadata && (qs.m == state.metadata.id)) {
+		is_loading = true;
+		load_ui_by_hash_qs(qs);
+		is_loading = false;
 		return;
 	}
 
@@ -157,6 +158,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var network = require('./network');
 	var settings = require('./settings');
 	var stats = require('./stats');
+	var render = require('./render');
 	var match_storage = require('./match_storage');
 
 	module.exports = buphistory;

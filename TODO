@@ -1,5 +1,3 @@
-game to event scoresheet with shift+s fails, only works from settings
-
 simple P2P
 	rework protocol: set-events; setup_connection(candidates)
 	test between 3 nodes with candidates&offer
