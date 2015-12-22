@@ -498,9 +498,6 @@ function render(s, svg, without_metadata) {
 		$svg.find(search).text(str);
 	}
 
-	// Show SVG before modifying it, otherwise getBBox won't work
-	$svg.show();
-
 	// Set text fields
 	_text('.scoresheet_tournament_name', s.setup.tournament_name);
 
@@ -531,12 +528,13 @@ function render(s, svg, without_metadata) {
 		_text('.scoresheet_duration_value', null);
 	}
 
-	_text('.scoresheet_results_team1_player1', s.setup.teams[0].players[0].name);
-	_text('.scoresheet_results_team1_player2', s.setup.is_doubles ? s.setup.teams[0].players[1].name : '');
-	_text('.scoresheet_results_team1_name', s.setup.teams[0].name);
-	_text('.scoresheet_results_team2_player1', s.setup.teams[1].players[0].name);
-	_text('.scoresheet_results_team2_player2', s.setup.is_doubles ? s.setup.teams[1].players[1].name: '');
-	_text('.scoresheet_results_team2_name', s.setup.teams[1].name);
+	var teams = s.setup.teams;
+	_text('.scoresheet_results_team1_player1', teams[0].players[0] ? teams[0].players[0].name : '');
+	_text('.scoresheet_results_team1_player2', (s.setup.is_doubles && teams[0].players[1]) ? teams[0].players[1].name : '');
+	_text('.scoresheet_results_team1_name', teams[0].name);
+	_text('.scoresheet_results_team2_player1', teams[1].players[0] ? teams[1].players[0].name : '');
+	_text('.scoresheet_results_team2_player2', (s.setup.is_doubles && teams[1].players[1]) ? teams[1].players[1].name: '');
+	_text('.scoresheet_results_team2_name', teams[1].name);
 
 	$svg.find('.scoresheet_results_circle_team1').attr('visibility',
 		(s.match.finished && s.match.team1_won) ? 'visible' : 'hidden');
