@@ -1,5 +1,5 @@
 simple P2P
-	rework protocol: set-events; setup_connection(candidates)
+	fix connection / answer
 	test between 3 nodes with candidates&offer
 	check if websocket connected, then send current event registration + ice candidates
 	on event change register for event ID
@@ -7,6 +7,11 @@ simple P2P
 	actually transfer data
 	handle P2P in browsers that don't support it!
 	autodetect event from LAN
+move bup under CourtSpot to / instead of /html
+	make sure to adapt fallback path
+-webkit-appearance: none (nur für Safari)
+safari: TextDecoder
+btde: do not redo network buttons if nothing changed
 
 &print for scoresheet / event scoresheet / eventsheet
 event scoresheet should show current state if known (associate mstate, survive event reloads)
@@ -39,6 +44,8 @@ Installable on Android
 	test that it doesn't break when not TLS
 
 improve P2P
+	handle node gonce once we connect
+	clear up node info for nodes whose connections did not work out
 	install error handling functions
 	btde: set state.event.id
 	reconnect when changing network

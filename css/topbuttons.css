@@ -57,7 +57,7 @@
 	}*
 }
 @media screen and (min-aspect-ratio: 15/10) {
-	.topleft_buttons>*,.topright_buttons>*, #button_redo {
+	.topleft_buttons>*, .topright_buttons>*, #button_redo {
 		min-width: 18vmin;
 		min-height: 18vmin;
 	}

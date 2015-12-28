@@ -18,7 +18,7 @@
 	background: #ffffff;
 	border-radius: 1em;
 	padding: 0 2em 1em 2em;
-	max-width: calc(100vw-2em-2em);
+	max-width: calc(100vw - 2em - 2em);
 	overflow: hidden;
 }
 .settings_container input, .settings_container button {

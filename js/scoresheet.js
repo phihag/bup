@@ -942,7 +942,7 @@ function ui_pdf() {
 	var props = {
 		title: (
 			(state.ui.event_scoresheets_visible) ?
-			(state._('scoresheet:[Event Scoresheet Filename]').replace('{event_name}', state.event.event_name) + '.pdf') :
+			(state._('scoresheet:[Event Scoresheet Filename]').replace('{event_name}', state.event.event_name)) :
 			_match_title(state, '/')),
 		subject: state._('Score Sheet'),
 		creator: 'bup (https://phihag.de/bup/)',
@@ -952,10 +952,9 @@ function ui_pdf() {
 	} else if (state.settings.umpire_name) {
 		props.author = state.settings.umpire_name;
 	}
-	console.log('UI:', state.ui);
 	var filename = (
 		(state.ui.event_scoresheets_visible) ?
-		(state._('scoresheet:[Event Scoresheet Filename]') + state.event.event_name + '.pdf') :
+		(state._('scoresheet:[Event Scoresheet Filename]').replace('{event_name}', state.event.event_name) + '.pdf') :
 		(_match_title(state, ',') + '.pdf')
 	);
 	svg2pdf.save(svg_nodes, props, filename);

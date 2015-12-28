@@ -20,6 +20,16 @@ if (!ice_servers) {
 	}*/];
 }
 
+var servers = {
+	iceServers: ice_servers,
+};
+var media_constraints = {
+	optional: [{
+		RtpDataChannels: true,
+	}],
+};
+
+
 var RTCPeerConnection = wrtc.RTCPeerConnection || wrtc.mozRTCPeerConnection || wrtc.webkitRTCPeerConnection;
 
 var request_id = 1;
@@ -36,17 +46,21 @@ function signalling_connect() {
 			connect_to(msg.node_id);
 			break;
 		case 'connection-request':
-			// 
+			handle_connection_request(msg.from_node, msg.candidate);
 			break;
 		// TODO display 'error' messages
 		}
 	};
-	signalling_sock.onopen = signalling_update;
+	signalling_sock.onopen = signalling_update_events;
 	// TODO on close renew
 }
 
-function signalling_update() {
-	if ((! signalling_sock) || (signalling_sock.readyState != 1)) { // 1 = OPEN
+function signalling_ready() {
+	return signalling_sock && (signalling_sock.readyState == 1); // 1 = OPEN
+}
+
+function signalling_update_events() {
+	if (! signalling_ready()) {
 		// As soon as the connection is open we will send the current state
 		return;
 	}
@@ -65,42 +79,61 @@ function signalling_update() {
 	signalling_sock.send(d);
 }
 
-function connect_to(node_id, candidates) {
+function signalling_send(msg) {
+	if (! signalling_ready()) {
+		// Not connected, try again later
+		return false;
+	}
+
+	request_id++;
+	msg.request_id = request_id;
+
+	signalling_sock.send(JSON.stringify(msg));
+}
+
+function connect_to(node_id) {
 	if (connections[node_id]) {
 		return;
 	}
 
-	// TODO make connection!
-}
-
-function on_candidate(e) {
-	if (! e.candidate) {
-		return;  // End of candidate list
-	}
-
-	candidates.push(e.candidate.candidate);
-	signalling_update();
-}
-
-function setup_connection() {
-	var servers = {
-		iceServers: ice_servers,
-	};
-	var media_constraints = {
-		optional: [{
-			RtpDataChannels: true,
-		}],
-	};
-	
 	var pc = new RTCPeerConnection(servers, media_constraints);
-	pc.onicecandidate = on_candidate;
-
-	pc.createDataChannel('bup-p2p-v1', {
+	var channel = pc.createDataChannel('bup-p2p', {
 		ordered: true,
+		reliable: true,
 	});
-	pc.createOffer(function(result){
-        pc.setLocalDescription(result, function(){}, function(){});
-	}, function(){});
+	channel.onopen = function() {
+		console.log('cannel opened', arguments);
+	};
+	channel.onopen = function() {
+		console.log('cannel closed', arguments);
+	};
+	pc.onicecandidate = function(e) {
+		if (!e.candidate) {
+			return;
+		}
+		signalling_send({
+			type: 'ice-candidate',
+			to_node: node_id,
+			candidate: e.candidate,
+		});
+	};
+
+	pc.createOffer(function(desc){
+        pc.setLocalDescription(desc, function() {
+			signalling_send({
+				type: 'connection-request',
+				to_node: node_id,
+				desc: desc,
+			});
+		}, function(err) {
+			console.error('setLocalDescription failed', err);
+		});
+	}, function(err) {
+		console.error('offer creation failed', err);
+	});
+}
+
+function handle_connection_request(node_id) {
 
 }
 
