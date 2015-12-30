@@ -1,3 +1,8 @@
+install teamviewer
+-webkit-appearance: none (nur für Safari)
+safari: TextDecoder
+
+
 simple P2P
 	fix connection / answer
 	test between 3 nodes with candidates&offer
@@ -7,12 +12,11 @@ simple P2P
 	actually transfer data
 	handle P2P in browsers that don't support it!
 	autodetect event from LAN
-move bup under CourtSpot to / instead of /html
-	make sure to adapt fallback path
--webkit-appearance: none (nur für Safari)
-safari: TextDecoder
-btde: do not redo network buttons if nothing changed
+network: do not redo network buttons if nothing changed
+make error msg a form submission
+	fall back to email?
 
+check battery?
 &print for scoresheet / event scoresheet / eventsheet
 event scoresheet should show current state if known (associate mstate, survive event reloads)
 demo event (with eventsheet & current state)

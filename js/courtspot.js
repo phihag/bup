@@ -123,10 +123,10 @@ function list_matches(s, cb) {
 /* Paramter (unused:) s */
 function ui_init() {
 	if (!baseurl) {
-		baseurl = '../../';
+		baseurl = '../';
 	}
 
-	var m = window.location.pathname.match(/^(.*\/)html\/bup(?:\/(?:bup\.html)?)?$/);
+	var m = window.location.pathname.match(/^(.*\/)bup(?:\/(?:bup\.html)?)?$/);
 	if (m) {
 		baseurl = m[1];
 	}
