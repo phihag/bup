@@ -18,8 +18,8 @@ function ui_init() {
 		return;
 	}
 
-	$('.appcache_update_button').on('click', update_now);
-	$('.appcache_later_button').on('click', function() {
+	utils.on_click_qs('.appcache_update_button', update_now);
+	utils.on_click_qs('.appcache_later_button', function() {
 		$('.appcache_update_ingame').hide();
 	});
 

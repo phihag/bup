@@ -1,5 +1,9 @@
-install teamviewer
+mobile safari: prevent double clicks
+mobile safari: editmode has no buttons
+settings looks wrong on android
 safari: very very slow presses
+	remove \.on\('click'
+install teamviewer
 safari: align feld1
 safari: shuttle counter looks stupid
 safari: TextDecoder
@@ -21,6 +25,8 @@ network: do not redo network buttons if nothing changed
 include compressed presses in error report
 make error msg a form submission
 	fall back to email?
+progress line diagram in stats
+problem report: include
 
 check battery? (send via P2P)
 &print for scoresheet / event scoresheet / eventsheet
@@ -205,6 +211,7 @@ scoresheet: deal and notify failures of loading SVG
 unify scoresheet and eventsheet downloading
 display mode: until match start show preview (Refrath gegen ...)
 demo event
+support badminton umpire scorekeeper?
 allow challenges
 	failsafe (http://www.badmintoncentral.com/forums/showthread.php/160170-sub-standard-umpire-gave-a-free-point-to-Okuhara-in-first-set?p=2413636#post2413636)
 -> Demo Jörg H, Manuel, Susanne, Werner Durow

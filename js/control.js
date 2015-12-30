@@ -172,102 +172,102 @@ function block_score_buttons() {
 }
 
 function init_buttons() {
-	$('#pick_side_team1').on('click', function() {
+	utils.on_click_qs('#pick_side_team1', function() {
 		on_press({
 			type: 'pick_side',
 			team1_left: true,
 		});
 	});
-	$('#pick_side_team2').on('click', function() {
+	utils.on_click_qs('#pick_side_team2', function() {
 		on_press({
 			type: 'pick_side',
 			team1_left: false,
 		});
 	});
-	$('#love-all').on('click', function() {
+	utils.on_click_qs('#love-all', function() {
 		on_press({
 			type: 'love-all',
 		});
 	});
-	$('#postgame-confirm').on('click', function() {
+	utils.on_click_qs('#postgame-confirm', function() {
 		on_press({
 			type: 'postgame-confirm',
 		});
 	});
-	$('#postmatch-confirm').on('click', function() {
+	utils.on_click_qs('#postmatch-confirm', function() {
 		on_press({
 			type: 'postmatch-confirm',
 		});
 	});
-	$('#left_score').on('click', function() {
+	utils.on_click_qs('#left_score', function() {
 		block_score_buttons();
 		on_press({
 			type: 'score',
 			side: 'left',
 		});
 	});
-	$('#right_score').on('click', function() {
+	utils.on_click_qs('#right_score', function() {
 		block_score_buttons();
 		on_press({
 			type: 'score',
 			side: 'right',
 		});
 	});
-	$('#button_undo').on('click', function() {
+	utils.on_click_qs('#button_undo', function() {
 		on_press({
 			type: 'undo',
 		});
 	});
-	$('#button_redo').on('click', function() {
+	utils.on_click_qs('#button_redo', function() {
 		on_press({
 			type: 'redo',
 		});
 	});
 
-	$('#button_settings').on('click', function() {
+	utils.on_click_qs('#button_settings', function() {
 		settings.show();
 	});
-	$('#button_exception').on('click', function() {
+	utils.on_click_qs('#button_exception', function() {
 		ui_show_exception_dialog();
 	});
-	$('.exception_dialog>.cancel-button').on('click', function() {
+	utils.on_click_qs('.exception_dialog>.cancel-button', function() {
 		hide_exception_dialog();
 	});
-	$('#exception_referee').on('click', function() {
+	utils.on_click_qs('#exception_referee', function() {
 		on_press({
 			type: 'referee',
 		});
 		hide_exception_dialog();
 	});
-	$('#exception_suspension').on('click', function() {
+	utils.on_click_qs('#exception_suspension', function() {
 		on_press({
 			type: 'suspension',
 		});
 		hide_exception_dialog();
 	});
-	$('#exception_correction').on('click', function() {
+	utils.on_click_qs('#exception_correction', function() {
 		hide_exception_dialog();
 		uiu.make_team_pick(
 			state, state._('exceptions:dialog:correction'), 'correction', ui_show_exception_dialog
 		);
 	});
-	$('#exception_overrule').on('click', function() {
+	utils.on_click_qs('#exception_overrule', function() {
 		on_press({
 			'type': 'overrule',
 		});
 		hide_exception_dialog();
 	});
-	$('#button_shuttle').on('click', function() {
+	utils.on_click_qs('#button_shuttle', function() {
 		on_press({
 			'type': 'shuttle',
 		});
 	});
-	$('#suspension-resume').on('click', function() {
+	utils.on_click_qs('#suspension-resume', function() {
 		on_press({
 			'type': 'resume',
 		});
 	});
-	$('#exception_yellow').on('click', function() {
+	utils.on_click_qs('#exception_yellow', function() {
 		hide_exception_dialog();
 		uiu.make_player_pick(
 			state, state._('exceptions:dialog:yellow-card'), 'yellow-card', ui_show_exception_dialog,
@@ -279,19 +279,19 @@ function init_buttons() {
 			}
 		);
 	});
-	$('#exception_red').on('click', function() {
+	utils.on_click_qs('#exception_red', function() {
 		hide_exception_dialog();
 		uiu.make_player_pick(state, state._('exceptions:dialog:red-card'), 'red-card', ui_show_exception_dialog);
 	});
-	$('#exception_injury').on('click', function() {
+	utils.on_click_qs('#exception_injury', function() {
 		hide_exception_dialog();
 		uiu.make_player_pick(state, state._('exceptions:dialog:injury'), 'injury', ui_show_exception_dialog);
 	});
-	$('#exception_retired').on('click', function() {
+	utils.on_click_qs('#exception_retired', function() {
 		hide_exception_dialog();
 		uiu.make_player_pick(state, state._('exceptions:dialog:retired'), 'retired', ui_show_exception_dialog);
 	});
-	$('#exception_black').on('click', function() {
+	utils.on_click_qs('#exception_black', function() {
 		hide_exception_dialog();
 		uiu.make_player_pick(state, state._('exceptions:dialog:black-card'), 'disqualified', ui_show_exception_dialog);
 	});
