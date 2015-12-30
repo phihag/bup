@@ -40,14 +40,21 @@ function signalling_connect() {
 	signalling_sock = new WebSocket(signalling_wsurl, 'bup-p2p-signalling');
 	signalling_sock.onmessage = function(e) {
 		var msg = JSON.parse(e.data);
-		console.log('got message: ', msg);
 		switch (msg.type) {
 		case 'peer-available':
 			connect_to(msg.node_id);
 			break;
 		case 'connection-request':
-			handle_connection_request(msg.from_node, msg.candidate);
+			handle_connection_request(msg.from_node, msg.desc);
 			break;
+		case 'connection-response':
+			handle_connection_response(msg.from_node, msg.desc);
+			break;
+		case 'ice-candidate':
+			handle_ice_candidate(msg.from_node, msg.candidate);
+			break;
+		default:
+			console.error('unhandled message', msg);
 		// TODO display 'error' messages
 		}
 	};
@@ -97,14 +104,15 @@ function connect_to(node_id) {
 	}
 
 	var pc = new RTCPeerConnection(servers, media_constraints);
+	connections[node_id] = pc;
 	var channel = pc.createDataChannel('bup-p2p', {
 		ordered: true,
 		reliable: true,
 	});
 	channel.onopen = function() {
-		console.log('cannel opened', arguments);
+		console.log('channel opened', arguments);
 	};
-	channel.onopen = function() {
+	channel.onclose = function() {
 		console.log('cannel closed', arguments);
 	};
 	pc.onicecandidate = function(e) {
@@ -133,8 +141,56 @@ function connect_to(node_id) {
 	});
 }
 
-function handle_connection_request(node_id) {
+function handle_connection_request(node_id, desc) {
+	var pc = new RTCPeerConnection(servers, media_constraints);
+	connections[node_id] = pc;
+	pc.onicecandidate = function(e) {
+		if (!e.candidate) {
+			return;
+		}
+		signalling_send({
+			type: 'ice-candidate',
+			to_node: node_id,
+			candidate: e.candidate,
+		});
+	};
+	pc.ondatachannel = function() {
+		console.log('receiver: data channel opened!');
+	};
+	pc.setRemoteDescription(desc);
+	pc.createAnswer(function(local_desc) {
+		pc.setLocalDescription(local_desc);
+		signalling_send({
+			type: 'connection-response',
+			to_node: node_id,
+			desc: local_desc,
+		});
+	}, function(err) {
+		console.error('answer creation failed');
+	});
+}
 
+function handle_connection_response(node_id, desc) {
+	var conn = connections[node_id];
+	if (!conn) {
+		console.error('cannot deal with response!');
+		return;
+	}
+	conn.setRemoteDescription(desc);
+}
+
+function handle_ice_candidate(node_id, candidate) {
+	var pc = connections[node_id];
+	if (!pc) {
+		console.error('cannot deal with ice!');
+		return;
+	}
+	pc.addIceCandidate(candidate, function() {
+		// Successfully added ICE candidate.
+		// We're fine with that.
+	}, function(err) {
+		console.error('could not add ice candidate', err);
+	});
 }
 
 function init() {

@@ -115,6 +115,7 @@ function handle(ws) {
 			}
 			break;
 		case 'connection-request':
+		case 'connection-response':
 		case 'ice-candidate':
 			// Just relay these messages
 			if (typeof msg.to_node != 'string') {
