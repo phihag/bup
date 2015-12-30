@@ -8,11 +8,11 @@ var reported_count = 0;
 
 function get_info() {
 	return {
-		_type: 'bup-error',
 		ua: window.navigator.userAgent,
 		url: window.location.href,
 		bup_version: bup_version,
 		size: document.documentElement.clientWidth + 'x' + document.documentElement.clientHeight,
+		screen: window.screen.width + 'x' + window.screen.height,
 		last_error: last_error,
 		reported_count: reported_count,
 	};
@@ -32,6 +32,7 @@ function report(info_obj) {
 		return;
 	}
 
+	info_obj._type = 'bup-error';
 	var json_report = JSON.stringify(info_obj);
 
 	var xhr = new XMLHttpRequest();

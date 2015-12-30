@@ -1,10 +1,12 @@
+buttons missing icons
 install teamviewer
--webkit-appearance: none (nur für Safari)
 show errors in Safari?
+safari: shuttle counter looks stupid
 safari: TextDecoder
 safari hide URL bar
-icon for front page
-
+safari: icon for front page
+safari: set a better bookmark name
+unify cache
 
 simple P2P
 	fix connection / answer
@@ -16,6 +18,7 @@ simple P2P
 	handle P2P in browsers that don't support it!
 	autodetect event from LAN
 network: do not redo network buttons if nothing changed
+include compressed presses in error report
 make error msg a form submission
 	fall back to email?
 

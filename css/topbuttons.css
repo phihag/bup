@@ -54,7 +54,7 @@
 	.topright_buttons>*:not(:first-child) {
 		margin-left: 10px;
 		margin-left: 3vmin;
-	}*
+	}
 }
 @media screen and (min-aspect-ratio: 15/10) {
 	.topleft_buttons>*, .topright_buttons>*, #button_redo {
