@@ -104,7 +104,11 @@ function connect_to(node_id) {
 	}
 
 	var pc = new RTCPeerConnection(servers, media_constraints);
-	connections[node_id] = pc;
+	var info = {
+		node_id: node_id,
+		pc: pc,
+	};
+	connections[node_id] = info;
 	var channel = pc.createDataChannel('bup-p2p', {
 		ordered: true,
 		reliable: true,
@@ -114,6 +118,9 @@ function connect_to(node_id) {
 	};
 	channel.onclose = function() {
 		console.log('cannel closed', arguments);
+	};
+	channel.onmessage = function() {
+		console.log('cannel got message', arguments);
 	};
 	pc.onicecandidate = function(e) {
 		if (!e.candidate) {
@@ -143,7 +150,12 @@ function connect_to(node_id) {
 
 function handle_connection_request(node_id, desc) {
 	var pc = new RTCPeerConnection(servers, media_constraints);
-	connections[node_id] = pc;
+	var info = {
+		node_id: node_id,
+		pc: pc,
+	};
+	connections[node_id] = info;
+
 	pc.onicecandidate = function(e) {
 		if (!e.candidate) {
 			return;
@@ -154,8 +166,18 @@ function handle_connection_request(node_id, desc) {
 			candidate: e.candidate,
 		});
 	};
-	pc.ondatachannel = function() {
-		console.log('receiver: data channel opened!');
+	pc.ondatachannel = function(e) {
+		var channel = e.channel;
+		info.channel = channel;
+		channel.onmessage = function() {
+			console.log('receiver got', arguments);
+		};
+		channel.onopen = function() {
+			send_update(info);
+		};
+		channel.onclose = function() {
+			console.log('receiver cannel closed', arguments);
+		};
 	};
 	pc.setRemoteDescription(desc);
 	pc.createAnswer(function(local_desc) {
@@ -176,21 +198,26 @@ function handle_connection_response(node_id, desc) {
 		console.error('cannot deal with response!');
 		return;
 	}
-	conn.setRemoteDescription(desc);
+	conn.pc.setRemoteDescription(desc);
 }
 
 function handle_ice_candidate(node_id, candidate) {
-	var pc = connections[node_id];
-	if (!pc) {
+	var conn = connections[node_id];
+	if (!conn) {
 		console.error('cannot deal with ice!');
 		return;
 	}
-	pc.addIceCandidate(candidate, function() {
+	conn.pc.addIceCandidate(candidate, function() {
 		// Successfully added ICE candidate.
 		// We're fine with that.
 	}, function(err) {
 		console.error('could not add ice candidate', err);
 	});
+}
+
+function send_update(info) {
+	console.log('would send update to', info);
+	// TODO reschedule
 }
 
 function init() {

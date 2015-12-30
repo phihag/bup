@@ -1,6 +1,14 @@
+questions Ulf
+	install CourtSpot (send via email current Menu.html/php files)
+		unification 6|8
+	which tablet is liked better?
+	ipad mini 2 software version
+
 install teamviewer
 -webkit-appearance: none (nur für Safari)
+show errors in Safari?
 safari: TextDecoder
+safari hide scrollbar
 
 
 simple P2P
@@ -16,7 +24,7 @@ network: do not redo network buttons if nothing changed
 make error msg a form submission
 	fall back to email?
 
-check battery?
+check battery? (send via P2P)
 &print for scoresheet / event scoresheet / eventsheet
 event scoresheet should show current state if known (associate mstate, survive event reloads)
 demo event (with eventsheet & current state)
