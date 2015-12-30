@@ -402,7 +402,8 @@ function download(es_key, callback) {
 	var url = URLS[es_key];
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET', url, true);
-	xhr.responseType = 'arraybuffer';
+	var is_binary = true;
+	xhr.responseType = is_binary ? 'arraybuffer' : 'text';
 
 	xhr.onload = function() {
 		var ui8r = new Uint8Array(this.response);

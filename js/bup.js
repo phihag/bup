@@ -16,6 +16,7 @@ function init() {
 }
 
 function ui_init() {
+	compat.ui_init();
 	i18n.ui_init();
 
 	$('.version').text(bup_version);
