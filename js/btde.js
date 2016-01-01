@@ -261,8 +261,6 @@ function ui_init() {
 	if (m) {
 		baseurl = m[1];
 	}
-
-	$('.setup_network_container').show();
 }
 
 
