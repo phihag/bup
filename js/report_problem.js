@@ -11,6 +11,10 @@ function get_info() {
 		ua: window.navigator.userAgent,
 		url: window.location.href,
 		bup_version: bup_version,
+		fullscreen: {
+			supported: fullscreen.supported(),
+			active: fullscreen.active(),
+		},
 		size: document.documentElement.clientWidth + 'x' + document.documentElement.clientHeight,
 		screen: window.screen.width + 'x' + window.screen.height,
 		settings: state.settings,
@@ -104,6 +108,8 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var fullscreen = require('./fullscreen');
+
 	module.exports = report_problem;
 }
 /*/@DEV*/

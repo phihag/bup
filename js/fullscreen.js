@@ -2,7 +2,7 @@ var fullscreen = (function() {
 'use strict';
 
 function supported() {
-	return (
+	return !!(
 		document.fullscreenEnabled ||
 		document.webkitFullscreenEnabled ||
 		document.mozFullScreenEnabled ||
@@ -11,7 +11,7 @@ function supported() {
 }
 
 function active() {
-	return (
+	return !!(
 		document.fullscreenElement ||
 		document.webkitFullscreenElement ||
 		document.mozFullScreenElement ||
@@ -102,6 +102,8 @@ function autostart() {
 return {
 	autostart: autostart,
 	ui_init: ui_init,
+	supported: supported,
+	active: active,
 };
 
 })();

@@ -1,7 +1,8 @@
+settings: completely hide fullscreen line if not available
+menu: remove horizontal scroll bar
+
 clicking on current match when match is in progress shouldn't do anything
 highlight current match button
-settings: completely hide fullscreen line if not available
-add fullscreen supported into debug info
 fix Schiedsrichterzettel
 save presses in CourtSpot
 	convert table during runtime if insertion fails
