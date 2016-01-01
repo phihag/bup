@@ -1,16 +1,6 @@
 function btde(baseurl) {
 'use strict';
 
-var ALL_COURTS = [{
-	label: '1 (links)',
-	court_id: '1',
-	court_description: 'links',
-}, {
-	label: '2 (rechts)',
-	court_id: '2',
-	court_description: 'rechts',
-}];
-
 function ui_render_login(container) {
 	var login_form = $('<form class="settings_login">');
 	login_form.append($('<h2>Login badmintonticker</h2>'));
@@ -253,7 +243,17 @@ function list_matches(s, cb) {
 	});
 }
 
-function ui_init(s, hash_query) {
+function courts(s) {
+	return [{
+		id: '1',
+		description: s._('left'),
+	}, {
+		id: '2',
+		description: s._('right'),
+	}];
+}
+
+function ui_init(s) {
 	if (!baseurl) {
 		baseurl = '../';
 	}
@@ -263,18 +263,6 @@ function ui_init(s, hash_query) {
 	}
 
 	$('.setup_network_container').show();
-
-	var configured = (hash_query.select_court === undefined) && ALL_COURTS.some(function(c) {
-		return s.settings.court_id == c.court_id && s.settings.court_description == c.court_description;
-	});
-	if (! configured) {
-		uiu.make_pick(null, 'Feld auswählen', ALL_COURTS, function(c) {
-			s.settings.court_id = c.court_id;
-			s.settings.court_description = c.court_description;
-			settings.store(s);
-			settings.update();
-		}, false, $('body'));
-	}
 }
 
 
@@ -284,6 +272,7 @@ return {
 	send_press: send_press,
 	list_matches: list_matches,
 	sync: sync,
+	courts: courts,
 	// Testing only
 	_parse_match_list: _parse_match_list,
 };

@@ -18,6 +18,16 @@ function _request(s, options, cb) {
 	});
 }
 
+function courts(s) {
+	return [{
+		id: '1',
+		description: s._('left'),
+	}, {
+		id: '2',
+		description: s._('right'),
+	}];
+}
+
 function prepare_match(current_settings, match) {
 	if (typeof match.courtspot.heim_oben == 'boolean') {
 		match.network_team1_left = match.courtspot.heim_oben == (current_settings.court_id == 1);
@@ -140,6 +150,7 @@ return {
 	send_press: send_press,
 	sync: sync,
 	prepare_match: prepare_match,
+	courts: courts,
 };
 
 }

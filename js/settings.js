@@ -116,20 +116,6 @@ function update() {
 	render.shuttle_counter(state);
 }
 
-function report_problem_init() {
-	var report_problem_body = (state._('report:body').
-		replace('{ua}', window.navigator.userAgent).
-		replace('{url}', window.location.href).
-		replace('{size}', document.documentElement.clientWidth + 'x' + document.documentElement.clientHeight));
-	var report_problem_link = (
-		'mailto:phihag@phihag.de?' +
-		'subject=' + encodeURIComponent(state._('report:subject')) +
-		'&body=' + encodeURIComponent(report_problem_body)
-	);
-	$('.settings_report_problem').attr('href', report_problem_link);
-}
-
-
 function ui_init() {
 	$('#setup_manual_form [name="gametype"]').on('change', function() {
 		var new_type = $('#setup_manual_form [name="gametype"]:checked').val();
@@ -210,7 +196,6 @@ return {
 	show: show,
 	hide: hide,
 	ui_init: ui_init,
-	report_problem_init: report_problem_init,
 };
 
 })();

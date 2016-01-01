@@ -5,6 +5,17 @@ function get_netw() {
 	return networks.btde || networks.courtspot;
 }
 
+// Returns a list of {id, description} or null (if no restrictions).
+// State s is for i18n
+function courts(s) {
+	var netw = get_netw();
+	if (! netw) {
+		return null;
+	}
+
+	return netw.courts(s);
+}
+
 function calc_score(s, always_zero) {
 	function _finish_score(score, team1_won) {
 		var winner = team1_won ? 0 : 1;
@@ -384,8 +395,29 @@ function errstate(component, err) {
 	}
 }
 
-function ui_init() {
+function ui_init(s, hash_query) {
 	utils.on_click_qs('.network_desync_image', resync);
+
+	var all_courts = courts(s);
+	if (all_courts === null) {
+		return;
+	}
+	var configured = (hash_query.select_court === undefined) && all_courts.some(function(c) {
+		return s.settings.court_id == c.id && s.settings.court_description == c.description;
+	});
+	if (! configured) {
+		all_courts.forEach(function(c) {
+			if (!c.label) {
+				c.label = c.id + ' (' + c.description + ')';
+			}
+		});
+		uiu.make_pick(null, s._('Select Court'), all_courts, function(c) {
+			s.settings.court_id = c.id;
+			s.settings.court_description = c.description;
+			settings.store(s);
+			settings.update();
+		}, false, $('body'));
+	}
 }
 
 function match_by_id(id) {
@@ -411,6 +443,7 @@ return {
 	match_by_id: match_by_id,
 	enter_match: enter_match,
 	list_matches: list_matches,
+	courts: courts,
 };
 
 

@@ -3,8 +3,11 @@ var i18n_de = {
 '_code': 'de',
 '_name': 'Deutsch',
 
+'left': 'links',
+'right': 'rechts',
 'Automatic': 'Automatisch',
 'Court': 'Feld',
+'Select Court': 'Feld auswählen',
 'Score Sheet': 'Schiedsrichterzettel',
 'Statistics': 'Spiel-Statistiken',
 'dialog-left': 'Spieler auf der linken Seite',
@@ -122,7 +125,7 @@ var i18n_de = {
 'settings:loadmatch_none': 'Keine gespeicherten Spiele vorhanden!',
 
 'settings:Settings': 'Einstellungen',
-'settings:Court Description': 'Feld',
+'settings:Court Description': 'Feld:',
 'settings:Court Description.placeholder': 'z.B. rechts',
 'settings:Court Number': 'Nummer',
 'settings:Umpire': 'Schiedsrichter',

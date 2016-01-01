@@ -28,7 +28,6 @@ function ui_init() {
 	report_problem.ui_init();
 	editmode.ui_init();
 	scoresheet.ui_init();
-	network.ui_init();
 	timer.ui_init();
 	control.ui_init();
 	startmatch.ui_init();
@@ -60,9 +59,10 @@ function ui_init() {
 		networks.courtspot.ui_init(state);
 	} else if (hash_query.btde !== undefined) {
 		networks.btde = btde();
-		networks.btde.ui_init(state, hash_query);
+		networks.btde.ui_init(state);
 	}
 
+	network.ui_init(state, hash_query);
 	buphistory.ui_init();
 	buphistory.kickoff();
 

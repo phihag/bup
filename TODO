@@ -1,9 +1,11 @@
-mobile safari: prevent double clicks
+CourtSpot: Einstellung Feld verbergen
+button sizes on Mac OSX Chrome
+
+fix Schiedsrichterzettel
+
 mobile safari: editmode has no buttons
-settings looks wrong on android
 safari: very very slow presses
-	remove \.on\('click'
-install teamviewer
+	http://build.origami.ft.com/bundles/js?modules=fastclick
 safari: align feld1
 safari: shuttle counter looks stupid
 safari: TextDecoder
@@ -11,7 +13,6 @@ safari hide URL bar
 safari: icon for front page
 safari: set a better bookmark name
 unify cache
-
 simple P2P
 	fix connection / answer
 	test between 3 nodes with candidates&offer
@@ -26,9 +27,13 @@ include compressed presses in error report
 make error msg a form submission
 	fall back to email?
 progress line diagram in stats
-problem report: include
-
+	Treppchen-Auswertung mit Länge
+problem report: include umpire name if set
+option to hide restart timer button (default set)
+fix with samsung browser
+	top buttons are all over the place
 check battery? (send via P2P)
+
 &print for scoresheet / event scoresheet / eventsheet
 event scoresheet should show current state if known (associate mstate, survive event reloads)
 demo event (with eventsheet & current state)
@@ -214,5 +219,6 @@ demo event
 support badminton umpire scorekeeper?
 allow challenges
 	failsafe (http://www.badmintoncentral.com/forums/showthread.php/160170-sub-standard-umpire-gave-a-free-point-to-Okuhara-in-first-set?p=2413636#post2413636)
+CourtSpot: Spielreihenfolge festlegen
 -> Demo Jörg H, Manuel, Susanne, Werner Durow
 

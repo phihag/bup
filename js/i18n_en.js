@@ -3,8 +3,11 @@ var i18n_en = {
 '_code': 'en',
 '_name': 'English',
 
+'left': 'left',
+'right': 'right',
 'Automatic': 'Automatic',
 'Court': 'Court',
+'Select Court': 'Select Court',
 'Score Sheet': 'Score Sheet',
 'Statistics': 'Statistiken',
 'dialog-left': 'Left court side',
@@ -120,7 +123,7 @@ var i18n_en = {
 'settings:loadmatch_none': 'No stored matches',
 
 'settings:Settings': 'Settings',
-'settings:Court Description': 'Court',
+'settings:Court Description': 'Court:',
 'settings:Court Description.placeholder': 'e.g. right',
 'settings:Court Number': 'Number',
 'settings:Umpire': 'Umpire',
