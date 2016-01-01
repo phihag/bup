@@ -426,10 +426,10 @@ function _court_by_id(all_courts, court_id) {
 	return null;
 }
 
-function _court_pick_dialog(s, all_courts) {
-	uiu.make_pick(null, s._('Select Court'), all_courts, function(c) {
+function _court_pick_dialog(s, all_courts, on_cancel) {
+	uiu.make_pick(s, s._('Select Court'), all_courts, function(c) {
 		_set_court(s, c);
-	}, false, $('body'));
+	}, on_cancel, $('body'));
 }
 
 function ui_init_court(s, hash_query) {
@@ -449,8 +449,10 @@ function ui_init_court(s, hash_query) {
 		return s.settings.court_id == c.id && s.settings.court_description == c.description;
 	});
 	if (! configured) {
-		s.settings.court_id = undefined; // Prevent updates while we select a court
-		_court_pick_dialog(s, all_courts);
+		// Prevent updates while we select a court
+		s.settings.court_id = undefined;
+		s.settings.court_description = '';
+		_court_pick_dialog(s, all_courts, false);
 	}
 
 	// Configure court select
@@ -473,6 +475,12 @@ function ui_init_court(s, hash_query) {
 	manual.hide();
 	var automatic = $('.settings_court_automatic');
 	automatic.show();
+
+	utils.on_click_qs('#court_court_str', function() {
+		_court_pick_dialog(s, all_courts, function() {
+			// On abort change nothing
+		});
+	});
 }
 
 function ui_init(s, hash_query) {

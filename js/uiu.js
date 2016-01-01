@@ -31,7 +31,7 @@ function make_pick(s, label, values, on_pick, on_cancel, container) {
 		uiu.esc_stack_pop();
 		dlg_wrapper.remove();
 	};
-	if (s) {
+	if (s && on_cancel) {
 		control.install_destructor(s, kill_dialog);
 	}
 	var cancel = function() {
