@@ -13,7 +13,6 @@ var i18n_en = {
 'dialog-left': 'Left court side',
 'dialog-server': 'Server',
 'dialog-receiver': 'Receiver',
-'fullscreen:unsupported': 'Fullscreen mode is not supported by your web browser',
 'fullscreen:go': 'Go fullscreen',
 'fullscreen:no': 'Normal screen',
 'timer:restart': 'Restart timer',

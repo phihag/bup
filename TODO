@@ -1,4 +1,3 @@
-settings: completely hide fullscreen line if not available
 menu: remove horizontal scroll bar
 
 clicking on current match when match is in progress shouldn't do anything

@@ -13,7 +13,6 @@ var i18n_de = {
 'dialog-left': 'Spieler auf der linken Seite',
 'dialog-server': 'Aufschläger',
 'dialog-receiver': 'Rückschläger',
-'fullscreen:unsupported': 'Vollbildmodus wird von diesem Browser nicht unterstützt',
 'fullscreen:go': 'Vollbildmodus',
 'fullscreen:no': 'Normalbildmodus',
 'timer:restart': 'Stoppuhr neu starten',

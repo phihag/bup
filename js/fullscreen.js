@@ -63,12 +63,9 @@ function ui_init() {
 	});
 
 	if (! supported()) {
-		$('.fullscreen_button').attr({
-			disabled: 'disabled',
-			title: state._('fullscreen:unsupported'),
-		});
+		$('.fullscreen_line').hide();
 	}
-	$('.fullscreen_button').on('click', function() {
+	utils.on_click_qs('.fullscreen_button', function() {
 		toggle();
 	});
 }
