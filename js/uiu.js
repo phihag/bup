@@ -179,6 +179,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
+	var pronounciation = require('./pronounciation');
 
 	module.exports = uiu;
 }

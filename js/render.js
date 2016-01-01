@@ -402,6 +402,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var pronounciation = require('./pronounciation');
 	var timer = require('./timer');
 	var uiu = require('./uiu');
+	var utils = require('./utils');
 
 	module.exports = render;
 }

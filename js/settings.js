@@ -51,7 +51,7 @@ function show() {
 	stats.hide();
 
 	$('#settings_wrapper').show();
-	if (networks.courtspot || networks.btde) {
+	if (network.is_enabled()) {
 		$('.setup_network_container').show();
 		$('.setup_show_manual').show();
 		$('#setup_manual_form').hide();
@@ -85,38 +85,45 @@ function hide(force) {
 	uiu.esc_stack_pop();
 }
 
+function update_court(s) {
+	var court_select = $('.settings [name="court_select"]');
+	court_select.val(s.settings.court_id);
+}
+
 var _settings_checkboxes = ['save_finished_matches', 'go_fullscreen', 'show_pronounciation', 'negative_timers', 'shuttle_counter'];
 var _settings_textfields = ['umpire_name', 'service_judge_name', 'court_id', 'court_description'];
 var _settings_numberfields = ['network_timeout', 'network_update_interval', 'button_block_timeout'];
 var _settings_selects = ['language'];
 
-function update() {
+function update(s) {
 	_settings_checkboxes.forEach(function(name) {
 		var box = $('.settings [name="' + name + '"]');
-		box.prop('checked', state.settings[name]);
+		box.prop('checked', s.settings[name]);
 	});
 
 	_settings_textfields.forEach(function(name) {
 		var input = $('.settings [name="' + name + '"]');
-		input.val(state.settings[name] ? state.settings[name] : '');
+		input.val(s.settings[name] ? s.settings[name] : '');
 	});
 
 	_settings_numberfields.forEach(function(name) {
 		var input = $('.settings [name="' + name + '"]');
-		input.val(state.settings[name] ? state.settings[name] : '');
+		input.val(s.settings[name] ? s.settings[name] : '');
 	});
 
 	_settings_selects.forEach(function(name) {
 		var select = $('.settings [name="' + name + '"]');
-		select.val(state.settings[name]);
+		select.val(s.settings[name]);
 	});
 
-	i18n.ui_update_state(state);
-	render.ui_court_str(state);
-	render.shuttle_counter(state);
+	update_court(s);
+
+	i18n.ui_update_state(s);
+	render.ui_court_str(s);
+	render.shuttle_counter(s);
 }
 
-function ui_init() {
+function ui_init(s) {
 	$('#setup_manual_form [name="gametype"]').on('change', function() {
 		var new_type = $('#setup_manual_form [name="gametype"]:checked').val();
 		var is_doubles = new_type == 'doubles';
@@ -124,53 +131,54 @@ function ui_init() {
 	});
 
 	$('.backtogame_button').on('click', function() {
-		control.set_current(state);
+		control.set_current(s);
 		hide();
 	});
 
 	_settings_checkboxes.forEach(function(name) {
 		var box = $('.settings [name="' + name + '"]');
 		box.on('change', function() {
-			state.settings[name] = box.prop('checked');
-			if ((name === 'show_pronounciation') && (state.initialized)) {
-				render.ui_render(state);
+			s.settings[name] = box.prop('checked');
+			if ((name === 'show_pronounciation') && (s.initialized)) {
+				render.ui_render(s);
 			}
 			if (name === 'shuttle_counter') {
-				render.shuttle_counter(state);
+				render.shuttle_counter(s);
 			}
-			settings.store(state);
+			settings.store(s);
 		});
 	});
 
 	_settings_textfields.forEach(function(name) {
 		var input = $('.settings [name="' + name + '"]');
 		input.on('change input', function(e) {
-			state.settings[name] = input.val();
+			s.settings[name] = input.val();
 			if ((name === 'court_id') || (name === 'court_description')) {
-				render.ui_court_str(state);
+				update_court(s);
+				render.ui_court_str(s);
 				if (e.type == 'change') {
 					network.resync();
 				}
 			}
-			settings.store(state);
+			settings.store(s);
 		});
 	});
 
 	_settings_numberfields.forEach(function(name) {
 		var input = $('.settings [name="' + name + '"]');
 		input.on('change input', function() {
-			state.settings[name] = parseInt(input.val(), 10);
-			settings.store(state);
+			s.settings[name] = parseInt(input.val(), 10);
+			settings.store(s);
 		});
 	});
 
 	_settings_selects.forEach(function(name) {
 		var select = $('.settings [name="' + name + '"]');
 		select.on('change', function() {
-			state.settings[name] = select.val();
-			settings.store(state);
+			s.settings[name] = select.val();
+			settings.store(s);
 			if (name == 'language') {
-				i18n.ui_update_state(state);
+				i18n.ui_update_state(s);
 			}
 		});
 	});
@@ -186,7 +194,7 @@ function ui_init() {
 
 	fullscreen.ui_init();
 
-	update();
+	update(s);
 }
 
 return {
@@ -202,13 +210,15 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
-	var fullscreen = require('./fullscreen');
-	var render = require('./render');
-	var uiu = require('./uiu');
-	var match_storage = require('./match_storage');
-	var i18n = require('./i18n');
-	var stats = require('./stats');
 	var control = require('./control');
+	var fullscreen = require('./fullscreen');
+	var i18n = require('./i18n');
+	var match_storage = require('./match_storage');
+	var network = require('./network');
+	var render = require('./render');
+	var scoresheet = require('./scoresheet');
+	var stats = require('./stats');
+	var uiu = require('./uiu');
 
 	module.exports = settings;
 }

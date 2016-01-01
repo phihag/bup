@@ -399,16 +399,19 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var buphistory = require('./buphistory');
+	var calc = require('./calc');
+	var editmode = require('./editmode');
 	var i18n = require('./i18n');
-	var uiu = require('./uiu');
+	var match_storage = require('./match_storage');
 	var network = require('./network');
 	var render = require('./render');
-	var calc = require('./calc');
-	var match_storage = require('./match_storage');
-	var editmode = require('./editmode');
-	var timer = require('./timer');
-	var buphistory = require('./buphistory');
+	var scoresheet = require('./scoresheet');
+	var settings = require('./settings');
 	var stats = require('./stats');
+	var timer = require('./timer');
+	var uiu = require('./uiu');
+	var utils = require('./utils');
 
 	module.exports = control;
 }

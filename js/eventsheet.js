@@ -571,9 +571,11 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
-	var utils = require('./utils');
+	var network = require('./network');
 	var render = require('./render');
+	var settings = require('./settings');
 	var svg2pdf = require('./svg2pdf');
+	var utils = require('./utils');
 
 	module.exports = eventsheet;
 }

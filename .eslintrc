@@ -30,19 +30,9 @@
         "pdfform": 1,
         "saveAs": 1,
 
-        " (module names) ": 1,
-        "utils": 1,
-        "btde": 1,
-        "courtspot": 1,
-        "pronounciation": 1,
-        "scoresheet": 1,
-        "network": 1,
-
         " (global variables) ": 1,
         "state": 1,
-        "settings": 1,
-        "networks": 1,
-        "bup_version": 1
+         "bup_version": 1
     },
     "extends": "eslint:recommended"
 }

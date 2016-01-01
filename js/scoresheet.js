@@ -1032,13 +1032,15 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
-	var utils = require('./utils');
 	var control = require('./control');
-	var render = require('./render');
-	var stats = require('./stats');
-	var uiu = require('./uiu');
 	var i18n = require('./i18n');
+	var network = require('./network');
+	var render = require('./render');
+	var settings = require('./settings');
+	var stats = require('./stats');
 	var svg2pdf = require('./svg2pdf');
+	var uiu = require('./uiu');
+	var utils = require('./utils');
 
 	module.exports = scoresheet;
 }

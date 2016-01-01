@@ -1,7 +1,11 @@
-CourtSpot: Einstellung Feld verbergen
-button sizes on Mac OSX Chrome
-
+clicking on current match when match is in progress shouldn't do anything
+highlight current match button
+settings: completely hide fullscreen line if not available
+add fullscreen supported into debug info
 fix Schiedsrichterzettel
+save presses in CourtSpot
+	convert table during runtime if insertion fails
+	extend table
 
 mobile safari: editmode has no buttons
 safari: very very slow presses
@@ -14,25 +18,30 @@ safari: icon for front page
 safari: set a better bookmark name
 unify cache
 simple P2P
+	list connected nodes in settings
+	test for connected nodes
+	send current battery level (if known)
+
 	fix connection / answer
 	test between 3 nodes with candidates&offer
 	check if websocket connected, then send current event registration + ice candidates
 	on event change register for event ID
-	list connected nodes in settings
 	actually transfer data
 	handle P2P in browsers that don't support it!
 	autodetect event from LAN
-network: do not redo network buttons if nothing changed
+network: do not reconstruct network buttons if nothing changed
 include compressed presses in error report
 make error msg a form submission
 	fall back to email?
 progress line diagram in stats
 	Treppchen-Auswertung mit Länge
+	minimum and maximum lenght for each rally
 problem report: include umpire name if set
 option to hide restart timer button (default set)
 fix with samsung browser
 	top buttons are all over the place
 check battery? (send via P2P)
+button sizes on Mac OSX Chrome
 
 &print for scoresheet / event scoresheet / eventsheet
 event scoresheet should show current state if known (associate mstate, survive event reloads)
@@ -216,7 +225,9 @@ scoresheet: deal and notify failures of loading SVG
 unify scoresheet and eventsheet downloading
 display mode: until match start show preview (Refrath gegen ...)
 demo event
-support badminton umpire scorekeeper?
+test badminton umpire scorekeeper? / support its web interface?
+remove all references of state in favor of passing in state
+	simply remove state from lint
 allow challenges
 	failsafe (http://www.badmintoncentral.com/forums/showthread.php/160170-sub-standard-umpire-gave-a-free-point-to-Okuhara-in-first-set?p=2413636#post2413636)
 CourtSpot: Spielreihenfolge festlegen

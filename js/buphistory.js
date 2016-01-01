@@ -155,11 +155,13 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
 	var eventsheet = require('./eventsheet');
+	var match_storage = require('./match_storage');
 	var network = require('./network');
+	var render = require('./render');
+	var scoresheet = require('./scoresheet');
 	var settings = require('./settings');
 	var stats = require('./stats');
-	var render = require('./render');
-	var match_storage = require('./match_storage');
+	var utils = require('./utils');
 
 	module.exports = buphistory;
 }

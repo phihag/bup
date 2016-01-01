@@ -2,7 +2,6 @@ var state = {
 	initialized: false,
 	ui: {},
 };
-var networks = {};
 var bup_version = 'dev';
 
 (function() {
@@ -31,37 +30,15 @@ function ui_init() {
 	timer.ui_init();
 	control.ui_init();
 	startmatch.ui_init();
-	settings.ui_init();
+	settings.ui_init(state);
 	eventsheet.ui_init();
 	stats.ui_init();
 
 	var hash_query = utils.parse_query_string(window.location.hash.substr(1));
 	if (hash_query.lang) {
 		state.settings.language = hash_query.lang;
-		settings.update();
+		settings.update(state);
 	}
-	if (hash_query.court) {
-		// TODO make sure this is only for the current session, only overwrite settings when necessary
-		state.settings.court_id = hash_query.court;
-		if (state.settings.court_id == '1') {
-			state.settings.court_description = 'links';
-		} else if (state.settings.court_id == '2') {
-			state.settings.court_description = 'rechts';
-		}
-		settings.update();
-	}
-	if (hash_query.p2p !== undefined) {
-		networks.p2p = p2p();
-		networks.p2p.ui_init(state);
-	}
-	if (hash_query.courtspot !== undefined) {
-		networks.courtspot = courtspot();
-		networks.courtspot.ui_init(state);
-	} else if (hash_query.btde !== undefined) {
-		networks.btde = btde();
-		networks.btde.ui_init(state);
-	}
-
 	network.ui_init(state, hash_query);
 	buphistory.ui_init();
 	buphistory.kickoff();
@@ -91,6 +68,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var utils = require('./utils');
 	var i18n = require('./i18n');
 	var calc = require('./calc');
+	var compat = require('./compat');
 	var appcache = require('./appcache');
 	var timer = require('./timer');
 	var editmode = require('./editmode');

@@ -253,7 +253,7 @@ function courts(s) {
 	}];
 }
 
-function ui_init(s) {
+function ui_init() {
 	if (!baseurl) {
 		baseurl = '../';
 	}
@@ -282,7 +282,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var utils = require('./utils');
-	var uiu = require('./uiu');
+	var network = require('./network');
 
 	module.exports = btde;
 }

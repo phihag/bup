@@ -13,6 +13,7 @@ function get_info() {
 		bup_version: bup_version,
 		size: document.documentElement.clientWidth + 'x' + document.documentElement.clientHeight,
 		screen: window.screen.width + 'x' + window.screen.height,
+		settings: state.settings,
 		last_error: last_error,
 		reported_count: reported_count,
 	};
@@ -45,6 +46,7 @@ function update() {
 	var report_problem_body = state._('report:body');
 	var info = get_info();
 	info.last_error = (info.last_error ? JSON.stringify(info.last_error) : '-');
+	info.settings = JSON.stringify(info.settings);
 	for (var k in info) {
 		report_problem_body = report_problem_body.replace('{' + k + '}', info[k]);
 	}

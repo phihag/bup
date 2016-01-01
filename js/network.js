@@ -1,8 +1,14 @@
 var network = (function() {
 'use strict';
 
+var networks = {};
+
 function get_netw() {
 	return networks.btde || networks.courtspot;
+}
+
+function is_enabled() {
+	return !!get_netw() || !!networks.p2p;
 }
 
 // Returns a list of {id, description} or null (if no restrictions).
@@ -13,7 +19,15 @@ function courts(s) {
 		return null;
 	}
 
-	return netw.courts(s);
+	var res = netw.courts(s);
+	if (res) {
+		res.forEach(function(c) {
+			if (!c.label) {
+				c.label = c.id + ' (' + c.description + ')';
+			}
+		});
+	}
+	return res;
 }
 
 function calc_score(s, always_zero) {
@@ -395,28 +409,91 @@ function errstate(component, err) {
 	}
 }
 
-function ui_init(s, hash_query) {
-	utils.on_click_qs('.network_desync_image', resync);
+function _set_court(s, c) {
+	s.settings.court_id = c.id;
+	s.settings.court_description = c.description;
+	settings.store(s);
+	settings.update(s);
+}
 
+function _court_by_id(all_courts, court_id) {
+	for (var i = 0;i < all_courts.length;i++) {
+		var c = all_courts[i];
+		if (c.id == court_id) {
+			return c;
+		}
+	}
+	return null;
+}
+
+function _court_pick_dialog(s, all_courts) {
+	uiu.make_pick(null, s._('Select Court'), all_courts, function(c) {
+		_set_court(s, c);
+	}, false, $('body'));
+}
+
+function ui_init_court(s, hash_query) {
+	// Determine avialable courts
 	var all_courts = courts(s);
-	if (all_courts === null) {
+	if (!all_courts) {
 		return;
+	}
+
+	if (hash_query.court) {
+		var c = _court_by_id(all_courts, hash_query.court);
+		if (c) {
+			_set_court(s, c);
+		}
 	}
 	var configured = (hash_query.select_court === undefined) && all_courts.some(function(c) {
 		return s.settings.court_id == c.id && s.settings.court_description == c.description;
 	});
 	if (! configured) {
-		all_courts.forEach(function(c) {
-			if (!c.label) {
-				c.label = c.id + ' (' + c.description + ')';
-			}
-		});
-		uiu.make_pick(null, s._('Select Court'), all_courts, function(c) {
-			s.settings.court_id = c.id;
-			s.settings.court_description = c.description;
-			settings.store(s);
-			settings.update();
-		}, false, $('body'));
+		s.settings.court_id = undefined; // Prevent updates while we select a court
+		_court_pick_dialog(s, all_courts);
+	}
+
+	// Configure court select
+	var manual = $('.settings_court_manual');
+	manual.hide();
+	var automatic = $('.settings_court_automatic');
+	automatic.show();
+	var select = $('.settings select[name="court_select"]');
+	all_courts.forEach(function(c) {
+		var option = $('<option>');
+		option.text(c.label);
+		option.attr('value', c.id);
+		select.append(option);
+	});
+	select.on('change', function() {
+		var c = _court_by_id(all_courts, $(select).val());
+		if (c) {
+			_set_court(s, c);
+			resync();
+		}
+	});
+}
+
+function ui_init(s, hash_query) {
+	utils.on_click_qs('.network_desync_image', resync);
+
+	// Load networking module(s)
+	if (hash_query.p2p !== undefined) {
+		networks.p2p = p2p();
+	}
+	if (hash_query.courtspot !== undefined) {
+		networks.courtspot = courtspot();
+	} else if (hash_query.btde !== undefined) {
+		networks.btde = btde();
+	}
+
+	// Initialize court info
+	ui_init_court(s, hash_query);
+
+	// Initialize networking module
+	var netw = get_netw();
+	if (netw) {
+		netw.ui_init(s);
 	}
 }
 
@@ -444,6 +521,7 @@ return {
 	enter_match: enter_match,
 	list_matches: list_matches,
 	courts: courts,
+	is_enabled: is_enabled,
 };
 
 
@@ -451,13 +529,16 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
-	var utils = require('./utils');
+	var btde = require('./btde');
 	var calc = require('./calc');
-	var uiu = require('./uiu');
 	var control = require('./control');
+	var courtspot = require('./courtspot');
 	var eventsheet = require('./eventsheet');
+	var p2p = require('./p2p');
 	var pronounciation = require('./pronounciation');
 	var settings = require('./settings');
+	var uiu = require('./uiu');
+	var utils = require('./utils');
 
 	module.exports = network;
 }

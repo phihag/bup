@@ -97,6 +97,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
+	var utils = require('./utils');
 
 	module.exports = timer;
 }

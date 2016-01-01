@@ -83,6 +83,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
+	var settings = require('./settings');
 
 	module.exports = startmatch;
 }

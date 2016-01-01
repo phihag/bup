@@ -21,7 +21,7 @@ var i18n_de = {
 'report problem': 'Problem/Anregung melden',
 'report:test': 'Diagnose-Funktion testen',
 'report:subject': 'Problem mit bup',
-'report:body': 'Das Schiedsrichter-Panel hat folgendes Problem:\n\n\n\n\nTechnische Informationen:\nVersion: {bup_version}\nWebbrowser: {ua}\nURL: {url}\nGröße: {size} ({screen})\nLetzer Fehler: {last_error}\n',
+'report:body': 'Das Schiedsrichter-Panel hat folgendes Problem:\n\n\n\n\nTechnische Informationen:\nVersion: {bup_version}\nWebbrowser: {ua}\nURL: {url}\nGröße: {size} ({screen})\nEinstellungen: {settings}\nLetzer Fehler: {last_error}\n',
 
 'network:error': 'Fehler bei der Netzwerk-Übertragung',
 'network:error:unconfigured': 'Keine Netzwerk-Anbindung vorhanden!',
@@ -128,6 +128,7 @@ var i18n_de = {
 'settings:Court Description': 'Feld:',
 'settings:Court Description.placeholder': 'z.B. rechts',
 'settings:Court Number': 'Nummer',
+'settings:Select Court': 'Feld:',
 'settings:Umpire': 'Schiedsrichter',
 'settings:Service judge': 'Aufschlagrichter',
 'settings:Language': 'Sprache',
