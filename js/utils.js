@@ -257,8 +257,8 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
-	var report_problem = require('./report_problem');
-
 	module.exports = utils;
+
+	var report_problem = require('./report_problem');
 }
 /*/@DEV*/

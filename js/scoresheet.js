@@ -369,10 +369,6 @@ function _parse_match(state, col_count) {
 				retired_cell.width = 2;
 			}
 			s.scoresheet_game.cells.push(retired_cell);
-			if (s.lang == 'de') {
-				// Why suppressed? See below under disqualified
-				s.scoresheet_game.circle = 'suppressed';
-			}
 			s.scoresheet_game.col_idx++;
 			break;
 		case 'disqualified':
@@ -383,11 +379,6 @@ function _parse_match(state, col_count) {
 				val: 'Disqualifiziert',
 				width: 4,
 			};
-			// Example after German RTTO shows no circle if player is disqualified, so suppress the circle
-			// Internationally, do include a circle (BWF Umpire Training manual January 2015 page 41/42)
-			if (s.lang == 'de') {
-				s.scoresheet_game.circle = 'suppressed';
-			}
 			s.scoresheet_game.cells.push(cell);
 			s.scoresheet_game.col_idx += cell.width;
 			break;

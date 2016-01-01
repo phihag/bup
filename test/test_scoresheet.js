@@ -830,6 +830,13 @@ _describe('scoresheet generation', function() {
 			row: 3,
 			val: 'A',
 		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 5,
+			type: 'circle',
+			score: [1, 0],
+			width: 3,
+		});
 
 		presses = base_presses.slice();
 		presses.push({
@@ -843,6 +850,13 @@ _describe('scoresheet generation', function() {
 			col: 2,
 			row: 0,
 			val: 'A',
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 5,
+			type: 'circle',
+			score: [1, 0],
+			width: 3,
 		});
 	});
 
@@ -885,6 +899,13 @@ _describe('scoresheet generation', function() {
 			val: 'Disqualifiziert',
 			width: 4,
 		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 8,
+			type: 'circle',
+			score: [1, 0],
+			width: 3,
+		});
 
 		presses = base_presses.slice();
 		presses.push({
@@ -900,6 +921,13 @@ _describe('scoresheet generation', function() {
 			type: 'longtext',
 			val: 'Disqualifiziert',
 			width: 4,
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 7,
+			type: 'circle',
+			score: [0, 0],
+			width: 3,
 		});
 	});	
 

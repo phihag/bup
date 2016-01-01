@@ -1,12 +1,9 @@
-menu: remove horizontal scroll bar
-
-clicking on current match when match is in progress shouldn't do anything
-highlight current match button
-fix Schiedsrichterzettel
 save presses in CourtSpot
 	convert table during runtime if insertion fails
 	extend table
 
+clicking on current match when match is in progress shouldn't do anything
+highlight current match button
 mobile safari: editmode has no buttons
 safari: very very slow presses
 	http://build.origami.ft.com/bundles/js?modules=fastclick

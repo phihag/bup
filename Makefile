@@ -54,6 +54,7 @@ dist: cleandist
 		div/Spielberichtsbogen_2BL.pdf \
 		div/Spielbericht_RLW.svg \
 		div/scoresheet_international.svg \
+		div/FAQ.de \
 		--target-directory dist/bup/div/
 
 	$(MAKE) appcache-manifest
