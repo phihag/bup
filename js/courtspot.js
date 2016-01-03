@@ -50,7 +50,7 @@ function sync(s) {
 
 	var data = {
 		'Detail': (serve_is_determined ? 'alles' : 'punkte'),
-		'Satz': netscore.length,
+		'Satz': Math.max(1, netscore.length),
 		'gewonnenHeim': game_score[0],
 		'gewonnenGast': game_score[1],
 		'team_links': (s.game.team1_left ? 'heim' : 'gast'),
@@ -61,6 +61,7 @@ function sync(s) {
 		'court': s.settings.court_id,
 		'art': s.setup.match_name,
 		'verein': (cs_team1 ? 'heim' : 'gast'),
+		'presses_json': JSON.stringify(s.presses),
 	};
 	for (var i = 0;i < s.match.max_games;i++) {
 		data['HeimSatz' + (i+1)] = (i < netscore.length) ? netscore[i][0] : -1;
@@ -77,6 +78,7 @@ function sync(s) {
 			'&art=' + encodeURIComponent(data.art) +
 			'&verein=' + encodeURIComponent(data.verein)
 	);
+	var match_id = s.metadata.id;
 	_request(s, {
 		method: 'POST',
 		data: data,
@@ -85,13 +87,22 @@ function sync(s) {
 	}, function(err, content) {
 		_outstanding_requests--;
 
+		if (s.metadata.id !== match_id) { // Match changed while the request was underway
+			return;
+		}
+
 		if (!err) {
 			try {
 				var res = JSON.parse(content);
-				if (res.status != 'ok') {
+				if (res.status == 'ok') {
+					s.remote.courtspot_step = res.step;
+				} else {
 					err = {
 						msg: 'CourtSpot-Aktualisierung fehlgeschlagen!',
 					};
+					if (res.description) {
+						err.msg += '\nMeldung: ' + res.description;
+					}
 				}
 			} catch (e) {
 				err = {
