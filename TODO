@@ -1,15 +1,5 @@
 answer Ulf
-	match ID of dbStandEintrag (undo should work like in panel)
-		-> get back from dbStandEintrag
-		-> increment if score changed
-		-> reduce on undo
-		-> support resuming match from local (and change score without getting undefined)
-		-> if last outstanding request comes back, make this the value
-
-		-> in courtspot: delete future versions
-	test restarting
-	test resuming
-
+	test resuming from presses
 	set "leer" at end of match (test that UI looks nice)
 	safari fix exception icons
 resume presses from CourtSpot
@@ -57,7 +47,7 @@ check battery? (send via P2P)
 button sizes on Mac OSX Chrome
 do not recreate network buttons, update them instead
 
-send Michael Pütz
+send mail to Michael Pütz, Jens Köster (depend on iPad) 
 
 &print for scoresheet / event scoresheet / eventsheet
 event scoresheet should show current state if known (associate mstate, survive event reloads)
