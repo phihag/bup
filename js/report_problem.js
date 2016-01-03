@@ -33,7 +33,7 @@ function report(info_obj) {
 	}
 
 	reported_count++;
-	if (reported_count > 3) {
+	if (reported_count > 5) {
 		return;
 	}
 
@@ -76,7 +76,7 @@ function on_error(msg, script_url, line, col, err) {
 	report(get_info());
 }
 
-function on_silent_error(msg) {
+function silent_error(msg) {
 	console.error(msg); // eslint-disable-line no-console
 	last_error = {
 		msg: msg,
@@ -101,7 +101,7 @@ return {
 	update: update,
 	ui_init: ui_init,
 	report: report,
-	on_silent_error: on_silent_error,
+	silent_error: silent_error,
 };
 
 })();

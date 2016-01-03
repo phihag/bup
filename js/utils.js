@@ -49,7 +49,7 @@ function on_click(node, callback) {
 function on_click_qs(qs, callback) {
 	var node = document.querySelector(qs);
 	if (! node) {
-		report_problem.on_silent_error('Expected to find qs  ' + qs + ' , but no node matching.');
+		report_problem.silent_error('Expected to find qs  ' + qs + ' , but no node matching.');
 		return;
 	}
 	return on_click(node, callback);
@@ -152,7 +152,7 @@ function visible(node, val) {
 function visible_qs(qs, val) {
 	var node = document.querySelector(qs);
 	if (! node) {
-		report_problem.on_silent_error('Expected to find qs  ' + qs + ' , but no node matching.');
+		report_problem.silent_error('Expected to find qs  ' + qs + ' , but no node matching.');
 		return;
 	}
 	visible(node, val);

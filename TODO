@@ -1,8 +1,6 @@
 answer Ulf
-	test resuming from presses
 	set "leer" at end of match (test that UI looks nice)
 	safari fix exception icons
-resume presses from CourtSpot
 write a small polyfill for textdecoder/textencoder
 	encodeURIComponent
 	publish on GitHub
@@ -11,6 +9,7 @@ safari: very very slow presses
 	http://build.origami.ft.com/bundles/js?modules=fastclick
 record IP in server-side bug reports
 IE bug report
+hide Federbälle stats when shuttle counter is missing
 
 progress line diagram in stats
 	Treppchen-Auswertung mit Länge
@@ -46,6 +45,7 @@ fix with samsung browser
 check battery? (send via P2P)
 button sizes on Mac OSX Chrome
 do not recreate network buttons, update them instead
+show UI when reporting errors (top right, allow email address entering)
 
 send mail to Michael Pütz, Jens Köster (depend on iPad) 
 

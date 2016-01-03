@@ -151,7 +151,8 @@ function calc_stats(s) {
 	var keys = [].concat(
 		['points', 'points_lr'],
 		server_keys,
-		['shuttles', 'duration', 'avg_rally_length', 'longest_rally']
+		(s.settings.shuttle_counter ? ['shuttles'] : []),
+		['duration', 'avg_rally_length', 'longest_rally']
 	);
 
 	return {
