@@ -33,11 +33,12 @@
 	margin: 0 0 1vh 0;
 }
 .network_desync_errmsg {
-	text-align: center;
+	text-align: left;
 	clear: left;
 	color: red;
 	font-weight: bold;
 	padding: 1em 0 0 0;
+	white-space: pre-wrap;
 }
 
 .loading-icon {

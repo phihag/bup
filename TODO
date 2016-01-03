@@ -1,15 +1,35 @@
-save presses in CourtSpot
-	convert table during runtime if insertion fails
-	extend table
+answer Ulf
+	match ID of dbStandEintrag (undo should work like in panel)
+		-> get back from dbStandEintrag
+		-> increment if score changed
+		-> reduce on undo
+		-> support resuming match from local (and change score without getting undefined)
+		-> if last outstanding request comes back, make this the value
 
+		-> in courtspot: delete future versions
+	test restarting
+	test resuming
+
+	set "leer" at end of match (test that UI looks nice)
+	safari fix exception icons
+resume presses from CourtSpot
+write a small polyfill for textdecoder/textencoder
+	encodeURIComponent
+	publish on GitHub
+	stats about encoding.js and encoding-utf8
+safari: very very slow presses
+	http://build.origami.ft.com/bundles/js?modules=fastclick
+record IP in server-side bug reports
+IE bug report
+
+progress line diagram in stats
+	Treppchen-Auswertung mit Länge
+	minimum and maximum width for each rally (say, 5 minutes)
+safari: align feld1
 clicking on current match when match is in progress shouldn't do anything
 highlight current match button
 mobile safari: editmode has no buttons
-safari: very very slow presses
-	http://build.origami.ft.com/bundles/js?modules=fastclick
-safari: align feld1
 safari: shuttle counter looks stupid
-safari: TextDecoder
 safari hide URL bar
 safari: icon for front page
 safari: set a better bookmark name
@@ -30,15 +50,14 @@ network: do not reconstruct network buttons if nothing changed
 include compressed presses in error report
 make error msg a form submission
 	fall back to email?
-progress line diagram in stats
-	Treppchen-Auswertung mit Länge
-	minimum and maximum lenght for each rally
-problem report: include umpire name if set
-option to hide restart timer button (default set)
+option to hide restart timer button
 fix with samsung browser
 	top buttons are all over the place
 check battery? (send via P2P)
 button sizes on Mac OSX Chrome
+do not recreate network buttons, update them instead
+
+send Michael Pütz
 
 &print for scoresheet / event scoresheet / eventsheet
 event scoresheet should show current state if known (associate mstate, survive event reloads)
@@ -80,6 +99,7 @@ improve P2P
 	automatically get the current event from IP
 	encrypt (retrieve signature from event host)
 	write test cases
+	ObjectRTC
 
 
 yourscore.info
@@ -223,6 +243,7 @@ unify scoresheet and eventsheet downloading
 display mode: until match start show preview (Refrath gegen ...)
 demo event
 test badminton umpire scorekeeper? / support its web interface?
+add option no court; prevent transferring (big fat message though!)
 remove all references of state in favor of passing in state
 	simply remove state from lint
 allow challenges
