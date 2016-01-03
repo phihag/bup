@@ -190,8 +190,21 @@ function enter_match(match) {
 	settings.hide(true);
 	control.start_match_dialog(state, match.setup);
 
-	if (match.network_score) {
-		var netscore = match.network_score;
+	if (match.presses_json) {
+		var presses = null;
+		try {
+			presses = JSON.parse(match.presses_json);
+		} catch (e) {
+			report_problem.silent_error('Failed to decode presses_json: ' + e.toString());
+		}
+		if (presses) {
+			control.start_match(state, match.setup, presses);
+			return;
+		}
+	}
+
+	var netscore = match.network_score;
+	if (netscore) {
 		var mwinner = calc.match_winner(netscore);
 
 		var on_cancel = function() {
