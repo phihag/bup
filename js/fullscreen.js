@@ -108,6 +108,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var uiu = require('./uiu');
+	var utils = require('./utils');
 
 	module.exports = fullscreen;
 }

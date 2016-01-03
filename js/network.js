@@ -561,6 +561,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var pronounciation = require('./pronounciation');
 	var settings = require('./settings');
 	var uiu = require('./uiu');
+	var report_problem = require('./report_problem');
 	var utils = require('./utils');
 
 	module.exports = network;
