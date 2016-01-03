@@ -8,6 +8,15 @@ var _it = tutils._it;
 (function() {
 'use strict';
 
+var WITH_COUNTER = {
+	shuttle_counter: true,
+	language: 'de',
+};
+var WITHOUT_COUNTER = {
+	shuttle_counter: false,
+	language: 'de',
+};
+
 _describe('stats', function() {
 	_it('test stats calc', function() {
 		var presses = [{
@@ -40,7 +49,7 @@ _describe('stats', function() {
 			side: 'right',
 			timestamp: 230000,
 		});
-		var s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+		var s = tutils.state_after(presses, tutils.DOUBLES_SETUP, WITH_COUNTER);
 		var st = bup.stats.calc_stats(s).cols;
 		assert.strictEqual(st.length, 1 + 1);
 		assert.strictEqual(st[0].points, '10-1');
@@ -142,12 +151,22 @@ _describe('stats', function() {
 			side: 'left',
 			timestamp: 330000,
 		});
-		s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+		s = tutils.state_after(presses, tutils.DOUBLES_SETUP, WITH_COUNTER);
 		st = bup.stats.calc_stats(s).cols;
 		assert.deepStrictEqual(
 			st[0].serves,
 			[[11, 5], [1, 1]]
 		);
+	});
+
+	_it('enable/disable shuttle stats depending on settings', function() {
+		var s = tutils.state_after([], tutils.DOUBLES_SETUP, WITH_COUNTER);
+		var st = bup.stats.calc_stats(s);
+		assert(st.keys.indexOf('shuttles') >= 0);
+
+		s = tutils.state_after([], tutils.DOUBLES_SETUP, WITHOUT_COUNTER);
+		st = bup.stats.calc_stats(s);
+		assert(st.keys.indexOf('shuttles') == -1);
 	});
 });
 

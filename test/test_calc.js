@@ -1316,6 +1316,7 @@ _describe('calc_state', function() {
 		assert.equal(s.court.player_right_even, null);
 		assert.equal(s.match.finished, true);
 		assert.strictEqual(s.match.team1_won, false);
+		assert.strictEqual(s.match.finish_confirmed, false);
 
 		presses.push({
 			type: 'postmatch-confirm',
@@ -1328,6 +1329,7 @@ _describe('calc_state', function() {
 		assert.equal(s.match.finished_games.length, 3);
 		assert.deepEqual(s.match.game_score, [1, 2]);
 		assert.equal(s.match.finished, true);
+		assert.strictEqual(s.match.finish_confirmed, true);
 	});
 
 	_it('Correct announcements (doubles)', function() {
