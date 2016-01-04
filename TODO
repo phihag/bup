@@ -1,10 +1,10 @@
-include language in report
+mail btde: please update now
+
+Edge fix scoresheet font size
 write a small polyfill for textdecoder/textencoder
 	encodeURIComponent
 	publish on GitHub
 	stats about encoding.js and encoding-utf8
-record IP in server-side bug reports
-IE bug report
 
 progress line diagram in stats
 	Treppchen-Auswertung mit Länge
@@ -13,7 +13,6 @@ clicking on current match when match is in progress shouldn't do anything
 highlight current match button
 mobile safari: editmode has no buttons
 safari: reload button has no icon
-safari hide URL bar
 safari: icon for front page
 safari: set a better bookmark name
 unify cache

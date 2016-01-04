@@ -240,14 +240,28 @@ function disabled_qsa(qs, val) {
 	}
 }
 
+function empty(node) {
+	var last;
+	while ((last = node.lastChild)) {
+		node.removeChild(last);
+	}
+}
+
+function text(node, str) {
+	empty(node);
+	node.appendChild(node.ownerDocument.createTextNode(str));
+}
+
 return {
 	add_zeroes: add_zeroes,
 	any: any,
 	date_str: date_str,
 	datetime_str: datetime_str,
 	deep_equal: deep_equal,
+	disabled_qsa: disabled_qsa,
 	duration_mins: duration_mins,
 	duration_secs: duration_secs,
+	empty: empty,
 	human_date_str: human_date_str,
 	iso8601: iso8601,
 	map_dict: map_dict,
@@ -261,12 +275,12 @@ return {
 	reverse_every: reverse_every,
 	set_class: set_class,
 	sum: sum,
+	text: text,
 	time_str: time_str,
 	uuid: uuid,
 	values: values,
 	visible: visible,
 	visible_qs: visible_qs,
-	disabled_qsa: disabled_qsa,
 };
 })();
 

@@ -480,21 +480,19 @@ function _parse_match(state, col_count) {
 }
 
 function sheet_render(s, svg, without_metadata) {
-	var $svg = $(svg);
-
 	function _text(search, str) {
 		if (str !== 0 && !str) {
 			str = '';
 		}
-		$svg.find(search).text(str);
+		utils.text(svg.querySelector(search), str);
 	}
 
 	// Set text fields
 	_text('.scoresheet_tournament_name', s.setup.tournament_name);
 
 	// Special handling for event name: Move it just to the right of the tournament name
-	var tname_bbox = $svg.find('.scoresheet_tournament_name')[0].getBBox();
-	$svg.find('.scoresheet_event_name').attr('x', tname_bbox.x + tname_bbox.width + 4);
+	var tname_bbox = svg.querySelector('.scoresheet_tournament_name').getBBox();
+	svg.querySelector('.scoresheet_event_name').setAttribute('x', tname_bbox.x + tname_bbox.width + 4);
 	var event_name = s.setup.event_name;
 	if (!event_name && s.setup.team_competition && s.setup.teams[0].name && s.setup.teams[1].name) {
 		event_name = s.setup.teams[0].name + ' - ' + s.setup.teams[1].name;
@@ -526,13 +524,17 @@ function sheet_render(s, svg, without_metadata) {
 	_text('.scoresheet_results_team2_player2', (s.setup.is_doubles && teams[1].players[1]) ? teams[1].players[1].name: '');
 	_text('.scoresheet_results_team2_name', teams[1].name);
 
-	$svg.find('.scoresheet_results_circle_team1').attr('visibility',
+	svg.querySelector('.scoresheet_results_circle_team1').setAttribute(
+		'visibility',
 		(s.match.finished && s.match.team1_won) ? 'visible' : 'hidden');
-	$svg.find('.scoresheet_results_circle_team2').attr('visibility',
+	svg.querySelector('.scoresheet_results_circle_team2').setAttribute(
+		'visibility',
 		(s.match.finished && !s.match.team1_won) ? 'visible' : 'hidden');
 
 	var shuttle_counter_active = (typeof s.match.shuttle_count == 'number') && (s.settings.shuttle_counter);
-	$('.scoresheet_shuttle_counter').attr('visibility', shuttle_counter_active ? 'visible' : 'hidden');
+	svg.querySelector('.scoresheet_shuttle_counter').setAttribute(
+		'visibility',
+		shuttle_counter_active ? 'visible' : 'hidden');
 	_text('.scoresheet_shuttle_counter_value', s.match.shuttle_count ? s.match.shuttle_count : '');
 
 	var side1_str = '';
@@ -589,9 +591,8 @@ function sheet_render(s, svg, without_metadata) {
 
 	var SCORESHEET_COL_COUNT = 35;
 	var cells = _parse_match(s, SCORESHEET_COL_COUNT);
-	var $t = $svg.find('.scoresheet_table_container');
-	$t.empty();
-	var t = $t[0];
+	var t = svg.querySelector('.scoresheet_table_container');
+	utils.empty(t);
 
 	var padding_left = 0.5;
 	var table_left = 15;
