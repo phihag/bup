@@ -19,8 +19,10 @@
 
 	width: 20vmin;
 	height: 20vmin;
-	font-size: 16vmin;
 	display: block;
+}
+.exception_dialog>div>button>span {
+	font-size: 16vmin;
 }
 #exception_yellow>span {
 	background-image: url(../icons/exception_yellow.svg);
