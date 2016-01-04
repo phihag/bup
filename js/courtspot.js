@@ -21,10 +21,13 @@ function _request(s, options, cb) {
 function courts(s) {
 	return [{
 		id: '1',
-		description: s._('left'),
+		description: s._('court:left'),
 	}, {
 		id: '2',
-		description: s._('right'),
+		description: s._('court:right'),
+	}, {
+		id: 'referee',
+		description: s._('court:referee'),
 	}];
 }
 
@@ -36,6 +39,10 @@ function prepare_match(current_settings, match) {
 
 var _outstanding_requests = 0;
 function sync(s) {
+	if (s.settings.court_id === 'referee') {
+		return;
+	}
+
 	var netscore = network.calc_score(s);
 
 	// CourtSpot requires us to set the team currently serving.
@@ -87,7 +94,7 @@ function sync(s) {
 	}, function(err, content) {
 		_outstanding_requests--;
 
-		if (s.metadata.id !== match_id) { // Match changed while the request was underway
+		if (!s.metadata || (s.metadata.id !== match_id)) { // Match changed while the request was underway
 			return;
 		}
 

@@ -3,8 +3,6 @@ var i18n_en = {
 '_code': 'en',
 '_name': 'English',
 
-'left': 'left',
-'right': 'right',
 'Automatic': 'Automatic',
 'Court': 'Court',
 'Select Court': 'Select Court',
@@ -16,6 +14,10 @@ var i18n_en = {
 'fullscreen:go': 'Go fullscreen',
 'fullscreen:no': 'Normal screen',
 'timer:restart': 'Restart timer',
+
+'court:left': 'left',
+'court:right': 'right',
+'court:referee': 'Changes will not be transmitted',
 
 'report problem': 'Report problem/suggestion',
 'report:test': 'Test diagnostics',

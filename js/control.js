@@ -105,6 +105,12 @@ function stop_match(s) {
 	s.initialized = false;
 }
 
+function leave_match(s) {
+	stop_match(s);
+	settings.show();
+	set_current(s);
+}
+
 function install_destructor(s, destructor) {
 	if (! s.destructors) {
 		s.destructors = [];
@@ -143,14 +149,8 @@ function on_press(press, s) {
 
 function on_presses_change(s) {
 	calc.state(s);
-	if (s.match.finish_confirmed) {
-		if (! s.settings.save_finished_matches) {
-			match_storage.remove(s.metadata.id);
-		}
-		s.metadata = {};
-		s.initialized = false;
-		settings.show();
-		set_current(s);
+	if ((s.match.finish_confirmed) && (! s.settings.save_finished_matches)) {
+		match_storage.remove(s.metadata.id);
 	} else {
 		match_storage.store(s);
 		render.ui_render(s);
@@ -195,9 +195,13 @@ function init_buttons() {
 		});
 	});
 	utils.on_click_qs('#postmatch-confirm', function() {
-		on_press({
-			type: 'postmatch-confirm',
-		});
+		if (! state.match.finish_confirmed) {
+			on_press({
+				type: 'postmatch-confirm',
+			});
+		}
+		console.log('leaving match', state);
+		leave_match(state);
 	});
 	utils.on_click_qs('#left_score', function() {
 		block_score_buttons();

@@ -184,8 +184,11 @@ function render_score_display(s) {
 	}
 }
 
-function ui_court_str(s) {
+function calc_court_str(s) {
 	var court_str = '';
+	if (s.settings.court_id === 'referee') {
+		return s.settings.court_description;
+	}
 	if (s.settings.court_id) {
 		court_str = s._('Court') + ' ' + s.settings.court_id;
 	}
@@ -196,7 +199,10 @@ function ui_court_str(s) {
 			court_str += s._('Court') + ' ' + s.settings.court_description;
 		}
 	}
-	$('#court_court_str>span').text(court_str);
+}
+
+function ui_court_str(s) {
+	$('#court_court_str>span').text(calc_court_str(s));
 }
 
 function ui_render(s) {

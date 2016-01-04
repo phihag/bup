@@ -119,6 +119,10 @@ function send_score(s) {
 }
 
 function sync(s) {
+	if (s.settings.court_id === 'referee') {
+		return;
+	}
+
 	var netscore = network.calc_score(s);
 	if ((s.settings.court_id != s.remote.btde_court) || !utils.deep_equal(netscore, s.remote.btde_score)) {
 		send_score(s);
@@ -246,10 +250,13 @@ function list_matches(s, cb) {
 function courts(s) {
 	return [{
 		id: '1',
-		description: s._('left'),
+		description: s._('court:left'),
 	}, {
 		id: '2',
-		description: s._('right'),
+		description: s._('court:right'),
+	}, {
+		id: 'referee',
+		description: s._('court:referee'),
 	}];
 }
 

@@ -3,8 +3,6 @@ var i18n_de = {
 '_code': 'de',
 '_name': 'Deutsch',
 
-'left': 'links',
-'right': 'rechts',
 'Automatic': 'Automatisch',
 'Court': 'Feld',
 'Select Court': 'Feld auswählen',
@@ -16,6 +14,10 @@ var i18n_de = {
 'fullscreen:go': 'Vollbildmodus',
 'fullscreen:no': 'Normalbildmodus',
 'timer:restart': 'Stoppuhr neu starten',
+
+'court:left': 'links',
+'court:right': 'rechts',
+'court:referee': 'Änderungen werden nicht übertragen',
 
 'report problem': 'Problem/Anregung melden',
 'report:test': 'Diagnose-Funktion testen',

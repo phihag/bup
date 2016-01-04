@@ -1,6 +1,9 @@
+re-handle finish-confirmed: disable buttons
 answer Ulf
 	set "leer" at end of match (test that UI looks nice)
 	safari fix exception icons
+mail ulf
+
 write a small polyfill for textdecoder/textencoder
 	encodeURIComponent
 	publish on GitHub
