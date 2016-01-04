@@ -111,9 +111,6 @@ option for double-click editmode (default off)
 document network error cases
 animation in hide_settings (go to top-right icon)
 
-IE kill scoresheet scrollbars
-IE fix PDF output
-
 re-style settings with columns
 only show 4 games to resume
 
@@ -225,6 +222,7 @@ scoresheet: deal and notify failures of loading SVG
 unify scoresheet and eventsheet downloading
 display mode: until match start show preview (Refrath gegen ...)
 demo event
+make reload button a normal button
 test badminton umpire scorekeeper? / support its web interface?
 add option no court; prevent transferring (big fat message though!)
 remove all references of state in favor of passing in state

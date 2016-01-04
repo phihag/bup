@@ -21,6 +21,7 @@ function get_info() {
 		settings: state.settings,
 		last_error: last_error,
 		reported_count: reported_count,
+		presses: state.presses,
 	};
 }
 
