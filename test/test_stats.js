@@ -18,7 +18,7 @@ var WITHOUT_COUNTER = {
 };
 
 _describe('stats', function() {
-	_it('test stats calc', function() {
+	_it('calculation', function() {
 		var presses = [{
 			type: 'pick_side',
 			team1_left: true,
@@ -79,7 +79,7 @@ _describe('stats', function() {
 			side: 'left',
 			timestamp: 250000,
 		});
-		s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+		s = tutils.state_after(presses, tutils.DOUBLES_SETUP, WITH_COUNTER);
 		st = bup.stats.calc_stats(s).cols;
 		assert.strictEqual(st.length, 1 + 1);
 		assert.strictEqual(st[0].points, '11-1');
@@ -115,7 +115,7 @@ _describe('stats', function() {
 			side: 'left',
 			timestamp: 330000,
 		});
-		s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+		s = tutils.state_after(presses, tutils.DOUBLES_SETUP, WITH_COUNTER);
 		st = bup.stats.calc_stats(s).cols;
 		assert.strictEqual(st.length, 1 + 1);
 		assert.strictEqual(st[0].points, '13-1');
