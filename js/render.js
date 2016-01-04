@@ -199,6 +199,7 @@ function calc_court_str(s) {
 			court_str += s._('Court') + ' ' + s.settings.court_description;
 		}
 	}
+	return court_str;
 }
 
 function ui_court_str(s) {

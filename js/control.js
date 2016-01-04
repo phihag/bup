@@ -200,7 +200,6 @@ function init_buttons() {
 				type: 'postmatch-confirm',
 			});
 		}
-		console.log('leaving match', state);
 		leave_match(state);
 	});
 	utils.on_click_qs('#left_score', function() {
