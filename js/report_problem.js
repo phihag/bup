@@ -15,6 +15,7 @@ function get_info() {
 			supported: fullscreen.supported(),
 			active: fullscreen.active(),
 		},
+		lang: state.lang,
 		size: document.documentElement.clientWidth + 'x' + document.documentElement.clientHeight,
 		screen: window.screen.width + 'x' + window.screen.height,
 		settings: state.settings,

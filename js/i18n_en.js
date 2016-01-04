@@ -25,7 +25,7 @@ var i18n_en = {
 'report problem': 'Report problem/suggestion',
 'report:test': 'Test diagnostics',
 'report:subject': 'Problem with bup',
-'report:body': 'I encountered the following problem with the umpire panel:\n\n\n\n\nTechnical Information:\nVersion: {bup_version}\nWeb browser: {ua}\nURL: {url}\Window size: {size} ({screen})\nSettings: {settings}\nError object: {last_error}\n',
+'report:body': 'I encountered the following problem with the umpire panel:\n\n\n\n\nTechnical Information:\nVersion: {bup_version}\nLanguage: {lang}\nWeb browser: {ua}\nURL: {url}\Window size: {size} ({screen})\nSettings: {settings}\nError object: {last_error}\n',
 
 'network:error': 'Network transmission error',
 'network:error:unconfigured': 'Network connection not configured',

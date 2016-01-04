@@ -1,25 +1,18 @@
-answer Ulf
-	safari fix exception icons
-mail ulf
-
-automatically scale player name font size (iPad in portrait mode)
+include language in report
 write a small polyfill for textdecoder/textencoder
 	encodeURIComponent
 	publish on GitHub
 	stats about encoding.js and encoding-utf8
-safari: very very slow presses
-	http://build.origami.ft.com/bundles/js?modules=fastclick
 record IP in server-side bug reports
 IE bug report
 
 progress line diagram in stats
 	Treppchen-Auswertung mit Länge
 	minimum and maximum width for each rally (say, 5 minutes)
-safari: align feld1
 clicking on current match when match is in progress shouldn't do anything
 highlight current match button
 mobile safari: editmode has no buttons
-safari: shuttle counter looks stupid
+safari: reload button has no icon
 safari hide URL bar
 safari: icon for front page
 safari: set a better bookmark name
