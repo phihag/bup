@@ -1,6 +1,4 @@
-re-handle finish-confirmed: disable buttons
 answer Ulf
-	set "leer" at end of match (test that UI looks nice)
 	safari fix exception icons
 mail ulf
 
@@ -238,6 +236,7 @@ test badminton umpire scorekeeper? / support its web interface?
 add option no court; prevent transferring (big fat message though!)
 remove all references of state in favor of passing in state
 	simply remove state from lint
+check for all disabled settings and use utils.disabled_qsa
 allow challenges
 	failsafe (http://www.badmintoncentral.com/forums/showthread.php/160170-sub-standard-umpire-gave-a-free-point-to-Okuhara-in-first-set?p=2413636#post2413636)
 CourtSpot: Spielreihenfolge festlegen

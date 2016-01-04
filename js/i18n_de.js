@@ -19,6 +19,9 @@ var i18n_de = {
 'court:right': 'rechts',
 'court:referee': 'Änderungen werden nicht übertragen',
 
+'postmatch:label': '(Dieses Spiel wurde bereits beendet)',
+'postmatch:leave': 'Spiel verlassen',
+
 'report problem': 'Problem/Anregung melden',
 'report:test': 'Diagnose-Funktion testen',
 'report:subject': 'Problem mit bup',

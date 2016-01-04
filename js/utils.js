@@ -226,6 +226,20 @@ function sum(ar) {
 	}, 0);
 }
 
+function disabled_qsa(qs, val) {
+	var nodes = document.querySelectorAll(qs);
+	for (var i = 0;i < nodes.length;i++) {
+		var n = nodes[i];
+		if (val) {
+			n.setAttribute('disabled', 'disabled');
+			$(n).addClass('half-invisible');
+		} else {
+			n.removeAttribute('disabled');
+			$(n).removeClass('half-invisible');
+		}
+	}
+}
+
 return {
 	add_zeroes: add_zeroes,
 	any: any,
@@ -252,6 +266,7 @@ return {
 	values: values,
 	visible: visible,
 	visible_qs: visible_qs,
+	disabled_qsa: disabled_qsa,
 };
 })();
 

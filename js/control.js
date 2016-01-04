@@ -202,6 +202,9 @@ function init_buttons() {
 		}
 		leave_match(state);
 	});
+	utils.on_click_qs('#postmatch-leave', function() {
+		leave_match(state);
+	});
 	utils.on_click_qs('#left_score', function() {
 		block_score_buttons();
 		on_press({
@@ -302,7 +305,7 @@ function init_buttons() {
 
 function init_shortcuts() {
 	Mousetrap.bind('x', function() {
-		if (state.initialized) {
+		if (state.initialized && !state.match.finish_confirmed) {
 			ui_show_exception_dialog();
 		}
 	});

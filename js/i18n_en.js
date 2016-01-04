@@ -19,6 +19,9 @@ var i18n_en = {
 'court:right': 'right',
 'court:referee': 'Changes will not be transmitted',
 
+'postmatch:label': '(This match is over)',
+'postmatch:leave': 'Leave match',
+
 'report problem': 'Report problem/suggestion',
 'report:test': 'Test diagnostics',
 'report:subject': 'Problem with bup',

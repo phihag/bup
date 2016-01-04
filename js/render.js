@@ -175,6 +175,10 @@ function render_score_display(s) {
 	}
 	for (var i = 0;i < s.match.max_games;i++) {
 		if (i < s.match.finished_games.length) {
+			if ((s.match.finish_confirmed) && (i === s.match.finished_games.length - 1)) {
+				// In postmatch-confirmed state, all games are finished, but render it otherwise for optical reasons
+				continue;
+			}
 			_score_display_set_game(s, s.match.finished_games[i], i, false);
 		} else if (i == s.match.finished_games.length) {
 			_score_display_set_game(s, s.game, i, true);
@@ -263,7 +267,12 @@ function ui_render(s) {
 		$('#love-all-dialog').hide();
 	}
 
-	if (s.match.finished) {
+	utils.disabled_qsa('#button_shuttle,#button_exception', s.match.finish_confirmed);
+	utils.visible_qs('#postmatch-leave-dialog', s.match.finish_confirmed);
+	if (s.match.finish_confirmed) {
+		dialog_active = true;
+	}
+	if (s.match.finished && !s.match.finish_confirmed) {
 		dialog_active = true;
 		$('#postmatch-confirm-dialog').show();
 		$('#postmatch-confirm').text(s.settings.show_pronounciation ? pronounciation.pronounce(s) : pronounciation.postgame_announcement(s));

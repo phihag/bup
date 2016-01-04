@@ -56,7 +56,7 @@ function sync(s) {
 		(state.game.teams_player1_even[1] !== null));
 
 	var data = {
-		'Detail': (serve_is_determined ? 'alles' : 'punkte'),
+		'Detail': (s.match.finish_confirmed ? 'leer' : (serve_is_determined ? 'alles' : 'punkte')),
 		'Satz': Math.max(1, netscore.length),
 		'gewonnenHeim': game_score[0],
 		'gewonnenGast': game_score[1],
