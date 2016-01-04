@@ -878,15 +878,16 @@ function show() {
 	render.hide();
 	uiu.esc_stack_push(hide);
 
-	var $container = $('.scoresheet_container');
-	$container.children('.scoresheet').remove();
+	var container = document.querySelector('.scoresheet_container');
+	$(container).children('.scoresheet').remove();
 	utils.visible_qs('.scoresheet_loading-icon', true);
-	$container.show();
+	utils.visible(container, true);
+
 	make_sheet_node('international', function(doc) {
 		var docEl = doc.documentElement;
 		docEl.setAttribute('class', 'scoresheet single_scoresheet');
 		var svg = document.importNode(docEl, true);
-		$container.append(svg);
+		container.appendChild(svg);
 		sheet_render(state, svg);
 		utils.visible_qs('.scoresheet_loading-icon', false);
 	});

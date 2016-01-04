@@ -142,6 +142,7 @@ function duration_secs(start_timestamp, end_timestamp) {
 }
 
 function visible(node, val) {
+	// TODO test adding/removing invisible class here
 	if (val) {
 		$(node).show();
 	} else {

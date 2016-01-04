@@ -1,10 +1,14 @@
-mail btde: please update now
-
 Edge fix scoresheet font size
+edge test multiple sheets
 write a small polyfill for textdecoder/textencoder
 	encodeURIComponent
 	publish on GitHub
 	stats about encoding.js and encoding-utf8
+
+mail btde
+mail Manuel
+mail Werner
+mail Jörg
 
 progress line diagram in stats
 	Treppchen-Auswertung mit Länge
@@ -227,6 +231,7 @@ test badminton umpire scorekeeper? / support its web interface?
 add option no court; prevent transferring (big fat message though!)
 remove all references of state in favor of passing in state
 	simply remove state from lint
+compress presses in sending?
 check for all disabled settings and use utils.disabled_qsa
 allow challenges
 	failsafe (http://www.badmintoncentral.com/forums/showthread.php/160170-sub-standard-umpire-gave-a-free-point-to-Okuhara-in-first-set?p=2413636#post2413636)
