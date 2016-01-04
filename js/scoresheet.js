@@ -790,14 +790,12 @@ function sheet_render(s, svg, without_metadata) {
 	});
 }
 
-function event_render($container) {
-	make_sheet_node('international', function(doc) {
-		var docEl = doc.documentElement;
-
+function event_render(container) {
+	load_sheet('international', function(xml) {
 		state.event.matches.forEach(function(match) {
-			var svg = document.importNode(docEl, true);
+			var svg = make_sheet_node(xml);
 			svg.setAttribute('class', 'scoresheet');
-			$container.append(svg);
+			container.appendChild(svg);
 
 			var s = {
 				settings: state.settings,
@@ -815,7 +813,7 @@ function event_render($container) {
 	});
 }
 
-function event_list_matches($container) {
+function event_list_matches(container) {
 	network.list_matches(state, function(err, ev) {
 		utils.visible_qs('.scoresheet_error', !!err);
 		if (err) {
@@ -824,7 +822,7 @@ function event_list_matches($container) {
 			return;
 		}
 		state.event = ev;
-		event_render($container);
+		event_render(container);
 	});
 }
 
@@ -844,16 +842,15 @@ function event_show() {
 	render.hide();
 	uiu.esc_stack_push(hide);
 
-	var $container = $('.scoresheet_container');
-	$container.addClass('event_scoresheet_container');
-	$container.children('.scoresheet').remove();
+	var container = document.querySelector('.scoresheet_container');
+	$(container).children('.scoresheet').remove();
 	utils.visible_qs('.scoresheet_loading-icon', true);
-	$container.show();
+	utils.visible(container, true);
 
 	if (state.event) {
-		event_render($container);
+		event_render(container);
 	} else {
-		event_list_matches($container);
+		event_list_matches(container);
 	}
 }
 
@@ -883,10 +880,10 @@ function show() {
 	utils.visible_qs('.scoresheet_loading-icon', true);
 	utils.visible(container, true);
 
-	make_sheet_node('international', function(doc) {
-		var docEl = doc.documentElement;
-		docEl.setAttribute('class', 'scoresheet single_scoresheet');
-		var svg = document.importNode(docEl, true);
+	load_sheet('international', function(xml) {
+		var svg = make_sheet_node(xml);
+		svg.setAttribute('class', 'scoresheet single_scoresheet');
+		// Usually we'd call importNode here to import the document here, but IE/Edge then ignores the styles
 		container.appendChild(svg);
 		sheet_render(state, svg);
 		utils.visible_qs('.scoresheet_loading-icon', false);
@@ -980,12 +977,10 @@ function load_sheet(key, callback) {
 	xhr.send();
 }
 
-function make_sheet_node(key, callback) {
-	load_sheet(key, function(xml) {
-		var doc = $.parseXML(xml);
-		i18n.translate_nodes($(doc), state);
-		callback(doc);
-	});
+function make_sheet_node(xml) {
+	var doc = $.parseXML(xml);
+	i18n.translate_nodes($(doc), state);
+	return doc.documentElement;
 }
 
 function ui_init() {

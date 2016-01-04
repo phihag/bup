@@ -1,5 +1,5 @@
-Edge fix scoresheet font size
-edge test multiple sheets
+Edge printing
+show current state in multiple scoresheet display
 write a small polyfill for textdecoder/textencoder
 	encodeURIComponent
 	publish on GitHub
