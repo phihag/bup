@@ -6,6 +6,8 @@ function is_mobile_safari() {
 }
 
 function ui_init() {
+	FastClick.attach(document.body);
+
 	if (is_mobile_safari()) {
 		$('html').addClass('mobile_safari');
 	}

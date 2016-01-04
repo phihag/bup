@@ -1,7 +1,9 @@
+safari fast-click
 answer Ulf
 	safari fix exception icons
 mail ulf
 
+automatically scale player name font size (iPad in portrait mode)
 write a small polyfill for textdecoder/textencoder
 	encodeURIComponent
 	publish on GitHub
