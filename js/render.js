@@ -177,10 +177,11 @@ function render_score_display(s) {
 		if (i < s.match.finished_games.length) {
 			if ((s.match.finish_confirmed) && (i === s.match.finished_games.length - 1)) {
 				// In postmatch-confirmed state, all games are finished, but render it otherwise for optical reasons
+				_score_display_set_game(s, s.game, i, true);
 				continue;
 			}
 			_score_display_set_game(s, s.match.finished_games[i], i, false);
-		} else if (i == s.match.finished_games.length) {
+		} else if ((i == s.match.finished_games.length) && (!s.match.finish_confirmed)) {
 			_score_display_set_game(s, s.game, i, true);
 		} else {
 			_score_display_set_game(s, null, i, false);
@@ -272,14 +273,13 @@ function ui_render(s) {
 	if (s.match.finish_confirmed) {
 		dialog_active = true;
 	}
+	utils.visible_qs('.postmatch_options', s.match.finished);
 	if (s.match.finished && !s.match.finish_confirmed) {
 		dialog_active = true;
 		$('#postmatch-confirm-dialog').show();
 		$('#postmatch-confirm').text(s.settings.show_pronounciation ? pronounciation.pronounce(s) : pronounciation.postgame_announcement(s));
-		$('.postmatch_options').show();
 	} else {
 		$('#postmatch-confirm-dialog').hide();
-		$('.postmatch_options').hide();
 	}
 	if (!s.match.finished && s.game.finished) {
 		dialog_active = true;
