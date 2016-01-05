@@ -1,9 +1,6 @@
-Edge printing
+safari: reload button has no icon
+mobile safari: editmode has no buttons
 show current state in multiple scoresheet display
-write a small polyfill for textdecoder/textencoder
-	encodeURIComponent
-	publish on GitHub
-	stats about encoding.js and encoding-utf8
 
 mail btde
 mail Manuel
@@ -15,8 +12,6 @@ progress line diagram in stats
 	minimum and maximum width for each rally (say, 5 minutes)
 clicking on current match when match is in progress shouldn't do anything
 highlight current match button
-mobile safari: editmode has no buttons
-safari: reload button has no icon
 safari: icon for front page
 safari: set a better bookmark name
 unify cache
@@ -51,7 +46,7 @@ event scoresheet should show current state if known (associate mstate, survive e
 demo event (with eventsheet & current state)
 court selection by clicking on court name (if restricted courts, otherwise other court selection)
 move pronounciation above love-all? / highlight love-all?
-love-all should cancel timer
+option so that love-all should cancel timer
 click on match button should go to match if it is currently running (associate events with presses locally)
 profile event scoresheet rendering
 highlight or hide middle center buttons

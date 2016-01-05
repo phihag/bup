@@ -22,6 +22,7 @@ force-install-libs:
 	wget https://raw.githubusercontent.com/phihag/jsPDF/dist/dist/jspdf.min.js -O libs/jspdf.min.js
 	wget https://raw.githubusercontent.com/phihag/pdfform.js/dist/dist/pdfform.dist.js -O libs/pdfform.dist.js
 	wget https://raw.githubusercontent.com/eligrey/FileSaver.js/master/FileSaver.min.js -O libs/FileSaver.min.js
+	wget https://raw.githubusercontent.com/phihag/text-encoding-utf-8/master/lib/encoding.js -O libs/encoding.js
 	touch libs/.completed
 
 deps: install-libs
