@@ -82,7 +82,13 @@ function _request(s, options, cb) {
 	});
 }
 
+var outstanding_requests = 0;
 function send_score(s) {
+	if (s.settings.court_id === 'referee') {
+		network.errstate('btde.score', null);
+		return;
+	}
+
 	var netscore = network.calc_score(s);
 
 	// badminticker requirements - show 0:0 before match start
@@ -104,25 +110,39 @@ function send_score(s) {
 		}
 	}
 
+	if (_outstanding_requests > 0) {
+		// Another request is currently underway; ours may come to late
+		// Send our request anyways, but send it once again as soon as there are no more open requests
+		s.remote.btde_resend = true;
+	}
+	_outstanding_requests++;
+	var match_id = s.metadata.id;
+
 	_request(s, {
 		method: 'POST',
 		url: baseurl + 'login/write.php',
 		data: JSON.stringify(post_data),
 		contentType: 'application/json; charset=utf-8',
 	}, function(err) {
+		_outstanding_requests--;
+		if (!s.metadata || (s.metadata.id !== match_id)) { // Match changed while the request was underway
+			return;
+		}
+
 		if (!err) {
 			s.remote.btde_score = netscore;
 			s.remote.btde_court = s.settings.court_id;
 		}
 		network.errstate('btde.score', err);
+
+		if (s.remote.btde_resend && _outstanding_requests === 0) {
+			s.remote.btde_resend = false;
+			send_score(s);
+		}
 	});
 }
 
 function sync(s) {
-	if (s.settings.court_id === 'referee') {
-		return;
-	}
-
 	var netscore = network.calc_score(s);
 	if ((s.settings.court_id != s.remote.btde_court) || !utils.deep_equal(netscore, s.remote.btde_score)) {
 		send_score(s);

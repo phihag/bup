@@ -11,6 +11,22 @@ function is_enabled() {
 	return !!get_netw() || !!networks.p2p;
 }
 
+function get_presses(match) {
+	if (match.presses) {
+		return match.presses;
+	}
+
+	var res = null;
+	if (match.presses_json) {
+		try {
+			res = JSON.parse(match.presses_json);
+		} catch (e) {
+			report_problem.silent_error('Failed to decode presses_json: ' + e.toString());
+		}
+	}
+	return res;
+}
+
 // Returns a list of {id, description} or null (if no restrictions).
 // State s is for i18n
 function courts(s) {
@@ -72,6 +88,16 @@ function calc_score(s, always_zero) {
 
 
 function send_press(s, press) {
+	if (s.event && s.event.matches) {
+		s.event.matches.forEach(function(match) {
+			if (!s.metadata || !match.setup || (s.metadata.id !== match.setup.match_id)) {
+				return;
+			}
+
+			match.presses = s.presses.slice();
+		});
+	}
+
 	if (networks.courtspot && s.setup.courtspot_match_id) {
 		networks.courtspot.send_press(s, press);
 	}
@@ -190,17 +216,10 @@ function enter_match(match) {
 	settings.hide(true);
 	control.start_match_dialog(state, match.setup);
 
-	if (match.presses_json) {
-		var presses = null;
-		try {
-			presses = JSON.parse(match.presses_json);
-		} catch (e) {
-			report_problem.silent_error('Failed to decode presses_json: ' + e.toString());
-		}
-		if (presses) {
-			control.start_match(state, match.setup, presses);
-			return;
-		}
+	var presses = get_presses(match);
+	if (presses) {
+		control.start_match(state, match.setup, presses);
+		return;
 	}
 
 	var netscore = match.network_score;
@@ -545,6 +564,7 @@ return {
 	list_matches: list_matches,
 	courts: courts,
 	is_enabled: is_enabled,
+	get_presses: get_presses,
 };
 
 
