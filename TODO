@@ -1,6 +1,14 @@
+sync code: set s.remote.sync_necessary when current query count > 0
+Uhr bei Verletzung
+keep stats about network connection problems
+generate Aufstellungszettel
+prevent negative date when begin is not set in scoresheet
+begin is wrong in multi scoresheets (use date from presses?)
+multi scoresheet: shift+S shows outdated state when editing match
+check eventsheet with bupbt
 safari: reload button has no icon
 mobile safari: editmode has no buttons
-show current state in multiple scoresheet display
+enable compression for presses_json
 
 mail btde
 mail Manuel
@@ -10,6 +18,8 @@ mail Jörg
 progress line diagram in stats
 	Treppchen-Auswertung mit Länge
 	minimum and maximum width for each rally (say, 5 minutes)
+stats: remove avg icon (fails on Android)
+comment on Verletzung?
 clicking on current match when match is in progress shouldn't do anything
 highlight current match button
 safari: icon for front page
