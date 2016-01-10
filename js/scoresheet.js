@@ -794,7 +794,7 @@ function event_render(container) {
 	load_sheet('international', function(xml) {
 		state.event.matches.forEach(function(match) {
 			var svg = make_sheet_node(xml);
-			svg.setAttribute('class', 'scoresheet');
+			svg.setAttribute('class', 'scoresheet multi_scoresheet');
 			container.appendChild(svg);
 
 			var s = {
@@ -802,7 +802,7 @@ function event_render(container) {
 				_: state._,
 				lang: state.lang,
 			};
-			calc.init_state(s, match.setup);
+			calc.init_state(s, match.setup, network.get_presses(match));
 			calc.state(s);
 			state.new_s = s;
 

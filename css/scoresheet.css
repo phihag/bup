@@ -66,6 +66,11 @@
 		max-height: 100vh;
 	}
 }
+@media screen and (orientation: landscape) {
+	.multi_scoresheet {
+		width: 50%;
+	}
+}
 @media print{
 	@page {
 		size: landscape; size: landscape A4;
