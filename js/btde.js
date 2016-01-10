@@ -110,12 +110,12 @@ function send_score(s) {
 		}
 	}
 
-	if (_outstanding_requests > 0) {
+	if (outstanding_requests > 0) {
 		// Another request is currently underway; ours may come to late
 		// Send our request anyways, but send it once again as soon as there are no more open requests
 		s.remote.btde_resend = true;
 	}
-	_outstanding_requests++;
+	outstanding_requests++;
 	var match_id = s.metadata.id;
 
 	_request(s, {
@@ -124,7 +124,7 @@ function send_score(s) {
 		data: JSON.stringify(post_data),
 		contentType: 'application/json; charset=utf-8',
 	}, function(err) {
-		_outstanding_requests--;
+		outstanding_requests--;
 		if (!s.metadata || (s.metadata.id !== match_id)) { // Match changed while the request was underway
 			return;
 		}
@@ -135,7 +135,7 @@ function send_score(s) {
 		}
 		network.errstate('btde.score', err);
 
-		if (s.remote.btde_resend && _outstanding_requests === 0) {
+		if (s.remote.btde_resend && outstanding_requests === 0) {
 			s.remote.btde_resend = false;
 			send_score(s);
 		}

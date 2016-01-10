@@ -37,7 +37,7 @@ function prepare_match(current_settings, match) {
 	}
 }
 
-var _outstanding_requests = 0;
+var outstanding_requests = 0;
 function sync(s, force) {
 	if (s.settings.court_id === 'referee') {
 		network.errstate('courtspot.set', null);
@@ -75,16 +75,16 @@ function sync(s, force) {
 		data['HeimSatz' + (i+1)] = (i < netscore.length) ? netscore[i][0] : -1;
 		data['GastSatz' + (i+1)] = (i < netscore.length) ? netscore[i][1] : -1;
 	}
-	if (!force && utils.deep_equal(data, s.remote.courtspot_data) && (_outstanding_requests === 0)) {
+	if (!force && utils.deep_equal(data, s.remote.courtspot_data) && (outstanding_requests === 0)) {
 		return;
 	}
 
-	if (_outstanding_requests > 0) {
+	if (outstanding_requests > 0) {
 		// Another request is currently underway; ours may come to late
 		// Send our request anyways, but send it once again as soon as there are no more open requests
 		s.remote.courtspot_resend = true;
 	}
-	_outstanding_requests++;
+	outstanding_requests++;
 
 	var request_url = (
 		baseurl + 'php/dbStandEintrag.php?befehl=setzen' + 
@@ -99,7 +99,7 @@ function sync(s, force) {
 		dataType: 'text',
 		url: request_url,
 	}, function(err, content) {
-		_outstanding_requests--;
+		outstanding_requests--;
 
 		if (!s.metadata || (s.metadata.id !== match_id)) { // Match changed while the request was underway
 			return;
@@ -133,7 +133,7 @@ function sync(s, force) {
 		// We had multiple requests going on in parallel, and that's now over.
 		// An older requests may have been delayed and been the last one.
 		// Send one more request to ensure CourtSpot is up to date.
-		if (s.remote.courtspot_resend && _outstanding_requests === 0) {
+		if (s.remote.courtspot_resend && outstanding_requests === 0) {
 			s.remote.courtspot_resend = false;
 			sync(s, true);
 		}
