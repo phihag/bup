@@ -23,7 +23,7 @@ _describe('p2p', function() {
 		function(port, cb) { // Start p2p
 			var conncount = 0;
 			var on_connect = function(info) {
-				assert.ok(info.node_id.match(/^bup.*::1.*$/));
+				assert.ok(info.node_id.match(/^liveaw-bupp2p_::1.*$/));
 				conncount++;
 				if (conncount == 2) {
 					cb();
