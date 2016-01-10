@@ -21,12 +21,20 @@ _describe('p2p', function() {
 			liveaw_server.serve(cb);
 		},
 		function(port, cb) { // Start p2p
+			var conncount = 0;
+			var on_connect = function(info) {
+				conncount++;
+				if (conncount == 2) {
+					done();
+				}
+			};
+
 			var s1 = {
 				event: {
 					id: 'testevent-p2p-' + port,
 				},
 			};
-			var client1 = bup.p2p(s1, 'ws://[::1]:' + port + '/ws/bup-p2p', [], wrtc, ws_module);
+			var client1 = bup.p2p(s1, on_connect, 'ws://[::1]:' + port + '/ws/bup-p2p', [], wrtc, ws_module);
 			client1.init();
 
 			var s2 = {
@@ -34,7 +42,7 @@ _describe('p2p', function() {
 					id: 'testevent-p2p-' + port,
 				},
 			};
-			var client2 = bup.p2p(s2, 'ws://[::1]:' + port + '/ws/bup-p2p', [], wrtc, ws_module);
+			var client2 = bup.p2p(s2, on_connect, 'ws://[::1]:' + port + '/ws/bup-p2p', [], wrtc, ws_module);
 			client2.init();
 		}], function(err) {
 			done(err);

@@ -1,7 +1,11 @@
-sync code: set s.remote.sync_necessary when current query count > 0
+fix p2p tests
 Uhr bei Verletzung
+	write tests
+	injury during pause
+	injury between games
 keep stats about network connection problems
 generate Aufstellungszettel
+	empty, printer-friendly
 prevent negative date when begin is not set in scoresheet
 begin is wrong in multi scoresheets (use date from presses?)
 multi scoresheet: shift+S shows outdated state when editing match
@@ -82,6 +86,7 @@ Installable on Android
 	test that it doesn't break when not TLS
 
 improve P2P
+	test with deliberately incorrect messages (no valid JSON etc.)
 	handle node gonce once we connect
 	clear up node info for nodes whose connections did not work out
 	install error handling functions
@@ -236,7 +241,7 @@ test badminton umpire scorekeeper? / support its web interface?
 add option no court; prevent transferring (big fat message though!)
 remove all references of state in favor of passing in state
 	simply remove state from lint
-compress presses in sending?
+compress presses in sending
 check for all disabled settings and use utils.disabled_qsa
 allow challenges
 	failsafe (http://www.badmintoncentral.com/forums/showthread.php/160170-sub-standard-umpire-gave-a-free-point-to-Okuhara-in-first-set?p=2413636#post2413636)

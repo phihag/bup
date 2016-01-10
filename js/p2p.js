@@ -1,4 +1,4 @@
-var p2p = (function(s, signalling_wsurl, ice_servers, wrtc, WebSocket) {
+var p2p = (function(s, on_connect, signalling_wsurl, ice_servers, wrtc, WebSocket) {
 'use strict';	
 
 if (!s) {
@@ -98,6 +98,19 @@ function signalling_send(msg) {
 	signalling_sock.send(JSON.stringify(msg));
 }
 
+function handle_message(info, e) {
+	var msg = JSON.parse(e.data);
+	console.log('got message', e.data);
+	switch (msg.type) {
+	case 'status-request':
+		break;
+	}
+}
+
+function send_message(info, msg) {
+	info.channel.send(JSON.stringify(msg));
+}
+
 function connect_to(node_id) {
 	if (connections[node_id]) {
 		return;
@@ -114,13 +127,14 @@ function connect_to(node_id) {
 		reliable: true,
 	});
 	channel.onopen = function() {
-		console.log('channel opened', arguments);
+		info.channel = channel;
+		on_connect(info);
 	};
 	channel.onclose = function() {
 		console.log('cannel closed', arguments);
 	};
-	channel.onmessage = function() {
-		console.log('cannel got message', arguments);
+	channel.onmessage = function(e) {
+		handle_message(info, e);
 	};
 	pc.onicecandidate = function(e) {
 		if (!e.candidate) {
@@ -168,12 +182,12 @@ function handle_connection_request(node_id, desc) {
 	};
 	pc.ondatachannel = function(e) {
 		var channel = e.channel;
-		info.channel = channel;
-		channel.onmessage = function() {
-			console.log('receiver got', arguments);
+		channel.onmessage = function(e) {
+			handle_message(info, e);
 		};
 		channel.onopen = function() {
-			send_update(info);
+			info.channel = channel;
+			on_connect(info);
 		};
 		channel.onclose = function() {
 			console.log('receiver cannel closed', arguments);
@@ -215,24 +229,33 @@ function handle_ice_candidate(node_id, candidate) {
 	});
 }
 
-function send_update(info) {
-	console.log('would send update to', info);
-	// TODO reschedule
+// Ask all connected nodes for their state
+function request_node_status(callback) {
+	connections.forEach(function(conn) {
+		if (!conn.channel) {
+			callback({
+				info: conn,
+				connectivity: 'connecting',
+			});
+			return;
+		}
+
+		send_
+	});
 }
 
 function init() {
 	signalling_connect();
 }
 
-/* Arguments: s (state) */
 function ui_init() {
 	init();
 }
-
 return {
 	ui_init: ui_init,
 	// testing only
 	init: init,
+	request_node_status: request_node_status,
 };
 
 });
