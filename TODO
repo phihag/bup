@@ -1,10 +1,15 @@
+fix pronounciation (in diff, stash?)
 Uhr bei Verletzung
-	write tests
+	red card should not influence injury
 	injury during pause
+	injury at match start
 	injury between games
+	injury during suspension / suspension during injury
 	test that it looks good on scoresheet
 	test multiple injuries
-end timer at love-all 0-0
+	do not include injury in stats about rally length
+
+end timer at love-all
 keep stats about network connection problems
 generate Aufstellungszettel
 	empty, printer-friendly
@@ -15,15 +20,17 @@ check eventsheet with bupbt
 safari: reload button has no icon
 mobile safari: editmode has no buttons
 enable compression for presses_json
+option to disable double click on court (default set)
+progress line diagram in stats
+	Treppchen-Auswertung mit Länge
+	minimum and maximum width for each rally (say, 5 minutes)
 
 mail btde
 mail Manuel
 mail Werner
 mail Jörg
 
-progress line diagram in stats
-	Treppchen-Auswertung mit Länge
-	minimum and maximum width for each rally (say, 5 minutes)
+write network demo (liveaw)!
 stats: remove avg icon (fails on Android)
 comment on Verletzung?
 clicking on current match when match is in progress shouldn't do anything
@@ -193,7 +200,6 @@ remove #pick_side in favor of _ui_make_team_pick
 test correction in scoresheet at very beginning of set
 move scoresheet press handling after state_calc (and use servers of game)
 undo without redo back to start should reset begin in umpire scoresheet
-cursor for buttons?
 loading bup.. teaser in HTML for very slow connections
 network: color/opacity in match list by state
 Schiedsrichterzettel auch im Bundesliga-Design
@@ -243,8 +249,10 @@ test badminton umpire scorekeeper? / support its web interface?
 add option no court; prevent transferring (big fat message though!)
 remove all references of state in favor of passing in state
 	simply remove state from lint
+consider reason for injury / retired
 compress presses in sending
 check for all disabled settings and use utils.disabled_qsa
+show part of scoresheet below? [optionally]
 allow challenges
 	failsafe (http://www.badmintoncentral.com/forums/showthread.php/160170-sub-standard-umpire-gave-a-free-point-to-Okuhara-in-first-set?p=2413636#post2413636)
 CourtSpot: Spielreihenfolge festlegen
