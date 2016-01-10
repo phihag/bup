@@ -1,8 +1,10 @@
-fix p2p tests
 Uhr bei Verletzung
 	write tests
 	injury during pause
 	injury between games
+	test that it looks good on scoresheet
+	test multiple injuries
+end timer at love-all 0-0
 keep stats about network connection problems
 generate Aufstellungszettel
 	empty, printer-friendly

@@ -36,6 +36,11 @@ var request_id = 1;
 var signalling_sock;
 var connections = {};
 
+function on_error(msg, e) {
+	// TODO do something useful here
+	console.error(msg, e); // eslint-disable-line no-console
+}
+
 function signalling_connect() {
 	signalling_sock = new WebSocket(signalling_wsurl, 'bup-p2p-signalling');
 	signalling_sock.onmessage = function(e) {
@@ -54,7 +59,7 @@ function signalling_connect() {
 			handle_ice_candidate(msg.from_node, msg.candidate);
 			break;
 		default:
-			console.error('unhandled message', msg);
+			on_error('unhandled message', msg);
 		// TODO display 'error' messages
 		}
 	};
@@ -100,7 +105,8 @@ function signalling_send(msg) {
 
 function handle_message(info, e) {
 	var msg = JSON.parse(e.data);
-	console.log('got message', e.data);
+	// TODO correct this
+	console.log('got message', e.data); // eslint-disable-line no-console
 	switch (msg.type) {
 	case 'status-request':
 		break;
@@ -131,7 +137,8 @@ function connect_to(node_id) {
 		on_connect(info);
 	};
 	channel.onclose = function() {
-		console.log('cannel closed', arguments);
+		// TODO do something useful here
+		on_error('channel closed');
 	};
 	channel.onmessage = function(e) {
 		handle_message(info, e);
@@ -155,10 +162,10 @@ function connect_to(node_id) {
 				desc: desc,
 			});
 		}, function(err) {
-			console.error('setLocalDescription failed', err);
+			on_error('setLocalDescription failed', err);
 		});
 	}, function(err) {
-		console.error('offer creation failed', err);
+		on_error('offer creation failed', err);
 	});
 }
 
@@ -190,7 +197,7 @@ function handle_connection_request(node_id, desc) {
 			on_connect(info);
 		};
 		channel.onclose = function() {
-			console.log('receiver cannel closed', arguments);
+			on_error('receiver cannel closed', arguments);
 		};
 	};
 	pc.setRemoteDescription(desc);
@@ -202,14 +209,14 @@ function handle_connection_request(node_id, desc) {
 			desc: local_desc,
 		});
 	}, function(err) {
-		console.error('answer creation failed');
+		on_error('answer creation failed', err);
 	});
 }
 
 function handle_connection_response(node_id, desc) {
 	var conn = connections[node_id];
 	if (!conn) {
-		console.error('cannot deal with response!');
+		on_error('cannot deal with response!');
 		return;
 	}
 	conn.pc.setRemoteDescription(desc);
@@ -218,29 +225,29 @@ function handle_connection_response(node_id, desc) {
 function handle_ice_candidate(node_id, candidate) {
 	var conn = connections[node_id];
 	if (!conn) {
-		console.error('cannot deal with ice!');
+		on_error('cannot deal with ice!');
 		return;
 	}
 	conn.pc.addIceCandidate(candidate, function() {
 		// Successfully added ICE candidate.
 		// We're fine with that.
 	}, function(err) {
-		console.error('could not add ice candidate', err);
+		on_error('could not add ice candidate', err);
 	});
 }
 
 // Ask all connected nodes for their state
 function request_node_status(callback) {
-	connections.forEach(function(conn) {
-		if (!conn.channel) {
+	connections.forEach(function(info) {
+		if (!info.channel) {
 			callback({
-				info: conn,
+				info: info,
 				connectivity: 'connecting',
 			});
 			return;
 		}
 
-		send_
+		send_message(info, {type: 'status-request'});
 	});
 }
 
