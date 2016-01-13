@@ -300,6 +300,7 @@ function calc_press(s, press) {
 	case 'love-all':
 		s.game.started = true;
 		s.match.marks = [];
+		s.match.just_unsuspended = false;
 		break;
 	case 'score':
 		var team1_scored = (s.game.team1_left == (press.side == 'left'));

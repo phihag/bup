@@ -274,7 +274,7 @@ function ui_render(s) {
 		});
 	}
 
-	utils.visible_qs('#love-all-dialog', s.match.announce_pregame);
+	utils.visible_qs('#love-all-dialog', s.match.announce_pregame && !s.match.injuries && !s.match.suspended);
 	if (s.match.announce_pregame) {
 		dialog_active = true;
 		if (s.settings.show_pronounciation) {
@@ -383,7 +383,7 @@ function ui_render(s) {
 	$('#pick_side').hide();
 	$('#pick_server').hide();
 	$('#pick_receiver').hide();
-	if (!s.match.finished) {
+	if (!s.match.finished && !s.match.injuries && !s.match.suspended) {
 		if (s.game.start_team1_left === null) {
 			dialog_active = true;
 			uiu.show_picker($('#pick_side'));

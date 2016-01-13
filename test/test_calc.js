@@ -2887,6 +2887,44 @@ _describe('calc_state', function() {
 		// TODO injury after love-all
 		// TODO injury during suspension? / suspension during injury
 	});
+
+	_it('suspension before match start', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}];
+		presses.push({
+			type: 'suspension',
+		});
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.match.suspended, true);
+
+		presses.push({
+			type: 'resume',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.match.just_unsuspended, true);
+
+		presses.push({
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'love-all',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.match.just_unsuspended, false);
+
+		press_score(presses, 1, 0);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.match.just_unsuspended, false);
+	});
 });
 
 _describe('calc helper functions', function() {
