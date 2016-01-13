@@ -443,6 +443,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
+	var control = require('./control');
 	var editmode = require('./editmode');
 	var pronounciation = require('./pronounciation');
 	var timer = require('./timer');
