@@ -235,22 +235,25 @@ _describe('scoresheet generation', function() {
 			type: 'injury',
 			team_id: 0,
 			player_id: 0,
+			timestamp: 1000,
 		});
 		presses.push({
 			type: 'referee',
 		});
 
 		var cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		assert.equal(cells.length, 6);
 		_assert_cell(cells, {
 			table: 0,
 			col: 1,
 			row: 0,
 			val: 'V',
+			press_type: 'injury',
 		});
 		_assert_cell(cells, {
 			table: 0,
-			col: 2,
-			row: 0,
+			col: 1,
+			row: 1,
 			val: 'R',
 		});
 
@@ -258,21 +261,24 @@ _describe('scoresheet generation', function() {
 			type: 'injury',
 			team_id: 1,
 			player_id: 1,
+			timestamp: 2000,
 		});
 		presses.push({
 			type: 'referee',
 		});
 		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		assert.equal(cells.length, 8);
 		_assert_cell(cells, {
 			table: 0,
-			col: 3,
+			col: 2,
 			row: 3,
 			val: 'V',
+			press_type: 'injury',
 		});
 		_assert_cell(cells, {
 			table: 0,
-			col: 4,
-			row: 3,
+			col: 2,
+			row: 2,
 			val: 'R',
 		});
 
@@ -280,22 +286,53 @@ _describe('scoresheet generation', function() {
 			type: 'injury',
 			team_id: 1,
 			player_id: 0,
+			timestamp: 3000,
 		});
 		presses.push({
 			type: 'referee',
 		});
 		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		assert.equal(cells.length, 10);
 		_assert_cell(cells, {
 			table: 0,
-			col: 5,
+			col: 3,
 			row: 2,
 			val: 'V',
+			press_type: 'injury',
 		});
 		_assert_cell(cells, {
 			table: 0,
-			col: 6,
+			col: 2,
 			row: 2,
 			val: 'R',
+		});
+
+		presses.push({
+			type: 'injury-resume',
+			timestamp: 130000,
+		});
+		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		assert.equal(cells.length, 13);
+		_assert_cell(cells, {
+			type: 'vertical-text',
+			table: 0,
+			col: 1,
+			row: 2.5,
+			val: '2:09',
+		});
+		_assert_cell(cells, {
+			type: 'vertical-text',
+			table: 0,
+			col: 2,
+			row: 0.5,
+			val: '2:08',
+		});
+		_assert_cell(cells, {
+			type: 'vertical-text',
+			table: 0,
+			col: 3,
+			row: 0.5,
+			val: '2:07',
 		});
 	});
 
@@ -560,6 +597,7 @@ _describe('scoresheet generation', function() {
 			col: 1,
 			row: 1,
 			val: 'F',
+			press_type: 'red-card',
 		});
 		_assert_cell(cells, {
 			table: 0,
@@ -570,19 +608,20 @@ _describe('scoresheet generation', function() {
 		});
 		_assert_cell(cells, {
 			table: 0,
-			col: 2,
-			row: 1,
+			col: 1,
+			row: 0,
 			val: 'R',
 		});
 		_assert_cell(cells, {
 			table: 0,
-			col: 3,
+			col: 2,
 			row: 0,
 			val: 'F',
+			press_type: 'red-card',
 		});
 		_assert_cell(cells, {
 			table: 0,
-			col: 3,
+			col: 2,
 			row: 3,
 			val: 2,
 			type: 'score',
@@ -596,13 +635,14 @@ _describe('scoresheet generation', function() {
 		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
 		_assert_cell(cells, {
 			table: 0,
-			col: 4,
+			col: 3,
 			row: 3,
 			val: 'F',
+			press_type: 'red-card',
 		});
 		_assert_cell(cells, {
 			table: 0,
-			col: 4,
+			col: 3,
 			row: 0,
 			val: 1,
 			type: 'score',
@@ -643,6 +683,13 @@ _describe('scoresheet generation', function() {
 			col: 1,
 			row: 2,
 			val: 'F',
+			press_type: 'red-card',
+		});
+		_assert_cell(cells, {
+			table: 0,
+			col: 1,
+			row: 3,
+			val: 'R',
 		});
 		_assert_cell(cells, {
 			table: 0,
@@ -655,17 +702,12 @@ _describe('scoresheet generation', function() {
 			table: 0,
 			col: 2,
 			row: 2,
-			val: 'R',
-		});
-		_assert_cell(cells, {
-			table: 0,
-			col: 3,
-			row: 2,
 			val: 'F',
+			press_type: 'red-card',
 		});
 		_assert_cell(cells, {
 			table: 0,
-			col: 3,
+			col: 2,
 			row: 0,
 			val: 2,
 			type: 'score',
@@ -679,13 +721,14 @@ _describe('scoresheet generation', function() {
 		cells = _scoresheet_cells(presses, SINGLES_SETUP);
 		_assert_cell(cells, {
 			table: 0,
-			col: 4,
+			col: 3,
 			row: 0,
 			val: 'F',
+			press_type: 'red-card',
 		});
 		_assert_cell(cells, {
 			table: 0,
-			col: 4,
+			col: 3,
 			row: 2,
 			val: 1,
 			type: 'score',
@@ -703,21 +746,22 @@ _describe('scoresheet generation', function() {
 
 		_assert_cell(cells, {
 			table: 0,
-			col: 5,
+			col: 4,
 			row: 2,
 			val: 'F',
+			press_type: 'red-card',
 		});
 		_assert_cell(cells, {
 			table: 0,
-			col: 5,
+			col: 4,
 			row: 0,
 			val: 3,
 			type: 'score',
 		});
 		_assert_cell(cells, {
 			table: 0,
-			col: 6,
-			row: 2,
+			col: 4,
+			row: 3,
 			val: 'R',
 		});
 	});
@@ -785,6 +829,7 @@ _describe('scoresheet generation', function() {
 			col: 22,
 			row: 2,
 			val: 'F',
+			press_type: 'red-card',
 		});
 		cells.forEach(function(cell) {
 			if (cell.type == 'score') {
@@ -1990,6 +2035,7 @@ _describe('scoresheet generation', function() {
 			row: 0,
 			table: 0,
 			val: 'F',
+			press_type: 'red-card',
 		}]);
 
 		presses.push({
@@ -2012,6 +2058,7 @@ _describe('scoresheet generation', function() {
 			row: 2,
 			table: 0,
 			val: 'F',
+			press_type: 'red-card',
 		});
 
 		presses.push({
@@ -2071,6 +2118,7 @@ _describe('scoresheet generation', function() {
 			col: 22,
 			row: 0,
 			val: 'F',
+			press_type: 'red-card',
 		});
 		_assert_cell(cells, {
 			table: 1,

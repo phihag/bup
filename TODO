@@ -2,10 +2,9 @@ Uhr bei Verletzung (test_calc injury tests)
 	injury at match start
 	injury between games
 	injury during suspension / suspension during injury
-	test that it looks good on scoresheet
 	test multiple injuries on scoresheet
+show injury length when it leads to resignation on scoresheet
 
-scoresheet: show duration during injury
 test red card out of suspension into game end
 test red card out of suspension into match end
 test red card out of injury into game end

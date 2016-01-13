@@ -162,6 +162,7 @@ function _parse_match(state, col_count) {
 		initialized: state.initialized,
 		scoresheet_game: _make_scoresheet_game(),
 		scoresheet_games: [],
+		scoresheet_injuries: [],
 		settings: state.settings,
 		lang: state.lang,
 		_: state._,
@@ -268,6 +269,7 @@ function _parse_match(state, col_count) {
 				col: s.scoresheet_game.col_idx,
 				row: 2 * press.team_id + press.player_id,
 				val: calc.press_char(s, press),
+				press_type: press.type,
 			});
 			s.scoresheet_game.col_idx++;
 			break;
@@ -276,13 +278,30 @@ function _parse_match(state, col_count) {
 		calc.calc_press(s, press);
 
 		switch (press.type) {
+		case 'injury-resume':
+			s.scoresheet_injuries.forEach(function(si) {
+				s.scoresheet_game.cells.push({
+					type: 'vertical-text',
+					col: si.cell.col,
+					row: ((si.cell.row < 2) ? 2.5 : 0.5),
+					val: utils.duration_secs(si.press.timestamp, press.timestamp),
+				});
+			});
+			s.scoresheet_injuries = [];
+			break;
 		case 'injury':
-			s.scoresheet_game.cells.push({
+			var cell = {
 				col: s.scoresheet_game.col_idx,
 				row: 2 * press.team_id + press.player_id,
 				val: calc.press_char(s, press),
-			});
+				press_type: press.type,
+			};
+			s.scoresheet_game.cells.push(cell);
 			s.scoresheet_game.col_idx++;
+			s.scoresheet_injuries.push({
+				cell: cell,
+				press: press,
+			});
 			break;
 		case 'overrule':
 			var found = false;
@@ -313,6 +332,15 @@ function _parse_match(state, col_count) {
 			row = 1;
 			if (s.scoresheet_game.cells.length > 0) {
 				prev_cell = s.scoresheet_game.cells[s.scoresheet_game.cells.length - 1];
+				if ((prev_cell.press_type === 'injury') || (prev_cell.press_type === 'red-card') || (prev_cell.press_type === 'yellow-card')) {
+					s.scoresheet_game.cells.push({
+						row: [1, 0, 3, 2][prev_cell.row],
+						col: prev_cell.col,
+						val: calc.press_char(s, press),
+					});
+					break;
+				}
+
 				if ((typeof prev_cell.val == 'string') && (typeof prev_cell.row == 'number')) {
 					row = prev_cell.row;
 				}
