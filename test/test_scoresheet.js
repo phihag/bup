@@ -1967,6 +1967,118 @@ _describe('scoresheet generation', function() {
 			row: 2,
 			val: 'S',
 		});
+	});
+
+	_it('red card at match start', function() {
+		// According to RTTO 3.7.7, red cards before or after the match do not influence the score
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}];
+
+		var cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(cells, []);
+
+		presses.push({
+			type: 'red-card',
+			team_id: 0,
+			player_id: 0,
+		});
+		cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(cells, [{
+			col: 0,
+			row: 0,
+			table: 0,
+			val: 'F',
+		}]);
+
+		presses.push({
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		});
+		cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(cells.length, 2);
+
+		presses.push({
+			type: 'red-card',
+			team_id: 1,
+			player_id: 0,
+		});
+		cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(cells.length, 3);
+		_assert_cell(cells, {
+			col: 1,
+			row: 2,
+			table: 0,
+			val: 'F',
+		});
+
+		presses.push({
+			type: 'love-all',
+		});
+		cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(cells.length, 5);
+		_assert_cell(cells, {
+			type: 'score',
+			col: 2,
+			row: 0,
+			table: 0,
+			val: 0,
+		});
+		_assert_cell(cells, {
+			type: 'score',
+			col: 2,
+			row: 2,
+			table: 0,
+			val: 0,
+		});
+
+		press_score(presses, 21, 0);
+		presses.push({
+			type: 'postgame-confirm',
+		});
+		presses.push({
+			type: 'love-all',
+		});
+		press_score(presses, 0, 21);
+		cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(cells.length, 52);
+		_assert_cell(cells, {
+			type: 'score',
+			col: 21,
+			row: 0,
+			table: 1,
+			val: 21,
+		});
+		_assert_cell(cells, {
+			type: 'circle',
+			col: 24,
+			table: 1,
+			score: [21, 0],
+			width: 3,
+		});
+
+		presses.push({
+			type: 'red-card',
+			team_id: 0,
+			player_id: 0,
+		});
+		cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(cells.length, 53);
+		_assert_cell(cells, {
+			table: 1,
+			col: 22,
+			row: 0,
+			val: 'F',
+		});
+		_assert_cell(cells, {
+			table: 1,
+			type: 'circle',
+			col: 25,
+			score: [21, 0],
+			width: 3,
+		});
 
 	});
 });

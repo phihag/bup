@@ -2851,10 +2851,35 @@ _describe('calc_state', function() {
 			exigent: 20499,
 		});
 
-		// Injury during interval - how to handle?
+		var injury6 = {
+			type: 'injury',
+			team_id: 0,
+			player_id: 0,
+			side: 'left',
+			timestamp: 1020000,
+		};
+		presses.push(injury6);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [11, 10]);
+		assert.deepStrictEqual(s.match.injuries, [injury6]);
+		assert.deepStrictEqual(s.timer, {
+			upwards: true,
+			start: injury6.timestamp,
+		});
 
+		presses.push({
+			type: 'injury-resume',
+			timestamp: 1025000,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [11, 10]);
+		assert.deepStrictEqual(s.match.injuries, false);
+		assert.deepStrictEqual(s.timer, {
+			start: 1010000,
+			duration: 60000,
+			exigent: 20499,
+		});
 
-		// TODO injury during interval
 
 		// TODO injury before postmatch
 		// TODO injury after postmatch

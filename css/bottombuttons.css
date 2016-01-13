@@ -9,6 +9,9 @@
 #pronounciation>span {
 	padding: 2vmin 0 2vmin 0;
 }
+.pick_dialog .pronounciation+button {
+	margin-top: 0.1em;
+}
 
 #left_score, #right_score {
 	position: absolute;

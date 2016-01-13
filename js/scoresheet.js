@@ -252,12 +252,17 @@ function _parse_match(state, col_count) {
 						s.scoresheet_game.servers[score_team] = 1 - s.scoresheet_game.servers[score_team];
 					}
 				}
-				s.scoresheet_game.cells.push({
-					col: s.scoresheet_game.col_idx,
-					row: 2 * score_team + s.scoresheet_game.servers[score_team],
-					type: 'score',
-					val: s.game.score[score_team] + 1,
-				});
+				if (s.game.started || (s.match.finished_games.length > 0)) { // Not before match
+					// See RTTO 3.7.7:
+					// Misconduct before and after the match (...)
+					// shall have no effect on the score of the match.
+					s.scoresheet_game.cells.push({
+						col: s.scoresheet_game.col_idx,
+						row: 2 * score_team + s.scoresheet_game.servers[score_team],
+						type: 'score',
+						val: s.game.score[score_team] + 1,
+					});
+				}
 			}
 			s.scoresheet_game.cells.push({
 				col: s.scoresheet_game.col_idx,

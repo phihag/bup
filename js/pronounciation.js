@@ -31,6 +31,7 @@ function teamtext_internal(s, team_id) {
 function loveall_announcement(s) {
 	return s._('loveall_play.' + s.match.finished_games.length, {
 		mark_extra: '',
+		score: _pronounciation_score(s),
 	});
 }
 
@@ -204,7 +205,9 @@ function pronounce(s) {
 				score: _pronounciation_score(s),
 			});
 		} else {
-			return s._('loveall_play.' + s.match.finished_games.length);
+			return s._('loveall_play.' + s.match.finished_games.length, {
+				score: _pronounciation_score(s),
+			});
 		}
 	}
 

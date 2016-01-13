@@ -211,6 +211,20 @@ function ui_court_str(s) {
 	$('#court_court_str>span').text(calc_court_str(s));
 }
 
+function _set_dialog(dialog_qs, pr_str) {
+	var dialog = document.querySelector(dialog_qs);
+	var pronounciation_span = dialog.querySelector('span.pronounciation');
+	var button = dialog.querySelector('button');
+	var m = pr_str.match(/^([\s\S]+?)\n([^\n]+)$/);
+	if (m) {
+		utils.text(pronounciation_span, m[1]);
+		utils.text(button, m[2]);
+	} else { // Short string, pack it all into the button
+		utils.text(pronounciation_span, '');
+		utils.text(button, pr_str);
+	}
+}
+
 function ui_render(s) {
 	var dialog_active = false;  // Is there anything to pick in the bottom?
 
@@ -260,12 +274,15 @@ function ui_render(s) {
 		});
 	}
 
+	utils.visible_qs('#love-all-dialog', s.match.announce_pregame);
 	if (s.match.announce_pregame) {
 		dialog_active = true;
-		$('#love-all-dialog').show();
-		$('#love-all').text(s.settings.show_pronounciation ? pronounciation.pronounce(s) : pronounciation.loveall_announcement(s));
-	} else {
-		$('#love-all-dialog').hide();
+		if (s.settings.show_pronounciation) {
+			_set_dialog('#love-all-dialog', pronounciation.pronounce(s));
+		} else {
+			$('#love-all-dialog button').text(pronounciation.loveall_announcement(s));
+			utils.text_qs('#love-all-dialog span', '');
+		}
 	}
 
 	utils.disabled_qsa('#button_shuttle,#button_exception', s.match.finish_confirmed);
@@ -309,8 +326,9 @@ function ui_render(s) {
 		s.match.injuries.forEach(function(injury) {
 			var btn = utils.create_node(
 				dialog, 'button',
-				s._('{player_name} retires').replace(
-					'{player_name}', s.setup.teams[injury.team_id].players[injury.player_id].name)
+				s._('card.retired', {
+					player_name: s.setup.teams[injury.team_id].players[injury.player_id].name,
+				}).replace(/\n?$/, '')
 			);
 			utils.on_click(btn, function() {
 				control.on_press({

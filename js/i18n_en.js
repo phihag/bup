@@ -13,7 +13,6 @@ var i18n_en = {
 'dialog-receiver': 'Receiver',
 '[Call referee!]': '[Call referee!]',
 'Are you retiring?': 'Are you retiring?',
-'{player_name} retires': '{player_name} retires',
 
 'fullscreen:go': 'Go fullscreen',
 'fullscreen:no': 'Normal screen',
@@ -78,9 +77,11 @@ var i18n_en = {
 'demo:event_name': 'MX',
 'demo:tournament_name': 'Demo',
 
-'loveall_play.0': 'love all; play',
-'loveall_play.1': 'Second game; love all; play',
-'loveall_play.2': 'Final game; love all; play',
+
+'loveall_play': 'Bitte spielen.',
+'loveall_play.0': '{score}; play',
+'loveall_play.1': 'Second game; {score}; play',
+'loveall_play.2': 'Final game; {score}; play',
 'loveall_play.0.mark': 'Love all.\n{mark_str}{score}. Play.',
 'loveall_play.1.mark': 'Second game; love all.\n{mark_str}{score}. Play.',
 'loveall_play.2.mark': 'Final game; love all.\n{mark_str}{score}. Play.',

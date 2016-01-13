@@ -30,6 +30,7 @@ function update() {
 	if (state.timer.upwards) {
 		var val = utils.duration_secs(state.timer.start, Date.now());
 		timer_el.text(val);
+		timer_el.removeClass('timer_exigent');
 		ui_timer = window.setTimeout(update, 1000);
 	} else {
 		var remaining = state.timer.start + state.timer.duration - Date.now();

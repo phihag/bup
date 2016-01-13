@@ -13,7 +13,6 @@ var i18n_de = {
 'dialog-receiver': 'Rückschläger',
 '[Call referee!]': '[Referee rufen!]',
 'Are you retiring?': 'Werden Sie aufgeben?',
-'{player_name} retires': '{player_name} gibt auf',
 
 'fullscreen:go': 'Vollbildmodus',
 'fullscreen:no': 'Normalbildmodus',
@@ -80,9 +79,10 @@ var i18n_de = {
 'demo:tournament_name': 'Demo',
 
 
-'loveall_play.0': '0 beide.\nBitte spielen.',
-'loveall_play.1': 'Zweiter Satz. 0 beide.\nBitte spielen.',
-'loveall_play.2': 'Entscheidungssatz. 0 beide.\nBitte spielen.',
+'loveall_play': 'Bitte spielen.',
+'loveall_play.0': '{score}.\nBitte spielen.',
+'loveall_play.1': 'Zweiter Satz. {score}.\nBitte spielen.',
+'loveall_play.2': 'Entscheidungssatz. {score}.\nBitte spielen.',
 'loveall_play.0.mark': '0 beide.\n{mark_str}{score}. Bitte spielen.',
 'loveall_play.1.mark': 'Zweiter Satz. 0 beide.\n{mark_str}{score}. Bitte spielen.',
 'loveall_play.2.mark': 'Entscheidungssatz. 0 beide.\n{mark_str}{score}. Bitte spielen.',

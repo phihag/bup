@@ -253,6 +253,15 @@ function text(node, str) {
 	node.appendChild(node.ownerDocument.createTextNode(str));
 }
 
+function text_qs(qs, str) {
+	var node = document.querySelector(qs);
+	if (! node) {
+		report_problem.silent_error('Expected to find qs  ' + qs + ' , but no node matching.');
+		return;
+	}
+	text(node, str);
+}
+
 function create_node(parent, tagName, text) {
 	var el = document.createElement(tagName);
 	el.appendChild(document.createTextNode(text));
@@ -263,6 +272,7 @@ function create_node(parent, tagName, text) {
 return {
 	add_zeroes: add_zeroes,
 	any: any,
+	create_node: create_node,
 	date_str: date_str,
 	datetime_str: datetime_str,
 	deep_equal: deep_equal,
@@ -284,12 +294,12 @@ return {
 	set_class: set_class,
 	sum: sum,
 	text: text,
+	text_qs: text_qs,
 	time_str: time_str,
 	uuid: uuid,
 	values: values,
 	visible: visible,
 	visible_qs: visible_qs,
-	create_node: create_node,
 };
 })();
 

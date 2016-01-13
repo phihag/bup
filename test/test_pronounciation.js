@@ -859,11 +859,11 @@ _describe('pronounciation', function() {
 		assert.strictEqual(pronounce_de(s),
 			'Zweiter Satz. 0 beide.\nBitte spielen.');
 		assert.strictEqual(pronounce_en(s),
-			'Second game; love all; play');
+			'Second game; Love all; play');
 		assert.strictEqual(loveall_de(s),
 			'Zweiter Satz. 0 beide.\nBitte spielen.');
 		assert.strictEqual(loveall_en(s),
-			'Second game; love all; play');
+			'Second game; Love all; play');
 
 		presses.push({
 			type: 'love-all',
@@ -1073,11 +1073,11 @@ _describe('pronounciation', function() {
 		assert.equal(pronounce_de(s),
 			'Entscheidungssatz. 0 beide.\nBitte spielen.');
 		assert.equal(pronounce_en(s),
-			'Final game; love all; play');
+			'Final game; Love all; play');
 		assert.equal(loveall_de(s),
 			'Entscheidungssatz. 0 beide.\nBitte spielen.');
 		assert.equal(loveall_en(s),
-			'Final game; love all; play');
+			'Final game; Love all; play');
 		
 		presses.push({
 			type: 'love-all',
