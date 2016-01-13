@@ -469,6 +469,10 @@ function _parse_match(state, col_count) {
 			break;
 		}
 
+		if (s.game.finished) {
+			_after_injuries(s, press);
+		}
+
 		if ((s.game.score[0] == 20) && (s.game.score[1] == 20) && !s.scoresheet_game.reached_20_all) {
 			s.scoresheet_game.reached_20_all = true;
 			s.scoresheet_game.cells.push({

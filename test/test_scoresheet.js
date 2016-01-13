@@ -2193,7 +2193,130 @@ _describe('scoresheet generation', function() {
 			table: 0,
 			val: '0:09',
 		});
+	});
 
+	_it('interplay of injuries and red cards', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		}, {
+			type: 'love-all',
+		}];
+
+		// A red card should *not* end injury ...
+		presses.push({
+			type: 'injury',
+			team_id: 0,
+			player_id: 0,
+			timestamp: 1000,
+		});
+		var cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		assert.equal(cells.length, 4);
+
+		presses.push({
+			type: 'red-card',
+			team_id: 1,
+			player_id: 0,
+			timestamp: 10000,
+		});
+		var cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		_assert_cell(cells, {
+			col: 2,
+			row: 2,
+			table: 0,
+			val: 'F',
+			press_type: 'red-card',
+		});
+		assert.equal(cells.length, 6);
+
+		presses.push({
+			type: 'editmode_set-finished_games',
+			scores: [[12, 21], [25, 23]],
+		});
+		presses.push({
+			type: 'editmode_set-score',
+			score: [20, 15],
+		});
+		presses.push({
+			type: 'injury',
+			team_id: 0,
+			player_id: 0,
+			timestamp: 20000,
+		});
+		cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		assert.equal(cells.length, 18);
+
+		// still not ...
+		presses.push({
+			type: 'red-card',
+			team_id: 0,
+			player_id: 0,
+			timestamp: 22000,
+		});
+		var cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		_assert_cell(cells, {
+			col: 5,
+			row: 0,
+			table: 2,
+			val: 'F',
+			press_type: 'red-card',
+		});
+		_assert_cell(cells, {
+			type: 'score',
+			col: 5,
+			row: 2,
+			table: 2,
+			val: 16,
+		});
+		assert.equal(cells.length, 20);
+		_assert_cell(cells, {
+			col: 4,
+			row: 0,
+			table: 2,
+			val: 'V',
+			press_type: 'injury',
+		});
+
+		// but if the match ends then yes
+		presses.push({
+			type: 'red-card',
+			team_id: 1,
+			player_id: 0,
+			timestamp: 23000,
+		});
+		var cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		_assert_cell(cells, {
+			col: 6,
+			row: 2,
+			table: 2,
+			val: 'F',
+			press_type: 'red-card',
+		});
+		_assert_cell(cells, {
+			type: 'score',
+			col: 6,
+			row: 0,
+			table: 2,
+			val: 21,
+		});
+		_assert_cell(cells, {
+			col: 4,
+			row: 0,
+			table: 2,
+			val: 'V',
+			press_type: 'injury',
+		});
+		_assert_cell(cells, {
+			type: 'vertical-text',
+			col: 4,
+			row: 2.5,
+			table: 2,
+			val: '0:03',
+		});
 	});
 });
 
