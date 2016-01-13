@@ -229,6 +229,13 @@ function pronounce(s) {
 		return s._('match suspended');
 	}
 
+	if (s.match.injuries) {
+		var referee_called = s.match.marks.some(function(mark) {
+			return mark.type == 'referee';
+		});
+		return mark_str + (referee_called ? '' : (s._('[Call referee!]') + '\n')) + s._('Are you retiring?');
+	}
+
 	if (s.match.just_unsuspended)  {
 		return (
 			mark_str + s._('ready to unsuspend') +

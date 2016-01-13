@@ -2633,6 +2633,235 @@ _describe('calc_state', function() {
 		assert.strictEqual(s.match.just_unsuspended, false);
 		assert.strictEqual(s.timer, false);
 	});
+
+	_it('injury', function() {
+		var presses = [{
+			type: 'pick_side', // Andrew&Alice pick left
+			team1_left: true,
+		}];
+		presses.push({
+			type: 'pick_server', // Andrew serves
+			team_id: 0,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'pick_receiver', // Bob receives
+			team_id: 1,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'love-all',
+			timestamp: 5000,
+		});
+
+		presses.push({
+			type: 'score',
+			side: 'left',
+			timestamp: 7000,
+		});
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [1, 0]);
+		assert.strictEqual(s.timer, false);
+		assert.strictEqual(s.match.injuries, false);
+
+		var st = bup.stats.calc_stats(s);
+		assert.deepStrictEqual(
+			st.cols[0].rally_lengths, [2000]);
+		assert.strictEqual(st.cols[0].avg_rally_length, '0:02');
+
+		// 1 simple injury
+		var injury1 = {
+			type: 'injury',
+			team_id: 0,
+			player_id: 0,
+			timestamp: 10000,
+		};
+		presses.push(injury1);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.timer.upwards, true);
+		assert.strictEqual(s.timer.start, 10000);
+		assert.deepStrictEqual(s.match.injuries, [injury1]);
+
+		// Healed quickly
+		presses.push({
+			type: 'injury-resume',
+			team_id: 0,
+			player_id: 0,
+			timestamp: 14000,
+		});
+		st = bup.stats.calc_stats(s);
+		assert.deepStrictEqual(
+			st.cols[0].rally_lengths, [2000]);
+		assert.strictEqual(st.cols[0].avg_rally_length, '0:02');
+
+		presses.push({
+			type: 'score',
+			side: 'left',
+			timestamp: 20000,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [2, 0]);
+		assert.strictEqual(s.timer, false);
+		assert.strictEqual(s.match.injuries, false);
+
+		st = bup.stats.calc_stats(s);
+		assert.deepStrictEqual(
+			st.cols[0].rally_lengths, [2000, 6000]);
+		assert.strictEqual(st.cols[0].avg_rally_length, '0:04');
+
+		// Injury again
+		var injury2 = {
+			type: 'injury',
+			team_id: 0,
+			player_id: 0,
+			timestamp: 30000,
+		};
+		presses.push(injury2);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [2, 0]);
+		assert.deepStrictEqual(s.match.injuries, [injury2]);
+		assert.strictEqual(s.timer.upwards, true);
+		assert.strictEqual(s.timer.start, 30000);
+
+		// Call the referee
+		presses.push({
+			type: 'referee',
+			team_id: 0,
+			player_id: 0,
+			timestamp: 31000,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [2, 0]);
+		assert.deepStrictEqual(s.match.injuries, [injury2]);
+		assert.strictEqual(s.timer.upwards, true);
+		assert.strictEqual(s.timer.start, 30000);
+
+		// Other player complains that it's all fake
+		presses.push({
+			type: 'red-card',
+			team_id: 1,
+			player_id: 0,
+			timestamp: 40000,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [3, 0]);
+		assert.deepStrictEqual(s.match.injuries, [injury2]);
+		assert.ok(s.timer);
+		assert.strictEqual(s.timer.upwards, true);
+		assert.strictEqual(s.timer.start, 30000);
+
+		// Partner gets injured as well during helping
+		var injury3 = {
+			type: 'injury',
+			team_id: 0,
+			player_id: 1,
+			timestamp: 50000,
+		};
+		presses.push(injury3);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [3, 0]);
+		assert.deepStrictEqual(s.match.injuries, [injury2, injury3]);
+		assert.strictEqual(s.timer.upwards, true);
+		assert.strictEqual(s.timer.start, 30000);
+
+		// Just as the first player has recovered, he trips over partner once again (double injury)
+		var injury4 = {
+			type: 'injury',
+			team_id: 0,
+			player_id: 0,
+			timestamp: 51000,
+		};
+		presses.push(injury4);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [3, 0]);
+		assert.deepStrictEqual(s.match.injuries, [injury2, injury3, injury4]);
+		assert.strictEqual(s.timer.upwards, true);
+		assert.strictEqual(s.timer.start, 30000);
+
+		// It was all just a flesh wound
+		presses.push({
+			type: 'injury-resume',
+			timestamp: 53000,
+		});
+		presses.push({
+			type: 'score',
+			side: 'right',
+			timestamp: 60000,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [3, 1]);
+		assert.strictEqual(s.timer, false);
+		st = bup.stats.calc_stats(s);
+		assert.deepStrictEqual(
+			st.cols[0].rally_lengths, [2000, 6000, 7000]);
+		assert.strictEqual(st.cols[0].avg_rally_length, '0:05');
+
+		presses.push({
+			type: 'score',
+			side: 'right',
+			timestamp: 160000,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [3, 2]);
+		assert.strictEqual(s.timer, false);
+
+		st = bup.stats.calc_stats(s);
+		assert.deepStrictEqual(
+			st.cols[0].rally_lengths, [2000, 6000, 7000, 100000]);
+		assert.strictEqual(st.cols[0].avg_rally_length, '0:29');
+
+		// Injury before interval
+		press_score(presses, 7, 7);
+		presses.push({
+			type: 'score',
+			side: 'right',
+			timestamp: 1000000,
+		});
+		var injury5 = {
+			type: 'injury',
+			team_id: 0,
+			player_id: 0,
+			timestamp: 1001000,
+		};
+		presses.push(injury5);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [10, 10]);
+		assert.deepStrictEqual(s.match.injuries, [injury5]);
+		assert.deepStrictEqual(s.timer, {
+			upwards: true,
+			start: 1001000,
+		});
+
+		presses.push({
+			type: 'injury-resume',
+			side: 'left',
+			start: 1008000,
+		});
+		presses.push({
+			type: 'score',
+			side: 'left',
+			timestamp: 1010000,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [11, 10]);
+		assert.strictEqual(s.match.injuries, false);
+		assert.deepStrictEqual(s.timer, {
+			start: 1010000,
+			duration: 60000,
+			exigent: 20499,
+		});
+
+		// Injury during interval - how to handle?
+
+
+		// TODO injury during interval
+
+		// TODO injury before postmatch
+		// TODO injury after postmatch
+		// TODO injury before love-all
+		// TODO injury after love-all
+		// TODO injury during suspension? / suspension during injury
+	});
 });
 
 _describe('calc helper functions', function() {

@@ -289,18 +289,47 @@ function ui_render(s) {
 		$('#postgame-confirm-dialog').hide();
 	}
 
+	utils.visible_qs('#suspension-resume-dialog', s.match.suspended);
 	if (s.match.suspended) {
 		dialog_active = true;
-		$('#suspension-resume-dialog').show();
 		$('#suspension-resume').text(
 			(s.settings.show_pronounciation ? (pronounciation.pronounce(s) + '.\n\n') : '') +
 			s._('button:Unsuspend')
 		);
-	} else {
-		$('#suspension-resume-dialog').hide();
 	}
 
-	var score_enabled = s.game.started && !s.game.finished && !s.match.suspended;
+	utils.visible_qs('#injury-resume-dialog', s.match.injuries && !s.match.suspended);
+	$('#injury-resume-dialog button').remove();
+	if (s.match.injuries) {
+		dialog_active = true;
+		$('#injury-pronounciation').text(
+			(s.settings.show_pronounciation ? (pronounciation.pronounce(s)) : '')
+		);
+		var dialog = document.querySelector('#injury-resume-dialog');
+		s.match.injuries.forEach(function(injury) {
+			var btn = utils.create_node(
+				dialog, 'button',
+				s._('{player_name} retires').replace(
+					'{player_name}', s.setup.teams[injury.team_id].players[injury.player_id].name)
+			);
+			utils.on_click(btn, function() {
+				control.on_press({
+					type: 'retired',
+					team_id: injury.team_id,
+					player_id: injury.player_id,
+				});
+			});
+		});
+		var continue_btn = utils.create_node(
+			dialog, 'button', s._('button:Resume after injury'));
+		utils.on_click(continue_btn, function() {
+			control.on_press({
+				type: 'injury-resume',
+			});
+		});
+	}
+
+	var score_enabled = s.game.started && !s.game.finished && !s.match.suspended && !s.match.injuries;
 	var buttons = $('#left_score,#right_score');
 	if (score_enabled) {
 		buttons.removeAttr('data-render-disabled');

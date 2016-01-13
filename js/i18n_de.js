@@ -11,6 +11,10 @@ var i18n_de = {
 'dialog-left': 'Spieler auf der linken Seite',
 'dialog-server': 'Aufschläger',
 'dialog-receiver': 'Rückschläger',
+'[Call referee!]': '[Referee rufen!]',
+'Are you retiring?': 'Werden Sie aufgeben?',
+'{player_name} retires': '{player_name} gibt auf',
+
 'fullscreen:go': 'Vollbildmodus',
 'fullscreen:no': 'Normalbildmodus',
 'timer:restart': 'Stoppuhr neu starten',
@@ -41,6 +45,7 @@ var i18n_de = {
 'button:shuttle': 'Federball +1',
 'button:redo': 'Wiederholen',
 'button:Unsuspend': 'Spiel fortsetzen',
+'button:Resume after injury': 'Spiel fortsetzen',
 
 
 'onmyleft.home_team': 'Meine Damen und Herren:\nZu meiner Rechten, {away_team},\nund zu meiner Linken, {home_team}.\n{serving_team} schlägt auf{serving_str}.\n{score}.\nBitte spielen.',

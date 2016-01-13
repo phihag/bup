@@ -2397,30 +2397,6 @@ _describe('pronounciation', function() {
 			'Service over. 1-Love. Play.');
 		assert.ok(! s.timer);
 
-		var injury = {
-			type: 'injury',
-			team_id: 0,
-			player_id: 0,
-			timestamp: 5,
-		};
-		presses.push(injury);
-		s = state_after(presses, SINGLES_SETUP);
-		assert.deepEqual(s.match.marks, [
-			referee,
-			red_card2,
-			injury,
-		]);
-		assert.deepEqual(s.game.score, [0, 1]);
-		assert.equal(pronounce_de(s),
-			'Zweiter Satz. 0 beide.\n' +
-			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
-			'Aufschlagwechsel. 1-0. Bitte spielen.');
-		assert.equal(pronounce_en(s),
-			'Second game; love all.\n' +
-			'Alice, faulted.\n' +
-			'Service over. 1-Love. Play.');
-		assert.ok(! s.timer);
-
 		presses.push({
 			type: 'love-all',
 		});
@@ -2614,6 +2590,99 @@ _describe('pronounciation', function() {
 			'Love all.\n' +
 			'Play.'
 		);
+	});
+
+	_it('injury', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		}, {
+			type: 'love-all',
+		}];
+
+		presses.push({
+			type: 'injury',
+			team_id: 0,
+			player_id: 0,
+		});
+
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(pronounce_de(s),
+			'[Referee rufen!]\n' +
+			'Werden Sie aufgeben?'
+		);
+		assert.equal(pronounce_en(s),
+			'[Call referee!]\n' +
+			'Are you retiring?'
+		);
+
+		presses.push({
+			type: 'referee',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(pronounce_de(s),
+			'Werden Sie aufgeben?'
+		);
+		assert.equal(pronounce_en(s),
+			'Are you retiring?'
+		);
+
+		presses.push({
+			type: 'injury-resume',
+		});
+
+		press_score(presses, 1, 0);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(pronounce_de(s),
+			'1-0'
+		);
+
+		presses.push({
+			type: 'injury',
+			team_id: 0,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'yellow-card',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(pronounce_de(s),
+			'Bob, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'[Referee rufen!]\n' +
+			'Werden Sie aufgeben?'
+		);
+		assert.equal(pronounce_en(s),
+			'Bob, warning for misconduct.\n' +
+			'[Call referee!]\n' +
+			'Are you retiring?'
+		);
+
+		presses.push({
+			type: 'red-card',
+			team_id: 1,
+			player_id: 1,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(pronounce_de(s),
+			'Bob, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'Birgit, Fehler wegen unsportlichen Verhaltens.\n' +
+			'[Referee rufen!]\n' +
+			'Werden Sie aufgeben?'
+		);
+		assert.equal(pronounce_en(s),
+			'Bob, warning for misconduct.\n' +
+			'Birgit, fault for misconduct.\n' +
+			'[Call referee!]\n' +
+			'Are you retiring?'
+		);
+
+
 	});
 });
 

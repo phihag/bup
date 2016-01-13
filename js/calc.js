@@ -178,6 +178,7 @@ function recalc_after_score(s, team_id, press) {
 		}
 		s.game.game = true;
 		s.game.finished = true;
+		s.match.injuries = false;
 		if (s.match.game_score[winner_idx] == 2) {
 			s.match.finished = true;
 			s.match.team1_won = team1_won;
@@ -232,7 +233,7 @@ function recalc_after_score(s, team_id, press) {
 			duration: 120 * 1000,
 			exigent: 20499,
 		};
-	} else if (! s.game.interval) {
+	} else if (!s.game.interval && !s.match.suspended && !s.match.injuries) {
 		s.timer = false;
 	}
 
@@ -240,7 +241,6 @@ function recalc_after_score(s, team_id, press) {
 		s.match.marks = [];
 		s.match.just_unsuspended = false;
 	}
-
 }
 
 function score(s, team_id, press) {
@@ -357,6 +357,19 @@ function calc_press(s, press) {
 		break;
 	case 'injury':
 		s.match.marks.push(press);
+		if (! s.match.injuries) {
+			s.match.injuries = [];
+			s.match.preinjury_timer = s.timer;
+			s.timer = {
+				start: press.timestamp,
+				upwards: true,
+			};
+		}
+		s.match.injuries.push(press);
+		break;
+	case 'injury-resume':
+		s.timer = s.match.preinjury_timer;
+		s.match.injuries = false;
 		break;
 	case 'retired':
 		s.match.marks.push(press);
@@ -368,6 +381,7 @@ function calc_press(s, press) {
 		s.game.team1_serving = null;
 		s.game.service_over = null;
 		s.timer = false;
+		s.match.injuries = false;
 		break;
 	case 'disqualified':
 		s.match.marks = [];  // Red cards do not matter now
@@ -380,6 +394,7 @@ function calc_press(s, press) {
 		s.game.team1_serving = null;
 		s.game.service_over = null;
 		s.timer = false;
+		s.match.injuries = false;
 		break;
 	case 'suspension':
 		if (s.match.suspended) {
@@ -512,6 +527,7 @@ function init_calc(s) {
 		shuttle_count: 0,
 		announce_pregame: null,
 		pending_red_cards: [],
+		injuries: false,
 	};
 
 	switch (s.setup.counting) {

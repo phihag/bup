@@ -56,6 +56,10 @@ function calc_stats(s) {
 			if (! mstats.start_ts) {
 				mstats.start_ts = p.timestamp;
 			}
+			current_game.rally_start = p.timestamp;
+			break;
+		case 'injury-resume':
+			current_game.rally_start = p.timestamp;
 			break;
 		case 'score':
 			var server_team_id = scopy.game.team1_serving ? 0 : 1;
@@ -151,7 +155,7 @@ function calc_stats(s) {
 	var keys = [].concat(
 		['points', 'points_lr'],
 		server_keys,
-		(s.settings.shuttle_counter ? ['shuttles'] : []),
+		((!s.settings || s.settings.shuttle_counter) ? ['shuttles'] : []),
 		['duration', 'avg_rally_length', 'longest_rally']
 	);
 

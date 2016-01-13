@@ -253,6 +253,13 @@ function text(node, str) {
 	node.appendChild(node.ownerDocument.createTextNode(str));
 }
 
+function create_node(parent, tagName, text) {
+	var el = document.createElement(tagName);
+	el.appendChild(document.createTextNode(text));
+	parent.appendChild(el);
+	return el;
+}
+
 return {
 	add_zeroes: add_zeroes,
 	any: any,
@@ -282,6 +289,7 @@ return {
 	values: values,
 	visible: visible,
 	visible_qs: visible_qs,
+	create_node: create_node,
 };
 })();
 

@@ -11,6 +11,10 @@ var i18n_en = {
 'dialog-left': 'Left court side',
 'dialog-server': 'Server',
 'dialog-receiver': 'Receiver',
+'[Call referee!]': '[Call referee!]',
+'Are you retiring?': 'Are you retiring?',
+'{player_name} retires': '{player_name} retires',
+
 'fullscreen:go': 'Go fullscreen',
 'fullscreen:no': 'Normal screen',
 'timer:restart': 'Restart timer',
@@ -41,6 +45,7 @@ var i18n_en = {
 'button:shuttle': 'Shuttle Counter +1',
 'button:redo': 'Redo',
 'button:Unsuspend': 'Resume Play',
+'button:Resume after injury': 'Resume Play',
 
 'onmyleft.home_team': 'Ladies and Gentlemen:\nOn my right, {away_team},\nand on my left, {home_team}.\n{serving_team} to serve{serving_str}.\n{score}.\nPlay.',
 'onmyleft.away_team': 'Ladies and Gentlemen:\nOn my left, {away_team},\nand on my right, {home_team}.\n{serving_team} to serve{serving_str}.\n{score}.\nPlay.',
