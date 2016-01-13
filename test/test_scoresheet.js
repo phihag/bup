@@ -2127,6 +2127,72 @@ _describe('scoresheet generation', function() {
 			score: [21, 0],
 			width: 3,
 		});
+	});
+
+	_it('match end after injury', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		}, {
+			type: 'love-all',
+		}];
+
+		presses.push({
+			type: 'injury',
+			team_id: 0,
+			player_id: 0,
+			timestamp: 1000,
+		});
+		var base_presses = presses.slice();
+
+		presses.push({
+			type: 'retired',
+			team_id: 0,
+			player_id: 0,
+			timestamp: 10000,
+		});
+		var cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		_assert_cell(cells, {
+			col: 1,
+			row: 0,
+			table: 0,
+			val: 'V',
+			press_type: 'injury',
+		});
+		_assert_cell(cells, {
+			type: 'vertical-text',
+			col: 1,
+			row: 2.5,
+			table: 0,
+			val: '0:09',
+		});
+
+		presses = base_presses.slice();
+		presses.push({
+			type: 'disqualified',
+			team_id: 1,
+			player_id: 0,
+			timestamp: 10000,
+		});
+		var cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		_assert_cell(cells, {
+			col: 1,
+			row: 0,
+			table: 0,
+			val: 'V',
+			press_type: 'injury',
+		});
+		_assert_cell(cells, {
+			type: 'vertical-text',
+			col: 1,
+			row: 2.5,
+			table: 0,
+			val: '0:09',
+		});
 
 	});
 });

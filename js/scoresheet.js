@@ -157,6 +157,18 @@ function _make_scoresheet_game() {
 	};
 }
 
+function _after_injuries(s, press) {
+	s.scoresheet_injuries.forEach(function(si) {
+		s.scoresheet_game.cells.push({
+			type: 'vertical-text',
+			col: si.cell.col,
+			row: ((si.cell.row < 2) ? 2.5 : 0.5),
+			val: utils.duration_secs(si.press.timestamp, press.timestamp),
+		});
+	});
+	s.scoresheet_injuries = [];
+}
+
 function _parse_match(state, col_count) {
 	var s = {
 		initialized: state.initialized,
@@ -279,15 +291,7 @@ function _parse_match(state, col_count) {
 
 		switch (press.type) {
 		case 'injury-resume':
-			s.scoresheet_injuries.forEach(function(si) {
-				s.scoresheet_game.cells.push({
-					type: 'vertical-text',
-					col: si.cell.col,
-					row: ((si.cell.row < 2) ? 2.5 : 0.5),
-					val: utils.duration_secs(si.press.timestamp, press.timestamp),
-				});
-			});
-			s.scoresheet_injuries = [];
+			_after_injuries(s, press);
 			break;
 		case 'injury':
 			var cell = {
@@ -391,6 +395,7 @@ function _parse_match(state, col_count) {
 			s.scoresheet_game.col_idx++;
 			break;
 		case 'retired':
+			_after_injuries(s, press);
 			var press_char = calc.press_char(s, press);
 			var retired_cell = {
 				row: 2 * press.team_id + press.player_id,
@@ -405,6 +410,7 @@ function _parse_match(state, col_count) {
 			s.scoresheet_game.col_idx++;
 			break;
 		case 'disqualified':
+			_after_injuries(s, press);
 			var cell = {
 				type: 'longtext',
 				row: 2 * press.team_id + press.player_id,
