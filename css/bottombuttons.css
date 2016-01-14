@@ -9,7 +9,7 @@
 #pronounciation>span {
 	padding: 2vmin 0 2vmin 0;
 }
-.pick_dialog .pronounciation+button {
+.pick_dialog .pronounciation_nonempty+button {
 	margin-top: 0.1em;
 }
 

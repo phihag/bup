@@ -216,13 +216,18 @@ function _set_dialog(dialog_qs, pr_str) {
 	var pronounciation_span = dialog.querySelector('span.pronounciation');
 	var button = dialog.querySelector('button');
 	var m = pr_str.match(/^([\s\S]+?)\n([^\n]+)$/);
-	if (m) {
-		utils.text(pronounciation_span, m[1]);
-		utils.text(button, m[2]);
-	} else { // Short string, pack it all into the button
-		utils.text(pronounciation_span, '');
-		utils.text(button, pr_str);
+
+	var span_str = m ? m[1] : '';
+	var btn_str = m ? m[2] : pr_str;
+
+	if (span_str) {
+		$(pronounciation_span).addClass('pronounciation_nonempty');
+	} else {
+		$(pronounciation_span).removeClass('pronounciation_nonempty');
 	}
+
+	utils.text(pronounciation_span, span_str);
+	utils.text(button, btn_str);
 }
 
 function ui_render(s) {
