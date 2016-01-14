@@ -1,9 +1,9 @@
 progress line diagram in stats
+	remove space before and after match
 	y coordinate numbers
 	x coordinate numbers
-	grid?
+	grid legend
 	show special chars (cards etc.)
-	pick better colors
 	legend
 
 generate Aufstellungszettel

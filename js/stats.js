@@ -1,51 +1,6 @@
 var stats = (function() {
 'use strict';
 
-// Calculate x
-function _layout_graph(gpoints) {
-	if (gpoints.length === 0) {
-		return;
-	}
-
-	var timestamp_now = gpoints[0].timestamp;
-	var normalized_now = 0;
-	var game = gpoints[0].game;
-	var score = gpoints[0].score;
-	var max_score = 1;
-	var res = [];
-	for (var i = 0;i < gpoints.length;i++) {
-		var gp = gpoints[i];
-		if (utils.deep_equal(gp.score, score)) {
-			continue;
-		}
-		res.push(gp);
-
-		var duration = gp.timestamp - timestamp_now;
-		if (gp.game > game) {
-			gp.draw_line = false;
-			duration = Math.min(duration, 200000);
-		} else {
-			gp.draw_line = (i > 0);
-			duration = Math.min(duration, 300000);
-		}
-		duration = Math.max(3000, duration);
-		normalized_now += duration;
-		gp.normalized = normalized_now;
-		timestamp_now = gp.timestamp;
-		game = gp.game;
-		score = gp.score;
-		max_score = Math.max(max_score, Math.max(gp.score[0], gp.score[1]));
-	}
-
-	res.forEach(function(gp) {
-		gp.x = 5 + gp.normalized * 290 / normalized_now;
-		gp.y = gp.score.map(function(sco) {
-			return 95 - sco * 90 / max_score;
-		});
-	});
-	return res;
-}
-
 function svg_el(parent, tagName, attrs, text) {
 	var el = parent.ownerDocument.createElementNS('http://www.w3.org/2000/svg', tagName);
 	if (attrs) {
@@ -59,38 +14,84 @@ function svg_el(parent, tagName, attrs, text) {
 	parent.appendChild(el);
 }
 
-function render_graph(svg, s, gpoints) {
-	if (gpoints.length === 0) {
+function render_graph(svg, s, all_gpoints) {
+	if (all_gpoints.length === 0) {
 		return;
 	}
 	var lines = svg.querySelector('.stats_graph_lines');
 	utils.empty(lines);
 
-	gpoints = _layout_graph(gpoints);
-	var x = [gpoints[0].x, gpoints[0].x];
-	var y = gpoints[0].y;
+	var timestamp_now = all_gpoints[0].timestamp;
+	var normalized_now = 0;
+	var game = all_gpoints[0].game;
+	var score = all_gpoints[0].score;
+	var max_score = 1;
+	var gpoints = [];
+	for (var i = 0;i < all_gpoints.length;i++) {
+		var gp = all_gpoints[i];
+		if (utils.deep_equal(gp.score, score)) {
+			continue;
+		}
+		gpoints.push(gp);
+
+		var duration = gp.timestamp - timestamp_now;
+		if (gp.game > game) {
+			gp.draw_line = false;
+			duration = Math.min(duration, 200000);
+		} else {
+			gp.draw_line = (i > 0);
+			duration = Math.min(duration, 300000);
+		}
+		duration = Math.max(3000, duration);
+		
+		normalized_now += duration;
+		gp.normalized = normalized_now;
+		timestamp_now = gp.timestamp;
+		game = gp.game;
+		score = gp.score;
+		max_score = Math.max(max_score, Math.max(gp.score[0], gp.score[1]));
+	}
+
+	var grid = document.querySelector('.stats_graph_grid');
+	utils.empty(grid);
+	for (var i = 0;i <= max_score;i++) {
+		var grid_y = 95 - i * 90 / max_score;
+		svg_el(grid, 'line', {
+			'x1': 0,
+			'x2': 300,
+			'y1': grid_y,
+			'y2': grid_y,
+			'class': (i % 10 === 0) ? 'important' : '',
+		});
+	}
+
+	var x = [5, 5];
+	var y = [95, 95];
 	for (var i = 1;i < gpoints.length;i++) {
 		var gp = gpoints[i];
+		var gpx = 5 + gp.normalized * 290 / normalized_now;
 		for (var team = 0;team < 2;team++) {
+			var gpy = 95 - gp.score[team] * 90 / max_score;
+
 			if (gp.draw_line) {
 				svg_el(lines, 'line', {
 					'x1': x[team],
-					'x2': gp.x,
+					'x2': gpx,
 					'y1': y[team],
 					'y2': y[team],
 					'class': 'team' + team,
 				});
 				svg_el(lines, 'line', {
-					'x1': gp.x,
-					'x2': gp.x,
+					'x1': gpx,
+					'x2': gpx,
 					'y1': y[team],
-					'y2': gp.y[team],
+					'y2': gpy,
 					'class': 'team' + team,
 				});
 			}
 
-			x[team] = gp.x;
-			y[team] = gp.y[team];
+			x[team] = gpx;
+			y[team] = gpy;
 		}
 	}
 }

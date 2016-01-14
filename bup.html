@@ -354,13 +354,20 @@ line.team0, line.team1 {
 	stroke-width: 1;
 }
 .team0 {
-	stroke: blue;
+	stroke: #0000bb;
 }
 .team1 {
-	stroke: red;
+	stroke: #ff0000;
 }
-
+.stats_graph_grid>line {
+	stroke-width: 0.1;
+	stroke: #bbb;
+}
+.stats_graph_grid>line.important {
+	stroke-width: 0.2;
+}
 </style>
+<g class="stats_graph_grid"></g>
 <g class="stats_graph_lines"></g>
 </svg>
 <a href="#" class="stats_back" data-i18n="stats:back"></a>
