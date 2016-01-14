@@ -1,4 +1,8 @@
 keep stats about network connection problems
+	latency of changes
+	failed changes (with ring buffer)
+	show avg
+
 generate Aufstellungszettel
 	empty, printer-friendly
 prevent negative date when begin is not set in scoresheet
