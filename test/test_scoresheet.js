@@ -2178,7 +2178,7 @@ _describe('scoresheet generation', function() {
 			player_id: 0,
 			timestamp: 10000,
 		});
-		var cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		cells = _scoresheet_cells(presses, SINGLES_SETUP);
 		_assert_cell(cells, {
 			col: 1,
 			row: 0,
@@ -2214,7 +2214,7 @@ _describe('scoresheet generation', function() {
 			player_id: 0,
 			timestamp: 1000,
 		});
-		var cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		cells = _scoresheet_cells(presses, SINGLES_SETUP);
 		assert.equal(cells.length, 4);
 
 		presses.push({
@@ -2223,7 +2223,7 @@ _describe('scoresheet generation', function() {
 			player_id: 0,
 			timestamp: 10000,
 		});
-		var cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		cells = _scoresheet_cells(presses, SINGLES_SETUP);
 		_assert_cell(cells, {
 			col: 2,
 			row: 2,
@@ -2288,7 +2288,7 @@ _describe('scoresheet generation', function() {
 			player_id: 0,
 			timestamp: 23000,
 		});
-		var cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		cells = _scoresheet_cells(presses, SINGLES_SETUP);
 		_assert_cell(cells, {
 			col: 6,
 			row: 2,

@@ -303,12 +303,11 @@ function ui_render(s) {
 	} else {
 		$('#postmatch-confirm-dialog').hide();
 	}
+
+	utils.visible_qs('#postgame-confirm-dialog', !s.match.finished && s.game.finished && !s.match.suspended && !s.match.injuries);
 	if (!s.match.finished && s.game.finished) {
 		dialog_active = true;
-		$('#postgame-confirm-dialog').show();
 		$('#postgame-confirm').text(s.settings.show_pronounciation ? pronounciation.pronounce(s) : pronounciation.postgame_announcement(s));
-	} else {
-		$('#postgame-confirm-dialog').hide();
 	}
 
 	utils.visible_qs('#suspension-resume-dialog', s.match.suspended);

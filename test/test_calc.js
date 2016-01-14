@@ -2855,7 +2855,6 @@ _describe('calc_state', function() {
 			type: 'injury',
 			team_id: 0,
 			player_id: 0,
-			side: 'left',
 			timestamp: 1020000,
 		};
 		presses.push(injury6);
@@ -2880,11 +2879,80 @@ _describe('calc_state', function() {
 			exigent: 20499,
 		});
 
+		// Injury during game end
+		press_score(presses, 9, 0);
+		presses.push({
+			type: 'score',
+			side: 'left',
+			timestamp: 1200000,
+		})
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [21, 10]);
+		assert.deepStrictEqual(s.timer, {
+			start: 1200000,
+			duration: 120000,
+			exigent: 20499,
+		});
 
-		// TODO injury before postmatch
-		// TODO injury after postmatch
-		// TODO injury before love-all
-		// TODO injury after love-all
+		var base_presses = presses.slice();
+		var injury7 = {
+			type: 'injury',
+			team_id: 0,
+			player_id: 0,
+			timestamp: 1230000,
+		};
+		presses.push(injury7);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [21, 10]);
+		assert.deepStrictEqual(s.match.injuries, [injury7]);
+		assert.deepStrictEqual(s.timer, {
+			upwards: true,
+			start: injury7.timestamp,
+		});
+
+		presses.push({
+			type: 'injury-resume',
+			timestamp: 1240000,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [21, 10]);
+		assert.deepStrictEqual(s.match.injuries, false);
+		assert.deepStrictEqual(s.timer, {
+			start: 1200000,
+			duration: 120000,
+			exigent: 20499,
+		});
+
+		presses = base_presses.slice();
+		presses.push({
+			type: 'postgame-confirm',
+			timestamp: 1201000,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.timer, {
+			start: 1200000,
+			duration: 120000,
+			exigent: 20499,
+		});
+		presses.push(injury7);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.match.injuries, [injury7]);
+		assert.deepStrictEqual(s.timer, {
+			upwards: true,
+			start: injury7.timestamp,
+		});
+
+		presses.push({
+			type: 'injury-resume',
+			timestamp: 1240000,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.match.injuries, false);
+		assert.deepStrictEqual(s.timer, {
+			start: 1200000,
+			duration: 120000,
+			exigent: 20499,
+		});
 	});
 
 	_it('suspension before match start', function() {

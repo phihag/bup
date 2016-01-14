@@ -52,6 +52,8 @@ dist: cleandist
 		div/courtspot_screenshot_links.png \
 		div/courtspot_screenshot_rechts.png \
 		div/LICENSE.commercial.de \
+		div/Mannschaftsaufstellung_1BL.pdf \
+		div/Mannschaftsaufstellung_2BL.pdf \
 		div/Spielberichtsbogen_1BL.pdf \
 		div/Spielberichtsbogen_2BL.pdf \
 		div/Spielbericht_RLW.svg \

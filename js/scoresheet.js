@@ -411,15 +411,15 @@ function _parse_match(state, col_count) {
 			break;
 		case 'disqualified':
 			_after_injuries(s, press);
-			var cell = {
+			var dq_cell = {
 				type: 'longtext',
 				row: 2 * press.team_id + press.player_id,
 				col: s.scoresheet_game.col_idx,
 				val: 'Disqualifiziert',
 				width: 4,
 			};
-			s.scoresheet_game.cells.push(cell);
-			s.scoresheet_game.col_idx += cell.width;
+			s.scoresheet_game.cells.push(dq_cell);
+			s.scoresheet_game.col_idx += dq_cell.width;
 			break;
 		case 'suspension':
 			s.scoresheet_game.cells.push({
