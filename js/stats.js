@@ -15,6 +15,10 @@ function svg_el(parent, tagName, attrs, text) {
 }
 
 function render_graph(svg, s, all_gpoints) {
+	// No let in current browsers, so declare these for all
+	var gp;
+	var i;
+
 	if (all_gpoints.length === 0) {
 		return;
 	}
@@ -27,8 +31,8 @@ function render_graph(svg, s, all_gpoints) {
 	var score = all_gpoints[0].score;
 	var max_score = 1;
 	var gpoints = [];
-	for (var i = 0;i < all_gpoints.length;i++) {
-		var gp = all_gpoints[i];
+	for (i = 0;i < all_gpoints.length;i++) {
+		gp = all_gpoints[i];
 		if (utils.deep_equal(gp.score, score)) {
 			continue;
 		}
@@ -54,7 +58,7 @@ function render_graph(svg, s, all_gpoints) {
 
 	var grid = document.querySelector('.stats_graph_grid');
 	utils.empty(grid);
-	for (var i = 0;i <= max_score;i++) {
+	for (i = 0;i <= max_score;i++) {
 		var grid_y = 95 - i * 90 / max_score;
 		svg_el(grid, 'line', {
 			'x1': 0,
@@ -67,8 +71,8 @@ function render_graph(svg, s, all_gpoints) {
 
 	var x = [5, 5];
 	var y = [95, 95];
-	for (var i = 1;i < gpoints.length;i++) {
-		var gp = gpoints[i];
+	for (i = 1;i < gpoints.length;i++) {
+		gp = gpoints[i];
 		var gpx = 5 + gp.normalized * 290 / normalized_now;
 		for (var team = 0;team < 2;team++) {
 			var gpy = 95 - gp.score[team] * 90 / max_score;

@@ -1,10 +1,9 @@
 progress line diagram in stats
+	grid legend (top left, player colors)
 	remove space before and after match
 	y coordinate numbers
-	x coordinate numbers
-	grid legend
+	x coordinates (time, scale correctly)
 	show special chars (cards etc.)
-	legend
 
 generate Aufstellungszettel
 	empty, printer-friendly
@@ -18,11 +17,11 @@ mail Ulf
 mail btde
 mail Manuel
 mail Werner
+mail Michael Pütz
 mail Jörg
+mail Jens Köster
 answer Wolf
 post bc
-mail Michael Pütz
-mail Jens Köster
 
 write network demo (liveaw)!
 enable compression for presses_json
@@ -55,6 +54,7 @@ check battery? (send via P2P)
 button sizes on Mac OSX Chrome
 do not recreate network buttons, update them instead
 show UI when reporting errors (top right, allow email address entering)
+netstats: use Resource Timing API
 
 &print for scoresheet / event scoresheet / eventsheet
 event scoresheet should show current state if known (associate mstate, survive event reloads)
