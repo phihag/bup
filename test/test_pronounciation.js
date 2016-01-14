@@ -2682,6 +2682,44 @@ _describe('pronounciation', function() {
 			'Are you retiring?'
 		);
 
+		presses.push({
+			type: 'injury-resume',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(pronounce_de(s),
+			'Bob, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'Birgit, Fehler wegen unsportlichen Verhaltens.\n' +
+			'2-0'
+		);
+		assert.equal(pronounce_en(s),
+			'Bob, warning for misconduct.\n' +
+			'Birgit, fault for misconduct.\n' +
+			'2-Love'
+		);
+
+		press_score(presses, 19, 0);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.equal(pronounce_de(s),
+			'Satz.\n' +
+			'Der erste Satz wurde gewonnen von Alice mit 21-0');
+		assert.equal(pronounce_en(s),
+			'Game.\n' +
+			'First game won by Alice 21-0');
+
+		presses.push({
+			type: 'injury',
+			team_id: 0,
+			player_id: 0,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(pronounce_de(s),
+			'[Referee rufen!]\n' +
+			'Werden Sie aufgeben?'
+		);
+		assert.equal(pronounce_en(s),
+			'[Call referee!]\n' +
+			'Are you retiring?'
+		);
 
 	});
 });

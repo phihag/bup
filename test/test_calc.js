@@ -2885,7 +2885,7 @@ _describe('calc_state', function() {
 			type: 'score',
 			side: 'left',
 			timestamp: 1200000,
-		})
+		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.deepStrictEqual(s.game.score, [21, 10]);
 		assert.deepStrictEqual(s.timer, {
@@ -3020,7 +3020,7 @@ _describe('calc_state', function() {
 			type: 'suspension',
 			timestamp: 20000,
 		});
-		var s = state_after(presses, SINGLES_SETUP);
+		s = state_after(presses, SINGLES_SETUP);
 		assert.deepStrictEqual(s.timer, {
 			upwards: true,
 			start: 20000,
@@ -3064,7 +3064,7 @@ _describe('calc_state', function() {
 			player_id: 0,
 			timestamp: 20000,
 		});
-		var s = state_after(presses, SINGLES_SETUP);
+		s = state_after(presses, SINGLES_SETUP);
 		assert.deepStrictEqual(s.timer, {
 			upwards: true,
 			start: 10000,

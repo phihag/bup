@@ -215,7 +215,7 @@ function _set_dialog(dialog_qs, pr_str) {
 	var dialog = document.querySelector(dialog_qs);
 	var pronounciation_span = dialog.querySelector('span.pronounciation');
 	var button = dialog.querySelector('button');
-	var m = pr_str.match(/^([\s\S]+?)\n([^\n]+)$/);
+	var m = pr_str.match(/^([\s\S]+?)\n([^\n]+\n[^\n]{1,15}|[^\n]+)$/);
 
 	var span_str = m ? m[1] : '';
 	var btn_str = m ? m[2] : pr_str;
@@ -296,18 +296,26 @@ function ui_render(s) {
 		dialog_active = true;
 	}
 	utils.visible_qs('.postmatch_options', s.match.finished);
+	utils.visible_qs('#postmatch-confirm-dialog', s.match.finished && !s.match.finish_confirmed && !s.match.suspended && !s.match.injuries);
 	if (s.match.finished && !s.match.finish_confirmed) {
 		dialog_active = true;
-		$('#postmatch-confirm-dialog').show();
-		$('#postmatch-confirm').text(s.settings.show_pronounciation ? pronounciation.pronounce(s) : pronounciation.postgame_announcement(s));
-	} else {
-		$('#postmatch-confirm-dialog').hide();
+		if (s.settings.show_pronounciation) {
+			_set_dialog('#postmatch-confirm-dialog', pronounciation.pronounce(s));
+		} else {
+			$('#postmatch-confirm-dialog button').text(pronounciation.postgame_announcement(s));
+			utils.text_qs('#postmatch-confirm-dialog span', '');
+		}
 	}
 
 	utils.visible_qs('#postgame-confirm-dialog', !s.match.finished && s.game.finished && !s.match.suspended && !s.match.injuries);
 	if (!s.match.finished && s.game.finished) {
 		dialog_active = true;
-		$('#postgame-confirm').text(s.settings.show_pronounciation ? pronounciation.pronounce(s) : pronounciation.postgame_announcement(s));
+		if (s.settings.show_pronounciation) {
+			_set_dialog('#postgame-confirm-dialog', pronounciation.pronounce(s));
+		} else {
+			$('#postgame-confirm-dialog button').text(pronounciation.postgame_announcement(s));
+			utils.text_qs('#postgame-confirm-dialog span', '');
+		}
 	}
 
 	utils.visible_qs('#suspension-resume-dialog', s.match.suspended);

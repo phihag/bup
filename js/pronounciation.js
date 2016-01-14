@@ -154,6 +154,17 @@ function marks2str(s, marks, during_interval) {
 function pronounce(s) {
 	var mark_str = marks2str(s, s.match.marks);
 
+	if (s.match.suspended) {
+		return s._('match suspended');
+	}
+
+	if (s.match.injuries) {
+		var referee_called = s.match.marks.some(function(mark) {
+			return mark.type == 'referee';
+		});
+		return mark_str + (referee_called ? '' : (s._('[Call referee!]') + '\n')) + s._('Are you retiring?');
+	}
+
 	if (s.match.announce_pregame && s.match.finished_games.length === 0) {
 		var serving_team_id = s.game.team1_serving ? 0 : 1;
 		var receiving_team_id = 1 - serving_team_id;
@@ -226,17 +237,6 @@ function pronounce(s) {
 			(post_mark_str ? (post_mark_str) : '') +
 			postgame_announcement(s)
 		);
-	}
-
-	if (s.match.suspended) {
-		return s._('match suspended');
-	}
-
-	if (s.match.injuries) {
-		var referee_called = s.match.marks.some(function(mark) {
-			return mark.type == 'referee';
-		});
-		return mark_str + (referee_called ? '' : (s._('[Call referee!]') + '\n')) + s._('Are you retiring?');
 	}
 
 	if (s.match.just_unsuspended)  {
