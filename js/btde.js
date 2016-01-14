@@ -19,7 +19,7 @@ function ui_render_login(container) {
 		loading_icon.show();
 		login_button.attr('disabled', 'disabled');
 
-		network.$ajax({
+		network.request('btde.login', {
 			dataType: 'text',
 			url: baseurl + 'login/',
 			method: 'POST',
@@ -58,10 +58,10 @@ function ui_render_login(container) {
 	});
 }
 
-function _request(s, options, cb) {
+function _request(s, component, options, cb) {
 	options.dataType = 'text';
 	options.timeout = s.settings.network_timeout;
-	network.$ajax(options).done(function(res) {
+	network.request(component, options).done(function(res) {
 		if (/<div class="login">/.exec(res)) {
 			return cb({
 				type: 'login-required',
@@ -118,7 +118,7 @@ function send_score(s) {
 	outstanding_requests++;
 	var match_id = s.metadata.id;
 
-	_request(s, {
+	_request(s, 'btde.score', {
 		method: 'POST',
 		url: baseurl + 'login/write.php',
 		data: JSON.stringify(post_data),
@@ -248,7 +248,7 @@ function _parse_match_list(doc, now) {
 }
 
 function list_matches(s, cb) {
-	_request(s, {
+	_request(s, 'btde.listmatches', {
 		url: baseurl + 'login/write.php?id=all',
 	}, function(err, json) {
 		if (err) {

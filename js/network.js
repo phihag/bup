@@ -552,12 +552,13 @@ function match_by_id(id) {
 	}
 }
 
-function $ajax(options) {
+// Follows the jQuery AJAX promise
+function request(component, options) {
 	return $.ajax(options);
 }
 
 return {
-	$ajax: $ajax,
+	request: request,
 	calc_score: calc_score,
 	send_press: send_press,
 	ui_list_matches: ui_list_matches,

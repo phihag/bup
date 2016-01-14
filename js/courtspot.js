@@ -1,9 +1,9 @@
 function courtspot(baseurl) {
 'use strict';
 
-function _request(s, options, cb) {
+function _request(s, component, options, cb) {
 	options.timeout = s.settings.network_timeout;
-	network.$ajax(options).done(function(res) {
+	network.request(component, options).done(function(res) {
 		return cb(null, res);
 	}).fail(function(xhr) {
 		var msg = ((xhr.status === 0) ?
@@ -93,7 +93,7 @@ function sync(s, force) {
 			'&verein=' + encodeURIComponent(data.verein)
 	);
 	var match_id = s.metadata.id;
-	_request(s, {
+	_request(s, 'courtspot.set', {
 		method: 'POST',
 		data: data,
 		dataType: 'text',
@@ -149,7 +149,7 @@ function list_matches(s, cb) {
 		url: baseurl + 'php/bupabfrage.php',
 		dataType: 'json',
 	};
-	_request(s, options, function(err, event) {
+	_request(s, 'courtspot.listmatches', options, function(err, event) {
 		if (err) {
 			return cb(err);
 		}

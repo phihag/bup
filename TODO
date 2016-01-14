@@ -1,6 +1,6 @@
 keep stats about network connection problems
-	latency of changes
-	failed changes (with ring buffer)
+	latency of requests
+	last 100 non-identical entries per key
 	show avg
 
 generate Aufstellungszettel
