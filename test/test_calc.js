@@ -2885,7 +2885,6 @@ _describe('calc_state', function() {
 		// TODO injury after postmatch
 		// TODO injury before love-all
 		// TODO injury after love-all
-		// TODO injury during suspension? / suspension during injury
 	});
 
 	_it('suspension before match start', function() {
@@ -2924,6 +2923,94 @@ _describe('calc_state', function() {
 		press_score(presses, 1, 0);
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.strictEqual(s.match.just_unsuspended, false);
+	});
+
+	_it('suspension during injury', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}, {
+			type: 'pick_server',
+			team1_id: 0,
+		}, {
+			type: 'love-all',
+		}];
+		presses.push({
+			type: 'injury',
+			team_id: 0,
+			player_id: 0,
+			timestamp: 10000,
+		});
+
+		var s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(s.timer, {
+			upwards: true,
+			start: 10000,
+		});
+
+		presses.push({
+			type: 'suspension',
+			timestamp: 20000,
+		});
+		var s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(s.timer, {
+			upwards: true,
+			start: 20000,
+		});
+
+		presses.push({
+			type: 'resume',
+			timestamp: 30000,
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(s.timer, {
+			upwards: true,
+			start: 10000,
+		});
+	});
+
+	_it('injury during suspension', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}, {
+			type: 'pick_server',
+			team1_id: 0,
+		}, {
+			type: 'love-all',
+		}];
+		presses.push({
+			type: 'suspension',
+			timestamp: 10000,
+		});
+
+		var s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(s.timer, {
+			upwards: true,
+			start: 10000,
+		});
+
+		presses.push({
+			type: 'injury',
+			team_id: 0,
+			player_id: 0,
+			timestamp: 20000,
+		});
+		var s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(s.timer, {
+			upwards: true,
+			start: 10000,
+		});
+
+		presses.push({
+			type: 'resume',
+			timestamp: 30000,
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(s.timer, {
+			upwards: true,
+			start: 20000,
+		});
 	});
 });
 

@@ -360,11 +360,19 @@ function calc_press(s, press) {
 		s.match.marks.push(press);
 		if (! s.match.injuries) {
 			s.match.injuries = [];
-			s.match.preinjury_timer = s.timer;
-			s.timer = {
-				start: press.timestamp,
-				upwards: true,
-			};
+			if (s.match.suspended) {
+				s.match.preinjury_timer = s.match.suspended_timer;
+				s.match.suspended_timer = {
+					start: press.timestamp,
+					upwards: true,
+				};
+			} else {
+				s.match.preinjury_timer = s.timer;
+				s.timer = {
+					start: press.timestamp,
+					upwards: true,
+				};
+			}
 		}
 		s.match.injuries.push(press);
 		break;

@@ -1,14 +1,12 @@
 Uhr bei Verletzung (test_calc injury tests)
 	injury at match start
 	injury between games
-	injury during suspension / suspension during injury
 	test multiple injuries on scoresheet
 
 test red card out of suspension into game end
 test red card out of suspension into match end
 test red card out of injury into game end
 test red card out of injury into match end
-less space between pronounciation and button
 end timer at love-all
 keep stats about network connection problems
 generate Aufstellungszettel
