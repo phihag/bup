@@ -164,6 +164,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
+	var network = require('./network');
 	var render = require('./render');
 	var settings = require('./settings');
 	var stats = require('./stats');
