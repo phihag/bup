@@ -106,12 +106,14 @@ button>.loading-icon {
 .setup_network_matches_reload {
 	display: inline-block;
 	margin: 0 0 0 0.6em;
-	background-image: url(../icons/reload.svg);
+	/* Will be larger on Mobile Safari because of brain-dead minimum button width */
 	width: 1em;
 	height: 1em;
-	background-size: 100%;
-	background-repeat: no-repeat;
 }
+.setup_network_matches_reload>span {
+	background-image: url(../icons/reload.svg);
+}
+
 .setup_linkline a:not(:last-child), .setup_linkline>div>a {
 	display: inline-block;
 	margin-right: 2em;

@@ -7,7 +7,7 @@ function enter() {
 	$('.editmode_leave,.editmode_arrow,.editmode_change-ends,.editmode_switch_left,.editmode_switch_right').show();
 	$('.editmode_ok').attr('disabled', 'disabled');
 	var k = 'settings:Abort Manual Edit';
-	$('.editmode_button').text(state._(k)).attr('data-i18n', k);
+	$('.go_editmode_button').text(state._(k)).attr('data-i18n', k);
 	$('#score td.score span').hide();
 	$('#game').addClass('editmode');
 	render(state);
@@ -17,13 +17,13 @@ function leave() {
 	$('#game').removeClass('editmode');
 	$('.editmode_leave,.editmode_arrow,.editmode_change-ends,.editmode_switch_left,.editmode_switch_right').hide();
 	var k = 'settings:Edit Manually';
-	$('.editmode_button').text(state._(k)).attr('data-i18n', k);
+	$('.go_editmode_button').text(state._(k)).attr('data-i18n', k);
 	hide_inputs(0);
 	$('#score td.score span').show();
 }
 
 function ui_init() {
-	$('.editmode_button').on('click', function() {
+	$('.go_editmode_button').on('click', function() {
 		if ($('#game').hasClass('editmode')) {
 			leave();
 		} else {

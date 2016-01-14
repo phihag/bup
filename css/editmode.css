@@ -1,12 +1,30 @@
-.editmode_change-ends, .editmode_switch_left, .editmode_switch_right, .editmode_leave {
+.editmode_button {
+	z-index: 80;
+}
+
+.editmode_button>span {
 	position: absolute;
+	left: 0; right: 0; top: 0; bottom: 0;
 	background-position: center;
 	background-size: 80% 80%;
 	background-repeat: no-repeat;
-	z-index: 80;
+}
+
+.editmode_arrow {
+	position: absolute;
+	left: 50%; top: 50%;
+	margin-left: -7.5vmin; margin-top: -7.5vmin;
+	width: 15vmin; height: 15vmin;
+	z-index: 50;
+}
+.editmode_arrow>span {
+	background-image: url(../icons/court_arrow.svg);
+}
+
+.editmode_change-ends, .editmode_switch_left, .editmode_switch_right, .editmode_leave {
+	position: absolute;
 }
 .editmode_leave {
-	background-image: url(../icons/checkmark.svg);
 	bottom: 10%;
 	left: 50%;
 	transform: translate(-50%, 0);
@@ -14,20 +32,27 @@
 	width: 15vmin;
 	height: 15vmin;
 }
+.editmode_leave>span {
+	background-image: url(../icons/checkmark.svg);
+}
 .editmode_change-ends {
-	background-image: url(../icons/change-ends.svg);
 	top: 25%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	width: 14vmin;
 	height: 10vmin;
 }
+.editmode_change-ends>span {
+	background-image: url(../icons/change-ends.svg);
+}
 .editmode_switch_left,.editmode_switch_right {
-	background-image: url(../icons/change-sides.svg);
 	top: 50%;
 	transform: translate(0%, -50%);
 	width: 10vmin;
 	height: 14vmin;
+}
+.editmode_switch_left>span,.editmode_switch_right>span {
+	background-image: url(../icons/change-sides.svg);
 }
 .editmode_switch_left {
 	left: 0.5%;

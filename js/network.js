@@ -135,7 +135,7 @@ function _matchlist_install_reload_button(s) {
 	if (event_container.find('.setup_network_matches_reload').length > 0) {
 		return;
 	}
-	var reload_button = $('<button class="setup_network_matches_reload"></button>');
+	var reload_button = $('<button class="setup_network_matches_reload image-button"><span></span></button>');
 	reload_button.on('click', function() {
 		ui_list_matches(s);
 	});

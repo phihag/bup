@@ -19,7 +19,7 @@
 	background-repeat: no-repeat;
 	border: 1px solid #dadada;
 }
-#court span {
+#court>div>span {
 	background: rgba(194, 211, 194, 0.4);
 }
 #court_left_even, #court_left_odd, #court_right_even, #court_right_odd, #court_right_team, #court_left_team, #court_match_name, #court_court_str {
@@ -81,7 +81,7 @@
 }
 
 
-#court_arrow, .editmode_arrow {
+#court_arrow {
 	position: absolute;
 	left: 50%; top: 50%;
 	margin-left: -7.5vmin; margin-top: -7.5vmin;
