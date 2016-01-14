@@ -552,7 +552,12 @@ function match_by_id(id) {
 	}
 }
 
+function $ajax(options) {
+	return $.ajax(options);
+}
+
 return {
+	$ajax: $ajax,
 	calc_score: calc_score,
 	send_press: send_press,
 	ui_list_matches: ui_list_matches,

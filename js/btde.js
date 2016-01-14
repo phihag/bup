@@ -19,7 +19,7 @@ function ui_render_login(container) {
 		loading_icon.show();
 		login_button.attr('disabled', 'disabled');
 
-		$.ajax({
+		network.$ajax({
 			dataType: 'text',
 			url: baseurl + 'login/',
 			method: 'POST',
@@ -61,7 +61,7 @@ function ui_render_login(container) {
 function _request(s, options, cb) {
 	options.dataType = 'text';
 	options.timeout = s.settings.network_timeout;
-	$.ajax(options).done(function(res) {
+	network.$ajax(options).done(function(res) {
 		if (/<div class="login">/.exec(res)) {
 			return cb({
 				type: 'login-required',

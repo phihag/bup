@@ -3,7 +3,7 @@ function courtspot(baseurl) {
 
 function _request(s, options, cb) {
 	options.timeout = s.settings.network_timeout;
-	$.ajax(options).done(function(res) {
+	network.$ajax(options).done(function(res) {
 		return cb(null, res);
 	}).fail(function(xhr) {
 		var msg = ((xhr.status === 0) ?
