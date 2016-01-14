@@ -262,9 +262,16 @@ function text_qs(qs, str) {
 	text(node, str);
 }
 
-function create_node(parent, tagName, text) {
+function create_el(parent, tagName, attrs, text) {
 	var el = document.createElement(tagName);
-	el.appendChild(document.createTextNode(text));
+	if (attrs) {
+		for (var k in attrs) {
+			el.setAttribute(k, attrs[k]);
+		}
+	}
+	if (text) {
+		el.appendChild(document.createTextNode(text));
+	}
 	parent.appendChild(el);
 	return el;
 }
@@ -272,7 +279,7 @@ function create_node(parent, tagName, text) {
 return {
 	add_zeroes: add_zeroes,
 	any: any,
-	create_node: create_node,
+	create_el: create_el,
 	date_str: date_str,
 	datetime_str: datetime_str,
 	deep_equal: deep_equal,

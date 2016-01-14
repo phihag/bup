@@ -517,6 +517,7 @@ function ui_init_court(s, hash_query) {
 
 function ui_init(s, hash_query) {
 	utils.on_click_qs('.network_desync_image', resync);
+	netstats.ui_init();
 
 	// Load networking module(s)
 	if (hash_query.p2p !== undefined) {
@@ -554,7 +555,10 @@ function match_by_id(id) {
 
 // Follows the jQuery AJAX promise
 function request(component, options) {
-	return $.ajax(options);
+	var cb = netstats.pre_request(component);
+	var res = $.ajax(options);
+	res.always(cb);
+	return res;
 }
 
 return {
@@ -589,6 +593,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var uiu = require('./uiu');
 	var report_problem = require('./report_problem');
 	var utils = require('./utils');
+	var netstats = require('./netstats');
 
 	module.exports = network;
 }

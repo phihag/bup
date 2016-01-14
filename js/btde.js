@@ -248,7 +248,7 @@ function _parse_match_list(doc, now) {
 }
 
 function list_matches(s, cb) {
-	_request(s, 'btde.listmatches', {
+	_request(s, 'btde.list', {
 		url: baseurl + 'login/write.php?id=all',
 	}, function(err, json) {
 		if (err) {

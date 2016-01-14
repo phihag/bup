@@ -314,6 +314,9 @@ function init_shortcuts() {
 			settings.show();
 		}
 	});
+	Mousetrap.bind('shift+n', function() {
+		netstats.show();
+	});
 	Mousetrap.bind('shift+a', function() {
 		if (state.initialized) {
 			stats.show();
@@ -410,6 +413,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var editmode = require('./editmode');
 	var i18n = require('./i18n');
 	var match_storage = require('./match_storage');
+	var netstats = require('./netstats');
 	var network = require('./network');
 	var render = require('./render');
 	var scoresheet = require('./scoresheet');

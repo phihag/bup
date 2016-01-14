@@ -36,7 +36,7 @@ function record(s) {
 
 	var orig_hval = window.location.hash.substr(1);
 	var hval = orig_hval;
-	hval = hval.replace(/(?:^|&)(?:m|settings|event_scoresheets|scoresheet|eventsheet|stats)(?:=[^&]*)?(?=&|$)/g, '');
+	hval = hval.replace(/(?:^|&)(?:m|settings|event_scoresheets|scoresheet|eventsheet|stats|netstats)(?:=[^&]*)?(?=&|$)/g, '');
 	hval = hval.replace(/^&+|&+$/g, '');
 
 	if (s.initialized) {
@@ -61,6 +61,11 @@ function record(s) {
 			hval += '&';
 		}
 		hval += 'eventsheet=' + encodeURIComponent(s.ui.eventsheet);
+	} else if (s.ui.netstats_visible) {
+		if (hval.length > 1) {
+			hval += '&';
+		}
+		hval += 'netstats';
 	} else if (s.ui.settings_visible) {
 		if (hval.length > 1) {
 			hval += '&';
@@ -76,6 +81,7 @@ function record(s) {
 	var orig_qs = utils.parse_query_string(orig_hval);
 	var new_qs = utils.parse_query_string(hval);
 	if (! utils.deep_equal(orig_qs, new_qs)) {
+		// TODO use history API here to avoid changing?
 		window.location.hash = '#' + hval;
 	}
 }
@@ -90,6 +96,11 @@ function load_by_hash() {
 
 	if (typeof qs.event_scoresheets != 'undefined') {
 		scoresheet.event_show();
+		return;
+	}
+
+	if (typeof qs.netstats != 'undefined') {
+		netstats.show();
 		return;
 	}
 
@@ -156,6 +167,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
 	var eventsheet = require('./eventsheet');
 	var match_storage = require('./match_storage');
+	var netstats = require('./netstats');
 	var network = require('./network');
 	var render = require('./render');
 	var scoresheet = require('./scoresheet');

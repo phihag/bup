@@ -116,6 +116,7 @@ var i18n_en = {
 'settings:Matches': 'Matches',
 'settings:Event Scoresheets': 'Scoresheets',
 'settings:Custom match details': 'Custom match details ...',
+'settings:Network statistics': 'network statistics',
 'settings:New match': 'Create match',
 'settings:Singles': 'Singles',
 'settings:Doubles': 'Doubles',
@@ -230,6 +231,18 @@ var i18n_en = {
 'stats:serves': '#Serves {player_name}',
 'stats:longest rally (game)': ' ({score})',
 'stats:longest rally (match)': ' (game {game} at {score})',
+
+'netstats:No stats available': 'No network communication yet',
+'stats:<25ms': 'latency <25ms',
+'stats:<100ms': 'latency <100ms',
+'stats:<500ms': 'latency <500ms',
+'stats:<2s': 'latency <2s',
+'stats:<8s': 'latency <8s',
+'stats:>8s': 'latency >8s',
+'stats:latency_avg_str': '⌀ latency',
+'stats:failed_net_count': 'request loss',
+'stats:failed_srv_count': 'server errors',
+'stats:success_net_count': '# successful',
 
 };
 

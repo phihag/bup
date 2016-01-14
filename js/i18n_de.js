@@ -117,6 +117,7 @@ var i18n_de = {
 'settings:Matches': 'Spiele',
 'settings:Event Scoresheets': 'Schiedsrichterzettel',
 'settings:Custom match details': 'Spiel manuell eintragen ...',
+'settings:Network statistics': 'Netzwerkstatistiken',
 'settings:New match': 'Neues Spiel',
 'settings:Singles': 'Einzel',
 'settings:Doubles': 'Doppel',
@@ -231,6 +232,18 @@ var i18n_de = {
 'stats:longest rally (game)': ' ({score})',
 'stats:longest rally (match)': ' ({score} im {game}. Satz)',
 'stats:serves': 'Aufschläge {player_name}',
+
+'netstats:No stats available': 'Noch keine Netzwerkkommunikation',
+'stats:<25ms': 'Latenz <25ms',
+'stats:<100ms': 'Latenz <100ms',
+'stats:<500ms': 'Latenz <500ms',
+'stats:<2s': 'Latenz <2s',
+'stats:<8s': 'Latenz <8s',
+'stats:>8s': 'Latenz >8s',
+'stats:latency_avg_str': '⌀ Latenz',
+'stats:failed_net_count': 'Verlust',
+'stats:failed_srv_count': 'Server-Fehler',
+'stats:success_net_count': '# Erfolg',
 
 };
 

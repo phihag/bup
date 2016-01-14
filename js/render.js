@@ -336,8 +336,8 @@ function ui_render(s) {
 		);
 		var dialog = document.querySelector('#injury-resume-dialog');
 		s.match.injuries.forEach(function(injury) {
-			var btn = utils.create_node(
-				dialog, 'button',
+			var btn = utils.create_el(
+				dialog, 'button', {},
 				s._('card.retired', {
 					player_name: s.setup.teams[injury.team_id].players[injury.player_id].name,
 				}).replace(/\n?$/, '')
@@ -350,8 +350,8 @@ function ui_render(s) {
 				});
 			});
 		});
-		var continue_btn = utils.create_node(
-			dialog, 'button', s._('button:Resume after injury'));
+		var continue_btn = utils.create_el(
+			dialog, 'button', {}, s._('button:Resume after injury'));
 		utils.on_click(continue_btn, function() {
 			control.on_press({
 				type: 'injury-resume',

@@ -1,6 +1,100 @@
 var stats = (function() {
 'use strict';
 
+// Calculate x
+function _layout_graph(gpoints) {
+	if (gpoints.length === 0) {
+		return;
+	}
+
+	var timestamp_now = gpoints[0].timestamp;
+	var normalized_now = 0;
+	var game = gpoints[0].game;
+	var score = gpoints[0].score;
+	var max_score = 1;
+	var res = [];
+	for (var i = 0;i < gpoints.length;i++) {
+		var gp = gpoints[i];
+		if (utils.deep_equal(gp.score, score)) {
+			continue;
+		}
+		res.push(gp);
+
+		var duration = gp.timestamp - timestamp_now;
+		if (gp.game > game) {
+			gp.draw_line = false;
+			duration = Math.min(duration, 200000);
+		} else {
+			gp.draw_line = (i > 0);
+			duration = Math.min(duration, 300000);
+		}
+		duration = Math.max(3000, duration);
+		normalized_now += duration;
+		gp.normalized = normalized_now;
+		timestamp_now = gp.timestamp;
+		game = gp.game;
+		score = gp.score;
+		max_score = Math.max(max_score, Math.max(gp.score[0], gp.score[1]));
+	}
+
+	res.forEach(function(gp) {
+		gp.x = 5 + gp.normalized * 290 / normalized_now;
+		gp.y = gp.score.map(function(sco) {
+			return 95 - sco * 90 / max_score;
+		});
+	});
+	return res;
+}
+
+function svg_el(parent, tagName, attrs, text) {
+	var el = parent.ownerDocument.createElementNS('http://www.w3.org/2000/svg', tagName);
+	if (attrs) {
+		for (var k in attrs) {
+			el.setAttribute(k, attrs[k]);
+		}
+	}
+	if (text) {
+		el.appendChild(document.createTextNode(text));
+	}
+	parent.appendChild(el);
+}
+
+function render_graph(svg, s, gpoints) {
+	if (gpoints.length === 0) {
+		return;
+	}
+	var lines = svg.querySelector('.stats_graph_lines');
+	utils.empty(lines);
+
+	gpoints = _layout_graph(gpoints);
+	var x = [gpoints[0].x, gpoints[0].x];
+	var y = gpoints[0].y;
+	for (var i = 1;i < gpoints.length;i++) {
+		var gp = gpoints[i];
+		for (var team = 0;team < 2;team++) {
+			if (gp.draw_line) {
+				svg_el(lines, 'line', {
+					'x1': x[team],
+					'x2': gp.x,
+					'y1': y[team],
+					'y2': y[team],
+					'class': 'team' + team,
+				});
+				svg_el(lines, 'line', {
+					'x1': gp.x,
+					'x2': gp.x,
+					'y1': y[team],
+					'y2': gp.y[team],
+					'class': 'team' + team,
+				});
+			}
+
+			x[team] = gp.x;
+			y[team] = gp.y[team];
+		}
+	}
+}
+
 function calc_stats(s) {
 	var all_games = s.match.finished_games.slice();
 	all_games.push(s.game);
@@ -31,6 +125,7 @@ function calc_stats(s) {
 	};
 	cols.push(mstats);
 
+	var gpoints = [];
 	var scopy = {
 		initialized: s.initialized,
 		settings: s.settings,
@@ -43,6 +138,16 @@ function calc_stats(s) {
 	calc.init_state(scopy, s.setup);
 	calc.init_calc(scopy);
 
+	for (var i = 0;i < presses.length;i++) {
+		if (presses[i].timestamp) {
+			gpoints.push({
+				score: [0, 0],
+				timestamp: presses[i].timestamp,
+				game: 0,
+			});
+			break;
+		}
+	}
 	presses.forEach(function(p) {
 		var current_game_idx = scopy.match.finished_games.length;
 		var current_game = cols[current_game_idx];
@@ -104,6 +209,14 @@ function calc_stats(s) {
 
 		calc.calc_press(scopy, p);
 
+		if (p.timestamp) {
+			gpoints.push({
+				timestamp: p.timestamp,
+				score: scopy.game.score.slice(),
+				game: scopy.match.finished_games.length,
+			});
+		}
+
 		switch (p.type) {
 		case 'love-all':
 		case 'score':
@@ -163,45 +276,20 @@ function calc_stats(s) {
 		cols: cols,
 		keys: keys,
 		labels: labels,
+		gpoints: gpoints,
 	};
 }
 
-
-function show() {
-	if (state.ui.stats_visible) {
-		return;
-	}
-	uiu.esc_stack_push(hide);
-
-	state.ui.stats_visible = true;
-	control.set_current(state);	
-	$('.stats_layout').show();
-	var stats = calc_stats(state);
-
-	var match_name = '';
-	if (state.setup.match_name) {
-		match_name += '(' + state.setup.match_name + ') ';
-	}
-	if (state.setup.is_doubles) {
-		match_name += state.setup.teams[0].players[0].name + ' / ' + state.setup.teams[0].players[1].name + ' - ' + state.setup.teams[1].players[0].name + ' / ' + state.setup.teams[1].players[1].name;
-	} else {
-		match_name += state.setup.teams[0].players[0].name + ' - ' + state.setup.teams[1].players[0].name;
-	}
-	$('.stats_match_name').text(match_name);
-
-
-	var table = $('.stats_table');
-
-	var thead_tr = table.find('thead>tr');
-	thead_tr.empty();
-	thead_tr.append('<th></th>');
+function render_table($table, stats) {
+	var thead_tr = $table.find('thead>tr');
+	thead_tr.children('th:not(:first-child)').remove();
 	stats.cols.forEach(function(st) {
 		var th = $('<th>');
 		th.text(st.label);
 		thead_tr.append(th);
 	});
 
-	var tbody = table.find('tbody');
+	var tbody = $table.find('tbody');
 	tbody.empty();
 
 	stats.keys.forEach(function(k) {
@@ -216,7 +304,7 @@ function show() {
 
 		stats.cols.forEach(function(st) {
 			var td = $('<td>');
-			if (k == 'longest_rally') {
+			if (k === 'longest_rally') {
 				td.attr('title', st.longest_rally_desc);
 			}
 			tr.append(td);
@@ -225,6 +313,33 @@ function show() {
 
 		tbody.append(tr);
 	});
+}
+
+function show() {
+	if (state.ui.stats_visible) {
+		return;
+	}
+	uiu.esc_stack_push(hide);
+
+	state.ui.stats_visible = true;
+	control.set_current(state);	
+	$('.stats_layout').show();
+
+	var match_name = '';
+	if (state.setup.match_name) {
+		match_name += '(' + state.setup.match_name + ') ';
+	}
+	if (state.setup.is_doubles) {
+		match_name += state.setup.teams[0].players[0].name + ' / ' + state.setup.teams[0].players[1].name + ' - ' + state.setup.teams[1].players[0].name + ' / ' + state.setup.teams[1].players[1].name;
+	} else {
+		match_name += state.setup.teams[0].players[0].name + ' - ' + state.setup.teams[1].players[0].name;
+	}
+	$('.stats_match_name').text(match_name);
+
+	var stats = calc_stats(state);
+	var table = $('.stats_table');
+	render_table(table, stats);
+	render_graph(document.querySelector('.stats_graph'), state, stats.gpoints);
 }
 
 function hide() {
@@ -258,6 +373,7 @@ return {
 	show: show,
 	ui_init: ui_init,
 	calc_stats: calc_stats,
+	render_table: render_table,
 };
 
 })();

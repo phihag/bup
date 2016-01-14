@@ -22,6 +22,7 @@ function get_info() {
 		last_error: last_error,
 		reported_count: reported_count,
 		presses: state.presses,
+		netstats: netstats.all_stats,
 	};
 }
 
@@ -111,6 +112,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var fullscreen = require('./fullscreen');
+	var netstats = require('./netstats');
 
 	module.exports = report_problem;
 }

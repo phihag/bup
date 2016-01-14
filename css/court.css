@@ -41,6 +41,7 @@
 	font-size: 5vmin;
 	top: 1%;
 	left: 50%;
+	cursor: pointer;
 	transform: translate(-50%, 0);
 }
 #court_match_name {

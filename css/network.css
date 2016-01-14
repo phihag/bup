@@ -114,9 +114,17 @@ button>.loading-icon {
 	background-image: url(../icons/reload.svg);
 }
 
+.setup_linkline {
+	margin-top: 0.8em;
+	margin-bottom: 1em;
+}
 .setup_linkline a:not(:last-child), .setup_linkline>div>a {
 	display: inline-block;
 	margin-right: 2em;
+	margin-bottom: 1.5em;
+}
+.setup_linkline a {
+	white-space: pre;
 }
 
 /* Smartphones */

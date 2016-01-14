@@ -149,7 +149,7 @@ function list_matches(s, cb) {
 		url: baseurl + 'php/bupabfrage.php',
 		dataType: 'json',
 	};
-	_request(s, 'courtspot.listmatches', options, function(err, event) {
+	_request(s, 'courtspot.list', options, function(err, event) {
 		if (err) {
 			return cb(err);
 		}

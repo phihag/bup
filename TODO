@@ -1,7 +1,10 @@
-keep stats about network connection problems
-	latency of requests
-	last 100 non-identical entries per key
-	show avg
+progress line diagram in stats
+	y coordinate numbers
+	x coordinate numbers
+	grid?
+	show special chars (cards etc.)
+	pick better colors
+	legend
 
 generate Aufstellungszettel
 	empty, printer-friendly
@@ -10,9 +13,6 @@ begin is wrong in multi scoresheets (use date from presses?)
 multi scoresheet: shift+S shows outdated state when editing match
 check eventsheet with bupbt
 option to disable double click on court (default set)
-progress line diagram in stats
-	Treppchen-Auswertung mit Länge
-	minimum and maximum width for each rally (say, 5 minutes)
 
 mail Ulf
 mail btde
@@ -21,10 +21,11 @@ mail Werner
 mail Jörg
 answer Wolf
 post bc
+mail Michael Pütz
+mail Jens Köster
 
 write network demo (liveaw)!
 enable compression for presses_json
-stats: remove avg icon (fails on Android)
 comment on Verletzung?
 clicking on current match when match is in progress shouldn't do anything
 highlight current match button
@@ -54,8 +55,6 @@ check battery? (send via P2P)
 button sizes on Mac OSX Chrome
 do not recreate network buttons, update them instead
 show UI when reporting errors (top right, allow email address entering)
-
-send mail to Michael Pütz, Jens Köster (depend on iPad) 
 
 &print for scoresheet / event scoresheet / eventsheet
 event scoresheet should show current state if known (associate mstate, survive event reloads)

@@ -1,0 +1,11 @@
+.netstats_empty {
+	font-style: italic;
+}
+
+.netstats_resync {
+	width: 40px;
+	height: 40px;
+}
+.netstats_resync>span {
+	background-image: url(../icons/reload.svg);
+}
