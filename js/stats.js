@@ -18,6 +18,7 @@ function render_graph(svg, s, all_gpoints) {
 	// No let in current browsers, so declare these for all
 	var gp;
 	var i;
+	var team;
 
 	if (all_gpoints.length === 0) {
 		return;
@@ -28,12 +29,12 @@ function render_graph(svg, s, all_gpoints) {
 	var timestamp_now = all_gpoints[0].timestamp;
 	var normalized_now = 0;
 	var game = all_gpoints[0].game;
-	var score = all_gpoints[0].score;
+	var score = false;
 	var max_score = 1;
 	var gpoints = [];
 	for (i = 0;i < all_gpoints.length;i++) {
 		gp = all_gpoints[i];
-		if (utils.deep_equal(gp.score, score)) {
+		if (utils.deep_equal(gp.score, score) && (game === gp.game)) {
 			continue;
 		}
 		gpoints.push(gp);
@@ -65,7 +66,7 @@ function render_graph(svg, s, all_gpoints) {
 			'x2': 300,
 			'y1': grid_y,
 			'y2': grid_y,
-			'class': (i % 10 === 0) ? 'important' : '',
+			'class': ((i == 0) || (i === 11) || (i == 21)) ? 'important' : '',
 		});
 	}
 
@@ -74,7 +75,7 @@ function render_graph(svg, s, all_gpoints) {
 	for (i = 1;i < gpoints.length;i++) {
 		gp = gpoints[i];
 		var gpx = 5 + gp.normalized * 290 / normalized_now;
-		for (var team = 0;team < 2;team++) {
+		for (team = 0;team < 2;team++) {
 			var gpy = 95 - gp.score[team] * 90 / max_score;
 
 			if (gp.draw_line) {
@@ -98,6 +99,21 @@ function render_graph(svg, s, all_gpoints) {
 			y[team] = gpy;
 		}
 	}
+
+	var max_width = 0;
+	for (team = 0;team < 2;team++) {
+		var player_names = s.setup.teams[team].players[0].name;
+		if (s.setup.is_doubles) {
+			player_names += ' / ' + s.setup.teams[team].players[1].name;
+		}
+
+		var text = svg.querySelector('.legend_team' + team);
+		utils.text(text, player_names);
+		var bb = text.getBBox();
+		max_width = Math.max(bb.width, max_width);
+	}
+
+	svg.querySelector('.legend_background').setAttribute('width', max_width + 2);
 }
 
 function calc_stats(s) {

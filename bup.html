@@ -353,12 +353,27 @@
 line.team0, line.team1 {
 	stroke-width: 1;
 }
-.team0 {
+line.team0 {
 	stroke: #0000bb;
 }
-.team1 {
+line.team1 {
 	stroke: #ff0000;
 }
+
+.legend_background {
+	fill: #fff;
+}
+.legend_team0, .legend_team1 {
+	font-size: 6px;
+}
+text.team0 {
+	fill: #0000bb;
+}
+text.team1 {
+	fill: #ff0000;
+}
+
+
 .stats_graph_grid>line {
 	stroke-width: 0.1;
 	stroke: #bbb;
@@ -367,7 +382,13 @@ line.team0, line.team1 {
 	stroke-width: 0.2;
 }
 </style>
+
 <g class="stats_graph_grid"></g>
+
+<rect x="6" y="4" width="100" height="15" class="legend_background" />
+<text x="7" y="10" class="legend_team0 team0">team0</text>
+<text x="7" y="17" class="legend_team1 team1">team1</text>
+
 <g class="stats_graph_lines"></g>
 </svg>
 <a href="#" class="stats_back" data-i18n="stats:back"></a>
