@@ -1,5 +1,5 @@
 progress line diagram in stats
-	show special chars (cards etc.)
+	show cards
 
 generate Aufstellungszettel
 	empty, printer-friendly
@@ -31,6 +31,7 @@ simple P2P
 	list connected nodes in settings
 	test for connected nodes
 	send current battery level (if known)
+	send network stats
 
 	fix connection / answer
 	test between 3 nodes with candidates&offer

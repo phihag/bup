@@ -1,7 +1,7 @@
 var calc = (function() {
 'use strict';
 
-var _PRESSES_WITH_CHAR = [
+var SPECIAL_PRESSES = [
 	'correction',
 	'disqualified',
 	'injury',
@@ -13,7 +13,7 @@ var _PRESSES_WITH_CHAR = [
 	'yellow-card',
 ];
 function press_char(s, press) {
-	if (_PRESSES_WITH_CHAR.indexOf(press.type) >= 0) {
+	if (SPECIAL_PRESSES.indexOf(press.type) >= 0) {
 		return s._('mark:' + press.type);
 	}
 }
@@ -670,6 +670,7 @@ return {
 	press_char: press_char,
 	lr2score: lr2score,
 	match_started: match_started,
+	SPECIAL_PRESSES: SPECIAL_PRESSES,
 };
 
 })();

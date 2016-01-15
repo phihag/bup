@@ -1,6 +1,8 @@
 var stats = (function() {
 'use strict';
 
+var _INTERESTING_TYPES = ['love-all', 'postgame-confirm', 'postmatch-confirm', 'suspension', 'resume'];
+
 function svg_el(parent, tagName, attrs, text) {
 	var el = parent.ownerDocument.createElementNS('http://www.w3.org/2000/svg', tagName);
 	if (attrs) {
@@ -34,7 +36,11 @@ function render_graph(svg, s, all_gpoints) {
 	var gpoints = [];
 	for (i = 0;i < all_gpoints.length;i++) {
 		gp = all_gpoints[i];
-		if (utils.deep_equal(gp.score, score) && (game === gp.game) && !gp.interesting) {
+		if (
+				utils.deep_equal(gp.score, score) &&
+				(game === gp.game) &&
+				!gp.interesting &&
+				(!gp.press || (calc.SPECIAL_PRESSES.indexOf(gp.press.type) < 0))) {
 			continue;
 		}
 		gpoints.push(gp);
@@ -63,10 +69,10 @@ function render_graph(svg, s, all_gpoints) {
 	for (i = 0;i <= max_score;i++) {
 		var grid_y = 95 - i * 90 / max_score;
 		svg_el(grid, 'line', {
-			'x1': 5,
-			'x2': 295,
-			'y1': grid_y,
-			'y2': grid_y,
+			x1: 5,
+			x2: 295,
+			y1: grid_y,
+			y2: grid_y,
 			'class': ((i === 0) || (i === 11) || (i == 21)) ? 'important' : '',
 		});
 	}
@@ -134,22 +140,56 @@ function render_graph(svg, s, all_gpoints) {
 	for (i = 1;i < gpoints.length;i++) {
 		gp = gpoints[i];
 		var gpx = 5 + gp.normalized * 290 / normalized_now;
+		var gpys = [0, 1].map(function(team) {
+			return 95 - gp.score[team] * 90 / max_score;
+		});
+
+		var press = gp.press;
+		if (press) {
+			switch (press.type) {
+			case 'suspension':
+			case 'overrule':
+			case 'referee':
+				svg_el(lines, 'text', {
+					x: gpx,
+					y: 5,
+					'text-anchor': 'middle',
+					'class': 'stats_graph_mark',
+				}, calc.press_char(s, press));
+				break;
+			case 'correction':
+			case 'injury':
+			case 'retired':
+				var my_gpy = gpys[press.team_id];
+				var other_gpy = gpys[1 - press.team_id];
+				var ty = ((my_gpy > other_gpy) || (my_gpy + 10 < other_gpy)) ? (my_gpy - 1) : (my_gpy - 6);
+
+				svg_el(lines, 'text', {
+					x: gpx,
+					y: ty,
+					'text-anchor': 'middle',
+					'class': 'stats_graph_mark team' + press.team_id,
+				}, calc.press_char(s, press));
+				break;
+			}
+		}
+
 		for (team = 0;team < 2;team++) {
-			var gpy = 95 - gp.score[team] * 90 / max_score;
+			var gpy = gpys[team];
 
 			if (gp.draw_line) {
 				svg_el(lines, 'line', {
-					'x1': x[team],
-					'x2': gpx,
-					'y1': y[team],
-					'y2': y[team],
+					x1: x[team],
+					x2: gpx,
+					y1: y[team],
+					y2: y[team],
 					'class': 'team' + team,
 				});
 				svg_el(lines, 'line', {
-					'x1': gpx,
-					'x2': gpx,
-					'y1': y[team],
-					'y2': gpy,
+					x1: gpx,
+					x2: gpx,
+					y1: y[team],
+					y2: gpy,
 					'class': 'team' + team,
 				});
 			}
@@ -276,11 +316,14 @@ function calc_stats(s) {
 		calc.calc_press(scopy, p);
 
 		if (p.timestamp) {
+			var interesting = ((i === presses.length - 1) || (_INTERESTING_TYPES.indexOf(p.type) >= 0));
+
 			gpoints.push({
 				timestamp: p.timestamp,
 				score: scopy.game.score.slice(),
 				game: scopy.match.finished_games.length,
-				interesting: ((i === presses.length - 1) || (p.type == 'love-all') || (p.type == 'postgame-confirm') || (p.type == 'postmatch-confirm')),
+				interesting: interesting,
+				press: p,
 			});
 		}
 
