@@ -34,7 +34,7 @@ function render_graph(svg, s, all_gpoints) {
 	var gpoints = [];
 	for (i = 0;i < all_gpoints.length;i++) {
 		gp = all_gpoints[i];
-		if (utils.deep_equal(gp.score, score) && (game === gp.game)) {
+		if (utils.deep_equal(gp.score, score) && (game === gp.game) && !gp.interesting) {
 			continue;
 		}
 		gpoints.push(gp);
@@ -63,31 +63,55 @@ function render_graph(svg, s, all_gpoints) {
 	for (i = 0;i <= max_score;i++) {
 		var grid_y = 95 - i * 90 / max_score;
 		svg_el(grid, 'line', {
-			'x1': 0,
-			'x2': 300,
+			'x1': 5,
+			'x2': 295,
 			'y1': grid_y,
 			'y2': grid_y,
-			'class': ((i == 0) || (i === 11) || (i == 21)) ? 'important' : '',
+			'class': ((i === 0) || (i === 11) || (i == 21)) ? 'important' : '',
 		});
 	}
 
 	// Y axis labels
-	for (var i = 0;i <= max_score;i++) {
+	for (i = 0;i <= max_score;i++) {
 		svg_el(grid, 'text', {
-			'x': 5,
-			'y': 95 - i * 90 / max_score,
+			x: 5,
+			y: 95 - i * 90 / max_score,
 			'text-anchor': 'end',
 			'alignment-baseline': 'middle',
 			'class': 'axis_score_label',
 		}, i);
 		svg_el(grid, 'text', {
-			'x': 300,
-			'y': 95 - i * 90 / max_score,
+			x: 300,
+			y: 95 - i * 90 / max_score,
 			'text-anchor': 'end',
 			'alignment-baseline': 'middle',
 			'class': 'axis_score_label',
 		}, i);
 	}
+
+	// Times on the x axis
+	var last_x = -999;
+	gpoints.forEach(function(gp) {
+		if (!gp.interesting) {
+			return;
+		}
+
+		var gpx = 5 + gp.normalized * 290 / normalized_now;
+		if (last_x + 10 > gpx) {
+			// Overlap, leave out time
+			return;
+		}
+		last_x = gpx;
+		svg_el(grid, 'text', {
+			x: gpx,
+			y: 99,
+			'text-anchor': 'middle',
+			'alignment-baseline': 'baseline',
+			'class': 'xaxis_label',
+		},
+		utils.time_str(gp.timestamp));
+
+	});
 
 	// Legend
 	var max_width = 0;
@@ -185,11 +209,12 @@ function calc_stats(s) {
 				score: [0, 0],
 				timestamp: presses[i].timestamp,
 				game: 0,
+				interesting: true,
 			});
 			break;
 		}
 	}
-	presses.forEach(function(p) {
+	presses.forEach(function(p, i) {
 		var current_game_idx = scopy.match.finished_games.length;
 		var current_game = cols[current_game_idx];
 
@@ -255,6 +280,7 @@ function calc_stats(s) {
 				timestamp: p.timestamp,
 				score: scopy.game.score.slice(),
 				game: scopy.match.finished_games.length,
+				interesting: ((i === presses.length - 1) || (p.type == 'love-all') || (p.type == 'postgame-confirm') || (p.type == 'postmatch-confirm')),
 			});
 		}
 
