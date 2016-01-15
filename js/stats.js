@@ -54,6 +54,8 @@ function render_graph(svg, s, all_gpoints) {
 			duration = Math.min(duration, 300000);
 		}
 		duration = Math.max(3000, duration);
+		// TODO just for testing
+		duration = Math.min(40000, duration);
 		
 		normalized_now += duration;
 		gp.normalized = normalized_now;
@@ -145,6 +147,41 @@ function render_graph(svg, s, all_gpoints) {
 		});
 
 		var press = gp.press;
+		var mark_y = 5;
+		var CLOSENESS = 20;
+		if (press.team_id !== undefined) {
+			var my_gpy = gpys[press.team_id];
+			var other_gpy = gpys[1 - press.team_id];
+			if (my_gpy < other_gpy) {
+				if (my_gpy < other_gpy - CLOSENESS) {
+					mark_y = my_gpy + 10;
+				} else {
+					mark_y = my_gpy - 5;
+				}
+			} else {
+				if (my_gpy > other_gpy + CLOSENESS) {
+					mark_y = my_gpy - 4;
+				} else if (my_gpy + 6 < 100) {
+					mark_y = my_gpy + 6;
+				} else {
+					mark_y = other_gpy - 4;
+				}
+			}
+		} else {
+			var min_y = Math.min(gpys[0], gpys[1]);
+			var max_y = Math.max(gpys[0], gpys[1]);
+			if (max_y - min_y > 2 * CLOSENESS) {
+				mark_y = (min_y + max_y) / 2;
+			} else if (min_y > 50) {
+				mark_y = min_y - 10;
+			} else {
+				mark_y = max_y + 12;
+			}
+		}
+
+		var CARD_HEIGHT = 5;
+		var CARD_WIDTH = CARD_HEIGHT * 22 / 29;
+		var CARD_RADIUS = CARD_WIDTH / 11;
 		if (press) {
 			switch (press.type) {
 			case 'suspension':
@@ -152,7 +189,7 @@ function render_graph(svg, s, all_gpoints) {
 			case 'referee':
 				svg_el(lines, 'text', {
 					x: gpx,
-					y: 5,
+					y: mark_y,
 					'text-anchor': 'middle',
 					'class': 'stats_graph_mark',
 				}, calc.press_char(s, press));
@@ -160,16 +197,26 @@ function render_graph(svg, s, all_gpoints) {
 			case 'correction':
 			case 'injury':
 			case 'retired':
-				var my_gpy = gpys[press.team_id];
-				var other_gpy = gpys[1 - press.team_id];
-				var ty = ((my_gpy > other_gpy) || (my_gpy + 10 < other_gpy)) ? (my_gpy - 1) : (my_gpy - 6);
-
 				svg_el(lines, 'text', {
 					x: gpx,
-					y: ty,
+					y: mark_y,
 					'text-anchor': 'middle',
 					'class': 'stats_graph_mark team' + press.team_id,
 				}, calc.press_char(s, press));
+				break;
+			case 'yellow-card':
+			case 'red-card':
+			case 'disqualified':
+				svg_el(lines, 'rect', {
+					'x': (gpx - CARD_WIDTH / 2),
+					'y': (mark_y - CARD_HEIGHT / 2),
+					'rx': CARD_RADIUS,
+					'ry': CARD_RADIUS,
+					'width': CARD_WIDTH,
+					'height': CARD_HEIGHT,
+					'fill': 'lime',
+					'class': 'stats_graph_' + press.type,
+				});
 				break;
 			}
 		}

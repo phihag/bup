@@ -1,6 +1,3 @@
-progress line diagram in stats
-	show cards
-
 generate Aufstellungszettel
 	empty, printer-friendly
 prevent negative date when begin is not set in scoresheet
@@ -9,12 +6,11 @@ multi scoresheet: shift+S shows outdated state when editing match
 check eventsheet with bupbt
 option to disable double click on court (default set)
 
-mail Ulf
+mail Jörg
+mail Michael Pütz
 mail btde
 mail Manuel
 mail Werner
-mail Michael Pütz
-mail Jörg
 mail Jens Köster
 answer Wolf
 post bc
