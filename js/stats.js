@@ -8,7 +8,7 @@ function svg_el(parent, tagName, attrs, text) {
 			el.setAttribute(k, attrs[k]);
 		}
 	}
-	if (text) {
+	if (text !== undefined) {
 		el.appendChild(document.createTextNode(text));
 	}
 	parent.appendChild(el);
@@ -57,6 +57,7 @@ function render_graph(svg, s, all_gpoints) {
 		max_score = Math.max(max_score, Math.max(gp.score[0], gp.score[1]));
 	}
 
+	// Gray grid
 	var grid = document.querySelector('.stats_graph_grid');
 	utils.empty(grid);
 	for (i = 0;i <= max_score;i++) {
@@ -70,6 +71,40 @@ function render_graph(svg, s, all_gpoints) {
 		});
 	}
 
+	// Y axis labels
+	for (var i = 0;i <= max_score;i++) {
+		svg_el(grid, 'text', {
+			'x': 5,
+			'y': 95 - i * 90 / max_score,
+			'text-anchor': 'end',
+			'alignment-baseline': 'middle',
+			'class': 'axis_score_label',
+		}, i);
+		svg_el(grid, 'text', {
+			'x': 300,
+			'y': 95 - i * 90 / max_score,
+			'text-anchor': 'end',
+			'alignment-baseline': 'middle',
+			'class': 'axis_score_label',
+		}, i);
+	}
+
+	// Legend
+	var max_width = 0;
+	for (team = 0;team < 2;team++) {
+		var player_names = s.setup.teams[team].players[0].name;
+		if (s.setup.is_doubles) {
+			player_names += ' / ' + s.setup.teams[team].players[1].name;
+		}
+
+		var text = svg.querySelector('.legend_team' + team);
+		utils.text(text, player_names);
+		var bb = text.getBBox();
+		max_width = Math.max(bb.width, max_width);
+	}
+	svg.querySelector('.legend_background').setAttribute('width', max_width + 2);
+
+	// Main diagram
 	var x = [5, 5];
 	var y = [95, 95];
 	for (i = 1;i < gpoints.length;i++) {
@@ -99,21 +134,6 @@ function render_graph(svg, s, all_gpoints) {
 			y[team] = gpy;
 		}
 	}
-
-	var max_width = 0;
-	for (team = 0;team < 2;team++) {
-		var player_names = s.setup.teams[team].players[0].name;
-		if (s.setup.is_doubles) {
-			player_names += ' / ' + s.setup.teams[team].players[1].name;
-		}
-
-		var text = svg.querySelector('.legend_team' + team);
-		utils.text(text, player_names);
-		var bb = text.getBBox();
-		max_width = Math.max(bb.width, max_width);
-	}
-
-	svg.querySelector('.legend_background').setAttribute('width', max_width + 2);
 }
 
 function calc_stats(s) {

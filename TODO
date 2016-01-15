@@ -1,6 +1,4 @@
 progress line diagram in stats
-	remove space before and after match
-	y coordinate numbers
 	x coordinates (time, scale correctly)
 	show special chars (cards etc.)
 
