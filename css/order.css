@@ -1,0 +1,17 @@
+.order_config_container, .order_result {
+	text-align: left;
+}
+
+.order_container>h2 {
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+.order_match_name {
+	display: inline-block;
+	min-width: 2.5em;
+}
+.order_result_vs, .order_result_and {
+	color: #bbb;
+}

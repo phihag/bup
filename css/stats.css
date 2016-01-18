@@ -1,4 +1,4 @@
-.stats_layout, .netstats_layout {
+.stats_layout, .netstats_layout, .order_layout {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -10,7 +10,7 @@
 	z-index: 2000;
 }
 
-.stats_container, .netstats_container {
+.stats_container, .netstats_container, .order_container {
 	display: inline-block;
 	background: #fff;
 	border-bottom-right-radius: 1em;

@@ -21,6 +21,7 @@
 	<link rel="stylesheet" href="css/bottombuttons.css" />
 	<link rel="stylesheet" href="css/stats.css" />
 	<link rel="stylesheet" href="css/netstats.css" />
+	<link rel="stylesheet" href="css/order.css" />
 	<link rel="stylesheet" href="css/compat.css" />
 	<link rel="stylesheet" href="bup.css" />
 <!--/@DEV-->
@@ -215,7 +216,8 @@
 	<div class="setup_linkline">
 		<div class="setup_eventsheets default-invisible"></div>
 		<a href="#" class="setup_event_scoresheets" data-i18n="settings:Event Scoresheets"></a>
-		<a href="#netstats" class="netstats_link default-invisible" data-i18n="settings:Network statistics"></a>
+		<a href="#" class="netstats_link default-invisible" data-i18n="settings:Network statistics"></a>
+		<a href="#" class="order_link" data-i18n="settings:Order link"></a>
 		<a href="#" class="setup_show_manual" data-i18n="settings:Custom match details"></a>
 	</div>
 	</div>
@@ -439,6 +441,32 @@ text.team1 {
 
 <div class="appcache_updating_wrapper default-invisible" data-i18n="bup.updating"></div>
 
+<div class="order_layout default-invisible">
+<div class="order_container">
+	<h2 data-i18n="order:header"></h2>
+
+	<div class="order_loading-icon loading-icon default-invisible"></div>
+	<div class="order_error default-invisible"><span class="order_error_message network_error"></span></div>
+
+	<div class="order_config_container">
+		<div><span data-i18n="order:preferred label"></span><span class="order_preferred"></span></div>
+
+	<label><span data-i18n="order:costfunc"></span>
+	<select size="1" id="order_costfunc">
+		<option data-i18n="order:rest 2 matches (2 courts)" value="rest2_2courts"></option>
+		<option data-i18n="order:rest 2 matches" value="rest2"></option>
+		<option data-i18n="order:maximum rest" value="maxrest"></option>
+		<option data-i18n="order:no rest" value="norest"></option>
+	</select>
+	</label>
+
+	</div>
+	<ol class="order_result">
+
+	</ol>
+	<a href="#" class="order_back" data-i18n="order:back"></a>
+</div>
+</div>
 
 
 <!--@DEV-->
@@ -477,6 +505,7 @@ text.team1 {
 <script src="js/report_problem.js"></script>
 <script src="js/appcache.js"></script>
 <script src="js/register_sworker.js"></script>
+<script src="js/order.js"></script>
 <script src="js/compat.js"></script>
 
 <script src="js/bup.js"></script>

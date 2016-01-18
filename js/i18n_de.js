@@ -118,6 +118,7 @@ var i18n_de = {
 'settings:Event Scoresheets': 'Schiedsrichterzettel',
 'settings:Custom match details': 'Spiel manuell eintragen ...',
 'settings:Network statistics': 'Netzwerkstatistiken',
+'settings:Order link': 'Spielreihenfolge',
 'settings:New match': 'Neues Spiel',
 'settings:Singles': 'Einzel',
 'settings:Doubles': 'Doppel',
@@ -246,6 +247,15 @@ var i18n_de = {
 'stats:failed_net_count': 'Verlust',
 'stats:failed_srv_count': 'Server-Fehler',
 'stats:success_net_count': '# Erfolg',
+
+'order:header': 'Spielreihenfolge',
+'order:back': 'Zurück',
+'order:rest 2 matches': '2 Spiele Pause',
+'order:rest 2 matches (2 courts)': '2 Spiele Pause (2 Felder)',
+'order:maximum rest': 'Größtmögliche Pausen',
+'order:no rest': 'Keine Pausen',
+'order:preferred label': 'Bevorzugte Reihenfolge: ',
+'order:costfunc': 'Pausenregelung: ',
 
 };
 

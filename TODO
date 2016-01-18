@@ -1,28 +1,31 @@
-scoresheet: shuttle counter is too low
+find optimum order of matches
+	test with N/A (should show warning, but not crash)
 
 prevent negative duration when begin is not set in scoresheet
 begin is wrong in multi scoresheets (use date from presses?)
 multi scoresheet: shift+S shows outdated state when editing match
+enable eventsheet with bupbt
+check eventsheet with bupbt
+
+generate Aufstellungszettel
+	empty, printer-friendly
+option to disable double click on court (default set)
+
+mail btde!
 
 proper layouting for cards in stats
 	determine all used coordinates to the left and right at current x
-
+	red/blue line
 add tests for note positioning
 reason of injury
 reason of retired
 	automatic if as a result or after injury
 reason of yellow card/red card/disqualification
 	delay,throwing racket,verbal abuse,
+optimize clicking on links (just show/display once)
+	avoid load_by_hash when just clicking
 
-find optimum order of matches
-	optimize_order
-
-generate Aufstellungszettel
-	empty, printer-friendly
-check eventsheet with bupbt
-option to disable double click on court (default set)
-
-mail Jörg
+mail Jörg Hupertz
 mail Michael Pütz
 mail btde
 mail Manuel
@@ -31,6 +34,9 @@ mail Jens Köster
 answer Wolf
 post bc
 
+order: progress indicator?
+order: do not show link if no matches present (not yet connected etc.)
+test going from netstats to order to multi-sheets to game etc. (all via hash, shared functionality for showing/hiding)
 write network demo (liveaw)!
 position manual notes after circle if space is sufficient
 enable compression for presses_json
@@ -254,6 +260,8 @@ compress presses in sending
 check for all disabled settings and use utils.disabled_qsa
 show part of scoresheet below? [optionally]
 check for instances of {replace} when calling s._
+compile i18n keys into an array (save mapping in JSON)
+replace document.querySelector with utils.qs
 allow challenges
 	failsafe (http://www.badmintoncentral.com/forums/showthread.php/160170-sub-standard-umpire-gave-a-free-point-to-Okuhara-in-first-set?p=2413636#post2413636)
 CourtSpot: Spielreihenfolge festlegen

@@ -142,9 +142,10 @@ function render_graph(svg, s, all_gpoints) {
 	for (i = 1;i < gpoints.length;i++) {
 		gp = gpoints[i];
 		var gpx = 5 + gp.normalized * 290 / normalized_now;
-		var gpys = [0, 1].map(function(team) {
-			return 95 - gp.score[team] * 90 / max_score;
-		});
+		var gpys = [
+			95 - gp.score[0] * 90 / max_score,
+			95 - gp.score[1] * 90 / max_score,
+		];
 
 		var press = gp.press;
 		var mark_y = 5;

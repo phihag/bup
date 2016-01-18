@@ -33,6 +33,7 @@ function ui_init() {
 	settings.ui_init(state);
 	eventsheet.ui_init();
 	stats.ui_init();
+	order.ui_init();
 
 	var hash_query = utils.parse_query_string(window.location.hash.substr(1));
 	if (hash_query.lang) {
@@ -65,28 +66,29 @@ if (typeof $ !== 'undefined') {
 
 /* @DEV */
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
-	var utils = require('./utils');
-	var i18n = require('./i18n');
+	var appcache = require('./appcache');
+	var btde = require('./btde');
+	var buphistory = require('./buphistory');
 	var calc = require('./calc');
 	var compat = require('./compat');
-	var appcache = require('./appcache');
-	var timer = require('./timer');
-	var editmode = require('./editmode');
-	var fullscreen = require('./fullscreen');
-	var buphistory = require('./buphistory');
-	var scoresheet = require('./scoresheet');
-	var eventsheet = require('./eventsheet');
-	var network = require('./network');
-	var btde = require('./btde');
-	var courtspot = require('./courtspot');
-	var settings = require('./settings');
-	var pronounciation = require('./pronounciation');
 	var control = require('./control');
+	var courtspot = require('./courtspot');
+	var editmode = require('./editmode');
+	var eventsheet = require('./eventsheet');
+	var fullscreen = require('./fullscreen');
+	var i18n = require('./i18n');
+	var network = require('./network');
+	var order = require('./order');
+	var p2p = require('./p2p');
+	var pronounciation = require('./pronounciation');
+	var register_sworker = require('./register_sworker');
+	var report_problem = require('./report_problem');
+	var scoresheet = require('./scoresheet');
+	var settings = require('./settings');
 	var startmatch = require('./startmatch');
 	var stats = require('./stats');
-	var p2p = require('./p2p');
-	var report_problem = require('./report_problem');
-	var register_sworker = require('./register_sworker');
+	var timer = require('./timer');
+	var utils = require('./utils');
 
 	module.exports = {
 		btde: btde,
@@ -94,11 +96,12 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 		courtspot: courtspot,
 		i18n: i18n,
 		network: network,
+		order: order,
+		p2p: p2p,
 		pronounciation: pronounciation,
 		scoresheet: scoresheet,
-		utils: utils,
 		stats: stats,
-		p2p: p2p,
+		utils: utils,
 	};
 }
 /*/@DEV*/

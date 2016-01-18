@@ -276,6 +276,14 @@ function create_el(parent, tagName, attrs, text) {
 	return el;
 }
 
+function range(n) {
+	var res = [];
+	for (var i = 0;i < n;i++) {
+		res.push(i);
+	}
+	return res;
+}
+
 return {
 	add_zeroes: add_zeroes,
 	any: any,
@@ -307,6 +315,7 @@ return {
 	values: values,
 	visible: visible,
 	visible_qs: visible_qs,
+	range: range,
 };
 })();
 

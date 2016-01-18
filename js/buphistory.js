@@ -36,7 +36,7 @@ function record(s) {
 
 	var orig_hval = window.location.hash.substr(1);
 	var hval = orig_hval;
-	hval = hval.replace(/(?:^|&)(?:m|settings|event_scoresheets|scoresheet|eventsheet|stats|netstats)(?:=[^&]*)?(?=&|$)/g, '');
+	hval = hval.replace(/(?:^|&)(?:m|settings|event_scoresheets|scoresheet|eventsheet|stats|netstats|order)(?:=[^&]*)?(?=&|$)/g, '');
 	hval = hval.replace(/^&+|&+$/g, '');
 
 	if (s.initialized) {
@@ -66,6 +66,11 @@ function record(s) {
 			hval += '&';
 		}
 		hval += 'netstats';
+	} else if (s.ui.order_visible) {
+		if (hval.length > 1) {
+			hval += '&';
+		}
+		hval += 'order';
 	} else if (s.ui.settings_visible) {
 		if (hval.length > 1) {
 			hval += '&';
@@ -101,6 +106,11 @@ function load_by_hash() {
 
 	if (typeof qs.netstats != 'undefined') {
 		netstats.show();
+		return;
+	}
+
+	if (typeof qs.order != 'undefined') {
+		order.show();
 		return;
 	}
 
@@ -169,6 +179,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var match_storage = require('./match_storage');
 	var netstats = require('./netstats');
 	var network = require('./network');
+	var order = require('./order');
 	var render = require('./render');
 	var scoresheet = require('./scoresheet');
 	var settings = require('./settings');

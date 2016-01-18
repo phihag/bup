@@ -752,7 +752,12 @@ function sheet_render(s, svg, without_metadata) {
 		}
 	}
 
+	var text_y_padding = 0.3;
 	cells.forEach(function(cell) {
+		// No let in current browsers, so declare some variables here
+		var bg;
+		var bb;
+
 		var table_top = 57 + 22 * cell.table;
 
 		switch (cell.type) {
@@ -802,7 +807,7 @@ function sheet_render(s, svg, without_metadata) {
 
 			break;
 		case 'note':
-			var bg = _svg_el('rect', {
+			bg = _svg_el('rect', {
 				'class': (((cell.table < 6) && (cell.row > 1)) ? 'table_longtext_background shaded' : 'table_longtext_background'),
 			}, t);
 
@@ -811,15 +816,14 @@ function sheet_render(s, svg, without_metadata) {
 			}, t, cell.val);
 			_svg_align_vcenter(text, table_top + cell.row * cell_height + cell_height / 2);
 
-			var padding = 0.3;
-			var bb = text.getBBox();
+			bb = text.getBBox();
 			bg.setAttribute('x', bb.x);
-			bg.setAttribute('y', bb.y + padding);
+			bg.setAttribute('y', bb.y + text_y_padding);
 			bg.setAttribute('width', bb.width);
-			bg.setAttribute('height', bb.height - 2 * padding);
+			bg.setAttribute('height', bb.height - 2 * text_y_padding);
 			break;
 		case 'longtext':
-			var bg = _svg_el('rect', {
+			bg = _svg_el('rect', {
 				'class': ((cell.row > 1) ? 'table_longtext_background shaded' : 'table_longtext_background'),
 			}, t);
 
@@ -828,12 +832,11 @@ function sheet_render(s, svg, without_metadata) {
 			}, t, cell.val);
 			_svg_align_vcenter(text, table_top + cell.row * cell_height + cell_height / 2);
 
-			var padding = 0.3;
-			var bb = text.getBBox();
+			bb = text.getBBox();
 			bg.setAttribute('x', bb.x);
-			bg.setAttribute('y', bb.y + padding);
+			bg.setAttribute('y', bb.y + text_y_padding);
 			bg.setAttribute('width', bb.width);
-			bg.setAttribute('height', bb.height - 2 * padding);
+			bg.setAttribute('height', bb.height - 2 * text_y_padding);
 			break;
 		case 'vertical-text':
 			text = _svg_el('text', {}, t, cell.val);

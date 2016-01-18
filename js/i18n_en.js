@@ -117,6 +117,7 @@ var i18n_en = {
 'settings:Event Scoresheets': 'Scoresheets',
 'settings:Custom match details': 'Custom match details ...',
 'settings:Network statistics': 'network statistics',
+'settings:Order link': 'match order',
 'settings:New match': 'Create match',
 'settings:Singles': 'Singles',
 'settings:Doubles': 'Doubles',
@@ -246,6 +247,14 @@ var i18n_en = {
 'stats:failed_srv_count': 'server errors',
 'stats:success_net_count': '# successful',
 
+'order:header': 'Match order',
+'order:back': 'Back',
+'order:rest 2 matches': 'rest 2 matches',
+'order:rest 2 matches (2 courts)': 'rest 2 matches (2 courts)',
+'order:maximum rest': 'maximum rest',
+'order:no rest': 'no rest',
+'order:preferred label': 'Preferred order: ',
+'order:costfunc': 'Rest allowance: ',
 };
 
 /*@DEV*/
