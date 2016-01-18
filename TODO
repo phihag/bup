@@ -1,15 +1,21 @@
-prevent negative date when begin is not set in scoresheet
+scoresheet: shuttle counter is too low
+
+prevent negative duration when begin is not set in scoresheet
 begin is wrong in multi scoresheets (use date from presses?)
 multi scoresheet: shift+S shows outdated state when editing match
 
-add manual note
-	note icon
-add tests for positioning
+proper layouting for cards in stats
+	determine all used coordinates to the left and right at current x
+
+add tests for note positioning
 reason of injury
 reason of retired
 	automatic if as a result or after injury
 reason of yellow card/red card/disqualification
 	delay,throwing racket,verbal abuse,
+
+find optimum order of matches
+	optimize_order
 
 generate Aufstellungszettel
 	empty, printer-friendly
@@ -26,6 +32,7 @@ answer Wolf
 post bc
 
 write network demo (liveaw)!
+position manual notes after circle if space is sufficient
 enable compression for presses_json
 clicking on current match when match is in progress shouldn't do anything
 highlight current match button
@@ -49,7 +56,6 @@ network: do not reconstruct network buttons if nothing changed
 include compressed presses in error report
 make error msg a form submission
 	fall back to email?
-option to hide restart timer button
 fix with samsung browser
 	top buttons are all over the place
 check battery? (send via P2P)

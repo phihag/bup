@@ -55,7 +55,7 @@ function render_graph(svg, s, all_gpoints) {
 		}
 		duration = Math.max(3000, duration);
 		// TODO just for testing
-		duration = Math.min(40000, duration);
+		//duration = Math.min(10000, duration);
 		
 		normalized_now += duration;
 		gp.normalized = normalized_now;

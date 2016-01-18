@@ -31,7 +31,7 @@ function _svg_el(tagName, attrs, parent, text) {
 	return el;
 }
 
-function _layout(games, col_count) {
+function _layout(games, col_count, notes) {
 	var table_idx = 0;
 	var cells = [];
 	games.forEach(function(game) {
@@ -81,6 +81,23 @@ function _layout(games, col_count) {
 
 		table_idx = max_table + 1;
 	});
+
+	var row_idx = 0;
+	notes.forEach(function(note) {
+		cells.push({
+			table: table_idx,
+			row: row_idx,
+			type: 'note',
+			val: note,
+		});
+
+		row_idx++;
+		if (row_idx > 3) {
+			row_idx = 0;
+			table_idx++;
+		}
+	});
+
 	return cells;
 }
 
@@ -179,6 +196,8 @@ function _parse_match(state, col_count) {
 		lang: state.lang,
 		_: state._,
 	};
+	var notes = [];
+
 	calc.init_state(s, state.setup);
 	s.presses = state.presses;
 	calc.init_calc(s);
@@ -467,6 +486,9 @@ function _parse_match(state, col_count) {
 				return sgame;
 			});
 			break;
+		case 'note':
+			notes.push(press.val);
+			break;
 		}
 
 		if (s.game.finished) {
@@ -519,7 +541,7 @@ function _parse_match(state, col_count) {
 		_loveall(s, fgame, sgame, {editmode_related: true});
 	});
 
-	return _layout(s.scoresheet_games, col_count);
+	return _layout(s.scoresheet_games, col_count, notes);
 }
 
 function sheet_render(s, svg, without_metadata) {
@@ -779,6 +801,23 @@ function sheet_render(s, svg, without_metadata) {
 			_svg_align_hcenter(text, cx_bottom);
 
 			break;
+		case 'note':
+			var bg = _svg_el('rect', {
+				'class': (((cell.table < 6) && (cell.row > 1)) ? 'table_longtext_background shaded' : 'table_longtext_background'),
+			}, t);
+
+			text = _svg_el('text', {
+				'x': ((cell.table < 6) ? (cols_left + padding_left) : table_left),
+			}, t, cell.val);
+			_svg_align_vcenter(text, table_top + cell.row * cell_height + cell_height / 2);
+
+			var padding = 0.3;
+			var bb = text.getBBox();
+			bg.setAttribute('x', bb.x);
+			bg.setAttribute('y', bb.y + padding);
+			bg.setAttribute('width', bb.width);
+			bg.setAttribute('height', bb.height - 2 * padding);
+			break;
 		case 'longtext':
 			var bg = _svg_el('rect', {
 				'class': ((cell.row > 1) ? 'table_longtext_background shaded' : 'table_longtext_background'),
@@ -918,12 +957,15 @@ function show() {
 	render.hide();
 	uiu.esc_stack_push(hide);
 
+	document.querySelector('#scoresheet_note_input').focus();
+	ui_show();
+}
+
+function ui_show() {
+	utils.visible_qs('.scoresheet_loading-icon', true);
 	var container = document.querySelector('.scoresheet_container');
 	$(container).children('.scoresheet').remove();
-	utils.visible_qs('.scoresheet_loading-icon', true);
-	utils.visible(container, true);
-
-	load_sheet('international', function(xml) {
+	utils.visible(container, true);	load_sheet('international', function(xml) {
 		var svg = make_sheet_node(xml);
 		svg.setAttribute('class', 'scoresheet single_scoresheet');
 		// Usually we'd call importNode here to import the document here, but IE/Edge then ignores the styles
@@ -1043,6 +1085,20 @@ function ui_init() {
 	});
 	$('.scoresheet_reload').on('click', function() {
 		event_list_matches($('.scoresheet_container'));
+	});
+
+	$('.scoresheet_note_dialog').on('submit', function(e) {
+		e.preventDefault();
+		var input = document.querySelector('#scoresheet_note_input');
+
+		control.on_press({
+			type: 'note',
+			val: input.value,
+		});
+		ui_show();
+
+		input.value = '';
+		return false;
 	});
 
 	load_sheet('international');

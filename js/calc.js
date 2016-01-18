@@ -517,6 +517,9 @@ function calc_press(s, press) {
 			};
 		}
 		break;
+	// Display-only types
+	case 'note':
+		break;
 	default:
 		throw new Error('Unsupported press type ' + press.type);
 	}

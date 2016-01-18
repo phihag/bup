@@ -119,3 +119,46 @@
 	background-size: 100%;
 	background-repeat: no-repeat;
 }
+
+
+.scoresheet_note_dialog {
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: rgba(255, 255, 255, 0.9);
+	z-index: 100;
+	font-size: 20px;
+}
+#scoresheet_note_input {
+	width: 40em;
+	max-width: 70vw;
+	margin: 10px 0 10px 10px;
+	font-size: inherit;
+}
+#scoresheet_note_button {
+	font-size: inherit;
+	margin: 0 0 10px 10px;
+}
+
+@media print {
+	.scoresheet_note_dialog {
+		display: none;
+	}
+}
+@media screen and (max-aspect-ratio: 250/200) {
+	.scoresheet_note_dialog {
+		width: 100%;
+	}
+	.single_scoresheet {
+		margin-top: 40px;
+	}
+}
+@media screen and (max-aspect-ratio: 1000/1000) {
+	#scoresheet_note_input {
+		width: calc(100vw - 20px);
+		max-width: calc(100vw - 20px);
+	}
+	.single_scoresheet {
+		margin-top: 90px;
+	}
+}
