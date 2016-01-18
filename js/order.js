@@ -158,7 +158,7 @@ function cost_maxrest(order, conflicts, preferred) {
 	for (var i = 0;i < order.length;i++) {
 		var my_conflicts = conflicts[order[i]];
 		for (var j = 1;i - j >= 0;j++) {
-			var factor = (j === 1) ? 10000 : ((j === 2) ? 1000 : 500);
+			var factor = (j === 1) ? 10000 : ((j === 2) ? 5000 : (100 * j));
 			res += factor * my_conflicts[order[i - j]];
 		}
 
