@@ -106,7 +106,7 @@
 
 <g class="scoresheet_shuttle_counter">
 	<text class="small-text" x="202" y="50" text-anchor="end" data-i18n="scoresheet:Shuttles"></text>
-	<text class="scoresheet_shuttle_counter_value" x="205" y="50.5"></text>
+	<text class="scoresheet_shuttle_counter_value" x="205" y="50"></text>
 </g>
 
 <g class="scoresheet_table_container"></g>
