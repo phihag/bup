@@ -625,7 +625,7 @@ function sheet_render(s, svg, referee_view) {
 
 	if (s.match) {
 		var all_finished_games = s.match.finished_games.slice();
-		if (s.match.finished) {
+		if (s.match.finished && (all_finished_games[all_finished_games.length - 1] !== s.game)) {
 			all_finished_games.push(s.game);
 		}
 
