@@ -3080,6 +3080,108 @@ _describe('calc_state', function() {
 			start: 20000,
 		});
 	});
+
+	_it('metadata start&end', function() {
+		var presses = [];
+		var s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(s.metadata.start, null);
+
+		presses.push({
+			type: 'pick_side',
+			team1_left: true,
+			timestamp: 1,
+		});
+		presses.push({
+			type: 'pick_server',
+			team1_id: 0,
+			timestamp: 2,
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(s.metadata.start, null);
+
+		presses.push({
+			type: 'love-all',
+			timestamp: 3,
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(s.metadata.start, 3);
+		assert.strictEqual(s.metadata.end, null);
+
+		press_score(presses, 21, 15);
+		presses.push({
+			type: 'postgame-confirm',
+			timestamp: 4,
+		});
+		presses.push({
+			type: 'love-all',
+			timestamp: 100,
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(s.metadata.start, 3);
+		assert.strictEqual(s.metadata.end, null);
+
+		press_score(presses, 15, 20);
+		presses.push({
+			type: 'score',
+			side: 'right',
+			timestamp: 200,
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(s.metadata.start, 3);
+		assert.strictEqual(s.metadata.end, 200);
+
+		presses.push({
+			type: 'postmatch-confirm',
+			timestamp: 201,
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(s.metadata.start, 3);
+		assert.strictEqual(s.metadata.end, 200);
+
+		presses.push({
+			type: 'undo',
+			timestamp: 301,
+		});
+		presses.push({
+			type: 'undo',
+			timestamp: 302,
+		});
+		presses.push({
+			type: 'undo',
+			timestamp: 303,
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(s.metadata.start, 3);
+		assert.strictEqual(s.metadata.end, null);
+
+		presses.push({
+			type: 'disqualified',
+			team_id: 0,
+			player_id: 0,
+			timestamp: 400,
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(s.metadata.start, 3);
+		assert.strictEqual(s.metadata.end, 400);
+
+		presses.push({
+			type: 'undo',
+			timestamp: 500,
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(s.metadata.start, 3);
+		assert.strictEqual(s.metadata.end, null);
+
+		presses.push({
+			type: 'disqualified',
+			team_id: 0,
+			player_id: 0,
+			timestamp: 501,
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(s.metadata.start, 3);
+		assert.strictEqual(s.metadata.end, 501);
+	});
 });
 
 _describe('calc helper functions', function() {

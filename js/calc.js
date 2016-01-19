@@ -109,7 +109,8 @@ function init_state(s, setup, presses, keep_metadata) {
 		var now = Date.now();
 		s.metadata = {
 			id: setup.match_id ? setup.match_id : utils.uuid(),
-			start: now,
+			start: null,
+			end: null,
 			updated: now,
 		};
 	}
@@ -180,6 +181,9 @@ function recalc_after_score(s, team_id, press) {
 		s.game.finished = true;
 		s.match.injuries = false;
 		if (s.match.game_score[winner_idx] == 2) {
+			if (! s.metadata.end) {
+				s.metadata.end = press.timestamp;
+			}
 			s.match.finished = true;
 			s.match.team1_won = team1_won;
 		}
@@ -301,6 +305,9 @@ function calc_press(s, press) {
 		s.game.started = true;
 		s.match.marks = [];
 		s.match.just_unsuspended = false;
+		if (! s.metadata.start) {
+			s.metadata.start = press.timestamp;
+		}
 		break;
 	case 'score':
 		var team1_scored = (s.game.team1_left == (press.side == 'left'));
@@ -387,6 +394,7 @@ function calc_press(s, press) {
 		s.game.won_by_score = false;
 		s.game.finished = true;
 		s.match.finished = true;
+		s.metadata.end = press.timestamp;
 		s.game.team1_serving = null;
 		s.game.service_over = null;
 		s.timer = false;
@@ -400,6 +408,7 @@ function calc_press(s, press) {
 		s.game.team1_won = press.team_id !== 0;
 		s.match.team1_won = s.game.team1_won;
 		s.match.finished = true;
+		s.metadata.end = press.timestamp;
 		s.game.team1_serving = null;
 		s.game.service_over = null;
 		s.timer = false;

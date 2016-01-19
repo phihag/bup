@@ -544,7 +544,7 @@ function _parse_match(state, col_count) {
 	return _layout(s.scoresheet_games, col_count, notes);
 }
 
-function sheet_render(s, svg, without_metadata) {
+function sheet_render(s, svg, referee_view) {
 	function _text(search, str) {
 		if (str !== 0 && !str) {
 			str = '';
@@ -568,14 +568,14 @@ function sheet_render(s, svg, without_metadata) {
 	_text('.scoresheet_match_name', s.setup.match_name);
 	_text('.scoresheet_date_value', s.metadata.start ? utils.human_date_str(s.metadata.start) : '');
 
-	_text('.scoresheet_court_id', (without_metadata ? '' : s.settings.court_id));
-	_text('.scoresheet_umpire_name', s.metadata.umpire_name ? s.metadata.umpire_name : (without_metadata ? '' : s.settings.umpire_name));
-	_text('.scoresheet_service_judge_name', s.metadata.service_judge_name ? s.metadata.service_judge_name : (without_metadata ? '' : s.settings.service_judge_name));
+	_text('.scoresheet_court_id', (referee_view ? '' : s.settings.court_id));
+	_text('.scoresheet_umpire_name', s.metadata.umpire_name ? s.metadata.umpire_name : (referee_view ? '' : s.settings.umpire_name));
+	_text('.scoresheet_service_judge_name', s.metadata.service_judge_name ? s.metadata.service_judge_name : (referee_view ? '' : s.settings.service_judge_name));
 
-	_text('.scoresheet_begin_value', (s.metadata.start && ! without_metadata) ? utils.time_str(s.metadata.start) : '');
+	_text('.scoresheet_begin_value', (s.metadata.start ? utils.time_str(s.metadata.start) : ''));
 	if (s.match.finished) {
-		_text('.scoresheet_end_value', s.metadata.updated ? utils.time_str(s.metadata.updated) : '');
-		_text('.scoresheet_duration_value', s.metadata.updated ? utils.duration_mins(s.metadata.start, s.metadata.updated) : '');
+		_text('.scoresheet_end_value', (s.metadata.end ? utils.time_str(s.metadata.end) : ''));
+		_text('.scoresheet_duration_value', ((s.metadata.start && s.metadata.end) ? utils.duration_mins(s.metadata.start, s.metadata.end) : ''));
 	} else {
 		_text('.scoresheet_end_value', null);
 		_text('.scoresheet_duration_value', null);
@@ -932,6 +932,8 @@ function event_show() {
 	utils.visible_qs('.scoresheet_loading-icon', true);
 	utils.visible(container, true);
 
+	utils.visible_qs('.scoresheet_note_dialog', false);
+
 	if (state.event) {
 		event_render(container);
 	} else {
@@ -948,7 +950,6 @@ function show() {
 		return;
 	}
 	state.ui.scoresheet_visible = true;
-
 	control.set_current(state);
 
 	if (typeof jsPDF != 'undefined') {
@@ -958,8 +959,10 @@ function show() {
 	settings.hide();
 	stats.hide();
 	render.hide();
+
 	uiu.esc_stack_push(hide);
 
+	utils.visible_qs('.scoresheet_note_dialog', false);
 	document.querySelector('#scoresheet_note_input').focus();
 	ui_show();
 }

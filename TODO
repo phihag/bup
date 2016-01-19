@@ -1,8 +1,4 @@
-find optimum order of matches
-	test with N/A (should show warning, but not crash)
-
-prevent negative duration when begin is not set in scoresheet
-begin is wrong in multi scoresheets (use date from presses?)
+multi scoresheet: doubled score upon retiring!
 multi scoresheet: shift+S shows outdated state when editing match
 enable eventsheet with bupbt
 check eventsheet with bupbt
@@ -34,7 +30,8 @@ mail Jens Köster
 answer Wolf
 post bc
 
-order: progress indicator?
+order: test with N/A (should show warning, but not crash)
+order: store match order in bup / CourtSpot
 order: do not show link if no matches present (not yet connected etc.)
 test going from netstats to order to multi-sheets to game etc. (all via hash, shared functionality for showing/hiding)
 write network demo (liveaw)!
