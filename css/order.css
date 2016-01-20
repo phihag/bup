@@ -54,6 +54,7 @@
 	background-image: url(../icons/insert_mark_active.svg);
 }
 .order_insert_active {
+	background: #eee;
 	opacity: 0.5;
 }
 

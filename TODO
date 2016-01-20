@@ -2,6 +2,7 @@ redesign order as manual
 	more effective rendering
 	animation
 	drag&drop
+	allow marking matches as ignored
 	use slightly different reds for each player
 	triple points as touch signifier
 	re-add automatic optimization
