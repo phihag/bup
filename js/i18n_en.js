@@ -249,12 +249,8 @@ var i18n_en = {
 
 'order:header': 'Match order',
 'order:back': 'Back',
-'order:rest 2 matches': 'rest 2 matches',
-'order:rest 2 matches (2 courts)': 'rest 2 matches (2 courts)',
-'order:maximum rest': 'maximum rest',
-'order:no rest': 'no rest',
-'order:preferred label': 'Preferred order: ',
-'order:costfunc': 'Rest allowance: ',
+'order:optimize': 'Optimize',
+'order:reset': 'Reset',
 };
 
 /*@DEV*/

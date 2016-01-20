@@ -448,23 +448,17 @@ text.team1 {
 	<div class="order_loading-icon loading-icon default-invisible"></div>
 	<div class="order_error default-invisible"><span class="order_error_message network_error"></span></div>
 
-	<div class="order_config_container">
-		<div><span data-i18n="order:preferred label"></span><span class="order_preferred"></span></div>
-
-	<label><span data-i18n="order:costfunc"></span>
-	<select size="1" id="order_costfunc">
-		<option data-i18n="order:rest 2 matches" value="rest2"></option>
-		<option data-i18n="order:rest 2 matches (2 courts)" value="rest2_2courts"></option>
-		<option data-i18n="order:maximum rest" value="maxrest"></option>
-		<option data-i18n="order:no rest" value="norest"></option>
-	</select>
-	</label>
-
+	<div class="order_display_container">
+		<div class="order_nums"></div>
+		<div class="order_display"></div>
 	</div>
-	<ol class="order_result">
+	<div class="order_clear"></div>
 
-	</ol>
-	<a href="#" class="order_back" data-i18n="order:back"></a>
+	<div class="order_buttons">
+		<a href="#" class="order_back" data-i18n="order:back"></a>
+		<button class="order_reset" data-i18n="order:reset"></button>
+		<button class="order_optimize" data-i18n="order:optimize"></button>
+	</div>
 </div>
 </div>
 

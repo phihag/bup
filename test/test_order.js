@@ -8,9 +8,21 @@ var bup = tutils.bup;
 (function() {
 'use strict';
 
+function _order_matches(matches, order_str) {
+	var match_names = order_str.split('-');
+	return bup.order.order_by_names(matches, match_names);
+}
+
 function _calc_order(matches, order_str) {
 	var match_names = order_str.split('-');
-	return bup.order.calc_order(matches, match_names);
+	return match_names.map(function(match_name) {
+		for (var i = 0;i < matches.length;i++) {
+			if (matches[i].setup.match_name === match_name) {
+				return i;
+			}
+		}
+		throw new Error('Could not find match ' + match_name);
+	});
 }
 
 function _calc_names(matches, order)  {
@@ -137,8 +149,29 @@ var sample_matches = [{setup: {
 }}];
 
 _describe('order', function() {
-	_it('realistic sample for conflicts, cost calculation and optimization', function() {
-		var conflicts = bup.order.calc_conflicts(sample_matches);
+	_it('realistic sample for conflict determination', function() {
+		var omatches = _order_matches(sample_matches, 'HD1-HD2-DD-HE1-HE2-HE3-DE-MX');
+		var conflicts = bup.order.calc_conflicting_players(omatches);
+		assert.deepStrictEqual(conflicts, {});
+
+		omatches = _order_matches(sample_matches, 'HD1-HE1-HD2-DD-HE2-HE3-DE-MX');
+		conflicts = bup.order.calc_conflicting_players(omatches);
+		assert.deepStrictEqual(conflicts, {
+			'Alexander': 1,
+			'Lukas': 1,
+		});
+
+		omatches = _order_matches(sample_matches, 'HD1-DE-HE1-HD2-DD-HE2-HE3-MX');
+		conflicts = bup.order.calc_conflicting_players(omatches);
+		assert.deepStrictEqual(conflicts, {
+			'Alexander': 2,
+			'Lukas': 2,
+			'Linus': 2,
+		});
+	});
+
+	_it('realistic sample optimization', function() {
+		var conflicts = bup.order.calc_conflict_map(sample_matches);
 		assert.deepStrictEqual(conflicts, [
 			[undefined, 0, 0, 2, 1, 0, 0, 0], // HD1
 			[0, undefined, 0, 0, 0, 0, 0, 1], // HD2
@@ -199,26 +232,6 @@ _describe('order', function() {
 		assert.strictEqual(optimized, 'MX-DE-HD1-HD2-DD-HE1-HE2-HE3');
 	});
 
-	_it('calc_conflicting_players', function() {
-		var conflict_counts = bup.order.calc_conflicting_players(sample_matches);
-		assert.deepEqual(conflict_counts, {
-			'Alexander': 1,
-			'Andreas': 1,
-			'Lukas': 1,
-			'Leon': 0,
-			'Linus': 1,
-			'Christopher': 1,
-			'Christian': 0,
-			'Nick': 0,
-			'Norbert': 0,
-			'Beate': 1,
-			'Britta': 1,
-			'Mareike': 1,
-			'Manuela': 1,
-			'Dominik': 0,
-			'Olaf': 0,
-		});
-	});
 });
 
 })();	

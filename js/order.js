@@ -1,73 +1,65 @@
 var order = (function() {
 'use strict';
 
-var COLORS = ['#791399', '#829900', '#375Edf', '#042998', '#AD0000', '#D17D00', 'red', 'blue'];
-
-function colorize(matches) {
-	var player_conflicts = calc_conflicting_players(matches);
-	var player_colors = {};
-	var color_idx = 0;
-
-	// First colorize singles
-	matches.forEach(function(match) {
-		var setup = match.setup;
-		if (setup.is_doubles) {
-			return;
-		}
-
-		var p1 = setup.teams[0].players[0].name;
-		var p2 = setup.teams[1].players[0].name;
-		if (player_conflicts[p1] || player_conflicts[p2]) {
-			var col = COLORS[color_idx];
-			if (player_conflicts[p1]) {
-				player_colors[p1] = col;
-			}
-			if (player_conflicts[p2]) {
-				player_colors[p2] = col;
-			}
-			color_idx = (color_idx + 1) % COLORS.length;
-		}
-	});
-
-	// Colorize doubles
-	matches.forEach(function(match) {
-		var setup = match.setup;
-		if (!setup.is_doubles) {
-			return;
-		}
-
-		var new_color_idx = color_idx;
-		for (var team_idx = 0;team_idx <= 1;team_idx++) {
-			var cidx = color_idx;
-			for (var player_idx = 0;player_idx <= 1;player_idx++) {
-				var p = setup.teams[team_idx].players[player_idx].name;
-				if (player_colors[p] || !player_conflicts[p]) {
-					continue;
-				}
-
-				player_colors[p] = COLORS[cidx % COLORS.length];
-				cidx++;
-			}
-			new_color_idx = Math.max(new_color_idx, cidx);
-		}
-		color_idx = new_color_idx % COLORS.length;
-	});
-
-	return player_colors;
-}
+var current_from = null;
+var current_matches;
 
 function calc_players(match) {
 	var setup = match.setup;
+	var teams = setup.teams;
 	if (setup.is_doubles) {
 		return [
-			setup.teams[0].players[0].name, setup.teams[0].players[1].name,
-			setup.teams[1].players[0].name, setup.teams[1].players[1].name];
+			teams[0].players[0].name, teams[0].players[1].name,
+			teams[1].players[0].name, teams[1].players[1].name,
+		];
 	} else {
-		return [setup.teams[0].players[0].name, setup.teams[1].players[0].name];
+		return [
+			teams[0].players[0].name,
+			teams[1].players[0].name,
+		];
 	}
 }
 
-function calc_conflicts(matches) {
+function order_by_names(matches, match_names) {
+	return match_names.map(function(match_name) {
+		for (var i = 0;i < matches.length;i++) {
+			if (matches[i].setup.match_name === match_name) {
+				return matches[i];
+			}
+		}
+		throw new Error('Could not find match ' + match_name);
+	});
+}
+
+function sort_by_order(matches, match_order) {
+	return match_order.map(function(mo) {
+		return matches[mo];
+	});
+}
+
+function calc_conflicting_players(omatches) {
+	var len = omatches.length;
+	var o_players = omatches.map(calc_players);
+	var conflicts = {};
+	for (var i = 0;i < len;i++) {
+		var my_players = o_players[i];
+		for (var dist = 1;dist <= 2;dist++) {
+			if (i + dist >= len) {
+				break;
+			}
+			var other_players = o_players[i + dist];
+			for (var j = 0;j < my_players.length;j++) {
+				var p = my_players[j];
+				if (other_players.indexOf(p) >= 0) {
+					conflicts[p] = dist;
+				}
+			}
+		}
+	}
+	return conflicts;
+}
+
+function calc_conflict_map(matches) {
 	var conflicts = [];
 	matches.forEach(function(m1) {
 		var m1_players = calc_players(m1);
@@ -77,7 +69,7 @@ function calc_conflicts(matches) {
 			}
 			var m2_players = calc_players(m2);
 			var conflicting = m1_players.filter(function(n) {
-				return m2_players.indexOf(n) != -1;
+				return m2_players.indexOf(n) >= 0;
 			});	
 			return conflicting.length;
 		});
@@ -86,91 +78,18 @@ function calc_conflicts(matches) {
 	return conflicts;
 }
 
-function calc_conflicting_players(matches) {
-	var res = {};
-	matches.forEach(function(m1) {
-		var players = calc_players(m1);
-		players.forEach(function(player) {
-			if (player in res) {
-				res[player]++;
-			} else {
-				res[player] = 0;
-			}
-		});
-	});
-	return res;	
-}
-
-function calc_order(matches, match_names) {
-	return match_names.map(function(match_name) {
-		for (var i = 0;i < matches.length;i++) {
-			if (matches[i].setup.match_name === match_name) {
-				return i;
-			}
-		}
-		throw new Error('Could not find match ' + match_name);
-	});
-}
-
-function cost_rest2(order, conflicts, preferred) {
+function cost_rest2(order, conflict_map, preferred) {
 	var res = 0;
 	for (var i = 0;i < order.length;i++) {
 		// conflicts
 		if (i - 2 >= 0) {
-			res += 1000 * conflicts[order[i]][order[i - 2]];
+			res += 1000 * conflict_map[order[i]][order[i - 2]];
 		}
 		if (i - 1 >= 0) {
-			res += 10000 * conflicts[order[i]][order[i - 1]];
+			res += 10000 * conflict_map[order[i]][order[i - 1]];
 		}
 
 		// preferred
-		res += Math.abs(i - preferred.indexOf(order[i]));
-	}
-	return res;
-}
-
-// rest 2 matches, but first two matches are evaluated identically
-function cost_rest2_2courts(order, conflicts, preferred) {
-	var res = 0;
-	for (var i = 0;i < order.length;i++) {
-		var my_conflicts = conflicts[order[i]];
-
-		if (i === 1) {
-			res += 10000 * my_conflicts[order[0]];
-		} else if (i === 2) {
-			res += 10000 * (my_conflicts[order[0]] + my_conflicts[order[1]]);
-		} else if (i === 3) {
-			res += 1000 * (my_conflicts[order[0]] + my_conflicts[order[1]]);
-			res += 10000 * my_conflicts[order[i - 1]];
-		} else if (i > 0) {
-			res += 10000 * my_conflicts[order[i - 1]];
-			res += 1000 * my_conflicts[order[i - 2]];
-		}
-
-		// preferred
-		res += Math.abs(i - preferred.indexOf(order[i]));
-	}
-	return res;
-}
-
-function cost_maxrest(order, conflicts, preferred) {
-	var res = 0;
-	for (var i = 0;i < order.length;i++) {
-		var my_conflicts = conflicts[order[i]];
-		for (var j = 1;i - j >= 0;j++) {
-			var factor = (j === 1) ? 10000 : ((j === 2) ? 5000 : (100 * j));
-			res += factor * my_conflicts[order[i - j]];
-		}
-
-		// preferred
-		res += Math.abs(i - preferred.indexOf(order[i]));
-	}
-	return res;
-}
-
-function cost_norest(order, conflicts, preferred) {
-	var res = 0;
-	for (var i = 0;i < order.length;i++) {
 		res += Math.abs(i - preferred.indexOf(order[i]));
 	}
 	return res;
@@ -183,7 +102,7 @@ function _swap(ar, i, j) {
 }
 
 function optimize(costfunc, matches, preferred) {
-	var conflicts = calc_conflicts(matches);
+	var conflict_map = calc_conflict_map(matches);
 	var match_count = matches.length;
 	if (match_count < 1) {
 		throw new Error('No matches to optimize');
@@ -191,12 +110,12 @@ function optimize(costfunc, matches, preferred) {
 
 	var permutation = utils.range(match_count);
 	var best_order = permutation.slice();
-	var best_cost = costfunc(best_order, conflicts, preferred);
+	var best_cost = costfunc(best_order, conflict_map, preferred);
 
 	// See https://en.wikipedia.org/wiki/Heap%27s_algorithm
 	function permute_heap(n) {
 		if (n === 1) {
-			var cost = costfunc(permutation, conflicts, preferred);
+			var cost = costfunc(permutation, conflict_map, preferred);
 			if (cost < best_cost) {
 				best_order = permutation.slice();
 				best_cost = cost;
@@ -215,7 +134,6 @@ function optimize(costfunc, matches, preferred) {
 		permute_heap(n - 1);
 	}
 	permute_heap(match_count);
-
 	return best_order;
 }
 
@@ -232,10 +150,11 @@ function show() {
 	control.set_current(state);
 
 	utils.visible_qs('.order_layout', true);
-	var result = document.querySelector('.order_result');
-	utils.empty(result);
+	var display = document.querySelector('.order_display');
+	utils.empty(display);
 
 	if (state.event && state.event.matches) {
+		current_matches = get_omatches(state);
 		ui_render();
 	} else {
 		utils.visible_qs('.order_loading-icon', true);
@@ -247,76 +166,102 @@ function show() {
 				return;
 			}
 			state.event = ev;
+			current_matches = get_omatches(state);
 			ui_render();
 		});
 	}
-
 }
 
-var COSTFUNCS = {
-	rest2: cost_rest2,
-	rest2_2courts: cost_rest2_2courts,
-	maxrest: cost_maxrest,
-	norest: cost_norest,
-};
+function get_omatches(s) {
+	var event = s.event;
+	if (!event.preferred_order) {
+		return event.matches.slice();
+	}
+	return order_by_names(event.matches, event.preferred_order);
+}
+
+function ui_move_prepare(from_idx) {
+	current_from = from_idx;
+	utils.qsEach('.order_insert', function(insert) {
+		var idx = parseInt(insert.getAttribute('data-order-idx'), 10);
+		utils.visible(insert, (idx !== from_idx) && (idx !== from_idx + 1));
+	});
+}
+
+function move(from_idx, to_idx) {
+	var tmp_ar = current_matches.splice(from_idx, 1);
+	current_matches.splice((from_idx < to_idx) ? to_idx - 1 : to_idx, 0, tmp_ar[0]);
+	ui_render();
+}
+
+function ui_move_abort() {
+	$('.order_insert_active').removeClass('order_insert_active');
+	current_from = null;
+	utils.qsEach('.order_insert', function(insert) {
+		utils.visible(insert, false);
+	});
+}
 
 function ui_render() {
-	var result = document.querySelector('.order_result');
-	utils.empty(result);
-	utils.visible_qs('.order_loading-icon', true);
-	var matches = state.event.matches;
+	var nums = document.querySelector('.order_nums');
+	utils.empty(nums);
+	for (var i = 1;i <= current_matches.length;i++) {
+		utils.create_el(nums, 'div', {'class': 'order_num'}, i + '.');
+	}
 
-	// Configure preferred order
-	// By default prefer keeping current order
-	var preferred = (
-		state.event.preferred_order ?
-		calc_order(matches, state.event.preferred_order) :
-		utils.range(matches.length)
-	);
-	// TODO: Add more options here
-	var preferred_str = preferred.map(function(idx) {
-		return matches[idx].setup.match_name;
-	}).join(' - ');
-	utils.text_qs('.order_preferred', preferred_str);
+	var conflicts = calc_conflicting_players(current_matches);
+	var display = document.querySelector('.order_display');
+	utils.empty(display);
 
-	// Configure costfunc
-	var costfunc_id = document.querySelector('#order_costfunc').value;
-	var costfunc = COSTFUNCS[costfunc_id];
+	function _create_insert_mark(display, idx) {
+		var container = utils.create_el(display, 'div', {'class': 'order_insert_container'});
+		var mark = utils.create_el(container, 'div', {'class': 'order_insert default-invisible', 'data-order-idx': idx});
+		utils.on_click(mark, function() {
+			var to_idx = parseInt(mark.getAttribute('data-order-idx'));
+			move(current_from, to_idx);
+		});
+	}
 
-	var best_order = optimize(costfunc, matches, preferred);
-	var best_matches = best_order.map(function(idx) {
-		return matches[idx];
-	});
-	var colors = colorize(best_matches);
+	function _add_player(team_container, team, player_id) {
+		var player_name = team.players[player_id].name;
+		var conflict = conflicts[player_name];
+		var style = '';
+		if (conflict === 1) {
+			style = 'color: red;';
+		} else if (conflict === 2) {
+			style = 'color: orange;';
+		}
+		utils.create_el(team_container, 'span', {'class': 'order_player', style: style}, player_name);
+	}
 
-	best_matches.forEach(function(match) {
+	_create_insert_mark(display, 0);
+	current_matches.forEach(function(match, i) {
 		var setup = match.setup;
-		var li = utils.create_el(result, 'li', {});
-
-		if (setup.match_name) {
-			utils.create_el(li, 'span', {'class': 'order_match_name'}, setup.match_name);
+		var match_el = utils.create_el(display, 'table', {'class': 'order_match', 'data-order-idx': i});
+		var match_tr = utils.create_el(match_el, 'tr');
+		utils.create_el(match_tr, 'td', {'class': 'order_match_name'}, setup.match_name);
+		for (var team_id = 0;team_id <= 1;team_id++) {
+			var team = setup.teams[team_id];
+			var team_container = utils.create_el(match_tr, 'td', {'class': 'order_match_team'});
+			_add_player(team_container, team, 0);
+			if (setup.is_doubles) {
+				_add_player(team_container, team, 1);
+			}
 		}
+		utils.on_click(match_el, function() {
+			$('.order_insert_active').removeClass('order_insert_active');
+			$(match_el).addClass('order_insert_active');
 
-		function player_add_span(team_id, player_id) {
-			var player_name = setup.teams[team_id].players[player_id].name;
-			var col = colors[player_name];
-			utils.create_el(li, 'span', {style: 'color: ' + (col ? col : '#ccc;') + ';'}, player_name);
-		}	
+			var from_idx = parseInt(match_el.getAttribute('data-order-idx'));
+			if (from_idx === current_from) {
+				ui_move_abort();
+			} else {
+				ui_move_prepare(from_idx, 10);
+			}
+		});
 
-		player_add_span(0, 0);
-		if (setup.is_doubles) {
-			utils.create_el(li, 'span', {'class': 'order_result_and'}, ' / ');
-			player_add_span(0, 1);
-		}
-		utils.create_el(li, 'span', {'class': 'order_result_vs'}, ' - ');
-		player_add_span(1, 0);
-		if (setup.is_doubles) {
-			utils.create_el(li, 'span', {'class': 'order_result_and'}, ' / ');
-			player_add_span(1, 1);
-		}
+		_create_insert_mark(display, i + 1);
 	});
-	utils.visible_qs('.order_loading-icon', false);
-
 }
 
 function hide() {
@@ -344,14 +289,22 @@ function ui_init() {
 		return false;
 	});
 
-	var black = document.querySelector('.order_layout');
-	utils.on_click(black, function(e) {
-		if (e.target === black) {
-			hide();
+	utils.on_click_qs('.order_layout', function(e) {
+		if (e.target === this) {
+			ui_move_abort();
 		}
 	});
 
-	document.querySelector('#order_costfunc').addEventListener('change', ui_render);
+	utils.on_click_qs('.order_optimize', function() {
+		var best_order = optimize(cost_rest2, current_matches, utils.range(current_matches.length));
+		current_matches = sort_by_order(current_matches, best_order);
+		ui_render();
+	});
+
+	utils.on_click_qs('.order_reset', function() {
+		current_matches = get_omatches(state);
+		ui_render();
+	});
 }
 
 return {
@@ -359,10 +312,10 @@ return {
 	show: show,
 	ui_init: ui_init,
 	// Testing only
-	calc_order: calc_order,
-	calc_conflicts: calc_conflicts,
 	calc_conflicting_players: calc_conflicting_players,
+	order_by_names: order_by_names,
 	cost_rest2: cost_rest2,
+	calc_conflict_map: calc_conflict_map,
 	optimize: optimize,
 };
 

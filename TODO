@@ -1,4 +1,13 @@
-scoresheet: doubled score upon retiring!
+redesign order as manual
+	more effective rendering
+	animation
+	drag&drop
+	use slightly different reds for each player
+	triple points as touch signifier
+	re-add automatic optimization
+
+mail Ulf
+
 multi scoresheet: shift+S shows outdated state when editing match
 enable eventsheet with bupbt
 check eventsheet with bupbt
@@ -20,6 +29,9 @@ reason of yellow card/red card/disqualification
 	delay,throwing racket,verbal abuse,
 optimize clicking on links (just show/display once)
 	avoid load_by_hash when just clicking
+	make sure to only change hash once when navigating
+	avoid showing stuff in hide functions
+	maybe use history API instead of hash?
 
 mail Jörg Hupertz
 mail Michael Pütz
@@ -33,6 +45,8 @@ post bc
 order: test with N/A (should show warning, but not crash)
 order: store match order in bup / CourtSpot
 order: do not show link if no matches present (not yet connected etc.)
+
+
 test going from netstats to order to multi-sheets to game etc. (all via hash, shared functionality for showing/hiding)
 write network demo (liveaw)!
 position manual notes after circle if space is sufficient

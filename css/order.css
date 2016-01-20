@@ -8,10 +8,85 @@
 	text-align: center;
 }
 
-.order_match_name {
-	display: inline-block;
-	min-width: 2.5em;
+.order_display_container {
+	text-align: left;
 }
-.order_result_vs, .order_result_and {
-	color: #bbb;
+.order_clear {
+	clear: both;
+}
+.order_num, .order_match {
+	height: 3em;
+}
+
+.order_nums,.order_display {
+	margin: 1em 0;
+}
+
+.order_nums {
+	float: left;
+	width: 2em;
+}
+.order_display {
+	float: left;
+}
+.order_num {
+	color: #aaa;
+	vertical-align: middle;
+	line-height: 3em;
+}
+
+.order_insert_container {
+	position: relative;
+	height: 0;
+}
+
+.order_insert {
+	position: absolute;
+	left: -2em;
+	top: -1em;
+	width: 2em;
+	height: 2em;
+	background-image: url(../icons/insert_mark.svg);
+	background-size: 100%;
+	cursor: pointer;
+}
+.order_insert:hover {
+	background-image: url(../icons/insert_mark_active.svg);
+}
+.order_insert_active {
+	opacity: 0.5;
+}
+
+
+.order_match {
+	text-align: left;
+	vertical-align: middle;
+	cursor: pointer;
+	user-select: none;
+	-webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+.order_match:hover {
+	background: #ddd;
+}
+.order_match_name {
+	width: 3em;
+}
+.order_match_team {
+	width: 10em;
+}
+.order_player {
+	display: inline-block;
+}
+
+.order_buttons {
+	font-size: 150%;
+}
+.order_buttons>* {
+	font-size: inherit;
+}
+.order_buttons>*+* {
+	margin-left: 2em;
 }

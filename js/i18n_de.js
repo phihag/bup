@@ -250,13 +250,8 @@ var i18n_de = {
 
 'order:header': 'Spielreihenfolge',
 'order:back': 'Zurück',
-'order:rest 2 matches': '2 Spiele Pause',
-'order:rest 2 matches (2 courts)': '2 Spiele Pause (2 Felder)',
-'order:maximum rest': 'Größtmögliche Pausen',
-'order:no rest': 'Keine Pausen',
-'order:preferred label': 'Bevorzugte Reihenfolge: ',
-'order:costfunc': 'Pausenregelung: ',
-
+'order:optimize': 'Optimieren',
+'order:reset': 'Zurücksetzen',
 };
 
 /*@DEV*/
