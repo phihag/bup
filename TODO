@@ -1,4 +1,10 @@
+bupabfrage.php with ERORR_ALL and no timezone
+
 redesign order as manual
+	implement ignored matches
+	test reset with ignored matches
+	make "ignored matches" text clickable as well
+	test at low resolutions (left col gets position: absolute; center col gets margin-left)
 	more effective rendering
 	animation
 	drag&drop
@@ -70,6 +76,7 @@ simple P2P
 	actually transfer data
 	handle P2P in browsers that don't support it!
 	autodetect event from LAN
+	push settings
 network: do not reconstruct network buttons if nothing changed
 include compressed presses in error report
 make error msg a form submission
