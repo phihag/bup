@@ -6,10 +6,12 @@ function _request(s, component, options, cb) {
 	network.request(component, options).done(function(res) {
 		return cb(null, res);
 	}).fail(function(xhr) {
-		var msg = ((xhr.status === 0) ?
-			'CourtSpot nicht erreichbar' :
-			('Netzwerk-Fehler (Code ' + xhr.status + ')')
-		);
+		var msg = 'Netzwerk-Fehler (Code ' + xhr.status + ')';
+		if (xhr.status === 0) {
+			msg = 'CourtSpot nicht erreichbar';
+		} else if ((xhr.status === 200) && (options.dataType === 'json')) {
+			msg = 'Kein gültiges JSON-Dokument';
+		}
 		return cb({
 			type: 'network-error',
 			status: xhr.status,
@@ -153,7 +155,11 @@ function list_matches(s, cb) {
 		if (err) {
 			return cb(err);
 		}
-		if (event.status != 'ok') {
+		if (event.status === 'error') {
+			return cb({
+				msg: 'Fehler beim Lesen der Spiel-Daten: ' + event.description,
+			});
+		} else if (event.status != 'ok') {
 			return cb({
 				msg: 'Spiel-Daten konnten nicht gelesen werden',
 			});
