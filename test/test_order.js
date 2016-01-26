@@ -151,18 +151,18 @@ var sample_matches = [{setup: {
 _describe('order', function() {
 	_it('realistic sample for conflict determination', function() {
 		var omatches = _order_matches(sample_matches, 'HD1-HD2-DD-HE1-HE2-HE3-DE-MX');
-		var conflicts = bup.order.calc_conflicting_players(omatches);
+		var conflicts = bup.order.calc_conflicting_players(omatches, omatches.length);
 		assert.deepStrictEqual(conflicts, {});
 
 		omatches = _order_matches(sample_matches, 'HD1-HE1-HD2-DD-HE2-HE3-DE-MX');
-		conflicts = bup.order.calc_conflicting_players(omatches);
+		conflicts = bup.order.calc_conflicting_players(omatches, omatches.length);
 		assert.deepStrictEqual(conflicts, {
 			'Alexander': 1,
 			'Lukas': 1,
 		});
 
 		omatches = _order_matches(sample_matches, 'HD1-DE-HE1-HD2-DD-HE2-HE3-MX');
-		conflicts = bup.order.calc_conflicting_players(omatches);
+		conflicts = bup.order.calc_conflicting_players(omatches, omatches.length);
 		assert.deepStrictEqual(conflicts, {
 			'Alexander': 2,
 			'Lukas': 2,
