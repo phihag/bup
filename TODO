@@ -1,6 +1,9 @@
+generate Aufstellungszettel
+	empty, printer-friendly
+
 redesign order as manual
 	test at low resolutions (left col gets position: absolute; center col gets margin-left)
-	more effective rendering
+	more effective rendering (prepare for animation)
 	animation
 	drag&drop
 	use slightly different reds for each player
@@ -9,8 +12,6 @@ multi scoresheet: shift+S shows outdated state when editing match
 enable eventsheet with bupbt
 check eventsheet with bupbt
 
-generate Aufstellungszettel
-	empty, printer-friendly
 option to disable double click on court (default set)
 
 mail btde!

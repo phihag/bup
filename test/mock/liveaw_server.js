@@ -8,7 +8,7 @@ var liveaw_mock = (function() {
 // cb gets called with (error, port)
 function serve(cb) {
 	var ws_module = require('ws');
-	var wss = new ws_module.Server({host: '::1', port: 0});
+	var wss = new ws_module.Server({host: '127.0.0.1', port: 0});
 
 	wss._server.on('listening', function() {
 		var wss_port = wss._server.address().port;
