@@ -198,7 +198,7 @@ function ui_move_prepare(from_idx) {
 function move(from_idx, to_idx) {
 	if (to_idx === -99) { // Move to ignore
 		if (from_idx >= current_ignore_start) {
-			ui_render()
+			ui_render();
 			return;
 		}
 		to_idx = current_ignore_start;
