@@ -252,6 +252,7 @@ var i18n_de = {
 'order:back': 'Zurück',
 'order:optimize': 'Optimieren',
 'order:reset': 'Zurücksetzen',
+'order:ignore match': 'Spiel herausnehmen',
 };
 
 /*@DEV*/

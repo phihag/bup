@@ -1,19 +1,9 @@
-bupabfrage.php with ERORR_ALL and no timezone
-
 redesign order as manual
-	implement ignored matches
-	test reset with ignored matches
-	make "ignored matches" text clickable as well
 	test at low resolutions (left col gets position: absolute; center col gets margin-left)
 	more effective rendering
 	animation
 	drag&drop
-	allow marking matches as ignored
 	use slightly different reds for each player
-	triple points as touch signifier
-	re-add automatic optimization
-
-mail Ulf
 
 multi scoresheet: shift+S shows outdated state when editing match
 enable eventsheet with bupbt
@@ -40,6 +30,7 @@ optimize clicking on links (just show/display once)
 	avoid showing stuff in hide functions
 	maybe use history API instead of hash?
 
+mail Ulf
 mail Jörg Hupertz
 mail Michael Pütz
 mail btde

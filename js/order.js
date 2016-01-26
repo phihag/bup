@@ -3,6 +3,7 @@ var order = (function() {
 
 var current_from = null;
 var current_matches;
+var current_ignore_start;
 
 function calc_players(match) {
 	var setup = match.setup;
@@ -37,14 +38,13 @@ function sort_by_order(matches, match_order) {
 	});
 }
 
-function calc_conflicting_players(omatches) {
-	var len = omatches.length;
+function calc_conflicting_players(omatches, ignore_start) {
 	var o_players = omatches.map(calc_players);
 	var conflicts = {};
-	for (var i = 0;i < len;i++) {
+	for (var i = 0;i < ignore_start;i++) {
 		var my_players = o_players[i];
 		for (var dist = 1;dist <= 2;dist++) {
-			if (i + dist >= len) {
+			if (i + dist >= ignore_start) {
 				break;
 			}
 			var other_players = o_players[i + dist];
@@ -155,6 +155,7 @@ function show() {
 
 	if (state.event && state.event.matches) {
 		current_matches = get_omatches(state);
+		current_ignore_start = current_matches.length;
 		ui_render();
 	} else {
 		utils.visible_qs('.order_loading-icon', true);
@@ -167,6 +168,7 @@ function show() {
 			}
 			state.event = ev;
 			current_matches = get_omatches(state);
+			current_ignore_start = current_matches.length;
 			ui_render();
 		});
 	}
@@ -182,20 +184,42 @@ function get_omatches(s) {
 
 function ui_move_prepare(from_idx) {
 	current_from = from_idx;
+	$('.order_ignore_match').addClass('order_ignore_match_active');
 	utils.qsEach('.order_insert', function(insert) {
 		var idx = parseInt(insert.getAttribute('data-order-idx'), 10);
-		utils.visible(insert, (idx !== from_idx) && (idx !== from_idx + 1));
+		utils.visible(insert,
+			(from_idx >= current_ignore_start) ?
+			((idx <= current_ignore_start) && (idx != -99)) :
+			((idx !== from_idx) && (idx !== from_idx + 1))
+		);
 	});
 }
 
 function move(from_idx, to_idx) {
+	if (to_idx === -99) { // Move to ignore
+		if (from_idx >= current_ignore_start) {
+			ui_render()
+			return;
+		}
+		to_idx = current_ignore_start;
+		current_ignore_start--;
+	} else if (from_idx >= current_ignore_start) {
+		current_ignore_start++;
+	}
+
 	var tmp_ar = current_matches.splice(from_idx, 1);
 	current_matches.splice((from_idx < to_idx) ? to_idx - 1 : to_idx, 0, tmp_ar[0]);
 	ui_render();
 }
 
+function ui_mark_click(e) {
+	var to_idx = parseInt(e.target.getAttribute('data-order-idx'));
+	move(current_from, to_idx);
+}
+
 function ui_move_abort() {
 	$('.order_insert_active').removeClass('order_insert_active');
+	$('.order_ignore_match_active').removeClass('order_ignore_match_active');
 	current_from = null;
 	utils.qsEach('.order_insert', function(insert) {
 		utils.visible(insert, false);
@@ -205,21 +229,32 @@ function ui_move_abort() {
 function ui_render() {
 	var nums = document.querySelector('.order_nums');
 	utils.empty(nums);
-	for (var i = 1;i <= current_matches.length;i++) {
-		utils.create_el(nums, 'div', {'class': 'order_num'}, i + '.');
+	for (var i = 0;i < current_matches.length;i++) {
+		var css_class = 'order_num' + ((i >= current_ignore_start) ? ' order_num_invisible' : '');
+		utils.create_el(nums, 'div', {'class': css_class}, (i + 1) + '.');
 	}
 
-	var conflicts = calc_conflicting_players(current_matches);
+	var conflicts = calc_conflicting_players(current_matches, current_ignore_start);
 	var display = document.querySelector('.order_display');
 	utils.empty(display);
+
+	function _create_ignore_after_mark(display) {
+		var container = utils.create_el(display, 'div', {
+			'class': 'order_ignore_match',
+		});
+		var ignore_label = utils.create_el(container, 'span', {
+			'class': 'order_ignore_label',
+			'data-i18n': 'order:ignore match',
+			'data-order-idx': '-99',
+		}, state._('order:ignore match'));
+		utils.on_click(ignore_label, ui_mark_click);
+		_create_insert_mark(display, -99);
+	}
 
 	function _create_insert_mark(display, idx) {
 		var container = utils.create_el(display, 'div', {'class': 'order_insert_container'});
 		var mark = utils.create_el(container, 'div', {'class': 'order_insert default-invisible', 'data-order-idx': idx});
-		utils.on_click(mark, function() {
-			var to_idx = parseInt(mark.getAttribute('data-order-idx'));
-			move(current_from, to_idx);
-		});
+		utils.on_click(mark, ui_mark_click);
 	}
 
 	function _add_player(team_container, team, player_id) {
@@ -236,6 +271,10 @@ function ui_render() {
 
 	_create_insert_mark(display, 0);
 	current_matches.forEach(function(match, i) {
+		if (current_ignore_start === i) {
+			_create_ignore_after_mark(display);
+		}
+
 		var setup = match.setup;
 		var match_el = utils.create_el(display, 'table', {'class': 'order_match', 'data-order-idx': i});
 		var match_tr = utils.create_el(match_el, 'tr');
@@ -260,8 +299,14 @@ function ui_render() {
 			}
 		});
 
-		_create_insert_mark(display, i + 1);
+		if (i < current_ignore_start) {
+			_create_insert_mark(display, i + 1);
+		}
 	});
+
+	if (current_ignore_start === current_matches.length) {
+		_create_ignore_after_mark(display);
+	}
 }
 
 function hide() {
@@ -296,13 +341,16 @@ function ui_init() {
 	});
 
 	utils.on_click_qs('.order_optimize', function() {
-		var best_order = optimize(cost_rest2, current_matches, utils.range(current_matches.length));
-		current_matches = sort_by_order(current_matches, best_order);
+		var matches_to_sort = current_matches.slice(0, current_ignore_start);
+		var best_order = optimize(cost_rest2, matches_to_sort, utils.range(current_ignore_start));
+		var sorted = sort_by_order(matches_to_sort, best_order, current_ignore_start);
+		current_matches = sorted.concat(current_matches.slice(current_ignore_start));
 		ui_render();
 	});
 
 	utils.on_click_qs('.order_reset', function() {
 		current_matches = get_omatches(state);
+		current_ignore_start = current_matches.length;
 		ui_render();
 	});
 }

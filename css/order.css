@@ -14,12 +14,16 @@
 .order_clear {
 	clear: both;
 }
-.order_num, .order_match {
+.order_num, .order_match, .order_ignore_match {
 	height: 3em;
 }
 
 .order_nums,.order_display {
 	margin: 1em 0;
+}
+.order_nums {
+	/* Account for 3em of ignored match area */
+	margin-bottom: 4em;
 }
 
 .order_nums {
@@ -33,6 +37,29 @@
 	color: #aaa;
 	vertical-align: middle;
 	line-height: 3em;
+}
+.order_num_invisible {
+	visibility: hidden;
+}
+
+.order_ignore_match {
+	position: relative;
+	visibility: hidden;
+}
+.order_ignore_match.order_ignore_match_active {
+	visibility: visible;
+}
+.order_ignore_label {
+	font-style: italic;
+	text-align: center;
+	position: absolute;
+	left: 0; right: 0;
+	bottom: 0;
+	border-top: 1px solid #000;
+	cursor: pointer;
+}
+.order_ignore_label:hover {
+	color: #003380;
 }
 
 .order_insert_container {

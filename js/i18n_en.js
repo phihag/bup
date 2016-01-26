@@ -251,6 +251,7 @@ var i18n_en = {
 'order:back': 'Back',
 'order:optimize': 'Optimize',
 'order:reset': 'Reset',
+'order:ignore match': 'ignore match',
 };
 
 /*@DEV*/
