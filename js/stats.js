@@ -17,6 +17,17 @@ function svg_el(parent, tagName, attrs, text) {
 }
 
 function render_graph(svg, s, all_gpoints) {
+	var HEIGHT = 100;
+	var TOP_PADDING = 5;
+	var BOTTOM_PADDING = 5;
+	var XAXIS_Y = 99;
+	var GRAPH_HEIGHT = HEIGHT - TOP_PADDING - BOTTOM_PADDING;
+	var GRAPH_BOTTOM = HEIGHT - BOTTOM_PADDING;
+	var WIDTH = 300;
+	var LEFT_PADDING = 5;
+	var RIGHT_PADDING = 5;
+	var GRAPH_WIDTH = WIDTH - LEFT_PADDING - RIGHT_PADDING;
+
 	// No let in current browsers, so declare these for all
 	var gp;
 	var i;
@@ -54,8 +65,6 @@ function render_graph(svg, s, all_gpoints) {
 			duration = Math.min(duration, 300000);
 		}
 		duration = Math.max(3000, duration);
-		// TODO just for testing
-		//duration = Math.min(10000, duration);
 		
 		normalized_now += duration;
 		gp.normalized = normalized_now;
@@ -69,10 +78,10 @@ function render_graph(svg, s, all_gpoints) {
 	var grid = document.querySelector('.stats_graph_grid');
 	utils.empty(grid);
 	for (i = 0;i <= max_score;i++) {
-		var grid_y = 95 - i * 90 / max_score;
+		var grid_y = GRAPH_BOTTOM - i * GRAPH_HEIGHT / max_score;
 		svg_el(grid, 'line', {
-			x1: 5,
-			x2: 295,
+			x1: LEFT_PADDING,
+			x2: (WIDTH - RIGHT_PADDING),
 			y1: grid_y,
 			y2: grid_y,
 			'class': ((i === 0) || (i === 11) || (i == 21)) ? 'important' : '',
@@ -82,15 +91,15 @@ function render_graph(svg, s, all_gpoints) {
 	// Y axis labels
 	for (i = 0;i <= max_score;i++) {
 		svg_el(grid, 'text', {
-			x: 5,
-			y: 95 - i * 90 / max_score,
+			x: LEFT_PADDING,
+			y: GRAPH_BOTTOM - i * GRAPH_HEIGHT / max_score,
 			'text-anchor': 'end',
 			'alignment-baseline': 'middle',
 			'class': 'axis_score_label',
 		}, i);
 		svg_el(grid, 'text', {
-			x: 300,
-			y: 95 - i * 90 / max_score,
+			x: WIDTH,
+			y: GRAPH_BOTTOM - i * GRAPH_HEIGHT / max_score,
 			'text-anchor': 'end',
 			'alignment-baseline': 'middle',
 			'class': 'axis_score_label',
@@ -104,7 +113,7 @@ function render_graph(svg, s, all_gpoints) {
 			return;
 		}
 
-		var gpx = 5 + gp.normalized * 290 / normalized_now;
+		var gpx = LEFT_PADDING + gp.normalized * GRAPH_WIDTH / normalized_now;
 		if (last_x + 10 > gpx) {
 			// Overlap, leave out time
 			return;
@@ -112,7 +121,7 @@ function render_graph(svg, s, all_gpoints) {
 		last_x = gpx;
 		svg_el(grid, 'text', {
 			x: gpx,
-			y: 99,
+			y: XAXIS_Y,
 			'text-anchor': 'middle',
 			'alignment-baseline': 'baseline',
 			'class': 'xaxis_label',
@@ -137,14 +146,14 @@ function render_graph(svg, s, all_gpoints) {
 	svg.querySelector('.legend_background').setAttribute('width', max_width + 2);
 
 	// Main diagram
-	var x = [5, 5];
-	var y = [95, 95];
+	var x = [LEFT_PADDING, LEFT_PADDING];
+	var y = [GRAPH_BOTTOM, GRAPH_BOTTOM];
 	for (i = 1;i < gpoints.length;i++) {
 		gp = gpoints[i];
-		var gpx = 5 + gp.normalized * 290 / normalized_now;
+		var gpx = LEFT_PADDING + gp.normalized * GRAPH_WIDTH / normalized_now;
 		var gpys = [
-			95 - gp.score[0] * 90 / max_score,
-			95 - gp.score[1] * 90 / max_score,
+			GRAPH_BOTTOM - gp.score[0] * GRAPH_HEIGHT / max_score,
+			GRAPH_BOTTOM - gp.score[1] * GRAPH_HEIGHT / max_score,
 		];
 
 		var press = gp.press;
@@ -215,7 +224,6 @@ function render_graph(svg, s, all_gpoints) {
 					'ry': CARD_RADIUS,
 					'width': CARD_WIDTH,
 					'height': CARD_HEIGHT,
-					'fill': 'lime',
 					'class': 'stats_graph_' + press.type,
 				});
 				break;
