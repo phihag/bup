@@ -2,155 +2,27 @@ var stats = (function() {
 'use strict';
 
 var _INTERESTING_TYPES = ['love-all', 'postgame-confirm', 'postmatch-confirm', 'suspension', 'resume'];
+var HEIGHT = 125;
+var TOP_PADDING = 15;
+var BOTTOM_PADDING = 5;
+var XAXIS_Y = HEIGHT - 1;
+var GRAPH_HEIGHT = HEIGHT - TOP_PADDING - BOTTOM_PADDING;
+var GRAPH_BOTTOM = HEIGHT - BOTTOM_PADDING;
+var WIDTH = 300;
+var LEFT_PADDING = 5;
+var RIGHT_PADDING = 5;
+var GRAPH_WIDTH = WIDTH - LEFT_PADDING - RIGHT_PADDING;
 
-function svg_el(parent, tagName, attrs, text) {
-	var el = parent.ownerDocument.createElementNS('http://www.w3.org/2000/svg', tagName);
-	if (attrs) {
-		for (var k in attrs) {
-			el.setAttribute(k, attrs[k]);
-		}
-	}
-	if (text !== undefined) {
-		el.appendChild(document.createTextNode(text));
-	}
-	parent.appendChild(el);
-}
+// Shortcut to save space and typing
+var svg_el = utils.svg_el;
 
-function render_graph(svg, s, all_gpoints) {
-	var HEIGHT = 100;
-	var TOP_PADDING = 5;
-	var BOTTOM_PADDING = 5;
-	var XAXIS_Y = 99;
-	var GRAPH_HEIGHT = HEIGHT - TOP_PADDING - BOTTOM_PADDING;
-	var GRAPH_BOTTOM = HEIGHT - BOTTOM_PADDING;
-	var WIDTH = 300;
-	var LEFT_PADDING = 5;
-	var RIGHT_PADDING = 5;
-	var GRAPH_WIDTH = WIDTH - LEFT_PADDING - RIGHT_PADDING;
-
-	// No let in current browsers, so declare these for all
-	var gp;
-	var i;
-	var team;
-
-	if (all_gpoints.length === 0) {
-		return;
-	}
-	var lines = svg.querySelector('.stats_graph_lines');
-	utils.empty(lines);
-
-	var timestamp_now = all_gpoints[0].timestamp;
-	var normalized_now = 0;
-	var game = all_gpoints[0].game;
-	var score = false;
-	var max_score = 1;
-	var gpoints = [];
-	for (i = 0;i < all_gpoints.length;i++) {
-		gp = all_gpoints[i];
-		if (
-				utils.deep_equal(gp.score, score) &&
-				(game === gp.game) &&
-				!gp.interesting &&
-				(!gp.press || (calc.SPECIAL_PRESSES.indexOf(gp.press.type) < 0))) {
-			continue;
-		}
-		gpoints.push(gp);
-
-		var duration = gp.timestamp - timestamp_now;
-		if (gp.game > game) {
-			gp.draw_line = false;
-			duration = Math.min(duration, 200000);
-		} else {
-			gp.draw_line = (i > 0);
-			duration = Math.min(duration, 300000);
-		}
-		duration = Math.max(3000, duration);
-		
-		normalized_now += duration;
-		gp.normalized = normalized_now;
-		timestamp_now = gp.timestamp;
-		game = gp.game;
-		score = gp.score;
-		max_score = Math.max(max_score, Math.max(gp.score[0], gp.score[1]));
-	}
-
-	// Gray grid
-	var grid = document.querySelector('.stats_graph_grid');
-	utils.empty(grid);
-	for (i = 0;i <= max_score;i++) {
-		var grid_y = GRAPH_BOTTOM - i * GRAPH_HEIGHT / max_score;
-		svg_el(grid, 'line', {
-			x1: LEFT_PADDING,
-			x2: (WIDTH - RIGHT_PADDING),
-			y1: grid_y,
-			y2: grid_y,
-			'class': ((i === 0) || (i === 11) || (i == 21)) ? 'important' : '',
-		});
-	}
-
-	// Y axis labels
-	for (i = 0;i <= max_score;i++) {
-		svg_el(grid, 'text', {
-			x: LEFT_PADDING,
-			y: GRAPH_BOTTOM - i * GRAPH_HEIGHT / max_score,
-			'text-anchor': 'end',
-			'alignment-baseline': 'middle',
-			'class': 'axis_score_label',
-		}, i);
-		svg_el(grid, 'text', {
-			x: WIDTH,
-			y: GRAPH_BOTTOM - i * GRAPH_HEIGHT / max_score,
-			'text-anchor': 'end',
-			'alignment-baseline': 'middle',
-			'class': 'axis_score_label',
-		}, i);
-	}
-
-	// Times on the x axis
-	var last_x = -999;
-	gpoints.forEach(function(gp) {
-		if (!gp.interesting) {
-			return;
-		}
-
-		var gpx = LEFT_PADDING + gp.normalized * GRAPH_WIDTH / normalized_now;
-		if (last_x + 10 > gpx) {
-			// Overlap, leave out time
-			return;
-		}
-		last_x = gpx;
-		svg_el(grid, 'text', {
-			x: gpx,
-			y: XAXIS_Y,
-			'text-anchor': 'middle',
-			'alignment-baseline': 'baseline',
-			'class': 'xaxis_label',
-		},
-		utils.time_str(gp.timestamp));
-
-	});
-
-	// Legend
-	var max_width = 0;
-	for (team = 0;team < 2;team++) {
-		var player_names = s.setup.teams[team].players[0].name;
-		if (s.setup.is_doubles) {
-			player_names += ' / ' + s.setup.teams[team].players[1].name;
-		}
-
-		var text = svg.querySelector('.legend_team' + team);
-		utils.text(text, player_names);
-		var bb = text.getBBox();
-		max_width = Math.max(bb.width, max_width);
-	}
-	svg.querySelector('.legend_background').setAttribute('width', max_width + 2);
-
-	// Main diagram
+function draw_graph(s, container, gpoints, max_score) {
+	var max_normalized = gpoints[gpoints.length - 1].normalized;
 	var x = [LEFT_PADDING, LEFT_PADDING];
 	var y = [GRAPH_BOTTOM, GRAPH_BOTTOM];
-	for (i = 1;i < gpoints.length;i++) {
-		gp = gpoints[i];
-		var gpx = LEFT_PADDING + gp.normalized * GRAPH_WIDTH / normalized_now;
+	for (var i = 1;i < gpoints.length;i++) {
+		var gp = gpoints[i];
+		var gpx = LEFT_PADDING + gp.normalized * GRAPH_WIDTH / max_normalized;
 		var gpys = [
 			GRAPH_BOTTOM - gp.score[0] * GRAPH_HEIGHT / max_score,
 			GRAPH_BOTTOM - gp.score[1] * GRAPH_HEIGHT / max_score,
@@ -197,7 +69,7 @@ function render_graph(svg, s, all_gpoints) {
 			case 'suspension':
 			case 'overrule':
 			case 'referee':
-				svg_el(lines, 'text', {
+				svg_el(container, 'text', {
 					x: gpx,
 					y: mark_y,
 					'text-anchor': 'middle',
@@ -207,7 +79,7 @@ function render_graph(svg, s, all_gpoints) {
 			case 'correction':
 			case 'injury':
 			case 'retired':
-				svg_el(lines, 'text', {
+				svg_el(container, 'text', {
 					x: gpx,
 					y: mark_y,
 					'text-anchor': 'middle',
@@ -217,7 +89,7 @@ function render_graph(svg, s, all_gpoints) {
 			case 'yellow-card':
 			case 'red-card':
 			case 'disqualified':
-				svg_el(lines, 'rect', {
+				svg_el(container, 'rect', {
 					'x': (gpx - CARD_WIDTH / 2),
 					'y': (mark_y - CARD_HEIGHT / 2),
 					'rx': CARD_RADIUS,
@@ -230,18 +102,18 @@ function render_graph(svg, s, all_gpoints) {
 			}
 		}
 
-		for (team = 0;team < 2;team++) {
+		for (var team = 0;team < 2;team++) {
 			var gpy = gpys[team];
 
 			if (gp.draw_line) {
-				svg_el(lines, 'line', {
+				svg_el(container, 'line', {
 					x1: x[team],
 					x2: gpx,
 					y1: y[team],
 					y2: y[team],
 					'class': 'team' + team,
 				});
-				svg_el(lines, 'line', {
+				svg_el(container, 'line', {
 					x1: gpx,
 					x2: gpx,
 					y1: y[team],
@@ -254,6 +126,128 @@ function render_graph(svg, s, all_gpoints) {
 			y[team] = gpy;
 		}
 	}
+}
+
+function normalize_gpoints(all_gpoints) {
+	var prev_gp = all_gpoints[0];
+	prev_gp.normalized = 0;
+	var gpoints = [prev_gp];
+	for (var i = 1;i < all_gpoints.length;i++) {
+		var gp = all_gpoints[i];
+		if (
+				utils.deep_equal(gp.score, prev_gp.score) &&
+				(prev_gp.game === gp.game) &&
+				!gp.interesting &&
+				(!gp.press || (calc.SPECIAL_PRESSES.indexOf(gp.press.type) < 0))) {
+			continue;
+		}
+		gpoints.push(gp);
+
+		var duration = gp.timestamp - prev_gp.timestamp;
+		if (gp.game > prev_gp.game) {
+			gp.draw_line = false;
+			duration = Math.min(duration, 200000);
+		} else {
+			gp.draw_line = (i > 0);
+			duration = Math.min(duration, 300000);
+		}
+		duration = Math.max(3000, duration);
+		
+		gp.normalized = prev_gp.normalized + duration;
+		prev_gp = gp;
+	}
+	return gpoints;
+}
+
+function render_graph(svg, s, all_gpoints) {
+	// Legend
+	var max_width = 0;
+	for (var team = 0;team < 2;team++) {
+		var player_names = s.setup.teams[team].players[0].name;
+		if (s.setup.is_doubles) {
+			player_names += ' / ' + s.setup.teams[team].players[1].name;
+		}
+
+		var text = svg.querySelector('.legend_team' + team);
+		utils.text(text, player_names);
+		var bb = text.getBBox();
+		max_width = Math.max(bb.width, max_width);
+	}
+	svg.querySelector('.legend_background').setAttribute('width', max_width + 2);
+
+	var lines = svg.querySelector('.stats_graph_lines');
+	utils.empty(lines);
+
+	if (all_gpoints.length === 0) {
+		return;
+	}
+
+	var gpoints = normalize_gpoints(all_gpoints);
+
+	var max_score = 1;
+	for (var i = 0;i < gpoints.length;i++) {
+		var gp = gpoints[i];
+		max_score = Math.max(max_score, Math.max(gp.score[0], gp.score[1]));
+	}
+
+	// Gray grid
+	var grid = svg.querySelector('.stats_graph_grid');
+	utils.empty(grid);
+	for (i = 0;i <= max_score;i++) {
+		var grid_y = GRAPH_BOTTOM - i * GRAPH_HEIGHT / max_score;
+		svg_el(grid, 'line', {
+			x1: LEFT_PADDING,
+			x2: (WIDTH - RIGHT_PADDING),
+			y1: grid_y,
+			y2: grid_y,
+			'class': ((i === 0) || (i === 11) || (i == 21)) ? 'important' : '',
+		});
+	}
+
+	// Y axis labels
+	for (i = 0;i <= max_score;i++) {
+		svg_el(grid, 'text', {
+			x: LEFT_PADDING,
+			y: GRAPH_BOTTOM - i * GRAPH_HEIGHT / max_score,
+			'text-anchor': 'end',
+			'alignment-baseline': 'middle',
+			'class': 'axis_score_label',
+		}, i);
+		svg_el(grid, 'text', {
+			x: WIDTH,
+			y: GRAPH_BOTTOM - i * GRAPH_HEIGHT / max_score,
+			'text-anchor': 'end',
+			'alignment-baseline': 'middle',
+			'class': 'axis_score_label',
+		}, i);
+	}
+
+	// Times on the x axis
+	var last_x = -999;
+	var max_normalized = gpoints[gpoints.length - 1].normalized;
+	gpoints.forEach(function(gp) {
+		if (!gp.interesting) {
+			return;
+		}
+
+		var gpx = LEFT_PADDING + gp.normalized * GRAPH_WIDTH / max_normalized;
+		if (last_x + 10 > gpx) {
+			// Overlap, leave out time
+			return;
+		}
+		last_x = gpx;
+		svg_el(grid, 'text', {
+			x: gpx,
+			y: XAXIS_Y,
+			'text-anchor': 'middle',
+			'alignment-baseline': 'baseline',
+			'class': 'xaxis_label',
+		},
+		utils.time_str(gp.timestamp));
+	});
+
+	// Main diagram
+	draw_graph(s, lines, gpoints, max_score);
 }
 
 function calc_stats(s) {

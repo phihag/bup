@@ -284,6 +284,19 @@ function range(n) {
 	return res;
 }
 
+function svg_el(parent, tagName, attrs, text) {
+	var el = parent.ownerDocument.createElementNS('http://www.w3.org/2000/svg', tagName);
+	if (attrs) {
+		for (var k in attrs) {
+			el.setAttribute(k, attrs[k]);
+		}
+	}
+	if (text !== undefined) {
+		el.appendChild(document.createTextNode(text));
+	}
+	parent.appendChild(el);
+}
+
 return {
 	add_zeroes: add_zeroes,
 	any: any,
@@ -307,6 +320,7 @@ return {
 	repeat: repeat,
 	reverse_every: reverse_every,
 	set_class: set_class,
+	svg_el: svg_el,
 	sum: sum,
 	text: text,
 	text_qs: text_qs,

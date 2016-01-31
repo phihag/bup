@@ -1,3 +1,12 @@
+current change introduces incorrect downward lines!
+
+proper layouting for cards in stats
+	write tests first
+	determine all used coordinates to the left and right at current x
+	red/blue line
+	retired
+mail wolf!
+
 generate Aufstellungszettel
 	empty, printer-friendly
 
@@ -8,6 +17,7 @@ redesign order as manual
 	drag&drop
 	use slightly different reds for each player
 
+import/export JSON
 multi scoresheet: shift+S shows outdated state when editing match
 enable eventsheet with bupbt
 check eventsheet with bupbt
@@ -16,9 +26,6 @@ option to disable double click on court (default set)
 
 mail btde!
 
-proper layouting for cards in stats
-	determine all used coordinates to the left and right at current x
-	red/blue line
 add tests for note positioning
 reason of injury
 reason of retired
@@ -45,7 +52,9 @@ order: test with N/A (should show warning, but not crash)
 order: store match order in bup / CourtSpot
 order: do not show link if no matches present (not yet connected etc.)
 
-
+referee mode where we see both courts
+	... and a list of the last 10 presses each
+	first with CourtSpot, later with P2P
 test going from netstats to order to multi-sheets to game etc. (all via hash, shared functionality for showing/hiding)
 write network demo (liveaw)!
 position manual notes after circle if space is sufficient
