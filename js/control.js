@@ -415,6 +415,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
 	var editmode = require('./editmode');
 	var i18n = require('./i18n');
+	var importexport = require('./importexport');
 	var match_storage = require('./match_storage');
 	var netstats = require('./netstats');
 	var network = require('./network');
