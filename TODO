@@ -1,10 +1,9 @@
-current change introduces incorrect downward lines!
+export JSON
 
-proper layouting for cards in stats
-	write tests first
-	determine all used coordinates to the left and right at current x
-	red/blue line
-	retired
+mail Ulf
+
+import JSON
+analyze yourscore
 mail wolf!
 
 generate Aufstellungszettel
@@ -17,7 +16,6 @@ redesign order as manual
 	drag&drop
 	use slightly different reds for each player
 
-import/export JSON
 multi scoresheet: shift+S shows outdated state when editing match
 enable eventsheet with bupbt
 check eventsheet with bupbt
@@ -48,6 +46,7 @@ mail Jens Köster
 answer Wolf
 post bc
 
+order: reload button
 order: test with N/A (should show warning, but not crash)
 order: store match order in bup / CourtSpot
 order: do not show link if no matches present (not yet connected etc.)

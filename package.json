@@ -12,11 +12,10 @@
 	"dependencies": {
 	},
 	"devDependencies": {
-		"jsdom": "*",
-		"mocha": "*",
 		"async": "*",
-		"jshint": "*",
 		"eslint": "*",
+		"jshint": "*",
+		"mocha": "*",
 		"parse-appcache-manifest": "*",
 		"wrtc": "*",
 		"ws": "*"

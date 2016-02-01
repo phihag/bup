@@ -2,7 +2,6 @@
 	position: absolute;
 	left: 0; right: 0;
 	top: 0;
-	background: rgba(0, 0, 0, 0.8);
 	z-index: 10000;
 }
 .settings_layout {
@@ -16,6 +15,7 @@
 	align-items: center;
 	-webkit-justify-content: center;
 	justify-content: center;
+	background: rgba(0, 0, 0, 0.9);
 
 	font-size: 18px;
 }

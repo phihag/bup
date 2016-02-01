@@ -13,113 +13,232 @@ var LEFT_PADDING = 5;
 var RIGHT_PADDING = 5;
 var GRAPH_WIDTH = WIDTH - LEFT_PADDING - RIGHT_PADDING;
 
-// Shortcut to save space and typing
-var svg_el = utils.svg_el;
+var CARD_PADDING = 1;
+var CARD_HEIGHT = 5;
+var CARD_WIDTH = CARD_HEIGHT * 22 / 29;
+var CARD_RADIUS = CARD_HEIGHT / 11;
+var TEXT_WIDTH = 4;
+var TEXT_HEIGHT = 6;
 
-function draw_graph(s, container, gpoints, max_score) {
-	var max_normalized = gpoints[gpoints.length - 1].normalized;
-	var x = [LEFT_PADDING, LEFT_PADDING];
-	var y = [GRAPH_BOTTOM, GRAPH_BOTTOM];
-	for (var i = 1;i < gpoints.length;i++) {
+function calc_max_score(gpoints) {
+	var max_score = 1;
+	for (var i = 0;i < gpoints.length;i++) {
 		var gp = gpoints[i];
-		var gpx = LEFT_PADDING + gp.normalized * GRAPH_WIDTH / max_normalized;
-		var gpys = [
-			GRAPH_BOTTOM - gp.score[0] * GRAPH_HEIGHT / max_score,
-			GRAPH_BOTTOM - gp.score[1] * GRAPH_HEIGHT / max_score,
-		];
+		max_score = Math.max(max_score, Math.max(gp.score[0], gp.score[1]));
+	}
+	return max_score;
+}
 
-		var press = gp.press;
-		var mark_y = 5;
-		var CLOSENESS = 20;
-		if (press.team_id !== undefined) {
-			var my_gpy = gpys[press.team_id];
-			var other_gpy = gpys[1 - press.team_id];
-			if (my_gpy < other_gpy) {
-				if (my_gpy < other_gpy - CLOSENESS) {
-					mark_y = my_gpy + 10;
-				} else {
-					mark_y = my_gpy - 5;
-				}
-			} else {
-				if (my_gpy > other_gpy + CLOSENESS) {
-					mark_y = my_gpy - 4;
-				} else if (my_gpy + 6 < 100) {
-					mark_y = my_gpy + 6;
-				} else {
-					mark_y = other_gpy - 4;
-				}
+function _find_best(start_y, relevant_marks, mark_height, direction) {
+	var marks_sorted = relevant_marks.slice();
+	marks_sorted.sort(function(m1, m2) {
+		return direction * (m1.y - m2.y);
+	});
+
+	var res = start_y + direction * CARD_PADDING;
+	for (var i = 0;i < marks_sorted.length;i++) {
+		var rm = marks_sorted[i];
+		if (direction > 0) {
+			if (res + mark_height + CARD_PADDING <= rm.y - rm.height / 2) {
+				break;
 			}
 		} else {
-			var min_y = Math.min(gpys[0], gpys[1]);
-			var max_y = Math.max(gpys[0], gpys[1]);
-			if (max_y - min_y > 2 * CLOSENESS) {
-				mark_y = (min_y + max_y) / 2;
-			} else if (min_y > 50) {
-				mark_y = min_y - 10;
-			} else {
-				mark_y = max_y + 12;
+			if (res - mark_height - CARD_PADDING >= rm.y + rm.height / 2) {
+				break;
 			}
 		}
+		res = rm.y + direction * (rm.height / 2 + CARD_PADDING);
+	}
+	return res + direction * mark_height / 2;
+}
 
-		var CARD_HEIGHT = 5;
-		var CARD_WIDTH = CARD_HEIGHT * 22 / 29;
-		var CARD_RADIUS = CARD_WIDTH / 11;
-		if (press) {
-			switch (press.type) {
-			case 'suspension':
-			case 'overrule':
-			case 'referee':
-				svg_el(container, 'text', {
-					x: gpx,
-					y: mark_y,
-					'text-anchor': 'middle',
-					'class': 'stats_graph_mark',
-				}, calc.press_char(s, press));
-				break;
-			case 'correction':
-			case 'injury':
-			case 'retired':
-				svg_el(container, 'text', {
-					x: gpx,
-					y: mark_y,
-					'text-anchor': 'middle',
-					'class': 'stats_graph_mark team' + press.team_id,
-				}, calc.press_char(s, press));
-				break;
-			case 'yellow-card':
-			case 'red-card':
-			case 'disqualified':
-				svg_el(container, 'rect', {
-					'x': (gpx - CARD_WIDTH / 2),
-					'y': (mark_y - CARD_HEIGHT / 2),
-					'rx': CARD_RADIUS,
-					'ry': CARD_RADIUS,
-					'width': CARD_WIDTH,
-					'height': CARD_HEIGHT,
-					'class': 'stats_graph_' + press.type,
+function _calc_mark_y(marks, gpoints, gpoints_index, mark_width, mark_height) {
+	var gp = gpoints[gpoints_index];
+
+	var left_x = gp.x - mark_width / 2 - CARD_PADDING;
+	var right_x = gp.x + mark_width / 2 + CARD_PADDING;
+	var relevant_marks = marks.filter(function(m) {
+		return m.maxx > left_x;
+	});
+
+	// Add marks for all points on the lines
+	var i;
+	var igp;
+	var prevgp;
+	var team;
+	for (i = gpoints_index;i >= 1;i--) {
+		igp = gpoints[i];
+		prevgp = gpoints[i - 1];
+		if (igp.draw_line) {
+			for (team = 0;team < 2;team++) {
+				relevant_marks.push({
+					y: ((igp.ys[team] + prevgp.ys[team]) / 2),
+					height: Math.abs(igp.ys[team] - prevgp.ys[team]),
 				});
-				break;
 			}
+		}
+		if (igp.x < left_x) {
+			break;
+		}
+	}
+	for (i = gpoints_index + 1;i < gpoints.length;i++) {
+		igp = gpoints[i];
+		if (igp.x > right_x) {
+			break;
+		}
+		prevgp = gpoints[i - 1];
+		if (! igp.draw_line) {
+			continue;
+		}
+		for (team = 0;team < 2;team++) {
+			relevant_marks.push({
+				y: ((igp.ys[team] + prevgp.ys[team]) / 2),
+				height: Math.abs(igp.ys[team] - prevgp.ys[team]),
+			});
+		}
+	}
+
+	var mark_y = (
+		(gp.press.team_id !== undefined) ?
+		gp.ys[gp.press.team_id] :
+		((gp.ys[0] + gp.ys[1]) / 2));
+
+	var top_option = _find_best(mark_y, relevant_marks, mark_height, -1);
+	var bottom_option = _find_best(mark_y, relevant_marks, mark_height, 1);
+
+	if (bottom_option + mark_height / 2 > HEIGHT) {
+		mark_y = top_option;
+	} else if (top_option - mark_height / 2 < 0) {
+		mark_y = bottom_option;
+	} else if (Math.abs(mark_y - bottom_option) < Math.abs(mark_y - top_option)) {
+		mark_y = bottom_option;
+	} else {
+		mark_y = top_option;
+	}
+
+	marks.push({
+		maxx: gp.x + mark_width / 2,
+		y: mark_y,
+		height: mark_height,
+	});
+	return mark_y;
+}
+
+
+function draw_graph(s, container, gpoints, max_score) {
+	// No let
+	var line_y;
+	var bottom_y;
+	var mark_y;
+
+	var connectors = utils.svg_el(container, 'g', {});
+
+	var marks = [];
+	var max_normalized = gpoints[gpoints.length - 1].normalized;
+	for (var i = 0;i < gpoints.length;i++) {
+		var igp = gpoints[i];
+		igp.x = LEFT_PADDING + igp.normalized * GRAPH_WIDTH / max_normalized;
+		igp.ys = [
+			GRAPH_BOTTOM - igp.score[0] * GRAPH_HEIGHT / max_score,
+			GRAPH_BOTTOM - igp.score[1] * GRAPH_HEIGHT / max_score,
+		];
+	}
+
+	var x = [LEFT_PADDING, LEFT_PADDING];
+	var y = [GRAPH_BOTTOM, GRAPH_BOTTOM];
+	var gpoints_index;
+	for (gpoints_index = 1;gpoints_index < gpoints.length;gpoints_index++) {
+		var gp = gpoints[gpoints_index];
+		var gpx = gp.x;
+		var gpys = gp.ys;
+		var press = gp.press;
+
+		switch (press.type) {
+		case 'suspension':
+		case 'overrule':
+		case 'referee':
+		case 'correction':
+		case 'injury':
+		case 'retired':
+			var css_class = 'stats_graph_mark' + ((press.team_id !== undefined) ? ' team' + press.team_id : '');
+			var str = calc.press_char(s, press);
+			var do_rotate = (str.length > 3);
+			var width = do_rotate ? TEXT_HEIGHT : (TEXT_WIDTH * str.length);
+			var height = do_rotate ? (TEXT_WIDTH * str.length) : TEXT_HEIGHT;
+			mark_y = _calc_mark_y(marks, gpoints, gpoints_index, width, height);
+			var attrib = {
+				x: gpx,
+				y: mark_y,
+				'class': css_class,
+			};
+			if (do_rotate) {
+				attrib.transform = 'rotate(-90 ' + attrib.x + ' ' + attrib.y + ')';
+			}
+
+			utils.svg_el(container, 'text', attrib, str);
+
+			if (press.team_id !== undefined) {
+				line_y = gpys[press.team_id];
+				bottom_y = mark_y + ((mark_y > line_y) ? -1 : 1) * height / 2;
+
+				utils.svg_el(connectors, 'line', {
+					x1: gpx,
+					x2: gpx,
+					y1: gpys[press.team_id],
+					y2: bottom_y,
+					'class': ('stats_graph_connector team' + press.team_id),
+				});
+			}
+			break;
+		case 'yellow-card':
+		case 'red-card':
+		case 'disqualified':
+			mark_y = _calc_mark_y(marks, gpoints, gpoints_index, CARD_WIDTH, CARD_HEIGHT);
+			utils.svg_el(container, 'rect', {
+				x: (gpx - CARD_WIDTH / 2),
+				y: (mark_y - CARD_HEIGHT / 2),
+				rx: CARD_RADIUS,
+				ry: CARD_RADIUS,
+				width: CARD_WIDTH,
+				height: CARD_HEIGHT,
+				'class': 'stats_graph_' + press.type,
+			});
+
+			line_y = gpys[press.team_id];
+			bottom_y = mark_y + ((mark_y > line_y) ? -1 : 1) * height / 2;
+
+			utils.svg_el(connectors, 'line', {
+				x1: gpx,
+				x2: gpx,
+				y1: gpys[press.team_id],
+				y2: bottom_y,
+				'class': ('stats_graph_connector team' + press.team_id),
+			});
+			break;
 		}
 
 		for (var team = 0;team < 2;team++) {
 			var gpy = gpys[team];
 
 			if (gp.draw_line) {
-				svg_el(container, 'line', {
-					x1: x[team],
-					x2: gpx,
-					y1: y[team],
-					y2: y[team],
-					'class': 'team' + team,
-				});
-				svg_el(container, 'line', {
-					x1: gpx,
-					x2: gpx,
-					y1: y[team],
-					y2: gpy,
-					'class': 'team' + team,
-				});
+				if (x[team] !== gpx) {
+					utils.svg_el(container, 'line', {
+						x1: x[team],
+						x2: gpx,
+						y1: y[team],
+						y2: y[team],
+						'class': 'team' + team,
+					});
+				}
+				if (y[team] !== gpy) {
+					utils.svg_el(container, 'line', {
+						x1: gpx,
+						x2: gpx,
+						y1: y[team],
+						y2: gpy,
+						'class': 'team' + team,
+					});
+				}
 			}
 
 			x[team] = gpx;
@@ -144,7 +263,7 @@ function normalize_gpoints(all_gpoints) {
 		gpoints.push(gp);
 
 		var duration = gp.timestamp - prev_gp.timestamp;
-		if (gp.game > prev_gp.game) {
+		if (gp.game !== prev_gp.game) {
 			gp.draw_line = false;
 			duration = Math.min(duration, 200000);
 		} else {
@@ -183,19 +302,14 @@ function render_graph(svg, s, all_gpoints) {
 	}
 
 	var gpoints = normalize_gpoints(all_gpoints);
-
-	var max_score = 1;
-	for (var i = 0;i < gpoints.length;i++) {
-		var gp = gpoints[i];
-		max_score = Math.max(max_score, Math.max(gp.score[0], gp.score[1]));
-	}
+	var max_score = calc_max_score(gpoints);
 
 	// Gray grid
 	var grid = svg.querySelector('.stats_graph_grid');
 	utils.empty(grid);
-	for (i = 0;i <= max_score;i++) {
+	for (var i = 0;i <= max_score;i++) {
 		var grid_y = GRAPH_BOTTOM - i * GRAPH_HEIGHT / max_score;
-		svg_el(grid, 'line', {
+		utils.svg_el(grid, 'line', {
 			x1: LEFT_PADDING,
 			x2: (WIDTH - RIGHT_PADDING),
 			y1: grid_y,
@@ -206,14 +320,14 @@ function render_graph(svg, s, all_gpoints) {
 
 	// Y axis labels
 	for (i = 0;i <= max_score;i++) {
-		svg_el(grid, 'text', {
+		utils.svg_el(grid, 'text', {
 			x: LEFT_PADDING,
 			y: GRAPH_BOTTOM - i * GRAPH_HEIGHT / max_score,
 			'text-anchor': 'end',
 			'alignment-baseline': 'middle',
 			'class': 'axis_score_label',
 		}, i);
-		svg_el(grid, 'text', {
+		utils.svg_el(grid, 'text', {
 			x: WIDTH,
 			y: GRAPH_BOTTOM - i * GRAPH_HEIGHT / max_score,
 			'text-anchor': 'end',
@@ -236,7 +350,7 @@ function render_graph(svg, s, all_gpoints) {
 			return;
 		}
 		last_x = gpx;
-		svg_el(grid, 'text', {
+		utils.svg_el(grid, 'text', {
 			x: gpx,
 			y: XAXIS_Y,
 			'text-anchor': 'middle',
@@ -532,8 +646,20 @@ return {
 	hide: hide,
 	show: show,
 	ui_init: ui_init,
-	calc_stats: calc_stats,
 	render_table: render_table,
+	// testing only
+	calc_stats: calc_stats,
+	calc_max_score: calc_max_score,
+	draw_graph: draw_graph,
+	normalize_gpoints: normalize_gpoints,
+	HEIGHT: HEIGHT,
+	LEFT_PADDING: LEFT_PADDING,
+	RIGHT_PADDING: RIGHT_PADDING,
+	WIDTH: WIDTH,
+	CARD_PADDING: CARD_PADDING,
+	TEXT_WIDTH: TEXT_WIDTH,
+	TEXT_HEIGHT: TEXT_HEIGHT,
+	CARD_HEIGHT: CARD_HEIGHT,
 };
 
 })();

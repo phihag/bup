@@ -285,16 +285,18 @@ function range(n) {
 }
 
 function svg_el(parent, tagName, attrs, text) {
-	var el = parent.ownerDocument.createElementNS('http://www.w3.org/2000/svg', tagName);
+	var doc = parent.ownerDocument;
+	var el = doc.createElementNS('http://www.w3.org/2000/svg', tagName);
 	if (attrs) {
 		for (var k in attrs) {
 			el.setAttribute(k, attrs[k]);
 		}
 	}
 	if (text !== undefined) {
-		el.appendChild(document.createTextNode(text));
+		el.appendChild(doc.createTextNode(text));
 	}
 	parent.appendChild(el);
+	return el;
 }
 
 return {

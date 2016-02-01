@@ -1,3 +1,4 @@
+var assert = require('assert');
 var bup = require('../js/bup');
 
 // Make linter happy
@@ -115,6 +116,78 @@ function press_score(presses, left_score, right_score) {
 	}
 }
 
+function TextNode(ownerDocument, text) {
+	this.ownerDocument = ownerDocument;
+	this.text = text;
+}
+function Element(ownerDocument, tagName) {
+	this.ownerDocument = ownerDocument;
+	this.tagName = tagName;
+	this.attributes = {};
+	this.childNodes = [];
+	Object.defineProperty(this, 'textContent', {
+		get: function() {
+			var res = '';
+			for (var i = 0;i < this.childNodes.length;i++) {
+				var node = this.childNodes[i];
+				if (node instanceof TextNode) {
+					res += node.text;
+				}
+			}
+			return res;
+		},
+	});
+}
+Element.prototype.setAttribute = function(k, v) {
+	this.attributes[k] = v;
+};
+Element.prototype.appendChild = function(node) {
+	this.childNodes.push(node);
+};
+function Document(tagName) {
+	this.documentElement = new Element(this, tagName);
+}
+Document.prototype.createElement = function(tagName) {
+	return new Element(this, tagName);
+};
+Document.prototype.createElementNS = function(namespace, tagName) {
+	return new Element(this, tagName);
+};
+Document.prototype.createTextNode = function(text) {
+	return new TextNode(this, text);
+};
+
+function _find_object_check(el, search) {
+	for (var key in search) {
+		var value = search[key];
+
+		if (typeof value === 'object') {
+			if (typeof el[key] !== 'object') {
+				return false;
+			}
+			if (! _find_object_check(el[key], value)) {
+				return false;
+			}
+		} else {
+			if (el[key] !== value) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
+function find_object(ar, search) {
+	for (var i = 0;i < ar.length;i++) {
+		var el = ar[i];
+		if (_find_object_check(el, search)) {
+			return el;
+		}
+	}
+	assert.ok(false, 'Could not find object ' + JSON.stringify(search));
+}
+
+
 module.exports = {
 	DOUBLES_SETUP: DOUBLES_SETUP,
 	SINGLES_SETUP: SINGLES_SETUP,
@@ -128,6 +201,8 @@ module.exports = {
 	press_score: press_score,
 	state_after: state_after,
 	state_at: state_at,
+	Document: Document,
+	find_object: find_object,
 };
 
 })();
