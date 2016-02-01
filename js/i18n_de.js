@@ -119,6 +119,7 @@ var i18n_de = {
 'settings:Custom match details': 'Spiel manuell eintragen ...',
 'settings:Network statistics': 'Netzwerkstatistiken',
 'settings:Order link': 'Spielreihenfolge',
+'settings:Export link': 'Exportieren',
 'settings:New match': 'Neues Spiel',
 'settings:Singles': 'Einzel',
 'settings:Doubles': 'Doppel',

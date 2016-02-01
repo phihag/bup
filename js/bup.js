@@ -34,6 +34,7 @@ function ui_init() {
 	eventsheet.ui_init();
 	stats.ui_init();
 	order.ui_init();
+	importexport.ui_init();
 
 	var hash_query = utils.parse_query_string(window.location.hash.substr(1));
 	if (hash_query.lang) {
@@ -77,6 +78,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var eventsheet = require('./eventsheet');
 	var fullscreen = require('./fullscreen');
 	var i18n = require('./i18n');
+	var importexport = require('./importexport');
 	var network = require('./network');
 	var order = require('./order');
 	var p2p = require('./p2p');

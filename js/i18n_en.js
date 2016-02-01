@@ -118,6 +118,7 @@ var i18n_en = {
 'settings:Custom match details': 'Custom match details ...',
 'settings:Network statistics': 'network statistics',
 'settings:Order link': 'match order',
+'settings:Export link': 'Export',
 'settings:New match': 'Create match',
 'settings:Singles': 'Singles',
 'settings:Doubles': 'Doubles',

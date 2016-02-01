@@ -346,6 +346,9 @@ function init_shortcuts() {
 	Mousetrap.bind('shift+d', function() {
 		i18n.ui_update_state(state, 'de');
 	});
+	Mousetrap.bind('shift+j', function() {
+		importexport.export_json(state);
+	});
 }
 
 function set_current(s) {
