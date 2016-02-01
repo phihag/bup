@@ -11,11 +11,11 @@ function export_json(s) {
 		settings: s.settings,
 	};
 
-	var export_json = JSON.stringify(data, undefined, 2);
+	var data_json = JSON.stringify(data, undefined, 2);
 	var name = s.event ? s.event.event_name : '';
 	var now = new Date();
 	var filename = utils.iso8601(now) + ' ' + utils.time_str(now.getTime()).replace(':', '-') + (name ? ' ' : '') + name + '.json';
-	var blob = new Blob([export_json], {type: 'application/json'});
+	var blob = new Blob([data_json], {type: 'application/json'});
 	saveAs(blob, filename);
 }
 
