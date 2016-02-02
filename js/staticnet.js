@@ -19,7 +19,8 @@ function courts() {
 	return null; // No restrictions
 }
 
-function service_name(s) {
+// Unused param: s
+function service_name() {
 	return 'staticnet:service_name';
 }
 
