@@ -265,7 +265,7 @@ function ui_lock_click(e) {
 		$(el).addClass('order_lock_locked');
 		current_locked[match_id] = true;
 	}
-	utils.visible(el, current_from === idx);
+	ui_move_abort();
 }
 
 function ui_move_abort() {
