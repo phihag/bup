@@ -15,7 +15,7 @@ var default_settings = {
 	button_block_timeout: 1200,
 	negative_timers: false,
 	shuttle_counter: true,
-	lang: 'auto',
+	language: 'auto',
 };
 
 function load() {
