@@ -608,13 +608,14 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
 	var courtspot = require('./courtspot');
 	var eventsheet = require('./eventsheet');
+	var netstats = require('./netstats');
 	var p2p = require('./p2p');
 	var pronounciation = require('./pronounciation');
-	var settings = require('./settings');
-	var uiu = require('./uiu');
 	var report_problem = require('./report_problem');
+	var settings = require('./settings');
+	var staticnet = require('./staticnet');
+	var uiu = require('./uiu');
 	var utils = require('./utils');
-	var netstats = require('./netstats');
 
 	module.exports = network;
 }

@@ -257,7 +257,6 @@ var i18n_en = {
 
 'staticnet:switch back message': 'Imported event. Changes here will not be transmitted! ',
 'staticnet:switch back button': 'Switch to live {service}',
-'staticnet:service_name': 'Imported event',
 'staticnet:error': 'Download error ({code})',
 'staticnet:service_name': 'network demo',
 };
