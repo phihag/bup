@@ -11,6 +11,8 @@ bup.dist.js
 jspdf.dist.js
 pdfform.dist.js
 div/scoresheet_international.svg
+div/edemo_en.json
+div/edemo_de.json
 
 @svgfiles
 
