@@ -1,0 +1,232 @@
+{
+  "type": "bup-export",
+  "version": 1,
+  "event": {
+    "staticnet_message": "Demo mode - Changes will not be transmitted",
+    "preferred_order": [
+      "1.HD",
+      "DD",
+      "1.HE",
+      "DE",
+      "GD",
+      "2.HE"
+    ],
+    "matches": [
+      {
+        "setup": {
+          "match_name": "1.HD",
+          "teams": [
+            {
+              "name": "Denmark",
+              "players": [
+                {
+                  "name": "Sam Magee"
+                },
+                {
+                  "name": "Maurice Niesner"
+                }
+              ]
+            },
+            {
+              "name": "China",
+              "players": [
+                {
+                  "name": "Michael Fuchs"
+                },
+                {
+                  "name": "Peter Käsbauer"
+                }
+              ]
+            }
+          ],
+          "event_name": "Denmark - China (Demo)",
+          "tournament_name": "Demo",
+          "team_competition": true,
+          "is_doubles": true,
+          "counting": "3x21",
+          "match_id": "edemo_HD1"
+        },
+        "network_score": [],
+        "presses_json": "[]"
+      },
+      {
+        "setup": {
+          "match_name": "DD",
+          "teams": [
+            {
+              "name": "Denmark",
+              "players": [
+                {
+                  "name": "Carla Nelte"
+                },
+                {
+                  "name": "Chloe Magee"
+                }
+              ]
+            },
+            {
+              "name": "China",
+              "players": [
+                {
+                  "name": "Samantha Barning"
+                },
+                {
+                  "name": "Isabel Herttrich"
+                }
+              ]
+            }
+          ],
+          "event_name": "Denmark - China (Demo)",
+          "tournament_name": "Demo",
+          "team_competition": true,
+          "is_doubles": true,
+          "counting": "3x21",
+          "match_id": "edemo_DD"
+        },
+        "network_score": [],
+        "presses_json": "[]"
+      },
+      {
+        "setup": {
+          "match_name": "1.HE",
+          "teams": [
+            {
+              "name": "Denmark",
+              "players": [
+                {
+                  "name": "Fabian Roth"
+                }
+              ]
+            },
+            {
+              "name": "China",
+              "players": [
+                {
+                  "name": "Marc Zwiebler"
+                }
+              ]
+            }
+          ],
+          "event_name": "Denmark - China (Demo)",
+          "tournament_name": "Demo",
+          "team_competition": true,
+          "is_doubles": false,
+          "counting": "3x21",
+          "match_id": "edemo_HE1"
+        },
+        "network_score": [],
+        "presses_json": "[]"
+      },
+      {
+        "setup": {
+          "match_name": "DE",
+          "teams": [
+            {
+              "name": "Denmark",
+              "players": [
+                {
+                  "name": "Chloe Magee"
+                }
+              ]
+            },
+            {
+              "name": "China",
+              "players": [
+                {
+                  "name": "Olga Konon"
+                }
+              ]
+            }
+          ],
+          "event_name": "Denmark - China (Demo)",
+          "tournament_name": "Demo",
+          "team_competition": true,
+          "is_doubles": false,
+          "counting": "3x21",
+          "match_id": "edemo_DE"
+        },
+        "network_score": [],
+        "presses_json": "[]"
+      },
+      {
+        "setup": {
+          "match_name": "GD",
+          "teams": [
+            {
+              "name": "Denmark",
+              "players": [
+                {
+                  "name": "Sam Magee"
+                },
+                {
+                  "name": "Carla Nelte"
+                }
+              ]
+            },
+            {
+              "name": "China",
+              "players": [
+                {
+                  "name": "Michael Fuchs"
+                },
+                {
+                  "name": "Isabel Herttrich"
+                }
+              ]
+            }
+          ],
+          "event_name": "Denmark - China (Demo)",
+          "tournament_name": "Demo",
+          "team_competition": true,
+          "is_doubles": true,
+          "counting": "3x21",
+          "match_id": "edemo_GD"
+        },
+        "network_score": [],
+        "presses_json": "[]"
+      },
+      {
+        "setup": {
+          "match_name": "2.HE",
+          "teams": [
+            {
+              "name": "Denmark",
+              "players": [
+                {
+                  "name": "Richard Domke"
+                }
+              ]
+            },
+            {
+              "name": "China",
+              "players": [
+                {
+                  "name": "Dieter Domke"
+                }
+              ]
+            }
+          ],
+          "event_name": "Denmark - China (Demo)",
+          "tournament_name": "Demo",
+          "team_competition": true,
+          "is_doubles": false,
+          "counting": "3x21",
+          "match_id": "edemo_HE2"
+        },
+        "network_score": [],
+        "presses_json": "[]"
+      }
+    ],
+    "id": "edemo",
+    "event_name": "Denmark - China (Demo)",
+    "tournament_name": "Demo",
+    "home_team_name": "Denmark",
+    "away_team_name": "China",
+    "eventsheets": [
+      {
+        "key": "1BL",
+        "label": "(German Bundesliga) result report sheet"
+      }
+    ]
+  }
+}

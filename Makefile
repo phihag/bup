@@ -48,6 +48,8 @@ dist: cleandist
 	cp icons/*.gif icons/*.png dist/bup/icons/
 	cp div/dist_htaccess dist/bup/.htaccess
 	mkdir -p dist/bup/div/
+	node div/minify_json.js div/edemo_de.json dist/bup/div/edemo_de.json
+	node div/minify_json.js div/edemo_en.json dist/bup/div/edemo_en.json
 	cp \
 		div/courtspot_screenshot_links.png \
 		div/courtspot_screenshot_rechts.png \

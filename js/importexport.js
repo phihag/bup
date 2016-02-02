@@ -1,8 +1,13 @@
 var importexport = (function() {
 'use strict';
 
+function load_data(data) {
+	return data;
+}
+
 function import_data(s, data) {
-	var snet = staticnet(data.event);
+	var event = load_data(data).event;
+	var snet = staticnet(event);
 	network.ui_install_staticnet(s, snet);
 }
 
@@ -68,6 +73,7 @@ return {
 	ui_init: ui_init,
 	export_json: export_json,
 	import_json: import_json,
+	load_data: load_data,
 };
 
 })();

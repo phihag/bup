@@ -180,6 +180,10 @@ function obj_update(obj, other) {
 	}
 }
 
+function deep_copy(obj) {
+	return JSON.parse(JSON.stringify(obj));
+}
+
 function deep_equal(x, y) {
 	if (x === y) {
 		return true;
@@ -306,6 +310,7 @@ return {
 	date_str: date_str,
 	datetime_str: datetime_str,
 	deep_equal: deep_equal,
+	deep_copy: deep_copy,
 	disabled_qsa: disabled_qsa,
 	duration_mins: duration_mins,
 	duration_secs: duration_secs,

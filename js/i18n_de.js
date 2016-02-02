@@ -259,6 +259,8 @@ var i18n_de = {
 'staticnet:switch back message': 'Sicherungskopie des Wettkampfs geladen. Änderungen werden nicht übertragen! ',
 'staticnet:switch back button': 'Wechseln zu {service}',
 'staticnet:service_name': 'Importierter Wettkampf',
+'staticnet:error': 'Download-Fehler (Code: {code})',
+'staticnet:service_name': 'Netzwerk-Demo',
 };
 
 /*@DEV*/

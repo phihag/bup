@@ -4,7 +4,7 @@ var network = (function() {
 var networks = {};
 
 function get_real_netw() {
-	return networks.btde || networks.courtspot;
+	return networks.edemo || networks.btde || networks.courtspot;
 }
 
 function get_netw() {
@@ -529,6 +529,8 @@ function ui_init(s, hash_query) {
 		networks.courtspot = courtspot();
 	} else if (hash_query.btde !== undefined) {
 		networks.btde = btde();
+	} else if (hash_query.edemo !== undefined) {
+		networks.edemo = staticnet(null, 'div/edemo_' + s.lang + '.json');
 	}
 
 	// Initialize court info
@@ -538,7 +540,7 @@ function ui_init(s, hash_query) {
 	var netw = get_netw();
 	if (netw) {
 		netw.ui_init(s);
-		$('.setup_network_container').show();
+		utils.visible_qs('.setup_network_container', true);
 	}
 }
 
@@ -566,30 +568,8 @@ function request(component, options) {
 function ui_install_staticnet(s, stnet) {
 	networks.staticnet = stnet;
 	erroneous = {}; // Delete all current errors
-	utils.visible_qs('.setup_network_container', true);
 	ui_list_matches(s, false, true);
-
-	var msg_container = document.querySelector('.setup_network_message');
-	utils.empty(msg_container);
-
-	var snet_container = utils.create_el(msg_container, 'div', {
-		'class': 'staticnet_message',
-	});
-
-	utils.create_el(snet_container, 'span', {
-		'data-i18n': 'staticnet:switch back message',
-	}, s._('staticnet:switch back message'));
-	var real_netw = get_real_netw();
-	if (real_netw) {
-		var button = utils.create_el(snet_container, 'button', {
-			role: 'button',
-		}, s._('staticnet:switch back button', {
-			service: real_netw.service_name(s),
-		}));
-		utils.on_click(button, function() {
-			ui_uninstall_staticnet(s);
-		});
-	}
+	stnet.ui_init(s);
 }
 
 function ui_uninstall_staticnet(s) {
@@ -614,6 +594,8 @@ return {
 	is_enabled: is_enabled,
 	get_presses: get_presses,
 	ui_install_staticnet: ui_install_staticnet,
+	ui_uninstall_staticnet: ui_uninstall_staticnet,
+	get_real_netw: get_real_netw,
 };
 
 

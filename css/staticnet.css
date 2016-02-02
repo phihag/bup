@@ -1,0 +1,10 @@
+.staticnet_message {
+	border-radius: 0.5em;
+	background: #f9e38e;
+	padding: 0.5em;
+	margin: 1em 0;
+}
+
+.staticnet_switch_button {
+	margin-left: 1em;
+}

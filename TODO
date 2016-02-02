@@ -1,8 +1,6 @@
-order: locking
-	update optimization
-	add tests
-
-mail Ulf
+fix staticnet/edemo Spielbericht
+test english edemo (player names etc)
+two fast clicks + 1 click on submit dont dismiss
 
 analyze yourscore
 mail wolf!
@@ -48,6 +46,7 @@ mail Jens Köster
 answer Wolf
 post bc
 
+edemo: set up interesting maches
 order: reload button
 order: test with N/A (should show warning, but not crash)
 order: store match order in bup / CourtSpot
