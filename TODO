@@ -1,4 +1,3 @@
-fix staticnet/edemo Spielbericht
 test english edemo (player names etc)
 two fast clicks + 1 click on submit dont dismiss
 
@@ -16,6 +15,7 @@ option to disable double click on court (default set)
 
 mail btde!
 
+edemo: add location etc. for Spielbericht
 add tests for note positioning
 reason of injury
 reason of retired
