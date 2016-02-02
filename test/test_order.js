@@ -36,6 +36,7 @@ function _calc_names(matches, order)  {
 
 var sample_matches = [{setup: {
 	match_name: 'HD1',
+	match_id: 'HD1',
 	is_doubles: true,
 	teams: [{
 		players: [{
@@ -52,6 +53,7 @@ var sample_matches = [{setup: {
 	}],
 }}, {setup: {
 	match_name: 'HD2',
+	match_id: 'HD2',
 	is_doubles: true,
 	teams: [{
 		players: [{
@@ -68,6 +70,7 @@ var sample_matches = [{setup: {
 	}],
 }}, {setup: {
 	match_name: 'DD',
+	match_id: 'DD',
 	is_doubles: true,
 	teams: [{
 		players: [{
@@ -84,6 +87,7 @@ var sample_matches = [{setup: {
 	}],
 }}, {setup: {
 	match_name: 'HE1',
+	match_id: 'HE1',
 	is_doubles: false,
 	teams: [{
 		players: [{
@@ -96,6 +100,7 @@ var sample_matches = [{setup: {
 	}],
 }}, {setup: {
 	match_name: 'HE2',
+	match_id: 'HE2',
 	is_doubles: false,
 	teams: [{
 		players: [{
@@ -108,6 +113,7 @@ var sample_matches = [{setup: {
 	}],
 }}, {setup: {
 	match_name: 'HE3',
+	match_id: 'HE3',
 	is_doubles: false,
 	teams: [{
 		players: [{
@@ -120,6 +126,7 @@ var sample_matches = [{setup: {
 	}],
 }}, {setup: {
 	match_name: 'DE',
+	match_id: 'DE',
 	is_doubles: false,
 	teams: [{
 		players: [{
@@ -132,6 +139,7 @@ var sample_matches = [{setup: {
 	}],
 }}, {setup: {
 	match_name: 'MX',
+	match_id: 'MX',
 	is_doubles: true,
 	teams: [{
 		players: [{
@@ -235,6 +243,7 @@ _describe('order', function() {
 	_it('Gifhorn example (Sunday, easy)', function() {
 		var matches = [{setup: {
 			match_name: 'HD1',
+			match_id: 'HD1',
 			is_doubles: true,
 			teams: [{
 				players: [{
@@ -251,6 +260,7 @@ _describe('order', function() {
 			}],
 		}}, {setup: {
 			match_name: 'DD',
+			match_id: 'DD',
 			is_doubles: true,
 			teams: [{
 				players: [{
@@ -267,6 +277,7 @@ _describe('order', function() {
 			}],
 		}}, {setup: {
 			match_name: 'HD2',
+			match_id: 'HD2',
 			is_doubles: true,
 			teams: [{
 				players: [{
@@ -283,6 +294,7 @@ _describe('order', function() {
 			}],
 		}}, {setup: {
 			match_name: 'HE1',
+			match_id: 'HE1',
 			is_doubles: false,
 			teams: [{
 				players: [{
@@ -295,6 +307,7 @@ _describe('order', function() {
 			}],
 		}}, {setup: {
 			match_name: 'DE',
+			match_id: 'DE',
 			is_doubles: false,
 			teams: [{
 				players: [{
@@ -307,6 +320,7 @@ _describe('order', function() {
 			}],
 		}}, {setup: {
 			match_name: 'GD',
+			match_id: 'GD',
 			is_doubles: true,
 			teams: [{
 				players: [{
@@ -323,6 +337,7 @@ _describe('order', function() {
 			}],
 		}}, {setup: {
 			match_name: 'HE2',
+			match_id: 'HE2',
 			is_doubles: false,
 			teams: [{
 				players: [{
@@ -335,6 +350,7 @@ _describe('order', function() {
 			}],
 		}}, {setup: {
 			match_name: 'HE3',
+			match_id: 'HE3',
 			is_doubles: false,
 			teams: [{
 				players: [{
@@ -355,6 +371,7 @@ _describe('order', function() {
 	_it('Gifhorn example (Saturday, hard, includes locking)', function() {
 		var matches = [{setup: {
 			match_name: 'HD1',
+			match_id: 'HD1',
 			is_doubles: true,
 			teams: [{
 				players: [{
@@ -371,6 +388,7 @@ _describe('order', function() {
 			}],
 		}}, {setup: {
 			match_name: 'DD',
+			match_id: 'DD',
 			is_doubles: true,
 			teams: [{
 				players: [{
@@ -387,6 +405,7 @@ _describe('order', function() {
 			}],
 		}}, {setup: {
 			match_name: 'HD2',
+			match_id: 'HD2',
 			is_doubles: true,
 			teams: [{
 				players: [{
@@ -403,6 +422,7 @@ _describe('order', function() {
 			}],
 		}}, {setup: {
 			match_name: 'HE1',
+			match_id: 'HE1',
 			is_doubles: false,
 			teams: [{
 				players: [{
@@ -415,6 +435,7 @@ _describe('order', function() {
 			}],
 		}}, {setup: {
 			match_name: 'DE',
+			match_id: 'DE',
 			is_doubles: false,
 			teams: [{
 				players: [{
@@ -427,6 +448,7 @@ _describe('order', function() {
 			}],
 		}}, {setup: {
 			match_name: 'GD',
+			match_id: 'GD',
 			is_doubles: true,
 			teams: [{
 				players: [{
@@ -443,6 +465,7 @@ _describe('order', function() {
 			}],
 		}}, {setup: {
 			match_name: 'HE2',
+			match_id: 'HE2',
 			is_doubles: false,
 			teams: [{
 				players: [{
@@ -455,6 +478,7 @@ _describe('order', function() {
 			}],
 		}}, {setup: {
 			match_name: 'HE3',
+			match_id: 'HE3',
 			is_doubles: false,
 			teams: [{
 				players: [{
@@ -510,6 +534,13 @@ _describe('order', function() {
 			imagined_costfunc, matches, preferred, {'HD1': true, 'DD': true}));
 		assert.strictEqual(optimized, 'HD1-DD-HE1-HE2-HE3-GD-DE-HD2');
 
+		var alt_matches = matches.slice();
+		var m0 = alt_matches[0];
+		alt_matches[0] = alt_matches[1];
+		alt_matches[1] = m0;
+		optimized = _calc_names(alt_matches, bup.order.optimize(
+			imagined_costfunc, alt_matches, preferred, {'HD1': true, 'DD': true}));
+		assert.strictEqual(optimized, 'DD-HD1-HE1-HE3-HE2-GD-DE-HD2');
 	});
 
 });
