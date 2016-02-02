@@ -1,16 +1,14 @@
-import JSON
+order: locking
+	update optimization
+	add tests
+
+mail Ulf
+
 analyze yourscore
 mail wolf!
 
 generate Aufstellungszettel
 	empty, printer-friendly
-
-redesign order as manual
-	test at low resolutions (left col gets position: absolute; center col gets margin-left)
-	more effective rendering (prepare for animation)
-	animation
-	drag&drop
-	use slightly different reds for each player
 
 multi scoresheet: shift+S shows outdated state when editing match
 enable eventsheet with bupbt
@@ -34,6 +32,14 @@ optimize clicking on links (just show/display once)
 
 mail Ulf
 mail Jörg Hupertz
+
+redesign order as manual
+	test at low resolutions (left col gets position: absolute; center col gets margin-left)
+	more effective rendering (prepare for animation)
+	animation
+	drag&drop
+	use slightly different reds for each player
+
 mail Michael Pütz
 mail btde
 mail Manuel
@@ -51,7 +57,8 @@ referee mode where we see both courts
 	... and a list of the last 10 presses each
 	first with CourtSpot, later with P2P
 test going from netstats to order to multi-sheets to game etc. (all via hash, shared functionality for showing/hiding)
-write network demo (liveaw)!
+write network demo (staticnet)!
+liveaw event demo
 position manual notes after circle if space is sufficient
 enable compression for presses_json
 clicking on current match when match is in progress shouldn't do anything
@@ -85,6 +92,9 @@ do not recreate network buttons, update them instead
 show UI when reporting errors (top right, allow email address entering)
 netstats: use Resource Timing API
 
+import: hide login upon switching to staticnet?
+import: test from non-network
+import: test importing match-only stuff (should not active staticnet)
 &print for scoresheet / event scoresheet / eventsheet
 event scoresheet should show current state if known (associate mstate, survive event reloads)
 demo event (with eventsheet & current state)
@@ -127,8 +137,7 @@ improve P2P
 	encrypt (retrieve signature from event host)
 	write test cases
 	ObjectRTC
-
-
+import single matches
 yourscore.info
 
 replay?
@@ -277,6 +286,9 @@ show part of scoresheet below? [optionally]
 check for instances of {replace} when calling s._
 compile i18n keys into an array (save mapping in JSON)
 replace document.querySelector with utils.qs
+export: include timestamp/date of export
+import: restrict file types
+import: gracefully handle invalid input files, put out a warning 
 allow challenges
 	failsafe (http://www.badmintoncentral.com/forums/showthread.php/160170-sub-standard-umpire-gave-a-free-point-to-Okuhara-in-first-set?p=2413636#post2413636)
 CourtSpot: Spielreihenfolge festlegen

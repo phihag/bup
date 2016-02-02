@@ -349,6 +349,9 @@ function init_shortcuts() {
 	Mousetrap.bind('shift+j', function() {
 		importexport.export_json(state);
 	});
+	Mousetrap.bind('shift+i', function() {
+		importexport.import_json(state);
+	});
 }
 
 function set_current(s) {

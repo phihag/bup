@@ -212,24 +212,304 @@ _describe('order', function() {
 
 		// Test optimization
 		preferred = _calc_order(sample_matches, 'HD1-HD2-DD-HE1-HE2-HE3-DE-MX');
-		var optimized = _calc_names(sample_matches, bup.order.optimize(bup.order.cost_rest2,sample_matches, preferred));
+		var optimized = _calc_names(sample_matches, bup.order.optimize(bup.order.cost_rest2,sample_matches, preferred, {}));
 		assert.strictEqual(optimized, 'HD1-HD2-DD-HE1-HE2-HE3-DE-MX');
 
 		preferred = _calc_order(sample_matches, 'MX-DE-HE3-HE2-HE1-DD-HD2-HD1');
-		optimized = _calc_names(sample_matches, bup.order.optimize(bup.order.cost_rest2,sample_matches, preferred));
+		optimized = _calc_names(sample_matches, bup.order.optimize(bup.order.cost_rest2,sample_matches, preferred, {}));
 		assert.strictEqual(optimized, 'MX-DE-HE3-HE2-HE1-DD-HD2-HD1');
 
 		preferred = _calc_order(sample_matches, 'HD1-HE1-HD2-DD-HE2-HE3-DE-MX');
-		optimized = _calc_names(sample_matches, bup.order.optimize(bup.order.cost_rest2,sample_matches, preferred));
+		optimized = _calc_names(sample_matches, bup.order.optimize(bup.order.cost_rest2,sample_matches, preferred, {}));
 		assert.strictEqual(optimized, 'HD1-HD2-DD-HE1-HE2-HE3-DE-MX');
 
 		preferred = _calc_order(sample_matches, 'DE-MX-DD-HD1-HD2-HE1-HE2-HE3');
-		optimized = _calc_names(sample_matches, bup.order.optimize(bup.order.cost_rest2,sample_matches, preferred));
+		optimized = _calc_names(sample_matches, bup.order.optimize(bup.order.cost_rest2,sample_matches, preferred, {}));
 		assert.strictEqual(optimized, 'MX-DE-HD1-HD2-DD-HE1-HE2-HE3');
 
 		preferred = _calc_order(sample_matches, 'DD-DE-MX-HD1-HD2-HE1-HE2-HE3');
-		optimized = _calc_names(sample_matches, bup.order.optimize(bup.order.cost_rest2,sample_matches, preferred));
+		optimized = _calc_names(sample_matches, bup.order.optimize(bup.order.cost_rest2,sample_matches, preferred, {}));
 		assert.strictEqual(optimized, 'MX-DE-HD1-HD2-DD-HE1-HE2-HE3');
+	});
+
+	_it('Gifhorn example (Sunday, easy)', function() {
+		var matches = [{setup: {
+			match_name: 'HD1',
+			is_doubles: true,
+			teams: [{
+				players: [{
+					name: 'Maurice Niesner',
+				}, {
+					name: 'Daniel Porath',
+				}],
+			}, {
+				players: [{
+					name: 'Adi Pratama',
+				}, {
+					name: 'Filip Spoljarec',
+				}],
+			}],
+		}}, {setup: {
+			match_name: 'DD',
+			is_doubles: true,
+			teams: [{
+				players: [{
+					name: 'Fabienne Deprez',
+				}, {
+					name: 'Sonja Schlösser',
+				}],
+			}, {
+				players: [{
+					name: 'Laura Ufermann',
+				}, {
+					name: 'Jenny Wan',
+				}],
+			}],
+		}}, {setup: {
+			match_name: 'HD2',
+			is_doubles: true,
+			teams: [{
+				players: [{
+					name: 'Patrick Kämnitz',
+				}, {
+					name: 'Timo Teulings',
+				}],
+			}, {
+				players: [{
+					name: 'Niklas Niemczyk',
+				}, {
+					name: 'Niclas Lohau',
+				}],
+			}],
+		}}, {setup: {
+			match_name: 'HE1',
+			is_doubles: false,
+			teams: [{
+				players: [{
+					name: 'Patrick Kämnitz',
+				}],
+			}, {
+				players: [{
+					name: 'Adi Pratama',
+				}],
+			}],
+		}}, {setup: {
+			match_name: 'DE',
+			is_doubles: false,
+			teams: [{
+				players: [{
+					name: 'Fabienne Deprez',
+				}],
+			}, {
+				players: [{
+					name: 'Jenny Wan',
+				}],
+			}],
+		}}, {setup: {
+			match_name: 'GD',
+			is_doubles: true,
+			teams: [{
+				players: [{
+					name: 'Daniel Porath',
+				}, {
+					name: 'Sonja Schlösser',
+				}],
+			}, {
+				players: [{
+					name: 'Niclas Lohau',
+				}, {
+					name: 'Laura Ufermann',
+				}],
+			}],
+		}}, {setup: {
+			match_name: 'HE2',
+			is_doubles: false,
+			teams: [{
+				players: [{
+					name: 'Yannik Joop',
+				}],
+			}, {
+				players: [{
+					name: 'Filip Spoljarec',
+				}],
+			}],
+		}}, {setup: {
+			match_name: 'HE3',
+			is_doubles: false,
+			teams: [{
+				players: [{
+					name: 'Mirco Ewert',
+				}],
+			}, {
+				players: [{
+					name: 'Niklas Niemczyk',
+				}],
+			}],
+		}}];
+
+		var preferred = _calc_order(matches, 'HD1-DD-HD2-HE1-DE-GD-HE2-HE3');
+		var optimized = _calc_names(matches, bup.order.optimize(bup.order.cost_rest2, matches, preferred, {}));
+		assert.strictEqual(optimized, 'HD1-DD-HD2-HE2-DE-GD-HE1-HE3');
+	});
+
+	_it('Gifhorn example (Saturday, hard, includes locking)', function() {
+		var matches = [{setup: {
+			match_name: 'HD1',
+			is_doubles: true,
+			teams: [{
+				players: [{
+					name: 'Maurice Niesner',
+				}, {
+					name: 'Daniel Porath',
+				}],
+			}, {
+				players: [{
+					name: 'Mark Lamsfuß',
+				}, {
+					name: 'Jens Lamsfuß',
+				}],
+			}],
+		}}, {setup: {
+			match_name: 'DD',
+			is_doubles: true,
+			teams: [{
+				players: [{
+					name: 'Fabienne Deprez',
+				}, {
+					name: 'Alicia Molitor',
+				}],
+			}, {
+				players: [{
+					name: 'Brid Stepper',
+				}, {
+					name: 'Ramona Hacks',
+				}],
+			}],
+		}}, {setup: {
+			match_name: 'HD2',
+			is_doubles: true,
+			teams: [{
+				players: [{
+					name: 'Patrick Kämnitz',
+				}, {
+					name: 'Timo Teulings',
+				}],
+			}, {
+				players: [{
+					name: 'Hubert Paczek',
+				}, {
+					name: 'Jones Ralfy Jansen',
+				}],
+			}],
+		}}, {setup: {
+			match_name: 'HE1',
+			is_doubles: false,
+			teams: [{
+				players: [{
+					name: 'Patrick Kämnitz',
+				}],
+			}, {
+				players: [{
+					name: 'Hubert PaczekHubert Paczek',
+				}],
+			}],
+		}}, {setup: {
+			match_name: 'DE',
+			is_doubles: false,
+			teams: [{
+				players: [{
+					name: 'Fabienne Deprez',
+				}],
+			}, {
+				players: [{
+					name: 'Brid Stepper',
+				}],
+			}],
+		}}, {setup: {
+			match_name: 'GD',
+			is_doubles: true,
+			teams: [{
+				players: [{
+					name: 'Daniel Porath',
+				}, {
+					name: 'Alicia Molitor',
+				}],
+			}, {
+				players: [{
+					name: 'Mateusz Szalankiewicz',
+				}, {
+					name: 'Ramona Hacks',
+				}],
+			}],
+		}}, {setup: {
+			match_name: 'HE2',
+			is_doubles: false,
+			teams: [{
+				players: [{
+					name: 'Timo Teulings',
+				}],
+			}, {
+				players: [{
+					name: 'Mark Lamsfuß',
+				}],
+			}],
+		}}, {setup: {
+			match_name: 'HE3',
+			is_doubles: false,
+			teams: [{
+				players: [{
+					name: 'Yannik Joop',
+				}],
+			}, {
+				players: [{
+					name: 'Jones Ralfy Jansen',
+				}],
+			}],
+		}}];
+
+		var preferred = _calc_order(matches, 'HD1-DD-HD2-HE1-DE-GD-HE2-HE3');
+		var optimized = _calc_names(matches, bup.order.optimize(bup.order.cost_rest2, matches, preferred, {}));
+		assert.strictEqual(optimized, 'HD2-DD-HD1-HE1-DE-GD-HE2-HE3');
+
+		// Restrict to HD1 and DD at start. There is no basis for this in the actual rules.
+		var imagined_costfunc = function(order, conflict_map, preferred) {
+			var res = bup.order.cost_rest2(order, conflict_map, preferred);
+			if (order[0] > 1) {
+				res += 100000;
+			}
+			if (order[1] > 1) {
+				res += 100000;
+			}
+			return res;
+		};
+		optimized = _calc_names(matches, bup.order.optimize(imagined_costfunc, matches, preferred, {}));
+		assert.strictEqual(optimized, 'DD-HD1-HD2-DE-GD-HE1-HE2-HE3');
+
+		// Restrict to HD1 at 1 and DD at 2. There is no basis for this in the actual rules.
+		imagined_costfunc = function(order, conflict_map, preferred) {
+			var res = bup.order.cost_rest2(order, conflict_map, preferred);
+			if (order[0] !== 0) {
+				res += 100000;
+			}
+			if (order[1] !== 1) {
+				res += 100000;
+			}
+			return res;
+		};
+		optimized = _calc_names(matches, bup.order.optimize(imagined_costfunc, matches, preferred, {}));
+		assert.strictEqual(optimized, 'HD1-DD-HE1-HE2-HE3-GD-DE-HD2');
+
+		// Restrict to HD1 at 1 and DD at 2, via locking
+		optimized = _calc_names(matches, bup.order.optimize(
+			imagined_costfunc, matches, preferred, {'HD1': true, 'DD': true}));
+		assert.strictEqual(optimized, 'HD1-DD-HE1-HE2-HE3-GD-DE-HD2');
+
+		// Make sure locking was not accidental
+		preferred = _calc_order(matches, 'HE1-HE2-HD1-DD-HE3-GD-DE-HD2');
+		optimized = _calc_names(matches, bup.order.optimize(
+			imagined_costfunc, matches, preferred, {'HD1': true, 'DD': true}));
+		assert.strictEqual(optimized, 'HD1-DD-HE1-HE2-HE3-GD-DE-HD2');
+
 	});
 
 });

@@ -13,6 +13,7 @@ var i18n_de = {
 'dialog-receiver': 'Rückschläger',
 '[Call referee!]': '[Referee rufen!]',
 'Are you retiring?': 'Werden Sie aufgeben?',
+'import link': 'Importieren ...',
 
 'fullscreen:go': 'Vollbildmodus',
 'fullscreen:no': 'Normalbildmodus',
@@ -254,6 +255,10 @@ var i18n_de = {
 'order:optimize': 'Optimieren',
 'order:reset': 'Zurücksetzen',
 'order:ignore match': 'Spiel herausnehmen',
+
+'staticnet:switch back message': 'Sicherungskopie des Wettkampfs geladen. Änderungen werden nicht übertragen! ',
+'staticnet:switch back button': 'Wechseln zu {service}',
+'staticnet:service_name': 'Importierter Wettkampf',
 };
 
 /*@DEV*/

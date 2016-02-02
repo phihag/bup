@@ -23,6 +23,7 @@
 	<link rel="stylesheet" href="css/netstats.css" />
 	<link rel="stylesheet" href="css/order.css" />
 	<link rel="stylesheet" href="css/compat.css" />
+	<link rel="stylesheet" href="css/importexport.css" />
 	<link rel="stylesheet" href="bup.css" />
 <!--/@DEV-->
 <!--@PRODUCTION
@@ -209,6 +210,7 @@
 
 <div class="setup">
 	<div class="setup_network_container default-invisible">
+	<div class="setup_network_message"></div>
 	<h2 class="setup_network_heading"><span class="setup_network_event" data-i18n="settings:Matches"></span></h2>
 	<div id="setup_network_matches"></div>
 	<div class="setup_network_status"></div>
@@ -271,7 +273,10 @@
 		<button tabindex="101" class="setup_manual_start" data-i18n="settings:Start Match"></button>
 	</div>
 
-	</form>
+	<div class="import_link_container">
+		<a href="#" class="import_link" data-i18n="import link"></a>
+	</div>
+
 
 	<h2 data-i18n="settings:Resume Match"></h2>
 
@@ -279,6 +284,8 @@
 
 	<ul class="setup_loadmatch_list">
 	</ul>
+
+	</form>
 </div>
 
 <div class="settings">
@@ -509,6 +516,7 @@ text.team1 {
 <script src="js/order.js"></script>
 <script src="js/compat.js"></script>
 <script src="js/importexport.js"></script>
+<script src="js/staticnet.js"></script>
 
 <script src="js/bup.js"></script>
 

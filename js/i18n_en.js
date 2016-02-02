@@ -13,6 +13,7 @@ var i18n_en = {
 'dialog-receiver': 'Receiver',
 '[Call referee!]': '[Call referee!]',
 'Are you retiring?': 'Are you retiring?',
+'import link': 'Import event ...',
 
 'fullscreen:go': 'Go fullscreen',
 'fullscreen:no': 'Normal screen',
@@ -253,6 +254,10 @@ var i18n_en = {
 'order:optimize': 'Optimize',
 'order:reset': 'Reset',
 'order:ignore match': 'ignore match',
+
+'staticnet:switch back message': 'Imported event. Changes here will not be transmitted! ',
+'staticnet:switch back button': 'Switch to live {service}',
+'staticnet:service_name': 'Imported event',
 };
 
 /*@DEV*/

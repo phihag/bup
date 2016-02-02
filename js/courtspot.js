@@ -143,6 +143,10 @@ function sync(s, force) {
 }
 
 function send_press(s) {
+	if (!s.setup.courtspot_match_id) {
+		// Manual match while CourtSpot is active
+		return;
+	}
 	sync(s);
 }
 
@@ -181,6 +185,11 @@ function ui_init() {
 	}
 }
 
+/* Paramter: s */
+function service_name() {
+	return 'CourtSpot';
+}
+
 return {
 	ui_init: ui_init,
 	list_matches: list_matches,
@@ -188,6 +197,7 @@ return {
 	sync: sync,
 	prepare_match: prepare_match,
 	courts: courts,
+	service_name: service_name,
 };
 
 }

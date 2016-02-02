@@ -151,6 +151,10 @@ function sync(s) {
 
 /* s, press */
 function send_press(s) {
+	if (!s.setup.btde_match_id) {
+		// Manual match while badmintonticker is active
+		return;
+	}
 	sync(s);
 }
 
@@ -290,6 +294,9 @@ function ui_init() {
 	}
 }
 
+function service_name() {
+	return 'badmintonticker';
+}
 
 return {
 	ui_init: ui_init,
@@ -298,6 +305,7 @@ return {
 	list_matches: list_matches,
 	sync: sync,
 	courts: courts,
+	service_name: service_name,
 	// Testing only
 	_parse_match_list: _parse_match_list,
 };

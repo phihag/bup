@@ -4,6 +4,7 @@ var order = (function() {
 var current_from = null;
 var current_matches;
 var current_ignore_start;
+var current_locked;
 
 function calc_players(match) {
 	var setup = match.setup;
@@ -101,11 +102,29 @@ function _swap(ar, i, j) {
 	ar[j] = tmp;
 }
 
-function optimize(costfunc, matches, preferred) {
+/*
+costfunc:  cost function to be called with:
+           - an order (same format as preferred)
+           - map of the conflicts between each map index
+           - preferred
+           - locked
+matches:   array of matches, in initial order, say [MD, WD, XD]
+preferred: array of indices into matches.
+           For instance, [1, 2, 0] means preferred order is [WD, XD, MD]
+locked:    map of which match IDs are locked (true means locked)
+*/
+function optimize(costfunc, matches, preferred, locked) {
 	var conflict_map = calc_conflict_map(matches);
 	var match_count = matches.length;
 	if (match_count < 1) {
 		throw new Error('No matches to optimize');
+	}
+
+	var locked_list = [];
+	for (var i = 0;i < match_count;i++) {
+		if (locked[matches[i].setup.match_id]) {
+			locked_list.push(i);
+		}
 	}
 
 	var permutation = utils.range(match_count);
@@ -115,6 +134,13 @@ function optimize(costfunc, matches, preferred) {
 	// See https://en.wikipedia.org/wiki/Heap%27s_algorithm
 	function permute_heap(n) {
 		if (n === 1) {
+			for (var j = 0;j < locked_list.length;j++) {
+				var idx = locked_list[j];
+				if (permutation[idx] !== idx) {
+					return;
+				}
+			}
+
 			var cost = costfunc(permutation, conflict_map, preferred);
 			if (cost < best_cost) {
 				best_order = permutation.slice();
@@ -156,6 +182,7 @@ function show() {
 	if (state.event && state.event.matches) {
 		current_matches = get_omatches(state);
 		current_ignore_start = current_matches.length;
+		current_locked = {};
 		ui_render();
 	} else {
 		utils.visible_qs('.order_loading-icon', true);
@@ -169,6 +196,7 @@ function show() {
 			state.event = ev;
 			current_matches = get_omatches(state);
 			current_ignore_start = current_matches.length;
+			current_locked = {};
 			ui_render();
 		});
 	}
@@ -191,6 +219,15 @@ function ui_move_prepare(from_idx) {
 			(from_idx >= current_ignore_start) ?
 			((idx <= current_ignore_start) && (idx != -99)) :
 			((idx !== from_idx) && (idx !== from_idx + 1))
+		);
+	});
+
+	utils.qsEach('.order_lock', function(lock) {
+		var idx = parseInt(lock.getAttribute('data-order-idx'), 10);
+		var match_id = current_matches[idx].setup.match_id;
+		utils.visible(lock,
+			(current_locked[match_id]) ||
+			(from_idx === idx)
 		);
 	});
 }
@@ -217,12 +254,32 @@ function ui_mark_click(e) {
 	move(current_from, to_idx);
 }
 
+function ui_lock_click(e) {
+	var el = e.target;
+	var idx = parseInt(el.getAttribute('data-order-idx'));
+	var match_id = current_matches[idx].setup.match_id;
+	if (current_locked[match_id]) {
+		$(el).removeClass('order_lock_locked');
+		current_locked[match_id] = false;
+	} else {
+		$(el).addClass('order_lock_locked');
+		current_locked[match_id] = true;
+	}
+	utils.visible(el, current_from === idx);
+}
+
 function ui_move_abort() {
 	$('.order_insert_active').removeClass('order_insert_active');
 	$('.order_ignore_match_active').removeClass('order_ignore_match_active');
 	current_from = null;
 	utils.qsEach('.order_insert', function(insert) {
 		utils.visible(insert, false);
+	});
+
+	utils.qsEach('.order_lock', function(lock) {
+		var idx = parseInt(lock.getAttribute('data-order-idx'), 10);
+		var match_id = current_matches[idx].setup.match_id;
+		utils.visible(lock, current_locked[match_id]);
 	});
 }
 
@@ -257,6 +314,19 @@ function ui_render() {
 		utils.on_click(mark, ui_mark_click);
 	}
 
+	function _create_lock_mark(display, idx) {
+		var container = utils.create_el(display, 'div', {'class': 'order_lock_container'});
+		var match_id = current_matches[idx].setup.match_id;
+		var mark_class = 'order_lock';
+		if (current_locked[match_id]) {
+			mark_class += ' order_lock_locked';
+		} else {
+			mark_class += ' default-invisible';
+		}
+		var mark = utils.create_el(container, 'div', {'class': mark_class, 'data-order-idx': idx});
+		utils.on_click(mark, ui_lock_click);
+	}
+
 	function _add_player(team_container, team, player_id) {
 		var player_name = team.players[player_id].name;
 		var conflict = conflicts[player_name];
@@ -273,6 +343,10 @@ function ui_render() {
 	current_matches.forEach(function(match, i) {
 		if (current_ignore_start === i) {
 			_create_ignore_after_mark(display);
+		}
+
+		if (i < current_ignore_start) {
+			_create_lock_mark(display, i);
 		}
 
 		var setup = match.setup;
@@ -342,7 +416,7 @@ function ui_init() {
 
 	utils.on_click_qs('.order_optimize', function() {
 		var matches_to_sort = current_matches.slice(0, current_ignore_start);
-		var best_order = optimize(cost_rest2, matches_to_sort, utils.range(current_ignore_start));
+		var best_order = optimize(cost_rest2, matches_to_sort, utils.range(current_ignore_start), current_locked);
 		var sorted = sort_by_order(matches_to_sort, best_order, current_ignore_start);
 		current_matches = sorted.concat(current_matches.slice(current_ignore_start));
 		ui_render();
@@ -351,6 +425,7 @@ function ui_init() {
 	utils.on_click_qs('.order_reset', function() {
 		current_matches = get_omatches(state);
 		current_ignore_start = current_matches.length;
+		current_locked = {};
 		ui_render();
 	});
 }

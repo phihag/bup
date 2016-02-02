@@ -133,3 +133,10 @@ button>.loading-icon {
 		text-align: center;
 	}
 }
+
+.staticnet_message {
+	border-radius: 0.5em;
+	background: #f9e38e;
+	padding: 0.5em;
+	margin: 1em 0;
+}

@@ -66,7 +66,6 @@
 	position: relative;
 	height: 0;
 }
-
 .order_insert {
 	position: absolute;
 	left: -2em;
@@ -83,6 +82,28 @@
 .order_insert_active {
 	background: #eee;
 	opacity: 0.5;
+}
+
+
+.order_lock_container {
+	position: relative;
+	height: 0;
+}
+.order_lock {
+	position: absolute;
+	right: -2.5em;
+	top: 0.5em;
+	width: 2em;
+	height: 2em;
+	background-image: url(../icons/unlocked_inactive.svg);
+	background-size: 100%;
+	cursor: pointer;
+}
+.order_lock:hover {
+	background-image: url(../icons/unlocked.svg);
+}
+.order_lock.order_lock_locked {
+	background-image: url(../icons/locked.svg);
 }
 
 
