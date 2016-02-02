@@ -18,9 +18,9 @@ function ui_init() {
 		return;
 	}
 
-	utils.on_click_qs('.appcache_update_button', update_now);
+	utils.on_click_qsa('.appcache_update_button', update_now);
 	utils.on_click_qs('.appcache_later_button', function() {
-		$('.appcache_update_ingame').hide();
+		utils.visible_qs('.appcache_update_ingame', false);
 	});
 
 	window.applicationCache.addEventListener('updateready', function() {

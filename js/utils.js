@@ -52,7 +52,13 @@ function on_click_qs(qs, callback) {
 		report_problem.silent_error('Expected to find qs  ' + qs + ' , but no node matching.');
 		return;
 	}
-	return on_click(node, callback);
+	on_click(node, callback);
+}
+
+function on_click_qsa(qs, callback) {
+	qsEach(qs, function(node) {
+		on_click(node, callback);
+	});
 }
 
 function iso8601(d) {
@@ -322,6 +328,7 @@ return {
 	obj_update: obj_update,
 	on_click: on_click,
 	on_click_qs: on_click_qs,
+	on_click_qsa: on_click_qsa,
 	parse_query_string: parse_query_string,
 	qsEach: qsEach,
 	repeat: repeat,
