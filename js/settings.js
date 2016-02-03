@@ -16,6 +16,7 @@ var default_settings = {
 	negative_timers: false,
 	shuttle_counter: true,
 	language: 'auto',
+	editmode_doubleclick: false,
 };
 
 function load() {
@@ -90,7 +91,7 @@ function update_court(s) {
 	court_select.val(s.settings.court_id);
 }
 
-var _settings_checkboxes = ['save_finished_matches', 'go_fullscreen', 'show_pronounciation', 'negative_timers', 'shuttle_counter'];
+var _settings_checkboxes = ['save_finished_matches', 'go_fullscreen', 'show_pronounciation', 'negative_timers', 'shuttle_counter', 'editmode_doubleclick'];
 var _settings_textfields = ['umpire_name', 'service_judge_name', 'court_id', 'court_description'];
 var _settings_numberfields = ['network_timeout', 'network_update_interval', 'button_block_timeout'];
 var _settings_selects = ['language'];

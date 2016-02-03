@@ -146,6 +146,7 @@ var i18n_de = {
 'settings:Service judge': 'Aufschlagrichter',
 'settings:Language': 'Sprache',
 'settings:Store Completed Games': 'Abgeschlossene Spiele speichern',
+'settings:editmode doubleclick': 'Manuelles Bearbeiten mit Doppelklick auf Feld',
 'settings:Show Pronounciation': 'Ansagen anzeigen',
 'settings:Negative Timers': 'Stoppuhr läuft bis zum nächsten Punkt (auch negative Werte anzeigen)',
 'settings:Shuttle Counter': 'Federballzähler anzeigen',

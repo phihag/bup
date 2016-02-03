@@ -32,7 +32,11 @@ function ui_init() {
 		settings.hide();
 	});
 	$('#court').on('click', function(e) {
-		if (e.target.tagName.toLowerCase() == 'button') {
+		if ((e.target.tagName.toLowerCase() == 'button') || (e.target.parentNode.tagName.toLowerCase() == 'button')) {
+			return;
+		}
+
+		if (! state.settings.editmode_doubleclick) {
 			return;
 		}
 
