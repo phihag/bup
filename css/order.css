@@ -127,7 +127,7 @@
 	width: 10em;
 }
 .order_player {
-	display: inline-block;
+	display: block;
 }
 
 .order_buttons {

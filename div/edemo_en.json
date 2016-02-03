@@ -4,26 +4,27 @@
   "event": {
     "staticnet_message": "Demo mode - Changes will not be transmitted",
     "preferred_order": [
-      "1.HD",
-      "DD",
-      "1.HE",
-      "DE",
-      "GD",
-      "2.HE"
+      "MD",
+      "WD",
+      "MS1",
+      "WS",
+      "MX",
+      "MS2"
     ],
     "matches": [
       {
         "setup": {
-          "match_name": "1.HD",
+          "match_name": "MD",
+          "eventsheet_id": "HD",
           "teams": [
             {
               "name": "Denmark",
               "players": [
                 {
-                  "name": "Sam Magee"
+                  "name": "Mathias Boe"
                 },
                 {
-                  "name": "Maurice Niesner"
+                  "name": "Carsten Mogensen"
                 }
               ]
             },
@@ -31,10 +32,10 @@
               "name": "China",
               "players": [
                 {
-                  "name": "Michael Fuchs"
+                  "name": "Fu Haifeng"
                 },
                 {
-                  "name": "Peter Käsbauer"
+                  "name": "Zhang Nan"
                 }
               ]
             }
@@ -44,23 +45,24 @@
           "team_competition": true,
           "is_doubles": true,
           "counting": "3x21",
-          "match_id": "edemo_HD1"
+          "match_id": "edemo_MD"
         },
         "network_score": [],
         "presses_json": "[]"
       },
       {
         "setup": {
-          "match_name": "DD",
+          "match_name": "WD",
+          "eventsheet_id": "DD",
           "teams": [
             {
               "name": "Denmark",
               "players": [
                 {
-                  "name": "Carla Nelte"
+                  "name": "Kamilla Rytter Juhl"
                 },
                 {
-                  "name": "Chloe Magee"
+                  "name": "Christinna Pedersen"
                 }
               ]
             },
@@ -68,10 +70,10 @@
               "name": "China",
               "players": [
                 {
-                  "name": "Samantha Barning"
+                  "name": "Luo Ying"
                 },
                 {
-                  "name": "Isabel Herttrich"
+                  "name": "Luo Yu"
                 }
               ]
             }
@@ -81,20 +83,21 @@
           "team_competition": true,
           "is_doubles": true,
           "counting": "3x21",
-          "match_id": "edemo_DD"
+          "match_id": "edemo_WD"
         },
         "network_score": [],
         "presses_json": "[]"
       },
       {
         "setup": {
-          "match_name": "1.HE",
+          "match_name": "MS1",
+          "eventsheet_id": "1.HE",
           "teams": [
             {
               "name": "Denmark",
               "players": [
                 {
-                  "name": "Fabian Roth"
+                  "name": "Jan Ø. Jørgensen"
                 }
               ]
             },
@@ -102,7 +105,7 @@
               "name": "China",
               "players": [
                 {
-                  "name": "Marc Zwiebler"
+                  "name": "Chen Long"
                 }
               ]
             }
@@ -112,20 +115,21 @@
           "team_competition": true,
           "is_doubles": false,
           "counting": "3x21",
-          "match_id": "edemo_HE1"
+          "match_id": "edemo_MS1"
         },
         "network_score": [],
         "presses_json": "[]"
       },
       {
         "setup": {
-          "match_name": "DE",
+          "match_name": "WS",
+          "eventsheet_id": "DE",
           "teams": [
             {
               "name": "Denmark",
               "players": [
                 {
-                  "name": "Chloe Magee"
+                  "name": "Line Kjaersfeldt"
                 }
               ]
             },
@@ -133,7 +137,7 @@
               "name": "China",
               "players": [
                 {
-                  "name": "Olga Konon"
+                  "name": "Li Xuerui"
                 }
               ]
             }
@@ -143,23 +147,24 @@
           "team_competition": true,
           "is_doubles": false,
           "counting": "3x21",
-          "match_id": "edemo_DE"
+          "match_id": "edemo_WS"
         },
         "network_score": [],
         "presses_json": "[]"
       },
       {
         "setup": {
-          "match_name": "GD",
+          "match_name": "MX",
+          "eventsheet_id": "GD",
           "teams": [
             {
               "name": "Denmark",
               "players": [
                 {
-                  "name": "Sam Magee"
+                  "name": "Joachim Fischer Nielsen"
                 },
                 {
-                  "name": "Carla Nelte"
+                  "name": "Christinna Pedersen"
                 }
               ]
             },
@@ -167,10 +172,10 @@
               "name": "China",
               "players": [
                 {
-                  "name": "Michael Fuchs"
+                  "name": "Zhang Nan"
                 },
                 {
-                  "name": "Isabel Herttrich"
+                  "name": "Zhao Yunlei"
                 }
               ]
             }
@@ -180,20 +185,21 @@
           "team_competition": true,
           "is_doubles": true,
           "counting": "3x21",
-          "match_id": "edemo_GD"
+          "match_id": "edemo_MX"
         },
         "network_score": [],
         "presses_json": "[]"
       },
       {
         "setup": {
-          "match_name": "2.HE",
+          "match_name": "MS2",
+          "eventsheet_id": "2.HE",
           "teams": [
             {
               "name": "Denmark",
               "players": [
                 {
-                  "name": "Richard Domke"
+                  "name": "Viktor Axelsen"
                 }
               ]
             },
@@ -201,7 +207,7 @@
               "name": "China",
               "players": [
                 {
-                  "name": "Dieter Domke"
+                  "name": "Lin Dan"
                 }
               ]
             }
@@ -211,7 +217,7 @@
           "team_competition": true,
           "is_doubles": false,
           "counting": "3x21",
-          "match_id": "edemo_HE2"
+          "match_id": "edemo_MS2"
         },
         "network_score": [],
         "presses_json": "[]"

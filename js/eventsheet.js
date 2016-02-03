@@ -109,7 +109,7 @@ function calc_last_update(matches) {
 function order_matches(ev, match_order) {
 	var matches = [];
 	ev.matches.forEach(function(m) {
-		var match_order_id = m.setup.courtspot_match_id || m.setup.match_name;
+		var match_order_id = m.setup.eventsheet_id || m.setup.courtspot_match_id || m.setup.match_name;
 		var idx = match_order.indexOf(match_order_id);
 		if (idx < 0) {
 			report_problem.silent_error('eventsheet failed to find position of match ' + match_order_id);
