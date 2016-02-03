@@ -1,9 +1,8 @@
 order on smartphone
 order on tablets
 retest on iPad
-
-analyze yourscore
-mail wolf!
+order is extremely slow on iPad -> reposition instead of remake
+order background is too short on iPad
 
 generate Aufstellungszettel
 	empty, printer-friendly
@@ -31,7 +30,6 @@ mail Ulf
 mail Jörg Hupertz
 
 redesign order as manual
-	test at low resolutions (left col gets position: absolute; center col gets margin-left)
 	more effective rendering (prepare for animation)
 	animation
 	drag&drop
@@ -180,6 +178,7 @@ test touch interface
 test touch latency
 prevent double touches
 
+youscore.info support
 injury timer
 	in scoresheet (if not disqualified / retired afterwards)
 show what was undone

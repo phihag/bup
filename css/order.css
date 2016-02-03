@@ -14,8 +14,11 @@
 .order_clear {
 	clear: both;
 }
-.order_num, .order_match, .order_ignore_match {
+.order_num, .order_match {
 	height: 3em;
+}
+.order_ignore_match {
+	height: 2em;
 }
 
 .order_display {
@@ -141,4 +144,10 @@
 
 .order_container {
 	font-size: 3vmin;
+}
+
+@media (max-height:900px) {
+	.order_header {
+		display: none;
+	}
 }
