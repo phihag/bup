@@ -284,16 +284,17 @@ function ui_move_abort() {
 }
 
 function ui_render() {
-	var nums = document.querySelector('.order_nums');
-	utils.empty(nums);
-	for (var i = 0;i < current_matches.length;i++) {
-		var css_class = 'order_num' + ((i >= current_ignore_start) ? ' order_num_invisible' : '');
-		utils.create_el(nums, 'div', {'class': css_class}, (i + 1) + '.');
-	}
-
 	var conflicts = calc_conflicting_players(current_matches, current_ignore_start);
 	var display = document.querySelector('.order_display');
 	utils.empty(display);
+
+	function _create_num(display, i) {
+		var container = utils.create_el(display, 'div', {
+			'class': 'order_num_container',
+		});
+		var css_class = 'order_num' + ((i >= current_ignore_start) ? ' order_num_invisible' : '');
+		utils.create_el(container, 'div', {'class': css_class}, (i + 1) + '.');
+	}
 
 	function _create_ignore_after_mark(display) {
 		var container = utils.create_el(display, 'div', {
@@ -345,6 +346,7 @@ function ui_render() {
 			_create_ignore_after_mark(display);
 		}
 
+		_create_num(display, i);
 		if (i < current_ignore_start) {
 			_create_lock_mark(display, i);
 		}

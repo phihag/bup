@@ -18,25 +18,24 @@
 	height: 3em;
 }
 
-.order_nums,.order_display {
-	margin: 1em 0;
-}
-.order_nums {
-	/* Account for 3em of ignored match area */
-	margin-bottom: 4em;
+.order_display {
+	/* left side for nums, right for lock */
+	margin: 1em 2em;
 }
 
-.order_nums {
-	float: left;
-	width: 2em;
-}
-.order_display {
-	float: left;
+.order_num_container {
+	position: relative;
+	height: 0;
 }
 .order_num {
+	position: absolute;
+	left: -2em;
+	top: 0.5em;
+	width: 2em;
+	height: 2em;
 	color: #aaa;
 	vertical-align: middle;
-	line-height: 3em;
+	line-height: 2em;
 }
 .order_num_invisible {
 	visibility: hidden;
@@ -124,7 +123,7 @@
 	width: 3em;
 }
 .order_match_team {
-	width: 10em;
+	width: 11em;
 }
 .order_player {
 	display: block;
