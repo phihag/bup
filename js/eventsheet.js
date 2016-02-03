@@ -580,6 +580,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
 	var network = require('./network');
 	var render = require('./render');
+	var report_problem = require('./report_problem');
 	var settings = require('./settings');
 	var svg2pdf = require('./svg2pdf');
 	var utils = require('./utils');
