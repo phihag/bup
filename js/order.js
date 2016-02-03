@@ -283,6 +283,19 @@ function ui_move_abort() {
 	});
 }
 
+function on_match_click(e) {
+	var match_el = $(e.target).closest('.order_match')[0];
+	$('.order_insert_active').removeClass('order_insert_active');
+	$(match_el).addClass('order_insert_active');
+
+	var from_idx = parseInt(match_el.getAttribute('data-order-idx'), 10);
+	if (from_idx === current_from) {
+		ui_move_abort();
+	} else {
+		ui_move_prepare(from_idx, 10);
+	}
+}
+
 function ui_render() {
 	var conflicts = calc_conflicting_players(current_matches, current_ignore_start);
 	var display = document.querySelector('.order_display');
@@ -363,17 +376,7 @@ function ui_render() {
 				_add_player(team_container, team, 1);
 			}
 		}
-		utils.on_click(match_el, function() {
-			$('.order_insert_active').removeClass('order_insert_active');
-			$(match_el).addClass('order_insert_active');
-
-			var from_idx = parseInt(match_el.getAttribute('data-order-idx'));
-			if (from_idx === current_from) {
-				ui_move_abort();
-			} else {
-				ui_move_prepare(from_idx, 10);
-			}
-		});
+		utils.on_click(match_el, on_match_click);
 
 		if (i < current_ignore_start) {
 			_create_insert_mark(display, i + 1);

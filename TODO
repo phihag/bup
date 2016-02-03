@@ -1,7 +1,9 @@
 order on smartphone
-order on tablets
-retest on iPad
+order on pixel c
+order on n10
+order on tab4
 order is extremely slow on iPad -> reposition instead of remake
+order buttons look wrong on ipad in portrait
 order background is too short on iPad
 
 generate Aufstellungszettel
@@ -14,6 +16,9 @@ check eventsheet with bupbt
 
 mail btde!
 
+order should actually change order on state.event with staticnet
+	how to store current order then?
+	test happens if order changed on one device, and dialog open on other
 add tests for note positioning
 reason of injury
 reason of retired
