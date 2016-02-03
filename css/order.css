@@ -138,3 +138,7 @@
 .order_buttons>*+* {
 	margin-left: 2em;
 }
+
+.order_container {
+	font-size: 3vmin;
+}
