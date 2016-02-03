@@ -234,7 +234,7 @@ function render_bundesliga(ev, es_key, ui8r, extra_data) {
 		'Textfeld11': [event_winner_str(ev, match_score_home, match_score_away)],
 		'Textfeld12': [extra_data.backup_players],
 		'Textfeld13': [extra_data.notes],
-		'Textfeld14': [undefined, undefined, undefined, extra_data.protest, (extra_data.protest ? utils.time_str(Date.now()) : '')],
+		'Textfeld14': [undefined, undefined, undefined, extra_data.protest, ''],
 		'NumerischesFeld1': get_match_order(matches),
 		'NumerischesFeld2': scores,
 		'Kontrollkästchen1': [true],
@@ -501,11 +501,23 @@ function ui_init() {
 	}
 }
 
+function on_fetch() {
+	var event = state.event;
+	var container = document.querySelector('.eventsheet_container');
+	var KEYS = ['umpires', 'location', 'starttime', 'matchday', 'notes', 'backup_players', 'protest'];
+	KEYS.forEach(function(k) {
+		if (event[k]) {
+			container.querySelector('[name="' + k + '"]').value = event[k];
+		}
+	});
+}
+
 function dialog_fetch() {
 	utils.visible_qs('.eventsheet_generate_loading_icon', !state.event);
 	var btn = $('.eventsheet_generate_button');
 	if (state.event) {
 		btn.removeAttr('disabled');
+		on_fetch();
 	} else {
 		btn.attr('disabled', 'disabled');
 		network.list_matches(state, function(err, ev) {
@@ -522,6 +534,7 @@ function dialog_fetch() {
 			es_key = resolve_key(es_key);
 			container.attr('data-eventsheet_key', es_key);
 			btn.removeAttr('disabled');
+			on_fetch();
 		});
 	}
 }

@@ -14,6 +14,7 @@
     "matches": [
       {
         "setup": {
+          "eventsheet_id": "1.HD",
           "match_name": "HD",
           "teams": [
             {
@@ -222,6 +223,13 @@
     "tournament_name": "Demo",
     "home_team_name": "TV Refrath",
     "away_team_name": "BC Bischmisheim",
+    "location": "SpH Steinbreche",
+    "protest": "Coaching-Stühle zu gemütlich",
+    "umpires": "Max Mustermann & Michaela Meier",
+    "starttime": "14:00",
+    "matchday": "Finale",
+    "notes": "",
+    "backup_players": "Jennifer Karnott, Dennis Nyenhuis (TV Refrath), Marvin Seidel (BC Bischmisheim)",
     "eventsheets": [
       {
         "key": "1BL",

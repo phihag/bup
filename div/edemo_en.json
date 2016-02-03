@@ -228,6 +228,13 @@
     "tournament_name": "Demo",
     "home_team_name": "Denmark",
     "away_team_name": "China",
+    "location": "Gold Coast, Australia",
+    "protest": "Coaching seats too comfortable - 2 coaches fell asleep",
+    "umpires": "Janet Smith & Hong Gildong",
+    "starttime": "14:00 AEST",
+    "matchday": "Finals",
+    "notes": "",
+    "backup_players": "Hans-Kristian Vittinghus (Denmark), Wang Shixian (China)",
     "eventsheets": [
       {
         "key": "1BL",
