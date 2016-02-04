@@ -100,15 +100,17 @@ div.order_container {
 	top: 0.5em;
 	width: 2em;
 	height: 2em;
-	background-image: url(../icons/unlocked_inactive.svg);
+	background-image: url(../icons/unlocked.svg);
 	background-size: 100%;
 	cursor: pointer;
+	opacity: 0.4;
 }
 .order_lock:hover {
-	background-image: url(../icons/unlocked.svg);
+	opacity: 1;
 }
 .order_lock.order_lock_locked {
 	background-image: url(../icons/locked.svg);
+	opacity: 1;
 }
 
 
@@ -118,9 +120,9 @@ div.order_container {
 	cursor: pointer;
 	user-select: none;
 	-webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 }
 .order_match:hover {
 	background: #ddd;
