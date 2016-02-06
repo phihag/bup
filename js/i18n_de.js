@@ -227,7 +227,8 @@ var i18n_de = {
 'eventsheet:Event Sheet': 'Spielbericht',
 
 'eventsheet:label:1BL': 'Spielbericht',
-'eventsheet:label:2BL': 'Spielbericht',
+'eventsheet:label:2BLN': 'Spielbericht',
+'eventsheet:label:2BLS': 'Spielbericht',
 'eventsheet:label:RLW': 'Spielbericht',
 'eventsheet:label:team-1BL': 'Mannschaftsaufstellung',
 'eventsheet:label:team-2BL': 'Mannschaftsaufstellung',

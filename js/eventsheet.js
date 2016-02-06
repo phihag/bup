@@ -2,16 +2,19 @@ var eventsheet = (function() {
 'use strict';
 
 var SHEETS_BY_LEAGUE = {
-	'1BL': ['1BL', 'team-1BL'],
-	'2BLN': ['2BL', 'team-2BL'],
-	'2BLS': ['2BL', 'team-2BL'],
+	'1BL': ['1BL'/*, 'team-1BL'*/],
+	'2BLN': ['2BLN'/*, 'team-2BL'*/],
+	'2BLS': ['2BLS'/*, 'team-2BL'*/],
 	'RLW': ['RLW'],
 };
 
 var URLS = {
 	'1BL': 'div/Spielberichtsbogen_1BL.pdf',
-	'2BL': 'div/Spielberichtsbogen_2BL.pdf',
+	'2BLN': 'div/Spielberichtsbogen_2BL.pdf',
+	'2BLS': 'div/Spielberichtsbogen_2BL.pdf',
 	'RLW': 'div/Spielbericht_RLW.svg',
+	'team-1BL': 'div/TODO.pdf',
+	'team-2BL': 'div/TODO.pdf',
 };
 var files = {};
 
@@ -439,22 +442,22 @@ function render_links(s) {
 		pdfform_loaded();
 	}
 
-	var container = $('.setup_eventsheets');
-	container.empty();
+	var container = document.querySelector('.setup_eventsheets');
+	utils.empty(container);
 	if (! league_key) {
 		return;
 	}
 	var eventsheets = SHEETS_BY_LEAGUE[league_key];
-	eventsheets.forEach(function(es) {
-		var i18n_key = 'eventsheet:label:' + es;
+	eventsheets.forEach(function(es_key) {
+		var i18n_key = 'eventsheet:label:' + es_key;
 		var link = utils.create_el(container, 'a', {
+			'href': '#',
 			'class': 'eventsheet_link',
 			'data-i18n': i18n_key,
 		}, s._(i18n_key));
 		utils.on_click(link, function(e) {
 			e.preventDefault();
-			show_dialog(es.key);
-			return false;
+			show_dialog(es_key);
 		});
 	});
 }

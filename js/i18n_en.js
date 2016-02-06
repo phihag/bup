@@ -226,10 +226,11 @@ var i18n_en = {
 'eventsheet:Event Sheet': 'Event Report',
 
 'eventsheet:label:1BL': '(German Bundesliga) result report sheet',
-'eventsheet:label:2BL': '(German Bundesliga) result report sheet',
-'eventsheet:label:RLW': '(German Bundesliga) result report sheet',
-'eventsheet:label:team-1BL': 'team selection sheet',
-'eventsheet:label:team-2BL': 'team selection sheet',
+'eventsheet:label:2BLN': '(German 2. Bundesliga North) result report sheet',
+'eventsheet:label:2BLS': '(German 2. Bundesliga South) result report sheet',
+'eventsheet:label:RLW': '(German Regionalliga West) result report sheet',
+'eventsheet:label:team-1BL': '(German Bundesliga) team selection sheet',
+'eventsheet:label:team-2BL': '(German 2. Bundesliga) team selection sheet',
 
 'stats:game': 'Game {number}',
 'stats:match': 'Match',

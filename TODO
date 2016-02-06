@@ -1,12 +1,8 @@
-eventsheet: switch to league_key
-eventsheet:
-	test 1BL
-	test 2BLN (test that we have league id as well)
-	test 2BLS
-	test RLW
-	extend RLN
+send export via JSON
 generate Aufstellungszettel
-remove texts from Spielbericht_RLW
+remove texts from Spielbericht_RLW svg file
+
+better edemo
 
 Aufstellungszettel
 	empty, printer-friendly

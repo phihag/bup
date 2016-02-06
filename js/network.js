@@ -373,8 +373,9 @@ function ui_list_matches(s, silent, no_timer) {
 			return;
 		}
 
+		s.event = event;
 		eventsheet.render_links(s);
-		ui_render_matchlist(s, s.event);
+		ui_render_matchlist(s, event);
 	});
 
 	return _stop_list_matches;
