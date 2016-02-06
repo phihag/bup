@@ -226,6 +226,12 @@ var i18n_de = {
 'eventsheet:back': 'Zurück',
 'eventsheet:Event Sheet': 'Spielbericht',
 
+'eventsheet:label:1BL': 'Spielbericht',
+'eventsheet:label:2BL': 'Spielbericht',
+'eventsheet:label:RLW': 'Spielbericht',
+'eventsheet:label:team-1BL': 'Mannschaftsaufstellung',
+'eventsheet:label:team-2BL': 'Mannschaftsaufstellung',
+
 'stats:game': '{number}. Satz',
 'stats:match': 'Spiel',
 'stats:back': 'Zurück',

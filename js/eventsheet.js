@@ -1,15 +1,21 @@
 var eventsheet = (function() {
 'use strict';
 
+var SHEETS_BY_LEAGUE = {
+	'1BL': ['1BL', 'team-1BL'],
+	'2BLN': ['2BL', 'team-2BL'],
+	'2BLS': ['2BL', 'team-2BL'],
+	'RLW': ['RLW'],
+};
+
 var URLS = {
 	'1BL': 'div/Spielberichtsbogen_1BL.pdf',
-	'2BLN': 'div/Spielberichtsbogen_2BL.pdf',
-	'2BLS': 'div/Spielberichtsbogen_2BL.pdf',
+	'2BL': 'div/Spielberichtsbogen_2BL.pdf',
 	'RLW': 'div/Spielbericht_RLW.svg',
 };
 var files = {};
 
-var ui_current_eventsheets = null;
+var ui_current_league_key = null;
 
 function pdfform_loaded() {
 	$('.setup_eventsheets').removeClass('default-invisible');
@@ -423,11 +429,11 @@ function download(es_key, callback) {
 }
 
 function render_links(s) {
-	var ev = s.event;
-
-	if (utils.deep_equal(ui_current_eventsheets, ev.eventsheets)) {
+	var league_key = network.league_key(s);
+	if (utils.deep_equal(ui_current_league_key, league_key)) {
 		return;  // No need to reconfigure containers
 	}
+	ui_current_league_key = league_key;
 
 	if (typeof pdfform != 'undefined') {
 		pdfform_loaded();
@@ -435,21 +441,22 @@ function render_links(s) {
 
 	var container = $('.setup_eventsheets');
 	container.empty();
-	ui_current_eventsheets = ev.eventsheets;
-	ev.eventsheets.forEach(function(es) {
-		var link = $('<a href="#" class="eventsheet_link">');
-		link.on('click', function(e) {
+	if (! league_key) {
+		return;
+	}
+	var eventsheets = SHEETS_BY_LEAGUE[league_key];
+	eventsheets.forEach(function(es) {
+		var i18n_key = 'eventsheet:label:' + es;
+		var link = utils.create_el(container, 'a', {
+			'class': 'eventsheet_link',
+			'data-i18n': i18n_key,
+		}, s._(i18n_key));
+		utils.on_click(link, function(e) {
 			e.preventDefault();
 			show_dialog(es.key);
 			return false;
 		});
-		link.text(es.label);
-		container.append(link);
 	});
-}
-
-function hide() {
-	$('.setup_eventsheets').empty();
 }
 
 function ui_init() {
@@ -580,10 +587,9 @@ function hide_dialog() {
 
 return {
 	pdfform_loaded: pdfform_loaded,
-	render_links: render_links,
-	hide: hide,
 	ui_init: ui_init,
 	show_dialog: show_dialog,
+	render_links: render_links,
 };
 
 })();

@@ -235,11 +235,6 @@
     "matchday": "Finals",
     "notes": "",
     "backup_players": "Hans-Kristian Vittinghus (Denmark), Wang Shixian (China)",
-    "eventsheets": [
-      {
-        "key": "1BL",
-        "label": "(German Bundesliga) result report sheet"
-      }
-    ]
+    "league_id": "1BL"
   }
 }

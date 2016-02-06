@@ -230,11 +230,6 @@
     "matchday": "Finale",
     "notes": "",
     "backup_players": "Jennifer Karnott, Dennis Nyenhuis (TV Refrath), Marvin Seidel (BC Bischmisheim)",
-    "eventsheets": [
-      {
-        "key": "1BL",
-        "label": "Spielbericht"
-      }
-    ]
+    "league_id": "1BL"
   }
 }

@@ -225,6 +225,12 @@ var i18n_en = {
 'eventsheet:back': 'Back',
 'eventsheet:Event Sheet': 'Event Report',
 
+'eventsheet:label:1BL': '(German Bundesliga) result report sheet',
+'eventsheet:label:2BL': '(German Bundesliga) result report sheet',
+'eventsheet:label:RLW': '(German Bundesliga) result report sheet',
+'eventsheet:label:team-1BL': 'team selection sheet',
+'eventsheet:label:team-2BL': 'team selection sheet',
+
 'stats:game': 'Game {number}',
 'stats:match': 'Match',
 'stats:back': 'Back',

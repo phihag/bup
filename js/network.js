@@ -15,6 +15,25 @@ function is_enabled() {
 	return !!get_netw() || !!networks.p2p;
 }
 
+function league_key(s) {
+	var event = s.event;
+	if (!event) {
+		return null;
+	}
+
+	if (event.league_key) {
+		return event.league_key;
+	}
+
+	// Support for old CourtSpot versions
+	var eventsheets = event.eventsheets;
+	if (eventsheets && (eventsheets.length > 0)) {
+		return eventsheets[0].key;
+	}
+
+	return null;
+}
+
 function get_presses(match) {
 	if (match.presses) {
 		return match.presses;
@@ -354,14 +373,8 @@ function ui_list_matches(s, silent, no_timer) {
 			return;
 		}
 
-		s.event = event;
-		if (event.eventsheets) {
-			eventsheet.render_links(s);
-		} else {
-			eventsheet.hide();
-		}
-
-		ui_render_matchlist(s, event);
+		eventsheet.render_links(s);
+		ui_render_matchlist(s, s.event);
 	});
 
 	return _stop_list_matches;
@@ -580,22 +593,23 @@ function ui_uninstall_staticnet(s) {
 }
 
 return {
-	request: request,
 	calc_score: calc_score,
-	send_press: send_press,
-	ui_list_matches: ui_list_matches,
-	ui_init: ui_init,
-	resync: resync,
-	errstate: errstate,
-	match_by_id: match_by_id,
-	enter_match: enter_match,
-	list_matches: list_matches,
 	courts: courts,
-	is_enabled: is_enabled,
+	enter_match: enter_match,
+	errstate: errstate,
 	get_presses: get_presses,
-	ui_install_staticnet: ui_install_staticnet,
-	ui_uninstall_staticnet: ui_uninstall_staticnet,
 	get_real_netw: get_real_netw,
+	is_enabled: is_enabled,
+	league_key: league_key,
+	list_matches: list_matches,
+	match_by_id: match_by_id,
+	request: request,
+	resync: resync,
+	send_press: send_press,
+	ui_init: ui_init,
+	ui_install_staticnet: ui_install_staticnet,
+	ui_list_matches: ui_list_matches,
+	ui_uninstall_staticnet: ui_uninstall_staticnet,
 };
 
 
