@@ -1,12 +1,23 @@
+eventsheet: switch to league_key
+eventsheet:
+	test 1BL
+	test 2BLN (test that we have league id as well)
+	test 2BLS
+	test RLW
+	extend RLN
+generate Aufstellungszettel
+remove texts from Spielbericht_RLW
+
+Aufstellungszettel
+	empty, printer-friendly
+	download full player lists for empty versions
+remove eventsheets everywhere
+
 reason of injury
 reason of retired
 	automatic if as a result or after injury
 reason of yellow card/red card/disqualification
 	delay,throwing racket,verbal abuse,
-
-generate Aufstellungszettel
-	empty, printer-friendly
-	download full player lists for empty versions
 
 multi scoresheet: shift+S shows outdated state when editing match
 order should actually change order on state.event with staticnet
