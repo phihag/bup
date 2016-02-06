@@ -252,7 +252,7 @@ var i18n_de = {
 'stats:success_net_count': '# Erfolg',
 
 'order:header': 'Spielreihenfolge',
-'order:back': 'Zurück',
+'order:back': '< Zurück',
 'order:optimize': 'Optimieren',
 'order:reset': 'Zurücksetzen',
 'order:ignore match': 'Spiel herausnehmen',

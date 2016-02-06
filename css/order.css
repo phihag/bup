@@ -104,6 +104,7 @@ div.order_container {
 	background-size: 100%;
 	cursor: pointer;
 	opacity: 0.4;
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 .order_lock:hover {
 	opacity: 1;
@@ -123,6 +124,7 @@ div.order_container {
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	-ms-user-select: none;
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 .order_match:hover {
 	background: #ddd;
@@ -138,12 +140,13 @@ div.order_container {
 }
 
 .order_buttons {
+	position: relative;
 	font-size: 150%;
 }
 .order_buttons>* {
 	font-size: inherit;
 }
-.order_buttons>*+* {
+.order_reset, .order_optimize {
 	margin-left: 2em;
 }
 
@@ -151,8 +154,22 @@ div.order_container {
 	font-size: 3vmin;
 }
 
-@media (max-height:900px) {
+@media screen and (max-height:900px) {
 	.order_header {
 		display: none;
+	}
+}
+
+@media screen and (max-aspect-ratio: 1/1) {
+	.order_back {
+		position: absolute;
+		left: 0;
+		top: 2.2em;
+	}
+	.order_reset {
+		margin-left: 0;
+	}
+	.order_buttons {
+		margin-bottom: 2em;
 	}
 }

@@ -1,30 +1,27 @@
-order touching is finicky on ipad
-order on smartphone
-order on pixel c
-order on n10
-order on tab4
-order buttons look wrong on ipad in portrait
-order background is too short on iPad
+reason of injury
+reason of retired
+	automatic if as a result or after injury
+reason of yellow card/red card/disqualification
+	delay,throwing racket,verbal abuse,
 
 generate Aufstellungszettel
 	empty, printer-friendly
+	download full player lists for empty versions
 
 multi scoresheet: shift+S shows outdated state when editing match
+order should actually change order on state.event with staticnet
+	how to store current order then?
+	test happens if order changed on one device, and dialog open on other
+	change in CourtSpot too
+
+
 enable eventsheet with bupbt
 check eventsheet with bupbt
 
 
 mail btde!
 
-order should actually change order on state.event with staticnet
-	how to store current order then?
-	test happens if order changed on one device, and dialog open on other
 add tests for note positioning
-reason of injury
-reason of retired
-	automatic if as a result or after injury
-reason of yellow card/red card/disqualification
-	delay,throwing racket,verbal abuse,
 optimize clicking on links (just show/display once)
 	avoid load_by_hash when just clicking
 	make sure to only change hash once when navigating
