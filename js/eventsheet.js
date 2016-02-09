@@ -27,10 +27,16 @@ function pdfform_loaded() {
 function _player_names(match, team_id) {
 	var team = match.setup.teams[team_id];
 	if (match.setup.is_doubles) {
+		if (team.players.length !== 2) {
+			return 'N.N. / N.N.';
+		}
 		return (
 			team.players[0].name + ' / ' +
 			team.players[1].name);
 	} else {
+		if (team.players.length !== 1) {
+			return 'N.N.';
+		}
 		return team.players[0].name;
 	}
 }

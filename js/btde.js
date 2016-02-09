@@ -231,9 +231,19 @@ function _parse_match_list(doc, now) {
 
 		var match_id = 'btde_' + utils.iso8601(now) + '_' + match.dis + '_' + home_team_name + '-' + away_team_name;
 
+		var m = /^(.+?)\s*([0-9]+)$/.exec(match.dis);
+		var eventsheet_id = match.dis;
+		if (m) {
+			eventsheet_id = m[2] + '.' + m[1];
+		}
+		if (eventsheet_id === 'HD') {
+			eventsheet_id = '1.HD';
+		}
+
 		return {
 			setup: {
 				counting: '3x21',
+				eventsheet_id: eventsheet_id,
 				match_name: match.dis,
 				is_doubles: is_doubles,
 				teams: [home_team, away_team],
@@ -246,8 +256,11 @@ function _parse_match_list(doc, now) {
 		};
 	});
 	return {
+		home_team_name: home_team_name,
+		away_team_name: away_team_name,
 		event_name: home_team_name + ' - ' + away_team_name,
 		matches: matches,
+		league_key: ((matches.length === 6) ? '1BL' : '2BLN'),
 	};
 }
 
