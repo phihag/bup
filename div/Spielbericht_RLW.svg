@@ -185,14 +185,14 @@ line {
 <text x="255.5" y="126.5" style="text-anchor:middle;" id="es_rlw_match7_games0"></text>
 
 <text x="262.5" y="49" style="text-anchor:middle; font-size: 2.5px;">Gast</text>
-<text x="262.5" y="56.5" style="text-anchor:middle;" id="es_rlw_match0_games1">2</text>
-<text x="262.5" y="66.5" style="text-anchor:middle;" id="es_rlw_match1_games1">2</text>
-<text x="262.5" y="76.5" style="text-anchor:middle;" id="es_rlw_match2_games1">2</text>
-<text x="262.5" y="86.5" style="text-anchor:middle;" id="es_rlw_match3_games1">2</text>
-<text x="262.5" y="96.5" style="text-anchor:middle;" id="es_rlw_match4_games1">2</text>
-<text x="262.5" y="106.5" style="text-anchor:middle;" id="es_rlw_match5_games1">2</text>
-<text x="262.5" y="116.5" style="text-anchor:middle;" id="es_rlw_match6_games1">2</text>
-<text x="262.5" y="126.5" style="text-anchor:middle;" id="es_rlw_match7_games1">2</text>
+<text x="262.5" y="56.5" style="text-anchor:middle;" id="es_rlw_match0_games1"></text>
+<text x="262.5" y="66.5" style="text-anchor:middle;" id="es_rlw_match1_games1"></text>
+<text x="262.5" y="76.5" style="text-anchor:middle;" id="es_rlw_match2_games1"></text>
+<text x="262.5" y="86.5" style="text-anchor:middle;" id="es_rlw_match3_games1"></text>
+<text x="262.5" y="96.5" style="text-anchor:middle;" id="es_rlw_match4_games1"></text>
+<text x="262.5" y="106.5" style="text-anchor:middle;" id="es_rlw_match5_games1"></text>
+<text x="262.5" y="116.5" style="text-anchor:middle;" id="es_rlw_match6_games1"></text>
+<text x="262.5" y="126.5" style="text-anchor:middle;" id="es_rlw_match7_games1"></text>
 
 
 <text x="273" y="46.5" style="text-anchor:middle; font-size: 2.5px;">Spiele</text>
@@ -220,7 +220,7 @@ line {
 
 <text x="20" y="136.5">Sieger:</text>
 <line x1="34" x2="120" y1="137.5" y2="137.5" />
-<text x="35" y="136.5" id="es_rlw_winner">TSV SG Neuhausen-Nymphenburg 2</text>
+<text x="35" y="136.5" id="es_rlw_winner"></text>
 
 <text x="230" y="136.5" style="text-anchor: end;">Ergebnis:</text>
 <text x="237" y="136.5" style="text-anchor:middle;" id="es_rlw_sum_points0"></text>
