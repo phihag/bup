@@ -11,10 +11,10 @@ function calc_players(match) {
 
 	var res = [];
 	for (var team_id = 0;team_id < 2;team_id++) {
-		var team = teams[team_id];
-		team.players.forEach(function(p) {
-			res.push(p.name);
-		});
+		var players = teams[team_id].players;
+		for (var i = 0;i < players.length;i++) {
+			res.push(players[i].name);
+		}
 	}
 	return res;
 }

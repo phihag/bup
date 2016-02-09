@@ -126,6 +126,7 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var fullscreen = require('./fullscreen');
 	var netstats = require('./netstats');
+	var utils = require('./utils');
 
 	module.exports = report_problem;
 }
