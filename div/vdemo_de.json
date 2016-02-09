@@ -2,237 +2,234 @@
   "type": "bup-export",
   "version": 1,
   "event": {
-    "staticnet_message": "Demo mode - Changes will not be transmitted",
+    "staticnet_message": "Demo (nur lokal)",
     "preferred_order": [
-      "MD",
-      "WD",
-      "MS1",
-      "WS",
-      "MX",
-      "MS2"
+      "HD",
+      "DD",
+      "1.HE",
+      "DE",
+      "GD",
+      "2.HE"
     ],
     "matches": [
       {
         "setup": {
-          "match_name": "MD",
           "eventsheet_id": "1.HD",
+          "match_name": "HD",
           "teams": [
             {
-              "name": "Denmark",
+              "name": "TV Refrath",
               "players": [
                 {
-                  "name": "Mathias Boe"
+                  "name": "Sam Magee"
                 },
                 {
-                  "name": "Carsten Mogensen"
+                  "name": "Fabian Holzer"
                 }
               ]
             },
             {
-              "name": "China",
+              "name": "BC Bischmisheim",
               "players": [
                 {
-                  "name": "Fu Haifeng"
+                  "name": "Michael Fuchs"
                 },
                 {
-                  "name": "Zhang Nan"
+                  "name": "Peter Käsbauer"
                 }
               ]
             }
           ],
-          "event_name": "Denmark - China (Demo)",
+          "event_name": "TV Refrath - BC Bischmisheim (Demo)",
           "tournament_name": "Demo",
           "team_competition": true,
           "is_doubles": true,
           "counting": "3x21",
-          "match_id": "edemo_MD"
+          "match_id": "edemo_HD"
         },
         "network_score": [],
         "presses_json": "[]"
       },
       {
         "setup": {
-          "match_name": "WD",
-          "eventsheet_id": "DD",
+          "match_name": "DD",
           "teams": [
             {
-              "name": "Denmark",
+              "name": "TV Refrath",
               "players": [
                 {
-                  "name": "Kamilla Rytter Juhl"
+                  "name": "Carla Nelte"
                 },
                 {
-                  "name": "Christinna Pedersen"
+                  "name": "Chloe Magee"
                 }
               ]
             },
             {
-              "name": "China",
+              "name": "BC Bischmisheim",
               "players": [
                 {
-                  "name": "Luo Ying"
+                  "name": "Samantha Barning"
                 },
                 {
-                  "name": "Luo Yu"
+                  "name": "Isabel Herttrich"
                 }
               ]
             }
           ],
-          "event_name": "Denmark - China (Demo)",
+          "event_name": "TV Refrath - BC Bischmisheim (Demo)",
           "tournament_name": "Demo",
           "team_competition": true,
           "is_doubles": true,
           "counting": "3x21",
-          "match_id": "edemo_WD"
+          "match_id": "edemo_DD"
         },
         "network_score": [],
         "presses_json": "[]"
       },
       {
         "setup": {
-          "match_name": "MS1",
-          "eventsheet_id": "1.HE",
+          "match_name": "1.HE",
           "teams": [
             {
-              "name": "Denmark",
+              "name": "TV Refrath",
               "players": [
                 {
-                  "name": "Jan Ø. Jørgensen"
+                  "name": "Fabian Roth"
                 }
               ]
             },
             {
-              "name": "China",
+              "name": "BC Bischmisheim",
               "players": [
                 {
-                  "name": "Chen Long"
+                  "name": "Marc Zwiebler"
                 }
               ]
             }
           ],
-          "event_name": "Denmark - China (Demo)",
+          "event_name": "TV Refrath - BC Bischmisheim (Demo)",
           "tournament_name": "Demo",
           "team_competition": true,
           "is_doubles": false,
           "counting": "3x21",
-          "match_id": "edemo_MS1"
+          "match_id": "edemo_HE1"
         },
         "network_score": [],
         "presses_json": "[]"
       },
       {
         "setup": {
-          "match_name": "WS",
-          "eventsheet_id": "DE",
+          "match_name": "DE",
           "teams": [
             {
-              "name": "Denmark",
+              "name": "TV Refrath",
               "players": [
                 {
-                  "name": "Line Kjaersfeldt"
+                  "name": "Chloe Magee"
                 }
               ]
             },
             {
-              "name": "China",
+              "name": "BC Bischmisheim",
               "players": [
                 {
-                  "name": "Li Xuerui"
+                  "name": "Olga Konon"
                 }
               ]
             }
           ],
-          "event_name": "Denmark - China (Demo)",
+          "event_name": "TV Refrath - BC Bischmisheim (Demo)",
           "tournament_name": "Demo",
           "team_competition": true,
           "is_doubles": false,
           "counting": "3x21",
-          "match_id": "edemo_WS"
+          "match_id": "edemo_DE"
         },
         "network_score": [],
         "presses_json": "[]"
       },
       {
         "setup": {
-          "match_name": "MX",
-          "eventsheet_id": "GD",
+          "match_name": "GD",
           "teams": [
             {
-              "name": "Denmark",
+              "name": "TV Refrath",
               "players": [
                 {
-                  "name": "Joachim Fischer Nielsen"
+                  "name": "Sam Magee"
                 },
                 {
-                  "name": "Christinna Pedersen"
+                  "name": "Carla Nelte"
                 }
               ]
             },
             {
-              "name": "China",
+              "name": "BC Bischmisheim",
               "players": [
                 {
-                  "name": "Zhang Nan"
+                  "name": "Michael Fuchs"
                 },
                 {
-                  "name": "Zhao Yunlei"
+                  "name": "Isabel Herttrich"
                 }
               ]
             }
           ],
-          "event_name": "Denmark - China (Demo)",
+          "event_name": "TV Refrath - BC Bischmisheim (Demo)",
           "tournament_name": "Demo",
           "team_competition": true,
           "is_doubles": true,
           "counting": "3x21",
-          "match_id": "edemo_MX"
+          "match_id": "edemo_GD"
         },
         "network_score": [],
         "presses_json": "[]"
       },
       {
         "setup": {
-          "match_name": "MS2",
-          "eventsheet_id": "2.HE",
+          "match_name": "2.HE",
           "teams": [
             {
-              "name": "Denmark",
+              "name": "TV Refrath",
               "players": [
                 {
-                  "name": "Viktor Axelsen"
+                  "name": "Richard Domke"
                 }
               ]
             },
             {
-              "name": "China",
+              "name": "BC Bischmisheim",
               "players": [
                 {
-                  "name": "Lin Dan"
+                  "name": "Dieter Domke"
                 }
               ]
             }
           ],
-          "event_name": "Denmark - China (Demo)",
+          "event_name": "TV Refrath - BC Bischmisheim (Demo)",
           "tournament_name": "Demo",
           "team_competition": true,
           "is_doubles": false,
           "counting": "3x21",
-          "match_id": "edemo_MS2"
+          "match_id": "edemo_HE2"
         },
         "network_score": [],
         "presses_json": "[]"
       }
     ],
     "id": "edemo",
-    "event_name": "Denmark - China (Demo)",
+    "event_name": "TV Refrath - BC Bischmisheim (Demo)",
     "tournament_name": "Demo",
-    "home_team_name": "Denmark",
-    "away_team_name": "China",
-    "location": "Gold Coast, Australia",
-    "starttime": "14:00 AEST",
-    "matchday": "Finals",
+    "home_team_name": "TV Refrath",
+    "away_team_name": "BC Bischmisheim",
+    "location": "SpH Steinbreche",
+    "protest": "Coaching-Stühle zu gemütlich",
+    "umpires": "Max Mustermann & Michaela Meier",
+    "starttime": "14:00",
+    "matchday": "Finale",
     "notes": "",
-    "backup_players": "Hans-Kristian Vittinghus (Denmark), Wang Shixian (China)",
+    "backup_players": "Jennifer Karnott, Dennis Nyenhuis (TV Refrath), Marvin Seidel (BC Bischmisheim)",
     "league_key": "1BL"
   }
 }

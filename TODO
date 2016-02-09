@@ -1,13 +1,13 @@
-mail btde!
-
 generate Aufstellungszettel
 Aufstellungszettel
 	empty, printer-friendly
 	download full player lists for empty versions
 
-
 vdemo
-remove eventsheets everywhere
+	usable
+	transcribe 2 matches (stop within one)
+	invent a match with lots of cards and stuff
+clean edemo
 
 reason of injury
 reason of retired

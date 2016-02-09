@@ -4,7 +4,7 @@ var network = (function() {
 var networks = {};
 
 function get_real_netw() {
-	return networks.edemo || networks.btde || networks.courtspot;
+	return networks.vdemo || networks.edemo || networks.btde || networks.courtspot;
 }
 
 function get_netw() {
@@ -545,6 +545,8 @@ function ui_init(s, hash_query) {
 		networks.btde = btde();
 	} else if (hash_query.edemo !== undefined) {
 		networks.edemo = staticnet(null, 'div/edemo_' + s.lang + '.json');
+	} else if (hash_query.vdemo !== undefined) {
+		networks.vdemo = staticnet(null, 'div/vdemo_' + s.lang + '.json');
 	}
 
 	// Initialize court info
