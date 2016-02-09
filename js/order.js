@@ -7,19 +7,16 @@ var current_ignore_start;
 var current_locked;
 
 function calc_players(match) {
-	var setup = match.setup;
-	var teams = setup.teams;
-	if (setup.is_doubles) {
-		return [
-			teams[0].players[0].name, teams[0].players[1].name,
-			teams[1].players[0].name, teams[1].players[1].name,
-		];
-	} else {
-		return [
-			teams[0].players[0].name,
-			teams[1].players[0].name,
-		];
+	var teams = match.setup.teams;
+
+	var res = [];
+	for (var team_id = 0;team_id < 2;team_id++) {
+		var team = teams[team_id];
+		team.players.forEach(function(p) {
+			res.push(p.name);
+		});
 	}
+	return res;
 }
 
 function order_by_names(matches, match_names) {
@@ -342,13 +339,19 @@ function ui_render() {
 	}
 
 	function _add_player(team_container, team, player_id) {
-		var player_name = team.players[player_id].name;
-		var conflict = conflicts[player_name];
 		var style = '';
-		if (conflict === 1) {
-			style = 'color: red;';
-		} else if (conflict === 2) {
-			style = 'color: orange;';
+		var player_name;
+		if (team.players[player_id]) {
+			player_name = team.players[player_id].name;
+			var conflict = conflicts[player_name];
+			if (conflict === 1) {
+				style = 'color: red;';
+			} else if (conflict === 2) {
+				style = 'color: orange;';
+			}
+		} else {
+			// Player not configured yet
+			player_name = 'N.N.';
 		}
 		utils.create_el(team_container, 'span', {'class': 'order_player', style: style}, player_name);
 	}
