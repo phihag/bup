@@ -219,11 +219,11 @@ function render_bundesliga(ev, es_key, ui8r, extra_data) {
 		utils.reverse_every(scores.slice(6 * 6), 6)
 	);
 
-	var match_score_home = scores[scores.length - 2];
+	var match_score_home = sums[sums.length - 2];
 	if (!match_score_home) {
 		match_score_home = 0;
 	}
-	var match_score_away = scores[scores.length - 1];
+	var match_score_away = sums[sums.length - 1];
 	if (!match_score_away) {
 		match_score_away = 0;
 	}
