@@ -1,12 +1,17 @@
-send export via JSON
-generate Aufstellungszettel
+shortcut to send export via JSON
+enable eventsheet with bupbt
+check eventsheet with bupbt
 remove texts from Spielbericht_RLW svg file
 
-better edemo
+mail btde!
 
+generate Aufstellungszettel
 Aufstellungszettel
 	empty, printer-friendly
 	download full player lists for empty versions
+
+
+vdemo
 remove eventsheets everywhere
 
 reason of injury
@@ -21,12 +26,6 @@ order should actually change order on state.event with staticnet
 	test happens if order changed on one device, and dialog open on other
 	change in CourtSpot too
 
-
-enable eventsheet with bupbt
-check eventsheet with bupbt
-
-
-mail btde!
 
 add tests for note positioning
 optimize clicking on links (just show/display once)
@@ -291,6 +290,7 @@ check for all disabled settings and use utils.disabled_qsa
 show part of scoresheet below? [optionally]
 check for instances of {replace} when calling s._
 compile i18n keys into an array (save mapping in JSON)
+send export: show status / finished
 replace document.querySelector with utils.qs
 export: include timestamp/date of export
 import: restrict file types

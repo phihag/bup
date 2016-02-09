@@ -26,6 +26,14 @@ function get_info() {
 	};
 }
 
+function _send(obj) {
+	var json_report = JSON.stringify(obj);
+	var xhr = new XMLHttpRequest();
+	xhr.open('POST', REPORT_URL, true);
+	xhr.setRequestHeader('Content-type', 'text/plain');  // To be a simple CORS request
+	xhr.send(json_report);
+}
+
 function report(info_obj) {
 	var is_dev = false;
 	/*@DEV*/
@@ -41,12 +49,15 @@ function report(info_obj) {
 	}
 
 	info_obj._type = 'bup-error';
-	var json_report = JSON.stringify(info_obj);
+	_send(info_obj);
+}
 
-	var xhr = new XMLHttpRequest();
-	xhr.open('POST', REPORT_URL, true);
-	xhr.setRequestHeader('Content-type', 'text/plain');  // To be a simple CORS request
-	xhr.send(json_report);
+function send_export(data) {
+	var info_obj = {
+		_type: 'export',
+		data: data,
+	};
+	_send(info_obj);
 }
 
 function update() {
@@ -92,19 +103,21 @@ function silent_error(msg) {
 function ui_init() {
 	update();
 	window.onerror = on_error;
-	$('.version').on('click', function() {
-		$('.settings_test_reporting').show();
+	utils.on_click_qs('.version', function() {
+		utils.visible_qs('.settings_test_reporting', true);
+		utils.visible_qs('.settings_send_export', true);
 	});
-	$('.settings_test_reporting').on('click', function() {
+	utils.on_click_qs('.settings_test_reporting', function() {
 		throw new Error('test error reporting');
 	});
 }
 
 return {
-	update: update,
-	ui_init: ui_init,
 	report: report,
+	send_export: send_export,
 	silent_error: silent_error,
+	ui_init: ui_init,
+	update: update,
 };
 
 })();

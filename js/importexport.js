@@ -36,8 +36,8 @@ function import_json(s) {
 	input.click();
 }
 
-function export_json(s) {
-	var data = {
+function gen_export_data(s) {
+	return {
 		type: 'bup-export',
 		version: 1,
 		event: s.event,
@@ -45,13 +45,21 @@ function export_json(s) {
 		presses: s.presses,
 		settings: s.settings,
 	};
+}
 
+function export_json(s) {
+	var data = gen_export_data(s);
 	var data_json = JSON.stringify(data, undefined, 2);
 	var name = s.event ? s.event.event_name : '';
 	var now = new Date();
 	var filename = utils.iso8601(now) + ' ' + utils.time_str(now.getTime()).replace(':', '-') + (name ? ' ' : '') + name + '.json';
 	var blob = new Blob([data_json], {type: 'application/json'});
 	saveAs(blob, filename);
+}
+
+function send_export(s) {
+	var data = gen_export_data(s);
+	report_problem.send_export(data);
 }
 
 function ui_init() {
@@ -67,6 +75,10 @@ function ui_init() {
 		return false;
 	});
 
+	utils.on_click_qs('.settings_send_export', function(e) {
+		e.preventDefault();
+		send_export(state);
+	});
 }
 
 return {
@@ -74,6 +86,7 @@ return {
 	export_json: export_json,
 	import_json: import_json,
 	load_data: load_data,
+	send_export: send_export,
 };
 
 })();

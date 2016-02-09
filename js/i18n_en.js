@@ -14,6 +14,7 @@ var i18n_en = {
 '[Call referee!]': '[Call referee!]',
 'Are you retiring?': 'Are you retiring?',
 'import link': 'Import event ...',
+'send export': 'send export file',
 
 'fullscreen:go': 'Go fullscreen',
 'fullscreen:no': 'Normal screen',

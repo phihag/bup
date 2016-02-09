@@ -14,6 +14,7 @@ var i18n_de = {
 '[Call referee!]': '[Referee rufen!]',
 'Are you retiring?': 'Werden Sie aufgeben?',
 'import link': 'Importieren ...',
+'send export': 'Export senden',
 
 'fullscreen:go': 'Vollbildmodus',
 'fullscreen:no': 'Normalbildmodus',
