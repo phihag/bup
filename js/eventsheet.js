@@ -13,8 +13,9 @@ var URLS = {
 	'2BLN': 'div/Spielberichtsbogen_2BL.pdf',
 	'2BLS': 'div/Spielberichtsbogen_2BL.pdf',
 	'RLW': 'div/Spielbericht_RLW.svg',
-	'team-1BL': 'div/TODO.pdf',
-	'team-2BL': 'div/TODO.pdf',
+	'RLN': 'div/Spielbericht_RLN.svg',
+	'team-1BL': 'div/Mannschaftsaufstellung_1BL.pdf',
+	'team-2BL': 'div/Mannschaftsaufstellung_2BL.pdf',
 };
 var files = {};
 
@@ -263,7 +264,7 @@ function render_bundesliga(ev, es_key, ui8r, extra_data) {
 }
 
 function _svg_text(svg, id, val) {
-	var whole_id = 'es_rlw_' + id;
+	var whole_id = 'es_svg_' + id;
 	var text_el = svg.getElementById(whole_id);
 	if (!text_el) {
 		return;
@@ -398,6 +399,7 @@ function es_render(ev, es_key, ui8r, extra_data) {
 	case '2BLS':
 		return render_bundesliga(ev, es_key, ui8r, extra_data);
 	case 'RLW':
+	case 'RLN':
 		return render_svg(ev, es_key, ui8r, extra_data);
 	default:
 	throw new Error('Unsupported eventsheet key ' + es_key);

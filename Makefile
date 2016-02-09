@@ -61,6 +61,7 @@ dist: cleandist
 		div/Spielberichtsbogen_1BL.pdf \
 		div/Spielberichtsbogen_2BL.pdf \
 		div/Spielbericht_RLW.svg \
+		div/Spielbericht_RLN.svg \
 		div/scoresheet_international.svg \
 		div/FAQ.de \
 		--target-directory dist/bup/div/

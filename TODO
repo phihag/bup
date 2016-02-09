@@ -2,12 +2,11 @@ generate Aufstellungszettel
 Aufstellungszettel
 	empty, printer-friendly
 	download full player lists for empty versions
+eventsheet: add RLN
 
 vdemo
-	usable
 	transcribe 2 matches (stop within one)
 	invent a match with lots of cards and stuff
-clean edemo
 
 reason of injury
 reason of retired
@@ -46,9 +45,7 @@ mail Jens Köster
 answer Wolf
 post bc
 
-edemo: set up interesting maches
 order: reload button
-order: test with N/A (should show warning, but not crash)
 order: store match order in bup / CourtSpot
 order: do not show link if no matches present (not yet connected etc.)
 
@@ -181,6 +178,7 @@ test touch interface
 test touch latency
 prevent double touches
 
+formalize backup_players event entry (in edemo/vdemo, later in liveaw)
 youscore.info support
 injury timer
 	in scoresheet (if not disqualified / retired afterwards)
