@@ -22,12 +22,16 @@ _describe('btde', function() {
 
 		var expected = {
 			'event_name': 'TV Refrath - 1. BV Mülheim',
+			'home_team_name': 'TV Refrath',
+			'away_team_name': '1. BV Mülheim',
+			'league_key': '1BL',
 			'matches': [
 				{
 					'setup': {
 						'incomplete': false,
 						'counting': '3x21',
 						'match_name': 'HD',
+						'eventsheet_id': '1.HD',
 						'is_doubles': true,
 						'teams': [
 							{
@@ -72,6 +76,7 @@ _describe('btde', function() {
 						'incomplete': false,
 						'counting': '3x21',
 						'match_name': 'DD',
+						'eventsheet_id': 'DD',
 						'is_doubles': true,
 						'teams': [
 							{
@@ -116,6 +121,7 @@ _describe('btde', function() {
 						'counting': '3x21',
 						'incomplete': false,
 						'match_name': 'HE 1',
+						'eventsheet_id': '1.HE',
 						'is_doubles': false,
 						'teams': [
 							{
@@ -150,6 +156,7 @@ _describe('btde', function() {
 						'incomplete': false,
 						'counting': '3x21',
 						'match_name': 'DE',
+						'eventsheet_id': 'DE',
 						'is_doubles': false,
 						'teams': [
 							{
@@ -184,6 +191,7 @@ _describe('btde', function() {
 						'incomplete': false,
 						'counting': '3x21',
 						'match_name': 'GD',
+						'eventsheet_id': 'GD',
 						'is_doubles': true,
 						'teams': [
 							{
@@ -243,6 +251,7 @@ _describe('btde', function() {
 						}],
 						'counting': '3x21',
 						'match_name': 'HE 2',
+						'eventsheet_id': '2.HE',
 						'btde_match_id': '6',
 						'team_competition': true,
 						'match_id': 'btde_2015-11-05_HE 2_TV Refrath-1. BV Mülheim',
@@ -269,7 +278,9 @@ _describe('btde', function() {
 		];
 
 		var expected = {
-
+			'home_team_name': 'TV Refrath',
+			'away_team_name': '1. BV Mülheim',
+			'league_key': '1BL',
 			'event_name': 'TV Refrath - 1. BV Mülheim',
 			'matches': [
 				{
@@ -277,6 +288,7 @@ _describe('btde', function() {
 						'incomplete': false,
 						'counting': '3x21',
 						'match_name': 'HD',
+						'eventsheet_id': '1.HD',
 						'is_doubles': true,
 						'teams': [
 							{
@@ -321,6 +333,7 @@ _describe('btde', function() {
 						'incomplete': true,
 						'counting': '3x21',
 						'match_name': 'DD',
+						'eventsheet_id': 'DD',
 						'is_doubles': true,
 						'teams': [
 							{
@@ -349,6 +362,7 @@ _describe('btde', function() {
 						'incomplete': false,
 						'counting': '3x21',
 						'match_name': 'HE 1',
+						'eventsheet_id': '1.HE',
 						'is_doubles': false,
 						'teams': [
 							{
@@ -383,6 +397,7 @@ _describe('btde', function() {
 						'incomplete': false,
 						'counting': '3x21',
 						'match_name': 'DE',
+						'eventsheet_id': 'DE',
 						'is_doubles': false,
 						'teams': [
 							{
@@ -417,6 +432,7 @@ _describe('btde', function() {
 						'incomplete': false,
 						'counting': '3x21',
 						'match_name': 'GD',
+						'eventsheet_id': 'GD',
 						'is_doubles': true,
 						'teams': [
 							{
@@ -474,6 +490,7 @@ _describe('btde', function() {
 						}],
 						'counting': '3x21',
 						'match_name': 'HE 2',
+						'eventsheet_id': '2.HE',
 						'btde_match_id': '6',
 						'team_competition': true,
 						'match_id': 'btde_2015-11-05_HE 2_TV Refrath-1. BV Mülheim',

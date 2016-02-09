@@ -95,6 +95,7 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var network = require('./network');
 	var staticnet = require('./staticnet');
+	var report_problem = require('./report_problem');
 	var utils = require('./utils');
 
 	module.exports = importexport;
