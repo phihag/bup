@@ -670,19 +670,18 @@ function undo(s) {
 	});
 }
 
-
 return {
-	init_state: init_state,
-	init_calc: init_calc,
-	state: state,
-	undo: undo,
 	calc_press: calc_press,
 	game_winner: game_winner,
-	match_winner: match_winner,
-	press_char: press_char,
+	init_calc: init_calc,
+	init_state: init_state,
 	lr2score: lr2score,
 	match_started: match_started,
+	match_winner: match_winner,
+	press_char: press_char,
 	SPECIAL_PRESSES: SPECIAL_PRESSES,
+	state: state,
+	undo: undo,
 };
 
 })();

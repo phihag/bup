@@ -1,11 +1,17 @@
-generate Aufstellungszettel
 Aufstellungszettel
+	function guess gender
+	add gender to CourtSpot bupabfrage
+	generate PDF
+	rework UI
+	link to download empty PDF
+	make UI printable
+	link to empty form
 	empty, printer-friendly
-	download full player lists for empty versions
-eventsheet: add RLN
+	download full player lists for empty versions?
+eventsheet 2BLN: do not show winner when match is not over yet
 
 vdemo
-	transcribe 2 matches (stop within one)
+	collect real matches
 	invent a match with lots of cards and stuff
 
 reason of injury

@@ -230,6 +230,7 @@ var i18n_en = {
 'eventsheet:label:2BLN': '(German 2. Bundesliga North) result report sheet',
 'eventsheet:label:2BLS': '(German 2. Bundesliga South) result report sheet',
 'eventsheet:label:RLW': '(German Regionalliga West) result report sheet',
+'eventsheet:label:RLN': '(German Regionalliga North) result report sheet',
 'eventsheet:label:team-1BL': '(German Bundesliga) team selection sheet',
 'eventsheet:label:team-2BL': '(German 2. Bundesliga) team selection sheet',
 
