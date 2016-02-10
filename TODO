@@ -1,5 +1,5 @@
-eventsheet: correct backup players parsing (array instead of string)
 Aufstellungszettel
+	team-1BL (numbers)
 	rework UI
 	link to download empty PDF
 	make UI printable(SVG?)
@@ -10,8 +10,6 @@ Aufstellungszettel
 	add gender to vdemo
 	add backup players
 	extend to 1BL
-eventsheet 2BLN: do not show winner when match is not over yet
-eventsheet: autogen backup_players text if possible
 
 vdemo
 	collect real matches
