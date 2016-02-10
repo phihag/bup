@@ -3,7 +3,7 @@ var eventsheet = (function() {
 
 var SHEETS_BY_LEAGUE = {
 	'1BL': ['1BL'/*, 'team-1BL'*/],
-	'2BLN': ['2BLN'/*, 'team-2BL'*/],
+	'2BLN': ['2BLN', 'team-2BL'],
 	'2BLS': ['2BLS'/*, 'team-2BL'*/],
 	'RLW': ['RLW'],
 };
@@ -20,6 +20,19 @@ var URLS = {
 var files = {};
 
 var ui_current_league_key = null;
+
+function guess_gender(match, player_id) {
+	var setup = match.setup;
+	var mname = setup.discipline_key ? setup.match_name : setup.match_name;
+	if (/(?:HD|HE|MD|MS)/.test(mname)) {
+		return 'm';
+	} else if (/(?:DD|DE|WD|WS)/.test(mname)) {
+		return 'f';
+	} else {
+		// Mixed
+		return (player_id === 0) ? 'm' : 'f';
+	}
+}
 
 function pdfform_loaded() {
 	$('.setup_eventsheets').removeClass('default-invisible');
@@ -122,10 +135,15 @@ function calc_last_update(matches) {
 	return last_update;
 }
 
+function calc_match_id(match) {
+	var setup = match.setup;
+	return setup.eventsheet_id || setup.courtspot_match_id || setup.match_name;
+}
+
 function order_matches(ev, match_order) {
 	var matches = [];
 	ev.matches.forEach(function(m) {
-		var match_order_id = m.setup.eventsheet_id || m.setup.courtspot_match_id || m.setup.match_name;
+		var match_order_id = calc_match_id(m);
 		var idx = match_order.indexOf(match_order_id);
 		if (idx < 0) {
 			report_problem.silent_error('eventsheet failed to find position of match ' + match_order_id);
@@ -263,6 +281,116 @@ function render_bundesliga(ev, es_key, ui8r, extra_data) {
 	saveAs(blob, filename);
 }
 
+function render_team_bl(ev, es_key, ui8r, extra_data) {
+	var last_update = calc_last_update(ev.matches);
+	var matches_by_player = {};
+	var player_names = [
+		{'m': [], 'mb': [], 'f': [], 'fb': []},
+		{'m': [], 'mb': [], 'f': [], 'fb': []},
+	];
+	ev.matches.forEach(function(match) {
+		var teams = match.setup.teams;
+		for (var team_id = 0;team_id < 2;team_id++) {
+			var players = teams[team_id].players;
+			for (var player_id = 0;player_id < players.length;player_id++) {
+				var player = players[player_id];
+				var gender = player.gender ? player.gender : guess_gender(match, player_id);
+				if (matches_by_player[player.name]) {
+					matches_by_player[player.name].push(match);
+				} else {
+					matches_by_player[player.name] = [match];
+					player_names[team_id][gender].push(player.name);
+				}
+			}
+		}
+	});
+
+	if (es_key === 'team-2BL') {
+		var NAME_IDXS = [{
+			'm': [10, 19, 18, 17, 16, 11, 12, 15],
+			'mb': [13, 14],
+			'f': [25, 24, 23, 22],
+			'fb': [21, 20],
+		}, {
+			'm': [9, 0, 1, 2, 3, 8, 7, 4],
+			'mb': [6, 5],
+			'f': [31, 30, 29, 28],
+			'fb': [27, 26],
+		}];
+		var KEY_IDXS = [{
+			'm1.HE': [132, 113, 101, 102, 65, 66, 90, 89],
+			'mb1.HE': [77, 78],
+			'm2.HE': [137, 108, 96, 107, 60, 71, 95, 84],
+			'mb2.HE': [72, 83],
+			'm3.HE': [136, 109, 97, 106, 61, 70, 94, 85],
+			'mb3.HE': [73, 82],
+			'm1.HD': [133, 112, 100, 103, 64, 67, 91, 88],
+			'mb1.HD': [76, 79],
+			'm2.HD': [134, 111, 99, 104, 63, 68, 92, 87],
+			'mb2.HD': [75, 80],
+			'mGD': [135, 110, 98, 105, 62, 69, 93, 86],
+			'mbGD': [74, 81],
+			'fGD': [115, 121, 119, 129],
+			'fbGD': [123, 125],
+			'fDD': [114, 117, 120, 130],
+			'fbDD': [127, 124],
+			'fDE': [116, 131, 118, 128],
+			'fbDD': [122, 126],
+		}, {
+			'm1.HE': [5, 6, 18, 17, 54, 53, 29, 30],
+			'mb1.HE': [42, 41],
+			'm2.HE': [0, 11, 23, 12, 59, 48, 24, 35],
+			'mb2.HE': [47, 36],
+			'm3.HE': [1, 10, 22, 13, 58, 49, 25, 34],
+			'mb3.HE': [46, 37],
+			'm1.HD': [4, 7, 19, 16, 55, 52, 28, 31],
+			'mb1.HD': [43, 40],
+			'm2.HD': [3, 8, 20, 15, 56, 51, 27, 32],
+			'mb2.HD': [44, 39],
+			'mGD': [2, 9, 21, 14, 57, 50, 26, 33],
+			'mbGD': [45, 38],
+			'fGD': [139, 145, 143, 153],
+			'fbGD': [147, 149],
+			'fDD': [138, 141, 144, 154],
+			'fbDD': [151, 148],
+			'fDE': [140, 155, 142, 152],
+			'fbDD': [146, 150],
+		}];
+	} else {
+		throw new Error('Unsupported es key ' + es_key);
+	}
+
+	var player_fields = [];
+	var x_fields = [];
+	for (var team_id = 0;team_id < 2;team_id++) {
+		var name_idxs = NAME_IDXS[team_id];
+		var key_idxs = KEY_IDXS[team_id];
+		for (var gender_id in name_idxs) {
+			var gplayers = player_names[team_id][gender_id];
+			var idx_list = name_idxs[gender_id];
+			for (var player_idx = 0;player_idx < gplayers.length;player_idx++) {
+				var gpname = gplayers[player_idx];
+				player_fields[idx_list[player_idx]] = gpname;
+				var player_matches = matches_by_player[gpname];
+				for (var match_idx=0;match_idx < player_matches.length;match_idx++) {
+					var nkey = gender_id + calc_match_id(player_matches[match_idx]);
+					x_fields[key_idxs[nkey][player_idx]] = '  X';
+				}
+			}
+		}
+	}
+
+	var fields = {
+		'Textfeld1': player_fields,
+		'Textfeld2': x_fields,
+	};
+	var res_pdf = pdfform.transform(ui8r, fields);
+	var filename = 'Mannschaftsaufstellung ' + ev.event_name + (last_update ? (' ' + utils.date_str(last_update * 1000)) : '') + '.pdf';
+	var blob = new Blob([res_pdf], {type: 'application/pdf'});
+	saveAs(blob, filename);
+}
+
+
 function _svg_text(svg, id, val) {
 	var whole_id = 'es_svg_' + id;
 	var text_el = svg.getElementById(whole_id);
@@ -398,6 +526,9 @@ function es_render(ev, es_key, ui8r, extra_data) {
 	case '2BLN':
 	case '2BLS':
 		return render_bundesliga(ev, es_key, ui8r, extra_data);
+	case 'team-1BL':
+	case 'team-2BL':
+		return render_team_bl(ev, es_key, ui8r, extra_data);
 	case 'RLW':
 	case 'RLN':
 		return render_svg(ev, es_key, ui8r, extra_data);

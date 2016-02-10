@@ -45,7 +45,7 @@
           "team_competition": true,
           "is_doubles": true,
           "counting": "3x21",
-          "match_id": "edemo_MD"
+          "match_id": "vdemo_MD"
         },
         "network_score": [],
         "presses_json": "[]"
@@ -83,7 +83,7 @@
           "team_competition": true,
           "is_doubles": true,
           "counting": "3x21",
-          "match_id": "edemo_WD"
+          "match_id": "vdemo_WD"
         },
         "network_score": [],
         "presses_json": "[]"
@@ -115,7 +115,7 @@
           "team_competition": true,
           "is_doubles": false,
           "counting": "3x21",
-          "match_id": "edemo_MS1"
+          "match_id": "vdemo_MS1"
         },
         "network_score": [],
         "presses_json": "[]"
@@ -147,7 +147,7 @@
           "team_competition": true,
           "is_doubles": false,
           "counting": "3x21",
-          "match_id": "edemo_WS"
+          "match_id": "vdemo_WS"
         },
         "network_score": [],
         "presses_json": "[]"
@@ -185,7 +185,7 @@
           "team_competition": true,
           "is_doubles": true,
           "counting": "3x21",
-          "match_id": "edemo_MX"
+          "match_id": "vdemo_MX"
         },
         "network_score": [],
         "presses_json": "[]"
@@ -217,13 +217,13 @@
           "team_competition": true,
           "is_doubles": false,
           "counting": "3x21",
-          "match_id": "edemo_MS2"
+          "match_id": "vdemo_MS2"
         },
         "network_score": [],
         "presses_json": "[]"
       }
     ],
-    "id": "edemo",
+    "id": "vdemo",
     "event_name": "Denmark - China (Demo)",
     "tournament_name": "Demo",
     "home_team_name": "Denmark",
@@ -234,7 +234,13 @@
     "starttime": "14:00 AEST",
     "matchday": "Finals",
     "notes": "",
-    "backup_players": "Hans-Kristian Vittinghus (Denmark), Wang Shixian (China)",
+    "backup_players": [[{
+      "name": "Hans-Kristian Vittinghus",
+      "gender": "m"
+    }], [{
+      "name": "Wang Shixian",
+      "gender": "f"
+    }]],
     "league_key": "1BL"
   }
 }

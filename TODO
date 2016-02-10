@@ -1,14 +1,17 @@
+eventsheet: correct backup players parsing (array instead of string)
 Aufstellungszettel
-	function guess gender
-	add gender to CourtSpot bupabfrage
-	generate PDF
 	rework UI
 	link to download empty PDF
-	make UI printable
+	make UI printable(SVG?)
 	link to empty form
 	empty, printer-friendly
-	download full player lists for empty versions?
+	add gender to CourtSpot bupabfrage
+	add gender to edemo
+	add gender to vdemo
+	add backup players
+	extend to 1BL
 eventsheet 2BLN: do not show winner when match is not over yet
+eventsheet: autogen backup_players text if possible
 
 vdemo
 	collect real matches

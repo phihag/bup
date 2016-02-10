@@ -45,7 +45,7 @@
           "team_competition": true,
           "is_doubles": true,
           "counting": "3x21",
-          "match_id": "edemo_HD"
+          "match_id": "vdemo_HD"
         },
         "network_score": [],
         "presses_json": "[]"
@@ -82,7 +82,7 @@
           "team_competition": true,
           "is_doubles": true,
           "counting": "3x21",
-          "match_id": "edemo_DD"
+          "match_id": "vdemo_DD"
         },
         "network_score": [],
         "presses_json": "[]"
@@ -113,7 +113,7 @@
           "team_competition": true,
           "is_doubles": false,
           "counting": "3x21",
-          "match_id": "edemo_HE1"
+          "match_id": "vdemo_HE1"
         },
         "network_score": [],
         "presses_json": "[]"
@@ -144,7 +144,7 @@
           "team_competition": true,
           "is_doubles": false,
           "counting": "3x21",
-          "match_id": "edemo_DE"
+          "match_id": "vdemo_DE"
         },
         "network_score": [],
         "presses_json": "[]"
@@ -181,7 +181,7 @@
           "team_competition": true,
           "is_doubles": true,
           "counting": "3x21",
-          "match_id": "edemo_GD"
+          "match_id": "vdemo_GD"
         },
         "network_score": [],
         "presses_json": "[]"
@@ -212,13 +212,13 @@
           "team_competition": true,
           "is_doubles": false,
           "counting": "3x21",
-          "match_id": "edemo_HE2"
+          "match_id": "vdemo_HE2"
         },
         "network_score": [],
         "presses_json": "[]"
       }
     ],
-    "id": "edemo",
+    "id": "vdemo",
     "event_name": "TV Refrath - BC Bischmisheim (Demo)",
     "tournament_name": "Demo",
     "home_team_name": "TV Refrath",

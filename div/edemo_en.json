@@ -232,7 +232,13 @@
     "starttime": "14:00 AEST",
     "matchday": "Finals",
     "notes": "",
-    "backup_players": "Hans-Kristian Vittinghus (Denmark), Wang Shixian (China)",
+    "backup_players": [[{
+      "name": "Hans-Kristian Vittinghus",
+      "gender": "m"
+    }], [{
+      "name": "Wang Shixian",
+      "gender": "f"
+    }]],
     "league_key": "1BL"
   }
 }

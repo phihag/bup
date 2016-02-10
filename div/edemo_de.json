@@ -226,6 +226,16 @@
     "location": "SpH Steinbreche",
     "starttime": "14:00",
     "matchday": "Finale",
+    "backup_players": [[{
+      "name": "Dennis Nyenhuis",
+      "gender": "m"
+    }, {
+      "name": "Jennifer Karnott",
+      "gender": "f"
+    }], [{
+      "name": "Marvin Seidel",
+      "gender": "m"
+    }]],
     "league_key": "1BL"
   }
 }
