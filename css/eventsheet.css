@@ -23,18 +23,16 @@
 }
 .eventsheet_form input {
 	width: 15em;
+	font-size: inherit;
 }
-.eventsheet_form>* {
+.eventsheet_report>*,.eventsheet_button_row {
 	width: auto;
 	display: block;
 	margin: 1em 0;
 }
-.eventsheet_form>label>span {
+.eventsheet_report>label>span {
 	display: inline-block;
 	min-width: 14em;
-}
-.eventsheet_form input {
-	font-size: inherit;
 }
 .eventsheet_form button {
 	font-size: inherit;
