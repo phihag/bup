@@ -54,8 +54,17 @@ function list_matches(s, cb) {
 	}
 }
 
-function courts() {
-	return null; // No restrictions
+function courts(s) {
+	return [{
+		id: '1',
+		description: s._('court:left'),
+	}, {
+		id: '2',
+		description: s._('court:right'),
+	}, {
+		id: 'referee',
+		description: s._('court:referee'),
+	}];
 }
 
 function service_name(s) {

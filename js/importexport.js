@@ -43,6 +43,7 @@ function gen_export_data(s) {
 		event: s.event,
 		setup: s.setup,
 		presses: s.presses,
+		netstats: netstats.all_stats,
 		settings: s.settings,
 	};
 }
@@ -93,9 +94,10 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var netstats = require('./netstats');
 	var network = require('./network');
-	var staticnet = require('./staticnet');
 	var report_problem = require('./report_problem');
+	var staticnet = require('./staticnet');
 	var utils = require('./utils');
 
 	module.exports = importexport;
