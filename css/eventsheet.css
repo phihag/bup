@@ -59,20 +59,25 @@
 	background-repeat: no-repeat;
 }
 
+.eventsheet_link_container {
+	margin: 1em 0 0.5em 0;
+}
+
 @media screen and (max-width:480px) {
 	.eventsheet_dialog {
 		padding: 0 0.5em 0.5em 0;
 	}
-	.eventsheet_form>label>span {
+	.eventsheet_report>label>span {
 		font-size: 50%;
 	}
-	.eventsheet_form>* {
+	.eventsheet_report>* {
 		margin: 0;
 	}
-	.eventsheet_form>label>* {
+	.eventsheet_report>label>* {
 		display: block;
 		max-width: 90vw;
 	}
+
 	.eventsheet_button_row {
 		max-width: 100vw;
 	}

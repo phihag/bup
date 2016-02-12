@@ -802,22 +802,42 @@ function show_dialog(es_key) {
 	render.hide();
 
 	es_key = resolve_key(es_key);
-
 	if (es_key != 'auto-direct') {
 		download(es_key);
 	}
 
 	var container = $('.eventsheet_container');
 	container.attr('data-eventsheet_key', es_key);
-	container.removeClass('default-invisible');
+	utils.visible_qs('.eventsheet_container', true);
+
+	var link = document.querySelector('.eventsheet_link');
+	switch (es_key) {
+	case '1BL':
+	case '2BL':
+	case 'RLW':
+	case 'RLN':
+		utils.visible_qs('.eventsheet_report', true);
+		utils.visible(link, false);
+		break;
+	case 'team-1BL':
+	case 'team-2BL':
+		utils.visible_qs('.eventsheet_report', false);
+		link.setAttribute('href', URLS[es_key]);
+		utils.visible(link, true);
+		break;
+	}
+
+	utils.text_qs('.eventsheet_generate_button',
+		state._('eventsheet:Generate', {
+			sheetname: state._('eventsheet:label:' + es_key),
+		}));
 
 	dialog_fetch();
 }
 
 function hide_dialog() {
 	state.ui.eventsheet = null;
-	var container = $('.eventsheet_container');
-	container.addClass('default-invisible');
+	utils.visible_qs('.eventsheet_container', false);
 	settings.show();
 }
 

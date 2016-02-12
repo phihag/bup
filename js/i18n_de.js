@@ -216,7 +216,7 @@ var i18n_de = {
 'scoresheet:[Event Scoresheet Filename]': 'Schiedsrichterzettel {event_name}',
 
 'eventsheet:draw': 'Unentschieden',
-'eventsheet:Generate': 'Spielbericht generieren',
+'eventsheet:Generate': '{sheetname} generieren',
 'eventsheet:Umpires': 'Schiedsrichter:',
 'eventsheet:Location': 'Austragungsstätte:',
 'eventsheet:Matchday': 'Spieltag:',
@@ -226,6 +226,7 @@ var i18n_de = {
 'eventsheet:Protest': 'Protest:',
 'eventsheet:back': 'Zurück',
 'eventsheet:Event Sheet': 'Spielbericht',
+'eventsheet:download empty': 'Leeres Formular',
 
 'eventsheet:label:1BL': 'Spielbericht',
 'eventsheet:label:2BLN': 'Spielbericht',

@@ -1,20 +1,14 @@
-Aufstellungszettel
-	rework UI
-	link to download empty PDF
-	make UI printable(SVG?)
-	empty, printer-friendly
-	add gender to CourtSpot bupabfrage
-	add gender to edemo
-	add gender to vdemo
-vdemo
-	collect real matches
-	invent a match with lots of cards and stuff
+test eventsheet on various mobiles
 
 reason of injury
 reason of retired
 	automatic if as a result or after injury
 reason of yellow card/red card/disqualification
 	delay,throwing racket,verbal abuse,
+
+vdemo
+	collect real matches
+	invent a match with lots of cards and stuff
 
 multi scoresheet: shift+S shows outdated state when editing match
 order should actually change order on state.event with staticnet
@@ -180,6 +174,7 @@ test touch interface
 test touch latency
 prevent double touches
 
+team-* eventsheet as SVG (for preview)?
 formalize backup_players event entry (in edemo/vdemo, later in liveaw)
 youscore.info support
 injury timer

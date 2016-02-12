@@ -215,7 +215,7 @@ var i18n_en = {
 'scoresheet:[Event Scoresheet Filename]': 'Scoresheets {event_name}',
 
 'eventsheet:draw': 'Draw',
-'eventsheet:Generate': 'Generate Report',
+'eventsheet:Generate': 'Generate {sheetname}',
 'eventsheet:Umpires': 'Umpires:',
 'eventsheet:Location': 'Location:',
 'eventsheet:Matchday': 'Match day:',
@@ -225,6 +225,7 @@ var i18n_en = {
 'eventsheet:Protest': 'Protest:',
 'eventsheet:back': 'Back',
 'eventsheet:Event Sheet': 'Event Report',
+'eventsheet:download empty': 'Download empty form',
 
 'eventsheet:label:1BL': '(German Bundesliga) result report sheet',
 'eventsheet:label:2BLN': '(German 2. Bundesliga North) result report sheet',
