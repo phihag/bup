@@ -46,13 +46,8 @@ function on_click(node, callback) {
 	node.addEventListener('click', callback, false);
 }
 
-function on_click_qs(qs, callback) {
-	var node = document.querySelector(qs);
-	if (! node) {
-		report_problem.silent_error('Expected to find qs  ' + qs + ' , but no node matching.');
-		return;
-	}
-	on_click(node, callback);
+function on_click_qs(selector, callback) {
+	on_click(qs(selector), callback);
 }
 
 function on_click_qsa(qs, callback) {
@@ -156,13 +151,24 @@ function visible(node, val) {
 	}
 }
 
-function visible_qs(qs, val) {
-	var node = document.querySelector(qs);
+function qs(selector) {
+	/*@DEV*/
+	var all_nodes = document.querySelectorAll(selector);
+	if (all_nodes.length !== 1) {
+		report_problem.silent_error(all_nodes.length + ' nodes matched by qs ' + selector);
+	}
+	/*/@DEV*/
+
+	var node = document.querySelector(selector);
 	if (! node) {
-		report_problem.silent_error('Expected to find qs  ' + qs + ' , but no node matching.');
+		report_problem.silent_error('Expected to find qs  ' + selector + ' , but no node matching.');
 		return;
 	}
-	visible(node, val);
+	return node;
+}
+
+function visible_qs(selector, val) {
+	visible(qs(selector), val);
 }
 
 function de_jq(node) {
@@ -263,13 +269,8 @@ function text(node, str) {
 	node.appendChild(node.ownerDocument.createTextNode(str));
 }
 
-function text_qs(qs, str) {
-	var node = document.querySelector(qs);
-	if (! node) {
-		report_problem.silent_error('Expected to find qs  ' + qs + ' , but no node matching.');
-		return;
-	}
-	text(node, str);
+function text_qs(selector, str) {
+	text(qs(selector), str);
 }
 
 function create_el(parent, tagName, attrs, text) {
@@ -340,6 +341,7 @@ return {
 	text_qs: text_qs,
 	time_str: time_str,
 	uuid: uuid,
+	qs: qs,
 	values: values,
 	visible: visible,
 	visible_qs: visible_qs,

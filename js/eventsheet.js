@@ -475,6 +475,9 @@ function render_team_bl(ev, es_key, ui8r) {
 	saveAs(blob, filename);
 }
 
+function preview_team_bl(s, es_key) {
+	// TODO download
+}
 
 function _svg_text(svg, id, val) {
 	var whole_id = 'es_svg_' + id;
@@ -670,7 +673,7 @@ function render_links(s) {
 		pdfform_loaded();
 	}
 
-	var container = document.querySelector('.setup_eventsheets');
+	var container = utils.qs('.setup_eventsheets');
 	utils.empty(container);
 	if (! league_key) {
 		return;
@@ -741,7 +744,7 @@ function ui_init() {
 
 function on_fetch() {
 	var event = state.event;
-	var container = document.querySelector('.eventsheet_container');
+	var container = utils.qs('.eventsheet_container');
 	var KEYS = ['umpires', 'location', 'starttime', 'matchday', 'notes', 'protest'];
 	KEYS.forEach(function(k) {
 		if (event[k]) {
@@ -810,20 +813,24 @@ function show_dialog(es_key) {
 	container.attr('data-eventsheet_key', es_key);
 	utils.visible_qs('.eventsheet_container', true);
 
-	var link = document.querySelector('.eventsheet_link');
+	var download_link = utils.qs('.eventsheet_download_link');
+	var preview = utils.qs('.eventsheet_preview');
 	switch (es_key) {
 	case '1BL':
 	case '2BL':
 	case 'RLW':
 	case 'RLN':
 		utils.visible_qs('.eventsheet_report', true);
-		utils.visible(link, false);
+		utils.visible(preview, false);
+		utils.visible(download_link, false);
 		break;
 	case 'team-1BL':
 	case 'team-2BL':
 		utils.visible_qs('.eventsheet_report', false);
-		link.setAttribute('href', URLS[es_key]);
-		utils.visible(link, true);
+		utils.visible(preview, true);
+		preview_team_bl(state, es_key);
+		download_link.setAttribute('href', URLS[es_key]);
+		utils.visible(download_link, true);
 		break;
 	}
 

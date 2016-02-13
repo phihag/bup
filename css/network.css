@@ -23,6 +23,7 @@
 	height: 5em;
 }
 .network_desync_image_preload {
+	background-image: url(../icons/desync.svg);
 	position: absolute;
 	left: -999px;
 	width: 1px;
