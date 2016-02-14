@@ -927,7 +927,7 @@ function event_show() {
 	render.hide();
 	uiu.esc_stack_push(hide);
 
-	var container = document.querySelector('.scoresheet_container');
+	var container = utils.qs('.scoresheet_container');
 	$(container).children('.scoresheet').remove();
 	utils.visible_qs('.scoresheet_loading-icon', true);
 	utils.visible(container, true);
@@ -963,13 +963,13 @@ function show() {
 	uiu.esc_stack_push(hide);
 
 	utils.visible_qs('.scoresheet_note_dialog', false);
-	document.querySelector('#scoresheet_note_input').focus();
+	utils.qs('#scoresheet_note_input').focus();
 	ui_show();
 }
 
 function ui_show() {
 	utils.visible_qs('.scoresheet_loading-icon', true);
-	var container = document.querySelector('.scoresheet_container');
+	var container = utils.qs('.scoresheet_container');
 	$(container).children('.scoresheet').remove();
 	utils.visible(container, true);	load_sheet('international', function(xml) {
 		var svg = make_sheet_node(xml);
@@ -1019,7 +1019,7 @@ function _match_title(s, sep) {
 }
 
 function ui_pdf() {
-	var svg_nodes = document.querySelectorAll('.scoresheet_container>.scoresheet');
+	var svg_nodes = utils.qsAll('.scoresheet_container>.scoresheet');
 	var props = {
 		title: (
 			(state.ui.event_scoresheets_visible) ?
@@ -1042,7 +1042,7 @@ function ui_pdf() {
 }
 
 function jspdf_loaded() {
-	document.querySelector('.scoresheet_button_pdf').removeAttribute('disabled');
+	utils.qs('.scoresheet_button_pdf').removeAttribute('disabled');
 }
 
 var URLS = {
@@ -1095,7 +1095,7 @@ function ui_init() {
 
 	$('.scoresheet_note_dialog').on('submit', function(e) {
 		e.preventDefault();
-		var input = document.querySelector('#scoresheet_note_input');
+		var input = utils.qs('#scoresheet_note_input');
 
 		control.on_press({
 			type: 'note',

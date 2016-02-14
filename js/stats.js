@@ -613,7 +613,7 @@ function show() {
 	var stats = calc_stats(state);
 	var table = $('.stats_table');
 	render_table(table, stats);
-	render_graph(document.querySelector('.stats_graph'), state, stats.gpoints);
+	render_graph(utils.qs('.stats_graph'), state, stats.gpoints);
 }
 
 function hide() {

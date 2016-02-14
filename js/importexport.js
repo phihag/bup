@@ -12,7 +12,7 @@ function import_data(s, data) {
 }
 
 function import_json(s) {
-	var container = document.querySelector('.import_link_container');
+	var container = utils.qs('.import_link_container');
 	var input = container.querySelector('input[type="file"]');
 	if (input) {
 		container.removeChild(input);

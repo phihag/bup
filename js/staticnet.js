@@ -87,7 +87,7 @@ function ui_init(s) {
 }
 
 function on_load_data(s) {
-	var msg_container = document.querySelector('.setup_network_message');
+	var msg_container = utils.qs('.setup_network_message');
 	utils.empty(msg_container);
 
 	var snet_container = utils.create_el(msg_container, 'div', {

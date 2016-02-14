@@ -1,5 +1,5 @@
 demo link
-use utils.qs everywhere instead of document.querySelector
+
 eventsheet: hide empty form link
 eventsheet hide 0-0
 eventsheet svg for only home/only away (incl. PDF generations for each)

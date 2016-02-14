@@ -127,7 +127,7 @@ function hide() {
 }
 
 function ui_init() {
-	var link = document.querySelector('.netstats_link');
+	var link = utils.qs('.netstats_link');
 	utils.visible(link, true);
 	utils.on_click(link, function(e) {
 		e.preventDefault();
@@ -141,7 +141,7 @@ function ui_init() {
 		return false;
 	});
 
-	var black = document.querySelector('.netstats_layout');
+	var black = utils.qs('.netstats_layout');
 	utils.on_click(black, function(e) {
 		if (e.target === black) {
 			hide();

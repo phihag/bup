@@ -212,7 +212,7 @@ function ui_court_str(s) {
 }
 
 function _set_dialog(dialog_qs, pr_str) {
-	var dialog = document.querySelector(dialog_qs);
+	var dialog = utils.qs(dialog_qs);
 	var pronounciation_span = dialog.querySelector('span.pronounciation');
 	var button = dialog.querySelector('button');
 	var m = pr_str.match(/^([\s\S]+?)\n([^\n]+\n[^\n]{1,15}|[^\n]+)$/);
@@ -334,7 +334,7 @@ function ui_render(s) {
 		$('#injury-pronounciation').text(
 			(s.settings.show_pronounciation ? (pronounciation.pronounce(s)) : '')
 		);
-		var dialog = document.querySelector('#injury-resume-dialog');
+		var dialog = utils.qs('#injury-resume-dialog');
 		s.match.injuries.forEach(function(injury) {
 			var btn = utils.create_el(
 				dialog, 'button', {},

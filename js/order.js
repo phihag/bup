@@ -173,7 +173,7 @@ function show() {
 	control.set_current(state);
 
 	utils.visible_qs('.order_layout', true);
-	var display = document.querySelector('.order_display');
+	var display = utils.qs('.order_display');
 	utils.empty(display);
 
 	if (state.event && state.event.matches) {
@@ -295,7 +295,7 @@ function on_match_click(e) {
 
 function ui_render() {
 	var conflicts = calc_conflicting_players(current_matches, current_ignore_start);
-	var display = document.querySelector('.order_display');
+	var display = utils.qs('.order_display');
 	utils.empty(display);
 
 	function _create_num(display, i) {

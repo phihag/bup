@@ -590,7 +590,7 @@ function ui_install_staticnet(s, stnet) {
 
 function ui_uninstall_staticnet(s) {
 	delete networks.staticnet;
-	var msg_container = document.querySelector('.setup_network_message');
+	var msg_container = utils.qs('.setup_network_message');
 	utils.empty(msg_container);
 	ui_list_matches(s, false, true);
 }
