@@ -1,6 +1,4 @@
 demo link
-
-eventsheet: hide empty form link
 eventsheet hide 0-0
 eventsheet svg for only home/only away (incl. PDF generations for each)
 test eventsheet on various mobiles
@@ -160,7 +158,7 @@ alternate match opening
 network: notify if clicked game is locally present (hide network if score is identically there)
 
 
-option for double-click editmode (default off)
+manually create an event (staticnet)
 document network error cases
 animation in hide_settings (go to top-right icon)
 
@@ -293,7 +291,7 @@ send export: show status / finished
 replace document.querySelector with utils.qs
 export: include timestamp/date of export
 import: restrict file types
-import: gracefully handle invalid input files, put out a warning 
+import: gracefully handle invalid input files, put out a warning
 helper function for document.querySelector which asserts result is true (and omits silent error otherwise)
 	use that in various util functions as well
 allow challenges
