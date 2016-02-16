@@ -205,7 +205,7 @@ function draw_graph(s, container, gpoints, max_score) {
 			});
 
 			line_y = gpys[press.team_id];
-			bottom_y = mark_y + ((mark_y > line_y) ? -1 : 1) * height / 2;
+			bottom_y = mark_y + ((mark_y > line_y) ? -1 : 1) * CARD_HEIGHT / 2;
 
 			utils.svg_el(connectors, 'line', {
 				x1: gpx,
@@ -366,7 +366,9 @@ function render_graph(svg, s, all_gpoints) {
 
 function calc_stats(s) {
 	var all_games = s.match.finished_games.slice();
-	all_games.push(s.game);
+	if (all_games[all_games.length - 1] !== s.game) {
+		all_games.push(s.game);
+	}
 
 	var cols = all_games.map(function(game, i) {
 		return {
@@ -395,12 +397,7 @@ function calc_stats(s) {
 	cols.push(mstats);
 
 	var gpoints = [];
-	var scopy = {
-		initialized: s.initialized,
-		settings: s.settings,
-		lang: s.lang,
-		_: s._,
-	};
+	var scopy = calc.copy_state(s);
 	calc.init_state(scopy, s.setup, s.presses);
 	calc.undo(scopy);
 	var presses = scopy.flattened_presses;
@@ -589,6 +586,46 @@ function render_table($table, stats) {
 	});
 }
 
+function render_presses(table, s) {
+	utils.empty(table);
+
+	// TODO disable for now
+	return;
+
+	var presses = s.presses;
+	var last_ts = 0;
+	/*var scopy = calc.copy_state(s);
+	calc.init_state(scopy, s.setup);
+	calc.init_calc(scopy);*/
+	for (var i = 0;i < presses.length;i++) {
+		var press = presses[i];
+		//calc.calc_press(scopy, press);
+
+		var desc = press.type;
+		var sdesc = '';
+		switch (press.type) {
+		case 'score':
+			desc = s._('pressdesc:score:' + press.side);
+			sdesc = 'TODO: neuerstand';
+			break;
+		}
+
+		var highlight_ts = (i === 0) || (i === presses.length - 1) || ((press.timestamp - last_ts) > 120000);
+		last_ts = press.timestamp;
+
+		var tr = utils.create_el(table, 'tr');
+		utils.create_el(tr, 'td', {
+			'class': 'stats_presses_timestamp' + (highlight_ts ? ' stats_presses_highlight' : ''),
+		}, utils.timesecs_str(press.timestamp));
+		utils.create_el(tr, 'td', {
+			'class': 'stats_presses_desc',
+		}, desc);
+		utils.create_el(tr, 'td', {
+			'class': 'stats_presses_sdesc',
+		}, sdesc ? '→ ' + sdesc : sdesc);
+	}
+}
+
 function show() {
 	if (state.ui.stats_visible) {
 		return;
@@ -614,6 +651,7 @@ function show() {
 	var table = $('.stats_table');
 	render_table(table, stats);
 	render_graph(utils.qs('.stats_graph'), state, stats.gpoints);
+	render_presses(utils.qs('.stats_presses'), state);
 }
 
 function hide() {
@@ -629,7 +667,7 @@ function hide() {
 
 
 function ui_init() {
-	$('.postmatch_stats_button').on('click', show);
+	utils.on_click_qs('.postmatch_stats_button', show);
 	$('.stats_layout').on('click', function(e) {
 		if (e.target === this) {
 			hide();

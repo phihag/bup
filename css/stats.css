@@ -39,3 +39,13 @@
 	width: 90vmin;
 	height: 37.5vmin;
 }
+
+.stats_presses_timestamp {
+	color: #999;
+}
+.stats_presses_timestamp.stats_presses_highlight {
+	color: #222;
+}
+.stats_presses_desc {
+	text-align: left;
+}

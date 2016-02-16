@@ -41,6 +41,16 @@ function lr2score(s, lrscore) {
 	return null;
 }
 
+// Copy a state (except presses / setup), for example in order to go through its history
+function copy_state(s) {
+	return {
+		initialized: s.initialized,
+		settings: s.settings,
+		lang: s.lang,
+		_: s._,
+	};
+}
+
 // Returns:
 //  'inprogress' for game in progress
 //  'invalid' if the score can't happen
@@ -672,6 +682,7 @@ function undo(s) {
 
 return {
 	calc_press: calc_press,
+	copy_state: copy_state,
 	game_winner: game_winner,
 	init_calc: init_calc,
 	init_state: init_state,

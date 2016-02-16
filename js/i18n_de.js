@@ -261,6 +261,9 @@ var i18n_de = {
 'stats:failed_srv_count': 'Server-Fehler',
 'stats:success_net_count': '# Erfolg',
 
+'pressdesc:score:left': 'Punkt links',
+'pressdesc:score:right': 'Punkt rechts',
+
 'order:header': 'Spielreihenfolge',
 'order:back': '< Zurück',
 'order:optimize': 'Optimieren',

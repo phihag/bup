@@ -70,6 +70,11 @@ function time_str(ts) {
 	return add_zeroes(d.getHours()) + ':' + add_zeroes(d.getMinutes());
 }
 
+function timesecs_str(ts) {
+	var d = new Date(ts);
+	return add_zeroes(d.getHours()) + ':' + add_zeroes(d.getMinutes()) + ':' + add_zeroes(d.getSeconds());
+}
+
 function datetime_str(ts) {
 	return date_str(ts) + ' ' + time_str(ts);
 }
@@ -340,6 +345,7 @@ return {
 	text: text,
 	text_qs: text_qs,
 	time_str: time_str,
+	timesecs_str: timesecs_str,
 	uuid: uuid,
 	qs: qs,
 	values: values,

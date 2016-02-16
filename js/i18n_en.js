@@ -260,6 +260,9 @@ var i18n_en = {
 'stats:failed_srv_count': 'server errors',
 'stats:success_net_count': '# successful',
 
+'pressdesc:score:left': 'Score left',
+'pressdesc:score:right': 'Score right',
+
 'order:header': 'Match order',
 'order:back': 'Back',
 'order:optimize': 'Optimize',

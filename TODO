@@ -1,8 +1,15 @@
-show match history (with/without undos)
-	shortcut H
-	buphistory #matchhistory
-	button after match
+show match history
+	press descriptions
+	icons for actions?
+	explain undo/redo
+	hide undo
+	test without timestamps
+	highlight timestamp if pause > 50s
+black in stats should reach bottom
+stats should have back link at top as well
 
+i18n utils.human_date_str
+hide clock at love-all
 eventsheet svg for only home/only away (incl. PDF generations for each)
 test eventsheet on various mobiles
 
@@ -54,6 +61,7 @@ BTP support -> Moritz
 order: reload button
 order: store match order in bup / CourtSpot
 order: do not show link if no matches present (not yet connected etc.)
+fix load_ui_by_hash (returns too early)
 
 referee mode where we see both courts
 	... and a list of the last 10 presses each
