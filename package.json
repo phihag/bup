@@ -17,7 +17,6 @@
 		"jshint": "*",
 		"mocha": "*",
 		"parse-appcache-manifest": "*",
-		"wrtc": "*",
 		"ws": "*"
 	},
 	"private": true

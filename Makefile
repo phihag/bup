@@ -28,6 +28,10 @@ force-install-libs:
 deps: install-libs
 	(node --version && npm --version) >/dev/null 2>/dev/null || sudo apt-get install nodejs npm
 	npm install
+	$(MAKE) deps-optional
+
+deps-optional:
+	test -e ./node_modules/wrtc/build/Release/obj.target/wrtc/src/peerconnection.o || npm install wrtc || echo 'wrtc installation failed. Continuing without wrtc...'
 
 cleandist:
 	rm -rf -- dist
@@ -102,4 +106,4 @@ clean: cleandist
 	rm -rf -- libs
 	rm -rf -- node_modules
 
-.PHONY: default help deps test clean install-libs force-install-libs upload dist cleandist coverage coverage-display cd lint jshint eslint appcache-manifest manifest upload-run
+.PHONY: default help deps deps-optional test clean install-libs force-install-libs upload dist cleandist coverage coverage-display cd lint jshint eslint appcache-manifest manifest upload-run
