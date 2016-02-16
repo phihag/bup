@@ -1,11 +1,10 @@
-demo link
-eventsheet hide 0-0
+show match history (with/without undos)
+	shortcut H
+	buphistory #matchhistory
+	button after match
+
 eventsheet svg for only home/only away (incl. PDF generations for each)
 test eventsheet on various mobiles
-
-netstats: use Resource Timing API
-
-crypto handshake for referee mode, disable p2p otherwise
 
 reason of injury
 reason of retired
@@ -14,8 +13,9 @@ reason of yellow card/red card/disqualification
 	delay,throwing racket,verbal abuse,
 
 vdemo
-	collect real matches
+	import real matches
 	invent a match with lots of cards and stuff
+	normalize times
 
 multi scoresheet: shift+S shows outdated state when editing match
 order should actually change order on state.event with staticnet
@@ -33,6 +33,9 @@ optimize clicking on links (just show/display once)
 
 mail Ulf
 mail Jörg Hupertz
+
+referee mode
+	p2p crypto handshake
 
 redesign order as manual
 	more effective rendering (prepare for animation)
@@ -285,6 +288,7 @@ compress presses in sending
 check for all disabled settings and use utils.disabled_qsa
 show part of scoresheet below? [optionally]
 check for instances of {replace} when calling s._
+netstats: use Resource Timing API to distinguish server time and network time
 compile i18n keys into an array (save mapping in JSON)
 alternative toss: ask what happened
 send export: show status / finished

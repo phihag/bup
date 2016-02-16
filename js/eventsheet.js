@@ -197,9 +197,14 @@ function render_bundesliga(ev, es_key, ui8r, extra_data) {
 	}
 
 	var point_scores_arrays = matches.map(function(m) {
-		var res = m.network_score.map(function(nscore) {
-			return nscore[0] + '-' + nscore[1];
-		});
+		var res;
+		if (utils.deep_equal(m.network_score, [[0, 0]])) {
+			res = [];
+		} else {
+			res = m.network_score.map(function(nscore) {
+				return nscore[0] + '-' + nscore[1];
+			});
+		}
 		while (res.length < 3) {
 			res.push('');
 		}
