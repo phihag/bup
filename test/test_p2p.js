@@ -13,9 +13,16 @@ var liveaw_server = require('./mock/liveaw_server.js');
 
 _describe('p2p', function() {
 	var ws_module = require('ws');
-	var wrtc = require('wrtc');
 
 	_it('test connection and basic communication', function(done) {
+		try {
+			var wrtc = require('wrtc');
+		} catch (e) {
+			console.log('Skipping p2p test because wrtc module not installed');
+			return done();
+		}
+
+
 		async.waterfall([
 		function(cb) { // Start liveaw
 			liveaw_server.serve(cb);
