@@ -480,7 +480,8 @@ function render_team_bl(ev, es_key, ui8r) {
 	saveAs(blob, filename);
 }
 
-function preview_team_bl(s, es_key) {
+/*params: s, es_key*/
+function preview_team_bl() {
 	// TODO download
 }
 
