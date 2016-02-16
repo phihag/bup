@@ -262,6 +262,9 @@ var i18n_en = {
 
 'pressdesc:score:left': 'Score left',
 'pressdesc:score:right': 'Score right',
+'pressdesc:love-all': 'Love all',
+'pressdesc:shuttle': '+1 Shuttles',
+'pressdesc:shuttle:count': '{count} Shuttles',
 
 'order:header': 'Match order',
 'order:back': 'Back',

@@ -589,24 +589,37 @@ function render_table($table, stats) {
 function render_presses(table, s) {
 	utils.empty(table);
 
-	// TODO disable for now
-	return;
-
 	var presses = s.presses;
 	var last_ts = 0;
-	/*var scopy = calc.copy_state(s);
+	var scopy = calc.copy_state(s);
 	calc.init_state(scopy, s.setup);
-	calc.init_calc(scopy);*/
+	calc.init_calc(scopy);
 	for (var i = 0;i < presses.length;i++) {
 		var press = presses[i];
-		//calc.calc_press(scopy, press);
+		scopy.presses.push(press);
+		if ((press.type === 'undo') || (press.type === 'redo')) {
+			calc.state(scopy);
+		} else {
+			calc.calc_press(scopy, press);
+		}
 
 		var desc = press.type;
 		var sdesc = '';
 		switch (press.type) {
 		case 'score':
 			desc = s._('pressdesc:score:' + press.side);
-			sdesc = 'TODO: neuerstand';
+			var score = scopy.game.score;
+			var left_idx = scopy.game.team1_left ? 0 : 1;
+			sdesc = score[left_idx] + ':' + score[1 - left_idx];
+			break;
+		case 'love-all':
+			desc = s._('pressdesc:' + press.type);
+			break;
+		case 'shuttle':
+			desc = s._('pressdesc:' + press.type);
+			sdesc = s._('pressdesc:shuttle:count', {
+				count: scopy.match.shuttle_count,
+			});
 			break;
 		}
 

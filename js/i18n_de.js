@@ -263,6 +263,9 @@ var i18n_de = {
 
 'pressdesc:score:left': 'Punkt links',
 'pressdesc:score:right': 'Punkt rechts',
+'pressdesc:love-all': '0 beide',
+'pressdesc:shuttle': '+1 Federball',
+'pressdesc:shuttle:count': '{count} Bälle',
 
 'order:header': 'Spielreihenfolge',
 'order:back': '< Zurück',

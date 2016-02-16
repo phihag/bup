@@ -18,7 +18,7 @@ _describe('p2p', function() {
 		try {
 			var wrtc = require('wrtc');
 		} catch (e) {
-			console.log('Skipping p2p test because wrtc module not installed');
+			console.log('Skipping p2p test because wrtc module not installed');  // eslint-disable-line no-console
 			return done();
 		}
 
