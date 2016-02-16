@@ -1019,7 +1019,7 @@ function _match_title(s, sep) {
 }
 
 function ui_pdf() {
-	var svg_nodes = utils.qsAll('.scoresheet_container>.scoresheet');
+	var svg_nodes = document.querySelectorAll('.scoresheet_container>.scoresheet');
 	var props = {
 		title: (
 			(state.ui.event_scoresheets_visible) ?
