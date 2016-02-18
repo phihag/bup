@@ -27,7 +27,19 @@ function import_json(s) {
 		var reader = new FileReader();
 		reader.onload = function(e) {
 			var input_json = e.target.result;
-			var input_data = JSON.parse(input_json);
+			var input_data;
+			try {
+				input_data = JSON.parse(input_json);
+			} catch (jsone) {
+				alert(s._('importexport:invalid JSON', {
+					msg: jsone.message,
+				}));
+				return;
+			}
+			if (input_data.type !== 'bup-export') {
+				alert(s._('importexport:not an export file'));
+				return;
+			}
 
 			import_data(s, input_data);
 		};

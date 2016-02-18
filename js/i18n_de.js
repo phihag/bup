@@ -295,8 +295,6 @@ var i18n_de = {
 'pressdesc:state:yellow-card': '{player} verwarnt',
 'pressdesc:red-card': 'Rote Karte',
 'pressdesc:state:red-card': 'Fehlerwarnung {player}, {score_str}',
-'pressdesc:disqualified': 'Schwarze Karte',
-'pressdesc:state:disqualified': '{player} disqualifiziert',
 'pressdesc:referee': 'Referee',
 'pressdesc:note': 'Notiz',
 'pressdesc:postgame-confirm': 'Satz-Bestätigung',
@@ -316,6 +314,9 @@ var i18n_de = {
 'staticnet:switch back button': 'Wechseln zu {service}',
 'staticnet:error': 'Download-Fehler (Code: {code})',
 'staticnet:service_name': 'Netzwerk-Demo',
+
+'importexport:invalid JSON': 'Ungültiges JSON: {msg}',
+'importexport:not an export file': 'Diese Datei ist keine bup-export-Datei!',
 };
 
 /*@DEV*/

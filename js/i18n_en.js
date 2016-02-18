@@ -294,12 +294,14 @@ var i18n_en = {
 'pressdesc:state:yellow-card': '{player} warned',
 'pressdesc:red-card': 'red card',
 'pressdesc:state:red-card': 'faulted {player}, {score_str}',
-'pressdesc:disqualified': 'black card',
-'pressdesc:state:disqualified': '{player} disqualified',
 'pressdesc:referee': 'referee',
 'pressdesc:note': 'note',
 'pressdesc:postgame-confirm': 'game confirmation',
 'pressdesc:postmatch-confirm': 'match confirmation',
+'pressdesc:retired': '{player} retired',
+'pressdesc:state:retired': '{winner} wins {score_str}',
+'pressdesc:disqualified': 'black card {player}',
+'pressdesc:state:disqualified': '{winner} wins {score_str}',
 
 'order:header': 'Match order',
 'order:back': 'Back',
@@ -311,6 +313,9 @@ var i18n_en = {
 'staticnet:switch back button': 'Switch to live {service}',
 'staticnet:error': 'Download error ({code})',
 'staticnet:service_name': 'network demo',
+
+'importexport:invalid JSON': 'Invalid JSON: {msg}',
+'importexport:not an export file': 'This file is not a bup-export file!',
 };
 
 /*@DEV*/
