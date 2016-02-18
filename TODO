@@ -1,15 +1,28 @@
+fix Schwendtner
+mail Markus
+fix Jackie
+
+
 show match history
 	press descriptions
-	icons for actions?
-	explain undo/redo
-	hide undo
 	test without timestamps
-	highlight timestamp if pause > 50s
+	with/without undo
 black in stats should reach bottom
 stats should have back link at top as well
 
+vdemo
+	import real matches
+	invent a match with lots of cards and stuff
+	normalize times
+
+edemo/vdemo: improve court handling (download from import, none by default)
 i18n utils.human_date_str
 hide clock at love-all
+
+mail Ulf
+mail Manuel
+mail Werner
+
 eventsheet svg for only home/only away (incl. PDF generations for each)
 test eventsheet on various mobiles
 
@@ -18,11 +31,6 @@ reason of retired
 	automatic if as a result or after injury
 reason of yellow card/red card/disqualification
 	delay,throwing racket,verbal abuse,
-
-vdemo
-	import real matches
-	invent a match with lots of cards and stuff
-	normalize times
 
 multi scoresheet: shift+S shows outdated state when editing match
 order should actually change order on state.event with staticnet
@@ -191,6 +199,7 @@ test touch interface
 test touch latency
 prevent double touches
 
+test stats pressdescs in english
 team-* eventsheet as SVG (for preview)?
 formalize backup_players event entry (in edemo/vdemo, later in liveaw)
 youscore.info support
@@ -304,6 +313,7 @@ replace document.querySelector with utils.qs
 export: include timestamp/date of export
 import: restrict file types
 import: gracefully handle invalid input files, put out a warning
+rename teamtext_internal to teamtext
 helper function for document.querySelector which asserts result is true (and omits silent error otherwise)
 	use that in various util functions as well
 allow challenges

@@ -51,6 +51,28 @@ function copy_state(s) {
 	};
 }
 
+function score_str(s, left_id) {
+	var game_score; // No "let" in current browsers
+	var res = '';
+	var finished_games = s.match.finished_games;
+	for (var i = 0;i < finished_games.length;i++) {
+		if (res) {
+			res += ' ';
+		}
+
+		game_score = finished_games[i].score;
+		res += game_score[left_id] + '-' + game_score[1 - left_id];
+	}
+	if (finished_games[finished_games.length - 1] !== s.game) {
+		if (res) {
+			res += ' ';
+		}
+		game_score = s.game.score;
+		res += game_score[left_id] + '-' + game_score[1 - left_id];
+	}
+	return res;
+}
+
 // Returns:
 //  'inprogress' for game in progress
 //  'invalid' if the score can't happen
@@ -136,6 +158,13 @@ function init_state(s, setup, presses, keep_metadata) {
 	delete s.match;
 	delete s.game;
 	delete s.court;
+}
+
+function server(s) {
+	var serving_team_id = s.game.team1_serving ? 0 : 1;
+	var server_score_side = s.game.score[serving_team_id] % 2;
+	var serving_player_id = s.game.teams_player1_even[serving_team_id] ? server_score_side : (1 - server_score_side);
+	return s.setup.teams[serving_team_id].players[serving_player_id];
 }
 
 function make_game_state(s, previous_game) {
@@ -690,6 +719,8 @@ return {
 	match_started: match_started,
 	match_winner: match_winner,
 	press_char: press_char,
+	score_str: score_str,
+	server: server,
 	SPECIAL_PRESSES: SPECIAL_PRESSES,
 	state: state,
 	undo: undo,

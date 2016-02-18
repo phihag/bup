@@ -1287,6 +1287,8 @@ _describe('calc_state', function() {
 		assert.equal(s.court.player_right_odd.name, 'Alice');
 		assert.equal(s.court.player_left_even, null);
 		assert.equal(s.court.player_right_even, null);
+		assert.equal(bup.calc.score_str(s, 0), '30-29 29-30 20-21');
+		assert.equal(bup.calc.score_str(s, 1), '29-30 30-29 21-20');
 
 		presses.push({
 			type: 'score',

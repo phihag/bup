@@ -581,6 +581,229 @@ _describe('stats graphs', function() {
 		var els = _plot(s);
 		_check_els(els);
 	});
+
+	_it('press descriptions', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+			desc: 'Seitenwahl',
+			sdesc: 'Andrew / Alice links, Bob / Birgit rechts',
+		}, {
+			type: 'undo',
+			desc: 'Rückgängig',
+			sdesc: '',
+		}, {
+			type: 'redo',
+			desc: 'Wiederholen',
+			sdesc: '',
+		}, {
+			type: 'undo',
+			desc: 'Rückgängig',
+			sdesc: '',
+		}, {
+			type: 'pick_side',
+			team1_left: false,
+			desc: 'Seitenwahl',
+			sdesc: 'Bob / Birgit links, Andrew / Alice rechts',
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+			desc: 'Aufschläger',
+			sdesc: 'Andrew',
+		}, {
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 1,
+			desc: 'Rückschläger',
+			sdesc: 'Birgit',
+		}, {
+			type: 'timer_restart',
+			desc: 'Stoppuhr Reset',
+			sdesc: '2:00',
+		}, {
+			type: 'love-all',
+			desc: '0 beide',
+			sdesc: '',
+		}, {
+			type: 'score',
+			side: 'left',
+			desc: 'Punkt links',
+			sdesc: '1-0',
+		}, {
+			type: 'score',
+			side: 'right',
+			desc: 'Punkt rechts',
+			sdesc: '1-1',
+		}, {
+			type: 'overrule',
+			desc: 'Overrule Linienrichter',
+			sdesc: '',
+		}, {
+			type: 'correction',
+			team_id: 0,
+			desc: 'Vertauschung Aufschlagfeld',
+			sdesc: 'Korrekt: Alice links, Andrew rechts',
+		}, {
+			type: 'suspension',
+			desc: 'Unterbrechung',
+			sdesc: '',
+			timestamp: 1000,
+		}, {
+			type: 'resume',
+			desc: 'Spielfortsetzung',
+			sdesc: '0:09',
+			timestamp: 10000,
+		}, {
+			type: 'injury',
+			team_id: 0,
+			player_id: 1,
+			desc: 'Verletzung',
+			sdesc: 'Alice verletzt',
+			timestamp: 100000,
+		}, {
+			type: 'injury-resume',
+			team_id: 0,
+			player_id: 1,
+			desc: 'Spiel wird fortgesetzt',
+			sdesc: '2:10',
+			timestamp: 230000,
+		}, {
+			type: 'shuttle',
+			desc: 'Ball ausgegeben',
+			sdesc: '1 Bälle',
+		}, {
+			type: 'shuttle',
+			desc: 'Ball ausgegeben',
+			sdesc: '2 Bälle',
+		}, {
+			type: 'editmode_change-ends',
+			desc: 'Manuelle Korrektur: Seitenwechsel',
+			sdesc: 'Andrew / Alice links, Bob / Birgit rechts',
+		}, {
+			type: 'editmode_change-ends',
+			desc: 'Manuelle Korrektur: Seitenwechsel',
+			sdesc: 'Bob / Birgit links, Andrew / Alice rechts',
+		}, {
+			type: 'editmode_change-serve',
+			desc: 'Manuelle Korrektur: Aufschlagsrecht',
+			sdesc: 'Bob schlägt auf',
+		}, {
+			type: 'editmode_change-serve',
+			desc: 'Manuelle Korrektur: Aufschlagsrecht',
+			sdesc: 'Alice schlägt auf',
+		}, {
+			type: 'editmode_switch-sides',
+			side: 'right',
+			desc: 'Manuelle Korrektur: Position',
+			sdesc: 'Andrew links, Alice rechts',
+		}, {
+			type: 'editmode_switch-sides',
+			side: 'right',
+			desc: 'Manuelle Korrektur: Position',
+			sdesc: 'Alice links, Andrew rechts',
+		}, {
+			type: 'editmode_switch-sides',
+			side: 'right',
+			desc: 'Manuelle Korrektur: Position',
+			sdesc: 'Andrew links, Alice rechts',
+		}, {
+			type: 'editmode_switch-sides',
+			side: 'left',
+			desc: 'Manuelle Korrektur: Position',
+			sdesc: 'Birgit links, Bob rechts',
+		}, {
+			type: 'editmode_change-serve',
+			desc: 'Manuelle Korrektur: Aufschlagsrecht',
+			sdesc: 'Birgit schlägt auf',
+		}, {
+			type: 'editmode_change-serve',
+			desc: 'Manuelle Korrektur: Aufschlagsrecht',
+			sdesc: 'Andrew schlägt auf',
+		}, {
+			type: 'editmode_change-ends',
+			desc: 'Manuelle Korrektur: Seitenwechsel',
+			sdesc: 'Andrew / Alice links, Bob / Birgit rechts',
+		}, {
+			type: 'editmode_set-finished_games',
+			scores: [[21, 15]],
+			desc: 'Manuelle Korrektur: Spielstand',
+			sdesc: '21-15 1-1',
+		}, {
+			type: 'editmode_change-ends',
+			desc: 'Manuelle Korrektur: Seitenwechsel',
+			sdesc: 'Bob / Birgit links, Andrew / Alice rechts',
+		}, {
+			type: 'editmode_set-finished_games',
+			scores: [[21, 16]],
+			desc: 'Manuelle Korrektur: Spielstand',
+			sdesc: '16-21 1-1',
+		}, {
+			type: 'editmode_set-score',
+			score: [13, 19],
+			desc: 'Manuelle Korrektur: Spielstand',
+			sdesc: '16-21 19-13',
+		}, {
+			type: 'yellow-card',
+			team_id: 1,
+			player_id: 0,
+			desc: 'Gelbe Karte',
+			sdesc: 'Bob verwarnt',
+		}, {
+			type: 'referee',
+			desc: 'Referee',
+			sdesc: '',
+		}, {
+			type: 'red-card',
+			team_id: 0,
+			player_id: 0,
+			desc: 'Rote Karte',
+			sdesc: 'Fehlerwarnung Andrew, 16-21 20-13',
+		}, {
+			type: 'note',
+			val: 'foo bar',
+			desc: 'Notiz',
+			sdesc: 'foo bar',
+		}, {
+			type: 'score',
+			side: 'left',
+			desc: 'Punkt links',
+			sdesc: '21-13',
+		}, {
+			type: 'postgame-confirm',
+			desc: 'Satz-Bestätigung',
+			sdesc: '',
+		}, {
+			type: 'retired',
+			team_id: 0,
+			player_id: 1,
+			desc: 'Alice gibt auf',
+			sdesc: 'Bob / Birgit gewinnt 16-21 21-13 0-0',
+		}, {
+			type: 'undo',
+			desc: 'Rückgängig',
+			sdesc: '',
+		}, {
+			type: 'disqualified',
+			team_id: 1,
+			player_id: 0,
+			desc: 'Schwarze Karte Bob',
+			sdesc: 'Andrew / Alice gewinnt 21-16 13-21 0-0',
+		}, {
+			type: 'postmatch-confirm',
+			desc: 'Spiel-Bestätigung',
+			sdesc: '',
+		}];
+
+		var cur_presses = [];
+		for (var i = 0;i < presses.length;i++) {
+			var press = presses[i];
+			cur_presses.push(press);
+			var s = tutils.state_after(cur_presses, tutils.DOUBLES_SETUP);
+			assert.strictEqual(bup.stats.press_description(s, press), press.desc);
+			assert.strictEqual(bup.stats.press_state_desc(s, press), press.sdesc);
+		}
+	});
 });
 
 })();

@@ -81,8 +81,8 @@ function update_state(s, code) {
 		code = detect_lang();
 	}
 	s.lang = code;
-	s._ = function(str, data) {
-		return translate(s, str, data);
+	s._ = function(str, data, fallback) {
+		return translate(s, str, data, fallback);
 	};
 }
 
@@ -93,14 +93,18 @@ function ui_update_state(s, code) {
 	report_problem.update();
 }
 
-function translate(s, str, data) {
+function translate(s, str, data, fallback) {
 	var lang = languages[s.lang];
 	if (! lang) {
 		return 'Invalid Language [' + s.lang + ']:>> ' + str + ' <<';
 	}
 	var res = lang[str];
 	if (res === undefined) {
-		return 'UNTRANSLATED:>> ' + str + ' <<';
+		if (fallback === undefined) {
+			return 'UNTRANSLATED:>> ' + str + ' <<';
+		} else {
+			return fallback;
+		}
 	}
 
 	if (data) {

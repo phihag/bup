@@ -586,6 +586,118 @@ function render_table($table, stats) {
 	});
 }
 
+function press_state_desc(s, press) {
+	// No let in current browsers
+	var fpresses;
+	var i;
+	var fpress;
+
+	switch (press.type) {
+	case 'pick_side':
+		var left_team = pronounciation.teamtext_internal(s, press.team1_left ? 0 : 1);
+		var right_team = pronounciation.teamtext_internal(s, press.team1_left ? 1 : 0);
+		return s._('pressdesc:state:' + press.type, {
+			left_team: left_team,
+			right_team: right_team,
+		});
+	case 'score':
+		var score = s.game.score;
+		var left_idx = s.game.team1_left ? 0 : 1;
+		return score[left_idx] + '-' + score[1 - left_idx];
+	case 'shuttle':
+		return s._('pressdesc:state:' + press.type, {
+			count: s.match.shuttle_count,
+		});
+	case 'timer_restart':
+		return utils.duration_secs(0, s.timer.duration);
+	case 'correction':
+		var players = s.setup.teams[press.team_id].players;
+		var right_id = s.game.teams_player1_even[press.team_id] ? 0 : 1;
+		return s._('pressdesc:state:' + press.type, {
+			right_player: players[right_id].name,
+			left_player: players[1 - right_id].name,
+		});
+	case 'resume':
+		fpresses = s.flattened_presses;
+		for (i = fpresses.length - 1;i >= 0;i--) {
+			fpress = fpresses[i];
+			if (fpress.type === 'suspension') {
+				return utils.duration_secs(fpress.timestamp, press.timestamp);
+			}
+		}
+		return '';
+	case 'injury-resume':
+		fpresses = s.flattened_presses;
+		for (i = fpresses.length - 1;i >= 0;i--) {
+			fpress = fpresses[i];
+			if (fpress.type === 'injury') {
+				return utils.duration_secs(fpress.timestamp, press.timestamp);
+			}
+		}
+		return '';
+	case 'editmode_change-ends':
+		return s._('pressdesc:state:' + press.type, {
+			left_team: pronounciation.teamtext_internal(s, s.game.team1_left ? 0 : 1),
+			right_team: pronounciation.teamtext_internal(s, s.game.team1_left ? 1 : 0),
+		});
+	case 'editmode_change-serve':
+		return s._('pressdesc:state:' + press.type, {
+			player: calc.server(s).name,
+		});
+	case 'editmode_switch-sides':
+		var team_id = (s.game.team1_left == (press.side == 'left')) ? 0 : 1;
+		var team_players = s.setup.teams[team_id].players;
+		var right_player_id = s.game.teams_player1_even[team_id] ? 0 : 1;
+		return s._('pressdesc:state:' + press.type, {
+			left_player: team_players[1 - right_player_id].name,
+			right_player: team_players[right_player_id].name,
+		});
+	case 'editmode_set-finished_games':
+	case 'editmode_set-score':
+		return calc.score_str(s, s.game.team1_left ? 0 : 1);
+	case 'pick_server':
+	case 'pick_receiver':
+	case 'injury':
+		return s._('pressdesc:state:' + press.type, {
+			player: s.setup.teams[press.team_id].players[press.player_id].name,
+		});
+	case 'yellow-card':
+		return s._('pressdesc:state:' + press.type, {
+			player: s.setup.teams[press.team_id].players[press.player_id].name,
+		});
+	case 'red-card':
+		return s._('pressdesc:state:' + press.type, {
+			player: s.setup.teams[press.team_id].players[press.player_id].name,
+			score_str: calc.score_str(s, s.game.team1_left ? 0 : 1),
+		});
+	case 'retired':
+	case 'disqualified':
+		var winner_id = 1 - press.team_id;
+		return s._('pressdesc:state:' + press.type, {
+			winner: pronounciation.teamtext_internal(s, winner_id),
+			score_str: calc.score_str(s, winner_id),
+		});
+	case 'note':
+		return press.val;
+	default:
+		return '';
+	}
+}
+
+function press_description(s, press) {
+	switch (press.type) {
+	case 'score':
+		return s._('pressdesc:score:' + press.side);
+	case 'retired':
+	case 'disqualified':
+		return s._('pressdesc:' + press.type, {
+			player: s.setup.teams[press.team_id].players[press.player_id].name,
+		});
+	}
+
+	return s._('pressdesc:' + press.type, {}, '[' + press.type + ']');
+}
+
 function render_presses(table, s) {
 	utils.empty(table);
 
@@ -603,25 +715,8 @@ function render_presses(table, s) {
 			calc.calc_press(scopy, press);
 		}
 
-		var desc = press.type;
-		var sdesc = '';
-		switch (press.type) {
-		case 'score':
-			desc = s._('pressdesc:score:' + press.side);
-			var score = scopy.game.score;
-			var left_idx = scopy.game.team1_left ? 0 : 1;
-			sdesc = score[left_idx] + ':' + score[1 - left_idx];
-			break;
-		case 'love-all':
-			desc = s._('pressdesc:' + press.type);
-			break;
-		case 'shuttle':
-			desc = s._('pressdesc:' + press.type);
-			sdesc = s._('pressdesc:shuttle:count', {
-				count: scopy.match.shuttle_count,
-			});
-			break;
-		}
+		var desc = press_description(scopy, press);
+		var sdesc = press_state_desc(scopy, press);
 
 		var highlight_ts = (i === 0) || (i === presses.length - 1) || ((press.timestamp - last_ts) > 120000);
 		last_ts = press.timestamp;
@@ -635,7 +730,7 @@ function render_presses(table, s) {
 		}, desc);
 		utils.create_el(tr, 'td', {
 			'class': 'stats_presses_sdesc',
-		}, sdesc ? '→ ' + sdesc : sdesc);
+		}, sdesc);
 	}
 }
 
@@ -699,10 +794,12 @@ return {
 	ui_init: ui_init,
 	render_table: render_table,
 	// testing only
-	calc_stats: calc_stats,
 	calc_max_score: calc_max_score,
+	calc_stats: calc_stats,
 	draw_graph: draw_graph,
 	normalize_gpoints: normalize_gpoints,
+	press_description: press_description,
+	press_state_desc: press_state_desc,
 	HEIGHT: HEIGHT,
 	LEFT_PADDING: LEFT_PADDING,
 	RIGHT_PADDING: RIGHT_PADDING,
@@ -718,9 +815,10 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
-	var utils = require('./utils');
 	var control = require('./control');
+	var pronounciation = require('./pronounciation');
 	var uiu = require('./uiu');
+	var utils = require('./utils');
 
 	module.exports = stats;
 }

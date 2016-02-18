@@ -52,16 +52,9 @@ function postgame_announcement(s) {
 	}
 	var res = '';
 	if (s.match.finished) {
-		var previous_scores = s.match.finished_games.reduce(function(str, game) {
-			str += game.score[winner_index] + '-' + game.score[1 - winner_index] + ' ';
-			return str;
-		}, '');
-
 		res = s._('wonby.match', {
 			winner_name: winner_name,
-			previous_scores: previous_scores,
-			winner_score: winner_score,
-			loser_score: loser_score,
+			score_str: calc.score_str(s, winner_index),
 		});
 	} else if (s.match.finished_games.length <= 1) {
 		res = s._('wonby.' + (1 + s.match.finished_games.length), {
@@ -299,6 +292,8 @@ return {
 
 /*@DEV*/
 if (typeof module !== 'undefined') {
+	var calc = require('./calc');
+
 	module.exports = pronounciation;
 }
 /*/@DEV*/
