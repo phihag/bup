@@ -1,6 +1,32 @@
+event edit mode
+	manually add players
+	on change do something
+
+remove "mit"
+fetch all players for tomorrow
+write mail
+mail Markus
+
+editevent: configure backup players
+editevent: on adding player add it as an option everywhere else
+editevent: other color for other / N.N.
+editevent: test on mobile
+
+manual player name changing
+MVP liveaw
+	-> import event (with all players)
+	allow input
+	launch bup
+	sync with bup
+	show current state (who's on which court, like btde)
+	colors for team 
+	-> in Refrath?
+
+design editevent
+block editevent shortcut if event is not editable
 show match history
 	press descriptions
-	test without timestamps
+	test in browser without timestamps
 	with/without undo
 black in stats should reach bottom
 stats should have back link at top as well
@@ -9,6 +35,7 @@ vdemo
 	import real matches
 	invent a match with lots of cards and stuff
 	normalize times
+	(...+edemo) add all_players
 
 edemo/vdemo: improve court handling (download from import, none by default)
 i18n utils.human_date_str
@@ -18,6 +45,8 @@ mail Ulf
 mail Manuel
 mail Werner
 
+support RLS (Excel file)
+editevent: show an error if not editable
 eventsheet svg for only home/only away (incl. PDF generations for each)
 test eventsheet on various mobiles
 

@@ -67,6 +67,14 @@ function courts(s) {
 	}];
 }
 
+function editable(s) {
+	return s.event.editable !== false;
+}
+
+function on_edit_event(s) {
+	event = s.event;
+}
+
 function service_name(s) {
 	return s._('staticnet:service_name');
 }
@@ -117,6 +125,8 @@ return {
 	service_name: service_name,
 	staticnet_message: staticnet_message,
 	ui_init: ui_init,
+	editable: editable,
+	on_edit_event: on_edit_event,
 };
 
 }

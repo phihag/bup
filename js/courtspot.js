@@ -190,6 +190,11 @@ function service_name() {
 	return 'CourtSpot';
 }
 
+/* Paramter: s */
+function editable() {
+	return false;
+}
+
 return {
 	ui_init: ui_init,
 	list_matches: list_matches,
@@ -198,6 +203,7 @@ return {
 	prepare_match: prepare_match,
 	courts: courts,
 	service_name: service_name,
+	editable: editable,
 };
 
 }

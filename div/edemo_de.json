@@ -239,6 +239,7 @@
       "name": "Marvin Seidel",
       "gender": "m"
     }]],
-    "league_key": "1BL"
+    "league_key": "1BL",
+    "editable": true
   }
 }

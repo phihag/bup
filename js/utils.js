@@ -160,7 +160,7 @@ function qs(selector) {
 	/*@DEV*/
 	var all_nodes = document.querySelectorAll(selector);
 	if (all_nodes.length !== 1) {
-		report_problem.silent_error(all_nodes.length + ' nodes matched by qs ' + selector);
+		throw new Error(all_nodes.length + ' nodes matched by qs ' + selector);
 	}
 	/*/@DEV*/
 

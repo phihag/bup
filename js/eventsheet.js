@@ -38,19 +38,6 @@ function calc_backup_players_str(s) {
 	}).join(' / ');
 }
 
-function guess_gender(match, player_id) {
-	var setup = match.setup;
-	var mname = setup.discipline_key ? setup.match_name : setup.match_name;
-	if (/(?:HD|HE|MD|MS)/.test(mname)) {
-		return 'm';
-	} else if (/(?:DD|DE|WD|WS)/.test(mname)) {
-		return 'f';
-	} else {
-		// Mixed
-		return (player_id === 0) ? 'm' : 'f';
-	}
-}
-
 function pdfform_loaded() {
 	$('.setup_eventsheets').removeClass('default-invisible');
 }
@@ -319,7 +306,7 @@ function render_team_bl(ev, es_key, ui8r) {
 			var players = teams[team_id].players;
 			for (var player_id = 0;player_id < players.length;player_id++) {
 				var player = players[player_id];
-				var gender = player.gender ? player.gender : guess_gender(match, player_id);
+				var gender = player.gender ? player.gender : eventutils.guess_gender(match.setup, player_id);
 				if (matches_by_player[player.name]) {
 					matches_by_player[player.name].push(match);
 				} else {
@@ -866,6 +853,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
+	var eventutils = require('./eventutils');
 	var network = require('./network');
 	var render = require('./render');
 	var report_problem = require('./report_problem');

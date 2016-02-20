@@ -334,6 +334,9 @@ function init_shortcuts() {
 		}
 		settings.store(state);
 	});
+	Mousetrap.bind('v', function() {
+		editevent.show();
+	});
 	Mousetrap.bind('s', function() {
 		scoresheet.show();
 	});
@@ -419,6 +422,7 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var buphistory = require('./buphistory');
 	var calc = require('./calc');
+	var editevent = require('./editevent');
 	var editmode = require('./editmode');
 	var i18n = require('./i18n');
 	var importexport = require('./importexport');

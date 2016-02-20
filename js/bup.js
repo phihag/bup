@@ -18,7 +18,7 @@ function ui_init() {
 	compat.ui_init();
 	i18n.ui_init();
 
-	$('.version').text(bup_version);
+	utils.text_qs('.version', bup_version);
 
 	appcache.ui_init();
 	$('#script_jspdf').on('load', scoresheet.jspdf_loaded);
@@ -35,6 +35,7 @@ function ui_init() {
 	stats.ui_init();
 	order.ui_init();
 	importexport.ui_init();
+	editevent.ui_init();
 
 	var hash_query = utils.parse_query_string(window.location.hash.substr(1));
 	if (hash_query.lang) {
@@ -74,6 +75,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var compat = require('./compat');
 	var control = require('./control');
 	var courtspot = require('./courtspot');
+	var editevent = require('./editevent');
 	var editmode = require('./editmode');
 	var eventsheet = require('./eventsheet');
 	var fullscreen = require('./fullscreen');

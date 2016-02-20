@@ -375,6 +375,7 @@ function ui_list_matches(s, silent, no_timer) {
 
 		s.event = event;
 		eventsheet.render_links(s);
+		utils.visible_qs('.editevent_link', netw.editable(s));
 		ui_render_matchlist(s, event);
 	});
 
@@ -595,6 +596,17 @@ function ui_uninstall_staticnet(s) {
 	ui_list_matches(s, false, true);
 }
 
+function on_edit_event(s) {
+	var netw = get_netw();
+	if (!netw) {
+		return;
+	}
+	if (!netw.editable(s)) {
+		return;
+	}
+	netw.on_edit_event(s);
+}
+
 return {
 	calc_score: calc_score,
 	courts: courts,
@@ -609,6 +621,7 @@ return {
 	request: request,
 	resync: resync,
 	send_press: send_press,
+	on_edit_event: on_edit_event,
 	ui_init: ui_init,
 	ui_install_staticnet: ui_install_staticnet,
 	ui_list_matches: ui_list_matches,

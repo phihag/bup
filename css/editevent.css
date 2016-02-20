@@ -1,0 +1,16 @@
+.editevent_table {
+	font-size: 140%;
+}
+
+.editevent_table>tbody>tr>th {
+	text-align: left;
+}
+
+.editevent_table>tbody select {
+	display: block;
+	min-width: 12em;
+	margin: 0.8em;
+}
+.editevent_table>tbody select + select {
+	margin-top: 0.2em;
+}

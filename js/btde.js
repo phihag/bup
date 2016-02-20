@@ -311,6 +311,11 @@ function service_name() {
 	return 'badmintonticker';
 }
 
+/* Paramter: s */
+function editable() {
+	return false;
+}
+
 return {
 	ui_init: ui_init,
 	ui_render_login: ui_render_login,
@@ -319,6 +324,7 @@ return {
 	sync: sync,
 	courts: courts,
 	service_name: service_name,
+	editable: editable,
 	// Testing only
 	_parse_match_list: _parse_match_list,
 };

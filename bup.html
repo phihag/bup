@@ -25,6 +25,7 @@
 	<link rel="stylesheet" href="css/compat.css" />
 	<link rel="stylesheet" href="css/importexport.css" />
 	<link rel="stylesheet" href="css/staticnet.css" />
+	<link rel="stylesheet" href="css/editevent.css" />
 	<link rel="stylesheet" href="bup.css" />
 <!--/@DEV-->
 <!--@PRODUCTION
@@ -222,6 +223,7 @@
 		<a href="#" class="netstats_link default-invisible" data-i18n="settings:Network statistics"></a>
 		<a href="#" class="order_link" data-i18n="settings:Order link"></a>
 		<a href="#" class="export_link" data-i18n="settings:Export link"></a>
+		<a href="#" class="editevent_link default-invisible" data-i18n="editevent:link"></a>
 		<a href="#" class="setup_show_manual" data-i18n="settings:Custom match details"></a>
 	</div>
 	</div>
@@ -491,6 +493,13 @@ text.team1 {
 </div>
 </div>
 
+<div class="editevent_container default-invisible">
+	<div class="editevent_loading-icon loading-icon"></div>
+	<div class="editevent_error"><span class="editevent_error_message"></span></div>
+	<table class="editevent_table"></table>
+	<a href="#" class="editevent_back" data-i18n="editevent:back"></a>
+</div>
+
 
 <!--@DEV-->
 <script src="libs/jquery.min.js"></script>
@@ -532,6 +541,8 @@ text.team1 {
 <script src="js/compat.js"></script>
 <script src="js/importexport.js"></script>
 <script src="js/staticnet.js"></script>
+<script src="js/editevent.js"></script>
+<script src="js/eventutils.js"></script>
 
 <script src="js/bup.js"></script>
 

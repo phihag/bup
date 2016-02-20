@@ -40,6 +40,12 @@ var i18n_de = {
 'network:in progress': 'Das Spiel {match} wurde bereits angefangen',
 'network:match finished': 'Das Spiel {match} ist bereits beendet ({score})!',
 
+'editevent:link': 'Wettkampf bearbeiten',
+'editevent:back': 'Zurück',
+'editevent:add manual m': 'Anderer Spieler ..',
+'editevent:add manual f': 'Andere Spielerin ..',
+'editevent:enter player name': 'Spieler-Name:',
+
 'button:undo': 'Rückgängig',
 'button:settings': 'Konfiguration',
 'button:exception': 'Situation',
@@ -317,6 +323,8 @@ var i18n_de = {
 
 'importexport:invalid JSON': 'Ungültiges JSON: {msg}',
 'importexport:not an export file': 'Diese Datei ist keine bup-export-Datei!',
+
+
 };
 
 /*@DEV*/

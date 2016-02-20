@@ -40,6 +40,12 @@ var i18n_en = {
 'network:in progress': 'Match {match} has already been started',
 'network:match finished': 'Match {match} already finished ({score})!',
 
+'editevent:link': 'Edit event',
+'editevent:back': 'Back',
+'editevent:add manual m': 'Other player ..',
+'editevent:add manual f': 'Other player ..',
+'editevent:enter player name': 'player name:',
+
 'button:undo': 'Undo',
 'button:settings': 'Configuration',
 'button:exception': 'Situation',
