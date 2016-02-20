@@ -71,17 +71,17 @@ function _score_display_set_game(s, game, game_index, is_current) {
 
 	var editmode_active = $('#game').hasClass('editmode');
 	var editmode_score_active = editmode_active && (s.game.team1_left !== null);
-	var tr = $('#score_game_' + game_index);
+	var tr = utils.qs('#score_game_' + game_index);
 
 	if (!game) {
-		utils.set_class(tr, 'score_future-game');
+		tr.setAttribute('class', 'score_future-game');
 	} else if (is_current) {
-		utils.set_class(tr, 'score_current-game');
+		tr.setAttribute('class', 'score_current-game');
 	} else {
-		utils.set_class(tr, 'score_finished-game');
+		tr.setAttribute('class', 'score_finished-game');
 	}
 
-	var left = tr.children('.score_left');
+	var left = $(tr.querySelector('.score_left'));
 	var left_input = left.children('input');
 	left.attr('class', 'score score_left');
 	if (game) {
@@ -105,7 +105,7 @@ function _score_display_set_game(s, game, game_index, is_current) {
 		}
 	}
 
-	var right = tr.children('.score_right');
+	var right = $(tr.querySelector('.score_right'));
 	var right_input = right.children('input');
 	right.attr('class', 'score score_right');
 	if (game) {

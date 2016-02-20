@@ -176,21 +176,6 @@ function visible_qs(selector, val) {
 	visible(qs(selector), val);
 }
 
-function de_jq(node) {
-	if (typeof node.getAttribute === 'undefined') {
-		// jQuery node
-		return node[0];
-	}
-	return node;
-}
-
-function set_class(node, class_name) {
-	node = de_jq(node);
-	if (node.getAttribute('class') != class_name) {
-		node.setAttribute('class', class_name);
-	}
-}
-
 function obj_update(obj, other) {
 	for (var key in other) {
 		obj[key] = other[key];
@@ -339,7 +324,6 @@ return {
 	qsEach: qsEach,
 	repeat: repeat,
 	reverse_every: reverse_every,
-	set_class: set_class,
 	svg_el: svg_el,
 	sum: sum,
 	text: text,
