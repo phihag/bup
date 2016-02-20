@@ -23,6 +23,9 @@
         "browser": true
     },
     "globals": {
+        " (workaround for old eslint version) ": 1,
+        "Uint8Array": 1,
+
         " (library names) ": 1,
         "$": 1,
         "jsPDF": 1,

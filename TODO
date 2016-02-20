@@ -1,13 +1,10 @@
-fix travis
-
-stats: + most consecutive points
+block editevent shortcut if event is not editable
 
 editevent: configure backup players
 editevent: on adding player add it as an option everywhere else
 editevent: other color for other / N.N.
 editevent: test on mobile
 
-manual player name changing
 MVP liveaw
 	-> import event (with all players)
 	allow input
@@ -18,7 +15,6 @@ MVP liveaw
 	-> in Refrath?
 
 design editevent
-block editevent shortcut if event is not editable
 show match history
 	press descriptions
 	test in browser without timestamps
@@ -40,6 +36,7 @@ mail Ulf
 mail Manuel
 mail Werner
 
+stats: + most consecutive points
 Opera Mini bug
 support RLS (Excel file)
 editevent: show an error if not editable
