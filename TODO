@@ -1,11 +1,4 @@
-event edit mode
-	manually add players
-	on change do something
-
-remove "mit"
-fetch all players for tomorrow
-write mail
-mail Markus
+fix travis
 
 editevent: configure backup players
 editevent: on adding player add it as an option everywhere else
