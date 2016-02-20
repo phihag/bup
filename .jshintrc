@@ -4,6 +4,7 @@
 	"globals": {
 		"document": false,
 		"window": false,
+		"Uint8Array": false,
 
 		"Mousetrap": false,
 
