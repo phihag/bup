@@ -1,5 +1,7 @@
 fix travis
 
+stats: + most consecutive points
+
 editevent: configure backup players
 editevent: on adding player add it as an option everywhere else
 editevent: other color for other / N.N.
@@ -38,6 +40,7 @@ mail Ulf
 mail Manuel
 mail Werner
 
+Opera Mini bug
 support RLS (Excel file)
 editevent: show an error if not editable
 eventsheet svg for only home/only away (incl. PDF generations for each)
