@@ -23,20 +23,20 @@
         "browser": true
     },
     "globals": {
-        " (workaround for old eslint version) ": 1,
-        "Uint8Array": 1,
+        " (workaround for old eslint version) ": true,
+        "Uint8Array": true,
 
-        " (library names) ": 1,
-        "$": 1,
-        "jsPDF": 1,
-        "Mousetrap": 1,
-        "pdfform": 1,
-        "saveAs": 1,
-        "FastClick": 1,
+        " (library names) ": true,
+        "$": true,
+        "jsPDF": true,
+        "Mousetrap": true,
+        "pdfform": true,
+        "saveAs": true,
+        "FastClick": true,
 
-        " (global variables) ": 1,
-        "state": 1,
-         "bup_version": 1
+        " (global variables) ": true,
+        "state": true,
+         "bup_version": true
     },
     "extends": "eslint:recommended"
 }
