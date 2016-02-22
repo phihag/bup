@@ -781,11 +781,14 @@ function ui_init() {
 			hide();
 		}
 	});
-	$('.stats_back').on('click', function(e) {
+
+	var back_func = function(e) {
 		e.preventDefault();
 		hide();
-		return false;
-	});
+	};
+
+	utils.on_click_qs('.stats_back', back_func);
+	utils.on_click_qs('.stats_top_back_link', back_func);
 }
 
 return {

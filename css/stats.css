@@ -3,7 +3,7 @@
 	top: 0;
 	left: 0;
 	right: 0;
-	bottom: 0;
+	min-height: 100%;
 	font-size: 24px;
 	text-align: center;
 	background: rgba(0, 0, 0, 0.9);
@@ -17,6 +17,10 @@
 	border-bottom-left-radius: 1em;
 	text-align: center;
 	padding: 1em 1em;
+}
+.stats_top_back_link {
+	display: block;
+	float: left;
 }
 
 .stats_table>thead>tr>th, .netstats_table>thead>tr>th {
@@ -48,7 +52,9 @@
 }
 .stats_presses_desc {
 	text-align: left;
+	white-space: pre-line;
 }
 .stats_presses_sdesc {
 	text-align: left;
+	white-space: pre-line;
 }
