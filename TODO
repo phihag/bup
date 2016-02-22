@@ -1,5 +1,4 @@
 block editevent shortcut if event is not editable
-
 editevent: configure backup players
 editevent: on adding player add it as an option everywhere else
 editevent: other color for other / N.N.
@@ -17,7 +16,6 @@ MVP liveaw
 design editevent
 show match history
 	press descriptions
-	test in browser without timestamps
 	with/without undo
 black in stats should reach bottom
 stats should have back link at top as well

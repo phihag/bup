@@ -724,7 +724,7 @@ function render_presses(table, s) {
 		var tr = utils.create_el(table, 'tr');
 		utils.create_el(tr, 'td', {
 			'class': 'stats_presses_timestamp' + (highlight_ts ? ' stats_presses_highlight' : ''),
-		}, utils.timesecs_str(press.timestamp));
+		}, (press.timestamp ? utils.timesecs_str(press.timestamp) : ''));
 		utils.create_el(tr, 'td', {
 			'class': 'stats_presses_desc',
 		}, desc);
