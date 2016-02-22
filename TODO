@@ -1,24 +1,11 @@
-block editevent shortcut if event is not editable
-editevent: configure backup players
-editevent: on adding player add it as an option everywhere else
-editevent: other color for other / N.N.
-editevent: test on mobile
-
-MVP liveaw
-	-> import event (with all players)
-	allow input
-	launch bup
-	sync with bup
-	show current state (who's on which court, like btde)
-	colors for team 
-	-> in Refrath?
-
-design editevent
-show match history
-	press descriptions
-	with/without undo
+show match history: with/without undo
 black in stats should reach bottom
 stats should have back link at top as well
+
+design editevent
+editevent: configure backup players
+editevent: on adding player add it as an option everywhere else
+editevent: test on mobile
 
 vdemo
 	import real matches
@@ -33,6 +20,15 @@ hide clock at love-all
 mail Ulf
 mail Manuel
 mail Werner
+
+MVP liveaw
+	-> import event (with all players)
+	allow input
+	launch bup
+	sync with bup
+	show current state (who's on which court, like btde)
+	colors for team 
+	-> in Refrath?
 
 stats: + most consecutive points
 Opera Mini bug

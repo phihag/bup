@@ -77,9 +77,11 @@ function render_table(s) {
 				utils.create_el(select, 'option', {
 					'data-i18n': 'editevent:add manual ' + gender,
 					value: '__add_manual',
+					'class': 'editevent_option_manual',
 				}, s._('editevent:add manual ' + gender));
 				var nn_attrs = {
 					value: 'N.N.',
+					'class': 'editevent_option_nn',
 				};
 				if (player.name === 'N.N.') {
 					nn_attrs.selected = 'selected';

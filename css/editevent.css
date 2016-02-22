@@ -14,3 +14,7 @@
 .editevent_table>tbody select + select {
 	margin-top: 0.2em;
 }
+
+.editevent_option_nn, .editevent_option_manual {
+	color: #666;
+}
