@@ -1,10 +1,9 @@
-vdemo: invent a match with lots of cards and stuff
+vdemo: invent a match to continue
 vdemo: normalize times
 
 editevent: configure backup players
 editevent: on adding player add it as an option everywhere else
 editevent: make sure we don't lose players who get deselected
-change all_players to simple array
 
 add all_players
 	vdemo
