@@ -46,7 +46,7 @@ var i18n_de = {
 'editevent:add manual f': 'Andere Spielerin ..',
 'editevent:enter player name': 'Spieler-Name:',
 'editevent:backup players': 'Ersatzspieler',
-'editevent:add backup player': '- Ersatzspieler hinzufügen -',
+'editevent:add backup player': 'Ersatzspieler hinzufügen ...',
 
 'button:undo': 'Rückgängig',
 'button:settings': 'Konfiguration',

@@ -241,6 +241,43 @@
       "name": "Wang Shixian",
       "gender": "f"
     }]],
+        "all_players": [[
+      {"gender": "m", "name": "Astrup Kim"},
+      {"gender": "m", "name": "Axelsen Viktor"},
+      {"gender": "m", "name": "Christiansen Mathias"},
+      {"gender": "m", "name": "Conrad-Petersen Mads"},
+      {"gender": "m", "name": "Jorgensen Jan O"},
+      {"gender": "m", "name": "Pieler Kolding Mads"},
+      {"gender": "m", "name": "Skaarup Rasmussen Anders"},
+      {"gender": "m", "name": "Vittinghus Hans-Kristian"},
+      {"gender": "f", "name": "Fruergaard Maiken"},
+      {"gender": "f", "name": "Grebak Lena"},
+      {"gender": "f", "name": "Helsbol Maria"},
+      {"gender": "f", "name": "Kjaersfeldt Line"},
+      {"gender": "f", "name": "Madsen Anna Thea"},
+      {"gender": "f", "name": "Thygesen Sara"}
+    ], [
+      {"gender": "m", "name": "Cai Yun"},
+      {"gender": "m", "name": "Chai Biao"},
+      {"gender": "m", "name": "Chen Long"},
+      {"gender": "m", "name": "Fu Haifeng"},
+      {"gender": "m", "name": "Hong Wei"},
+      {"gender": "m", "name": "Lin Dan"},
+      {"gender": "m", "name": "Liu Cheng"},
+      {"gender": "m", "name": "Lu Kai"},
+      {"gender": "m", "name": "Wang Zhengming"},
+      {"gender": "m", "name": "Xu Chen"},
+      {"gender": "m", "name": "Zhang Nan"},
+      {"gender": "f", "name": "Bao Yixin"},
+      {"gender": "f", "name": "Li Xuerui"},
+      {"gender": "f", "name": "Ma Jin"},
+      {"gender": "f", "name": "Tang Yuanting"},
+      {"gender": "f", "name": "Wang Shixian"},
+      {"gender": "f", "name": "Wang Xiaoli"},
+      {"gender": "f", "name": "Wang Yihan"},
+      {"gender": "f", "name": "Yu Yang"},
+      {"gender": "f", "name": "Zhao Yunlei"}
+    ]],
     "league_key": "1BL"
   }
 }

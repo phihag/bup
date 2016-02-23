@@ -242,6 +242,38 @@
       "name": "Kristof Hopp",
       "gender": "m"
     }]],
+    "all_players": [
+      [
+        {"gender": "m", "name": "Fabian Roth"},
+        {"gender": "m", "name": "Richard Domke"},
+        {"gender": "m", "name": "Lars Schänzler"},
+        {"gender": "m", "name": "Max Schwenger"},
+        {"gender": "m", "name": "Sam Magee"},
+        {"gender": "m", "name": "Fabian Holzer"},
+        {"gender": "m", "name": "Dennis Nyenhuis"},
+        {"gender": "f", "name": "Chloe Magee"},
+        {"gender": "f", "name": "Carla Nelte"},
+        {"gender": "f", "name": "Ya Lan Chang"},
+        {"gender": "f", "name": "Jennifer Karnott"},
+        {"gender": "f", "name": "Mette Stahlberg"}
+      ],
+      [
+        {"gender": "m", "name": "Marc Zwiebler"},
+        {"gender": "m", "name": "Dieter Domke"},
+        {"gender": "m", "name": "Lukas Schmidt"},
+        {"gender": "m", "name": "Marcel Reuter"},
+        {"gender": "m", "name": "Michael Fuchs"},
+        {"gender": "m", "name": "Simon Wang"},
+        {"gender": "m", "name": "Marvin Seidel"},
+        {"gender": "m", "name": "Peter Käsbauer"},
+        {"gender": "m", "name": "Johannes Schöttler"},
+        {"gender": "m", "name": "Kristof Hopp"},
+        {"gender": "f", "name": "Olga Konon"},
+        {"gender": "f", "name": "Samantha Barning"},
+        {"gender": "f", "name": "Gayle Mahulette"},
+        {"gender": "f", "name": "Isabel Herttrich"}
+      ]
+    ],
     "league_key": "1BL"
   }
 }

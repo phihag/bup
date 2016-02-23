@@ -42,11 +42,11 @@ var i18n_en = {
 
 'editevent:link': 'Edit event',
 'editevent:back': 'Back',
-'editevent:add manual m': 'Other player ..',
-'editevent:add manual f': 'Other player ..',
+'editevent:add manual m': 'Other player (m) ..',
+'editevent:add manual f': 'Other player (f) ..',
 'editevent:enter player name': 'player name:',
 'editevent:backup players': 'backup players',
-'editevent:add backup player': '- Add backup player -',
+'editevent:add backup player': 'Add backup player ...',
 
 'button:undo': 'Undo',
 'button:settings': 'Configuration',
