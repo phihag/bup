@@ -1,9 +1,3 @@
-add all_players
-	vdemo
-	edemo
-	add all actual players to that
-stats: + most consecutive points
-
 mail Manuel (Refrath, Courtspot, various updates)
 mail Werner (Refrath, Courtspot, various updates)
 mail Markus (editevent updated, liveaw in progress)
@@ -321,6 +315,7 @@ export: include timestamp/date of export
 import: restrict file types
 import: gracefully handle invalid input files, put out a warning
 rename teamtext_internal to teamtext
+stats: + most consecutive points, + game points, + match points
 helper function for document.querySelector which asserts result is true (and omits silent error otherwise)
 	use that in various util functions as well
 allow challenges
