@@ -1,5 +1,3 @@
-i18n utils.human_date_str
-
 editevent: configure backup players
 editevent: on adding player add it as an option everywhere else
 

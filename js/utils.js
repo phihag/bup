@@ -79,10 +79,9 @@ function datetime_str(ts) {
 	return date_str(ts) + ' ' + time_str(ts);
 }
 
-function human_date_str(ts) {
+function human_date_str(s, ts) {
 	var d = new Date(ts);
-	var WEEKDAYS = ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'];
-	return WEEKDAYS[d.getDay()] + ' ' + utils.date_str(d);
+	return s._('weekday:' + d.getDay()) + ' ' + utils.date_str(d);
 }
 
 function add_zeroes(n) {

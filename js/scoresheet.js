@@ -566,7 +566,7 @@ function sheet_render(s, svg, referee_view) {
 
 
 	_text('.scoresheet_match_name', s.setup.match_name);
-	_text('.scoresheet_date_value', s.metadata.start ? utils.human_date_str(s.metadata.start) : '');
+	_text('.scoresheet_date_value', s.metadata.start ? utils.human_date_str(s, s.metadata.start) : '');
 
 	_text('.scoresheet_court_id', (referee_view ? '' : s.settings.court_id));
 	_text('.scoresheet_umpire_name', s.metadata.umpire_name ? s.metadata.umpire_name : (referee_view ? '' : s.settings.umpire_name));

@@ -322,6 +322,14 @@ var i18n_en = {
 
 'importexport:invalid JSON': 'Invalid JSON: {msg}',
 'importexport:not an export file': 'This file is not a bup-export file!',
+
+'weekday:0': 'Sun',
+'weekday:1': 'Mon',
+'weekday:2': 'Tue',
+'weekday:3': 'Wed',
+'weekday:4': 'Thu',
+'weekday:5': 'Fri',
+'weekday:6': 'Sat',
 };
 
 /*@DEV*/
