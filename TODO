@@ -1,16 +1,21 @@
+vdemo: invent a match with lots of cards and stuff
+vdemo: normalize times
+
 editevent: configure backup players
 editevent: on adding player add it as an option everywhere else
+editevent: make sure we don't lose players who get deselected
+change all_players to simple array
 
-vdemo
-	import real matches
-	invent a match with lots of cards and stuff
-	normalize times
-	(...+edemo) add all_players
+add all_players
+	vdemo
+	edemo
+	add all actual players to that
+stats: + most consecutive points
 
-edemo/vdemo: improve court handling (download from import, none by default)
-
-mail Manuel
-mail Werner
+mail Manuel (Refrath, Courtspot, various updates)
+mail Werner (Refrath, Courtspot, various updates)
+mail Markus (editevent updated, liveaw in progress)
+mail Ulf (bug fixes, stats)
 
 MVP liveaw
 	-> import event (with all players)
@@ -18,16 +23,17 @@ MVP liveaw
 	launch bup
 	sync with bup
 	show current state (who's on which court, like btde)
-	colors for team 
+	set all_players correctly
+	import players if already there
 	-> in Refrath?
 
-stats: + most consecutive points
 Opera Mini bug
 support RLS (Excel file)
 mail Ulf
-editevent: show an error if not editable
+
 eventsheet svg for only home/only away (incl. PDF generations for each)
 test eventsheet on various mobiles
+edemo/vdemo: improve court handling (download from import, none by default)
 
 reason of injury
 reason of retired
@@ -68,7 +74,12 @@ mail Werner
 answer Wolf
 post bc
 
-BTP support -> Moritz
+improve liveaw
+	player ids
+	Rangliste
+	colors for team
+
+BTP support -> Moritz (DMO35)
 order: reload button
 order: store match order in bup / CourtSpot
 order: do not show link if no matches present (not yet connected etc.)
@@ -78,7 +89,6 @@ referee mode where we see both courts
 	... and a list of the last 10 presses each
 	first with CourtSpot, later with P2P
 test going from netstats to order to multi-sheets to game etc. (all via hash, shared functionality for showing/hiding)
-write network demo (staticnet)!
 liveaw event demo
 position manual notes after circle if space is sufficient
 enable compression for presses_json
