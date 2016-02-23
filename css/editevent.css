@@ -1,6 +1,24 @@
-.editevent_table {
-	font-size: 140%;
+.editevent_layout {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	min-height: 100%;
+	font-size: 24px;
+	text-align: center;
+	background: rgba(0, 0, 0, 0.9);
+	z-index: 2000;
 }
+
+.editevent_container {
+	display: inline-block;
+	background: #fff;
+	color: #000;
+	padding: 0 0.5em 0.5em 0.5em;
+	border-bottom-left-radius: 0.4em;
+	border-bottom-right-radius: 0.4em;
+}
+
 
 .editevent_table>tbody>tr>th {
 	text-align: left;
@@ -10,6 +28,7 @@
 	display: block;
 	min-width: 12em;
 	margin: 0.8em;
+	font-size: 20px;
 }
 .editevent_table>tbody select + select {
 	margin-top: 0.2em;

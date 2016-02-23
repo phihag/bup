@@ -104,7 +104,7 @@ function show() {
 	uiu.esc_stack_push(hide);
 	control.set_current(state);
 
-	utils.visible_qs('.editevent_container', true);
+	utils.visible_qs('.editevent_layout', true);
 	if (state.event && state.event.matches) {
 		utils.visible_qs('.editevent_loading-icon', false);
 		render_table(state);
@@ -131,7 +131,7 @@ function hide() {
 
 	uiu.esc_stack_pop();
 	state.ui.editevent_visible = false;
-	utils.visible_qs('.editevent_container', false);
+	utils.visible_qs('.editevent_layout', false);
 	control.set_current(state);
 	settings.show();
 }
@@ -144,6 +144,13 @@ function ui_init() {
 	utils.on_click_qs('.editevent_back', function(e) {
 		e.preventDefault();
 		hide();
+	});
+
+	var layout = utils.qs('.editevent_layout');
+	utils.on_click(layout, function(e) {
+		if (e.target === layout) {
+			hide();
+		}
 	});
 }
 

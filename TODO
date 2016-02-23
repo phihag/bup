@@ -1,6 +1,5 @@
-show match history: with/without undo
+i18n utils.human_date_str
 
-design editevent
 editevent: configure backup players
 editevent: on adding player add it as an option everywhere else
 editevent: test on mobile
@@ -12,10 +11,8 @@ vdemo
 	(...+edemo) add all_players
 
 edemo/vdemo: improve court handling (download from import, none by default)
-i18n utils.human_date_str
 hide clock at love-all
 
-mail Ulf
 mail Manuel
 mail Werner
 
@@ -31,6 +28,7 @@ MVP liveaw
 stats: + most consecutive points
 Opera Mini bug
 support RLS (Excel file)
+mail Ulf
 editevent: show an error if not editable
 eventsheet svg for only home/only away (incl. PDF generations for each)
 test eventsheet on various mobiles
