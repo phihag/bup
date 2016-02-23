@@ -168,6 +168,7 @@ function render_bundesliga(ev, es_key, ui8r, extra_data) {
 		match_order = ['1.HD', 'DD', '2.HD', '1.HE', 'DE', 'GD', '2.HE', '3.HE'];
 	}
 
+	eventutils.set_metadata(ev);
 	var matches = order_matches(ev, match_order);
 	var last_update = calc_last_update(matches);
 

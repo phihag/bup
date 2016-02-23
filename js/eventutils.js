@@ -53,9 +53,24 @@ function calc_all_players(event) {
 	return res;
 }
 
+function set_metadata(event) {
+	event.matches.forEach(function(match) {
+		if (! match.presses_json) {
+			return;
+		}
+		var scopy = calc.copy_state(state);
+		scopy.presses = JSON.parse(match.presses_json);
+		calc.undo(scopy);
+		if (scopy.flattened_presses.length > 0) {
+			match.network_match_start = scopy.flattened_presses[0].timestamp;
+		}
+	});
+}
+
 return {
 	guess_gender: guess_gender,
 	calc_all_players: calc_all_players,
+	set_metadata: set_metadata,
 };
 
 })();
