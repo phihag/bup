@@ -26,9 +26,9 @@
 
 .editevent_table>tbody select {
 	display: block;
-	min-width: 12em;
+	min-width: 11em;
 	margin: 0.8em;
-	font-size: 20px;
+	font-size: 85%;
 }
 .editevent_table>tbody select + select {
 	margin-top: 0.2em;
@@ -36,4 +36,10 @@
 
 .editevent_option_nn, .editevent_option_manual {
 	color: #666;
+}
+
+@media screen and (max-width:500px) {
+	.editevent_layout {
+		font-size: 4vmin;
+	}
 }
