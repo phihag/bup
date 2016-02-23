@@ -140,7 +140,7 @@ function ui_init(s) {
 		var box = $('.settings [name="' + name + '"]');
 		box.on('change', function() {
 			s.settings[name] = box.prop('checked');
-			if ((name === 'show_pronounciation') && (s.initialized)) {
+			if ((name === 'show_pronounciation') || (name === 'negative_timers')) {
 				render.ui_render(s);
 			}
 			if (name === 'shuttle_counter') {

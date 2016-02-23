@@ -962,7 +962,7 @@ function show() {
 
 	uiu.esc_stack_push(hide);
 
-	utils.visible_qs('.scoresheet_note_dialog', false);
+	utils.visible_qs('.scoresheet_note_dialog', true);
 	utils.qs('#scoresheet_note_input').focus();
 	ui_show();
 }
