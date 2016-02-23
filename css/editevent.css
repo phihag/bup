@@ -24,14 +24,26 @@
 	text-align: left;
 }
 
+.editevent_table>tbody>tr>td {
+	text-align: left;
+	padding: 0.8em;
+}
+
 .editevent_table>tbody select {
 	display: block;
 	min-width: 11em;
-	margin: 0.8em;
+	margin: 0;
 	font-size: 85%;
 }
 .editevent_table>tbody select + select {
 	margin-top: 0.2em;
+}
+
+div.editevent_backup_player {
+	margin-bottom: 0.6em;
+}
+td.editevent_backup_players {
+	vertical-align: top;
 }
 
 .editevent_option_nn, .editevent_option_manual {

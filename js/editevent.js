@@ -6,14 +6,14 @@ function on_select_change(e) {
 	var value = select.value;
 	if (value === '__add_manual') {
 		var player_name = prompt(state._('editevent:enter player name'));
-		if (!player_name) {
-			select.value = 'N.N.';
-			return;
+		if (player_name) {
+			utils.create_el(select, 'option', {
+				value: player_name,
+				selected: 'selected',
+			}, player_name);
+		} else {
+			player_name = 'N.N.';
 		}
-		utils.create_el(select, 'option', {
-			value: player_name,
-			selected: 'selected',
-		}, player_name);
 		select.value = player_name;
 	}
 	var match_id = parseInt(select.getAttribute('data-match_id'), 10);
@@ -27,7 +27,28 @@ function on_select_change(e) {
 	network.on_edit_event(state);
 }
 
+function on_bp_delbtn_click(e) {
+	var team_id = parseInt(e.target.getAttribute('data-team_id'), 10);
+	var bp_id = parseInt(e.target.getAttribute('data-bp_id'), 10);
+	state.event.backup_players[team_id].splice(bp_id, 1);
+	network.on_edit_event(state);
+	render_table(state);
+}
+
+function on_add_change(e) {
+	var team_id = parseInt(e.target.getAttribute('data-team_id'), 10);
+	var val = e.target.value;
+	if (!val) {
+		return;
+	}
+	state.event.backup_players[team_id].push(JSON.parse(val));
+	network.on_edit_event(state);
+	render_table(state);
+}
+
 function render_table(s) {
+	var team_id; // No let
+
 	var table = utils.qs('.editevent_table');
 	utils.empty(table);
 	var thead = utils.create_el(table, 'thead');
@@ -44,7 +65,7 @@ function render_table(s) {
 		var tr = utils.create_el(tbody, 'tr');
 		utils.create_el(tr, 'th', {}, match_setup.match_name);
 		var player_count = (match_setup.is_doubles ? 2 : 1);
-		for (var team_id = 0;team_id < 2;team_id++) {
+		for (team_id = 0;team_id < 2;team_id++) {
 			var td = utils.create_el(tr, 'td');
 			for (var player_id = 0;player_id < player_count;player_id++) {
 				var player = match_setup.teams[team_id].players[player_id];
@@ -62,9 +83,12 @@ function render_table(s) {
 				});
 				select.addEventListener('change', on_select_change);
 				var gender = eventutils.guess_gender(match_setup, player_id);
-				var av_players = all_players[team_id][gender];
+				var av_players = all_players[team_id];
 				for (var i = 0;i < av_players.length;i++) {
 					var avp = av_players[i];
+					if (avp.gender && (avp.gender !== gender)) {
+						continue;
+					}
 					var attrs = {
 						value: avp.name,
 					};
@@ -89,6 +113,51 @@ function render_table(s) {
 				utils.create_el(select, 'option', nn_attrs, 'N.N.');
 			}
 		}
+	}
+
+	var all_backup_players = s.event.backup_players;
+	if (!all_backup_players) {
+		all_backup_players = [[], []];
+	}
+	var backup_tr = utils.create_el(tbody, 'tr');
+	utils.create_el(backup_tr, 'th', {}, s._('editevent:backup players'));
+	for (team_id = 0;team_id < 2;team_id++) {
+		var td = utils.create_el(backup_tr, 'td', {
+			'class': 'editevent_backup_players',
+		});
+		var bps = all_backup_players[team_id];
+		for (var bp_id = 0;bp_id < bps.length;bp_id++) {
+			var bp = bps[bp_id];
+			var div = utils.create_el(td, 'div', {
+				'class': 'editevent_backup_player',
+			}, bp.name);
+			var del_btn = utils.create_el(div, 'button', {
+				'class': 'button_delete image-button textsize-button',
+				'data-bp_id': bp_id,
+				'data-team_id': team_id,
+			});
+			utils.create_el(del_btn, 'span', {
+				'data-bp_id': bp_id,
+				'data-team_id': team_id,
+			});
+			utils.on_click(del_btn, on_bp_delbtn_click);
+		}
+
+		var add_select = utils.create_el(td, 'select', {
+			'data-team_id': team_id,
+		});
+		utils.create_el(add_select, 'option', {
+			'disabled': 'disabled',
+			'value': '',
+			'selected': 'selected',
+		}, s._('editevent:add backup player'));
+		for (var pid = 0;pid < all_players[team_id].length;pid++) {
+			var bp = all_players[team_id][pid];
+			utils.create_el(add_select, 'option', {
+				value: JSON.stringify(bp),
+			}, bp.name);
+		}
+		add_select.addEventListener('change', on_add_change);
 	}
 }
 

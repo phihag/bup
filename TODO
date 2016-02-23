@@ -1,10 +1,3 @@
-vdemo: invent a match to continue
-vdemo: normalize times
-
-editevent: configure backup players
-editevent: on adding player add it as an option everywhere else
-editevent: make sure we don't lose players who get deselected
-
 add all_players
 	vdemo
 	edemo
@@ -33,6 +26,8 @@ mail Ulf
 eventsheet svg for only home/only away (incl. PDF generations for each)
 test eventsheet on various mobiles
 edemo/vdemo: improve court handling (download from import, none by default)
+editevent: on adding player add it as an option everywhere else
+editevent: make sure we don't lose players who get deselected
 
 reason of injury
 reason of retired

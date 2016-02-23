@@ -14,10 +14,6 @@ function guess_gender(match_setup, player_id) {
 }
 
 function calc_all_players(event) {
-	if (event.all_players) {
-		return event.all_players;
-	}
-
 	function _add_player(ar, p) {
 		for (var i = 0;i < ar.length;i++) {
 			if (ar[i].name === p.name) {
@@ -27,7 +23,7 @@ function calc_all_players(event) {
 		ar.push(p);
 	}
 
-	var res = [{'m': [], 'f': []}, {'m': [], 'f': []}];
+	var res = event.all_players ? utils.deep_copy(event.all_players) : [[], []];
 	var all_matches = event.matches;
 	for (var team_id = 0;team_id <= 1;team_id++) {
 		for (var match_id = 0;match_id < all_matches.length;match_id++) {
@@ -35,9 +31,13 @@ function calc_all_players(event) {
 			var player_count = match.setup.is_doubles ? 2 : 1;
 			for (var player_id = 0;player_id < player_count;player_id++) {
 				var player = match.setup.teams[team_id].players[player_id];
-				var gender = player.gender || guess_gender(match.setup, player_id);
-				var ar = res[team_id][gender];
-				_add_player(ar, player);
+				if (player.name === 'N.N.') {
+					continue;
+				}
+				if (!player.gender) {
+					player.gender = guess_gender(match.setup, player_id);
+				}
+				_add_player(res[team_id], player);
 			}
 		}
 
@@ -45,7 +45,7 @@ function calc_all_players(event) {
 			var bps = event.backup_players[team_id];
 			for (var bp_id = 0;bp_id < bps.length;bp_id++) {
 				var bp = bps[bp_id];
-				_add_player(res[team_id][bp.gender], bp);
+				_add_player(res[team_id], bp);
 			}
 		}
 	}
