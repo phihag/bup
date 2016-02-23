@@ -61,8 +61,10 @@ function set_metadata(event) {
 		var scopy = calc.copy_state(state);
 		scopy.presses = JSON.parse(match.presses_json);
 		calc.undo(scopy);
-		if (scopy.flattened_presses.length > 0) {
-			match.network_match_start = scopy.flattened_presses[0].timestamp;
+		var fpresses = scopy.flattened_presses;
+		if (fpresses.length > 0) {
+			match.network_match_start = fpresses[0].timestamp;
+			match.network_last_update = fpresses[fpresses.length - 1].timestamp;
 		}
 	});
 }
