@@ -79,6 +79,9 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var calc = require('./calc');
+	var utils = require('./utils');
+
 	module.exports = eventutils;
 }
 /*/@DEV*/

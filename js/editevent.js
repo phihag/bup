@@ -62,7 +62,9 @@ function on_add_change(e) {
 }
 
 function render_table(s) {
-	var team_id; // No let
+	// No let
+	var team_id;
+	var td;
 
 	var table = utils.qs('.editevent_table');
 	utils.empty(table);
@@ -81,7 +83,7 @@ function render_table(s) {
 		utils.create_el(tr, 'th', {}, match_setup.match_name);
 		var player_count = (match_setup.is_doubles ? 2 : 1);
 		for (team_id = 0;team_id < 2;team_id++) {
-			var td = utils.create_el(tr, 'td');
+			td = utils.create_el(tr, 'td');
 			for (var player_id = 0;player_id < player_count;player_id++) {
 				var player = match_setup.teams[team_id].players[player_id];
 				if (!player) {
@@ -139,7 +141,7 @@ function render_table(s) {
 		'class': 'editevent_backup_players',
 	}, s._('editevent:backup players'));
 	for (team_id = 0;team_id < 2;team_id++) {
-		var td = utils.create_el(backup_tr, 'td', {
+		td = utils.create_el(backup_tr, 'td', {
 			'class': 'editevent_backup_players',
 		});
 		var bps = all_backup_players[team_id];
@@ -169,10 +171,10 @@ function render_table(s) {
 			'selected': 'selected',
 		}, s._('editevent:add backup player'));
 		for (var pid = 0;pid < all_players[team_id].length;pid++) {
-			var bp = all_players[team_id][pid];
+			var bpo = all_players[team_id][pid];
 			utils.create_el(add_select, 'option', {
-				value: JSON.stringify(bp),
-			}, bp.name);
+				value: JSON.stringify(bpo),
+			}, bpo.name);
 		}
 		utils.create_el(add_select, 'option', {
 			'data-i18n': 'editevent:add manual m',
