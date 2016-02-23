@@ -197,7 +197,7 @@ var i18n_en = {
 'mark:red-card': 'F',
 'mark:injury': 'I',
 'mark:retired': 'Retired',
-'mark:disqualified': 'Disqualifiziert',
+'mark:disqualified': 'Disqualified',
 
 'scoresheet:Match': 'Match:',
 'scoresheet:Date': 'Date:',
