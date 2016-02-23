@@ -3184,6 +3184,41 @@ _describe('calc_state', function() {
 		assert.strictEqual(s.metadata.start, 3);
 		assert.strictEqual(s.metadata.end, 501);
 	});
+
+	_it('hide clock at 0-0', function() {
+		// A timer at 0-0 is confusing, so hide it once that button is pressed.
+		var presses = [];
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.timer, false);
+
+		presses.push({
+			type: 'pick_side',
+			team1_left: true,
+			timestamp: 100000,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.timer, {
+			start: 100000,
+			duration: 120000,
+		});
+
+		presses.push({
+			type: 'pick_server',
+			team1_id: 0,
+			timestamp: 102987,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.timer, {
+			start: 100000,
+			duration: 120000,
+		});
+
+		presses.push({
+			type: 'love-all',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.timer, false);
+	});
 });
 
 _describe('calc helper functions', function() {

@@ -8,7 +8,6 @@ vdemo
 	(...+edemo) add all_players
 
 edemo/vdemo: improve court handling (download from import, none by default)
-hide clock at love-all
 
 mail Manuel
 mail Werner

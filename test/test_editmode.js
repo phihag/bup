@@ -1033,13 +1033,12 @@ _describe('editmode', function() {
 			type: 'love-all',
 		});
 		var s = state_after(presses, DOUBLES_SETUP);
-		assert(s.timer);
+		assert.strictEqual(s.timer, false);
 
 		presses.push({
 			type: 'editmode_change-serve',
 		});
 		s = state_after(presses, DOUBLES_SETUP);
-		assert(s.timer);
 	});
 
 	_it('ending and un-ending a match with a score edit', function() {

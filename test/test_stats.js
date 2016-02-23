@@ -587,7 +587,7 @@ _describe('stats graphs', function() {
 			type: 'pick_side',
 			team1_left: true,
 			desc: 'Seitenwahl',
-			sdesc: 'Andrew / Alice links, Bob / Birgit rechts',
+			sdesc: 'Andrew / Alice links,\nBob / Birgit rechts',
 		}, {
 			type: 'undo',
 			desc: 'Rückgängig',
@@ -604,7 +604,7 @@ _describe('stats graphs', function() {
 			type: 'pick_side',
 			team1_left: false,
 			desc: 'Seitenwahl',
-			sdesc: 'Bob / Birgit links, Andrew / Alice rechts',
+			sdesc: 'Bob / Birgit links,\nAndrew / Alice rechts',
 		}, {
 			type: 'pick_server',
 			team_id: 0,
@@ -643,7 +643,7 @@ _describe('stats graphs', function() {
 			type: 'correction',
 			team_id: 0,
 			desc: 'Vertauschung Aufschlagfeld',
-			sdesc: 'Korrekt: Alice links, Andrew rechts',
+			sdesc: 'Korrekt: Alice links,\nAndrew rechts',
 		}, {
 			type: 'suspension',
 			desc: 'Unterbrechung',
@@ -679,11 +679,11 @@ _describe('stats graphs', function() {
 		}, {
 			type: 'editmode_change-ends',
 			desc: 'Manuelle Korrektur: Seitenwechsel',
-			sdesc: 'Andrew / Alice links, Bob / Birgit rechts',
+			sdesc: 'Andrew / Alice links,\nBob / Birgit rechts',
 		}, {
 			type: 'editmode_change-ends',
 			desc: 'Manuelle Korrektur: Seitenwechsel',
-			sdesc: 'Bob / Birgit links, Andrew / Alice rechts',
+			sdesc: 'Bob / Birgit links,\nAndrew / Alice rechts',
 		}, {
 			type: 'editmode_change-serve',
 			desc: 'Manuelle Korrektur: Aufschlagsrecht',
@@ -696,22 +696,22 @@ _describe('stats graphs', function() {
 			type: 'editmode_switch-sides',
 			side: 'right',
 			desc: 'Manuelle Korrektur: Position',
-			sdesc: 'Andrew links, Alice rechts',
+			sdesc: 'Andrew links,\nAlice rechts',
 		}, {
 			type: 'editmode_switch-sides',
 			side: 'right',
 			desc: 'Manuelle Korrektur: Position',
-			sdesc: 'Alice links, Andrew rechts',
+			sdesc: 'Alice links,\nAndrew rechts',
 		}, {
 			type: 'editmode_switch-sides',
 			side: 'right',
 			desc: 'Manuelle Korrektur: Position',
-			sdesc: 'Andrew links, Alice rechts',
+			sdesc: 'Andrew links,\nAlice rechts',
 		}, {
 			type: 'editmode_switch-sides',
 			side: 'left',
 			desc: 'Manuelle Korrektur: Position',
-			sdesc: 'Birgit links, Bob rechts',
+			sdesc: 'Birgit links,\nBob rechts',
 		}, {
 			type: 'editmode_change-serve',
 			desc: 'Manuelle Korrektur: Aufschlagsrecht',
@@ -723,7 +723,7 @@ _describe('stats graphs', function() {
 		}, {
 			type: 'editmode_change-ends',
 			desc: 'Manuelle Korrektur: Seitenwechsel',
-			sdesc: 'Andrew / Alice links, Bob / Birgit rechts',
+			sdesc: 'Andrew / Alice links,\nBob / Birgit rechts',
 		}, {
 			type: 'editmode_set-finished_games',
 			scores: [[21, 15]],
@@ -732,7 +732,7 @@ _describe('stats graphs', function() {
 		}, {
 			type: 'editmode_change-ends',
 			desc: 'Manuelle Korrektur: Seitenwechsel',
-			sdesc: 'Bob / Birgit links, Andrew / Alice rechts',
+			sdesc: 'Bob / Birgit links,\nAndrew / Alice rechts',
 		}, {
 			type: 'editmode_set-finished_games',
 			scores: [[21, 16]],

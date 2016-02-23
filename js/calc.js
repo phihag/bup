@@ -344,6 +344,7 @@ function calc_press(s, press) {
 		s.game.started = true;
 		s.match.marks = [];
 		s.match.just_unsuspended = false;
+		s.timer = false;
 		if (! s.metadata.start) {
 			s.metadata.start = press.timestamp;
 		}
