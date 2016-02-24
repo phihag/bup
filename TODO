@@ -1,8 +1,3 @@
-mail Manuel (Refrath, Courtspot, various updates)
-mail Werner (Refrath, Courtspot, various updates)
-mail Markus (editevent updated, liveaw in progress)
-mail Ulf (bug fixes, stats)
-
 MVP liveaw
 	-> import event (with all players)
 	allow input
@@ -13,13 +8,14 @@ MVP liveaw
 	import players if already there
 	-> in Refrath?
 
+mail Markus
+mail Daniel / Peter
+
 Opera Mini bug
 support RLS (Excel file)
-mail Ulf
 
 eventsheet svg for only home/only away (incl. PDF generations for each)
 test eventsheet on various mobiles
-edemo/vdemo: improve court handling (download from import, none by default)
 editevent: on adding player add it as an option everywhere else
 editevent: make sure we don't lose players who get deselected
 
@@ -36,6 +32,7 @@ order should actually change order on state.event with staticnet
 	change in CourtSpot too
 
 
+CourtSpot: support all_players
 add tests for note positioning
 optimize clicking on links (just show/display once)
 	avoid load_by_hash when just clicking
@@ -59,7 +56,6 @@ mail Michael Pütz
 mail btde
 mail Manuel
 mail Werner
-answer Wolf
 post bc
 
 improve liveaw
