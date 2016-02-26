@@ -1,23 +1,37 @@
+editevent with not all players
+
+liveaw: send all_players
+liveaw: editable (changes should take effect)
+
+liveaw: write match results
+liveaw: check various event metadata
+show match results in liveaw
+liveaw hall display (incl. court)
+liveaw import tournament_name (1. Bundesliga)
+liveaw set tournament_name
+
 MVP liveaw
-	-> import event (with all players)
-	allow input
-	launch bup
-	sync with bup
 	show current state (who's on which court, like btde)
 	set all_players correctly
-	import players if already there
+	make (really) editable
+	allow hiding from public
+	configure leauge (Spielberichtszettel etc.)
 	-> in Refrath?
 
+scoresheet: Fit "TSV Neuhausen-Nymphenburg 1"
 mail Markus
 mail Daniel / Peter
 
+do not line-break player / team names in announcements
+multi scoresheet: shift+S shows outdated state when editing match
+highlight current match button
+move login rendering into a helper function into network
 Opera Mini bug
+show court number
 support RLS (Excel file)
 
 eventsheet svg for only home/only away (incl. PDF generations for each)
 test eventsheet on various mobiles
-editevent: on adding player add it as an option everywhere else
-editevent: make sure we don't lose players who get deselected
 
 reason of injury
 reason of retired
@@ -25,7 +39,6 @@ reason of retired
 reason of yellow card/red card/disqualification
 	delay,throwing racket,verbal abuse,
 
-multi scoresheet: shift+S shows outdated state when editing match
 order should actually change order on state.event with staticnet
 	how to store current order then?
 	test happens if order changed on one device, and dialog open on other
@@ -77,7 +90,6 @@ liveaw event demo
 position manual notes after circle if space is sufficient
 enable compression for presses_json
 clicking on current match when match is in progress shouldn't do anything
-highlight current match button
 safari: icon for front page
 safari: set a better bookmark name
 unify cache
@@ -311,7 +323,10 @@ export: include timestamp/date of export
 import: restrict file types
 import: gracefully handle invalid input files, put out a warning
 rename teamtext_internal to teamtext
-stats: + most consecutive points, + game points, + match points
+stats: + most consecutive points
+stats: + game points
+stats: + match points
+anroid chrome address bar background color
 helper function for document.querySelector which asserts result is true (and omits silent error otherwise)
 	use that in various util functions as well
 allow challenges

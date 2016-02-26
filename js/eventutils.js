@@ -28,9 +28,9 @@ function calc_all_players(event) {
 	for (var team_id = 0;team_id <= 1;team_id++) {
 		for (var match_id = 0;match_id < all_matches.length;match_id++) {
 			var match = all_matches[match_id];
-			var player_count = match.setup.is_doubles ? 2 : 1;
-			for (var player_id = 0;player_id < player_count;player_id++) {
-				var player = match.setup.teams[team_id].players[player_id];
+			var team_players = match.setup.teams[team_id].players;
+			for (var player_id = 0;player_id < team_players.length;player_id++) {
+				var player = team_players[player_id];
 				if (player.name === 'N.N.') {
 					continue;
 				}
