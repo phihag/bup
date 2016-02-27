@@ -808,15 +808,17 @@ function show_dialog(es_key) {
 	utils.visible_qs('.eventsheet_container', true);
 
 	var download_link = utils.qs('.eventsheet_download_link');
+	var download_link_container = utils.qs('.eventsheet_download_link_container');
 	var preview = utils.qs('.eventsheet_preview');
 	switch (es_key) {
 	case '1BL':
-	case '2BL':
+	case '2BLN':
+	case '2BLN':
 	case 'RLW':
 	case 'RLN':
 		utils.visible_qs('.eventsheet_report', true);
 		utils.visible(preview, false);
-		utils.visible(download_link, false);
+		utils.visible(download_link_container, false);
 		break;
 	case 'team-1BL':
 	case 'team-2BL':
@@ -824,7 +826,7 @@ function show_dialog(es_key) {
 		utils.visible(preview, true);
 		preview_team_bl(state, es_key);
 		download_link.setAttribute('href', URLS[es_key]);
-		utils.visible(download_link, true);
+		utils.visible(download_link_container, true);
 		break;
 	}
 

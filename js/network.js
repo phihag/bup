@@ -4,7 +4,7 @@ var network = (function() {
 var networks = {};
 
 function get_real_netw() {
-	return networks.vdemo || networks.edemo || networks.btde || networks.courtspot || networks.lawr;
+	return networks.vdemo || networks.edemo || networks.btde || networks.courtspot || networks.liveaw;
 }
 
 function get_netw() {
@@ -544,8 +544,8 @@ function ui_init(s, hash_query) {
 		networks.courtspot = courtspot();
 	} else if (hash_query.btde !== undefined) {
 		networks.btde = btde();
-	} else if (hash_query.lawr_event_id) {
-		networks.lawr = lawr(hash_query.lawr_event_id);
+	} else if (hash_query.liveaw_event_id) {
+		networks.liveaw = liveaw(hash_query.liveaw_event_id);
 	} else if (hash_query.edemo !== undefined) {
 		networks.edemo = staticnet(null, 'div/edemo_' + s.lang + '.json');
 	} else if (hash_query.vdemo !== undefined) {
@@ -640,7 +640,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
 	var courtspot = require('./courtspot');
 	var eventsheet = require('./eventsheet');
-	var lawr = require('./lawr');
+	var liveaw = require('./liveaw');
 	var netstats = require('./netstats');
 	var p2p = require('./p2p');
 	var pronounciation = require('./pronounciation');

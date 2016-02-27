@@ -56,6 +56,9 @@ function on_add_change(e) {
 	} else {
 		player = JSON.parse(val);
 	}
+	if (! state.event.backup_players) {
+		state.event.backup_players = [[], []];
+	}
 	state.event.backup_players[team_id].push(player);
 	network.on_edit_event(state);
 	render_table(state);

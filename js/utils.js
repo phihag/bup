@@ -299,6 +299,22 @@ function svg_el(parent, tagName, attrs, text) {
 	return el;
 }
 
+function readCookie(name) {
+	// http://www.quirksmode.org/js/cookies.html
+	var nameEQ = name + "=";
+	var ca = document.cookie.split(';');
+	for (var i=0;i < ca.length;i++) {
+		var c = ca[i];
+		while (c.charAt(0) == ' ') {
+			c = c.substring(1, c.length);
+		}
+		if (c.indexOf(nameEQ) == 0) {
+			return c.substring(nameEQ.length, c.length);
+		}
+	}
+	return null;
+}
+
 return {
 	add_zeroes: add_zeroes,
 	any: any,
@@ -321,6 +337,7 @@ return {
 	on_click_qsa: on_click_qsa,
 	parse_query_string: parse_query_string,
 	qsEach: qsEach,
+	readCookie: readCookie,
 	repeat: repeat,
 	reverse_every: reverse_every,
 	svg_el: svg_el,
