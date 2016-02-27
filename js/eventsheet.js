@@ -813,7 +813,7 @@ function show_dialog(es_key) {
 	switch (es_key) {
 	case '1BL':
 	case '2BLN':
-	case '2BLN':
+	case '2BLS':
 	case 'RLW':
 	case 'RLN':
 		utils.visible_qs('.eventsheet_report', true);
