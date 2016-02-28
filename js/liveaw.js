@@ -1,37 +1,92 @@
-function liveaw(liveaw_event_id, baseurl) {
+function liveaw(event_id) {
 'use strict';
 
-/*
-function liveaw_contact(cb) {
+var ws;
+var handlers = {};
+var outstanding_requests = [];
+
+function connect() {
 	var wsurl = (location.protocol === 'https:' ? 'wss' : 'ws') + '://' + location.hostname + (location.port ? ':' + location.port: '')  + '/ws/bup';
-	var ws = new WebSocket(wsurl, 'liveaw-bup');
-	ws.onopen = function() {
-		cb(null, ws);
+	var new_ws = new WebSocket(wsurl, 'liveaw-bup');
+	new_ws.onopen = function() {
+		ws = new_ws;
+		for (var i = 0;i < outstanding_requests.length;i++) {
+			_send_request(outstanding_requests[i]);
+		}
 	};
-	ws.onmessage = function(ws_message) {
-		var msg = JSON.parse(ws_message.data);
-		if (! msg.request_id) {
-			// Not an answer, ignore for now
+	new_ws.onmessage = _handle_response;
+	new_ws.onclose = function() {
+		ws = null;
+		console.log('closing; we should now open up a new conn, maybe wait for timeout?');
+		connect();
+	};
+}
+
+var next_request_id = 1;
+function _request(msg, cb) {
+	msg.request_id = next_request_id;
+	next_request_id++;
+	handlers[msg.request_id] = cb;
+	outstanding_requests.push(msg);
+	if (ws) {
+		_send_request(msg, cb);
+	}
+}
+
+function _handle_response(ws_message) {
+	var msg = JSON.parse(ws_message.data);
+	if (! msg.request_id) {
+		report_problem.silent_error('liveaw: Response without request_id: ' + ws_message.data);
+		return;
+	}
+	var handler = handlers[msg.request_id];
+	if (!handler) {
+		report_problem.silent_error('liveaw: No handler for request ' + msg.request_id);
+		return;
+	}
+
+	for (var i = 0;i < outstanding_requests.length;i++) {
+		if (outstanding_requests[i].request_id === msg.request_id) {
+			outstanding_requests.splice(i, 1);
+			break;
+		}
+	}
+
+	handler(msg);
+	delete handlers[msg.request_id];
+}
+
+function _send_request(msg, cb) {
+	ws.send(JSON.stringify(msg));
+}
+
+function list_matches(s, cb) {
+	_request({
+		type: 'event_get',
+		event_id: event_id,
+	}, function(response) {
+		if (response.type === 'error') {
+			cb(new Error(response.msg));
 			return;
 		}
-		if (state.liveaw.handlers[msg.request_id]) {
-			if (! state.liveaw.handlers[msg.request_id](msg)) {
-				delete state.liveaw.handlers[msg.request_id];
-			}
-		} else {
-			control.show_error('No handler for request ' + msg.request_id);
+
+		cb(null, response.event);
+	});
+}
+
+function on_edit_event(s) {
+	_request({
+		type: 'event_set_players',
+		event_id: event_id,
+		backup_players: s.event.backup_players,
+	}, function(response) {
+		if (response.type === 'error') {
+			report.silent_error('liveaw event_set_players failed: ' + response.msg);
 		}
-	};
+	});
 }
 
-function _liveaw_request(msg, cb) {
-	msg.request_id = state.liveaw.next_request_id;
-	state.liveaw.next_request_id++;
-	state.liveaw.handlers[msg.request_id] = cb;
-	state.liveaw.ws.send(JSON.stringify(msg));
-}
 
-*/
 
 function ui_render_login(container) {
 	var login_form = $('<form class="settings_login">');
@@ -90,80 +145,14 @@ function ui_render_login(container) {
 	});
 }
 
-function _request(s, component, options, cb) {
-	var csrf_token = utils.readCookie('_csrf');
-	if (csrf_token) {
-		options.url += (
-			((options.url.indexOf('?') >= 0) ? '&' : '?') +
-			'_csrf=' + encodeURIComponent(csrf_token)
-		);
-	}
-	options.dataType = 'text';
-	options.timeout = s.settings.network_timeout;
-	network.request(component, options).done(function(res) {
-		if (/<div class="login">/.exec(res)) {
-			return cb({
-				type: 'login-required',
-				msg: 'Login erforderlich',
-			}, res);
-		}
-		return cb(null, res);
-	}).fail(function(xhr) {
-		var msg = ((xhr.status === 0) ?
-			'badmintonticker nicht erreichbar' :
-			('Netzwerk-Fehler (Code ' + xhr.status + ')')
-		);
-		return cb({
-			type: 'network-error',
-			status: xhr.status,
-			msg: msg,
-		});
-	});
-}
-
-var outstanding_requests = 0;
 function send_score(s) {
 	if (s.settings.court_id === 'referee') {
 		network.errstate('liveaw.score', null);
 		return;
 	}
 
-	var netscore = network.calc_score(s);
+	// TODO 
 
-	if (outstanding_requests > 0) {
-		// Another request is currently underway; ours may come to late
-		// Send our request anyways, but send it once again as soon as there are no more open requests
-		s.remote.liveaw_resend = true;
-	}
-	outstanding_requests++;
-	var match_id = s.metadata.id;
-
-	var post_data = {
-		presses: s.presses,
-	};
-
-	_request(s, 'liveaw.score', {
-		method: 'POST',
-		url: baseurl + 'TODO',
-		data: JSON.stringify(post_data),
-		contentType: 'application/json; charset=utf-8',
-	}, function(err) {
-		outstanding_requests--;
-		if (!s.metadata || (s.metadata.id !== match_id)) { // Match changed while the request was underway
-			return;
-		}
-
-		if (!err) {
-			s.remote.liveaw_score = netscore;
-			s.remote.liveaw_court = s.settings.court_id;
-		}
-		network.errstate('liveaw.score', err);
-
-		if (s.remote.liveaw_resend && outstanding_requests === 0) {
-			s.remote.liveaw_resend = false;
-			send_score(s);
-		}
-	});
 }
 
 function sync(s) {
@@ -182,25 +171,6 @@ function send_press(s) {
 	sync(s);
 }
 
-function list_matches(s, cb) {
-	_request(s, 'liveaw.list', {
-		url: baseurl + 'e/' + liveaw_event_id + '/json',
-	}, function(err, json) {
-		if (err) {
-			return cb(err);
-		}
-
-		var data;
-		try {
-			data = JSON.parse(json);
-		} catch (e) {
-			return cb({
-				msg: 'Aktualisierung fehlgeschlagen: Server-Fehler erkannt',
-			});
-		}
-		return cb(null, data.event);
-	});
-}
 
 function courts(s) {
 	return [{
@@ -216,13 +186,7 @@ function courts(s) {
 }
 
 function ui_init() {
-	if (!baseurl) {
-		baseurl = '../';
-	}
-	var m = window.location.pathname.match(/^(.*\/)bup\/(?:bup\.html|index\.html)?$/);
-	if (m) {
-		baseurl = m[1];
-	}
+	connect();
 }
 
 function service_name() {
@@ -232,22 +196,6 @@ function service_name() {
 /* Parameter: s */
 function editable() {
 	return true;
-}
-
-function on_edit_event(s) {
-	// TODO send something
-	var post_data = {
-		event: s.event,
-	};
-
-	_request(s, 'liveaw.editevent', {
-		method: 'POST',
-		url: baseurl + 'e/' + liveaw_event_id + '/editevent',
-		data: JSON.stringify(post_data),
-		contentType: 'application/json; charset=utf-8',
-	}, function(err) {
-		network.errstate('liveaw.editevent', err);
-	});
 }
 
 return {

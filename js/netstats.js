@@ -13,7 +13,8 @@ function get_stats(component)  {
 		res = {
 			'<25ms': 0,
 			'<100ms': 0,
-			'<500ms': 0, // Not including those <100ms
+			'<250ms': 0,
+			'<500ms': 0,
 			'<2s': 0,
 			'<8s': 0,
 			'>8s': 0,
@@ -42,6 +43,8 @@ function pre_request(component) {
 			stats['<25ms']++;
 		} else if (duration < 100) {
 			stats['<100ms']++;
+		} else if (duration < 250) {
+			stats['<250ms']++;
 		} else if (duration < 500) {
 			stats['<500ms']++;
 		} else if (duration < 2000) {
@@ -85,6 +88,7 @@ function render_table() {
 		keys: [
 			'<25ms',
 			'<100ms',
+			'<250ms',
 			'<500ms',
 			'<2s',
 			'<8s',

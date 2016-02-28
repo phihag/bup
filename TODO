@@ -1,19 +1,13 @@
-Link "leeres Formular" in eventsheet totally wrong
+prevent adding backup players twice
 
-netstats: add 250ms latency group
-N10 sensitivity!!! ontouch instead of onclick
-eventsheet: more space for input
-
-liveaw: requests
-liveaw: send all_players
-liveaw: editable (changes should take effect)
-
+liveaw: edit players
 liveaw: write match results
 liveaw: check various event metadata
 show match results in liveaw
 liveaw hall display (incl. court)
 liveaw import tournament_name (1. Bundesliga)
 liveaw set tournament_name
+liveaw: reconnect
 
 MVP liveaw
 	show current state (who's on which court, like btde)
@@ -21,18 +15,25 @@ MVP liveaw
 	make (really) editable
 	allow hiding from public
 	configure leauge (Spielberichtszettel etc.)
-	-> in Refrath?
+	implement errstate
+	implement timeout
+	implement netstats gathering as well (re-add component)
 
-scoresheet: Fit "TSV Neuhausen-Nymphenburg 1"
 mail Markus
 mail Daniel / Peter
+
+
+english: always start with to my right, even in team competitions
+eventsheet: more space for input, vary by field
+N10 sensitivity! ontouch instead of onclick
+scoresheet: Fit "TSV Neuhausen-Nymphenburg 1"
 
 do not line-break player / team names in announcements
 multi scoresheet: shift+S shows outdated state when editing match
 highlight current match button
 move login rendering into a helper function into network
 Opera Mini bug
-show court number
+liveaw: use JSON instead of websocket for speed?
 support RLS (Excel file)
 test editevent without all_players
 
@@ -333,6 +334,7 @@ rename teamtext_internal to teamtext
 stats: + most consecutive points
 stats: + game points
 stats: + match points
+remove all mentions of home/away
 anroid chrome address bar background color
 helper function for document.querySelector which asserts result is true (and omits silent error otherwise)
 	use that in various util functions as well
