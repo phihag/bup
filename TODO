@@ -1,13 +1,9 @@
-prevent adding backup players twice
-
 liveaw: edit players
 liveaw: write match results
 liveaw: check various event metadata
 show match results in liveaw
 liveaw hall display (incl. court)
-liveaw import tournament_name (1. Bundesliga)
-liveaw set tournament_name
-liveaw: reconnect
+liveaw: improve/test reconnecting
 
 MVP liveaw
 	show current state (who's on which court, like btde)

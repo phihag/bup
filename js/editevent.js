@@ -139,6 +139,13 @@ function render_table(s) {
 	if (!all_backup_players) {
 		all_backup_players = [[], []];
 	}
+	var backup_player_names = all_backup_players.map(function(bps) {
+		var names = {};
+		for (var i = 0;i < bps.length;i++) {
+			names[bps[i].name] = bps[i];
+		}
+		return names;
+	});
 	var backup_tr = utils.create_el(tbody, 'tr', {});
 	utils.create_el(backup_tr, 'th', {
 		'class': 'editevent_backup_players',
@@ -174,10 +181,13 @@ function render_table(s) {
 			'selected': 'selected',
 		}, s._('editevent:add backup player'));
 		for (var pid = 0;pid < all_players[team_id].length;pid++) {
-			var bpo = all_players[team_id][pid];
+			var p = all_players[team_id][pid];
+			if (backup_player_names[team_id][p.name]) {
+				continue;
+			}
 			utils.create_el(add_select, 'option', {
-				value: JSON.stringify(bpo),
-			}, bpo.name);
+				value: JSON.stringify(p),
+			}, p.name);
 		}
 		utils.create_el(add_select, 'option', {
 			'data-i18n': 'editevent:add manual m',
