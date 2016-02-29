@@ -21,9 +21,17 @@ function on_select_change(e) {
 	var player_id = parseInt(select.getAttribute('data-player_id'), 10);
 
 	// TODO instead, select player out of all players if present in there
-	state.event.matches[match_id].setup.teams[team_id].players[player_id] = {
+	var team_players = state.event.matches[match_id].setup.teams[team_id].players;
+	var player = {
 		name: select.value,
 	};
+	if ((team_players.length === 0) && (player_id === 1)) {
+		team_players.push({
+			name: 'N.N.',
+		});
+	}
+	team_players[player_id] = player;
+
 	network.on_edit_event(state);
 	render_table(state);
 }

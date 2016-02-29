@@ -1,14 +1,12 @@
-liveaw: edit players
-liveaw: write match results
+liveaw: write match state
 liveaw: check various event metadata
 show match results in liveaw
 liveaw hall display (incl. court)
 liveaw: improve/test reconnecting
+liveaw: proper reconnect backoff
 
 MVP liveaw
 	show current state (who's on which court, like btde)
-	set all_players correctly
-	make (really) editable
 	allow hiding from public
 	configure leauge (Spielberichtszettel etc.)
 	implement errstate

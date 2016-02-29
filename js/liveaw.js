@@ -17,7 +17,6 @@ function connect() {
 	new_ws.onmessage = _handle_response;
 	new_ws.onclose = function() {
 		ws = null;
-		console.log('closing; we should now open up a new conn, maybe wait for timeout?');
 		connect();
 	};
 }
@@ -29,7 +28,7 @@ function _request(msg, cb) {
 	handlers[msg.request_id] = cb;
 	outstanding_requests.push(msg);
 	if (ws) {
-		_send_request(msg, cb);
+		_send_request(msg);
 	}
 }
 
@@ -56,7 +55,7 @@ function _handle_response(ws_message) {
 	delete handlers[msg.request_id];
 }
 
-function _send_request(msg, cb) {
+function _send_request(msg) {
 	ws.send(JSON.stringify(msg));
 }
 
@@ -75,19 +74,25 @@ function list_matches(s, cb) {
 }
 
 function on_edit_event(s) {
+	var match_players = {};
+	s.event.matches.forEach(function(match) {
+		var setup = match.setup;
+		match_players[setup.liveaw_match_id] = [setup.teams[0].players, setup.teams[1].players];
+	});
 	_request({
 		type: 'event_set_players',
 		event_id: event_id,
+		match_players: match_players,
 		backup_players: s.event.backup_players,
 	}, function(response) {
 		if (response.type === 'error') {
-			report.silent_error('liveaw event_set_players failed: ' + response.msg);
+			report_problem.silent_error('liveaw event_set_players failed: ' + response.msg);
 		}
 	});
 }
 
 
-
+/*
 function ui_render_login(container) {
 	var login_form = $('<form class="settings_login">');
 	login_form.append($('<h2>Login liveawr</h2>'));
@@ -144,6 +149,7 @@ function ui_render_login(container) {
 		return false;
 	});
 }
+*/
 
 function send_score(s) {
 	if (s.settings.court_id === 'referee') {
@@ -200,7 +206,6 @@ function editable() {
 
 return {
 	ui_init: ui_init,
-	ui_render_login: ui_render_login,
 	send_press: send_press,
 	list_matches: list_matches,
 	on_edit_event: on_edit_event,
@@ -216,6 +221,7 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var utils = require('./utils');
 	var network = require('./network');
+	var report_problem = require('./report_problem');
 
 	module.exports = liveaw;
 }
