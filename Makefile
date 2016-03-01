@@ -2,12 +2,7 @@ default: help
 
 help:
 	@echo 'make targets:'
-	@echo '  deps          Download and install all dependencies (for compiling / testing / CLI operation)'
-	@echo '  dist          Create distribution files'
-	@echo '  test          Run tests'
-	@echo '  lint          Verify source code quality'
-	@echo '  upload        Upload to demo page'
-	@echo '  clean         Remove temporary files'
+	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  %-13s %s\n", $$1, $$2}'
 	@echo '  help          This message'
 
 
@@ -25,7 +20,7 @@ force-install-libs:
 	wget https://raw.githubusercontent.com/phihag/text-encoding-utf-8/master/lib/encoding.js -O libs/encoding.js
 	touch libs/.completed
 
-deps: install-libs
+deps: install-libs ## Download and install all dependencies (for compiling / testing / CLI operation)
 	(node --version && npm --version) >/dev/null 2>/dev/null || sudo apt-get install nodejs npm
 	npm install
 	$(MAKE) deps-optional
@@ -41,7 +36,7 @@ manifest: appcache-manifest
 appcache-manifest:
 	node div/make_manifest.js dist/bup/ div/bup.appcache.in dist/bup/bup.appcache
 
-dist: cleandist
+dist: cleandist ## Create distribution files
 	mkdir -p dist/bup
 
 	node div/make_dist.js . dist/bup/ dist/tmp
@@ -75,7 +70,7 @@ dist: cleandist
 	find dist -exec touch --date "$$(git log -1 --date=iso | sed -n -e 's/Date:\s*\([0-9 :-]*\)+.*/\1/p')" '{}' ';'
 	cd dist && zip bup.zip bup/ -rq
 
-upload: dist
+upload: dist ## Upload to demo page
 	cp div/dist_upload_config.json dist/.upload_config.json
 	cp div/dist_public dist/.public
 	$(MAKE) upload-run
@@ -83,16 +78,16 @@ upload: dist
 upload-run:
 	cd dist && upload
 
-test:
+test: ## Run tests
 	@npm test
 
-lint: jshint eslint
+lint: jshint eslint ## Verify source code quality
 
 jshint:
-	@jshint js/ div/*.js test/ div/*.js cachesw.js
+	@jshint js/ div/*.js test/ cachesw.js
 
 eslint:
-	@eslint js/ div/*.js test/ div/*.js cachesw.js
+	@eslint js/ div/*.js test/ cachesw.js
 
 coverage:
 	istanbul cover _mocha -- -R spec
@@ -102,7 +97,7 @@ coverage-display: coverage
 
 cd: coverage-display
 
-clean: cleandist
+clean: cleandist ## Remove temporary files
 	rm -rf -- libs
 	rm -rf -- node_modules
 
