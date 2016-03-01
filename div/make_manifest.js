@@ -70,6 +70,11 @@ function hash_string(s) {
 
 function main() {
 	var args = process.argv.slice(2);
+	if (args.length !== 3) {
+		console.log('Usage: make_manifest.js DISTDIR INFILE OUTFILE');
+		process.exit(1);
+		return;
+	}
 	var dist_dir = args[0];
 	var in_file = args[1];
 	var out_file = args[2];
@@ -78,6 +83,9 @@ function main() {
 		fs.readFile(in_file, {encoding: 'utf8'}, cb);
 	}, function(manifest_in, cb) {
 		determine_svg_files(dist_dir, function(err, svg_files) {
+			if (err) {
+				return cb(err);
+			}
 			var manifest = manifest_in.replace('@svgfiles', svg_files.join('\n'));
 			cb(err, manifest);
 		});
@@ -86,6 +94,9 @@ function main() {
 		async.map(files, function(fn, cb) {
 			hash_file(path.join(dist_dir, fn), cb);
 		}, function(err, checksums) {
+			if (err) {
+				return cb(err);
+			}
 			var single_checksum = hash_string(checksums.join(' '));
 			var manifest = manifest_in.replace('@checksum', single_checksum);
 			cb(err, manifest);
