@@ -144,6 +144,9 @@ var i18n_en = {
 'settings:Start Match': 'Start match',
 'settings:Resume Match': 'Resume match',
 'settings:loadmatch_none': 'No stored matches',
+'settings:counting': 'Scoring:',
+'settings:counting:3x21': 'BWF (3x21)',
+'settings:counting:2x21+11': 'German Bundesliga 2016/2017 (2x21, 3rd game until 11)',
 
 'settings:Settings': 'Settings',
 'settings:Court Description': 'Court:',

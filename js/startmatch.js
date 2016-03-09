@@ -35,7 +35,7 @@ function ui_init() {
 		var team1, team2;
 		var setup = {
 			is_doubles: $('#setup_manual_form [name="gametype"]:checked').val() == 'doubles',
-			counting: '3x21',
+			counting: _formval('counting'),
 		};
 
 		setup.team_competition = $('#setup_manual_form [name="team_competition"]').prop('checked');
@@ -51,7 +51,11 @@ function ui_init() {
 				!setup.event_name &&
 				!setup.tournament_name) {
 			// Demo mode
-			return control.demo_match_start();
+			var demo_setup = {
+				counting: setup.counting,
+				team_competition: setup.team_competition,
+			};
+			return control.demo_match_start(demo_setup);
 		}
 
 		if (setup.is_doubles) {

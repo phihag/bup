@@ -145,6 +145,9 @@ var i18n_de = {
 'settings:Start Match': 'Spiel starten',
 'settings:Resume Match': 'Spiel fortführen',
 'settings:loadmatch_none': 'Keine gespeicherten Spiele vorhanden!',
+'settings:counting': 'Zählweise:',
+'settings:counting:3x21': 'BWF (3x21)',
+'settings:counting:2x21+11': 'Bundesliga 2016/2017 (2x21, 3. Satz bis 11)',
 
 'settings:Settings': 'Einstellungen',
 'settings:Court Description': 'Feld:',

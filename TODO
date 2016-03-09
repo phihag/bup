@@ -1,7 +1,6 @@
 bup support 2x21+11
-	fix game_winner invocations
-	fix match_winner invocations
 	test eventsheet, network transmission, editmode
+add counting UI
 
 liveaw: write match state
 

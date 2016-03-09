@@ -1,9 +1,14 @@
 var control = (function() {
 'use strict';
 
-function demo_match_start() {
-	var setup = {
-		counting: '3x21',
+function demo_match_start(setup) {
+	if (! setup) {
+		setup = {
+			counting: '3x21',
+			team_competition: true,
+		};
+	}
+	utils.obj_update(setup, {
 		is_doubles: true,
 		teams: [{
 			name: state._('demo:team1'),
@@ -23,8 +28,7 @@ function demo_match_start() {
 		match_name: state._('demo:match_name'),
 		event_name: state._('demo:event_name'),
 		tournament_name: state._('demo:tournament_name'),
-		team_competition: true,
-	};
+	});
 
 	settings.hide(true);
 	start_match(state, setup);
