@@ -3223,21 +3223,21 @@ _describe('calc_state', function() {
 
 _describe('calc helper functions', function() {
 	_it('game_winner', function() {
-		assert.equal(bup.calc.game_winner(21, 19), 'left');
-		assert.equal(bup.calc.game_winner(19, 21), 'right');
-		assert.equal(bup.calc.game_winner(22, 20), 'left');
-		assert.equal(bup.calc.game_winner(25, 27), 'right');
-		assert.equal(bup.calc.game_winner(29, 30), 'right');
-		assert.equal(bup.calc.game_winner(28, 30), 'right');
-		assert.equal(bup.calc.game_winner(0, 0), 'inprogress');
-		assert.equal(bup.calc.game_winner(20, 19), 'inprogress');
-		assert.equal(bup.calc.game_winner(25, 26), 'inprogress');
-		assert.equal(bup.calc.game_winner(29, 29), 'inprogress');
-		assert.equal(bup.calc.game_winner(22, 19), 'invalid');
-		assert.equal(bup.calc.game_winner(32, 30), 'invalid');
-		assert.equal(bup.calc.game_winner(30, 31), 'invalid');
-		assert.equal(bup.calc.game_winner(30, 30), 'invalid');
-		assert.equal(bup.calc.game_winner(28, 25), 'invalid');
+		assert.equal(bup.calc.game_winner('3x21', 0, 21, 19), 'left');
+		assert.equal(bup.calc.game_winner('3x21', 0, 19, 21), 'right');
+		assert.equal(bup.calc.game_winner('3x21', 0, 22, 20), 'left');
+		assert.equal(bup.calc.game_winner('3x21', 0, 25, 27), 'right');
+		assert.equal(bup.calc.game_winner('3x21', 0, 29, 30), 'right');
+		assert.equal(bup.calc.game_winner('3x21', 0, 28, 30), 'right');
+		assert.equal(bup.calc.game_winner('3x21', 0, 0, 0), 'inprogress');
+		assert.equal(bup.calc.game_winner('3x21', 0, 20, 19), 'inprogress');
+		assert.equal(bup.calc.game_winner('3x21', 0, 25, 26), 'inprogress');
+		assert.equal(bup.calc.game_winner('3x21', 0, 29, 29), 'inprogress');
+		assert.equal(bup.calc.game_winner('3x21', 0, 22, 19), 'invalid');
+		assert.equal(bup.calc.game_winner('3x21', 0, 32, 30), 'invalid');
+		assert.equal(bup.calc.game_winner('3x21', 0, 30, 31), 'invalid');
+		assert.equal(bup.calc.game_winner('3x21', 0, 30, 30), 'invalid');
+		assert.equal(bup.calc.game_winner('3x21', 0, 28, 25), 'invalid');
 	});
 });
 

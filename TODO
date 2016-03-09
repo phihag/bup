@@ -1,4 +1,7 @@
 bup support 2x21+11
+	fix game_winner invocations
+	fix match_winner invocations
+	test eventsheet, network transmission, editmode
 
 liveaw: write match state
 
@@ -336,10 +339,12 @@ stats: + game points
 stats: + match points
 remove all mentions of home/away
 anroid chrome address bar background color
+remove one of network.calc_gamescore and calc.calc_game_score?
 helper function for document.querySelector which asserts result is true (and omits silent error otherwise)
 	use that in various util functions as well
 allow challenges
 	failsafe (http://www.badmintoncentral.com/forums/showthread.php/160170-sub-standard-umpire-gave-a-free-point-to-Okuhara-in-first-set?p=2413636#post2413636)
 CourtSpot: Spielreihenfolge festlegen
+remove s.match.max_games in favor of a calc function
 -> Demo Jörg H, Manuel, Susanne, Werner Durow
 

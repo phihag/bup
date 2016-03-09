@@ -100,7 +100,7 @@ function read_input() {
 			right_val = 0;
 		}
 
-		var winner = calc.game_winner(left_val, right_val);
+		var winner = calc.game_winner(state.setup.counting, game_index, left_val, right_val);
 		res.push({
 			winner: winner,
 			left: left_val,
@@ -111,8 +111,8 @@ function read_input() {
 			return res;
 		}
 
-		var match_winner = calc.match_winner(res);
-		if (match_winner != 'inprogress') {
+		var mwinner = calc.match_winner(state.setup.counting, res);
+		if (mwinner != 'inprogress') {
 			return res;
 		}
 	}

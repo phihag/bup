@@ -22,12 +22,22 @@ function match_started(game_scores) {
 	return (game_scores.length > 0) && ((game_scores[0][0] > 0) || (game_scores[0][1] > 0));
 }
 
-function _is_winner(candidate, other) {
-	return (
-		((candidate == 21) && (other < 20)) ||
-		((candidate > 21) && (candidate <= 30) && (other == candidate - 2)) ||
-		(candidate == 30) && (other == 29)
-	);
+function _is_winner(counting, game_idx, candidate, other) {
+	if ((counting === '3x21') || ((counting === '2x21+11') && (game_idx < 2))) {
+		return (
+			((candidate == 21) && (other < 20)) ||
+			((candidate > 21) && (candidate <= 30) && (other == candidate - 2)) ||
+			(candidate == 30) && (other == 29)
+		);
+	}
+	if ((counting === '2x21+11') && (game_idx === 2)) {
+		return (
+			((candidate == 11) && (other < 10)) ||
+			((candidate > 11) && (candidate <= 15) && (other == candidate - 2)) ||
+			(candidate == 15) && (other == 14)
+		);
+	}
+	throw new Error('Invalid counting scheme ' + counting);
 }
 
 // Returns null if score cannot be mapped
@@ -78,27 +88,39 @@ function score_str(s, left_id) {
 //  'invalid' if the score can't happen
 //  'left' if left side won this game
 //  'right' if right side won this game
-function game_winner(left_score, right_score) {
-	if (_is_winner(left_score, right_score)) {
+function game_winner(counting, game_idx, left_score, right_score) {
+	if (_is_winner(counting, game_idx, left_score, right_score)) {
 		return 'left';
 	}
-	if (_is_winner(right_score, left_score)) {
+	if (_is_winner(counting, game_idx, right_score, left_score)) {
 		return 'right';
 	}
-	if ((left_score < 21) && (right_score < 21)) {
-		return 'inprogress';
-	}
-	if ((left_score < 30) && (right_score >= left_score - 1) && (right_score <= left_score + 1)) {
-		return 'inprogress';
+	if ((counting === '3x21') || ((counting === '2x21+11') && (game_idx < 2))) {
+		if ((left_score < 21) && (right_score < 21)) {
+			return 'inprogress';
+		}
+		if ((left_score < 30) && (right_score >= left_score - 1) && (right_score <= left_score + 1)) {
+			return 'inprogress';
+		}
+	} else if ((counting === '2x21+11') && (game_idx === 2)) {
+		if ((left_score < 11) && (right_score < 11)) {
+			return 'inprogress';
+		}
+		if ((left_score < 15) && (right_score >= left_score - 1) && (right_score <= left_score + 1)) {
+			return 'inprogress';
+		}
 	}
 	return 'invalid';
 }
 
-function match_winner(input_scores) {
+function match_winner(counting, input_scores) {
 	var score = [0, 0];
 	for (var i = 0;i < input_scores.length;i++) {
 		var iscore = input_scores[i];
-		var winner = (iscore.winner ? iscore.winner : game_winner(iscore[0], iscore[1]));
+		var winner = iscore.winner;
+		if (!winner) {
+			winner = game_winner(counting, i, iscore[0], iscore[1]);
+		}
 		switch (winner) {
 		case 'left':
 			score[0]++;
@@ -121,10 +143,10 @@ function match_winner(input_scores) {
 	return 'inprogress';
 }
 
-function calc_game_score(games) {
+function calc_game_score(counting, games) {
 	var res = [0, 0];
-	games.forEach(function(g) {
-		var winner = game_winner(g.score[0], g.score[1]);
+	games.forEach(function(g, game_index) {
+		var winner = game_winner(counting, game_index, g.score[0], g.score[1]);
 		if (winner === 'left') {
 			res[0]++;
 		} else if (winner === 'right') {
@@ -202,11 +224,13 @@ function make_game_state(s, previous_game) {
 }
 
 function recalc_after_score(s, team_id, press) {
-	var team1_won = _is_winner(s.game.score[0], s.game.score[1]);
-	var team2_won = _is_winner(s.game.score[1], s.game.score[0]);
+	var counting = s.setup.counting;
+	var game_idx = s.match.finished_games.length;
+	var team1_won = _is_winner(counting, game_idx, s.game.score[0], s.game.score[1]);
+	var team2_won = _is_winner(counting, game_idx, s.game.score[1], s.game.score[0]);
 	if (team1_won || team2_won) {
 		var winner_idx = team1_won ? 0 : 1;
-		s.match.game_score = calc_game_score(s.match.finished_games);
+		s.match.game_score = calc_game_score(counting, s.match.finished_games);
 		s.match.game_score[winner_idx]++;
 		s.game.won_by_score = true;
 		s.game.team1_won = team1_won;
@@ -248,9 +272,17 @@ function recalc_after_score(s, team_id, press) {
 
 	var is_interval = null;
 	if (team_id !== null) {
-		is_interval = (
-			(s.game.score[team_id] === 11) && (s.game.score[1 - team_id] < 11)
-		);
+		if ((counting === '3x21') || ((counting === '2x21+11') && (game_idx < 2))) {
+			is_interval = (
+				(s.game.score[team_id] === 11) && (s.game.score[1 - team_id] < 11)
+			);
+		} else if ((counting == '2x21+11') && (game_idx === 2)) {
+			is_interval = (
+				(s.game.score[team_id] === 6) && (s.game.score[1 - team_id] < 6)
+			);
+		} else {
+			throw new Error('Invalid counting scheme ' + s.setup.counting);
+		}
 		if (is_interval) { // First time
 			s.game.interval_score = s.game.score.slice();
 			s.game.interval_service_over = s.game.service_over;
@@ -546,7 +578,7 @@ function calc_press(s, press) {
 				synthetic: true,
 				finished: true,
 				start_team1_left: (fgame ? fgame.start_team1_left : null),
-				team1_won: _is_winner(new_score[0], new_score[1]),
+				team1_won: _is_winner(s.setup.counting, i, new_score[0], new_score[1]),
 				score: new_score,
 				editmode_by_side: !! press.by_side,
 			};
@@ -554,7 +586,7 @@ function calc_press(s, press) {
 
 		s.match.finished = false;
 		s.match.team1_won = null;
-		s.match.game_score = calc_game_score(s.match.finished_games);
+		s.match.game_score = calc_game_score(s.setup.counting, s.match.finished_games);
 		recalc_after_score(s, null, press);
 		break;
 	case 'timer_restart':
@@ -593,6 +625,7 @@ function init_calc(s) {
 
 	switch (s.setup.counting) {
 	case '3x21':
+	case '2x21+11':
 		s.match.max_games = 3;
 		break;
 	default:
@@ -613,25 +646,32 @@ function state(s) {
 		calc_press(s, press);
 	});
 
-	if ((s.game.score[0] === 11) && (s.game.score[1] < 11) && (s.game.team1_serving)) {
-		s.game.interval = true;
-	} else if ((s.game.score[1] === 11) && (s.game.score[0] < 11) && (!s.game.team1_serving)) {
-		s.game.interval = true;
-	}
+	var counting = s.setup.counting;
+	var game_idx = s.match.finished_games.length;
 
 	if (! s.game.finished) {
-		if ((s.game.team1_serving) && (((s.game.score[0] === 20) && (s.game.score[1] < 20)) || (s.game.score[0] == 29))) {
-			if (s.match.game_score[0] === 0) {
-				s.game.gamepoint = true;
-			} else {
+		if ((counting === '3x21') || ((counting === '2x21+11') && (game_idx < 2))) {
+			if ((s.game.team1_serving) && (((s.game.score[0] === 20) && (s.game.score[1] < 20)) || (s.game.score[0] == 29))) {
+				if (s.match.game_score[0] === 0) {
+					s.game.gamepoint = true;
+				} else {
+					s.game.matchpoint = true;
+				}
+			} else if ((!s.game.team1_serving) && (((s.game.score[1] === 20) && (s.game.score[0] < 20)) || (s.game.score[1] == 29))) {
+				if (s.match.game_score[1] === 0) {
+					s.game.gamepoint = true;
+				} else {
+					s.game.matchpoint = true;
+				}
+			}
+		} else if ((counting === '2x21+11') && (game_idx === 2)) {
+			if ((s.game.team1_serving) && (((s.game.score[0] === 10) && (s.game.score[1] < 10)) || (s.game.score[0] == 14))) {
+				s.game.matchpoint = true;
+			} else if ((!s.game.team1_serving) && (((s.game.score[1] === 10) && (s.game.score[0] < 10)) || (s.game.score[1] == 14))) {
 				s.game.matchpoint = true;
 			}
-		} else if ((!s.game.team1_serving) && (((s.game.score[1] === 20) && (s.game.score[0] < 20)) || (s.game.score[1] == 29))) {
-			if (s.match.game_score[1] === 0) {
-				s.game.gamepoint = true;
-			} else {
-				s.game.matchpoint = true;
-			}
+		} else {
+			throw new Error('Invalid counting scheme ' + counting);
 		}
 	}
 

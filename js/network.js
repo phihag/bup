@@ -245,7 +245,7 @@ function enter_match(match) {
 
 	var netscore = match.network_score;
 	if (netscore) {
-		var mwinner = calc.match_winner(netscore);
+		var mwinner = calc.match_winner(match.setup.counting, netscore);
 
 		var on_cancel = function() {
 			control.stop_match(state);

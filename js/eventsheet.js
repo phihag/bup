@@ -59,10 +59,10 @@ function _player_names(match, team_id) {
 	}
 }
 
-function calc_gamescore(netscore) {
+function calc_gamescore(counting, netscore) {
 	var scores = [0, 0];
-	netscore.forEach(function(game_score) {
-		var winner = calc.game_winner(game_score[0], game_score[1]);
+	netscore.forEach(function(game_score, game_idx) {
+		var winner = calc.game_winner(counting, game_idx, game_score[0], game_score[1]);
 		if (winner == 'left') {
 			scores[0]++;
 		} else if (winner == 'right') {
@@ -72,8 +72,8 @@ function calc_gamescore(netscore) {
 	return scores;
 }
 
-function calc_matchscore(netscore) {
-	var winner = calc.match_winner(netscore);
+function calc_matchscore(counting, netscore) {
+	var winner = calc.match_winner(counting, netscore);
 	if (winner == 'left') {
 		return [1, 0];
 	} else if (winner == 'right') {
@@ -218,8 +218,8 @@ function render_bundesliga(ev, es_key, ui8r, extra_data) {
 				points[0] += game_score[0];
 				points[1] += game_score[1];
 			});
-			games = calc_gamescore(netscore);
-			matches = calc_matchscore(netscore);
+			games = calc_gamescore(m.setup.counting, netscore);
+			matches = calc_matchscore(m.setup.counting, netscore);
 		}
 		scores.push(points[0]);
 		scores.push(points[1]);
@@ -551,7 +551,7 @@ function render_svg(ev, es_key, ui8r, extra_data) {
 			_svg_text(svg, 'match' + match_id + '_points0', points[0]);
 			_svg_text(svg, 'match' + match_id + '_points1', points[1]);
 
-			var games = calc_gamescore(netscore);
+			var games = calc_gamescore(match.setup.counting, netscore);
 			sum_games[0] += games[0];
 			sum_games[1] += games[1];
 			_svg_text(svg, 'match' + match_id + '_games0', games[0]);
