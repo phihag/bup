@@ -1,9 +1,14 @@
+bup support 2x21+11
+
 liveaw: write match state
+
 liveaw: check various event metadata
 show match results in liveaw
+liveaw: bup button in match overview
 liveaw hall display (incl. court)
 liveaw: improve/test reconnecting
 liveaw: proper reconnect backoff
+liveaw: disable N.N. entries
 
 MVP liveaw
 	show current state (who's on which court, like btde)
@@ -33,6 +38,7 @@ test editevent without all_players
 
 eventsheet svg for only home/only away (incl. PDF generations for each)
 test eventsheet on various mobiles
+liveaw: prevent csrf from other domains
 
 reason of injury
 reason of retired

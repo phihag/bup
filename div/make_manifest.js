@@ -71,7 +71,7 @@ function hash_string(s) {
 function main() {
 	var args = process.argv.slice(2);
 	if (args.length !== 3) {
-		console.log('Usage: make_manifest.js DISTDIR INFILE OUTFILE');
+		console.log('Usage: make_manifest.js DISTDIR INFILE OUTFILE'); // eslint-disable-line no-console
 		process.exit(1);
 		return;
 	}

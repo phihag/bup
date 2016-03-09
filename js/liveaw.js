@@ -91,6 +91,37 @@ function on_edit_event(s) {
 	});
 }
 
+function send_score(s) {
+	if (s.settings.court_id === 'referee') {
+		network.errstate('liveaw.score', null);
+		return;
+	}
+
+	_request({
+		type: 'set-presses',
+		match_id: s.setup.liveaw_match_id,
+		presses: s.presses,
+	}, function(response) {
+		// TODO handle errors
+	});
+}
+
+function sync(s) {
+	var netscore = network.calc_score(s);
+	if ((s.settings.court_id != s.remote.liveaw_court) || !utils.deep_equal(netscore, s.remote.liveaw_score)) {
+		send_score(s);
+	}
+}
+
+/* s, press */
+function send_press(s) {
+	if (!s.setup.liveaw_match_id) {
+		// Manually created match
+		return;
+	}
+	sync(s);
+}
+
 
 /*
 function ui_render_login(container) {
@@ -150,32 +181,6 @@ function ui_render_login(container) {
 	});
 }
 */
-
-function send_score(s) {
-	if (s.settings.court_id === 'referee') {
-		network.errstate('liveaw.score', null);
-		return;
-	}
-
-	// TODO 
-
-}
-
-function sync(s) {
-	var netscore = network.calc_score(s);
-	if ((s.settings.court_id != s.remote.liveaw_court) || !utils.deep_equal(netscore, s.remote.liveaw_score)) {
-		send_score(s);
-	}
-}
-
-/* s, press */
-function send_press(s) {
-	if (!s.setup.liveaw_match_id) {
-		// Manually created match
-		return;
-	}
-	sync(s);
-}
 
 
 function courts(s) {

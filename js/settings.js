@@ -146,7 +146,7 @@ function ui_init(s) {
 			if (name === 'shuttle_counter') {
 				render.shuttle_counter(s);
 			}
-			settings.store(s);
+			store(s);
 		});
 	});
 
@@ -161,7 +161,7 @@ function ui_init(s) {
 					network.resync();
 				}
 			}
-			settings.store(s);
+			store(s);
 		});
 	});
 
@@ -169,7 +169,7 @@ function ui_init(s) {
 		var input = $('.settings [name="' + name + '"]');
 		input.on('change input', function() {
 			s.settings[name] = parseInt(input.val(), 10);
-			settings.store(s);
+			store(s);
 		});
 	});
 
@@ -177,7 +177,7 @@ function ui_init(s) {
 		var select = $('.settings [name="' + name + '"]');
 		select.on('change', function() {
 			s.settings[name] = select.val();
-			settings.store(s);
+			store(s);
 			if (name == 'language') {
 				i18n.ui_update_state(s);
 			}
