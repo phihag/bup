@@ -122,7 +122,7 @@ var i18n_en = {
 'settings:Back to Match': 'Back to match',
 'settings:Current Match': 'Current match',
 'settings:Edit Manually': 'Manual edit',
-'settings:Abort Manual Edit': 'Manuelles Bearbeiten abbrechen',
+'settings:Abort Manual Edit': 'Cancel manual editing',
 'settings:Matches': 'Matches',
 'settings:Event Scoresheets': 'scoresheets',
 'settings:Custom match details': 'custom match details ...',

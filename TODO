@@ -36,6 +36,7 @@ test editevent without all_players
 eventsheet svg for only home/only away (incl. PDF generations for each)
 test eventsheet on various mobiles
 liveaw: prevent csrf from other domains
+event stats
 
 reason of injury
 reason of retired
