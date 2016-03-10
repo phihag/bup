@@ -103,11 +103,11 @@ function silent_error(msg) {
 function ui_init() {
 	update();
 	window.onerror = on_error;
-	utils.on_click_qs('.version', function() {
-		utils.visible_qs('.settings_test_reporting', true);
-		utils.visible_qs('.settings_send_export', true);
+	uiu.on_click_qs('.version', function() {
+		uiu.visible_qs('.settings_test_reporting', true);
+		uiu.visible_qs('.settings_send_export', true);
 	});
-	utils.on_click_qs('.settings_test_reporting', function() {
+	uiu.on_click_qs('.settings_test_reporting', function() {
 		throw new Error('test error reporting');
 	});
 }
@@ -127,7 +127,7 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var fullscreen = require('./fullscreen');
 	var netstats = require('./netstats');
-	var utils = require('./utils');
+	var uiu = require('./uiu');
 
 	module.exports = report_problem;
 }

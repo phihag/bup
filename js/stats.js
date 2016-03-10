@@ -288,14 +288,14 @@ function render_graph(svg, s, all_gpoints) {
 		}
 
 		var text = svg.querySelector('.legend_team' + team);
-		utils.text(text, player_names);
+		uiu.text(text, player_names);
 		var bb = text.getBBox();
 		max_width = Math.max(bb.width, max_width);
 	}
 	svg.querySelector('.legend_background').setAttribute('width', max_width + 2);
 
 	var lines = svg.querySelector('.stats_graph_lines');
-	utils.empty(lines);
+	uiu.empty(lines);
 
 	if (all_gpoints.length === 0) {
 		return;
@@ -306,7 +306,7 @@ function render_graph(svg, s, all_gpoints) {
 
 	// Gray grid
 	var grid = svg.querySelector('.stats_graph_grid');
-	utils.empty(grid);
+	uiu.empty(grid);
 	for (var i = 0;i <= max_score;i++) {
 		var grid_y = GRAPH_BOTTOM - i * GRAPH_HEIGHT / max_score;
 		utils.svg_el(grid, 'line', {
@@ -699,7 +699,7 @@ function press_description(s, press) {
 }
 
 function render_presses(table, s) {
-	utils.empty(table);
+	uiu.empty(table);
 
 	var presses = s.presses;
 	var last_ts = 0;
@@ -721,14 +721,14 @@ function render_presses(table, s) {
 		var highlight_ts = (i === 0) || (i === presses.length - 1) || ((press.timestamp - last_ts) > 120000);
 		last_ts = press.timestamp;
 
-		var tr = utils.create_el(table, 'tr');
-		utils.create_el(tr, 'td', {
+		var tr = uiu.create_el(table, 'tr');
+		uiu.create_el(tr, 'td', {
 			'class': 'stats_presses_timestamp' + (highlight_ts ? ' stats_presses_highlight' : ''),
 		}, (press.timestamp ? utils.timesecs_str(press.timestamp) : ''));
-		utils.create_el(tr, 'td', {
+		uiu.create_el(tr, 'td', {
 			'class': 'stats_presses_desc',
 		}, desc);
-		utils.create_el(tr, 'td', {
+		uiu.create_el(tr, 'td', {
 			'class': 'stats_presses_sdesc',
 		}, sdesc);
 	}
@@ -758,8 +758,8 @@ function show() {
 	var stats = calc_stats(state);
 	var table = $('.stats_table');
 	render_table(table, stats);
-	render_graph(utils.qs('.stats_graph'), state, stats.gpoints);
-	render_presses(utils.qs('.stats_presses'), state);
+	render_graph(uiu.qs('.stats_graph'), state, stats.gpoints);
+	render_presses(uiu.qs('.stats_presses'), state);
 }
 
 function hide() {
@@ -775,7 +775,7 @@ function hide() {
 
 
 function ui_init() {
-	utils.on_click_qs('.postmatch_stats_button', show);
+	uiu.on_click_qs('.postmatch_stats_button', show);
 	$('.stats_layout').on('click', function(e) {
 		if (e.target === this) {
 			hide();
@@ -787,8 +787,8 @@ function ui_init() {
 		hide();
 	};
 
-	utils.on_click_qs('.stats_back', back_func);
-	utils.on_click_qs('.stats_top_back_link', back_func);
+	uiu.on_click_qs('.stats_back', back_func);
+	uiu.on_click_qs('.stats_top_back_link', back_func);
 }
 
 return {

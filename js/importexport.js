@@ -12,12 +12,12 @@ function import_data(s, data) {
 }
 
 function import_json(s) {
-	var container = utils.qs('.import_link_container');
+	var container = uiu.qs('.import_link_container');
 	var input = container.querySelector('input[type="file"]');
 	if (input) {
 		container.removeChild(input);
 	}
-	input = utils.create_el(container, 'input', {
+	input = uiu.create_el(container, 'input', {
 		type: 'file',
 		accept: '.json',
 		style: 'visibility: hidden; position: absolute',
@@ -76,19 +76,19 @@ function send_export(s) {
 }
 
 function ui_init() {
-	utils.on_click_qs('.export_link', function(e) {
+	uiu.on_click_qs('.export_link', function(e) {
 		e.preventDefault();
 		export_json(state);
 		return false;
 	});
 
-	utils.on_click_qs('.import_link', function(e) {
+	uiu.on_click_qs('.import_link', function(e) {
 		e.preventDefault();
 		import_json(state);
 		return false;
 	});
 
-	utils.on_click_qs('.settings_send_export', function(e) {
+	uiu.on_click_qs('.settings_send_export', function(e) {
 		e.preventDefault();
 		send_export(state);
 	});
@@ -110,6 +110,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var network = require('./network');
 	var report_problem = require('./report_problem');
 	var staticnet = require('./staticnet');
+	var uiu = require('./uiu');
 	var utils = require('./utils');
 
 	module.exports = importexport;

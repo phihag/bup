@@ -102,12 +102,14 @@ function send_score(s) {
 		match_id: s.setup.liveaw_match_id,
 		presses: s.presses,
 	}, function(response) {
-		// TODO handle errors
+		console.log('got', response);
+		var err = (response.type == 'error') ? response : null;
+		network.errstate('liveaw.send_score', err);
 	});
 }
 
 function sync(s) {
-	var netscore = network.calc_score(s);
+	var netscore = calc.netscore(s);
 	if ((s.settings.court_id != s.remote.liveaw_court) || !utils.deep_equal(netscore, s.remote.liveaw_score)) {
 		send_score(s);
 	}
@@ -224,9 +226,10 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
-	var utils = require('./utils');
+	var calc = require('./calc');
 	var network = require('./network');
 	var report_problem = require('./report_problem');
+	var utils = require('./utils');
 
 	module.exports = liveaw;
 }

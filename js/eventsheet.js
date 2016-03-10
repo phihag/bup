@@ -667,20 +667,20 @@ function render_links(s) {
 		pdfform_loaded();
 	}
 
-	var container = utils.qs('.setup_eventsheets');
-	utils.empty(container);
+	var container = uiu.qs('.setup_eventsheets');
+	uiu.empty(container);
 	if (! league_key) {
 		return;
 	}
 	var eventsheets = SHEETS_BY_LEAGUE[league_key];
 	eventsheets.forEach(function(es_key) {
 		var i18n_key = 'eventsheet:label:' + es_key;
-		var link = utils.create_el(container, 'a', {
+		var link = uiu.create_el(container, 'a', {
 			'href': '#',
 			'class': 'eventsheet_link',
 			'data-i18n': i18n_key,
 		}, s._(i18n_key));
-		utils.on_click(link, function(e) {
+		uiu.on_click(link, function(e) {
 			e.preventDefault();
 			show_dialog(es_key);
 		});
@@ -738,7 +738,7 @@ function ui_init() {
 
 function on_fetch() {
 	var event = state.event;
-	var container = utils.qs('.eventsheet_container');
+	var container = uiu.qs('.eventsheet_container');
 	var KEYS = ['umpires', 'location', 'starttime', 'matchday', 'notes', 'protest'];
 	KEYS.forEach(function(k) {
 		if (event[k]) {
@@ -753,7 +753,7 @@ function on_fetch() {
 }
 
 function dialog_fetch() {
-	utils.visible_qs('.eventsheet_generate_loading_icon', !state.event);
+	uiu.visible_qs('.eventsheet_generate_loading_icon', !state.event);
 	var btn = $('.eventsheet_generate_button');
 	if (state.event) {
 		btn.removeAttr('disabled');
@@ -761,10 +761,10 @@ function dialog_fetch() {
 	} else {
 		btn.attr('disabled', 'disabled');
 		network.list_matches(state, function(err, ev) {
-			utils.visible_qs('.eventsheet_generate_loading_icon', false);
+			uiu.visible_qs('.eventsheet_generate_loading_icon', false);
 			if (err) {
 				$('.eventsheet_error_message').text(err.msg);
-				utils.visible_qs('.eventsheet_error', true);
+				uiu.visible_qs('.eventsheet_error', true);
 				return;
 			}
 			state.event = ev;
@@ -805,32 +805,32 @@ function show_dialog(es_key) {
 
 	var container = $('.eventsheet_container');
 	container.attr('data-eventsheet_key', es_key);
-	utils.visible_qs('.eventsheet_container', true);
+	uiu.visible_qs('.eventsheet_container', true);
 
-	var download_link = utils.qs('.eventsheet_download_link');
-	var download_link_container = utils.qs('.eventsheet_download_link_container');
-	var preview = utils.qs('.eventsheet_preview');
+	var download_link = uiu.qs('.eventsheet_download_link');
+	var download_link_container = uiu.qs('.eventsheet_download_link_container');
+	var preview = uiu.qs('.eventsheet_preview');
 	switch (es_key) {
 	case '1BL':
 	case '2BLN':
 	case '2BLS':
 	case 'RLW':
 	case 'RLN':
-		utils.visible_qs('.eventsheet_report', true);
-		utils.visible(preview, false);
-		utils.visible(download_link_container, false);
+		uiu.visible_qs('.eventsheet_report', true);
+		uiu.visible(preview, false);
+		uiu.visible(download_link_container, false);
 		break;
 	case 'team-1BL':
 	case 'team-2BL':
-		utils.visible_qs('.eventsheet_report', false);
-		utils.visible(preview, true);
+		uiu.visible_qs('.eventsheet_report', false);
+		uiu.visible(preview, true);
 		preview_team_bl(state, es_key);
 		download_link.setAttribute('href', URLS[es_key]);
-		utils.visible(download_link_container, true);
+		uiu.visible(download_link_container, true);
 		break;
 	}
 
-	utils.text_qs('.eventsheet_generate_button',
+	uiu.text_qs('.eventsheet_generate_button',
 		state._('eventsheet:Generate', {
 			sheetname: state._('eventsheet:label:' + es_key),
 		}));
@@ -840,7 +840,7 @@ function show_dialog(es_key) {
 
 function hide_dialog() {
 	state.ui.eventsheet = null;
-	utils.visible_qs('.eventsheet_container', false);
+	uiu.visible_qs('.eventsheet_container', false);
 	settings.show();
 }
 
@@ -862,6 +862,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var report_problem = require('./report_problem');
 	var settings = require('./settings');
 	var svg2pdf = require('./svg2pdf');
+	var uiu = require('./uiu');
 	var utils = require('./utils');
 
 	module.exports = eventsheet;

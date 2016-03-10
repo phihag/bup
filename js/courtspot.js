@@ -46,7 +46,7 @@ function sync(s, force) {
 		return;
 	}
 
-	var netscore = network.calc_score(s);
+	var netscore = calc.netscore(s);
 
 	// CourtSpot requires us to set the team currently serving.
 	// Calculate that from match winner or actual game details.
@@ -185,12 +185,12 @@ function ui_init() {
 	}
 }
 
-/* Paramter: s */
+/* Parameter: s */
 function service_name() {
 	return 'CourtSpot';
 }
 
-/* Paramter: s */
+/* Parameter: s */
 function editable() {
 	return false;
 }
@@ -210,6 +210,7 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var calc = require('./calc');
 	var network = require('./network');
 	var utils = require('./utils');
 

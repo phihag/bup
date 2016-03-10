@@ -454,7 +454,413 @@ _describe('Bundesliga 2016 counting', function() {
 		assert.equal(bup.calc.game_winner('2x21+11', 2, 15, 15), 'invalid');
 		assert.equal(bup.calc.game_winner('2x21+11', 2, 15, 11), 'invalid');
 		assert.equal(bup.calc.game_winner('2x21+11', 2, 20, 20), 'invalid');
+	});
 
+	_it('calc.netscore', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		}];
+
+		var alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'retired',
+			team_id: 1,
+			player_id: 0,
+		});
+		var s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(bup.calc.netscore(s), [[21, 0], [21, 0]]);
+
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'retired',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(bup.calc.netscore(s), [[21, 0], [21, 0]]);
+
+
+		press_score(presses, 21, 19);
+		presses.push({
+			type: 'postgame-confirm',
+		});
+		presses.push({
+			type: 'love-all',
+		});
+		press_score(presses, 11, 7);
+
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(bup.calc.netscore(s), [[21, 19], [7, 11]]);
+
+		press_score(presses, 9, 7);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(bup.calc.netscore(s), [[21, 19], [14, 20]]);
+
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 0,
+			player_id: 0,
+		});
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [0, 11]]);
+
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [22, 20]]);
+
+		press_score(presses, 1, 0);
+		presses.push({
+			type: 'postgame-confirm',
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s, true), [[21, 19], [14, 21], [0, 0]]);
+
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 0,
+			player_id: 0,
+		});
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [0, 11]]);
+
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [11, 0]]);
+
+		var alt2_presses = presses.slice();
+		alt2_presses.push({
+			type: 'disqualified',
+			team_id: 0,
+			player_id: 0,
+		});
+		alt2_presses.push({
+			type: 'postmatch-confirm',
+		});
+		s = state_after(alt2_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [0, 11]]);
+
+		alt2_presses = presses.slice();
+		alt2_presses.push({
+			type: 'disqualified',
+			team_id: 1,
+			player_id: 0,
+		});
+		alt2_presses.push({
+			type: 'postmatch-confirm',
+		});
+		s = state_after(alt2_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [11, 0]]);
+
+
+		press_score(presses, 5, 3);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [5, 3]]);
+
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 0,
+			player_id: 0,
+		});
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [5, 11]]);
+
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [11, 3]]);
+
+		press_score(presses, 1, 0);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [6, 3]]);
+
+		press_score(presses, 7, 4);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [10, 10]]);
+
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 0,
+			player_id: 0,
+		});
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [10, 12]]);
+
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [12, 10]]);
+
+		press_score(presses, 1, 0);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [10, 11]]);
+
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 0,
+			player_id: 0,
+		});
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [10, 12]]);
+
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [13, 11]]);
+
+		alt_presses = presses.slice();
+		press_score(alt_presses, 1, 0);
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [10, 12]]);
+
+		press_score(presses, 0, 1);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [11, 11]]);
+
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 0,
+			player_id: 0,
+		});
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [11, 13]]);
+
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [13, 11]]);
+
+		press_score(presses, 1, 0);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [11, 12]]);
+
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 0,
+			player_id: 0,
+		});
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [11, 13]]);
+
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [14, 12]]);
+
+		press_score(presses, 0, 1);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [12, 12]]);
+
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 0,
+			player_id: 0,
+		});
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [12, 14]]);
+
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [14, 12]]);
+
+		press_score(presses, 0, 1);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [13, 12]]);
+
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 0,
+			player_id: 0,
+		});
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [13, 15]]);
+
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [14, 12]]);
+
+		press_score(presses, 1, 0);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [13, 13]]);
+
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 0,
+			player_id: 0,
+		});
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [13, 15]]);
+
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [15, 13]]);
+
+		press_score(presses, 1, 0);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [13, 14]]);
+
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 0,
+			player_id: 0,
+		});
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [13, 15]]);
+
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [15, 14]]);
+
+		alt_presses = presses.slice();
+		press_score(alt_presses, 1, 0);
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [13, 15]]);
+
+		press_score(presses, 0, 1);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [14, 14]]);
+
+		alt_presses = presses.slice();
+		press_score(alt_presses, 0, 1);
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [15, 14]]);
+
+		alt_presses.push({
+			type: 'postmatch-confirm',
+		});
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [15, 14]]);
+
+		alt_presses = presses.slice();
+		press_score(alt_presses, 1, 0);
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [14, 15]]);
+
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 0,
+			player_id: 0,
+		});
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [14, 15]]);
+
+		alt_presses = presses.slice();
+		alt_presses.push({
+			type: 'disqualified',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(alt_presses, SINGLES_SETUP);
+		assert.deepStrictEqual(
+			bup.calc.netscore(s), [[21, 19], [14, 21], [15, 14]]);
 	});
 });
 

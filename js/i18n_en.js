@@ -262,6 +262,7 @@ var i18n_en = {
 'netstats:No stats available': 'No network communication yet',
 'stats:<25ms': 'latency <25ms',
 'stats:<100ms': 'latency <100ms',
+'stats:<250ms': 'latency <250ms',
 'stats:<500ms': 'latency <500ms',
 'stats:<2s': 'latency <2s',
 'stats:<8s': 'latency <8s',

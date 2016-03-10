@@ -750,6 +750,64 @@ function undo(s) {
 	});
 }
 
+// Calculate score according to tournament/division/network adapter rules.
+// state(s) must have been called before.
+// Not necessarily the same as the score according to the main Badminton laws
+function netscore(s, always_zero) {
+	function _finish_score(game_idx, score, team1_won) {
+		var counting = s.setup.counting;
+		var winner = team1_won ? 0 : 1;
+		if ((counting === '3x21') || ((counting === '2x21+11') && (game_idx < 2))) {
+			if (score[1 - winner] >= 29) {
+				score[winner] = 30;
+			} else if (score[1 - winner] >= 20) {
+				score[winner] = score[1 - winner] + 2;
+			} else {
+				score[winner] = 21;
+			}
+		} else if ((counting === '2x21+11') && (game_idx === 2)) {
+			if (score[1 - winner] >= 14) {
+				score[winner] = 15;
+			} else if (score[1 - winner] >= 10) {
+				score[winner] = score[1 - winner] + 2;
+			} else {
+				score[winner] = 11;
+			}
+		} else {
+			throw new Error('Invalid counting scheme ' + counting);
+		}
+	}
+
+	var scores = [];
+	s.match.finished_games.forEach(function(fg) {
+		scores.push(fg.score.slice());
+	});
+	if (! s.match.finish_confirmed && ((s.game.started || s.match.finished || (s.game.score[0] > 0) || (s.game.score[1] > 0) || always_zero))) {
+		scores.push(s.game.score.slice());
+	}
+	if (s.match.finished && !s.match.won_by_score) {
+		if (scores.length > 0) {
+			_finish_score(scores.length - 1, scores[scores.length - 1], s.match.team1_won);
+		}
+
+		var won_games = 0;
+		scores.forEach(function(score) {
+			if ((score[0] >= score[1]) == s.match.team1_won) {
+				won_games++;
+			}
+		});
+		for (;won_games < 2;won_games++) {
+			var new_score = [0, 0];
+			_finish_score(scores.length, new_score, s.match.team1_won);
+			scores.push(new_score);
+		}
+	}
+
+	return scores;
+}
+
+
+
 return {
 	calc_press: calc_press,
 	copy_state: copy_state,
@@ -759,6 +817,7 @@ return {
 	lr2score: lr2score,
 	match_started: match_started,
 	match_winner: match_winner,
+	netscore: netscore,
 	press_char: press_char,
 	score_str: score_str,
 	server: server,

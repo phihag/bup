@@ -549,7 +549,7 @@ function sheet_render(s, svg, referee_view) {
 		if (str !== 0 && !str) {
 			str = '';
 		}
-		utils.text(svg.querySelector(search), str);
+		uiu.text(svg.querySelector(search), str);
 	}
 
 	// Set text fields
@@ -657,7 +657,7 @@ function sheet_render(s, svg, referee_view) {
 	var SCORESHEET_COL_COUNT = 35;
 	var cells = _parse_match(s, SCORESHEET_COL_COUNT);
 	var t = svg.querySelector('.scoresheet_table_container');
-	utils.empty(t);
+	uiu.empty(t);
 
 	var padding_left = 0.5;
 	var table_left = 15;
@@ -894,16 +894,16 @@ function event_render(container) {
 			sheet_render(s, svg, true);
 		});
 
-		utils.visible_qs('.scoresheet_loading-icon', false);
+		uiu.visible_qs('.scoresheet_loading-icon', false);
 	});
 }
 
 function event_list_matches(container) {
 	network.list_matches(state, function(err, ev) {
-		utils.visible_qs('.scoresheet_error', !!err);
+		uiu.visible_qs('.scoresheet_error', !!err);
 		if (err) {
 			$('.scoresheet_error_message').text(err.msg);
-			utils.visible_qs('.scoresheet_loading-icon', false);
+			uiu.visible_qs('.scoresheet_loading-icon', false);
 			return;
 		}
 		state.event = ev;
@@ -927,12 +927,12 @@ function event_show() {
 	render.hide();
 	uiu.esc_stack_push(hide);
 
-	var container = utils.qs('.scoresheet_container');
+	var container = uiu.qs('.scoresheet_container');
 	$(container).children('.scoresheet').remove();
-	utils.visible_qs('.scoresheet_loading-icon', true);
-	utils.visible(container, true);
+	uiu.visible_qs('.scoresheet_loading-icon', true);
+	uiu.visible(container, true);
 
-	utils.visible_qs('.scoresheet_note_dialog', false);
+	uiu.visible_qs('.scoresheet_note_dialog', false);
 
 	if (state.event) {
 		event_render(container);
@@ -962,22 +962,22 @@ function show() {
 
 	uiu.esc_stack_push(hide);
 
-	utils.visible_qs('.scoresheet_note_dialog', true);
-	utils.qs('#scoresheet_note_input').focus();
+	uiu.visible_qs('.scoresheet_note_dialog', true);
+	uiu.qs('#scoresheet_note_input').focus();
 	ui_show();
 }
 
 function ui_show() {
-	utils.visible_qs('.scoresheet_loading-icon', true);
-	var container = utils.qs('.scoresheet_container');
+	uiu.visible_qs('.scoresheet_loading-icon', true);
+	var container = uiu.qs('.scoresheet_container');
 	$(container).children('.scoresheet').remove();
-	utils.visible(container, true);	load_sheet('international', function(xml) {
+	uiu.visible(container, true);	load_sheet('international', function(xml) {
 		var svg = make_sheet_node(xml);
 		svg.setAttribute('class', 'scoresheet single_scoresheet');
 		// Usually we'd call importNode here to import the document here, but IE/Edge then ignores the styles
 		container.appendChild(svg);
 		sheet_render(state, svg);
-		utils.visible_qs('.scoresheet_loading-icon', false);
+		uiu.visible_qs('.scoresheet_loading-icon', false);
 	});
 }
 
@@ -1042,7 +1042,7 @@ function ui_pdf() {
 }
 
 function jspdf_loaded() {
-	utils.qs('.scoresheet_button_pdf').removeAttribute('disabled');
+	uiu.qs('.scoresheet_button_pdf').removeAttribute('disabled');
 }
 
 var URLS = {
@@ -1084,7 +1084,7 @@ function ui_init() {
 	$('.scoresheet_button_print').on('click', function() {
 		window.print();
 	});
-	utils.on_click_qs('.setup_event_scoresheets', function(e) {
+	uiu.on_click_qs('.setup_event_scoresheets', function(e) {
 		e.preventDefault();
 		event_show();
 		return false;
@@ -1095,7 +1095,7 @@ function ui_init() {
 
 	$('.scoresheet_note_dialog').on('submit', function(e) {
 		e.preventDefault();
-		var input = utils.qs('#scoresheet_note_input');
+		var input = uiu.qs('#scoresheet_note_input');
 
 		control.on_press({
 			type: 'note',

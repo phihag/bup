@@ -80,7 +80,7 @@ function render_table() {
 		cstats.latency_avg_str = (cstats.count > 0) ? (Math.round(cstats.latency_sum / cstats.count) + ' ms') : '-';
 		return cstats;
 	});
-	utils.visible_qs('.netstats_empty', cols.length === 0);
+	uiu.visible_qs('.netstats_empty', cols.length === 0);
 
 	var table = {
 		cols: cols,
@@ -131,28 +131,28 @@ function hide() {
 }
 
 function ui_init() {
-	var link = utils.qs('.netstats_link');
-	utils.visible(link, true);
-	utils.on_click(link, function(e) {
+	var link = uiu.qs('.netstats_link');
+	uiu.visible(link, true);
+	uiu.on_click(link, function(e) {
 		e.preventDefault();
 		show();
 		return false;
 	});
 
-	utils.on_click_qs('.netstats_back', function(e) {
+	uiu.on_click_qs('.netstats_back', function(e) {
 		e.preventDefault();
 		hide();
 		return false;
 	});
 
-	var black = utils.qs('.netstats_layout');
-	utils.on_click(black, function(e) {
+	var black = uiu.qs('.netstats_layout');
+	uiu.on_click(black, function(e) {
 		if (e.target === black) {
 			hide();
 		}
 	});
 
-	utils.on_click_qs('.netstats_resync', network.resync);
+	uiu.on_click_qs('.netstats_resync', network.resync);
 }
 
 return {
@@ -173,7 +173,6 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var settings = require('./settings');
 	var stats = require('./stats');
 	var uiu = require('./uiu');
-	var utils = require('./utils');
 
 	module.exports = netstats;
 }

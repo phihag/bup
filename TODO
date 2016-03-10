@@ -1,16 +1,10 @@
-bup support 2x21+11
-	test eventsheet, network transmission, editmode
-add counting UI
-
-liveaw: write match state
-
+liveaw: try HTTP version
 liveaw: check various event metadata
 show match results in liveaw
 liveaw: bup button in match overview
 liveaw hall display (incl. court)
 liveaw: improve/test reconnecting
 liveaw: proper reconnect backoff
-liveaw: disable N.N. entries
 
 MVP liveaw
 	show current state (who's on which court, like btde)
@@ -24,10 +18,12 @@ mail Markus
 mail Daniel / Peter
 
 
+black background of main screen does not reach to bottom
 english: always start with to my right, even in team competitions
 eventsheet: more space for input, vary by field
 N10 sensitivity! ontouch instead of onclick
 scoresheet: Fit "TSV Neuhausen-Nymphenburg 1"
+network loading should not move around design
 
 do not line-break player / team names in announcements
 multi scoresheet: shift+S shows outdated state when editing match

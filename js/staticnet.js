@@ -25,7 +25,7 @@ function sync(s) {
 		return;
 	}
 
-	nmatch.network_score = network.calc_score(s);
+	nmatch.network_score = calc.netscore(s);
 	nmatch.presses_json = JSON.stringify(s.presses);
 }
 
@@ -88,30 +88,30 @@ function staticnet_message(s) {
 }
 
 function ui_init(s) {
-	utils.visible_qs('.setup_network_container', true);
+	uiu.visible_qs('.setup_network_container', true);
 	if (event) {
 		on_load_data(s);
 	}
 }
 
 function on_load_data(s) {
-	var msg_container = utils.qs('.setup_network_message');
-	utils.empty(msg_container);
+	var msg_container = uiu.qs('.setup_network_message');
+	uiu.empty(msg_container);
 
-	var snet_container = utils.create_el(msg_container, 'div', {
+	var snet_container = uiu.create_el(msg_container, 'div', {
 		'class': 'staticnet_message',
 	});
 
-	utils.create_el(snet_container, 'span', {}, staticnet_message(s));
+	uiu.create_el(snet_container, 'span', {}, staticnet_message(s));
 	var real_netw = network.get_real_netw();
 	if (!url && real_netw) {
-		var button = utils.create_el(snet_container, 'button', {
+		var button = uiu.create_el(snet_container, 'button', {
 			role: 'button',
 			'class': 'staticnet_switch_button',
 		}, s._('staticnet:switch back button', {
 			service: real_netw.service_name(s),
 		}));
-		utils.on_click(button, function() {
+		uiu.on_click(button, function() {
 			network.ui_uninstall_staticnet(s);
 		});
 	}
@@ -133,8 +133,10 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var calc = require('./calc.js');
 	var importexport = require('./importexport.js');
 	var network = require('./network.js');
+	var uiu = require('./uiu.js');
 	var utils = require('./utils.js');
 
 	module.exports = staticnet;

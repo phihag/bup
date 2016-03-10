@@ -71,7 +71,7 @@ function _score_display_set_game(s, game, game_index, is_current) {
 
 	var editmode_active = $('#game').hasClass('editmode');
 	var editmode_score_active = editmode_active && (s.game.team1_left !== null);
-	var tr = utils.qs('#score_game_' + game_index);
+	var tr = uiu.qs('#score_game_' + game_index);
 
 	if (!game) {
 		tr.setAttribute('class', 'score_future-game');
@@ -101,7 +101,7 @@ function _score_display_set_game(s, game, game_index, is_current) {
 		_val(left_input, left_points);
 		left_text.text(left_points);
 		if (editmode_active) {
-			utils.visible(left_input, editmode_score_active);
+			uiu.visible(left_input, editmode_score_active);
 		}
 	}
 
@@ -125,7 +125,7 @@ function _score_display_set_game(s, game, game_index, is_current) {
 		_val(right_input, right_points);
 		right_text.text(right_points);
 		if (editmode_active) {
-			utils.visible(right_input, editmode_score_active);
+			uiu.visible(right_input, editmode_score_active);
 		}
 	}
 
@@ -212,7 +212,7 @@ function ui_court_str(s) {
 }
 
 function _set_dialog(dialog_qs, pr_str) {
-	var dialog = utils.qs(dialog_qs);
+	var dialog = uiu.qs(dialog_qs);
 	var pronounciation_span = dialog.querySelector('span.pronounciation');
 	var button = dialog.querySelector('button');
 	var m = pr_str.match(/^([\s\S]+?)\n([^\n]+\n[^\n]{1,15}|[^\n]+)$/);
@@ -226,8 +226,8 @@ function _set_dialog(dialog_qs, pr_str) {
 		$(pronounciation_span).removeClass('pronounciation_nonempty');
 	}
 
-	utils.text(pronounciation_span, span_str);
-	utils.text(button, btn_str);
+	uiu.text(pronounciation_span, span_str);
+	uiu.text(button, btn_str);
 }
 
 function ui_render(s) {
@@ -279,46 +279,46 @@ function ui_render(s) {
 		});
 	}
 
-	utils.visible_qs('#love-all-dialog', s.match.announce_pregame && !s.match.injuries && !s.match.suspended);
+	uiu.visible_qs('#love-all-dialog', s.match.announce_pregame && !s.match.injuries && !s.match.suspended);
 	if (s.match.announce_pregame) {
 		dialog_active = true;
 		if (s.settings.show_pronounciation) {
 			_set_dialog('#love-all-dialog', pronounciation.pronounce(s));
 		} else {
 			$('#love-all-dialog button').text(pronounciation.loveall_announcement(s));
-			utils.text_qs('#love-all-dialog span', '');
+			uiu.text_qs('#love-all-dialog span', '');
 		}
 	}
 
-	utils.disabled_qsa('#button_shuttle,#button_exception', s.match.finish_confirmed);
-	utils.visible_qs('#postmatch-leave-dialog', s.match.finish_confirmed);
+	uiu.disabled_qsa('#button_shuttle,#button_exception', s.match.finish_confirmed);
+	uiu.visible_qs('#postmatch-leave-dialog', s.match.finish_confirmed);
 	if (s.match.finish_confirmed) {
 		dialog_active = true;
 	}
-	utils.visible_qs('.postmatch_options', s.match.finished);
-	utils.visible_qs('#postmatch-confirm-dialog', s.match.finished && !s.match.finish_confirmed && !s.match.suspended && !s.match.injuries);
+	uiu.visible_qs('.postmatch_options', s.match.finished);
+	uiu.visible_qs('#postmatch-confirm-dialog', s.match.finished && !s.match.finish_confirmed && !s.match.suspended && !s.match.injuries);
 	if (s.match.finished && !s.match.finish_confirmed) {
 		dialog_active = true;
 		if (s.settings.show_pronounciation) {
 			_set_dialog('#postmatch-confirm-dialog', pronounciation.pronounce(s));
 		} else {
 			$('#postmatch-confirm-dialog button').text(pronounciation.postgame_announcement(s));
-			utils.text_qs('#postmatch-confirm-dialog span', '');
+			uiu.text_qs('#postmatch-confirm-dialog span', '');
 		}
 	}
 
-	utils.visible_qs('#postgame-confirm-dialog', !s.match.finished && s.game.finished && !s.match.suspended && !s.match.injuries);
+	uiu.visible_qs('#postgame-confirm-dialog', !s.match.finished && s.game.finished && !s.match.suspended && !s.match.injuries);
 	if (!s.match.finished && s.game.finished) {
 		dialog_active = true;
 		if (s.settings.show_pronounciation) {
 			_set_dialog('#postgame-confirm-dialog', pronounciation.pronounce(s));
 		} else {
 			$('#postgame-confirm-dialog button').text(pronounciation.postgame_announcement(s));
-			utils.text_qs('#postgame-confirm-dialog span', '');
+			uiu.text_qs('#postgame-confirm-dialog span', '');
 		}
 	}
 
-	utils.visible_qs('#suspension-resume-dialog', s.match.suspended);
+	uiu.visible_qs('#suspension-resume-dialog', s.match.suspended);
 	if (s.match.suspended) {
 		dialog_active = true;
 		$('#suspension-resume').text(
@@ -327,22 +327,22 @@ function ui_render(s) {
 		);
 	}
 
-	utils.visible_qs('#injury-resume-dialog', s.match.injuries && !s.match.suspended);
+	uiu.visible_qs('#injury-resume-dialog', s.match.injuries && !s.match.suspended);
 	$('#injury-resume-dialog button').remove();
 	if (s.match.injuries) {
 		dialog_active = true;
 		$('#injury-pronounciation').text(
 			(s.settings.show_pronounciation ? (pronounciation.pronounce(s)) : '')
 		);
-		var dialog = utils.qs('#injury-resume-dialog');
+		var dialog = uiu.qs('#injury-resume-dialog');
 		s.match.injuries.forEach(function(injury) {
-			var btn = utils.create_el(
+			var btn = uiu.create_el(
 				dialog, 'button', {},
 				s._('card.retired', {
 					player_name: s.setup.teams[injury.team_id].players[injury.player_id].name,
 				}).replace(/\n?$/, '')
 			);
-			utils.on_click(btn, function() {
+			uiu.on_click(btn, function() {
 				control.on_press({
 					type: 'retired',
 					team_id: injury.team_id,
@@ -350,9 +350,9 @@ function ui_render(s) {
 				});
 			});
 		});
-		var continue_btn = utils.create_el(
+		var continue_btn = uiu.create_el(
 			dialog, 'button', {}, s._('button:Resume after injury'));
-		utils.on_click(continue_btn, function() {
+		uiu.on_click(continue_btn, function() {
 			control.on_press({
 				type: 'injury-resume',
 			});
@@ -398,7 +398,7 @@ function ui_render(s) {
 	if (!s.match.finished && !s.match.injuries && !s.match.suspended) {
 		if (s.game.start_team1_left === null) {
 			dialog_active = true;
-			uiu.show_picker($('#pick_side'));
+			bupui.show_picker($('#pick_side'));
 
 			$('#pick_side_team1').text(pronounciation.teamtext_internal(s, 0));
 			$('#pick_side_team2').text(pronounciation.teamtext_internal(s, 1));
@@ -420,21 +420,21 @@ function ui_render(s) {
 					}
 				}
 
-				uiu.add_player_pick(s, $('#pick_server'), 'pick_server', ti, 0, null, namefunc);
+				bupui.add_player_pick(s, $('#pick_server'), 'pick_server', ti, 0, null, namefunc);
 				if (s.setup.is_doubles) {
-					uiu.add_player_pick(s, $('#pick_server'), 'pick_server', ti, 1, null, namefunc);
+					bupui.add_player_pick(s, $('#pick_server'), 'pick_server', ti, 1, null, namefunc);
 				}
 			});
 
 			dialog_active = true;
-			uiu.show_picker($('#pick_server'));
+			bupui.show_picker($('#pick_server'));
 		} else if (s.game.start_receiver_player_id === null) {
 			$('#pick_receiver button').remove();
 			dialog_active = true;
 			var team_id = (s.game.start_server_team_id == 1) ? 0 : 1;
-			uiu.add_player_pick(s, $('#pick_receiver'), 'pick_receiver', team_id, 0);
-			uiu.add_player_pick(s, $('#pick_receiver'), 'pick_receiver', team_id, 1);
-			uiu.show_picker($('#pick_receiver'));
+			bupui.add_player_pick(s, $('#pick_receiver'), 'pick_receiver', team_id, 0);
+			bupui.add_player_pick(s, $('#pick_receiver'), 'pick_receiver', team_id, 1);
+			bupui.show_picker($('#pick_receiver'));
 		}
 	}
 
@@ -452,11 +452,11 @@ function ui_render(s) {
 }
 
 function show() {
-	utils.visible_qs('#game', true);
+	uiu.visible_qs('#game', true);
 }
 
 function hide() {
-	utils.visible_qs('#game', false);
+	uiu.visible_qs('#game', false);
 }
 
 return {
@@ -472,13 +472,13 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var bupui = require('./bupui');
 	var calc = require('./calc');
 	var control = require('./control');
 	var editmode = require('./editmode');
 	var pronounciation = require('./pronounciation');
 	var timer = require('./timer');
 	var uiu = require('./uiu');
-	var utils = require('./utils');
 
 	module.exports = render;
 }

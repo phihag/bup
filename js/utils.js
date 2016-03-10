@@ -9,13 +9,6 @@ function repeat(val, len) {
 	return res;
 }
 
-function qsEach(selector, func) {
-	var nodes = document.querySelectorAll(selector);
-	for (var i = 0;i < nodes.length;i++) {
-		func(nodes[i], i);
-	}
-}
-
 function values(obj) {
 	var res = [];
 	for (var key in obj) {
@@ -39,20 +32,6 @@ function uuid() {
 	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
 		var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
 		return v.toString(16);
-	});
-}
-
-function on_click(node, callback) {
-	node.addEventListener('click', callback, false);
-}
-
-function on_click_qs(selector, callback) {
-	on_click(qs(selector), callback);
-}
-
-function on_click_qsa(qs, callback) {
-	qsEach(qs, function(node) {
-		on_click(node, callback);
 	});
 }
 
@@ -145,46 +124,6 @@ function duration_secs(start_timestamp, end_timestamp) {
 		return mins + ':' + utils.add_zeroes(secs);
 	}
 }
-
-function visible(node, val) {
-	// TODO test adding/removing invisible class here
-	if (val) {
-		$(node).show();
-	} else {
-		$(node).hide();
-	}
-}
-
-function qs(selector) {
-	/*@DEV*/
-	var all_nodes = document.querySelectorAll(selector);
-	if (all_nodes.length !== 1) {
-		throw new Error(all_nodes.length + ' nodes matched by qs ' + selector);
-	}
-	/*/@DEV*/
-
-	var node = document.querySelector(selector);
-	if (! node) {
-		report_problem.silent_error('Expected to find qs  ' + selector + ' , but no node matching.');
-		return;
-	}
-	return node;
-}
-
-function visible_qs(selector, val) {
-	visible(qs(selector), val);
-}
-
-function obj_update(obj, other) {
-	for (var key in other) {
-		obj[key] = other[key];
-	}
-}
-
-function deep_copy(obj) {
-	return JSON.parse(JSON.stringify(obj));
-}
-
 function deep_equal(x, y) {
 	if (x === y) {
 		return true;
@@ -232,50 +171,6 @@ function sum(ar) {
 	}, 0);
 }
 
-function disabled_qsa(qs, val) {
-	var nodes = document.querySelectorAll(qs);
-	for (var i = 0;i < nodes.length;i++) {
-		var n = nodes[i];
-		if (val) {
-			n.setAttribute('disabled', 'disabled');
-			$(n).addClass('half-invisible');
-		} else {
-			n.removeAttribute('disabled');
-			$(n).removeClass('half-invisible');
-		}
-	}
-}
-
-function empty(node) {
-	var last;
-	while ((last = node.lastChild)) {
-		node.removeChild(last);
-	}
-}
-
-function text(node, str) {
-	empty(node);
-	node.appendChild(node.ownerDocument.createTextNode(str));
-}
-
-function text_qs(selector, str) {
-	text(qs(selector), str);
-}
-
-function create_el(parent, tagName, attrs, text) {
-	var el = document.createElement(tagName);
-	if (attrs) {
-		for (var k in attrs) {
-			el.setAttribute(k, attrs[k]);
-		}
-	}
-	if (text) {
-		el.appendChild(document.createTextNode(text));
-	}
-	parent.appendChild(el);
-	return el;
-}
-
 function range(n) {
 	var res = [];
 	for (var i = 0;i < n;i++) {
@@ -299,41 +194,39 @@ function svg_el(parent, tagName, attrs, text) {
 	return el;
 }
 
+function obj_update(obj, other) {
+	for (var key in other) {
+		obj[key] = other[key];
+	}
+}
+
+function deep_copy(obj) {
+	return JSON.parse(JSON.stringify(obj));
+}
+
 return {
 	add_zeroes: add_zeroes,
 	any: any,
-	create_el: create_el,
 	date_str: date_str,
 	datetime_str: datetime_str,
 	deep_equal: deep_equal,
 	deep_copy: deep_copy,
-	disabled_qsa: disabled_qsa,
 	duration_mins: duration_mins,
 	duration_secs: duration_secs,
-	empty: empty,
 	human_date_str: human_date_str,
 	iso8601: iso8601,
 	map_dict: map_dict,
 	multiline_regexp: multiline_regexp,
 	obj_update: obj_update,
-	on_click: on_click,
-	on_click_qs: on_click_qs,
-	on_click_qsa: on_click_qsa,
 	parse_query_string: parse_query_string,
-	qsEach: qsEach,
 	repeat: repeat,
 	reverse_every: reverse_every,
 	svg_el: svg_el,
 	sum: sum,
-	text: text,
-	text_qs: text_qs,
 	time_str: time_str,
 	timesecs_str: timesecs_str,
 	uuid: uuid,
-	qs: qs,
 	values: values,
-	visible: visible,
-	visible_qs: visible_qs,
 	range: range,
 };
 })();
@@ -341,7 +234,5 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	module.exports = utils;
-
-	var report_problem = require('./report_problem');
 }
 /*/@DEV*/

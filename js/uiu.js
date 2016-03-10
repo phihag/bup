@@ -21,165 +21,122 @@ function esc_stack_pop() {
 	}
 }
 
-// Returns a function to cancel the dialog
-function make_pick(s, label, values, on_pick, on_cancel, container) {
-	if (! container) {
-		container = $('.bottom-ui');
+function qsEach(selector, func) {
+	var nodes = document.querySelectorAll(selector);
+	for (var i = 0;i < nodes.length;i++) {
+		func(nodes[i], i);
 	}
+}
 
-	var kill_dialog = function() {
-		uiu.esc_stack_pop();
-		dlg_wrapper.remove();
-	};
-	if (s && on_cancel) {
-		control.install_destructor(s, kill_dialog);
+function on_click(node, callback) {
+	node.addEventListener('click', callback, false);
+}
+
+function on_click_qs(selector, callback) {
+	on_click(qs(selector), callback);
+}
+
+function on_click_qsa(qs, callback) {
+	qsEach(qs, function(node) {
+		on_click(node, callback);
+	});
+}
+
+function visible(node, val) {
+	// TODO test adding/removing invisible class here
+	if (val) {
+		$(node).show();
+	} else {
+		$(node).hide();
 	}
-	var cancel = function() {
-		if (! on_cancel) {
-			return;  // No cancelling allowed
-		}
-		if (s) {
-			control.uninstall_destructor(s, kill_dialog);
-		}
-		kill_dialog();
-		on_cancel();
-	};
-	uiu.esc_stack_push(cancel);
+}
 
-	var dlg_wrapper = $('<div class="modal-wrapper">');
-	dlg_wrapper.on('click', function(e) {
-		if (e.target == dlg_wrapper[0]) {
-			cancel();
-		}
-	});
-	var dlg = $('<div class="pick_dialog">');
-	dlg.appendTo(dlg_wrapper);
-
-	var label_span = $('<span>');
-	label_span.text(label);
-	label_span.appendTo(dlg);
-
-	values.forEach(function(v) {
-		var btn = $('<button>');
-		btn.text(v.label);
-		btn.on('click', function() {
-			kill_dialog();
-			on_pick(v);
-		});
-		if (v.modify_button) {
-			v.modify_button(btn, v);
-		}
-		dlg.append(btn);
-	});
-
-	if (on_cancel) {
-		var cancel_btn = $('<button class="cancel-button"></button>');
-		cancel_btn.text(s._('button:Cancel'));
-		cancel_btn.on('click', cancel);
-		cancel_btn.appendTo(dlg);
+function qs(selector) {
+	/*@DEV*/
+	var all_nodes = document.querySelectorAll(selector);
+	if (all_nodes.length !== 1) {
+		throw new Error(all_nodes.length + ' nodes matched by qs ' + selector);
 	}
+	/*/@DEV*/
 
-	container.append(dlg_wrapper);
-
-	return kill_dialog;
+	var node = document.querySelector(selector);
+	if (! node) {
+		report_problem.silent_error('Expected to find qs  ' + selector + ' , but no node matching.');
+		return;
+	}
+	return node;
 }
 
-function make_team_pick(s, label, press_type, on_cancel, modify_button) {
-	var values = [0, 1].map(function(ti) {
-		return {
-			label: pronounciation.teamtext_internal(s, ti),
-			modify_button: modify_button,
-			team_id: ti,
-		};
-	});
-
-	make_pick(s, label, values, function(v) {
-		control.on_press({
-			type: press_type,
-			team_id: v.team_id,
-		});
-	}, on_cancel);
+function visible_qs(selector, val) {
+	visible(qs(selector), val);
 }
 
-
-function make_player_pick(s, label, press_type, on_cancel, modify_button) {
-	var values = [];
-	[0, 1].forEach(function(team_id) {
-		var player_ids = s.setup.is_doubles ? [0, 1] : [0];
-		player_ids.forEach(function(player_id) {
-			values.push({
-				label: s.setup.teams[team_id].players[player_id].name,
-				modify_button: modify_button,
-				team_id: team_id,
-				player_id: player_id,
-			});
-		});
-	});
-
-	make_pick(s, label, values, function(v) {
-		control.on_press({
-			type: press_type,
-			team_id: v.team_id,
-			player_id: v.player_id,
-		});
-	}, on_cancel);
+function disabled_qsa(qs, val) {
+	var nodes = document.querySelectorAll(qs);
+	for (var i = 0;i < nodes.length;i++) {
+		var n = nodes[i];
+		if (val) {
+			n.setAttribute('disabled', 'disabled');
+			$(n).addClass('half-invisible');
+		} else {
+			n.removeAttribute('disabled');
+			$(n).removeClass('half-invisible');
+		}
+	}
 }
 
-function show_picker(obj) {
-	obj.show();
-	var first_button = obj.find('button:first');
-	first_button.addClass('auto-focused');
-	var kill_special_treatment = function() {
-		first_button.removeClass('auto-focused');
-		first_button.off('blur', kill_special_treatment);
-	};
-	first_button.on('blur', kill_special_treatment);
+function empty(node) {
+	var last;
+	while ((last = node.lastChild)) {
+		node.removeChild(last);
+	}
 }
 
-// TODO remove this function in favor of using one of the pick_* functions in the first place
-function add_player_pick(s, container, type, team_id, player_id, on_click, namefunc) {
-       if (! namefunc) {
-               namefunc = function(player) {
-                       return player.name;
-               };
-       }
+function text(node, str) {
+	empty(node);
+	node.appendChild(node.ownerDocument.createTextNode(str));
+}
 
-       var player = s.setup.teams[team_id].players[player_id];
-       var btn = $('<button>');
-       btn.text(namefunc(player));
-       btn.on('click', function() {
-               var press = {
-                       type: type,
-                       team_id: team_id,
-               };
-               if (player_id !== null) {
-                       press.player_id = player_id;
-               }
-               if (on_click) {
-                       on_click(press);
-               }
-               control.on_press(press);
-       });
-       container.append(btn);
-       return btn;
+function text_qs(selector, str) {
+	text(qs(selector), str);
+}
+
+function create_el(parent, tagName, attrs, text) {
+	var el = document.createElement(tagName);
+	if (attrs) {
+		for (var k in attrs) {
+			el.setAttribute(k, attrs[k]);
+		}
+	}
+	if (text) {
+		el.appendChild(document.createTextNode(text));
+	}
+	parent.appendChild(el);
+	return el;
 }
 
 return {
-	esc_stack_push: esc_stack_push,
+	create_el: create_el,
+	disabled_qsa: disabled_qsa,
+	empty: empty,
 	esc_stack_pop: esc_stack_pop,
-	add_player_pick: add_player_pick,
-	make_pick: make_pick,
-	make_team_pick: make_team_pick,
-	make_player_pick: make_player_pick,
-	show_picker: show_picker,
+	esc_stack_push: esc_stack_push,
+	on_click: on_click,
+	on_click_qs: on_click_qs,
+	on_click_qsa: on_click_qsa,
+	qs: qs,
+	qsEach: qsEach,
+	text: text,
+	text_qs: text_qs,
+	visible: visible,
+	visible_qs: visible_qs,
 };
 
 })();
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
-	var control = require('./control');
-	var pronounciation = require('./pronounciation');
+	var report_problem = require('./report_problem');
 
 	module.exports = uiu;
 }

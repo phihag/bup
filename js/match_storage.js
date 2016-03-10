@@ -62,7 +62,7 @@ function ui_init() {
 	matches = matches.filter(function(m) {
 		return (!state.metadata || m.metadata.id != state.metadata.id);
 	});
-	utils.visible_qs('.setup_loadmatch_none', matches.length === 0);
+	uiu.visible_qs('.setup_loadmatch_none', matches.length === 0);
 	var match_list = $('.setup_loadmatch_list');
 	match_list.empty();
 	match_list.toggle(matches.length > 0);
@@ -111,6 +111,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
 	var pronounciation = require('./pronounciation');
 	var settings = require('./settings');
+	var uiu = require('./uiu');
 	var utils = require('./utils');
 
 	module.exports = match_storage;

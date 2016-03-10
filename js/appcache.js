@@ -18,9 +18,9 @@ function ui_init() {
 		return;
 	}
 
-	utils.on_click_qsa('.appcache_update_button', update_now);
-	utils.on_click_qs('.appcache_later_button', function() {
-		utils.visible_qs('.appcache_update_ingame', false);
+	uiu.on_click_qsa('.appcache_update_button', update_now);
+	uiu.on_click_qs('.appcache_later_button', function() {
+		uiu.visible_qs('.appcache_update_ingame', false);
 	});
 
 	window.applicationCache.addEventListener('updateready', function() {
@@ -58,7 +58,7 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
-	var utils = require('./utils');
+	var uiu = require('./uiu');
 
 	module.exports = appcache;
 }

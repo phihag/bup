@@ -69,47 +69,6 @@ function courts(s) {
 	return res;
 }
 
-function calc_score(s, always_zero) {
-	function _finish_score(score, team1_won) {
-		var winner = team1_won ? 0 : 1;
-		if (score[1 - winner] >= 29) {
-			score[winner] = 30;
-		} else if (score[1 - winner] >= 20) {
-			score[winner] = score[1 - winner] + 2;
-		} else {
-			score[winner] = 21;
-		}
-	}
-
-	var scores = [];
-	s.match.finished_games.forEach(function(fg) {
-		scores.push(fg.score.slice());
-	});
-	if (! s.match.finish_confirmed && ((s.game.started || (s.game.score[0] > 0) || (s.game.score[1] > 0) || always_zero))) {
-		scores.push(s.game.score.slice());
-	}
-	if (s.match.finished && !s.match.won_by_score) {
-		if (scores.length > 0) {
-			_finish_score(scores[scores.length - 1], s.match.team1_won);
-		}
-
-		var won_games = 0;
-		scores.forEach(function(score) {
-			if ((score[0] >= score[1]) == s.match.team1_won) {
-				won_games++;
-			}
-		});
-		for (;won_games < 2;won_games++) {
-			var new_score = [0, 0];
-			_finish_score(new_score, s.match.team1_won);
-			scores.push(new_score);
-		}
-	}
-
-	return scores;
-}
-
-
 function send_press(s, press) {
 	if (s.event && s.event.matches) {
 		s.event.matches.forEach(function(match) {
@@ -253,7 +212,7 @@ function enter_match(match) {
 		};
 
 		if ((mwinner == 'inprogress') && calc.match_started(netscore)) {
-			uiu.make_pick(state, state._('network:in progress').replace('{match}', pronounciation.match_str(match.setup)), [{
+			bupui.make_pick(state, state._('network:in progress').replace('{match}', pronounciation.match_str(match.setup)), [{
 				label: state._('network:resume match').replace('{score}', _score_text(netscore)),
 				key: 'resume',
 			}, {
@@ -270,7 +229,7 @@ function enter_match(match) {
 		}
 
 		if (mwinner == 'left' || mwinner == 'right') {
-			uiu.make_pick(state, state._('network:match finished').replace('{score}', _score_text(netscore)).replace('{match}', pronounciation.match_str(match.setup)), [{
+			bupui.make_pick(state, state._('network:match finished').replace('{score}', _score_text(netscore)).replace('{match}', pronounciation.match_str(match.setup)), [{
 				label: state._('network:restart match'),
 			}], function() {
 				control.start_match(state, match.setup);
@@ -375,7 +334,7 @@ function ui_list_matches(s, silent, no_timer) {
 
 		s.event = event;
 		eventsheet.render_links(s);
-		utils.visible_qs('.editevent_link', netw.editable(s));
+		uiu.visible_qs('.editevent_link', netw.editable(s));
 		ui_render_matchlist(s, event);
 	});
 
@@ -476,7 +435,7 @@ function _court_by_id(all_courts, court_id) {
 }
 
 function _court_pick_dialog(s, all_courts, on_cancel) {
-	uiu.make_pick(s, s._('Select Court'), all_courts, function(c) {
+	bupui.make_pick(s, s._('Select Court'), all_courts, function(c) {
 		_set_court(s, c);
 	}, on_cancel, $('body'));
 }
@@ -525,7 +484,7 @@ function ui_init_court(s, hash_query) {
 	var automatic = $('.settings_court_automatic');
 	automatic.show();
 
-	utils.on_click_qs('#court_court_str', function() {
+	uiu.on_click_qs('#court_court_str', function() {
 		_court_pick_dialog(s, all_courts, function() {
 			// On abort change nothing
 		});
@@ -533,7 +492,7 @@ function ui_init_court(s, hash_query) {
 }
 
 function ui_init(s, hash_query) {
-	utils.on_click_qs('.network_desync_image', resync);
+	uiu.on_click_qs('.network_desync_image', resync);
 	netstats.ui_init();
 
 	// Load networking module(s)
@@ -559,7 +518,7 @@ function ui_init(s, hash_query) {
 	var netw = get_netw();
 	if (netw) {
 		netw.ui_init(s);
-		utils.visible_qs('.setup_network_container', true);
+		uiu.visible_qs('.setup_network_container', true);
 	}
 }
 
@@ -593,8 +552,8 @@ function ui_install_staticnet(s, stnet) {
 
 function ui_uninstall_staticnet(s) {
 	delete networks.staticnet;
-	var msg_container = utils.qs('.setup_network_message');
-	utils.empty(msg_container);
+	var msg_container = uiu.qs('.setup_network_message');
+	uiu.empty(msg_container);
 	ui_list_matches(s, false, true);
 }
 
@@ -610,7 +569,6 @@ function on_edit_event(s) {
 }
 
 return {
-	calc_score: calc_score,
 	courts: courts,
 	enter_match: enter_match,
 	errstate: errstate,
@@ -636,6 +594,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var btde = require('./btde');
+	var bupui = require('./bupui');
 	var calc = require('./calc');
 	var control = require('./control');
 	var courtspot = require('./courtspot');

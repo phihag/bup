@@ -65,7 +65,7 @@ function ui_init() {
 	if (! supported()) {
 		$('.fullscreen_line').hide();
 	}
-	utils.on_click_qs('.fullscreen_button', function() {
+	uiu.on_click_qs('.fullscreen_button', function() {
 		toggle();
 	});
 }
@@ -108,7 +108,6 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var uiu = require('./uiu');
-	var utils = require('./utils');
 
 	module.exports = fullscreen;
 }

@@ -50,27 +50,27 @@ function ui_init() {
 		return true;
 	});
 
-	utils.on_click_qs('.editmode_leave', function() {
+	uiu.on_click_qs('.editmode_leave', function() {
 		leave();
 	});
-	utils.on_click_qs('.editmode_change-ends', function() {
+	uiu.on_click_qs('.editmode_change-ends', function() {
 		control.on_press({
 			type: 'editmode_change-ends',
 		});
 	});
-	utils.on_click_qs('.editmode_switch_left', function() {
+	uiu.on_click_qs('.editmode_switch_left', function() {
 		control.on_press({
 			type: 'editmode_switch-sides',
 			side: 'left',
 		});
 	});
-	utils.on_click_qs('.editmode_switch_right', function() {
+	uiu.on_click_qs('.editmode_switch_right', function() {
 		control.on_press({
 			type: 'editmode_switch-sides',
 			side: 'right',
 		});
 	});
-	utils.on_click_qs('.editmode_arrow', function() {
+	uiu.on_click_qs('.editmode_arrow', function() {
 		control.on_press({
 			type: 'editmode_change-serve',
 		});
@@ -78,10 +78,10 @@ function ui_init() {
 }
 
 function hide_inputs(since_game) {
-	utils.qsEach('.editmode_score', function(n) {
+	uiu.qsEach('.editmode_score', function(n) {
 		$(n).removeClass('editmode_invalid');
 		var game_index = parseInt(n.getAttribute('data-game-index'), 10);
-		utils.visible(n, game_index < since_game);
+		uiu.visible(n, game_index < since_game);
 	});
 }
 
@@ -217,10 +217,11 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
-	var utils = require('./utils');
 	var calc = require('./calc');
 	var control = require('./control');
 	var settings = require('./settings');
+	var uiu = require('./uiu');
+	var utils = require('./utils');
 
 	module.exports = editmode;
 }

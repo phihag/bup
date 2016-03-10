@@ -172,9 +172,9 @@ function show() {
 	uiu.esc_stack_push(hide);
 	control.set_current(state);
 
-	utils.visible_qs('.order_layout', true);
-	var display = utils.qs('.order_display');
-	utils.empty(display);
+	uiu.visible_qs('.order_layout', true);
+	var display = uiu.qs('.order_display');
+	uiu.empty(display);
 
 	if (state.event && state.event.matches) {
 		current_matches = get_omatches(state);
@@ -182,10 +182,10 @@ function show() {
 		current_locked = {};
 		ui_render();
 	} else {
-		utils.visible_qs('.order_loading-icon', true);
+		uiu.visible_qs('.order_loading-icon', true);
 		network.list_matches(state, function(err, ev) {
-			utils.visible_qs('.order_error', !!err);
-			utils.visible_qs('.order_loading-icon', false);
+			uiu.visible_qs('.order_error', !!err);
+			uiu.visible_qs('.order_loading-icon', false);
 			if (err) {
 				$('.order_error_message').text(err.msg);
 				return;
@@ -210,19 +210,19 @@ function get_omatches(s) {
 function ui_move_prepare(from_idx) {
 	current_from = from_idx;
 	$('.order_ignore_match').addClass('order_ignore_match_active');
-	utils.qsEach('.order_insert', function(insert) {
+	uiu.qsEach('.order_insert', function(insert) {
 		var idx = parseInt(insert.getAttribute('data-order-idx'), 10);
-		utils.visible(insert,
+		uiu.visible(insert,
 			(from_idx >= current_ignore_start) ?
 			((idx <= current_ignore_start) && (idx != -99)) :
 			((idx !== from_idx) && (idx !== from_idx + 1))
 		);
 	});
 
-	utils.qsEach('.order_lock', function(lock) {
+	uiu.qsEach('.order_lock', function(lock) {
 		var idx = parseInt(lock.getAttribute('data-order-idx'), 10);
 		var match_id = current_matches[idx].setup.match_id;
-		utils.visible(lock,
+		uiu.visible(lock,
 			(current_locked[match_id]) ||
 			(from_idx === idx)
 		);
@@ -269,14 +269,14 @@ function ui_move_abort() {
 	$('.order_insert_active').removeClass('order_insert_active');
 	$('.order_ignore_match_active').removeClass('order_ignore_match_active');
 	current_from = null;
-	utils.qsEach('.order_insert', function(insert) {
-		utils.visible(insert, false);
+	uiu.qsEach('.order_insert', function(insert) {
+		uiu.visible(insert, false);
 	});
 
-	utils.qsEach('.order_lock', function(lock) {
+	uiu.qsEach('.order_lock', function(lock) {
 		var idx = parseInt(lock.getAttribute('data-order-idx'), 10);
 		var match_id = current_matches[idx].setup.match_id;
-		utils.visible(lock, current_locked[match_id]);
+		uiu.visible(lock, current_locked[match_id]);
 	});
 }
 
@@ -295,38 +295,38 @@ function on_match_click(e) {
 
 function ui_render() {
 	var conflicts = calc_conflicting_players(current_matches, current_ignore_start);
-	var display = utils.qs('.order_display');
-	utils.empty(display);
+	var display = uiu.qs('.order_display');
+	uiu.empty(display);
 
 	function _create_num(display, i) {
-		var container = utils.create_el(display, 'div', {
+		var container = uiu.create_el(display, 'div', {
 			'class': 'order_num_container',
 		});
 		var css_class = 'order_num' + ((i >= current_ignore_start) ? ' order_num_invisible' : '');
-		utils.create_el(container, 'div', {'class': css_class}, (i + 1) + '.');
+		uiu.create_el(container, 'div', {'class': css_class}, (i + 1) + '.');
 	}
 
 	function _create_ignore_after_mark(display) {
-		var container = utils.create_el(display, 'div', {
+		var container = uiu.create_el(display, 'div', {
 			'class': 'order_ignore_match',
 		});
-		var ignore_label = utils.create_el(container, 'span', {
+		var ignore_label = uiu.create_el(container, 'span', {
 			'class': 'order_ignore_label',
 			'data-i18n': 'order:ignore match',
 			'data-order-idx': '-99',
 		}, state._('order:ignore match'));
-		utils.on_click(ignore_label, ui_mark_click);
+		uiu.on_click(ignore_label, ui_mark_click);
 		_create_insert_mark(display, -99);
 	}
 
 	function _create_insert_mark(display, idx) {
-		var container = utils.create_el(display, 'div', {'class': 'order_insert_container'});
-		var mark = utils.create_el(container, 'div', {'class': 'order_insert default-invisible', 'data-order-idx': idx});
-		utils.on_click(mark, ui_mark_click);
+		var container = uiu.create_el(display, 'div', {'class': 'order_insert_container'});
+		var mark = uiu.create_el(container, 'div', {'class': 'order_insert default-invisible', 'data-order-idx': idx});
+		uiu.on_click(mark, ui_mark_click);
 	}
 
 	function _create_lock_mark(display, idx) {
-		var container = utils.create_el(display, 'div', {'class': 'order_lock_container'});
+		var container = uiu.create_el(display, 'div', {'class': 'order_lock_container'});
 		var match_id = current_matches[idx].setup.match_id;
 		var mark_class = 'order_lock';
 		if (current_locked[match_id]) {
@@ -334,8 +334,8 @@ function ui_render() {
 		} else {
 			mark_class += ' default-invisible';
 		}
-		var mark = utils.create_el(container, 'div', {'class': mark_class, 'data-order-idx': idx});
-		utils.on_click(mark, ui_lock_click);
+		var mark = uiu.create_el(container, 'div', {'class': mark_class, 'data-order-idx': idx});
+		uiu.on_click(mark, ui_lock_click);
 	}
 
 	function _add_player(team_container, team, player_id) {
@@ -353,7 +353,7 @@ function ui_render() {
 			// Player not configured yet
 			player_name = 'N.N.';
 		}
-		utils.create_el(team_container, 'span', {'class': 'order_player', style: style}, player_name);
+		uiu.create_el(team_container, 'span', {'class': 'order_player', style: style}, player_name);
 	}
 
 	_create_insert_mark(display, 0);
@@ -368,18 +368,18 @@ function ui_render() {
 		}
 
 		var setup = match.setup;
-		var match_el = utils.create_el(display, 'table', {'class': 'order_match', 'data-order-idx': i});
-		var match_tr = utils.create_el(match_el, 'tr');
-		utils.create_el(match_tr, 'td', {'class': 'order_match_name'}, setup.match_name);
+		var match_el = uiu.create_el(display, 'table', {'class': 'order_match', 'data-order-idx': i});
+		var match_tr = uiu.create_el(match_el, 'tr');
+		uiu.create_el(match_tr, 'td', {'class': 'order_match_name'}, setup.match_name);
 		for (var team_id = 0;team_id <= 1;team_id++) {
 			var team = setup.teams[team_id];
-			var team_container = utils.create_el(match_tr, 'td', {'class': 'order_match_team'});
+			var team_container = uiu.create_el(match_tr, 'td', {'class': 'order_match_team'});
 			_add_player(team_container, team, 0);
 			if (setup.is_doubles) {
 				_add_player(team_container, team, 1);
 			}
 		}
-		utils.on_click(match_el, on_match_click);
+		uiu.on_click(match_el, on_match_click);
 
 		if (i < current_ignore_start) {
 			_create_insert_mark(display, i + 1);
@@ -404,25 +404,25 @@ function hide() {
 }
 
 function ui_init() {
-	utils.on_click_qs('.order_link', function(e) {
+	uiu.on_click_qs('.order_link', function(e) {
 		e.preventDefault();
 		show();
 		return false;
 	});
 
-	utils.on_click_qs('.order_back', function(e) {
+	uiu.on_click_qs('.order_back', function(e) {
 		e.preventDefault();
 		hide();
 		return false;
 	});
 
-	utils.on_click_qs('.order_layout', function(e) {
+	uiu.on_click_qs('.order_layout', function(e) {
 		if (e.target === this) {
 			ui_move_abort();
 		}
 	});
 
-	utils.on_click_qs('.order_optimize', function() {
+	uiu.on_click_qs('.order_optimize', function() {
 		var matches_to_sort = current_matches.slice(0, current_ignore_start);
 		var best_order = optimize(cost_rest2, matches_to_sort, utils.range(current_ignore_start), current_locked);
 		var sorted = sort_by_order(matches_to_sort, best_order, current_ignore_start);
@@ -430,7 +430,7 @@ function ui_init() {
 		ui_render();
 	});
 
-	utils.on_click_qs('.order_reset', function() {
+	uiu.on_click_qs('.order_reset', function() {
 		current_matches = get_omatches(state);
 		current_ignore_start = current_matches.length;
 		current_locked = {};

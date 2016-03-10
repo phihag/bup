@@ -263,6 +263,7 @@ var i18n_de = {
 'netstats:No stats available': 'Noch keine Netzwerkkommunikation',
 'stats:<25ms': 'Latenz <25ms',
 'stats:<100ms': 'Latenz <100ms',
+'stats:<250ms': 'Latenz <250ms',
 'stats:<500ms': 'Latenz <500ms',
 'stats:<2s': 'Latenz <2s',
 'stats:<8s': 'Latenz <8s',

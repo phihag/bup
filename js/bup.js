@@ -18,7 +18,7 @@ function ui_init() {
 	compat.ui_init();
 	i18n.ui_init();
 
-	utils.text_qs('.version', bup_version);
+	uiu.text_qs('.version', bup_version);
 
 	appcache.ui_init();
 	$('#script_jspdf').on('load', scoresheet.jspdf_loaded);
@@ -92,6 +92,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var startmatch = require('./startmatch');
 	var stats = require('./stats');
 	var timer = require('./timer');
+	var uiu = require('./uiu');
 	var utils = require('./utils');
 
 	module.exports = {
