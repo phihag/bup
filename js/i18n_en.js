@@ -336,6 +336,8 @@ var i18n_en = {
 'weekday:4': 'Thu',
 'weekday:5': 'Fri',
 'weekday:6': 'Sat',
+
+'liveaw:lost connection': 'Reconnecting ...',
 };
 
 /*@DEV*/

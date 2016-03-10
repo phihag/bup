@@ -1,22 +1,21 @@
 liveaw: try HTTP version
+liveaw: order of matches keeps changing
 liveaw: check various event metadata
-show match results in liveaw
-liveaw: bup button in match overview
-liveaw hall display (incl. court)
+liveaw: show player names
+liveaw: show match results
 liveaw: improve/test reconnecting
 liveaw: proper reconnect backoff
 
 MVP liveaw
-	show current state (who's on which court, like btde)
-	allow hiding from public
-	configure leauge (Spielberichtszettel etc.)
+	display mode
+	allow hiding events from public
 	implement errstate
 	implement timeout
 	implement netstats gathering as well (re-add component)
+	implement authorization (including login via bup)
 
 mail Markus
 mail Daniel / Peter
-
 
 black background of main screen does not reach to bottom
 english: always start with to my right, even in team competitions

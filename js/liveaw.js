@@ -13,9 +13,11 @@ function connect() {
 		for (var i = 0;i < outstanding_requests.length;i++) {
 			_send_request(outstanding_requests[i]);
 		}
+		network.errstate('liveaw.conn', null);
 	};
 	new_ws.onmessage = _handle_response;
 	new_ws.onclose = function() {
+		network.errstate('liveaw.conn', state._('liveaw:lost connection'));
 		ws = null;
 		connect();
 	};
@@ -102,7 +104,6 @@ function send_score(s) {
 		match_id: s.setup.liveaw_match_id,
 		presses: s.presses,
 	}, function(response) {
-		console.log('got', response);
 		var err = (response.type == 'error') ? response : null;
 		network.errstate('liveaw.send_score', err);
 	});

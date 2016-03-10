@@ -338,6 +338,7 @@ var i18n_de = {
 'weekday:5': 'Fr',
 'weekday:6': 'Sa',
 
+'liveaw:lost connection': 'Verbindung wird wiederhergestellt ...',
 };
 
 /*@DEV*/
