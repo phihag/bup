@@ -452,7 +452,12 @@ function render_team_bl(ev, es_key, ui8r) {
 				var player_matches = matches_by_player[gpname];
 				for (var match_idx=0;match_idx < player_matches.length;match_idx++) {
 					var nkey = gender_id + calc_match_id(player_matches[match_idx]);
-					x_fields[key_idxs[nkey][player_idx]] = '  X';
+					var match_player_idxs = key_idxs[nkey];
+					if (!match_player_idxs) {
+						// When a player is set up as male + female by mistake, do not cross
+						continue;
+					}
+					x_fields[match_player_idxs[player_idx]] = '  X';
 				}
 			}
 		}
