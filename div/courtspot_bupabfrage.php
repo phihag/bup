@@ -26,8 +26,11 @@ function make_player($name, $row) {
 }
 
 function make_team($name, $row, $verwaltung) {
+	$players = [];
 	$p1 = make_player($name . 'spieler1', $row);
-	$players = [$p1];
+	if ($p1['firstname'] && $p1['lastname']) {
+		array_push($players, $p1);
+	}
 	$p2 = make_player($name . 'spieler2', $row);
 	if ($p2['firstname'] && $p2['lastname']) {
 		array_push($players, $p2);
@@ -128,8 +131,13 @@ while ($row = $result->fetch_assoc()) {
 
 	$home_team = make_team('Heim', $row, $verwaltung);
 	$away_team = make_team('Gast', $row, $verwaltung);
-	$is_doubles = count($home_team['players']) == 2;
-	$match_id =  'courtspot_' . $today . '_' . $row['Art'] . '_' . $home_team['name'] . '-' . $away_team['name'];
+	$is_doubles = preg_match('/HD|DD|GD/', $row['Art']);
+	$player_count = $is_doubles ? 2 : 1;
+	$incomplete = (
+		(count($home_team['players']) !== $player_count) ||
+		(count($away_team['players']) !== $player_count)
+	);
+	$match_id = 'courtspot_' . $today . '_' . $row['Art'] . '_' . $home_team['name'] . '-' . $away_team['name'];
 
 	$setup = [
 		'match_name' => $row['Art'],
@@ -141,6 +149,7 @@ while ($row = $result->fetch_assoc()) {
 		'tournament_name' => $tournament_name,
 		'team_competition' => true,
 		'is_doubles' => $is_doubles,
+		'incomplete' => $incomplete,
 		'counting' => '3x21',
 		'courtspot_match_id' => $row['Art'],
 		'match_id' => $match_id,

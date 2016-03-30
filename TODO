@@ -1,13 +1,13 @@
+liveaw: show player names in detail
+liveaw: show match results in detail
 liveaw: try HTTP version
 liveaw: order of matches keeps changing
 liveaw: check various event metadata
-liveaw: show player names
-liveaw: show match results
 liveaw: improve/test reconnecting
 liveaw: proper reconnect backoff
 
 MVP liveaw
-	display mode
+	bup display mode
 	allow hiding events from public
 	implement errstate
 	implement timeout
@@ -23,6 +23,7 @@ eventsheet: more space for input, vary by field
 N10 sensitivity! ontouch instead of onclick
 scoresheet: Fit "TSV Neuhausen-Nymphenburg 1"
 network loading should not move around design
+option to call home upon event completion
 
 do not line-break player / team names in announcements
 multi scoresheet: shift+S shows outdated state when editing match
