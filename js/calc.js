@@ -40,6 +40,26 @@ function _is_winner(counting, game_idx, candidate, other) {
 	throw new Error('Invalid counting scheme ' + counting);
 }
 
+function team_carded(s, team_id) {
+	var res = null;
+	s.match.cards.forEach(function(card) {
+		if (card.team_id === team_id) {
+			res = card;
+		}
+	});
+	return res;
+}
+
+function player_carded(s, team_id, player_id) {
+	var res = null;
+	s.match.cards.forEach(function(card) {
+		if ((card.team_id === team_id) && (card.player_id === player_id)) {
+			res = card;
+		}
+	});
+	return res;
+}
+
 // Returns null if score cannot be mapped
 function lr2score(s, lrscore) {
 	if ((lrscore.left === undefined) || (lrscore.right === undefined)) {
@@ -418,7 +438,7 @@ function calc_press(s, press) {
 		break;
 	case 'yellow-card':
 		s.match.marks.push(press);
-		s.match.carded[press.team_id] = true;
+		s.match.cards.push(press);
 		break;
 	case 'red-card':
 		if (! s.match.finished) {
@@ -434,6 +454,7 @@ function calc_press(s, press) {
 			}
 		}
 		s.match.marks.push(press);
+		s.match.cards.push(press);
 		break;
 	case 'injury':
 		s.match.marks.push(press);
@@ -615,7 +636,7 @@ function init_calc(s) {
 		just_unsuspended: false,
 		marks: [],
 		finish_confirmed: false,
-		carded: [false, false],
+		cards: [],
 		team1_won: null,
 		shuttle_count: 0,
 		announce_pregame: null,
@@ -823,6 +844,8 @@ return {
 	server: server,
 	SPECIAL_PRESSES: SPECIAL_PRESSES,
 	state: state,
+	team_carded: team_carded,
+	player_carded: player_carded,
 	undo: undo,
 };
 

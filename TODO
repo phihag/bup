@@ -21,13 +21,13 @@ MVP liveaw
 mail Markus
 mail Daniel / Peter
 
+CourtSpot: support order
 english: always start with to my right, even in team competitions
 eventsheet: more space for input, vary by field
 N10 sensitivity! ontouch instead of onclick
 scoresheet: Fit "TSV Neuhausen-Nymphenburg 1"
 network loading should not move around design
 option to call home upon event completion
-
 do not line-break player / team names in announcements
 multi scoresheet: shift+S shows outdated state when editing match
 highlight current match button
@@ -339,6 +339,7 @@ stats: + match points
 remove all mentions of home/away
 anroid chrome address bar background color
 remove one of network.calc_gamescore and calc.calc_game_score?
+improve yellow-card.svg / red-card.svg
 helper function for document.querySelector which asserts result is true (and omits silent error otherwise)
 	use that in various util functions as well
 allow challenges

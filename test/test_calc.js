@@ -3001,7 +3001,7 @@ _describe('calc_state', function() {
 			team1_left: true,
 		}, {
 			type: 'pick_server',
-			team1_id: 0,
+			team_id: 0,
 		}, {
 			type: 'love-all',
 		}];
@@ -3045,7 +3045,7 @@ _describe('calc_state', function() {
 			team1_left: true,
 		}, {
 			type: 'pick_server',
-			team1_id: 0,
+			team_id: 0,
 		}, {
 			type: 'love-all',
 		}];
@@ -3095,7 +3095,7 @@ _describe('calc_state', function() {
 		});
 		presses.push({
 			type: 'pick_server',
-			team1_id: 0,
+			team_id: 0,
 			timestamp: 2,
 		});
 		s = state_after(presses, SINGLES_SETUP);
@@ -3204,7 +3204,8 @@ _describe('calc_state', function() {
 
 		presses.push({
 			type: 'pick_server',
-			team1_id: 0,
+			team_id: 0,
+			player_id: 0,
 			timestamp: 102987,
 		});
 		s = state_after(presses, DOUBLES_SETUP);
@@ -3218,6 +3219,91 @@ _describe('calc_state', function() {
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.deepStrictEqual(s.timer, false);
+	});
+
+	_it('cards', function() {
+		var presses = [];
+		presses.push({
+			type: 'pick_side',
+			team1_left: true,
+		});
+		presses.push({
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'love-all',
+		});
+
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(bup.calc.team_carded(s, 0), null);
+		assert.deepStrictEqual(bup.calc.team_carded(s, 1), null);
+		assert.deepStrictEqual(bup.calc.player_carded(s, 0, 0), null);
+		assert.deepStrictEqual(bup.calc.player_carded(s, 0, 1), null);
+		assert.deepStrictEqual(bup.calc.player_carded(s, 1, 0), null);
+		assert.deepStrictEqual(bup.calc.player_carded(s, 1, 1), null);
+
+		var ycard1 = {
+			type: 'yellow-card',
+			team_id: 1,
+			player_id: 1,
+		};
+		presses.push(ycard1);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(bup.calc.team_carded(s, 0), null);
+		assert.deepStrictEqual(bup.calc.team_carded(s, 1), ycard1);
+		assert.deepStrictEqual(bup.calc.player_carded(s, 0, 0), null);
+		assert.deepStrictEqual(bup.calc.player_carded(s, 0, 1), null);
+		assert.deepStrictEqual(bup.calc.player_carded(s, 1, 0), null);
+		assert.deepStrictEqual(bup.calc.player_carded(s, 1, 1), ycard1);
+
+		var rcard1 = {
+			type: 'red-card',
+			team_id: 1,
+			player_id: 1,
+		};
+		presses.push(rcard1);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(bup.calc.team_carded(s, 0), null);
+		assert.deepStrictEqual(bup.calc.team_carded(s, 1), rcard1);
+		assert.deepStrictEqual(bup.calc.player_carded(s, 0, 0), null);
+		assert.deepStrictEqual(bup.calc.player_carded(s, 0, 1), null);
+		assert.deepStrictEqual(bup.calc.player_carded(s, 1, 0), null);
+		assert.deepStrictEqual(bup.calc.player_carded(s, 1, 1), rcard1);
+
+		var ycard2 = {
+			type: 'yellow-card',
+			team_id: 0,
+			player_id: 0,
+		};
+		presses.push(ycard2);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(bup.calc.team_carded(s, 0), ycard2);
+		assert.deepStrictEqual(bup.calc.team_carded(s, 1), rcard1);
+		assert.deepStrictEqual(bup.calc.player_carded(s, 0, 0), ycard2);
+		assert.deepStrictEqual(bup.calc.player_carded(s, 0, 1), null);
+		assert.deepStrictEqual(bup.calc.player_carded(s, 1, 0), null);
+		assert.deepStrictEqual(bup.calc.player_carded(s, 1, 1), rcard1);
+
+		var rcard2 = {
+			type: 'yellow-card',
+			team_id: 0,
+			player_id: 1,
+		};
+		presses.push(rcard2);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(bup.calc.team_carded(s, 0), rcard2);
+		assert.deepStrictEqual(bup.calc.team_carded(s, 1), rcard1);
+		assert.deepStrictEqual(bup.calc.player_carded(s, 0, 0), ycard2);
+		assert.deepStrictEqual(bup.calc.player_carded(s, 0, 1), rcard2);
+		assert.deepStrictEqual(bup.calc.player_carded(s, 1, 0), null);
+		assert.deepStrictEqual(bup.calc.player_carded(s, 1, 1), rcard1);
 	});
 });
 

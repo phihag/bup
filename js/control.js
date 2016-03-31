@@ -282,8 +282,9 @@ function init_buttons() {
 		bupui.make_player_pick(
 			state, state._('exceptions:dialog:yellow-card'), 'yellow-card', ui_show_exception_dialog,
 			function(btn, v) {
-				if (state.match.carded[v.team_id]) {
-					btn.prepend('<span class="yellow-card-image"></span>');
+				var carded = calc.team_carded(state, v.team_id);
+				if (carded) {
+					btn.prepend('<span class="' + carded.type + '-image"></span>');
 					btn.attr('disabled', 'disabled');
 				}
 			}

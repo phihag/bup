@@ -1349,6 +1349,7 @@ _describe('pronounciation', function() {
 		var presses = [];
 		var s = state_after(presses, DOUBLES_TEAM_SETUP);
 		assert.strictEqual(pronounce_de(s), null);
+		assert.deepStrictEqual(s.match.cards, []);
 
 		var yellow_card = {
 			type: 'yellow-card',
@@ -1361,6 +1362,7 @@ _describe('pronounciation', function() {
 			'Andrew, Verwarnung wegen unsportlichen Verhaltens.');
 		assert.equal(pronounce_en(s),
 			'Andrew, warning for misconduct.');
+		assert.deepStrictEqual(s.match.cards, [yellow_card]);
 
 		var red_card = {
 			type: 'red-card',
@@ -1369,13 +1371,13 @@ _describe('pronounciation', function() {
 		};
 		presses.push(red_card);
 		s = state_after(presses, DOUBLES_TEAM_SETUP);
+		assert.deepStrictEqual(s.match.cards, [yellow_card, red_card]);
 		assert.equal(pronounce_de(s),
 			'Andrew, Verwarnung wegen unsportlichen Verhaltens.\n' +
 			'Bob, Fehler wegen unsportlichen Verhaltens.');
 		assert.equal(pronounce_en(s),
 			'Andrew, warning for misconduct.\n' +
 			'Bob, faulted.');
-		assert.strictEqual(s.match.carded[0], true);
 		assert.deepEqual(s.match.pending_red_cards, []); // See RTTO 3.7.7
 
 		presses.push({
@@ -1393,7 +1395,7 @@ _describe('pronounciation', function() {
 			player_id: 1,
 		});
 		s = state_after(presses, DOUBLES_SETUP);
-		assert.strictEqual(s.match.carded[0], true);
+		assert.deepStrictEqual(s.match.cards, [yellow_card, red_card]);
 		assert.deepEqual(s.match.pending_red_cards, []); // See RTTO 3.7.7
 		assert.deepEqual(s.game.score, [0, 0]);
 		assert.equal(s.game.started, false);

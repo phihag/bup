@@ -37,13 +37,18 @@
 	background-image: url(../icons/exception_retired.svg);
 }
 
-.yellow-card-image {
+.yellow-card-image,.red-card-image {
 	text-align: middle;
 	margin-right: 0.4em;
 	display: inline-block;
 	width: 1em;
 	height: 1em;
-	background-image: url(../icons/yellow-card.svg);
 	background-repeat: no-repeat;
 	background-size: 100%;
+}
+.yellow-card-image {
+	background-image: url(../icons/yellow-card.svg);
+}
+.red-card-image {
+	background-image: url(../icons/red-card.svg);
 }
