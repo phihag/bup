@@ -238,10 +238,11 @@ function ui_render(s) {
 		return;
 	}
 
+	var court = calc.court(s);
 	editmode.render(s);
 
 	function _court_show_player(key) {
-		var p = s.court['player_' + key];
+		var p = court['player_' + key];
 		$('#court_' + key + '>span').text(p === null ? '' : p.name);
 	}
 	_court_show_player('left_odd');
@@ -264,13 +265,13 @@ function ui_render(s) {
 
 	$('#shuttle_counter_value').text(s.match.shuttle_count);
 
-	if (s.court.left_serving === null) {
+	if (court.left_serving === null) {
 		$('#court_arrow').hide();
 	} else {
 		$('#court_arrow').show();
 		var transform_css = ('scale(' +
-			(s.court.left_serving ? '-1' : '1') + ',' +
-			(s.court.serving_downwards ? '1' : '-1') + ')'
+			(court.left_serving ? '-1' : '1') + ',' +
+			(court.serving_downwards ? '1' : '-1') + ')'
 		);
 		$('#court_arrow,.editmode_arrow').css({
 			'transform': transform_css,

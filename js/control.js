@@ -105,7 +105,6 @@ function stop_match(s) {
 	delete s.remote;
 	delete s.match;
 	delete s.game;
-	delete s.court;
 	s.initialized = false;
 }
 

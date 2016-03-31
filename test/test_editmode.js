@@ -36,30 +36,32 @@ _describe('editmode', function() {
 		press_score(presses, 1, 0);
 
 		var s = state_after(presses, DOUBLES_SETUP);
+		var court = bup.calc.court(s);
 		assert.equal(s.game.team1_serving, true);
 		assert.equal(s.game.service_over, true);
 		assert.deepEqual(s.game.score, [3, 1]);
 		assert.equal(s.game.teams_player1_even[0], false);
 		assert.equal(s.game.teams_player1_even[1], true);
-		assert.equal(s.court.player_left_even.name, 'Alice');
-		assert.equal(s.court.player_left_odd.name, 'Andrew');
-		assert.equal(s.court.player_right_even.name, 'Bob');
-		assert.equal(s.court.player_right_odd.name, 'Birgit');
+		assert.equal(court.player_left_even.name, 'Alice');
+		assert.equal(court.player_left_odd.name, 'Andrew');
+		assert.equal(court.player_right_even.name, 'Bob');
+		assert.equal(court.player_right_odd.name, 'Birgit');
 
 		// Umpire notices wrong order of the last two points, but decides to use manual editing instead of undo
 		presses.push({
 			type: 'editmode_change-serve',
 		});
 		s = state_after(presses, DOUBLES_SETUP);
+		court = bup.calc.court(s);
 		assert.equal(s.game.team1_serving, false);
 		assert.equal(s.game.service_over, true);
 		assert.deepEqual(s.game.score, [3, 1]);
 		assert.equal(s.game.teams_player1_even[0], false);
 		assert.equal(s.game.teams_player1_even[1], true);
-		assert.equal(s.court.player_left_even.name, 'Alice');
-		assert.equal(s.court.player_left_odd.name, 'Andrew');
-		assert.equal(s.court.player_right_even.name, 'Bob');
-		assert.equal(s.court.player_right_odd.name, 'Birgit');
+		assert.equal(court.player_left_even.name, 'Alice');
+		assert.equal(court.player_left_odd.name, 'Andrew');
+		assert.equal(court.player_right_even.name, 'Bob');
+		assert.equal(court.player_right_odd.name, 'Birgit');
 
 		press_score(presses, 1, 0);
 		s = state_after(presses, DOUBLES_SETUP);
@@ -897,12 +899,13 @@ _describe('editmode', function() {
 
 		var s = state_after(presses, SINGLES_SETUP);
 		assert.deepEqual(s.game.score, [3, 0]);
-		assert.strictEqual(s.court.player_left_odd.name, 'Alice');
-		assert.strictEqual(s.court.player_left_even, null);
-		assert.strictEqual(s.court.player_right_odd.name, 'Bob');
-		assert.strictEqual(s.court.player_right_even, null);
-		assert.strictEqual(s.court.left_serving, true);
-		assert.strictEqual(s.court.serving_downwards, true);
+		var court = bup.calc.court(s);
+		assert.strictEqual(court.player_left_odd.name, 'Alice');
+		assert.strictEqual(court.player_left_even, null);
+		assert.strictEqual(court.player_right_odd.name, 'Bob');
+		assert.strictEqual(court.player_right_even, null);
+		assert.strictEqual(court.left_serving, true);
+		assert.strictEqual(court.serving_downwards, true);
 	});
 
 	_it('crash with postmatch-confirm', function() {
@@ -1107,8 +1110,9 @@ _describe('editmode', function() {
 		assert.strictEqual(s.game.team1_serving, true);
 		assert.strictEqual(s.game.teams_player1_even[0], true);
 		assert.strictEqual(s.game.teams_player1_even[1], true);
-		assert.strictEqual(s.court.serving_downwards, false);
-		assert.strictEqual(s.court.left_serving, true);
+		var court = bup.calc.court(s);
+		assert.strictEqual(court.serving_downwards, false);
+		assert.strictEqual(court.left_serving, true);
 
 		presses.push({
 			type: 'editmode_set-score',
@@ -1120,10 +1124,11 @@ _describe('editmode', function() {
 		assert.strictEqual(s.game.team1_serving, null);
 		assert.strictEqual(s.game.teams_player1_even[0], true);
 		assert.strictEqual(s.game.teams_player1_even[1], true);
-		assert.strictEqual(s.court.serving_downwards, null);
-		assert.strictEqual(s.court.left_serving, null);
 		assert.strictEqual(s.game.game, true);
 		assert.strictEqual(s.game.team1_won, true);
+		court = bup.calc.court(s);
+		assert.strictEqual(court.serving_downwards, null);
+		assert.strictEqual(court.left_serving, null);
 
 		presses.push({
 			type: 'editmode_set-score',
@@ -1135,10 +1140,11 @@ _describe('editmode', function() {
 		assert.strictEqual(s.game.team1_serving, true);
 		assert.strictEqual(s.game.teams_player1_even[0], true);
 		assert.strictEqual(s.game.teams_player1_even[1], true);
-		assert.strictEqual(s.court.serving_downwards, false);
-		assert.strictEqual(s.court.left_serving, true);
 		assert.strictEqual(s.game.game, false);
 		assert.strictEqual(s.game.team1_won, null);
+		court = bup.calc.court(s);
+		assert.strictEqual(court.serving_downwards, false);
+		assert.strictEqual(court.left_serving, true);
 
 		presses.push({
 			type: 'editmode_set-score',
@@ -1150,8 +1156,9 @@ _describe('editmode', function() {
 		assert.strictEqual(s.game.teams_player1_even[0], true);
 		assert.strictEqual(s.game.teams_player1_even[1], true);
 		assert.strictEqual(s.game.team1_serving, true);
-		assert.strictEqual(s.court.serving_downwards, false);
-		assert.strictEqual(s.court.left_serving, true);
+		court = bup.calc.court(s);
+		assert.strictEqual(court.serving_downwards, false);
+		assert.strictEqual(court.left_serving, true);
 
 		presses.push({
 			type: 'editmode_change-serve',
@@ -1162,8 +1169,9 @@ _describe('editmode', function() {
 		assert.strictEqual(s.game.teams_player1_even[0], true);
 		assert.strictEqual(s.game.teams_player1_even[1], true);
 		assert.strictEqual(s.game.team1_serving, false);
-		assert.strictEqual(s.court.serving_downwards, true);
-		assert.strictEqual(s.court.left_serving, false);
+		court = bup.calc.court(s);
+		assert.strictEqual(court.serving_downwards, true);
+		assert.strictEqual(court.left_serving, false);
 
 		presses.push({
 			type: 'editmode_change-serve',
@@ -1174,8 +1182,9 @@ _describe('editmode', function() {
 		assert.strictEqual(s.game.teams_player1_even[0], true);
 		assert.strictEqual(s.game.teams_player1_even[1], true);
 		assert.strictEqual(s.game.team1_serving, true);
-		assert.strictEqual(s.court.serving_downwards, false);
-		assert.strictEqual(s.court.left_serving, true);
+		court = bup.calc.court(s);
+		assert.strictEqual(court.serving_downwards, false);
+		assert.strictEqual(court.left_serving, true);
 	});
 
 
@@ -1282,10 +1291,11 @@ _describe('editmode', function() {
 		var s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(s.game.teams_player1_even[0], true);
 		assert.equal(s.game.teams_player1_even[1], false);
-		assert.equal(s.court.player_left_even.name, 'Andrew');
-		assert.equal(s.court.player_left_odd.name, 'Alice');
-		assert.equal(s.court.player_right_even.name, 'Birgit');
-		assert.equal(s.court.player_right_odd.name, 'Bob');
+		var court = bup.calc.court(s);
+		assert.equal(court.player_left_even.name, 'Andrew');
+		assert.equal(court.player_left_odd.name, 'Alice');
+		assert.equal(court.player_right_even.name, 'Birgit');
+		assert.equal(court.player_right_odd.name, 'Bob');
 
 		// Umpire notices wrong player is serving, uses edit
 		presses.push({
@@ -1295,10 +1305,11 @@ _describe('editmode', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(s.game.teams_player1_even[0], false);
 		assert.equal(s.game.teams_player1_even[1], false);
-		assert.equal(s.court.player_left_even.name, 'Alice');
-		assert.equal(s.court.player_left_odd.name, 'Andrew');
-		assert.equal(s.court.player_right_even.name, 'Birgit');
-		assert.equal(s.court.player_right_odd.name, 'Bob');
+		court = bup.calc.court(s);
+		assert.equal(court.player_left_even.name, 'Alice');
+		assert.equal(court.player_left_odd.name, 'Andrew');
+		assert.equal(court.player_right_even.name, 'Birgit');
+		assert.equal(court.player_right_odd.name, 'Bob');
 
 		presses.push({
 			type: 'editmode_switch-sides',
@@ -1307,10 +1318,11 @@ _describe('editmode', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(s.game.teams_player1_even[0], false);
 		assert.equal(s.game.teams_player1_even[1], true);
-		assert.equal(s.court.player_left_even.name, 'Alice');
-		assert.equal(s.court.player_left_odd.name, 'Andrew');
-		assert.equal(s.court.player_right_even.name, 'Bob');
-		assert.equal(s.court.player_right_odd.name, 'Birgit');
+		court = bup.calc.court(s);
+		assert.equal(court.player_left_even.name, 'Alice');
+		assert.equal(court.player_left_odd.name, 'Andrew');
+		assert.equal(court.player_right_even.name, 'Bob');
+		assert.equal(court.player_right_odd.name, 'Birgit');
 
 		presses.push({
 			type: 'editmode_switch-sides',
@@ -1319,10 +1331,11 @@ _describe('editmode', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(s.game.teams_player1_even[0], false);
 		assert.equal(s.game.teams_player1_even[1], false);
-		assert.equal(s.court.player_left_even.name, 'Alice');
-		assert.equal(s.court.player_left_odd.name, 'Andrew');
-		assert.equal(s.court.player_right_even.name, 'Birgit');
-		assert.equal(s.court.player_right_odd.name, 'Bob');
+		court = bup.calc.court(s);
+		assert.equal(court.player_left_even.name, 'Alice');
+		assert.equal(court.player_left_odd.name, 'Andrew');
+		assert.equal(court.player_right_even.name, 'Birgit');
+		assert.equal(court.player_right_odd.name, 'Bob');
 
 		presses.push({
 			type: 'editmode_switch-sides',
@@ -1331,10 +1344,11 @@ _describe('editmode', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(s.game.teams_player1_even[0], true);
 		assert.equal(s.game.teams_player1_even[1], false);
-		assert.equal(s.court.player_left_even.name, 'Andrew');
-		assert.equal(s.court.player_left_odd.name, 'Alice');
-		assert.equal(s.court.player_right_even.name, 'Birgit');
-		assert.equal(s.court.player_right_odd.name, 'Bob');
+		court = bup.calc.court(s);
+		assert.equal(court.player_left_even.name, 'Andrew');
+		assert.equal(court.player_left_odd.name, 'Alice');
+		assert.equal(court.player_right_even.name, 'Birgit');
+		assert.equal(court.player_right_odd.name, 'Bob');
 
 		presses.push({
 			type: 'editmode_change-ends',
@@ -1342,10 +1356,11 @@ _describe('editmode', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(s.game.teams_player1_even[0], true);
 		assert.equal(s.game.teams_player1_even[1], false);
-		assert.equal(s.court.player_left_even.name, 'Birgit');
-		assert.equal(s.court.player_left_odd.name, 'Bob');
-		assert.equal(s.court.player_right_even.name, 'Andrew');
-		assert.equal(s.court.player_right_odd.name, 'Alice');
+		court = bup.calc.court(s);
+		assert.equal(court.player_left_even.name, 'Birgit');
+		assert.equal(court.player_left_odd.name, 'Bob');
+		assert.equal(court.player_right_even.name, 'Andrew');
+		assert.equal(court.player_right_odd.name, 'Alice');
 
 		presses.push({
 			type: 'editmode_switch-sides',
@@ -1354,10 +1369,11 @@ _describe('editmode', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(s.game.teams_player1_even[0], true);
 		assert.equal(s.game.teams_player1_even[1], true);
-		assert.equal(s.court.player_left_even.name, 'Bob');
-		assert.equal(s.court.player_left_odd.name, 'Birgit');
-		assert.equal(s.court.player_right_even.name, 'Andrew');
-		assert.equal(s.court.player_right_odd.name, 'Alice');
+		court = bup.calc.court(s);
+		assert.equal(court.player_left_even.name, 'Bob');
+		assert.equal(court.player_left_odd.name, 'Birgit');
+		assert.equal(court.player_right_even.name, 'Andrew');
+		assert.equal(court.player_right_odd.name, 'Alice');
 
 		presses.push({
 			type: 'editmode_switch-sides',
@@ -1366,10 +1382,11 @@ _describe('editmode', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(s.game.teams_player1_even[0], true);
 		assert.equal(s.game.teams_player1_even[1], false);
-		assert.equal(s.court.player_left_even.name, 'Birgit');
-		assert.equal(s.court.player_left_odd.name, 'Bob');
-		assert.equal(s.court.player_right_even.name, 'Andrew');
-		assert.equal(s.court.player_right_odd.name, 'Alice');
+		court = bup.calc.court(s);
+		assert.equal(court.player_left_even.name, 'Birgit');
+		assert.equal(court.player_left_odd.name, 'Bob');
+		assert.equal(court.player_right_even.name, 'Andrew');
+		assert.equal(court.player_right_odd.name, 'Alice');
 
 		presses.push({
 			type: 'editmode_switch-sides',
@@ -1378,10 +1395,11 @@ _describe('editmode', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(s.game.teams_player1_even[0], false);
 		assert.equal(s.game.teams_player1_even[1], false);
-		assert.equal(s.court.player_left_even.name, 'Birgit');
-		assert.equal(s.court.player_left_odd.name, 'Bob');
-		assert.equal(s.court.player_right_even.name, 'Alice');
-		assert.equal(s.court.player_right_odd.name, 'Andrew');
+		court = bup.calc.court(s);
+		assert.equal(court.player_left_even.name, 'Birgit');
+		assert.equal(court.player_left_odd.name, 'Bob');
+		assert.equal(court.player_right_even.name, 'Alice');
+		assert.equal(court.player_right_odd.name, 'Andrew');
 
 		presses.push({
 			type: 'editmode_change-ends',
@@ -1389,10 +1407,11 @@ _describe('editmode', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(s.game.teams_player1_even[0], false);
 		assert.equal(s.game.teams_player1_even[1], false);
-		assert.equal(s.court.player_left_even.name, 'Alice');
-		assert.equal(s.court.player_left_odd.name, 'Andrew');
-		assert.equal(s.court.player_right_even.name, 'Birgit');
-		assert.equal(s.court.player_right_odd.name, 'Bob');
+		court = bup.calc.court(s);
+		assert.equal(court.player_left_even.name, 'Alice');
+		assert.equal(court.player_left_odd.name, 'Andrew');
+		assert.equal(court.player_right_even.name, 'Birgit');
+		assert.equal(court.player_right_odd.name, 'Bob');
 	});
 
 	_it('score setting in singles should update sides', function() {
@@ -1410,10 +1429,11 @@ _describe('editmode', function() {
 		var s = state_after(presses, SINGLES_SETUP);
 		assert.equal(s.game.teams_player1_even[0], true);
 		assert.equal(s.game.teams_player1_even[1], true);
-		assert.equal(s.court.player_left_even.name, 'Alice');
-		assert.equal(s.court.player_left_odd, null);
-		assert.equal(s.court.player_right_even.name, 'Bob');
-		assert.equal(s.court.player_right_odd, null);
+		var court = bup.calc.court(s);
+		assert.equal(court.player_left_even.name, 'Alice');
+		assert.equal(court.player_left_odd, null);
+		assert.equal(court.player_right_even.name, 'Bob');
+		assert.equal(court.player_right_odd, null);
 
 		presses.push({
 			type: 'editmode_set-score',
@@ -1422,10 +1442,11 @@ _describe('editmode', function() {
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(s.game.teams_player1_even[0], false);
 		assert.equal(s.game.teams_player1_even[1], false);
-		assert.equal(s.court.player_left_even, null);
-		assert.equal(s.court.player_left_odd.name, 'Alice');
-		assert.equal(s.court.player_right_even, null);
-		assert.equal(s.court.player_right_odd.name, 'Bob');
+		court = bup.calc.court(s);
+		assert.equal(court.player_left_even, null);
+		assert.equal(court.player_left_odd.name, 'Alice');
+		assert.equal(court.player_right_even, null);
+		assert.equal(court.player_right_odd.name, 'Bob');
 	});
 });
 

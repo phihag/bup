@@ -199,7 +199,6 @@ function init_state(s, setup, presses, keep_metadata) {
 
 	delete s.match;
 	delete s.game;
-	delete s.court;
 }
 
 function server(s) {
@@ -696,7 +695,17 @@ function state(s) {
 		}
 	}
 
-	s.court = {
+	s.match.announce_pregame = (
+		(s.game.start_server_player_id !== null) &&
+		(s.game.start_receiver_player_id !== null) &&
+		(!s.game.started) &&
+		(!s.game.finished));
+
+	return s;
+}
+
+function court(s) {
+	var res = {
 		player_left_odd: null,
 		player_left_even: null,
 		player_right_even: null,
@@ -706,39 +715,31 @@ function state(s) {
 		serving_downwards: null,
 	};
 	if ((s.game.team1_left !== null) && (s.game.teams_player1_even[0] !== null)) {
-		s.court[
+		res[
 			'player_' + (s.game.team1_left ? 'left' : 'right') + '_' +
 			(s.game.teams_player1_even[0] ? 'even' : 'odd')] = s.setup.teams[0].players[0];
 		if (s.setup.is_doubles) {
-			s.court[
+			res[
 				'player_' + (s.game.team1_left ? 'left' : 'right') + '_' +
 				(s.game.teams_player1_even[0] ? 'odd' : 'even')] = s.setup.teams[0].players[1];
 		}
 	}
 	if ((s.game.team1_left !== null) && (s.game.teams_player1_even[1] !== null)) {
-		s.court[
+		res[
 			'player_' + (s.game.team1_left ? 'right' : 'left') + '_' +
 			(s.game.teams_player1_even[1] ? 'even' : 'odd')] = s.setup.teams[1].players[0];
 		if (s.setup.is_doubles) {
-			s.court[
+			res[
 				'player_' + (s.game.team1_left ? 'right' : 'left') + '_' +
 				(s.game.teams_player1_even[1] ? 'odd' : 'even')] = s.setup.teams[1].players[1];
 		}
 	}
-
 	if ((! s.game.finished) && (s.game.team1_serving !== null) && (s.game.team1_left !== null)) {
-		s.court.left_serving = s.game.team1_serving == s.game.team1_left;
+		res.left_serving = s.game.team1_serving == s.game.team1_left;
 		var serving_score = s.game.score[s.game.team1_serving ? 0 : 1];
-		s.court.serving_downwards = (serving_score % 2 === 0) != s.court.left_serving;
+		res.serving_downwards = (serving_score % 2 === 0) != res.left_serving;
 	}
-
-	s.match.announce_pregame = (
-		(s.game.start_server_player_id !== null) &&
-		(s.game.start_receiver_player_id !== null) &&
-		(!s.game.started) &&
-		(!s.game.finished));
-
-	return s;
+	return res;
 }
 
 function undo(s) {
@@ -831,6 +832,7 @@ function netscore(s, always_zero) {
 
 return {
 	calc_press: calc_press,
+	court: court,
 	copy_state: copy_state,
 	game_winner: game_winner,
 	init_calc: init_calc,
