@@ -51,6 +51,10 @@
 	border-top-right-radius: 1em;
 	z-index: 100;
 }
+#pronounciation {
+	min-width: calc(100vw - 60vmin);
+	max-width: calc(100vw - 60vmin);
+}
 .pick_dialog button {
 	font-size: inherit;
 	display: block;
@@ -74,5 +78,8 @@
 
 	#pronounciation {
 		bottom: 25vmin;
+		min-width: auto;
+		max-width: none;
+		width: 94%;
 	}
 }
