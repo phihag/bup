@@ -291,7 +291,16 @@ function init_buttons() {
 	});
 	uiu.on_click_qs('#exception_red', function() {
 		hide_exception_dialog();
-		bupui.make_player_pick(state, state._('exceptions:dialog:red-card'), 'red-card', ui_show_exception_dialog);
+		bupui.make_player_pick(
+			state, state._('exceptions:dialog:red-card'), 'red-card', ui_show_exception_dialog,
+			function(btn, v) {
+				var carded = calc.team_carded(state, v.team_id);
+				if (carded) {
+					btn.prepend('<span class="' + carded.type + '-image"></span>');
+				}
+			}
+		);
+
 	});
 	uiu.on_click_qs('#exception_injury', function() {
 		hide_exception_dialog();
