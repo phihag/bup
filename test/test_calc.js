@@ -37,10 +37,10 @@ _describe('calc_state', function() {
 		assert.equal(s.match.finish_confirmed, false);
 		assert.deepEqual(s.match.game_score, [0, 0]);
 		assert.equal(s.match.announce_pregame, false);
-		assert.strictEqual(court.player_left_odd, null);
-		assert.strictEqual(court.player_left_even, null);
-		assert.strictEqual(court.player_right_odd, null);
-		assert.strictEqual(court.player_right_even, null);
+		assert.strictEqual(court.left_odd, null);
+		assert.strictEqual(court.left_even, null);
+		assert.strictEqual(court.right_odd, null);
+		assert.strictEqual(court.right_even, null);
 		assert.strictEqual(court.left_serving, null);
 		assert.strictEqual(court.serving_downwards, null);
 
@@ -67,10 +67,10 @@ _describe('calc_state', function() {
 		assert.equal(s.match.finish_confirmed, false);
 		assert.deepEqual(s.match.game_score, [0, 0]);
 		assert.equal(s.match.announce_pregame, false);
-		assert.equal(court.player_left_odd, null);
-		assert.equal(court.player_left_even, null);
-		assert.equal(court.player_right_odd, null);
-		assert.equal(court.player_right_even, null);
+		assert.equal(court.left_odd, null);
+		assert.equal(court.left_even, null);
+		assert.equal(court.right_odd, null);
+		assert.equal(court.right_even, null);
 		assert.equal(court.left_serving, null);
 		assert.equal(court.serving_downwards, null);
 	});
@@ -82,10 +82,10 @@ _describe('calc_state', function() {
 		}], SINGLES_SETUP);
 		var court = bup.calc.court(s);
 		assert.equal(s.game.team1_serving, null);
-		assert.equal(court.player_left_odd, null);
-		assert.equal(court.player_left_even.name, 'Alice');
-		assert.equal(court.player_right_odd, null);
-		assert.equal(court.player_right_even.name, 'Bob');
+		assert.equal(court.left_odd, null);
+		assert.equal(court.left_even.player.name, 'Alice');
+		assert.equal(court.right_odd, null);
+		assert.equal(court.right_even.player.name, 'Bob');
 		assert.equal(court.left_serving, null);
 		assert.equal(court.serving_downwards, null);
 
@@ -99,10 +99,10 @@ _describe('calc_state', function() {
 		}], SINGLES_SETUP);
 		court = bup.calc.court(s);
 		assert.equal(s.game.team1_serving, false);
-		assert.equal(court.player_left_odd, null);
-		assert.equal(court.player_left_even.name, 'Bob');
-		assert.equal(court.player_right_odd, null);
-		assert.equal(court.player_right_even.name, 'Alice');
+		assert.equal(court.left_odd, null);
+		assert.equal(court.left_even.player.name, 'Bob');
+		assert.equal(court.right_odd, null);
+		assert.equal(court.right_even.player.name, 'Alice');
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, false);
 
@@ -116,10 +116,10 @@ _describe('calc_state', function() {
 		}], SINGLES_SETUP);
 		court = bup.calc.court(s);
 		assert.equal(s.game.team1_serving, true);
-		assert.equal(court.player_left_odd, null);
-		assert.equal(court.player_left_even.name, 'Bob');
-		assert.equal(court.player_right_odd, null);
-		assert.equal(court.player_right_even.name, 'Alice');
+		assert.equal(court.left_odd, null);
+		assert.equal(court.left_even.player.name, 'Bob');
+		assert.equal(court.right_odd, null);
+		assert.equal(court.right_even.player.name, 'Alice');
 		assert.equal(court.left_serving, false);
 		assert.equal(court.serving_downwards, true);
 
@@ -133,10 +133,10 @@ _describe('calc_state', function() {
 		}], SINGLES_SETUP);
 		court = bup.calc.court(s);
 		assert.equal(s.game.team1_serving, true);
-		assert.equal(court.player_left_odd, null);
-		assert.equal(court.player_left_even.name, 'Alice');
-		assert.equal(court.player_right_odd, null);
-		assert.equal(court.player_right_even.name, 'Bob');
+		assert.equal(court.left_odd, null);
+		assert.equal(court.left_even.player.name, 'Alice');
+		assert.equal(court.right_odd, null);
+		assert.equal(court.right_even.player.name, 'Bob');
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, false);
 
@@ -150,10 +150,10 @@ _describe('calc_state', function() {
 		}], SINGLES_SETUP);
 		court = bup.calc.court(s);
 		assert.equal(s.game.team1_serving, false);
-		assert.equal(court.player_left_odd, null);
-		assert.equal(court.player_left_even.name, 'Alice');
-		assert.equal(court.player_right_odd, null);
-		assert.equal(court.player_right_even.name, 'Bob');
+		assert.equal(court.left_odd, null);
+		assert.equal(court.left_even.player.name, 'Alice');
+		assert.equal(court.right_odd, null);
+		assert.equal(court.right_even.player.name, 'Bob');
 		assert.equal(court.left_serving, false);
 		assert.equal(court.serving_downwards, true);
 	});
@@ -165,10 +165,10 @@ _describe('calc_state', function() {
 		}], DOUBLES_SETUP);
 		var court = bup.calc.court(s);
 		assert.equal(s.game.team1_serving, null);
-		assert.equal(court.player_left_odd, null);
-		assert.equal(court.player_left_even, null);
-		assert.equal(court.player_right_odd, null);
-		assert.equal(court.player_right_even, null);
+		assert.equal(court.left_odd, null);
+		assert.equal(court.left_even, null);
+		assert.equal(court.right_odd, null);
+		assert.equal(court.right_even, null);
 		assert.equal(court.left_serving, null);
 		assert.equal(court.serving_downwards, null);
 
@@ -182,10 +182,10 @@ _describe('calc_state', function() {
 		}], DOUBLES_SETUP);
 		court = bup.calc.court(s);
 		assert.equal(s.game.team1_serving, false);
-		assert.equal(court.player_left_odd.name, 'Birgit');
-		assert.equal(court.player_left_even.name, 'Bob');
-		assert.equal(court.player_right_odd, null);
-		assert.equal(court.player_right_even, null);
+		assert.equal(court.left_odd.player.name, 'Birgit');
+		assert.equal(court.left_even.player.name, 'Bob');
+		assert.equal(court.right_odd, null);
+		assert.equal(court.right_even, null);
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, false);
 
@@ -205,10 +205,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_serving, false);
 		assert.equal(s.game.teams_player1_even[0], true);
 		assert.equal(s.game.teams_player1_even[1], false);
-		assert.equal(court.player_left_odd.name, 'Bob');
-		assert.equal(court.player_left_even.name, 'Birgit');
-		assert.equal(court.player_right_odd.name, 'Alice');
-		assert.equal(court.player_right_even.name, 'Andrew');
+		assert.equal(court.left_odd.player.name, 'Bob');
+		assert.equal(court.left_even.player.name, 'Birgit');
+		assert.equal(court.right_odd.player.name, 'Alice');
+		assert.equal(court.right_even.player.name, 'Andrew');
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, false);
 
@@ -228,10 +228,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_serving, true);
 		assert.equal(s.game.teams_player1_even[0], false);
 		assert.equal(s.game.teams_player1_even[1], false);
-		assert.equal(court.player_left_odd.name, 'Bob');
-		assert.equal(court.player_left_even.name, 'Birgit');
-		assert.equal(court.player_right_odd.name, 'Andrew');
-		assert.equal(court.player_right_even.name, 'Alice');
+		assert.equal(court.left_odd.player.name, 'Bob');
+		assert.equal(court.left_even.player.name, 'Birgit');
+		assert.equal(court.right_odd.player.name, 'Andrew');
+		assert.equal(court.right_even.player.name, 'Alice');
 		assert.equal(court.left_serving, false);
 		assert.equal(court.serving_downwards, true);
 
@@ -251,10 +251,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_serving, true);
 		assert.equal(s.game.teams_player1_even[0], true);
 		assert.equal(s.game.teams_player1_even[1], false);
-		assert.equal(court.player_left_odd.name, 'Bob');
-		assert.equal(court.player_left_even.name, 'Birgit');
-		assert.equal(court.player_right_odd.name, 'Alice');
-		assert.equal(court.player_right_even.name, 'Andrew');
+		assert.equal(court.left_odd.player.name, 'Bob');
+		assert.equal(court.left_even.player.name, 'Birgit');
+		assert.equal(court.right_odd.player.name, 'Alice');
+		assert.equal(court.right_even.player.name, 'Andrew');
 		assert.equal(court.left_serving, false);
 		assert.equal(court.serving_downwards, true);
 
@@ -274,10 +274,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_serving, false);
 		assert.equal(s.game.teams_player1_even[0], true);
 		assert.equal(s.game.teams_player1_even[1], true);
-		assert.equal(court.player_left_odd.name, 'Birgit');
-		assert.equal(court.player_left_even.name, 'Bob');
-		assert.equal(court.player_right_odd.name, 'Alice');
-		assert.equal(court.player_right_even.name, 'Andrew');
+		assert.equal(court.left_odd.player.name, 'Birgit');
+		assert.equal(court.left_even.player.name, 'Bob');
+		assert.equal(court.right_odd.player.name, 'Alice');
+		assert.equal(court.right_even.player.name, 'Andrew');
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, false);
 
@@ -295,10 +295,10 @@ _describe('calc_state', function() {
 		}], DOUBLES_SETUP);
 		court = bup.calc.court(s);
 		assert.equal(s.game.team1_serving, false);
-		assert.equal(court.player_left_odd.name, 'Andrew');
-		assert.equal(court.player_left_even.name, 'Alice');
-		assert.equal(court.player_right_odd.name, 'Bob');
-		assert.equal(court.player_right_even.name, 'Birgit');
+		assert.equal(court.left_odd.player.name, 'Andrew');
+		assert.equal(court.left_even.player.name, 'Alice');
+		assert.equal(court.right_odd.player.name, 'Bob');
+		assert.equal(court.right_even.player.name, 'Birgit');
 		assert.equal(court.left_serving, false);
 		assert.equal(court.serving_downwards, true);
 
@@ -318,10 +318,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_serving, true);
 		assert.equal(s.game.teams_player1_even[0], true);
 		assert.equal(s.game.teams_player1_even[1], false);
-		assert.equal(court.player_left_odd.name, 'Alice');
-		assert.equal(court.player_left_even.name, 'Andrew');
-		assert.equal(court.player_right_odd.name, 'Bob');
-		assert.equal(court.player_right_even.name, 'Birgit');
+		assert.equal(court.left_odd.player.name, 'Alice');
+		assert.equal(court.left_even.player.name, 'Andrew');
+		assert.equal(court.right_odd.player.name, 'Bob');
+		assert.equal(court.right_even.player.name, 'Birgit');
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, false);
 	});
@@ -341,10 +341,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_serving, true);
 		assert.equal(s.game.service_over, false);
 		assert.deepEqual(s.game.score, [0, 0]);
-		assert.equal(court.player_left_odd, null);
-		assert.equal(court.player_left_even.name, 'Bob');
-		assert.equal(court.player_right_odd, null);
-		assert.equal(court.player_right_even.name, 'Alice');
+		assert.equal(court.left_odd, null);
+		assert.equal(court.left_even.player.name, 'Bob');
+		assert.equal(court.right_odd, null);
+		assert.equal(court.right_even.player.name, 'Alice');
 		assert.equal(court.left_serving, false);
 		assert.equal(court.serving_downwards, true);
 		assert.equal(s.game.interval, false);
@@ -381,10 +381,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_serving, false);
 		assert.deepEqual(s.game.score, [2, 3]);
 		assert.equal(s.game.service_over, true);
-		assert.equal(court.player_left_odd.name, 'Bob');
-		assert.equal(court.player_left_even, null);
-		assert.equal(court.player_right_odd.name, 'Alice');
-		assert.equal(court.player_right_even, null);
+		assert.equal(court.left_odd.player.name, 'Bob');
+		assert.equal(court.left_even, null);
+		assert.equal(court.right_odd.player.name, 'Alice');
+		assert.equal(court.right_even, null);
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, true);
 		assert.equal(s.game.interval, false);
@@ -415,10 +415,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_serving, true);
 		assert.deepEqual(s.game.score, [3, 0]);
 		assert.equal(s.game.service_over, false);
-		assert.equal(court.player_left_odd.name, 'Alice');
-		assert.equal(court.player_left_even, null);
-		assert.equal(court.player_right_odd.name, 'Bob');
-		assert.equal(court.player_right_even, null);
+		assert.equal(court.left_odd.player.name, 'Alice');
+		assert.equal(court.left_even, null);
+		assert.equal(court.right_odd.player.name, 'Bob');
+		assert.equal(court.right_even, null);
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, true);
 
@@ -444,10 +444,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.service_over, true);
 		assert.equal(s.game.teams_player1_even[0], false);
 		assert.equal(s.game.teams_player1_even[1], false);
-		assert.equal(court.player_left_odd.name, 'Alice');
-		assert.equal(court.player_left_even, null);
-		assert.equal(court.player_right_odd.name, 'Bob');
-		assert.equal(court.player_right_even, null);
+		assert.equal(court.left_odd.player.name, 'Alice');
+		assert.equal(court.left_even, null);
+		assert.equal(court.right_odd.player.name, 'Bob');
+		assert.equal(court.right_even, null);
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, true);
 	});
@@ -471,10 +471,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_serving, true);
 		assert.equal(s.game.service_over, false);
 		assert.deepEqual(s.game.score, [0, 0]);
-		assert.equal(court.player_left_odd.name, 'Birgit');
-		assert.equal(court.player_left_even.name, 'Bob');
-		assert.equal(court.player_right_odd.name, 'Andrew');
-		assert.equal(court.player_right_even.name, 'Alice');
+		assert.equal(court.left_odd.player.name, 'Birgit');
+		assert.equal(court.left_even.player.name, 'Bob');
+		assert.equal(court.right_odd.player.name, 'Andrew');
+		assert.equal(court.right_even.player.name, 'Alice');
 		assert.equal(court.left_serving, false);
 		assert.equal(court.serving_downwards, true);
 
@@ -511,10 +511,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_serving, false);
 		assert.equal(s.game.service_over, true);
 		assert.deepEqual(s.game.score, [2, 3]);
-		assert.equal(court.player_left_odd.name, 'Bob');
-		assert.equal(court.player_left_even.name, 'Birgit');
-		assert.equal(court.player_right_odd.name, 'Andrew');
-		assert.equal(court.player_right_even.name, 'Alice');
+		assert.equal(court.left_odd.player.name, 'Bob');
+		assert.equal(court.left_even.player.name, 'Birgit');
+		assert.equal(court.right_odd.player.name, 'Andrew');
+		assert.equal(court.right_even.player.name, 'Alice');
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, true);
 	});
@@ -539,10 +539,10 @@ _describe('calc_state', function() {
 		var court = bup.calc.court(s);
 		assert.equal(s.game.team1_serving, true);
 		assert.deepEqual(s.game.score, [10, 9]);
-		assert.equal(court.player_left_odd, null);
-		assert.equal(court.player_left_even.name, 'Bob');
-		assert.equal(court.player_right_odd, null);
-		assert.equal(court.player_right_even.name, 'Alice');
+		assert.equal(court.left_odd, null);
+		assert.equal(court.left_even.player.name, 'Bob');
+		assert.equal(court.right_odd, null);
+		assert.equal(court.right_even.player.name, 'Alice');
 		assert.equal(court.left_serving, false);
 		assert.equal(court.serving_downwards, true);
 		assert.equal(s.game.interval, false);
@@ -560,10 +560,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_serving, true);
 		assert.equal(s.game.service_over, true);
 		assert.deepEqual(s.game.score, [11, 10]);
-		assert.equal(court.player_left_odd.name, 'Bob');
-		assert.equal(court.player_left_even, null);
-		assert.equal(court.player_right_odd.name, 'Alice');
-		assert.equal(court.player_right_even, null);
+		assert.equal(court.left_odd.player.name, 'Bob');
+		assert.equal(court.left_even, null);
+		assert.equal(court.right_odd.player.name, 'Alice');
+		assert.equal(court.right_even, null);
 		assert.equal(court.left_serving, false);
 		assert.equal(court.serving_downwards, false);
 		assert.equal(s.game.interval, true);
@@ -578,10 +578,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_serving, false);
 		assert.equal(s.game.service_over, true);
 		assert.deepEqual(s.game.score, [11, 11]);
-		assert.equal(court.player_left_odd.name, 'Bob');
-		assert.equal(court.player_left_even, null);
-		assert.equal(court.player_right_odd.name, 'Alice');
-		assert.equal(court.player_right_even, null);
+		assert.equal(court.left_odd.player.name, 'Bob');
+		assert.equal(court.left_even, null);
+		assert.equal(court.right_odd.player.name, 'Alice');
+		assert.equal(court.right_even, null);
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, true);
 		assert.equal(s.game.interval, false);
@@ -595,10 +595,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_serving, false);
 		assert.equal(s.game.service_over, false);
 		assert.deepEqual(s.game.score, [11, 12]);
-		assert.equal(court.player_left_odd, null);
-		assert.equal(court.player_left_even.name, 'Bob');
-		assert.equal(court.player_right_odd, null);
-		assert.equal(court.player_right_even.name, 'Alice');
+		assert.equal(court.left_odd, null);
+		assert.equal(court.left_even.player.name, 'Bob');
+		assert.equal(court.right_odd, null);
+		assert.equal(court.right_even.player.name, 'Alice');
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, false);
 		assert.equal(s.game.interval, false);
@@ -884,10 +884,10 @@ _describe('calc_state', function() {
 		assert.strictEqual(s.game.won_by_score, true);
 		assert.equal(court.left_serving, null);
 		assert.equal(court.serving_downwards, null);
-		assert.equal(court.player_left_odd.name, 'Alice');
-		assert.equal(court.player_right_odd.name, 'Bob');
-		assert.equal(court.player_left_even, null);
-		assert.equal(court.player_right_even, null);
+		assert.equal(court.left_odd.player.name, 'Alice');
+		assert.equal(court.right_odd.player.name, 'Bob');
+		assert.equal(court.left_even, null);
+		assert.equal(court.right_even, null);
 
 		presses.push({
 			type: 'score',
@@ -908,10 +908,10 @@ _describe('calc_state', function() {
 		assert.strictEqual(s.game.won_by_score, true);
 		assert.equal(court.left_serving, null);
 		assert.equal(court.serving_downwards, null);
-		assert.equal(court.player_left_odd.name, 'Alice');
-		assert.equal(court.player_right_odd.name, 'Bob');
-		assert.equal(court.player_left_even, null);
-		assert.equal(court.player_right_even, null);
+		assert.equal(court.left_odd.player.name, 'Alice');
+		assert.equal(court.right_odd.player.name, 'Bob');
+		assert.equal(court.left_even, null);
+		assert.equal(court.right_even, null);
 
 		presses.push({
 			type: 'postgame-confirm',
@@ -951,10 +951,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_serving, true);
 		assert.equal(court.left_serving, false);
 		assert.equal(court.serving_downwards, true);
-		assert.equal(court.player_left_odd, null);
-		assert.equal(court.player_left_even.name, 'Bob');
-		assert.equal(court.player_right_odd, null);
-		assert.equal(court.player_right_even.name, 'Alice');
+		assert.equal(court.left_odd, null);
+		assert.equal(court.left_even.player.name, 'Bob');
+		assert.equal(court.right_odd, null);
+		assert.equal(court.right_even.player.name, 'Alice');
 
 		press_score(presses, 9, 9);
 		presses.push({
@@ -983,10 +983,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_serving, true);
 		assert.equal(court.left_serving, false);
 		assert.equal(court.serving_downwards, false);
-		assert.equal(court.player_left_odd.name, 'Bob');
-		assert.equal(court.player_left_even, null);
-		assert.equal(court.player_right_odd.name, 'Alice');
-		assert.equal(court.player_right_even, null);
+		assert.equal(court.left_odd.player.name, 'Bob');
+		assert.equal(court.left_even, null);
+		assert.equal(court.right_odd.player.name, 'Alice');
+		assert.equal(court.right_even, null);
 
 		press_score(presses, 9, 7);
 		presses.push({
@@ -1011,10 +1011,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_serving, false);
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, false);
-		assert.equal(court.player_left_odd, null);
-		assert.equal(court.player_left_even.name, 'Bob');
-		assert.equal(court.player_right_odd, null);
-		assert.equal(court.player_right_even.name, 'Alice');
+		assert.equal(court.left_odd, null);
+		assert.equal(court.left_even.player.name, 'Bob');
+		assert.equal(court.right_odd, null);
+		assert.equal(court.right_even.player.name, 'Alice');
 
 		presses.push({
 			type: 'score',
@@ -1034,10 +1034,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_serving, true);
 		assert.equal(court.left_serving, false);
 		assert.equal(court.serving_downwards, true);
-		assert.equal(court.player_left_odd, null);
-		assert.equal(court.player_left_even.name, 'Bob');
-		assert.equal(court.player_right_odd, null);
-		assert.equal(court.player_right_even.name, 'Alice');
+		assert.equal(court.left_odd, null);
+		assert.equal(court.left_even.player.name, 'Bob');
+		assert.equal(court.right_odd, null);
+		assert.equal(court.right_even.player.name, 'Alice');
 
 		presses.push({
 			type: 'score',
@@ -1057,10 +1057,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_serving, true);
 		assert.equal(court.left_serving, false);
 		assert.equal(court.serving_downwards, false);
-		assert.equal(court.player_left_odd.name, 'Bob');
-		assert.equal(court.player_left_even, null);
-		assert.equal(court.player_right_odd.name, 'Alice');
-		assert.equal(court.player_right_even, null);
+		assert.equal(court.left_odd.player.name, 'Bob');
+		assert.equal(court.left_even, null);
+		assert.equal(court.right_odd.player.name, 'Alice');
+		assert.equal(court.right_even, null);
 
 		presses.push({
 			type: 'score',
@@ -1093,10 +1093,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_serving, true);
 		assert.equal(court.left_serving, false);
 		assert.equal(court.serving_downwards, false);
-		assert.equal(court.player_left_odd.name, 'Bob');
-		assert.equal(court.player_left_even, null);
-		assert.equal(court.player_right_odd.name, 'Alice');
-		assert.equal(court.player_right_even, null);
+		assert.equal(court.left_odd.player.name, 'Bob');
+		assert.equal(court.left_even, null);
+		assert.equal(court.right_odd.player.name, 'Alice');
+		assert.equal(court.right_even, null);
 
 		presses.push({
 			type: 'score',
@@ -1116,10 +1116,10 @@ _describe('calc_state', function() {
 		court = bup.calc.court(s);
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, true);
-		assert.equal(court.player_left_odd.name, 'Bob');
-		assert.equal(court.player_left_even, null);
-		assert.equal(court.player_right_odd.name, 'Alice');
-		assert.equal(court.player_right_even, null);
+		assert.equal(court.left_odd.player.name, 'Bob');
+		assert.equal(court.left_even, null);
+		assert.equal(court.right_odd.player.name, 'Alice');
+		assert.equal(court.right_even, null);
 
 		presses.push({
 			type: 'score',
@@ -1186,10 +1186,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_left, true);
 		assert.equal(court.left_serving, false);
 		assert.equal(court.serving_downwards, true);
-		assert.equal(court.player_left_even.name, 'Alice');
-		assert.equal(court.player_right_even.name, 'Bob');
-		assert.equal(court.player_left_odd, null);
-		assert.equal(court.player_right_odd, null);
+		assert.equal(court.left_even.player.name, 'Alice');
+		assert.equal(court.right_even.player.name, 'Bob');
+		assert.equal(court.left_odd, null);
+		assert.equal(court.right_odd, null);
 
 		press_score(presses, 9, 9);
 		presses.push({
@@ -1215,10 +1215,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_left, false);
 		assert.equal(court.left_serving, false);
 		assert.equal(court.serving_downwards, false);
-		assert.equal(court.player_right_odd.name, 'Alice');
-		assert.equal(court.player_left_odd.name, 'Bob');
-		assert.equal(court.player_left_even, null);
-		assert.equal(court.player_right_even, null);
+		assert.equal(court.right_odd.player.name, 'Alice');
+		assert.equal(court.left_odd.player.name, 'Bob');
+		assert.equal(court.left_even, null);
+		assert.equal(court.right_even, null);
 
 		var alt_presses = presses.slice();
 		alt_presses.push({
@@ -1239,10 +1239,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_serving, false);
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, false);
-		assert.equal(court.player_left_even.name, 'Bob');
-		assert.equal(court.player_right_even.name, 'Alice');
-		assert.equal(court.player_left_odd, null);
-		assert.equal(court.player_right_odd, null);
+		assert.equal(court.left_even.player.name, 'Bob');
+		assert.equal(court.right_even.player.name, 'Alice');
+		assert.equal(court.left_odd, null);
+		assert.equal(court.right_odd, null);
 
 		presses.push({
 			type: 'score',
@@ -1262,10 +1262,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_serving, true);
 		assert.equal(court.left_serving, false);
 		assert.equal(court.serving_downwards, true);
-		assert.equal(court.player_left_even.name, 'Bob');
-		assert.equal(court.player_right_even.name, 'Alice');
-		assert.equal(court.player_left_odd, null);
-		assert.equal(court.player_right_odd, null);
+		assert.equal(court.left_even.player.name, 'Bob');
+		assert.equal(court.right_even.player.name, 'Alice');
+		assert.equal(court.left_odd, null);
+		assert.equal(court.right_odd, null);
 
 		press_score(presses, 10, 6);
 		presses.push({
@@ -1290,10 +1290,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_serving, true);
 		assert.equal(court.left_serving, false);
 		assert.equal(court.serving_downwards, true);
-		assert.equal(court.player_left_even.name, 'Bob');
-		assert.equal(court.player_right_even.name, 'Alice');
-		assert.equal(court.player_left_odd, null);
-		assert.equal(court.player_right_odd, null);
+		assert.equal(court.left_even.player.name, 'Bob');
+		assert.equal(court.right_even.player.name, 'Alice');
+		assert.equal(court.left_odd, null);
+		assert.equal(court.right_odd, null);
 
 		presses.push({
 			type: 'score',
@@ -1313,10 +1313,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_serving, false);
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, false);
-		assert.equal(court.player_left_even.name, 'Bob');
-		assert.equal(court.player_right_even.name, 'Alice');
-		assert.equal(court.player_left_odd, null);
-		assert.equal(court.player_right_odd, null);
+		assert.equal(court.left_even.player.name, 'Bob');
+		assert.equal(court.right_even.player.name, 'Alice');
+		assert.equal(court.left_odd, null);
+		assert.equal(court.right_odd, null);
 
 		presses.push({
 			type: 'score',
@@ -1337,10 +1337,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_serving, false);
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, true);
-		assert.equal(court.player_left_odd.name, 'Bob');
-		assert.equal(court.player_right_odd.name, 'Alice');
-		assert.equal(court.player_left_even, null);
-		assert.equal(court.player_right_even, null);
+		assert.equal(court.left_odd.player.name, 'Bob');
+		assert.equal(court.right_odd.player.name, 'Alice');
+		assert.equal(court.left_even, null);
+		assert.equal(court.right_even, null);
 		assert.equal(bup.calc.score_str(s, 0), '30-29 29-30 20-21');
 		assert.equal(bup.calc.score_str(s, 1), '29-30 30-29 21-20');
 
@@ -1367,10 +1367,10 @@ _describe('calc_state', function() {
 		assert.strictEqual(s.game.won_by_score, true);
 		assert.equal(court.left_serving, null);
 		assert.equal(court.serving_downwards, null);
-		assert.equal(court.player_left_odd.name, 'Bob');
-		assert.equal(court.player_right_odd.name, 'Alice');
-		assert.equal(court.player_left_even, null);
-		assert.equal(court.player_right_even, null);
+		assert.equal(court.left_odd.player.name, 'Bob');
+		assert.equal(court.right_odd.player.name, 'Alice');
+		assert.equal(court.left_even, null);
+		assert.equal(court.right_even, null);
 		assert.equal(s.match.finished, true);
 		assert.strictEqual(s.match.team1_won, false);
 		assert.strictEqual(s.match.finish_confirmed, false);
@@ -1431,10 +1431,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_left, false);
 		assert.equal(court.left_serving, false);
 		assert.equal(court.serving_downwards, false);
-		assert.equal(court.player_left_even.name, 'Bob');
-		assert.equal(court.player_left_odd.name, 'Birgit');
-		assert.equal(court.player_right_even.name, 'Alice');
-		assert.equal(court.player_right_odd.name, 'Andrew');
+		assert.equal(court.left_even.player.name, 'Bob');
+		assert.equal(court.left_odd.player.name, 'Birgit');
+		assert.equal(court.right_even.player.name, 'Alice');
+		assert.equal(court.right_odd.player.name, 'Andrew');
 
 		presses.push({
 			type: 'score',
@@ -1457,10 +1457,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_serving, true);
 		assert.equal(court.left_serving, false);
 		assert.equal(court.serving_downwards, true);
-		assert.equal(court.player_left_even.name, 'Bob');
-		assert.equal(court.player_left_odd.name, 'Birgit');
-		assert.equal(court.player_right_odd.name, 'Alice');
-		assert.equal(court.player_right_even.name, 'Andrew');
+		assert.equal(court.left_even.player.name, 'Bob');
+		assert.equal(court.left_odd.player.name, 'Birgit');
+		assert.equal(court.right_odd.player.name, 'Alice');
+		assert.equal(court.right_even.player.name, 'Andrew');
 
 		presses.push({
 			type: 'score',
@@ -1481,10 +1481,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_left, false);
 		assert.equal(court.left_serving, null);
 		assert.equal(court.serving_downwards, null);
-		assert.equal(court.player_left_even.name, 'Bob');
-		assert.equal(court.player_left_odd.name, 'Birgit');
-		assert.equal(court.player_right_odd.name, 'Alice');
-		assert.equal(court.player_right_even.name, 'Andrew');
+		assert.equal(court.left_even.player.name, 'Bob');
+		assert.equal(court.left_odd.player.name, 'Birgit');
+		assert.equal(court.right_odd.player.name, 'Alice');
+		assert.equal(court.right_even.player.name, 'Andrew');
 		assert.equal(s.match.finished, false);
 		assert.deepEqual(s.match.game_score, [1, 0]);
 		assert.equal(s.match.finished_games.length, 0);
@@ -1508,10 +1508,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_left, true);
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, false);
-		assert.equal(court.player_left_even, null);
-		assert.equal(court.player_left_odd, null);
-		assert.equal(court.player_right_odd, null);
-		assert.equal(court.player_right_even, null);
+		assert.equal(court.left_even, null);
+		assert.equal(court.left_odd, null);
+		assert.equal(court.right_odd, null);
+		assert.equal(court.right_even, null);
 		assert.equal(s.match.finished, false);
 		assert.deepEqual(s.match.game_score, [1, 0]);
 		assert.equal(s.match.finished_games.length, 1);
@@ -1538,10 +1538,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_left, true);
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, false);
-		assert.equal(court.player_left_even.name, 'Andrew');
-		assert.equal(court.player_left_odd.name, 'Alice');
-		assert.equal(court.player_right_even, null);
-		assert.equal(court.player_right_odd, null);
+		assert.equal(court.left_even.player.name, 'Andrew');
+		assert.equal(court.left_odd.player.name, 'Alice');
+		assert.equal(court.right_even, null);
+		assert.equal(court.right_odd, null);
 		assert.equal(s.match.finished, false);
 		assert.deepEqual(s.match.game_score, [1, 0]);
 		assert.equal(s.match.finished_games.length, 1);
@@ -1568,10 +1568,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_left, true);
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, false);
-		assert.equal(court.player_left_even.name, 'Andrew');
-		assert.equal(court.player_left_odd.name, 'Alice');
-		assert.equal(court.player_right_even.name, 'Bob');
-		assert.equal(court.player_right_odd.name, 'Birgit');
+		assert.equal(court.left_even.player.name, 'Andrew');
+		assert.equal(court.left_odd.player.name, 'Alice');
+		assert.equal(court.right_even.player.name, 'Bob');
+		assert.equal(court.right_odd.player.name, 'Birgit');
 		assert.equal(s.match.finished, false);
 		assert.deepEqual(s.match.game_score, [1, 0]);
 		assert.equal(s.match.finished_games.length, 1);
@@ -1596,10 +1596,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_left, true);
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, false);
-		assert.equal(court.player_left_even.name, 'Andrew');
-		assert.equal(court.player_left_odd.name, 'Alice');
-		assert.equal(court.player_right_even.name, 'Bob');
-		assert.equal(court.player_right_odd.name, 'Birgit');
+		assert.equal(court.left_even.player.name, 'Andrew');
+		assert.equal(court.left_odd.player.name, 'Alice');
+		assert.equal(court.right_even.player.name, 'Bob');
+		assert.equal(court.right_odd.player.name, 'Birgit');
 		assert.equal(s.match.finished, false);
 		assert.deepEqual(s.match.game_score, [1, 0]);
 		assert.equal(s.match.finished_games.length, 1);
@@ -1629,10 +1629,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_left, true);
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, false);
-		assert.equal(court.player_left_even.name, 'Andrew');
-		assert.equal(court.player_left_odd.name, 'Alice');
-		assert.equal(court.player_right_even.name, 'Bob');
-		assert.equal(court.player_right_odd.name, 'Birgit');
+		assert.equal(court.left_even.player.name, 'Andrew');
+		assert.equal(court.left_odd.player.name, 'Alice');
+		assert.equal(court.right_even.player.name, 'Bob');
+		assert.equal(court.right_odd.player.name, 'Birgit');
 		assert.equal(s.match.finished, false);
 		assert.deepEqual(s.match.game_score, [1, 0]);
 		assert.equal(s.match.finished_games.length, 1);
@@ -1665,10 +1665,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_left, true);
 		assert.equal(court.left_serving, false);
 		assert.equal(court.serving_downwards, true);
-		assert.equal(court.player_left_even.name, 'Alice');
-		assert.equal(court.player_left_odd.name, 'Andrew');
-		assert.equal(court.player_right_even.name, 'Birgit');
-		assert.equal(court.player_right_odd.name, 'Bob');
+		assert.equal(court.left_even.player.name, 'Alice');
+		assert.equal(court.left_odd.player.name, 'Andrew');
+		assert.equal(court.right_even.player.name, 'Birgit');
+		assert.equal(court.right_odd.player.name, 'Bob');
 		assert.equal(s.match.finished, false);
 		assert.deepEqual(s.match.game_score, [1, 0]);
 		assert.equal(s.match.finished_games.length, 1);
@@ -1694,10 +1694,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_left, true);
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, false);
-		assert.equal(court.player_left_even.name, 'Alice');
-		assert.equal(court.player_left_odd.name, 'Andrew');
-		assert.equal(court.player_right_even.name, 'Birgit');
-		assert.equal(court.player_right_odd.name, 'Bob');
+		assert.equal(court.left_even.player.name, 'Alice');
+		assert.equal(court.left_odd.player.name, 'Andrew');
+		assert.equal(court.right_even.player.name, 'Birgit');
+		assert.equal(court.right_odd.player.name, 'Bob');
 		assert.equal(s.match.finished, false);
 		assert.deepEqual(s.match.game_score, [1, 0]);
 		assert.equal(s.match.finished_games.length, 1);
@@ -1722,10 +1722,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_left, true);
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, true);
-		assert.equal(court.player_left_even.name, 'Andrew');
-		assert.equal(court.player_left_odd.name, 'Alice');
-		assert.equal(court.player_right_even.name, 'Birgit');
-		assert.equal(court.player_right_odd.name, 'Bob');
+		assert.equal(court.left_even.player.name, 'Andrew');
+		assert.equal(court.left_odd.player.name, 'Alice');
+		assert.equal(court.right_even.player.name, 'Birgit');
+		assert.equal(court.right_odd.player.name, 'Bob');
 		assert.equal(s.match.finished, false);
 		assert.deepEqual(s.match.game_score, [1, 0]);
 		assert.equal(s.match.finished_games.length, 1);
@@ -1750,10 +1750,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_left, true);
 		assert.equal(court.left_serving, null);
 		assert.equal(court.serving_downwards, null);
-		assert.equal(court.player_left_even.name, 'Andrew');
-		assert.equal(court.player_left_odd.name, 'Alice');
-		assert.equal(court.player_right_even.name, 'Birgit');
-		assert.equal(court.player_right_odd.name, 'Bob');
+		assert.equal(court.left_even.player.name, 'Andrew');
+		assert.equal(court.left_odd.player.name, 'Alice');
+		assert.equal(court.right_even.player.name, 'Birgit');
+		assert.equal(court.right_odd.player.name, 'Bob');
 		assert.equal(s.match.finished, true);
 		assert.strictEqual(s.match.team1_won, true);
 		assert.deepEqual(s.match.game_score, [2, 0]);
@@ -1792,10 +1792,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_left, true);
 		assert.equal(court.left_serving, null);
 		assert.equal(court.serving_downwards, null);
-		assert.equal(court.player_left_even.name, 'Alice');
-		assert.equal(court.player_left_odd.name, 'Andrew');
-		assert.equal(court.player_right_even.name, 'Birgit');
-		assert.equal(court.player_right_odd.name, 'Bob');
+		assert.equal(court.left_even.player.name, 'Alice');
+		assert.equal(court.left_odd.player.name, 'Andrew');
+		assert.equal(court.right_even.player.name, 'Birgit');
+		assert.equal(court.right_odd.player.name, 'Bob');
 		assert.equal(s.match.finished, false);
 		assert.strictEqual(s.match.team1_won, null);
 		assert.deepEqual(s.match.game_score, [1, 1]);
@@ -1821,10 +1821,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_left, false);
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, false);
-		assert.equal(court.player_left_even, null);
-		assert.equal(court.player_left_odd, null);
-		assert.equal(court.player_right_even, null);
-		assert.equal(court.player_right_odd, null);
+		assert.equal(court.left_even, null);
+		assert.equal(court.left_odd, null);
+		assert.equal(court.right_even, null);
+		assert.equal(court.right_odd, null);
 		assert.equal(s.match.finished, false);
 		assert.deepEqual(s.match.game_score, [1, 1]);
 		assert.equal(s.match.finished_games.length, 2);
@@ -1852,10 +1852,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_left, false);
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, false);
-		assert.equal(court.player_left_even.name, 'Birgit');
-		assert.equal(court.player_left_odd.name, 'Bob');
-		assert.equal(court.player_right_even, null);
-		assert.equal(court.player_right_odd, null);
+		assert.equal(court.left_even.player.name, 'Birgit');
+		assert.equal(court.left_odd.player.name, 'Bob');
+		assert.equal(court.right_even, null);
+		assert.equal(court.right_odd, null);
 		assert.equal(s.match.finished, false);
 		assert.deepEqual(s.match.game_score, [1, 1]);
 		assert.equal(s.match.finished_games.length, 2);
@@ -1883,10 +1883,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_left, false);
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, false);
-		assert.equal(court.player_left_even.name, 'Birgit');
-		assert.equal(court.player_left_odd.name, 'Bob');
-		assert.equal(court.player_right_even.name, 'Alice');
-		assert.equal(court.player_right_odd.name, 'Andrew');
+		assert.equal(court.left_even.player.name, 'Birgit');
+		assert.equal(court.left_odd.player.name, 'Bob');
+		assert.equal(court.right_even.player.name, 'Alice');
+		assert.equal(court.right_odd.player.name, 'Andrew');
 		assert.equal(s.match.finished, false);
 		assert.deepEqual(s.match.game_score, [1, 1]);
 		assert.equal(s.match.finished_games.length, 2);
@@ -1911,10 +1911,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_left, false);
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, false);
-		assert.equal(court.player_left_even.name, 'Birgit');
-		assert.equal(court.player_left_odd.name, 'Bob');
-		assert.equal(court.player_right_even.name, 'Alice');
-		assert.equal(court.player_right_odd.name, 'Andrew');
+		assert.equal(court.left_even.player.name, 'Birgit');
+		assert.equal(court.left_odd.player.name, 'Bob');
+		assert.equal(court.right_even.player.name, 'Alice');
+		assert.equal(court.right_odd.player.name, 'Andrew');
 		assert.equal(s.match.finished, false);
 		assert.deepEqual(s.match.game_score, [1, 1]);
 		assert.equal(s.match.finished_games.length, 2);
@@ -1945,10 +1945,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_left, false);
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, true);
-		assert.equal(court.player_left_even.name, 'Birgit');
-		assert.equal(court.player_left_odd.name, 'Bob');
-		assert.equal(court.player_right_even.name, 'Alice');
-		assert.equal(court.player_right_odd.name, 'Andrew');
+		assert.equal(court.left_even.player.name, 'Birgit');
+		assert.equal(court.left_odd.player.name, 'Bob');
+		assert.equal(court.right_even.player.name, 'Alice');
+		assert.equal(court.right_odd.player.name, 'Andrew');
 		assert.equal(s.match.finished, false);
 		assert.deepEqual(s.match.game_score, [1, 1]);
 		assert.equal(s.match.finished_games.length, 2);
@@ -1974,10 +1974,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_left, false);
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, false);
-		assert.equal(court.player_left_even.name, 'Bob');
-		assert.equal(court.player_left_odd.name, 'Birgit');
-		assert.equal(court.player_right_even.name, 'Alice');
-		assert.equal(court.player_right_odd.name, 'Andrew');
+		assert.equal(court.left_even.player.name, 'Bob');
+		assert.equal(court.left_odd.player.name, 'Birgit');
+		assert.equal(court.right_even.player.name, 'Alice');
+		assert.equal(court.right_odd.player.name, 'Andrew');
 		assert.equal(s.match.finished, false);
 		assert.deepEqual(s.match.game_score, [1, 1]);
 		assert.equal(s.match.finished_games.length, 2);
@@ -2003,10 +2003,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_left, true);
 		assert.equal(court.left_serving, false);
 		assert.equal(court.serving_downwards, false);
-		assert.equal(court.player_left_even.name, 'Alice');
-		assert.equal(court.player_left_odd.name, 'Andrew');
-		assert.equal(court.player_right_even.name, 'Birgit');
-		assert.equal(court.player_right_odd.name, 'Bob');
+		assert.equal(court.left_even.player.name, 'Alice');
+		assert.equal(court.left_odd.player.name, 'Andrew');
+		assert.equal(court.right_even.player.name, 'Birgit');
+		assert.equal(court.right_odd.player.name, 'Bob');
 		assert.equal(s.match.finished, false);
 		assert.deepEqual(s.match.game_score, [1, 1]);
 		assert.equal(s.match.finished_games.length, 2);
@@ -2032,10 +2032,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_left, true);
 		assert.equal(court.left_serving, false);
 		assert.equal(court.serving_downwards, true);
-		assert.equal(court.player_left_even.name, 'Alice');
-		assert.equal(court.player_left_odd.name, 'Andrew');
-		assert.equal(court.player_right_even.name, 'Bob');
-		assert.equal(court.player_right_odd.name, 'Birgit');
+		assert.equal(court.left_even.player.name, 'Alice');
+		assert.equal(court.left_odd.player.name, 'Andrew');
+		assert.equal(court.right_even.player.name, 'Bob');
+		assert.equal(court.right_odd.player.name, 'Birgit');
 		assert.equal(s.match.finished, false);
 		assert.deepEqual(s.match.game_score, [1, 1]);
 		assert.equal(s.match.finished_games.length, 2);
@@ -2062,10 +2062,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_left, true);
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, true);
-		assert.equal(court.player_left_even.name, 'Alice');
-		assert.equal(court.player_left_odd.name, 'Andrew');
-		assert.equal(court.player_right_even.name, 'Bob');
-		assert.equal(court.player_right_odd.name, 'Birgit');
+		assert.equal(court.left_even.player.name, 'Alice');
+		assert.equal(court.left_odd.player.name, 'Andrew');
+		assert.equal(court.right_even.player.name, 'Bob');
+		assert.equal(court.right_odd.player.name, 'Birgit');
 		assert.equal(s.match.finished, false);
 		assert.deepEqual(s.match.game_score, [1, 1]);
 		assert.equal(s.match.finished_games.length, 2);
@@ -2091,10 +2091,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_left, true);
 		assert.equal(court.left_serving, false);
 		assert.equal(court.serving_downwards, true);
-		assert.equal(court.player_left_even.name, 'Alice');
-		assert.equal(court.player_left_odd.name, 'Andrew');
-		assert.equal(court.player_right_even.name, 'Bob');
-		assert.equal(court.player_right_odd.name, 'Birgit');
+		assert.equal(court.left_even.player.name, 'Alice');
+		assert.equal(court.left_odd.player.name, 'Andrew');
+		assert.equal(court.right_even.player.name, 'Bob');
+		assert.equal(court.right_odd.player.name, 'Birgit');
 		assert.equal(s.match.finished, false);
 		assert.deepEqual(s.match.game_score, [1, 1]);
 		assert.equal(s.match.finished_games.length, 2);
@@ -2120,10 +2120,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_left, true);
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, false);
-		assert.equal(court.player_left_even.name, 'Alice');
-		assert.equal(court.player_left_odd.name, 'Andrew');
-		assert.equal(court.player_right_even.name, 'Bob');
-		assert.equal(court.player_right_odd.name, 'Birgit');
+		assert.equal(court.left_even.player.name, 'Alice');
+		assert.equal(court.left_odd.player.name, 'Andrew');
+		assert.equal(court.right_even.player.name, 'Bob');
+		assert.equal(court.right_odd.player.name, 'Birgit');
 		assert.equal(s.match.finished, false);
 		assert.strictEqual(s.match.team1_won, null);
 		assert.deepEqual(s.match.game_score, [1, 1]);
@@ -2151,10 +2151,10 @@ _describe('calc_state', function() {
 		assert.equal(s.game.team1_left, true);
 		assert.equal(court.left_serving, null);
 		assert.equal(court.serving_downwards, null);
-		assert.equal(court.player_left_even.name, 'Alice');
-		assert.equal(court.player_left_odd.name, 'Andrew');
-		assert.equal(court.player_right_even.name, 'Bob');
-		assert.equal(court.player_right_odd.name, 'Birgit');
+		assert.equal(court.left_even.player.name, 'Alice');
+		assert.equal(court.left_odd.player.name, 'Andrew');
+		assert.equal(court.right_even.player.name, 'Bob');
+		assert.equal(court.right_odd.player.name, 'Birgit');
 		assert.equal(s.match.finished, true);
 		assert.equal(s.match.team1_won, false);
 		assert.deepEqual(s.match.game_score, [1, 2]);
@@ -2262,10 +2262,10 @@ _describe('calc_state', function() {
 		var court = bup.calc.court(s);
 		assert.equal(court.left_serving, false);
 		assert.equal(court.serving_downwards, false);
-		assert.equal(court.player_left_even.name, 'Birgit');
-		assert.equal(court.player_left_odd.name, 'Bob');
-		assert.equal(court.player_right_even.name, 'Andrew');
-		assert.equal(court.player_right_odd.name, 'Alice');
+		assert.equal(court.left_even.player.name, 'Birgit');
+		assert.equal(court.left_odd.player.name, 'Bob');
+		assert.equal(court.right_even.player.name, 'Andrew');
+		assert.equal(court.right_odd.player.name, 'Alice');
 
 		presses.push({
 			type: 'redo',
@@ -2291,10 +2291,10 @@ _describe('calc_state', function() {
 		court = bup.calc.court(s);
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, true);
-		assert.equal(court.player_left_even.name, 'Birgit');
-		assert.equal(court.player_left_odd.name, 'Bob');
-		assert.equal(court.player_right_even.name, 'Andrew');
-		assert.equal(court.player_right_odd.name, 'Alice');
+		assert.equal(court.left_even.player.name, 'Birgit');
+		assert.equal(court.left_odd.player.name, 'Bob');
+		assert.equal(court.right_even.player.name, 'Andrew');
+		assert.equal(court.right_odd.player.name, 'Alice');
 
 		presses.push({
 			type: 'undo',
@@ -2320,10 +2320,10 @@ _describe('calc_state', function() {
 		court = bup.calc.court(s);
 		assert.equal(court.left_serving, false);
 		assert.equal(court.serving_downwards, false);
-		assert.equal(court.player_left_even.name, 'Birgit');
-		assert.equal(court.player_left_odd.name, 'Bob');
-		assert.equal(court.player_right_even.name, 'Andrew');
-		assert.equal(court.player_right_odd.name, 'Alice');
+		assert.equal(court.left_even.player.name, 'Birgit');
+		assert.equal(court.left_odd.player.name, 'Bob');
+		assert.equal(court.right_even.player.name, 'Andrew');
+		assert.equal(court.right_odd.player.name, 'Alice');
 
 		presses.push({
 			type: 'redo',
@@ -2349,10 +2349,10 @@ _describe('calc_state', function() {
 		court = bup.calc.court(s);
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, true);
-		assert.equal(court.player_left_even.name, 'Birgit');
-		assert.equal(court.player_left_odd.name, 'Bob');
-		assert.equal(court.player_right_even.name, 'Andrew');
-		assert.equal(court.player_right_odd.name, 'Alice');
+		assert.equal(court.left_even.player.name, 'Birgit');
+		assert.equal(court.left_odd.player.name, 'Bob');
+		assert.equal(court.right_even.player.name, 'Andrew');
+		assert.equal(court.right_odd.player.name, 'Alice');
 
 		presses.push({
 			type: 'redo',
@@ -2378,10 +2378,10 @@ _describe('calc_state', function() {
 		court = bup.calc.court(s);
 		assert.equal(court.left_serving, true);
 		assert.equal(court.serving_downwards, false);
-		assert.equal(court.player_left_even.name, 'Bob');
-		assert.equal(court.player_left_odd.name, 'Birgit');
-		assert.equal(court.player_right_even.name, 'Andrew');
-		assert.equal(court.player_right_odd.name, 'Alice');
+		assert.equal(court.left_even.player.name, 'Bob');
+		assert.equal(court.left_odd.player.name, 'Birgit');
+		assert.equal(court.right_even.player.name, 'Andrew');
+		assert.equal(court.right_odd.player.name, 'Alice');
 	});
 
 	_it('Retiring', function() {
@@ -3333,6 +3333,11 @@ _describe('calc_state', function() {
 		assert.deepStrictEqual(bup.calc.player_carded(s, 0, 1), null);
 		assert.deepStrictEqual(bup.calc.player_carded(s, 1, 0), null);
 		assert.deepStrictEqual(bup.calc.player_carded(s, 1, 1), null);
+		var court = bup.calc.court(s);
+		assert.deepStrictEqual(court.left_odd.carded, null);
+		assert.deepStrictEqual(court.left_even.carded, null);
+		assert.deepStrictEqual(court.right_odd.carded, null);
+		assert.deepStrictEqual(court.right_even.carded, null);
 
 		var ycard1 = {
 			type: 'yellow-card',
@@ -3347,6 +3352,11 @@ _describe('calc_state', function() {
 		assert.deepStrictEqual(bup.calc.player_carded(s, 0, 1), null);
 		assert.deepStrictEqual(bup.calc.player_carded(s, 1, 0), null);
 		assert.deepStrictEqual(bup.calc.player_carded(s, 1, 1), ycard1);
+		court = bup.calc.court(s);
+		assert.deepStrictEqual(court.left_odd.carded, null);
+		assert.deepStrictEqual(court.left_even.carded, null);
+		assert.deepStrictEqual(court.right_odd.carded, ycard1);
+		assert.deepStrictEqual(court.right_even.carded, null);
 
 		var rcard1 = {
 			type: 'red-card',
@@ -3361,6 +3371,11 @@ _describe('calc_state', function() {
 		assert.deepStrictEqual(bup.calc.player_carded(s, 0, 1), null);
 		assert.deepStrictEqual(bup.calc.player_carded(s, 1, 0), null);
 		assert.deepStrictEqual(bup.calc.player_carded(s, 1, 1), rcard1);
+		court = bup.calc.court(s);
+		assert.deepStrictEqual(court.left_odd.carded, null);
+		assert.deepStrictEqual(court.left_even.carded, null);
+		assert.deepStrictEqual(court.right_odd.carded, rcard1);
+		assert.deepStrictEqual(court.right_even.carded, null);
 
 		var ycard2 = {
 			type: 'yellow-card',
@@ -3375,9 +3390,58 @@ _describe('calc_state', function() {
 		assert.deepStrictEqual(bup.calc.player_carded(s, 0, 1), null);
 		assert.deepStrictEqual(bup.calc.player_carded(s, 1, 0), null);
 		assert.deepStrictEqual(bup.calc.player_carded(s, 1, 1), rcard1);
+		court = bup.calc.court(s);
+		assert.deepStrictEqual(court.left_odd.carded, ycard2);
+		assert.deepStrictEqual(court.left_even.carded, null);
+		assert.deepStrictEqual(court.right_odd.carded, rcard1);
+		assert.deepStrictEqual(court.right_even.carded, null);
+
+		presses.push({
+			type: 'score',
+			side: 'right',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		court = bup.calc.court(s);
+		assert.deepStrictEqual(court.left_odd.carded, ycard2);
+		assert.deepStrictEqual(court.left_even.carded, null);
+		assert.deepStrictEqual(court.right_odd.carded, rcard1);
+		assert.deepStrictEqual(court.right_even.carded, null);
+
+		presses.push({
+			type: 'score',
+			side: 'right',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		court = bup.calc.court(s);
+		assert.deepStrictEqual(court.left_odd.carded, ycard2);
+		assert.deepStrictEqual(court.left_even.carded, null);
+		assert.deepStrictEqual(court.right_odd.carded, null);
+		assert.deepStrictEqual(court.right_even.carded, rcard1);
+
+		presses.push({
+			type: 'score',
+			side: 'right',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		court = bup.calc.court(s);
+		assert.deepStrictEqual(court.left_odd.carded, ycard2);
+		assert.deepStrictEqual(court.left_even.carded, null);
+		assert.deepStrictEqual(court.right_odd.carded, rcard1);
+		assert.deepStrictEqual(court.right_even.carded, null);
+
+		presses.push({
+			type: 'score',
+			side: 'right',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		court = bup.calc.court(s);
+		assert.deepStrictEqual(court.left_odd.carded, ycard2);
+		assert.deepStrictEqual(court.left_even.carded, null);
+		assert.deepStrictEqual(court.right_odd.carded, null);
+		assert.deepStrictEqual(court.right_even.carded, rcard1);
 
 		var rcard2 = {
-			type: 'yellow-card',
+			type: 'red-card',
 			team_id: 0,
 			player_id: 1,
 		};
@@ -3389,6 +3453,33 @@ _describe('calc_state', function() {
 		assert.deepStrictEqual(bup.calc.player_carded(s, 0, 1), rcard2);
 		assert.deepStrictEqual(bup.calc.player_carded(s, 1, 0), null);
 		assert.deepStrictEqual(bup.calc.player_carded(s, 1, 1), rcard1);
+		court = bup.calc.court(s);
+		assert.deepStrictEqual(court.left_odd.carded, ycard2);
+		assert.deepStrictEqual(court.left_even.carded, rcard2);
+		// switching server because of red card
+		assert.deepStrictEqual(court.right_odd.carded, rcard1);
+		assert.deepStrictEqual(court.right_even.carded, null);
+
+		var bcard = {
+			type: 'disqualified',
+			team_id: 0,
+			player_id: 0,
+		};
+		presses.push(bcard);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(bup.calc.team_carded(s, 0), bcard);
+		assert.deepStrictEqual(bup.calc.team_carded(s, 1), rcard1);
+		assert.deepStrictEqual(bup.calc.player_carded(s, 0, 0), bcard);
+		assert.deepStrictEqual(bup.calc.player_carded(s, 0, 1), rcard2);
+		assert.deepStrictEqual(bup.calc.player_carded(s, 1, 0), null);
+		assert.deepStrictEqual(bup.calc.player_carded(s, 1, 1), rcard1);
+		court = bup.calc.court(s);
+		assert.deepStrictEqual(court.left_odd.carded, bcard);
+		assert.deepStrictEqual(court.left_even.carded, rcard2);
+		// switching server because of red card
+		assert.deepStrictEqual(court.right_odd.carded, rcard1);
+		assert.deepStrictEqual(court.right_even.carded, null);
+
 	});
 });
 

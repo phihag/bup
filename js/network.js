@@ -484,7 +484,8 @@ function ui_init_court(s, hash_query) {
 	var automatic = $('.settings_court_automatic');
 	automatic.show();
 
-	uiu.on_click_qs('#court_court_str', function() {
+	var court_str_field = render.main_court_ui().court_str;
+	uiu.on_click(court_str_field, function() {
 		_court_pick_dialog(s, all_courts, function() {
 			// On abort change nothing
 		});
@@ -603,6 +604,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var netstats = require('./netstats');
 	var p2p = require('./p2p');
 	var pronounciation = require('./pronounciation');
+	var render = require('./render');
 	var report_problem = require('./report_problem');
 	var settings = require('./settings');
 	var staticnet = require('./staticnet');

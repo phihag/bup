@@ -505,6 +505,7 @@ function calc_press(s, press) {
 		s.game.service_over = null;
 		s.timer = false;
 		s.match.injuries = false;
+		s.match.cards.push(press);
 		break;
 	case 'suspension':
 		if (s.match.suspended) {
@@ -706,34 +707,33 @@ function state(s) {
 
 function court(s) {
 	var res = {
-		player_left_odd: null,
-		player_left_even: null,
-		player_right_even: null,
-		player_right_odd: null,
+		left_odd: null,
+		left_even: null,
+		right_even: null,
+		right_odd: null,
 
 		left_serving: null,
 		serving_downwards: null,
 	};
-	if ((s.game.team1_left !== null) && (s.game.teams_player1_even[0] !== null)) {
-		res[
-			'player_' + (s.game.team1_left ? 'left' : 'right') + '_' +
-			(s.game.teams_player1_even[0] ? 'even' : 'odd')] = s.setup.teams[0].players[0];
+	for (var team_id = 0;team_id < 2;team_id++) {
+		if ((s.game.team1_left === null) || (s.game.teams_player1_even[team_id] === null)) {
+			continue;
+		}
+
+		var prefix = ((s.game.team1_left == (team_id === 0)) ? 'left' : 'right') + '_';
+		var players = s.setup.teams[team_id].players;
+		res[prefix + (s.game.teams_player1_even[team_id] ? 'even' : 'odd')] = {
+			player: players[0],
+			carded: player_carded(s, team_id, 0),
+		};
 		if (s.setup.is_doubles) {
-			res[
-				'player_' + (s.game.team1_left ? 'left' : 'right') + '_' +
-				(s.game.teams_player1_even[0] ? 'odd' : 'even')] = s.setup.teams[0].players[1];
+			res[prefix + (s.game.teams_player1_even[team_id] ? 'odd' : 'even')] = {
+				player: players[1],
+				carded: player_carded(s, team_id, 1),
+			};
 		}
 	}
-	if ((s.game.team1_left !== null) && (s.game.teams_player1_even[1] !== null)) {
-		res[
-			'player_' + (s.game.team1_left ? 'right' : 'left') + '_' +
-			(s.game.teams_player1_even[1] ? 'even' : 'odd')] = s.setup.teams[1].players[0];
-		if (s.setup.is_doubles) {
-			res[
-				'player_' + (s.game.team1_left ? 'right' : 'left') + '_' +
-				(s.game.teams_player1_even[1] ? 'odd' : 'even')] = s.setup.teams[1].players[1];
-		}
-	}
+
 	if ((! s.game.finished) && (s.game.team1_serving !== null) && (s.game.team1_left !== null)) {
 		res.left_serving = s.game.team1_serving == s.game.team1_left;
 		var serving_score = s.game.score[s.game.team1_serving ? 0 : 1];

@@ -19,24 +19,31 @@
 	background-repeat: no-repeat;
 	border: 1px solid #dadada;
 }
-#court>div>span {
-	background: rgba(194, 211, 194, 0.4);
-}
-#court_left_even, #court_left_odd, #court_right_even, #court_right_odd, #court_right_team, #court_left_team, #court_match_name, #court_court_str {
+
+.court_left_even, .court_left_odd, .court_right_even, .court_right_odd, .court_right_team, .court_left_team, .court_match_name, .court_court_str {
 	position: absolute;
 	text-align: center;
 	font-size: inherit;
 }
-#court_right_team, #court_left_team  {
+.court_left_even>span,
+.court_left_odd>span,
+.court_right_even>span,
+.court_right_odd>span,
+.court_right_team>span,
+.court_left_team>span {
+	background-color: rgba(194, 211, 194, 0.4);
+}
+.court_court_str>span, .court_match_name>span {
+	background-color: rgba(194, 211, 194, 0.8);
+}
+
+.court_right_team, .court_left_team  {
 	color: #555555;
 	font-size: 5vmin;
 	top: 50%; transform: translate(0, -50%);
 }
 
-#court>#court_court_str>span, #court>#court_match_name>span {
-	background: rgba(194, 211, 194, 0.8);
-}
-#court_court_str {
+.court_court_str {
 	color: #555555;
 	font-size: 5vmin;
 	top: 1%;
@@ -44,7 +51,7 @@
 	cursor: pointer;
 	transform: translate(-50%, 0);
 }
-#court_match_name {
+.court_match_name {
 	color: #555555;
 	font-size: 5vmin;
 	bottom: 1%;
@@ -52,37 +59,37 @@
 	transform: translate(-50%, 0);
 }
 
-#court_left_odd {
+.court_left_odd {
 	left: 0%;
 	right: 50%;
 	bottom: 65.5%;
 }
-#court_left_team {
+.court_left_team {
 	left: 0%;
 	right: 50%;
 }
-#court_left_even {
+.court_left_even {
 	left: 0%;
 	right: 50%;
 	top: 65.5%;
 }
-#court_right_even {
+.court_right_even {
 	left: 50%;
 	right: 0%;
 	bottom: 65.5%;
 }
-#court_right_team {
+.court_right_team {
 	left: 50%;
 	right: 0%;
 }
-#court_right_odd {
+.court_right_odd {
 	left: 50%;
 	right: 0%;
 	top: 65.5%;
 }
 
 
-#court_arrow {
+.court_arrow {
 	position: absolute;
 	left: 50%; top: 50%;
 	margin-left: -7.5vmin; margin-top: -7.5vmin;
@@ -91,4 +98,23 @@
 	background-size: 100%;
 	background-repeat: no-repeat;
 	z-index: 50;
+}
+
+.court_yellow-card,.court_red-card,.court_disqualified {
+	display: inline-block;
+	vertical-align: middle;
+	width: 0.7em;
+	height: 0.7em;
+	padding-bottom: 0.2em;
+	background-repeat: no-repeat;
+	background-size: 100%;
+}
+.court_yellow-card {
+	background-image: url(../icons/yellow-card.svg);
+}
+.court_red-card {
+	background-image: url(../icons/red-card.svg);
+}
+.court_disqualified {
+	background-image: url(../icons/black-card.svg);
 }

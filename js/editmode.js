@@ -3,19 +3,28 @@ var editmode = (function() {
 
 var last_click = 0;
 
+function ui_visible(val) {
+	var main_cui = render.main_court_ui();
+	for (var k in main_cui) {
+		if (/^editmode_/.test(k)) {
+			uiu.visible(main_cui[k], !!val);
+		}
+	}
+}
+
 function enter() {
-	$('.editmode_leave,.editmode_arrow,.editmode_change-ends,.editmode_switch_left,.editmode_switch_right').show();
+	ui_visible(true);
 	$('.editmode_ok').attr('disabled', 'disabled');
 	var k = 'settings:Abort Manual Edit';
 	$('.go_editmode_button').text(state._(k)).attr('data-i18n', k);
 	$('#score td.score span').hide();
 	$('#game').addClass('editmode');
-	render(state);
+	update_ui(state);
 }
 
 function leave() {
 	$('#game').removeClass('editmode');
-	$('.editmode_leave,.editmode_arrow,.editmode_change-ends,.editmode_switch_left,.editmode_switch_right').hide();
+	ui_visible(false);
 	var k = 'settings:Edit Manually';
 	$('.go_editmode_button').text(state._(k)).attr('data-i18n', k);
 	hide_inputs(0);
@@ -50,27 +59,28 @@ function ui_init() {
 		return true;
 	});
 
-	uiu.on_click_qs('.editmode_leave', function() {
+	var main_cui = render.main_court_ui();
+	uiu.on_click(main_cui.editmode_leave, function() {
 		leave();
 	});
-	uiu.on_click_qs('.editmode_change-ends', function() {
+	uiu.on_click(main_cui.editmode_change_ends, function() {
 		control.on_press({
 			type: 'editmode_change-ends',
 		});
 	});
-	uiu.on_click_qs('.editmode_switch_left', function() {
+	uiu.on_click(main_cui.editmode_switch_left, function() {
 		control.on_press({
 			type: 'editmode_switch-sides',
 			side: 'left',
 		});
 	});
-	uiu.on_click_qs('.editmode_switch_right', function() {
+	uiu.on_click(main_cui.editmode_switch_right, function() {
 		control.on_press({
 			type: 'editmode_switch-sides',
 			side: 'right',
 		});
 	});
-	uiu.on_click_qs('.editmode_arrow', function() {
+	uiu.on_click(main_cui.editmode_arrow, function() {
 		control.on_press({
 			type: 'editmode_change-serve',
 		});
@@ -156,7 +166,7 @@ function change_score() {
 	}
 }
 
-function render(s) {
+function update_ui(s) {
 	var editmode_active = $('#game').hasClass('editmode');
 	if (!editmode_active) {
 		return;
@@ -210,7 +220,7 @@ return {
 	leave: leave,
 	ui_init: ui_init,
 	change_score: change_score,
-	render: render,
+	update_ui: update_ui,
 };
 
 })();
@@ -219,6 +229,7 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
 	var control = require('./control');
+	var render = require('./render');
 	var settings = require('./settings');
 	var uiu = require('./uiu');
 	var utils = require('./utils');

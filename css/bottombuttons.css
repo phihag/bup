@@ -51,7 +51,11 @@
 	border-top-right-radius: 1em;
 	z-index: 100;
 }
+.pick_dialog, .exception_dialog {
+	z-index: 300;
+}
 #pronounciation {
+	z-index: 100;
 	min-width: calc(100vw - 60vmin);
 	max-width: calc(100vw - 60vmin);
 }

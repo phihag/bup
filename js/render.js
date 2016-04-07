@@ -189,28 +189,6 @@ function render_score_display(s) {
 	}
 }
 
-function calc_court_str(s) {
-	var court_str = '';
-	if (s.settings.court_id === 'referee') {
-		return s.settings.court_description;
-	}
-	if (s.settings.court_id) {
-		court_str = s._('Court') + ' ' + s.settings.court_id;
-	}
-	if (s.settings.court_description) {
-		if (court_str) {
-			court_str += '(' + s.settings.court_description + ')';
-		} else {
-			court_str += s._('Court') + ' ' + s.settings.court_description;
-		}
-	}
-	return court_str;
-}
-
-function ui_court_str(s) {
-	$('#court_court_str>span').text(calc_court_str(s));
-}
-
 function _set_dialog(dialog_qs, pr_str) {
 	var dialog = uiu.qs(dialog_qs);
 	var pronounciation_span = dialog.querySelector('span.pronounciation');
@@ -230,6 +208,18 @@ function _set_dialog(dialog_qs, pr_str) {
 	uiu.text(button, btn_str);
 }
 
+var _main_court_ui;
+function main_court_ui() {
+	if (! _main_court_ui) {
+		_main_court_ui = court.install(uiu.qs('#court'));
+	}
+	return _main_court_ui;
+}
+
+function ui_court_str(s) {
+	court.update_court_str(s, main_court_ui());
+}
+
 function ui_render(s) {
 	var dialog_active = false;  // Is there anything to pick in the bottom?
 
@@ -238,47 +228,10 @@ function ui_render(s) {
 		return;
 	}
 
-	var court = calc.court(s);
-	editmode.render(s);
-
-	function _court_show_player(key) {
-		var p = court['player_' + key];
-		$('#court_' + key + '>span').text(p === null ? '' : p.name);
-	}
-	_court_show_player('left_odd');
-	_court_show_player('left_even');
-	_court_show_player('right_even');
-	_court_show_player('right_odd');
-
-
-	if (s.setup.team_competition && (s.game.team1_left !== null)) {
-		$('#court_left_team, #court_right_team').show();
-		var left_index = s.game.team1_left ? 0 : 1;
-		$('#court_left_team>span').text(s.setup.teams[left_index].name);
-		$('#court_right_team>span').text(s.setup.teams[1 - left_index].name);
-	} else {
-		$('#court_left_team, #court_right_team').hide();
-	}
-
-	$('#court_match_name>span').text(s.setup.match_name ? s.setup.match_name : '');
-	ui_court_str(s);
+	court.render(s, main_court_ui());
+	editmode.update_ui(s);
 
 	$('#shuttle_counter_value').text(s.match.shuttle_count);
-
-	if (court.left_serving === null) {
-		$('#court_arrow').hide();
-	} else {
-		$('#court_arrow').show();
-		var transform_css = ('scale(' +
-			(court.left_serving ? '-1' : '1') + ',' +
-			(court.serving_downwards ? '1' : '-1') + ')'
-		);
-		$('#court_arrow,.editmode_arrow').css({
-			'transform': transform_css,
-			'-ms-transform': transform_css,
-			'-webkit-transform': transform_css,
-		});
-	}
 
 	uiu.visible_qs('#love-all-dialog', s.match.announce_pregame && !s.match.injuries && !s.match.suspended);
 	if (s.match.announce_pregame) {
@@ -464,6 +417,7 @@ return {
 	ui_render: ui_render,
 	ui_court_str: ui_court_str,
 	exception_dialog: exception_dialog,
+	main_court_ui: main_court_ui,
 	shuttle_counter: shuttle_counter,
 	show: show,
 	hide: hide,
@@ -476,6 +430,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var bupui = require('./bupui');
 	var calc = require('./calc');
 	var control = require('./control');
+	var court = require('./court');
 	var editmode = require('./editmode');
 	var pronounciation = require('./pronounciation');
 	var timer = require('./timer');
