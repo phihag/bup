@@ -68,7 +68,7 @@ function render(s, cui) {
 		cui.editmode_arrow.style.MsTransform = transform_val;
 		cui.editmode_arrow.style.WebkitTransform = transform_val;
 	}
-	uiu.visible(cui.arrow, true || (cdata.left_serving !== null));
+	uiu.visible(cui.arrow, (cdata.left_serving !== null));
 
 	uiu.text(cui.match_name_text, s.setup.match_name ? s.setup.match_name : '');
 
