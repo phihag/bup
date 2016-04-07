@@ -276,14 +276,18 @@ function init_buttons() {
 			'type': 'resume',
 		});
 	});
+
 	uiu.on_click_qs('#exception_yellow', function() {
 		hide_exception_dialog();
 		bupui.make_player_pick(
 			state, state._('exceptions:dialog:yellow-card'), 'yellow-card', ui_show_exception_dialog,
 			function(btn, v) {
-				var carded = calc.team_carded(state, v.team_id);
+				var carded = calc.player_carded(state, v.team_id, v.player_id);
 				if (carded) {
 					btn.prepend('<span class="' + carded.type + '-image"></span>');
+				}
+				var team_carded = calc.team_carded(state, v.team_id);
+				if (team_carded) {
 					btn.attr('disabled', 'disabled');
 				}
 			}
@@ -294,7 +298,7 @@ function init_buttons() {
 		bupui.make_player_pick(
 			state, state._('exceptions:dialog:red-card'), 'red-card', ui_show_exception_dialog,
 			function(btn, v) {
-				var carded = calc.team_carded(state, v.team_id);
+				var carded = calc.player_carded(state, v.team_id, v.player_id);
 				if (carded) {
 					btn.prepend('<span class="' + carded.type + '-image"></span>');
 				}
@@ -302,6 +306,19 @@ function init_buttons() {
 		);
 
 	});
+	uiu.on_click_qs('#exception_black', function() {
+		hide_exception_dialog();
+		bupui.make_player_pick(
+			state, state._('exceptions:dialog:black-card'), 'disqualified', ui_show_exception_dialog,
+			function(btn, v) {
+				var carded = calc.player_carded(state, v.team_id, v.player_id);
+				if (carded) {
+					btn.prepend('<span class="' + carded.type + '-image"></span>');
+				}
+			}
+		);
+	});
+
 	uiu.on_click_qs('#exception_injury', function() {
 		hide_exception_dialog();
 		bupui.make_player_pick(state, state._('exceptions:dialog:injury'), 'injury', ui_show_exception_dialog);
@@ -309,10 +326,6 @@ function init_buttons() {
 	uiu.on_click_qs('#exception_retired', function() {
 		hide_exception_dialog();
 		bupui.make_player_pick(state, state._('exceptions:dialog:retired'), 'retired', ui_show_exception_dialog);
-	});
-	uiu.on_click_qs('#exception_black', function() {
-		hide_exception_dialog();
-		bupui.make_player_pick(state, state._('exceptions:dialog:black-card'), 'disqualified', ui_show_exception_dialog);
 	});
 }
 

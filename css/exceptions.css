@@ -37,7 +37,7 @@
 	background-image: url(../icons/exception_retired.svg);
 }
 
-.yellow-card-image,.red-card-image {
+.yellow-card-image,.red-card-image,.disqualified-image {
 	text-align: middle;
 	margin-right: 0.4em;
 	display: inline-block;
@@ -51,4 +51,7 @@
 }
 .red-card-image {
 	background-image: url(../icons/red-card.svg);
+}
+.disqualified-image {
+	background-image: url(../icons/black-card.svg);
 }
