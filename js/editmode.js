@@ -15,9 +15,13 @@ function ui_visible(val) {
 function enter() {
 	ui_visible(true);
 	$('.editmode_ok').attr('disabled', 'disabled');
+
 	var k = 'settings:Abort Manual Edit';
-	$('.go_editmode_button').text(state._(k)).attr('data-i18n', k);
-	$('#score td.score span').hide();
+	var toggle_button = uiu.qs('.go_editmode_button');
+	uiu.text(toggle_button, state._(k));
+	toggle_button.setAttribute('data-i18n', k);
+
+	uiu.visible_qsa('#score td.score span', false);
 	$('#game').addClass('editmode');
 	update_ui(state);
 }
@@ -25,10 +29,14 @@ function enter() {
 function leave() {
 	$('#game').removeClass('editmode');
 	ui_visible(false);
+
 	var k = 'settings:Edit Manually';
-	$('.go_editmode_button').text(state._(k)).attr('data-i18n', k);
+	var toggle_button = uiu.qs('.go_editmode_button');
+	uiu.text(toggle_button, state._(k));
+	toggle_button.setAttribute('data-i18n', k);
+
 	hide_inputs(0);
-	$('#score td.score span').show();
+	uiu.visible_qsa('#score td.score span', true);
 }
 
 function ui_init() {

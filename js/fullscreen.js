@@ -91,8 +91,10 @@ function autostart() {
 		return false;
 	});
 	uiu.esc_stack_push(go_fullscreen_hide);
-	$('#go_fullscreen_wrapper').on('click', go_fullscreen_hide);
-	$('#go_fullscreen_wrapper').show();
+
+	var go_fullscreen_wrapper = uiu.qs('#go_fullscreen_wrapper');
+	uiu.on_click(go_fullscreen_wrapper, go_fullscreen_hide);
+	uiu.visible(go_fullscreen_wrapper, true);
 }
 
 

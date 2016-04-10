@@ -67,6 +67,13 @@ function qs(selector) {
 	return node;
 }
 
+function visible_qsa(selector, val) {
+	var nodes = document.querySelectorAll(selector);
+	for (var i = 0;i < nodes.length;i++) {
+		visible(nodes[i], val);
+	}
+}
+
 function visible_qs(selector, val) {
 	visible(qs(selector), val);
 }
@@ -130,6 +137,7 @@ return {
 	text_qs: text_qs,
 	visible: visible,
 	visible_qs: visible_qs,
+	visible_qsa: visible_qsa,
 };
 
 })();
