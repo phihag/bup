@@ -25,7 +25,7 @@ function ui_init() {
 		}
 
 		function _formval(input_name, def) {
-			var val = $('#setup_manual_form [name="' + input_name + '"]').val();
+			var val = $('#setup_manual_form').find('[name="' + input_name + '"]').val();
 			if (! val) {
 				val = def;
 			}
@@ -34,11 +34,11 @@ function ui_init() {
 
 		var team1, team2;
 		var setup = {
-			is_doubles: $('#setup_manual_form [name="gametype"]:checked').val() == 'doubles',
+			is_doubles: $('#setup_manual_form').find('[name="gametype"]:checked').val() == 'doubles',
 			counting: _formval('counting'),
 		};
 
-		setup.team_competition = $('#setup_manual_form [name="team_competition"]').prop('checked');
+		setup.team_competition = $('#setup_manual_form').find('[name="team_competition"]').prop('checked');
 		setup.match_name = _formval('match_name');
 		setup.event_name = _formval('event_name');
 		setup.tournament_name = _formval('tournament_name');
