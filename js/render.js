@@ -29,7 +29,7 @@ function _score_display_init(s) {
 	var ann_tr = uiu.create_el(score_table, 'tr', {
 		'class': 'score_announcements',
 	});
-	var ann_td = uiu.create_el(ann_tr, 'td', {
+	uiu.create_el(ann_tr, 'td', {
 		colspan: 2,
 	});
 	score_table.setAttribute('data-game-count', s.match.max_games);
@@ -39,7 +39,10 @@ function _score_display_init(s) {
 			id: 'score_game_' + game_index,
 		});
 
-		['left', 'right'].forEach(function(side) {
+		var SIDES = ['left', 'right'];
+		for (var i = 0;i < SIDES.length;i++) {
+			var side = SIDES[i];
+
 			var td = uiu.create_el(tr, 'td', {
 				'class': 'score score_' + side,
 			});
@@ -57,7 +60,7 @@ function _score_display_init(s) {
 			input.addEventListener('input', editmode.change_score);
 
 			uiu.create_el(td, 'span');
-		});
+		}
 	}
 }
 
