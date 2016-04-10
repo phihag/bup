@@ -28,7 +28,7 @@ function leave() {
 	var k = 'settings:Edit Manually';
 	$('.go_editmode_button').text(state._(k)).attr('data-i18n', k);
 	hide_inputs(0);
-	$('#score td.score span').show();
+	$('#score').find('td.score span').show();
 }
 
 function ui_init() {

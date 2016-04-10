@@ -23,18 +23,19 @@ function shuttle_counter(s) {
 }
 
 function _score_display_init(s) {
-	$('#score_table').empty();
+	var score_table = $('#score_table');
+	score_table.empty();
 
 	var ann_tr = $('<tr class="score_announcements">');
 	var ann_td = $('<td colspan="2"></td>');
 	ann_tr.append(ann_td);
-	$('#score_table').attr('data-game-count', s.match.max_games);
-	$('#score_table').append(ann_tr);
+	
+	score_table.attr('data-game-count', s.match.max_games).append(ann_tr);
 
 	for (var game_index = 0;game_index < s.match.max_games;game_index++) {
 		var tr = $('<tr>');
 		tr.attr('id', 'score_game_' + game_index);
-		$('#score_table').append(tr);
+		score_table.append(tr);
 
 		var left = $('<td class="score score_left">');
 		var left_input = $('<input type="number" size="2" min="0" max="30" class="editmode_score default-invisible" value="0">');
@@ -239,7 +240,7 @@ function ui_render(s) {
 		if (s.settings.show_pronounciation) {
 			_set_dialog('#love-all-dialog', pronounciation.pronounce(s));
 		} else {
-			$('#love-all-dialog button').text(pronounciation.loveall_announcement(s));
+			$('#love-all-dialog').find('button').text(pronounciation.loveall_announcement(s));
 			uiu.text_qs('#love-all-dialog span', '');
 		}
 	}
@@ -256,7 +257,7 @@ function ui_render(s) {
 		if (s.settings.show_pronounciation) {
 			_set_dialog('#postmatch-confirm-dialog', pronounciation.pronounce(s));
 		} else {
-			$('#postmatch-confirm-dialog button').text(pronounciation.postgame_announcement(s));
+			$('#postmatch-confirm-dialog').find('button').text(pronounciation.postgame_announcement(s));
 			uiu.text_qs('#postmatch-confirm-dialog span', '');
 		}
 	}
@@ -267,7 +268,7 @@ function ui_render(s) {
 		if (s.settings.show_pronounciation) {
 			_set_dialog('#postgame-confirm-dialog', pronounciation.pronounce(s));
 		} else {
-			$('#postgame-confirm-dialog button').text(pronounciation.postgame_announcement(s));
+			$('#postgame-confirm-dialog').find('button').text(pronounciation.postgame_announcement(s));
 			uiu.text_qs('#postgame-confirm-dialog span', '');
 		}
 	}
@@ -282,7 +283,7 @@ function ui_render(s) {
 	}
 
 	uiu.visible_qs('#injury-resume-dialog', s.match.injuries && !s.match.suspended);
-	$('#injury-resume-dialog button').remove();
+	$('#injury-resume-dialog').find('button').remove();
 	if (s.match.injuries) {
 		dialog_active = true;
 		$('#injury-pronounciation').text(
@@ -346,18 +347,22 @@ function ui_render(s) {
 
 	render_score_display(s);
 
-	$('#pick_side').hide();
-	$('#pick_server').hide();
-	$('#pick_receiver').hide();
+	var pick_side = $('#pick_side');
+	var pick_server = $('#pick_server');
+	var pick_receiver = $('#pick_receiver');
+	
+	pick_side.hide();
+	pick_server.hide();
+	pick_receiver.hide();
 	if (!s.match.finished && !s.match.injuries && !s.match.suspended) {
 		if (s.game.start_team1_left === null) {
 			dialog_active = true;
-			bupui.show_picker($('#pick_side'));
+			bupui.show_picker(pick_side);
 
 			$('#pick_side_team1').text(pronounciation.teamtext_internal(s, 0));
 			$('#pick_side_team2').text(pronounciation.teamtext_internal(s, 1));
 		} else if (s.game.start_server_player_id === null) {
-			$('#pick_server button').remove();
+			pick_server.find('button').remove();
 
 			var team_indices = (s.game.start_server_team_id === null) ? [0, 1] : [s.game.start_server_team_id];
 			team_indices.forEach(function(ti) {
@@ -374,34 +379,35 @@ function ui_render(s) {
 					}
 				}
 
-				bupui.add_player_pick(s, $('#pick_server'), 'pick_server', ti, 0, null, namefunc);
+				bupui.add_player_pick(s, pick_server, 'pick_server', ti, 0, null, namefunc);
 				if (s.setup.is_doubles) {
-					bupui.add_player_pick(s, $('#pick_server'), 'pick_server', ti, 1, null, namefunc);
+					bupui.add_player_pick(s, pick_server, 'pick_server', ti, 1, null, namefunc);
 				}
 			});
 
 			dialog_active = true;
-			bupui.show_picker($('#pick_server'));
+			bupui.show_picker(pick_server);
 		} else if (s.game.start_receiver_player_id === null) {
-			$('#pick_receiver button').remove();
+			pick_server.find('button').remove();
 			dialog_active = true;
 			var team_id = (s.game.start_server_team_id == 1) ? 0 : 1;
-			bupui.add_player_pick(s, $('#pick_receiver'), 'pick_receiver', team_id, 0);
-			bupui.add_player_pick(s, $('#pick_receiver'), 'pick_receiver', team_id, 1);
-			bupui.show_picker($('#pick_receiver'));
+			bupui.add_player_pick(s, pick_receiver, 'pick_receiver', team_id, 0);
+			bupui.add_player_pick(s, pick_receiver, 'pick_receiver', team_id, 1);
+			bupui.show_picker(pick_receiver);
 		}
 	}
 
+	var pronounciation_el = $('#pronounciation');
 	if (s.settings.show_pronounciation && !dialog_active) {
 		var pronounciation_text = pronounciation.pronounce(s);
 		if (pronounciation_text) {
-			$('#pronounciation>span').text(pronounciation_text);
-			$('#pronounciation').show();
+			pronounciation_el.find('>span').text(pronounciation_text);
+			pronounciation_el.show();
 		} else {
-			$('#pronounciation').hide();
+			pronounciation_el.hide();
 		}
 	} else {
-		$('#pronounciation').hide();
+		pronounciation_el.hide();
 	}
 }
 

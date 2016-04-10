@@ -125,10 +125,11 @@ function update(s) {
 }
 
 function ui_init(s) {
-	$('#setup_manual_form [name="gametype"]').on('change', function() {
-		var new_type = $('#setup_manual_form [name="gametype"]:checked').val();
+	var setup_manual_form = $('#setup_manual_form');
+	setup_manual_form.find('[name="gametype"]').on('change', function() {
+		var new_type = setup_manual_form.find('[name="gametype"]:checked').val();
 		var is_doubles = new_type == 'doubles';
-		$('#setup_manual_form .only-doubles').toggle(is_doubles);
+		setup_manual_form.find('.only-doubles').toggle(is_doubles);
 	});
 
 	$('.backtogame_button').on('click', function() {
