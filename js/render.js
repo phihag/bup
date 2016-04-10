@@ -23,44 +23,41 @@ function shuttle_counter(s) {
 }
 
 function _score_display_init(s) {
-	var score_table = $('#score_table');
-	score_table.empty();
+	var score_table = uiu.qs('#score_table');
+	uiu.empty(score_table);
 
-	var ann_tr = $('<tr class="score_announcements">');
-	var ann_td = $('<td colspan="2"></td>');
-	ann_tr.append(ann_td);
-	
-	score_table.attr('data-game-count', s.match.max_games);
-	score_table.append(ann_tr);
+	var ann_tr = uiu.create_el(score_table, 'tr', {
+		'class': 'score_announcements',
+	});
+	var ann_td = uiu.create_el(ann_tr, 'td', {
+		colspan: 2,
+	});
+	score_table.setAttribute('data-game-count', s.match.max_games);
 
 	for (var game_index = 0;game_index < s.match.max_games;game_index++) {
-		var tr = $('<tr>');
-		tr.attr('id', 'score_game_' + game_index);
-		score_table.append(tr);
-
-		var left = $('<td class="score score_left">');
-		var left_input = $('<input type="number" size="2" min="0" max="30" class="editmode_score default-invisible" value="0">');
-		left_input.attr({
-			'data-game-index': game_index,
-			'data-team-side': 'left',
+		var tr = uiu.create_el(score_table, 'tr', {
+			id: 'score_game_' + game_index,
 		});
-		left_input.on('input', editmode.change_score);
-		left.append(left_input);
-		var left_text = $('<span>');
-		left.append(left_text);
-		tr.append(left);
 
-		var right = $('<td class="score score_right">');
-		var right_input = $('<input type="number" size="2" min="0" max="30" class="editmode_score default-invisible" value="0">');
-		right_input.attr({
-			'data-game-index': game_index,
-			'data-team-side': 'right',
+		['left', 'right'].forEach(function(side) {
+			var td = uiu.create_el(tr, 'td', {
+				'class': 'score score_' + side,
+			});
+
+			var input = uiu.create_el(td, 'input', {
+				type: 'number',
+				size: 2,
+				min: 0,
+				max: 30,
+				'class': 'editmode_score default-invisible',
+				value: 0,
+				'data-game-index': game_index,
+				'data-team-side': side,
+			});
+			input.addEventListener('input', editmode.change_score);
+
+			uiu.create_el(td, 'span');
 		});
-		right_input.on('input', editmode.change_score);
-		right.append(right_input);
-		var right_text = $('<span>');
-		right.append(right_text);
-		tr.append(right);
 	}
 }
 

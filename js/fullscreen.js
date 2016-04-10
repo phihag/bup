@@ -57,7 +57,7 @@ function toggle() {
 
 function ui_init() {
 	$(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange', function() {
-		$('.fullscreen_button').text(
+		uiu.text_qs('.fullscreen_button',
 			state._(active() ? 'settings:Leave Fullscreen' : 'settings:Go Fullscreen')
 		);
 	});
