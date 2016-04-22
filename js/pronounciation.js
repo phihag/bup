@@ -205,13 +205,15 @@ function pronounce(s) {
 			return mark_str + s._('onmyleft', d);
 		}
 	} else if (s.match.announce_pregame) {
+		var glen = s.match.finished_games.length;
+		var game_id_str = (s.match.max_games === glen) ? 'final' : glen;
 		if (mark_str) {
-			return s._('loveall_play.' + s.match.finished_games.length + '.mark', {
+			return s._('loveall_play.' + game_id_str + '.mark', {
 				mark_str: marks2str(s, s.match.marks, true),
 				score: _pronounciation_score(s),
 			});
 		} else {
-			return s._('loveall_play.' + s.match.finished_games.length, {
+			return s._('loveall_play.' + game_id_str, {
 				score: _pronounciation_score(s),
 			});
 		}

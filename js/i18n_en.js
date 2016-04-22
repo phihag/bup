@@ -91,10 +91,14 @@ var i18n_en = {
 'loveall_play': 'Bitte spielen.',
 'loveall_play.0': '{score}; play',
 'loveall_play.1': 'Second game; {score}; play',
-'loveall_play.2': 'Final game; {score}; play',
+'loveall_play.2': 'Third game; {score}; play',
+'loveall_play.3': 'Fourth game; {score}; play',
+'loveall_play.final': 'Final game; {score}; play',
 'loveall_play.0.mark': 'Love all.\n{mark_str}{score}. Play.',
 'loveall_play.1.mark': 'Second game; love all.\n{mark_str}{score}. Play.',
-'loveall_play.2.mark': 'Final game; love all.\n{mark_str}{score}. Play.',
+'loveall_play.2.mark': 'Third game; love all.\n{mark_str}{score}. Play.',
+'loveall_play.3.mark': 'Fourth game; love all.\n{mark_str}{score}. Play.',
+'loveall_play.final.mark': 'Final game; love all.\n{mark_str}{score}. Play.',
 
 
 'card.yellow': '{player_name}, warning for misconduct.\n',

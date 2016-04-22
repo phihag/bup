@@ -92,9 +92,13 @@ var i18n_de = {
 'loveall_play': 'Bitte spielen.',
 'loveall_play.0': '{score}.\nBitte spielen.',
 'loveall_play.1': 'Zweiter Satz. {score}.\nBitte spielen.',
+'loveall_play.2': 'Dritter Satz. {score}.\nBitte spielen.',
+'loveall_play.3': 'Vierter Satz. {score}.\nBitte spielen.',
 'loveall_play.final': 'Entscheidungssatz. {score}.\nBitte spielen.',
 'loveall_play.0.mark': '0 beide.\n{mark_str}{score}. Bitte spielen.',
 'loveall_play.1.mark': 'Zweiter Satz. 0 beide.\n{mark_str}{score}. Bitte spielen.',
+'loveall_play.2.mark': 'Dritter Satz. 0 beide.\n{mark_str}{score}. Bitte spielen.',
+'loveall_play.3.mark': 'Vierter Satz. 0 beide.\n{mark_str}{score}. Bitte spielen.',
 'loveall_play.final.mark': 'Entscheidungssatz. 0 beide.\n{mark_str}{score}. Bitte spielen.',
 
 'card.yellow': '{player_name}, Verwarnung wegen unsportlichen Verhaltens.\n',
