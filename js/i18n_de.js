@@ -92,10 +92,10 @@ var i18n_de = {
 'loveall_play': 'Bitte spielen.',
 'loveall_play.0': '{score}.\nBitte spielen.',
 'loveall_play.1': 'Zweiter Satz. {score}.\nBitte spielen.',
-'loveall_play.2': 'Entscheidungssatz. {score}.\nBitte spielen.',
+'loveall_play.final': 'Entscheidungssatz. {score}.\nBitte spielen.',
 'loveall_play.0.mark': '0 beide.\n{mark_str}{score}. Bitte spielen.',
 'loveall_play.1.mark': 'Zweiter Satz. 0 beide.\n{mark_str}{score}. Bitte spielen.',
-'loveall_play.2.mark': 'Entscheidungssatz. 0 beide.\n{mark_str}{score}. Bitte spielen.',
+'loveall_play.final.mark': 'Entscheidungssatz. 0 beide.\n{mark_str}{score}. Bitte spielen.',
 
 'card.yellow': '{player_name}, Verwarnung wegen unsportlichen Verhaltens.\n',
 'card.red': '{player_name}, Fehler wegen unsportlichen Verhaltens.\n',
@@ -148,6 +148,7 @@ var i18n_de = {
 'settings:counting': 'Zählweise:',
 'settings:counting:3x21': 'BWF (3x21)',
 'settings:counting:2x21+11': 'Bundesliga 2016/2017 (2x21, 3. Satz bis 11)',
+'settings:counting:11x5_15': 'BWF 2016 Experiment Option 1 (5x11 bis max. 15)',
 
 'settings:Settings': 'Einstellungen',
 'settings:Court Description': 'Feld:',

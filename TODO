@@ -1,3 +1,10 @@
+5x11_15
+	test UI
+
+5x11/3
+	test that display is correct
+	test change ends
+
 liveaw: show player names in detail
 liveaw: show match results in detail
 liveaw: try HTTP version
@@ -129,7 +136,6 @@ import: test from non-network
 import: test importing match-only stuff (should not active staticnet)
 &print for scoresheet / event scoresheet / eventsheet
 event scoresheet should show current state if known (associate mstate, survive event reloads)
-demo event (with eventsheet & current state)
 court selection by clicking on court name (if restricted courts, otherwise other court selection)
 move pronounciation above love-all? / highlight love-all?
 option so that love-all should cancel timer
@@ -308,7 +314,6 @@ scoresheet: show loading dialog
 scoresheet: deal and notify failures of loading SVG
 unify scoresheet and eventsheet downloading
 display mode: until match start show preview (Refrath gegen ...)
-demo event
 make reload button a normal button
 test badminton umpire scorekeeper? / support its web interface?
 add option no court; prevent transferring (big fat message though!)
@@ -336,6 +341,7 @@ remove all mentions of home/away
 anroid chrome address bar background color
 remove one of network.calc_gamescore and calc.calc_game_score?
 improve yellow-card.svg / red-card.svg
+replace state.match.max_games by a function
 helper function for document.querySelector which asserts result is true (and omits silent error otherwise)
 	use that in various util functions as well
 allow challenges

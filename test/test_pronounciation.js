@@ -2726,4 +2726,9 @@ _describe('pronounciation', function() {
 	});
 });
 
+module.exports = {
+	pronounce_de: pronounce_de,
+	pronounce_en: pronounce_en,
+};
+
 })();

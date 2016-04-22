@@ -29,7 +29,9 @@ function teamtext_internal(s, team_id) {
 
 // Simplified announcement for minimal buttons
 function loveall_announcement(s) {
-	return s._('loveall_play.' + s.match.finished_games.length, {
+	var glen = s.match.finished_games.length;
+	var game_id = (s.match.max_games === glen) ? 'final' : glen;
+	return s._('loveall_play.' + game_id, {
 		mark_extra: '',
 		score: _pronounciation_score(s),
 	});
