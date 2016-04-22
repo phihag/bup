@@ -30,7 +30,7 @@ function teamtext_internal(s, team_id) {
 // Simplified announcement for minimal buttons
 function loveall_announcement(s) {
 	var glen = s.match.finished_games.length;
-	var game_id = (s.match.max_games === glen) ? 'final' : glen;
+	var game_id = (s.match.max_games - 1 === glen) ? 'final' : glen;
 	return s._('loveall_play.' + game_id, {
 		mark_extra: '',
 		score: _pronounciation_score(s),
@@ -206,7 +206,7 @@ function pronounce(s) {
 		}
 	} else if (s.match.announce_pregame) {
 		var glen = s.match.finished_games.length;
-		var game_id_str = (s.match.max_games === glen) ? 'final' : glen;
+		var game_id_str = (s.match.max_games - 1 === glen) ? 'final' : glen;
 		if (mark_str) {
 			return s._('loveall_play.' + game_id_str + '.mark', {
 				mark_str: marks2str(s, s.match.marks, true),
