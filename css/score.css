@@ -36,11 +36,20 @@ span.score_announcement+span.score_announcement {
 	color: #444444;
 }
 .score_finished-game, .score_future-game {
+	/* 3 games (default) */
 	font-size: 12px;
 	font-size: 3vh;
 	line-height: 3vh;
 	height: 3.5vh;
 }
+table[data-game-count="5"] .score_finished-game, table[data-game-count="5"].score_future-game {
+	font-size: 7.2px;
+	font-size: 1.8vh;
+	line-height: 1.8vh;
+	height: 1.9vh;
+}
+
+
 .score_future-game>td.score>span {
 	visibility: hidden;
 }

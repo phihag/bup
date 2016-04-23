@@ -1,8 +1,9 @@
+fix score height
 receiver is broken in second game!
 
 5x11_15
-	scoresheet
 	style top display
+	scoresheet
 
 5x11/3
 	test that display is correct
@@ -353,5 +354,7 @@ allow challenges
 	failsafe (http://www.badmintoncentral.com/forums/showthread.php/160170-sub-standard-umpire-gave-a-free-point-to-Okuhara-in-first-set?p=2413636#post2413636)
 CourtSpot: Spielreihenfolge festlegen
 remove s.match.max_games in favor of a calc function
+remove !important
+add CSS lint
 -> Demo Jörg H, Manuel, Susanne, Werner Durow
 
