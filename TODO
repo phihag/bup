@@ -1,12 +1,9 @@
-5x11_15
-	style top display
-	scoresheet
-
 5x11/3
 	test that display is correct
 	test change ends
 
 test eventsheet game score upon resigning
+love-all should dismiss timer?
 
 liveaw: show player names in detail
 liveaw: show match results in detail
@@ -39,7 +36,6 @@ multi scoresheet: shift+S shows outdated state when editing match
 highlight current match button
 move login rendering into a helper function into network
 Opera Mini bug
-liveaw: use JSON instead of websocket for speed?
 support RLS (Excel file)
 test editevent without all_players
 

@@ -875,9 +875,18 @@ function sheet_render(s, svg, referee_view) {
 	});
 }
 
+function sheet_name(setup) {
+	switch (setup.counting) {
+	case '5x11_15':
+		return 'international_5x11';
+	default:
+		return 'international';
+	}
+}
+
 function event_render(container) {
-	load_sheet('international', function(xml) {
-		state.event.matches.forEach(function(match) {
+	state.event.matches.forEach(function(match) {
+		load_sheet(sheet_name(match.setup), function(xml) {
 			var svg = make_sheet_node(xml);
 			svg.setAttribute('class', 'scoresheet multi_scoresheet');
 			container.appendChild(svg);
@@ -971,7 +980,8 @@ function ui_show() {
 	uiu.visible_qs('.scoresheet_loading-icon', true);
 	var container = uiu.qs('.scoresheet_container');
 	$(container).children('.scoresheet').remove();
-	uiu.visible(container, true);	load_sheet('international', function(xml) {
+	uiu.visible(container, true);
+	load_sheet(sheet_name(state.setup), function(xml) {
 		var svg = make_sheet_node(xml);
 		svg.setAttribute('class', 'scoresheet single_scoresheet');
 		// Usually we'd call importNode here to import the document here, but IE/Edge then ignores the styles
@@ -1047,6 +1057,7 @@ function jspdf_loaded() {
 
 var URLS = {
 	'international': 'div/scoresheet_international.svg',
+	'international_5x11': 'div/scoresheet_international_5x11.svg',
 };
 var files = {};
 function load_sheet(key, callback) {
@@ -1108,6 +1119,7 @@ function ui_init() {
 	});
 
 	load_sheet('international');
+	load_sheet('international_5x11');
 }
 
 return {
