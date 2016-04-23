@@ -389,7 +389,7 @@ function ui_render(s) {
 			dialog_active = true;
 			bupui.show_picker(pick_server);
 		} else if (s.game.start_receiver_player_id === null) {
-			pick_server.find('button').remove();
+			pick_receiver.find('button').remove();
 			dialog_active = true;
 			var team_id = (s.game.start_server_team_id == 1) ? 0 : 1;
 			bupui.add_player_pick(s, pick_receiver, 'pick_receiver', team_id, 0);
