@@ -3501,6 +3501,78 @@ _describe('calc helper functions', function() {
 		assert.equal(bup.calc.game_winner('3x21', 0, 30, 30), 'invalid');
 		assert.equal(bup.calc.game_winner('3x21', 0, 28, 25), 'invalid');
 	});
+
+	_it('gamescore', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+		}, {
+			type: 'love-all',
+		}];
+		var s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(s.match.finished_games, []);
+		assert.deepStrictEqual(bup.calc.gamescore(s), [0, 0]);
+
+		// Avoid corruption of finished_games
+		assert.deepStrictEqual(s.match.finished_games, []);
+
+		press_score(presses, 18, 18);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(bup.calc.gamescore(s), [0, 0]);
+
+		press_score(presses, 3, 0);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(bup.calc.gamescore(s), [1, 0]);
+
+		presses.push({
+			type: 'postgame-confirm',
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(bup.calc.gamescore(s), [1, 0]);
+
+		presses.push({
+			type: 'love-all',
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(bup.calc.gamescore(s), [1, 0]);
+
+		press_score(presses, 3, 1);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(bup.calc.gamescore(s), [1, 0]);
+
+		press_score(presses, 18, 5);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(bup.calc.gamescore(s), [1, 1]);
+
+		presses.push({
+			type: 'postgame-confirm',
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(bup.calc.gamescore(s), [1, 1]);
+
+		presses.push({
+			type: 'love-all',
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(bup.calc.gamescore(s), [1, 1]);
+
+		press_score(presses, 11, 10);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(bup.calc.gamescore(s), [1, 1]);
+
+		press_score(presses, 0, 10);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(bup.calc.gamescore(s), [2, 1]);
+
+		presses.push({
+			type: 'postmatch-confirm',
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(bup.calc.gamescore(s), [2, 1]);
+	});
 });
 
 })();

@@ -37,35 +37,43 @@ function loveall_announcement(s) {
 	});
 }
 
+function wonby_name(s, winner_idx) {
+	var winner = s.setup.teams[winner_idx];
+
+	if (s.setup.team_competition) {
+		return winner.name;
+	} else {
+		if (s.setup.is_doubles) {
+			return winner.players[0].name + s._('wonby.and') + winner.players[1].name;
+		} else {
+			return winner.players[0].name;
+		}
+	}
+}
+
 function postgame_announcement(s) {
 	var winner_index = s.game.team1_won ? 0 : 1;
 	var winner_score = s.game.score[winner_index];
 	var loser_score = s.game.score[1 - winner_index];
-	var winner = s.setup.teams[winner_index];
-	var winner_name;
-	if (s.setup.team_competition) {
-		winner_name = winner.name;
-	} else {
-		if (s.setup.is_doubles) {
-			winner_name = winner.players[0].name + s._('wonby.and') + winner.players[1].name;
-		} else {
-			winner_name = winner.players[0].name;
-		}
-	}
+	var winner_name = wonby_name(s, winner_index);
+
 	var res = '';
 	if (s.match.finished) {
 		res = s._('wonby.match', {
 			winner_name: winner_name,
 			score_str: calc.score_str(s, winner_index),
 		});
-	} else if (s.match.finished_games.length <= 1) {
-		res = s._('wonby.' + (1 + s.match.finished_games.length), {
+	} else {
+		var gscore = calc.gamescore(s);
+		var games_leader_idx = (gscore[0] > gscore[1]) ? 0 : 1;
+		var games_leader_name = wonby_name(s, games_leader_idx);
+		res = s._('wonby.' + (gscore[0] + gscore[1]), {
 			winner_name: winner_name,
 			winner_score: winner_score,
 			loser_score: loser_score,
+		}) + s._('gamescore.' + gscore[games_leader_idx] + '-' + gscore[1 - games_leader_idx], {
+			games_leader_name: games_leader_name,
 		});
-	} else {
-		throw new Error('Won third game but match not finished?');
 	}
 	return res;
 }

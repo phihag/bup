@@ -5,6 +5,8 @@
 	test that display is correct
 	test change ends
 
+test eventsheet game score upon resigning
+
 liveaw: show player names in detail
 liveaw: show match results in detail
 liveaw: try HTTP version

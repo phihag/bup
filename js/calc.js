@@ -82,6 +82,26 @@ function copy_state(s) {
 	};
 }
 
+
+function gamescore(s) {
+	var gscores = [0, 0];
+	var all_games = s.match.finished_games.slice();
+	if (all_games[all_games.length - 1] !== s.game) {
+		all_games.push(s.game);
+	}
+	all_games.forEach(function(g, game_idx) {
+		var gs = g.score;
+		var winner = game_winner(s.setup.counting, game_idx, gs[0], gs[1]);
+		if (winner == 'left') {
+			gscores[0]++;
+		} else if (winner == 'right') {
+			gscores[1]++;
+		}
+	});
+	return gscores;
+}
+
+
 function score_str(s, left_id) {
 	var game_score; // No "let" in current browsers
 	var res = '';
@@ -851,6 +871,7 @@ return {
 	calc_press: calc_press,
 	court: court,
 	copy_state: copy_state,
+	gamescore: gamescore,
 	game_winner: game_winner,
 	init_calc: init_calc,
 	init_state: init_state,

@@ -49,7 +49,7 @@ _describe('BWF experimental 5x11_15 counting', function() {
 
 		press_score(presses, 4, 0);
 		s = state_after(presses, SINGLES_SETUP);
-		assert.deepStrictEqual(s.match.finished_games, []);
+		assert.deepStrictEqual(bup.calc.gamescore(s), [0, 0]);
 		assert.deepStrictEqual(s.game.score, [10, 5]);
 		assert.strictEqual(s.game.team1_left, true);
 		assert.strictEqual(s.game.interval, false);
@@ -433,6 +433,7 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.deepStrictEqual(s.game.score, [15, 14]);
+		assert.deepStrictEqual(bup.calc.gamescore(s), [2, 0]);
 		assert.strictEqual(s.game.team1_left, false);
 		assert.strictEqual(s.game.interval, false);
 		assert.strictEqual(s.game.change_sides, false);
@@ -449,17 +450,17 @@ _describe('BWF experimental 5x11_15 counting', function() {
 			exigent: 20499,
 		});
 		assert.strictEqual(pronounce_de(s),
-			'Satz.\nDer zweite Satz wurde gewonnen von Alice 15-14. Alice führt zwei Sätze zu null.');
+			'Satz.\nDer zweite Satz wurde gewonnen von Alice 15-14. Alice führt zwei Sätze zu null');
 		assert.strictEqual(pronounce_en(s),
-			'Game.\nSecond game won by Alice 15-14. Alice leads two games to love.');
+			'Game.\nSecond game won by Alice 15-14. Alice leads two games to love');
 
 		presses.push({
 			type: 'postgame-confirm',
 		});
 		s = state_after(presses, SINGLES_SETUP);
-		assert.deepStrictEqual(s.match.finished_games, [[11, 9], [15, 14]]);
+		assert.deepStrictEqual(bup.calc.gamescore(s), [2, 0]);
 		assert.deepStrictEqual(s.game.score, [0, 0]);
-		assert.strictEqual(s.game.team1_left, false);
+		assert.strictEqual(s.game.team1_left, true);
 		assert.strictEqual(s.game.interval, false);
 		assert.strictEqual(s.game.change_sides, false);
 		assert.strictEqual(s.game.matchpoint, false);
@@ -490,15 +491,11 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.strictEqual(s.game.matchpoint, false);
 		assert.strictEqual(s.game.gamepoint, false);
 		assert.strictEqual(s.game.game, false);
-		assert.strictEqual(s.game.finished, true);
+		assert.strictEqual(s.game.finished, false);
 		assert.strictEqual(s.match.finished, false);
 		assert.strictEqual(s.game.team1_won, null);
 		assert.strictEqual(s.match.team1_won, null);
 		assert.deepStrictEqual(s.timer, false);
-		assert.strictEqual(pronounce_de(s),
-			'Dritter Satz. 0 beide.\nBitte spielen.');
-		assert.strictEqual(pronounce_en(s),
-			'Third game; Love all; play');
 
 		press_score(presses, 6, 5);
 		s = state_after(presses, SINGLES_SETUP);
@@ -509,7 +506,7 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.strictEqual(s.game.matchpoint, false);
 		assert.strictEqual(s.game.gamepoint, false);
 		assert.strictEqual(s.game.game, false);
-		assert.strictEqual(s.game.finished, true);
+		assert.strictEqual(s.game.finished, false);
 		assert.strictEqual(s.match.finished, false);
 		assert.strictEqual(s.game.team1_won, null);
 		assert.strictEqual(s.match.team1_won, null);
@@ -546,9 +543,9 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.strictEqual(s.match.team1_won, true);
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
-			'Das Spiel wurde gewonnen von Alice mit 11-9 15-14 11-5.');
+			'Satz.\nDas Spiel wurde gewonnen von Alice 11-6 15-14 11-5');
 		assert.strictEqual(pronounce_en(s),
-			'Match won by Alice, 11-9 15-14 11-5.');
+			'Game.\nMatch won by Alice 11-6 15-14 11-5');
 
 		alt_presses.push({
 			type: 'postmatch-confirm',
@@ -567,9 +564,9 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.strictEqual(s.match.team1_won, true);
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
-			'Das Spiel wurde gewonnen von Alice mit 11-9 15-14 11-5.');
+			'Satz.\nDas Spiel wurde gewonnen von Alice 11-6 15-14 11-5');
 		assert.strictEqual(pronounce_en(s),
-			'Match won by Alice, 11-9 15-14 11-5.');
+			'Game.\nMatch won by Alice 11-6 15-14 11-5');
 
 		press_score(presses, 0, 6);
 		s = state_after(presses, SINGLES_SETUP);
@@ -588,7 +585,7 @@ _describe('BWF experimental 5x11_15 counting', function() {
 
 		presses.push({
 			type: 'score',
-			side: 'left',
+			side: 'right',
 			timestamp: 140000,
 		});
 		s = state_after(presses, SINGLES_SETUP);
@@ -609,15 +606,15 @@ _describe('BWF experimental 5x11_15 counting', function() {
 			exigent: 20499,
 		});
 		assert.strictEqual(pronounce_de(s),
-			'Der dritte Satz wurde gewonnen von Bob mit 12-10. Alice führt zwei Sätze zu einem.');
+			'Satz.\nDer dritte Satz wurde gewonnen von Bob 12-10. Alice führt zwei Sätze zu eins');
 		assert.strictEqual(pronounce_en(s),
-			'Third game won by Bob, 12-10. Alice leads to games to one.');
+			'Game.\nThird game won by Bob 12-10. Alice leads two games to one');
 
 		presses.push({
 			type: 'postgame-confirm',
 		});
 		s = state_after(presses, SINGLES_SETUP);
-		assert.deepStrictEqual(s.match.finished_games, [[11, 9], [15, 14], [10, 12]]);
+		assert.deepStrictEqual(bup.calc.gamescore(s), [2, 1]);
 		assert.deepStrictEqual(s.game.score, [0, 0]);
 		assert.strictEqual(s.game.team1_left, false);
 		assert.strictEqual(s.game.interval, false);
@@ -655,15 +652,11 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.strictEqual(s.game.team1_won, null);
 		assert.strictEqual(s.match.team1_won, null);
 		assert.deepStrictEqual(s.timer, false);
-		assert.strictEqual(pronounce_de(s),
-			'Vierter Satz. 0 beide.\nBitte spielen.');
-		assert.strictEqual(pronounce_en(s),
-			'Fourth game; Love all; play');
 
 		press_score(presses, 6, 2);
 		s = state_after(presses, SINGLES_SETUP);
 		assert.deepStrictEqual(s.game.score, [2, 6]);
-		assert.strictEqual(s.game.team1_left, true);
+		assert.strictEqual(s.game.team1_left, false);
 		assert.strictEqual(s.game.interval, false);
 		assert.strictEqual(s.game.change_sides, false);
 		assert.strictEqual(s.game.matchpoint, false);
@@ -741,42 +734,18 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.deepStrictEqual(s.timer, {
 			duration: 60000,
 			start: 250000,
+			exigent: 20499,
 		});
 		assert.strictEqual(pronounce_de(s),
-			'Der vierte Satz wurde gewonnen von Bob mit 11-2. Zwei Sätze beide.');
+			'Satz.\nDer vierte Satz wurde gewonnen von Bob 11-2; Zwei Sätze beide');
 		assert.strictEqual(pronounce_en(s),
-			'Fourth game won by Bob, 11-2. Two games all.');
+			'Game.\nFourth game won by Bob 11-2; Two games all');
 
 		presses.push({
 			type: 'postgame-confirm',
 		});
 		s = state_after(presses, SINGLES_SETUP);
-		assert.deepStrictEqual(s.match.finished_games, [[11, 9], [15, 14], [10, 12], [2, 11]]);
-		assert.deepStrictEqual(s.game.score, [0, 0]);
-		assert.strictEqual(s.game.team1_left, false);
-		assert.strictEqual(s.game.interval, false);
-		assert.strictEqual(s.game.change_sides, false);
-		assert.strictEqual(s.game.matchpoint, false);
-		assert.strictEqual(s.game.gamepoint, false);
-		assert.strictEqual(s.game.game, false);
-		assert.strictEqual(s.game.finished, false);
-		assert.strictEqual(s.match.finished, false);
-		assert.strictEqual(s.game.team1_won, false);
-		assert.strictEqual(s.match.team1_won, null);
-		assert.deepStrictEqual(s.timer, {
-			duration: 60000,
-			start: 250000,
-		});
-		assert.strictEqual(pronounce_de(s),
-			'Entscheidungsspiel. Null beide. Bitte spielen');
-		assert.strictEqual(pronounce_en(s),
-			'Final game. Love all. Play.');
-
-		presses.push({
-			type: 'love-all',
-		});
-		s = state_after(presses, SINGLES_SETUP);
-		assert.deepStrictEqual(s.match.finished_games, [[11, 9], [15, 14], [10, 12], [2, 11]]);
+		assert.deepStrictEqual(bup.calc.gamescore(s), [2, 2]);
 		assert.deepStrictEqual(s.game.score, [0, 0]);
 		assert.strictEqual(s.game.team1_left, true);
 		assert.strictEqual(s.game.interval, false);
@@ -786,16 +755,40 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.strictEqual(s.game.game, false);
 		assert.strictEqual(s.game.finished, false);
 		assert.strictEqual(s.match.finished, false);
-		assert.strictEqual(s.game.team1_won, false);
+		assert.strictEqual(s.game.team1_won, null);
 		assert.strictEqual(s.match.team1_won, null);
 		assert.deepStrictEqual(s.timer, {
 			duration: 60000,
 			start: 250000,
+			exigent: 20499,
 		});
+		assert.strictEqual(pronounce_de(s),
+			'Entscheidungssatz. 0 beide.\nBitte spielen.');
+		assert.strictEqual(pronounce_en(s),
+			'Final game; Love all; play');
+
+		presses.push({
+			type: 'love-all',
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(bup.calc.gamescore(s), [2, 2]);
+		assert.deepStrictEqual(s.game.score, [0, 0]);
+		assert.strictEqual(s.game.team1_left, true);
+		assert.strictEqual(s.game.interval, false);
+		assert.strictEqual(s.game.change_sides, false);
+		assert.strictEqual(s.game.matchpoint, false);
+		assert.strictEqual(s.game.gamepoint, false);
+		assert.strictEqual(s.game.game, false);
+		assert.strictEqual(s.game.finished, false);
+		assert.strictEqual(s.match.finished, false);
+		assert.strictEqual(s.game.team1_won, null);
+		assert.strictEqual(s.match.team1_won, null);
+		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s), null);
 		assert.strictEqual(pronounce_en(s), null);
 
-		press_score(presses, 5, 5);
+		press_score(presses, 4, 5);
+		press_score(presses, 1, 0);
 		s = state_after(presses, SINGLES_SETUP);
 		assert.deepStrictEqual(s.game.score, [5, 5]);
 		assert.strictEqual(s.game.team1_left, true);
@@ -806,11 +799,11 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.strictEqual(s.game.game, false);
 		assert.strictEqual(s.game.finished, false);
 		assert.strictEqual(s.match.finished, false);
-		assert.strictEqual(s.game.team1_won, false);
+		assert.strictEqual(s.game.team1_won, null);
 		assert.strictEqual(s.match.team1_won, null);
 		assert.deepStrictEqual(s.timer, false);
-		assert.strictEqual(pronounce_de(s), 'Aufschlagwechsel. 5 beide.');
-		assert.strictEqual(pronounce_en(s), 'Service over. 5 all.');
+		assert.strictEqual(pronounce_de(s), 'Aufschlagwechsel. 5 beide');
+		assert.strictEqual(pronounce_en(s), 'Service over. 5 all');
 
 		presses.push({
 			type: 'score',
@@ -827,16 +820,17 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.strictEqual(s.game.game, false);
 		assert.strictEqual(s.game.finished, false);
 		assert.strictEqual(s.match.finished, false);
-		assert.strictEqual(s.game.team1_won, false);
+		assert.strictEqual(s.game.team1_won, null);
 		assert.strictEqual(s.match.team1_won, null);
 		assert.deepStrictEqual(s.timer, {
 			start: 300000,
 			duration: 60000,
+			exigent: 20499,
 		});
 		assert.strictEqual(pronounce_de(s),
-			'6-5. Pause. Bitte die Spielfeldseiten wechseln.');
+			'6-5 Pause. Bitte die Spielfeldseiten wechseln');
 		assert.strictEqual(pronounce_en(s),
-			'6-5. Interval. Change ends.');
+			'6-5 Interval; change ends');
 
 
 		press_score(presses, 4, 3);
@@ -850,27 +844,13 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.strictEqual(s.game.game, false);
 		assert.strictEqual(s.game.finished, false);
 		assert.strictEqual(s.match.finished, false);
-		assert.strictEqual(s.game.team1_won, false);
-		assert.strictEqual(s.match.team1_won, null);
-		assert.deepStrictEqual(s.timer, false);
-
-		press_score(presses, 5, 3);
-		s = state_after(presses, SINGLES_SETUP);
-		assert.deepStrictEqual(s.game.score, [9, 9]);
-		assert.strictEqual(s.game.team1_left, false);
-		assert.strictEqual(s.game.interval, false);
-		assert.strictEqual(s.game.change_sides, false);
-		assert.strictEqual(s.game.matchpoint, false);
-		assert.strictEqual(s.game.gamepoint, false);
-		assert.strictEqual(s.game.game, false);
-		assert.strictEqual(s.game.finished, false);
-		assert.strictEqual(s.match.finished, false);
-		assert.strictEqual(s.game.team1_won, false);
+		assert.strictEqual(s.game.team1_won, null);
 		assert.strictEqual(s.match.team1_won, null);
 		assert.deepStrictEqual(s.timer, false);
 
 		press_score(presses, 1, 0);
 		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(bup.calc.gamescore(s), [2, 2]);
 		assert.deepStrictEqual(s.game.score, [9, 10]);
 		assert.strictEqual(s.game.team1_left, false);
 		assert.strictEqual(s.game.interval, false);
@@ -887,12 +867,12 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		alt_presses = presses.slice();
 		press_score(alt_presses, 1, 0);
 		s = state_after(alt_presses, SINGLES_SETUP);
-		assert.deepStrictEqual(s.match.finished_games, [[11, 9], [15, 14], [10, 12], [2, 11]]);
+		assert.deepStrictEqual(bup.calc.gamescore(s), [2, 3]);
 		assert.deepStrictEqual(s.game.score, [9, 11]);
 		assert.strictEqual(s.game.team1_left, false);
 		assert.strictEqual(s.game.interval, false);
 		assert.strictEqual(s.game.change_sides, false);
-		assert.strictEqual(s.game.matchpoint, true);
+		assert.strictEqual(s.game.matchpoint, false);
 		assert.strictEqual(s.game.gamepoint, false);
 		assert.strictEqual(s.game.game, true);
 		assert.strictEqual(s.game.finished, true);
@@ -901,9 +881,9 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.strictEqual(s.match.team1_won, false);
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
-			'Das Spiel wurde von Bob mit 9-11 14-15 12-10 11-2 11-9.');
+			'Satz.\nDas Spiel wurde gewonnen von Bob 6-11 14-15 12-10 11-2 11-9');
 		assert.strictEqual(pronounce_en(s),
-			'Match won by Bob 9-11 14-15 12-10 11-2 11-9.');
+			'Game.\nMatch won by Bob 6-11 14-15 12-10 11-2 11-9');
 
 		press_score(presses, 0, 1);
 		s = state_after(presses, SINGLES_SETUP);
@@ -935,9 +915,9 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.strictEqual(s.match.team1_won, null);
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
-			'Aufschlagwechsel. 13 beide.');
+			'Aufschlagwechsel. 13 beide');
 		assert.strictEqual(pronounce_en(s),
-			'Service over. 13 all.');
+			'Service over. 13 all');
 
 		press_score(presses, 0, 1);
 		s = state_after(presses, SINGLES_SETUP);
@@ -954,9 +934,9 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.strictEqual(s.match.team1_won, null);
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
-			'14 Spielpunkt 13.');
+			'14 Spielpunkt 13');
 		assert.strictEqual(pronounce_en(s),
-			'14 match point 13.');
+			'14 match point 13');
 
 		press_score(presses, 1, 0);
 		s = state_after(presses, SINGLES_SETUP);
@@ -973,14 +953,14 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.strictEqual(s.match.team1_won, null);
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
-			'14 Spielpunkt beide.');
+			'Aufschlagwechsel. 14 Spielpunkt beide');
 		assert.strictEqual(pronounce_en(s),
-			'14 match point all.');
+			'Service over. 14 match point all');
 
 		alt_presses = presses.slice();
 		press_score(alt_presses, 1, 0);
 		s = state_after(alt_presses, SINGLES_SETUP);
-		assert.deepStrictEqual(s.match.finished_games, [[11, 9], [15, 14], [10, 12], [2, 11]]);
+		assert.deepStrictEqual(bup.calc.gamescore(s), [2, 3]);
 		assert.deepStrictEqual(s.game.score, [14, 15]);
 		assert.strictEqual(s.game.team1_left, false);
 		assert.strictEqual(s.game.interval, false);
@@ -994,18 +974,18 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.strictEqual(s.match.team1_won, false);
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
-			'Das Spiel wurde gewonnen von Bob mit 9-11 14-15 12-10 11-2 15-14.');
+			'Satz.\nDas Spiel wurde gewonnen von Bob 6-11 14-15 12-10 11-2 15-14');
 		assert.strictEqual(pronounce_en(s),
-			'Match won by Bob 9-11 14-15 12-10 11-2 15-14.');
+			'Game.\nMatch won by Bob 6-11 14-15 12-10 11-2 15-14');
 
 		press_score(presses, 0, 1);
 		s = state_after(presses, SINGLES_SETUP);
-		assert.deepStrictEqual(s.match.finished_games, [[11, 9], [15, 14], [10, 12], [2, 11]]);
+		assert.deepStrictEqual(bup.calc.gamescore(s), [3, 2]);
 		assert.deepStrictEqual(s.game.score, [15, 14]);
 		assert.strictEqual(s.game.team1_left, false);
 		assert.strictEqual(s.game.interval, false);
 		assert.strictEqual(s.game.change_sides, false);
-		assert.strictEqual(s.game.matchpoint, true);
+		assert.strictEqual(s.game.matchpoint, false);
 		assert.strictEqual(s.game.gamepoint, false);
 		assert.strictEqual(s.game.game, true);
 		assert.strictEqual(s.game.finished, true);
@@ -1014,20 +994,20 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.strictEqual(s.match.team1_won, true);
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
-			'Das Spiel wurde gewonnen von Alice mit 11-9 15-14 10-12 2-11 15-14.');
+			'Satz.\nDas Spiel wurde gewonnen von Alice 11-6 15-14 10-12 2-11 15-14');
 		assert.strictEqual(pronounce_en(s),
-			'Match won by Alice 11-9 15-14 10-12 2-11 15-14.');
+			'Game.\nMatch won by Alice 11-6 15-14 10-12 2-11 15-14');
 
 		presses.push({
 			type: 'postmatch-confirm',
 		});
 		s = state_after(presses, SINGLES_SETUP);
-		assert.deepStrictEqual(s.match.finished_games, [[11, 9], [15, 14], [10, 12], [2, 11], [15, 14]]);
+		assert.deepStrictEqual(bup.calc.gamescore(s), [3, 2]);
 		assert.deepStrictEqual(s.game.score, [15, 14]);
 		assert.strictEqual(s.game.team1_left, false);
 		assert.strictEqual(s.game.interval, false);
 		assert.strictEqual(s.game.change_sides, false);
-		assert.strictEqual(s.game.matchpoint, true);
+		assert.strictEqual(s.game.matchpoint, false);
 		assert.strictEqual(s.game.gamepoint, false);
 		assert.strictEqual(s.game.game, true);
 		assert.strictEqual(s.game.finished, true);
@@ -1036,9 +1016,9 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.strictEqual(s.match.team1_won, true);
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
-			'Das Spiel wurde gewonnen von Alice mit 11-9 15-14 10-12 2-11 15-14.');
+			'Satz.\nDas Spiel wurde gewonnen von Alice 11-6 15-14 10-12 2-11 15-14');
 		assert.strictEqual(pronounce_en(s),
-			'Match won by Alice 11-9 15-14 10-12 2-11 15-14.');
+			'Game.\nMatch won by Alice 11-6 15-14 10-12 2-11 15-14');
 	});
 
 	_it('game_winner helper function', function() {
