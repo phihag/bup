@@ -878,6 +878,7 @@ function sheet_render(s, svg, referee_view) {
 function sheet_name(setup) {
 	switch (setup.counting) {
 	case '5x11_15':
+	case '5x11/3':
 		return 'international_5x11';
 	default:
 		return 'international';
