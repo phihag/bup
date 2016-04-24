@@ -2722,7 +2722,310 @@ _describe('pronounciation', function() {
 			'[Call referee!]\n' +
 			'Are you retiring?'
 		);
+	});
 
+	_it('5x11 end-of game pronounciation', function() {
+		var SINGLES_SETUP_5x11 = bup.utils.deep_copy(SINGLES_SETUP);
+		SINGLES_SETUP_5x11.counting = '5x11_15';
+		var DOUBLES_SETUP_5x11 = bup.utils.deep_copy(DOUBLES_SETUP);
+		DOUBLES_SETUP_5x11.counting = '5x11_15';
+		var SINGLES_TEAM_SETUP_5x11 = bup.utils.deep_copy(SINGLES_TEAM_SETUP);
+		SINGLES_TEAM_SETUP_5x11.counting = '5x11_15';
+		var DOUBLES_TEAM_SETUP_5x11 = bup.utils.deep_copy(DOUBLES_TEAM_SETUP);
+		DOUBLES_TEAM_SETUP_5x11.counting = '5x11_15';
+
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		}, {
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 0,
+		}, {
+			type: 'love-all',
+		}];
+		press_score(presses, 11, 1);
+
+		var s = state_after(presses, SINGLES_SETUP_5x11);
+		assert.equal(pronounce_de(s),
+			'Satz.\nDer erste Satz wurde gewonnen von Alice 11-1'
+		);
+		assert.equal(pronounce_en(s),
+			'Game.\nFirst game won by Alice 11-1'
+		);
+		s = state_after(presses, DOUBLES_SETUP_5x11);
+		assert.equal(pronounce_de(s),
+			'Satz.\nDer erste Satz wurde gewonnen von Andrew und Alice 11-1'
+		);
+		assert.equal(pronounce_en(s),
+			'Game.\nFirst game won by Andrew and Alice 11-1'
+		);
+		s = state_after(presses, SINGLES_TEAM_SETUP_5x11);
+		assert.equal(pronounce_de(s),
+			'Satz.\nDer erste Satz wurde gewonnen von A team 11-1'
+		);
+		assert.equal(pronounce_en(s),
+			'Game.\nFirst game won by A team 11-1'
+		);
+		s = state_after(presses, DOUBLES_TEAM_SETUP_5x11);
+		assert.equal(pronounce_de(s),
+			'Satz.\nDer erste Satz wurde gewonnen von A team 11-1'
+		);
+		assert.equal(pronounce_en(s),
+			'Game.\nFirst game won by A team 11-1'
+		);
+
+		presses.push({
+			type: 'postgame-confirm',
+		});
+		presses.push({
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(presses, SINGLES_SETUP_5x11);
+		assert.equal(pronounce_de(s),
+			'Zweiter Satz. 0 beide.\nBitte spielen.'
+		);
+		assert.equal(pronounce_en(s),
+			'Second game; Love all; play'
+		);
+		presses.push({
+			type: 'love-all',
+		});
+
+		var alt_presses = presses.slice();
+		press_score(alt_presses, 11, 2);
+		s = state_after(alt_presses, SINGLES_SETUP_5x11);
+		assert.equal(pronounce_de(s),
+			'Satz.\nDer zweite Satz wurde gewonnen von Bob 11-2; einen Satz beide'
+		);
+		assert.equal(pronounce_en(s),
+			'Game.\nSecond game won by Bob 11-2; One game all'
+		);
+		s = state_after(alt_presses, DOUBLES_SETUP_5x11);
+		assert.equal(pronounce_de(s),
+			'Satz.\nDer zweite Satz wurde gewonnen von Bob und Birgit 11-2; einen Satz beide'
+		);
+		assert.equal(pronounce_en(s),
+			'Game.\nSecond game won by Bob and Birgit 11-2; One game all'
+		);
+		s = state_after(alt_presses, SINGLES_TEAM_SETUP_5x11);
+		assert.equal(pronounce_de(s),
+			'Satz.\nDer zweite Satz wurde gewonnen von B team 11-2; einen Satz beide'
+		);
+		assert.equal(pronounce_en(s),
+			'Game.\nSecond game won by B team 11-2; One game all'
+		);
+		s = state_after(alt_presses, DOUBLES_TEAM_SETUP_5x11);
+		assert.equal(pronounce_de(s),
+			'Satz.\nDer zweite Satz wurde gewonnen von B team 11-2; einen Satz beide'
+		);
+		assert.equal(pronounce_en(s),
+			'Game.\nSecond game won by B team 11-2; One game all'
+		);
+
+		press_score(presses, 3, 11);
+		s = state_after(presses, SINGLES_SETUP_5x11);
+		assert.equal(pronounce_de(s),
+			'Satz.\nDer zweite Satz wurde gewonnen von Alice 11-3. Alice führt zwei Sätze zu null'
+		);
+		assert.equal(pronounce_en(s),
+			'Game.\nSecond game won by Alice 11-3. Alice leads two games to love'
+		);
+		s = state_after(presses, DOUBLES_SETUP_5x11);
+		assert.equal(pronounce_de(s),
+			'Satz.\nDer zweite Satz wurde gewonnen von Andrew und Alice 11-3. Andrew und Alice führen zwei Sätze zu null'
+		);
+		assert.equal(pronounce_en(s),
+			'Game.\nSecond game won by Andrew and Alice 11-3. Andrew and Alice lead two games to love'
+		);
+		s = state_after(presses, SINGLES_TEAM_SETUP_5x11);
+		assert.equal(pronounce_de(s),
+			'Satz.\nDer zweite Satz wurde gewonnen von A team 11-3. A team führt zwei Sätze zu null'
+		);
+		assert.equal(pronounce_en(s),
+			'Game.\nSecond game won by A team 11-3. A team leads two games to love'
+		);
+		s = state_after(presses, DOUBLES_TEAM_SETUP_5x11);
+		assert.equal(pronounce_de(s),
+			'Satz.\nDer zweite Satz wurde gewonnen von A team 11-3. A team führt zwei Sätze zu null'
+		);
+		assert.equal(pronounce_en(s),
+			'Game.\nSecond game won by A team 11-3. A team leads two games to love'
+		);
+
+		presses.push({
+			type: 'postgame-confirm',
+		});
+		presses.push({
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(presses, SINGLES_SETUP_5x11);
+		assert.equal(pronounce_de(s),
+			'Dritter Satz. 0 beide.\nBitte spielen.'
+		);
+		assert.equal(pronounce_en(s),
+			'Third game; Love all; play'
+		);
+		presses.push({
+			type: 'love-all',
+		});
+
+		press_score(presses, 4, 11);
+		s = state_after(presses, SINGLES_SETUP_5x11);
+		assert.equal(pronounce_de(s),
+			'Satz.\nDer dritte Satz wurde gewonnen von Bob 11-4. Alice führt zwei Sätze zu eins'
+		);
+		assert.equal(pronounce_en(s),
+			'Game.\nThird game won by Bob 11-4. Alice leads two games to one'
+		);
+		s = state_after(presses, DOUBLES_SETUP_5x11);
+		assert.equal(pronounce_de(s),
+			'Satz.\nDer dritte Satz wurde gewonnen von Bob und Birgit 11-4. Andrew und Alice führen zwei Sätze zu eins'
+		);
+		assert.equal(pronounce_en(s),
+			'Game.\nThird game won by Bob and Birgit 11-4. Andrew and Alice lead two games to one'
+		);
+		s = state_after(presses, SINGLES_TEAM_SETUP_5x11);
+		assert.equal(pronounce_de(s),
+			'Satz.\nDer dritte Satz wurde gewonnen von B team 11-4. A team führt zwei Sätze zu eins'
+		);
+		assert.equal(pronounce_en(s),
+			'Game.\nThird game won by B team 11-4. A team leads two games to one'
+		);
+		s = state_after(presses, DOUBLES_TEAM_SETUP_5x11);
+		assert.equal(pronounce_de(s),
+			'Satz.\nDer dritte Satz wurde gewonnen von B team 11-4. A team führt zwei Sätze zu eins'
+		);
+		assert.equal(pronounce_en(s),
+			'Game.\nThird game won by B team 11-4. A team leads two games to one'
+		);
+
+		presses.push({
+			type: 'postgame-confirm',
+		});
+		presses.push({
+			type: 'pick_server',
+			team_id: 1,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'pick_receiver',
+			team_id: 0,
+			player_id: 0,
+		});
+		s = state_after(presses, SINGLES_SETUP_5x11);
+		assert.equal(pronounce_de(s),
+			'Vierter Satz. 0 beide.\nBitte spielen.'
+		);
+		assert.equal(pronounce_en(s),
+			'Fourth game; Love all; play'
+		);
+		presses.push({
+			type: 'love-all',
+		});
+
+		press_score(presses, 11, 5);
+		s = state_after(presses, SINGLES_SETUP_5x11);
+		assert.equal(pronounce_de(s),
+			'Satz.\nDer vierte Satz wurde gewonnen von Bob 11-5; Zwei Sätze beide'
+		);
+		assert.equal(pronounce_en(s),
+			'Game.\nFourth game won by Bob 11-5; Two games all'
+		);
+		s = state_after(presses, DOUBLES_SETUP_5x11);
+		assert.equal(pronounce_de(s),
+			'Satz.\nDer vierte Satz wurde gewonnen von Bob und Birgit 11-5; Zwei Sätze beide'
+		);
+		assert.equal(pronounce_en(s),
+			'Game.\nFourth game won by Bob and Birgit 11-5; Two games all'
+		);
+		s = state_after(presses, SINGLES_TEAM_SETUP_5x11);
+		assert.equal(pronounce_de(s),
+			'Satz.\nDer vierte Satz wurde gewonnen von B team 11-5; Zwei Sätze beide'
+		);
+		assert.equal(pronounce_en(s),
+			'Game.\nFourth game won by B team 11-5; Two games all'
+		);
+		s = state_after(presses, DOUBLES_TEAM_SETUP_5x11);
+		assert.equal(pronounce_de(s),
+			'Satz.\nDer vierte Satz wurde gewonnen von B team 11-5; Zwei Sätze beide'
+		);
+		assert.equal(pronounce_en(s),
+			'Game.\nFourth game won by B team 11-5; Two games all'
+		);
+
+		presses.push({
+			type: 'postgame-confirm',
+		});
+		presses.push({
+			type: 'pick_server',
+			team_id: 1,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'pick_receiver',
+			team_id: 0,
+			player_id: 0,
+		});
+		s = state_after(presses, SINGLES_SETUP_5x11);
+		assert.equal(pronounce_de(s),
+			'Entscheidungssatz. 0 beide.\nBitte spielen.'
+		);
+		assert.equal(pronounce_en(s),
+			'Final game; Love all; play'
+		);
+		presses.push({
+			type: 'love-all',
+		});
+
+		press_score(presses, 6, 5);
+		press_score(presses, 1, 5);
+		s = state_after(presses, SINGLES_SETUP_5x11);
+		assert.equal(pronounce_de(s),
+			'Satz.\nDas Spiel wurde gewonnen von Alice 11-1 11-3 4-11 5-11 11-6'
+		);
+		assert.equal(pronounce_en(s),
+			'Game.\nMatch won by Alice 11-1 11-3 4-11 5-11 11-6'
+		);
+		s = state_after(presses, DOUBLES_SETUP_5x11);
+		assert.equal(pronounce_de(s),
+			'Satz.\nDas Spiel wurde gewonnen von Andrew und Alice 11-1 11-3 4-11 5-11 11-6'
+		);
+		assert.equal(pronounce_en(s),
+			'Game.\nMatch won by Andrew and Alice 11-1 11-3 4-11 5-11 11-6'
+		);
+		s = state_after(presses, SINGLES_TEAM_SETUP_5x11);
+		assert.equal(pronounce_de(s),
+			'Satz.\nDas Spiel wurde gewonnen von A team 11-1 11-3 4-11 5-11 11-6'
+		);
+		assert.equal(pronounce_en(s),
+			'Game.\nMatch won by A team 11-1 11-3 4-11 5-11 11-6'
+		);
+		s = state_after(presses, DOUBLES_TEAM_SETUP_5x11);
+		assert.equal(pronounce_de(s),
+			'Satz.\nDas Spiel wurde gewonnen von A team 11-1 11-3 4-11 5-11 11-6'
+		);
+		assert.equal(pronounce_en(s),
+			'Game.\nMatch won by A team 11-1 11-3 4-11 5-11 11-6'
+		);
 	});
 });
 

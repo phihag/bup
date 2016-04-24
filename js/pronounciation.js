@@ -64,6 +64,7 @@ function postgame_announcement(s) {
 			score_str: calc.score_str(s, winner_index),
 		});
 	} else {
+		var is_individual_doubles = s.setup.is_doubles && !s.setup.team_competition;
 		var gscore = calc.gamescore(s);
 		var games_leader_idx = (gscore[0] > gscore[1]) ? 0 : 1;
 		var games_leader_name = wonby_name(s, games_leader_idx);
@@ -71,7 +72,7 @@ function postgame_announcement(s) {
 			winner_name: winner_name,
 			winner_score: winner_score,
 			loser_score: loser_score,
-		}) + s._('gamescore.' + gscore[games_leader_idx] + '-' + gscore[1 - games_leader_idx], {
+		}) + s._('gamescore.' + (is_individual_doubles ? 'doubles.' : '') + gscore[games_leader_idx] + '-' + gscore[1 - games_leader_idx], {
 			games_leader_name: games_leader_name,
 		});
 	}

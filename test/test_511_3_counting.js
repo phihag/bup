@@ -8,10 +8,6 @@ var press_score = tutils.press_score;
 var state_after = tutils.state_after;
 var bup = tutils.bup;
 
-var test_pronounciation = require('./test_pronounciation');
-var pronounce_de = test_pronounciation.pronounce_de;
-var pronounce_en = test_pronounciation.pronounce_en;
-
 (function() {
 'use strict';
 
@@ -24,6 +20,10 @@ SINGLES_SETUP.counting = '5x11/3';
 
 _describe('BWF experimental 5x11/3 counting', function() {
 	_it('go through a whole match', function() {
+		var test_pronounciation = require('./test_pronounciation');
+		var pronounce_de = test_pronounciation.pronounce_de;
+		var pronounce_en = test_pronounciation.pronounce_en;
+
 		var presses = [{
 			type: 'pick_side',
 			team1_left: true,
