@@ -726,6 +726,7 @@ function state(s) {
 	var game_idx = s.match.finished_games.length;
 
 	if (! s.game.finished) {
+		var team_id; // No let in modern browsers :(
 		if ((counting === '3x21') || ((counting === '2x21+11') && (game_idx < 2))) {
 			if ((s.game.team1_serving) && (((s.game.score[0] === 20) && (s.game.score[1] < 20)) || (s.game.score[0] == 29))) {
 				if (s.match.game_score[0] === 0) {
@@ -747,7 +748,7 @@ function state(s) {
 				s.game.matchpoint = true;
 			}
 		} else if (counting === '5x11_15') {
-			var team_id = s.game.team1_serving ? 0 : 1;
+			team_id = s.game.team1_serving ? 0 : 1;
 			if (((s.game.score[team_id] === 10) && (s.game.score[1 - team_id] < 10)) || (s.game.score[team_id] == 14)) {
 				if (s.match.game_score[team_id] < 2) {
 					s.game.gamepoint = true;
@@ -756,7 +757,7 @@ function state(s) {
 				}
 			}
 		} else if (counting === '5x11/3') {
-			var team_id = s.game.team1_serving ? 0 : 1;
+			team_id = s.game.team1_serving ? 0 : 1;
 			if (((s.game.score[team_id] === 10) && (s.game.score[1 - team_id] < 10)) || (s.game.score[team_id] == 12)) {
 				if (s.match.game_score[team_id] < 2) {
 					s.game.gamepoint = true;

@@ -62,6 +62,7 @@ dist: cleandist ## Create distribution files
 		div/Spielbericht_RLW.svg \
 		div/Spielbericht_RLN.svg \
 		div/scoresheet_international.svg \
+		div/scoresheet_international_5x11.svg \
 		div/FAQ.de \
 		--target-directory dist/bup/div/
 
