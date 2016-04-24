@@ -160,6 +160,7 @@ var i18n_en = {
 'settings:counting:3x21': 'BWF (3x21)',
 'settings:counting:2x21+11': 'German Bundesliga 2016/2017 (2x21, 3rd game until 11)',
 'settings:counting:5x11_15': 'BWF 2016 Experiment Option 1 (5x11 until max. 15)',
+'settings:counting:5x11/3': 'BWF 2016 Experiment Option 2 (5x11 with 3 point challenge)',
 
 'settings:Settings': 'Settings',
 'settings:Court Description': 'Court:',
