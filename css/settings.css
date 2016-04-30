@@ -20,6 +20,11 @@
 
 	font-size: 18px;
 }
+.settings_layout.settings_layout_displaymode {
+	background: none;
+	-webkit-align-items: flex-end;
+	align-items: flex-end;
+}
 .settings_container {
 	position: relative;
 	text-align: left;
@@ -148,6 +153,19 @@ input[name="court_id"] {
 }
 .settings_language {
 	min-width: 8em;
+}
+
+a.settings_mode_active:link, a.settings_mode_active:visited {
+	color: #000;
+	font-weight: bold;
+	text-decoration: none;
+}
+.settings_mode {
+	margin: 1em 0 1em 0;
+}
+.settings_mode a {
+	display: inline-block;
+	margin: 0 0.6em;
 }
 
 .settings_footer {

@@ -36,7 +36,7 @@ function record(s) {
 
 	var orig_hval = window.location.hash.substr(1);
 	var hval = orig_hval;
-	hval = hval.replace(/(?:^|&)(?:m|settings|event_scoresheets|scoresheet|eventsheet|stats|netstats|order|editevent)(?:=[^&]*)?(?=&|$)/g, '');
+	hval = hval.replace(/(?:^|&)(?:m|display|settings|event_scoresheets|scoresheet|eventsheet|stats|netstats|order|editevent)(?:=[^&]*)?(?=&|$)/g, '');
 	hval = hval.replace(/^&+|&+$/g, '');
 
 	if (s.initialized) {
@@ -46,7 +46,15 @@ function record(s) {
 		hval += 'm=' + encodeURIComponent(s.metadata.id);
 	}
 
-	if (s.ui.scoresheet_visible) {
+	if (s.ui.displaymode_visible) {
+		if (hval.length > 1) {
+			hval += '&';
+		}
+		hval += 'display';
+		if (s.ui.displaymode_settings_visible) {
+			hval += '&settings';
+		}
+	} else if (s.ui.scoresheet_visible) {
 		if (hval.length > 1) {
 			hval += '&';
 		}
@@ -98,6 +106,13 @@ function record(s) {
 
 function load_by_hash() {
 	var qs = utils.parse_query_string(window.location.hash.substr(1));
+
+	if (typeof qs.display != 'undefined') {
+		displaymode.show();
+		return;
+	} else {
+		displaymode.hide();
+	}
 
 	if (qs.eventsheet) {
 		eventsheet.show_dialog(qs.eventsheet);
@@ -185,6 +200,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
+	var displaymode = require('./displaymode');
 	var editevent = require('./editevent');
 	var eventsheet = require('./eventsheet');
 	var match_storage = require('./match_storage');

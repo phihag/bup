@@ -189,6 +189,10 @@ var i18n_de = {
 'settings:Network Timeout': 'Netzwerk-Timeout (ms)',
 'settings:Network Repeat Interval': 'Netzwerk-Wiederholungszeit (ms)',
 
+'settings:mode:label': 'Modus:',
+'settings:mode:umpire': 'Schiedsrichter',
+'settings:mode:display': 'Anzeigetafel (experimentell)',
+
 'exceptions:yellow-card-title': 'Gelbe Karte',
 'exceptions:yellow-card': 'Verwarnung',
 'exceptions:red-card-title': 'Rote Karte',

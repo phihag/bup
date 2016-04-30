@@ -114,7 +114,7 @@ function show() {
 	uiu.esc_stack_push(hide);
 	control.set_current(state);
 
-	$('.netstats_layout').show();
+	uiu.visible_qs('.netstats_layout', true);
 	render_table();
 }
 
@@ -124,7 +124,7 @@ function hide() {
 	}
 
 	uiu.esc_stack_pop();
-	$('.netstats_layout').hide();
+	uiu.visible_qs('.netstats_layout', false);
 	state.ui.netstats_visible = false;
 	control.set_current(state);
 	settings.show();

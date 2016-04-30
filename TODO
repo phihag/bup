@@ -1,15 +1,26 @@
-counting systems demo
+bup display mode
+	implement courts with CourtSpot
+		handle empty court
+	just list
+	implmeent courts with liveaw
+	showhide settings on press
+	make settings semi-transparent in display mode
+	add per-court display
+	left/right keys to change display type
+	dismiss settings
+	test all with incomplete matchups!
+	test with empty court
+	use state.event upon switching from settings (don't start with loading then)
+	add court info to vdemo/edemo
+	update court info with vdemo/edemo
+CourtSpot: support order
 
-liveaw: show player names in detail
-liveaw: show match results in detail
-liveaw: try HTTP version
-liveaw: order of matches keeps changing
-liveaw: check various event metadata
+
+liveaw: HTTP mode
 liveaw: improve/test reconnecting
 liveaw: proper reconnect backoff
 
 MVP liveaw
-	bup display mode
 	allow hiding events from public
 	implement errstate
 	implement timeout
@@ -19,8 +30,7 @@ MVP liveaw
 mail Markus
 mail Daniel / Peter
 
-CourtSpot: support order
-english: always start with to my right, even in team competitions
+displaymode: automatic font scaling if necessary
 eventsheet: more space for input, vary by field
 N10 sensitivity! ontouch instead of onclick
 scoresheet: Fit "TSV Neuhausen-Nymphenburg 1"
@@ -33,6 +43,10 @@ move login rendering into a helper function into network
 Opera Mini bug
 support RLS (Excel file)
 test editevent without all_players
+Leere Mannschaftszettel interaktiv generieren (anwesend)
+"bitte spielen" after timer expires at 11
+"court 1, 20 seconds"  after timer expires at 11 / new game
+ready to play
 
 eventsheet svg for only home/only away (incl. PDF generations for each)
 test eventsheet on various mobiles
@@ -70,6 +84,7 @@ redesign order as manual
 	animation
 	drag&drop
 	use slightly different reds for each player
+liveaw: fall back to plain HTTP
 
 mail Michael Pütz
 mail btde
@@ -125,6 +140,7 @@ button sizes on Mac OSX Chrome
 do not recreate network buttons, update them instead
 show UI when reporting errors (top right, allow email address entering)
 
+extend displaymode (new views)
 import: hide login upon switching to staticnet?
 import: test from non-network
 import: test importing match-only stuff (should not active staticnet)
@@ -214,6 +230,7 @@ test touch interface
 test touch latency
 prevent double touches
 
+counting systems demo
 test stats pressdescs in english
 team-* eventsheet as SVG (for preview)?
 formalize backup_players event entry (in edemo/vdemo, later in liveaw)
@@ -259,8 +276,6 @@ test for shuttle counter
 detect if already in F11 fullscreen before showing fullscreen dialog
 &fs in hash to override fullscreen setting
 If long pronounciation ends with short one, short pronounciation in larger font-size
-"bitte spielen" after timer expires at 11
-"court 1, 20 seconds"  after timer expires at 11 / new game
 test that cards lead to an exceptions entry in match
 remove #pick_side in favor of _ui_make_team_pick
 test correction in scoresheet at very beginning of set
@@ -269,7 +284,6 @@ undo without redo back to start should reset begin in umpire scoresheet
 loading bup.. teaser in HTML for very slow connections
 network: color/opacity in match list by state
 Schiedsrichterzettel auch im Bundesliga-Design
-limit available courts when network is in use
 move scoresheet SVG into separate file
 mock courtspot and write automated tests
 dynamically create favicon (score? match name? court name?)
@@ -331,6 +345,7 @@ rename teamtext_internal to teamtext
 stats: + most consecutive points
 stats: + game points
 stats: + match points
+switch network.ui_list_event for network.subscribe
 remove all mentions of home/away
 anroid chrome address bar background color
 remove one of network.calc_gamescore and calc.calc_game_score?

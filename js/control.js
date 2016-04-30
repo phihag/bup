@@ -384,6 +384,9 @@ function init_shortcuts() {
 	Mousetrap.bind('shift+x', function() {
 		importexport.send_export(state);
 	});
+	Mousetrap.bind('shift+a', function() {
+		displaymode.show();
+	});
 }
 
 function set_current(s) {
@@ -449,6 +452,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var buphistory = require('./buphistory');
 	var bupui = require('./bupui');
 	var calc = require('./calc');
+	var displaymode = require('./displaymode');
 	var editevent = require('./editevent');
 	var editmode = require('./editmode');
 	var i18n = require('./i18n');

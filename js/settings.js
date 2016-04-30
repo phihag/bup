@@ -11,6 +11,7 @@ var default_settings = {
 	court_description: '',
 	network_timeout: 10000,
 	network_update_interval: 10000,
+	displaymode_update_interval: 500,
 	double_click_timeout: 1000,
 	button_block_timeout: 1200,
 	negative_timers: false,
@@ -41,6 +42,22 @@ function store(s) {
 	window.localStorage.setItem('bup_settings', JSON.stringify(s.settings));
 }
 
+function show_displaymode() {
+	if (state.ui.displaymode_settings_visible) {
+		return;
+	}
+	state.ui.displaymode_settings_visible = true;
+	uiu.visible_qs('#settings_wrapper', true);	
+}
+
+function hide_displaymode() {
+	if (!state.ui.displaymode_settings_visible) {
+		return;
+	}
+	state.ui.displaymode_settings_visible = true;
+	uiu.visible_qs('#settings_wrapper', false);
+}
+
 var _network_hide_cb = null;
 function show() {
 	if (state.ui.settings_visible) {
@@ -51,7 +68,7 @@ function show() {
 	scoresheet.hide();
 	stats.hide();
 
-	$('#settings_wrapper').show();
+	uiu.visible_qs('#settings_wrapper', true);
 	if (network.is_enabled()) {
 		$('.setup_network_container').show();
 		$('.setup_show_manual').show();
@@ -62,10 +79,10 @@ function show() {
 		$('#setup_manual_form').show();
 	}
 	uiu.esc_stack_push(function() {
-		settings.hide();
+		hide();
 	});
 	match_storage.ui_init();
-	$('.ingame_options').toggle(state.initialized);
+	uiu.visible_qs('.ingame_options', state.initialized);
 }
 
 function hide(force) {
@@ -93,7 +110,7 @@ function update_court(s) {
 
 var _settings_checkboxes = ['save_finished_matches', 'go_fullscreen', 'show_pronounciation', 'negative_timers', 'shuttle_counter', 'editmode_doubleclick'];
 var _settings_textfields = ['umpire_name', 'service_judge_name', 'court_id', 'court_description'];
-var _settings_numberfields = ['network_timeout', 'network_update_interval', 'button_block_timeout'];
+var _settings_numberfields = ['network_timeout', 'network_update_interval', 'displaymode_update_interval', 'button_block_timeout'];
 var _settings_selects = ['language'];
 
 function update(s) {
@@ -197,6 +214,28 @@ function ui_init(s) {
 	fullscreen.ui_init();
 
 	update(s);
+	on_mode_change(s);
+}
+
+function on_mode_change(s) {
+	var mode = 'umpire';
+	if (s.ui.displaymode_visible) {
+		mode = 'display';
+	}
+
+	uiu.qsEach('.settings_mode>a', function(a) {
+		var is_active = $(a).hasClass('settings_mode_' + mode);
+		if (is_active) {
+			$(a).addClass('settings_mode_active');
+		} else {
+			$(a).removeClass('settings_mode_active');
+		}
+	});
+
+	uiu.qsEach('#settings_wrapper [data-bup-modes]', function(el) {
+		var modes = el.getAttribute('data-bup-modes');
+		uiu.visible(el, modes.indexOf(mode) >= 0);
+	});
 }
 
 return {
@@ -204,8 +243,11 @@ return {
 	store: store,
 	update: update,
 	show: show,
+	show_displaymode: show_displaymode,
+	hide_displaymode: hide_displaymode,
 	hide: hide,
 	ui_init: ui_init,
+	on_mode_change: on_mode_change,
 };
 
 })();

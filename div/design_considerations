@@ -1,0 +1,47 @@
+Display Mode (default view)
+===========================
+
+We want to show the current score on the courts, and that of all matches (mandated in the Bundesliga by BLO Appendix VI). We have two courts so, the general layout will be
+
+             |
+    Court 1  | Court 2
+             |
+    ------------------
+        Home : Away 
+          Match 1
+          Match 2
+    ...
+
+Colors should be as high-contrast as possible, so white on black or black on white. The former has the advantage of not blinding players as much, so we'll pick it for now. Use lines or white spacing (try which works better) to separate the three areas.
+
+Every court display must include
+1. current score
+2. player names (if possible full)
+3. prior scores
+4. match name
+5. team names
+
+Beware of long player names. Since our canvas is almost rectangular, player names can be sorted vertically.
+
+Sam Magee
+Chloe Magee         6
+TV Refrath    21 21
+MX ------------------
+1. BC Beuel    8 23
+Max Weißkirchen     5
+Birgit Michels
+
+Current score should be in a giant font. Winning scores should be in bold. We may indicate the server by changing the background color a bit, or adding a small * after the score, or adding a small vertical line before/after the score.
+
+
+Below the courts, there should be the main table. The top row should reflect the teams, and score, as in
+
+   TV Refrath  2 : 1  1. BC Beuel
+
+Below that, we want to show all matches. For every match, we want a row like
+
+MX  Sam Magee / Chloee Magee  21:8  21:23  6:5  Max Weißkirchen / Birgit Michels 
+HE2 Lars Schänzler            21:19 29:30 25:27 Erik Meijs
+
+If necessary, use two lines for the names in doubles, or abbreviate first name in doubles.
+Bolden winning scores (and potentially winners).

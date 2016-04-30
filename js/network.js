@@ -321,6 +321,7 @@ function ui_list_matches(s, silent, no_timer) {
 	if (!netw) {
 		return;
 	}
+	// TODO use subscribe here
 	netw.list_matches(s, function(err, event) {
 		status_container.empty();
 		_matchlist_install_reload_button(s);
@@ -341,6 +342,40 @@ function ui_list_matches(s, silent, no_timer) {
 	return _stop_list_matches;
 }
 
+// Returns a callback to be called when the updates are no longer required.
+// cb gets called with (err, s, event); s is NOT updated implicitly
+// calc_timeout is called with s and must return immediately the timeout
+function subscribe(s, cb, calc_timeout) {
+	var cancelled = false;
+	var timeout = null;
+
+	function query() {
+		if (cancelled) {
+			return;
+		}
+		var netw = get_netw();
+		if (!netw) {
+			cb({
+				msg: s._('network:error:unconfigured'),
+			}, s);
+			return;
+		}
+		netw.list_matches(s, function(err, event) {
+			cb(err, s, event);
+		});
+		timeout = setTimeout(query, calc_timeout(s));
+	}
+	query();
+
+	return function() {
+		cancelled = true;
+		if (timeout) {
+			clearTimeout(timeout);
+			timeout = null;
+		}
+	};
+
+}
 
 // Map of component => error status (true: currently faulty)
 var erroneous = {};
@@ -582,6 +617,7 @@ return {
 	request: request,
 	resync: resync,
 	send_press: send_press,
+	subscribe: subscribe,
 	on_edit_event: on_edit_event,
 	ui_init: ui_init,
 	ui_install_staticnet: ui_install_staticnet,

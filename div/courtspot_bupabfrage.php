@@ -112,10 +112,10 @@ INNER JOIN (
 ) sv_first
 ON $table.Spiel = sv_first.Art
 ;");
-
 if (! $result) {
 	jsonErr(mysqli_error($db));
 }
+
 $matches = [];
 $today = @date('Y-m-d');
 while ($row = $result->fetch_assoc()) {
@@ -179,6 +179,34 @@ while ($row = $result->fetch_assoc()) {
 }
 mysqli_free_result($result);
 
+function _find_match($matches, $courtspot_id) {
+	foreach ($matches as $m) {
+		if ($m['setup']['courtspot_match_id'] === $courtspot_id) {
+			return $m;
+		}
+	}
+	return null;
+}
+
+$court_result = mysqli_query($db, '
+SELECT AnzeigeID, Anzeige, Detail
+FROM Courts;');
+if (! $court_result) {
+	jsonErr(mysqli_error($db));
+}
+$courts = [];
+while ($row = $court_result->fetch_assoc()) {
+	$match = _find_match($matches, $row['Anzeige']);
+	$match_id = $match ? $match['setup']['match_id'] : null;
+	$courts[] = [
+		'court_id' => $row['AnzeigeID'],
+		'match_id' => $match_id,
+		'courtspot_detail' => $row['Detail'],
+	];
+}
+mysqli_free_result($court_result);
+
+
 header('Cache-Control: no-cache, no-store, must-revalidate');
 header('Pragma: no-cache');
 header('Expires: 0');
@@ -188,6 +216,7 @@ echo json_encode([
 	'status' => 'ok',
 	'preferred_order' => $preferred_order,
 	'matches' => $matches,
+	'courts' => $courts,
 	'id' => 'Courtspot:' . $verwaltung['Heim'] . ' - ' . $verwaltung['Gast'],
 	'event_name' => $verwaltung['Heim'] . ' - ' . $verwaltung['Gast'],
 	'tournament_name' => $tournament_name,

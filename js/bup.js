@@ -36,6 +36,7 @@ function ui_init() {
 	order.ui_init();
 	importexport.ui_init();
 	editevent.ui_init();
+	displaymode.ui_init();
 
 	var hash_query = utils.parse_query_string(window.location.hash.substr(1));
 	if (hash_query.lang) {
@@ -75,6 +76,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var compat = require('./compat');
 	var control = require('./control');
 	var courtspot = require('./courtspot');
+	var displaymode = require('./displaymode');
 	var editevent = require('./editevent');
 	var editmode = require('./editmode');
 	var eventsheet = require('./eventsheet');
