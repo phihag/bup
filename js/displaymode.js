@@ -11,7 +11,7 @@ function update(err, s, event) {
 
 	if (err) {
 		// TODO handle errors
-		console.error(err);
+		console.error(err); // eslint-disable-line no-console
 		return;
 	}
 
@@ -22,12 +22,11 @@ function update(err, s, event) {
 			'class': 'display_courts_container',
 		});
 		var court_count = event.courts.length;
-		for (var i = 0;i < court_count;i++) {
-			if (i > 0) {
-				var court_seperator = uiu.create_el(courts_container, 'div', {
+		for (var court_idx = 0;court_idx < court_count;court_idx++) {
+			if (court_idx > 0) {
+				uiu.create_el(courts_container, 'div', {
 					'class': 'display_courts_separator',
 				});
-
 			}
 
 			var court_container = uiu.create_el(courts_container, 'div', {
@@ -35,7 +34,7 @@ function update(err, s, event) {
 				'style': ('width: ' + (100.0 / court_count - 2) + 'vw;'),
 			});
 
-			var court = event.courts[i];
+			var court = event.courts[court_idx];
 			var match = court.match_id ? utils.find(event.matches, function(m) {
 				return court.match_id === m.setup.match_id;
 			}) : null;
@@ -71,10 +70,10 @@ function update(err, s, event) {
 			uiu.create_el(court_container, 'div', {
 				'class': 'display_courts_team_name',
 			}, away_team.name);
-			var player_container = uiu.create_el(court_container, 'div', {
+			player_container = uiu.create_el(court_container, 'div', {
 				'class': (match_setup.is_doubles ? 'display_courts_player_names_doubles' : 'display_courts_player_names_singles'),
 			});
-			for (var player_id = 0;player_id < away_team.players.length;player_id++) {
+			for (player_id = 0;player_id < away_team.players.length;player_id++) {
 				uiu.create_el(player_container, 'div', {
 					'class': 'display_courts_player_name',
 				}, away_team.players[player_id].name);
@@ -91,7 +90,7 @@ function update(err, s, event) {
 		}
 	}
 
-	var list_container = uiu.create_el(container, 'div', {
+	uiu.create_el(container, 'div', {
 		'class': 'display_list_container',
 	});
 	// TODO team names
@@ -167,6 +166,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var render = require('./render');
 	var settings = require('./settings');
 	var uiu = require('./uiu');
+	var utils = require('./utils');
 
 	module.exports = displaymode;
 }
