@@ -1,7 +1,23 @@
 var displaymode = (function() {
 'use strict';
 
+var autosize_cancels = [];
+
+function _setup_autosize(el, right_el) {
+	autosize.maintain(el, function() {
+		return {
+			width: right_el.offsetLeft - el.offsetLeft,
+			height: right_el.offsetHeight,
+		};
+	});
+}
+
 function update(err, s, event) {
+	autosize_cancels.forEach(function(ac) {
+		ac();
+	});
+	autosize_cancels = [];
+
 	var container = uiu.qs('.displaymode_layout');
 	uiu.empty(container);
 
@@ -31,17 +47,25 @@ function update(err, s, event) {
 
 			var court_container = uiu.create_el(courts_container, 'div', {
 				'class': 'display_courts_court',
-				'style': ('width: ' + (100.0 / court_count - 2) + 'vw;'),
+				'style': ('width: ' + (100.0 / court_count - 4) + 'vw;'),
 			});
 
 			var court = event.courts[court_idx];
 			var match = court.match_id ? utils.find(event.matches, function(m) {
 				return court.match_id === m.setup.match_id;
 			}) : null;
-			var match_setup = match.setup;
 
+			var match_setup = match.setup;
+			var nscore = match.network_score;
+			var current_score = (nscore.length > 0) ? nscore[nscore.length - 1] : ['', ''];
+			var prev_scores = nscore.slice(0, -1);
+prev_scores = [[11, 5], [13, 11], [14, 15], [8, 11]];
 			var home_team = match_setup.teams[0];
-			var player_container = uiu.create_el(court_container, 'div', {
+home_team.name = 'TSV Neuhausen-Nymphenburg 1'; // DEBUG
+			var home_team_container = uiu.create_el(court_container, 'div', {
+				'class': 'display_courts_team_container',
+			});
+			var player_container = uiu.create_el(home_team_container, 'div', {
 				'class': (match_setup.is_doubles ? 'display_courts_player_names_doubles' : 'display_courts_player_names_singles'),
 			});
 			for (var player_id = 0;player_id < home_team.players.length;player_id++) {
@@ -49,9 +73,21 @@ function update(err, s, event) {
 					'class': 'display_courts_player_name',
 				}, home_team.players[player_id].name);
 			}
-			uiu.create_el(court_container, 'div', {
+			var home_team_el = uiu.create_el(home_team_container, 'div', {
 				'class': 'display_courts_team_name',
-			}, home_team.name);
+			});
+			var home_team_span = uiu.create_el(home_team_el, 'span', {}, home_team.name);
+			uiu.create_el(player_container, 'div', {
+				'class': 'display_courts_current_score',
+			}, current_score[0]);
+			var home_prev_scores_container = uiu.create_el(player_container, 'div', {
+				'class': 'display_courts_prev_scores_home',
+			});
+			prev_scores.forEach(function(ps) {
+				uiu.create_el(home_prev_scores_container, 'div', {
+					'class': ((ps[0] > ps[1]) ? 'display_courts_prev_score_won' : 'display_courts_prev_score_lost'),
+				}, ps[0]);
+			});
 
 			var divider_line = uiu.create_el(court_container, 'div', {
 				'class': 'display_courts_divider_line_container',
@@ -67,10 +103,15 @@ function update(err, s, event) {
 			});
 
 			var away_team = match_setup.teams[1];
-			uiu.create_el(court_container, 'div', {
+			var away_team_container = uiu.create_el(court_container, 'div', {
+				'class': 'display_courts_team_container',
+			});
+			var away_team_el = uiu.create_el(away_team_container, 'div', {
 				'class': 'display_courts_team_name',
-			}, away_team.name);
-			player_container = uiu.create_el(court_container, 'div', {
+			});
+			var away_team_span = uiu.create_el(away_team_el, 'span', {}, away_team.name);
+
+			player_container = uiu.create_el(away_team_container, 'div', {
 				'class': (match_setup.is_doubles ? 'display_courts_player_names_doubles' : 'display_courts_player_names_singles'),
 			});
 			for (player_id = 0;player_id < away_team.players.length;player_id++) {
@@ -78,12 +119,23 @@ function update(err, s, event) {
 					'class': 'display_courts_player_name',
 				}, away_team.players[player_id].name);
 			}
+			uiu.create_el(player_container, 'div', {
+				'class': 'display_courts_current_score',
+			}, current_score[1]);
+			var away_prev_scores_container = uiu.create_el(player_container, 'div', {
+				'class': 'display_courts_prev_scores_away',
+			});
+			prev_scores.forEach(function(ps) {
+				uiu.create_el(away_prev_scores_container, 'div', {
+					'class': ((ps[1] > ps[0]) ? 'display_courts_prev_score_won' : 'display_courts_prev_score_lost'),
+				}, ps[1]);
+			});
 
-
+			_setup_autosize(home_team_span, home_prev_scores_container);
+			_setup_autosize(away_team_span, away_prev_scores_container);
 
 
 			// TODO handle empty court
-			// TODO player names
 			// TODO current score
 			// TODO previous score
 			// TODO fatten winning score
@@ -161,6 +213,7 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var autosize = require('./autosize');
 	var control = require('./control');
 	var network = require('./network');
 	var render = require('./render');

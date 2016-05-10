@@ -1,8 +1,13 @@
 bup display mode
+	resize
+	test TSV Neuhausen-Nymphenburg 1
+
+	remove line and rescale stuff
+
 	implement courts with CourtSpot
 		handle empty court
 	just list
-	implmeent courts with liveaw
+	implement courts with liveaw
 	showhide settings on press
 	make settings semi-transparent in display mode
 	add per-court display
@@ -10,11 +15,16 @@ bup display mode
 	dismiss settings
 	test all with incomplete matchups!
 	test with empty court
+	handle loading
 	use state.event upon switching from settings (don't start with loading then)
 	add court info to vdemo/edemo
 	update court info with vdemo/edemo
 CourtSpot: support order
 
+goldengame
+	test (1x21, 1x11_15)
+vdemo: set court nr
+mail Ulf
 
 liveaw: HTTP mode
 liveaw: improve/test reconnecting

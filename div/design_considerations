@@ -26,12 +26,12 @@ Beware of long player names. Since our canvas is almost rectangular, player name
 Sam Magee
 Chloe Magee         6
 TV Refrath    21 21
-MX ------------------
+
 1. BC Beuel    8 23
 Max Weißkirchen     5
 Birgit Michels
 
-Current score should be in a giant font. Winning scores should be in bold. We may indicate the server by changing the background color a bit, or adding a small * after the score, or adding a small vertical line before/after the score.
+Current score should be in a giant font. Winning scores should be in bold. We may indicate the server by changing the background color a bit, or adding a small * after the score, or adding a small vertical line before/after the score. If it's not sufficiently clear, we can add a line between both scores instead of space. Anywhere in the middle may also be a good point to include the match name.
 
 
 Below the courts, there should be the main table. The top row should reflect the teams, and score, as in
@@ -43,5 +43,5 @@ Below that, we want to show all matches. For every match, we want a row like
 MX  Sam Magee / Chloee Magee  21:8  21:23  6:5  Max Weißkirchen / Birgit Michels 
 HE2 Lars Schänzler            21:19 29:30 25:27 Erik Meijs
 
-If necessary, use two lines for the names in doubles, or abbreviate first name in doubles.
-Bolden winning scores (and potentially winners).
+If) necessary, use two lines for the names in doubles, or abbreviate first name in doubles.
+Bolden winning scores and winners.

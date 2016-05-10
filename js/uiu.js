@@ -115,7 +115,7 @@ function create_el(parent, tagName, attrs, text) {
 			el.setAttribute(k, attrs[k]);
 		}
 	}
-	if (text) {
+	if ((text !== undefined) && (text !== null)) {
 		el.appendChild(document.createTextNode(text));
 	}
 	parent.appendChild(el);

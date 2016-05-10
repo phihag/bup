@@ -94,6 +94,25 @@ _describe('helper functions', function() {
 		assert.deepStrictEqual(
 			bup.utils.range(0), []);
 	});
+
+	_it('remove', function() {
+		var ar = [1, 2, 3, 4, 5, 4, '4'];
+
+		assert.strictEqual(bup.utils.remove(ar, 1), true);
+		assert.deepStrictEqual(ar, [2, 3, 4, 5, 4, '4']);
+
+		assert.strictEqual(bup.utils.remove(ar, 1), false);
+		assert.deepStrictEqual(ar, [2, 3, 4, 5, 4, '4']);
+
+		assert.strictEqual(bup.utils.remove(ar, 4), true);
+		assert.deepStrictEqual(ar, [2, 3, 5, 4, '4']);
+
+		assert.strictEqual(bup.utils.remove(ar, 4), true);
+		assert.deepStrictEqual(ar, [2, 3, 5, '4']);
+
+		assert.strictEqual(bup.utils.remove(ar, 4), false);
+		assert.deepStrictEqual(ar, [2, 3, 5, '4']);
+	});
 });
 
 })();

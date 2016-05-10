@@ -213,6 +213,17 @@ function deep_copy(obj) {
 	return JSON.parse(JSON.stringify(obj));
 }
 
+function remove(ar, val) {
+	for (var i = 0;i < ar.length;i++) {
+		if (ar[i] === val) {
+			ar.splice(i, 1);
+			return true;
+		}
+	}
+	return false;
+}
+
+
 return {
 	add_zeroes: add_zeroes,
 	any: any,
@@ -229,15 +240,16 @@ return {
 	multiline_regexp: multiline_regexp,
 	obj_update: obj_update,
 	parse_query_string: parse_query_string,
+	range: range,
+	remove: remove,
 	repeat: repeat,
 	reverse_every: reverse_every,
-	svg_el: svg_el,
 	sum: sum,
+	svg_el: svg_el,
 	time_str: time_str,
 	timesecs_str: timesecs_str,
 	uuid: uuid,
 	values: values,
-	range: range,
 };
 })();
 
