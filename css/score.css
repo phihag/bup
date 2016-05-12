@@ -1,6 +1,7 @@
 
 #score {
 	text-align: center;
+	min-height: 17.5vmin;
 }
 #score_table {
 	background: #fcfcff;
