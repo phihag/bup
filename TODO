@@ -1,8 +1,5 @@
 bup display mode
-	resize
-	test TSV Neuhausen-Nymphenburg 1
-
-	remove line and rescale stuff
+	remove line and reorder stuff
 
 	implement courts with CourtSpot
 		handle empty court
@@ -22,7 +19,9 @@ bup display mode
 CourtSpot: support order
 
 goldengame
-	test (1x21, 1x11_15)
+	5x11 netscore
+	5x11 tests go through
+	run tests
 vdemo: set court nr
 mail Ulf
 

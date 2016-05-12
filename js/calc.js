@@ -23,14 +23,14 @@ function match_started(game_scores) {
 }
 
 function _is_winner(counting, game_idx, candidate, other) {
-	if ((counting === '3x21') || ((counting === '2x21+11') && (game_idx < 2))) {
+	if ((counting === '3x21') || (counting === '1x21') || ((counting === '2x21+11') && (game_idx < 2))) {
 		return (
 			((candidate == 21) && (other < 20)) ||
 			((candidate > 21) && (candidate <= 30) && (other == candidate - 2)) ||
 			(candidate == 30) && (other == 29)
 		);
 	}
-	if ((counting === '5x11_15') || ((counting === '2x21+11') && (game_idx === 2))) {
+	if ((counting === '5x11_15') || (counting === '1x11_15') || ((counting === '2x21+11') && (game_idx === 2))) {
 		return (
 			((candidate == 11) && (other < 10)) ||
 			((candidate > 11) && (candidate <= 15) && (other == candidate - 2)) ||
@@ -142,14 +142,14 @@ function game_winner(counting, game_idx, left_score, right_score) {
 	if (_is_winner(counting, game_idx, right_score, left_score)) {
 		return 'right';
 	}
-	if ((counting === '3x21') || ((counting === '2x21+11') && (game_idx < 2))) {
+	if ((counting === '3x21') || (counting === '1x21') || ((counting === '2x21+11') && (game_idx < 2))) {
 		if ((left_score < 21) && (right_score < 21)) {
 			return 'inprogress';
 		}
 		if ((left_score < 30) && (right_score >= left_score - 1) && (right_score <= left_score + 1)) {
 			return 'inprogress';
 		}
-	} else if ((counting === '5x11_15') || ((counting === '2x21+11') && (game_idx === 2))) {
+	} else if ((counting === '5x11_15') || (counting === '1x11_15') || ((counting === '2x21+11') && (game_idx === 2))) {
 		if ((left_score < 11) && (right_score < 11)) {
 			return 'inprogress';
 		}
@@ -167,8 +167,25 @@ function game_winner(counting, game_idx, left_score, right_score) {
 	return 'invalid';
 }
 
+function winning_game_count(counting) {
+	switch (counting) {
+	case '5x11_15':
+	case '5x11/3':
+		return 3;
+	case '3x21':
+	case '2x21+11':
+		return 2;
+	case '1x21':
+	case '1x11_15':
+		return 1;
+	default:
+		throw new Error('Invalid counting scheme ' + counting);
+	}
+}
+
 function match_winner(counting, input_scores) {
-	var winning_count = ((counting === '5x11_15') || (counting === '5x11/3')) ? 3 : 2;
+	var winning_count = winning_game_count(counting);
+
 	var score = [0, 0];
 	for (var i = 0;i < input_scores.length;i++) {
 		var iscore = input_scores[i];
@@ -297,7 +314,7 @@ function recalc_after_score(s, team_id, press) {
 		s.game.game = true;
 		s.game.finished = true;
 		s.match.injuries = false;
-		var winning_count = ((counting === '5x11_15') || (counting === '5x11/3')) ? 3 : 2;
+		var winning_count = winning_game_count(counting);
 		if (s.match.game_score[winner_idx] === winning_count) {
 			if (! s.metadata.end) {
 				s.metadata.end = press.timestamp;
@@ -327,11 +344,11 @@ function recalc_after_score(s, team_id, press) {
 
 	var is_interval = null;
 	if (team_id !== null) {
-		if ((counting === '3x21') || ((counting === '2x21+11') && (game_idx < 2))) {
+		if ((counting === '3x21') || (counting === '1x21') || ((counting === '2x21+11') && (game_idx < 2))) {
 			is_interval = (
 				(s.game.score[team_id] === 11) && (s.game.score[1 - team_id] < 11)
 			);
-		} else if ((((counting === '5x11_15') || (counting === '5x11/3')) && (game_idx === 4)) || ((counting === '2x21+11') && (game_idx === 2))) {
+		} else if ((counting === '1x11_15') || (((counting === '5x11_15') || (counting === '5x11/3')) && (game_idx === 4)) || ((counting === '2x21+11') && (game_idx === 2))) {
 			is_interval = (
 				(s.game.score[team_id] === 6) && (s.game.score[1 - team_id] < 6)
 			);
@@ -370,6 +387,9 @@ function recalc_after_score(s, team_id, press) {
 		case '2x21+11':
 			rest_duration = 120;
 			break;
+		case '1x21':
+		case '1x11_15':
+			throw new Error('Should never happen with ' + counting);
 		default:
 			throw new Error('Invalid counting scheme ' + counting);
 		}
@@ -696,6 +716,10 @@ function init_calc(s) {
 	};
 
 	switch (s.setup.counting) {
+	case '1x21':
+	case '1x11_15':
+		s.match.max_games = 1;
+		break;
 	case '3x21':
 	case '2x21+11':
 		s.match.max_games = 3;
@@ -741,19 +765,25 @@ function state(s) {
 					s.game.matchpoint = true;
 				}
 			}
+		} else if (counting === '1x21') {
+			if ((s.game.team1_serving) && (((s.game.score[0] === 20) && (s.game.score[1] < 20)) || (s.game.score[0] == 29))) {
+				s.game.matchpoint = true;
+			} else if ((!s.game.team1_serving) && (((s.game.score[1] === 20) && (s.game.score[0] < 20)) || (s.game.score[1] == 29))) {
+				s.game.matchpoint = true;
+			}
 		} else if ((counting === '2x21+11') && (game_idx === 2)) {
 			if ((s.game.team1_serving) && (((s.game.score[0] === 10) && (s.game.score[1] < 10)) || (s.game.score[0] == 14))) {
 				s.game.matchpoint = true;
 			} else if ((!s.game.team1_serving) && (((s.game.score[1] === 10) && (s.game.score[0] < 10)) || (s.game.score[1] == 14))) {
 				s.game.matchpoint = true;
 			}
-		} else if (counting === '5x11_15') {
+		} else if ((counting === '5x11_15') || (counting === '1x11_15')) {
 			team_id = s.game.team1_serving ? 0 : 1;
 			if (((s.game.score[team_id] === 10) && (s.game.score[1 - team_id] < 10)) || (s.game.score[team_id] == 14)) {
-				if (s.match.game_score[team_id] < 2) {
-					s.game.gamepoint = true;
-				} else {
+				if ((s.match.game_score[team_id] >= 2) || (counting === '1x11_15')) {
 					s.game.matchpoint = true;
+				} else {
+					s.game.gamepoint = true;
 				}
 			}
 		} else if (counting === '5x11/3') {
@@ -853,7 +883,7 @@ function netscore(s, always_zero) {
 	function _finish_score(game_idx, score, team1_won) {
 		var counting = s.setup.counting;
 		var winner = team1_won ? 0 : 1;
-		if ((counting === '3x21') || ((counting === '2x21+11') && (game_idx < 2))) {
+		if ((counting === '3x21') || (counting === '1x21') || ((counting === '2x21+11') && (game_idx < 2))) {
 			if (score[1 - winner] >= 29) {
 				score[winner] = 30;
 			} else if (score[1 - winner] >= 20) {
@@ -861,7 +891,7 @@ function netscore(s, always_zero) {
 			} else {
 				score[winner] = 21;
 			}
-		} else if ((counting === '5x11_15') || ((counting === '2x21+11') && (game_idx === 2))) {
+		} else if ((counting === '5x11_15') || (counting === '1x11_15') || ((counting === '2x21+11') && (game_idx === 2))) {
 			if (score[1 - winner] >= 14) {
 				score[winner] = 15;
 			} else if (score[1 - winner] >= 10) {

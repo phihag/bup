@@ -1080,11 +1080,11 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		alt_presses = presses.slice();
 		alt_presses.push({
 			type: 'retired',
-			team_id: 1,
+			team_id: 0,
 			player_id: 0,
 		});
 		s = state_after(alt_presses, SINGLES_SETUP);
-		assert.deepStrictEqual(bup.calc.netscore(s), [[11, 0], [11, 0], [11, 0]]);
+		assert.deepStrictEqual(bup.calc.netscore(s), [[0, 11], [0, 11], [0, 11]]);
 
 		press_score(presses, 3, 2);
 		s = state_after(presses, SINGLES_SETUP);
