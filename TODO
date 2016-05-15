@@ -1,6 +1,4 @@
 bup display mode
-	remove line and reorder stuff
-
 	implement courts with CourtSpot
 		handle empty court
 	just list
@@ -8,16 +6,18 @@ bup display mode
 	showhide settings on press
 	make settings semi-transparent in display mode
 	add per-court display
+	add court outline display
 	left/right keys to change display type
 	dismiss settings
 	test all with incomplete matchups!
 	test with empty court
 	handle loading
+	display: add court orientation (chair: "east"|"west")
 	use state.event upon switching from settings (don't start with loading then)
 	add court info to vdemo/edemo
 	update court info with vdemo/edemo
-CourtSpot: support order
 
+CourtSpot: support order
 vdemo: set court nr
 mail Ulf
 

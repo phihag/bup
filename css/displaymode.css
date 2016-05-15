@@ -10,10 +10,10 @@
 
 .display_courts_court {
 	margin: 0 2vw 0 2vw;
+	position: relative;
 }
 .display_courts_court, .display_courts_separator {
 	float: left;
-	height: 50vmin;
 }
 
 .display_courts_player_names_singles, .display_courts_player_names_doubles {
@@ -29,64 +29,47 @@
 .display_courts_player_name {
 	font-size: 5vmin;
 }
+
+.display_courts_team_row {
+	height: 4vmin;
+}
 .display_courts_team_name {
 	font-size: 3vmin;
+	height: 100%;
+	white-space: pre;
+
+	display: -webkit-flex;
+	display: flex;
+
+	-webkit-align-items: center;
+	align-items: center;
 }
-.display_courts_team_container {
-	position: relative;
-}
-.display_courts_current_score {
+.display_courts_current_score_home,.display_courts_current_score_away {
 	position: absolute;
 	font-size: 12vmin;
 	line-height: 12vmin;
 	right: 0;
-	top: calc(50% - 6vmin);
+}
+.display_courts_current_score_home {
+	top: 0;
+}
+.display_courts_current_score_away {
+	bottom: 0;
 }
 
 .display_courts_prev_scores_home, .display_courts_prev_scores_away {
-	position: absolute;
-	right: 14vmin;
 	font-size: 3vmin;
-}
-.display_courts_prev_scores_home {
-	bottom: 0;
-}
-.display_courts_prev_scores_away {
-	top: 0;
+		float: right;
 }
 .display_courts_prev_score_lost, .display_courts_prev_score_won {
 	display: inline-block;
 	margin: 0 1vw;
+	min-width: 1.2em;
+	text-align: right;
 }
 .display_courts_prev_score_lost {
 
 }
 .display_courts_prev_score_won {
 	font-weight: bold;
-}
-
-.display_courts_divider_line_container {
-	margin: 2vmin 0;
-	height: 2vmin;
-	font-size: 1.8vmin;
-	position: relative;
-}
-.display_courts_divider_line1, .display_courts_divider_line2 {
-	position: absolute;
-	top: 0.8vmin;
-	height: 0.4vmin;
-	background: #fff;
-}
-.display_courts_match_name {
-	width: 100%;
-	text-align: center;
-	font-size: 2vmin;
-}
-.display_courts_divider_line1 {
-	left: 0;
-	width: 46%;
-}
-.display_courts_divider_line2 {
-	width: 46%;
-	right: 0;
 }
