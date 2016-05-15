@@ -58,6 +58,7 @@
 	font-size: 3vmin;
 	height: 100%;
 	white-space: pre;
+	color: #cfcfcf;
 
 	display: -webkit-flex;
 	display: flex;
@@ -92,7 +93,7 @@
 
 }
 .display_courts_prev_score_won {
-	font-weight: bold;
+	color: #dba766;
 }
 
 .display_list_container {
@@ -102,40 +103,53 @@
 	border-collapse: collapse;
 	table-layout: fixed;
 }
+.display_list_thead {
+	border-bottom: 0.3vmin solid #666;
+}
 .display_list_container tr th {
 	padding-bottom: 1vmin;
 }
 .display_list_container tr td {
-	border-top: 0.1vmin solid #666;
+	vertical-align: middle;
 	padding-top: 1.5vmin;
 	padding-bottom: 1.5vmin;
 }
+.display_list_container tr:nth-child(even) {
+	background-color: #272727;
+}
+
 .display_list_teamname, .display_list_player_names {
 	width: 28%;
+	padding-left: 0.2em;
 }
 .display_list_player_names_wrapper {
 	width: 100%;
 	overflow: hidden;
 }
 .display_list_player_names {
-	padding-left: 0.2em;
 	white-space: pre;
 }
 .display_list_teamname {
 	white-space: pre;
 	text-align: left;
 	font-weight: normal;
+	color: #cfcfcf;
 }
 .display_list_match_name {
+	width: 5%;
+}
+.display_list_container tr td.display_list_match_name {
+	padding: 0;
 	padding-right: 0.5em;
-	max-width: 3em;
+	vertical-align: middle;
 	text-align: right;
+	font-size: 2.5vmin;
+	color: #cfcfcf;
+	font-style: italic;
 }
 .display_list_winning {
 	font-weight: bold;
-}
-.display_list_winning_players {
-	background: #040;
+	color: #dba766;
 }
 .display_list_matchscore {
 	text-align: center;

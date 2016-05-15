@@ -202,6 +202,7 @@ while ($row = $court_result->fetch_assoc()) {
 		'court_id' => $row['AnzeigeID'],
 		'match_id' => $match_id,
 		'courtspot_detail' => $row['Detail'],
+		'chair' => ((count($courts) % 2 === 0) ? 'west' : 'east'),
 	];
 }
 mysqli_free_result($court_result);

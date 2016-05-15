@@ -12,7 +12,7 @@ function _setup_autosize(el, right_node) {
 		}
 		return {
 			width: w,
-			height: parent_node.offsetHeight,
+			height: parent_node.offsetHeight / 1.1,
 		};
 	});
 }
@@ -68,7 +68,7 @@ function _list_render_team_name(tr, team_name) {
 	});
 	var div = uiu.create_el(th, 'div');
 	var span = uiu.create_el(div, 'span', {}, team_name);
-	_setup_autosize(span);
+	return span;
 }
 
 function _calc_max_games(event) {
@@ -105,7 +105,7 @@ function update(err, s, event) {
 if (event) {
 	event.matches.forEach(function(m) {
 m.setup.counting = '5x11_15';
-m.network_score = [[11, 13], [15, 14], [9, 11], [13, 15], [10, 10]];
+m.network_score = [[11, 13], [15, 14], [9, 11], [15, 13], [10, 10]];
 	});
 event.matches[0].setup.teams[1].players[0] = {
 	firstname: 'Philipp',
@@ -134,6 +134,7 @@ event.home_team_name = 'TSV Neuhausen-Nymphenburg 1'; // DEBUG
 			});
 
 			var court = event.courts[court_idx];
+			// TODO court orientation
 			var match = court.match_id ? utils.find(event.matches, function(m) {
 				return court.match_id === m.setup.match_id;
 			}) : null;
@@ -228,16 +229,22 @@ home_team.name = 'TSV Neuhausen-Nymphenburg 1'; // DEBUG
 	var match_list = uiu.create_el(container, 'table', {
 		'class': 'display_list_container',
 	});
-	var match_list_head = uiu.create_el(match_list, 'tr');
+	var match_list_head = uiu.create_el(match_list, 'tr', {
+		'class': 'display_list_thead',
+	});
 	uiu.create_el(match_list_head, 'th', {
 		'class': 'display_list_match_name',
 	}, '');
-	_list_render_team_name(match_list_head, event.home_team_name);
-	_list_render_team_name(match_list_head, event.away_team_name);
+	var home_span = _list_render_team_name(match_list_head, event.home_team_name);
+	var away_span = _list_render_team_name(match_list_head, event.away_team_name);
 	uiu.create_el(match_list_head, 'th', {
 		'class': 'display_list_matchscore',
 		'colspan': max_games,
 	}, match_score[0] + ' : ' + match_score[1]);
+
+	// Now that we're done with initializing the first row, actually call autosizing
+	_setup_autosize(home_span);
+	_setup_autosize(away_span);
 
 	event.matches.forEach(function(m) {
 		var mwinner = calc.match_winner(m.setup.counting, m.network_score);
