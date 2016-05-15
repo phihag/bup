@@ -183,6 +183,22 @@ function winning_game_count(counting) {
 	}
 }
 
+function max_game_count(counting) {
+	switch (counting) {
+	case '5x11_15':
+	case '5x11/3':
+		return 5;
+	case '3x21':
+	case '2x21+11':
+		return 3;
+	case '1x21':
+	case '1x11_15':
+		return 1;
+	default:
+		throw new Error('Invalid counting scheme ' + counting);
+	}
+}
+
 function match_winner(counting, input_scores) {
 	var winning_count = winning_game_count(counting);
 
@@ -715,23 +731,7 @@ function init_calc(s) {
 		injuries: false,
 	};
 
-	switch (s.setup.counting) {
-	case '1x21':
-	case '1x11_15':
-		s.match.max_games = 1;
-		break;
-	case '3x21':
-	case '2x21+11':
-		s.match.max_games = 3;
-		break;
-	case '5x11_15':
-	case '5x11/3':
-		s.match.max_games = 5;
-		break;
-	default:
-		throw new Error('Invalid counting scheme ' + s.setup.counting);
-	}
-
+	s.match.max_games = max_game_count(s.setup.counting); // TODO: deprecate this property
 	s.game = make_game_state(s);
 }
 
@@ -922,7 +922,8 @@ function netscore(s, always_zero) {
 			_finish_score(scores.length - 1, scores[scores.length - 1], s.match.team1_won);
 		}
 
-		while (scores.length < s.match.max_games) {
+		var max_games = max_game_count(s.setup.counting);
+		while (scores.length < max_games) {
 			var mwinner = match_winner(s.setup.counting, scores);
 			if ((mwinner == 'left') || (mwinner == 'right')) {
 				break;
@@ -949,6 +950,7 @@ return {
 	init_state: init_state,
 	lr2score: lr2score,
 	match_started: match_started,
+	max_game_count: max_game_count,
 	match_winner: match_winner,
 	netscore: netscore,
 	press_char: press_char,

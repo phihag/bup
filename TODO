@@ -1,21 +1,20 @@
 bup display mode
-	implement courts with CourtSpot
-		handle empty court
-	just list
-	implement courts with liveaw
-	showhide settings on press
+	add court orientation (chair: "east"|"west")
+
+	list: columns for each possible game
+	error handling (do not delete current info)
+	add mode: just list
+	showhide settings on any press or mouse movement
 	make settings semi-transparent in display mode
-	add per-court display
-	add court outline display
+	add per-court display mode
+	add court outline display mode
 	left/right keys to change display type
-	dismiss settings
 	test all with incomplete matchups!
-	test with empty court
-	handle loading
-	display: add court orientation (chair: "east"|"west")
 	use state.event upon switching from settings (don't start with loading then)
 	add court info to vdemo/edemo
 	update court info with vdemo/edemo
+	dismiss/show settings
+	implement courts with liveaw
 
 CourtSpot: support order
 vdemo: set court nr

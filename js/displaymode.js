@@ -3,15 +3,80 @@ var displaymode = (function() {
 
 var autosize_cancels = [];
 
-function _setup_autosize(el) {
-	var container = el.parentNode;
-	console.log(container.offsetHeight);
+function _setup_autosize(el, right_node) {
 	autosize.maintain(el, function() {
+		var parent_node = el.parentNode;
+		var w = parent_node.offsetWidth;
+		if (right_node) {
+			w = Math.min(w, right_node.offsetLeft);
+		}
 		return {
-			width: container.offsetWidth,
-			height: container.offsetHeight,
+			width: w,
+			height: parent_node.offsetHeight,
 		};
 	});
+}
+
+function _calc_matchscore(matches) {
+	var res = [0, 0];
+	matches.forEach(function(m) {
+		var winner = calc.match_winner(m.setup.counting, m.network_score);
+		if (winner === 'left') {
+			res[0] += 1;
+		} else if (winner === 'right') {
+			res[1] += 1;
+		}
+	});
+	return res;
+}
+
+function _doubles_name(player) {
+	if (player.lastname) {
+		return player.firstname[0] + '.\xa0' + player.lastname;
+	}
+	
+	var m = /^(.).*?\s+(\S+)$/.exec(player.name);
+	if (!m) {
+		return player.name;
+	}
+	return m[1] + '.\xa0' + m[2];
+}
+
+function _list_render_player_names(container, players, winning) {
+	var names_str;
+	if (players.length === 1) {
+		names_str = players[0].name;
+	} else {
+		names_str = _doubles_name(players[0]) + ' / ' + _doubles_name(players[1]);
+	}
+	var div = uiu.create_el(
+		container, 'div', {
+			'class': 'display_list_player_names_wrapper',
+		}
+	);
+	var span = uiu.create_el(
+		div, 'span', {
+			'class': (winning ? 'display_list_winning' : ''),
+		}, names_str
+	);
+	_setup_autosize(span);
+}
+
+function _list_render_team_name(tr, team_name) {
+	var th = uiu.create_el(tr, 'th', {
+		'class': 'display_list_teamname',
+	});
+	var div = uiu.create_el(th, 'div');
+	var span = uiu.create_el(div, 'span', {}, team_name);
+	_setup_autosize(span);
+}
+
+function _calc_max_games(event) {
+	var res = 0;
+	event.matches.forEach(function(match) {
+		res = Math.max(res, calc.max_game_count(match.setup.counting));
+	});
+	return res;
 }
 
 function update(err, s, event) {
@@ -24,7 +89,10 @@ function update(err, s, event) {
 	uiu.empty(container);
 
 	if (err && (err.errtype === 'loading')) {
-		// TODO show loading animation
+		uiu.create_el(container, 'div', {
+			'class': 'display_loading',
+		});
+		return;
 	}
 
 	if (err) {
@@ -34,12 +102,25 @@ function update(err, s, event) {
 	}
 
 	s.event = event;
+if (event) {
+	event.matches.forEach(function(m) {
+m.setup.counting = '5x11_15';
+m.network_score = [[11, 13], [15, 14], [9, 11], [13, 15], [10, 10]];
+	});
+event.matches[0].setup.teams[1].players[0] = {
+	firstname: 'Philipp',
+	lastname: 'Jansen-Hagemeister',
+	name: 'Philipp Jansen-Hagemeister',
+};
+}
+event.home_team_name = 'TSV Neuhausen-Nymphenburg 1'; // DEBUG
 
 	if (event.courts) {
 		var courts_container = uiu.create_el(container, 'div', {
 			'class': 'display_courts_container',
 		});
 		var court_count = event.courts.length;
+		var court_width = Math.floor((100.0 - (4 * (court_count - 1))) / court_count);
 		for (var court_idx = 0;court_idx < court_count;court_idx++) {
 			if (court_idx > 0) {
 				uiu.create_el(courts_container, 'div', {
@@ -49,7 +130,7 @@ function update(err, s, event) {
 
 			var court_container = uiu.create_el(courts_container, 'div', {
 				'class': 'display_courts_court',
-				'style': ('width: ' + (100.0 / court_count - 4) + 'vw;'),
+				'style': ('width: ' + court_width + '%;'),
 			});
 
 			var court = event.courts[court_idx];
@@ -57,20 +138,39 @@ function update(err, s, event) {
 				return court.match_id === m.setup.match_id;
 			}) : null;
 
-			var match_setup = match.setup;
-			var nscore = match.network_score;
-			var current_score = (nscore.length > 0) ? nscore[nscore.length - 1] : ['', ''];
+			var nscore = match ? match.network_score : [];
+			var match_setup = match ? match.setup : {
+				teams: [{
+					name: event.home_team_name,
+					players: [],
+				}, {
+					name: event.away_team_name,
+					players: [],
+				}],
+			};
 			var prev_scores = nscore.slice(0, -1);
-prev_scores = [[11, 5], [13, 11], [14, 15], [8, 11]];
+			var current_score = (nscore.length > 0) ? nscore[nscore.length - 1] : ['', ''];
+
+			var home_current_score = uiu.create_el(court_container, 'div', {
+				'class': 'display_courts_current_score_home',
+			}, current_score[0]);
+			var away_current_score = uiu.create_el(court_container, 'div', {
+				'class': 'display_courts_current_score_away',
+			}, current_score[1]);
+
 			var home_team = match_setup.teams[0];
+if (match) {prev_scores = [[11, 5], [13, 11], [14, 15], [8, 11]];}
 home_team.name = 'TSV Neuhausen-Nymphenburg 1'; // DEBUG
 			var player_container = uiu.create_el(court_container, 'div', {
 				'class': (match_setup.is_doubles ? 'display_courts_player_names_doubles' : 'display_courts_player_names_singles'),
 			});
 			for (var player_id = 0;player_id < home_team.players.length;player_id++) {
-				uiu.create_el(player_container, 'div', {
+				var home_player_name_container = uiu.create_el(player_container, 'div', {
 					'class': 'display_courts_player_name',
-				}, home_team.players[player_id].name);
+				});
+				var home_player_name_span = uiu.create_el(
+					home_player_name_container, 'span', {}, home_team.players[player_id].name);
+				_setup_autosize(home_player_name_span, home_current_score);
 			}
 
 			var home_row = uiu.create_el(court_container, 'div', {
@@ -110,36 +210,70 @@ home_team.name = 'TSV Neuhausen-Nymphenburg 1'; // DEBUG
 				'class': (match_setup.is_doubles ? 'display_courts_player_names_doubles' : 'display_courts_player_names_singles'),
 			});
 			for (player_id = 0;player_id < away_team.players.length;player_id++) {
-				uiu.create_el(player_container, 'div', {
+				var away_player_name_container = uiu.create_el(player_container, 'div', {
 					'class': 'display_courts_player_name',
-				}, away_team.players[player_id].name);
+				});
+				var away_player_name_span = uiu.create_el(
+					away_player_name_container, 'span', {}, away_team.players[player_id].name);
+				_setup_autosize(away_player_name_span, away_current_score);
 			}
 
-			uiu.create_el(court_container, 'div', {
-				'class': 'display_courts_current_score_home',
-			}, current_score[0]);
-			uiu.create_el(court_container, 'div', {
-				'class': 'display_courts_current_score_away',
-			}, current_score[1]);
-
-			_setup_autosize(home_team_span, home_prev_scores_container);
-			_setup_autosize(away_team_span, away_prev_scores_container);
-
-
-			// TODO handle empty court
-			// TODO current score
-			// TODO previous score
-			// TODO fatten winning score
+			_setup_autosize(home_team_span);
+			_setup_autosize(away_team_span);
 		}
 	}
 
-	uiu.create_el(container, 'div', {
+	var max_games = _calc_max_games(event);
+	var match_score = _calc_matchscore(event.matches);
+	var match_list = uiu.create_el(container, 'table', {
 		'class': 'display_list_container',
 	});
-	// TODO team names
-	// TODO match table
-	// TODO score
-	// TODO fatten winners
+	var match_list_head = uiu.create_el(match_list, 'tr');
+	uiu.create_el(match_list_head, 'th', {
+		'class': 'display_list_match_name',
+	}, '');
+	_list_render_team_name(match_list_head, event.home_team_name);
+	_list_render_team_name(match_list_head, event.away_team_name);
+	uiu.create_el(match_list_head, 'th', {
+		'class': 'display_list_matchscore',
+		'colspan': max_games,
+	}, match_score[0] + ' : ' + match_score[1]);
+
+	event.matches.forEach(function(m) {
+		var mwinner = calc.match_winner(m.setup.counting, m.network_score);
+
+		var row = uiu.create_el(match_list, 'tr');
+		uiu.create_el(row, 'td', {
+			'class': 'display_list_match_name',
+		}, m.setup.match_name);
+		var home_td = uiu.create_el(row, 'td', {
+			'class': 'display_list_player_names' + ((mwinner === 'left') ? ' display_list_winning_players' : ''),
+		});
+		_list_render_player_names(home_td, m.setup.teams[0].players, (mwinner === 'left'));
+		var away_td = uiu.create_el(row, 'td', {
+			'class': 'display_list_player_names' + ((mwinner === 'right') ? ' display_list_winning_players' : ''),
+		});
+		_list_render_player_names(away_td, m.setup.teams[1].players, (mwinner === 'right'));
+
+		for (var game_idx = 0;game_idx < max_games;game_idx++) {
+			var score_td = uiu.create_el(row, 'td', {
+				'class': 'display_list_game_score',
+			});
+
+			if (game_idx >= m.network_score.length) {
+				continue;
+			}
+			var nscore = m.network_score[game_idx];
+			var gwinner = calc.game_winner(m.setup.counting, game_idx, nscore[0], nscore[1]);
+			uiu.create_el(score_td, 'span', {
+				'class': ((gwinner === 'left') ? 'display_list_winning' : ''),
+			}, nscore[0]);
+			uiu.create_el(score_td, 'span', {}, ':');
+			uiu.create_el(score_td, 'span', {
+				'class': ((gwinner === 'right') ? 'display_list_winning' : ''),
+			}, nscore[1]);
+		}
+	});
 }
 
 var _cancel_updates = null;
@@ -206,6 +340,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var autosize = require('./autosize');
+	var calc = require('./calc');
 	var control = require('./control');
 	var network = require('./network');
 	var render = require('./render');
