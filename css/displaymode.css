@@ -160,6 +160,9 @@
 	white-space: pre;
 	padding-left: 0.4em;
 }
+.display_list_vs {
+	color: #cfcfcf;
+}
 
 .display_loading {
 	background-image: url(../icons/loading.gif);

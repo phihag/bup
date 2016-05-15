@@ -103,9 +103,13 @@ function update(err, s, event) {
 
 	s.event = event;
 if (event) {
-	event.matches.forEach(function(m) {
+	event.matches.forEach(function(m, i) {
 m.setup.counting = '5x11_15';
-m.network_score = [[11, 13], [15, 14], [9, 11], [15, 13], [10, 10]];
+if (i < 5) {
+m.network_score = [[11, 13], [15, 14], [9, 11], [15, 13], [12, 10]];
+} else {
+m.network_score = [[11, 13], [15, 14], [9, 11], [15, 13], [12, 14]];
+}
 	});
 event.matches[0].setup.teams[1].players[0] = {
 	firstname: 'Philipp',
@@ -226,6 +230,13 @@ home_team.name = 'TSV Neuhausen-Nymphenburg 1'; // DEBUG
 
 	var max_games = _calc_max_games(event);
 	var match_score = _calc_matchscore(event.matches);
+	var home_winning = match_score[0] > (event.matches.length / 2);
+	var away_winning = match_score[1] > (event.matches.length / 2);
+	if ((match_score[0] === event.matches.length / 2) && (match_score[0] === event.matches.length / 2)) {
+		// draw
+		home_winning = true;
+		away_winning = true;
+	}
 	var match_list = uiu.create_el(container, 'table', {
 		'class': 'display_list_container',
 	});
@@ -237,10 +248,17 @@ home_team.name = 'TSV Neuhausen-Nymphenburg 1'; // DEBUG
 	}, '');
 	var home_span = _list_render_team_name(match_list_head, event.home_team_name);
 	var away_span = _list_render_team_name(match_list_head, event.away_team_name);
-	uiu.create_el(match_list_head, 'th', {
+	var match_score_el = uiu.create_el(match_list_head, 'th', {
 		'class': 'display_list_matchscore',
 		'colspan': max_games,
-	}, match_score[0] + ' : ' + match_score[1]);
+	});
+	uiu.create_el(match_score_el, 'span', {
+		'class': (home_winning ? 'display_list_winning' : ''),
+	}, match_score[0]);
+	uiu.create_el(match_score_el, 'span', {'class': 'display_list_vs'}, ' : ');
+	uiu.create_el(match_score_el, 'span', {
+		'class': (away_winning ? 'display_list_winning' : ''),
+	}, match_score[1]);
 
 	// Now that we're done with initializing the first row, actually call autosizing
 	_setup_autosize(home_span);
@@ -275,7 +293,9 @@ home_team.name = 'TSV Neuhausen-Nymphenburg 1'; // DEBUG
 			uiu.create_el(score_td, 'span', {
 				'class': ((gwinner === 'left') ? 'display_list_winning' : ''),
 			}, nscore[0]);
-			uiu.create_el(score_td, 'span', {}, ':');
+			uiu.create_el(score_td, 'span', {
+				'class': 'display_list_vs',
+			}, ':');
 			uiu.create_el(score_td, 'span', {
 				'class': ((gwinner === 'right') ? 'display_list_winning' : ''),
 			}, nscore[1]);
