@@ -257,7 +257,7 @@ function _parse_match(state, col_count) {
 					val: s._('scoresheet:server'),
 				});
 			}
-			// In doubles we'll get future pick-server and pick-receiver events
+			// In doubles we'll get future pick_server and pick_receiver events
 			break;
 		case 'score':
 			score_team = (s.game.team1_left == (press.side == 'left')) ? 0 : 1;

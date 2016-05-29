@@ -1,6 +1,5 @@
 bup display mode
-	add court orientation (chair: "east"|"west")
-
+	highlight server
 	list: columns for each possible game
 	error handling (do not delete current info)
 	add mode: just list
@@ -17,6 +16,9 @@ bup display mode
 	implement courts with liveaw
 
 CourtSpot: support order
+*demo: support order
+liveaw: support order
+
 vdemo: set court nr
 court selector in demo mode
 mail Ulf
@@ -34,6 +36,7 @@ MVP liveaw
 
 mail Markus
 mail Daniel / Peter
+
 
 displaymode: automatic font scaling if necessary
 eventsheet: more space for input, vary by field

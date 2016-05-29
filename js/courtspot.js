@@ -34,8 +34,10 @@ function courts(s) {
 }
 
 function prepare_match(current_settings, match) {
-	if (typeof match.courtspot.heim_oben == 'boolean') {
-		match.network_team1_left = match.courtspot.heim_oben == (current_settings.court_id == 1);
+	if (!match.presses) {
+		if (typeof match.courtspot.heim_oben == 'boolean') {
+			match.network_team0_left = match.courtspot.heim_oben == (current_settings.court_id == 1);
+		}
 	}
 }
 

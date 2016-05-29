@@ -68,20 +68,20 @@
 	-webkit-align-items: center;
 	align-items: center;
 }
-.display_courts_current_score_home,.display_courts_current_score_away {
+.display_courts_current_score_top,.display_courts_current_score_bottom {
 	position: absolute;
 	font-size: 12vmin;
 	line-height: 12vmin;
 	right: 0;
 }
-.display_courts_current_score_home {
+.display_courts_current_score_top {
 	top: 0;
 }
-.display_courts_current_score_away {
+.display_courts_current_score_bottom {
 	bottom: 0;
 }
 
-.display_courts_prev_scores_home, .display_courts_prev_scores_away {
+.display_courts_prev_scores_top, .display_courts_prev_scores_bottom {
 	font-size: 3vmin;
 	float: right;
 }

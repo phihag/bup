@@ -136,6 +136,21 @@ function _score_text(network_score) {
 	}).join(' ');
 }
 
+function calc_team0_left(match) {
+	if (match.network_team0_left !== undefined) {
+		return match.network_team0_left;
+	}
+
+	var presses = get_presses(match);
+	if (presses) {
+		var s = {};
+		calc.init_state(s, match.setup, presses);
+		calc.state(s);
+		return s.game.team1_left;
+	}
+	return null;
+}
+
 function calc_resume_presses(s, match) {
 	var netscore = match.network_score;
 	var current_game = netscore[netscore.length - 1];
@@ -155,10 +170,10 @@ function calc_resume_presses(s, match) {
 		resumed: true,
 	});
 
-	if (typeof match.network_team1_left == 'boolean') {
+	if (typeof match.network_team0_left == 'boolean') {
 		presses.push({
 			type: 'pick_side',
-			team1_left: match.network_team1_left,
+			team1_left: match.network_team0_left,
 		});
 	}
 	if ((typeof match.network_team1_serving == 'boolean') && match.network_teams_player1_even) {
@@ -605,6 +620,7 @@ function on_edit_event(s) {
 }
 
 return {
+	calc_team0_left: calc_team0_left,
 	courts: courts,
 	enter_match: enter_match,
 	errstate: errstate,
