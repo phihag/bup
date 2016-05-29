@@ -152,7 +152,12 @@ function update(err, s, event) {
 			var server_player_id = null;
 			if ((typeof match.network_team1_serving == 'boolean') && match.network_teams_player1_even) {
 				server_team_id = match.network_team1_serving ? 0 : 1;
-				server_player_id = match.setup.is_doubles ? (match.network_teams_player1_even[server_team_id] ? 0 : 1) : 0;
+
+				if (match.setup.is_doubles) {
+					server_player_id = (match.network_teams_player1_even[server_team_id] == (current_score[server_team_id] % 2 == 0)) ? 0 : 1;
+				} else {
+					server_player_id = 0;
+				}
 			}
 
 			var top_current_score = uiu.create_el(court_container, 'div', {

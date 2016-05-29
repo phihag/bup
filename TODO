@@ -1,5 +1,6 @@
 bup display mode
 	error handling (do not delete current info)
+
 	add per-court display mode
 	add mode: just list
 	showhide settings on any press or mouse movement
