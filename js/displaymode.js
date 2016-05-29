@@ -148,6 +148,13 @@ function update(err, s, event) {
 			var prev_scores = nscore.slice(0, -1);
 			var current_score = (nscore.length > 0) ? nscore[nscore.length - 1] : ['', ''];
 
+			var server_team_id = null;
+			var server_player_id = null;
+			if ((typeof match.network_team1_serving == 'boolean') && match.network_teams_player1_even) {
+				server_team_id = match.network_team1_serving ? 0 : 1;
+				server_player_id = match.setup.is_doubles ? (match.network_teams_player1_even[server_team_id] ? 0 : 1) : 0;
+			}
+
 			var top_current_score = uiu.create_el(court_container, 'div', {
 				'class': 'display_courts_current_score_top',
 			}, current_score[top_team_idx]);
@@ -161,8 +168,9 @@ function update(err, s, event) {
 				'class': (match_setup.is_doubles ? 'display_courts_player_names_doubles' : 'display_courts_player_names_singles'),
 			});
 			for (var player_id = 0;player_id < top_team.players.length;player_id++) {
+				var top_is_serving = (top_team_idx === server_team_id) && (player_id === server_player_id);
 				var top_player_name_container = uiu.create_el(player_container, 'div', {
-					'class': 'display_courts_player_name',
+					'class': 'display_courts_player_name' + (top_is_serving ? ' display_courts_player_serving' : ''),
 				});
 				var top_player_name_span = uiu.create_el(
 					top_player_name_container, 'span', {}, top_team.players[player_id].name);
@@ -206,8 +214,9 @@ function update(err, s, event) {
 				'class': (match_setup.is_doubles ? 'display_courts_player_names_doubles' : 'display_courts_player_names_singles'),
 			});
 			for (player_id = 0;player_id < bottom_team.players.length;player_id++) {
+				var bottom_is_serving = (bottom_team_idx === server_team_id) && (player_id === server_player_id);
 				var bottom_player_name_container = uiu.create_el(player_container, 'div', {
-					'class': 'display_courts_player_name',
+					'class': 'display_courts_player_name' + (bottom_is_serving ? ' display_courts_player_serving' : ''),
 				});
 				var bottom_player_name_span = uiu.create_el(
 					bottom_player_name_container, 'span', {}, bottom_team.players[player_id].name);

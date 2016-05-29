@@ -1,11 +1,9 @@
 bup display mode
-	highlight server
-	list: columns for each possible game
 	error handling (do not delete current info)
+	add per-court display mode
 	add mode: just list
 	showhide settings on any press or mouse movement
 	make settings semi-transparent in display mode
-	add per-court display mode
 	add court outline display mode
 	left/right keys to change display type
 	test all with incomplete matchups!
@@ -19,7 +17,7 @@ CourtSpot: support order
 *demo: support order
 liveaw: support order
 
-vdemo: set court nr
+v/edemo: set court nr
 court selector in demo mode
 mail Ulf
 
@@ -37,8 +35,6 @@ MVP liveaw
 mail Markus
 mail Daniel / Peter
 
-
-displaymode: automatic font scaling if necessary
 eventsheet: more space for input, vary by field
 N10 sensitivity! ontouch instead of onclick
 scoresheet: Fit "TSV Neuhausen-Nymphenburg 1"

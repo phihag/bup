@@ -52,6 +52,9 @@
 
 	height: 6vmin;
 }
+.display_courts_player_serving {
+	color: #ddddff;
+}
 
 .display_courts_team_row {
 	height: 4vmin;
