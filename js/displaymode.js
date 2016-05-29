@@ -80,13 +80,8 @@ function _calc_max_games(event) {
 }
 
 function update(err, s, event) {
-	autosize_cancels.forEach(function(ac) {
-		ac();
-	});
-	autosize_cancels = [];
-
 	var container = uiu.qs('.displaymode_layout');
-	uiu.empty(container);
+	uiu.remove_qsa('.display_loading,.display_error', container);
 
 	if (err && (err.errtype === 'loading')) {
 		uiu.create_el(container, 'div', {
@@ -96,10 +91,19 @@ function update(err, s, event) {
 	}
 
 	if (err) {
-		// TODO handle errors
-		console.error(err); // eslint-disable-line no-console
+		uiu.create_el(container, 'div', {
+			'class': 'display_error',
+		}, err.msg);
+		// TODO report these errors as well to home?
 		return;
 	}
+
+	// Redraw everything
+	autosize_cancels.forEach(function(ac) {
+		ac();
+	});
+	autosize_cancels = [];
+	uiu.empty(container);
 
 	s.event = event;
 

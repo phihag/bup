@@ -21,8 +21,11 @@ function esc_stack_pop() {
 	}
 }
 
-function qsEach(selector, func) {
-	var nodes = document.querySelectorAll(selector);
+function qsEach(selector, func, container) {
+	if (!container) {
+		container = document;
+	}
+	var nodes = container.querySelectorAll(selector);
 	for (var i = 0;i < nodes.length;i++) {
 		func(nodes[i], i);
 	}
@@ -99,6 +102,15 @@ function empty(node) {
 	}
 }
 
+function remove(node) {
+	empty(node);
+	node.parentNode.removeChild(node);
+}
+
+function remove_qsa(qs, container) {
+	qsEach(qs, remove, container);
+}
+
 function text(node, str) {
 	empty(node);
 	node.appendChild(node.ownerDocument.createTextNode(str));
@@ -131,6 +143,8 @@ return {
 	on_click: on_click,
 	on_click_qs: on_click_qs,
 	on_click_qsa: on_click_qsa,
+	remove: remove,
+	remove_qsa: remove_qsa,
 	qs: qs,
 	qsEach: qsEach,
 	text: text,
