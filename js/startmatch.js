@@ -2,12 +2,6 @@ var startmatch = (function() {
 'use strict';
 
 function ui_init() {	
-	$('.settings_layout').on('click', function(e) {
-		if (e.target != this) {
-			return;
-		}
-		settings.hide();
-	});
 	$('#exception_wrapper').on('click', function(e) {
 		if (e.target != this) {
 			return;

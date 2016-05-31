@@ -33,6 +33,9 @@
 	padding: 0 2em 1em 2em;
 	overflow: hidden;
 }
+.settings_layout_displaymode>.settings_container {
+	background: rgba(255, 255, 255, 0.94);
+}
 .settings_container input, .settings_container button {
 	font-size: inherit;
 }

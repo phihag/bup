@@ -8,9 +8,14 @@ function ui_init(s) {
 		}
 	});
 	Mousetrap.bind('m', function() {
+		if (s.ui.displaymode_visible) {
+			settings.toggle_displaymode();
+			return;
+		}
 		if (s.initialized) {
 			settings.show();
 		}
+
 	});
 	Mousetrap.bind('shift+n', function() {
 		netstats.show();
@@ -36,6 +41,10 @@ function ui_init(s) {
 		editevent.show();
 	});
 	Mousetrap.bind('s', function() {
+		if (s.ui.displaymode_visible) {
+			settings.toggle_displaymode();
+			return;
+		}
 		scoresheet.show();
 	});
 	Mousetrap.bind('shift+s', function() {
@@ -61,6 +70,16 @@ function ui_init(s) {
 	});
 	Mousetrap.bind('shift+u', function() {
 		displaymode.hide();
+	});
+	Mousetrap.bind('enter', function() {
+		if (s.ui.displaymode_visible) {
+			settings.toggle_displaymode();
+		}
+	});
+	Mousetrap.bind('space', function() {
+		if (s.ui.displaymode_visible) {
+			settings.toggle_displaymode();
+		}
 	});
 }
 

@@ -48,14 +48,24 @@ function show_displaymode() {
 	}
 	state.ui.displaymode_settings_visible = true;
 	uiu.visible_qs('#settings_wrapper', true);	
+	uiu.esc_stack_push(hide_displaymode);
 }
 
 function hide_displaymode() {
 	if (!state.ui.displaymode_settings_visible) {
 		return;
 	}
-	state.ui.displaymode_settings_visible = true;
+	state.ui.displaymode_settings_visible = false;
 	uiu.visible_qs('#settings_wrapper', false);
+	uiu.esc_stack_pop();
+}
+
+function toggle_displaymode() {
+	if (state.ui.displaymode_settings_visible) {
+		hide_displaymode();
+	} else {
+		show_displaymode();
+	}
 }
 
 var _network_hide_cb = null;
@@ -99,7 +109,7 @@ function hide(force) {
 
 	state.ui.settings_visible = false;
 	control.set_current(state);
-	$('#settings_wrapper').hide();
+	uiu.visible_qs('#settings_wrapper', false);
 	uiu.esc_stack_pop();
 }
 
@@ -142,6 +152,17 @@ function update(s) {
 }
 
 function ui_init(s) {
+	uiu.on_click_qs('.settings_layout', function(e) {
+		if (e.target != this) {
+			return;
+		}
+		if (state.ui.displaymode_settings_visible) {
+			hide_displaymode();
+		} else {
+			hide();
+		}
+	});
+
 	var setup_manual_form = $('#setup_manual_form');
 	setup_manual_form.find('[name="gametype"]').on('change', function() {
 		var new_type = setup_manual_form.find('[name="gametype"]:checked').val();
@@ -149,7 +170,7 @@ function ui_init(s) {
 		setup_manual_form.find('.only-doubles').toggle(is_doubles);
 	});
 
-	$('.backtogame_button').on('click', function() {
+	uiu.on_click_qs('.backtogame_button', function() {
 		control.set_current(s);
 		hide();
 	});
@@ -245,6 +266,7 @@ return {
 	show: show,
 	show_displaymode: show_displaymode,
 	hide_displaymode: hide_displaymode,
+	toggle_displaymode: toggle_displaymode,
 	hide: hide,
 	ui_init: ui_init,
 	on_mode_change: on_mode_change,
