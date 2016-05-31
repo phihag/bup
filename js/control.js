@@ -174,7 +174,7 @@ function block_score_buttons() {
 	}, state.settings.button_block_timeout);
 }
 
-function init_buttons() {
+function ui_init() {
 	uiu.on_click_qs('#pick_side_team1', function() {
 		on_press({
 			type: 'pick_side',
@@ -329,66 +329,6 @@ function init_buttons() {
 	});
 }
 
-function init_shortcuts() {
-	Mousetrap.bind('x', function() {
-		if (state.initialized && !state.match.finish_confirmed) {
-			ui_show_exception_dialog();
-		}
-	});
-	Mousetrap.bind('m', function() {
-		if (state.initialized) {
-			settings.show();
-		}
-	});
-	Mousetrap.bind('shift+n', function() {
-		netstats.show();
-	});
-	Mousetrap.bind('shift+a', function() {
-		if (state.initialized) {
-			stats.show();
-		}
-	});
-	Mousetrap.bind('e', function() {
-		if (state.initialized) {
-			editmode.enter();
-		}
-	});
-	Mousetrap.bind('a', function() {
-		state.settings.show_pronounciation = ! state.settings.show_pronounciation;
-		if (state.initialized) {
-			render.ui_render(state);
-		}
-		settings.store(state);
-	});
-	Mousetrap.bind('v', function() {
-		editevent.show();
-	});
-	Mousetrap.bind('s', function() {
-		scoresheet.show();
-	});
-	Mousetrap.bind('shift+s', function() {
-		scoresheet.event_show();
-	});
-	Mousetrap.bind('shift+e', function() {
-		i18n.ui_update_state(state, 'en');
-	});
-	Mousetrap.bind('shift+d', function() {
-		i18n.ui_update_state(state, 'de');
-	});
-	Mousetrap.bind('shift+j', function() {
-		importexport.export_json(state);
-	});
-	Mousetrap.bind('shift+i', function() {
-		importexport.import_json(state);
-	});
-	Mousetrap.bind('shift+x', function() {
-		importexport.send_export(state);
-	});
-	Mousetrap.bind('shift+a', function() {
-		displaymode.show();
-	});
-}
-
 function set_current(s) {
 	buphistory.record(s);
 
@@ -406,11 +346,6 @@ function set_current(s) {
 	}
 	title += 'Badminton Umpire Panel';
 	document.title = title;
-}
-
-function ui_init() {
-	init_buttons();
-	init_shortcuts();
 }
 
 function ui_show_exception_dialog() {
@@ -452,18 +387,11 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var buphistory = require('./buphistory');
 	var bupui = require('./bupui');
 	var calc = require('./calc');
-	var displaymode = require('./displaymode');
-	var editevent = require('./editevent');
 	var editmode = require('./editmode');
-	var i18n = require('./i18n');
-	var importexport = require('./importexport');
 	var match_storage = require('./match_storage');
-	var netstats = require('./netstats');
 	var network = require('./network');
 	var render = require('./render');
-	var scoresheet = require('./scoresheet');
 	var settings = require('./settings');
-	var stats = require('./stats');
 	var timer = require('./timer');
 	var uiu = require('./uiu');
 	var utils = require('./utils');

@@ -1,8 +1,9 @@
 bup display mode
-	add per-court display mode
-	add mode: just list
 	showhide settings on any press or mouse movement
 	make settings semi-transparent in display mode
+
+	add per-court display mode
+	add mode: just list
 	add court outline display mode
 	left/right keys to change display type
 	test all with incomplete matchups!
@@ -11,6 +12,7 @@ bup display mode
 	update court info with vdemo/edemo
 	dismiss/show settings
 	implement courts with liveaw
+	construct before adding into DOM (autosize later)
 
 CourtSpot: support order
 *demo: support order

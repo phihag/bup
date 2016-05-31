@@ -37,6 +37,7 @@ function ui_init() {
 	importexport.ui_init();
 	editevent.ui_init();
 	displaymode.ui_init();
+	shortcuts.ui_init(state);
 
 	var hash_query = utils.parse_query_string(window.location.hash.substr(1));
 	if (hash_query.lang) {
@@ -91,6 +92,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var report_problem = require('./report_problem');
 	var scoresheet = require('./scoresheet');
 	var settings = require('./settings');
+	var shortcuts = require('./shortcuts');
 	var startmatch = require('./startmatch');
 	var stats = require('./stats');
 	var timer = require('./timer');

@@ -322,8 +322,7 @@ function show() {
 	state.ui.displaymode_visible = true;
 	render.hide();
 	settings.on_mode_change(state);
-	//settings.show_displaymode();
-	// TODO only show settings if required
+	settings.show_displaymode();
 
 	control.set_current(state);
 	uiu.visible_qs('.displaymode_layout', true);
