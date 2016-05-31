@@ -67,7 +67,7 @@ function uglify(js_files, jsdist_fn, cb) {
 	args.push('-o');
 	args.push(jsdist_fn);
 
-	var uglify_proc = child_process.spawn('uglify', args, {
+	var uglify_proc = child_process.spawn('uglifyjs', args, {
 		stdio: 'inherit',
 	});
 	uglify_proc.on('close', function (code) {
