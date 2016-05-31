@@ -353,7 +353,7 @@ function hide() {
 }
 
 function ui_init() {
-	uiu.on_click_qs('.displaymode_layout', function(e) {
+	uiu.on_click_qs('.displaymode_layout', function() {
 		settings.show_displaymode();
 	});
 	uiu.on_click_qs('.settings_mode_display', function(e) {
