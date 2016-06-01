@@ -133,9 +133,13 @@ function duration_secs(start_timestamp, end_timestamp) {
 		return mins + ':' + utils.add_zeroes(secs);
 	}
 }
+
 function deep_equal(x, y) {
 	if (x === y) {
 		return true;
+	}
+	if ((x === null) || (y === null)) {
+		return false;
 	}
 	if ((typeof x == 'object') && (typeof y == 'object')) {
 		var key_count = 0;

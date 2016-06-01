@@ -79,6 +79,14 @@ function _calc_max_games(event) {
 	return res;
 }
 
+function hash(event) {
+	return {
+		courts: utils.deep_copy(event.courts),
+		matches: utils.deep_copy(event.matches),
+	};
+}
+
+var _last_painted_hash = null;
 function update(err, s, event) {
 	var container = uiu.qs('.displaymode_layout');
 	uiu.remove_qsa('.display_loading,.display_error', container);
@@ -98,14 +106,22 @@ function update(err, s, event) {
 		return;
 	}
 
+	// Also update general state
+	s.event = event;
+
+	// If nothing has changed we can skip painting
+	var cur_event_hash = hash(event);
+	if (utils.deep_equal(cur_event_hash, _last_painted_hash)) {
+		console.log('cached');
+		return;
+	}
+
 	// Redraw everything
 	autosize_cancels.forEach(function(ac) {
 		ac();
 	});
 	autosize_cancels = [];
 	uiu.empty(container);
-
-	s.event = event;
 
 	if (event.courts) {
 		var courts_container = uiu.create_el(container, 'div', {
@@ -311,6 +327,8 @@ function update(err, s, event) {
 			}, nscore[1]);
 		}
 	});
+
+	_last_painted_hash = cur_event_hash;
 }
 
 var _cancel_updates = null;

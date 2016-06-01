@@ -8,12 +8,12 @@ bup display mode
 	add court info to vdemo/edemo
 	update court info with vdemo/edemo
 	implement courts with liveaw
-	construct before adding into DOM (autosize later)
 
 CourtSpot: support order
 *demo: support order
 liveaw: support order
 
+v/edemo11
 v/edemo: set court nr
 court selector in demo mode
 mail Ulf

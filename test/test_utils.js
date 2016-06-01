@@ -35,6 +35,8 @@ _describe('helper functions', function() {
 		assert.strictEqual(bup.utils.deep_equal({x: 1, y: 2}, {x: 1, y: 3}), false);
 		assert.strictEqual(bup.utils.deep_equal({x: 1, y: 2}, {x: 1, y: 2, z: 3}), false);
 		assert.strictEqual(bup.utils.deep_equal({x: 1, y: 2}, {x: 1}), false);
+		assert.strictEqual(bup.utils.deep_equal({x: 1, y: 2}, null), false);
+		assert.strictEqual(bup.utils.deep_equal(null, {x: 1, y: 2}), false);
 	});
 
 	_it('repeat', function() {

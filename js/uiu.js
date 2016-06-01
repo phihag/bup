@@ -130,7 +130,9 @@ function create_el(parent, tagName, attrs, text) {
 	if ((text !== undefined) && (text !== null)) {
 		el.appendChild(document.createTextNode(text));
 	}
-	parent.appendChild(el);
+	if (parent) {
+		parent.appendChild(el);
+	}
 	return el;
 }
 
