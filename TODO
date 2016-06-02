@@ -1,5 +1,8 @@
 bup display mode
 	style per-court display mode
+		bump size
+		add discipline?
+
 	add court outline display mode
 	upon changing mode or court show name and court at top
 	left/right keys to change display type
@@ -11,6 +14,8 @@ bup display mode
 	implement courts with liveaw
 	switch to svg display for list
 	hide settings after timeout (10s?)
+	show last update in settings
+
 
 CourtSpot: support order
 *demo: support order

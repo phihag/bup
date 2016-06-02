@@ -76,7 +76,7 @@
 }
 .dcs_prev_score_lost, .dcs_prev_score_won {
 	display: inline-block;
-	margin: 0 0.5em;
+	margin: 0 0.4em;
 	min-width: 1.2em;
 	text-align: right;
 }
@@ -109,19 +109,29 @@
 
 .display_oncourt_container {
 	position: relative;
+	margin: 5vmin 2vmin 0 2vmin;
 }
 .display_oncourt_container .dcs_team_row {
-	height: 10vh;
+	height: 12vmin;
+}
+.display_oncourt_container .dcs_team_row_top {
+	margin-top: 2vmin;
+	margin-bottom: 3vmin;
+}
+.display_oncourt_container .dcs_team_row_bottom {
+	margin-top: 3vmin;
+	margin-bottom: 2vmin;
 }
 .display_oncourt_container .dcs_team_name {
-	font-size: 8vmin;
+	font-size: 10vmin;
+	color: #888;
 }
 .display_oncourt_container .dcs_current_score_top,.display_oncourt_container .dcs_current_score_bottom {
-	font-size: 30vmin;
-	line-height: 30vmin;
+	font-size: 32vmin;
+	line-height: 32vmin;
 }
 .display_oncourt_container .dcs_prev_scores_top,.display_oncourt_container .dcs_prev_scores_bottom {
-	font-size: 8vmin;
+	font-size: 10vmin;
 }
 .display_oncourt_container .dcs_player_names_singles,.display_oncourt_container .dcs_player_names_doubles {
 	height: 30vmin;

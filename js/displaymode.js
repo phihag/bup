@@ -160,7 +160,7 @@ function _render_court_display(container, event, court, top_team_idx) {
 	}
 
 	var top_row = uiu.create_el(container, 'div', {
-		'class': 'dcs_team_row',
+		'class': 'dcs_team_row dcs_team_row_top',
 	});
 	var top_prev_scores_container = uiu.create_el(top_row, 'div', {
 		'class': 'dcs_prev_scores_top',
@@ -176,7 +176,7 @@ function _render_court_display(container, event, court, top_team_idx) {
 	var top_team_span = uiu.create_el(top_team_el, 'span', {}, top_team.name);
 
 	var bottom_row = uiu.create_el(container, 'div', {
-		'class': 'dcs_team_row',
+		'class': 'dcs_team_row dcs_team_row_bottom',
 	});
 	var bottom_prev_scores_container = uiu.create_el(bottom_row, 'div', {
 		'class': 'dcs_prev_scores_bottom',
