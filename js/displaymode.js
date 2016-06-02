@@ -79,181 +79,168 @@ function _calc_max_games(event) {
 	return res;
 }
 
-function hash(event) {
+function hash(style, settings_displaymode_court_id, event) {
 	return {
+		style: style,
+		court_id: settings_displaymode_court_id,
 		courts: utils.deep_copy(event.courts),
 		matches: utils.deep_copy(event.matches),
 	};
 }
 
-var _last_painted_hash = null;
-function update(err, s, event) {
-	var container = uiu.qs('.displaymode_layout');
-	uiu.remove_qsa('.display_loading,.display_error', container);
-
-	if (err && (err.errtype === 'loading')) {
-		uiu.create_el(container, 'div', {
-			'class': 'display_loading',
-		});
-		return;
+function determine_server(match, current_score) {
+	if ((typeof match.network_team1_serving !== 'boolean') || !match.network_teams_player1_even) {
+		return {}; // This ensures that server.player_id is undefined
 	}
 
-	if (err) {
-		uiu.create_el(container, 'div', {
-			'class': 'display_error',
-		}, err.msg);
-		// TODO report these errors as well to home?
-		return;
+
+	var team_id = match.network_team1_serving ? 0 : 1;
+	var player_id = 0;
+	if (match.setup.is_doubles) {
+		player_id = (match.network_teams_player1_even[team_id] == (current_score[team_id] % 2 == 0)) ? 0 : 1;
 	}
 
-	// Also update general state
-	s.event = event;
+	return {
+		team_id: team_id,
+		player_id: player_id,
+	};
+}
 
-	// If nothing has changed we can skip painting
-	var cur_event_hash = hash(event);
-	if (utils.deep_equal(cur_event_hash, _last_painted_hash)) {
-		console.log('cached');
-		return;
-	}
+function _render_court_display(container, event, court, top_team_idx) {
+	var match = court.match_id ? utils.find(event.matches, function(m) {
+		return court.match_id === m.setup.match_id;
+	}) : null;
 
-	// Redraw everything
-	autosize_cancels.forEach(function(ac) {
-		ac();
-	});
-	autosize_cancels = [];
-	uiu.empty(container);
-
-	if (event.courts) {
-		var courts_container = uiu.create_el(container, 'div', {
-			'class': 'display_courts_container',
-		});
-		var court_count = event.courts.length;
-		var court_width = Math.floor((100.0 - (4 * (court_count - 1))) / court_count);
-		for (var court_idx = 0;court_idx < court_count;court_idx++) {
-			if (court_idx > 0) {
-				uiu.create_el(courts_container, 'div', {
-					'class': 'display_courts_separator',
-				});
+	if (top_team_idx === undefined) {
+		top_team_idx = 0;
+		if (match && court.chair) {
+			var team0_left = network.calc_team0_left(match);
+			if (typeof team0_left == 'boolean') {
+				top_team_idx = (team0_left == (court.chair === 'west')) ? 0 : 1;
 			}
-
-			var court_container = uiu.create_el(courts_container, 'div', {
-				'class': 'display_courts_court',
-				'style': ('width: ' + court_width + '%;'),
-			});
-
-			var court = event.courts[court_idx];
-			var match = court.match_id ? utils.find(event.matches, function(m) {
-				return court.match_id === m.setup.match_id;
-			}) : null;
-
-			var top_team_idx = 0;
-			if (match && court.chair) {
-				var team0_left = network.calc_team0_left(match);
-				if (typeof team0_left == 'boolean') {
-					top_team_idx = (team0_left == (court.chair === 'west')) ? 0 : 1;
-				}
-			}
-			var bottom_team_idx = 1 - top_team_idx;
-
-			var nscore = match ? match.network_score : [];
-			var match_setup = match ? match.setup : {
-				teams: [{
-					name: event.home_team_name,
-					players: [],
-				}, {
-					name: event.away_team_name,
-					players: [],
-				}],
-			};
-			var prev_scores = nscore.slice(0, -1);
-			var current_score = (nscore.length > 0) ? nscore[nscore.length - 1] : ['', ''];
-
-			var server_team_id = null;
-			var server_player_id = null;
-			if ((typeof match.network_team1_serving == 'boolean') && match.network_teams_player1_even) {
-				server_team_id = match.network_team1_serving ? 0 : 1;
-
-				if (match.setup.is_doubles) {
-					server_player_id = (match.network_teams_player1_even[server_team_id] == (current_score[server_team_id] % 2 == 0)) ? 0 : 1;
-				} else {
-					server_player_id = 0;
-				}
-			}
-
-			var top_current_score = uiu.create_el(court_container, 'div', {
-				'class': 'display_courts_current_score_top',
-			}, current_score[top_team_idx]);
-			var bottom_current_score = uiu.create_el(court_container, 'div', {
-				'class': 'display_courts_current_score_bottom',
-			}, current_score[bottom_team_idx]);
-
-			var top_team = match_setup.teams[top_team_idx];
-
-			var player_container = uiu.create_el(court_container, 'div', {
-				'class': (match_setup.is_doubles ? 'display_courts_player_names_doubles' : 'display_courts_player_names_singles'),
-			});
-			for (var player_id = 0;player_id < top_team.players.length;player_id++) {
-				var top_is_serving = (top_team_idx === server_team_id) && (player_id === server_player_id);
-				var top_player_name_container = uiu.create_el(player_container, 'div', {
-					'class': 'display_courts_player_name' + (top_is_serving ? ' display_courts_player_serving' : ''),
-				});
-				var top_player_name_span = uiu.create_el(
-					top_player_name_container, 'span', {}, top_team.players[player_id].name);
-				_setup_autosize(top_player_name_span, top_current_score);
-			}
-
-			var top_row = uiu.create_el(court_container, 'div', {
-				'class': 'display_courts_team_row',
-			});
-			var top_prev_scores_container = uiu.create_el(top_row, 'div', {
-				'class': 'display_courts_prev_scores_top',
-			});
-			prev_scores.forEach(function(ps) {
-				uiu.create_el(top_prev_scores_container, 'div', {
-					'class': ((ps[top_team_idx] > ps[bottom_team_idx]) ? 'display_courts_prev_score_won' : 'display_courts_prev_score_lost'),
-				}, ps[top_team_idx]);
-			});
-			var top_team_el = uiu.create_el(top_row, 'div', {
-				'class': 'display_courts_team_name',
-			});
-			var top_team_span = uiu.create_el(top_team_el, 'span', {}, top_team.name);
-
-			var bottom_row = uiu.create_el(court_container, 'div', {
-				'class': 'display_courts_team_row',
-			});
-			var bottom_prev_scores_container = uiu.create_el(bottom_row, 'div', {
-				'class': 'display_courts_prev_scores_bottom',
-			});
-			prev_scores.forEach(function(ps) {
-				uiu.create_el(bottom_prev_scores_container, 'div', {
-					'class': ((ps[bottom_team_idx] > ps[top_team_idx]) ? 'display_courts_prev_score_won' : 'display_courts_prev_score_lost'),
-				}, ps[bottom_team_idx]);
-			});
-			var bottom_team = match_setup.teams[bottom_team_idx];
-			var bottom_team_el = uiu.create_el(bottom_row, 'div', {
-				'class': 'display_courts_team_name',
-			});
-			var bottom_team_span = uiu.create_el(bottom_team_el, 'span', {}, bottom_team.name);
-
-			player_container = uiu.create_el(court_container, 'div', {
-				'class': (match_setup.is_doubles ? 'display_courts_player_names_doubles' : 'display_courts_player_names_singles'),
-			});
-			for (player_id = 0;player_id < bottom_team.players.length;player_id++) {
-				var bottom_is_serving = (bottom_team_idx === server_team_id) && (player_id === server_player_id);
-				var bottom_player_name_container = uiu.create_el(player_container, 'div', {
-					'class': 'display_courts_player_name' + (bottom_is_serving ? ' display_courts_player_serving' : ''),
-				});
-				var bottom_player_name_span = uiu.create_el(
-					bottom_player_name_container, 'span', {}, bottom_team.players[player_id].name);
-				_setup_autosize(bottom_player_name_span, bottom_current_score);
-			}
-
-			_setup_autosize(top_team_span);
-			_setup_autosize(bottom_team_span);
 		}
 	}
+	var bottom_team_idx = 1 - top_team_idx;
 
-	// List of all matches
+	var nscore = match ? match.network_score : [];
+	var match_setup = match ? match.setup : {
+		teams: [{
+			name: event.home_team_name,
+			players: [],
+		}, {
+			name: event.away_team_name,
+			players: [],
+		}],
+	};
+	var prev_scores = nscore.slice(0, -1);
+	var current_score = (nscore.length > 0) ? nscore[nscore.length - 1] : ['', ''];
+
+	var server = determine_server(match, current_score);
+
+	var top_current_score = uiu.create_el(container, 'div', {
+		'class': 'dcs_current_score_top',
+	}, current_score[top_team_idx]);
+	var bottom_current_score = uiu.create_el(container, 'div', {
+		'class': 'dcs_current_score_bottom',
+	}, current_score[bottom_team_idx]);
+
+	var top_team = match_setup.teams[top_team_idx];
+
+	var player_container = uiu.create_el(container, 'div', {
+		'class': (match_setup.is_doubles ? 'dcs_player_names_doubles' : 'dcs_player_names_singles'),
+	});
+	for (var player_id = 0;player_id < top_team.players.length;player_id++) {
+		var top_is_serving = (top_team_idx === server.team_id) && (player_id === server.player_id);
+		var top_player_name_container = uiu.create_el(player_container, 'div', {
+			'class': 'dcs_player_name' + (top_is_serving ? ' dcs_player_serving' : ''),
+		});
+		var top_player_name_span = uiu.create_el(
+			top_player_name_container, 'span', {}, top_team.players[player_id].name);
+		_setup_autosize(top_player_name_span, top_current_score);
+	}
+
+	var top_row = uiu.create_el(container, 'div', {
+		'class': 'dcs_team_row',
+	});
+	var top_prev_scores_container = uiu.create_el(top_row, 'div', {
+		'class': 'dcs_prev_scores_top',
+	});
+	prev_scores.forEach(function(ps) {
+		uiu.create_el(top_prev_scores_container, 'div', {
+			'class': ((ps[top_team_idx] > ps[bottom_team_idx]) ? 'dcs_prev_score_won' : 'dcs_prev_score_lost'),
+		}, ps[top_team_idx]);
+	});
+	var top_team_el = uiu.create_el(top_row, 'div', {
+		'class': 'dcs_team_name',
+	});
+	var top_team_span = uiu.create_el(top_team_el, 'span', {}, top_team.name);
+
+	var bottom_row = uiu.create_el(container, 'div', {
+		'class': 'dcs_team_row',
+	});
+	var bottom_prev_scores_container = uiu.create_el(bottom_row, 'div', {
+		'class': 'dcs_prev_scores_bottom',
+	});
+	prev_scores.forEach(function(ps) {
+		uiu.create_el(bottom_prev_scores_container, 'div', {
+			'class': ((ps[bottom_team_idx] > ps[top_team_idx]) ? 'dcs_prev_score_won' : 'dcs_prev_score_lost'),
+		}, ps[bottom_team_idx]);
+	});
+	var bottom_team = match_setup.teams[bottom_team_idx];
+	var bottom_team_el = uiu.create_el(bottom_row, 'div', {
+		'class': 'dcs_team_name',
+	});
+	var bottom_team_span = uiu.create_el(bottom_team_el, 'span', {}, bottom_team.name);
+
+	player_container = uiu.create_el(container, 'div', {
+		'class': (match_setup.is_doubles ? 'dcs_player_names_doubles' : 'dcs_player_names_singles'),
+	});
+	for (player_id = 0;player_id < bottom_team.players.length;player_id++) {
+		var bottom_is_serving = (bottom_team_idx === server.team_id) && (player_id === server.player_id);
+		var bottom_player_name_container = uiu.create_el(player_container, 'div', {
+			'class': 'dcs_player_name' + (bottom_is_serving ? ' dcs_player_serving' : ''),
+		});
+		var bottom_player_name_span = uiu.create_el(
+			bottom_player_name_container, 'span', {}, bottom_team.players[player_id].name);
+		_setup_autosize(bottom_player_name_span, bottom_current_score);
+	}
+
+	_setup_autosize(top_team_span);
+	_setup_autosize(bottom_team_span);
+}
+
+function render_top(container, event) {
+	if (! event.courts) {
+		return;
+	}
+
+	var courts_container = uiu.create_el(container, 'div', {
+		'class': 'display_courts_container',
+	});
+	var court_count = event.courts.length;
+	var court_width = Math.floor((100.0 - (4 * (court_count - 1))) / court_count);
+	for (var court_idx = 0;court_idx < court_count;court_idx++) {
+		if (court_idx > 0) {
+			uiu.create_el(courts_container, 'div', {
+				'class': 'display_courts_separator',
+			});
+		}
+
+		var court_container = uiu.create_el(courts_container, 'div', {
+			'class': 'display_courts_court',
+			'style': ('width: ' + court_width + '%;'),
+		});
+
+		var court = event.courts[court_idx];
+		_render_court_display(court_container, event, court);
+	}
+}
+
+function render_list(container, event) {
+	render_html_list(container, event); // TODO switch to svg
+}
+
+function render_html_list(container, event) {
 	var max_games = _calc_max_games(event);
 	var match_score = _calc_matchscore(event.matches);
 	var home_winning = match_score[0] > (event.matches.length / 2);
@@ -327,8 +314,110 @@ function update(err, s, event) {
 			}, nscore[1]);
 		}
 	});
+}
+
+function render_oncourt(s, container, event) {
+	if (!event.courts) {
+		uiu.create_el(container, 'div', {
+			'class': 'display_error',
+		}, 'Court information missing');
+		return;
+	}
+
+	var cid = s.settings.displaymode_court_id;
+	var court;
+	for (var i = 0;i < event.courts.length;i++) {
+		var c = event.courts[i];
+		if (c.court_id == cid) {
+			court = c;
+			break;
+		}
+	}
+	if (!court) {
+		uiu.create_el(container, 'div', {
+			'class': 'display_error',
+		}, 'Court ' + cid + ' not found');
+		return;
+	}
+
+	var oncourt_container = uiu.create_el(container, 'div', {
+		'class': 'display_oncourt_container',
+	});
+	_render_court_display(oncourt_container, event, court, 0);
+
+}
+
+
+var _last_painted_hash = null;
+var _last_err;
+function update(err, s, event) {
+	_last_err = err;
+
+	var container = uiu.qs('.displaymode_layout');
+	uiu.remove_qsa('.display_loading,.display_error', container);
+
+	var style = s.settings.displaymode_style;
+
+	if (err && (err.errtype === 'loading')) {
+		uiu.create_el(container, 'div', {
+			'class': 'display_loading',
+		});
+		return;
+	}
+
+	if (err) {
+		uiu.create_el(container, 'div', {
+			'class': 'display_error',
+		}, err.msg);
+		// TODO report these errors as well to home?
+		return;
+	}
+
+	// Also update general state
+	s.event = event;
+
+	// If nothing has changed we can skip painting
+	var cur_event_hash = hash(style, s.settings.displaymode_court_id, event);
+	if (utils.deep_equal(cur_event_hash, _last_painted_hash)) {
+		return;
+	}
+
+	var court_select = uiu.qs('[name="displaymode_court_id"]');
+	if (event.courts && (!_last_painted_hash || !utils.deep_equal(cur_event_hash.courts, _last_painted_hash.courts))) {
+		uiu.empty(court_select);
+		event.courts.forEach(function(c) {
+			var attrs = {
+				value: c.court_id,
+			};
+			if (s.settings.displaymode_court_id == c.court_id) {
+				attrs['selected'] = 'selected';
+			}
+			uiu.create_el(court_select, 'option', attrs, c.description ? c.description : c.court_id);
+		});
+	}
+
+	// Redraw everything
+	autosize_cancels.forEach(function(ac) {
+		ac();
+	});
+	autosize_cancels = [];
+	uiu.empty(container);
+
+	switch (style) {
+	case 'oncourt':
+		render_oncourt(s, container, event);
+		break;
+	case 'top+list':
+	default:
+		render_top(container, event);
+		render_list(container, event);
+	}
 
 	_last_painted_hash = cur_event_hash;
+}
+
+function on_style_change(s) {
+	update(_last_err, s, s.event);
 }
 
 var _cancel_updates = null;
@@ -390,6 +479,7 @@ return {
 	show: show,
 	hide: hide,
 	ui_init: ui_init,
+	on_style_change: on_style_change,
 };
 
 })();

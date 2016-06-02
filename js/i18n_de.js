@@ -365,6 +365,12 @@ var i18n_de = {
 'weekday:5': 'Fr',
 'weekday:6': 'Sa',
 
+'displaymode:style': 'Style:',
+'displaymode:top+list': 'Aktuell/Liste',
+'displaymode:oncourt': 'Feld-Punktzahl',
+'displaymode:court_id': 'Court:',
+'displaymode:court_id:loading': 'lade ...',
+
 'liveaw:lost connection': 'Verbindung wird wiederhergestellt ...',
 };
 

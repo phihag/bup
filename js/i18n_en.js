@@ -364,6 +364,12 @@ var i18n_en = {
 'weekday:5': 'Fri',
 'weekday:6': 'Sat',
 
+'displaymode:style': 'style:',
+'displaymode:top+list': 'current/list',
+'displaymode:oncourt': 'court score',
+'displaymode:court_id': 'court:',
+'displaymode:court_id:loading': 'loading ...',
+
 'liveaw:lost connection': 'Reconnecting ...',
 };
 

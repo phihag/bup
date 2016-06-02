@@ -152,6 +152,25 @@ function send_press(s) {
 	sync(s);
 }
 
+function annotate(s, event) {
+	if (event.courts) { // very old versions are missing this field
+		event.courts.forEach(function(c) {
+			if (c.description) {
+				return;
+			}
+
+			switch (c.court_id) {
+			case '1':
+				c.description = c.court_id + ' / ' + s._('court:left');
+				break;
+			case '2':
+				c.description = c.court_id + ' / ' + s._('court:right');
+				break;
+			}
+		});
+	}
+}
+
 function list_matches(s, cb) {
 	var options = {
 		url: baseurl + 'php/bupabfrage.php',
@@ -170,6 +189,8 @@ function list_matches(s, cb) {
 				msg: 'Spiel-Daten konnten nicht gelesen werden',
 			});
 		}
+
+		annotate(s, event);
 
 		cb(err, event);
 	});

@@ -1,13 +1,16 @@
 bup display mode
-	add per-court display mode
-	add mode: just list
+	style per-court display mode
 	add court outline display mode
+	upon changing mode or court show name and court at top
 	left/right keys to change display type
+	up/down keys to change court
 	test all with incomplete matchups!
 	use state.event upon switching from settings (don't start with loading then)
 	add court info to vdemo/edemo
 	update court info with vdemo/edemo
 	implement courts with liveaw
+	switch to svg display for list
+	hide settings after timeout (10s?)
 
 CourtSpot: support order
 *demo: support order

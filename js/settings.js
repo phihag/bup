@@ -18,6 +18,8 @@ var default_settings = {
 	shuttle_counter: true,
 	language: 'auto',
 	editmode_doubleclick: false,
+	displaymode_style: 'top+list',
+	displaymode_court_id: 1,
 };
 
 function load() {
@@ -121,7 +123,7 @@ function update_court(s) {
 var _settings_checkboxes = ['save_finished_matches', 'go_fullscreen', 'show_pronounciation', 'negative_timers', 'shuttle_counter', 'editmode_doubleclick'];
 var _settings_textfields = ['umpire_name', 'service_judge_name', 'court_id', 'court_description'];
 var _settings_numberfields = ['network_timeout', 'network_update_interval', 'displaymode_update_interval', 'button_block_timeout'];
-var _settings_selects = ['language'];
+var _settings_selects = ['language', 'displaymode_court_id', 'displaymode_style'];
 
 function update(s) {
 	_settings_checkboxes.forEach(function(name) {
@@ -217,8 +219,14 @@ function ui_init(s) {
 		select.on('change', function() {
 			s.settings[name] = select.val();
 			store(s);
-			if (name == 'language') {
+			switch (name) {
+			case 'language':
 				i18n.ui_update_state(s);
+				break;
+			case 'displaymode_style':
+			case 'displaymode_court_id':
+				displaymode.on_style_change(s);
+				break;
 			}
 		});
 	});
@@ -277,6 +285,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
+	var displaymode = require('./displaymode');
 	var fullscreen = require('./fullscreen');
 	var i18n = require('./i18n');
 	var match_storage = require('./match_storage');
