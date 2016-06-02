@@ -222,7 +222,7 @@
 	color: #f00;
 	font-weight: bold;
 	font-size: 3vmin;
-	background: rgab(0, 0, 0, 0.8);
+	background: rgba(0, 0, 0, 0.8);
 	padding: 2vmin 2vmin 1vmin 1vmin;
 	border-top-right-radius: 4vmin;
 }
