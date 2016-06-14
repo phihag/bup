@@ -1,10 +1,6 @@
 bup display mode
-	style per-court display mode
-		bump size
-		add discipline?
-
 	add court outline display mode
-	upon changing mode or court show name and court at top
+	upon changing mode or court show name and court at top for 10s
 	left/right keys to change display type
 	up/down keys to change court
 	test all with incomplete matchups!
@@ -17,6 +13,7 @@ bup display mode
 	show last update in settings
 
 
+shift+A breaks demo mode!?
 CourtSpot: support order
 *demo: support order
 liveaw: support order
@@ -24,6 +21,7 @@ liveaw: support order
 v/edemo11
 v/edemo: set court nr
 court selector in demo mode
+
 mail Ulf
 
 liveaw: HTTP mode
@@ -37,6 +35,7 @@ MVP liveaw
 	implement netstats gathering as well (re-add component)
 	implement authorization (including login via bup)
 
+mail Werner
 mail Markus
 mail Daniel / Peter
 

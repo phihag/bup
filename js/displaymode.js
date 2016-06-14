@@ -369,7 +369,7 @@ function update(err, s, event) {
 		uiu.create_el(container, 'div', {
 			'class': 'display_error',
 		}, err.msg);
-		// TODO report these errors as well to home?
+		report_problem.silent_error('network error in display mode: ' + err.msg);
 		return;
 	}
 
