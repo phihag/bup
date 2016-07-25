@@ -13,6 +13,7 @@ bup display mode
 	show last update in settings
 
 
+add a test that all public functions are in use
 shift+A breaks demo mode!?
 CourtSpot: support order
 *demo: support order

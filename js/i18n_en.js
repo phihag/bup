@@ -101,6 +101,15 @@ var i18n_en = {
 'demo:event_name': 'MX',
 'demo:tournament_name': 'Demo',
 
+'servedemo:team1': 'Team A',
+'servedemo:player1.1': 'Alice',
+'servedemo:player1.2': 'Alex',
+'servedemo:team2': 'Team B',
+'servedemo:player2.1': 'Bob',
+'servedemo:player2.2': 'Bella',
+'servedemo:match_name': 'serve demo',
+'servedemo:event_name': 'serve demo',
+'servedemo:tournament_name': 'Demo',
 
 'loveall_play': 'Bitte spielen.',
 'loveall_play.0': '{score}; play',

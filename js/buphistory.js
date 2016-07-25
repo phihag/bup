@@ -174,6 +174,12 @@ function load_by_hash() {
 		load_ui_by_hash_qs(qs);
 		is_loading = false;
 		record(state);
+	} else if (qs.servedemo !== undefined) {
+		is_loading = true;
+		control.servedemo_match_start();
+		load_ui_by_hash_qs(qs);
+		is_loading = false;
+		record(state);
 	} else if (qs.empty_match !== undefined) {
 		is_loading = true;
 		control.empty_match_start();

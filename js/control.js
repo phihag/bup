@@ -34,6 +34,49 @@ function demo_match_start(setup) {
 	start_match(state, setup);
 }
 
+function servedemo_match_start() {
+	var setup = {
+		counting: '3x21',
+		team_competition: true,
+		is_doubles: true,
+		teams: [{
+			name: state._('servedemo:team1'),
+			players: [{
+				name: state._('servedemo:player1.1'),
+			}, {
+				name: state._('servedemo:player1.2'),
+			}],
+		}, {
+			name: state._('servedemo:team2'),
+			players: [{
+				name: state._('servedemo:player2.1'),
+			}, {
+				name: state._('servedemo:player2.2'),
+			}],
+		}],
+		match_name: state._('servedemo:match_name'),
+		event_name: state._('servedemo:event_name'),
+		tournament_name: state._('servedemo:tournament_name'),
+	};
+	var presses = [{
+		type: 'pick_side',
+		team1_left: false,
+	}, {
+		type: 'pick_server',
+		team_id: 0,
+		player_id: 0,
+	}, {
+		type: 'pick_receiver',
+		team_id: 1,
+		player_id: 0,
+	}, {
+		type: 'love-all',
+	}];
+
+	settings.hide(true);
+	start_match(state, setup, presses);
+}
+
 function empty_match_start() {
 	var setup = {
 		counting: '3x21',
@@ -367,6 +410,7 @@ function hide_exception_dialog() {
 return {
 	on_press: on_press,
 	on_presses_change: on_presses_change,
+	servedemo_match_start: servedemo_match_start,
 	demo_match_start: demo_match_start,
 	empty_match_start: empty_match_start,
 	start_match: start_match,
