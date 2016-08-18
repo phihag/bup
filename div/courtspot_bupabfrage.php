@@ -10,9 +10,9 @@ if (!$db) {
 mysqli_set_charset($db, 'utf8');
 
 
-function json_error_handler($level, $errstr) {
+function json_error_handler($level, $errstr, $errfile, $errline) {
 	if ((error_reporting() & $level) !== 0) {
-		jsonErr('php-Fehler: ' . $errstr);
+		jsonErr('php-Fehler: ' . $errstr. ' (Zeile ' . $errline . ')');
 	}
 }
 
