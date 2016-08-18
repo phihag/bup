@@ -80,14 +80,9 @@ case 3:
 }
 
 
-$is_8spiele = (strpos($_SERVER['PHP_SELF'], 'CourtSpot_8_Spiele') !== false);
-$table = $is_8spiele ? '8Spiele' : 'Spiele';
-// Siehe DBV BLO-DB §3.8
-$preferred_order = (
-	$is_8spiele ?
-	['1.HD', 'DD', '2.HD', '1.HE', 'DE', 'GD', '2.HE', '3.HE'] :
-	['1.HD', 'DD', '1.HE', 'DE', 'GD', '2.HE']
-);
+// Siehe DBV BLO-DB §8.8
+$preferred_order = ['1.HD', 'DD', '2.HD', '1.HE', 'DE', 'GD', '2.HE'];
+$table = 'Spiele';
 
 $result = mysqli_query($db, "
 SELECT sv_first.first_timestamp AS first_timestamp, $table.*, svf.*, UNIX_TIMESTAMP(svf.ts) AS last_timestamp
@@ -150,7 +145,7 @@ while ($row = $result->fetch_assoc()) {
 		'team_competition' => true,
 		'is_doubles' => $is_doubles,
 		'incomplete' => $incomplete,
-		'counting' => '3x21',
+		'counting' => '5x11_15',
 		'courtspot_match_id' => $row['Art'],
 		'match_id' => $match_id,
 	];
