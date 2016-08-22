@@ -2,21 +2,27 @@ var eventsheet = (function() {
 'use strict';
 
 var SHEETS_BY_LEAGUE = {
-	'1BL': ['1BL', 'team-1BL'],
-	'2BLN': ['2BLN', 'team-2BL'],
-	'2BLS': ['2BLS', 'team-2BL'],
+	'1BL-2015': ['1BL-2015', 'team-1BL-2015'],
+	'2BLN-2015': ['2BLN-2015', 'team-2BL-2015'],
+	'2BLS-2015': ['2BLS-2015', 'team-2BL-2015'],
+	'1BL-2016': ['1BL-2016'],
+	'2BLN-2016': ['2BLN-2016'],
+	'2BLS-2016': ['2BLS-2016'],
 	'RLW': ['RLW'],
 	'RLN': ['RLN'],
 };
 
 var URLS = {
-	'1BL': 'div/Spielberichtsbogen_1BL.pdf',
-	'2BLN': 'div/Spielberichtsbogen_2BL.pdf',
-	'2BLS': 'div/Spielberichtsbogen_2BL.pdf',
+	'1BL-2015': 'div/Spielberichtsbogen_1BL_2015.pdf',
+	'2BLN-2015': 'div/Spielberichtsbogen_2BL_2015.pdf',
+	'2BLS-2015': 'div/Spielberichtsbogen_2BL_2015.pdf',
+	'1BL-2015': 'div/Spielberichtsbogen_1BL_2015.pdf',
+	'2BLN-2015': 'div/Spielberichtsbogen_2BL_2015.pdf',
+	'2BLS-2015': 'div/Spielberichtsbogen_2BL_2015.pdf',
 	'RLW': 'div/Spielbericht_RLW.svg',
 	'RLN': 'div/Spielbericht_RLN.svg',
-	'team-1BL': 'div/Mannschaftsaufstellung_1BL.pdf',
-	'team-2BL': 'div/Mannschaftsaufstellung_2BL.pdf',
+	'team-1BL-2015': 'div/Mannschaftsaufstellung_1BL_2015.pdf',
+	'team-2BL-2015': 'div/Mannschaftsaufstellung_2BL_2015.pdf',
 };
 var files = {};
 
@@ -162,10 +168,13 @@ function order_matches(ev, match_order) {
 function render_bundesliga(ev, es_key, ui8r, extra_data) {
 	var i; // "let" is not available even in modern browsers
 	var match_order;
-	if (es_key == '1BL') {
+	if (es_key == '1BL-2015') {
 		match_order = ['1.HD', 'DD', '1.HE', 'DE', 'GD', '2.HE'];
-	} else {
+	} else if (es_key === '2BL-2015') {
 		match_order = ['1.HD', 'DD', '2.HD', '1.HE', 'DE', 'GD', '2.HE', '3.HE'];
+	} else {
+		report_problem.silent_error('Unsupported eventsheet ' + es_key);
+		return;
 	}
 
 	eventutils.set_metadata(ev);
@@ -609,12 +618,12 @@ function render_svg(ev, es_key, ui8r, extra_data) {
 
 function es_render(ev, es_key, ui8r, extra_data) {
 	switch(es_key) {
-	case '1BL':
-	case '2BLN':
-	case '2BLS':
+	case '1BL-2015':
+	case '2BLN-2015':
+	case '2BLS-2015':
 		return render_bundesliga(ev, es_key, ui8r, extra_data);
-	case 'team-1BL':
-	case 'team-2BL':
+	case 'team-1BL-2015':
+	case 'team-2BL-2015':
 		return render_team_bl(ev, es_key, ui8r);
 	case 'RLW':
 	case 'RLN':
@@ -678,6 +687,10 @@ function render_links(s) {
 		return;
 	}
 	var eventsheets = SHEETS_BY_LEAGUE[league_key];
+	if (!eventsheets) { // Unsupported league
+		report_problem.silent_error('Unsupported league ' + league_key);
+		eventsheets = [];
+	}
 	eventsheets.forEach(function(es_key) {
 		var i18n_key = 'eventsheet:label:' + es_key;
 		var link = uiu.create_el(container, 'a', {

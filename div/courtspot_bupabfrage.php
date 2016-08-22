@@ -67,26 +67,25 @@ $eventsheet_key = null;
 switch ($verwaltung['Liga']) {
 case 1:
 	$tournament_name = '1. Bundesliga';
-	$eventsheet_key = '1BL';
+	$eventsheet_key = '1BL-2016';
 	break;
 case 2:
 	$tournament_name = '2. Bundesliga Nord';
-	$eventsheet_key = '2BLN';
+	$eventsheet_key = '2BLN-2016';
 	break;
 case 3:
 	$tournament_name = '2. Bundesliga Süd';
-	$eventsheet_key = '2BLS';
+	$eventsheet_key = '2BLS-2016';
 	break;
 }
 
 
 // Siehe DBV BLO-DB §8.8
 $preferred_order = ['1.HD', 'DD', '2.HD', '1.HE', 'DE', 'GD', '2.HE'];
-$table = 'Spiele';
 
-$result = mysqli_query($db, "
-SELECT sv_first.first_timestamp AS first_timestamp, $table.*, svf.*, UNIX_TIMESTAMP(svf.ts) AS last_timestamp
-FROM $table
+$result = mysqli_query($db, '
+SELECT sv_first.first_timestamp AS first_timestamp, Spiele.*, svf.*, UNIX_TIMESTAMP(svf.ts) AS last_timestamp
+FROM Spiele
 
 INNER JOIN (
 	SELECT sv.*, svmax.max_Spielstep AS max_Spielstep
@@ -98,15 +97,15 @@ INNER JOIN (
 	INNER JOIN Spielverlauf sv
 		ON sv.Art = svmax.Art AND sv.Spielstep = svmax.max_Spielstep
 ) svf
-ON $table.Spiel = svf.Art
+ON Spiele.Spiel = svf.Art
 
 INNER JOIN (
 	SELECT sv2.Art AS Art, UNIX_TIMESTAMP(MIN(sv2.ts)) AS first_timestamp
 	FROM Spielverlauf sv2
 	GROUP BY sv2.Art
 ) sv_first
-ON $table.Spiel = sv_first.Art
-;");
+ON Spiele.Spiel = sv_first.Art
+;');
 if (! $result) {
 	jsonErr(mysqli_error($db));
 }
