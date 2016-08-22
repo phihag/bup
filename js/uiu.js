@@ -121,14 +121,15 @@ function text_qs(selector, str) {
 }
 
 function create_el(parent, tagName, attrs, text) {
-	var el = document.createElement(tagName);
+	var doc = parent ? parent.ownerDocument : document;
+	var el = doc.createElement(tagName);
 	if (attrs) {
 		for (var k in attrs) {
 			el.setAttribute(k, attrs[k]);
 		}
 	}
 	if ((text !== undefined) && (text !== null)) {
-		el.appendChild(document.createTextNode(text));
+		el.appendChild(doc.createTextNode(text));
 	}
 	if (parent) {
 		parent.appendChild(el);

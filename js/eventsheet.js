@@ -16,9 +16,9 @@ var URLS = {
 	'1BL-2015': 'div/Spielberichtsbogen_1BL_2015.pdf',
 	'2BLN-2015': 'div/Spielberichtsbogen_2BL_2015.pdf',
 	'2BLS-2015': 'div/Spielberichtsbogen_2BL_2015.pdf',
-	'1BL-2015': 'div/Spielberichtsbogen_1BL_2015.pdf',
-	'2BLN-2015': 'div/Spielberichtsbogen_2BL_2015.pdf',
-	'2BLS-2015': 'div/Spielberichtsbogen_2BL_2015.pdf',
+	'1BL-2016': 'div/Spielbericht-Buli-2016-17.xlsm',
+	'2BLN-2016': 'div/Spielbericht-Buli-2016-17.xlsm',
+	'2BLS-2016': 'div/Spielbericht-Buli-2016-17.xlsm',
 	'RLW': 'div/Spielbericht_RLW.svg',
 	'RLN': 'div/Spielbericht_RLN.svg',
 	'team-1BL-2015': 'div/Mannschaftsaufstellung_1BL_2015.pdf',
@@ -616,6 +616,29 @@ function render_svg(ev, es_key, ui8r, extra_data) {
 	container.remove();
 }
 
+function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
+	JSZip.loadAsync(ui8r).then(function(zipfile) {
+		var sheet_fn = 'xl/worksheets/sheet2.xml';
+		zipfile.file(sheet_fn).async('string').then(function(xml_str) {
+			var sheet = (new DOMParser()).parseFromString(xml_str, 'application/xml');
+			var team_name_cell = sheet.querySelector('c[r="B4"]');
+			team_name_cell.setAttribute('t', 'inlineStr');
+			var is_node = uiu.create_el(team_name_cell, 'is');
+			var t_node = uiu.create_el(is_node, 't', {}, ev.home_team_name);
+			var new_xml = (new XMLSerializer()).serializeToString(sheet);
+
+			zipfile.file(sheet_fn, new_xml);
+
+			zipfile.generateAsync({
+				type: 'blob',
+				mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+			}).then(function(content) {
+				saveAs(content, 'Spielbericht ' + ev.home_team_name + '-' + ev.away_team_name + '.xlsm');
+			});
+		});
+	});
+}
+
 function es_render(ev, es_key, ui8r, extra_data) {
 	switch(es_key) {
 	case '1BL-2015':
@@ -628,6 +651,10 @@ function es_render(ev, es_key, ui8r, extra_data) {
 	case 'RLW':
 	case 'RLN':
 		return render_svg(ev, es_key, ui8r, extra_data);
+	case '1BL-2016':
+	case '2BLN-2016':
+	case '2BLS-2016':
+		return render_bundesliga2016(ev, es_key, ui8r, extra_data);
 	default:
 	throw new Error('Unsupported eventsheet key ' + es_key);
 	}
@@ -829,9 +856,12 @@ function show_dialog(es_key) {
 	var download_link_container = uiu.qs('.eventsheet_download_link_container');
 	var preview = uiu.qs('.eventsheet_preview');
 	switch (es_key) {
-	case '1BL':
-	case '2BLN':
-	case '2BLS':
+	case '1BL-2015':
+	case '2BLN-2015':
+	case '2BLS-2015':
+	case '1BL-2016':
+	case '2BLN-2016':
+	case '2BLS-2016':
 	case 'RLW':
 	case 'RLN':
 		uiu.visible_qs('.eventsheet_report', true);

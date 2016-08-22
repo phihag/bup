@@ -275,9 +275,9 @@ var i18n_de = {
 'eventsheet:Event Sheet': 'Spielbericht',
 'eventsheet:download empty': 'Leeres Formular',
 
-'eventsheet:label:1BL-2016': 'Spielbericht',
-'eventsheet:label:2BLN-2016': 'Spielbericht',
-'eventsheet:label:2BLS-2016': 'Spielbericht',
+'eventsheet:label:1BL-2016': 'Spielbericht (experimentell)',
+'eventsheet:label:2BLN-2016': 'Spielbericht (experimentell)',
+'eventsheet:label:2BLS-2016': 'Spielbericht (experimentell)',
 'eventsheet:label:1BL-2015': 'Spielbericht (2015)',
 'eventsheet:label:2BLN-2015': 'Spielbericht (2015)',
 'eventsheet:label:2BLS-2015': 'Spielbericht (2015)',
