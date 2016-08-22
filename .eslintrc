@@ -33,6 +33,7 @@
         "pdfform": true,
         "saveAs": true,
         "FastClick": true,
+        "JSZip": true,
 
         " (global variables) ": true,
         "state": true,

@@ -616,7 +616,7 @@ function render_svg(ev, es_key, ui8r, extra_data) {
 	container.remove();
 }
 
-function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
+function render_bundesliga2016(ev, es_key, ui8r) {
 	JSZip.loadAsync(ui8r).then(function(zipfile) {
 		var sheet_fn = 'xl/worksheets/sheet2.xml';
 		zipfile.file(sheet_fn).async('string').then(function(xml_str) {
@@ -624,7 +624,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 			var team_name_cell = sheet.querySelector('c[r="B4"]');
 			team_name_cell.setAttribute('t', 'inlineStr');
 			var is_node = uiu.create_el(team_name_cell, 'is');
-			var t_node = uiu.create_el(is_node, 't', {}, ev.home_team_name);
+			uiu.create_el(is_node, 't', {}, ev.home_team_name);
 			var new_xml = (new XMLSerializer()).serializeToString(sheet);
 
 			zipfile.file(sheet_fn, new_xml);
