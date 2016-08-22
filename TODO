@@ -3,6 +3,8 @@ Bundesliga xlsx
 
 update to bundesliga-2016
 Anforderungsliste BuLi!
+load jszip async
+	add to appcache
 
 bup display mode
 	add court outline display mode
@@ -19,7 +21,8 @@ bup display mode
 	show last update in settings
 	support display mode without network
 
-add a test that all public functions are in use
+test offline
+
 shift+A breaks demo mode!?
 CourtSpot: support order
 *demo: support order
@@ -375,5 +378,6 @@ CourtSpot: Spielreihenfolge festlegen
 remove s.match.max_games in favor of a calc function
 remove !important
 add CSS lint
+add a test that all public functions are in use
 -> Demo Jörg H, Manuel, Susanne, Werner Durow
 

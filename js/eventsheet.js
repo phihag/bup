@@ -13,16 +13,16 @@ var SHEETS_BY_LEAGUE = {
 };
 
 var URLS = {
-	'1BL-2015': 'div/Spielberichtsbogen_1BL_2015.pdf',
-	'2BLN-2015': 'div/Spielberichtsbogen_2BL_2015.pdf',
-	'2BLS-2015': 'div/Spielberichtsbogen_2BL_2015.pdf',
+	'1BL-2015': 'div/Spielberichtsbogen_1BL-2015.pdf',
+	'2BLN-2015': 'div/Spielberichtsbogen_2BL-2015.pdf',
+	'2BLS-2015': 'div/Spielberichtsbogen_2BL-2015.pdf',
 	'1BL-2016': 'div/Spielbericht-Buli-2016-17.xlsm',
 	'2BLN-2016': 'div/Spielbericht-Buli-2016-17.xlsm',
 	'2BLS-2016': 'div/Spielbericht-Buli-2016-17.xlsm',
 	'RLW': 'div/Spielbericht_RLW.svg',
 	'RLN': 'div/Spielbericht_RLN.svg',
-	'team-1BL-2015': 'div/Mannschaftsaufstellung_1BL_2015.pdf',
-	'team-2BL-2015': 'div/Mannschaftsaufstellung_2BL_2015.pdf',
+	'team-1BL-2015': 'div/Mannschaftsaufstellung_1BL-2015.pdf',
+	'team-2BL-2015': 'div/Mannschaftsaufstellung_2BL-2015.pdf',
 };
 var files = {};
 

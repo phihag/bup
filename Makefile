@@ -56,10 +56,11 @@ dist: cleandist ## Create distribution files
 		div/courtspot_screenshot_links.png \
 		div/courtspot_screenshot_rechts.png \
 		div/LICENSE.commercial.de \
-		div/Mannschaftsaufstellung_1BL.pdf \
-		div/Mannschaftsaufstellung_2BL.pdf \
-		div/Spielberichtsbogen_1BL.pdf \
-		div/Spielberichtsbogen_2BL.pdf \
+		div/Mannschaftsaufstellung_1BL-2015.pdf \
+		div/Mannschaftsaufstellung_2BL-2015.pdf \
+		div/Spielberichtsbogen_1BL-2015.pdf \
+		div/Spielberichtsbogen_2BL-2015.pdf \
+		div/Spielbericht-Buli-2016-17.xlsm \
 		div/Spielbericht_RLW.svg \
 		div/Spielbericht_RLN.svg \
 		div/scoresheet_international.svg \
