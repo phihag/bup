@@ -1,8 +1,8 @@
 Bundesliga xlsx
 
-
 update to bundesliga-2016
 Absegnungsbogen (Anforderungsliste BuLi)
+
 bup display mode
 	add court outline display mode
 	upon changing mode or court show name and court at top for 10s
@@ -16,9 +16,7 @@ bup display mode
 	switch to svg display for list
 	hide settings after timeout (10s?)
 	show last update in settings
-
-
-support display mode without network
+	support display mode without network
 
 add a test that all public functions are in use
 shift+A breaks demo mode!?

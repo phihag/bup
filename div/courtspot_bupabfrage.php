@@ -114,7 +114,7 @@ $matches = [];
 $today = @date('Y-m-d');
 while ($row = $result->fetch_assoc()) {
 	$network_score = [];
-	for ($i = 1;$i <= 3;$i++) {
+	for ($i = 1;array_key_exists('HeimSatz' . $i, $row);$i++) {
 		$score_home = intval($row['HeimSatz' . $i]);
 		$score_away = intval($row['GastSatz' . $i]);
 		if (($score_home < 0) || ($score_away < 0)) {
