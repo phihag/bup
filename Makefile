@@ -89,6 +89,9 @@ lint: eslint ## Verify source code quality
 eslint:
 	@eslint js/ div/*.js test/ cachesw.js
 
+stylelint:
+	@./node_modules/.bin/stylelint css/*.css
+
 coverage:
 	istanbul cover _mocha -- -R spec
 
