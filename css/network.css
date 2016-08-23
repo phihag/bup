@@ -94,7 +94,7 @@ button > .loading-icon {
 	font-style: italic;
 }
 
-.setup_network_heading:after {
+.setup_network_heading::after {
 	/* Set line-height to height, so that we can vertically center with vertical-align: middle; */
 	content: '';
 	display: inline-block;

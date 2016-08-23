@@ -4,11 +4,9 @@
       "indentation": "tab",
       "max-empty-lines": 2,
       "declaration-empty-line-before": null,
-
+      "rule-nested-empty-line-before": null,
       "rule-non-nested-empty-line-before": null,
       "at-rule-empty-line-before": null,
-      "rule-nested-empty-line-before": null,
-      "selector-pseudo-element-colon-notation": "single",
       "shorthand-property-no-redundant-values": null
   }
 }

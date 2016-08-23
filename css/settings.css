@@ -62,7 +62,7 @@
 	margin-left: 1.5em;
 }
 
-.settings_container label:before {
+.settings_container label::before {
 	/* Set line-height to height, so that we can vertically center with vertical-align: middle; */
 	content: '';
 	display: inline-block;
@@ -94,7 +94,7 @@
 .setup_manual_teams {
 	margin-bottom: 0.5em;
 }
-.setup_manual_teams:after {
+.setup_manual_teams::after {
 	/* Set line-height to height, so that we can vertically center with vertical-align: middle; */
 	content: '';
 	display: inline-block;
@@ -204,7 +204,7 @@ a.settings_mode_active:visited {
 	.setup_manual_details input[type="text"] {
 		min-width: unset;
 	}
-	.setup_manual_teams:after {
+	.setup_manual_teams::after {
 		display: none;
 	}
 	.setup_manual_discipline {

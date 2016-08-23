@@ -19,7 +19,7 @@
 	margin-top: 1vmin;
 	text-align: center;
 }
-.display_courts_container:after {
+.display_courts_container::after {
 	clear: both;
 	content: '';
 	display: block;
