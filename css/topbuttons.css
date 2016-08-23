@@ -1,4 +1,5 @@
-.topleft_buttons, .topright_buttons {
+.topleft_buttons,
+.topright_buttons {
 	z-index: 1000;
 	margin-top: 1vmin;
 	margin-bottom: 4vmin;
@@ -12,12 +13,15 @@
 	margin-right: 1vmin;
 }
 @media all and (max-width: 480px) {
-	.topleft_buttons, .topright_buttons {
+	.topleft_buttons,
+	.topright_buttons {
 		margin: 0;
 	}
 }
 
-.topleft_buttons>*,.topright_buttons>*, #button_redo {
+.topleft_buttons > *,
+.topright_buttons > *,
+#button_redo {
 	width: 85px;
 	height: 85px;
 	min-width: 16vmin;
@@ -32,7 +36,8 @@
 	margin-left: 40px;
 	margin-left: 7vmin;
 }
-.topleft_buttons>*:first-child, .topright_buttons>*:first-child {
+.topleft_buttons > *:first-child,
+.topright_buttons > *:first-child {
 	margin-left: 0;
 }
 #button_redo {
@@ -44,20 +49,24 @@
 	z-index: 10;
 }
 @media all and (max-width: 480px) {
-	.topleft_buttons>*,.topright_buttons>*,#button_redo {
+	.topleft_buttons > *,
+	.topright_buttons > *,
+	#button_redo {
 		margin: 0;
 	}
-	.topleft_buttons>*:not(:last-child) {
+	.topleft_buttons > *:not(:last-child) {
 		margin-right: 10px;
 		margin-right: 3vmin;
 	}
-	.topright_buttons>*:not(:first-child) {
+	.topright_buttons > *:not(:first-child) {
 		margin-left: 10px;
 		margin-left: 3vmin;
 	}
 }
 @media screen and (min-aspect-ratio: 15/10) {
-	.topleft_buttons>*, .topright_buttons>*, #button_redo {
+	.topleft_buttons > *,
+	.topright_buttons > *,
+	#button_redo {
 		min-width: 18vmin;
 		min-height: 18vmin;
 	}
@@ -69,24 +78,25 @@
 #shuttle_counter_value {
 	font-size: 6vmin;
 	position: absolute;
-	top: 50%; transform: translate(0, -50%);
+	top: 50%;
+	transform: translate(0, -50%);
 	right: 47%;
 	text-align: right;
 }
 
-#button_settings>span {
+#button_settings > span {
 	background-image: url(../icons/settings.svg);
 }
-#button_exception>span {
+#button_exception > span {
 	background-image: url(../icons/exception.svg);
 }
-#button_undo>span {
+#button_undo > span {
 	background-image: url(../icons/undo.svg);
 }
-#button_redo>span {
+#button_redo > span {
 	background-image: url(../icons/redo.svg);
 }
-#button_shuttle>span.button_icon {
+#button_shuttle > span.button_icon {
 	background-image: url(../icons/shuttle-button.svg);
 }
 

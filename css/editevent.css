@@ -19,23 +19,22 @@
 	border-bottom-right-radius: 0.4em;
 }
 
-
-.editevent_table>tbody>tr>th {
+.editevent_table > tbody > tr > th {
 	text-align: left;
 }
 
-.editevent_table>tbody>tr>td {
+.editevent_table > tbody > tr > td {
 	text-align: left;
 	padding: 0.8em;
 }
 
-.editevent_table>tbody select {
+.editevent_table > tbody select {
 	display: block;
 	min-width: 12em;
 	margin: 0;
 	font-size: 85%;
 }
-.editevent_table>tbody select + select {
+.editevent_table > tbody select + select {
 	margin-top: 0.2em;
 }
 
@@ -46,11 +45,12 @@ td.editevent_backup_players {
 	vertical-align: top;
 }
 
-.editevent_option_nn, .editevent_option_manual {
+.editevent_option_nn,
+.editevent_option_manual {
 	color: #666;
 }
 
-@media screen and (max-width:500px) {
+@media screen and (max-width: 500px) {
 	.editevent_layout {
 		font-size: 4vmin;
 	}

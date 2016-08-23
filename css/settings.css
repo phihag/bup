@@ -1,12 +1,14 @@
 #settings_wrapper {
 	position: absolute;
-	left: 0; right: 0;
+	left: 0;
+	right: 0;
 	top: 0;
 	z-index: 10000;
 }
 .settings_layout {
 	position: absolute;
-	left: 0; right: 0;
+	left: 0;
+	right: 0;
 	top: 0;
 	min-height: 100vh;
 	overflow: auto;
@@ -28,15 +30,16 @@
 .settings_container {
 	position: relative;
 	text-align: left;
-	background: #ffffff;
+	background: #fff;
 	border-radius: 1em;
 	padding: 0 2em 1em 2em;
 	overflow: hidden;
 }
-.settings_layout_displaymode>.settings_container {
+.settings_layout_displaymode > .settings_container {
 	background: rgba(255, 255, 255, 0.98);
 }
-.settings_container input, .settings_container button {
+.settings_container input,
+.settings_container button {
 	font-size: inherit;
 }
 .settings_container input[type="checkbox"] {
@@ -55,7 +58,7 @@
 .setup_manual_discipline input {
 	margin-left: 0;
 }
-.setup_manual_discipline>label+label {
+.setup_manual_discipline > label + label {
 	margin-left: 1.5em;
 }
 
@@ -65,17 +68,17 @@
 	display: inline-block;
 	height: 100%;
 }
-.settings_container label>* {
+.settings_container label > * {
 	vertical-align: middle;
 }
 
 .ingame_options {
 	text-align: center;
 }
-.ingame_options>h2 {
+.ingame_options > h2 {
 	text-align: left;
 }
-.ingame_options>button {
+.ingame_options > button {
 	display: inline-block;
 	font-size: 150%;
 	padding: 0.1em;
@@ -83,9 +86,9 @@
 	margin: 0.3em 0.2em;
 	user-select: none;
 	-webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 }
 
 .setup_manual_teams {
@@ -97,17 +100,17 @@
 	display: inline-block;
 	height: 100%;
 }
-.setup_manual_teams>* {
+.setup_manual_teams > * {
 	vertical-align: middle;
 	display: inline-block;
 }
 .setup_manual_vs {
 	text-align: center;
 }
-.setup_manual_team>div+div {
+.setup_manual_team > div + div {
 	margin-top: 0.5em;
 }
-.setup_manual_team>div>input {
+.setup_manual_team > div > input {
 	display: inline-block;
 	margin: 0.25em 0 0.25em 0;
 }
@@ -115,7 +118,8 @@
 .setup_manual_details input[type="text"] {
 	min-width: 17em;
 }
-.setup_manual_details th, .setup_manual_details th {
+.setup_manual_details th,
+.setup_manual_details th {
 	padding: 0.5em 0;
 }
 .settings_container button.setup_manual_start {
@@ -130,7 +134,6 @@
 	padding-right: 0.2em;
 }
 
-
 .setup_loadmatch_list {
 	margin: 0;
 }
@@ -141,14 +144,15 @@
 	color: blue;
 	padding: 0.1em 0;
 }
-.button_delete>span {
+.button_delete > span {
 	background-image: url(../icons/delete.svg);
 }
 
-.settings>label {
-	display: block;	
+.settings > label {
+	display: block;
 }
-.settings>div, .settings>label {
+.settings > div,
+.settings > label {
 	padding: 0.3em 0 0.3em 0;
 }
 input[name="court_id"] {
@@ -158,7 +162,8 @@ input[name="court_id"] {
 	min-width: 8em;
 }
 
-a.settings_mode_active:link, a.settings_mode_active:visited {
+a.settings_mode_active:link,
+a.settings_mode_active:visited {
 	color: #000;
 	font-weight: bold;
 	text-decoration: none;
@@ -181,18 +186,18 @@ a.settings_mode_active:link, a.settings_mode_active:visited {
 }
 
 /* Smartphones */
-@media screen and (max-width:480px) {
+@media screen and (max-width: 480px) {
 	.settings_container {
 		border-radius: 0;
 		padding-left: 1em;
 		padding-right: 1em;
 	}
-	.setup_manual_teams>* {
+	.setup_manual_teams > * {
 		display: block;
 		width: 100%;
 		text-align: center;
 	}
-	.setup_manual_team>div>input {
+	.setup_manual_team > div > input {
 		width: 90%;
 	}
 
@@ -205,7 +210,7 @@ a.settings_mode_active:link, a.settings_mode_active:visited {
 	.setup_manual_discipline {
 		text-align: center;
 	}
-	.setup_manual_discipline>label+label {
+	.setup_manual_discipline > label + label {
 		margin-left: 3em;
 	}
 	.setup_manual_start_container {
@@ -213,8 +218,8 @@ a.settings_mode_active:link, a.settings_mode_active:visited {
 	}
 }
 
-@media screen and (max-width:480px), screen and (max-height:480px) {
-	.ingame_options>h2 {
+@media screen and (max-width: 480px), screen and (max-height: 480px) {
+	.ingame_options > h2 {
 		display: none;
 	}
 }

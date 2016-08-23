@@ -7,7 +7,8 @@
 
 	width: 132vh;
 	height: 60vh;
-	max-width: 100vw; max-width: calc(100vw - 2px); /* border */
+	max-width: 100vw;
+	max-width: calc(100vw - 2px); /* border */
 	max-height: 45.45vw;
 	margin: 0 auto;
 
@@ -20,31 +21,41 @@
 	border: 1px solid #dadada;
 }
 
-.court_left_even, .court_left_odd, .court_right_even, .court_right_odd, .court_right_team, .court_left_team, .court_match_name, .court_court_str {
+.court_left_even,
+.court_left_odd,
+.court_right_even,
+.court_right_odd,
+.court_right_team,
+.court_left_team,
+.court_match_name,
+.court_court_str {
 	position: absolute;
 	text-align: center;
 	font-size: inherit;
 }
-.court_left_even>span,
-.court_left_odd>span,
-.court_right_even>span,
-.court_right_odd>span,
-.court_right_team>span,
-.court_left_team>span {
+.court_left_even > span,
+.court_left_odd > span,
+.court_right_even > span,
+.court_right_odd > span,
+.court_right_team > span,
+.court_left_team > span {
 	background-color: rgba(194, 211, 194, 0.4);
 }
-.court_court_str>span, .court_match_name>span {
+.court_court_str > span,
+.court_match_name > span {
 	background-color: rgba(194, 211, 194, 0.8);
 }
 
-.court_right_team, .court_left_team  {
-	color: #555555;
+.court_right_team,
+.court_left_team {
+	color: #555;
 	font-size: 5vmin;
-	top: 50%; transform: translate(0, -50%);
+	top: 50%;
+	transform: translate(0, -50%);
 }
 
 .court_court_str {
-	color: #555555;
+	color: #555;
 	font-size: 5vmin;
 	top: 1%;
 	left: 50%;
@@ -52,7 +63,7 @@
 	transform: translate(-50%, 0);
 }
 .court_match_name {
-	color: #555555;
+	color: #555;
 	font-size: 5vmin;
 	bottom: 1%;
 	left: 50%;
@@ -88,19 +99,23 @@
 	top: 65.5%;
 }
 
-
 .court_arrow {
 	position: absolute;
-	left: 50%; top: 50%;
-	margin-left: -7.5vmin; margin-top: -7.5vmin;
-	width: 15vmin; height: 15vmin;
+	left: 50%;
+	top: 50%;
+	margin-left: -7.5vmin;
+	margin-top: -7.5vmin;
+	width: 15vmin;
+	height: 15vmin;
 	background-image: url(../icons/court_arrow.svg);
 	background-size: 100%;
 	background-repeat: no-repeat;
 	z-index: 50;
 }
 
-.court_yellow-card,.court_red-card,.court_disqualified {
+.court_yellow-card,
+.court_red-card,
+.court_disqualified {
 	display: inline-block;
 	vertical-align: middle;
 	width: 0.7em;

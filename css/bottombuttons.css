@@ -1,19 +1,21 @@
 #pronounciation {
 	padding-top: 0;
 }
-#pronounciation>span, .pronounciation {
+#pronounciation > span,
+.pronounciation {
 	display: block;
 	color: #444;
 	white-space: pre-wrap;
 }
-#pronounciation>span {
+#pronounciation > span {
 	padding: 2vmin 0 2vmin 0;
 }
-.pick_dialog .pronounciation_nonempty+button {
+.pick_dialog .pronounciation_nonempty + button {
 	margin-top: 0.1em;
 }
 
-#left_score, #right_score {
+#left_score,
+#right_score {
 	position: absolute;
 	font-size: 80px; /* legacy (for now) */
 	font-size: 15vmin;
@@ -30,15 +32,19 @@
 	right: 1vmin;
 }
 @media screen and (min-aspect-ratio: 18/10) {
-	#left_score, #right_score {
+	#left_score,
+	#right_score {
 		font-size: 22vmin;
 	}
 }
 
-.pick_dialog, .exception_dialog, #pronounciation {
+.pick_dialog,
+.exception_dialog,
+#pronounciation {
 	position: absolute;
 	bottom: 0;
-	left: 0; right: 0;
+	left: 0;
+	right: 0;
 	text-align: center;
 	width: 40%;
 	min-width: 80vmin;
@@ -51,7 +57,8 @@
 	border-top-right-radius: 1em;
 	z-index: 100;
 }
-.pick_dialog, .exception_dialog {
+.pick_dialog,
+.exception_dialog {
 	z-index: 300;
 }
 #pronounciation {
@@ -67,12 +74,13 @@
 	padding: 0.5em 0;
 	white-space: pre-wrap;
 }
-.pick_dialog button+button {
+.pick_dialog button + button {
 	margin-top: 1.5em;
 }
 
 @media screen and (max-aspect-ratio: 3/4) {
-	#left_score, #right_score {
+	#left_score,
+	#right_score {
 		font-size: 20vmin;
 		padding: 1vmin;
 		bottom: 0;

@@ -1,11 +1,12 @@
-.order_config_container, .order_result {
+.order_config_container,
+.order_result {
 	text-align: left;
 }
 
 div.order_container {
 	padding-top: 0;
 }
-.order_container>h2 {
+.order_container > h2 {
 	margin: 0;
 	padding: 0;
 	text-align: center;
@@ -17,7 +18,8 @@ div.order_container {
 .order_clear {
 	clear: both;
 }
-.order_num, .order_match {
+.order_num,
+.order_match {
 	height: 3em;
 }
 .order_ignore_match {
@@ -40,7 +42,6 @@ div.order_container {
 	width: 2em;
 	height: 2em;
 	color: #aaa;
-	vertical-align: middle;
 	line-height: 2em;
 }
 .order_num_invisible {
@@ -58,7 +59,8 @@ div.order_container {
 	font-style: italic;
 	text-align: center;
 	position: absolute;
-	left: 0; right: 0;
+	left: 0;
+	right: 0;
 	bottom: 0;
 	border-top: 1px solid #000;
 	cursor: pointer;
@@ -89,7 +91,6 @@ div.order_container {
 	opacity: 0.5;
 }
 
-
 .order_lock_container {
 	position: relative;
 	height: 0;
@@ -113,7 +114,6 @@ div.order_container {
 	background-image: url(../icons/locked.svg);
 	opacity: 1;
 }
-
 
 .order_match {
 	text-align: left;
@@ -143,10 +143,11 @@ div.order_container {
 	position: relative;
 	font-size: 150%;
 }
-.order_buttons>* {
+.order_buttons > * {
 	font-size: inherit;
 }
-.order_reset, .order_optimize {
+.order_reset,
+.order_optimize {
 	margin-left: 2em;
 }
 
@@ -154,7 +155,7 @@ div.order_container {
 	font-size: 3vmin;
 }
 
-@media screen and (max-height:900px) {
+@media screen and (max-height: 900px) {
 	.order_header {
 		display: none;
 	}

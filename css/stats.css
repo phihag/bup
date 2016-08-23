@@ -1,4 +1,6 @@
-.stats_layout, .netstats_layout, .order_layout {
+.stats_layout,
+.netstats_layout,
+.order_layout {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -10,32 +12,36 @@
 	z-index: 2000;
 }
 
-.stats_container, .netstats_container, .order_container {
+.stats_container,
+.netstats_container,
+.order_container {
 	display: inline-block;
 	background: #fff;
 	border-bottom-right-radius: 1em;
 	border-bottom-left-radius: 1em;
 	text-align: center;
-	padding: 1em 1em;
+	padding: 1em;
 }
 .stats_top_back_link {
 	display: block;
 	float: left;
 }
 
-.stats_table>thead>tr>th, .netstats_table>thead>tr>th {
+.stats_table > thead > tr > th,
+.netstats_table > thead > tr > th {
 	padding: 0 0.4em;
 }
-.stats_table>tbody>tr>th, .netstats_table>tbody>tr>th {
+.stats_table > tbody > tr > th,
+.netstats_table > tbody > tr > th {
 	text-align: left;
 }
-.stats_table>tbody>tr>td, .netstats_table>tbody>tr>td {
+.stats_table > tbody > tr > td,
+.netstats_table > tbody > tr > td {
 	text-align: right;
 }
 
-
 .stats_match_name {
-	margin: 0 0 1em 0;
+	margin: 0 0 1em;
 	font-size: 80%;
 }
 .stats_graph {

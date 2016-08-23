@@ -1,21 +1,23 @@
 .scoresheet_buttons {
-	position: absolute; position: fixed;
+	position: absolute;
+	position: fixed;
 	font-size: 24px; /* legacy */
 	font-size: 4vmin;
 	z-index: 100;
 	bottom: 0; /* legacy */
 	bottom: 0.1vmin;
 	padding: 0 0.1vmin;
-	left: 0; right: 0;
+	left: 0;
+	right: 0;
 }
-.scoresheet_buttons>button {
+.scoresheet_buttons > button {
 	margin: 0;
 	font-size: inherit;
 	padding: 0.1em 0.1em;
 	min-width: 7em;
 	opacity: 0.9;
 }
-.scoresheet_buttons>button+button {
+.scoresheet_buttons > button + button {
 	margin-left: 2vw;
 }
 .scoresheet_button_back {
@@ -24,7 +26,7 @@
 }
 
 @media screen and (orientation: portrait) {
-	.scoresheet_buttons>button {
+	.scoresheet_buttons > button {
 		float: none;
 		display: block;
 		min-width: 80%;
@@ -40,14 +42,14 @@
 		left: auto;
 		right: 0;
 	}
-	.scoresheet_buttons>button {
+	.scoresheet_buttons > button {
 		display: block;
 		float: none;
 		font-size: 8vmin;
 		margin: 0 1vmin 10vh 0 !important;
 		padding: 3vmin 0;
 	}
-	.scoresheet_buttons>button:last-child {
+	.scoresheet_buttons > button:last-child {
 		margin-bottom: 1vmin !important;
 	}
 }
@@ -55,10 +57,11 @@
 .scoresheet {
 	background: #fff;
 }
-@media tv,projection,handheld,screen {
+@media tv, projection, handheld, screen {
 	.single_scoresheet {
 		position: absolute;
-		left: 0; top: 0;
+		left: 0;
+		top: 0;
 		width: 100%; /* legacy */
 		width: 100vw;
 		height: 70.71067811865474vw; /* 100 / √2  (ratio of DIN A) */
@@ -71,19 +74,23 @@
 		width: 50%;
 	}
 }
-@media print{
+@media print {
 	@page {
-		size: landscape; size: landscape A4;
+		size: landscape;
+		size: landscape A4;
 		margin: 0;
 	}
 
-	body,html,.scoresheet_container {
-		background: #ffffff;
+	body,
+	html,
+	.scoresheet_container {
+		background: #fff;
 	}
 
 	.single_scoresheet {
 		position: absolute;
-		top: 0; left: 0;
+		top: 0;
+		left: 0;
 		width: 100%;
 		height: 100%;
 	}
@@ -119,7 +126,6 @@
 	background-size: 100%;
 	background-repeat: no-repeat;
 }
-
 
 .scoresheet_note_dialog {
 	position: absolute;
