@@ -84,7 +84,7 @@ upload-run:
 test: ## Run tests
 	@npm test
 
-lint: eslint ## Verify source code quality
+lint: eslint stylelint ## Verify source code quality
 
 eslint:
 	@./node_modules/.bin/eslint js/ div/*.js test/ cachesw.js
