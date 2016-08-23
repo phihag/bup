@@ -8,9 +8,9 @@
 	display: inline-table;
 	margin-bottom: 1vh;
 	border-collapse: separate;
-    border-spacing: 0;
+	border-spacing: 0;
 
-    border-bottom-left-radius: 2vh;
+	border-bottom-left-radius: 2vh;
 	border-bottom-right-radius: 2vh;
 	border: 1px solid #dadada;
 }
@@ -27,31 +27,34 @@
 	height: 3vh;
 	vertical-align: middle;
 }
-span.score_announcement+span.score_announcement {
+span.score_announcement + span.score_announcement {
 	padding-left: 0.8em;
 }
-.score_finished-game td.score, .score_future-game td.score, .score_current-game td.score {
+.score_finished-game td.score,
+.score_future-game td.score,
+.score_current-game td.score {
 	vertical-align: middle;
 	padding: 0 2vh;
 	min-width: 1.6em;
-	color: #444444;
+	color: #444;
 }
-.score_finished-game, .score_future-game {
+.score_finished-game,
+.score_future-game {
 	/* 3 games (default) */
 	font-size: 12px;
 	font-size: 3vh;
 	line-height: 3vh;
 	height: 3.5vh;
 }
-table[data-game-count="5"] .score_finished-game, table[data-game-count="5"] .score_future-game {
+table[data-game-count="5"] .score_finished-game,
+table[data-game-count="5"] .score_future-game {
 	font-size: 8px;
 	font-size: 2vh;
 	line-height: 2vh;
 	height: 2.1vh;
 }
 
-
-.score_future-game>td.score>span {
+.score_future-game > td.score > span {
 	visibility: hidden;
 }
 .score_current-game {
@@ -66,7 +69,7 @@ table[data-game-count="5"] .score_finished-game, table[data-game-count="5"] .sco
 	color: rgba(232, 97, 0, 0.2) !important;
 }
 .score_won {
-	color: #000000 !important;
+	color: #000 !important;
 }
 .score_serving {
 	color: #e86100 !important;
@@ -77,25 +80,25 @@ table[data-game-count="5"] .score_finished-game, table[data-game-count="5"] .sco
 .score_right {
 	text-align: left;
 }
-.score_current-game>td.score_left {
+.score_current-game > td.score_left {
 	padding-left: 0;
 	padding-right: 3vh;
 }
-.score_current-game>td.score_right {
+.score_current-game > td.score_right {
 	padding-left: 3vh;
 	padding-right: 0;
 }
-.score>input {
+.score > input {
 	max-width: 1.9em;
 	vertical-align: top;
 	font-size: 2vh;
 	max-height: 3vh;
 }
-.score_current-game>.score>input {
+.score_current-game > .score > input {
 	font-size: 7.5vh;
 	max-height: 8vh;
 }
-.score_future-game>.score>input {
+.score_future-game > .score > input {
 	visibility: hidden;
 }
 #game.editmode .score_left {

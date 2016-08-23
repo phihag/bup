@@ -5,7 +5,8 @@
 }
 
 /* Safari has some kind of minimum width for buttons. Increase button size to adapt to that. */
-.mobile_safari .setup_network_matches_reload, .mobile_safari .button_delete {
+.mobile_safari .setup_network_matches_reload,
+.mobile_safari .button_delete {
 	width: 2em;
 	height: 2em;
 }

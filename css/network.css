@@ -49,7 +49,7 @@
 	width: 2em;
 	height: 2em;
 }
-button>.loading-icon {
+button > .loading-icon {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -57,12 +57,12 @@ button>.loading-icon {
 }
 
 @media screen and (orientation: portrait) {
-	.settings_login>button, .settings_login>input {
+	.settings_login > button,
+	.settings_login > input {
 		display: block;
 		margin: 1em auto 1em auto;
 	}
 }
-
 
 #setup_network_matches {
 	margin: 0 -1em;
@@ -76,24 +76,23 @@ button>.loading-icon {
 .setup_network_match_match_name {
 	font-size: 180%;
 }
-.setup_network_match>span {
+.setup_network_match > span {
 	display: block;
 	text-align: center;
 }
-.setup_network_matches_loading>* {
+.setup_network_matches_loading > * {
 	vertical-align: middle;
 }
-.setup_network_matches_loading>.loading-icon {
+.setup_network_matches_loading > .loading-icon {
 	margin-left: 1.5vmin;
 	display: inline-block;
 }
-#setup_network_matches>.network_error {
+#setup_network_matches > .network_error {
 	margin-left: 1.5vmin;
 }
 .setup_network_match_score {
 	font-style: italic;
 }
-
 
 .setup_network_heading:after {
 	/* Set line-height to height, so that we can vertically center with vertical-align: middle; */
@@ -101,17 +100,18 @@ button>.loading-icon {
 	display: inline-block;
 	height: 100%;
 }
-.setup_network_heading>* {
+.setup_network_heading > * {
 	vertical-align: middle;
 }
 .setup_network_matches_reload {
 	display: inline-block;
 	margin: 0 0 0 0.6em;
+
 	/* Will be larger on Mobile Safari because of brain-dead minimum button width */
 	width: 1em;
 	height: 1em;
 }
-.setup_network_matches_reload>span {
+.setup_network_matches_reload > span {
 	background-image: url(../icons/reload.svg);
 }
 
@@ -119,7 +119,8 @@ button>.loading-icon {
 	margin-top: 0.8em;
 	margin-bottom: 1em;
 }
-.setup_linkline a:not(:last-child), .setup_linkline>div>a {
+.setup_linkline a:not(:last-child),
+.setup_linkline > div > a {
 	display: inline-block;
 	margin-right: 2em;
 	margin-bottom: 1.5em;
@@ -129,7 +130,7 @@ button>.loading-icon {
 }
 
 /* Smartphones */
-@media screen and (max-device-width:480px) {
+@media screen and (max-device-width: 480px) {
 	#setup_network_matches {
 		text-align: center;
 	}

@@ -2,17 +2,17 @@
 .exception_dialog {
 	vertical-align: top;
 }
-.exception_dialog>div {
+.exception_dialog > div {
 	display: inline-block;
 	text-align: center;
 	font-size: 3vmin;
 	vertical-align: top;
 	margin: 2vmin 2vmin 0 2vmin;
 }
-.exception_dialog>div>span {
+.exception_dialog > div > span {
 	white-space: pre-wrap;
 }
-.exception_dialog>div>button {
+.exception_dialog > div > button {
 	/* legacy (for now) */
 	width: 50px;
 	height: 50px;
@@ -21,23 +21,25 @@
 	height: 20vmin;
 	display: block;
 }
-.exception_dialog>div>button>span {
+.exception_dialog > div > button > span {
 	font-size: 16vmin;
 }
-#exception_yellow>span {
+#exception_yellow > span {
 	background-image: url(../icons/exception_yellow.svg);
 }
-#exception_red>span {
+#exception_red > span {
 	background-image: url(../icons/exception_red.svg);
 }
-#exception_black>span {
+#exception_black > span {
 	background-image: url(../icons/exception_black.svg);
 }
-#exception_retired>span {
+#exception_retired > span {
 	background-image: url(../icons/exception_retired.svg);
 }
 
-.yellow-card-image,.red-card-image,.disqualified-image {
+.yellow-card-image,
+.red-card-image,
+.disqualified-image {
 	text-align: middle;
 	margin-right: 0.4em;
 	display: inline-block;
