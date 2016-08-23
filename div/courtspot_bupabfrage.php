@@ -215,7 +215,6 @@ echo json_encode([
 	'id' => 'Courtspot:' . $verwaltung['Heim'] . ' - ' . $verwaltung['Gast'],
 	'event_name' => $verwaltung['Heim'] . ' - ' . $verwaltung['Gast'],
 	'tournament_name' => $tournament_name,
-	'home_team_name' => $verwaltung['Heim'],
-	'away_team_name' => $verwaltung['Gast'],
+	'team_names' => [$verwaltung['Heim'], $verwaltung['Gast']],
 	'eventsheets' => ($eventsheet_key ? [['key' => $eventsheet_key, 'label' => 'Spielbericht']] : []),
 ], JSON_PRETTY_PRINT);

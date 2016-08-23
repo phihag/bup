@@ -256,11 +256,10 @@ function _parse_match_list(doc, now) {
 		};
 	});
 	return {
-		home_team_name: home_team_name,
-		away_team_name: away_team_name,
+		team_names: [home_team_name, away_team_name],
 		event_name: home_team_name + ' - ' + away_team_name,
 		matches: matches,
-		league_key: ((matches.length === 6) ? '1BL' : '2BLN'),
+		league_key: '1BL', // TODO: get the league another way
 	};
 }
 

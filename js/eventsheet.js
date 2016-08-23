@@ -38,7 +38,7 @@ function calc_backup_players_str(s) {
 			return player.name;
 		}).join(', ');
 		if (res) {
-			res += ' (' + ((team_id === 0) ? s.event.home_team_name : s.event.away_team_name) + ')';
+			res += ' (' + s.event.team_names[team_id] + ')';
 		}
 		return res;
 	}).join(' / ');
@@ -92,9 +92,9 @@ function calc_matchscore(counting, netscore) {
 function event_winner_str(ev, match_score_home, match_score_away) {
 	var needed_to_win = ev.matches.length / 2;
 	if (match_score_home > needed_to_win) {
-		return ev.home_team_name;
+		return ev.team_names[0];
 	} else if (match_score_away > needed_to_win) {
-		return ev.away_team_name;
+		return ev.team_names[1];
 	} else if ((match_score_home == needed_to_win) && (match_score_away == needed_to_win)) {
 		return state._('eventsheet:draw');
 	} else {
@@ -274,8 +274,8 @@ function render_bundesliga(ev, es_key, ui8r, extra_data) {
 	}
 
 	var fields = {
-		'Textfeld1': [ev.home_team_name],
-		'Textfeld2': [ev.away_team_name],
+		'Textfeld1': [ev.team_names[0]],
+		'Textfeld2': [ev.team_names[1]],
 		'Textfeld3': [extra_data.umpires],
 		'Textfeld4': [extra_data.location],
 		'Textfeld5': (last_update ? [utils.date_str(last_update)] : []),
@@ -601,8 +601,8 @@ function render_svg(ev, es_key, ui8r, extra_data) {
 	_svg_text(svg, 'starttime', extra_data.starttime);
 	_svg_text(svg, 'date', (last_update ? utils.date_str(last_update * 1000) : ''));
 	_svg_text(svg, 'matchday', extra_data.matchday);
-	_svg_text(svg, 'home_team_name', ev.home_team_name);
-	_svg_text(svg, 'away_team_name', ev.away_team_name);
+	_svg_text(svg, 'home_team_name', ev.team_names[0]);
+	_svg_text(svg, 'away_team_name', ev.team_names[1]);
 	_svg_text(svg, 'tournament_name', ev.tournament_name);
 	_svg_text(svg, 'location', extra_data.location);
 	_svg_text(svg, 'notes', extra_data.notes);
@@ -624,7 +624,7 @@ function render_bundesliga2016(ev, es_key, ui8r) {
 			var team_name_cell = sheet.querySelector('c[r="B4"]');
 			team_name_cell.setAttribute('t', 'inlineStr');
 			var is_node = uiu.create_el(team_name_cell, 'is');
-			uiu.create_el(is_node, 't', {}, ev.home_team_name);
+			uiu.create_el(is_node, 't', {}, ev.team_names[0]);
 			var new_xml = (new XMLSerializer()).serializeToString(sheet);
 
 			zipfile.file(sheet_fn, new_xml);
@@ -633,7 +633,7 @@ function render_bundesliga2016(ev, es_key, ui8r) {
 				type: 'blob',
 				mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
 			}).then(function(content) {
-				saveAs(content, 'Spielbericht ' + ev.home_team_name + '-' + ev.away_team_name + '.xlsm');
+				saveAs(content, 'Spielbericht ' + ev.event_name + '.xlsm');
 			});
 		});
 	});

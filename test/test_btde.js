@@ -22,8 +22,7 @@ _describe('btde', function() {
 
 		var expected = {
 			'event_name': 'TV Refrath - 1. BV Mülheim',
-			'home_team_name': 'TV Refrath',
-			'away_team_name': '1. BV Mülheim',
+			'team_names': ['TV Refrath', '1. BV Mülheim'],
 			'league_key': '1BL',
 			'matches': [
 				{
@@ -278,8 +277,7 @@ _describe('btde', function() {
 		];
 
 		var expected = {
-			'home_team_name': 'TV Refrath',
-			'away_team_name': '1. BV Mülheim',
+			'team_names': ['TV Refrath', '1. BV Mülheim'],
 			'league_key': '1BL',
 			'event_name': 'TV Refrath - 1. BV Mülheim',
 			'matches': [

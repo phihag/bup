@@ -125,10 +125,10 @@ function _render_court_display(container, event, court, top_team_idx) {
 	var nscore = match ? match.network_score : [];
 	var match_setup = match ? match.setup : {
 		teams: [{
-			name: event.home_team_name,
+			name: event.team_names[0],
 			players: [],
 		}, {
-			name: event.away_team_name,
+			name: event.team_names[1],
 			players: [],
 		}],
 	};
@@ -259,8 +259,8 @@ function render_html_list(container, event) {
 	uiu.create_el(match_list_head, 'th', {
 		'class': 'display_list_match_name',
 	}, '');
-	var home_span = _list_render_team_name(match_list_head, event.home_team_name);
-	var away_span = _list_render_team_name(match_list_head, event.away_team_name);
+	var home_span = _list_render_team_name(match_list_head, event.team_names[0]);
+	var away_span = _list_render_team_name(match_list_head, event.team_names[1]);
 	var match_score_el = uiu.create_el(match_list_head, 'th', {
 		'class': 'display_list_matchscore',
 		'colspan': max_games,

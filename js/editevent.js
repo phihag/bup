@@ -82,8 +82,8 @@ function render_table(s) {
 	var thead = uiu.create_el(table, 'thead');
 	var top_tr = uiu.create_el(thead, 'tr');
 	uiu.create_el(top_tr, 'td');
-	uiu.create_el(top_tr, 'th', {}, s.event.home_team_name);
-	uiu.create_el(top_tr, 'th', {}, s.event.away_team_name);
+	uiu.create_el(top_tr, 'th', {}, s.event.team_names[0]);
+	uiu.create_el(top_tr, 'th', {}, s.event.team_names[1]);
 
 	var all_players = eventutils.calc_all_players(s.event);
 	var tbody = uiu.create_el(table, 'tbody');
