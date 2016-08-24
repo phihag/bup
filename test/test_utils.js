@@ -115,6 +115,47 @@ _describe('helper functions', function() {
 		assert.strictEqual(bup.utils.remove(ar, 4), false);
 		assert.deepStrictEqual(ar, [2, 3, 5, '4']);
 	});
+
+	_it('parallel (without errors)', function(done) {
+		var r = [];
+		var called = false;
+		bup.utils.parallel([function(cb) {
+			r.push(1);
+			cb();
+		}, function(cb) {
+			r.push(2);
+			cb();
+		}, function(cb) {
+			r.push(3);
+			cb();
+		}], function(err) {
+			assert(!called);
+			assert(!err);
+			called = true;
+			assert(r.indexOf(1) >= 0);
+			assert(r.indexOf(2) >= 0);
+			assert(r.indexOf(3) >= 0);
+			assert(r.indexOf(4) < 0);
+			done();
+		});
+	});
+
+	_it('parallel (with errors)', function(done) {
+		var called = false;
+		bup.utils.parallel([function(cb) {
+			cb('ERROR');
+		}, function(cb) {
+			cb();
+		}, function(cb) {
+			cb('fail!');
+		}], function(err) {
+			assert(!called);
+			assert(err);
+			called = true;
+
+			done();
+		});
+	});
 });
 
 })();

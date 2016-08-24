@@ -227,6 +227,26 @@ function remove(ar, val) {
 	return false;
 }
 
+function parallel(tasks, callback) {
+	var errored = false;
+	var done = repeat(false, tasks.length);
+	tasks.forEach(function(task, i) {
+		task(function(err) {
+			if (errored) return;
+
+			if (err) {
+				errored = true;
+				callback(err);
+				return;
+			}
+
+			done[i] = true;
+			if (done.every(function(x) {return x;})) {
+				callback();
+			}
+		});
+	});
+}
 
 return {
 	add_zeroes: add_zeroes,
@@ -244,6 +264,7 @@ return {
 	multiline_regexp: multiline_regexp,
 	obj_update: obj_update,
 	parse_query_string: parse_query_string,
+	parallel: parallel,
 	range: range,
 	remove: remove,
 	repeat: repeat,

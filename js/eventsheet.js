@@ -616,19 +616,66 @@ function render_svg(ev, es_key, ui8r, extra_data) {
 	container.remove();
 }
 
+function calc_player_matches(ev, team_id) {
+	var res = [];
+	ev.matches.forEach(function(match) {
+		match.setup.teams[team_id].players.forEach(function(player, player_id) {
+			var pinfo = utils.find(res, function(existing_player) {
+				return existing_player.name === player.name;
+			});
+			if (pinfo) {
+				pinfo.matches.push(match);
+			} else {
+				var gender = player.gender ? player.gender : eventutils.guess_gender(match.setup, player_id);
+				res.push({
+					name: player.name,
+					matches: [match],
+					gender: gender,
+				});
+			}
+		});
+	});
+	return res;
+}
+
+function _xlsx_text(sheet, cell_id, text) {
+	var cell = sheet.querySelector('c[r="' + cell_id + '"]');
+	cell.setAttribute('t', 'inlineStr');
+	var is_node = uiu.create_el(cell, 'is');
+	uiu.create_el(is_node, 't', {}, text);
+}
+
 function render_bundesliga2016(ev, es_key, ui8r) {
 	JSZip.loadAsync(ui8r).then(function(zipfile) {
-		var sheet_fn = 'xl/worksheets/sheet2.xml';
-		zipfile.file(sheet_fn).async('string').then(function(xml_str) {
-			var sheet = (new DOMParser()).parseFromString(xml_str, 'application/xml');
-			var team_name_cell = sheet.querySelector('c[r="B4"]');
-			team_name_cell.setAttribute('t', 'inlineStr');
-			var is_node = uiu.create_el(team_name_cell, 'is');
-			uiu.create_el(is_node, 't', {}, ev.team_names[0]);
-			var new_xml = (new XMLSerializer()).serializeToString(sheet);
+		function fill_team_sheet(sheet_fn, team_id, cb) {
+			zipfile.file(sheet_fn).async('string').then(function(xml_str) {
+				var sheet = (new DOMParser()).parseFromString(xml_str, 'application/xml');
 
-			zipfile.file(sheet_fn, new_xml);
+				_xlsx_text(sheet, 'B4', ev.team_names[team_id]);
+				var players = calc_player_matches(ev, team_id);
+				var row_idx = {
+					m: 8,
+					f: 21,
+				};
+				players.forEach(function(player) {
+					var ridx = row_idx[player.gender];
+					_xlsx_text(sheet, 'B' + ridx, player.name);
+					row_idx[player.gender]++;
+				});
 
+
+				var new_xml = (new XMLSerializer()).serializeToString(sheet);
+
+				zipfile.file(sheet_fn, new_xml);
+				cb();
+			});
+		}
+
+		utils.parallel([function(cb) {
+			fill_team_sheet('xl/worksheets/sheet2.xml', 0, cb);
+		}, function(cb) {
+			fill_team_sheet('xl/worksheets/sheet3.xml', 1, cb);
+		}], function() {
 			zipfile.generateAsync({
 				type: 'blob',
 				mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
