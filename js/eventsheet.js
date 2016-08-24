@@ -640,12 +640,39 @@ function calc_player_matches(ev, team_id) {
 
 function _xlsx_text(sheet, cell_id, text) {
 	var cell = sheet.querySelector('c[r="' + cell_id + '"]');
+	if (!cell) {
+		report_problem.silent_error('Cannot find cell ' + cell_id);
+		return;
+	}
 	cell.setAttribute('t', 'inlineStr');
 	var is_node = uiu.create_el(cell, 'is');
 	uiu.create_el(is_node, 't', {}, text);
 }
 
 function render_bundesliga2016(ev, es_key, ui8r) {
+	var MATCH_COLS = {
+		m: {
+			'1.HE': 'D',
+			'2.HE': 'E',
+			'1.HD': 'F',
+			'2.HD': 'G',
+			'1. HE': 'D',
+			'2. HE': 'E',
+			'1. HD': 'F',
+			'2. HD': 'G',
+			'XD': 'H',
+			'GD': 'H',
+			'MX': 'H',
+		},
+		f: {
+			'DE': 'F',
+			'DD': 'G',
+			'XD': 'H',
+			'GD': 'H',
+			'MX': 'H',
+		},
+	};
+
 	JSZip.loadAsync(ui8r).then(function(zipfile) {
 		function fill_team_sheet(sheet_fn, team_id, cb) {
 			zipfile.file(sheet_fn).async('string').then(function(xml_str) {
@@ -658,9 +685,14 @@ function render_bundesliga2016(ev, es_key, ui8r) {
 					f: 21,
 				};
 				players.forEach(function(player) {
-					var ridx = row_idx[player.gender];
-					_xlsx_text(sheet, 'B' + ridx, player.name);
+					var row = row_idx[player.gender];
+					_xlsx_text(sheet, 'B' + row, player.name);
 					row_idx[player.gender]++;
+
+					player.matches.forEach(function(match) {
+						var col = MATCH_COLS[player.gender][match.setup.match_name];
+						_xlsx_text(sheet, col + row, 'x');
+					});
 				});
 
 
