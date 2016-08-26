@@ -1,0 +1,279 @@
+{
+  "type": "bup-export",
+  "version": 1,
+  "event": {
+    "staticnet_message": "Bundesliga-Demo (nur lokal)",
+    "preferred_order": [
+      "HD",
+      "DD",
+      "2.HD",
+      "1.HE",
+      "DE",
+      "GD",
+      "2.HE"
+    ],
+    "matches": [
+      {
+        "setup": {
+          "eventsheet_id": "1.HD",
+          "match_name": "HD",
+          "teams": [
+            {
+              "name": "TV Refrath",
+              "players": [
+                {
+                  "name": "Sam Magee"
+                },
+                {
+                  "name": "Fabian Holzer"
+                }
+              ]
+            },
+            {
+              "name": "BC Bischmisheim",
+              "players": [
+                {
+                  "name": "Michael Fuchs"
+                },
+                {
+                  "name": "Peter Käsbauer"
+                }
+              ]
+            }
+          ],
+          "event_name": "TV Refrath - BC Bischmisheim (Demo)",
+          "tournament_name": "Demo",
+          "team_competition": true,
+          "is_doubles": true,
+          "counting": "3x21",
+          "match_id": "vdemo_HD"
+        },
+        "network_score": [],
+        "presses_json": "[]"
+      },
+      {
+        "setup": {
+          "match_name": "DD",
+          "teams": [
+            {
+              "name": "TV Refrath",
+              "players": [
+                {
+                  "name": "Carla Nelte"
+                },
+                {
+                  "name": "Jennifer Karnott"
+                }
+              ]
+            },
+            {
+              "name": "BC Bischmisheim",
+              "players": [
+                {
+                  "name": "Samantha Barning"
+                },
+                {
+                  "name": "Isabel Herttrich"
+                }
+              ]
+            }
+          ],
+          "event_name": "TV Refrath - BC Bischmisheim (Demo)",
+          "tournament_name": "Demo",
+          "team_competition": true,
+          "is_doubles": true,
+          "counting": "3x21",
+          "match_id": "vdemo_DD"
+        },
+        "network_score": [[11, 21], [15, 21]],
+        "presses_json": "[{\"type\":\"pick_side\",\"team1_left\":true,\"timestamp\":1455300366360},{\"type\":\"pick_server\",\"team_id\":1,\"player_id\":0,\"timestamp\":1455300371429},{\"type\":\"pick_receiver\",\"team_id\":0,\"player_id\":0,\"timestamp\":1455300374048},{\"type\":\"shuttle\",\"timestamp\":1455300375048},{\"type\":\"love-all\",\"timestamp\":1455300608180},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455300625772},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455300646501},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455300664805},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455300695537},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455300712318},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455300728250},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455300741041},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455300753614},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455300771820},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455300787913},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455300799766},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455300816797},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455300827736},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455300855675},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455300869300},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455300887415},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455300908588},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455300979904},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455300989123},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455301004741},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455301023954},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455301037684},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455301052810},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301077066},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455301095073},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301108384},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455301123605},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301136992},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455301152333},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455301164524},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301183857},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455301205622},{\"type\":\"postgame-confirm\",\"timestamp\":1455301252419},{\"type\":\"pick_server\",\"team_id\":1,\"player_id\":0,\"timestamp\":1455301254442},{\"type\":\"shuttle\",\"timestamp\":1455301269094},{\"type\":\"shuttle\",\"timestamp\":1455301269815},{\"type\":\"pick_receiver\",\"team_id\":0,\"player_id\":0,\"timestamp\":1455301277442},{\"type\":\"love-all\",\"timestamp\":1455301296652},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455301304790},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301351710},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455301367256},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301385242},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301399855},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301427625},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301452449},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455301469170},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301488371},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455301516900},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301537395},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455301563358},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455301581224},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301599281},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455301626735},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455301645130},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301661025},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301683024},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301695079},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301755473},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301768561},{\"type\":\"shuttle\",\"timestamp\":1455301773312},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455301815827},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301835319},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301848528},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455301863573},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301879697},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455301897688},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455301916027},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301935151},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301947631},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455301956156},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455301970027},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301987061},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302013973},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302035669},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302061344}, {\"type\":\"postmatch-confirm\",\"timestamp\":1455302062344}]"
+      },
+      {
+        "setup": {
+          "match_name": "1.HE",
+          "teams": [
+            {
+              "name": "TV Refrath",
+              "players": [
+                {
+                  "name": "Fabian Roth"
+                }
+              ]
+            },
+            {
+              "name": "BC Bischmisheim",
+              "players": [
+                {
+                  "name": "Marc Zwiebler"
+                }
+              ]
+            }
+          ],
+          "event_name": "TV Refrath - BC Bischmisheim (Demo)",
+          "tournament_name": "Demo",
+          "team_competition": true,
+          "is_doubles": false,
+          "counting": "3x21",
+          "match_id": "vdemo_HE1"
+        },
+        "network_score": [],
+        "presses_json": "[]"
+      },
+      {
+        "setup": {
+          "match_name": "DE",
+          "teams": [
+            {
+              "name": "TV Refrath",
+              "players": [
+                {
+                  "name": "Ya Lan Chang"
+                }
+              ]
+            },
+            {
+              "name": "BC Bischmisheim",
+              "players": [
+                {
+                  "name": "Olga Konon"
+                }
+              ]
+            }
+          ],
+          "event_name": "TV Refrath - BC Bischmisheim (Demo)",
+          "tournament_name": "Demo",
+          "team_competition": true,
+          "is_doubles": false,
+          "counting": "3x21",
+          "match_id": "vdemo_DE"
+        },
+        "network_score": [[9,21],[21,19],[11,21]],
+        "presses_json": "[{\"type\":\"shuttle\",\"timestamp\":1455302269027},{\"type\":\"pick_side\",\"team1_left\":false,\"timestamp\":1455302270027},{\"type\":\"pick_server\",\"team_id\":1,\"player_id\":0,\"timestamp\":1455302275513},{\"type\":\"undo\",\"timestamp\":1455302282250},{\"type\":\"pick_server\",\"team_id\":1,\"player_id\":0,\"timestamp\":1455302289520},{\"type\":\"love-all\",\"timestamp\":1455302488417},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302495030},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302512969},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302522388},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302539654},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302558679},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302578154},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302589364},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302603021},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302620076},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302631300},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302638965},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302650023},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302659701},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302677116},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302691490},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302710940},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302726184},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302789297},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302812377},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302825457},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302839253},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302848756},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302870648},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302902921},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302935328},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302950743},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302963701},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302990106},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455303001846},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455303016220},{\"type\":\"postgame-confirm\",\"timestamp\":1455303027104},{\"type\":\"love-all\",\"timestamp\":1455303088444},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455303096772},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455303121919},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455303146751},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455303161670},{\"type\":\"shuttle\",\"timestamp\":1455303171038},{\"type\":\"shuttle\",\"timestamp\":1455303171654},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455303185433},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455303203718},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455303219549},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455303241424},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455303263774},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455303282625},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455303298093},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455303314234},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455303331868},{\"type\":\"shuttle\",\"timestamp\":1455303337955},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455303376832},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455303407770},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455303422902},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455303438634},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455303455276},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455303514905},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455303533773},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455303552116},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455303566474},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455303581345},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455303594708},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455303611500},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455303636906},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455303659061},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455303681876},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455303702084},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455303716738},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455303730147},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455303754356},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455303771225},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455303790637},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455303803813},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455303821030},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455303842367},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455303867542},{\"type\":\"shuttle\",\"timestamp\":1455303878120},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455303924046},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455303953684},{\"type\":\"postgame-confirm\",\"timestamp\":1455304073070},{\"type\":\"love-all\",\"timestamp\":1455304079472},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455304100941},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455304114376},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455304124093},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455304138366},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455304158352},{\"type\":\"shuttle\",\"timestamp\":1455304164821},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455304179356},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455304193756},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455304213104},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455304231025},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455304238601},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455304255571},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455304268731},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455304288782},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455304347198},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455304356285},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455304380565},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455304392846},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455304425017},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455304446167},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455304489237},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455304513043},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455304532572},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455304555398},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455304591792},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455304618953},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455304636731},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455304649318},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455304665198},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455304681204},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455304694729},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455304710977},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455304735904}]"
+      },
+      {
+        "setup": {
+          "match_name": "GD",
+          "teams": [
+            {
+              "name": "TV Refrath",
+              "players": [
+                {
+                  "name": "Sam Magee"
+                },
+                {
+                  "name": "Carla Nelte"
+                }
+              ]
+            },
+            {
+              "name": "BC Bischmisheim",
+              "players": [
+                {
+                  "name": "Michael Fuchs"
+                },
+                {
+                  "name": "Isabel Herttrich"
+                }
+              ]
+            }
+          ],
+          "event_name": "TV Refrath - BC Bischmisheim (Demo)",
+          "tournament_name": "Demo",
+          "team_competition": true,
+          "is_doubles": true,
+          "counting": "3x21",
+          "match_id": "vdemo_GD"
+        },
+        "network_score": [[9, 21], [0, 21]],
+        "presses_json": "[{\"type\":\"note\",\"val\":\"Dies ist ein Demonstrationsspiel, das Karten, manuelles Editieren usw. zeigt\",\"timestamp\":1455300951271}, {\"type\":\"shuttle\",\"timestamp\":1455300952271},{\"type\":\"pick_side\",\"team1_left\":true,\"timestamp\":1455300953160},{\"type\":\"pick_server\",\"team_id\":0,\"player_id\":1,\"timestamp\":1455300954654},{\"type\":\"pick_receiver\",\"team_id\":1,\"player_id\":0,\"timestamp\":1455300955387},{\"type\":\"love-all\",\"timestamp\":1455300956515},{\"type\":\"undo\",\"timestamp\":1455300959004},{\"type\":\"shuttle\",\"timestamp\":1455300962458},{\"type\":\"shuttle\",\"timestamp\":1455300962960},{\"type\":\"injury\",\"team_id\":0,\"player_id\":0,\"timestamp\":1455300996622},{\"type\":\"injury-resume\",\"timestamp\":1455300999577},{\"type\":\"love-all\",\"timestamp\":1455301098095},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301120667},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301139488},{\"type\":\"shuttle\",\"timestamp\":1455301173231},{\"type\":\"editmode_switch-sides\",\"side\":\"left\",\"timestamp\":1455301178228},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301184626},{\"type\":\"editmode_set-score\",\"score\":{\"winner\":\"inprogress\",\"left\":3,\"right\":1},\"by_side\":true,\"timestamp\":1455301188190},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455301202258},{\"type\":\"correction\",\"team_id\":0,\"timestamp\":1455301207685},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301230472},{\"type\":\"referee\",\"timestamp\":1455301236991},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301255422},{\"type\":\"overrule\",\"timestamp\":1455301259815},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301289356},{\"type\":\"yellow-card\",\"team_id\":1,\"player_id\":0,\"timestamp\":1455301301135},{\"type\":\"shuttle\",\"timestamp\":1455301306344},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455301316310},{\"type\":\"injury\",\"team_id\":0,\"player_id\":0,\"timestamp\":1455301326205},{\"type\":\"referee\",\"timestamp\":1455301328244},{\"type\":\"injury-resume\",\"timestamp\":1455301332687},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455301342455},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301371174},{\"type\":\"suspension\",\"timestamp\":1455301376749},{\"type\":\"resume\",\"timestamp\":1455301388031},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455301397094},{\"type\":\"red-card\",\"team_id\":0,\"player_id\":1,\"timestamp\":1455301404779},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301428067},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301445975},{\"type\":\"undo\",\"timestamp\":1455301447055},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455301449388},{\"type\":\"referee\",\"timestamp\":1455301468761},{\"type\":\"yellow-card\",\"team_id\":0,\"player_id\":0,\"timestamp\":1455301489100},{\"type\":\"correction\",\"team_id\":1,\"timestamp\":1455301506148},{\"type\":\"undo\",\"timestamp\":1455301511437},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455301528349},{\"type\":\"disqualified\",\"team_id\":0,\"player_id\":1,\"timestamp\":1455301536776},{\"type\":\"postmatch-confirm\",\"timestamp\":1455301537776}]"
+      },
+      {
+        "setup": {
+          "match_name": "2.HE",
+          "teams": [
+            {
+              "name": "TV Refrath",
+              "players": [
+                {
+                  "name": "Richard Domke"
+                }
+              ]
+            },
+            {
+              "name": "BC Bischmisheim",
+              "players": [
+                {
+                  "name": "Dieter Domke"
+                }
+              ]
+            }
+          ],
+          "event_name": "TV Refrath - BC Bischmisheim (Demo)",
+          "tournament_name": "Demo",
+          "team_competition": true,
+          "is_doubles": false,
+          "counting": "3x21",
+          "match_id": "vdemo_HE2"
+        },
+        "network_score": [[22, 20], [2, 0]],
+        "presses_json": "[{\"type\":\"pick_side\",\"team1_left\":false,\"timestamp\":1455301944155},{\"type\":\"pick_server\",\"team_id\":1,\"player_id\":0,\"timestamp\":1455301948722},{\"type\":\"shuttle\",\"timestamp\":1455301967725},{\"type\":\"shuttle\",\"timestamp\":1455301968275},{\"type\":\"note\",\"val\":\"Dieses Spiel läuft noch! Es kann jetzt fortgesetzt werden.\",\"timestamp\":1455302011791},{\"type\":\"undo\",\"timestamp\":1455302023337},{\"type\":\"love-all\",\"timestamp\":1455302050889},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302059761},{\"type\":\"undo\",\"timestamp\":1455302062462},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302063223},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302080418},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302098976},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302120556},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302149751},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302179529},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302199433},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302216212},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302235689},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302246137},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302258130},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302270366},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302287378},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302313084},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302343430},{\"type\":\"shuttle\",\"timestamp\":1455302344105},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302386508},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302416289},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302422572},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302435366},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302504424},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302514124},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302526422},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302561174},{\"type\":\"shuttle\",\"timestamp\":1455302562500},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302591625},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302625739},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302647553},{\"type\":\"shuttle\",\"timestamp\":1455302648297},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302669243},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302704925},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302736511},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302749192},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302763770},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302785616},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302805525},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302826625},{\"type\":\"shuttle\",\"timestamp\":1455302828045},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302851233},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302882722},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302892687},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302909131},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455302943667},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455302976516},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455303020421},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1455303040965},{\"type\":\"postgame-confirm\",\"timestamp\":1455303048090},{\"type\":\"love-all\",\"timestamp\":1455303162872},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455303165129},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1455303170321}]"
+      }
+    ],
+    "id": "vdemo",
+    "event_name": "TV Refrath - BC Bischmisheim (Demo)",
+    "tournament_name": "Demo",
+    "team_names": ["TV Refrath", "BC Bischmisheim"],
+    "location": "SpH Steinbreche",
+    "protest": "Coaching-Stühle zu gemütlich",
+    "umpires": "Max Mustermann & Michaela Meier",
+    "starttime": "19:00",
+    "matchday": "Finale",
+    "notes": "",
+    "backup_players": [[{
+      "name": "Dennis Nyenhuis",
+      "gender": "m"
+    }, {
+      "name": "Mette Stahlberg",
+      "gender": "f"
+    }], [{
+      "name": "Marvin Seidel",
+      "gender": "m"
+    }, {
+      "name": "Kristof Hopp",
+      "gender": "m"
+    }]],
+    "all_players": [
+      [
+        {"gender": "m", "name": "Fabian Roth"},
+        {"gender": "m", "name": "Richard Domke"},
+        {"gender": "m", "name": "Lars Schänzler"},
+        {"gender": "m", "name": "Max Schwenger"},
+        {"gender": "m", "name": "Sam Magee"},
+        {"gender": "m", "name": "Fabian Holzer"},
+        {"gender": "m", "name": "Dennis Nyenhuis"},
+        {"gender": "f", "name": "Chloe Magee"},
+        {"gender": "f", "name": "Carla Nelte"},
+        {"gender": "f", "name": "Ya Lan Chang"},
+        {"gender": "f", "name": "Jennifer Karnott"},
+        {"gender": "f", "name": "Mette Stahlberg"}
+      ],
+      [
+        {"gender": "m", "name": "Marc Zwiebler"},
+        {"gender": "m", "name": "Dieter Domke"},
+        {"gender": "m", "name": "Lukas Schmidt"},
+        {"gender": "m", "name": "Marcel Reuter"},
+        {"gender": "m", "name": "Michael Fuchs"},
+        {"gender": "m", "name": "Simon Wang"},
+        {"gender": "m", "name": "Marvin Seidel"},
+        {"gender": "m", "name": "Peter Käsbauer"},
+        {"gender": "m", "name": "Johannes Schöttler"},
+        {"gender": "m", "name": "Kristof Hopp"},
+        {"gender": "f", "name": "Olga Konon"},
+        {"gender": "f", "name": "Samantha Barning"},
+        {"gender": "f", "name": "Gayle Mahulette"},
+        {"gender": "f", "name": "Isabel Herttrich"}
+      ]
+    ],
+    "league_key": "1BL-2015"
+  }
+}

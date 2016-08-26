@@ -1,15 +1,28 @@
 Bundesliga xlsx
- 	backup players
 	Spielbericht
+		players
+		points
+		backup players
+		Spielfolge
+		sums
+		sumsums
+		winner
 	SR-Zettel
-	Mannschaftsführer
+fix bup error report!
+	resume breaks press history
+mail Ulf
+mail Klaus-Michael
+	example correct?
+	xlsx
+	Autor Carsten Koch?
+
 Mannschaftsaufstellungsvordruck mit BuLi-Logo
+bl2016: Mannschaftsaufstellungsvordruck!
 
 scoresheet bundesliga-Logo
 Anforderungsliste BuLi!
 load jszip async
 	add to appcache
-update demo bundesliga-2016
 
 bup display mode
 	add court outline display mode
@@ -26,7 +39,8 @@ bup display mode
 	show last update in settings
 	support display mode without network
 
-test offline
+test offline (all features present with all demos?)
+do not require a court for staticnet (test by changing languages)
 
 shift+A breaks demo mode!?
 CourtSpot: support order
@@ -383,5 +397,7 @@ CourtSpot: Spielreihenfolge festlegen
 remove s.match.max_games in favor of a calc function
 remove !important
 add a test that all public functions are in use
+write a test to find undocumented (div/data_structures.md) keys
+move eventsheet._xlsx into separate module
 -> Demo Jörg H, Manuel, Susanne, Werner Durow
 
