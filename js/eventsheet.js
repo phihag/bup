@@ -649,7 +649,7 @@ function _xlsx_text(sheet, cell_id, text) {
 	uiu.create_el(is_node, 't', {}, text);
 }
 
-function _xlsx_set_val(sheet, cell_id, val) {
+function _xlsx_val(sheet, cell_id, val) {
 	uiu.text(sheet.querySelector('c[r="' + cell_id + '"]>v'), val);
 }
 
@@ -719,7 +719,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					_xlsx_text(sheet, 'B' + row, player.name);
 					row_idx[player.gender]++;
 
-					_xlsx_set_val(sheet, 'C' + row, player.matches.length);
+					_xlsx_val(sheet, 'C' + row, player.matches.length);
 
 					player.matches.forEach(function(match) {
 						var setup = match.setup;
@@ -737,9 +737,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 						f: 19,
 					}[gender];
 					for (var col in x_count[gender]) {
-						uiu.text(
-							sheet.querySelector('c[r="' + col + row + '"]>v'),
-							x_count[gender][col]);
+						_xlsx_val(sheet, col + row, x_count[gender][col]);
 					}
 				}
 
@@ -760,9 +758,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 				var incomplete = ev.matches.some(function(m) {
 					return m.setup.incomplete;
 				});
-				uiu.text(
-					sheet.querySelector('c[r="C4"]>v'),
-					incomplete ? 0 : 1);
+				_xlsx_val(sheet, 'C4', incomplete ? 0 : 1);
 			});
 		}
 
@@ -794,7 +790,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					var row = MATCH_ROWS[setup.eventsheet_id || setup.match_name];
 					setup.teams.forEach(function(team, team_id) {
 						team.players.forEach(function(player, player_id) {
-							_xlsx_val(sheet, 'D' + (row + player_id), extra_data.location);
+							_xlsx_val(sheet, _xlsx_add_col('C', 3 * team_id) + (row + player_id), player.name);
 						});
 					});
 				});
@@ -803,7 +799,8 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 
 		function fill_score_sheets(cb) {
 			_xlsx_modify_sheet(zipfile, 'xl/worksheets/sheet6.xml', cb, function(sheet) {
-				// TODO fill in all scoresheets
+				_xlsx_text(sheet, 'G8', ev.team_names[0]);
+				// TODO actually fill in scoresheets
 			});
 		}
 

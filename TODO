@@ -1,12 +1,13 @@
 Bundesliga xlsx
 	Spielbericht
-		players
 		points
 		backup players
 		Spielfolge
 		sums
 		sumsums
 		winner
+		Datum
+		Ende
 	SR-Zettel
 fix bup error report!
 	resume breaks press history
