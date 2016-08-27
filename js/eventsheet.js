@@ -785,6 +785,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					_xlsx_text(sheet, 'AB8', utils.time_str(last_update));
 				}
 
+				var match_order = get_match_order(ev.matches);
 				var MATCH_ROWS = {
 					'1.HD': 12,
 					'DD': 14,
@@ -794,9 +795,13 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					'GD': 20, // called XD in the sheet itself
 					'2.HE': 22,
 				};
-				ev.matches.forEach(function(match) {
+				ev.matches.forEach(function(match, match_id) {
 					var setup = match.setup;
 					var row = MATCH_ROWS[setup.eventsheet_id || setup.match_name];
+					if (match_order[match_id]) {
+						_xlsx_text(sheet, 'A' + row, match_order[match_id]);
+					}
+
 					setup.teams.forEach(function(team, team_id) {
 						team.players.forEach(function(player, player_id) {
 							_xlsx_val(sheet, _xlsx_add_col('C', 3 * team_id) + (row + player_id), player.name);
