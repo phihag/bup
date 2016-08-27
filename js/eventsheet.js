@@ -135,6 +135,7 @@ function get_match_order(matches) {
 	});
 }
 
+// call eventutils.set_metadata before this
 function calc_last_update(matches) {
 	var last_update = 0;
 	matches.forEach(function(m) {
@@ -685,20 +686,7 @@ function _xlsx_add_col(col, add) {
 }
 
 function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
-	var MATCH_COLS = {
-		m: {
-			'1.HE': 'D',
-			'2.HE': 'E',
-			'1.HD': 'F',
-			'2.HD': 'G',
-			'GD': 'H',
-		},
-		f: {
-			'DE': 'F',
-			'DD': 'G',
-			'GD': 'H',
-		},
-	};
+	eventutils.set_metadata(ev);
 
 	JSZip.loadAsync(ui8r).then(function(zipfile) {
 		function fill_team_sheet(sheet_fn, team_id, cb) {
@@ -722,6 +710,21 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					_xlsx_val(sheet, 'C' + row, player.matches.length);
 
 					player.matches.forEach(function(match) {
+						var MATCH_COLS = {
+							m: {
+								'1.HE': 'D',
+								'2.HE': 'E',
+								'1.HD': 'F',
+								'2.HD': 'G',
+								'GD': 'H',
+							},
+							f: {
+								'DE': 'F',
+								'DD': 'G',
+								'GD': 'H',
+							},
+						};
+
 						var setup = match.setup;
 						var col = MATCH_COLS[player.gender][setup.eventsheet_id || setup.match_name];
 						_xlsx_text(sheet, col + row, 'x');
@@ -775,6 +778,12 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 				_xlsx_text(sheet, 'W8', extra_data.matchday);
 				_xlsx_text(sheet, 'W4', extra_data.umpires);
 				_xlsx_text(sheet, 'AB6', extra_data.starttime);
+
+				var last_update = calc_last_update(ev.matches);
+				if (last_update) {
+					_xlsx_text(sheet, 'W6', utils.date_str(last_update));
+					_xlsx_text(sheet, 'AB8', utils.time_str(last_update));
+				}
 
 				var MATCH_ROWS = {
 					'1.HD': 12,
