@@ -27,11 +27,11 @@ _describe('btde', function() {
 			'courts': [{
 				'court_id': 1,
 				'description': '1 (links)',
-				'match_id': 'btde_2016-11-05_HD 1_TV Refrath-1. BV Mülheim'
+				'match_id': 'btde_2016-11-05_HD 1_TV Refrath-1. BV Mülheim',
 			}, {
 				'court_id': 2,
 				'description': '2 (rechts)',
-				'match_id': 'btde_2016-11-05_DD_TV Refrath-1. BV Mülheim'
+				'match_id': 'btde_2016-11-05_DD_TV Refrath-1. BV Mülheim',
 			}],
 			'matches': [
 				{
@@ -292,10 +292,10 @@ _describe('btde', function() {
 			'courts': [{
 				'court_id': 1,
 				'description': '1 (links)',
-				'match_id':'btde_2016-11-05_HD 1_TV Refrath-1. BV Mülheim'
+				'match_id':'btde_2016-11-05_HD 1_TV Refrath-1. BV Mülheim',
 			}, {
 				'court_id': 2,
-				'description': '2 (rechts)'
+				'description': '2 (rechts)',
 			}],
 			'matches': [
 				{
