@@ -22,7 +22,7 @@ all_players     2-element list (home/away), each element is a list of all player
                 gender key required for each player.
 teamsters       2-element list (home/away). Name (as string) of the teamsters of each team.
                 Depending on regulation, not necessarily (active) players.
-                Example: [["Heinz Kelzenberg", "Michael Fuchs"]]
+                Example: ["Heinz Kelzenberg", "Michael Fuchs"]
 
 
 match
@@ -56,7 +56,7 @@ type*            What kind of button has been pressed. Determines the other keys
  "postgame-confirm"  Confirmation after announcement at end of game
  "postmatch-confirm" Confirmation after announcement at end of match
  "score"         A normal rally has been won.
- 	side*          Either "left" or "right"
+ 	  side*          Either "left" or "right", depending on who won the rallye.
  "overrule"      Line judge has been overruled (O in scoresheet)
  "referee"       Referee has been called (R in scoresheet)
  "correction"    Incorrect server/receiver has been corrected (C in scoresheet)
@@ -119,8 +119,10 @@ tournament_name   Name of the overall tournament (will be present on scoresheet)
 team
 ====
 
-name     The team, club, or country name the player is competing for, e.g. "TV Refrath". Required when team_competition is set in match setup.
-players* Array of players (1 in singles, 2 in doubles/mixed). Each element of that array is a player object (see below).
+name     The team, club, or country name the player is competing for, e.g. "TV Refrath".
+         Required when team_competition is set in match setup.
+players* Array of players (1 element in singles, 2 in doubles/mixed).
+         Each element of that array is a player object (see below).
 
 player
 ======
