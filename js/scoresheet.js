@@ -575,7 +575,7 @@ function sheet_render(s, svg, referee_view) {
 	_text('.scoresheet_begin_value', (s.metadata.start ? utils.time_str(s.metadata.start) : ''));
 	if (s.match.finished) {
 		_text('.scoresheet_end_value', (s.metadata.end ? utils.time_str(s.metadata.end) : ''));
-		_text('.scoresheet_duration_value', ((s.metadata.start && s.metadata.end) ? utils.duration_mins(s.metadata.start, s.metadata.end) : ''));
+		_text('.scoresheet_duration_value', ((s.metadata.start && s.metadata.end) ? utils.duration_hours(s.metadata.start, s.metadata.end) : ''));
 	} else {
 		_text('.scoresheet_end_value', null);
 		_text('.scoresheet_duration_value', null);

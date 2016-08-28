@@ -116,6 +116,11 @@ function duration_mins(start_timestamp, end_timestamp) {
 
 	var diff_ms = end.getTime() - start.getTime();
 	var mins = Math.round(diff_ms / 60000);
+	return mins;
+}
+
+function duration_hours(start_timestamp, end_timestamp) {
+	var mins = duration_mins(start_timestamp, end_timestamp);
 	var hours = (mins - (mins % 60)) / 60;
 	return hours + ':' + utils.add_zeroes(mins % 60);
 }
@@ -255,6 +260,7 @@ return {
 	datetime_str: datetime_str,
 	deep_equal: deep_equal,
 	deep_copy: deep_copy,
+	duration_hours: duration_hours,
 	duration_mins: duration_mins,
 	duration_secs: duration_secs,
 	find: find,

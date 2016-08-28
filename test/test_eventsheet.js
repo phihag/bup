@@ -51,6 +51,26 @@ _describe('eventsheet', function() {
 		assert.strictEqual(bup.eventsheet._xlsx_add_col('FOOBAR', 0), 'FOOBAR');
 		assert.strictEqual(bup.eventsheet._xlsx_add_col('ABC', 28), 'ACE');
 	});
+
+	_it('XLSX date', function() {
+		assert.strictEqual(bup.eventsheet._xlsx_date(new Date(2000, 0, 1)), 36526);
+		assert.strictEqual(bup.eventsheet._xlsx_date(new Date(2017, 6, 6)), 42922);
+	});
+
+	_it('XLSX leap year', function() {
+		assert.strictEqual(bup.eventsheet._xlsx_leap_year(1970), false);
+		assert.strictEqual(bup.eventsheet._xlsx_leap_year(1972), true);
+		assert.strictEqual(bup.eventsheet._xlsx_leap_year(1973), false);
+		assert.strictEqual(bup.eventsheet._xlsx_leap_year(2001), false);
+		assert.strictEqual(bup.eventsheet._xlsx_leap_year(2004), true);
+		assert.strictEqual(bup.eventsheet._xlsx_leap_year(2008), true);
+		assert.strictEqual(bup.eventsheet._xlsx_leap_year(2009), false);
+		assert.strictEqual(bup.eventsheet._xlsx_leap_year(2100), false);
+		assert.strictEqual(bup.eventsheet._xlsx_leap_year(2200), false);
+		assert.strictEqual(bup.eventsheet._xlsx_leap_year(2300), false);
+		assert.strictEqual(bup.eventsheet._xlsx_leap_year(2400), true);
+		assert.strictEqual(bup.eventsheet._xlsx_leap_year(2000), true);
+	});
 });
 
 })();

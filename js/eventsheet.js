@@ -749,6 +749,33 @@ function _xlsx_num2col(num) {
 	return res;
 }
 
+function _xlsx_leap_year(y) {
+	return (y % 400 === 0) || ((y % 4 === 0) && (y % 100 !== 0));
+}
+
+// Convert a JavaScript date object to an excel date number
+function _xlsx_date(d) {
+	var res = 25569; // 1970-01-01
+	var target_year = d.getFullYear();
+	for (var year = 1970;year < target_year;year++) {
+		res += _xlsx_leap_year(year) ? 366 : 365;
+	}
+	var month = d.getMonth();
+	if (month > 0) res += 31;
+	if (month > 1) res += _xlsx_leap_year(target_year) ? 29 : 28;
+	if (month > 2) res += 31;
+	if (month > 3) res += 30;
+	if (month > 4) res += 31;
+	if (month > 5) res += 30;
+	if (month > 6) res += 31;
+	if (month > 7) res += 31;
+	if (month > 8) res += 30;
+	if (month > 9) res += 31;
+	if (month > 10) res += 30;
+	res += d.getDate() - 1;
+	return res;
+}
+
 function _xlsx_add_col(col, add) {
 	var num = _xlsx_col2num(col) + add;
 	return _xlsx_num2col(num);
@@ -756,6 +783,8 @@ function _xlsx_add_col(col, add) {
 
 function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 	eventutils.set_metadata(ev);
+	var match_order = get_match_order(ev.matches);
+	var last_update = calc_last_update(ev.matches);
 
 	JSZip.loadAsync(ui8r).then(function(zipfile) {
 		function fill_team_sheet(sheet_fn, team_id, cb) {
@@ -794,8 +823,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 							},
 						};
 
-						var setup = match.setup;
-						var col = MATCH_COLS[player.gender][setup.eventsheet_id || setup.match_name];
+						var col = MATCH_COLS[player.gender][calc_match_id(match)];
 						_xlsx_text(sheet, col + row, 'x');
 						var v = x_count[player.gender][col];
 						x_count[player.gender][col] = v ? (v + 1) : 1;
@@ -848,7 +876,6 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 				_xlsx_text(sheet, 'W4', extra_data.umpires);
 				_xlsx_text(sheet, 'AB6', extra_data.starttime);
 
-				var last_update = calc_last_update(ev.matches);
 				var all_finished = ev.matches.every(function(m) {
 					return m.network_finished;
 				});
@@ -860,7 +887,6 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 				}
 
 				var col_sums = {};
-				var match_order = get_match_order(ev.matches);
 				var MATCH_ROWS = {
 					'1.HD': 12,
 					'DD': 14,
@@ -872,7 +898,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 				};
 				ev.matches.forEach(function(match, match_id) {
 					var setup = match.setup;
-					var row = MATCH_ROWS[setup.eventsheet_id || setup.match_name];
+					var row = MATCH_ROWS[calc_match_id(match)];
 					if (match_order[match_id]) {
 						_xlsx_text(sheet, 'A' + row, match_order[match_id]);
 					}
@@ -928,8 +954,56 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 
 		function fill_score_sheets(cb) {
 			_xlsx_modify_sheet(zipfile, 'xl/worksheets/sheet6.xml', cb, function(sheet) {
-				_xlsx_val(sheet, 'G8', ev.team_names[0]);
-				// TODO actually fill in scoresheets
+				var MATCH_ROWS = {
+					'1.HD': 5,
+					'DD': 43,
+					'2.HD': 81,
+					'1.HE': 119,
+					'DE': 157,
+					'GD': 195, // called XD in the sheet itself
+					'2.HE': 233,
+				};
+
+				ev.matches.forEach(function(match, match_idx) {
+					var start_row = MATCH_ROWS[calc_match_id(match)];
+					var md = match.network_metadata;
+
+					// top header
+					_xlsx_val(sheet, 'G' + (start_row + 3), ev.team_names[0]);
+					_xlsx_val(sheet, 'V' + (start_row + 3), ev.team_names[1]);
+					match.setup.teams.forEach(function(team, team_idx) {
+						team.players.forEach(function(player, player_idx) {
+							_xlsx_val(sheet, _xlsx_add_col('G', 15 * team_idx) + (start_row + 1 + player_idx), player.name);
+						});
+					});
+
+					// left header
+					if (match_order[match_idx]) {
+						_xlsx_val(sheet, 'C' + start_row, match_order[match_idx]);
+					}
+					if (match.setup.court_id) {
+						_xlsx_text(sheet, 'C' + (start_row + 2), match.setup.court_id);
+					}
+					var today = last_update ? (new Date(last_update)) : (new Date());
+					_xlsx_val(sheet, 'C' + (start_row + 3), _xlsx_date(today));
+
+					// right header
+					if (match.setup.umpire_name) {
+						_xlsx_text(sheet, 'AJ' + start_row, match.setup.umpire_name);
+					}
+					if (match.setup.service_judge_name) {
+						_xlsx_text(sheet, 'AJ' + (start_row + 1), match.setup.service_judge_name);
+					}
+					if (md.start) {
+						_xlsx_text(sheet, 'AI' + (start_row + 2), utils.time_str(md.start));
+					}
+					if (md.end) {
+						_xlsx_text(sheet, 'AM' + (start_row + 2), utils.time_str(md.end));
+					}
+					if (md.start && md.end) {
+						_xlsx_text(sheet, 'AI' + (start_row + 3), utils.duration_mins(md.start, md.end));
+					}
+				});
 			});
 		}
 
@@ -1229,6 +1303,8 @@ return {
 	_xlsx_add_col: _xlsx_add_col,
 	_xlsx_col2num: _xlsx_col2num,
 	_xlsx_num2col: _xlsx_num2col,
+	_xlsx_date: _xlsx_date,
+	_xlsx_leap_year: _xlsx_leap_year,
 };
 
 })();

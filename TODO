@@ -1,5 +1,9 @@
-Bundesliga xlsx
-	SR-Zettel
+Bundesliga xlsx scoresheets
+	player names for main body
+	main body
+	results in header
+	sides (l/r)
+
 bldemo: displaymode broken
 fix bup error report!
 	resume breaks press history
@@ -8,8 +12,10 @@ mail Klaus-Michael
 	example correct?
 	xlsx instead of xls
 	strange formula in Spielbericht -> Summe Sätze
+	formatting Feld-Nummer
+	different lengths of Schiedsrichter / Aufschlagsrichter dots
 	Autor Carsten Koch?
-error s.game is undefined
+error s.game is undefined (Markus?)
 
 Mannschaftsaufstellungsvordruck mit BuLi-Logo
 bl2016: Mannschaftsaufstellungsvordruck!

@@ -69,6 +69,7 @@ function set_metadata(event) {
 		}
 		match.netscore = calc.netscore(scopy);
 		match.network_finished = scopy.match.finished;
+		match.network_metadata = scopy.metadata;
 	});
 }
 
