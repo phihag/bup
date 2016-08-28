@@ -713,6 +713,7 @@ function render_presses(table, s) {
 			calc.state(scopy);
 		} else {
 			calc.calc_press(scopy, press);
+			scopy.flattened_presses = scopy.presses;
 		}
 
 		var desc = press_description(scopy, press);
