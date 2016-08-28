@@ -653,7 +653,8 @@ function _xlsx_text(sheet, cell_id, text) {
 }
 
 function calc_sums(match) {
-	if (!match.netscore.length) {
+	var netscore = match.netscore || match.network_score;
+	if (!netscore.length) {
 		return {
 			points: [],
 			games: [],
@@ -665,7 +666,7 @@ function calc_sums(match) {
 		games: [0, 0],
 		matches: [],
 	};
-	match.netscore.forEach(function(ngame, game_idx) {
+	netscore.forEach(function(ngame, game_idx) {
 		res.points[0] += ngame[0];
 		res.points[1] += ngame[1];
 
@@ -677,7 +678,7 @@ function calc_sums(match) {
 		}
 	});
 
-	var mwinner = calc.match_winner(match.setup.counting, match.netscore);
+	var mwinner = calc.match_winner(match.setup.counting, netscore);
 	if (mwinner === 'left') {
 		res.matches = [1, 0];
 	} else if (mwinner === 'right') {
@@ -909,7 +910,8 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 						});
 					});
 
-					match.netscore.forEach(function(nsGame, game_idx) {
+					var netscore = match.netscore || match.network_score;
+					netscore.forEach(function(nsGame, game_idx) {
 						nsGame.forEach(function(points, team_idx) {
 							var col = _xlsx_add_col('I', 3 * game_idx + 2 * team_idx);
 							_xlsx_val(sheet, col + row, points);
@@ -994,14 +996,16 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					if (match.setup.service_judge_name) {
 						_xlsx_text(sheet, 'AJ' + (start_row + 1), match.setup.service_judge_name);
 					}
-					if (md.start) {
-						_xlsx_text(sheet, 'AI' + (start_row + 2), utils.time_str(md.start));
-					}
-					if (md.end) {
-						_xlsx_text(sheet, 'AM' + (start_row + 2), utils.time_str(md.end));
-					}
-					if (md.start && md.end) {
-						_xlsx_text(sheet, 'AI' + (start_row + 3), utils.duration_mins(md.start, md.end));
+					if (md) {
+						if (md.start) {
+							_xlsx_text(sheet, 'AI' + (start_row + 2), utils.time_str(md.start));
+						}
+						if (md.end) {
+							_xlsx_text(sheet, 'AM' + (start_row + 2), utils.time_str(md.end));
+						}
+						if (md.start && md.end) {
+							_xlsx_text(sheet, 'AI' + (start_row + 3), utils.duration_mins(md.start, md.end));
+						}
 					}
 
 					// Player names in main body

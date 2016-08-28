@@ -1,12 +1,14 @@
 function btde(baseurl) {
 'use strict';
 
+var GAME_COUNT = 5;
+
 function ui_render_login(container) {
 	var login_form = $('<form class="settings_login">');
 	login_form.append($('<h2>Login badmintonticker</h2>'));
 	var login_error = $('<div class="network_error"></div>');
 	login_form.append(login_error);
-	login_form.append($('<input name="benutzer" type="text" placeholder="Benutzername">'));
+	login_form.append($('<input name="benutzername" type="text" placeholder="Benutzername">'));
 	login_form.append($('<input name="passwort" type="password" placeholder="Passwort">'));
 	var login_button = $('<button class="login_button"/>');
 	login_form.append(login_button);
@@ -21,7 +23,7 @@ function ui_render_login(container) {
 
 		network.request('btde.login', {
 			dataType: 'text',
-			url: baseurl + 'login/',
+			url: baseurl + 'login/index.php',
 			method: 'POST',
 			data: login_form.serializeArray(),
 			contentType: 'application/x-www-form-urlencoded',
@@ -62,7 +64,7 @@ function _request(s, component, options, cb) {
 	options.dataType = 'text';
 	options.timeout = s.settings.network_timeout;
 	network.request(component, options).done(function(res) {
-		if (/<div class="login">/.exec(res)) {
+		if (/<button>anmelden<\/button>/.exec(res)) {
 			return cb({
 				type: 'login-required',
 				msg: 'Login erforderlich',
@@ -102,9 +104,9 @@ function send_score(s) {
 	};
 	netscore.forEach(function(score, game_idx) {
 		post_data['satz' + (game_idx + 1)] = '' + score[0];
-		post_data['satz' + (3 + game_idx + 1)] = '' + score[1];
+		post_data['satz' + (GAME_COUNT + game_idx + 1)] = '' + score[1];
 	});
-	for (var i = 1;i <= 6;i++) {
+	for (var i = 1;i <= 2 * GAME_COUNT;i++) {
 		if (post_data['satz' + i] === undefined) {
 			post_data['satz' + i] = '';
 		}
@@ -218,9 +220,9 @@ function _parse_match_list(doc, now) {
 			(home_team.players.length != (is_doubles ? 2 : 1)));
 
 		var network_score = [];
-		for (var game_idx = 0;game_idx < 3;game_idx++) {
+		for (var game_idx = 0;game_idx < GAME_COUNT;game_idx++) {
 			var home_score_str = match['satz' + (1 + game_idx)];
-			var away_score_str = match['satz' + (4 + game_idx)];
+			var away_score_str = match['satz' + (1 + GAME_COUNT + game_idx)];
 			if (home_score_str !== '' && away_score_str !== '') {
 				network_score.push([
 					parseInt(home_score_str, 10),
@@ -236,13 +238,10 @@ function _parse_match_list(doc, now) {
 		if (m) {
 			eventsheet_id = m[2] + '.' + m[1];
 		}
-		if (eventsheet_id === 'HD') {
-			eventsheet_id = '1.HD';
-		}
 
 		return {
 			setup: {
-				counting: '3x21',
+				counting: '5x11_15',
 				eventsheet_id: eventsheet_id,
 				match_name: match.dis,
 				is_doubles: is_doubles,
@@ -259,7 +258,7 @@ function _parse_match_list(doc, now) {
 		team_names: [home_team_name, away_team_name],
 		event_name: home_team_name + ' - ' + away_team_name,
 		matches: matches,
-		league_key: '1BL', // TODO: get the league another way
+		league_key: '1BL-2016',
 	};
 }
 
