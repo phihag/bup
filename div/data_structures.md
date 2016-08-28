@@ -23,6 +23,15 @@ all_players     2-element list (home/away), each element is a list of all player
 teamsters       2-element list (home/away). Name (as string) of the teamsters of each team.
                 Depending on regulation, not necessarily (active) players.
                 Example: ["Heinz Kelzenberg", "Michael Fuchs"]
+courts          An array describing the current configuration of courts.
+
+
+court
+=====
+
+court_id*     ID of this court (often 1, 2, 3..)
+description   Description of where this court is.
+match_id      The match_id property of the match currently being played on this court.
 
 
 match

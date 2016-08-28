@@ -3,7 +3,6 @@ Bundesliga xlsx scoresheets
 	results in header
 	sides (l/r)
 
-bldemo: displaymode broken
 mail Ulf
 mail Klaus-Michael
 	example correct?
@@ -12,6 +11,7 @@ mail Klaus-Michael
 	formatting Feld-Nummer
 	different lengths of Schiedsrichter / Aufschlagsrichter dots
 	Autor Carsten Koch?
+bldemo: add a match in progress
 error s.game is undefined (Markus?)
 
 Mannschaftsaufstellungsvordruck mit BuLi-Logo

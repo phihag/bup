@@ -12,6 +12,15 @@
       "GD",
       "2.HE"
     ],
+    "courts": [{
+      "court_id": 1,
+      "description": "links",
+      "match_id": "bldemo_GD"
+    }, {
+      "court_id": 2,
+      "description": "rechts",
+      "match_id": "bldemo_HE2"
+    }],
     "matches": [
       {
         "setup": {

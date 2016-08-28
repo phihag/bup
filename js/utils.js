@@ -219,6 +219,9 @@ function obj_update(obj, other) {
 }
 
 function deep_copy(obj) {
+	if (obj === undefined) {
+		return obj;
+	}
 	return JSON.parse(JSON.stringify(obj));
 }
 
