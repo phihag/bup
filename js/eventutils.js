@@ -68,6 +68,7 @@ function set_metadata(event) {
 			match.network_last_update = fpresses[fpresses.length - 1].timestamp;
 		}
 		match.netscore = calc.netscore(scopy);
+		match.network_finished = scopy.match.finished;
 	});
 }
 

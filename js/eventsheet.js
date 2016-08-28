@@ -849,9 +849,14 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 				_xlsx_text(sheet, 'AB6', extra_data.starttime);
 
 				var last_update = calc_last_update(ev.matches);
+				var all_finished = ev.matches.every(function(m) {
+					return m.network_finished;
+				});
 				if (last_update) {
 					_xlsx_text(sheet, 'W6', utils.date_str(last_update));
-					_xlsx_text(sheet, 'AB8', utils.time_str(last_update));
+					if (all_finished) {
+						_xlsx_text(sheet, 'AB8', utils.time_str(last_update));
+					}
 				}
 
 				var match_order = get_match_order(ev.matches);

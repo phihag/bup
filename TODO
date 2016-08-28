@@ -1,12 +1,12 @@
 Bundesliga xlsx
 	Spielbericht
-		kein Ende wenn noch nicht alle Spiele fertig
 		backup players
 		sumsums
 		winner
 		notes
 		protest
 	SR-Zettel
+bldemo: displaymode broken
 fix bup error report!
 	resume breaks press history
 error s.game is undefined
