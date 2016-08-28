@@ -39,22 +39,74 @@ incomplete    Boolean. If set than the match is not yet ready to be called,
 press
 =====
 
+team_id is always 0: home team, 1: away_team.
+player_id is the index into the players array of setup.teams (0 in singles).
+
 timestamp*       UNIX timestamp when the button was pressed.
 type*            What kind of button has been pressed. Determines the other keys.
  "pick_side"     Who plays on which side.
-   team1_left*   (true: home team left, false: home team right)
+    team1_left*    (true: home team left, false: home team right)
  "pick_server"   Who is serving.
-     team_id*    0: home team, 1: away_team
-     player_id*  Index in players array of setup.teams (0 in singles)
+    team_id*
+    player_id*
  "pick_receiver" Who is receiving (optional in singles).
-     team_id*    0: home team, 1: away_team
-     player_id*  Index in players array of setup.teams (0 in singles)
-...
+    team_id*
+    player_id*
+ "love-all"      Start of match time (end of initial announcement)
+ "postgame-confirm"  Confirmation after announcement at end of game
+ "postmatch-confirm" Confirmation after announcement at end of match
+ "score"         A normal rally has been won.
+ 	side*          Either "left" or "right"
+ "overrule"      Line judge has been overruled (O in scoresheet)
+ "referee"       Referee has been called (R in scoresheet)
+ "correction"    Incorrect server/receiver has been corrected (C in scoresheet)
+    team_id*       0: home team was incorrect, 1: away team was incorrect
+ "yellow-card"   Warning for misconduct (yellow card).
+    team_id*
+    player_id*
+ "red-card"      Fault for misconduct (red card).
+    team_id*
+    player_id*
+ "injury"        A player has been injured (I on scoresheet, timer will run)
+    team_id*
+    player_id*
+ "injury-resume" Play resumes after an injury
+ "retired"       Player resigns. ("Retired" on scoresheet)
+    team_id*
+    player_id*
+ "disqualified"  Black card. ("Disqualified" on scoresheet)
+    team_id*
+    player_id*
+ "suspension"   Interruption of game, e.g. due to power failure. ("S" on scoresheet)
+ "resume"       Resume play after interruption. Duration will be recorded on scoresheet.
+ "shuttle"      Shuttlecock given out to the players. Total count will be recorded on scoresheet.
+ "editmode_change-ends"  Manual change of ends during the match.
+ "editmode_switch-sides" Manual change of who's playing left and who's right.
+    team_id*
+ "editmode_change-serve" Manual change of which side is serving.
+ "editmode_set-score"    Manual edit of the current score.
+    by_side*      Boolean, determines the format of score.
+    score*        The new score of the current game.
+                  If by_side then {left: 19, right: 18}.
+                  Otherwise [19, 18], where the first value is the home team's score.
+ "editmode_set-finished_games" Manual change of the scores of past games.
+                               Can also be used to invent or ignore past games.
+    by_side*      Boolean, determines the format of score.
+    scores*       An array of the scores of the past games.
+                  If by_side then [{left: 19, right: 18}].
+                  Otherwise [[19, 18]], where the first value of each subarray is the home team's score.
+                  Number of items can be different from actual number of sets.
+                  For instance, to start at 21:19 18:21 in the third game right away, call with
+                  scores: [[21, 19], [18, 21]].
+ "timer_restart" Restart the current (interval/warmup) timer.
+ "note"          A plain-text note on the scoresheet.
+    val*          Human-readable string of what happened.
 
 match setup
 ===========
 
-eventsheet_id     Language-independent ID of the match describing match type and number, e.g. "MS1". If missing match_name will be used.
+eventsheet_id     Language-independent ID of the match describing match type and number, e.g. "MS1".
+                  If missing match_name will be used.
 match_name*       Human-readable name of the match, e.g. "1. MS"
 match_id*         (Globally) unique ID, e.g. "20160825-Bundesliga-finale-MS1"
 teams*            An array (0: home team, 1: away team) of teams (see below).
@@ -78,4 +130,5 @@ gender    "m" or "f". If missing this is guessed by eventutils.guess_gender.
 lastname  Surname. If present firstname must be set as well.
 name*     Full name of the player
 
-* required
+
+* required key
