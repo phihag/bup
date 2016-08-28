@@ -196,10 +196,10 @@ function render_bundesliga(ev, es_key, ui8r, extra_data) {
 
 	var point_scores_arrays = matches.map(function(m) {
 		var res;
-		if (utils.deep_equal(m.network_score, [[0, 0]])) {
+		if (utils.deep_equal(m.netscore, [[0, 0]])) {
 			res = [];
 		} else {
-			res = m.network_score.map(function(nscore) {
+			res = m.netscore.map(function(nscore) {
 				return nscore[0] + '-' + nscore[1];
 			});
 		}
@@ -221,7 +221,7 @@ function render_bundesliga(ev, es_key, ui8r, extra_data) {
 		var games = [undefined, undefined];
 		var matches = [undefined, undefined];
 
-		var netscore = m.network_score;
+		var netscore = m.netscore;
 		if (netscore && (netscore.length > 0) && ((netscore[0][0] > 0) || (netscore[0][1] > 0))) {
 			points = [0, 0];
 			netscore.forEach(function(game_score) {
@@ -508,6 +508,8 @@ function render_svg(ev, es_key, ui8r, extra_data) {
 	var svg_doc = (new DOMParser()).parseFromString(xml_str, 'image/svg+xml');
 	var svg = svg_doc.getElementsByTagName('svg')[0];
 
+	eventutils.set_metadata(ev);
+
 	var match_order = ['1.HD', '2.HD', 'DD', '1.HE', '2.HE', '3.HE', 'DE', 'GD'];
 	var matches = order_matches(ev, match_order);
 	var last_update = calc_last_update(ev.matches);
@@ -536,7 +538,7 @@ function render_svg(ev, es_key, ui8r, extra_data) {
 	var sum_matches = [0, 0];
 
 	matches.forEach(function(match, match_id) {
-		var netscore = match.network_score;
+		var netscore = match.netscore;
 
 		match.setup.teams.forEach(function(team, team_id) {
 			team.players.forEach(function(player, player_id) {
@@ -650,8 +652,52 @@ function _xlsx_text(sheet, cell_id, text) {
 	uiu.create_el(is_node, 't', {}, text);
 }
 
+function calc_sums(match) {
+	if (!match.netscore.length) {
+		return {
+			points: [],
+			games: [],
+			matches: [],
+		};
+	}
+	var res = {
+		points: [0, 0],
+		games: [0, 0],
+		matches: [],
+	};
+	match.netscore.forEach(function(ngame, game_idx) {
+		res.points[0] += ngame[0];
+		res.points[1] += ngame[1];
+
+		var winner = calc.game_winner(match.setup.counting, game_idx, ngame[0], ngame[1]);
+		if (winner === 'left') {
+			res.games[0]++;
+		} else if (winner === 'right') {
+			res.games[1]++;
+		}
+	});
+
+	var mwinner = calc.match_winner(match.setup.counting, match.netscore);
+	if (mwinner === 'left') {
+		res.matches = [1, 0];
+	} else if (mwinner === 'right') {
+		res.matches = [0, 1];
+	}
+	return res;
+}
+
 function _xlsx_val(sheet, cell_id, val) {
-	uiu.text(sheet.querySelector('c[r="' + cell_id + '"]>v'), val);
+	var cell = sheet.querySelector('c[r="' + cell_id + '"]');
+	if (!cell) {
+		report_problem.silent_error('Cannot find cell ' + cell_id);
+		return;
+	}
+	var v_node = cell.querySelector('v');
+	if (v_node) {
+		uiu.text(v_node, val);
+	} else {
+		uiu.create_el(cell, 'v', {}, val);
+	}
 }
 
 function _xlsx_modify_sheet(zipfile, sheet_fn, cb, func) {
@@ -667,22 +713,45 @@ function _xlsx_modify_sheet(zipfile, sheet_fn, cb, func) {
 	});
 }
 
-function _xlsx_add_col(col, add) {
-	// Internally, we use a 1-based index!
-	// A=1, B=2, Z=27, AA=28
+function _xlsx_col2num(col) {
+	// A=0, B=1, Z=26, AA=27
 	var num = 0;
 	for (var i = 0;i < col.length;i++) {
 		num *= 26;
-		num += (col.charCodeAt(i) - 64);
+		num += (col.charCodeAt(i) - 65);
 	}
-	num += add;
+	// give bonus to first char
+	var bonus = 26;
+	for (var j = 1;j < col.length;j++) {
+		num += bonus;
+		bonus *= 26;
+	}
+	return num;
+}
 
+function _xlsx_num2col(num) {
 	var res = '';
+	var bonus = 26;
+	var minchars = 1;
+	while (num >= bonus) {
+		num -= bonus;
+		bonus *= 26;
+		minchars++;
+	}
+
 	while (num > 0) {
-		res = String.fromCharCode(64 + (num % 26)) + res;
+		res = String.fromCharCode(65 + (num % 26)) + res;
 		num = (num - (num % 26)) / 26;
 	}
+	while (res.length < minchars) {
+		res = 'A' + res;
+	}
 	return res;
+}
+
+function _xlsx_add_col(col, add) {
+	var num = _xlsx_col2num(col) + add;
+	return _xlsx_num2col(num);
 }
 
 function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
@@ -806,6 +875,27 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 						team.players.forEach(function(player, player_id) {
 							_xlsx_val(sheet, _xlsx_add_col('C', 3 * team_id) + (row + player_id), player.name);
 						});
+					});
+
+					match.netscore.forEach(function(nsGame, game_idx) {
+						nsGame.forEach(function(points, team_idx) {
+							var col = _xlsx_add_col('I', 3 * game_idx + 2 * team_idx);
+							_xlsx_val(sheet, col + row, points);
+						});
+					});
+
+					var sums = calc_sums(match);
+					sums.points.forEach(function(ps, ps_id) {
+						var col = _xlsx_add_col('X', ps_id);
+						_xlsx_val(sheet, col + row, ps);
+					});
+					sums.games.forEach(function(gs, gs_id) {
+						var col = _xlsx_add_col('Z', gs_id);
+						_xlsx_val(sheet, col + row, gs);
+					});
+					sums.matches.forEach(function(ms, ms_id) {
+						var col = _xlsx_add_col('AB', ms_id);
+						_xlsx_val(sheet, col + row, ms);
 					});
 				});
 			});
@@ -1112,6 +1202,8 @@ return {
 	render_links: render_links,
 	// Testing only
 	_xlsx_add_col: _xlsx_add_col,
+	_xlsx_col2num: _xlsx_col2num,
+	_xlsx_num2col: _xlsx_num2col,
 };
 
 })();

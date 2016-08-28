@@ -59,13 +59,15 @@ function set_metadata(event) {
 			return;
 		}
 		var scopy = calc.copy_state(state);
-		scopy.presses = JSON.parse(match.presses_json);
-		calc.undo(scopy);
+		var presses = JSON.parse(match.presses_json);
+		calc.init_state(scopy, match.setup, presses);
+		calc.state(scopy);
 		var fpresses = scopy.flattened_presses;
 		if (fpresses.length > 0) {
 			match.network_match_start = fpresses[0].timestamp;
 			match.network_last_update = fpresses[fpresses.length - 1].timestamp;
 		}
+		match.netscore = calc.netscore(scopy);
 	});
 }
 

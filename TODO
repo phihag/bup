@@ -1,16 +1,17 @@
+bldemo: more/better content (believable times etc.)
+	one crazy game
+
 Bundesliga xlsx
 	Spielbericht
-		points
 		backup players
-		Spielfolge
-		sums
 		sumsums
 		winner
-		Datum
-		Ende
+		notes
+		protest
 	SR-Zettel
 fix bup error report!
 	resume breaks press history
+error s.game is undefined
 mail Ulf
 mail Klaus-Michael
 	example correct?
@@ -20,11 +21,11 @@ mail Klaus-Michael
 
 Mannschaftsaufstellungsvordruck mit BuLi-Logo
 bl2016: Mannschaftsaufstellungsvordruck!
-
 scoresheet bundesliga-Logo
 Anforderungsliste BuLi!
 load jszip async
 	add to appcache
+interactive error handler => ask for an email
 
 bup display mode
 	add court outline display mode
@@ -226,7 +227,6 @@ improve P2P
 	write test cases
 	ObjectRTC
 import single matches
-yourscore.info
 
 replay?
 btde: Partial matches
@@ -270,11 +270,9 @@ test touch interface
 test touch latency
 prevent double touches
 
-counting systems demo
-test stats pressdescs in english
+option to not score games
 team-* eventsheet as SVG (for preview)?
 formalize backup_players event entry (in edemo/vdemo, later in liveaw)
-youscore.info support
 injury timer
 	in scoresheet (if not disqualified / retired afterwards)
 show what was undone

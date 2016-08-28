@@ -65,7 +65,7 @@ function ui_init(s) {
 	Mousetrap.bind('shift+x', function() {
 		importexport.send_export(state);
 	});
-	Mousetrap.bind('shift+a', function() {
+	Mousetrap.bind('shift+y', function() {
 		displaymode.show();
 	});
 	Mousetrap.bind('shift+u', function() {

@@ -50,6 +50,9 @@
 	height: 37.5vmin;
 }
 
+.stats_presses td {
+	vertical-align: top;
+}
 .stats_presses_timestamp {
 	color: #999;
 }

@@ -7,7 +7,7 @@ var i18n_en = {
 'Court': 'Court',
 'Select Court': 'Select Court',
 'Score Sheet': 'Score Sheet',
-'Statistics': 'Stats',
+'Statistics': 'Statistics',
 'dialog-left': 'Left court side',
 'dialog-server': 'Server',
 'dialog-receiver': 'Receiver',
