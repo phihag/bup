@@ -205,6 +205,14 @@ function _parse_match_list(doc, now) {
 	var home_team_name = event_data.heim;
 	var away_team_name = event_data.gast;
 
+	var courts = [{
+		court_id: 1,
+		description: '1 (links)',
+	}, {
+		court_id: 2,
+		description: '2 (rechts)',
+	}];
+
 	var matches = doc.slice(1, doc.length).map(function(match) {
 		var is_doubles = /~/.test(match.heim) && /~/.test(match.gast);
 		var home_team = {
@@ -232,6 +240,14 @@ function _parse_match_list(doc, now) {
 		}
 
 		var match_id = 'btde_' + utils.iso8601(now) + '_' + match.dis + '_' + home_team_name + '-' + away_team_name;
+		if (match.feld) {
+			var on_court = utils.find(courts, function(c) {
+				return c.court_id == match.feld;
+			});
+			if (on_court) {
+				on_court.match_id = match_id;
+			}
+		}
 
 		var m = /^(.+?)\s*([0-9]+)$/.exec(match.dis);
 		var eventsheet_id = match.dis;
@@ -258,6 +274,7 @@ function _parse_match_list(doc, now) {
 		team_names: [home_team_name, away_team_name],
 		event_name: home_team_name + ' - ' + away_team_name,
 		matches: matches,
+		courts: courts,
 		league_key: '1BL-2016',
 	};
 }

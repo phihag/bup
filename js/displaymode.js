@@ -44,7 +44,9 @@ function _doubles_name(player) {
 
 function _list_render_player_names(container, players, winning) {
 	var names_str;
-	if (players.length === 1) {
+	if (players.length === 0) {
+		names_str = 'TBA';
+	} else if (players.length === 1) {
 		names_str = players[0].name;
 	} else {
 		names_str = _doubles_name(players[0]) + ' / ' + _doubles_name(players[1]);
@@ -93,7 +95,6 @@ function determine_server(match, current_score) {
 		return {}; // This ensures that server.player_id is undefined
 	}
 
-
 	var team_id = match.network_team1_serving ? 0 : 1;
 	var player_id = 0;
 	if (match.setup.is_doubles) {
@@ -135,7 +136,6 @@ function _render_court_display(container, event, court, top_team_idx) {
 	var prev_scores = nscore.slice(0, -1);
 	var current_score = (nscore.length > 0) ? nscore[nscore.length - 1] : ['', ''];
 
-	var server = determine_server(match, current_score);
 
 	var top_current_score = uiu.create_el(container, 'div', {
 		'class': 'dcs_current_score_top',
@@ -149,6 +149,7 @@ function _render_court_display(container, event, court, top_team_idx) {
 	var player_container = uiu.create_el(container, 'div', {
 		'class': (match_setup.is_doubles ? 'dcs_player_names_doubles' : 'dcs_player_names_singles'),
 	});
+	var server = match ? determine_server(match, current_score) : {};
 	for (var player_id = 0;player_id < top_team.players.length;player_id++) {
 		var top_is_serving = (top_team_idx === server.team_id) && (player_id === server.player_id);
 		var top_player_name_container = uiu.create_el(player_container, 'div', {

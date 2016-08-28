@@ -3,7 +3,6 @@ Bundesliga xlsx scoresheets
 	results in header
 	sides (l/r)
 
-mail Ulf
 mail Klaus-Michael
 	example correct?
 	xlsx instead of xls
@@ -11,8 +10,6 @@ mail Klaus-Michael
 	formatting Feld-Nummer
 	different lengths of Schiedsrichter / Aufschlagsrichter dots
 	Autor Carsten Koch?
-update btde
-mail btde
 bldemo: add a match in progress
 error s.game is undefined (Markus?)
 
