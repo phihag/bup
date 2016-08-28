@@ -859,6 +859,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					}
 				}
 
+				var col_sums = {};
 				var match_order = get_match_order(ev.matches);
 				var MATCH_ROWS = {
 					'1.HD': 12,
@@ -889,20 +890,26 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 						});
 					});
 
+					function _enter_sums(start_col, values) {
+						values.forEach(function(v, v_id) {
+							var col = _xlsx_add_col(start_col, v_id);
+							_xlsx_val(sheet, col + row, v);
+							if (! col_sums[col]) {
+								col_sums[col] = 0;
+							}
+							col_sums[col] += v;
+						});
+					}
+
 					var sums = calc_sums(match);
-					sums.points.forEach(function(ps, ps_id) {
-						var col = _xlsx_add_col('X', ps_id);
-						_xlsx_val(sheet, col + row, ps);
-					});
-					sums.games.forEach(function(gs, gs_id) {
-						var col = _xlsx_add_col('Z', gs_id);
-						_xlsx_val(sheet, col + row, gs);
-					});
-					sums.matches.forEach(function(ms, ms_id) {
-						var col = _xlsx_add_col('AB', ms_id);
-						_xlsx_val(sheet, col + row, ms);
-					});
+					_enter_sums('X', sums.points);
+					_enter_sums('Z', sums.games);
+					_enter_sums('AB', sums.matches);
 				});
+
+				for (var col in col_sums) {
+					_xlsx_val(sheet, col + '23', col_sums[col]);
+				}
 			});
 		}
 
