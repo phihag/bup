@@ -968,7 +968,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					var start_row = MATCH_ROWS[calc_match_id(match)];
 					var md = match.network_metadata;
 
-					// top header
+					// top center header
 					_xlsx_val(sheet, 'G' + (start_row + 3), ev.team_names[0]);
 					_xlsx_val(sheet, 'V' + (start_row + 3), ev.team_names[1]);
 					match.setup.teams.forEach(function(team, team_idx) {
@@ -1002,6 +1002,15 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					}
 					if (md.start && md.end) {
 						_xlsx_text(sheet, 'AI' + (start_row + 3), utils.duration_mins(md.start, md.end));
+					}
+
+					// Player names in main body
+					for (var game = 0;game < 5;game++) {
+						match.setup.teams.forEach(function(team, team_idx) {
+							team.players.forEach(function(player, player_idx) {
+								_xlsx_val(sheet, 'B' + (start_row + 6 + 5 * game + 2 * team_idx + player_idx), player.name);
+							});
+						});
 					}
 				});
 			});
