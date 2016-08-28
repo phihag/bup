@@ -2,7 +2,12 @@ Bundesliga xlsx scoresheets
 	main body
 	results in header
 	sides (l/r)
+scoresheet bundesliga-Logo
+Mannschaftsaufstellungsvordruck mit BuLi-Logo
+bl2016: Mannschaftsaufstellungsvordruck!
+Anforderungsliste BuLi!
 
+mail Werner
 mail Klaus-Michael
 	example correct?
 	xlsx instead of xls
@@ -13,10 +18,6 @@ mail Klaus-Michael
 bldemo: add a match in progress
 error s.game is undefined (Markus?)
 
-Mannschaftsaufstellungsvordruck mit BuLi-Logo
-bl2016: Mannschaftsaufstellungsvordruck!
-scoresheet bundesliga-Logo
-Anforderungsliste BuLi!
 load jszip async
 	add to appcache
 interactive error handler => ask for an email
