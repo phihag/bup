@@ -928,7 +928,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 
 		function fill_score_sheets(cb) {
 			_xlsx_modify_sheet(zipfile, 'xl/worksheets/sheet6.xml', cb, function(sheet) {
-				_xlsx_text(sheet, 'G8', ev.team_names[0]);
+				_xlsx_val(sheet, 'G8', ev.team_names[0]);
 				// TODO actually fill in scoresheets
 			});
 		}

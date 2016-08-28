@@ -36,6 +36,7 @@ network_score The score displayed in the network system (may be different to act
 incomplete    Boolean. If set than the match is not yet ready to be called,
               for instance because no players have been assigned yet.
 
+
 press
 =====
 
@@ -105,16 +106,19 @@ type*            What kind of button has been pressed. Determines the other keys
 match setup
 ===========
 
-eventsheet_id     Language-independent ID of the match describing match type and number, e.g. "MS1".
-                  If missing match_name will be used.
-match_name*       Human-readable name of the match, e.g. "1. MS"
-match_id*         (Globally) unique ID, e.g. "20160825-Bundesliga-finale-MS1"
-teams*            An array (0: home team, 1: away team) of teams (see below).
-is_doubles*       Boolean key. false => singles, true => mixed/doubles
-counting*         Scoring system. Valid values are "3x21", "1x21", "2x21+11", "5x11_15", "1x11_15", "5x11/3"
-team_competition* Are players competing for their teams(true) or for themselves(false)? Affects announcements
-event_name        Name of the event (will be present on scoresheet), e.g. "Finals"
-tournament_name   Name of the overall tournament (will be present on scoresheet), e.g. "Bundesliga 2015/2016"
+eventsheet_id      Language-independent ID of the match describing match type and number, e.g. "MS1".
+                   If missing match_name will be used.
+match_name*        Human-readable name of the match, e.g. "1. MS"
+match_id*          (Globally) unique ID, e.g. "20160825-Bundesliga-finale-MS1"
+teams*             An array (0: home team, 1: away team) of teams (see below).
+is_doubles*        Boolean key. false => singles, true => mixed/doubles
+counting*          Scoring system. Valid values are "3x21", "1x21", "2x21+11", "5x11_15", "1x11_15", "5x11/3"
+team_competition*  Are players competing for their teams(true) or for themselves(false)? Affects announcements
+event_name         Name of the event (will be present on scoresheet), e.g. "Finals"
+tournament_name    Name of the overall tournament (will be present on scoresheet), e.g. "Bundesliga 2015/2016"
+umpire_name        Name of the umpire assigned to this match (or the last one who touched it).
+service_judge_name Name of the service judge assigned to this match.
+court_id           ID of the court this match is played on.
 
 team
 ====
