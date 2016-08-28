@@ -28,8 +28,8 @@ var files = {};
 
 var ui_current_league_key = null;
 
-function calc_backup_players_str(s) {
-	var bp = s.event.backup_players;
+function calc_backup_players_str(ev) {
+	var bp = ev.backup_players;
 	if (!bp) {
 		return '';
 	}
@@ -38,7 +38,7 @@ function calc_backup_players_str(s) {
 			return player.name;
 		}).join(', ');
 		if (res) {
-			res += ' (' + s.event.team_names[team_id] + ')';
+			res += ' (' + ev.team_names[team_id] + ')';
 		}
 		return res;
 	}).join(' / ');
@@ -919,6 +919,10 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					_xlsx_val(sheet, 'C23', ev.team_names[1]);
 				}
 
+				_xlsx_val(sheet, 'A25', calc_backup_players_str(ev));
+				_xlsx_text(sheet, 'A27', extra_data.notes);
+				_xlsx_text(sheet, 'A30', extra_data.protest);
+
 			});
 		}
 
@@ -1106,7 +1110,7 @@ function on_fetch() {
 		});
 	}
 
-	var backup_players_str = calc_backup_players_str(state);
+	var backup_players_str = calc_backup_players_str(state.event);
 	if (backup_players_str) {
 		container.querySelector('[name="backup_players_str"]').value = backup_players_str;
 	}
