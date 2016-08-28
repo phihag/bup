@@ -910,6 +910,15 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 				for (var col in col_sums) {
 					_xlsx_val(sheet, col + '23', col_sums[col]);
 				}
+
+				// Match winner
+				if ((col_sums.AB) && (col_sums.AB > ev.matches.length / 2)) {
+					_xlsx_val(sheet, 'C23', ev.team_names[0]);
+				}
+				if ((col_sums.AC) && (col_sums.AC > ev.matches.length / 2)) {
+					_xlsx_val(sheet, 'C23', ev.team_names[1]);
+				}
+
 			});
 		}
 
