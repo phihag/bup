@@ -14,11 +14,11 @@
     ],
     "courts": [{
       "court_id": 1,
-      "description": "links",
+      "description": "1 (links)",
       "match_id": "bldemo_GD"
     }, {
       "court_id": 2,
-      "description": "rechts",
+      "description": "2 (rechts)",
       "match_id": "bldemo_HE2"
     }],
     "matches": [
