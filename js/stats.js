@@ -365,10 +365,7 @@ function render_graph(svg, s, all_gpoints) {
 }
 
 function calc_stats(s) {
-	var all_games = s.match.finished_games.slice();
-	if (all_games[all_games.length - 1] !== s.game) {
-		all_games.push(s.game);
-	}
+	var all_games = calc.all_games(s);
 
 	var cols = all_games.map(function(game, i) {
 		return {

@@ -88,14 +88,18 @@ function copy_state(s) {
 	};
 }
 
+function all_games(s) {
+	var res = s.match.finished_games.slice();
+	if (res[res.length - 1] !== s.game) {
+		res.push(s.game);
+	}
+	return res;
+}
+
 
 function gamescore(s) {
 	var gscores = [0, 0];
-	var all_games = s.match.finished_games.slice();
-	if (all_games[all_games.length - 1] !== s.game) {
-		all_games.push(s.game);
-	}
-	all_games.forEach(function(g, game_idx) {
+	all_games(s).forEach(function(g, game_idx) {
 		var gs = g.score;
 		var winner = game_winner(s.setup.counting, game_idx, gs[0], gs[1]);
 		if (winner == 'left') {
@@ -939,8 +943,8 @@ function netscore(s, always_zero) {
 }
 
 
-
 return {
+	all_games: all_games,
 	calc_press: calc_press,
 	court: court,
 	copy_state: copy_state,

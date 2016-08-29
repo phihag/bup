@@ -72,6 +72,11 @@ function set_metadata(event) {
 		match.network_metadata = scopy.metadata;
 		var first_game = scopy.match.finished_games.length ? scopy.match.finished_games[0] : scopy.game;
 		match.network_start_team1_left = first_game.start_team1_left;
+		match.network_real_scores = calc.all_games(scopy).filter(function(g) {
+			return g.finished;
+		}).map(function(g) {
+			return g.score;
+		});
 	});
 }
 

@@ -983,6 +983,10 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 						_xlsx_text(sheet, 'F' + (start_row + 1), t1l ? 'L' : 'R');
 						_xlsx_text(sheet, 'AE' + (start_row + 1), t1l ? 'R' : 'L');
 					}
+					match.network_real_scores.forEach(function(scores, game_idx) {
+						_xlsx_text(sheet, 'R' + (start_row + game_idx), scores[0]);
+						_xlsx_text(sheet, 'T' + (start_row + game_idx), scores[1]);
+					});
 
 					// left header
 					if (match_order[match_idx]) {
