@@ -681,7 +681,7 @@ function _xlsx_text(sheet, cell_id, text) {
 	if (!cell) {
 		var m = /^([A-Z]+)([0-9]+)$/.exec(cell_id);
 		if (!m) {
-			silent_error.report('Cannot parse cell_id ' + cell_id);
+			report_problem.silent_error('Cannot parse cell_id ' + cell_id);
 			return;
 		}
 		var row_id = m[2];
@@ -1393,6 +1393,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var network = require('./network');
 	var render = require('./render');
 	var report_problem = require('./report_problem');
+	var scoresheet = require('./scoresheet');
 	var settings = require('./settings');
 	var svg2pdf = require('./svg2pdf');
 	var uiu = require('./uiu');
