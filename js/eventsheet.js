@@ -1025,6 +1025,22 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 							});
 						});
 					}
+
+
+					// Main body
+					var scopy = calc.copy_state(state);
+					var presses = JSON.parse(match.presses_json);
+					calc.init_state(scopy, match.setup, presses);
+					var entries = scoresheet.parse_match(scopy, 36);
+					
+					cells.forEach(c)(function() {
+						switch (c.type) {
+						case 'score':
+
+							break;
+						// Eeything else is ignored for now
+						}
+					});
 				});
 			});
 		}

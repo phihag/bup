@@ -17,7 +17,7 @@ var bup = tutils.bup;
 _describe('scoresheet generation', function() {
 	function _scoresheet_cells(presses, setup) {
 		var s = state_after(presses, setup);
-		return bup.scoresheet._parse_match(s, 35);
+		return bup.scoresheet.parse_match(s, 35);
 	}
 
 	function _assert_cell(cells, cell) {
@@ -89,12 +89,14 @@ _describe('scoresheet generation', function() {
 			assert(! isNaN(c.table), JSON.stringify(c) + ' has NaN col value');
 		});
 		_assert_cell(cells, {
+			type: 'text',
 			table: 2,
 			col: -1,
 			row: 0,
 			val: 'R',
 		});
 		_assert_cell(cells, {
+			type: 'text',
 			table: 2,
 			col: -1,
 			row: 2,
@@ -244,6 +246,7 @@ _describe('scoresheet generation', function() {
 		var cells = _scoresheet_cells(presses, DOUBLES_SETUP);
 		assert.equal(cells.length, 6);
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: 1,
 			row: 0,
@@ -251,6 +254,7 @@ _describe('scoresheet generation', function() {
 			press_type: 'injury',
 		});
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: 1,
 			row: 1,
@@ -269,6 +273,7 @@ _describe('scoresheet generation', function() {
 		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
 		assert.equal(cells.length, 8);
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: 2,
 			row: 3,
@@ -276,6 +281,7 @@ _describe('scoresheet generation', function() {
 			press_type: 'injury',
 		});
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: 2,
 			row: 2,
@@ -294,6 +300,7 @@ _describe('scoresheet generation', function() {
 		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
 		assert.equal(cells.length, 10);
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: 3,
 			row: 2,
@@ -301,6 +308,7 @@ _describe('scoresheet generation', function() {
 			press_type: 'injury',
 		});
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: 2,
 			row: 2,
@@ -367,12 +375,14 @@ _describe('scoresheet generation', function() {
 
 		var cells = _scoresheet_cells(presses, DOUBLES_SETUP);
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: 1,
 			row: 1,
 			val: 'W',
 		});
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: 2,
 			row: 1,
@@ -389,12 +399,14 @@ _describe('scoresheet generation', function() {
 		});
 		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: 3,
 			row: 2,
 			val: 'W',
 		});
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: 4,
 			row: 2,
@@ -417,6 +429,7 @@ _describe('scoresheet generation', function() {
 		});
 		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: 1,
 			row: 1,
@@ -463,6 +476,7 @@ _describe('scoresheet generation', function() {
 
 		var cells = _scoresheet_cells(presses, DOUBLES_SETUP);
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: 1,
 			row: 1,
@@ -510,6 +524,7 @@ _describe('scoresheet generation', function() {
 			type: 'score',
 		});
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: 2,
 			row: 1,
@@ -517,6 +532,7 @@ _describe('scoresheet generation', function() {
 			_suspension_timestamp: 1000000,
 		});
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: 3,
 			row: 1,
@@ -536,6 +552,7 @@ _describe('scoresheet generation', function() {
 			type: 'score',
 		});
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: 2,
 			row: 1,
@@ -550,6 +567,7 @@ _describe('scoresheet generation', function() {
 			val: '8:39',
 		});
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: 3,
 			row: 1,
@@ -593,6 +611,7 @@ _describe('scoresheet generation', function() {
 
 		var cells = _scoresheet_cells(presses, DOUBLES_SETUP);
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: 1,
 			row: 1,
@@ -607,12 +626,14 @@ _describe('scoresheet generation', function() {
 			type: 'score',
 		});
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: 1,
 			row: 0,
 			val: 'R',
 		});
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: 2,
 			row: 0,
@@ -634,6 +655,7 @@ _describe('scoresheet generation', function() {
 		});
 		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: 3,
 			row: 3,
@@ -679,6 +701,7 @@ _describe('scoresheet generation', function() {
 
 		var cells = _scoresheet_cells(presses, SINGLES_SETUP);
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: 1,
 			row: 2,
@@ -686,6 +709,7 @@ _describe('scoresheet generation', function() {
 			press_type: 'red-card',
 		});
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: 1,
 			row: 3,
@@ -699,6 +723,7 @@ _describe('scoresheet generation', function() {
 			type: 'score',
 		});
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: 2,
 			row: 2,
@@ -720,6 +745,7 @@ _describe('scoresheet generation', function() {
 		});
 		cells = _scoresheet_cells(presses, SINGLES_SETUP);
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: 3,
 			row: 0,
@@ -745,6 +771,7 @@ _describe('scoresheet generation', function() {
 		cells = _scoresheet_cells(presses, SINGLES_SETUP);
 
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: 4,
 			row: 2,
@@ -759,6 +786,7 @@ _describe('scoresheet generation', function() {
 			type: 'score',
 		});
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: 4,
 			row: 3,
@@ -825,6 +853,7 @@ _describe('scoresheet generation', function() {
 			val: 21,
 		});
 		_assert_cell(cells, {
+			type: 'text',
 			table: 1,
 			col: 22,
 			row: 2,
@@ -870,6 +899,7 @@ _describe('scoresheet generation', function() {
 		});
 		var cells = _scoresheet_cells(presses, DOUBLES_SETUP);
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: 2,
 			row: 3,
@@ -891,6 +921,7 @@ _describe('scoresheet generation', function() {
 		});
 		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: 2,
 			row: 0,
@@ -1295,6 +1326,7 @@ _describe('scoresheet generation', function() {
 		});
 		var cells = _scoresheet_cells(presses, SINGLES_SETUP);
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: -1,
 			row: 2,
@@ -1318,6 +1350,7 @@ _describe('scoresheet generation', function() {
 			assert(cell.val != 'R');
 		});
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: -1,
 			row: 2,
@@ -1345,6 +1378,7 @@ _describe('scoresheet generation', function() {
 			val: 0,
 		});
 		_assert_cell(cells, {
+			type: 'text',
 			table: 1,
 			col: -1,
 			row: 0,
@@ -1362,6 +1396,7 @@ _describe('scoresheet generation', function() {
 		});
 		cells = _scoresheet_cells(presses, SINGLES_SETUP);
 		_assert_cell(cells, {
+			type: 'text',
 			table: 2,
 			col: -1,
 			row: 2,
@@ -1943,6 +1978,7 @@ _describe('scoresheet generation', function() {
 		var cells = _scoresheet_cells(presses, SINGLES_SETUP_EN);
 		assert.equal(cells.length, 1);
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: -1,
 			row: 2,
@@ -1957,12 +1993,14 @@ _describe('scoresheet generation', function() {
 		cells = _scoresheet_cells(presses, DOUBLES_SETUP_EN);
 		assert.equal(cells.length, 2);
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: -1,
 			row: 2,
 			val: 'S',
 		});
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: -1,
 			row: 0,
@@ -1975,12 +2013,14 @@ _describe('scoresheet generation', function() {
 		cells = _scoresheet_cells(presses, DOUBLES_SETUP_EN);
 		assert.equal(cells.length, 4);
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: -1,
 			row: 2,
 			val: 'S',
 		});
 		_assert_cell(cells, {
+			type: 'text',
 			table: 0,
 			col: -1,
 			row: 0,
@@ -1994,6 +2034,7 @@ _describe('scoresheet generation', function() {
 		});
 		cells = _scoresheet_cells(presses, SINGLES_SETUP_EN);
 		_assert_cell(cells, {
+			type: 'text',
 			table: 1,
 			col: -1,
 			row: 0,
@@ -2007,6 +2048,7 @@ _describe('scoresheet generation', function() {
 		});
 		cells = _scoresheet_cells(presses, SINGLES_SETUP_EN);
 		_assert_cell(cells, {
+			type: 'text',
 			table: 1,
 			col: -1,
 			row: 2,
@@ -2031,6 +2073,7 @@ _describe('scoresheet generation', function() {
 		});
 		cells = _scoresheet_cells(presses, SINGLES_SETUP);
 		assert.deepStrictEqual(cells, [{
+			type: 'text',
 			col: 0,
 			row: 0,
 			table: 0,
@@ -2054,6 +2097,7 @@ _describe('scoresheet generation', function() {
 		cells = _scoresheet_cells(presses, SINGLES_SETUP);
 		assert.deepStrictEqual(cells.length, 3);
 		_assert_cell(cells, {
+			type: 'text',
 			col: 1,
 			row: 2,
 			table: 0,
@@ -2114,6 +2158,7 @@ _describe('scoresheet generation', function() {
 		cells = _scoresheet_cells(presses, SINGLES_SETUP);
 		assert.deepStrictEqual(cells.length, 53);
 		_assert_cell(cells, {
+			type: 'text',
 			table: 1,
 			col: 22,
 			row: 0,
@@ -2157,6 +2202,7 @@ _describe('scoresheet generation', function() {
 		});
 		var cells = _scoresheet_cells(presses, SINGLES_SETUP);
 		_assert_cell(cells, {
+			type: 'text',
 			col: 1,
 			row: 0,
 			table: 0,
@@ -2180,6 +2226,7 @@ _describe('scoresheet generation', function() {
 		});
 		cells = _scoresheet_cells(presses, SINGLES_SETUP);
 		_assert_cell(cells, {
+			type: 'text',
 			col: 1,
 			row: 0,
 			table: 0,
@@ -2225,6 +2272,7 @@ _describe('scoresheet generation', function() {
 		});
 		cells = _scoresheet_cells(presses, SINGLES_SETUP);
 		_assert_cell(cells, {
+			type: 'text',
 			col: 2,
 			row: 2,
 			table: 0,
@@ -2259,6 +2307,7 @@ _describe('scoresheet generation', function() {
 		});
 		var cells = _scoresheet_cells(presses, SINGLES_SETUP);
 		_assert_cell(cells, {
+			type: 'text',
 			col: 5,
 			row: 0,
 			table: 2,
@@ -2274,6 +2323,7 @@ _describe('scoresheet generation', function() {
 		});
 		assert.equal(cells.length, 20);
 		_assert_cell(cells, {
+			type: 'text',
 			col: 4,
 			row: 0,
 			table: 2,
@@ -2290,6 +2340,7 @@ _describe('scoresheet generation', function() {
 		});
 		cells = _scoresheet_cells(presses, SINGLES_SETUP);
 		_assert_cell(cells, {
+			type: 'text',
 			col: 6,
 			row: 2,
 			table: 2,
@@ -2304,6 +2355,7 @@ _describe('scoresheet generation', function() {
 			val: 21,
 		});
 		_assert_cell(cells, {
+			type: 'text',
 			col: 4,
 			row: 0,
 			table: 2,

@@ -186,7 +186,7 @@ function _after_injuries(s, press) {
 	s.scoresheet_injuries = [];
 }
 
-function _parse_match(state, col_count) {
+function parse_match(state, col_count) {
 	var s = {
 		initialized: state.initialized,
 		scoresheet_game: _make_scoresheet_game(),
@@ -222,6 +222,7 @@ function _parse_match(state, col_count) {
 			s.scoresheet_game.serving_team = press.team_id;
 
 			s.scoresheet_game.cells.push({
+				type: 'text',
 				col: -1,
 				row: press.team_id * 2 + press.player_id,
 				val: s._('scoresheet:server'),
@@ -236,6 +237,7 @@ function _parse_match(state, col_count) {
 					press.team_id * 2 + press.player_id);
 			}
 			s.scoresheet_game.cells.push({
+				type: 'text',
 				col: -1,
 				row: 2 * press.team_id + press.player_id,
 				val: s._('scoresheet:receiver'),
@@ -252,6 +254,7 @@ function _parse_match(state, col_count) {
 				s.scoresheet_game.servers = [0, 0];
 				s.scoresheet_game.serving_team = s.game.team1_won ? 0 : 1;
 				s.scoresheet_game.cells.push({
+					type: 'text',
 					col: -1,
 					row: 2 * s.scoresheet_game.serving_team,
 					val: s._('scoresheet:server'),
@@ -297,6 +300,7 @@ function _parse_match(state, col_count) {
 				}
 			}
 			s.scoresheet_game.cells.push({
+				type: 'text',
 				col: s.scoresheet_game.col_idx,
 				row: 2 * press.team_id + press.player_id,
 				val: calc.press_char(s, press),
@@ -314,6 +318,7 @@ function _parse_match(state, col_count) {
 			break;
 		case 'injury':
 			var cell = {
+				type: 'text',
 				col: s.scoresheet_game.col_idx,
 				row: 2 * press.team_id + press.player_id,
 				val: calc.press_char(s, press),
@@ -342,6 +347,7 @@ function _parse_match(state, col_count) {
 			}
 			if (! found) {
 				s.scoresheet_game.cells.push({
+					type: 'text',
 					row: 1,
 					col: s.scoresheet_game.col_idx,
 					val: calc.press_char(s, press),
@@ -357,6 +363,7 @@ function _parse_match(state, col_count) {
 				prev_cell = s.scoresheet_game.cells[s.scoresheet_game.cells.length - 1];
 				if ((prev_cell.press_type === 'injury') || (prev_cell.press_type === 'red-card') || (prev_cell.press_type === 'yellow-card')) {
 					s.scoresheet_game.cells.push({
+						type: 'text',
 						row: [1, 0, 3, 2][prev_cell.row],
 						col: prev_cell.col,
 						val: calc.press_char(s, press),
@@ -370,6 +377,7 @@ function _parse_match(state, col_count) {
 			}
 
 			s.scoresheet_game.cells.push({
+				type: 'text',
 				row: row,
 				col: s.scoresheet_game.col_idx,
 				val: calc.press_char(s, press),
@@ -407,6 +415,7 @@ function _parse_match(state, col_count) {
 			break;
 		case 'yellow-card':
 			s.scoresheet_game.cells.push({
+				type: 'text',
 				row: 2 * press.team_id + press.player_id,
 				col: s.scoresheet_game.col_idx,
 				val: calc.press_char(s, press),
@@ -417,6 +426,7 @@ function _parse_match(state, col_count) {
 			_after_injuries(s, press);
 			var press_char = calc.press_char(s, press);
 			var retired_cell = {
+				type: 'text',
 				row: 2 * press.team_id + press.player_id,
 				col: s.scoresheet_game.col_idx,
 				val: press_char,
@@ -442,6 +452,7 @@ function _parse_match(state, col_count) {
 			break;
 		case 'suspension':
 			s.scoresheet_game.cells.push({
+				type: 'text',
 				row: 1,
 				col: s.scoresheet_game.col_idx,
 				val: calc.press_char(s, press),
@@ -655,7 +666,7 @@ function sheet_render(s, svg, referee_view) {
 	}
 
 	var SCORESHEET_COL_COUNT = 35;
-	var cells = _parse_match(s, SCORESHEET_COL_COUNT);
+	var cells = parse_match(s, SCORESHEET_COL_COUNT);
 	var t = svg.querySelector('.scoresheet_table_container');
 	uiu.empty(t);
 
@@ -1129,8 +1140,7 @@ return {
 	hide: hide,
 	show: show,
 	event_show: event_show,
-	// For testing only
-	_parse_match: _parse_match,
+	parse_match: parse_match,
 };
 
 })();
