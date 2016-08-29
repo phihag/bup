@@ -641,17 +641,6 @@ function calc_player_matches(ev, team_id) {
 	return res;
 }
 
-function _xlsx_text(sheet, cell_id, text) {
-	var cell = sheet.querySelector('c[r="' + cell_id + '"]');
-	if (!cell) {
-		report_problem.silent_error('Cannot find cell ' + cell_id);
-		return;
-	}
-	cell.setAttribute('t', 'inlineStr');
-	var is_node = uiu.create_el(cell, 'is');
-	uiu.create_el(is_node, 't', {}, text);
-}
-
 function calc_sums(match) {
 	var netscore = match.netscore || match.network_score;
 	if (!netscore.length) {
@@ -685,6 +674,28 @@ function calc_sums(match) {
 		res.matches = [0, 1];
 	}
 	return res;
+}
+
+function _xlsx_text(sheet, cell_id, text) {
+	var cell = sheet.querySelector('c[r="' + cell_id + '"]');
+	if (!cell) {
+		var m = /^([A-Z]+)([0-9]+)$/.exec(cell_id);
+		if (!m) {
+			silent_error.report('Cannot parse cell_id ' + cell_id);
+			return;
+		}
+		var row_id = m[2];
+
+		var sheet_data = sheet.querySelector('sheetData');
+		var row = sheet_data.querySelector('row[r="' + row_id + '"]');
+		if (!row) {
+			row = uiu.create_el(sheet_data, 'row', {r: row_id});
+		}
+		cell = uiu.create_el(row, 'c', {r: cell_id});
+	}
+	cell.setAttribute('t', 'inlineStr');
+	var is_node = uiu.create_el(cell, 'is');
+	uiu.create_el(is_node, 't', {}, text);
 }
 
 function _xlsx_val(sheet, cell_id, val) {
@@ -780,6 +791,18 @@ function _xlsx_date(d) {
 function _xlsx_add_col(col, add) {
 	var num = _xlsx_col2num(col) + add;
 	return _xlsx_num2col(num);
+}
+
+function _xlsx_merge_cells(sheet, ref) {
+	var merges = sheet.querySelector('mergeCells');
+	if (!merges) {
+		merges = uiu.create_el(sheet.querySelector('worksheet'), 'mergeCells', {count: 0});
+	}
+	var count = parseInt(merges.getAttribute('count'), 10);
+	if (count) {
+		merges.setAttribute('count', count + 1);
+	}
+	uiu.create_el(merges, 'mergeCell', {ref: ref});
 }
 
 function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
@@ -965,6 +988,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					'GD': 195, // called XD in the sheet itself
 					'2.HE': 233,
 				};
+				var ROW_COUNT = 35;
 
 				ev.matches.forEach(function(match, match_idx) {
 					var start_row = MATCH_ROWS[calc_match_id(match)];
@@ -1026,19 +1050,34 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 						});
 					}
 
-
 					// Main body
 					var scopy = calc.copy_state(state);
 					var presses = JSON.parse(match.presses_json);
 					calc.init_state(scopy, match.setup, presses);
-					var entries = scoresheet.parse_match(scopy, 36);
+					var cells = scoresheet.parse_match(scopy, ROW_COUNT);
 					
-					cells.forEach(c)(function() {
+					cells.forEach(function(c) {
 						switch (c.type) {
 						case 'score':
-
+						case 'text':
+						case 'longtext':
+							_xlsx_text(sheet, _xlsx_add_col('F', c.col) + (start_row + 6 + 5 * c.table + c.row), c.val);
 							break;
-						// Eeything else is ignored for now
+						case 'note':
+							var col = 'F';
+							if (c.table >= 5) {
+								c.table -= 5;
+								col = 'AR';
+							}
+							var row = (start_row + 6 + 5 * c.table + c.row);
+							if (col === 'F') {
+								_xlsx_merge_cells(sheet, col + row + ':' + _xlsx_add_col(col, ROW_COUNT - 1) + row);
+							}
+							_xlsx_text(sheet, col + row, c.val);
+							break;
+						default:
+							// console.log('ignoring cell ', JSON.stringify(c));
+							// Everything else is ignored for now
 						}
 					});
 				});
