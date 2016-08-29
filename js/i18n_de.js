@@ -33,7 +33,7 @@ var i18n_de = {
 'report:body': 'Das Schiedsrichter-Panel hat folgendes Problem:\n\n\n\n\nTechnische Informationen:\nVersion: {bup_version}\nSprache: {lang}\nWebbrowser: {ua}\nURL: {url}\nGröße: {size} ({screen})\nEinstellungen: {settings}\nLetzer Fehler: {last_error}\n',
 
 'network:error': 'Fehler bei der Netzwerk-Übertragung',
-'network:error:unconfigured': 'Keine Netzwerk-Anbindung vorhanden!',
+'network:error:unconfigured': 'Keine Netzwerk-Anbindung konfiguriert! (Einzel-Demo-Modus statt #bldemo?)',
 'network:Matches': 'Spiele',
 'network:restart match': 'Spiel bei 0-0 neu starten',
 'network:resume match': 'Spiel bei {score} fortsetzen',

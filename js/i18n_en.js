@@ -33,7 +33,7 @@ var i18n_en = {
 'report:body': 'I encountered the following problem with the umpire panel:\n\n\n\n\nTechnical Information:\nVersion: {bup_version}\nLanguage: {lang}\nWeb browser: {ua}\nURL: {url}\Window size: {size} ({screen})\nSettings: {settings}\nError object: {last_error}\n',
 
 'network:error': 'Network transmission error',
-'network:error:unconfigured': 'Network connection not configured',
+'network:error:unconfigured': 'Network connection not configured (demo mode? put #bldemo into the URL to see it)',
 'network:Matches': 'Matches',
 'network:restart match': 'Restart match at 0-0',
 'network:resume match': 'Resume match at {score}',
