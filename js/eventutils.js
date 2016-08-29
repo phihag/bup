@@ -70,6 +70,8 @@ function set_metadata(event) {
 		match.netscore = calc.netscore(scopy);
 		match.network_finished = scopy.match.finished;
 		match.network_metadata = scopy.metadata;
+		var first_game = scopy.match.finished_games.length ? scopy.match.finished_games[0] : scopy.game;
+		match.network_start_team1_left = first_game.start_team1_left;
 	});
 }
 

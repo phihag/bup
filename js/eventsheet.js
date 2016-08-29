@@ -978,6 +978,11 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 							_xlsx_val(sheet, _xlsx_add_col('G', 15 * team_idx) + (start_row + 1 + player_idx), player.name);
 						});
 					});
+					var t1l = match.network_start_team1_left;
+					if (typeof t1l === 'boolean') {
+						_xlsx_text(sheet, 'F' + (start_row + 1), t1l ? 'L' : 'R');
+						_xlsx_text(sheet, 'AE' + (start_row + 1), t1l ? 'R' : 'L');
+					}
 
 					// left header
 					if (match_order[match_idx]) {

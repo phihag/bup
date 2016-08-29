@@ -1,7 +1,6 @@
 Bundesliga xlsx scoresheets
 	main body
 	results in header
-	sides (l/r)
 scoresheet bundesliga-Logo
 Mannschaftsaufstellungsvordruck mit BuLi-Logo
 bl2016: Mannschaftsaufstellungsvordruck!
@@ -12,7 +11,7 @@ mail Klaus-Michael
 	example correct?
 	xlsx instead of xls
 	strange formula in Spielbericht -> Summe Sätze
-	formatting Feld-Nummer
+	formatting Feld-Nummer / L/R in SR-Zettel
 	different lengths of Schiedsrichter / Aufschlagsrichter dots
 	Autor Carsten Koch?
 bldemo: add a match in progress
