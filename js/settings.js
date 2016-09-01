@@ -125,6 +125,17 @@ var _settings_textfields = ['umpire_name', 'service_judge_name', 'court_id', 'co
 var _settings_numberfields = ['network_timeout', 'network_update_interval', 'displaymode_update_interval', 'button_block_timeout'];
 var _settings_selects = ['language', 'displaymode_court_id', 'displaymode_style'];
 
+function update_court_settings(s) {
+	var automatic = false;
+	var manual = false;
+	if (get_mode(s) === 'umpire') {
+		automatic = uiu.qs('.settings select[name="court_select"]').getAttribute('data-auto-available') === 'true';
+		manual = ! automatic;
+	}
+	uiu.visible_qs('.settings_court_manual', manual);
+	uiu.visible_qs('.settings_court_automatic', automatic);
+}
+
 function update(s) {
 	_settings_checkboxes.forEach(function(name) {
 		var box = $('.settings [name="' + name + '"]');
@@ -246,12 +257,16 @@ function ui_init(s) {
 	on_mode_change(s);
 }
 
-function on_mode_change(s) {
-	var mode = 'umpire';
+function get_mode(s) {
+	var res = 'umpire';
 	if (s.ui.displaymode_visible) {
-		mode = 'display';
+		res = 'display';
 	}
+	return res;
+}
 
+function on_mode_change(s) {
+	var mode = get_mode(s);
 	uiu.qsEach('.settings_mode>a', function(a) {
 		var is_active = $(a).hasClass('settings_mode_' + mode);
 		if (is_active) {
@@ -265,19 +280,21 @@ function on_mode_change(s) {
 		var modes = el.getAttribute('data-bup-modes');
 		uiu.visible(el, modes.indexOf(mode) >= 0);
 	});
+	update_court_settings(s);
 }
 
 return {
+	hide: hide,
+	hide_displaymode: hide_displaymode,
 	load: load,
-	store: store,
-	update: update,
+	on_mode_change: on_mode_change,
 	show: show,
 	show_displaymode: show_displaymode,
-	hide_displaymode: hide_displaymode,
+	store: store,
 	toggle_displaymode: toggle_displaymode,
-	hide: hide,
 	ui_init: ui_init,
-	on_mode_change: on_mode_change,
+	update: update,
+	update_court_settings: update_court_settings,
 };
 
 })();

@@ -521,6 +521,7 @@ function ui_init_court(s, hash_query) {
 		option.attr('value', c.id);
 		select.append(option);
 	});
+	select.attr('data-auto-available', 'true');
 	select.val(s.settings.court_id);
 	select.on('change', function() {
 		var c = _court_by_id(all_courts, $(select).val());
@@ -529,10 +530,7 @@ function ui_init_court(s, hash_query) {
 			resync();
 		}
 	});
-	var manual = $('.settings_court_manual');
-	manual.hide();
-	var automatic = $('.settings_court_automatic');
-	automatic.show();
+	settings.update_court_settings(s);
 
 	var court_str_field = render.main_court_ui().court_str;
 	uiu.on_click(court_str_field, function() {

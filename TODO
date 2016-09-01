@@ -1,5 +1,5 @@
 Bundesliga xlsx scoresheets
-	main body
+	vertical-texts
 	circle for overall winner
 	circle at game end
 scoresheet bundesliga-Logo
@@ -18,12 +18,16 @@ mail Klaus-Michael
 	Autor Carsten Koch?
 bldemo: add a match in progress
 error s.game is undefined (Markus?)
+courts for edemo / vdemo
+retest edemo / vdemo with different locales
 
 load jszip async
 	add to appcache
 interactive error handler => ask for an email
 
 bup display mode
+	double court mode (digits outside)
+	normal mode w/ digits outside
 	add court outline display mode
 	upon changing mode or court show name and court at top for 10s
 	left/right keys to change display type
