@@ -63,19 +63,19 @@ $verwaltung = mysqli_fetch_assoc($result);
 mysqli_free_result($result);
 
 $tournament_name = null;
-$eventsheet_key = null;
+$league_key = null;
 switch ($verwaltung['Liga']) {
 case 1:
 	$tournament_name = '1. Bundesliga';
-	$eventsheet_key = '1BL-2016';
+	$league_key = '1BL-2016';
 	break;
 case 2:
 	$tournament_name = '2. Bundesliga Nord';
-	$eventsheet_key = '2BLN-2016';
+	$league_key = '2BLN-2016';
 	break;
 case 3:
 	$tournament_name = '2. Bundesliga Süd';
-	$eventsheet_key = '2BLS-2016';
+	$league_key = '2BLS-2016';
 	break;
 }
 
@@ -216,5 +216,5 @@ echo json_encode([
 	'event_name' => $verwaltung['Heim'] . ' - ' . $verwaltung['Gast'],
 	'tournament_name' => $tournament_name,
 	'team_names' => [$verwaltung['Heim'], $verwaltung['Gast']],
-	'eventsheets' => ($eventsheet_key ? [['key' => $eventsheet_key, 'label' => 'Spielbericht']] : []),
+	'league_key' => $league_key,
 ], JSON_PRETTY_PRINT);
