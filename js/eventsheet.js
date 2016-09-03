@@ -676,144 +676,15 @@ function calc_sums(match) {
 	return res;
 }
 
-function _xlsx_text(sheet, cell_id, text) {
-	var cell = sheet.querySelector('c[r="' + cell_id + '"]');
-	if (!cell) {
-		var m = /^([A-Z]+)([0-9]+)$/.exec(cell_id);
-		if (!m) {
-			report_problem.silent_error('Cannot parse cell_id ' + cell_id);
-			return;
-		}
-		var row_id = m[2];
-
-		var sheet_data = sheet.querySelector('sheetData');
-		var row = sheet_data.querySelector('row[r="' + row_id + '"]');
-		if (!row) {
-			row = uiu.create_el(sheet_data, 'row', {r: row_id});
-		}
-		cell = uiu.create_el(row, 'c', {r: cell_id});
-	}
-	cell.setAttribute('t', 'inlineStr');
-	var is_node = uiu.create_el(cell, 'is');
-	uiu.create_el(is_node, 't', {}, text);
-}
-
-function _xlsx_val(sheet, cell_id, val) {
-	var cell = sheet.querySelector('c[r="' + cell_id + '"]');
-	if (!cell) {
-		report_problem.silent_error('Cannot find cell ' + cell_id);
-		return;
-	}
-	var v_node = cell.querySelector('v');
-	if (v_node) {
-		uiu.text(v_node, val);
-	} else {
-		uiu.create_el(cell, 'v', {}, val);
-	}
-}
-
-function _xlsx_modify_sheet(zipfile, sheet_fn, cb, func) {
-	zipfile.file(sheet_fn).async('string').then(function(xml_str) {
-		var sheet = (new DOMParser()).parseFromString(xml_str, 'application/xml');
-
-		func(sheet);
-
-		var new_xml = (new XMLSerializer()).serializeToString(sheet);
-		zipfile.file(sheet_fn, new_xml);
-
-		cb();
-	});
-}
-
-function _xlsx_col2num(col) {
-	// A=0, B=1, Z=26, AA=27
-	var num = 0;
-	for (var i = 0;i < col.length;i++) {
-		num *= 26;
-		num += (col.charCodeAt(i) - 65);
-	}
-	// give bonus to first char
-	var bonus = 26;
-	for (var j = 1;j < col.length;j++) {
-		num += bonus;
-		bonus *= 26;
-	}
-	return num;
-}
-
-function _xlsx_num2col(num) {
-	var res = '';
-	var bonus = 26;
-	var minchars = 1;
-	while (num >= bonus) {
-		num -= bonus;
-		bonus *= 26;
-		minchars++;
-	}
-
-	while (num > 0) {
-		res = String.fromCharCode(65 + (num % 26)) + res;
-		num = (num - (num % 26)) / 26;
-	}
-	while (res.length < minchars) {
-		res = 'A' + res;
-	}
-	return res;
-}
-
-function _xlsx_leap_year(y) {
-	return (y % 400 === 0) || ((y % 4 === 0) && (y % 100 !== 0));
-}
-
-// Convert a JavaScript date object to an excel date number
-function _xlsx_date(d) {
-	var res = 25569; // 1970-01-01
-	var target_year = d.getFullYear();
-	for (var year = 1970;year < target_year;year++) {
-		res += _xlsx_leap_year(year) ? 366 : 365;
-	}
-	var month = d.getMonth();
-	if (month > 0) res += 31;
-	if (month > 1) res += _xlsx_leap_year(target_year) ? 29 : 28;
-	if (month > 2) res += 31;
-	if (month > 3) res += 30;
-	if (month > 4) res += 31;
-	if (month > 5) res += 30;
-	if (month > 6) res += 31;
-	if (month > 7) res += 31;
-	if (month > 8) res += 30;
-	if (month > 9) res += 31;
-	if (month > 10) res += 30;
-	res += d.getDate() - 1;
-	return res;
-}
-
-function _xlsx_add_col(col, add) {
-	var num = _xlsx_col2num(col) + add;
-	return _xlsx_num2col(num);
-}
-
-function _xlsx_merge_cells(sheet, ref) {
-	var merges = sheet.querySelector('mergeCells');
-	if (!merges) {
-		merges = uiu.create_el(sheet.querySelector('worksheet'), 'mergeCells', {count: 0});
-	}
-	var count = parseInt(merges.getAttribute('count'), 10);
-	if (count) {
-		merges.setAttribute('count', count + 1);
-	}
-	uiu.create_el(merges, 'mergeCell', {ref: ref});
-}
-
 function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 	eventutils.set_metadata(ev);
 	var match_order = get_match_order(ev.matches);
 	var last_update = calc_last_update(ev.matches);
 
-	JSZip.loadAsync(ui8r).then(function(zipfile) {
+	xlsx.open(ui8r, function(xlsx_file) {
 		function fill_team_sheet(sheet_fn, team_id, cb) {
-			_xlsx_modify_sheet(zipfile, sheet_fn, cb, function(sheet) {
-				_xlsx_text(sheet, 'B4', ev.team_names[team_id]);
+			xlsx_file.modify_sheet(sheet_fn, cb, function(sheet) {
+				sheet.text('B4', ev.team_names[team_id]);
 				var players = calc_player_matches(ev, team_id);
 
 				var row_idx = {
@@ -826,10 +697,10 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 				};
 				players.forEach(function(player) {
 					var row = row_idx[player.gender];
-					_xlsx_text(sheet, 'B' + row, player.name);
+					sheet.text('B' + row, player.name);
 					row_idx[player.gender]++;
 
-					_xlsx_val(sheet, 'C' + row, player.matches.length);
+					sheet.val('C' + row, player.matches.length);
 
 					player.matches.forEach(function(match) {
 						var MATCH_COLS = {
@@ -848,7 +719,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 						};
 
 						var col = MATCH_COLS[player.gender][calc_match_id(match)];
-						_xlsx_text(sheet, col + row, 'x');
+						sheet.text(col + row, 'x');
 						var v = x_count[player.gender][col];
 						x_count[player.gender][col] = v ? (v + 1) : 1;
 					});
@@ -861,7 +732,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 						f: 19,
 					}[gender];
 					for (var col in x_count[gender]) {
-						_xlsx_val(sheet, col + row, x_count[gender][col]);
+						sheet.val(col + row, x_count[gender][col]);
 					}
 				}
 
@@ -872,41 +743,41 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					};
 					ev.backup_players[team_id].forEach(function(player) {
 						var row = backup_row_idx[player.gender];
-						_xlsx_text(sheet, 'B' + row, player.name);
+						sheet.text('B' + row, player.name);
 						backup_row_idx[player.gender]++;
 					});
 				}
 
-				_xlsx_text(sheet, 'B29', extra_data['teamster' + team_id]);
+				sheet.text('B29', extra_data['teamster' + team_id]);
 
 				var incomplete = ev.matches.some(function(m) {
 					return m.setup.incomplete;
 				});
-				_xlsx_val(sheet, 'C4', incomplete ? 0 : 1);
+				sheet.val('C4', incomplete ? 0 : 1);
 			});
 		}
 
 		function fill_result_sheet(cb) {
-			_xlsx_modify_sheet(zipfile, 'xl/worksheets/sheet5.xml', cb, function(sheet) {
+			xlsx_file.modify_sheet('xl/worksheets/sheet5.xml', cb, function(sheet) {
 				var x_location = {
 					'1BL-2016': 'E4',
 					'2BLN-2016': 'E5',
 					'2BLS-2016': 'E6',
 				}[ev.league_key];
-				_xlsx_text(sheet, x_location, 'X');
+				sheet.text(x_location, 'X');
 
-				_xlsx_text(sheet, 'E8', extra_data.location);
-				_xlsx_text(sheet, 'W8', extra_data.matchday);
-				_xlsx_text(sheet, 'W4', extra_data.umpires);
-				_xlsx_text(sheet, 'AB6', extra_data.starttime);
+				sheet.text('E8', extra_data.location);
+				sheet.text('W8', extra_data.matchday);
+				sheet.text('W4', extra_data.umpires);
+				sheet.text('AB6', extra_data.starttime);
 
 				var all_finished = ev.matches.every(function(m) {
 					return m.network_finished;
 				});
 				if (last_update) {
-					_xlsx_text(sheet, 'W6', utils.date_str(last_update));
+					sheet.text('W6', utils.date_str(last_update));
 					if (all_finished) {
-						_xlsx_text(sheet, 'AB8', utils.time_str(last_update));
+						sheet.text('AB8', utils.time_str(last_update));
 					}
 				}
 
@@ -924,27 +795,27 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					var setup = match.setup;
 					var row = MATCH_ROWS[calc_match_id(match)];
 					if (match_order[match_id]) {
-						_xlsx_text(sheet, 'A' + row, match_order[match_id]);
+						sheet.text('A' + row, match_order[match_id]);
 					}
 
 					setup.teams.forEach(function(team, team_id) {
 						team.players.forEach(function(player, player_id) {
-							_xlsx_val(sheet, _xlsx_add_col('C', 3 * team_id) + (row + player_id), player.name);
+							sheet.val(xlsx.add_col('C', 3 * team_id) + (row + player_id), player.name);
 						});
 					});
 
 					var netscore = match.netscore || match.network_score;
 					netscore.forEach(function(nsGame, game_idx) {
 						nsGame.forEach(function(points, team_idx) {
-							var col = _xlsx_add_col('I', 3 * game_idx + 2 * team_idx);
-							_xlsx_val(sheet, col + row, points);
+							var col = xlsx.add_col('I', 3 * game_idx + 2 * team_idx);
+							sheet.val(col + row, points);
 						});
 					});
 
 					function _enter_sums(start_col, values) {
 						values.forEach(function(v, v_id) {
-							var col = _xlsx_add_col(start_col, v_id);
-							_xlsx_val(sheet, col + row, v);
+							var col = xlsx.add_col(start_col, v_id);
+							sheet.val(col + row, v);
 							if (! col_sums[col]) {
 								col_sums[col] = 0;
 							}
@@ -959,26 +830,26 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 				});
 
 				for (var col in col_sums) {
-					_xlsx_val(sheet, col + '23', col_sums[col]);
+					sheet.val(col + '23', col_sums[col]);
 				}
 
 				// Match winner
 				if ((col_sums.AB) && (col_sums.AB > ev.matches.length / 2)) {
-					_xlsx_val(sheet, 'C23', ev.team_names[0]);
+					sheet.val('C23', ev.team_names[0]);
 				}
 				if ((col_sums.AC) && (col_sums.AC > ev.matches.length / 2)) {
-					_xlsx_val(sheet, 'C23', ev.team_names[1]);
+					sheet.val('C23', ev.team_names[1]);
 				}
 
-				_xlsx_val(sheet, 'A25', calc_backup_players_str(ev));
-				_xlsx_text(sheet, 'A27', extra_data.notes);
-				_xlsx_text(sheet, 'A30', extra_data.protest);
+				sheet.val('A25', calc_backup_players_str(ev));
+				sheet.text('A27', extra_data.notes);
+				sheet.text('A30', extra_data.protest);
 
 			});
 		}
 
 		function fill_score_sheets(cb) {
-			_xlsx_modify_sheet(zipfile, 'xl/worksheets/sheet6.xml', cb, function(sheet) {
+			xlsx_file.modify_sheet('xl/worksheets/sheet6.xml', cb, function(sheet) {
 				var MATCH_ROWS = {
 					'1.HD': 5,
 					'DD': 43,
@@ -995,49 +866,49 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					var md = match.network_metadata;
 
 					// top center header
-					_xlsx_val(sheet, 'G' + (start_row + 3), ev.team_names[0]);
-					_xlsx_val(sheet, 'V' + (start_row + 3), ev.team_names[1]);
+					sheet.val('G' + (start_row + 3), ev.team_names[0]);
+					sheet.val('V' + (start_row + 3), ev.team_names[1]);
 					match.setup.teams.forEach(function(team, team_idx) {
 						team.players.forEach(function(player, player_idx) {
-							_xlsx_val(sheet, _xlsx_add_col('G', 15 * team_idx) + (start_row + 1 + player_idx), player.name);
+							sheet.val(xlsx.add_col('G', 15 * team_idx) + (start_row + 1 + player_idx), player.name);
 						});
 					});
 					var t1l = match.network_start_team1_left;
 					if (typeof t1l === 'boolean') {
-						_xlsx_text(sheet, 'F' + (start_row + 1), t1l ? 'L' : 'R');
-						_xlsx_text(sheet, 'AE' + (start_row + 1), t1l ? 'R' : 'L');
+						sheet.text('F' + (start_row + 1), t1l ? 'L' : 'R');
+						sheet.text('AE' + (start_row + 1), t1l ? 'R' : 'L');
 					}
 					match.network_real_scores.forEach(function(scores, game_idx) {
-						_xlsx_text(sheet, 'R' + (start_row + game_idx), scores[0]);
-						_xlsx_text(sheet, 'T' + (start_row + game_idx), scores[1]);
+						sheet.text('R' + (start_row + game_idx), scores[0]);
+						sheet.text('T' + (start_row + game_idx), scores[1]);
 					});
 
 					// left header
 					if (match_order[match_idx]) {
-						_xlsx_val(sheet, 'C' + start_row, match_order[match_idx]);
+						sheet.val('C' + start_row, match_order[match_idx]);
 					}
 					if (match.setup.court_id) {
-						_xlsx_text(sheet, 'C' + (start_row + 2), match.setup.court_id);
+						sheet.text('C' + (start_row + 2), match.setup.court_id);
 					}
 					var today = last_update ? (new Date(last_update)) : (new Date());
-					_xlsx_val(sheet, 'C' + (start_row + 3), _xlsx_date(today));
+					sheet.val('C' + (start_row + 3), xlsx.date(today));
 
 					// right header
 					if (match.setup.umpire_name) {
-						_xlsx_text(sheet, 'AJ' + start_row, match.setup.umpire_name);
+						sheet.text('AJ' + start_row, match.setup.umpire_name);
 					}
 					if (match.setup.service_judge_name) {
-						_xlsx_text(sheet, 'AJ' + (start_row + 1), match.setup.service_judge_name);
+						sheet.text('AJ' + (start_row + 1), match.setup.service_judge_name);
 					}
 					if (md) {
 						if (md.start) {
-							_xlsx_text(sheet, 'AI' + (start_row + 2), utils.time_str(md.start));
+							sheet.text('AI' + (start_row + 2), utils.time_str(md.start));
 						}
 						if (md.end) {
-							_xlsx_text(sheet, 'AM' + (start_row + 2), utils.time_str(md.end));
+							sheet.text('AM' + (start_row + 2), utils.time_str(md.end));
 						}
 						if (md.start && md.end) {
-							_xlsx_text(sheet, 'AI' + (start_row + 3), utils.duration_mins(md.start, md.end));
+							sheet.text('AI' + (start_row + 3), utils.duration_mins(md.start, md.end));
 						}
 					}
 
@@ -1045,7 +916,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					for (var game = 0;game < 5;game++) {
 						match.setup.teams.forEach(function(team, team_idx) {
 							team.players.forEach(function(player, player_idx) {
-								_xlsx_val(sheet, 'B' + (start_row + 6 + 5 * game + 2 * team_idx + player_idx), player.name);
+								sheet.val('B' + (start_row + 6 + 5 * game + 2 * team_idx + player_idx), player.name);
 							});
 						});
 					}
@@ -1061,7 +932,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 						case 'score':
 						case 'text':
 						case 'longtext':
-							_xlsx_text(sheet, _xlsx_add_col('F', c.col) + (start_row + 6 + 5 * c.table + c.row), c.val);
+							sheet.text(xlsx.add_col('F', c.col) + (start_row + 6 + 5 * c.table + c.row), c.val);
 							break;
 						case 'note':
 							var col = 'F';
@@ -1071,9 +942,9 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 							}
 							var row = (start_row + 6 + 5 * c.table + c.row);
 							if (col === 'F') {
-								_xlsx_merge_cells(sheet, col + row + ':' + _xlsx_add_col(col, ROW_COUNT - 1) + row);
+								sheet.merge_cells(col + row + ':' + xlsx.add_col(col, ROW_COUNT - 1) + row);
 							}
-							_xlsx_text(sheet, col + row, c.val);
+							sheet.text(col + row, c.val);
 							break;
 						default:
 							// console.log('ignoring cell ', JSON.stringify(c));
@@ -1092,12 +963,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 		fill_result_sheet,
 		fill_score_sheets,
 		], function() {
-			zipfile.generateAsync({
-				type: 'blob',
-				mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-			}).then(function(content) {
-				saveAs(content, 'Spielbericht ' + ev.event_name + '.xlsm');
-			});
+			xlsx_file.save('Spielbericht ' + ev.event_name + '.xlsm');
 		});
 	});
 }
@@ -1376,12 +1242,6 @@ return {
 	ui_init: ui_init,
 	show_dialog: show_dialog,
 	render_links: render_links,
-	// Testing only
-	_xlsx_add_col: _xlsx_add_col,
-	_xlsx_col2num: _xlsx_col2num,
-	_xlsx_num2col: _xlsx_num2col,
-	_xlsx_date: _xlsx_date,
-	_xlsx_leap_year: _xlsx_leap_year,
 };
 
 })();
@@ -1398,6 +1258,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var svg2pdf = require('./svg2pdf');
 	var uiu = require('./uiu');
 	var utils = require('./utils');
+	var xlsx = require('./xlsx');
 
 	module.exports = eventsheet;
 }

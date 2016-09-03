@@ -32,6 +32,7 @@ court
 court_id*     ID of this court (often 1, 2, 3..)
 description   Description of where this court is.
 match_id      The match_id property of the match currently being played on this court.
+chair         "west" - Umpire chair to the west at displaymode, "east" - Umpire chair to the east of the displaymode.
 
 
 match

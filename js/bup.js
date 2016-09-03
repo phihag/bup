@@ -98,12 +98,12 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var timer = require('./timer');
 	var uiu = require('./uiu');
 	var utils = require('./utils');
+	var xlsx = require('./xlsx');
 
 	module.exports = {
 		btde: btde,
 		calc: calc,
 		courtspot: courtspot,
-		eventsheet: eventsheet,
 		i18n: i18n,
 		network: network,
 		order: order,
@@ -112,6 +112,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 		scoresheet: scoresheet,
 		stats: stats,
 		utils: utils,
+		xlsx: xlsx,
 	};
 }
 /*/@DEV*/

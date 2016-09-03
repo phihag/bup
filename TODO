@@ -1,11 +1,13 @@
+separate xlsx
 Bundesliga xlsx scoresheets
-	vertical-texts
 	circle for overall winner
+	vertical-texts
 	circle at game end
 scoresheet bundesliga-Logo
 Mannschaftsaufstellungsvordruck mit BuLi-Logo
 bl2016: Mannschaftsaufstellungsvordruck!
 Anforderungsliste BuLi!
+btde 3x21 vs 5x11_15
 
 mail Werner
 mail Klaus-Michael
@@ -21,6 +23,7 @@ error s.game is undefined (Markus?)
 courts for edemo / vdemo
 retest edemo / vdemo with different locales
 
+error-reports Markus
 load jszip async
 	add to appcache
 interactive error handler => ask for an email
