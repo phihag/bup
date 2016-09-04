@@ -849,47 +849,42 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 		}
 
 		function fill_score_sheets(cb) {
+			var d_count = 0;
 			xlsx_file.modify_sheet('6', cb, function(sheet) {
-				sheet.add_drawing(function(drawings) {
-					var anchor = uiu.create_el(drawings, 'xdr:twoCellAnchor');
-					var from = uiu.create_el(anchor, 'xdr:from');
-					uiu.create_el(from, 'xdr:col', {}, 0);
-					uiu.create_el(from, 'xdr:colOff', {}, 720360);
-					uiu.create_el(from, 'xdr:row', {}, 1);
-					uiu.create_el(from, 'xdr:rowOff', {}, 54360);
-					var to = uiu.create_el(anchor, 'xdr:to');
-					uiu.create_el(to, 'xdr:col', {}, 1);
-					uiu.create_el(to, 'xdr:colOff', {}, 739080);
-					uiu.create_el(to, 'xdr:row', {}, 6);
-					uiu.create_el(to, 'xdr:rowOff', {}, 72720);
+				function add_winner_circle(start_row, team_id) {
+					var start_col = 6 + team_id * 15;
 
-					var sp = uiu.create_el(anchor, 'xdr:sp', {macro: '', textlink: ''});
+					sheet.add_drawing(function(drawings) {
+						var anchor = uiu.create_el(drawings, 'xdr:twoCellAnchor');
+						var from = uiu.create_el(anchor, 'xdr:from');
+						uiu.create_el(from, 'xdr:col', {}, start_col);
+						uiu.create_el(from, 'xdr:colOff', {}, 0);
+						uiu.create_el(from, 'xdr:row', {}, start_row);
+						uiu.create_el(from, 'xdr:rowOff', {}, 0);
+						var to = uiu.create_el(anchor, 'xdr:to');
+						uiu.create_el(to, 'xdr:col', {}, start_col + 9);
+						uiu.create_el(to, 'xdr:colOff', {}, 0);
+						uiu.create_el(to, 'xdr:row', {}, start_row + 3);
+						uiu.create_el(to, 'xdr:rowOff', {}, 0);
 
-					var nvSpPr = uiu.create_el(sp, 'xdr:nvSpPr');
-					uiu.create_el(nvSpPr, 'xdr:cNvPr', {'id': 6, 'name': 'Ellipse 5'});
-					uiu.create_el(nvSpPr, 'xdr:cNvSpPr');
+						var sp = uiu.create_el(anchor, 'xdr:sp');
 
-					var spPr = uiu.create_el(sp, 'xdr:spPr');
-					var xfrm = uiu.create_el(spPr, 'a:xdrm');
-					uiu.create_el(xfrm, 'a:off', {x: 720360, y: 216720});
-					uiu.create_el(xfrm, 'a:ext', {cx: 831240, cy: 831240});
-					var geom = uiu.create_el(spPr, 'a:prstGeom', {prst: 'ellipse'});
-					uiu.create_el(geom, 'a:avLst');
-					var fill = uiu.create_el(spPr, 'a:solidFill');
-					uiu.create_el(fill, 'a:srgbClr', {val: '729FCF'});
-					var line = uiu.create_el(spPr, 'a:ln');
-					var line_fill = uiu.create_el(line, 'a:solidFill');
-					uiu.create_el(line_fill, 'a:srgbClr', {val: '3465A4'});
-					var style = uiu.create_el(sp, 'xdr:style');
-					var lnRef = uiu.create_el(style, 'a:lnRef', {idx: 0});
-					uiu.create_el(lnRef, 'a:scrgbClr', {r: 0, g: 0, b: 0});
-					var fillRef = uiu.create_el(style, 'a:fillRef', {idx: 0});
-					uiu.create_el(fillRef, 'a:scrgbClr', {r: 0, g: 0, b: 0});
-					var effectRef = uiu.create_el(style, 'a:effectRef', {idx: 0});
-					uiu.create_el(effectRef, 'a:scrgbClr', {r: 0, g: 0, b: 0});
-					uiu.create_el(style, 'a:fontRef', {idx: 'major'});
-					uiu.create_el(anchor, 'xdr:clientData');
-				});
+						var nvSpPr = uiu.create_el(sp, 'xdr:nvSpPr');
+						uiu.create_el(nvSpPr, 'xdr:cNvPr', {'id': 1000 + d_count, 'name': 'bup ' + d_count});
+						uiu.create_el(nvSpPr, 'xdr:cNvSpPr');
+
+						var spPr = uiu.create_el(sp, 'xdr:spPr');
+						var geom = uiu.create_el(spPr, 'a:prstGeom', {prst: 'ellipse'});
+						uiu.create_el(geom, 'a:avLst');
+						var fill = uiu.create_el(spPr, 'a:solidFill');
+						uiu.create_el(fill, 'a:srgbClr', {val: '729FCF'});
+						var line = uiu.create_el(spPr, 'a:ln');
+						var line_fill = uiu.create_el(line, 'a:solidFill');
+						uiu.create_el(line_fill, 'a:srgbClr', {val: '3465A4'});
+						uiu.create_el(anchor, 'xdr:clientData');
+					});
+
+				}
 
 				var MATCH_ROWS = {
 					'1.HD': 5,
@@ -923,6 +918,9 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 						sheet.text('R' + (start_row + game_idx), scores[0]);
 						sheet.text('T' + (start_row + game_idx), scores[1]);
 					});
+					if (typeof match.network_team1_won === 'boolean') {
+						add_winner_circle(start_row, match.network_team1_won ? 0 : 1);
+					}
 
 					// left header
 					if (match_order[match_idx]) {
