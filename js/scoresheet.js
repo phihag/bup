@@ -337,6 +337,7 @@ function parse_match(state, col_count) {
 				prev_cell = s.scoresheet_game.cells[i];
 				if (prev_cell.type == 'score') {
 					s.scoresheet_game.cells.push({
+						type: 'text',
 						row: ({0:1, 1:0, 2: 3, 3:2})[prev_cell.row],
 						col: prev_cell.col,
 						val: calc.press_char(s, press),
@@ -396,6 +397,7 @@ function parse_match(state, col_count) {
 						row = ({0:3, 1:3, 2:0, 3:0})[prev_cell.row];
 					}
 					s.scoresheet_game.cells.push({
+						type: 'text',
 						row: row,
 						col: prev_cell.col,
 						val: calc.press_char(s, press),
@@ -406,6 +408,7 @@ function parse_match(state, col_count) {
 			}
 			if (! found) {
 				s.scoresheet_game.cells.push({
+					type: 'text',
 					row: 1,
 					col: s.scoresheet_game.col_idx,
 					val: calc.press_char(s, press),

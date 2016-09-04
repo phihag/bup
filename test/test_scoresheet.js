@@ -164,6 +164,7 @@ _describe('scoresheet generation', function() {
 			col: 1,
 			row: 1,
 			val: 'O',
+			type: 'text',
 		});
 
 		presses.push({
@@ -186,6 +187,7 @@ _describe('scoresheet generation', function() {
 			col: 2,
 			row: 2,
 			val: 'O',
+			type: 'text',
 		});
 
 		presses.push({
@@ -211,6 +213,7 @@ _describe('scoresheet generation', function() {
 			col: 3,
 			row: 0,
 			val: 'O',
+			type: 'text',
 		});
 	});
 
@@ -1058,6 +1061,7 @@ _describe('scoresheet generation', function() {
 			col: 2,
 			row: 0,
 			val: 'C',
+			type: 'text',
 		});
 
 		presses.push({
@@ -1092,6 +1096,7 @@ _describe('scoresheet generation', function() {
 			col: 4,
 			row: 1,
 			val: 'C',
+			type: 'text',
 		});
 
 		presses.push({
@@ -1126,6 +1131,7 @@ _describe('scoresheet generation', function() {
 			col: 6,
 			row: 2,
 			val: 'C',
+			type: 'text',
 		});
 
 		presses.push({
@@ -1160,6 +1166,7 @@ _describe('scoresheet generation', function() {
 			col: 8,
 			row: 3,
 			val: 'C',
+			type: 'text',
 		});
 
 		// Now against the receiver
@@ -1206,6 +1213,7 @@ _describe('scoresheet generation', function() {
 			col: 11,
 			row: 0,
 			val: 'C',
+			type: 'text',
 		});
 
 		presses.push({
@@ -1240,6 +1248,7 @@ _describe('scoresheet generation', function() {
 			col: 13,
 			row: 0,
 			val: 'C',
+			type: 'text',
 		});
 
 		presses.push({
@@ -1274,6 +1283,7 @@ _describe('scoresheet generation', function() {
 			col: 15,
 			row: 3,
 			val: 'C',
+			type: 'text',
 		});
 
 		presses.push({
@@ -1308,6 +1318,7 @@ _describe('scoresheet generation', function() {
 			col: 17,
 			row: 3,
 			val: 'C',
+			type: 'text',
 		});
 	});
 
