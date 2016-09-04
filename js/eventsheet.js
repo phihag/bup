@@ -758,7 +758,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 		}
 
 		function fill_result_sheet(cb) {
-			xlsx_file.modify_sheet('xl/worksheets/sheet5.xml', cb, function(sheet) {
+			xlsx_file.modify_sheet('5', cb, function(sheet) {
 				var x_location = {
 					'1BL-2016': 'E4',
 					'2BLN-2016': 'E5',
@@ -849,7 +849,34 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 		}
 
 		function fill_score_sheets(cb) {
-			xlsx_file.modify_sheet('xl/worksheets/sheet6.xml', cb, function(sheet) {
+			xlsx_file.modify_sheet('6', cb, function(sheet) {
+				sheet.add_drawing(function(drawings) {
+					var anchor = uiu.create_el(drawings, 'xdr:twoCellAnchor');
+					var from = uiu.create_el(anchor, 'xdr:from');
+					uiu.create_el(from, 'xdr:col', {}, 0);
+					uiu.create_el(from, 'xdr:colOff', {}, 720360);
+					uiu.create_el(from, 'xdr:row', {}, 1);
+					uiu.create_el(from, 'xdr:rowOff', {}, 54360);
+					var to = uiu.create_el(anchor, 'xdr:to');
+					uiu.create_el(to, 'xdr:col', {}, 1);
+					uiu.create_el(to, 'xdr:colOff', {}, 739080);
+					uiu.create_el(to, 'xdr:row', {}, 6);
+					uiu.create_el(to, 'xdr:rowOff', {}, 72720);
+
+					var sp = uiu.create_el(anchor, 'xdr:sp');
+					var spPr = uiu.create_el(sp, 'xdr:spPr');
+					var xfrm = uiu.create_el(spPr, 'a:xdrm');
+					uiu.create_el(xfrm, 'a:off', {x: 720360, y: 216720});
+					uiu.create_el(xfrm, 'a:ext', {cx: 831240, cy: 831240});
+					uiu.create_el(spPr, 'a:prstGeom', {prst: 'ellipse'});
+					var fill = uiu.create_el(spPr, 'a:solidFill');
+					uiu.create_el(fill, 'a:SrgbClr', {val: '729fcf'});
+					var line = uiu.create_el(spPr, 'a:ln');
+					var line_fill = uiu.create_el(line, 'a:solidFill');
+					uiu.create_el(line_fill, 'a:SrgbClr', {val: '3465a4'});
+					//var style = uiu.create_el(sp, 'xdr:style');
+				});
+
 				var MATCH_ROWS = {
 					'1.HD': 5,
 					'DD': 43,
@@ -956,9 +983,9 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 		}
 
 		utils.parallel([function(cb) {
-			fill_team_sheet('xl/worksheets/sheet2.xml', 0, cb);
+			fill_team_sheet('2', 0, cb);
 		}, function(cb) {
-			fill_team_sheet('xl/worksheets/sheet3.xml', 1, cb);
+			fill_team_sheet('3', 1, cb);
 		},
 		fill_result_sheet,
 		fill_score_sheets,

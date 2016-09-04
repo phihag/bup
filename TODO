@@ -1,8 +1,8 @@
-separate xlsx
 Bundesliga xlsx scoresheets
 	circle for overall winner
 	vertical-texts
 	circle at game end
+cell_id undefined Ulf
 scoresheet bundesliga-Logo
 Mannschaftsaufstellungsvordruck mit BuLi-Logo
 bl2016: Mannschaftsaufstellungsvordruck!
@@ -45,6 +45,7 @@ bup display mode
 	show last update in settings
 	support display mode without network
 
+Content-security-policy
 test offline (all features present with all demos?)
 do not require a court for staticnet (test by changing languages)
 
@@ -402,5 +403,6 @@ remove !important
 add a test that all public functions are in use
 write a test to find undocumented (div/data_structures.md) keys
 move eventsheet._xlsx into separate module
+reduce common occurences of a single string with dots in it (automatically?) Example: uiu.create_el
 -> Demo Jörg H, Manuel, Susanne, Werner Durow
 

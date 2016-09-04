@@ -1,7 +1,15 @@
 var xlsx = (function() {
 'use strict';
 
-function Sheet(doc) {
+function _parse_xml(xml_str) {
+	return (new DOMParser()).parseFromString(xml_str, 'application/xml');
+}
+
+function _serialize_xml(doc) {
+	return (new XMLSerializer()).serializeToString(doc);
+}
+
+function Sheet(book, doc, drawing_doc) {
 	function text(cell_id, text) {
 		var cell = doc.querySelector('c[r="' + cell_id + '"]');
 		if (!cell) {
@@ -50,28 +58,68 @@ function Sheet(doc) {
 		uiu.create_el(merges, 'mergeCell', {ref: ref});
 	}
 
+	function add_drawing(func) {
+		func(drawing_doc.documentElement);
+	}
+
 	return {
 		val: val,
 		merge_cells: merge_cells,
 		text: text,
+		add_drawing: add_drawing,
 	};
 }
 
 function open(ui8r, cb) {
 	JSZip.loadAsync(ui8r).then(function(zipfile) {
+		var drawing_count = (function() {
+			for (var i = 1;;i++) {
+				if (! zipfile.files['xl/drawings/drawing' + i + '.xml']) {
+					return i;
+				}
+			}
+		})();
+
 		// TODO open relations
 		// TODO open drawings doc
-		function modify_sheet(sheet_fn, cb, func) {
+
+		function modify_sheet(sheet_id, cb, func) {
+			var sheet_fn = 'xl/worksheets/sheet' + sheet_id + '.xml';
+			var rel_fn = 'xl/worksheets/_rels/sheet' + sheet_id + '.xml.rels';
 			zipfile.file(sheet_fn).async('string').then(function(xml_str) {
-				var xml_doc = (new DOMParser()).parseFromString(xml_str, 'application/xml');
-				var sheet = Sheet(xml_doc);
+				var doc = _parse_xml(xml_str);
+				zipfile.file(rel_fn).async('string').then(function(rel_str) {
+					var rel_doc = _parse_xml(rel_str);
 
-				func(sheet);
+					function process(drawing_fn, drawing_doc) {
+						var sheet = Sheet(book, doc, drawing_doc);
 
-				var new_xml = (new XMLSerializer()).serializeToString(xml_doc);
-				zipfile.file(sheet_fn, new_xml);
+						func(sheet);
 
-				cb();
+						var new_xml = _serialize_xml(doc);
+						zipfile.file(sheet_fn, new_xml);
+
+						if (drawing_fn) {
+							var new_drawing_xml = _serialize_xml(drawing_doc);
+							zipfile.file(drawing_fn, new_drawing_xml);
+						}
+
+						cb();
+					}
+
+					var drawing_ref = doc.querySelector('drawing');
+					if (drawing_ref) {
+						var drawing_id = drawing_ref.getAttribute('r:id');
+						var drawing_rel_fn = rel_doc.querySelector('Relationship[Id="' + drawing_id + '"]').getAttribute('Target');
+						var m = /(drawing[0-9]+\.xml)$/.exec(drawing_rel_fn);
+						var drawing_fn = 'xl/drawings/' + m[1];
+						zipfile.file(drawing_fn).async('string').then(function(drawing_str) {
+							process(drawing_fn, _parse_xml(drawing_str));
+						});
+					} else {
+						process();
+					}
+				});
 			});
 		}
 
@@ -84,10 +132,12 @@ function open(ui8r, cb) {
 			});
 		}
 
-		cb({
+		var book = {
 			modify_sheet: modify_sheet,
 			save: save,
-		});
+		};
+
+		cb(book);
 	});
 }
 
