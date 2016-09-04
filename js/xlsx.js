@@ -72,17 +72,6 @@ function Sheet(book, doc, drawing_doc) {
 
 function open(ui8r, cb) {
 	JSZip.loadAsync(ui8r).then(function(zipfile) {
-		var drawing_count = (function() {
-			for (var i = 1;;i++) {
-				if (! zipfile.files['xl/drawings/drawing' + i + '.xml']) {
-					return i;
-				}
-			}
-		})();
-
-		// TODO open relations
-		// TODO open drawings doc
-
 		function modify_sheet(sheet_id, cb, func) {
 			var sheet_fn = 'xl/worksheets/sheet' + sheet_id + '.xml';
 			var rel_fn = 'xl/worksheets/_rels/sheet' + sheet_id + '.xml.rels';
