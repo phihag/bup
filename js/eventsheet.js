@@ -858,14 +858,14 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 						var anchor = uiu.create_el(drawings, 'xdr:twoCellAnchor');
 						var from = uiu.create_el(anchor, 'xdr:from');
 						uiu.create_el(from, 'xdr:col', {}, start_col);
-						uiu.create_el(from, 'xdr:colOff', {}, 0);
+						uiu.create_el(from, 'xdr:colOff', {}, -200000);
 						uiu.create_el(from, 'xdr:row', {}, start_row);
-						uiu.create_el(from, 'xdr:rowOff', {}, 0);
+						uiu.create_el(from, 'xdr:rowOff', {}, -120000);
 						var to = uiu.create_el(anchor, 'xdr:to');
 						uiu.create_el(to, 'xdr:col', {}, start_col + 9);
 						uiu.create_el(to, 'xdr:colOff', {}, 0);
 						uiu.create_el(to, 'xdr:row', {}, start_row + 3);
-						uiu.create_el(to, 'xdr:rowOff', {}, 0);
+						uiu.create_el(to, 'xdr:rowOff', {}, 120000);
 
 						var sp = uiu.create_el(anchor, 'xdr:sp');
 
@@ -874,13 +874,10 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 						uiu.create_el(nvSpPr, 'xdr:cNvSpPr');
 
 						var spPr = uiu.create_el(sp, 'xdr:spPr');
-						var geom = uiu.create_el(spPr, 'a:prstGeom', {prst: 'ellipse'});
-						uiu.create_el(geom, 'a:avLst');
-						var fill = uiu.create_el(spPr, 'a:solidFill');
-						uiu.create_el(fill, 'a:srgbClr', {val: '729FCF'});
-						var line = uiu.create_el(spPr, 'a:ln');
+						uiu.create_el(spPr, 'a:prstGeom', {prst: 'ellipse'});
+						var line = uiu.create_el(spPr, 'a:ln', {w: 36000});
 						var line_fill = uiu.create_el(line, 'a:solidFill');
-						uiu.create_el(line_fill, 'a:srgbClr', {val: '3465A4'});
+						uiu.create_el(line_fill, 'a:srgbClr', {val: '000000'});
 						uiu.create_el(anchor, 'xdr:clientData');
 					});
 
