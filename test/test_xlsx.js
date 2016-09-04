@@ -23,16 +23,16 @@ _describe('XLSX', function() {
 	});
 
 	_it('num2col', function() {
-		assert.strictEqual(bup.xlsx._num2col(0), 'A');
-		assert.strictEqual(bup.xlsx._num2col(1), 'B');
-		assert.strictEqual(bup.xlsx._num2col(25), 'Z');
-		assert.strictEqual(bup.xlsx._num2col(26), 'AA');
-		assert.strictEqual(bup.xlsx._num2col(27), 'AB');
-		assert.strictEqual(bup.xlsx._num2col(51), 'AZ');
-		assert.strictEqual(bup.xlsx._num2col(52), 'BA');
-		assert.strictEqual(bup.xlsx._num2col(675), 'YZ');
-		assert.strictEqual(bup.xlsx._num2col(701), 'ZZ');
-		assert.strictEqual(bup.xlsx._num2col(702), 'AAA');
+		assert.strictEqual(bup.xlsx.num2col(0), 'A');
+		assert.strictEqual(bup.xlsx.num2col(1), 'B');
+		assert.strictEqual(bup.xlsx.num2col(25), 'Z');
+		assert.strictEqual(bup.xlsx.num2col(26), 'AA');
+		assert.strictEqual(bup.xlsx.num2col(27), 'AB');
+		assert.strictEqual(bup.xlsx.num2col(51), 'AZ');
+		assert.strictEqual(bup.xlsx.num2col(52), 'BA');
+		assert.strictEqual(bup.xlsx.num2col(675), 'YZ');
+		assert.strictEqual(bup.xlsx.num2col(701), 'ZZ');
+		assert.strictEqual(bup.xlsx.num2col(702), 'AAA');
 	});
 
 	_it('add_col', function() {

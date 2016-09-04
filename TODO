@@ -1,13 +1,5 @@
-Bundesliga xlsx scoresheets
-	improve cicrcle size
-	transparent circle
-	thicker circle
-	vertical-texts
-	circle at game end
-cell_id undefined Ulf
 scoresheet bundesliga-Logo
 Mannschaftsaufstellungsvordruck mit BuLi-Logo
-bl2016: Mannschaftsaufstellungsvordruck!
 Anforderungsliste BuLi!
 btde 3x21 vs 5x11_15
 
@@ -20,11 +12,15 @@ mail Klaus-Michael
 	different lengths of Schiedsrichter / Aufschlagsrichter dots
 	Mannschaftsaufstellungsvordruck Bundesliga
 	Autor Carsten Koch?
+cell_id undefined Ulf
+Bundesliga xlsx scoresheets
+	vertical-texts with shape instead
 bldemo: add a match in progress
 error s.game is undefined (Markus?)
 courts for edemo / vdemo
 retest edemo / vdemo with different locales
 
+disqualified in english scoresheet!
 error-reports Markus
 load jszip async
 	add to appcache
@@ -60,6 +56,8 @@ v/edemo11
 v/edemo: set court nr
 court selector in demo mode
 Schiedsrichterzettel mit DBV-Logo! (S. 246)
+
+xlsx scoresheet: add angled line (and improve text positioning)
 
 mail Ulf
 

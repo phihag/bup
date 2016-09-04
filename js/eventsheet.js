@@ -871,6 +871,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 
 						var nvSpPr = uiu.create_el(sp, 'xdr:nvSpPr');
 						uiu.create_el(nvSpPr, 'xdr:cNvPr', {'id': 1000 + d_count, 'name': 'bup ' + d_count});
+						d_count++;
 						uiu.create_el(nvSpPr, 'xdr:cNvSpPr');
 
 						var spPr = uiu.create_el(sp, 'xdr:spPr');
@@ -880,7 +881,130 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 						uiu.create_el(line_fill, 'a:srgbClr', {val: '000000'});
 						uiu.create_el(anchor, 'xdr:clientData');
 					});
+				}
 
+				function gen_game_circle(start_row, c) {
+					var row = start_row + 5 + 5 * c.table;
+					var col = 5 + c.col;
+
+					sheet.text(xlsx.num2col(col + 1) + (row + 2), c.score[0]);
+					sheet.text(xlsx.num2col(col + 1) + (row + 3), c.score[1]);
+
+					sheet.add_drawing(function(drawings) {
+						var anchor = uiu.create_el(drawings, 'xdr:twoCellAnchor');
+						var from = uiu.create_el(anchor, 'xdr:from');
+						uiu.create_el(from, 'xdr:col', {}, col + 1);
+						uiu.create_el(from, 'xdr:colOff', {}, -150000);
+						uiu.create_el(from, 'xdr:row', {}, row);
+						uiu.create_el(from, 'xdr:rowOff', {}, 20000);
+						var to = uiu.create_el(anchor, 'xdr:to');
+						uiu.create_el(to, 'xdr:col', {}, col + 2);
+						uiu.create_el(to, 'xdr:colOff', {}, 150000);
+						uiu.create_el(to, 'xdr:row', {}, row + 4);
+						uiu.create_el(to, 'xdr:rowOff', {}, -40000);
+
+						var sp = uiu.create_el(anchor, 'xdr:sp');
+
+						var nvSpPr = uiu.create_el(sp, 'xdr:nvSpPr');
+						uiu.create_el(nvSpPr, 'xdr:cNvPr', {'id': 1000 + d_count, 'name': 'bup ' + d_count});
+						d_count++;
+						uiu.create_el(nvSpPr, 'xdr:cNvSpPr');
+
+						var spPr = uiu.create_el(sp, 'xdr:spPr');
+						uiu.create_el(spPr, 'a:prstGeom', {prst: 'ellipse'});
+						var line = uiu.create_el(spPr, 'a:ln', {w: 12000});
+						var line_fill = uiu.create_el(line, 'a:solidFill');
+						uiu.create_el(line_fill, 'a:srgbClr', {val: '000000'});
+						uiu.create_el(anchor, 'xdr:clientData');
+					});
+				}
+
+				function gen_vertical_text(start_row, c) {
+					sheet.text(xlsx.add_col('F', c.col) + (start_row + 6 + 5 * c.table + parseInt(Math.ceil(c.row))), c.val);
+
+					// TODO use a shape instead
+					/* XML should look like:
+	    <xdr:sp>
+      <xdr:nvSpPr>
+        <xdr:cNvPr id="0" name="TextShape 1"/>
+        <xdr:cNvSpPr txBox="1"/>
+      </xdr:nvSpPr>
+      <xdr:spPr>
+        <a:xfrm rot="16111200">
+          <a:off x="1067040" y="952200"/>
+          <a:ext cx="316080" cy="180720"/>
+        </a:xfrm>
+        <a:prstGeom prst="rect">
+          <a:avLst/>
+        </a:prstGeom>
+        <a:noFill/>
+        <a:ln>
+          <a:noFill/>
+        </a:ln>
+      </xdr:spPr>
+      <xdr:txBody>
+        <a:bodyPr lIns="0" rIns="0" tIns="0" bIns="0"/>
+        <a:p>
+          <a:r>
+            <a:rPr b="0" lang="de-DE" sz="1200" spc="-1" strike="noStrike">
+              <a:solidFill>
+                <a:srgbClr val="000000"/>
+              </a:solidFill>
+              <a:uFill>
+                <a:solidFill>
+                  <a:srgbClr val="ffffff"/>
+                </a:solidFill>
+              </a:uFill>
+              <a:latin typeface="Times New Roman"/>
+            </a:rPr>
+            <a:t>Text</a:t>
+          </a:r>
+          <a:endParaRPr b="0" lang="de-DE" sz="1200" spc="-1" strike="noStrike">
+            <a:solidFill>
+              <a:srgbClr val="000000"/>
+            </a:solidFill>
+            <a:uFill>
+              <a:solidFill>
+                <a:srgbClr val="ffffff"/>
+              </a:solidFill>
+            </a:uFill>
+            <a:latin typeface="Times New Roman"/>
+          </a:endParaRPr>
+        </a:p>
+      </xdr:txBody>
+    </xdr:sp>*/
+
+    				/*
+					var row = start_row + 5 + 5 * c.table;
+					var col = 5 + c.col;
+
+					sheet.add_drawing(function(drawings) {
+						var anchor = uiu.create_el(drawings, 'xdr:twoCellAnchor');
+						var from = uiu.create_el(anchor, 'xdr:from');
+						uiu.create_el(from, 'xdr:col', {}, col + 1);
+						uiu.create_el(from, 'xdr:colOff', {}, -150000);
+						uiu.create_el(from, 'xdr:row', {}, row);
+						uiu.create_el(from, 'xdr:rowOff', {}, 20000);
+						var to = uiu.create_el(anchor, 'xdr:to');
+						uiu.create_el(to, 'xdr:col', {}, col + 2);
+						uiu.create_el(to, 'xdr:colOff', {}, 150000);
+						uiu.create_el(to, 'xdr:row', {}, row + 4);
+						uiu.create_el(to, 'xdr:rowOff', {}, -40000);
+
+						var sp = uiu.create_el(anchor, 'xdr:sp');
+
+						var nvSpPr = uiu.create_el(sp, 'xdr:nvSpPr');
+						uiu.create_el(nvSpPr, 'xdr:cNvPr', {'id': 1000 + d_count, 'name': 'bup ' + d_count});
+						d_count++;
+						uiu.create_el(nvSpPr, 'xdr:cNvSpPr');
+
+						var spPr = uiu.create_el(sp, 'xdr:spPr');
+						uiu.create_el(spPr, 'a:prstGeom', {prst: 'ellipse'});
+						var line = uiu.create_el(spPr, 'a:ln', {w: 12000});
+						var line_fill = uiu.create_el(line, 'a:solidFill');
+						uiu.create_el(line_fill, 'a:srgbClr', {val: '000000'});
+						uiu.create_el(anchor, 'xdr:clientData');
+					});*/
 				}
 
 				var MATCH_ROWS = {
@@ -982,8 +1106,14 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 							}
 							sheet.text(col + row, c.val);
 							break;
+						case 'circle':
+							gen_game_circle(start_row, c);
+							break;
+						case 'vertical-text':
+							gen_vertical_text(start_row, c);
+							break;
 						default:
-							// console.log('ignoring cell ', JSON.stringify(c));
+							console.log('ignoring cell ', JSON.stringify(c));
 							// Everything else is ignored for now
 						}
 					});

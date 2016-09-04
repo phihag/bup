@@ -133,7 +133,7 @@ function open(ui8r, cb) {
 
 function add_col(col, add) {
 	var num = _col2num(col) + add;
-	return _num2col(num);
+	return num2col(num);
 }
 
 function _col2num(col) {
@@ -152,7 +152,7 @@ function _col2num(col) {
 	return num;
 }
 
-function _num2col(num) {
+function num2col(num) {
 	var res = '';
 	var bonus = 26;
 	var minchars = 1;
@@ -203,8 +203,8 @@ return {
 	open: open,
 	date: date,
 	add_col: add_col,
+	num2col: num2col,
 	// testing only
-	_num2col: _num2col,
 	_col2num: _col2num,
 	_leap_year: _leap_year,
 };
