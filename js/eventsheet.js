@@ -759,12 +759,17 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 
 		function fill_result_sheet(cb) {
 			xlsx_file.modify_sheet('5', cb, function(sheet) {
+				var league_key = network.league_key(ev);
 				var x_location = {
 					'1BL-2016': 'E4',
 					'2BLN-2016': 'E5',
 					'2BLS-2016': 'E6',
-				}[ev.league_key];
-				sheet.text(x_location, 'X');
+				}[league_key];
+				if (x_location) {
+					sheet.text(x_location, 'X');
+				} else {
+					report_problem.silent_error('Unsupported league ' + league_key);
+				}
 
 				sheet.text('E8', extra_data.location);
 				sheet.text('W8', extra_data.matchday);
@@ -1035,10 +1040,12 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 						sheet.text('F' + (start_row + 1), t1l ? 'L' : 'R');
 						sheet.text('AE' + (start_row + 1), t1l ? 'R' : 'L');
 					}
-					match.network_real_scores.forEach(function(scores, game_idx) {
-						sheet.text('R' + (start_row + game_idx), scores[0]);
-						sheet.text('T' + (start_row + game_idx), scores[1]);
-					});
+					if (match.network_real_scores) {
+						match.network_real_scores.forEach(function(scores, game_idx) {
+							sheet.text('R' + (start_row + game_idx), scores[0]);
+							sheet.text('T' + (start_row + game_idx), scores[1]);
+						});
+					}
 					if (typeof match.network_team1_won === 'boolean') {
 						add_winner_circle(start_row, match.network_team1_won ? 0 : 1);
 					}
