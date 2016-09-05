@@ -3,7 +3,6 @@ standard annotation for league_key and the like
 	make sure that existing keys stay unchanged
 Mannschaftsaufstellungsvordruck mit BuLi-Logo
 Anforderungsliste BuLi!
-mail Werner
 mail Klaus-Michael
 	example correct?
 	xlsx instead of xls
@@ -27,6 +26,8 @@ error-reports Markus
 load jszip async
 	add to appcache
 interactive error handler => ask for an email
+
+RLS
 
 bup display mode
 	double court mode (digits outside)
@@ -277,8 +278,6 @@ test touch interface
 test touch latency
 prevent double touches
 
-option to not score games
-team-* eventsheet as SVG (for preview)?
 formalize backup_players event entry (in edemo/vdemo, later in liveaw)
 injury timer
 	in scoresheet (if not disqualified / retired afterwards)
