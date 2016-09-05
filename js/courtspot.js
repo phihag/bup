@@ -171,8 +171,8 @@ function annotate(s, event) {
 	}
 
 	event.matches.forEach(function(m) {
-		if (! m.league_key) {
-			m.league_key = network.league_key(event);
+		if (! m.setup.league_key) {
+			m.setup.league_key = network.league_key(event);
 		}
 	});
 }
