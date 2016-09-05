@@ -204,6 +204,7 @@ function _parse_match_list(doc, now) {
 	var event_data = doc[0];
 	var home_team_name = event_data.heim;
 	var away_team_name = event_data.gast;
+	var league_key = '1BL-2016';
 
 	var courts = [{
 		court_id: 1,
@@ -212,6 +213,7 @@ function _parse_match_list(doc, now) {
 		court_id: 2,
 		description: '2 (rechts)',
 	}];
+	var counting = (doc[0].GewS == 2) ? '3x21' : '5x11_15';
 
 	var matches = doc.slice(1, doc.length).map(function(match) {
 		var is_doubles = /~/.test(match.heim) && /~/.test(match.gast);
@@ -257,7 +259,7 @@ function _parse_match_list(doc, now) {
 
 		return {
 			setup: {
-				counting: '5x11_15',
+				counting: counting,
 				eventsheet_id: eventsheet_id,
 				match_name: match.dis,
 				is_doubles: is_doubles,
@@ -266,6 +268,7 @@ function _parse_match_list(doc, now) {
 				team_competition: true,
 				match_id: match_id,
 				incomplete: incomplete,
+				league_key: league_key,
 			},
 			network_score: network_score,
 		};
@@ -275,7 +278,7 @@ function _parse_match_list(doc, now) {
 		event_name: home_team_name + ' - ' + away_team_name,
 		matches: matches,
 		courts: courts,
-		league_key: '1BL-2016',
+		league_key: league_key,
 	};
 }
 
