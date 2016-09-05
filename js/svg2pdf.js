@@ -8,6 +8,8 @@ function render_page(svg, pdf) {
 		var x;
 		var y;
 		var m;
+		var width;
+		var height;
 
 		var n = nodes[i];
 		var style = window.getComputedStyle(n);
@@ -79,8 +81,8 @@ function render_page(svg, pdf) {
 		case 'rect':
 			x = parseFloat(n.getAttribute('x'));
 			y = parseFloat(n.getAttribute('y'));
-			var width = parseFloat(n.getAttribute('width'));
-			var height = parseFloat(n.getAttribute('height'));
+			width = parseFloat(n.getAttribute('width'));
+			height = parseFloat(n.getAttribute('height'));
 			pdf.rect(x, y, width, height, mode);
 			break;
 		case 'ellipse':
@@ -146,10 +148,10 @@ function render_page(svg, pdf) {
 			break;
 		case 'image':
 			var imgData = n.getAttribute('xlink:href');
-			var x = parseFloat(n.getAttribute('x'));
-			var y = parseFloat(n.getAttribute('y'));
-			var width = parseFloat(n.getAttribute('width'));
-			var height = parseFloat(n.getAttribute('height'));
+			x = parseFloat(n.getAttribute('x'));
+			y = parseFloat(n.getAttribute('y'));
+			width = parseFloat(n.getAttribute('width'));
+			height = parseFloat(n.getAttribute('height'));
 			pdf.addImage(imgData, x, y, width, height);
 			break;
 		}
