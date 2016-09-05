@@ -144,6 +144,14 @@ function render_page(svg, pdf) {
 			}
 
 			break;
+		case 'image':
+			var imgData = n.getAttribute('xlink:href');
+			var x = parseFloat(n.getAttribute('x'));
+			var y = parseFloat(n.getAttribute('y'));
+			var width = parseFloat(n.getAttribute('width'));
+			var height = parseFloat(n.getAttribute('height'));
+			pdf.addImage(imgData, x, y, width, height);
+			break;
 		}
 	}
 }
