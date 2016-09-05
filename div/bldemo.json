@@ -284,7 +284,8 @@
           "team_competition": true,
           "is_doubles": false,
           "counting": "5x11_15",
-          "match_id": "bldemo_HE2"
+          "match_id": "bldemo_HE2",
+          "league_key": "1BL-2016"
         },
         "network_score": [],
         "presses_json": "[]"
