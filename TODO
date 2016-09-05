@@ -17,11 +17,13 @@ mail Klaus-Michael
 cell_id undefined Ulf
 Bundesliga xlsx scoresheets
 	vertical-texts with shape instead
+	diagonal line for game-end circles
 bldemo: add a match in progress
 error s.game is undefined (Markus?)
 courts for edemo / vdemo
 retest edemo / vdemo with different locales
 
+editmode: input values from last match carry over, should not
 disqualified in english scoresheet!
 error-reports Markus
 load jszip async

@@ -1112,8 +1112,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 						case 'vertical-text':
 							gen_vertical_text(start_row, c);
 							break;
-						default:
-							report_problem.silent_error('ignoring cell ' + JSON.stringify(c));
+						// Ignore other types (like editmode changes)
 						}
 					});
 				});
