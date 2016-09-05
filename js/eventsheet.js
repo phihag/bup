@@ -974,7 +974,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
       </xdr:txBody>
     </xdr:sp>*/
 
-    				/*
+					/*
 					var row = start_row + 5 + 5 * c.table;
 					var col = 5 + c.col;
 
@@ -1113,8 +1113,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 							gen_vertical_text(start_row, c);
 							break;
 						default:
-							console.log('ignoring cell ', JSON.stringify(c));
-							// Everything else is ignored for now
+							report_problem.silent_error('ignoring cell ' + JSON.stringify(c));
 						}
 					});
 				});
