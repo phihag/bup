@@ -890,6 +890,10 @@ function sheet_render(s, svg, referee_view) {
 }
 
 function sheet_name(setup) {
+	if (setup.league_key && /^(?:1BL|2BLN|2BLS)-2016$/.test(setup.league_key)) {
+		return 'bundesliga-2016';
+	}
+
 	switch (setup.counting) {
 	case '5x11_15':
 	case '5x11/3':
@@ -1073,6 +1077,7 @@ function jspdf_loaded() {
 var URLS = {
 	'international': 'div/scoresheet_international.svg',
 	'international_5x11': 'div/scoresheet_international_5x11.svg',
+	'bundesliga-2016': 'div/scoresheet_bundesliga-2016.svg',
 };
 var files = {};
 function load_sheet(key, callback) {
@@ -1135,6 +1140,7 @@ function ui_init() {
 
 	load_sheet('international');
 	load_sheet('international_5x11');
+	load_sheet('bundesliga-2016');
 }
 
 return {
