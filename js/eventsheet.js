@@ -1193,7 +1193,7 @@ function download(es_key, callback) {
 }
 
 function render_links(s) {
-	var league_key = network.league_key(s);
+	var league_key = network.league_key(s.event);
 	if (utils.deep_equal(ui_current_league_key, league_key)) {
 		return;  // No need to reconfigure containers
 	}

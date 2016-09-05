@@ -15,8 +15,7 @@ function is_enabled() {
 	return !!get_netw() || !!networks.p2p;
 }
 
-function league_key(s) {
-	var event = s.event;
+function league_key(event) {
 	if (!event) {
 		return null;
 	}

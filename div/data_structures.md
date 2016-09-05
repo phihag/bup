@@ -129,6 +129,7 @@ tournament_name    Name of the overall tournament (will be present on scoresheet
 umpire_name        Name of the umpire assigned to this match (or the last one who touched it).
 service_judge_name Name of the service judge assigned to this match.
 court_id           ID of the court this match is played on.
+league_key         ID of the league the match is played in (see league_key of event objects).
 
 team
 ====
