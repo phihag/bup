@@ -1,6 +1,12 @@
 var xlsx = (function() {
 'use strict';
 
+var NS = 'http://schemas.openxmlformats.org/spreadsheetml/2006/main';
+
+function _create_el(parent, tagName, attrs, text) {
+	return uiu.ns_el(parent, NS, tagName, attrs, text);
+}
+
 function _parse_xml(xml_str) {
 	return (new DOMParser()).parseFromString(xml_str, 'application/xml');
 }
@@ -23,13 +29,13 @@ function Sheet(book, doc, drawing_doc) {
 			var sheet_data = doc.querySelector('sheetData');
 			var row = sheet_data.querySelector('row[r="' + row_id + '"]');
 			if (!row) {
-				row = uiu.create_el(sheet_data, 'row', {r: row_id});
+				row = _create_el(sheet_data, 'row', {r: row_id});
 			}
-			cell = uiu.create_el(row, 'c', {r: cell_id});
+			cell = _create_el(row, 'c', {r: cell_id});
 		}
 		cell.setAttribute('t', 'inlineStr');
-		var is_node = uiu.create_el(cell, 'is');
-		uiu.create_el(is_node, 't', {}, text);
+		var is_node = _create_el(cell, 'is');
+		_create_el(is_node, 't', {}, text);
 	}
 
 	function val(cell_id, val) {
@@ -42,20 +48,20 @@ function Sheet(book, doc, drawing_doc) {
 		if (v_node) {
 			uiu.text(v_node, val);
 		} else {
-			uiu.create_el(cell, 'v', {}, val);
+			_create_el(cell, 'v', {}, val);
 		}
 	}
 
 	function merge_cells(ref) {
 		var merges = doc.querySelector('mergeCells');
 		if (!merges) {
-			merges = uiu.create_el(doc.querySelector('worksheet'), 'mergeCells', {count: 0});
+			merges = _create_el(doc.querySelector('worksheet'), 'mergeCells', {count: 0});
 		}
 		var count = parseInt(merges.getAttribute('count'), 10);
 		if (count) {
 			merges.setAttribute('count', count + 1);
 		}
-		uiu.create_el(merges, 'mergeCell', {ref: ref});
+		_create_el(merges, 'mergeCell', {ref: ref});
 	}
 
 	function add_drawing(func) {

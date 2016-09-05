@@ -120,6 +120,23 @@ function text_qs(selector, str) {
 	text(qs(selector), str);
 }
 
+function ns_el(parent, ns, tagName, attrs, text) {
+	var doc = parent ? parent.ownerDocument : document;
+	var el = doc.createElementNS(ns, tagName);
+	if (attrs) {
+		for (var k in attrs) {
+			el.setAttribute(k, attrs[k]);
+		}
+	}
+	if ((text !== undefined) && (text !== null)) {
+		el.appendChild(doc.createTextNode(text));
+	}
+	if (parent) {
+		parent.appendChild(el);
+	}
+	return el;
+}
+
 function create_el(parent, tagName, attrs, text) {
 	var doc = parent ? parent.ownerDocument : document;
 	var el = doc.createElement(tagName);
@@ -143,13 +160,14 @@ return {
 	empty: empty,
 	esc_stack_pop: esc_stack_pop,
 	esc_stack_push: esc_stack_push,
+	ns_el: ns_el,
 	on_click: on_click,
 	on_click_qs: on_click_qs,
 	on_click_qsa: on_click_qsa,
-	remove: remove,
-	remove_qsa: remove_qsa,
 	qs: qs,
 	qsEach: qsEach,
+	remove: remove,
+	remove_qsa: remove_qsa,
 	text: text,
 	text_qs: text_qs,
 	visible: visible,
