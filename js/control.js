@@ -408,20 +408,21 @@ function hide_exception_dialog() {
 
 
 return {
-	on_press: on_press,
-	on_presses_change: on_presses_change,
-	servedemo_match_start: servedemo_match_start,
 	demo_match_start: demo_match_start,
 	empty_match_start: empty_match_start,
+	hide_exception_dialog: hide_exception_dialog,
+	install_destructor: install_destructor,
+	on_press: on_press,
+	on_presses_change: on_presses_change,
+	resume_match: resume_match,
+	servedemo_match_start: servedemo_match_start,
+	set_current: set_current,
 	start_match: start_match,
 	start_match_dialog: start_match_dialog,
-	resume_match: resume_match,
-	ui_init: ui_init,
-	hide_exception_dialog: hide_exception_dialog,
 	stop_match: stop_match,
-	install_destructor: install_destructor,
+	ui_init: ui_init,
+	ui_show_exception_dialog: ui_show_exception_dialog,
 	uninstall_destructor: uninstall_destructor,
-	set_current: set_current,
 };
 
 })();
