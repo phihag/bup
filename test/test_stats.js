@@ -787,7 +787,7 @@ _describe('stats graphs', function() {
 			type: 'disqualified',
 			team_id: 1,
 			player_id: 0,
-			desc: 'Schwarze Karte Bob',
+			desc: 'Schwarze Karte Bob.',
 			sdesc: 'Andrew / Alice gewinnt 21-16 13-21 0-0',
 		}, {
 			type: 'postmatch-confirm',
