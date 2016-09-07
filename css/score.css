@@ -107,3 +107,29 @@ table[data-game-count="5"] .score_future-game {
 #game.editmode .score_right {
 	padding-left: 1.5vh;
 }
+
+.score_counting_td {
+	height: 0;
+}
+.score_counting_container {
+	position: relative;
+	width: 100%;
+	height: 0;
+}
+.score_counting {
+	user-select: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+
+	cursor: pointer;
+	position: absolute;
+	color: #888;
+	padding: 1vh 0;
+	top: 11vh;
+	font-size: 4vh;
+	width: 100%;
+	background: #fff;
+	border-radius: 0 0 2vh 2vh;
+}

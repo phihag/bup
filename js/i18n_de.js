@@ -354,7 +354,7 @@ var i18n_de = {
 'pressdesc:postmatch-confirm': 'Spiel-Bestätigung',
 'pressdesc:retired': '{player} gibt auf',
 'pressdesc:state:retired': '{winner} gewinnt {score_str}',
-'pressdesc:disqualified': 'Schwarze Karte {player}',
+'pressdesc:disqualified': 'Schwarze Karte {player}.',
 'pressdesc:state:disqualified': '{winner} gewinnt {score_str}',
 
 'order:header': 'Spielreihenfolge',

@@ -1,21 +1,22 @@
-standard annotation for league_key and the like
-	make sure that existing keys stay unchanged
-Mannschaftsaufstellungsvordruck mit BuLi-Logo
-Anforderungsliste BuLi!
 mail Klaus-Michael
 	example correct?
 	xlsx instead of xls
 	strange formula in Spielbericht -> Summe Sätze
 	formatting Feld-Nummer / L/R in SR-Zettel
 	different lengths of Schiedsrichter / Aufschlagsrichter dots
-	Mannschaftsaufstellungsvordruck Bundesliga
+	Mannschaftsaufstellungsvordruck Bundesliga (Logo/offiziell?)!
 	Autor Carsten Koch?
-cell_id undefined Ulf
+
+allow change of counting by pressing counting (change counting)
+
+standard annotation for league_key and the like
+	make sure that existing keys stay unchanged
+	warn if redundant keys
+Mannschaftsaufstellungsvordruck mit BuLi-Logo
+Anforderungsliste BuLi!
 Bundesliga xlsx scoresheets
 	vertical-texts with shape instead
 	diagonal line for game-end circles
-bldemo: add a match in progress
-error s.game is undefined (Markus?)
 courts for edemo / vdemo
 retest edemo / vdemo with different locales
 

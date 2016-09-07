@@ -15,6 +15,7 @@ function ui_visible(val) {
 function enter() {
 	ui_visible(true);
 	$('.editmode_ok').attr('disabled', 'disabled');
+	state.ui.editmode_active = true;
 
 	var k = 'settings:Abort Manual Edit';
 	var toggle_button = uiu.qs('.go_editmode_button');
@@ -29,6 +30,7 @@ function enter() {
 function leave() {
 	$('#game').removeClass('editmode');
 	ui_visible(false);
+	state.ui.editmode_active = false;
 
 	var k = 'settings:Edit Manually';
 	var toggle_button = uiu.qs('.go_editmode_button');

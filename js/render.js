@@ -1,6 +1,15 @@
 var render = (function() {
 'use strict';
 
+function _allow_counting_change(s) {
+	return (
+		!s.ui.editmode_active &&
+		s.setup && s.setup.counting &&
+		s.match && (s.match.finished_games.length === 0) &&
+		s.game && (s.game.score[0] <= 5) && (s.game.score[1] <= 5)
+	);
+}
+
 function exception_dialog(s) {
 	// Be careful not to restrict exotic scenarios such as disqualification after match end
 	var sc = $('.exception_suspension_container');
@@ -33,6 +42,18 @@ function _score_display_init(s) {
 		colspan: 2,
 	});
 	score_table.setAttribute('data-game-count', s.match.max_games);
+
+	var counting_tr = uiu.create_el(score_table, 'tr');
+	var counting_td = uiu.create_el(counting_tr, 'td', {
+		colspan: 2,
+		'class': 'score_counting_td',
+	});
+	var counting_container = uiu.create_el(counting_td, 'div', {
+		'class': 'score_counting_container default-invisible',
+	});
+	uiu.create_el(counting_container, 'div', {
+		'class': 'score_counting',
+	}, s.setup.counting);
 
 	for (var game_index = 0;game_index < s.match.max_games;game_index++) {
 		var tr = uiu.create_el(score_table, 'tr', {
@@ -71,7 +92,7 @@ function _score_display_set_game(s, game, game_index, is_current) {
 		}
 	}
 
-	var editmode_active = $('#game').hasClass('editmode');
+	var editmode_active = s.ui.editmode_active;
 	var editmode_score_active = editmode_active && (s.game.team1_left !== null);
 	var tr = uiu.qs('#score_game_' + game_index);
 
@@ -189,6 +210,8 @@ function render_score_display(s) {
 			_score_display_set_game(s, null, i, false);
 		}
 	}
+
+	uiu.visible_qs('.score_counting_container', _allow_counting_change(s));
 }
 
 function _set_dialog(dialog_qs, pr_str) {
