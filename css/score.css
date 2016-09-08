@@ -117,13 +117,6 @@ table[data-game-count="5"] .score_future-game {
 	height: 0;
 }
 .score_counting {
-	user-select: none;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-
-	cursor: pointer;
 	position: absolute;
 	color: #888;
 	padding: 1vh 0;
