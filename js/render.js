@@ -1,15 +1,6 @@
 var render = (function() {
 'use strict';
 
-function _allow_counting_change(s) {
-	return (
-		!s.ui.editmode_active &&
-		s.setup && s.setup.counting &&
-		s.match && (s.match.finished_games.length === 0) &&
-		s.game && (s.game.score[0] <= 5) && (s.game.score[1] <= 5)
-	);
-}
-
 function exception_dialog(s) {
 	// Be careful not to restrict exotic scenarios such as disqualification after match end
 	var sc = $('.exception_suspension_container');
@@ -211,7 +202,12 @@ function render_score_display(s) {
 		}
 	}
 
-	uiu.visible_qs('.score_counting_container', _allow_counting_change(s));
+	uiu.visible_qs('.score_counting_container', (
+		!s.ui.editmode_active &&
+		s.setup && s.setup.counting &&
+		s.match && (s.match.finished_games.length === 0) &&
+		s.game && (s.game.score[0] <= 0) && (s.game.score[1] <= 0)
+	));
 }
 
 function _set_dialog(dialog_qs, pr_str) {
