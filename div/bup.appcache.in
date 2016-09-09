@@ -9,7 +9,7 @@ icons/loading.gif
 bup.dist.css
 bup.dist.js
 jspdf.dist.js
-pdfform.dist.js
+pdfform.minipdf.dist.js
 div/scoresheet_international.svg
 div/scoresheet_international_5x11.svg
 div/scoresheet_bundesliga-2016.svg

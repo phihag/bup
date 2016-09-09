@@ -15,7 +15,7 @@ force-install-libs:
 	wget https://craig.global.ssl.fastly.net/js/mousetrap/mousetrap.min.js -O libs/mousetrap.min.js
 	wget https://raw.githubusercontent.com/ftlabs/fastclick/master/lib/fastclick.js -O libs/fastclick.js
 	wget https://raw.githubusercontent.com/phihag/jsPDF/dist/dist/jspdf.min.js -O libs/jspdf.min.js
-	wget https://raw.githubusercontent.com/phihag/pdfform.js/dist/dist/pdfform.dist.js -O libs/pdfform.dist.js
+	wget https://raw.githubusercontent.com/phihag/pdfform.js/dist/dist/pdfform.minipdf.dist.js -O libs/pdfform.minipdf.dist.js
 	wget https://raw.githubusercontent.com/eligrey/FileSaver.js/master/FileSaver.min.js -O libs/FileSaver.min.js
 	wget https://raw.githubusercontent.com/phihag/text-encoding-utf-8/master/lib/encoding.js -O libs/encoding.js
 	wget https://raw.githubusercontent.com/Stuk/jszip/master/dist/jszip.min.js -O libs/jszip.min.js

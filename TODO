@@ -1,4 +1,4 @@
-allow change of counting by pressing counting (change counting)
+wakelock
 
 xlsx style center
 standard annotation for league_key and the like
@@ -40,6 +40,7 @@ bup display mode
 
 Content-security-policy
 test offline (all features present with all demos?)
+	broken atm?
 do not require a court for staticnet (test by changing languages)
 support for lower NRW leagues (KL-S1-194)
 
