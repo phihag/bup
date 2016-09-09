@@ -1,11 +1,12 @@
+btde liga
 wakelock
-
 xlsx style center
+
+Mannschaftsaufstellungsvordruck mit BuLi-Logo
+Anforderungsliste BuLi!
 standard annotation for league_key and the like
 	make sure that existing keys stay unchanged
 	warn if redundant keys
-Mannschaftsaufstellungsvordruck mit BuLi-Logo
-Anforderungsliste BuLi!
 Bundesliga xlsx scoresheets
 	vertical-texts with shape instead
 	diagonal line for game-end circles
@@ -15,8 +16,6 @@ retest edemo / vdemo with different locales
 editmode: input values from last match carry over, should not
 disqualified in english scoresheet!
 error-reports Markus
-load jszip async
-	add to appcache
 interactive error handler => ask for an email
 
 RLS

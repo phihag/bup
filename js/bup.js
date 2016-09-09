@@ -22,7 +22,8 @@ function ui_init() {
 
 	appcache.ui_init();
 	$('#script_jspdf').on('load', scoresheet.jspdf_loaded);
-	$('#script_pdfform').on('load', eventsheet.pdfform_loaded);
+	$('#script_pdfform').on('load', eventsheet.loaded('pdfform'));
+	$('#script_jszip').on('load', eventsheet.loaded('jszip'));
 
 	report_problem.ui_init();
 	editmode.ui_init();

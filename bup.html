@@ -206,7 +206,7 @@
 	<div class="setup_network_status"></div>
 
 	<div class="setup_linkline">
-		<div class="setup_eventsheets default-invisible"></div>
+		<div class="setup_eventsheets"></div>
 		<a href="#" class="setup_event_scoresheets" data-i18n="settings:Event Scoresheets"></a>
 		<a href="#" class="netstats_link default-invisible" data-i18n="settings:Network statistics"></a>
 		<a href="#" class="order_link" data-i18n="settings:Order link"></a>
@@ -369,7 +369,7 @@
 </div>
 
 <div class="eventsheet_error default-invisible"><span class="eventsheet_error_message"></span><button class="eventsheet_reload" type="button"></button></div>
-<div class="eventsheet_button_row"><a href="#" class="eventsheet_back" data-i18n="eventsheet:back"></a><div class="loading-icon eventsheet_generate_loading_icon"></div><button type="submit" class="eventsheet_generate_button"></button></div>
+<div class="eventsheet_button_row"><a href="#" class="eventsheet_back" data-i18n="eventsheet:back"></a><div class="loading-icon eventsheet_generate_loading_icon"></div><button type="submit" class="eventsheet_generate_button" disabled="disabled"></button></div>
 </form>
 </div>
 </div>
@@ -514,7 +514,6 @@ text.team1 {
 <script src="libs/mousetrap.min.js"></script>
 <script src="libs/FileSaver.min.js"></script>
 <script src="libs/fastclick.js"></script>
-<script src="libs/jszip.min.js"></script>
 <script src="libs/encoding.js"></script>
 
 <script src="js/utils.js"></script>
@@ -563,12 +562,14 @@ text.team1 {
 
 <script src="libs/jspdf.min.js" async="async" id="script_jspdf"></script>
 <script src="libs/pdfform.minipdf.dist.js" async="async" id="script_pdfform"></script>
+<script src="libs/jszip.min.js" async="async" id="script_jszip"></script>
 <!--/@DEV-->
 
 <!--@PRODUCTION
 <script src="bup.dist.js"></script>
 <script src="jspdf.dist.js" async="async" id="script_jspdf"></script>
 <script src="pdfform.minipdf.dist.js" async="async" id="script_pdfform"></script>
+<script src="jszip.min.js" async="async" id="script_jszip"></script>
 -->
 
 </body>

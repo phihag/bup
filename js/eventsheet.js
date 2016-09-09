@@ -44,8 +44,23 @@ function calc_backup_players_str(ev) {
 	}).join(' / ');
 }
 
-function pdfform_loaded() {
-	$('.setup_eventsheets').removeClass('default-invisible');
+
+var _loaded = {
+	'jszip': false,
+	'pdfform': false,
+};
+var _loaded_all_libs = false;
+function loaded(key) {
+	if (_loaded_all_libs) {
+		// Redundant call, but that's fine
+		return;
+	}
+	_loaded[key] = true;
+	_loaded_all_libs = utils.values(_loaded).every(function(x) {return x;});
+	if (_loaded_all_libs) {
+		uiu.qs('.eventsheet_generate_button').removeAttribute('disabled');
+		uiu.visible_qs('.eventsheet_generate_loading_icon', !state.event);
+	}
 }
 
 function _player_names(match, team_id) {
@@ -1205,7 +1220,10 @@ function render_links(s) {
 	ui_current_league_key = league_key;
 
 	if (typeof pdfform != 'undefined') {
-		pdfform_loaded();
+		loaded('pdfform');
+	}
+	if (typeof JSZip != 'undefined') {
+		loaded('jszip');
 	}
 
 	var container = uiu.qs('.setup_eventsheets');
@@ -1305,7 +1323,7 @@ function on_fetch() {
 }
 
 function dialog_fetch() {
-	uiu.visible_qs('.eventsheet_generate_loading_icon', !state.event);
+	uiu.visible_qs('.eventsheet_generate_loading_icon', !state.event || !_loaded_all_libs);
 	var btn = $('.eventsheet_generate_button');
 	if (state.event) {
 		btn.removeAttr('disabled');
@@ -1313,7 +1331,7 @@ function dialog_fetch() {
 	} else {
 		btn.attr('disabled', 'disabled');
 		network.list_matches(state, function(err, ev) {
-			uiu.visible_qs('.eventsheet_generate_loading_icon', false);
+			uiu.visible_qs('.eventsheet_generate_loading_icon', !_loaded_all_libs);
 			if (err) {
 				$('.eventsheet_error_message').text(err.msg);
 				uiu.visible_qs('.eventsheet_error', true);
@@ -1409,7 +1427,7 @@ function hide_dialog() {
 }
 
 return {
-	pdfform_loaded: pdfform_loaded,
+	loaded: loaded,
 	ui_init: ui_init,
 	show_dialog: show_dialog,
 	render_links: render_links,
