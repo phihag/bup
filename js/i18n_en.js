@@ -199,6 +199,10 @@ var i18n_en = {
 'settings:Button Block Timeout': 'Double press protection (ms)',
 'settings:Network Timeout': 'Network timeout (ms)',
 'settings:Network Repeat Interval': 'Network repeat interval (ms)',
+'settings:wakelock:label': 'Acquire wakelock:',
+'settings:wakelock:display': 'Only in displaymode',
+'settings:wakelock:always': 'Always',
+'settings:wakelock:never': 'Never',
 
 'settings:mode:label': 'Mode:',
 'settings:mode:umpire': 'Umpire',

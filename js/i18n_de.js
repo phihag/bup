@@ -178,7 +178,6 @@ var i18n_de = {
 'settings:counting:5x11_15': 'BWF 2016 Experiment Option 1 (5x11 bis max. 15)',
 'settings:counting:5x11/3': 'BWF 2016 Experiment Option 2 (5x11, Verlängerung bis 13)',
 'settings:counting:1x21': 'Bundesliga Goldener Satz (1x21)',
-'settings:counting:1x11_15': 'Bundesliga Goldener Satz Experiment (1x11 bis max. 15)',
 
 
 'settings:Settings': 'Einstellungen',
@@ -200,6 +199,10 @@ var i18n_de = {
 'settings:Button Block Timeout': 'Doppel-Touch-Sperre (ms)',
 'settings:Network Timeout': 'Netzwerk-Timeout (ms)',
 'settings:Network Repeat Interval': 'Netzwerk-Wiederholungszeit (ms)',
+'settings:wakelock:label': 'Bildschirm anlassen:',
+'settings:wakelock:display': 'Nur im Anzeigemodus',
+'settings:wakelock:always': 'immer',
+'settings:wakelock:never': 'niemals',
 
 'settings:mode:label': 'Modus:',
 'settings:mode:umpire': 'Schiedsrichter',

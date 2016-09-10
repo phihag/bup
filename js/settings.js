@@ -20,6 +20,7 @@ var default_settings = {
 	editmode_doubleclick: false,
 	displaymode_style: 'top+list',
 	displaymode_court_id: 1,
+	wakelock: 'display',
 };
 
 function load() {
@@ -123,7 +124,7 @@ function update_court(s) {
 var _settings_checkboxes = ['save_finished_matches', 'go_fullscreen', 'show_pronounciation', 'negative_timers', 'shuttle_counter', 'editmode_doubleclick'];
 var _settings_textfields = ['umpire_name', 'service_judge_name', 'court_id', 'court_description'];
 var _settings_numberfields = ['network_timeout', 'network_update_interval', 'displaymode_update_interval', 'button_block_timeout'];
-var _settings_selects = ['language', 'displaymode_court_id', 'displaymode_style'];
+var _settings_selects = ['language', 'displaymode_court_id', 'displaymode_style', 'wakelock'];
 
 function update_court_settings(s) {
 	var automatic = false;
@@ -238,6 +239,9 @@ function ui_init(s) {
 			case 'displaymode_court_id':
 				displaymode.on_style_change(s);
 				break;
+			case 'wakelock':
+				wakelock.update(s);
+				break;
 			}
 		});
 	});
@@ -281,9 +285,12 @@ function on_mode_change(s) {
 		uiu.visible(el, modes.indexOf(mode) >= 0);
 	});
 	update_court_settings(s);
+
+	wakelock.update(s);
 }
 
 return {
+	get_mode: get_mode,
 	hide: hide,
 	hide_displaymode: hide_displaymode,
 	load: load,
@@ -311,6 +318,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var scoresheet = require('./scoresheet');
 	var stats = require('./stats');
 	var uiu = require('./uiu');
+	var wakelock = require('./wakelock');
 
 	module.exports = settings;
 }
