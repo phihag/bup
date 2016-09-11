@@ -1,16 +1,14 @@
-
-referenceerror inf
-final match confirmation should set umpire name/court id
-Ulf english names in CourtSpot!?
+remove removing finished matches!
+xlsx eventsheet singles: player name is 0
 new sheet<KM
-alles vorhanden im Spielbericht ankreuzen
 make everything unselectable
+add perf metrics
+performance tests!
+alles vorhanden im Spielbericht ankreuzen
+final match confirmation should set umpire name/court id
 btde export should export all known matches!
 Spielbericht broken during match (undefined in JSON somehow, not reported!!!)
 store stuff on server and always on tablet!
-remove removing finished matches!
-xlsx eventsheet singles: player name is 0
-BWF change 90 seconds warmup (Jörg Hupertz)
 Checkliste Mindestanforderungen
 sent export should be able to imported
 en counting i18n
@@ -21,7 +19,7 @@ hide current matches from match overview if not enough space
 wakelock
 	functional (seems currently broken)
 	test on device
-	create mp4 video
+	wakelock craft video
 btde liga
 xlsx style center
 referee mode
@@ -429,4 +427,4 @@ Blocked
 =====
 
 btde: league_key from btde JSON => what's the value for 2BLN/2BLS?
-
+Jörg Hupert: BWF change 90 seconds warmups

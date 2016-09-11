@@ -61,11 +61,14 @@ function ensure_mkdir(path, cb) {
 /*   JavaScript   */
 
 function uglify(js_files, jsdist_fn, cb) {
-	var args = js_files.slice();
+	var args = [];
 	args.push('--mangle');
+	args.push('mangle_yes');
 	args.push('--compress');
 	args.push('-o');
 	args.push(jsdist_fn);
+	args.push('--');
+	args.push.apply(args, js_files);
 
 	var uglify_proc = child_process.spawn('uglifyjs', args, {
 		stdio: 'inherit',
