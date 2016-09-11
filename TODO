@@ -1,9 +1,11 @@
-remove removing finished matches!
+add support for static downloadable files
+	bundesliga-mindestanforderungen
+	bundesliga-ballsorten
 xlsx eventsheet singles: player name is 0
 new sheet<KM
 make everything unselectable
 add perf metrics
-performance tests!
+run detailed performance tests!
 alles vorhanden im Spielbericht ankreuzen
 final match confirmation should set umpire name/court id
 btde export should export all known matches!
@@ -11,7 +13,6 @@ Spielbericht broken during match (undefined in JSON somehow, not reported!!!)
 store stuff on server and always on tablet!
 Checkliste Mindestanforderungen
 sent export should be able to imported
-en counting i18n
 export netstats (with hidden and visible export!)
 
 display for very small screens (see error report)
@@ -27,6 +28,7 @@ Ansagenänderung bei 60 Sekunden! (11-.. bitte spielen)
 check minification should also rewrite variable names
 mail Klaus-Michael + Jörg
 
+doc about all main features (HTML table, compare with other projects
 fix autorescale on tablets
 Anforderungsliste BuLi!
 standard annotation for league_key and the like
@@ -79,6 +81,7 @@ court selector in demo mode
 xlsx scoresheet: add angled line (and improve text positioning)
 
 mail Ulf
+
 
 liveaw: HTTP mode
 liveaw: improve/test reconnecting

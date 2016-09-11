@@ -2,7 +2,6 @@ var settings = (function() {
 'use strict';
 
 var default_settings = {
-	save_finished_matches: true,
 	go_fullscreen: false,
 	show_pronounciation: true,
 	umpire_name: '',
@@ -121,7 +120,7 @@ function update_court(s) {
 	court_select.val(s.settings.court_id);
 }
 
-var _settings_checkboxes = ['save_finished_matches', 'go_fullscreen', 'show_pronounciation', 'negative_timers', 'shuttle_counter', 'editmode_doubleclick'];
+var _settings_checkboxes = ['go_fullscreen', 'show_pronounciation', 'negative_timers', 'shuttle_counter', 'editmode_doubleclick'];
 var _settings_textfields = ['umpire_name', 'service_judge_name', 'court_id', 'court_description'];
 var _settings_numberfields = ['network_timeout', 'network_update_interval', 'displaymode_update_interval', 'button_block_timeout'];
 var _settings_selects = ['language', 'displaymode_court_id', 'displaymode_style', 'wakelock'];

@@ -188,7 +188,6 @@ var i18n_en = {
 'settings:Umpire': 'Umpire',
 'settings:Service judge': 'Service judge',
 'settings:Language': 'Language',
-'settings:Store Completed Games': 'Store completed games',
 'settings:editmode doubleclick': 'Enter manual edit mode by touching court twice',
 'settings:Show Pronounciation': 'Show announcements',
 'settings:Negative Timers': 'Timers go into negative',

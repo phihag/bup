@@ -189,18 +189,11 @@ function on_press(press, s) {
 		s.metadata.service_judge_name = s.settings.service_judge_name;
 	}
 
-	on_presses_change(s);
-	network.send_press(s, press);
-}
-
-function on_presses_change(s) {
 	calc.state(s);
-	if ((s.match.finish_confirmed) && (! s.settings.save_finished_matches)) {
-		match_storage.remove(s.metadata.id);
-	} else {
-		match_storage.store(s);
-		render.ui_render(s);
-	}
+	match_storage.store(s);
+	render.ui_render(s);
+
+	network.send_press(s, press);
 }
 
 function block_score_buttons() {
@@ -413,7 +406,6 @@ return {
 	hide_exception_dialog: hide_exception_dialog,
 	install_destructor: install_destructor,
 	on_press: on_press,
-	on_presses_change: on_presses_change,
 	resume_match: resume_match,
 	servedemo_match_start: servedemo_match_start,
 	set_current: set_current,
