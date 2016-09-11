@@ -89,7 +89,6 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var displaymode = require('./displaymode');
 	var editevent = require('./editevent');
 	var editmode = require('./editmode');
-	var i18n = require('./i18n');
 	var importexport = require('./importexport');
 	var netstats = require('./netstats');
 	var render = require('./render');
