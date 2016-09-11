@@ -50,12 +50,6 @@ function ui_init(s) {
 	Mousetrap.bind('shift+s', function() {
 		scoresheet.event_show();
 	});
-	Mousetrap.bind('shift+e', function() {
-		i18n.ui_update_state(state, 'en');
-	});
-	Mousetrap.bind('shift+d', function() {
-		i18n.ui_update_state(state, 'de');
-	});
 	Mousetrap.bind('shift+j', function() {
 		importexport.export_json(state);
 	});

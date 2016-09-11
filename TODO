@@ -1,5 +1,6 @@
-tablet match order broken #bldemo
+
 referenceerror inf
+final match confirmation should set umpire name/court id
 Ulf english names in CourtSpot!?
 new sheet<KM
 alles vorhanden im Spielbericht ankreuzen
@@ -423,4 +424,9 @@ write a test to find undocumented (div/data_structures.md) keys
 move eventsheet._xlsx into separate module
 reduce common occurences of a single string with dots in it (automatically?) Example: uiu.create_el
 -> Demo Jörg H, Manuel, Susanne, Werner Durow
+
+Blocked
+=====
+
+btde: league_key from btde JSON => what's the value for 2BLN/2BLS?
 
