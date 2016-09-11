@@ -1,8 +1,34 @@
-btde liga
-wakelock
-xlsx style center
+tablet match order broken #bldemo
+referenceerror inf
+Ulf english names in CourtSpot!?
+new sheet<KM
+alles vorhanden im Spielbericht ankreuzen
+make everything unselectable
+btde export should export all known matches!
+Spielbericht broken during match (undefined in JSON somehow, not reported!!!)
+store stuff on server and always on tablet!
+remove removing finished matches!
+xlsx eventsheet singles: player name is 0
+BWF change 90 seconds warmup (Jörg Hupertz)
+Checkliste Mindestanforderungen
+sent export should be able to imported
+en counting i18n
+export netstats (with hidden and visible export!)
 
-Mannschaftsaufstellungsvordruck mit BuLi-Logo
+display for very small screens (see error report)
+hide current matches from match overview if not enough space
+wakelock
+	functional (seems currently broken)
+	test on device
+	create mp4 video
+btde liga
+xlsx style center
+referee mode
+Ansagenänderung bei 60 Sekunden! (11-.. bitte spielen)
+check minification should also rewrite variable names
+mail Klaus-Michael + Jörg
+
+fix autorescale on tablets
 Anforderungsliste BuLi!
 standard annotation for league_key and the like
 	make sure that existing keys stay unchanged
@@ -15,7 +41,6 @@ retest edemo / vdemo with different locales
 
 editmode: input values from last match carry over, should not
 disqualified in english scoresheet!
-error-reports Markus
 interactive error handler => ask for an email
 
 RLS
@@ -51,7 +76,6 @@ liveaw: support order
 v/edemo11
 v/edemo: set court nr
 court selector in demo mode
-Schiedsrichterzettel mit DBV-Logo! (S. 246)
 
 xlsx scoresheet: add angled line (and improve text positioning)
 
