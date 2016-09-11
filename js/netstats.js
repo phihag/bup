@@ -29,6 +29,14 @@ function get_stats(component)  {
 	return res;
 }
 
+// Measuring non-network performance
+function perf(component) {
+	var endfunc = pre_request(component);
+	return function() {
+		return endfunc({status: 200});
+	};
+}
+
 // Returns a callback to be called after the request
 function pre_request(component) {
 	var start = now();
@@ -157,6 +165,7 @@ function ui_init() {
 
 return {
 	pre_request: pre_request,
+	perf: perf,
 	all_stats: all_stats,
 	show: show,
 	hide: hide,

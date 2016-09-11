@@ -182,6 +182,7 @@ function on_press(press, s) {
 		s = state;
 	}
 
+	var on_end = netstats.perf('perfp.calc');
 	press.timestamp = Date.now();
 	s.presses.push(press);
 	if (s.settings && s.settings.umpire_name) {
@@ -190,8 +191,13 @@ function on_press(press, s) {
 	}
 
 	calc.state(s);
+	on_end();
+	on_end = netstats.perf('perfp.store');
 	match_storage.store(s);
-	render.ui_render(s);
+	on_end();
+	on_end = netstats.perf('perfp.render');
+	render.ui_render(s); // TODO move this up?
+	on_end();
 
 	network.send_press(s, press);
 }
