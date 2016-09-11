@@ -36,6 +36,10 @@ function import_json(s) {
 				}));
 				return;
 			}
+			// Send export format
+			if (input_data.data && input_data.data.type === 'bup-export') {
+				input_data = input_data.data;
+			}
 			if (input_data.type !== 'bup-export') {
 				alert(s._('importexport:not an export file'));
 				return;
