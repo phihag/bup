@@ -68,7 +68,7 @@ dist: cleandist ## Create distribution files
 		div/scoresheet_international.svg \
 		div/scoresheet_international_5x11.svg \
 		div/scoresheet_bundesliga-2016.svg \
-		div/wakelock.mpeg \
+		div/wakelock.mp4 \
 		div/data_structures.md \
 		div/FAQ.de \
 		--target-directory dist/bup/div/
