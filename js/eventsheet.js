@@ -1104,6 +1104,10 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					}
 
 					// Main body
+					if (!match.presses_json) {
+						// No details about presses, skip
+						return;
+					}
 					var scopy = calc.copy_state(state);
 					var presses = JSON.parse(match.presses_json);
 					calc.init_state(scopy, match.setup, presses);
