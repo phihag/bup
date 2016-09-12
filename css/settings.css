@@ -4,6 +4,12 @@
 	right: 0;
 	top: 0;
 	z-index: 10000;
+
+	user-select: none;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 }
 .settings_layout {
 	position: absolute;
