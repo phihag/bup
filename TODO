@@ -1,14 +1,15 @@
 Ansagenänderung bei 60 Sekunden! (11-.. bitte spielen)
+xlsx eventsheet singles: player name is 0
+alles vorhanden im Spielbericht ankreuzen
+option to react on touch instead of click
 mail Klaus-Michael + Jörg
 	now measured
 	irreproducible (stats show <20ms)
 	selectable
+	Anzeigenänderung
 add support for static downloadable files
 	bundesliga-mindestanforderungen
 	bundesliga-ballsorten
-xlsx eventsheet singles: player name is 0
-alles vorhanden im Spielbericht ankreuzen
-option to react on touch instead of click
 final match confirmation should set umpire name/court id
 btde export should export all known matches!
 sent export should be able to imported

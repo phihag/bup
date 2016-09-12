@@ -81,7 +81,7 @@ var i18n_de = {
 'gamescore.doubles.1-1': '; einen Satz beide',
 'gamescore.doubles.2-0': '. {games_leader_name} führen mit 2:0 Sätzen',
 'gamescore.doubles.2-1': '. {games_leader_name} führen mit 2:1 Sätzen',
-'gamescore.doubles.2-2': '; Zwei Sätze beide',
+'gamescore.doubles.2-2': '; zwei Sätze beide',
 'wonby.1': 'Der erste Satz wurde gewonnen von {winner_name} {winner_score}-{loser_score}',
 'wonby.2': 'Der zweite Satz wurde gewonnen von {winner_name} {winner_score}-{loser_score}',
 'wonby.3': 'Der dritte Satz wurde gewonnen von {winner_name} {winner_score}-{loser_score}',

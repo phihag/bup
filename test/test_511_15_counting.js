@@ -450,7 +450,7 @@ _describe('BWF experimental 5x11_15 counting', function() {
 			exigent: 20499,
 		});
 		assert.strictEqual(pronounce_de(s),
-			'Satz.\nDer zweite Satz wurde gewonnen von Alice 15-14. Alice führt zwei Sätze zu null');
+			'Satz.\nDer zweite Satz wurde gewonnen von Alice 15-14. Alice führt mit 2:0 Sätzen');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\nSecond game won by Alice 15-14. Alice leads two games to love');
 
@@ -606,7 +606,7 @@ _describe('BWF experimental 5x11_15 counting', function() {
 			exigent: 20499,
 		});
 		assert.strictEqual(pronounce_de(s),
-			'Satz.\nDer dritte Satz wurde gewonnen von Bob 12-10. Alice führt zwei Sätze zu eins');
+			'Satz.\nDer dritte Satz wurde gewonnen von Bob 12-10. Alice führt mit 2:1 Sätzen');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\nThird game won by Bob 12-10. Alice leads two games to one');
 
@@ -737,7 +737,7 @@ _describe('BWF experimental 5x11_15 counting', function() {
 			exigent: 20499,
 		});
 		assert.strictEqual(pronounce_de(s),
-			'Satz.\nDer vierte Satz wurde gewonnen von Bob 11-2; Zwei Sätze beide');
+			'Satz.\nDer vierte Satz wurde gewonnen von Bob 11-2; zwei Sätze beide');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\nFourth game won by Bob 11-2; Two games all');
 
