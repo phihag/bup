@@ -1,14 +1,19 @@
+Ansagenänderung bei 60 Sekunden! (11-.. bitte spielen)
+mail Klaus-Michael + Jörg
+	now measured
+	irreproducible (stats show <20ms)
+	selectable
 add support for static downloadable files
 	bundesliga-mindestanforderungen
 	bundesliga-ballsorten
 xlsx eventsheet singles: player name is 0
 alles vorhanden im Spielbericht ankreuzen
 option to react on touch instead of click
-new sheet<KM
-run detailed performance tests!
 final match confirmation should set umpire name/court id
 btde export should export all known matches!
 sent export should be able to imported
+xlsx style at center
+referee mode
 
 display for very small screens (see error report)
 hide current matches from match overview if not enough space
@@ -16,11 +21,6 @@ wakelock
 	functional (seems currently broken)
 	test on device
 	wakelock craft video
-xlsx style at center
-referee mode
-Ansagenänderung bei 60 Sekunden! (11-.. bitte spielen)
-check minification should also rewrite variable names
-mail Klaus-Michael + Jörg
 
 doc about all main features (HTML table, compare with other projects
 fix autorescale on tablets

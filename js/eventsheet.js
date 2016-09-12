@@ -699,12 +699,12 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 	xlsx.open(ui8r, function(xlsx_file) {
 		function fill_team_sheet(sheet_fn, team_id, cb) {
 			xlsx_file.modify_sheet(sheet_fn, cb, function(sheet) {
-				sheet.text('B4', ev.team_names[team_id]);
+				sheet.text('B5', ev.team_names[team_id]);
 				var players = calc_player_matches(ev, team_id);
 
 				var row_idx = {
-					m: 8,
-					f: 21,
+					m: 9,
+					f: 22,
 				};
 				var x_count = {
 					m: {},
@@ -743,8 +743,8 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 				// Mark top rows green
 				for (var gender in x_count) {
 					var row = {
-						m: 6,
-						f: 19,
+						m: 7,
+						f: 20,
 					}[gender];
 					for (var col in x_count[gender]) {
 						sheet.val(col + row, x_count[gender][col]);
@@ -753,8 +753,8 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 
 				if (ev.backup_players) {
 					var backup_row_idx = {
-						m: 16,
-						f: 25,
+						m: 17,
+						f: 26,
 					};
 					ev.backup_players[team_id].forEach(function(player) {
 						var row = backup_row_idx[player.gender];
@@ -763,12 +763,12 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					});
 				}
 
-				sheet.text('B29', extra_data['teamster' + team_id]);
+				sheet.text('B30', extra_data['teamster' + team_id]);
 
 				var incomplete = ev.matches.some(function(m) {
 					return m.setup.incomplete;
 				});
-				sheet.val('C4', incomplete ? 0 : 1);
+				sheet.val('C5', incomplete ? 0 : 1);
 			});
 		}
 
