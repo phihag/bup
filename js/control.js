@@ -432,6 +432,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
 	var editmode = require('./editmode');
 	var match_storage = require('./match_storage');
+	var netstats = require('./netstats');
 	var network = require('./network');
 	var render = require('./render');
 	var settings = require('./settings');
