@@ -13,29 +13,29 @@ var bup = tutils.bup;
 
 function pronounce_de(s) {
 	bup.i18n.update_state(s, 'de');
-	return bup.pronounciation.pronounce(s);
+	return bup.pronunciation.pronounce(s);
 }
 
 function pronounce_en(s) {
 	bup.i18n.update_state(s, 'en');
-	return bup.pronounciation.pronounce(s);
+	return bup.pronunciation.pronounce(s);
 }
 
 function loveall_de(s) {
 	bup.i18n.update_state(s, 'de');
-	return bup.pronounciation.loveall_announcement(s);
+	return bup.pronunciation.loveall_announcement(s);
 }
 
 function loveall_en(s) {
 	bup.i18n.update_state(s, 'en');
-	return bup.pronounciation.loveall_announcement(s);
+	return bup.pronunciation.loveall_announcement(s);
 }
 
 
 (function() {
 'use strict';
 
-_describe('pronounciation', function() {
+_describe('pronunciation', function() {
 	_it('Start of match (singles)', function() {
 		var presses = [];
 		var s = state_after(presses, DOUBLES_SETUP);
@@ -2724,7 +2724,7 @@ _describe('pronounciation', function() {
 		);
 	});
 
-	_it('5x11 end-of game pronounciation', function() {
+	_it('5x11 end-of game pronunciation', function() {
 		var SINGLES_SETUP_5x11 = bup.utils.deep_copy(SINGLES_SETUP);
 		SINGLES_SETUP_5x11.counting = '5x11_15';
 		var DOUBLES_SETUP_5x11 = bup.utils.deep_copy(DOUBLES_SETUP);

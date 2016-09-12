@@ -212,7 +212,7 @@ function render_score_display(s) {
 
 function _set_dialog(dialog_qs, pr_str) {
 	var dialog = uiu.qs(dialog_qs);
-	var pronounciation_span = dialog.querySelector('span.pronounciation');
+	var pronunciation_span = dialog.querySelector('span.pronunciation');
 	var button = dialog.querySelector('button');
 	var m = pr_str.match(/^([\s\S]+?)\n([^\n]+\n[^\n]{1,15}|[^\n]+)$/);
 
@@ -220,12 +220,12 @@ function _set_dialog(dialog_qs, pr_str) {
 	var btn_str = m ? m[2] : pr_str;
 
 	if (span_str) {
-		$(pronounciation_span).addClass('pronounciation_nonempty');
+		$(pronunciation_span).addClass('pronunciation_nonempty');
 	} else {
-		$(pronounciation_span).removeClass('pronounciation_nonempty');
+		$(pronunciation_span).removeClass('pronunciation_nonempty');
 	}
 
-	uiu.text(pronounciation_span, span_str);
+	uiu.text(pronunciation_span, span_str);
 	uiu.text(button, btn_str);
 }
 
@@ -257,10 +257,10 @@ function ui_render(s) {
 	uiu.visible_qs('#love-all-dialog', s.match.announce_pregame && !s.match.injuries && !s.match.suspended);
 	if (s.match.announce_pregame) {
 		dialog_active = true;
-		if (s.settings.show_pronounciation) {
-			_set_dialog('#love-all-dialog', pronounciation.pronounce(s));
+		if (s.settings.show_pronunciation) {
+			_set_dialog('#love-all-dialog', pronunciation.pronounce(s));
 		} else {
-			$('#love-all-dialog button').text(pronounciation.loveall_announcement(s));
+			$('#love-all-dialog button').text(pronunciation.loveall_announcement(s));
 			uiu.text_qs('#love-all-dialog span', '');
 		}
 	}
@@ -274,10 +274,10 @@ function ui_render(s) {
 	uiu.visible_qs('#postmatch-confirm-dialog', s.match.finished && !s.match.finish_confirmed && !s.match.suspended && !s.match.injuries);
 	if (s.match.finished && !s.match.finish_confirmed) {
 		dialog_active = true;
-		if (s.settings.show_pronounciation) {
-			_set_dialog('#postmatch-confirm-dialog', pronounciation.pronounce(s));
+		if (s.settings.show_pronunciation) {
+			_set_dialog('#postmatch-confirm-dialog', pronunciation.pronounce(s));
 		} else {
-			$('#postmatch-confirm-dialog button').text(pronounciation.postgame_announcement(s));
+			$('#postmatch-confirm-dialog button').text(pronunciation.postgame_announcement(s));
 			uiu.text_qs('#postmatch-confirm-dialog span', '');
 		}
 	}
@@ -285,10 +285,10 @@ function ui_render(s) {
 	uiu.visible_qs('#postgame-confirm-dialog', !s.match.finished && s.game.finished && !s.match.suspended && !s.match.injuries);
 	if (!s.match.finished && s.game.finished) {
 		dialog_active = true;
-		if (s.settings.show_pronounciation) {
-			_set_dialog('#postgame-confirm-dialog', pronounciation.pronounce(s));
+		if (s.settings.show_pronunciation) {
+			_set_dialog('#postgame-confirm-dialog', pronunciation.pronounce(s));
 		} else {
-			$('#postgame-confirm-dialog button').text(pronounciation.postgame_announcement(s));
+			$('#postgame-confirm-dialog button').text(pronunciation.postgame_announcement(s));
 			uiu.text_qs('#postgame-confirm-dialog span', '');
 		}
 	}
@@ -297,7 +297,7 @@ function ui_render(s) {
 	if (s.match.suspended) {
 		dialog_active = true;
 		$('#suspension-resume').text(
-			(s.settings.show_pronounciation ? (pronounciation.pronounce(s) + '.\n\n') : '') +
+			(s.settings.show_pronunciation ? (pronunciation.pronounce(s) + '.\n\n') : '') +
 			s._('button:Unsuspend')
 		);
 	}
@@ -306,8 +306,8 @@ function ui_render(s) {
 	$('#injury-resume-dialog button').remove();
 	if (s.match.injuries) {
 		dialog_active = true;
-		$('#injury-pronounciation').text(
-			(s.settings.show_pronounciation ? (pronounciation.pronounce(s)) : '')
+		$('#injury-pronunciation').text(
+			(s.settings.show_pronunciation ? (pronunciation.pronounce(s)) : '')
 		);
 		var dialog = uiu.qs('#injury-resume-dialog');
 		s.match.injuries.forEach(function(injury) {
@@ -379,8 +379,8 @@ function ui_render(s) {
 			dialog_active = true;
 			bupui.show_picker(pick_side);
 
-			$('#pick_side_team1').text(pronounciation.teamtext_internal(s, 0));
-			$('#pick_side_team2').text(pronounciation.teamtext_internal(s, 1));
+			$('#pick_side_team1').text(pronunciation.teamtext_internal(s, 0));
+			$('#pick_side_team2').text(pronunciation.teamtext_internal(s, 1));
 		} else if (s.game.start_server_player_id === null) {
 			pick_server.find('button').remove();
 
@@ -417,17 +417,17 @@ function ui_render(s) {
 		}
 	}
 
-	var pronounciation_el = $('#pronounciation');
-	if (s.settings.show_pronounciation && !dialog_active) {
-		var pronounciation_text = pronounciation.pronounce(s);
-		if (pronounciation_text) {
-			pronounciation_el.find('>span').text(pronounciation_text);
-			pronounciation_el.show();
+	var pronunciation_el = $('#pronunciation');
+	if (s.settings.show_pronunciation && !dialog_active) {
+		var pronunciation_text = pronunciation.pronounce(s);
+		if (pronunciation_text) {
+			pronunciation_el.find('>span').text(pronunciation_text);
+			pronunciation_el.show();
 		} else {
-			pronounciation_el.hide();
+			pronunciation_el.hide();
 		}
 	} else {
-		pronounciation_el.hide();
+		pronunciation_el.hide();
 	}
 }
 
@@ -458,7 +458,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
 	var court = require('./court');
 	var editmode = require('./editmode');
-	var pronounciation = require('./pronounciation');
+	var pronunciation = require('./pronunciation');
 	var timer = require('./timer');
 	var uiu = require('./uiu');
 

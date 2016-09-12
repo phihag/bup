@@ -1,16 +1,16 @@
-#pronounciation {
+#pronunciation {
 	padding-top: 0;
 }
-#pronounciation > span,
-.pronounciation {
+#pronunciation > span,
+.pronunciation {
 	display: block;
 	color: #444;
 	white-space: pre-wrap;
 }
-#pronounciation > span {
+#pronunciation > span {
 	padding: 2vmin 0 2vmin 0;
 }
-.pick_dialog .pronounciation_nonempty + button {
+.pick_dialog .pronunciation_nonempty + button {
 	margin-top: 0.1em;
 }
 
@@ -40,7 +40,7 @@
 
 .pick_dialog,
 .exception_dialog,
-#pronounciation {
+#pronunciation {
 	position: absolute;
 	bottom: 0;
 	left: 0;
@@ -61,7 +61,7 @@
 .exception_dialog {
 	z-index: 300;
 }
-#pronounciation {
+#pronunciation {
 	z-index: 100;
 	min-width: calc(100vw - 60vmin);
 	max-width: calc(100vw - 60vmin);
@@ -88,7 +88,7 @@
 		height: 25vmin;
 	}
 
-	#pronounciation {
+	#pronunciation {
 		bottom: 25vmin;
 		min-width: auto;
 		max-width: none;

@@ -88,7 +88,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var network = require('./network');
 	var order = require('./order');
 	var p2p = require('./p2p');
-	var pronounciation = require('./pronounciation');
+	var pronunciation = require('./pronunciation');
 	var register_sworker = require('./register_sworker');
 	var report_problem = require('./report_problem');
 	var scoresheet = require('./scoresheet');
@@ -109,7 +109,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 		network: network,
 		order: order,
 		p2p: p2p,
-		pronounciation: pronounciation,
+		pronunciation: pronunciation,
 		scoresheet: scoresheet,
 		stats: stats,
 		utils: utils,

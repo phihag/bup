@@ -591,8 +591,8 @@ function press_state_desc(s, press) {
 
 	switch (press.type) {
 	case 'pick_side':
-		var left_team = pronounciation.teamtext_internal(s, press.team1_left ? 0 : 1);
-		var right_team = pronounciation.teamtext_internal(s, press.team1_left ? 1 : 0);
+		var left_team = pronunciation.teamtext_internal(s, press.team1_left ? 0 : 1);
+		var right_team = pronunciation.teamtext_internal(s, press.team1_left ? 1 : 0);
 		return s._('pressdesc:state:' + press.type, {
 			left_team: left_team,
 			right_team: right_team,
@@ -634,8 +634,8 @@ function press_state_desc(s, press) {
 		return '';
 	case 'editmode_change-ends':
 		return s._('pressdesc:state:' + press.type, {
-			left_team: pronounciation.teamtext_internal(s, s.game.team1_left ? 0 : 1),
-			right_team: pronounciation.teamtext_internal(s, s.game.team1_left ? 1 : 0),
+			left_team: pronunciation.teamtext_internal(s, s.game.team1_left ? 0 : 1),
+			right_team: pronunciation.teamtext_internal(s, s.game.team1_left ? 1 : 0),
 		});
 	case 'editmode_change-serve':
 		return s._('pressdesc:state:' + press.type, {
@@ -671,7 +671,7 @@ function press_state_desc(s, press) {
 	case 'disqualified':
 		var winner_id = 1 - press.team_id;
 		return s._('pressdesc:state:' + press.type, {
-			winner: pronounciation.teamtext_internal(s, winner_id),
+			winner: pronunciation.teamtext_internal(s, winner_id),
 			score_str: calc.score_str(s, winner_id),
 		});
 	case 'note':
@@ -817,7 +817,7 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
 	var control = require('./control');
-	var pronounciation = require('./pronounciation');
+	var pronunciation = require('./pronunciation');
 	var uiu = require('./uiu');
 	var utils = require('./utils');
 

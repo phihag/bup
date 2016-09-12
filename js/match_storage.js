@@ -80,7 +80,7 @@ function ui_init() {
 	matches.forEach(function(m) {
 		var li = $('<li>');
 		var a = $('<span class="load_match_link">');
-		a.text(pronounciation.match_str(m.setup) + ', ' + utils.datetime_str(m.metadata.updated));
+		a.text(pronunciation.match_str(m.setup) + ', ' + utils.datetime_str(m.metadata.updated));
 		a.on('click', function(e) {
 			e.preventDefault();
 			control.resume_match(m);
@@ -109,7 +109,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
-	var pronounciation = require('./pronounciation');
+	var pronunciation = require('./pronunciation');
 	var settings = require('./settings');
 	var uiu = require('./uiu');
 	var utils = require('./utils');

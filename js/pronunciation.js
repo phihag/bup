@@ -1,4 +1,4 @@
-var pronounciation = (function() {
+var pronunciation = (function() {
 'use strict';
 
 function match_str(setup) {
@@ -33,7 +33,7 @@ function loveall_announcement(s) {
 	var game_id = (s.match.max_games - 1 === glen) ? 'final' : glen;
 	return s._('loveall_play.' + game_id, {
 		mark_extra: '',
-		score: _pronounciation_score(s),
+		score: _pronunciation_score(s),
 	});
 }
 
@@ -99,7 +99,7 @@ function _prematch_team(s, team_id) {
 	return res;
 }
 
-function _pronounciation_score(s, score, team1_serving, service_over) {
+function _pronunciation_score(s, score, team1_serving, service_over) {
 	if (score === undefined) {
 		score = s.game.score;
 	}
@@ -192,7 +192,7 @@ function pronounce(s) {
 				home_team: _prematch_team(s, 0),
 				serving_team: s.setup.teams[serving_team_id].name,
 				serving_str: serving_str,
-				score: _pronounciation_score(s),
+				score: _pronunciation_score(s),
 			};
 
 			return (
@@ -208,7 +208,7 @@ function pronounce(s) {
 				left_team: _prematch_team(s, (s.game.team1_left ? 0 : 1)),
 				server: server_name,
 				receiver_str: receiver_str,
-				score: _pronounciation_score(s),
+				score: _pronunciation_score(s),
 			};
 
 			return mark_str + s._('onmyleft', d);
@@ -219,11 +219,11 @@ function pronounce(s) {
 		if (mark_str) {
 			return s._('loveall_play.' + game_id_str + '.mark', {
 				mark_str: marks2str(s, s.match.marks, true),
-				score: _pronounciation_score(s),
+				score: _pronunciation_score(s),
 			});
 		} else {
 			return s._('loveall_play.' + game_id_str, {
-				score: _pronounciation_score(s),
+				score: _pronunciation_score(s),
 			});
 		}
 	}
@@ -248,7 +248,7 @@ function pronounce(s) {
 	if (s.match.just_unsuspended)  {
 		return (
 			mark_str + s._('ready to unsuspend') +
-			_pronounciation_score(s, undefined, undefined, false) +
+			_pronunciation_score(s, undefined, undefined, false) +
 			s._('card.play')
 		);
 	}
@@ -269,17 +269,17 @@ function pronounce(s) {
 					// Only use extended form if it's more than just a referee call
 					return (
 						interval_pre_mark_str +
-						_pronounciation_score(s, s.game.interval_score, s.game.interval_team1_serving, s.game.interval_service_over) +
+						_pronunciation_score(s, s.game.interval_score, s.game.interval_team1_serving, s.game.interval_service_over) +
 						interval_str + '.\n' +
 						interval_post_mark_str +
-						_pronounciation_score(s) +
+						_pronunciation_score(s) +
 						s._('card.play')
 					);
 				}
 			}
 		}
 
-		return mark_str + _pronounciation_score(s) + interval_str;
+		return mark_str + _pronunciation_score(s) + interval_str;
 	}
 
 	if (mark_str) {
@@ -307,6 +307,6 @@ return {
 if (typeof module !== 'undefined') {
 	var calc = require('./calc');
 
-	module.exports = pronounciation;
+	module.exports = pronunciation;
 }
 /*/@DEV*/

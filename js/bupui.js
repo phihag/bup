@@ -67,7 +67,7 @@ function make_pick(s, label, values, on_pick, on_cancel, container) {
 function make_team_pick(s, label, press_type, on_cancel, modify_button) {
 	var values = [0, 1].map(function(ti) {
 		return {
-			label: pronounciation.teamtext_internal(s, ti),
+			label: pronunciation.teamtext_internal(s, ti),
 			modify_button: modify_button,
 			team_id: ti,
 		};
@@ -158,7 +158,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
-	var pronounciation = require('./pronounciation');
+	var pronunciation = require('./pronunciation');
 	var uiu = require('./uiu');
 
 	module.exports = bupui;

@@ -17,9 +17,9 @@ SINGLES_SETUP.counting = '1x11_15';
 
 _describe('Golden game (1x11_15) counting', function() {
 	_it('go through a whole match', function() {
-		var test_pronounciation = require('./test_pronounciation');
-		var pronounce_de = test_pronounciation.pronounce_de;
-		var pronounce_en = test_pronounciation.pronounce_en;
+		var test_pronunciation = require('./test_pronunciation');
+		var pronounce_de = test_pronunciation.pronounce_de;
+		var pronounce_en = test_pronunciation.pronounce_en;
 
 		var presses = [{
 			type: 'pick_side',

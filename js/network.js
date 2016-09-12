@@ -226,7 +226,7 @@ function enter_match(match) {
 		};
 
 		if ((mwinner == 'inprogress') && calc.match_started(netscore)) {
-			bupui.make_pick(state, state._('network:in progress').replace('{match}', pronounciation.match_str(match.setup)), [{
+			bupui.make_pick(state, state._('network:in progress').replace('{match}', pronunciation.match_str(match.setup)), [{
 				label: state._('network:resume match').replace('{score}', _score_text(netscore)),
 				key: 'resume',
 			}, {
@@ -243,7 +243,7 @@ function enter_match(match) {
 		}
 
 		if (mwinner == 'left' || mwinner == 'right') {
-			bupui.make_pick(state, state._('network:match finished').replace('{score}', _score_text(netscore)).replace('{match}', pronounciation.match_str(match.setup)), [{
+			bupui.make_pick(state, state._('network:match finished').replace('{score}', _score_text(netscore)).replace('{match}', pronunciation.match_str(match.setup)), [{
 				label: state._('network:restart match'),
 			}], function() {
 				control.start_match(state, match.setup);
@@ -654,7 +654,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var liveaw = require('./liveaw');
 	var netstats = require('./netstats');
 	var p2p = require('./p2p');
-	var pronounciation = require('./pronounciation');
+	var pronunciation = require('./pronunciation');
 	var render = require('./render');
 	var report_problem = require('./report_problem');
 	var settings = require('./settings');

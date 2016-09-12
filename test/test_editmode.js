@@ -1222,7 +1222,7 @@ _describe('editmode', function() {
 
 		var s = state_after(presses, DOUBLES_SETUP);
 		assert.strictEqual(
-			bup.pronounciation.pronounce(s),
+			bup.pronunciation.pronounce(s),
 			'3-5'
 		);
 	});

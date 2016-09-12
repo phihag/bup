@@ -3,7 +3,7 @@ var settings = (function() {
 
 var default_settings = {
 	go_fullscreen: false,
-	show_pronounciation: true,
+	show_pronunciation: true,
 	umpire_name: '',
 	service_judge_name: '',
 	court_id: '',
@@ -120,7 +120,7 @@ function update_court(s) {
 	court_select.val(s.settings.court_id);
 }
 
-var _settings_checkboxes = ['go_fullscreen', 'show_pronounciation', 'negative_timers', 'shuttle_counter', 'editmode_doubleclick'];
+var _settings_checkboxes = ['go_fullscreen', 'show_pronunciation', 'negative_timers', 'shuttle_counter', 'editmode_doubleclick'];
 var _settings_textfields = ['umpire_name', 'service_judge_name', 'court_id', 'court_description'];
 var _settings_numberfields = ['network_timeout', 'network_update_interval', 'displaymode_update_interval', 'button_block_timeout'];
 var _settings_selects = ['language', 'displaymode_court_id', 'displaymode_style', 'wakelock'];
@@ -192,7 +192,7 @@ function ui_init(s) {
 		var box = $('.settings [name="' + name + '"]');
 		box.on('change', function() {
 			s.settings[name] = box.prop('checked');
-			if ((name === 'show_pronounciation') || (name === 'negative_timers')) {
+			if ((name === 'show_pronunciation') || (name === 'negative_timers')) {
 				render.ui_render(s);
 			}
 			if (name === 'shuttle_counter') {

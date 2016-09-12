@@ -31,7 +31,7 @@ function ui_init(s) {
 		}
 	});
 	Mousetrap.bind('a', function() {
-		s.settings.show_pronounciation = ! s.settings.show_pronounciation;
+		s.settings.show_pronunciation = ! s.settings.show_pronunciation;
 		if (s.initialized) {
 			render.ui_render(state);
 		}
