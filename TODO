@@ -1,7 +1,4 @@
-when 20 seconds remaining in interval switch top text with 20 seconds
-	write test first!
-	test in UI
-20 seconds test after games as well
+20 seconds test after games
 	write test
 	test in UI
 but not after match!

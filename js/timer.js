@@ -46,11 +46,22 @@ function update() {
 		}
 		timer_el.text(remaining_val);
 
+		var new_timer_state = (remaining <= 0) ? undefined : 'running';
 		if (state.timer.exigent && (remaining <= state.timer.exigent)) {
 			timer_el.addClass('timer_exigent');
+			if (new_timer_state === 'running') {
+				new_timer_state = 'exigent';
+			}
 		} else {
 			timer_el.removeClass('timer_exigent');
 		}
+
+		var old_timer_state = state.timer_state;
+		state.timer_state = new_timer_state;
+		if (old_timer_state && (new_timer_state !== old_timer_state)) {
+			render.ui_render(state); // Rerender because pronounciation may have changed
+		}
+
 		if ((remaining <= 0) && (state.settings.negative_timers)) {
 			ui_timer = window.setTimeout(update, 1000);
 			return true;
@@ -67,6 +78,7 @@ function update() {
 }
 
 function remove(immediately) {
+	state.timer_state = undefined;
 	if (ui_timer) {
 		window.clearTimeout(ui_timer);
 		ui_timer = null;
@@ -99,6 +111,7 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
 	var utils = require('./utils');
+	var render = require('./render');
 
 	module.exports = timer;
 }

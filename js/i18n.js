@@ -109,7 +109,7 @@ function translate(s, str, data, fallback) {
 
 	if (data) {
 		for (var key in data) {
-			res = res.replace('{' + key + '}', data[key]);
+			res = utils.replace_all(res, '{' + key + '}', data[key]);
 		}
 	}
 	return res;

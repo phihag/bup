@@ -67,6 +67,8 @@ var i18n_de = {
 'score.all': 'beide',
 'score.service_over': 'Aufschlagwechsel. ',
 'Interval': 'Pause.',
+'20secs': 'Spielfeld {court_id}, 20 Sekunden.\nSpielfeld {court_id}, 20 Sekunden.',
+'20secs:nocourt': '20 Sekunden. 20 Sekunden.',
 'change_ends': ' Bitte die Spielfeldseiten wechseln.',
 'game point': 'Satzpunkt',
 'match point': 'Spielpunkt',

@@ -54,7 +54,8 @@ SINGLES_SETUP_EN.force_language = 'en';
 function state_after(presses, setup, settings) {
 	var s = {};
 	s.settings = settings;
-	bup.i18n.update_state(s, (settings ? settings.language : (setup.force_language ? setup.force_language : 'de')));
+	var lang = ((settings && settings.langauge) ? settings.language : (setup.force_language ? setup.force_language : 'de'));
+	bup.i18n.update_state(s, lang);
 	bup.calc.init_state(s, setup);
 	s.presses = presses;
 	bup.calc.state(s);

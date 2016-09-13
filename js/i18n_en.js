@@ -66,6 +66,8 @@ var i18n_en = {
 'score.all': 'all',
 'score.service_over': 'Service over. ',
 'Interval': 'Interval',
+'20secs': 'Court {court_id}, 20 seconds. Court {court_id}, 20 seconds.',
+'20secs:nocourt': '20 seconds. 20 seconds.',
 'change_ends': '; change ends',
 'game point': 'game point',
 'match point': 'match point',

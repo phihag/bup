@@ -256,6 +256,10 @@ function parallel(tasks, callback) {
 	});
 }
 
+function replace_all(str, search, replacement) {
+	return str.split(search).join(replacement);
+}
+
 return {
 	add_zeroes: add_zeroes,
 	any: any,
@@ -277,6 +281,7 @@ return {
 	range: range,
 	remove: remove,
 	repeat: repeat,
+	replace_all: replace_all,
 	reverse_every: reverse_every,
 	sum: sum,
 	svg_el: svg_el,

@@ -11,14 +11,17 @@ var state_after = tutils.state_after;
 var press_score = tutils.press_score;
 var bup = tutils.bup;
 
-function pronounce_de(s) {
-	bup.i18n.update_state(s, 'de');
-	return bup.pronunciation.pronounce(s);
+function pronounce(lang_name, s, now) {
+	bup.i18n.update_state(s, lang_name);
+	return bup.pronunciation.pronounce(s, now);
 }
 
-function pronounce_en(s) {
-	bup.i18n.update_state(s, 'en');
-	return bup.pronunciation.pronounce(s);
+function pronounce_de(s, now) {
+	return pronounce('de', s, now);
+}
+
+function pronounce_en(s, now) {
+	return pronounce('en', s, now);
 }
 
 function loveall_de(s) {
@@ -3124,11 +3127,13 @@ _describe('pronunciation', function() {
 		});
 
 		var s = state_after(presses, DOUBLES_SETUP);
-		assert.equal(pronounce_de(s),
-			'Aufschlagwechsel. 11-6 Pause.\n11-6. Bitte spielen.'
+		assert.equal(pronounce_de(s, 1000000),
+			'Aufschlagwechsel. 11-6 Pause.\n' +
+			'11-6. Bitte spielen.'
 		);
-		assert.equal(pronounce_en(s),
-			'Service over. 11-6 Interval\n11-6. Play.'
+		assert.equal(pronounce_en(s, 1000000),
+			'Service over. 11-6 Interval\n' +
+			'11-6. Play.'
 		);
 		assert.deepStrictEqual(s.timer, {
 			duration: 60000,
@@ -3147,6 +3152,119 @@ _describe('pronunciation', function() {
 		assert.strictEqual(pronounce_en(s), null);
 		assert.strictEqual(s.game.just_interval, true);
 		assert.deepStrictEqual(s.timer, false);
+	});
+
+	_it('20 seconds call', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		}, {
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 0,
+		}, {
+			type: 'love-all',
+		}];
+		press_score(presses, 5, 10);
+		press_score(presses, 1, 0);
+		presses.push({
+			type: 'score',
+			side: 'right',
+			timestamp: 1000000,
+		});
+
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(pronounce_de(s, 1000000),
+			'Aufschlagwechsel. 11-6 Pause.\n' +
+			'11-6. Bitte spielen.'
+		);
+		assert.equal(pronounce_en(s, 1000000),
+			'Service over. 11-6 Interval\n' +
+			'11-6. Play.'
+		);
+		assert.deepStrictEqual(s.timer, {
+			duration: 60000,
+			exigent: 20499,
+			start: 1000000,
+		});
+		var sav_presses = presses.slice();
+
+		s = state_after(presses, DOUBLES_SETUP, {court_id: 5});
+		assert.equal(pronounce_de(s, 1040000),
+			'Spielfeld 5, 20 Sekunden.\n' +
+			'Spielfeld 5, 20 Sekunden.\n' +
+			'11-6. Bitte spielen.'
+		);
+		assert.equal(pronounce_en(s, 1040000),
+			'Court 5, 20 seconds. Court 5, 20 seconds.\n' +
+			'11-6. Play.'
+		);
+		assert.deepStrictEqual(s.timer, {
+			duration: 60000,
+			exigent: 20499,
+			start: 1000000,
+		});
+
+		s = state_after(presses, DOUBLES_SETUP, {court_id: 'referee'});
+		assert.equal(pronounce_de(s, 1040000),
+			'20 Sekunden. 20 Sekunden.\n' +
+			'11-6. Bitte spielen.'
+		);
+		assert.equal(pronounce_en(s, 1040000),
+			'20 seconds. 20 seconds.\n' +
+			'11-6. Play.'
+		);
+
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(pronounce_de(s, 1040000),
+			'20 Sekunden. 20 Sekunden.\n' +
+			'11-6. Bitte spielen.'
+		);
+		assert.equal(pronounce_en(s, 1040000),
+			'20 seconds. 20 seconds.\n' +
+			'11-6. Play.'
+		);
+
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(pronounce_de(s, 1070000),
+			'11-6. Bitte spielen.'
+		);
+		assert.equal(pronounce_en(s, 1070000),
+			'11-6. Play.'
+		);
+		assert.deepStrictEqual(s.timer, {
+			duration: 60000,
+			exigent: 20499,
+			start: 1000000,
+		});
+
+		presses.push({
+			type: 'postinterval-confirm',
+			timestamp: 1080000,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		// no pronounciation now (unless cards are involved, tested somewhere else)
+		assert.strictEqual(pronounce_de(s), null);
+		assert.strictEqual(pronounce_en(s), null);
+		assert.strictEqual(s.game.just_interval, true);
+		assert.deepStrictEqual(s.timer, false);
+
+		// Early resumption of play
+		presses = sav_presses.slice();
+		presses.push({
+			type: 'postinterval-confirm',
+			timestamp: 1030000,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(pronounce_de(s), null);
+		assert.strictEqual(pronounce_en(s), null);
+		assert.strictEqual(s.game.just_interval, true);
+		assert.deepStrictEqual(s.timer, false);
+
 	});
 });
 
