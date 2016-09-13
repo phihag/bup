@@ -192,7 +192,7 @@ var i18n_de = {
 'settings:Service judge': 'Aufschlagrichter',
 'settings:Language': 'Sprache',
 'settings:editmode doubleclick': 'Manuelles Bearbeiten mit Doppelklick auf Feld',
-'settings:Show Pronounciation': 'Ansagen anzeigen',
+'settings:Show Pronunciation': 'Ansagen anzeigen',
 'settings:Negative Timers': 'Stoppuhr läuft bis zum nächsten Punkt (auch negative Werte anzeigen)',
 'settings:Shuttle Counter': 'Federballzähler anzeigen',
 'settings:Request Fullscreen on Startup': 'Vollbildmodus beim Start anfragen',

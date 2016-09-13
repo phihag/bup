@@ -190,7 +190,7 @@ var i18n_en = {
 'settings:Service judge': 'Service judge',
 'settings:Language': 'Language',
 'settings:editmode doubleclick': 'Enter manual edit mode by touching court twice',
-'settings:Show Pronounciation': 'Show announcements',
+'settings:Show Pronunciation': 'Show announcements',
 'settings:Negative Timers': 'Timers go into negative',
 'settings:Shuttle Counter': 'Show shuttle counter',
 'settings:Request Fullscreen on Startup': 'Request fullscreen on startup',
