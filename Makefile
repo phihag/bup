@@ -89,13 +89,16 @@ upload-run:
 test: ## Run tests
 	@npm test
 
-lint: eslint stylelint ## Verify source code quality
+lint: eslint stylelint doclint ## Verify source code quality
 
 eslint:
 	@./node_modules/.bin/eslint js/ div/*.js test/ cachesw.js
 
 stylelint:
 	@./node_modules/.bin/stylelint css/*.css
+
+doclint:
+	@if grep --line-number -P '\t' div/data_structures.md; then echo 'Tab char in div/data_structures.md'; exit 1 ; fi
 
 coverage:
 	istanbul cover _mocha -- -R spec
@@ -109,4 +112,4 @@ clean: cleandist ## Remove temporary files
 	rm -rf -- libs
 	rm -rf -- node_modules
 
-.PHONY: default help deps deps-optional test clean install-libs force-install-libs upload dist cleandist coverage coverage-display cd lint jshint eslint appcache-manifest manifest upload-run stylelint
+.PHONY: default help deps deps-optional test clean install-libs force-install-libs upload dist cleandist coverage coverage-display cd lint jshint eslint appcache-manifest manifest upload-run stylelint doclint
