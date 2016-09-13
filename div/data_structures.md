@@ -6,7 +6,7 @@ preferred_order Array of eventsheet_id (recommended) or match_name values that i
                 Example: ["MS1", "WS", "MS2", "MD1", "WD", "MD2", "MX"].
 league_key      ID of the league being played (this determines which event sheets are available, among others).
                 Strongly recommended if applicable.
-                Available values: "1bl-2015", "2bln-2015", "2bls-2015", "1bl-2016", "2bln-2016", "2bls-2016", "RLW", "RLN"
+                Available values: "1BL-2015", "2BLN-2015", "2BLS-2015", "1BL-2016", "2BLN-2016", "2BLS-2016", "RLW", "RLN"
 team_names      Array of home and away team name. Required for team competitions.
                 Example: ["TV Refrath", "BC Bischmisheim"]
 id              Globally unique event id, e.g. "2016-bundesliga-refrath vs bischmisheim"
