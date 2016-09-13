@@ -179,6 +179,8 @@ _describe('order', function() {
 	});
 
 	_it('realistic sample optimization', function() {
+		this.timeout(30000);
+
 		var conflicts = bup.order.calc_conflict_map(sample_matches);
 		assert.deepStrictEqual(conflicts, [
 			[undefined, 0, 0, 2, 1, 0, 0, 0], // HD1
