@@ -53,7 +53,7 @@ press
 team_id is always 0: home team, 1: away_team.
 player_id is the index into the players array of setup.teams (0 in singles).
 
-timestamp*       UNIX timestamp when the button was pressed.
+timestamp*       UNIX timestamp when the button was pressed, times 1000 (i.e. ms since 1970-01-01).
 type*            What kind of button has been pressed. Determines the other keys.
  "pick_side"     Who plays on which side.
     team1_left*    (true: home team left, false: home team right)
