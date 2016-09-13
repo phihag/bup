@@ -1,13 +1,15 @@
 20 seconds test after games
 	write test
 	test in UI
+20 seconds at warmup
+	write test
+	test in UI
 but not after match!
 add stats tests for postinterval-confirm
 	description should be good
 	with should account rally length
 	without(old style) should not
 
-fix coverage (make cd)
 league_key btde
 	add in tests
 
