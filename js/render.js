@@ -293,6 +293,17 @@ function ui_render(s) {
 		}
 	}
 
+	uiu.visible_qs('#postinterval-confirm-dialog', s.game.interval);
+	if (s.game.interval) {
+		dialog_active = true;
+		if (s.settings.show_pronunciation) {
+			_set_dialog('#postinterval-confirm-dialog', pronunciation.pronounce(s));
+		} else {
+			$('#postinterval-confirm-dialog button').text('TODO');
+			uiu.text_qs('#postinterval-confirm-dialog .pronunciation', 'TODO2');
+		}
+	}
+
 	uiu.visible_qs('#suspension-resume-dialog', s.match.suspended);
 	if (s.match.suspended) {
 		dialog_active = true;
@@ -334,7 +345,7 @@ function ui_render(s) {
 		});
 	}
 
-	var score_enabled = s.game.started && !s.game.finished && !s.match.suspended && !s.match.injuries;
+	var score_enabled = s.game.started && !s.game.finished && !s.match.suspended && !s.match.injuries && !s.game.interval;
 	var buttons = $('#left_score,#right_score');
 	if (score_enabled) {
 		buttons.removeAttr('data-render-disabled');

@@ -493,6 +493,7 @@ function calc_press(s, press) {
 		break;
 	case 'score':
 		var team1_scored = (s.game.team1_left == (press.side == 'left'));
+		s.game.just_interval = false;
 		score(s, (team1_scored ? 0 : 1), press);
 		break;
 	case 'postgame-confirm':
@@ -516,6 +517,11 @@ function calc_press(s, press) {
 		}
 		s.match.finished_games.push(s.game);
 		s.match.finish_confirmed = true;
+		break;
+	case 'postinterval-confirm':
+		s.game.interval = false;
+		s.game.change_sides = false;
+		s.game.just_interval = true;
 		break;
 	case 'overrule':
 		s.match.marks.push(press);
@@ -725,6 +731,7 @@ function init_calc(s) {
 		finished: false,
 		suspended: false,
 		just_unsuspended: false,
+		just_interval: false,
 		marks: [],
 		finish_confirmed: false,
 		cards: [],

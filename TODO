@@ -1,12 +1,21 @@
 Ansagenänderung bei 60 Sekunden! (11-.. bitte spielen)
+	extend new test
+	add stats test
+
+fix coverage (make cd)
+league_key btde
+	add in tests
+
+when 20 seconds remaining in interval switch top text with 20 seconds
+	write test first!
 xlsx eventsheet singles: player name is 0
 alles vorhanden im Spielbericht ankreuzen
 option to react on touch instead of click
 mail Klaus-Michael + Jörg
 	now measured
-	irreproducible (stats show <20ms)
-	selectable
-	Anzeigenänderung
+	irreproducible (stats show <20ms) -> do you mean update on the wall?
+	unselectable
+	Anzeigenänderung in der Pause
 add support for static downloadable files
 	bundesliga-mindestanforderungen
 	bundesliga-ballsorten
@@ -425,5 +434,4 @@ reduce common occurences of a single string with dots in it (automatically?) Exa
 Blocked
 =====
 
-btde: league_key from btde JSON => what's the value for 2BLN/2BLS?
 Jörg Hupert: BWF change 90 seconds warmups

@@ -239,6 +239,11 @@ function ui_init() {
 			type: 'postgame-confirm',
 		});
 	});
+	uiu.on_click_qs('#postinterval-confirm', function() {
+		on_press({
+			type: 'postinterval-confirm',
+		});
+	});
 	uiu.on_click_qs('#postmatch-confirm', function() {
 		if (! state.match.finish_confirmed) {
 			on_press({

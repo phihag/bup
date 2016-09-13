@@ -66,8 +66,8 @@ var i18n_de = {
 'onmyleft.serve.to': ' zu ',
 'score.all': 'beide',
 'score.service_over': 'Aufschlagwechsel. ',
-'Interval': 'Pause',
-'change_ends': '. Bitte die Spielfeldseiten wechseln',
+'Interval': 'Pause.',
+'change_ends': ' Bitte die Spielfeldseiten wechseln.',
 'game point': 'Satzpunkt',
 'match point': 'Spielpunkt',
 'gamescore.0-0': '',
@@ -123,6 +123,8 @@ var i18n_de = {
 'loveall_play.2.mark': 'Dritter Satz. 0 beide.\n{mark_str}{score}. Bitte spielen.',
 'loveall_play.3.mark': 'Vierter Satz. 0 beide.\n{mark_str}{score}. Bitte spielen.',
 'loveall_play.final.mark': 'Entscheidungssatz. 0 beide.\n{mark_str}{score}. Bitte spielen.',
+
+'postinterval.play': '{score}. Bitte spielen.',
 
 'card.yellow': '{player_name}, Verwarnung wegen unsportlichen Verhaltens.\n',
 'card.red': '{player_name}, Fehler wegen unsportlichen Verhaltens.\n',

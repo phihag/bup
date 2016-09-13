@@ -123,6 +123,7 @@ var i18n_en = {
 'loveall_play.3.mark': 'Fourth game; love all.\n{mark_str}{score}. Play.',
 'loveall_play.final.mark': 'Final game; love all.\n{mark_str}{score}. Play.',
 
+'postinterval.play': '{score}. Play.',
 
 'card.yellow': '{player_name}, warning for misconduct.\n',
 'card.red': '{player_name}, fault for misconduct.\n',

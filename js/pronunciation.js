@@ -253,29 +253,60 @@ function pronounce(s) {
 		);
 	}
 
+	// No let in current browsers, therefore tucked in here
+	var interval_pre_mark_str;
+	var post_interval_marks;
+	var interval_post_mark_str;
+
 	if (!s.game.finished && s.game.started) {
 		if ((s.game.score[0] === 0) && (s.game.score[1] === 0) && !mark_str) {
 			return null;  // Special case at 0-0, we just showed the long text. Time to focus on the game.
 		}
 
-		var interval_str = (s.game.interval ? ' ' + s._('Interval') : '') + (s.game.change_sides ? s._('change_ends') : '');
-		if (s.game.interval && mark_str) {
-			var interval_pre_mark_str = marks2str(s, s.game.interval_marks);
-			var post_interval_marks = s.match.marks.slice(s.game.interval_marks.length);
+		var interval_str = '';
+		if (s.game.interval) {
+			interval_str += ' ' + s._('Interval');
+			if (s.game.change_sides) {
+				interval_str += s._('change_ends');
+			}
+			if (mark_str) {
+				interval_pre_mark_str = marks2str(s, s.game.interval_marks);
+				post_interval_marks = s.match.marks.slice(s.game.interval_marks.length);
 
-			if (post_interval_marks.length > 0) {
-				var interval_post_mark_str = marks2str(s, post_interval_marks, true);
-				if (interval_post_mark_str) {
-					// Only use extended form if it's more than just a referee call
-					return (
-						interval_pre_mark_str +
-						_pronunciation_score(s, s.game.interval_score, s.game.interval_team1_serving, s.game.interval_service_over) +
-						interval_str + '.\n' +
-						interval_post_mark_str +
-						_pronunciation_score(s) +
-						s._('card.play')
-					);
+				if (post_interval_marks.length > 0) {
+					interval_post_mark_str = marks2str(s, post_interval_marks, true);
+					if (interval_post_mark_str) {
+						// Only use extended form if it's more than just a referee call
+						var service_over_param = utils.deep_equal(s.game.interval_score, s.game.score) ? false : undefined;
+						return (
+							interval_pre_mark_str +
+							_pronunciation_score(s, s.game.interval_score, s.game.interval_team1_serving, s.game.interval_service_over) +
+							interval_str + '\n' +
+							interval_post_mark_str +
+							_pronunciation_score(s, undefined, undefined, service_over_param) +
+							s._('card.play')
+						);
+					}
 				}
+			}
+			interval_str += '\n';
+			interval_str += s._('postinterval.play', {
+				score: _pronunciation_score(s, undefined, undefined, false),
+			});
+		} else if (s.game.just_interval) {
+			if (mark_str) {
+				interval_pre_mark_str = marks2str(s, s.game.interval_marks);
+				post_interval_marks = s.match.marks.slice(s.game.interval_marks.length);
+				if (post_interval_marks.length > 0) {
+					interval_post_mark_str = marks2str(s, post_interval_marks, true);
+				} else {
+					interval_post_mark_str = '';
+				}
+				return interval_pre_mark_str + interval_post_mark_str + s._('postinterval.play', {
+					score: _pronunciation_score(s, undefined, undefined, false),
+				});
+			} else {
+				return null;  // Special case after interval, pronunciation has just been confirmed.	
 			}
 		}
 
@@ -306,6 +337,7 @@ return {
 /*@DEV*/
 if (typeof module !== 'undefined') {
 	var calc = require('./calc');
+	var utils = require('./utils');
 
 	module.exports = pronunciation;
 }

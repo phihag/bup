@@ -828,9 +828,11 @@ _describe('BWF experimental 5x11_15 counting', function() {
 			exigent: 20499,
 		});
 		assert.strictEqual(pronounce_de(s),
-			'6-5 Pause. Bitte die Spielfeldseiten wechseln');
+			'6-5 Pause. Bitte die Spielfeldseiten wechseln.\n' +
+			'6-5. Bitte spielen.');
 		assert.strictEqual(pronounce_en(s),
-			'6-5 Interval; change ends');
+			'6-5 Interval; change ends\n' +
+			'6-5. Play.');
 
 
 		press_score(presses, 4, 3);

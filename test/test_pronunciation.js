@@ -744,8 +744,12 @@ _describe('pronunciation', function() {
 			side: 'left',
 		});
 		var s = state_after(presses, SINGLES_SETUP);
-		assert.equal(pronounce_de(s), '11-9 Pause');
-		assert.equal(pronounce_en(s), '11-9 Interval');
+		assert.equal(pronounce_de(s),
+			'11-9 Pause.\n' +
+			'11-9. Bitte spielen.');
+		assert.equal(pronounce_en(s),
+			'11-9 Interval\n' +
+			'11-9. Play.');
 
 		press_score(presses, 8, 9);
 		presses.push({
@@ -885,8 +889,12 @@ _describe('pronunciation', function() {
 			side: 'right',
 		});
 		s = state_after(presses, SINGLES_SETUP);
-		assert.equal(pronounce_de(s), 'Aufschlagwechsel. 11-10 Pause');
-		assert.equal(pronounce_en(s), 'Service over. 11-10 Interval');
+		assert.equal(pronounce_de(s),
+			'Aufschlagwechsel. 11-10 Pause.\n' +
+			'11-10. Bitte spielen.');
+		assert.equal(pronounce_en(s),
+			'Service over. 11-10 Interval\n' +
+			'11-10. Play.');
 
 		press_score(presses, 9, 6);
 		presses.push({
@@ -1101,9 +1109,11 @@ _describe('pronunciation', function() {
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce_de(s),
-			'Aufschlagwechsel. 11-10 Pause. Bitte die Spielfeldseiten wechseln');
+			'Aufschlagwechsel. 11-10 Pause. Bitte die Spielfeldseiten wechseln.\n' +
+			'11-10. Bitte spielen.');
 		assert.equal(pronounce_en(s),
-			'Service over. 11-10 Interval; change ends');
+			'Service over. 11-10 Interval; change ends\n' +
+			'11-10. Play.');
 
 		presses.push({
 			type: 'score',
@@ -2085,7 +2095,7 @@ _describe('pronunciation', function() {
 			'Match won by Bob and Birgit 19-21');
 	});
 
-	_it('red card at interval (RTTO 3.7.2 after November 9th 2015)', function() {
+	_it('red card at interval (RTTO 3.7.5)', function() {
 		var presses = [{
 			type: 'pick_side',
 			team1_left: true,
@@ -2108,9 +2118,11 @@ _describe('pronunciation', function() {
 		assert.strictEqual(s.game.interval, true);
 		assert.deepEqual(s.game.score, [11, 7]);
 		assert.equal(pronounce_de(s),
-			'11-7 Pause');
+			'11-7 Pause.\n' +
+			'11-7. Bitte spielen.');
 		assert.equal(pronounce_en(s),
-			'11-7 Interval');
+			'11-7 Interval\n' +
+			'11-7. Play.');
 
 		presses.push({
 			type: 'red-card',
@@ -2127,7 +2139,7 @@ _describe('pronunciation', function() {
 			'Birgit, Fehler wegen unsportlichen Verhaltens.\n' +
 			'12-7. Bitte spielen.');
 		assert.equal(pronounce_en(s),
-			'11-7 Interval.\n' +
+			'11-7 Interval\n' +
 			'Birgit, faulted.\n' +
 			'12-7. Play.');
 
@@ -2148,7 +2160,7 @@ _describe('pronunciation', function() {
 			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Aufschlagwechsel. 8-11. Bitte spielen.');
 		assert.equal(pronounce_en(s),
-			'11-7 Interval.\n' +
+			'11-7 Interval\n' +
 			'Alice, faulted.\n' +
 			'Service over. 8-11. Play.');
 
@@ -2167,7 +2179,7 @@ _describe('pronunciation', function() {
 			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Aufschlagwechsel. 12-8. Bitte spielen.');
 		assert.equal(pronounce_en(s),
-			'11-7 Interval.\n' +
+			'11-7 Interval\n' +
 			'Alice, faulted.\n' +
 			'Bob, faulted.\n' +
 			'Service over. 12-8. Play.');
@@ -2204,10 +2216,12 @@ _describe('pronunciation', function() {
 		]);
 		assert.equal(pronounce_de(s),
 			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
-			'Aufschlagwechsel. 11-10 Pause');
+			'Aufschlagwechsel. 11-10 Pause.\n' +
+			'11-10. Bitte spielen.');
 		assert.equal(pronounce_en(s),
 			'Andrew, fault for misconduct.\n' +
-			'Service over. 11-10 Interval');
+			'Service over. 11-10 Interval\n' + 
+			'11-10. Play.');
 
 		var referee = {
 			type: 'referee',
@@ -2222,10 +2236,12 @@ _describe('pronunciation', function() {
 		]);
 		assert.equal(pronounce_de(s),
 			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
-			'Aufschlagwechsel. 11-10 Pause');
+			'Aufschlagwechsel. 11-10 Pause.\n' +
+			'11-10. Bitte spielen.');
 		assert.equal(pronounce_en(s),
 			'Andrew, fault for misconduct.\n' +
-			'Service over. 11-10 Interval');
+			'Service over. 11-10 Interval\n' +
+			'11-10. Play.');
 		var sav_presses = presses.slice();
 
 		var second_red_card = {
@@ -2249,7 +2265,7 @@ _describe('pronunciation', function() {
 			'Aufschlagwechsel. 11 beide. Bitte spielen.');
 		assert.equal(pronounce_en(s),
 			'Andrew, fault for misconduct.\n' +
-			'Service over. 11-10 Interval.\n' +
+			'Service over. 11-10 Interval\n' +
 			'Bob, faulted.\n' +
 			'Service over. 11 all. Play.');
 
@@ -2275,9 +2291,65 @@ _describe('pronunciation', function() {
 			'12-10. Bitte spielen.');
 		assert.equal(pronounce_en(s),
 			'Andrew, fault for misconduct.\n' +
-			'Service over. 11-10 Interval.\n' +
+			'Service over. 11-10 Interval\n' +
 			'Alice, faulted.\n' +
 			'12-10. Play.');
+
+		presses.push({
+			type: 'postinterval-confirm',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.game.interval, false);
+		assert.deepEqual(s.game.score, [10, 12]);
+		assert.strictEqual(pronounce_de(s),
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'12-10. Bitte spielen.');
+		assert.strictEqual(pronounce_en(s),
+			'Andrew, fault for misconduct.\n' +
+			'Alice, faulted.\n' +
+			'12-10. Play.');
+
+		presses = sav_presses.slice();
+		var yellow_card = {
+			type: 'yellow-card',
+			team_id: 1,
+			player_id: 0,
+		};
+		presses.push(yellow_card);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.game.interval, true);
+		assert.deepEqual(s.game.score, [10, 11]);
+		assert.deepEqual(s.match.marks, [
+			first_red_card,
+			referee,
+			yellow_card,
+		]);
+		assert.equal(pronounce_de(s),
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 11-10 Pause.\n' +
+			'Bob, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'11-10. Bitte spielen.');
+		assert.equal(pronounce_en(s),
+			'Andrew, fault for misconduct.\n' +
+			'Service over. 11-10 Interval\n' +
+			'Bob, warning for misconduct.\n' +
+			'11-10. Play.');
+
+		presses.push({
+			type: 'postinterval-confirm',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.game.interval, false);
+		assert.deepEqual(s.game.score, [10, 11]);
+		assert.equal(pronounce_de(s),
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Bob, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'11-10. Bitte spielen.');
+		assert.equal(pronounce_en(s),
+			'Andrew, fault for misconduct.\n' +
+			'Bob, warning for misconduct.\n' +
+			'11-10. Play.');
 	});
 
 	_it('ending game / match with a red card', function() {
@@ -3026,6 +3098,39 @@ _describe('pronunciation', function() {
 		assert.equal(pronounce_en(s),
 			'Game.\nMatch won by A team 11-1 11-3 4-11 5-11 11-6'
 		);
+	});
+
+	_it('postinterval-confirm', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		}, {
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 0,
+		}, {
+			type: 'love-all',
+		}];
+		press_score(presses, 5, 10);
+		press_score(presses, 1, 0);
+		presses.push({
+			type: 'score',
+			side: 'right',
+			timestamp: 1000000,
+		});
+
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(pronounce_de(s),
+			'Aufschlagwechsel. 11-6 Pause.\n11-6. Bitte spielen.'
+		);
+		assert.equal(pronounce_en(s),
+			'Service over. 11-6 Interval\n11-6. Play.'
+		);
+		// TODO check no timer after confirmation
 	});
 });
 
