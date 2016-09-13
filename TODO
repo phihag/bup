@@ -1,7 +1,14 @@
-Ansagenänderung bei 60 Sekunden! (11-.. bitte spielen)
-	add stats test
 when 20 seconds remaining in interval switch top text with 20 seconds
 	write test first!
+	test in UI
+20 seconds test after games as well
+	write test
+	test in UI
+but not after match!
+add stats tests for postinterval-confirm
+	description should be good
+	with should account rally length
+	without(old style) should not
 
 fix coverage (make cd)
 league_key btde
