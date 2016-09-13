@@ -1,13 +1,12 @@
 Ansagenänderung bei 60 Sekunden! (11-.. bitte spielen)
-	extend new test
 	add stats test
+when 20 seconds remaining in interval switch top text with 20 seconds
+	write test first!
 
 fix coverage (make cd)
 league_key btde
 	add in tests
 
-when 20 seconds remaining in interval switch top text with 20 seconds
-	write test first!
 xlsx eventsheet singles: player name is 0
 alles vorhanden im Spielbericht ankreuzen
 option to react on touch instead of click

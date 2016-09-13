@@ -522,6 +522,7 @@ function calc_press(s, press) {
 		s.game.interval = false;
 		s.game.change_sides = false;
 		s.game.just_interval = true;
+		s.timer = false;
 		break;
 	case 'overrule':
 		s.match.marks.push(press);

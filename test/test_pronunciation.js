@@ -3130,7 +3130,23 @@ _describe('pronunciation', function() {
 		assert.equal(pronounce_en(s),
 			'Service over. 11-6 Interval\n11-6. Play.'
 		);
-		// TODO check no timer after confirmation
+		assert.deepStrictEqual(s.timer, {
+			duration: 60000,
+			exigent: 20499,
+			start: 1000000,
+		});
+		assert.strictEqual(s.game.just_interval, false);
+
+		presses.push({
+			type: 'postinterval-confirm',
+			timestamp: 1050000,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		// no pronounciation now (unless cards are involved, tested somewhere else)
+		assert.strictEqual(pronounce_de(s), null);
+		assert.strictEqual(pronounce_en(s), null);
+		assert.strictEqual(s.game.just_interval, true);
+		assert.deepStrictEqual(s.timer, false);
 	});
 });
 
