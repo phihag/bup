@@ -101,7 +101,7 @@ doclint:
 	@if grep --line-number -P '\t' div/data_structures.md; then echo 'Tab char in div/data_structures.md'; exit 1 ; fi
 
 coverage:
-	istanbul cover _mocha -- -R spec
+	./node_modules/.bin/istanbul cover _mocha -- -R spec
 
 coverage-display: coverage
 	xdg-open coverage/lcov-report/js/index.html

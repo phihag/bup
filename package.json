@@ -16,6 +16,7 @@
     "eslint": "*",
     "jshint": "*",
     "mocha": "*",
+    "istanbul": "*",
     "parse-appcache-manifest": "*",
     "stylelint": "*",
     "stylelint-config-standard": "*",
