@@ -28,6 +28,7 @@ referee mode
 display for very small screens (see error report)
 hide current matches from match overview if not enough space
 wakelock
+	un-hide
 	functional (seems currently broken)
 	test on device
 	wakelock craft video
