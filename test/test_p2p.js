@@ -15,6 +15,8 @@ _describe('p2p', function() {
 	var ws_module = require('ws');
 
 	_it('test connection and basic communication', function(done) {
+		this.timeout(30000);
+
 		try {
 			var wrtc = require('wrtc');
 		} catch (e) {
