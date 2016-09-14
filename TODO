@@ -1,4 +1,3 @@
-btde: remove GAME_COUNT
 20 seconds test after games
 	write test
 	test in UI
@@ -7,9 +6,6 @@ add stats tests for postinterval-confirm
 	description should be good
 	with should account rally length
 	without(old style) should not
-
-league_key btde
-	add in tests
 
 xlsx eventsheet singles: player name is 0
 alles vorhanden im Spielbericht ankreuzen

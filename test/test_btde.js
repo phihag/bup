@@ -11,7 +11,7 @@ var _it = tutils._it;
 _describe('btde', function() {
 	_it('parse_match_list', function() {
 		var doc = [
-			{'heim':'TV Refrath','gast':'1. BV M\u00fclheim', 'GewS': 3},
+			{'heim':'TV Refrath','gast':'1. BV M\u00fclheim', 'GewS': 3, Liga: 'BL1'},
 			{'id':'1','dis':'HD 1','heim':'Magee, Sam~Holzer, Fabian','gast':'Ellis, Marcus~de Ruiter, Jorrit','satz1':'6','satz2':'','satz3':'','satz4':'','satz5':'','satz6':'0','satz7':'','satz8':'','satz9':'','satz10':'','feld':'1'},
 			{'id':'2','dis':'DD','heim':'Magee, Chloe~Nelte, Carla','gast':'Goliszewski, Johanna~K\u00e4pplein, Lara','satz1':'4','satz2':'12','satz3':'','satz4':'','satz5':'','satz6':'11','satz7':'10','satz8':'','satz9':'','satz10':'','feld':'2'},
 			{'id':'3','dis':'HE 1','heim':'Domke, Richard','gast':'Zavadsky, Dmytro','satz1':'11','satz2':'11','satz3':'11','satz4':'','satz5':'','satz6':'5','satz7':'8','satz8':'2','satz9':'','satz10':'','feld':'0'},
@@ -282,7 +282,7 @@ _describe('btde', function() {
 
 	_it('parse_match_list with holes', function() {
 		var doc = [
-			{'heim':'TV Refrath','gast':'1. BV M\u00fclheim'},
+			{'heim':'TV Refrath','gast':'1. BV M\u00fclheim', Liga: 'BL2N'},
 			{'id':'1','dis':'HD 1','heim':'Magee, Sam~Holzer, Fabian','gast':'Ellis, Marcus~de Ruiter, Jorrit','satz1':'6','satz2':'','satz3':'','satz4':'','satz5':'','satz6':'0','satz7':'','satz8':'','satz9':'','satz10':'','feld':'1'},
 			{'id':'2','dis':'DD','heim':'~','gast':'Meulendijks, Judith~','satz1':'4','satz2':'2','satz3':'','satz4':'','satz5':'','satz6':'11','satz7':'4','satz8':'','satz9':'','satz10':'','feld':'0'},
 			{'id':'3','dis':'HE 1','heim':'Richard Domke','gast':'Zavadsky, Dmytro','satz1':'','satz2':'','satz3':'','satz4':'','satz5':'','satz6':'','satz7':'','satz8':'','satz9':'','satz10':'','feld':'0'},
@@ -293,7 +293,7 @@ _describe('btde', function() {
 
 		var expected = {
 			'team_names': ['TV Refrath', '1. BV Mülheim'],
-			'league_key': '1BL-2016',
+			'league_key': '2BLN-2016',
 			'event_name': 'TV Refrath - 1. BV Mülheim',
 			'courts': [{
 				'court_id': 1,
@@ -307,7 +307,7 @@ _describe('btde', function() {
 				{
 					'setup': {
 						'incomplete': false,
-						'league_key': '1BL-2016',
+						'league_key': '2BLN-2016',
 						'counting': '5x11_15',
 						'match_name': 'HD 1',
 						'eventsheet_id': '1.HD',
@@ -353,7 +353,7 @@ _describe('btde', function() {
 				{
 					'setup': {
 						'incomplete': true,
-						'league_key': '1BL-2016',
+						'league_key': '2BLN-2016',
 						'counting': '5x11_15',
 						'match_name': 'DD',
 						'eventsheet_id': 'DD',
@@ -383,7 +383,7 @@ _describe('btde', function() {
 				{
 					'setup': {
 						'incomplete': false,
-						'league_key': '1BL-2016',
+						'league_key': '2BLN-2016',
 						'counting': '5x11_15',
 						'match_name': 'HE 1',
 						'eventsheet_id': '1.HE',
@@ -419,7 +419,7 @@ _describe('btde', function() {
 				{
 					'setup': {
 						'incomplete': false,
-						'league_key': '1BL-2016',
+						'league_key': '2BLN-2016',
 						'counting': '5x11_15',
 						'match_name': 'DE',
 						'eventsheet_id': 'DE',
@@ -455,7 +455,7 @@ _describe('btde', function() {
 				{
 					'setup': {
 						'incomplete': false,
-						'league_key': '1BL-2016',
+						'league_key': '2BLN-2016',
 						'counting': '5x11_15',
 						'match_name': 'GD',
 						'eventsheet_id': 'GD',
@@ -498,7 +498,7 @@ _describe('btde', function() {
 				}, {
 					'setup': {
 						'incomplete': false,
-						'league_key': '1BL-2016',
+						'league_key': '2BLN-2016',
 						'is_doubles': false,
 						'teams': [{
 							'name': 'TV Refrath',
