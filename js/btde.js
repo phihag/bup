@@ -1,8 +1,6 @@
 function btde(baseurl) {
 'use strict';
 
-var GAME_COUNT = 5;
-
 function ui_render_login(container) {
 	var login_form = $('<form class="settings_login">');
 	login_form.append($('<h2>Login badmintonticker</h2>'));
@@ -102,11 +100,12 @@ function send_score(s) {
 		id: s.setup.btde_match_id,
 		feld: s.settings.court_id,
 	};
+	var game_count = calc.max_game_count(s.setup.counting);
 	netscore.forEach(function(score, game_idx) {
 		post_data['satz' + (game_idx + 1)] = '' + score[0];
-		post_data['satz' + (GAME_COUNT + game_idx + 1)] = '' + score[1];
+		post_data['satz' + (game_count + game_idx + 1)] = '' + score[1];
 	});
-	for (var i = 1;i <= 2 * GAME_COUNT;i++) {
+	for (var i = 1;i <= 2 * game_count;i++) {
 		if (post_data['satz' + i] === undefined) {
 			post_data['satz' + i] = '';
 		}
@@ -214,6 +213,7 @@ function _parse_match_list(doc, now) {
 		description: '2 (rechts)',
 	}];
 	var counting = (doc[0].GewS == 2) ? '3x21' : '5x11_15';
+	var game_count = calc.max_game_count(counting);
 
 	var matches = doc.slice(1, doc.length).map(function(match) {
 		var is_doubles = /~/.test(match.heim) && /~/.test(match.gast);
@@ -230,9 +230,9 @@ function _parse_match_list(doc, now) {
 			(home_team.players.length != (is_doubles ? 2 : 1)));
 
 		var network_score = [];
-		for (var game_idx = 0;game_idx < GAME_COUNT;game_idx++) {
+		for (var game_idx = 0;game_idx < game_count;game_idx++) {
 			var home_score_str = match['satz' + (1 + game_idx)];
-			var away_score_str = match['satz' + (1 + GAME_COUNT + game_idx)];
+			var away_score_str = match['satz' + (1 + game_count + game_idx)];
 			if (home_score_str !== '' && away_score_str !== '') {
 				network_score.push([
 					parseInt(home_score_str, 10),

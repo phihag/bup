@@ -1,7 +1,5 @@
+btde: remove GAME_COUNT
 20 seconds test after games
-	write test
-	test in UI
-20 seconds at warmup
 	write test
 	test in UI
 but not after match!
