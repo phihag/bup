@@ -101,9 +101,11 @@ _describe('BWF experimental 5x11_15 counting', function() {
 			start: 1000,
 		});
 		assert.strictEqual(pronounce_de(s),
-			'Satz.\nDer erste Satz wurde gewonnen von Alice 11-6');
+			'Satz.\n\n' +
+			'Der erste Satz wurde gewonnen von Alice 11-6');
 		assert.strictEqual(pronounce_en(s),
-			'Game.\nFirst game won by Alice 11-6');
+			'Game.\n\n' +
+			'First game won by Alice 11-6');
 
 		presses.push({
 			type: 'postgame-confirm',
@@ -216,9 +218,11 @@ _describe('BWF experimental 5x11_15 counting', function() {
 			start: 100000,
 		});
 		assert.strictEqual(pronounce_de(s),
-			'Satz.\nDer zweite Satz wurde gewonnen von Bob 12-10; einen Satz beide');
+			'Satz.\n\n' +
+			'Der zweite Satz wurde gewonnen von Bob 12-10; einen Satz beide');
 		assert.strictEqual(pronounce_en(s),
-			'Game.\nSecond game won by Bob 12-10; One game all');
+			'Game.\n\n' +
+			'Second game won by Bob 12-10; One game all');
 
 		alt_presses.push({
 			type: 'postgame-confirm',
@@ -315,9 +319,11 @@ _describe('BWF experimental 5x11_15 counting', function() {
 			exigent: 20499,
 		});
 		assert.strictEqual(pronounce_de(s),
-			'Satz.\nDer zweite Satz wurde gewonnen von Bob 14-12; einen Satz beide');
+			'Satz.\n\n' +
+			'Der zweite Satz wurde gewonnen von Bob 14-12; einen Satz beide');
 		assert.strictEqual(pronounce_en(s),
-			'Game.\nSecond game won by Bob 14-12; One game all');
+			'Game.\n\n' +
+			'Second game won by Bob 14-12; One game all');
 
 
 		press_score(presses, 0, 1);
@@ -374,9 +380,11 @@ _describe('BWF experimental 5x11_15 counting', function() {
 			exigent: 20499,
 		});
 		assert.strictEqual(pronounce_de(s),
-			'Satz.\nDer zweite Satz wurde gewonnen von Bob 15-13; einen Satz beide');
+			'Satz.\n\n' +
+			'Der zweite Satz wurde gewonnen von Bob 15-13; einen Satz beide');
 		assert.strictEqual(pronounce_en(s),
-			'Game.\nSecond game won by Bob 15-13; One game all');
+			'Game.\n\n' +
+			'Second game won by Bob 15-13; One game all');
 
 		press_score(presses, 0, 1);
 		s = state_after(presses, SINGLES_SETUP);
@@ -422,9 +430,11 @@ _describe('BWF experimental 5x11_15 counting', function() {
 			exigent: 20499,
 		});
 		assert.strictEqual(pronounce_de(s),
-			'Satz.\nDer zweite Satz wurde gewonnen von Bob 15-14; einen Satz beide');
+			'Satz.\n\n' +
+			'Der zweite Satz wurde gewonnen von Bob 15-14; einen Satz beide');
 		assert.strictEqual(pronounce_en(s),
-			'Game.\nSecond game won by Bob 15-14; One game all');
+			'Game.\n\n' +
+			'Second game won by Bob 15-14; One game all');
 
 		presses.push({
 			type: 'score',
@@ -450,9 +460,11 @@ _describe('BWF experimental 5x11_15 counting', function() {
 			exigent: 20499,
 		});
 		assert.strictEqual(pronounce_de(s),
-			'Satz.\nDer zweite Satz wurde gewonnen von Alice 15-14. Alice führt mit 2:0 Sätzen');
+			'Satz.\n\n' +
+			'Der zweite Satz wurde gewonnen von Alice 15-14. Alice führt mit 2:0 Sätzen');
 		assert.strictEqual(pronounce_en(s),
-			'Game.\nSecond game won by Alice 15-14. Alice leads two games to love');
+			'Game.\n\n' +
+			'Second game won by Alice 15-14. Alice leads two games to love');
 
 		presses.push({
 			type: 'postgame-confirm',
@@ -543,9 +555,11 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.strictEqual(s.match.team1_won, true);
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
-			'Satz.\nDas Spiel wurde gewonnen von Alice 11-6 15-14 11-5');
+			'Satz.\n\n' +
+			'Das Spiel wurde gewonnen von Alice 11-6 15-14 11-5');
 		assert.strictEqual(pronounce_en(s),
-			'Game.\nMatch won by Alice 11-6 15-14 11-5');
+			'Game.\n\n' +
+			'Match won by Alice 11-6 15-14 11-5');
 
 		alt_presses.push({
 			type: 'postmatch-confirm',
@@ -564,9 +578,11 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.strictEqual(s.match.team1_won, true);
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
-			'Satz.\nDas Spiel wurde gewonnen von Alice 11-6 15-14 11-5');
+			'Satz.\n\n' +
+			'Das Spiel wurde gewonnen von Alice 11-6 15-14 11-5');
 		assert.strictEqual(pronounce_en(s),
-			'Game.\nMatch won by Alice 11-6 15-14 11-5');
+			'Game.\n\n' +
+			'Match won by Alice 11-6 15-14 11-5');
 
 		press_score(presses, 0, 6);
 		s = state_after(presses, SINGLES_SETUP);
@@ -606,9 +622,11 @@ _describe('BWF experimental 5x11_15 counting', function() {
 			exigent: 20499,
 		});
 		assert.strictEqual(pronounce_de(s),
-			'Satz.\nDer dritte Satz wurde gewonnen von Bob 12-10. Alice führt mit 2:1 Sätzen');
+			'Satz.\n\n' +
+			'Der dritte Satz wurde gewonnen von Bob 12-10. Alice führt mit 2:1 Sätzen');
 		assert.strictEqual(pronounce_en(s),
-			'Game.\nThird game won by Bob 12-10. Alice leads two games to one');
+			'Game.\n\n' +
+			'Third game won by Bob 12-10. Alice leads two games to one');
 
 		presses.push({
 			type: 'postgame-confirm',
@@ -737,9 +755,11 @@ _describe('BWF experimental 5x11_15 counting', function() {
 			exigent: 20499,
 		});
 		assert.strictEqual(pronounce_de(s),
-			'Satz.\nDer vierte Satz wurde gewonnen von Bob 11-2; zwei Sätze beide');
+			'Satz.\n\n' +
+			'Der vierte Satz wurde gewonnen von Bob 11-2; zwei Sätze beide');
 		assert.strictEqual(pronounce_en(s),
-			'Game.\nFourth game won by Bob 11-2; Two games all');
+			'Game.\n\n' +
+			'Fourth game won by Bob 11-2; Two games all');
 
 		presses.push({
 			type: 'postgame-confirm',
@@ -828,10 +848,10 @@ _describe('BWF experimental 5x11_15 counting', function() {
 			exigent: 20499,
 		});
 		assert.strictEqual(pronounce_de(s, 300001),
-			'6-5 Pause. Bitte die Spielfeldseiten wechseln.\n' +
+			'6-5 Pause. Bitte die Spielfeldseiten wechseln.\n\n' +
 			'6-5. Bitte spielen.');
 		assert.strictEqual(pronounce_en(s, 300001),
-			'6-5 Interval; change ends\n' +
+			'6-5 Interval; change ends\n\n' +
 			'6-5. Play.');
 
 
@@ -883,9 +903,11 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.strictEqual(s.match.team1_won, false);
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
-			'Satz.\nDas Spiel wurde gewonnen von Bob 6-11 14-15 12-10 11-2 11-9');
+			'Satz.\n\n' +
+			'Das Spiel wurde gewonnen von Bob 6-11 14-15 12-10 11-2 11-9');
 		assert.strictEqual(pronounce_en(s),
-			'Game.\nMatch won by Bob 6-11 14-15 12-10 11-2 11-9');
+			'Game.\n\n' +
+			'Match won by Bob 6-11 14-15 12-10 11-2 11-9');
 
 		press_score(presses, 0, 1);
 		s = state_after(presses, SINGLES_SETUP);
@@ -976,9 +998,11 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.strictEqual(s.match.team1_won, false);
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
-			'Satz.\nDas Spiel wurde gewonnen von Bob 6-11 14-15 12-10 11-2 15-14');
+			'Satz.\n\n' +
+			'Das Spiel wurde gewonnen von Bob 6-11 14-15 12-10 11-2 15-14');
 		assert.strictEqual(pronounce_en(s),
-			'Game.\nMatch won by Bob 6-11 14-15 12-10 11-2 15-14');
+			'Game.\n\n' +
+			'Match won by Bob 6-11 14-15 12-10 11-2 15-14');
 
 		press_score(presses, 0, 1);
 		s = state_after(presses, SINGLES_SETUP);
@@ -996,9 +1020,11 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.strictEqual(s.match.team1_won, true);
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
-			'Satz.\nDas Spiel wurde gewonnen von Alice 11-6 15-14 10-12 2-11 15-14');
+			'Satz.\n\n' +
+			'Das Spiel wurde gewonnen von Alice 11-6 15-14 10-12 2-11 15-14');
 		assert.strictEqual(pronounce_en(s),
-			'Game.\nMatch won by Alice 11-6 15-14 10-12 2-11 15-14');
+			'Game.\n\n' +
+			'Match won by Alice 11-6 15-14 10-12 2-11 15-14');
 
 		presses.push({
 			type: 'postmatch-confirm',
@@ -1018,9 +1044,11 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.strictEqual(s.match.team1_won, true);
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
-			'Satz.\nDas Spiel wurde gewonnen von Alice 11-6 15-14 10-12 2-11 15-14');
+			'Satz.\n\n' +
+			'Das Spiel wurde gewonnen von Alice 11-6 15-14 10-12 2-11 15-14');
 		assert.strictEqual(pronounce_en(s),
-			'Game.\nMatch won by Alice 11-6 15-14 10-12 2-11 15-14');
+			'Game.\n\n' +
+			'Match won by Alice 11-6 15-14 10-12 2-11 15-14');
 	});
 
 	_it('game_winner helper function', function() {

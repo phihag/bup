@@ -155,6 +155,18 @@ function marks2str(s, marks, during_interval) {
 	return res;
 }
 
+function ready_announcement(s) {
+	var court_id = s.settings ? s.settings.court_id : null;
+	if (court_id === 'referee') {
+		court_id = null;
+	}
+	if (court_id) {
+		return s._('20secs', {court_id: court_id});
+	} else {
+		return s._('20secs:nocourt');
+	}
+}
+
 function pronounce(s, now) {
 	var timer_done = false;
 	var timer_exigent = false;
@@ -228,15 +240,17 @@ function pronounce(s, now) {
 	} else if (s.match.announce_pregame) {
 		var glen = s.match.finished_games.length;
 		var game_id_str = (s.match.max_games - 1 === glen) ? 'final' : glen;
+		var rtp = timer_exigent ? (ready_announcement(s) + '\n\n') : '';
+
 		if (mark_str) {
-			return s._('loveall_play.' + game_id_str + '.mark', {
+			return (rtp + s._('loveall_play.' + game_id_str + '.mark', {
 				mark_str: marks2str(s, s.match.marks, true),
 				score: _pronunciation_score(s),
-			});
+			}));
 		} else {
-			return s._('loveall_play.' + game_id_str, {
+			return (rtp + s._('loveall_play.' + game_id_str, {
 				score: _pronunciation_score(s),
-			});
+			}));
 		}
 	}
 
@@ -253,6 +267,7 @@ function pronounce(s, now) {
 			pre_mark_str +
 			(s.game.won_by_score ? s._('game(won)') + '.\n' : '') +
 			(post_mark_str ? (post_mark_str) : '') +
+			'\n' +
 			postgame_announcement(s)
 		);
 	}
@@ -280,16 +295,8 @@ function pronounce(s, now) {
 		var interval_str = '';
 		if (s.game.interval) {
 			if (timer_exigent) {
-				var court_id = s.settings ? s.settings.court_id : null;
-				if (court_id === 'referee') {
-					court_id = null;
-				}
 				score_str = '';
-				if (court_id) {
-					interval_str += s._('20secs', {court_id: court_id});
-				} else {
-					interval_str += s._('20secs:nocourt');
-				}
+				interval_str += ready_announcement(s) + '\n';
 			} else if (timer_done) {
 				score_str = '';
 			} else {
@@ -297,6 +304,7 @@ function pronounce(s, now) {
 				if (s.game.change_sides) {
 					interval_str += s._('change_ends');
 				}
+				interval_str += '\n';
 			}
 			if (mark_str) {
 				interval_pre_mark_str = marks2str(s, s.game.interval_marks);

@@ -136,9 +136,11 @@ _describe('Golden game (1x21) counting', function() {
 		assert.strictEqual(s.match.team1_won, true);
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
-			'Satz.\nDas Spiel wurde gewonnen von Alice 21-9');
+			'Satz.\n\n' +
+			'Das Spiel wurde gewonnen von Alice 21-9');
 		assert.strictEqual(pronounce_en(s),
-			'Game.\nMatch won by Alice 21-9');
+			'Game.\n\n' +
+			'Match won by Alice 21-9');
 
 		press_score(presses, 12, 0);
 		s = state_after(presses, SINGLES_SETUP);

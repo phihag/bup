@@ -1,14 +1,10 @@
-20 seconds test after games
-	write test
-	test in UI
-but not after match!
+test all without pronounciation
+
 add stats tests for postinterval-confirm
 	description should be good
 	with should account rally length
 	without(old style) should not
 
-xlsx eventsheet singles: player name is 0
-alles vorhanden im Spielbericht ankreuzen
 option to react on touch instead of click
 mail Klaus-Michael + Jörg
 	now measured
@@ -32,7 +28,7 @@ wakelock
 	test on device
 	wakelock craft video
 
-doc about all main features (HTML table, compare with other projects
+doc about all main features (HTML table, compare with other projects)
 fix autorescale on tablets
 Anforderungsliste BuLi!
 standard annotation for league_key and the like
@@ -51,6 +47,7 @@ interactive error handler => ask for an email
 RLS
 
 bup display mode
+	add btde emulation
 	bg colors single-court display (https://image.jimcdn.com/app/cms/image/transf/dimension=640x1024:format=jpg/path/sb05689bf882eaf25/image/ia1b1bbe374005542/version/1473663902/image.jpg seems very good)
 	double court mode (digits outside)
 	normal mode w/ digits outside

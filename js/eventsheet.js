@@ -790,6 +790,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 				sheet.text('W8', extra_data.matchday);
 				sheet.text('W4', extra_data.umpires);
 				sheet.text('AB6', extra_data.starttime);
+				sheet.text('K32', '\xa0X');
 
 				var all_finished = ev.matches.every(function(m) {
 					return m.network_finished;
@@ -1128,7 +1129,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 							}
 							var row = (start_row + 6 + 5 * c.table + c.row);
 							if (col === 'F') {
-								sheet.merge_cells(col + row + ':' + xlsx.add_col(col, ROW_COUNT - 1) + row);
+								sheet.merge_cells(col + row + ':' + xlsx.add_col(col, ROW_COUNT) + row);
 							}
 							sheet.text(col + row, c.val);
 							break;

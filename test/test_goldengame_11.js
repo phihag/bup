@@ -136,9 +136,11 @@ _describe('Golden game (1x11_15) counting', function() {
 		assert.strictEqual(s.match.team1_won, true);
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
-			'Satz.\nDas Spiel wurde gewonnen von Alice 11-4');
+			'Satz.\n\n' +
+			'Das Spiel wurde gewonnen von Alice 11-4');
 		assert.strictEqual(pronounce_en(s),
-			'Game.\nMatch won by Alice 11-4');
+			'Game.\n\n' +
+			'Match won by Alice 11-4');
 
 		press_score(presses, 6, 0);
 		s = state_after(presses, SINGLES_SETUP);
@@ -216,9 +218,11 @@ _describe('Golden game (1x11_15) counting', function() {
 		assert.strictEqual(s.match.team1_won, true);
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
-			'Satz.\nDas Spiel wurde gewonnen von Alice 13-11');
+			'Satz.\n\n' +
+			'Das Spiel wurde gewonnen von Alice 13-11');
 		assert.strictEqual(pronounce_en(s),
-			'Game.\nMatch won by Alice 13-11');
+			'Game.\n\n' +
+			'Match won by Alice 13-11');
 
 		press_score(presses, 2, 0);
 		s = state_after(presses, SINGLES_SETUP);
@@ -270,9 +274,11 @@ _describe('Golden game (1x11_15) counting', function() {
 		assert.strictEqual(s.match.team1_won, true);
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
-			'Satz.\nDas Spiel wurde gewonnen von Alice 15-13');
+			'Satz.\n\n' +
+			'Das Spiel wurde gewonnen von Alice 15-13');
 		assert.strictEqual(pronounce_en(s),
-			'Game.\nMatch won by Alice 15-13');
+			'Game.\n\n' +
+			'Match won by Alice 15-13');
 
 		press_score(presses, 1, 0);
 		s = state_after(presses, SINGLES_SETUP);
@@ -309,9 +315,11 @@ _describe('Golden game (1x11_15) counting', function() {
 		assert.strictEqual(s.match.team1_won, true);
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
-			'Satz.\nDas Spiel wurde gewonnen von Alice 15-14');
+			'Satz.\n\n' +
+			'Das Spiel wurde gewonnen von Alice 15-14');
 		assert.strictEqual(pronounce_en(s),
-			'Game.\nMatch won by Alice 15-14');
+			'Game.\n\n' +
+			'Match won by Alice 15-14');
 
 		press_score(presses, 1, 0);
 		s = state_after(presses, SINGLES_SETUP);
@@ -328,9 +336,11 @@ _describe('Golden game (1x11_15) counting', function() {
 		assert.strictEqual(s.match.team1_won, false);
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
-			'Satz.\nDas Spiel wurde gewonnen von Bob 15-14');
+			'Satz.\n\n' +
+			'Das Spiel wurde gewonnen von Bob 15-14');
 		assert.strictEqual(pronounce_en(s),
-			'Game.\nMatch won by Bob 15-14');
+			'Game.\n\n' +
+			'Match won by Bob 15-14');
 
 		presses.push({
 			type: 'postmatch-confirm',

@@ -210,14 +210,24 @@ function render_score_display(s) {
 	));
 }
 
-function _set_dialog(dialog_qs, pr_str) {
+function _set_dialog(s, dialog_qs, btn_str) {
+	var pr_str = pronunciation.pronounce(s);
 	var dialog = uiu.qs(dialog_qs);
 	var pronunciation_span = dialog.querySelector('span.pronunciation');
 	var button = dialog.querySelector('button');
-	var m = pr_str.match(/^([\s\S]+?)\n([^\n]+\n[^\n]{1,15}|[^\n]+)$/);
+	var span_str;
 
-	var span_str = m ? m[1] : '';
-	var btn_str = m ? m[2] : pr_str;
+	if (btn_str) {
+		span_str = pr_str;
+	} else {
+		var m = pr_str.match(/^([\s\S]+?)\n\n([\s\S]+)$/);
+		span_str = m ? m[1] : '';
+		btn_str = m ? m[2] : pr_str;
+	}
+
+	if (! s.settings.show_pronunciation) {
+		span_str = '';
+	}
 
 	if (span_str) {
 		$(pronunciation_span).addClass('pronunciation_nonempty');
@@ -257,12 +267,7 @@ function ui_render(s) {
 	uiu.visible_qs('#love-all-dialog', s.match.announce_pregame && !s.match.injuries && !s.match.suspended);
 	if (s.match.announce_pregame) {
 		dialog_active = true;
-		if (s.settings.show_pronunciation) {
-			_set_dialog('#love-all-dialog', pronunciation.pronounce(s));
-		} else {
-			$('#love-all-dialog button').text(pronunciation.loveall_announcement(s));
-			uiu.text_qs('#love-all-dialog span', '');
-		}
+		_set_dialog(s, '#love-all-dialog');
 	}
 
 	uiu.disabled_qsa('#button_shuttle,#button_exception', s.match.finish_confirmed);
@@ -274,43 +279,25 @@ function ui_render(s) {
 	uiu.visible_qs('#postmatch-confirm-dialog', s.match.finished && !s.match.finish_confirmed && !s.match.suspended && !s.match.injuries);
 	if (s.match.finished && !s.match.finish_confirmed) {
 		dialog_active = true;
-		if (s.settings.show_pronunciation) {
-			_set_dialog('#postmatch-confirm-dialog', pronunciation.pronounce(s));
-		} else {
-			$('#postmatch-confirm-dialog button').text(pronunciation.postgame_announcement(s));
-			uiu.text_qs('#postmatch-confirm-dialog span', '');
-		}
+		_set_dialog(s, '#postmatch-confirm-dialog');
 	}
 
 	uiu.visible_qs('#postgame-confirm-dialog', !s.match.finished && s.game.finished && !s.match.suspended && !s.match.injuries);
 	if (!s.match.finished && s.game.finished) {
 		dialog_active = true;
-		if (s.settings.show_pronunciation) {
-			_set_dialog('#postgame-confirm-dialog', pronunciation.pronounce(s));
-		} else {
-			$('#postgame-confirm-dialog button').text(pronunciation.postgame_announcement(s));
-			uiu.text_qs('#postgame-confirm-dialog span', '');
-		}
+		_set_dialog(s, '#postgame-confirm-dialog');
 	}
 
 	uiu.visible_qs('#postinterval-confirm-dialog', s.game.interval);
 	if (s.game.interval) {
 		dialog_active = true;
-		if (s.settings.show_pronunciation) {
-			_set_dialog('#postinterval-confirm-dialog', pronunciation.pronounce(s));
-		} else {
-			$('#postinterval-confirm-dialog button').text('TODO');
-			uiu.text_qs('#postinterval-confirm-dialog .pronunciation', 'TODO2');
-		}
+		_set_dialog(s, '#postinterval-confirm-dialog');
 	}
 
 	uiu.visible_qs('#suspension-resume-dialog', s.match.suspended);
 	if (s.match.suspended) {
 		dialog_active = true;
-		$('#suspension-resume').text(
-			(s.settings.show_pronunciation ? (pronunciation.pronounce(s) + '.\n\n') : '') +
-			s._('button:Unsuspend')
-		);
+		_set_dialog(s, '#suspension-resume-dialog', s._('button:Unsuspend'));
 	}
 
 	uiu.visible_qs('#injury-resume-dialog', s.match.injuries && !s.match.suspended);
