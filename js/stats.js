@@ -488,6 +488,7 @@ function calc_stats(s) {
 		switch (p.type) {
 		case 'love-all':
 		case 'score':
+		case 'postinterval-confirm':
 			current_game.rally_start = p.timestamp;
 			break;
 		}

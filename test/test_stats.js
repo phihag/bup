@@ -179,22 +179,51 @@ _describe('stats', function() {
 		assert.strictEqual(st[1].longest_rally, '0:20');
 		assert.strictEqual(st[1].longest_rally_desc, '0:20 (1-10 im 1. Satz)');
 
+		var at_interval_presses = presses.slice();
+
+		// Without postconfirm-interval, we have no idea how long the time was, so ignore it for duration calculation
 		presses.push({
 			type: 'score',
 			side: 'left',
-			timestamp: 320000,
+			timestamp: 420000,
 		});
+		s = tutils.state_after(presses, tutils.DOUBLES_SETUP, WITH_COUNTER);
+		st = bup.stats.calc_stats(s).cols;
+		assert.strictEqual(st.length, 1 + 1);
+		assert.strictEqual(st[0].points, '12-1');
+		assert.strictEqual(st[0].points_lr, '12/1');
+		assert.strictEqual(st[0].duration, '5:00');
+		assert.deepStrictEqual(
+			st[0].rally_lengths,
+			[10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 20000]);
+		assert.strictEqual(st[0].avg_rally_length, '0:11');
+		assert.strictEqual(st[0].longest_rally_length, 20000);
+		assert.strictEqual(st[0].longest_rally, '0:20');
+		assert.strictEqual(st[0].longest_rally_desc, '0:20 (1-10)');
+		assert.deepStrictEqual(
+			st[0].serves,
+			[[11, 1], [0, 1]]
+		);
+
+		assert.strictEqual(st[1].points, '12-1');
+		assert.strictEqual(st[1].points_lr, '12/1');
+		assert.strictEqual(st[1].duration, '5:00');
+		assert.strictEqual(st[1].avg_rally_length, '0:11');
+		assert.strictEqual(st[1].longest_rally_length, 20000);
+		assert.strictEqual(st[1].longest_rally, '0:20');
+		assert.strictEqual(st[1].longest_rally_desc, '0:20 (1-10 im 1. Satz)');
+
 		presses.push({
 			type: 'score',
 			side: 'left',
-			timestamp: 330000,
+			timestamp: 430000,
 		});
 		s = tutils.state_after(presses, tutils.DOUBLES_SETUP, WITH_COUNTER);
 		st = bup.stats.calc_stats(s).cols;
 		assert.strictEqual(st.length, 1 + 1);
 		assert.strictEqual(st[0].points, '13-1');
 		assert.strictEqual(st[0].points_lr, '13/1');
-		assert.strictEqual(st[0].duration, '3:30');
+		assert.strictEqual(st[0].duration, '5:10');
 		assert.strictEqual(st[0].avg_rally_length, '0:11');
 		assert.deepStrictEqual(
 			st[0].serves,
@@ -202,28 +231,28 @@ _describe('stats', function() {
 		);
 		assert.strictEqual(st[1].points, '13-1');
 		assert.strictEqual(st[1].points_lr, '13/1');
-		assert.strictEqual(st[1].duration, '3:30');
+		assert.strictEqual(st[1].duration, '5:10');
 		assert.strictEqual(st[1].avg_rally_length, '0:11');
 
 		presses.push({
 			type: 'score',
 			side: 'left',
-			timestamp: 330000,
+			timestamp: 430000,
 		});
 		presses.push({
 			type: 'score',
 			side: 'left',
-			timestamp: 330000,
+			timestamp: 430000,
 		});
 		presses.push({
 			type: 'score',
 			side: 'right',
-			timestamp: 330000,
+			timestamp: 430000,
 		});
 		presses.push({
 			type: 'score',
 			side: 'left',
-			timestamp: 330000,
+			timestamp: 430000,
 		});
 		s = tutils.state_after(presses, tutils.DOUBLES_SETUP, WITH_COUNTER);
 		st = bup.stats.calc_stats(s).cols;
@@ -231,6 +260,45 @@ _describe('stats', function() {
 			st[0].serves,
 			[[11, 5], [1, 1]]
 		);
+
+
+		// Alternative with postinterval-confirm
+		presses = at_interval_presses.slice();
+		presses.push({
+			type: 'postinterval-confirm',
+			timestamp: 400000,
+		});
+
+		presses.push({
+			type: 'score',
+			side: 'left',
+			timestamp: 426000,
+		});
+		s = tutils.state_after(presses, tutils.DOUBLES_SETUP, WITH_COUNTER);
+		st = bup.stats.calc_stats(s).cols;
+		assert.strictEqual(st.length, 1 + 1);
+		assert.strictEqual(st[0].points, '12-1');
+		assert.strictEqual(st[0].points_lr, '12/1');
+		assert.strictEqual(st[0].duration, '5:06');
+		assert.deepStrictEqual(
+			st[0].rally_lengths,
+			[10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 20000, 26000]);
+		assert.strictEqual(st[0].avg_rally_length, '0:12');
+		assert.strictEqual(st[0].longest_rally_length, 26000);
+		assert.strictEqual(st[0].longest_rally, '0:26');
+		assert.strictEqual(st[0].longest_rally_desc, '0:26 (11-1)');
+		assert.deepStrictEqual(
+			st[0].serves,
+			[[11, 1], [0, 1]]
+		);
+
+		assert.strictEqual(st[1].points, '12-1');
+		assert.strictEqual(st[1].points_lr, '12/1');
+		assert.strictEqual(st[1].duration, '5:06');
+		assert.strictEqual(st[1].avg_rally_length, '0:12');
+		assert.strictEqual(st[1].longest_rally_length, 26000);
+		assert.strictEqual(st[1].longest_rally, '0:26');
+		assert.strictEqual(st[1].longest_rally_desc, '0:26 (11-1 im 1. Satz)');
 	});
 
 	_it('enable/disable shuttle stats depending on settings', function() {

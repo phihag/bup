@@ -1,7 +1,3 @@
-add stats tests for postinterval-confirm
-	with should account rally length
-	without(old style) should not
-
 xlsx style at center
 option to react on touch instead of click
 add support for static downloadable files
