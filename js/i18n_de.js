@@ -359,6 +359,7 @@ var i18n_de = {
 'pressdesc:note': 'Notiz',
 'pressdesc:postgame-confirm': 'Satz-Bestätigung',
 'pressdesc:postmatch-confirm': 'Spiel-Bestätigung',
+'pressdesc:postinterval-confirm': 'Bitte spielen',
 'pressdesc:retired': '{player} gibt auf',
 'pressdesc:state:retired': '{winner} gewinnt {score_str}',
 'pressdesc:disqualified': 'Schwarze Karte {player}.',

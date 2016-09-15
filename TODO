@@ -1,23 +1,20 @@
-test all without pronounciation
-
 add stats tests for postinterval-confirm
-	description should be good
 	with should account rally length
 	without(old style) should not
 
+xlsx style at center
 option to react on touch instead of click
+add support for static downloadable files
+	bundesliga-mindestanforderungen
+	bundesliga-ballsorten
+final match confirmation should set umpire name/court id
 mail Klaus-Michael + Jörg
 	now measured
 	irreproducible (stats show <20ms) -> do you mean update on the wall?
 	unselectable
 	Anzeigenänderung in der Pause
-add support for static downloadable files
-	bundesliga-mindestanforderungen
-	bundesliga-ballsorten
-final match confirmation should set umpire name/court id
 btde export should export all known matches!
 sent export should be able to imported
-xlsx style at center
 referee mode
 
 display for very small screens (see error report)
@@ -28,7 +25,6 @@ wakelock
 	test on device
 	wakelock craft video
 
-doc about all main features (HTML table, compare with other projects)
 fix autorescale on tablets
 Anforderungsliste BuLi!
 standard annotation for league_key and the like
@@ -427,6 +423,7 @@ write a test to find undocumented (div/data_structures.md) keys
 move eventsheet._xlsx into separate module
 reduce common occurences of a single string with dots in it (automatically?) Example: uiu.create_el
 -> Demo Jörg H, Manuel, Susanne, Werner Durow
+doc about all main features (HTML table, compare with other projects)
 
 Blocked
 =====
