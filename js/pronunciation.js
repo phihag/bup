@@ -33,7 +33,7 @@ function loveall_announcement(s) {
 	var game_id = (s.match.max_games - 1 === glen) ? 'final' : glen;
 	return s._('loveall_play.' + game_id, {
 		mark_extra: '',
-		score: _pronunciation_score(s),
+		score: pronounce_score(s),
 	});
 }
 
@@ -99,7 +99,7 @@ function _prematch_team(s, team_id) {
 	return res;
 }
 
-function _pronunciation_score(s, score, team1_serving, service_over) {
+function pronounce_score(s, score, team1_serving, service_over) {
 	if (score === undefined) {
 		score = s.game.score;
 	}
@@ -216,7 +216,7 @@ function pronounce(s, now) {
 				home_team: _prematch_team(s, 0),
 				serving_team: s.setup.teams[serving_team_id].name,
 				serving_str: serving_str,
-				score: _pronunciation_score(s),
+				score: pronounce_score(s),
 			};
 
 			return (
@@ -232,7 +232,7 @@ function pronounce(s, now) {
 				left_team: _prematch_team(s, (s.game.team1_left ? 0 : 1)),
 				server: server_name,
 				receiver_str: receiver_str,
-				score: _pronunciation_score(s),
+				score: pronounce_score(s),
 			};
 
 			return mark_str + s._('onmyleft', d);
@@ -245,11 +245,11 @@ function pronounce(s, now) {
 		if (mark_str) {
 			return (rtp + s._('loveall_play.' + game_id_str + '.mark', {
 				mark_str: marks2str(s, s.match.marks, true),
-				score: _pronunciation_score(s),
+				score: pronounce_score(s),
 			}));
 		} else {
 			return (rtp + s._('loveall_play.' + game_id_str, {
-				score: _pronunciation_score(s),
+				score: pronounce_score(s),
 			}));
 		}
 	}
@@ -275,12 +275,12 @@ function pronounce(s, now) {
 	if (s.match.just_unsuspended)  {
 		return (
 			mark_str + s._('ready to unsuspend') +
-			_pronunciation_score(s, undefined, undefined, false) +
+			pronounce_score(s, undefined, undefined, false) +
 			s._('card.play')
 		);
 	}
 
-	var score_str = _pronunciation_score(s);
+	var score_str = pronounce_score(s);
 
 	// No let in current browsers, therefore tucked in here
 	var interval_pre_mark_str;
@@ -316,7 +316,7 @@ function pronounce(s, now) {
 						// Only use extended form if it's more than just a referee call
 						var service_over_param = utils.deep_equal(s.game.interval_score, s.game.score) ? false : undefined;
 						if (score_str) {
-							score_str = _pronunciation_score(s, s.game.interval_score, s.game.interval_team1_serving, s.game.interval_service_over);
+							score_str = pronounce_score(s, s.game.interval_score, s.game.interval_team1_serving, s.game.interval_service_over);
 						}
 						var res = (
 							interval_pre_mark_str +
@@ -327,7 +327,7 @@ function pronounce(s, now) {
 						}
 						return (res +
 							interval_post_mark_str +
-							_pronunciation_score(s, undefined, undefined, service_over_param) +
+							pronounce_score(s, undefined, undefined, service_over_param) +
 							s._('card.play')
 						);
 					}
@@ -337,7 +337,7 @@ function pronounce(s, now) {
 				interval_str += '\n';
 			}
 			interval_str += s._('postinterval.play', {
-				score: _pronunciation_score(s, undefined, undefined, false),
+				score: pronounce_score(s, undefined, undefined, false),
 			});
 		} else if (s.game.just_interval) {
 			if (mark_str) {
@@ -349,7 +349,7 @@ function pronounce(s, now) {
 					interval_post_mark_str = '';
 				}
 				return interval_pre_mark_str + interval_post_mark_str + s._('postinterval.play', {
-					score: _pronunciation_score(s, undefined, undefined, false),
+					score: pronounce_score(s, undefined, undefined, false),
 				});
 			} else {
 				return null;  // Special case after interval, pronunciation has just been confirmed.	
@@ -374,6 +374,7 @@ return {
 	pronounce: pronounce,
 	loveall_announcement: loveall_announcement,
 	postgame_announcement: postgame_announcement,
+	pronounce_score: pronounce_score,
 	match_str: match_str,
 	teamtext_internal: teamtext_internal,
 };

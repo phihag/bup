@@ -636,6 +636,50 @@ _describe('stats graphs', function() {
 			desc: 'Punkt rechts',
 			sdesc: '1-1',
 		}, {
+			type: 'score',
+			side: 'left',
+			desc: 'Punkt links',
+			sdesc: '2-1',
+		}, {
+			type: 'editmode_set-score',
+			score: [3, 8],
+			desc: 'Manuelle Korrektur: Spielstand',
+			sdesc: '8-3',
+		}, {
+			type: 'score',
+			side: 'right',
+			desc: 'Punkt rechts',
+			sdesc: '8-4',
+		}, {
+			type: 'score',
+			side: 'left',
+			desc: 'Punkt links',
+			sdesc: '9-4',
+		}, {
+			type: 'score',
+			side: 'left',
+			desc: 'Punkt links',
+			sdesc: '10-4',
+		}, {
+			type: 'score',
+			side: 'left',
+			desc: 'Punkt links',
+			sdesc: '11-4',
+		}, {
+			type: 'postinterval-confirm',
+			desc: 'Ende der Pause',
+			sdesc: '"11-4. Bitte spielen."',
+		}, {
+			type: 'score',
+			side: 'right',
+			desc: 'Punkt rechts',
+			sdesc: '11-5',
+		}, {
+			type: 'editmode_set-score',
+			score: [1, 1],
+			desc: 'Manuelle Korrektur: Spielstand',
+			sdesc: '1-1',
+		}, {
 			type: 'overrule',
 			desc: 'Overrule Linienrichter',
 			sdesc: '',

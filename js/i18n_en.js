@@ -357,7 +357,7 @@ var i18n_en = {
 'pressdesc:note': 'note',
 'pressdesc:postgame-confirm': 'game confirmation',
 'pressdesc:postmatch-confirm': 'match confirmation',
-'pressdesc:postinterval-confirm': '"Play" after interval',
+'pressdesc:postinterval-confirm': 'Interval end',
 'pressdesc:retired': '{player} retired',
 'pressdesc:state:retired': '{winner} wins {score_str}',
 'pressdesc:disqualified': 'black card {player}',

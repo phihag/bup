@@ -601,6 +601,10 @@ function press_state_desc(s, press) {
 		var score = s.game.score;
 		var left_idx = s.game.team1_left ? 0 : 1;
 		return score[left_idx] + '-' + score[1 - left_idx];
+	case 'postinterval-confirm':
+		return '"' + s._('postinterval.play', {
+			score: pronunciation.pronounce_score(s, undefined, undefined, false),
+		}) + '"';
 	case 'shuttle':
 		return s._('pressdesc:state:' + press.type, {
 			count: s.match.shuttle_count,
@@ -676,9 +680,9 @@ function press_state_desc(s, press) {
 		});
 	case 'note':
 		return press.val;
-	default:
-		return '';
 	}
+
+	return '';
 }
 
 function press_description(s, press) {
