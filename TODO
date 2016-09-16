@@ -6,8 +6,10 @@ mail Klaus-Michael + Jörg
 	irreproducible (stats show <20ms) -> do you mean update on the wall?
 	unselectable
 	Anzeigenänderung in der Pause
-xlsx style at center
+	high-sensitivity
+disable fastclick (not needed on IOS)
 option to react on touch instead of click
+xlsx style at center
 set umpire name/service judge name/court id if != settings
 btde export should export all known matches!
 sent export should be able to imported

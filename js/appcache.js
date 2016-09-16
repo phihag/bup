@@ -28,19 +28,21 @@ function ui_init() {
 			return;
 		}
 		if (Date.now() - bup_start_time <= AUTOUPDATE_WITHIN) {
-			$('.appcache_updating_wrapper').show();
+			uiu.visible_qs('.appcache_updating_wrapper', true);
 			update_now();
 			return;
 		}
 
-		$('.appcache_update').show();
-		$('.appcache_update_ingame').show();
+		uiu.visible_qs('.appcache_update', true);
+		uiu.visible_qs('.appcache_update_ingame', true);
 	}, false);
 }
 
 function on_post_update(new_version) {
-	$('.appcache_updated_version').text(new_version);
-	$('.appcache_updated_wrapper').show().fadeOut(2500);
+	uiu.text_qs('.appcache_updated_version', new_version);
+	var updated_wrapper = uiu.qs('.appcache_updated_wrapper');
+	uiu.visible(updated_wrapper, true);
+	$(updated_wrapper).fadeOut(2500);
 
 	var hash = window.location.hash;
 	hash = hash.replace(/([&#])updated(?=&|$)/g, function(_, g1) {
