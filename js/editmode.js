@@ -43,7 +43,7 @@ function leave() {
 
 function ui_init() {
 	$('.go_editmode_button').on('click', function() {
-		if ($('#game').hasClass('editmode')) {
+		if (state.ui.editmode_active) {
 			leave();
 		} else {
 			enter();
@@ -177,8 +177,7 @@ function change_score() {
 }
 
 function update_ui(s) {
-	var editmode_active = $('#game').hasClass('editmode');
-	if (!editmode_active) {
+	if (!state.ui.editmode_active) {
 		return;
 	}
 

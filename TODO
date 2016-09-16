@@ -1,17 +1,18 @@
-xlsx style at center
-option to react on touch instead of click
 add support for static downloadable files
 	bundesliga-mindestanforderungen
 	bundesliga-ballsorten
-final match confirmation should set umpire name/court id
 mail Klaus-Michael + Jörg
 	now measured
 	irreproducible (stats show <20ms) -> do you mean update on the wall?
 	unselectable
 	Anzeigenänderung in der Pause
+xlsx style at center
+option to react on touch instead of click
+set umpire name/service judge name/court id if != settings
 btde export should export all known matches!
 sent export should be able to imported
 referee mode
+rendering error in editmode/Edge
 
 display for very small screens (see error report)
 hide current matches from match overview if not enough space
