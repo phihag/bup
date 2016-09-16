@@ -23,12 +23,12 @@ function enter() {
 	toggle_button.setAttribute('data-i18n', k);
 
 	uiu.visible_qsa('#score td.score span', false);
-	$('#game').addClass('editmode');
+	uiu.addClass_qs('#game', 'editmode');
 	update_ui(state);
 }
 
 function leave() {
-	$('#game').removeClass('editmode');
+	uiu.removeClass_qs('#game', 'editmode');
 	ui_visible(false);
 	state.ui.editmode_active = false;
 

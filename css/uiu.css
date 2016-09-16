@@ -1,0 +1,4 @@
+.uiu_button {
+	/* Remove delay after tapping */
+	touch-action: manipulation;
+}

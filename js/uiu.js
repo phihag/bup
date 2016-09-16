@@ -33,6 +33,7 @@ function qsEach(selector, func, container) {
 
 function on_click(node, callback) {
 	node.addEventListener('click', callback, false);
+	addClass(node, 'uiu_button');
 }
 
 function on_click_qs(selector, callback) {
@@ -154,12 +155,49 @@ function create_el(parent, tagName, attrs, text) {
 	return el;
 }
 
+// From https://plainjs.com/javascript/attributes/adding-removing-and-testing-for-classes-9/
+var hasClass, addClass, removeClass;
+if ('classList' in document.documentElement) {
+	hasClass = function(el, className) {
+		return el.classList.contains(className);
+	};
+	addClass = function(el, className) {
+		el.classList.add(className);
+	};
+	removeClass = function(el, className) {
+		el.classList.remove(className);
+	};
+} else {
+	hasClass = function (el, className) {
+	    return new RegExp('\\b'+ className+'\\b').test(el.className);
+	};
+	addClass = function (el, className) {
+		if (!hasClass(el, className)) {
+			el.className += ' ' + className;
+		}
+	};
+	removeClass = function (el, className) {
+	    el.className = el.className.replace(new RegExp('\\b' + className + '\\b', 'g'), '');
+	};
+}
+
+function addClass_qs(selector, className) {
+	return addClass(qs(selector), className);
+}
+
+function removeClass_qs(selector, className) {
+	return removeClass(qs(selector), className);
+}
+
 return {
+	addClass: addClass,
+	addClass_qs: addClass_qs,
 	create_el: create_el,
 	disabled_qsa: disabled_qsa,
 	empty: empty,
 	esc_stack_pop: esc_stack_pop,
 	esc_stack_push: esc_stack_push,
+	hasClass: hasClass,
 	ns_el: ns_el,
 	on_click: on_click,
 	on_click_qs: on_click_qs,
@@ -168,6 +206,8 @@ return {
 	qsEach: qsEach,
 	remove: remove,
 	remove_qsa: remove_qsa,
+	removeClass: removeClass,
+	removeClass_qs: removeClass_qs,
 	text: text,
 	text_qs: text_qs,
 	visible: visible,
