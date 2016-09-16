@@ -11,6 +11,9 @@ function get_info() {
 		ua: window.navigator.userAgent,
 		url: window.location.href,
 		bup_version: bup_version,
+		setup: state.setup,
+		event_id: (state.event ? state.event.id : '(no event)'),
+		state_ui: state.ui,
 		fullscreen: {
 			supported: fullscreen.supported(),
 			active: fullscreen.active(),
