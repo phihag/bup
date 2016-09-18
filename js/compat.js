@@ -19,6 +19,8 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var uiu = require('./uiu');
+
 	module.exports = compat;
 }
 /*/@DEV*/
