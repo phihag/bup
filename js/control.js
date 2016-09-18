@@ -435,6 +435,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var buphistory = require('./buphistory');
 	var bupui = require('./bupui');
 	var calc = require('./calc');
+	var click = require('./click');
 	var editmode = require('./editmode');
 	var match_storage = require('./match_storage');
 	var netstats = require('./netstats');

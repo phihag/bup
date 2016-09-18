@@ -489,6 +489,7 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var autosize = require('./autosize');
 	var calc = require('./calc');
+	var click = require('./click');
 	var control = require('./control');
 	var network = require('./network');
 	var render = require('./render');

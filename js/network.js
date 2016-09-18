@@ -648,6 +648,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var btde = require('./btde');
 	var bupui = require('./bupui');
 	var calc = require('./calc');
+	var click = require('./click');
 	var control = require('./control');
 	var courtspot = require('./courtspot');
 	var eventsheet = require('./eventsheet');

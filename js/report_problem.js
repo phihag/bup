@@ -128,6 +128,7 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var click = require('./click');
 	var fullscreen = require('./fullscreen');
 	var netstats = require('./netstats');
 	var uiu = require('./uiu');

@@ -60,6 +60,7 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var click = require('./click');
 	var uiu = require('./uiu');
 
 	module.exports = appcache;

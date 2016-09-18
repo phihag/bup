@@ -1482,6 +1482,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
+	var click = require('./click');
 	var eventutils = require('./eventutils');
 	var network = require('./network');
 	var render = require('./render');

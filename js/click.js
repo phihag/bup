@@ -20,7 +20,7 @@ return {
 	qs: on_click_qs,
 	on: on_click,
 	qsa: on_click_qsa,
-}
+};
 })();
 
 
