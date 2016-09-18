@@ -444,6 +444,11 @@ function score(s, team_id, press) {
 function calc_press(s, press) {
 	switch (press.type) {
 	case 'pick_side':
+		// Manuel Lappe reported a mysterious error where team1_left seems to have been not boolean
+		if (typeof press.team1_left != 'boolean') {
+			report_problem.silent_error('pick_side value not boolean, but ' + (typeof press.team1_left));
+		}
+
 		s.game.start_team1_left = press.team1_left;
 		s.game.team1_left = s.game.start_team1_left;
 		if (!s.game.started) {
@@ -492,7 +497,13 @@ function calc_press(s, press) {
 		}
 		break;
 	case 'score':
-		var team1_scored = (s.game.team1_left == (press.side == 'left'));
+		// Report by Manuel Lappe: It is possible to get into a state where both presses effect the same side.
+		var side_type = typeof s.game.team1_left;
+		if (side_type != 'boolean') {
+			report_problem.silent_error('Unclear sides while scoring, type ' + side_type);
+		}
+
+		var team1_scored = (!!s.game.team1_left == (press.side == 'left'));
 		s.game.just_interval = false;
 		score(s, (team1_scored ? 0 : 1), press);
 		break;
@@ -979,6 +990,7 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var report_problem = require('./report_problem');
 	var utils = require('./utils');
 
 	module.exports = calc;
