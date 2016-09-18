@@ -1303,7 +1303,7 @@ function ui_init() {
 		return false;
 	});
 
-	$('.eventsheet_reload').on('click', function() {
+	click.qs('.eventsheet_reload', function() {
 		dialog_fetch();
 	});
 
