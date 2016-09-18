@@ -288,6 +288,8 @@ var i18n_en = {
 'eventsheet:label:1BL-2016': '(German Bundesliga) result report sheet (2016)',
 'eventsheet:label:2BLN-2016': '(German 2. Bundesliga North) result report sheet (2016)',
 'eventsheet:label:2BLS-2016': '(German 2. Bundesliga South) result report sheet (2016)',
+'eventsheet:label:BL-ballsorten-2016': '(German 1./2. Bundesliga) list of approved shuttles (2016)',
+'eventsheet:label:BL-mindestanforderungen-2016': '(German 1./2. Bundesliga) minimum requirements (2016)',
 'eventsheet:label:RLW': '(German Regionalliga West) result report sheet',
 'eventsheet:label:RLN': '(German Regionalliga North) result report sheet',
 'eventsheet:label:team-1BL-2015': '(German Bundesliga) team selection sheet (2015)',

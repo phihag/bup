@@ -55,22 +55,24 @@ dist: cleandist ## Create distribution files
 	node div/minify_json.js div/vdemo_en.json dist/bup/div/vdemo_en.json
 	node div/minify_json.js div/bldemo.json dist/bup/div/bldemo.json
 	cp \
+		div/bundesliga-ballsorten-2016.pdf \
+		div/bundesliga-Mindestanforderungen.pdf \
 		div/courtspot_screenshot_links.png \
 		div/courtspot_screenshot_rechts.png \
+		div/data_structures.md \
+		div/FAQ.de \
 		div/LICENSE.commercial.de \
 		div/Mannschaftsaufstellung_1BL-2015.pdf \
 		div/Mannschaftsaufstellung_2BL-2015.pdf \
-		div/Spielberichtsbogen_1BL-2015.pdf \
-		div/Spielberichtsbogen_2BL-2015.pdf \
-		div/Spielbericht-Buli-2016-17.xlsm \
-		div/Spielbericht_RLW.svg \
-		div/Spielbericht_RLN.svg \
+		div/scoresheet_bundesliga-2016.svg \
 		div/scoresheet_international.svg \
 		div/scoresheet_international_5x11.svg \
-		div/scoresheet_bundesliga-2016.svg \
+		div/Spielbericht-Buli-2016-17.xlsm \
+		div/Spielbericht_RLN.svg \
+		div/Spielbericht_RLW.svg \
+		div/Spielberichtsbogen_1BL-2015.pdf \
+		div/Spielberichtsbogen_2BL-2015.pdf \
 		div/wakelock.mp4 \
-		div/data_structures.md \
-		div/FAQ.de \
 		--target-directory dist/bup/div/
 
 	$(MAKE) appcache-manifest

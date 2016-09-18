@@ -5,9 +5,9 @@ var SHEETS_BY_LEAGUE = {
 	'1BL-2015': ['1BL-2015', 'team-1BL-2015'],
 	'2BLN-2015': ['2BLN-2015', 'team-2BL-2015'],
 	'2BLS-2015': ['2BLS-2015', 'team-2BL-2015'],
-	'1BL-2016': ['1BL-2016'],
-	'2BLN-2016': ['2BLN-2016'],
-	'2BLS-2016': ['2BLS-2016'],
+	'1BL-2016': ['1BL-2016', 'BL-ballsorten-2016', 'BL-mindestanforderungen-2016'],
+	'2BLN-2016': ['2BLN-2016', 'BL-ballsorten-2016', 'BL-mindestanforderungen-2016'],
+	'2BLS-2016': ['2BLS-2016', 'BL-ballsorten-2016', 'BL-mindestanforderungen-2016'],
 	'RLW': ['RLW'],
 	'RLN': ['RLN'],
 };
@@ -19,10 +19,21 @@ var URLS = {
 	'1BL-2016': 'div/Spielbericht-Buli-2016-17.xlsm',
 	'2BLN-2016': 'div/Spielbericht-Buli-2016-17.xlsm',
 	'2BLS-2016': 'div/Spielbericht-Buli-2016-17.xlsm',
+	'BL-ballsorten-2016': 'div/bundesliga-ballsorten-2016.pdf',
+	'BL-mindestanforderungen-2016': 'div/bundesliga-Mindestanforderungen.pdf',
 	'RLW': 'div/Spielbericht_RLW.svg',
 	'RLN': 'div/Spielbericht_RLN.svg',
 	'team-1BL-2015': 'div/Mannschaftsaufstellung_1BL-2015.pdf',
 	'team-2BL-2015': 'div/Mannschaftsaufstellung_2BL-2015.pdf',
+};
+var DIRECT_DOWNLOAD_SHEETS = {
+	'BL-ballsorten-2016': true,
+	'BL-mindestanforderungen-2016': true,
+};
+
+
+var MIME_TYPES = {
+	pdf: 'application/pdf',
 };
 var files = {};
 
@@ -312,7 +323,7 @@ function render_bundesliga(ev, es_key, ui8r, extra_data) {
 	};
 	var res_pdf = pdfform.transform(ui8r, fields);
 	var filename = 'Spielbericht ' + ev.event_name + (last_update ? (' ' + utils.date_str(last_update * 1000)) : '') + '.pdf';
-	var blob = new Blob([res_pdf], {type: 'application/pdf'});
+	var blob = new Blob([res_pdf], {type: MIME_TYPES.pdf});
 	saveAs(blob, filename);
 }
 
@@ -494,7 +505,7 @@ function render_team_bl(ev, es_key, ui8r) {
 	};
 	var res_pdf = pdfform.transform(ui8r, fields);
 	var filename = 'Mannschaftsaufstellung ' + ev.event_name + (last_update ? (' ' + utils.date_str(last_update * 1000)) : '') + '.pdf';
-	var blob = new Blob([res_pdf], {type: 'application/pdf'});
+	var blob = new Blob([res_pdf], {type: MIME_TYPES.pdf});
 	saveAs(blob, filename);
 }
 
@@ -1159,7 +1170,18 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 	});
 }
 
+function direct_download(es_key, ui8r) {
+	var ext = /\.([a-z0-9]+)$/.exec(URLS[es_key])[1];
+	var filename = state._('eventsheet:label:' + es_key) + '.' + ext;
+	var blob = new Blob([ui8r], {type: MIME_TYPES[ext]});
+	saveAs(blob, filename);
+}
+
 function es_render(ev, es_key, ui8r, extra_data) {
+	if (DIRECT_DOWNLOAD_SHEETS[es_key]) {
+		return direct_download(es_key, ui8r);
+	}
+
 	switch(es_key) {
 	case '1BL-2015':
 	case '2BLN-2015':
@@ -1243,15 +1265,27 @@ function render_links(s) {
 	}
 	eventsheets.forEach(function(es_key) {
 		var i18n_key = 'eventsheet:label:' + es_key;
-		var link = uiu.create_el(container, 'a', {
-			'href': '#',
-			'class': 'eventsheet_link',
-			'data-i18n': i18n_key,
-		}, s._(i18n_key));
-		uiu.on_click(link, function(e) {
-			e.preventDefault();
-			show_dialog(es_key);
-		});
+		if (DIRECT_DOWNLOAD_SHEETS[es_key]) {
+			var ext = /\.([a-z0-9]+)$/.exec(URLS[es_key])[1];
+			var filename = state._('eventsheet:label:' + es_key) + '.' + ext;
+
+			uiu.create_el(container, 'a', {
+				'href': URLS[es_key],
+				'download': filename,
+				'class': 'eventsheet_link',
+				'data-i18n': i18n_key,
+			}, s._(i18n_key));
+		} else {
+			var link = uiu.create_el(container, 'a', {
+				'href': '#',
+				'class': 'eventsheet_link',
+				'data-i18n': i18n_key,
+			}, s._(i18n_key));
+			uiu.on_click(link, function(e) {
+				e.preventDefault();
+				show_dialog(es_key);
+			});
+		}
 	});
 }
 
@@ -1415,6 +1449,11 @@ function show_dialog(es_key) {
 		download_link.setAttribute('href', URLS[es_key]);
 		uiu.visible(download_link_container, true);
 		break;
+	}
+	if (DIRECT_DOWNLOAD_SHEETS[es_key]) {
+		uiu.visible_qs('.eventsheet_report', false);
+		uiu.visible(preview, false);
+		uiu.visible(download_link_container, false);
 	}
 
 	uiu.text_qs('.eventsheet_generate_button',

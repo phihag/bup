@@ -1,16 +1,11 @@
 move click into separate module
+	setting to support multiple ways
 FORCE PRESS
 test on android
 test on iOS (with / without FastClick)
 mail Ulf
 	-> critical updates
 
-add support for static downloadable files
-	bundesliga-mindestanforderungen
-	bundesliga-ballsorten
-	add both to Makefile + appcache
-	support direct linking (just an empty button)
-	add simple <a download="..">
 mail btde
 mail Klaus-Michael + Jörg
 	now measured
@@ -19,7 +14,6 @@ mail Klaus-Michael + Jörg
 	force presses
 	high-sensitivity
 	Anzeigenänderung in der Pause
-option to react on touch instead of click
 
 ---
 
@@ -41,7 +35,6 @@ wakelock
 	wakelock craft video
 
 fix autorescale on tablets
-Anforderungsliste BuLi!
 standard annotation for league_key and the like
 	make sure that existing keys stay unchanged
 	warn if redundant keys
