@@ -42,7 +42,7 @@ function leave() {
 }
 
 function ui_init() {
-	$('.go_editmode_button').on('click', function() {
+	click.qs('.go_editmode_button', function() {
 		if (state.ui.editmode_active) {
 			leave();
 		} else {
@@ -50,7 +50,7 @@ function ui_init() {
 		}
 		settings.hide();
 	});
-	$('#court').on('click', function(e) {
+	click.qs('#court', function(e) {
 		if ((e.target.tagName.toLowerCase() == 'button') || (e.target.parentNode.tagName.toLowerCase() == 'button')) {
 			return;
 		}
@@ -70,27 +70,27 @@ function ui_init() {
 	});
 
 	var main_cui = render.main_court_ui();
-	uiu.on_click(main_cui.editmode_leave, function() {
+	click.on(main_cui.editmode_leave, function() {
 		leave();
 	});
-	uiu.on_click(main_cui.editmode_change_ends, function() {
+	click.on(main_cui.editmode_change_ends, function() {
 		control.on_press({
 			type: 'editmode_change-ends',
 		});
 	});
-	uiu.on_click(main_cui.editmode_switch_left, function() {
+	click.on(main_cui.editmode_switch_left, function() {
 		control.on_press({
 			type: 'editmode_switch-sides',
 			side: 'left',
 		});
 	});
-	uiu.on_click(main_cui.editmode_switch_right, function() {
+	click.on(main_cui.editmode_switch_right, function() {
 		control.on_press({
 			type: 'editmode_switch-sides',
 			side: 'right',
 		});
 	});
-	uiu.on_click(main_cui.editmode_arrow, function() {
+	click.on(main_cui.editmode_arrow, function() {
 		control.on_press({
 			type: 'editmode_change-serve',
 		});
@@ -237,6 +237,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
+	var click = require('./click');
 	var control = require('./control');
 	var render = require('./render');
 	var settings = require('./settings');

@@ -80,19 +80,19 @@ function send_export(s) {
 }
 
 function ui_init() {
-	uiu.on_click_qs('.export_link', function(e) {
+	click.qs('.export_link', function(e) {
 		e.preventDefault();
 		export_json(state);
 		return false;
 	});
 
-	uiu.on_click_qs('.import_link', function(e) {
+	click.qs('.import_link', function(e) {
 		e.preventDefault();
 		import_json(state);
 		return false;
 	});
 
-	uiu.on_click_qs('.settings_send_export', function(e) {
+	click.qs('.settings_send_export', function(e) {
 		e.preventDefault();
 		send_export(state);
 	});

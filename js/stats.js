@@ -778,7 +778,7 @@ function hide() {
 
 
 function ui_init() {
-	uiu.on_click_qs('.postmatch_stats_button', show);
+	click.qs('.postmatch_stats_button', show);
 	$('.stats_layout').on('click', function(e) {
 		if (e.target === this) {
 			hide();
@@ -790,8 +790,8 @@ function ui_init() {
 		hide();
 	};
 
-	uiu.on_click_qs('.stats_back', back_func);
-	uiu.on_click_qs('.stats_top_back_link', back_func);
+	click.qs('.stats_back', back_func);
+	click.qs('.stats_top_back_link', back_func);
 }
 
 return {
@@ -821,6 +821,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
+	var click = require('./click');
 	var control = require('./control');
 	var pronunciation = require('./pronunciation');
 	var uiu = require('./uiu');

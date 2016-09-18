@@ -1115,7 +1115,7 @@ function ui_init() {
 	$('.scoresheet_button_print').on('click', function() {
 		window.print();
 	});
-	uiu.on_click_qs('.setup_event_scoresheets', function(e) {
+	click.qs('.setup_event_scoresheets', function(e) {
 		e.preventDefault();
 		event_show();
 		return false;
@@ -1157,6 +1157,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
+	var click = require('./click');
 	var control = require('./control');
 	var i18n = require('./i18n');
 	var network = require('./network');

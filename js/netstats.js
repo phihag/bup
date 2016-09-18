@@ -141,26 +141,26 @@ function hide() {
 function ui_init() {
 	var link = uiu.qs('.netstats_link');
 	uiu.visible(link, true);
-	uiu.on_click(link, function(e) {
+	click.on(link, function(e) {
 		e.preventDefault();
 		show();
 		return false;
 	});
 
-	uiu.on_click_qs('.netstats_back', function(e) {
+	click.qs('.netstats_back', function(e) {
 		e.preventDefault();
 		hide();
 		return false;
 	});
 
 	var black = uiu.qs('.netstats_layout');
-	uiu.on_click(black, function(e) {
+	click.on(black, function(e) {
 		if (e.target === black) {
 			hide();
 		}
 	});
 
-	uiu.on_click_qs('.netstats_resync', network.resync);
+	click.qs('.netstats_resync', network.resync);
 }
 
 return {
@@ -176,6 +176,7 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var click = require('./click');
 	var control = require('./control');
 	var network = require('./network');
 	var render = require('./render');

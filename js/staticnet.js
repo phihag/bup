@@ -111,7 +111,7 @@ function on_load_data(s) {
 		}, s._('staticnet:switch back button', {
 			service: real_netw.service_name(s),
 		}));
-		uiu.on_click(button, function() {
+		click.on(button, function() {
 			network.ui_uninstall_staticnet(s);
 		});
 	}
@@ -134,6 +134,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc.js');
+	var click = require('./click');
 	var importexport = require('./importexport.js');
 	var network = require('./network.js');
 	var uiu = require('./uiu.js');

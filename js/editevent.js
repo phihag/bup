@@ -177,7 +177,7 @@ function render_table(s) {
 				'data-bp_id': bp_id,
 				'data-team_id': team_id,
 			});
-			uiu.on_click(del_btn, on_bp_delbtn_click);
+			click.on(del_btn, on_bp_delbtn_click);
 		}
 
 		var add_select = uiu.create_el(td, 'select', {
@@ -256,17 +256,17 @@ function hide() {
 }
 
 function ui_init() {
-	uiu.on_click_qs('.editevent_link', function(e) {
+	click.qs('.editevent_link', function(e) {
 		e.preventDefault();
 		show();
 	});
-	uiu.on_click_qs('.editevent_back', function(e) {
+	click.qs('.editevent_back', function(e) {
 		e.preventDefault();
 		hide();
 	});
 
 	var layout = uiu.qs('.editevent_layout');
-	uiu.on_click(layout, function(e) {
+	click.on(layout, function(e) {
 		if (e.target === layout) {
 			hide();
 		}
@@ -284,6 +284,7 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var click = require('./click');
 	var control = require('./control');
 	var eventutils = require('./eventutils');
 	var network = require('./network');

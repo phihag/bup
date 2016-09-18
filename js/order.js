@@ -315,14 +315,14 @@ function ui_render() {
 			'data-i18n': 'order:ignore match',
 			'data-order-idx': '-99',
 		}, state._('order:ignore match'));
-		uiu.on_click(ignore_label, ui_mark_click);
+		click.on(ignore_label, ui_mark_click);
 		_create_insert_mark(display, -99);
 	}
 
 	function _create_insert_mark(display, idx) {
 		var container = uiu.create_el(display, 'div', {'class': 'order_insert_container'});
 		var mark = uiu.create_el(container, 'div', {'class': 'order_insert default-invisible', 'data-order-idx': idx});
-		uiu.on_click(mark, ui_mark_click);
+		click.on(mark, ui_mark_click);
 	}
 
 	function _create_lock_mark(display, idx) {
@@ -335,7 +335,7 @@ function ui_render() {
 			mark_class += ' default-invisible';
 		}
 		var mark = uiu.create_el(container, 'div', {'class': mark_class, 'data-order-idx': idx});
-		uiu.on_click(mark, ui_lock_click);
+		click.on(mark, ui_lock_click);
 	}
 
 	function _add_player(team_container, team, player_id) {
@@ -379,7 +379,7 @@ function ui_render() {
 				_add_player(team_container, team, 1);
 			}
 		}
-		uiu.on_click(match_el, on_match_click);
+		click.on(match_el, on_match_click);
 
 		if (i < current_ignore_start) {
 			_create_insert_mark(display, i + 1);
@@ -404,25 +404,25 @@ function hide() {
 }
 
 function ui_init() {
-	uiu.on_click_qs('.order_link', function(e) {
+	click.qs('.order_link', function(e) {
 		e.preventDefault();
 		show();
 		return false;
 	});
 
-	uiu.on_click_qs('.order_back', function(e) {
+	click.qs('.order_back', function(e) {
 		e.preventDefault();
 		hide();
 		return false;
 	});
 
-	uiu.on_click_qs('.order_layout', function(e) {
+	click.qs('.order_layout', function(e) {
 		if (e.target === this) {
 			ui_move_abort();
 		}
 	});
 
-	uiu.on_click_qs('.order_optimize', function() {
+	click.qs('.order_optimize', function() {
 		var matches_to_sort = current_matches.slice(0, current_ignore_start);
 		var best_order = optimize(cost_rest2, matches_to_sort, utils.range(current_ignore_start), current_locked);
 		var sorted = sort_by_order(matches_to_sort, best_order, current_ignore_start);
@@ -430,7 +430,7 @@ function ui_init() {
 		ui_render();
 	});
 
-	uiu.on_click_qs('.order_reset', function() {
+	click.qs('.order_reset', function() {
 		current_matches = get_omatches(state);
 		current_ignore_start = current_matches.length;
 		current_locked = {};
@@ -454,6 +454,7 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var click = require('./click');
 	var control = require('./control');
 	var network = require('./network');
 	var render = require('./render');

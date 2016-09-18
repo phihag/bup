@@ -532,7 +532,7 @@ function ui_init_court(s, hash_query) {
 	settings.update_court_settings(s);
 
 	var court_str_field = render.main_court_ui().court_str;
-	uiu.on_click(court_str_field, function() {
+	click.on(court_str_field, function() {
 		_court_pick_dialog(s, all_courts, function() {
 			// On abort change nothing
 		});
@@ -540,7 +540,7 @@ function ui_init_court(s, hash_query) {
 }
 
 function ui_init(s, hash_query) {
-	uiu.on_click_qs('.network_desync_image', resync);
+	click.qs('.network_desync_image', resync);
 	netstats.ui_init();
 
 	// Load networking module(s)

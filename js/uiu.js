@@ -31,21 +31,6 @@ function qsEach(selector, func, container) {
 	}
 }
 
-function on_click(node, callback) {
-	node.addEventListener('click', callback, false);
-	addClass(node, 'uiu_button');
-}
-
-function on_click_qs(selector, callback) {
-	on_click(qs(selector), callback);
-}
-
-function on_click_qsa(qs, callback) {
-	qsEach(qs, function(node) {
-		on_click(node, callback);
-	});
-}
-
 function visible(node, val) {
 	// TODO test adding/removing invisible class here
 	if (val) {
@@ -201,9 +186,6 @@ return {
 	esc_stack_push: esc_stack_push,
 	hasClass: hasClass,
 	ns_el: ns_el,
-	on_click: on_click,
-	on_click_qs: on_click_qs,
-	on_click_qsa: on_click_qsa,
 	qs: qs,
 	qsEach: qsEach,
 	remove: remove,

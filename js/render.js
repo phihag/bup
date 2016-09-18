@@ -315,7 +315,7 @@ function ui_render(s) {
 					player_name: s.setup.teams[injury.team_id].players[injury.player_id].name,
 				}).replace(/\n?$/, '')
 			);
-			uiu.on_click(btn, function() {
+			click.on(btn, function() {
 				control.on_press({
 					type: 'retired',
 					team_id: injury.team_id,
@@ -325,7 +325,7 @@ function ui_render(s) {
 		});
 		var continue_btn = uiu.create_el(
 			dialog, 'button', {}, s._('button:Resume after injury'));
-		uiu.on_click(continue_btn, function() {
+		click.on(continue_btn, function() {
 			control.on_press({
 				type: 'injury-resume',
 			});
@@ -453,6 +453,7 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var bupui = require('./bupui');
 	var calc = require('./calc');
+	var click = require('./click');
 	var control = require('./control');
 	var court = require('./court');
 	var editmode = require('./editmode');

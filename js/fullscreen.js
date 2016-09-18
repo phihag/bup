@@ -65,7 +65,7 @@ function ui_init() {
 	if (! supported()) {
 		$('.fullscreen_line').hide();
 	}
-	uiu.on_click_qs('.fullscreen_button', function() {
+	click.qs('.fullscreen_button', function() {
 		toggle();
 	});
 }
@@ -93,7 +93,7 @@ function autostart() {
 	uiu.esc_stack_push(go_fullscreen_hide);
 
 	var go_fullscreen_wrapper = uiu.qs('#go_fullscreen_wrapper');
-	uiu.on_click(go_fullscreen_wrapper, go_fullscreen_hide);
+	click.on(go_fullscreen_wrapper, go_fullscreen_hide);
 	uiu.visible(go_fullscreen_wrapper, true);
 }
 
@@ -109,6 +109,7 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var click = require('./click');
 	var uiu = require('./uiu');
 
 	module.exports = fullscreen;

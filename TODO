@@ -1,4 +1,5 @@
 move click into separate module
+	remove .on('click'
 	setting to support multiple ways
 FORCE PRESS
 test on android
@@ -25,6 +26,7 @@ referee mode
 rendering error in editmode/Edge
 write test that appcache has every URL in eventsheets
 suppress sending duplicate silent_errors
+generate static "Mannschaftsunterlagen" file from turnier.de?
 
 display for very small screens (see error report)
 hide current matches from match overview if not enough space

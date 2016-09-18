@@ -1281,7 +1281,7 @@ function render_links(s) {
 				'class': 'eventsheet_link',
 				'data-i18n': i18n_key,
 			}, s._(i18n_key));
-			uiu.on_click(link, function(e) {
+			click.on(link, function(e) {
 				e.preventDefault();
 				show_dialog(es_key);
 			});

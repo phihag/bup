@@ -165,7 +165,7 @@ function update(s) {
 }
 
 function ui_init(s) {
-	uiu.on_click_qs('.settings_layout', function(e) {
+	click.qs('.settings_layout', function(e) {
 		if (e.target != this) {
 			return;
 		}
@@ -183,7 +183,7 @@ function ui_init(s) {
 		setup_manual_form.find('.only-doubles').toggle(is_doubles);
 	});
 
-	uiu.on_click_qs('.backtogame_button', function() {
+	click.qs('.backtogame_button', function() {
 		control.set_current(s);
 		hide();
 	});
@@ -307,6 +307,7 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var click = require('./click');
 	var control = require('./control');
 	var displaymode = require('./displaymode');
 	var fullscreen = require('./fullscreen');

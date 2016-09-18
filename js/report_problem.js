@@ -106,11 +106,11 @@ function silent_error(msg) {
 function ui_init() {
 	update();
 	window.onerror = on_error;
-	uiu.on_click_qs('.version', function() {
+	click.qs('.version', function() {
 		uiu.visible_qs('.settings_test_reporting', true);
 		uiu.visible_qs('.settings_send_export', true);
 	});
-	uiu.on_click_qs('.settings_test_reporting', function() {
+	click.qs('.settings_test_reporting', function() {
 		throw new Error('test error reporting');
 	});
 }
