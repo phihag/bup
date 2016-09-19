@@ -154,6 +154,7 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var click = require('./click');
 	var control = require('./control');
 	var pronunciation = require('./pronunciation');
 	var uiu = require('./uiu');
