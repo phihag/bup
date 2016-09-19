@@ -292,6 +292,7 @@ var i18n_de = {
 'eventsheet:label:2BLS-2015': 'Spielbericht (2015)',
 'eventsheet:label:BL-ballsorten-2016': 'Zugelassene Bälle',
 'eventsheet:label:BL-mindestanforderungen-2016': 'Mindestanforderungen',
+'eventsheet:label:DBV-Satzungen-2016': 'Regeln DBV 2015/2016',
 'eventsheet:label:RLW': 'Spielbericht',
 'eventsheet:label:RLN': 'Spielbericht',
 'eventsheet:label:team-1BL-2015': 'Mannschaftsaufstellung (2015)',

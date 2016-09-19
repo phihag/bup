@@ -1,8 +1,10 @@
 move click into separate module
+	also capture touchend?
 	setting to support multiple ways
+	test everything that does target
 FORCE PRESS
 test on android
-test on iOS (with / without FastClick)
+toprow not cozy with top of browser
 mail Ulf
 	-> critical updates
 
@@ -17,6 +19,7 @@ mail Klaus-Michael + Jörg
 
 ---
 
+handle superfluous score presses (ignoring ...)
 xlsx style at center
 set umpire name/service judge name/court id if != settings
 btde export should export all known matches!

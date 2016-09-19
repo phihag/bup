@@ -5,9 +5,9 @@ var SHEETS_BY_LEAGUE = {
 	'1BL-2015': ['1BL-2015', 'team-1BL-2015'],
 	'2BLN-2015': ['2BLN-2015', 'team-2BL-2015'],
 	'2BLS-2015': ['2BLS-2015', 'team-2BL-2015'],
-	'1BL-2016': ['1BL-2016', 'BL-ballsorten-2016', 'BL-mindestanforderungen-2016'],
-	'2BLN-2016': ['2BLN-2016', 'BL-ballsorten-2016', 'BL-mindestanforderungen-2016'],
-	'2BLS-2016': ['2BLS-2016', 'BL-ballsorten-2016', 'BL-mindestanforderungen-2016'],
+	'1BL-2016': ['1BL-2016', 'BL-ballsorten-2016', 'BL-mindestanforderungen-2016', 'DBV-Satzungen-2016'],
+	'2BLN-2016': ['2BLN-2016', 'BL-ballsorten-2016', 'BL-mindestanforderungen-2016', 'DBV-Satzungen-2016'],
+	'2BLS-2016': ['2BLS-2016', 'BL-ballsorten-2016', 'BL-mindestanforderungen-2016', 'DBV-Satzungen-2016'],
 	'RLW': ['RLW'],
 	'RLN': ['RLN'],
 };
@@ -21,6 +21,7 @@ var URLS = {
 	'2BLS-2016': 'div/Spielbericht-Buli-2016-17.xlsm',
 	'BL-ballsorten-2016': 'div/bundesliga-ballsorten-2016.pdf',
 	'BL-mindestanforderungen-2016': 'div/bundesliga-Mindestanforderungen.pdf',
+	'DBV-Satzungen-2016': 'http://www.badminton.de/fileadmin/Dateibereich/Foto-Archiv/pdf-xls/DBV/Satzung/16-DBV-Druckwerk_Satzung-Ordnungen-Spielregeln201617-Website.pdf',
 	'RLW': 'div/Spielbericht_RLW.svg',
 	'RLN': 'div/Spielbericht_RLN.svg',
 	'team-1BL-2015': 'div/Mannschaftsaufstellung_1BL-2015.pdf',
@@ -29,6 +30,9 @@ var URLS = {
 var DIRECT_DOWNLOAD_SHEETS = {
 	'BL-ballsorten-2016': true,
 	'BL-mindestanforderungen-2016': true,
+};
+var EXTERNAL_DOWNLOAD_SHEETS = {
+	'DBV-Satzungen-2016': true,
 };
 
 
@@ -1265,7 +1269,15 @@ function render_links(s) {
 	}
 	eventsheets.forEach(function(es_key) {
 		var i18n_key = 'eventsheet:label:' + es_key;
-		if (DIRECT_DOWNLOAD_SHEETS[es_key]) {
+		if (EXTERNAL_DOWNLOAD_SHEETS[es_key]) {
+			uiu.create_el(container, 'a', {
+				'href': URLS[es_key],
+				'download': '',
+				'target': '_blank',
+				'class': 'eventsheet_link',
+				'data-i18n': i18n_key,
+			}, s._(i18n_key));
+		} else if (DIRECT_DOWNLOAD_SHEETS[es_key]) {
 			var ext = /\.([a-z0-9]+)$/.exec(URLS[es_key])[1];
 			var filename = state._('eventsheet:label:' + es_key) + '.' + ext;
 
