@@ -108,7 +108,8 @@ table[data-game-count="5"] .score_future-game {
 	padding-left: 1.5vh;
 }
 
-.score_counting_tr, .score_counting_td {
+.score_counting_tr,
+.score_counting_td {
 	height: 0;
 	max-height: 0;
 	margin: 0;
