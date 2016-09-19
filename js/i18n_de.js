@@ -207,6 +207,12 @@ var i18n_de = {
 'settings:wakelock:display': 'Nur im Anzeigemodus',
 'settings:wakelock:always': 'immer',
 'settings:wakelock:never': 'niemals',
+'settings:click_mode': 'Touch-Erkennung',
+'settings:click_mode:auto': 'Automatisch',
+'settings:click_mode:touchstart': 'Schnell',
+'settings:click_mode:touchend': 'Emulation (experimentell)',
+'settings:click_mode:click': 'Nativ',
+
 
 'settings:mode:label': 'Modus:',
 'settings:mode:umpire': 'Schiedsrichter',

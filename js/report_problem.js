@@ -24,6 +24,7 @@ function get_info() {
 		settings: state.settings,
 		last_error: last_error,
 		reported_count: reported_count,
+		click_mode: click.get_mode(),
 		presses: state.presses,
 		netstats: netstats.all_stats,
 	};

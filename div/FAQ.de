@@ -7,3 +7,12 @@ Wie kann ich verhindern, dass durch versehentliches Betätigen des Homebuttons a
 
 Mit der Option "Geführter Zugriff" kann das eingerichtet werden, siehe https://support.apple.com/de-de/HT202612.
 
+
+Was bedeuten die Touch-Erkennung-Optionen?
+
+Diese Option regelt, wie Touch-Eingaben behandelt werden.
+
+- Automatisch: Bup wählt nach Gerät die beste Option aus. [empfohlen]
+- Nativ: Die Click-Emulation des mobilen Webbrowsers wird verwendet
+- Schnell: Eine einfache Berührung genügt um den Button auszulösen
+- Emulation: Emulation des nativen Verhaltens mit Touch-Events

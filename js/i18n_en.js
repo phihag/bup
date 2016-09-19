@@ -205,6 +205,11 @@ var i18n_en = {
 'settings:wakelock:display': 'Only in displaymode',
 'settings:wakelock:always': 'Always',
 'settings:wakelock:never': 'Never',
+'settings:click_mode': 'Touch Detection',
+'settings:click_mode:auto': 'Automatic',
+'settings:click_mode:touchstart': 'Fast',
+'settings:click_mode:touchend': 'Emulation (experimental)',
+'settings:click_mode:click': 'Native',
 
 'settings:mode:label': 'Mode:',
 'settings:mode:umpire': 'Umpire',

@@ -20,6 +20,7 @@ var default_settings = {
 	displaymode_style: 'top+list',
 	displaymode_court_id: 1,
 	wakelock: 'display',
+	click_mode: 'auto',
 };
 
 function load() {
@@ -120,10 +121,31 @@ function update_court(s) {
 	court_select.val(s.settings.court_id);
 }
 
-var _settings_checkboxes = ['go_fullscreen', 'show_pronunciation', 'negative_timers', 'shuttle_counter', 'editmode_doubleclick'];
-var _settings_textfields = ['umpire_name', 'service_judge_name', 'court_id', 'court_description'];
-var _settings_numberfields = ['network_timeout', 'network_update_interval', 'displaymode_update_interval', 'button_block_timeout'];
-var _settings_selects = ['language', 'displaymode_court_id', 'displaymode_style', 'wakelock'];
+var _settings_checkboxes = [
+	'go_fullscreen',
+	'show_pronunciation',
+	'negative_timers',
+	'shuttle_counter',
+	'editmode_doubleclick',
+];
+var _settings_textfields = ['umpire_name',
+	'service_judge_name',
+	'court_id',
+	'court_description',
+];
+var _settings_numberfields = [
+	'network_timeout',
+	'network_update_interval',
+	'displaymode_update_interval',
+	'button_block_timeout',
+];
+var _settings_selects = [
+	'click_mode',
+	'displaymode_court_id',
+	'displaymode_style',
+	'language',
+	'wakelock',
+];
 
 function update_court_settings(s) {
 	var automatic = false;
@@ -162,6 +184,7 @@ function update(s) {
 	i18n.ui_update_state(s);
 	render.ui_court_str(s);
 	render.shuttle_counter(s);
+	click.update_mode(s.settings.click_mode);
 }
 
 function ui_init(s) {
@@ -240,6 +263,9 @@ function ui_init(s) {
 				break;
 			case 'wakelock':
 				wakelock.update(s);
+				break;
+			case 'click_mode':
+				click.update_mode(s.settings[name]);
 				break;
 			}
 		});

@@ -6,14 +6,27 @@ function on_click(node, callback) {
 	uiu.addClass(node, 'click_button');
 
 	node.addEventListener('touchstart', function(e) {
-		if (mode !== 'touchstart_disabled') {
+		if ((mode !== 'touchstart') && (mode !== 'touchend')) {
 			return;
 		}
+
 		e.preventDefault();
 		if (node.getAttribute('disabled')) {
 			return;
 		}
+
+		if (mode === 'touchend') {
+			return;
+		}
 		callback(e);
+	}, false);
+	node.addEventListener('touchend', function(e) {
+		if (mode !== 'touchend') {
+			return;
+		}
+		callback(e);
+		// TODO only if started recently on this one
+		// TODO only if distance not too far away
 	}, false);
 	node.addEventListener('click', function(e) {
 		e.preventDefault();
@@ -40,7 +53,7 @@ function calc_auto() {
 	return 'click'; // very conservative for now
 }
 
-function on_mode_change(new_mode) {
+function update_mode(new_mode) {
 	if (new_mode === 'auto') {
 		new_mode = calc_auto();
 	}
@@ -50,11 +63,16 @@ function on_mode_change(new_mode) {
 	mode = new_mode;
 }
 
+function get_mode() {
+	return mode;
+}
+
 return {
 	qs: on_click_qs,
 	on: on_click,
 	qsa: on_click_qsa,
-	on_mode_change: on_mode_change,
+	update_mode: update_mode,
+	get_mode: get_mode,
 };
 })();
 

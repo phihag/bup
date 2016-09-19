@@ -1,12 +1,4 @@
 mail Ulf
-	-> critical updates
-
-move click into separate module
-	also capture touchend?
-	setting to support multiple ways
-test on android
-retest on iOS
-
 mail btde
 mail Klaus-Michael + Jörg
 	now measured
@@ -18,17 +10,25 @@ mail Klaus-Michael + Jörg
 
 ---
 
+improve click
+	highlight with touchend
+	improve touchend
 handle superfluous score presses (ignoring, report problem ...)
 	test with allowing clicks on disabled button
 xlsx style at center
 set umpire name/service judge name/court id if != settings
 btde export should export all known matches!
 sent export should be able to imported
+generate static "Mannschaftsunterlagen" files from turnier.de
+
 referee mode
+	via websockets
+	add subproject for server
+	move to separate worker if workers available
+
 rendering error in editmode/Edge
 write test that appcache has every URL in eventsheets
 suppress sending duplicate silent_errors
-generate static "Mannschaftsunterlagen" files from turnier.de
 
 display for very small screens (see error report)
 hide current matches from match overview if not enough space
