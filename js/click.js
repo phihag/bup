@@ -6,7 +6,7 @@ var is_android = (typeof navigator != 'undefined') && (/[Aa]ndroid/.test(navigat
 function on_click(node, callback) {
 	uiu.addClass(node, 'click_button');
 
-	if (is_android) {
+	if (is_android && false) {
 		// On android devices, click will not be fired for a strong touch
 		node.addEventListener('touchstart', function(e) {
 			e.preventDefault();
