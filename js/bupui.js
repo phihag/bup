@@ -105,43 +105,40 @@ function make_player_pick(s, label, press_type, on_cancel, modify_button) {
 	}, on_cancel);
 }
 
-function show_picker(obj) {
-	obj.show();
-	var first_button = obj.find('button:first');
-	first_button.addClass('auto-focused');
+function show_picker($obj) {
+	$obj.show();
+	var $first_button = $obj.find('button:first');
+	$first_button.addClass('auto-focused');
 	var kill_special_treatment = function() {
-		first_button.removeClass('auto-focused');
-		first_button.off('blur', kill_special_treatment);
+		$first_button.removeClass('auto-focused');
+		$first_button.off('blur', kill_special_treatment);
 	};
-	first_button.on('blur', kill_special_treatment);
+	$first_button.on('blur', kill_special_treatment);
 }
 
 // TODO remove this function in favor of using one of the pick_* functions in the first place
 function add_player_pick(s, container, type, team_id, player_id, on_click, namefunc) {
-       if (! namefunc) {
-               namefunc = function(player) {
-                       return player.name;
-               };
-       }
+	if (! namefunc) {
+		namefunc = function(player) {
+			return player.name;
+		};
+	}
 
-       var player = s.setup.teams[team_id].players[player_id];
-       var btn = $('<button>');
-       btn.text(namefunc(player));
-       btn.on('click', function() {
-               var press = {
-                       type: type,
-                       team_id: team_id,
-               };
-               if (player_id !== null) {
-                       press.player_id = player_id;
-               }
-               if (on_click) {
-                       on_click(press);
-               }
-               control.on_press(press);
-       });
-       container.append(btn);
-       return btn;
+	var player = s.setup.teams[team_id].players[player_id];
+	var btn = uiu.create_el(container, 'button', {}, namefunc(player));
+	click.on(btn, function() {
+		var press = {
+			type: type,
+			team_id: team_id,
+		};
+		if (player_id !== null) {
+			press.player_id = player_id;
+		}
+		if (on_click) {
+			on_click(press);
+		}
+		control.on_press(press);
+	});
 }
 
 

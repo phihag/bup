@@ -165,7 +165,7 @@ function update(s) {
 }
 
 function ui_init(s) {
-	click.qs('.settings_layout', function(e) {
+	$('.settings_layout').on('click', function(e) {
 		if (e.target != this) {
 			return;
 		}

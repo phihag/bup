@@ -397,9 +397,9 @@ function ui_render(s) {
 					}
 				}
 
-				bupui.add_player_pick(s, pick_server, 'pick_server', ti, 0, null, namefunc);
+				bupui.add_player_pick(s, pick_server[0], 'pick_server', ti, 0, null, namefunc);
 				if (s.setup.is_doubles) {
-					bupui.add_player_pick(s, pick_server, 'pick_server', ti, 1, null, namefunc);
+					bupui.add_player_pick(s, pick_server[0], 'pick_server', ti, 1, null, namefunc);
 				}
 			});
 
@@ -409,8 +409,8 @@ function ui_render(s) {
 			pick_receiver.find('button').remove();
 			dialog_active = true;
 			var team_id = (s.game.start_server_team_id == 1) ? 0 : 1;
-			bupui.add_player_pick(s, pick_receiver, 'pick_receiver', team_id, 0);
-			bupui.add_player_pick(s, pick_receiver, 'pick_receiver', team_id, 1);
+			bupui.add_player_pick(s, pick_receiver[0], 'pick_receiver', team_id, 0);
+			bupui.add_player_pick(s, pick_receiver[0], 'pick_receiver', team_id, 1);
 			bupui.show_picker(pick_receiver);
 		}
 	}

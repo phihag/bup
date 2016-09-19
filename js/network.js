@@ -255,19 +255,21 @@ function enter_match(match) {
 }
 
 function ui_render_matchlist(s, event) {
-	var container = $('#setup_network_matches');
-	container.empty(); // TODO better transition if we're updating?
-	$('.setup_network_event').text(event.event_name ? event.event_name : s._('network:Matches'));
+	var container = uiu.qs('#setup_network_matches');
+	uiu.empty(container); // TODO better transition if we're updating?
+	uiu.text_qs('.setup_network_event', (event.event_name ? event.event_name : s._('network:Matches')));
 
 	event.matches.forEach(function(match) {
-		var btn = $('<button class="setup_network_match">');
+		var btn = uiu.create_el(container, 'button', {
+			'class': 'setup_network_match',
+		});
 		if (match.setup.incomplete) {
-			btn.attr('disabled', 'disabled');
+			btn.setAttribute('disabled', 'disabled');
 		}
 
-		var match_name = $('<span class="setup_network_match_match_name">');
-		match_name.text(match.setup.match_name);
-		btn.append(match_name);
+		uiu.create_el(btn, 'span', {
+			'class': 'setup_network_match_match_name',
+		}, match.setup.match_name);
 
 		var _players_str = function(team) {
 			if (match.setup.is_doubles) {
@@ -287,24 +289,22 @@ function ui_render_matchlist(s, event) {
 			}
 		};
 
-		var home_players = $('<span class="setup_network_match_home_players">');
-		home_players.text(_players_str(match.setup.teams[0]));
-		btn.append(home_players);
+		uiu.create_el(btn, 'span', {
+			'class': 'setup_network_match_home_players',
+		}, _players_str(match.setup.teams[0]));
+		uiu.create_el(btn, 'span', {
+			'class': 'setup_network_match_away_players',
+		}, _players_str(match.setup.teams[1]));
 
-		var away_players = $('<span class="setup_network_match_away_players">');
-		away_players.text(_players_str(match.setup.teams[1]));
-		btn.append(away_players);
 
-		var score = $('<span class="setup_network_match_score">');
 		var score_text = _score_text(match.network_score);
-		score.text(score_text ? score_text : '\xA0');
-		btn.append(score);
+		uiu.create_el(btn, 'span', {
+			'class': 'setup_network_match_score',
+		}, (score_text ? score_text : '\xA0'));
 
-		btn.on('click', function() {
+		click.on(btn, function() {
 			enter_match(match);
 		});
-
-		container.append(btn);
 	});
 }
 
