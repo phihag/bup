@@ -50,7 +50,7 @@ function ui_init() {
 		}
 		settings.hide();
 	});
-	click.qs('#court', function(e) {
+	$('#court').on('click', function(e) {
 		if ((e.target.tagName.toLowerCase() == 'button') || (e.target.parentNode.tagName.toLowerCase() == 'button')) {
 			return;
 		}
