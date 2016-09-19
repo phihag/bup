@@ -34,13 +34,15 @@ function _score_display_init(s) {
 	});
 	score_table.setAttribute('data-game-count', s.match.max_games);
 
-	var counting_tr = uiu.create_el(score_table, 'tr');
+	var counting_tr = uiu.create_el(score_table, 'tr', {
+		'class': 'score_counting_tr',
+	});
 	var counting_td = uiu.create_el(counting_tr, 'td', {
 		colspan: 2,
 		'class': 'score_counting_td',
 	});
 	var counting_container = uiu.create_el(counting_td, 'div', {
-		'class': 'score_counting_container default-invisible',
+		'class': 'score_counting_container',
 	});
 	uiu.create_el(counting_container, 'div', {
 		'class': 'score_counting',
@@ -144,8 +146,11 @@ function _score_display_set_game(s, game, game_index, is_current) {
 	}
 
 	if (is_current) {
+		var $counting_tr = $('.score_counting_tr');
+		$counting_tr.insertBefore(tr);
 		var ann_tr = $('tr.score_announcements');
-		ann_tr.insertBefore(tr);
+		ann_tr.insertBefore($counting_tr);
+
 		var ann_td = ann_tr.children('td');
 		ann_td.empty();
 		var _add_ann = function (text) {

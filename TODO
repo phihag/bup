@@ -1,5 +1,3 @@
-CAN'T click on COURT id!
-toprow not cozy with top of browser
 mail Ulf
 	-> critical updates
 
@@ -20,7 +18,8 @@ mail Klaus-Michael + Jörg
 
 ---
 
-handle superfluous score presses (ignoring ...)
+handle superfluous score presses (ignoring, report problem ...)
+	test with allowing clicks on disabled button
 xlsx style at center
 set umpire name/service judge name/court id if != settings
 btde export should export all known matches!
@@ -29,7 +28,7 @@ referee mode
 rendering error in editmode/Edge
 write test that appcache has every URL in eventsheets
 suppress sending duplicate silent_errors
-generate static "Mannschaftsunterlagen" file from turnier.de?
+generate static "Mannschaftsunterlagen" files from turnier.de
 
 display for very small screens (see error report)
 hide current matches from match overview if not enough space
@@ -53,7 +52,7 @@ editmode: input values from last match carry over, should not
 disqualified in english scoresheet!
 interactive error handler => ask for an email
 contemplate adding various PDFs to appcache
-
+Mindestanforderungen als SVG statt von Tobias Oertel (prefill dates, maybe checkboxes)
 RLS
 
 bup display mode
@@ -110,8 +109,8 @@ mail Werner
 mail Markus
 mail Daniel / Peter
 
+eventsheet: do not show external links when no internet access
 eventsheet: more space for input, vary by field
-N10 sensitivity! ontouch instead of onclick
 scoresheet: Fit "TSV Neuhausen-Nymphenburg 1"
 network loading should not move around design
 option to call home upon event completion

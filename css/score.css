@@ -108,8 +108,11 @@ table[data-game-count="5"] .score_future-game {
 	padding-left: 1.5vh;
 }
 
-.score_counting_td {
+.score_counting_tr, .score_counting_td {
 	height: 0;
+	max-height: 0;
+	margin: 0;
+	padding: 0;
 }
 .score_counting_container {
 	position: relative;
@@ -120,7 +123,7 @@ table[data-game-count="5"] .score_future-game {
 	position: absolute;
 	color: #888;
 	padding: 1vh 0;
-	top: 11vh;
+	top: 9vh;
 	font-size: 4vh;
 	width: 100%;
 	background: #fff;
