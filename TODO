@@ -1,15 +1,5 @@
-mail Ulf
-mail btde
-mail Klaus-Michael + Jörg
-	now measured
-	irreproducible (stats show <20ms)
-	unselectable
-	force presses
-	high-sensitivity
-	Anzeigenänderung in der Pause
-
----
-
+Verbandsliga (GW Mülheim)
+fix travis
 improve click
 	highlight with touchend
 	improve touchend
@@ -48,6 +38,7 @@ Bundesliga xlsx scoresheets
 courts for edemo / vdemo
 retest edemo / vdemo with different locales
 
+recognize that teammatch is over and send export (if inet connection9!
 editmode: input values from last match carry over, should not
 disqualified in english scoresheet!
 interactive error handler => ask for an email
