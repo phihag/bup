@@ -1,35 +1,35 @@
 event
 =====
 
-matches*        A list of matches to be played (see below)
-preferred_order Array of eventsheet_id (recommended) or match_name values that indicate the best order of matches as set by the tournament organizers.
-                Example: ["MS1", "WS", "MS2", "MD1", "WD", "MD2", "MX"].
+all_players     2-element list (home/away), each element is a list of all players that can play for the team.
+                gender key required for each player.
+backup_players  2-element list (home/away), each element is another list of all the players (see below).
+                gender key required for each player.
+courts          An array describing the current configuration of courts.
+id              Globally unique event id, e.g. "2016-bundesliga-refrath vs bischmisheim"
 league_key      ID of the league being played (this determines which event sheets are available, among others).
                 Strongly recommended if applicable.
                 Available values: "1BL-2015", "2BLN-2015", "2BLS-2015", "1BL-2016", "2BLN-2016", "2BLS-2016", "RLW-2016", "RLN-2016".
                 The year is the first year that the specific ruleset was implemented in.
                 If the rules and descriptions of the league don't change (at least as far as bup is concerned),
                 the same league_key can be used for later seasons.
+location        Location name and address as a string, e.g. "SpH Steinbreche"
+matches*        A list of matches to be played (see below)
+preferred_order Array of eventsheet_id (recommended) or match_name values that indicate the best order of matches as set by the tournament organizers.
+                Example: ["MS1", "WS", "MS2", "MD1", "WD", "MD2", "MX"].
+protest         Text describing the protest of one team, e.g. "Court extremely slippery (Home team, 19:00)"
+team_competition* Are players competing for their teams(true) or for themselves(false)? Affects announcements.
 team_names      Array of home and away team name. Required for team competitions.
                 Example: ["TV Refrath", "BC Bischmisheim"]
-id              Globally unique event id, e.g. "2016-bundesliga-refrath vs bischmisheim"
-location        Location name and address as a string, e.g. "SpH Steinbreche"
-protest         Text describing the protest of one team, e.g. "Court extremely slippery (Home team, 19:00)"
 umpires         String describing umpires (for eventsheet), e.g. "Barbara Bub & Klaus-Michael Becker"
 starttime       Human-readable official start time, e.g. "19:00"
 matchday        Match day according to league plan, e.g. "1" (first game of the season) or "semi-finals"
 notes           Non-protest notes, e.g. "Bundesliga logo missing on front of information sheet"
-backup_players  2-element list (home/away), each element is another list of all the players (see below).
-                gender key required for each player.
-all_players     2-element list (home/away), each element is a list of all players that can play for the team.
-                gender key required for each player.
 teamsters       2-element list (home/away). Name (as string) of the teamsters of each team.
                 Depending on regulation, not necessarily (active) players.
                 Example: ["Heinz Kelzenberg", "Michael Fuchs"]
-courts          An array describing the current configuration of courts.
 event_name      Name of the event (will be present on scoresheet), e.g. "Finals".
 tournament_name Name of the overall tournament (will be present on scoresheet), e.g. "Bundesliga 2015/2016".
-
 
 court
 =====
@@ -132,14 +132,16 @@ match_id*          (Globally) unique ID, e.g. "20160825-Bundesliga-finale-MS1"
 teams*             An array (0: home team, 1: away team) of teams (see below).
 is_doubles*        Boolean key. false => singles, true => mixed/doubles
 counting*          Scoring system. Valid values are "3x21", "1x21", "2x21+11", "5x11_15", "1x11_15", "5x11/3"
-team_competition*  Are players competing for their teams(true) or for themselves(false)? Affects announcements
+  Are players competing for their teams(true) or for themselves(false)? Affects announcements
 umpire_name        Name of the umpire assigned to this match (or the last one who touched it).
 service_judge_name Name of the service judge assigned to this match.
 court_id           ID of the court this match is played on.
 
 The following keys are copied over from the event (see there for documentation):
 
-league_key, tournament_name, event_name.
+league_key, tournament_name, event_name, team_competition*
+
+These keys can also be set manually on a match, for example if the match is not connected to any event, or the match setup properties differ from the event.
 
 team
 ====

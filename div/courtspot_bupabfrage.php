@@ -139,7 +139,6 @@ while ($row = $result->fetch_assoc()) {
 			$home_team,
 			$away_team,
 		],
-		'team_competition' => true,
 		'is_doubles' => $is_doubles,
 		'incomplete' => $incomplete,
 		'counting' => '5x11_15',
@@ -215,4 +214,5 @@ echo json_encode([
 	'tournament_name' => $tournament_name,
 	'team_names' => [$verwaltung['Heim'], $verwaltung['Gast']],
 	'league_key' => $league_key,
+	'team_competition' => true,
 ], JSON_PRETTY_PRINT);

@@ -103,12 +103,15 @@ function annotate(s, event) {
 		league_key: network.league_key(event),
 		event_name: event.event_name,
 		tournament_name: event.tournament_name,
+		team_competition: event.team_competition,
 	};
 	event.matches.forEach(function(m) {
 		var setup = m.setup;
 		for (var key in props) {
 			var val = props[key];
-			if (!val) continue;
+			if (val === undefined) {
+				continue;
+			}
 
 			/*@DEV*/
 			if (setup[key] === val) {
@@ -144,6 +147,8 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
 	var utils = require('./utils');
+	var network = require('./network');
+	var report_problem = require('./report_problem');
 
 	module.exports = eventutils;
 }

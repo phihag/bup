@@ -41,7 +41,6 @@
               ]
             }
           ],
-          "team_competition": true,
           "is_doubles": true,
           "counting": "5x11_15",
           "match_id": "bldemo_HD1",
@@ -80,7 +79,6 @@
             }
           ],
 
-          "team_competition": true,
           "is_doubles": true,
           "counting": "5x11_15",
           "match_id": "bldemo_DD",
@@ -119,7 +117,6 @@
               ]
             }
           ],
-          "team_competition": true,
           "is_doubles": true,
           "counting": "5x11_15",
           "match_id": "bldemo_HD2",
@@ -151,7 +148,6 @@
               ]
             }
           ],
-          "team_competition": true,
           "is_doubles": false,
           "counting": "5x11_15",
           "match_id": "bldemo_HE1",
@@ -183,7 +179,6 @@
               ]
             }
           ],
-          "team_competition": true,
           "is_doubles": false,
           "counting": "5x11_15",
           "match_id": "bldemo_DE",
@@ -221,7 +216,6 @@
               ]
             }
           ],
-          "team_competition": true,
           "is_doubles": true,
           "counting": "5x11_15",
           "match_id": "bldemo_GD",
@@ -253,7 +247,6 @@
               ]
             }
           ],
-          "team_competition": true,
           "is_doubles": false,
           "counting": "5x11_15",
           "match_id": "bldemo_HE2"
@@ -321,6 +314,7 @@
       ]
     ],
     "teamsters": ["Heinz Kelzenberg", "Michael Fuchs"],
-    "league_key": "1BL-2016"
+    "league_key": "1BL-2016",
+    "team_competition": true
   }
 }

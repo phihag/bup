@@ -39,11 +39,9 @@
               ]
             }
           ],
-          "team_competition": true,
           "is_doubles": true,
           "counting": "3x21",
           "match_id": "nrwdemo_HD1",
-
         },
         "network_score": [],
         "presses_json": "[]"
@@ -74,7 +72,6 @@
               ]
             }
           ],
-          "team_competition": true,
           "is_doubles": true,
           "counting": "3x21",
           "match_id": "nrwdemo_HD2",
@@ -108,7 +105,6 @@
               ]
             }
           ],
-          "team_competition": true,
           "is_doubles": true,
           "counting": "3x21",
           "match_id": "nrwdemo_DD",
@@ -136,7 +132,6 @@
               ]
             }
           ],
-          "team_competition": true,
           "is_doubles": false,
           "counting": "3x21",
           "match_id": "nrwdemo_HE1",
@@ -165,7 +160,6 @@
               ]
             }
           ],
-          "team_competition": true,
           "is_doubles": false,
           "counting": "3x21",
           "match_id": "nrwdemo_HE2",
@@ -193,7 +187,6 @@
               ]
             }
           ],
-          "team_competition": true,
           "is_doubles": false,
           "counting": "3x21",
           "match_id": "nrwdemo_HE3",
@@ -220,7 +213,6 @@
               ]
             }
           ],
-          "team_competition": true,
           "is_doubles": false,
           "counting": "3x21",
           "match_id": "nrwdemo_DE",
@@ -253,7 +245,6 @@
               ]
             }
           ],
-          "team_competition": true,
           "is_doubles": true,
           "counting": "3x21",
           "match_id": "nrwdemo_GD",
@@ -265,13 +256,13 @@
     ],
     "id": "vdemo",
     "event_name": "SG Düsseldorf-Unterrath 5 - VC Phönix Düsseldorf 1 (Demo)",
-    "tournament_name": "NRW-Demo",
+    "tournament_name": "Demo NRW-Ligen",
     "team_names": ["SG Düsseldorf-Unterrath 5", "VC Phönix Düsseldorf 1"],
     "location": "Franz-Rennefeld-Weg 15, Düsseldorf",
     "protest": "",
     "starttime": "14:00",
     "matchday": "1",
-    "notes": "",
+    "notes": "Fiktive Ergebnisse (automatisch generiert)",
     "backup_players": [[], []],
     "all_players": [
       [
@@ -315,7 +306,8 @@
         {"gender": "f", "name": "Anne Nußbaum", "ranking_team": 1, "ranking": 4},
       ]
     ],
-    "teamsters": ["TODO", "TODO"],
-    "league_key": "TODO"
+    "teamsters": ["Uwe Kampen", "Ron Labuhn"],
+    "league_key": "NRW-O19-S1-KK-195-2016",
+    "team_competition": true
   }
 }

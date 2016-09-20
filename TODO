@@ -1,7 +1,7 @@
-move team_competition to annotation/event
 nrw demo
 	implement and test
-retest demos
+	generate results (and a timeline)
+retest and update (or delete) demos
 	edemo/de
 	edemo/en
 	vdemo/en

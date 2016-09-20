@@ -494,6 +494,7 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var click = require('./click');
 	var control = require('./control');
+	var eventsheet = require('./eventsheet');
 	var network = require('./network');
 	var render = require('./render');
 	var settings = require('./settings');
