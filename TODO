@@ -1,19 +1,17 @@
-automatically set preferred_order
-order: deal with preferred_order unset
-
-Verbandsliga (GW Mülheim)
-	add nrwdemo (from bldemo)
-	eventsheet date is bananas
-	add helper function to generate league name
-	test for that
-	fill out eventsheet with helper function name
-set umpire name/service judge name/court id if != settings
-
+move team_competition to annotation/event
+nrw demo
+	implement and test
 retest demos
 	edemo/de
 	edemo/en
 	vdemo/en
 	vdemo/de
+NRW-Ligen
+	eventsheet date is bananas in bldemo/nrwdemo
+	add helper function to generate league name
+disqualified in english scoresheet!
+set umpire name/service judge name/court id if != settings
+
 improve click
 	highlight with touchend
 		(filter: brightness(.2);)
@@ -36,6 +34,7 @@ referee mode
 	see current match/event
 	download into local view
 
+annotate team.name
 rendering error in editmode/Edge
 write test that appcache has every URL in eventsheets
 suppress sending duplicate silent_errors
@@ -60,13 +59,13 @@ retest edemo / vdemo with different locales
 
 recognize that teammatch is over and send export (if inet connection9!
 editmode: input values from last match carry over, should not
-disqualified in english scoresheet!
 interactive error handler => ask for an email
 contemplate adding various PDFs to appcache
 Mindestanforderungen als SVG statt von Tobias Oertel (prefill dates, maybe checkboxes)
 RLS
 
 bup display mode
+	recheck that caching still works with annotate
 	add btde emulation
 	bg colors single-court display (https://image.jimcdn.com/app/cms/image/transf/dimension=640x1024:format=jpg/path/sb05689bf882eaf25/image/ia1b1bbe374005542/version/1473663902/image.jpg seems very good)
 	double court mode (digits outside)
