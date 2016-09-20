@@ -8,8 +8,9 @@ var SHEETS_BY_LEAGUE = {
 	'1BL-2016': ['1BL-2016', 'BL-ballsorten-2016', 'BL-mindestanforderungen-2016', 'DBV-Satzungen-2016'],
 	'2BLN-2016': ['2BLN-2016', 'BL-ballsorten-2016', 'BL-mindestanforderungen-2016', 'DBV-Satzungen-2016'],
 	'2BLS-2016': ['2BLS-2016', 'BL-ballsorten-2016', 'BL-mindestanforderungen-2016', 'DBV-Satzungen-2016'],
-	'RLW': ['RLW'],
-	'RLN': ['RLN'],
+	'NRW-2016': ['NRW-2016'],
+	'RLW-2016': ['RLW-2016'],
+	'RLN-2016': ['RLN-2016', 'RLN-Satzungen-2016'],
 };
 
 var URLS = {
@@ -22,8 +23,10 @@ var URLS = {
 	'BL-ballsorten-2016': 'div/bundesliga-ballsorten-2016.pdf',
 	'BL-mindestanforderungen-2016': 'div/bundesliga-Mindestanforderungen.pdf',
 	'DBV-Satzungen-2016': 'http://www.badminton.de/fileadmin/Dateibereich/Foto-Archiv/pdf-xls/DBV/Satzung/16-DBV-Druckwerk_Satzung-Ordnungen-Spielregeln201617-Website.pdf',
-	'RLW': 'div/Spielbericht_RLW.svg',
-	'RLN': 'div/Spielbericht_RLN.svg',
+	'RLW-2016': 'div/Spielbericht_RLW.svg',
+	'RLN-2016': 'div/Spielbericht_RLN.svg',
+	'RLN-Satzungen-2016': 'http://www.gruppe-nord.net/fileadmin/user_upload/schuch/GruppeNord/Satzung/Satzung%20und%20Ordnungen%20der%20Gruppe%20Nord%20Stand%2006-08-16.pdf',
+	'NRW-2016': 'div/Spielbericht_RLW.svg',
 	'team-1BL-2015': 'div/Mannschaftsaufstellung_1BL-2015.pdf',
 	'team-2BL-2015': 'div/Mannschaftsaufstellung_2BL-2015.pdf',
 };
@@ -33,12 +36,15 @@ var DIRECT_DOWNLOAD_SHEETS = {
 };
 var EXTERNAL_DOWNLOAD_SHEETS = {
 	'DBV-Satzungen-2016': true,
+	'RLN-Satzungen-2016': true,
 };
 
 
 var MIME_TYPES = {
 	pdf: 'application/pdf',
 };
+
+var NRW2016_RE = /^NRW-(O19)-(?:([NS][12])-)?([A-Z]{2})-([0-9]{3})-2016$/;
 var files = {};
 
 var ui_current_league_key = null;
@@ -604,7 +610,7 @@ function render_svg(ev, es_key, ui8r, extra_data) {
 			_svg_text(svg, 'match' + match_id + '_games0', games[0]);
 			_svg_text(svg, 'match' + match_id + '_games1', games[1]);
 
-			var matches_score = calc_matchscore(netscore);
+			var matches_score = calc_matchscore(match.setup.counting, netscore);
 			if (matches_score[0] !== undefined) {
 				sum_matches[0] += matches_score[0];
 				sum_matches[1] += matches_score[1];
@@ -1194,8 +1200,9 @@ function es_render(ev, es_key, ui8r, extra_data) {
 	case 'team-1BL-2015':
 	case 'team-2BL-2015':
 		return render_team_bl(ev, es_key, ui8r);
-	case 'RLW':
-	case 'RLN':
+	case 'RLW-2016':
+	case 'RLN-2016':
+	case 'NRW-2016':
 		return render_svg(ev, es_key, ui8r, extra_data);
 	case '1BL-2016':
 	case '2BLN-2016':
@@ -1261,6 +1268,10 @@ function render_links(s) {
 	uiu.empty(container);
 	if (! league_key) {
 		return;
+	}
+
+	if (NRW2016_RE.test(league_key)) {
+		league_key = 'NRW-2016';
 	}
 	var eventsheets = SHEETS_BY_LEAGUE[league_key];
 	if (!eventsheets) { // Unsupported league
@@ -1435,8 +1446,9 @@ function show_dialog(es_key) {
 	case '1BL-2015':
 	case '2BLN-2015':
 	case '2BLS-2015':
-	case 'RLW':
-	case 'RLN':
+	case 'RLW-2016':
+	case 'RLN-2016':
+	case 'NRW-2016':
 		uiu.visible_qs('.eventsheet_report', true);
 		uiu.visible_qs('label.eventsheet_backup_players_str', true);
 		uiu.visible_qsa('label.eventsheet_teamster', false);
@@ -1487,6 +1499,7 @@ return {
 	ui_init: ui_init,
 	show_dialog: show_dialog,
 	render_links: render_links,
+	NRW2016_RE: NRW2016_RE,
 };
 
 })();

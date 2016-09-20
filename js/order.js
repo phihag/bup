@@ -200,10 +200,26 @@ function show() {
 }
 
 function preferred_by_league(league_key) {
+	if (eventsheet.NRW_RE.test(league_key) || (league_key === 'RLW-2016')) {
+		// See §57.2 SpO
+		return [
+			'1.HD',
+			'2.HD',
+			'DD',
+			'1.HE',
+			'2.HE',
+			'3.HE',
+			'DE',
+			'GD',
+		];
+	}
+
+
 	switch (league_key) {
 	case '1BL-2016':
 	case '2BLN-2016':
 	case '2BLS-2016':
+		// See BLO-DB §8.8
 		return [
 			'1.HD',
 			'DD',
