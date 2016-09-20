@@ -10,6 +10,7 @@ id              Globally unique event id, e.g. "2016-bundesliga-refrath vs bisch
 league_key      ID of the league being played (this determines which event sheets are available, among others).
                 Strongly recommended if applicable.
                 Available values: "1BL-2015", "2BLN-2015", "2BLS-2015", "1BL-2016", "2BLN-2016", "2BLS-2016", "RLW-2016", "RLN-2016".
+                Also, NRW leagues can be specified like "NRW-O19-S1-KK-194-2016"
                 The year is the first year that the specific ruleset was implemented in.
                 If the rules and descriptions of the league don't change (at least as far as bup is concerned),
                 the same league_key can be used for later seasons.

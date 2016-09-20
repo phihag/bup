@@ -1,5 +1,3 @@
-mail Daniel / Peter
-
 nrw demo
 	generate results (and a timeline)
 	test eventsheet
@@ -13,6 +11,8 @@ retest and update (or delete) demos
 	vdemo/en
 	vdemo/de
 set umpire name/service judge name/court id if != settings
+	use in scoresheet
+	use in eventsheet (test!)
 
 improve click
 	highlight with touchend
