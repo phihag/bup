@@ -8,8 +8,8 @@ var SHEETS_BY_LEAGUE = {
 	'1BL-2016': ['1BL-2016', 'BL-ballsorten-2016', 'BL-mindestanforderungen-2016', 'DBV-Satzungen-2016'],
 	'2BLN-2016': ['2BLN-2016', 'BL-ballsorten-2016', 'BL-mindestanforderungen-2016', 'DBV-Satzungen-2016'],
 	'2BLS-2016': ['2BLS-2016', 'BL-ballsorten-2016', 'BL-mindestanforderungen-2016', 'DBV-Satzungen-2016'],
-	'NRW-2016': ['NRW-2016'],
-	'RLW-2016': ['RLW-2016'],
+	'NRW-2016': ['NRW-2016', 'NRW-Satzungen-2016'],
+	'RLW-2016': ['RLW-2016', 'NRW-Satzungen-2016'],
 	'RLN-2016': ['RLN-2016', 'RLN-Satzungen-2016'],
 };
 
@@ -27,6 +27,7 @@ var URLS = {
 	'RLN-2016': 'div/Spielbericht_RLN.svg',
 	'RLN-Satzungen-2016': 'http://www.gruppe-nord.net/fileadmin/user_upload/schuch/GruppeNord/Satzung/Satzung%20und%20Ordnungen%20der%20Gruppe%20Nord%20Stand%2006-08-16.pdf',
 	'NRW-2016': 'div/Spielbericht_RLW.svg',
+	'NRW-Satzungen-2016': 'http://www.badminton-nrw.de/fileadmin/gstnrw/pdf_xls_doc/Satzungswerk/2016/SatzungOrdnungen2016.pdf',
 	'team-1BL-2015': 'div/Mannschaftsaufstellung_1BL-2015.pdf',
 	'team-2BL-2015': 'div/Mannschaftsaufstellung_2BL-2015.pdf',
 };
@@ -37,6 +38,7 @@ var DIRECT_DOWNLOAD_SHEETS = {
 var EXTERNAL_DOWNLOAD_SHEETS = {
 	'DBV-Satzungen-2016': true,
 	'RLN-Satzungen-2016': true,
+	'NRW-Satzungen-2016': true,
 };
 
 

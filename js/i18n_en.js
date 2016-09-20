@@ -302,6 +302,7 @@ var i18n_en = {
 'eventsheet:label:team-1BL-2015': '(German Bundesliga) team selection sheet (2015)',
 'eventsheet:label:team-2BL-2015': '(German 2. Bundesliga) team selection sheet (2015)',
 'eventsheet:label:NRW-2016': '(NRW leagues) result report sheet',
+'eventsheet:label:NRW-Satzungen-2016': '(Germany, NRW) laws & regulations (2016)',
 
 'stats:game': 'Game {number}',
 'stats:match': 'Match',

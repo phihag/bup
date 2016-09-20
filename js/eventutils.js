@@ -81,24 +81,6 @@ function set_metadata(event) {
 	});
 }
 
-function _duplicate_setup(event, key, val) {
-	if (!val) {
-		return;
-	}
-
-	event.matches.forEach(function(m) {
-		/*@DEV*/
-		if (m.setup[key] === val) {
-			report_problem.silent_error('Duplicate key ' + key + ' in ' + m.setup.match_id);
-		}
-		/*/@DEV*/
-
-		if (! m.setup[key]) {
-			m.setup[key] = val;
-		}
-	});
-}
-
 function annotate(s, event) {
 	if (event.courts && event.courts.length === 2) {
 		event.courts.forEach(function(c) {
@@ -117,9 +99,36 @@ function annotate(s, event) {
 		});
 	}
 
-	_duplicate_setup(event, 'league_key', network.league_key(event));
-	_duplicate_setup(event, 'event_name', event.event_name);
-	_duplicate_setup(event, 'tournament_name', event.tournament_name);
+	var props = {
+		league_key: network.league_key(event),
+		event_name: event.event_name,
+		tournament_name: event.tournament_name,
+	};
+	event.matches.forEach(function(m) {
+		var setup = m.setup;
+		for (var key in props) {
+			var val = props[key];
+			if (!val) continue;
+
+			/*@DEV*/
+			if (setup[key] === val) {
+				report_problem.silent_error('Duplicate key ' + key + ' in ' + setup.match_id);
+			}
+			/*/@DEV*/
+
+			if (! setup[key]) {
+				setup[key] = val;
+			}
+		}
+
+		if (event.team_names) {
+			event.team_names.forEach(function(team_name, team_idx) {
+				if (!setup.teams[team_idx].name) {
+					setup.teams[team_idx].name = team_name;
+				}
+			});
+		}
+	});
 }
 
 return {
