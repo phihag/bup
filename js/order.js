@@ -199,12 +199,33 @@ function show() {
 	}
 }
 
+function preferred_by_league(league_key) {
+	switch (league_key) {
+	case '1BL-2016':
+	case '2BLN-2016':
+	case '2BLS-2016':
+		return [
+			'1.HD',
+			'DD',
+			'2.HD',
+			'1.HE',
+			'DE',
+			'GD',
+			'2.HE',
+		];
+	}
+}
+
 function get_omatches(s) {
 	var event = s.event;
-	if (!event.preferred_order) {
+	var pref = event.preferred_order;
+	if (!pref && event.league_key) {
+		pref = preferred_by_league(event.league_key);
+	}
+	if (!pref) {
 		return event.matches.slice();
 	}
-	return order_by_names(event.matches, event.preferred_order);
+	return order_by_names(event.matches, pref);
 }
 
 function ui_move_prepare(from_idx) {
