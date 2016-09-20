@@ -152,31 +152,6 @@ function send_press(s) {
 	sync(s);
 }
 
-function annotate(s, event) {
-	if (event.courts) { // very old versions are missing this field
-		event.courts.forEach(function(c) {
-			if (c.description) {
-				return;
-			}
-
-			switch (c.court_id) {
-			case '1':
-				c.description = c.court_id + ' / ' + s._('court:left');
-				break;
-			case '2':
-				c.description = c.court_id + ' / ' + s._('court:right');
-				break;
-			}
-		});
-	}
-
-	event.matches.forEach(function(m) {
-		if (! m.setup.league_key) {
-			m.setup.league_key = network.league_key(event);
-		}
-	});
-}
-
 function list_matches(s, cb) {
 	var options = {
 		url: baseurl + 'php/bupabfrage.php',
@@ -196,7 +171,7 @@ function list_matches(s, cb) {
 			});
 		}
 
-		annotate(s, event);
+		eventutils.annotate(s, event);
 
 		cb(err, event);
 	});
@@ -240,6 +215,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
+	var eventutils = require('./eventutils');
 	var network = require('./network');
 	var utils = require('./utils');
 

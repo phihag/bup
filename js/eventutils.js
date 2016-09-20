@@ -81,10 +81,36 @@ function set_metadata(event) {
 	});
 }
 
+function annotate(s, event) {
+	if (event.courts && event.courts.length === 2) {
+		event.courts.forEach(function(c) {
+			if (c.description) {
+				return;
+			}
+
+			switch (c.court_id) {
+			case '1':
+				c.description = c.court_id + ' / ' + s._('court:left');
+				break;
+			case '2':
+				c.description = c.court_id + ' / ' + s._('court:right');
+				break;
+			}
+		});
+	}
+
+	event.matches.forEach(function(m) {
+		if (! m.setup.league_key) {
+			m.setup.league_key = network.league_key(event);
+		}
+	});
+}
+
 return {
 	guess_gender: guess_gender,
 	calc_all_players: calc_all_players,
 	set_metadata: set_metadata,
+	annotate: annotate,
 };
 
 })();

@@ -1,3 +1,7 @@
+automatically set preferred_order
+order: deal with preferred_order unset
+retest bldemo
+
 Verbandsliga (GW Mülheim)
 	add nrwdemo (from bldemo)
 	eventsheet date is bananas
