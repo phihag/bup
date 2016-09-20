@@ -1,15 +1,20 @@
 Verbandsliga (GW Mülheim)
+	add nrwdemo (from bldemo)
+	eventsheet date is bananas
 	add helper function to generate league name
 	test for that
 	fill out eventsheet with helper function name
+set umpire name/service judge name/court id if != settings
+
 improve click
 	highlight with touchend
 		(filter: brightness(.2);)
 	improve touchend
-handle superfluous score presses (ignoring, report problem ...)
+handle superfluous score presses
+	ignore in calc
+	report problem
 	test with allowing clicks on disabled button
 xlsx style at center
-set umpire name/service judge name/court id if != settings
 btde export should export all known matches!
 sent export should be able to imported
 generate static "Mannschaftsunterlagen" files from turnier.de
@@ -18,6 +23,9 @@ referee mode
 	via websockets
 	add subproject for server
 	move to separate worker if workers available
+	see battery
+	see current match/event
+	download into local view
 
 rendering error in editmode/Edge
 write test that appcache has every URL in eventsheets

@@ -6,7 +6,10 @@ preferred_order Array of eventsheet_id (recommended) or match_name values that i
                 Example: ["MS1", "WS", "MS2", "MD1", "WD", "MD2", "MX"].
 league_key      ID of the league being played (this determines which event sheets are available, among others).
                 Strongly recommended if applicable.
-                Available values: "1BL-2015", "2BLN-2015", "2BLS-2015", "1BL-2016", "2BLN-2016", "2BLS-2016", "RLW", "RLN"
+                Available values: "1BL-2015", "2BLN-2015", "2BLS-2015", "1BL-2016", "2BLN-2016", "2BLS-2016", "RLW-2016", "RLN-2016".
+                The year is the first year that the specific ruleset was implemented in.
+                If the rules and descriptions of the league don't change (at least as far as bup is concerned),
+                the same league_key can be used for later seasons.
 team_names      Array of home and away team name. Required for team competitions.
                 Example: ["TV Refrath", "BC Bischmisheim"]
 id              Globally unique event id, e.g. "2016-bundesliga-refrath vs bischmisheim"
@@ -53,6 +56,9 @@ press
 team_id is always 0: home team, 1: away_team.
 player_id is the index into the players array of setup.teams (0 in singles).
 
+umpire_name      Name of the umpire who took over this match, starting with this press.
+service_judge_name Name of the service judge who took over this match, starting with this press.
+court_id         ID of the court that this match is being played on, starting with this press.
 timestamp*       UNIX timestamp when the button was pressed, times 1000 (i.e. ms since 1970-01-01).
 type*            What kind of button has been pressed. Determines the other keys.
  "pick_side"     Who plays on which side.
