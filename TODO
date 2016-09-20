@@ -1,6 +1,10 @@
 Verbandsliga (GW Mülheim)
+	add helper function to generate league name
+	test for that
+	fill out eventsheet with helper function name
 improve click
 	highlight with touchend
+		(filter: brightness(.2);)
 	improve touchend
 handle superfluous score presses (ignoring, report problem ...)
 	test with allowing clicks on disabled button
@@ -425,7 +429,7 @@ add a test that all public functions are in use
 write a test to find undocumented (div/data_structures.md) keys
 move eventsheet._xlsx into separate module
 reduce common occurences of a single string with dots in it (automatically?) Example: uiu.create_el
--> Demo Jörg H, Manuel, Susanne, Werner Durow
+editevent: check ranking
 doc about all main features (HTML table, compare with other projects)
 
 Blocked

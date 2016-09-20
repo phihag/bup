@@ -30,7 +30,7 @@
 
 .editevent_table > tbody select {
 	display: block;
-	min-width: 12em;
+	min-width: 14em;
 	margin: 0;
 	font-size: 85%;
 }
@@ -41,7 +41,10 @@
 div.editevent_backup_player {
 	margin-bottom: 0.6em;
 }
-td.editevent_backup_players {
+th.editevent_backup_players {
+	padding-top: 0.6em;
+}
+.editevent_backup_players {
 	vertical-align: top;
 }
 

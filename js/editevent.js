@@ -72,6 +72,18 @@ function on_add_change(e) {
 	render_table(state);
 }
 
+function calc_player_str(p) {
+	var player_str = p.name;
+	if (p.ranking) {
+		var ranking_str = p.ranking;
+		if (p.ranking_d) {
+			ranking_str += '-D' + p.ranking_d;
+		}
+		player_str += ' (' + ranking_str + ')';
+	}
+	return player_str;
+}
+
 function render_table(s) {
 	// No let
 	var team_id;
@@ -123,7 +135,7 @@ function render_table(s) {
 					if (avp.name === player.name) {
 						attrs.selected = 'selected';
 					}
-					uiu.create_el(select, 'option', attrs, avp.name);
+					uiu.create_el(select, 'option', attrs, calc_player_str(avp));
 				}
 
 				uiu.create_el(select, 'option', {
@@ -167,7 +179,7 @@ function render_table(s) {
 			var bp = bps[bp_id];
 			var div = uiu.create_el(td, 'div', {
 				'class': 'editevent_backup_player',
-			}, bp.name);
+			}, calc_player_str(bp));
 			var del_btn = uiu.create_el(div, 'button', {
 				'class': 'button_delete image-button textsize-button',
 				'data-bp_id': bp_id,

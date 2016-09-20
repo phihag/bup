@@ -143,10 +143,14 @@ players* Array of players (1 element in singles, 2 in doubles/mixed).
 player
 ======
 
-firstname Given name. If present lastname must be present as well.
-gender    "m" or "f". If missing this is guessed by eventutils.guess_gender.
-lastname  Surname. If present firstname must be set as well.
-name*     Full name of the player
+firstname    Given name. If present lastname must be present as well.
+gender       "m" or "f". If missing this is guessed by eventutils.guess_gender.
+lastname     Surname. If present firstname must be set as well.
+ranking      An integer denoting the ranking number in singles (and default in doubles).
+ranking_d    An integer denoting the ranking number in doubles, if differing from the one in singles.
+ranking_team The ID of the team the player is ranked in.
+textid       Human-readable ID of this player (e.g. "01-062459" or "50858")
+name*        Full name of the player
 
 
 * required key
