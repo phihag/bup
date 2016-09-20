@@ -64,7 +64,7 @@ function calc_backup_players_str(ev) {
 			res += ' (' + ev.team_names[team_id] + ')';
 		}
 		return res;
-	}).join(' / ');
+	}).filter(function(s) {return s;}).join(' / ');
 }
 
 
