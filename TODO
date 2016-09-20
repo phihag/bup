@@ -1,3 +1,5 @@
+mail Daniel / Peter
+
 nrw demo
 	generate results (and a timeline)
 	test eventsheet
@@ -34,7 +36,6 @@ referee mode
 	see current match/event
 	download into local view
 
-annotate team.name
 rendering error in editmode/Edge
 write test that appcache has every URL in eventsheets
 suppress sending duplicate silent_errors
@@ -57,7 +58,7 @@ Bundesliga xlsx scoresheets
 courts for edemo / vdemo
 retest edemo / vdemo with different locales
 
-recognize that teammatch is over and send export (if inet connection9!
+recognize that teammatch is over and send export (if inet connection)!
 editmode: input values from last match carry over, should not
 interactive error handler => ask for an email
 contemplate adding various PDFs to appcache
@@ -88,7 +89,6 @@ Content-security-policy
 test offline (all features present with all demos?)
 	broken atm?
 do not require a court for staticnet (test by changing languages)
-support for lower NRW leagues (KL-S1-194)
 
 shift+A breaks demo mode!?
 CourtSpot: support order
@@ -101,8 +101,6 @@ court selector in demo mode
 
 xlsx scoresheet: add angled line (and improve text positioning)
 
-mail Ulf
-
 
 liveaw: HTTP mode
 liveaw: improve/test reconnecting
@@ -114,10 +112,6 @@ MVP liveaw
 	implement timeout
 	implement netstats gathering as well (re-add component)
 	implement authorization (including login via bup)
-
-mail Werner
-mail Markus
-mail Daniel / Peter
 
 eventsheet: do not show external links when no internet access
 eventsheet: more space for input, vary by field
@@ -161,9 +155,6 @@ optimize clicking on links (just show/display once)
 	avoid showing stuff in hide functions
 	maybe use history API instead of hash?
 
-mail Ulf
-mail Jörg Hupertz
-
 referee mode
 	p2p crypto handshake
 
@@ -173,12 +164,6 @@ redesign order as manual
 	drag&drop
 	use slightly different reds for each player
 liveaw: fall back to plain HTTP
-
-mail Michael Pütz
-mail btde
-mail Manuel
-mail Werner
-post bc
 
 improve liveaw
 	player ids
@@ -223,12 +208,10 @@ make error msg a form submission
 	fall back to email?
 fix with samsung browser
 	top buttons are all over the place
-check battery? (send via P2P)
 button sizes on Mac OSX Chrome
 do not recreate network buttons, update them instead
 show UI when reporting errors (top right, allow email address entering)
 
-extend displaymode (new views)
 import: hide login upon switching to staticnet?
 import: test from non-network
 import: test importing match-only stuff (should not active staticnet)
