@@ -4,7 +4,7 @@ var network = (function() {
 var networks = {};
 
 function get_real_netw() {
-	return networks.bldemo || networks.vdemo || networks.edemo || networks.btde || networks.courtspot || networks.liveaw;
+	return networks.nrwdemo || networks.bldemo || networks.vdemo || networks.edemo || networks.btde || networks.courtspot || networks.liveaw;
 }
 
 function get_netw() {
@@ -557,6 +557,8 @@ function ui_init(s, hash_query) {
 		networks.edemo = staticnet(null, 'div/edemo_' + s.lang + '.json');
 	} else if (hash_query.bldemo !== undefined) {
 		networks.bldemo = staticnet(null, 'div/bldemo.json');
+	} else if (hash_query.nrwdemo !== undefined) {
+		networks.nrwdemo = staticnet(null, 'div/nrwdemo.json');
 	} else if (hash_query.vdemo !== undefined) {
 		networks.vdemo = staticnet(null, 'div/vdemo_' + s.lang + '.json');
 	}

@@ -41,7 +41,7 @@
           ],
           "is_doubles": true,
           "counting": "3x21",
-          "match_id": "nrwdemo_HD1",
+          "match_id": "nrwdemo_HD1"
         },
         "network_score": [],
         "presses_json": "[]"
@@ -74,7 +74,7 @@
           ],
           "is_doubles": true,
           "counting": "3x21",
-          "match_id": "nrwdemo_HD2",
+          "match_id": "nrwdemo_HD2"
 
         },
         "network_score": [],
@@ -107,7 +107,7 @@
           ],
           "is_doubles": true,
           "counting": "3x21",
-          "match_id": "nrwdemo_DD",
+          "match_id": "nrwdemo_DD"
 
         },
         "network_score": [],
@@ -134,7 +134,7 @@
           ],
           "is_doubles": false,
           "counting": "3x21",
-          "match_id": "nrwdemo_HE1",
+          "match_id": "nrwdemo_HE1"
 
         },
         "network_score": [],
@@ -162,7 +162,7 @@
           ],
           "is_doubles": false,
           "counting": "3x21",
-          "match_id": "nrwdemo_HE2",
+          "match_id": "nrwdemo_HE2"
 
         },
         "network_score": [],
@@ -189,7 +189,7 @@
           ],
           "is_doubles": false,
           "counting": "3x21",
-          "match_id": "nrwdemo_HE3",
+          "match_id": "nrwdemo_HE3"
         },
         "network_score": [],
         "presses_json": "[]"
@@ -215,7 +215,7 @@
           ],
           "is_doubles": false,
           "counting": "3x21",
-          "match_id": "nrwdemo_DE",
+          "match_id": "nrwdemo_DE"
         },
         "network_score": [],
         "presses_json": "[]"
@@ -247,7 +247,7 @@
           ],
           "is_doubles": true,
           "counting": "3x21",
-          "match_id": "nrwdemo_GD",
+          "match_id": "nrwdemo_GD"
 
         },
         "network_score": [],
@@ -303,7 +303,7 @@
         {"gender": "f", "name": "Hannah Larbig", "ranking_team": 1, "ranking": 1},
         {"gender": "f", "name": "Karolina Dziwik", "ranking_team": 1, "ranking": 2},
         {"gender": "f", "name": "Heike Kress-Plaßmann", "ranking_team": 1, "ranking": 3},
-        {"gender": "f", "name": "Anne Nußbaum", "ranking_team": 1, "ranking": 4},
+        {"gender": "f", "name": "Anne Nußbaum", "ranking_team": 1, "ranking": 4}
       ]
     ],
     "teamsters": ["Uwe Kampen", "Ron Labuhn"],
