@@ -99,11 +99,14 @@ function annotate(s, event) {
 		});
 	}
 
-	event.matches.forEach(function(m) {
-		if (! m.setup.league_key) {
-			m.setup.league_key = network.league_key(event);
-		}
-	});
+	var league_key = network.league_key(event);
+	if (league_key) {
+		event.matches.forEach(function(m) {
+			if (! m.setup.league_key) {
+				m.setup.league_key = league_key;
+			}
+		});
+	}
 }
 
 return {
