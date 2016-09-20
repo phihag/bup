@@ -139,8 +139,6 @@ while ($row = $result->fetch_assoc()) {
 			$home_team,
 			$away_team,
 		],
-		'event_name' => $home_team['name'] . ' - ' . $away_team['name'],
-		'tournament_name' => $tournament_name,
 		'team_competition' => true,
 		'is_doubles' => $is_doubles,
 		'incomplete' => $incomplete,

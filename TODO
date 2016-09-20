@@ -1,6 +1,5 @@
 automatically set preferred_order
 order: deal with preferred_order unset
-retest bldemo
 
 Verbandsliga (GW Mülheim)
 	add nrwdemo (from bldemo)
@@ -10,6 +9,11 @@ Verbandsliga (GW Mülheim)
 	fill out eventsheet with helper function name
 set umpire name/service judge name/court id if != settings
 
+retest demos
+	edemo/de
+	edemo/en
+	vdemo/en
+	vdemo/de
 improve click
 	highlight with touchend
 		(filter: brightness(.2);)
@@ -22,6 +26,7 @@ xlsx style at center
 btde export should export all known matches!
 sent export should be able to imported
 generate static "Mannschaftsunterlagen" files from turnier.de
+simplify courtspot_bupabfrage (add check in eventutils.annotate)
 
 referee mode
 	via websockets

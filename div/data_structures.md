@@ -27,6 +27,8 @@ teamsters       2-element list (home/away). Name (as string) of the teamsters of
                 Depending on regulation, not necessarily (active) players.
                 Example: ["Heinz Kelzenberg", "Michael Fuchs"]
 courts          An array describing the current configuration of courts.
+event_name      Name of the event (will be present on scoresheet), e.g. "Finals".
+tournament_name Name of the overall tournament (will be present on scoresheet), e.g. "Bundesliga 2015/2016".
 
 
 court
@@ -131,12 +133,13 @@ teams*             An array (0: home team, 1: away team) of teams (see below).
 is_doubles*        Boolean key. false => singles, true => mixed/doubles
 counting*          Scoring system. Valid values are "3x21", "1x21", "2x21+11", "5x11_15", "1x11_15", "5x11/3"
 team_competition*  Are players competing for their teams(true) or for themselves(false)? Affects announcements
-event_name         Name of the event (will be present on scoresheet), e.g. "Finals"
-tournament_name    Name of the overall tournament (will be present on scoresheet), e.g. "Bundesliga 2015/2016"
 umpire_name        Name of the umpire assigned to this match (or the last one who touched it).
 service_judge_name Name of the service judge assigned to this match.
 court_id           ID of the court this match is played on.
-league_key         ID of the league the match is played in (see league_key of event objects).
+
+The following keys are copied over from the event (see there for documentation):
+
+league_key, tournament_name, event_name.
 
 team
 ====
