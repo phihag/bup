@@ -447,7 +447,7 @@ function parse_match(state, col_count) {
 				type: 'longtext',
 				row: 2 * press.team_id + press.player_id,
 				col: s.scoresheet_game.col_idx,
-				val: 'Disqualifiziert',
+				val: calc.press_char(s, press),
 				width: 4,
 			};
 			s.scoresheet_game.cells.push(dq_cell);

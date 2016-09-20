@@ -1,14 +1,15 @@
 nrw demo
 	generate results (and a timeline)
+	test eventsheet
+	eventsheet date is bananas in bldemo/nrwdemo
+	add helper function to generate league name
+	check league name in eventsheet
+	check league name in scoresheet
 retest and update (or delete) demos
 	edemo/de
 	edemo/en
 	vdemo/en
 	vdemo/de
-NRW-Ligen
-	eventsheet date is bananas in bldemo/nrwdemo
-	add helper function to generate league name
-disqualified in english scoresheet!
 set umpire name/service judge name/court id if != settings
 
 improve click

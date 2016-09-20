@@ -1008,6 +1008,16 @@ _describe('scoresheet generation', function() {
 			score: [0, 0],
 			width: 3,
 		});
+
+		cells = _scoresheet_cells(presses, DOUBLES_SETUP_EN);
+		_assert_cell(cells, {
+			table: 0,
+			col: 1,
+			row: 1,
+			type: 'longtext',
+			val: 'Disqualified',
+			width: 4,
+		});
 	});	
 
 	_it('correction (service court error)', function() {
