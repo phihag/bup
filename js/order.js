@@ -22,7 +22,8 @@ function calc_players(match) {
 function order_by_names(matches, match_names) {
 	return match_names.map(function(match_name) {
 		for (var i = 0;i < matches.length;i++) {
-			if (matches[i].setup.match_name === match_name) {
+			var msetup = matches[i].setup;
+			if ((msetup.eventsheet_id === match_name) || (msetup.match_name === match_name)) {
 				return matches[i];
 			}
 		}
@@ -200,7 +201,7 @@ function show() {
 }
 
 function preferred_by_league(league_key) {
-	if (eventsheet.NRW_RE.test(league_key) || (league_key === 'RLW-2016')) {
+	if (eventsheet.NRW2016_RE.test(league_key) || (league_key === 'RLW-2016')) {
 		// See §57.2 SpO
 		return [
 			'1.HD',
