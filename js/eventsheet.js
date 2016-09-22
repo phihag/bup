@@ -558,7 +558,7 @@ function render_svg(ev, es_key, ui8r, extra_data) {
 	body.appendChild(container[0]);
 
 	var props = {
-		title: ('Spielbericht ' + ev.event_name + (last_update ? (' ' + utils.date_str(last_update * 1000)) : '')),
+		title: ('Spielbericht ' + ev.event_name + (last_update ? (' ' + utils.date_str(last_update)) : '')),
 		subject: state._('Event Sheet'),
 		creator: 'bup (https://phihag.de/bup/)',
 	};
@@ -585,9 +585,9 @@ function render_svg(ev, es_key, ui8r, extra_data) {
 			});
 		});
 
-		var netscore_strs = netscore.map(function(nscore) {
+		var netscore_strs = netscore ? (netscore.map(function(nscore) {
 			return nscore[0] + ' - ' + nscore[1];
-		});
+		})) : [];
 		while (netscore_strs.length < 3) {
 			netscore_strs.push('');
 		}
@@ -640,7 +640,7 @@ function render_svg(ev, es_key, ui8r, extra_data) {
 	_svg_text(svg, 'winner', winner_str);
 
 	_svg_text(svg, 'starttime', extra_data.starttime);
-	_svg_text(svg, 'date', (last_update ? utils.date_str(last_update * 1000) : ''));
+	_svg_text(svg, 'date', (last_update ? utils.date_str(last_update) : ''));
 	_svg_text(svg, 'matchday', extra_data.matchday);
 	_svg_text(svg, 'home_team_name', ev.team_names[0]);
 	_svg_text(svg, 'away_team_name', ev.team_names[1]);
@@ -651,7 +651,7 @@ function render_svg(ev, es_key, ui8r, extra_data) {
 	_svg_text(svg, 'protest', extra_data.protest);
 	_svg_text(svg, 'umpires', extra_data.umpires);
 
-	var filename = 'Spielbericht ' + ev.event_name + (last_update ? (' ' + utils.date_str(last_update * 1000)) : '') + '.pdf';
+	var filename = 'Spielbericht ' + ev.event_name + (last_update ? (' ' + utils.date_str(last_update)) : '') + '.pdf';
 	svg2pdf.save([svg], props, filename);
 
 	container.remove();
