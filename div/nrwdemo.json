@@ -3,15 +3,18 @@
   "version": 1,
   "event": {
     "staticnet_message": "Demo NRW-Ligen (nur lokal)",
-    "courts": [{
-      "court_id": 1,
-      "description": "1 (links)",
-      "match_id": "nrwdemo_GD"
-    }, {
-      "court_id": 2,
-      "description": "2 (rechts)",
-      "match_id": "nrwdemo_DE"
-    }],
+    "courts": [
+      {
+        "court_id": 1,
+        "description": "1 (links)",
+        "match_id": "nrwdemo_GD"
+      },
+      {
+        "court_id": 2,
+        "description": "2 (rechts)",
+        "match_id": "nrwdemo_DE"
+      }
+    ],
     "matches": [
       {
         "setup": {
@@ -43,8 +46,21 @@
           "counting": "3x21",
           "match_id": "nrwdemo_HD1"
         },
-        "network_score": [],
-        "presses_json": "[]"
+        "network_score": [
+          [
+            19,
+            21
+          ],
+          [
+            21,
+            19
+          ],
+          [
+            21,
+            15
+          ]
+        ],
+        "presses_json": "[{\"timestamp\":1474725602535,\"type\":\"note\",\"val\":\"Dies ist ein fiktives (zufällig generiertes) Spiel\",\"court_id\":1},{\"timestamp\":1474725602535,\"type\":\"pick_side\",\"team1_left\":true},{\"timestamp\":1474725604535,\"type\":\"pick_server\",\"team_id\":1,\"player_id\":0},{\"timestamp\":1474725606535,\"type\":\"pick_receiver\",\"team_id\":0,\"player_id\":0},{\"timestamp\":1474725607858,\"type\":\"shuttle\"},{\"timestamp\":1474725608459,\"type\":\"shuttle\"},{\"timestamp\":1474725728459,\"type\":\"shuttle\"},{\"timestamp\":1474725738999,\"type\":\"love-all\"},{\"timestamp\":1474725759231,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474725765233,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474725803157,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474725823404,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474725842330,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474725892467,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474725926907,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474725966544,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474725998280,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474726050123,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474726058118,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474726089408,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474726091225,\"type\":\"shuttle\"},{\"timestamp\":1474726103667,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474726161673,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474726182079,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474726221565,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474726246656,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474726273582,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474726274915,\"type\":\"shuttle\"},{\"timestamp\":1474726312543,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474726320792,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474726328913,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474726369223,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474726398412,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474726438852,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474726440304,\"type\":\"shuttle\"},{\"timestamp\":1474726450687,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474726452117,\"type\":\"shuttle\"},{\"timestamp\":1474726465105,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474726503289,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474726549870,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474726587234,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474726620478,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474726634289,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474726681358,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474726707249,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474726743717,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474726801065,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474726859417,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474726911486,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474726938029,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474726986550,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474727000875,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474727002102,\"type\":\"postgame-confirm\"},{\"timestamp\":1474727124748,\"type\":\"pick_server\",\"team_id\":1,\"player_id\":0},{\"timestamp\":1474727126748,\"type\":\"pick_receiver\",\"team_id\":0,\"player_id\":1},{\"timestamp\":1474727141734,\"type\":\"love-all\"},{\"timestamp\":1474727146620,\"type\":\"shuttle\"},{\"timestamp\":1474727166440,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474727180427,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474727216397,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474727222808,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474727247974,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474727249367,\"type\":\"shuttle\"},{\"timestamp\":1474727271138,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474727272415,\"type\":\"shuttle\"},{\"timestamp\":1474727331404,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474727377066,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474727414565,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474727458460,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474727468358,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474727516914,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474727523680,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474727558737,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474727565327,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474727618080,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474727626559,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474727657365,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474727716274,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474727755242,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474727801289,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474727848725,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474727884451,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474727894940,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474727954686,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474728014074,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474728050151,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474728067748,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474728103648,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474728111392,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474728166233,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474728210431,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474728268863,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474728270204,\"type\":\"shuttle\"},{\"timestamp\":1474728325371,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474728357674,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474728409574,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474728445141,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474728495043,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474728554384,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474728582862,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474728584223,\"type\":\"postgame-confirm\"},{\"timestamp\":1474728709296,\"type\":\"pick_server\",\"team_id\":0,\"player_id\":0},{\"timestamp\":1474728711296,\"type\":\"pick_receiver\",\"team_id\":1,\"player_id\":0},{\"timestamp\":1474728727257,\"type\":\"love-all\"},{\"timestamp\":1474728748173,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474728754242,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474728813540,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474728836338,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474728892437,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474728936399,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474728950270,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474728981844,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474729009879,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729060860,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729088490,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729131681,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474729150744,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729169477,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474729184273,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474729197994,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729233031,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474729292117,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729301659,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729350746,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729352513,\"type\":\"shuttle\"},{\"timestamp\":1474729393313,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729432867,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729433942,\"type\":\"shuttle\"},{\"timestamp\":1474729441726,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474729443646,\"type\":\"shuttle\"},{\"timestamp\":1474729477080,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474729510183,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474729539739,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474729596905,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474729610775,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729650135,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729651518,\"type\":\"shuttle\"},{\"timestamp\":1474729679631,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729712155,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474729765394,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474729796055,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474729814817,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474729860327,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729875940,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474729888354,\"type\":\"postmatch-confirm\"}]"
       },
       {
         "setup": {
@@ -75,10 +91,22 @@
           "is_doubles": true,
           "counting": "3x21",
           "match_id": "nrwdemo_HD2"
-
         },
-        "network_score": [],
-        "presses_json": "[]"
+        "network_score": [
+          [
+            21,
+            13
+          ],
+          [
+            17,
+            21
+          ],
+          [
+            21,
+            14
+          ]
+        ],
+        "presses_json": "[{\"timestamp\":1474725606599,\"type\":\"note\",\"val\":\"Dies ist ein fiktives (zufällig generiertes) Spiel\",\"court_id\":2},{\"timestamp\":1474725606599,\"type\":\"pick_side\",\"team1_left\":true},{\"timestamp\":1474725608599,\"type\":\"pick_server\",\"team_id\":1,\"player_id\":1},{\"timestamp\":1474725610599,\"type\":\"pick_receiver\",\"team_id\":0,\"player_id\":1},{\"timestamp\":1474725611729,\"type\":\"shuttle\"},{\"timestamp\":1474725612671,\"type\":\"shuttle\"},{\"timestamp\":1474725732671,\"type\":\"shuttle\"},{\"timestamp\":1474725743399,\"type\":\"love-all\"},{\"timestamp\":1474725770111,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474725793287,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474725795074,\"type\":\"shuttle\"},{\"timestamp\":1474725805293,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474725835381,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474725884213,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474725904173,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474725924887,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474725978245,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474725980069,\"type\":\"shuttle\"},{\"timestamp\":1474726038543,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474726068729,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474726077537,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474726130565,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474726187400,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474726213196,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474726235545,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474726262474,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474726306594,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474726358844,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474726405022,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474726416999,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474726446227,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474726475293,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474726533142,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474726562863,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474726564784,\"type\":\"shuttle\"},{\"timestamp\":1474726593126,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474726607059,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474726658239,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474726706817,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474726752157,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474726802826,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474726822127,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474726843914,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474726902829,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474726941642,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474726944406,\"type\":\"postgame-confirm\"},{\"timestamp\":1474727067732,\"type\":\"pick_server\",\"team_id\":0,\"player_id\":1},{\"timestamp\":1474727069732,\"type\":\"pick_receiver\",\"team_id\":1,\"player_id\":0},{\"timestamp\":1474727086332,\"type\":\"love-all\"},{\"timestamp\":1474727138630,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474727150873,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474727187167,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474727246690,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474727282961,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474727335790,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474727381648,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474727416382,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474727458695,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474727500484,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474727539133,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474727551143,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474727552289,\"type\":\"shuttle\"},{\"timestamp\":1474727602752,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474727651053,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474727682474,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474727683516,\"type\":\"shuttle\"},{\"timestamp\":1474727716383,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474727717949,\"type\":\"shuttle\"},{\"timestamp\":1474727771351,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474727816819,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474727833179,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474727892494,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474727937139,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474727988337,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474728010745,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474728028490,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474728047342,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474728094042,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474728109646,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474728135489,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474728157501,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474728216515,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474728226418,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474728247723,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474728249689,\"type\":\"shuttle\"},{\"timestamp\":1474728308108,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474728324989,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474728359148,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474728397457,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474728403796,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474728459869,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474728460918,\"type\":\"postgame-confirm\"},{\"timestamp\":1474728584813,\"type\":\"pick_server\",\"team_id\":1,\"player_id\":0},{\"timestamp\":1474728586813,\"type\":\"pick_receiver\",\"team_id\":0,\"player_id\":1},{\"timestamp\":1474728601724,\"type\":\"love-all\"},{\"timestamp\":1474728624095,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474728680594,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474728699650,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474728749525,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474728788857,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474728831260,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474728859771,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474728901554,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474728917610,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474728967207,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729002101,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729003591,\"type\":\"shuttle\"},{\"timestamp\":1474729016227,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729065672,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729107877,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729139259,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729181479,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729202214,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474729229947,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729247812,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474729285387,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729307366,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474729335859,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474729363162,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474729414986,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474729448703,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474729478079,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729506262,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729514680,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729543978,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729593121,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474729604499,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729624730,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729626066,\"type\":\"shuttle\"},{\"timestamp\":1474729655894,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729664745,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474729697508,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474729709249,\"type\":\"postmatch-confirm\"}]"
       },
       {
         "setup": {
@@ -108,10 +136,22 @@
           "is_doubles": true,
           "counting": "3x21",
           "match_id": "nrwdemo_DD"
-
         },
-        "network_score": [],
-        "presses_json": "[]"
+        "network_score": [
+          [
+            21,
+            17
+          ],
+          [
+            18,
+            21
+          ],
+          [
+            19,
+            21
+          ]
+        ],
+        "presses_json": "[{\"timestamp\":1474729746322,\"type\":\"note\",\"val\":\"Dies ist ein fiktives (zufällig generiertes) Spiel\",\"court_id\":2},{\"timestamp\":1474729746322,\"type\":\"pick_side\",\"team1_left\":true},{\"timestamp\":1474729748322,\"type\":\"pick_server\",\"team_id\":0,\"player_id\":1},{\"timestamp\":1474729750322,\"type\":\"pick_receiver\",\"team_id\":1,\"player_id\":1},{\"timestamp\":1474729751834,\"type\":\"shuttle\"},{\"timestamp\":1474729752290,\"type\":\"shuttle\"},{\"timestamp\":1474729872290,\"type\":\"shuttle\"},{\"timestamp\":1474729885543,\"type\":\"love-all\"},{\"timestamp\":1474729927781,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474729966208,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474729974717,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474730027900,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730038983,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730089314,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474730117648,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730127860,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474730168465,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474730188308,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474730227993,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474730254843,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730278006,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730307984,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730330196,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730352287,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730382445,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730419560,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474730440059,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730497294,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474730557008,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474730610638,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730649041,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730689042,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474730697768,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474730699459,\"type\":\"shuttle\"},{\"timestamp\":1474730718096,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730751659,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474730797908,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730830294,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730863014,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730894175,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474730937324,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474730953730,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731004142,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474731031479,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731041506,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474731046828,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474731067245,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474731069485,\"type\":\"postgame-confirm\"},{\"timestamp\":1474731194051,\"type\":\"pick_server\",\"team_id\":0,\"player_id\":0},{\"timestamp\":1474731196051,\"type\":\"pick_receiver\",\"team_id\":1,\"player_id\":1},{\"timestamp\":1474731212005,\"type\":\"love-all\"},{\"timestamp\":1474731246039,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474731298967,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731343499,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731351907,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731357672,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474731411834,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731412920,\"type\":\"shuttle\"},{\"timestamp\":1474731447010,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731448610,\"type\":\"shuttle\"},{\"timestamp\":1474731459473,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474731476028,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731527368,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474731565103,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474731566395,\"type\":\"shuttle\"},{\"timestamp\":1474731585957,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474731606836,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731626075,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731659965,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474731667843,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474731698933,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474731708520,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731721542,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731722604,\"type\":\"shuttle\"},{\"timestamp\":1474731732722,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731734073,\"type\":\"shuttle\"},{\"timestamp\":1474731788069,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474731789946,\"type\":\"shuttle\"},{\"timestamp\":1474731848274,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731867975,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731898806,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731930110,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474731964683,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474731966291,\"type\":\"shuttle\"},{\"timestamp\":1474732014149,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474732044412,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474732101011,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474732148370,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474732185195,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474732227110,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474732281969,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474732291431,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474732349337,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474732358689,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474732360288,\"type\":\"shuttle\"},{\"timestamp\":1474732414040,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474732473807,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474732491196,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474732492905,\"type\":\"postgame-confirm\"},{\"timestamp\":1474732618922,\"type\":\"pick_server\",\"team_id\":1,\"player_id\":0},{\"timestamp\":1474732620922,\"type\":\"pick_receiver\",\"team_id\":0,\"player_id\":1},{\"timestamp\":1474732631816,\"type\":\"love-all\"},{\"timestamp\":1474732666599,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474732697048,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474732705401,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474732759605,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474732784588,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474732801829,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474732803293,\"type\":\"shuttle\"},{\"timestamp\":1474732835503,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474732861266,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474732866725,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474732892338,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474732932689,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474732983287,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474733018246,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474733034905,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733036835,\"type\":\"shuttle\"},{\"timestamp\":1474733081030,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474733101413,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474733102497,\"type\":\"shuttle\"},{\"timestamp\":1474733138997,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733140621,\"type\":\"shuttle\"},{\"timestamp\":1474733171512,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733198479,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474733226636,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733255239,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733292092,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474733310711,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733349236,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733372181,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474733421507,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733437332,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733476234,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733524241,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474733559386,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733601440,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474733632055,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474733676503,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733701169,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474733760197,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733803638,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474733840187,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733857360,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474733858622,\"type\":\"shuttle\"},{\"timestamp\":1474733878180,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733909865,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733921765,\"type\":\"postmatch-confirm\"}]"
       },
       {
         "setup": {
@@ -135,12 +175,19 @@
           "is_doubles": false,
           "counting": "3x21",
           "match_id": "nrwdemo_HE1"
-
         },
-        "network_score": [],
-        "presses_json": "[]"
+        "network_score": [
+          [
+            12,
+            21
+          ],
+          [
+            17,
+            21
+          ]
+        ],
+        "presses_json": "[{\"timestamp\":1474734090462,\"type\":\"note\",\"val\":\"Dies ist ein fiktives (zufällig generiertes) Spiel\",\"court_id\":1},{\"timestamp\":1474734090462,\"type\":\"pick_side\",\"team1_left\":false},{\"timestamp\":1474734092462,\"type\":\"pick_server\",\"team_id\":0,\"player_id\":0},{\"timestamp\":1474734094398,\"type\":\"shuttle\"},{\"timestamp\":1474734095023,\"type\":\"shuttle\"},{\"timestamp\":1474734215023,\"type\":\"shuttle\"},{\"timestamp\":1474734226116,\"type\":\"love-all\"},{\"timestamp\":1474734283197,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734288504,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734332659,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734376814,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474734378710,\"type\":\"shuttle\"},{\"timestamp\":1474734390152,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474734428512,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474734468317,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734489518,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734543667,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734578788,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734610544,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734664687,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734694621,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734746464,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734773036,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734797957,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474734819868,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734860921,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734903673,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734905449,\"type\":\"shuttle\"},{\"timestamp\":1474734932981,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734946267,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735004179,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735056714,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735115833,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474735166730,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735222613,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735224424,\"type\":\"shuttle\"},{\"timestamp\":1474735256658,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474735258245,\"type\":\"shuttle\"},{\"timestamp\":1474735287750,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474735302637,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474735304338,\"type\":\"shuttle\"},{\"timestamp\":1474735347533,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735401307,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735441978,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735486637,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474735489442,\"type\":\"postgame-confirm\"},{\"timestamp\":1474735625932,\"type\":\"love-all\"},{\"timestamp\":1474735629701,\"type\":\"shuttle\"},{\"timestamp\":1474735659527,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474735674713,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474735691567,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735730539,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735757580,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735772560,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735778009,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735779740,\"type\":\"shuttle\"},{\"timestamp\":1474735823532,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474735847377,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474735902613,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735927197,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735958403,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735997552,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474736024401,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474736026134,\"type\":\"shuttle\"},{\"timestamp\":1474736079364,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474736110153,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474736156136,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474736165243,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474736209437,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474736224202,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474736235911,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474736292129,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474736307712,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474736345182,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474736374144,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474736425813,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474736450240,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474736479365,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474736510826,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474736527385,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474736529272,\"type\":\"shuttle\"},{\"timestamp\":1474736568540,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474736580538,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474736603231,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474736614831,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474736666301,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474736671310,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474736685039,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474736734583,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474736746003,\"type\":\"postmatch-confirm\"}]"
       },
-
       {
         "setup": {
           "match_name": "2.HE",
@@ -163,10 +210,18 @@
           "is_doubles": false,
           "counting": "3x21",
           "match_id": "nrwdemo_HE2"
-
         },
-        "network_score": [],
-        "presses_json": "[]"
+        "network_score": [
+          [
+            21,
+            17
+          ],
+          [
+            21,
+            19
+          ]
+        ],
+        "presses_json": "[{\"timestamp\":1474733969564,\"type\":\"note\",\"val\":\"Dies ist ein fiktives (zufällig generiertes) Spiel\",\"court_id\":2},{\"timestamp\":1474733969564,\"type\":\"pick_side\",\"team1_left\":false},{\"timestamp\":1474733971564,\"type\":\"pick_server\",\"team_id\":1,\"player_id\":0},{\"timestamp\":1474733972819,\"type\":\"shuttle\"},{\"timestamp\":1474733973593,\"type\":\"shuttle\"},{\"timestamp\":1474734093593,\"type\":\"shuttle\"},{\"timestamp\":1474734103156,\"type\":\"love-all\"},{\"timestamp\":1474734112545,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474734164088,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734170413,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734184076,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734241129,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734262613,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474734279193,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734290289,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734342722,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474734353933,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734374077,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734405486,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474734420883,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474734425944,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474734482345,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734540232,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474734583014,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474734643014,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474734690831,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734746120,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734782795,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474734783928,\"type\":\"shuttle\"},{\"timestamp\":1474734803842,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474734837330,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734872492,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474734885044,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474734907030,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474734908615,\"type\":\"shuttle\"},{\"timestamp\":1474734914464,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474734946575,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734985866,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474734993203,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735003357,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474735032615,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474735043764,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735052652,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474735061917,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735110990,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735161835,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474735193835,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735194867,\"type\":\"postgame-confirm\"},{\"timestamp\":1474735331708,\"type\":\"love-all\"},{\"timestamp\":1474735377920,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474735420162,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474735436861,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735456477,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735473290,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474735530198,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474735548108,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735564441,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735614846,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735616069,\"type\":\"shuttle\"},{\"timestamp\":1474735655949,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735657530,\"type\":\"shuttle\"},{\"timestamp\":1474735665292,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474735699651,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474735745243,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474735787297,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735833299,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735862704,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474735892920,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735893976,\"type\":\"shuttle\"},{\"timestamp\":1474735911227,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474735923428,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735957842,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474735995063,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474735996073,\"type\":\"shuttle\"},{\"timestamp\":1474736027848,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474736037001,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474736086165,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474736097241,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474736134250,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474736182499,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474736234407,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474736279804,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474736281133,\"type\":\"shuttle\"},{\"timestamp\":1474736310686,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474736345305,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474736356889,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474736377729,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474736419893,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474736455085,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474736501850,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474736561411,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474736594639,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474736652933,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474736673142,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474736682078,\"type\":\"postmatch-confirm\"}]"
       },
       {
         "setup": {
@@ -191,8 +246,21 @@
           "counting": "3x21",
           "match_id": "nrwdemo_HE3"
         },
-        "network_score": [],
-        "presses_json": "[]"
+        "network_score": [
+          [
+            17,
+            21
+          ],
+          [
+            21,
+            16
+          ],
+          [
+            18,
+            21
+          ]
+        ],
+        "presses_json": "[{\"timestamp\":1474729948326,\"type\":\"note\",\"val\":\"Dies ist ein fiktives (zufällig generiertes) Spiel\",\"court_id\":1},{\"timestamp\":1474729948326,\"type\":\"pick_side\",\"team1_left\":true},{\"timestamp\":1474729950326,\"type\":\"pick_server\",\"team_id\":1,\"player_id\":0},{\"timestamp\":1474729951995,\"type\":\"shuttle\"},{\"timestamp\":1474729952946,\"type\":\"shuttle\"},{\"timestamp\":1474730072946,\"type\":\"shuttle\"},{\"timestamp\":1474730084835,\"type\":\"love-all\"},{\"timestamp\":1474730115672,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730127295,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730151263,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474730173293,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474730174776,\"type\":\"shuttle\"},{\"timestamp\":1474730220825,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474730280596,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474730300407,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474730302013,\"type\":\"shuttle\"},{\"timestamp\":1474730339002,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474730375601,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730423264,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730453161,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730505990,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474730524212,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730583419,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474730604087,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730656735,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474730662001,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730672033,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730712085,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730747388,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474730756484,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730780226,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730803223,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730830031,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730863157,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474730882714,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474730907098,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730914274,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474730915597,\"type\":\"shuttle\"},{\"timestamp\":1474730963098,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474730987361,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731016703,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474731063112,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731091747,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731109302,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731111090,\"type\":\"shuttle\"},{\"timestamp\":1474731118575,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731135670,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731175154,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731216707,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731219370,\"type\":\"postgame-confirm\"},{\"timestamp\":1474731359124,\"type\":\"love-all\"},{\"timestamp\":1474731369968,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731389395,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474731411645,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731462522,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474731472614,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474731509375,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474731521232,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474731522366,\"type\":\"shuttle\"},{\"timestamp\":1474731563961,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731583770,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731623184,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731642867,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731664435,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731721439,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474731723076,\"type\":\"shuttle\"},{\"timestamp\":1474731779584,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731825841,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731874616,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474731875993,\"type\":\"shuttle\"},{\"timestamp\":1474731893887,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474731950732,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474731972411,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474731980151,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474732012965,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474732036413,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474732046317,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474732086219,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474732099988,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474732151955,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474732183725,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474732212789,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474732214599,\"type\":\"shuttle\"},{\"timestamp\":1474732242563,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474732276609,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474732332175,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474732368773,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474732375383,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474732390912,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474732437577,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474732493722,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474732514883,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474732516922,\"type\":\"postgame-confirm\"},{\"timestamp\":1474732656607,\"type\":\"love-all\"},{\"timestamp\":1474732681657,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474732711228,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474732757871,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474732806827,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474732839738,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474732857896,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474732909872,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474732937630,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474732983052,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474733036590,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733038429,\"type\":\"shuttle\"},{\"timestamp\":1474733080598,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474733134360,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474733163428,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733221986,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733223641,\"type\":\"shuttle\"},{\"timestamp\":1474733254285,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474733267369,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474733275976,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733331132,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733381711,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733416494,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474733418350,\"type\":\"shuttle\"},{\"timestamp\":1474733427621,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474733462354,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474733478899,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733524864,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733561467,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474733568108,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733588928,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733627615,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733675927,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733722043,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733741883,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733788829,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474733841440,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733886388,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474733917106,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733970188,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474733980395,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474734038621,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734063553,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474734072194,\"type\":\"postmatch-confirm\"}]"
       },
       {
         "setup": {
@@ -217,8 +285,17 @@
           "counting": "3x21",
           "match_id": "nrwdemo_DE"
         },
-        "network_score": [],
-        "presses_json": "[]"
+        "network_score": [
+          [
+            13,
+            21
+          ],
+          [
+            22,
+            24
+          ]
+        ],
+        "presses_json": "[{\"timestamp\":1474736694056,\"type\":\"note\",\"val\":\"Dies ist ein fiktives (zufällig generiertes) Spiel\",\"court_id\":2},{\"timestamp\":1474736694056,\"type\":\"pick_side\",\"team1_left\":false},{\"timestamp\":1474736696056,\"type\":\"pick_server\",\"team_id\":1,\"player_id\":0},{\"timestamp\":1474736697521,\"type\":\"shuttle\"},{\"timestamp\":1474736698006,\"type\":\"shuttle\"},{\"timestamp\":1474736818006,\"type\":\"shuttle\"},{\"timestamp\":1474736827328,\"type\":\"love-all\"},{\"timestamp\":1474736832347,\"type\":\"shuttle\"},{\"timestamp\":1474736861652,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474736863293,\"type\":\"shuttle\"},{\"timestamp\":1474736909235,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474736939634,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474736941430,\"type\":\"shuttle\"},{\"timestamp\":1474736959451,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737017123,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737055306,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737060776,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737116688,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737127661,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737149551,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737183384,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737223953,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737252388,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737288565,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737301411,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737318916,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737348350,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737350129,\"type\":\"shuttle\"},{\"timestamp\":1474737388884,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737409416,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737443097,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737485014,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737531399,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737580567,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737602443,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737622322,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737669588,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737687196,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737709001,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737714773,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737729556,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737735145,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737736785,\"type\":\"shuttle\"},{\"timestamp\":1474737775096,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737795831,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737817484,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737819064,\"type\":\"postgame-confirm\"},{\"timestamp\":1474737950565,\"type\":\"love-all\"},{\"timestamp\":1474737970941,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737971961,\"type\":\"shuttle\"},{\"timestamp\":1474738015034,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474738051324,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738059230,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474738111399,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738113311,\"type\":\"shuttle\"},{\"timestamp\":1474738133962,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474738141359,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738198594,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738225093,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474738231037,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474738262264,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738306720,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474738318555,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474738320029,\"type\":\"shuttle\"},{\"timestamp\":1474738343659,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474738345403,\"type\":\"shuttle\"},{\"timestamp\":1474738385616,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474738439295,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738447740,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738477581,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474738502485,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738510543,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474738546840,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474738596618,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474738606107,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474738644345,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738690230,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738735861,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738756082,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738798367,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738811567,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738846999,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474738867718,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474738899436,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738938403,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738940238,\"type\":\"shuttle\"},{\"timestamp\":1474738988473,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474739018730,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474739035765,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474739081459,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474739128810,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474739148361,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474739168846,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474739193667,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474739200531,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474739213342,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474739265043,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474739290950,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474739328021,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474739337061,\"type\":\"postmatch-confirm\"}]"
       },
       {
         "setup": {
@@ -248,65 +325,266 @@
           "is_doubles": true,
           "counting": "3x21",
           "match_id": "nrwdemo_GD"
-
         },
-        "network_score": [],
-        "presses_json": "[]"
+        "network_score": [
+          [
+            20,
+            22
+          ],
+          [
+            21,
+            15
+          ],
+          [
+            16,
+            21
+          ]
+        ],
+        "presses_json": "[{\"timestamp\":1474736770105,\"type\":\"note\",\"val\":\"Dies ist ein fiktives (zufällig generiertes) Spiel\",\"court_id\":1},{\"timestamp\":1474736770105,\"type\":\"pick_side\",\"team1_left\":true},{\"timestamp\":1474736772105,\"type\":\"pick_server\",\"team_id\":0,\"player_id\":1},{\"timestamp\":1474736774105,\"type\":\"pick_receiver\",\"team_id\":1,\"player_id\":0},{\"timestamp\":1474736776101,\"type\":\"shuttle\"},{\"timestamp\":1474736776734,\"type\":\"shuttle\"},{\"timestamp\":1474736896734,\"type\":\"shuttle\"},{\"timestamp\":1474736909446,\"type\":\"love-all\"},{\"timestamp\":1474736913468,\"type\":\"shuttle\"},{\"timestamp\":1474736940447,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474736978356,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737021683,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737063893,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737069663,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737118980,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737127783,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737158631,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737197950,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737199810,\"type\":\"shuttle\"},{\"timestamp\":1474737220933,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737236098,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737289933,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737296667,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737315738,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737374150,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737395917,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737419777,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737421248,\"type\":\"shuttle\"},{\"timestamp\":1474737438464,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737447709,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737502807,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737544577,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737546196,\"type\":\"shuttle\"},{\"timestamp\":1474737599367,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737601117,\"type\":\"shuttle\"},{\"timestamp\":1474737623034,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737649945,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737657665,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737691312,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737692414,\"type\":\"shuttle\"},{\"timestamp\":1474737705052,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737721137,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737740194,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737780290,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737806299,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737825480,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737874128,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737882538,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474737931367,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737954022,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474737994662,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474738042216,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738101158,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738103098,\"type\":\"shuttle\"},{\"timestamp\":1474738116746,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474738144428,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738172175,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738173420,\"type\":\"postgame-confirm\"},{\"timestamp\":1474738296580,\"type\":\"pick_server\",\"team_id\":1,\"player_id\":1},{\"timestamp\":1474738298580,\"type\":\"pick_receiver\",\"team_id\":0,\"player_id\":0},{\"timestamp\":1474738311833,\"type\":\"love-all\"},{\"timestamp\":1474738315419,\"type\":\"shuttle\"},{\"timestamp\":1474738327324,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474738347310,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738406190,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738418177,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738419490,\"type\":\"shuttle\"},{\"timestamp\":1474738425134,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738459368,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474738487331,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474738543491,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738575298,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738577246,\"type\":\"shuttle\"},{\"timestamp\":1474738586454,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474738633667,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474738674236,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738711338,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474738752579,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474738802069,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474738815480,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738863251,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474738864844,\"type\":\"shuttle\"},{\"timestamp\":1474738875511,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738886191,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738887304,\"type\":\"shuttle\"},{\"timestamp\":1474738906159,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738948962,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474738976837,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474739017285,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474739033430,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474739041766,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474739043287,\"type\":\"shuttle\"},{\"timestamp\":1474739068211,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474739119641,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474739163116,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474739182869,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474739242302,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474739299061,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474739354120,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474739392710,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474739450493,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474739491448,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474739545400,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474739547056,\"type\":\"postgame-confirm\"},{\"timestamp\":1474739670499,\"type\":\"pick_server\",\"team_id\":0,\"player_id\":1},{\"timestamp\":1474739672499,\"type\":\"pick_receiver\",\"team_id\":1,\"player_id\":0},{\"timestamp\":1474739687393,\"type\":\"love-all\"},{\"timestamp\":1474739733059,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474739778420,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474739831644,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474739837265,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474739843583,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474739854644,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474739898749,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474739936937,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474739960182,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474739996998,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474740045713,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474740074054,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474740085505,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474740144256,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474740145969,\"type\":\"shuttle\"},{\"timestamp\":1474740151212,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474740161075,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474740197555,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474740225599,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474740273339,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474740303772,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474740348965,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474740364858,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474740375846,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474740377331,\"type\":\"shuttle\"},{\"timestamp\":1474740410747,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474740446339,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474740447403,\"type\":\"shuttle\"},{\"timestamp\":1474740483627,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474740537320,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474740578809,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474740601700,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474740627098,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474740685543,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474740703058,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474740704635,\"type\":\"shuttle\"},{\"timestamp\":1474740743003,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474740765658,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474740808668,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474740832913,\"type\":\"score\",\"side\":\"right\"},{\"timestamp\":1474740838273,\"type\":\"score\",\"side\":\"left\"},{\"timestamp\":1474740847759,\"type\":\"postmatch-confirm\"}]"
       }
     ],
     "id": "vdemo",
     "event_name": "SG Düsseldorf-Unterrath 5 - VC Phönix Düsseldorf 1 (Demo)",
     "tournament_name": "Demo NRW-Ligen",
-    "team_names": ["SG Düsseldorf-Unterrath 5", "VC Phönix Düsseldorf 1"],
+    "team_names": [
+      "SG Düsseldorf-Unterrath 5",
+      "VC Phönix Düsseldorf 1"
+    ],
     "location": "Franz-Rennefeld-Weg 15, Düsseldorf",
     "protest": "",
-    "starttime": "14:00",
+    "starttime": "16:00",
     "matchday": "1",
     "notes": "Fiktive Ergebnisse (automatisch generiert)",
-    "backup_players": [[], []],
+    "backup_players": [
+      [],
+      []
+    ],
     "all_players": [
       [
-        {"gender": "m", "name": "Philipp Hagemeister", "ranking_team": 5, "ranking": 28},
-        {"gender": "m", "name": "Marcel Bach", "ranking_team": 5, "ranking": 29},
-        {"gender": "m", "name": "Michael Corsten", "ranking_team": 5, "ranking": 30},
-        {"gender": "m", "name": "Thorsten Fuchs", "ranking_team": 5, "ranking": 31},
-        {"gender": "m", "name": "Dennis Daniels", "ranking_team": 5, "ranking": 32},
-        {"gender": "m", "name": "Anand Sant", "ranking_team": 5, "ranking": 33},
-        {"gender": "m", "name": "Surjahadi Hidajat", "ranking_team": 5, "ranking": 34},
-        {"gender": "m", "name": "Uwe Kampen", "ranking_team": 5, "ranking": 35},
-        {"gender": "m", "name": "Albrecht Hindemith", "ranking_team": 5, "ranking": 36},
-        {"gender": "m", "name": "Attila Horvath", "ranking_team": 5, "ranking": 37},
-        {"gender": "m", "name": "Marvin Gregarek", "ranking_team": 5, "ranking": 38},
-        {"gender": "m", "name": "Lennert Graf", "ranking_team": 5, "ranking": 39},
-        {"gender": "m", "name": "Martin Bohnen", "ranking_team": 5, "ranking": 40},
-        {"gender": "f", "name": "Nicole Beller", "ranking_team": 5, "ranking": 13},
-        {"gender": "f", "name": "Marie Becker", "ranking_team": 5, "ranking": 14},
-        {"gender": "f", "name": "Janine Hagen", "ranking_team": 5, "ranking": 15},
-        {"gender": "f", "name": "Dinao Simao-Schlicker,", "ranking_team": 5, "ranking": 16},
-        {"gender": "f", "name": "Astrid Schafhausen", "ranking_team": 5, "ranking": 17},
-        {"gender": "f", "name": "Andrea Horvath", "ranking_team": 5, "ranking": 18},
-        {"gender": "f", "name": "Marlen Garten", "ranking_team": 5, "ranking": 19},
-        {"gender": "f", "name": "Anne Liang", "ranking_team": 5, "ranking": 20},
-        {"gender": "f", "name": "Franca Panczek", "ranking_team": 5, "ranking": 21}
+        {
+          "gender": "m",
+          "name": "Philipp Hagemeister",
+          "ranking_team": 5,
+          "ranking": 28
+        },
+        {
+          "gender": "m",
+          "name": "Marcel Bach",
+          "ranking_team": 5,
+          "ranking": 29
+        },
+        {
+          "gender": "m",
+          "name": "Michael Corsten",
+          "ranking_team": 5,
+          "ranking": 30
+        },
+        {
+          "gender": "m",
+          "name": "Thorsten Fuchs",
+          "ranking_team": 5,
+          "ranking": 31
+        },
+        {
+          "gender": "m",
+          "name": "Dennis Daniels",
+          "ranking_team": 5,
+          "ranking": 32
+        },
+        {
+          "gender": "m",
+          "name": "Anand Sant",
+          "ranking_team": 5,
+          "ranking": 33
+        },
+        {
+          "gender": "m",
+          "name": "Surjahadi Hidajat",
+          "ranking_team": 5,
+          "ranking": 34
+        },
+        {
+          "gender": "m",
+          "name": "Uwe Kampen",
+          "ranking_team": 5,
+          "ranking": 35
+        },
+        {
+          "gender": "m",
+          "name": "Albrecht Hindemith",
+          "ranking_team": 5,
+          "ranking": 36
+        },
+        {
+          "gender": "m",
+          "name": "Attila Horvath",
+          "ranking_team": 5,
+          "ranking": 37
+        },
+        {
+          "gender": "m",
+          "name": "Marvin Gregarek",
+          "ranking_team": 5,
+          "ranking": 38
+        },
+        {
+          "gender": "m",
+          "name": "Lennert Graf",
+          "ranking_team": 5,
+          "ranking": 39
+        },
+        {
+          "gender": "m",
+          "name": "Martin Bohnen",
+          "ranking_team": 5,
+          "ranking": 40
+        },
+        {
+          "gender": "f",
+          "name": "Nicole Beller",
+          "ranking_team": 5,
+          "ranking": 13
+        },
+        {
+          "gender": "f",
+          "name": "Marie Becker",
+          "ranking_team": 5,
+          "ranking": 14
+        },
+        {
+          "gender": "f",
+          "name": "Janine Hagen",
+          "ranking_team": 5,
+          "ranking": 15
+        },
+        {
+          "gender": "f",
+          "name": "Dinao Simao-Schlicker,",
+          "ranking_team": 5,
+          "ranking": 16
+        },
+        {
+          "gender": "f",
+          "name": "Astrid Schafhausen",
+          "ranking_team": 5,
+          "ranking": 17
+        },
+        {
+          "gender": "f",
+          "name": "Andrea Horvath",
+          "ranking_team": 5,
+          "ranking": 18
+        },
+        {
+          "gender": "f",
+          "name": "Marlen Garten",
+          "ranking_team": 5,
+          "ranking": 19
+        },
+        {
+          "gender": "f",
+          "name": "Anne Liang",
+          "ranking_team": 5,
+          "ranking": 20
+        },
+        {
+          "gender": "f",
+          "name": "Franca Panczek",
+          "ranking_team": 5,
+          "ranking": 21
+        }
       ],
       [
-        {"gender": "m", "name": "Karsten Borghorst", "ranking_team": 1, "ranking": 1},
-        {"gender": "m", "name": "Saengchai Gries", "ranking_team": 1, "ranking": 2},
-        {"gender": "m", "name": "Thomas Bickmann", "ranking_team": 1, "ranking": 3},
-        {"gender": "m", "name": "Markus Uebel", "ranking_team": 1, "ranking": 4},
-        {"gender": "m", "name": "Sascha Blank", "ranking_team": 1, "ranking": 5},
-        {"gender": "m", "name": "Alexander Hadiwidjaja", "ranking_team": 1, "ranking": 6},
-        {"gender": "m", "name": "Ron Labuhn", "ranking_team": 1, "ranking": 7},
-        {"gender": "m", "name": "Daniel Moniri Awal", "ranking_team": 1, "ranking": 8},
-        {"gender": "m", "name": "Markus Löffler", "ranking_team": 1, "ranking": 9},
-        {"gender": "m", "name" : "Pascal Marquardt", "ranking_team": 1, "ranking": 10},
-        {"gender": "f", "name": "Hannah Larbig", "ranking_team": 1, "ranking": 1},
-        {"gender": "f", "name": "Karolina Dziwik", "ranking_team": 1, "ranking": 2},
-        {"gender": "f", "name": "Heike Kress-Plaßmann", "ranking_team": 1, "ranking": 3},
-        {"gender": "f", "name": "Anne Nußbaum", "ranking_team": 1, "ranking": 4}
+        {
+          "gender": "m",
+          "name": "Karsten Borghorst",
+          "ranking_team": 1,
+          "ranking": 1
+        },
+        {
+          "gender": "m",
+          "name": "Saengchai Gries",
+          "ranking_team": 1,
+          "ranking": 2
+        },
+        {
+          "gender": "m",
+          "name": "Thomas Bickmann",
+          "ranking_team": 1,
+          "ranking": 3
+        },
+        {
+          "gender": "m",
+          "name": "Markus Uebel",
+          "ranking_team": 1,
+          "ranking": 4
+        },
+        {
+          "gender": "m",
+          "name": "Sascha Blank",
+          "ranking_team": 1,
+          "ranking": 5
+        },
+        {
+          "gender": "m",
+          "name": "Alexander Hadiwidjaja",
+          "ranking_team": 1,
+          "ranking": 6
+        },
+        {
+          "gender": "m",
+          "name": "Ron Labuhn",
+          "ranking_team": 1,
+          "ranking": 7
+        },
+        {
+          "gender": "m",
+          "name": "Daniel Moniri Awal",
+          "ranking_team": 1,
+          "ranking": 8
+        },
+        {
+          "gender": "m",
+          "name": "Markus Löffler",
+          "ranking_team": 1,
+          "ranking": 9
+        },
+        {
+          "gender": "m",
+          "name": "Pascal Marquardt",
+          "ranking_team": 1,
+          "ranking": 10
+        },
+        {
+          "gender": "f",
+          "name": "Hannah Larbig",
+          "ranking_team": 1,
+          "ranking": 1
+        },
+        {
+          "gender": "f",
+          "name": "Karolina Dziwik",
+          "ranking_team": 1,
+          "ranking": 2
+        },
+        {
+          "gender": "f",
+          "name": "Heike Kress-Plaßmann",
+          "ranking_team": 1,
+          "ranking": 3
+        },
+        {
+          "gender": "f",
+          "name": "Anne Nußbaum",
+          "ranking_team": 1,
+          "ranking": 4
+        }
       ]
     ],
-    "teamsters": ["Uwe Kampen", "Ron Labuhn"],
+    "teamsters": [
+      "Uwe Kampen",
+      "Ron Labuhn"
+    ],
     "league_key": "NRW-O19-S1-KK-195-2016",
     "team_competition": true
   }

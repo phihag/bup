@@ -54,6 +54,7 @@ dist: cleandist ## Create distribution files
 	node div/minify_json.js div/vdemo_de.json dist/bup/div/vdemo_de.json
 	node div/minify_json.js div/vdemo_en.json dist/bup/div/vdemo_en.json
 	node div/minify_json.js div/bldemo.json dist/bup/div/bldemo.json
+	node div/minify_json.js div/nrwdemo.json dist/bup/div/nrwdemo.json
 	cp \
 		div/bundesliga-ballsorten-2016.pdf \
 		div/bundesliga-Mindestanforderungen.pdf \

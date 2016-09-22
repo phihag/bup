@@ -1,15 +1,15 @@
+eventsheet error
 nrw demo
-	generate results (and a timeline)
-	test eventsheet
 	eventsheet date is bananas in bldemo/nrwdemo
+	test eventsheet
 	add helper function to generate league name
 	check league name in eventsheet
 	check league name in scoresheet
-retest and update (or delete) demos
-	edemo/de
+stats: display court_id and umpire_name and service_name if set (even highlight?)
+beautify
 	edemo/en
 	vdemo/en
-	vdemo/de
+make edemo/vdemo en only
 set umpire name/service judge name/court id if != settings
 	use in scoresheet
 	use in eventsheet (test!)

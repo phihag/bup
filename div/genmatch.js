@@ -3,6 +3,7 @@
 
 /* eslint-disable no-console */
 
+var fs = require('fs');
 var bup = require('../js/bup');
 
 function rand(min, max) {
@@ -11,13 +12,80 @@ function rand(min, max) {
 
 function main() {
 	var args = process.argv.slice(2);
-	if (args.length !== 2) {
-		console.error('Usage: genmatch \'{"is_doubles":true,"counting":"5x11_15"}\' START_TIMESTAMP');
+	if (args.length !== 3) {
+		console.error('Usage: genmatch export-file.json 1.HD,2.HD,DD,3.HE,2.HE,1.HE,DE,GD START_TIMESTAMP');
 		return 1;
 	}
-	var setup = JSON.parse(args[0]);
-	var ts = parseInt(args[1], 10);
 
+	var json_fn = args[0];
+	var match_order = args[1].split(',');
+	var ts = parseInt(args[2], 10);
+
+	fs.readFile(json_fn, function(err, data_json) {
+		if (err) throw err;
+
+		var data = JSON.parse(data_json);
+		var courts = data.event.courts;
+		var match_by_eid = {};
+		for (let m of data.event.matches) {
+			match_by_eid[m.setup.eventsheet_id || m.setup.match_name] = m;
+		}
+
+		for (let c of courts) {
+			c._avail = ts;
+			delete c.match_id;
+		}
+
+		for (let eid of match_order) {
+			let m = match_by_eid[eid];
+			if (!m) {
+				let all_match_ids = Object.keys(match_by_eid).join(',');
+				throw new Error('Cannot find match ' + eid + ', available: ' + all_match_ids);
+			}
+
+			let min_court;
+			for (let c of courts) {
+				if (!c.match_id) {
+					min_court = c;
+					break;
+				}
+
+				if (min_court) {
+					if (min_court._avail > c._avail) {
+						min_court = c;
+					}
+				} else {
+					min_court = c;
+				}
+			}
+
+			play_on_court(m, min_court, min_court._avail + rand(0, 10000));
+		}
+
+		for (let c of courts) {
+			if (c._avail) {
+				delete c._avail;
+			}
+		}
+
+		fs.writeFile(json_fn, JSON.stringify(data, null, 2), function(err) {
+			if (err) throw err;
+		});
+	});
+}
+
+function play_on_court(match, court, ts) {
+	console.log(match.setup.match_id + ' starts at ' + (new Date(ts)).toString());
+	court.match_id = match.setup.match_id;
+	var s = gen_match(match.setup, ts);
+	var presses = s.presses;
+	s.presses[0].court_id = court.court_id;
+	match.network_score = bup.calc.netscore(s);
+	match.presses_json = JSON.stringify(presses);
+	court._avail = presses[presses.length - 1].timestamp + rand(10000, 60000);
+}
+
+function gen_match(setup, ts) {
 	var s = {};
 	bup.calc.init_state(s, setup);
 	bup.calc.state(s);
@@ -110,9 +178,7 @@ function main() {
 		type: 'postmatch-confirm',
 	});
 
-	console.log('"network_score": ' + JSON.stringify(bup.calc.netscore(s)) + ',');
-	console.log('"presses_json": ' + JSON.stringify(JSON.stringify(s.presses)));
-	return 0;
+	return s;
 }
 
-process.exit(main());
+main();
