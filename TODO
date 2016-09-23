@@ -1,11 +1,9 @@
-eventsheet error
+RLN / RLW: Check scoresheet & eventsheet
 nrw demo
-	eventsheet date is bananas in bldemo/nrwdemo
 	test eventsheet
 	add helper function to generate league name
 	check league name in eventsheet
 	check league name in scoresheet
-stats: display court_id and umpire_name and service_name if set (even highlight?)
 beautify
 	edemo/en
 	vdemo/en
@@ -13,6 +11,7 @@ make edemo/vdemo en only
 set umpire name/service judge name/court id if != settings
 	use in scoresheet
 	use in eventsheet (test!)
+	stats: display court_id and umpire_name and service_name if set (even highlight?)
 
 improve click
 	highlight with touchend

@@ -99,10 +99,25 @@ function annotate(s, event) {
 		});
 	}
 
+	var league_key = network.league_key(event);
+	if (!event.league_key) {
+		event.league_key = league_key;
+	}
+
+	/*@DEV*/
+	if (event.tournament_name && event.tournament_name === name_by_league(league_key)) {
+		report_problem.silent_error('Redundant tournament_name in event');
+	}
+	/*/@DEV*/
+
+	if (!event.tournament_name) {
+		event.tournament_name = name_by_league(league_key);
+	}
+
 	var props = {
-		league_key: network.league_key(event),
-		event_name: event.event_name,
+		league_key: league_key,
 		tournament_name: event.tournament_name,
+		event_name: event.event_name,
 		team_competition: event.team_competition,
 	};
 	event.matches.forEach(function(m) {
@@ -115,7 +130,7 @@ function annotate(s, event) {
 
 			/*@DEV*/
 			if (setup[key] === val) {
-				report_problem.silent_error('Duplicate key ' + key + ' in ' + setup.match_id);
+				report_problem.silent_error('Redundant key ' + key + ' in ' + setup.match_id);
 			}
 			/*/@DEV*/
 
@@ -134,11 +149,72 @@ function annotate(s, event) {
 	});
 }
 
+var NRW2016_RE = /^NRW-(O19)-(?:(?:([NS])([12]))-)?([A-Z]{2})-([0-9]{3})-2016$/;
+function name_by_league(league_key) {
+	if (/^1BL-(?:2015|2016)$/.test(league_key)) {
+		return '1. Bundesliga';
+	}
+	if (/^2BLN-(?:2015|2016)$/.test(league_key)) {
+		return '2. Bundesliga Nord';
+	}
+	if (/^2BLS-(?:2015|2016)$/.test(league_key)) {
+		return '2. Bundesliga Süd';
+	}
+	if (league_key === 'RLN-2016') {
+ 		return 'Regionalliga Nord';
+	}
+	if (league_key === 'RLW-2016') {
+		league_key = 'NRW-O19-RL-001-2016';
+	}
+
+	var m = NRW2016_RE.exec(league_key);
+	if (m) {
+		var league_name = {
+			'RL': 'Regionalliga',
+			'OL': 'NRW-Oberliga',
+			'VL': 'Verbandsliga',
+			'LL': 'Landesliga',
+			'BL': 'Bezirksliga',
+			'BK': 'Bezirksklasse',
+			'KL': 'Kreisliga',
+			'KK': 'Kreisklasse',
+		}[m[4]];
+
+		var location_name;
+		if (m[4] === 'RL') {
+			location_name = 'West';
+		} else if (m[4] === 'OL') {
+			location_name = (m[5] === '002') ? 'Nord' : 'Süd';
+		} else {
+			location_name = {
+				'N': 'Nord',
+				'S': 'Süd',
+			}[m[2]];
+			if (location_name) {
+				location_name += ' ' + m[3];
+			} else {
+				location_name = m[2] + ' ' + m[3];
+			}
+		}
+
+		if (!league_name) {
+			return league_key;
+		}
+
+		return league_name + ' ' + location_name + ' (' + m[5] + ')';
+	}
+
+	return league_key;
+}
+
 return {
 	guess_gender: guess_gender,
 	calc_all_players: calc_all_players,
 	set_metadata: set_metadata,
 	annotate: annotate,
+	NRW2016_RE: NRW2016_RE,
+	// Testing only
+	name_by_league: name_by_league,
 };
 
 })();

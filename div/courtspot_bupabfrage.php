@@ -62,26 +62,19 @@ if (! $result) {
 $verwaltung = mysqli_fetch_assoc($result);
 mysqli_free_result($result);
 
-$tournament_name = null;
 $league_key = null;
 switch ($verwaltung['Liga']) {
 case 1:
-	$tournament_name = '1. Bundesliga';
 	$league_key = '1BL-2016';
 	break;
 case 2:
-	$tournament_name = '2. Bundesliga Nord';
 	$league_key = '2BLN-2016';
 	break;
 case 3:
-	$tournament_name = '2. Bundesliga Süd';
 	$league_key = '2BLS-2016';
 	break;
 }
 
-
-// Siehe DBV BLO-DB §8.8
-$preferred_order = ['1.HD', 'DD', '2.HD', '1.HE', 'DE', 'GD', '2.HE'];
 
 $result = mysqli_query($db, '
 SELECT sv_first.first_timestamp AS first_timestamp, Spiele.*, svf.*, UNIX_TIMESTAMP(svf.ts) AS last_timestamp
@@ -206,12 +199,10 @@ header('Content-Type: application/json');
 
 echo json_encode([
 	'status' => 'ok',
-	'preferred_order' => $preferred_order,
 	'matches' => $matches,
 	'courts' => $courts,
 	'id' => 'Courtspot:' . $verwaltung['Heim'] . ' - ' . $verwaltung['Gast'],
 	'event_name' => $verwaltung['Heim'] . ' - ' . $verwaltung['Gast'],
-	'tournament_name' => $tournament_name,
 	'team_names' => [$verwaltung['Heim'], $verwaltung['Gast']],
 	'league_key' => $league_key,
 	'team_competition' => true,

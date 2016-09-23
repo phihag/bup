@@ -345,7 +345,6 @@
     ],
     "id": "vdemo",
     "event_name": "SG Düsseldorf-Unterrath 5 - VC Phönix Düsseldorf 1 (Demo)",
-    "tournament_name": "Demo NRW-Ligen",
     "team_names": [
       "SG Düsseldorf-Unterrath 5",
       "VC Phönix Düsseldorf 1"
@@ -585,7 +584,9 @@
       "Uwe Kampen",
       "Ron Labuhn"
     ],
-    "league_key": "NRW-O19-S1-KK-195-2016",
+    "DEBUG_league_key": "NRW-O19-S1-KK-195-2016",
+    "DEBUG_tournament_name": "Demo NRW-Ligen",
+    "league_key": "RLN-2016",
     "team_competition": true
   }
 }

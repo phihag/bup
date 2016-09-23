@@ -81,6 +81,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var displaymode = require('./displaymode');
 	var editevent = require('./editevent');
 	var editmode = require('./editmode');
+	var eventutils = require('./eventutils');
 	var eventsheet = require('./eventsheet');
 	var fullscreen = require('./fullscreen');
 	var i18n = require('./i18n');
@@ -105,6 +106,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 		btde: btde,
 		calc: calc,
 		courtspot: courtspot,
+		eventutils: eventutils,
 		i18n: i18n,
 		network: network,
 		order: order,

@@ -23,10 +23,10 @@ var URLS = {
 	'BL-ballsorten-2016': 'div/bundesliga-ballsorten-2016.pdf',
 	'BL-mindestanforderungen-2016': 'div/bundesliga-Mindestanforderungen.pdf',
 	'DBV-Satzungen-2016': 'http://www.badminton.de/fileadmin/Dateibereich/Foto-Archiv/pdf-xls/DBV/Satzung/16-DBV-Druckwerk_Satzung-Ordnungen-Spielregeln201617-Website.pdf',
-	'RLW-2016': 'div/Spielbericht_RLW.svg',
-	'RLN-2016': 'div/Spielbericht_RLN.svg',
+	'RLW-2016': 'div/Spielbericht_8x3x21.svg',
+	'RLN-2016': 'div/Spielbericht_8x3x21.svg',
 	'RLN-Satzungen-2016': 'http://www.gruppe-nord.net/fileadmin/user_upload/schuch/GruppeNord/Satzung/Satzung%20und%20Ordnungen%20der%20Gruppe%20Nord%20Stand%2006-08-16.pdf',
-	'NRW-2016': 'div/Spielbericht_RLW.svg',
+	'NRW-2016': 'div/Spielbericht_8x3x21.svg',
 	'NRW-Satzungen-2016': 'http://www.badminton-nrw.de/fileadmin/gstnrw/pdf_xls_doc/Satzungswerk/2016/SatzungOrdnungen2016.pdf',
 	'team-1BL-2015': 'div/Mannschaftsaufstellung_1BL-2015.pdf',
 	'team-2BL-2015': 'div/Mannschaftsaufstellung_2BL-2015.pdf',
@@ -46,7 +46,6 @@ var MIME_TYPES = {
 	pdf: 'application/pdf',
 };
 
-var NRW2016_RE = /^NRW-(O19)-(?:([NS][12])-)?([A-Z]{2})-([0-9]{3})-2016$/;
 var files = {};
 
 var ui_current_league_key = null;
@@ -556,6 +555,8 @@ function render_svg(ev, es_key, ui8r, extra_data) {
 	var container = $('<div style="position: absolute; left: -999px; top: -999px; width: 297px; height: 210px;">');
 	container[0].appendChild(svg);
 	body.appendChild(container[0]);
+
+	var tournament_name = ev.tournament_name;
 
 	var props = {
 		title: ('Spielbericht ' + ev.event_name + (last_update ? (' ' + utils.date_str(last_update)) : '')),
@@ -1272,7 +1273,7 @@ function render_links(s) {
 		return;
 	}
 
-	if (NRW2016_RE.test(league_key)) {
+	if (eventutils.NRW2016_RE.test(league_key)) {
 		league_key = 'NRW-2016';
 	}
 	var eventsheets = SHEETS_BY_LEAGUE[league_key];
@@ -1501,7 +1502,6 @@ return {
 	ui_init: ui_init,
 	show_dialog: show_dialog,
 	render_links: render_links,
-	NRW2016_RE: NRW2016_RE,
 };
 
 })();

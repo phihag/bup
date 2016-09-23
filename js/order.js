@@ -201,7 +201,7 @@ function show() {
 }
 
 function preferred_by_league(league_key) {
-	if (eventsheet.NRW2016_RE.test(league_key) || (league_key === 'RLW-2016')) {
+	if (eventutils.NRW2016_RE.test(league_key) || (league_key === 'RLW-2016')) {
 		// See §57.2 SpO
 		return [
 			'1.HD',

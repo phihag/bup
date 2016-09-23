@@ -21,7 +21,7 @@ line {
 <text x="45" y="35" id="es_svg_away_team_name"></text>
 <text x="110" y="15">Staffel:</text>
 <line x1="124" x2="182" y1="16" y2="16" />
-<text x="125" y="15" id="es_svg_tournament_name">Regionalliga Nord</text>
+<text x="125" y="15" id="es_svg_tournament_name"></text>
 <text x="132" y="25">Austragungsort:</text>
 <line x1="162" x2="280" y1="26" y2="26" />
 <text id="es_svg_location" x="163" y="25"></text>

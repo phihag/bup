@@ -227,11 +227,9 @@ function _parse_match_list(doc, now) {
 		var is_doubles = /~/.test(match.heim) && /~/.test(match.gast);
 		var home_team = {
 			players: _parse_players(match.heim),
-			name: home_team_name,
 		};
 		var away_team = {
 			players: _parse_players(match.gast),
-			name: away_team_name,
 		};
 		var incomplete = (
 			(home_team.players.length != away_team.players.length) ||
@@ -276,7 +274,6 @@ function _parse_match_list(doc, now) {
 				team_competition: true,
 				match_id: match_id,
 				incomplete: incomplete,
-				league_key: league_key,
 			},
 			network_score: network_score,
 		};
@@ -306,7 +303,9 @@ function list_matches(s, cb) {
 				msg: 'badmintonticker-Aktualisierung fehlgeschlagen: Server-Fehler erkannt',
 			});
 		}
-		return cb(null, _parse_match_list(doc, new Date()));
+		var ev = _parse_match_list(doc, new Date());
+		eventutils.annotate(state, ev);
+		return cb(null, ev);
 	});
 }
 
@@ -360,6 +359,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
+	var eventutils = require('./eventutils');
 	var network = require('./network');
 	var utils = require('./utils');
 
