@@ -37,7 +37,6 @@ _describe('btde', function() {
 				{
 					'setup': {
 						'incomplete': false,
-						'league_key': '1BL-2016',
 						'counting': '5x11_15',
 						'match_name': 'HD 1',
 						'eventsheet_id': '1.HD',
@@ -56,7 +55,6 @@ _describe('btde', function() {
 										'name': 'Fabian Holzer',
 									},
 								],
-								'name': 'TV Refrath',
 							},
 							{
 								'players': [
@@ -71,7 +69,6 @@ _describe('btde', function() {
 										'name': 'Jorrit de Ruiter',
 									},
 								],
-								'name': '1. BV Mülheim',
 							},
 						],
 						'btde_match_id': '1',
@@ -83,7 +80,6 @@ _describe('btde', function() {
 				{
 					'setup': {
 						'incomplete': false,
-						'league_key': '1BL-2016',
 						'counting': '5x11_15',
 						'match_name': 'DD',
 						'eventsheet_id': 'DD',
@@ -102,7 +98,6 @@ _describe('btde', function() {
 										'name': 'Carla Nelte',
 									},
 								],
-								'name': 'TV Refrath',
 							},
 							{
 								'players': [
@@ -117,7 +112,6 @@ _describe('btde', function() {
 										'name': 'Lara Käpplein',
 									},
 								],
-								'name': '1. BV Mülheim',
 							},
 						],
 						'btde_match_id': '2',
@@ -130,7 +124,6 @@ _describe('btde', function() {
 					'setup': {
 						'counting': '5x11_15',
 						'incomplete': false,
-						'league_key': '1BL-2016',
 						'match_name': 'HE 1',
 						'eventsheet_id': '1.HE',
 						'is_doubles': false,
@@ -143,7 +136,6 @@ _describe('btde', function() {
 										'name': 'Richard Domke',
 									},
 								],
-								'name': 'TV Refrath',
 							},
 							{
 								'players': [
@@ -153,7 +145,6 @@ _describe('btde', function() {
 										'name': 'Dmytro Zavadsky',
 									},
 								],
-								'name': '1. BV Mülheim',
 							},
 						],
 						'btde_match_id': '3',
@@ -165,7 +156,6 @@ _describe('btde', function() {
 				{
 					'setup': {
 						'incomplete': false,
-						'league_key': '1BL-2016',
 						'counting': '5x11_15',
 						'match_name': 'DE',
 						'eventsheet_id': 'DE',
@@ -179,7 +169,6 @@ _describe('btde', function() {
 										'name': 'Chloe Magee',
 									},
 								],
-								'name': 'TV Refrath',
 							},
 							{
 								'players': [
@@ -189,7 +178,6 @@ _describe('btde', function() {
 										'name': 'Lara Käpplein',
 									},
 								],
-								'name': '1. BV Mülheim',
 							},
 						],
 						'btde_match_id': '4',
@@ -201,7 +189,6 @@ _describe('btde', function() {
 				{
 					'setup': {
 						'incomplete': false,
-						'league_key': '1BL-2016',
 						'counting': '5x11_15',
 						'match_name': 'GD',
 						'eventsheet_id': 'GD',
@@ -220,7 +207,6 @@ _describe('btde', function() {
 										'name': 'Sam Magee',
 									},
 								],
-								'name': 'TV Refrath',
 							},
 							{
 								'players': [
@@ -235,7 +221,6 @@ _describe('btde', function() {
 										'name': 'Marcus Ellis',
 									},
 								],
-								'name': '1. BV Mülheim',
 							},
 						],
 						'btde_match_id': '5',
@@ -246,17 +231,14 @@ _describe('btde', function() {
 				},  {
 					'setup': {
 						'incomplete': false,
-						'league_key': '1BL-2016',
 						'is_doubles': false,
 						'teams': [{
-							'name': 'TV Refrath',
 							'players': [{
 								'firstname': 'Lars',
 								'lastname': 'Schänzler',
 								'name': 'Lars Schänzler',
 							}],
 						}, {
-							'name': '1. BV Mülheim',
 							'players': [{
 								'firstname': 'Alexander',
 								'lastname': 'Roovers',
@@ -307,7 +289,6 @@ _describe('btde', function() {
 				{
 					'setup': {
 						'incomplete': false,
-						'league_key': '2BLN-2016',
 						'counting': '5x11_15',
 						'match_name': 'HD 1',
 						'eventsheet_id': '1.HD',
@@ -326,7 +307,6 @@ _describe('btde', function() {
 										'name': 'Fabian Holzer',
 									},
 								],
-								'name': 'TV Refrath',
 							},
 							{
 								'players': [
@@ -341,7 +321,6 @@ _describe('btde', function() {
 										'name': 'Jorrit de Ruiter',
 									},
 								],
-								'name': '1. BV Mülheim',
 							},
 						],
 						'btde_match_id': '1',
@@ -353,7 +332,6 @@ _describe('btde', function() {
 				{
 					'setup': {
 						'incomplete': true,
-						'league_key': '2BLN-2016',
 						'counting': '5x11_15',
 						'match_name': 'DD',
 						'eventsheet_id': 'DD',
@@ -361,7 +339,6 @@ _describe('btde', function() {
 						'teams': [
 							{
 								'players': [],
-								'name': 'TV Refrath',
 							},
 							{
 								'players': [
@@ -371,7 +348,6 @@ _describe('btde', function() {
 										'name': 'Judith Meulendijks',
 									},
 								],
-								'name': '1. BV Mülheim',
 							},
 						],
 						'btde_match_id': '2',
@@ -383,7 +359,6 @@ _describe('btde', function() {
 				{
 					'setup': {
 						'incomplete': false,
-						'league_key': '2BLN-2016',
 						'counting': '5x11_15',
 						'match_name': 'HE 1',
 						'eventsheet_id': '1.HE',
@@ -397,7 +372,6 @@ _describe('btde', function() {
 										'name': 'Richard Domke',
 									},
 								],
-								'name': 'TV Refrath',
 							},
 							{
 								'players': [
@@ -407,7 +381,6 @@ _describe('btde', function() {
 										'name': 'Dmytro Zavadsky',
 									},
 								],
-								'name': '1. BV Mülheim',
 							},
 						],
 						'btde_match_id': '3',
@@ -419,7 +392,6 @@ _describe('btde', function() {
 				{
 					'setup': {
 						'incomplete': false,
-						'league_key': '2BLN-2016',
 						'counting': '5x11_15',
 						'match_name': 'DE',
 						'eventsheet_id': 'DE',
@@ -433,7 +405,6 @@ _describe('btde', function() {
 										'name': 'Chloe Magee',
 									},
 								],
-								'name': 'TV Refrath',
 							},
 							{
 								'players': [
@@ -443,7 +414,6 @@ _describe('btde', function() {
 										'name': 'Lara Käpplein',
 									},
 								],
-								'name': '1. BV Mülheim',
 							},
 						],
 						'btde_match_id': '4',
@@ -455,7 +425,6 @@ _describe('btde', function() {
 				{
 					'setup': {
 						'incomplete': false,
-						'league_key': '2BLN-2016',
 						'counting': '5x11_15',
 						'match_name': 'GD',
 						'eventsheet_id': 'GD',
@@ -474,7 +443,6 @@ _describe('btde', function() {
 										'name': 'Sam Magee',
 									},
 								],
-								'name': 'TV Refrath',
 							},
 							{
 								'players': [
@@ -487,7 +455,6 @@ _describe('btde', function() {
 										'name': 'Marcus Ellis',
 									},
 								],
-								'name': '1. BV Mülheim',
 							},
 						],
 						'btde_match_id': '5',
@@ -498,17 +465,14 @@ _describe('btde', function() {
 				}, {
 					'setup': {
 						'incomplete': false,
-						'league_key': '2BLN-2016',
 						'is_doubles': false,
 						'teams': [{
-							'name': 'TV Refrath',
 							'players': [{
 								'firstname': 'Lars',
 								'lastname': 'Schänzler',
 								'name': 'Lars Schänzler',
 							}],
 						}, {
-							'name': '1. BV Mülheim',
 							'players': [{
 								'firstname': 'Alexander',
 								'lastname': 'Roovers',
