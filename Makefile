@@ -62,6 +62,7 @@ dist: cleandist ## Create distribution files
 		div/courtspot_screenshot_rechts.png \
 		div/data_structures.md \
 		div/FAQ.de \
+		div/URLS.md \
 		div/LICENSE.commercial.de \
 		div/Mannschaftsaufstellung_1BL-2015.pdf \
 		div/Mannschaftsaufstellung_2BL-2015.pdf \
@@ -69,8 +70,7 @@ dist: cleandist ## Create distribution files
 		div/scoresheet_international.svg \
 		div/scoresheet_international_5x11.svg \
 		div/Spielbericht-Buli-2016-17.xlsm \
-		div/Spielbericht_RLN.svg \
-		div/Spielbericht_RLW.svg \
+		div/Spielbericht_8x3x21.svg \
 		div/Spielberichtsbogen_1BL-2015.pdf \
 		div/Spielberichtsbogen_2BL-2015.pdf \
 		div/wakelock.mp4 \
