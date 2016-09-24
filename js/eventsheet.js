@@ -556,8 +556,6 @@ function render_svg(ev, es_key, ui8r, extra_data) {
 	container[0].appendChild(svg);
 	body.appendChild(container[0]);
 
-	var tournament_name = ev.tournament_name;
-
 	var props = {
 		title: ('Spielbericht ' + ev.event_name + (last_update ? (' ' + utils.date_str(last_update)) : '')),
 		subject: state._('Event Sheet'),
