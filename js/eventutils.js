@@ -161,7 +161,7 @@ function name_by_league(league_key) {
 		return '2. Bundesliga Süd';
 	}
 	if (league_key === 'RLN-2016') {
- 		return 'Regionalliga Nord';
+		return 'Regionalliga Nord';
 	}
 	if (league_key === 'RLW-2016') {
 		league_key = 'NRW-O19-RL-001-2016';

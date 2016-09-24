@@ -59,7 +59,7 @@ function main() {
 				}
 			}
 
-			play_on_court(m, min_court, min_court._avail + rand(0, 10000));
+			play_on_court(m, min_court, min_court + rand(0, 10000));
 		}
 
 		for (let c of courts) {
