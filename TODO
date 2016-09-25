@@ -1,24 +1,17 @@
-Vereinsname kursiv/fett kleiner
-mail Jan
-	Vereinsname
-	Zeilenumbruch Ansagen
-	link to bldemo
-
-Vilson james-Lukas Vattanirappel
-generate static "Mannschaftsunterlagen" files from turnier.de
 beautify
 	vdemo/en
-import: only annotate v2
 export: generate v2
-netstats: +rolling avg
+generate static "Mannschaftsunterlagen" files from turnier.de
+netstats: +moving avg
 feedback on export / diagnosis button
-record last succesful transmission and its state, per network in network submodule (make sure it gets exported)
+record last successsful transmission and its state, per network in network submodule (make sure it gets exported)
 export error as well
-
 set umpire name/service judge name/court id if != settings
 	use in scoresheet
 	use in eventsheet (test!)
 	stats: display court_id and umpire_name and service_name if set (even highlight?)
+
+mail Ulf
 
 improve click
 	highlight with touchend
