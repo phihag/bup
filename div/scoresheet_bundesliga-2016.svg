@@ -51,7 +51,7 @@
 <text class="scoresheet_results_team1_side" x="74.5" y="25" text-anchor="middle"></text>
 <text class="scoresheet_results_team1_player1" x="78" y="25"></text>
 <text class="scoresheet_results_team1_player2" x="78" y="32"></text>
-<text class="scoresheet_results_team1_name" x="78" y="39"></text>
+<text class="scoresheet_results_team1_name small-text" x="78" y="38.5"></text>
 <ellipse class="scoresheet_results_circle_team1" visibility="hidden" cx="100" cy="30" rx="28" ry="13" />
 
 <!-- score box -->
@@ -86,7 +86,7 @@
 <text class="scoresheet_results_team2_side" x="222.5" y="25" text-anchor="middle"></text>
 <text class="scoresheet_results_team2_player1" x="162" y="25"></text>
 <text class="scoresheet_results_team2_player2" x="162" y="32"></text>
-<text class="scoresheet_results_team2_name" x="162" y="39"></text>
+<text class="scoresheet_results_team2_name small-text" x="162" y="38.5"></text>
 <ellipse class="scoresheet_results_circle_team2" visibility="hidden" cx="189" cy="30" rx="28" ry="13" />
 
 <!-- top right information about match -->
