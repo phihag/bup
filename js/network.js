@@ -554,13 +554,13 @@ function ui_init(s, hash_query) {
 	} else if (hash_query.liveaw_event_id) {
 		networks.liveaw = liveaw(hash_query.liveaw_event_id);
 	} else if (hash_query.edemo !== undefined) {
-		networks.edemo = staticnet(null, 'div/edemo_' + s.lang + '.json');
+		networks.edemo = staticnet(null, 'div/edemo.json');
 	} else if (hash_query.bldemo !== undefined) {
 		networks.bldemo = staticnet(null, 'div/bldemo.json');
 	} else if (hash_query.nrwdemo !== undefined) {
 		networks.nrwdemo = staticnet(null, 'div/nrwdemo.json');
 	} else if (hash_query.vdemo !== undefined) {
-		networks.vdemo = staticnet(null, 'div/vdemo_' + s.lang + '.json');
+		networks.vdemo = staticnet(null, 'div/vdemo.json');
 	}
 
 	// Initialize court info

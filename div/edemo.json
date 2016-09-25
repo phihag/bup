@@ -1,6 +1,6 @@
 {
   "type": "bup-export",
-  "version": 1,
+  "version": 2,
   "event": {
     "staticnet_message": "Demo mode - Changes will not be transmitted",
     "preferred_order": [
@@ -11,6 +11,14 @@
       "MX",
       "MS2"
     ],
+    "courts": [{
+      "court_id": 1,
+      "description": "1 (left)"
+    }, {
+      "court_id": 2,
+      "description": "2 (right)"
+    }],
+
     "matches": [
       {
         "setup": {
@@ -18,8 +26,7 @@
           "eventsheet_id": "1.HD",
           "teams": [
             {
-              "name": "Denmark",
-              "players": [
+               "players": [
                 {
                   "name": "Mathias Boe"
                 },
@@ -29,8 +36,7 @@
               ]
             },
             {
-              "name": "China",
-              "players": [
+               "players": [
                 {
                   "name": "Fu Haifeng"
                 },
@@ -40,8 +46,6 @@
               ]
             }
           ],
-          "event_name": "Denmark - China (Demo)",
-          "tournament_name": "Demo",
           "team_competition": true,
           "is_doubles": true,
           "counting": "3x21",
@@ -56,8 +60,7 @@
           "eventsheet_id": "DD",
           "teams": [
             {
-              "name": "Denmark",
-              "players": [
+               "players": [
                 {
                   "name": "Kamilla Rytter Juhl"
                 },
@@ -67,8 +70,7 @@
               ]
             },
             {
-              "name": "China",
-              "players": [
+               "players": [
                 {
                   "name": "Luo Ying"
                 },
@@ -78,8 +80,6 @@
               ]
             }
           ],
-          "event_name": "Denmark - China (Demo)",
-          "tournament_name": "Demo",
           "team_competition": true,
           "is_doubles": true,
           "counting": "3x21",
@@ -94,24 +94,20 @@
           "eventsheet_id": "1.HE",
           "teams": [
             {
-              "name": "Denmark",
-              "players": [
+               "players": [
                 {
                   "name": "Jan Ø. Jørgensen"
                 }
               ]
             },
             {
-              "name": "China",
-              "players": [
+               "players": [
                 {
                   "name": "Chen Long"
                 }
               ]
             }
           ],
-          "event_name": "Denmark - China (Demo)",
-          "tournament_name": "Demo",
           "team_competition": true,
           "is_doubles": false,
           "counting": "3x21",
@@ -126,24 +122,20 @@
           "eventsheet_id": "DE",
           "teams": [
             {
-              "name": "Denmark",
-              "players": [
+               "players": [
                 {
                   "name": "Line Kjaersfeldt"
                 }
               ]
             },
             {
-              "name": "China",
-              "players": [
+               "players": [
                 {
                   "name": "Li Xuerui"
                 }
               ]
             }
           ],
-          "event_name": "Denmark - China (Demo)",
-          "tournament_name": "Demo",
           "team_competition": true,
           "is_doubles": false,
           "counting": "3x21",
@@ -158,8 +150,7 @@
           "eventsheet_id": "GD",
           "teams": [
             {
-              "name": "Denmark",
-              "players": [
+               "players": [
                 {
                   "name": "Joachim Fischer Nielsen"
                 },
@@ -169,8 +160,7 @@
               ]
             },
             {
-              "name": "China",
-              "players": [
+               "players": [
                 {
                   "name": "Zhang Nan"
                 },
@@ -180,8 +170,6 @@
               ]
             }
           ],
-          "event_name": "Denmark - China (Demo)",
-          "tournament_name": "Demo",
           "team_competition": true,
           "is_doubles": true,
           "counting": "3x21",
@@ -196,24 +184,20 @@
           "eventsheet_id": "2.HE",
           "teams": [
             {
-              "name": "Denmark",
-              "players": [
+               "players": [
                 {
                   "name": "Viktor Axelsen"
                 }
               ]
             },
             {
-              "name": "China",
-              "players": [
+               "players": [
                 {
                   "name": "Lin Dan"
                 }
               ]
             }
           ],
-          "event_name": "Denmark - China (Demo)",
-          "tournament_name": "Demo",
           "team_competition": true,
           "is_doubles": false,
           "counting": "3x21",

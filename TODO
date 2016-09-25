@@ -1,13 +1,20 @@
-RLN / RLW: Check scoresheet & eventsheet
-nrw demo
-	test eventsheet
-	add helper function to generate league name
-	check league name in eventsheet
-	check league name in scoresheet
+Zeilenumbruch love-all / play
+Vereinsname kursiv/fett kleiner
+mail Jan
+	Vereinsname
+	Zeilenumbruch Ansagen
+	link to bldemo
+
 beautify
-	edemo/en
 	vdemo/en
-make edemo/vdemo en only
+import: only annotate v2
+export: generate v2
+netstats: +rolling avg
+feedback on export / diagnosis button
+record last succesful transmission and its state, per network in network submodule (make sure it gets exported)
+export error as well
+
+generate static "Mannschaftsunterlagen" files from turnier.de
 set umpire name/service judge name/court id if != settings
 	use in scoresheet
 	use in eventsheet (test!)
@@ -24,8 +31,8 @@ handle superfluous score presses
 xlsx style at center
 btde export should export all known matches!
 sent export should be able to imported
-generate static "Mannschaftsunterlagen" files from turnier.de
 simplify courtspot_bupabfrage (add check in eventutils.annotate)
+automatically send export if state finishes from event incomplete -> event complete
 
 referee mode
 	via websockets
@@ -36,7 +43,6 @@ referee mode
 	download into local view
 
 rendering error in editmode/Edge
-write test that appcache has every URL in eventsheets
 suppress sending duplicate silent_errors
 
 display for very small screens (see error report)
@@ -83,6 +89,7 @@ bup display mode
 	hide settings after timeout (10s?)
 	show last update in settings
 	support display mode without network
+	show games on the side that won them?
 
 Content-security-policy
 test offline (all features present with all demos?)
@@ -100,7 +107,7 @@ court selector in demo mode
 
 xlsx scoresheet: add angled line (and improve text positioning)
 
-
+editevent: check if ok by VRLs
 liveaw: HTTP mode
 liveaw: improve/test reconnecting
 liveaw: proper reconnect backoff

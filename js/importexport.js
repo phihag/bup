@@ -1,12 +1,15 @@
 var importexport = (function() {
 'use strict';
 
-function load_data(data) {
+function load_data(s, data) {
+	if (data.version >= 2) {
+		eventutils.annotate(s, event);
+	}
 	return data;
 }
 
 function import_data(s, data) {
-	var event = load_data(data).event;
+	var event = load_data(s, data).event;
 	var snet = staticnet(event);
 	network.ui_install_staticnet(s, snet);
 }

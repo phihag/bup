@@ -13,7 +13,7 @@ courtspot Run under CourtSpot
 Initial UI
 ==========
 
-These can be combined with any other options (but not each other).
+These can be combined with any other options (but not each other), as in #bldemo&display .
 
 settings       Show settings UI
 display        Start in display mode

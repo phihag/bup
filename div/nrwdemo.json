@@ -1,6 +1,6 @@
 {
   "type": "bup-export",
-  "version": 1,
+  "version": 2,
   "event": {
     "staticnet_message": "Demo NRW-Ligen (nur lokal)",
     "courts": [

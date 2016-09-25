@@ -39,9 +39,8 @@ function list_matches(s, cb) {
 			url: url,
 			dataType: 'json',
 		}).done(function(data) {
-			var imported = importexport.load_data(data);
+			var imported = importexport.load_data(s, data);
 			event = imported.event;
-			eventutils.annotate(s, event);
 			on_load_data(s);
 			return cb(null, utils.deep_copy(event));
 		}).fail(function(xhr) {
