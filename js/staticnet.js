@@ -135,7 +135,6 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc.js');
 	var click = require('./click');
-	var eventutils = require('./eventutils');
 	var importexport = require('./importexport.js');
 	var network = require('./network.js');
 	var uiu = require('./uiu.js');

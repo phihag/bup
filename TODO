@@ -4,6 +4,7 @@ mail Jan
 	Zeilenumbruch Ansagen
 	link to bldemo
 
+generate static "Mannschaftsunterlagen" files from turnier.de
 beautify
 	vdemo/en
 import: only annotate v2
@@ -13,7 +14,6 @@ feedback on export / diagnosis button
 record last succesful transmission and its state, per network in network submodule (make sure it gets exported)
 export error as well
 
-generate static "Mannschaftsunterlagen" files from turnier.de
 set umpire name/service judge name/court id if != settings
 	use in scoresheet
 	use in eventsheet (test!)
@@ -41,6 +41,7 @@ referee mode
 	see current match/event
 	download into local view
 
+implement resource timing API
 rendering error in editmode/Edge
 suppress sending duplicate silent_errors
 

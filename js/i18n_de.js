@@ -57,9 +57,9 @@ var i18n_de = {
 'button:Resume after injury': 'Spiel fortsetzen',
 
 
-'onmyleft.home_team': 'Meine Damen und Herren:\nZu meiner Rechten, {away_team},\nund zu meiner Linken, {home_team}.\n{serving_team} schlägt auf{serving_str}.\n\n{score}.\nBitte spielen.',
-'onmyleft.away_team': 'Meine Damen und Herren:\nZu meiner Linken, {away_team},\nund zu meiner Rechten, {home_team}.\n{serving_team} schlägt auf{serving_str}.\n\n{score}.\nBitte spielen.',
-'onmyleft': 'Meine Damen und Herren:\nZu meiner Rechten, {right_team},\nund zu meiner Linken, {left_team}.\n{server} schlägt auf{receiver_str}.\n\n{score}.\nBitte spielen.',
+'onmyleft.home_team': 'Meine Damen und Herren:\nZu meiner Rechten,\n{away_team},\nund zu meiner Linken,\n{home_team}.\n{serving_team} schlägt auf{serving_str}.\n\n{score}.\nBitte spielen.',
+'onmyleft.away_team': 'Meine Damen und Herren:\nZu meiner Linken,\n{away_team},\nund zu meiner Rechten,\n{home_team}.\n{serving_team} schlägt auf{serving_str}.\n\n{score}.\nBitte spielen.',
+'onmyleft': 'Meine Damen und Herren:\nZu meiner Rechten,\n{right_team},\nund zu meiner Linken,\n{left_team}.\n{server} schlägt auf{receiver_str}.\n\n{score}.\nBitte spielen.',
 'onmyleft.serveto': ' zu {receiver}',
 'onmyleft.team.doubles': '{p1} und {p2}',
 'onmyleft.representedby': ', vertreten durch ',

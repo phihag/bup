@@ -235,7 +235,7 @@ function _set_dialog(s, dialog_qs, btn_str) {
 	}
 
 	uiu.setClass(pronunciation_span, 'pronunciation_nonempty', span_str);
-	uiu.setClass(pronunciation_span, 'pronunciation_longtext', span_str && utils.count_lines(span_str) >= 3);
+	uiu.setClass(pronunciation_span, 'pronunciation_longtext', span_str && utils.count_lines(span_str) >= 5);
 
 	uiu.text(pronunciation_span, span_str);
 	uiu.text(button, btn_str);
@@ -462,6 +462,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var pronunciation = require('./pronunciation');
 	var timer = require('./timer');
 	var uiu = require('./uiu');
+	var utils = require('./utils');
 
 	module.exports = render;
 }

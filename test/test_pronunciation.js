@@ -68,8 +68,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_de(s),
 			'Meine Damen und Herren:\n' +
-			'Zu meiner Rechten, Bob und Birgit,\n' +
-			'und zu meiner Linken, Andrew und Alice.\n' +
+			'Zu meiner Rechten,\n' +
+			'Bob und Birgit,\n' +
+			'und zu meiner Linken,\n' +
+			'Andrew und Alice.\n' +
 			'Andrew schlägt auf zu Birgit.\n\n' +
 			'0 beide.\n' +
 			'Bitte spielen.'
@@ -77,8 +79,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_en(s),
 			'Ladies and Gentlemen:\n' +
-			'On my right, Bob and Birgit,\n' +
-			'and on my left, Andrew and Alice.\n' +
+			'On my right,\n' +
+			'Bob and Birgit,\n' +
+			'and on my left,\n' +
+			'Andrew and Alice.\n' +
 			'Andrew to serve to Birgit.\n\n' +
 			'Love all.\n' +
 			'Play.'
@@ -102,8 +106,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_de(s),
 			'Meine Damen und Herren:\n' +
-			'Zu meiner Rechten, Andrew und Alice,\n' +
-			'und zu meiner Linken, Bob und Birgit.\n' +
+			'Zu meiner Rechten,\n' +
+			'Andrew und Alice,\n' +
+			'und zu meiner Linken,\n' +
+			'Bob und Birgit.\n' +
 			'Alice schlägt auf zu Birgit.\n\n' +
 			'0 beide.\n' +
 			'Bitte spielen.'
@@ -111,8 +117,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_en(s),
 			'Ladies and Gentlemen:\n' +
-			'On my right, Andrew and Alice,\n' +
-			'and on my left, Bob and Birgit.\n' +
+			'On my right,\n' +
+			'Andrew and Alice,\n' +
+			'and on my left,\n' +
+			'Bob and Birgit.\n' +
 			'Alice to serve to Birgit.\n\n' +
 			'Love all.\n' +
 			'Play.'
@@ -134,8 +142,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_de(s),
 			'Meine Damen und Herren:\n' +
-			'Zu meiner Rechten, Bob und Birgit,\n' +
-			'und zu meiner Linken, Andrew und Alice.\n' +
+			'Zu meiner Rechten,\n' +
+			'Bob und Birgit,\n' +
+			'und zu meiner Linken,\n' +
+			'Andrew und Alice.\n' +
 			'Bob schlägt auf zu Alice.\n\n' +
 			'0 beide.\n' +
 			'Bitte spielen.'
@@ -143,8 +153,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_en(s),
 			'Ladies and Gentlemen:\n' +
-			'On my right, Bob and Birgit,\n' +
-			'and on my left, Andrew and Alice.\n' +
+			'On my right,\n' +
+			'Bob and Birgit,\n' +
+			'and on my left,\n' +
+			'Andrew and Alice.\n' +
 			'Bob to serve to Alice.\n\n' +
 			'Love all.\n' +
 			'Play.'
@@ -172,8 +184,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_de(s),
 			'Meine Damen und Herren:\n' +
-			'Zu meiner Rechten, Bob,\n' +
-			'und zu meiner Linken, Alice.\n' +
+			'Zu meiner Rechten,\n' +
+			'Bob,\n' +
+			'und zu meiner Linken,\n' +
+			'Alice.\n' +
 			'Alice schlägt auf.\n\n' +
 			'0 beide.\n' +
 			'Bitte spielen.'
@@ -181,8 +195,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_en(s),
 			'Ladies and Gentlemen:\n' +
-			'On my right, Bob,\n' +
-			'and on my left, Alice.\n' +
+			'On my right,\n' +
+			'Bob,\n' +
+			'and on my left,\n' +
+			'Alice.\n' +
 			'Alice to serve.\n\n' +
 			'Love all.\n' +
 			'Play.'
@@ -201,8 +217,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_de(s),
 			'Meine Damen und Herren:\n' +
-			'Zu meiner Rechten, Alice,\n' +
-			'und zu meiner Linken, Bob.\n' +
+			'Zu meiner Rechten,\n' +
+			'Alice,\n' +
+			'und zu meiner Linken,\n' +
+			'Bob.\n' +
 			'Alice schlägt auf.\n\n' +
 			'0 beide.\n' +
 			'Bitte spielen.'
@@ -210,8 +228,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_en(s),
 			'Ladies and Gentlemen:\n' +
-			'On my right, Alice,\n' +
-			'and on my left, Bob.\n' +
+			'On my right,\n' +
+			'Alice,\n' +
+			'and on my left,\n' +
+			'Bob.\n' +
 			'Alice to serve.\n\n' +
 			'Love all.\n' +
 			'Play.'
@@ -230,8 +250,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_de(s),
 			'Meine Damen und Herren:\n' +
-			'Zu meiner Rechten, Bob,\n' +
-			'und zu meiner Linken, Alice.\n' +
+			'Zu meiner Rechten,\n' +
+			'Bob,\n' +
+			'und zu meiner Linken,\n' +
+			'Alice.\n' +
 			'Bob schlägt auf.\n\n' +
 			'0 beide.\n' +
 			'Bitte spielen.'
@@ -239,8 +261,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_en(s),
 			'Ladies and Gentlemen:\n' +
-			'On my right, Bob,\n' +
-			'and on my left, Alice.\n' +
+			'On my right,\n' +
+			'Bob,\n' +
+			'and on my left,\n' +
+			'Alice.\n' +
 			'Bob to serve.\n\n' +
 			'Love all.\n' +
 			'Play.'
@@ -258,8 +282,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_de(s),
 			'Meine Damen und Herren:\n' +
-			'Zu meiner Rechten, Alice,\n' +
-			'und zu meiner Linken, Bob.\n' +
+			'Zu meiner Rechten,\n' +
+			'Alice,\n' +
+			'und zu meiner Linken,\n' +
+			'Bob.\n' +
 			'Bob schlägt auf.\n\n' +
 			'0 beide.\n' +
 			'Bitte spielen.'
@@ -267,8 +293,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_en(s),
 			'Ladies and Gentlemen:\n' +
-			'On my right, Alice,\n' +
-			'and on my left, Bob.\n' +
+			'On my right,\n' +
+			'Alice,\n' +
+			'and on my left,\n' +
+			'Bob.\n' +
 			'Bob to serve.\n\n' +
 			'Love all.\n' +
 			'Play.'
@@ -292,8 +320,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_de(s),
 			'Meine Damen und Herren:\n' +
-			'Zu meiner Rechten, B team, vertreten durch Bob und Birgit,\n' +
-			'und zu meiner Linken, A team, vertreten durch Andrew und Alice.\n' +
+			'Zu meiner Rechten,\n' +
+			'B team, vertreten durch Bob und Birgit,\n' +
+			'und zu meiner Linken,\n' +
+			'A team, vertreten durch Andrew und Alice.\n' +
 			'A team schlägt auf, Alice zu Birgit.\n\n' +
 			'0 beide.\n' +
 			'Bitte spielen.'
@@ -301,8 +331,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_en(s),
 			'Ladies and Gentlemen:\n' +
-			'On my right, B team, represented by Bob and Birgit,\n' +
-			'and on my left, A team, represented by Andrew and Alice.\n' +
+			'On my right,\n' +
+			'B team, represented by Bob and Birgit,\n' +
+			'and on my left,\n' +
+			'A team, represented by Andrew and Alice.\n' +
 			'A team to serve, Alice to Birgit.\n\n' +
 			'Love all.\n' +
 			'Play.'
@@ -325,8 +357,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_de(s),
 			'Meine Damen und Herren:\n' +
-			'Zu meiner Linken, B team, vertreten durch Bob und Birgit,\n' +
-			'und zu meiner Rechten, A team, vertreten durch Andrew und Alice.\n' +
+			'Zu meiner Linken,\n' +
+			'B team, vertreten durch Bob und Birgit,\n' +
+			'und zu meiner Rechten,\n' +
+			'A team, vertreten durch Andrew und Alice.\n' +
 			'A team schlägt auf, Alice zu Birgit.\n\n' +
 			'0 beide.\n' +
 			'Bitte spielen.'
@@ -334,8 +368,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_en(s),
 			'Ladies and Gentlemen:\n' +
-			'On my left, B team, represented by Bob and Birgit,\n' +
-			'and on my right, A team, represented by Andrew and Alice.\n' +
+			'On my left,\n' +
+			'B team, represented by Bob and Birgit,\n' +
+			'and on my right,\n' +
+			'A team, represented by Andrew and Alice.\n' +
 			'A team to serve, Alice to Birgit.\n\n' +
 			'Love all.\n' +
 			'Play.'
@@ -358,8 +394,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_de(s),
 			'Meine Damen und Herren:\n' +
-			'Zu meiner Linken, B team, vertreten durch Bob und Birgit,\n' +
-			'und zu meiner Rechten, A team, vertreten durch Andrew und Alice.\n' +
+			'Zu meiner Linken,\n' +
+			'B team, vertreten durch Bob und Birgit,\n' +
+			'und zu meiner Rechten,\n' +
+			'A team, vertreten durch Andrew und Alice.\n' +
 			'B team schlägt auf, Bob zu Andrew.\n\n' +
 			'0 beide.\n' +
 			'Bitte spielen.'
@@ -367,8 +405,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_en(s),
 			'Ladies and Gentlemen:\n' +
-			'On my left, B team, represented by Bob and Birgit,\n' +
-			'and on my right, A team, represented by Andrew and Alice.\n' +
+			'On my left,\n' +
+			'B team, represented by Bob and Birgit,\n' +
+			'and on my right,\n' +
+			'A team, represented by Andrew and Alice.\n' +
 			'B team to serve, Bob to Andrew.\n\n' +
 			'Love all.\n' +
 			'Play.'
@@ -390,8 +430,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_de(s),
 			'Meine Damen und Herren:\n' +
-			'Zu meiner Rechten, B team, vertreten durch Bob und Birgit,\n' +
-			'und zu meiner Linken, A team, vertreten durch Andrew und Alice.\n' +
+			'Zu meiner Rechten,\n' +
+			'B team, vertreten durch Bob und Birgit,\n' +
+			'und zu meiner Linken,\n' +
+			'A team, vertreten durch Andrew und Alice.\n' +
 			'B team schlägt auf, Birgit zu Andrew.\n\n' +
 			'0 beide.\n' +
 			'Bitte spielen.'
@@ -399,8 +441,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_en(s),
 			'Ladies and Gentlemen:\n' +
-			'On my right, B team, represented by Bob and Birgit,\n' +
-			'and on my left, A team, represented by Andrew and Alice.\n' +
+			'On my right,\n' +
+			'B team, represented by Bob and Birgit,\n' +
+			'and on my left,\n' +
+			'A team, represented by Andrew and Alice.\n' +
 			'B team to serve, Birgit to Andrew.\n\n' +
 			'Love all.\n' +
 			'Play.'
@@ -430,8 +474,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_de(s),
 			'Meine Damen und Herren:\n' +
-			'Zu meiner Rechten, B team, vertreten durch Bob,\n' +
-			'und zu meiner Linken, A team, vertreten durch Alice.\n' +
+			'Zu meiner Rechten,\n' +
+			'B team, vertreten durch Bob,\n' +
+			'und zu meiner Linken,\n' +
+			'A team, vertreten durch Alice.\n' +
 			'A team schlägt auf.\n\n' +
 			'0 beide.\n' +
 			'Bitte spielen.'
@@ -439,8 +485,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_en(s),
 			'Ladies and Gentlemen:\n' +
-			'On my right, B team, represented by Bob,\n' +
-			'and on my left, A team, represented by Alice.\n' +
+			'On my right,\n' +
+			'B team, represented by Bob,\n' +
+			'and on my left,\n' +
+			'A team, represented by Alice.\n' +
 			'A team to serve.\n\n' +
 			'Love all.\n' +
 			'Play.'
@@ -459,8 +507,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_de(s),
 			'Meine Damen und Herren:\n' +
-			'Zu meiner Linken, B team, vertreten durch Bob,\n' +
-			'und zu meiner Rechten, A team, vertreten durch Alice.\n' +
+			'Zu meiner Linken,\n' +
+			'B team, vertreten durch Bob,\n' +
+			'und zu meiner Rechten,\n' +
+			'A team, vertreten durch Alice.\n' +
 			'A team schlägt auf.\n\n' +
 			'0 beide.\n' +
 			'Bitte spielen.'
@@ -468,8 +518,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_en(s),
 			'Ladies and Gentlemen:\n' +
-			'On my left, B team, represented by Bob,\n' +
-			'and on my right, A team, represented by Alice.\n' +
+			'On my left,\n' +
+			'B team, represented by Bob,\n' +
+			'and on my right,\n' +
+			'A team, represented by Alice.\n' +
 			'A team to serve.\n\n' +
 			'Love all.\n' +
 			'Play.'
@@ -488,8 +540,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_de(s),
 			'Meine Damen und Herren:\n' +
-			'Zu meiner Rechten, B team, vertreten durch Bob,\n' +
-			'und zu meiner Linken, A team, vertreten durch Alice.\n' +
+			'Zu meiner Rechten,\n' +
+			'B team, vertreten durch Bob,\n' +
+			'und zu meiner Linken,\n' +
+			'A team, vertreten durch Alice.\n' +
 			'B team schlägt auf.\n\n' +
 			'0 beide.\n' +
 			'Bitte spielen.'
@@ -497,8 +551,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_en(s),
 			'Ladies and Gentlemen:\n' +
-			'On my right, B team, represented by Bob,\n' +
-			'and on my left, A team, represented by Alice.\n' +
+			'On my right,\n' +
+			'B team, represented by Bob,\n' +
+			'and on my left,\n' +
+			'A team, represented by Alice.\n' +
 			'B team to serve.\n\n' +
 			'Love all.\n' +
 			'Play.'
@@ -518,8 +574,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_de(s),
 			'Meine Damen und Herren:\n' +
-			'Zu meiner Linken, B team, vertreten durch Bob,\n' +
-			'und zu meiner Rechten, A team, vertreten durch Alice.\n' +
+			'Zu meiner Linken,\n' +
+			'B team, vertreten durch Bob,\n' +
+			'und zu meiner Rechten,\n' +
+			'A team, vertreten durch Alice.\n' +
 			'B team schlägt auf.\n\n' +
 			'0 beide.\n' +
 			'Bitte spielen.'
@@ -527,8 +585,10 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_en(s),
 			'Ladies and Gentlemen:\n' +
-			'On my left, B team, represented by Bob,\n' +
-			'and on my right, A team, represented by Alice.\n' +
+			'On my left,\n' +
+			'B team, represented by Bob,\n' +
+			'and on my right,\n' +
+			'A team, represented by Alice.\n' +
 			'B team to serve.\n\n' +
 			'Love all.\n' +
 			'Play.'
@@ -1416,8 +1476,10 @@ _describe('pronunciation', function() {
 			'Andrew, Verwarnung wegen unsportlichen Verhaltens.\n' +
 			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Meine Damen und Herren:\n' +
-			'Zu meiner Rechten, Bob und Birgit,\n' +
-			'und zu meiner Linken, Andrew und Alice.\n' +
+			'Zu meiner Rechten,\n' +
+			'Bob und Birgit,\n' +
+			'und zu meiner Linken,\n' +
+			'Andrew und Alice.\n' +
 			'Andrew schlägt auf zu Birgit.\n\n' +
 			'0 beide.\n' +
 			'Bitte spielen.');
@@ -1425,8 +1487,10 @@ _describe('pronunciation', function() {
 			'Andrew, warning for misconduct.\n' +
 			'Bob, fault for misconduct.\n' +
 			'Ladies and Gentlemen:\n' +
-			'On my right, Bob and Birgit,\n' +
-			'and on my left, Andrew and Alice.\n' +
+			'On my right,\n' +
+			'Bob and Birgit,\n' +
+			'and on my left,\n' +
+			'Andrew and Alice.\n' +
 			'Andrew to serve to Birgit.\n\n' +
 			'Love all.\n' +
 			'Play.'
@@ -1436,8 +1500,10 @@ _describe('pronunciation', function() {
 			'Andrew, Verwarnung wegen unsportlichen Verhaltens.\n' +
 			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Meine Damen und Herren:\n' +
-			'Zu meiner Rechten, B team, vertreten durch Bob und Birgit,\n' +
-			'und zu meiner Linken, A team, vertreten durch Andrew und Alice.\n' +
+			'Zu meiner Rechten,\n' +
+			'B team, vertreten durch Bob und Birgit,\n' +
+			'und zu meiner Linken,\n' +
+			'A team, vertreten durch Andrew und Alice.\n' +
 			'A team schlägt auf, Andrew zu Birgit.\n\n' +
 			'0 beide.\n' +
 			'Bitte spielen.');
@@ -1445,8 +1511,10 @@ _describe('pronunciation', function() {
 			'Andrew, warning for misconduct.\n' +
 			'Bob, fault for misconduct.\n' +
 			'Ladies and Gentlemen:\n' +
-			'On my right, B team, represented by Bob and Birgit,\n' +
-			'and on my left, A team, represented by Andrew and Alice.\n' +
+			'On my right,\n' +
+			'B team, represented by Bob and Birgit,\n' +
+			'and on my left,\n' +
+			'A team, represented by Andrew and Alice.\n' +
 			'A team to serve, Andrew to Birgit.\n\n' +
 			'Love all.\n' +
 			'Play.'
@@ -1462,8 +1530,10 @@ _describe('pronunciation', function() {
 			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Meine Damen und Herren:\n' +
-			'Zu meiner Rechten, Bob und Birgit,\n' +
-			'und zu meiner Linken, Andrew und Alice.\n' +
+			'Zu meiner Rechten,\n' +
+			'Bob und Birgit,\n' +
+			'und zu meiner Linken,\n' +
+			'Andrew und Alice.\n' +
 			'Andrew schlägt auf zu Birgit.\n\n' +
 			'0 beide.\n' +
 			'Bitte spielen.');
@@ -1472,8 +1542,10 @@ _describe('pronunciation', function() {
 			'Bob, fault for misconduct.\n' +
 			'Alice, fault for misconduct.\n' +
 			'Ladies and Gentlemen:\n' +
-			'On my right, Bob and Birgit,\n' +
-			'and on my left, Andrew and Alice.\n' +
+			'On my right,\n' +
+			'Bob and Birgit,\n' +
+			'and on my left,\n' +
+			'Andrew and Alice.\n' +
 			'Andrew to serve to Birgit.\n\n' +
 			'Love all.\n' +
 			'Play.'
@@ -1484,8 +1556,10 @@ _describe('pronunciation', function() {
 			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Meine Damen und Herren:\n' +
-			'Zu meiner Rechten, B team, vertreten durch Bob und Birgit,\n' +
-			'und zu meiner Linken, A team, vertreten durch Andrew und Alice.\n' +
+			'Zu meiner Rechten,\n' +
+			'B team, vertreten durch Bob und Birgit,\n' +
+			'und zu meiner Linken,\n' +
+			'A team, vertreten durch Andrew und Alice.\n' +
 			'A team schlägt auf, Andrew zu Birgit.\n\n' +
 			'0 beide.\n' +
 			'Bitte spielen.');
@@ -1494,8 +1568,10 @@ _describe('pronunciation', function() {
 			'Bob, fault for misconduct.\n' +
 			'Alice, fault for misconduct.\n' +
 			'Ladies and Gentlemen:\n' +
-			'On my right, B team, represented by Bob and Birgit,\n' +
-			'and on my left, A team, represented by Andrew and Alice.\n' +
+			'On my right,\n' +
+			'B team, represented by Bob and Birgit,\n' +
+			'and on my left,\n' +
+			'A team, represented by Andrew and Alice.\n' +
 			'A team to serve, Andrew to Birgit.\n\n' +
 			'Love all.\n' +
 			'Play.'
@@ -2653,16 +2729,20 @@ _describe('pronunciation', function() {
 
 		assert.equal(pronounce_de(s),
 			'Meine Damen und Herren:\n' +
-			'Zu meiner Rechten, Marc Zwiebler, Germany,\n' +
-			'und zu meiner Linken, Chen Long, China.\n' +
+			'Zu meiner Rechten,\n' +
+			'Marc Zwiebler, Germany,\n' +
+			'und zu meiner Linken,\n' +
+			'Chen Long, China.\n' +
 			'Marc Zwiebler schlägt auf.\n\n' +
 			'0 beide.\n' +
 			'Bitte spielen.'
 		);
 		assert.equal(pronounce_en(s),
 			'Ladies and Gentlemen:\n' +
-			'On my right, Marc Zwiebler, Germany,\n' +
-			'and on my left, Chen Long, China.\n' +
+			'On my right,\n' +
+			'Marc Zwiebler, Germany,\n' +
+			'and on my left,\n' +
+			'Chen Long, China.\n' +
 			'Marc Zwiebler to serve.\n\n' +
 			'Love all.\n' +
 			'Play.'
