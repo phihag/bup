@@ -256,6 +256,10 @@ function parallel(tasks, callback) {
 	});
 }
 
+function count_lines(s) {
+	return s.split(/\n/).length;
+}
+
 function replace_all(str, search, replacement) {
 	return str.split(search).join(replacement);
 }
@@ -263,6 +267,7 @@ function replace_all(str, search, replacement) {
 return {
 	add_zeroes: add_zeroes,
 	any: any,
+	count_lines: count_lines,
 	date_str: date_str,
 	datetime_str: datetime_str,
 	deep_equal: deep_equal,

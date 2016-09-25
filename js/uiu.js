@@ -73,10 +73,10 @@ function disabled_qsa(qs, val) {
 		var n = nodes[i];
 		if (val) {
 			n.setAttribute('disabled', 'disabled');
-			$(n).addClass('half-invisible');
+			addClass(n, 'half-invisible');
 		} else {
 			n.removeAttribute('disabled');
-			$(n).removeClass('half-invisible');
+			removeClass(n, 'half-invisible');
 		}
 	}
 }
@@ -176,6 +176,14 @@ function removeClass_qs(selector, className) {
 	return removeClass(qs(selector), className);
 }
 
+function setClass(el, className, enabled) {
+	if (enabled) {
+		addClass(el, className);
+	} else {
+		removeClass(el, className);
+	}
+}
+
 return {
 	addClass: addClass,
 	addClass_qs: addClass_qs,
@@ -192,6 +200,7 @@ return {
 	remove_qsa: remove_qsa,
 	removeClass: removeClass,
 	removeClass_qs: removeClass_qs,
+	setClass: setClass,
 	text: text,
 	text_qs: text_qs,
 	visible: visible,

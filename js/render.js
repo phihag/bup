@@ -234,11 +234,8 @@ function _set_dialog(s, dialog_qs, btn_str) {
 		span_str = '';
 	}
 
-	if (span_str) {
-		$(pronunciation_span).addClass('pronunciation_nonempty');
-	} else {
-		$(pronunciation_span).removeClass('pronunciation_nonempty');
-	}
+	uiu.setClass(pronunciation_span, 'pronunciation_nonempty', span_str);
+	uiu.setClass(pronunciation_span, 'pronunciation_longtext', span_str && utils.count_lines(span_str) >= 3);
 
 	uiu.text(pronunciation_span, span_str);
 	uiu.text(button, btn_str);

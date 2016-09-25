@@ -13,6 +13,9 @@
 .pick_dialog .pronunciation_nonempty + button {
 	margin-top: 0.1em;
 }
+.pronunciation_longtext {
+	text-align: left;
+}
 
 #left_score,
 #right_score {
