@@ -4,6 +4,7 @@ mail Jan
 	Zeilenumbruch Ansagen
 	link to bldemo
 
+Vilson james-Lukas Vattanirappel
 generate static "Mannschaftsunterlagen" files from turnier.de
 beautify
 	vdemo/en
@@ -91,6 +92,7 @@ bup display mode
 	support display mode without network
 	show games on the side that won them?
 
+xlsx: Reihenfolge optimieren
 Content-security-policy
 test offline (all features present with all demos?)
 	broken atm?

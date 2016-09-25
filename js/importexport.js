@@ -3,7 +3,7 @@ var importexport = (function() {
 
 function load_data(s, data) {
 	if (data.version >= 2) {
-		eventutils.annotate(s, event);
+		eventutils.annotate(s, data.event);
 	}
 	return data;
 }
