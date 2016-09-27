@@ -51,10 +51,10 @@ function ui_init(s) {
 		scoresheet.event_show();
 	});
 	Mousetrap.bind('shift+j', function() {
-		importexport.export_json(state);
+		importexport.ui_export_json(state);
 	});
 	Mousetrap.bind('shift+i', function() {
-		importexport.import_json(state);
+		importexport.ui_import_json(state);
 	});
 	Mousetrap.bind('shift+x', function() {
 		importexport.send_export(state);

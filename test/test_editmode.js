@@ -1,3 +1,5 @@
+'use strict';
+
 var assert = require('assert');
 
 var tutils = require('./tutils');
@@ -8,9 +10,6 @@ var DOUBLES_SETUP = tutils.DOUBLES_SETUP;
 var press_score = tutils.press_score;
 var state_after = tutils.state_after;
 var bup = tutils.bup;
-
-(function() {
-'use strict';
 
 _describe('editmode', function() {
 	_it('serve switching', function() {
@@ -1449,5 +1448,3 @@ _describe('editmode', function() {
 		assert.equal(court.right_odd.player.name, 'Bob');
 	});
 });
-
-})();

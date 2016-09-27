@@ -1,5 +1,5 @@
-var eventutils = (function() {
 'use strict';
+var eventutils = (function() {
 
 function guess_gender(match_setup, player_id) {
 	var mname = match_setup.discipline_key ? match_setup.match_name : match_setup.match_name;
@@ -99,10 +99,7 @@ function annotate(s, event) {
 		});
 	}
 
-	var league_key = network.league_key(event);
-	if (!event.league_key) {
-		event.league_key = league_key;
-	}
+	var league_key = event.league_key;
 
 	/*@DEV*/
 	if (event.tournament_name && event.tournament_name === name_by_league(league_key)) {

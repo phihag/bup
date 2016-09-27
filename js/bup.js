@@ -108,6 +108,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 		courtspot: courtspot,
 		eventutils: eventutils,
 		i18n: i18n,
+		importexport: importexport,
 		network: network,
 		order: order,
 		p2p: p2p,
