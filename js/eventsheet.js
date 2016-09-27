@@ -796,7 +796,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 
 		function fill_result_sheet(cb) {
 			xlsx_file.modify_sheet('5', cb, function(sheet) {
-				var league_key = network.league_key(ev);
+				var league_key = ev.league_key;
 				var x_location = {
 					'1BL-2016': 'E4',
 					'2BLN-2016': 'E5',
@@ -1252,7 +1252,7 @@ function download(es_key, callback) {
 }
 
 function render_links(s) {
-	var league_key = network.league_key(s.event);
+	var league_key = event ? event.league_key : undefined;
 	if (utils.deep_equal(ui_current_league_key, league_key)) {
 		return;  // No need to reconfigure containers
 	}

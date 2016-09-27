@@ -15,24 +15,6 @@ function is_enabled() {
 	return !!get_netw() || !!networks.p2p;
 }
 
-function league_key(event) {
-	if (!event) {
-		return null;
-	}
-
-	if (event.league_key) {
-		return event.league_key;
-	}
-
-	// Support for old CourtSpot versions
-	var eventsheets = event.eventsheets;
-	if (eventsheets && (eventsheets.length > 0)) {
-		return eventsheets[0].key;
-	}
-
-	return null;
-}
-
 function get_presses(match) {
 	if (match.presses) {
 		return match.presses;
@@ -628,7 +610,6 @@ return {
 	get_presses: get_presses,
 	get_real_netw: get_real_netw,
 	is_enabled: is_enabled,
-	league_key: league_key,
 	list_matches: list_matches,
 	match_by_id: match_by_id,
 	request: request,

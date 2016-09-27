@@ -220,7 +220,6 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
 	var utils = require('./utils');
-	var network = require('./network');
 	var report_problem = require('./report_problem');
 
 	module.exports = eventutils;

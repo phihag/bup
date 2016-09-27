@@ -37,6 +37,7 @@ function ui_import_json(s) {
 		var file = ev.target.files[0];
 		var reader = new FileReader();
 		reader.onload = function(e) {
+			var input_json = e.target.result;
 			try {
 				var input_data;
 				try {
@@ -47,7 +48,7 @@ function ui_import_json(s) {
 					}));
 				}
 
-				import_json(s, e.target.result);
+				import_data(s, input_data);
 			} catch (exc) {
 				alert(exc.message);
 			}
