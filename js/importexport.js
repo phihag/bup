@@ -100,7 +100,12 @@ function ui_init() {
 
 	click.qs('.settings_send_export', function(e) {
 		e.preventDefault();
+		var status = uiu.qs('.settings_footer_status');
 		send_export(state);
+		uiu.text(status, state._('importexport:export sent'));
+		window.setTimeout(function() {
+			uiu.text(status, '');
+		}, 2000);
 	});
 }
 

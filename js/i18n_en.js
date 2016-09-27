@@ -387,6 +387,7 @@ var i18n_en = {
 
 'importexport:invalid JSON': 'Invalid JSON: {msg}',
 'importexport:not an export file': 'This file is not a bup-export file!',
+'importexport:export sent': 'Thanks! Export file sent.',
 
 'weekday:0': 'Sun',
 'weekday:1': 'Mon',
