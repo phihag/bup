@@ -119,7 +119,6 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var click = require('./click');
 	var eventutils = require('./eventutils');
-	var netstats = require('./netstats');
 	var network = require('./network');
 	var report_problem = require('./report_problem');
 	var staticnet = require('./staticnet');
