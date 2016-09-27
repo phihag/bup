@@ -1,6 +1,6 @@
-beautify
-	vdemo/en
+vdemo: fix courts
 export: generate v2
+test export + import
 generate static "Mannschaftsunterlagen" files from turnier.de
 netstats: +moving avg
 feedback on export / diagnosis button
@@ -10,11 +10,8 @@ set umpire name/service judge name/court id if != settings
 	use in scoresheet
 	use in eventsheet (test!)
 	stats: display court_id and umpire_name and service_name if set (even highlight?)
-
-mail Ulf
-
 improve click
-	highlight with touchend
+	highlight until touchend
 		(filter: brightness(.2);)
 	improve touchend
 handle superfluous score presses
@@ -23,9 +20,11 @@ handle superfluous score presses
 	test with allowing clicks on disabled button
 xlsx style at center
 btde export should export all known matches!
-sent export should be able to imported
 simplify courtspot_bupabfrage (add check in eventutils.annotate)
 automatically send export if state finishes from event incomplete -> event complete
+	test that this fails gracefully if no inet connection
+
+mail Ulf
 
 referee mode
 	via websockets
@@ -48,16 +47,10 @@ wakelock
 	wakelock craft video
 
 fix autorescale on tablets
-standard annotation for league_key and the like
-	make sure that existing keys stay unchanged
-	warn if redundant keys
 Bundesliga xlsx scoresheets
 	vertical-texts with shape instead
 	diagonal line for game-end circles
-courts for edemo / vdemo
-retest edemo / vdemo with different locales
 
-recognize that teammatch is over and send export (if inet connection)!
 editmode: input values from last match carry over, should not
 interactive error handler => ask for an email
 contemplate adding various PDFs to appcache

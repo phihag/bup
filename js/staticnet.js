@@ -12,18 +12,27 @@ function sync(s) {
 		return;
 	}
 
-	var all_matches = event.matches;
-	var nmatch;
-	for (var i = 0;i < all_matches.length;i++) {
-		var m = all_matches[i];
-		if (s.setup.match_id === m.setup.match_id) {
-			nmatch = all_matches[i];
+	if (s.settings.court_id === 'referee') {
+		return;
+	}
+
+	if (event.courts) {
+		var court = utils.find(event.courts, function(c) {
+			return s.settings.court_id == c.court_id;
+		});
+		if (court) {
+			court.match_id = s.setup.match_id;
 		}
 	}
+
+	var nmatch = utils.find(event.matches, function(m) {
+		return s.setup.match_id === m.setup.match_id;
+	});
 	if (! nmatch) {
 		// Manually created match
 		return;
 	}
+
 
 	nmatch.network_score = calc.netscore(s);
 	nmatch.presses_json = JSON.stringify(s.presses);
