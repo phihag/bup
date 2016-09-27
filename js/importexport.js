@@ -65,12 +65,7 @@ function gen_export_data(s, include_debug) {
 		event: s.event,
 	};
 	if (include_debug) {
-		utils.obj_update(res, {
-			setup: s.setup,
-			presses: s.presses,
-			netstats: netstats.all_stats,
-			settings: s.settings,
-		});
+		utils.obj_update(res, report_problem.get_info());
 	}
 	return res;
 }

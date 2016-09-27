@@ -120,6 +120,7 @@ return {
 	report: report,
 	send_export: send_export,
 	silent_error: silent_error,
+	get_info: get_info,
 	on_error: on_error,
 	ui_init: ui_init,
 	update: update,

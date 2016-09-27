@@ -1252,7 +1252,7 @@ function download(es_key, callback) {
 }
 
 function render_links(s) {
-	var league_key = event ? event.league_key : undefined;
+	var league_key = s.event ? s.event.league_key : undefined;
 	if (utils.deep_equal(ui_current_league_key, league_key)) {
 		return;  // No need to reconfigure containers
 	}
