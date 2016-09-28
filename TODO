@@ -1,7 +1,13 @@
-CourtSpot: add test for data
 xlsx style at center
 	+ border
 	Satzergebnisse
+CourtSpot: extend tests
+	whole match
+	cards
+	injury
+	advertisements after match
+	interval display
+	add a testcase for singles
 btde export should export all known matches!
 automatically send export if state finishes from event incomplete -> event complete
 	different mail subject (auto-export)
