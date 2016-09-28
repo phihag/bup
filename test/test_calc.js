@@ -2634,7 +2634,7 @@ _describe('calc_state', function() {
 			red_card,
 		]);
 
-		press_score(presses, 10, 5);
+		press_score(presses, 7, 5);
 		presses.push(referee);
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.deepEqual(s.match.marks, [

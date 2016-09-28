@@ -1,3 +1,5 @@
+'use strict';
+
 var assert = require('assert');
 
 var tutils = require('./tutils');
@@ -8,9 +10,6 @@ var press_score = tutils.press_score;
 var state_after = tutils.state_after;
 var bup = tutils.bup;
 
-(function() {
-'use strict';
-
 
 var DOUBLES_SETUP = bup.utils.deep_copy(tutils.DOUBLES_SETUP);
 DOUBLES_SETUP.counting = '2x21+11';
@@ -18,7 +17,7 @@ var SINGLES_SETUP = bup.utils.deep_copy(tutils.SINGLES_SETUP);
 SINGLES_SETUP.counting = '2x21+11';
 
 
-_describe('Bundesliga 2016 counting', function() {
+_describe('2x21+11 counting', function() {
 	_it('go through a whole match', function() {
 		var presses = [{
 			type: 'pick_side',
@@ -36,14 +35,29 @@ _describe('Bundesliga 2016 counting', function() {
 			type: 'love-all',
 		});
 		press_score(presses, 10, 7);
+
+		var s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [7, 10]);
+		assert.strictEqual(s.game.team1_left, false);
+		assert.strictEqual(s.game.interval, false);
+		assert.strictEqual(s.game.change_sides, false);
+		assert.strictEqual(s.game.matchpoint, false);
+		assert.strictEqual(s.game.gamepoint, false);
+		assert.strictEqual(s.game.game, false);
+		assert.strictEqual(s.game.finished, false);
+		assert.strictEqual(s.match.finished, false);
+		assert.strictEqual(s.game.team1_won, null);
+		assert.strictEqual(s.match.team1_won, null);
+		assert.deepStrictEqual(s.timer, false);
+
 		presses.push({
 			type: 'score',
 			side: 'left',
 			timestamp: 1000,
 		});
-		
-		var s = state_after(presses, SINGLES_SETUP);
+		s = state_after(presses, SINGLES_SETUP);
 		assert.deepStrictEqual(s.game.score, [7, 11]);
+		assert.strictEqual(s.game.team1_left, false);
 		assert.strictEqual(s.game.interval, true);
 		assert.strictEqual(s.game.change_sides, false);
 		assert.strictEqual(s.game.matchpoint, false);
@@ -59,13 +73,77 @@ _describe('Bundesliga 2016 counting', function() {
 			start: 1000,
 		});
 
-		press_score(presses, 10, 10);
+		press_score(presses, 9, 8);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [15, 20]);
+		assert.strictEqual(s.game.team1_left, false);
+		assert.strictEqual(s.game.interval, false);
+		assert.strictEqual(s.game.change_sides, false);
+		assert.strictEqual(s.game.matchpoint, false);
+		assert.strictEqual(s.game.gamepoint, true);
+		assert.strictEqual(s.game.game, false);
+		assert.strictEqual(s.game.finished, false);
+		assert.strictEqual(s.match.finished, false);
+		assert.strictEqual(s.game.team1_won, null);
+		assert.strictEqual(s.match.team1_won, null);
+		assert.deepStrictEqual(s.timer, false);
+
+		press_score(presses, 0, 1);
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [16, 20]);
+		assert.strictEqual(s.game.team1_left, false);
+		assert.strictEqual(s.game.interval, false);
+		assert.strictEqual(s.game.change_sides, false);
+		assert.strictEqual(s.game.matchpoint, false);
+		assert.strictEqual(s.game.gamepoint, false);
+		assert.strictEqual(s.game.game, false);
+		assert.strictEqual(s.game.finished, false);
+		assert.strictEqual(s.match.finished, false);
+		assert.strictEqual(s.game.team1_won, null);
+		assert.strictEqual(s.match.team1_won, null);
+		assert.deepStrictEqual(s.timer, false);
+
+		presses.push({
+			type: 'score',
+			side: 'left',
+			timestamp: 1500,
+		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [16, 21]);
+		assert.strictEqual(s.game.interval, false);
+		assert.strictEqual(s.game.change_sides, false);
+		assert.strictEqual(s.game.matchpoint, false);
+		assert.strictEqual(s.game.gamepoint, false);
+		assert.strictEqual(s.game.game, true);
+		assert.strictEqual(s.game.finished, true);
+		assert.strictEqual(s.match.finished, false);
+		assert.strictEqual(s.game.team1_won, false);
+		assert.strictEqual(s.match.team1_won, null);
+		assert.deepStrictEqual(s.timer, {
+			start: 1500,
+			duration: 120000,
+			exigent: 20499,
+		});
+
 		presses.push({
 			type: 'postgame-confirm',
 		});
 		presses.push({
 			type: 'love-all',
 		});
+		s = state_after(presses, SINGLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [0, 0]);
+		assert.strictEqual(s.game.interval, false);
+		assert.strictEqual(s.game.change_sides, false);
+		assert.strictEqual(s.game.matchpoint, false);
+		assert.strictEqual(s.game.gamepoint, false);
+		assert.strictEqual(s.game.game, false);
+		assert.strictEqual(s.game.finished, false);
+		assert.strictEqual(s.match.finished, false);
+		assert.strictEqual(s.game.team1_won, null);
+		assert.strictEqual(s.match.team1_won, null);
+		assert.deepStrictEqual(s.timer, false);
+
 		press_score(presses, 5, 4);
 		
 		s = state_after(presses, SINGLES_SETUP);
@@ -863,5 +941,3 @@ _describe('Bundesliga 2016 counting', function() {
 			bup.calc.netscore(s), [[21, 19], [14, 21], [15, 14]]);
 	});
 });
-
-})();
