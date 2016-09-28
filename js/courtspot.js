@@ -48,7 +48,7 @@ function sync(s, force) {
 		return;
 	}
 
-	var netscore = calc.netscore(s);
+	var netscore = calc.netscore(s, true);
 
 	// CourtSpot requires us to set the team currently serving.
 	// Calculate that from match winner or actual game details.
@@ -60,10 +60,6 @@ function sync(s, force) {
 		(s.game.team1_serving !== null) &&
 		(state.game.teams_player1_even[0] !== null) &&
 		(state.game.teams_player1_even[1] !== null));
-
-	if (serve_is_determined && (netscore.length === 0)) {
-		netscore = [[0, 0]];
-	}
 
 	var data = {
 		'Detail': (s.match.finish_confirmed ? 'leer' : (serve_is_determined ? 'alles' : (side_is_determined ? 'punkte' : 'leer'))),

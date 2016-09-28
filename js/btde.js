@@ -89,7 +89,7 @@ function send_score(s) {
 		return;
 	}
 
-	var netscore = calc.netscore(s);
+	var netscore = calc.netscore(s, true);
 
 	// badminticker requirements - show 0:0 before match start
 	if (netscore.length === 0) {
@@ -144,7 +144,7 @@ function send_score(s) {
 }
 
 function sync(s) {
-	var netscore = calc.netscore(s);
+	var netscore = calc.netscore(s, true);
 	if ((s.settings.court_id != s.remote.btde_court) || !utils.deep_equal(netscore, s.remote.btde_score)) {
 		send_score(s);
 	}
