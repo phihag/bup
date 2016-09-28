@@ -558,7 +558,7 @@ function parse_match(state, col_count) {
 	return _layout(s.scoresheet_games, col_count, notes);
 }
 
-function sheet_render(s, svg, referee_view) {
+function sheet_render(s, svg) {
 	function _text(search, str) {
 		if (str !== 0 && !str) {
 			str = '';
@@ -919,7 +919,7 @@ function event_render(container) {
 			calc.state(s);
 			state.new_s = s;
 
-			sheet_render(s, svg, true);
+			sheet_render(s, svg);
 		});
 
 		uiu.visible_qs('.scoresheet_loading-icon', false);
