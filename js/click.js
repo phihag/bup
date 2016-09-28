@@ -2,8 +2,6 @@
 var click = (function() {
 var mode = calc_auto();
 
-function _sqr(x) {return x*x};
-
 function on_click(node, callback) {
 	uiu.addClass(node, 'click_button');
 
