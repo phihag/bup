@@ -66,7 +66,7 @@ function sync(s, force) {
 		'Satz': Math.max(1, netscore.length),
 		'gewonnenHeim': game_score[0],
 		'gewonnenGast': game_score[1],
-		'team_links': (s.game.team1_lefnt ? 'heim' : 'gast'),
+		'team_links': (s.game.team1_left ? 'heim' : 'gast'),
 		'team_aufschlag': (s.game.team1_serving ? 'Heim' : 'Gast'),
 		'aufschlag_score': s.game.score[s.game.team1_serving ? 0 : 1],
 		'heim_spieler1_links': (s.game.teams_player1_even[0] ? 'false' : 'true'),
