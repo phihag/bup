@@ -37,7 +37,14 @@ manifest: appcache-manifest
 appcache-manifest:
 	node div/make_manifest.js dist/bup/ div/bup.appcache.in dist/bup/bup.appcache
 
+teamlists:
+	mkdir -p div/teamlists
+	div/gen_teamlist.js 'http://www.turnier.de/sport/draw.aspx?id=2E6B5BAC-8F64-46E8-94FC-804611281DF1&draw=1' div/teamlists/teamlist-1BL-2016.html
+	div/gen_teamlist.js 'http://www.turnier.de/sport/draw.aspx?id=2E6B5BAC-8F64-46E8-94FC-804611281DF1&draw=2' div/teamlists/teamlist-2BLN-2016.html
+	div/gen_teamlist.js 'http://www.turnier.de/sport/draw.aspx?id=2E6B5BAC-8F64-46E8-94FC-804611281DF1&draw=3' div/teamlists/teamlist-2BLS-2016.html
+
 dist: cleandist ## Create distribution files
+	@test -d div/teamlists || $(MAKE) teamlists
 	mkdir -p dist/bup
 
 	node div/make_dist.js . dist/bup/ dist/tmp
@@ -72,6 +79,7 @@ dist: cleandist ## Create distribution files
 		div/Spielberichtsbogen_1BL-2015.pdf \
 		div/Spielberichtsbogen_2BL-2015.pdf \
 		div/wakelock.mp4 \
+		div/teamlists \
 		--target-directory dist/bup/div/
 
 	$(MAKE) appcache-manifest
@@ -112,5 +120,6 @@ cd: coverage-display
 clean: cleandist ## Remove temporary files
 	rm -rf -- libs
 	rm -rf -- node_modules
+	rm -rf -- div/teamlists/
 
 .PHONY: default help deps deps-optional test clean install-libs force-install-libs upload dist cleandist coverage coverage-display cd lint jshint eslint appcache-manifest manifest upload-run stylelint doclint

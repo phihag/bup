@@ -15,7 +15,6 @@ handle superfluous score presses
 	test with allowing clicks on disabled button
 xlsx style at center
 btde export should export all known matches!
-simplify courtspot_bupabfrage (add check in eventutils.annotate)
 automatically send export if state finishes from event incomplete -> event complete
 	test that this fails gracefully if no inet connection
 add demo mode to UI (also a way to disable)

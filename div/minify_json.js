@@ -1,14 +1,12 @@
+'use strict';
 var fs = require('fs');
 var process = require('process');
 
 
-(function() {
-'use strict';
-
 function main() {
 	var args = process.argv.slice(2);
 	if (args.length != 2) {
-		console.log('Usage: ' + process.argv[1] + ' IN.json OUT.json'); // eslint-disable-line no-console
+		console.log('Usage: ' + process.argv[1] + ' IN.json OUT.json');
 		return 1;
 	}
 
@@ -22,5 +20,3 @@ function main() {
 }
 
 process.exit(main());
-
-})();
