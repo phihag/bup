@@ -176,10 +176,22 @@ function uninstall_destructor(s, destructor) {
 	}
 }
 
-
 function on_press(press, s) {
 	if (s === undefined) {
 		s = state;
+	}
+
+	var se = s.settings;
+	if (se && se.court_id != 'referee') {
+		if (se.umpire_name && (se.umpire_name !== s.match.umpire_name)) {
+			press.umpire_name = se.umpire_name;
+		}
+		if (se.service_judge_name && (se.service_judge_name !== s.match.service_judge_name)) {
+			press.service_judge_name = se.service_judge_name;
+		}
+		if (se.court_id && (se.court_id !== s.match.court_id)) {
+			press.court_id = se.court_id;
+		}
 	}
 
 	var on_end = netstats.perf('perfp.calc');

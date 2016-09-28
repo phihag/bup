@@ -442,6 +442,16 @@ function score(s, team_id, press) {
 }
 
 function calc_press(s, press) {
+	if (press.umpire_name) {
+		s.match.umpire_name = press.umpire_name;
+	}
+	if (press.service_judge_name) {
+		s.match.service_judge_name = press.service_judge_name;
+	}
+	if (press.court_id) {
+		s.match.court_id = press.court_id;
+	}
+
 	switch (press.type) {
 	case 'pick_side':
 		// Manuel Lappe reported a mysterious error where team1_left seems to have been not boolean
