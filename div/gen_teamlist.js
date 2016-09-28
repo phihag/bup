@@ -37,7 +37,7 @@ function download_bin(url, cb) {
 			cb(null, null, all);
 		});
 	}).end();
-};
+}
 
 function match_all(pattern, input) {
 	var res = [];
@@ -161,7 +161,7 @@ function main() {
 				'<body><h1>Mannschaftsunterlagen ' + league_info.name + '</h1>' +
 				main_content +
 				'\n</body></html>\n');
-			fs.writeFile(out_fn, main_content);
+			fs.writeFile(out_fn, html);
 		});
 	});
 }
