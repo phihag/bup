@@ -377,6 +377,9 @@ var i18n_en = {
 'pressdesc:state:retired': '{winner} wins {score_str}',
 'pressdesc:disqualified': 'black card {player}',
 'pressdesc:state:disqualified': '{winner} wins {score_str}',
+'pressdesc:court_id': 'Court {court_id}\n',
+'pressdesc:umpire_name': 'Umpire: {umpire_name}\n',
+'pressdesc:service_judge_name': 'Service judge: {service_judge_name}\n',
 
 'order:header': 'Match order',
 'order:back': 'Back',

@@ -380,6 +380,9 @@ var i18n_de = {
 'pressdesc:state:retired': '{winner} gewinnt {score_str}',
 'pressdesc:disqualified': 'Schwarze Karte {player}.',
 'pressdesc:state:disqualified': '{winner} gewinnt {score_str}',
+'pressdesc:court_id': 'Feld {court_id}\n',
+'pressdesc:umpire_name': 'Schiedsrichter: {umpire_name}\n',
+'pressdesc:service_judge_name': 'Aufschlagrichter: {service_judge_name}\n',
 
 'order:header': 'Spielreihenfolge',
 'order:back': '< Zurück',

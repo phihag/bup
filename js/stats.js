@@ -719,9 +719,19 @@ function render_presses(table, s) {
 		}
 
 		var desc = press_description(scopy, press);
-		var sdesc = press_state_desc(scopy, press);
+		var sdesc = '';
+		if (press.court_id) {
+			sdesc += s._('pressdesc:court_id', press);
+		}
+		if (press.umpire_name) {
+			sdesc += s._('pressdesc:umpire_name', press);
+		}
+		if (press.service_judge_name) {
+			sdesc += s._('pressdesc:service_judge_name', press);
+		}
+		sdesc += press_state_desc(scopy, press);
 
-		var highlight_ts = (i === 0) || (i === presses.length - 1) || ((press.timestamp - last_ts) > 120000);
+		var highlight_ts = (i === 0) || (i === presses.length - 1) || ((press.timestamp - last_ts) > 60000);
 		last_ts = press.timestamp;
 
 		var tr = uiu.create_el(table, 'tr');
