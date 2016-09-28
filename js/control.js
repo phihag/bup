@@ -197,10 +197,6 @@ function on_press(press, s) {
 	var on_end = netstats.perf('perfp.calc');
 	press.timestamp = Date.now();
 	s.presses.push(press);
-	if (s.settings && s.settings.umpire_name) {
-		s.metadata.umpire_name = s.settings.umpire_name;
-		s.metadata.service_judge_name = s.settings.service_judge_name;
-	}
 
 	calc.state(s);
 	on_end();
