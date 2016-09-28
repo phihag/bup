@@ -41,13 +41,7 @@ function prepare_match(current_settings, match) {
 	}
 }
 
-var outstanding_requests = 0;
-function sync(s, force) {
-	if (s.settings.court_id === 'referee') {
-		network.errstate('courtspot.set', null);
-		return;
-	}
-
+function gen_data(s) {
 	var netscore = calc.netscore(s, true);
 
 	// CourtSpot requires us to set the team currently serving.
@@ -58,8 +52,8 @@ function sync(s, force) {
 	var side_is_determined = s.game.team1_left !== null;
 	var serve_is_determined = (
 		(s.game.team1_serving !== null) &&
-		(state.game.teams_player1_even[0] !== null) &&
-		(state.game.teams_player1_even[1] !== null));
+		(s.game.teams_player1_even[0] !== null) &&
+		(s.game.teams_player1_even[1] !== null));
 
 	var data = {
 		'Detail': (s.match.finish_confirmed ? 'leer' : (serve_is_determined ? 'alles' : (side_is_determined ? 'punkte' : 'leer'))),
@@ -80,6 +74,17 @@ function sync(s, force) {
 		data['HeimSatz' + (i+1)] = (i < netscore.length) ? netscore[i][0] : -1;
 		data['GastSatz' + (i+1)] = (i < netscore.length) ? netscore[i][1] : -1;
 	}
+	return data;
+}
+
+var outstanding_requests = 0;
+function sync(s, force) {
+	if (s.settings.court_id === 'referee') {
+		network.errstate('courtspot.set', null);
+		return;
+	}
+
+	var data = gen_data(s);
 	if (!force && utils.deep_equal(data, s.remote.courtspot_data) && (outstanding_requests === 0)) {
 		return;
 	}
@@ -209,6 +214,8 @@ return {
 	courts: courts,
 	service_name: service_name,
 	editable: editable,
+	// Testing only
+	gen_data: gen_data,
 };
 
 }
