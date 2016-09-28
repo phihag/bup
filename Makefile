@@ -60,6 +60,7 @@ dist: cleandist ## Create distribution files
 	node div/minify_json.js div/vdemo.json dist/bup/div/vdemo.json
 	node div/minify_json.js div/bldemo.json dist/bup/div/bldemo.json
 	node div/minify_json.js div/nrwdemo.json dist/bup/div/nrwdemo.json
+	cp -R div/teamlists --target-directory dist/bup/div/
 	cp \
 		div/bundesliga-ballsorten-2016.pdf \
 		div/bundesliga-Mindestanforderungen.pdf \
@@ -79,7 +80,6 @@ dist: cleandist ## Create distribution files
 		div/Spielberichtsbogen_1BL-2015.pdf \
 		div/Spielberichtsbogen_2BL-2015.pdf \
 		div/wakelock.mp4 \
-		div/teamlists \
 		--target-directory dist/bup/div/
 
 	$(MAKE) appcache-manifest
