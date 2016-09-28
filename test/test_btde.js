@@ -1,12 +1,11 @@
+'use strict';
+
 var assert = require('assert');
 
 var tutils = require('./tutils');
 var bup = tutils.bup;
 var _describe = tutils._describe;
 var _it = tutils._it;
-
-(function() {
-'use strict';
 
 _describe('btde', function() {
 	_it('parse_match_list', function() {
@@ -496,5 +495,3 @@ _describe('btde', function() {
 		assert.deepEqual(ml, expected);
 	});
 });
-
-})();
