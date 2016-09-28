@@ -12,8 +12,6 @@ automatically send export if state finishes from event incomplete -> event compl
 	test that this fails gracefully if no inet connection
 add demo mode to UI (also a way to disable)
 
-mail Ulf
-
 referee mode
 	via websockets
 	add subproject for server
@@ -284,9 +282,6 @@ test touch interface
 test touch latency
 prevent double touches
 
-formalize backup_players event entry (in edemo/vdemo, later in liveaw)
-injury timer
-	in scoresheet (if not disqualified / retired afterwards)
 show what was undone
 support for team flags
 support for player portraits
@@ -401,8 +396,6 @@ anroid chrome address bar background color
 remove one of network.calc_gamescore and calc.calc_game_score?
 improve yellow-card.svg / red-card.svg
 replace state.match.max_games by a function
-helper function for document.querySelector which asserts result is true (and omits silent error otherwise)
-	use that in various util functions as well
 allow challenges
 	failsafe (http://www.badmintoncentral.com/forums/showthread.php/160170-sub-standard-umpire-gave-a-free-point-to-Okuhara-in-first-set?p=2413636#post2413636)
 CourtSpot: Spielreihenfolge festlegen
