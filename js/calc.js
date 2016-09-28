@@ -513,6 +513,12 @@ function calc_press(s, press) {
 			report_problem.silent_error('Unclear sides while scoring, type ' + side_type);
 		}
 
+		// This should not be possible in the UI, but could be caused by a race condition or invalid data
+		if (s.game.finished) {
+			report_problem.silent_error('Ignoring score press: Game is already finished');
+			break;
+		}
+
 		var team1_scored = (!!s.game.team1_left == (press.side == 'left'));
 		s.game.just_interval = false;
 		score(s, (team1_scored ? 0 : 1), press);

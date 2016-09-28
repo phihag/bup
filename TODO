@@ -1,7 +1,3 @@
-handle superfluous score presses
-	ignore in calc
-	report problem
-	test with allowing clicks on disabled button
 xlsx style at center
 btde export should export all known matches!
 automatically send export if state finishes from event incomplete -> event complete
