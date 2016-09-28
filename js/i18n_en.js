@@ -208,7 +208,7 @@ var i18n_en = {
 'settings:click_mode': 'Touch Detection',
 'settings:click_mode:auto': 'Automatic',
 'settings:click_mode:touchstart': 'Fast',
-'settings:click_mode:touchend': 'Emulation (experimental)',
+'settings:click_mode:touchend': 'Slow',
 'settings:click_mode:click': 'Native',
 
 'settings:mode:label': 'Mode:',

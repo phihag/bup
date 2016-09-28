@@ -2,3 +2,7 @@
 	/* Remove delay after tapping */
 	touch-action: manipulation;
 }
+
+.click_active {
+	filter: brightness(.9);
+}

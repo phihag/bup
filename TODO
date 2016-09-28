@@ -1,12 +1,7 @@
-record last successsful transmission and its state, per network in network submodule (make sure it gets exported)
 set umpire name/service judge name/court id if != settings
 	use in scoresheet
 	use in eventsheet (test!)
 	stats: display court_id and umpire_name and service_name if set (even highlight?)
-improve click
-	highlight until touchend
-		(filter: brightness(.2);)
-	improve touchend
 handle superfluous score presses
 	ignore in calc
 	report problem

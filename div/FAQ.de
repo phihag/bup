@@ -15,4 +15,4 @@ Diese Option regelt, wie Touch-Eingaben behandelt werden.
 - Automatisch: Bup wählt nach Gerät die beste Option aus. [empfohlen]
 - Nativ: Die Click-Emulation des mobilen Webbrowsers wird verwendet
 - Schnell: Eine einfache Berührung genügt um den Button auszulösen
-- Emulation: Emulation des nativen Verhaltens mit Touch-Events
+- Langsam: Auslösung erst wenn der Finger abhebt (wirkt ev. natürlicher)

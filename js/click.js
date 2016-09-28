@@ -2,6 +2,8 @@
 var click = (function() {
 var mode = calc_auto();
 
+function _sqr(x) {return x*x};
+
 function on_click(node, callback) {
 	uiu.addClass(node, 'click_button');
 
@@ -15,18 +17,25 @@ function on_click(node, callback) {
 			return;
 		}
 
+		uiu.addClass(node, 'click_active');
 		if (mode === 'touchend') {
 			return;
 		}
+
+		setTimeout(function() {
+			uiu.removeClass(node, 'click_active');
+		}, 250);
+
 		callback(e);
 	}, false);
 	node.addEventListener('touchend', function(e) {
 		if (mode !== 'touchend') {
 			return;
 		}
+
+		uiu.removeClass(node, 'click_active');
+		e.preventDefault();
 		callback(e);
-		// TODO only if started recently on this one
-		// TODO only if distance not too far away
 	}, false);
 	node.addEventListener('click', function(e) {
 		e.preventDefault();
