@@ -900,6 +900,20 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 
 		function fill_score_sheets(cb) {
 			var d_count = 0;
+
+			var thick_border_id = xlsx_file.add_border('medium');
+			var thick_center_style_id = xlsx_file.add_style(function(xf) {
+				xf.setAttribute('fontId', 0);
+				xf.setAttribute('borderId', thick_border_id);
+				xf.setAttribute('xfId', 0);
+				xf.setAttribute('applyBorder', 1);
+				xf.setAttribute('applyAlignment', 1);
+				uiu.create_el(xf, 'alignment', {
+					horizontal: 'center',
+					vertical: 'center',
+				});
+			});
+
 			xlsx_file.modify_sheet('6', cb, function(sheet) {
 				function add_winner_circle(start_row, team_id) {
 					var start_col = 6 + team_id * 15;
@@ -1082,8 +1096,8 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					});
 					var t1l = match.network_start_team1_left;
 					if (typeof t1l === 'boolean') {
-						sheet.text('F' + (start_row + 1), t1l ? 'L' : 'R');
-						sheet.text('AE' + (start_row + 1), t1l ? 'R' : 'L');
+						sheet.text('F' + (start_row + 1), t1l ? 'L' : 'R', thick_center_style_id);
+						sheet.text('AE' + (start_row + 1), t1l ? 'R' : 'L', thick_center_style_id);
 					}
 					if (match.network_real_scores) {
 						match.network_real_scores.forEach(function(scores, game_idx) {

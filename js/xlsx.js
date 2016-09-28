@@ -16,7 +16,7 @@ function _serialize_xml(doc) {
 }
 
 function Sheet(book, doc, drawing_doc) {
-	function text(cell_id, text) {
+	function text(cell_id, text, style_id) {
 		var cell = doc.querySelector('c[r="' + cell_id + '"]');
 		if (!cell) {
 			var m = /^([A-Z]+)([0-9]+)$/.exec(cell_id);
@@ -34,6 +34,9 @@ function Sheet(book, doc, drawing_doc) {
 			cell = _create_el(row, 'c', {r: cell_id});
 		}
 		cell.setAttribute('t', 'inlineStr');
+		if (style_id) {
+			cell.setAttribute('s', style_id);
+		}
 		var is_node = _create_el(cell, 'is');
 		_create_el(is_node, 't', {}, text);
 	}
@@ -77,6 +80,7 @@ function Sheet(book, doc, drawing_doc) {
 }
 
 function open(ui8r, cb) {
+	var STYLE_FN = 'xl/styles.xml';
 	JSZip.loadAsync(ui8r).then(function(zipfile) {
 		function modify_sheet(sheet_id, cb, func) {
 			var sheet_fn = 'xl/worksheets/sheet' + sheet_id + '.xml';
@@ -119,6 +123,9 @@ function open(ui8r, cb) {
 		}
 
 		function save(fn) {
+			var new_style_xml = _serialize_xml(book._style_doc);
+			zipfile.file(STYLE_FN, new_style_xml);
+
 			zipfile.generateAsync({
 				type: 'blob',
 				mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
@@ -127,12 +134,47 @@ function open(ui8r, cb) {
 			});
 		}
 
+		// Returns the style ID
+		// addfunc gets called with the new <xf> element
+		function add_style(addfunc) {
+			var style_doc = book._style_doc;
+			var container = style_doc.querySelector('cellXfs');
+			var el = uiu.create_el(container, 'xf');
+			addfunc(el);
+			var id = parseInt(container.getAttribute('count'));
+			container.setAttribute('count', id + 1);
+			return id;
+		}
+
+		// Returns the border ID
+		function add_border(thickness) {
+			var style_doc = book._style_doc;
+			var container = style_doc.querySelector('borders');
+			var el = uiu.create_el(container, 'border');
+			['left', 'right', 'top', 'bottom'].forEach(function(direction) {
+				var d = uiu.create_el(el, direction, {
+					style: thickness,
+				});
+				uiu.create_el(d, 'color', {indexed: 64});
+			});
+			uiu.create_el(el, 'diagonal');
+
+			var id = parseInt(container.getAttribute('count'));
+			container.setAttribute('count', id + 1);
+			return id;
+		}
+
 		var book = {
 			modify_sheet: modify_sheet,
 			save: save,
+			add_style: add_style,
+			add_border: add_border,
 		};
 
-		cb(book);
+		zipfile.file(STYLE_FN).async('string').then(function(style_str) {
+			book._style_doc = _parse_xml(style_str);
+			cb(book);
+		});
 	});
 }
 
