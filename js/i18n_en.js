@@ -329,6 +329,7 @@ var i18n_en = {
 'stats:<8s': 'latency <8s',
 'stats:>8s': 'latency >8s',
 'stats:latency_avg_str': '⌀ latency',
+'stats:moving_avg_str': 'Moving ⌀',
 'stats:failed_net_count': 'request loss',
 'stats:failed_srv_count': 'server errors',
 'stats:success_net_count': '# successful',

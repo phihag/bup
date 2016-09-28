@@ -1,6 +1,8 @@
 var netstats = (function() {
 'use strict';
 
+var MOVING_AVG_FACTOR = 0.9;
+
 var now = (((typeof window != 'undefined') && window.performance) ? function() {
 	return window.performance.now();
 } : Date.now);
@@ -23,6 +25,7 @@ function get_stats(component)  {
 			'failed_net_count': 0,
 			'failed_srv_count': 0,
 			'success_net_count': 0,
+			'moving_avg': null,
 		};
 		all_stats[component] = res;
 	}
@@ -63,6 +66,12 @@ function pre_request(component) {
 			stats['>8s']++;
 		}
 
+		if (stats.moving_avg === null) {
+			stats.moving_avg = duration;
+		} else {
+			stats.moving_avg = MOVING_AVG_FACTOR * stats.moving_avg + (1 - MOVING_AVG_FACTOR) * duration;
+		}
+
 		// Depending on whether success or failure, the arguments will have different meanings
 		var status = (typeof arg1.status == 'number') ? arg1.status : arg3.status;
 		if (status === 200) {
@@ -86,6 +95,7 @@ function render_table() {
 		var cstats = all_stats[component];
 		cstats.label = component;
 		cstats.latency_avg_str = (cstats.count > 0) ? (Math.round(cstats.latency_sum / cstats.count) + ' ms') : '-';
+		cstats.moving_avg_str = (cstats.moving_avg !== null) ? (Math.round(cstats.moving_avg) + ' ms') : '-';
 		return cstats;
 	});
 	uiu.visible_qs('.netstats_empty', cols.length === 0);
@@ -102,6 +112,7 @@ function render_table() {
 			'<8s',
 			'>8s',
 			'latency_avg_str',
+			'moving_avg_str',
 			'failed_net_count',
 			'failed_srv_count',
 			'success_net_count',

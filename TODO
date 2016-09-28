@@ -1,4 +1,3 @@
-netstats: +moving avg
 record last successsful transmission and its state, per network in network submodule (make sure it gets exported)
 set umpire name/service judge name/court id if != settings
 	use in scoresheet
