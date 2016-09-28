@@ -54,6 +54,8 @@ function calc_all_players(event) {
 }
 
 function set_metadata(event) {
+	var umpires_set = {}; // Poor man's set
+
 	event.matches.forEach(function(match) {
 		if (! match.presses_json) {
 			return;
@@ -70,6 +72,12 @@ function set_metadata(event) {
 		match.netscore = calc.netscore(scopy);
 		match.network_finished = scopy.match.finished;
 		match.network_team1_won = scopy.match.team1_won;
+		if (scopy.match.umpire_name) {
+			umpires_set[scopy.match.umpire_name] = true;
+		}
+		if (scopy.match.service_judge_name) {
+			umpires_set[scopy.match.service_judge_name] = true;
+		}
 		match.network_metadata = scopy.metadata;
 		var first_game = scopy.match.finished_games.length ? scopy.match.finished_games[0] : scopy.game;
 		match.network_start_team1_left = first_game.start_team1_left;
@@ -79,6 +87,9 @@ function set_metadata(event) {
 			return g.score;
 		});
 	});
+	var umps = Object.keys(umpires_set);
+	umps.sort();
+	event.match_umpires = umps;
 }
 
 function annotate(s, event) {

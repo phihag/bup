@@ -1,5 +1,4 @@
 set umpire name/service judge name/court id if != settings
-	use in eventsheet (test!)
 	stats: display court_id and umpire_name and service_name if set (even highlight?)
 handle superfluous score presses
 	ignore in calc

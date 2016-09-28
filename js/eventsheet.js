@@ -1372,12 +1372,19 @@ function ui_init() {
 function on_fetch() {
 	var event = state.event;
 	var container = uiu.qs('.eventsheet_container');
-	var KEYS = ['umpires', 'location', 'starttime', 'matchday', 'notes', 'protest'];
+	var KEYS = ['location', 'starttime', 'matchday', 'notes', 'protest'];
 	KEYS.forEach(function(k) {
 		if (event[k]) {
 			container.querySelector('[name="' + k + '"]').value = event[k];
 		}
 	});
+
+	eventutils.set_metadata(event);
+	var umpires_str = (
+		event.umpires ? event.umpires : (
+			event.match_umpires ? event.match_umpires.join(', ') : ''));
+	container.querySelector('[name="umpires"]').value = umpires_str;
+
 	if (event.teamsters) {
 		event.teamsters.forEach(function(teamster, idx) {
 			if (teamster) {
