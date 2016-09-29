@@ -1162,7 +1162,17 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 						case 'score':
 						case 'text':
 						case 'longtext':
-							sheet.text(xlsx.add_col('F', c.col) + (start_row + 6 + 5 * c.table + c.row), c.val);
+							var cell_id = xlsx.add_col('F', c.col) + (start_row + 6 + 5 * c.table + c.row);
+							var snode = sheet.get_style_node(cell_id);
+							snode.setAttribute('applyAlignment', 1);
+							var alignment = snode.querySelector('alignment');
+							if (!alignment) {
+								alignment = uiu.create_el(snode, 'alignment');
+							}
+							alignment.setAttribute('horizontal', 'center');
+							alignment.setAttribute('vertical', 'center');
+
+							sheet.text(cell_id, c.val);
 							break;
 						case 'note':
 							var col = 'F';

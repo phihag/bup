@@ -55,6 +55,13 @@ function Sheet(book, doc, drawing_doc) {
 		}
 	}
 
+	function get_style_node(cell_id) {
+		var cell = doc.querySelector('c[r="' + cell_id + '"]');
+		var style_id = parseInt(cell.getAttribute('s'));
+		var container = book._style_doc.querySelector('cellXfs');
+		return container.childNodes[style_id];
+	}
+
 	function merge_cells(ref) {
 		var merges = doc.querySelector('mergeCells');
 		if (!merges) {
@@ -76,6 +83,7 @@ function Sheet(book, doc, drawing_doc) {
 		merge_cells: merge_cells,
 		text: text,
 		add_drawing: add_drawing,
+		get_style_node: get_style_node,
 	};
 }
 
