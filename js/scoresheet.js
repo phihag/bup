@@ -943,6 +943,8 @@ function event_show() {
 	if (state.ui.event_scoresheets_visible) {
 		return;
 	}
+	uiu.addClass_qs('.scoresheet_container', 'scoresheet_container_multi');
+
 	state.ui.event_scoresheets_visible = true;
 	control.set_current(state);
 
@@ -959,8 +961,6 @@ function event_show() {
 	$(container).children('.scoresheet').remove();
 	uiu.visible_qs('.scoresheet_loading-icon', true);
 	uiu.visible(container, true);
-
-	uiu.visible_qs('.scoresheet_note_dialog', false);
 
 	if (state.event) {
 		event_render(container);
@@ -990,7 +990,7 @@ function show() {
 
 	uiu.esc_stack_push(hide);
 
-	uiu.visible_qs('.scoresheet_note_dialog', true);
+	uiu.removeClass_qs('.scoresheet_container', 'scoresheet_container_multi');
 	uiu.qs('#scoresheet_note_input').focus();
 	ui_show();
 }

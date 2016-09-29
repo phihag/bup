@@ -98,6 +98,7 @@
 	.scoresheet {
 		width: 99%;
 		height: 99%;
+		display: block;
 	}
 
 	.only-screen {
@@ -127,6 +128,9 @@
 	background-repeat: no-repeat;
 }
 
+.scoresheet_container_multi .scoresheet_note_dialog {
+	display: none;
+}
 .scoresheet_note_dialog {
 	position: absolute;
 	left: 0;
