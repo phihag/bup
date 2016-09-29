@@ -1167,11 +1167,11 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 							snode.setAttribute('applyAlignment', 1);
 							var alignment = snode.querySelector('alignment');
 							if (!alignment) {
-								alignment = uiu.create_el(snode, 'alignment');
+								alignment = snode.ownerDocument.createElement('alignment');
+								snode.insertBefore(alignment, snode.firstChild);
 							}
 							alignment.setAttribute('horizontal', 'center');
 							alignment.setAttribute('vertical', 'center');
-
 							sheet.text(cell_id, c.val);
 							break;
 						case 'note':
