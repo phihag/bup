@@ -55,6 +55,10 @@ function gen_data(s) {
 		(s.game.teams_player1_even[0] !== null) &&
 		(s.game.teams_player1_even[1] !== null));
 
+	if (!side_is_determined) {
+		netscore = [];
+	}
+
 	var data = {
 		'Detail': (s.match.finish_confirmed ? 'leer' : (serve_is_determined ? 'alles' : (side_is_determined ? 'punkte' : 'leer'))),
 		'Satz': Math.max(1, netscore.length),
