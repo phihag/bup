@@ -46,7 +46,7 @@ function gen_data(s) {
 
 	// CourtSpot requires us to set the team currently serving.
 	// Calculate that from match winner or actual game details.
-	var cs_team1 = (s.match.team1_won === null) ? s.game.team1_serving : s.match.team1_won;
+	var team1_serving = (s.game.team1_won === null) ? s.game.team1_serving : s.game.team1_won;
 
 	var game_score = s.match.game_score;
 	var side_is_determined = s.game.team1_left !== null;
@@ -65,13 +65,13 @@ function gen_data(s) {
 		'gewonnenHeim': game_score[0],
 		'gewonnenGast': game_score[1],
 		'team_links': (s.game.team1_left ? 'heim' : 'gast'),
-		'team_aufschlag': (s.game.team1_serving ? 'Heim' : 'Gast'),
-		'aufschlag_score': s.game.score[s.game.team1_serving ? 0 : 1],
+		'team_aufschlag': (team1_serving ? 'Heim' : 'Gast'),
+		'aufschlag_score': s.game.score[team1_serving ? 0 : 1],
 		'heim_spieler1_links': (s.game.teams_player1_even[0] ? 'false' : 'true'),
 		'gast_spieler1_links': (s.game.teams_player1_even[1] ? 'false' : 'true'),
 		'court': s.settings.court_id,
 		'art': s.setup.match_name,
-		'verein': (cs_team1 ? 'heim' : 'gast'),
+		'verein': (team1_serving ? 'heim' : 'gast'),
 		'presses_json': JSON.stringify(s.presses),
 	};
 	for (var i = 0;i < s.match.max_games;i++) {

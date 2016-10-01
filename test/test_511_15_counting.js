@@ -1,3 +1,5 @@
+'use strict';
+
 var assert = require('assert');
 
 var tutils = require('./tutils');
@@ -7,9 +9,6 @@ var _it = tutils._it;
 var press_score = tutils.press_score;
 var state_after = tutils.state_after;
 var bup = tutils.bup;
-
-(function() {
-'use strict';
 
 
 var DOUBLES_SETUP = bup.utils.deep_copy(tutils.DOUBLES_SETUP);
@@ -1330,6 +1329,112 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.deepStrictEqual(
 			bup.calc.netscore(s), [[11, 9], [8, 11], [13, 11], [14, 15], [11, 8]]);
 	});
-});
 
-})();
+	_it('game.teams_player1_even', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}];
+		var start_presses = presses.slice();
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.teams_player1_even, [null, null]);
+
+		presses.push({
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.teams_player1_even, [true, null]);
+
+		presses.push({
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.teams_player1_even, [true, true]);
+
+		presses.push({
+			type: 'love-all',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.teams_player1_even, [true, true]);
+
+		presses = start_presses.slice();
+		presses.push({
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 1,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.teams_player1_even, [false, null]);
+
+		presses.push({
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 1,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.teams_player1_even, [false, false]);
+
+		presses.push({
+			type: 'love-all',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.teams_player1_even, [false, false]);
+
+		press_score(presses, 11, 2);
+		presses.push({
+			type: 'postgame-confirm',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.teams_player1_even, [null, null]);
+
+		var g1_sav = presses.slice();
+		presses.push({
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.teams_player1_even, [true, null]);
+
+		presses.push({
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 1,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.teams_player1_even, [true, false]);
+
+		presses.push({
+			type: 'love-all',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.teams_player1_even, [true, false]);
+
+		presses = g1_sav.slice();
+		presses.push({
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 1,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.teams_player1_even, [false, null]);
+
+		presses.push({
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.teams_player1_even, [false, true]);
+
+		presses.push({
+			type: 'love-all',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.teams_player1_even, [false, true]);
+	});
+});
