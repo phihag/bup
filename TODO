@@ -1,16 +1,15 @@
-automatically send export if state finishes from event incomplete -> event complete
-	different mail subject (auto-export)
-	don't try without inet connection
-	wait for internet connection
-	test that this fails gracefully if no inet connection
-
 referee mode
-	via websockets
 	add subproject for server
 	move to separate worker if workers available
 	see battery
 	see current match/event
 	download into local view
+
+automatically send export if state finishes from event incomplete -> event complete
+	different mail subject (auto-export)
+	don't try without inet connection
+	wait for internet connection
+	test that this fails gracefully if no inet connection
 
 add demo mode to UI (also a way to disable)
 implement resource timing API

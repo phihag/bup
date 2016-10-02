@@ -21,10 +21,12 @@ force-install-libs:
 	wget https://raw.githubusercontent.com/Stuk/jszip/master/dist/jszip.min.js -O libs/jszip.min.js
 	touch libs/.completed
 
-deps: install-libs ## Download and install all dependencies (for compiling / testing / CLI operation)
+deps: deps-mandatory ## Download and install all dependencies (for compiling / testing / CLI operation)
+	$(MAKE) deps-optional
+
+deps-mandatory: install-libs
 	(node --version && npm --version) >/dev/null 2>/dev/null || sudo apt-get install nodejs npm
 	npm install
-	$(MAKE) deps-optional
 
 deps-optional:
 	test -e ./node_modules/wrtc/build/Release/obj.target/wrtc/src/peerconnection.o || npm install wrtc || echo 'wrtc installation failed. Continuing without wrtc...'
