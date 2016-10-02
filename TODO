@@ -1,8 +1,8 @@
-btde export should export all known matches!
 automatically send export if state finishes from event incomplete -> event complete
 	different mail subject (auto-export)
+	don't try without inet connection
+	wait for internet connection
 	test that this fails gracefully if no inet connection
-add demo mode to UI (also a way to disable)
 
 referee mode
 	via websockets
@@ -12,6 +12,7 @@ referee mode
 	see current match/event
 	download into local view
 
+add demo mode to UI (also a way to disable)
 implement resource timing API
 rendering error in editmode/Edge
 suppress sending duplicate silent_errors

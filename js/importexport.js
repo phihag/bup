@@ -59,10 +59,23 @@ function ui_import_json(s) {
 }
 
 function gen_export_data(s, include_debug) {
+	var e = utils.deep_copy(s.event);
+	e.matches.forEach(function(m) {
+		if (m.presses || m.presses_json) {
+			return;
+		}
+		var stored = match_storage.get(m.setup.match_id);
+		if (!stored) {
+			return;
+		}
+		if (stored.presses) {
+			m.presses_json = JSON.stringify(stored.presses);
+		}
+	});
 	var res = {
 		type: 'bup-export',
 		version: 1,
-		event: s.event,
+		event: e,
 	};
 	if (include_debug) {
 		utils.obj_update(res, report_problem.get_info());
@@ -124,6 +137,7 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var click = require('./click');
 	var eventutils = require('./eventutils');
+	var match_storage = require('./match_storage');
 	var network = require('./network');
 	var report_problem = require('./report_problem');
 	var staticnet = require('./staticnet');
