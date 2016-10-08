@@ -38,6 +38,11 @@ function ui_import_json(s) {
 		var reader = new FileReader();
 		reader.onload = function(e) {
 			var input_json = e.target.result;
+
+			// There seems to be a bug in some part of the export-sending that creates invalid JSON.
+			// Fix it up.
+			input_json = utils.replace_all(input_json, '\ufffd', '');
+
 			try {
 				var input_data;
 				try {
@@ -50,6 +55,7 @@ function ui_import_json(s) {
 
 				import_data(s, input_data);
 			} catch (exc) {
+				report_problem.silent_error('Import error: ' + exc.message);
 				alert(exc.message);
 			}
 		};

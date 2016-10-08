@@ -1,11 +1,10 @@
-Keine Felder Mannschaftsführer
+BL-eventsheet: rm Mannschaftsführer
 scoresheet: Kreise im mobile safari viel zu dick
 check bldemo: is it v2
 Verbleibende Pausenzeiten der Spieler nach Spielordnung
 netstats last value
-courtspot reihenfolge
 empty list of players in hall (select + input)
-Spielbericht: Leitender Schiedsrichter
+Spielbericht: Leitender Schiedsrichter auswählen
 
 referee mode
 	handle the button
@@ -41,7 +40,9 @@ automatically send export if state finishes from event incomplete -> event compl
 	don't try without inet connection
 	wait for internet connection
 	test that this fails gracefully if no inet connection
-
+UTF-8 replacement char in Ulf's exports
+courtspot reihenfolge
+export graphic for facebook post
 Verlauf => Bernd-Christian Hölscher
 alternative toss (who won?)
 send export: error message / success
