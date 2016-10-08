@@ -39,6 +39,7 @@ function ui_init() {
 	editevent.ui_init();
 	displaymode.ui_init();
 	shortcuts.ui_init(state);
+	refmode_client.ui_init(state);
 
 	var hash_query = utils.parse_query_string(window.location.hash.substr(1));
 	if (hash_query.lang) {
@@ -90,6 +91,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var order = require('./order');
 	var p2p = require('./p2p');
 	var pronunciation = require('./pronunciation');
+	var refmode_client = require('./refmode_client');
 	var register_sworker = require('./register_sworker');
 	var report_problem = require('./report_problem');
 	var scoresheet = require('./scoresheet');

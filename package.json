@@ -10,7 +10,9 @@
     "test": "mocha test/",
     "test:watch": "npm run test -- -w"
   },
-  "dependencies": {},
+  "dependencies": {
+    "ws": "*"
+  },
   "devDependencies": {
     "async": "*",
     "eslint": "*",
@@ -19,8 +21,7 @@
     "istanbul": "*",
     "parse-appcache-manifest": "*",
     "stylelint": "*",
-    "stylelint-config-standard": "*",
-    "ws": "*"
+    "stylelint-config-standard": "*"
   },
   "private": true
 }

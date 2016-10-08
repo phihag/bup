@@ -1,15 +1,50 @@
+Keine Felder Mannschaftsführer
+scoresheet: Kreise im mobile safari viel zu dick
+check bldemo: is it v2
+Verbleibende Pausenzeiten der Spieler nach Spielordnung
+netstats last value
+courtspot reihenfolge
+empty list of players in hall (select + input)
+Spielbericht: Leitender Schiedsrichter
+
 referee mode
-	add subproject for server
+	handle the button
+	connect on enabling
+	add dialog to connect to referee
+	add new mode
+
+	automatically reconnect if connection fails
 	move to separate worker if workers available
 	see battery
 	see current match/event
-	download into local view
+	espouse an event from a client
+	better client string (configured / connected)
 
+90 seconds (Jörg Hupertz)
+
+jticker
+	bup-update
+		download zip (admins only)
+		atomic
+		if dev present use that
+	bup module
+		login with token
+		login with user/pass
+	list
+	sync
+		which match on court
+		points for all sets
+
+bupbug: correct exports with really long lines
 automatically send export if state finishes from event incomplete -> event complete
 	different mail subject (auto-export)
 	don't try without inet connection
 	wait for internet connection
 	test that this fails gracefully if no inet connection
+
+Verlauf => Bernd-Christian Hölscher
+alternative toss (who won?)
+send export: error message / success
 
 add demo mode to UI (also a way to disable)
 implement resource timing API

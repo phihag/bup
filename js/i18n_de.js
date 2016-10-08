@@ -56,7 +56,6 @@ var i18n_de = {
 'button:Unsuspend': 'Spiel fortsetzen',
 'button:Resume after injury': 'Spiel fortsetzen',
 
-
 'onmyleft.home_team': 'Meine Damen und Herren:\nZu meiner Rechten,\n{away_team},\nund zu meiner Linken,\n{home_team}.\n{serving_team} schlägt auf{serving_str}.\n\n{score}.\nBitte spielen.',
 'onmyleft.away_team': 'Meine Damen und Herren:\nZu meiner Linken,\n{away_team},\nund zu meiner Rechten,\n{home_team}.\n{serving_team} schlägt auf{serving_str}.\n\n{score}.\nBitte spielen.',
 'onmyleft': 'Meine Damen und Herren:\nZu meiner Rechten,\n{right_team},\nund zu meiner Linken,\n{left_team}.\n{server} schlägt auf{receiver_str}.\n\n{score}.\nBitte spielen.',
@@ -150,7 +149,6 @@ var i18n_de = {
 'bup.updating': 'Aktualisiere ...',
 'bup.updated.version': 'Version',
 
-
 'settings:Back to Match': 'Zurück zum Spiel',
 'settings:Current Match': 'Aktuelles Spiel',
 'settings:Edit Manually': 'Manuell Bearbeiten',
@@ -184,7 +182,6 @@ var i18n_de = {
 'settings:counting:1x21': 'Bundesliga Goldener Satz (1x21)',
 'settings:counting:1x11_15': 'Bundesliga Goldener Satz Experiment (1x11 bis max. 15)',
 
-
 'settings:Settings': 'Einstellungen',
 'settings:Court Description': 'Feld:',
 'settings:Court Description.placeholder': 'z.B. rechts',
@@ -212,11 +209,12 @@ var i18n_de = {
 'settings:click_mode:touchstart': 'Schnell',
 'settings:click_mode:touchend': 'Langsam',
 'settings:click_mode:click': 'Nativ',
-
+'settings:refmode:client:status': 'Referee:',
 
 'settings:mode:label': 'Modus:',
 'settings:mode:umpire': 'Schiedsrichter',
 'settings:mode:display': 'Anzeigetafel (experimentell)',
+'settings:mode:referee': 'Referee (experimentell)',
 
 'exceptions:yellow-card-title': 'Gelbe Karte',
 'exceptions:yellow-card': 'Verwarnung',
@@ -414,6 +412,11 @@ var i18n_de = {
 'displaymode:court_id:loading': 'lade ...',
 
 'liveaw:lost connection': 'Verbindung wird wiederhergestellt ...',
+
+'refmode:lost connection': 'Verbindung wird wiederhergestellt ...',
+'refmode:client:disabled': 'Deaktiviert',
+'refmode:client:enabled': 'Aktiviert',
+
 };
 
 /*@DEV*/

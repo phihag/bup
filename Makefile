@@ -103,7 +103,7 @@ test: ## Run tests
 lint: eslint stylelint doclint ## Verify source code quality
 
 eslint:
-	@./node_modules/.bin/eslint js/ div/*.js test/ cachesw.js
+	@./node_modules/.bin/eslint js/ div/*.js test/ cachesw.js refmode_server/
 
 stylelint:
 	@./node_modules/.bin/stylelint css/*.css
@@ -124,4 +124,9 @@ clean: cleandist ## Remove temporary files
 	rm -rf -- node_modules
 	rm -rf -- div/teamlists/
 
-.PHONY: default help deps deps-optional test clean install-libs force-install-libs upload dist cleandist coverage coverage-display cd lint jshint eslint appcache-manifest manifest upload-run stylelint doclint
+run-server: run-refmode_server
+
+run-refmode_server:
+	node refmode_server/refmode_server.js
+
+.PHONY: default help deps deps-optional test clean install-libs force-install-libs upload dist cleandist coverage coverage-display cd lint jshint eslint appcache-manifest manifest upload-run stylelint doclint deps-mandatory run-server run-refmode_server

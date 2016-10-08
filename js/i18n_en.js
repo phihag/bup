@@ -182,7 +182,6 @@ var i18n_en = {
 'settings:counting:1x21': 'One Game (1x21)',
 'settings:counting:1x11_15': 'One Game 2016 Experiment Option 1 (1x11 until max. 15)',
 
-
 'settings:Settings': 'Settings',
 'settings:Court Description': 'Court:',
 'settings:Court Description.placeholder': 'e.g. right',
@@ -210,10 +209,12 @@ var i18n_en = {
 'settings:click_mode:touchstart': 'Fast',
 'settings:click_mode:touchend': 'Slow',
 'settings:click_mode:click': 'Native',
+'settings:refmode:client:status': 'Referee:',
 
 'settings:mode:label': 'Mode:',
 'settings:mode:umpire': 'Umpire',
 'settings:mode:display': 'Display (experimental)',
+'settings:mode:referee': 'Referee (experimental)',
 
 'exceptions:yellow-card-title': 'Yellow card',
 'exceptions:yellow-card': 'Warning',
@@ -411,6 +412,10 @@ var i18n_en = {
 'displaymode:court_id:loading': 'loading ...',
 
 'liveaw:lost connection': 'Reconnecting ...',
+
+'refmode:lost connection': 'Reconnecting ...',
+'refmode:client:disabled': 'Disabled',
+'refmode:client:enabled': 'Enabled',
 };
 
 /*@DEV*/

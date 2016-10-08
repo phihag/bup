@@ -21,6 +21,7 @@ var default_settings = {
 	displaymode_court_id: 1,
 	wakelock: 'display',
 	click_mode: 'auto',
+	refmode_client_enabled: false,
 };
 
 function load() {
