@@ -792,8 +792,6 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					});
 				}
 
-				sheet.text('B30', extra_data['teamster' + team_id]);
-
 				var incomplete = ev.matches.some(function(m) {
 					return m.setup.incomplete;
 				});
@@ -1349,7 +1347,7 @@ function ui_init() {
 	form.on('submit', function(e) {
 		e.preventDefault();
 		var es_key = $('.eventsheet_container').attr('data-eventsheet_key');
-		var fields = ['umpires', 'location', 'matchday', 'starttime', 'notes', 'backup_players_str', 'protest', 'teamster0', 'teamster1'];
+		var fields = ['umpires', 'location', 'matchday', 'starttime', 'notes', 'backup_players_str', 'protest'];
 		var extra_data = utils.map_dict(fields, function(field) {
 			return form.find('[name="' + field + '"]').val();
 		});
@@ -1408,14 +1406,6 @@ function on_fetch() {
 		event.umpires ? event.umpires : (
 			event.match_umpires ? event.match_umpires.join(', ') : ''));
 	container.querySelector('[name="umpires"]').value = umpires_str;
-
-	if (event.teamsters) {
-		event.teamsters.forEach(function(teamster, idx) {
-			if (teamster) {
-				container.querySelector('[name="teamster' + idx + '"]').value = teamster;
-			}
-		});
-	}
 
 	var backup_players_str = calc_backup_players_str(state.event);
 	if (backup_players_str) {
@@ -1490,7 +1480,6 @@ function show_dialog(es_key) {
 	case 'NRW-2016':
 		uiu.visible_qs('.eventsheet_report', true);
 		uiu.visible_qs('label.eventsheet_backup_players_str', true);
-		uiu.visible_qsa('label.eventsheet_teamster', false);
 		uiu.visible(preview, false);
 		uiu.visible(download_link_container, false);
 		break;
@@ -1499,14 +1488,13 @@ function show_dialog(es_key) {
 	case '2BLS-2016':
 		uiu.visible_qs('.eventsheet_report', true);
 		uiu.visible_qs('label.eventsheet_backup_players_str', false);
-		uiu.visible_qsa('label.eventsheet_teamster', true);
 		uiu.visible(preview, false);
 		uiu.visible(download_link_container, false);
 		break;
 	case 'team-1BL':
 	case 'team-2BL':
 		uiu.visible_qs('.eventsheet_report', false);
-		// backup_players and teamsters are children of _report
+		// backup_players are children of _report
 		uiu.visible(preview, true);
 		preview_team_bl(state, es_key);
 		download_link.setAttribute('href', URLS[es_key]);

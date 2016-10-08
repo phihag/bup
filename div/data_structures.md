@@ -26,9 +26,6 @@ umpires         String describing umpires (for eventsheet), e.g. "Barbara Bub & 
 starttime       Human-readable official start time, e.g. "19:00"
 matchday        Match day according to league plan, e.g. "1" (first game of the season) or "semi-finals"
 notes           Non-protest notes, e.g. "Bundesliga logo missing on front of information sheet"
-teamsters       2-element list (home/away). Name (as string) of the teamsters of each team.
-                Depending on regulation, not necessarily (active) players.
-                Example: ["Heinz Kelzenberg", "Michael Fuchs"]
 event_name      Name of the event (will be present on scoresheet), e.g. "Finals".
 tournament_name Name of the overall tournament (will be present on scoresheet), e.g. "Bundesliga 2015/2016".
                 Generated from league_key if not present (this is recommended).

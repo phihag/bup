@@ -285,8 +285,6 @@ var i18n_de = {
 'eventsheet:back': 'Zurück',
 'eventsheet:Event Sheet': 'Spielbericht',
 'eventsheet:download empty': 'Leeres Formular',
-'eventsheet:Teamster home': 'Heim-Mannschaftsführer:',
-'eventsheet:Teamster away': 'Auswärts-Mannschaftsführer:',
 
 'eventsheet:label:1BL-2016': 'Spielbericht',
 'eventsheet:label:2BLN-2016': 'Spielbericht',
