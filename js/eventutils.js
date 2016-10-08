@@ -149,8 +149,16 @@ function annotate(s, event) {
 
 		if (event.team_names) {
 			event.team_names.forEach(function(team_name, team_idx) {
-				if (!setup.teams[team_idx].name) {
-					setup.teams[team_idx].name = team_name;
+				var team = setup.teams[team_idx];
+
+				/*@DEV*/
+				if (team.name === team_name) {
+					report_problem.silent_error('Redundant key ' + key + ' in ' + setup.match_id);
+				}
+				/*/@DEV*/
+
+				if (!team.name) {
+					team.name = team_name;
 				}
 			});
 		}
