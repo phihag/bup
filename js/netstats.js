@@ -25,6 +25,7 @@ function get_stats(component)  {
 			'failed_net_count': 0,
 			'failed_srv_count': 0,
 			'success_net_count': 0,
+			'last': null,
 			'moving_avg': null,
 		};
 		all_stats[component] = res;
@@ -47,6 +48,7 @@ function pre_request(component) {
 		var duration = now() - start;
 		var stats = get_stats(component);
 
+		stats.last = duration;
 		stats.latency_sum += duration;
 		stats.count++;
 
@@ -96,6 +98,7 @@ function render_table() {
 		cstats.label = component;
 		cstats.latency_avg_str = (cstats.count > 0) ? (Math.round(cstats.latency_sum / cstats.count) + ' ms') : '-';
 		cstats.moving_avg_str = (cstats.moving_avg !== null) ? (Math.round(cstats.moving_avg) + ' ms') : '-';
+		cstats.last_str = (cstats.last !== null) ? (Math.round(cstats.last) + ' ms') : '-';
 		return cstats;
 	});
 	uiu.visible_qs('.netstats_empty', cols.length === 0);
@@ -104,6 +107,7 @@ function render_table() {
 		cols: cols,
 		labels: [],
 		keys: [
+			'last_str',
 			'<25ms',
 			'<100ms',
 			'<250ms',

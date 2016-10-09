@@ -1,9 +1,6 @@
 scoresheet: Kreise im mobile safari viel zu dick
-BL-eventsheet: rm Mannschaftsführer
 Verbleibende Pausenzeiten der Spieler nach Spielordnung
-netstats last value
 empty list of players in hall (select + input)
-Spielbericht: Leitender Schiedsrichter auswählen
 
 referee mode
 	handle the button
@@ -33,6 +30,8 @@ jticker
 		which match on court
 		points for all sets
 
+alternate editevent (with checkboxes, same order as Mannschaftsaufstellungszettel)
+
 bupbug: correct exports with really long lines
 automatically send export if state finishes from event incomplete -> event complete
 	different mail subject (auto-export)
@@ -45,6 +44,7 @@ export graphic for facebook post
 Verlauf => Bernd-Christian Hölscher
 alternative toss (who won?)
 send export: error message / success
+Spielbericht: Leitender Schiedsrichter auswählen?
 
 add demo mode to UI (also a way to disable)
 implement resource timing API

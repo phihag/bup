@@ -332,6 +332,7 @@ var i18n_de = {
 'stats:failed_net_count': 'Verlust',
 'stats:failed_srv_count': 'Server-Fehler',
 'stats:success_net_count': '# Erfolg',
+'stats:last_str': 'Letzer Wert',
 
 'pressdesc:pick_side': 'Seitenwahl',
 'pressdesc:state:pick_side': '{left_team} links,\n{right_team} rechts',
