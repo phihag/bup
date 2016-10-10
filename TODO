@@ -1,6 +1,11 @@
-Verbleibende Pausenzeiten der Spieler nach Spielordnung
-	-> in match order
-fix match order of played matches
+improve order
+	mark played / playing matches
+	show time of matches
+	show time remaining for players with rest according to regulations
+	show playing for currently playing players
+	mark current players as red and optimize as such
+	reset should restore current lock status
+
 transmit match order to courtspot
 empty list of players in hall (select + input)
 

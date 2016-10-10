@@ -161,6 +161,19 @@ function optimize(costfunc, matches, preferred, locked) {
 	return best_order;
 }
 
+function init(s) {
+	eventutils.set_metadata(s.event);
+	current_matches = get_omatches(s);
+	current_ignore_start = current_matches.length;
+	current_locked = {};
+	s.event.matches.forEach(function(m) {
+		if (m.network_match_start) {
+			current_locked[m.setup.match_id] = true;
+		}
+	});
+	ui_render();
+}
+
 function show() {
 	if (state.ui.order_visible) {
 		return;
@@ -178,10 +191,7 @@ function show() {
 	uiu.empty(display);
 
 	if (state.event && state.event.matches) {
-		current_matches = get_omatches(state);
-		current_ignore_start = current_matches.length;
-		current_locked = {};
-		ui_render();
+		init(state);
 	} else {
 		uiu.visible_qs('.order_loading-icon', true);
 		network.list_matches(state, function(err, ev) {
@@ -192,10 +202,7 @@ function show() {
 				return;
 			}
 			state.event = ev;
-			current_matches = get_omatches(state);
-			current_ignore_start = current_matches.length;
-			current_locked = {};
-			ui_render();
+			init(state);
 		});
 	}
 }
@@ -480,10 +487,7 @@ function ui_init() {
 	});
 
 	click.qs('.order_reset', function() {
-		current_matches = get_omatches(state);
-		current_ignore_start = current_matches.length;
-		current_locked = {};
-		ui_render();
+		init(state);
 	});
 }
 
