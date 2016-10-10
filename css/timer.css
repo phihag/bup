@@ -1,6 +1,6 @@
 .timer_container {
-	padding: 2vh 3vh 2vh 1vh;
-	font-size: 20vmin;
+	padding: 0 2vh 0 1vh;
+	font-size: 15vmin;
 	z-index: 200;
 }
 .timer {
@@ -11,8 +11,9 @@
 	cursor: pointer;
 	display: block;
 	float: left;
-	width: 22vmin;
-	height: 22vmin;
+	margin: 2vmin 0;
+	width: 13vmin;
+	height: 13vmin;
 	background-image: url(../icons/timer_restart.svg);
 	background-repeat: no-repeat;
 	background-size: 100% 100%;

@@ -47,6 +47,26 @@ function _is_winner(counting, game_idx, candidate, other) {
 	throw new Error('Invalid counting scheme ' + counting);
 }
 
+function warmup_timer(s, cointoss_ts) {
+	switch (s.setup.warmup) {
+	case 'none':
+		return false;
+	case 'bwf-2016':
+		return {
+			start: cointoss_ts,
+			duration: 120000,
+			exigent: 30499,
+		};
+	case 'legacy':
+	default:
+		return {
+			start: cointoss_ts,
+			duration: 120000,
+			exigent: 5499,
+		};
+	}
+}
+
 function team_carded(s, team_id) {
 	var res = null;
 	s.match.cards.forEach(function(card) {
@@ -462,10 +482,7 @@ function calc_press(s, press) {
 		s.game.start_team1_left = press.team1_left;
 		s.game.team1_left = s.game.start_team1_left;
 		if (!s.game.started) {
-			s.timer = {
-				start: press.timestamp,
-				duration: 120 * 1000,
-			};
+			s.timer = warmup_timer(s, press.timestamp);
 		}
 		if (! s.game.team1_left) {
 			if (s.game.editmode_by_side) {

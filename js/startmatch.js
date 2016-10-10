@@ -30,6 +30,7 @@ function ui_init() {
 		var setup = {
 			is_doubles: $('#setup_manual_form [name="gametype"]:checked').val() == 'doubles',
 			counting: _formval('counting'),
+			warmup: _formval('warmup'),
 		};
 
 		setup.team_competition = $('#setup_manual_form [name="team_competition"]').prop('checked');
@@ -47,6 +48,7 @@ function ui_init() {
 			// Demo mode
 			var demo_setup = {
 				counting: setup.counting,
+				warmup: setup.warmup,
 				team_competition: setup.team_competition,
 			};
 			return control.demo_match_start(demo_setup);

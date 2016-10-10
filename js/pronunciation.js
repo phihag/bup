@@ -194,6 +194,8 @@ function pronounce(s, now) {
 	}
 
 	if (s.match.announce_pregame && s.match.finished_games.length === 0) {
+		var ready_str = (timer_exigent) ? s._('ready to play') + '\n' : '';
+
 		var serving_team_id = s.game.team1_serving ? 0 : 1;
 		var receiving_team_id = 1 - serving_team_id;
 
@@ -220,6 +222,7 @@ function pronounce(s, now) {
 			};
 
 			return (
+				ready_str +
 				mark_str +
 				s._(s.game.team1_left ? 'onmyleft.home_team' : 'onmyleft.away_team', d)
 			);
@@ -235,7 +238,7 @@ function pronounce(s, now) {
 				score: pronounce_score(s),
 			};
 
-			return mark_str + s._('onmyleft', d);
+			return ready_str + mark_str + s._('onmyleft', d);
 		}
 	} else if (s.match.announce_pregame) {
 		var glen = s.match.finished_games.length;

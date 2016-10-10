@@ -15,8 +15,6 @@ referee mode
 	espouse an event from a client
 	better client string (configured / connected)
 
-90 seconds (Jörg Hupertz)
-
 jticker
 	bup-update
 		download zip (admins only)
@@ -30,8 +28,10 @@ jticker
 		which match on court
 		points for all sets
 
+BuLi checkliste
 alternate editevent (with checkboxes, same order as Mannschaftsaufstellungszettel)
 
+editevent: test ranking (green checkmark / red x)
 bupbug: correct exports with really long lines
 automatically send export if state finishes from event incomplete -> event complete
 	different mail subject (auto-export)
@@ -41,8 +41,10 @@ automatically send export if state finishes from event incomplete -> event compl
 UTF-8 replacement char in Ulf's exports
 courtspot reihenfolge
 export graphic for facebook post
-Verlauf => Bernd-Christian Hölscher
-alternative toss (who won?)
+Verlauf SR-Zettel (oder presses) => Bernd-Christian Hölscher
+alternative toss
+	who won?
+	offer toss
 send export: error message / success
 Spielbericht: Leitender Schiedsrichter auswählen?
 

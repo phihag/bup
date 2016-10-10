@@ -3285,6 +3285,7 @@ _describe('calc_state', function() {
 		assert.deepStrictEqual(s.timer, {
 			start: 100000,
 			duration: 120000,
+			exigent: 5499,
 		});
 
 		presses.push({
@@ -3297,6 +3298,7 @@ _describe('calc_state', function() {
 		assert.deepStrictEqual(s.timer, {
 			start: 100000,
 			duration: 120000,
+			exigent: 5499,
 		});
 
 		presses.push({
@@ -3572,5 +3574,41 @@ _describe('calc helper functions', function() {
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.deepStrictEqual(bup.calc.gamescore(s), [2, 1]);
+	});
+
+	_it('warmup rules', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+			timestamp: 1234000,
+		}];
+		var setup = bup.utils.deep_copy(SINGLES_SETUP);
+		// Backwards compatibility
+		var s = state_after(presses, setup);
+		assert.deepStrictEqual(s.timer, {
+			start: 1234000,
+			exigent: 5499,
+			duration: 120000,
+		});
+
+		setup.warmup = 'legacy';
+		s = state_after(presses, setup);
+		assert.deepStrictEqual(s.timer, {
+			start: 1234000,
+			exigent: 5499,
+			duration: 120000,
+		});
+
+		setup.warmup = 'none';
+		s = state_after(presses, setup);
+		assert.deepStrictEqual(s.timer, false);
+
+		setup.warmup = 'bwf-2016';
+		s = state_after(presses, setup);
+		assert.deepStrictEqual(s.timer, {
+			start: 1234000,
+			exigent: 30499,
+			duration: 120000,
+		});
 	});
 });

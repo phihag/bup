@@ -92,6 +92,7 @@ var i18n_de = {
 'game(won)': 'Satz',
 'match suspended': 'Das Spiel ist unterbrochen',
 'ready to unsuspend': 'Sind Sie spielbereit?\n',
+'ready to play': 'Spielbereit.',
 
 'demo:team1': '1. BC Beuel',
 'demo:player1.1': 'Max Weißkirchen',
@@ -174,13 +175,18 @@ var i18n_de = {
 'settings:Start Match': 'Spiel starten',
 'settings:Resume Match': 'Spiel fortführen',
 'settings:loadmatch_none': 'Keine gespeicherten Spiele vorhanden!',
-'settings:counting': 'Zählweise:',
+'settings:counting': 'Zählweise',
 'settings:counting:3x21': 'BWF (3x21)',
 'settings:counting:2x21+11': '2x21, 3. Satz bis 11',
 'settings:counting:5x11_15': 'BWF 2016 Experiment Option 1 (5x11 bis max. 15)',
 'settings:counting:5x11/3': 'BWF 2016 Experiment Option 2 (5x11, Verlängerung bis 13)',
 'settings:counting:1x21': 'Bundesliga Goldener Satz (1x21)',
 'settings:counting:1x11_15': 'Bundesliga Goldener Satz Experiment (1x11 bis max. 15)',
+
+'settings:warmup': 'Spielfeldgewöhnungszeit',
+'settings:warmup:bwf-2016': 'BWF ab 2016 (90s)',
+'settings:warmup:legacy': '120s (Deutschland)',
+'settings:warmup:none': 'Sofort beginnen',
 
 'settings:Settings': 'Einstellungen',
 'settings:Court Description': 'Feld:',

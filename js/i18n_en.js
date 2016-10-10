@@ -92,6 +92,7 @@ var i18n_en = {
 'game(won)': 'Game',
 'match suspended': 'Play is suspended',
 'ready to unsuspend': 'Are you ready?\n',
+'ready to play': 'Ready to play.',
 
 'demo:team1': 'Denmark',
 'demo:player1.1': 'Joachim Fischer Nielsen',
@@ -181,6 +182,11 @@ var i18n_en = {
 'settings:counting:5x11/3': 'BWF 2016 Experiment Option 2 (5x11 with 3 point challenge)',
 'settings:counting:1x21': 'One Game (1x21)',
 'settings:counting:1x11_15': 'One Game 2016 Experiment Option 1 (1x11 until max. 15)',
+
+'settings:warmup': 'Warmup:',
+'settings:warmup:bwf-2016': 'BWF 2016+ (120s, ready after 90s)',
+'settings:warmup:legacy': 'legacy (120s)',
+'settings:warmup:none': 'none',
 
 'settings:Settings': 'Settings',
 'settings:Court Description': 'Court:',

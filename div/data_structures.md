@@ -135,6 +135,11 @@ counting*          Scoring system. Valid values are "3x21", "1x21", "2x21+11", "
 umpire_name        Name of the umpire assigned to this match (or the last one who touched it).
 service_judge_name Name of the service judge assigned to this match.
 court_id           ID of the court this match is played on.
+warmup             Warmup time rules. Values are:
+   "bwf-2016"       BWF laws starting June 2016 (120s total, ready to play after 90s)
+   "legacy"         120 seconds warmup time. (Default when the key is missing)
+   "none"           No warmup time.
+
 
 The following keys are copied over from the event (see there for documentation):
 
