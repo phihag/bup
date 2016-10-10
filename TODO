@@ -1,5 +1,7 @@
-scoresheet: Kreise im mobile safari viel zu dick
 Verbleibende Pausenzeiten der Spieler nach Spielordnung
+	-> in match order
+fix match order of played matches
+transmit match order to courtspot
 empty list of players in hall (select + input)
 
 referee mode
@@ -435,8 +437,4 @@ move eventsheet._xlsx into separate module
 reduce common occurences of a single string with dots in it (automatically?) Example: uiu.create_el
 editevent: check ranking
 doc about all main features (HTML table, compare with other projects)
-
-Blocked
-=====
-
-Jörg Hupert: BWF change 90 seconds warmups
+upload to turnier.de?
