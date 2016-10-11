@@ -26,11 +26,11 @@ function update() {
 		return;
 	}
 
-	var timer_el = $('.timer');
+	var timer_el = uiu.qs('.timer');
 	if (state.timer.upwards) {
 		var val = utils.duration_secs(state.timer.start, Date.now());
-		timer_el.text(val);
-		timer_el.removeClass('timer_exigent');
+		uiu.text(timer_el, val);
+		uiu.removeClass(timer_el, 'timer_exigent');
 		ui_timer = window.setTimeout(update, 1000);
 	} else {
 		var remaining = state.timer.start + state.timer.duration - Date.now();
@@ -44,16 +44,16 @@ function update() {
 				remaining_val = Math.floor(remaining_val / 60) + ':' + utils.add_zeroes(remaining_val % 60);
 			}
 		}
-		timer_el.text(remaining_val);
+		uiu.text(timer_el, remaining_val);
 
 		var new_timer_state = (remaining <= 0) ? undefined : 'running';
 		if (state.timer.exigent && (remaining <= state.timer.exigent)) {
-			timer_el.addClass('timer_exigent');
+			uiu.addClass(timer_el, 'timer_exigent');
 			if (new_timer_state === 'running') {
 				new_timer_state = 'exigent';
 			}
 		} else {
-			timer_el.removeClass('timer_exigent');
+			uiu.removeClass(timer_el, 'timer_exigent');
 		}
 
 		var old_timer_state = state.timer_state;
