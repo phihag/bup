@@ -128,6 +128,7 @@ var _settings_checkboxes = [
 	'negative_timers',
 	'shuttle_counter',
 	'editmode_doubleclick',
+	'refmode_client_enabled',
 ];
 var _settings_textfields = ['umpire_name',
 	'service_judge_name',
@@ -186,6 +187,7 @@ function update(s) {
 	render.ui_court_str(s);
 	render.shuttle_counter(s);
 	click.update_mode(s.settings.click_mode);
+	refmode_client.on_settings_change(s);
 }
 
 function ui_init(s) {
@@ -221,6 +223,9 @@ function ui_init(s) {
 			}
 			if (name === 'shuttle_counter') {
 				render.shuttle_counter(s);
+			}
+			if (name === 'refmode_client_enabled') {
+				refmode_client.on_settings_change(s);
 			}
 			store(s);
 		});
@@ -341,6 +346,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var i18n = require('./i18n');
 	var match_storage = require('./match_storage');
 	var network = require('./network');
+	var refmode_client = require('./refmode_client');
 	var render = require('./render');
 	var scoresheet = require('./scoresheet');
 	var stats = require('./stats');

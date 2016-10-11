@@ -215,7 +215,7 @@ var i18n_en = {
 'settings:click_mode:touchstart': 'Fast',
 'settings:click_mode:touchend': 'Slow',
 'settings:click_mode:click': 'Native',
-'settings:refmode:client:status': 'Referee:',
+'settings:refmode:client:status': 'Referee (highly experimental):',
 
 'settings:mode:label': 'Mode:',
 'settings:mode:umpire': 'Umpire',
@@ -419,8 +419,9 @@ var i18n_en = {
 'liveaw:lost connection': 'Reconnecting ...',
 
 'refmode:lost connection': 'Reconnecting ...',
-'refmode:client:disabled': 'Disabled',
-'refmode:client:enabled': 'Enabled',
+'refmode:status:disabled': 'Disabled',
+'refmode:status:enabled': 'Enabled',
+'refmode:status:connected to hub': 'connected to hub',
 };
 
 /*@DEV*/

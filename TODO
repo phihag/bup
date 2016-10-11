@@ -1,3 +1,17 @@
+referee mode
+	allow URL change (reconnect on change)
+	add new mode
+	pair referee / refclient
+
+	exponential backoff when connecting, up to network interval
+	automatically reconnect if connection fails
+	see battery
+	see current match/event
+	espouse an event from a client
+	add encryption / signatures
+	better client string (configured / connected)
+	test with very long wait ... heartbeat necessary?
+
 jticker
 	bup-update
 		download zip (admins only)
@@ -11,27 +25,19 @@ jticker
 		which match on court
 		points for all sets
 
-transmit match order to courtspot
-empty list of players in hall (select + input)
+order:
+	on change transmit to demo
+	on change transmit to courtspot
 
-referee mode
-	handle the button
-	connect on enabling
-	add dialog to connect to referee
-	add new mode
-
-	automatically reconnect if connection fails
-	move to separate worker if workers available
-	see battery
-	see current match/event
-	espouse an event from a client
-	better client string (configured / connected)
-
-BuLi checkliste
-	=> mails Jörg
+BuLi checkliste: redesign
+	=> mails Jörg Hupertz
 alternate editevent (with checkboxes, same order as Mannschaftsaufstellungszettel)
 
-editevent: test ranking (green checkmark / red x)
+courtspot: fetch all_players
+btde: fetch all_players
+empty list of players in hall (select + input)
+
+editevent: check ranking (red error message)
 bupbug: correct exports with really long lines
 automatically send export if state finishes from event incomplete -> event complete
 	different mail subject (auto-export)

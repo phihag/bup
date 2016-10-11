@@ -6,9 +6,12 @@ var ws;
 
 function status_str(s) {
 	if (!enabled) {
-		return s._('refmode:client:disabled');
+		return s._('refmode:status:disabled');
 	}
-	return s._('refmode:client:enabled');
+	if (ws.bup_connected) {
+		return s._('refmode:status:connected to hub');
+	}
+	return s._('refmode:status:enabled');
 }
 
 function update_status_str(s) {
@@ -17,33 +20,50 @@ function update_status_str(s) {
 
 function on_settings_change(s) {
 	var settings_enabled = s.settings.refmode_client_enabled;
-	if (settings_enabled === enabled) {
-		return;
-	}
-	enabled = settings_enabled;
+	var changed = false;
 
-	if (enabled && !ws) { // TODO: simply this to 1 var
-		connect();
+	if (settings_enabled !== enabled) {
+		enabled = settings_enabled;
+		changed = true;
 	}
-	// TODO disconnect
+
+	if (changed) {
+		disconnect();
+		if (enabled) {
+			connect(function(estate) {
+				network.errstate('refmode.client.ws', estate);
+				update_status_str(s);
+			});
+		}
+	}
+
 	update_status_str(s);
 }
 
-function connect() {
-	var wsurl = (location.protocol === 'https:' ? 'wss' : 'ws') + '://' + location.hostname + (location.port ? ':' + location.port: '')  + '/ws/bup';
-	var new_ws = new WebSocket(wsurl, 'bup-refmode');
-	new_ws.onopen = function() {
-		ws = new_ws;
-		network.errstate('refmode.client.ws', null);
+function connect(status_cb) {
+	var wsurl = 'wss://live.aufschlagwechsel.de/refmode_server/';
+	ws = new WebSocket(wsurl, 'bup-refmode');
+	ws.onopen = function() {
+		ws.bup_connected = true;
+		status_cb(null);
 	};
-	new_ws.onmessage = function() {
+	ws.onmessage = function() {
 		console.log('got message', arguments); // eslint-disable-line no-console
 	};
-	new_ws.onclose = function() {
-		network.errstate('refmode.client.ws', state._('refmode:lost connection'));
-		ws = null;
-		connect();
+	ws.onclose = function() {
+		if (!enabled) {
+			return;
+		}
+		status_cb(state._('refmode:lost connection'));
+		connect(status_cb);
 	};
+}
+
+function disconnect() {
+	if (ws) {
+		ws.close();
+		ws = null;
+	}
 }
 
 function ui_init(s) {
