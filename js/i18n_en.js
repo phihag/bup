@@ -216,6 +216,7 @@ var i18n_en = {
 'settings:click_mode:touchend': 'Slow',
 'settings:click_mode:click': 'Native',
 'settings:refmode:client:status': 'Referee (highly experimental):',
+'settings:refmode:client:ws_url': 'Hub URL:',
 
 'settings:mode:label': 'Mode:',
 'settings:mode:umpire': 'Umpire',

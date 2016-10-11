@@ -22,6 +22,7 @@ var default_settings = {
 	wakelock: 'display',
 	click_mode: 'auto',
 	refmode_client_enabled: false,
+	refmode_client_ws_url: 'wss://live.aufschlagwechsel.de/refmode_server/',
 };
 
 function load() {
@@ -122,6 +123,11 @@ function update_court(s) {
 	court_select.val(s.settings.court_id);
 }
 
+function update_refclient(s) {
+	uiu.visible_qs('.settings_refmode_client_container', s.settings.refmode_client_enabled);
+	refmode_client.on_settings_change(s);
+}
+
 var _settings_checkboxes = [
 	'go_fullscreen',
 	'show_pronunciation',
@@ -134,6 +140,7 @@ var _settings_textfields = ['umpire_name',
 	'service_judge_name',
 	'court_id',
 	'court_description',
+	'refmode_client_ws_url',
 ];
 var _settings_numberfields = [
 	'network_timeout',
@@ -187,7 +194,7 @@ function update(s) {
 	render.ui_court_str(s);
 	render.shuttle_counter(s);
 	click.update_mode(s.settings.click_mode);
-	refmode_client.on_settings_change(s);
+	update_refclient(s);
 }
 
 function ui_init(s) {
@@ -225,7 +232,7 @@ function ui_init(s) {
 				render.shuttle_counter(s);
 			}
 			if (name === 'refmode_client_enabled') {
-				refmode_client.on_settings_change(s);
+				update_refclient(s);
 			}
 			store(s);
 		});
@@ -241,6 +248,9 @@ function ui_init(s) {
 				if (e.type == 'change') {
 					network.resync();
 				}
+			}
+			if (name === 'refmode_client_ws_url') {
+				refmode_client.on_settings_change(s);
 			}
 			store(s);
 		});

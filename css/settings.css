@@ -191,6 +191,10 @@ a.settings_mode_active:visited {
 	margin-right: 1em;
 }
 
+.settings div.settings_refmode_client_container {
+	padding-left: 2em;
+}
+
 /* Smartphones */
 @media screen and (max-width: 480px) {
 	.settings_container {

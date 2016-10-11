@@ -216,6 +216,7 @@ var i18n_de = {
 'settings:click_mode:touchend': 'Langsam',
 'settings:click_mode:click': 'Nativ',
 'settings:refmode:client:status': 'Referee (sehr experimentell):',
+'settings:refmode:client:ws_url': 'Hub-URL:',
 
 'settings:mode:label': 'Modus:',
 'settings:mode:umpire': 'Schiedsrichter',
@@ -421,7 +422,7 @@ var i18n_de = {
 'refmode:lost connection': 'Verbindung wird wiederhergestellt ...',
 'refmode:status:disabled': 'Deaktiviert',
 'refmode:status:enabled': 'Aktiviert',
-'refmode:status:connected to hub': 'Verbunden zu Vermittler',
+'refmode:status:connected to hub': 'Verbunden zu Hub',
 };
 
 /*@DEV*/
