@@ -111,6 +111,7 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var click = require('./click');
 	var control = require('./control');
+	var uiu = require('./uiu');
 	var utils = require('./utils');
 	var render = require('./render');
 
