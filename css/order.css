@@ -156,7 +156,7 @@ div.order_container {
 .order_match_time {
 	width: 3em;
 }
-.order_match_time>span {
+.order_match_time > span {
 	display: block;
 }
 
