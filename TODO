@@ -1,16 +1,16 @@
 referee mode
-	allow URL change (reconnect on change)
 	add new mode
 	pair referee / refclient
+	re-pair afterwards (send acceptable keys / auth@server)
 
 	exponential backoff when connecting, up to network interval
 	automatically reconnect if connection fails
 	see battery
-	see current match/event
 	espouse an event from a client
+	see current match/event
 	add encryption / signatures
-	better client string (configured / connected)
 	test with very long wait ... heartbeat necessary?
+	push event to client
 
 jticker
 	bup-update
@@ -81,6 +81,7 @@ RLS
 export: generate v2 data
 
 bup display mode
+	berlin-like display (names top/bottom, very large numbers for one court)
 	recheck that caching still works with annotate
 	add btde emulation
 	bg colors single-court display (https://image.jimcdn.com/app/cms/image/transf/dimension=640x1024:format=jpg/path/sb05689bf882eaf25/image/ia1b1bbe374005542/version/1473663902/image.jpg seems very good)
