@@ -73,6 +73,10 @@ function toggle_displaymode() {
 	}
 }
 
+function show_refereemode() {
+	uiu.visible_qs('#settings_wrapper', true);	
+}
+
 var _network_hide_cb = null;
 function show() {
 	if (state.ui.settings_visible) {
@@ -300,14 +304,23 @@ function ui_init(s) {
 
 	update(s);
 	on_mode_change(s);
+
+	click.qs('.settings_mode_umpire', function(e) {
+		e.preventDefault();
+		displaymode.hide();
+		refmode_referee.hide();
+		settings.show();
+	});
 }
 
 function get_mode(s) {
-	var res = 'umpire';
 	if (s.ui.displaymode_visible) {
-		res = 'display';
+		return 'display';
 	}
-	return res;
+	if (s.ui.referee_mode) {
+		return 'referee';
+	}
+	return 'umpire';
 }
 
 function on_mode_change(s) {
@@ -338,6 +351,7 @@ return {
 	on_mode_change: on_mode_change,
 	show: show,
 	show_displaymode: show_displaymode,
+	show_refereemode: show_refereemode,
 	store: store,
 	toggle_displaymode: toggle_displaymode,
 	ui_init: ui_init,

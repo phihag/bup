@@ -36,7 +36,7 @@ function record(s) {
 
 	var orig_hval = window.location.hash.substr(1);
 	var hval = orig_hval;
-	hval = hval.replace(/(?:^|&)(?:m|display|settings|event_scoresheets|scoresheet|eventsheet|stats|netstats|order|editevent)(?:=[^&]*)?(?=&|$)/g, '');
+	hval = hval.replace(/(?:^|&)(?:m|display|settings|event_scoresheets|scoresheet|eventsheet|stats|netstats|order|editevent|referee_mode)(?:=[^&]*)?(?=&|$)/g, '');
 	hval = hval.replace(/^&+|&+$/g, '');
 
 	if (s.initialized) {
@@ -54,6 +54,11 @@ function record(s) {
 		if (s.ui.displaymode_settings_visible) {
 			hval += '&settings';
 		}
+	} else if (s.ui.referee_mode) {
+		if (hval.length > 1) {
+			hval += '&';
+		}
+		hval += 'referee_mode';
 	} else if (s.ui.scoresheet_visible) {
 		if (hval.length > 1) {
 			hval += '&';
@@ -112,6 +117,13 @@ function load_by_hash() {
 		return;
 	} else {
 		displaymode.hide();
+	}
+
+	if (typeof qs.referee_mode != 'undefined') {
+		refmode_referee.show();
+		return;
+	} else {
+		refmode_referee.hide();
 	}
 
 	if (qs.eventsheet) {

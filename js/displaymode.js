@@ -428,6 +428,7 @@ function show() {
 	}
 
 	state.ui.displaymode_visible = true;
+	refmode_referee.hide();
 	render.hide();
 	settings.on_mode_change(state);
 	settings.show_displaymode();
@@ -467,11 +468,6 @@ function ui_init() {
 	click.qs('.settings_mode_display', function(e) {
 		e.preventDefault();
 		show();
-	});
-	click.qs('.settings_mode_umpire', function(e) {
-		e.preventDefault();
-		hide();
-		settings.show();
 	});
 }
 

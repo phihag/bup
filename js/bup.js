@@ -40,6 +40,7 @@ function ui_init() {
 	displaymode.ui_init();
 	shortcuts.ui_init(state);
 	refmode_client.ui_init(state);
+	refmode_referee.ui_init();
 
 	var hash_query = utils.parse_query_string(window.location.hash.substr(1));
 	if (hash_query.lang) {

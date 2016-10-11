@@ -1,36 +1,54 @@
 'use strict';
 
 var refmode_referee = (function() {
-// TODO add show / hide
 
-/*
-function connect() {
-	var wsurl = (location.protocol === 'https:' ? 'wss' : 'ws') + '://' + location.hostname + (location.port ? ':' + location.port: '')  + '/ws/bup';
-	var new_ws = new WebSocket(wsurl, 'bup-refmode');
-	new_ws.onopen = function() {
-		ws = new_ws;
-		for (var i = 0;i < outstanding_requests.length;i++) {
-			_send_request(outstanding_requests[i]);
-		}
-		network.errstate('refmode.client.ws', null);
-	};
-	new_ws.onmessage = _handle_response;
-	new_ws.onclose = function() {
-		network.errstate('refmode.client.ws', state._('refmode:lost connection'));
-		ws = null;
-		connect();
-	};
+function show() {
+	if (state.ui.referee_mode) {
+		return;
+	}
+
+	state.ui.referee_mode = true;
+	render.hide();
+	displaymode.hide();
+	settings.show_refereemode();
+	settings.on_mode_change(state);
+	control.set_current(state);
+
+	uiu.visible_qs('.referee_layout', true);
 }
-*/
+
+function hide() {
+	if (! state.ui.referee_mode) {
+		return;
+	}
+	state.ui.referee_mode = false;
+	uiu.visible_qs('.referee_layout', false);
+	settings.on_mode_change(state);
+}
+
+function ui_init() {
+	click.qs('.settings_mode_referee', function(e) {
+		e.preventDefault();
+		show();
+	});
+}
 
 return {
-
+	show: show,
+	hide: hide,
+	ui_init: ui_init,
 };
 
 })();
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var control = require('./control');
+	var displaymode = require('./displaymode');
+	var render = require('./render');
+	var settings = require('./settings');
+	var uiu = require('./uiu');
+
 	module.exports = refmode_referee;
 }
 /*/@DEV*/

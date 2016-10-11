@@ -64,6 +64,11 @@ function ui_init(s) {
 	});
 	Mousetrap.bind('shift+u', function() {
 		displaymode.hide();
+		refmode_referee.hide();
+		settings.show();
+	});
+	Mousetrap.bind('shift+r', function() {
+		refmode_referee.show();
 	});
 	Mousetrap.bind('enter', function() {
 		if (s.ui.displaymode_visible) {

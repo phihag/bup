@@ -1,5 +1,4 @@
 referee mode
-	add new mode
 	pair referee / refclient
 	re-pair afterwards (send acceptable keys / auth@server)
 
@@ -29,6 +28,7 @@ order:
 	on change transmit to demo
 	on change transmit to courtspot
 
+invented current match upon switching modes
 BuLi checkliste: redesign
 	=> mails Jörg Hupertz
 alternate editevent (with checkboxes, same order as Mannschaftsaufstellungszettel)
@@ -444,3 +444,4 @@ reduce common occurences of a single string with dots in it (automatically?) Exa
 editevent: check ranking
 doc about all main features (HTML table, compare with other projects)
 upload to turnier.de?
+rework settings.show => split stuff into ui_init

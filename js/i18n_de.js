@@ -221,7 +221,7 @@ var i18n_de = {
 'settings:mode:label': 'Modus:',
 'settings:mode:umpire': 'Schiedsrichter',
 'settings:mode:display': 'Anzeigetafel (experimentell)',
-'settings:mode:referee': 'Referee (experimentell)',
+'settings:mode:referee': 'Referee (sehr experimentell)',
 
 'exceptions:yellow-card-title': 'Gelbe Karte',
 'exceptions:yellow-card': 'Verwarnung',

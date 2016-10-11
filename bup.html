@@ -297,7 +297,7 @@
 <div class="settings">
 <h2 data-i18n="settings:Settings"></h2>
 
-<label data-bup-modes="umpire display"><span data-i18n="settings:refmode:client:status"></span><input type="checkbox" name="refmode_client_enabled" class="refmode_client_settings" data-i18n="settings:refmode:client:configure"/><span class="refmode_status"></span></label>
+<label><span data-i18n="settings:refmode:client:status"></span><input type="checkbox" name="refmode_client_enabled" class="refmode_client_settings" data-i18n="settings:refmode:client:configure"/><span class="refmode_status"></span></label>
 <div class="settings_refmode_client_container default-invisible">
 	<label><span data-i18n="settings:refmode:client:ws_url"></span> <input type="text" size="50" name="refmode_client_ws_url" data-i18n="settings:refmode:client:ws_url"/></label>
 </div>
@@ -326,6 +326,7 @@
 <div class="settings_mode"><span data-i18n="settings:mode:label"></span>
 <a href="#settings" class="settings_mode_umpire" data-i18n="settings:mode:umpire"></a>
 <a href="#display" class="settings_mode_display" data-i18n="settings:mode:display"></a>
+<a href="#referee_mode" class="settings_mode_referee" data-i18n="settings:mode:referee"></a>
 </div>
 
 <div class="settings_footer">
@@ -524,6 +525,8 @@ text.team1 {
 </div>
 
 <div class="displaymode_layout default-invisible"></div>
+
+<div class="referee_layout default-invisible">TODO: Referee display goes here!</div>
 
 <!--@DEV-->
 <script src="libs/jquery.min.js"></script>
