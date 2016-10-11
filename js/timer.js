@@ -92,7 +92,7 @@ function remove(immediately) {
 }
 
 function ui_init() {
-	$('.timer_restart').click(function() {
+	click.qs('.timer_restart', function() {
 		control.on_press({
 			type: 'timer_restart',
 		});
@@ -109,6 +109,7 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var click = require('./click');
 	var control = require('./control');
 	var utils = require('./utils');
 	var render = require('./render');
