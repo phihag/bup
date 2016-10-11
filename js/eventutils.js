@@ -57,6 +57,7 @@ function set_metadata(event) {
 	var umpires_set = {}; // Poor man's set
 
 	event.matches.forEach(function(match) {
+		match.md_eid = match.setup.eventsheet_id || match.setup.match_name;
 		if (! match.presses_json) {
 			return;
 		}
@@ -67,12 +68,16 @@ function set_metadata(event) {
 		var fpresses = scopy.flattened_presses;
 		if (fpresses.length > 0) {
 			match.network_match_start = fpresses[0].timestamp;
+			match.md_start = fpresses[0].timestamp;
 			match.network_last_update = fpresses[fpresses.length - 1].timestamp;
-			match.network_match_end = null;
+			match.md_end = null;
 			for (var i = 0;i < fpresses.length;i++) {
 				if (fpresses[i].type === 'postmatch-confirm') {
-					match.network_match_end = fpresses[i].timestamp;
+					match.md_end = fpresses[i].timestamp;
 				}
+			}
+			if (! match.md_end && scopy.match.finished) {
+				match.md_end = scopy.fpresses[fpresses.length - 1].timestamp;
 			}
 		}
 		match.netscore = calc.netscore(scopy);
@@ -159,7 +164,7 @@ function annotate(s, event) {
 
 				/*@DEV*/
 				if (team.name === team_name) {
-					report_problem.silent_error('Redundant key ' + key + ' in ' + setup.match_id);
+					report_problem.silent_error('Redundant team_name in ' + setup.match_id);
 				}
 				/*/@DEV*/
 

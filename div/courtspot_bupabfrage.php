@@ -37,7 +37,6 @@ function make_team($name, $row, $verwaltung) {
 	}
 	return [
 		'short_name' => $verwaltung[$name . 'Court'],
-		'name' => $verwaltung[$name],
 		'players' => $players,
 	];
 }
@@ -124,7 +123,9 @@ while ($row = $result->fetch_assoc()) {
 		(count($home_team['players']) !== $player_count) ||
 		(count($away_team['players']) !== $player_count)
 	);
-	$match_id = 'courtspot_' . $today . '_' . $row['Art'] . '_' . $home_team['name'] . '-' . $away_team['name'];
+	$home_team_name = $verwaltung['Heim'];
+	$away_team_name = $verwaltung['Gast'];
+	$match_id = 'courtspot_' . $today . '_' . $row['Art'] . '_' . $home_team_name . '-' . $away_team_name;
 
 	$setup = [
 		'match_name' => $row['Art'],

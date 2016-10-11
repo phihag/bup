@@ -1,10 +1,15 @@
-improve order
-	mark played / playing matches
-	no coloring in done matches
-	show time remaining for players with rest according to regulations
-	show playing for currently playing players
-	mark current players as red and optimize as such
-	reset should restore current lock status
+jticker
+	bup-update
+		download zip (admins only)
+		atomic
+		if dev present use that
+	bup module
+		login with token
+		login with user/pass
+	list
+	sync
+		which match on court
+		points for all sets
 
 transmit match order to courtspot
 empty list of players in hall (select + input)
@@ -22,20 +27,8 @@ referee mode
 	espouse an event from a client
 	better client string (configured / connected)
 
-jticker
-	bup-update
-		download zip (admins only)
-		atomic
-		if dev present use that
-	bup module
-		login with token
-		login with user/pass
-	list
-	sync
-		which match on court
-		points for all sets
-
 BuLi checkliste
+	=> mails Jörg
 alternate editevent (with checkboxes, same order as Mannschaftsaufstellungszettel)
 
 editevent: test ranking (green checkmark / red x)
@@ -54,6 +47,7 @@ alternative toss
 	offer toss
 send export: error message / success
 Spielbericht: Leitender Schiedsrichter auswählen?
+order: show time remaining for players with rest according to regulations
 
 add demo mode to UI (also a way to disable)
 implement resource timing API

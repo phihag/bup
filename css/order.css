@@ -26,6 +26,21 @@ div.order_container {
 	height: 2em;
 }
 
+
+.order_finished {
+	color: #666;
+}
+.order_ongoing {
+	color: #44f;
+}
+.order_conflict1 {
+	color: red;
+}
+.order_conflict2 {
+	color: orange;
+}
+
+
 .order_display {
 	/* left side for nums, right for lock */
 	margin: 1em 2em;

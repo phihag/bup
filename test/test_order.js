@@ -1,3 +1,5 @@
+'use strict';
+
 var assert = require('assert');
 
 var tutils = require('./tutils');
@@ -5,12 +7,11 @@ var _describe = tutils._describe;
 var _it = tutils._it;
 var bup = tutils.bup;
 
-(function() {
-'use strict';
 
 function _order_matches(matches, order_str) {
 	var match_names = order_str.split('-');
-	return bup.order.order_by_names(matches, match_names);
+	bup.eventutils.set_metadata({matches: matches});
+	return bup.order.init_order_matches(matches, match_names);
 }
 
 function _calc_order(matches, order_str) {
@@ -547,4 +548,3 @@ _describe('order', function() {
 
 });
 
-})();	

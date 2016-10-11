@@ -19,16 +19,49 @@ function calc_players(match) {
 	return res;
 }
 
-function order_by_names(matches, match_names) {
-	return match_names.map(function(match_name) {
-		for (var i = 0;i < matches.length;i++) {
-			var msetup = matches[i].setup;
-			if ((msetup.eventsheet_id === match_name) || (msetup.match_name === match_name)) {
-				return matches[i];
+function _pref_idx(prefs, match) {
+	var res = prefs.indexOf(match.md_eid);
+	if (res < 0) {
+		throw new Error('Could not find match ' + match.md_eid);
+	}
+	return res;
+}
+
+// Need to call eventutils.set_metadata before calling this
+function init_order_matches(matches, prefs) {
+	if (! prefs) {
+		prefs = matches.map(function(m) {
+			return m.md_eid;
+		});
+	}
+
+	var res = matches.slice();
+	res.sort(function(m1, m2) {
+		if (m1.md_start) {
+			if (m2.md_start) {
+				if (m1.md_start < m2.md_start) {
+					return -1;
+				} else if (m1.md_start > m2.md_start) {
+					return 1;
+				}
+			} else {
+				return -1;
 			}
+		} else if (m2.md_start) {
+			return 1;
 		}
-		throw new Error('Could not find match ' + match_name);
+
+		var idx1 = _pref_idx(prefs, m1);
+		var idx2 = _pref_idx(prefs, m2);
+		if (idx1 < idx2) {
+			return -1;
+		} else if (idx1 > idx2) {
+			return 1;
+		} else {
+			return 0;
+		}
 	});
+	return res;
 }
 
 function sort_by_order(matches, match_order) {
@@ -45,6 +78,10 @@ function calc_conflicting_players(omatches, ignore_start) {
 		for (var dist = 1;dist <= 2;dist++) {
 			if (i + dist >= ignore_start) {
 				break;
+			}
+			if (omatches[i].md_start && omatches[i + dist].md_start) {
+				// Both matches started already, so no need to color conflict
+				continue;
 			}
 			var other_players = o_players[i + dist];
 			for (var j = 0;j < my_players.length;j++) {
@@ -162,12 +199,20 @@ function optimize(costfunc, matches, preferred, locked) {
 }
 
 function init(s) {
-	eventutils.set_metadata(s.event);
-	current_matches = get_omatches(s);
+	var event = s.event;
+
+	eventutils.set_metadata(event);
+
+	var pref = event.preferred_order;
+	if (!pref && event.league_key) {
+		pref = preferred_by_league(event.league_key);
+	}
+	current_matches = init_order_matches(event.matches, pref);
+
 	current_ignore_start = current_matches.length;
 	current_locked = {};
 	s.event.matches.forEach(function(m) {
-		if (m.network_match_start) {
+		if (m.md_start) {
 			current_locked[m.setup.match_id] = true;
 		}
 	});
@@ -249,18 +294,6 @@ function preferred_by_league(league_key) {
 			'3.HE',
 		];
 	}
-}
-
-function get_omatches(s) {
-	var event = s.event;
-	var pref = event.preferred_order;
-	if (!pref && event.league_key) {
-		pref = preferred_by_league(event.league_key);
-	}
-	if (!pref) {
-		return event.matches.slice();
-	}
-	return order_by_names(event.matches, pref);
 }
 
 function ui_move_prepare(from_idx) {
@@ -395,21 +428,21 @@ function ui_render() {
 	}
 
 	function _add_player(team_container, team, player_id) {
-		var style = '';
+		var player_class = 'order_player';
 		var player_name;
 		if (team.players[player_id]) {
 			player_name = team.players[player_id].name;
 			var conflict = conflicts[player_name];
 			if (conflict === 1) {
-				style = 'color: red;';
+				player_class += ' order_conflict1';
 			} else if (conflict === 2) {
-				style = 'color: orange;';
+				player_class += ' order_conflict2';
 			}
 		} else {
 			// Player not configured yet
 			player_name = 'N.N.';
 		}
-		uiu.create_el(team_container, 'span', {'class': 'order_player', style: style}, player_name);
+		uiu.create_el(team_container, 'span', {'class': player_class}, player_name);
 	}
 
 	_create_insert_mark(display, 0);
@@ -424,7 +457,16 @@ function ui_render() {
 		}
 
 		var setup = match.setup;
-		var match_el = uiu.create_el(display, 'table', {'class': 'order_match', 'data-order-idx': i});
+		var match_class = 'order_match';
+		if (match.network_finished) {
+			match_class += ' order_finished';
+		} else if (match.md_start) {
+			match_class += ' order_ongoing';
+		}
+		var match_el = uiu.create_el(display, 'table', {
+			'class': match_class,
+			'data-order-idx': i,
+		});
 		var match_tr = uiu.create_el(match_el, 'tr');
 		uiu.create_el(match_tr, 'td', {'class': 'order_match_name'}, setup.match_name);
 		for (var team_id = 0;team_id <= 1;team_id++) {
@@ -440,8 +482,8 @@ function ui_render() {
 		var time_td = uiu.create_el(match_tr, 'td', {
 			'class': 'order_match_time',
 		});
-		uiu.create_el(time_td, 'span', {}, match.network_match_start ? utils.time_str(match.network_match_start) + '-' : '\xa0');
-		uiu.create_el(time_td, 'span', {}, match.network_match_end ? utils.time_str(match.network_match_end) : '\xa0');
+		uiu.create_el(time_td, 'span', {}, match.md_start ? utils.time_str(match.md_start) + '-' : '\xa0');
+		uiu.create_el(time_td, 'span', {}, match.md_end ? utils.time_str(match.md_end) : '\xa0');
 
 		if (i < current_ignore_start) {
 			_create_insert_mark(display, i + 1);
@@ -503,7 +545,7 @@ return {
 	ui_init: ui_init,
 	// Testing only
 	calc_conflicting_players: calc_conflicting_players,
-	order_by_names: order_by_names,
+	init_order_matches: init_order_matches,
 	cost_rest2: cost_rest2,
 	calc_conflict_map: calc_conflict_map,
 	optimize: optimize,
