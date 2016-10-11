@@ -138,6 +138,12 @@ div.order_container {
 .order_player {
 	display: block;
 }
+.order_match_time {
+	width: 3em;
+}
+.order_match_time>span {
+	display: block;
+}
 
 .order_buttons {
 	position: relative;

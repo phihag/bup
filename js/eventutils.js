@@ -68,6 +68,12 @@ function set_metadata(event) {
 		if (fpresses.length > 0) {
 			match.network_match_start = fpresses[0].timestamp;
 			match.network_last_update = fpresses[fpresses.length - 1].timestamp;
+			match.network_match_end = null;
+			for (var i = 0;i < fpresses.length;i++) {
+				if (fpresses[i].type === 'postmatch-confirm') {
+					match.network_match_end = fpresses[i].timestamp;
+				}
+			}
 		}
 		match.netscore = calc.netscore(scopy);
 		match.network_finished = scopy.match.finished;

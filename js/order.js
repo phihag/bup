@@ -198,7 +198,7 @@ function show() {
 			uiu.visible_qs('.order_error', !!err);
 			uiu.visible_qs('.order_loading-icon', false);
 			if (err) {
-				$('.order_error_message').text(err.msg);
+				uiu.text_qs('.order_error_message', err.msg);
 				return;
 			}
 			state.event = ev;
@@ -312,10 +312,10 @@ function ui_lock_click(e) {
 	var idx = parseInt(el.getAttribute('data-order-idx'));
 	var match_id = current_matches[idx].setup.match_id;
 	if (current_locked[match_id]) {
-		$(el).removeClass('order_lock_locked');
+		uiu.removeClass(el, 'order_lock_locked');
 		current_locked[match_id] = false;
 	} else {
-		$(el).addClass('order_lock_locked');
+		uiu.addClass(el, 'order_lock_locked');
 		current_locked[match_id] = true;
 	}
 	ui_move_abort();
@@ -436,6 +436,12 @@ function ui_render() {
 			}
 		}
 		click.on(match_el, on_match_click);
+
+		var time_td = uiu.create_el(match_tr, 'td', {
+			'class': 'order_match_time',
+		});
+		uiu.create_el(time_td, 'span', {}, match.network_match_start ? utils.time_str(match.network_match_start) + '-' : '\xa0');
+		uiu.create_el(time_td, 'span', {}, match.network_match_end ? utils.time_str(match.network_match_end) : '\xa0');
 
 		if (i < current_ignore_start) {
 			_create_insert_mark(display, i + 1);
