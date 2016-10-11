@@ -1,7 +1,7 @@
 'use strict';
 
 var refmode_client = (function() {
-var rc = refmode_conn(handle_change, handle_msg);
+var rc;
 
 function update_status_str(s) {
 	uiu.text_qs('.refmode_status', rc.status_str(s));
@@ -17,6 +17,9 @@ function handle_change(estate) {
 }
 
 function on_settings_change(s) {
+	if (!rc) {
+		rc = refmode_conn(handle_change, handle_msg);
+	}
 	rc.on_settings_change(s.settings.refmode_client_enabled, s.settings.refmode_client_ws_url);
 	update_status_str(s);
 }

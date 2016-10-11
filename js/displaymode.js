@@ -489,6 +489,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
 	var network = require('./network');
 	var render = require('./render');
+	var refmode_referee = require('./refmode_referee');
 	var report_problem = require('./report_problem');
 	var settings = require('./settings');
 	var uiu = require('./uiu');

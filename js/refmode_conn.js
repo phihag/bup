@@ -1,6 +1,7 @@
 'use strict';
 
-var refmode_conn = (function(status_cb, handle_msg) {
+var refmode_conn = function(status_cb, handle_msg) {
+
 var ws;
 var enabled = false;
 var ws_url;
@@ -64,10 +65,11 @@ return {
 	on_settings_change: on_settings_change,
 	status_str: status_str,
 };
-});
+
+};
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
-	module.exports = refmode_referee;
+	module.exports = refmode_conn;
 }
 /*/@DEV*/

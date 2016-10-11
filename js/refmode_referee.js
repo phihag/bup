@@ -44,6 +44,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
+	var click = require('./click');
 	var displaymode = require('./displaymode');
 	var render = require('./render');
 	var settings = require('./settings');

@@ -371,6 +371,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var match_storage = require('./match_storage');
 	var network = require('./network');
 	var refmode_client = require('./refmode_client');
+	var refmode_referee = require('./refmode_referee');
 	var render = require('./render');
 	var scoresheet = require('./scoresheet');
 	var stats = require('./stats');

@@ -96,6 +96,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var editmode = require('./editmode');
 	var importexport = require('./importexport');
 	var netstats = require('./netstats');
+	var refmode_referee = require('./refmode_referee');
 	var render = require('./render');
 	var scoresheet = require('./scoresheet');
 	var settings = require('./settings');

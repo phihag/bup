@@ -93,6 +93,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var p2p = require('./p2p');
 	var pronunciation = require('./pronunciation');
 	var refmode_client = require('./refmode_client');
+	var refmode_referee = require('./refmode_referee');
 	var register_sworker = require('./register_sworker');
 	var report_problem = require('./report_problem');
 	var scoresheet = require('./scoresheet');
