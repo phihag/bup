@@ -13,6 +13,17 @@ function verify_client(info) {
 	return true;
 }
 
+function send(ws, msg) {
+	ws.send(JSON.stringify(msg));
+}
+
+function send_error(ws, emsg) {
+	ws.send({
+		type: 'error',
+		message: emsg,
+	});
+}
+
 function hub(config) {
 	if (!config) {
 		config = DEFAULT_CONFIG;
@@ -20,11 +31,48 @@ function hub(config) {
 
 	var wss = new ws_module.Server({port: config.port, verifyClient: verify_client});
 
-	//var active_clients = {};
-
 	wss.on('connection', function(ws) {
-		ws.on('message', function(message) {
-			console.log('received: %s', message);
+		var cd = {};
+		ws.conn_data = cd;
+
+		ws.on('message', function(msg_json) {
+			try {
+				var msg = JSON.parse(msg_json);
+			} catch(e) {
+				send_error(ws, 'Invalid JSON: ' + e.message);
+				return;
+			}
+
+			switch(msg.type) {
+			case 'register-referee':
+				if (typeof msg.key !== 'string') {
+					send_error(ws, 'Invalid key');
+					return;
+				}
+
+				cd.key = msg.key;
+				cd.is_referee = true;
+				break;
+			case 'list-referees':
+				var referees = [];
+				wss.clients.forEach(function(c) {
+					var cd = c.conn_data;
+					if (!cd.is_referee) {
+						return;
+					}
+
+					referees.push({
+						key: cd.key,
+					});
+				});
+				send(ws, {
+					type: 'referee-list',
+					referees: referees,
+				});
+				break;
+			default:
+				send_error(ws, 'Unsupported message type: ' + msg.type);
+			}
 		});
 	});
 	return wss;

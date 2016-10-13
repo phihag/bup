@@ -1,10 +1,22 @@
 'use strict';
 
-var refmode_referee = (function(handle_change) {
+var refmode_referee = (function(handle_change_ui) {
 var conn = refmode_conn(handle_change, handle_msg);
+var key = 'refkey-4242';
 
-function handle_msg() {
-	console.log('got message', arguments); // eslint-disable-line no-console
+function handle_change(status) {
+	if (status === null) {
+		// new connection
+		conn.send({
+			type: 'register-referee',
+			key: key,
+		});
+	}
+	handle_change_ui(status);
+}
+
+function handle_msg(msg) {
+	console.log('referee got message', msg); // eslint-disable-line no-console
 }
 
 function on_settings_change(s) {

@@ -6,6 +6,23 @@ var ws;
 var enabled = false;
 var ws_url;
 
+function send_error(emsg) {
+	send({
+		type: 'error',
+		message: emsg,
+	});
+}
+
+function handle_msg_json(e) {
+	try {
+		var msg = JSON.parse(e.data);
+	} catch(e) {
+		send_error('Invalid JSON: ' + e.message);
+		return;
+	}
+	handle_msg(msg);
+}
+
 function connect(ws_url) {
 	var my_ws = new WebSocket(ws_url, 'bup-refmode');
 	ws = my_ws;
@@ -13,7 +30,7 @@ function connect(ws_url) {
 		my_ws.bup_connected = true;
 		status_cb(null);
 	};
-	my_ws.onmessage = handle_msg;
+	my_ws.onmessage = handle_msg_json;
 	my_ws.onclose = function() {
 		if (my_ws.bup_die) {
 			return;
@@ -61,9 +78,18 @@ function status_str(s) {
 	return s._('refmode:status:enabled');
 }
 
+function send(msg) {
+	if (ws) {
+		ws.send(JSON.stringify(msg));
+	}
+}
+
+
 return {
 	on_settings_change: on_settings_change,
 	status_str: status_str,
+	send: send,
+	send_error: send_error,
 };
 
 };

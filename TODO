@@ -1,5 +1,6 @@
 referee mode
-	pair referee / refclient
+	generate key
+	pair refclient
 	re-pair afterwards (send acceptable keys / auth@server)
 
 	exponential backoff when connecting, up to network interval

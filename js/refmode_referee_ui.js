@@ -3,7 +3,7 @@
 var refmode_referee_ui = (function() {
 var rc;
 
-function on_status_change(new_status) {
+function on_status_change() {
 	uiu.text_qs('.refmode_referee_status', rc.status_str(state));
 }
 
@@ -56,6 +56,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
 	var click = require('./click');
 	var displaymode = require('./displaymode');
+	var refmode_referee = require('./refmode_referee');
 	var render = require('./render');
 	var settings = require('./settings');
 	var uiu = require('./uiu');

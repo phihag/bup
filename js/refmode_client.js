@@ -1,10 +1,32 @@
 'use strict';
 
-var refmode_client = (function(handle_change) {
+var refmode_client = (function(handle_change_ui) {
 var conn = refmode_conn(handle_change, handle_msg);
 
-function handle_msg() {
-	console.log('got message', arguments); // eslint-disable-line no-console
+var list_handlers = [];
+
+function handle_change(estate) {
+	if (estate === null) {
+		// New connection, resend our connstate
+		if (list_handlers.length > 0) {
+			conn.send({
+				type: 'list-referees',
+			});
+		}
+	}
+	handle_change_ui(estate);
+}
+
+function handle_msg(msg) {
+	switch(msg.type) {
+	case 'referee-list':
+		list_handlers.forEach(function(lh) {
+			lh(msg.referees);
+		});
+		break;
+	default:
+		conn.send_error('Unsupported message type: ' + msg.type);
+	}
 }
 
 function on_settings_change(s) {
@@ -15,9 +37,23 @@ function status_str(s) {
 	return conn.status_str(s);
 }
 
+// Returns a function to cancel the updates
+function list_referees(callback) {
+	list_handlers.push(callback);
+	conn.send({
+		type: 'list-referees',
+	});
+	return function() {
+		list_handlers = list_handlers.filter(function(h) {
+			return h !== callback;
+		});
+	};
+}
+
 return {
 	on_settings_change: on_settings_change,
 	status_str: status_str,
+	list_referees: list_referees,
 };
 
 });

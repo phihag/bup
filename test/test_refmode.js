@@ -1,5 +1,6 @@
 'use strict';
 
+var assert = require('assert');
 var async = require('async');
 
 var tutils = require('./tutils');
@@ -28,12 +29,12 @@ _describe('refmode', function() {
 
 			function on_change(new_state) {
 				if (new_state === null) {
-					return cb(null, ws_url);
+					return cb(null, ws_url, client);
 				}
 			}
 			var client = bup.refmode_client(on_change);
 			client.on_settings_change(s);
-		}, function(ws_url, cb) {
+		}, function(ws_url, client, cb) {
 			var s = {
 				settings: {
 					refmode_referee_ws_url: ws_url,
@@ -42,11 +43,18 @@ _describe('refmode', function() {
 
 			function on_change(new_state) {
 				if (new_state === null) {
-					return cb();
+					return cb(null, client, referee);
 				}
 			}
 			var referee = bup.refmode_referee(on_change);
 			referee.on_settings_change(s);
+		}, function(client, referee, cb) {
+			client.list_referees(function(refs) {
+				assert.deepStrictEqual(refs, [{
+					key: 'refkey-4242',
+				}]);
+				cb();
+			});
 		}], done);
 	});
 });
