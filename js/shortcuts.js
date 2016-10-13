@@ -64,11 +64,11 @@ function ui_init(s) {
 	});
 	Mousetrap.bind('shift+u', function() {
 		displaymode.hide();
-		refmode_referee.hide();
+		refmode_referee_ui.hide();
 		settings.show();
 	});
 	Mousetrap.bind('shift+r', function() {
-		refmode_referee.show();
+		refmode_referee_ui.show();
 	});
 	Mousetrap.bind('enter', function() {
 		if (s.ui.displaymode_visible) {
@@ -96,7 +96,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var editmode = require('./editmode');
 	var importexport = require('./importexport');
 	var netstats = require('./netstats');
-	var refmode_referee = require('./refmode_referee');
+	var refmode_referee_ui = require('./refmode_referee_ui');
 	var render = require('./render');
 	var scoresheet = require('./scoresheet');
 	var settings = require('./settings');

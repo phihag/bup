@@ -19,18 +19,34 @@ _describe('refmode', function() {
 				cb(null, ws_url);
 			});
 		}, function(ws_url, cb) {
-			var s = tutils.state_after([], tutils.DOUBLES_SETUP, {
-				refmode_client_enabled: true,
-				refmode_client_ws_url: ws_url,
-			});
+			var s = {
+				settings: {
+					refmode_client_enabled: true,
+					refmode_client_ws_url: ws_url,
+				},
+			};
+
+			function on_change(new_state) {
+				if (new_state === null) {
+					return cb(null, ws_url);
+				}
+			}
+			var client = bup.refmode_client(on_change);
+			client.on_settings_change(s);
+		}, function(ws_url, cb) {
+			var s = {
+				settings: {
+					refmode_referee_ws_url: ws_url,
+				},
+			};
 
 			function on_change(new_state) {
 				if (new_state === null) {
 					return cb();
 				}
 			}
-			var client = bup.refmode_client(on_change);
-			client.on_settings_change(s);
+			var referee = bup.refmode_referee(on_change);
+			referee.on_settings_change(s);
 		}], done);
 	});
 });

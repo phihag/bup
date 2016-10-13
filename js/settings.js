@@ -23,6 +23,7 @@ var default_settings = {
 	click_mode: 'auto',
 	refmode_client_enabled: false,
 	refmode_client_ws_url: 'wss://live.aufschlagwechsel.de/refmode_hub/',
+	refmode_referee_ws_url: 'wss://live.aufschlagwechsel.de/refmode_hub/',
 };
 
 function load() {
@@ -128,7 +129,7 @@ function update_court(s) {
 }
 
 function update_refclient(s) {
-	uiu.visible_qs('.settings_refmode_client_container', s.settings.refmode_client_enabled);
+	uiu.visible_qs('.settings_refmode_client_container', (get_mode(s) !== 'referee') && s.settings.refmode_client_enabled);
 	refmode_client_ui.on_settings_change(s);
 }
 
@@ -145,6 +146,7 @@ var _settings_textfields = ['umpire_name',
 	'court_id',
 	'court_description',
 	'refmode_client_ws_url',
+	'refmode_referee_ws_url',
 ];
 var _settings_numberfields = [
 	'network_timeout',
@@ -308,7 +310,7 @@ function ui_init(s) {
 	click.qs('.settings_mode_umpire', function(e) {
 		e.preventDefault();
 		displaymode.hide();
-		refmode_referee.hide();
+		refmode_referee_ui.hide();
 		settings.show();
 	});
 }
@@ -341,6 +343,7 @@ function on_mode_change(s) {
 	update_court_settings(s);
 
 	wakelock.update(s);
+	update_refclient(s);
 }
 
 return {
@@ -371,7 +374,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var match_storage = require('./match_storage');
 	var network = require('./network');
 	var refmode_client_ui = require('./refmode_client_ui');
-	var refmode_referee = require('./refmode_referee');
+	var refmode_referee_ui = require('./refmode_referee_ui');
 	var render = require('./render');
 	var scoresheet = require('./scoresheet');
 	var stats = require('./stats');

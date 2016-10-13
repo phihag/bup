@@ -120,10 +120,10 @@ function load_by_hash() {
 	}
 
 	if (typeof qs.referee_mode != 'undefined') {
-		refmode_referee.show();
+		refmode_referee_ui.show();
 		return;
 	} else {
-		refmode_referee.hide();
+		refmode_referee_ui.hide();
 	}
 
 	if (qs.eventsheet) {
@@ -225,7 +225,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var netstats = require('./netstats');
 	var network = require('./network');
 	var order = require('./order');
-	var refmode_referee = require('./refmode_referee');
+	var refmode_referee_ui = require('./refmode_referee_ui');
 	var render = require('./render');
 	var scoresheet = require('./scoresheet');
 	var settings = require('./settings');

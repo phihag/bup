@@ -1,54 +1,30 @@
 'use strict';
 
-var refmode_referee = (function() {
+var refmode_referee = (function(handle_change) {
+var conn = refmode_conn(handle_change, handle_msg);
 
-function show() {
-	if (state.ui.referee_mode) {
-		return;
-	}
-
-	state.ui.referee_mode = true;
-	render.hide();
-	displaymode.hide();
-	settings.show_refereemode();
-	settings.on_mode_change(state);
-	control.set_current(state);
-
-	uiu.visible_qs('.referee_layout', true);
+function handle_msg() {
+	console.log('got message', arguments); // eslint-disable-line no-console
 }
 
-function hide() {
-	if (! state.ui.referee_mode) {
-		return;
-	}
-	state.ui.referee_mode = false;
-	uiu.visible_qs('.referee_layout', false);
-	settings.on_mode_change(state);
+function on_settings_change(s) {
+	conn.on_settings_change(true, s.settings.refmode_referee_ws_url);
 }
 
-function ui_init() {
-	click.qs('.settings_mode_referee', function(e) {
-		e.preventDefault();
-		show();
-	});
+function status_str(s) {
+	return conn.status_str(s);
 }
 
 return {
-	show: show,
-	hide: hide,
-	ui_init: ui_init,
+	on_settings_change: on_settings_change,
+	status_str: status_str,
 };
 
-})();
+});
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
-	var control = require('./control');
-	var click = require('./click');
-	var displaymode = require('./displaymode');
-	var render = require('./render');
-	var settings = require('./settings');
-	var uiu = require('./uiu');
+	var refmode_conn = require('./refmode_conn');
 
 	module.exports = refmode_referee;
 }
