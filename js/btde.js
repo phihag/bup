@@ -205,9 +205,9 @@ function _parse_match_list(doc, now) {
 	var away_team_name = event_data.gast;
 
 	var league_key = {
-		'BL1': '1BL-2016',
-		'BL2N': '2BLN-2016',
-		'BL2S': '2BLS-2016',
+		'1. Bundesliga': '1BL-2016',
+		'2. Bundesliga Nord': '2BLN-2016',
+		'2. Bundesliga Süd': '2BLS-2016',
 	}[event_data.Liga];
 	if (!league_key) {
 		league_key = '1BL-2016';
