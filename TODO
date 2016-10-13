@@ -1,4 +1,5 @@
 referee mode
+	configure referee to connect as well
 	pair referee / refclient
 	re-pair afterwards (send acceptable keys / auth@server)
 

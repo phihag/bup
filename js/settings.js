@@ -22,7 +22,7 @@ var default_settings = {
 	wakelock: 'display',
 	click_mode: 'auto',
 	refmode_client_enabled: false,
-	refmode_client_ws_url: 'wss://live.aufschlagwechsel.de/refmode_server/',
+	refmode_client_ws_url: 'wss://live.aufschlagwechsel.de/refmode_hub/',
 };
 
 function load() {
@@ -129,7 +129,7 @@ function update_court(s) {
 
 function update_refclient(s) {
 	uiu.visible_qs('.settings_refmode_client_container', s.settings.refmode_client_enabled);
-	refmode_client.on_settings_change(s);
+	refmode_client_ui.on_settings_change(s);
 }
 
 var _settings_checkboxes = [
@@ -254,7 +254,7 @@ function ui_init(s) {
 				}
 			}
 			if (name === 'refmode_client_ws_url') {
-				refmode_client.on_settings_change(s);
+				refmode_client_ui.on_settings_change(s);
 			}
 			store(s);
 		});
@@ -370,7 +370,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var i18n = require('./i18n');
 	var match_storage = require('./match_storage');
 	var network = require('./network');
-	var refmode_client = require('./refmode_client');
+	var refmode_client_ui = require('./refmode_client_ui');
 	var refmode_referee = require('./refmode_referee');
 	var render = require('./render');
 	var scoresheet = require('./scoresheet');

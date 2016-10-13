@@ -39,7 +39,7 @@ function ui_init() {
 	editevent.ui_init();
 	displaymode.ui_init();
 	shortcuts.ui_init(state);
-	refmode_client.ui_init(state);
+	refmode_client_ui.ui_init(state);
 	refmode_referee.ui_init();
 
 	var hash_query = utils.parse_query_string(window.location.hash.substr(1));
@@ -93,6 +93,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var p2p = require('./p2p');
 	var pronunciation = require('./pronunciation');
 	var refmode_client = require('./refmode_client');
+	var refmode_client_ui = require('./refmode_client_ui');
 	var refmode_referee = require('./refmode_referee');
 	var register_sworker = require('./register_sworker');
 	var report_problem = require('./report_problem');
@@ -117,6 +118,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 		order: order,
 		p2p: p2p,
 		pronunciation: pronunciation,
+		refmode_client: refmode_client,
 		scoresheet: scoresheet,
 		stats: stats,
 		utils: utils,

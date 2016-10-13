@@ -70,6 +70,8 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var WebSocket = require('ws');
+
 	module.exports = refmode_conn;
 }
 /*/@DEV*/
