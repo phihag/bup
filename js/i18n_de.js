@@ -215,14 +215,14 @@ var i18n_de = {
 'settings:click_mode:touchstart': 'Schnell',
 'settings:click_mode:touchend': 'Langsam',
 'settings:click_mode:click': 'Nativ',
-'settings:refmode:client:status': 'Referee (sehr experimentell):',
+'settings:refmode:client:status': 'Referee (sehr experimentell, nur für Entwickler):',
 'settings:refmode:ws_url': 'Hub-URL:',
 
 
 'settings:mode:label': 'Modus:',
 'settings:mode:umpire': 'Schiedsrichter',
 'settings:mode:display': 'Anzeigetafel (experimentell)',
-'settings:mode:referee': 'Referee (sehr experimentell)',
+'settings:mode:referee': 'Referee (sehr experimentell, nur für Entwickler)',
 
 'exceptions:yellow-card-title': 'Gelbe Karte',
 'exceptions:yellow-card': 'Verwarnung',
