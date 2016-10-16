@@ -122,7 +122,7 @@ function duration_mins(start_timestamp, end_timestamp) {
 function duration_hours(start_timestamp, end_timestamp) {
 	var mins = duration_mins(start_timestamp, end_timestamp);
 	var hours = (mins - (mins % 60)) / 60;
-	return hours + ':' + utils.add_zeroes(mins % 60);
+	return hours + ':' + add_zeroes(mins % 60);
 }
 
 function duration_secs(start_timestamp, end_timestamp) {
@@ -133,9 +133,9 @@ function duration_secs(start_timestamp, end_timestamp) {
 	var hours = (diff_mins - mins) / 60;
 
 	if (hours) {
-		return hours + ':' + utils.add_zeroes(mins) + ':' + utils.add_zeroes(secs);
+		return hours + ':' + add_zeroes(mins) + ':' + add_zeroes(secs);
 	} else {
-		return mins + ':' + utils.add_zeroes(secs);
+		return mins + ':' + add_zeroes(secs);
 	}
 }
 
@@ -264,6 +264,54 @@ function replace_all(str, search, replacement) {
 	return str.split(search).join(replacement);
 }
 
+var encode_utf8;
+if (typeof TextEncoder != 'undefined') {
+	encode_utf8 = function(str) {
+		return new TextEncoder('utf-8').encode(str);
+	};
+} else {
+	encode_utf8 = function(str) {
+		var ints = [];
+		for (var i = 0;i < str.length;i++) {
+			var c = str.charCodeAt(i);
+			if (c <= 0x7f) {
+				ints.push(c);
+			} else if (c <= 0x7ff) {
+				ints.push(0xc0 | (c >> 6));
+				ints.push(0x80 | (c & 0x3f));
+			} else if ((c <= 0xd7ff) || (c > 0xdfff)) {
+				ints.push(0xe0 | (c >> 12));
+				ints.push(0x80 | ((c >> 6) & 0x3f));
+				ints.push(0x80 | (c & 0x3f));
+			} else {
+				// Non-BMP, first reconstruct the codepoint from JavaScript's UTF-16 representation
+				var c2 = str.charCodeAt(++i);
+				c = ((c - 0xd800) << 10) + (c2 - 0xdc00) + 0x10000;
+
+				ints.push(0xf0 | (c >> 18));
+				ints.push(0x80 | ((c >> 12) & 0x3f));
+				ints.push(0x80 | ((c >> 6) & 0x3f));
+				ints.push(0x80 | (c & 0x3f));
+			}
+		}
+		return new Uint8Array(ints);
+	};
+}
+
+function hex(ab) {
+	var lst = [];
+	var r = new Uint8Array(ab);
+	for (var i = 0; i < r.byteLength;i++) {
+		var s = r[i].toString(16);
+		while (s.length < 2) {
+			s = '0' + s.length;
+		}
+		lst.push(s);
+	}
+	return lst.join('');
+}
+
+
 return {
 	add_zeroes: add_zeroes,
 	any: any,
@@ -275,7 +323,9 @@ return {
 	duration_hours: duration_hours,
 	duration_mins: duration_mins,
 	duration_secs: duration_secs,
+	encode_utf8: encode_utf8,
 	find: find,
+	hex: hex,
 	human_date_str: human_date_str,
 	iso8601: iso8601,
 	map_dict: map_dict,

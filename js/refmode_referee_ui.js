@@ -13,7 +13,7 @@ function show() {
 	}
 
 	if (!rc) {
-		rc = refmode_referee(on_status_change);
+		rc = refmode_referee(on_status_change, key_storage);
 		rc.on_settings_change(state);
 	}
 
@@ -56,6 +56,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
 	var click = require('./click');
 	var displaymode = require('./displaymode');
+	var key_storage = require('./key_storage');
 	var refmode_referee = require('./refmode_referee');
 	var render = require('./render');
 	var settings = require('./settings');

@@ -18,7 +18,7 @@ function send(ws, msg) {
 }
 
 function send_error(ws, emsg) {
-	ws.send({
+	send(ws, {
 		type: 'error',
 		message: emsg,
 	});
@@ -45,13 +45,18 @@ function hub(config) {
 
 			switch(msg.type) {
 			case 'register-referee':
-				if (typeof msg.key !== 'string') {
+				if (typeof msg.pub_json !== 'string') {
 					send_error(ws, 'Invalid key');
 					return;
 				}
 
-				cd.key = msg.key;
+				// TODO calculate fingerprint
+				// TODO copy over key info
 				cd.is_referee = true;
+				send(ws, {
+					type: 'referee-registered',
+				});
+				// TODO challenge instead
 				break;
 			case 'list-referees':
 				var referees = [];

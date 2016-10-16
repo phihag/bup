@@ -424,6 +424,9 @@ var i18n_de = {
 'refmode:status:disabled': 'Deaktiviert',
 'refmode:status:enabled': 'Aktiviert',
 'refmode:status:connected to hub': 'Verbunden zu Hub',
+'refmode:keygen failed': 'Schlüssel konnte nicht erzeugt werden: {message}',
+'refmode:generating key': 'Generiere Schlüssel ...',
+
 };
 
 /*@DEV*/

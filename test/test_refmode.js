@@ -10,6 +10,26 @@ var bup = tutils.bup;
 
 var refmode_hub = require('../refmode_hub/refmode_hub');
 
+
+var tutil_key_storage = (function() {
+	var stored;
+	return {
+		retrieve: function(cb) {
+			if (stored) {
+				return cb(null, stored);
+			}
+
+			bup.key_storage.gen(function(err, store) {
+				if (err) return cb(err);
+				stored = store;
+				cb(null, stored);
+			});
+		},
+		fingerprint: bup.key_storage.fingerprint,
+	};
+})();
+
+
 _describe('refmode', function() {
 	_it('ws integration test', function(done) {
 		async.waterfall([function(cb) {
@@ -28,7 +48,10 @@ _describe('refmode', function() {
 			};
 
 			function on_change(new_state) {
-				if (new_state === null) {
+				if (new_state.status === 'error') {
+					return cb(new_state);
+				}
+				if (new_state.status === 'connected to hub') {
 					return cb(null, ws_url, client);
 				}
 			}
@@ -42,17 +65,21 @@ _describe('refmode', function() {
 			};
 
 			function on_change(new_state) {
-				if (new_state === null) {
+				if (new_state.status === 'error') {
+					return cb(new_state);
+				}
+				if (new_state.status === 'referee.registered') {
 					return cb(null, client, referee);
 				}
 			}
-			var referee = bup.refmode_referee(on_change);
+			var referee = bup.refmode_referee(on_change, tutil_key_storage);
 			referee.on_settings_change(s);
-		}, function(client, referee, cb) {
+		},
+		function(client, referee, cb) {
 			client.list_referees(function(refs) {
-				assert.deepStrictEqual(refs, [{
-					key: 'refkey-4242',
-				}]);
+				assert.strictEqual(refs.length, 1);
+				// TODO check that key matches the one we expect
+				// TODO verify that key matches
 				cb();
 			});
 		}], done);

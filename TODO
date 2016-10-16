@@ -1,6 +1,6 @@
 referee mode
-	generate key
-	pair refclient
+	challenge on referee registration before confirming fingerprint
+	connect-to-refereees (keep on server like that, send back connected/disconnected packets)
 	re-pair afterwards (send acceptable keys / auth@server)
 
 	exponential backoff when connecting, up to network interval
@@ -25,6 +25,7 @@ jticker
 		which match on court
 		points for all sets
 
+test utils.hex
 order:
 	on change transmit to demo
 	on change transmit to courtspot

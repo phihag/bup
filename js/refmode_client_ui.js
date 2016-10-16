@@ -8,7 +8,7 @@ function update_status_str(s) {
 }
 
 function handle_change(estate) {
-	network.errstate('refmode.client.ws', estate);
+	network.errstate('refmode.client.ws', ((estate.status === 'error') ? estate : null));
 	update_status_str(state);
 }
 
@@ -17,7 +17,6 @@ function on_settings_change(s) {
 		rc = refmode_client(handle_change);
 	}
 	rc.on_settings_change(s);
-	update_status_str(s);
 }
 
 function ui_init(s) {

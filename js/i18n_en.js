@@ -423,6 +423,9 @@ var i18n_en = {
 'refmode:status:disabled': 'Disabled',
 'refmode:status:enabled': 'Enabled',
 'refmode:status:connected to hub': 'connected to hub',
+'refmode:keygen failed': 'Key generation failed: {message}',
+'refmode:generating key': 'Generating key ...',
+
 };
 
 /*@DEV*/

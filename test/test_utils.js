@@ -1,11 +1,11 @@
+'use strict';
+
 var assert = require('assert');
 var tutils = require('./tutils');
 var _describe = tutils._describe;
 var _it = tutils._it;
 var bup = tutils.bup;
 
-(function() {
-'use strict';
 
 _describe('helper functions', function() {
 	_it('duration_mins', function() {
@@ -166,6 +166,34 @@ _describe('helper functions', function() {
 			done();
 		});
 	});
-});
 
-})();
+	_it('encode_utf8', function() {
+		tutils.assert_u8r_eq(
+			bup.utils.encode_utf8(''),
+			[]);
+		tutils.assert_u8r_eq(
+			bup.utils.encode_utf8('abc'),
+			[97, 98, 99]);
+		tutils.assert_u8r_eq(
+			bup.utils.encode_utf8('ö'),
+			[195, 182]);
+		tutils.assert_u8r_eq(
+			bup.utils.encode_utf8('Düsseldorf'),
+			[68, 195, 188, 115, 115, 101, 108, 100, 111, 114, 102]);
+		tutils.assert_u8r_eq(
+			bup.utils.encode_utf8('ℝ'),
+			[226, 132, 157]);
+		tutils.assert_u8r_eq(
+			bup.utils.encode_utf8('אּ'),
+			[239, 172, 176]);
+		tutils.assert_u8r_eq(
+			bup.utils.encode_utf8('אּאּ'),
+			[239, 172, 176, 239, 172, 176]);
+		tutils.assert_u8r_eq(
+			bup.utils.encode_utf8('😂'),
+			[240, 159, 152, 130]);
+		tutils.assert_u8r_eq(
+			bup.utils.encode_utf8('a ä ℝ 😂'),
+			[97, 32, 195, 164, 32, 226, 132, 157, 32, 240, 159, 152, 130]);
+	});
+});

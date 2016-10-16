@@ -1,3 +1,5 @@
+'use strict';
+
 var assert = require('assert');
 var bup = require('../js/bup');
 
@@ -13,10 +15,6 @@ var _it = ((typeof it == 'undefined') ?
 	function(s, f) {f();} :
 	it
 );
-
-
-(function() {
-'use strict';
 
 
 var SINGLES_SETUP = {
@@ -184,6 +182,21 @@ function find_object(ar, search) {
 	assert.ok(false, 'Could not find object ' + JSON.stringify(search));
 }
 
+function assert_u8r_eq(r, lst) {
+	assert(r instanceof Uint8Array);
+	assert(lst instanceof Array);
+	lst.forEach(function(el) {
+		assert.equal(typeof el, 'number');
+	});
+
+	assert.strictEqual(r.length, lst.length, 'Expected an Uint8Array of length ' + lst.length + ', but length is ' + r.length);
+	var ints = [];
+	for (var i = 0;i < r.length;i++) {
+		ints.push(r[i]);
+	}
+	assert.deepStrictEqual(ints, lst);
+}
+
 
 module.exports = {
 	DOUBLES_SETUP: DOUBLES_SETUP,
@@ -195,11 +208,11 @@ module.exports = {
 	_describe: _describe,
 	_it: _it,
 	bup: bup,
+
+	assert_u8r_eq: assert_u8r_eq,
 	press_score: press_score,
 	state_after: state_after,
 	state_at: state_at,
 	Document: Document,
 	find_object: find_object,
 };
-
-})();

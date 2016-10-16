@@ -88,6 +88,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var fullscreen = require('./fullscreen');
 	var i18n = require('./i18n');
 	var importexport = require('./importexport');
+	var key_storage = require('./key_storage');
 	var network = require('./network');
 	var order = require('./order');
 	var p2p = require('./p2p');
@@ -115,6 +116,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 		eventutils: eventutils,
 		i18n: i18n,
 		importexport: importexport,
+		key_storage: key_storage,
 		network: network,
 		order: order,
 		p2p: p2p,

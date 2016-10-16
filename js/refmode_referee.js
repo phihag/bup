@@ -1,22 +1,43 @@
 'use strict';
 
-var refmode_referee = (function(handle_change_ui) {
+var refmode_referee = (function(handle_change_ui, key_storage) {
 var conn = refmode_conn(handle_change, handle_msg);
-var key = 'refkey-4242';
+var key;
+var key_err;
+
+key_storage.retrieve(function(err, k) {
+	if (err) {
+		key_err = err;
+		throw err;
+	}
+
+	key = k;
+});
 
 function handle_change(status) {
-	if (status === null) {
+	if (status.status === 'connected to hub') {
 		// new connection
-		conn.send({
-			type: 'register-referee',
-			key: key,
-		});
+		if (key) {
+			conn.send({
+				type: 'register-referee',
+				pub_json: key.pub_json,
+				fp: key.fp,
+			});
+		}
 	}
 	handle_change_ui(status);
 }
 
 function handle_msg(msg) {
-	console.log('referee got message', msg); // eslint-disable-line no-console
+	switch (msg.type) {
+	case 'referee-registered':
+		conn.set_status({
+			status: 'referee.registered',
+		});
+		break;
+	default:
+		console.log('referee got unhandled message', msg); // eslint-disable-line no-console
+	}
 }
 
 function on_settings_change(s) {
@@ -24,6 +45,15 @@ function on_settings_change(s) {
 }
 
 function status_str(s) {
+	if (key_err) {
+		return s._('refmode:keygen failed', {
+			message: key_err.message,
+		});
+	}
+	if (!key) {
+		return s._('refmode:generating key');
+	}
+
 	return conn.status_str(s);
 }
 
