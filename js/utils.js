@@ -298,19 +298,39 @@ if (typeof TextEncoder != 'undefined') {
 	};
 }
 
+var decode_utf8;
+if (typeof TextDecoder != 'undefined') {
+	decode_utf8 = function(ab) {
+		return new TextDecoder('utf-8').decode(ab);
+	};
+} else {
+	decode_utf8 = function(ui8r) {
+		// Neat but crazy
+		return decodeURIComponent(escape(String.fromCharCode.apply(null, ui8r)));
+	};
+}
+
 function hex(ab) {
 	var lst = [];
 	var r = new Uint8Array(ab);
-	for (var i = 0; i < r.byteLength;i++) {
+	for (var i = 0;i < r.byteLength;i++) {
 		var s = r[i].toString(16);
 		while (s.length < 2) {
-			s = '0' + s.length;
+			s = '0' + s;
 		}
 		lst.push(s);
 	}
 	return lst.join('');
 }
 
+function unhex(str) {
+	var lst = [];
+	for (var i = 0;i < str.length;i += 2) {
+		var byte = parseInt(str.slice(i, i + 2), 16);
+		lst.push(byte);
+	}
+	return Uint8Array.from(lst);
+}
 
 return {
 	add_zeroes: add_zeroes,
@@ -318,6 +338,7 @@ return {
 	count_lines: count_lines,
 	date_str: date_str,
 	datetime_str: datetime_str,
+	decode_utf8: decode_utf8,
 	deep_equal: deep_equal,
 	deep_copy: deep_copy,
 	duration_hours: duration_hours,
@@ -342,6 +363,7 @@ return {
 	svg_el: svg_el,
 	time_str: time_str,
 	timesecs_str: timesecs_str,
+	unhex: unhex,
 	uuid: uuid,
 	values: values,
 };

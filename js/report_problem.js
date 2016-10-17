@@ -1,5 +1,6 @@
-var report_problem = (function() {
 'use strict';
+
+var report_problem = (function() {
 
 var REPORT_URL = 'https://aufschlagwechsel.de/bupbug/';
 var last_error = '-';
@@ -96,6 +97,12 @@ function on_error(msg, script_url, line, col, err) {
 
 function silent_error(msg) {
 	console.error(msg); // eslint-disable-line no-console
+	/*@DEV*/
+	if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+		return;
+	}
+	/*/@DEV*/
+
 	last_error = {
 		msg: msg,
 		type: 'silent-error',

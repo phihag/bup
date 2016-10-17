@@ -4,6 +4,7 @@ var refmode_referee = (function(handle_change_ui, key_storage) {
 var conn = refmode_conn(handle_change, handle_msg);
 var key;
 var key_err;
+var last_status = {};
 
 key_storage.retrieve(function(err, k) {
 	if (err) {
@@ -12,17 +13,29 @@ key_storage.retrieve(function(err, k) {
 	}
 
 	key = k;
+	if (last_status.status === 'welcomed') {
+		register();
+	}
 });
 
+function register() {
+	var data = utils.encode_utf8(last_status.challenge);
+	key_utils.sign(key, data, function(err, sig_hex) {
+		if (err) throw err;
+
+		conn.send({
+			type: 'register-referee',
+			pub_json: key.pub_json,
+			sig: sig_hex,
+		});
+	});
+}
+
 function handle_change(status) {
-	if (status.status === 'connected to hub') {
-		// new connection
+	last_status = status;
+	if (status.status === 'welcomed') {
 		if (key) {
-			conn.send({
-				type: 'register-referee',
-				pub_json: key.pub_json,
-				fp: key.fp,
-			});
+			register();
 		}
 	}
 	handle_change_ui(status);
@@ -30,13 +43,19 @@ function handle_change(status) {
 
 function handle_msg(msg) {
 	switch (msg.type) {
+	case 'error':
+		report_problem.silent_error('referee received error ' + JSON.stringify(msg));
+		break;
+	case 'welcome':
+		break;
 	case 'referee-registered':
 		conn.set_status({
 			status: 'referee.registered',
 		});
 		break;
 	default:
-		console.log('referee got unhandled message', msg); // eslint-disable-line no-console
+		report_problem.silent_error('referee got unhandled message ' + JSON.stringify(msg));
+		conn.send_error('Unsupported message type: ' + msg.type);
 	}
 }
 
@@ -66,7 +85,10 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var key_utils = require('./key_utils');
 	var refmode_conn = require('./refmode_conn');
+	var report_problem = require('./report_problem');
+	var utils = require('./utils');
 
 	module.exports = refmode_referee;
 }

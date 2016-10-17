@@ -24,6 +24,12 @@ function handle_msg_json(e) {
 		return;
 	}
 	handle_msg(msg);
+	if (msg.type === 'welcome') {
+		set_status({
+			status: 'welcomed',
+			challenge: msg.challenge,
+		});
+	}
 }
 
 function connect(ws_url) {
@@ -35,21 +41,19 @@ function connect(ws_url) {
 	ws = my_ws;
 	my_ws.onopen = function() {
 		my_ws.bup_connected = true;
-		last_status = {
+		set_status({
 			status: 'connected to hub',
-		};
-		status_cb(last_status);
+		});
 	};
 	my_ws.onmessage = handle_msg_json;
 	my_ws.onclose = function() {
 		if (my_ws.bup_die) {
 			return;
 		}
-		last_status = {
+		set_status({
 			status: 'error',
 			message_i18n: 'refmode:lost connection',
-		};
-		status_cb(last_status);
+		});
 		connect(ws_url, status_cb);
 	};
 }

@@ -1,14 +1,11 @@
 referee mode
-	challenge on referee registration before confirming fingerprint
 	connect-to-refereees (keep on server like that, send back connected/disconnected packets)
-	re-pair afterwards (send acceptable keys / auth@server)
+	test reconnection when referee goes offline
 
 	exponential backoff when connecting, up to network interval
-	automatically reconnect if connection fails
 	see battery
 	espouse an event from a client
 	see current match/event
-	add encryption / signatures
 	test with very long wait ... heartbeat necessary?
 	push event to client
 
@@ -25,7 +22,13 @@ jticker
 		which match on court
 		points for all sets
 
-test utils.hex
+improve referee mode
+	client: store paired referees, allow to disconnect
+	client: auto-update referee list
+	test: bind hub to localhost
+	update referee list when referee disconnects
+
+test key_utils.gen / sign / verify
 order:
 	on change transmit to demo
 	on change transmit to courtspot

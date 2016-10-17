@@ -196,4 +196,55 @@ _describe('helper functions', function() {
 			bup.utils.encode_utf8('a ä ℝ 😂'),
 			[97, 32, 195, 164, 32, 226, 132, 157, 32, 240, 159, 152, 130]);
 	});
+
+	_it('decode_utf8', function() {
+		assert.deepStrictEqual(
+			bup.utils.decode_utf8([]),
+			'');
+		assert.deepStrictEqual(
+			bup.utils.decode_utf8([97, 98, 99]),
+			'abc');
+		assert.deepStrictEqual(
+			bup.utils.decode_utf8([195, 182]),
+			'ö');
+		assert.deepStrictEqual(
+			bup.utils.decode_utf8([68, 195, 188, 115, 115, 101, 108, 100, 111, 114, 102]),
+			'Düsseldorf');
+		assert.deepStrictEqual(
+			bup.utils.decode_utf8([226, 132, 157]),
+			'ℝ');
+		assert.deepStrictEqual(
+			bup.utils.decode_utf8([239, 172, 176]),
+			'אּ');
+		assert.deepStrictEqual(
+			bup.utils.decode_utf8([239, 172, 176, 239, 172, 176]),
+			'אּאּ');
+		assert.deepStrictEqual(
+			bup.utils.decode_utf8([240, 159, 152, 130]),
+			'😂');
+		assert.deepStrictEqual(
+			bup.utils.decode_utf8([97, 32, 195, 164, 32, 226, 132, 157, 32, 240, 159, 152, 130]),
+			'a ä ℝ 😂');
+	});
+
+	_it('hex', function() {
+		assert.deepStrictEqual(
+			bup.utils.hex(Uint8Array.from([])),
+			'');
+		assert.deepStrictEqual(
+			bup.utils.hex(Uint8Array.from([0, 10])),
+			'000a');
+		assert.deepStrictEqual(
+			bup.utils.hex(Uint8Array.from([0, 10, 16, 32, 128, 120, 255])),
+			'000a10208078ff');
+	});
+
+	_it('unhex', function() {
+		tutils.assert_u8r_eq(
+			bup.utils.unhex(''),
+			[]);
+		tutils.assert_u8r_eq(
+			bup.utils.unhex('000a10208078ff'),
+			[0, 10, 16, 32, 128, 120, 255]);
+	});
 });

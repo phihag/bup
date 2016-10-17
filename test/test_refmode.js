@@ -19,13 +19,12 @@ var tutil_key_storage = (function() {
 				return cb(null, stored);
 			}
 
-			bup.key_storage.gen(function(err, store) {
+			bup.key_utils.gen(function(err, store) {
 				if (err) return cb(err);
 				stored = store;
 				cb(null, stored);
 			});
 		},
-		fingerprint: bup.key_storage.fingerprint,
 	};
 })();
 
@@ -55,7 +54,12 @@ _describe('refmode', function() {
 					return cb(null, ws_url, client);
 				}
 			}
-			var client = bup.refmode_client(on_change);
+			var client = bup.refmode_client(function(status) {
+				client.test_handlers.forEach(function(h) {
+					h(status);
+				});
+			});
+			client.test_handlers = [on_change];
 			client.on_settings_change(s);
 		}, function(ws_url, client, cb) {
 			var s = {
@@ -78,10 +82,19 @@ _describe('refmode', function() {
 		function(client, referee, cb) {
 			client.list_referees(function(refs) {
 				assert.strictEqual(refs.length, 1);
-				// TODO check that key matches the one we expect
-				// TODO verify that key matches
-				cb();
+				assert(/^[0-9a-f]{64}$/.test(refs[0].fp));
+				cb(null, client, referee, refs[0].fp);
 			});
-		}], done);
+		},/*
+		function(client, referee, ref_fp, cb) {
+			client.test_handlers = [function(status) {
+				if (status.status === 'connected to referee') {
+					assert.deepStrictEqual(status.ref_fp, ref_fp);
+					cb();
+				}
+			}];
+			console.log('subscribging');
+			client.connect_to_referee(ref_fp);
+		}*/], done);
 	});
 });
