@@ -36,6 +36,12 @@ function handle_msg(msg) {
 			});
 		}
 		break;
+	case 'connected':
+		conn.set_status({
+			status: 'client.connected',
+			fp: msg.fp,
+		});
+		break;
 	default:
 		report_problem.silent_error('client got unhandled message ' + JSON.stringify(msg));
 		conn.send_error('Unsupported message type: ' + msg.type);

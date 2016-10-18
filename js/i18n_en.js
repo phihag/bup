@@ -424,6 +424,8 @@ var i18n_en = {
 'refmode:status:enabled': 'Enabled',
 'refmode:status:connected to hub': 'connected to hub...',
 'refmode:status:welcomed': 'connected to hub',
+'refmode:status:client.connected': 'Connected to {fp}',
+'refmode:status:referee.connected': 'Connected to {all_str}',
 'refmode:keygen failed': 'Key generation failed: {message}',
 'refmode:generating key': 'Generating key ...',
 

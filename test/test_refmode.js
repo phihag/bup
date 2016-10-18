@@ -85,16 +85,15 @@ _describe('refmode', function() {
 				assert(/^[0-9a-f]{64}$/.test(refs[0].fp));
 				cb(null, client, referee, refs[0].fp);
 			});
-		},/*
+		},
 		function(client, referee, ref_fp, cb) {
 			client.test_handlers = [function(status) {
-				if (status.status === 'connected to referee') {
-					assert.deepStrictEqual(status.ref_fp, ref_fp);
+				if (status.status === 'client.connected') {
+					assert.deepStrictEqual(status.fp, ref_fp);
 					cb();
 				}
 			}];
-			console.log('subscribging');
 			client.connect_to_referee(ref_fp);
-		}*/], done);
+		}], done);
 	});
 });

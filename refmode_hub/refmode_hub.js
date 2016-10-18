@@ -65,9 +65,11 @@ function hub(config) {
 	var conn_counter = 0;
 
 	wss.on('connection', function(ws) {
-		var cd = {};
+		var cd = {
+			connected_to: [],
+			id: conn_counter++,
+		};
 		ws.conn_data = cd;
-		cd.conn_id = conn_counter++;
 
 		node_crypto.randomBytes(64, function(err, buffer) {
 			cd.challenge = buffer.toString('hex');
@@ -142,6 +144,31 @@ function hub(config) {
 					return;
 				}
 				cd.referee_requests = msg.fps;
+				for (let r of wss.clients) {
+					var rd = r.conn_data;
+					if (! rd.is_referee) {
+						continue;
+					}
+
+					if (cd.referee_requests.includes(rd.fp)) {
+						if (cd.connected_to.includes(rd.id)) {
+							continue; // Already connected
+						}
+
+						cd.connected_to.push(rd.id);
+						rd.connected_to.push(cd.id);
+						send(ws, {
+							type: 'connected',
+							id: rd.id,
+							fp: rd.fp,
+						});
+						send(r, {
+							type: 'connected',
+							id: cd.id,
+							all: rd.connected_to,
+						});
+					}
+				}
 
 				break;
 			case 'error':

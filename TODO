@@ -1,6 +1,9 @@
 referee mode
 	connect-to-refereees (keep on server like that, send back connected/disconnected packets)
 	test reconnection when referee goes offline
+	test reconnection when client goes offline
+	sending connect-to-referees twice should no create additional connections
+	disconnect on deselecting a referee
 
 	exponential backoff when connecting, up to network interval
 	see battery

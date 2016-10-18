@@ -53,6 +53,12 @@ function handle_msg(msg) {
 			status: 'referee.registered',
 		});
 		break;
+	case 'connected':
+		conn.set_status({
+			status: 'referee.connected',
+			all_str: msg.all.join(','),
+		});
+		break;
 	default:
 		report_problem.silent_error('referee got unhandled message ' + JSON.stringify(msg));
 		conn.send_error('Unsupported message type: ' + msg.type);
