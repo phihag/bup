@@ -1,14 +1,15 @@
 referee mode
-	connect-to-refereees (keep on server like that, send back connected/disconnected packets)
+	send disconnect information once referee disconnects
+	send disconnect information once client disconnects
 	test reconnection when referee goes offline
 	test reconnection when client goes offline
-	sending connect-to-referees twice should no create additional connections
 	disconnect on deselecting a referee
+	UI to select referee
 
 	exponential backoff when connecting, up to network interval
 	see battery
 	espouse an event from a client
-	see current match/event
+	see current match/event (download data)
 	test with very long wait ... heartbeat necessary?
 	push event to client
 
