@@ -1,0 +1,10 @@
+.refmode_client_referee_list {
+	margin: 2em 0;
+}
+.refmode_client_referee_list > div > span {
+	cursor: pointer;
+	padding: 1em 0;
+}
+.refmode_client_referee_list > div > span:hover {
+	background: #ccc;
+}
