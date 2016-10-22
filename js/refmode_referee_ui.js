@@ -27,6 +27,12 @@ function show() {
 	uiu.visible_qs('.referee_layout', true);
 }
 
+function on_settings_change(s) {
+	if (rc) {
+		rc.on_settings_change(s);
+	}
+}
+
 function hide() {
 	if (! state.ui.referee_mode) {
 		return;
@@ -34,6 +40,8 @@ function hide() {
 	state.ui.referee_mode = false;
 	uiu.visible_qs('.referee_layout', false);
 	settings.on_mode_change(state);
+	// TODO disconnect?
+	rc = null;
 }
 
 function ui_init() {
@@ -47,6 +55,7 @@ return {
 	show: show,
 	hide: hide,
 	ui_init: ui_init,
+	on_settings_change: on_settings_change,
 };
 
 })();

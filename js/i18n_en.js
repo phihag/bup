@@ -428,7 +428,12 @@ var i18n_en = {
 'refmode:status:referee.connected': 'Connected to {all_str}',
 'refmode:keygen failed': 'Key generation failed: {message}',
 'refmode:generating key': 'Generating key ...',
-
+'refmode:client:no_referees': 'No connected referees',
+'refmode:client:select_referee': 'Connect to referee ...',
+'refmode:client:no_select_referee': 'Hide referee list',
+'refmode:status:referee.registered': 'Registered at hub',
+'refmode:client:paired': 'Authenticated Referees: {refs_str}',
+'refmode:client:paired:none': 'No Referees autenticated',
 };
 
 /*@DEV*/

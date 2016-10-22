@@ -258,6 +258,9 @@ function ui_init(s) {
 			if (name === 'refmode_client_ws_url') {
 				refmode_client_ui.on_settings_change(s);
 			}
+			if (name === 'refmode_referee_ws_url') {
+				refmode_referee_ui.on_settings_change(s);
+			}
 			store(s);
 		});
 	});

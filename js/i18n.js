@@ -43,13 +43,13 @@ function init() {
 
 function translate_nodes(root, s) {
 	root.find('*[data-i18n]').each(function(_, n) {
-		$(n).text(translate(s, n.getAttribute('data-i18n')));
+		uiu.text(n, translate(s, n.getAttribute('data-i18n')));
 	});
 	root.find('*[data-i18n-placeholder]').each(function(_, n) {
-		$(n).attr('placeholder', translate(s, n.getAttribute('data-i18n-placeholder')));
+		n.setAttribute('placeholder', translate(s, n.getAttribute('data-i18n-placeholder')));
 	});
 	root.find('*[data-i18n-title]').each(function(_, n) {
-		$(n).attr('title', translate(s, n.getAttribute('data-i18n-title')));
+		n.setAttribute('title', translate(s, n.getAttribute('data-i18n-title')));
 	});
 }
 
@@ -101,6 +101,9 @@ function translate(s, str, data, fallback) {
 	var res = lang[str];
 	if (res === undefined) {
 		if (fallback === undefined) {
+			/*@DEV*/
+			console.error('Untranslated string(' + s.lang + '): ' + JSON.stringify(str)); // eslint-disable-line no-console
+			/*/@DEV*/
 			return 'UNTRANSLATED:>> ' + str + ' <<';
 		} else {
 			return fallback;
@@ -134,9 +137,10 @@ return simple_translate;
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
-	var utils = require('./utils');
 	var render = require('./render');
 	var report_problem = require('./report_problem');
+	var uiu = require('./uiu');
+	var utils = require('./utils');
 
 	var i18n_de = require('./i18n_de');
 	i18n.register_lang(i18n_de);

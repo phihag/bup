@@ -1,6 +1,6 @@
 'use strict';
 
-var key_storage = (function() {
+var key_utils = (function() {
 var ALGO = {
 	name: 'ECDSA',
 	namedCurve: 'P-256',
@@ -122,6 +122,6 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var utils = require('./utils');
 	var promutils = require('./promutils');
 
-	module.exports = key_storage;
+	module.exports = key_utils;
 }
 /*/@DEV*/

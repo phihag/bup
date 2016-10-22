@@ -7,14 +7,6 @@ var list_handlers = [];
 var paired_referees = [];
 
 function handle_change(estate) {
-	if (estate === null) {
-		// New connection, resend our connstate
-		if (list_handlers.length > 0) {
-			conn.send({
-				type: 'list-referees',
-			});
-		}
-	}
 	handle_change_ui(estate);
 }
 
@@ -29,6 +21,11 @@ function handle_msg(msg) {
 		});
 		break;
 	case 'welcome':
+		if (list_handlers.length > 0) {
+			conn.send({
+				type: 'subscribe-list-referees',
+			});
+		}
 		if (paired_referees.length > 0) {
 			conn.send({
 				type: 'connect-to-referees',
@@ -62,6 +59,7 @@ function list_referees(callback) {
 	conn.send({
 		type: 'subscribe-list-referees',
 	});
+
 	return function() {
 		list_handlers = list_handlers.filter(function(h) {
 			return h !== callback;
@@ -78,7 +76,12 @@ function connect_to_referee(fp) {
 	});
 }
 
+function get_paired_referees() {
+	return paired_referees;
+}
+
 return {
+	get_paired_referees: get_paired_referees,
 	on_settings_change: on_settings_change,
 	status_str: status_str,
 	list_referees: list_referees,

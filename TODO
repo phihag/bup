@@ -4,14 +4,24 @@ referee mode
 	test reconnection when referee goes offline
 	test reconnection when client goes offline
 	disconnect on deselecting a referee
-	UI to select referee
-
+	add heartbeat/ping
 	exponential backoff when connecting, up to network interval
-	see battery
+	store authenticated referees for the next time
+
+	UI of referee: list clients
+
+	list clients
+		device name (editable)
+		umpire name (editable)
+		court (selectable)
+		current state (including scoresheet buttons)?
+	see battery, get updated
 	espouse an event from a client
-	see current match/event (download data)
-	test with very long wait ... heartbeat necessary?
-	push event to client
+	see current match/event (download data, print scoresheets)
+	push event to client (live for displaymode)
+
+btde: liga stimmt nicht (spaces in front)!
+bup: Aufstellungszettel mit all_names
 
 jticker
 	bup-update
@@ -25,6 +35,12 @@ jticker
 	sync
 		which match on court
 		points for all sets
+
+pick referee court if starting with displaymode
+
+BTP-Anbindung (=> Moritz)
+
+bldemo: Active match should be on court 1
 
 improve referee mode
 	client: store paired referees, allow to disconnect
@@ -454,3 +470,4 @@ editevent: check ranking
 doc about all main features (HTML table, compare with other projects)
 upload to turnier.de?
 rework settings.show => split stuff into ui_init
+i18n: use uiu instead of $

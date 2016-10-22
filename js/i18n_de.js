@@ -218,7 +218,6 @@ var i18n_de = {
 'settings:refmode:client:status': 'Referee (sehr experimentell, nur für Entwickler):',
 'settings:refmode:ws_url': 'Hub-URL:',
 
-
 'settings:mode:label': 'Modus:',
 'settings:mode:umpire': 'Schiedsrichter',
 'settings:mode:display': 'Anzeigetafel (experimentell)',
@@ -429,6 +428,12 @@ var i18n_de = {
 'refmode:status:referee.connected': 'Verbunden zu {all_str}',
 'refmode:keygen failed': 'Schlüssel konnte nicht erzeugt werden: {message}',
 'refmode:generating key': 'Generiere Schlüssel ...',
+'refmode:client:no_referees': 'Keine Referees verbunden',
+'refmode:client:select_referee': 'Mit Referee verbinden ...',
+'refmode:client:no_select_referee': 'Anzeige verbergen',
+'refmode:status:referee.registered': 'Beim Hub registriert',
+'refmode:client:paired': 'Authentifizierte Referees: {refs_str}',
+'refmode:client:paired:none': 'Keine Referees authentifiziert',
 
 };
 
