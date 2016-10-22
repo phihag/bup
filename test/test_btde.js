@@ -263,7 +263,7 @@ _describe('btde', function() {
 
 	_it('parse_match_list with holes', function() {
 		var doc = [
-			{'heim':'TV Refrath','gast':'1. BV M\u00fclheim', Liga: '2. Bundesliga Nord'},
+			{'heim':'TV Refrath','gast':'1. BV M\u00fclheim', Liga: '   2. Bundesliga Nord'},
 			{'id':'1','dis':'HD 1','heim':'Magee, Sam~Holzer, Fabian','gast':'Ellis, Marcus~de Ruiter, Jorrit','satz1':'6','satz2':'','satz3':'','satz4':'','satz5':'','satz6':'0','satz7':'','satz8':'','satz9':'','satz10':'','feld':'1'},
 			{'id':'2','dis':'DD','heim':'~','gast':'Meulendijks, Judith~','satz1':'4','satz2':'2','satz3':'','satz4':'','satz5':'','satz6':'11','satz7':'4','satz8':'','satz9':'','satz10':'','feld':'0'},
 			{'id':'3','dis':'HE 1','heim':'Richard Domke','gast':'Zavadsky, Dmytro','satz1':'','satz2':'','satz3':'','satz4':'','satz5':'','satz6':'','satz7':'','satz8':'','satz9':'','satz10':'','feld':'0'},
