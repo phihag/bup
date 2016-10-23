@@ -15,13 +15,16 @@ referee mode
 		umpire name (editable)
 		court (selectable)
 		current state (including scoresheet buttons)?
+	show upcoming match
 	see battery, get updated
 	espouse an event from a client
 	see current match/event (download data, print scoresheets)
 	push event to client (live for displaymode)
+	push match state of other matches to client if match not present (i.e. btde)
 
-btde: liga stimmt nicht (spaces in front)!
-bup: Aufstellungszettel mit all_names
+Aufstellungszettel mit all_names (checkboxes)
+	fetch from CourtSpot
+	fetch from btde
 
 jticker
 	bup-update
@@ -41,6 +44,7 @@ pick referee court if starting with displaymode
 BTP-Anbindung (=> Moritz)
 
 bldemo: Active match should be on court 1
+ask again if resetting to 0-0 (btde)
 
 improve referee mode
 	client: store paired referees, allow to disconnect
