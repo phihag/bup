@@ -69,13 +69,103 @@ function connect(referee, client) {
 		type: 'connected',
 		id: rd.id,
 		fp: rd.fp,
+		all: cd.connected_to,
 	});
 	send(referee, {
 		type: 'connected',
 		id: cd.id,
 		all: rd.connected_to,
 	});
+}
 
+function handle_msg(wss, ws, msg) {
+	let cd = ws.conn_data;
+
+	switch(msg.type) {
+	case 'register-referee':
+		if (!cd.challenge) {
+			send_error(ws, 'No challenge posted yet');
+			return;
+		}
+		if (typeof msg.pub_json !== 'string') {
+			send_error(ws, 'Invalid key of type ' + typeof msg.pub_json);
+			return;
+		}
+		if (typeof msg.sig !== 'string') {
+			send_error(ws, 'Signature missing');
+			return;
+		}
+
+		var challenge_data = bup.utils.encode_utf8(cd.challenge);
+		bup.key_utils.verify(msg.pub_json, challenge_data, msg.sig, function(err, is_valid) {
+			if (err) {
+				send_error(ws, 'Failed to validate signature');
+				return;
+			}
+
+			if (! is_valid) {
+				send_error(ws, 'Invalid signature');
+				return;
+			}
+
+			bup.key_utils.fingerprint(msg.pub_json, function(err, fp) {
+				if (err) {
+					send_error(ws, 'Could not generate fingerprint');
+					return;
+				}
+
+				cd.is_referee = true;
+				cd.pub_json = msg.pub_json;
+				cd.fp = fp;
+				on_referees_change(wss);
+				send(ws, {
+					type: 'referee-registered',
+					fp: fp,
+				});
+				for (let c of wss.clients) {
+					let cd = c.conn_data;
+					if (!cd.referee_requests) {
+						continue;
+					}
+					if (!cd.referee_requests.includes(fp)) {
+						continue;
+					}
+					connect(ws, c);
+				}
+			});
+		});
+		break;
+	case 'list-referees':
+		send_referee_list(wss, [ws]);
+		break;
+	case 'subscribe-list-referees':
+		cd.subscribed_list_referees = true;
+		send_referee_list(wss, [ws]);
+		break;
+	case 'connect-to-referees':
+		if (!Array.isArray(msg.fps)) {
+			send_error(ws, 'Missing fps (referee fingerprints) argument');
+			return;
+		}
+		cd.referee_requests = msg.fps;
+		for (let r of wss.clients) {
+			let rd = r.conn_data;
+			if (! rd.is_referee) {
+				continue;
+			}
+
+			if (cd.referee_requests.includes(rd.fp)) {
+				connect(r, ws);
+			}
+		}
+
+		break;
+	case 'error':
+		console.log('Received error: ', msg.message);
+		break;
+	default:
+		send_error(ws, 'Unsupported message type: ' + msg.type);
+	}
 }
 
 function hub(config) {
@@ -109,90 +199,20 @@ function hub(config) {
 				return;
 			}
 
-			switch(msg.type) {
-			case 'register-referee':
-				if (!cd.challenge) {
-					send_error(ws, 'No challenge posted yet');
-					return;
-				}
-				if (typeof msg.pub_json !== 'string') {
-					send_error(ws, 'Invalid key of type ' + typeof msg.pub_json);
-					return;
-				}
-				if (typeof msg.sig !== 'string') {
-					send_error(ws, 'Signature missing');
-					return;
-				}
+			handle_msg(wss, ws, msg);
+		});
 
-				var challenge_data = bup.utils.encode_utf8(cd.challenge);
-				bup.key_utils.verify(msg.pub_json, challenge_data, msg.sig, function(err, is_valid) {
-					if (err) {
-						send_error(ws, 'Failed to validate signature');
-						return;
-					}
-
-					if (! is_valid) {
-						send_error(ws, 'Invalid signature');
-						return;
-					}
-
-					bup.key_utils.fingerprint(msg.pub_json, function(err, fp) {
-						if (err) {
-							send_error(ws, 'Could not generate fingerprint');
-							return;
-						}
-
-						cd.is_referee = true;
-						cd.pub_json = msg.pub_json;
-						cd.fp = fp;
-						on_referees_change(wss);
-						send(ws, {
-							type: 'referee-registered',
-							fp: fp,
-						});
-						for (let c of wss.clients) {
-							let cd = c.conn_data;
-							if (!cd.referee_requests) {
-								continue;
-							}
-							if (!cd.referee_requests.includes(fp)) {
-								continue;
-							}
-							connect(ws, c);
-						}
+		ws.on('close', function() {
+			let leaving_id = ws.conn_data.id;
+			for (let conn of wss.clients) {
+				let cd = conn.conn_data;
+				if (bup.utils.remove(cd.connected_to, leaving_id)) {
+					send(conn, {
+						type: 'disconnected',
+						id: leaving_id,
+						all: cd.connected_to,
 					});
-				});
-				break;
-			case 'list-referees':
-				send_referee_list(wss, [ws]);
-				break;
-			case 'subscribe-list-referees':
-				cd.subscribed_list_referees = true;
-				send_referee_list(wss, [ws]);
-				break;
-			case 'connect-to-referees':
-				if (!Array.isArray(msg.fps)) {
-					send_error(ws, 'Missing fps (referee fingerprints) argument');
-					return;
 				}
-				cd.referee_requests = msg.fps;
-				for (let r of wss.clients) {
-					var rd = r.conn_data;
-					if (! rd.is_referee) {
-						continue;
-					}
-
-					if (cd.referee_requests.includes(rd.fp)) {
-						connect(r, ws);
-					}
-				}
-
-				break;
-			case 'error':
-				console.log('Received error: ', msg.message);
-				break;
-			default:
-				send_error(ws, 'Unsupported message type: ' + msg.type);
 			}
 		});
 	});

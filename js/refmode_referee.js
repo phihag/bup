@@ -54,10 +54,17 @@ function handle_msg(msg) {
 		});
 		break;
 	case 'connected':
-		conn.set_status({
-			status: 'referee.connected',
-			all_str: msg.all.join(','),
-		});
+	case 'disconnected':
+		if (msg.all.length > 0) {
+			conn.set_status({
+				status: 'referee.connected',
+				all_str: msg.all.join(','),
+			});
+		} else {
+			conn.set_status({
+				status: 'referee.registered',
+			});
+		}
 		break;
 	default:
 		report_problem.silent_error('referee got unhandled message ' + JSON.stringify(msg));

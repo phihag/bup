@@ -18,12 +18,18 @@ function update_ref_display(s) {
 
 function connect_button_click(e) {
 	var ref_fp = e.target.getAttribute('data-fp');
-	rc.connect_to_referee(ref_fp);
+	var paired = rc.get_paired_referees();
+	if (paired.indexOf(ref_fp) >= 0) {
+		rc.disconnect_referee(ref_fp);
+	} else {
+		rc.connect_to_referee(ref_fp);
+	}
 	update_ref_display(state);
 	set_list(state, false);
 }
 
 function list_handler(referee_list) {
+	var paired = rc.get_paired_referees();
 	var list_el = uiu.qs('.refmode_client_referee_list');
 	uiu.empty(list_el);
 	if (referee_list.length === 0) {
@@ -31,9 +37,13 @@ function list_handler(referee_list) {
 	}
 	referee_list.forEach(function(ref) {
 		var div = uiu.create_el(list_el, 'div');
-		var span = uiu.create_el(div, 'span', {
+		var attrs = {
 			'data-fp': ref.fp,
-		}, ref.fp);
+		};
+		if (paired.indexOf(ref.fp) >= 0) {
+			attrs['data-paired'] = 'true';
+		}
+		var span = uiu.create_el(div, 'span', attrs, ref.fp);
 		click.on(span, connect_button_click);
 	});
 }

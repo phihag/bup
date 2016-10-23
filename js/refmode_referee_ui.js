@@ -18,6 +18,7 @@ function show() {
 	}
 
 	state.ui.referee_mode = true;
+	refmode_client_ui.on_settings_change(state);
 	render.hide();
 	displaymode.hide();
 	settings.show_refereemode();
@@ -38,6 +39,7 @@ function hide() {
 		return;
 	}
 	state.ui.referee_mode = false;
+	refmode_client_ui.on_settings_change(state);
 	uiu.visible_qs('.referee_layout', false);
 	settings.on_mode_change(state);
 	// TODO disconnect?
@@ -66,6 +68,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var click = require('./click');
 	var displaymode = require('./displaymode');
 	var key_storage = require('./key_storage');
+	var refmode_client_ui = require('./refmode_client_ui');
 	var refmode_referee = require('./refmode_referee');
 	var render = require('./render');
 	var settings = require('./settings');

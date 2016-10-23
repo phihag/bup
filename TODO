@@ -1,15 +1,11 @@
 referee mode
-	send disconnect information once referee disconnects
-	send disconnect information once client disconnects
-	test reconnection when referee goes offline
-	test reconnection when client goes offline
+	store authenticated referees for the next time (and load)
 	disconnect on deselecting a referee
-	add heartbeat/ping
 	exponential backoff when connecting, up to network interval
-	store authenticated referees for the next time
+	add heartbeat/ping (test long connections through NAT)
 
 	UI of referee: list clients
-
+	messages between referee and clients
 	list clients
 		device name (editable)
 		umpire name (editable)

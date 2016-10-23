@@ -8,3 +8,12 @@
 .refmode_client_referee_list > div > span:hover {
 	background: #ccc;
 }
+.refmode_client_referee_list > div > span[data-paired]::before {
+	content: '✔ ';
+}
+.refmode_client_referee_list > div > span[data-paired]:hover {
+	background: #ecc;
+}
+.refmode_client_referee_list > div > span[data-paired]:hover::before {
+	content: 'X ';
+}

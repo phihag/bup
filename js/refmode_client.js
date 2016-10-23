@@ -39,6 +39,11 @@ function handle_msg(msg) {
 			fp: msg.fp,
 		});
 		break;
+	case 'disconnected':
+		conn.set_status({
+			status: 'welcomed',
+		});
+		break;
 	default:
 		report_problem.silent_error('client got unhandled message ' + JSON.stringify(msg));
 		conn.send_error('Unsupported message type: ' + msg.type);
@@ -46,7 +51,15 @@ function handle_msg(msg) {
 }
 
 function on_settings_change(s) {
-	conn.on_settings_change(s.settings.refmode_client_enabled, s.settings.refmode_client_ws_url);
+	var enabled = s.settings.refmode_client_enabled && (!s.ui || !s.ui.referee_mode);
+	// Cheat a little: do not enable if referee mode is going to be loaded soon
+	if (enabled && typeof window != 'undefined') {
+		var qs = utils.parse_query_string(window.location.hash.substr(1));
+		if (qs.referee_mode !== undefined) {
+			enabled = false;
+		}
+	}
+	conn.on_settings_change(enabled, s.settings.refmode_client_ws_url);
 }
 
 function status_str(s) {
@@ -94,6 +107,7 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var refmode_conn = require('./refmode_conn');
 	var report_problem = require('./report_problem');
+	var utils = require('./utils');
 
 	module.exports = refmode_client;
 }
