@@ -56,6 +56,28 @@ function on_referees_change(wss) {
 	send_referee_list(wss, interested);
 }
 
+function connect(referee, client) {
+	var rd = referee.conn_data;
+	var cd = client.conn_data;
+
+	if (cd.connected_to.includes(rd.id)) {
+		return; // Already connected
+	}
+	cd.connected_to.push(rd.id);
+	rd.connected_to.push(cd.id);
+	send(client, {
+		type: 'connected',
+		id: rd.id,
+		fp: rd.fp,
+	});
+	send(referee, {
+		type: 'connected',
+		id: cd.id,
+		all: rd.connected_to,
+	});
+
+}
+
 function hub(config) {
 	if (!config) {
 		config = DEFAULT_CONFIG;
@@ -128,6 +150,16 @@ function hub(config) {
 							type: 'referee-registered',
 							fp: fp,
 						});
+						for (let c of wss.clients) {
+							let cd = c.conn_data;
+							if (!cd.referee_requests) {
+								continue;
+							}
+							if (!cd.referee_requests.includes(fp)) {
+								continue;
+							}
+							connect(ws, c);
+						}
 					});
 				});
 				break;
@@ -151,22 +183,7 @@ function hub(config) {
 					}
 
 					if (cd.referee_requests.includes(rd.fp)) {
-						if (cd.connected_to.includes(rd.id)) {
-							continue; // Already connected
-						}
-
-						cd.connected_to.push(rd.id);
-						rd.connected_to.push(cd.id);
-						send(ws, {
-							type: 'connected',
-							id: rd.id,
-							fp: rd.fp,
-						});
-						send(r, {
-							type: 'connected',
-							id: cd.id,
-							all: rd.connected_to,
-						});
+						connect(r, ws);
 					}
 				}
 
