@@ -8,6 +8,7 @@ var ws_url;
 var last_status = {
 	status: 'disabled',
 };
+var outstanding_msgs = []; // Messages sent while we were still connecting
 
 function send_error(emsg) {
 	send({
@@ -44,6 +45,11 @@ function connect(ws_url) {
 		set_status({
 			status: 'connected to hub',
 		});
+		var to_send = outstanding_msgs;
+		if (to_send.length > 0) {
+			outstanding_msgs = [];
+			to_send.forEach(send);
+		}
 	};
 	my_ws.onmessage = handle_msg_json;
 	my_ws.onclose = function() {
@@ -99,13 +105,21 @@ function status_str(s) {
 }
 
 function send(msg) {
-	if (ws) {
-		var msg_json = JSON.stringify(msg);
-		try {
-			ws.send(msg_json);
-		} catch(e) {
-			report_problem.on_error('Failed to send refmode message: ' + e.message, 'refmode_conn', 'synthetic', 0, e);
-		}
+	if (!ws) {
+		report_problem.silent_error('websocket conn tried to send message while no websocket active: ' + JSON.stringify(msg));
+		return;
+	}
+
+	if (ws.readyState === 0) { // Still connecting
+		outstanding_msgs.push(msg);
+		return;
+	}
+
+	var msg_json = JSON.stringify(msg);
+	try {
+		ws.send(msg_json);
+	} catch(e) {
+		report_problem.on_error('Failed to send refmode message: ' + e.message, 'refmode_conn', 'synthetic', 0, e);
 	}
 }
 
@@ -126,6 +140,8 @@ return {
 	
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var report_problem = require('./report_problem');
+
 	var WebSocket = require('ws');
 
 	module.exports = refmode_conn;
