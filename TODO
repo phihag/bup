@@ -1,8 +1,8 @@
 referee mode
 	store authenticated referees for the next time (and load)
-	disconnect on deselecting a referee
 	exponential backoff when connecting, up to network interval
 	add heartbeat/ping (test long connections through NAT)
+	handle error "Still in CONNECTING state." when sending
 
 	UI of referee: list clients
 	messages between referee and clients

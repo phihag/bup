@@ -78,8 +78,16 @@ function connect(referee, client) {
 	});
 }
 
+function _client_by_id(wss, id) {
+	for (const c of wss.clients) {
+		if (c.conn_data.id === id) {
+			return c;
+		}
+	}
+}
+
 function handle_msg(wss, ws, msg) {
-	let cd = ws.conn_data;
+	const cd = ws.conn_data;
 
 	switch(msg.type) {
 	case 'register-referee':
@@ -122,8 +130,8 @@ function handle_msg(wss, ws, msg) {
 					type: 'referee-registered',
 					fp: fp,
 				});
-				for (let c of wss.clients) {
-					let cd = c.conn_data;
+				for (const c of wss.clients) {
+					const cd = c.conn_data;
 					if (!cd.referee_requests) {
 						continue;
 					}
@@ -148,8 +156,32 @@ function handle_msg(wss, ws, msg) {
 			return;
 		}
 		cd.referee_requests = msg.fps;
-		for (let r of wss.clients) {
-			let rd = r.conn_data;
+
+		// Clean up existing connections
+		for (const ref_idx of cd.connected_to) {
+			const ref_conn = _client_by_id(wss, ref_idx);
+			const rd = ref_conn.conn_data;
+
+			if (! cd.referee_requests.includes(rd.fp)) {
+				bup.utils.remove(rd.connected_to, cd.id);
+				send(ref_conn, {
+					type: 'disconnected',
+					id: cd.id,
+					all: rd.connected_to,
+				});
+
+				bup.utils.remove(cd.connected_to, ref_idx);
+				send(ws, {
+					type: 'disconnected',
+					id: ref_idx,
+					all: cd.connected_to,
+				});
+			}
+		}
+
+		// Create new connections
+		for (const r of wss.clients) {
+			const rd = r.conn_data;
 			if (! rd.is_referee) {
 				continue;
 			}
@@ -203,9 +235,9 @@ function hub(config) {
 		});
 
 		ws.on('close', function() {
-			let leaving_id = ws.conn_data.id;
-			for (let conn of wss.clients) {
-				let cd = conn.conn_data;
+			const leaving_id = ws.conn_data.id;
+			for (const conn of wss.clients) {
+				const cd = conn.conn_data;
 				if (bup.utils.remove(cd.connected_to, leaving_id)) {
 					send(conn, {
 						type: 'disconnected',

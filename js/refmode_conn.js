@@ -100,7 +100,12 @@ function status_str(s) {
 
 function send(msg) {
 	if (ws) {
-		ws.send(JSON.stringify(msg));
+		var msg_json = JSON.stringify(msg);
+		try {
+			ws.send(msg_json);
+		} catch(e) {
+			report_problem.on_error('Failed to send refmode message: ' + e.message, 'refmode_conn', 'synthetic', 0, e);
+		}
 	}
 }
 

@@ -89,6 +89,14 @@ function connect_to_referee(fp) {
 	});
 }
 
+function disconnect_referee(fp) {
+	utils.remove(paired_referees, fp);
+	conn.send({
+		type: 'connect-to-referees',
+		fps: paired_referees,
+	});
+}
+
 function get_paired_referees() {
 	return paired_referees;
 }
@@ -99,6 +107,7 @@ return {
 	status_str: status_str,
 	list_referees: list_referees,
 	connect_to_referee: connect_to_referee,
+	disconnect_referee: disconnect_referee,
 };
 
 });
