@@ -1,10 +1,11 @@
 referee mode
 	store authenticated referees for the next time (and load)
-	exponential backoff when connecting, up to network interval
 	add heartbeat/ping (test long connections through NAT)
+		sent_ts
+	messages between referee and clients
+		rid
 
 	UI of referee: list clients
-	messages between referee and clients
 	list clients
 		device name (editable)
 		umpire name (editable)
@@ -16,6 +17,8 @@ referee mode
 	see current match/event (download data, print scoresheets)
 	push event to client (live for displaymode)
 	push match state of other matches to client if match not present (i.e. btde)
+	referee: settings button on top right
+	referee: show matches to the right (in order, with results)
 
 Aufstellungszettel mit all_names (checkboxes)
 	fetch from CourtSpot

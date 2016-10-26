@@ -10,6 +10,11 @@ var last_status = {
 };
 var outstanding_msgs = []; // Messages sent while we were still connecting
 
+var INITIAL_RECONNECT = 50;
+var max_reconnect = 10000;
+var reconnect_duration = INITIAL_RECONNECT;
+var reconnect_timeout;
+
 function send_error(emsg) {
 	send({
 		type: 'error',
@@ -33,7 +38,7 @@ function handle_msg_json(e) {
 	}
 }
 
-function connect(ws_url) {
+function connect() {
 	var my_ws = new WebSocket(ws_url, 'bup-refmode');
 	last_status = {
 		status: 'enabled',
@@ -41,6 +46,12 @@ function connect(ws_url) {
 	status_cb(last_status);
 	ws = my_ws;
 	my_ws.onopen = function() {
+		reconnect_duration = INITIAL_RECONNECT;
+		if (reconnect_timeout) {
+			clearTimeout(reconnect_timeout);
+			reconnect_timeout = null;
+		}
+
 		my_ws.bup_connected = true;
 		set_status({
 			status: 'connected to hub',
@@ -60,11 +71,18 @@ function connect(ws_url) {
 			status: 'error',
 			message_i18n: 'refmode:lost connection',
 		});
-		connect(ws_url, status_cb);
+
+		if (reconnect_timeout) {
+			clearTimeout(reconnect_timeout);
+			reconnect_timeout = null;
+		}
+		reconnect_timeout = setTimeout(connect, reconnect_duration);
+		reconnect_duration = Math.min(reconnect_duration * 2, max_reconnect);
 	};
 }
 
 function disconnect() {
+	outstanding_msgs = [];
 	if (ws) {
 		ws.bup_die = true;
 		ws.close();
@@ -72,7 +90,7 @@ function disconnect() {
 	}
 }
 
-function on_settings_change(new_enabled, new_ws_url) {
+function on_settings_change(new_enabled, new_ws_url, network_timeout) {
 	var changed = false;
 
 	if (new_enabled !== enabled) {
@@ -83,11 +101,15 @@ function on_settings_change(new_enabled, new_ws_url) {
 		ws_url = new_ws_url;
 		changed = true;
 	}
+	if (max_reconnect !== network_timeout) {
+		max_reconnect = network_timeout;
+		changed = true;
+	}
 
 	if (changed) {
 		disconnect();
 		if (enabled) {
-			connect(ws_url);
+			connect();
 		} else {
 			last_status = {
 				status: 'disabled',

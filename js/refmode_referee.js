@@ -73,7 +73,7 @@ function handle_msg(msg) {
 }
 
 function on_settings_change(s) {
-	conn.on_settings_change(true, s.settings.refmode_referee_ws_url);
+	conn.on_settings_change(true, s.settings.refmode_referee_ws_url, s.settings.network_timeout);
 }
 
 function status_str(s) {

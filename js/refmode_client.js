@@ -59,7 +59,7 @@ function on_settings_change(s) {
 			enabled = false;
 		}
 	}
-	conn.on_settings_change(enabled, s.settings.refmode_client_ws_url);
+	conn.on_settings_change(enabled, s.settings.refmode_client_ws_url, s.settings.network_timeout);
 }
 
 function status_str(s) {
