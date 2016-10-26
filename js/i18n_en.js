@@ -434,6 +434,7 @@ var i18n_en = {
 'refmode:status:referee.registered': 'Registered at hub',
 'refmode:client:paired': 'Authenticated Referees: {refs_str}',
 'refmode:client:paired:none': 'No Referees autenticated',
+'refmode:referee:paired:none': 'No connections (yet)',
 };
 
 /*@DEV*/

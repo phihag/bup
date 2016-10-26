@@ -434,6 +434,7 @@ var i18n_de = {
 'refmode:status:referee.registered': 'Beim Hub registriert',
 'refmode:client:paired': 'Authentifizierte Referees: {refs_str}',
 'refmode:client:paired:none': 'Keine Referees authentifiziert',
+'refmode:referee:paired:none': 'Keine Tablets verbunden',
 
 };
 

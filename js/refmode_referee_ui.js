@@ -23,6 +23,10 @@ function render_clients(clients) {
 			'class': 'referee_c_battery',
 		}, client.battery_percent ? client.battery_percent + '%' : '');
 	});
+
+	if (clients.length === 0) {
+		uiu.text(container, state._('refmode:referee:paired:none'));
+	}
 }
 
 function show() {
