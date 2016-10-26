@@ -225,6 +225,16 @@ function deep_copy(obj) {
 	return JSON.parse(JSON.stringify(obj));
 }
 
+function remove_cb(ar, cb) {
+	for (var i = 0;i < ar.length;i++) {
+		if (cb(ar[i])) {
+			ar.splice(i, 1);
+			return true;
+		}
+	}
+	return false;
+}
+
 function remove(ar, val) {
 	for (var i = 0;i < ar.length;i++) {
 		if (ar[i] === val) {
@@ -356,6 +366,7 @@ return {
 	parallel: parallel,
 	range: range,
 	remove: remove,
+	remove_cb: remove_cb,
 	repeat: repeat,
 	replace_all: replace_all,
 	reverse_every: reverse_every,

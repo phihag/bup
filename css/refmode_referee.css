@@ -1,5 +1,7 @@
 .referee_layout {
 	padding: 5vh 0 0 5vw;
+	z-index: 20000;
+	position: relative;
 }
 
 .referee_clients {
@@ -13,5 +15,10 @@
 .referee_clients > div {
 	border: 1px solid #000;
 	background: #fff;
-	border-radius: 1vmin;
+}
+.referee_clients > div+div {
+	margin-top: 2vmin;
+}
+.referee_c_title {
+	padding: 0 0 0 0.4em;
 }

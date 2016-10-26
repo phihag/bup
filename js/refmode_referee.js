@@ -5,6 +5,7 @@ var conn = refmode_conn(handle_change, handle_msg);
 var key;
 var key_err;
 var last_status = {};
+var clients = [];
 
 key_storage.retrieve(function(err, k) {
 	if (err) {
@@ -76,7 +77,22 @@ function handle_msg(msg) {
 		});
 		break;
 	case 'connected':
+		conn.set_status({
+			status: 'referee.connected',
+			all_str: msg.all.join(','),
+		});
+		clients.push({
+			id: msg.id,
+			title: '[' + msg.id + ']',
+		});
+		// TODO: ask the client for more info
+		render_clients(clients);
+		break;
 	case 'disconnected':
+		utils.remove_cb(clients, function(c) {
+			return c.id === msg.id;
+		});
+		render_clients(clients);
 		if (msg.all.length > 0) {
 			conn.set_status({
 				status: 'referee.connected',

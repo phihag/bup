@@ -1,17 +1,14 @@
 referee mode
-	UI of referee: list clients
-
-	espouse an event from a client
 	list clients
-		device name (editable)
-		umpire name (editable)
-		court (selectable)
-		current state (including scoresheet buttons)?
+		device name
+		umpire name
+		court
 		device ID
 	see battery, get updated
 	edit device name
 	edit umpire name
 	select court
+	espouse an event from a client
 	see current match/event (download data, print scoresheets)
 	push event to client (live for displaymode)
 	push match state of other matches to client if match not present (i.e. btde)
@@ -54,6 +51,7 @@ improve referee mode
 	update referee list when referee disconnects
 	show disconnected clients
 	show current client state (i.e. enter the match etc.) in a small view?
+	show last 5 presses
 
 test key_utils.gen / sign / verify
 order:
