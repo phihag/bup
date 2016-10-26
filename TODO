@@ -1,11 +1,14 @@
 referee mode
-	store authenticated referees for the next time (and load)
 	add heartbeat/ping (test long connections through NAT)
 		sent_ts
 	messages between referee and clients
 		rid
 
+	referee: settings button on top right
+	referee: show matches to the right (in order, with results)
 	UI of referee: list clients
+
+	espouse an event from a client
 	list clients
 		device name (editable)
 		umpire name (editable)
@@ -13,14 +16,14 @@ referee mode
 		current state (including scoresheet buttons)?
 	show upcoming match
 	see battery, get updated
-	espouse an event from a client
 	see current match/event (download data, print scoresheets)
 	push event to client (live for displaymode)
 	push match state of other matches to client if match not present (i.e. btde)
-	referee: settings button on top right
-	referee: show matches to the right (in order, with results)
 
 Aufstellungszettel mit all_names (checkboxes)
+	helper method update_event
+		keep all_players if present in old and id == old_id and not present in new
+	test with demo
 	fetch from CourtSpot
 	fetch from btde
 

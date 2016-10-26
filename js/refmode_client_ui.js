@@ -16,6 +16,14 @@ function update_ref_display(s) {
 	}
 }
 
+function store_paired_referees() {
+	try {
+		localStorage.setItem('bup_refclient_paired', JSON.stringify(rc.get_paired_referees()));
+	} catch(e) {
+		report_problem.silent_error('Cannot store paired referees: ' + e.message);
+	}
+}
+
 function connect_button_click(e) {
 	var ref_fp = e.target.getAttribute('data-fp');
 	var paired = rc.get_paired_referees();
@@ -24,6 +32,8 @@ function connect_button_click(e) {
 	} else {
 		rc.connect_to_referee(ref_fp);
 	}
+
+	store_paired_referees();
 	update_ref_display(state);
 	set_list(state, false);
 }
@@ -59,7 +69,17 @@ function handle_change(estate) {
 
 function on_settings_change(s) {
 	if (!rc) {
-		rc = refmode_client(handle_change);
+		var initial_paired_refs;
+		try {
+			initial_paired_refs = JSON.parse(localStorage.getItem('bup_refclient_paired'));
+		} catch(e) {
+			// Ignore error
+		}
+		if (! initial_paired_refs) {
+			initial_paired_refs = [];
+		}
+
+		rc = refmode_client(handle_change, initial_paired_refs);
 	}
 	rc.on_settings_change(s);
 }
@@ -108,8 +128,9 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var click = require('./click');
 	var network = require('./network');
-	var uiu = require('./uiu');
 	var refmode_client = require('./refmode_client');
+	var report_problem = require('./report_problem');
+	var uiu = require('./uiu');
 
 	module.exports = refmode_client_ui;
 }

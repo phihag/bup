@@ -58,7 +58,7 @@ _describe('refmode', function() {
 				client.test_handlers.forEach(function(h) {
 					h(status);
 				});
-			});
+			}, []);
 			client.test_handlers = [on_change];
 			client.on_settings_change(s);
 		}, function(ws_url, client, cb) {

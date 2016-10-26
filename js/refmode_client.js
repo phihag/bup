@@ -1,10 +1,10 @@
 'use strict';
 
-var refmode_client = (function(handle_change_ui) {
+var refmode_client = (function(handle_change_ui, initial_paired_refs) {
 var conn = refmode_conn(handle_change, handle_msg);
 
 var list_handlers = [];
-var paired_referees = [];
+var paired_referees = initial_paired_refs.slice();
 
 function handle_change(estate) {
 	handle_change_ui(estate);
