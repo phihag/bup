@@ -1,0 +1,17 @@
+.referee_layout {
+	padding: 5vh 0 0 5vw;
+}
+
+.referee_clients {
+	display: inline-block;
+	min-width: 40vmin;
+	min-height: 5vmin;
+	padding: 1vmin;
+	background: #eee;
+}
+
+.referee_clients > div {
+	border: 1px solid #000;
+	background: #fff;
+	border-radius: 1vmin;
+}

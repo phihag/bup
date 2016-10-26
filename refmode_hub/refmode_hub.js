@@ -192,6 +192,32 @@ function handle_msg(wss, ws, msg) {
 		}
 
 		break;
+	case 'keepalive':
+		send(ws, {
+			type: 'keptalive',
+			sent: msg.sent,
+			rid: msg.rid,
+			answered: Date.now(),
+		});
+		break;
+	case 'dmsg':
+		if (! cd.connected_to.includes(msg.to)) {
+			send(ws, {
+				type: 'dmsg-unconnected',
+				msg: 'Could not deliver dmsg: not connected to ' + msg.to,
+				rid: msg.rid,
+			});
+			return;
+		}
+
+		var receiver = _client_by_id(wss, msg.to);
+		send(receiver, {
+			type: 'dmsg',
+			from: cd.id,
+			m: msg.m,
+			rid: msg.rid,
+		});
+		break;
 	case 'error':
 		console.log('Received error: ', msg.message);
 		break;

@@ -456,7 +456,7 @@ function hide() {
 		_cancel_updates();
 	}
 	uiu.visible_qs('.displaymode_layout', false);
-	$(uiu.qs('.settings_layout')).removeClass('settings_layout_displaymode');
+	uiu.removeClass_qs('.settings_layout', 'settings_layout_displaymode');
 	state.ui.displaymode_visible = false;
 	settings.on_mode_change(state);
 }

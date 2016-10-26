@@ -1,6 +1,6 @@
 'use strict';
 
-var refmode_client = (function(handle_change_ui, initial_paired_refs) {
+var refmode_client = (function(s, handle_change_ui, initial_paired_refs) {
 var conn = refmode_conn(handle_change, handle_msg);
 
 var list_handlers = [];
@@ -10,6 +10,31 @@ function handle_change(estate) {
 	handle_change_ui(estate);
 }
 
+function respond(dmsg, response) {
+	response.rid = dmsg.m.rid;
+	conn.send({
+		to: dmsg.from,
+		rid: dmsg.rid,
+		m: response,
+	});
+}
+
+// Handle direct messages (from referee)
+function handle_dmsg(dmsg) {
+	switch(dmsg.type) {
+	case 'error':
+		report_problem.silent_error('refclient received error: ' + dmsg.message);
+		break;
+	default:
+		respond(dmsg, {
+			type: 'error',
+			code: 'unsupported',
+			message: 'Unsupported message type ' + JSON.stringify(dmsg.type),
+		});
+	}
+}
+
+// Handle messages from hub
 function handle_msg(msg) {
 	switch(msg.type) {
 	case 'error':
@@ -43,6 +68,21 @@ function handle_msg(msg) {
 		conn.set_status({
 			status: 'welcomed',
 		});
+		break;
+	case 'dmsg':
+		handle_dmsg(msg.m);
+		break;
+	case 'dmsg-unconnected':
+		report_problem.silent_error('refclient: Message did not reach referee');
+		break;
+	case 'keptalive':
+		/*@DEV*/
+		if (! ((typeof module !== 'undefined') && (typeof require !== 'undefined'))) {
+		/*/@DEV*/
+		netstats.record('referee.hub.keepalive', 200, Date.now() - msg.sent);
+		/*@DEV*/
+		}
+		/*/@DEV*/
 		break;
 	default:
 		report_problem.silent_error('client got unhandled message ' + JSON.stringify(msg));
@@ -114,6 +154,7 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var netstats = require('./netstats');
 	var refmode_conn = require('./refmode_conn');
 	var report_problem = require('./report_problem');
 	var utils = require('./utils');

@@ -7,13 +7,31 @@ function on_status_change() {
 	uiu.text_qs('.refmode_referee_status', rc.status_str(state));
 }
 
+function render_clients(clients) {
+	var container = uiu.qs('.referee_clients');
+	uiu.empty(container);
+
+	clients.forEach(function(client) {
+		var div = uiu.create_el(container, 'div');
+		var toprow = uiu.create_el(div, 'div', {
+			'class': 'referee_c_toprow',
+		});
+		uiu.create_el(toprow, 'span', {
+			'class': 'referee_c_title',
+		}, client.title);
+		uiu.create_el(toprow, 'span', {
+			'class': 'referee_c_battery',
+		}, client.battery_percent ? client.battery_percent + '%' : '');
+	});
+}
+
 function show() {
 	if (state.ui.referee_mode) {
 		return;
 	}
 
 	if (!rc) {
-		rc = refmode_referee(on_status_change, key_storage);
+		rc = refmode_referee(on_status_change, render_clients, key_storage);
 		rc.on_settings_change(state);
 	}
 
@@ -25,7 +43,9 @@ function show() {
 	settings.on_mode_change(state);
 	control.set_current(state);
 
+	uiu.addClass_qs('.settings_layout', 'settings_layout_refereemode');
 	uiu.visible_qs('.referee_layout', true);
+	render_clients([]);
 }
 
 function on_settings_change(s) {
@@ -40,6 +60,7 @@ function hide() {
 	}
 	state.ui.referee_mode = false;
 	refmode_client_ui.on_settings_change(state);
+	uiu.removeClass_qs('.settings_layout', 'settings_layout_refereemode');
 	uiu.visible_qs('.referee_layout', false);
 	settings.on_mode_change(state);
 	// TODO disconnect?

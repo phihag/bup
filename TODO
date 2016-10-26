@@ -1,11 +1,4 @@
 referee mode
-	add heartbeat/ping (test long connections through NAT)
-		sent_ts
-	messages between referee and clients
-		rid
-
-	referee: settings button on top right
-	referee: show matches to the right (in order, with results)
 	UI of referee: list clients
 
 	espouse an event from a client
@@ -14,11 +7,17 @@ referee mode
 		umpire name (editable)
 		court (selectable)
 		current state (including scoresheet buttons)?
-	show upcoming match
+		device ID
 	see battery, get updated
+	edit device name
+	edit umpire name
+	select court
 	see current match/event (download data, print scoresheets)
 	push event to client (live for displaymode)
 	push match state of other matches to client if match not present (i.e. btde)
+	referee UI: drop referee_mode in URL (&enable refclient) upon switching back
+	referee UI: settings button on top right
+	referee: show matches to the right (in order, with results)
 
 Aufstellungszettel mit all_names (checkboxes)
 	helper method update_event
@@ -45,6 +44,7 @@ pick referee court if starting with displaymode
 BTP-Anbindung (=> Moritz)
 
 bldemo: Active match should be on court 1
+bldemo: without started matches (bldemo_inprogress?)
 ask again if resetting to 0-0 (btde)
 
 improve referee mode
@@ -52,6 +52,8 @@ improve referee mode
 	client: auto-update referee list
 	test: bind hub to localhost
 	update referee list when referee disconnects
+	show disconnected clients
+	show current client state (i.e. enter the match etc.) in a small view?
 
 test key_utils.gen / sign / verify
 order:
@@ -110,7 +112,9 @@ Mindestanforderungen als SVG statt von Tobias Oertel (prefill dates, maybe check
 RLS
 export: generate v2 data
 
-bup display mode
+improve display mode
+	large numbers display mode (larger than now, maybe two courts, game count)
+	add lock functionality
 	berlin-like display (names top/bottom, very large numbers for one court)
 	recheck that caching still works with annotate
 	add btde emulation
@@ -174,9 +178,6 @@ Opera Mini bug
 support RLS (Excel file)
 test editevent without all_players
 Leere Mannschaftszettel interaktiv generieren (anwesend)
-"bitte spielen" after timer expires at 11
-"court 1, 20 seconds"  after timer expires at 11 / new game
-ready to play
 
 eventsheet svg for only home/only away (incl. PDF generations for each)
 test eventsheet on various mobiles
@@ -440,7 +441,6 @@ remove all references of state in favor of passing in state
 	simply remove state from lint
 test red card after disqualification
 consider reason for injury / retired
-compress presses in sending
 check for all disabled settings and use utils.disabled_qsa
 show part of scoresheet below? [optionally]
 check for instances of {replace} when calling s._

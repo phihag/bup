@@ -33,6 +33,12 @@
 	-webkit-align-items: flex-end;
 	align-items: flex-end;
 }
+.settings_layout.settings_layout_refereemode {
+	background: none;
+	-webkit-align-items: flex-end;
+	align-items: flex-end;
+}
+
 .settings_container {
 	position: relative;
 	text-align: left;

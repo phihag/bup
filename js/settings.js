@@ -1,5 +1,5 @@
-var settings = (function() {
 'use strict';
+var settings = (function() {
 
 var default_settings = {
 	go_fullscreen: false,
@@ -75,7 +75,7 @@ function toggle_displaymode() {
 }
 
 function show_refereemode() {
-	uiu.visible_qs('#settings_wrapper', true);	
+	uiu.visible_qs('#settings_wrapper', true);
 }
 
 var _network_hide_cb = null;

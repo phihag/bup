@@ -46,48 +46,52 @@ function pre_request(component) {
 	var start = now();
 	return function(arg1, _textStatus, arg3) {
 		var duration = now() - start;
-		var stats = get_stats(component);
-
-		stats.last = duration;
-		stats.latency_sum += duration;
-		stats.count++;
-
-		if (duration < 25) {
-			stats['<25ms']++;
-		} else if (duration < 100) {
-			stats['<100ms']++;
-		} else if (duration < 250) {
-			stats['<250ms']++;
-		} else if (duration < 500) {
-			stats['<500ms']++;
-		} else if (duration < 2000) {
-			stats['<2s']++;
-		} else if (duration < 8000) {
-			stats['<8s']++;
-		} else {
-			stats['>8s']++;
-		}
-
-		if (stats.moving_avg === null) {
-			stats.moving_avg = duration;
-		} else {
-			stats.moving_avg = MOVING_AVG_FACTOR * stats.moving_avg + (1 - MOVING_AVG_FACTOR) * duration;
-		}
-
 		// Depending on whether success or failure, the arguments will have different meanings
 		var status = (typeof arg1.status == 'number') ? arg1.status : arg3.status;
-		if (status === 200) {
-			stats.success_net_count++;
-		} else if (status === 0) {
-			stats.failed_net_count++;
-		} else {
-			stats.failed_srv_count++;
-		}
-
-		if (state.ui.netstats_visible) {
-			render_table();
-		}
+		record(component, status, duration);
 	};
+}
+
+function record(component, status, duration) {
+	var stats = get_stats(component);
+
+	stats.last = duration;
+	stats.latency_sum += duration;
+	stats.count++;
+
+	if (duration < 25) {
+		stats['<25ms']++;
+	} else if (duration < 100) {
+		stats['<100ms']++;
+	} else if (duration < 250) {
+		stats['<250ms']++;
+	} else if (duration < 500) {
+		stats['<500ms']++;
+	} else if (duration < 2000) {
+		stats['<2s']++;
+	} else if (duration < 8000) {
+		stats['<8s']++;
+	} else {
+		stats['>8s']++;
+	}
+
+	if (stats.moving_avg === null) {
+		stats.moving_avg = duration;
+	} else {
+		stats.moving_avg = MOVING_AVG_FACTOR * stats.moving_avg + (1 - MOVING_AVG_FACTOR) * duration;
+	}
+
+	if (status === 200) {
+		stats.success_net_count++;
+	} else if (status === 0) {
+		stats.failed_net_count++;
+	} else {
+		stats.failed_srv_count++;
+	}
+
+	if (state.ui.netstats_visible) {
+		render_table();
+	}
 }
 
 function render_table() {
@@ -185,6 +189,7 @@ return {
 	show: show,
 	hide: hide,
 	ui_init: ui_init,
+	record: record,
 };
 
 })();

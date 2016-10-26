@@ -10,6 +10,11 @@ var last_status = {
 };
 var outstanding_msgs = []; // Messages sent while we were still connecting
 
+var request_id = 0;
+
+var keepalive_interval_duration = 60000;
+var keepalive_interval;
+
 var INITIAL_RECONNECT = 50;
 var max_reconnect = 10000;
 var reconnect_duration = INITIAL_RECONNECT;
@@ -38,6 +43,14 @@ function handle_msg_json(e) {
 	}
 }
 
+function keepalive() {
+	send({
+		type: 'keepalive',
+		sent: Date.now(),
+		rid: request_id++,
+	});
+}
+
 function connect() {
 	var my_ws = new WebSocket(ws_url, 'bup-refmode');
 	last_status = {
@@ -51,6 +64,11 @@ function connect() {
 			clearTimeout(reconnect_timeout);
 			reconnect_timeout = null;
 		}
+
+		if (keepalive_interval) {
+			clearInterval(keepalive_interval);
+		}
+		keepalive_interval = setInterval(keepalive, keepalive_interval_duration);
 
 		my_ws.bup_connected = true;
 		set_status({
@@ -75,6 +93,10 @@ function connect() {
 		if (reconnect_timeout) {
 			clearTimeout(reconnect_timeout);
 			reconnect_timeout = null;
+		}
+		if (keepalive_interval) {
+			clearInterval(keepalive_interval);
+			keepalive_interval = null;
 		}
 		reconnect_timeout = setTimeout(connect, reconnect_duration);
 		reconnect_duration = Math.min(reconnect_duration * 2, max_reconnect);

@@ -1,6 +1,6 @@
 'use strict';
 
-var refmode_referee = (function(handle_change_ui, key_storage) {
+var refmode_referee = (function(handle_change_ui, render_clients, key_storage) {
 var conn = refmode_conn(handle_change, handle_msg);
 var key;
 var key_err;
@@ -41,12 +41,34 @@ function handle_change(status) {
 	handle_change_ui(status);
 }
 
+function respond(dmsg, response) {
+	response.rid = dmsg.m.rid;
+	conn.send({
+		to: dmsg.from,
+		rid: dmsg.rid,
+		m: response,
+	});
+}
+
+// Handle direct messages (from clients)
+function handle_dmsg(dmsg) {
+	switch(dmsg.type) {
+	case 'error':
+		report_problem.silent_error('referee received error: ' + dmsg.message);
+		break;
+	default:
+		respond(dmsg, {
+			type: 'error',
+			code: 'unsupported',
+			message: 'Unsupported message type ' + JSON.stringify(dmsg.type),
+		});
+	}
+}
+
 function handle_msg(msg) {
 	switch (msg.type) {
 	case 'error':
 		report_problem.silent_error('referee received error ' + JSON.stringify(msg));
-		break;
-	case 'welcome':
 		break;
 	case 'referee-registered':
 		conn.set_status({
@@ -65,6 +87,23 @@ function handle_msg(msg) {
 				status: 'referee.registered',
 			});
 		}
+		break;
+	case 'keptalive':
+		/*@DEV*/
+		if (! ((typeof module !== 'undefined') && (typeof require !== 'undefined'))) {
+		/*/@DEV*/
+		netstats.record('referee.hub.keepalive', 200, Date.now() - msg.sent);
+		/*@DEV*/
+		}
+		/*/@DEV*/
+		break;
+	case 'dmsg':
+		handle_dmsg(msg.m);
+		break;
+	case 'dmsg-unconnected':
+		// TODO: display something?
+		break;
+	case 'welcome':
 		break;
 	default:
 		report_problem.silent_error('referee got unhandled message ' + JSON.stringify(msg));
@@ -99,6 +138,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var key_utils = require('./key_utils');
+	var netstats = require('./netstats');
 	var refmode_conn = require('./refmode_conn');
 	var report_problem = require('./report_problem');
 	var utils = require('./utils');

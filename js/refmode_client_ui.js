@@ -24,6 +24,16 @@ function store_paired_referees() {
 	}
 }
 
+function get_node_id() {
+	try {
+		return localStorage.getItem('bup_refclient_node_id');
+	} catch (e) {
+		var node_id = utils.uniqid();
+		localStorage.setItem('bup_refclient_node_id', node_id);
+		return node_id;
+	}
+}
+
 function connect_button_click(e) {
 	var ref_fp = e.target.getAttribute('data-fp');
 	var paired = rc.get_paired_referees();
@@ -79,7 +89,8 @@ function on_settings_change(s) {
 			initial_paired_refs = [];
 		}
 
-		rc = refmode_client(handle_change, initial_paired_refs);
+		s.refclient_node_id = get_node_id();
+		rc = refmode_client(s, handle_change, initial_paired_refs);
 	}
 	rc.on_settings_change(s);
 }
@@ -131,6 +142,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var refmode_client = require('./refmode_client');
 	var report_problem = require('./report_problem');
 	var uiu = require('./uiu');
+	var utils = require('./utils');
 
 	module.exports = refmode_client_ui;
 }

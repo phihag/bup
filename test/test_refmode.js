@@ -54,7 +54,7 @@ _describe('refmode', function() {
 					return cb(null, ws_url, client);
 				}
 			}
-			var client = bup.refmode_client(function(status) {
+			var client = bup.refmode_client(s, function(status) {
 				client.test_handlers.forEach(function(h) {
 					h(status);
 				});
@@ -76,7 +76,13 @@ _describe('refmode', function() {
 					return cb(null, client, referee);
 				}
 			}
-			var referee = bup.refmode_referee(on_change, tutil_key_storage);
+
+			function render_clients(clients) {
+				assert(Array.isArray(clients));
+				assert(client.length <= 1);
+			}
+
+			var referee = bup.refmode_referee(on_change, render_clients, tutil_key_storage);
 			referee.on_settings_change(s);
 		},
 		function(client, referee, cb) {
