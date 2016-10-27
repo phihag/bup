@@ -184,9 +184,27 @@ function setClass(el, className, enabled) {
 	}
 }
 
+function closest(el, cb) {
+	while (el) {
+		if (cb(el)) {
+			return el;
+		}
+		el = el.parentNode;
+	}
+}
+
+function closest_class(el, className) {
+	return closest(el, function(node) {
+		// nodeType != 1: not an element (i.e. document)
+		return (node.nodeType === 1) && hasClass(node, className);
+	});
+}
+
 return {
 	addClass: addClass,
 	addClass_qs: addClass_qs,
+	closest: closest,
+	closest_class: closest_class,
 	create_el: create_el,
 	disabled_qsa: disabled_qsa,
 	empty: empty,

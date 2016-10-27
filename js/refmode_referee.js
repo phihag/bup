@@ -42,28 +42,65 @@ function handle_change(status) {
 	handle_change_ui(status);
 }
 
-function respond(dmsg, response) {
-	response.rid = dmsg.m.rid;
-	conn.send({
-		to: dmsg.from,
-		rid: dmsg.rid,
-		m: response,
+function client_by_conn_id(conn_id) {
+	return utils.find(clients, function(c) {
+		return c.id === conn_id;
 	});
 }
 
+function calc_client_title(c) {
+	c.title = ((c.settings && c.settings.refmode_client_node_name) ? c.settings.refmode_client_node_name : (c.node_id ? c.node_id : '[' + c.id + ']'));
+}
+
 // Handle direct messages (from clients)
-function handle_dmsg(dmsg) {
-	switch(dmsg.type) {
+function handle_dmsg(msg) {
+	switch(msg.dtype) {
+	case 'update-settings-answer':
+		refresh(msg.from); // TODO only needed when not subscribing
+		break;
+	case 'get-state-answer':
+		var c = client_by_conn_id(msg.from);
+		if (!c) {
+			// Client disconnected in between
+			return;
+		}
+
+		// TODO integrate new info
+		c.presses = msg.presses;
+		c.setup = msg.setup;
+		c.settings = msg.settings;
+		c.node_id = msg.node_id;
+		c.battery = msg.battery;
+		calc_client_title(c);
+		render_clients(clients);
+		break;
 	case 'error':
-		report_problem.silent_error('referee received error: ' + dmsg.message);
+		report_problem.silent_error('referee received error: ' + msg.message);
 		break;
 	default:
-		respond(dmsg, {
-			type: 'error',
+		conn.respond(msg, {
+			dtype: 'error',
 			code: 'unsupported',
-			message: 'Unsupported message type ' + JSON.stringify(dmsg.type),
+			message: 'Unsupported dmsg dtype ' + JSON.stringify(msg.dtype),
 		});
 	}
+}
+
+function refresh(conn_id) {
+	conn.send({
+		type: 'dmsg',
+		dtype: 'get-state',
+		to: conn_id,
+	});
+}
+
+function update_settings(conn_id, new_settings) {
+	conn.send({
+		type: 'dmsg',
+		dtype: 'update-settings',
+		to: conn_id,
+		settings: new_settings,
+	});
 }
 
 function handle_msg(msg) {
@@ -81,11 +118,12 @@ function handle_msg(msg) {
 			status: 'referee.connected',
 			all_str: msg.all.join(','),
 		});
-		clients.push({
+		var client = {
 			id: msg.id,
-			title: '[' + msg.id + ']',
-		});
-		// TODO: ask the client for more info
+		};
+		calc_client_title(client);
+		clients.push(client);
+		refresh(msg.id);
 		render_clients(clients);
 		break;
 	case 'disconnected':
@@ -114,7 +152,7 @@ function handle_msg(msg) {
 		/*/@DEV*/
 		break;
 	case 'dmsg':
-		handle_dmsg(msg.m);
+		handle_dmsg(msg);
 		break;
 	case 'dmsg-unconnected':
 		// TODO: display something?
@@ -147,6 +185,8 @@ function status_str(s) {
 return {
 	on_settings_change: on_settings_change,
 	status_str: status_str,
+	refresh: refresh,
+	update_settings: update_settings,
 };
 
 });

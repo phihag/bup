@@ -216,6 +216,7 @@ var i18n_en = {
 'settings:click_mode:touchend': 'Slow',
 'settings:click_mode:click': 'Native',
 'settings:refmode:client:status': 'Referee (highly experimental):',
+'settings:refmode:client:node_name': 'Device name:',
 'settings:refmode:ws_url': 'Hub URL:',
 
 'settings:mode:label': 'Mode:',
@@ -435,6 +436,16 @@ var i18n_en = {
 'refmode:client:paired': 'Authenticated Referees: {refs_str}',
 'refmode:client:paired:none': 'No Referees autenticated',
 'refmode:referee:paired:none': 'No connections (yet)',
+'refmode:referee:subscribe': 'Subscribe',
+'refmode:referee:refresh': 'Refresh',
+'refmode:referee:battery': 'Battery: ',
+'refmode:referee:battery:na': 'N/A',
+'refmode:referee:battery:charging': 'Charging ({percent}%{duration})',
+'refmode:referee:battery:discharging': '{percent}%{duration} remaining',
+'refmode:referee:set': 'Set',
+'refmode:referee:cancel': 'Cancel',
+'refmode:referee:edit': 'Edit',
+'refmode:referee:umpire_name': 'Umpire: ',
 };
 
 /*@DEV*/

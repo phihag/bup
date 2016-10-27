@@ -6,30 +6,49 @@ var conn = refmode_conn(handle_change, handle_msg);
 var list_handlers = [];
 var paired_referees = initial_paired_refs.slice();
 
+var battery;
+
+
 function handle_change(estate) {
 	handle_change_ui(estate);
 }
 
-function respond(dmsg, response) {
-	response.rid = dmsg.m.rid;
-	conn.send({
-		to: dmsg.from,
-		rid: dmsg.rid,
-		m: response,
-	});
-}
-
 // Handle direct messages (from referee)
-function handle_dmsg(dmsg) {
-	switch(dmsg.type) {
+function handle_dmsg(msg) {
+	switch(msg.dtype) {
+	case 'update-settings':
+		utils.obj_update(s.settings, msg.settings);
+		settings.update(s);
+		conn.respond(msg, {
+			dtype: 'update-settings-answer',
+		});
+		break;
+	case 'get-state':
+		var answer = {
+			dtype: 'get-state-answer',
+			presses: s.presses,
+			setup: s.setup,
+			settings: s.settings,
+			node_id: s.refclient_node_id,
+		};
+		if (battery) {
+			answer.battery = {
+				charging: battery.charging,
+				level: battery.level,
+				chargingTime: battery.chargingTime,
+				dischargingTime: battery.dischargingTime,
+			};
+		}
+		conn.respond(msg, answer);
+		break;
 	case 'error':
-		report_problem.silent_error('refclient received error: ' + dmsg.message);
+		report_problem.silent_error('refclient received error: ' + msg.message);
 		break;
 	default:
-		respond(dmsg, {
-			type: 'error',
+		conn.respond(msg, {
+			dtype: 'error',
 			code: 'unsupported',
-			message: 'Unsupported message type ' + JSON.stringify(dmsg.type),
+			message: 'Unsupported dmsg dtype ' + JSON.stringify(msg.dtype),
 		});
 	}
 }
@@ -70,7 +89,7 @@ function handle_msg(msg) {
 		});
 		break;
 	case 'dmsg':
-		handle_dmsg(msg.m);
+		handle_dmsg(msg);
 		break;
 	case 'dmsg-unconnected':
 		report_problem.silent_error('refclient: Message did not reach referee');
@@ -98,6 +117,11 @@ function on_settings_change(s) {
 		if (qs.referee_mode !== undefined) {
 			enabled = false;
 		}
+	}
+	if (!battery && enabled && (typeof navigator != 'undefined') && navigator.getBattery) {
+		navigator.getBattery().then(function(bat) {
+			battery = bat;
+		});
 	}
 	conn.on_settings_change(enabled, s.settings.refmode_client_ws_url, s.settings.network_timeout);
 }
@@ -157,6 +181,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var netstats = require('./netstats');
 	var refmode_conn = require('./refmode_conn');
 	var report_problem = require('./report_problem');
+	var settings = require('./settings');
 	var utils = require('./utils');
 
 	module.exports = refmode_client;

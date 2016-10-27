@@ -172,7 +172,15 @@ function set_status(status) {
 	status_cb(last_status);
 }
 
+function respond(dmsg, response) {
+	response.type = 'dmsg';
+	response.rid = dmsg.rid;
+	response.to = dmsg.from;
+	send(response);
+}
+
 return {
+	respond: respond,
 	on_settings_change: on_settings_change,
 	status_str: status_str,
 	set_status: set_status,

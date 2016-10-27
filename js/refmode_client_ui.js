@@ -3,6 +3,7 @@
 var refmode_client_ui = (function() {
 var rc;
 var abort_list;
+var node_id;
 
 function update_ref_display(s) {
 	var paired = rc.get_paired_referees();
@@ -25,13 +26,25 @@ function store_paired_referees() {
 }
 
 function get_node_id() {
-	try {
-		return localStorage.getItem('bup_refclient_node_id');
-	} catch (e) {
-		var node_id = utils.uniqid();
-		localStorage.setItem('bup_refclient_node_id', node_id);
+	if (node_id) {
 		return node_id;
 	}
+
+	try {
+		node_id = localStorage.getItem('bup_refclient_node_id');
+		if (node_id) {
+			return node_id;
+		}
+	} catch (e) {
+		// Ignore, generate a new one
+	}
+	node_id = utils.uuid();
+	try {
+		localStorage.setItem('bup_refclient_node_id', node_id);
+	} catch(e) {
+		// Sucks, but at least we're keeping the node_id for this browser session
+	}
+	return node_id;
 }
 
 function connect_button_click(e) {

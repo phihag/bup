@@ -7,21 +7,121 @@ function on_status_change() {
 	uiu.text_qs('.refmode_referee_status', rc.status_str(state));
 }
 
+function on_refresh_button_click(e) {
+	var client_id = parseInt(uiu.closest_class(e.target, 'referee_c').getAttribute('data-client-id'));
+	rc.refresh(client_id);
+}
+
+function make_editable(el, cb) {
+	var edit = function() {
+		var destroy = function() {
+			uiu.remove(form);
+			uiu.visible(el, true);
+		};
+
+		var cur_val = el.firstChild.textContent;
+		var form = uiu.create_el(null, 'form', {
+			'class': 'referee_editform',
+		});
+		var input = uiu.create_el(form, 'input', {
+			type: 'text',
+			value: cur_val,
+			style: 'min-width: ' + el.offsetWidth + 'px',
+		});
+		uiu.create_el(form, 'button', {
+			role: 'submit',
+		}, state._('refmode:referee:set'));
+		var cancel_button = uiu.create_el(form, 'button', {
+			role: 'button',
+		}, state._('refmode:referee:cancel'));
+		input.addEventListener('keyup', function(e) {
+			if (e.keyCode === 27) {
+				destroy();
+			}
+		});
+		click.on(cancel_button, destroy);
+		form.addEventListener('submit', function(e) {
+			e.preventDefault();
+			var new_value = input.value;
+			uiu.text(el, new_value);
+			destroy(new_value);
+			cb(new_value);
+		});
+		el.parentNode.insertBefore(form, el.nextSibling);
+
+		uiu.visible(el, false);
+		if (edit_btn) {
+			uiu.visible(edit_btn, false);
+		}
+		input.setSelectionRange(0, cur_val.length);
+		input.focus();
+	};
+
+	click.on(el, edit);
+	var edit_btn;
+	if (el.firstChild.textContent.length < 2) {
+		edit_btn = uiu.create_el(null, 'button', {
+			role: 'button',
+		}, state._('refmode:referee:edit'));
+		click.on(edit_btn, edit);
+		el.parentNode.insertBefore(edit_btn, el.nextSibling);
+	}
+}
+
 function render_clients(clients) {
 	var container = uiu.qs('.referee_clients');
 	uiu.empty(container);
 
-	clients.forEach(function(client) {
-		var div = uiu.create_el(container, 'div');
+	clients.forEach(function(c) {
+		var div = uiu.create_el(container, 'div', {
+			'data-client-id': c.id,
+			'class': 'referee_c',
+		});
 		var toprow = uiu.create_el(div, 'div', {
 			'class': 'referee_c_toprow',
 		});
-		uiu.create_el(toprow, 'span', {
+		var title = uiu.create_el(toprow, 'span', {
 			'class': 'referee_c_title',
-		}, client.title);
-		uiu.create_el(toprow, 'span', {
-			'class': 'referee_c_battery',
-		}, client.battery_percent ? client.battery_percent + '%' : '');
+		}, c.title);
+		make_editable(title, function(node_name) {
+			rc.update_settings(c.id, {
+				refmode_client_node_name: node_name,
+			});
+		});
+		var buttons = uiu.create_el(toprow, 'div', {
+			'class': 'referee_c_buttons',
+		});
+
+		/* TODO: add subscriptions
+		var subscribe_label = uiu.create_el(buttons, 'label', {}, state._('refmode:referee:subscribe'));
+		var subscribe_checkbox = uiu.create_el(subscribe_label, 'input', {
+			type: 'checkbox',
+			'class': 'referee_c_subscribe',
+		});*/
+		var refresh_button = uiu.create_el(buttons, 'button', {}, state._('refmode:referee:refresh'));
+		click.on(refresh_button, on_refresh_button_click);
+
+		var bat = c.battery;
+		var bat_text = (bat ? (
+			bat.charging ? state._('refmode:referee:battery:charging', {
+				duration: (bat.chargingTime ? (', ' + utils.duration_hours(0, bat.chargingTime * 1000)) : ''),
+				percent: (bat.level * 100),
+			})
+			:
+			state._('refmode:referee:battery:discharging', {
+				duration: (bat.dischargingTime ? (', ' + utils.duration_hours(0, bat.dischargingTime * 1000)) : ''),
+				percent: (bat.level * 100),
+			})
+		) : state._('refmode:referee:battery:na'));
+		uiu.create_el(div, 'div', {}, state._('refmode:referee:battery') + bat_text);
+
+		var umpire_row = uiu.create_el(div, 'div', {}, state._('refmode:referee:umpire_name'));
+		var umpire_name = uiu.create_el(umpire_row, 'span', {}, (c.settings ? c.settings.umpire_name : '-'));
+		make_editable(umpire_name, function(new_name) {
+			rc.update_settings(c.id, {
+				umpire_name: new_name,
+			});
+		});
 	});
 
 	if (clients.length === 0) {
@@ -98,6 +198,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var render = require('./render');
 	var settings = require('./settings');
 	var uiu = require('./uiu');
+	var utils = require('./utils');
 
 	module.exports = refmode_referee_ui;
 }

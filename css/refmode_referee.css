@@ -2,23 +2,36 @@
 	padding: 5vh 0 0 5vw;
 	z-index: 20000;
 	position: relative;
+	font-size: 18px;
+}
+.referee_layout button {
+	font-size: inherit;
 }
 
 .referee_clients {
 	display: inline-block;
-	min-width: 40vmin;
-	min-height: 5vmin;
+	min-width: 40vw;
 	padding: 1vmin;
 	background: #eee;
 }
 
-.referee_clients > div {
+.referee_c {
 	border: 1px solid #000;
 	background: #fff;
+	padding: 1vmin;
 }
-.referee_clients > div+div {
+.referee_c + .referee_c {
 	margin-top: 2vmin;
 }
-.referee_c_title {
-	padding: 0 0 0 0.4em;
+.referee_c_buttons {
+	float: right;
+}
+.referee_c_buttons > label {
+	display: inline;
+}
+.referee_c_subscribe {
+	margin-right: 1.5em;
+}
+.referee_editform {
+	display: inline-block;
 }

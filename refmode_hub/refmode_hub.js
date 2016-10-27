@@ -211,12 +211,8 @@ function handle_msg(wss, ws, msg) {
 		}
 
 		var receiver = _client_by_id(wss, msg.to);
-		send(receiver, {
-			type: 'dmsg',
-			from: cd.id,
-			m: msg.m,
-			rid: msg.rid,
-		});
+		msg.from = cd.id;
+		send(receiver, msg);
 		break;
 	case 'error':
 		console.log('Received error: ', msg.message);
