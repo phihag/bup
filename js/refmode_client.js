@@ -19,6 +19,7 @@ function handle_dmsg(msg) {
 	case 'update-settings':
 		utils.obj_update(s.settings, msg.settings);
 		settings.update(s);
+		settings.store(s);
 		conn.respond(msg, {
 			dtype: 'update-settings-answer',
 		});
@@ -30,6 +31,7 @@ function handle_dmsg(msg) {
 			setup: s.setup,
 			settings: s.settings,
 			node_id: s.refclient_node_id,
+			netstats: netstats.all_stats,
 		};
 		if (battery) {
 			answer.battery = {

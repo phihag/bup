@@ -446,6 +446,8 @@ var i18n_de = {
 'refmode:referee:cancel': 'Abbrechen',
 'refmode:referee:edit': 'Bearbeiten',
 'refmode:referee:umpire_name': 'Schiedsrichter: ',
+'refmode:referee:court': 'Feld: ',
+'refmode:referee:match': 'Spiel: ',
 };
 
 /*@DEV*/

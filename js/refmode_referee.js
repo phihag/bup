@@ -71,6 +71,7 @@ function handle_dmsg(msg) {
 		c.settings = msg.settings;
 		c.node_id = msg.node_id;
 		c.battery = msg.battery;
+		c.last_update = Date.now();
 		calc_client_title(c);
 		render_clients(clients);
 		break;
@@ -187,6 +188,7 @@ return {
 	status_str: status_str,
 	refresh: refresh,
 	update_settings: update_settings,
+	client_by_conn_id: client_by_conn_id,
 };
 
 });

@@ -117,3 +117,9 @@ html, body, button {
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 }
+
+.js_link {
+	cursor: pointer;
+	color: #0000ee;
+	text-decoration: underline;
+}

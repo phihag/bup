@@ -1,25 +1,21 @@
 referee mode
-	allow resetting empty/space-only fields
-	battery is incorrect!?
-	list clients
-		device name
-		umpire name
-		court
-		device ID
-	edit umpire name
-	select court
+	see current match (download data, print scoresheets, allow going back)
+		exit correctly
+	warn if event != my event
 	espouse an event from a client
-	see current match/event (download data, print scoresheets)
-	push event to client (live for displaymode)
+	select current match (i.e. enter on client)
+
 	push match state of other matches to client if match not present (i.e. btde)
 	subscribe
 		battery
-		state
+		current match
 		settings changes
-	referee UI: drop referee_mode in URL (&enable refclient) upon switching back
+		event state (i.e. players being filled in / changed)
+	referee UI: button to leave it
 	referee UI: settings button on top right
 	referee: show matches to the right (in order, with results)
 	hub: redirect to local hub
+	record failures (closing on error) and successful connections
 
 Aufstellungszettel mit all_names (checkboxes)
 	helper method update_event
@@ -50,14 +46,16 @@ bldemo: without started matches (bldemo_inprogress?)
 ask again if resetting to 0-0 (btde)
 
 improve referee mode
+	install pseudeo network refmode_referee
+	push event to client (live changes for displaymode, make sure no loop)
+	select court
 	init scripts for hub (including installation script)
-	client: store paired referees, allow to disconnect
 	client: auto-update referee list
-	test: bind hub to localhost
 	update referee list when referee disconnects
 	show disconnected clients
 	show current client state (i.e. enter the match etc.) in a small view?
 	show last 5 presses
+	more efficient rendering (client.updated)
 
 test key_utils.gen / sign / verify
 order:

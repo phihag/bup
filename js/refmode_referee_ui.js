@@ -7,9 +7,28 @@ function on_status_change() {
 	uiu.text_qs('.refmode_referee_status', rc.status_str(state));
 }
 
+function _client_id(event) {
+	return parseInt(uiu.closest_class(event.target, 'referee_c').getAttribute('data-client-id'));
+}
+
 function on_refresh_button_click(e) {
-	var client_id = parseInt(uiu.closest_class(e.target, 'referee_c').getAttribute('data-client-id'));
-	rc.refresh(client_id);
+	rc.refresh(_client_id(e));
+}
+
+function on_client_match_link_click(e) {
+	var c = rc.client_by_conn_id(_client_id(e));
+	if (!c) return;
+
+	uiu.visible_qs('.referee_layout', false);
+	uiu.visible_qs('#game', true);
+	settings.hide_refereemode();
+	control.start_match(state, c.setup, c.presses);
+}
+
+function back_to_ui() {
+	uiu.visible_qs('.referee_layout', true);
+	uiu.visible_qs('#game', false);
+	settings.show_refereemode();
 }
 
 function make_editable(el, cb) {
@@ -35,7 +54,7 @@ function make_editable(el, cb) {
 			role: 'button',
 		}, state._('refmode:referee:cancel'));
 		input.addEventListener('keyup', function(e) {
-			if (e.keyCode === 27) {
+			if (e.keyCode === 27) { // Esc
 				destroy();
 			}
 		});
@@ -98,7 +117,9 @@ function render_clients(clients) {
 			type: 'checkbox',
 			'class': 'referee_c_subscribe',
 		});*/
-		var refresh_button = uiu.create_el(buttons, 'button', {}, state._('refmode:referee:refresh'));
+		var refresh_button = uiu.create_el(buttons, 'button', {
+			title: (c.last_update ? utils.timesecs_str(c.last_update) : ''),
+		}, state._('refmode:referee:refresh'));
 		click.on(refresh_button, on_refresh_button_click);
 
 		var bat = c.battery;
@@ -122,6 +143,20 @@ function render_clients(clients) {
 				umpire_name: new_name,
 			});
 		});
+
+		var court_row = uiu.create_el(div, 'div', {}, state._('refmode:referee:court'));
+		uiu.create_el(
+			court_row, 'span', {},
+			(c.settings ? c.settings.court_id : '') +
+			((c.settings && c.settings.court_description) ? (' (' + c.settings.court_description + ')') : ''));
+
+		var match_row = uiu.create_el(div, 'div', {}, state._('refmode:referee:match'));
+		if (c.setup) {
+			var match_link = uiu.create_el(match_row, 'span', {
+				'class': 'js_link',
+			}, c.setup.match_name);
+			click.on(match_link, on_client_match_link_click);
+		}
 	});
 
 	if (clients.length === 0) {
@@ -183,6 +218,7 @@ return {
 	hide: hide,
 	ui_init: ui_init,
 	on_settings_change: on_settings_change,
+	back_to_ui: back_to_ui,
 };
 
 })();

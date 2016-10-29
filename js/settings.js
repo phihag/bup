@@ -79,6 +79,10 @@ function show_refereemode() {
 	uiu.visible_qs('#settings_wrapper', true);
 }
 
+function hide_refereemode() {
+	uiu.visible_qs('#settings_wrapper', false);
+}
+
 var _network_hide_cb = null;
 function show() {
 	if (state.ui.settings_visible) {
@@ -355,6 +359,7 @@ return {
 	get_mode: get_mode,
 	hide: hide,
 	hide_displaymode: hide_displaymode,
+	hide_refereemode: hide_refereemode,
 	load: load,
 	on_mode_change: on_mode_change,
 	show: show,

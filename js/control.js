@@ -153,7 +153,13 @@ function stop_match(s) {
 
 function leave_match(s) {
 	stop_match(s);
-	settings.show();
+
+	if (s.ui.referee_mode) {
+		refmode_referee_ui.back_to_ui();
+	} else {
+		// Umpire mode
+		settings.show();
+	}
 	set_current(s);
 }
 
