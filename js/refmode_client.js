@@ -26,7 +26,6 @@ function bat_status() {
 }
 
 function onbattery_change() {
-	console.log('battery change! ', battery.charging, battery.level, subscriptions);
 	subscriptions.forEach(function(conn_id) {
 		conn.send({
 			type: 'dmsg',

@@ -454,6 +454,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var match_storage = require('./match_storage');
 	var netstats = require('./netstats');
 	var network = require('./network');
+	var refmode_referee_ui = require('./refmode_referee_ui');
 	var render = require('./render');
 	var settings = require('./settings');
 	var timer = require('./timer');
