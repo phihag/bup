@@ -25,6 +25,12 @@ function on_client_match_link_click(e) {
 	control.start_match(state, c.setup, c.presses);
 }
 
+function on_subscribe_checkbox_click(e) {
+	var c = rc.client_by_conn_id(_client_id(e));
+	c.subscribed = e.target.checked;
+	rc.refresh(c.id);
+}
+
 function back_to_ui() {
 	uiu.visible_qs('.referee_layout', true);
 	uiu.visible_qs('#game', false);
@@ -111,12 +117,16 @@ function render_clients(clients) {
 			'class': 'referee_c_buttons',
 		});
 
-		/* TODO: add subscriptions
 		var subscribe_label = uiu.create_el(buttons, 'label', {}, state._('refmode:referee:subscribe'));
 		var subscribe_checkbox = uiu.create_el(subscribe_label, 'input', {
 			type: 'checkbox',
 			'class': 'referee_c_subscribe',
-		});*/
+		});
+		if (c.subscribed) {
+			subscribe_checkbox.setAttribute('checked', 'checked');
+		}
+		subscribe_checkbox.addEventListener('change', on_subscribe_checkbox_click);
+
 		var refresh_button = uiu.create_el(buttons, 'button', {
 			title: (c.last_update ? utils.timesecs_str(c.last_update) : ''),
 		}, state._('refmode:referee:refresh'));

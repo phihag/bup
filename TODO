@@ -1,21 +1,27 @@
 referee mode
 	see current match (download data, print scoresheets, allow going back)
-		exit correctly
+		back from scoresheet
+		back via settings
 	warn if event != my event
 	espouse an event from a client
 	select current match (i.e. enter on client)
-
-	push match state of other matches to client if match not present (i.e. btde)
 	subscribe
-		battery
 		current match
 		settings changes
 		event state (i.e. players being filled in / changed)
+		live-update while in match (if still compatible)
+
+	push match state of other matches to client if match not present (i.e. btde)
+	live push state for display
 	referee UI: button to leave it
 	referee UI: settings button on top right
 	referee: show matches to the right (in order, with results)
 	hub: redirect to local hub
 	record failures (closing on error) and successful connections
+
+print match order
+	hide buttons
+	proper margin at top
 
 Aufstellungszettel mit all_names (checkboxes)
 	helper method update_event
@@ -41,6 +47,32 @@ pick referee court if starting with displaymode
 
 BTP-Anbindung (=> Moritz)
 
+improve display mode
+	large numbers display mode (larger than now, maybe two courts, game count)
+	add lock functionality
+	berlin-like display (names top/bottom, very large numbers for one court)
+	recheck that caching still works with annotate
+	add btde emulation
+	bg colors single-court display (https://image.jimcdn.com/app/cms/image/transf/dimension=640x1024:format=jpg/path/sb05689bf882eaf25/image/ia1b1bbe374005542/version/1473663902/image.jpg seems very good)
+	double court mode (digits outside)
+	normal mode w/ digits outside
+	add court outline display mode
+	refrath-gegen integration (count down to match start)
+	upon changing mode or court show name and court at top for 10s
+	left/right keys to change display type
+	up/down keys to change court
+	test all with incomplete matchups!
+	use state.event upon switching from settings (don't start with loading then)
+	add court info to vdemo/edemo
+	update court info with vdemo/edemo
+	implement courts with liveaw
+	switch to svg display for list
+	hide settings after timeout (10s?)
+	show last update in settings
+	support display mode without network
+	show games on the side that won them?
+
+
 bldemo: Active match should be on court 1
 bldemo: without started matches (bldemo_inprogress?)
 ask again if resetting to 0-0 (btde)
@@ -48,7 +80,7 @@ ask again if resetting to 0-0 (btde)
 improve referee mode
 	install pseudeo network refmode_referee
 	push event to client (live changes for displaymode, make sure no loop)
-	select court
+	change setting  announcements visible/not visible
 	init scripts for hub (including installation script)
 	client: auto-update referee list
 	update referee list when referee disconnects
@@ -56,6 +88,8 @@ improve referee mode
 	show current client state (i.e. enter the match etc.) in a small view?
 	show last 5 presses
 	more efficient rendering (client.updated)
+	test that battery stays current
+	show current network state
 
 test key_utils.gen / sign / verify
 order:
@@ -113,30 +147,6 @@ contemplate adding various PDFs to appcache
 Mindestanforderungen als SVG statt von Tobias Oertel (prefill dates, maybe checkboxes)
 RLS
 export: generate v2 data
-
-improve display mode
-	large numbers display mode (larger than now, maybe two courts, game count)
-	add lock functionality
-	berlin-like display (names top/bottom, very large numbers for one court)
-	recheck that caching still works with annotate
-	add btde emulation
-	bg colors single-court display (https://image.jimcdn.com/app/cms/image/transf/dimension=640x1024:format=jpg/path/sb05689bf882eaf25/image/ia1b1bbe374005542/version/1473663902/image.jpg seems very good)
-	double court mode (digits outside)
-	normal mode w/ digits outside
-	add court outline display mode
-	upon changing mode or court show name and court at top for 10s
-	left/right keys to change display type
-	up/down keys to change court
-	test all with incomplete matchups!
-	use state.event upon switching from settings (don't start with loading then)
-	add court info to vdemo/edemo
-	update court info with vdemo/edemo
-	implement courts with liveaw
-	switch to svg display for list
-	hide settings after timeout (10s?)
-	show last update in settings
-	support display mode without network
-	show games on the side that won them?
 
 xlsx: Reihenfolge optimieren
 Content-security-policy

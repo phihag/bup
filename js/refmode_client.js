@@ -7,10 +7,46 @@ var list_handlers = [];
 var paired_referees = initial_paired_refs.slice();
 
 var battery;
-
+var subscriptions = [];
 
 function handle_change(estate) {
 	handle_change_ui(estate);
+}
+
+function bat_status() {
+	if (!battery) {
+		return undefined;
+	}
+	return {
+		charging: battery.charging,
+		level: battery.level,
+		chargingTime: battery.chargingTime,
+		dischargingTime: battery.dischargingTime,
+	};
+}
+
+function onbattery_change() {
+	console.log('battery change! ', battery.charging, battery.level, subscriptions);
+	subscriptions.forEach(function(conn_id) {
+		conn.send({
+			type: 'dmsg',
+			dtype: 'state',
+			to: conn_id,
+			battery: bat_status(),
+		});
+	});
+}
+
+function subscribe(conn_id) {
+	if (subscriptions.indexOf(conn_id) >= 0) {
+		return;
+	}
+
+	subscriptions.push(conn_id);
+}
+
+function unsubscribe(conn_id) {
+	utils.remove(subscriptions, conn_id);
 }
 
 // Handle direct messages (from referee)
@@ -25,22 +61,21 @@ function handle_dmsg(msg) {
 		});
 		break;
 	case 'get-state':
+		if (msg.subscribe) {
+			subscribe(msg.from);
+		} else {
+			unsubscribe(msg.from);
+		}
 		var answer = {
-			dtype: 'get-state-answer',
+			dtype: 'state',
 			presses: s.presses,
 			setup: s.setup,
 			settings: s.settings,
 			node_id: s.refclient_node_id,
 			netstats: netstats.all_stats,
+			subscribed: (subscriptions.indexOf(msg.from) >= 0),
+			battery: bat_status(),
 		};
-		if (battery) {
-			answer.battery = {
-				charging: battery.charging,
-				level: battery.level,
-				chargingTime: battery.chargingTime,
-				dischargingTime: battery.dischargingTime,
-			};
-		}
 		conn.respond(msg, answer);
 		break;
 	case 'error':
@@ -86,6 +121,7 @@ function handle_msg(msg) {
 		});
 		break;
 	case 'disconnected':
+		unsubscribe(msg.id);
 		conn.set_status({
 			status: 'welcomed',
 		});
@@ -123,6 +159,8 @@ function on_settings_change(s) {
 	if (!battery && enabled && (typeof navigator != 'undefined') && navigator.getBattery) {
 		navigator.getBattery().then(function(bat) {
 			battery = bat;
+			battery.onchargingchange = onbattery_change;
+			battery.onlevelchange = onbattery_change;
 		});
 	}
 	conn.on_settings_change(enabled, s.settings.refmode_client_ws_url, s.settings.network_timeout);

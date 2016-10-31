@@ -1,5 +1,5 @@
 .referee_layout {
-	padding: 5vh 0 0 5vw;
+	padding: 3vh 0 0 3vw;
 	z-index: 20000;
 	position: relative;
 	font-size: 18px;
@@ -10,7 +10,7 @@
 
 .referee_clients {
 	display: inline-block;
-	min-width: 40vw;
+	min-width: 50vw;
 	padding: 1vmin;
 	background: #eee;
 }

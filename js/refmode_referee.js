@@ -54,29 +54,32 @@ function calc_client_title(c) {
 
 // Handle direct messages (from clients)
 function handle_dmsg(msg) {
+	if (msg.dtype === 'error') {
+		report_problem.silent_error('referee received error: ' + msg.message);
+		return;
+	}
+
+	var c = client_by_conn_id(msg.from);
+	if (!c) {
+		// Client disconnected in between
+		return;
+	}
+
 	switch(msg.dtype) {
 	case 'update-settings-answer':
-		refresh(msg.from); // TODO only needed when not subscribing
+		// TODO: only needed when not subscribed
+		refresh(msg.from);
 		break;
-	case 'get-state-answer':
-		var c = client_by_conn_id(msg.from);
-		if (!c) {
-			// Client disconnected in between
-			return;
-		}
-
-		// TODO integrate new info
-		c.presses = msg.presses;
-		c.setup = msg.setup;
-		c.settings = msg.settings;
-		c.node_id = msg.node_id;
-		c.battery = msg.battery;
+	case 'state':
+		console.log(msg);
+		['presses', 'setup', 'settings', 'node_id', 'battery'].forEach(function(k) {
+			if (msg.hasOwnProperty(k)) {
+				c[k] = msg[k];
+			}
+		});
 		c.last_update = Date.now();
 		calc_client_title(c);
 		render_clients(clients);
-		break;
-	case 'error':
-		report_problem.silent_error('referee received error: ' + msg.message);
 		break;
 	default:
 		conn.respond(msg, {
@@ -88,10 +91,17 @@ function handle_dmsg(msg) {
 }
 
 function refresh(conn_id) {
+	var c = client_by_conn_id(conn_id);
+	if (!c) {
+		// Client disconnected in between
+		return;
+	}
+
 	conn.send({
 		type: 'dmsg',
 		dtype: 'get-state',
 		to: conn_id,
+		subscribe: c.subscribed,
 	});
 }
 
@@ -121,6 +131,7 @@ function handle_msg(msg) {
 		});
 		var client = {
 			id: msg.id,
+			subscribed: true,
 		};
 		calc_client_title(client);
 		clients.push(client);

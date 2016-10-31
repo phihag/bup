@@ -1,6 +1,7 @@
+'use strict';
+
 // A pseudo-network interface for an event that is only changed locally
 function staticnet(event, url) {
-'use strict';
 
 /* s, press */
 function send_press(s) {
