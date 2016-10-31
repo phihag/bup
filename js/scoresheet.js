@@ -1,5 +1,5 @@
-var scoresheet = (function() {
 'use strict';
+var scoresheet = (function() {
 
 function _svg_align_vcenter(text, vcenter) {
 	var bbox = text.getBBox();
@@ -1024,6 +1024,10 @@ function hide() {
 	$container.hide();
 	$container.removeClass('event_scoresheet_container');
 	$container.children('.scoresheet').remove();
+
+	if (state.ui.referee_mode) {
+		refmode_referee_ui.back_to_ui();
+	}
 }
 
 function _match_title(s, sep) {

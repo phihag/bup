@@ -1,6 +1,5 @@
 referee mode
 	see current match (download data, print scoresheets, allow going back)
-		back from scoresheet
 		back via settings
 	warn if event != my event
 	espouse an event from a client
