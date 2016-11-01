@@ -1,5 +1,5 @@
 .referee_layout {
-	padding: 3vh 0 0 3vw;
+	padding: 2vh 0 0 0;
 	z-index: 20000;
 	position: relative;
 	font-size: 18px;
@@ -8,11 +8,16 @@
 	font-size: inherit;
 }
 
-.referee_clients {
+.referee_clients,
+.referee_event {
 	display: inline-block;
-	min-width: 50vw;
-	padding: 1vmin;
+	width: 46vw;
+	padding: 1vmin 1vw;
+	margin: 0 1vw;
 	background: #eee;
+}
+.referee_event {
+	float: right;
 }
 
 .referee_c {

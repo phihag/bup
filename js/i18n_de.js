@@ -449,6 +449,9 @@ var i18n_de = {
 'refmode:referee:court': 'Feld: ',
 'refmode:referee:match': 'Spiel: ',
 'refmode:referee:back from settings': 'Zurück zur Referee-Übersicht',
+'refmode:referee:no event': 'Kein Wettkampf ausgewählt',
+'refmode:referee:no matches': 'Keine Spiele - verbinde mindestens ein Tablet.',
+
 };
 
 /*@DEV*/

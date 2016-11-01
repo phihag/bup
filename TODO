@@ -1,4 +1,5 @@
 referee mode
+	changing settings should have immediate effect
 	warn if event != my event
 	espouse an event from a client
 	select current match (i.e. enter on client)
@@ -8,6 +9,7 @@ referee mode
 		event state (i.e. players being filled in / changed)
 		live-update while in match (if still compatible)
 
+	distinguish umpire<->refere mode
 	push match state of other matches to client if match not present (i.e. btde)
 	live push state for display
 	referee UI: button to leave it

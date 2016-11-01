@@ -449,6 +449,9 @@ var i18n_en = {
 'refmode:referee:court': 'Court: ',
 'refmode:referee:match': 'Match: ',
 'refmode:referee:back from settings': 'Back to referee overview',
+'refmode:referee:no event': '- No event -',
+'refmode:referee:no matches': 'No matches available. Connect to a client.',
+
 };
 
 /*@DEV*/

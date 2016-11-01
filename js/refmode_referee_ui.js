@@ -175,6 +175,20 @@ function render_clients(clients) {
 	}
 }
 
+function render_event(s) {
+	var ev = s.event;
+	var matches_container = uiu.qs('.referee_matches');
+	uiu.empty(matches_container);
+
+	if (!ev) {
+		uiu.text_qs('.referee_event_title', s._('refmode:referee:no event'));
+		uiu.text(matches_container, s._('refmode:referee:no matches'));
+		return;
+	}
+
+	uiu.text_qs('.referee_event_title', ev.event_name);
+}
+
 function on_settings_change(s) {
 	if (rc) {
 		rc.on_settings_change(s);
@@ -185,6 +199,8 @@ function show() {
 	if (state.ui.referee_mode) {
 		return;
 	}
+
+	delete state.event;
 
 	if (!rc) {
 		rc = refmode_referee(on_status_change, render_clients, key_storage);
@@ -202,6 +218,7 @@ function show() {
 	uiu.addClass_qs('.settings_layout', 'settings_layout_refereemode');
 	uiu.visible_qs('.referee_layout', true);
 	render_clients([]);
+	render_event(state);
 }
 
 function hide() {
