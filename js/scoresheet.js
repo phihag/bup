@@ -1165,6 +1165,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
 	var i18n = require('./i18n');
 	var network = require('./network');
+	var refmode_referee_ui = require('./refmode_referee_ui');
 	var render = require('./render');
 	var settings = require('./settings');
 	var stats = require('./stats');

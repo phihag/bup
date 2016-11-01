@@ -2,7 +2,7 @@ var match_storage = (function() {
 'use strict';
 
 function store(s) {
-	if (! window.localStorage) {
+	if (typeof localStorage == 'undefined') {
 		return;
 	}
 
@@ -16,38 +16,38 @@ function store(s) {
 		presses: presses,
 	};
 	try {
-		window.localStorage.setItem('bup_match_' + s.metadata.id, JSON.stringify(cleaned_s));
+		localStorage.setItem('bup_match_' + s.metadata.id, JSON.stringify(cleaned_s));
 	} catch(e) {
 		// Ignore error
 	}
 }
 
 function load() {
-	if (! window.localStorage) {
+	if (typeof localStorage == 'undefined') {
 		return;
 	}
 
 	var res = [];
-	for (var i = 0;i < window.localStorage.length;i++) {
-		var k = window.localStorage.key(i);
+	for (var i = 0;i < localStorage.length;i++) {
+		var k = localStorage.key(i);
 		if (! k.match(/^bup_match_/)) {
 			continue;
 		}
 
-		var m = JSON.parse(window.localStorage.getItem(k));
+		var m = JSON.parse(localStorage.getItem(k));
 		res.push(m);
 	}
 	return res;
 }
 
 function get(match_id) {
-	if (! window.localStorage) {
+	if (typeof localStorage == 'undefined') {
 		return;
 	}
 	var k = 'bup_match_' + match_id;
 
 	try {
-		return JSON.parse(window.localStorage.getItem(k));
+		return JSON.parse(localStorage.getItem(k));
 	} catch(e) {
 		// Ignore
 	}
