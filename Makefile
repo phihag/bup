@@ -61,6 +61,7 @@ dist: cleandist ## Create distribution files
 	node div/minify_json.js div/edemo.json dist/bup/div/edemo.json
 	node div/minify_json.js div/vdemo.json dist/bup/div/vdemo.json
 	node div/minify_json.js div/bldemo.json dist/bup/div/bldemo.json
+	node div/minify_json.js div/bldemo_inprogress.json dist/bup/div/bldemo_inprogress.json
 	node div/minify_json.js div/nrwdemo.json dist/bup/div/nrwdemo.json
 	cp -R div/teamlists --target-directory dist/bup/div/
 	cp \
