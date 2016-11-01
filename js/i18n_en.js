@@ -448,6 +448,7 @@ var i18n_en = {
 'refmode:referee:umpire_name': 'Umpire: ',
 'refmode:referee:court': 'Court: ',
 'refmode:referee:match': 'Match: ',
+'refmode:referee:back from settings': 'Back to referee overview',
 };
 
 /*@DEV*/

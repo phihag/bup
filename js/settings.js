@@ -77,6 +77,7 @@ function toggle_displaymode() {
 
 function show_refereemode() {
 	uiu.visible_qs('#settings_wrapper', true);
+	uiu.visible_qs('.ingame_options', false);
 }
 
 function hide_refereemode() {
@@ -108,6 +109,7 @@ function show() {
 	});
 	match_storage.ui_init();
 	uiu.visible_qs('.ingame_options', state.initialized);
+	uiu.visible_qs('.ingame_options_refmode', state.ui.referee_mode);
 }
 
 function hide(force) {

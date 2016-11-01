@@ -32,6 +32,7 @@ function on_subscribe_checkbox_click(e) {
 }
 
 function back_to_ui() {
+	settings.hide(true);
 	uiu.visible_qs('.referee_layout', true);
 	uiu.visible_qs('#game', false);
 	settings.show_refereemode();
@@ -174,6 +175,12 @@ function render_clients(clients) {
 	}
 }
 
+function on_settings_change(s) {
+	if (rc) {
+		rc.on_settings_change(s);
+	}
+}
+
 function show() {
 	if (state.ui.referee_mode) {
 		return;
@@ -197,12 +204,6 @@ function show() {
 	render_clients([]);
 }
 
-function on_settings_change(s) {
-	if (rc) {
-		rc.on_settings_change(s);
-	}
-}
-
 function hide() {
 	if (! state.ui.referee_mode) {
 		return;
@@ -220,6 +221,9 @@ function ui_init() {
 	click.qs('.settings_mode_referee', function(e) {
 		e.preventDefault();
 		show();
+	});
+	click.qs('.refmode_referee_from_settings', function() {
+		back_to_ui();
 	});
 }
 

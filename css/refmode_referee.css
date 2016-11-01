@@ -35,3 +35,10 @@
 .referee_editform {
 	display: inline-block;
 }
+
+.settings_container button.refmode_referee_from_settings {
+	margin: 2vh 0 0 0;
+	padding: 2vh 0;
+	font-size: 150%;
+	width: 100%;
+}

@@ -448,6 +448,7 @@ var i18n_de = {
 'refmode:referee:umpire_name': 'Schiedsrichter: ',
 'refmode:referee:court': 'Feld: ',
 'refmode:referee:match': 'Spiel: ',
+'refmode:referee:back from settings': 'Zurück zur Referee-Übersicht',
 };
 
 /*@DEV*/
