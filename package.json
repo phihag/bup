@@ -20,10 +20,10 @@
     "istanbul": "*",
     "jshint": "*",
     "mocha": "*",
-    "node-webcrypto-ossl": "*"
+    "node-webcrypto-ossl": "*",
     "parse-appcache-manifest": "*",
     "stylelint": "*",
-    "stylelint-config-standard": "*",
+    "stylelint-config-standard": "*"
   },
   "private": true
 }
