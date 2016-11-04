@@ -21,10 +21,10 @@ force-install-libs:
 	wget https://raw.githubusercontent.com/Stuk/jszip/master/dist/jszip.min.js -O libs/jszip.min.js
 	touch libs/.completed
 
-deps: deps-mandatory ## Download and install all dependencies (for compiling / testing / CLI operation)
+deps: deps-essential ## Download and install all dependencies (for compiling / testing / CLI operation)
 	$(MAKE) deps-optional
 
-deps-mandatory: install-libs
+deps-essential: install-libs
 	(node --version && npm --version) >/dev/null 2>/dev/null || sudo apt-get install nodejs npm
 	npm install
 
@@ -130,4 +130,4 @@ run-server: run-refmode_hub
 run-refmode_hub:
 	node refmode_hub/refmode_hub.js
 
-.PHONY: default help deps deps-optional test clean install-libs force-install-libs upload dist cleandist coverage coverage-display cd lint jshint eslint appcache-manifest manifest upload-run stylelint doclint deps-mandatory run-server run-refmode_hub
+.PHONY: default help deps deps-optional test clean install-libs force-install-libs upload dist cleandist coverage coverage-display cd lint jshint eslint appcache-manifest manifest upload-run stylelint doclint deps-essential run-server run-refmode_hub
