@@ -71,7 +71,7 @@ function handle_dmsg(msg) {
 		refresh(msg.from);
 		break;
 	case 'state':
-		['presses', 'setup', 'settings', 'node_id', 'battery'].forEach(function(k) {
+		['event', 'presses', 'setup', 'settings', 'node_id', 'battery'].forEach(function(k) {
 			if (msg.hasOwnProperty(k)) {
 				c[k] = msg[k];
 			}
