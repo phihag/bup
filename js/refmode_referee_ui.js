@@ -103,7 +103,6 @@ function make_editable(el, cb) {
 
 function render_clients(clients) {
 	var s = state;
-	var ev = state.event;
 
 	var container = uiu.qs('.referee_clients');
 	uiu.empty(container);
