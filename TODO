@@ -1,4 +1,5 @@
 referee mode
+	umpire cannot be edited once set to empty
 	warn if event != my event
 	espouse an event from a client
 	select current match (i.e. enter on client)
@@ -48,6 +49,7 @@ pick referee court if starting with displaymode
 BTP-Anbindung (=> Moritz)
 
 improve display mode
+	like den-ger
 	test that settings change has immediate effect (UI)
 	large numbers display mode (larger than now, maybe two courts, game count)
 	add lock functionality
