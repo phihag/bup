@@ -1,6 +1,6 @@
 'use strict';
 
-var refmode_referee = (function(handle_change_ui, render_clients, key_storage) {
+var refmode_referee = (function(handle_change_ui, render_clients, render_event, key_storage) {
 var conn = refmode_conn(handle_change, handle_msg);
 var key;
 var key_err;
@@ -71,7 +71,7 @@ function handle_dmsg(msg) {
 		refresh(msg.from);
 		break;
 	case 'state':
-		['presses', 'setup', 'settings', 'node_id', 'battery'].forEach(function(k) {
+		['event', 'presses', 'setup', 'settings', 'node_id', 'battery'].forEach(function(k) {
 			if (msg.hasOwnProperty(k)) {
 				c[k] = msg[k];
 			}
@@ -193,12 +193,19 @@ function status_str(s) {
 	return conn.status_str(s);
 }
 
+function espouse_event(s, c) {
+	s.event = c.event;
+	render_event(s);
+	render_clients(clients);
+}
+
 return {
 	on_settings_change: on_settings_change,
 	status_str: status_str,
 	refresh: refresh,
 	update_settings: update_settings,
 	client_by_conn_id: client_by_conn_id,
+	espouse_event: espouse_event,
 };
 
 });

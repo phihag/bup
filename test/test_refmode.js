@@ -82,7 +82,11 @@ _describe('refmode', function() {
 				assert(client.length <= 1);
 			}
 
-			var referee = bup.refmode_referee(on_change, render_clients, tutil_key_storage);
+			function render_event(s) {
+				assert(s);
+			}
+
+			var referee = bup.refmode_referee(on_change, render_clients, render_event, tutil_key_storage);
 			referee.on_settings_change(s);
 		},
 		function(client, referee, cb) {

@@ -451,7 +451,8 @@ var i18n_en = {
 'refmode:referee:back from settings': 'Back to referee overview',
 'refmode:referee:no event': '- No event -',
 'refmode:referee:no matches': 'No matches available. Connect to a client.',
-
+'refmode:referee:different_event': 'Different event: {event_name}',
+'refmode:referee:espouse event': 'Espouse event',
 };
 
 /*@DEV*/

@@ -1,7 +1,4 @@
 referee mode
-	net status flickering when hub is away
-	warn if event != my event
-	espouse an event from a client
 	select current match (i.e. enter on client)
 	subscribe
 		current match
@@ -9,7 +6,6 @@ referee mode
 		event state (i.e. players being filled in / changed)
 		live-update while in match (if still compatible)
 
-	distinguish umpire<->refere mode
 	push match state of other matches to client if match not present (i.e. btde)
 	live push state for display
 	referee UI: button to leave it
@@ -73,7 +69,7 @@ improve display mode
 	show last update in settings
 	support display mode without network
 	show games on the side that won them?
-
+	net status flickering when hub is away
 
 bldemo: Active match should be on court 1
 bldemo: without started matches (bldemo_inprogress?)

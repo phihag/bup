@@ -65,6 +65,7 @@ function handle_dmsg(msg) {
 		} else {
 			unsubscribe(msg.from);
 		}
+
 		var answer = {
 			dtype: 'state',
 			presses: s.presses,
@@ -75,6 +76,15 @@ function handle_dmsg(msg) {
 			subscribed: (subscriptions.indexOf(msg.from) >= 0),
 			battery: bat_status(),
 		};
+
+		var ev = s.event;
+		if (ev) {
+			answer.event = {
+				id: ev.id,
+				event_name: ev.event_name,
+				tournament_name: ev.tournament_name,
+			};
+		}
 		conn.respond(msg, answer);
 		break;
 	case 'error':
