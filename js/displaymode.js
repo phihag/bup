@@ -1,5 +1,5 @@
-var displaymode = (function() {
 'use strict';
+var displaymode = (function() {
 
 var autosize_cancels = [];
 
@@ -20,7 +20,7 @@ function _setup_autosize(el, right_node) {
 function _calc_matchscore(matches) {
 	var res = [0, 0];
 	matches.forEach(function(m) {
-		var winner = calc.match_winner(m.setup.counting, m.network_score);
+		var winner = calc.match_winner(m.setup.counting, m.network_score || []);
 		if (winner === 'left') {
 			res[0] += 1;
 		} else if (winner === 'right') {
@@ -123,7 +123,7 @@ function _render_court_display(container, event, court, top_team_idx) {
 	}
 	var bottom_team_idx = 1 - top_team_idx;
 
-	var nscore = match ? match.network_score : [];
+	var nscore = (match && match.network_score) ? match.network_score : [];
 	var match_setup = match ? match.setup : {
 		teams: [{
 			name: event.team_names[0],
@@ -135,7 +135,6 @@ function _render_court_display(container, event, court, top_team_idx) {
 	};
 	var prev_scores = nscore.slice(0, -1);
 	var current_score = (nscore.length > 0) ? nscore[nscore.length - 1] : ['', ''];
-
 
 	var top_current_score = uiu.create_el(container, 'div', {
 		'class': 'dcs_current_score_top',
@@ -279,7 +278,8 @@ function render_html_list(container, event) {
 	_setup_autosize(away_span);
 
 	event.matches.forEach(function(m) {
-		var mwinner = calc.match_winner(m.setup.counting, m.network_score);
+		var netscore = m.network_score || [];
+		var mwinner = calc.match_winner(m.setup.counting, netscore);
 
 		var row = uiu.create_el(match_list, 'tr');
 		uiu.create_el(row, 'td', {
@@ -299,10 +299,10 @@ function render_html_list(container, event) {
 				'class': 'display_list_game_score',
 			});
 
-			if (game_idx >= m.network_score.length) {
+			if (game_idx >= netscore.length) {
 				continue;
 			}
-			var nscore = m.network_score[game_idx];
+			var nscore = netscore[game_idx];
 			var gwinner = calc.game_winner(m.setup.counting, game_idx, nscore[0], nscore[1]);
 			uiu.create_el(score_td, 'span', {
 				'class': ((gwinner === 'left') ? 'display_list_winning' : ''),

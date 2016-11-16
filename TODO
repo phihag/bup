@@ -1,5 +1,5 @@
 referee mode
-	changing settings should have immediate effect
+	net status flickering when hub is away
 	warn if event != my event
 	espouse an event from a client
 	select current match (i.e. enter on client)
@@ -17,6 +17,8 @@ referee mode
 	referee: show matches to the right (in order, with results)
 	hub: redirect to local hub
 	record failures (closing on error) and successful connections
+	transmit and show last error with timestamp
+	transmit and show network status with timestamp
 
 print match order
 	hide buttons
@@ -47,6 +49,7 @@ pick referee court if starting with displaymode
 BTP-Anbindung (=> Moritz)
 
 improve display mode
+	test that settings change has immediate effect (UI)
 	large numbers display mode (larger than now, maybe two courts, game count)
 	add lock functionality
 	berlin-like display (names top/bottom, very large numbers for one court)
