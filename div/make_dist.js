@@ -1,14 +1,13 @@
+'use strict';
+
 var async = require('async');
 var child_process = require('child_process');
 var fs = require('fs');
 var path = require('path');
 var process = require('process');
 
-(function() {
-'use strict';
 
 /* Helper functions */
-
 function add_zeroes(n) {
 	if (n < 10) {
 		return '0' + n;
@@ -179,19 +178,23 @@ function main() {
 
 	var html_in_fn = path.join(dev_dir, 'bup.html');
 	var html_out_fn = path.join(dist_dir, 'index.html');
+	var html_out_fn2 = path.join(dist_dir, 'bup.html');
 	var jsdist_fn = path.join(dist_dir, 'bup.dist.js');
 	var cssdist_fn = path.join(dist_dir, 'bup.dist.css');
 	var version_fn = path.join(dist_dir, 'VERSION');
 
+	function transform_html(html) {
+		html = html.replace(/<!--@DEV-->[\s\S]*?<!--\/@DEV-->/g, '');
+		html = html.replace(/<!--@PRODUCTION([\s\S]*?)-->/g, function(m, m1) {return m1;});
+		html = html.replace(/PRODUCTIONATTR-/g, '');
+		return html;
+	}
+
 	async.waterfall([
 		function(cb) {
-			// Compile HTML file
-			transform_file(html_in_fn, html_out_fn, function(html) {
-				html = html.replace(/<!--@DEV-->[\s\S]*?<!--\/@DEV-->/g, '');
-				html = html.replace(/<!--@PRODUCTION([\s\S]*?)-->/g, function(m, m1) {return m1;});
-				html = html.replace(/PRODUCTIONATTR-/g, '');
-				return html;
-			}, cb);
+			transform_file(html_in_fn, html_out_fn, transform_html, cb);
+		}, function(cb) {
+			transform_file(html_in_fn, html_out_fn2, transform_html, cb);
 		}, function(cb) {
 			uglify([path.join(dev_dir, 'cachesw.js')], path.join(dist_dir, 'cachesw.js'), cb);
 		},
@@ -259,5 +262,3 @@ function main() {
 }
 
 main();
-
-})();

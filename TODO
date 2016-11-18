@@ -1,8 +1,4 @@
 jticker
-	bup-update
-		download zip (admins only)
-		atomic
-		if dev present use that
 	bup module
 		login with token
 		login with user/pass
@@ -10,6 +6,10 @@ jticker
 	sync
 		which match on court
 		points for all sets
+	add presses
+		db migration
+	edit teams? (all_players...)
+	delete old bup versions?
 
 liveaw: improve/test reconnecting
 liveaw: proper reconnect backoff
