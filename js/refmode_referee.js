@@ -79,6 +79,8 @@ function handle_dmsg(msg) {
 		c.last_update = Date.now();
 		calc_client_title(c);
 		render_clients(clients);
+
+		// TODO automatically espouse event
 		break;
 	default:
 		conn.respond(msg, {

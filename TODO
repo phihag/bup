@@ -1,4 +1,32 @@
+jticker
+	bup-update
+		download zip (admins only)
+		atomic
+		if dev present use that
+	bup module
+		login with token
+		login with user/pass
+	list
+	sync
+		which match on court
+		points for all sets
+
+liveaw: improve/test reconnecting
+liveaw: proper reconnect backoff
+MVP liveaw
+	allow hiding events from public
+	implement errstate
+	implement timeout
+	implement netstats gathering as well (re-add component)
+	implement authorization (including login via bup)
+
+display
+	invert colors
+	small court rendering of all courts
+	only list
+
 referee mode
+	automatically espouse first event
 	select current match (i.e. enter on client)
 	subscribe
 		current match
@@ -27,22 +55,7 @@ Aufstellungszettel mit all_names (checkboxes)
 	fetch from CourtSpot
 	fetch from btde
 
-jticker
-	bup-update
-		download zip (admins only)
-		atomic
-		if dev present use that
-	bup module
-		login with token
-		login with user/pass
-	list
-	sync
-		which match on court
-		points for all sets
-
 pick referee court if starting with displaymode
-
-BTP-Anbindung (=> Moritz)
 
 improve display mode
 	test that settings change has immediate effect (UI)
@@ -155,7 +168,6 @@ do not require a court for staticnet (test by changing languages)
 shift+A breaks demo mode!?
 CourtSpot: support order
 *demo: support order
-liveaw: support order
 
 v/edemo11
 v/edemo: set court nr
@@ -164,16 +176,6 @@ court selector in demo mode
 xlsx scoresheet: add angled line (and improve text positioning)
 
 editevent: check if ok by VRLs
-liveaw: HTTP mode
-liveaw: improve/test reconnecting
-liveaw: proper reconnect backoff
-
-MVP liveaw
-	allow hiding events from public
-	implement errstate
-	implement timeout
-	implement netstats gathering as well (re-add component)
-	implement authorization (including login via bup)
 
 eventsheet: do not show external links when no internet access
 eventsheet: more space for input, vary by field

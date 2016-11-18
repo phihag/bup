@@ -181,26 +181,20 @@ function main() {
 	var html_out_fn = path.join(dist_dir, 'index.html');
 	var jsdist_fn = path.join(dist_dir, 'bup.dist.js');
 	var cssdist_fn = path.join(dist_dir, 'bup.dist.css');
-
-	// Compile HTML file
-	transform_file(html_in_fn, html_out_fn, function(html) {
-		html = html.replace(/<!--@DEV-->[\s\S]*?<!--\/@DEV-->/g, '');
-		html = html.replace(/<!--@PRODUCTION([\s\S]*?)-->/g, function(m, m1) {return m1;});
-		html = html.replace(/PRODUCTIONATTR-/g, '');
-		return html;
-	}, function(err) {
-		if (err) {
-			throw err;
-		}
-	});
-
-	uglify([path.join(dev_dir, 'cachesw.js')], path.join(dist_dir, 'cachesw.js'), function(err) {
-		if (err) {
-			throw err;
-		}
-	});
+	var version_fn = path.join(dist_dir, 'VERSION');
 
 	async.waterfall([
+		function(cb) {
+			// Compile HTML file
+			transform_file(html_in_fn, html_out_fn, function(html) {
+				html = html.replace(/<!--@DEV-->[\s\S]*?<!--\/@DEV-->/g, '');
+				html = html.replace(/<!--@PRODUCTION([\s\S]*?)-->/g, function(m, m1) {return m1;});
+				html = html.replace(/PRODUCTIONATTR-/g, '');
+				return html;
+			}, cb);
+		}, function(cb) {
+			uglify([path.join(dev_dir, 'cachesw.js')], path.join(dist_dir, 'cachesw.js'), cb);
+		},
 		function(cb) {
 			ensure_mkdir(tmp_dir, cb);
 		},
@@ -216,11 +210,16 @@ function main() {
 			});
 		},
 		function(version, cb) {
+			fs.writeFile(version_fn, version, {encoding: 'utf8'}, function(err) {
+				cb(err, version);
+			});
+		},
+		function(version, cb) {
 			fs.readFile(html_in_fn, 'utf8', function(err, content) {
 				cb(err, version, content);
 			});
 		},
-		function (version, html, cb) {
+		function(version, html, cb) {
 			// Get all scripts in HTML file
 			var script_files = [];
 			var dev_re = /<!--@DEV-->([\s\S]*?)<!--\/@DEV-->/g;
