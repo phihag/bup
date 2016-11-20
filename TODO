@@ -1,13 +1,12 @@
-jticker
-	bup module
-		login with token
-		login with user/pass
-	list
-	sync
-		which match on court
-		points for all sets
-	add presses
-		db migration
+update BL XLSX document!!!
+	BuLi Mindestanforderungen (jetzt integriert!)
+	BuLi anwesende Spieler
+	BuLi backup players
+update RLN document
+
+improve jticker
+	login with token
+	login with user/pass
 	edit teams? (all_players...)
 	delete old bup versions?
 
@@ -24,6 +23,11 @@ display
 	invert colors
 	small court rendering of all courts
 	only list
+
+courtspot
+	remove team_names
+if @dev: warn if event_name is redundant
+	update import/export
 
 referee mode
 	automatically espouse first event

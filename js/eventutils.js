@@ -2,7 +2,7 @@
 var eventutils = (function() {
 
 function guess_gender(match_setup, player_id) {
-	var mname = match_setup.discipline_key ? match_setup.match_name : match_setup.match_name;
+	var mname = match_setup.discipline_key ? match_setup.discipline_key : (match_setup.eventsheet_id ? match_setup.eventsheet_id : match_setup.match_name);
 	if (/(?:HD|HE|MD|MS)/.test(mname)) {
 		return 'm';
 	} else if (/(?:DD|DE|WD|WS)/.test(mname)) {
@@ -131,6 +131,9 @@ function annotate(s, event) {
 
 	if (!event.tournament_name) {
 		event.tournament_name = name_by_league(league_key);
+	}
+	if (!event.event_name && event.team_names) {
+		event.event_name = event.team_names[0] + ' - ' + event.team_names[1];
 	}
 
 	var props = {

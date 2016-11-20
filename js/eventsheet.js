@@ -762,7 +762,13 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 							},
 						};
 
-						var col = MATCH_COLS[player.gender][calc_match_id(match)];
+						var match_eventsheet_id = calc_match_id(match);
+						var col = MATCH_COLS[player.gender][match_eventsheet_id];
+						if (col === undefined) {
+							report_problem.silent_error('Cannot find ' + match_eventsheet_id + ' in ' + es_key + ' sheet (gender ' + player.gender + ')');
+							return;
+						}
+
 						sheet.text(col + row, 'x');
 						var v = x_count[player.gender][col];
 						x_count[player.gender][col] = v ? (v + 1) : 1;
@@ -841,7 +847,13 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 				};
 				ev.matches.forEach(function(match, match_id) {
 					var setup = match.setup;
-					var row = MATCH_ROWS[calc_match_id(match)];
+					var match_eventsheet_id = calc_match_id(match);
+					var row = MATCH_ROWS[match_eventsheet_id];
+					if (row === undefined) {
+						report_problem.silent_error('Cannot find ' + match_eventsheet_id + ' in ' + es_key + ' sheet');
+						return;
+					}
+
 					if (match_order[match_id]) {
 						sheet.text('A' + row, match_order[match_id]);
 					}

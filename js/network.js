@@ -4,7 +4,7 @@ var network = (function() {
 var networks = {};
 
 function get_real_netw() {
-	return networks.nrwdemo || networks.bldemo || networks.bldemo_inprogress || networks.vdemo || networks.edemo || networks.btde || networks.courtspot || networks.liveaw;
+	return networks.nrwdemo || networks.bldemo || networks.bldemo_inprogress || networks.vdemo || networks.edemo || networks.btde || networks.courtspot || networks.liveaw || networks.jticker;
 }
 
 function get_netw() {
@@ -535,6 +535,8 @@ function ui_init(s, hash_query) {
 		networks.btde = btde();
 	} else if (hash_query.liveaw_event_id) {
 		networks.liveaw = liveaw(hash_query.liveaw_event_id);
+	} else if (hash_query.jt_id !== undefined) {
+		networks.jticker = jticker(hash_query.jt_id);
 	} else if (hash_query.edemo !== undefined) {
 		networks.edemo = staticnet(null, 'div/edemo.json');
 	} else if (hash_query.bldemo !== undefined) {
@@ -637,6 +639,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
 	var courtspot = require('./courtspot');
 	var eventsheet = require('./eventsheet');
+	var jticker = require('./jticker');
 	var liveaw = require('./liveaw');
 	var netstats = require('./netstats');
 	var p2p = require('./p2p');

@@ -284,7 +284,7 @@ function render_html_list(container, event) {
 		var row = uiu.create_el(match_list, 'tr');
 		uiu.create_el(row, 'td', {
 			'class': 'display_list_match_name',
-		}, m.setup.match_name);
+		}, m.setup.short_name || m.setup.match_name);
 		var home_td = uiu.create_el(row, 'td', {
 			'class': 'display_list_player_names' + ((mwinner === 'left') ? ' display_list_winning_players' : ''),
 		});

@@ -127,6 +127,7 @@ match setup
 eventsheet_id      Language-independent ID of the match describing match type and number, e.g. "MS1".
                    If missing match_name will be used.
 match_name*        Human-readable name of the match, e.g. "1. MS"
+short_name         Short human-readable name of the match, e.g. "MS1" (recommended if match_name is 10+ chars)
 match_id*          (Globally) unique ID, e.g. "20160825-Bundesliga-finale-MS1"
 teams*             An array (0: home team, 1: away team) of teams (see below).
 is_doubles*        Boolean key. false => singles, true => mixed/doubles
