@@ -5,6 +5,7 @@ update BL XLSX document!!!
 update RLN document
 
 improve jticker
+	auto-switch after download
 	login with token
 	login with user/pass
 	edit teams? (all_players...)
