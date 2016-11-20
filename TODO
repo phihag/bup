@@ -62,6 +62,10 @@ Aufstellungszettel mit all_names (checkboxes)
 pick referee court if starting with displaymode
 
 improve display mode
+<<<<<<< HEAD
+=======
+	like den-ger
+>>>>>>> origin/master
 	test that settings change has immediate effect (UI)
 	large numbers display mode (larger than now, maybe two courts, game count)
 	add lock functionality

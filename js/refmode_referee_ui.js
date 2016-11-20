@@ -22,6 +22,13 @@ function on_espouse_btn_click(e) {
 	rr.espouse_event(state, c);
 }
 
+function on_espouse_btn_click(e) {
+	var c = rc.client_by_conn_id(_client_id(e));
+	if (!c) return;
+
+	rc.espouse_event(c);
+}
+
 function on_client_match_link_click(e) {
 	var c = rr.client_by_conn_id(_client_id(e));
 	if (!c) return;

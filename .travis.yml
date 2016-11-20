@@ -1,4 +1,4 @@
-dist: trusty
+dist: precise
 sudo: false
 
 language: node_js
@@ -6,17 +6,16 @@ node_js:
   - 6
   - node
 env:
-  - CXX=g++-4.8
+  - CXX=g++-6
 addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
     packages:
-      - g++-4.8
+      - g++-6
 
-install:
-  - make deps
 before_script:
+  - make deps
   - make lint
 notifications:
   email:

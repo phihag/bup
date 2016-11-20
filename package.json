@@ -17,9 +17,10 @@
   "devDependencies": {
     "async": "*",
     "eslint": "*",
+    "istanbul": "*",
     "jshint": "*",
     "mocha": "*",
-    "istanbul": "*",
+    "node-webcrypto-ossl": "*",
     "parse-appcache-manifest": "*",
     "stylelint": "*",
     "stylelint-config-standard": "*"
