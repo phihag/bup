@@ -118,7 +118,14 @@ function update_settings(conn_id, new_settings) {
 function handle_msg(msg) {
 	switch (msg.type) {
 	case 'error':
-		report_problem.silent_error('referee received error ' + JSON.stringify(msg));
+		var is_dev = false;
+		/*@DEV*/
+		console.error('referee received error: ' + JSON.stringify(msg)); // eslint-disable-line no-console
+		is_dev = true;
+		/*/@DEV*/
+		if (!is_dev) {
+			report_problem.silent_error('referee received error ' + JSON.stringify(msg));
+		}
 		break;
 	case 'referee-registered':
 		conn.set_status({
