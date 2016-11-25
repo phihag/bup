@@ -38,13 +38,16 @@
 	margin-top: 0.2em;
 }
 
-div.editevent_backup_player, div.editevent_present_player {
+div.editevent_backup_player,
+div.editevent_present_player {
 	margin-bottom: 0.6em;
 }
-th.editevent_backup_players, th.editevent_present_players {
+th.editevent_backup_players,
+th.editevent_present_players {
 	padding-top: 0.6em;
 }
-.editevent_backup_players, .editevent_present_players {
+.editevent_backup_players,
+.editevent_present_players {
 	vertical-align: top;
 }
 
