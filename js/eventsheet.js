@@ -5,9 +5,9 @@ var SHEETS_BY_LEAGUE = {
 	'1BL-2015': ['1BL-2015', 'team-1BL-2015'],
 	'2BLN-2015': ['2BLN-2015', 'team-2BL-2015'],
 	'2BLS-2015': ['2BLS-2015', 'team-2BL-2015'],
-	'1BL-2016': ['1BL-2016', 'BL-ballsorten-2016', 'BL-mindestanforderungen-2016', 'DBV-Satzungen-2016', 'teamlist-1BL-2016'],
-	'2BLN-2016': ['2BLN-2016', 'BL-ballsorten-2016', 'BL-mindestanforderungen-2016', 'DBV-Satzungen-2016', 'teamlist-2BLN-2016'],
-	'2BLS-2016': ['2BLS-2016', 'BL-ballsorten-2016', 'BL-mindestanforderungen-2016', 'DBV-Satzungen-2016', 'teamlist-2BLS-2016'],
+	'1BL-2016': ['1BL-2016', 'BL-ballsorten-2016', 'DBV-Satzungen-2016', 'teamlist-1BL-2016'],
+	'2BLN-2016': ['2BLN-2016', 'BL-ballsorten-2016', 'DBV-Satzungen-2016', 'teamlist-2BLN-2016'],
+	'2BLS-2016': ['2BLS-2016', 'BL-ballsorten-2016', 'DBV-Satzungen-2016', 'teamlist-2BLS-2016'],
 	'NRW-2016': ['NRW-2016', 'NRW-Satzungen-2016'],
 	'RLW-2016': ['RLW-2016', 'NRW-Satzungen-2016'],
 	'RLN-2016': ['RLN-2016', 'RLN-Satzungen-2016'],
@@ -73,6 +73,11 @@ function calc_backup_players_str(ev) {
 	}).filter(function(s) {return s;}).join(' / ');
 }
 
+function players2str(players) {
+	return players.map(function(player) {
+		return player.name;
+	}).join(', ');
+}
 
 var _loaded = {
 	'jszip': false,
@@ -686,7 +691,7 @@ function calc_player_matches(ev, team_id) {
 }
 
 function calc_sums(match) {
-	var netscore = match.netscore || match.network_score;
+	var netscore = match.netscore || match.network_score || [];
 	if (!netscore.length) {
 		return {
 			points: [],
@@ -724,6 +729,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 	eventutils.set_metadata(ev);
 	var match_order = get_match_order(ev.matches);
 	var last_update = calc_last_update(ev.matches);
+	var today = last_update ? last_update : Date.now();
 
 	xlsx.open(ui8r, function(xlsx_file) {
 		function fill_team_sheet(sheet_fn, team_id, cb) {
@@ -775,6 +781,23 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					});
 				});
 
+				if (ev.backup_players) {
+					ev.backup_players[team_id].forEach(function(player) {
+						var row = row_idx[player.gender];
+						sheet.text('B' + row, player.name);
+						sheet.text('J' + row, 'x');
+						row_idx[player.gender]++;
+					});
+				}
+
+				if (ev.present_players) {
+					ev.present_players[team_id].forEach(function(player) {
+						var row = row_idx[player.gender];
+						sheet.text('B' + row, player.name);
+						row_idx[player.gender]++;
+					});
+				}
+
 				// Mark top rows green
 				for (var gender in x_count) {
 					var row = {
@@ -784,18 +807,6 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					for (var col in x_count[gender]) {
 						sheet.val(col + row, x_count[gender][col]);
 					}
-				}
-
-				if (ev.backup_players) {
-					var backup_row_idx = {
-						m: 17,
-						f: 26,
-					};
-					ev.backup_players[team_id].forEach(function(player) {
-						var row = backup_row_idx[player.gender];
-						sheet.text('B' + row, player.name);
-						backup_row_idx[player.gender]++;
-					});
 				}
 
 				var incomplete = ev.matches.some(function(m) {
@@ -823,16 +834,12 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 				sheet.text('W8', extra_data.matchday);
 				sheet.text('W4', extra_data.umpires);
 				sheet.text('AB6', extra_data.starttime);
-				sheet.text('K32', '\xa0X');
-
 				var all_finished = ev.matches.every(function(m) {
 					return m.network_finished;
 				});
-				if (last_update) {
-					sheet.text('W6', utils.date_str(last_update));
-					if (all_finished) {
-						sheet.text('AB8', utils.time_str(last_update));
-					}
+				sheet.text('W6', utils.date_str(today));
+				if (last_update && all_finished) {
+					sheet.text('AB8', utils.time_str(last_update));
 				}
 
 				var col_sums = {};
@@ -864,7 +871,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 						});
 					});
 
-					var netscore = match.netscore || match.network_score;
+					var netscore = match.netscore || match.network_score || [];
 					netscore.forEach(function(nsGame, game_idx) {
 						nsGame.forEach(function(points, team_idx) {
 							var col = xlsx.add_col('I', 3 * game_idx + 2 * team_idx);
@@ -901,10 +908,18 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					sheet.val('C23', ev.team_names[1]);
 				}
 
-				sheet.val('A25', calc_backup_players_str(ev));
-				sheet.text('A27', extra_data.notes);
-				sheet.text('A30', extra_data.protest);
+				if (ev.backup_players) {
+					sheet.val('D25', players2str(ev.backup_players[0]));
+					sheet.val('D26', players2str(ev.backup_players[1]));
+				}
+				if (ev.present_players) {
+					sheet.text('U25', players2str(ev.present_players[0]));
+					sheet.text('U26', players2str(ev.present_players[1]));
+				}
 
+				sheet.text('D28', extra_data.notes);
+				sheet.text('D31', extra_data.protest);
+				sheet.text('V33', 'X'); // Mindestanforderungen
 			});
 		}
 
@@ -1126,8 +1141,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					if (match.setup.court_id) {
 						sheet.text('C' + (start_row + 2), match.setup.court_id);
 					}
-					var today = last_update ? (new Date(last_update)) : (new Date());
-					sheet.val('C' + (start_row + 3), xlsx.date(today));
+					sheet.val('C' + (start_row + 3), xlsx.date(new Date(today)));
 
 					// right header
 					if (match.setup.umpire_name) {
@@ -1209,6 +1223,14 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 			});
 		}
 
+		function fill_minreq_sheet(cb) {
+			xlsx_file.modify_sheet('8', cb, function(sheet) {
+				sheet.val('A43', ev.team_names[0]);
+				sheet.val('B43', ev.team_names[1]);
+				sheet.val('B45', utils.date_str(today));
+			});
+		}
+
 		utils.parallel([function(cb) {
 			fill_team_sheet('2', 0, cb);
 		}, function(cb) {
@@ -1216,6 +1238,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 		},
 		fill_result_sheet,
 		fill_score_sheets,
+		fill_minreq_sheet,
 		], function() {
 			xlsx_file.save('Spielbericht ' + ev.event_name + '.xlsm');
 		});
