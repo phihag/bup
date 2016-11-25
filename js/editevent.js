@@ -37,9 +37,11 @@ function on_select_change(e) {
 }
 
 function on_bp_delbtn_click(e) {
-	var team_id = parseInt(e.target.getAttribute('data-team_id'), 10);
-	var bp_id = parseInt(e.target.getAttribute('data-bp_id'), 10);
-	state.event.backup_players[team_id].splice(bp_id, 1);
+	var el = e.target;
+	var team_id = parseInt(el.getAttribute('data-team_id'), 10);
+	var player_index = parseInt(el.getAttribute('data-player_index'), 10);
+	var ar_key = el.getAttribute('data-ar-key');
+	state.event[ar_key + '_players'][team_id].splice(player_index, 1);
 	network.on_edit_event(state);
 	render_table(state);
 }
@@ -64,10 +66,12 @@ function on_add_change(e) {
 	} else {
 		player = JSON.parse(val);
 	}
-	if (! state.event.backup_players) {
-		state.event.backup_players = [[], []];
+
+	var key = e.target.getAttribute('data-ar-key');
+	if (! state.event[key + '_players']) {
+		state.event[key + '_players'] = [[], []];
 	}
-	state.event.backup_players[team_id].push(player);
+	state.event[key + '_players'][team_id].push(player);
 	network.on_edit_event(state);
 	render_table(state);
 }
@@ -84,11 +88,79 @@ function calc_player_str(p) {
 	return player_str;
 }
 
-function render_table(s) {
-	// No let
-	var team_id;
-	var td;
+function render_player_sel(s, tbody, all_players, key) {
+	var all_sel_players = s.event[key + '_players'];
+	if (!all_sel_players) {
+		all_sel_players = [[], []];
+	}
+	var sel_player_names = all_sel_players.map(function(asp) {
+		var names = {};
+		for (var i = 0;i < asp.length;i++) {
+			names[asp[i].name] = asp[i];
+		}
+		return names;
+	});
+	var tr = uiu.create_el(tbody, 'tr', {});
+	uiu.create_el(tr, 'th', {
+		'class': 'editevent_' + key + '_players',
+	}, s._('editevent:' + key + ' players'));
+	for (var team_id = 0;team_id < 2;team_id++) {
+		var td = uiu.create_el(tr, 'td', {
+			'class': 'editevent_' + key + '_players',
+		});
+		var asp = all_sel_players[team_id];
+		for (var player_index = 0;player_index < asp.length;player_index++) {
+			var bp = asp[player_index];
+			var div = uiu.create_el(td, 'div', {
+				'class': 'editevent_' + key + '_player',
+			}, calc_player_str(bp));
+			var del_btn = uiu.create_el(div, 'button', {
+				'class': 'button_delete image-button textsize-button',
+				'data-player_index': player_index,
+				'data-team_id': team_id,
+				'data-ar-key': key,
+			});
+			uiu.create_el(del_btn, 'span', {
+				'data-player_index': player_index,
+				'data-team_id': team_id,
+				'data-ar-key': key,
+			});
+			click.on(del_btn, on_bp_delbtn_click);
+		}
 
+		var add_select = uiu.create_el(td, 'select', {
+			'data-team_id': team_id,
+			'data-ar-key': key,
+		});
+		uiu.create_el(add_select, 'option', {
+			'disabled': 'disabled',
+			'value': '',
+			'selected': 'selected',
+		}, s._('editevent:add ' + key + ' player'));
+		for (var pid = 0;pid < all_players[team_id].length;pid++) {
+			var p = all_players[team_id][pid];
+			if (sel_player_names[team_id][p.name]) {
+				continue;
+			}
+			uiu.create_el(add_select, 'option', {
+				value: JSON.stringify(p),
+			}, p.name);
+		}
+		uiu.create_el(add_select, 'option', {
+			'data-i18n': 'editevent:add manual m',
+			value: '__add_manual_m',
+			'class': 'editevent_option_manual',
+		}, s._('editevent:add manual m'));
+		uiu.create_el(add_select, 'option', {
+			'data-i18n': 'editevent:add manual f',
+			value: '__add_manual_f',
+			'class': 'editevent_option_manual',
+		}, s._('editevent:add manual f'));
+		add_select.addEventListener('change', on_add_change);
+	}
+}
+
+function render_table(s) {
 	var table = uiu.qs('.editevent_table');
 	uiu.empty(table);
 	var thead = uiu.create_el(table, 'thead');
@@ -105,8 +177,8 @@ function render_table(s) {
 		var tr = uiu.create_el(tbody, 'tr');
 		uiu.create_el(tr, 'th', {}, match_setup.match_name);
 		var player_count = (match_setup.is_doubles ? 2 : 1);
-		for (team_id = 0;team_id < 2;team_id++) {
-			td = uiu.create_el(tr, 'td');
+		for (var team_id = 0;team_id < 2;team_id++) {
+			var td = uiu.create_el(tr, 'td');
 			for (var player_id = 0;player_id < player_count;player_id++) {
 				var player = match_setup.teams[team_id].players[player_id];
 				if (!player) {
@@ -155,72 +227,8 @@ function render_table(s) {
 		}
 	}
 
-	var all_backup_players = s.event.backup_players;
-	if (!all_backup_players) {
-		all_backup_players = [[], []];
-	}
-	var backup_player_names = all_backup_players.map(function(bps) {
-		var names = {};
-		for (var i = 0;i < bps.length;i++) {
-			names[bps[i].name] = bps[i];
-		}
-		return names;
-	});
-	var backup_tr = uiu.create_el(tbody, 'tr', {});
-	uiu.create_el(backup_tr, 'th', {
-		'class': 'editevent_backup_players',
-	}, s._('editevent:backup players'));
-	for (team_id = 0;team_id < 2;team_id++) {
-		td = uiu.create_el(backup_tr, 'td', {
-			'class': 'editevent_backup_players',
-		});
-		var bps = all_backup_players[team_id];
-		for (var bp_id = 0;bp_id < bps.length;bp_id++) {
-			var bp = bps[bp_id];
-			var div = uiu.create_el(td, 'div', {
-				'class': 'editevent_backup_player',
-			}, calc_player_str(bp));
-			var del_btn = uiu.create_el(div, 'button', {
-				'class': 'button_delete image-button textsize-button',
-				'data-bp_id': bp_id,
-				'data-team_id': team_id,
-			});
-			uiu.create_el(del_btn, 'span', {
-				'data-bp_id': bp_id,
-				'data-team_id': team_id,
-			});
-			click.on(del_btn, on_bp_delbtn_click);
-		}
-
-		var add_select = uiu.create_el(td, 'select', {
-			'data-team_id': team_id,
-		});
-		uiu.create_el(add_select, 'option', {
-			'disabled': 'disabled',
-			'value': '',
-			'selected': 'selected',
-		}, s._('editevent:add backup player'));
-		for (var pid = 0;pid < all_players[team_id].length;pid++) {
-			var p = all_players[team_id][pid];
-			if (backup_player_names[team_id][p.name]) {
-				continue;
-			}
-			uiu.create_el(add_select, 'option', {
-				value: JSON.stringify(p),
-			}, p.name);
-		}
-		uiu.create_el(add_select, 'option', {
-			'data-i18n': 'editevent:add manual m',
-			value: '__add_manual_m',
-			'class': 'editevent_option_manual',
-		}, s._('editevent:add manual m'));
-		uiu.create_el(add_select, 'option', {
-			'data-i18n': 'editevent:add manual f',
-			value: '__add_manual_f',
-			'class': 'editevent_option_manual',
-		}, s._('editevent:add manual f'));
-		add_select.addEventListener('change', on_add_change);
-	}
+	render_player_sel(s, tbody, all_players, 'backup');
+	render_player_sel(s, tbody, all_players, 'present');
 }
 
 function show() {

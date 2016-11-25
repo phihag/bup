@@ -1,8 +1,25 @@
+editevent: add present_players
+
 update BL XLSX document!!!
+	backup players
+	present players
 	BuLi Mindestanforderungen (jetzt integriert!)
 	BuLi anwesende Spieler
-	BuLi backup players
-update RLN document
+
+Aufstellung (unter editevent)
+	new field present_players
+	new field suggested_players -> add in XLSX
+	list all_players (list top 4 singles / doubles)
+	add players
+	add completely new players (with input)
+	click on boxes to change
+	make sure layout contains BuLi-Logo
+	print
+	pdf
+	XLSX
+	edit present players in editevent
+	CourtSpot: import league
+
 
 improve jticker
 	auto-switch after download
@@ -11,7 +28,7 @@ improve jticker
 	edit teams? (all_players...)
 	delete old bup versions?
 
-liveaw: improve/test reconnecting
+	liveaw: improve/test reconnecting
 liveaw: proper reconnect backoff
 MVP liveaw
 	allow hiding events from public
@@ -24,13 +41,17 @@ display
 	invert colors
 	small court rendering of all courts
 	only list
+update RLN document
 
 courtspot
 	remove team_names
+	change players
+	change event
 if @dev: warn if event_name is redundant
 	update import/export
 
 referee mode
+	send export to referee (add request_id map)
 	automatically espouse first event
 	select current match (i.e. enter on client)
 	subscribe
@@ -63,10 +84,7 @@ Aufstellungszettel mit all_names (checkboxes)
 pick referee court if starting with displaymode
 
 improve display mode
-<<<<<<< HEAD
-=======
 	like den-ger
->>>>>>> origin/master
 	test that settings change has immediate effect (UI)
 	large numbers display mode (larger than now, maybe two courts, game count)
 	add lock functionality

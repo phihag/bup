@@ -47,6 +47,8 @@ var i18n_de = {
 'editevent:enter player name': 'Spieler-Name:',
 'editevent:backup players': 'Ersatzspieler',
 'editevent:add backup player': 'Ersatzspieler hinzufügen ...',
+'editevent:present players': 'Anwesende Spieler',
+'editevent:add present player': 'Anwesende hinzufügen ...',
 
 'button:undo': 'Rückgängig',
 'button:settings': 'Konfiguration',

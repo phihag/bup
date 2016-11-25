@@ -235,6 +235,16 @@
       "name": "Simon Wang",
       "gender": "m"
     }]],
+    "present_players": [[{
+      "name": "Mark Byerly",
+      "gender": "m"
+    }], [{
+      "name": "Matthias Deininger",
+      "gender": "m"
+    }, {
+      "name": "Nadia Frankhauser",
+      "gender": "f"
+    }]],
     "all_players": [
       [
         {"gender": "m", "name": "Fabian Roth", "ranking": 1, "ranking_d": 6},
@@ -247,6 +257,7 @@
         {"gender": "m", "name": "Mark Byerly", "ranking": 8},
         {"gender": "m", "name": "Dennis Nyenhuis", "ranking": 9, "ranking_d": 7},
         {"gender": "m", "name": "Max Schwenger", "ranking": 10, "ranking_d": 5},
+        {"gender": "m", "name": "Max Schwenger", "ranking": 11},
         {"gender": "f", "name": "Chloe Magee", "ranking": 1},
         {"gender": "f", "name": "Carla Nelte", "ranking": 2},
         {"gender": "f", "name": "Ya Lan Chang", "ranking": 3},
@@ -261,10 +272,13 @@
         {"gender": "m", "name": "Simon Wang", "ranking": 5, "ranking_d": 7},
         {"gender": "m", "name": "Marvin Seidel", "ranking": 7, "ranking_d": 4},
         {"gender": "m", "name": "Johannes Schöttler", "ranking": 8, "ranking_d": 3},
+        {"gender": "m", "name": "Matthias Deininger", "ranking": 9},
+        {"gender": "m", "name": "Marcel Reuter", "ranking": 10},
         {"gender": "f", "name": "Olga Konon", "ranking": 1},
         {"gender": "f", "name": "Samantha Barning", "ranking": 2},
         {"gender": "f", "name": "Isabel Herttrich", "ranking": 3},
-        {"gender": "f", "name": "Cisita Joitiy Jansen", "ranking": 4}
+        {"gender": "f", "name": "Cisita Joitiy Jansen", "ranking": 4},
+        {"gender": "f", "name": "Nadia Frankhauser", "ranking": 5}
       ]
     ],
     "league_key": "1BL-2016",
