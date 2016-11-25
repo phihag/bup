@@ -306,7 +306,6 @@ var i18n_de = {
 'eventsheet:label:teamlist-2BLN-2016': 'Mannschaftsunterlagen',
 'eventsheet:label:teamlist-2BLS-2016': 'Mannschaftsunterlagen',
 'eventsheet:label:BL-ballsorten-2016': 'Zugelassene Bälle',
-'eventsheet:label:BL-mindestanforderungen-2016': 'Mindestanforderungen',
 'eventsheet:label:DBV-Satzungen-2016': 'Regeln DBV 2016/2017',
 'eventsheet:label:RLW-2016': 'Spielbericht',
 'eventsheet:label:RLN-2016': 'Spielbericht',

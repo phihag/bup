@@ -21,7 +21,6 @@ var URLS = {
 	'2BLN-2016': 'div/Spielbericht-Buli-2016-17.xlsm',
 	'2BLS-2016': 'div/Spielbericht-Buli-2016-17.xlsm',
 	'BL-ballsorten-2016': 'div/bundesliga-ballsorten-2016.pdf',
-	'BL-mindestanforderungen-2016': 'div/bundesliga-Mindestanforderungen.pdf',
 	'DBV-Satzungen-2016': 'http://www.badminton.de/fileadmin/Dateibereich/Foto-Archiv/pdf-xls/DBV/Satzung/16-DBV-Druckwerk_Satzung-Ordnungen-Spielregeln201617-Website.pdf',
 	'RLW-2016': 'div/Spielbericht_8x3x21.svg',
 	'RLN-2016': 'div/Spielbericht_8x3x21.svg',
@@ -36,7 +35,6 @@ var URLS = {
 };
 var DIRECT_DOWNLOAD_SHEETS = {
 	'BL-ballsorten-2016': true,
-	'BL-mindestanforderungen-2016': true,
 	'teamlist-1BL-2016': true,
 	'teamlist-2BLN-2016': true,
 	'teamlist-2BLS-2016': true,

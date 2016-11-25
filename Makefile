@@ -66,7 +66,6 @@ dist: cleandist ## Create distribution files
 	cp -R div/teamlists --target-directory dist/bup/div/
 	cp \
 		div/bundesliga-ballsorten-2016.pdf \
-		div/bundesliga-Mindestanforderungen.pdf \
 		div/courtspot_screenshot_links.png \
 		div/courtspot_screenshot_rechts.png \
 		div/data_structures.md \
