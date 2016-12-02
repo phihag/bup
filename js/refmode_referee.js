@@ -120,7 +120,7 @@ function handle_msg(msg) {
 	case 'error':
 		var is_dev = false;
 		/*@DEV*/
-		console.error('referee received error: ' + JSON.stringify(msg)); // eslint-disable-line no-console
+		console.error('referee received error: ' + JSON.stringify(msg.message)); // eslint-disable-line no-console
 		is_dev = true;
 		/*/@DEV*/
 		if (!is_dev) {

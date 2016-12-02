@@ -221,29 +221,40 @@
     "notes": "",
     "backup_players": [[{
       "name": "Dennis Nyenhuis",
-      "gender": "m"
+      "gender": "m",
+      "ranking": 9,
+      "ranking_d": 7
     }, {
       "name": "Elin Svensson",
-      "gender": "f"
-    }, {
-      "name": "Ya Lan Chang",
-      "gender": "f"
+      "gender": "f",
+      "ranking": 5
     }], [{
       "name": "Marvin Seidel",
-      "gender": "m"
+      "gender": "m",
+      "ranking": 7,
+      "ranking_d": 4
     }, {
       "name": "Simon Wang",
-      "gender": "m"
+      "gender": "m",
+      "ranking": 5,
+      "ranking_d": 7
     }]],
     "present_players": [[{
       "name": "Mark Byerly",
-      "gender": "m"
+      "gender": "m",
+      "ranking": 8
+    }, {
+      "name": "Ya Lan Chang",
+      "gender": "f",
+      "ranking": 3
     }], [{
       "name": "Matthias Deininger",
-      "gender": "m"
+      "gender": "m",
+      "ranking": 9
     }, {
       "name": "Nadia Frankhauser",
-      "gender": "f"
+      "gender": "f",
+      "ranking": 5
     }]],
     "all_players": [
       [

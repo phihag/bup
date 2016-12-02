@@ -1,3 +1,12 @@
+improve jticker
+	auto-switch after download
+	login with token
+	login with user/pass
+	delete old bup versions
+	edit teams? (all_players...)
+
+android home screen icon
+
 Aufstellung (unter editevent)
 	new field present_players
 	new field suggested_players -> add in XLSX
@@ -12,15 +21,13 @@ Aufstellung (unter editevent)
 	edit present players in editevent
 	CourtSpot: import league
 
+yellow/red/black card: document time (in fourth row)
+	add test (with / without referee)
+	implement
+	thank Günter Wagner
 
-improve jticker
-	auto-switch after download
-	login with token
-	login with user/pass
-	edit teams? (all_players...)
-	delete old bup versions?
 
-	liveaw: improve/test reconnecting
+liveaw: improve/test reconnecting
 liveaw: proper reconnect backoff
 MVP liveaw
 	allow hiding events from public
@@ -102,6 +109,9 @@ improve display mode
 	support display mode without network
 	show games on the side that won them?
 	net status flickering when hub is away
+
+BVM-Support
+	Upload via SFTP
 
 bldemo: Active match should be on court 1
 bldemo: without started matches (bldemo_inprogress?)
