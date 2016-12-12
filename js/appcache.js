@@ -54,6 +54,8 @@ function on_post_update(new_version) {
 return {
 	ui_init: ui_init,
 	on_post_update: on_post_update,
+	// Debugging only
+	update_now: update_now,
 };
 
 })();

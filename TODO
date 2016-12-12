@@ -1,11 +1,9 @@
-improve jticker
-	auto-switch after download
-	login with token
-	login with user/pass
-	delete old bup versions
-	edit teams? (all_players...)
+refmode
+	show event matches
+	support changing match remotely
+	redirect from live.aw
+	show match state (21:4 finished)
 
-android home screen icon
 
 Aufstellung (unter editevent)
 	new field present_players
@@ -20,6 +18,16 @@ Aufstellung (unter editevent)
 	XLSX
 	edit present players in editevent
 	CourtSpot: import league
+
+improve jticker
+	auto-switch after download
+	login with token
+	login with user/pass
+	delete old bup versions
+	edit teams? (all_players...)
+
+android home screen icon
+run lighthouse
 
 yellow/red/black card: document time (in fourth row)
 	add test (with / without referee)
