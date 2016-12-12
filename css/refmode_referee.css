@@ -51,3 +51,11 @@
 .referee_espouse_event {
 	margin-left: 0.1em;
 }
+
+.referee_match_change_select {
+	margin-left: 1em;
+	margin-right: 0.5em;
+}
+.referee_match_change_form {
+	display: inline-block;
+}

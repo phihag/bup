@@ -37,6 +37,16 @@ function find(ar, cb) {
 	return null;
 }
 
+function pluck(obj, keys) {
+	var res = {};
+	keys.forEach(function(k) {
+		if (obj.hasOwnProperty(k)) {
+			res[k] = obj[k];
+		}
+	});
+	return res;
+}
+
 function uuid() {
 	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
 		var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
@@ -364,6 +374,7 @@ return {
 	obj_update: obj_update,
 	parse_query_string: parse_query_string,
 	parallel: parallel,
+	pluck: pluck,
 	range: range,
 	remove: remove,
 	remove_cb: remove_cb,

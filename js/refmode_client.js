@@ -84,8 +84,36 @@ function handle_dmsg(msg) {
 				event_name: ev.event_name,
 				tournament_name: ev.tournament_name,
 			};
+
+			if (msg.include_event_matches && ev.matches) {
+				answer.event.matches = ev.matches.map(function(m) {
+					return utils.pluck(
+						m, ['setup', 'network_score', 'presses', 'presses_json']);
+				});
+			}
 		}
 		conn.respond(msg, answer);
+		break;
+	case 'change-match':
+		var match = utils.find(s.event.matches, function(m) {
+			return m.setup.match_id === msg.new_match_id;
+		});
+
+		if (!match) {
+			conn.respond(msg, {
+				dtype: 'error',
+				message: 'Failed to change match: Could not find ' + msg.new_match_id,
+			});
+			return;
+		}
+
+		control.stop_match(s);
+		network.enter_match(match);
+
+		conn.respond(msg, {
+			dtype: 'changed-match',
+			new_match_id: msg.new_match_id,
+		});
 		break;
 	case 'error':
 		report_problem.silent_error('refclient received error: ' + msg.message);
@@ -227,7 +255,9 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var control = require('./control');
 	var netstats = require('./netstats');
+	var network = require('./network');
 	var refmode_conn = require('./refmode_conn');
 	var report_problem = require('./report_problem');
 	var settings = require('./settings');

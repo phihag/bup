@@ -4,7 +4,9 @@ var refmode_referee_ui = (function() {
 var rr;
 
 function on_status_change() {
-	uiu.text_qs('.refmode_referee_status', rr.status_str(state));
+	if (rr) {
+		uiu.text_qs('.refmode_referee_status', rr.status_str(state));
+	}
 }
 
 function _client_id(event) {
@@ -30,6 +32,21 @@ function on_client_match_link_click(e) {
 	uiu.visible_qs('#game', true);
 	settings.hide_refereemode();
 	control.start_match(state, c.setup, c.presses);
+}
+
+function on_client_match_change_submit(e) {
+	e.preventDefault();
+
+	var c = rr.client_by_conn_id(_client_id(e));
+	if (!c) return;
+
+	var container = uiu.closest_class(e.target, 'referee_c');
+	var current_sel_match = container.querySelector('.referee_match_change_select').value;
+	if (!current_sel_match) { // Nothing selected yet, ignore
+		return;
+	}
+
+	rr.change_match(c.id, current_sel_match);
 }
 
 function on_subscribe_checkbox_click(e) {
@@ -147,12 +164,12 @@ function render_clients(clients) {
 		var bat_text = (bat ? (
 			bat.charging ? s._('refmode:referee:battery:charging', {
 				duration: (bat.chargingTime ? (', ' + utils.duration_hours(0, bat.chargingTime * 1000)) : ''),
-				percent: (bat.level * 100),
+				percent: Math.round(bat.level * 100),
 			})
 			:
 			s._('refmode:referee:battery:discharging', {
 				duration: (bat.dischargingTime ? (', ' + utils.duration_hours(0, bat.dischargingTime * 1000)) : ''),
-				percent: (bat.level * 100),
+				percent: Math.round(bat.level * 100),
 			})
 		) : s._('refmode:referee:battery:na'));
 		uiu.create_el(div, 'div', {}, s._('refmode:referee:battery') + bat_text);
@@ -177,6 +194,31 @@ function render_clients(clients) {
 				'class': 'js_link',
 			}, c.setup.match_name);
 			click.on(match_link, on_client_match_link_click);
+		}
+		if (c.event && ev && ev.matches && (c.event.id === ev.id)) {
+			var match_change_form = uiu.create_el(match_row, 'form', {
+				'class': 'referee_match_change_form',
+			});
+			match_change_form.addEventListener('submit', on_client_match_change_submit);
+
+			var change_match_sel = uiu.create_el(match_change_form, 'select', {
+				'class': 'referee_match_change_select',
+				size: 1,
+				required: 'required',
+			});
+			uiu.create_el(change_match_sel, 'option', {
+				value: '',
+				disabled: 'disabled',
+				selected: 'selected',
+			}, '');
+			ev.matches.forEach(function(m) {
+				uiu.create_el(change_match_sel, 'option', {
+					value: m.setup.match_id,
+				}, m.setup.match_name);
+			});
+			uiu.create_el(match_change_form, 'button', {
+				'role': 'submit',
+			}, s._('refmode:referee:change match'));
 		}
 
 		if (c.event && (!ev || (c.event.id !== ev.id))) {
@@ -204,6 +246,11 @@ function render_event(s) {
 		uiu.text_qs('.referee_event_title', s._('refmode:referee:no event'));
 		uiu.text(matches_container, s._('refmode:referee:no matches'));
 		return;
+	}
+	if (ev.matches) {
+		ev.matches.forEach(function(m) {
+			uiu.create_el(matches_container, 'div', {}, m.setup.match_name);
+		});
 	}
 
 	uiu.text_qs('.referee_event_title', ev.event_name);

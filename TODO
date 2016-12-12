@@ -1,7 +1,7 @@
 refmode
+	redirect from live.aw
 	show event matches
 	support changing match remotely
-	redirect from live.aw
 	show match state (21:4 finished)
 
 

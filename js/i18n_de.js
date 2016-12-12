@@ -454,6 +454,7 @@ var i18n_de = {
 'refmode:referee:no matches': 'Keine Spiele - verbinde mindestens ein Tablet.',
 'refmode:referee:different_event': 'Anderer Wettkampf: {event_name}',
 'refmode:referee:espouse event': 'Übernehmen',
+'refmode:referee:change match': 'Ändern',
 };
 
 /*@DEV*/

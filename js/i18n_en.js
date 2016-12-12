@@ -454,6 +454,7 @@ var i18n_en = {
 'refmode:referee:no matches': 'No matches available. Connect to a client.',
 'refmode:referee:different_event': 'Different event: {event_name}',
 'refmode:referee:espouse event': 'Espouse event',
+'refmode:referee:change match': 'Change match',
 };
 
 /*@DEV*/

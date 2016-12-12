@@ -52,6 +52,15 @@ function calc_client_title(c) {
 	c.title = ((c.settings && c.settings.refmode_client_node_name) ? c.settings.refmode_client_node_name : (c.node_id ? c.node_id : '[' + c.id + ']'));
 }
 
+function change_match(conn_id, new_match_id) {
+	conn.send({
+		type: 'dmsg',
+		dtype: 'change-match',
+		to: conn_id,
+		new_match_id: new_match_id,
+	});
+}
+
 // Handle direct messages (from clients)
 function handle_dmsg(msg) {
 	if (msg.dtype === 'error') {
@@ -66,6 +75,7 @@ function handle_dmsg(msg) {
 	}
 
 	switch(msg.dtype) {
+	case 'changed-match':
 	case 'update-settings-answer':
 		// TODO: only needed when not subscribed
 		refresh(msg.from);
@@ -80,7 +90,9 @@ function handle_dmsg(msg) {
 		calc_client_title(c);
 		render_clients(clients);
 
-		// TODO automatically espouse event
+		if (!state.event && c.event) {
+			espouse_event(state, c);
+		}
 		break;
 	default:
 		conn.respond(msg, {
@@ -103,6 +115,7 @@ function refresh(conn_id) {
 		dtype: 'get-state',
 		to: conn_id,
 		subscribe: c.subscribed,
+		include_event_matches: true, // TODO make this more clever
 	});
 }
 
@@ -209,12 +222,13 @@ function espouse_event(s, c) {
 }
 
 return {
-	on_settings_change: on_settings_change,
-	status_str: status_str,
-	refresh: refresh,
-	update_settings: update_settings,
+	change_match: change_match,
 	client_by_conn_id: client_by_conn_id,
 	espouse_event: espouse_event,
+	on_settings_change: on_settings_change,
+	refresh: refresh,
+	status_str: status_str,
+	update_settings: update_settings,
 };
 
 });
