@@ -273,8 +273,30 @@ function hub(config) {
 	return wss;
 }
 
+function parse_args(argv) {
+	if (argv.length === 0) {
+		return DEFAULT_CONFIG;
+	}
+
+	if ((argv.length !== 1) || argv.includes('--help')) {
+		console.log('Usage: refmode_hub [JSON_CONFIG]');
+		console.log('JSON keys are:');
+		console.log('  port        Integer of port to bind to');
+		console.log('  register_at String of websocket address of root server to register at.');
+		console.log('              e.g. "register_at": "wss://live.aufschlagwechsel.de/refmode_hub/"');
+		console.log('  local_addr  String of websocket address of this server in the local network.');
+		process.exit(1);
+	}
+
+	const cfg = bup.utils.deep_copy(DEFAULT_CONFIG);
+	const cmd_config = JSON.parse(argv[0]);
+	bup.utils.obj_update(cfg, cmd_config);
+	return cfg;
+}
+
 if (require.main === module) {
-	hub();
+	const cfg = parse_args(process.argv.slice(2));
+	hub(cfg);
 }
 
 module.exports = hub;

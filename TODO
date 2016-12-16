@@ -1,9 +1,16 @@
 refmode
+	install on liveaw as service
+	Makefile to install as service
 	redirect from live.aw
-	show event matches
-	support changing match remotely
-	show match state (21:4 finished)
+		argparse hub
+		after 10 failures of satellite go back to main
+		show satellite in UI
+		allow to clear satellite
 
+	show event matches
+	show version if older than current (if current dev then if older than any known)
+	show match state (21:4 finished)
+	push state to display (when no event set offer it as an option)
 
 Aufstellung (unter editevent)
 	new field present_players
@@ -525,3 +532,4 @@ upload to turnier.de?
 rework settings.show => split stuff into ui_init
 i18n: use uiu instead of $
 UI (& refmode) in konqueror
+refmode: screenshot
