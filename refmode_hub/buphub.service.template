@@ -2,7 +2,7 @@
 Description=referee hub for Badminton Umprie Panel
 
 [Service]
-ExecStart=/usr/bin/env node /home/buphub/bup/refmode_hub/refmode_hub.js '{"port": 3001}'
+ExecStart=/usr/bin/env nodejs BUP_ROOT_DIR/refmode_hub/refmode_hub.js '{"port": 3001}'
 Type=simple
 User=buphub
 Group=buphub

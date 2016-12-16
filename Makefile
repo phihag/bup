@@ -124,9 +124,15 @@ clean: cleandist ## Remove temporary files
 	rm -rf -- node_modules
 	rm -rf -- div/teamlists/
 
-run-server: run-refmode_hub
+run-hub: run-refmode_hub
 
 run-refmode_hub:
 	node refmode_hub/refmode_hub.js
 
-.PHONY: default help deps deps-optional test clean install-libs force-install-libs upload dist cleandist coverage coverage-display cd lint jshint eslint appcache-manifest manifest upload-run stylelint doclint deps-essential run-server run-refmode_hub
+install-hub: deps
+	sudo sed -e "s#BUP_ROOT_DIR#$$PWD#" refmode_hub/buphub.service.template > /etc/systemd/system/buphub.service
+	sudo chmod +x /etc/systemd/system/buphub.service
+	systemctl enable buphub
+	systemctl start buphub
+
+.PHONY: default help deps deps-optional test clean install-libs force-install-libs upload dist cleandist coverage coverage-display cd lint jshint eslint appcache-manifest manifest upload-run stylelint doclint deps-essential run-hub run-refmode_hub install-hub
