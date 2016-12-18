@@ -61,7 +61,7 @@ function set_metadata(event) {
 		if (! match.presses_json) {
 			return;
 		}
-		var scopy = calc.copy_state(state);
+		var scopy = {};
 		var presses = JSON.parse(match.presses_json);
 		calc.init_state(scopy, match.setup, presses);
 		calc.state(scopy);
@@ -77,7 +77,7 @@ function set_metadata(event) {
 				}
 			}
 			if (! match.md_end && scopy.match.finished) {
-				match.md_end = scopy.fpresses[fpresses.length - 1].timestamp;
+				match.md_end = fpresses[fpresses.length - 1].timestamp;
 			}
 		}
 		match.netscore = calc.netscore(scopy);

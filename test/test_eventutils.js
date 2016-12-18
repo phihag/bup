@@ -29,5 +29,47 @@ _describe('eventutils', function() {
 		assert.strictEqual(bup.eventutils.name_by_league('NRW-O19-S1-KL-100-2016'), 'Kreisliga Süd 1 (100)');
 		assert.strictEqual(bup.eventutils.name_by_league('NRW-O19-S1-KK-194-2016'), 'Kreisklasse Süd 1 (194)');
 	});
+
+	_it('set_metadata with incomplete match', function() {
+		var event = {
+			matches: [{
+				setup: {
+					is_doubles: false,
+					counting: '3x21',
+				},
+				presses_json: JSON.stringify([{
+					type: 'pick_side',
+					team1_left: true,
+					umpire_name: 'Philipp Hagemeister',
+					court_id:'2',
+					timestamp:1482068711532,
+				}, {
+					type:'pick_server',
+					team_id:1,
+					player_id:0,
+					timestamp:1482068712227,
+				}, {
+					'type':'pick_receiver',
+					team_id:0,
+					player_id:0,
+					timestamp:1482068712769,
+				}, {
+					type:'love-all',
+					timestamp:1482068714598,
+				}, {
+					type:'score',
+					side:'right',
+					timestamp: 1482068715266,
+				}, {
+					type: 'disqualified',
+					team_id: 0,
+					player_id: 0,
+					timestamp: 1482070499,
+				}]),
+			}],
+		};
+
+		bup.eventutils.set_metadata(event);
+	});
 });
 

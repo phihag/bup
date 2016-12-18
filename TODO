@@ -1,4 +1,5 @@
 Button Vollbildmodus klappt nicht (auf Tablets?)
+enable sourcemap
 
 refmode
 	install on liveaw as service
@@ -25,6 +26,7 @@ Spielbericht: Ersatzspieler etc.
 auto go fullscreen with any click when set that way
 clicking on match should go to match if match is the current one, don't reload from server
 Reihenfolge: improve printing
+Cornelia Schröder
 
 Aufstellung (unter editevent)
 	new field present_players
