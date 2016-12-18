@@ -1,16 +1,30 @@
+Button Vollbildmodus klappt nicht (auf Tablets?)
+
 refmode
 	install on liveaw as service
-	Makefile to install as service
+	install apache
 	redirect from live.aw
 		argparse hub
 		after 10 failures of satellite go back to main
 		show satellite in UI
 		allow to clear satellite
 
+	live push updates (only last press)
+
 	show event matches
 	show version if older than current (if current dev then if older than any known)
 	show match state (21:4 finished)
 	push state to display (when no event set offer it as an option)
+	flickers when no hub
+	disabling should turn off referee mode
+	test with multiple referees
+
+omit error network could not be connected in displaymode
+font size should be larger in single-court display
+Spielbericht: Ersatzspieler etc.
+auto go fullscreen with any click when set that way
+clicking on match should go to match if match is the current one, don't reload from server
+Reihenfolge: improve printing
 
 Aufstellung (unter editevent)
 	new field present_players
@@ -36,7 +50,7 @@ improve jticker
 android home screen icon
 run lighthouse
 
-yellow/red/black card: document time (in fourth row)
+yellow/red/black card/unterbrechung: document time (in fourth row)
 	add test (with / without referee)
 	implement
 	thank Günter Wagner
@@ -127,6 +141,8 @@ improve display mode
 
 BVM-Support
 	Upload via SFTP
+
+publish to turnier.de
 
 bldemo: Active match should be on court 1
 bldemo: without started matches (bldemo_inprogress?)

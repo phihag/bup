@@ -1,19 +1,20 @@
 'use strict';
 
-var ws_module = require('ws');
-var node_crypto = require('crypto');
+const os = require('os');
 
-var bup = require('../js/bup.js');
+const node_crypto = require('crypto');
+const ws_module = require('ws');
+
+const bup = require('../js/bup.js');
 
 const DEFAULT_CONFIG = {
 	port: 3001,
+	keepalive: 180000, // (keepalive as a satellite) 3 minutes
 };
 
 function verify_client(info) {
-	if (info.req.headers['sec-websocket-protocol'] !== 'bup-refmode') {
-		return false;
-	}
-	return true;
+	const proto = info.req.headers['sec-websocket-protocol'];
+	return ['bup-refmode', 'bup-refmode-hub2hub'].includes(proto);
 }
 
 function send(ws, msg) {
@@ -26,6 +27,10 @@ function send_error(ws, emsg) {
 		type: 'error',
 		message: emsg,
 	});
+}
+
+function remote_ip(ws) {
+	return ws.upgradeReq.headers['x-forwarded-for'] || ws.upgradeReq.connection.remoteAddress;
 }
 
 function send_referee_list(wss, clients) {
@@ -214,6 +219,19 @@ function handle_msg(wss, ws, msg) {
 		msg.from = cd.id;
 		send(receiver, msg);
 		break;
+	case 'register-hub':
+		const ip = remote_ip(ws);
+		if (! /^wss?:\/\//.test(msg.local_addr)) {
+			send_error(ws, 'Missing or invalid local_addr ' + JSON.stringify(msg.local_addr));
+			return;
+		}
+		wss.hub_map.set(ip, {local_addr: msg.local_addr, conn_id: cd.id});
+		send(ws, {
+			type: 'hub-registered',
+			public_ip: ip,
+			local_addr: msg.local_addr,
+		});
+		break;
 	case 'error':
 		console.log('Received error: ', msg.message);
 		break;
@@ -222,16 +240,94 @@ function handle_msg(wss, ws, msg) {
 	}
 }
 
+function determine_local_ip() {
+	// Adapted from http://stackoverflow.com/a/8440736/35070
+	const ifaces = bup.utils.values(os.networkInterfaces());
+
+	for (const iface of ifaces) {
+		for (const addr of iface) {
+			if ((addr.family === 'IPv4') && !addr.internal) {
+				return addr.address;
+			}
+		}
+	}
+	throw new Error('Cannot determine local IP address');
+}
+
+function register(config) {
+	if (!config.root_hub) {
+		return;
+	}
+
+	let local_addr = config.local_addr;
+	if (!local_addr) {
+		let local_ip = determine_local_ip();
+		if (local_ip.includes(':')) { // IPv6
+			local_ip = `[${local_ip}]`;
+		}
+		local_addr = 'ws://' + local_ip + ':' + config.port + '/';
+	}
+
+	const ws = new ws_module(config.root_hub, 'bup-refmode-hub2hub');
+	let keepalive_interval;
+	let request_id = 0;
+	let err = false;
+
+	console.log('Registering at ' + config.root_hub + ' ...');
+	ws.on('open', function() {
+		send(ws, {
+			type: 'register-hub',
+			local_addr: local_addr,
+		});
+		keepalive_interval = setInterval(function() {
+			send(ws, {
+				type: 'keepalive',
+				rid: request_id++,
+				sent: Date.now(),
+			});
+		}, config.keepalive);
+	});
+	ws.onerror = function(e) {
+		err = true;
+		console.log('Error on hub registration: ' + e.message + '. Will retry later.');
+	};
+	ws.on('message', function(msg_json) {
+		const msg = JSON.parse(msg_json);
+		switch (msg.type) {
+		case 'hub-registered':
+			console.log('Registered at ' + config.root_hub + ': ' + msg.public_ip + ' -> ' + msg.local_addr);
+			break;
+		case 'error':
+			console.log('Received error: ', msg.message);
+			break;
+		case 'keptalive':
+		case 'welcome':
+			// Ignore
+			break;
+		default:
+			send_error(ws, 'Unsupported message type ' + msg.type);
+		}
+	});
+	ws.on('close', function() {
+		if (!err) {
+			console.log('Connection to root lost, reconnecting ...');
+		}
+		setTimeout(register, 10000, config);
+		clearInterval(keepalive_interval);
+	});
+}
+
 function hub(config) {
 	if (!config) {
 		config = DEFAULT_CONFIG;
 	}
 
-	var wss = new ws_module.Server({port: config.port, verifyClient: verify_client});
-	var conn_counter = 0;
+	const wss = new ws_module.Server({port: config.port, verifyClient: verify_client});
+	let conn_counter = 0;
+	wss.hub_map = new Map(); // IP address -> {local_addr:, conn_id:}
 
 	wss.on('connection', function(ws) {
-		var cd = {
+		const cd = {
 			connected_to: [],
 			id: conn_counter++,
 		};
@@ -241,7 +337,7 @@ function hub(config) {
 			cd.challenge = buffer.toString('hex');
 			send(ws, {
 				'type': 'welcome',
-				'challenge': cd.challenge,
+				challenge: cd.challenge,
 			});
 		});
 
@@ -268,8 +364,21 @@ function hub(config) {
 					});
 				}
 			}
+
+			const to_delete = [];
+			for (const [ip, hub_data] of wss.hub_map) {
+				if (hub_data.conn_id === leaving_id) {
+					to_delete.push(ip);
+				}
+			}
+			for (const ip of to_delete) {
+				wss.hub_map.delete(ip);
+			}
 		});
 	});
+
+	register(config);
+
 	return wss;
 }
 
@@ -282,9 +391,11 @@ function parse_args(argv) {
 		console.log('Usage: refmode_hub [JSON_CONFIG]');
 		console.log('JSON keys are:');
 		console.log('  port        Integer of port to bind to');
-		console.log('  register_at String of websocket address of root server to register at.');
-		console.log('              e.g. "register_at": "wss://live.aufschlagwechsel.de/refmode_hub/"');
+		console.log('  root_hub    String of websocket address of root server to register at.');
+		console.log('              e.g. "root_hub": "wss://live.aufschlagwechsel.de/refmode_hub/"');
 		console.log('  local_addr  String of websocket address of this server in the local network.');
+		console.log('              Autodetermined if missing.');
+		console.log('  keepalive   Duration in ms when to send keepalive messages');
 		process.exit(1);
 	}
 
