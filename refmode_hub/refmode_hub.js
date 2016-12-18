@@ -83,6 +83,21 @@ function connect(referee, client) {
 	});
 }
 
+function register_hub(wss, ws, msg) {
+	const ip = remote_ip(ws);
+	if (! /^wss?:\/\//.test(msg.local_addr)) {
+		send_error(ws, 'Missing or invalid local_addr ' + JSON.stringify(msg.local_addr));
+		return;
+	}
+	wss.hub_map.set(ip, {local_addr: msg.local_addr, conn_id: ws.conn_data.id});
+	send(ws, {
+		type: 'hub-registered',
+		public_ip: ip,
+		local_addr: msg.local_addr,
+	});
+
+}
+
 function _client_by_id(wss, id) {
 	for (const c of wss.clients) {
 		if (c.conn_data.id === id) {
@@ -220,17 +235,7 @@ function handle_msg(wss, ws, msg) {
 		send(receiver, msg);
 		break;
 	case 'register-hub':
-		const ip = remote_ip(ws);
-		if (! /^wss?:\/\//.test(msg.local_addr)) {
-			send_error(ws, 'Missing or invalid local_addr ' + JSON.stringify(msg.local_addr));
-			return;
-		}
-		wss.hub_map.set(ip, {local_addr: msg.local_addr, conn_id: cd.id});
-		send(ws, {
-			type: 'hub-registered',
-			public_ip: ip,
-			local_addr: msg.local_addr,
-		});
+		register_hub(wss, ws, msg);
 		break;
 	case 'error':
 		console.log('Received error: ', msg.message);
