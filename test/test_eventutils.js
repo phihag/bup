@@ -44,21 +44,21 @@ _describe('eventutils', function() {
 					court_id:'2',
 					timestamp:1482068711532,
 				}, {
-					type:'pick_server',
-					team_id:1,
-					player_id:0,
-					timestamp:1482068712227,
+					type: 'pick_server',
+					team_id: 1,
+					player_id: 0,
+					timestamp: 1482068712227,
 				}, {
-					'type':'pick_receiver',
-					team_id:0,
-					player_id:0,
-					timestamp:1482068712769,
+					type: 'pick_receiver',
+					team_id: 0,
+					player_id: 0,
+					timestamp: 1482068712769,
 				}, {
-					type:'love-all',
-					timestamp:1482068714598,
+					type: 'love-all',
+					timestamp: 1482068714598,
 				}, {
-					type:'score',
-					side:'right',
+					type: 'score',
+					side: 'right',
 					timestamp: 1482068715266,
 				}, {
 					type: 'disqualified',

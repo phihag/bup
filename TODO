@@ -1,5 +1,6 @@
 Button Vollbildmodus klappt nicht (auf Tablets?)
-enable sourcemap
+auto go fullscreen with any click when set that way
+enable sourcemap?
 
 refmode
 	install on liveaw as service
@@ -23,10 +24,9 @@ refmode
 omit error network could not be connected in displaymode
 font size should be larger in single-court display
 Spielbericht: Ersatzspieler etc.
-auto go fullscreen with any click when set that way
 clicking on match should go to match if match is the current one, don't reload from server
 Reihenfolge: improve printing
-Cornelia Schröder
+Cornelia Schröder: redesign display when
 
 Aufstellung (unter editevent)
 	new field present_players
@@ -115,6 +115,7 @@ pick referee court if starting with displaymode
 
 improve display mode
 	like den-ger
+	show team colors (blue-white refrath etc., as a square, maybe with two triangles)
 	test that settings change has immediate effect (UI)
 	large numbers display mode (larger than now, maybe two courts, game count)
 	add lock functionality
