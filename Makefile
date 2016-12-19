@@ -128,7 +128,7 @@ run-hub:
 	node refmode_hub/refmode_hub.js
 
 install-hub: deps
-	sudo sed -e "s#BUP_ROOT_DIR#$$PWD#" refmode_hub/buphub.service.template > /etc/systemd/system/buphub.service
+	sed -e "s#BUP_ROOT_DIR#$$PWD#" refmode_hub/buphub.service.template | sudo tee /etc/systemd/system/buphub.service >/dev/null
 	sudo chmod +x /etc/systemd/system/buphub.service
 	systemctl enable buphub
 	systemctl start buphub

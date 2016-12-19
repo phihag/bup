@@ -2,13 +2,11 @@ refmode
 	install on liveaw as service
 	install apache
 	redirect from live.aw
-		argparse hub
 		after 10 failures of satellite go back to main
 		show satellite in UI
 		allow to clear satellite
 
 	live push updates (only last press)
-
 	show event matches
 	show version if older than current (if current dev then if older than any known)
 	show match state (21:4 finished)
@@ -16,15 +14,6 @@ refmode
 	flickers when no hub
 	disabling should turn off referee mode
 	test with multiple referees
-
-omit error network could not be connected in displaymode
-font size should be larger in single-court display
-Spielbericht: Ersatzspieler etc.
-BuLi-Spielbericht als PDF / direkt ausdrucken (-> Janine)
-clicking on match should go to match if match is the current one, don't reload from server
-Reihenfolge: improve printing
-Cornelia Schröder: redesign display to select server / receiver
-auto go fullscreen with any click when set that way
 
 Aufstellung (unter editevent)
 	new field present_players
@@ -39,6 +28,15 @@ Aufstellung (unter editevent)
 	XLSX
 	edit present players in editevent
 	CourtSpot: import league
+
+omit error network could not be connected in displaymode
+font size should be larger in single-court display
+Spielbericht: Ersatzspieler etc.
+BuLi-Spielbericht als PDF / direkt ausdrucken (-> Janine)
+clicking on match should go to match if match is the current one, don't reload from server
+Reihenfolge: improve printing
+Cornelia Schröder: redesign display to select server / receiver
+auto go fullscreen with any click when set that way
 
 improve jticker
 	auto-switch after download
