@@ -8,4 +8,4 @@ User=buphub
 Group=buphub
 
 [Install]
-WantedBy=mult
+WantedBy=multi-user.target
