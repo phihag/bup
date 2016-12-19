@@ -55,16 +55,21 @@ function toggle() {
 	}
 }
 
+function update_fullscreen_button() {
+	uiu.text_qs('.fullscreen_button',
+		state._(active() ? 'settings:Leave Fullscreen' : 'settings:Go Fullscreen')
+	);
+}
+
 function ui_init() {
-	$(document).on('webkitfullscreenchange mozfullscreenchange fullscreenchange MSFullscreenChange', function() {
-		uiu.text_qs('.fullscreen_button',
-			state._(active() ? 'settings:Leave Fullscreen' : 'settings:Go Fullscreen')
-		);
+	['webkitfullscreenchange', 'mozfullscreenchange', 'fullscreenchange', 'MSFullscreenChange'].forEach(function(event_name) {
+		document.addEventListener(event_name, update_fullscreen_button);
 	});
 
 	if (! supported()) {
-		$('.fullscreen_line').hide();
+		uiu.hide_qs('.fullscreen_line');
 	}
+
 	click.qs('.fullscreen_button', function() {
 		toggle();
 	});
@@ -76,19 +81,15 @@ function autostart() {
 	}
 	var go_fullscreen_hide = function() {
 		uiu.esc_stack_pop();
-		$('#go_fullscreen_wrapper').hide();
+		uiu.hide_qs('#go_fullscreen_wrapper');
 	};
 
-	$('.go_fullscreen_normal').on('click', function(e) {
-		e.preventDefault();
+	click.qs('.go_fullscreen_normal', function() {
 		go_fullscreen_hide();
-		return false;
 	});
-	$('.go_fullscreen_go').on('click', function(e) {
-		e.preventDefault();
+	click.qs('.go_fullscreen_go', function() {
+		toggle();
 		go_fullscreen_hide();
-		start();
-		return false;
 	});
 	uiu.esc_stack_push(go_fullscreen_hide);
 

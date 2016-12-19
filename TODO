@@ -1,7 +1,3 @@
-Button Vollbildmodus klappt nicht (auf Tablets?)
-auto go fullscreen with any click when set that way
-enable sourcemap?
-
 refmode
 	install on liveaw as service
 	install apache
@@ -24,9 +20,11 @@ refmode
 omit error network could not be connected in displaymode
 font size should be larger in single-court display
 Spielbericht: Ersatzspieler etc.
+BuLi-Spielbericht als PDF / direkt ausdrucken (-> Janine)
 clicking on match should go to match if match is the current one, don't reload from server
 Reihenfolge: improve printing
-Cornelia Schröder: redesign display when
+Cornelia Schröder: redesign display to select server / receiver
+auto go fullscreen with any click when set that way
 
 Aufstellung (unter editevent)
 	new field present_players
