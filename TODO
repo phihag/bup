@@ -1,5 +1,7 @@
 refmode
-	install apache
+	show error in UI
+	fix signature validation
+
 	redirect from live.aw
 		after 10 failures of satellite go back to main
 		show satellite in UI

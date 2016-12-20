@@ -127,7 +127,7 @@ function handle_msg(wss, ws, msg) {
 		var challenge_data = bup.utils.encode_utf8(cd.challenge);
 		bup.key_utils.verify(msg.pub_json, challenge_data, msg.sig, function(err, is_valid) {
 			if (err) {
-				send_error(ws, 'Failed to validate signature');
+				send_error(ws, 'Failed to validate signature: ' + err.message);
 				return;
 			}
 

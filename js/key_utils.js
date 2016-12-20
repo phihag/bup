@@ -8,6 +8,7 @@ var ALGO = {
 var SIGN_ALGO = {
 	name: 'ECDSA',
 	hash: {name: 'SHA-256'},
+	namedCurve: 'P-256',
 };
 
 function get_subtle() {
