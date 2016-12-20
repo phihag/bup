@@ -67,7 +67,7 @@ function ui_init() {
 	});
 
 	if (! supported()) {
-		uiu.hide_qs('.fullscreen_line');
+		uiu.visible_qs('.fullscreen_line', false);
 	}
 
 	click.qs('.fullscreen_button', function() {
@@ -81,7 +81,7 @@ function autostart() {
 	}
 	var go_fullscreen_hide = function() {
 		uiu.esc_stack_pop();
-		uiu.hide_qs('#go_fullscreen_wrapper');
+		uiu.visible_qs('#go_fullscreen_wrapper', false);
 	};
 
 	click.qs('.go_fullscreen_normal', function() {
