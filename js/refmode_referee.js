@@ -39,6 +39,10 @@ function handle_change(status) {
 			register();
 		}
 	}
+	if (status.status === 'enabled') {
+		clients = [];
+		render_clients(clients);
+	}
 	handle_change_ui(status);
 }
 

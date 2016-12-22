@@ -1,12 +1,4 @@
 refmode
-	show error in UI
-	fix signature validation
-
-	redirect from live.aw
-		after 10 failures of satellite go back to main
-		show satellite in UI
-		allow to clear satellite
-
 	live push updates (only last press)
 	show event matches
 	show version if older than current (if current dev then if older than any known)
@@ -149,6 +141,7 @@ bldemo: without started matches (bldemo_inprogress?)
 ask again if resetting to 0-0 (btde)
 
 improve referee mode
+	show error in UI
 	install pseudeo network refmode_referee
 	push event to client (live changes for displaymode, make sure no loop)
 	change setting  announcements visible/not visible

@@ -5,6 +5,8 @@ var refmode_conn = function(status_cb, handle_msg) {
 var ws;
 var enabled = false;
 var ws_url;
+var sat_ws_url = null;
+var sat_fail_count = 0;
 var last_status = {
 	status: 'disabled',
 };
@@ -34,6 +36,17 @@ function handle_msg_json(e) {
 		send_error('Invalid JSON: ' + e.message);
 		return;
 	}
+	if (((msg.type === 'welcome') || (msg.type === 'redirected')) && msg.redirect) {
+		if (msg.redirect === sat_ws_url) {
+			return; // Already redirected (and prevent loops)
+		}
+
+		sat_ws_url = msg.redirect;
+		sat_fail_count = 0;
+		disconnect();
+		connect();
+		return;
+	}
 	handle_msg(msg);
 	if (msg.type === 'welcome') {
 		set_status({
@@ -52,9 +65,11 @@ function keepalive() {
 }
 
 function connect() {
-	var my_ws = new WebSocket(ws_url, 'bup-refmode');
+	var my_ws_url = sat_ws_url ? sat_ws_url : ws_url;
+	var my_ws = new WebSocket(my_ws_url, 'bup-refmode');
 	last_status = {
 		status: 'enabled',
+		local_addr: sat_ws_url,
 	};
 	status_cb(last_status);
 	ws = my_ws;
@@ -93,6 +108,10 @@ function connect() {
 		if (reconnect_timeout) {
 			clearTimeout(reconnect_timeout);
 			reconnect_timeout = null;
+			sat_fail_count++;
+			if (sat_fail_count > 10) {
+				sat_ws_url = null; // retry original URL
+			}
 		}
 		if (keepalive_interval) {
 			clearInterval(keepalive_interval);
@@ -129,6 +148,9 @@ function on_settings_change(new_enabled, new_ws_url, network_timeout) {
 	}
 
 	if (changed) {
+		sat_ws_url = null;
+		sat_fail_count = 0;
+
 		disconnect();
 		if (enabled) {
 			connect();
@@ -156,6 +178,10 @@ function send(msg) {
 
 	if (ws.readyState === 0) { // Still connecting
 		outstanding_msgs.push(msg);
+		return;
+	}
+
+	if (ws.readyState !== 1) { // Closing
 		return;
 	}
 

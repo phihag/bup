@@ -220,6 +220,7 @@ var i18n_en = {
 'settings:refmode:client:status': 'Referee (highly experimental):',
 'settings:refmode:client:node_name': 'Device name:',
 'settings:refmode:ws_url': 'Hub URL:',
+'settings:refmode:redirected': 'Local Hub: ',
 
 'settings:mode:label': 'Mode:',
 'settings:mode:umpire': 'Umpire',

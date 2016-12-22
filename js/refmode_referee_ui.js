@@ -3,9 +3,17 @@
 var refmode_referee_ui = (function() {
 var rr;
 
-function on_status_change() {
-	if (rr) {
-		uiu.text_qs('.refmode_referee_status', rr.status_str(state));
+function on_status_change(new_status) {
+	if (!rr) {
+		return;
+	}
+
+	uiu.text_qs('.refmode_referee_status', rr.status_str(state));
+	if (new_status.status === 'enabled') {
+		uiu.visible_qs('.refmode_referee_redir', !!new_status.local_addr);
+		if (new_status.local_addr) {
+			uiu.text_qs('.refmode_referee_redir_url', new_status.local_addr);
+		}
 	}
 }
 

@@ -84,7 +84,7 @@ function connect(referee, client) {
 }
 
 function register_hub(wss, ws, msg) {
-	const ip = remote_ip(ws);
+	const ip = ws.conn_data.ip;
 	if (! /^wss?:\/\//.test(msg.local_addr)) {
 		send_error(ws, 'Missing or invalid local_addr ' + JSON.stringify(msg.local_addr));
 		return;
@@ -96,6 +96,15 @@ function register_hub(wss, ws, msg) {
 		local_addr: msg.local_addr,
 	});
 
+	wss.clients.forEach(function(cws) {
+		if (cws === ws) return;
+		if (cws.conn_data.ip === ip) {
+			send(cws, {
+				type: 'redirected',
+				redirect: msg.local_addr,
+			});
+		}
+	})
 }
 
 function _client_by_id(wss, id) {
@@ -335,15 +344,22 @@ function hub(config) {
 		const cd = {
 			connected_to: [],
 			id: conn_counter++,
+			ip: remote_ip(ws),
 		};
 		ws.conn_data = cd;
 
 		node_crypto.randomBytes(64, function(err, buffer) {
 			cd.challenge = buffer.toString('hex');
-			send(ws, {
+			const answer = {
 				'type': 'welcome',
 				challenge: cd.challenge,
-			});
+			};
+			const client_ip = remote_ip(ws);
+			const redir = wss.hub_map.get(client_ip);
+			if (redir) {
+				answer.redirect = redir.local_addr;
+			}
+			send(ws, answer);
 		});
 
 		ws.on('message', function(msg_json) {
