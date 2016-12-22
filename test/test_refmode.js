@@ -79,7 +79,7 @@ _describe('refmode', function() {
 
 			function render_clients(clients) {
 				assert(Array.isArray(clients));
-				assert(client.length <= 1);
+				assert(clients.length <= 1);
 			}
 
 			function render_event(s) {
