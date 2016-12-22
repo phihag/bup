@@ -87,7 +87,7 @@ dist: cleandist ## Create distribution files
 	$(MAKE) appcache-manifest
 
 	find dist -exec touch --date "$$(git log -1 --date=iso | sed -n -e 's/Date:\s*\([0-9 :-]*\)+.*/\1/p')" '{}' ';'
-	cd dist && zip bup.zip bup/ -rq
+	cd dist && zip bup.zip bup/ -rqX
 
 upload: dist ## Upload to demo page
 	cp div/dist_upload_config.json dist/.upload_config.json
