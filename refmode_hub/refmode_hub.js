@@ -104,7 +104,7 @@ function register_hub(wss, ws, msg) {
 				redirect: msg.local_addr,
 			});
 		}
-	})
+	});
 }
 
 function _client_by_id(wss, id) {
