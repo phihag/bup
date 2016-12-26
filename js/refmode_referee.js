@@ -91,6 +91,9 @@ function handle_dmsg(msg) {
 			}
 		});
 		c.last_update = Date.now();
+		if (msg.hasOwnProperty('rid')) {
+			c.last_state_rid = msg.rid;
+		}
 		calc_client_title(c);
 		render_clients(clients);
 
@@ -114,13 +117,16 @@ function refresh(conn_id) {
 		return;
 	}
 
+	var rid = conn.gen_rid();
 	conn.send({
 		type: 'dmsg',
 		dtype: 'get-state',
 		to: conn_id,
 		subscribe: c.subscribed,
 		include_event_matches: true, // TODO make this more clever
+		rid: rid,
 	});
+	return rid;
 }
 
 function update_settings(conn_id, new_settings) {

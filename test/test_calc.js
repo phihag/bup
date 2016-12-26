@@ -3611,4 +3611,105 @@ _describe('calc helper functions', function() {
 			duration: 120000,
 		});
 	});
+
+	_it('desc', function() {
+		var presses = [];
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(bup.calc.desc(s), 'Aufruf&Wahl');
+
+		presses.push({
+			type: 'pick_side',
+			team1_left: false,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(bup.calc.desc(s), 'Wahl wird eingegeben');
+
+		presses.push({
+			type: 'pick_server',
+			team_id: 1,
+			player_id: 1,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(bup.calc.desc(s), 'Wahl wird eingegeben');
+
+		presses.push({
+			type: 'pick_receiver',
+			team_id: 0,
+			player_id: 1,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(bup.calc.desc(s), 'Einspielen');
+
+		presses.push({
+			type: 'love-all',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(bup.calc.desc(s), '0:0');
+
+		presses.push({
+			type: 'score',
+			side: 'left',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(bup.calc.desc(s), '0:1');
+
+		press_score(presses, 9, 2);
+		press_score(presses, 1, 0);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(bup.calc.desc(s), '2:11 Pause');
+
+		press_score(presses, 0, 5);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(bup.calc.desc(s), '7:11');
+
+		press_score(presses, 10, 0);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(bup.calc.desc(s), '7:21');
+
+		presses.push({
+			type: 'postgame-confirm',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(bup.calc.desc(s), '7:21 Wahl wird eingegeben');
+
+		presses.push({
+			type: 'pick_server',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(bup.calc.desc(s), '7:21 Wahl wird eingegeben');
+
+		presses.push({
+			type: 'pick_receiver',
+			team_id: 0,
+			player_id: 0,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(bup.calc.desc(s), '7:21 Pause');
+
+		presses.push({
+			type: 'love-all',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(bup.calc.desc(s), '7:21 0:0');
+
+		presses.push({
+			type: 'disqualified',
+			team_id: 1,
+			player_id: 1,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(bup.calc.desc(s), '7:21 0:0 Abgeschlossen');
+
+		presses.push({
+			type: 'undo',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(bup.calc.desc(s), '7:21 0:0');
+
+		press_score(presses, 4, 21);
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(bup.calc.desc(s), '7:21 4:21 Abgeschlossen');
+	});
 });

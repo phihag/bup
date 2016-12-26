@@ -111,7 +111,12 @@ function on_settings_change(s) {
 		s.refclient_node_id = get_node_id();
 		rc = refmode_client(s, handle_change, initial_paired_refs);
 	}
-	rc.on_settings_change(s);
+	var enabled = rc.on_settings_change(s);
+	if (enabled) {
+		network.ui_install_refmode_client(rc);
+	} else {
+		network.ui_uninstall_refmode_client();
+	}
 }
 
 function ui_init(s) {

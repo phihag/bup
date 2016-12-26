@@ -1,14 +1,10 @@
 refmode
-	test for live updates
-	live push updates (only last press)
-	show match state (21:4 finished)
+	live push of changing event match
 	show event matches
 	show last presses
 	show version if older than current (if current dev then if older than any known)
-	push state to display (when no event set offer it as an option)
 	flickers when hub not available
 	disabling should turn off referee mode
-	test with multiple referees
 
 Aufstellung (unter editevent)
 	new field present_players
@@ -143,6 +139,9 @@ bldemo: without started matches (bldemo_inprogress?)
 ask again if resetting to 0-0 (btde)
 
 improve referee mode
+	more efficient protocol for differential changes
+	test with multiple referees
+	document direct protocol
 	show error in UI
 	install pseudeo network refmode_referee
 	push event to client (live changes for displaymode, make sure no loop)

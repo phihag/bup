@@ -27,6 +27,12 @@ var i18n_de = {
 'postmatch:label': '(Dieses Spiel wurde bereits beendet)',
 'postmatch:leave': 'Spiel verlassen',
 
+'mdesc:finished': 'Abgeschlossen',
+'mdesc:interval': 'Pause',
+'mdesc:selected': 'Aufruf&Wahl',
+'mdesc:toss': 'Wahl wird eingegeben',
+'mdesc:warmup': 'Einspielen',
+
 'report problem': 'Problem/Anregung melden',
 'report:test': 'Diagnose-Funktion testen',
 'report:subject': 'Problem mit bup',

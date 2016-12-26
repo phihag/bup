@@ -27,6 +27,12 @@ var i18n_en = {
 'postmatch:label': '(This match is over)',
 'postmatch:leave': 'Leave match',
 
+'mdesc:finished': 'finished',
+'mdesc:interval': 'interval',
+'mdesc:selected': 'preparing match',
+'mdesc:toss': 'inputing toss',
+'mdesc:warmup': 'warmup',
+
 'report problem': 'Report problem/suggestion',
 'report:test': 'Test diagnostics',
 'report:subject': 'Problem with bup',

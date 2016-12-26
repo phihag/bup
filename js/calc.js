@@ -994,13 +994,40 @@ function netscore(s, always_zero) {
 	return scores;
 }
 
-function presses2score(setup, presses) {
-	var s = {
-		setup: setup,
-		presses: presses,
-	};
-	state(s);
-	return netscore(s);
+function remote_state(s, setup, presses) {
+	var res = s ? copy_state(s) : {};
+	res.metadata = {};
+	init_state(res, setup, presses, true);
+	state(res);
+	return res;
+}
+
+// A human-readable decscription of the current state of the match
+function desc(s) {
+	var res = s.match.finished_games.map(function(g) {
+		return g.score.join(':');
+	}).join(' ');
+	if (! s.match.finish_confirmed && (s.game.started || s.match.finished)) {
+		res += (res ? ' ' : '') + s.game.score.join(':');
+	}
+	if (s.game.interval) {
+		res += ' ' + s._('mdesc:interval');
+	}
+	if (s.match.finished) {
+		res += ' ' + s._('mdesc:finished');
+	}
+	if (!s.game.started) {
+		res += (res ? ' ' : '') + s._(
+			((s.game.start_team1_left === null) ?
+			'mdesc:selected' :
+			(((s.game.start_server_player_id === null) || (s.game.start_receiver_player_id === null)) ?
+			'mdesc:toss' :
+			((s.match.finished_games.length > 0) ?
+			'mdesc:interval' :
+			'mdesc:warmup'
+		))));
+	}
+	return res;
 }
 
 return {
@@ -1008,6 +1035,7 @@ return {
 	calc_press: calc_press,
 	court: court,
 	copy_state: copy_state,
+	desc: desc,
 	gamescore: gamescore,
 	game_winner: game_winner,
 	init_calc: init_calc,
@@ -1025,7 +1053,7 @@ return {
 	team_carded: team_carded,
 	player_carded: player_carded,
 	undo: undo,
-	presses2score: presses2score,
+	remote_state: remote_state,
 };
 
 })();

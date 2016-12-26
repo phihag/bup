@@ -56,11 +56,15 @@ function handle_msg_json(e) {
 	}
 }
 
+function gen_rid() {
+	return request_id++;
+}
+
 function keepalive() {
 	send({
 		type: 'keepalive',
 		sent: Date.now(),
-		rid: request_id++,
+		rid: gen_rid(),
 	});
 }
 
@@ -212,6 +216,7 @@ return {
 	set_status: set_status,
 	send: send,
 	send_error: send_error,
+	gen_rid: gen_rid,
 };
 
 };

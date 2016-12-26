@@ -203,6 +203,7 @@ function on_settings_change(s) {
 		});
 	}
 	conn.on_settings_change(enabled, s.settings.refmode_client_ws_url, s.settings.network_timeout);
+	return enabled;
 }
 
 function status_str(s) {
@@ -244,13 +245,29 @@ function get_paired_referees() {
 	return paired_referees;
 }
 
+function net_send_press(s, press) {
+	subscriptions.forEach(function(conn_id) {
+		conn.send({
+			type: 'dmsg',
+			dtype: 'state',
+			to: conn_id,
+			presses: s.presses,
+			press: press,
+			setup: s.setup,
+		});
+	});
+}
+
 return {
 	get_paired_referees: get_paired_referees,
 	on_settings_change: on_settings_change,
+	net_send_press: net_send_press,
 	status_str: status_str,
 	list_referees: list_referees,
 	connect_to_referee: connect_to_referee,
 	disconnect_referee: disconnect_referee,
+	// Testing only
+	_subscriptions: subscriptions,
 };
 
 });

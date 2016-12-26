@@ -196,12 +196,21 @@ function render_clients(clients) {
 			(c.settings ? c.settings.court_id : '') +
 			((c.settings && c.settings.court_description) ? (' (' + c.settings.court_description + ')') : ''));
 
-		var match_row = uiu.create_el(div, 'div', {}, s._('refmode:referee:match'));
+		var match_row = uiu.create_el(div, 'div', {
+			'class': 'referee_c_match_row',
+		}, s._('refmode:referee:match'));
 		if (c.setup) {
 			var match_link = uiu.create_el(match_row, 'span', {
 				'class': 'js_link',
 			}, c.setup.match_name);
 			click.on(match_link, on_client_match_link_click);
+
+			if (c.presses) {
+				var client_state = calc.remote_state(s, c.setup, c.presses);
+				uiu.create_el(match_row, 'span', {
+					'class': 'referee_c_match_status',
+				}, calc.desc(client_state));
+			}
 		}
 		if (c.event && ev && ev.matches && (c.event.id === ev.id)) {
 			var match_change_form = uiu.create_el(match_row, 'form', {
@@ -216,7 +225,6 @@ function render_clients(clients) {
 			});
 			uiu.create_el(change_match_sel, 'option', {
 				value: '',
-				disabled: 'disabled',
 				selected: 'selected',
 			}, '');
 			ev.matches.forEach(function(m) {
@@ -331,6 +339,7 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var calc = require('./calc');
 	var control = require('./control');
 	var click = require('./click');
 	var displaymode = require('./displaymode');

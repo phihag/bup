@@ -77,7 +77,7 @@ type*            What kind of button has been pressed. Determines the other keys
  "postmatch-confirm"    Confirmation after announcement at end of match
  "postinterval-confirm" Resuming play after an interval
  "score"         A normal rally has been won.
-    side*          Either "left" or "right", depending on who won the rallye.
+    side*          Either "left" or "right", depending on who won the rally.
  "overrule"      Line judge has been overruled (O in scoresheet)
  "referee"       Referee has been called (R in scoresheet)
  "correction"    Incorrect server/receiver has been corrected (C in scoresheet)

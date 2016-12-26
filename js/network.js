@@ -61,6 +61,10 @@ function send_press(s, press) {
 		});
 	}
 
+	if (networks.refmode_client) {
+		networks.refmode_client.net_send_press(s, press);
+	}
+
 	var netw = get_netw();
 	if (netw) {
 		netw.send_press(s, press);
@@ -606,6 +610,14 @@ function on_edit_event(s) {
 	netw.on_edit_event(s);
 }
 
+function ui_install_refmode_client(rc) {
+	networks.refmode_client = rc;
+}
+
+function ui_uninstall_refmode_client() {
+	delete networks.refmode_client;
+}
+
 return {
 	calc_team0_left: calc_team0_left,
 	courts: courts,
@@ -625,6 +637,8 @@ return {
 	ui_install_staticnet: ui_install_staticnet,
 	ui_list_matches: ui_list_matches,
 	ui_uninstall_staticnet: ui_uninstall_staticnet,
+	ui_install_refmode_client: ui_install_refmode_client,
+	ui_uninstall_refmode_client: ui_uninstall_refmode_client,
 };
 
 

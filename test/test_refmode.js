@@ -147,10 +147,15 @@ _describe('refmode', function() {
 			assert(c);
 			c.subscribed = false;
 			client.test_handlers = [];
+			var rid;
 			referee.test_render_clients = function(clients) {
 				assert(Array.isArray(clients));
 				assert.strictEqual(clients.length, 1);
 				var c = clients[0];
+				if (c.last_state_rid !== rid) {
+					return; // Call from prior event espousing business
+				}
+
 				assert.deepStrictEqual(c.id, referee.test_client0_id);
 				assert.deepStrictEqual(c.subscribed, false);
 				assert.deepStrictEqual(c.event, client.test_state.event);
@@ -158,10 +163,11 @@ _describe('refmode', function() {
 				// We should now go and espouse the event automatically
 				if (referee.test_state.event) {
 					assert.deepStrictEqual(referee.test_state.event, c.event);
+					assert.deepStrictEqual(client._subscriptions, []);
 					cb(null, client, referee);
 				}
 			};
-			referee.refresh(client.test_client_id);
+			rid = referee.refresh(referee.test_client0_id);
 		}, function(client, referee, cb) {
 			// Select a match on client, expect it seen on referee as soon as we refresh
 			referee.test_render_clients = function(clients) {
@@ -172,7 +178,8 @@ _describe('refmode', function() {
 				assert.deepStrictEqual(c.subscribed, false);
 				assert.deepStrictEqual(c.setup.match_id, 'testbl_HE2');
 				assert.deepStrictEqual(c.presses, []);
-				var nscore = bup.calc.presses2score(c.setup, c.presses);
+				var remote_state = bup.calc.remote_state({}, c.setup, c.presses);
+				var nscore = bup.calc.netscore(remote_state);
 				assert.deepStrictEqual(nscore, []);
 				cb(null, client, referee);
 			};
@@ -182,28 +189,142 @@ _describe('refmode', function() {
 			assert.deepStrictEqual(he2.setup.match_id, 'testbl_HE2');
 			bup.calc.init_state(s, he2.setup);
 			bup.calc.state(s);
-			referee.refresh(referee.test_client0_id);
-		}, function(client, referee, cb) {
-			cb();
-			/*
-			bup.network.send_press(s, {
+			assert.deepStrictEqual(bup.calc.netscore(s), []);
+			client.net_send_press(s, {
 				type: '_start_match',
 			});
-			*/
+			referee.refresh(referee.test_client0_id);
+		}, function(client, referee, cb) {
+			var all_presses;
+			referee.test_render_clients = function(clients) {
+				assert(Array.isArray(clients));
+				assert.strictEqual(clients.length, 1);
+				var c = clients[0];
+				assert.deepStrictEqual(c.id, referee.test_client0_id);
+				assert.deepStrictEqual(c.subscribed, false);
+				assert.deepStrictEqual(c.setup.match_id, 'testbl_HE2');
+				assert.deepStrictEqual(c.presses, all_presses);
+				var remote_state = bup.calc.remote_state({}, c.setup, c.presses);
+				var nscore = bup.calc.netscore(remote_state);
+				assert.deepStrictEqual(nscore, [[2, 0]]);
+				cb(null, client, referee);
+			};
 
-			// TODO add point on client
-			// TODO refresh without subscribe
-			// TODO server should have that point
-			// TODO refresh with subscribe
-			// TODO + press on client
-			// TODO check server got it
-			// TODO + press on client
-			// TODO + press on client
-			// TODO check server got it
-			// TODO client changes match
-			// TODO server should now client at a different match
-			// TODO + press on client
-			// TODO check server got it
+			var s = client.test_state;
+			var press = {
+				type: 'pick_side',
+				team1_left: true,
+			};
+			s.presses.push(press);
+			bup.calc.state(s);
+			client.net_send_press(s, press);
+
+			press = {
+				type: 'pick_server',
+				team_id: 0,
+				player_id: 0,
+			};
+			s.presses.push(press);
+			bup.calc.state(s);
+			client.net_send_press(s, press);
+
+			press = {
+				type: 'love-all',
+			};
+			s.presses.push(press);
+			bup.calc.state(s);
+			assert.deepStrictEqual(bup.calc.netscore(s), [[0, 0]]);
+			client.net_send_press(s, press);
+
+			press = {
+				type: 'score',
+				side: 'left',
+			};
+			s.presses.push(press);
+			bup.calc.state(s);
+			client.net_send_press(s, press);
+
+			press = {
+				type: 'score',
+				side: 'left',
+				timestamp: 1000,
+			};
+			s.presses.push(press);
+			bup.calc.state(s);
+			client.net_send_press(s, press);
+
+			all_presses = bup.utils.deep_copy(s.presses);
+			referee.refresh(referee.test_client0_id);
+		}, function(client, referee, cb) {
+			referee.test_render_clients = function(clients) {
+				assert(Array.isArray(clients));
+				assert.strictEqual(clients.length, 1);
+				var c = clients[0];
+				assert.deepStrictEqual(c.id, referee.test_client0_id);
+				assert.deepStrictEqual(c.subscribed, true);
+				assert.deepStrictEqual(c.setup.match_id, 'testbl_HE2');
+				assert.deepStrictEqual(c.presses, client.test_state.presses);
+				var remote_state = bup.calc.remote_state({}, c.setup, c.presses);
+				var nscore = bup.calc.netscore(remote_state);
+				assert.deepStrictEqual(nscore, [[2, 0]]);
+				cb(null, client, referee);
+			};
+			var cd = referee.client_by_conn_id(referee.test_client0_id);
+			cd.subscribed = true;
+			referee.refresh(referee.test_client0_id);
+		}, function(client, referee, cb) {
+			referee.test_render_clients = function(clients) {
+				assert(Array.isArray(clients));
+				assert.strictEqual(clients.length, 1);
+				var c = clients[0];
+				assert.deepStrictEqual(c.id, referee.test_client0_id);
+				assert.deepStrictEqual(c.subscribed, true);
+				assert.deepStrictEqual(c.setup.match_id, 'testbl_HE2');
+				assert.deepStrictEqual(c.presses, client.test_state.presses);
+				var remote_state = bup.calc.remote_state({}, c.setup, c.presses);
+				var nscore = bup.calc.netscore(remote_state);
+				assert.deepStrictEqual(nscore, [[3, 0]]); // changed
+				cb(null, client, referee);
+			};
+			var s = client.test_state;
+			var press = {
+				type: 'score',
+				side: 'left',
+				timestamp: 2000,
+			};
+			s.presses.push(press);
+			bup.calc.state(s);
+			client.net_send_press(s, press);
+			// No refresh - client should send automatically now
+		}, function(client, referee, cb) {
+			referee.test_render_clients = function(clients) {
+				assert(Array.isArray(clients));
+				assert.strictEqual(clients.length, 1);
+				var c = clients[0];
+				assert.deepStrictEqual(c.id, referee.test_client0_id);
+				assert.deepStrictEqual(c.subscribed, true);
+				assert.deepStrictEqual(c.setup.match_id, 'testbl_HE2');
+				assert.deepStrictEqual(c.presses, client.test_state.presses);
+				var remote_state = bup.calc.remote_state({}, c.setup, c.presses);
+				var nscore = bup.calc.netscore(remote_state);
+				assert.deepStrictEqual(nscore, [[4, 0]]); // changed
+				cb(null, client, referee);
+			};
+			var s = client.test_state;
+			var press = {
+				type: 'score',
+				side: 'left',
+				timestamp: 3000,
+			};
+			s.presses.push(press);
+			bup.calc.state(s);
+			client.net_send_press(s, press);
+			// No refresh - client should send automatically now
+		}, function(client, referee, cb) {
+			// TODO switch match
+			// TODO server should now know client is at a different match
+			// TODO event status should still be correct for the HE2
+			cb();
 		}], done);
 	});
 });
