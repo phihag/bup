@@ -79,11 +79,13 @@ function handle_dmsg(msg) {
 
 		var ev = s.event;
 		if (ev) {
-			answer.event = {
-				id: ev.id,
-				event_name: ev.event_name,
-				tournament_name: ev.tournament_name,
-			};
+			answer.event = utils.pluck(ev, [
+				'id', 'event_name', 'tournament_name',
+				'courts',
+				'location', 'protest', 'matchday', 'starttime', 'notes',
+				'team_competition', 'team_names', 'league_key',
+				'all_players', 'backup_players', 'present_players',
+			]);
 
 			if (msg.include_event_matches && ev.matches) {
 				answer.event.matches = ev.matches.map(function(m) {

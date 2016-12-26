@@ -1,10 +1,12 @@
 refmode
+	test for live updates
 	live push updates (only last press)
-	show event matches
-	show version if older than current (if current dev then if older than any known)
 	show match state (21:4 finished)
+	show event matches
+	show last presses
+	show version if older than current (if current dev then if older than any known)
 	push state to display (when no event set offer it as an option)
-	flickers when no hub
+	flickers when hub not available
 	disabling should turn off referee mode
 	test with multiple referees
 
@@ -154,6 +156,7 @@ improve referee mode
 	more efficient rendering (client.updated)
 	test that battery stays current
 	show current network state
+	test two clients at the same match
 
 Notiz an Spielernamen (-> Werner Durow)
 
