@@ -1,6 +1,6 @@
 'use strict';
 
-var refmode_referee = (function(handle_change_ui, render_clients, render_event, key_storage) {
+var refmode_referee = (function(s, handle_change_ui, render_clients, render_event, key_storage) {
 var conn = refmode_conn(handle_change, handle_msg);
 var key;
 var key_err;
@@ -94,8 +94,8 @@ function handle_dmsg(msg) {
 		calc_client_title(c);
 		render_clients(clients);
 
-		if (!state.event && c.event) {
-			espouse_event(state, c);
+		if (!s.event && c.event) {
+			espouse_event(c);
 		}
 		break;
 	default:
@@ -202,11 +202,11 @@ function handle_msg(msg) {
 	}
 }
 
-function on_settings_change(s) {
+function on_settings_change() {
 	conn.on_settings_change(true, s.settings.refmode_referee_ws_url, s.settings.network_timeout);
 }
 
-function status_str(s) {
+function status_str() {
 	if (key_err) {
 		return s._('refmode:keygen failed', {
 			message: key_err.message,
@@ -219,7 +219,7 @@ function status_str(s) {
 	return conn.status_str(s);
 }
 
-function espouse_event(s, c) {
+function espouse_event(c) {
 	s.event = c.event;
 	render_event(s);
 	render_clients(clients);

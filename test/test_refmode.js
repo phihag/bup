@@ -91,7 +91,7 @@ _describe('refmode', function() {
 				}
 			}
 
-			var referee = bup.refmode_referee(on_change, function(clients) {
+			var referee = bup.refmode_referee(server_state, on_change, function(clients) {
 				referee.test_render_clients(clients);
 			}, function(s) {
 				referee.test_render_event(s);
@@ -155,10 +155,42 @@ _describe('refmode', function() {
 				assert.deepStrictEqual(c.subscribed, false);
 				assert.deepStrictEqual(c.event, client.test_state.event);
 				assert.deepStrictEqual(c.event.matches.length, 7);
-				cb(null, client, referee);
+				// We should now go and espouse the event automatically
+				if (referee.test_state.event) {
+					assert.deepStrictEqual(referee.test_state.event, c.event);
+					cb(null, client, referee);
+				}
 			};
 			referee.refresh(client.test_client_id);
 		}, function(client, referee, cb) {
+			// Select a match on client, expect it seen on referee as soon as we refresh
+			referee.test_render_clients = function(clients) {
+				assert(Array.isArray(clients));
+				assert.strictEqual(clients.length, 1);
+				var c = clients[0];
+				assert.deepStrictEqual(c.id, referee.test_client0_id);
+				assert.deepStrictEqual(c.subscribed, false);
+				assert.deepStrictEqual(c.setup.match_id, 'testbl_HE2');
+				assert.deepStrictEqual(c.presses, []);
+				var nscore = bup.calc.presses2score(c.setup, c.presses);
+				assert.deepStrictEqual(nscore, []);
+				cb(null, client, referee);
+			};
+
+			var s = client.test_state;
+			var he2 = s.event.matches[6];
+			assert.deepStrictEqual(he2.setup.match_id, 'testbl_HE2');
+			bup.calc.init_state(s, he2.setup);
+			bup.calc.state(s);
+			referee.refresh(referee.test_client0_id);
+		}, function(client, referee, cb) {
+			cb();
+			/*
+			bup.network.send_press(s, {
+				type: '_start_match',
+			});
+			*/
+
 			// TODO add point on client
 			// TODO refresh without subscribe
 			// TODO server should have that point
@@ -172,7 +204,6 @@ _describe('refmode', function() {
 			// TODO server should now client at a different match
 			// TODO + press on client
 			// TODO check server got it
-			cb();
 		}], done);
 	});
 });

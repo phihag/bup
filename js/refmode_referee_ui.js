@@ -29,7 +29,7 @@ function on_espouse_btn_click(e) {
 	var c = rr.client_by_conn_id(_client_id(e));
 	if (!c) return;
 
-	rr.espouse_event(state, c);
+	rr.espouse_event(c);
 }
 
 function on_client_match_link_click(e) {
@@ -264,9 +264,9 @@ function render_event(s) {
 	uiu.text_qs('.referee_event_title', ev.event_name);
 }
 
-function on_settings_change(s) {
+function on_settings_change() {
 	if (rr) {
-		rr.on_settings_change(s);
+		rr.on_settings_change();
 	}
 }
 
@@ -278,8 +278,8 @@ function show() {
 	delete state.event;
 
 	if (!rr) {
-		rr = refmode_referee(on_status_change, render_clients, render_event, key_storage);
-		rr.on_settings_change(state);
+		rr = refmode_referee(state, on_status_change, render_clients, render_event, key_storage);
+		rr.on_settings_change();
 	}
 
 	state.ui.referee_mode = true;

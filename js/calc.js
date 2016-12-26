@@ -994,6 +994,14 @@ function netscore(s, always_zero) {
 	return scores;
 }
 
+function presses2score(setup, presses) {
+	var s = {
+		setup: setup,
+		presses: presses,
+	};
+	state(s);
+	return netscore(s);
+}
 
 return {
 	all_games: all_games,
@@ -1017,6 +1025,7 @@ return {
 	team_carded: team_carded,
 	player_carded: player_carded,
 	undo: undo,
+	presses2score: presses2score,
 };
 
 })();
