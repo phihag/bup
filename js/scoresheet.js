@@ -992,20 +992,20 @@ function show() {
 
 	uiu.removeClass_qs('.scoresheet_container', 'scoresheet_container_multi');
 	uiu.qs('#scoresheet_note_input').focus();
-	ui_show();
+	ui_show(state);
 }
 
-function ui_show() {
+function ui_show(s) {
 	uiu.visible_qs('.scoresheet_loading-icon', true);
 	var container = uiu.qs('.scoresheet_container');
 	$(container).children('.scoresheet').remove();
 	uiu.visible(container, true);
-	load_sheet(sheet_name(state.setup), function(xml) {
+	load_sheet(sheet_name(s.setup), function(xml) {
 		var svg = make_sheet_node(xml);
 		svg.setAttribute('class', 'scoresheet single_scoresheet');
 		// Usually we'd call importNode here to import the document here, but IE/Edge then ignores the styles
 		container.appendChild(svg);
-		sheet_render(state, svg);
+		sheet_render(s, svg);
 		uiu.visible_qs('.scoresheet_loading-icon', false);
 	});
 }
@@ -1136,7 +1136,7 @@ function ui_init() {
 			type: 'note',
 			val: input.value,
 		});
-		ui_show();
+		ui_show(state);
 
 		input.value = '';
 		return false;

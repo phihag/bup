@@ -1,6 +1,6 @@
 refmode
-	link to matchsheet
 	link to stats
+	test going to stats from various links
 	show last 3 presses
 	show version if older than current (if current dev then if older than any known)
 	flickers when hub not available
@@ -9,7 +9,10 @@ refmode
 	should still get all presses of all matches after reloading refmode
 	in refere mode details block court ID and show different text there
 	change title in referee mode
-	Spielbericht
+	eventsheet
+	all scoresheets at once
+	show warning if no event on a node
+	color warning of different event red
 
 Aufstellung (unter editevent)
 	new field present_players

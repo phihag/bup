@@ -66,6 +66,17 @@ function on_event_match_link_click(e) {
 	control.start_match(state, m.setup, m.presses);
 }
 
+function on_event_match_scoresheet_click(e) {
+	var m = _event_match(e);
+	if (!m) return;
+
+	uiu.visible_qs('.referee_layout', false);
+	settings.hide_refereemode();
+	calc.init_state(state, m.setup, m.presses, false);
+	calc.state(state);
+	scoresheet.show(state);
+}
+
 function on_client_match_change_submit(e) {
 	e.preventDefault();
 
@@ -303,6 +314,11 @@ function render_event(s) {
 			uiu.create_el(name_row, 'span', {
 				'class': 'referee_e_match_status',
 			}, calc.desc(client_state));
+
+			var scoresheet_link = uiu.create_el(name_row, 'span', {
+				'class': 'js_link referee_e_link',
+			}, s._('Score Sheet'));
+			click.on(scoresheet_link, on_event_match_scoresheet_click);
 		});
 	}
 
@@ -385,6 +401,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var refmode_referee = require('./refmode_referee');
 	var render = require('./render');
 	var report_problem = require('./report_problem');
+	var scoresheet = require('./scoresheet');
 	var settings = require('./settings');
 	var uiu = require('./uiu');
 	var utils = require('./utils');

@@ -50,6 +50,9 @@
 	display: inline-block;
 	min-width: 3em;
 }
+.referee_e_link {
+	float: right;
+}
 
 .settings_container button.refmode_referee_from_settings {
 	margin: 2vh 0 0 0;
