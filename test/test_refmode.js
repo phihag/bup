@@ -452,14 +452,12 @@ _describe('refmode', function() {
 			});
 			assert(he2);
 			assert.deepStrictEqual(he2.presses.length, 7);
-			assert.deepStrictEqual(he2.network_score, [4, 0]);
 
 			var gd = bup.utils.find(ev.matches, function(m) {
 				return m.setup.match_id == 'testbl_GD';
 			});
 			assert(gd);
 			assert.deepStrictEqual(gd.presses.length, 7);
-			assert.deepStrictEqual(gd.network_score, [1, 2]);
 
 			cb();
 		}], done);
