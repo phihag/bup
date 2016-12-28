@@ -1,5 +1,4 @@
 refmode
-	show last 3 presses
 	show version if older than current (if current dev then if older than any known)
 	flickers when hub not available
 	disabling should turn off referee mode

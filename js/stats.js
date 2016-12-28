@@ -700,8 +700,11 @@ function press_description(s, press) {
 	return s._('pressdesc:' + press.type, {}, '[' + press.type + ']');
 }
 
-function render_presses(table, s) {
+function render_presses(table, s, start_at) {
 	uiu.empty(table);
+	if (!start_at) {
+		start_at = 0;
+	}
 
 	var presses = s.presses;
 	var last_ts = 0;
@@ -716,6 +719,10 @@ function render_presses(table, s) {
 		} else {
 			calc.calc_press(scopy, press);
 			scopy.flattened_presses = scopy.presses;
+		}
+
+		if (i < start_at) {
+			continue;
 		}
 
 		var desc = press_description(scopy, press);
@@ -813,6 +820,7 @@ return {
 	show: show,
 	ui_init: ui_init,
 	render_table: render_table,
+	render_presses: render_presses,
 	// testing only
 	calc_max_score: calc_max_score,
 	calc_stats: calc_stats,

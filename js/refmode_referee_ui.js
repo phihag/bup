@@ -316,7 +316,7 @@ function render_event(s) {
 				'data-match-id': m.setup.match_id,
 			});
 
-			var name_row = uiu.create_el(match_container, 'div', {});
+			var name_row = uiu.create_el(match_container, 'div');
 			var match_link = uiu.create_el(name_row, 'span', {
 				'class': 'js_link referee_e_match_name',
 			}, m.setup.match_name);
@@ -335,6 +335,14 @@ function render_event(s) {
 				'class': 'js_link referee_e_link',
 			}, s._('Score Sheet'));
 			click.on(scoresheet_link, on_event_match_scoresheet_click);
+
+			if (m.presses) {
+				var presses_table = uiu.create_el(match_container, 'table');
+				var scopy = calc.copy_state(s);
+				s.presses = m.presses;
+				s.setup = m.setup;
+				stats.render_presses(presses_table, s, m.presses.length - 3);
+			}
 		});
 	}
 
