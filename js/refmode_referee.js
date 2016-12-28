@@ -65,6 +65,31 @@ function change_match(conn_id, new_match_id) {
 	});
 }
 
+function update_match(s, msg) {
+	if (!Array.isArray(msg.presses) || !msg.setup) {
+		return; // Incomplete update request
+	}
+	if (!s.event) {
+		return;
+	}
+
+	var match = utils.find(s.event.matches, function(m) {
+		return m.setup.match_id === msg.setup.match_id;
+	});
+	if (!match) {
+		return; // Match from another event!?
+	}
+
+	if (msg.presses.length === 0) {
+		// Just entered the match, do not overwrite
+		return;
+	}
+
+	match.presses = msg.presses;
+
+	render_event(s);
+}
+
 // Handle direct messages (from clients)
 function handle_dmsg(msg) {
 	if (msg.dtype === 'error') {
@@ -95,11 +120,13 @@ function handle_dmsg(msg) {
 			c.last_state_rid = msg.rid;
 		}
 		calc_client_title(c);
-		render_clients(clients);
 
 		if (!s.event && c.event) {
 			espouse_event(c);
 		}
+		update_match(s, msg);
+
+		render_clients(clients);
 		break;
 	default:
 		conn.respond(msg, {

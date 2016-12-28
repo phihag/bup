@@ -321,9 +321,146 @@ _describe('refmode', function() {
 			client.net_send_press(s, press);
 			// No refresh - client should send automatically now
 		}, function(client, referee, cb) {
-			// TODO switch match
-			// TODO server should now know client is at a different match
-			// TODO event status should still be correct for the HE2
+			referee.test_render_clients = function(clients) {
+				assert(Array.isArray(clients));
+				assert.strictEqual(clients.length, 1);
+				var c = clients[0];
+				assert.deepStrictEqual(c.id, referee.test_client0_id);
+				assert.deepStrictEqual(c.subscribed, true);
+				if (c.setup.match_id === 'testbl_HE2') {
+					// old updates
+					return;
+				}
+				assert.deepStrictEqual(c.setup.match_id, 'testbl_GD');
+				assert.deepStrictEqual(c.presses, []);
+				var remote_state = bup.calc.remote_state({}, c.setup, c.presses);
+				var nscore = bup.calc.netscore(remote_state);
+				assert.deepStrictEqual(nscore, []); // changed
+				cb(null, client, referee);
+			};
+
+			var s = client.test_state;
+			var mx = s.event.matches[5];
+			assert.deepStrictEqual(mx.setup.match_id, 'testbl_GD');
+			bup.calc.init_state(s, mx.setup);
+			bup.calc.state(s);
+			assert.deepStrictEqual(bup.calc.netscore(s), []);
+			client.net_send_press(s, {
+				type: '_start_match',
+			});
+		}, function(client, referee, cb) {
+			referee.test_render_clients = function(clients) {
+				assert(Array.isArray(clients));
+				assert.strictEqual(clients.length, 1);
+				var c = clients[0];
+				assert.deepStrictEqual(c.id, referee.test_client0_id);
+				assert.deepStrictEqual(c.subscribed, true);
+				assert.deepStrictEqual(c.setup.match_id, 'testbl_GD');
+				assert.deepStrictEqual(c.presses, client.test_state.presses);
+				var remote_state = bup.calc.remote_state({}, c.setup, c.presses);
+				var nscore = bup.calc.netscore(remote_state);
+				assert.deepStrictEqual(nscore, []);
+				cb(null, client, referee);
+			};
+			var s = client.test_state;
+			var press = {
+				type: 'pick_side',
+				team1_left: true,
+				timestamp: 10000,
+			};
+			s.presses.push(press);
+			bup.calc.state(s);
+			client.net_send_press(s, press);
+		}, function(client, referee, cb) {
+			referee.test_render_clients = function(clients) {
+				assert(Array.isArray(clients));
+				assert.strictEqual(clients.length, 1);
+				var c = clients[0];
+				assert.deepStrictEqual(c.id, referee.test_client0_id);
+				assert.deepStrictEqual(c.subscribed, true);
+				assert.deepStrictEqual(c.setup.match_id, 'testbl_GD');
+				var remote_state = bup.calc.remote_state({}, c.setup, c.presses);
+				var nscore = bup.calc.netscore(remote_state);
+				if (!bup.utils.deep_equal(nscore, [[1, 2]])) {
+					return;
+				}
+				assert.deepStrictEqual(c.presses, client.test_state.presses);
+				cb(null, client, referee);
+			};
+			var s = client.test_state;
+			var press = {
+				type: 'pick_server',
+				team_id: 0,
+				player_id: 0,
+				timestamp: 11000,
+			};
+			s.presses.push(press);
+			bup.calc.state(s);
+			client.net_send_press(s, press);
+
+			press = {
+				type: 'pick_receiver',
+				team_id: 1,
+				player_id: 0,
+				timestamp: 12000,
+			};
+			s.presses.push(press);
+			bup.calc.state(s);
+			client.net_send_press(s, press);
+
+			press = {
+				type: 'love-all',
+				timestamp: 13000,
+			};
+			s.presses.push(press);
+			bup.calc.state(s);
+			client.net_send_press(s, press);
+
+			press = {
+				type: 'score',
+				side: 'left',
+				timestamp: 13000,
+			};
+			s.presses.push(press);
+			bup.calc.state(s);
+			client.net_send_press(s, press);
+
+			press = {
+				type: 'score',
+				side: 'right',
+				timestamp: 14000,
+			};
+			s.presses.push(press);
+			bup.calc.state(s);
+			client.net_send_press(s, press);
+
+			press = {
+				type: 'score',
+				side: 'right',
+				timestamp: 15000,
+			};
+			s.presses.push(press);
+			bup.calc.state(s);
+			client.net_send_press(s, press);
+		}, function(client, referee, cb) {
+			// Event on server should be up to date
+			var ev = referee.test_state.event;
+			assert.deepStrictEqual(ev.matches.length, 7);
+
+			var he2 = bup.utils.find(ev.matches, function(m) {
+				return m.setup.match_id == 'testbl_HE2';
+			});
+			assert(he2);
+			assert.deepStrictEqual(he2.presses.length, 7);
+			assert.deepStrictEqual(he2.network_score, [4, 0]);
+
+			var gd = bup.utils.find(ev.matches, function(m) {
+				return m.setup.match_id == 'testbl_GD';
+			});
+			assert(gd);
+			assert.deepStrictEqual(gd.presses.length, 7);
+			assert.deepStrictEqual(gd.network_score, [1, 2]);
+
 			cb();
 		}], done);
 	});

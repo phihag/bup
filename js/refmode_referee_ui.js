@@ -3,6 +3,20 @@
 var refmode_referee_ui = (function() {
 var rr;
 
+function _event_match(e) {
+	var match_el = uiu.closest_class(e.target, 'referee_e_match');
+	var match_id = match_el.getAttribute('data-match-id');
+	var res = utils.find(state.event.matches, function(m) {
+		return m.setup.match_id === match_id;
+	});
+
+	if (!res) {
+		report_problem.silent_error('Could not find match ' + match_id + ' in ' + state.event.event_name);
+		return;
+	}
+	return res;
+}
+
 function on_status_change(new_status) {
 	if (!rr) {
 		return;
@@ -40,6 +54,16 @@ function on_client_match_link_click(e) {
 	uiu.visible_qs('#game', true);
 	settings.hide_refereemode();
 	control.start_match(state, c.setup, c.presses);
+}
+
+function on_event_match_link_click(e) {
+	var m = _event_match(e);
+	if (!m) return;
+
+	uiu.visible_qs('.referee_layout', false);
+	uiu.visible_qs('#game', true);
+	settings.hide_refereemode();
+	control.start_match(state, m.setup, m.presses);
 }
 
 function on_client_match_change_submit(e) {
@@ -265,7 +289,20 @@ function render_event(s) {
 	}
 	if (ev.matches) {
 		ev.matches.forEach(function(m) {
-			uiu.create_el(matches_container, 'div', {}, m.setup.match_name);
+			var match_container = uiu.create_el(matches_container, 'div', {
+				'class': 'referee_e_match',
+				'data-match-id': m.setup.match_id,
+			});
+
+			var name_row = uiu.create_el(match_container, 'div', {});
+			var match_link = uiu.create_el(name_row, 'span', {
+				'class': 'js_link referee_e_match_name',
+			}, m.setup.match_name);
+			click.on(match_link, on_event_match_link_click);
+			var client_state = calc.remote_state(s, m.setup, m.presses); // TODO calculate this at the event
+			uiu.create_el(name_row, 'span', {
+				'class': 'referee_e_match_status',
+			}, calc.desc(client_state));
 		});
 	}
 

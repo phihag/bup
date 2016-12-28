@@ -1,10 +1,15 @@
 refmode
-	live push of changing event match
-	show event matches
-	show last presses
+	link to matchsheet
+	link to stats
+	show last 3 presses
 	show version if older than current (if current dev then if older than any known)
 	flickers when hub not available
 	disabling should turn off referee mode
+	test entering finished match with btde
+	should still get all presses of all matches after reloading refmode
+	in refere mode details block court ID and show different text there
+	change title in referee mode
+	Spielbericht
 
 Aufstellung (unter editevent)
 	new field present_players
@@ -23,11 +28,12 @@ Aufstellung (unter editevent)
 Reihenfolge: improve printing
 omit error network could not be connected in displaymode
 font size of score should be larger in single-court display
+
 Spielbericht: Ersatzspieler etc.
 BuLi-Spielbericht als PDF / direkt ausdrucken (-> Janine)
 clicking on match should go to match if match is the current one, don't reload from server
-Cornelia Schröder: redesign display to select server / receiver
 auto go fullscreen with any click when set that way
+php to download from turnier.de
 
 improve jticker
 	auto-switch after download
@@ -66,26 +72,6 @@ courtspot
 	change event
 if @dev: warn if event_name is redundant
 	update import/export
-
-referee mode
-	send export to referee (add request_id map)
-	automatically espouse first event
-	select current match (i.e. enter on client)
-	subscribe
-		current match
-		settings changes
-		event state (i.e. players being filled in / changed)
-		live-update while in match (if still compatible)
-
-	push match state of other matches to client if match not present (i.e. btde)
-	live push state for display
-	referee UI: button to leave it
-	referee UI: settings button on top right
-	referee: show matches to the right (in order, with results)
-	hub: redirect to local hub
-	record failures (closing on error) and successful connections
-	transmit and show last error with timestamp
-	transmit and show network status with timestamp
 
 print match order
 	hide buttons
@@ -139,10 +125,24 @@ bldemo: without started matches (bldemo_inprogress?)
 ask again if resetting to 0-0 (btde)
 
 improve referee mode
+	more efficient updating on referee
+		calc state of matches and just update that when necessary
 	more efficient protocol for differential changes
 	test with multiple referees
 	document direct protocol
 	show error in UI
+	send export to referee (add request_id map)
+	subscribe
+		event state (i.e. players being filled in / changed)
+
+	push match state of other matches to client if match not present (i.e. btde)
+	live push state for display
+	record failures (closing on error) and successful connections
+	transmit and show last error with timestamp
+	transmit and show network status with timestamp
+	show netstats
+	show other settings
+
 	install pseudeo network refmode_referee
 	push event to client (live changes for displaymode, make sure no loop)
 	change setting  announcements visible/not visible
@@ -167,6 +167,7 @@ order:
 invented current match upon switching modes
 BuLi checkliste: redesign
 	=> mails Jörg Hupertz
+Cornelia Schröder: redesign display to select server / receiver
 alternate editevent (with checkboxes, same order as Mannschaftsaufstellungszettel)
 
 courtspot: fetch all_players
