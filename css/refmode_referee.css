@@ -40,7 +40,8 @@
 .referee_editform {
 	display: inline-block;
 }
-.referee_c_match_status, .referee_e_match_status {
+.referee_c_match_status,
+.referee_e_match_status {
 	display: inline-block;
 	padding-left: 1em;
 	color: #666;
@@ -69,4 +70,3 @@
 	float: right;
 	display: block;
 }
-
