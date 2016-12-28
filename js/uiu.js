@@ -67,6 +67,10 @@ function visible_qs(selector, val) {
 	visible(qs(selector), val);
 }
 
+function hide_qs(selector) {
+	visible_qs(selector, false);
+}
+
 function disabled_qsa(qs, val) {
 	var nodes = document.querySelectorAll(qs);
 	for (var i = 0;i < nodes.length;i++) {
@@ -211,6 +215,7 @@ return {
 	esc_stack_pop: esc_stack_pop,
 	esc_stack_push: esc_stack_push,
 	hasClass: hasClass,
+	hide_qs: hide_qs,
 	ns_el: ns_el,
 	qs: qs,
 	qsEach: qsEach,

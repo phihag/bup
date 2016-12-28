@@ -52,6 +52,7 @@
 }
 .referee_e_link {
 	float: right;
+	padding-left: 0.6em;
 }
 
 .settings_container button.refmode_referee_from_settings {

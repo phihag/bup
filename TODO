@@ -1,6 +1,4 @@
 refmode
-	link to stats
-	test going to stats from various links
 	show last 3 presses
 	show version if older than current (if current dev then if older than any known)
 	flickers when hub not available
@@ -550,3 +548,5 @@ rework settings.show => split stuff into ui_init
 i18n: use uiu instead of $
 UI (& refmode) in konqueror
 refmode: screenshot
+replace visible_qs(.*, false) -> hide_qs($1)
+

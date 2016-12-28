@@ -781,9 +781,13 @@ function hide() {
 	}
 
 	uiu.esc_stack_pop();
-	$('.stats_layout').hide();
+	uiu.hide_qs('.stats_layout');
 	state.ui.stats_visible = false;
-	control.set_current(state);	
+	control.set_current(state);
+
+	if (state.ui.referee_mode) {
+		refmode_referee_ui.back_to_ui();
+	}
 }
 
 
