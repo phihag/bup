@@ -384,6 +384,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var refmode_client_ui = require('./refmode_client_ui');
 	var refmode_referee = require('./refmode_referee');
 	var render = require('./render');
+	var report_problem = require('./report_problem');
 	var settings = require('./settings');
 	var uiu = require('./uiu');
 	var utils = require('./utils');
