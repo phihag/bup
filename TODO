@@ -3,12 +3,10 @@ refmode
 	disabling should turn off referee mode
 	test entering finished match with btde
 	should still get all presses of all matches after reloading refmode
-	in refere mode details block court ID and show different text there
 	change title in referee mode
-	eventsheet
+	eventsheets
+	order
 	all scoresheets at once
-	show warning if no event on a node
-	color warning of different event red
 
 Aufstellung (unter editevent)
 	new field present_players
