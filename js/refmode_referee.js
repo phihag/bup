@@ -110,7 +110,7 @@ function handle_dmsg(msg) {
 		refresh(msg.from);
 		break;
 	case 'state':
-		['event', 'presses', 'setup', 'settings', 'node_id', 'battery'].forEach(function(k) {
+		['event', 'presses', 'setup', 'settings', 'node_id', 'battery', 'bup_version'].forEach(function(k) {
 			if (msg.hasOwnProperty(k)) {
 				c[k] = msg[k];
 			}
@@ -145,14 +145,20 @@ function refresh(conn_id) {
 	}
 
 	var rid = conn.gen_rid();
-	conn.send({
+	var include = ['event_matches'];
+	if (! c.bup_version) {
+		include.push('bup_version');
+	}
+	var req = {
 		type: 'dmsg',
 		dtype: 'get-state',
 		to: conn_id,
 		subscribe: c.subscribed,
 		include_event_matches: true, // TODO make this more clever
+		include: include,
 		rid: rid,
-	});
+	};
+	conn.send(req);
 	return rid;
 }
 

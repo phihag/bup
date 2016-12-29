@@ -88,3 +88,6 @@
 	float: right;
 	display: block;
 }
+.referee_warning {
+	color: #f00;
+}

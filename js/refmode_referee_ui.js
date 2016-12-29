@@ -284,13 +284,24 @@ function render_clients(clients) {
 		}
 
 		if (c.event && (!ev || (c.event.id !== ev.id))) {
-			var diff_ev = uiu.create_el(div, 'div', {}, s._('refmode:referee:different_event', {
+			var diff_ev = uiu.create_el(div, 'div', {
+				'class': 'referee_warning',
+			}, s._('refmode:referee:different_event', {
 				event_name: c.event.event_name,
 			}));
 			var espouse_btn = uiu.create_el(diff_ev, 'button', {
 				'class': 'referee_espouse_event',
 			}, s._('refmode:referee:espouse event'));
 			click.on(espouse_btn, on_espouse_btn_click);
+		}
+
+		var v = c.bup_version;
+		if (v && (v !== 'dev') && (bup_version !== 'dev') && (v !== bup_version)) {
+			uiu.create_el(div, 'div', {
+				'class': 'referee_warning',
+			}, s._('refmode:referee:outdated_bup', {
+				bup_version: c.bup_version,
+			}));
 		}
 	});
 

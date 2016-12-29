@@ -462,6 +462,7 @@ var i18n_en = {
 'refmode:referee:different_event': 'Different event: {event_name}',
 'refmode:referee:espouse event': 'Espouse event',
 'refmode:referee:change match': 'Change match',
+'refmode:referee:outdated_bup': 'Outdated bup version: {bup_version}',
 };
 
 /*@DEV*/

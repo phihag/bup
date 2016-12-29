@@ -462,6 +462,7 @@ var i18n_de = {
 'refmode:referee:different_event': 'Anderer Wettkampf: {event_name}',
 'refmode:referee:espouse event': 'Übernehmen',
 'refmode:referee:change match': 'Ändern',
+'refmode:referee:outdated_bup': 'Veraltete bup-Version: {bup_version}',
 };
 
 /*@DEV*/

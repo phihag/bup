@@ -77,6 +77,10 @@ function handle_dmsg(msg) {
 			battery: bat_status(),
 		};
 
+		if (msg.include && (msg.include.indexOf('bup_version') >= 0) && (typeof bup_version === 'string')) {
+			answer.bup_version = bup_version;
+		}
+
 		var ev = s.event;
 		if (ev) {
 			answer.event = utils.pluck(ev, [
