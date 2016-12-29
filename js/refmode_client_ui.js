@@ -86,7 +86,6 @@ function update_status_str(s) {
 }
 
 function handle_change(estate) {
-	network.errstate('refmode.client.ws', ((estate.status === 'error') ? estate : null));
 	if (estate.status === 'enabled') {
 		uiu.visible_qs('.refmode_client_redir', !!estate.local_addr);
 		if (estate.local_addr) {
