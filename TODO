@@ -1,9 +1,14 @@
 refmode
-	test entering finished match with btde
-	should still get all presses of all matches after reloading refmode
+	update on changed settings
+
+	change court
+	should still get all presses of all matches after reloading refmode (parse from JSON etc.)
 	eventsheets
 	order
 	all scoresheets at once
+	support displaymode endpoints (configuring, not yet pushing)
+	configure fullscreen
+	test entering finished match with btde
 
 Aufstellung (unter editevent)
 	new field present_players
@@ -118,12 +123,13 @@ bldemo: Active match should be on court 1
 bldemo: without started matches (bldemo_inprogress?)
 ask again if resetting to 0-0 (btde)
 
-improve referee mode
+improve refmode
+	more efficient protocol for differential changes
 	more efficient updating on referee
 		calc state of matches and just update that when necessary
-	more efficient protocol for differential changes
 	test with multiple referees
 	document direct protocol
+	kill button
 	show error in UI
 	send export to referee (add request_id map)
 	subscribe
@@ -150,6 +156,7 @@ improve referee mode
 	test that battery stays current
 	show current network state
 	test two clients at the same match
+	re-render clients+event upon language change
 
 Notiz an Spielernamen (-> Werner Durow)
 

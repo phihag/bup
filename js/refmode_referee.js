@@ -109,6 +109,7 @@ function handle_dmsg(msg) {
 		// TODO: only needed when not subscribed
 		refresh(msg.from);
 		break;
+	case 'changed-settings':
 	case 'state':
 		['event', 'presses', 'setup', 'settings', 'node_id', 'battery', 'bup_version'].forEach(function(k) {
 			if (msg.hasOwnProperty(k)) {

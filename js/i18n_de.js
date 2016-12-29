@@ -462,6 +462,7 @@ var i18n_de = {
 'refmode:referee:different_event': 'Anderer Wettkampf: {event_name}',
 'refmode:referee:espouse event': 'Übernehmen',
 'refmode:referee:change match': 'Ändern',
+'refmode:referee:change court': 'Ändern',
 'refmode:referee:outdated bup': 'Veraltete bup-Version: {bup_version}',
 'refmode:referee:no event on client': 'Kein Wettkampf assoziiert',
 };

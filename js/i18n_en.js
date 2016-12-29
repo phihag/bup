@@ -462,6 +462,7 @@ var i18n_en = {
 'refmode:referee:different_event': 'Different event: {event_name}',
 'refmode:referee:espouse event': 'Espouse event',
 'refmode:referee:change match': 'Change match',
+'refmode:referee:change court': 'Change court',
 'refmode:referee:outdated bup': 'Outdated bup version: {bup_version}',
 'refmode:referee:no event on client': 'No event associated',
 };

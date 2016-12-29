@@ -80,14 +80,20 @@
 	margin-left: 0.1em;
 }
 
-.referee_match_change_select {
+.referee_match_change_select,
+.referee_c_court_change_select {
 	margin-left: 1em;
 	margin-right: 0.5em;
 }
-.referee_match_change_form {
+.referee_match_change_form,
+.referee_c_court_change_form {
 	float: right;
 	display: block;
 }
 .referee_warning {
 	color: #f00;
+}
+
+.referee_c_court_row {
+	padding: 0 0 0.7em 0;
 }

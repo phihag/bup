@@ -211,6 +211,54 @@ function update(s) {
 	update_refclient(s);
 }
 
+function change_setting(s, name, val) {
+	if (val === s.settings[name]) {
+		return; // No change required
+	}
+	s.settings[name] = val;
+
+	switch (name) {
+	case 'show_pronunciation':
+	case 'negative_timers':
+		render.ui_render(s);
+		break;
+	case 'shuttle_counter':
+		render.shuttle_counter(s);
+		break;
+	case 'refmode_client_enabled':
+		update_refclient(s);
+		break;
+	case 'court_id':
+		update_court(s);
+		render.ui_court_str(s);
+		network.resync();
+		break;
+	case 'court_description':
+		update_court(s);
+		render.ui_court_str(s);
+		break;
+	case 'refmode_referee_ws_url':
+		refmode_referee_ui.on_settings_change(s);
+		break;
+	case 'language':
+		i18n.ui_update_state(s);
+		break;
+	case 'displaymode_style':
+	case 'displaymode_court_id':
+		displaymode.on_style_change(s);
+		break;
+	case 'wakelock':
+		wakelock.update(s);
+		break;
+	case 'click_mode':
+		click.update_mode(s.settings[name]);
+		break;
+	}
+
+	refmode_client_ui.on_settings_change(s);
+	store(s);
+}
+
 function ui_init(s) {
 	$('.settings_layout').on('click', function(e) {
 		if (e.target != this) {
@@ -238,69 +286,28 @@ function ui_init(s) {
 	_settings_checkboxes.forEach(function(name) {
 		var box = $('.settings [name="' + name + '"]');
 		box.on('change', function() {
-			s.settings[name] = box.prop('checked');
-			if ((name === 'show_pronunciation') || (name === 'negative_timers')) {
-				render.ui_render(s);
-			}
-			if (name === 'shuttle_counter') {
-				render.shuttle_counter(s);
-			}
-			if (name === 'refmode_client_enabled') {
-				update_refclient(s);
-			}
-			store(s);
+			change_setting(s, name, box.prop('checked'));
 		});
 	});
 
 	_settings_textfields.forEach(function(name) {
 		var input = $('.settings [name="' + name + '"]');
-		input.on('change input', function(e) {
-			s.settings[name] = input.val();
-			if ((name === 'court_id') || (name === 'court_description')) {
-				update_court(s);
-				render.ui_court_str(s);
-				if (e.type == 'change') {
-					network.resync();
-				}
-			}
-			if (name === 'refmode_client_ws_url') {
-				refmode_client_ui.on_settings_change(s);
-			}
-			if (name === 'refmode_referee_ws_url') {
-				refmode_referee_ui.on_settings_change(s);
-			}
-			store(s);
+		input.on('change input', function() {
+			change_setting(s, name, input.val());
 		});
 	});
 
 	_settings_numberfields.forEach(function(name) {
 		var input = $('.settings [name="' + name + '"]');
 		input.on('change input', function() {
-			s.settings[name] = parseInt(input.val(), 10);
-			store(s);
+			change_setting(s, name, parseInt(input.val(), 10));
 		});
 	});
 
 	_settings_selects.forEach(function(name) {
 		var select = $('.settings [name="' + name + '"]');
 		select.on('change', function() {
-			s.settings[name] = select.val();
-			store(s);
-			switch (name) {
-			case 'language':
-				i18n.ui_update_state(s);
-				break;
-			case 'displaymode_style':
-			case 'displaymode_court_id':
-				displaymode.on_style_change(s);
-				break;
-			case 'wakelock':
-				wakelock.update(s);
-				break;
-			case 'click_mode':
-				click.update_mode(s.settings[name]);
-				break;
-			}
+			change_setting(s, name, select.val());
 		});
 	});
 

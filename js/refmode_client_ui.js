@@ -110,9 +110,11 @@ function on_settings_change(s) {
 		s.refclient_node_id = get_node_id();
 		rc = refmode_client(s, handle_change, initial_paired_refs);
 	}
+
 	var enabled = rc.on_settings_change(s);
 	if (enabled) {
 		network.ui_install_refmode_client(rc);
+		rc.notify_changed_settings(s);
 	} else {
 		network.ui_uninstall_refmode_client();
 	}

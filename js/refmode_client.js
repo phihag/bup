@@ -262,6 +262,17 @@ function net_send_press(s, press) {
 	});
 }
 
+function notify_changed_settings(s) {
+	subscriptions.forEach(function(conn_id) {
+		conn.send({
+			type: 'dmsg',
+			dtype: 'changed-settings',
+			to: conn_id,
+			settings: s.settings,
+		});
+	});
+}
+
 return {
 	get_paired_referees: get_paired_referees,
 	on_settings_change: on_settings_change,
@@ -270,6 +281,7 @@ return {
 	list_referees: list_referees,
 	connect_to_referee: connect_to_referee,
 	disconnect_referee: disconnect_referee,
+	notify_changed_settings: notify_changed_settings,
 	// Testing only
 	_subscriptions: subscriptions,
 };

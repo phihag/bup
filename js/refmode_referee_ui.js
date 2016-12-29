@@ -236,11 +236,33 @@ function render_clients(clients) {
 			});
 		});
 
-		var court_row = uiu.create_el(div, 'div', {}, s._('refmode:referee:court'));
+		var court_row = uiu.create_el(div, 'div', {
+			class: 'referee_c_court_row',
+		}, s._('refmode:referee:court'));
 		uiu.create_el(
 			court_row, 'span', {},
 			(c.settings ? c.settings.court_id : '') +
 			((c.settings && c.settings.court_description) ? (' (' + c.settings.court_description + ')') : ''));
+/*
+		var court_change_form = uiu.create_el(court_row, 'form', {
+			'class': 'referee_c_court_change_form',
+		});
+		court_change_form.addEventListener('submit', on_client_match_change_submit);
+		var court_change_select = uiu.create_el(court_change_form, 'select', {
+			'class': 'referee_c_court_change_select',
+			size: 1,
+			required: 'required',
+		});
+		var all_courts = [];
+		all_courts.forEach(function(c) {
+			uiu.create_el(court_change_select, 'option', {
+				value: c.court_id,
+			}, c.court_description);
+		});
+		uiu.create_el(court_change_form, 'button', {
+			'role': 'submit',
+		}, s._('refmode:referee:change court'));
+*/
 
 		var match_row = uiu.create_el(div, 'div', {
 			'class': 'referee_c_match_row',
