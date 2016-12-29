@@ -324,6 +324,7 @@ function render_event(s) {
 		uiu.text(matches_container, s._('refmode:referee:no matches'));
 		return;
 	}
+
 	if (ev.matches) {
 		ev.matches.forEach(function(m) {
 			var match_container = uiu.create_el(matches_container, 'div', {
@@ -362,6 +363,7 @@ function render_event(s) {
 	}
 
 	uiu.text_qs('.referee_event_title', ev.event_name);
+	document.title = ev.event_name;
 }
 
 function on_settings_change() {
