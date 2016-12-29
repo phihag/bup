@@ -846,6 +846,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var click = require('./click');
 	var control = require('./control');
 	var pronunciation = require('./pronunciation');
+	var refmode_referee_ui = require('./refmode_referee_ui');
 	var uiu = require('./uiu');
 	var utils = require('./utils');
 

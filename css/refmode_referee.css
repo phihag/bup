@@ -12,7 +12,7 @@
 .referee_event {
 	display: inline-block;
 	width: 46vw;
-	padding: 1vmin 1vw;
+	padding: 0.7vmin 0.7vmin;
 	margin: 0 1vw;
 	background: #eee;
 }
@@ -40,6 +40,14 @@
 .referee_editform {
 	display: inline-block;
 }
+.referee_event_title {
+	padding-left: 0.4em;
+}
+.referee_e_match {
+	margin-top: 0.4em;
+	background: #fff;
+	padding: 0.2em 0.5em;
+}
 .referee_c_match_status,
 .referee_e_match_status {
 	display: inline-block;
@@ -53,6 +61,12 @@
 .referee_e_link {
 	float: right;
 	padding-left: 0.6em;
+}
+.referee_e_match .stats_presses_desc,
+.referee_e_match .stats_presses_sdesc,
+.referee_e_match .stats_presses_timestamp,
+.referee_e_match .stats_presses_highlight {
+	color: #222;
 }
 
 .settings_container button.refmode_referee_from_settings {

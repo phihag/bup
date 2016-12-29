@@ -339,9 +339,9 @@ function render_event(s) {
 			if (m.presses) {
 				var presses_table = uiu.create_el(match_container, 'table');
 				var scopy = calc.copy_state(s);
-				s.presses = m.presses;
-				s.setup = m.setup;
-				stats.render_presses(presses_table, s, m.presses.length - 3);
+				scopy.presses = m.presses;
+				scopy.setup = m.setup;
+				stats.render_presses(presses_table, scopy, m.presses.length - 3);
 			}
 		});
 	}
