@@ -1,5 +1,4 @@
 refmode
-	disabling should turn off referee mode
 	test entering finished match with btde
 	should still get all presses of all matches after reloading refmode
 	eventsheets

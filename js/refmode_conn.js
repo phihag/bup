@@ -69,6 +69,10 @@ function keepalive() {
 }
 
 function connect() {
+	if (!enabled) {
+		return;
+	}
+
 	var my_ws_url = sat_ws_url ? sat_ws_url : ws_url;
 	var my_ws = new WebSocket(my_ws_url, 'bup-refmode');
 	last_status = {
@@ -101,6 +105,11 @@ function connect() {
 	};
 	my_ws.onmessage = handle_msg_json;
 	my_ws.onclose = function() {
+		if (keepalive_interval) {
+			clearInterval(keepalive_interval);
+			keepalive_interval = null;
+		}
+
 		if (my_ws.bup_die) {
 			return;
 		}
@@ -117,10 +126,6 @@ function connect() {
 				sat_ws_url = null; // retry original URL
 			}
 		}
-		if (keepalive_interval) {
-			clearInterval(keepalive_interval);
-			keepalive_interval = null;
-		}
 		reconnect_timeout = setTimeout(connect, reconnect_duration);
 		reconnect_duration = Math.min(reconnect_duration * 2, max_reconnect);
 	};
@@ -132,6 +137,9 @@ function disconnect() {
 		ws.bup_die = true;
 		ws.close();
 		ws = null;
+	}
+	if (reconnect_timeout) {
+		clearTimeout(reconnect_timeout);
 	}
 }
 
