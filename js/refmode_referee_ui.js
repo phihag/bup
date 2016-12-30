@@ -50,9 +50,8 @@ function on_client_match_link_click(e) {
 	var c = rr.client_by_conn_id(_client_id(e));
 	if (!c) return;
 
-	uiu.visible_qs('.referee_layout', false);
+	hide_tmp();
 	uiu.visible_qs('#game', true);
-	settings.hide_refereemode();
 	control.start_match(state, c.setup, c.presses);
 }
 
@@ -60,9 +59,8 @@ function on_event_match_link_click(e) {
 	var m = _event_match(e);
 	if (!m) return;
 
-	uiu.visible_qs('.referee_layout', false);
+	hide_tmp();
 	uiu.visible_qs('#game', true);
-	settings.hide_refereemode();
 	control.start_match(state, m.setup, m.presses);
 }
 
@@ -70,8 +68,7 @@ function on_event_match_scoresheet_click(e) {
 	var m = _event_match(e);
 	if (!m) return;
 
-	uiu.visible_qs('.referee_layout', false);
-	settings.hide_refereemode();
+	hide_tmp();
 	calc.init_state(state, m.setup, m.presses, false);
 	calc.state(state);
 	scoresheet.show();
@@ -81,8 +78,7 @@ function on_event_match_stats_click(e) {
 	var m = _event_match(e);
 	if (!m) return;
 
-	uiu.visible_qs('.referee_layout', false);
-	settings.hide_refereemode();
+	hide_tmp();
 	calc.init_state(state, m.setup, m.presses, false);
 	calc.state(state);
 	stats.show(state);
@@ -122,13 +118,6 @@ function on_subscribe_checkbox_click(e) {
 	var c = rr.client_by_conn_id(_client_id(e));
 	c.subscribed = e.target.checked;
 	rr.refresh(c.id);
-}
-
-function back_to_ui() {
-	settings.hide(true);
-	uiu.visible_qs('.referee_layout', true);
-	uiu.visible_qs('#game', false);
-	settings.show_refereemode();
 }
 
 function make_editable(el, cb) {
@@ -470,6 +459,18 @@ function hide() {
 	rr = null;
 }
 
+function hide_tmp() {
+	uiu.visible_qs('.referee_layout', false);
+	settings.hide_refereemode();
+}
+
+function back_to_ui() {
+	settings.hide(true);
+	uiu.visible_qs('.referee_layout', true);
+	uiu.visible_qs('#game', false);
+	settings.show_refereemode();
+}
+
 function ui_init() {
 	click.qs('.settings_mode_referee', function(e) {
 		e.preventDefault();
@@ -485,6 +486,7 @@ return {
 	hide: hide,
 	ui_init: ui_init,
 	on_settings_change: on_settings_change,
+	hide_tmp: hide_tmp,
 	back_to_ui: back_to_ui,
 };
 

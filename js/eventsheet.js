@@ -1486,8 +1486,12 @@ function resolve_key(es_key) {
 
 function show_dialog(es_key) {
 	state.ui.eventsheet = es_key;
-	settings.hide(true);
-	render.hide();
+	if (state.ui.referee_mode) {
+		refmode_referee_ui.hide_tmp();
+	} else {
+		settings.hide(true);
+		render.hide();
+	}
 
 	es_key = resolve_key(es_key);
 	if (es_key != 'auto-direct') {
@@ -1548,7 +1552,11 @@ function show_dialog(es_key) {
 function hide_dialog() {
 	state.ui.eventsheet = null;
 	uiu.visible_qs('.eventsheet_container', false);
-	settings.show();
+	if (state.ui.referee_mode) {
+		refmode_referee_ui.back_to_ui();
+	} else {
+		settings.show();
+	}
 }
 
 return {
@@ -1566,6 +1574,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var click = require('./click');
 	var eventutils = require('./eventutils');
 	var network = require('./network');
+	var refmode_referee_ui = require('./refmode_referee_ui');
 	var render = require('./render');
 	var report_problem = require('./report_problem');
 	var scoresheet = require('./scoresheet');

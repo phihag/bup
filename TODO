@@ -1,14 +1,16 @@
 refmode
 	eventsheets
+		score is missing
+		Schiedsrichter
+		Ende
 	order
 	all scoresheets at once
-	support displaymode endpoints (configuring, not yet pushing)
-	test entering finished match with btde
+	support configuring displaymode endpoints
 
 Aufstellung (unter editevent)
 	new field present_players
 	new field suggested_players -> add in XLSX
-	list all_players (list top 4 singles / doubles)
+	list all_players (list top 2 singles / 4 doubles)
 	add players
 	add completely new players (with input)
 	click on boxes to change
