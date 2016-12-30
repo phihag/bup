@@ -133,9 +133,35 @@ function handle_dmsg(msg) {
 		}
 		calc_client_title(c);
 
-		if (!s.event && c.event) {
-			espouse_event(c);
+		if (msg.event) {
+			if (s.event) {
+				var ignore = (msg.setup && msg.presses) ? msg.setup.match_id : null; // Will be updated later
+				var changed = false;
+				c.event.matches.forEach(function(m) {
+					if (m.setup.match_id === ignore) {
+						return;
+					}
+					var local_m = utils.find(s.event.matches, function(lm) {
+						return lm.setup.match_id === m.setup.match_id;
+					});
+					if (!local_m) {
+						return;
+					}
+					if (local_m.presses) {
+						return;
+					}
+
+					local_m.presses = _adopt_match(m).presses;
+					changed = true;
+				});
+				if (changed) {
+					render_event(s);
+				}
+			} else {
+				espouse_event(c);
+			}
 		}
+
 		update_match(s, msg);
 
 		render_clients(clients);
@@ -269,8 +295,18 @@ function status_str() {
 	return conn.status_str(s);
 }
 
+function _adopt_match(m) {
+	if (m.presses_json) {
+		m.presses = JSON.parse(m.presses_json);
+		delete m.presses_json;
+	}
+	return m;
+}
+
 function espouse_event(c) {
-	s.event = c.event;
+	var ev = utils.deep_copy(c.event);
+	ev.matches.forEach(_adopt_match);
+	s.event = ev;
 	render_event(s);
 	render_clients(clients);
 }
