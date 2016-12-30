@@ -404,7 +404,7 @@ function render_event(s) {
 				var scopy = calc.copy_state(s);
 				scopy.presses = m.presses;
 				scopy.setup = m.setup;
-				stats.render_presses(presses_table, scopy, m.presses.length - 3);
+				stats.render_presses(presses_table, scopy, m.presses.length - 2);
 			}
 		});
 	}

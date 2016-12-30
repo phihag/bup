@@ -327,12 +327,12 @@
 <label data-bup-modes="umpire"><span data-i18n="settings:Service judge"></span>: <input type="text" name="service_judge_name" /></label>
 <label><span data-i18n="settings:Language"></span>: <select size="1" class="settings_language" name="language"></select></label>
 <div data-bup-modes="DEBUG"><label><span data-i18n="settings:wakelock:label"></span> <select name="wakelock" size="1"><option data-i18n="settings:wakelock:display" value="display"></option><option data-i18n="settings:wakelock:always" value="always"></option><option data-i18n="settings:wakelock:never" value="never"></option></select></label></div>
-<div class="fullscreen_line"><label><input type="checkbox" name="go_fullscreen" /><span data-i18n="settings:Request Fullscreen on Startup"></span></label> <button class="fullscreen_button" data-i18n="settings:Go Fullscreen"></button></div>
+<div class="fullscreen_line" data-bup-modes="umpire display"><label><input type="checkbox" name="go_fullscreen" /><span data-i18n="settings:Request Fullscreen on Startup"></span></label> <button class="fullscreen_button" data-i18n="settings:Go Fullscreen"></button></div>
 <label data-bup-modes="umpire"><input type="checkbox" name="shuttle_counter" /><span data-i18n="settings:Shuttle Counter"></span></label>
 <label data-bup-modes="umpire"><input type="checkbox" name="show_pronunciation" /><span data-i18n="settings:Show Pronunciation"></span></label>
 <label data-bup-modes="umpire"><input type="checkbox" name="negative_timers" /><span data-i18n="settings:Negative Timers"></span></label>
 <label data-bup-modes="umpire"><input type="checkbox" name="editmode_doubleclick" /><span data-i18n="settings:editmode doubleclick"></span></label>
-<label><span data-i18n="settings:click_mode"></span>: <select name="click_mode" size="1"><option data-i18n="settings:click_mode:auto" value="auto"></option><option data-i18n="settings:click_mode:click" value="click"></option><option data-i18n="settings:click_mode:touchstart" value="touchstart"></option><option data-i18n="settings:click_mode:touchend" value="touchend"></option></select></label>
+<label data-bup-modes="umpire"><span data-i18n="settings:click_mode"></span>: <select name="click_mode" size="1"><option data-i18n="settings:click_mode:auto" value="auto"></option><option data-i18n="settings:click_mode:click" value="click"></option><option data-i18n="settings:click_mode:touchstart" value="touchstart"></option><option data-i18n="settings:click_mode:touchend" value="touchend"></option></select></label>
 <label data-bup-modes="umpire"><span data-i18n="settings:Button Block Timeout"></span>: <input type="number" name="button_block_timeout" min="0" value="1500" max="5000" /></label>
 <label><span data-i18n="settings:Network Timeout"></span>: <input type="number" name="network_timeout" min="1" value="1000" max="600000" /></label>
 <label data-bup-modes="umpire"><span data-i18n="settings:Network Repeat Interval"></span>: <input type="number" name="network_update_interval" min="1" value="10000" max="600000" /></label>
@@ -547,6 +547,7 @@ text.team1 {
 	<div class="referee_event">
 		<div class="referee_event_title"></div>
 		<div class="referee_matches"></div>
+		<div class="referee_e_links"></div>
 	</div>
 </div>
 
