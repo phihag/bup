@@ -416,6 +416,12 @@ function render_event(s) {
 		hide_tmp();
 		scoresheet.event_show();
 	});
+	var order_link = uiu.create_el(links_container, 'a', {
+		'class': 'js_link',
+	}, s._('settings:Order link'));
+	click.on(order_link, function() {
+		order.show();
+	});
 
 	uiu.text_qs('.referee_event_title', ev.event_name);
 	document.title = ev.event_name;
@@ -508,6 +514,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var eventsheet = require('./eventsheet');
 	var key_storage = require('./key_storage');
 	var importexport = require('./importexport');
+	var order = require('./order');
 	var refmode_client_ui = require('./refmode_client_ui');
 	var refmode_referee = require('./refmode_referee');
 	var render = require('./render');
