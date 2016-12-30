@@ -1,10 +1,11 @@
 refmode
 	should still get all presses of all matches after reloading refmode (parse from JSON etc.)
+		btde: make sure to send JSON
+	export
 	eventsheets
 	order
 	all scoresheets at once
 	support displaymode endpoints (configuring, not yet pushing)
-	configure fullscreen
 	test entering finished match with btde
 
 Aufstellung (unter editevent)
@@ -21,7 +22,6 @@ Aufstellung (unter editevent)
 	edit present players in editevent
 	CourtSpot: import league
 
-Reihenfolge: improve printing
 omit error network could not be connected in displaymode
 font size of score should be larger in single-court display
 
@@ -131,7 +131,7 @@ improve refmode
 	send export to referee (add request_id map)
 	subscribe
 		event state (i.e. players being filled in / changed)
-
+	configure fullscreen
 	push match state of other matches to client if match not present (i.e. btde)
 	live push state for display
 	record failures (closing on error) and successful connections
