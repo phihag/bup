@@ -1,5 +1,4 @@
 refmode
-	when F5 on client often no event
 	should still get all presses of all matches after reloading refmode (parse from JSON etc.)
 	eventsheets
 	order

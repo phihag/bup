@@ -120,6 +120,7 @@ function handle_dmsg(msg) {
 		refresh(msg.from);
 		break;
 	case 'changed-settings':
+	case 'event-update':
 	case 'state':
 		['event', 'presses', 'setup', 'settings', 'node_id', 'battery', 'bup_version'].forEach(function(k) {
 			if (msg.hasOwnProperty(k)) {
@@ -156,7 +157,7 @@ function refresh(conn_id) {
 	}
 
 	var rid = conn.gen_rid();
-	var include = ['event_matches'];
+	var include = [];
 	if (! c.bup_version) {
 		include.push('bup_version');
 	}
@@ -165,7 +166,6 @@ function refresh(conn_id) {
 		dtype: 'get-state',
 		to: conn_id,
 		subscribe: c.subscribed,
-		include_event_matches: true, // TODO make this more clever
 		include: include,
 		rid: rid,
 	};

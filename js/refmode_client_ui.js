@@ -153,8 +153,15 @@ function set_list(s, enabled) {
 	uiu.visible_qs('.refmode_client_referee_list', enabled);
 }
 
+function on_event_update() {
+	if (rc) {
+		rc.on_event_update();
+	}
+}
+
 return {
 	on_settings_change: on_settings_change,
+	on_event_update: on_event_update,
 	ui_init: ui_init,
 };
 

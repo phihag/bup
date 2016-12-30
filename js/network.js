@@ -301,7 +301,12 @@ function list_matches(s, callback) {
 			msg: state._('network:error:unconfigured'),
 		});
 	}
-	netw.list_matches(s, callback);
+	netw.list_matches(s, function(err, ev) {
+		callback(err, ev);
+		if (!err) {
+			refmode_client_ui.on_event_update();
+		}
+	});
 }
 
 // Returns a callback to be called when the list is no longer required
@@ -322,7 +327,7 @@ function ui_list_matches(s, silent, no_timer) {
 		return;
 	}
 	// TODO use subscribe here
-	netw.list_matches(s, function(err, event) {
+	list_matches(s, function(err, event) {
 		status_container.empty();
 		_matchlist_install_reload_button(s);
 		errstate('list_matches', err);
@@ -658,6 +663,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var netstats = require('./netstats');
 	var p2p = require('./p2p');
 	var pronunciation = require('./pronunciation');
+	var refmode_client_ui = require('./refmode_client_ui');
 	var render = require('./render');
 	var report_problem = require('./report_problem');
 	var settings = require('./settings');

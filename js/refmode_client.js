@@ -48,6 +48,25 @@ function unsubscribe(conn_id) {
 	utils.remove(subscriptions, conn_id);
 }
 
+function craft_event() {
+	var ev = s.event;
+	var res = utils.pluck(ev, [
+		'id', 'event_name', 'tournament_name',
+		'courts',
+		'location', 'protest', 'matchday', 'starttime', 'notes',
+		'team_competition', 'team_names', 'league_key',
+		'all_players', 'backup_players', 'present_players',
+	]);
+
+	if (ev.matches) {
+		res.matches = ev.matches.map(function(m) {
+			return utils.pluck(
+				m, ['setup', 'network_score', 'presses', 'presses_json']);
+		});
+	}
+	return res;
+}
+
 // Handle direct messages (from referee)
 function handle_dmsg(msg) {
 	switch(msg.dtype) {
@@ -81,23 +100,10 @@ function handle_dmsg(msg) {
 			answer.bup_version = bup_version;
 		}
 
-		var ev = s.event;
-		if (ev) {
-			answer.event = utils.pluck(ev, [
-				'id', 'event_name', 'tournament_name',
-				'courts',
-				'location', 'protest', 'matchday', 'starttime', 'notes',
-				'team_competition', 'team_names', 'league_key',
-				'all_players', 'backup_players', 'present_players',
-			]);
-
-			if (msg.include_event_matches && ev.matches) {
-				answer.event.matches = ev.matches.map(function(m) {
-					return utils.pluck(
-						m, ['setup', 'network_score', 'presses', 'presses_json']);
-				});
-			}
+		if (s.event) {
+			answer.event = craft_event();
 		}
+
 		conn.respond(msg, answer);
 		break;
 	case 'change-match':
@@ -298,10 +304,24 @@ function notify_changed_settings(s) {
 	});
 }
 
+function on_event_update() {
+	var ev = craft_event();
+	subscriptions.forEach(function(conn_id) {
+		conn.send({
+			type: 'dmsg',
+			dtype: 'event-update',
+			to: conn_id,
+			event: ev,
+		});
+	});
+}
+
+
 return {
 	get_paired_referees: get_paired_referees,
 	on_settings_change: on_settings_change,
 	net_send_press: net_send_press,
+	on_event_update: on_event_update,
 	status_str: status_str,
 	list_referees: list_referees,
 	connect_to_referee: connect_to_referee,
