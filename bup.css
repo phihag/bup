@@ -123,3 +123,7 @@ html, body, button {
 	color: #0000ee;
 	text-decoration: underline;
 }
+
+select {
+	font-size: inherit;
+}
