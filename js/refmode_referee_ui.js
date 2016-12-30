@@ -409,9 +409,11 @@ function render_event(s) {
 		});
 	}
 
+	// Per-event links
 	var links_container = uiu.qs('.referee_e_links');
-	uiu.empty(links_container);
-
+	links_container.removeAttribute('data-league-key');
+	eventsheet.render_links(s, links_container);
+	
 	var export_link = uiu.create_el(links_container, 'a', {
 		'class': 'js_link',
 	}, s._('settings:Export link'));
@@ -494,6 +496,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
 	var click = require('./click');
 	var displaymode = require('./displaymode');
+	var eventsheet = require('./eventsheet');
 	var key_storage = require('./key_storage');
 	var importexport = require('./importexport');
 	var refmode_client_ui = require('./refmode_client_ui');

@@ -345,7 +345,7 @@ function ui_list_matches(s, silent, no_timer) {
 		}
 
 		s.event = event;
-		eventsheet.render_links(s);
+		eventsheet.render_links(s, uiu.qs('.setup_eventsheets'));
 		uiu.visible_qs('.editevent_link', netw.editable(s));
 		ui_render_matchlist(s, event);
 	});

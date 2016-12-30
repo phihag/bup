@@ -53,8 +53,6 @@ var MIME_TYPES = {
 
 var files = {};
 
-var ui_current_league_key = null;
-
 function calc_backup_players_str(ev) {
 	var bp = ev.backup_players;
 	if (!bp) {
@@ -1313,12 +1311,12 @@ function download(es_key, callback) {
 	xhr.send();
 }
 
-function render_links(s) {
+function render_links(s, container) {
 	var league_key = s.event ? s.event.league_key : undefined;
-	if (utils.deep_equal(ui_current_league_key, league_key)) {
+	if (container.getAttribute('data-league-key') === league_key) {
 		return;  // No need to reconfigure containers
 	}
-	ui_current_league_key = league_key;
+	container.setAttribute('data-league-key', league_key);
 
 	if (typeof pdfform != 'undefined') {
 		loaded('pdfform');
@@ -1327,7 +1325,6 @@ function render_links(s) {
 		loaded('jszip');
 	}
 
-	var container = uiu.qs('.setup_eventsheets');
 	uiu.empty(container);
 	if (! league_key) {
 		return;

@@ -106,3 +106,9 @@
 .referee_e_links {
 	margin-top: 0.5em;
 }
+.referee_e_links > a {
+	display: inline-block;
+	margin-right: 1.5em;
+	margin-bottom: 0.8em;
+}
+
