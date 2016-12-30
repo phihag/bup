@@ -213,7 +213,7 @@ function _parse_match_list(doc, now) {
 		league_key = '1BL-2016';
 	}
 
-	var courts = [{
+	var used_courts = [{
 		court_id: 1,
 		description: '1 (links)',
 	}, {
@@ -249,7 +249,7 @@ function _parse_match_list(doc, now) {
 
 		var match_id = 'btde_' + utils.iso8601(now) + '_' + match.dis + '_' + home_team_name + '-' + away_team_name;
 		if (match.feld) {
-			var on_court = utils.find(courts, function(c) {
+			var on_court = utils.find(used_courts, function(c) {
 				return c.court_id == match.feld;
 			});
 			if (on_court) {
@@ -282,7 +282,7 @@ function _parse_match_list(doc, now) {
 		team_names: [home_team_name, away_team_name],
 		event_name: home_team_name + ' - ' + away_team_name,
 		matches: matches,
-		courts: courts,
+		courts: used_courts,
 		league_key: league_key,
 	};
 }

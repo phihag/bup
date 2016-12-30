@@ -103,6 +103,21 @@ function on_client_match_change_submit(e) {
 	rr.change_match(c.id, current_sel_match);
 }
 
+function on_client_court_change_submit(e) {
+	e.preventDefault();
+
+	var c = rr.client_by_conn_id(_client_id(e));
+	if (!c) return;
+
+	var container = uiu.closest_class(e.target, 'referee_c');
+	var current_sel_court = container.querySelector('.referee_c_court_change_select').value;
+	if (!current_sel_court) { // Nothing selected yet, ignore
+		return;
+	}
+
+	rr.change_court(c.id, current_sel_court);
+}
+
 function on_subscribe_checkbox_click(e) {
 	var c = rr.client_by_conn_id(_client_id(e));
 	c.subscribed = e.target.checked;
@@ -170,6 +185,14 @@ function make_editable(el, cb) {
 		click.on(edit_btn, edit);
 		el.parentNode.insertBefore(edit_btn, el.nextSibling);
 	}
+}
+
+function _all_courts(s) {
+	var res = (s.event && s.event.courts) ? s.event.courts.slice() : [];
+	res.push({
+		court_id: 'referee',
+	});
+	return res;
 }
 
 function render_clients(clients) {
@@ -243,26 +266,28 @@ function render_clients(clients) {
 			court_row, 'span', {},
 			(c.settings ? c.settings.court_id : '') +
 			((c.settings && c.settings.court_description) ? (' (' + c.settings.court_description + ')') : ''));
-/*
+
 		var court_change_form = uiu.create_el(court_row, 'form', {
 			'class': 'referee_c_court_change_form',
 		});
-		court_change_form.addEventListener('submit', on_client_match_change_submit);
+		court_change_form.addEventListener('submit', on_client_court_change_submit);
 		var court_change_select = uiu.create_el(court_change_form, 'select', {
 			'class': 'referee_c_court_change_select',
 			size: 1,
 			required: 'required',
 		});
-		var all_courts = [];
-		all_courts.forEach(function(c) {
-			uiu.create_el(court_change_select, 'option', {
-				value: c.court_id,
-			}, c.court_description);
+		_all_courts(s).forEach(function(court) {
+			var attrs = {
+				value: court.court_id,
+			};
+			if (c.settings && (c.settings.court_id == court.court_id)) {
+				attrs.selected = 'selected';
+			}
+			uiu.create_el(court_change_select, 'option', attrs, (court.description ? court.description : court.court_id));
 		});
 		uiu.create_el(court_change_form, 'button', {
 			'role': 'submit',
 		}, s._('refmode:referee:change court'));
-*/
 
 		var match_row = uiu.create_el(div, 'div', {
 			'class': 'referee_c_match_row',

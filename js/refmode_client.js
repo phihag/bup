@@ -121,6 +121,31 @@ function handle_dmsg(msg) {
 			new_match_id: msg.new_match_id,
 		});
 		break;
+	case 'change-court':
+		var all_courts = network.courts(s);
+		var court = utils.find(all_courts, function(c) {
+			return c.id == msg.new_court_id;
+		});
+
+		if (!court) {
+			court = {
+				id: msg.new_court_id,
+				description: '',
+			};
+		}
+
+		utils.obj_update(s.settings, {
+			court_id: court.id,
+			court_description: court.description,
+		});
+		settings.update(s);
+		settings.store(s);
+
+		conn.respond(msg, {
+			dtype: 'changed-court',
+			new_court: court,
+		});
+		break;
 	case 'error':
 		report_problem.silent_error('refclient received error: ' + msg.message);
 		break;

@@ -65,6 +65,15 @@ function change_match(conn_id, new_match_id) {
 	});
 }
 
+function change_court(conn_id, new_court_id) {
+	conn.send({
+		type: 'dmsg',
+		dtype: 'change-court',
+		to: conn_id,
+		new_court_id: new_court_id,
+	});
+}
+
 function update_match(s, msg) {
 	if (!Array.isArray(msg.presses) || !msg.setup) {
 		return; // Incomplete update request
@@ -105,6 +114,7 @@ function handle_dmsg(msg) {
 
 	switch(msg.dtype) {
 	case 'changed-match':
+	case 'changed-court':
 	case 'update-settings-answer':
 		// TODO: only needed when not subscribed
 		refresh(msg.from);
@@ -267,6 +277,7 @@ function espouse_event(c) {
 
 return {
 	change_match: change_match,
+	change_court: change_court,
 	client_by_conn_id: client_by_conn_id,
 	espouse_event: espouse_event,
 	on_settings_change: on_settings_change,
