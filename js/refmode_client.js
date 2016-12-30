@@ -343,6 +343,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
+	var match_storage = require('./match_storage');
 	var netstats = require('./netstats');
 	var network = require('./network');
 	var refmode_conn = require('./refmode_conn');

@@ -202,6 +202,12 @@ function enter_match(match) {
 		return;
 	}
 
+	var stored = match_storage.get(match.setup.match_id);
+	if (stored && stored.presses) {
+		control.start_match(state, match.setup, stored.presses);
+		return;
+	}
+
 	var netscore = match.network_score;
 	if (netscore) {
 		var mwinner = calc.match_winner(match.setup.counting, netscore);
@@ -660,6 +666,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var eventsheet = require('./eventsheet');
 	var jticker = require('./jticker');
 	var liveaw = require('./liveaw');
+	var match_storage = require('./match_storage');
 	var netstats = require('./netstats');
 	var p2p = require('./p2p');
 	var pronunciation = require('./pronunciation');

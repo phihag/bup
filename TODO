@@ -1,4 +1,3 @@
-btde: jump into HD1 if HD1 stored
 refmode
 	should still get all presses of all matches after reloading refmode (parse from JSON etc.)
 		test with courtspot
@@ -9,6 +8,7 @@ refmode
 	all scoresheets at once
 	support displaymode endpoints (configuring, not yet pushing)
 	test entering finished match with btde
+	import event
 
 Aufstellung (unter editevent)
 	new field present_players
