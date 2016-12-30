@@ -151,7 +151,12 @@ function handle_dmsg(msg) {
 						return;
 					}
 
-					local_m.presses = _adopt_match(m).presses;
+					_adopt_match(m);
+					if (!m.presses) {
+						return;
+					}
+
+					local_m.presses = m.presses;
 					changed = true;
 				});
 				if (changed) {
