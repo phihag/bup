@@ -1574,7 +1574,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var click = require('./click');
 	var eventutils = require('./eventutils');
 	var network = require('./network');
-	var refmode_referee_ui = require('./refmode_referee_ui');
+	var refmode_referee_ui = null; // break circle, really would be require('./refmode_referee_ui');
 	var render = require('./render');
 	var report_problem = require('./report_problem');
 	var scoresheet = require('./scoresheet');

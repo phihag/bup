@@ -58,11 +58,16 @@ function set_metadata(event) {
 
 	event.matches.forEach(function(match) {
 		match.md_eid = match.setup.eventsheet_id || match.setup.match_name;
-		if (! match.presses_json) {
+		var presses;
+		if (match.presses) {
+			presses = match.presses;
+		} else if (match.presses_json) {
+			presses = JSON.parse(match.presses_json);
+		} else {
 			return;
 		}
+
 		var scopy = {};
-		var presses = JSON.parse(match.presses_json);
 		calc.init_state(scopy, match.setup, presses);
 		calc.state(scopy);
 		var fpresses = scopy.flattened_presses;

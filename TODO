@@ -1,8 +1,4 @@
 refmode
-	eventsheets
-		score is missing
-		Schiedsrichter
-		Ende
 	order
 	all scoresheets at once
 	support configuring displaymode endpoints
