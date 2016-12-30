@@ -409,6 +409,13 @@ function render_event(s) {
 	click.on(export_link, function() {
 		importexport.ui_export_json(s);
 	});
+	var scoresheets_link = uiu.create_el(links_container, 'a', {
+		'class': 'js_link',
+	}, s._('settings:Event Scoresheets'));
+	click.on(scoresheets_link, function() {
+		hide_tmp();
+		scoresheet.event_show();
+	});
 
 	uiu.text_qs('.referee_event_title', ev.event_name);
 	document.title = ev.event_name;
