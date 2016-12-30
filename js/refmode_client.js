@@ -60,8 +60,15 @@ function craft_event() {
 
 	if (ev.matches) {
 		res.matches = ev.matches.map(function(m) {
-			return utils.pluck(
+			var res = utils.pluck(
 				m, ['setup', 'network_score', 'presses', 'presses_json']);
+			if (!m.presses && !m.presses_json) {
+				var loaded = match_storage.get(m.setup.match_id);
+				if (loaded) {
+					res.presses = loaded.presses;
+				}
+				return res;
+			}
 		});
 	}
 	return res;

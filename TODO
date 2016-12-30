@@ -1,6 +1,8 @@
+btde: jump into HD1 if HD1 stored
 refmode
 	should still get all presses of all matches after reloading refmode (parse from JSON etc.)
-		btde: make sure to send JSON
+		test with courtspot
+		integrate with multiple clients (test with a tablet?)
 	export
 	eventsheets
 	order
