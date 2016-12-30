@@ -1,29 +1,34 @@
 .referee_layout {
-	padding: 2vh 0 0 0;
+	padding: 0 0 0 0;
 	z-index: 20000;
 	position: relative;
 	font-size: 22px;
+	background: inherit;
 }
 .referee_layout button {
 	font-size: inherit;
 }
 
-.referee_clients,
-.referee_event {
-	display: inline-block;
+.referee_clients {
+	float: left;
 	width: 46vw;
-	padding: 0.7vmin 0.7vmin;
-	margin: 0 1vw;
-	background: #eee;
+	padding: 0.7vmin 1.4vmin 1.4vmin 0.7vmin;
+	margin: 0 0 0 0;
+	background: inherit;
+	border-bottom-right-radius: 0.7vmin;
 }
 .referee_event {
+	background: inherit;
 	float: right;
+	width: 48vw;
+	padding: 0.7vmin 0.7vmin 1.4vmin 1.4vmin;
+	margin: 0 0 0 0;
+	border-bottom-left-radius: 0.7vmin;
 }
 
 .referee_c {
-	border: 1px solid #000;
 	background: #fff;
-	padding: 1vmin;
+	padding: 1.4vmin 0.7vmin 1.4vmin 0.7vmin;
 }
 .referee_c + .referee_c {
 	margin-top: 2vmin;
@@ -96,4 +101,8 @@
 
 .referee_c_court_row {
 	padding: 0 0 0.7em 0;
+}
+
+.referee_e_links {
+	margin-top: 0.5em;
 }

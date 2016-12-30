@@ -409,6 +409,16 @@ function render_event(s) {
 		});
 	}
 
+	var links_container = uiu.qs('.referee_e_links');
+	uiu.empty(links_container);
+
+	var export_link = uiu.create_el(links_container, 'a', {
+		'class': 'js_link',
+	}, s._('settings:Export link'));
+	click.on(export_link, function() {
+		importexport.ui_export_json(s);
+	});
+
 	uiu.text_qs('.referee_event_title', ev.event_name);
 	document.title = ev.event_name;
 }
@@ -485,6 +495,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var click = require('./click');
 	var displaymode = require('./displaymode');
 	var key_storage = require('./key_storage');
+	var importexport = require('./importexport');
 	var refmode_client_ui = require('./refmode_client_ui');
 	var refmode_referee = require('./refmode_referee');
 	var render = require('./render');
