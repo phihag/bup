@@ -225,7 +225,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var netstats = require('./netstats');
 	var network = require('./network');
 	var order = require('./order');
-	var refmode_referee_ui = require('./refmode_referee_ui');
+	var refmode_referee_ui = null; // break cycle, should be require('./refmode_referee_ui');
 	var render = require('./render');
 	var scoresheet = require('./scoresheet');
 	var settings = require('./settings');

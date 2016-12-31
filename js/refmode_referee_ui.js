@@ -362,7 +362,7 @@ function render_clients(clients) {
 
 			var dstyle_form = uiu.create_el(dstyle_row, 'form', {
 				'class': 'referee_c_dstyle_change_form',
-			})
+			});
 			dstyle_form.addEventListener('submit', on_client_dstyle_change_submit);
 			var change_dstyle_sel = uiu.create_el(dstyle_form, 'select', {
 				'class': 'referee_c_dstyle_change_select',
@@ -579,7 +579,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var key_storage = require('./key_storage');
 	var importexport = require('./importexport');
 	var order = require('./order');
-	var refmode_client_ui = require('./refmode_client_ui');
+	var refmode_client_ui = null; // break cycle, should be require('./refmode_client_ui');
 	var refmode_referee = require('./refmode_referee');
 	var render = require('./render');
 	var report_problem = require('./report_problem');

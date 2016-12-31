@@ -334,6 +334,9 @@ function ui_init(s) {
 }
 
 function get_mode(s) {
+	if (!s.ui) {
+		return 'umpire'; // Tests?
+	}
 	if (s.ui.displaymode_visible) {
 		return 'display';
 	}
@@ -392,8 +395,8 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var i18n = require('./i18n');
 	var match_storage = require('./match_storage');
 	var network = require('./network');
-	var refmode_client_ui = require('./refmode_client_ui');
-	var refmode_referee_ui = require('./refmode_referee_ui');
+	var refmode_client_ui = null; // break cycle, should be require('./refmode_client_ui');
+	var refmode_referee_ui = null; // break cycle, should be require('./refmode_referee_ui');
 	var render = require('./render');
 	var scoresheet = require('./scoresheet');
 	var stats = require('./stats');

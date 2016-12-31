@@ -568,7 +568,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
 	var eventutils = require('./eventutils');
 	var network = require('./network');
-	var refmode_referee_ui = require('./refmode_referee_ui');
+	var refmode_referee_ui = null; // break cycle, should be require('./refmode_referee_ui');
 	var render = require('./render');
 	var settings = require('./settings');
 	var uiu = require('./uiu');
