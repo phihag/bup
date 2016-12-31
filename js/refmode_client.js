@@ -101,6 +101,7 @@ function handle_dmsg(msg) {
 			netstats: netstats.all_stats,
 			subscribed: (subscriptions.indexOf(msg.from) >= 0),
 			battery: bat_status(),
+			mode: settings.get_mode(s),
 		};
 
 		if (msg.include && (msg.include.indexOf('bup_version') >= 0) && (typeof bup_version === 'string')) {

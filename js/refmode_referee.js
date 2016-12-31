@@ -79,6 +79,28 @@ function change_court(conn_id, new_court_id) {
 	});
 }
 
+function change_display_style(conn_id, new_style) {
+	conn.send({
+		type: 'dmsg',
+		dtype: 'update-settings',
+		to: conn_id,
+		settings: {
+			displaymode_style: new_style,
+		},
+	});
+}
+
+function change_display_court(conn_id, new_court) {
+	conn.send({
+		type: 'dmsg',
+		dtype: 'update-settings',
+		to: conn_id,
+		settings: {
+			displaymode_court_id: new_court,
+		},
+	});
+}
+
 function update_match(s, msg) {
 	if (!Array.isArray(msg.presses) || !msg.setup) {
 		return; // Incomplete update request
@@ -127,7 +149,7 @@ function handle_dmsg(msg) {
 	case 'changed-settings':
 	case 'event-update':
 	case 'state':
-		['event', 'presses', 'setup', 'settings', 'node_id', 'battery', 'bup_version'].forEach(function(k) {
+		['event', 'presses', 'setup', 'settings', 'node_id', 'battery', 'bup_version', 'mode'].forEach(function(k) {
 			if (msg.hasOwnProperty(k)) {
 				c[k] = msg[k];
 			}
@@ -325,6 +347,8 @@ return {
 	key_fp: key_fp,
 	change_match: change_match,
 	change_court: change_court,
+	change_display_style: change_display_style,
+	change_display_court: change_display_court,
 	client_by_conn_id: client_by_conn_id,
 	espouse_event: espouse_event,
 	on_settings_change: on_settings_change,

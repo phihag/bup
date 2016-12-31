@@ -85,12 +85,14 @@
 }
 
 .referee_match_change_select,
-.referee_c_court_change_select {
+.referee_c_court_change_select,
+.referee_c_dstyle_change_select {
 	margin-left: 1em;
 	margin-right: 0.5em;
 }
 .referee_match_change_form,
-.referee_c_court_change_form {
+.referee_c_court_change_form,
+.referee_c_dstyle_change_form {
 	float: right;
 	display: block;
 }

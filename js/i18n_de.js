@@ -463,6 +463,7 @@ var i18n_de = {
 'refmode:referee:espouse event': 'Übernehmen',
 'refmode:referee:change match': 'Ändern',
 'refmode:referee:change court': 'Ändern',
+'refmode:referee:change display style': 'Ändern',
 'refmode:referee:outdated bup': 'Veraltete bup-Version: {bup_version}',
 'refmode:referee:no event on client': 'Kein Wettkampf assoziiert',
 'refmode:referee:generating key': 'Generiere Referee-Schlüssel ...',

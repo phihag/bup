@@ -1,6 +1,3 @@
-refmode
-	support configuring displaymode endpoints
-
 Aufstellung (unter editevent)
 	new field present_players
 	new field suggested_players -> add in XLSX
@@ -13,8 +10,8 @@ Aufstellung (unter editevent)
 	print
 	pdf
 	XLSX
-	edit present players in editevent
-	CourtSpot: import league
+	edit -> bldemo
+	edit this -> CourtSpot
 
 omit error network could not be connected in displaymode
 font size of score should be larger in single-court display
@@ -34,7 +31,9 @@ improve jticker
 
 improve refmode
 	kill button
-	docs how to associate at left panel
+	only re-render changed clients
+	only rerender changed matches
+	docs how to associate at left panel when no clients
 	order should be reflected in display
 	import event
 	more efficient protocol for differential changes

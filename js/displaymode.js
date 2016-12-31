@@ -2,6 +2,10 @@
 var displaymode = (function() {
 
 var autosize_cancels = [];
+var ALL_STYLES = [
+	'oncourt',
+	'top+list',
+];
 
 function _setup_autosize(el, right_node) {
 	autosize.maintain(el, function() {
@@ -471,12 +475,19 @@ function ui_init() {
 	});
 }
 
+function court_specific(style_id) {
+	return [
+		'oncourt',
+	].includes(style_id);
+}
 
 return {
 	show: show,
 	hide: hide,
 	ui_init: ui_init,
 	on_style_change: on_style_change,
+	court_specific: court_specific,
+	ALL_STYLES: ALL_STYLES,
 };
 
 })();

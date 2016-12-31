@@ -111,7 +111,22 @@ function on_client_court_change_submit(e) {
 		return;
 	}
 
-	rr.change_court(c.id, current_sel_court);
+	if (c.mode === 'display') {
+		rr.change_display_court(c.id, current_sel_court);
+	} else {
+		rr.change_court(c.id, current_sel_court);
+	}
+}
+
+function on_client_dstyle_change_submit(e) {
+	e.preventDefault();
+
+	var c = rr.client_by_conn_id(_client_id(e));
+	if (!c) return;
+
+	var container = uiu.closest_class(e.target, 'referee_c');
+	var new_style = container.querySelector('.referee_c_dstyle_change_select').value;
+	rr.change_display_style(c.id, new_style);
 }
 
 function on_subscribe_checkbox_click(e) {
@@ -176,11 +191,13 @@ function make_editable(el, cb) {
 	}
 }
 
-function _all_courts(s) {
+function _all_courts(s, c) {
 	var res = (s.event && s.event.courts) ? s.event.courts.slice() : [];
-	res.push({
-		court_id: 'referee',
-	});
+	if (c.mode !== 'display') {
+		res.push({
+			court_id: 'referee',
+		});
+	}
 	return res;
 }
 
@@ -243,83 +260,127 @@ function render_clients(clients) {
 		) : s._('refmode:referee:battery:na'));
 		uiu.create_el(div, 'div', {}, s._('refmode:referee:battery') + bat_text);
 
-		var umpire_row = uiu.create_el(div, 'div', {}, s._('refmode:referee:umpire_name'));
-		var umpire_name = uiu.create_el(umpire_row, 'span', {}, (c.settings ? c.settings.umpire_name : '-'));
-		make_editable(umpire_name, function(new_name) {
-			rr.update_settings(c.id, {
-				umpire_name: new_name,
+		if (c.mode === 'umpire') {
+			var umpire_row = uiu.create_el(div, 'div', {}, s._('refmode:referee:umpire_name'));
+			var umpire_name = uiu.create_el(umpire_row, 'span', {}, (c.settings ? c.settings.umpire_name : '-'));
+			make_editable(umpire_name, function(new_name) {
+				rr.update_settings(c.id, {
+					umpire_name: new_name,
+				});
 			});
-		});
-
-		var court_row = uiu.create_el(div, 'div', {
-			class: 'referee_c_court_row',
-		}, s._('refmode:referee:court'));
-		uiu.create_el(
-			court_row, 'span', {},
-			(c.settings ? c.settings.court_id : '') +
-			((c.settings && c.settings.court_description) ? (' (' + c.settings.court_description + ')') : ''));
-
-		var court_change_form = uiu.create_el(court_row, 'form', {
-			'class': 'referee_c_court_change_form',
-		});
-		court_change_form.addEventListener('submit', on_client_court_change_submit);
-		var court_change_select = uiu.create_el(court_change_form, 'select', {
-			'class': 'referee_c_court_change_select',
-			size: 1,
-			required: 'required',
-		});
-		_all_courts(s).forEach(function(court) {
-			var attrs = {
-				value: court.court_id,
-			};
-			if (c.settings && (c.settings.court_id == court.court_id)) {
-				attrs.selected = 'selected';
-			}
-			uiu.create_el(court_change_select, 'option', attrs, (court.description ? court.description : court.court_id));
-		});
-		uiu.create_el(court_change_form, 'button', {
-			'role': 'submit',
-		}, s._('refmode:referee:change court'));
-
-		var match_row = uiu.create_el(div, 'div', {
-			'class': 'referee_c_match_row',
-		}, s._('refmode:referee:match'));
-		if (c.setup) {
-			var match_link = uiu.create_el(match_row, 'span', {
-				'class': 'js_link',
-			}, c.setup.match_name);
-			click.on(match_link, on_client_match_link_click);
-
-			if (c.presses) {
-				var client_state = calc.remote_state(s, c.setup, c.presses);
-				uiu.create_el(match_row, 'span', {
-					'class': 'referee_c_match_status',
-				}, calc.desc(client_state));
-			}
 		}
-		if (c.event && ev && ev.matches && (c.event.id === ev.id)) {
-			var match_change_form = uiu.create_el(match_row, 'form', {
-				'class': 'referee_match_change_form',
-			});
-			match_change_form.addEventListener('submit', on_client_match_change_submit);
 
-			var change_match_sel = uiu.create_el(match_change_form, 'select', {
-				'class': 'referee_match_change_select',
+		// Court
+		var need_court = (
+			(c.mode === 'umpire') ||
+			((c.mode === 'display') &&
+				displaymode.court_specific(c.settings.displaymode_style)
+			));
+		if (need_court) {
+			var court_row = uiu.create_el(div, 'div', {
+				class: 'referee_c_court_row',
+			}, s._('refmode:referee:court'));
+			var court_text = '';
+			if (c.settings) {
+				if (c.mode === 'display') {
+					court_text = c.settings.displaymode_court_id;
+				} else {
+					court_text = c.settings.court_id + (c.settings.court_description ? (' (' + c.settings.court_description + ')') : '');
+				}
+			}
+			uiu.create_el(court_row, 'span', {}, court_text);
+			var court_change_form = uiu.create_el(court_row, 'form', {
+				'class': 'referee_c_court_change_form',
+			});
+			court_change_form.addEventListener('submit', on_client_court_change_submit);
+			var court_change_select = uiu.create_el(court_change_form, 'select', {
+				'class': 'referee_c_court_change_select',
 				size: 1,
 				required: 'required',
 			});
-			uiu.create_el(change_match_sel, 'option', {
-				value: '',
-				selected: 'selected',
-			}, '');
-			ev.matches.forEach(function(m) {
-				uiu.create_el(change_match_sel, 'option', {
-					value: m.setup.match_id,
-				}, m.setup.match_name);
+			var cur_court_id = (c.mode === 'display') ? c.settings.displaymode_court_id : c.settings.court_id;
+			_all_courts(s, c).forEach(function(court) {
+				var attrs = {
+					value: court.court_id,
+				};
+				if (c.settings && (cur_court_id == court.court_id)) {
+					attrs.selected = 'selected';
+				}
+				uiu.create_el(court_change_select, 'option', attrs, (court.description ? court.description : court.court_id));
 			});
-			uiu.create_el(match_change_form, 'button', {
+			uiu.create_el(court_change_form, 'button', {
 				'role': 'submit',
-			}, s._('refmode:referee:change match'));
+			}, s._('refmode:referee:change court'));
+		}
+
+		// Match / Main configuration
+		if (c.mode === 'umpire') {
+			var match_row = uiu.create_el(div, 'div', {
+				'class': 'referee_c_match_row',
+			}, s._('refmode:referee:match'));
+			if (c.setup) {
+				var match_link = uiu.create_el(match_row, 'span', {
+					'class': 'js_link',
+				}, c.setup.match_name);
+				click.on(match_link, on_client_match_link_click);
+
+				if (c.presses) {
+					var client_state = calc.remote_state(s, c.setup, c.presses);
+					uiu.create_el(match_row, 'span', {
+						'class': 'referee_c_match_status',
+					}, calc.desc(client_state));
+				}
+			}
+			if (c.event && ev && ev.matches && (c.event.id === ev.id)) {
+				var match_change_form = uiu.create_el(match_row, 'form', {
+					'class': 'referee_match_change_form',
+				});
+				match_change_form.addEventListener('submit', on_client_match_change_submit);
+
+				var change_match_sel = uiu.create_el(match_change_form, 'select', {
+					'class': 'referee_match_change_select',
+					size: 1,
+					required: 'required',
+				});
+				uiu.create_el(change_match_sel, 'option', {
+					value: '',
+					selected: 'selected',
+				}, '');
+				ev.matches.forEach(function(m) {
+					uiu.create_el(change_match_sel, 'option', {
+						value: m.setup.match_id,
+					}, m.setup.match_name);
+				});
+				uiu.create_el(match_change_form, 'button', {
+					'role': 'submit',
+				}, s._('refmode:referee:change match'));
+			}
+		} else if (c.mode === 'display') {
+			var dstyle_row = uiu.create_el(div, 'div', {
+				'class': 'referee_c_dstyle',
+			}, s._('displaymode:style') + ' ' + s._('displaymode:' + c.settings.displaymode_style));
+
+			var dstyle_form = uiu.create_el(dstyle_row, 'form', {
+				'class': 'referee_c_dstyle_change_form',
+			})
+			dstyle_form.addEventListener('submit', on_client_dstyle_change_submit);
+			var change_dstyle_sel = uiu.create_el(dstyle_form, 'select', {
+				'class': 'referee_c_dstyle_change_select',
+				size: 1,
+				required: 'required',
+			});
+			displaymode.ALL_STYLES.forEach(function(ds) {
+				var attrs = {
+					value: ds,
+				};
+				if (ds === c.settings.displaymode_style) {
+					attrs.selected = 'selected';
+				}
+				uiu.create_el(change_dstyle_sel, 'option', attrs, s._('displaymode:' + ds));
+			});
+			uiu.create_el(dstyle_form, 'button', {
+				'role': 'submit',
+			}, s._('refmode:referee:change display style'));
 		}
 
 		if (c.event && (!ev || (c.event.id !== ev.id))) {
