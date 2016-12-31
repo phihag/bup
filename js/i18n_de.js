@@ -223,7 +223,7 @@ var i18n_de = {
 'settings:click_mode:touchstart': 'Schnell',
 'settings:click_mode:touchend': 'Langsam',
 'settings:click_mode:click': 'Nativ',
-'settings:refmode:client:status': 'Referee (experimentell):',
+'settings:refmode:client:status': 'Referee:',
 'settings:refmode:client:node_name': 'Geräte-Name:',
 'settings:refmode:ws_url': 'Hub-URL:',
 'settings:refmode:redirected': 'Lokaler Hub: ',
@@ -231,7 +231,7 @@ var i18n_de = {
 'settings:mode:label': 'Modus:',
 'settings:mode:umpire': 'Schiedsrichter',
 'settings:mode:display': 'Anzeigetafel (experimentell)',
-'settings:mode:referee': 'Referee (experimentell)',
+'settings:mode:referee': 'Referee',
 
 'exceptions:yellow-card-title': 'Gelbe Karte',
 'exceptions:yellow-card': 'Verwarnung',

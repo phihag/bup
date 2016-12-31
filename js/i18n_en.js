@@ -223,7 +223,7 @@ var i18n_en = {
 'settings:click_mode:touchstart': 'Fast',
 'settings:click_mode:touchend': 'Slow',
 'settings:click_mode:click': 'Native',
-'settings:refmode:client:status': 'Referee (experimental):',
+'settings:refmode:client:status': 'Referee:',
 'settings:refmode:client:node_name': 'Device name:',
 'settings:refmode:ws_url': 'Hub URL:',
 'settings:refmode:redirected': 'Local Hub: ',
@@ -231,7 +231,7 @@ var i18n_en = {
 'settings:mode:label': 'Mode:',
 'settings:mode:umpire': 'Umpire',
 'settings:mode:display': 'Display (experimental)',
-'settings:mode:referee': 'Referee (experimental)',
+'settings:mode:referee': 'Referee',
 
 'exceptions:yellow-card-title': 'Yellow card',
 'exceptions:yellow-card': 'Warning',
