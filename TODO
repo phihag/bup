@@ -33,7 +33,6 @@ improve refmode
 	kill button
 	only re-render changed clients
 	only rerender changed matches
-	docs how to associate at left panel when no clients
 	order should be reflected in display
 	import event
 	more efficient protocol for differential changes

@@ -443,7 +443,7 @@ var i18n_de = {
 'refmode:client:no_select_referee': 'Anzeige verbergen',
 'refmode:client:paired': 'Authentifizierte Referees: {refs_str}',
 'refmode:client:paired:none': 'Keine Referees authentifiziert',
-'refmode:referee:paired:none': 'Keine Tablets verbunden',
+'refmode:referee:paired:none': 'Keine Tablets verbunden.\n\nVerbinde ein Tablet:\n1. Option "Referee" in den Einstellungen aktivieren.\n2. Auf Button "Mit Referee verbinden" klicken.\n3. {ref_fp} auswählen.',
 'refmode:referee:subscribe': 'Live',
 'refmode:referee:refresh': 'Aktualisieren',
 'refmode:referee:battery': 'Batterie: ',

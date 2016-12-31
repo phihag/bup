@@ -410,7 +410,13 @@ function render_clients(clients) {
 	});
 
 	if (clients.length === 0) {
-		uiu.text(container, s._('refmode:referee:paired:none'));
+		var key = rr ? rr.key_fp() : null;
+		var key_str = key ? key : '[...]';
+		uiu.create_el(container, 'div', {
+			'class': 'referee_c_tutorial',
+		}, s._('refmode:referee:paired:none', {
+			ref_fp: key_str,
+		}));
 	}
 }
 
