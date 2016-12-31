@@ -230,7 +230,7 @@ var i18n_de = {
 
 'settings:mode:label': 'Modus:',
 'settings:mode:umpire': 'Schiedsrichter',
-'settings:mode:display': 'Anzeigetafel (experimentell)',
+'settings:mode:display': 'Anzeigetafel',
 'settings:mode:referee': 'Referee',
 
 'exceptions:yellow-card-title': 'Gelbe Karte',

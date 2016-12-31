@@ -230,7 +230,7 @@ var i18n_en = {
 
 'settings:mode:label': 'Mode:',
 'settings:mode:umpire': 'Umpire',
-'settings:mode:display': 'Display (experimental)',
+'settings:mode:display': 'Display',
 'settings:mode:referee': 'Referee',
 
 'exceptions:yellow-card-title': 'Yellow card',
