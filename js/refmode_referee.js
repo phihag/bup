@@ -17,7 +17,12 @@ key_storage.retrieve(function(err, k) {
 	if (last_status.status === 'welcomed') {
 		register();
 	}
+	render_clients(clients);
 });
+
+function key_fp() {
+	return key ? key.fp : null;
+}
 
 function register() {
 	var data = utils.encode_utf8(last_status.challenge);
@@ -317,6 +322,7 @@ function espouse_event(c) {
 }
 
 return {
+	key_fp: key_fp,
 	change_match: change_match,
 	change_court: change_court,
 	client_by_conn_id: client_by_conn_id,

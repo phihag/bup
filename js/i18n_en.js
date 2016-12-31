@@ -465,6 +465,7 @@ var i18n_en = {
 'refmode:referee:change court': 'Change court',
 'refmode:referee:outdated bup': 'Outdated bup version: {bup_version}',
 'refmode:referee:no event on client': 'No event associated',
+'refmode:referee:generating key': 'Generating referee key ...',
 };
 
 /*@DEV*/

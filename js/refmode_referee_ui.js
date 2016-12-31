@@ -188,6 +188,9 @@ function render_clients(clients) {
 	var s = state;
 	var ev = s.event;
 
+	var kfp = rr ? rr.key_fp() : null;
+	uiu.text_qs('.referee_key', kfp ? kfp : s._('refmode:referee:generating key'));
+
 	var container = uiu.qs('.referee_clients');
 	uiu.empty(container);
 
@@ -356,7 +359,7 @@ function render_event(s) {
 	uiu.empty(matches_container);
 
 	if (!ev) {
-		uiu.text_qs('.referee_event_title', s._('refmode:referee:no event'));
+		uiu.text_qs('.referee_e_title', s._('refmode:referee:no event'));
 		uiu.text(matches_container, s._('refmode:referee:no matches'));
 		return;
 	}
@@ -423,7 +426,7 @@ function render_event(s) {
 		order.show();
 	});
 
-	uiu.text_qs('.referee_event_title', ev.event_name);
+	uiu.text_qs('.referee_e_title', ev.event_name);
 	document.title = ev.event_name;
 }
 

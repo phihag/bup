@@ -9,6 +9,7 @@ Aufstellung (unter editevent)
 	add completely new players (with input)
 	click on boxes to change
 	make sure layout contains BuLi-Logo
+	Message "Yes, correct." || "No, check doubles/singles" || "no info"
 	print
 	pdf
 	XLSX
@@ -30,6 +31,75 @@ improve jticker
 	login with user/pass
 	delete old bup versions
 	edit teams? (all_players...)
+
+improve refmode
+	kill button
+	docs how to associate at left panel
+	order should be reflected in display
+	import event
+	more efficient protocol for differential changes
+	more efficient updating on referee
+		calc state of matches and just update that when necessary
+	test with multiple referees
+	document direct protocol
+	show error in UI
+	send export to referee (add request_id map)
+	subscribe
+		event state (i.e. players being filled in / changed)
+	configure fullscreen
+	push match state of other matches to client if match not present (i.e. btde)
+	live push state for display
+	record failures (closing on error) and successful connections
+	transmit and show last error with timestamp
+	transmit and show network status with timestamp
+	show netstats
+	show other settings
+
+	install pseudeo network refmode_referee
+	push event to client (live changes for displaymode, make sure no loop)
+	change setting  announcements visible/not visible
+	init scripts for hub (including installation script)
+	client: auto-update referee list
+	update referee list when referee disconnects
+	show disconnected clients
+	show current client state (i.e. enter the match etc.) in a small view?
+	show last 5 presses
+	more efficient rendering (client.updated)
+	test that battery stays current
+	show current network state
+	test two clients at the same match
+	re-render clients+event upon language change
+
+improve display mode
+	like den-ger
+	show team colors (blue-white refrath etc., as a square, maybe with two triangles)
+	test that settings change has immediate effect (UI)
+	large numbers display mode (larger than now, maybe two courts, game count)
+	add lock functionality
+	berlin-like display (names top/bottom, very large numbers for one court)
+	recheck that caching still works with annotate
+	add btde emulation
+	bg colors single-court display (https://image.jimcdn.com/app/cms/image/transf/dimension=640x1024:format=jpg/path/sb05689bf882eaf25/image/ia1b1bbe374005542/version/1473663902/image.jpg seems very good)
+	double court mode (digits outside)
+	normal mode w/ digits outside
+	add court outline display mode
+	refrath-gegen integration (count down to match start)
+	upon changing mode or court show name and court at top for 10s
+	left/right keys to change display type
+	up/down keys to change court
+	test all with incomplete matchups!
+	use state.event upon switching from settings (don't start with loading then)
+	add court info to vdemo/edemo
+	update court info with vdemo/edemo
+	implement courts with liveaw
+	switch to svg display for list
+	hide settings after timeout (10s?)
+	show last update in settings
+	support display mode without network
+	show games on the side that won them?
+	net status flickering when hub is away
+
+Notiz an Spielernamen (-> Werner Durow)
 
 android home screen icon
 run lighthouse
@@ -62,10 +132,6 @@ courtspot
 if @dev: warn if event_name is redundant
 	update import/export
 
-print match order
-	hide buttons
-	proper margin at top
-
 Aufstellungszettel mit all_names (checkboxes)
 	helper method update_event
 		keep all_players if present in old and id == old_id and not present in new
@@ -75,35 +141,6 @@ Aufstellungszettel mit all_names (checkboxes)
 
 pick referee court if starting with displaymode
 
-improve display mode
-	like den-ger
-	show team colors (blue-white refrath etc., as a square, maybe with two triangles)
-	test that settings change has immediate effect (UI)
-	large numbers display mode (larger than now, maybe two courts, game count)
-	add lock functionality
-	berlin-like display (names top/bottom, very large numbers for one court)
-	recheck that caching still works with annotate
-	add btde emulation
-	bg colors single-court display (https://image.jimcdn.com/app/cms/image/transf/dimension=640x1024:format=jpg/path/sb05689bf882eaf25/image/ia1b1bbe374005542/version/1473663902/image.jpg seems very good)
-	double court mode (digits outside)
-	normal mode w/ digits outside
-	add court outline display mode
-	refrath-gegen integration (count down to match start)
-	upon changing mode or court show name and court at top for 10s
-	left/right keys to change display type
-	up/down keys to change court
-	test all with incomplete matchups!
-	use state.event upon switching from settings (don't start with loading then)
-	add court info to vdemo/edemo
-	update court info with vdemo/edemo
-	implement courts with liveaw
-	switch to svg display for list
-	hide settings after timeout (10s?)
-	show last update in settings
-	support display mode without network
-	show games on the side that won them?
-	net status flickering when hub is away
-
 BVM-Support
 	Upload via SFTP
 
@@ -112,44 +149,6 @@ publish to turnier.de
 bldemo: Active match should be on court 1
 bldemo: without started matches (bldemo_inprogress?)
 ask again if resetting to 0-0 (btde)
-
-improve refmode
-	import event
-	more efficient protocol for differential changes
-	more efficient updating on referee
-		calc state of matches and just update that when necessary
-	test with multiple referees
-	document direct protocol
-	kill button
-	show error in UI
-	send export to referee (add request_id map)
-	subscribe
-		event state (i.e. players being filled in / changed)
-	configure fullscreen
-	push match state of other matches to client if match not present (i.e. btde)
-	live push state for display
-	record failures (closing on error) and successful connections
-	transmit and show last error with timestamp
-	transmit and show network status with timestamp
-	show netstats
-	show other settings
-
-	install pseudeo network refmode_referee
-	push event to client (live changes for displaymode, make sure no loop)
-	change setting  announcements visible/not visible
-	init scripts for hub (including installation script)
-	client: auto-update referee list
-	update referee list when referee disconnects
-	show disconnected clients
-	show current client state (i.e. enter the match etc.) in a small view?
-	show last 5 presses
-	more efficient rendering (client.updated)
-	test that battery stays current
-	show current network state
-	test two clients at the same match
-	re-render clients+event upon language change
-
-Notiz an Spielernamen (-> Werner Durow)
 
 test key_utils.gen / sign / verify
 order:
@@ -405,10 +404,6 @@ disqualification at game start
 	write test
 	test
 test various network errors
-
-test touch interface
-test touch latency
-prevent double touches
 
 show what was undone
 support for team flags

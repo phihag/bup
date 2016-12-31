@@ -465,6 +465,7 @@ var i18n_de = {
 'refmode:referee:change court': 'Ändern',
 'refmode:referee:outdated bup': 'Veraltete bup-Version: {bup_version}',
 'refmode:referee:no event on client': 'Kein Wettkampf assoziiert',
+'refmode:referee:generating key': 'Generiere Referee-Schlüssel ...',
 };
 
 /*@DEV*/

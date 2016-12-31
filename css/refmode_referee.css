@@ -13,7 +13,6 @@
 	float: left;
 	width: 46vw;
 	padding: 0.7vmin 1.4vmin 1.4vmin 0.7vmin;
-	margin: 0 0 0 0;
 	background: inherit;
 	border-bottom-right-radius: 0.7vmin;
 }
@@ -49,7 +48,7 @@
 	padding-left: 0.4em;
 }
 .referee_e_match {
-	margin-top: 0.4em;
+	margin-bottom: 0.4em;
 	background: #fff;
 	padding: 0.2em 0.5em;
 }
@@ -111,4 +110,6 @@
 	margin-right: 1.5em;
 	margin-bottom: 0.8em;
 }
-
+.referee_e_title {
+	float: right;
+}
