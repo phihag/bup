@@ -236,8 +236,12 @@ function show() {
 		return;
 	}
 
-	render.hide();
-	settings.hide(true);
+	if (state.ui.referee_mode) {
+		refmode_referee_ui.hide_tmp();
+	} else {
+		render.hide();
+		settings.hide(true);
+	}
 
 	state.ui.editevent_visible = true;
 	uiu.esc_stack_push(hide);
@@ -272,7 +276,12 @@ function hide() {
 	state.ui.editevent_visible = false;
 	uiu.visible_qs('.editevent_layout', false);
 	control.set_current(state);
-	settings.show();
+
+	if (state.ui.referee_mode) {
+		refmode_referee_ui.back_to_ui();
+	} else {
+		settings.show();
+	}
 }
 
 function ui_init() {
@@ -308,6 +317,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
 	var eventutils = require('./eventutils');
 	var network = require('./network');
+	var refmode_referee_ui = null; // break cycle, should be require('./refmode_referee_ui');
 	var render = require('./render');
 	var settings = require('./settings');
 	var uiu = require('./uiu');

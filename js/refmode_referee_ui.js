@@ -473,12 +473,6 @@ function render_event(s) {
 	links_container.removeAttribute('data-league-key');
 	eventsheet.render_links(s, links_container);
 	
-	var export_link = uiu.create_el(links_container, 'a', {
-		'class': 'js_link',
-	}, s._('settings:Export link'));
-	click.on(export_link, function() {
-		importexport.ui_export_json(s);
-	});
 	var scoresheets_link = uiu.create_el(links_container, 'a', {
 		'class': 'js_link',
 	}, s._('settings:Event Scoresheets'));
@@ -491,6 +485,18 @@ function render_event(s) {
 	}, s._('settings:Order link'));
 	click.on(order_link, function() {
 		order.show();
+	});
+	var editevent_link = uiu.create_el(links_container, 'a', {
+		'class': 'js_link',
+	}, s._('editevent:link'));
+	click.on(editevent_link, function() {
+		editevent.show();
+	});
+	var export_link = uiu.create_el(links_container, 'a', {
+		'class': 'js_link',
+	}, s._('settings:Export link'));
+	click.on(export_link, function() {
+		importexport.ui_export_json(s);
 	});
 
 	uiu.text_qs('.referee_e_title', ev.event_name);
@@ -581,6 +587,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
 	var click = require('./click');
 	var displaymode = require('./displaymode');
+	var editevent = require('./editevent');
 	var eventsheet = require('./eventsheet');
 	var key_storage = require('./key_storage');
 	var importexport = require('./importexport');

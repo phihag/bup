@@ -1,3 +1,7 @@
+refmode
+	editevent
+bldemo: max schwenger present twice?
+
 Aufstellung (unter editevent)
 	new field present_players
 	new field suggested_players -> add in XLSX
