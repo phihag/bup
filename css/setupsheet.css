@@ -1,0 +1,25 @@
+.setupsheet_layout {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	min-height: 100%;
+	font-size: 24px;
+	text-align: center;
+	background: rgba(0, 0, 0, 0.9);
+	z-index: 2000;
+}
+
+.setupsheet_container {
+	display: inline-block;
+	background: #fff;
+	color: #000;
+	padding: 0 0.5em 0.5em 0.5em;
+	border-bottom-left-radius: 0.4em;
+	border-bottom-right-radius: 0.4em;
+}
+
+.setupsheet_link,
+.referee_e_setupsheet_link {
+	display: none !important;
+}

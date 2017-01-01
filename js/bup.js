@@ -37,6 +37,7 @@ function ui_init() {
 	order.ui_init();
 	importexport.ui_init();
 	editevent.ui_init();
+	setupsheet.ui_init();
 	displaymode.ui_init();
 	shortcuts.ui_init(state);
 	refmode_client_ui.ui_init(state);
@@ -101,6 +102,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var report_problem = require('./report_problem');
 	var scoresheet = require('./scoresheet');
 	var settings = require('./settings');
+	var setupsheet = require('./setupsheet');
 	var shortcuts = require('./shortcuts');
 	var startmatch = require('./startmatch');
 	var stats = require('./stats');

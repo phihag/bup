@@ -27,6 +27,7 @@
 	<link rel="stylesheet" href="css/importexport.css" />
 	<link rel="stylesheet" href="css/staticnet.css" />
 	<link rel="stylesheet" href="css/editevent.css" />
+	<link rel="stylesheet" href="css/setupsheet.css" />
 	<link rel="stylesheet" href="css/displaymode.css" />
 	<link rel="stylesheet" href="css/click.css" />
 	<link rel="stylesheet" href="css/refmode_client.css" />
@@ -225,6 +226,7 @@
 		<a href="#" class="order_link" data-i18n="settings:Order link"></a>
 		<a href="#" class="export_link" data-i18n="settings:Export link"></a>
 		<a href="#" class="editevent_link default-invisible" data-i18n="editevent:link"></a>
+		<a href="#" class="setupsheet_link default-invisible" data-i18n="setupsheet:link"></a>
 		<a href="#" class="setup_show_manual" data-i18n="settings:Custom match details"></a>
 	</div>
 	</div>
@@ -540,6 +542,16 @@ text.team1 {
 </div>
 </div>
 
+<div class="setupsheet_layout default-invisible">
+<div class="setupsheet_container">
+	<div class="setupsheet_loading-icon loading-icon"></div>
+	<div class="setupsheet_error"><span class="setupsheet_error_message"></span></div>
+	<table class="setupsheet_table"></table>
+	<a href="#" class="setupsheet_back" data-i18n="setupsheet:back"></a>
+</div>
+</div>
+
+
 <div class="displaymode_layout default-invisible"></div>
 
 <div class="referee_layout default-invisible">
@@ -602,6 +614,7 @@ text.team1 {
 <script src="js/report_problem.js"></script>
 <script src="js/scoresheet.js"></script>
 <script src="js/settings.js"></script>
+<script src="js/setupsheet.js"></script>
 <script src="js/shortcuts.js"></script>
 <script src="js/startmatch.js"></script>
 <script src="js/staticnet.js"></script>

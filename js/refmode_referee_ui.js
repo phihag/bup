@@ -492,6 +492,12 @@ function render_event(s) {
 	click.on(editevent_link, function() {
 		editevent.show();
 	});
+	var setupsheet_link = uiu.create_el(links_container, 'a', {
+		'class': 'js_link referee_e_setupsheet_link',
+	}, s._('setupsheet:link'));
+	click.on(setupsheet_link, function() {
+		setupsheet.show();
+	});
 	var export_link = uiu.create_el(links_container, 'a', {
 		'class': 'js_link',
 	}, s._('settings:Export link'));
@@ -598,6 +604,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var report_problem = require('./report_problem');
 	var scoresheet = require('./scoresheet');
 	var settings = require('./settings');
+	var setupsheet = require('./setupsheet');
 	var stats = require('./stats');
 	var uiu = require('./uiu');
 	var utils = require('./utils');

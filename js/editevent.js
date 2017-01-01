@@ -264,7 +264,6 @@ function show() {
 			render_table(state);
 		});
 	}
-
 }
 
 function hide() {

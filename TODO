@@ -1,8 +1,10 @@
-refmode
-	editevent
-bldemo: max schwenger present twice?
+TODO losing focus too often
+	incremental updates
 
-Aufstellung (unter editevent)
+Aufstellung
+	add basic table
+	implement load_all_players
+
 	new field present_players
 	new field suggested_players -> add in XLSX
 	list all_players (list top 2 singles / 4 doubles)

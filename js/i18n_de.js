@@ -56,6 +56,9 @@ var i18n_de = {
 'editevent:present players': 'Anwesende Spieler',
 'editevent:add present player': 'Anwesende hinzufügen ...',
 
+'setupsheet:link': 'Aufstellung',
+'setupsheet:back': 'Zurück',
+
 'button:undo': 'Rückgängig',
 'button:settings': 'Konfiguration',
 'button:exception': 'Situation',
