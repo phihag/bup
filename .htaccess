@@ -5,10 +5,3 @@ DirectoryIndex bup.html
 Header set Cache-Control "no-cache"
 </IfModule>
 </filesMatch>
-
-<IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteCond %{HTTPS} !=on
-RewriteCond %{HTTP_HOST} aufschlagwechsel.de
-RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [NC,R=301,L]
-</IfModule>
