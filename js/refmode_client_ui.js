@@ -9,10 +9,21 @@ function update_ref_display(s) {
 	var paired = rc.get_paired_referees();
 	var paired_el = uiu.qs('.refmode_client_paired');
 	if (paired.length > 0) {
-		uiu.text(paired_el, (paired.length === 1) ? s._('refmode:client:paired:one') :
-			(s._('refmode:client:paired', {
-				ref_count: paired.length,
-			})));
+		uiu.text(paired_el, s._('refmode:client:paired'));
+
+		paired.forEach(function(ref_fp) {
+			var paired = uiu.create_el(paired_el, 'div', {
+				'class': 'refmode_client_authref',
+			}, ref_fp);
+			var rm_btn = uiu.create_el(paired, 'button', {
+				'data-fp': ref_fp,
+				'class': 'button_delete image-button refmode_client_rmbtn',
+			});
+			uiu.create_el(rm_btn, 'span', {
+				'data-fp': ref_fp,
+			});
+			click.on(rm_btn, disconnect_button_click);
+		});
 		paired_el.setAttribute('title', paired.join('\n'));
 	} else {
 		uiu.text(paired_el, s._('refmode:client:paired:none'));
@@ -52,12 +63,22 @@ function get_node_id() {
 
 function connect_button_click(e) {
 	var ref_fp = e.target.getAttribute('data-fp');
-	var paired = rc.get_paired_referees();
-	if (paired.indexOf(ref_fp) >= 0) {
-		rc.disconnect_referee(ref_fp);
-	} else {
-		rc.connect_to_referee(ref_fp);
+	if (!ref_fp) {
+		throw new Error('Missing data-fp attribute');
 	}
+	rc.connect_to_referee(ref_fp);
+
+	store_paired_referees();
+	update_ref_display(state);
+	set_list(state, false);
+}
+
+function disconnect_button_click(e) {
+	var ref_fp = e.target.getAttribute('data-fp');
+	if (!ref_fp) {
+		throw new Error('Missing data-fp attribute');
+	}
+	rc.disconnect_referee(ref_fp);
 
 	store_paired_referees();
 	update_ref_display(state);
@@ -66,21 +87,24 @@ function connect_button_click(e) {
 
 function list_handler(referee_list) {
 	var paired = rc.get_paired_referees();
+	var connectable = referee_list.filter(function(ref) {
+		return (paired.indexOf(ref.fp) < 0);
+	});
 	var list_el = uiu.qs('.refmode_client_referee_list');
 	uiu.empty(list_el);
-	if (referee_list.length === 0) {
-		uiu.text(list_el, state._('refmode:client:no_referees'));
+	if (connectable.length === 0) {
+		var text = (((paired.length > 0) && (referee_list.length > 0)) ?
+			state._('refmode:client:no_more_referees') :
+			state._('refmode:client:no_referees')
+		);
+		uiu.text(list_el, text);
 	}
-	referee_list.forEach(function(ref) {
-		var div = uiu.create_el(list_el, 'div');
-		var attrs = {
+	connectable.forEach(function(ref) {
+		var btn = uiu.create_el(list_el, 'button', {
+			role: 'button',
 			'data-fp': ref.fp,
-		};
-		if (paired.indexOf(ref.fp) >= 0) {
-			attrs['data-paired'] = 'true';
-		}
-		var span = uiu.create_el(div, 'span', attrs, ref.fp);
-		click.on(span, connect_button_click);
+		}, ref.fp);
+		click.on(btn, connect_button_click);
 	});
 }
 

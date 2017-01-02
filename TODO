@@ -1,10 +1,10 @@
 fix https on live.aufschlagwechsel.de
-
+remode: show errors (b.phihag.de)
 TODO losing focus too often
 	incremental updates
-UI too confusing
-	should be buttons
-	automatically update
+refmode client:
+	reflist should update automatically
+	retranslate to en
 referee mode: back function
 
 Aufstellung

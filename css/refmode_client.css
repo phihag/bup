@@ -5,15 +5,13 @@
 	cursor: pointer;
 	padding: 1em 0;
 }
-.refmode_client_referee_list > div > span:hover {
-	background: #ccc;
+
+.refmode_client_authref {
+	display: inline-block;
+	margin: 0 1em;
 }
-.refmode_client_referee_list > div > span[data-paired]::before {
-	content: '✔ ';
-}
-.refmode_client_referee_list > div > span[data-paired]:hover {
-	background: #ecc;
-}
-.refmode_client_referee_list > div > span[data-paired]:hover::before {
-	content: 'X ';
+.refmode_client_rmbtn {
+	height: 1.2em;
+	width: 1.2em;
+	margin-left: 0.2em;
 }
