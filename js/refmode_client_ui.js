@@ -9,11 +9,14 @@ function update_ref_display(s) {
 	var paired = rc.get_paired_referees();
 	var paired_el = uiu.qs('.refmode_client_paired');
 	if (paired.length > 0) {
-		uiu.text(paired_el, s._('refmode:client:paired', {
-			refs_str: paired.join(', '),
-		}));
+		uiu.text(paired_el, (paired.length === 1) ? s._('refmode:client:paired:one') :
+			(s._('refmode:client:paired', {
+				ref_count: paired.length,
+			})));
+		paired_el.setAttribute('title', paired.join('\n'));
 	} else {
 		uiu.text(paired_el, s._('refmode:client:paired:none'));
+		paired_el.removeAttribute('title');
 	}
 }
 
