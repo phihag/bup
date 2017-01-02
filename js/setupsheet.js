@@ -1,8 +1,31 @@
 'use strict';
 var setupsheet = (function() {
 
-function render(s) {
-	
+var BULI2016_CONFIG = {
+	m: ['1.HD', '2.HD', '1.HE', '2.HE', 'GD', 'backup', 'present'],
+	f: ['dark', 'dark', 'DE', 'DD', 'GD', 'backup', 'present'],
+};
+var CONFIGS = {
+	'1BL-2016': BULI2016_CONFIG,
+	'2BLN-2016': BULI2016_CONFIG,
+	'2BLS-2016': BULI2016_CONFIG,
+};
+
+
+function ui_render(s) {
+	var cfg = CONFIGS[s.event.league_key];
+
+	if (!cfg) {
+		uiu.text_qs('Unsupported league: ' + s.event.league_key);
+	}
+
+
+	// Determine all matches for men
+
+
+	// Determine all matches for women
+
+
 }
 
 function show() {
@@ -24,7 +47,7 @@ function show() {
 	uiu.visible_qs('.setupsheet_layout', true);
 	if (state.event && state.event.matches && state.event.all_players) {
 		uiu.visible_qs('.setupsheet_loading-icon', false);
-		render(state);
+		ui_render(state);
 	} else {
 		uiu.visible_qs('.setupsheet_loading-icon', true);
 		network.load_all_players(state, function(err, ev) {
@@ -35,7 +58,7 @@ function show() {
 				return;
 			}
 			state.event = ev;
-			render(state);
+			ui_render(state);
 		});
 	}
 }
@@ -88,7 +111,6 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var click = require('./click');
 	var control = require('./control');
-	var eventutils = require('./eventutils');
 	var network = require('./network');
 	var refmode_referee_ui = null; // break cycle, should be require('./refmode_referee_ui');
 	var render = require('./render');

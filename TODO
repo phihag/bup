@@ -1,3 +1,4 @@
+fix https on live.aufschlagwechsel.de
 TODO losing focus too often
 	incremental updates
 UI too confusing
@@ -5,7 +6,6 @@ UI too confusing
 	automatically update
 	hide automatically
 	UI
-stats: update live in refmode
 referee mode: back function
 
 Aufstellung
@@ -43,6 +43,7 @@ improve jticker
 	edit teams? (all_players...)
 
 improve refmode
+	update stats / Srzettel / match live (in event)
 	kill button
 	only re-render changed clients
 	only rerender changed matches
