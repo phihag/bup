@@ -240,6 +240,12 @@ function update_settings(conn_id, new_settings) {
 	});
 }
 
+function kill(conn_id) {
+	update_settings(conn_id, {
+		refmode_client_enabled: false,
+	});
+}
+
 function handle_msg(msg) {
 	switch (msg.type) {
 	case 'error':
@@ -351,6 +357,7 @@ return {
 	change_display_court: change_display_court,
 	client_by_conn_id: client_by_conn_id,
 	espouse_event: espouse_event,
+	kill: kill,
 	on_settings_change: on_settings_change,
 	refresh: refresh,
 	status_str: status_str,

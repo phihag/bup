@@ -450,6 +450,8 @@ var i18n_de = {
 'refmode:referee:paired:none': 'Keine Tablets verbunden.\n\nVerbinde ein Tablet:\n1. Option "Referee" in den Einstellungen aktivieren.\n2. Auf Button "Mit Referee verbinden" klicken.\n3. {ref_fp} auswählen.',
 'refmode:referee:subscribe': 'Live',
 'refmode:referee:refresh': 'Aktualisieren',
+'refmode:referee:kill': 'Trennen',
+'refmode:referee:kill prompt': 'Referee-Anbindung von {client} deaktivieren?',
 'refmode:referee:battery': 'Batterie: ',
 'refmode:referee:battery:na': 'Keine Informationen',
 'refmode:referee:battery:charging': 'Lädt ({percent}%{duration})',

@@ -39,6 +39,16 @@ function on_refresh_button_click(e) {
 	rr.refresh(_client_id(e));
 }
 
+function on_kill_button_click(e) {
+	var client_id = _client_id(e);
+	var c = rr.client_by_conn_id(client_id);
+	if (!c) return;
+
+	if (window.confirm(state._('refmode:referee:kill prompt', {client: c.title}))) {
+		rr.kill(client_id);
+	}
+}
+
 function on_espouse_btn_click(e) {
 	var c = rr.client_by_conn_id(_client_id(e));
 	if (!c) return;
@@ -245,6 +255,11 @@ function render_clients(clients) {
 			title: (c.last_update ? utils.timesecs_str(c.last_update) : ''),
 		}, s._('refmode:referee:refresh'));
 		click.on(refresh_button, on_refresh_button_click);
+
+		var kill_button = uiu.create_el(buttons, 'button', {
+			title: (c.last_update ? utils.timesecs_str(c.last_update) : ''),
+		}, s._('refmode:referee:kill'));
+		click.on(kill_button, on_kill_button_click);
 
 		var bat = c.battery;
 		var bat_text = (bat ? (

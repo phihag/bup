@@ -20,6 +20,7 @@ Aufstellung
 	check singles ranking
 	editevent: show nationality if non-EU
 
+editevent: show nat
 increase keepalive? Measure
 refmode: show errors (b.phihag.de)
 TODO losing focus too often
@@ -48,7 +49,6 @@ improve jticker
 improve refmode
 	inject presses @remote! (precedence: WDM in Refrath)
 	update stats / Srzettel / match live (in event)
-	kill button
 	only re-render changed clients
 	only rerender changed matches
 	order should be reflected in display

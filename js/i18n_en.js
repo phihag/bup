@@ -450,6 +450,8 @@ var i18n_en = {
 'refmode:referee:paired:none': 'No connections (yet).\n\nTo connect a tablet, perform the following steps on the tablet:\n1. Activate "Referee" in the settings.\n2. Click "Connect to referee".\n3. Select {ref_fp}.',
 'refmode:referee:subscribe': 'Subscribe',
 'refmode:referee:refresh': 'Refresh',
+'refmode:referee:kill': 'Disconnect',
+'refmode:referee:kill prompt': 'Disconnect {client} from all referees?',
 'refmode:referee:battery': 'Battery: ',
 'refmode:referee:battery:na': 'N/A',
 'refmode:referee:battery:charging': 'Charging ({percent}%{duration})',
