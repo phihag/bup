@@ -1,29 +1,33 @@
-fix https on live.aufschlagwechsel.de
-remode: show errors (b.phihag.de)
-TODO losing focus too often
-	incremental updates
-refmode client:
-	reflist should update automatically
-	retranslate to en
-referee mode: back function
-
 Aufstellung
 	add basic table
 	implement load_all_players
-
 	new field present_players
 	new field suggested_players -> add in XLSX
 	list all_players (list top 2 singles / 4 doubles)
 	add players
 	add completely new players (with input)
 	click on boxes to change
-	make sure layout contains BuLi-Logo
 	Message "Yes, correct." || "No, check doubles/singles" || "no info"
+	check doubles ranking
+	check for too many foreigners
+	check on editevent as well
+	make sure layout contains BuLi-Logo
 	print
 	pdf
 	XLSX
 	edit -> bldemo
 	edit this -> CourtSpot
+	check singles ranking
+	editevent: show nationality if non-EU
+
+increase keepalive? Measure
+refmode: show errors (b.phihag.de)
+TODO losing focus too often
+	incremental updates
+refmode client:
+	reflist should update automatically
+referee mode: back function
+
 
 omit error network could not be connected in displaymode
 font size of score should be larger in single-court display
@@ -32,9 +36,9 @@ Spielbericht: Ersatzspieler etc.
 BuLi-Spielbericht als PDF / direkt ausdrucken (-> Janine)
 clicking on match should go to match if match is the current one, don't reload from server
 auto go fullscreen with any click when set that way
-php to download from turnier.de
 
 improve jticker
+	remove additional zeroes (-> Martin/Beuel)
 	auto-switch after download
 	login with token
 	login with user/pass
@@ -42,6 +46,7 @@ improve jticker
 	edit teams? (all_players...)
 
 improve refmode
+	inject presses @remote! (precedence: WDM in Refrath)
 	update stats / Srzettel / match live (in event)
 	kill button
 	only re-render changed clients

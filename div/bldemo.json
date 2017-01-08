@@ -259,21 +259,21 @@
     "all_players": [
       [
         {"gender": "m", "name": "Fabian Roth", "ranking": 1, "ranking_d": 6},
-        {"gender": "m", "name": "Giap Chin Goh", "ranking": 2, "ranking_d": 9},
-        {"gender": "m", "name": "Sam Magee", "ranking": 3, "ranking_d": 1},
+        {"gender": "m", "name": "Giap Chin Goh", "ranking": 2, "ranking_d": 9, "nationality": "MAS"},
+        {"gender": "m", "name": "Sam Magee", "ranking": 3, "ranking_d": 1, "nationality": "IRL"},
         {"gender": "m", "name": "Fabian Holzer", "ranking": 4, "ranking_d": 2},
         {"gender": "m", "name": "Lars Schänzler", "ranking": 5, "ranking_d": 10},
         {"gender": "m", "name": "Richard Domke", "ranking": 6, "ranking_d": 4},
-        {"gender": "m", "name": "Joshua Magee", "ranking": 7, "ranking_d": 3},
+        {"gender": "m", "name": "Joshua Magee", "ranking": 7, "ranking_d": 3, "nationality": "IRL"},
         {"gender": "m", "name": "Mark Byerly", "ranking": 8},
         {"gender": "m", "name": "Dennis Nyenhuis", "ranking": 9, "ranking_d": 7},
         {"gender": "m", "name": "Max Schwenger", "ranking": 10, "ranking_d": 5},
         {"gender": "m", "name": "Kai Waldenberger", "ranking": 11},
-        {"gender": "f", "name": "Chloe Magee", "ranking": 1},
+        {"gender": "f", "name": "Chloe Magee", "ranking": 1, "nationality": "IRL"},
         {"gender": "f", "name": "Carla Nelte", "ranking": 2},
-        {"gender": "f", "name": "Ya Lan Chang", "ranking": 3},
+        {"gender": "f", "name": "Ya Lan Chang", "ranking": 3, "nationality": "TPE"},
         {"gender": "f", "name": "Jennifer Karnott", "ranking": 3},
-        {"gender": "f", "name": "Elin Svensson", "ranking": 5}
+        {"gender": "f", "name": "Elin Svensson", "ranking": 5, "nationality": "SWE"}
       ],
       [
         {"gender": "m", "name": "Marc Zwiebler", "ranking": 1, "ranking_d": 5},
@@ -289,7 +289,7 @@
         {"gender": "f", "name": "Samantha Barning", "ranking": 2},
         {"gender": "f", "name": "Isabel Herttrich", "ranking": 3},
         {"gender": "f", "name": "Cisita Joitiy Jansen", "ranking": 4},
-        {"gender": "f", "name": "Nadia Frankhauser", "ranking": 5}
+        {"gender": "f", "name": "Nadia Frankhauser", "ranking": 5, "nationality": "SUI"}
       ]
     ],
     "league_key": "1BL-2016",
