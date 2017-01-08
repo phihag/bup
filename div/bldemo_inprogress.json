@@ -324,5 +324,7 @@
         {"gender": "f", "name": "Nadia Frankhauser", "ranking": 5, "nationality": "SUI"}
       ]
     ],
+    "league_key": "1BL-2016",
+    "team_competition": true
   }
 }
