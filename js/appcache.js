@@ -28,13 +28,13 @@ function ui_init() {
 			return;
 		}
 		if (Date.now() - bup_start_time <= AUTOUPDATE_WITHIN) {
-			uiu.visible_qs('.appcache_updating_wrapper', true);
+			uiu.show_qs('.appcache_updating_wrapper');
 			update_now();
 			return;
 		}
 
-		uiu.visible_qs('.appcache_update', true);
-		uiu.visible_qs('.appcache_update_ingame', true);
+		uiu.show_qs('.appcache_update');
+		uiu.show_qs('.appcache_update_ingame');
 	}, false);
 }
 

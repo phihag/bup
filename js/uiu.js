@@ -71,6 +71,10 @@ function hide_qs(selector) {
 	visible_qs(selector, false);
 }
 
+function show_qs(selector) {
+	visible_qs(selector, true);
+}
+
 function disabled_qsa(qs, val) {
 	var nodes = document.querySelectorAll(qs);
 	for (var i = 0;i < nodes.length;i++) {
@@ -224,6 +228,7 @@ return {
 	removeClass: removeClass,
 	removeClass_qs: removeClass_qs,
 	setClass: setClass,
+	show_qs: show_qs,
 	text: text,
 	text_qs: text_qs,
 	visible: visible,

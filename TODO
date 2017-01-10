@@ -1,3 +1,5 @@
+BTS support
+
 Aufstellung
 	add basic table
 	implement load_all_players
@@ -21,14 +23,12 @@ Aufstellung
 	editevent: show nationality if non-EU
 
 editevent: show nat
-increase keepalive? Measure
 refmode: show errors (b.phihag.de)
 TODO losing focus too often
 	incremental updates
 refmode client:
 	reflist should update automatically
 referee mode: back function
-
 
 omit error network could not be connected in displaymode
 font size of score should be larger in single-court display
@@ -47,7 +47,9 @@ improve jticker
 	edit teams? (all_players...)
 
 improve refmode
+	increase keepalive? Measure
 	inject presses @remote! (precedence: WDM in Refrath)
+	switch to event *from* remote
 	update stats / Srzettel / match live (in event)
 	only re-render changed clients
 	only rerender changed matches
@@ -114,6 +116,10 @@ improve display mode
 	support display mode without network
 	show games on the side that won them?
 	net status flickering when hub is away
+
+make an android app
+	Mülheim SFTP
+	badmintonticker
 
 Notiz an Spielernamen (-> Werner Durow)
 
