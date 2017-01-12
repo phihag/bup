@@ -89,6 +89,13 @@
 - [ ] Tablets checken: Eingeloggt und richtiger Zustand?
 - [ ] Beamer auf anzeigealle umstellen
 
+Während des Spiels:
+
+- [ ] Ergebnisse in manuelle Kopie eintragen
+- [ ] Auf Handzeichen der Schiedsrichter achten
+- [ ] Ggf. weitere Bälle bringen
+- [ ] Router-Statistiken beobachten
+
 Nach Spielende:
 
 - [ ] Spielbericht
