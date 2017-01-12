@@ -54,7 +54,7 @@
 - [ ] Referee-bup starten
 - [ ] bup refmode satellite starten
 - [ ] bup im Referee Mode (auf 2. Laptop) starten
-  - [ ] Alle Tablets vorhanden?
+  - [ ] Alle Tablets erkannt? (ggf. Referee Mode aktivieren)
 - [ ] Tabs Aufstellungen öffnen (von kroton.de)
 - [ ] Aufstellungszettel
   - [ ] Excel generieren
