@@ -124,8 +124,11 @@ clean: cleandist ## Remove temporary files
 	rm -rf -- node_modules
 	rm -rf -- div/teamlists/
 
-run-hub:
+root-hub:
 	node refmode_hub/refmode_hub.js
+
+sat-hub:
+	node refmode_hub/refmode_hub.js '{"root_hub":"wss://live.aufschlagwechsel.de/refmode_hub/"}'
 
 install-hub: deps
 	sed -e "s#BUP_ROOT_DIR#$$PWD#" refmode_hub/buphub.service.template | sudo tee /etc/systemd/system/buphub.service >/dev/null
@@ -133,4 +136,4 @@ install-hub: deps
 	systemctl enable buphub
 	systemctl start buphub
 
-.PHONY: default help deps deps-optional test clean install-libs force-install-libs upload dist cleandist coverage coverage-display cd lint jshint eslint appcache-manifest manifest upload-run stylelint doclint deps-essential run-hub install-hub
+.PHONY: default help deps deps-optional test clean install-libs force-install-libs upload dist cleandist coverage coverage-display cd lint jshint eslint appcache-manifest manifest upload-run stylelint doclint deps-essential sat-hub root-hub install-hub
