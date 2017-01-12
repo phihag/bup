@@ -58,6 +58,7 @@ improve jticker
 
 improve refmode
 	increase keepalive? Measure
+	export client info(including netstats) from refmode as well
 	inject presses @remote! (precedence: WDM in Refrath)
 	switch to event *from* remote
 	update stats / Srzettel / match live (in event)
