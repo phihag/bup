@@ -398,10 +398,12 @@ function set_current(s) {
 		if (s.setup.match_name) {
 			title += s.setup.match_name + ' - ';
 		}
-		if (s.setup.is_doubles) {
-			title += s.setup.teams[0].players[0].name + ' / ' + s.setup.teams[0].players[1].name + ' vs ' + s.setup.teams[1].players[0].name + ' / ' + s.setup.teams[1].players[1].name;
-		} else {
-			title += s.setup.teams[0].players[0].name + ' vs ' + s.setup.teams[1].players[0].name;
+		if (!s.setup.incomplete) {
+			if (s.setup.is_doubles) {
+				title += s.setup.teams[0].players[0].name + ' / ' + s.setup.teams[0].players[1].name + ' vs ' + s.setup.teams[1].players[0].name + ' / ' + s.setup.teams[1].players[1].name;
+			} else {
+				title += s.setup.teams[0].players[0].name + ' vs ' + s.setup.teams[1].players[0].name;
+			}
 		}
 		title += ' - ';
 	}
