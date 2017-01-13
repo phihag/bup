@@ -448,6 +448,7 @@ function render_event(s) {
 
 	if (ev.matches) {
 		ev.matches.forEach(function(m) {
+			var is_complete = !m.setup.incomplete;
 			var match_container = uiu.create_el(matches_container, 'div', {
 				'class': 'referee_e_match',
 				'data-match-id': m.setup.match_id,
@@ -455,23 +456,27 @@ function render_event(s) {
 
 			var name_row = uiu.create_el(match_container, 'div');
 			var match_link = uiu.create_el(name_row, 'span', {
-				'class': 'js_link referee_e_match_name',
+				'class': ((is_complete ? 'js_link ' : '') + 'referee_e_match_name'),
 			}, m.setup.match_name);
-			click.on(match_link, on_event_match_link_click);
+			if (is_complete) {
+				click.on(match_link, on_event_match_link_click);
+			}
 			var client_state = calc.remote_state(s, m.setup, m.presses); // TODO calculate this at the event
 			uiu.create_el(name_row, 'span', {
 				'class': 'referee_e_match_status',
 			}, calc.desc(client_state));
 
-			var stats_link = uiu.create_el(name_row, 'span', {
-				'class': 'js_link referee_e_link',
-			}, s._('Statistics'));
-			click.on(stats_link, on_event_match_stats_click);
+			if (is_complete) {
+				var stats_link = uiu.create_el(name_row, 'span', {
+					'class': 'js_link referee_e_link',
+				}, s._('Statistics'));
+				click.on(stats_link, on_event_match_stats_click);
 
-			var scoresheet_link = uiu.create_el(name_row, 'span', {
-				'class': 'js_link referee_e_link',
-			}, s._('Score Sheet'));
-			click.on(scoresheet_link, on_event_match_scoresheet_click);
+				var scoresheet_link = uiu.create_el(name_row, 'span', {
+					'class': 'js_link referee_e_link',
+				}, s._('Score Sheet'));
+				click.on(scoresheet_link, on_event_match_scoresheet_click);
+			}
 
 			if (m.presses) {
 				var presses_table = uiu.create_el(match_container, 'table');

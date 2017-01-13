@@ -1004,6 +1004,10 @@ function remote_state(s, setup, presses) {
 
 // A human-readable decscription of the current state of the match
 function desc(s) {
+	if (s.setup.incomplete) {
+		return s._('mdesc:incomplete');
+	}
+
 	var res = s.match.finished_games.map(function(g) {
 		return g.score.join(':');
 	}).join(' ');

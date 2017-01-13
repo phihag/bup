@@ -3712,4 +3712,14 @@ _describe('calc helper functions', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.deepStrictEqual(bup.calc.desc(s), '7:21 4:21 Abgeschlossen');
 	});
+
+	_it('desc for incomplete matches', function() {
+		var setup = {
+			incomplete: true,
+			counting: '3x21',
+		};
+		var s = state_after([], setup);
+		assert.deepStrictEqual(bup.calc.desc(s), 'Erwarte Mannschaftsaufstellung');
+	});
+
 });

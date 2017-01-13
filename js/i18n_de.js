@@ -32,6 +32,7 @@ var i18n_de = {
 'mdesc:selected': 'Aufruf&Wahl',
 'mdesc:toss': 'Wahl wird eingegeben',
 'mdesc:warmup': 'Einspielen',
+'mdesc:incomplete': 'Erwarte Mannschaftsaufstellung',
 
 'report problem': 'Problem/Anregung melden',
 'report:test': 'Diagnose-Funktion testen',

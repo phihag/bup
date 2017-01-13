@@ -32,6 +32,7 @@ var i18n_en = {
 'mdesc:selected': 'preparing match',
 'mdesc:toss': 'inputing toss',
 'mdesc:warmup': 'warmup',
+'mdesc:incomplete': 'missing player names',
 
 'report problem': 'Report problem/suggestion',
 'report:test': 'Test diagnostics',
