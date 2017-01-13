@@ -1,0 +1,293 @@
+{
+  "type": "bup-export",
+  "version": 2,
+  "event": {
+    "staticnet_message": "Bundesliga-Demo (nur lokal)",
+    "courts": [{
+      "court_id": 1,
+      "description": "1 (links)",
+      "match_id": "bldemo_HD1"
+    }, {
+      "court_id": 2,
+      "description": "2 (rechts)",
+      "match_id": "bldemo_DD"
+    }],
+    "matches": [
+      {
+        "setup": {
+          "eventsheet_id": "1.HD",
+          "match_name": "1.HD",
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Sam Magee"
+                },
+                {
+                  "name": "Fabian Holzer"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Michael Fuchs"
+                },
+                {
+                  "name": "Peter Käsbauer"
+                }
+              ]
+            }
+          ],
+          "is_doubles": true,
+          "counting": "5x11_15",
+          "match_id": "bldemo_HD1" 
+        }
+      },
+      {
+        "setup": {
+          "match_name": "DD",
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Carla Nelte"
+                },
+                {
+                  "name": "Jennifer Karnott"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Samantha Barning"
+                },
+                {
+                  "name": "Isabel Herttrich"
+                }
+              ]
+            }
+          ],
+
+          "is_doubles": true,
+          "counting": "5x11_15",
+          "match_id": "bldemo_DD"
+        }
+      },
+      {
+        "setup": {
+          "eventsheet_id": "2.HD",
+          "match_name": "2.HD",
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Fabian Roth"
+                },
+                {
+                  "name": "Richard Domke"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Marc Zwiebler"
+                },
+                {
+                  "name": "Johannes Schöttler"
+                }
+              ]
+            }
+          ],
+          "is_doubles": true,
+          "counting": "5x11_15",
+          "match_id": "bldemo_HD2"
+        }
+      },
+      {
+        "setup": {
+          "match_name": "1.HE",
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Fabian Roth"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Marc Zwiebler"
+                }
+              ]
+            }
+          ],
+          "is_doubles": false,
+          "counting": "5x11_15",
+          "match_id": "bldemo_HE1"
+        }
+      },
+      {
+        "setup": {
+          "match_name": "DE",
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Chloe Magee"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Olga Konon"
+                }
+              ]
+            }
+          ],
+          "is_doubles": false,
+          "counting": "5x11_15",
+          "match_id": "bldemo_DE"
+        }
+      },
+      {
+        "setup": {
+          "match_name": "GD",
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Sam Magee"
+                },
+                {
+                  "name": "Carla Nelte"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Michael Fuchs"
+                },
+                {
+                  "name": "Isabel Herttrich"
+                }
+              ]
+            }
+          ],
+          "is_doubles": true,
+          "counting": "5x11_15",
+          "match_id": "bldemo_GD"
+        }
+      },
+      {
+        "setup": {
+          "match_name": "2.HE",
+          "teams": [
+            {
+              "players": [
+              ]
+            },
+            {
+              "players": [
+              ]
+            }
+          ],
+          "incomplete": true,
+          "is_doubles": false,
+          "counting": "5x11_15",
+          "match_id": "bldemo_HE2"
+        }
+      }
+    ],
+    "id": "bldemo",
+    "event_name": "TV Refrath - BC Bischmisheim (Demo)",
+    "tournament_name": "Demo",
+    "team_names": ["TV Refrath", "BC Bischmisheim"],
+    "location": "SpH Steinbreche",
+    "protest": "Coaching-Stühle zu gemütlich",
+    "umpires": "Barbara Bub & Markus Schwendtner",
+    "starttime": "19:00",
+    "matchday": "Finale",
+    "notes": "",
+    "backup_players": [[{
+      "name": "Dennis Nyenhuis",
+      "gender": "m",
+      "ranking": 9,
+      "ranking_d": 7
+    }, {
+      "name": "Elin Svensson",
+      "gender": "f",
+      "ranking": 5
+    }], [{
+      "name": "Marvin Seidel",
+      "gender": "m",
+      "ranking": 7,
+      "ranking_d": 4
+    }, {
+      "name": "Simon Wang",
+      "gender": "m",
+      "ranking": 5,
+      "ranking_d": 7
+    }]],
+    "present_players": [[{
+      "name": "Mark Byerly",
+      "gender": "m",
+      "ranking": 8
+    }, {
+      "name": "Ya Lan Chang",
+      "gender": "f",
+      "ranking": 3
+    }], [{
+      "name": "Matthias Deininger",
+      "gender": "m",
+      "ranking": 9
+    }, {
+      "name": "Nadia Frankhauser",
+      "gender": "f",
+      "ranking": 5
+    }]],
+    "all_players": [
+      [
+        {"gender": "m", "name": "Fabian Roth", "ranking": 1, "ranking_d": 6},
+        {"gender": "m", "name": "Giap Chin Goh", "ranking": 2, "ranking_d": 9, "nationality": "MAS"},
+        {"gender": "m", "name": "Sam Magee", "ranking": 3, "ranking_d": 1, "nationality": "IRL"},
+        {"gender": "m", "name": "Fabian Holzer", "ranking": 4, "ranking_d": 2},
+        {"gender": "m", "name": "Lars Schänzler", "ranking": 5, "ranking_d": 10},
+        {"gender": "m", "name": "Richard Domke", "ranking": 6, "ranking_d": 4},
+        {"gender": "m", "name": "Joshua Magee", "ranking": 7, "ranking_d": 3, "nationality": "IRL"},
+        {"gender": "m", "name": "Mark Byerly", "ranking": 8},
+        {"gender": "m", "name": "Dennis Nyenhuis", "ranking": 9, "ranking_d": 7},
+        {"gender": "m", "name": "Max Schwenger", "ranking": 10, "ranking_d": 5},
+        {"gender": "m", "name": "Kai Waldenberger", "ranking": 11},
+        {"gender": "f", "name": "Chloe Magee", "ranking": 1, "nationality": "IRL"},
+        {"gender": "f", "name": "Carla Nelte", "ranking": 2},
+        {"gender": "f", "name": "Ya Lan Chang", "ranking": 3, "nationality": "TPE"},
+        {"gender": "f", "name": "Jennifer Karnott", "ranking": 3},
+        {"gender": "f", "name": "Elin Svensson", "ranking": 5, "nationality": "SWE"}
+      ],
+      [
+        {"gender": "m", "name": "Marc Zwiebler", "ranking": 1, "ranking_d": 5},
+        {"gender": "m", "name": "Dieter Domke", "ranking": 2, "ranking_d": 6},
+        {"gender": "m", "name": "Michael Fuchs", "ranking": 3, "ranking_d": 1},
+        {"gender": "m", "name": "Peter Käsbauer", "ranking": 4, "ranking_d": 2},
+        {"gender": "m", "name": "Simon Wang", "ranking": 5, "ranking_d": 7},
+        {"gender": "m", "name": "Marvin Seidel", "ranking": 7, "ranking_d": 4},
+        {"gender": "m", "name": "Johannes Schöttler", "ranking": 8, "ranking_d": 3},
+        {"gender": "m", "name": "Matthias Deininger", "ranking": 9},
+        {"gender": "m", "name": "Marcel Reuter", "ranking": 10},
+        {"gender": "f", "name": "Olga Konon", "ranking": 1},
+        {"gender": "f", "name": "Samantha Barning", "ranking": 2},
+        {"gender": "f", "name": "Isabel Herttrich", "ranking": 3},
+        {"gender": "f", "name": "Cisita Joitiy Jansen", "ranking": 4},
+        {"gender": "f", "name": "Nadia Frankhauser", "ranking": 5, "nationality": "SUI"}
+      ]
+    ],
+    "league_key": "1BL-2016",
+    "team_competition": true
+  }
+}
