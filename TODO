@@ -1,5 +1,4 @@
 BuLi-Spielbericht: 0 in there at start of match (skip this)
-btde errors
 
 adopting from displaymode
 	Uncaught TypeError: Cannot read property 'forEach' of undefined
@@ -7,6 +6,7 @@ adopting from displaymode
 	    at handle_dmsg (refmode_referee.js:193)
 	    at handle_msg (refmode_referee.js:306)
 	    at WebSocket.handle_msg_json (refmode_conn.js:50)
+
 
 BTS support
 
@@ -133,6 +133,9 @@ make an android app
 	badmintonticker
 
 Notiz an Spielernamen (-> Werner Durow)
+
+stats: add rally length
+stats: list top 10 longest rallies (for video)
 
 android home screen icon
 run lighthouse

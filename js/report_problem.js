@@ -13,6 +13,7 @@ function get_info() {
 		url: window.location.href,
 		bup_version: bup_version,
 		setup: state.setup,
+		league_key: (state.event ? state.event.league_key : '(no event)'),
 		event_id: (state.event ? state.event.id : '(no event)'),
 		state_ui: state.ui,
 		fullscreen: {
@@ -78,7 +79,7 @@ function update() {
 		'subject=' + encodeURIComponent(state._('report:subject')) +
 		'&body=' + encodeURIComponent(report_problem_body)
 	);
-	$('.settings_report_problem').attr('href', report_problem_link);
+	uiu.qs('.settings_report_problem').setAttribute('href', report_problem_link);
 }
 
 function on_error(msg, script_url, line, col, err) {

@@ -1,5 +1,5 @@
-var order = (function() {
 'use strict';
+var order = (function() {
 
 var current_from = null;
 var current_matches;
