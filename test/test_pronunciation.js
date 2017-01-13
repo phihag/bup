@@ -1,3 +1,5 @@
+'use strict';
+
 var assert = require('assert');
 
 var tutils = require('./tutils');
@@ -34,9 +36,6 @@ function loveall_en(s) {
 	return bup.pronunciation.loveall_announcement(s);
 }
 
-
-(function() {
-'use strict';
 
 _describe('pronunciation', function() {
 	_it('Start of match (singles)', function() {
@@ -3501,11 +3500,19 @@ _describe('pronunciation', function() {
 		assert.strictEqual(pronounce_de(s, 2980000), null);
 		assert.strictEqual(pronounce_en(s, 2980000), null);
 	});
+
+	_it('match_str', function() {
+		assert.strictEqual(bup.pronunciation.match_str(DOUBLES_SETUP), 'Andrew/Alice vs Bob/Birgit');
+
+		var incomplete_setup = {
+			incomplete: true,
+			match_name: 'XD',
+		};
+		assert.strictEqual(bup.pronunciation.match_str(incomplete_setup), 'XD');
+	})
 });
 
 module.exports = {
 	pronounce_de: pronounce_de,
 	pronounce_en: pronounce_en,
 };
-
-})();

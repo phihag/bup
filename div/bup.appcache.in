@@ -18,6 +18,7 @@ div/edemo.json
 div/vdemo.json
 div/bldemo.json
 div/bldemo_inprogress.json
+# bldemo_incomplete.json is only for development, do not include
 div/nrwdemo.json
 div/wakelock.mp4
 

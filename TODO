@@ -1,12 +1,5 @@
+refmode: go from incomplete to complete
 BuLi-Spielbericht: 0 in there at start of match (skip this)
-
-adopting from displaymode
-	Uncaught TypeError: Cannot read property 'forEach' of undefined
-	    at espouse_event (refmode_referee.js:346)
-	    at handle_dmsg (refmode_referee.js:193)
-	    at handle_msg (refmode_referee.js:306)
-	    at WebSocket.handle_msg_json (refmode_conn.js:50)
-
 
 BTS support
 

@@ -1,7 +1,10 @@
-var pronunciation = (function() {
 'use strict';
+var pronunciation = (function() {
 
 function match_str(setup) {
+	if (setup.incomplete) {
+		return setup.match_name;
+	}
 	if (setup.is_doubles) {
 		return setup.teams[0].players[0].name + '/' + setup.teams[0].players[1].name + ' vs ' + setup.teams[1].players[0].name + '/' + setup.teams[1].players[1].name;
 	} else {
