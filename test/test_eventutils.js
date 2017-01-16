@@ -71,5 +71,113 @@ _describe('eventutils', function() {
 
 		bup.eventutils.set_metadata(event);
 	});
+
+	_it('is_incomplete (singles)', function() {
+		assert.strictEqual(bup.eventutils.is_incomplete({
+			is_doubles: false,
+			teams: [{
+				players: [{
+					name: 'Alice',
+				}],
+			}, {
+				players: [{
+					name: 'Bob',
+				}],
+			}],
+		}), false);
+		assert.strictEqual(bup.eventutils.is_incomplete({
+			is_doubles: false,
+			teams: [{
+				players: [{
+					name: 'Alice',
+				}],
+			}, {
+				players: [],
+			}],
+		}), true);
+		assert.strictEqual(bup.eventutils.is_incomplete({
+			is_doubles: false,
+			teams: [{
+				players: [],
+			}, {
+				players: [{
+					name: 'Bob',
+				}],
+			}],
+		}), true);
+		assert.strictEqual(bup.eventutils.is_incomplete({
+			is_doubles: false,
+			teams: [{
+				players: [],
+			}, {
+				players: [],
+			}],
+		}), true);
+	});
+
+	_it('is_incomplete (doubles)', function() {
+		assert.strictEqual(bup.eventutils.is_incomplete({
+			is_doubles: true,
+			teams: [{
+				players: [{
+					name: 'Alice',
+				}, {
+					name: 'Andrew',
+				}],
+			}, {
+				players: [{
+					name: 'Bob',
+				}, {
+					name: 'Birgit',
+				}],
+			}],
+		}), false);
+		assert.strictEqual(bup.eventutils.is_incomplete({
+			is_doubles: true,
+			teams: [{
+				players: [{
+					name: 'Alice',
+				}, {
+					name: 'Andrew',
+				}],
+			}, {
+				players: [{
+					name: 'Birgit',
+				}],
+			}],
+		}), true);
+		assert.strictEqual(bup.eventutils.is_incomplete({
+			is_doubles: true,
+			teams: [{
+				players: [],
+			}, {
+				players: [{
+					name: 'Bob',
+				}, {
+					name: 'Birgit',
+				}],
+			}],
+		}), true);
+		assert.strictEqual(bup.eventutils.is_incomplete({
+			is_doubles: true,
+			teams: [{
+				players: [{
+					name: 'Alice',
+				}],
+			}, {
+				players: [{
+					name: 'Bob',
+				}],
+			}],
+		}), true);
+		assert.strictEqual(bup.eventutils.is_incomplete({
+			is_doubles: true,
+			teams: [{
+				players: [],
+			}, {
+				players: [],
+			}],
+		}), true);
+	});
 });
 

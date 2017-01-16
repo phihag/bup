@@ -231,9 +231,6 @@ function _parse_match_list(doc, now) {
 		var away_team = {
 			players: _parse_players(match.gast),
 		};
-		var incomplete = (
-			(home_team.players.length != away_team.players.length) ||
-			(home_team.players.length != (is_doubles ? 2 : 1)));
 
 		var network_score = [];
 		for (var game_idx = 0;game_idx < game_count;game_idx++) {
@@ -263,18 +260,20 @@ function _parse_match_list(doc, now) {
 			eventsheet_id = m[2] + '.' + m[1];
 		}
 
+		var setup = {
+			counting: counting,
+			eventsheet_id: eventsheet_id,
+			match_name: match.dis,
+			is_doubles: is_doubles,
+			teams: [home_team, away_team],
+			btde_match_id: match.id,
+			team_competition: true,
+			match_id: match_id,
+		};
+		setup.incomplete = eventutils.is_incomplete(setup);
+
 		return {
-			setup: {
-				counting: counting,
-				eventsheet_id: eventsheet_id,
-				match_name: match.dis,
-				is_doubles: is_doubles,
-				teams: [home_team, away_team],
-				btde_match_id: match.id,
-				team_competition: true,
-				match_id: match_id,
-				incomplete: incomplete,
-			},
+			setup: setup,
 			network_score: network_score,
 		};
 	});

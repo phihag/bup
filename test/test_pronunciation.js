@@ -3509,7 +3509,7 @@ _describe('pronunciation', function() {
 			match_name: 'XD',
 		};
 		assert.strictEqual(bup.pronunciation.match_str(incomplete_setup), 'XD');
-	})
+	});
 });
 
 module.exports = {

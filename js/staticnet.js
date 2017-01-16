@@ -82,6 +82,7 @@ function editable(s) {
 }
 
 function on_edit_event(s) {
+	eventutils.set_incomplete(s.event);
 	event = s.event;
 }
 
@@ -145,6 +146,7 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc.js');
 	var click = require('./click');
+	var eventutils = require('./eventutils.js');
 	var importexport = require('./importexport.js');
 	var network = require('./network.js');
 	var uiu = require('./uiu.js');

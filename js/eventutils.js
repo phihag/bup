@@ -242,10 +242,29 @@ function name_by_league(league_key) {
 	return league_key;
 }
 
+function is_incomplete(setup) {
+	return (
+		(setup.teams[0].players.length !== setup.teams[1].players.length) ||
+		(setup.teams[0].players.length !== (setup.is_doubles ? 2 : 1)));
+}
+
+function set_incomplete(event) {
+	event.matches.forEach(function(m) {
+		var setup = m.setup;
+		if (is_incomplete(setup)) {
+			setup.incomplete = true;
+		} else {
+			delete setup.incomplete;
+		}
+	});
+}
+
 return {
 	guess_gender: guess_gender,
 	calc_all_players: calc_all_players,
 	set_metadata: set_metadata,
+	is_incomplete: is_incomplete,
+	set_incomplete: set_incomplete,
 	annotate: annotate,
 	NRW2016_RE: NRW2016_RE,
 	// Testing only
