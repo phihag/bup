@@ -136,7 +136,7 @@ function handle_dmsg(msg) {
 		});
 		break;
 	case 'change-court':
-		var all_courts = network.courts(s);
+		var all_courts = network.courts(s) || [];
 		var court = utils.find(all_courts, function(c) {
 			return c.id == msg.new_court_id;
 		});
