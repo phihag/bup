@@ -623,6 +623,7 @@ function on_edit_event(s) {
 	}
 	s.event.last_update = Date.now();
 	netw.on_edit_event(s);
+	refmode_client_ui.on_event_update();
 }
 
 function ui_install_refmode_client(rc) {
