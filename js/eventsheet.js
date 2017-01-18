@@ -868,6 +868,9 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					});
 
 					var netscore = match.netscore || match.network_score || [];
+					if (utils.deep_equal(netscore, [[0, 0]])) {
+						netscore = [];
+					}
 					netscore.forEach(function(nsGame, game_idx) {
 						nsGame.forEach(function(points, team_idx) {
 							var col = xlsx.add_col('I', 3 * game_idx + 2 * team_idx);
