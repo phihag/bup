@@ -260,7 +260,7 @@ function show() {
 				$('.editevent_error_message').text(err.msg);
 				return;
 			}
-			state.event = ev;
+			network.update_event(state, ev);
 			render_table(state);
 		});
 	}

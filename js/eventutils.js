@@ -259,14 +259,43 @@ function set_incomplete(event) {
 	});
 }
 
+function setups_eq(e1, e2) {
+	var IMPORTANT_KEYS = [
+		'all_players',
+		'backup_players',
+		'event_name',
+		'event_name',
+		'id',
+		'league_key',
+		'present_players',
+		'team_names',
+		'tournament_name',
+	];
+	if (! utils.plucked_deep_equal(e1, e2, IMPORTANT_KEYS)) {
+		return false;
+	}
+
+	if (e1.matches.length !== e2.matches.length) {
+		return false;
+	}
+	for (var i = 0;i < e1.matches.length;i++) {
+		if (! utils.plucked_deep_equal(e1.matches[i], e2.matches[i], ['setup'])) {
+			return false;
+		}
+	}
+
+	return true;
+}
+
 return {
-	guess_gender: guess_gender,
-	calc_all_players: calc_all_players,
-	set_metadata: set_metadata,
-	is_incomplete: is_incomplete,
-	set_incomplete: set_incomplete,
 	annotate: annotate,
+	calc_all_players: calc_all_players,
+	setups_eq: setups_eq,
+	guess_gender: guess_gender,
+	is_incomplete: is_incomplete,
 	NRW2016_RE: NRW2016_RE,
+	set_incomplete: set_incomplete,
+	set_metadata: set_metadata,
 	// Testing only
 	name_by_league: name_by_league,
 };

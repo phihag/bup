@@ -344,7 +344,8 @@ function ui_list_matches(s, silent, no_timer) {
 			return;
 		}
 
-		s.event = event;
+		update_event(s, event);
+
 		eventsheet.render_links(s, uiu.qs('.setup_eventsheets'));
 		uiu.visible_qs('.editevent_link', netw.editable(s));
 		ui_render_matchlist(s, event);
@@ -620,6 +621,7 @@ function on_edit_event(s) {
 	if (!netw.editable(s)) {
 		return;
 	}
+	s.event.last_update = Date.now();
 	netw.on_edit_event(s);
 }
 
@@ -629,6 +631,14 @@ function ui_install_refmode_client(rc) {
 
 function ui_uninstall_refmode_client() {
 	delete networks.refmode_client;
+}
+
+// Update event after fetching it somehow
+function update_event(s, ev) {
+	if (! ev.last_update) {
+		ev.last_update = Date.now();
+	}
+	s.event = ev;
 }
 
 return {
@@ -652,6 +662,7 @@ return {
 	ui_uninstall_staticnet: ui_uninstall_staticnet,
 	ui_install_refmode_client: ui_install_refmode_client,
 	ui_uninstall_refmode_client: ui_uninstall_refmode_client,
+	update_event: update_event,
 };
 
 

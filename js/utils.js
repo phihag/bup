@@ -149,6 +149,16 @@ function duration_secs(start_timestamp, end_timestamp) {
 	}
 }
 
+function plucked_deep_equal(x, y, keys) {
+	for (var i = 0;i < keys.length;i++) {
+		var k = keys[i];
+		if (! deep_equal(x[k], y[k])) {
+			return false;
+		}
+	}
+	return true;
+}
+
 function deep_equal(x, y) {
 	if (x === y) {
 		return true;
@@ -375,6 +385,7 @@ return {
 	parse_query_string: parse_query_string,
 	parallel: parallel,
 	pluck: pluck,
+	plucked_deep_equal: plucked_deep_equal,
 	range: range,
 	remove: remove,
 	remove_cb: remove_cb,

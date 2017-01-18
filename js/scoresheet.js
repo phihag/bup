@@ -934,7 +934,7 @@ function event_list_matches(container) {
 			uiu.visible_qs('.scoresheet_loading-icon', false);
 			return;
 		}
-		state.event = ev;
+		network.update_event(state, ev);
 		event_render(container);
 	});
 }

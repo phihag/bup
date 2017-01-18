@@ -1,6 +1,6 @@
-Jackie Error report
-refmode: go from incomplete to complete
 BuLi-Spielbericht: 0 in there at start of match (skip this)
+refmode: go from incomplete to complete
+	automatic updates (e.g. while in editevent)
 
 BTS support
 
@@ -26,6 +26,7 @@ Aufstellung
 	check singles ranking
 	editevent: show nationality if non-EU
 
+editevent: recalc incomplete when setting to N.N.
 editevent: show nat
 refmode: show errors (b.phihag.de)
 TODO losing focus too often

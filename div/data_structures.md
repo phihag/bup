@@ -31,6 +31,8 @@ notes           Non-protest notes, e.g. "Bundesliga logo missing on front of inf
 event_name      Name of the event (will be present on scoresheet), e.g. "Finals".
 tournament_name Name of the overall tournament (will be present on scoresheet), e.g. "Bundesliga 2015/2016".
                 Generated from league_key if not present (this is recommended).
+last_update     UNIX timestamp in ms: Date of last change to this event
+
 
 court
 =====

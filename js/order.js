@@ -250,7 +250,7 @@ function show() {
 				uiu.text_qs('.order_error_message', err.msg);
 				return;
 			}
-			state.event = ev;
+			network.update_event(state, ev);
 			init(state);
 		});
 	}

@@ -56,6 +56,7 @@ function craft_event() {
 		'location', 'protest', 'matchday', 'starttime', 'notes',
 		'team_competition', 'team_names', 'league_key',
 		'all_players', 'backup_players', 'present_players',
+		'last_update',
 	]);
 
 	if (ev.matches) {

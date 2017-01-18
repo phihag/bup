@@ -57,7 +57,7 @@ function show() {
 				$('.setupsheet_error_message').text(err.msg);
 				return;
 			}
-			state.event = ev;
+			network.update_event(state, ev);
 			ui_render(state);
 		});
 	}

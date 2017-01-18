@@ -22,7 +22,7 @@ _describe('importexport', function() {
 				var imported = bup.importexport.load_data(s, data);
 				var ev = imported.event;
 				assert(ev);
-				s.event = ev;
+				bup.network.update_event(s, ev);
 
 				var export_data = bup.importexport.gen_export_data(s);
 				var s2 = {};

@@ -379,7 +379,7 @@ function update(err, s, event) {
 	}
 
 	// Also update general state
-	s.event = event;
+	network.update_event(s, event);
 
 	// If nothing has changed we can skip painting
 	var cur_event_hash = hash(style, s.settings.displaymode_court_id, event);

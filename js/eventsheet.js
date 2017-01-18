@@ -1458,7 +1458,7 @@ function dialog_fetch() {
 				uiu.visible_qs('.eventsheet_error', true);
 				return;
 			}
-			state.event = ev;
+			network.update_event(state, ev);
 
 			var container = $('.eventsheet_container');
 			var es_key = container.attr('data-eventsheet_key');

@@ -408,6 +408,14 @@ function render_clients(clients) {
 				'class': 'referee_espouse_event',
 			}, s._('refmode:referee:espouse event'));
 			click.on(espouse_btn, on_espouse_btn_click);
+		} else if (c.event && ev && ((c.event.last_update > ev.last_update) && !eventutils.setups_eq(c.event, ev))) {
+			var diff_ev = uiu.create_el(div, 'div', {}, s._('refmode:referee:updated_event', {
+				time: utils.datetime_str(c.event.last_update),
+			}));
+			var espouse_btn = uiu.create_el(diff_ev, 'button', {
+				'class': 'referee_espouse_event',
+			}, s._('refmode:referee:espouse event'));
+			click.on(espouse_btn, on_espouse_btn_click);
 		} else if (!c.event) {
 			uiu.create_el(div, 'div', {
 				'class': 'referee_warning',
@@ -615,6 +623,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var displaymode = require('./displaymode');
 	var editevent = require('./editevent');
 	var eventsheet = require('./eventsheet');
+	var eventutils = require('./eventutils');
 	var key_storage = require('./key_storage');
 	var importexport = require('./importexport');
 	var order = require('./order');

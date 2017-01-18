@@ -467,6 +467,7 @@ var i18n_en = {
 'refmode:referee:no event': '- No event -',
 'refmode:referee:no matches': 'No matches available. Connect to a tablet.',
 'refmode:referee:different_event': 'Different event: {event_name}',
+'refmode:referee:updated_event': 'Updated ({time})',
 'refmode:referee:espouse event': 'Espouse event',
 'refmode:referee:change match': 'Set match',
 'refmode:referee:change court': 'Set court',

@@ -467,6 +467,7 @@ var i18n_de = {
 'refmode:referee:no event': 'Kein Wettkampf ausgewählt',
 'refmode:referee:no matches': 'Keine Spiele - verbinde mindestens ein Tablet.',
 'refmode:referee:different_event': 'Anderer Wettkampf: {event_name}',
+'refmode:referee:updated_event': 'Neuerer Stand ({time})',
 'refmode:referee:espouse event': 'Übernehmen',
 'refmode:referee:change match': 'Ändern',
 'refmode:referee:change court': 'Ändern',
