@@ -265,11 +265,11 @@ _describe('eventutils', function() {
 		ev2.last_update = ev.last_update + 1;
 		assert(bup.eventutils.setups_eq(ev, ev2));
 
-		ev2 = bup.utils.deep_copy(ev)
+		ev2 = bup.utils.deep_copy(ev);
 		ev2.id = 'bar';
 		assert(!bup.eventutils.setups_eq(ev, ev2));
 
-		ev2 = bup.utils.deep_copy(ev)
+		ev2 = bup.utils.deep_copy(ev);
 		ev2.event_name = 'Irgendein match';
 		assert(!bup.eventutils.setups_eq(ev, ev2));
 

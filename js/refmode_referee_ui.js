@@ -409,13 +409,13 @@ function render_clients(clients) {
 			}, s._('refmode:referee:espouse event'));
 			click.on(espouse_btn, on_espouse_btn_click);
 		} else if (c.event && ev && ((c.event.last_update > ev.last_update) && !eventutils.setups_eq(c.event, ev))) {
-			var diff_ev = uiu.create_el(div, 'div', {}, s._('refmode:referee:updated_event', {
+			var updated_ev = uiu.create_el(div, 'div', {}, s._('refmode:referee:updated_event', {
 				time: utils.datetime_str(c.event.last_update),
 			}));
-			var espouse_btn = uiu.create_el(diff_ev, 'button', {
+			var espouse_update_btn = uiu.create_el(updated_ev, 'button', {
 				'class': 'referee_espouse_event',
 			}, s._('refmode:referee:espouse event'));
-			click.on(espouse_btn, on_espouse_btn_click);
+			click.on(espouse_update_btn, on_espouse_btn_click);
 		} else if (!c.event) {
 			uiu.create_el(div, 'div', {
 				'class': 'referee_warning',
