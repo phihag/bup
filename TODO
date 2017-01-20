@@ -1,5 +1,3 @@
-BTS support
-
 Aufstellung
 	add basic table
 	implement load_all_players
@@ -22,6 +20,9 @@ Aufstellung
 	check singles ranking
 	editevent: show nationality if non-EU
 
+BTS support
+
+import without all_players => load_all_players
 editevent: recalc incomplete when setting to N.N.
 editevent: show nat
 refmode: show errors (b.phihag.de)

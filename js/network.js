@@ -347,7 +347,9 @@ function ui_list_matches(s, silent, no_timer) {
 		update_event(s, event);
 
 		eventsheet.render_links(s, uiu.qs('.setup_eventsheets'));
-		uiu.visible_qs('.editevent_link', netw.editable(s));
+		var editable = netw.editable(s);
+		uiu.visible_qs('.editevent_link', editable);
+		uiu.visible_qs('.setupsheet_link', editable);
 		ui_render_matchlist(s, event);
 	});
 
@@ -642,6 +644,31 @@ function update_event(s, ev) {
 	s.event = ev;
 }
 
+function list_all_players(s, callback) {
+	var netw = get_netw();
+	netw.list_all_players(s, callback);
+}
+
+// all_players + all_matches
+function list_full_event(s, callback) {
+	list_all_players(s, function(err, all_players) {
+		if (err) return callback(err);
+
+		if (!s.event || !s.event.matches) {
+			list_matches(s, function(err, ev) {
+				if (err) return callback(err);
+
+				ev.all_players = all_players;
+				update_event(s, ev);
+				return callback();
+			});
+		} else {
+			event.all_players = all_players;
+			return callback();
+		}
+	});
+}
+
 return {
 	calc_team0_left: calc_team0_left,
 	courts: courts,
@@ -651,6 +678,8 @@ return {
 	get_real_netw: get_real_netw,
 	is_enabled: is_enabled,
 	list_matches: list_matches,
+	list_all_players: list_all_players,
+	list_full_event: list_full_event,
 	match_by_id: match_by_id,
 	request: request,
 	resync: resync,

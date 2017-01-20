@@ -50,14 +50,13 @@ function show() {
 		ui_render(state);
 	} else {
 		uiu.visible_qs('.setupsheet_loading-icon', true);
-		network.load_all_players(state, function(err, ev) {
+		network.list_full_event(state, function(err) {
 			uiu.visible_qs('.setupsheet_error', !!err);
 			uiu.visible_qs('.setupsheet_loading-icon', false);
 			if (err) {
-				$('.setupsheet_error_message').text(err.msg);
+				uiu.text_qs('.setupsheet_error_message', err.msg);
 				return;
 			}
-			network.update_event(state, ev);
 			ui_render(state);
 		});
 	}

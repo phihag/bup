@@ -64,6 +64,16 @@ function list_matches(s, cb) {
 	}
 }
 
+function list_all_players(s, cb) {
+	list_matches(s, function(err, ev) {
+		if (err) {
+			return cb(err);
+		}
+		// TODO handle cases when all_players is missing, i.e. when loading from backup (autocompute)
+		return cb(err, ev.all_players);
+	});
+}
+
 function courts(s) {
 	return [{
 		id: '1',
@@ -131,6 +141,7 @@ function on_load_data(s) {
 return {
 	send_press: send_press,
 	list_matches: list_matches,
+	list_all_players: list_all_players,
 	courts: courts,
 	sync: sync,
 	service_name: service_name,

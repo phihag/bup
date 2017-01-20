@@ -1,6 +1,6 @@
+'use strict';
 // location.hash handling
 var buphistory = (function() {
-'use strict';
 
 function load_ui_by_hash_qs(qs) {
 	if (qs.scoresheet !== undefined) {
@@ -36,7 +36,7 @@ function record(s) {
 
 	var orig_hval = window.location.hash.substr(1);
 	var hval = orig_hval;
-	hval = hval.replace(/(?:^|&)(?:m|display|settings|event_scoresheets|scoresheet|eventsheet|stats|netstats|order|editevent|referee_mode)(?:=[^&]*)?(?=&|$)/g, '');
+	hval = hval.replace(/(?:^|&)(?:m|display|settings|event_scoresheets|scoresheet|eventsheet|stats|netstats|order|editevent|setupsheet|referee_mode)(?:=[^&]*)?(?=&|$)/g, '');
 	hval = hval.replace(/^&+|&+$/g, '');
 
 	if (s.initialized) {
@@ -84,6 +84,11 @@ function record(s) {
 			hval += '&';
 		}
 		hval += 'editevent';
+	} else if (s.ui.setupsheet_visible) {
+		if (hval.length > 1) {
+			hval += '&';
+		}
+		hval += 'setupsheet';
 	} else if (s.ui.order_visible) {
 		if (hval.length > 1) {
 			hval += '&';
@@ -148,6 +153,11 @@ function load_by_hash() {
 
 	if (typeof qs.editevent != 'undefined') {
 		editevent.show();
+		return;
+	}
+
+	if (typeof qs.setupsheet != 'undefined') {
+		setupsheet.show();
 		return;
 	}
 
@@ -229,6 +239,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var render = require('./render');
 	var scoresheet = require('./scoresheet');
 	var settings = require('./settings');
+	var setupsheet = require('./setupsheet');
 	var stats = require('./stats');
 	var utils = require('./utils');
 

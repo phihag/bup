@@ -57,7 +57,7 @@ var i18n_en = {
 'editevent:present players': 'Present players',
 'editevent:add present player': 'Add present player ...',
 
-'setupsheet:link': 'Setup sheet',
+'setupsheet:link': 'Setup sheet (experimental)',
 'setupsheet:back': 'Back',
 
 'button:undo': 'Undo',
