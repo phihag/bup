@@ -57,6 +57,10 @@ var i18n_de = {
 'editevent:present players': 'Anwesende Spieler',
 'editevent:add present player': 'Anwesende hinzufügen ...',
 
+'setupsheet:header|m': 'Herren',
+'setupsheet:header|f': 'Damen',
+'setupsheet:header:backup': 'E',
+'setupsheet:header:present': 'A',
 'setupsheet:link': 'Aufstellung (experimentell)',
 'setupsheet:back': 'Zurück',
 

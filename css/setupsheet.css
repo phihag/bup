@@ -6,15 +6,68 @@
 	min-height: 100%;
 	font-size: 24px;
 	text-align: center;
-	background: rgba(0, 0, 0, 0.9);
+	background: #000;
 	z-index: 2000;
 }
 
 .setupsheet_container {
-	display: inline-block;
 	background: #fff;
 	color: #000;
 	padding: 0 0.5em 0.5em 0.5em;
-	border-bottom-left-radius: 0.4em;
-	border-bottom-right-radius: 0.4em;
+	border-bottom-left-radius: 0.2em;
+	border-bottom-right-radius: 0.2em;
+}
+
+.setupsheet_error {
+	color: red;
+	font-size: 200%;
+}
+
+.setupsheet_tables {
+	column-width: 32em;
+	column-gap: 1em;
+}
+.setupsheet_table {
+	break-inside: avoid-column;
+	-webkit-column-break-inside: avoid;
+	border-collapse: collapse;
+}
+.setupsheet_table td,
+.setupsheet_table th {
+	border: 1px solid #444;
+}
+.setupsheet_table td.setupsheet_dark,
+.setupsheet_table th.setupsheet_dark {
+	border: none;
+}
+.setupsheet_table tr :first-child {
+	border-left: none;
+}
+.setupsheet_table tr :last-child {
+	border-right: none;
+}
+.setupsheet_table th.setupsheet_team_name {
+	border: none;
+}
+
+
+.setupsheet_player_name {
+	min-width: 10em;
+}
+.setupsheet_team_name {
+	text-align: left;
+}
+.setupsheet_table > tbody th {
+	min-width: 2.9em;
+}
+.setupsheet_dark {
+	background: #c0c0c0;
+}
+
+.setupsheet_header,
+.setupsheet_player_name {
+	text-align: left;
+}
+.setupsheet_new {
+	text-align: left;
 }

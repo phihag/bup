@@ -7,6 +7,9 @@ backup_players  2-element list (home/away), each element is another list of all 
                 gender key required for each player. These players can fill in in case of injury.
 present_players 2-element list (home/away), each element is another list of all the players (see below).
                 gender key required for each player. These players are present in the hall (e.g. injured, coaching).
+listed_players  Order of players listed in the setup sheet. 2 element list(home/away).
+                Each element is a dictionary with the keys "m" and "f".
+                Each element of that dictionary is an array for each player.
 courts          An array describing the current configuration of courts.
 id              Globally unique event id, e.g. "2016-bundesliga-refrath vs bischmisheim"
 league_key      ID of the league being played (this determines which event sheets are available, among others).

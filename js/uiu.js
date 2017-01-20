@@ -135,6 +135,11 @@ function create_el(parent, tagName, attrs, text) {
 	var doc = parent ? parent.ownerDocument : document;
 	var el = doc.createElement(tagName);
 	if (attrs) {
+		if (typeof attrs === 'string') {
+			attrs = {
+				'class': attrs,
+			};
+		}
 		for (var k in attrs) {
 			el.setAttribute(k, attrs[k]);
 		}

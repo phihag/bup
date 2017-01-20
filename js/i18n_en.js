@@ -57,6 +57,10 @@ var i18n_en = {
 'editevent:present players': 'Present players',
 'editevent:add present player': 'Add present player ...',
 
+'setupsheet:header|m': 'Men',
+'setupsheet:header|f': 'Women',
+'setupsheet:header:backup': 'B',
+'setupsheet:header:present': 'P',
 'setupsheet:link': 'Setup sheet (experimental)',
 'setupsheet:back': 'Back',
 

@@ -1,5 +1,5 @@
-var editevent = (function() {
 'use strict';
+var editevent = (function() {
 
 function on_select_change(e) {
 	var select = e.target;
@@ -274,6 +274,12 @@ function hide() {
 	uiu.esc_stack_pop();
 	state.ui.editevent_visible = false;
 	uiu.visible_qs('.editevent_layout', false);
+	return true;
+}
+
+function hide_and_back() {
+	if (!hide()) return;
+
 	control.set_current(state);
 
 	if (state.ui.referee_mode) {
@@ -290,13 +296,13 @@ function ui_init() {
 	});
 	click.qs('.editevent_back', function(e) {
 		e.preventDefault();
-		hide();
+		hide_and_back();
 	});
 
 	var layout = uiu.qs('.editevent_layout');
 	click.on(layout, function(e) {
 		if (e.target === layout) {
-			hide();
+			hide_and_back();
 		}
 	});
 }

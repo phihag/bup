@@ -1567,6 +1567,7 @@ return {
 	ui_init: ui_init,
 	show_dialog: show_dialog,
 	render_links: render_links,
+	calc_match_id: calc_match_id,
 };
 
 })();

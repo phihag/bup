@@ -1,19 +1,20 @@
-Aufstellung
-	add basic table
-	implement load_all_players
-	new field present_players
-	new field suggested_players -> add in XLSX
-	list all_players (list top 2 singles / 4 doubles)
+setupsheet
+	editevent changes have no effect!?
+	allow changing X
+	delete players
+	change players
 	add players
+	highlight column header on mouseover
 	add completely new players (with input)
-	click on boxes to change
+	print
+		make sure layout contains BuLi-Logo
+	pdf
+	browser back fails!
 	Message "Yes, correct." || "No, check doubles/singles" || "no info"
 	check doubles ranking
 	check for too many foreigners
 	check on editevent as well
-	make sure layout contains BuLi-Logo
-	print
-	pdf
+	check rows
 	XLSX
 	edit -> bldemo
 	edit this -> CourtSpot

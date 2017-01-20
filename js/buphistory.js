@@ -117,6 +117,14 @@ function record(s) {
 function load_by_hash() {
 	var qs = utils.parse_query_string(window.location.hash.substr(1));
 
+	// TODO hide editevent/setupsheet etc.
+	/*if (!qs.editevent) {
+		editevent.hide();
+	}
+	if (!qs.setupsheet) {
+		setupsheet.hide();
+	}*/
+
 	if (typeof qs.display != 'undefined') {
 		displaymode.show();
 		return;
