@@ -1,8 +1,8 @@
-Oliver: Am Anfang rechte Seite?
-Anzeige: Sätze
+btde auto update
+
 
 buphub: query table remotely (write CLI script)
-buphub: redirect fails!
+buphub: redirect fails when IPv6 is active!
 buphub crash:
 Jan 21 18:23:40 r.phihag.de env[1898]: /home/buphub/bup/node_modules/ws/lib/WebSocket.js:219
 Jan 21 18:23:40 r.phihag.de env[1898]:     else throw new Error('not opened');
@@ -34,6 +34,8 @@ setupsheet
 	edit this -> CourtSpot
 	check singles ranking
 	editevent: show nationality if non-EU
+Anzeige: Sätze
+Oliver Schönborn: Am Anfang rechte Seite?
 
 20s delay clock (BC)
 

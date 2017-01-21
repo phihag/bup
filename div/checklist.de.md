@@ -111,6 +111,10 @@ Nach Spielende:
   - [ ] Von SR unterschreiben
   - [ ] 1 Exemplar an Gast
   - [ ] 2 Exemplare an Heim
+  - [ ] 1 Exemplar zur Meldung
+- [ ] Melden
+  - [ ] Helmut Ruppert anrufen
+  - [ ] auf turnier.de eintragen
 - [ ] Tablets einsammeln
   - [ ] Export senden
   - [ ] Statistiken anschauen

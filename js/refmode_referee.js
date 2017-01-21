@@ -342,7 +342,6 @@ function _adopt_match(m) {
 }
 
 function espouse_event(c) {
-	console.log('espousing from', c);
 	var ev = utils.deep_copy(c.event);
 	ev.matches.forEach(_adopt_match);
 	s.event = ev;
