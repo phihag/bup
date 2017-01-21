@@ -160,7 +160,7 @@ function handle_dmsg(msg) {
 		}
 		calc_client_title(c);
 
-		if (msg.event) {
+		if (c.event) {
 			if (s.event) {
 				var ignore = (msg.setup && msg.presses) ? msg.setup.match_id : null; // Will be updated later
 				var changed = false;
@@ -189,7 +189,7 @@ function handle_dmsg(msg) {
 				if (changed) {
 					render_event(s);
 				}
-			} else {
+			} else if (c.event.matches) {
 				espouse_event(c);
 			}
 		}
@@ -342,6 +342,7 @@ function _adopt_match(m) {
 }
 
 function espouse_event(c) {
+	console.log('espousing from', c);
 	var ev = utils.deep_copy(c.event);
 	ev.matches.forEach(_adopt_match);
 	s.event = ev;

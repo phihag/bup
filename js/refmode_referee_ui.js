@@ -398,7 +398,7 @@ function render_clients(clients) {
 			}, s._('refmode:referee:change display style'));
 		}
 
-		if (c.event && (!ev || (c.event.id !== ev.id))) {
+		if (c.event && c.event.matches && (!ev || (c.event.id !== ev.id))) {
 			var diff_ev = uiu.create_el(div, 'div', {
 				'class': 'referee_warning',
 			}, s._('refmode:referee:different_event', {
@@ -408,7 +408,7 @@ function render_clients(clients) {
 				'class': 'referee_espouse_event',
 			}, s._('refmode:referee:espouse event'));
 			click.on(espouse_btn, on_espouse_btn_click);
-		} else if (c.event && ev && ((c.event.last_update > ev.last_update) && !eventutils.setups_eq(c.event, ev))) {
+		} else if (c.event && c.event.matches && ev && ((c.event.last_update > ev.last_update) && !eventutils.setups_eq(c.event, ev))) {
 			var updated_ev = uiu.create_el(div, 'div', {}, s._('refmode:referee:updated_event', {
 				time: utils.datetime_str(c.event.last_update),
 			}));
@@ -420,6 +420,10 @@ function render_clients(clients) {
 			uiu.create_el(div, 'div', {
 				'class': 'referee_warning',
 			}, s._('refmode:referee:no event'));
+		} else if (!c.event.matches) {
+			uiu.create_el(div, 'div', {
+				'class': 'referee_warning',
+			}, s._('refmode:referee:no event matches'));
 		}
 
 		var v = c.bup_version;

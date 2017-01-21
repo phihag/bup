@@ -469,6 +469,7 @@ var i18n_en = {
 'refmode:referee:match': 'Match: ',
 'refmode:referee:back from settings': 'Back to referee overview',
 'refmode:referee:no event': '- No event -',
+'refmode:referee:no event matches': 'No match information',
 'refmode:referee:no matches': 'No matches available. Connect to a tablet.',
 'refmode:referee:different_event': 'Different event: {event_name}',
 'refmode:referee:updated_event': 'Updated ({time})',

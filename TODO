@@ -1,3 +1,18 @@
+Oliver: Am Anfang rechte Seite?
+Anzeige: Sätze
+
+buphub: query table remotely (write CLI script)
+buphub: redirect fails!
+buphub crash:
+Jan 21 18:23:40 r.phihag.de env[1898]: /home/buphub/bup/node_modules/ws/lib/WebSocket.js:219
+Jan 21 18:23:40 r.phihag.de env[1898]:     else throw new Error('not opened');
+Jan 21 18:23:40 r.phihag.de env[1898]:          ^
+Jan 21 18:23:40 r.phihag.de env[1898]: Error: not opened	
+Jan 21 18:23:40 r.phihag.de env[1898]:     at WebSocket.send (/home/buphub/bup/node_modules/ws/lib/WebSocket.js:219:16)
+Jan 21 18:23:40 r.phihag.de env[1898]:     at send (/home/buphub/bup/refmode_hub/refmode_hub.js:21:5)
+Jan 21 18:23:40 r.phihag.de env[1898]:     at InternalFieldObject.ondone (/home/buphub/bup/refmode_hub/refmode_hub.js:362:4)
+
+
 setupsheet
 	allow changing X
 	delete players

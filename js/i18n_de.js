@@ -469,6 +469,7 @@ var i18n_de = {
 'refmode:referee:match': 'Spiel: ',
 'refmode:referee:back from settings': 'Zurück zur Referee-Übersicht',
 'refmode:referee:no event': 'Kein Wettkampf ausgewählt',
+'refmode:referee:no event matches': 'Keine Spielinformationen',
 'refmode:referee:no matches': 'Keine Spiele - verbinde mindestens ein Tablet.',
 'refmode:referee:different_event': 'Anderer Wettkampf: {event_name}',
 'refmode:referee:updated_event': 'Neuerer Stand ({time})',
