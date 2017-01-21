@@ -1,5 +1,4 @@
 setupsheet
-	editevent changes have no effect!?
 	allow changing X
 	delete players
 	change players
@@ -20,6 +19,8 @@ setupsheet
 	edit this -> CourtSpot
 	check singles ranking
 	editevent: show nationality if non-EU
+
+20s delay clock (BC)
 
 BTS support
 

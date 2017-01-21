@@ -34,7 +34,7 @@
 }
 .setupsheet_table td,
 .setupsheet_table th {
-	border: 1px solid #444;
+	border: 1px solid #ccc;
 }
 .setupsheet_table td.setupsheet_dark,
 .setupsheet_table th.setupsheet_dark {
@@ -50,6 +50,44 @@
 	border: none;
 }
 
+.setupsheet_x_cell {
+	position: relative;
+}
+.setupsheet_x {
+	position: absolute;
+	top: 50%;
+	transform: translate(0, -50%);
+	left: 0;
+	right: 0;
+	z-index: 2000;
+	text-align: center;
+}
+.setupsheet_table .setupsheet_match_name_hint {
+	position: absolute;
+	top: 50%;
+	transform: translate(0, -50%);
+	left: 0;
+	right: 0;
+	text-align: center;
+	display: none;
+	color: #cce;
+	z-index: 1999;
+}
+.setupsheet_table tr:hover .setupsheet_player_name {
+	background: #cce;
+}
+
+
+.setupsheet_table tr:hover .setupsheet_match_name_hint {
+	display: block;
+}
+.setupsheet_table tr:hover td:hover .setupsheet_match_name_hint {
+	color: #449;
+}
+
+.setupsheet_x_marked {
+	background: #eef;
+}
 
 .setupsheet_player_name {
 	min-width: 10em;
@@ -70,4 +108,7 @@
 }
 .setupsheet_new {
 	text-align: left;
+}
+.setupsheet_new select {
+	min-width: 10em;
 }

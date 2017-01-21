@@ -32,6 +32,7 @@
   - [ ] USB-Akkus dranhängen
 - [ ] Backup-Tablets
   - [ ] Batteriestand überprüfen, ggf. laden
+  - [ ] Auf lautlos stellen
   - [ ] Ins richtige WLAN einbuchen
   - [ ] Chrome aufrufen und einloggen
 - [ ] Demo-Tablet starten

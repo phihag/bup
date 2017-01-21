@@ -19,10 +19,9 @@ function calc_listed(event, team_id, gender) {
 
 	var res = [];
 	function _add(p, p_gender) {
-		if (!p_gender) {
+		if (typeof p_gender != 'string') {
 			p_gender = p.gender;
 		}
-
 		if (p_gender !== gender) {
 			return;
 		}
@@ -66,6 +65,18 @@ function available_players(s, listed, team_id, gender) {
 	return res;
 }
 
+function col_text(s, col) {
+	switch (col) {
+	case 'dark':
+		return '';
+	case 'backup':
+		return s._('setupsheet:header:backup');
+	case 'present':
+		return s._('setupsheet:header:present');
+	}
+	return col;
+}
+
 function ui_render(s) {
 	var cfg = CONFIGS[s.event.league_key];
 
@@ -103,12 +114,7 @@ function ui_render(s) {
 				if (col === 'dark') {
 					uiu.create_el(header_tr, 'th', 'setupsheet_dark');
 				} else {
-					var text = (
-						(col === 'backup') ? (s._('setupsheet:header:backup')) : (
-						(col === 'present') ? (s._('setupsheet:header:present')) : (
-						col
-					)));
-					uiu.create_el(header_tr, 'th', {}, text);
+					uiu.create_el(header_tr, 'th', {}, col_text(s, col));
 				}
 			});
 
@@ -135,9 +141,14 @@ function ui_render(s) {
 						var plays_in = candidate_players && candidate_players.some(function(cp) {
 							return cp.name === p.name;
 						});
-						uiu.create_el(tr, 'td', {
+						var td = uiu.create_el(tr, 'td', {
 							'data-col': col,
-						}, plays_in ? 'x' : '');
+							'class': 'setupsheet_x_cell' + (plays_in ? ' setupsheet_x_marked' : ''),
+						});
+						uiu.create_el(td, 'span', 'setupsheet_match_name_hint', col_text(s, col));
+						uiu.create_el(
+							td, 'span',
+							'setupsheet_x', plays_in ? 'x' : '');
 					}
 				});
 			});
