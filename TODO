@@ -1,6 +1,21 @@
-btde auto update
-
-
+refmode: show time when next match can be played (in BuLi)
+refmode: Aufruf nicht vor ...
+refmode: changes as referee should not change umpire
+refmode: report network errors
+refmode: send export via email (+confirm)
+refmode: synchronize notes, location, etc.
+refmode: synchronize present_players / backup_players even if not supported by btde
+refmode: alert on network failures
+refmode: show netstats
+btde: switch players in mixed (so that gender is correct)
+websocket conn tried to send message while no websocket active: should not happen more than once
+Liste aller Spieler + Schiedsrichter für Hallensprecher
+checkliste: + Spielberichte audrucken bei gelben Karten
+gelbe Karten: text automatisch generieren
+upload dist instead of dest version to t.aufschlagwechsel.de
+btde auto update script
+fullscreen is visible with no effect on iPad
+sat disconnection -> does not get notified
 buphub: query table remotely (write CLI script)
 buphub: redirect fails when IPv6 is active!
 buphub crash:
@@ -8,10 +23,10 @@ Jan 21 18:23:40 r.phihag.de env[1898]: /home/buphub/bup/node_modules/ws/lib/WebS
 Jan 21 18:23:40 r.phihag.de env[1898]:     else throw new Error('not opened');
 Jan 21 18:23:40 r.phihag.de env[1898]:          ^
 Jan 21 18:23:40 r.phihag.de env[1898]: Error: not opened	
-Jan 21 18:23:40 r.phihag.de env[1898]:     at WebSocket.send (/home/buphub/bup/node_modules/ws/lib/WebSocket.js:219:16)
+Jan 21 18:23:40 r.phihag.de env[1898]:     at WebSocket.send (/home/buphub/bup/node_modules/ws/lib/bSocket.js:219:16)
 Jan 21 18:23:40 r.phihag.de env[1898]:     at send (/home/buphub/bup/refmode_hub/refmode_hub.js:21:5)
 Jan 21 18:23:40 r.phihag.de env[1898]:     at InternalFieldObject.ondone (/home/buphub/bup/refmode_hub/refmode_hub.js:362:4)
-
+document why we're asking for left instead of right in th ebeginning
 
 setupsheet
 	allow changing X
@@ -35,7 +50,6 @@ setupsheet
 	check singles ranking
 	editevent: show nationality if non-EU
 Anzeige: Sätze
-Oliver Schönborn: Am Anfang rechte Seite?
 
 20s delay clock (BC)
 
@@ -109,6 +123,8 @@ improve refmode
 	show current network state
 	test two clients at the same match
 	re-render clients+event upon language change
+	message to SRs?
+	request shuttles
 
 improve display mode
 	like den-ger

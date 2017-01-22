@@ -19,6 +19,7 @@
   - [ ] Chrome aufrufen und einloggen
   - [ ] Vollbild
 - [ ] Beamer aufbauen
+  - [ ] Überprüfen: Ist der Rechner im tvr_ticker-WLAN?
   - [ ] https://aufschlagwechsel.de/rg
   - [ ] Zweites Tab mit Ticker-Anzeige
 - [ ] Schiedsrichter-Tablets
@@ -49,6 +50,7 @@
   - [ ] Handy befestigen
   - [ ] Auf lautlos stellen
   - [ ] 4k
+- [ ] Link zum Ticker auf Facebook gepostet?
 
 90-60 Minuten vor Spielbeginn:
 
@@ -98,6 +100,7 @@ Während des Spiels:
 - [ ] Router-Statistiken beobachten
 - [ ] Auf gute Ballwechsel achten (Spiel+Spielstand aufschreiben)
 - [ ] Falls kein Referee-Mode: Spielendzeiten notieren
+- [ ] Zuschauer mit Blitzlicht ermahnen
 
 Nach Spielende:
 
