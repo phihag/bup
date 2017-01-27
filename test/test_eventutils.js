@@ -376,5 +376,258 @@ _describe('eventutils', function() {
 		ev2.present_players[0] = [];
 		assert(!bup.eventutils.setups_eq(ev, ev2));
 	});
+
+	_it('set_not_before', function() {
+		var hd1_presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		}, {
+			type: 'pick_receiver',
+			team_id: 0,
+			player_id: 0,
+		}, {
+			type: 'love-all',
+		}];
+
+		var matches = [{
+			setup: {
+				match_id: 'HD1',
+				is_doubles: true,
+				counting: '5x11_15',
+				teams: [{
+					players: [
+						{name: 'Sam Magee'},
+						{name: 'Richard Domke'},
+					],
+				}, {
+					players: [
+						{name: 'Michael Fuchs'},
+						{name: 'Marvin Seidel'},
+					],
+				}],
+			},
+			presses_json: '[{"type":"pick_side","team1_left":false,"timestamp":1485104515708},{"type":"pick_server","team_id":0,"player_id":0,"timestamp":1485104518071},{"type":"shuttle","timestamp":1485104604580},{"type":"love-all","timestamp":1485104629089},{"type":"score","side":"left","timestamp":1485104634244},{"type":"score","side":"left","timestamp":1485104652344},{"type":"score","side":"right","timestamp":1485104664394},{"type":"score","side":"left","timestamp":1485104675001},{"type":"score","side":"right","timestamp":1485104687418},{"type":"score","side":"left","timestamp":1485104711434},{"type":"score","side":"right","timestamp":1485104734983},{"type":"score","side":"left","timestamp":1485104751078},{"type":"score","side":"left","timestamp":1485104764877},{"type":"score","side":"left","timestamp":1485104780870},{"type":"score","side":"left","timestamp":1485104800720},{"type":"score","side":"right","timestamp":1485104811950},{"type":"score","side":"right","timestamp":1485104828095},{"type":"score","side":"left","timestamp":1485104846698},{"type":"score","side":"left","timestamp":1485104862631},{"type":"score","side":"right","timestamp":1485104875968},{"type":"score","side":"left","timestamp":1485104890043},{"type":"postgame-confirm","timestamp":1485104898703},{"type":"shuttle","timestamp":1485104920180},{"type":"love-all","timestamp":1485104934444},{"type":"score","side":"right","timestamp":1485104942588},{"type":"score","side":"left","timestamp":1485104960356},{"type":"score","side":"left","timestamp":1485104979838},{"type":"shuttle","timestamp":1485104985393},{"type":"score","side":"left","timestamp":1485104998562},{"type":"score","side":"right","timestamp":1485105018487},{"type":"score","side":"right","timestamp":1485105033746},{"type":"score","side":"left","timestamp":1485105047606},{"type":"score","side":"left","timestamp":1485105059227},{"type":"score","side":"right","timestamp":1485105076295},{"type":"score","side":"left","timestamp":1485105098150},{"type":"shuttle","timestamp":1485105104165},{"type":"score","side":"right","timestamp":1485105122564},{"type":"score","side":"left","timestamp":1485105136055},{"type":"score","side":"right","timestamp":1485105152877},{"type":"score","side":"left","timestamp":1485105161496},{"type":"score","side":"right","timestamp":1485105173256},{"type":"score","side":"left","timestamp":1485105187284},{"type":"score","side":"left","timestamp":1485105214953},{"type":"score","side":"left","timestamp":1485105228895},{"type":"postgame-confirm","timestamp":1485105242122},{"type":"love-all","timestamp":1485105287950},{"type":"score","side":"left","timestamp":1485105292434},{"type":"score","side":"right","timestamp":1485105305858},{"type":"score","side":"left","timestamp":1485105315270},{"type":"score","side":"left","timestamp":1485105333080},{"type":"score","side":"left","timestamp":1485105344764},{"type":"score","side":"right","timestamp":1485105358836},{"type":"score","side":"right","timestamp":1485105384299},{"type":"score","side":"left","timestamp":1485105413244},{"type":"score","side":"right","timestamp":1485105433299},{"type":"score","side":"left","timestamp":1485105447244},{"type":"score","side":"right","timestamp":1485105461851},{"type":"score","side":"right","timestamp":1485105475686},{"type":"score","side":"left","timestamp":1485105488903},{"type":"score","side":"right","timestamp":1485105500580},{"type":"score","side":"right","timestamp":1485105527919},{"type":"score","side":"right","timestamp":1485105543970},{"type":"score","side":"right","timestamp":1485105557129},{"type":"score","side":"right","timestamp":1485105573369},{"type":"postgame-confirm","timestamp":1485105587841},{"type":"love-all","timestamp":1485105634834},{"type":"score","side":"right","timestamp":1485105641832},{"type":"score","side":"left","timestamp":1485105666409},{"type":"score","side":"right","timestamp":1485105683162},{"type":"score","side":"left","timestamp":1485105701543},{"type":"shuttle","timestamp":1485105708590},{"type":"score","side":"left","timestamp":1485105724712},{"type":"score","side":"right","timestamp":1485105742327},{"type":"score","side":"left","timestamp":1485105762148},{"type":"score","side":"right","timestamp":1485105778253},{"type":"score","side":"left","timestamp":1485105793264},{"type":"score","side":"right","timestamp":1485105815518},{"type":"score","side":"right","timestamp":1485105830727},{"type":"score","side":"left","timestamp":1485105843397},{"type":"score","side":"left","timestamp":1485105860064},{"type":"score","side":"right","timestamp":1485105876834},{"type":"score","side":"left","timestamp":1485105894216},{"type":"score","side":"left","timestamp":1485105912956},{"type":"score","side":"left","timestamp":1485105949743},{"type":"shuttle","timestamp":1485105963337},{"type":"score","side":"right","timestamp":1485105976693},{"type":"score","side":"right","timestamp":1485105993078},{"type":"score","side":"right","timestamp":1485106004794},{"type":"score","side":"left","timestamp":1485106019866},{"type":"score","side":"left","timestamp":1485106037052}]',
+		}, {
+			setup: {
+				match_id: 'DD',
+				is_doubles: true,
+				counting: '5x11_15',
+				teams: [{
+					players: [
+						{name: 'Jennifer Karnott'},
+						{name: 'Carla Nelte'},
+					],
+				}, {
+					players: [
+						{name: 'Linda Efler'},
+						{name: 'Isabel Herttrich'},
+					],
+				}],
+			},
+			presses_json: '[{"type":"pick_side","team1_left":false,"timestamp":1485104515708},{"type":"pick_server","team_id":0,"player_id":0,"timestamp":1485104518071},{"type":"shuttle","timestamp":1485104604580},{"type":"love-all","timestamp":1485104629089},{"type":"score","side":"left","timestamp":1485104634244},{"type":"score","side":"left","timestamp":1485104652344},{"type":"score","side":"right","timestamp":1485104664394},{"type":"score","side":"left","timestamp":1485104675001},{"type":"score","side":"right","timestamp":1485104687418},{"type":"score","side":"left","timestamp":1485104711434},{"type":"score","side":"right","timestamp":1485104734983},{"type":"score","side":"left","timestamp":1485104751078},{"type":"score","side":"left","timestamp":1485104764877},{"type":"score","side":"left","timestamp":1485104780870},{"type":"score","side":"left","timestamp":1485104800720},{"type":"score","side":"right","timestamp":1485104811950},{"type":"score","side":"right","timestamp":1485104828095},{"type":"score","side":"left","timestamp":1485104846698},{"type":"score","side":"left","timestamp":1485104862631},{"type":"score","side":"right","timestamp":1485104875968},{"type":"score","side":"left","timestamp":1485104890043},{"type":"postgame-confirm","timestamp":1485104898703},{"type":"shuttle","timestamp":1485104920180},{"type":"love-all","timestamp":1485104934444},{"type":"score","side":"right","timestamp":1485104942588},{"type":"score","side":"left","timestamp":1485104960356},{"type":"score","side":"left","timestamp":1485104979838},{"type":"shuttle","timestamp":1485104985393},{"type":"score","side":"left","timestamp":1485104998562},{"type":"score","side":"right","timestamp":1485105018487},{"type":"score","side":"right","timestamp":1485105033746},{"type":"score","side":"left","timestamp":1485105047606},{"type":"score","side":"left","timestamp":1485105059227},{"type":"score","side":"right","timestamp":1485105076295},{"type":"score","side":"left","timestamp":1485105098150},{"type":"shuttle","timestamp":1485105104165},{"type":"score","side":"right","timestamp":1485105122564},{"type":"score","side":"left","timestamp":1485105136055},{"type":"score","side":"right","timestamp":1485105152877},{"type":"score","side":"left","timestamp":1485105161496},{"type":"score","side":"right","timestamp":1485105173256},{"type":"score","side":"left","timestamp":1485105187284},{"type":"score","side":"left","timestamp":1485105214953},{"type":"score","side":"left","timestamp":1485105228895},{"type":"postgame-confirm","timestamp":1485105242122},{"type":"love-all","timestamp":1485105287950},{"type":"score","side":"left","timestamp":1485105292434},{"type":"score","side":"right","timestamp":1485105305858},{"type":"score","side":"left","timestamp":1485105315270},{"type":"score","side":"left","timestamp":1485105333080},{"type":"score","side":"left","timestamp":1485105344764},{"type":"score","side":"right","timestamp":1485105358836},{"type":"score","side":"right","timestamp":1485105384299},{"type":"score","side":"left","timestamp":1485105413244},{"type":"score","side":"right","timestamp":1485105433299},{"type":"score","side":"left","timestamp":1485105447244},{"type":"score","side":"right","timestamp":1485105461851},{"type":"score","side":"right","timestamp":1485105475686},{"type":"score","side":"left","timestamp":1485105488903},{"type":"score","side":"right","timestamp":1485105500580},{"type":"score","side":"right","timestamp":1485105527919},{"type":"score","side":"right","timestamp":1485105543970},{"type":"score","side":"right","timestamp":1485105557129},{"type":"score","side":"right","timestamp":1485105573369},{"type":"postgame-confirm","timestamp":1485105587841},{"type":"love-all","timestamp":1485105634834},{"type":"score","side":"right","timestamp":1485105641832},{"type":"score","side":"left","timestamp":1485105666409},{"type":"score","side":"right","timestamp":1485105683162},{"type":"score","side":"left","timestamp":1485105701543},{"type":"shuttle","timestamp":1485105708590},{"type":"score","side":"left","timestamp":1485105724712},{"type":"score","side":"right","timestamp":1485105742327},{"type":"score","side":"left","timestamp":1485105762148},{"type":"score","side":"right","timestamp":1485105778253},{"type":"score","side":"left","timestamp":1485105793264},{"type":"score","side":"right","timestamp":1485105815518},{"type":"score","side":"right","timestamp":1485105830727},{"type":"score","side":"left","timestamp":1485105843397},{"type":"score","side":"left","timestamp":1485105860064},{"type":"score","side":"right","timestamp":1485105876834},{"type":"score","side":"left","timestamp":1485105894216},{"type":"score","side":"left","timestamp":1485105912956},{"type":"score","side":"left","timestamp":1485105949743},{"type":"shuttle","timestamp":1485105963337},{"type":"score","side":"right","timestamp":1485105976693},{"type":"score","side":"right","timestamp":1485105993078},{"type":"score","side":"right","timestamp":1485106004794},{"type":"score","side":"left","timestamp":1485106019866},{"type":"score","side":"left","timestamp":1485106037051}]',
+		}, {
+			setup: {
+				match_id: 'GD',
+				is_doubles: true,
+				counting: '5x11_15',
+				teams: [{
+					players: [
+						{name: 'Sam Magee'},
+						{name: 'Carla Nelte'},
+					],
+				}, {
+					players: [
+						{name: 'Peter Käsbauer'},
+						{name: 'Isabel Herttrich'},
+					],
+				}],
+			},
+			presses_json: '[]',
+		}, {
+			setup: {
+				match_id: 'HE1',
+				is_doubles: false,
+				counting: '5x11_15',
+				teams: [{
+					players: [
+						{name: 'Fabian Roth'},
+					],
+				}, {
+					players: [
+						{name: 'Marc Zwiebler'},
+					]
+				}],
+			},
+			presses_json: '[]',
+		}, {
+			setup: {
+				match_id: 'HD2',
+				is_doubles: true,
+				counting: '5x11_15',
+				teams: [{
+					players: [
+						{name: 'Fabian Holzer'},
+						{name: 'Denis Nyenhuis'},
+					],
+				}, {
+					players: [
+						{name: 'Johannes Schöttler'},
+						{name: 'Marcel Reuter'},
+					],
+				}],
+			},
+			presses_json: '[{"type":"pick_side","team1_left":false,"timestamp":1485104515708}]',
+		}, {
+			setup: {
+				match_id: 'HD4',
+				is_doubles: true,
+				counting: '5x11_15',
+				teams: [{
+					players: [
+						{name: 'Kai Waldenberger'},
+						{name: 'Mark Byerly'},
+					],
+				}, {
+					players: [
+						{name: 'Tobias Wadenka'},
+						{name: 'Lucas Bednorsch'},
+					],
+				}],
+			},
+			presses_json: '[{"type":"pick_side","team1_left":false,"timestamp":1485104515708}]',
+		}, {
+			setup: {
+				match_id: 'HE2',
+				is_doubles: false,
+				counting: '5x11_15',
+				teams: [{
+					players: [
+						{name: 'Denis Nyenhuis'},
+					],
+				}, {
+					players: [
+						{name: 'Tobias Wadenka'},
+					],
+				}],
+			},
+			presses_json: '[]',
+		}, {
+			setup: {
+				match_id: 'HE3',
+				is_doubles: false,
+				counting: '5x11_15',
+				teams: [{
+					players: [
+						{name: 'Fabian Holzer'},
+					],
+				}, {
+					players: [
+						{name: 'Marvin Seidel'},
+					],
+				}],
+			},
+			presses_json: '[]',
+		}, {
+			setup: {
+				match_id: 'HD3',
+				is_doubles: true,
+				counting: '5x11_15',
+				teams: [{
+					players: [
+						{name: 'Joshua Magee'},
+						{name: 'Joshua Domke'},
+					],
+				}, {
+					players: [
+						{name: 'Philipp Wachenfeld'},
+						{name: 'Samuel Hsiao'},
+					],
+				}],
+			},
+			presses_json: '[{"type":"pick_side","team1_left":false,"timestamp":1485104515708},{"type":"pick_server","team_id":0,"player_id":0,"timestamp":1485104518071},{"type":"shuttle","timestamp":1485104604580},{"type":"love-all","timestamp":1485104629089},{"type":"score","side":"left","timestamp":1485104634244},{"type":"score","side":"left","timestamp":1485104652344},{"type":"score","side":"right","timestamp":1485104664394},{"type":"score","side":"left","timestamp":1485104675001},{"type":"score","side":"right","timestamp":1485104687418},{"type":"score","side":"left","timestamp":1485104711434},{"type":"score","side":"right","timestamp":1485104734983},{"type":"score","side":"left","timestamp":1485104751078},{"type":"score","side":"left","timestamp":1485104764877},{"type":"score","side":"left","timestamp":1485104780870},{"type":"score","side":"left","timestamp":1485104800720},{"type":"score","side":"right","timestamp":1485104811950},{"type":"score","side":"right","timestamp":1485104828095},{"type":"score","side":"left","timestamp":1485104846698},{"type":"score","side":"left","timestamp":1485104862631},{"type":"score","side":"right","timestamp":1485104875968},{"type":"score","side":"left","timestamp":1485104890043},{"type":"postgame-confirm","timestamp":1485104898703},{"type":"shuttle","timestamp":1485104920180},{"type":"love-all","timestamp":1485104934444},{"type":"score","side":"right","timestamp":1485104942588},{"type":"score","side":"left","timestamp":1485104960356},{"type":"score","side":"left","timestamp":1485104979838},{"type":"shuttle","timestamp":1485104985393},{"type":"score","side":"left","timestamp":1485104998562},{"type":"score","side":"right","timestamp":1485105018487},{"type":"score","side":"right","timestamp":1485105033746},{"type":"score","side":"left","timestamp":1485105047606},{"type":"score","side":"left","timestamp":1485105059227},{"type":"score","side":"right","timestamp":1485105076295},{"type":"score","side":"left","timestamp":1485105098150},{"type":"shuttle","timestamp":1485105104165},{"type":"score","side":"right","timestamp":1485105122564},{"type":"score","side":"left","timestamp":1485105136055},{"type":"score","side":"right","timestamp":1485105152877},{"type":"score","side":"left","timestamp":1485105161496},{"type":"score","side":"right","timestamp":1485105173256},{"type":"score","side":"left","timestamp":1485105187284},{"type":"score","side":"left","timestamp":1485105214953},{"type":"score","side":"left","timestamp":1485105228895},{"type":"postgame-confirm","timestamp":1485105242122},{"type":"love-all","timestamp":1485105287950},{"type":"score","side":"left","timestamp":1485105292434},{"type":"score","side":"right","timestamp":1485105305858},{"type":"score","side":"left","timestamp":1485105315270},{"type":"score","side":"left","timestamp":1485105333080},{"type":"score","side":"left","timestamp":1485105344764},{"type":"score","side":"right","timestamp":1485105358836},{"type":"score","side":"right","timestamp":1485105384299},{"type":"score","side":"left","timestamp":1485105413244},{"type":"score","side":"right","timestamp":1485105433299},{"type":"score","side":"left","timestamp":1485105447244},{"type":"score","side":"right","timestamp":1485105461851},{"type":"score","side":"right","timestamp":1485105475686},{"type":"score","side":"left","timestamp":1485105488903},{"type":"score","side":"right","timestamp":1485105500580},{"type":"score","side":"right","timestamp":1485105527919},{"type":"score","side":"right","timestamp":1485105543970},{"type":"score","side":"right","timestamp":1485105557129},{"type":"score","side":"right","timestamp":1485105573369},{"type":"postgame-confirm","timestamp":1485105587841},{"type":"love-all","timestamp":1485105634834},{"type":"score","side":"right","timestamp":1485105641832},{"type":"score","side":"left","timestamp":1485105666409},{"type":"score","side":"right","timestamp":1485105683162},{"type":"score","side":"left","timestamp":1485105701543},{"type":"shuttle","timestamp":1485105708590},{"type":"score","side":"left","timestamp":1485105724712},{"type":"score","side":"right","timestamp":1485105742327},{"type":"score","side":"left","timestamp":1485105762148},{"type":"score","side":"right","timestamp":1485105778253},{"type":"score","side":"left","timestamp":1485105793264},{"type":"score","side":"right","timestamp":1485105815518},{"type":"score","side":"right","timestamp":1485105830727},{"type":"score","side":"left","timestamp":1485105843397},{"type":"score","side":"left","timestamp":1485105860064},{"type":"score","side":"right","timestamp":1485105876834},{"type":"score","side":"left","timestamp":1485105894216},{"type":"score","side":"left","timestamp":1485105912956},{"type":"score","side":"left","timestamp":1485105949743},{"type":"shuttle","timestamp":1485105963337},{"type":"score","side":"right","timestamp":1485105976693},{"type":"score","side":"right","timestamp":1485105993078},{"type":"score","side":"right","timestamp":1485106004794},{"type":"score","side":"left","timestamp":1485106019866},{"type":"score","side":"left","timestamp":1485106037053}]',
+		}, {
+			setup: {
+				match_id: 'HE4',
+				is_doubles: false,
+				counting: '5x11_15',
+				teams: [{
+					players: [
+						{name: 'Richard Domke'},
+					],
+				}, {
+					players: [
+						{name: 'Samuel Hsiao'},
+					],
+				}]
+			},
+			presses_json: '[]',
+		}, {
+			setup: {
+				match_id: 'DE',
+				is_doubles: false,
+				counting: '5x11_15',
+				teams: [{
+					players: [
+						{name: 'Chloe Magee'},
+					],
+				}, {
+					players: [
+						{name: 'Olga Konon'},
+					],
+				}]
+			},
+			presses_json: '[]',
+
+		}];
+		var local_state = {};
+		var match_states = matches.map(function(m) {
+			var presses = JSON.parse(m.presses_json);
+			assert(presses);
+			return bup.calc.remote_state(local_state, m.setup, presses);
+		});
+		var named_match_states = {};
+		match_states.forEach(function(ms) {
+			named_match_states[ms.setup.match_id] = ms;
+		});
+
+		bup.eventutils.set_not_before('1BL-2016', match_states);
+		assert.deepStrictEqual(named_match_states.HD1.not_before, 'started');
+		assert.deepStrictEqual(named_match_states.DD.not_before, 'started');
+		assert.deepStrictEqual(named_match_states.GD.not_before, 1485107237052);
+		assert.deepStrictEqual(named_match_states.HE1.not_before, 0);
+		assert.deepStrictEqual(named_match_states.HD2.not_before, 'started');
+		assert.deepStrictEqual(named_match_states.HD4.not_before, 'started');
+		assert.deepStrictEqual(named_match_states.HE2.not_before, 'playing');
+		assert.deepStrictEqual(named_match_states.HE2.not_before_matches, [named_match_states.HD2, named_match_states.HD4]);
+		assert.deepStrictEqual(named_match_states.HE3.not_before, 'playing');
+		assert.deepStrictEqual(named_match_states.HE3.not_before_matches, [named_match_states.HD2]);
+		assert.deepStrictEqual(named_match_states.HD3.not_before, 'started');
+		assert.deepStrictEqual(named_match_states.HE4.not_before, 1485107237053);
+		assert.deepStrictEqual(named_match_states.DE.not_before, 0);
+
+		bup.eventutils.set_not_before('RLW-2016', match_states);
+		assert.deepStrictEqual(named_match_states.HD1.not_before, 'started');
+		assert.deepStrictEqual(named_match_states.GD.not_before, 1485107837052);
+		assert.deepStrictEqual(named_match_states.DD.not_before, 'started');
+		assert.deepStrictEqual(named_match_states.HE1.not_before, 0);
+		assert.deepStrictEqual(named_match_states.HD2.not_before, 'started');
+		assert.deepStrictEqual(named_match_states.HD4.not_before, 'started');
+		assert.deepStrictEqual(named_match_states.HE2.not_before, 'playing');
+		assert.deepStrictEqual(named_match_states.HE2.not_before_matches, [named_match_states.HD2, named_match_states.HD4]);
+		assert.deepStrictEqual(named_match_states.HE3.not_before, 'playing');
+		assert.deepStrictEqual(named_match_states.HE3.not_before_matches, [named_match_states.HD2]);
+		assert.deepStrictEqual(named_match_states.HD3.not_before, 'started');
+		assert.deepStrictEqual(named_match_states.HE4.not_before, 1485107837053);
+		assert.deepStrictEqual(named_match_states.DE.not_before, 0);
+
+		bup.eventutils.set_not_before('ficticious-league', match_states); // No rest information for this league
+		match_states.forEach(function(ms) {
+			assert.deepStrictEqual(ms.not_before, undefined);
+		});
+	});
 });
 

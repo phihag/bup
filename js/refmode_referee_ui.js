@@ -459,21 +459,27 @@ function render_event(s) {
 	}
 
 	if (ev.matches) {
-		ev.matches.forEach(function(m) {
-			var is_complete = !m.setup.incomplete;
+		var cstates = ev.matches.map(function(m) {
+			return calc.remote_state(s, m.setup, m.presses);
+		});
+		eventutils.set_not_before(ev.league_key, cstates);
+
+		ev.matches.forEach(function(cs) {
+			var setup = cs.setup;
+
+			var is_complete = !setup.incomplete;
 			var match_container = uiu.create_el(matches_container, 'div', {
 				'class': 'referee_e_match',
-				'data-match-id': m.setup.match_id,
+				'data-match-id': setup.match_id,
 			});
 
 			var name_row = uiu.create_el(match_container, 'div');
 			var match_link = uiu.create_el(name_row, 'span', {
 				'class': ((is_complete ? 'js_link ' : '') + 'referee_e_match_name'),
-			}, m.setup.match_name);
+			}, setup.match_name);
 			if (is_complete) {
 				click.on(match_link, on_event_match_link_click);
 			}
-			var client_state = calc.remote_state(s, m.setup, m.presses); // TODO calculate this at the event
 			uiu.create_el(name_row, 'span', {
 				'class': 'referee_e_match_status',
 			}, calc.desc(client_state));
@@ -490,12 +496,9 @@ function render_event(s) {
 				click.on(scoresheet_link, on_event_match_scoresheet_click);
 			}
 
-			if (m.presses) {
+			if (cs.presses) {
 				var presses_table = uiu.create_el(match_container, 'table');
-				var scopy = calc.copy_state(s);
-				scopy.presses = m.presses;
-				scopy.setup = m.setup;
-				stats.render_presses(presses_table, scopy, m.presses.length - 2);
+				stats.render_presses(presses_table, client_stat, cs.presses.length - 2);
 			}
 		});
 	}

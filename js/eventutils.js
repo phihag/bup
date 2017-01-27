@@ -287,9 +287,102 @@ function setups_eq(e1, e2) {
 	return true;
 }
 
+function get_min_pause(league_key) {
+	if (/^(?:1BL|2BLN|2BLS)-(?:2015|2016)$/.test(league_key)) {
+		return 20 * 60000; // §10.1 BLO-DB
+	}
+	if ((league_key === 'RLW-2016') || (NRW2016_RE.test(league_key))) {
+		return 30 * 60000; // §57.7 SpO
+	}
+	if (league_key === 'RLN-2016') {
+		return 20 * 60000; // §7.7 Gruppe Nord
+	}
+	return undefined;
+}
+
+function shares_players(setup1, setup2) {
+	var player_register = {};
+	var setups = [setup1, setup2];
+	for (var setup_id = 0;setup_id < setups.length;setup_id++) {
+		var setup = setups[setup_id];
+		for (var team_id = 0;team_id < setup.teams.length;team_id++) {
+			var players = setup.teams[team_id].players;
+			for (var player_id = 0;player_id < players.length;player_id++) {
+				var pname = players[player_id].name;
+				if (player_register[pname]) {
+					return true;
+				}
+				player_register[pname] = true;
+			}
+		}
+	}
+	return false;
+}
+
+// Decorates all match_states with properties not_before
+// Values:
+//   "started"   - Match has already started (or even finished)
+//   "playing"   - Match depends on a match that is currently playing
+//   0           - it's the first match for all players
+//   Any integer - UNIX timestamp (ms) when the match can be announced (or played, if regulations only cover that).
+// If the value is "playing", there will be another annotation:
+// match_states_depends, an array of match_state objects that the match depends on.
+function set_not_before(league_key, match_states) {
+	var min_pause = get_min_pause(league_key);
+	if (min_pause === undefined) {
+		match_states.forEach(function(ms) {
+			ms.not_before = undefined;
+		});
+		return;
+	}
+
+	match_states.forEach(function(ms) {
+		delete ms.not_before_matches;
+	});
+
+	var latest_active = {}; // player name => 'oncourt' or integer when last on court
+	var oncourt_in = {}; // player name => array
+	match_states.forEach(function(ms) {
+		if (!ms.presses || (ms.presses.length === 0)) {
+			if (!ms.not_before) {
+				ms.not_before = 0;
+			}
+			return;
+		}
+		ms.not_before = 'started';
+
+		match_states.forEach(function(change_ms) {
+			if (ms === change_ms) return;
+
+			if (change_ms.presses && (change_ms.presses.length > 0)) {
+				return;
+			}
+
+			if (!shares_players(ms.setup, change_ms.setup)) {
+				return;
+			}
+
+			if (ms.match.finished) {
+				var v = change_ms.not_before;
+				var earliest_call = ms.presses[ms.presses.length - 1].timestamp + min_pause;
+				if (!v || ((typeof v === 'number') && (v < earliest_call))) {
+					change_ms.not_before = earliest_call;
+				}
+			} else {
+				change_ms.not_before = 'playing';
+				if (! change_ms.not_before_matches) {
+					change_ms.not_before_matches = [];
+				}
+				change_ms.not_before_matches.push(ms);
+			}
+		});
+	});
+}
+
 return {
 	annotate: annotate,
 	calc_all_players: calc_all_players,
+	set_not_before: set_not_before,
 	setups_eq: setups_eq,
 	guess_gender: guess_gender,
 	is_incomplete: is_incomplete,
