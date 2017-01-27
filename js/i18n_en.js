@@ -33,6 +33,9 @@ var i18n_en = {
 'mdesc:toss': 'inputing toss',
 'mdesc:warmup': 'warmup',
 'mdesc:incomplete': 'missing player names',
+'mdesc:blocked': 'waiting for players ({matches})',
+'mdesc:waiting': 'rest until {time}',
+'mdesc:selectable': 'can be called',
 
 'report problem': 'Report problem/suggestion',
 'report:test': 'Test diagnostics',

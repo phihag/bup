@@ -378,21 +378,6 @@ _describe('eventutils', function() {
 	});
 
 	_it('set_not_before', function() {
-		var hd1_presses = [{
-			type: 'pick_side',
-			team1_left: true,
-		}, {
-			type: 'pick_server',
-			team_id: 0,
-			player_id: 0,
-		}, {
-			type: 'pick_receiver',
-			team_id: 0,
-			player_id: 0,
-		}, {
-			type: 'love-all',
-		}];
-
 		var matches = [{
 			setup: {
 				match_id: 'HD1',
@@ -459,7 +444,7 @@ _describe('eventutils', function() {
 				}, {
 					players: [
 						{name: 'Marc Zwiebler'},
-					]
+					],
 				}],
 			},
 			presses_json: '[]',
@@ -562,7 +547,7 @@ _describe('eventutils', function() {
 					players: [
 						{name: 'Samuel Hsiao'},
 					],
-				}]
+				}],
 			},
 			presses_json: '[]',
 		}, {
@@ -578,7 +563,7 @@ _describe('eventutils', function() {
 					players: [
 						{name: 'Olga Konon'},
 					],
-				}]
+				}],
 			},
 			presses_json: '[]',
 

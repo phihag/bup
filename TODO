@@ -1,16 +1,15 @@
-refmode: show time when next match can be played (in BuLi)
-
 btde auto update script
 refmode: changes as referee should not change umpire
 refmode: report network errors
-refmode: send export via email (+confirm)
+refmode: send export via email from nodes (+confirm)
 refmode: synchronize notes, location, etc.
 refmode: synchronize present_players / backup_players even if not supported by btde
 refmode: alert on network failures
 refmode: show netstats
 btde: switch players in mixed (so that gender is correct)
 websocket conn tried to send message while no websocket active: should not happen more than once
-Liste aller Spieler + Schiedsrichter für Hallensprecher
+Liste aller Spieler + Schiedsrichter für Hallensprecher (inkl. Reihenfolge)
+refmode: save&render order
 checkliste: + Spielberichte audrucken bei gelben Karten
 gelbe Karten: text automatisch generieren
 upload dist instead of dest version to t.aufschlagwechsel.de

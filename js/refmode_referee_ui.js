@@ -212,6 +212,7 @@ function _all_courts(s, c) {
 }
 
 function render_clients(clients) {
+	var now = Date.now();
 	var s = state;
 	var ev = s.event;
 
@@ -343,7 +344,7 @@ function render_clients(clients) {
 					var client_state = calc.remote_state(s, c.setup, c.presses);
 					uiu.create_el(match_row, 'span', {
 						'class': 'referee_c_match_status',
-					}, calc.desc(client_state));
+					}, calc.desc(client_state, now));
 				}
 			}
 			if (c.event && ev && ev.matches && (c.event.id === ev.id)) {
@@ -448,6 +449,7 @@ function render_clients(clients) {
 }
 
 function render_event(s) {
+	var now = Date.now();
 	var ev = s.event;
 	var matches_container = uiu.qs('.referee_matches');
 	uiu.empty(matches_container);
@@ -464,7 +466,7 @@ function render_event(s) {
 		});
 		eventutils.set_not_before(ev.league_key, cstates);
 
-		ev.matches.forEach(function(cs) {
+		cstates.forEach(function(cs) {
 			var setup = cs.setup;
 
 			var is_complete = !setup.incomplete;
@@ -482,7 +484,7 @@ function render_event(s) {
 			}
 			uiu.create_el(name_row, 'span', {
 				'class': 'referee_e_match_status',
-			}, calc.desc(client_state));
+			}, calc.desc(cs, now));
 
 			if (is_complete) {
 				var stats_link = uiu.create_el(name_row, 'span', {
@@ -498,7 +500,7 @@ function render_event(s) {
 
 			if (cs.presses) {
 				var presses_table = uiu.create_el(match_container, 'table');
-				stats.render_presses(presses_table, client_stat, cs.presses.length - 2);
+				stats.render_presses(presses_table, cs, cs.presses.length - 2);
 			}
 		});
 	}

@@ -33,6 +33,9 @@ var i18n_de = {
 'mdesc:toss': 'Wahl wird eingegeben',
 'mdesc:warmup': 'Einspielen',
 'mdesc:incomplete': 'Erwarte Mannschaftsaufstellung',
+'mdesc:blocked': 'Warte auf Spieler ({matches})',
+'mdesc:waiting': 'Aufruf nicht vor {time}',
+'mdesc:selectable': 'Aufruf jetzt möglich',
 
 'report problem': 'Problem/Anregung melden',
 'report:test': 'Diagnose-Funktion testen',

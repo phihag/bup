@@ -340,8 +340,6 @@ function set_not_before(league_key, match_states) {
 		delete ms.not_before_matches;
 	});
 
-	var latest_active = {}; // player name => 'oncourt' or integer when last on court
-	var oncourt_in = {}; // player name => array
 	match_states.forEach(function(ms) {
 		if (!ms.presses || (ms.presses.length === 0)) {
 			if (!ms.not_before) {

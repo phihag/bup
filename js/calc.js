@@ -1003,7 +1003,7 @@ function remote_state(s, setup, presses) {
 }
 
 // A human-readable decscription of the current state of the match
-function desc(s) {
+function desc(s, now) {
 	if (s.setup.incomplete) {
 		return s._('mdesc:incomplete');
 	}
@@ -1021,15 +1021,31 @@ function desc(s) {
 		res += ' ' + s._('mdesc:finished');
 	}
 	if (!s.game.started) {
-		res += (res ? ' ' : '') + s._(
-			((s.game.start_team1_left === null) ?
-			'mdesc:selected' :
-			(((s.game.start_server_player_id === null) || (s.game.start_receiver_player_id === null)) ?
-			'mdesc:toss' :
-			((s.match.finished_games.length > 0) ?
-			'mdesc:interval' :
-			'mdesc:warmup'
-		))));
+		res += (res ? ' ' : '') + ((s.game.start_team1_left === null) ? (
+			(s.not_before === undefined) ? s._('mdesc:selected') : (
+				(s.not_before === 'playing') ?
+					s._('mdesc:blocked', {
+						matches: s.not_before_matches.map(function(m) {
+							return m.setup.match_name;
+						}).join(', '),
+					}
+					) : (
+					(s.not_before <= now) ?
+						s._('mdesc:selectable')
+						:
+						s._('mdesc:waiting', {
+							time: utils.time_str(s.not_before),
+						})
+					)
+			)
+		) : (
+			s._(
+				(((s.game.start_server_player_id === null) || (s.game.start_receiver_player_id === null)) ?
+				'mdesc:toss' :
+				((s.match.finished_games.length > 0) ?
+				'mdesc:interval' :
+				'mdesc:warmup'
+		)))));
 	}
 	return res;
 }

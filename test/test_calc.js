@@ -3615,7 +3615,26 @@ _describe('calc helper functions', function() {
 	_it('desc', function() {
 		var presses = [];
 		var s = state_after(presses, DOUBLES_SETUP);
-		assert.deepStrictEqual(bup.calc.desc(s), 'Aufruf&Wahl');
+		assert.deepStrictEqual(bup.calc.desc(s, 1485107837052), 'Aufruf&Wahl');
+
+		s.not_before = 0;
+		assert.deepStrictEqual(bup.calc.desc(s, 1485107837052), 'Aufruf jetzt möglich');
+
+		s.not_before = 1485107837052;
+		assert.deepStrictEqual(bup.calc.desc(s, 1485100000000), 'Aufruf nicht vor ' + bup.utils.time_str(s.not_before));
+		assert.deepStrictEqual(bup.calc.desc(s, 1485107837053), 'Aufruf jetzt möglich');
+
+		s.not_before = 'playing';
+		s.not_before_matches = [{
+			setup: {
+				match_name: '1.HD',
+			},
+		}, {
+			setup: {
+				match_name: '2.HD',
+			},
+		}];
+		assert.deepStrictEqual(bup.calc.desc(s, 1485100837052), 'Warte auf Spieler (1.HD, 2.HD)');
 
 		presses.push({
 			type: 'pick_side',
