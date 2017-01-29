@@ -39,6 +39,9 @@ function rmrf($dir) {
 		if (! \preg_match('/bup_update/', $p)) {
 			throw new \ErrorException('Sanity check failed, refusing to delete ' . $p);
 		}
+		if (\preg_match('/\.\./', $p)) {
+			throw new \ErrorException('Dots check failed, refusing to delete ' . $p);
+		}
 
 		if ($fileinfo->isDir()) {
 			\rmdir($p);
