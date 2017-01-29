@@ -98,9 +98,12 @@ Während des Spiels:
 - [ ] Auf Handzeichen der Schiedsrichter achten
 - [ ] Ggf. weitere Bälle bringen
 - [ ] Router-Statistiken beobachten
-- [ ] Auf gute Ballwechsel achten (Spiel+Spielstand aufschreiben)
+- [ ] Auf gute Ballwechsel achten (Spiel+Spielstand aufschreiben, für Video)
 - [ ] Falls kein Referee-Mode: Spielendzeiten notieren
 - [ ] Zuschauer mit Blitzlicht ermahnen
+- [ ] Bei gelben/roten Karten:
+  - [ ] Schiedsrichterzettel ausdrucken
+  - [ ] Notiz auf Spielbericht vorbereiten
 
 Nach Spielende:
 

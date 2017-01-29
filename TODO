@@ -1,4 +1,7 @@
 btde auto update script
+	set up on t.aufschlagwechsel.de
+
+upload dist instead of dest version to t.aufschlagwechsel.de
 refmode: changes as referee should not change umpire
 refmode: report network errors
 refmode: send export via email from nodes (+confirm)
@@ -10,9 +13,7 @@ btde: switch players in mixed (so that gender is correct)
 websocket conn tried to send message while no websocket active: should not happen more than once
 Liste aller Spieler + Schiedsrichter für Hallensprecher (inkl. Reihenfolge)
 refmode: save&render order
-checkliste: + Spielberichte audrucken bei gelben Karten
 gelbe Karten: text automatisch generieren
-upload dist instead of dest version to t.aufschlagwechsel.de
 fullscreen is visible with no effect on iPad
 sat disconnection -> does not get notified
 buphub: query redirect table remotely (write CLI script)

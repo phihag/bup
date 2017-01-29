@@ -86,6 +86,7 @@ dist: cleandist ## Create distribution files
 		--target-directory dist/bup/div/
 
 	$(MAKE) appcache-manifest
+	node div/calc_checksums.js dist/ bup/ dist/bup/checksums.json
 
 	find dist -exec touch --date "$$(git log -1 --date=iso | sed -n -e 's/Date:\s*\([0-9 :-]*\)+.*/\1/p')" '{}' ';'
 	cd dist && zip bup.zip bup/ -rqX

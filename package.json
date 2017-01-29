@@ -17,6 +17,7 @@
   "devDependencies": {
     "async": "*",
     "eslint": "*",
+    "fs-walk": "*",
     "istanbul": "*",
     "jshint": "*",
     "mocha": "*",
