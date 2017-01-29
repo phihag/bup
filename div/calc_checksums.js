@@ -1,11 +1,9 @@
 #!/usr/bin/env node
 'use strict';
 
-const crypto = require('crypto');
 const fs = require('fs');
 const fs_walk = require('fs-walk');
 const path = require('path');
-const os = require('os');
 
 const script_utils = require('./script_utils');
 
