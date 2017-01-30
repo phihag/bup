@@ -1,10 +1,7 @@
 <?php
 
-// TODO zip
-// TODO cli-unzip
-
-define('DOWNLOAD_METHOD', 'cli-wget'); // Possible values: 'php', 'curl', 'cli-curl', 'cli-wget'
-define('ZIP_METHOD', 'phar'); // Possible values: 'phar'
+define('DOWNLOAD_METHOD', 'php'); // Possible values: 'php', 'curl', 'cli-curl', 'cli-wget'
+define('ZIP_METHOD', 'phar'); // Possible values: 'phar', 'php', 'cli-unzip'
 define('TARGET_DIR', __DIR__);
 define('DOWNLOAD_URL', 'https://aufschlagwechsel.de/bup.zip');
 
@@ -132,6 +129,19 @@ if (ZIP_METHOD === 'phar') {
 
 	$phar = new \PharData($zip_fn);
     $phar->extractTo($new_dir);
+} elseif (ZIP_METHOD === 'php') {
+	$zip = new \ZipArchive();
+	if (!$zip->open($zip_fn)) {
+		error('Failed to open zip file');
+	}
+	$zip->extractTo($new_dir);
+	$zip->close();
+} elseif (ZIP_METHOD === 'cli-unzip') {
+	$cmd = 'unzip ' . \escapeshellarg($zip_fn) . ' -d ' . \escapeshellarg($new_dir);
+	$errline = \exec($cmd, $_output, $retcode);
+	if ($retcode !== 0) {
+		error('Failed to unzip: code ' . $retcode);
+	}
 } else {
 	error('Unsupported zip method ' . ZIP_METHOD);
 }
