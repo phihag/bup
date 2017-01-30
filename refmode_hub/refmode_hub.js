@@ -114,7 +114,7 @@ function register_hub(wss, ws, msg) {
 
 function list_hubs(wss, ws, msg) {
 	const hub_list = [];
-	for (const [ip, hub_info] of wss.hub_info_map.entries()) {
+	for (const [ip, hub_info] of wss.hub_map.entries()) {
 		hub_list.push({ip, hub_info});
 	}
 	send(ws, {
