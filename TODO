@@ -1,6 +1,5 @@
 btde auto update script
 
-refmode: changes as referee should not change umpire
 refmode: report network errors
 refmode: send export via email from nodes (+confirm)
 refmode: synchronize notes, location, etc.
@@ -9,8 +8,6 @@ refmode: alert on network failures
 refmode: show netstats
 websocket conn tried to send message while no websocket active: should not happen more than once
 Liste aller Spieler + Schiedsrichter für Hallensprecher (inkl. Reihenfolge)
-refmode: save&render order
-gelbe Karten: text automatisch generieren
 fullscreen is visible with no effect on iPad
 sat disconnection -> does not get notified (should switch over immediately)
 buphub: query redirect table remotely (write CLI script)
@@ -80,6 +77,7 @@ improve refmode
 	increase keepalive? Measure
 	export client info(including netstats) from refmode as well
 	inject presses @remote! (precedence: WDM in Refrath)
+	refmode: save&render order
 	switch to event *from* remote
 	update stats / Srzettel / match live (in event)
 	only re-render changed clients
@@ -463,6 +461,7 @@ disqualification at game start
 	test
 test various network errors
 
+autogenerate summary text if card was handed in any match
 show what was undone
 support for team flags
 support for player portraits

@@ -18,7 +18,12 @@ function verify_client(info) {
 }
 
 function send(ws, msg) {
-	ws.send(JSON.stringify(msg));
+	const msg_json = JSON.stringify(msg);
+	try {
+		ws.send(msg_json);
+	} catch(e) {
+		console.error('Could not send: ' + e.message);
+	}
 }
 
 function send_error(ws, emsg) {
