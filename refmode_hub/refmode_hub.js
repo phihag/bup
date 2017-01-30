@@ -60,7 +60,7 @@ function send_referee_list(wss, clients) {
 }
 
 function on_referees_change(wss) {
-	var interested = wss.clients.filter(function(c) {
+	var interested = Array.from(wss.clients).filter(function(c) {
 		return c.subscribed_list_referees;
 	});
 	send_referee_list(wss, interested);
