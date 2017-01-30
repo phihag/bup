@@ -1,15 +1,16 @@
+sat disconnection -> does not get notified (should switch over immediately)
 btde auto update script
 
 refmode: report network errors
-refmode: send export via email from nodes (+confirm)
+refmode: request&download export
 refmode: synchronize notes, location, etc.
 refmode: synchronize present_players / backup_players even if not supported by btde
 refmode: alert on network failures
 refmode: show netstats
+Safari: Spielbericht fails
 websocket conn tried to send message while no websocket active: should not happen more than once
 Liste aller Spieler + Schiedsrichter für Hallensprecher (inkl. Reihenfolge)
 fullscreen is visible with no effect on iPad
-sat disconnection -> does not get notified (should switch over immediately)
 
 setupsheet
 	allow changing X

@@ -415,6 +415,18 @@ function hub(config) {
 			for (const ip of to_delete) {
 				wss.hub_map.delete(ip);
 			}
+			// Notify clients that satellite hub is now offline
+			for (const ip of to_delete) {
+				wss.clients.forEach(function(cws) {
+					if (cws === ws) return;
+					if (cws.conn_data.ip === ip) {
+						send(cws, {
+							type: 'redirected',
+							redirect: null,
+						});
+					}
+				});
+			}
 		});
 	});
 
