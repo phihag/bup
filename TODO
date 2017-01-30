@@ -10,7 +10,6 @@ websocket conn tried to send message while no websocket active: should not happe
 Liste aller Spieler + Schiedsrichter für Hallensprecher (inkl. Reihenfolge)
 fullscreen is visible with no effect on iPad
 sat disconnection -> does not get notified (should switch over immediately)
-buphub: query redirect table remotely (write CLI script)
 
 setupsheet
 	allow changing X
