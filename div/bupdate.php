@@ -1,13 +1,9 @@
 <?php
-// TODO auto modes
 
-// TODO curl
-// TODO cli-curl
-// TODO cli-wget
 // TODO zip
 // TODO cli-unzip
 
-define('DOWNLOAD_METHOD', 'php'); // Possible values: 'php'
+define('DOWNLOAD_METHOD', 'cli-wget'); // Possible values: 'php', 'curl', 'cli-curl', 'cli-wget'
 define('ZIP_METHOD', 'phar'); // Possible values: 'phar'
 define('TARGET_DIR', __DIR__);
 define('DOWNLOAD_URL', 'https://aufschlagwechsel.de/bup.zip');
@@ -15,6 +11,8 @@ define('DOWNLOAD_URL', 'https://aufschlagwechsel.de/bup.zip');
 \set_error_handler(function ($errno, $errstr, $errfile, $errline) {
     throw new \ErrorException($errstr, 0, $errno, $errfile, $errline);
 });
+
+\set_time_limit(0);
 
 function error($msg) {
 	\header('HTTP/1.1 500 Internal Server Error');
@@ -70,6 +68,40 @@ if (DOWNLOAD_METHOD === 'php') {
 	}
 	if (! \file_put_contents($zip_fn, $zip_contents)) {
 		error('Could not write zip file to disk');
+	}
+} elseif (DOWNLOAD_METHOD === 'curl') {
+	$zip_fp = \fopen($zip_fn, 'w');
+	if (! $zip_fp) {
+		error('Failed to open file for curl downloading');
+	}
+	$ch = \curl_init(DOWNLOAD_URL);
+	\curl_setopt($ch, \CURLOPT_RETURNTRANSFER, 1);
+	\curl_setopt($ch, \CURLOPT_FILE, $zip_fp);
+	$zip_contents = \curl_exec($ch);
+	if($curl_errno = \curl_errno($ch)) {
+		$curl_error_message = \curl_strerror($errno);
+		error('Failed to download via curl: ' . $curl_error_message);
+	} else {
+		$curl_http_code = \curl_getinfo($ch, \CURLINFO_HTTP_CODE);
+		if ($curl_http_code !== 200) {
+			error('Failed to download via curl: HTTP ' . $curl_http_code);
+		}
+	}
+	\curl_close($ch);
+} elseif (DOWNLOAD_METHOD === 'cli-curl') {
+	$cmd = 'curl -w "%{http_code}" -s -o ' . \escapeshellarg($zip_fn) . ' ' . \escapeshellarg(DOWNLOAD_URL);
+	$errline = \exec($cmd, $_output, $retcode);
+	if ($retcode !== 0) {
+		error('Failed to download via cli-curl: ' . $retcode);
+	}
+	if ($errline !== '200')  {
+		error('Failed to download via cli-curl: HTTP ' . $errline);
+	}
+} elseif (DOWNLOAD_METHOD === 'cli-wget') {
+	$cmd = 'wget -q -O ' . \escapeshellarg($zip_fn) . ' ' . \escapeshellarg(DOWNLOAD_URL);
+	\exec($cmd, $_output, $retcode);
+	if ($retcode !== 0) {
+		error('Failed to download via cli-wget: ' . $retcode);
 	}
 } else {
 	error('Unsupported download method ' . DOWNLOAD_METHOD);
