@@ -5,8 +5,13 @@ define('ZIP_METHOD', 'phar'); // Possible values: 'phar', 'php', 'cli-unzip'
 define('TARGET_DIR', __DIR__);
 define('DOWNLOAD_URL', 'https://aufschlagwechsel.de/bup.zip');
 
+// Be very conservative: assume errors in our code (devlopment only)
 \set_error_handler(function ($errno, $errstr, $errfile, $errline) {
-    throw new \ErrorException($errstr, 0, $errno, $errfile, $errline);
+	if (error_reporting() === 0) {
+		return; // Suppressed reporting
+	}
+	error($errline . ': ' . $errstr);
+	throw new \ErrorException($errstr, 0, $errno, $errfile, $errline);
 });
 
 \set_time_limit(0);
@@ -48,8 +53,15 @@ function rmrf($dir) {
 	\rmdir($dir);
 }
 
-$tmp_id = uniqid('bup_update');
-$tmp_dir = sys_get_temp_dir() . '/' . $tmp_id;
+$tmp_root = TARGET_DIR . '/bupdate_tmp';
+if (! \file_exists($tmp_root)) {
+	if (! \mkdir($tmp_root)) {
+		error('failed to create temporary directory');
+	}
+}
+
+$tmp_id = \uniqid('bup_update');
+$tmp_dir = $tmp_root . '/' . $tmp_id;
 if (! \mkdir($tmp_dir)) {
 	error('Cannot create tmp dir ' . $tmp_dir);
 }
@@ -176,3 +188,4 @@ if (! \rename($new_bup, $bup_dir)) {
 }
 
 rmrf($tmp_dir);
+@\rmdir($tmp_root);
