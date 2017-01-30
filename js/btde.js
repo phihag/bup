@@ -225,12 +225,22 @@ function _parse_match_list(doc, now) {
 
 	var matches = doc.slice(1, doc.length).map(function(match) {
 		var is_doubles = /~/.test(match.heim) && /~/.test(match.gast);
-		var home_team = {
+		var teams = [{
 			players: _parse_players(match.heim),
-		};
-		var away_team = {
+		}, {
 			players: _parse_players(match.gast),
-		};
+		}];
+
+		// btde always lists the woman first, but all other materials
+		// (including bup algorithms) list the man first.
+		// Switch them around
+		if (match.dis === 'GD') {
+			teams.forEach(function(team) {
+				if (team.players.length === 2) {
+					team.players = [team.players[1], team.players[0]];
+				}
+			});
+		}
 
 		var network_score = [];
 		for (var game_idx = 0;game_idx < game_count;game_idx++) {
@@ -265,7 +275,7 @@ function _parse_match_list(doc, now) {
 			eventsheet_id: eventsheet_id,
 			match_name: match.dis,
 			is_doubles: is_doubles,
-			teams: [home_team, away_team],
+			teams: teams,
 			btde_match_id: match.id,
 			team_competition: true,
 			match_id: match_id,

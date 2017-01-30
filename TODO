@@ -1,7 +1,5 @@
 btde auto update script
-	set up on t.aufschlagwechsel.de
 
-upload dist instead of dest version to t.aufschlagwechsel.de
 refmode: changes as referee should not change umpire
 refmode: report network errors
 refmode: send export via email from nodes (+confirm)
@@ -9,13 +7,12 @@ refmode: synchronize notes, location, etc.
 refmode: synchronize present_players / backup_players even if not supported by btde
 refmode: alert on network failures
 refmode: show netstats
-btde: switch players in mixed (so that gender is correct)
 websocket conn tried to send message while no websocket active: should not happen more than once
 Liste aller Spieler + Schiedsrichter für Hallensprecher (inkl. Reihenfolge)
 refmode: save&render order
 gelbe Karten: text automatisch generieren
 fullscreen is visible with no effect on iPad
-sat disconnection -> does not get notified
+sat disconnection -> does not get notified (should switch over immediately)
 buphub: query redirect table remotely (write CLI script)
 buphub crash:
 Jan 21 18:23:40 r.phihag.de env[1898]: /home/buphub/bup/node_modules/ws/lib/WebSocket.js:219

@@ -196,28 +196,28 @@ _describe('btde', function() {
 							{
 								'players': [
 									{
-										'firstname': 'Carla',
-										'lastname': 'Nelte',
-										'name': 'Carla Nelte',
-									},
-									{
 										'firstname': 'Sam',
 										'lastname': 'Magee',
 										'name': 'Sam Magee',
+									},
+									{
+										'firstname': 'Carla',
+										'lastname': 'Nelte',
+										'name': 'Carla Nelte',
 									},
 								],
 							},
 							{
 								'players': [
 									{
-										'firstname': 'Johanna',
-										'lastname': 'Goliszewski',
-										'name': 'Johanna Goliszewski',
-									},
-									{
 										'firstname': 'Marcus',
 										'lastname': 'Ellis',
 										'name': 'Marcus Ellis',
+									},
+									{
+										'firstname': 'Johanna',
+										'lastname': 'Goliszewski',
+										'name': 'Johanna Goliszewski',
 									},
 								],
 							},
@@ -432,26 +432,26 @@ _describe('btde', function() {
 							{
 								'players': [
 									{
-										'firstname': 'Carla',
-										'lastname': 'Nelte',
-										'name': 'Carla Nelte',
-									},
-									{
 										'firstname': 'Sam',
 										'lastname': 'Magee',
 										'name': 'Sam Magee',
+									},
+									{
+										'firstname': 'Carla',
+										'lastname': 'Nelte',
+										'name': 'Carla Nelte',
 									},
 								],
 							},
 							{
 								'players': [
 									{
-										'name': 'Johanna',
-									},
-									{
 										'firstname': 'Marcus',
 										'lastname': 'Ellis',
 										'name': 'Marcus Ellis',
+									},
+									{
+										'name': 'Johanna',
 									},
 								],
 							},
