@@ -112,6 +112,18 @@ function register_hub(wss, ws, msg) {
 	});
 }
 
+function list_hubs(wss, ws, msg) {
+	const hub_list = [];
+	for (const [ip, hub_info] of wss.hub_info_map.entries()) {
+		hub_list.push({ip, hub_info});
+	}
+	send(ws, {
+		type: 'hub-list',
+		hubs: hub_list,
+		rid: msg.rid,
+	});
+}
+
 function _client_by_id(wss, id) {
 	for (const c of wss.clients) {
 		if (c.conn_data.id === id) {
@@ -250,6 +262,9 @@ function handle_msg(wss, ws, msg) {
 		break;
 	case 'register-hub':
 		register_hub(wss, ws, msg);
+		break;
+	case 'list-hubs':
+		list_hubs(wss, ws, msg);
 		break;
 	case 'error':
 		console.log('Received error: ', msg.message);

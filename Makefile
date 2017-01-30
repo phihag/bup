@@ -133,6 +133,9 @@ root-hub:
 sat-hub:
 	node refmode_hub/refmode_hub.js '{"root_hub":"wss://live.aufschlagwechsel.de/refmode_hub/"}'
 
+list-sats:
+	node refmode_hub/list_sats.js
+
 install-hub: deps
 	sed -e "s#BUP_ROOT_DIR#$$PWD#" refmode_hub/buphub.service.template | sudo tee /etc/systemd/system/buphub.service >/dev/null
 	sudo chmod +x /etc/systemd/system/buphub.service
