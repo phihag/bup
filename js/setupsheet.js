@@ -5,10 +5,18 @@ var BULI2016_CONFIG = {
 	m: ['1.HD', '2.HD', '1.HE', '2.HE', 'GD', 'backup', 'present'],
 	f: ['dark', 'dark', 'DE', 'DD', 'GD', 'backup', 'present'],
 };
+var DE_CONFIG = {
+	m: ['1.HD', '2.HD', '1.HE', '2.HE', '3.HE', 'GD', 'backup'],
+	f: ['dark', 'dark', 'dark', 'DE', 'DD', 'GD', 'backup'],
+};
+
 var CONFIGS = {
 	'1BL-2016': BULI2016_CONFIG,
 	'2BLN-2016': BULI2016_CONFIG,
 	'2BLS-2016': BULI2016_CONFIG,
+	'RLW-2016': DE_CONFIG,
+	'RLN-2016': DE_CONFIG,
+	'RLM-2016': DE_CONFIG,
 };
 var GENDERS = ['m', 'f'];
 
@@ -77,9 +85,15 @@ function col_text(s, col) {
 	return col;
 }
 
-function ui_render(s) {
-	var cfg = CONFIGS[s.event.league_key];
+function get_config(league_key) {
+	if (eventutils.NRW2016_RE.test(league_key)) {
+		return DE_CONFIG;
+	}
+	return CONFIGS[league_key];
+}
 
+function ui_render(s) {
+	var cfg = get_config(s.event.league_key);
 	if (!cfg) {
 		var err_display = uiu.qs('.setupsheet_error');
 		uiu.visible(err_display, true);
