@@ -390,7 +390,7 @@ function ui_render(s) {
 				if (s.setup.team_competition && (team_indices.length > 1)) {
 					if (s.setup.is_doubles) {
 						namefunc = function(player) {
-							return player.name + ' [' + s.setup.teams[ti].name + ']';
+							return player.name;
 						};
 					} else {
 						namefunc = function(player) {
