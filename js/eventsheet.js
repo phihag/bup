@@ -569,7 +569,7 @@ function render_svg(ev, es_key, ui8r, extra_data) {
 	body.appendChild(container[0]);
 
 	var props = {
-		title: ('Spielbericht ' + ev.event_name + (last_update ? (' ' + utils.date_str(last_update)) : '')),
+		title: (state._('Event Sheet') + ' ' + ev.event_name + (last_update ? (' ' + utils.date_str(last_update)) : '')),
 		subject: state._('Event Sheet'),
 		creator: 'bup (https://phihag.de/bup/)',
 	};
@@ -662,7 +662,7 @@ function render_svg(ev, es_key, ui8r, extra_data) {
 	_svg_text(svg, 'protest', extra_data.protest);
 	_svg_text(svg, 'umpires', extra_data.umpires);
 
-	var filename = 'Spielbericht ' + ev.event_name + (last_update ? (' ' + utils.date_str(last_update)) : '') + '.pdf';
+	var filename = state._('Event Sheet') + ' ' + ev.event_name + (last_update ? (' ' + utils.date_str(last_update)) : '') + '.pdf';
 	svg2pdf.save([svg], props, filename);
 
 	container.remove();
