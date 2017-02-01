@@ -198,6 +198,9 @@ function name_by_league(league_key) {
 	if (league_key === 'RLN-2016') {
 		return 'Regionalliga Nord';
 	}
+	if (league_key === 'RLM-2016') {
+		return 'Regionalliga Mitte';
+	}
 	if (league_key === 'RLW-2016') {
 		league_key = 'NRW-O19-RL-001-2016';
 	}
