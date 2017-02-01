@@ -3,6 +3,7 @@ var i18n_de = {
 '_code': 'de',
 '_name': 'Deutsch',
 
+'Event Sheet': 'Spielbericht',
 'Automatic': 'Automatisch',
 'Court': 'Feld',
 'Select Court': 'Feld auswählen',
@@ -328,6 +329,8 @@ var i18n_de = {
 'eventsheet:label:RLW-2016': 'Spielbericht',
 'eventsheet:label:RLN-2016': 'Spielbericht',
 'eventsheet:label:RLN-Satzungen-2016': 'Satzungen und Ordnungen 2016',
+'eventsheet:label:RLM-2016': 'Spielbericht',
+'eventsheet:label:RLM-SpO-2015': 'Spielordnung',
 'eventsheet:label:team-1BL-2015': 'Mannschaftsaufstellung (2015)',
 'eventsheet:label:team-2BL-2015': 'Mannschaftsaufstellung (2015)',
 'eventsheet:label:NRW-2016': 'Spielbericht',

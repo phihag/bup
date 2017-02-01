@@ -1,10 +1,19 @@
+better stack traces
+googlebot error
+	["enabled","disabled"].includes
+swiss problem
+SVG-Spielberichte 2pdf!
+
+default court to referee!
+test nrw eventsheets
+test RLN eventsheets
+Safari: Spielbericht fails
 refmode: report network errors
 refmode: request&download export
 refmode: synchronize notes, location, etc.
 refmode: synchronize present_players / backup_players even if not supported by btde
 refmode: alert on network failures
 refmode: show netstats
-Safari: Spielbericht fails
 websocket conn tried to send message while no websocket active: should not happen more than once
 Liste aller Spieler + Schiedsrichter für Hallensprecher (inkl. Reihenfolge)
 fullscreen is visible with no effect on iPad

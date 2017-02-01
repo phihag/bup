@@ -1,0 +1,380 @@
+{
+  "type": "bup-export",
+  "version": 2,
+  "event": {
+    "staticnet_message": "Demo Regionalliga Mitte (nur lokal)",
+    "courts": [
+      {
+        "court_id": 1,
+        "description": "1 (links)",
+        "match_id": "rlmdemo_DD"
+      },
+      {
+        "court_id": 2,
+        "description": "2 (rechts)",
+        "match_id": "rlmdemo_DE"
+      }
+    ],
+    "matches": [
+      {
+        "setup": {
+          "eventsheet_id": "1.HD",
+          "match_name": "1.HD",
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Kristof Hopp"
+                },
+                {
+                  "name": "Jonas Scheller"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Sebastian Grieser"
+                },
+                {
+                  "name": "Sandro Kulla"
+                }
+              ]
+            }
+          ],
+          "is_doubles": true,
+          "counting": "3x21",
+          "match_id": "rlmdemo_HD1"
+        }
+      },
+      {
+        "setup": {
+          "eventsheet_id": "2.HD",
+          "match_name": "2.HD",
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Felix Kruchten"
+                },
+                {
+                  "name": "Matthias Petry"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Huy Minh Nguyen"
+                },
+                {
+                  "name": "Johannes Grieser"
+                }
+              ]
+            }
+          ],
+          "is_doubles": true,
+          "counting": "3x21",
+          "match_id": "rlmdemo_HD2"
+        }
+      },
+      {
+        "setup": {
+          "match_name": "DD",
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Ann-Katrin Hippchen"
+                },
+                {
+                  "name": "Alisa Rebmann"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Michelle Antony"
+                },
+                {
+                  "name": "Anna Dollak"
+                }
+              ]
+            }
+          ],
+          "is_doubles": true,
+          "counting": "3x21",
+          "match_id": "rlmdemo_DD"
+        }
+      },
+      {
+        "setup": {
+          "match_name": "1.HE",
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Felix Kruchten"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Sandro Kulla"
+                }
+              ]
+            }
+          ],
+          "is_doubles": false,
+          "counting": "3x21",
+          "match_id": "rlmdemo_HE1"
+        }
+      },
+      {
+        "setup": {
+          "match_name": "2.HE",
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Jonas Scheller"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Johannes Grieser"
+                }
+              ]
+            }
+          ],
+          "is_doubles": false,
+          "counting": "3x21",
+          "match_id": "rlmdemo_HE2"
+        }
+      },
+      {
+        "setup": {
+          "match_name": "3.HE",
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Matthias Petry"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Huy Minh Nguyen"
+                }
+              ]
+            }
+          ],
+          "is_doubles": false,
+          "counting": "3x21",
+          "match_id": "rlmdemo_HE3"
+        }
+      },
+      {
+        "setup": {
+          "match_name": "DE",
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Ann-Katrin Hippchen"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Michelle Antony"
+                }
+              ]
+            }
+          ],
+          "is_doubles": false,
+          "counting": "3x21",
+          "match_id": "rlmdemo_DE"
+        }
+      },
+      {
+        "setup": {
+          "match_name": "GD",
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Kristof Hopp"
+                },
+                {
+                  "name": "Alisa Rebmann"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Sebastian Grieser"
+                },
+                {
+                  "name": "Anna Dollak"
+                }
+              ]
+            }
+          ],
+          "is_doubles": true,
+          "counting": "3x21",
+          "match_id": "rlmdemo_GD"
+        }
+      }
+    ],
+    "id": "rlmdemo",
+    "event_name": "1. BC Sbr.-Bischmisheim 3 - SV Fun-Ball Dortelweil 2 (Demo)",
+    "team_names": [
+      "1. BC Sbr.-Bischmisheim 3",
+      "SV Fun-Ball Dortelweil 2"
+    ],
+    "location": "Sporthalle Brebach, Saarbrücken",
+    "protest": "",
+    "starttime": "16:00",
+    "matchday": "5",
+    "notes": "",
+    "backup_players": [
+      [],
+      []
+    ],
+    "all_players": [
+      [
+        {
+          "gender": "m",
+          "name": "Kristof Hopp",
+          "ranking": 1
+        },
+        {
+          "gender": "m",
+          "name": "Felix Kruchten",
+          "ranking": 2,
+          "ranking_d": 3
+        },
+        {
+          "gender": "m",
+          "name": "Jonas Scheller",
+          "ranking": 3,
+          "ranking_d": 4
+        },
+        {
+          "gender": "m",
+          "name": "Matthias Petry",
+          "ranking": 4,
+          "ranking_d": 5
+        },
+        {
+          "gender": "m",
+          "name": "Matthias Aßmann"
+        },
+        {
+          "gender": "m",
+          "name": "Thomas Becker"
+        },
+        {
+          "gender": "m",
+          "name": "Kai Behles"
+        },
+        {
+          "gender": "m",
+          "name": "Tim Peiler"
+        },
+        {
+          "gender": "f",
+          "name": "Nadia Frankhauser",
+          "nationality": "SUI",
+          "ranking": 1
+        },
+        {
+          "gender": "f",
+          "name": "Lisa Heidenreich",
+          "ranking": 2
+        },
+        {
+          "gender": "f",
+          "name": "Jil Heinz-Schwitzgebel"
+        },
+        {
+          "gender": "f",
+          "name": "Ann-Katrin Hippchen"
+        },
+        {
+          "gender": "f",
+          "name": "Nadine Petry"
+        }
+      ],
+      [
+        {
+          "gender": "m",
+          "name": "Sandro Kulla",
+          "ranking": 1,
+          "ranking_d": 2
+        },
+        {
+          "gender": "m",
+          "name": "Nils Rotter",
+          "ranking": 2,
+          "ranking_d": 1
+        },
+        {
+          "gender": "m",
+          "name": "Johannes Grieser",
+          "ranking": 3
+        },
+        {
+          "gender": "m",
+          "name": "Dominik Proschmann",
+          "ranking": 4
+        },
+        {
+          "gender": "m",
+          "name": "Sebastian Grieser"
+        },
+        {
+          "gender": "m",
+          "name": "Huy Minh Nguyen"
+        },
+        {
+          "gender": "m",
+          "name": "Gunnar Scheiwe"
+        },
+        {
+          "gender": "m",
+          "name": "Huy-Van Ta"
+        },
+        {
+          "gender": "f",
+          "name": "Annika Horbach",
+          "ranking": 1
+        },
+        {
+          "gender": "f",
+          "name": "Anna Dollak",
+          "ranking": 2
+        },
+        {
+          "gender": "f",
+          "name": "Michelle Antony"
+        },
+        {
+          "gender": "f",
+          "name": "Xuan Giao-Tien Nguyen"
+        }
+      ]
+    ],
+    "league_key": "RLM-2016",
+    "team_competition": true
+  }
+}

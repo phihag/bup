@@ -4,7 +4,7 @@ var network = (function() {
 var networks = {};
 
 function get_real_netw() {
-	return networks.nrwdemo || networks.bldemo || networks.bldemo_inprogress || networks.bldemo_incomplete || networks.vdemo || networks.edemo || networks.btde || networks.courtspot || networks.liveaw || networks.jticker;
+	return networks.rlmdemo || networks.nrwdemo || networks.bldemo || networks.bldemo_inprogress || networks.bldemo_incomplete || networks.vdemo || networks.edemo || networks.btde || networks.courtspot || networks.liveaw || networks.jticker;
 }
 
 function get_netw() {
@@ -565,6 +565,8 @@ function ui_init(s, hash_query) {
 		networks.bldemo_incomplete = staticnet(null, 'div/bldemo_incomplete.json');
 	} else if (hash_query.nrwdemo !== undefined) {
 		networks.nrwdemo = staticnet(null, 'div/nrwdemo.json');
+	} else if (hash_query.rlmdemo !== undefined) {
+		networks.rlmdemo = staticnet(null, 'div/rlmdemo.json');
 	} else if (hash_query.vdemo !== undefined) {
 		networks.vdemo = staticnet(null, 'div/vdemo.json');
 	}

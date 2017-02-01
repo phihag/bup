@@ -112,7 +112,14 @@ function render_page(svg, pdf) {
 
 			switch (style['text-anchor']) {
 			case 'middle':
-				x -= n.getBBox().width / 2;
+				x -= (n.getBBox().width / 2);
+
+				/*
+				// To debug: Insert a rectangle here.
+				*/
+
+				// TODO The following is a hack for our SVGs; fix it!
+				x += 1.5;
 				break;
 			case 'end':
 				x -= n.getBBox().width;

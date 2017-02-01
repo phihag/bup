@@ -11,6 +11,7 @@ var SHEETS_BY_LEAGUE = {
 	'NRW-2016': ['NRW-2016', 'NRW-Satzungen-2016'],
 	'RLW-2016': ['RLW-2016', 'NRW-Satzungen-2016'],
 	'RLN-2016': ['RLN-2016', 'RLN-Satzungen-2016'],
+	'RLM-2016': ['RLM-2016', 'RLM-SpO-2015'],
 };
 
 var URLS = {
@@ -25,6 +26,8 @@ var URLS = {
 	'RLW-2016': 'div/Spielbericht_8x3x21.svg',
 	'RLN-2016': 'div/Spielbericht_8x3x21.svg',
 	'RLN-Satzungen-2016': 'http://www.gruppe-nord.net/fileadmin/user_upload/schuch/GruppeNord/Satzung/Satzung%20und%20Ordnungen%20der%20Gruppe%20Nord%20Stand%2006-08-16.pdf',
+	'RLM-2016': 'div/Spielbericht_8x3x21.svg',
+	'RLM-SpO-2015': 'http://www.dbv-mitte.de/web/images/Allgemein/Gruppenordnung/Spielordnung/Spielordnung-aktuell.pdf',
 	'NRW-2016': 'div/Spielbericht_8x3x21.svg',
 	'NRW-Satzungen-2016': 'http://www.badminton-nrw.de/fileadmin/gstnrw/pdf_xls_doc/Satzungswerk/2016/SatzungOrdnungen2016.pdf',
 	'team-1BL-2015': 'div/Mannschaftsaufstellung_1BL-2015.pdf',
@@ -42,6 +45,7 @@ var DIRECT_DOWNLOAD_SHEETS = {
 var EXTERNAL_DOWNLOAD_SHEETS = {
 	'DBV-Satzungen-2016': true,
 	'RLN-Satzungen-2016': true,
+	'RLM-SpO-2015': true,
 	'NRW-Satzungen-2016': true,
 };
 
@@ -559,7 +563,7 @@ function render_svg(ev, es_key, ui8r, extra_data) {
 	var matches = order_matches(ev, match_order);
 	var last_update = calc_last_update(ev.matches);
 
-	var body = document.getElementsByTagName('body')[0];
+	var body = uiu.qs('body');
 	var container = $('<div style="position: absolute; left: -999px; top: -999px; width: 297px; height: 210px;">');
 	container[0].appendChild(svg);
 	body.appendChild(container[0]);
@@ -1266,6 +1270,7 @@ function es_render(ev, es_key, ui8r, extra_data) {
 		return render_team_bl(ev, es_key, ui8r);
 	case 'RLW-2016':
 	case 'RLN-2016':
+	case 'RLM-2016':
 	case 'NRW-2016':
 		return render_svg(ev, es_key, ui8r, extra_data);
 	case '1BL-2016':
@@ -1514,6 +1519,7 @@ function show_dialog(es_key) {
 	case '2BLS-2015':
 	case 'RLW-2016':
 	case 'RLN-2016':
+	case 'RLM-2016':
 	case 'NRW-2016':
 		uiu.visible_qs('.eventsheet_report', true);
 		uiu.visible_qs('label.eventsheet_backup_players_str', true);

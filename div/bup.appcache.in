@@ -20,6 +20,7 @@ div/bldemo.json
 div/bldemo_inprogress.json
 # bldemo_incomplete.json is only for development, do not include
 div/nrwdemo.json
+div/rlmdemo.json
 div/wakelock.mp4
 
 @svgfiles

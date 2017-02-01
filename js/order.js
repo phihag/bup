@@ -297,6 +297,18 @@ function preferred_by_league(league_key) {
 			'2.HE',
 			'3.HE',
 		];
+	case 'RLM-2016':
+		// SpO Gruppe Mitte §12c
+		return [
+			'1.HD',
+			'DD',
+			'2.HD',
+			'1.HE',
+			'DE',
+			'GD',
+			'2.HE',
+			'3.HE',
+		];
 	}
 }
 
