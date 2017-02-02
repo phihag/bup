@@ -1283,10 +1283,9 @@ function es_render(ev, es_key, ui8r, extra_data) {
 }
 
 function prepare_render(btn, es_key, extra_data) {
-	var progress = $('<div class="loading-icon" />');
-	btn.append(progress);
+	var progress = uiu.create_el(btn, 'div', 'loading-icon');
 	download(es_key, function(ui8r) {
-		progress.remove();
+		uiu.remove(progress);
 		es_render(state.event, es_key, ui8r, extra_data);
 	});
 }
@@ -1390,7 +1389,7 @@ function ui_init() {
 			return form.find('[name="' + field + '"]').val();
 		});
 
-		prepare_render($('.eventsheet_generate_button'), es_key, extra_data);
+		prepare_render(uiu.qs('.eventsheet_generate_button'), es_key, extra_data);
 		return false;
 	});
 
