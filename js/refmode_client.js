@@ -10,9 +10,11 @@ var battery;
 var subscriptions = [];
 
 function handle_change(estate) {
-	if (['enabled', 'disabled'].includes(estate.status)) {
-		// Clear subscriptions
+	switch (estate.status) {
+	case 'enabled':
+	case 'disabled':
 		subscriptions = [];
+		break;
 	}
 	handle_change_ui(estate);
 }

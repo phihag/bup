@@ -476,9 +476,7 @@ function ui_init() {
 }
 
 function court_specific(style_id) {
-	return [
-		'oncourt',
-	].includes(style_id);
+	return 'oncourt' === style_id;
 }
 
 return {
