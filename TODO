@@ -1,12 +1,14 @@
-better stack traces
-googlebot error
-	["enabled","disabled"].includes
-swiss problem
 SVG-Spielberichte 2pdf: fix workaround!
-
 test nrw eventsheets
 test RLN eventsheets
+test RLM eventsheets
+	all properties (Spieltag ...)
+test PDF scoresheets
+
 Safari: Spielbericht fails
+Safari referee: show red warning
+
+refmode: push to client
 refmode: report network errors
 refmode: request&download export
 refmode: synchronize notes, location, etc.
@@ -16,6 +18,13 @@ refmode: show netstats
 websocket conn tried to send message while no websocket active: should not happen more than once
 Liste aller Spieler + Schiedsrichter für Hallensprecher (inkl. Reihenfolge)
 fullscreen is visible with no effect on iPad
+
+more displays
+	2 displays per courtE
+make colors configurable
+ads!
+-> Markus Schwendtner
+
 
 setupsheet
 	allow changing X
@@ -199,6 +208,7 @@ BVM-Support
 	Upload via SFTP
 
 publish to turnier.de
+	-> Janine
 
 bldemo: Active match should be on court 1
 bldemo: without started matches (bldemo_inprogress?)
