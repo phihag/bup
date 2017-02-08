@@ -558,13 +558,13 @@ function render_svg(ev, es_key, ui8r, extra_data) {
 	var svg = svg_doc.getElementsByTagName('svg')[0];
 
 	eventutils.set_metadata(ev);
-
 	var match_order = ['1.HD', '2.HD', 'DD', '1.HE', '2.HE', '3.HE', 'DE', 'GD'];
 	var matches = order_matches(ev, match_order);
 	var last_update = calc_last_update(ev.matches);
 
 	var body = uiu.qs('body');
-	var container = $('<div style="position: absolute; left: -999px; top: -999px; width: 297px; height: 210px;">');
+	var container = $('<div style="position: absolute; left: -999px; top: -2999px; width: 297px; height: 210px; overflow: hidden;">');
+	svg.setAttribute('style', 'width: 2970px; height: 2100px;')
 	container[0].appendChild(svg);
 	body.appendChild(container[0]);
 
