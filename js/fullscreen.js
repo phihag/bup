@@ -67,7 +67,9 @@ function ui_init() {
 	});
 
 	if (! supported()) {
-		uiu.visible_qs('.fullscreen_line', false);
+		var fullscreen_line = uiu.qs('.fullscreen_line');
+		fullscreen_line.setAttribute('data-bup-modes', '');
+		uiu.visible(fullscreen_line, false);
 	}
 
 	click.qs('.fullscreen_button', function() {
