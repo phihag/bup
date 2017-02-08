@@ -1,8 +1,4 @@
-test nrw eventsheets
-test RLN eventsheets
-test RLM eventsheets
-	all properties (Spieltag ...)
-test PDF scoresheets
+fullscreen is visible with no effect on iPad
 
 Safari: Spielbericht fails
 Safari referee: show red warning
@@ -16,7 +12,6 @@ refmode: alert on network failures
 refmode: show netstats
 websocket conn tried to send message while no websocket active: should not happen more than once
 Liste aller Spieler + Schiedsrichter für Hallensprecher (inkl. Reihenfolge)
-fullscreen is visible with no effect on iPad
 
 more displays
 	2 displays per courtE

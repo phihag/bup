@@ -564,7 +564,7 @@ function render_svg(ev, es_key, ui8r, extra_data) {
 
 	var body = uiu.qs('body');
 	var container = $('<div style="position: absolute; left: -999px; top: -2999px; width: 297px; height: 210px; overflow: hidden;">');
-	svg.setAttribute('style', 'width: 2970px; height: 2100px;')
+	svg.setAttribute('style', 'width: 2970px; height: 2100px;');
 	container[0].appendChild(svg);
 	body.appendChild(container[0]);
 
