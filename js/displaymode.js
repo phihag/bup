@@ -438,8 +438,8 @@ function show() {
 	settings.show_displaymode();
 
 	control.set_current(state);
-	uiu.visible_qs('.displaymode_layout', true);
-	$(uiu.qs('.settings_layout')).addClass('settings_layout_displaymode');
+	uiu.show_qs('.displaymode_layout');
+	uiu.addClass_qs('.settings_layout', 'settings_layout_displaymode');
 
 	_cancel_updates = network.ui_list_matches(state, true, false);
 	update({
@@ -456,10 +456,11 @@ function hide() {
 		return;
 	}
 
+	settings.hide_displaymode();
 	if (_cancel_updates) {
 		_cancel_updates();
 	}
-	uiu.visible_qs('.displaymode_layout', false);
+	uiu.hide_qs('.displaymode_layout');
 	uiu.removeClass_qs('.settings_layout', 'settings_layout_displaymode');
 	state.ui.displaymode_visible = false;
 	settings.on_mode_change(state);
