@@ -106,6 +106,7 @@ return {
 	ui_init: ui_init,
 	supported: supported,
 	active: active,
+	start: start,
 };
 
 })();

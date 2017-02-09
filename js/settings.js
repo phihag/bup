@@ -266,6 +266,7 @@ function ui_init(s) {
 		}
 		if (state.ui.displaymode_settings_visible) {
 			hide_displaymode();
+			fullscreen.start();
 		} else {
 			hide();
 		}
