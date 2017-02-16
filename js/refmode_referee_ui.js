@@ -426,6 +426,22 @@ function render_clients(clients) {
 				'class': 'referee_warning',
 			}, s._('refmode:referee:no event matches'));
 		}
+		var TIME_LIMIT = 120000;
+		if (c.time_difference) {
+			if (c.time_difference > TIME_LIMIT) {
+				uiu.create_el(div, 'div', {
+					'class': 'referee_warning',
+				}, s._('refmode:referee:forwards clock', {
+					diff: utils.duration_secs(0, c.time_difference),
+				}));
+			} else if (-c.time_difference > TIME_LIMIT) {
+				uiu.create_el(div, 'div', {
+					'class': 'referee_warning',
+				}, s._('refmode:referee:backwards clock', {
+					diff: utils.duration_secs(0, -c.time_difference),
+				}));
+			}
+		}
 
 		var v = c.bup_version;
 		if (v && (v !== 'dev') && (bup_version !== 'dev') && (v !== bup_version)) {

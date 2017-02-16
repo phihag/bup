@@ -486,6 +486,9 @@ var i18n_en = {
 'refmode:referee:outdated bup': 'Outdated bup version: {bup_version}',
 'refmode:referee:no event on client': 'No event associated',
 'refmode:referee:generating key': 'Generating referee key ...',
+'refmode:referee:forwards clock': 'The internal clock of the tablet is early by {diff} minutes!',
+'refmode:referee:backwards clock': 'The internal clock of the tablet is late by {diff} minutes!',
+
 };
 
 /*@DEV*/

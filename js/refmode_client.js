@@ -109,6 +109,8 @@ function handle_dmsg(msg) {
 			subscribed: (subscriptions.indexOf(msg.from) >= 0),
 			battery: bat_status(),
 			mode: settings.get_mode(s),
+			request_ts: msg.request_ts,
+			response_ts: Date.now(),
 		};
 
 		if (msg.include && (msg.include.indexOf('bup_version') >= 0) && (typeof bup_version === 'string')) {

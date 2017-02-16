@@ -1,22 +1,4 @@
-Safari: Spielbericht fails
-Safari referee: show red warning
-
-refmode: push to client
-refmode: report network errors
-refmode: request&download export
-refmode: synchronize notes, location, etc.
-refmode: synchronize present_players / backup_players even if not supported by btde
-refmode: alert on network failures
-refmode: show netstats
-websocket conn tried to send message while no websocket active: should not happen more than once
-Liste aller Spieler + Schiedsrichter für Hallensprecher (inkl. Reihenfolge)
-
-more displays
-	2 displays per courtE
-make colors configurable
-ads!
--> Markus Schwendtner
-
+refmode: update UI better
 
 setupsheet
 	allow changing X
@@ -40,6 +22,32 @@ setupsheet
 	check singles ranking
 	editevent: show nationality if non-EU
 Anzeige: Sätze
+
+handle und test old Android browsers
+go through all TVR reports and test that it works now
+
+refmode: push to client
+refmode: report network errors
+refmode: request&download export
+refmode: synchronize notes, location, etc.
+refmode: synchronize present_players / backup_players even if not supported by btde
+refmode: alert on network failures
+refmode: show netstats
+websocket conn tried to send message while no websocket active: should not happen more than once
+Liste aller Spieler + Schiedsrichter für Hallensprecher (inkl. Reihenfolge)
+
+Android
+SFTP (for BVM)
+
+Safari: Spielbericht fails
+Safari referee: show red warning
+Safari: private browsing mode incurs more error messages
+
+more displays
+	2 displays per courtE
+make colors configurable
+ads!
+-> Markus Schwendtner
 
 20s delay clock (BC)
 
@@ -72,6 +80,8 @@ improve jticker
 	edit teams? (all_players...)
 
 improve refmode
+	show ping + last_update
+	refmode: improve instructions (screenshot with tablet border)
 	don't send entire state on settings changes
 	increase keepalive? Measure
 	export client info(including netstats) from refmode as well
@@ -115,8 +125,9 @@ improve refmode
 	show current network state
 	test two clients at the same match
 	re-render clients+event upon language change
-	message to SRs?
+	message to SRs
 	request shuttles
+	refmode: autosave (and offer to restore)
 
 improve display mode
 	like den-ger

@@ -154,7 +154,13 @@ function handle_dmsg(msg) {
 				c[k] = msg[k];
 			}
 		});
-		c.last_update = Date.now();
+		var now = Date.now();
+		c.last_update = now;
+		if (msg.request_ts && msg.response_ts && ((now - msg.request_ts) > 0)) {
+			c.ping = now - msg.request_ts;
+			c.time_difference = now - (c.ping / 2) - msg.response_ts;
+		}
+
 		if (msg.hasOwnProperty('rid')) {
 			c.last_state_rid = msg.rid;
 		}
@@ -226,6 +232,7 @@ function refresh(conn_id) {
 		subscribe: c.subscribed,
 		include: include,
 		rid: rid,
+		request_ts: Date.now(),
 	};
 	conn.send(req);
 	return rid;

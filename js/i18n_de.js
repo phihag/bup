@@ -486,6 +486,8 @@ var i18n_de = {
 'refmode:referee:outdated bup': 'Veraltete bup-Version: {bup_version}',
 'refmode:referee:no event on client': 'Kein Wettkampf assoziiert',
 'refmode:referee:generating key': 'Generiere Referee-Schlüssel ...',
+'refmode:referee:forwards clock': 'Die Uhr des Tablets geht um {diff} Minuten vor!',
+'refmode:referee:backwards clock': 'Die Uhr des Tablets geht um {diff} Minuten nach!',
 };
 
 /*@DEV*/
