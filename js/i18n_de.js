@@ -69,6 +69,9 @@ var i18n_de = {
 'setupsheet:link': 'Aufstellung (experimentell)',
 'setupsheet:cancel': 'Abbrechen',
 'setupsheet:save': 'Speichern',
+'setupsheet:new player|m': 'Anderer Spieler ..',
+'setupsheet:new player|f': 'Andere Spielerin ..',
+'setupsheet:enter player name': 'Spieler-Name:',
 
 'button:undo': 'Rückgängig',
 'button:settings': 'Konfiguration',

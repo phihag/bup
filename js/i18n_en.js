@@ -69,6 +69,9 @@ var i18n_en = {
 'setupsheet:add': 'add player',
 'setupsheet:cancel': 'Cancel',
 'setupsheet:save': 'Save',
+'setupsheet:new player|m': 'other player ..',
+'setupsheet:new player|f': 'other player ..',
+'setupsheet:enter player name': 'player name:',
 
 'button:undo': 'Undo',
 'button:settings': 'Configuration',

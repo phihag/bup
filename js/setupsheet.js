@@ -215,7 +215,7 @@ function on_new_form_submit(e) {
 	var select = uiu.qs('.setupsheet_newselect_' + team_id + '_' + gender);
 	var player_name = select.value;
 
-	if (!player_name) {
+	if (!player_name || (player_name === '__add_manual')) {
 		return;
 	}
 
@@ -224,6 +224,26 @@ function on_new_form_submit(e) {
 		gender: gender,
 	});
 	rerender(state);
+}
+
+function on_add_change(e) {
+	var select = e.target;
+	var team_id = parseInt(select.getAttribute('data-team_id'), 10);
+	var val = select.value;
+	if (!val) {
+		return;
+	}
+	if ((val === '__add_manual')) {
+		var player_name = prompt(state._('editevent:enter player name'));
+		if (!player_name) {
+			select.value = '';
+			return;
+		}
+		uiu.create_el(select, 'option', {
+			value: player_name,
+			selected: 'selected',
+		}, player_name);
+	}
 }
 
 function save(/* s */) {
@@ -305,10 +325,29 @@ function rerender(s) {
 				'data-gender': gender,
 			});
 			new_form.addEventListener('submit', on_new_form_submit);
-			var new_select = uiu.create_el(new_form, 'select', 'setupsheet_newselect_' + team_id + '_' + gender);
-			available_players(s, listed_g_players, team_id, gender).forEach(function(ap) {
-				uiu.create_el(new_select, 'option', {}, ap.name);
+			var new_select = uiu.create_el(new_form, 'select', {
+				'class': 'setupsheet_newselect_' + team_id + '_' + gender,
+				required: 'required',
 			});
+			var avp = available_players(s, listed_g_players, team_id, gender);
+			avp.forEach(function(ap) {
+				uiu.create_el(new_select, 'option', {
+					value: ap.name,
+				}, ap.name);
+			});
+			if (avp.length === 0) {
+				uiu.create_el(new_select, 'option', {
+					value: '',
+					disabled: 'disabled',
+					selected: 'selected',
+				}, '');
+			}
+			uiu.create_el(new_select, 'option', {
+				value: '__add_manual',
+				'class': 'setupsheet_option_manual',
+			}, s._('setupsheet:new player|' + gender));
+			new_select.addEventListener('change', on_add_change);
+
 			uiu.create_el(new_form, 'button', {
 				'data-i18n': 'setupsheet:add',
 				'role': 'submit',
