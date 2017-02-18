@@ -66,7 +66,8 @@ var i18n_en = {
 'setupsheet:header:backup': 'B',
 'setupsheet:header:present': 'P',
 'setupsheet:link': 'Setup sheet (experimental)',
-'setupsheet:back': 'Back',
+'setupsheet:cancel': 'Cancel',
+'setupsheet:save': 'Save',
 
 'button:undo': 'Undo',
 'button:settings': 'Configuration',

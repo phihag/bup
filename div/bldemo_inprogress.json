@@ -305,7 +305,8 @@
         {"gender": "f", "name": "Carla Nelte", "ranking": 2},
         {"gender": "f", "name": "Ya Lan Chang", "ranking": 3, "nationality": "TPE"},
         {"gender": "f", "name": "Jennifer Karnott", "ranking": 3},
-        {"gender": "f", "name": "Elin Svensson", "ranking": 5, "nationality": "SWE"}
+        {"gender": "f", "name": "Elin Svensson", "ranking": 5, "nationality": "SWE"},
+        {"gender": "f", "name": "Runa Plützer", "ranking": 6}
       ],
       [
         {"gender": "m", "name": "Marc Zwiebler", "ranking": 1, "ranking_d": 5},
@@ -321,7 +322,8 @@
         {"gender": "f", "name": "Samantha Barning", "ranking": 2},
         {"gender": "f", "name": "Isabel Herttrich", "ranking": 3},
         {"gender": "f", "name": "Cisita Joitiy Jansen", "ranking": 4},
-        {"gender": "f", "name": "Nadia Frankhauser", "ranking": 5, "nationality": "SUI"}
+        {"gender": "f", "name": "Nadia Frankhauser", "ranking": 5, "nationality": "SUI"},
+        {"gender": "f", "name": "Lisa Heidenreich", "ranking": 6}
       ]
     ],
     "league_key": "1BL-2016",

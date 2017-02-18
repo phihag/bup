@@ -1,12 +1,12 @@
-refmode: update UI better
-
 setupsheet
-	allow changing X
 	delete players
 	change players
 	add players
-	highlight column header on mouseover
+	highlight column header on mouseover (remove CSS-based approach)
 	add completely new players (with input)
+	save button (sets event.state and transmits this)
+	submit to btde
+	submit to courtspot
 	print
 		make sure layout contains BuLi-Logo
 	pdf
@@ -23,6 +23,8 @@ setupsheet
 	editevent: show nationality if non-EU
 Anzeige: Sätze
 
+
+refmode: update UI better
 handle und test old Android browsers
 go through all TVR reports and test that it works now
 
@@ -36,7 +38,7 @@ refmode: show netstats
 websocket conn tried to send message while no websocket active: should not happen more than once
 Liste aller Spieler + Schiedsrichter für Hallensprecher (inkl. Reihenfolge)
 
-Android
+Android app
 SFTP (for BVM)
 
 Safari: Spielbericht fails

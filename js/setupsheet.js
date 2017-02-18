@@ -19,39 +19,97 @@ var CONFIGS = {
 	'RLM-2016': DE_CONFIG,
 };
 var GENDERS = ['m', 'f'];
+var LIMITS = {
+	m: {
+		'1.HD': 2,
+		'2.HD': 2,
+		'1.HE': 1,
+		'2.HE': 1,
+		'3.HE': 1,
+		'GD': 1,
+	}, 
+	f: {
+		'DD': 2,
+		'DE': 1,
+		'GD': 1,
+	},
+};
 
-function calc_listed(event, team_id, gender) {
-	if (event.listed_players) {
-		return event.listed_players[team_id][gender];
-	}
+// Current state
+var listed; // Array of teams -> dict of genders -> array of players
+var cur_players; // dict of col -> array of teams -> array of players (with gender)
+var cfg;
 
-	var res = [];
-	function _add(p, p_gender) {
-		if (typeof p_gender != 'string') {
-			p_gender = p.gender;
-		}
-		if (p_gender !== gender) {
-			return;
-		}
+function calc_cur_players(cfg, event) {
+	var res = {};
+	GENDERS.forEach(function(gender) {
+		cfg[gender].forEach(function(match_key) {
+			event.matches.forEach(function(m) {
+				if (eventsheet.calc_match_id(m) === match_key) {
+					res[match_key] = m.setup.teams.map(function(team) {
+						return team.players.map(function(orig_p, player_id) {
+							if (orig_p.gender) {
+								return orig_p;
+							}
 
-		if (!res.some(function(added_p) {
-			return added_p.name === p.name;
-		})) {
-			res.push(p);
-		}
-	}
-
-	event.matches.forEach(function(match) {
-		var setup = match.setup;
-		setup.teams[team_id].players.forEach(function(p, player_id) {
-			_add(p, p.gender || eventutils.guess_gender(setup, player_id));
+							var p = utils.deep_copy(orig_p);
+							if (!p.gender) {
+								p.gender = eventutils.guess_gender(m.setup, player_id);
+							}
+							return p;
+						});
+					});
+				}
+			});
 		});
 	});
-	if (event.backup_players) {
-		event.backup_players[team_id].forEach(_add);
-	}
-	if (event.present_players) {
-		event.present_players[team_id].forEach(_add);
+
+	res['backup'] = event.backup_players ? event.backup_players : [[], []];
+	res['present'] = event.present_players ? event.present_players : [[], []];
+	return res;
+}
+
+function cur_plays_in(col, team_id, p) {
+	return !! cur_players[col][team_id].some(function(cp) {
+		return cp.name === p.name;
+	});
+}
+
+function calc_listed(event) {
+	var res = [];
+	for (var team_id = 0;team_id < 2;team_id++) {
+		var team_res = {
+			m: [],
+			f: [],
+		};
+		res.push(team_res);
+
+		function _add(p, p_gender) {
+			if (typeof p_gender !== 'string') {
+				p_gender = p.gender;
+			}
+			var g_players = team_res[p_gender];
+
+			if (!g_players.some(function(added_p) {
+				return added_p.name === p.name;
+			})) {
+				g_players.push(p);
+			}
+		}
+
+		event.matches.forEach(function(match) {
+			var setup = match.setup;
+			setup.teams[team_id].players.forEach(function(p, player_id) {
+				_add(p, p.gender || eventutils.guess_gender(setup, player_id));
+			});
+		});
+		if (event.backup_players) {
+			event.backup_players[team_id].forEach(_add);
+		}
+		if (event.present_players) {
+			event.present_players[team_id].forEach(_add);
+		}
+
 	}
 	return res;
 }
@@ -85,33 +143,70 @@ function col_text(s, col) {
 	return col;
 }
 
-function get_config(league_key) {
+function calc_config(league_key) {
 	if (eventutils.NRW2016_RE.test(league_key)) {
 		return DE_CONFIG;
 	}
 	return CONFIGS[league_key];
 }
 
-function ui_render(s) {
-	var cfg = get_config(s.event.league_key);
+function on_cell_click(e) {
+	var cell = uiu.closest_class(e.target, 'setupsheet_x_cell');
+	var player_name = cell.getAttribute('data-player-name');
+	var gender = cell.getAttribute('data-gender');
+	var team_id = parseInt(cell.getAttribute('data-team_id'));
+	var col = cell.getAttribute('data-col');
+
+	var cps = cur_players[col][team_id];
+	var cur_in = cps.some(function(cp) {
+		return cp.name === player_name;
+	});
+
+	if (cur_in) {
+		// Remove
+		cur_players[col][team_id] = cps.filter(function(cp) {
+			return cp.name !== player_name;
+		});
+	} else {
+		// Add player
+		var limit = LIMITS[gender][col];
+		var cur_count = utils.sum(cps.map(function(cp) {
+			return (cp.gender === gender) ? 1 : 0;
+		}));
+		if (limit && (cur_count >= limit)) {
+			cps = cps.filter(function(cp) {
+				return cp.gender !== gender;
+			});
+			cur_players[col][team_id] = cps;
+		}
+		cps.push({
+			name: player_name,
+			gender: gender,
+		});
+	}
+
+	rerender(state);
+}
+
+function save(s) {
+	// TODO also configure match setups
+	// TODO also save individual stuff (backup/present players)
+}
+
+function ui_render_init(s) {
+	cfg = calc_config(s.event.league_key);
 	if (!cfg) {
 		var err_display = uiu.qs('.setupsheet_error');
 		uiu.visible(err_display, true);
 		uiu.text(err_display, 'Unsupported league: ' + s.event.league_key);
 	}
+	listed = calc_listed(s.event);
+	cur_players = calc_cur_players(cfg, s.event);
+	rerender(s);
+}
 
-	var matches_by_id = {};
-	GENDERS.forEach(function(gender) {
-		cfg[gender].forEach(function(match_key) {
-			s.event.matches.forEach(function(m) {
-				if (eventsheet.calc_match_id(m) === match_key) {
-					matches_by_id[match_key] = m;
-				}
-			});
-		});
-	});
-
-	for (var team_id = 0;team_id <= 1;team_id++) {
+function rerender(s) {
+	listed.forEach(function(team, team_id) {
 		var table = uiu.qs('#setupsheet_table_team' + team_id);
 		uiu.empty(table);
 		var thead = uiu.create_el(table, 'thead');
@@ -132,7 +227,7 @@ function ui_render(s) {
 				}
 			});
 
-			var listed_g_players = calc_listed(s.event, team_id, gender);
+			var listed_g_players = team[gender];
 			listed_g_players.forEach(function(p) {
 				var tr = uiu.create_el(tbody, 'tr');
 				uiu.create_el(tr, 'td', 'setupsheet_player_name', p.name);
@@ -140,29 +235,15 @@ function ui_render(s) {
 					if (col === 'dark') {
 						uiu.create_el(tr, 'td', 'setupsheet_dark');
 					} else {
-						var candidate_players;
-						if (col === 'backup') {
-							candidate_players = s.event.backup_players[team_id];
-						} else if (col === 'present') {
-							candidate_players = s.event.present_players[team_id];
-						} else {
-							var match = matches_by_id[col];
-							if (!match) {
-								throw new Error('Cannot find match ' + col);
-							}
-							candidate_players = match.setup.teams[team_id].players;
-						}
-						var plays_in = candidate_players && candidate_players.some(function(cp) {
-							return cp.name === p.name;
-						});
+						var plays_in = cur_plays_in(col, team_id, p);
 						var td = uiu.create_el(tr, 'td', {
 							'data-col': col,
+							'data-gender': gender,
+							'data-team_id': team_id,
+							'data-player-name': p.name,
 							'class': 'setupsheet_x_cell' + (plays_in ? ' setupsheet_x_marked' : ''),
-						});
-						uiu.create_el(td, 'span', 'setupsheet_match_name_hint', col_text(s, col));
-						uiu.create_el(
-							td, 'span',
-							'setupsheet_x', plays_in ? 'x' : '');
+						}, (plays_in ? 'x' : ''));
+						click.on(td, on_cell_click);
 					}
 				});
 			});
@@ -177,8 +258,7 @@ function ui_render(s) {
 				uiu.create_el(new_select, 'option', {}, ap.name);
 			});
 		});
-
-	}
+	});
 }
 
 function show() {
@@ -200,7 +280,7 @@ function show() {
 	uiu.visible_qs('.setupsheet_layout', true);
 	if (state.event && state.event.matches && state.event.all_players) {
 		uiu.visible_qs('.setupsheet_loading-icon', false);
-		ui_render(state);
+		ui_render_init(state);
 	} else {
 		uiu.visible_qs('.setupsheet_loading-icon', true);
 		network.list_full_event(state, function(err) {
@@ -210,7 +290,7 @@ function show() {
 				uiu.text_qs('.setupsheet_error_message', err.msg);
 				return;
 			}
-			ui_render(state);
+			ui_render_init(state);
 		});
 	}
 }
@@ -242,9 +322,9 @@ function ui_init() {
 		e.preventDefault();
 		show();
 	});
-	click.qs('.setupsheet_back', function(e) {
-		e.preventDefault();
-		hide_and_back();
+	click.qs('.setupsheet_cancel', hide_and_back);
+	click.qs('.setupsheet_save', function() {
+		save(state);
 	});
 }
 

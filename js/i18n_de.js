@@ -66,7 +66,8 @@ var i18n_de = {
 'setupsheet:header:backup': 'E',
 'setupsheet:header:present': 'A',
 'setupsheet:link': 'Aufstellung (experimentell)',
-'setupsheet:back': 'Zurück',
+'setupsheet:cancel': 'Abbrechen',
+'setupsheet:save': 'Speichern',
 
 'button:undo': 'Rückgängig',
 'button:settings': 'Konfiguration',
