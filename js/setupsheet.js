@@ -84,7 +84,7 @@ function calc_listed(event) {
 		};
 		res.push(team_res);
 
-		function _add(p, p_gender) {
+		var _add = function(p, p_gender) {
 			if (typeof p_gender !== 'string') {
 				p_gender = p.gender;
 			}
@@ -95,7 +95,7 @@ function calc_listed(event) {
 			})) {
 				g_players.push(p);
 			}
-		}
+		};
 
 		event.matches.forEach(function(match) {
 			var setup = match.setup;
@@ -152,7 +152,7 @@ function calc_config(league_key) {
 
 function on_cell_click(e) {
 	var cell = uiu.closest_class(e.target, 'setupsheet_x_cell');
-	var player_name = cell.getAttribute('data-player-name');
+	var player_name = cell.getAttribute('data-player_name');
 	var gender = cell.getAttribute('data-gender');
 	var team_id = parseInt(cell.getAttribute('data-team_id'));
 	var col = cell.getAttribute('data-col');
@@ -188,7 +188,26 @@ function on_cell_click(e) {
 	rerender(state);
 }
 
-function save(s) {
+function on_delete_click(e) {
+	var btn = uiu.closest_class(e.target, 'setupsheet_delete_button');
+	var player_name = btn.getAttribute('data-player_name');
+	var gender = btn.getAttribute('data-gender');
+	var team_id = parseInt(btn.getAttribute('data-team_id'));
+
+	function is_player(p) {
+		return p.name === player_name;
+	}
+
+	utils.remove_cb(listed[team_id][gender], is_player);
+	Object.values(cur_players).forEach(function(teams) {
+		teams.forEach(function(players) {
+			utils.remove_cb(players, is_player);
+		});
+	});
+	rerender(state);
+}
+
+function save(/* s */) {
 	// TODO also configure match setups
 	// TODO also save individual stuff (backup/present players)
 }
@@ -230,7 +249,15 @@ function rerender(s) {
 			var listed_g_players = team[gender];
 			listed_g_players.forEach(function(p) {
 				var tr = uiu.create_el(tbody, 'tr');
-				uiu.create_el(tr, 'td', 'setupsheet_player_name', p.name);
+				var first_cell = uiu.create_el(tr, 'td', 'setupsheet_player_name', p.name);
+				var btn = uiu.create_el(first_cell, 'button', {
+					'class': 'setupsheet_delete_button image-button textsize-button',
+					'data-team_id': team_id,
+					'data-player_name': p.name,
+					'data-gender': gender,
+				});
+				click.on(btn, on_delete_click);
+				uiu.create_el(btn, 'span');
 				cfg[gender].forEach(function(col) {
 					if (col === 'dark') {
 						uiu.create_el(tr, 'td', 'setupsheet_dark');
@@ -240,7 +267,7 @@ function rerender(s) {
 							'data-col': col,
 							'data-gender': gender,
 							'data-team_id': team_id,
-							'data-player-name': p.name,
+							'data-player_name': p.name,
 							'class': 'setupsheet_x_cell' + (plays_in ? ' setupsheet_x_marked' : ''),
 						}, (plays_in ? 'x' : ''));
 						click.on(td, on_cell_click);
@@ -348,6 +375,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var render = require('./render');
 	var settings = require('./settings');
 	var uiu = require('./uiu');
+	var utils = require('./utils');
 
 	module.exports = setupsheet;
 }

@@ -1,8 +1,5 @@
 setupsheet
-	delete players
-	change players
 	add players
-	highlight column header on mouseover (remove CSS-based approach)
 	add completely new players (with input)
 	save button (sets event.state and transmits this)
 	submit to btde
@@ -10,12 +7,12 @@ setupsheet
 	print
 		make sure layout contains BuLi-Logo
 	pdf
+	highlight column header on mouseover (remove CSS-based approach)
 	browser back fails!
 	Message "Yes, correct." || "No, check doubles/singles" || "no info"
 	check doubles ranking
 	check for too many foreigners
 	check on editevent as well
-	check rows
 	XLSX
 	edit -> bldemo
 	edit this -> CourtSpot

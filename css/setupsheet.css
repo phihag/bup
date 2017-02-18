@@ -104,10 +104,20 @@
 	font-size: 4vmin;
 	margin: 3vmin 0 1vmin 0;
 }
-.setupsheet_buttons>button {
+.setupsheet_buttons > button {
 	font-size: inherit;
 	padding: 0.2em 0.4em;
 }
-.setupsheet_buttons>button + button {
+.setupsheet_buttons > button + button {
 	margin-left: 10vw;
+}
+
+.setupsheet_delete_button > span {
+	background-image: url(../icons/delete.svg);
+}
+.setupsheet_delete_button {
+	opacity: 0.1;
+}
+td:hover .setupsheet_delete_button {
+	opacity: 1;
 }
