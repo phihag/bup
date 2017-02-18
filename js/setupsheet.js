@@ -251,6 +251,10 @@ function save(/* s */) {
 	// TODO also save individual stuff (backup/present players)
 }
 
+function pdf() {
+	// TODO
+}
+
 function ui_render_init(s) {
 	cfg = calc_config(s.event.league_key);
 	if (!cfg) {
@@ -354,11 +358,21 @@ function rerender(s) {
 			}, s._('setupsheet:add'));
 		});
 	});
+
+	render_svg(s);
+}
+
+function render_svg(s) {
+	// TODO
 }
 
 function show() {
 	if (state.ui.setupsheet_visible) {
 		return;
+	}
+
+	if (typeof jsPDF !== 'undefined') {
+		jspdf_loaded();
 	}
 
 	if (state.ui.referee_mode) {
@@ -412,6 +426,10 @@ function hide_and_back() {
 	}
 }
 
+function jspdf_loaded() {
+	uiu.qs('.setupsheet_pdf').removeAttribute('disabled');
+}
+
 function ui_init() {
 	click.qs('.setupsheet_link', function(e) {
 		e.preventDefault();
@@ -421,12 +439,17 @@ function ui_init() {
 	click.qs('.setupsheet_save', function() {
 		save(state);
 	});
+	click.qs('.setupsheet_print', function() {
+		window.print();
+	});
+	click.qs('.setupsheet_pdf', pdf);
 }
 
 return {
 	ui_init: ui_init,
 	show: show,
 	hide: hide,
+	jspdf_loaded: jspdf_loaded,
 };
 
 

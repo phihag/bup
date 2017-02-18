@@ -72,6 +72,8 @@ var i18n_de = {
 'setupsheet:new player|m': 'Anderer Spieler ..',
 'setupsheet:new player|f': 'Andere Spielerin ..',
 'setupsheet:enter player name': 'Spieler-Name:',
+'setupsheet:pdf': 'PDF',
+'setupsheet:print': 'Drucken',
 
 'button:undo': 'Rückgängig',
 'button:settings': 'Konfiguration',

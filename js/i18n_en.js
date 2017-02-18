@@ -72,6 +72,8 @@ var i18n_en = {
 'setupsheet:new player|m': 'other player ..',
 'setupsheet:new player|f': 'other player ..',
 'setupsheet:enter player name': 'player name:',
+'setupsheet:pdf': 'PDF',
+'setupsheet:print': 'Print',
 
 'button:undo': 'Undo',
 'button:settings': 'Configuration',

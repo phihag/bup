@@ -125,7 +125,8 @@ td:hover .setupsheet_delete_button {
 .setupsheet_buttons > button {
 	font-size: inherit;
 	padding: 0.2em 0.4em;
+	min-width: 5em;
 }
 .setupsheet_buttons > button + button {
-	margin-left: 10vw;
+	margin-left: 5vw;
 }

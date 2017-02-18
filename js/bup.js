@@ -21,7 +21,10 @@ function ui_init() {
 	uiu.text_qs('.version', bup_version);
 
 	appcache.ui_init();
-	$('#script_jspdf').on('load', scoresheet.jspdf_loaded);
+	$('#script_jspdf').on('load', function() {
+		scoresheet.jspdf_loaded();
+		setupsheet.jspdf_loaded();
+	});
 	$('#script_pdfform').on('load', eventsheet.loaded('pdfform'));
 	$('#script_jszip').on('load', eventsheet.loaded('jszip'));
 
