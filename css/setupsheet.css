@@ -93,9 +93,24 @@
 }
 .setupsheet_new {
 	text-align: left;
+	padding: 0.3em 0 0.7em 0;
 }
 .setupsheet_new select {
 	min-width: 10em;
+}
+.setupsheet_new button {
+	font-size: inherit;
+	margin-left: 0.5em;
+}
+.setupsheet_delete_button {
+	opacity: 0.1;
+	cursor: pointer;
+}
+td:hover .setupsheet_delete_button {
+	opacity: 1;
+}
+.setupsheet_delete_button > span {
+	background-image: url(../icons/delete.svg);
 }
 
 
@@ -112,12 +127,3 @@
 	margin-left: 10vw;
 }
 
-.setupsheet_delete_button > span {
-	background-image: url(../icons/delete.svg);
-}
-.setupsheet_delete_button {
-	opacity: 0.1;
-}
-td:hover .setupsheet_delete_button {
-	opacity: 1;
-}

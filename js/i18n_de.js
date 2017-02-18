@@ -65,6 +65,7 @@ var i18n_de = {
 'setupsheet:header|f': 'Damen',
 'setupsheet:header:backup': 'E',
 'setupsheet:header:present': 'A',
+'setupsheet:add': 'Hinzufügen',
 'setupsheet:link': 'Aufstellung (experimentell)',
 'setupsheet:cancel': 'Abbrechen',
 'setupsheet:save': 'Speichern',

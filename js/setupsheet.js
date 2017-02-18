@@ -207,6 +207,25 @@ function on_delete_click(e) {
 	rerender(state);
 }
 
+function on_new_form_submit(e) {
+	e.preventDefault();
+	var form = uiu.closest_class(e.target, 'setupsheet_new_form');
+	var gender = form.getAttribute('data-gender');
+	var team_id = parseInt(form.getAttribute('data-team_id'));
+	var select = uiu.qs('.setupsheet_newselect_' + team_id + '_' + gender);
+	var player_name = select.value;
+
+	if (!player_name) {
+		return;
+	}
+
+	listed[team_id][gender].push({
+		name: player_name,
+		gender: gender,
+	});
+	rerender(state);
+}
+
 function save(/* s */) {
 	// TODO also configure match setups
 	// TODO also save individual stuff (backup/present players)
@@ -280,10 +299,20 @@ function rerender(s) {
 				colspan: (1 + cfg[gender].length),
 				'class': 'setupsheet_new',
 			});
-			var new_select = uiu.create_el(new_td, 'select');
+			var new_form = uiu.create_el(new_td, 'form', {
+				'class': 'inline-form setupsheet_new_form',
+				'data-team_id': team_id,
+				'data-gender': gender,
+			});
+			new_form.addEventListener('submit', on_new_form_submit);
+			var new_select = uiu.create_el(new_form, 'select', 'setupsheet_newselect_' + team_id + '_' + gender);
 			available_players(s, listed_g_players, team_id, gender).forEach(function(ap) {
 				uiu.create_el(new_select, 'option', {}, ap.name);
 			});
+			uiu.create_el(new_form, 'button', {
+				'data-i18n': 'setupsheet:add',
+				'role': 'submit',
+			}, s._('setupsheet:add'));
 		});
 	});
 }

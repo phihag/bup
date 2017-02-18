@@ -1,5 +1,4 @@
 setupsheet
-	add players
 	add completely new players (with input)
 	save button (sets event.state and transmits this)
 	submit to btde

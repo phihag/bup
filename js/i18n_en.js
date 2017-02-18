@@ -66,6 +66,7 @@ var i18n_en = {
 'setupsheet:header:backup': 'B',
 'setupsheet:header:present': 'P',
 'setupsheet:link': 'Setup sheet (experimental)',
+'setupsheet:add': 'add player',
 'setupsheet:cancel': 'Cancel',
 'setupsheet:save': 'Save',
 
