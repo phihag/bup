@@ -274,10 +274,10 @@ function pdf() {
 	});
 	svg_container.setAttribute('style', 'display: block; position: absolute; top: -9999px;');
 	for (var i = 0;i < svgs.length;i++) {
-		svgs[i].setAttribute('style', 'width: 2970px; height: 2100px;')
+		svgs[i].setAttribute('style', 'width: 2970px; height: 2100px;');
 	}
 	svg2pdf.save(svgs, {}, 'portrait', filename);
-	for (var i = 0;i < svgs.length;i++) {
+	for (i = 0;i < svgs.length;i++) {
 		svgs[i].removeAttribute('style');
 	}
 	svg_container.removeAttribute('style');
@@ -618,6 +618,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var refmode_referee_ui = null; // break cycle, should be require('./refmode_referee_ui');
 	var render = require('./render');
 	var settings = require('./settings');
+	var svg2pdf = require('./svg2pdf');
 	var uiu = require('./uiu');
 	var utils = require('./utils');
 

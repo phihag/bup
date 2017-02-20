@@ -1,12 +1,4 @@
 setupsheet
-	pdf
-		fix horizontal align
-	create default template
-		add 3. he
-		extend women dark
-		remove present
-	test with NRW
-	test with BuLi
 	save button (sets event.state and transmits this)
 	submit to btde
 	submit to courtspot
