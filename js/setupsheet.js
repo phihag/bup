@@ -100,11 +100,8 @@ function calc_listed(event) {
 		};
 		res.push(team_res);
 
-		var _add = function(p, p_gender) {
-			if (typeof p_gender !== 'string') {
-				p_gender = p.gender;
-			}
-			var g_players = team_res[p_gender];
+		var _add = function(p) {
+			var g_players = team_res[p.gender];
 
 			if (!g_players.some(function(added_p) {
 				return added_p.name === p.name;
@@ -116,7 +113,11 @@ function calc_listed(event) {
 		event.matches.forEach(function(match) {
 			var setup = match.setup;
 			setup.teams[team_id].players.forEach(function(p, player_id) {
-				_add(p, p.gender || eventutils.guess_gender(setup, player_id));
+				if (!p.gender) {
+					p = utils.deep_copy(p);
+					p.gender = eventutils.guess_gender(setup, player_id);
+				}
+				_add(p);
 			});
 		});
 		if (event.backup_players) {
@@ -261,9 +262,12 @@ function on_add_change(e) {
 	}
 }
 
-function save(/* s */) {
+function save(s) {
+	s.event.listed_players = utils.deep_copy(listed);
 	// TODO also configure match setups
 	// TODO also save individual stuff (backup/present players)
+
+	network.on_edit_event(s);
 }
 
 function pdf() {

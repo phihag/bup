@@ -9,7 +9,7 @@ setupsheet
 	check doubles ranking
 	check for too many foreigners
 	check on editevent as well
-	sort by ranking if present
+	sort by ranking if present, name otherwise
 	XLSX
 	edit -> bldemo
 	edit this -> CourtSpot
