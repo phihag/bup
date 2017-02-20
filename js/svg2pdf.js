@@ -158,9 +158,9 @@ function render_page(svg, pdf) {
 	}
 }
 
-function make(svg_nodes, props) {
+function make(svg_nodes, props, orientation) {
 	var pdf = new jsPDF({
-		orientation: 'landscape',
+		orientation: orientation,
 		unit: 'mm',
 		format: 'a4',
 		autoAddFonts: false,
@@ -179,8 +179,8 @@ function make(svg_nodes, props) {
 	return pdf;
 }
 
-function save(svg_node, props, filename) {
-	var pdf = make(svg_node, props);
+function save(svg_nodes, props, orientation, filename) {
+	var pdf = make(svg_nodes, props, orientation);
 	pdf.save(filename);
 }
 

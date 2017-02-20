@@ -1,6 +1,6 @@
 setupsheet
 	pdf
-		svg2pdf: portrait!
+		fix horizontal align
 	create default template
 		add 3. he
 		extend women dark

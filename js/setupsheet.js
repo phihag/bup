@@ -267,7 +267,12 @@ function save(/* s */) {
 }
 
 function pdf() {
-	// TODO
+	var svg_container = uiu.qs('.setupsheet_svg_container');
+	var svgs = svg_container.querySelectorAll('svg');
+	var filename = state._('setupsheet:filename', {
+		event_name: state.event.event_name,
+	});
+	svg2pdf.save(svgs, {}, 'portrait', filename);
 }
 
 function ui_render_init(s) {

@@ -80,6 +80,7 @@ var i18n_de = {
 'setupsheet:signature': 'Unterschrift',
 'setupsheet:longlabel:backup': 'Ersatz',
 'setupsheet:longlabel:present': 'Anwesend',
+'setupsheet:filename': 'Aufstellungszettel {event_name}.pdf',
 
 'button:undo': 'Rückgängig',
 'button:settings': 'Konfiguration',

@@ -80,6 +80,7 @@ var i18n_en = {
 'setupsheet:signature': 'Signature',
 'setupsheet:longlabel:backup': 'backup',
 'setupsheet:longlabel:present': 'present',
+'setupsheet:filename': 'Setup sheets {event_name}.pdf',
 
 'button:undo': 'Undo',
 'button:settings': 'Configuration',

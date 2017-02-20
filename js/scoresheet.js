@@ -1074,7 +1074,7 @@ function ui_pdf() {
 		(state._('scoresheet:[Event Scoresheet Filename]').replace('{event_name}', state.event.event_name) + '.pdf') :
 		(_match_title(state, ',') + '.pdf')
 	);
-	svg2pdf.save(svg_nodes, props, filename);
+	svg2pdf.save(svg_nodes, props, 'landscape', filename);
 }
 
 function jspdf_loaded() {
