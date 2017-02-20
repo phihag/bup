@@ -8,7 +8,7 @@ function get_real_netw() {
 }
 
 function get_netw() {
-	return networks.staticnet || get_real_netw();
+	return networks.staticnet || networks.refmode_push || get_real_netw();
 }
 
 function is_enabled() {
@@ -636,12 +636,22 @@ function on_edit_event(s) {
 	refmode_client_ui.on_event_update();
 }
 
+// Client communicates to server
 function ui_install_refmode_client(rc) {
 	networks.refmode_client = rc;
 }
 
 function ui_uninstall_refmode_client() {
 	delete networks.refmode_client;
+}
+
+// With push, we're getting updates from the server
+function install_refmode_push(netw) {
+	networks.refmode_push = netw;
+}
+
+function uninstall_refmode_push() {
+	delete networks.refmode_push;
 }
 
 // Update event after fetching it somehow
@@ -684,22 +694,24 @@ return {
 	errstate: errstate,
 	get_presses: get_presses,
 	get_real_netw: get_real_netw,
+	install_refmode_push: install_refmode_push,
 	is_enabled: is_enabled,
-	list_matches: list_matches,
 	list_all_players: list_all_players,
 	list_full_event: list_full_event,
+	list_matches: list_matches,
 	match_by_id: match_by_id,
+	on_edit_event: on_edit_event,
 	request: request,
 	resync: resync,
 	send_press: send_press,
 	subscribe: subscribe,
-	on_edit_event: on_edit_event,
 	ui_init: ui_init,
+	ui_install_refmode_client: ui_install_refmode_client,
 	ui_install_staticnet: ui_install_staticnet,
 	ui_list_matches: ui_list_matches,
-	ui_uninstall_staticnet: ui_uninstall_staticnet,
-	ui_install_refmode_client: ui_install_refmode_client,
 	ui_uninstall_refmode_client: ui_uninstall_refmode_client,
+	ui_uninstall_staticnet: ui_uninstall_staticnet,
+	uninstall_refmode_push: uninstall_refmode_push,
 	update_event: update_event,
 };
 

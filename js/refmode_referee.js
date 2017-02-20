@@ -356,6 +356,27 @@ function espouse_event(c) {
 	render_clients(clients);
 }
 
+function push(c) {
+	conn.send({
+		type: 'dmsg',
+		dtype: 'push_start',
+		to: c.id,
+		event: refmode_common.craft_event(s),
+	});
+	c.pushing = true;
+	render_clients(clients);
+}
+
+function unpush(c) {
+	conn.send({
+		type: 'dmsg',
+		dtype: 'push_end',
+		to: c.id,
+	});
+	c.pushing = false;
+	render_clients(clients);
+}
+
 return {
 	key_fp: key_fp,
 	change_match: change_match,
@@ -366,8 +387,10 @@ return {
 	espouse_event: espouse_event,
 	kill: kill,
 	on_settings_change: on_settings_change,
+	push: push,
 	refresh: refresh,
 	status_str: status_str,
+	unpush: unpush,
 	update_settings: update_settings,
 };
 
@@ -378,6 +401,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var key_utils = require('./key_utils');
 	var netstats = require('./netstats');
 	var refmode_conn = require('./refmode_conn');
+	var refmode_common = require('./refmode_common');
 	var report_problem = require('./report_problem');
 	var utils = require('./utils');
 

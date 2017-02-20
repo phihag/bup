@@ -477,6 +477,8 @@ var i18n_en = {
 'refmode:referee:refresh': 'Refresh',
 'refmode:referee:kill': 'Disconnect',
 'refmode:referee:kill prompt': 'Disconnect {client} from all referees?',
+'refmode:referee:push:activate': 'start push mode (very experimental)',
+'refmode:referee:push:deactivate': 'end push mode',
 'refmode:referee:battery': 'Battery: ',
 'refmode:referee:battery:na': 'N/A',
 'refmode:referee:battery:charging': 'Charging ({percent}%{duration})',

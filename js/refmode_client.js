@@ -9,6 +9,8 @@ var paired_referees = initial_paired_refs.slice();
 var battery;
 var subscriptions = [];
 
+var push_netw;
+
 function handle_change(estate) {
 	switch (estate.status) {
 	case 'enabled':
@@ -54,33 +56,6 @@ function unsubscribe(conn_id) {
 	utils.remove(subscriptions, conn_id);
 }
 
-function craft_event() {
-	var ev = s.event;
-	var res = utils.pluck(ev, [
-		'id', 'event_name', 'tournament_name',
-		'courts',
-		'location', 'protest', 'matchday', 'starttime', 'notes',
-		'team_competition', 'team_names', 'league_key',
-		'all_players', 'backup_players', 'present_players',
-		'last_update',
-	]);
-
-	if (ev.matches) {
-		res.matches = ev.matches.map(function(m) {
-			var mr = utils.pluck(
-				m, ['setup', 'network_score', 'presses', 'presses_json']);
-			if (!m.presses && !m.presses_json) {
-				var loaded = match_storage.get(m.setup.match_id);
-				if (loaded) {
-					mr.presses = loaded.presses;
-				}
-			}
-			return mr;
-		});
-	}
-	return res;
-}
-
 // Handle direct messages (from referee)
 function handle_dmsg(msg) {
 	switch(msg.dtype) {
@@ -118,7 +93,7 @@ function handle_dmsg(msg) {
 		}
 
 		if (s.event) {
-			answer.event = craft_event();
+			answer.event = refmode_common.craft_event(s, match_storage);
 		}
 
 		conn.respond(msg, answer);
@@ -168,6 +143,21 @@ function handle_dmsg(msg) {
 			dtype: 'changed-court',
 			new_court: court,
 		});
+		break;
+	case 'push_start':
+		if (!push_netw) {
+			push_netw = refmode_push_netw(msg.event);
+		}
+		network.install_refmode_push(push_netw);
+		break;
+	case 'push_state':
+		if (push_netw) {
+			push_netw.update(msg);
+		}
+		break;
+	case 'push_end':
+		network.uninstall_refmode_push();
+		push_netw = null;
 		break;
 	case 'error':
 		report_problem.silent_error('refclient received error: ' + msg.message);
@@ -322,7 +312,7 @@ function notify_changed_settings(s) {
 }
 
 function on_event_update() {
-	var ev = craft_event();
+	var ev = refmode_common.craft_event(s, match_storage);
 	subscriptions.forEach(function(conn_id) {
 		conn.send({
 			type: 'dmsg',
@@ -357,6 +347,8 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var netstats = require('./netstats');
 	var network = require('./network');
 	var refmode_conn = require('./refmode_conn');
+	var refmode_common = require('./refmode_common');
+	var refmode_push_netw = require('./refmode_push_netw');
 	var report_problem = require('./report_problem');
 	var settings = require('./settings');
 	var utils = require('./utils');

@@ -34,7 +34,6 @@ function sync(s) {
 		return;
 	}
 
-
 	nmatch.network_score = calc.netscore(s);
 	nmatch.presses_json = JSON.stringify(s.presses);
 }

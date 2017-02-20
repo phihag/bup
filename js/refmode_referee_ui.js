@@ -49,6 +49,22 @@ function on_kill_button_click(e) {
 	}
 }
 
+function on_push_start_button_click(e) {
+	var client_id = _client_id(e);
+	var c = rr.client_by_conn_id(client_id);
+	if (!c) return;
+
+	rr.push(c);
+}
+
+function on_push_end_button_click(e) {
+	var client_id = _client_id(e);
+	var c = rr.client_by_conn_id(client_id);
+	if (!c) return;
+
+	rr.unpush(c);
+}
+
 function on_espouse_btn_click(e) {
 	var c = rr.client_by_conn_id(_client_id(e));
 	if (!c) return;
@@ -398,6 +414,16 @@ function render_clients(clients) {
 				'role': 'submit',
 			}, s._('refmode:referee:change display style'));
 		}
+
+		var event_row = uiu.create_el(div, 'div');
+		if (c.pushing) {
+			var unpush_button = uiu.create_el(event_row, 'button', {}, s._('refmode:referee:push:deactivate'));
+			click.on(unpush_button, on_push_end_button_click);
+		} else {
+			var push_button = uiu.create_el(event_row, 'button', {}, s._('refmode:referee:push:activate'));
+			click.on(push_button, on_push_start_button_click);
+		}
+
 
 		if (c.event && c.event.matches && (!ev || (c.event.id !== ev.id))) {
 			var diff_ev = uiu.create_el(div, 'div', {

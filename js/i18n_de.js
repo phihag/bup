@@ -477,6 +477,8 @@ var i18n_de = {
 'refmode:referee:refresh': 'Aktualisieren',
 'refmode:referee:kill': 'Trennen',
 'refmode:referee:kill prompt': 'Referee-Anbindung von {client} deaktivieren?',
+'refmode:referee:push:activate': 'Push-Modus aktivieren (sehr experimentell)',
+'refmode:referee:push:deactivate': 'Push-Modus beenden',
 'refmode:referee:battery': 'Batterie: ',
 'refmode:referee:battery:na': 'Keine Informationen',
 'refmode:referee:battery:charging': 'Lädt ({percent}%{duration})',
