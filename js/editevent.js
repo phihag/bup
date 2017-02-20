@@ -244,7 +244,7 @@ function show() {
 	}
 
 	state.ui.editevent_visible = true;
-	uiu.esc_stack_push(hide);
+	uiu.esc_stack_push(hide_and_back);
 	control.set_current(state);
 
 	uiu.visible_qs('.editevent_layout', true);

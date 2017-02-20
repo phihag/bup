@@ -1,19 +1,14 @@
 setupsheet
-	save button (sets event.state and transmits this)
 	submit to btde
 	submit to courtspot
 	highlight column header on mouseover (remove CSS-based approach)
 	browser back fails!
-	Esc should cancel correctly
-	Message "Yes, correct." || "No, check doubles/singles" || "no info"
+	check singles ranking
 	check doubles ranking
 	check for too many foreigners
 	check on editevent as well
 	sort by ranking if present, name otherwise
 	XLSX
-	edit -> bldemo
-	edit this -> CourtSpot
-	check singles ranking
 	editevent: show nationality if non-EU
 editevent: Esc should cancel correctly
 Anzeige: Sätze

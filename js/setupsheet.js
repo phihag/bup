@@ -263,10 +263,24 @@ function on_add_change(e) {
 }
 
 function save(s) {
-	s.event.listed_players = utils.deep_copy(listed);
-	// TODO also configure match setups
-	// TODO also save individual stuff (backup/present players)
-
+	var event = s.event;
+	event.listed_players = utils.deep_copy(listed);
+	event.matches.forEach(function(match) {
+		var match_id = eventsheet.calc_match_id(match);
+		for (var team_id = 0;team_id < 2;team_id++) {
+			var new_players = cur_players[match_id][team_id].slice();
+			if ((new_players.length === 2) && (new_players[0].gender === 'f') && (new_players[1].gender === 'm')) {
+				new_players = [new_players[1], new_players[0]];
+			}
+			match.setup.teams[team_id].players = new_players;
+		}
+	});
+	if (cur_players.backup) {
+		event.backup_players = utils.deep_copy(cur_players.backup);
+	}
+	if (cur_players.present) {
+		event.present_players = utils.deep_copy(cur_players.present);
+	}
 	network.on_edit_event(s);
 }
 
@@ -538,7 +552,7 @@ function show() {
 	}
 
 	state.ui.setupsheet_visible = true;
-	uiu.esc_stack_push(hide);
+	uiu.esc_stack_push(hide_and_back);
 	control.set_current(state);
 
 	uiu.visible_qs('.setupsheet_layout', true);
@@ -593,6 +607,7 @@ function ui_init() {
 	click.qs('.setupsheet_cancel', hide_and_back);
 	click.qs('.setupsheet_save', function() {
 		save(state);
+		hide_and_back();
 	});
 	click.qs('.setupsheet_print', function() {
 		window.print();

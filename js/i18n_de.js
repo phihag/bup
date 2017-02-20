@@ -51,7 +51,7 @@ var i18n_de = {
 'network:in progress': 'Das Spiel {match} wurde bereits angefangen',
 'network:match finished': 'Das Spiel {match} ist bereits beendet ({score})!',
 
-'editevent:link': 'Wettkampf bearbeiten',
+'editevent:link': 'Wettkampf bearbeiten (experimentell)',
 'editevent:back': 'Zurück',
 'editevent:add manual m': 'Anderer Spieler ..',
 'editevent:add manual f': 'Andere Spielerin ..',
