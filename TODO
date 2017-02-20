@@ -1,4 +1,5 @@
 setupsheet
+	btde: going into setupsheet fails
 	submit to btde
 	submit to courtspot
 	highlight column header on mouseover (remove CSS-based approach)
@@ -8,6 +9,7 @@ setupsheet
 	check for too many foreigners
 	check on editevent as well
 	sort by ranking if present, name otherwise
+	consider adding as soon as selection
 	XLSX
 	editevent: show nationality if non-EU
 editevent: Esc should cancel correctly

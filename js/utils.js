@@ -362,6 +362,15 @@ function unhex(str) {
 	return Uint8Array.from(lst);
 }
 
+function match_all(pattern, input) {
+	var res = [];
+	var match;
+	while ((match = pattern.exec(input))) {
+		res.push(match);
+	}
+	return res;
+}
+
 return {
 	add_zeroes: add_zeroes,
 	any: any,
@@ -379,6 +388,7 @@ return {
 	hex: hex,
 	human_date_str: human_date_str,
 	iso8601: iso8601,
+	match_all: match_all,
 	map_dict: map_dict,
 	multiline_regexp: multiline_regexp,
 	obj_update: obj_update,

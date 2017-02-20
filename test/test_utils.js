@@ -247,4 +247,26 @@ _describe('helper functions', function() {
 			bup.utils.unhex('000a10208078ff'),
 			[0, 10, 16, 32, 128, 120, 255]);
 	});
+
+	_it('match_all', function() {
+		assert.deepStrictEqual(
+			bup.utils.match_all(
+				/<option>([^<,]+),\s*([^<,]+)<\/option>/g,
+				'<option>Dubs, Konstantin</option>' +
+				'<option>Heumann, Manuel</option><option>Krasimir, Yankov</option>' +
+				'<option>Obernosterer, David</option><option>Patz, Eric</option>' +
+				'<option>Szydlowski, Przemyskaw</option><option>Wadenka, Tobias</option>').map(
+				function(m) {
+					return [m[1], m[2]];
+				}),
+			[
+				['Dubs', 'Konstantin'],
+				['Heumann', 'Manuel'],
+				['Krasimir', 'Yankov'],
+				['Obernosterer', 'David'],
+				['Patz', 'Eric'],
+				['Szydlowski', 'Przemyskaw'],
+				['Wadenka', 'Tobias'],
+			])
+	})
 });

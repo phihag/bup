@@ -347,7 +347,86 @@ function service_name() {
 
 /* Paramter: s */
 function editable() {
-	return false;
+	return true;
+}
+
+function calc_btde_player_name(p) {
+	var m = /^(.+)\s(.+)$/.exec(p.name);
+	if (m) {
+		return m[2] + ', ' + m[1];
+	} else {
+		return p.name;
+	}
+}
+
+function calc_setup_data(event) {
+	var res = {};
+	event.matches.forEach(function(match, match_idx) {
+		['Heim', 'Gast'].forEach(function(team_id, team_idx) {
+			var players = match.setup.teams[team_idx].players;
+			var pnames = players.map(calc_btde_player_name);
+
+			if (match.setup.is_doubles) {
+				res[team_id + team_idx + '0'] = (pnames.length >= 1) ? pnames[0] : '';
+				res[team_id + team_idx + '1'] = (pnames.length == 2) ? pnames[1] : '';
+			} else {
+				res[team_id + team_idx] = (pnames.length === 1) ? pnames[0] : '';
+			}
+		});
+	});
+	return res;
+}
+
+function on_edit_event(s, cb) {
+	var data = calc_setup_data(s.event);
+	_request(s, 'btde.changeevent', {
+		url: baseurl + 'login/start.php',
+		data: data,
+		method: 'post',
+	}, function(err) {
+		if (err) {
+			return cb(err);
+		}
+
+		return cb(null);
+	});
+}
+
+function parse_key_players(html, key, gender) {
+	var options_m = new RegExp(
+		'<datalist\\s+id="' + key + '">\\s*' +
+		'<select\\s+class="none">\\s*' +
+		'((?:<option>[^<]*</option>)*)' +
+		'\\s*</select>'
+	).exec(html);
+	if (!options_m) {
+		return [];
+	}
+
+	var names_m = utils.match_all(/<option>([^<]+)<\/option>/g, options_m[1]);
+	return names_m.map(function(m) {
+		var p = _parse_player(m[1]);
+		p.gender = gender;
+		return p;
+	});
+}
+
+function list_all_players(s, cb) {
+	_request(s, 'btde.list_all_players', {
+		url: baseurl + 'login/start.php',
+	}, function(err, html) {
+		if (err) {
+			return cb(err);
+		}
+
+		var all_players = [
+			parse_key_players(html, 'heimM', 'm').concat(
+				parse_key_players(html, 'heimF', 'f')),
+			parse_key_players(html, 'gastM', 'm').concat(
+				parse_key_players(html, 'gastF', 'f'))];
+		return cb(null, all_players);
+	});
+
 }
 
 return {
@@ -359,6 +438,8 @@ return {
 	courts: courts,
 	service_name: service_name,
 	editable: editable,
+	on_edit_event: on_edit_event,
+	list_all_players: list_all_players,
 	// Testing only
 	_parse_match_list: _parse_match_list,
 };

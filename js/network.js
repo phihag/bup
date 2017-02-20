@@ -626,7 +626,13 @@ function on_edit_event(s) {
 		return;
 	}
 	s.event.last_update = Date.now();
-	netw.on_edit_event(s);
+	netw.on_edit_event(s, function(err) {
+		if (err) {
+			report_problem.silent_error(err.message);
+			alert('Failed to save event');
+		}
+		// TODO show errors
+	});
 	refmode_client_ui.on_event_update();
 }
 

@@ -314,6 +314,7 @@ function ui_render_init(s) {
 }
 
 function rerender(s) {
+	console.log('rerendering')
 	listed.forEach(function(team, team_id) {
 		var table = uiu.qs('#setupsheet_table_team' + team_id);
 		uiu.empty(table);
@@ -562,6 +563,7 @@ function show() {
 	} else {
 		uiu.visible_qs('.setupsheet_loading-icon', true);
 		network.list_full_event(state, function(err) {
+			console.log('LISTED FULL EVENT; LETS GO', state.event.all_players)
 			uiu.visible_qs('.setupsheet_error', !!err);
 			uiu.visible_qs('.setupsheet_loading-icon', false);
 			if (err) {
