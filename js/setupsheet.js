@@ -272,7 +272,15 @@ function pdf() {
 	var filename = state._('setupsheet:filename', {
 		event_name: state.event.event_name,
 	});
+	svg_container.setAttribute('style', 'display: block; position: absolute; top: -9999px;');
+	for (var i = 0;i < svgs.length;i++) {
+		svgs[i].setAttribute('style', 'width: 2970px; height: 2100px;')
+	}
 	svg2pdf.save(svgs, {}, 'portrait', filename);
+	for (var i = 0;i < svgs.length;i++) {
+		svgs[i].removeAttribute('style');
+	}
+	svg_container.removeAttribute('style');
 }
 
 function ui_render_init(s) {
