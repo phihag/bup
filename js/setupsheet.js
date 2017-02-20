@@ -485,8 +485,12 @@ function fill_svg(s, svg_root, sheet_name, team_id)  {
 			fill_text(fixed, 'd-' + col_id, col_text);
 		});
 
-		fill_text(svg_root, 'label_backup_' + gender, s._('setupsheet:longlabel:backup'));
-		fill_text(svg_root, 'label_present_' + gender, s._('setupsheet:longlabel:present'));
+		if (g_cfg.indexOf('backup') >= 0) {
+			fill_text(svg_root, 'label_backup_' + gender, s._('setupsheet:longlabel:backup'));
+		}
+		if (g_cfg.indexOf('present') >= 0) {
+			fill_text(svg_root, 'label_present_' + gender, s._('setupsheet:longlabel:present'));
+		}
 
 		yoffset += height * (num_lines - 1);
 	});

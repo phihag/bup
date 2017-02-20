@@ -40,18 +40,17 @@
 .setupsheet_table th.setupsheet_dark {
 	border: none;
 }
-.setupsheet_table tr :first-child {
-	border-left: none;
-}
-.setupsheet_table tr :last-child {
-	border-right: none;
-}
 .setupsheet_table th.setupsheet_team_name {
+	border: none;
+}
+.setupsheet_table .setupsheet_new {
 	border: none;
 }
 
 .setupsheet_x_cell {
 	text-align: center;
+	user-select: none;
+	cursor: pointer;
 }
 .setupsheet_x_marked {
 	background: #eee;
@@ -75,7 +74,7 @@
 }
 
 .setupsheet_player_name {
-	min-width: 10em;
+	min-width: 11em;
 }
 .setupsheet_team_name {
 	text-align: left;
