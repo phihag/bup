@@ -19,7 +19,7 @@ function download_file_ifneeded(url, fn, cb) {
 }
 
 function download_file(url, fn, cb) {
-	console.log('Downloading ' + url)
+	console.log('Downloading ' + url);
 	const tmp_fn = fn + '.download';
 	const file = fs.createWriteStream(tmp_fn);
 	https.get(url, response => {
