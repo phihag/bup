@@ -1,0 +1,34 @@
+[
+{
+	"url": "https://code.jquery.com/jquery-2.1.4.min.js",
+	"file": "jquery.min.js"
+},
+{
+	"url": "https://craig.global.ssl.fastly.net/js/mousetrap/mousetrap.min.js",
+	"file": "mousetrap.min.js"
+},
+{
+	"url": "https://raw.githubusercontent.com/ftlabs/fastclick/master/lib/fastclick.js",
+	"file": "fastclick.js"
+},
+{
+	"url": "https://raw.githubusercontent.com/phihag/jsPDF/dist/dist/jspdf.min.js",
+	"file": "jspdf.min.js"
+},
+{
+	"url": "https://raw.githubusercontent.com/phihag/pdfform.js/dist/dist/pdfform.minipdf.dist.js",
+	"file": "pdfform.minipdf.dist.js"
+},
+{
+	"url": "https://raw.githubusercontent.com/eligrey/FileSaver.js/master/FileSaver.min.js",
+	"file": "FileSaver.min.js"
+},
+{
+	"url": "https://raw.githubusercontent.com/phihag/text-encoding-utf-8/master/lib/encoding.js",
+	"file": "encoding.js"
+},
+{
+	"url": "https://raw.githubusercontent.com/Stuk/jszip/master/dist/jszip.min.js",
+	"file": "jszip.min.js"
+}
+]
