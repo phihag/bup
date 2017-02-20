@@ -5,30 +5,18 @@ help:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  %-13s %s\n", $$1, $$2}'
 	@echo '  help          This message'
 
-
-install-libs:
-	test -e libs/.completed || $(MAKE) force-install-libs
-
-force-install-libs:
-	mkdir -p libs
-	wget https://code.jquery.com/jquery-2.1.4.min.js -O libs/jquery.min.js
-	wget https://craig.global.ssl.fastly.net/js/mousetrap/mousetrap.min.js -O libs/mousetrap.min.js
-	wget https://raw.githubusercontent.com/ftlabs/fastclick/master/lib/fastclick.js -O libs/fastclick.js
-	wget https://raw.githubusercontent.com/phihag/jsPDF/dist/dist/jspdf.min.js -O libs/jspdf.min.js
-	wget https://raw.githubusercontent.com/phihag/pdfform.js/dist/dist/pdfform.minipdf.dist.js -O libs/pdfform.minipdf.dist.js
-	wget https://raw.githubusercontent.com/eligrey/FileSaver.js/master/FileSaver.min.js -O libs/FileSaver.min.js
-	wget https://raw.githubusercontent.com/phihag/text-encoding-utf-8/master/lib/encoding.js -O libs/encoding.js
-	wget https://raw.githubusercontent.com/Stuk/jszip/master/dist/jszip.min.js -O libs/jszip.min.js
-	touch libs/.completed
+download-libs:
+	node div/download_libs.js div/libs.json libs/
 
 deps: deps-essential ## Download and install all dependencies (for compiling / testing / CLI operation)
 	$(MAKE) deps-optional
 
 deps-mandatory: deps-essential
 
-deps-essential: install-libs
+deps-essential:
 	(node --version && npm --version) >/dev/null 2>/dev/null || sudo apt-get install nodejs npm
 	npm install
+	$(MAKE) download-libs
 
 deps-optional:
 	test -e ./node_modules/wrtc/build/Release/obj.target/wrtc/src/peerconnection.o || npm install wrtc || echo 'wrtc installation failed. Continuing without wrtc...'
@@ -145,4 +133,4 @@ install-hub: deps
 	systemctl enable buphub
 	systemctl start buphub
 
-.PHONY: default help deps deps-essential deps-mandatory deps-optional test clean install-libs force-install-libs upload dist cleandist coverage coverage-display cd lint jshint eslint appcache-manifest manifest upload-run stylelint doclint deps-essential sat-hub root-hub install-hub
+.PHONY: default help deps deps-essential deps-mandatory deps-optional test clean download-libs upload dist cleandist coverage coverage-display cd lint jshint eslint appcache-manifest manifest upload-run stylelint doclint deps-essential sat-hub root-hub install-hub

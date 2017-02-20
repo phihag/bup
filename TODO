@@ -7,6 +7,8 @@ refmode: push to client
 refmode: start a new match from JSON
 refmode: make sure to prevent loops
 
+helper script to install libs
+
 Android app
 SFTP (for BVM)
 
