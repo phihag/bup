@@ -367,10 +367,10 @@ function calc_setup_data(event) {
 			var pnames = players.map(calc_btde_player_name);
 
 			if (match.setup.is_doubles) {
-				res[team_id + team_idx + '0'] = (pnames.length >= 1) ? pnames[0] : '';
-				res[team_id + team_idx + '1'] = (pnames.length == 2) ? pnames[1] : '';
+				res[team_id + (match_idx + 1) + '0'] = (pnames.length >= 1) ? pnames[0] : '';
+				res[team_id + (match_idx + 1) + '1'] = (pnames.length == 2) ? pnames[1] : '';
 			} else {
-				res[team_id + team_idx] = (pnames.length === 1) ? pnames[0] : '';
+				res[team_id + (match_idx + 1)] = (pnames.length === 1) ? pnames[0] : '';
 			}
 		});
 	});

@@ -671,7 +671,7 @@ function list_full_event(s, callback) {
 				return callback();
 			});
 		} else {
-			event.all_players = all_players;
+			s.event.all_players = all_players;
 			return callback();
 		}
 	});

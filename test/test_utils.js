@@ -267,6 +267,7 @@ _describe('helper functions', function() {
 				['Patz', 'Eric'],
 				['Szydlowski', 'Przemyskaw'],
 				['Wadenka', 'Tobias'],
-			])
-	})
+			]
+		);
+	});
 });
