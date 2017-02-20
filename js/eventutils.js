@@ -245,6 +245,10 @@ function name_by_league(league_key) {
 	return league_key;
 }
 
+function is_bundesliga(league_key) {
+	return /^(?:1BL|2BLN|2BLS)-(?:2015|2016)$/.test(league_key);
+}
+
 function is_incomplete(setup) {
 	return (
 		(setup.teams[0].players.length !== setup.teams[1].players.length) ||
@@ -390,6 +394,7 @@ return {
 	NRW2016_RE: NRW2016_RE,
 	set_incomplete: set_incomplete,
 	set_metadata: set_metadata,
+	is_bundesliga: is_bundesliga,
 	// Testing only
 	name_by_league: name_by_league,
 };

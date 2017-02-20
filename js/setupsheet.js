@@ -9,7 +9,6 @@ var DE_CONFIG = {
 	m: ['1.HD', '2.HD', '1.HE', '2.HE', '3.HE', 'GD', 'backup'],
 	f: ['dark', 'dark', 'dark', 'DE', 'DD', 'GD', 'backup'],
 };
-
 var CONFIGS = {
 	'1BL-2016': BULI2016_CONFIG,
 	'2BLN-2016': BULI2016_CONFIG,
@@ -18,6 +17,13 @@ var CONFIGS = {
 	'RLN-2016': DE_CONFIG,
 	'RLM-2016': DE_CONFIG,
 };
+
+var URLS = {
+	'bundesliga-2016': 'div/setupsheet_bundesliga-2016.svg',
+	'default': 'div/setupsheet_default.svg',
+};
+var dl;
+
 var GENDERS = ['m', 'f'];
 var LIMITS = {
 	m: {
@@ -32,6 +38,16 @@ var LIMITS = {
 		'DD': 2,
 		'DE': 1,
 		'GD': 1,
+	},
+};
+var MIN_LENGTHS = {
+	'bundesliga-2016': {
+		m: 7,
+		f: 4,
+	},
+	'default': {
+		m: 8,
+		f: 4,
 	},
 };
 
@@ -228,7 +244,6 @@ function on_new_form_submit(e) {
 
 function on_add_change(e) {
 	var select = e.target;
-	var team_id = parseInt(select.getAttribute('data-team_id'), 10);
 	var val = select.value;
 	if (!val) {
 		return;
@@ -363,13 +378,132 @@ function rerender(s) {
 }
 
 function render_svg(s) {
-	// TODO
+	var sheet_name = eventutils.is_bundesliga(s.event.league_key) ? 'bundesliga-2016' : 'default';
+	if (!dl) {
+		dl = downloader(URLS);
+	}
+	dl.load(sheet_name, function(xml_str) {
+		var svg_container = uiu.qs('.setupsheet_svg_container');
+		uiu.empty(svg_container);
+		for (var team_id = 0;team_id < 2;team_id++) {
+			var svg_doc = (new DOMParser()).parseFromString(xml_str, 'text/xml');
+			var svg_root = svg_doc.documentElement;
+
+			fill_svg(s, svg_root, sheet_name, team_id);
+			svg_container.appendChild(svg_root);
+		}
+	});
+}
+
+function change_yoffset(container, yoffset) {
+	uiu.qsEach('text,rect', function(text) {
+		var y = parseFloat(text.getAttribute('y'));
+		text.setAttribute('y', y + yoffset);
+	}, container);
+	uiu.qsEach('line', function(line) {
+		var y1 = parseFloat(line.getAttribute('y1'));
+		line.setAttribute('y1', y1 + yoffset);
+		var y2 = parseFloat(line.getAttribute('y2'));
+		line.setAttribute('y2', y2 + yoffset);
+	}, container);
+}
+
+function fill_text(container, fill_id, text) {
+	var el = uiu.qs('text[data-fill-id="' + fill_id + '"]', container);
+	uiu.text(el, text);
+}
+
+function fill_svg(s, svg_root, sheet_name, team_id)  {
+	fill_text(svg_root, 'tournament_name', s.event.tournament_name);
+	fill_text(svg_root, 'event_name', s.event.event_name);
+	fill_text(svg_root, 'setup_desc', s._('setupsheet:setup|' + team_id));
+	fill_text(svg_root, 'team_name', s.event.team_names[team_id]);
+
+	var yoffset = 0;
+	GENDERS.forEach(function(gender) {
+		var num_lines = Math.max(MIN_LENGTHS[sheet_name][gender], listed[team_id][gender].length);
+		var g_cfg = cfg[gender];
+
+		var template = uiu.qs('g[data-fill-id="template_' + gender + '"]', svg_root);
+		var height = parseFloat(template.getAttribute('data-fill-height'));
+		template.parentNode.removeChild(template);
+
+		for (var i = 0;i < num_lines;i++) {
+			var g = template.cloneNode(true);
+
+			fill_text(g, 'idx', i + 1);
+
+			var listed_player = listed[team_id][gender][i];
+			if (listed_player) {
+				fill_text(g, 'name', listed_player.name);
+
+				g_cfg.forEach(function(col, col_id) {
+					if (col === 'dark') {
+						return;
+					}
+
+					if (cur_plays_in(col, team_id, listed_player)) {
+						fill_text(g, 'x_' + col_id, 'x');
+					}
+				});
+			}
+
+			change_yoffset(g, yoffset + i * height);
+
+			if (i === num_lines - 1) {
+				uiu.qsEach('line[data-fill-id="bottom_line"]', function(bl) {
+					uiu.removeClass(bl, 'thin');
+					uiu.addClass(bl, 'thick');
+				}, g);
+			}
+			svg_root.appendChild(g);
+		}
+
+		var vlines = uiu.qs('g[data-fill-id="vlines_' + gender + '"]', svg_root);
+		change_yoffset(vlines, yoffset);
+		uiu.qsEach('line', function(vline) {
+			var y2 = parseFloat(vline.getAttribute('y2'));
+			vline.setAttribute('y2', y2 + height * (num_lines - 1));
+		}, vlines);
+		uiu.qsEach('rect', function(vline) {
+			var h = parseFloat(vline.getAttribute('height'));
+			vline.setAttribute('height', h + height * (num_lines - 1));
+		}, vlines);
+
+		var fixed = uiu.qs('g[data-fill-id="fixed_' + gender + '"]', svg_root);
+		change_yoffset(fixed, yoffset);
+		fill_text(fixed, 'header', s._('setupsheet:header|' + gender));
+		g_cfg.forEach(function(col, col_id) {
+			if (col === 'dark') {
+				return;
+			}
+			var col_text = (
+				(col === 'backup') ? s._('setupsheet:header:backup') :
+				((col === 'present') ? s._('setupsheet:header:present') :
+				col
+			));
+			fill_text(fixed, 'd-' + col_id, col_text);
+		});
+
+		fill_text(svg_root, 'label_backup_' + gender, s._('setupsheet:longlabel:backup'));
+		fill_text(svg_root, 'label_present_' + gender, s._('setupsheet:longlabel:present'));
+
+		yoffset += height * (num_lines - 1);
+	});
+
+	var lower = uiu.qs('g[data-fill-id="lower"]', svg_root);
+	change_yoffset(lower, yoffset);
+	fill_text(lower, 'teamster_label', s._('setupsheet:teamster'));
+	fill_text(lower, 'signature', s._('setupsheet:signature'));
+
 }
 
 function show() {
 	if (state.ui.setupsheet_visible) {
 		return;
 	}
+
+	printing.set_orientation('portrait');
 
 	if (typeof jsPDF !== 'undefined') {
 		jspdf_loaded();
@@ -459,9 +593,11 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var click = require('./click');
 	var control = require('./control');
+	var downloader = require('./downloader');
 	var eventsheet = require('./eventsheet');
 	var eventutils = require('./eventutils');
 	var network = require('./network');
+	var printing = require('./printing');
 	var refmode_referee_ui = null; // break cycle, should be require('./refmode_referee_ui');
 	var render = require('./render');
 	var settings = require('./settings');

@@ -74,6 +74,12 @@ var i18n_en = {
 'setupsheet:enter player name': 'player name:',
 'setupsheet:pdf': 'PDF',
 'setupsheet:print': 'Print',
+'setupsheet:setup|0': 'Home Team Setup',
+'setupsheet:setup|1': 'Away Team Setup',
+'setupsheet:teamster': 'Teamster',
+'setupsheet:signature': 'Signature',
+'setupsheet:longlabel:backup': 'backup',
+'setupsheet:longlabel:present': 'present',
 
 'button:undo': 'Undo',
 'button:settings': 'Configuration',

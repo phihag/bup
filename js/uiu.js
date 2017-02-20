@@ -40,15 +40,19 @@ function visible(node, val) {
 	}
 }
 
-function qs(selector) {
+function qs(selector, container) {
+	if (! container) {
+		container = document;
+	}
+
 	/*@DEV*/
-	var all_nodes = document.querySelectorAll(selector);
+	var all_nodes = container.querySelectorAll(selector);
 	if (all_nodes.length !== 1) {
 		throw new Error(all_nodes.length + ' nodes matched by qs ' + selector);
 	}
 	/*/@DEV*/
 
-	var node = document.querySelector(selector);
+	var node = container.querySelector(selector);
 	if (! node) {
 		report_problem.silent_error('Expected to find qs  ' + selector + ' , but no node matching.');
 		return;

@@ -75,12 +75,6 @@
 	}
 }
 @media print {
-	@page {
-		size: landscape;
-		size: landscape A4;
-		margin: 0;
-	}
-
 	body,
 	html,
 	.scoresheet_container {

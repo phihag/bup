@@ -74,6 +74,12 @@ var i18n_de = {
 'setupsheet:enter player name': 'Spieler-Name:',
 'setupsheet:pdf': 'PDF',
 'setupsheet:print': 'Drucken',
+'setupsheet:setup|0': 'Aufstellung der Heim-Mannschaft',
+'setupsheet:setup|1': 'Aufstellung der Gast-Mannschaft',
+'setupsheet:teamster': 'Mannschaftsführer',
+'setupsheet:signature': 'Unterschrift',
+'setupsheet:longlabel:backup': 'Ersatz',
+'setupsheet:longlabel:present': 'Anwesend',
 
 'button:undo': 'Rückgängig',
 'button:settings': 'Konfiguration',

@@ -945,6 +945,7 @@ function event_show() {
 	}
 	uiu.addClass_qs('.scoresheet_container', 'scoresheet_container_multi');
 
+	printing.set_orientation('landscape');
 	state.ui.event_scoresheets_visible = true;
 	control.set_current(state);
 
@@ -973,6 +974,8 @@ function show() {
 	if (!state.initialized) {
 		return; // Called on start with Shift+S
 	}
+
+	printing.set_orientation('landscape');
 
 	if (state.ui.scoresheet_visible) {
 		return;
@@ -1083,24 +1086,12 @@ var URLS = {
 	'international_5x11': 'div/scoresheet_international_5x11.svg',
 	'bundesliga-2016': 'div/scoresheet_bundesliga-2016.svg',
 };
-var files = {};
-function load_sheet(key, callback) {
-	if (key in files) {
-		return callback(files[key]);
+var dl;
+function load_sheet(sheet_name, cb) {
+	if (! dl) {
+		dl = downloader(URLS);
 	}
-
-	var url = URLS[key];
-	var xhr = new XMLHttpRequest();
-	xhr.open('GET', url, true);
-	xhr.responseType = 'text';
-
-	xhr.onload = function() {
-		files[key] = this.response;
-		if (callback) {
-			callback(files[key]);
-		}
-	};
-	xhr.send();
+	return dl.load(sheet_name, cb);
 }
 
 function make_sheet_node(xml) {
@@ -1163,8 +1154,10 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
 	var click = require('./click');
 	var control = require('./control');
+	var downloader = require('./downloader');
 	var i18n = require('./i18n');
 	var network = require('./network');
+	var printing = require('./printing');
 	var refmode_referee_ui = require('./refmode_referee_ui');
 	var render = require('./render');
 	var settings = require('./settings');

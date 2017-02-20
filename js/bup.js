@@ -45,6 +45,7 @@ function ui_init() {
 	shortcuts.ui_init(state);
 	refmode_client_ui.ui_init(state);
 	refmode_referee_ui.ui_init();
+	printing.set_orientation('landscape');
 
 	var hash_query = utils.parse_query_string(window.location.hash.substr(1));
 	if (hash_query.lang) {
@@ -96,6 +97,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var network = require('./network');
 	var order = require('./order');
 	var p2p = require('./p2p');
+	var printing = require('./printing');
 	var pronunciation = require('./pronunciation');
 	var refmode_client = require('./refmode_client');
 	var refmode_client_ui = require('./refmode_client_ui');

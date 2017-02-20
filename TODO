@@ -1,12 +1,18 @@
 setupsheet
-	print
-		make sure layout contains BuLi-Logo
 	pdf
+		svg2pdf: portrait!
+	create default template
+		add 3. he
+		extend women dark
+		remove present
+	test with NRW
+	test with BuLi
 	save button (sets event.state and transmits this)
 	submit to btde
 	submit to courtspot
 	highlight column header on mouseover (remove CSS-based approach)
 	browser back fails!
+	Esc should cancel correctly
 	Message "Yes, correct." || "No, check doubles/singles" || "no info"
 	check doubles ranking
 	check for too many foreigners
@@ -17,6 +23,7 @@ setupsheet
 	edit this -> CourtSpot
 	check singles ranking
 	editevent: show nationality if non-EU
+editevent: Esc should cancel correctly
 Anzeige: Sätze
 
 
@@ -47,9 +54,15 @@ make colors configurable
 ads!
 -> Markus Schwendtner
 
+demo: make display work
+
 20s delay clock (BC)
 
 BTS support
+
+editevent: allow changing fields
+editevent: allow selecting event (when supported by ticker)
+editevent: allow selecting event (when no ticker: load from JSON)
 
 import without all_players => load_all_players
 editevent: recalc incomplete when setting to N.N.

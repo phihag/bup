@@ -130,3 +130,23 @@ td:hover .setupsheet_delete_button {
 .setupsheet_buttons > button + button {
 	margin-left: 5vw;
 }
+
+.setupsheet_svg_container {
+	display: none;
+}
+
+/* SVG version: only for print */
+@media print {
+	.setupsheet_container {
+		display: none;
+	}
+	.setupsheet_svg_container {
+		display: block;
+	}
+	.setupsheet_svg_container svg {
+		width: 99%;
+	}
+	.setupsheet_svg_container svg + svg {
+		page-break-before: always;
+	}
+}

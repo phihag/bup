@@ -224,6 +224,8 @@ function show() {
 		return;
 	}
 
+	printing.set_orientation('landscape');
+
 	if (state.ui.referee_mode) {
 		refmode_referee_ui.hide_tmp();
 	} else {
@@ -580,6 +582,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
 	var eventutils = require('./eventutils');
 	var network = require('./network');
+	var printing = require('./printing');
 	var refmode_referee_ui = null; // break cycle, should be require('./refmode_referee_ui');
 	var render = require('./render');
 	var settings = require('./settings');
