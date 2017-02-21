@@ -1,3 +1,6 @@
+Aufstellungen crashes in referee mode
+
+
 refmode: push to client
 	rerender UI
 	disable timeouts

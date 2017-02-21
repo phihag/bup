@@ -74,6 +74,8 @@ dist: cleandist ## Create distribution files
 		div/Spielbericht_8x3x21.svg \
 		div/Spielberichtsbogen_1BL-2015.pdf \
 		div/Spielberichtsbogen_2BL-2015.pdf \
+		div/setupsheet_bundesliga-2016.svg \
+		div/setupsheet_default.svg \
 		div/wakelock.mp4 \
 		--target-directory dist/bup/div/
 
