@@ -7,7 +7,7 @@ refmode: push to client
 refmode: start a new match from JSON
 refmode: make sure to prevent loops
 
-helper script to install libs
+make lint work on macOS
 
 Android app
 SFTP (for BVM)

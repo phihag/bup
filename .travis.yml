@@ -15,6 +15,8 @@ addons:
 
 before_script:
   - make deps
+script:
+  - make test
   - make lint
 notifications:
   email:
