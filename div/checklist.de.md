@@ -104,6 +104,7 @@ Während des Spiels:
 - [ ] Bei gelben/roten Karten:
   - [ ] Schiedsrichterzettel ausdrucken
   - [ ] Notiz auf Spielbericht vorbereiten
+- [ ] Ausgefülltes Mindestanforderungen-Formular in/auf die Bundesligamappe legen
 
 Nach Spielende:
 
