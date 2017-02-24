@@ -298,8 +298,7 @@ function show() {
 				if (err) {
 					uiu.text_qs('.editevent_error_message', err.msg);
 				} else {
-					hide();
-					show();
+					hide_and_back();
 				}
 			});
 		});

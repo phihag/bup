@@ -100,6 +100,9 @@ function list_matches(s, cb) {
 				msg: 'miniticker-Aktualisierung fehlgeschlagen: Server-Fehler erkannt',
 			});
 		}
+		if (!ev.matches) ev.matches = [];
+		if (!ev.team_names) ev.team_names = ['', ''];
+
 		eventutils.annotate(state, ev);
 		eventutils.set_incomplete(ev);
 

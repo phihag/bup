@@ -302,11 +302,14 @@ function pdf() {
 }
 
 function ui_render_init(s) {
+	var err_display = uiu.qs('.setupsheet_error');
+	uiu.hide(err_display);
+	uiu.text(err_display);
 	cfg = calc_config(s.event.league_key);
 	if (!cfg) {
-		var err_display = uiu.qs('.setupsheet_error');
-		uiu.visible(err_display, true);
+		uiu.show(err_display);
 		uiu.text(err_display, 'Unsupported league: ' + s.event.league_key);
+		return;
 	}
 	listed = calc_listed(s.event);
 	cur_players = calc_cur_players(cfg, s.event);
