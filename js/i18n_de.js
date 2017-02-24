@@ -60,6 +60,7 @@ var i18n_de = {
 'editevent:add backup player': 'Ersatzspieler hinzufügen ...',
 'editevent:present players': 'Anwesende Spieler',
 'editevent:add present player': 'Anwesende hinzufügen ...',
+'editevent:select event': 'Auswählen',
 
 'setupsheet:header|m': 'Herren',
 'setupsheet:header|f': 'Damen',

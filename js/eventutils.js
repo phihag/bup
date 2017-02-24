@@ -384,6 +384,35 @@ function set_not_before(league_key, match_states) {
 	});
 }
 
+function make_empty_matches(league_key, event_id) {
+	if (/^(?:1BL|2BLN|2BLS)-2016$/.test(league_key)) {
+		var rawdef = [
+			{name: '1.HD', is_doubles: true},
+			{name: 'DD', is_doubles: true},
+			{name: '2.HD', is_doubles: true},
+			{name: '1.HE', is_doubles: false},
+			{name: 'DE', is_doubles: false},
+			{name: 'GD', is_doubles: true},
+			{name: '2.HE', is_doubles: false},
+		];
+		var counting = '5x11_15';
+
+		return rawdef.map(function(rd) {
+			return {
+				setup: {
+					match_name: rd.name,
+					match_id: event_id + '_' + rd.name,
+					counting: counting,
+					is_doubles: rd.is_doubles,
+					teams: [{players: []}, {players: []}],
+				},
+			};
+		});
+	}
+
+	throw new Error('Cannot create matches for ' + league_key);
+}
+
 return {
 	annotate: annotate,
 	calc_all_players: calc_all_players,
@@ -395,6 +424,7 @@ return {
 	set_incomplete: set_incomplete,
 	set_metadata: set_metadata,
 	is_bundesliga: is_bundesliga,
+	make_empty_matches: make_empty_matches,
 	// Testing only
 	name_by_league: name_by_league,
 };

@@ -252,18 +252,60 @@ function show() {
 		uiu.visible_qs('.editevent_loading-icon', false);
 		render_table(state);
 	} else {
-		uiu.visible_qs('.editevent_loading-icon', true);
+		uiu.show_qs('.editevent_loading-icon');
 		network.list_matches(state, function(err, ev) {
 			uiu.visible_qs('.editevent_error', !!err);
 			uiu.visible_qs('.editevent_loading-icon', false);
 			if (err) {
-				$('.editevent_error_message').text(err.msg);
+				uiu.text_qs('.editevent_error_message', err.msg);
 				return;
 			}
 			network.update_event(state, ev);
 			render_table(state);
 		});
 	}
+
+	network.list_events(state, function(err, events) {
+		var sel_container = uiu.qs('.editevent_select');
+		if (err && (err.code === 'unsupported')) {
+			uiu.hide(sel_container);
+			return;
+		}
+
+		uiu.empty(sel_container);
+		var form = uiu.create_el(sel_container, 'form');
+		var select = uiu.create_el(form, 'select', {
+			required: 'required',
+		});
+		uiu.create_el(select, 'option', {
+			selected: 'selected',
+			disabled: 'disabled',
+			value: '',
+		});
+		events.forEach(function(ev) {
+			uiu.create_el(select, 'option', {
+				value: JSON.stringify(ev),
+			}, ev.date + ' ' + ev.starttime + ' ' + ev.team_names[0] + ' - ' + ev.team_names[1]);
+		});
+		uiu.create_el(form, 'button', {
+			role: 'submit',
+		}, state._('editevent:select event'));
+		form.addEventListener('submit', function(e) {
+			e.preventDefault();
+			uiu.show_qs('.editevent_loading-icon');
+			network.select_event(state, JSON.parse(select.value), function(err) {
+				uiu.hide_qs('.editevent_loading-icon');
+				if (err) {
+					uiu.text_qs('.editevent_error_message', err.msg);
+				} else {
+					hide();
+					show();
+				}
+			});
+		});
+
+		uiu.show(sel_container);
+	});
 }
 
 function hide() {
@@ -297,13 +339,6 @@ function ui_init() {
 	click.qs('.editevent_back', function(e) {
 		e.preventDefault();
 		hide_and_back();
-	});
-
-	var layout = uiu.qs('.editevent_layout');
-	click.on(layout, function(e) {
-		if (e.target === layout) {
-			hide_and_back();
-		}
 	});
 }
 

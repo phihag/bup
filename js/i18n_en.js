@@ -60,6 +60,7 @@ var i18n_en = {
 'editevent:add backup player': 'Add backup player ...',
 'editevent:present players': 'Present players',
 'editevent:add present player': 'Add present player ...',
+'editevent:select event': 'select event',
 
 'setupsheet:header|m': 'Men',
 'setupsheet:header|f': 'Women',

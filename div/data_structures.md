@@ -29,6 +29,7 @@ team_names      Array of home and away team name. Required for team competitions
                 Example: ["TV Refrath", "BC Bischmisheim"]
 umpires         String describing umpires (for eventsheet), e.g. "Barbara Bub & Klaus-Michael Becker"
 starttime       Human-readable official start time, e.g. "19:00"
+date            Human-readable official day of match, e.g. "12.3.2017"
 matchday        Match day according to league plan, e.g. "1" (first game of the season) or "semi-finals"
 notes           Non-protest notes, e.g. "Bundesliga logo missing on front of information sheet"
 event_name      Name of the event (will be present on scoresheet), e.g. "Finals".

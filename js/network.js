@@ -4,7 +4,7 @@ var network = (function() {
 var networks = {};
 
 function get_real_netw() {
-	return networks.rlmdemo || networks.nrwdemo || networks.bldemo || networks.bldemo_inprogress || networks.bldemo_incomplete || networks.vdemo || networks.edemo || networks.btde || networks.courtspot || networks.liveaw || networks.jticker;
+	return networks.rlmdemo || networks.nrwdemo || networks.bldemo || networks.bldemo_inprogress || networks.bldemo_incomplete || networks.vdemo || networks.edemo || networks.btde || networks.mt || networks.courtspot || networks.liveaw || networks.jticker;
 }
 
 function get_netw() {
@@ -551,6 +551,8 @@ function ui_init(s, hash_query) {
 		networks.courtspot = courtspot();
 	} else if (hash_query.btde !== undefined) {
 		networks.btde = btde();
+	} else if (hash_query.mt !== undefined) {
+		networks.mt = mt();
 	} else if (hash_query.liveaw_event_id) {
 		networks.liveaw = liveaw(hash_query.liveaw_event_id);
 	} else if (hash_query.jt_id !== undefined) {
@@ -687,6 +689,18 @@ function list_full_event(s, callback) {
 	});
 }
 
+function list_events(s, cb) {
+	var netw = get_netw();
+	if (! netw.list_events) {
+		cb({code: 'unsupported'});
+	}
+	netw.list_events(s, cb);
+}
+
+function select_event(s, evdef, cb) {
+	get_netw().select_event(s, evdef, cb);
+}
+
 return {
 	calc_team0_left: calc_team0_left,
 	courts: courts,
@@ -697,12 +711,14 @@ return {
 	install_refmode_push: install_refmode_push,
 	is_enabled: is_enabled,
 	list_all_players: list_all_players,
+	list_events: list_events,
 	list_full_event: list_full_event,
 	list_matches: list_matches,
 	match_by_id: match_by_id,
 	on_edit_event: on_edit_event,
 	request: request,
 	resync: resync,
+	select_event: select_event,
 	send_press: send_press,
 	subscribe: subscribe,
 	ui_init: ui_init,
@@ -730,6 +746,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var jticker = require('./jticker');
 	var liveaw = require('./liveaw');
 	var match_storage = require('./match_storage');
+	var mt = require('./mt');
 	var netstats = require('./netstats');
 	var p2p = require('./p2p');
 	var pronunciation = require('./pronunciation');

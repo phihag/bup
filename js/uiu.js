@@ -79,6 +79,14 @@ function show_qs(selector) {
 	visible_qs(selector, true);
 }
 
+function hide(node) {
+	visible(node, false);
+}
+
+function show(node) {
+	visible(node, true);
+}
+
 function disabled_qsa(qs, val) {
 	var nodes = document.querySelectorAll(qs);
 	for (var i = 0;i < nodes.length;i++) {
@@ -228,6 +236,7 @@ return {
 	esc_stack_pop: esc_stack_pop,
 	esc_stack_push: esc_stack_push,
 	hasClass: hasClass,
+	hide: hide,
 	hide_qs: hide_qs,
 	ns_el: ns_el,
 	qs: qs,
@@ -237,6 +246,7 @@ return {
 	removeClass: removeClass,
 	removeClass_qs: removeClass_qs,
 	setClass: setClass,
+	show: show,
 	show_qs: show_qs,
 	text: text,
 	text_qs: text_qs,

@@ -1,3 +1,6 @@
+start mt
+
+
 override display to show a court as blank (Dario)
 displaymode: option to vacate a court
 	set via settings
@@ -22,6 +25,7 @@ Uncaught TypeError: Cannot read property 'name' of undefined
     at handle_msg (http://localhost/bup/js/refmode_referee.js:313:3)
     at WebSocket.handle_msg_json (http://localhost/bup/js/refmode_conn.js:50:2)
 
+demo: select event
 test players_present with btde should be correctly adopted by referee
 displaymode: double display
 idea: mirror referee
