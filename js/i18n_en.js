@@ -454,6 +454,7 @@ var i18n_en = {
 'displaymode:oncourt': 'court score',
 'displaymode:court_id': 'court:',
 'displaymode:court_id:loading': 'loading ...',
+'displaymode:reverse_order': 'reverse court order',
 
 'liveaw:lost connection': 'Reconnecting ...',
 

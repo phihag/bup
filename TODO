@@ -1,9 +1,15 @@
+displaymode: option to switch sides (Günter-Display)
+	show/set via refmode
+
+refmode push!
+mt: add manual refresh (query hard!)
+
+refmode: update UI better
 override display to show a court as blank (Dario)
 displaymode: option to vacate a court
 	set via settings
 	set (via refmode)
 "20 Sekunden" im Ansagefeld nicht sichtbar wenn Auf- und Rückschläger bestimmt werden -> Jörg Hupertz
-displaymode: option to switch sides (Günter-Display)
 almost changed running match: ask again when changing if match is in progress!!!
 adopt event: show difference
 adopt event: recalc upon event change
@@ -21,11 +27,11 @@ Uncaught TypeError: Cannot read property 'name' of undefined
     at handle_msg (http://localhost/bup/js/refmode_referee.js:313:3)
     at WebSocket.handle_msg_json (http://localhost/bup/js/refmode_conn.js:50:2)
 
-demo: select event
+demo: add event
 test players_present with btde should be correctly adopted by referee
 displaymode: double display
 idea: mirror referee
-refmode: push to client
+refmode:
 	rerender UI
 	disable timeouts
 	client should get notified by updates
@@ -40,7 +46,6 @@ Android app
 SFTP (for BVM)
 
 Anzeige: Sätze
-refmode: update UI better
 handle und test old Android browsers
 go through all TVR reports and test that it works now
 

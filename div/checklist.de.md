@@ -49,7 +49,7 @@
   - [ ] Akku an Stativ befestigen
   - [ ] Handy befestigen
   - [ ] Auf lautlos stellen
-  - [ ] 4k
+  - [ ] Überprüfen: Genug freier Speicherplatz?
 - [ ] Link zum Ticker auf Facebook gepostet?
 
 90-60 Minuten vor Spielbeginn:

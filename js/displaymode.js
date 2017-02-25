@@ -85,10 +85,11 @@ function _calc_max_games(event) {
 	return res;
 }
 
-function hash(style, settings_displaymode_court_id, event) {
+function hash(settings, event) {
 	return {
-		style: style,
-		court_id: settings_displaymode_court_id,
+		style: settings.displaymode_style,
+		court_id: settings.displaymode_court_id,
+		reverse_order: settings.displaymode_reverse_order,
 		courts: utils.deep_copy(event.courts),
 		matches: utils.deep_copy(event.matches),
 	};
@@ -213,7 +214,7 @@ function _render_court_display(container, event, court, top_team_idx) {
 	_setup_autosize(bottom_team_span);
 }
 
-function render_top(container, event) {
+function render_top(s, container, event) {
 	if (! event.courts) {
 		return;
 	}
@@ -235,7 +236,8 @@ function render_top(container, event) {
 			'style': ('width: ' + court_width + '%;'),
 		});
 
-		var court = event.courts[court_idx];
+		var real_court_idx = s.settings.displaymode_reverse_order ? (court_count - 1 - court_idx) : court_idx;
+		var court = event.courts[real_court_idx];
 		_render_court_display(court_container, event, court);
 	}
 }
@@ -382,7 +384,7 @@ function update(err, s, event) {
 	network.update_event(s, event);
 
 	// If nothing has changed we can skip painting
-	var cur_event_hash = hash(style, s.settings.displaymode_court_id, event);
+	var cur_event_hash = hash(s.settings, event);
 	if (utils.deep_equal(cur_event_hash, _last_painted_hash)) {
 		return;
 	}
@@ -414,7 +416,7 @@ function update(err, s, event) {
 		break;
 	case 'top+list':
 	default:
-		render_top(container, event);
+		render_top(s, container, event);
 		render_list(container, event);
 	}
 

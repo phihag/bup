@@ -454,6 +454,7 @@ var i18n_de = {
 'displaymode:oncourt': 'Feld-Punktzahl',
 'displaymode:court_id': 'Court:',
 'displaymode:court_id:loading': 'lade ...',
+'displaymode:reverse_order': 'Umgekehrte Felder-Reihenfolge',
 
 'liveaw:lost connection': 'Verbindung wird wiederhergestellt ...',
 

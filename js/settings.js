@@ -147,6 +147,7 @@ var _settings_checkboxes = [
 	'shuttle_counter',
 	'editmode_doubleclick',
 	'refmode_client_enabled',
+	'displaymode_reverse_order',
 ];
 var _settings_textfields = ['umpire_name',
 	'service_judge_name',
@@ -243,8 +244,9 @@ function change_setting(s, name, val) {
 	case 'language':
 		i18n.ui_update_state(s);
 		break;
-	case 'displaymode_style':
 	case 'displaymode_court_id':
+	case 'displaymode_reverse_order':
+	case 'displaymode_style':
 		displaymode.on_style_change(s);
 		break;
 	case 'wakelock':
