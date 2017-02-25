@@ -1,9 +1,8 @@
-displaymode: option to switch sides (Günter-Display)
-	show/set via refmode
-
 refmode push!
-mt: add manual refresh (query hard!)
+mt: add manual refresh? (query hard)
 
+displaymode: only show options when applicable
+	(call option_applies)
 refmode: update UI better
 override display to show a court as blank (Dario)
 displaymode: option to vacate a court

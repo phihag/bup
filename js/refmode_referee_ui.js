@@ -49,6 +49,14 @@ function on_kill_button_click(e) {
 	}
 }
 
+function on_dmode_reverse_order_change(e) {
+	var client_id = _client_id(e);
+
+	rr.update_settings(client_id, {
+		displaymode_reverse_order: e.target.checked,
+	});
+}
+
 function on_push_start_button_click(e) {
 	var client_id = _client_id(e);
 	var c = rr.client_by_conn_id(client_id);
@@ -306,7 +314,7 @@ function render_clients(clients) {
 		var need_court = (
 			(c.mode === 'umpire') ||
 			((c.mode === 'display') &&
-				displaymode.court_specific(c.settings.displaymode_style)
+				displaymode.option_applies(c.settings.displaymode_style, 'court_id')
 			));
 		if (need_court) {
 			var court_row = uiu.create_el(div, 'div', {
@@ -413,6 +421,22 @@ function render_clients(clients) {
 			uiu.create_el(dstyle_form, 'button', {
 				'role': 'submit',
 			}, s._('refmode:referee:change display style'));
+
+			var can_reverse = (
+				displaymode.option_applies(c.settings.displaymode_style, 'reverse_order')
+			);
+			if (can_reverse) {
+				var reverse_label = uiu.create_el(dstyle_row, 'label', 'referee_c_blocklabel');
+				var attrs = {
+					type: 'checkbox',
+				};
+				if (c.settings.displaymode_reverse_order) {
+					attrs.checked = 'checked';
+				}
+				var reverse_checkbox = uiu.create_el(reverse_label, 'input', attrs);
+				uiu.create_el(reverse_label, 'span', {}, s._('displaymode:reverse_order'));
+				reverse_checkbox.addEventListener('change', on_dmode_reverse_order_change);
+			}
 		}
 
 		var event_row = uiu.create_el(div, 'div');

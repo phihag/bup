@@ -478,8 +478,13 @@ function ui_init() {
 	});
 }
 
-function court_specific(style_id) {
-	return 'oncourt' === style_id;
+function option_applies(style_id, option_name) {
+	switch (option_name) {
+	case 'court_id':
+		return style_id === 'oncourt';
+	case 'reverse_order':
+		return style_id === 'top+list';
+	}
 }
 
 return {
@@ -487,7 +492,7 @@ return {
 	hide: hide,
 	ui_init: ui_init,
 	on_style_change: on_style_change,
-	court_specific: court_specific,
+	option_applies: option_applies,
 	ALL_STYLES: ALL_STYLES,
 };
 

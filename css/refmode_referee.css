@@ -96,6 +96,9 @@
 	float: right;
 	display: block;
 }
+.referee_c_blocklabel {
+	display: block;
+}
 .referee_warning {
 	color: #f00;
 }
