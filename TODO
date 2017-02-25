@@ -1,6 +1,3 @@
-start mt
-
-
 override display to show a court as blank (Dario)
 displaymode: option to vacate a court
 	set via settings
@@ -12,7 +9,6 @@ adopt event: show difference
 adopt event: recalc upon event change
 Aufstellungen crashes in referee mode
 setupsheet: only go back once saved
-Aufstellungen btde: doppel falsch
 refmode: adopt: do not delete presses if match id stays the same
 Uncaught TypeError: Cannot read property 'name' of undefined
     at press_state_desc (http://localhost/bup/js/restats.js:664:65)
@@ -36,7 +32,7 @@ refmode: push to client
 	test that server gets notified by updates
 	fails if client was in no net previously
 refmode: start a new match from JSON
-refmode: make sure to prevent loops
+refmode push: make sure to prevent loops
 
 make lint work on macOS
 

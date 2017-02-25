@@ -224,7 +224,7 @@ function _parse_match_list(doc, now) {
 	var game_count = calc.max_game_count(counting);
 
 	var matches = doc.slice(1, doc.length).map(function(match) {
-		var is_doubles = /~/.test(match.heim) && /~/.test(match.gast);
+		var is_doubles = /HD|DD|GD/.test(match.dis);
 		var teams = [{
 			players: _parse_players(match.heim),
 		}, {
