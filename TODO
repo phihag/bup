@@ -1,5 +1,12 @@
+gelbe karte dauert lange zum Laden auf iPad
+beamer: invert colors (Rheinhart@BVM)
 refmode push!
 mt: add manual refresh? (query hard)
+make court descriptions configurable
+displaymode/onecourt: score larger!
+displaymode: only points, way larger (left / right)
+displaymode: 2 monitor mode -> Markus
+displaymode: invert
 
 displaymode: only show options when applicable
 	(call option_applies)
