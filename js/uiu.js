@@ -143,7 +143,7 @@ function ns_el(parent, ns, tagName, attrs, text) {
 	return el;
 }
 
-function create_el(parent, tagName, attrs, text) {
+function el(parent, tagName, attrs, text) {
 	var doc = parent ? parent.ownerDocument : document;
 	var el = doc.createElement(tagName);
 	if (attrs) {
@@ -230,9 +230,10 @@ return {
 	addClass_qs: addClass_qs,
 	closest: closest,
 	closest_class: closest_class,
-	create_el: create_el,
+	create_el: el, // Backwards compatibility only, will be removed
 	disabled_qsa: disabled_qsa,
 	empty: empty,
+	el: el,
 	esc_stack_pop: esc_stack_pop,
 	esc_stack_push: esc_stack_push,
 	hasClass: hasClass,

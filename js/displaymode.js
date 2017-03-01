@@ -55,12 +55,12 @@ function _list_render_player_names(container, players, winning) {
 	} else {
 		names_str = _doubles_name(players[0]) + ' / ' + _doubles_name(players[1]);
 	}
-	var div = uiu.create_el(
+	var div = uiu.el(
 		container, 'div', {
 			'class': 'display_list_player_names_wrapper',
 		}
 	);
-	var span = uiu.create_el(
+	var span = uiu.el(
 		div, 'span', {
 			'class': (winning ? 'display_list_winning' : ''),
 		}, names_str
@@ -69,11 +69,11 @@ function _list_render_player_names(container, players, winning) {
 }
 
 function _list_render_team_name(tr, team_name) {
-	var th = uiu.create_el(tr, 'th', {
+	var th = uiu.el(tr, 'th', {
 		'class': 'display_list_teamname',
 	});
-	var div = uiu.create_el(th, 'div');
-	var span = uiu.create_el(div, 'span', {}, team_name);
+	var div = uiu.el(th, 'div');
+	var span = uiu.el(div, 'span', {}, team_name);
 	return span;
 }
 
@@ -141,71 +141,71 @@ function _render_court_display(container, event, court, top_team_idx) {
 	var prev_scores = nscore.slice(0, -1);
 	var current_score = (nscore.length > 0) ? nscore[nscore.length - 1] : ['', ''];
 
-	var top_current_score = uiu.create_el(container, 'div', {
+	var top_current_score = uiu.el(container, 'div', {
 		'class': 'dcs_current_score_top',
 	}, current_score[top_team_idx]);
-	var bottom_current_score = uiu.create_el(container, 'div', {
+	var bottom_current_score = uiu.el(container, 'div', {
 		'class': 'dcs_current_score_bottom',
 	}, current_score[bottom_team_idx]);
 
 	var top_team = match_setup.teams[top_team_idx];
 
-	var player_container = uiu.create_el(container, 'div', {
+	var player_container = uiu.el(container, 'div', {
 		'class': (match_setup.is_doubles ? 'dcs_player_names_doubles' : 'dcs_player_names_singles'),
 	});
 	var server = match ? determine_server(match, current_score) : {};
 	for (var player_id = 0;player_id < top_team.players.length;player_id++) {
 		var top_is_serving = (top_team_idx === server.team_id) && (player_id === server.player_id);
-		var top_player_name_container = uiu.create_el(player_container, 'div', {
+		var top_player_name_container = uiu.el(player_container, 'div', {
 			'class': 'dcs_player_name' + (top_is_serving ? ' dcs_player_serving' : ''),
 		});
-		var top_player_name_span = uiu.create_el(
+		var top_player_name_span = uiu.el(
 			top_player_name_container, 'span', {}, top_team.players[player_id].name);
 		_setup_autosize(top_player_name_span, top_current_score);
 	}
 
-	var top_row = uiu.create_el(container, 'div', {
+	var top_row = uiu.el(container, 'div', {
 		'class': 'dcs_team_row dcs_team_row_top',
 	});
-	var top_prev_scores_container = uiu.create_el(top_row, 'div', {
+	var top_prev_scores_container = uiu.el(top_row, 'div', {
 		'class': 'dcs_prev_scores_top',
 	});
 	prev_scores.forEach(function(ps) {
-		uiu.create_el(top_prev_scores_container, 'div', {
+		uiu.el(top_prev_scores_container, 'div', {
 			'class': ((ps[top_team_idx] > ps[bottom_team_idx]) ? 'dcs_prev_score_won' : 'dcs_prev_score_lost'),
 		}, ps[top_team_idx]);
 	});
-	var top_team_el = uiu.create_el(top_row, 'div', {
+	var top_team_el = uiu.el(top_row, 'div', {
 		'class': 'dcs_team_name',
 	});
-	var top_team_span = uiu.create_el(top_team_el, 'span', {}, top_team.name);
+	var top_team_span = uiu.el(top_team_el, 'span', {}, top_team.name);
 
-	var bottom_row = uiu.create_el(container, 'div', {
+	var bottom_row = uiu.el(container, 'div', {
 		'class': 'dcs_team_row dcs_team_row_bottom',
 	});
-	var bottom_prev_scores_container = uiu.create_el(bottom_row, 'div', {
+	var bottom_prev_scores_container = uiu.el(bottom_row, 'div', {
 		'class': 'dcs_prev_scores_bottom',
 	});
 	prev_scores.forEach(function(ps) {
-		uiu.create_el(bottom_prev_scores_container, 'div', {
+		uiu.el(bottom_prev_scores_container, 'div', {
 			'class': ((ps[bottom_team_idx] > ps[top_team_idx]) ? 'dcs_prev_score_won' : 'dcs_prev_score_lost'),
 		}, ps[bottom_team_idx]);
 	});
 	var bottom_team = match_setup.teams[bottom_team_idx];
-	var bottom_team_el = uiu.create_el(bottom_row, 'div', {
+	var bottom_team_el = uiu.el(bottom_row, 'div', {
 		'class': 'dcs_team_name',
 	});
-	var bottom_team_span = uiu.create_el(bottom_team_el, 'span', {}, bottom_team.name);
+	var bottom_team_span = uiu.el(bottom_team_el, 'span', {}, bottom_team.name);
 
-	player_container = uiu.create_el(container, 'div', {
+	player_container = uiu.el(container, 'div', {
 		'class': (match_setup.is_doubles ? 'dcs_player_names_doubles' : 'dcs_player_names_singles'),
 	});
 	for (player_id = 0;player_id < bottom_team.players.length;player_id++) {
 		var bottom_is_serving = (bottom_team_idx === server.team_id) && (player_id === server.player_id);
-		var bottom_player_name_container = uiu.create_el(player_container, 'div', {
+		var bottom_player_name_container = uiu.el(player_container, 'div', {
 			'class': 'dcs_player_name' + (bottom_is_serving ? ' dcs_player_serving' : ''),
 		});
-		var bottom_player_name_span = uiu.create_el(
+		var bottom_player_name_span = uiu.el(
 			bottom_player_name_container, 'span', {}, bottom_team.players[player_id].name);
 		_setup_autosize(bottom_player_name_span, bottom_current_score);
 	}
@@ -219,19 +219,19 @@ function render_top(s, container, event) {
 		return;
 	}
 
-	var courts_container = uiu.create_el(container, 'div', {
+	var courts_container = uiu.el(container, 'div', {
 		'class': 'display_courts_container',
 	});
 	var court_count = event.courts.length;
 	var court_width = Math.floor((100.0 - (4 * (court_count - 1))) / court_count);
 	for (var court_idx = 0;court_idx < court_count;court_idx++) {
 		if (court_idx > 0) {
-			uiu.create_el(courts_container, 'div', {
+			uiu.el(courts_container, 'div', {
 				'class': 'display_courts_separator',
 			});
 		}
 
-		var court_container = uiu.create_el(courts_container, 'div', {
+		var court_container = uiu.el(courts_container, 'div', {
 			'class': 'display_courts_court',
 			'style': ('width: ' + court_width + '%;'),
 		});
@@ -256,26 +256,26 @@ function render_html_list(container, event) {
 		home_winning = true;
 		away_winning = true;
 	}
-	var match_list = uiu.create_el(container, 'table', {
+	var match_list = uiu.el(container, 'table', {
 		'class': 'display_list_container',
 	});
-	var match_list_head = uiu.create_el(match_list, 'tr', {
+	var match_list_head = uiu.el(match_list, 'tr', {
 		'class': 'display_list_thead',
 	});
-	uiu.create_el(match_list_head, 'th', {
+	uiu.el(match_list_head, 'th', {
 		'class': 'display_list_match_name',
 	}, '');
 	var home_span = _list_render_team_name(match_list_head, event.team_names[0]);
 	var away_span = _list_render_team_name(match_list_head, event.team_names[1]);
-	var match_score_el = uiu.create_el(match_list_head, 'th', {
+	var match_score_el = uiu.el(match_list_head, 'th', {
 		'class': 'display_list_matchscore',
 		'colspan': max_games,
 	});
-	uiu.create_el(match_score_el, 'span', {
+	uiu.el(match_score_el, 'span', {
 		'class': (home_winning ? 'display_list_winning' : ''),
 	}, match_score[0]);
-	uiu.create_el(match_score_el, 'span', {'class': 'display_list_vs'}, ' : ');
-	uiu.create_el(match_score_el, 'span', {
+	uiu.el(match_score_el, 'span', {'class': 'display_list_vs'}, ' : ');
+	uiu.el(match_score_el, 'span', {
 		'class': (away_winning ? 'display_list_winning' : ''),
 	}, match_score[1]);
 
@@ -287,21 +287,21 @@ function render_html_list(container, event) {
 		var netscore = m.network_score || [];
 		var mwinner = calc.match_winner(m.setup.counting, netscore);
 
-		var row = uiu.create_el(match_list, 'tr');
-		uiu.create_el(row, 'td', {
+		var row = uiu.el(match_list, 'tr');
+		uiu.el(row, 'td', {
 			'class': 'display_list_match_name',
 		}, m.setup.short_name || m.setup.match_name);
-		var home_td = uiu.create_el(row, 'td', {
+		var home_td = uiu.el(row, 'td', {
 			'class': 'display_list_player_names' + ((mwinner === 'left') ? ' display_list_winning_players' : ''),
 		});
 		_list_render_player_names(home_td, m.setup.teams[0].players, (mwinner === 'left'));
-		var away_td = uiu.create_el(row, 'td', {
+		var away_td = uiu.el(row, 'td', {
 			'class': 'display_list_player_names' + ((mwinner === 'right') ? ' display_list_winning_players' : ''),
 		});
 		_list_render_player_names(away_td, m.setup.teams[1].players, (mwinner === 'right'));
 
 		for (var game_idx = 0;game_idx < max_games;game_idx++) {
-			var score_td = uiu.create_el(row, 'td', {
+			var score_td = uiu.el(row, 'td', {
 				'class': 'display_list_game_score',
 			});
 
@@ -310,13 +310,13 @@ function render_html_list(container, event) {
 			}
 			var nscore = netscore[game_idx];
 			var gwinner = calc.game_winner(m.setup.counting, game_idx, nscore[0], nscore[1]);
-			uiu.create_el(score_td, 'span', {
+			uiu.el(score_td, 'span', {
 				'class': ((gwinner === 'left') ? 'display_list_winning' : ''),
 			}, nscore[0]);
-			uiu.create_el(score_td, 'span', {
+			uiu.el(score_td, 'span', {
 				'class': 'display_list_vs',
 			}, ':');
-			uiu.create_el(score_td, 'span', {
+			uiu.el(score_td, 'span', {
 				'class': ((gwinner === 'right') ? 'display_list_winning' : ''),
 			}, nscore[1]);
 		}
@@ -325,7 +325,7 @@ function render_html_list(container, event) {
 
 function render_oncourt(s, container, event) {
 	if (!event.courts) {
-		uiu.create_el(container, 'div', {
+		uiu.el(container, 'div', {
 			'class': 'display_error',
 		}, 'Court information missing');
 		return;
@@ -341,13 +341,13 @@ function render_oncourt(s, container, event) {
 		}
 	}
 	if (!court) {
-		uiu.create_el(container, 'div', {
+		uiu.el(container, 'div', {
 			'class': 'display_error',
 		}, 'Court ' + cid + ' not found');
 		return;
 	}
 
-	var oncourt_container = uiu.create_el(container, 'div', {
+	var oncourt_container = uiu.el(container, 'div', {
 		'class': 'display_oncourt_container',
 	});
 	_render_court_display(oncourt_container, event, court, 0);
@@ -366,14 +366,14 @@ function update(err, s, event) {
 	var style = s.settings.displaymode_style;
 
 	if (err && (err.errtype === 'loading')) {
-		uiu.create_el(container, 'div', {
+		uiu.el(container, 'div', {
 			'class': 'display_loading',
 		});
 		return;
 	}
 
 	if (err) {
-		uiu.create_el(container, 'div', {
+		uiu.el(container, 'div', {
 			'class': 'display_error',
 		}, err.msg);
 		report_problem.silent_error('network error in display mode: ' + err.msg);
@@ -399,7 +399,7 @@ function update(err, s, event) {
 			if (s.settings.displaymode_court_id == c.court_id) {
 				attrs['selected'] = 'selected';
 			}
-			uiu.create_el(court_select, 'option', attrs, c.description ? c.description : c.court_id);
+			uiu.el(court_select, 'option', attrs, c.description ? c.description : c.court_id);
 		});
 	}
 
