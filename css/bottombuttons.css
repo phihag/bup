@@ -49,7 +49,7 @@
 	left: 0;
 	right: 0;
 	text-align: center;
-	width: 40%;
+	width: 70%;
 	min-width: 80vmin;
 	max-width: 100%;
 	font-size: 5vmin;
@@ -79,6 +79,9 @@
 }
 .pick_dialog button + button {
 	margin-top: 1.5em;
+}
+.pick_dialog select {
+	font-size: 4vmin;
 }
 
 @media screen and (max-aspect-ratio: 3/4) {

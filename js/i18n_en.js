@@ -16,6 +16,7 @@ var i18n_en = {
 'Are you retiring?': 'Are you retiring?',
 'import link': 'Import event ...',
 'send export': 'send export file',
+'select pick': 'Select',
 
 'fullscreen:go': 'Go fullscreen',
 'fullscreen:no': 'Normal screen',
@@ -50,6 +51,7 @@ var i18n_en = {
 'network:resume match': 'Resume match at {score}',
 'network:in progress': 'Match {match} has already been started',
 'network:match finished': 'Match {match} already finished ({score})!',
+'network:fetching courts': 'Fetching court list ...',
 
 'editevent:link': 'Edit event',
 'editevent:back': 'Back',

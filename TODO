@@ -1,3 +1,13 @@
+do not query court if configured already
+
+btsh: list matches on court
+btsh: transmit changes
+btsh: display one court
+btsh: display all courts
+
+scoresheet: support match_num
+scoresheet: support scheduled_time
+
 refmode: update UI better
 refmode push!
 

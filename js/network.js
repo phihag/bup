@@ -4,7 +4,17 @@ var network = (function() {
 var networks = {};
 
 function get_real_netw() {
-	return networks.rlmdemo || networks.nrwdemo || networks.bldemo || networks.bldemo_inprogress || networks.bldemo_incomplete || networks.vdemo || networks.edemo || networks.btde || networks.mt || networks.courtspot || networks.liveaw || networks.jticker;
+	return (
+		networks.rlmdemo || networks.nrwdemo ||
+		networks.bldemo || networks.bldemo_inprogress || networks.bldemo_incomplete ||
+		networks.vdemo || networks.edemo ||
+		networks.btsh ||
+		networks.btde ||
+		networks.mt ||
+		networks.courtspot ||
+		networks.liveaw ||
+		networks.jticker
+	);
 }
 
 function get_netw() {
@@ -486,11 +496,11 @@ function _court_by_id(all_courts, court_id) {
 function _court_pick_dialog(s, all_courts, on_cancel) {
 	bupui.make_pick(s, s._('Select Court'), all_courts, function(c) {
 		_set_court(s, c);
-	}, on_cancel, $('body'));
+	}, on_cancel, $('body'), 5);
 }
 
 function ui_init_court(s, hash_query) {
-	// Determine avialable courts
+	// Determine available courts
 	var all_courts = courts(s);
 	if (!all_courts) {
 		return;
@@ -503,7 +513,8 @@ function ui_init_court(s, hash_query) {
 		}
 	}
 	var configured = (hash_query.select_court === undefined) && all_courts.some(function(c) {
-		return s.settings.court_id == c.id && s.settings.court_description == c.description;
+		var desc = s.settings.court_description;
+		return (s.settings.court_id == c.id) && ((!desc && !c.description) || (desc == c.description));
 	});
 	if (! configured) {
 		// Prevent updates while we select a court
@@ -539,6 +550,34 @@ function ui_init_court(s, hash_query) {
 	});
 }
 
+function fetch_courts(s, success_callback) {
+	var court_status_container = uiu.el(uiu.qs('body'), 'div', 'modal-wrapper');
+	uiu.el(court_status_container, 'div', 'network_court_fetch_status', s._('network:fetching courts'));
+
+	var retry_btn = uiu.el(court_status_container, 'button', 'image-button network_court_fetch_retry');
+	uiu.el(retry_btn, 'span');
+
+	var done = false;
+	var on_success = function(err, courts) {
+		if (err) {
+			var court_status_error = uiu.el(court_status_container, 'div', 'network_court_fetch_error');
+			uiu.el(court_status_error, 'span', {}, err.msg);
+			return;
+		}
+		if (done) return;
+		done = true;
+
+		uiu.remove(court_status_container);
+		success_callback(courts);
+	};
+
+	click.on(retry_btn, function() {
+		uiu.qsEach('.network_court_fetch_error', uiu.remove);
+		get_netw().fetch_courts(s, on_success);
+	});
+	get_netw().fetch_courts(s, on_success);
+}
+
 function ui_init(s, hash_query) {
 	click.qs('.network_desync_image', resync);
 	netstats.ui_init();
@@ -571,16 +610,24 @@ function ui_init(s, hash_query) {
 		networks.rlmdemo = staticnet(null, 'div/rlmdemo.json');
 	} else if (hash_query.vdemo !== undefined) {
 		networks.vdemo = staticnet(null, 'div/vdemo.json');
+	} else if (hash_query.btsh_e !== undefined) {
+		networks.btsh = btsh(null, hash_query.btsh_e);
 	}
-
-	// Initialize court info
-	ui_init_court(s, hash_query);
 
 	// Initialize networking module
 	var netw = get_netw();
 	if (netw) {
 		netw.ui_init(s);
 		uiu.visible_qs('.setup_network_container', true);
+
+		if (netw.fetch_courts) {
+			fetch_courts(s, function() {
+				ui_init_court(s, hash_query);
+			});
+		} else {
+			// No need to wait :)
+			ui_init_court(s, hash_query);
+		}
 	}
 }
 
@@ -737,6 +784,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var btde = require('./btde');
+	var btsh = require('./btsh');
 	var bupui = require('./bupui');
 	var calc = require('./calc');
 	var click = require('./click');

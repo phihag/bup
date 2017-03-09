@@ -36,7 +36,7 @@ function _send(obj) {
 	var json_report = JSON.stringify(obj);
 	var xhr = new XMLHttpRequest();
 	xhr.open('POST', REPORT_URL, true);
-	xhr.setRequestHeader('Content-type', 'text/plain');  // To be a simple CORS request
+	xhr.setRequestHeader('Content-type', 'text/plain');  // To be a simple CORS request (avoid CORS preflight)
 	xhr.send(json_report);
 }
 

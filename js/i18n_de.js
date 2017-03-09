@@ -16,6 +16,7 @@ var i18n_de = {
 'Are you retiring?': 'Werden Sie aufgeben?',
 'import link': 'Importieren ...',
 'send export': 'Export senden',
+'select pick': 'Auswählen',
 
 'fullscreen:go': 'Vollbildmodus',
 'fullscreen:no': 'Normalbildmodus',
@@ -50,6 +51,7 @@ var i18n_de = {
 'network:resume match': 'Spiel bei {score} fortsetzen',
 'network:in progress': 'Das Spiel {match} wurde bereits angefangen',
 'network:match finished': 'Das Spiel {match} ist bereits beendet ({score})!',
+'network:fetching courts': 'Hole Spielfeld-Liste ...',
 
 'editevent:link': 'Wettkampf bearbeiten (experimentell)',
 'editevent:back': 'Zurück',

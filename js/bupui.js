@@ -2,7 +2,7 @@ var bupui = (function() {
 'use strict';
 
 // Returns a function to cancel the dialog
-function make_pick(s, label, values, on_pick, on_cancel, container) {
+function make_pick(s, label, values, on_pick, on_cancel, container, select_at) {
 	if (! container) {
 		container = $('.bottom-ui');
 	}
@@ -32,31 +32,51 @@ function make_pick(s, label, values, on_pick, on_cancel, container) {
 			cancel();
 		}
 	});
-	var dlg = $('<div class="pick_dialog">');
-	dlg.appendTo(dlg_wrapper);
+	var $dlg = $('<div class="pick_dialog">');
+	$dlg.appendTo(dlg_wrapper);
+	var dlg = $dlg[0];
 
 	var label_span = $('<span>');
 	label_span.text(label);
-	label_span.appendTo(dlg);
+	label_span.appendTo($dlg);
 
-	values.forEach(function(v) {
-		var btn = $('<button>');
-		btn.text(v.label);
-		btn.on('click', function() {
+	if ((select_at !== undefined) && (values.length >= select_at)) {
+		var select = uiu.el(dlg, 'select', {
+			size: 1,
+			'class': 'bupui_select',
+		});
+		values.forEach(function(v) {
+			uiu.el(select, 'option', {
+				value: JSON.stringify(v),
+			}, v.label);
+		});
+
+		var select_btn = uiu.el(dlg, 'button', {}, state._('select pick'));
+		click.on(select_btn, function() {
+			var v = JSON.parse(select.value);
 			kill_dialog();
 			on_pick(v);
 		});
-		if (v.modify_button) {
-			v.modify_button(btn, v);
-		}
-		dlg.append(btn);
-	});
+	} else {
+		values.forEach(function(v) {
+			var btn = $('<button>');
+			btn.text(v.label);
+			btn.on('click', function() {
+				kill_dialog();
+				on_pick(v);
+			});
+			if (v.modify_button) {
+				v.modify_button(btn, v);
+			}
+			$dlg.append(btn);
+		});
+	}
 
 	if (on_cancel) {
 		var cancel_btn = $('<button class="cancel-button"></button>');
 		cancel_btn.text(s._('button:Cancel'));
 		cancel_btn.on('click', cancel);
-		cancel_btn.appendTo(dlg);
+		cancel_btn.appendTo($dlg);
 	}
 
 	container.append(dlg_wrapper);
