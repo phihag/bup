@@ -1,6 +1,4 @@
-do not query court if configured already
-
-btsh: list matches on court
+btsh: nicer court display
 btsh: transmit changes
 btsh: display one court
 btsh: display all courts

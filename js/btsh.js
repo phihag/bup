@@ -13,6 +13,10 @@ function _request_json(s, component, options, cb) {
 			return cb(e);
 		}
 
+		if (res.status !== 'ok') {
+			return cb({msg: res.message});
+		}
+
 		return cb(null, res);
 	}).fail(function (xhr) {
 		var msg = ((xhr.status === 0) ?
@@ -92,7 +96,7 @@ function send_press(s) {
 
 function list_matches(s, cb) {
 	_request_json(s, 'btsh.list', {
-		url: baseurl + 'h/event',
+		url: baseurl + 'h/' + encodeURIComponent(tournament_key) + '/matches?court=' + encodeURIComponent(s.settings.court_id),
 	}, function(err, ev) {
 		if (err) {
 			return cb(err);
@@ -110,10 +114,6 @@ function fetch_courts(s, callback) {
 	}, function(err, response) {
 		if (err) {
 			return callback(err);
-		}
-
-		if (response.status !== 'ok') {
-			return callback({msg: response.message});
 		}
 
 		var courts = response.courts.map(function(rc) {

@@ -41,7 +41,8 @@ last_update     UNIX timestamp in ms: Date of last change to this event
 court
 =====
 
-court_id*     ID of this court (often 1, 2, 3..)
+court_id*     ID of this court (often a number, can also be 2017dm_hall1_12)
+label         A short, human-readable name for the court. ("Big hall 12")
 description   Description of where this court is.
 match_id      The match_id property of the match currently being played on this court.
 chair         "west" - Umpire chair to the west at displaymode, "east" - Umpire chair to the east of the displaymode.

@@ -88,7 +88,7 @@ function calc_court_str(s) {
 		return s.settings.court_description;
 	}
 	if (s.settings.court_id) {
-		court_str = s._('Court') + ' ' + s.settings.court_id;
+		court_str = s._('Court') + ' ' + network.court_label(s, s.settings.court_id);
 	}
 	if (s.settings.court_description) {
 		if (court_str) {

@@ -52,7 +52,7 @@ function courts(s) {
 	var res = netw.courts(s);
 	if (res) {
 		res.forEach(function(c) {
-			if (!c.label) {
+			if (!c.label && c.description) {
 				c.label = c.id + ' (' + c.description + ')';
 			}
 		});
@@ -569,6 +569,7 @@ function fetch_courts(s, success_callback) {
 
 		uiu.remove(court_status_container);
 		success_callback(courts);
+		render.ui_court_str(state);
 	};
 
 	click.on(retry_btn, function() {
@@ -748,8 +749,23 @@ function select_event(s, evdef, cb) {
 	get_netw().select_event(s, evdef, cb);
 }
 
+function court_label(s, court_id) {
+	var all_courts = courts(s);
+	if (!all_courts) {
+		return court_id;
+	}
+	var cur_court = utils.find(all_courts, function(c) {
+		return c.id == court_id;
+	});
+	if (cur_court && (cur_court.label !== undefined)) {
+		return cur_court.label;
+	}
+	return court_id;
+}
+
 return {
 	calc_team0_left: calc_team0_left,
+	court_label: court_label,
 	courts: courts,
 	enter_match: enter_match,
 	errstate: errstate,
