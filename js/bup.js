@@ -41,7 +41,6 @@ function ui_init() {
 	importexport.ui_init();
 	editevent.ui_init();
 	setupsheet.ui_init();
-	displaymode.ui_init();
 	shortcuts.ui_init(state);
 	refmode_client_ui.ui_init(state);
 	refmode_referee_ui.ui_init();
@@ -52,6 +51,7 @@ function ui_init() {
 		state.settings.language = hash_query.lang;
 		settings.update(state);
 	}
+	displaymode.ui_init(state, hash_query);
 	network.ui_init(state, hash_query);
 	buphistory.ui_init();
 	buphistory.kickoff();

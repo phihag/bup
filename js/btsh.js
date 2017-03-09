@@ -95,8 +95,11 @@ function send_press(s) {
 }
 
 function list_matches(s, cb) {
+	var court_id = (s.ui && s.ui.displaymode_visible) ? s.settings.displaymode_court_id : s.settings.court_id;
+	var filter = 'court=' + encodeURIComponent(court_id);
+
 	_request_json(s, 'btsh.list', {
-		url: baseurl + 'h/' + encodeURIComponent(tournament_key) + '/matches?court=' + encodeURIComponent(s.settings.court_id),
+		url: baseurl + 'h/' + encodeURIComponent(tournament_key) + '/matches?' + filter,
 	}, function(err, answer) {
 		if (err) {
 			return cb(err);
@@ -118,11 +121,14 @@ function fetch_courts(s, callback) {
 		}
 
 		var courts = response.courts.map(function(rc) {
-			return {
+			var res = {
 				id: rc._id,
 				label: rc.num,
-				match_id: 'bts_' + rc.match_id,
 			};
+			if (rc.match_id) {
+				res.match_id = 'bts_' + rc.match_id;
+			}
+			return res;
 		});
 		courts.push({
 			id: 'referee',

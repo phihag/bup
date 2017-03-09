@@ -479,6 +479,9 @@ function errstate(component, err) {
 function _set_court(s, c) {
 	s.settings.court_id = c.id;
 	s.settings.court_description = c.description;
+	if (c.id !== 'referee') {
+		s.settings.displaymode_court_id = c.id;
+	}
 	settings.store(s);
 	settings.update(s);
 }
@@ -551,6 +554,11 @@ function ui_init_court(s, hash_query) {
 }
 
 function fetch_courts(s, success_callback) {
+	var netw = get_netw();
+	if (!netw.fetch_courts) {
+		return success_callback(netw.courts(s));
+	}
+
 	var court_status_container = uiu.el(uiu.qs('body'), 'div', 'modal-wrapper');
 	uiu.el(court_status_container, 'div', 'network_court_fetch_status', s._('network:fetching courts'));
 
@@ -574,9 +582,9 @@ function fetch_courts(s, success_callback) {
 
 	click.on(retry_btn, function() {
 		uiu.qsEach('.network_court_fetch_error', uiu.remove);
-		get_netw().fetch_courts(s, on_success);
+		netw.fetch_courts(s, on_success);
 	});
-	get_netw().fetch_courts(s, on_success);
+	netw.fetch_courts(s, on_success);
 }
 
 function ui_init(s, hash_query) {
@@ -621,14 +629,9 @@ function ui_init(s, hash_query) {
 		netw.ui_init(s);
 		uiu.visible_qs('.setup_network_container', true);
 
-		if (netw.fetch_courts) {
-			fetch_courts(s, function() {
-				ui_init_court(s, hash_query);
-			});
-		} else {
-			// No need to wait :)
+		fetch_courts(s, function() {
 			ui_init_court(s, hash_query);
-		}
+		});
 	}
 }
 

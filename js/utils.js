@@ -371,6 +371,17 @@ function match_all(pattern, input) {
 	return res;
 }
 
+function filter_map(ar, cb) {
+	var res = [];
+	ar.forEach(function(el, idx) {
+		var mapped = cb(el, idx);
+		if (mapped) {
+			res.push(mapped);
+		}
+	});
+	return res;
+}
+
 return {
 	add_zeroes: add_zeroes,
 	any: any,
@@ -384,6 +395,7 @@ return {
 	duration_mins: duration_mins,
 	duration_secs: duration_secs,
 	encode_utf8: encode_utf8,
+	filter_map: filter_map,
 	find: find,
 	hex: hex,
 	human_date_str: human_date_str,

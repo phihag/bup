@@ -270,4 +270,16 @@ _describe('helper functions', function() {
 			]
 		);
 	});
+
+	_it('filter_map', function() {
+		assert.deepStrictEqual(
+			bup.utils.filter_map([1, 29, 2, 4, 15], function(i) {
+				if (i >= 10) {
+					return;
+				}
+				return 10 * i;
+			}),
+			[10, 20, 40]
+		);
+	});
 });

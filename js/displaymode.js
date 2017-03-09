@@ -128,13 +128,14 @@ function _render_court_display(container, event, court, top_team_idx) {
 	}
 	var bottom_team_idx = 1 - top_team_idx;
 
+	var team_names = event.team_names || [];
 	var nscore = (match && match.network_score) ? match.network_score : [];
 	var match_setup = match ? match.setup : {
 		teams: [{
-			name: event.team_names[0],
+			name: team_names[0],
 			players: [],
 		}, {
-			name: event.team_names[1],
+			name: team_names[1],
 			players: [],
 		}],
 	};
@@ -265,8 +266,9 @@ function render_html_list(container, event) {
 	uiu.el(match_list_head, 'th', {
 		'class': 'display_list_match_name',
 	}, '');
-	var home_span = _list_render_team_name(match_list_head, event.team_names[0]);
-	var away_span = _list_render_team_name(match_list_head, event.team_names[1]);
+	var team_names = event.team_names || [];
+	var home_span = _list_render_team_name(match_list_head, team_names[0]);
+	var away_span = _list_render_team_name(match_list_head, team_names[1]);
 	var match_score_el = uiu.el(match_list_head, 'th', {
 		'class': 'display_list_matchscore',
 		'colspan': max_games,
@@ -343,7 +345,7 @@ function render_oncourt(s, container, event) {
 	if (!court) {
 		uiu.el(container, 'div', {
 			'class': 'display_error',
-		}, 'Court ' + cid + ' not found');
+		}, 'Court ' + JSON.stringify(cid) + ' not found');
 		return;
 	}
 
@@ -399,7 +401,7 @@ function update(err, s, event) {
 			if (s.settings.displaymode_court_id == c.court_id) {
 				attrs['selected'] = 'selected';
 			}
-			uiu.el(court_select, 'option', attrs, c.description ? c.description : c.court_id);
+			uiu.el(court_select, 'option', attrs, c.label || c.description || c.court_id);
 		});
 	}
 
@@ -468,7 +470,12 @@ function hide() {
 	settings.on_mode_change(state);
 }
 
-function ui_init() {
+function ui_init(s, hash_query) {
+	if (hash_query.dm_style !== undefined) {
+		s.settings.displaymode_style = hash_query.dm_style;
+		settings.update(s);
+	}
+
 	click.qs('.displaymode_layout', function() {
 		settings.show_displaymode();
 	});
