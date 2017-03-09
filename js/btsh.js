@@ -14,7 +14,7 @@ function _request_json(s, component, options, cb) {
 		}
 
 		if (res.status !== 'ok') {
-			return cb({msg: res.message});
+			return cb({msg: res.message + ' (Status ist ' + res.status + ')'});
 		}
 
 		return cb(null, res);
@@ -37,43 +37,46 @@ function send_score(s) {
 		network.errstate('btsh.score', null);
 		return;
 	}
+	if (! /^bts_/.test(s.setup.match_id)) {
+		return;
+	}
+	var match_id = s.setup.match_id.substring('bts_'.length);
 
 	var netscore = calc.netscore(s, true);
-
 	var post_data = {
-		match_id: s.setup.match_id,
 		court_id: s.settings.court_id,
 		network_score: netscore,
-		presses_json: JSON.stringify(s.presses),
+		team1_won: s.match.team1_won,
+		presses: s.presses,
 	};
 
 	if (outstanding_requests > 0) {
 		// Another request is currently underway; ours may come to late
 		// Send our request anyways, but send it once again as soon as there are no more open requests
-		s.remote.mt_resend = true;
+		s.remote.btsh_resend = true;
 	}
 	outstanding_requests++;
-	var match_id = s.metadata.id;
+	var url = baseurl + 'h/' + encodeURIComponent(tournament_key) + '/m/' + encodeURIComponent(match_id) + '/score';
 
 	_request_json(s, 'btsh.score', {
 		method: 'POST',
-		url: baseurl + 'set_score',
+		url: url,
 		data: JSON.stringify(post_data),
 		contentType: 'application/json; charset=utf-8',
 	}, function(err) {
 		outstanding_requests--;
-		if (!s.metadata || (s.metadata.id !== match_id)) { // Match changed while the request was underway
+		if (s.setup.match_id !== match_id) { // Match changed while the request was underway
 			return;
 		}
 
 		if (!err) {
-			s.remote.mt_score = netscore;
-			s.remote.mt_court = s.settings.court_id;
+			s.remote.btsh_score = netscore;
+			s.remote.btsh_court = s.settings.court_id;
 		}
 		network.errstate('btsh.score', err);
 
-		if (s.remote.mt_resend && outstanding_requests === 0) {
-			s.remote.mt_resend = false;
+		if (s.remote.btsh_resend && outstanding_requests === 0) {
+			s.remote.btsh_resend = false;
 			send_score(s);
 		}
 	});
@@ -81,28 +84,26 @@ function send_score(s) {
 
 function sync(s) {
 	var netscore = calc.netscore(s, true);
-	if ((s.settings.court_id != s.remote.mt_court) || !utils.deep_equal(netscore, s.remote.mt_score)) {
+	if ((s.settings.court_id != s.remote.btsh_court) || !utils.deep_equal(netscore, s.remote.btsh_score)) {
 		send_score(s);
 	}
 }
 
 /* s, press */
 function send_press(s) {
-	if (! /^mt_/.test(s.setup.match_id)) {
-		return;
-	}
 	sync(s);
 }
 
 function list_matches(s, cb) {
 	_request_json(s, 'btsh.list', {
 		url: baseurl + 'h/' + encodeURIComponent(tournament_key) + '/matches?court=' + encodeURIComponent(s.settings.court_id),
-	}, function(err, ev) {
+	}, function(err, answer) {
 		if (err) {
 			return cb(err);
 		}
 
-		eventutils.annotate(state, ev);
+		var ev = answer.event;
+		eventutils.annotate(s, ev);
 
 		return cb(null, ev);
 	});
