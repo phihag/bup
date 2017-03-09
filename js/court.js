@@ -111,6 +111,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
+	var network = require('./network');
 	var uiu = require('./uiu');
 
 	module.exports = court;
