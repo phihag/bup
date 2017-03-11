@@ -5,7 +5,7 @@ define('ZIP_METHOD', 'phar'); // Possible values: 'phar', 'php', 'cli-unzip'
 define('TARGET_DIR', __DIR__);
 define('DOWNLOAD_URL', 'https://aufschlagwechsel.de/bup.zip');
 
-// Be very conservative: assume errors in our code (devlopment only)
+// Be very conservative: assume errors in our code (development only)
 \set_error_handler(function ($errno, $errstr, $errfile, $errline) {
 	if (error_reporting() === 0) {
 		return; // Suppressed reporting
