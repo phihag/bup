@@ -69,7 +69,7 @@ function ui_init() {
 	if (! supported()) {
 		var fullscreen_line = uiu.qs('.fullscreen_line');
 		fullscreen_line.setAttribute('data-bup-modes', '');
-		uiu.visible(fullscreen_line, false);
+		uiu.hide(fullscreen_line);
 	}
 
 	// Do not use click module: We need an actual click, not a touch here
@@ -82,7 +82,7 @@ function autostart() {
 	}
 	var go_fullscreen_hide = function() {
 		uiu.esc_stack_pop();
-		uiu.visible_qs('#go_fullscreen_wrapper', false);
+		uiu.hide_qs('#go_fullscreen_wrapper');
 	};
 
 	click.qs('.go_fullscreen_normal', function() {
@@ -96,7 +96,7 @@ function autostart() {
 	});
 	uiu.esc_stack_push(go_fullscreen_hide);
 
-	uiu.visible(go_fullscreen_wrapper, true);
+	uiu.show_qs('#go_fullscreen_wrapper', true);
 }
 
 
