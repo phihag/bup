@@ -72,9 +72,8 @@ function ui_init() {
 		uiu.visible(fullscreen_line, false);
 	}
 
-	click.qs('.fullscreen_button', function() {
-		toggle();
-	});
+	// Do not use click module: We need an actual click, not a touch here
+	uiu.qs('.fullscreen_button').addEventListener('click', toggle);
 }
 
 function autostart() {
@@ -89,14 +88,14 @@ function autostart() {
 	click.qs('.go_fullscreen_normal', function() {
 		go_fullscreen_hide();
 	});
-	click.qs('.go_fullscreen_go', function() {
+
+	// Do not use the click module: We need an actual click event
+	uiu.qs('.go_fullscreen_go').addEventListener('click', function() {
 		toggle();
 		go_fullscreen_hide();
 	});
 	uiu.esc_stack_push(go_fullscreen_hide);
 
-	var go_fullscreen_wrapper = uiu.qs('#go_fullscreen_wrapper');
-	click.on(go_fullscreen_wrapper, go_fullscreen_hide);
 	uiu.visible(go_fullscreen_wrapper, true);
 }
 
