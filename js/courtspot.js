@@ -270,7 +270,6 @@ function on_edit_event(s, cb) {
 				}
 			}
 		} catch (e) {
-			console.error(e);
 			err = {
 				msg: 'CourtSpot-Aufstellungs-Update fehlgeschlagen: Server-Fehler erkannt',
 			};
