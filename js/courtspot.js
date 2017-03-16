@@ -162,9 +162,9 @@ function send_press(s) {
 	sync(s);
 }
 
-function list_matches(s, cb) {
+function _list(s, suffix, cb) {
 	var options = {
-		url: baseurl + 'php/bupabfrage.php',
+		url: baseurl + 'php/bupabfrage.php' + suffix,
 		dataType: 'json',
 	};
 	_request(s, 'courtspot.list', options, function(err, event) {
@@ -181,8 +181,18 @@ function list_matches(s, cb) {
 			});
 		}
 
-		eventutils.annotate(s, event);
+		cb(err, event);
+	});
 
+}
+
+function list_matches(s, cb) {
+	_list(s, '', function(err, event) {
+		if (err) {
+			return cb(err);
+		}
+
+		eventutils.annotate(s, event);
 		cb(err, event);
 	});
 }
@@ -206,7 +216,79 @@ function service_name() {
 
 /* Parameter: s */
 function editable() {
-	return false;
+	return true;
+}
+
+function _calc_setup_data(event) {
+	var res = {
+		by_match: {},
+	};
+	event.matches.forEach(function(match) {
+		var setup = match.setup;
+		res.by_match[setup.courtspot_match_id] = setup.teams.map(function(team) {
+			return team.players.map(function(player) {
+				if (player.firstname && player.lastname) {
+					return player;
+				}
+				var m = /^(.*)\s+(\S+)$/.exec(player.name);
+				if (m) {
+					return {
+						firstname: m[1],
+						lastname: m[2],
+					};
+				}
+				return {
+					firstname: '',
+					lastname: m.name,
+				};
+			});
+		});
+	});
+	return res;
+}
+
+function on_edit_event(s, cb) {
+	var data = _calc_setup_data(s.event);
+	_request(s, 'courtspot.editevent', {
+		url: baseurl + 'php/bupaufstellung.php',
+		data: JSON.stringify(data),
+		method: 'post',
+		dataType: 'text',
+	}, function(err, content) {
+		if (err) {
+			return cb(err);
+		}
+
+		try {
+			var res = JSON.parse(content);
+			if (res.status !== 'ok') {
+				err = {
+					msg: 'CourtSpot-Aufstellungs-Update fehlgeschlagen!',
+				};
+				if (res.description) {
+					err.msg += '\nMeldung: ' + res.description;
+				}
+			}
+		} catch (e) {
+			console.error(e);
+			err = {
+				msg: 'CourtSpot-Aufstellungs-Update fehlgeschlagen: Server-Fehler erkannt',
+			};
+		}
+
+		return cb(err);
+	});
+}
+
+function list_all_players(s, cb) {
+	_list(s, '?all_players=1', function(err, event) {
+		if (!event.all_players) {
+			return cb({
+				msg: 'Alte CourtSpot-Version: Bitte bupabfrage.php aktualisieren',
+			});
+		}
+		return cb(err, event && event.all_players);
+	});
 }
 
 return {
@@ -218,6 +300,8 @@ return {
 	courts: courts,
 	service_name: service_name,
 	editable: editable,
+	on_edit_event: on_edit_event,
+	list_all_players: list_all_players,
 	// Testing only
 	gen_data: gen_data,
 };

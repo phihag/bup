@@ -192,13 +192,7 @@ while ($row = $court_result->fetch_assoc()) {
 }
 mysqli_free_result($court_result);
 
-
-header('Cache-Control: no-cache, no-store, must-revalidate');
-header('Pragma: no-cache');
-header('Expires: 0');
-header('Content-Type: application/json');
-
-echo json_encode([
+$res = [
 	'status' => 'ok',
 	'matches' => $matches,
 	'courts' => $courts,
@@ -207,4 +201,39 @@ echo json_encode([
 	'team_names' => [$verwaltung['Heim'], $verwaltung['Gast']],
 	'league_key' => $league_key,
 	'team_competition' => true,
-], JSON_PRETTY_PRINT);
+];
+
+if (array_key_exists('all_players', $_GET)) {
+	$all_players_result = mysqli_query($db, '
+	SELECT Art, Vorname, Nachname
+	FROM Spieler ORDER BY Art DESC;');
+	if (! $court_result) {
+		jsonErr(mysqli_error($db));
+	}
+	$all_players = [[], []];
+	while ($row = $all_players_result->fetch_assoc()) {
+		if (! preg_match('/^(Heim|Gast)(Herr|Dame)$/', $row['Art'], $art_m)) {
+			jsonErr('Cannot parse Spieler.Art = ' . $row['Art']);
+		}
+		$team_id = ($art_m[1] === 'Heim') ? 0 : 1;
+		$gender = ($art_m[2] === 'Herr') ? 'm' : 'f';
+		$name = $row['Vorname'] . ' ' . $row['Nachname'];
+
+		$all_players[$team_id][] = [
+			'gender' => $gender,
+			'firstname' => $row['Nachname'],
+			'lastname' => $row['Vorname'],
+			'name' => $name,
+		];
+	}
+	mysqli_free_result($all_players_result);
+	$res['all_players'] = $all_players;
+}
+
+
+header('Cache-Control: no-cache, no-store, must-revalidate');
+header('Pragma: no-cache');
+header('Expires: 0');
+header('Content-Type: application/json');
+
+echo json_encode($res, JSON_PRETTY_PRINT);

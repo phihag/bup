@@ -262,7 +262,7 @@ function on_add_change(e) {
 	}
 }
 
-function save(s) {
+function save(s, cb) {
 	var event = s.event;
 	event.listed_players = utils.deep_copy(listed);
 	event.matches.forEach(function(match) {
@@ -281,7 +281,7 @@ function save(s) {
 	if (cur_players.present) {
 		event.present_players = utils.deep_copy(cur_players.present);
 	}
-	network.on_edit_event(s);
+	network.on_edit_event(s, cb);
 }
 
 function pdf() {
@@ -609,8 +609,14 @@ function ui_init() {
 	});
 	click.qs('.setupsheet_cancel', hide_and_back);
 	click.qs('.setupsheet_save', function() {
-		save(state);
-		hide_and_back();
+		save(state, function(err) {
+			uiu.visible_qs('.setupsheet_error', err);
+			if (err) {
+				uiu.text_qs('.setupsheet_error', err.msg);
+			} else {
+				hide_and_back();
+			}
+		});
 	});
 	click.qs('.setupsheet_print', function() {
 		window.print();

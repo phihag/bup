@@ -670,7 +670,7 @@ function ui_uninstall_staticnet(s) {
 	ui_list_matches(s, false, true);
 }
 
-function on_edit_event(s) {
+function on_edit_event(s, cb) {
 	var netw = get_netw();
 	if (!netw) {
 		return;
@@ -681,12 +681,13 @@ function on_edit_event(s) {
 	s.event.last_update = Date.now();
 	netw.on_edit_event(s, function(err) {
 		if (err) {
-			report_problem.silent_error(err.message);
-			alert('Failed to save event');
+			report_problem.silent_error('on_edit_event failed: ' + err.msg);
+			cb(err);
+			return;
 		}
-		// TODO show errors
+		refmode_client_ui.on_event_update();
+		cb();
 	});
-	refmode_client_ui.on_event_update();
 }
 
 // Client communicates to server
@@ -744,6 +745,7 @@ function list_events(s, cb) {
 	var netw = get_netw();
 	if (! netw.list_events) {
 		cb({code: 'unsupported'});
+		return;
 	}
 	netw.list_events(s, cb);
 }

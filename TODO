@@ -3,6 +3,8 @@ fullscreen hide if blocked by insecure
 btsh: display one court
 btsh: display all courts
 
+replace msg with message everywhere (msg: msg. msg=)
+
 scoresheet: support match_num
 scoresheet: support scheduled_time
 
@@ -92,7 +94,6 @@ BTS support
 
 gelbe karte dauert lange zum Laden auf iPad?
 setupsheet
-	submit to courtspot
 	highlight column header on mouseover (remove CSS-based approach)
 	browser back fails!
 	check singles ranking
@@ -248,7 +249,6 @@ update RLN document
 
 courtspot
 	remove team_names
-	change players
 	change event
 if @dev: warn if event_name is redundant
 	update import/export
@@ -257,7 +257,6 @@ Aufstellungszettel mit all_names (checkboxes)
 	helper method update_event
 		keep all_players if present in old and id == old_id and not present in new
 	test with demo
-	fetch from CourtSpot
 	fetch from btde
 
 pick referee court if starting with displaymode
@@ -284,7 +283,6 @@ BuLi checkliste: redesign
 Cornelia Schröder: redesign display to select server / receiver
 alternate editevent (with checkboxes, same order as Mannschaftsaufstellungszettel)
 
-courtspot: fetch all_players
 btde: fetch all_players
 empty list of players in hall (select + input)
 
@@ -379,7 +377,6 @@ order should actually change order on state.event with staticnet
 	change in CourtSpot too
 
 
-CourtSpot: support all_players
 add tests for note positioning
 optimize clicking on links (just show/display once)
 	avoid load_by_hash when just clicking

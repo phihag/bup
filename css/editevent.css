@@ -56,6 +56,10 @@ th.editevent_present_players {
 	color: #666;
 }
 
+.editevent_error {
+	color: #f00;
+}
+
 @media screen and (max-width: 500px) {
 	.editevent_layout {
 		font-size: 4vmin;

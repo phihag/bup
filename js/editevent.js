@@ -1,6 +1,13 @@
 'use strict';
 var editevent = (function() {
 
+function err_handler(err) {
+	uiu.visible_qs('.editevent_error', err);
+	if (err) {
+		uiu.text_qs('.editevent_error_message', err.msg);
+	}
+}
+
 function on_select_change(e) {
 	var select = e.target;
 	var value = select.value;
@@ -32,7 +39,7 @@ function on_select_change(e) {
 	}
 	team_players[player_id] = player;
 
-	network.on_edit_event(state);
+	network.on_edit_event(state, err_handler);
 	render_table(state);
 }
 
@@ -42,7 +49,7 @@ function on_bp_delbtn_click(e) {
 	var player_index = parseInt(el.getAttribute('data-player_index'), 10);
 	var ar_key = el.getAttribute('data-ar-key');
 	state.event[ar_key + '_players'][team_id].splice(player_index, 1);
-	network.on_edit_event(state);
+	network.on_edit_event(state, err_handler);
 	render_table(state);
 }
 
@@ -72,7 +79,7 @@ function on_add_change(e) {
 		state.event[key + '_players'] = [[], []];
 	}
 	state.event[key + '_players'][team_id].push(player);
-	network.on_edit_event(state);
+	network.on_edit_event(state, err_handler);
 	render_table(state);
 }
 
