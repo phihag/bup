@@ -53,7 +53,7 @@ var i18n_de = {
 'network:match finished': 'Das Spiel {match} ist bereits beendet ({score})!',
 'network:fetching courts': 'Hole Spielfeld-Liste ...',
 
-'editevent:link': 'Wettkampf bearbeiten (experimentell)',
+'editevent:link': 'Wettkampf bearbeiten',
 'editevent:back': 'Zurück',
 'editevent:add manual m': 'Anderer Spieler ..',
 'editevent:add manual f': 'Andere Spielerin ..',
@@ -69,7 +69,7 @@ var i18n_de = {
 'setupsheet:header:backup': 'E',
 'setupsheet:header:present': 'A',
 'setupsheet:add': 'Hinzufügen',
-'setupsheet:link': 'Aufstellung (experimentell)',
+'setupsheet:link': 'Aufstellung',
 'setupsheet:cancel': 'Abbrechen',
 'setupsheet:save': 'Speichern',
 'setupsheet:new player|m': 'Anderer Spieler ..',

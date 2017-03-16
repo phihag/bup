@@ -68,7 +68,7 @@ var i18n_en = {
 'setupsheet:header|f': 'Women',
 'setupsheet:header:backup': 'B',
 'setupsheet:header:present': 'P',
-'setupsheet:link': 'Setup sheet (experimental)',
+'setupsheet:link': 'Setup sheet',
 'setupsheet:add': 'add player',
 'setupsheet:cancel': 'Cancel',
 'setupsheet:save': 'Save',
