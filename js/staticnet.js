@@ -90,9 +90,10 @@ function editable(s) {
 	return s.event.editable !== false;
 }
 
-function on_edit_event(s) {
+function on_edit_event(s, cb) {
 	eventutils.set_incomplete(s.event);
 	event = s.event;
+	cb();
 }
 
 function service_name(s) {

@@ -655,5 +655,6 @@ rework settings.show => split stuff into ui_init
 i18n: use uiu instead of $
 UI (& refmode) in konqueror
 refmode: screenshot
+selectevent: filter by date and GPS position
 replace visible_qs(.*, false) -> hide_qs($1)
 
