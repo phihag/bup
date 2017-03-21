@@ -84,6 +84,7 @@ var i18n_de = {
 'setupsheet:longlabel:backup': 'Ersatz',
 'setupsheet:longlabel:present': 'Anwesend',
 'setupsheet:filename': 'Aufstellungszettel {event_name}.pdf',
+'setupsheet:confirm cancel': 'Änderungen an der Aufstellung verwerfen?',
 
 'button:undo': 'Rückgängig',
 'button:settings': 'Konfiguration',

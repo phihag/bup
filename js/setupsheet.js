@@ -167,10 +167,20 @@ function calc_config(league_key) {
 	return CONFIGS[league_key];
 }
 
+function _get_player(cell) {
+	var player_json = cell.getAttribute('data-player_json');
+	var res = JSON.parse(player_json);
+	if (!res.gender) {
+		res.gender = cell.getAttribute('data-gender');
+	}
+	return res;
+}
+
 function on_cell_click(e) {
 	var cell = uiu.closest_class(e.target, 'setupsheet_x_cell');
-	var player_name = cell.getAttribute('data-player_name');
-	var gender = cell.getAttribute('data-gender');
+	var player = _get_player(cell);
+	var player_name = player.name;
+	var gender = player.gender;
 	var team_id = parseInt(cell.getAttribute('data-team_id'));
 	var col = cell.getAttribute('data-col');
 
@@ -196,10 +206,7 @@ function on_cell_click(e) {
 			});
 			cur_players[col][team_id] = cps;
 		}
-		cps.push({
-			name: player_name,
-			gender: gender,
-		});
+		cps.push(player);
 	}
 
 	rerender(state);
@@ -207,15 +214,14 @@ function on_cell_click(e) {
 
 function on_delete_click(e) {
 	var btn = uiu.closest_class(e.target, 'setupsheet_delete_button');
-	var player_name = btn.getAttribute('data-player_name');
-	var gender = btn.getAttribute('data-gender');
+	var player = _get_player(btn);
 	var team_id = parseInt(btn.getAttribute('data-team_id'));
 
 	function is_player(p) {
-		return p.name === player_name;
+		return p.name === player.name;
 	}
 
-	utils.remove_cb(listed[team_id][gender], is_player);
+	utils.remove_cb(listed[team_id][player.gender], is_player);
 	Object.values(cur_players).forEach(function(teams) {
 		teams.forEach(function(players) {
 			utils.remove_cb(players, is_player);
@@ -345,7 +351,7 @@ function rerender(s) {
 				var btn = uiu.create_el(first_cell, 'button', {
 					'class': 'setupsheet_delete_button image-button textsize-button',
 					'data-team_id': team_id,
-					'data-player_name': p.name,
+					'data-player_json': JSON.stringify(p),
 					'data-gender': gender,
 				});
 				click.on(btn, on_delete_click);
@@ -359,7 +365,7 @@ function rerender(s) {
 							'data-col': col,
 							'data-gender': gender,
 							'data-team_id': team_id,
-							'data-player_name': p.name,
+							'data-player_json': JSON.stringify(p),
 							'class': 'setupsheet_x_cell' + (plays_in ? ' setupsheet_x_marked' : ''),
 						}, (plays_in ? 'x' : ''));
 						click.on(td, on_cell_click);
@@ -555,7 +561,7 @@ function show() {
 	}
 
 	state.ui.setupsheet_visible = true;
-	uiu.esc_stack_push(hide_and_back);
+	uiu.esc_stack_push(ask_hide_and_back);
 	control.set_current(state);
 
 	uiu.visible_qs('.setupsheet_layout', true);
@@ -587,6 +593,19 @@ function hide() {
 	return true;
 }
 
+function ask_hide_and_back() {
+	var old_cur_players = calc_cur_players(cfg, state.event);
+	var old_listed = calc_listed(state.event);
+
+	var is_changed = !utils.deep_equal(old_cur_players, cur_players) || !utils.deep_equal(old_listed, listed);
+	if (is_changed) {
+		if (!window.confirm(state._('setupsheet:confirm cancel'))) {
+			return;
+		}
+	}
+	hide_and_back();
+}
+
 function hide_and_back() {
 	if (!hide()) return;
 
@@ -607,7 +626,7 @@ function ui_init() {
 		e.preventDefault();
 		show();
 	});
-	click.qs('.setupsheet_cancel', hide_and_back);
+	click.qs('.setupsheet_cancel', ask_hide_and_back);
 	click.qs('.setupsheet_save', function() {
 		save(state, function(err) {
 			uiu.visible_qs('.setupsheet_error', err);

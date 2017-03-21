@@ -1,5 +1,3 @@
-btde crashes on Pixel
-fullscreen hide if blocked by insecure
 btsh: display one court
 btsh: display all courts
 
@@ -42,6 +40,7 @@ Uncaught TypeError: Cannot read property 'name' of undefined
     at handle_dmsg (http://localhost/bup/js/refmode_referee.js:203:3)
     at handle_msg (http://localhost/bup/js/refmode_referee.js:313:3)
     at WebSocket.handle_msg_json (http://localhost/bup/js/refmode_conn.js:50:2)
+
 
 demo: add event
 test players_present with btde should be correctly adopted by referee
