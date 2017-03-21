@@ -1050,12 +1050,22 @@ function desc(s, now) {
 	return res;
 }
 
+function duration(s) {
+	var fps = s.flattened_presses;
+	if (!fps || (fps.length < 1)) {
+		return; // undefined
+	}
+
+	return fps[fps.length - 1].timestamp - fps[0].timestamp;
+}
+
 return {
 	all_games: all_games,
 	calc_press: calc_press,
 	court: court,
 	copy_state: copy_state,
 	desc: desc,
+	duration: duration,
 	gamescore: gamescore,
 	game_winner: game_winner,
 	init_calc: init_calc,

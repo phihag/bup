@@ -49,6 +49,7 @@ function send_score(s) {
 		network_score: netscore,
 		team1_won: s.match.team1_won,
 		presses: s.presses,
+		duration_ms: calc.duration(s),
 	};
 
 	if (outstanding_requests > 0) {

@@ -3741,4 +3741,67 @@ _describe('calc helper functions', function() {
 		assert.deepStrictEqual(bup.calc.desc(s), 'Erwarte Mannschaftsaufstellung');
 	});
 
+	_it('duration', function() {
+		var presses = [];
+		var s = state_after(presses, DOUBLES_SETUP);
+
+		assert.deepStrictEqual(bup.calc.duration(s), undefined);
+
+		presses.push({
+			type: 'pick_side',
+			team1_left: false,
+			timestamp: 1490122434948,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(bup.calc.duration(s), 0);
+
+		presses.push({
+			type: 'pick_server',
+			team_id: 1,
+			player_id: 1,
+			timestamp: 1490124800827,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(bup.calc.duration(s), 2365879);
+
+		// Undo should reset this
+		presses.push({
+			type: 'undo',
+			timestamp: 1490124853326,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(bup.calc.duration(s), 0);
+		presses.push({
+			type: 'undo',
+			timestamp: 1490124877909,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(bup.calc.duration(s), undefined);
+
+		presses.push({
+			type: 'pick_side',
+			team1_left: true,
+			timestamp: 1490124896253,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(bup.calc.duration(s), 0);
+
+		presses.push({
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+			timestamp: 1490124919589,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(bup.calc.duration(s), 23336);
+
+		presses.push({
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 0,
+			timestamp: 1490124950157,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(bup.calc.duration(s), 53904);
+	});
 });
