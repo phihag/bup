@@ -71,10 +71,6 @@ function send_score(s) {
 			return;
 		}
 
-		if (!err) {
-			s.remote.btsh_score = netscore;
-			s.remote.btsh_court = s.settings.court_id;
-		}
 		network.errstate('btsh.score', err);
 
 		if (s.remote.btsh_resend && outstanding_requests === 0) {
@@ -85,10 +81,7 @@ function send_score(s) {
 }
 
 function sync(s) {
-	var netscore = calc.netscore(s, true);
-	if ((s.settings.court_id != s.remote.btsh_court) || !utils.deep_equal(netscore, s.remote.btsh_score)) {
-		send_score(s);
-	}
+	send_score(s);
 }
 
 /* s, press */
