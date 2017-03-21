@@ -439,7 +439,7 @@ function errstate(component, err) {
 	if (err) {
 		erroneous[component] = true;
 
-		$('.network_desync_container').show();
+		uiu.show_qs('.network_desync_container');
 		if (resync_timeout === null) {
 			schedule_resync();
 		}

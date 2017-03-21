@@ -40,7 +40,8 @@ function send_score(s) {
 	if (! /^bts_/.test(s.setup.match_id)) {
 		return;
 	}
-	var match_id = s.setup.match_id.substring('bts_'.length);
+	var req_match_id = s.setup.match_id;
+	var match_id = req_match_id.substring('bts_'.length);
 
 	var netscore = calc.netscore(s, true);
 	var post_data = {
@@ -65,7 +66,7 @@ function send_score(s) {
 		contentType: 'application/json; charset=utf-8',
 	}, function(err) {
 		outstanding_requests--;
-		if (s.setup.match_id !== match_id) { // Match changed while the request was underway
+		if (s.setup.match_id !== req_match_id) { // Match changed while the request was underway
 			return;
 		}
 
