@@ -44,17 +44,23 @@ function send_score(s) {
 	var match_id = req_match_id.substring('bts_'.length);
 
 	var netscore = calc.netscore(s, true);
+	var duration_ms = (s.metadata.start && s.metadata.end) ? (s.metadata.end - s.metadata.start) : null;
+	var end_ts = s.metadata.end ? s.metadata.end : null;
 	var post_data = {
 		court_id: s.settings.court_id,
 		network_score: netscore,
 		team1_won: s.match.team1_won,
 		presses: s.presses,
-		duration_ms: calc.duration(s),
+		duration_ms: duration_ms,
+		end_ts: end_ts,
 	};
 
 	if (outstanding_requests > 0) {
 		// Another request is currently underway; ours may come to late
 		// Send our request anyways, but send it once again as soon as there are no more open requests
+		if (! s.remote) {
+			s.remote = {};
+		}
 		s.remote.btsh_resend = true;
 	}
 	outstanding_requests++;
