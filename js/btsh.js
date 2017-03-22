@@ -31,7 +31,6 @@ function _request_json(s, component, options, cb) {
 	});
 }
 
-var outstanding_requests = 0;
 function send_score(s) {
 	if (s.settings.court_id === 'referee') {
 		network.errstate('btsh.score', null);
@@ -55,15 +54,6 @@ function send_score(s) {
 		end_ts: end_ts,
 	};
 
-	if (outstanding_requests > 0) {
-		// Another request is currently underway; ours may come to late
-		// Send our request anyways, but send it once again as soon as there are no more open requests
-		if (! s.remote) {
-			s.remote = {};
-		}
-		s.remote.btsh_resend = true;
-	}
-	outstanding_requests++;
 	var url = baseurl + 'h/' + encodeURIComponent(tournament_key) + '/m/' + encodeURIComponent(match_id) + '/score';
 
 	_request_json(s, 'btsh.score', {
@@ -72,17 +62,11 @@ function send_score(s) {
 		data: JSON.stringify(post_data),
 		contentType: 'application/json; charset=utf-8',
 	}, function(err) {
-		outstanding_requests--;
 		if (s.setup.match_id !== req_match_id) { // Match changed while the request was underway
 			return;
 		}
 
 		network.errstate('btsh.score', err);
-
-		if (s.remote.btsh_resend && outstanding_requests === 0) {
-			s.remote.btsh_resend = false;
-			send_score(s);
-		}
 	});
 }
 
