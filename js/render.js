@@ -26,30 +26,30 @@ function _score_display_init(s) {
 	var score_table = uiu.qs('#score_table');
 	uiu.empty(score_table);
 
-	var ann_tr = uiu.create_el(score_table, 'tr', {
+	var ann_tr = uiu.el(score_table, 'tr', {
 		'class': 'score_announcements',
 	});
-	uiu.create_el(ann_tr, 'td', {
+	uiu.el(ann_tr, 'td', {
 		colspan: 2,
 	});
 	score_table.setAttribute('data-game-count', s.match.max_games);
 
-	var counting_tr = uiu.create_el(score_table, 'tr', {
+	var counting_tr = uiu.el(score_table, 'tr', {
 		'class': 'score_counting_tr',
 	});
-	var counting_td = uiu.create_el(counting_tr, 'td', {
+	var counting_td = uiu.el(counting_tr, 'td', {
 		colspan: 2,
 		'class': 'score_counting_td',
 	});
-	var counting_container = uiu.create_el(counting_td, 'div', {
+	var counting_container = uiu.el(counting_td, 'div', {
 		'class': 'score_counting_container',
 	});
-	uiu.create_el(counting_container, 'div', {
+	uiu.el(counting_container, 'div', {
 		'class': 'score_counting',
 	}, s.setup.counting);
 
 	for (var game_index = 0;game_index < s.match.max_games;game_index++) {
-		var tr = uiu.create_el(score_table, 'tr', {
+		var tr = uiu.el(score_table, 'tr', {
 			id: 'score_game_' + game_index,
 		});
 
@@ -57,11 +57,11 @@ function _score_display_init(s) {
 		for (var i = 0;i < SIDES.length;i++) {
 			var side = SIDES[i];
 
-			var td = uiu.create_el(tr, 'td', {
+			var td = uiu.el(tr, 'td', {
 				'class': 'score score_' + side,
 			});
 
-			var input = uiu.create_el(td, 'input', {
+			var input = uiu.el(td, 'input', {
 				type: 'number',
 				size: 2,
 				min: 0,
@@ -73,7 +73,7 @@ function _score_display_init(s) {
 			});
 			input.addEventListener('input', editmode.change_score);
 
-			uiu.create_el(td, 'span');
+			uiu.el(td, 'span');
 		}
 	}
 }
@@ -311,7 +311,7 @@ function ui_render(s) {
 		);
 		var dialog = uiu.qs('#injury-resume-dialog');
 		s.match.injuries.forEach(function(injury) {
-			var btn = uiu.create_el(
+			var btn = uiu.el(
 				dialog, 'button', {},
 				s._('card.retired', {
 					player_name: s.setup.teams[injury.team_id].players[injury.player_id].name,
@@ -325,7 +325,7 @@ function ui_render(s) {
 				});
 			});
 		});
-		var continue_btn = uiu.create_el(
+		var continue_btn = uiu.el(
 			dialog, 'button', {}, s._('button:Resume after injury'));
 		click.on(continue_btn, function() {
 			control.on_press({

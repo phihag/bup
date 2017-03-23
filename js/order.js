@@ -406,18 +406,18 @@ function ui_render() {
 	uiu.empty(display);
 
 	function _create_num(display, i) {
-		var container = uiu.create_el(display, 'div', {
+		var container = uiu.el(display, 'div', {
 			'class': 'order_num_container',
 		});
 		var css_class = 'order_num' + ((i >= current_ignore_start) ? ' order_num_invisible' : '');
-		uiu.create_el(container, 'div', {'class': css_class}, (i + 1) + '.');
+		uiu.el(container, 'div', {'class': css_class}, (i + 1) + '.');
 	}
 
 	function _create_ignore_after_mark(display) {
-		var container = uiu.create_el(display, 'div', {
+		var container = uiu.el(display, 'div', {
 			'class': 'order_ignore_match',
 		});
-		var ignore_label = uiu.create_el(container, 'span', {
+		var ignore_label = uiu.el(container, 'span', {
 			'class': 'order_ignore_label',
 			'data-i18n': 'order:ignore match',
 			'data-order-idx': '-99',
@@ -427,13 +427,13 @@ function ui_render() {
 	}
 
 	function _create_insert_mark(display, idx) {
-		var container = uiu.create_el(display, 'div', {'class': 'order_insert_container'});
-		var mark = uiu.create_el(container, 'div', {'class': 'order_insert default-invisible', 'data-order-idx': idx});
+		var container = uiu.el(display, 'div', {'class': 'order_insert_container'});
+		var mark = uiu.el(container, 'div', {'class': 'order_insert default-invisible', 'data-order-idx': idx});
 		click.on(mark, ui_mark_click);
 	}
 
 	function _create_lock_mark(display, idx) {
-		var container = uiu.create_el(display, 'div', {'class': 'order_lock_container'});
+		var container = uiu.el(display, 'div', {'class': 'order_lock_container'});
 		var match_id = current_matches[idx].setup.match_id;
 		var mark_class = 'order_lock';
 		if (current_locked[match_id]) {
@@ -441,7 +441,7 @@ function ui_render() {
 		} else {
 			mark_class += ' default-invisible';
 		}
-		var mark = uiu.create_el(container, 'div', {'class': mark_class, 'data-order-idx': idx});
+		var mark = uiu.el(container, 'div', {'class': mark_class, 'data-order-idx': idx});
 		click.on(mark, ui_lock_click);
 	}
 
@@ -460,7 +460,7 @@ function ui_render() {
 			// Player not configured yet
 			player_name = 'N.N.';
 		}
-		uiu.create_el(team_container, 'span', {'class': player_class}, player_name);
+		uiu.el(team_container, 'span', {'class': player_class}, player_name);
 	}
 
 	_create_insert_mark(display, 0);
@@ -481,15 +481,15 @@ function ui_render() {
 		} else if (match.md_start) {
 			match_class += ' order_ongoing';
 		}
-		var match_el = uiu.create_el(display, 'table', {
+		var match_el = uiu.el(display, 'table', {
 			'class': match_class,
 			'data-order-idx': i,
 		});
-		var match_tr = uiu.create_el(match_el, 'tr');
-		uiu.create_el(match_tr, 'td', {'class': 'order_match_name'}, setup.match_name);
+		var match_tr = uiu.el(match_el, 'tr');
+		uiu.el(match_tr, 'td', {'class': 'order_match_name'}, setup.match_name);
 		for (var team_id = 0;team_id <= 1;team_id++) {
 			var team = setup.teams[team_id];
-			var team_container = uiu.create_el(match_tr, 'td', {'class': 'order_match_team'});
+			var team_container = uiu.el(match_tr, 'td', {'class': 'order_match_team'});
 			_add_player(team_container, team, 0);
 			if (setup.is_doubles) {
 				_add_player(team_container, team, 1);
@@ -497,11 +497,11 @@ function ui_render() {
 		}
 		click.on(match_el, on_match_click);
 
-		var time_td = uiu.create_el(match_tr, 'td', {
+		var time_td = uiu.el(match_tr, 'td', {
 			'class': 'order_match_time',
 		});
-		uiu.create_el(time_td, 'span', {}, match.md_start ? utils.time_str(match.md_start) + '-' : '\xa0');
-		uiu.create_el(time_td, 'span', {}, match.md_end ? utils.time_str(match.md_end) : '\xa0');
+		uiu.el(time_td, 'span', {}, match.md_start ? utils.time_str(match.md_start) + '-' : '\xa0');
+		uiu.el(time_td, 'span', {}, match.md_end ? utils.time_str(match.md_end) : '\xa0');
 
 		if (i < current_ignore_start) {
 			_create_insert_mark(display, i + 1);

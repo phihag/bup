@@ -14,7 +14,7 @@ function on_select_change(e) {
 	if (value === '__add_manual') {
 		var player_name = prompt(state._('editevent:enter player name'));
 		if (player_name) {
-			uiu.create_el(select, 'option', {
+			uiu.el(select, 'option', {
 				value: player_name,
 				selected: 'selected',
 			}, player_name);
@@ -107,27 +107,27 @@ function render_player_sel(s, tbody, all_players, key) {
 		}
 		return names;
 	});
-	var tr = uiu.create_el(tbody, 'tr', {});
-	uiu.create_el(tr, 'th', {
+	var tr = uiu.el(tbody, 'tr', {});
+	uiu.el(tr, 'th', {
 		'class': 'editevent_' + key + '_players',
 	}, s._('editevent:' + key + ' players'));
 	for (var team_id = 0;team_id < 2;team_id++) {
-		var td = uiu.create_el(tr, 'td', {
+		var td = uiu.el(tr, 'td', {
 			'class': 'editevent_' + key + '_players',
 		});
 		var asp = all_sel_players[team_id];
 		for (var player_index = 0;player_index < asp.length;player_index++) {
 			var bp = asp[player_index];
-			var div = uiu.create_el(td, 'div', {
+			var div = uiu.el(td, 'div', {
 				'class': 'editevent_' + key + '_player',
 			}, calc_player_str(bp));
-			var del_btn = uiu.create_el(div, 'button', {
+			var del_btn = uiu.el(div, 'button', {
 				'class': 'button_delete image-button textsize-button',
 				'data-player_index': player_index,
 				'data-team_id': team_id,
 				'data-ar-key': key,
 			});
-			uiu.create_el(del_btn, 'span', {
+			uiu.el(del_btn, 'span', {
 				'data-player_index': player_index,
 				'data-team_id': team_id,
 				'data-ar-key': key,
@@ -135,11 +135,11 @@ function render_player_sel(s, tbody, all_players, key) {
 			click.on(del_btn, on_bp_delbtn_click);
 		}
 
-		var add_select = uiu.create_el(td, 'select', {
+		var add_select = uiu.el(td, 'select', {
 			'data-team_id': team_id,
 			'data-ar-key': key,
 		});
-		uiu.create_el(add_select, 'option', {
+		uiu.el(add_select, 'option', {
 			'disabled': 'disabled',
 			'value': '',
 			'selected': 'selected',
@@ -149,16 +149,16 @@ function render_player_sel(s, tbody, all_players, key) {
 			if (sel_player_names[team_id][p.name]) {
 				continue;
 			}
-			uiu.create_el(add_select, 'option', {
+			uiu.el(add_select, 'option', {
 				value: JSON.stringify(p),
 			}, p.name);
 		}
-		uiu.create_el(add_select, 'option', {
+		uiu.el(add_select, 'option', {
 			'data-i18n': 'editevent:add manual m',
 			value: '__add_manual_m',
 			'class': 'editevent_option_manual',
 		}, s._('editevent:add manual m'));
-		uiu.create_el(add_select, 'option', {
+		uiu.el(add_select, 'option', {
 			'data-i18n': 'editevent:add manual f',
 			value: '__add_manual_f',
 			'class': 'editevent_option_manual',
@@ -170,22 +170,22 @@ function render_player_sel(s, tbody, all_players, key) {
 function render_table(s) {
 	var table = uiu.qs('.editevent_table');
 	uiu.empty(table);
-	var thead = uiu.create_el(table, 'thead');
-	var top_tr = uiu.create_el(thead, 'tr');
-	uiu.create_el(top_tr, 'td');
-	uiu.create_el(top_tr, 'th', {}, s.event.team_names[0]);
-	uiu.create_el(top_tr, 'th', {}, s.event.team_names[1]);
+	var thead = uiu.el(table, 'thead');
+	var top_tr = uiu.el(thead, 'tr');
+	uiu.el(top_tr, 'td');
+	uiu.el(top_tr, 'th', {}, s.event.team_names[0]);
+	uiu.el(top_tr, 'th', {}, s.event.team_names[1]);
 
 	var all_players = eventutils.calc_all_players(s.event);
-	var tbody = uiu.create_el(table, 'tbody');
+	var tbody = uiu.el(table, 'tbody');
 	var all_matches = s.event.matches;
 	for (var match_id = 0;match_id < all_matches.length;match_id++) {
 		var match_setup = all_matches[match_id].setup;
-		var tr = uiu.create_el(tbody, 'tr');
-		uiu.create_el(tr, 'th', {}, match_setup.match_name);
+		var tr = uiu.el(tbody, 'tr');
+		uiu.el(tr, 'th', {}, match_setup.match_name);
 		var player_count = (match_setup.is_doubles ? 2 : 1);
 		for (var team_id = 0;team_id < 2;team_id++) {
-			var td = uiu.create_el(tr, 'td');
+			var td = uiu.el(tr, 'td');
 			for (var player_id = 0;player_id < player_count;player_id++) {
 				var player = match_setup.teams[team_id].players[player_id];
 				if (!player) {
@@ -193,7 +193,7 @@ function render_table(s) {
 						name: 'N.N.',
 					};
 				}
-				var select = uiu.create_el(td, 'select', {
+				var select = uiu.el(td, 'select', {
 					name: 'editevent_player_' + match_id + '_' + team_id + '_' + player_id,
 					'data-match_id': match_id,
 					'data-team_id': team_id,
@@ -214,10 +214,10 @@ function render_table(s) {
 					if (avp.name === player.name) {
 						attrs.selected = 'selected';
 					}
-					uiu.create_el(select, 'option', attrs, calc_player_str(avp));
+					uiu.el(select, 'option', attrs, calc_player_str(avp));
 				}
 
-				uiu.create_el(select, 'option', {
+				uiu.el(select, 'option', {
 					'data-i18n': 'editevent:add manual ' + gender,
 					value: '__add_manual',
 					'class': 'editevent_option_manual',
@@ -229,7 +229,7 @@ function render_table(s) {
 				if (player.name === 'N.N.') {
 					nn_attrs.selected = 'selected';
 				}
-				uiu.create_el(select, 'option', nn_attrs, 'N.N.');
+				uiu.el(select, 'option', nn_attrs, 'N.N.');
 			}
 		}
 	}
@@ -280,21 +280,21 @@ function show() {
 		}
 
 		uiu.empty(sel_container);
-		var form = uiu.create_el(sel_container, 'form');
-		var select = uiu.create_el(form, 'select', {
+		var form = uiu.el(sel_container, 'form');
+		var select = uiu.el(form, 'select', {
 			required: 'required',
 		});
-		uiu.create_el(select, 'option', {
+		uiu.el(select, 'option', {
 			selected: 'selected',
 			disabled: 'disabled',
 			value: '',
 		});
 		events.forEach(function(ev) {
-			uiu.create_el(select, 'option', {
+			uiu.el(select, 'option', {
 				value: JSON.stringify(ev),
 			}, ev.date + ' ' + ev.starttime + ' ' + ev.team_names[0] + ' - ' + ev.team_names[1]);
 		});
-		uiu.create_el(form, 'button', {
+		uiu.el(form, 'button', {
 			role: 'submit',
 		}, state._('editevent:select event'));
 		form.addEventListener('submit', function(e) {

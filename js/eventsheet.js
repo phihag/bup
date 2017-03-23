@@ -936,7 +936,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 				xf.setAttribute('xfId', 0);
 				xf.setAttribute('applyBorder', 1);
 				xf.setAttribute('applyAlignment', 1);
-				uiu.create_el(xf, 'alignment', {
+				uiu.el(xf, 'alignment', {
 					horizontal: 'center',
 					vertical: 'center',
 				});
@@ -947,31 +947,31 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					var start_col = 6 + team_id * 15;
 
 					sheet.add_drawing(function(drawings) {
-						var anchor = uiu.create_el(drawings, 'xdr:twoCellAnchor');
-						var from = uiu.create_el(anchor, 'xdr:from');
-						uiu.create_el(from, 'xdr:col', {}, start_col);
-						uiu.create_el(from, 'xdr:colOff', {}, -200000);
-						uiu.create_el(from, 'xdr:row', {}, start_row);
-						uiu.create_el(from, 'xdr:rowOff', {}, -120000);
-						var to = uiu.create_el(anchor, 'xdr:to');
-						uiu.create_el(to, 'xdr:col', {}, start_col + 9);
-						uiu.create_el(to, 'xdr:colOff', {}, 0);
-						uiu.create_el(to, 'xdr:row', {}, start_row + 3);
-						uiu.create_el(to, 'xdr:rowOff', {}, 120000);
+						var anchor = uiu.el(drawings, 'xdr:twoCellAnchor');
+						var from = uiu.el(anchor, 'xdr:from');
+						uiu.el(from, 'xdr:col', {}, start_col);
+						uiu.el(from, 'xdr:colOff', {}, -200000);
+						uiu.el(from, 'xdr:row', {}, start_row);
+						uiu.el(from, 'xdr:rowOff', {}, -120000);
+						var to = uiu.el(anchor, 'xdr:to');
+						uiu.el(to, 'xdr:col', {}, start_col + 9);
+						uiu.el(to, 'xdr:colOff', {}, 0);
+						uiu.el(to, 'xdr:row', {}, start_row + 3);
+						uiu.el(to, 'xdr:rowOff', {}, 120000);
 
-						var sp = uiu.create_el(anchor, 'xdr:sp');
+						var sp = uiu.el(anchor, 'xdr:sp');
 
-						var nvSpPr = uiu.create_el(sp, 'xdr:nvSpPr');
-						uiu.create_el(nvSpPr, 'xdr:cNvPr', {'id': 1000 + d_count, 'name': 'bup ' + d_count});
+						var nvSpPr = uiu.el(sp, 'xdr:nvSpPr');
+						uiu.el(nvSpPr, 'xdr:cNvPr', {'id': 1000 + d_count, 'name': 'bup ' + d_count});
 						d_count++;
-						uiu.create_el(nvSpPr, 'xdr:cNvSpPr');
+						uiu.el(nvSpPr, 'xdr:cNvSpPr');
 
-						var spPr = uiu.create_el(sp, 'xdr:spPr');
-						uiu.create_el(spPr, 'a:prstGeom', {prst: 'ellipse'});
-						var line = uiu.create_el(spPr, 'a:ln', {w: 36000});
-						var line_fill = uiu.create_el(line, 'a:solidFill');
-						uiu.create_el(line_fill, 'a:srgbClr', {val: '000000'});
-						uiu.create_el(anchor, 'xdr:clientData');
+						var spPr = uiu.el(sp, 'xdr:spPr');
+						uiu.el(spPr, 'a:prstGeom', {prst: 'ellipse'});
+						var line = uiu.el(spPr, 'a:ln', {w: 36000});
+						var line_fill = uiu.el(line, 'a:solidFill');
+						uiu.el(line_fill, 'a:srgbClr', {val: '000000'});
+						uiu.el(anchor, 'xdr:clientData');
 					});
 				}
 
@@ -983,31 +983,31 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					sheet.text(xlsx.num2col(col + 1) + (row + 3), c.score[1]);
 
 					sheet.add_drawing(function(drawings) {
-						var anchor = uiu.create_el(drawings, 'xdr:twoCellAnchor');
-						var from = uiu.create_el(anchor, 'xdr:from');
-						uiu.create_el(from, 'xdr:col', {}, col + 1);
-						uiu.create_el(from, 'xdr:colOff', {}, -150000);
-						uiu.create_el(from, 'xdr:row', {}, row);
-						uiu.create_el(from, 'xdr:rowOff', {}, 20000);
-						var to = uiu.create_el(anchor, 'xdr:to');
-						uiu.create_el(to, 'xdr:col', {}, col + 2);
-						uiu.create_el(to, 'xdr:colOff', {}, 150000);
-						uiu.create_el(to, 'xdr:row', {}, row + 4);
-						uiu.create_el(to, 'xdr:rowOff', {}, -40000);
+						var anchor = uiu.el(drawings, 'xdr:twoCellAnchor');
+						var from = uiu.el(anchor, 'xdr:from');
+						uiu.el(from, 'xdr:col', {}, col + 1);
+						uiu.el(from, 'xdr:colOff', {}, -150000);
+						uiu.el(from, 'xdr:row', {}, row);
+						uiu.el(from, 'xdr:rowOff', {}, 20000);
+						var to = uiu.el(anchor, 'xdr:to');
+						uiu.el(to, 'xdr:col', {}, col + 2);
+						uiu.el(to, 'xdr:colOff', {}, 150000);
+						uiu.el(to, 'xdr:row', {}, row + 4);
+						uiu.el(to, 'xdr:rowOff', {}, -40000);
 
-						var sp = uiu.create_el(anchor, 'xdr:sp');
+						var sp = uiu.el(anchor, 'xdr:sp');
 
-						var nvSpPr = uiu.create_el(sp, 'xdr:nvSpPr');
-						uiu.create_el(nvSpPr, 'xdr:cNvPr', {'id': 1000 + d_count, 'name': 'bup ' + d_count});
+						var nvSpPr = uiu.el(sp, 'xdr:nvSpPr');
+						uiu.el(nvSpPr, 'xdr:cNvPr', {'id': 1000 + d_count, 'name': 'bup ' + d_count});
 						d_count++;
-						uiu.create_el(nvSpPr, 'xdr:cNvSpPr');
+						uiu.el(nvSpPr, 'xdr:cNvSpPr');
 
-						var spPr = uiu.create_el(sp, 'xdr:spPr');
-						uiu.create_el(spPr, 'a:prstGeom', {prst: 'ellipse'});
-						var line = uiu.create_el(spPr, 'a:ln', {w: 12000});
-						var line_fill = uiu.create_el(line, 'a:solidFill');
-						uiu.create_el(line_fill, 'a:srgbClr', {val: '000000'});
-						uiu.create_el(anchor, 'xdr:clientData');
+						var spPr = uiu.el(sp, 'xdr:spPr');
+						uiu.el(spPr, 'a:prstGeom', {prst: 'ellipse'});
+						var line = uiu.el(spPr, 'a:ln', {w: 12000});
+						var line_fill = uiu.el(line, 'a:solidFill');
+						uiu.el(line_fill, 'a:srgbClr', {val: '000000'});
+						uiu.el(anchor, 'xdr:clientData');
 					});
 				}
 
@@ -1071,31 +1071,31 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					var col = 5 + c.col;
 
 					sheet.add_drawing(function(drawings) {
-						var anchor = uiu.create_el(drawings, 'xdr:twoCellAnchor');
-						var from = uiu.create_el(anchor, 'xdr:from');
-						uiu.create_el(from, 'xdr:col', {}, col + 1);
-						uiu.create_el(from, 'xdr:colOff', {}, -150000);
-						uiu.create_el(from, 'xdr:row', {}, row);
-						uiu.create_el(from, 'xdr:rowOff', {}, 20000);
-						var to = uiu.create_el(anchor, 'xdr:to');
-						uiu.create_el(to, 'xdr:col', {}, col + 2);
-						uiu.create_el(to, 'xdr:colOff', {}, 150000);
-						uiu.create_el(to, 'xdr:row', {}, row + 4);
-						uiu.create_el(to, 'xdr:rowOff', {}, -40000);
+						var anchor = uiu.el(drawings, 'xdr:twoCellAnchor');
+						var from = uiu.el(anchor, 'xdr:from');
+						uiu.el(from, 'xdr:col', {}, col + 1);
+						uiu.el(from, 'xdr:colOff', {}, -150000);
+						uiu.el(from, 'xdr:row', {}, row);
+						uiu.el(from, 'xdr:rowOff', {}, 20000);
+						var to = uiu.el(anchor, 'xdr:to');
+						uiu.el(to, 'xdr:col', {}, col + 2);
+						uiu.el(to, 'xdr:colOff', {}, 150000);
+						uiu.el(to, 'xdr:row', {}, row + 4);
+						uiu.el(to, 'xdr:rowOff', {}, -40000);
 
-						var sp = uiu.create_el(anchor, 'xdr:sp');
+						var sp = uiu.el(anchor, 'xdr:sp');
 
-						var nvSpPr = uiu.create_el(sp, 'xdr:nvSpPr');
-						uiu.create_el(nvSpPr, 'xdr:cNvPr', {'id': 1000 + d_count, 'name': 'bup ' + d_count});
+						var nvSpPr = uiu.el(sp, 'xdr:nvSpPr');
+						uiu.el(nvSpPr, 'xdr:cNvPr', {'id': 1000 + d_count, 'name': 'bup ' + d_count});
 						d_count++;
-						uiu.create_el(nvSpPr, 'xdr:cNvSpPr');
+						uiu.el(nvSpPr, 'xdr:cNvSpPr');
 
-						var spPr = uiu.create_el(sp, 'xdr:spPr');
-						uiu.create_el(spPr, 'a:prstGeom', {prst: 'ellipse'});
-						var line = uiu.create_el(spPr, 'a:ln', {w: 12000});
-						var line_fill = uiu.create_el(line, 'a:solidFill');
-						uiu.create_el(line_fill, 'a:srgbClr', {val: '000000'});
-						uiu.create_el(anchor, 'xdr:clientData');
+						var spPr = uiu.el(sp, 'xdr:spPr');
+						uiu.el(spPr, 'a:prstGeom', {prst: 'ellipse'});
+						var line = uiu.el(spPr, 'a:ln', {w: 12000});
+						var line_fill = uiu.el(line, 'a:solidFill');
+						uiu.el(line_fill, 'a:srgbClr', {val: '000000'});
+						uiu.el(anchor, 'xdr:clientData');
 					});*/
 				}
 
@@ -1283,7 +1283,7 @@ function es_render(ev, es_key, ui8r, extra_data) {
 }
 
 function prepare_render(btn, es_key, extra_data) {
-	var progress = uiu.create_el(btn, 'div', 'loading-icon');
+	var progress = uiu.el(btn, 'div', 'loading-icon');
 	download(es_key, function(ui8r) {
 		uiu.remove(progress);
 		es_render(state.event, es_key, ui8r, extra_data);
@@ -1348,7 +1348,7 @@ function render_links(s, container) {
 	eventsheets.forEach(function(es_key) {
 		var i18n_key = 'eventsheet:label:' + es_key;
 		if (EXTERNAL_DOWNLOAD_SHEETS[es_key]) {
-			uiu.create_el(container, 'a', {
+			uiu.el(container, 'a', {
 				'href': URLS[es_key],
 				'download': '',
 				'target': '_blank',
@@ -1359,14 +1359,14 @@ function render_links(s, container) {
 			var ext = /\.([a-z0-9]+)$/.exec(URLS[es_key])[1];
 			var filename = state._('eventsheet:label:' + es_key) + '.' + ext;
 
-			uiu.create_el(container, 'a', {
+			uiu.el(container, 'a', {
 				'href': URLS[es_key],
 				'download': filename,
 				'class': 'eventsheet_link',
 				'data-i18n': i18n_key,
 			}, s._(i18n_key));
 		} else {
-			var link = uiu.create_el(container, 'a', {
+			var link = uiu.el(container, 'a', {
 				'href': '#',
 				'class': 'eventsheet_link',
 				'data-i18n': i18n_key,

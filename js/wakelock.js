@@ -28,7 +28,7 @@ function update(s) {
 	}
 
 	if (!_video) {
-		_video = uiu.create_el(uiu.qs('body'), 'video', {
+		_video = uiu.el(uiu.qs('body'), 'video', {
 			autoplay: 'autoplay',
 			src: 'div/wakelock.mp4',
 			loop: 'loop',

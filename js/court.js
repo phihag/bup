@@ -5,13 +5,13 @@ var court = (function() {
 var POSITIONS = ['left_odd', 'left_even', 'right_even', 'right_odd'];
 function install(container) {
 	function create_button(attrs) {
-		var button = uiu.create_el(container, 'button', attrs);
-		uiu.create_el(button, 'span');
+		var button = uiu.el(container, 'button', attrs);
+		uiu.el(button, 'span');
 		return button;
 	}
 
 	var res = {
-		arrow: uiu.create_el(container, 'div', {'class': 'court_arrow default-invisible'}),
+		arrow: uiu.el(container, 'div', {'class': 'court_arrow default-invisible'}),
 		editmode_arrow: create_button({'class': 'editmode_arrow editmode_button default-invisible'}),
 		editmode_change_ends: create_button({'class': 'editmode_change-ends editmode_button default-invisible'}),
 		editmode_switch_left: create_button({'class': 'editmode_switch_left editmode_button default-invisible'}),
@@ -20,9 +20,9 @@ function install(container) {
 	};
 
 	function create_text(key) {
-		var el = uiu.create_el(container, 'div', {'class': 'court_' + key});
+		var el = uiu.el(container, 'div', {'class': 'court_' + key});
 		res[key] = el;
-		var span = uiu.create_el(el, 'span');
+		var span = uiu.el(el, 'span');
 		res[key + '_text'] = span;
 	}
 	create_text('court_str');
@@ -31,11 +31,11 @@ function install(container) {
 	create_text('match_name');
 
 	POSITIONS.forEach(function(p) {
-		var div = uiu.create_el(container, 'div', {
+		var div = uiu.el(container, 'div', {
 			'class': ('court_' + p),
 		});
-		res[p + '_card'] = uiu.create_el(div, 'span');
-		res[p + '_text'] = uiu.create_el(div, 'span');
+		res[p + '_card'] = uiu.el(div, 'span');
+		res[p + '_text'] = uiu.el(div, 'span');
 	});
 
 	return res;

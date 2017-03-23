@@ -262,14 +262,14 @@ function ui_render_matchlist(s, event) {
 	uiu.text_qs('.setup_network_event', (event.event_name ? event.event_name : s._('network:Matches')));
 
 	event.matches.forEach(function(match) {
-		var btn = uiu.create_el(container, 'button', {
+		var btn = uiu.el(container, 'button', {
 			'class': 'setup_network_match',
 		});
 		if (match.setup.incomplete) {
 			btn.setAttribute('disabled', 'disabled');
 		}
 
-		uiu.create_el(btn, 'span', {
+		uiu.el(btn, 'span', {
 			'class': 'setup_network_match_match_name',
 		}, match.setup.match_name);
 
@@ -291,16 +291,16 @@ function ui_render_matchlist(s, event) {
 			}
 		};
 
-		uiu.create_el(btn, 'span', {
+		uiu.el(btn, 'span', {
 			'class': 'setup_network_match_home_players',
 		}, _players_str(match.setup.teams[0]));
-		uiu.create_el(btn, 'span', {
+		uiu.el(btn, 'span', {
 			'class': 'setup_network_match_away_players',
 		}, _players_str(match.setup.teams[1]));
 
 
 		var score_text = _score_text(match.network_score);
-		uiu.create_el(btn, 'span', {
+		uiu.el(btn, 'span', {
 			'class': 'setup_network_match_score',
 		}, (score_text ? score_text : '\xA0'));
 

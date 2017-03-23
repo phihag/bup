@@ -177,18 +177,18 @@ function make_editable(el, cb) {
 		};
 
 		var cur_val = el.firstChild.textContent;
-		var form = uiu.create_el(null, 'form', {
+		var form = uiu.el(null, 'form', {
 			'class': 'referee_editform',
 		});
-		var input = uiu.create_el(form, 'input', {
+		var input = uiu.el(form, 'input', {
 			type: 'text',
 			value: cur_val,
 			style: 'min-width: ' + el.offsetWidth + 'px',
 		});
-		uiu.create_el(form, 'button', {
+		uiu.el(form, 'button', {
 			role: 'submit',
 		}, state._('refmode:referee:set'));
-		var cancel_button = uiu.create_el(form, 'button', {
+		var cancel_button = uiu.el(form, 'button', {
 			role: 'button',
 		}, state._('refmode:referee:cancel'));
 		input.addEventListener('keyup', function(e) {
@@ -217,7 +217,7 @@ function make_editable(el, cb) {
 	click.on(el, edit);
 	var edit_btn;
 	if (el.firstChild.textContent.length < 2) {
-		edit_btn = uiu.create_el(null, 'button', {
+		edit_btn = uiu.el(null, 'button', {
 			role: 'button',
 		}, state._('refmode:referee:edit'));
 		click.on(edit_btn, edit);
@@ -247,14 +247,14 @@ function render_clients(clients) {
 	uiu.empty(container);
 
 	clients.forEach(function(c) {
-		var div = uiu.create_el(container, 'div', {
+		var div = uiu.el(container, 'div', {
 			'data-client-id': c.id,
 			'class': 'referee_c',
 		});
-		var toprow = uiu.create_el(div, 'div', {
+		var toprow = uiu.el(div, 'div', {
 			'class': 'referee_c_toprow',
 		});
-		var title = uiu.create_el(toprow, 'span', {
+		var title = uiu.el(toprow, 'span', {
 			'class': 'referee_c_title',
 		}, c.title);
 		make_editable(title, function(node_name) {
@@ -262,12 +262,12 @@ function render_clients(clients) {
 				refmode_client_node_name: node_name,
 			});
 		});
-		var buttons = uiu.create_el(toprow, 'div', {
+		var buttons = uiu.el(toprow, 'div', {
 			'class': 'referee_c_buttons',
 		});
 
-		var subscribe_label = uiu.create_el(buttons, 'label', {}, s._('refmode:referee:subscribe'));
-		var subscribe_checkbox = uiu.create_el(subscribe_label, 'input', {
+		var subscribe_label = uiu.el(buttons, 'label', {}, s._('refmode:referee:subscribe'));
+		var subscribe_checkbox = uiu.el(subscribe_label, 'input', {
 			type: 'checkbox',
 			'class': 'referee_c_subscribe',
 		});
@@ -276,12 +276,12 @@ function render_clients(clients) {
 		}
 		subscribe_checkbox.addEventListener('change', on_subscribe_checkbox_click);
 
-		var refresh_button = uiu.create_el(buttons, 'button', {
+		var refresh_button = uiu.el(buttons, 'button', {
 			title: (c.last_update ? utils.timesecs_str(c.last_update) : ''),
 		}, s._('refmode:referee:refresh'));
 		click.on(refresh_button, on_refresh_button_click);
 
-		var kill_button = uiu.create_el(buttons, 'button', {
+		var kill_button = uiu.el(buttons, 'button', {
 			title: (c.last_update ? utils.timesecs_str(c.last_update) : ''),
 		}, s._('refmode:referee:kill'));
 		click.on(kill_button, on_kill_button_click);
@@ -298,11 +298,11 @@ function render_clients(clients) {
 				percent: Math.round(bat.level * 100),
 			})
 		) : s._('refmode:referee:battery:na'));
-		uiu.create_el(div, 'div', {}, s._('refmode:referee:battery') + bat_text);
+		uiu.el(div, 'div', {}, s._('refmode:referee:battery') + bat_text);
 
 		if (c.mode === 'umpire') {
-			var umpire_row = uiu.create_el(div, 'div', {}, s._('refmode:referee:umpire_name'));
-			var umpire_name = uiu.create_el(umpire_row, 'span', {}, (c.settings ? c.settings.umpire_name : '-'));
+			var umpire_row = uiu.el(div, 'div', {}, s._('refmode:referee:umpire_name'));
+			var umpire_name = uiu.el(umpire_row, 'span', {}, (c.settings ? c.settings.umpire_name : '-'));
 			make_editable(umpire_name, function(new_name) {
 				rr.update_settings(c.id, {
 					umpire_name: new_name,
@@ -317,7 +317,7 @@ function render_clients(clients) {
 				displaymode.option_applies(c.settings.displaymode_style, 'court_id')
 			));
 		if (need_court) {
-			var court_row = uiu.create_el(div, 'div', {
+			var court_row = uiu.el(div, 'div', {
 				class: 'referee_c_court_row',
 			}, s._('refmode:referee:court'));
 			var court_text = '';
@@ -328,12 +328,12 @@ function render_clients(clients) {
 					court_text = c.settings.court_id + (c.settings.court_description ? (' (' + c.settings.court_description + ')') : '');
 				}
 			}
-			uiu.create_el(court_row, 'span', {}, court_text);
-			var court_change_form = uiu.create_el(court_row, 'form', {
+			uiu.el(court_row, 'span', {}, court_text);
+			var court_change_form = uiu.el(court_row, 'form', {
 				'class': 'referee_c_court_change_form',
 			});
 			court_change_form.addEventListener('submit', on_client_court_change_submit);
-			var court_change_select = uiu.create_el(court_change_form, 'select', {
+			var court_change_select = uiu.el(court_change_form, 'select', {
 				'class': 'referee_c_court_change_select',
 				size: 1,
 				required: 'required',
@@ -346,65 +346,65 @@ function render_clients(clients) {
 				if (c.settings && (cur_court_id == court.court_id)) {
 					attrs.selected = 'selected';
 				}
-				uiu.create_el(court_change_select, 'option', attrs, (court.description ? court.description : court.court_id));
+				uiu.el(court_change_select, 'option', attrs, (court.description ? court.description : court.court_id));
 			});
-			uiu.create_el(court_change_form, 'button', {
+			uiu.el(court_change_form, 'button', {
 				'role': 'submit',
 			}, s._('refmode:referee:change court'));
 		}
 
 		// Match / Main configuration
 		if (c.mode === 'umpire') {
-			var match_row = uiu.create_el(div, 'div', {
+			var match_row = uiu.el(div, 'div', {
 				'class': 'referee_c_match_row',
 			}, s._('refmode:referee:match'));
 			if (c.setup) {
-				var match_link = uiu.create_el(match_row, 'span', {
+				var match_link = uiu.el(match_row, 'span', {
 					'class': 'js_link',
 				}, c.setup.match_name);
 				click.on(match_link, on_client_match_link_click);
 
 				if (c.presses) {
 					var client_state = calc.remote_state(s, c.setup, c.presses);
-					uiu.create_el(match_row, 'span', {
+					uiu.el(match_row, 'span', {
 						'class': 'referee_c_match_status',
 					}, calc.desc(client_state, now));
 				}
 			}
 			if (c.event && ev && ev.matches && (c.event.id === ev.id)) {
-				var match_change_form = uiu.create_el(match_row, 'form', {
+				var match_change_form = uiu.el(match_row, 'form', {
 					'class': 'referee_match_change_form',
 				});
 				match_change_form.addEventListener('submit', on_client_match_change_submit);
 
-				var change_match_sel = uiu.create_el(match_change_form, 'select', {
+				var change_match_sel = uiu.el(match_change_form, 'select', {
 					'class': 'referee_match_change_select',
 					size: 1,
 					required: 'required',
 				});
-				uiu.create_el(change_match_sel, 'option', {
+				uiu.el(change_match_sel, 'option', {
 					value: '',
 					selected: 'selected',
 				}, '');
 				ev.matches.forEach(function(m) {
-					uiu.create_el(change_match_sel, 'option', {
+					uiu.el(change_match_sel, 'option', {
 						value: m.setup.match_id,
 					}, m.setup.match_name);
 				});
-				uiu.create_el(match_change_form, 'button', {
+				uiu.el(match_change_form, 'button', {
 					'role': 'submit',
 				}, s._('refmode:referee:change match'));
 			}
 		} else if (c.mode === 'display') {
-			var dstyle_row = uiu.create_el(div, 'div', {
+			var dstyle_row = uiu.el(div, 'div', {
 				'class': 'referee_c_dstyle',
 			}, s._('displaymode:style') + ' ' + s._('displaymode:' + c.settings.displaymode_style));
 
-			var dstyle_form = uiu.create_el(dstyle_row, 'form', {
+			var dstyle_form = uiu.el(dstyle_row, 'form', {
 				'class': 'referee_c_dstyle_change_form',
 			});
 			dstyle_form.addEventListener('submit', on_client_dstyle_change_submit);
-			var change_dstyle_sel = uiu.create_el(dstyle_form, 'select', {
+			var change_dstyle_sel = uiu.el(dstyle_form, 'select', {
 				'class': 'referee_c_dstyle_change_select',
 				size: 1,
 				required: 'required',
@@ -416,9 +416,9 @@ function render_clients(clients) {
 				if (ds === c.settings.displaymode_style) {
 					attrs.selected = 'selected';
 				}
-				uiu.create_el(change_dstyle_sel, 'option', attrs, s._('displaymode:' + ds));
+				uiu.el(change_dstyle_sel, 'option', attrs, s._('displaymode:' + ds));
 			});
-			uiu.create_el(dstyle_form, 'button', {
+			uiu.el(dstyle_form, 'button', {
 				'role': 'submit',
 			}, s._('refmode:referee:change display style'));
 
@@ -426,66 +426,66 @@ function render_clients(clients) {
 				displaymode.option_applies(c.settings.displaymode_style, 'reverse_order')
 			);
 			if (can_reverse) {
-				var reverse_label = uiu.create_el(dstyle_row, 'label', 'referee_c_blocklabel');
+				var reverse_label = uiu.el(dstyle_row, 'label', 'referee_c_blocklabel');
 				var attrs = {
 					type: 'checkbox',
 				};
 				if (c.settings.displaymode_reverse_order) {
 					attrs.checked = 'checked';
 				}
-				var reverse_checkbox = uiu.create_el(reverse_label, 'input', attrs);
-				uiu.create_el(reverse_label, 'span', {}, s._('displaymode:reverse_order'));
+				var reverse_checkbox = uiu.el(reverse_label, 'input', attrs);
+				uiu.el(reverse_label, 'span', {}, s._('displaymode:reverse_order'));
 				reverse_checkbox.addEventListener('change', on_dmode_reverse_order_change);
 			}
 		}
 
-		var event_row = uiu.create_el(div, 'div');
+		var event_row = uiu.el(div, 'div');
 		if (c.pushing) {
-			var unpush_button = uiu.create_el(event_row, 'button', {}, s._('refmode:referee:push:deactivate'));
+			var unpush_button = uiu.el(event_row, 'button', {}, s._('refmode:referee:push:deactivate'));
 			click.on(unpush_button, on_push_end_button_click);
 		} else {
-			var push_button = uiu.create_el(event_row, 'button', {}, s._('refmode:referee:push:activate'));
+			var push_button = uiu.el(event_row, 'button', {}, s._('refmode:referee:push:activate'));
 			click.on(push_button, on_push_start_button_click);
 		}
 
 
 		if (c.event && c.event.matches && (!ev || (c.event.id !== ev.id))) {
-			var diff_ev = uiu.create_el(div, 'div', {
+			var diff_ev = uiu.el(div, 'div', {
 				'class': 'referee_warning',
 			}, s._('refmode:referee:different_event', {
 				event_name: c.event.event_name,
 			}));
-			var espouse_btn = uiu.create_el(diff_ev, 'button', {
+			var espouse_btn = uiu.el(diff_ev, 'button', {
 				'class': 'referee_espouse_event',
 			}, s._('refmode:referee:espouse event'));
 			click.on(espouse_btn, on_espouse_btn_click);
 		} else if (c.event && c.event.matches && ev && ((c.event.last_update > ev.last_update) && !eventutils.setups_eq(c.event, ev))) {
-			var updated_ev = uiu.create_el(div, 'div', {}, s._('refmode:referee:updated_event', {
+			var updated_ev = uiu.el(div, 'div', {}, s._('refmode:referee:updated_event', {
 				time: utils.datetime_str(c.event.last_update),
 			}));
-			var espouse_update_btn = uiu.create_el(updated_ev, 'button', {
+			var espouse_update_btn = uiu.el(updated_ev, 'button', {
 				'class': 'referee_espouse_event',
 			}, s._('refmode:referee:espouse event'));
 			click.on(espouse_update_btn, on_espouse_btn_click);
 		} else if (!c.event) {
-			uiu.create_el(div, 'div', {
+			uiu.el(div, 'div', {
 				'class': 'referee_warning',
 			}, s._('refmode:referee:no event'));
 		} else if (!c.event.matches) {
-			uiu.create_el(div, 'div', {
+			uiu.el(div, 'div', {
 				'class': 'referee_warning',
 			}, s._('refmode:referee:no event matches'));
 		}
 		var TIME_LIMIT = 120000;
 		if (c.time_difference) {
 			if (c.time_difference > TIME_LIMIT) {
-				uiu.create_el(div, 'div', {
+				uiu.el(div, 'div', {
 					'class': 'referee_warning',
 				}, s._('refmode:referee:forwards clock', {
 					diff: utils.duration_secs(0, c.time_difference),
 				}));
 			} else if (-c.time_difference > TIME_LIMIT) {
-				uiu.create_el(div, 'div', {
+				uiu.el(div, 'div', {
 					'class': 'referee_warning',
 				}, s._('refmode:referee:backwards clock', {
 					diff: utils.duration_secs(0, -c.time_difference),
@@ -495,7 +495,7 @@ function render_clients(clients) {
 
 		var v = c.bup_version;
 		if (v && (v !== 'dev') && (bup_version !== 'dev') && (v !== bup_version)) {
-			uiu.create_el(div, 'div', {
+			uiu.el(div, 'div', {
 				'class': 'referee_warning',
 			}, s._('refmode:referee:outdated bup', {
 				bup_version: c.bup_version,
@@ -506,7 +506,7 @@ function render_clients(clients) {
 	if (clients.length === 0) {
 		var key = rr ? rr.key_fp() : null;
 		var key_str = key ? key : '[...]';
-		uiu.create_el(container, 'div', {
+		uiu.el(container, 'div', {
 			'class': 'referee_c_tutorial',
 		}, s._('refmode:referee:paired:none', {
 			ref_fp: key_str,
@@ -536,36 +536,36 @@ function render_event(s) {
 			var setup = cs.setup;
 
 			var is_complete = !setup.incomplete;
-			var match_container = uiu.create_el(matches_container, 'div', {
+			var match_container = uiu.el(matches_container, 'div', {
 				'class': 'referee_e_match',
 				'data-match-id': setup.match_id,
 			});
 
-			var name_row = uiu.create_el(match_container, 'div');
-			var match_link = uiu.create_el(name_row, 'span', {
+			var name_row = uiu.el(match_container, 'div');
+			var match_link = uiu.el(name_row, 'span', {
 				'class': ((is_complete ? 'js_link ' : '') + 'referee_e_match_name'),
 			}, setup.match_name);
 			if (is_complete) {
 				click.on(match_link, on_event_match_link_click);
 			}
-			uiu.create_el(name_row, 'span', {
+			uiu.el(name_row, 'span', {
 				'class': 'referee_e_match_status',
 			}, calc.desc(cs, now));
 
 			if (is_complete) {
-				var stats_link = uiu.create_el(name_row, 'span', {
+				var stats_link = uiu.el(name_row, 'span', {
 					'class': 'js_link referee_e_link',
 				}, s._('Statistics'));
 				click.on(stats_link, on_event_match_stats_click);
 
-				var scoresheet_link = uiu.create_el(name_row, 'span', {
+				var scoresheet_link = uiu.el(name_row, 'span', {
 					'class': 'js_link referee_e_link',
 				}, s._('Score Sheet'));
 				click.on(scoresheet_link, on_event_match_scoresheet_click);
 			}
 
 			if (cs.presses) {
-				var presses_table = uiu.create_el(match_container, 'table');
+				var presses_table = uiu.el(match_container, 'table');
 				stats.render_presses(presses_table, cs, cs.presses.length - 2);
 			}
 		});
@@ -576,32 +576,32 @@ function render_event(s) {
 	links_container.removeAttribute('data-league-key');
 	eventsheet.render_links(s, links_container);
 	
-	var scoresheets_link = uiu.create_el(links_container, 'a', {
+	var scoresheets_link = uiu.el(links_container, 'a', {
 		'class': 'js_link',
 	}, s._('settings:Event Scoresheets'));
 	click.on(scoresheets_link, function() {
 		hide_tmp();
 		scoresheet.event_show();
 	});
-	var order_link = uiu.create_el(links_container, 'a', {
+	var order_link = uiu.el(links_container, 'a', {
 		'class': 'js_link',
 	}, s._('settings:Order link'));
 	click.on(order_link, function() {
 		order.show();
 	});
-	var editevent_link = uiu.create_el(links_container, 'a', {
+	var editevent_link = uiu.el(links_container, 'a', {
 		'class': 'js_link',
 	}, s._('editevent:link'));
 	click.on(editevent_link, function() {
 		editevent.show();
 	});
-	var setupsheet_link = uiu.create_el(links_container, 'a', {
+	var setupsheet_link = uiu.el(links_container, 'a', {
 		'class': 'js_link referee_e_setupsheet_link',
 	}, s._('setupsheet:link'));
 	click.on(setupsheet_link, function() {
 		setupsheet.show();
 	});
-	var export_link = uiu.create_el(links_container, 'a', {
+	var export_link = uiu.el(links_container, 'a', {
 		'class': 'js_link',
 	}, s._('settings:Export link'));
 	click.on(export_link, function() {

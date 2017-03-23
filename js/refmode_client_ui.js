@@ -12,14 +12,14 @@ function update_ref_display(s) {
 		uiu.text(paired_el, s._('refmode:client:paired'));
 
 		paired.forEach(function(ref_fp) {
-			var paired = uiu.create_el(paired_el, 'div', {
+			var paired = uiu.el(paired_el, 'div', {
 				'class': 'refmode_client_authref',
 			}, ref_fp);
-			var rm_btn = uiu.create_el(paired, 'button', {
+			var rm_btn = uiu.el(paired, 'button', {
 				'data-fp': ref_fp,
 				'class': 'button_delete image-button refmode_client_rmbtn',
 			});
-			uiu.create_el(rm_btn, 'span', {
+			uiu.el(rm_btn, 'span', {
 				'data-fp': ref_fp,
 			});
 			click.on(rm_btn, disconnect_button_click);
@@ -100,7 +100,7 @@ function list_handler(referee_list) {
 		uiu.text(list_el, text);
 	}
 	connectable.forEach(function(ref) {
-		var btn = uiu.create_el(list_el, 'button', {
+		var btn = uiu.el(list_el, 'button', {
 			role: 'button',
 			'data-fp': ref.fp,
 		}, ref.fp);

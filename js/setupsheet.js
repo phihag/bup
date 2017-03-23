@@ -261,7 +261,7 @@ function on_add_change(e) {
 			select.value = '';
 			return;
 		}
-		uiu.create_el(select, 'option', {
+		uiu.el(select, 'option', {
 			value: player_name,
 			selected: 'selected',
 		}, player_name);
@@ -326,42 +326,42 @@ function rerender(s) {
 	listed.forEach(function(team, team_id) {
 		var table = uiu.qs('#setupsheet_table_team' + team_id);
 		uiu.empty(table);
-		var thead = uiu.create_el(table, 'thead');
-		var thead_tr = uiu.create_el(thead, 'tr');
-		uiu.create_el(thead_tr, 'th', {
+		var thead = uiu.el(table, 'thead');
+		var thead_tr = uiu.el(thead, 'tr');
+		uiu.el(thead_tr, 'th', {
 			'class': 'setupsheet_team_name',
 			'colspan': (1 + cfg.m.length),
 		}, s.event.team_names[team_id]);
-		var tbody = uiu.create_el(table, 'tbody');
+		var tbody = uiu.el(table, 'tbody');
 		GENDERS.forEach(function(gender) {
-			var header_tr = uiu.create_el(tbody, 'tr');
-			uiu.create_el(header_tr, 'th', 'setupsheet_header', s._('setupsheet:header|' + gender));
+			var header_tr = uiu.el(tbody, 'tr');
+			uiu.el(header_tr, 'th', 'setupsheet_header', s._('setupsheet:header|' + gender));
 			cfg[gender].forEach(function(col) {
 				if (col === 'dark') {
-					uiu.create_el(header_tr, 'th', 'setupsheet_dark');
+					uiu.el(header_tr, 'th', 'setupsheet_dark');
 				} else {
-					uiu.create_el(header_tr, 'th', {}, col_text(s, col));
+					uiu.el(header_tr, 'th', {}, col_text(s, col));
 				}
 			});
 
 			var listed_g_players = team[gender];
 			listed_g_players.forEach(function(p) {
-				var tr = uiu.create_el(tbody, 'tr');
-				var first_cell = uiu.create_el(tr, 'td', 'setupsheet_player_name', p.name);
-				var btn = uiu.create_el(first_cell, 'button', {
+				var tr = uiu.el(tbody, 'tr');
+				var first_cell = uiu.el(tr, 'td', 'setupsheet_player_name', p.name);
+				var btn = uiu.el(first_cell, 'button', {
 					'class': 'setupsheet_delete_button image-button textsize-button',
 					'data-team_id': team_id,
 					'data-player_json': JSON.stringify(p),
 					'data-gender': gender,
 				});
 				click.on(btn, on_delete_click);
-				uiu.create_el(btn, 'span');
+				uiu.el(btn, 'span');
 				cfg[gender].forEach(function(col) {
 					if (col === 'dark') {
-						uiu.create_el(tr, 'td', 'setupsheet_dark');
+						uiu.el(tr, 'td', 'setupsheet_dark');
 					} else {
 						var plays_in = cur_plays_in(col, team_id, p);
-						var td = uiu.create_el(tr, 'td', {
+						var td = uiu.el(tr, 'td', {
 							'data-col': col,
 							'data-gender': gender,
 							'data-team_id': team_id,
@@ -373,41 +373,41 @@ function rerender(s) {
 				});
 			});
 
-			var new_tr = uiu.create_el(tbody, 'tr');
-			var new_td = uiu.create_el(new_tr, 'td', {
+			var new_tr = uiu.el(tbody, 'tr');
+			var new_td = uiu.el(new_tr, 'td', {
 				colspan: (1 + cfg[gender].length),
 				'class': 'setupsheet_new',
 			});
-			var new_form = uiu.create_el(new_td, 'form', {
+			var new_form = uiu.el(new_td, 'form', {
 				'class': 'inline-form setupsheet_new_form',
 				'data-team_id': team_id,
 				'data-gender': gender,
 			});
 			new_form.addEventListener('submit', on_new_form_submit);
-			var new_select = uiu.create_el(new_form, 'select', {
+			var new_select = uiu.el(new_form, 'select', {
 				'class': 'setupsheet_newselect_' + team_id + '_' + gender,
 				required: 'required',
 			});
 			var avp = available_players(s, listed_g_players, team_id, gender);
 			avp.forEach(function(ap) {
-				uiu.create_el(new_select, 'option', {
+				uiu.el(new_select, 'option', {
 					value: ap.name,
 				}, ap.name);
 			});
 			if (avp.length === 0) {
-				uiu.create_el(new_select, 'option', {
+				uiu.el(new_select, 'option', {
 					value: '',
 					disabled: 'disabled',
 					selected: 'selected',
 				}, '');
 			}
-			uiu.create_el(new_select, 'option', {
+			uiu.el(new_select, 'option', {
 				value: '__add_manual',
 				'class': 'setupsheet_option_manual',
 			}, s._('setupsheet:new player|' + gender));
 			new_select.addEventListener('change', on_add_change);
 
-			uiu.create_el(new_form, 'button', {
+			uiu.el(new_form, 'button', {
 				'data-i18n': 'setupsheet:add',
 				'role': 'submit',
 			}, s._('setupsheet:add'));

@@ -1,15 +1,13 @@
 btsh: display one court
 btsh: display all courts
 
-replace msg with message everywhere (msg: msg. msg=)
-
+korean-open like display
 scoresheet: support match_num
 scoresheet: support scheduled_time
 
 refmode: update UI better
 refmode push!
 
-replace uiu.create_el with uiu.el everywhere
 test with refmode that listed_players is being saved
 make court descriptions configurable
 displaymode/onecourt: score larger!
@@ -28,7 +26,6 @@ almost changed running match: ask again when changing if match is in progress!!!
 adopt event: show difference
 adopt event: recalc upon event change
 Aufstellungen crashes in referee mode
-setupsheet: only go back once saved
 refmode: adopt: do not delete presses if match id stays the same
 Uncaught TypeError: Cannot read property 'name' of undefined
     at press_state_desc (http://localhost/bup/js/restats.js:664:65)
@@ -654,6 +651,7 @@ rework settings.show => split stuff into ui_init
 i18n: use uiu instead of $
 UI (& refmode) in konqueror
 refmode: screenshot
+replace msg with message everywhere (msg: msg. msg=)
 selectevent: filter by date and GPS position
 replace visible_qs(.*, false) -> hide_qs($1)
 

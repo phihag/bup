@@ -28,7 +28,7 @@ function ui_import_json(s) {
 	if (input) {
 		container.removeChild(input);
 	}
-	input = uiu.create_el(container, 'input', {
+	input = uiu.el(container, 'input', {
 		type: 'file',
 		accept: '.json',
 		style: 'visibility: hidden; position: absolute',

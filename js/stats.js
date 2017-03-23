@@ -741,14 +741,14 @@ function render_presses(table, s, start_at) {
 		var highlight_ts = (i === 0) || (i === presses.length - 1) || ((press.timestamp - last_ts) > 60000);
 		last_ts = press.timestamp;
 
-		var tr = uiu.create_el(table, 'tr');
-		uiu.create_el(tr, 'td', {
+		var tr = uiu.el(table, 'tr');
+		uiu.el(tr, 'td', {
 			'class': 'stats_presses_timestamp' + (highlight_ts ? ' stats_presses_highlight' : ''),
 		}, (press.timestamp ? utils.timesecs_str(press.timestamp) : ''));
-		uiu.create_el(tr, 'td', {
+		uiu.el(tr, 'td', {
 			'class': 'stats_presses_desc',
 		}, desc);
-		uiu.create_el(tr, 'td', {
+		uiu.el(tr, 'td', {
 			'class': 'stats_presses_sdesc',
 		}, sdesc);
 	}

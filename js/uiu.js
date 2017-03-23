@@ -230,7 +230,6 @@ return {
 	addClass_qs: addClass_qs,
 	closest: closest,
 	closest_class: closest_class,
-	create_el: el, // Backwards compatibility only, will be removed
 	disabled_qsa: disabled_qsa,
 	empty: empty,
 	el: el,

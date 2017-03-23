@@ -147,7 +147,7 @@ function open(ui8r, cb) {
 		function add_style(addfunc) {
 			var style_doc = book._style_doc;
 			var container = style_doc.querySelector('cellXfs');
-			var el = uiu.create_el(container, 'xf');
+			var el = uiu.el(container, 'xf');
 			addfunc(el);
 			var id = parseInt(container.getAttribute('count'));
 			container.setAttribute('count', id + 1);
@@ -158,14 +158,14 @@ function open(ui8r, cb) {
 		function add_border(thickness) {
 			var style_doc = book._style_doc;
 			var container = style_doc.querySelector('borders');
-			var el = uiu.create_el(container, 'border');
+			var el = uiu.el(container, 'border');
 			['left', 'right', 'top', 'bottom'].forEach(function(direction) {
-				var d = uiu.create_el(el, direction, {
+				var d = uiu.el(el, direction, {
 					style: thickness,
 				});
-				uiu.create_el(d, 'color', {indexed: 64});
+				uiu.el(d, 'color', {indexed: 64});
 			});
-			uiu.create_el(el, 'diagonal');
+			uiu.el(el, 'diagonal');
 
 			var id = parseInt(container.getAttribute('count'));
 			container.setAttribute('count', id + 1);
