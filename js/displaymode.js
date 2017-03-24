@@ -408,10 +408,11 @@ function render_international(s, container, event, court) {
 			}, gscore[team_id]);
 		}
 
+		var points = current_score[team_id];
 		uiu.el(team_container, 'div', {
-			'class': 'd_international_score',
+			'class': 'd_international_score' + ((points >= 10) ? ' d_international_score_dd' : ''),
 			style: 'background: ' + (team_serving ? col : colors.bg) + '; color: ' + (team_serving ? colors.bg : col),
-		}, current_score[team_id]);
+		}, points);
 	});
 }
 

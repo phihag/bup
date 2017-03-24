@@ -258,26 +258,30 @@
 }
 .d_international_player_container {
 	position: relative;
-	width: 80%;
+	width: 100%;
 	display: flex;
 	align-items: center;
 }
 .d_international_player {
 	width: 100%;
-	font-size: 10vmin;
+	font-size: 6vh;
 	display: flex;
 	align-items: center;
 }
 .d_international_score {
 	font-size: 50vh;
 	line-height: 50vh;
+	width: 52vh;
 	position: absolute;
 	top: 0;
 	right: 0;
 	height: 100%;
-	width: 55vh;
 	text-align: center;
 	overflow: hidden;
+}
+.d_international_score.d_international_score_dd {
+	letter-spacing: -4vh;
+	text-align: left;
 }
 .d_international_gscore {
 	font-size: 25vh;
@@ -285,8 +289,8 @@
 	position: absolute;
 	top: 0;
 	bottom: 0;
-	right: 55vh;
-	width: 20vh;
+	right: 52vh;
+	width: 16vh;
 	overflow: hidden;
 	display: flex;
 	align-items: center;
