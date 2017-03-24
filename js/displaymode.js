@@ -370,7 +370,11 @@ function render_international(s, container, event, court) {
 
 	match.setup.teams.forEach(function(team, team_id) {
 		var col = colors[team_id];
-		var team_container = uiu.el(i_container, 'div', 'd_international_team');
+		var gwinner = calc.game_winner(match.setup.counting, nscore.length - 1, current_score[0], current_score[1]);
+		var team_serving = (
+			(gwinner === 'left') ? (team_id === 0) : (
+			(gwinner === 'right') ? (team_id === 1) : (
+			(server.team_id === team_id))));
 
 		var player_names = team.players.map(function(player) {
 			return player.name;
@@ -378,8 +382,8 @@ function render_international(s, container, event, court) {
 		while (player_names.length < pcount) {
 			player_names.push('');
 		}
-		var team_serving = (server.team_id === team_id);
 
+		var team_container = uiu.el(i_container, 'div', 'd_international_team');
 		player_names.forEach(function(pname, player_id) {
 			var is_server = (!match_over) && team_serving && (server.player_id === player_id);
 			var style = (
