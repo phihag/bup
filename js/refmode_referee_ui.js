@@ -161,7 +161,7 @@ function on_client_dstyle_change_submit(e) {
 	var container = uiu.closest_class(e.target, 'referee_c');
 	var new_style = container.querySelector('.referee_c_dstyle_change_select').value;
 	var colors = {};
-	['c0', 'c1', 'cbg', 'cfg', 'cbg2'].forEach(function(col) {
+	displaymode.ALL_COLORS.forEach(function(col) {
 		var input = container.querySelector('.referee_c_dstyle_' + col);
 		if (input) {
 			colors['d_' + col] = input.value;
@@ -425,15 +425,13 @@ function render_clients(clients) {
 				}
 				uiu.el(change_dstyle_sel, 'option', attrs, s._('displaymode:' + ds));
 			});
-			uiu.el(dstyle_form, 'input', {
-				type: 'color',
-				'class': 'referee_c_dstyle_c0',
-				value: c.settings.d_c0,
-			});
-			uiu.el(dstyle_form, 'input', {
-				type: 'color',
-				'class': 'referee_c_dstyle_c1',
-				value: c.settings.d_c1,
+
+			displaymode.ALL_COLORS.forEach(function(col) {
+				uiu.el(dstyle_form, 'input', {
+					type: 'color',
+					'class': 'referee_c_dstyle_' + col,
+					value: c.settings['d_' + col],
+				});
 			});
 			uiu.el(dstyle_form, 'button', {
 				'role': 'submit',

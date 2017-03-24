@@ -7,6 +7,7 @@ var ALL_STYLES = [
 	'international',
 	'top+list',
 ];
+var ALL_COLORS = ['c0', 'c1', 'cbg', 'cfg', 'cbg2'];
 
 function _setup_autosize(el, right_node) {
 	autosize.maintain(el, function() {
@@ -615,6 +616,7 @@ return {
 	on_style_change: on_style_change,
 	option_applies: option_applies,
 	ALL_STYLES: ALL_STYLES,
+	ALL_COLORS: ALL_COLORS,
 };
 
 })();
