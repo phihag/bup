@@ -250,3 +250,52 @@
 	padding: 2vmin 2vmin 1vmin 1vmin;
 	border-top-right-radius: 4vmin;
 }
+
+.d_international_container {
+	font-stretch: condensed;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	width: 100%;
+	height: 100%;
+}
+.d_international_team {
+	position: relative;
+	height: 50%;
+}
+.d_international_player_container {
+	position: relative;
+	width: 80%;
+	display: flex;
+	align-items: center;
+}
+.d_international_player {
+	width: 100%;
+	font-size: 10vmin;
+	display: flex;
+	align-items: center;
+}
+.d_international_score {
+	font-size: 50vh;
+	line-height: 50vh;
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 100%;
+	width: 55vh;
+	text-align: center;
+	overflow: hidden;
+}
+.d_international_gscore {
+	font-size: 25vh;
+	line-height: 25vh;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 55vh;
+	width: 20vh;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}

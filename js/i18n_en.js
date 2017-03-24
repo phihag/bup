@@ -455,6 +455,7 @@ var i18n_en = {
 'displaymode:style': 'style:',
 'displaymode:top+list': 'current/list',
 'displaymode:oncourt': 'court score',
+'displaymode:international': 'international',
 'displaymode:court_id': 'court:',
 'displaymode:court_id:loading': 'loading ...',
 'displaymode:reverse_order': 'reverse court order',

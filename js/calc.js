@@ -131,7 +131,6 @@ function gamescore(s) {
 	return gscores;
 }
 
-
 function score_str(s, left_id) {
 	var game_score; // No "let" in current browsers
 	var res = '';

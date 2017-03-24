@@ -1,3 +1,7 @@
+set colors via refmode
+
+courtspot: fix network_team1_serving (it's bananas at match start)
+courtspot: editevent fails because it does not request all_players
 btsh: display one court
 btsh: display all courts
 
@@ -211,7 +215,6 @@ improve display mode
 	net status flickering when hub is away
 
 make an android app
-	Mülheim SFTP
 	badmintonticker
 
 Notiz an Spielernamen (-> Werner Durow)
