@@ -160,9 +160,14 @@ function on_client_dstyle_change_submit(e) {
 
 	var container = uiu.closest_class(e.target, 'referee_c');
 	var new_style = container.querySelector('.referee_c_dstyle_change_select').value;
-	var new_col0 = container.querySelector('.referee_c_dstyle_col0').value;
-	var new_col1 = container.querySelector('.referee_c_dstyle_col1').value;
-	rr.change_display_style(c.id, new_style, new_col0, new_col1);
+	var colors = {};
+	['c0', 'c1', 'cbg', 'cfg', 'cbg2'].forEach(function(col) {
+		var input = container.querySelector('.referee_c_dstyle_' + col);
+		if (input) {
+			colors['d_' + col] = input.value;
+		}
+	});
+	rr.change_display_style(c.id, new_style, colors);
 }
 
 function on_subscribe_checkbox_click(e) {
@@ -422,13 +427,13 @@ function render_clients(clients) {
 			});
 			uiu.el(dstyle_form, 'input', {
 				type: 'color',
-				'class': 'referee_c_dstyle_col0',
-				value: c.settings.displaymode_col0,
+				'class': 'referee_c_dstyle_c0',
+				value: c.settings.d_c0,
 			});
 			uiu.el(dstyle_form, 'input', {
 				type: 'color',
-				'class': 'referee_c_dstyle_col1',
-				value: c.settings.displaymode_col1,
+				'class': 'referee_c_dstyle_c1',
+				value: c.settings.d_c1,
 			});
 			uiu.el(dstyle_form, 'button', {
 				'role': 'submit',

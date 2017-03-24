@@ -1,3 +1,7 @@
+displaymode: international looks wrong on android?
+
+remove court_description
+displaymode: configure colors locally
 courtspot: fix network_team1_serving (it's bananas at match start)
 courtspot: editevent fails because it does not request all_players
 btsh: display one court
@@ -655,4 +659,4 @@ refmode: screenshot
 replace msg with message everywhere (msg: msg. msg=)
 selectevent: filter by date and GPS position
 replace visible_qs(.*, false) -> hide_qs($1)
-
+all displaymode settings as d_ (also set the alternative options via refmode for a while)

@@ -1,10 +1,10 @@
 .displaymode_layout {
+	position: absolute;
 	left: 0;
 	right: 0;
 	top: 0;
-	min-height: 100vh;
+	bottom: 0;
 	z-index: 2000;
-	position: absolute;
 	background: #000;
 	color: #fff;
 }
@@ -251,15 +251,8 @@
 	border-top-right-radius: 4vmin;
 }
 
-.d_international_container {
-	font-stretch: condensed;
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	width: 100%;
-	height: 100%;
-}
 .d_international_team {
+	font-stretch: condensed;
 	position: relative;
 	height: 50%;
 }

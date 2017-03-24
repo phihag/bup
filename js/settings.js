@@ -11,8 +11,11 @@ var default_settings = {
 	network_timeout: 10000,
 	network_update_interval: 10000,
 	displaymode_update_interval: 500,
-	displaymode_col0: '#50e87d',
-	displaymode_col1: '#f76a23',
+	d_c0: '#50e87d',
+	d_c1: '#f76a23',
+	d_cbg: '#000',
+	d_cfg: '#fff',
+	d_cbg2: '#000090',
 	double_click_timeout: 1000,
 	button_block_timeout: 1200,
 	negative_timers: false,
@@ -161,8 +164,11 @@ var _settings_textfields = [
 	'refmode_client_node_name',
 
 	// really color fields
-	'displaymode_col0',
-	'displaymode_col1',
+	'd_c0',
+	'd_c1',
+	'd_cbg',
+	'd_cfg',
+	'd_cbg2',
 ];
 var _settings_numberfields = [
 	'network_timeout',
@@ -254,8 +260,8 @@ function change_setting(s, name, val) {
 	case 'displaymode_court_id':
 	case 'displaymode_reverse_order':
 	case 'displaymode_style':
-	case 'displaymode_col0':
-	case 'displaymode_col1':
+	case 'd_col0':
+	case 'd_col1':
 		displaymode.on_style_change(s);
 		break;
 	case 'wakelock':
