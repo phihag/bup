@@ -11,6 +11,8 @@ var default_settings = {
 	network_timeout: 10000,
 	network_update_interval: 10000,
 	displaymode_update_interval: 500,
+	displaymode_col0: '#50e87d',
+	displaymode_col1: '#f76a23',
 	double_click_timeout: 1000,
 	button_block_timeout: 1200,
 	negative_timers: false,
@@ -149,13 +151,18 @@ var _settings_checkboxes = [
 	'refmode_client_enabled',
 	'displaymode_reverse_order',
 ];
-var _settings_textfields = ['umpire_name',
+var _settings_textfields = [
+	'umpire_name',
 	'service_judge_name',
 	'court_id',
 	'court_description',
 	'refmode_client_ws_url',
 	'refmode_referee_ws_url',
 	'refmode_client_node_name',
+
+	// really color fields
+	'displaymode_col0',
+	'displaymode_col1',
 ];
 var _settings_numberfields = [
 	'network_timeout',
@@ -247,6 +254,8 @@ function change_setting(s, name, val) {
 	case 'displaymode_court_id':
 	case 'displaymode_reverse_order':
 	case 'displaymode_style':
+	case 'displaymode_col0':
+	case 'displaymode_col1':
 		displaymode.on_style_change(s);
 		break;
 	case 'wakelock':

@@ -79,13 +79,15 @@ function change_court(conn_id, new_court_id) {
 	});
 }
 
-function change_display_style(conn_id, new_style) {
+function change_display_style(conn_id, new_style, new_col0, new_col1) {
 	conn.send({
 		type: 'dmsg',
 		dtype: 'update-settings',
 		to: conn_id,
 		settings: {
 			displaymode_style: new_style,
+			displaymode_col0: new_col0,
+			displaymode_col1: new_col1,
 		},
 	});
 }

@@ -1,5 +1,3 @@
-set colors via refmode
-
 courtspot: fix network_team1_serving (it's bananas at match start)
 courtspot: editevent fails because it does not request all_players
 btsh: display one court

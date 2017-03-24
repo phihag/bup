@@ -89,6 +89,8 @@ function _calc_max_games(event) {
 function hash(settings, event) {
 	return {
 		style: settings.displaymode_style,
+		col0: settings.displaymode_col0,
+		col1: settings.displaymode_col1,
 		court_id: settings.displaymode_court_id,
 		reverse_order: settings.displaymode_reverse_order,
 		courts: utils.deep_copy(event.courts),

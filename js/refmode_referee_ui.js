@@ -160,7 +160,9 @@ function on_client_dstyle_change_submit(e) {
 
 	var container = uiu.closest_class(e.target, 'referee_c');
 	var new_style = container.querySelector('.referee_c_dstyle_change_select').value;
-	rr.change_display_style(c.id, new_style);
+	var new_col0 = container.querySelector('.referee_c_dstyle_col0').value;
+	var new_col1 = container.querySelector('.referee_c_dstyle_col1').value;
+	rr.change_display_style(c.id, new_style, new_col0, new_col1);
 }
 
 function on_subscribe_checkbox_click(e) {
@@ -417,6 +419,16 @@ function render_clients(clients) {
 					attrs.selected = 'selected';
 				}
 				uiu.el(change_dstyle_sel, 'option', attrs, s._('displaymode:' + ds));
+			});
+			uiu.el(dstyle_form, 'input', {
+				type: 'color',
+				'class': 'referee_c_dstyle_col0',
+				value: c.settings.displaymode_col0,
+			});
+			uiu.el(dstyle_form, 'input', {
+				type: 'color',
+				'class': 'referee_c_dstyle_col1',
+				value: c.settings.displaymode_col1,
 			});
 			uiu.el(dstyle_form, 'button', {
 				'role': 'submit',
