@@ -1,5 +1,3 @@
-displaymode: international looks wrong on android?
-
 remove court_description
 displaymode: configure colors locally
 courtspot: fix network_team1_serving (it's bananas at match start)
