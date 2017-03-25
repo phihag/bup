@@ -90,6 +90,11 @@ function main() {
 			cb(err, manifest);
 		});
 	}, function(manifest_in, cb) {
+		const version_fn = path.join(dist_dir, 'VERSION');
+		fs.readFile(version_fn, 'utf8', function(err, version) {
+			cb(err, manifest_in, version);
+		});
+	}, function(manifest_in, version, cb) {
 		var files = get_files_from_manifest(manifest_in);
 		async.map(files, function(fn, cb) {
 			hash_file(path.join(dist_dir, fn), cb);
@@ -99,6 +104,7 @@ function main() {
 			}
 			var single_checksum = hash_string(checksums.join(' '));
 			var manifest = manifest_in.replace('@checksum', single_checksum);
+			manifest = manifest.replace('@version', version);
 			cb(err, manifest);
 		});
 	}, function(manifest, cb) {
