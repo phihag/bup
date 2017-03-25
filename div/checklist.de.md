@@ -26,6 +26,7 @@
   - [ ] Ins richtige WLAN einbuchen
   - [ ] Auf lautlos stellen
   - [ ] Keep Screen On aktivieren
+  - [ ] Rotation = Landscape
   - [ ] Chrome aufrufen und einloggen
   - [ ] An Stühle anschrauben
   - [ ] Einstellungen überprüfen (Federballzähler an, Referee Mode?)

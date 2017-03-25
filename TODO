@@ -1,3 +1,7 @@
+autosize international
+A88X: reduce card dialog size
+A88X: make court more readable
+
 remove court_description
 displaymode: configure colors locally
 courtspot: fix network_team1_serving (it's bananas at match start)
