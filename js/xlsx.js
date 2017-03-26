@@ -41,11 +41,14 @@ function Sheet(book, doc, drawing_doc) {
 		_create_el(is_node, 't', {}, text);
 	}
 
-	function val(cell_id, val) {
+	function val(cell_id, val, del_formula) {
 		var cell = doc.querySelector('c[r="' + cell_id + '"]');
 		if (!cell) {
 			report_problem.silent_error('Cannot find cell ' + cell_id);
 			return;
+		}
+		if (del_formula) {
+			uiu.empty(cell);
 		}
 		var v_node = cell.querySelector('v');
 		if (v_node) {
