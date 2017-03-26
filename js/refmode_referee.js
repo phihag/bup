@@ -356,11 +356,13 @@ function espouse_event(c) {
 }
 
 function push(c) {
+	var cev = refmode_common.craft_event(s);
+	cev.last_update = s.event.last_update;
 	conn.send({
 		type: 'dmsg',
 		dtype: 'push_start',
 		to: c.id,
-		event: refmode_common.craft_event(s),
+		event: cev,
 	});
 	c.pushing = true;
 	render_clients(clients);

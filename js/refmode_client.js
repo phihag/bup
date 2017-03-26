@@ -10,6 +10,7 @@ var battery;
 var subscriptions = [];
 
 var push_netw;
+var ev_hash;
 
 function handle_change(estate) {
 	switch (estate.status) {
@@ -94,6 +95,7 @@ function handle_dmsg(msg) {
 
 		if (s.event) {
 			answer.event = refmode_common.craft_event(s, match_storage);
+			answer.event.last_update = s.event.last_update;
 		}
 
 		conn.respond(msg, answer);
@@ -313,6 +315,12 @@ function notify_changed_settings(s) {
 
 function on_event_update() {
 	var ev = refmode_common.craft_event(s, match_storage);
+	var ev_new = utils.hash_new(ev_hash, ev);
+	if (!ev_new) {
+		// No change
+		return;
+	}
+	ev_hash = ev_new;
 	subscriptions.forEach(function(conn_id) {
 		conn.send({
 			type: 'dmsg',

@@ -384,7 +384,7 @@ function subscribe(s, cb, calc_timeout) {
 			}, s);
 			return;
 		}
-		netw.list_matches(s, function(err, event) {
+		list_matches(s, function(err, event) {
 			cb(err, s, event);
 		});
 		timeout = setTimeout(query, calc_timeout(s));

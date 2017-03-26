@@ -1,4 +1,23 @@
-appcache must include version
+test update-event change
+
+international: font is way too small!! (name + satzergebnisse)
+refmode: international is missing court select
+
+test list_matches in courtspot display mode: totally crazy!
+
+TVR
+	Jörg: Satzbestätigung zu schnell
+	cursor in fullscreen display should be none if settings are not visible (Chrome / Mac OS)
+	newest version not available on tablets (?) -> t.aufschlagwechsel.de
+	error teamtext_internal bei Tablet wenn referee mode spiel ändert
+displaymode.option_applies for colors
+prevent going into incomplete match (update first, retry, if not then error)
+
+find out why btde not updating tablets (appcache)
+refmode: option to add a log of incoming messages
+consider team colors?
+match info (from Referee) mode for Darius
+demo international fails
 autosize international
 A88X: reduce card dialog size
 A88X: make court more readable
@@ -31,6 +50,7 @@ displaymode: option to vacate a court
 	set via settings
 	set (via refmode)
 "20 Sekunden" im Ansagefeld nicht sichtbar wenn Auf- und Rückschläger bestimmt werden -> Jörg Hupertz
+	noch "20 Sekunden" neben der Uhr
 almost changed running match: ask again when changing if match is in progress!!!
 adopt event: show difference
 adopt event: recalc upon event change
@@ -663,3 +683,4 @@ replace msg with message everywhere (msg: msg. msg=)
 selectevent: filter by date and GPS position
 replace visible_qs(.*, false) -> hide_qs($1)
 all displaymode settings as d_ (also set the alternative options via refmode for a while)
+event analysis: which presses before undo

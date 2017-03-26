@@ -382,6 +382,15 @@ function filter_map(ar, cb) {
 	return res;
 }
 
+function hash_obj(obj) {
+	return deep_copy(obj);
+}
+
+// Returns false if the object is not new, otherwise the new hash
+function hash_new(hashed_obj, obj) {
+	return deep_equal(hashed_obj, obj) ? false : hash_obj(obj);
+}
+
 return {
 	add_zeroes: add_zeroes,
 	any: any,
@@ -398,6 +407,8 @@ return {
 	filter_map: filter_map,
 	find: find,
 	hex: hex,
+	hash_obj: hash_obj,
+	hash_new: hash_new,
 	human_date_str: human_date_str,
 	iso8601: iso8601,
 	match_all: match_all,

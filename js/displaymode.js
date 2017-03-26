@@ -603,7 +603,7 @@ function ui_init(s, hash_query) {
 function option_applies(style_id, option_name) {
 	switch (option_name) {
 	case 'court_id':
-		return style_id === 'oncourt';
+		return (style_id === 'oncourt') || (style_id === 'international');
 	case 'reverse_order':
 		return style_id === 'top+list';
 	}

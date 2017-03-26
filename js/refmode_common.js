@@ -10,7 +10,6 @@ function craft_event(s, match_storage_module) {
 		'location', 'protest', 'matchday', 'starttime', 'notes',
 		'team_competition', 'team_names', 'league_key',
 		'all_players', 'backup_players', 'present_players',
-		'last_update',
 	]);
 
 	if (ev.matches) {
@@ -26,6 +25,7 @@ function craft_event(s, match_storage_module) {
 			return mr;
 		});
 	}
+
 	return res;
 }
 

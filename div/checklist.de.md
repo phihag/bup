@@ -70,6 +70,7 @@
 - [ ] Netzwerk checken
   - [ ] DSL-Modem als Tab öffnen
   - [ ] WLAN-Hotspot als Tab öffnen
+- [ ] Wischmöppe bereitgelegt?
 
 60-30 Minuten vor Spielbeginn:
 
