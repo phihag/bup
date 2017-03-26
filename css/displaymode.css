@@ -284,13 +284,13 @@
 	text-align: left;
 }
 .d_international_gscore {
-	font-size: 15vh;
-	line-height: 15vh;
+	font-size: 20vh;
+	line-height: 20vh;
 	position: absolute;
 	top: 0;
 	bottom: 0;
 	right: 52vh;
-	width: 16vh;
+	width: 20vh;
 	overflow: hidden;
 	display: flex;
 	align-items: center;
