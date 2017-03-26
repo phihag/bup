@@ -1,17 +1,15 @@
+update-event change: changes are not shown immediately anymore!
+btde/Aufstellung: switch the GD
+
+displaymode/international: + autosize
+
 TVR
 	Button verdeckt Namen -> Weiss
-	Ersatz Max Schwenger, Denis anwesend
+	-> remove saving hall
 
-	gestern Halle falsch!
-		-> remove saving hall
-		-> added to checklist
-	Spielbericht C10 / F10 -> LibreOffice
-	-> Guido Schänzler, Bernd Mohaupt
-
-btde: switch genders in mixed (or don't?)
+fix checklist indentation
 highlight undo in stats
-double courts display: discioplines two score
-update-event change: changes are not shown immediately anymore!
+double courts display: left score | disciplines | right score
 
 international: font is way too small!! (name + satzergebnisse)
 refmode: international is missing court select
@@ -25,6 +23,9 @@ TVR
 	error teamtext_internal bei Tablet wenn referee mode spiel ändert
 displaymode.option_applies for colors
 prevent going into incomplete match (update first, retry, if not then error)
+initialize from turnier.de?
+initialize ticker from turnier.de?
+refmode: show netstats
 
 find out why btde not updating tablets (appcache)
 refmode: option to add a log of incoming messages
