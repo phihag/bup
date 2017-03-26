@@ -830,6 +830,9 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					report_problem.silent_error('Unsupported league ' + league_key);
 				}
 
+				sheet.val('C10', ev.team_names[0]);
+				sheet.val('F10', ev.team_names[1]);
+
 				sheet.text('E8', extra_data.location);
 				sheet.text('W8', extra_data.matchday);
 				sheet.text('W4', extra_data.umpires);

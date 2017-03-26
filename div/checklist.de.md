@@ -18,6 +18,7 @@
   - [ ] Keep Screen On aktivieren
   - [ ] Chrome aufrufen und einloggen
   - [ ] Vollbild
+  - [ ] Feld / Farben eingestellt
 - [ ] Beamer aufbauen
   - [ ] Überprüfen: Ist der Rechner im tvr_ticker-WLAN?
   - [ ] https://aufschlagwechsel.de/rg
@@ -61,7 +62,6 @@
   - [ ] Alle Tablets erkannt? (ggf. Referee Mode aktivieren)
 - [ ] Tabs Aufstellungen öffnen (von kroton.de)
 - [ ] Aufstellungszettel
-  - [ ] Excel generieren
   - [ ] Ausfüllen mit in der Halle anwesenden Spielern
   - [ ] Ausdrucken
   - [ ] Heim geben
@@ -93,6 +93,7 @@
 - [ ] USB-Akkus von Tablets abmachen und einsammeln
 - [ ] Tablets checken: Eingeloggt und richtiger Zustand?
 - [ ] Beamer auf anzeigealle umstellen
+- [ ] Ballrollen an Schiedsrichterstühle stellen
 
 Während des Spiels:
 
