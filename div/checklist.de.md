@@ -113,8 +113,12 @@ Nach Spielende:
 
 - [ ] Spielbericht
   - [ ] generieren
-  - [ ] mit manuellem vergleichen
-  - [ ] Überprüfen: Schiedsrichter, anwesende Spieler, besondere Vorkommnisse?
+  - [ ] Überprüfen
+   - [ ] Halle
+   - [ ] Vereinsnamen
+   - [ ] Schiedsrichter
+   - [ ] anwesende Spieler
+   - [ ] besondere Vorkommnisse
   - [ ] 3x ausdrucken
   - [ ] Von Heim unterschreiben
   - [ ] Von Gast unterschreiben
@@ -125,6 +129,7 @@ Nach Spielende:
 - [ ] Melden
   - [ ] Helmut Ruppert anrufen
   - [ ] auf turnier.de eintragen
+- [ ] Filmstativ/Handy einsammeln
 - [ ] Tablets einsammeln
   - [ ] Export senden
   - [ ] Statistiken anschauen
