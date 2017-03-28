@@ -117,7 +117,7 @@ function show() {
 	uiu.visible_qs('.ingame_options_refmode', state.ui.referee_mode);
 }
 
-function hide(force) {
+function hide(force, skip_state) {
 	if (!force && !state.initialized) {
 		return;
 	}
@@ -130,9 +130,11 @@ function hide(force) {
 	}
 
 	state.ui.settings_visible = false;
-	control.set_current(state);
 	uiu.visible_qs('#settings_wrapper', false);
 	uiu.esc_stack_pop();
+	if (!skip_state) {
+		control.set_current(state);
+	}
 }
 
 function update_court(s) {
@@ -347,7 +349,7 @@ function ui_init(s) {
 		e.preventDefault();
 		displaymode.hide();
 		refmode_referee_ui.hide();
-		settings.show();
+		show();
 	});
 }
 

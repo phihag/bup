@@ -543,6 +543,7 @@ function show() {
 	state.ui.displaymode_visible = true;
 	refmode_referee_ui.hide();
 	render.hide();
+	settings.hide(true, true);
 	settings.on_mode_change(state);
 	settings.show_displaymode();
 
@@ -550,7 +551,6 @@ function show() {
 	uiu.show_qs('.displaymode_layout');
 	uiu.addClass_qs('.settings_layout', 'settings_layout_displaymode');
 
-	_cancel_updates = network.ui_list_matches(state, true, false);
 	update({
 		errtype: 'loading',
 	}, state);

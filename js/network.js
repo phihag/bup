@@ -81,30 +81,6 @@ function send_press(s, press) {
 	}
 }
 
-var _network_list_timeout = null;
-function _stop_list_matches() {
-	if (_network_list_timeout !== null) {
-		window.clearTimeout(_network_list_timeout);
-		_network_list_timeout = null;
-	}
-}
-
-function _start_list_matches(s) {
-	if (_network_list_timeout !== null) {
-		window.clearTimeout(_network_list_timeout);
-		_network_list_timeout = null;
-	}
-
-	if (erroneous.list_matches) {
-		// Let the normal resync procedure handle it
-		return;
-	}
-
-	_network_list_timeout = setTimeout(function() {
-		ui_list_matches(s, true);
-	}, s.settings.network_update_interval);
-}
-
 function _matchlist_install_reload_button(s) {
 	var event_container = $('.setup_network_heading');
 	if (event_container.find('.setup_network_matches_reload').length > 0) {
@@ -328,9 +304,6 @@ function list_matches(s, callback) {
 // Returns a callback to be called when the list is no longer required
 function ui_list_matches(s, silent, no_timer) {
 	_matchlist_install_reload_button(s);
-	if (! no_timer) {
-		_start_list_matches(s);
-	}
 
 	var status_container = $('.setup_network_status');
 	if (!silent && status_container.find('.setup_network_matches_loading').length === 0) {
@@ -342,10 +315,9 @@ function ui_list_matches(s, silent, no_timer) {
 	if (!netw) {
 		return;
 	}
-	// TODO use subscribe here
-	list_matches(s, function(err, event) {
+
+	return subscribe(s, function(err, s, event) {
 		status_container.empty();
-		_matchlist_install_reload_button(s);
 		errstate('list_matches', err);
 		if (err) {
 			var err_msg = $('<div class="network_error">');
@@ -361,14 +333,14 @@ function ui_list_matches(s, silent, no_timer) {
 		uiu.visible_qs('.editevent_link', editable);
 		uiu.visible_qs('.setupsheet_link', editable);
 		ui_render_matchlist(s, event);
+	}, function(s) {
+		return no_timer ? 'abort' : s.settings.network_update_interval;
 	});
-
-	return _stop_list_matches;
 }
 
 // Returns a callback to be called when the updates are no longer required.
 // cb gets called with (err, s, event); s is NOT updated implicitly
-// calc_timeout is called with s and must return immediately the timeout
+// calc_timeout is called with s and must return immediately the timeout or the string 'abort'
 function subscribe(s, cb, calc_timeout) {
 	var cancelled = false;
 	var timeout = null;
@@ -387,7 +359,12 @@ function subscribe(s, cb, calc_timeout) {
 		list_matches(s, function(err, event) {
 			cb(err, s, event);
 		});
-		timeout = setTimeout(query, calc_timeout(s));
+		var new_timeout = calc_timeout(s);
+		if (new_timeout === 'abort') {
+			cancelled = true;
+			return;
+		}
+		timeout = setTimeout(query, new_timeout);
 	}
 	query();
 

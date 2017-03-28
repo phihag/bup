@@ -1,8 +1,11 @@
-umpire -> display -> umpire breaks
-2x update-event on actual changes
+subscribing is wrong
+make sure repeat times are correct
 
+retest errors in displaymode
+
+2x update-event on actual changes
 displaymode/international: + autosize
-refmode: disable/enable pronouncing remotely
+refmode: disable/enable pronouncing and other settings remotely
 
 TVR
 	Button verdeckt Namen -> Weiss
