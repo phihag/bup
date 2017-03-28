@@ -427,11 +427,13 @@ function render_clients(clients) {
 			});
 
 			displaymode.ALL_COLORS.forEach(function(col) {
-				uiu.el(dstyle_form, 'input', {
-					type: 'color',
-					'class': 'referee_c_dstyle_' + col,
-					value: c.settings['d_' + col],
-				});
+				if (displaymode.option_applies(c.settings.displaymode_style, col)) {
+					uiu.el(dstyle_form, 'input', {
+						type: 'color',
+						'class': 'referee_c_dstyle_' + col,
+						value: c.settings['d_' + col],
+					});
+				}
 			});
 			uiu.el(dstyle_form, 'button', {
 				'role': 'submit',
