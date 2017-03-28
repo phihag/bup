@@ -1,6 +1,8 @@
-update-event change: changes are not shown immediately anymore!
+umpire -> display -> umpire breaks
+2x update-event on actual changes
 
 displaymode/international: + autosize
+refmode: disable/enable pronouncing remotely
 
 TVR
 	Button verdeckt Namen -> Weiss
@@ -10,7 +12,6 @@ fix checklist indentation
 highlight undo in stats
 double courts display: left score | disciplines | right score
 
-international: font is way too small!! (name + satzergebnisse)
 refmode: international is missing court select
 
 test list_matches in courtspot display mode: totally crazy!

@@ -309,6 +309,7 @@ function notify_changed_settings(s) {
 			dtype: 'changed-settings',
 			to: conn_id,
 			settings: s.settings,
+			mode: settings.get_mode(s),
 		});
 	});
 }
@@ -321,6 +322,7 @@ function on_event_update() {
 		return;
 	}
 	ev_hash = ev_new;
+	ev.last_update = s.event.last_update;
 	subscriptions.forEach(function(conn_id) {
 		conn.send({
 			type: 'dmsg',
