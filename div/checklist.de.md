@@ -113,19 +113,17 @@ Nach Spielende:
 
 - [ ] Spielbericht
   - [ ] generieren
-  - [ ] Überprüfen
-   - [ ] Halle
-   - [ ] Vereinsnamen
-   - [ ] Schiedsrichter
-   - [ ] anwesende Spieler
-   - [ ] besondere Vorkommnisse
+  - [ ] Halle überprüfen
+  - [ ] Vereinsnamen überprüfen
+  - [ ] Schiedsrichter überprüfen
+  - [ ] Anwesende/Ersatz-Spieler überprüfen
+  - [ ] Besondere Vorkommnisse überprüfen
   - [ ] 3x ausdrucken
   - [ ] Von Heim unterschreiben
   - [ ] Von Gast unterschreiben
   - [ ] Von SR unterschreiben
   - [ ] 1 Exemplar an Gast
   - [ ] 2 Exemplare an Heim
-  - [ ] 1 Exemplar zur Meldung
 - [ ] Melden
   - [ ] Helmut Ruppert anrufen
   - [ ] auf turnier.de eintragen

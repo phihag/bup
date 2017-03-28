@@ -321,6 +321,7 @@ function on_event_update() {
 		// No change
 		return;
 	}
+
 	ev_hash = ev_new;
 	ev.last_update = s.event.last_update;
 	subscriptions.forEach(function(conn_id) {
