@@ -5,14 +5,21 @@ var autosize = (function() {
 var tasks = [];
 
 
-function autosize_once(task) {
+function autosize_once(task, deferred) {
 	var el = task.el;
+	var el_style = window.getComputedStyle(el, null);
+	var current_style = el_style.getPropertyValue('font-size');
+	if (!current_style && !deferred) {
+		// Wait until rendered
+		setTimeout(function() {
+			autosize_once(task, true);
+		});
+		return;
+	}
 	var desired = task.desired_func(el);
 
 	var current_width = el.offsetWidth;
 	var current_height = el.offsetHeight;
-	var el_style = window.getComputedStyle(el, null);
-	var current_style = el_style.getPropertyValue('font-size');
 	var m = /^([0-9.]+)(\s*px)$/.exec(current_style);
 	if (!m) {
 		report_problem.silent_error('Could not parse font-size for autosizing: ' + current_style);

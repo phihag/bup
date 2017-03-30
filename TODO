@@ -1,6 +1,8 @@
+test if autosize fix works
 displaymode/international: autosize
+
 Anzeige André: Sätze links, black-white
-display Moritz: prior games between names
+display Moritz: prior games in detail between names
 vertical list of all matche son current courts (tournament-overview)
 double courts display: left score | disciplines | right score
 
@@ -10,16 +12,11 @@ TVR
 	Button verdeckt Namen -> Stefan Weiss
 	remove saving hall and other extra_data
 
-fix checklist indentation
 highlight undo in stats
 
-refmode: international is missing court select
-
-TVR
-	block middle buttons like any other
-	cursor in fullscreen display should be none if settings are not visible (Chrome / Mac OS)
-	newest version not available on tablets (?) -> t.aufschlagwechsel.de
-	error teamtext_internal bei Tablet wenn referee mode spiel ändert
+block middle buttons like any other-> Jörg Hupertz
+cursor in fullscreen display should be none if settings are not visible (Chrome / Mac OS)
+error teamtext_internal bei Tablet wenn referee mode spiel auf incomplete ändert
 displaymode.option_applies for colors
 prevent going into incomplete match (update first, retry, if not then error)
 initialize from turnier.de?
@@ -697,3 +694,4 @@ selectevent: filter by date and GPS position
 replace visible_qs(.*, false) -> hide_qs($1)
 all displaymode settings as d_ (also set the alternative options via refmode for a while)
 event analysis: which presses before undo
+remove calls to prompt and alert
