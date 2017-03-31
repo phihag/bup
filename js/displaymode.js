@@ -581,13 +581,18 @@ function ui_init(s, hash_query) {
 		settings.update(s);
 	}
 
+	var cur_style = s.settings.displaymode_style;
 	uiu.qsEach('select[name="displaymode_style"]', function(select) {
 		ALL_STYLES.forEach(function(style_id) {
 			var i18n_id = 'displaymode:' + style_id;
-			uiu.el(select, 'option', {
+			var attrs = {
 				'data-i18n': i18n_id,
 				value: style_id,
-			}, s._(i18n_id));
+			};
+			if (style_id === cur_style) {
+				attrs.selected = 'selected';
+			}
+			uiu.el(select, 'option', attrs, s._(i18n_id));
 		});
 	});
 
