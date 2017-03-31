@@ -333,7 +333,7 @@ function render_html_list(container, event) {
 
 function render_oncourt(s, container, event, court) {
 	var oncourt_container = uiu.el(container, 'div', {
-		'class': 'display_oncourt_container',
+		'class': 'd_oncourt',
 	});
 	_render_court_display(oncourt_container, event, court, 0);
 }
