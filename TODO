@@ -1,6 +1,6 @@
-style is incorrect initially
 display is scrollable under android?
-test if autosize fix works
+
+test if autosize fix works -> does not on resizing!
 displaymode/international: autosize
 fix courtspot caching on android!?
 make court smaller -> Stefan Weiss
