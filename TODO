@@ -1,10 +1,13 @@
-display is scrollable under android?
-
-test if autosize fix works -> does not on resizing!
+rework autosize
+make sure deleting removes all autosize
 displaymode/international: autosize
-fix courtspot caching on android!?
-make court smaller -> Stefan Weiss
 
+display is scrollable under android? rework it
+test if autosize fix works -> does not on resizing!
+
+fix courtspot caching on android!?
+
+displaymode: show remaining pause time
 Anzeige André: Sätze links, black-white
 display Moritz: prior games in detail between names
 vertical list of all matche son current courts (tournament-overview)
@@ -12,9 +15,8 @@ double courts display: left score | disciplines | right score
 
 refmode: disable/enable pronouncing and other settings remotely
 
-TVR
-	Button verdeckt Namen -> Stefan Weiss
-	remove saving hall and other extra_data
+remove saving hall and other extra_data
+make court smaller -> Stefan Weiss
 
 highlight undo in stats
 
@@ -27,6 +29,7 @@ initialize from turnier.de?
 initialize ticker from turnier.de?
 refmode: show netstats
 
+test button on umpire panels to test all connected displays for 10 seconds
 find out why btde not updating tablets (appcache)
 refmode: option to add a log of incoming messages
 consider team colors?

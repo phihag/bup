@@ -2,8 +2,8 @@
 var autosize = (function() {
 'use strict';
 
-var tasks = [];
-
+var tasks = {};
+var task_id = 0;
 
 function autosize_once(task, deferred) {
 	var el = task.el;
@@ -14,7 +14,6 @@ function autosize_once(task, deferred) {
 		setTimeout(function() {
 			autosize_once(task, true);
 		});
-		return;
 	}
 	var desired = task.desired_func(el);
 
@@ -22,7 +21,7 @@ function autosize_once(task, deferred) {
 	var current_height = el.offsetHeight;
 	var m = /^([0-9.]+)(\s*px)$/.exec(current_style);
 	if (!m) {
-		report_problem.silent_error('Could not parse font-size for autosizing: ' + current_style);
+		report_problem.silent_error('Could not parse font-size for autosizing: ' + current_style + ' (deferred: ' + JSON.stringify(deferred) + ')');
 		return;
 	}
 	var by_width = Math.floor(parseFloat(m[1]) / (current_width / desired.width));
@@ -37,24 +36,38 @@ function maintain(el, desired_func) {
 	var task = {
 		el: el,
 		desired_func: desired_func,
+		id: task_id,
 	};
-	tasks.push(task);
+	tasks[task_id] = task;
+	el.setAttribute('data-autosize-id', task_id);
+	task_id++;
 	autosize_once(task);
-	return function() {
-		utils.remove(tasks, task);
-	};
+}
+
+function unmaintain(el) {
+	var as_id = el.getAttribute('data-autosize-id');
+	if (!as_id) {
+		report_problem.silent_error('Failed to unmaintain: Autosize not enabled on element');
+		return;
+	}
+	delete tasks[as_id];
+}
+
+function unmaintain_all(container) {
+	uiu.qsEach('[data-autosize-id]', unmaintain, container);
 }
 
 if (typeof window != 'undefined') {
 	window.addEventListener('resize', function() {
-		tasks.forEach(function(task) {
-			autosize_once(task);
-		});
+		for (var k in tasks) {
+			autosize_once(tasks[k]);
+		}
 	});
 }
 
 return {
 	maintain: maintain,
+	unmaintain_all: unmaintain_all,
 };
 
 })();
@@ -62,7 +75,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var report_problem = require('./report_problem');
-	var utils = require('./utils');
+	var uiu = require('./uiu');
 
 	module.exports = autosize;
 }

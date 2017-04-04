@@ -1,7 +1,6 @@
 'use strict';
 var displaymode = (function() {
 
-var autosize_cancels = [];
 var ALL_STYLES = [
 	'oncourt',
 	'international',
@@ -503,11 +502,12 @@ function update(err, s, event) {
 	}
 
 	// Redraw everything
-	autosize_cancels.forEach(function(ac) {
-		ac();
-	});
-	autosize_cancels = [];
+	autosize.unmaintain_all(container);
 	uiu.empty(container);
+
+	ALL_STYLES.forEach(function(astyle) {
+		((astyle === style) ? uiu.addClass : uiu.removeClass)(container, 'd_layout_' + astyle);
+	});
 
 	var func = {
 		'oncourt': render_oncourt,
@@ -569,7 +569,12 @@ function hide() {
 	if (_cancel_updates) {
 		_cancel_updates();
 	}
-	uiu.hide_qs('.displaymode_layout');
+
+	var container = uiu.qs('.displaymode_layout');
+	autosize.unmaintain_all(container);
+	uiu.empty(container);
+	uiu.hide(container);
+
 	uiu.removeClass_qs('.settings_layout', 'settings_layout_displaymode');
 	state.ui.displaymode_visible = false;
 	settings.on_mode_change(state);
