@@ -1,6 +1,4 @@
-rework autosize
-make sure deleting removes all autosize
-displaymode/international: autosize
+displaymode/international: (fix) autosize
 
 display is scrollable under android? rework it
 test if autosize fix works -> does not on resizing!

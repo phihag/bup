@@ -7,8 +7,10 @@ var _describe = tutils._describe;
 var _it = tutils._it;
 var DOUBLES_SETUP = tutils.DOUBLES_SETUP;
 var DOUBLES_TEAM_SETUP = tutils.DOUBLES_TEAM_SETUP;
+var DOUBLES_TEAM_SETUP_NEUTRALGROUND = tutils.DOUBLES_TEAM_SETUP_NEUTRALGROUND;
 var SINGLES_SETUP = tutils.SINGLES_SETUP;
 var SINGLES_TEAM_SETUP = tutils.SINGLES_TEAM_SETUP;
+var SINGLES_TEAM_SETUP_NEUTRALGROUND = tutils.SINGLES_TEAM_SETUP_NEUTRALGROUND;
 var state_after = tutils.state_after;
 var press_score = tutils.press_score;
 var bup = tutils.bup;
@@ -375,6 +377,29 @@ _describe('pronunciation', function() {
 			'Love all.\n' +
 			'Play.'
 		);
+		s = state_after(presses, DOUBLES_TEAM_SETUP_NEUTRALGROUND);
+		assert.strictEqual(
+			pronounce_de(s),
+			'Meine Damen und Herren:\n' +
+			'Zu meiner Rechten,\n' +
+			'A team, vertreten durch Andrew und Alice,\n' +
+			'und zu meiner Linken,\n' +
+			'B team, vertreten durch Bob und Birgit.\n' +
+			'A team schlägt auf, Alice zu Birgit.\n\n' +
+			'0 beide.\n' +
+			'Bitte spielen.'
+		);
+		assert.strictEqual(
+			pronounce_en(s),
+			'Ladies and Gentlemen:\n' +
+			'On my right,\n' +
+			'A team, represented by Andrew and Alice,\n' +
+			'and on my left,\n' +
+			'B team, represented by Bob and Birgit.\n' +
+			'A team to serve, Alice to Birgit.\n\n' +
+			'Love all.\n' +
+			'Play.'
+		);
 
 
 		presses = [{
@@ -408,6 +433,29 @@ _describe('pronunciation', function() {
 			'B team, represented by Bob and Birgit,\n' +
 			'and on my right,\n' +
 			'A team, represented by Andrew and Alice.\n' +
+			'B team to serve, Bob to Andrew.\n\n' +
+			'Love all.\n' +
+			'Play.'
+		);
+		s = state_after(presses, DOUBLES_TEAM_SETUP_NEUTRALGROUND);
+		assert.strictEqual(
+			pronounce_de(s),
+			'Meine Damen und Herren:\n' +
+			'Zu meiner Rechten,\n' +
+			'A team, vertreten durch Andrew und Alice,\n' +
+			'und zu meiner Linken,\n' +
+			'B team, vertreten durch Bob und Birgit.\n' +
+			'B team schlägt auf, Bob zu Andrew.\n\n' +
+			'0 beide.\n' +
+			'Bitte spielen.'
+		);
+		assert.strictEqual(
+			pronounce_en(s),
+			'Ladies and Gentlemen:\n' +
+			'On my right,\n' +
+			'A team, represented by Andrew and Alice,\n' +
+			'and on my left,\n' +
+			'B team, represented by Bob and Birgit.\n' +
 			'B team to serve, Bob to Andrew.\n\n' +
 			'Love all.\n' +
 			'Play.'
@@ -448,7 +496,29 @@ _describe('pronunciation', function() {
 			'Love all.\n' +
 			'Play.'
 		);
-
+		s = state_after(presses, DOUBLES_TEAM_SETUP_NEUTRALGROUND);
+		assert.strictEqual(
+			pronounce_de(s),
+			'Meine Damen und Herren:\n' +
+			'Zu meiner Rechten,\n' +
+			'B team, vertreten durch Bob und Birgit,\n' +
+			'und zu meiner Linken,\n' +
+			'A team, vertreten durch Andrew und Alice.\n' +
+			'B team schlägt auf, Birgit zu Andrew.\n\n' +
+			'0 beide.\n' +
+			'Bitte spielen.'
+		);
+		assert.strictEqual(
+			pronounce_en(s),
+			'Ladies and Gentlemen:\n' +
+			'On my right,\n' +
+			'B team, represented by Bob and Birgit,\n' +
+			'and on my left,\n' +
+			'A team, represented by Andrew and Alice.\n' +
+			'B team to serve, Birgit to Andrew.\n\n' +
+			'Love all.\n' +
+			'Play.'
+		);
 	});
 
 	_it('Match start in a team competition (singles)', function() {
@@ -492,7 +562,29 @@ _describe('pronunciation', function() {
 			'Love all.\n' +
 			'Play.'
 		);
-
+		s = state_after(presses, SINGLES_TEAM_SETUP_NEUTRALGROUND);
+		assert.strictEqual(
+			pronounce_de(s),
+			'Meine Damen und Herren:\n' +
+			'Zu meiner Rechten,\n' +
+			'B team, vertreten durch Bob,\n' +
+			'und zu meiner Linken,\n' +
+			'A team, vertreten durch Alice.\n' +
+			'A team schlägt auf.\n\n' +
+			'0 beide.\n' +
+			'Bitte spielen.'
+		);
+		assert.strictEqual(
+			pronounce_en(s),
+			'Ladies and Gentlemen:\n' +
+			'On my right,\n' +
+			'B team, represented by Bob,\n' +
+			'and on my left,\n' +
+			'A team, represented by Alice.\n' +
+			'A team to serve.\n\n' +
+			'Love all.\n' +
+			'Play.'
+		);
 
 		presses = [{
 			type: 'pick_side', // Alice picks right
@@ -525,7 +617,29 @@ _describe('pronunciation', function() {
 			'Love all.\n' +
 			'Play.'
 		);
-
+		s = state_after(presses, SINGLES_TEAM_SETUP_NEUTRALGROUND);
+		assert.strictEqual(
+			pronounce_de(s),
+			'Meine Damen und Herren:\n' +
+			'Zu meiner Rechten,\n' +
+			'A team, vertreten durch Alice,\n' +
+			'und zu meiner Linken,\n' +
+			'B team, vertreten durch Bob.\n' +
+			'A team schlägt auf.\n\n' +
+			'0 beide.\n' +
+			'Bitte spielen.'
+		);
+		assert.strictEqual(
+			pronounce_en(s),
+			'Ladies and Gentlemen:\n' +
+			'On my right,\n' +
+			'A team, represented by Alice,\n' +
+			'and on my left,\n' +
+			'B team, represented by Bob.\n' +
+			'A team to serve.\n\n' +
+			'Love all.\n' +
+			'Play.'
+		);
 
 		presses = [{
 			type: 'pick_side', // Alice picks left
@@ -558,7 +672,29 @@ _describe('pronunciation', function() {
 			'Love all.\n' +
 			'Play.'
 		);
-
+		s = state_after(presses, SINGLES_TEAM_SETUP_NEUTRALGROUND);
+		assert.strictEqual(
+			pronounce_de(s),
+			'Meine Damen und Herren:\n' +
+			'Zu meiner Rechten,\n' +
+			'B team, vertreten durch Bob,\n' +
+			'und zu meiner Linken,\n' +
+			'A team, vertreten durch Alice.\n' +
+			'B team schlägt auf.\n\n' +
+			'0 beide.\n' +
+			'Bitte spielen.'
+		);
+		assert.strictEqual(
+			pronounce_en(s),
+			'Ladies and Gentlemen:\n' +
+			'On my right,\n' +
+			'B team, represented by Bob,\n' +
+			'and on my left,\n' +
+			'A team, represented by Alice.\n' +
+			'B team to serve.\n\n' +
+			'Love all.\n' +
+			'Play.'
+		);
 
 
 		presses = [{
@@ -588,6 +724,29 @@ _describe('pronunciation', function() {
 			'B team, represented by Bob,\n' +
 			'and on my right,\n' +
 			'A team, represented by Alice.\n' +
+			'B team to serve.\n\n' +
+			'Love all.\n' +
+			'Play.'
+		);
+		s = state_after(presses, SINGLES_TEAM_SETUP_NEUTRALGROUND);
+		assert.strictEqual(
+			pronounce_de(s),
+			'Meine Damen und Herren:\n' +
+			'Zu meiner Rechten,\n' +
+			'A team, vertreten durch Alice,\n' +
+			'und zu meiner Linken,\n' +
+			'B team, vertreten durch Bob.\n' +
+			'B team schlägt auf.\n\n' +
+			'0 beide.\n' +
+			'Bitte spielen.'
+		);
+		assert.strictEqual(
+			pronounce_en(s),
+			'Ladies and Gentlemen:\n' +
+			'On my right,\n' +
+			'A team, represented by Alice,\n' +
+			'and on my left,\n' +
+			'B team, represented by Bob.\n' +
 			'B team to serve.\n\n' +
 			'Love all.\n' +
 			'Play.'

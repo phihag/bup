@@ -62,6 +62,7 @@ $verwaltung = mysqli_fetch_assoc($result);
 mysqli_free_result($result);
 
 $league_key = null;
+$neutral_ground = false;
 switch ($verwaltung['Liga']) {
 case 1:
 	$league_key = '1BL-2016';
@@ -71,6 +72,10 @@ case 2:
 	break;
 case 3:
 	$league_key = '2BLS-2016';
+	break;
+case 4: // Aufstiegsrunde
+	$league_key = '1BL-2016';
+	$neutral_ground = true;
 	break;
 }
 
@@ -201,6 +206,7 @@ $res = [
 	'team_names' => [$verwaltung['Heim'], $verwaltung['Gast']],
 	'league_key' => $league_key,
 	'team_competition' => true,
+	'neutral_ground' => $neutral_ground,
 ];
 
 if (array_key_exists('all_players', $_GET)) {

@@ -216,9 +216,10 @@ function pronounce(s, now) {
 				(s.setup.is_doubles ? (', ' + server_name + s._('onmyleft.serve.to') + receiver_name) : '') :
 				''
 			);
+			var left_team = (s.game.team1_left ? 0 : 1);
 			d = {
-				away_team: _prematch_team(s, 1),
-				home_team: _prematch_team(s, 0),
+				left_team: _prematch_team(s, left_team),
+				right_team: _prematch_team(s, 1 - left_team),
 				serving_team: s.setup.teams[serving_team_id].name,
 				serving_str: serving_str,
 				score: pronounce_score(s),
@@ -227,7 +228,7 @@ function pronounce(s, now) {
 			return (
 				ready_str +
 				mark_str +
-				s._(s.game.team1_left ? 'onmyleft.home_team' : 'onmyleft.away_team', d)
+				s._((s.game.team1_left || s.setup.neutral_ground) ? 'onmyleft.home_team' : 'onmyleft.away_team', d)
 			);
 		} else {
 			var receiver_str = (s.setup.is_doubles ?

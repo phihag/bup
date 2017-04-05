@@ -94,8 +94,8 @@ var i18n_en = {
 'button:Unsuspend': 'Resume Play',
 'button:Resume after injury': 'Resume Play',
 
-'onmyleft.home_team': 'Ladies and Gentlemen:\nOn my right,\n{away_team},\nand on my left,\n{home_team}.\n{serving_team} to serve{serving_str}.\n\n{score}.\nPlay.',
-'onmyleft.away_team': 'Ladies and Gentlemen:\nOn my left,\n{away_team},\nand on my right,\n{home_team}.\n{serving_team} to serve{serving_str}.\n\n{score}.\nPlay.',
+'onmyleft.home_team': 'Ladies and Gentlemen:\nOn my right,\n{right_team},\nand on my left,\n{left_team}.\n{serving_team} to serve{serving_str}.\n\n{score}.\nPlay.',
+'onmyleft.away_team': 'Ladies and Gentlemen:\nOn my left,\n{left_team},\nand on my right,\n{right_team}.\n{serving_team} to serve{serving_str}.\n\n{score}.\nPlay.',
 'onmyleft': 'Ladies and Gentlemen:\nOn my right,\n{right_team},\nand on my left,\n{left_team}.\n{server} to serve{receiver_str}.\n\n{score}.\nPlay.',
 'onmyleft.serveto': ' to {receiver}',
 'onmyleft.team.doubles': '{p1} and {p2}',

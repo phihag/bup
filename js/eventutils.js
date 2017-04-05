@@ -146,6 +146,7 @@ function annotate(s, event) {
 		tournament_name: event.tournament_name,
 		event_name: event.event_name,
 		team_competition: event.team_competition,
+		neutral_ground: event.neutral_ground,
 	};
 	event.matches.forEach(function(m) {
 		var setup = m.setup;

@@ -25,6 +25,7 @@ preferred_order Array of eventsheet_id (recommended) or match_name values that i
                 Example: ["MS1", "WS", "MS2", "MD1", "WD", "MD2", "MX"].
 protest         Text describing the protest of one team, e.g. "Court extremely slippery (Home team, 19:00)"
 team_competition* Are players competing for their teams(true) or for themselves(false)? Affects announcements.
+neutral_ground  Boolean. If true, the competition is happening at a neutral venue, so the guest team is not mentioned first. Affects announcements.
 team_names      Array of home and away team name. Required for team competitions.
                 Example: ["TV Refrath", "BC Bischmisheim"]
 umpires         String describing umpires (for eventsheet), e.g. "Barbara Bub & Klaus-Michael Becker"
@@ -143,6 +144,7 @@ teams*             An array (0: home team, 1: away team) of teams (see below).
 is_doubles*        Boolean key. false => singles, true => mixed/doubles
 counting*          Scoring system. Valid values are "3x21", "1x21", "2x21+11", "5x11_15", "1x11_15", "5x11/3"
 team_competition   Are players competing for their teams(true) or for themselves(false)? Affects announcements
+neutral_ground     If team competition: Is the match played on neutral grounds? Affects announcements.     
 umpire_name        Name of the umpire assigned to this match (or the last one who touched it).
 service_judge_name Name of the service judge assigned to this match.
 court_id           ID of the court this match is played on.
