@@ -1,8 +1,12 @@
-displaymode: +2int
-displaymode: show remaining pause time
+displaymode/2court
+	show score
+	show gamescore
+	show match (in between)
+	highlight winner / server
+	show remaining pause time
 Anzeige André: Sätze links, black-white
 display Moritz: prior games in detail between names
-vertical list of all matche son current courts (tournament-overview)
+vertical list of all matches on current courts (tournament-overview)
 double courts display: left score | disciplines | right score
 displaymode: modify colors
 

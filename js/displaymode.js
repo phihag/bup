@@ -655,10 +655,10 @@ function ui_init(s, hash_query) {
 		});
 	});
 
-	Mousetrap.bind('ctrl+left', function() {
+	Mousetrap.bind('left', function() {
 		advance_style(s, -1);
 	});
-	Mousetrap.bind('ctrl+right', function() {
+	Mousetrap.bind('right', function() {
 		advance_style(s, 1);
 	});
 
