@@ -4,6 +4,7 @@ var displaymode = (function() {
 var ALL_STYLES = [
 	'oncourt',
 	'international',
+	'2court',
 	'top+list',
 ];
 var ALL_COLORS = ['c0', 'c1', 'cbg', 'cfg', 'cbg2'];
@@ -472,6 +473,17 @@ function _colors(settings) {
 	};
 }
 
+function render_2court(s, container, event) {
+	if (!event.courts) {
+		uiu.el(container, 'div', {
+			'class': 'display_error',
+		}, 'Court information missing');
+		return;
+	}
+
+	// TODO actually render here
+}
+
 var _last_painted_hash = null;
 var _last_err;
 function update(err, s, event) {
@@ -539,6 +551,9 @@ function update(err, s, event) {
 		}
 	} else {
 		switch (style) {
+		case '2court':
+			render_2court(s, container, event)
+			break;
 		case 'top+list':
 		default:
 			render_top(s, container, event);
@@ -636,7 +651,7 @@ function option_applies(style_id, option_name) {
 	case 'c1':
 	case 'cfg':
 	case 'cbg':
-		return (style_id === 'international');
+		return (style_id === 'international') || (style_id === '2court');
 	case 'cb2':
 		return false;
 	case 'court_id':
