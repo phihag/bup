@@ -29,6 +29,8 @@
 	font-size: 18px;
 }
 .settings_layout.settings_layout_displaymode {
+	position: fixed;
+	bottom: 0;
 	background: none;
 	-webkit-align-items: flex-end;
 	align-items: flex-end;
