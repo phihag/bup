@@ -618,6 +618,9 @@ function hide() {
 }
 
 function advance_style(s, direction) {
+	if (!state.ui.displaymode_visible) {
+		return;
+	}
 	var idx = ALL_STYLES.indexOf(s.settings.displaymode_style) + direction;
 	var len = ALL_STYLES.length;
 	if (idx >= len) {
