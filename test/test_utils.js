@@ -282,4 +282,22 @@ _describe('helper functions', function() {
 			[10, 20, 40]
 		);
 	});
+
+	_it('forEach', function() {
+		var ar = [];
+		bup.utils.forEach('foobar', function(c, i) {
+			ar.push({
+				c: c,
+				i: i,
+			});
+		});
+		assert.deepStrictEqual(ar, [
+			{c: 'f', i: 0},
+			{c: 'o', i: 1},
+			{c: 'o', i: 2},
+			{c: 'b', i: 3},
+			{c: 'a', i: 4},
+			{c: 'r', i: 5},
+		]);
+	});
 });

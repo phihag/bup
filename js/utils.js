@@ -391,6 +391,12 @@ function hash_new(hashed_obj, obj) {
 	return deep_equal(hashed_obj, obj) ? false : hash_obj(obj);
 }
 
+function forEach(str, cb) {
+	for (var i = 0;i < str.length;i++) {
+		cb(str[i], i);
+	}
+}
+
 return {
 	add_zeroes: add_zeroes,
 	any: any,
@@ -406,6 +412,7 @@ return {
 	encode_utf8: encode_utf8,
 	filter_map: filter_map,
 	find: find,
+	forEach: forEach,
 	hex: hex,
 	hash_obj: hash_obj,
 	hash_new: hash_new,

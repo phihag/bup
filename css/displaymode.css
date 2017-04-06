@@ -296,3 +296,87 @@
 	align-items: center;
 	justify-content: center;
 }
+
+
+.d_2court_side0,
+.d_2court_side1 {
+	position: fixed;
+	top: 0;
+	width: 50%;
+	height: 100%;
+}
+.d_2court_side0,
+.d_2court_side0 .d_2court_score {
+	left: 0;
+}
+.d_2court_side1,
+.d_2court_side1 .d_2court_score {
+	right: 0;
+}
+.d_2court_team0,
+.d_2court_team1 {
+	font-stretch: condensed;
+	position: relative;
+	height: 50%;
+}
+.d_2court_score {
+	position: absolute;
+	font-size: 44vh;
+	line-height: 50vh;
+	width: 44vh;
+	height: 100%;
+	text-align: center;
+}
+.d_2court_score_digit0 {
+	position: absolute;
+	left: 0;
+}
+.d_2court_score_digit1 {
+	position: absolute;
+	right: 0;
+}
+.d_2court_gscore {
+	font-size: 30vh;
+	line-height: 30vh;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	padding: 0 2vh;
+	width: 20vh;
+	display: flex;
+	justify-content: center;
+}
+.d_2court_team0 .d_2court_gscore {
+	align-items: flex-start;
+}
+.d_2court_team1 .d_2court_gscore {
+	align-items: flex-end;
+}
+.d_2court_info {
+	font-size: 12vh;
+	line-height: 15vh;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.d_2court_side0 .d_2court_info,
+.d_2court_side0 .d_2court_gscore {
+	left: 44vh;
+}
+.d_2court_side1 .d_2court_info,
+.d_2court_side1 .d_2court_gscore {
+	right: 44vh;
+}
+
+
+.d_2court_divider {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 49.8vw;
+	right: 49.8vw;
+	background: lime;
+}

@@ -469,7 +469,7 @@ function _colors(settings) {
 		1: settings.d_c1 || '#f76a23',
 		bg: settings.d_cbg || '#000',
 		fg: settings.d_cfg || '#fff',
-		bg2: settings.d_cbg2 || '#000090',
+		bg2: settings.d_cbg2 || '#2f2f2f',
 	};
 }
 
@@ -481,7 +481,58 @@ function render_2court(s, container, event) {
 		return;
 	}
 
-	// TODO actually render here
+	for (var court_idx = 0;court_idx < 2;court_idx++) {
+		var court_container = uiu.el(container, 'div', {
+			'class': 'd_2court_side' + court_idx,
+		});
+
+		var real_court_idx = s.settings.displaymode_reverse_order ? (1 - court_idx) : court_idx;
+		var court = event.courts[real_court_idx];
+		var match = _match_by_court(event, court);
+
+		var nscore = match.network_score || [];
+		var gscore = _gamescore_from_netscore(nscore, match.setup);
+		var current_score = nscore[nscore.length - 1] || [];
+		var colors = _colors(s.settings);
+		var server = determine_server(match, current_score);
+		var gwinner = calc.game_winner(match.setup.counting, nscore.length - 1, current_score[0], current_score[1]);
+
+		match.setup.teams.forEach(function(team, team_id) {
+			var team_container = uiu.el(court_container, 'div', 'd_2court_team' + team_id);
+
+			var col = colors[team_id];
+			var team_serving = (
+				(gwinner === 'left') ? (team_id === 0) : (
+				(gwinner === 'right') ? (team_id === 1) : (
+				(server.team_id === team_id))));
+
+			var points = '' + current_score[team_id];
+			var score_el = uiu.el(team_container, 'div', {
+				'class': 'd_2court_score',
+				style: 'background: ' + (team_serving ? col : colors.bg) + '; color: ' + (team_serving ? colors.bg : col),
+			});
+			if (points.length < 2) {
+				uiu.text(score_el, points);
+			} else {
+				// Two digits, layout manually since we're extremely tight on space
+				utils.forEach(points, function(digit, digit_idx) {
+					uiu.el(score_el, 'div', 'd_2court_score_digit' + digit_idx, digit);
+				});
+			}
+
+			uiu.el(team_container, 'div', {
+				'class': 'd_2court_gscore',
+				style: 'background: ' + colors.bg + '; color: ' + colors.fg + ';',
+			}, gscore[team_id]);
+		});
+
+		uiu.el(court_container, 'div', 'd_2court_info', match.setup.match_name);
+	}
+
+	uiu.el(container, 'div', {
+		'class': 'd_2court_divider',
+		'style': 'background: ' + colors.bg2,
+	});
 }
 
 var _last_painted_hash = null;
