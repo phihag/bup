@@ -8,16 +8,24 @@ var ALL_STYLES = [
 ];
 var ALL_COLORS = ['c0', 'c1', 'cbg', 'cfg', 'cbg2'];
 
-function _setup_autosize(el, right_node) {
+function _setup_autosize(el, right_node, determine_height) {
 	autosize.maintain(el, function() {
 		var parent_node = el.parentNode;
 		var w = parent_node.offsetWidth;
 		if (right_node) {
 			w = Math.min(w, right_node.offsetLeft);
 		}
+
+		var h;
+		if (determine_height) {
+			h = determine_height(parent_node);
+		} else {
+			h = parent_node.offsetHeight / 1.1;
+		}
+
 		return {
 			width: w,
-			height: parent_node.offsetHeight / 1.1,
+			height: h,
 		};
 	});
 }
@@ -420,7 +428,9 @@ function render_international(s, container, event, court) {
 		}
 
 		player_spans.forEach(function(ps) {
-			_setup_autosize(ps, right_border);
+			_setup_autosize(ps, right_border, function(parent_node) {
+				return parent_node.offsetHeight * 0.5;
+			});
 		});
 	});
 }
