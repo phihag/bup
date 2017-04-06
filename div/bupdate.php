@@ -187,5 +187,16 @@ if (! \rename($new_bup, $bup_dir)) {
 	error('Failed to move in new bup dir');
 }
 
+$new_version = \file_get_contents($bup_dir . '/VERSION');
+if ($new_version === false) {
+	error('Failed to read new bup version');
+}
+
 rmrf($tmp_dir);
 @\rmdir($tmp_root);
+
+header('Content-Type: text/plain');
+header('Cache-Control: no-cache, no-store, must-revalidate');
+header('Pragma: no-cache');
+header('Expires: 0');
+echo 'Updated to bup ' . $new_version;
