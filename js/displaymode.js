@@ -554,7 +554,7 @@ function update(err, s, event) {
 	} else {
 		switch (style) {
 		case '2court':
-			render_2court(s, container, event)
+			render_2court(s, container, event);
 			break;
 		case 'top+list':
 		default:
