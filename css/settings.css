@@ -29,6 +29,7 @@
 	font-size: 18px;
 }
 .settings_layout.settings_layout_displaymode {
+	min-height: 85vmin;
 	position: fixed;
 	bottom: 0;
 	background: none;
