@@ -383,7 +383,7 @@ function render_international(s, container, event, court) {
 		}
 
 		var team_container = uiu.el(container, 'div', 'd_international_team');
-		var player_els = player_names.map(function(pname, player_id) {
+		var player_spans = player_names.map(function(pname, player_id) {
 			var is_server = (!match_over) && team_serving && (server.player_id === player_id);
 			var style = (
 				'background: ' + (is_server ? col : colors.bg) + ';' +
@@ -395,10 +395,11 @@ function render_international(s, container, event, court) {
 				'style': 'height: ' + (is_doubles ? '50%' : '100%') + ';',
 				'class': 'd_international_player_container',
 			});
-			return uiu.el(player_container, 'div', {
+			var pel = uiu.el(player_container, 'div', {
 				style: style,
 				'class': 'd_international_player',
-			}, pname);
+			});
+			return uiu.el(pel, 'div', {}, pname);
 		});
 
 		var right_border;
@@ -418,8 +419,8 @@ function render_international(s, container, event, court) {
 			right_border = points_el;
 		}
 
-		player_els.forEach(function(pel) {
-			_setup_autosize(pel, right_border);
+		player_spans.forEach(function(ps) {
+			_setup_autosize(ps, right_border);
 		});
 	});
 }

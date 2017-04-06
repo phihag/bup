@@ -24,8 +24,9 @@ function autosize_once(task, deferred) {
 		report_problem.silent_error('Could not parse font-size for autosizing: ' + current_style + ' (deferred: ' + JSON.stringify(deferred) + ')');
 		return;
 	}
-	var by_width = Math.floor(parseFloat(m[1]) / (current_width / desired.width));
-	var by_height = Math.floor(parseFloat(m[1]) / (current_height / desired.height));
+	var cur_size = parseFloat(m[1]);
+	var by_width = Math.floor(cur_size / (current_width / desired.width));
+	var by_height = Math.floor(cur_size / (current_height / desired.height));
 	var new_size = Math.min(by_width, by_height);
 	el.style.fontSize = new_size + m[2];
 }

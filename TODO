@@ -1,4 +1,4 @@
-displaymode/international: (fix) autosize
+international: lower maximum size
 
 display is scrollable under android? rework it
 test if autosize fix works -> does not on resizing!
