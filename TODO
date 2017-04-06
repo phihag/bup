@@ -1,13 +1,10 @@
-displaymode: umgekehrte Feldreihenfolge nur wenn wichtig
-displaymode: modify colors
-change modes with ctrl+left/right
-
 displaymode: +2int
 displaymode: show remaining pause time
 Anzeige André: Sätze links, black-white
 display Moritz: prior games in detail between names
 vertical list of all matche son current courts (tournament-overview)
 double courts display: left score | disciplines | right score
+displaymode: modify colors
 
 fix courtspot caching on android!?
 refmode: disable/enable pronouncing and other settings remotely

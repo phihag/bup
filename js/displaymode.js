@@ -519,6 +519,8 @@ function update(err, s, event) {
 	}
 
 	var court_select = uiu.qs('[name="displaymode_court_id"]');
+	uiu.visible_qs('.settings_display_court_id', option_applies(style, 'court_id'));
+	uiu.visible_qs('.settings_display_reverse_order', option_applies(style, 'reverse_order'));
 	if (event.courts && (!_last_painted_hash || !utils.deep_equal(cur_event_hash.courts, _last_painted_hash.courts))) {
 		uiu.empty(court_select);
 		event.courts.forEach(function(c) {
@@ -678,7 +680,7 @@ function option_applies(style_id, option_name) {
 	case 'court_id':
 		return (style_id === 'oncourt') || (style_id === 'international');
 	case 'reverse_order':
-		return style_id === 'top+list';
+		return (style_id === 'top+list') || (style_id === '2court');
 	}
 }
 
