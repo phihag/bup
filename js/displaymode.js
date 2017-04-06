@@ -583,6 +583,7 @@ function hide() {
 	autosize.unmaintain_all(container);
 	uiu.empty(container);
 	uiu.hide(container);
+	_last_painted_hash = null;
 
 	uiu.removeClass_qs('.settings_layout', 'settings_layout_displaymode');
 	state.ui.displaymode_visible = false;
