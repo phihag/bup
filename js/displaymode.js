@@ -632,6 +632,7 @@ function advance_style(s, direction) {
 	s.settings.displaymode_style = ALL_STYLES[idx];
 	settings.update(s);
 	on_style_change(s);
+	settings.store(s);
 }
 
 function ui_init(s, hash_query) {
