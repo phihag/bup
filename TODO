@@ -1,5 +1,6 @@
 displaymode: umgekehrte Feldreihenfolge nur wenn wichtig
 displaymode: modify colors
+change modes with ctrl+left/right
 
 displaymode: +2int
 displaymode: show remaining pause time

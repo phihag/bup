@@ -615,6 +615,20 @@ function hide() {
 	settings.on_mode_change(state);
 }
 
+function advance_style(s, direction) {
+	var idx = ALL_STYLES.indexOf(s.settings.displaymode_style) + direction;
+	var len = ALL_STYLES.length;
+	if (idx >= len) {
+		idx -= len;
+	}
+	if (idx < 0) {
+		idx += len;
+	}
+	s.settings.displaymode_style = ALL_STYLES[idx];
+	settings.update(s);
+	on_style_change(s);
+}
+
 function ui_init(s, hash_query) {
 	if (hash_query.dm_style !== undefined) {
 		s.settings.displaymode_style = hash_query.dm_style;
@@ -634,6 +648,13 @@ function ui_init(s, hash_query) {
 			}
 			uiu.el(select, 'option', attrs, s._(i18n_id));
 		});
+	});
+
+	Mousetrap.bind('ctrl+left', function() {
+		advance_style(s, -1);
+	});
+	Mousetrap.bind('ctrl+right', function() {
+		advance_style(s, 1);
 	});
 
 	click.qs('.displaymode_layout', function() {
