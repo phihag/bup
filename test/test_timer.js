@@ -32,6 +32,7 @@ _describe('timer', function() {
 			}, 1230000),
 			{
 				visible: true,
+				upwards: true,
 				ms: 230000,
 				next: 1000,
 				str: '3:50',
@@ -86,6 +87,7 @@ _describe('timer', function() {
 			}, 1250280),
 			{
 				visible: false,
+				str: '0',
 			}
 		);
 

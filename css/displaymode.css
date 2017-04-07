@@ -396,3 +396,19 @@
 	border-bottom-left-radius: 0.2em;
 	border-top-left-radius: 0.2em;
 }
+.d_2court_teamname0,
+.d_2court_teamname1 {
+	position: absolute;
+	font-size: 10vh;
+	text-align: center;
+	left: 50vh;
+	right: 50vh;
+	white-space: pre;
+	z-index: 10001;
+}
+.d_2court_teamname0 {
+	top: 30vh;
+}
+.d_2court_teamname1 {
+	bottom: 30vh;
+}
