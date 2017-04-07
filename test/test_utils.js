@@ -30,8 +30,11 @@ _describe('helper functions', function() {
 
 	_it('duration_secs', function() {
 		assert.equal(bup.utils.duration_secs(0, 1005), '0:01');
+		assert.equal(bup.utils.duration_secs(1005), '0:01');
 		assert.equal(bup.utils.duration_secs(0, 62070), '1:02');
-		assert.equal(bup.utils.duration_secs(0, 18129090), '5:02:09');
+		assert.equal(bup.utils.duration_secs(62070), '1:02');
+		assert.equal(bup.utils.duration_secs(1000, 18129090), '5:02:08');
+		assert.equal(bup.utils.duration_secs(18129090), '5:02:09');
 	});
 
 	_it('deep_equal', function() {

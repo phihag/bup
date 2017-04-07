@@ -136,7 +136,8 @@ function duration_hours(start_timestamp, end_timestamp) {
 }
 
 function duration_secs(start_timestamp, end_timestamp) {
-	var diff_s = Math.round((end_timestamp - start_timestamp) / 1000);
+	var diff = end_timestamp ? (end_timestamp - start_timestamp) : start_timestamp;
+	var diff_s = Math.round(diff / 1000);
 	var secs = diff_s % 60;
 	var diff_mins = (diff_s - secs) / 60;
 	var mins = diff_mins % 60;

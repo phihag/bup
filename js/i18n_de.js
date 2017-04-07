@@ -452,7 +452,7 @@ var i18n_de = {
 'weekday:5': 'Fr',
 'weekday:6': 'Sa',
 
-'displaymode:style': 'Style:',
+'displaymode:style': 'Ansicht:',
 'displaymode:top+list': 'Aktuell/Liste',
 'displaymode:oncourt': 'Feld-Punktzahl',
 'displaymode:international': 'International',

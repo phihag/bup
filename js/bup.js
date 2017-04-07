@@ -132,6 +132,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 		refmode_referee: refmode_referee,
 		scoresheet: scoresheet,
 		stats: stats,
+		timer: timer,
 		utils: utils,
 		xlsx: xlsx,
 	};

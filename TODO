@@ -1,6 +1,9 @@
-display settings not visible on android
+timer goes out too late
+
 displaymode/2court
 	show remaining pause time
+
+
 Anzeige André: Sätze links, black-white
 display Moritz: prior games in detail between names
 vertical list of all matches on current courts (tournament-overview)
@@ -96,7 +99,6 @@ refmode push: make sure to prevent loops
 make lint work on macOS
 
 Android app
-SFTP (for BVM)
 
 Anzeige: Sätze
 handle und test old Android browsers
@@ -116,10 +118,8 @@ Liste aller Spieler + Schiedsrichter für Hallensprecher (inkl. Reihenfolge)
 Safari: Spielbericht fails
 Safari referee: show red warning
 Safari: private browsing mode incurs more error messages
+scoresheet: bundesliga SVG logo
 
-more displays
-	2 displays per courtE
-make colors configurable
 ads!
 -> Markus Schwendtner
 
@@ -296,9 +296,6 @@ Aufstellungszettel mit all_names (checkboxes)
 	fetch from btde
 
 pick referee court if starting with displaymode
-
-BVM-Support
-	Upload via SFTP
 
 publish to turnier.de
 	-> Janine

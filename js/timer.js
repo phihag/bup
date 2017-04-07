@@ -14,71 +14,92 @@ function set() {
 	}
 }
 
-function update() {
-	if (! state.timer) {
-		remove();
-		return;
+// Returns an object with keys
+//  visible Is there an active timer? If true, the following are also set:
+//  ms      number of ms remaining
+//  str     String representation to show
+//  exigent Boolean: should the timer be colored red?
+//  next    Next tick (ms) or false if not necessary
+function calc(s, now) {
+	if (!s.timer || !s.timer.start) {
+		return {visible: false};
 	}
 
-	if (!state.timer.start) {
-		// For example after resuming a game
-		remove();
-		return;
+	if (!now) {
+		now = Date.now();
 	}
+	if (s.timer.upwards) {
+		var ms = now - s.timer.start;
+
+		return {
+			visible: true,
+			ms: ms,
+			str: utils.duration_secs(ms),
+			exigent: false,
+			next: 1000,
+		};
+	}
+
+	var remaining = s.timer.start + s.timer.duration - now;
+	if (!s.settings.negative_timers && (remaining <= 0)) {
+		return {
+			visible: false,
+			str: '0',
+		};
+	}
+	var next = (
+		(remaining <= 0) ? // then s.settings.negative_timers
+		1000 :
+		Math.max(10, remaining % 1000)
+	);
+
+	var remaining_str;
+	if (s.settings.negative_timers && (remaining < 0)) {
+		remaining_str = '-' + utils.duration_secs(0, -remaining);
+	} else {
+		remaining = Math.max(0, remaining);
+		remaining_str = Math.round(remaining / 1000);
+		if (remaining_str >= 60) {
+			remaining_str = Math.floor(remaining_str / 60) + ':' + utils.add_zeroes(remaining_str % 60);
+		}
+	}
+
+	return {
+		visible: true,
+		ms: remaining,
+		str: remaining_str,
+		exigent: (s.timer.exigent && (remaining <= s.timer.exigent) && (remaining > 0)),
+		next: next,
+	};
+}
+
+function update() {
+	var tv = calc(state);
 
 	var timer_el = uiu.qs('.timer');
-	if (state.timer.upwards) {
-		var val = utils.duration_secs(state.timer.start, Date.now());
-		uiu.text(timer_el, val);
-		uiu.removeClass(timer_el, 'timer_exigent');
-		ui_timer = window.setTimeout(update, 1000);
-	} else {
-		var remaining = state.timer.start + state.timer.duration - Date.now();
-		var remaining_val;
-		if (state.settings.negative_timers && (remaining < 0)) {
-			remaining_val = '-' + utils.duration_secs(0, -remaining);
-		} else {
-			remaining = Math.max(0, remaining);
-			remaining_val = Math.round(remaining / 1000);
-			if (remaining_val >= 60) {
-				remaining_val = Math.floor(remaining_val / 60) + ':' + utils.add_zeroes(remaining_val % 60);
-			}
-		}
-		uiu.text(timer_el, remaining_val);
-
-		var new_timer_state = (remaining <= 0) ? undefined : 'running';
-		if (state.timer.exigent && (remaining <= state.timer.exigent)) {
-			uiu.addClass(timer_el, 'timer_exigent');
-			if (new_timer_state === 'running') {
-				new_timer_state = 'exigent';
-			}
-		} else {
-			uiu.removeClass(timer_el, 'timer_exigent');
-		}
-
-		var old_timer_state = state.timer_state;
-		state.timer_state = new_timer_state;
-		if (old_timer_state && (new_timer_state !== old_timer_state)) {
-			render.ui_render(state); // Rerender because pronounciation may have changed
-		}
-
-		if ((remaining <= 0) && (state.settings.negative_timers)) {
-			ui_timer = window.setTimeout(update, 1000);
-			return true;
-		}
-
-		if (remaining <= 0) {
-			remove();
-			return;
-		}
-		var remaining_ms = Math.max(10, remaining % 1000);
-		ui_timer = window.setTimeout(update, remaining_ms);
+	if (tv.str) {
+		uiu.text(timer_el, tv.str);
 	}
-	return true;
+	if (tv.visible) {
+		uiu.setClass(timer_el, 'timer_exigent', tv.exigent);
+		if (tv.next !== false) {
+			ui_timer = window.setTimeout(update, tv.next);
+		}
+	} else {
+		remove();
+	}
+
+	var state_id = (tv.visible ? (tv.exigent ? 'exigent' : 'running') : null);
+	var old_state_id = state.timer_state;
+	state.timer_state = state_id;
+	if (old_state_id && (state_id !== old_state_id)) {
+		render.ui_render(state); // Rerender because pronounciation may have changed
+	}
+
+	return tv.visible;
 }
 
 function remove(immediately) {
-	state.timer_state = undefined;
 	if (ui_timer) {
 		window.clearTimeout(ui_timer);
 		ui_timer = null;
@@ -100,6 +121,7 @@ function ui_init() {
 }
 
 return {
+	calc: calc,
 	set: set,
 	remove: remove,
 	ui_init: ui_init,
