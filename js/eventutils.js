@@ -53,19 +53,22 @@ function calc_all_players(event) {
 	return res;
 }
 
+function get_presses(match) {
+	if (match.presses) {
+		return match.presses;
+	} else if (match.presses_json) {
+		return JSON.parse(match.presses_json);
+	}
+	// Else: return undefined
+}
+
 function set_metadata(event) {
 	var umpires_set = {}; // Poor man's set
 
 	event.matches.forEach(function(match) {
 		match.md_eid = match.setup.eventsheet_id || match.setup.match_name;
-		var presses;
-		if (match.presses) {
-			presses = match.presses;
-		} else if (match.presses_json) {
-			presses = JSON.parse(match.presses_json);
-		} else {
-			return;
-		}
+		var presses = get_presses(match);
+		if (!presses) return;
 
 		var scopy = {};
 		calc.init_state(scopy, match.setup, presses);
@@ -417,15 +420,16 @@ function make_empty_matches(league_key, event_id) {
 return {
 	annotate: annotate,
 	calc_all_players: calc_all_players,
-	set_not_before: set_not_before,
-	setups_eq: setups_eq,
+	get_presses: get_presses,
 	guess_gender: guess_gender,
+	is_bundesliga: is_bundesliga,
 	is_incomplete: is_incomplete,
+	make_empty_matches: make_empty_matches,
 	NRW2016_RE: NRW2016_RE,
 	set_incomplete: set_incomplete,
 	set_metadata: set_metadata,
-	is_bundesliga: is_bundesliga,
-	make_empty_matches: make_empty_matches,
+	set_not_before: set_not_before,
+	setups_eq: setups_eq,
 	// Testing only
 	name_by_league: name_by_league,
 };
