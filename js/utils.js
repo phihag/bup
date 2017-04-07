@@ -383,11 +383,17 @@ function filter_map(ar, cb) {
 }
 
 function hash_obj(obj) {
+	if (!obj) {
+		obj = {__bup_hash: obj};
+	}
 	return deep_copy(obj);
 }
 
 // Returns false if the object is not new, otherwise the new hash
 function hash_new(hashed_obj, obj) {
+	if (!obj) {
+		obj = {__bup_hash: obj};
+	}
 	return deep_equal(hashed_obj, obj) ? false : hash_obj(obj);
 }
 

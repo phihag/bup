@@ -300,4 +300,17 @@ _describe('helper functions', function() {
 			{c: 'r', i: 5},
 		]);
 	});
+
+	_it('hash_new', function() {
+		var hashval;
+		hashval = bup.utils.hash_new(hashval, {});
+		assert(hashval);
+
+		var ret1 = bup.utils.hash_new(hashval, false);
+		assert(ret1);
+		hashval = ret1;
+
+		var ret2 = bup.utils.hash_new(hashval, false);
+		assert(!ret2);
+	});
 });
