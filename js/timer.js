@@ -19,6 +19,7 @@ function set() {
 //  ms      number of ms remaining
 //  str     String representation to show
 //  exigent Boolean: should the timer be colored red?
+//  upwards True if the timer is going up
 //  next    Next tick (ms) or false if not necessary
 function calc(s, now) {
 	if (!s.timer || !s.timer.start) {
@@ -32,6 +33,7 @@ function calc(s, now) {
 		var ms = now - s.timer.start;
 
 		return {
+			upwards: true,
 			visible: true,
 			ms: ms,
 			str: utils.duration_secs(ms),

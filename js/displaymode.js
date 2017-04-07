@@ -473,6 +473,50 @@ function _colors(settings) {
 	};
 }
 
+function _extract_timer_state(s, match) {
+	if (s.settings.displaymode_style !== '2court') {
+		return; // No timer required
+	}
+
+	var presses = eventutils.get_presses(match);
+	var rs = calc.remote_state(s, match.setup, presses);
+	return rs;
+}
+
+var active_timers = [];
+function create_timer(timer_state, parent, props) {
+	var tv = timer.calc(timer_state);
+	if (!tv.visible || tv.upwards) {
+		return;
+	}
+	var el = uiu.el(parent, 'div', props, tv.str);
+	var tobj = {}
+	active_timers.push(tobj);
+
+	var update = function() {
+		var tv = timer.calc(timer_state);
+		var visible = tv.visible && !tv.upwards;
+		uiu.text(el, tv.str);
+		if (visible && tv.next) {
+			tobj.timeout = setTimeout(update, tv.next);
+		} else {
+			tobj.timeout = null;
+		}
+		if (!visible) {
+			uiu.remove(el);
+		}
+	};
+	update();
+}
+
+function abort_timers() {
+	active_timers.forEach(function(tobj) {
+		if (tobj.timeout) {
+			clearTimeout(tobj.timeout);
+		}
+	});
+}
+
 function render_2court(s, container, event) {
 	if (!event.courts) {
 		uiu.el(container, 'div', {
@@ -527,6 +571,14 @@ function render_2court(s, container, event) {
 		});
 
 		uiu.el(court_container, 'div', 'd_2court_info', match.setup.match_name);
+
+		var timer_state = _extract_timer_state(s, match);
+		if (timer_state) {
+			create_timer(timer_state, court_container, {
+				'class': 'd_2court_timer',
+				style: 'background: ' + colors.bg + '; color: ' + colors.fg + ';',
+			});
+		}
 	}
 
 	uiu.el(container, 'div', {
@@ -586,6 +638,7 @@ function update(err, s, event) {
 	}
 
 	// Redraw everything
+	abort_timers();
 	autosize.unmaintain_all(container);
 	uiu.empty(container);
 
@@ -757,11 +810,13 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
 	var click = require('./click');
 	var control = require('./control');
+	var eventutils = require('./eventutils');
 	var network = require('./network');
 	var render = require('./render');
 	var refmode_referee_ui = null; // break cycle, should be require('./refmode_referee_ui');
 	var report_problem = require('./report_problem');
 	var settings = require('./settings');
+	var timer = require('./timer');
 	var uiu = require('./uiu');
 	var utils = require('./utils');
 

@@ -370,13 +370,29 @@
 .d_2court_side1 .d_2court_gscore {
 	right: 44vh;
 }
-
-
 .d_2court_divider {
 	position: fixed;
 	top: 0;
 	bottom: 0;
 	left: 49.8vw;
 	right: 49.8vw;
-	background: lime;
+}
+.d_2court_timer {
+	position: absolute;
+	top: 40vh;
+	font-size: 20vh;
+	line-height: 20vh;
+	min-width: 2ch;
+	padding: 0 1vh;
+	text-align: right;
+}
+.d_2court_side0 .d_2court_timer {
+	left: 0;
+	border-bottom-right-radius: 0.2em;
+	border-top-right-radius: 0.2em;
+}
+.d_2court_side1 .d_2court_timer {
+	right: 0;
+	border-bottom-left-radius: 0.2em;
+	border-top-left-radius: 0.2em;
 }
