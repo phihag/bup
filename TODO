@@ -1,8 +1,11 @@
+excel bug Paul firefox
+displaymode: + cast
+
+displaymode: modify colors
 Anzeige André: Sätze links, black-white
 display Moritz: prior games in detail between names
 vertical list of all matches on current courts (tournament-overview)
-half court displays
-displaymode: modify colors
+half screen court displays
 
 fix courtspot caching on android!?
 refmode: disable/enable pronouncing and other settings remotely

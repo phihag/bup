@@ -62,6 +62,7 @@ $verwaltung = mysqli_fetch_assoc($result);
 mysqli_free_result($result);
 
 $league_key = null;
+$tournament_name = null;
 $neutral_ground = false;
 switch ($verwaltung['Liga']) {
 case 1:
@@ -75,6 +76,11 @@ case 3:
 	break;
 case 4: // Aufstiegsrunde
 	$league_key = '1BL-2016';
+	$neutral_ground = true;
+	break;
+case 5: // Bundesliga-Finale
+	$league_key = '1BL-2016';
+	$tournament_name = 'Finalrunde 1. Bundesliga 2016/2017';
 	$neutral_ground = true;
 	break;
 }
@@ -208,6 +214,9 @@ $res = [
 	'team_competition' => true,
 	'neutral_ground' => $neutral_ground,
 ];
+if ($tournament_name) {
+	$res['tournament_name'] = $tournament_name;
+}
 
 if (array_key_exists('all_players', $_GET)) {
 	$all_players_result = mysqli_query($db, '
