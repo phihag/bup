@@ -6,8 +6,9 @@ var ALL_STYLES = [
 	'international',
 	'2court',
 	'top+list',
+	'cast',
 ];
-var ALL_COLORS = ['c0', 'c1', 'cbg', 'cfg', 'cbg2'];
+var ALL_COLORS = ['c0', 'c1', 'cbg', 'cfg', 'cbg2', 't'];
 
 function _setup_autosize(el, right_node, determine_height) {
 	autosize.maintain(el, function() {
@@ -257,6 +258,38 @@ function render_top(s, container, event) {
 	}
 }
 
+function render_cast(s, container, event) {
+	if (! event.courts) {
+		uiu.el(container, 'div', 'error', s._('displaymode:no courts'));
+		return;
+	}
+	var colors = _colors(s.settings);
+
+	var courts_container = uiu.el(container, 'div', {
+		'class': 'display_courts_container',
+		'style': 'background: ' + colors.t,
+	});
+	var court_count = event.courts.length;
+	var court_width = Math.floor((100.0 - (4 * (court_count - 1))) / court_count);
+	for (var court_idx = 0;court_idx < court_count;court_idx++) {
+		if (court_idx > 0) {
+			uiu.el(courts_container, 'div', {
+				'class': 'display_courts_separator',
+			});
+		}
+
+		var court_container = uiu.el(courts_container, 'div', {
+			'class': 'display_courts_court',
+			'style': ('width: ' + court_width + '%;'),
+		});
+
+		var real_court_idx = s.settings.displaymode_reverse_order ? (court_count - 1 - court_idx) : court_idx;
+		var court = event.courts[real_court_idx];
+		_render_court_display(court_container, event, court);
+	}
+}
+
+
 function render_list(container, event) {
 	render_html_list(container, event); // TODO switch to svg
 }
@@ -470,6 +503,7 @@ function _colors(settings) {
 		bg: settings.d_cbg || '#000',
 		fg: settings.d_cfg || '#fff',
 		bg2: settings.d_cbg2 || '#2f2f2f',
+		t: settings.d_ct || '#80ff00',
 	};
 }
 
@@ -666,6 +700,9 @@ function update(err, s, event) {
 		switch (style) {
 		case '2court':
 			render_2court(s, container, event);
+			break;
+		case 'cast':
+			render_cast(s, container, event);
 			break;
 		case 'top+list':
 		default:

@@ -457,9 +457,11 @@ var i18n_en = {
 'displaymode:oncourt': 'court score',
 'displaymode:international': 'international',
 'displaymode:2court': '2 courts',
+'displaymode:cast': 'greenscreen',
 'displaymode:court_id': 'court:',
 'displaymode:court_id:loading': 'loading ...',
 'displaymode:reverse_order': 'reverse court order',
+'displaymode:no courts': 'No court information available',
 
 'liveaw:lost connection': 'Reconnecting ...',
 
