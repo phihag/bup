@@ -66,18 +66,20 @@ function ui_import_json(s) {
 
 function gen_export_data(s, include_debug) {
 	var e = utils.deep_copy(s.event);
-	e.matches.forEach(function(m) {
-		if (m.presses || m.presses_json) {
-			return;
-		}
-		var stored = match_storage.get(m.setup.match_id);
-		if (!stored) {
-			return;
-		}
-		if (stored.presses) {
-			m.presses_json = JSON.stringify(stored.presses);
-		}
-	});
+	if (e) {
+		e.matches.forEach(function(m) {
+			if (m.presses || m.presses_json) {
+				return;
+			}
+			var stored = match_storage.get(m.setup.match_id);
+			if (!stored) {
+				return;
+			}
+			if (stored.presses) {
+				m.presses_json = JSON.stringify(stored.presses);
+			}
+		});
+	}
 	var res = {
 		type: 'bup-export',
 		version: 1,
