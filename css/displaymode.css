@@ -412,3 +412,26 @@
 .d_2court_teamname1 {
 	bottom: 30vh;
 }
+
+.d_castall_bg {
+	position: fixed;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+}
+.d_castall_bottom {
+	position: fixed;
+	bottom: 90px;
+	left: 0;
+	width: 100%;
+
+	display: flex;
+	align-items: center;
+}
+.d_castall_bottom_block {
+	display: inline-block;
+	width: 670px;
+	height: 55px;
+	border-radius: 12px;
+}

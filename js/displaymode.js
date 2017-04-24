@@ -6,7 +6,7 @@ var ALL_STYLES = [
 	'international',
 	'2court',
 	'top+list',
-	'cast',
+	'castall',
 ];
 var ALL_COLORS = ['c0', 'c1', 'cbg', 'cfg', 'cbg2', 't'];
 
@@ -258,35 +258,47 @@ function render_top(s, container, event) {
 	}
 }
 
-function render_cast(s, container, event) {
+function render_castall(s, container, event) {
 	if (! event.courts) {
 		uiu.el(container, 'div', 'error', s._('displaymode:no courts'));
 		return;
 	}
 	var colors = _colors(s.settings);
 
-	var courts_container = uiu.el(container, 'div', {
-		'class': 'display_courts_container',
-		'style': 'background: ' + colors.t,
+	uiu.el(container, 'div', {
+		'class': 'd_castall_bg',
+		'style': ('background: ' + colors.t),
 	});
+
 	var court_count = event.courts.length;
-	var court_width = Math.floor((100.0 - (4 * (court_count - 1))) / court_count);
 	for (var court_idx = 0;court_idx < court_count;court_idx++) {
-		if (court_idx > 0) {
-			uiu.el(courts_container, 'div', {
-				'class': 'display_courts_separator',
-			});
-		}
-
-		var court_container = uiu.el(courts_container, 'div', {
-			'class': 'display_courts_court',
-			'style': ('width: ' + court_width + '%;'),
-		});
-
-		var real_court_idx = s.settings.displaymode_reverse_order ? (court_count - 1 - court_idx) : court_idx;
+		/*var real_court_idx = s.settings.displaymode_reverse_order ? (court_count - 1 - court_idx) : court_idx;
 		var court = event.courts[real_court_idx];
-		_render_court_display(court_container, event, court);
+		var match = _match_by_court(event, court);
+		*/
+		// TODO background
+		// TODO match name
+		// TODO team names
+		// TODO server indicator
+		// TODO scores
 	}
+
+	// Bottom display
+	var bottom_container = uiu.el(container, 'div', 'd_castall_bottom');
+	var bottom_block = uiu.el(bottom_container, 'div', {
+		'class': 'd_castall_bottom_block',
+		'style': 'background: ' + colors.bg,
+	});
+	var team_names = event.team_names || [];
+	for (var team_id = 0;team_id < team_names.length;team_id++) {
+		uiu.el(bottom_block, 'span', {
+			'class': 'd_castall_bottom_team' + team_id,
+			'style': 'color: ' + colors.fg,
+		}, team_names[team_id]);
+	}
+
+	// TODO score
+	// TODO buli logo
 }
 
 
@@ -701,8 +713,8 @@ function update(err, s, event) {
 		case '2court':
 			render_2court(s, container, event);
 			break;
-		case 'cast':
-			render_cast(s, container, event);
+		case 'castall':
+			render_castall(s, container, event);
 			break;
 		case 'top+list':
 		default:
@@ -826,11 +838,11 @@ function option_applies(style_id, option_name) {
 	case 'c1':
 	case 'cfg':
 	case 'cbg':
-		return (style_id === 'international') || (style_id === '2court');
-	case 'cb2':
+		return (style_id === 'international') || (style_id === '2court') || (style_id === 'castall');
+	case 'cbg2':
 		return false;
 	case 't':
-		return (style_id === 'cast');
+		return (style_id === 'castall');
 	case 'court_id':
 		return (style_id === 'oncourt') || (style_id === 'international');
 	case 'reverse_order':

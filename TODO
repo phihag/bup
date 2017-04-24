@@ -1,8 +1,7 @@
-edge Referee mode
-
-displaymode: cast mode
+displaymode: castall mode
 displaymode: castsingle mode
 
+edge Referee mode
 displaymode: modify colors live
 Anzeige André: Sätze links, black-white
 display Moritz: prior games in detail between names

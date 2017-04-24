@@ -457,7 +457,7 @@ var i18n_de = {
 'displaymode:oncourt': 'Feld-Punktzahl',
 'displaymode:international': 'International',
 'displaymode:2court': '2 Felder',
-'displaymode:cast': 'Cast',
+'displaymode:castall': 'Cast (Alle Felder) (experimentell)',
 'displaymode:court_id': 'Court:',
 'displaymode:court_id:loading': 'lade ...',
 'displaymode:reverse_order': 'Umgekehrte Felder-Reihenfolge',
