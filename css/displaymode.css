@@ -427,11 +427,42 @@
 	width: 100%;
 
 	display: flex;
-	align-items: center;
+	justify-content: center;
 }
 .d_castall_bottom_block {
 	display: inline-block;
 	width: 670px;
 	height: 55px;
 	border-radius: 12px;
+}
+.d_castall_bottom_team0,
+.d_castall_bottom_team1 {
+	width: 262px;
+	height: 100%;
+	font-size: 32px;
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.d_castall_bottom_team0 {
+	float: left;
+	margin-left: 8px;
+}
+.d_castall_bottom_team1 {
+	margin-right: 8px;
+	float: right;
+}
+.d_castall_bottom_team_name {
+	white-space: pre;
+}
+.d_castall_score0,
+.d_castall_score1 {
+	height: 100%;
+	width: 65px;
+	display: inline-flex;
+	font-size: 55px;
+
+	justify-content: center;
+	align-items: center;
 }

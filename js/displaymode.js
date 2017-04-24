@@ -284,6 +284,7 @@ function render_castall(s, container, event) {
 	}
 
 	// Bottom display
+	var match_score = _calc_matchscore(event.matches);
 	var bottom_container = uiu.el(container, 'div', 'd_castall_bottom');
 	var bottom_block = uiu.el(bottom_container, 'div', {
 		'class': 'd_castall_bottom_block',
@@ -291,13 +292,19 @@ function render_castall(s, container, event) {
 	});
 	var team_names = event.team_names || [];
 	for (var team_id = 0;team_id < team_names.length;team_id++) {
-		uiu.el(bottom_block, 'span', {
-			'class': 'd_castall_bottom_team' + team_id,
+		var team_block = uiu.el(bottom_block, 'div', 'd_castall_bottom_team' + team_id);
+		var team_name_span = uiu.el(team_block, 'span', {
+			'class': 'd_castall_bottom_team_name',
 			'style': 'color: ' + colors.fg,
 		}, team_names[team_id]);
-	}
+		_setup_autosize(team_name_span);
 
-	// TODO score
+		uiu.el(bottom_block, 'div', {
+			'class': 'd_castall_score' + team_id,
+			'style': 'color: ' + colors.fg + '; background: ' + colors[team_id],
+		}, match_score[team_id]);
+	}
+	// TODO colon
 	// TODO buli logo
 }
 
