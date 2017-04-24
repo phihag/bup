@@ -596,7 +596,7 @@ function render_2court(s, container, event) {
 				(gwinner === 'right') ? (team_id === 1) : (
 				(server.team_id === team_id))));
 
-			var points = '' + current_score[team_id];
+			var points = (current_score[team_id] === undefined) ? '' : ('' + current_score[team_id]);
 			var score_el = uiu.el(team_container, 'div', {
 				'class': 'd_2court_score',
 				style: 'background: ' + (team_serving ? col : colors.bg) + '; color: ' + (team_serving ? colors.bg : col),
@@ -829,6 +829,8 @@ function option_applies(style_id, option_name) {
 		return (style_id === 'international') || (style_id === '2court');
 	case 'cb2':
 		return false;
+	case 't':
+		return (style_id === 'cast');
 	case 'court_id':
 		return (style_id === 'oncourt') || (style_id === 'international');
 	case 'reverse_order':
