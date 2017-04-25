@@ -100,6 +100,7 @@ function hash(settings, event) {
 	return {
 		style: settings.displaymode_style,
 		colors: _colors(settings),
+		scale: settings.d_scale,
 		court_id: settings.displaymode_court_id,
 		reverse_order: settings.displaymode_reverse_order,
 		courts: utils.deep_copy(event.courts),
@@ -264,6 +265,7 @@ function render_castall(s, container, event) {
 		return;
 	}
 	var colors = _colors(s.settings);
+	var scale = s.settings.d_scale / 100;
 
 	uiu.el(container, 'div', {
 		'class': 'd_castall_bg',
@@ -288,11 +290,22 @@ function render_castall(s, container, event) {
 	var bottom_container = uiu.el(container, 'div', 'd_castall_bottom');
 	var bottom_block = uiu.el(bottom_container, 'div', {
 		'class': 'd_castall_bottom_block',
-		'style': 'background: ' + colors.bg,
+		'style': (
+			'background:' + colors.bg + ';' +
+			'width:' + (670 * scale) + 'px;' +
+			'height:' + (55 * scale) + 'px;' + 
+			'border-radius:' + (12 * scale) + 'px'),
 	});
 	var team_names = event.team_names || [];
 	for (var team_id = 0;team_id < team_names.length;team_id++) {
-		var team_block = uiu.el(bottom_block, 'div', 'd_castall_bottom_team' + team_id);
+		var team_block = uiu.el(bottom_block, 'div', {
+			'class': 'd_castall_bottom_team' + team_id,
+			'style': (
+				'width:' + (262 * scale) + 'px;' +
+				'font-size:' + (32 * scale) + 'px;' +
+				((team_id === 0) ? 'margin-left' : 'margin-right') + ':' + (8 * scale) + 'px'
+			),
+		});
 		var team_name_span = uiu.el(team_block, 'span', {
 			'class': 'd_castall_bottom_team_name',
 			'style': 'color: ' + colors.fg,
@@ -301,7 +314,11 @@ function render_castall(s, container, event) {
 
 		uiu.el(bottom_block, 'div', {
 			'class': 'd_castall_score' + team_id,
-			'style': 'color: ' + colors.fg + '; background: ' + colors[team_id],
+			'style': (
+				'color:' + colors.bg + ';' +
+				'background: ' + colors[team_id] + ';' +
+				'width:' + (65 * scale) + 'px;' +
+				'font-size:' + (55 * scale) + 'px'),
 		}, match_score[team_id]);
 	}
 	// TODO colon
@@ -684,6 +701,7 @@ function update(err, s, event) {
 	var court_select = uiu.qs('[name="displaymode_court_id"]');
 	uiu.visible_qs('.settings_display_court_id', option_applies(style, 'court_id'));
 	uiu.visible_qs('.settings_display_reverse_order', option_applies(style, 'reverse_order'));
+	uiu.visible_qs('.settings_d_scale', option_applies(style, 'scale'));
 	if (event.courts && (!_last_painted_hash || !utils.deep_equal(cur_event_hash.courts, _last_painted_hash.courts))) {
 		uiu.empty(court_select);
 		event.courts.forEach(function(c) {
@@ -850,10 +868,13 @@ function option_applies(style_id, option_name) {
 		return false;
 	case 't':
 		return (style_id === 'castall');
+
 	case 'court_id':
 		return (style_id === 'oncourt') || (style_id === 'international');
 	case 'reverse_order':
 		return (style_id === 'top+list') || (style_id === '2court');
+	case 'scale':
+		return (style_id === 'castall');
 	}
 }
 

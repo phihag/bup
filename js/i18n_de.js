@@ -462,6 +462,7 @@ var i18n_de = {
 'displaymode:court_id:loading': 'lade ...',
 'displaymode:reverse_order': 'Umgekehrte Felder-Reihenfolge',
 'displaymode:no courts': 'Keine Court-Informationen verfügbar!',
+'displaymode:scale': 'Größen-Skalierung:',
 
 'liveaw:lost connection': 'Verbindung wird wiederhergestellt ...',
 

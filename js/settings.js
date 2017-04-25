@@ -17,6 +17,7 @@ var default_settings = {
 	d_cfg: '#ffffff',
 	d_cbg2: '#000090',
 	d_ct: '#80ff00',
+	d_scale: 100,
 	double_click_timeout: 1000,
 	button_block_timeout: 1200,
 	negative_timers: false,
@@ -178,6 +179,7 @@ var _settings_numberfields = [
 	'network_update_interval',
 	'displaymode_update_interval',
 	'button_block_timeout',
+	'd_scale',
 ];
 var _settings_selects = [
 	'click_mode',
@@ -263,8 +265,13 @@ function change_setting(s, name, val) {
 	case 'displaymode_court_id':
 	case 'displaymode_reverse_order':
 	case 'displaymode_style':
-	case 'd_col0':
-	case 'd_col1':
+	case 'd_c0':
+	case 'd_c1':
+	case 'd_cbg':
+	case 'd_cfg':
+	case 'd_cbg2':
+	case 'd_ct':
+	case 'd_scale':
 		displaymode.on_style_change(s);
 		break;
 	case 'wakelock':

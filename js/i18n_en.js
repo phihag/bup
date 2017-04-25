@@ -462,6 +462,7 @@ var i18n_en = {
 'displaymode:court_id:loading': 'loading ...',
 'displaymode:reverse_order': 'reverse court order',
 'displaymode:no courts': 'No court information available',
+'displaymode:scale': 'Scale:',
 
 'liveaw:lost connection': 'Reconnecting ...',
 
