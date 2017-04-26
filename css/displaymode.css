@@ -473,12 +473,18 @@
 }
 .d_castall_mname {
 	height: 100%;
-	float: left;
 	text-align: center;
+	float: left;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 }
+.d_castall_teams {
+	height: 100%;
+	display: block;
+	overflow: hidden;
+}
 .d_castall_team {
+	display: block;
 	height: 50%;
 }

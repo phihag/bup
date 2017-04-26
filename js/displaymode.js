@@ -293,10 +293,14 @@ function render_castall(s, container, event) {
 			uiu.el(mname_container, 'span', {}, mname[i]);
 		}
 
+		var teams_container = uiu.el(match_container, 'div', 'd_castall_teams');
 		abbrevs.forEach(function(abbrev, team_id) {
-			var team_block = uiu.el(match_container, 'div', 'd_castall_team');
+			var team_block = uiu.el(teams_container, 'div', {
+				'class': 'd_castall_team',
+				'style': 'background:' + colors[team_id],
+			});
 			uiu.el(team_block, 'div', {
-				'style': 'font-size:' + (15 * scale) + ';background:' + colors[team_id],
+				'style': 'font-size:' + (15 * scale) + 'px;',
 			}, abbrev);
 		});
 
