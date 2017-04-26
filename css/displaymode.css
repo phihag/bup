@@ -422,7 +422,7 @@
 }
 .d_castall_bottom {
 	position: fixed;
-	bottom: 8.6vh;
+	bottom: 8.6%;
 	left: 0;
 	width: 100%;
 
@@ -466,4 +466,19 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+.d_castall_match {
+	position: absolute;
+	top: 5%;
+}
+.d_castall_mname {
+	height: 100%;
+	float: left;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.d_castall_team {
+	height: 50%;
 }

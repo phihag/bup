@@ -28,6 +28,8 @@ team_competition* Are players competing for their teams(true) or for themselves(
 neutral_ground  Boolean. If true, the competition is happening at a neutral venue, so the guest team is not mentioned first. Affects announcements.
 team_names      Array of home and away team name. Required for team competitions.
                 Example: ["TV Refrath", "BC Bischmisheim"]
+team_abbrevs    Array of home and away team name abbreviation (3 letters).
+                Example: ["TVR", "BCB"]
 umpires         String describing umpires (for eventsheet), e.g. "Barbara Bub & Klaus-Michael Becker"
 starttime       Human-readable official start time, e.g. "19:00"
 date            Human-readable official day of match, e.g. "12.3.2017"

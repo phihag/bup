@@ -272,15 +272,34 @@ function render_castall(s, container, event) {
 		'style': ('background: ' + colors.t),
 	});
 
+	var abbrevs = extradata.abbrevs(s.event);
 	var court_count = event.courts.length;
 	for (var court_idx = 0;court_idx < court_count;court_idx++) {
-		/*var real_court_idx = s.settings.displaymode_reverse_order ? (court_count - 1 - court_idx) : court_idx;
+		var real_court_idx = s.settings.displaymode_reverse_order ? (court_count - 1 - court_idx) : court_idx;
 		var court = event.courts[real_court_idx];
 		var match = _match_by_court(event, court);
-		*/
-		// TODO background
-		// TODO match name
-		// TODO team names
+
+		var match_container = uiu.el(container, 'div', {
+			'class': 'd_castall_match',
+			'style': ((court_idx === 0) ? 'left' : 'right') + ':3%;background:' + colors.bg + ';width:' + (390 * scale) + 'px; height:' + (60 * scale) + 'px;border-radius:' + (6 * scale) + 'px',
+		});
+
+		var mname_container = uiu.el(match_container, 'div', {
+			'class': 'd_castall_mname',
+			'style': ('margin-left:' + (3 * scale) + 'px;font-size:' + (15 * scale) + 'px;width:' + (15 * scale) + 'px'),
+		});
+		var mname = match.setup.match_name.split(/(?=[^.])/);
+		for (var i = 0;i < mname.length;i++) {
+			uiu.el(mname_container, 'span', {}, mname[i]);
+		}
+
+		abbrevs.forEach(function(abbrev, team_id) {
+			var team_block = uiu.el(match_container, 'div', 'd_castall_team');
+			uiu.el(team_block, 'div', {
+				'style': 'font-size:' + (15 * scale) + ';background:' + colors[team_id],
+			}, abbrev);
+		});
+
 		// TODO server indicator
 		// TODO scores
 	}
@@ -904,6 +923,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var click = require('./click');
 	var control = require('./control');
 	var eventutils = require('./eventutils');
+	var extradata = require('./extradata');
 	var network = require('./network');
 	var render = require('./render');
 	var refmode_referee_ui = null; // break cycle, should be require('./refmode_referee_ui');
