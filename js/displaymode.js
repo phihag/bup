@@ -318,10 +318,17 @@ function render_castall(s, container, event) {
 				'color:' + colors.bg + ';' +
 				'background: ' + colors[team_id] + ';' +
 				'width:' + (65 * scale) + 'px;' +
-				'font-size:' + (55 * scale) + 'px'),
+				'font-size:' + (60 * scale) + 'px'),
 		}, match_score[team_id]);
 	}
-	// TODO colon
+
+	var colon_container = uiu.el(bottom_container, 'div', {
+		'class': 'd_castall_bcolon',
+	});
+	uiu.el(colon_container, 'div', {
+		'style': 'font-size:' + (50 * scale) + 'px; margin-top: -0.1em;',
+	}, ':');
+
 	// TODO buli logo
 }
 

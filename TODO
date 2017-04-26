@@ -16,6 +16,8 @@ remove saving hall and other extra_data
 make court smaller -> Stefan Weiss
 
 highlight undo in stats
+source maps for errors (server-side?)
+	http://stackoverflow.com/a/33129856/35070
 
 block middle buttons like any other-> Jörg Hupertz
 cursor in fullscreen display should be none if settings are not visible (Chrome / Mac OS)
