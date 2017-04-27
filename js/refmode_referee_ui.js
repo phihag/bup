@@ -22,7 +22,7 @@ function on_status_change(new_status) {
 		return;
 	}
 
-	uiu.text_qs('.refmode_referee_status', rr.status_str(state));
+	uiu.text_qs('.referee_status', rr.status_str(state));
 	if (new_status.status === 'enabled') {
 		uiu.visible_qs('.refmode_referee_redir', !!new_status.local_addr);
 		if (new_status.local_addr) {

@@ -120,3 +120,11 @@
 .referee_e_title {
 	float: right;
 }
+
+.referee_status {
+	user-select: auto;
+	-webkit-touch-callout: auto;
+	-webkit-user-select: auto;
+	-moz-user-select: auto;
+	-ms-user-select: auto;
+}
