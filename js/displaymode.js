@@ -8,7 +8,7 @@ var ALL_STYLES = [
 	'top+list',
 	'castall',
 ];
-var ALL_COLORS = ['c0', 'c1', 'cbg', 'cfg', 'cbg2', 't'];
+var ALL_COLORS = ['c0', 'c1', 'cbg', 'cfg', 'cbg2', 'ct'];
 
 function _setup_autosize(el, right_node, determine_height) {
 	autosize.maintain(el, function() {
@@ -286,7 +286,7 @@ function render_castall(s, container, event) {
 
 		var mname_container = uiu.el(match_container, 'div', {
 			'class': 'd_castall_mname',
-			'style': ('margin-left:' + (3 * scale) + 'px;font-size:' + (15 * scale) + 'px;width:' + (15 * scale) + 'px'),
+			'style': ('margin:0 ' + (3 * scale) + 'px;font-size:' + (15 * scale) + 'px;width:' + (15 * scale) + 'px'),
 		});
 		var mname = match.setup.match_name.split(/(?=[^.])/);
 		for (var i = 0;i < mname.length;i++) {
@@ -297,15 +297,24 @@ function render_castall(s, container, event) {
 		abbrevs.forEach(function(abbrev, team_id) {
 			var team_block = uiu.el(teams_container, 'div', {
 				'class': 'd_castall_team',
-				'style': 'background:' + colors[team_id],
 			});
-			uiu.el(team_block, 'div', {
-				'style': 'font-size:' + (15 * scale) + 'px;',
-			}, abbrev);
+			var team_name_container = uiu.el(team_block, 'div', {
+				'style': (
+					'background:' + colors[team_id] + ';' +
+					'color:' + colors.bg + ';' +
+					'outline:' + (5 * scale) + 'px solid blue;' + colors.bg + ';' +
+					'width:' + (45 * scale) + 'px;' +
+					'height: 100%;' +
+					'justify-content: center;' +
+					'align-items: center;' +
+					'font-size:' + (22 * scale) + 'px;'),
+			});
+			uiu.el(team_name_container, 'div', {}, abbrev);
 		});
 
 		// TODO server indicator
 		// TODO scores
+		// TODO bundesliga logo
 	}
 
 	// Bottom display
@@ -896,7 +905,7 @@ function option_applies(style_id, option_name) {
 		return (style_id === 'international') || (style_id === '2court') || (style_id === 'castall');
 	case 'cbg2':
 		return false;
-	case 't':
+	case 'ct':
 		return (style_id === 'castall');
 
 	case 'court_id':

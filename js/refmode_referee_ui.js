@@ -159,15 +159,20 @@ function on_client_dstyle_change_submit(e) {
 	if (!c) return;
 
 	var container = uiu.closest_class(e.target, 'referee_c');
-	var new_style = container.querySelector('.referee_c_dstyle_change_select').value;
-	var colors = {};
+	var settings = {
+		displaymode_style: container.querySelector('.referee_c_dstyle_change_select').value,
+	};
 	displaymode.ALL_COLORS.forEach(function(col) {
 		var input = container.querySelector('.referee_c_dstyle_' + col);
 		if (input) {
-			colors['d_' + col] = input.value;
+			settings['d_' + col] = input.value;
 		}
 	});
-	rr.change_display_style(c.id, new_style, colors);
+	var scale_input = container.querySelector('.referee_c_dstyle_scale');
+	if (scale_input) {
+		settings.d_scale = parseInt(scale_input.value);
+	}
+	rr.change_display_style(c.id, settings);
 }
 
 function on_subscribe_checkbox_click(e) {
@@ -416,18 +421,19 @@ function render_clients(clients) {
 				size: 1,
 				required: 'required',
 			});
+			var cur_style = c.settings.displaymode_style;
 			displaymode.ALL_STYLES.forEach(function(ds) {
 				var attrs = {
 					value: ds,
 				};
-				if (ds === c.settings.displaymode_style) {
+				if (ds === cur_style) {
 					attrs.selected = 'selected';
 				}
 				uiu.el(change_dstyle_sel, 'option', attrs, s._('displaymode:' + ds));
 			});
 
 			displaymode.ALL_COLORS.forEach(function(col) {
-				if (displaymode.option_applies(c.settings.displaymode_style, col)) {
+				if (displaymode.option_applies(cur_style, col)) {
 					uiu.el(dstyle_form, 'input', {
 						type: 'color',
 						'class': 'referee_c_dstyle_' + col,
@@ -435,6 +441,19 @@ function render_clients(clients) {
 					});
 				}
 			});
+			if (displaymode.option_applies(cur_style, 'scale')) {
+				var scale_label = uiu.el(dstyle_form, 'label', {
+					style: 'white-space: nowrap;',
+				}, s._('displaymode:scale'));
+				uiu.el(scale_label, 'input', {
+					type: 'number',
+					'class': 'referee_c_dstyle_scale',
+					min: 10,
+					max: 1000,
+					value: c.settings.d_scale,
+				});
+			}
+
 			uiu.el(dstyle_form, 'button', {
 				'role': 'submit',
 			}, s._('refmode:referee:change display style'));

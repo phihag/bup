@@ -173,6 +173,7 @@ var _settings_textfields = [
 	'd_cbg',
 	'd_cfg',
 	'd_cbg2',
+	'd_ct',
 ];
 var _settings_numberfields = [
 	'network_timeout',
@@ -230,12 +231,33 @@ function update(s) {
 	update_refclient(s);
 }
 
-function change_setting(s, name, val) {
-	if (val === s.settings[name]) {
-		return; // No change required
+function change_all(s, new_settings) {
+	var changed = {};
+	var any_changed = false;
+	var skey; // let is not available in all current browsers :()
+	for (skey in new_settings) {
+		var val = new_settings[skey];
+		if (val === s.settings[skey]) {
+			continue; // No change required
+		}
+		s.settings[skey] = val;
+		changed[skey] = true;
+		any_changed = true;
 	}
-	s.settings[name] = val;
 
+	if (!any_changed) {
+		return;
+	}
+
+	for (skey in changed) {
+		on_change(s, skey);
+	}
+
+	update(s);
+	store(s);
+}
+
+function on_change(s, name) {
 	switch (name) {
 	case 'show_pronunciation':
 	case 'negative_timers':
@@ -281,7 +303,15 @@ function change_setting(s, name, val) {
 		click.update_mode(s.settings[name]);
 		break;
 	}
+}
 
+function change_setting(s, name, val) {
+	if (val === s.settings[name]) {
+		return; // No change required
+	}
+	s.settings[name] = val;
+
+	on_change(s, name);
 	refmode_client_ui.on_settings_change(s);
 	store(s);
 }
@@ -401,6 +431,7 @@ return {
 	hide_displaymode: hide_displaymode,
 	hide_refereemode: hide_refereemode,
 	load: load,
+	change_all: change_all,
 	on_mode_change: on_mode_change,
 	show: show,
 	show_displaymode: show_displaymode,

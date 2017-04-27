@@ -1,9 +1,9 @@
-scale: change with referee mode
+displaymode: modify colors live
 displaymode: castall mode
+	black border-bottom for bottom
 displaymode: castsingle mode
 
 edge Referee mode
-displaymode: modify colors live
 Anzeige André: Sätze links, black-white
 display Moritz: prior games in detail between names
 vertical list of all matches on current courts (tournament-overview)

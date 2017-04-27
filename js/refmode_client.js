@@ -61,9 +61,7 @@ function unsubscribe(conn_id) {
 function handle_dmsg(msg) {
 	switch(msg.dtype) {
 	case 'update-settings':
-		utils.obj_update(s.settings, msg.settings);
-		settings.update(s);
-		settings.store(s);
+		settings.change_all(s, msg.settings);
 		conn.respond(msg, {
 			dtype: 'update-settings-answer',
 		});
