@@ -1,6 +1,11 @@
-displaymode: modify colors live
+90s interval
 displaymode: castall mode
 	black border-bottom for bottom
+	finish side bars
+	buli logos
+courtspot: option to switch left and right
+btde Berlin
+displaymode: modify colors live
 displaymode: castsingle mode
 
 edge Referee mode
@@ -16,7 +21,7 @@ remove saving hall and other extra_data
 make court smaller -> Stefan Weiss
 
 highlight undo in stats
-source maps for errors (server-side?)
+source maps for errors
 	http://stackoverflow.com/a/33129856/35070
 
 block middle buttons like any other-> Jörg Hupertz

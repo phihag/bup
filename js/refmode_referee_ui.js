@@ -442,9 +442,11 @@ function render_clients(clients) {
 				}
 			});
 			if (displaymode.option_applies(cur_style, 'scale')) {
-				var scale_label = uiu.el(dstyle_form, 'label', {
-					style: 'white-space: nowrap;',
-				}, s._('displaymode:scale'));
+				var scale_label = uiu.el(
+					dstyle_form,
+					'label',
+					'referee_c_dstyle_scale',
+					s._('displaymode:scale'));
 				uiu.el(scale_label, 'input', {
 					type: 'number',
 					'class': 'referee_c_dstyle_scale',
