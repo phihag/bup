@@ -17,6 +17,8 @@ var default_settings = {
 	d_cfg: '#ffffff',
 	d_cbg2: '#000090',
 	d_ct: '#80ff00',
+	d_serv: '#fff200',
+	d_recv: '#707676',
 	d_scale: 100,
 	double_click_timeout: 1000,
 	button_block_timeout: 1200,

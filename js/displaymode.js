@@ -8,7 +8,7 @@ var ALL_STYLES = [
 	'top+list',
 	'castall',
 ];
-var ALL_COLORS = ['c0', 'c1', 'cbg', 'cfg', 'cbg2', 'ct'];
+var ALL_COLORS = ['c0', 'c1', 'cbg', 'cfg', 'cbg2', 'ct', 'cserv', 'crecv'];
 
 function _setup_autosize(el, right_node, determine_height) {
 	autosize.maintain(el, function() {
@@ -281,7 +281,12 @@ function render_castall(s, container, event) {
 
 		var match_container = uiu.el(container, 'div', {
 			'class': 'd_castall_match',
-			'style': ((court_idx === 0) ? 'left' : 'right') + ':3%;background:' + colors.bg + ';width:' + (390 * scale) + 'px; height:' + (60 * scale) + 'px;border-radius:' + (6 * scale) + 'px',
+			'style': (
+				((court_idx === 0) ? 'left' : 'right') + ':3%;' +
+				'background:' + colors.bg + ';' +
+				'width:' + (390 * scale) + 'px;' +
+				'height:' + (60 * scale) + 'px;' +
+				'border-radius:' + (6 * scale) + 'px'),
 		});
 
 		var mname_container = uiu.el(match_container, 'div', {
@@ -297,21 +302,35 @@ function render_castall(s, container, event) {
 		abbrevs.forEach(function(abbrev, team_id) {
 			var team_block = uiu.el(teams_container, 'div', {
 				'class': 'd_castall_team',
+				style: (
+					'height:' + (28.5 * scale) + 'px;' +
+					'padding-top:' + (1 * scale) + 'px;' +
+					((team_id === 1) ? 'padding-bottom:' + (1 * scale) + 'px': '')
+				),
 			});
 			var team_name_container = uiu.el(team_block, 'div', {
-				'style': (
+				style: (
+					'font-family: monospace;' +
 					'background:' + colors[team_id] + ';' +
 					'color:' + colors.bg + ';' +
 					'width:' + (45 * scale) + 'px;' +
 					'height: 100%;' +
+					'display: flex;' +
 					'justify-content: center;' +
 					'align-items: center;' +
 					'font-size:' + (22 * scale) + 'px;'),
 			});
-			uiu.el(team_name_container, 'div', {}, abbrev);
+			uiu.el(team_name_container, 'span', {}, abbrev);
+
+			uiu.el(team_block, 'div', {
+				style: (
+					'height: 100%;' +
+					'background:' + ((match.network_team1_serving == (team_id === 0)) ? colors.serv : colors.recv) + ';' +	
+					'margin:0 ' + (1 * scale) + 'px;' +
+					'width:' + (10 * scale) + 'px;'),
+			});
 		});
 
-		// TODO server indicator
 		// TODO scores
 		// TODO bundesliga logo
 	}
@@ -578,6 +597,8 @@ function _colors(settings) {
 		fg: settings.d_cfg || '#fff',
 		bg2: settings.d_cbg2 || '#2f2f2f',
 		t: settings.d_ct || '#80ff00',
+		serv: settings.d_cserv || '#fff200',
+		recv: settings.d_crecv || '#707676',
 	};
 }
 
@@ -905,6 +926,8 @@ function option_applies(style_id, option_name) {
 	case 'cbg2':
 		return false;
 	case 'ct':
+	case 'cserv':
+	case 'crecv':
 		return (style_id === 'castall');
 
 	case 'court_id':

@@ -484,9 +484,7 @@
 	display: block;
 	overflow: hidden;
 }
-.d_castall_teams > * {
-	font-family: monospace;
-	height: 50%;
+.d_castall_team {
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
