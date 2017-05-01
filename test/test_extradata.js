@@ -35,6 +35,12 @@ _describe('helper functions', function() {
 		);
 		assert.deepStrictEqual(
 			bup.extradata.abbrevs({
+				team_names: ['STC Blau-Weiss Solingen', 'SG Ddorf-Unterrath'],
+			}),
+			['STC', 'SGU']
+		);
+		assert.deepStrictEqual(
+			bup.extradata.abbrevs({
 				team_names: ['BV Mülheim 2', 'TV Refrath 2'],
 			}),
 			['BVM', 'TVR']

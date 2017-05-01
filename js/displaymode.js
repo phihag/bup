@@ -302,7 +302,6 @@ function render_castall(s, container, event) {
 				'style': (
 					'background:' + colors[team_id] + ';' +
 					'color:' + colors.bg + ';' +
-					'outline:' + (5 * scale) + 'px solid blue;' + colors.bg + ';' +
 					'width:' + (45 * scale) + 'px;' +
 					'height: 100%;' +
 					'justify-content: center;' +

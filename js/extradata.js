@@ -8,6 +8,8 @@ var ABBREVS = {
 	'1.BV Mülheim': 'BVM',
 	'BV Mülheim': 'BVM',
 	'BC Hohenlimburg': 'BCH',
+	'STC Blau-Weiss Solingen': 'STC',
+	'SG Ddorf-Unterrath': 'SGU',
 };
 
 
