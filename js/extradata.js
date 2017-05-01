@@ -40,8 +40,15 @@ function abbrevs(event) {
 	return event.team_names.map(calc_abbrev);
 }
 
+function logo_url(event) {
+	if (eventutils.is_bundesliga(event.league_key)) {
+		return 'div/bundesliga-logo.svg';
+	}
+}
+
 return {
 	abbrevs: abbrevs,
+	logo_url: logo_url,
 };
 
 })();
@@ -49,5 +56,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	module.exports = extradata;
+
+	var eventutils = require('./eventutils');
 }
 /*/@DEV*/

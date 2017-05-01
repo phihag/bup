@@ -15,7 +15,7 @@ var default_settings = {
 	d_c1: '#f76a23',
 	d_cbg: '#000000',
 	d_cfg: '#ffffff',
-	d_cbg2: '#000090',
+	d_cbg2: '#d9d9d9',
 	d_ct: '#80ff00',
 	d_serv: '#fff200',
 	d_recv: '#707676',
@@ -176,6 +176,8 @@ var _settings_textfields = [
 	'd_cfg',
 	'd_cbg2',
 	'd_ct',
+	'd_cserv',
+	'd_crecv',
 ];
 var _settings_numberfields = [
 	'network_timeout',

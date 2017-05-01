@@ -278,13 +278,16 @@ function render_castall(s, container, event) {
 		var real_court_idx = s.settings.displaymode_reverse_order ? (court_count - 1 - court_idx) : court_idx;
 		var court = event.courts[real_court_idx];
 		var match = _match_by_court(event, court);
+		var max_games = calc.max_game_count(match.setup.counting);
+		var nscore = (match && match.network_score) ? match.network_score : [];
+		var logo_url = extradata.logo_url(s.event);
 
 		var match_container = uiu.el(container, 'div', {
 			'class': 'd_castall_match',
 			'style': (
 				((court_idx === 0) ? 'left' : 'right') + ':3%;' +
 				'background:' + colors.bg + ';' +
-				'width:' + (390 * scale) + 'px;' +
+				'width:' + ((85 + (max_games * 41) + (logo_url ? 100 : 0)) * scale) + 'px;' +
 				'height:' + (60 * scale) + 'px;' +
 				'border-radius:' + (6 * scale) + 'px'),
 		});
@@ -329,10 +332,35 @@ function render_castall(s, container, event) {
 					'margin:0 ' + (1 * scale) + 'px;' +
 					'width:' + (10 * scale) + 'px;'),
 			});
+
+			for (var game_idx = 0;game_idx < max_games;game_idx++) {
+				var score_container = uiu.el(team_block, 'div', {
+					style: (
+						'background:' + colors.bg2 + ';' +
+						'color:' + colors.bg + ';' +
+						'width:' + (40 * scale) + 'px;' +
+						'margin-right: ' + (1 * scale) + 'px;' +
+						'height: 100%;' +
+						'display: flex;' +
+						'justify-content: center;' +
+						'align-items: center;' +
+						'font-size:' + (22 * scale) + 'px;'),
+				});
+				uiu.el(score_container, 'span', {}, nscore[game_idx] ? nscore[game_idx][team_id] : '');
+			}
 		});
 
-		// TODO scores
-		// TODO bundesliga logo
+		if (logo_url) {
+			uiu.el(match_container, 'div', {
+				style: (
+					'height:' + (50 * scale) + 'px;' +
+					'margin:' + (5 * scale) + 'px 0;' +
+					'width:' + (100 * scale) + 'px;' +
+					'float: left;' +
+					'background: no-repeat center/contain url("' + logo_url + '");'
+				),
+			});
+		}
 	}
 
 	// Bottom display
@@ -595,7 +623,7 @@ function _colors(settings) {
 		1: settings.d_c1 || '#f76a23',
 		bg: settings.d_cbg || '#000',
 		fg: settings.d_cfg || '#fff',
-		bg2: settings.d_cbg2 || '#2f2f2f',
+		bg2: settings.d_cbg2 || '#d9d9d9',
 		t: settings.d_ct || '#80ff00',
 		serv: settings.d_cserv || '#fff200',
 		recv: settings.d_crecv || '#707676',
@@ -924,7 +952,6 @@ function option_applies(style_id, option_name) {
 	case 'cbg':
 		return (style_id === 'international') || (style_id === '2court') || (style_id === 'castall');
 	case 'cbg2':
-		return false;
 	case 'ct':
 	case 'cserv':
 	case 'crecv':

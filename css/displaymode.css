@@ -481,8 +481,7 @@
 }
 .d_castall_teams {
 	height: 100%;
-	display: block;
-	overflow: hidden;
+	float: left;
 }
 .d_castall_team {
 	display: flex;
