@@ -801,6 +801,13 @@ function render_2court(s, container, event) {
 	}
 }
 
+function on_color_select(e) {
+	var el = e.target;
+	var new_settings = {};
+	new_settings['d_' + el.getAttribute('data-name')] = el.value;
+	settings.change_all(state, new_settings);
+}
+
 var _last_painted_hash = null;
 var _last_err;
 function update(err, s, event) {
@@ -849,6 +856,22 @@ function update(err, s, event) {
 				attrs['selected'] = 'selected';
 			}
 			uiu.el(court_select, 'option', attrs, c.label || c.description || c.court_id);
+		});
+	}
+
+	var used_colors = active_colors(style);
+	uiu.visible_qs('.settings_d_colors', used_colors.length > 0);
+	var color_inputs = uiu.qs('.settings_d_colors_inputs');
+	if (color_inputs.getAttribute('data-json') !== JSON.stringify(used_colors)) {
+		uiu.empty(color_inputs);
+		used_colors.forEach(function(uc) {
+			var color_input = uiu.el(color_inputs, 'input', {
+				type: 'color',
+				'data-name': uc, // Not name to prevent it being found by general attaching of event handlers
+				title: uc,
+				value: s.settings['d_' + uc],
+			});
+			color_input.addEventListener('change', on_color_select);
 		});
 	}
 
@@ -992,6 +1015,16 @@ function ui_init(s, hash_query) {
 		e.preventDefault();
 		show();
 	});
+}
+
+function active_colors(style_id) {
+	var res = [];
+	ALL_COLORS.forEach(function(col) {
+		if (option_applies(style_id, col)) {
+			res.push(col);
+		}
+	});
+	return res;
 }
 
 function option_applies(style_id, option_name) {

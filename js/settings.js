@@ -17,8 +17,8 @@ var default_settings = {
 	d_cfg: '#ffffff',
 	d_cbg2: '#d9d9d9',
 	d_ct: '#80ff00',
-	d_serv: '#fff200',
-	d_recv: '#707676',
+	d_cserv: '#fff200',
+	d_crecv: '#707676',
 	d_scale: 100,
 	double_click_timeout: 1000,
 	button_block_timeout: 1200,
@@ -42,10 +42,10 @@ function load() {
 	}
 
 	var json_str = window.localStorage.getItem('bup_settings');
-	var res = $.extend({}, default_settings);
+	var res = utils.deep_copy(default_settings);
 	if (json_str) {
 		var new_settings = JSON.parse(json_str);
-		return $.extend(res, new_settings);
+		utils.obj_update(res, new_settings);
 	}
 	return res;
 }
@@ -464,6 +464,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var scoresheet = require('./scoresheet');
 	var stats = require('./stats');
 	var uiu = require('./uiu');
+	var utils = require('./utils');
 	var wakelock = require('./wakelock');
 
 	module.exports = settings;
