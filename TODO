@@ -1,7 +1,5 @@
+displaymode: hide mouse after a while
 btde Berlin
-displaymode: castsingle mode
-
-edge Referee mode
 Anzeige André: Sätze links, black-white
 display Moritz: prior games in detail between names
 vertical list of all matches on current courts (tournament-overview)
@@ -10,6 +8,7 @@ half screen court displays
 fix courtspot caching on android!?
 refmode: disable/enable pronouncing and other settings remotely
 
+edge Referee mode
 remove saving hall and other extra_data
 make court smaller -> Stefan Weiss
 
