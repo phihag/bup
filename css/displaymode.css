@@ -431,6 +431,7 @@
 }
 .d_castall_bottom_block {
 	display: inline-block;
+	position: relative;
 }
 .d_castall_bottom_team0,
 .d_castall_bottom_team1 {
@@ -451,7 +452,6 @@
 }
 .d_castall_score0,
 .d_castall_score1 {
-	height: 100%;
 	display: inline-flex;
 
 	justify-content: center;

@@ -273,6 +273,7 @@ function render_castall(s, container, event) {
 	});
 
 	var abbrevs = extradata.abbrevs(s.event);
+	var logo_url = extradata.logo_url(s.event);
 	var court_count = event.courts.length;
 	for (var court_idx = 0;court_idx < court_count;court_idx++) {
 		var real_court_idx = s.settings.displaymode_reverse_order ? (court_count - 1 - court_idx) : court_idx;
@@ -280,14 +281,13 @@ function render_castall(s, container, event) {
 		var match = _match_by_court(event, court);
 		var max_games = calc.max_game_count(match.setup.counting);
 		var nscore = (match && match.network_score) ? match.network_score : [];
-		var logo_url = extradata.logo_url(s.event);
 
 		var match_container = uiu.el(container, 'div', {
 			'class': 'd_castall_match',
 			'style': (
 				((court_idx === 0) ? 'left' : 'right') + ':3%;' +
 				'background:' + colors.bg + ';' +
-				'width:' + ((85 + (max_games * 41) + (logo_url ? 100 : 0)) * scale) + 'px;' +
+				'width:' + ((85 + (max_games * 41) + (logo_url ? 90 : 0)) * scale) + 'px;' +
 				'height:' + (60 * scale) + 'px;' +
 				'border-radius:' + (6 * scale) + 'px'),
 		});
@@ -355,7 +355,7 @@ function render_castall(s, container, event) {
 				style: (
 					'height:' + (50 * scale) + 'px;' +
 					'margin:' + (5 * scale) + 'px 0;' +
-					'width:' + (100 * scale) + 'px;' +
+					'width:' + (90 * scale) + 'px;' +
 					'float: left;' +
 					'background: no-repeat center/contain url("' + logo_url + '");'
 				),
@@ -393,6 +393,8 @@ function render_castall(s, container, event) {
 		uiu.el(bottom_block, 'div', {
 			'class': 'd_castall_score' + team_id,
 			'style': (
+				'height:' + (54 * scale) + 'px;' +
+				'margin-bottom:' + (1 * scale) + 'px;' +
 				'color:' + colors.bg + ';' +
 				'background: ' + colors[team_id] + ';' +
 				'width:' + (65 * scale) + 'px;' +
@@ -407,7 +409,55 @@ function render_castall(s, container, event) {
 		'style': 'font-size:' + (50 * scale) + 'px; margin-top: -0.1em;',
 	}, ':');
 
-	// TODO buli logo
+	if (logo_url) {
+		var logo_row = uiu.el(bottom_block, 'div', {
+			style: (
+				'position: absolute;' +
+				'left: 0;' +
+				'width: 100%;' +
+				'top:-' + (55 * scale) + 'px;' +
+				'height:' + (55 * scale) + 'px;' +
+				'display: flex;' +
+				'justify-content:center;'
+			),
+		});
+		uiu.el(logo_row, 'div', {
+			style: (
+				'width: 0; height: 0;' +
+				'border-top:' + (53.5 * scale) + 'px solid transparent;' +
+				'border-right:' + (20 * scale) + 'px solid ' + colors.bg + ';' +
+				'margin-top:' + (1.5 * scale) + 'px;' +
+				'margin-right:' + (-1 * scale) + 'px;'
+			),
+		});
+		var logo_mid = uiu.el(logo_row, 'div', {
+			style: (
+				'background:' + colors.bg + ';' +
+				'border-top-left-radius:' + (5 * scale) + 'px;' +
+				'border-top-right-radius:' + (5 * scale) + 'px;' +
+				'height:' + (55 * scale) + 'px;' +
+				'width:' + (90 * scale) + 'px;'
+			),
+		});
+		uiu.el(logo_mid, 'div', {
+			style: (
+				'height:' + (45 * scale) + 'px;' +
+				'margin-top: ' + (5 * scale) + 'px;' +
+				'margin-bottom: ' + (5 * scale) + 'px;' +
+				'width:' + (90 * scale) + 'px;' +
+				'background: no-repeat center/contain url("' + logo_url + '");'
+			),
+		});
+		uiu.el(logo_row, 'div', {
+			style: (
+				'width: 0; height: 0;' +
+				'border-top:' + (53.5 * scale) + 'px solid transparent;' +
+				'border-left:' + (20 * scale) + 'px solid ' + colors.bg + ';' +
+				'margin-top:' + (1.5 * scale) + 'px;' +
+				'margin-left:' + (-1 * scale) + 'px;'
+			),
+		});
+	}
 }
 
 

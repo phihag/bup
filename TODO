@@ -1,7 +1,5 @@
 displaymode: castall mode
 	black border-bottom for bottom
-	adapt width (max_games / logo_url)
-	finish side bars
 	buli logo bottom?
 courtspot: option to switch left and right
 btde Berlin
