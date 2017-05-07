@@ -1,10 +1,17 @@
-displaymode: hide mouse after a while
+bup bug Ulf
+write displaymode.render_castall tests
+test eventutils.default_counting
+test castall on mac
+test castall with missing matches etc.
+2courts looks broken with devmode on
+csde support
+
 btde Berlin
 Anzeige André: Sätze links, black-white
 display Moritz: prior games in detail between names
 vertical list of all matches on current courts (tournament-overview)
-half screen court displays
 
+reset colors
 fix courtspot caching on android!?
 refmode: disable/enable pronouncing and other settings remotely
 
@@ -12,6 +19,7 @@ edge Referee mode
 remove saving hall and other extra_data
 make court smaller -> Stefan Weiss
 
+set event colors from referee mode
 highlight undo in stats
 source maps for errors
 	http://stackoverflow.com/a/33129856/35070
@@ -24,6 +32,7 @@ prevent going into incomplete match (update first, retry, if not then error)
 initialize from turnier.de?
 initialize ticker from turnier.de?
 refmode: show netstats
+displaymode: hide mouse after a while
 
 test button on umpire panels to test all connected displays for 10 seconds
 find out why btde not updating tablets (appcache)
