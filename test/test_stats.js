@@ -1,6 +1,7 @@
 var assert = require('assert');
 
 var tutils = require('./tutils');
+var vdom = require('./vdom');
 var bup = tutils.bup;
 var _describe = tutils._describe;
 var _it = tutils._it;
@@ -81,7 +82,7 @@ function _intersects(el1, el2) {
 
 function _plot(s) {
 	var st = bup.stats.calc_stats(s);
-	var svg = new tutils.Document('container');
+	var svg = new vdom.Document('container');
 	var container = svg.documentElement;
 	var gpoints = bup.stats.normalize_gpoints(st.gpoints);
 	var max_score = bup.stats.calc_max_score(gpoints);
@@ -344,7 +345,7 @@ _describe('stats graphs', function() {
 
 	_it('basic positioning', function() {
 		var pseudo_state = tutils.state_after([], tutils.DOUBLES_SETUP);
-		var svg = new tutils.Document('container');
+		var svg = new vdom.Document('container');
 		var container = svg.documentElement;
 		var game = {};
 		var gpoints = [{

@@ -1,4 +1,9 @@
-bup bug Ulf
+add option to use team colors
+service missing in castall with bldemo
+bldemo_inprogress looks bad in castall
+write castdyn
+mail Dieter
+
 write displaymode.render_castall tests
 test eventutils.default_counting
 test castall on mac
@@ -15,6 +20,7 @@ reset colors
 fix courtspot caching on android!?
 refmode: disable/enable pronouncing and other settings remotely
 
+displaymode "Berlin": like courtspot vertical, but with border (red for finished green for server) -> BR 5/2017 S. 24
 edge Referee mode
 remove saving hall and other extra_data
 make court smaller -> Stefan Weiss
@@ -701,3 +707,4 @@ replace visible_qs(.*, false) -> hide_qs($1)
 all displaymode settings as d_ (also set the alternative options via refmode for a while)
 event analysis: which presses before undo
 remove calls to prompt and alert
+render in transparent windows -> Dieter Gläßer
