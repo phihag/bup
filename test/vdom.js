@@ -1,9 +1,17 @@
+'use strict';
 // Virtual DOM for unit tests
+
+var assert = require('assert');
 
 function TextNode(ownerDocument, text) {
 	this.ownerDocument = ownerDocument;
 	this.text = text;
 }
+// Nonstandard
+TextNode.prototype.toxml = function() {
+	return encode(this.text);
+};
+
 function Element(ownerDocument, tagName) {
 	this.ownerDocument = ownerDocument;
 	this.tagName = tagName;
@@ -25,9 +33,102 @@ function Element(ownerDocument, tagName) {
 Element.prototype.setAttribute = function(k, v) {
 	this.attributes[k] = v;
 };
+Element.prototype.getAttribute = function(k) {
+	return this.attributes[k] || '';
+};
 Element.prototype.appendChild = function(node) {
 	this.childNodes.push(node);
 };
+
+function _parse_attrqs(aqs) {
+	var m = /^([a-z]+)="([^"]+)"$/.exec(aqs);
+	if (m) {
+		return function(el) {
+			return el.getAttribute(m[1]) === m[2];
+		};
+	}
+
+	throw new Error("Cannot parse attribute check " + aqs);
+}
+
+// Returns a function that can be applied on any Element and returns true if it matches
+function parse_qs(qs) {
+	var next; // no let in all browsers yet :(
+	function _parse_next(next_str) {
+		if (!next_str) {
+			return function() {
+				return true;
+			};
+		}
+
+		return parse_qs(next_str);
+	}
+
+	var m = /^\*(.*)$/.exec(qs);
+	if (m) {
+		return _parse_next(m[1]);
+	}
+
+	m = /^([a-z]+)(.*)$/.exec(qs);
+	if (m) {
+		next = _parse_next(m[2]);
+		return function(el) {
+			return (el.tagName === m[1]) && next(el);
+		};
+	}
+
+	m = /^\[([^\]]+)\](.*)$/.exec(qs);
+	if (m) {
+		next = _parse_next(m[2]);
+		var attr_check = _parse_attrqs(m[1]);
+		return function(el) {
+			return attr_check(el) && next(el);
+		};
+	}
+
+	throw new Error('Cannot parse query selector ' + qs);
+};
+
+Element.prototype.querySelectorAll = function(qs) {
+	var qs_func = parse_qs(qs);
+
+	var to_visit = [this];
+	var res = [];
+	while (to_visit.length > 0) {
+		var el = to_visit.pop();
+		if (qs_func(el)) {
+			res.push(el);
+		}
+		var children = el.childNodes;
+		for (var i = children.length - 1;i >= 0;i--) {
+			var c = children[i];
+			if (c instanceof Element) {
+				to_visit.push(c);
+			}
+		}
+	}
+	return res;
+};
+
+function encode(text) {
+	return text.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+Element.prototype.toxml = function() {
+	var attrs = this.attributes;
+	var keys = Object.keys(attrs);
+	keys.sort();
+	var attrs_str = keys.map(function(k) {
+		var val = attrs[k];
+		assert(/^[a-zA-Z-]+$/.test(k));
+		return k + '="' + encode(val) + '"';
+	}).join(' ');
+	var child_xml = this.childNodes.map(function(c) {
+		return c.toxml();
+	}).join('');
+	return '<' + this.tagName + (attrs_str ? ' ' + attrs_str : '') + '>' + child_xml + '</' + this.tagName + '>';
+};
+
 function Document(tagName) {
 	this.documentElement = new Element(this, tagName);
 }
@@ -40,7 +141,11 @@ Document.prototype.createElementNS = function(namespace, tagName) {
 Document.prototype.createTextNode = function(text) {
 	return new TextNode(this, text);
 };
+Document.prototype.toxml = function(indent) {
+	return '<?xml version="1.0"?>' + (indent ? '\n' : '') + this.documentElement.toxml(indent);
+};
 
 module.exports = {
 	Document,
+	encode,
 };
