@@ -1,4 +1,5 @@
 implement vdom.toxml(indent)
+extradata: implement default team colors
 add option to use team colors
 service missing in castall with bldemo
 bldemo_inprogress looks bad in castall

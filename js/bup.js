@@ -121,6 +121,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 		btde: btde,
 		calc: calc,
 		courtspot: courtspot,
+		displaymode: displaymode,
 		eventutils: eventutils,
 		extradata: extradata,
 		i18n: i18n,
@@ -135,6 +136,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 		scoresheet: scoresheet,
 		stats: stats,
 		timer: timer,
+		uiu: uiu,
 		utils: utils,
 		xlsx: xlsx,
 	};

@@ -48,7 +48,14 @@ function _parse_attrqs(aqs) {
 		};
 	}
 
-	throw new Error("Cannot parse attribute check " + aqs);
+	m = /^([a-z]+)\*="([^"]+)"$/.exec(aqs);
+	if (m) {
+		return function(el) {
+			return el.getAttribute(m[1]).includes(m[2]);
+		};
+	}
+
+	throw new Error('Cannot parse attribute check ' + aqs);
 }
 
 // Returns a function that can be applied on any Element and returns true if it matches
@@ -87,7 +94,7 @@ function parse_qs(qs) {
 	}
 
 	throw new Error('Cannot parse query selector ' + qs);
-};
+}
 
 Element.prototype.querySelectorAll = function(qs) {
 	var qs_func = parse_qs(qs);
@@ -111,6 +118,10 @@ Element.prototype.querySelectorAll = function(qs) {
 };
 
 function encode(text) {
+	if (typeof text === 'number') {
+		text = '' + text;
+	}
+	assert(typeof text === 'string');
 	return text.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
@@ -146,6 +157,6 @@ Document.prototype.toxml = function(indent) {
 };
 
 module.exports = {
-	Document,
-	encode,
+	Document: Document,
+	encode: encode,
 };

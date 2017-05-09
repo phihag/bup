@@ -272,15 +272,16 @@ function render_castall(s, container, event) {
 		'style': ('background: ' + colors.t),
 	});
 
-	var abbrevs = extradata.abbrevs(s.event);
-	var logo_url = extradata.logo_url(s.event);
+	var abbrevs = extradata.abbrevs(event);
+	var logo_url = extradata.logo_url(event);
 	var court_count = event.courts.length;
 	for (var court_idx = 0;court_idx < court_count;court_idx++) {
 		var real_court_idx = s.settings.displaymode_reverse_order ? (court_count - 1 - court_idx) : court_idx;
 		var court = event.courts[real_court_idx];
 		var match = _match_by_court(event, court);
-		var max_games = calc.max_game_count(match.setup.counting);
-		var nscore = (match && match.network_score) ? match.network_score : [];
+		var counting = match ? match.setup.counting : eventutils.default_counting(event.league_key);
+		var max_games = counting ? calc.max_game_count(counting) : 0;
+		var nscore = (match ? match.network_score : 0) || [];
 
 		var match_container = uiu.el(container, 'div', {
 			'class': 'd_castall_match',
@@ -296,9 +297,9 @@ function render_castall(s, container, event) {
 			'class': 'd_castall_mname',
 			'style': ('margin:0 ' + (3 * scale) + 'px;font-size:' + (15 * scale) + 'px;width:' + (15 * scale) + 'px'),
 		});
-		var mname = match.setup.match_name.split(/(?=[^.])/);
+		var mname = match ? match.setup.match_name.split(/(?=[^.])/) : '';
 		for (var i = 0;i < mname.length;i++) {
-			uiu.el(mname_container, 'span', {}, mname[i]);
+			uiu.el(mname_container, 'span', {}, mname[i] || '');
 		}
 
 		var teams_container = uiu.el(match_container, 'div', 'd_castall_teams');
@@ -328,7 +329,7 @@ function render_castall(s, container, event) {
 			uiu.el(team_block, 'div', {
 				style: (
 					'height: 100%;' +
-					'background:' + ((match.network_team1_serving == (team_id === 0)) ? colors.serv : colors.recv) + ';' +	
+					'background:' + ((match && (match.network_team1_serving == (team_id === 0))) ? colors.serv : colors.recv) + ';' +	
 					'margin:0 ' + (1 * scale) + 'px;' +
 					'width:' + (10 * scale) + 'px;'),
 			});
@@ -1043,7 +1044,7 @@ function option_applies(style_id, option_name) {
 	case 'court_id':
 		return (style_id === 'oncourt') || (style_id === 'international');
 	case 'reverse_order':
-		return (style_id === 'top+list') || (style_id === '2court');
+		return (style_id === 'top+list') || (style_id === '2court') || (style_id === 'castall');
 	case 'scale':
 		return (style_id === 'castall');
 	}
@@ -1057,6 +1058,8 @@ return {
 	option_applies: option_applies,
 	ALL_STYLES: ALL_STYLES,
 	ALL_COLORS: ALL_COLORS,
+	// Testing only
+	render_castall: render_castall,
 };
 
 })();

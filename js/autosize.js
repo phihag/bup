@@ -6,6 +6,11 @@ var tasks = {};
 var task_id = 0;
 
 function autosize_once(task, deferred) {
+	if (typeof window === 'undefined') {
+		// Testing
+		return;
+	}
+
 	var el = task.el;
 	var el_style = window.getComputedStyle(el, null);
 	var current_style = el_style.getPropertyValue('font-size');
