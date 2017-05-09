@@ -259,7 +259,7 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
-	var report_problem = require('./report_problem');
+	var report_problem = null; // avoid circular import, should really be require('./report_problem');
 
 	module.exports = uiu;
 }

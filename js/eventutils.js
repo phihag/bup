@@ -453,7 +453,7 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
 	var utils = require('./utils');
-	var report_problem = require('./report_problem');
+	var report_problem = null; // Avoid circular imports, should be require('./report_problem');
 
 	module.exports = eventutils;
 }
