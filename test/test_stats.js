@@ -1,3 +1,5 @@
+'use strict';
+
 var assert = require('assert');
 
 var tutils = require('./tutils');
@@ -6,8 +8,6 @@ var bup = tutils.bup;
 var _describe = tutils._describe;
 var _it = tutils._it;
 
-(function() {
-'use strict';
 
 var WITH_COUNTER = {
 	shuttle_counter: true,
@@ -918,5 +918,3 @@ _describe('stats graphs', function() {
 		}
 	});
 });
-
-})();
