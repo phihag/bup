@@ -125,7 +125,7 @@ function encode(text) {
 	return text.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
-Element.prototype.toxml = function() {
+Element.prototype._toxml = function(indent, add_indent) {
 	var attrs = this.attributes;
 	var keys = Object.keys(attrs);
 	keys.sort();
@@ -134,10 +134,25 @@ Element.prototype.toxml = function() {
 		assert(/^[a-zA-Z-]+$/.test(k));
 		return k + '="' + encode(val) + '"';
 	}).join(' ');
-	var child_xml = this.childNodes.map(function(c) {
+
+	var children = this.childNodes;
+	var child_xml = children.map(function(c) {
+		if (c instanceof Element) {
+			return (add_indent ? '\n' : '') + c._toxml(indent + add_indent, add_indent);
+		}
 		return c.toxml();
 	}).join('');
-	return '<' + this.tagName + (attrs_str ? ' ' + attrs_str : '') + '>' + child_xml + '</' + this.tagName + '>';
+	return (
+		indent +
+		'<' + this.tagName + (attrs_str ? ' ' + attrs_str : '') + '>' +
+		child_xml +
+		((add_indent && (children.length > 0) && (children[children.length - 1] instanceof Element)) ? '\n' + indent : '') +
+		'</' + this.tagName + '>'
+	);
+}
+
+Element.prototype.toxml = function(indent) {
+	return this._toxml('', indent || '');
 };
 
 function Document(tagName) {

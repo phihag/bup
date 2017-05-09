@@ -20,9 +20,21 @@ _describe('vdom', function() {
 			a: 'aatr',
 			b: 'batr',
 		}, 'some <text');
-		bup.uiu.el(doc.documentElement, 'el2');
+		var el2 = bup.uiu.el(doc.documentElement, 'el2');
+		bup.uiu.el(el2, 'el3');
 
-		var xml = doc.toxml();
-		assert.strictEqual(xml, '<?xml version="1.0"?><root><el1 a="aatr" b="batr">some &lt;text</el1><el2></el2></root>');
+		assert.strictEqual(
+			doc.toxml(),
+			'<?xml version="1.0"?><root><el1 a="aatr" b="batr">some &lt;text</el1><el2><el3></el3></el2></root>');
+
+		assert.strictEqual(
+			doc.toxml('  '),
+			'<?xml version="1.0"?>\n' +
+			'<root>\n' +
+			'  <el1 a="aatr" b="batr">some &lt;text</el1>\n' +
+			'  <el2>\n' +
+			'    <el3></el3>\n' +
+			'  </el2>\n' +
+			'</root>');
 	});
 });
