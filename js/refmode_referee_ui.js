@@ -198,10 +198,10 @@ function make_editable(el, cb) {
 			style: 'min-width: ' + el.offsetWidth + 'px',
 		});
 		uiu.el(form, 'button', {
-			role: 'submit',
+			type: 'submit',
 		}, state._('refmode:referee:set'));
 		var cancel_button = uiu.el(form, 'button', {
-			role: 'button',
+			type: 'button',
 		}, state._('refmode:referee:cancel'));
 		input.addEventListener('keyup', function(e) {
 			if (e.keyCode === 27) { // Esc
@@ -230,7 +230,7 @@ function make_editable(el, cb) {
 	var edit_btn;
 	if (el.firstChild.textContent.length < 2) {
 		edit_btn = uiu.el(null, 'button', {
-			role: 'button',
+			type: 'button',
 		}, state._('refmode:referee:edit'));
 		click.on(edit_btn, edit);
 		el.parentNode.insertBefore(edit_btn, el.nextSibling);
@@ -457,7 +457,7 @@ function render_clients(clients) {
 			}
 
 			uiu.el(dstyle_form, 'button', {
-				'role': 'submit',
+				'type': 'submit',
 			}, s._('refmode:referee:change display style'));
 
 			var can_reverse = (

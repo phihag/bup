@@ -101,7 +101,7 @@ function list_handler(referee_list) {
 	}
 	connectable.forEach(function(ref) {
 		var btn = uiu.el(list_el, 'button', {
-			role: 'button',
+			type: 'button',
 			'data-fp': ref.fp,
 		}, ref.fp);
 		click.on(btn, connect_button_click);

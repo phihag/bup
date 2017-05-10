@@ -127,7 +127,7 @@ function on_load_data(s) {
 	var real_netw = network.get_real_netw();
 	if (!url && real_netw) {
 		var button = uiu.el(snet_container, 'button', {
-			role: 'button',
+			type: 'button',
 			'class': 'staticnet_switch_button',
 		}, s._('staticnet:switch back button', {
 			service: real_netw.service_name(s),

@@ -295,7 +295,7 @@ function show() {
 			}, ev.date + ' ' + ev.starttime + ' ' + ev.team_names[0] + ' - ' + ev.team_names[1]);
 		});
 		uiu.el(form, 'button', {
-			role: 'submit',
+			type: 'submit',
 		}, state._('editevent:select event'));
 		form.addEventListener('submit', function(e) {
 			e.preventDefault();
