@@ -174,14 +174,6 @@ BuLi-Spielbericht als PDF / direkt ausdrucken (-> Janine)
 clicking on match should go to match if match is the current one, don't reload from server
 auto go fullscreen with any click when set that way
 
-improve jticker
-	remove additional zeroes (-> Martin/Beuel)
-	auto-switch after download
-	login with token
-	login with user/pass
-	delete old bup versions
-	edit teams? (all_players...)
-
 improve refmode
 	show ping + last_update
 	refmode: improve instructions (screenshot with tablet border)
@@ -263,6 +255,12 @@ improve display mode
 
 make an android app
 	badmintonticker
+
+bupdemo.aufschlagwechsel.de
+	get thrown into bup/selectevent
+	notice in bup to add email address
+	send mail to email address either way (welcome | new device)
+	links in email: yes, confirm device | (ignore to not confirm device)
 
 Notiz an Spielernamen (-> Werner Durow)
 

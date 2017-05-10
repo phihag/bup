@@ -15,6 +15,7 @@ var TEAM_COLORS = {
 	'TV Refrath': '#0095ff',
 	'TSV Trittau': '#fd77b2',
 	'1. BC Sbr.-Bischmisheim': '#1e3a8e',
+	'BC Bischmisheim': '#1e3a8e',
 	'1.BC Düren': '#c81f1a',
 };
 
