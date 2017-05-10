@@ -1085,6 +1085,7 @@ return {
 	option_applies: option_applies,
 	ALL_STYLES: ALL_STYLES,
 	ALL_COLORS: ALL_COLORS,
+	calc_team_colors,
 	// Testing only
 	render_castall: render_castall,
 };

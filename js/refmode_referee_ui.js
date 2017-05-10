@@ -57,6 +57,19 @@ function on_dmode_reverse_order_change(e) {
 	});
 }
 
+function on_tc_button_click(e) {
+	var client_id = _client_id(e);
+	var c = rr.client_by_conn_id(client_id);
+	if (!c) return;
+
+	var tc = displaymode.calc_team_colors(c.event, c.settings);
+	rr.update_settings(client_id, {
+		d_c0: tc[0],
+		d_c1: tc[1],
+	});
+}
+
+
 function on_push_start_button_click(e) {
 	var client_id = _client_id(e);
 	var c = rr.client_by_conn_id(client_id);
@@ -159,20 +172,20 @@ function on_client_dstyle_change_submit(e) {
 	if (!c) return;
 
 	var container = uiu.closest_class(e.target, 'referee_c');
-	var settings = {
+	var csettings = {
 		displaymode_style: container.querySelector('.referee_c_dstyle_change_select').value,
 	};
 	displaymode.ALL_COLORS.forEach(function(col) {
 		var input = container.querySelector('.referee_c_dstyle_' + col);
 		if (input) {
-			settings['d_' + col] = input.value;
+			csettings['d_' + col] = input.value;
 		}
 	});
 	var scale_input = container.querySelector('.referee_c_dstyle_scale');
 	if (scale_input) {
-		settings.d_scale = parseInt(scale_input.value);
+		csettings.d_scale = parseInt(scale_input.value);
 	}
-	rr.change_display_style(c.id, settings);
+	rr.change_display_style(c.id, csettings);
 }
 
 function on_subscribe_checkbox_click(e) {
@@ -441,11 +454,25 @@ function render_clients(clients) {
 					});
 				}
 			});
+
+			if (
+				displaymode.option_applies(cur_style, 'c0') &&
+				c.event &&
+				!utils.deep_equal(
+					displaymode.calc_team_colors(c.event, c.settings),
+					[c.settings.d_c0, c.settings.d_c1])
+			) {
+				var tc_button = uiu.el(dstyle_form, 'button', {
+					type: 'button',
+				}, s._('displaymode:use team colors'));
+				click.on(tc_button, on_tc_button_click);
+			}
+
 			if (displaymode.option_applies(cur_style, 'scale')) {
 				var scale_label = uiu.el(
 					dstyle_form,
 					'label',
-					'referee_c_dstyle_scale',
+					{},
 					s._('displaymode:scale'));
 				uiu.el(scale_label, 'input', {
 					type: 'number',
