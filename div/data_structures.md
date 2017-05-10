@@ -30,6 +30,8 @@ team_names      Array of home and away team name. Required for team competitions
                 Example: ["TV Refrath", "BC Bischmisheim"]
 team_abbrevs    Array of home and away team name abbreviation (3 letters).
                 Example: ["TVR", "BCB"]
+team_colors     Array of home and away team colors (in #aabbcc format).
+                Example: ["#ffffff", "#0000f3"]
 umpires         String describing umpires (for eventsheet), e.g. "Barbara Bub & Klaus-Michael Becker"
 starttime       Human-readable official start time, e.g. "19:00"
 date            Human-readable official day of match, e.g. "12.3.2017"

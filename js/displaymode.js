@@ -99,7 +99,7 @@ function _calc_max_games(event) {
 function hash(settings, event) {
 	return {
 		style: settings.displaymode_style,
-		colors: _colors(settings),
+		colors: calc_colors(settings, event),
 		scale: settings.d_scale,
 		court_id: settings.displaymode_court_id,
 		reverse_order: settings.displaymode_reverse_order,
@@ -264,7 +264,7 @@ function render_castall(s, container, event) {
 		uiu.el(container, 'div', 'error', s._('displaymode:no courts'));
 		return;
 	}
-	var colors = _colors(s.settings);
+	var colors = calc_colors(s.settings, event);
 	var scale = s.settings.d_scale / 100;
 
 	uiu.el(container, 'div', {
@@ -572,7 +572,7 @@ function render_international(s, container, event, court) {
 
 	var nscore = match.network_score || [];
 	var gscore = _gamescore_from_netscore(nscore, match.setup);
-	var colors = _colors(s.settings);
+	var colors = calc_colors(s.settings, event);
 	var is_doubles = match.setup.is_doubles;
 	var pcount = is_doubles ? 2 : 1;
 	var current_score = nscore[nscore.length - 1] || [];
@@ -668,7 +668,22 @@ function _render_court(s, container, event) {
 	return court;
 }
 
-function _colors(settings) {
+function calc_team_colors(event, settings) {
+	if (event.team_colors) {
+		return event.team_colors;
+	}
+	if (event.team_names) {
+		return event.team_names.map(function(tn, team_idx) {
+			return extradata.get_color(tn) || settings['d_c' + team_idx];
+		});
+	}
+	return [
+		settings.d_c0,
+		settings.d_c1,
+	];
+}
+
+function calc_colors(settings) {
 	return {
 		0: settings.d_c0 || '#50e87d',
 		1: settings.d_c1 || '#f76a23',
@@ -733,7 +748,7 @@ function render_2court(s, container, event) {
 		return;
 	}
 
-	var colors = _colors(s.settings);
+	var colors = calc_colors(s.settings, event);
 
 	uiu.el(container, 'div', {
 		'class': 'd_2court_divider',
@@ -847,6 +862,11 @@ function update(err, s, event) {
 	uiu.visible_qs('.settings_display_court_id', option_applies(style, 'court_id'));
 	uiu.visible_qs('.settings_display_reverse_order', option_applies(style, 'reverse_order'));
 	uiu.visible_qs('.settings_d_scale', option_applies(style, 'scale'));
+	uiu.visible_qs('.settings_d_team_colors',
+		option_applies(style, 'c0') &&
+		!utils.deep_equal(
+			calc_team_colors(event, s.settings),
+			[s.settings.d_c0, s.settings.d_c1]));
 	if (event.courts && (!_last_painted_hash || !utils.deep_equal(cur_event_hash.courts, _last_painted_hash.courts))) {
 		uiu.empty(court_select);
 		event.courts.forEach(function(c) {
@@ -1015,6 +1035,13 @@ function ui_init(s, hash_query) {
 	click.qs('.settings_mode_display', function(e) {
 		e.preventDefault();
 		show();
+	});
+	click.qs('.settings_d_team_colors', function() {
+		var tc = calc_team_colors(state.event, state.settings);
+		settings.change_all(state, {
+			d_c0: tc[0],
+			d_c1: tc[1],
+		});
 	});
 }
 

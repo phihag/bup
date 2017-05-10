@@ -149,7 +149,7 @@ Element.prototype._toxml = function(indent, add_indent) {
 		((add_indent && (children.length > 0) && (children[children.length - 1] instanceof Element)) ? '\n' + indent : '') +
 		'</' + this.tagName + '>'
 	);
-}
+};
 
 Element.prototype.toxml = function(indent) {
 	return this._toxml('', indent || '');

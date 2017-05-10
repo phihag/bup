@@ -465,6 +465,7 @@ var i18n_en = {
 'displaymode:no courts': 'No court information available',
 'displaymode:scale': 'Scale:',
 'displaymode:colors': 'Colors:',
+'displaymode:use team colors': 'use team colors',
 
 'liveaw:lost connection': 'Reconnecting ...',
 

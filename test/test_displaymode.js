@@ -18,6 +18,7 @@ _describe('displaymode', function() {
 		var state = {
 			settings: {
 				d_scale: 100,
+				d_team_colors: true,
 			},
 		};
 		bup.i18n.update_state(state, 'de');
@@ -43,6 +44,7 @@ _describe('displaymode', function() {
 		assert(container.querySelectorAll('div[class="error"]').length === 0);
 		assert(container.querySelectorAll('div[style*="bundesliga-logo.svg"]').length === 3);
 		// TODO: require team names to be present
+		// TODO: require team colors to be present
 
 		// TODO test with full
 		// TODO test with missing match presses
