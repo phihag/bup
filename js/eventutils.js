@@ -151,6 +151,9 @@ function annotate(s, event) {
 		team_competition: event.team_competition,
 		neutral_ground: event.neutral_ground,
 	};
+	if (league_key) {
+		props.counting = default_counting(league_key);
+	}
 	event.matches.forEach(function(m) {
 		var setup = m.setup;
 		for (var key in props) {

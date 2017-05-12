@@ -1,6 +1,8 @@
 write castdyn
 mail Dieter
 
+lighter color for Bischmisheim
+
 write displaymode.render_castall tests
 test eventutils.default_counting
 test castall on mac

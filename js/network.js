@@ -13,7 +13,8 @@ function get_real_netw() {
 		networks.mt ||
 		networks.courtspot ||
 		networks.liveaw ||
-		networks.jticker
+		networks.jticker ||
+		networks.csde
 	);
 }
 
@@ -574,6 +575,8 @@ function ui_init(s, hash_query) {
 	}
 	if (hash_query.courtspot !== undefined) {
 		networks.courtspot = courtspot();
+	} else if (hash_query.csde !== undefined) {
+		networks.csde = csde(hash_query.csde);
 	} else if (hash_query.btde !== undefined) {
 		networks.btde = btde();
 	} else if (hash_query.mt !== undefined) {
@@ -785,6 +788,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var btsh = require('./btsh');
 	var bupui = require('./bupui');
 	var calc = require('./calc');
+	var csde = require('./csde');
 	var click = require('./click');
 	var control = require('./control');
 	var courtspot = require('./courtspot');

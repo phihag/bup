@@ -28,6 +28,8 @@ team_competition* Are players competing for their teams(true) or for themselves(
 neutral_ground  Boolean. If true, the competition is happening at a neutral venue, so the guest team is not mentioned first. Affects announcements.
 team_names      Array of home and away team name. Required for team competitions.
                 Example: ["TV Refrath", "BC Bischmisheim"]
+team_shortnames Array of short home and away team names.
+                Example: ["Refrath", "Bischmisheim"]
 team_abbrevs    Array of home and away team name abbreviation (3 letters).
                 Example: ["TVR", "BCB"]
 team_colors     Array of home and away team colors (in #aabbcc format).
