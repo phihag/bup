@@ -39,7 +39,6 @@
             }
           ],
           "is_doubles": true,
-          "counting": "5x11_15",
           "match_id": "testbl_HD1" 
         }
       },
@@ -70,7 +69,6 @@
           ],
 
           "is_doubles": true,
-          "counting": "5x11_15",
           "match_id": "testbl_DD"
         }
       },
@@ -101,7 +99,6 @@
             }
           ],
           "is_doubles": true,
-          "counting": "5x11_15",
           "match_id": "testbl_HD2"
         }
       },
@@ -125,7 +122,6 @@
             }
           ],
           "is_doubles": false,
-          "counting": "5x11_15",
           "match_id": "testbl_HE1"
         }
       },
@@ -149,7 +145,6 @@
             }
           ],
           "is_doubles": false,
-          "counting": "5x11_15",
           "match_id": "testbl_DE"
         }
       },
@@ -179,7 +174,6 @@
             }
           ],
           "is_doubles": true,
-          "counting": "5x11_15",
           "match_id": "testbl_GD"
         }
       },
@@ -203,7 +197,6 @@
             }
           ],
           "is_doubles": false,
-          "counting": "5x11_15",
           "match_id": "testbl_HE2"
         }
       }

@@ -395,6 +395,9 @@ function default_counting(league_key) {
 	if (NRW2016_RE.test(league_key) || (league_key === 'RLN-2016') || (league_key === 'RLM-2016')) {
 		return '3x21';
 	}
+	if (/^(?:1BL|2BLN|2BLS)-2015$/.test(league_key)) {
+		return '3x21';
+	}
 	if (/^(?:1BL|2BLN|2BLS)-2016$/.test(league_key)) {
 		return '5x11_15';
 	}
@@ -456,7 +459,7 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
 	var utils = require('./utils');
-	var report_problem = null; // Avoid circular imports, should be require('./report_problem');
+	var report_problem = require('./report_problem');
 
 	module.exports = eventutils;
 }

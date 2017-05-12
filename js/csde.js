@@ -20,7 +20,7 @@ function _request(s, component, options, cb) {
 	});
 }
 
-function courts(s) {
+function courts(/*/ s /*/) {
 	return null;
 }
 
@@ -107,6 +107,7 @@ function parse_csde_xml(doc) {
 			setup: {
 				match_id: 'csde:' + mid + '_' + match_name,
 				match_name: match_name,
+				is_doubles: is_doubles,
 				teams: teams,
 			},
 		});
@@ -222,9 +223,9 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
-	var calc = require('./calc');
 	var eventutils = require('./eventutils');
 	var network = require('./network');
+	var uiu = require('./uiu');
 	var utils = require('./utils');
 
 	module.exports = csde;

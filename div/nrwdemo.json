@@ -43,7 +43,6 @@
             }
           ],
           "is_doubles": true,
-          "counting": "3x21",
           "match_id": "nrwdemo_HD1"
         },
         "network_score": [
@@ -89,7 +88,6 @@
             }
           ],
           "is_doubles": true,
-          "counting": "3x21",
           "match_id": "nrwdemo_HD2"
         },
         "network_score": [
@@ -134,7 +132,6 @@
             }
           ],
           "is_doubles": true,
-          "counting": "3x21",
           "match_id": "nrwdemo_DD"
         },
         "network_score": [
@@ -173,7 +170,6 @@
             }
           ],
           "is_doubles": false,
-          "counting": "3x21",
           "match_id": "nrwdemo_HE1"
         },
         "network_score": [
@@ -208,7 +204,6 @@
             }
           ],
           "is_doubles": false,
-          "counting": "3x21",
           "match_id": "nrwdemo_HE2"
         },
         "network_score": [
@@ -243,7 +238,6 @@
             }
           ],
           "is_doubles": false,
-          "counting": "3x21",
           "match_id": "nrwdemo_HE3"
         },
         "network_score": [
@@ -282,7 +276,6 @@
             }
           ],
           "is_doubles": false,
-          "counting": "3x21",
           "match_id": "nrwdemo_DE"
         },
         "network_score": [
@@ -323,7 +316,6 @@
             }
           ],
           "is_doubles": true,
-          "counting": "3x21",
           "match_id": "nrwdemo_GD"
         },
         "network_score": [

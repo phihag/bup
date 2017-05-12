@@ -47,7 +47,6 @@
           ],
           "team_competition": true,
           "is_doubles": true,
-          "counting": "3x21",
           "match_id": "edemo_MD"
         },
         "network_score": [],
@@ -81,7 +80,6 @@
           ],
           "team_competition": true,
           "is_doubles": true,
-          "counting": "3x21",
           "match_id": "edemo_WD"
         },
         "network_score": [],
@@ -109,7 +107,6 @@
           ],
           "team_competition": true,
           "is_doubles": false,
-          "counting": "3x21",
           "match_id": "edemo_MS1"
         },
         "network_score": [],
@@ -137,7 +134,6 @@
           ],
           "team_competition": true,
           "is_doubles": false,
-          "counting": "3x21",
           "match_id": "edemo_WS"
         },
         "network_score": [],
@@ -171,7 +167,6 @@
           ],
           "team_competition": true,
           "is_doubles": true,
-          "counting": "3x21",
           "match_id": "edemo_MX"
         },
         "network_score": [],
@@ -199,7 +194,6 @@
           ],
           "team_competition": true,
           "is_doubles": false,
-          "counting": "3x21",
           "match_id": "edemo_MS2"
         },
         "network_score": [],

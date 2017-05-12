@@ -49,7 +49,6 @@
           ],
           "team_competition": true,
           "is_doubles": true,
-          "counting": "3x21",
           "match_id": "vdemo_MD"
         },
         "network_score": [],
@@ -83,7 +82,6 @@
           ],
           "team_competition": true,
           "is_doubles": true,
-          "counting": "3x21",
           "match_id": "vdemo_WD"
         },
         "network_score": [[11, 21], [15, 21]],
@@ -111,7 +109,6 @@
           ],
           "team_competition": true,
           "is_doubles": false,
-          "counting": "3x21",
           "match_id": "vdemo_MS1"
         },
         "network_score": [],
@@ -139,7 +136,6 @@
           ],
           "team_competition": true,
           "is_doubles": false,
-          "counting": "3x21",
           "match_id": "vdemo_WS"
         },
         "network_score": [[9,21],[21,19],[11,21]],
@@ -173,7 +169,6 @@
           ],
           "team_competition": true,
           "is_doubles": true,
-          "counting": "3x21",
           "match_id": "vdemo_MX"
         },
         "network_score": [[9, 21], [0, 21]],
@@ -201,7 +196,6 @@
           ],
           "team_competition": true,
           "is_doubles": false,
-          "counting": "3x21",
           "match_id": "vdemo_MS2"
         },
         "network_score": [],

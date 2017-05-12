@@ -138,10 +138,10 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
-	var click = require('./click');
-	var fullscreen = require('./fullscreen');
-	var netstats = require('./netstats');
-	var uiu = require('./uiu');
+	var click = null; // avoid circular imports, should be require('./click');
+	var fullscreen = null; // avoid circular imports, should be require('./fullscreen');
+	var netstats = null; // avoid circular imports, should be require('./netstats');
+	var uiu = null; // avoid circular imports, should be require('./uiu');
 
 	module.exports = report_problem;
 }

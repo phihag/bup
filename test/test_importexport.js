@@ -10,7 +10,7 @@ var _it = tutils._it;
 var bup = tutils.bup;
 
 _describe('importexport', function() {
-	['edemo.json', 'vdemo.json', 'bldemo.json', 'nrwdemo.json'].forEach(function(test_basename) {
+	['edemo.json', 'vdemo.json', 'bldemo.json', 'bldemo_incomplete.json', 'nrwdemo.json'].forEach(function(test_basename) {
 		_it('importing and exporting should be injective (' + test_basename + ')', function(done) {
 			var fn = path.join(__dirname, '..', 'div', test_basename);
 			fs.readFile(fn, function(err, content_json) {
