@@ -106,7 +106,7 @@ stylelint:
 	@./node_modules/.bin/stylelint css/*.css
 
 doclint:
-	@if grep -q -e '\t' div/data_structures.md; then echo 'Tab char in div/data_structures.md'; exit 1 ; fi
+	@if grep --line-number '	' div/data_structures.md; then echo 'Tab char in div/data_structures.md'; exit 1 ; fi
 
 coverage:
 	./node_modules/.bin/istanbul cover _mocha -- -R spec
