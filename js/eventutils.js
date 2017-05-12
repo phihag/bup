@@ -164,7 +164,9 @@ function annotate(s, event) {
 
 			/*@DEV*/
 			if (setup[key] === val) {
-				report_problem.silent_error('Redundant key ' + key + ' in ' + setup.match_id);
+				if (key !== 'counting') { // counting is very important, and in btde it's dynamic
+					report_problem.silent_error('Redundant key ' + key + ' in ' + setup.match_id);
+				}
 			}
 			/*/@DEV*/
 

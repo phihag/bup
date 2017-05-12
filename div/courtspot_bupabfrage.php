@@ -146,7 +146,6 @@ while ($row = $result->fetch_assoc()) {
 		],
 		'is_doubles' => $is_doubles,
 		'incomplete' => $incomplete,
-		'counting' => '5x11_15',
 		'courtspot_match_id' => $row['Art'],
 		'match_id' => $match_id,
 	];
