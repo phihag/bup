@@ -193,7 +193,7 @@ function ui_init() {
 		baseurl = '../';
 	}
 
-	var m = window.location.pathname.match(/^(.*?\/)(bup/)?bup(?:\/(?:bup\.html)?)?$/);
+	var m = window.location.pathname.match(/^(.*?\/)(?:bup\/)?bup(?:\/(?:bup\.html)?)?$/);
 	if (m) {
 		baseurl = m[1];
 	}
