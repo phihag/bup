@@ -60,4 +60,10 @@ _describe('helper functions', function() {
 			['TRI', 'BEU']
 		);
 	});
+
+	_it('color', function() {
+		assert(bup.extradata.get_color('BC Bischmisheim 2'));
+		assert(bup.extradata.get_color('1. BC Sbr.-Bischmisheim 1'));
+		assert(bup.extradata.get_color('TV Refrath 2'));
+	});
 });

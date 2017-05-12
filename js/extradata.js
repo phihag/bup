@@ -12,15 +12,18 @@ var ABBREVS = {
 	'SG Ddorf-Unterrath': 'SGU',
 };
 var TEAM_COLORS = {
-	'TV Refrath': '#0095ff',
-	'TSV Trittau': '#fd77b2',
-	'1. BC Sbr.-Bischmisheim': '#1e3a8e',
-	'BC Bischmisheim': '#1e3a8e',
-	'1.BC Düren': '#c81f1a',
+	'Refrath': '#8bd6ff',
+	'Trittau': '#fd77b2',
+	'Bischmisheim': '#1e3a8e',
+	'Düren': '#c81f1a',
 };
 
 function get_color(team_name) {
-	return TEAM_COLORS[team2club(team_name)];
+	for (var keyword in TEAM_COLORS) {
+		if (team_name.includes(keyword)) {
+			return TEAM_COLORS[keyword];
+		}
+	}
 }
 
 function team2club(team_name) {

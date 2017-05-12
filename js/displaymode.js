@@ -312,11 +312,12 @@ function render_castall(s, container, event) {
 					((team_id === 1) ? 'padding-bottom:' + (1 * scale) + 'px': '')
 				),
 			});
+			var fg_color = utils.contrast_color(colors[team_id], colors.bg, colors.fg);
 			var team_name_container = uiu.el(team_block, 'div', {
 				style: (
 					'font-family: monospace;' +
 					'background:' + colors[team_id] + ';' +
-					'color:' + colors.bg + ';' +
+					'color:' + fg_color + ';' +
 					'width:' + (45 * scale) + 'px;' +
 					'height: 100%;' +
 					'display: flex;' +
@@ -391,12 +392,13 @@ function render_castall(s, container, event) {
 		}, team_names[team_id]);
 		_setup_autosize(team_name_span);
 
+		var bottom_fg_color = utils.contrast_color(colors[team_id], colors.bg, colors.fg);
 		uiu.el(bottom_block, 'div', {
 			'class': 'd_castall_score' + team_id,
 			'style': (
 				'height:' + (54 * scale) + 'px;' +
 				'margin-bottom:' + (1 * scale) + 'px;' +
-				'color:' + colors.bg + ';' +
+				'color:' + bottom_fg_color + ';' +
 				'background: ' + colors[team_id] + ';' +
 				'width:' + (65 * scale) + 'px;' +
 				'font-size:' + (60 * scale) + 'px'),

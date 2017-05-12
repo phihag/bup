@@ -404,9 +404,56 @@ function forEach(str, cb) {
 	}
 }
 
+// Returns a value between 0 (extremely dark) and 1 (extremely bright)
+function brightness(rgb_str) {
+	// formula from https://www.w3.org/TR/AERT#color-contrast
+	var m = /^\#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/.exec(rgb_str);
+	if (!m) {
+		return; // undefined
+	}
+
+	return (
+		0.299 * parseInt(m[1], 16) + // r
+		0.587 * parseInt(m[2], 16) + // g
+		0.114 * parseInt(m[3], 16)   // b
+	);
+}
+
+function parse_rgb(rgb_str) {
+	var m = /^\#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/.exec(rgb_str);
+	if (!m) {
+		return; // undefined
+	}
+	return {
+		r: parseInt(m[1], 16),
+		g: parseInt(m[2], 16),
+		b: parseInt(m[3], 16),
+	};
+}
+
+function color_diff(crgb1, crgb2) {
+	var c1 = parse_rgb(crgb1);
+	var c2 = parse_rgb(crgb2);
+	if (!c1 || !c2) {
+		return; // undefined
+	}
+	return Math.abs(c1.g - c2.g) + Math.abs(c1.r - c2.r) + Math.abs(c1.b - c2.b);
+}
+
+// Returns the color that's farthest away
+function contrast_color(col, option1, option2) {
+	if (color_diff(col, option1) < color_diff(col, option2)) {
+		return option2;
+	} else {
+		return option1;
+	}
+}
+
 return {
 	add_zeroes: add_zeroes,
 	any: any,
+	brightness: brightness,
+	contrast_color: contrast_color,
 	count_lines: count_lines,
 	date_str: date_str,
 	datetime_str: datetime_str,

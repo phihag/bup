@@ -1,14 +1,11 @@
 write castdyn
-mail Dieter
-
-lighter color for Bischmisheim
 
 write displaymode.render_castall tests
 test eventutils.default_counting
 test castall on mac
 test castall with missing matches etc.
 2courts looks broken with devmode on
-csde support
+csde: handle closed events
 
 btde Berlin
 Anzeige André: Sätze links, black-white

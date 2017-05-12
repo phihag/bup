@@ -316,4 +316,14 @@ _describe('helper functions', function() {
 		var ret2 = bup.utils.hash_new(hashval, false);
 		assert(!ret2);
 	});
+
+	_it('closest_color', function() {
+		assert.strictEqual(
+			bup.utils.contrast_color('ffffff', '#ffffff', '#000000'),
+			'#000000');
+		assert.strictEqual(
+			bup.utils.contrast_color('fabca0', '#ffffff', '#000000'),
+			'#000000');
+
+	});
 });
