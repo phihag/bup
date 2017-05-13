@@ -6,6 +6,7 @@ var key;
 var key_err;
 var last_status = {};
 var clients = [];
+var pushing_to = [];
 
 key_storage.retrieve(function(err, k) {
 	if (err) {
@@ -19,6 +20,16 @@ key_storage.retrieve(function(err, k) {
 	}
 	render_clients(clients);
 });
+
+if (typeof localStorage !== 'undefined') {
+	var stored_json = localStorage.getItem('bup_referee_pushing_to');
+	if (stored_json) {
+		var read = JSON.parse(stored_json);
+		if (read) {
+			pushing_to = read;
+		}
+	}
+}
 
 function key_fp() {
 	return key ? key.fp : null;
@@ -215,6 +226,9 @@ function handle_dmsg(msg) {
 			pushall_presses(msg.setup.match_id, msg.presses);
 		}
 
+		if (c.node_id && pushing_to.includes(c.node_id) && !c.pushing) {
+			push(c);
+		}
 
 		render_clients(clients);
 		break;
@@ -373,9 +387,13 @@ function espouse_event(c) {
 }
 
 function push(c) {
-	push_start(c);
+	_push_start(c);
 	c.pushing = true;
 	render_clients(clients);
+	if (c.node_id && !pushing_to.includes(c.node_id)) {
+		pushing_to.push(c.node_id);
+		store_pushing_to();
+	}
 }
 
 function unpush(c) {
@@ -386,10 +404,18 @@ function unpush(c) {
 	});
 	c.pushing = false;
 	render_clients(clients);
+	utils.remove(pushing_to, c.node_id);
+	store_pushing_to();
 }
 
-function push_start(c) {
-	var cev = refmode_common.craft_event(s);
+function store_pushing_to() {
+	if (typeof localStorage !== 'undefined') {
+		localStorage.setItem('bup_referee_pushing_to', JSON.stringify(pushing_to));
+	}
+}
+
+function _push_start(c) {
+		var cev = refmode_common.craft_event(s);
 	cev.last_update = s.event.last_update;
 	conn.send({
 		type: 'dmsg',

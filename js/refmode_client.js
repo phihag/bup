@@ -150,6 +150,7 @@ function handle_dmsg(msg) {
 		}
 		network.install_refmode_push(push_netw);
 		break;
+	case 'push_presses':
 	case 'push_event':
 		if (push_netw) {
 			push_netw.update(msg);
