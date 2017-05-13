@@ -40,7 +40,11 @@ function main() {
 			process.exit(2);
 		}
 
-		const checksums_json = JSON.stringify(checksums);
+		const fns = Object.keys(checksums);
+		fns.sort();
+		const checksums_json = '{' + fns.map(function(fn) {
+			return JSON.stringify(fn) + ':' + JSON.stringify(checksums[fn]);
+		}).join(',') + '}';
 		fs.writeFile(outfile, checksums_json, {encoding: 'utf8'}, function(err) {
 			if (err) {
 				console.log('Failed to write checksums file', err);

@@ -1,5 +1,3 @@
-refmoe: store pushing property
-
 import y.json does not import everything!?
 refmode: on checking service judges immediately rerender
 note excel issue in mail
@@ -9,7 +7,6 @@ eventsheet error does not get deleted
 
 Druckbutton Spielreihenfolge
 Spielbericht generieren -> Ersatzspieler fehlen!
-partial kroton transmission -> Arno Schley
 refmode: Aufstellung still crashes! (see report)
 kürzere URL/button für bldemo
 aufschlagwechsel.de -> link bldemo
@@ -28,6 +25,7 @@ Anzeige André: Sätze links, black-white
 display Moritz: prior games in detail between names
 vertical list of all matches on current courts (tournament-overview)
 
+partial kroton transmission -> Arno Schley
 displaymode: window title should be something better
 push:
 	make more efficient
