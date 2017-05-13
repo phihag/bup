@@ -818,6 +818,8 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 
 		function fill_result_sheet(cb) {
 			xlsx_file.modify_sheet('5', cb, function(sheet) {
+				sheet.rm_protection();
+
 				var league_key = ev.league_key;
 				var x_location = {
 					'1BL-2016': 'E4',
@@ -856,7 +858,6 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					'2.HE': 22,
 				};
 
-				sheet.rm_qs('sheetProtection');
 				ev.matches.forEach(function(match, match_id) {
 					var setup = match.setup;
 					var match_eventsheet_id = calc_match_id(match);

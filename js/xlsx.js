@@ -41,8 +41,8 @@ function Sheet(book, doc, drawing_doc) {
 		_create_el(is_node, 't', {}, text);
 	}
 
-	function rm_qs(qs) {
-		var el = doc.querySelector(qs);
+	function rm_protection() {
+		var el = doc.querySelector('sheetProtection');
 		if (el) {
 			uiu.remove(el);
 		}
@@ -89,7 +89,7 @@ function Sheet(book, doc, drawing_doc) {
 	}
 
 	return {
-		rm_qs: rm_qs,
+		rm_protection: rm_protection,
 		val: val,
 		merge_cells: merge_cells,
 		text: text,
