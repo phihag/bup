@@ -150,7 +150,7 @@ function handle_dmsg(msg) {
 		}
 		network.install_refmode_push(push_netw);
 		break;
-	case 'push_state':
+	case 'push_event':
 		if (push_netw) {
 			push_netw.update(msg);
 		}
@@ -296,6 +296,7 @@ function net_send_press(s, press) {
 			presses: s.presses,
 			press: press,
 			setup: s.setup,
+			court_id: s.settings.court_id,
 		});
 	});
 }

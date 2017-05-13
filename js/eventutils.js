@@ -89,6 +89,8 @@ function set_metadata(event) {
 			}
 		}
 		match.netscore = calc.netscore(scopy);
+		match.network_score = calc.netscore(scopy);
+		match.network_team1_serving = scopy.game.team1_serving;
 		match.network_finished = scopy.match.finished;
 		match.network_team1_won = scopy.match.team1_won;
 		if (scopy.match.umpire_name) {

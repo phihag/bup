@@ -1,7 +1,7 @@
 'use strict';
 
 var refmode_push_netw = (function(initial_event) {
-var ev = initial_event;
+var ev = {};
 
 function send_press(s) {
 	sync(s);
@@ -53,6 +53,25 @@ function ui_init() {
 	// Nothing to do, it's all already initialized
 }
 
+function set_from_event(sent_ev) {
+	eventutils.set_metadata(sent_ev);
+	ev = sent_ev;
+}
+
+function update(msg) {
+	if (msg.dtype === 'push_event') {
+		set_from_event(msg.event);
+	} else if (msg.dtype === 'push_presses') {
+		// TODO implement this
+		/*nmatch.network_team1_serving = s.game.team1_serving;
+		nmatch.network_score = calc.netscore(s);
+		nmatch.presses_json = JSON.stringify(s.presses);*/
+
+	}
+}
+
+set_from_event(initial_event);
+
 return {
 	send_press: send_press,
 	list_matches: list_matches,
@@ -61,12 +80,14 @@ return {
 	service_name: service_name,
 	ui_init: ui_init,
 	editable: editable,
+	update: update,
 };
 
 });
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var eventutils = require('./eventutils');
 	var utils = require('./utils');
 
 	module.exports = refmode_push_netw;

@@ -120,8 +120,9 @@ function update_match(s, msg) {
 	}
 
 	match.presses = msg.presses;
-
 	render_event(s);
+
+	return true;
 }
 
 // Handle direct messages (from clients)
@@ -198,7 +199,22 @@ function handle_dmsg(msg) {
 			}
 		}
 
-		update_match(s, msg);
+		var updated = update_match(s, msg);
+
+		// Move current match on court
+		if (s.event && s.event.courts && msg.court_id && msg.setup) {
+			var court = utils.find(s.event.courts, function(court) {
+				return court.court_id == msg.court_id;
+			});
+			if (court) {
+				court.match_id = msg.setup.match_id;
+				pushall_event(); // TODO only send match assignment
+			}
+		}
+		if (updated) {
+			pushall_presses(msg.setup.match_id, msg.presses);
+		}
+
 
 		render_clients(clients);
 		break;
@@ -353,17 +369,11 @@ function espouse_event(c) {
 	s.event = ev;
 	render_event(s);
 	render_clients(clients);
+	pushall_event();
 }
 
 function push(c) {
-	var cev = refmode_common.craft_event(s);
-	cev.last_update = s.event.last_update;
-	conn.send({
-		type: 'dmsg',
-		dtype: 'push_start',
-		to: c.id,
-		event: cev,
-	});
+	push_start(c);
 	c.pushing = true;
 	render_clients(clients);
 }
@@ -376,6 +386,53 @@ function unpush(c) {
 	});
 	c.pushing = false;
 	render_clients(clients);
+}
+
+function push_start(c) {
+	var cev = refmode_common.craft_event(s);
+	cev.last_update = s.event.last_update;
+	conn.send({
+		type: 'dmsg',
+		dtype: 'push_start',
+		to: c.id,
+		event: cev,
+	});
+}
+
+function _pushall(makefunc) {
+	var msg_template;
+	clients.forEach(function(c) {
+		if (!c.pushing) {
+			return;
+		}
+
+		if (!msg_template) {
+			msg_template = makefunc();
+		}
+
+		var msg = {
+			type: 'dmsg',
+			to: c.id,
+		};
+		utils.obj_update(msg, msg_template);
+		conn.send(msg);
+	});
+}
+
+function pushall_event() {
+	_pushall(function() {
+		var cev = refmode_common.craft_event(s);
+		cev.last_update = s.event.last_update;
+		return {
+			event: cev,
+			dtype: 'push_event',
+		};
+	});
+}
+
+function pushall_presses(/*match_id, presses*/) {
+	// TODO: only push the presses here
+	pushall_event();
 }
 
 return {
