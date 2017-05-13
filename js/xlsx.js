@@ -43,7 +43,6 @@ function Sheet(book, doc, drawing_doc) {
 
 	function rm_qs(qs) {
 		var el = doc.querySelector(qs);
-		console.log('deleting ', el);
 		if (el) {
 			uiu.remove(el);
 		}
