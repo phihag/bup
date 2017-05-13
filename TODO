@@ -1,5 +1,9 @@
 D25 + D26
-FIX BUNDESLIGA ISSUE: generated xlsx fails
+FIX BUNDESLIGA ISSUE: generated xlsx fails to load
+
+eventsheet error does not get deleted
+	1. generate from localhost/bup while in eventsheet
+	2. load import
 
 Druckbutton Spielreihenfolge
 Spielbericht generieren -> Ersatzspieler fehlen!
@@ -9,6 +13,7 @@ kürzere URL/button für bldemo
 aufschlagwechsel.de -> link bldemo
 write castdyn
 
+display: copy CourtSpot's vertical one
 write displaymode.render_castall tests
 test eventutils.default_counting
 test castall on mac

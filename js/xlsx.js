@@ -190,6 +190,8 @@ function open(ui8r, cb) {
 			add_border: add_border,
 		};
 
+		zipfile.remove('xl/calcChain.xml');
+
 		zipfile.file(STYLE_FN).async('string').then(function(style_str) {
 			book._style_doc = _parse_xml(style_str);
 			cb(book);
