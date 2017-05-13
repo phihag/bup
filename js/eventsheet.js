@@ -873,7 +873,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 
 					setup.teams.forEach(function(team, team_id) {
 						team.players.forEach(function(player, player_id) {
-							sheet.val(xlsx.add_col('C', 3 * team_id) + (row + player_id), player.name);
+							sheet.text(xlsx.add_col('C', 3 * team_id) + (row + player_id), player.name);
 						});
 					});
 

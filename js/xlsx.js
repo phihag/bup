@@ -37,6 +37,7 @@ function Sheet(book, doc, drawing_doc) {
 		if (style_id) {
 			cell.setAttribute('s', style_id);
 		}
+		uiu.empty(cell);
 		var is_node = _create_el(cell, 'is');
 		_create_el(is_node, 't', {}, text);
 	}
