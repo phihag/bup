@@ -62,11 +62,13 @@ function update(msg) {
 	if (msg.dtype === 'push_event') {
 		set_from_event(msg.event);
 	} else if (msg.dtype === 'push_presses') {
-		// TODO implement this
-		/*nmatch.network_team1_serving = s.game.team1_serving;
-		nmatch.network_score = calc.netscore(s);
-		nmatch.presses_json = JSON.stringify(s.presses);*/
-
+		var m = utils.find(ev.matches, function (m) {
+			return m.setup.match_id === msg.match_id;
+		});
+		if (m) {
+			m.presses = msg.presses;
+			eventutils.set_metadata(ev);
+		}
 	}
 }
 

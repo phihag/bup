@@ -430,9 +430,16 @@ function pushall_event() {
 	});
 }
 
-function pushall_presses(/*match_id, presses*/) {
-	// TODO: only push the presses here
-	pushall_event();
+function pushall_presses(match_id, presses) {
+	_pushall(function() {
+		var cev = refmode_common.craft_event(s);
+		cev.last_update = s.event.last_update;
+		return {
+			dtype: 'push_presses',
+			match_id: match_id,
+			presses: presses,
+		};
+	});
 }
 
 return {

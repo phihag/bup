@@ -1,3 +1,5 @@
+refmoe: store pushing property
+
 import y.json does not import everything!?
 refmode: on checking service judges immediately rerender
 note excel issue in mail
@@ -26,6 +28,7 @@ Anzeige André: Sätze links, black-white
 display Moritz: prior games in detail between names
 vertical list of all matches on current courts (tournament-overview)
 
+displaymode: window title should be something better
 push:
 	make more efficient
 	write lots of tests
