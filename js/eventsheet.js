@@ -855,6 +855,8 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					'GD': 20, // called XD in the sheet itself
 					'2.HE': 22,
 				};
+
+				sheet.rm_qs('sheetProtection');
 				ev.matches.forEach(function(match, match_id) {
 					var setup = match.setup;
 					var match_eventsheet_id = calc_match_id(match);
@@ -915,8 +917,8 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 				}
 
 				if (ev.backup_players) {
-					sheet.val('D25', players2str(ev.backup_players[0]));
-					sheet.val('D26', players2str(ev.backup_players[1]));
+					sheet.text('D25', players2str(ev.backup_players[0]));
+					sheet.text('D26', players2str(ev.backup_players[1]));
 				}
 				if (ev.present_players) {
 					sheet.text('U25', players2str(ev.present_players[0]));

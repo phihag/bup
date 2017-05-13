@@ -1,3 +1,11 @@
+D25 + D26
+
+Druckbutton Spielreihenfolge
+Spielbericht generieren -> Ersatzspieler fehlen!
+partial kroton transmission -> Arno Schley
+refmode: Aufstellung still crashes! (see report)
+kürzere URL/button für bldemo
+aufschlagwechsel.de -> link bldemo
 write castdyn
 
 write displaymode.render_castall tests
