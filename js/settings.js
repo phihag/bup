@@ -285,6 +285,7 @@ function on_change(s, name) {
 		render.ui_court_str(s);
 		break;
 	case 'refmode_referee_ws_url':
+	case 'referee_service_judges':
 		refmode_referee_ui.on_settings_change(s);
 		break;
 	case 'language':
