@@ -34,6 +34,7 @@ var default_settings = {
 	refmode_client_ws_url: 'wss://live.aufschlagwechsel.de/refmode_hub/',
 	refmode_referee_ws_url: 'wss://live.aufschlagwechsel.de/refmode_hub/',
 	refmode_client_node_name: '',
+	referee_service_judges: false,
 };
 
 function load() {
@@ -159,6 +160,7 @@ var _settings_checkboxes = [
 	'editmode_doubleclick',
 	'refmode_client_enabled',
 	'displaymode_reverse_order',
+	'referee_service_judges',
 ];
 var _settings_textfields = [
 	'umpire_name',

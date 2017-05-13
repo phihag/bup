@@ -49,6 +49,17 @@ function on_kill_button_click(e) {
 	}
 }
 
+function on_swap_tos_click(e) {
+	var client_id = _client_id(e);
+	var c = rr.client_by_conn_id(client_id);
+	if (!c || !c.settings) return;
+
+	rr.update_settings(client_id, {
+		umpire_name: c.settings.service_judge_name,
+		service_judge_name: c.settings.umpire_name,
+	});
+}
+
 function on_dmode_reverse_order_change(e) {
 	var client_id = _client_id(e);
 
@@ -326,13 +337,29 @@ function render_clients(clients) {
 		uiu.el(div, 'div', {}, s._('refmode:referee:battery') + bat_text);
 
 		if (c.mode === 'umpire') {
-			var umpire_row = uiu.el(div, 'div', {}, s._('refmode:referee:umpire_name'));
+			var umpire_row = uiu.el(div, 'div', {});
+			uiu.el(umpire_row, 'span', {}, s._('refmode:referee:umpire_name'));
 			var umpire_name = uiu.el(umpire_row, 'span', {}, (c.settings ? c.settings.umpire_name : '-'));
 			make_editable(umpire_name, function(new_name) {
 				rr.update_settings(c.id, {
 					umpire_name: new_name,
 				});
 			});
+
+			if (state.settings.referee_service_judges) {
+				var service_judge_label = uiu.el(umpire_row, 'span', 'referee_service_judge_label', s._('refmode:referee:service_judge_name'));
+				var service_judge_name = uiu.el(service_judge_label, 'span', {}, (c.settings ? c.settings.service_judge_name : '-'));
+				make_editable(service_judge_name, function(new_name) {
+					rr.update_settings(c.id, {
+						service_judge_name: new_name,
+					});
+				});
+
+				var swap_tos_btn = uiu.el(umpire_row, 'button', {
+					type: 'button',
+				}, s._('refmode:referee:swap TOs'));
+				click.on(swap_tos_btn, on_swap_tos_click);
+			}
 		}
 
 		// Court

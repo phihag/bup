@@ -258,6 +258,7 @@ var i18n_de = {
 'settings:refmode:client:node_name': 'Geräte-Name:',
 'settings:refmode:ws_url': 'Hub-URL:',
 'settings:refmode:redirected': 'Lokaler Hub: ',
+'settings:refmode:service judges': 'Wettkampf mit Aufschlagrichtern',
 
 'settings:mode:label': 'Modus:',
 'settings:mode:umpire': 'Schiedsrichter',
@@ -500,6 +501,8 @@ var i18n_de = {
 'refmode:referee:cancel': 'Abbrechen',
 'refmode:referee:edit': 'Bearbeiten',
 'refmode:referee:umpire_name': 'Schiedsrichter: ',
+'refmode:referee:service_judge_name': 'Aufschlagrichter: ',
+'refmode:referee:swap TOs': 'Tauschen',
 'refmode:referee:court': 'Feld: ',
 'refmode:referee:match': 'Spiel: ',
 'refmode:referee:back from settings': 'Zurück zur Referee-Übersicht',

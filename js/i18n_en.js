@@ -258,6 +258,7 @@ var i18n_en = {
 'settings:refmode:client:node_name': 'Device name:',
 'settings:refmode:ws_url': 'Hub URL:',
 'settings:refmode:redirected': 'Local Hub: ',
+'settings:refmode:service judges': 'Match with service judges',
 
 'settings:mode:label': 'Mode:',
 'settings:mode:umpire': 'Umpire',
@@ -500,6 +501,8 @@ var i18n_en = {
 'refmode:referee:cancel': 'Cancel',
 'refmode:referee:edit': 'Edit',
 'refmode:referee:umpire_name': 'Umpire: ',
+'refmode:referee:service_judge_name': 'Service judge: ',
+'refmode:referee:swap TOs': 'Tauschen',
 'refmode:referee:court': 'Court: ',
 'refmode:referee:match': 'Match: ',
 'refmode:referee:back from settings': 'Back to referee overview',

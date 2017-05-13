@@ -323,6 +323,7 @@ function handle_msg(msg) {
 
 function on_settings_change() {
 	conn.on_settings_change(true, s.settings.refmode_referee_ws_url, s.settings.network_timeout);
+	render_clients(clients);
 }
 
 function status_str() {

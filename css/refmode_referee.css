@@ -128,3 +128,8 @@
 	-moz-user-select: auto;
 	-ms-user-select: auto;
 }
+
+.referee_service_judge_label {
+	display: inline-block;
+	margin-left: 1em;
+}
