@@ -1,3 +1,7 @@
+enable push mode
+
+import y.json does not import everything!?
+refmode: on checking service judges immediately rerender
 Ballstatistik -> Felix
 note excel issue in mail
 eventsheet error does not get deleted
