@@ -3669,6 +3669,46 @@ _describe('pronunciation', function() {
 		};
 		assert.strictEqual(bup.pronunciation.match_str(incomplete_setup), 'XD');
 	});
+
+	_it('teamtext_internal', function() {
+		var s = tutils.state_after([], DOUBLES_SETUP);
+		assert.strictEqual(bup.pronunciation.teamtext_internal(s, 0), 'Andrew / Alice');
+
+		s = tutils.state_after([], DOUBLES_TEAM_SETUP);
+		assert.strictEqual(bup.pronunciation.teamtext_internal(s, 0), 'A team (Andrew / Alice)');
+
+		// Incomplete doubles
+		s = {
+			setup: {
+				teams: [{
+					players: [{
+						name: 'Ohne Partner',
+					}],
+				}, {
+					players: [],
+				}],
+				is_doubles: true,
+			},
+		};
+		assert.strictEqual(bup.pronunciation.teamtext_internal(s, 0), 'Ohne Partner');
+		assert.strictEqual(bup.pronunciation.teamtext_internal(s, 1), '');
+
+		// Invalid players (should not happen, but be very resistent here)
+		s = {
+			setup: {
+				teams: [{
+					players: [{
+						name: 'Ohne Partner',
+					}, null],
+				}, {
+					players: [null],
+				}],
+				is_doubles: true,
+			},
+		};
+		assert.strictEqual(bup.pronunciation.teamtext_internal(s, 0), 'Ohne Partner / ');
+		assert.strictEqual(bup.pronunciation.teamtext_internal(s, 1), '');
+	});
 });
 
 module.exports = {

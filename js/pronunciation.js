@@ -14,16 +14,12 @@ function match_str(setup) {
 
 // Team name as presented to the umpire
 function teamtext_internal(s, team_id) {
-	var player_names;
-	if (s.setup.is_doubles) {
-		player_names = (
-			s.setup.teams[team_id].players[0].name + ' / ' +
-			s.setup.teams[team_id].players[1].name);
-	} else {
-		player_names = s.setup.teams[team_id].players[0].name;
-	}
+	var setup = s.setup;
+	var player_names = setup.teams[team_id].players.map(function(p) {
+		return p ? p.name : '';
+	}).join(' / ');
 
-	if (s.setup.team_competition) {
+	if (setup.team_competition) {
 		return s.setup.teams[team_id].name + ' (' + player_names + ')';
 	} else {
 		return player_names;

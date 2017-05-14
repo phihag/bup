@@ -1,6 +1,10 @@
+event changing fails to push!
+make going into fullscreen in displaymode on clicking sides an option
+make order respect 3 difference
+
 import y.json does not import everything!?
 refmode: on clicking show service judges immediately rerender
-note excel issue in mail
+note excel issue in mail, note issue with old bups
 eventsheet error does not get deleted
 	1. generate from localhost/bup while in eventsheet
 	2. load import
