@@ -1,7 +1,10 @@
-event changing fails to push!
-make going into fullscreen in displaymode on clicking sides an option
-make order respect 3 difference
+mail: order
 
+
+event changing fails to push!
+make order respect 3 difference -> fix+write tests (Freystadt vs Mülheim)
+
+refmode/event order of matches looks strange sometimes
 import y.json does not import everything!?
 refmode: on clicking show service judges immediately rerender
 note excel issue in mail, note issue with old bups
@@ -29,6 +32,9 @@ Anzeige André: Sätze links, black-white
 display Moritz: prior games in detail between names
 vertical list of all matches on current courts (tournament-overview)
 
+make going into fullscreen in displaymode on clicking sides an options
+refmode: instead of "Warte auf Spieler(1.HD)" "Warte auf Marvin Seidel (1.HD)" or "Warte auf 2 Spieler (1.HD)"
+refmode neuer Stand: Zeige was geändert wurde
 partial kroton transmission -> Arno Schley
 displaymode: window title should be something better
 push:
