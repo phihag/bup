@@ -212,6 +212,11 @@ function handle_dmsg(msg) {
 
 		var updated = update_match(s, msg);
 
+		// Old bup versions don't send court_id, infer it
+		if (c.settings && c.settings.court_id && s.event && s.event.courts && !msg.court_id && msg.setup) {
+			msg.court_id = c.settings.court_id;
+		}
+
 		// Move current match on court
 		if (s.event && s.event.courts && msg.court_id && msg.setup) {
 			var court = utils.find(s.event.courts, function(court) {
