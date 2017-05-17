@@ -57,6 +57,7 @@ dist: cleandist ## Create distribution files
 	node div/minify_json.js div/nrwdemo.json dist/bup/div/nrwdemo.json
 	node div/minify_json.js div/rlmdemo.json dist/bup/div/rlmdemo.json
 	cp -R div/teamlists --target-directory dist/bup/div/
+	cp -R http_proxy --target-directory dist/bup/
 	cp \
 		div/bundesliga-ballsorten-2016.pdf \
 		div/bupdate.php \
