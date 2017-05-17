@@ -1,8 +1,12 @@
+import without players
+
 make order respect 3 difference
+	download bundesliga matches
+	simulate match lengths
+	test out
 	write mail Heinz
 
 
-refmode/event order of matches looks strange sometimes
 
 event changing fails to push!
 update mail.template with git log
@@ -33,6 +37,7 @@ Anzeige André: Sätze links, black-white
 display Moritz: prior games in detail between names
 vertical list of all matches on current courts (tournament-overview)
 
+refmode/event order of matches looks strange sometimes
 display: copy CourtSpot's vertical one
 ads: 30s Stand, danach erst Werbung
 Referee mode Aufstellung

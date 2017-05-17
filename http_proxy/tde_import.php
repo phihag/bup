@@ -55,6 +55,9 @@ function parse_teammatch($tm_html) {
 	$LEAGUE_KEYS = [
 		'Bundesligen 2016/17:1. Bundesliga 1. Bundesliga' => '1BL-2016',
 		'Bundesligen 2016/17:1. Bundesliga 1. Bundesliga - Final Four' => '1BL-2016',
+		'Bundesligen 2016/17:1. Bundesliga 1. Bundesliga - PlayOff - Viertelfinale 1' => '1BL-2016',
+		'Bundesligen 2016/17:1. Bundesliga 1. Bundesliga - PlayOff - Viertelfinale 2' => '1BL-2016',
+		'TEST - Ligen - Hagemeister Mai 2017:Test LIGA - Testliga' => '1BL-2016',
 	];
 
 	$res = [];
@@ -104,9 +107,9 @@ function parse_teammatch($tm_html) {
 	$matches_table_html = $table_m['html'];
 	\preg_match_all(
 		'/<tr>\s*<td>(?P<match_name>[A-Z\.0-9\s]+)<\/td>
-		\s*<td[^>]*><table[^>]*>(?P<players_html0>.*?)<\/table>
+		\s*<td[^>]*>(?:<table[^>]*>(?P<players_html0>.*?)<\/table>)?
 		<\/td><td[^>]*>-<\/td>
-		<td[^>]*><table[^>]*>(?P<players_html1>.*?)<\/table>
+		<td[^>]*>(?:<table[^>]*>(?P<players_html1>.*?)<\/table>)?
 		#<td>(?P<score_html>.*?)<\/td>
 		/xs', $matches_table_html, $matches_m, \PREG_SET_ORDER);
 	$matches = [];

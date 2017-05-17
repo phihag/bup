@@ -2,17 +2,30 @@
 var urlimport = (function() {
 var baseurl = '../';
 
-function display_error(msg) {
+function display_error(s, msg) {
 	var form = uiu.qs('.urlimport_form');
-	uiu.qsEach('.error', uiu.remove, form);
+	uiu.qsEach('.urlimport_error', uiu.remove, form);
 	if (msg) {
-		uiu.el(form, 'div', 'error', state._('urlimport:error', {
+		uiu.el(form, 'div', 'urlimport_error', s._('urlimport:error', {
 			msg: msg,
 		}));
 	}
 }
 
-function import_tde(match_url) {
+function ui_import() {
+	var url = uiu.qs('input[name="urlimport_url"]').value;
+	var btn = uiu.qs('.urlimport_button');
+	var progress = uiu.el(btn, 'div', 'loading-icon');
+	import_tde(state, url, function(err_msg) {
+		uiu.remove(progress);
+		display_error(state, err_msg);
+		if (!err_msg) {
+			window.scrollTo(0, 0);
+		}
+	});
+}
+
+function import_tde(s, match_url, cb) {
 	var import_url = baseurl + 'bup/http_proxy/tde_import?format=export&url=' + encodeURIComponent(match_url);
 	ajax.req({
 		method: 'GET',
@@ -20,26 +33,26 @@ function import_tde(match_url) {
 	}, function(import_json) {
 		var data = utils.parse_json(import_json);
 		if (!data) {
-			display_error('JSON parse failed');
-			return;
+			return cb('JSON parse failed');
 		}
 
-		var event = importexport.load_data(state, data).event;
-		event.staticnet_message = state._('urlimport:staticnet_message');
+		var event = importexport.load_data(s, data).event;
+		event.staticnet_message = s._('urlimport:staticnet_message');
 		var snet = staticnet(event);
-		network.ui_install_staticnet(state, snet);
+		network.ui_install_staticnet(s, snet);
+		cb();
 	}, function(http_code, body, response) {
 		var content_type = response.getResponseHeader('content-type');
+		var msg = 'Code ' + http_code;
 		if (content_type === 'application/json') {
 			var data = utils.parse_json(body);
 			if (data) {
-				display_error(data.message);
+				msg = data.message;
 			} else {
-				display_error('invalid JSON');
+				msg = 'invalid JSON (HTTP ' + http_code + ')';
 			}
-		} else {
-			display_error('Code ' + http_code);
 		}
+		cb(msg);
 	});
 }
 
@@ -52,8 +65,7 @@ function ui_init() {
 	var urlimport_form = uiu.qs('.urlimport_form');
 	urlimport_form.addEventListener('submit', function(e) {
 		e.preventDefault();
-		var url = uiu.qs('input[name="urlimport_url"]').value;
-		import_tde(url);
+		ui_import();
 	});
 }
 
