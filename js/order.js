@@ -22,6 +22,9 @@ function calc_players(match) {
 function _pref_idx(prefs, match) {
 	var res = prefs.indexOf(match.md_eid);
 	if (res < 0) {
+		res = prefs.indexOf(match.setup.match_name);
+	}
+	if (res < 0) {
 		throw new Error('Could not find match ' + match.md_eid);
 	}
 	return res;
@@ -75,13 +78,9 @@ function calc_conflicting_players(omatches, ignore_start) {
 	var conflicts = {};
 	for (var i = 0;i < ignore_start;i++) {
 		var my_players = o_players[i];
-		for (var dist = 1;dist <= 2;dist++) {
+		for (var dist = 1;dist <= 3;dist++) {
 			if (i + dist >= ignore_start) {
 				break;
-			}
-			if (omatches[i].md_start && omatches[i + dist].md_start) {
-				// Both matches started already, so no need to color conflict
-				continue;
 			}
 			var other_players = o_players[i + dist];
 			for (var j = 0;j < my_players.length;j++) {
@@ -467,6 +466,8 @@ function ui_render() {
 				player_class += ' order_conflict1';
 			} else if (conflict === 2) {
 				player_class += ' order_conflict2';
+			} else if (conflict === 3) {
+				player_class += ' order_conflict3';
 			}
 		} else {
 			// Player not configured yet
@@ -563,7 +564,7 @@ function ui_init() {
 
 	click.qs('.order_optimize', function() {
 		var matches_to_sort = current_matches.slice(0, current_ignore_start);
-		var d3_cost = 0; // TODO make this configurable
+		var d3_cost = 100;
 		var best_order = optimize(calc_cost, matches_to_sort, utils.range(current_ignore_start), current_locked, d3_cost);
 		var sorted = sort_by_order(matches_to_sort, best_order, current_ignore_start);
 		current_matches = sorted.concat(current_matches.slice(current_ignore_start));
@@ -579,12 +580,15 @@ return {
 	hide: hide,
 	show: show,
 	ui_init: ui_init,
+	/*@DEV*/
 	// Testing only
 	calc_conflicting_players: calc_conflicting_players,
 	init_order_matches: init_order_matches,
 	calc_cost: calc_cost,
 	calc_conflict_map: calc_conflict_map,
 	optimize: optimize,
+	preferred_by_league: preferred_by_league,
+	/*/@DEV*/
 };
 
 })();

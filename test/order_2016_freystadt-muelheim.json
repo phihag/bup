@@ -3,11 +3,12 @@
     "version": 2,
     "event": {
         "team_names": [
-            "1. BC Sbr.-Bischmisheim [M]",
-            "TV Refrath"
+            "TSV 1906 Freystadt [N]",
+            "1.BV M\u00fclheim"
         ],
         "league_key": "1BL-2016",
-        "location": "36251 Bad Hersfeld, Waldhessenhalle, Am Obersberg 25",
+        "location": "92342 Freystadt, Turnhalle der Volksschule, Allersbergerstr. 13",
+        "umpires": "Schwendtner, Wilde ",
         "matches": [
             {
                 "setup": {
@@ -17,20 +18,20 @@
                         {
                             "players": [
                                 {
-                                    "name": "Michael Fuchs"
+                                    "name": "Johannes Pistorius"
                                 },
                                 {
-                                    "name": "Johannes Sch\u00f6ttler"
+                                    "name": "Pawel Pietryja"
                                 }
                             ]
                         },
                         {
                             "players": [
                                 {
-                                    "name": "Sam Magee"
+                                    "name": "Robin Tabeling"
                                 },
                                 {
-                                    "name": "Max Schwenger"
+                                    "name": "Zvonimir H\u00f6lbling"
                                 }
                             ]
                         }
@@ -46,20 +47,20 @@
                         {
                             "players": [
                                 {
-                                    "name": "Olga Konon"
+                                    "name": "Nanna Vainio"
                                 },
                                 {
-                                    "name": "Isabel Herttrich"
+                                    "name": "Julia Kunkel"
                                 }
                             ]
                         },
                         {
                             "players": [
                                 {
-                                    "name": "Chloe Magee"
+                                    "name": "Johanna Goliszewski"
                                 },
                                 {
-                                    "name": "Carla Nelte"
+                                    "name": "Lara K\u00e4pplein"
                                 }
                             ]
                         }
@@ -74,20 +75,20 @@
                         {
                             "players": [
                                 {
-                                    "name": "Peter K\u00e4sbauer"
+                                    "name": "Lukas Schmidt"
                                 },
                                 {
-                                    "name": "Marvin Seidel"
+                                    "name": "Florian Waffler"
                                 }
                             ]
                         },
                         {
                             "players": [
                                 {
-                                    "name": "Fabian Holzer"
+                                    "name": "Alexander Roovers"
                                 },
                                 {
-                                    "name": "Richard Domke"
+                                    "name": "Russel Muns"
                                 }
                             ]
                         }
@@ -103,14 +104,14 @@
                         {
                             "players": [
                                 {
-                                    "name": "Marc Zwiebler"
+                                    "name": "Lukas Schmidt"
                                 }
                             ]
                         },
                         {
                             "players": [
                                 {
-                                    "name": "Fabian Roth"
+                                    "name": "Alexander Roovers"
                                 }
                             ]
                         }
@@ -126,14 +127,14 @@
                         {
                             "players": [
                                 {
-                                    "name": "Olga Konon"
+                                    "name": "Nanna Vainio"
                                 }
                             ]
                         },
                         {
                             "players": [
                                 {
-                                    "name": "Chloe Magee"
+                                    "name": "Gayle Mahulette"
                                 }
                             ]
                         }
@@ -148,20 +149,20 @@
                         {
                             "players": [
                                 {
-                                    "name": "Marvin Seidel"
+                                    "name": "Pawel Pietryja"
                                 },
                                 {
-                                    "name": "Isabel Herttrich"
+                                    "name": "Julia Kunkel"
                                 }
                             ]
                         },
                         {
                             "players": [
                                 {
-                                    "name": "Max Schwenger"
+                                    "name": "Robin Tabeling"
                                 },
                                 {
-                                    "name": "Carla Nelte"
+                                    "name": "Johanna Goliszewski"
                                 }
                             ]
                         }
@@ -176,14 +177,14 @@
                         {
                             "players": [
                                 {
-                                    "name": "Dieter Domke"
+                                    "name": "Hannes Gerberich"
                                 }
                             ]
                         },
                         {
                             "players": [
                                 {
-                                    "name": "Lars Sch\u00e4nzler"
+                                    "name": "Christopher Skrzeba"
                                 }
                             ]
                         }

@@ -576,6 +576,14 @@ _describe('order', function() {
 			var optimized = _calc_names(matches, bup.order.optimize(bup.order.calc_cost, matches, preferred, {}, 100));
 			assert.strictEqual(optimized, 'DD-HD1-HD2-HE1-DE-HE2-GD');
 
+			// Test yellow markings
+			var omatches = _order_matches(matches, 'HD1-DD-HD2-HE1-DE-HE2-GD');
+			var conflicting_players = bup.order.calc_conflicting_players(omatches, matches.length);
+			assert.deepStrictEqual(conflicting_players, {
+				'Chloe Magee': 3,
+				'Olga Konon': 3,
+			});
+
 			done();
 		});		
 	});
@@ -601,6 +609,11 @@ _describe('order', function() {
 			optimized = _calc_names(
 				matches, bup.order.optimize(bup.order.calc_cost, matches, preferred, {}, 100));
 			assert.strictEqual(optimized, 'DD-HD1-HD2-HE2-DE-GD-HE1');
+
+			// Test initialization of order module
+			var pref = bup.order.preferred_by_league(event.league_key);
+			bup.eventutils.set_metadata(event);
+			bup.order.init_order_matches(event.matches, pref);
 
 			done(err);
 		});		

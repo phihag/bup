@@ -30,6 +30,7 @@ function main($match_url) {
 		}
 	}
 
+	header('HTTP 500 Internal Server Error');
 	header('Content-Type: application/json');
 	header('Cache-Control: no-cache, no-store, must-revalidate');
 	header('Pragma: no-cache');
@@ -44,7 +45,7 @@ function parse_match_players($players_html) {
 		$players_html, $players_m, \PREG_SET_ORDER);
 	$players = \array_map(function($pm) {
 		return [
-			'name' => $pm['name'],
+			'name' => decode_html($pm['name']),
 		];
 	}, $players_m);
 	return [
@@ -65,7 +66,10 @@ function parse_teammatch($tm_html) {
 			\s*-\s*
 			<a\s*href="\/sport\/team\.aspx\?id=[^"]+">(?P<team1>[^<]+?)\s*\([0-9-]+\)<\/a>
 			/xs', $tm_html, $teamnames_m)) {
-		$res['team_names'] = [$teamnames_m['team0'], $teamnames_m['team1']];
+		$res['team_names'] = [
+			decode_html($teamnames_m['team0']),
+			decode_html($teamnames_m['team1'])
+		];
 	} else {
 		throw new \Exception('Cannot find team names!');
 	}
@@ -116,12 +120,17 @@ function parse_teammatch($tm_html) {
 			parse_match_players($mm['players_html0']),
 			parse_match_players($mm['players_html1'])
 		];
-		// TODO score
 		$setup = [
 			'match_name' => $match_name,
 			'is_doubles' => $is_doubles,
 			'teams' => $teams,
 		];
+
+		if (\preg_match('/^(?P<discipline>[A-Z]+)(?P<num>[1-5])$/', $match_name, $eid_m)) {
+			$setup['eventsheet_id']	= $eid_m['num'] . '.' . $eid_m['discipline'];
+		}
+
+		// TODO score
 		$matches[] = [
 			'setup' => $setup,
 		];

@@ -26,3 +26,10 @@ function json_err($description) {
 	];
 	die(\json_encode($send));
 }
+
+function decode_html($html) {
+	$named = \html_entity_decode($html);
+	return preg_replace_callback('/(&#[0-9]+;)/', function($m) {
+		return mb_convert_encoding($m[1], 'UTF-8', 'HTML-ENTITIES');
+	}, $named);
+}
