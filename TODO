@@ -1,10 +1,14 @@
-mail: order
+make order respect 3 difference
+	fix tests
+	mark yellow
+	write test Freystadt vs Mülheim
+	write mail Heinz
 
-
-event changing fails to push!
-make order respect 3 difference -> fix+write tests (Freystadt vs Mülheim)
 
 refmode/event order of matches looks strange sometimes
+
+event changing fails to push!
+update mail.template with git log
 import y.json does not import everything!?
 refmode: on clicking show service judges immediately rerender
 note excel issue in mail, note issue with old bups
@@ -19,7 +23,6 @@ kürzere URL/button für bldemo
 aufschlagwechsel.de -> link bldemo
 write castdyn
 
-display: copy CourtSpot's vertical one
 write displaymode.render_castall tests
 test eventutils.default_counting
 test castall on mac
@@ -27,12 +30,18 @@ test castall with missing matches etc.
 2courts looks broken with devmode on
 csde: handle closed events
 
+displaymode/international and others: courtspot empty shows server
 btde Berlin
 Anzeige André: Sätze links, black-white
 display Moritz: prior games in detail between names
 vertical list of all matches on current courts (tournament-overview)
 
+display: copy CourtSpot's vertical one
+ads: 30s Stand, danach erst Werbung
+Referee mode Aufstellung
+Testspiele löschen statt manuell starten
 make going into fullscreen in displaymode on clicking sides an options
+bundesliga join protest cells -> Markus SChwendtner
 refmode: instead of "Warte auf Spieler(1.HD)" "Warte auf Marvin Seidel (1.HD)" or "Warte auf 2 Spieler (1.HD)"
 refmode neuer Stand: Zeige was geändert wurde
 partial kroton transmission -> Arno Schley
@@ -40,7 +49,6 @@ displaymode: window title should be something better
 push:
 	make more efficient
 	write lots of tests
-Ballstatistik -> Felix von Yonex / Boris Reichelt
 castall: allow normal zooming?
 reset colors
 fix courtspot caching on android!?
@@ -56,6 +64,7 @@ highlight undo in stats
 source maps for errors
 	http://stackoverflow.com/a/33129856/35070
 
+Ballstatistik -> Felix von Yonex / Boris Reichelt
 block middle buttons like any other-> Jörg Hupertz
 cursor in fullscreen display should be none if settings are not visible (Chrome / Mac OS)
 error teamtext_internal bei Tablet wenn referee mode spiel auf incomplete ändert
@@ -315,7 +324,6 @@ MVP liveaw
 	implement authorization (including login via bup)
 
 display
-	invert colors
 	small court rendering of all courts
 	only list
 update RLN document

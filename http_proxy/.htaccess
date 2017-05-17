@@ -1,0 +1,4 @@
+Options -MultiViews
+RewriteEngine On
+RewriteRule ^tde_import$ tde_import.php [L]
+

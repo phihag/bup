@@ -61,8 +61,10 @@ match
 setup*        All properties that don't change during the match
 presses       Array of press, contains all button presses in the match so far.
 presses_json  JSON encoding of presses (in order to not construct a large number of objects)
-network_score The score displayed in the network system (may be different to actual score in case of retiring or disqualification).
-              A list of 2-element lists, e.g. [[21, 19], [29, 30], [15, 4]]. First element is home team, second away team.
+network_score The score displayed in the network system
+              (may be different to actual score in case of retiring or disqualification).
+              A list of 2-element lists, e.g. [[21, 19], [29, 30], [15, 4]].
+              First element is home team, second away team.
 incomplete    Boolean. If set than the match is not yet ready to be called,
               for instance because no players have been assigned yet.
 

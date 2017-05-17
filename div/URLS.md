@@ -9,6 +9,7 @@ edemo     Demo of an event (empty)
 vdemo     Demo of an event (in progress)
 btde      Run under badmintonticker
 courtspot Run under CourtSpot
+csde      Run under courtspot.de
 
 Initial UI
 ==========
