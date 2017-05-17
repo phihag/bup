@@ -286,6 +286,9 @@ function preferred_by_league(league_key) {
 	case '1BL-2016':
 	case '2BLN-2016':
 	case '2BLS-2016':
+	case '1BL-2017':
+	case '2BLN-2017':
+	case '2BLS-2017':
 		// See BLO-DB §8.8
 		return [
 			'1.HD',
