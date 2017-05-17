@@ -116,15 +116,21 @@ function parse_teammatch($tm_html) {
 	foreach ($matches_m as $mm) {
 		$match_name = $mm['match_name'];
 		$is_doubles = preg_match('/DD|GD|HD|WD|MX|MD|BD|JD/', $match_name) !== 0;
+		$expect_players = $is_doubles ? 2 : 1;
 
 		$teams = [
-			parse_match_players($mm['players_html0']),
-			parse_match_players($mm['players_html1'])
+			parse_match_players(isset($mm['players_html0']) ? $mm['players_html0'] : ''),
+			parse_match_players(isset($mm['players_html1']) ? $mm['players_html1'] : ''),
 		];
+		$incomplete = (
+			(\count($teams[0]['players']) !== $expect_players) ||
+			(\count($teams[1]['players']) !== $expect_players)
+		);
 		$setup = [
 			'match_name' => $match_name,
 			'is_doubles' => $is_doubles,
 			'teams' => $teams,
+			'incomplete' => $incomplete,
 		];
 
 		if (\preg_match('/^(?P<discipline>[A-Z]+)(?P<num>[1-5])$/', $match_name, $eid_m)) {

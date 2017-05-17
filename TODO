@@ -1,5 +1,3 @@
-import without players
-
 make order respect 3 difference
 	download bundesliga matches
 	simulate match lengths
