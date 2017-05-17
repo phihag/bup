@@ -101,7 +101,7 @@ test: ## Run tests
 lint: eslint stylelint doclint ## Verify source code quality
 
 eslint:
-	@./node_modules/.bin/eslint js/ div/*.js test/ cachesw.js refmode_hub/
+	@./node_modules/.bin/eslint js/ div/*.js test/ cachesw.js refmode_hub/ div/eval_order/
 
 stylelint:
 	@./node_modules/.bin/stylelint css/*.css

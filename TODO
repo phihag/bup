@@ -4,10 +4,20 @@ make order respect 3 difference
 	test out
 	write mail Heinz
 
+btde Berlin
+Anzeige André: Sätze links, black-white
+display Moritz: prior games in detail between names
+vertical list of all matches on current courts (tournament-overview)
 
-
+displaymode/international and others: courtspot empty shows server
+group "Wettkampf importieren" under manual match start
+Druckbutton Spielreihenfolge
+Spielbericht generieren -> Ersatzspieler fehlen!
+refmode: Aufstellung still crashes! (see report)
+kürzere URL/button für bldemo
+aufschlagwechsel.de -> link bldemo
+write castdyn (see later mail from Dieter)
 event changing fails to push!
-update mail.template with git log
 import y.json does not import everything!?
 refmode: on clicking show service judges immediately rerender
 note excel issue in mail, note issue with old bups
@@ -15,26 +25,13 @@ eventsheet error does not get deleted
 	1. generate from localhost/bup while in eventsheet
 	2. load import
 
-Druckbutton Spielreihenfolge
-Spielbericht generieren -> Ersatzspieler fehlen!
-refmode: Aufstellung still crashes! (see report)
-kürzere URL/button für bldemo
-aufschlagwechsel.de -> link bldemo
-write castdyn
-
 write displaymode.render_castall tests
 test eventutils.default_counting
 test castall on mac
 test castall with missing matches etc.
 2courts looks broken with devmode on
 csde: handle closed events
-
-displaymode/international and others: courtspot empty shows server
-btde Berlin
-Anzeige André: Sätze links, black-white
-display Moritz: prior games in detail between names
-vertical list of all matches on current courts (tournament-overview)
-
+fix travis
 refmode/event order of matches looks strange sometimes
 display: copy CourtSpot's vertical one
 ads: 30s Stand, danach erst Werbung
@@ -55,6 +52,7 @@ fix courtspot caching on android!?
 refmode: disable/enable pronouncing and other settings remotely
 
 displaymode "Berlin": like courtspot vertical, but with border (red for finished green for server) -> BR 5/2017 S. 24
+stats: use team colors if available (and distinct)
 edge Referee mode
 remove saving hall and other extra_data
 make court smaller -> Stefan Weiss
@@ -64,7 +62,11 @@ highlight undo in stats
 source maps for errors
 	http://stackoverflow.com/a/33129856/35070
 
-Ballstatistik -> Felix von Yonex / Boris Reichelt
+Wettkampfstatistik
+	Ballstatistik -> Felix von Yonex / Boris Reichelt
+	match lengths
+	pauses
+
 block middle buttons like any other-> Jörg Hupertz
 cursor in fullscreen display should be none if settings are not visible (Chrome / Mac OS)
 error teamtext_internal bei Tablet wenn referee mode spiel auf incomplete ändert
