@@ -1,7 +1,6 @@
 'use strict';
 
 var assert = require('assert');
-var fs = require('fs');
 var path = require('path');
 
 var tutils = require('./tutils');
@@ -553,16 +552,13 @@ _describe('order', function() {
 	});
 
 	_it('Bundesliga final match 2016/2017', function(done) {
-		var blfinals_fn = path.join(__dirname, 'buli_finals2016.json');
-		fs.readFile(blfinals_fn, {encoding: 'utf-8'}, function(err, fcontents) {
-			if (err) return done(err);
+		var fn = path.join(__dirname, 'buli_finals2016.json');
+		tutils.load_event(fn, function(err, event) {
+			if (err) {
+				return done(err);
+			}
 
-			var s = tutils.state_after([], tutils.SINGLES_SETUP);
-			var data = JSON.parse(fcontents);
-			var loaded = bup.importexport.load_data(s, data);
-			assert(loaded && loaded.event);
-
-			var matches = loaded.event.matches;
+			var matches = event.matches;
 			var conflicts = bup.order.calc_conflict_map(matches);
 			var preferred = _calc_order(matches, 'HD1-DD-HD2-HE1-DE-GD-HE2');
 			var order = _calc_order(matches, 'HD1-DD-HD2-HE1-DE-GD-HE2');
@@ -580,8 +576,35 @@ _describe('order', function() {
 			var optimized = _calc_names(matches, bup.order.optimize(bup.order.calc_cost, matches, preferred, {}, 100));
 			assert.strictEqual(optimized, 'DD-HD1-HD2-HE1-DE-HE2-GD');
 
+			done();
+		});		
+	});
+
+	_it('Freystadt - Mülheim in 2016/2017 (testcase by Markus Schwendtner)', function(done) {
+		var fn = path.join(__dirname, 'order_2016_freystadt-muelheim.json');
+		tutils.load_event(fn, function(err, event) {
+			if (err) {
+				return done(err);
+			}
+
+			var matches = event.matches;
+			var conflicts = bup.order.calc_conflict_map(matches);
+			var preferred = _calc_order(matches, 'HD1-DD-HD2-HE1-DE-GD-HE2');
+			var order = _calc_order(matches, 'HD1-DD-HD2-HE1-DE-GD-HE2');
+			var cost = bup.order.calc_cost(order, conflicts, preferred, 100);
+			assert.strictEqual(cost, 100100); // HD2<-1->HE1 + DD<-3->DE
+
+			var optimized = _calc_names(
+				matches, bup.order.optimize(bup.order.calc_cost, matches, preferred, {}, 0));
+			assert.strictEqual(optimized, 'HD2-DD-HD1-HE1-DE-GD-HE2');
+
+			optimized = _calc_names(
+				matches, bup.order.optimize(bup.order.calc_cost, matches, preferred, {}, 100));
+			assert.strictEqual(optimized, 'DD-HD1-HD2-HE2-DE-GD-HE1');
+
 			done(err);
 		});		
 	});
+
 });
 

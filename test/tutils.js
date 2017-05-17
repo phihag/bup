@@ -1,6 +1,8 @@
 'use strict';
 
 var assert = require('assert');
+var fs = require('fs');
+
 var bup = require('../js/bup');
 
 // Make linter happy
@@ -163,6 +165,19 @@ function assert_u8r_eq(r, lst) {
 	assert.deepStrictEqual(ints, lst);
 }
 
+function load_event(fn, cb) {
+	fs.readFile(fn, {encoding: 'utf-8'}, function(err, fcontents) {
+		if (err) return cb(err);
+
+		var s = state_after([], SINGLES_SETUP);
+		var data = JSON.parse(fcontents);
+		var loaded = bup.importexport.load_data(s, data);
+		assert(loaded && loaded.event);
+
+		return cb(null, loaded.event);
+	});
+}
+
 
 module.exports = {
 	DOUBLES_SETUP: DOUBLES_SETUP,
@@ -179,6 +194,7 @@ module.exports = {
 
 	assert_u8r_eq: assert_u8r_eq,
 	press_score: press_score,
+	load_event: load_event,
 	state_after: state_after,
 	state_at: state_at,
 	find_object: find_object,
