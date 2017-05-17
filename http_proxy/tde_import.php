@@ -10,7 +10,6 @@ main($match_url);
 
 function main($match_url) {
 	if (! \preg_match('/^https?:\/\/www\.turnier\.de\/sport\/teammatch\.aspx\?id=([a-fA-F0-9-]+)&match=([0-9]+)$/', $match_url)) {
-		echo $match_url;
 		throw new \Exception('Unsupported URL');
 	}
 
@@ -30,7 +29,6 @@ function main($match_url) {
 		}
 	}
 
-	header('HTTP 500 Internal Server Error');
 	header('Content-Type: application/json');
 	header('Cache-Control: no-cache, no-store, must-revalidate');
 	header('Pragma: no-cache');

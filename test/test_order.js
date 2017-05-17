@@ -162,21 +162,32 @@ _describe('order', function() {
 	_it('realistic sample for conflict determination', function() {
 		var omatches = _order_matches(sample_matches, 'HD1-HD2-DD-HE1-HE2-HE3-DE-MX');
 		var conflicts = bup.order.calc_conflicting_players(omatches, omatches.length);
-		assert.deepStrictEqual(conflicts, {});
+		assert.deepStrictEqual(conflicts, {
+			'Alexander': 3,
+			'Linus': 3,
+			'Lukas': 3,
+		});
 
 		omatches = _order_matches(sample_matches, 'HD1-HE1-HD2-DD-HE2-HE3-DE-MX');
 		conflicts = bup.order.calc_conflicting_players(omatches, omatches.length);
 		assert.deepStrictEqual(conflicts, {
 			'Alexander': 1,
 			'Lukas': 1,
+			'Beate': 3,
+			'Linus': 3,
+			'Manuela': 3,
 		});
 
 		omatches = _order_matches(sample_matches, 'HD1-DE-HE1-HD2-DD-HE2-HE3-MX');
 		conflicts = bup.order.calc_conflicting_players(omatches, omatches.length);
 		assert.deepStrictEqual(conflicts, {
 			'Alexander': 2,
+			'Beate': 3,
+			'Britta': 3,
 			'Lukas': 2,
 			'Linus': 2,
+			'Manuela': 3,
+			'Mareike': 3,
 		});
 	});
 

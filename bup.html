@@ -289,11 +289,6 @@
 		<button tabindex="101" class="setup_manual_start" data-i18n="settings:Start Match"></button>
 	</div>
 
-	<div class="import_link_container">
-		<a href="#" class="import_link" data-i18n="import link"></a>
-	</div>
-
-
 	<h2 data-i18n="settings:Resume Match"></h2>
 
 	<div class="setup_loadmatch_none" data-i18n="settings:loadmatch_none"></div>
@@ -302,6 +297,17 @@
 	</ul>
 
 	</form>
+
+	<h2 data-i18n="settings:Import Event"></h2>
+		<div class="import_link_container">
+		<a href="#" class="import_link" data-i18n="import link"></a>
+	</div>
+
+	<form class="urlimport_form">
+		<input type="url" required="required" name="urlimport_url" data-i18n-placeholder="settings:import_url-placeholder" size="60" />
+		<button type="submit" data-i18n="settings:import from URL"></button>
+	</form>
+
 </div>
 
 <div class="settings">
@@ -587,6 +593,7 @@ text.team1 {
 <script src="libs/FileSaver.min.js"></script>
 <script src="libs/encoding.js"></script>
 
+<script src="js/ajax.js"></script>
 <script src="js/appcache.js"></script>
 <script src="js/autosize.js"></script>
 <script src="js/btde.js"></script>
@@ -646,6 +653,7 @@ text.team1 {
 <script src="js/svg2pdf.js"></script>
 <script src="js/timer.js"></script>
 <script src="js/uiu.js"></script>
+<script src="js/urlimport.js"></script>
 <script src="js/utils.js"></script>
 <script src="js/wakelock.js"></script>
 <script src="js/xlsx.js"></script>

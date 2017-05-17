@@ -16,13 +16,14 @@ function json_error_handler($level, $errstr, $errfile, $errline) {
 }
 
 function json_err($description) {
+	header('HTTP/1.1 500 Internal Server Error');
 	header('Content-Type: application/json');
 	header('Cache-Control: no-cache, no-store, must-revalidate');
 	header('Pragma: no-cache');
 	header('Expires: 0');
 	$send = [
 		'status' => 'error',
-		'description' => $description,
+		'message' => $description,
 	];
 	die(\json_encode($send));
 }

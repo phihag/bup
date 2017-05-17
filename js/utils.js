@@ -246,6 +246,15 @@ function deep_copy(obj) {
 	return JSON.parse(JSON.stringify(obj));
 }
 
+// Parse JSON without crashing
+function parse_json(json_str) {
+	try {
+		return JSON.parse(json_str);
+	} catch(e) {
+		return;
+	}
+}
+
 function remove_cb(ar, cb) {
 	for (var i = 0;i < ar.length;i++) {
 		if (cb(ar[i])) {
@@ -476,8 +485,9 @@ return {
 	map_dict: map_dict,
 	multiline_regexp: multiline_regexp,
 	obj_update: obj_update,
-	parse_query_string: parse_query_string,
 	parallel: parallel,
+	parse_json: parse_json,
+	parse_query_string: parse_query_string,
 	pluck: pluck,
 	plucked_deep_equal: plucked_deep_equal,
 	range: range,

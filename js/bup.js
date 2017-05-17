@@ -39,6 +39,7 @@ function ui_init() {
 	stats.ui_init();
 	order.ui_init();
 	importexport.ui_init();
+	urlimport.ui_init();
 	editevent.ui_init();
 	setupsheet.ui_init();
 	shortcuts.ui_init(state);
@@ -114,6 +115,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var stats = require('./stats');
 	var timer = require('./timer');
 	var uiu = require('./uiu');
+	var urlimport = require('./urlimport');
 	var utils = require('./utils');
 	var xlsx = require('./xlsx');
 

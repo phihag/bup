@@ -14,7 +14,7 @@ var i18n_en = {
 'dialog-receiver': 'Receiver',
 '[Call referee!]': '[Call referee!]',
 'Are you retiring?': 'Are you retiring?',
-'import link': 'Import event ...',
+'import link': 'Import event from backup file ...',
 'send export': 'send export file',
 'select pick': 'Select',
 
@@ -213,6 +213,9 @@ var i18n_en = {
 'settings:Start Match': 'Start match',
 'settings:Resume Match': 'Resume match',
 'settings:loadmatch_none': 'No stored matches',
+'settings:Import Event': 'Import event',
+'settings:import from URL': 'Import from URL',
+'settings:import_url-placeholder': 'https://www.turnier.de/...',
 'settings:counting': 'Scoring:',
 'settings:counting|3x21': 'BWF (3x21)',
 'settings:counting|2x21+11': '2x21, 3rd game until 11',
@@ -521,6 +524,8 @@ var i18n_en = {
 'refmode:referee:forwards clock': 'The internal clock of the tablet is early by {diff} minutes!',
 'refmode:referee:backwards clock': 'The internal clock of the tablet is late by {diff} minutes!',
 
+'urlimport:error': 'Import failed: {msg}',
+'urlimport:staticnet_message': 'Importierter Wettkampf',
 };
 
 /*@DEV*/

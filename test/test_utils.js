@@ -324,6 +324,10 @@ _describe('helper functions', function() {
 		assert.strictEqual(
 			bup.utils.contrast_color('fabca0', '#ffffff', '#000000'),
 			'#000000');
+	});
 
+	_it('parse_json', function() {
+		assert.deepStrictEqual(bup.utils.parse_json('{"x": 2}'), {x: 2});
+		assert.deepStrictEqual(bup.utils.parse_json('ERROR{"x": 2}'), undefined);
 	});
 });
