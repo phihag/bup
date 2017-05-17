@@ -1,7 +1,4 @@
 make order respect 3 difference
-	download bundesliga matches
-	simulate match lengths
-	test out
 	write mail Heinz
 
 btde Berlin

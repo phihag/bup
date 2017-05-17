@@ -10,7 +10,7 @@ const async = require('async');
 const bup = require('../../js/bup.js');
 
 const CACHE_DIR = path.join(__dirname, '.cache');
-const EXPERIMENT_COUNT = 100;
+const EXPERIMENT_COUNT = 1000;
 // These are some match length values from random Bundesliga matches
 const LENGTH_VALUES = [
 	17, 41, 30, 16, 29, 22, 15, 26, 26, 26, 44, 27, 43, 20, 25, 56,
@@ -112,34 +112,41 @@ function get_players(match) {
 	return res;
 }
 
-function _move2court(match, time, oncourt) {
+function _move2court(match, time, blocked_until) {
 	match.sim_start = time;
 	assert(match.sim_duration);
 	match.sim_end = match.sim_start + match.sim_duration;
 
 	for (const pn of get_players(match)) {
-		assert(! oncourt.has(pn));
-		oncourt.add(pn);
+		assert(! blocked_until.has(pn));
+		blocked_until.set(pn, match.sim_end + 20);
 	}
 }
 
 function play(matches, order_idxs) {
-	const oncourt = new Set();
+	const blocked_until = new Map();
 	const courts = [
 		matches[order_idxs[0]],
 		matches[order_idxs[1]],
 	];
 
 	let time = 0;
-	_move2court(courts[0], time, oncourt);
-	_move2court(courts[1], time, oncourt);
+	_move2court(courts[0], time, blocked_until);
+	_move2court(courts[1], time, blocked_until);
 
 	for (let oidx = 2;oidx < order_idxs.length;oidx++) {
-		const finishing = (courts[0].sim_end > courts1.sim_end) ? 1 : 0;
+		const finishing = (courts[0].sim_end > courts[1].sim_end) ? 1 : 0;
 		time = courts[finishing].sim_end;
 
-		// TODO actually play the match out
-		// TODO block the player for 20min
+		const next_match = matches[order_idxs[oidx]];
+		for (const pn of get_players(next_match)) {
+			if (blocked_until.has(pn)) {
+				time = Math.max(time, blocked_until.get(pn));
+				blocked_until.delete(pn);
+			}
+		}
+		courts[finishing] = next_match;
+		_move2court(next_match, time, blocked_until);
 	}
 
 	return Math.max(courts[0].sim_end, courts[1].sim_end);
@@ -148,20 +155,39 @@ function play(matches, order_idxs) {
 function run_experiment(tm, cb) {
 	const matches = tm.event.matches;
 	const preferred = _calc_order(matches, 'HD1-DD-HD2-HE1-DE-GD-HE2');
+	const preferred_alternative = _calc_order(matches, 'HE2-GD-DE-HE1-HD2-DD-HD1');
 	
 	const orders = [
 		bup.order.optimize(bup.order.calc_cost, matches, preferred, {}, 0),
 		bup.order.optimize(bup.order.calc_cost, matches, preferred, {}, 100),
+		bup.order.optimize(bup.order.calc_cost, matches, preferred_alternative, {}, 0),
+		bup.order.optimize(bup.order.calc_cost, matches, preferred_alternative, {}, 100),
 	];
 
 	cb(null, {
 		orders: orders.map(o => _calc_names(matches, o)),
-		lengths: orders.map(o => play(matches, o)),
+		durations: orders.map(o => play(matches, o)),
 	});
 }
 
+function avg(ar) {
+	return ar.reduce((acc, val) => acc + val, 0) / ar.length;
+}
+
 function summarize(results, cb) {
-	console.log('results are in', results);
+	const options_lengths = [];
+	for (const r of results) {
+		r.durations.forEach((dur, idx) => {
+			if (! options_lengths[idx]) {
+				options_lengths[idx] = [];
+			}
+
+			options_lengths[idx].push(dur);
+		});
+	}
+	return cb(null, {
+		avgs: options_lengths.map(avg),
+	});
 }
 
 function ensure_mkdir(path, cb) {
