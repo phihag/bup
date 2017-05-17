@@ -155,13 +155,10 @@ function play(matches, order_idxs) {
 function run_experiment(tm, cb) {
 	const matches = tm.event.matches;
 	const preferred = _calc_order(matches, 'HD1-DD-HD2-HE1-DE-GD-HE2');
-	const preferred_alternative = _calc_order(matches, 'HE2-GD-DE-HE1-HD2-DD-HD1');
 	
 	const orders = [
 		bup.order.optimize(bup.order.calc_cost, matches, preferred, {}, 0),
 		bup.order.optimize(bup.order.calc_cost, matches, preferred, {}, 100),
-		bup.order.optimize(bup.order.calc_cost, matches, preferred_alternative, {}, 0),
-		bup.order.optimize(bup.order.calc_cost, matches, preferred_alternative, {}, 100),
 	];
 
 	cb(null, {
