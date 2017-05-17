@@ -1,6 +1,8 @@
 'use strict';
 
 var assert = require('assert');
+var fs = require('fs');
+var path = require('path');
 
 var tutils = require('./tutils');
 var _describe = tutils._describe;
@@ -184,62 +186,66 @@ _describe('order', function() {
 
 		var conflicts = bup.order.calc_conflict_map(sample_matches);
 		assert.deepStrictEqual(conflicts, [
-			[undefined, 0, 0, 2, 1, 0, 0, 0], // HD1
+			[undefined, 0, 0, 1, 1, 0, 0, 0], // HD1
 			[0, undefined, 0, 0, 0, 0, 0, 1], // HD2
-			[0, 0, undefined, 0, 0, 0, 2, 2], // DD
-			[2, 0, 0, undefined, 0, 0, 0, 0], // HE1
+			[0, 0, undefined, 0, 0, 0, 1, 1], // DD
+			[1, 0, 0, undefined, 0, 0, 0, 0], // HE1
 			[1, 0, 0, 0, undefined, 0, 0, 1], // HE2
 			[0, 0, 0, 0, 0, undefined, 0, 0], // HE3
-			[0, 0, 2, 0, 0, 0, undefined, 0], // DE
-			[0, 1, 2, 0, 1, 0, 0, undefined], // MX
+			[0, 0, 1, 0, 0, 0, undefined, 0], // DE
+			[0, 1, 1, 0, 1, 0, 0, undefined], // MX
 		]);
 
 		// Test cost calculation
 		var preferred = _calc_order(sample_matches, 'HD1-HD2-DD-HE1-HE2-HE3-DE-MX');
-		var cost = bup.order.cost_rest2(preferred, conflicts, preferred);
-		assert.strictEqual(cost, 0);
+		var cost = bup.order.calc_cost(preferred, conflicts, preferred, 1000);
+		assert.strictEqual(cost, 2000); // HD1<-3->HE1 + HE2<-3->MX
 
 		preferred = _calc_order(sample_matches, 'HD1-HE1-HD2-DD-HE2-HE3-DE-MX');
-		cost = bup.order.cost_rest2(preferred, conflicts, preferred);
-		assert.strictEqual(cost, 20000); // 2 between HD1 and HE1, distance 1
+		cost = bup.order.calc_cost(preferred, conflicts, preferred, 1000);
+		assert.strictEqual(cost, 102000); // HD1<-1->HE1 + HE2<-3->MX + DD<-3->MX
 
 		preferred = _calc_order(sample_matches, 'HD1-HD2-HE1-DD-HE2-HE3-DE-MX');
-		cost = bup.order.cost_rest2(preferred, conflicts, preferred);
-		assert.strictEqual(cost, 2000); // 2 between HD1 and HE1, distance 2
+		cost = bup.order.calc_cost(preferred, conflicts, preferred, 1000);
+		assert.strictEqual(cost, 12000); // HD1<-2->E1 + DD<-3->DE + HE2<-3->MX
 
 		preferred = _calc_order(sample_matches, 'HD1-HE2-HD2-DD-HE1-HE3-DE-MX');
-		cost = bup.order.cost_rest2(preferred, conflicts, preferred);
-		assert.strictEqual(cost, 10000); // 1 between HD1 and HE2, distance 1
+		cost = bup.order.calc_cost(preferred, conflicts, preferred, 1000);
+		assert.strictEqual(cost, 101000); // HD1<-1->HE2 + DD<-3->DE
+		cost = bup.order.calc_cost(preferred, conflicts, preferred, 0);
+		assert.strictEqual(cost, 100000); // HD1<-1->HE2 + DD<-3->DE
+		cost = bup.order.calc_cost(preferred, conflicts, preferred, 500);
+		assert.strictEqual(cost, 100500); // HD1<-1->HE2 + DD<-3->DE
 
 		preferred = _calc_order(sample_matches, 'HD1-HE2-HD2-DD-HE1-HE3-DE-MX');
 		var order = _calc_order(sample_matches, 'HE2-HD1-HD2-DD-HE1-HE3-DE-MX');
-		cost = bup.order.cost_rest2(order, conflicts, preferred);
-		assert.strictEqual(cost, 10002);
+		cost = bup.order.calc_cost(order, conflicts, preferred, 1000);
+		assert.strictEqual(cost, 102002); // HD1<-1->HE2 + HD1<-3->HE1 + DD<-3->DE
 
 		preferred = _calc_order(sample_matches, 'HD1-HD2-DD-HE1-HE2-HE3-DE-MX');
 		order = _calc_order(sample_matches, 'MX-DE-HE3-HE2-HE1-DD-HD2-HD1');
-		cost = bup.order.cost_rest2(order, conflicts, preferred);
-		assert.strictEqual(cost, 7 + 5 + 3 + 1 + 1 + 3 + 5 + 7);
+		cost = bup.order.calc_cost(order, conflicts, preferred, 1000);
+		assert.strictEqual(cost, 2000 + 7 + 5 + 3 + 1 + 1 + 3 + 5 + 7); // HD1<-3->HE1 + HE2<-3->MX
 
 		// Test optimization
 		preferred = _calc_order(sample_matches, 'HD1-HD2-DD-HE1-HE2-HE3-DE-MX');
-		var optimized = _calc_names(sample_matches, bup.order.optimize(bup.order.cost_rest2,sample_matches, preferred, {}));
+		var optimized = _calc_names(sample_matches, bup.order.optimize(bup.order.calc_cost, sample_matches, preferred, {}, 0));
 		assert.strictEqual(optimized, 'HD1-HD2-DD-HE1-HE2-HE3-DE-MX');
 
 		preferred = _calc_order(sample_matches, 'MX-DE-HE3-HE2-HE1-DD-HD2-HD1');
-		optimized = _calc_names(sample_matches, bup.order.optimize(bup.order.cost_rest2,sample_matches, preferred, {}));
+		optimized = _calc_names(sample_matches, bup.order.optimize(bup.order.calc_cost, sample_matches, preferred, {}, 0));
 		assert.strictEqual(optimized, 'MX-DE-HE3-HE2-HE1-DD-HD2-HD1');
 
 		preferred = _calc_order(sample_matches, 'HD1-HE1-HD2-DD-HE2-HE3-DE-MX');
-		optimized = _calc_names(sample_matches, bup.order.optimize(bup.order.cost_rest2,sample_matches, preferred, {}));
+		optimized = _calc_names(sample_matches, bup.order.optimize(bup.order.calc_cost, sample_matches, preferred, {}, 0));
 		assert.strictEqual(optimized, 'HD1-HD2-DD-HE1-HE2-HE3-DE-MX');
 
 		preferred = _calc_order(sample_matches, 'DE-MX-DD-HD1-HD2-HE1-HE2-HE3');
-		optimized = _calc_names(sample_matches, bup.order.optimize(bup.order.cost_rest2,sample_matches, preferred, {}));
+		optimized = _calc_names(sample_matches, bup.order.optimize(bup.order.calc_cost,sample_matches, preferred, {}, 0));
 		assert.strictEqual(optimized, 'MX-DE-HD1-HD2-DD-HE1-HE2-HE3');
 
 		preferred = _calc_order(sample_matches, 'DD-DE-MX-HD1-HD2-HE1-HE2-HE3');
-		optimized = _calc_names(sample_matches, bup.order.optimize(bup.order.cost_rest2,sample_matches, preferred, {}));
+		optimized = _calc_names(sample_matches, bup.order.optimize(bup.order.calc_cost,sample_matches, preferred, {}, 0));
 		assert.strictEqual(optimized, 'MX-DE-HD1-HD2-DD-HE1-HE2-HE3');
 	});
 
@@ -367,7 +373,7 @@ _describe('order', function() {
 		}}];
 
 		var preferred = _calc_order(matches, 'HD1-DD-HD2-HE1-DE-GD-HE2-HE3');
-		var optimized = _calc_names(matches, bup.order.optimize(bup.order.cost_rest2, matches, preferred, {}));
+		var optimized = _calc_names(matches, bup.order.optimize(bup.order.calc_cost, matches, preferred, {}, 0));
 		assert.strictEqual(optimized, 'HD1-DD-HD2-HE2-DE-GD-HE1-HE3');
 	});
 
@@ -495,12 +501,12 @@ _describe('order', function() {
 		}}];
 
 		var preferred = _calc_order(matches, 'HD1-DD-HD2-HE1-DE-GD-HE2-HE3');
-		var optimized = _calc_names(matches, bup.order.optimize(bup.order.cost_rest2, matches, preferred, {}));
+		var optimized = _calc_names(matches, bup.order.optimize(bup.order.calc_cost, matches, preferred, {}, 0));
 		assert.strictEqual(optimized, 'HD2-DD-HD1-HE1-DE-GD-HE2-HE3');
 
 		// Restrict to HD1 and DD at start. There is no basis for this in the actual rules.
-		var imagined_costfunc = function(order, conflict_map, preferred) {
-			var res = bup.order.cost_rest2(order, conflict_map, preferred);
+		var imagined_costfunc = function(order, conflict_map, preferred, d3_cost) {
+			var res = bup.order.calc_cost(order, conflict_map, preferred, d3_cost);
 			if (order[0] > 1) {
 				res += 100000;
 			}
@@ -509,12 +515,12 @@ _describe('order', function() {
 			}
 			return res;
 		};
-		optimized = _calc_names(matches, bup.order.optimize(imagined_costfunc, matches, preferred, {}));
+		optimized = _calc_names(matches, bup.order.optimize(imagined_costfunc, matches, preferred, {}, 0));
 		assert.strictEqual(optimized, 'DD-HD1-HD2-DE-GD-HE1-HE2-HE3');
 
 		// Restrict to HD1 at 1 and DD at 2. There is no basis for this in the actual rules.
-		imagined_costfunc = function(order, conflict_map, preferred) {
-			var res = bup.order.cost_rest2(order, conflict_map, preferred);
+		imagined_costfunc = function(order, conflict_map, preferred, d3_cost) {
+			var res = bup.order.calc_cost(order, conflict_map, preferred, d3_cost);
 			if (order[0] !== 0) {
 				res += 100000;
 			}
@@ -523,18 +529,18 @@ _describe('order', function() {
 			}
 			return res;
 		};
-		optimized = _calc_names(matches, bup.order.optimize(imagined_costfunc, matches, preferred, {}));
+		optimized = _calc_names(matches, bup.order.optimize(imagined_costfunc, matches, preferred, {}, 0));
 		assert.strictEqual(optimized, 'HD1-DD-HE1-HE2-HE3-GD-DE-HD2');
 
 		// Restrict to HD1 at 1 and DD at 2, via locking
 		optimized = _calc_names(matches, bup.order.optimize(
-			imagined_costfunc, matches, preferred, {'HD1': true, 'DD': true}));
+			imagined_costfunc, matches, preferred, {'HD1': true, 'DD': true}, 0));
 		assert.strictEqual(optimized, 'HD1-DD-HE1-HE2-HE3-GD-DE-HD2');
 
 		// Make sure locking was not accidental
 		preferred = _calc_order(matches, 'HE1-HE2-HD1-DD-HE3-GD-DE-HD2');
 		optimized = _calc_names(matches, bup.order.optimize(
-			imagined_costfunc, matches, preferred, {'HD1': true, 'DD': true}));
+			imagined_costfunc, matches, preferred, {'HD1': true, 'DD': true}, 0));
 		assert.strictEqual(optimized, 'HD1-DD-HE1-HE2-HE3-GD-DE-HD2');
 
 		var alt_matches = matches.slice();
@@ -542,9 +548,40 @@ _describe('order', function() {
 		alt_matches[0] = alt_matches[1];
 		alt_matches[1] = m0;
 		optimized = _calc_names(alt_matches, bup.order.optimize(
-			imagined_costfunc, alt_matches, preferred, {'HD1': true, 'DD': true}));
+			imagined_costfunc, alt_matches, preferred, {'HD1': true, 'DD': true}, 0));
 		assert.strictEqual(optimized, 'DD-HD1-HE1-HE3-HE2-GD-DE-HD2');
 	});
 
+	_it('Bundesliga final match 2016/2017', function(done) {
+		var blfinals_fn = path.join(__dirname, 'buli_finals2016.json');
+		fs.readFile(blfinals_fn, {encoding: 'utf-8'}, function(err, fcontents) {
+			if (err) return done(err);
+
+			var s = tutils.state_after([], tutils.SINGLES_SETUP);
+			var data = JSON.parse(fcontents);
+			var loaded = bup.importexport.load_data(s, data);
+			assert(loaded && loaded.event);
+
+			var matches = loaded.event.matches;
+			var conflicts = bup.order.calc_conflict_map(matches);
+			var preferred = _calc_order(matches, 'HD1-DD-HD2-HE1-DE-GD-HE2');
+			var order = _calc_order(matches, 'HD1-DD-HD2-HE1-DE-GD-HE2');
+			var cost = bup.order.calc_cost(order, conflicts, preferred, 100);
+			assert.strictEqual(cost, 200); // DD<-3->DE + HD2<-3->GD
+
+			order = _calc_order(matches, 'HD1-DD-HD2-HE1-DE-HE2-GD');
+			cost = bup.order.calc_cost(order, conflicts, preferred, 100);
+			assert.strictEqual(cost, 102); // DD<-3->DE
+
+			order = _calc_order(matches, 'HD1-DD-HE2-HE1-DE-GD-HD2');
+			cost = bup.order.calc_cost(order, conflicts, preferred, 100);
+			assert.strictEqual(cost, 100108); // GD<-1->HD2 + DD<-3->DE
+
+			var optimized = _calc_names(matches, bup.order.optimize(bup.order.calc_cost, matches, preferred, {}, 100));
+			assert.strictEqual(optimized, 'DD-HD1-HD2-HE1-DE-HE2-GD');
+
+			done(err);
+		});		
+	});
 });
 

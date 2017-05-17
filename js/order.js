@@ -107,22 +107,29 @@ function calc_conflict_map(matches) {
 			var conflicting = m1_players.filter(function(n) {
 				return m2_players.indexOf(n) >= 0;
 			});	
-			return conflicting.length;
+			return (conflicting.length > 0) ? 1 : 0;
 		});
 		conflicts.push(m1_conflicts);
 	});
 	return conflicts;
 }
 
-function cost_rest2(order, conflict_map, preferred) {
+function calc_cost(order, conflict_map, preferred, d3_cost) {
+	if (d3_cost === undefined) {
+		throw new Error('Missing d3_cost');
+	}
+
 	var res = 0;
 	for (var i = 0;i < order.length;i++) {
 		// conflicts
+		if (i - 3 >= 0) {
+			res += d3_cost * conflict_map[order[i]][order[i - 3]];
+		}
 		if (i - 2 >= 0) {
-			res += 1000 * conflict_map[order[i]][order[i - 2]];
+			res += 10000 * conflict_map[order[i]][order[i - 2]];
 		}
 		if (i - 1 >= 0) {
-			res += 10000 * conflict_map[order[i]][order[i - 1]];
+			res += 100000 * conflict_map[order[i]][order[i - 1]];
 		}
 
 		// preferred
@@ -143,12 +150,14 @@ costfunc:  cost function to be called with:
            - map of the conflicts between each map index
            - preferred
            - locked
+           - d3_cost
 matches:   array of matches, in initial order, say [MD, WD, XD]
 preferred: array of indices into matches.
            For instance, [1, 2, 0] means preferred order is [WD, XD, MD]
 locked:    map of which match IDs are locked (true means locked)
+d3_cost:   Cost for matches that conflict with 2 matches in between.
 */
-function optimize(costfunc, matches, preferred, locked) {
+function optimize(costfunc, matches, preferred, locked, d3_cost) {
 	var conflict_map = calc_conflict_map(matches);
 	var match_count = matches.length;
 	if (match_count < 1) {
@@ -164,7 +173,7 @@ function optimize(costfunc, matches, preferred, locked) {
 
 	var permutation = utils.range(match_count);
 	var best_order = permutation.slice();
-	var best_cost = costfunc(best_order, conflict_map, preferred);
+	var best_cost = costfunc(best_order, conflict_map, preferred, d3_cost);
 
 	// See https://en.wikipedia.org/wiki/Heap%27s_algorithm
 	function permute_heap(n) {
@@ -176,7 +185,7 @@ function optimize(costfunc, matches, preferred, locked) {
 				}
 			}
 
-			var cost = costfunc(permutation, conflict_map, preferred);
+			var cost = costfunc(permutation, conflict_map, preferred, d3_cost);
 			if (cost < best_cost) {
 				best_order = permutation.slice();
 				best_cost = cost;
@@ -551,7 +560,8 @@ function ui_init() {
 
 	click.qs('.order_optimize', function() {
 		var matches_to_sort = current_matches.slice(0, current_ignore_start);
-		var best_order = optimize(cost_rest2, matches_to_sort, utils.range(current_ignore_start), current_locked);
+		var d3_cost = 0; // TODO make this configurable
+		var best_order = optimize(calc_cost, matches_to_sort, utils.range(current_ignore_start), current_locked, d3_cost);
 		var sorted = sort_by_order(matches_to_sort, best_order, current_ignore_start);
 		current_matches = sorted.concat(current_matches.slice(current_ignore_start));
 		ui_render();
@@ -569,7 +579,7 @@ return {
 	// Testing only
 	calc_conflicting_players: calc_conflicting_players,
 	init_order_matches: init_order_matches,
-	cost_rest2: cost_rest2,
+	calc_cost: calc_cost,
 	calc_conflict_map: calc_conflict_map,
 	optimize: optimize,
 };

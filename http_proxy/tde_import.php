@@ -17,11 +17,25 @@ function main($match_url) {
 	$tm_url = \file_get_contents($match_url);
 	$tm = parse_teammatch($tm_url);
 
+	$data = $tm;
+	if (isset($_GET['format'])) {
+		switch($_GET['format']) {
+		case 'export':
+			$data = [
+				'type' => 'bup-export',
+				'version' => 2,
+				'event' => $tm,
+			];
+			break;
+		}
+	}
+
 	header('Content-Type: application/json');
 	header('Cache-Control: no-cache, no-store, must-revalidate');
 	header('Pragma: no-cache');
 	header('Expires: 0');
-	echo \json_encode($tm, \JSON_PRETTY_PRINT);
+
+	echo \json_encode($data, \JSON_PRETTY_PRINT);
 }
 
 function parse_match_players($players_html) {
@@ -41,6 +55,7 @@ function parse_match_players($players_html) {
 function parse_teammatch($tm_html) {
 	$LEAGUE_KEYS = [
 		'Bundesligen 2016/17:1. Bundesliga 1. Bundesliga' => '1BL-2016',
+		'Bundesligen 2016/17:1. Bundesliga 1. Bundesliga - Final Four' => '1BL-2016',
 	];
 
 	$res = [];
@@ -95,7 +110,7 @@ function parse_teammatch($tm_html) {
 	$matches = [];
 	foreach ($matches_m as $mm) {
 		$match_name = $mm['match_name'];
-		$is_doubles = preg_match('/DD|GD|HD|WD|MX|MD|BD|JD/', $match_name);
+		$is_doubles = preg_match('/DD|GD|HD|WD|MX|MD|BD|JD/', $match_name) !== 0;
 
 		$teams = [
 			parse_match_players($mm['players_html0']),

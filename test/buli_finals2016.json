@@ -1,0 +1,192 @@
+{
+    "type": "bup-export",
+    "version": 2,
+    "event": {
+        "team_names": [
+            "1. BC Sbr.-Bischmisheim [M]",
+            "TV Refrath"
+        ],
+        "league_key": "1BL-2016",
+        "location": "36251 Bad Hersfeld, Waldhessenhalle, Am Obersberg 25",
+        "matches": [
+            {
+                "setup": {
+                    "match_name": "HD1",
+                    "is_doubles": true,
+                    "teams": [
+                        {
+                            "players": [
+                                {
+                                    "name": "Michael Fuchs"
+                                },
+                                {
+                                    "name": "Johannes Sch&#246;ttler"
+                                }
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "name": "Sam Magee"
+                                },
+                                {
+                                    "name": "Max Schwenger"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "setup": {
+                    "match_name": "DD",
+                    "is_doubles": true,
+                    "teams": [
+                        {
+                            "players": [
+                                {
+                                    "name": "Olga Konon"
+                                },
+                                {
+                                    "name": "Isabel Herttrich"
+                                }
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "name": "Chloe Magee"
+                                },
+                                {
+                                    "name": "Carla Nelte"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "setup": {
+                    "match_name": "HD2",
+                    "is_doubles": true,
+                    "teams": [
+                        {
+                            "players": [
+                                {
+                                    "name": "Peter K&#228;sbauer"
+                                },
+                                {
+                                    "name": "Marvin Seidel"
+                                }
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "name": "Fabian Holzer"
+                                },
+                                {
+                                    "name": "Richard Domke"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "setup": {
+                    "match_name": "HE1",
+                    "is_doubles": false,
+                    "teams": [
+                        {
+                            "players": [
+                                {
+                                    "name": "Marc Zwiebler"
+                                }
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "name": "Fabian Roth"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "setup": {
+                    "match_name": "DE",
+                    "is_doubles": false,
+                    "teams": [
+                        {
+                            "players": [
+                                {
+                                    "name": "Olga Konon"
+                                }
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "name": "Chloe Magee"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "setup": {
+                    "match_name": "GD",
+                    "is_doubles": true,
+                    "teams": [
+                        {
+                            "players": [
+                                {
+                                    "name": "Marvin Seidel"
+                                },
+                                {
+                                    "name": "Isabel Herttrich"
+                                }
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "name": "Max Schwenger"
+                                },
+                                {
+                                    "name": "Carla Nelte"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            },
+            {
+                "setup": {
+                    "match_name": "HE2",
+                    "is_doubles": false,
+                    "teams": [
+                        {
+                            "players": [
+                                {
+                                    "name": "Dieter Domke"
+                                }
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "name": "Lars Sch&#228;nzler"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            }
+        ]
+    }
+}

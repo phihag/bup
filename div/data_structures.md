@@ -150,7 +150,9 @@ match_id*          (Globally) unique ID, e.g. "20160825-Bundesliga-finale-MS1"
 match_num          Match number in a tournament context.
 teams*             An array (0: home team, 1: away team) of teams (see below).
 is_doubles*        Boolean key. false => singles, true => mixed/doubles
-counting*          Scoring system. Valid values are "3x21", "1x21", "2x21+11", "5x11_15", "1x11_15", "5x11/3"
+counting*          Scoring system.
+                   Valid values are "3x21", "1x21", "2x21+11", "5x11_15", "1x11_15", "5x11/3", "5x11_15^90".
+                   Can be left out if the league_key property of the event is set.
 team_competition   Are players competing for their teams(true) or for themselves(false)? Affects announcements
 neutral_ground     If team competition: Is the match played on neutral grounds? Affects announcements.     
 umpire_name        Name of the umpire assigned to this match (or the last one who touched it).
