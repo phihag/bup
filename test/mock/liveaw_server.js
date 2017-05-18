@@ -19,7 +19,7 @@ function serve(cb) {
 	wss.on('connection', function connection(ws, req) {
 		var location = url.parse(req.url);
 		if (location.path == '/ws/bup-p2p') {
-			return bupp2p.handle(ws);
+			return bupp2p.handle(ws, req);
 		}
 
 		ws.send('error: invalid path');

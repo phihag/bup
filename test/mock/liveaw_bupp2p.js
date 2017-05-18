@@ -67,10 +67,10 @@ function send_peerlist(ws) {
 var all_nodes = [];
 var node_by_id = {};
 
-function handle(ws) {
-	var remote_ip = ws.upgradeReq.connection.remoteAddress;
+function handle(ws, req) {
+	var remote_ip = req.connection.remoteAddress;
 
-	var node_id = 'liveaw-bupp2p_' + remote_ip + ':' + ws.upgradeReq.connection.remotePort;
+	var node_id = 'liveaw-bupp2p_' + remote_ip + ':' + req.connection.remotePort;
 	ws.bup_node_id = node_id;
 
 	all_nodes.push(ws);
