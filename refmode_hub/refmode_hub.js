@@ -34,10 +34,6 @@ function send_error(ws, emsg) {
 	});
 }
 
-function remote_ip(ws) {
-	return ws.upgradeReq.headers['x-forwarded-for'] || ws.upgradeReq.connection.remoteAddress;
-}
-
 function send_referee_list(wss, clients) {
 	var referees = [];
 	wss.clients.forEach(function(c) {
@@ -360,11 +356,12 @@ function hub(config) {
 	let conn_counter = 0;
 	wss.hub_map = new Map(); // IP address -> {local_addr:, conn_id:}
 
-	wss.on('connection', function(ws) {
+	wss.on('connection', function(ws, req) {
+		const client_ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 		const cd = {
 			connected_to: [],
 			id: conn_counter++,
-			ip: remote_ip(ws),
+			ip: client_ip,
 		};
 		ws.conn_data = cd;
 
@@ -374,7 +371,6 @@ function hub(config) {
 				'type': 'welcome',
 				challenge: cd.challenge,
 			};
-			const client_ip = remote_ip(ws);
 			const redir = wss.hub_map.get(client_ip);
 			if (redir) {
 				answer.redirect = redir.local_addr;
