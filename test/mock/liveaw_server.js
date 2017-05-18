@@ -16,8 +16,8 @@ function serve(cb) {
 		cb(null, wss_port);
 	});
 
-	wss.on('connection', function connection(ws) {
-		var location = url.parse(ws.upgradeReq.url);
+	wss.on('connection', function connection(ws, req) {
+		var location = url.parse(req.url);
 		if (location.path == '/ws/bup-p2p') {
 			return bupp2p.handle(ws);
 		}
