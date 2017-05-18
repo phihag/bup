@@ -1,11 +1,8 @@
-make order respect 3 difference
-	write mail Heinz
-
-btde Berlin
 Anzeige André: Sätze links, black-white
 display Moritz: prior games in detail between names
 vertical list of all matches on current courts (tournament-overview)
 
+btde Berlin
 displaymode/international and others: courtspot empty shows server
 group "Wettkampf importieren" under manual match start
 Druckbutton Spielreihenfolge
@@ -47,6 +44,7 @@ castall: allow normal zooming?
 reset colors
 fix courtspot caching on android!?
 refmode: disable/enable pronouncing and other settings remotely
+order: construct a testcase where singles before doubles is advantageous
 
 displaymode "Berlin": like courtspot vertical, but with border (red for finished green for server) -> BR 5/2017 S. 24
 stats: use team colors if available (and distinct)
