@@ -81,11 +81,7 @@ function handle(ws, req) {
 		delete node_by_id[node_id];
 	});
 
-	ws.on('message', function(data, flags) {
-		if (flags.binary) {
-			return;  // We don't understand that
-		}
-
+	ws.on('message', function(data) {
 		var msg;
 		try {
 			msg = JSON.parse(data);
