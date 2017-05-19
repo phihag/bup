@@ -152,13 +152,45 @@ function play(matches, order_idxs) {
 	return Math.max(courts[0].sim_end, courts[1].sim_end);
 }
 
+function calc_max_cost(order, conflict_map, preferred) {
+	var res = 0;
+	for (var i = 0;i < order.length;i++) {
+		// conflicts
+		if (i - 6 >= 0) {
+			res += 100 * conflict_map[order[i]][order[i - 3]];
+		}
+		if (i - 5 >= 0) {
+			res += 1000 * conflict_map[order[i]][order[i - 3]];
+		}
+		if (i - 6 >= 0) {
+			res += 10000 * conflict_map[order[i]][order[i - 3]];
+		}
+		if (i - 3 >= 0) {
+			res += 100000 * conflict_map[order[i]][order[i - 3]];
+		}
+		if (i - 2 >= 0) {
+			res += 1000000 * conflict_map[order[i]][order[i - 2]];
+		}
+		if (i - 1 >= 0) {
+			res += 10000000 * conflict_map[order[i]][order[i - 1]];
+		}
+
+		// preferred
+		res += Math.abs(i - preferred.indexOf(order[i]));
+	}
+	return res;
+}
+
+
 function run_experiment(tm, cb) {
 	const matches = tm.event.matches;
 	const preferred = _calc_order(matches, 'HD1-DD-HD2-HE1-DE-GD-HE2');
+	const reverse_preferred = _calc_order(matches, 'HE2-GD-DE-HE1-HD2-DD-HD1');
 	
 	const orders = [
 		bup.order.optimize(bup.order.calc_cost, matches, preferred, {}, 0),
 		bup.order.optimize(bup.order.calc_cost, matches, preferred, {}, 100),
+		bup.order.optimize(calc_max_cost, matches, preferred, {}),
 		bup.order.optimize(bup.order.calc_cost, matches, preferred, {
 			'HD1': true,
 			'DD': true,
@@ -177,6 +209,7 @@ function run_experiment(tm, cb) {
 			'GD': true,
 			'HE2': true,
 		}, 100),
+		bup.order.optimize(bup.order.calc_cost, matches, reverse_preferred, {}, 100),
 	];
 
 	cb(null, {
