@@ -555,7 +555,7 @@ function ui_init() {
 		hide();
 	});
 
-	click.qs('.order_print', function(e) {
+	click.qs('.order_print', function() {
 		window.print();
 	});
 
