@@ -171,8 +171,9 @@ div.order_container {
 	font-size: inherit;
 }
 .order_reset,
-.order_optimize {
-	margin-left: 2em;
+.order_optimize,
+.order_print {
+	margin-left: 5vw;
 }
 
 .order_container {

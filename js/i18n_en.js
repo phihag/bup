@@ -438,6 +438,7 @@ var i18n_en = {
 'order:back': 'Back',
 'order:optimize': 'Optimize',
 'order:reset': 'Reset',
+'order:print': 'Print',
 'order:ignore match': 'ignore match',
 
 'staticnet:switch back message': 'Imported event. Changes here will not be transmitted! ',

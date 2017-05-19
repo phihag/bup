@@ -196,7 +196,7 @@ var i18n_de = {
 'settings:Event Scoresheets': 'Schiedsrichterzettel',
 'settings:Custom match details': 'Spiel manuell eintragen ...',
 'settings:Network statistics': 'Netzwerkstatistiken',
-'settings:Order link': 'Spielreihenfolge',
+'settings:Order link': 'Reihenfolge',
 'settings:Export link': 'Exportieren',
 'settings:New match': 'Neues Spiel',
 'settings:Singles': 'Einzel',
@@ -438,6 +438,7 @@ var i18n_de = {
 'order:back': '< Zurück',
 'order:optimize': 'Optimieren',
 'order:reset': 'Zurücksetzen',
+'order:print': 'Drucken',
 'order:ignore match': 'Spiel herausnehmen',
 
 'staticnet:switch back message': 'Sicherungskopie des Wettkampfs geladen. Änderungen werden nicht übertragen! ',

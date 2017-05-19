@@ -548,13 +548,15 @@ function ui_init() {
 	click.qs('.order_link', function(e) {
 		e.preventDefault();
 		show();
-		return false;
 	});
 
 	click.qs('.order_back', function(e) {
 		e.preventDefault();
 		hide();
-		return false;
+	});
+
+	click.qs('.order_print', function(e) {
+		window.print();
 	});
 
 	click.qs('.order_layout', function(e) {
