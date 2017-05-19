@@ -165,7 +165,8 @@ function optimize(costfunc, matches, preferred, locked, d3_cost) {
 
 	var locked_list = [];
 	for (var i = 0;i < match_count;i++) {
-		if (locked[matches[i].setup.match_id]) {
+		var setup = matches[i].setup;
+		if (locked[setup.match_id] || locked[setup.eventsheet_id] || locked[setup.match_name]) {
 			locked_list.push(i);
 		}
 	}

@@ -159,6 +159,24 @@ function run_experiment(tm, cb) {
 	const orders = [
 		bup.order.optimize(bup.order.calc_cost, matches, preferred, {}, 0),
 		bup.order.optimize(bup.order.calc_cost, matches, preferred, {}, 100),
+		bup.order.optimize(bup.order.calc_cost, matches, preferred, {
+			'HD1': true,
+			'DD': true,
+		}, 100),
+		bup.order.optimize(bup.order.calc_cost, matches, preferred, {
+			'HD1': true,
+			'DD': true,
+			'HD2': true,
+		}, 100),
+		bup.order.optimize(bup.order.calc_cost, matches, preferred, {
+			'HD1': true,
+			'DD': true,
+			'HD2': true,
+			'HE1': true,
+			'DE': true,
+			'GD': true,
+			'HE2': true,
+		}, 100),
 	];
 
 	cb(null, {

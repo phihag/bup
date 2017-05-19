@@ -553,6 +553,12 @@ _describe('order', function() {
 			imagined_costfunc, matches, preferred, {'HD1': true, 'DD': true}, 0));
 		assert.strictEqual(optimized, 'HD1-DD-HE1-HE2-HE3-GD-DE-HD2');
 
+		preferred = _calc_order(matches, 'HE3-HE2-GD-DE-HE1-HD2-DD-HD1');
+		optimized = _calc_names(matches, bup.order.optimize(
+			imagined_costfunc, matches, preferred, {'HD1': true, 'DD': true}, 0));
+		assert.strictEqual(optimized, 'HD1-DD-HE3-HE2-HE1-GD-DE-HD2');
+
+		preferred = _calc_order(matches, 'HE1-HE2-HD1-DD-HE3-GD-DE-HD2');
 		var alt_matches = matches.slice();
 		var m0 = alt_matches[0];
 		alt_matches[0] = alt_matches[1];
