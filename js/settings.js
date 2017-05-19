@@ -105,14 +105,13 @@ function show() {
 	stats.hide();
 
 	uiu.visible_qs('#settings_wrapper', true);
-	if (network.is_enabled()) {
-		$('.setup_network_container').show();
-		$('.setup_show_manual').show();
-		$('#setup_manual_form').hide();
+	var net_enabled = network.is_enabled();
+	uiu.visible_qs('.setup_network_container', net_enabled);
+	uiu.visible_qs('.import_container', ! net_enabled);
+	uiu.visible_qs('#setup_manual_form', ! net_enabled);
+	if (net_enabled) {
+		uiu.show_qs('.setup_show_manual');
 		_network_hide_cb = network.ui_list_matches(state);
-	} else {
-		$('.setup_network_container').hide();
-		$('#setup_manual_form').show();
 	}
 	uiu.esc_stack_push(function() {
 		hide();
@@ -380,8 +379,9 @@ function ui_init(s) {
 	$('.setup_show_manual').on('click', function(e) {
 		e.preventDefault();
 		$('.setup_show_manual').hide();
-		// TODO use a CSS animation here
-		$('#setup_manual_form').show(200);
+		uiu.show_qs('#setup_manual_form');
+		uiu.show_qs('.import_container');
+
 		return false;
 	});
 
