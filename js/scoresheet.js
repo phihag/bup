@@ -1035,8 +1035,14 @@ function hide() {
 
 function _match_title(s, sep) {
 	var title = '';
+	if (!s.setup.team_competition && s.setup.tournament_name) {
+		title += s.setup.tournament_name + ' ';
+	}
 	if (s.metadata.start) {
 		title += utils.date_str(s.metadata.start) + ' ';
+	}
+	if (!s.setup.team_competition && s.setup.event_name) {
+		title += s.setup.event_name + ' ';
 	}
 	if (s.setup.match_name) {
 		title += s.setup.match_name + ' ';
