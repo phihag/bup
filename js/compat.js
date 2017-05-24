@@ -11,8 +11,15 @@ function ui_init() {
 	}
 }
 
+// Hack for bts
+function courtnum(cn) {
+	var m = /_([0-9]+)$/.exec(cn);
+	return m ? m[1] : cn;
+}
+
 return {
 	ui_init: ui_init,
+	courtnum: courtnum,
 };
 
 })();

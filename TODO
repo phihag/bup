@@ -1,6 +1,6 @@
+vertical list of all matches on current courts (tournament-overview)
 Anzeige André: Sätze links, black-white
 display Moritz: prior games in detail between names
-vertical list of all matches on current courts (tournament-overview)
 
 btde Berlin
 displaymode/international and others: courtspot empty shows server
@@ -19,6 +19,7 @@ eventsheet error does not get deleted
 	1. generate from localhost/bup while in eventsheet
 	2. load import
 
+courtspot-like displays
 write displaymode.render_castall tests
 test eventutils.default_counting
 test castall on mac
@@ -32,7 +33,7 @@ ads: 30s Stand, danach erst Werbung
 Referee mode Aufstellung
 Testspiele löschen statt manuell starten
 make going into fullscreen in displaymode on clicking sides an options
-bundesliga join protest cells -> Markus SChwendtner
+bundesliga join protest cells -> Markus Schwendtner
 refmode: instead of "Warte auf Spieler(1.HD)" "Warte auf Marvin Seidel (1.HD)" or "Warte auf 2 Spieler (1.HD)"
 refmode neuer Stand: Zeige was geändert wurde
 partial kroton transmission -> Arno Schley

@@ -582,7 +582,7 @@ function sheet_render(s, svg) {
 	_text('.scoresheet_match_name', s.setup.match_name);
 	_text('.scoresheet_date_value', s.metadata.start ? utils.human_date_str(s, s.metadata.start) : '');
 
-	_text('.scoresheet_court_id', (s.match.court_id ? s.match.court_id : s.setup.court_id));
+	_text('.scoresheet_court_id', compat.courtnum(s.match.court_id ? s.match.court_id : s.setup.court_id));
 	_text('.scoresheet_umpire_name', s.match.umpire_name ? s.match.umpire_name : s.setup.umpire_name);
 	_text('.scoresheet_service_judge_name', s.match.service_judge_name ? s.match.service_judge_name : s.setup.service_judge_name);
 
@@ -906,7 +906,7 @@ function sheet_name(setup) {
 function event_render(container) {
 	state.event.matches.forEach(function(match) {
 		load_sheet(sheet_name(match.setup), function(xml) {
-			var svg = make_sheet_node(xml);
+			var svg = make_sheet_node(s, xml);
 			svg.setAttribute('class', 'scoresheet multi_scoresheet');
 			container.appendChild(svg);
 
@@ -1004,7 +1004,7 @@ function ui_show(s) {
 	$(container).children('.scoresheet').remove();
 	uiu.visible(container, true);
 	load_sheet(sheet_name(s.setup), function(xml) {
-		var svg = make_sheet_node(xml);
+		var svg = make_sheet_node(s, xml);
 		svg.setAttribute('class', 'scoresheet single_scoresheet');
 		// Usually we'd call importNode here to import the document here, but IE/Edge then ignores the styles
 		container.appendChild(svg);
@@ -1035,44 +1035,48 @@ function hide() {
 
 function _match_title(s, sep) {
 	var title = '';
-	if (state.metadata.start) {
-		title += utils.date_str(state.metadata.start) + ' ';
+	if (s.metadata.start) {
+		title += utils.date_str(s.metadata.start) + ' ';
 	}
-	if (state.setup.match_name) {
-		title += state.setup.match_name + ' ';
+	if (s.setup.match_name) {
+		title += s.setup.match_name + ' ';
 	}
-	if (state.setup.teams[0].players[0].name || state.setup.teams[1].players[0].name) {
-		if (state.setup.is_doubles) {
-			title += state.setup.teams[0].players[0].name + sep + state.setup.teams[0].players[1].name + ' vs ' + state.setup.teams[1].players[0].name + sep + state.setup.teams[1].players[1].name;
+	if (s.setup.teams[0].players[0].name || s.setup.teams[1].players[0].name) {
+		if (s.setup.is_doubles) {
+			title += s.setup.teams[0].players[0].name + sep + s.setup.teams[0].players[1].name + ' vs ' + s.setup.teams[1].players[0].name + sep + s.setup.teams[1].players[1].name;
 		} else {
-			title += state.setup.teams[0].players[0].name + ' vs ' + state.setup.teams[1].players[0].name;
+			title += s.setup.teams[0].players[0].name + ' vs ' + s.setup.teams[1].players[0].name;
 		}
 	}
 	if (!title) {
-		title = state._('scoresheet:Empty Scoresheet');
+		title = s._('scoresheet:Empty Scoresheet');
 	}
 	return title;
 }
 
 function ui_pdf() {
 	var svg_nodes = document.querySelectorAll('.scoresheet_container>.scoresheet');
+	save_pdf(state, svg_nodes);
+}
+
+function save_pdf(s, svg_nodes) {
 	var props = {
 		title: (
-			(state.ui.event_scoresheets_visible) ?
-			(state._('scoresheet:[Event Scoresheet Filename]').replace('{event_name}', state.event.event_name)) :
-			_match_title(state, '/')),
-		subject: state._('Score Sheet'),
+			(s.ui.event_scoresheets_visible) ?
+			(s._('scoresheet:[Event Scoresheet Filename]').replace('{event_name}', s.event.event_name)) :
+			_match_title(s, '/')),
+		subject: s._('Score Sheet'),
 		creator: 'bup (https://phihag.de/bup/)',
 	};
-	if (state.metadata && state.metadata.umpire_name) {
-		props.author = state.metadata.umpire_name;
-	} else if (state.settings.umpire_name) {
-		props.author = state.settings.umpire_name;
+	if (s.metadata && s.metadata.umpire_name) {
+		props.author = s.metadata.umpire_name;
+	} else if (s.settings.umpire_name) {
+		props.author = s.settings.umpire_name;
 	}
 	var filename = (
-		(state.ui.event_scoresheets_visible) ?
-		(state._('scoresheet:[Event Scoresheet Filename]').replace('{event_name}', state.event.event_name) + '.pdf') :
-		(_match_title(state, ',') + '.pdf')
+		(s.ui.event_scoresheets_visible) ?
+		(s._('scoresheet:[Event Scoresheet Filename]').replace('{event_name}', s.event.event_name) + '.pdf') :
+		(_match_title(s, ',') + '.pdf')
 	);
 	svg2pdf.save(svg_nodes, props, 'landscape', filename);
 }
@@ -1087,16 +1091,23 @@ var URLS = {
 	'bundesliga-2016': 'div/scoresheet_bundesliga-2016.svg',
 };
 var dl;
-function load_sheet(sheet_name, cb) {
+function load_sheet(sheet_name, cb, url_prefix) {
+	var urls = URLS;
+	if (url_prefix) {
+		urls = utils.deep_copy(URLS);
+		for (var k in urls) {
+			urls[k] = url_prefix + urls[k];
+		}
+	}
 	if (! dl) {
-		dl = downloader(URLS);
+		dl = downloader(urls);
 	}
 	return dl.load(sheet_name, cb);
 }
 
-function make_sheet_node(xml) {
+function make_sheet_node(s, xml) {
 	var doc = $.parseXML(xml);
-	i18n.translate_nodes($(doc), state);
+	i18n.translate_nodes($(doc), s);
 	return doc.documentElement;
 }
 
@@ -1145,6 +1156,12 @@ return {
 	show: show,
 	event_show: event_show,
 	parse_match: parse_match,
+	// Used by bts
+	load_sheet: load_sheet,
+	make_sheet_node: make_sheet_node,
+	sheet_render: sheet_render,
+	sheet_name: sheet_name,
+	save_pdf: save_pdf,
 };
 
 })();
@@ -1153,6 +1170,7 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
 	var click = require('./click');
+	var compat = require('./compat');
 	var control = require('./control');
 	var downloader = require('./downloader');
 	var i18n = require('./i18n');

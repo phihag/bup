@@ -96,6 +96,7 @@ function ui_update_state(s, code) {
 function translate(s, str, data, fallback) {
 	var lang = languages[s.lang];
 	if (! lang) {
+console.trace('invalid lang', s.lang + ',, ', s)
 		return 'Invalid Language [' + s.lang + ']:>> ' + str + ' <<';
 	}
 	var res = lang[str];

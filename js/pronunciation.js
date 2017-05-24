@@ -160,7 +160,7 @@ function ready_announcement(s) {
 		court_id = null;
 	}
 	if (court_id) {
-		return s._('20secs', {court_id: court_id});
+		return s._('20secs', {court_id: compat.courtnum(court_id)});
 	} else {
 		return s._('20secs:nocourt');
 	}
@@ -387,6 +387,7 @@ return {
 /*@DEV*/
 if (typeof module !== 'undefined') {
 	var calc = require('./calc');
+	var compat = require('./compat');
 	var utils = require('./utils');
 
 	module.exports = pronunciation;
