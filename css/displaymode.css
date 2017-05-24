@@ -517,3 +517,54 @@
 .d_to_vs {
 	color: #cfcfcf;
 }
+
+
+.d_andre_team {
+	font-stretch: condensed;
+	position: relative;
+	height: 45%;
+	display: flex;
+	flex-wrap: nowrap;
+}
+.d_andre_mid {
+	width: 98vw;
+	height: 10%;
+	padding-left: 2vw;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	font-size: 3vw;
+}
+.d_andre_gscore {
+	height: 100%;
+	width: 10vw;
+	font-size: 10vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.d_andre_players {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 55vw;
+	height: 100%;
+}
+.d_andre_player {
+	width: 100%;
+	display: flex;
+	align-items: center;
+}
+.d_andre_player > span {
+	font-size: 5vw;
+	white-space: pre;
+}
+.d_andre_score {
+	position: fixed;
+	right: 0;
+	text-align: center;
+	font-size: 40vh;
+	width: 50vh;
+	height: 50vh;
+}

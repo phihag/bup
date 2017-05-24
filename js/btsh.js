@@ -47,6 +47,8 @@ function send_score(s) {
 	var end_ts = s.metadata.end ? s.metadata.end : null;
 	var post_data = {
 		court_id: s.settings.court_id,
+		network_team1_serving: s.game.team1_serving,
+		network_teams_player1_even: s.game.teams_player1_even,
 		network_score: netscore,
 		team1_won: s.match.team1_won,
 		presses: s.presses,
