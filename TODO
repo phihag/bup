@@ -1,8 +1,9 @@
-current displays crash!
+overview queries with court=
 vertical list of all matches on current courts (tournament-overview)
 Anzeige André: Sätze links, black-white
 display Moritz: prior games in detail between names
 
+displaymode: remove checks if (! event.courts) { in renderers
 btde Berlin
 displaymode/international and others: courtspot empty shows server
 group "Wettkampf importieren" under manual match start
@@ -19,7 +20,9 @@ note excel issue in mail, note issue with old bups
 eventsheet error does not get deleted
 	1. generate from localhost/bup while in eventsheet
 	2. load import
+displaymode: use includes in option_applies?
 
+grep for uiu.el(..{'class': ''}) and use newer form
 courtspot-like displays
 write displaymode.render_castall tests
 test eventutils.default_counting

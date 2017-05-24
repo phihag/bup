@@ -458,6 +458,18 @@ function contrast_color(col, option1, option2) {
 	}
 }
 
+function includes(ar, el) {
+	if (ar.includes) {
+		return ar.includes(el);
+	}
+	for (var i = 0;i < ar.length;i++) {
+		if (ar[i] === el) {
+			return true;
+		}
+	}
+	return false;
+}
+
 return {
 	add_zeroes: add_zeroes,
 	any: any,
@@ -476,13 +488,14 @@ return {
 	filter_map: filter_map,
 	find: find,
 	forEach: forEach,
-	hex: hex,
-	hash_obj: hash_obj,
 	hash_new: hash_new,
+	hash_obj: hash_obj,
+	hex: hex,
 	human_date_str: human_date_str,
+	includes: includes,
 	iso8601: iso8601,
-	match_all: match_all,
 	map_dict: map_dict,
+	match_all: match_all,
 	multiline_regexp: multiline_regexp,
 	obj_update: obj_update,
 	parallel: parallel,

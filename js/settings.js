@@ -16,6 +16,7 @@ var default_settings = {
 	d_cbg: '#000000',
 	d_cfg: '#ffffff',
 	d_cbg2: '#d9d9d9',
+	d_cbg3: '#252525',
 	d_ct: '#80ff00',
 	d_cserv: '#fff200',
 	d_crecv: '#707676',
@@ -433,6 +434,7 @@ function on_mode_change(s) {
 }
 
 return {
+	default_settings: default_settings,
 	get_mode: get_mode,
 	hide: hide,
 	hide_displaymode: hide_displaymode,

@@ -488,3 +488,19 @@
 	justify-content: flex-start;
 	align-items: center;
 }
+
+.d_to_table {
+	margin: 0;
+	width: 100vw;
+	border-collapse: collapse;
+	font-size: 4vmin;
+}
+.d_to_table tr td {
+	padding-top: 1.5vh;
+	padding-bottom: 1.5vh;
+}
+.d_to_court {
+	width: 1.4em;
+	padding-right: 0.5em;
+	text-align: right;
+}

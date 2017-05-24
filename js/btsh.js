@@ -80,8 +80,15 @@ function send_press(s) {
 }
 
 function list_matches(s, cb) {
-	var court_id = (s.ui && s.ui.displaymode_visible) ? s.settings.displaymode_court_id : s.settings.court_id;
-	var filter = 'court=' + encodeURIComponent(court_id);
+	var court_id = '';
+	if ((s.ui && s.ui.displaymode_visible)) {
+		if (displaymode.option_applies(s.settings.displaymode_style, 'court_id')) {
+			court_id = s.settings.displaymode_court_id;
+		}
+	} else {
+		court_id = s.settings.court_id;
+	}
+	var filter = court_id ? ('court=' + encodeURIComponent(court_id)) : '';
 
 	_request_json(s, 'btsh.list', {
 		url: baseurl + 'h/' + encodeURIComponent(tournament_key) + '/matches?' + filter,

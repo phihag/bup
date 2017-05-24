@@ -11,7 +11,7 @@ var ALL_STYLES = [
 	'andre',
 	'moritz',
 ];
-var ALL_COLORS = ['c0', 'c1', 'cbg', 'cfg', 'cbg2', 'ct', 'cserv', 'crecv'];
+var ALL_COLORS = ['c0', 'c1', 'cbg', 'cfg', 'cbg2', 'cbg3', 'ct', 'cserv', 'crecv'];
 
 function _setup_autosize(el, right_node, determine_height) {
 	autosize.maintain(el, function() {
@@ -262,13 +262,58 @@ function render_top(s, container, event) {
 	}
 }
 
-function render_tournament_overview(s, container, event) {
-	if (! event.courts) {
-		uiu.el(container, 'div', 'error', s._('displaymode:no courts'));
-		return;
+function namestr(players) {
+	if (players.length === 0) {
+		return '(Wird ermittelt)';
+	} else if (players.length === 1) {
+		return players[0].name;
+	} else {
+		return _doubles_name(players[0]) + ' / ' + _doubles_name(players[1]);
 	}
+}
 
-	uiu.el(container, 'div', {}, 'TODO: tournament_overview');
+function render_tournament_overview(s, container, event) {
+	var max_game_count = _calc_max_games(event);
+	var colors = calc_colors(s.settings, event);
+
+	var table = uiu.el(container, 'table', 'd_to_table');
+	var tbody = uiu.el(table, 'tbody');
+
+	event.courts.forEach(function(court, idx) {
+		var match = _match_by_court(event, court);
+		var nscore = (match ? match.network_score : 0) || [];
+
+		var tr = uiu.el(tbody, 'tr', {
+			style: (
+				'background:' + ((idx % 2 === 0) ? colors.bg : colors.bg3) + ';' +
+				'color:' + colors.fg + ';'
+			),
+		});
+		uiu.el(tr, 'td', 'd_to_court', court.label || compat.courtnum(court.id));
+		if (match) {
+			var match_name = '';
+			var setup = match.setup;
+			if (setup.event_name) {
+				match_name += setup.event_name;
+			}
+			if (setup.match_name) {
+				if (match_name) {
+					match_name += ' ';
+				}
+				match_name += setup.match_name;
+			}
+			uiu.el(tr, 'td', 'd_to_matchname', match_name);
+			uiu.el(tr, 'td', 'd_to_team', namestr(setup.teams[0].players));
+			uiu.el(tr, 'td', 'd_to_team', namestr(setup.teams[1].players));
+			for (var game_idx = 0;game_idx < max_game_count;game_idx++) {
+				uiu.el(tr, 'td', 'd_to_score', '');
+			}
+		} else {
+			uiu.el(tr, 'td', {
+				colspan: 3 + max_game_count,
+			});
+		}
+	});
 }
 
 function render_castall(s, container, event) {
@@ -705,17 +750,13 @@ function calc_team_colors(event, settings) {
 	];
 }
 
-function calc_colors(settings) {
-	return {
-		0: settings.d_c0 || '#50e87d',
-		1: settings.d_c1 || '#f76a23',
-		bg: settings.d_cbg || '#000',
-		fg: settings.d_cfg || '#fff',
-		bg2: settings.d_cbg2 || '#d9d9d9',
-		t: settings.d_ct || '#80ff00',
-		serv: settings.d_cserv || '#fff200',
-		recv: settings.d_crecv || '#707676',
-	};
+function calc_colors(cur_settings) {
+	var res = {};
+	ALL_COLORS.forEach(function(k) {
+		var ek = 'd_' + k;
+		res[k.substr(1)] = cur_settings[ek] || settings.default_settings[ek];
+	});
+	return res;
 }
 
 function _extract_timer_state(s, match) {
@@ -933,6 +974,11 @@ function update(err, s, event) {
 		((astyle === style) ? uiu.addClass : uiu.removeClass)(container, 'd_layout_' + astyle);
 	});
 
+	if (! event.courts) {
+		uiu.el(container, 'div', 'error', s._('displaymode:no courts'));
+		return;
+	}
+
 	var func = {
 		'oncourt': render_oncourt,
 		'international': render_international,
@@ -1089,12 +1135,23 @@ function active_colors(style_id) {
 }
 
 function option_applies(style_id, option_name) {
+	var BY_STYLE = {
+		tournament_overview: ['cfg', 'cbg', 'cbg3'],
+	};
+	var bs = BY_STYLE[style_id];
+	if (bs) {
+		return utils.includes(bs, option_name);
+	}
+
 	switch (option_name) {
 	case 'c0':
 	case 'c1':
 	case 'cfg':
 	case 'cbg':
-		return (style_id === 'international') || (style_id === '2court') || (style_id === 'castall');
+		return (
+			(style_id === 'international') ||
+			(style_id === '2court') ||
+			(style_id === 'castall'));
 	case 'cbg2':
 	case 'ct':
 	case 'cserv':
@@ -1102,7 +1159,7 @@ function option_applies(style_id, option_name) {
 		return (style_id === 'castall');
 
 	case 'court_id':
-		return (style_id === 'oncourt') || (style_id === 'international');
+		return (style_id === 'oncourt') || (style_id === 'international') || (style_id === 'andre') || (style_id === 'moritz');
 	case 'reverse_order':
 		return (style_id === 'top+list') || (style_id === '2court') || (style_id === 'castall');
 	case 'scale':
@@ -1131,12 +1188,12 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
 	var click = require('./click');
 	var control = require('./control');
+	var compat = require('./compat');
 	var eventutils = require('./eventutils');
 	var extradata = require('./extradata');
 	var network = require('./network');
 	var render = require('./render');
 	var refmode_referee_ui = null; // break cycle, should be require('./refmode_referee_ui');
-	var report_problem = require('./report_problem');
 	var settings = require('./settings');
 	var timer = require('./timer');
 	var uiu = require('./uiu');
