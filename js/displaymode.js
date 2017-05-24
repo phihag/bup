@@ -7,6 +7,9 @@ var ALL_STYLES = [
 	'2court',
 	'top+list',
 	'castall',
+	'tournament_overview',
+	'andre',
+	'moritz',
 ];
 var ALL_COLORS = ['c0', 'c1', 'cbg', 'cfg', 'cbg2', 'ct', 'cserv', 'crecv'];
 
@@ -257,6 +260,15 @@ function render_top(s, container, event) {
 		var court = event.courts[real_court_idx];
 		_render_court_display(court_container, event, court);
 	}
+}
+
+function render_tournament_overview(s, container, event) {
+	if (! event.courts) {
+		uiu.el(container, 'div', 'error', s._('displaymode:no courts'));
+		return;
+	}
+
+	uiu.el(container, 'div', {}, 'TODO: tournament_overview');
 }
 
 function render_castall(s, container, event) {
@@ -566,6 +578,14 @@ function _gamescore_from_netscore(netscore, setup) {
 	return gscores;
 }
 
+function render_andre(s, container/*, event, court*/) {
+	uiu.el(container, 'div', 'error', 'TODO: André rendering');
+}
+
+function render_moritz(s, container/*, event, court*/) {
+	uiu.el(container, 'div', 'error', 'TODO: Moritz rendering');
+}
+
 function render_international(s, container, event, court) {
 	var match = _match_by_court(event, court);
 	if (!match) {
@@ -756,7 +776,8 @@ function render_2court(s, container, event) {
 		'class': 'd_2court_divider',
 		'style': 'background: ' + colors.bg2,
 	});
-	event.team_names.forEach(function(team_name, team_idx) {
+	var team_names = event.team_names || [];
+	team_names.forEach(function(team_name, team_idx) {
 		var teamname_container = uiu.el(container, 'div', {
 			'class': 'd_2court_teamname' + team_idx,
 			style: 'background: ' + colors.bg + '; color: ' + colors[team_idx] + ';',
@@ -772,6 +793,10 @@ function render_2court(s, container, event) {
 		var court = event.courts[real_court_idx];
 		var match = _match_by_court(event, court);
 
+		if (!match) {
+			// TODO: test and improve handling when no match is on court
+			continue;
+		}
 		var nscore = match.network_score || [];
 		var gscore = _gamescore_from_netscore(nscore, match.setup);
 		var current_score = nscore[nscore.length - 1] || [];
@@ -847,7 +872,8 @@ function update(err, s, event) {
 		uiu.el(container, 'div', {
 			'class': 'display_error',
 		}, err.msg);
-		report_problem.silent_error('network error in display mode: ' + err.msg);
+		// TODO consider whether reenabling the following
+		// report_problem.silent_error('network error in display mode: ' + err.msg);
 		return;
 	}
 
@@ -910,6 +936,8 @@ function update(err, s, event) {
 	var func = {
 		'oncourt': render_oncourt,
 		'international': render_international,
+		'andre': render_andre,
+		'moritz': render_moritz,
 	}[style];
 	if (func) {
 		var court = _render_court(s, container, event);
@@ -923,6 +951,9 @@ function update(err, s, event) {
 			break;
 		case 'castall':
 			render_castall(s, container, event);
+			break;
+		case 'tournament_overview':
+			render_tournament_overview(s, container, event);
 			break;
 		case 'top+list':
 		default:
