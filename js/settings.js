@@ -17,6 +17,8 @@ var default_settings = {
 	d_cfg: '#ffffff',
 	d_cbg2: '#d9d9d9',
 	d_cbg3: '#252525',
+	d_cfg2: '#aaaaaa',
+	d_cborder: '#444444',
 	d_ct: '#80ff00',
 	d_cserv: '#fff200',
 	d_crecv: '#707676',
@@ -177,6 +179,9 @@ var _settings_textfields = [
 	'd_cbg',
 	'd_cfg',
 	'd_cbg2',
+	'd_cbg3',
+	'd_cfg2',
+	'd_cborder',
 	'd_ct',
 	'd_cserv',
 	'd_crecv',
@@ -299,6 +304,9 @@ function on_change(s, name) {
 	case 'd_cbg':
 	case 'd_cfg':
 	case 'd_cbg2':
+	case 'd_cbg3':
+	case 'd_cfg2':
+	case 'd_cborder':
 	case 'd_ct':
 	case 'd_scale':
 		displaymode.on_style_change(s);

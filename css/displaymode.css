@@ -493,7 +493,7 @@
 	margin: 0;
 	width: 100vw;
 	border-collapse: collapse;
-	font-size: 4vmin;
+	font-size: 3.5vmin;
 }
 .d_to_table tr td {
 	padding-top: 1.5vh;
@@ -503,4 +503,17 @@
 	width: 1.4em;
 	padding-right: 0.5em;
 	text-align: right;
+}
+.d_to_score {
+	min-width: 2.6em;
+	text-align: center;
+	border-left-width: 0.04em;
+	border-left-style: solid;
+}
+.d_to_winning {
+	font-weight: bold;
+	color: #dba766;
+}
+.d_to_vs {
+	color: #cfcfcf;
 }

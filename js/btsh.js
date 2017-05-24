@@ -169,6 +169,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
+	var displaymode = require('./displaymode');
 	var eventutils = require('./eventutils');
 	var network = require('./network');
 

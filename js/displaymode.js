@@ -11,7 +11,7 @@ var ALL_STYLES = [
 	'andre',
 	'moritz',
 ];
-var ALL_COLORS = ['c0', 'c1', 'cbg', 'cfg', 'cbg2', 'cbg3', 'ct', 'cserv', 'crecv'];
+var ALL_COLORS = ['c0', 'c1', 'cbg', 'cfg', 'cbg2', 'cbg3', 'cfg2', 'ct', 'cserv', 'crecv', 'cborder'];
 
 function _setup_autosize(el, right_node, determine_height) {
 	autosize.maintain(el, function() {
@@ -272,6 +272,11 @@ function namestr(players) {
 	}
 }
 
+function _tournament_overview_render_players(tr, players) {
+	var td = uiu.el(tr, 'td', 'd_to_team');
+	uiu.el(td, 'span', {}, namestr(players));
+}
+
 function render_tournament_overview(s, container, event) {
 	var max_game_count = _calc_max_games(event);
 	var colors = calc_colors(s.settings, event);
@@ -302,16 +307,38 @@ function render_tournament_overview(s, container, event) {
 				}
 				match_name += setup.match_name;
 			}
-			uiu.el(tr, 'td', 'd_to_matchname', match_name);
-			uiu.el(tr, 'td', 'd_to_team', namestr(setup.teams[0].players));
-			uiu.el(tr, 'td', 'd_to_team', namestr(setup.teams[1].players));
-			for (var game_idx = 0;game_idx < max_game_count;game_idx++) {
-				uiu.el(tr, 'td', 'd_to_score', '');
-			}
+			uiu.el(tr, 'td', {
+				'class': 'd_to_matchname',
+				style: (
+					'color:' + colors.fg2 + ';'
+				),
+			}, match_name);
+			_tournament_overview_render_players(tr, setup.teams[0].players);
+			_tournament_overview_render_players(tr, setup.teams[1].players);
 		} else {
 			uiu.el(tr, 'td', {
-				colspan: 3 + max_game_count,
+				colspan: 3,
 			});
+		}
+		for (var game_idx = 0;game_idx < max_game_count;game_idx++) {
+			var score_td = uiu.el(tr, 'td', {
+				'class': 'd_to_score',
+				style: 'border-color:' + colors.border,
+			});
+
+			var n = nscore[game_idx];
+			if (match && n) {
+				var gwinner = calc.game_winner(match.setup.counting, game_idx, n[0], n[1]);
+				uiu.el(score_td, 'span', {
+					'class': ((gwinner === 'left') ? 'd_to_winning' : ''),
+				}, n[0]);
+				uiu.el(score_td, 'span', {
+					'class': 't_to_vs',
+				}, ':');
+				uiu.el(score_td, 'span', {
+					'class': ((gwinner === 'right') ? 'd_to_winning' : ''),
+				}, n[1]);
+			}
 		}
 	});
 }
@@ -1136,7 +1163,7 @@ function active_colors(style_id) {
 
 function option_applies(style_id, option_name) {
 	var BY_STYLE = {
-		tournament_overview: ['cfg', 'cbg', 'cbg3'],
+		tournament_overview: ['cfg', 'cbg', 'cbg3', 'cborder', 'cfg2'],
 	};
 	var bs = BY_STYLE[style_id];
 	if (bs) {

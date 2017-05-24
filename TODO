@@ -1,8 +1,8 @@
-overview queries with court=
 vertical list of all matches on current courts (tournament-overview)
 Anzeige André: Sätze links, black-white
 display Moritz: prior games in detail between names
 
+settings: remove duplication of color names
 displaymode: remove checks if (! event.courts) { in renderers
 btde Berlin
 displaymode/international and others: courtspot empty shows server
@@ -22,6 +22,7 @@ eventsheet error does not get deleted
 	2. load import
 displaymode: use includes in option_applies?
 
+displaymode: make all colors configurable (including winning and vs in tournament_overview)
 grep for uiu.el(..{'class': ''}) and use newer form
 courtspot-like displays
 write displaymode.render_castall tests
