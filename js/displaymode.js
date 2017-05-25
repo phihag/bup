@@ -722,7 +722,7 @@ function render_andre(s, container, event, court, match, colors) {
 
 		player_spans.forEach(function(ps) {
 			_setup_autosize(ps, score_el, function(parent_node) {
-				return parent_node.offsetHeight * 0.8;
+				return parent_node.offsetHeight * 0.6;
 			});
 		});
 	});
