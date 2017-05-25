@@ -695,7 +695,7 @@ function render_andre(s, container, event, court, match, colors) {
 			var pel = uiu.el(players_container, 'div', {
 				'class': 'd_andre_player',
 				style: (
-					'height:' + (is_doubles ? '100%' : '50%') + ';'
+					'height:' + (is_doubles ? '50%' : '100%') + ';'
 				),
 			});
 			return uiu.el(pel, 'span', {}, pname);
@@ -722,7 +722,7 @@ function render_andre(s, container, event, court, match, colors) {
 
 		player_spans.forEach(function(ps) {
 			_setup_autosize(ps, score_el, function(parent_node) {
-				return parent_node.offsetHeight * 0.5;
+				return parent_node.offsetHeight * 0.8;
 			});
 		});
 	});
