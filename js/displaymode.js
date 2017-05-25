@@ -673,6 +673,7 @@ function render_andre(s, container, event, court, match, colors) {
 			(gwinner === 'left') ? (team_id === 0) : (
 			(gwinner === 'right') ? (team_id === 1) : (
 			(server.team_id === team_id))));
+		var points = current_score[team_id];
 
 		var player_names = team.players.map(function(player) {
 			return player.name;
@@ -688,6 +689,52 @@ function render_andre(s, container, event, court, match, colors) {
 				'color:' + colors.fg + ';'
 			),
 		});
+
+		if (compat.is_samsung()) {
+			var table = uiu.el(team_container, 'table', {
+				style: 'height: 45vh; width: 100vw; min-width: 95vw;',
+			});
+			var tbody = uiu.el(table, 'tbody');
+
+			var tr1 = uiu.el(tbody, 'tr');
+			var tr2 = uiu.el(tbody, 'tr');
+			var trs = [tr1, tr2];
+
+			uiu.el(tr1, 'td', {
+				rowspan: 2,
+				style: 'font-size: 10vh; vertical-align: middle;',
+			}, gscore[team_id]);
+
+			var is_singles = (player_names.length < 2);
+			player_names.forEach(function(pn, name_idx) {
+				var ptd = uiu.el(trs[name_idx], 'td', {
+					rowspan: (is_singles ? 2 : 1),
+					style: 'vertical-align: middle; font-size: 80px;',
+				});
+				uiu.el(ptd, 'span', {}, pn);
+			});
+
+			uiu.el(tr1, 'td', {
+				rowspan: 2,
+				style: (
+					'width: 50vh;' +
+					'background:' + (team_serving ? colors.fg : colors.bg) + ';' +
+					'color:' + (team_serving ? colors.bg : colors.fg) + ';' +
+					'text-align: center;' +
+					'font-size: 40vh;'
+				),
+			}, points);
+
+			if (team_id === 0) {
+				uiu.el(container, 'div', {
+					'class': 'd_andre_mid',
+					'style': (
+						'color:' + colors.fg2 + ';'
+					),
+				}, _match_name(match.setup));
+			}
+			return;
+		}
 		uiu.el(team_container, 'div', 'd_andre_gscore', gscore[team_id]);
 
 		var players_container = uiu.el(team_container, 'div', 'd_andre_players');
@@ -701,7 +748,6 @@ function render_andre(s, container, event, court, match, colors) {
 			return uiu.el(pel, 'span', {}, pname);
 		});
 
-		var points = current_score[team_id];
 		var score_el = uiu.el(team_container, 'div', {
 			'class': 'd_andre_score',
 			style: (
@@ -726,7 +772,6 @@ function render_andre(s, container, event, court, match, colors) {
 			});
 		});
 	});
-
 }
 
 function render_moritz(s, container/*, event, court*/) {

@@ -17,9 +17,15 @@ function courtnum(cn) {
 	return m ? m[1] : cn;
 }
 
+// Samsung TVs at DM O35
+function is_samsung() {
+	return /Chrome\/25\.0\.1349/.test(navigator.userAgent);
+}
+
 return {
 	ui_init: ui_init,
 	courtnum: courtnum,
+	is_samsung: is_samsung,
 };
 
 })();
