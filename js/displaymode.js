@@ -659,15 +659,9 @@ function _gamescore_from_netscore(netscore, setup) {
 	return gscores;
 }
 
-function render_andre(s, container, event, court) {
-	var match = _match_by_court(event, court);
-	if (!match) {
-		return;
-	}
-
+function render_andre(s, container, event, court, match, colors) {
 	var nscore = match.network_score || [];
 	var gscore = _gamescore_from_netscore(nscore, match.setup);
-	var colors = calc_colors(s.settings, event);
 	var is_doubles = match.setup.is_doubles;
 	var pcount = is_doubles ? 2 : 1;
 	var current_score = nscore[nscore.length - 1] || [];
@@ -708,7 +702,7 @@ function render_andre(s, container, event, court) {
 		});
 
 		var points = current_score[team_id];
-		uiu.el(team_container, 'div', {
+		var score_el = uiu.el(team_container, 'div', {
 			'class': 'd_andre_score',
 			style: (
 				'background:' + (team_serving ? colors.fg : colors.bg) + ';' +
@@ -727,8 +721,8 @@ function render_andre(s, container, event, court) {
 		}
 
 		player_spans.forEach(function(ps) {
-			_setup_autosize(ps, null, function(parent_node) {
-				return parent_node.offsetHeight * 0.4;
+			_setup_autosize(ps, score_el, function(parent_node) {
+				return parent_node.offsetHeight * 0.5;
 			});
 		});
 	});
@@ -1087,16 +1081,53 @@ function update(err, s, event) {
 		return;
 	}
 
+	var xfunc = {
+		andre: render_andre,
+	}[style];
+	if (xfunc) {
+		var court = _render_court(s, container, event);
+		if (!court) {
+			return;
+		}
+
+		var colors = calc_colors(s.settings, event);
+		var match = _match_by_court(event, court);
+		if (!match) {
+			var nomatch_el = uiu.el(container, 'div', {
+				'class': 'd_nomatch',
+				style: (
+					'color:' + colors.fg2
+				),
+			});
+			var tname = event.team_competition ? event.event_name : event.tournament_name;
+			if (tname) {
+				uiu.el(nomatch_el, 'div', {
+					style: (
+						'font-size:' + (event.team_competition ? '7vmin' : '18vmin') + ';'
+					),
+				}, tname);
+			}
+			uiu.el(nomatch_el, 'div', {
+				style: (
+					'font-size:' + (event.team_competition ? '10vmin' : '18vmin') + ';'
+				),
+			}, s._('Court') + ' ' + (court.label || court.num || court.court_id));
+			return;
+		}
+
+		xfunc(s, container, event, court, match, colors);
+		return;
+	}
+
 	var func = {
 		'oncourt': render_oncourt,
 		'international': render_international,
-		'andre': render_andre,
 		'moritz': render_moritz,
 	}[style];
 	if (func) {
-		var court = _render_court(s, container, event);
-		if (court) {
-			func(s, container, event, court);
+		var court2 = _render_court(s, container, event);
+		if (court2) {
+			func(s, container, event, court2);
 		}
 	} else {
 		switch (style) {
