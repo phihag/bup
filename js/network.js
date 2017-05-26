@@ -8,6 +8,7 @@ function get_real_netw() {
 		networks.rlmdemo || networks.nrwdemo ||
 		networks.bldemo || networks.bldemo_inprogress || networks.bldemo_incomplete ||
 		networks.vdemo || networks.edemo ||
+		networks.tdemo ||
 		networks.btsh ||
 		networks.btde ||
 		networks.mt ||
@@ -599,6 +600,8 @@ function ui_init(s, hash_query) {
 		networks.rlmdemo = staticnet(null, 'div/rlmdemo.json');
 	} else if (hash_query.vdemo !== undefined) {
 		networks.vdemo = staticnet(null, 'div/vdemo.json');
+	} else if (hash_query.tdemo !== undefined) {
+		networks.tdemo = staticnet(null, 'div/tdemo.json');
 	} else if (hash_query.btsh_e !== undefined) {
 		networks.btsh = btsh(null, hash_query.btsh_e);
 	}

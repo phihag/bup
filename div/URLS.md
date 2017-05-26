@@ -10,6 +10,11 @@ vdemo     Demo of an event (in progress)
 btde      Run under badmintonticker
 courtspot Run under CourtSpot
 csde      Run under courtspot.de
+btsh      Badminton tournament server (HTTP protocol)
+tdemo     Tournament demo
+nrwdemo   Demo of a match in the lower divisions in NRW
+rlmdemo   German Regionalliga Nord Demo
+
 
 Initial UI
 ==========

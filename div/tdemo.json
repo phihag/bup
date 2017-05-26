@@ -1,0 +1,96 @@
+{
+  "type": "bup-export",
+  "version": 2,
+  "event": {
+    "id": "tdemo",
+    "tournament_name": "Test-Turnier",
+    "matches": [
+      {
+        "setup": {
+          "incomplete": false,
+          "is_doubles": true,
+          "match_num": 42,
+          "counting": "3x21",
+          "team_competition": false,
+          "match_name": "Finale",
+          "event_name": "MX O55 (Demo)",
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Stefan Frey"
+                },
+                {
+                  "name": "Heidi Bender"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Thomas Bunn"
+                },
+                {
+                  "name": "Heike Bunn"
+                }
+              ]
+            }
+          ],
+          "scheduled_time_str": "14:00",
+          "court_id": "tdemo_5",
+          "match_id": "tdemo_match_42"
+        }
+      }
+    ],
+    "courts": [
+      {
+        "court_id": "tdemo_1",
+        "label": 1
+      },
+      {
+        "court_id": "tdemo_2",
+        "label": 2
+      },
+      {
+        "court_id": "tdemo_3",
+        "label": 3
+      },
+      {
+        "court_id": "tdemo_4",
+        "label": 4
+      },
+      {
+        "court_id": "tdemo_5",
+        "label": 5
+      },
+      {
+        "court_id": "tdemo_6",
+        "label": 6
+      },
+      {
+        "court_id": "tdemo_7",
+        "label": 7
+      },
+      {
+        "court_id": "tdemo_8",
+        "label": 8
+      },
+      {
+        "court_id": "tdemo_9",
+        "label": 9
+      },
+      {
+        "court_id": "tdemo_10",
+        "label": 10
+      },
+      {
+        "court_id": "tdemo_11",
+        "label": 11
+      },
+      {
+        "court_id": "tdemo_12",
+        "label": 12
+      }
+    ]
+  }
+}

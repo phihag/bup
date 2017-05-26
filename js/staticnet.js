@@ -75,6 +75,19 @@ function list_all_players(s, cb) {
 }
 
 function courts(s) {
+	if (s.event && s.event.courts) {
+		var res = s.event.courts.map(function(c) {
+			return {
+				id: c.court_id,
+			};
+		});
+		res.push({
+			id: 'referee',
+			description: s._('court:referee'),
+		});
+		return res;
+	}
+
 	return [{
 		id: '1',
 		description: s._('court:left'),

@@ -22,6 +22,7 @@ div/bldemo_inprogress.json
 # bldemo_incomplete.json is only for development, do not include
 div/nrwdemo.json
 div/rlmdemo.json
+div/tdemo.json
 div/bundesliga-logo.svg
 div/wakelock.mp4
 
