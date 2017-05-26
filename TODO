@@ -1,7 +1,9 @@
-vertical list of all matches on current courts (tournament-overview)
-Anzeige André: Sätze links, black-white
+option to fake time!
+
+displaymode/andre: bump font size of mid
 display Moritz: prior games in detail between names
 
+Peter Staats -> Liga-Modus
 displaymode: make cursor vanish after a while
 settings: remove duplication of color names
 displaymode: remove checks if (! event.courts) { in renderers

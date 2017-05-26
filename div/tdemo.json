@@ -2,6 +2,7 @@
   "type": "bup-export",
   "version": 2,
   "event": {
+    "staticnet_message": "Turnier-Demo (nur lokal)",
     "id": "tdemo",
     "tournament_name": "Test-Turnier",
     "matches": [
