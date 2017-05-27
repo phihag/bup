@@ -95,8 +95,7 @@ function calc_conflicting_players(omatches, ignore_start) {
 }
 
 function calc_conflict_map(matches) {
-	var conflicts = [];
-	matches.forEach(function(m1) {
+	return matches.map(function(m1) {
 		var m1_players = calc_players(m1);
 		var m1_conflicts = matches.map(function(m2) {
 			if (m1 === m2) {
@@ -108,9 +107,8 @@ function calc_conflict_map(matches) {
 			});	
 			return (conflicting.length > 0) ? 1 : 0;
 		});
-		conflicts.push(m1_conflicts);
+		return m1_conflicts;
 	});
-	return conflicts;
 }
 
 function calc_cost(order, conflict_map, preferred, d3_cost) {

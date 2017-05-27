@@ -129,8 +129,7 @@ function pronounce_score(s, score, team1_serving, service_over) {
 }
 
 function marks2str(s, marks, during_interval) {
-	var res = '';
-	marks.forEach(function(mark) {
+	return marks.reduce(function(res, mark) {
 		var d = {};
 		if ((mark.team_id !== undefined) && (mark.player_id !== undefined)) {
 			d.player_name = s.setup.teams[mark.team_id].players[mark.player_id].name;
@@ -150,8 +149,8 @@ function marks2str(s, marks, during_interval) {
 			res += s._('card.retired', d);
 			break;
 		}
-	});
-	return res;
+		return res;
+	}, '');
 }
 
 function ready_announcement(s) {

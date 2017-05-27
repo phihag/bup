@@ -76,11 +76,12 @@ function list_matches(s, cb) {
 }
 
 function on_edit_event(s) {
-	var match_players = {};
-	s.event.matches.forEach(function(match) {
+	var match_players = s.event.matches.reduce(function(prev, match) {
 		var setup = match.setup;
-		match_players[setup.liveaw_match_id] = [setup.teams[0].players, setup.teams[1].players];
-	});
+		prev[setup.liveaw_match_id] = [setup.teams[0].players, setup.teams[1].players];
+		return prev;
+	}, {});
+
 	_request({
 		type: 'event_set_players',
 		event_id: event_id,
