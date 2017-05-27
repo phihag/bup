@@ -528,12 +528,12 @@
 }
 .d_andre_mid {
 	width: 98vw;
-	height: 10%;
+	height: 10vh;
 	padding-left: 2vw;
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
-	font-size: 3vw;
+	font-size: 6vh;
 }
 .d_andre_gscore {
 	height: 100%;
