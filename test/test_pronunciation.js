@@ -3423,7 +3423,7 @@ _describe('pronunciation', function() {
 		);
 		assert.deepStrictEqual(s.timer, {
 			duration: 60000,
-			exigent: 20499,
+			exigent: 25000,
 			start: 1000000,
 		});
 		assert.strictEqual(s.game.just_interval, false);
@@ -3474,7 +3474,7 @@ _describe('pronunciation', function() {
 		);
 		assert.deepStrictEqual(s.timer, {
 			duration: 60000,
-			exigent: 20499,
+			exigent: 25000,
 			start: 1000000,
 		});
 		var sav_presses = presses.slice();
@@ -3491,7 +3491,7 @@ _describe('pronunciation', function() {
 		);
 		assert.deepStrictEqual(s.timer, {
 			duration: 60000,
-			exigent: 20499,
+			exigent: 25000,
 			start: 1000000,
 		});
 
@@ -3524,7 +3524,7 @@ _describe('pronunciation', function() {
 		);
 		assert.deepStrictEqual(s.timer, {
 			duration: 60000,
-			exigent: 20499,
+			exigent: 25000,
 			start: 1000000,
 		});
 
@@ -3567,7 +3567,7 @@ _describe('pronunciation', function() {
 		assert.deepStrictEqual(s.timer, {
 			start: 2000000,
 			duration: 120000,
-			exigent: 20499,
+			exigent: 25000,
 		});
 
 		presses.push({
@@ -3583,7 +3583,7 @@ _describe('pronunciation', function() {
 		assert.deepStrictEqual(s.timer, {
 			start: 2000000,
 			duration: 120000,
-			exigent: 20499,
+			exigent: 25000,
 		});
 
 		s = state_after(presses, SINGLES_SETUP);
@@ -3624,15 +3624,15 @@ _describe('pronunciation', function() {
 		});
 
 		s = state_after(presses, DOUBLES_SETUP);
-		assert.strictEqual(pronounce_de(s, 2095000),
+		assert.strictEqual(pronounce_de(s, 2090000),
 			'Zweiter Satz. 0 beide.\n' +
 			'Bitte spielen.');
-		assert.strictEqual(pronounce_en(s, 2095000),
+		assert.strictEqual(pronounce_en(s, 2090000),
 			'Second game; Love all; play');
 		assert.deepStrictEqual(s.timer, {
 			start: 2000000,
 			duration: 120000,
-			exigent: 20499,
+			exigent: 25000,
 		});
 
 		s = state_after(presses, DOUBLES_SETUP);

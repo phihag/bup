@@ -96,7 +96,7 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.strictEqual(s.match.team1_won, null);
 		assert.deepStrictEqual(s.timer, {
 			duration: 60 * 1000,
-			exigent: 20499,
+			exigent: 25000,
 			start: 1000,
 		});
 		assert.strictEqual(pronounce_de(s),
@@ -123,7 +123,7 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.strictEqual(s.match.team1_won, null);
 		assert.deepStrictEqual(s.timer, {
 			duration: 60 * 1000,
-			exigent: 20499,
+			exigent: 25000,
 			start: 1000,
 		});
 		assert.strictEqual(pronounce_de(s),
@@ -213,7 +213,7 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.strictEqual(s.match.team1_won, null);
 		assert.deepStrictEqual(s.timer, {
 			duration: 60 * 1000,
-			exigent: 20499,
+			exigent: 25000,
 			start: 100000,
 		});
 		assert.strictEqual(pronounce_de(s),
@@ -315,7 +315,7 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.deepStrictEqual(s.timer, {
 			duration: 60000,
 			start: 120000,
-			exigent: 20499,
+			exigent: 25000,
 		});
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
@@ -376,7 +376,7 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.deepStrictEqual(s.timer, {
 			duration: 60000,
 			start: 120000,
-			exigent: 20499,
+			exigent: 25000,
 		});
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
@@ -409,7 +409,7 @@ _describe('BWF experimental 5x11_15 counting', function() {
 			type: 'score',
 			side: 'left',
 			timestamp: 130000,
-			exigent: 20499,
+			exigent: 25000,
 		});
 		s = state_after(alt_presses, SINGLES_SETUP);
 		assert.deepStrictEqual(s.game.score, [14, 15]);
@@ -426,7 +426,7 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.deepStrictEqual(s.timer, {
 			duration: 60000,
 			start: 130000,
-			exigent: 20499,
+			exigent: 25000,
 		});
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
@@ -456,7 +456,7 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.deepStrictEqual(s.timer, {
 			duration: 60000,
 			start: 130000,
-			exigent: 20499,
+			exigent: 25000,
 		});
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
@@ -484,7 +484,7 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.deepStrictEqual(s.timer, {
 			duration: 60000,
 			start: 130000,
-			exigent: 20499,
+			exigent: 25000,
 		});
 		assert.strictEqual(pronounce_de(s),
 			'Dritter Satz. 0 beide.\nBitte spielen.');
@@ -618,7 +618,7 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.deepStrictEqual(s.timer, {
 			duration: 60000,
 			start: 140000,
-			exigent: 20499,
+			exigent: 25000,
 		});
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
@@ -646,7 +646,7 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.deepStrictEqual(s.timer, {
 			duration: 60000,
 			start: 140000,
-			exigent: 20499,
+			exigent: 25000,
 		});
 		assert.strictEqual(pronounce_de(s),
 			'Vierter Satz. 0 beide.\nBitte spielen.');
@@ -751,7 +751,7 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.deepStrictEqual(s.timer, {
 			duration: 60000,
 			start: 250000,
-			exigent: 20499,
+			exigent: 25000,
 		});
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
@@ -779,7 +779,7 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.deepStrictEqual(s.timer, {
 			duration: 60000,
 			start: 250000,
-			exigent: 20499,
+			exigent: 25000,
 		});
 		assert.strictEqual(pronounce_de(s),
 			'Entscheidungssatz. 0 beide.\nBitte spielen.');
@@ -844,7 +844,7 @@ _describe('BWF experimental 5x11_15 counting', function() {
 		assert.deepStrictEqual(s.timer, {
 			start: 300000,
 			duration: 60000,
-			exigent: 20499,
+			exigent: 25000,
 		});
 		assert.strictEqual(pronounce_de(s, 300001),
 			'6-5 Pause. Bitte die Spielfeldseiten wechseln.\n\n' +

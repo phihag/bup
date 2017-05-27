@@ -2938,7 +2938,7 @@ _describe('calc_state', function() {
 		assert.deepStrictEqual(s.timer, {
 			start: 1010000,
 			duration: 60000,
-			exigent: 20499,
+			exigent: 25000,
 		});
 
 		var injury6 = {
@@ -2966,7 +2966,7 @@ _describe('calc_state', function() {
 		assert.deepStrictEqual(s.timer, {
 			start: 1010000,
 			duration: 60000,
-			exigent: 20499,
+			exigent: 25000,
 		});
 
 		// Injury during game end
@@ -2981,7 +2981,7 @@ _describe('calc_state', function() {
 		assert.deepStrictEqual(s.timer, {
 			start: 1200000,
 			duration: 120000,
-			exigent: 20499,
+			exigent: 25000,
 		});
 
 		var base_presses = presses.slice();
@@ -3010,7 +3010,7 @@ _describe('calc_state', function() {
 		assert.deepStrictEqual(s.timer, {
 			start: 1200000,
 			duration: 120000,
-			exigent: 20499,
+			exigent: 25000,
 		});
 
 		presses = base_presses.slice();
@@ -3022,7 +3022,7 @@ _describe('calc_state', function() {
 		assert.deepStrictEqual(s.timer, {
 			start: 1200000,
 			duration: 120000,
-			exigent: 20499,
+			exigent: 25000,
 		});
 		presses.push(injury7);
 		s = state_after(presses, DOUBLES_SETUP);
@@ -3041,7 +3041,7 @@ _describe('calc_state', function() {
 		assert.deepStrictEqual(s.timer, {
 			start: 1200000,
 			duration: 120000,
-			exigent: 20499,
+			exigent: 25000,
 		});
 	});
 

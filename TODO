@@ -1,11 +1,13 @@
 option to fake time!
 
+compat.is_samsung should be no_flexbox
+test displays in demos
+redesign fullscreen to go on automatically -> Keiki
 prevent accidental shuttle setting / unsetting (conflicts with fullscreen buttony)
-displaymode/andre: bump font size of mid
 display Moritz: prior games in detail between names
 Peeter Staats -> accidental scrolling (make simple mode that only shows umpire stuff)
 
-mide: show match time
+mid: show match time
 show button once out of fullscreen
 test calc.players_present
 	yellow/red/black cards

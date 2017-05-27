@@ -31,3 +31,8 @@ Bei der Wahl notieren die Schiedsrichter auf dem Zettel R für rechts und R für
 Die Einspielzeit-Uhr fehlt!
 
 Nachdem der Button "0 beide, bitte spielen" (unter der Ansage "Zu meiner Rechten ...") gedrückt wird verschwindet die Uhr, um Missverständnisse zu vermeiden. Der Button sollte etwa zeitgleich (oder z.B. kurz vor) der Ansage "0 beide, bitte spielen" gedrückt werden.
+
+
+Warum erscheint die Ansage "20 Sekunden" schon bevor die Uhr 20s anzeigt?
+
+Nach Auskunft von Björn Wüpping verbleiben 20s nach Ende der Ansage. Da die 20s-Ansage etwa 5s dauert, wird die bereits 25s vor Ende der Pause angezeigt.

@@ -418,7 +418,7 @@ function recalc_after_score(s, team_id, press) {
 			s.timer = {
 				start: press.timestamp,
 				duration: (counting === '5x11_15^90' ? 90000 : 60000),
-				exigent: 20499,
+				exigent: 25000,
 			};
 		}
 		if ((press.type != 'red-card') || is_interval) {
@@ -449,7 +449,7 @@ function recalc_after_score(s, team_id, press) {
 		s.timer = {
 			start: press.timestamp,
 			duration: rest_duration,
-			exigent: 20499,
+			exigent: 25000,
 		};
 	} else if (!s.game.interval && !s.match.suspended && !s.match.injuries) {
 		s.timer = false;

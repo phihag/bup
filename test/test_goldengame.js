@@ -87,7 +87,7 @@ _describe('Golden game (1x21) counting', function() {
 		assert.deepStrictEqual(s.timer, {
 			start: 1000,
 			duration: 60000,
-			exigent: 20499,
+			exigent: 25000,
 		});
 
 		press_score(presses, 0, 8);

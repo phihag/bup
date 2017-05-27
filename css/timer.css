@@ -20,7 +20,7 @@
 }
 .timer_exigent {
 	color: #de0000;
-	animation-duration: 6s;
+	animation-duration: 10s;
 	animation-name: timer_exigent_color;
 }
 @keyframes timer_exigent_color {

@@ -69,7 +69,7 @@ _describe('2x21+11 counting', function() {
 		assert.strictEqual(s.match.team1_won, null);
 		assert.deepStrictEqual(s.timer, {
 			duration: 60 * 1000,
-			exigent: 20499,
+			exigent: 25000,
 			start: 1000,
 		});
 
@@ -122,7 +122,7 @@ _describe('2x21+11 counting', function() {
 		assert.deepStrictEqual(s.timer, {
 			start: 1500,
 			duration: 120000,
-			exigent: 20499,
+			exigent: 25000,
 		});
 
 		presses.push({
@@ -177,7 +177,7 @@ _describe('2x21+11 counting', function() {
 		assert.strictEqual(s.match.team1_won, null);
 		assert.deepStrictEqual(s.timer, {
 			duration: 60 * 1000,
-			exigent: 20499,
+			exigent: 25000,
 			start: 2000,
 		});
 
