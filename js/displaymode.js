@@ -9,7 +9,6 @@ var ALL_STYLES = [
 	'castall',
 	'tournament_overview',
 	'andre',
-	'moritz',
 ];
 var ALL_COLORS = ['c0', 'c1', 'cbg', 'cfg', 'cbg2', 'cbg3', 'cfg2', 'ct', 'cserv', 'crecv', 'cborder'];
 
@@ -774,10 +773,6 @@ function render_andre(s, container, event, court, match, colors) {
 	});
 }
 
-function render_moritz(s, container/*, event, court*/) {
-	uiu.el(container, 'div', 'error', 'TODO: Moritz rendering');
-}
-
 function render_international(s, container, event, court) {
 	var match = _match_by_court(event, court);
 	if (!match) {
@@ -1167,7 +1162,6 @@ function update(err, s, event) {
 	var func = {
 		'oncourt': render_oncourt,
 		'international': render_international,
-		'moritz': render_moritz,
 	}[style];
 	if (func) {
 		var court2 = _render_court(s, container, event);
@@ -1344,7 +1338,7 @@ function option_applies(style_id, option_name) {
 		return (style_id === 'castall');
 
 	case 'court_id':
-		return (style_id === 'oncourt') || (style_id === 'international') || (style_id === 'moritz');
+		return (style_id === 'oncourt') || (style_id === 'international');
 	case 'reverse_order':
 		return (style_id === 'top+list') || (style_id === '2court') || (style_id === 'castall');
 	case 'scale':
