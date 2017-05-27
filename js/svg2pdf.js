@@ -185,6 +185,7 @@ function save(svg_nodes, props, orientation, filename) {
 }
 
 return {
+	make: make,
 	save: save,
 };
 

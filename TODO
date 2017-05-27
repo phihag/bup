@@ -5,6 +5,8 @@ displaymode/andre: bump font size of mid
 display Moritz: prior games in detail between names
 Peeter Staats -> accidental scrolling (make simple mode that only shows umpire stuff)
 
+mide: show match time
+show button once out of fullscreen
 test calc.players_present
 	yellow/red/black cards
 Evelyn Jantsch: Animation or delay at ends change7
