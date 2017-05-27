@@ -388,6 +388,12 @@ function ui_init() {
 		hide_exception_dialog();
 		bupui.make_player_pick(state, state._('exceptions:dialog:retired'), 'retired', ui_show_exception_dialog);
 	});
+	click.qs('#exception_walkover', function() {
+		hide_exception_dialog();
+		bupui.make_team_pick(
+			state, state._('exceptions:dialog:walkover'), 'walkover', ui_show_exception_dialog);
+	});
+
 }
 
 function set_current(s) {
@@ -415,6 +421,10 @@ function ui_show_exception_dialog() {
 	install_destructor(state, hide_exception_dialog);
 	render.exception_dialog(state);
 	$('#exception_wrapper').show();
+	var players_present = calc.players_present(state);
+	uiu.visible_qs('#exception_walkover_container', !players_present);
+	uiu.visible_qs('#exception_overrule_container', players_present);
+
 	uiu.esc_stack_push(function() {
 		hide_exception_dialog();
 	});

@@ -266,6 +266,14 @@ function pronounce(s, now) {
 			post_mark_str = marks2str(s, post_marks, true);
 		}
 
+		if (s.match.walkover) {
+			var winner_index = s.match.team1_won ? 0 : 1;
+			return pre_mark_str + s._('wonby.walkover', {
+				winner_name: wonby_name(s, winner_index),
+				loser_name: wonby_name(s, 1 - winner_index),
+			});
+		}
+
 		return (
 			pre_mark_str +
 			(s.game.won_by_score ? s._('game(won)') + '.\n' : '') +

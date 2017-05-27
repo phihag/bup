@@ -479,6 +479,16 @@ function parse_match(state, col_count) {
 				break;
 			}
 			break;
+		case 'walkover':
+			s.scoresheet_game.cells.push({
+				type: 'longtext',
+				row: 2 * press.team_id + (s.setup.is_doubles ? 0.5 : 0),
+				col: s.scoresheet_game.col_idx,
+				width: 4,
+				val: calc.press_char(s, press),
+			});
+			s.scoresheet_game.col_idx += 10;
+			break;
 		case 'editmode_set-score':
 			_clean_editmode(s.scoresheet_game);
 			s.scoresheet_game.cells.push({
@@ -518,7 +528,7 @@ function parse_match(state, col_count) {
 			s.scoresheet_game.col_idx++;
 		}
 
-		if (s.game.finished && !s.scoresheet_game.circle) {
+		if (s.game.finished && !s.scoresheet_game.circle && !s.match.walkover) {
 			s.scoresheet_game.circle = s.game.score;
 		}
 	});
@@ -586,7 +596,7 @@ function sheet_render(s, svg) {
 	_text('.scoresheet_umpire_name', s.match.umpire_name ? s.match.umpire_name : s.setup.umpire_name);
 	_text('.scoresheet_service_judge_name', s.match.service_judge_name ? s.match.service_judge_name : s.setup.service_judge_name);
 
-	_text('.scoresheet_begin_value', (s.metadata.start ? utils.time_str(s.metadata.start) : ''));
+	_text('.scoresheet_begin_value', ((s.metadata.start && !s.match.walkover) ? utils.time_str(s.metadata.start) : ''));
 	if (s.match.finished) {
 		_text('.scoresheet_end_value', (s.metadata.end ? utils.time_str(s.metadata.end) : ''));
 		_text('.scoresheet_duration_value', ((s.metadata.start && s.metadata.end) ? utils.duration_hours(s.metadata.start, s.metadata.end) : ''));
@@ -639,7 +649,7 @@ function sheet_render(s, svg) {
 
 	if (s.match) {
 		var all_finished_games = s.match.finished_games.slice();
-		if (s.match.finished && (all_finished_games[all_finished_games.length - 1] !== s.game)) {
+		if (s.match.finished && (all_finished_games[all_finished_games.length - 1] !== s.game) && !s.match.walkover) {
 			all_finished_games.push(s.game);
 		}
 
@@ -850,7 +860,7 @@ function sheet_render(s, svg) {
 			bg.setAttribute('x', bb.x);
 			bg.setAttribute('y', bb.y + text_y_padding);
 			bg.setAttribute('width', bb.width);
-			bg.setAttribute('height', bb.height - 2 * text_y_padding);
+			bg.setAttribute('height', Math.max(0, bb.height - 2 * text_y_padding));
 			break;
 		case 'vertical-text':
 			text = _svg_el('text', {}, t, cell.val);

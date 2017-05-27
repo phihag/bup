@@ -126,6 +126,7 @@ var i18n_en = {
 'wonby.3': 'Third game won by {winner_name} {winner_score}-{loser_score}',
 'wonby.4': 'Fourth game won by {winner_name} {winner_score}-{loser_score}',
 'wonby.match': 'Match won by {winner_name} {score_str}',
+'wonby.walkover': '(Walkover in favor of {winner_name}.\n{loser_name} did not show up.)',
 'wonby.and': ' and ',
 'game(won)': 'Game',
 'match suspended': 'Play is suspended',
@@ -286,6 +287,8 @@ var i18n_en = {
 'exceptions:correction': 'Correction',
 'exceptions:overrule-title': 'Overrule',
 'exceptions:overrule': 'Overrule\nline judge',
+'exceptions:walkover': 'Walkover',
+'exceptions:walkover-title': 'Player did not show up',
 
 'exceptions:dialog:correction': 'service court correction',
 'exceptions:dialog:red-card': 'fault for misconduct (red card)',
@@ -293,6 +296,7 @@ var i18n_en = {
 'exceptions:dialog:injury': 'injury',
 'exceptions:dialog:retired': 'retired',
 'exceptions:dialog:black-card': 'disqualified (black card)',
+'exceptions:dialog:walkover': 'Walkover',
 
 'mark:overrule': 'O',
 'mark:referee': 'R',
@@ -303,6 +307,7 @@ var i18n_en = {
 'mark:injury': 'I',
 'mark:retired': 'Retired',
 'mark:disqualified': 'Disqualified',
+'mark:walkover': 'Walkover',
 
 'scoresheet:Match': 'Match:',
 'scoresheet:Date': 'Date:',

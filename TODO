@@ -1,9 +1,16 @@
 option to fake time!
 
-
+prevent accidental shuttle setting / unsetting (conflicts with fullscreen buttony)
 displaymode/andre: bump font size of mid
 display Moritz: prior games in detail between names
+Peeter Staats -> accidental scrolling (make simple mode that only shows umpire stuff)
 
+test calc.players_present
+	yellow/red/black cards
+Evelyn Jantsch: Animation or delay at ends change7
+umpire mode -> display mode -> umpire mode can show court twice
+Björn Wüpping: Aufschläger punkt im displaymode
+Björn Wüpping: Aufschläger punkt im displaymode
 20s bei 25s -> Björn Wüpping
 Peter Staats -> Liga-Modus
 displaymode: make cursor vanish after a while
@@ -36,6 +43,7 @@ test castall on mac
 test castall with missing matches etc.
 2courts looks broken with devmode on
 csde: handle closed events
+referee mode: warn if fullscreen mode is left?
 fix travis
 refmode/event order of matches looks strange sometimes
 display: copy CourtSpot's vertical one

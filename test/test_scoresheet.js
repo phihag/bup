@@ -2391,6 +2391,65 @@ _describe('scoresheet generation', function() {
 			val: '0:03',
 		});
 	});
+
+	_it('walkover', function() {
+		var presses = [{
+			type: 'walkover',
+			team_id: 0,
+		}];
+		var cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			type: 'longtext',
+			col: 0,
+			row: 0.5,
+			table: 0,
+			val: 'Walkover',
+			width: 4,
+		});
+
+		presses = [{
+			type: 'walkover',
+			team_id: 1,
+		}];
+		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
+		_assert_cell(cells, {
+			type: 'longtext',
+			col: 0,
+			row: 2.5,
+			table: 0,
+			val: 'Walkover',
+			width: 4,
+		});
+
+		presses = [{
+			type: 'walkover',
+			team_id: 0,
+		}];
+		cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		_assert_cell(cells, {
+			type: 'longtext',
+			col: 0,
+			row: 0,
+			table: 0,
+			val: 'Walkover',
+			width: 4,
+		});
+
+		presses = [{
+			type: 'walkover',
+			team_id: 1,
+		}];
+		cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		_assert_cell(cells, {
+			type: 'longtext',
+			col: 0,
+			row: 2,
+			table: 0,
+			val: 'Walkover',
+			width: 4,
+		});
+
+	});
 });
 
 })();

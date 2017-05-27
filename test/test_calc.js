@@ -43,6 +43,7 @@ _describe('calc_state', function() {
 		assert.strictEqual(court.right_even, null);
 		assert.strictEqual(court.left_serving, null);
 		assert.strictEqual(court.serving_downwards, null);
+		assert.strictEqual(bup.calc.players_present(s), false);
 
 		s = state_after([], SINGLES_SETUP);
 		court = bup.calc.court(s);
@@ -73,6 +74,7 @@ _describe('calc_state', function() {
 		assert.equal(court.right_even, null);
 		assert.equal(court.left_serving, null);
 		assert.equal(court.serving_downwards, null);
+		assert.strictEqual(bup.calc.players_present(s), false);
 	});
 
 	_it('Choosing sides (singles)', function() {
@@ -88,6 +90,7 @@ _describe('calc_state', function() {
 		assert.equal(court.right_even.player.name, 'Bob');
 		assert.equal(court.left_serving, null);
 		assert.equal(court.serving_downwards, null);
+		assert.strictEqual(bup.calc.players_present(s), true);
 
 		s = state_after([{
 			type: 'pick_side',
@@ -3803,5 +3806,29 @@ _describe('calc helper functions', function() {
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.deepStrictEqual(bup.calc.duration(s), 53904);
+	});
+
+	_it('walkover', function() {
+		var presses = [{
+			type: 'walkover',
+			team_id: 1,
+		}];
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.match.team1_won, true);
+		assert.strictEqual(s.match.finished, true);
+		assert.strictEqual(s.match.finish_confirmed, false);
+		assert.strictEqual(s.match.walkover, true);
+		assert.strictEqual(s.timer, false);
+
+		presses = [{
+			type: 'walkover',
+			team_id: 0,
+		}];
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(s.match.team1_won, false);
+		assert.strictEqual(s.match.finished, true);
+		assert.strictEqual(s.match.finish_confirmed, false);
+		assert.strictEqual(s.match.walkover, true);
+		assert.strictEqual(s.timer, false);
 	});
 });

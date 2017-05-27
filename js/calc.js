@@ -11,11 +11,20 @@ var SPECIAL_PRESSES = [
 	'retired',
 	'suspension',
 	'yellow-card',
+	'walkover',
 ];
 function press_char(s, press) {
 	if (SPECIAL_PRESSES.indexOf(press.type) >= 0) {
 		return s._('mark:' + press.type);
 	}
+}
+
+function players_present(s) {
+	return (
+		(s.match && s.match.finished_games && (s.match.finished_games.length > 0)) ||
+		(s.game && s.game.started) ||
+		(s.game && (typeof s.game.team1_left === 'boolean'))
+	);
 }
 
 function match_started(game_scores) {
@@ -765,6 +774,13 @@ function calc_press(s, press) {
 			};
 		}
 		break;
+	case 'walkover':
+		s.game.finished = true;
+		s.game.team1_won = (press.team_id === 1);
+		s.match.finished = true;
+		s.match.team1_won = (press.team_id === 1);
+		s.match.walkover = true;
+		break;
 	// Display-only types
 	case 'note':
 		break;
@@ -1086,6 +1102,7 @@ return {
 	state: state,
 	team_carded: team_carded,
 	player_carded: player_carded,
+	players_present: players_present,
 	undo: undo,
 	remote_state: remote_state,
 };

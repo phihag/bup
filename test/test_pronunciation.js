@@ -3660,6 +3660,18 @@ _describe('pronunciation', function() {
 		assert.strictEqual(pronounce_en(s, 2980000), null);
 	});
 
+	_it('walkover', function() {
+		var presses = [{
+			type: 'walkover',
+			team_id: 1,
+		}];
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert.strictEqual(pronounce_de(s),
+			'(Walkover zugunsten von Andrew und Alice.\nBob und Birgit waren nicht anwesend.)');
+		assert.strictEqual(pronounce_en(s),
+			'(Walkover in favor of Andrew and Alice.\nBob and Birgit did not show up.)');
+	});
+
 	_it('match_str', function() {
 		assert.strictEqual(bup.pronunciation.match_str(DOUBLES_SETUP), 'Andrew/Alice vs Bob/Birgit');
 

@@ -126,6 +126,7 @@ var i18n_de = {
 'wonby.3': 'Der dritte Satz wurde gewonnen von {winner_name} {winner_score}-{loser_score}',
 'wonby.4': 'Der vierte Satz wurde gewonnen von {winner_name} {winner_score}-{loser_score}',
 'wonby.match': 'Das Spiel wurde gewonnen von {winner_name} {score_str}',
+'wonby.walkover': '(Walkover zugunsten von {winner_name}.\n{loser_name} waren nicht anwesend.)',
 'wonby.and': ' und ',
 'game(won)': 'Satz',
 'match suspended': 'Das Spiel ist unterbrochen',
@@ -286,6 +287,8 @@ var i18n_de = {
 'exceptions:correction': 'Vertauschung\nAufschlagfeld',
 'exceptions:overrule-title': 'Overrule',
 'exceptions:overrule': 'Korrektur\nLinienrichter',
+'exceptions:walkover': 'Walkover',
+'exceptions:walkover-title': 'Spieler nicht erschienen',
 
 'exceptions:dialog:correction': 'Vertauschung Aufschlagfeld',
 'exceptions:dialog:yellow-card': 'Verwarnung (gelbe Karte)',
@@ -293,6 +296,7 @@ var i18n_de = {
 'exceptions:dialog:injury': 'Verletzung',
 'exceptions:dialog:retired': 'Aufgegeben',
 'exceptions:dialog:black-card': 'Disqualifiziert (schwarze Karte)',
+'exceptions:dialog:walkover': 'Walkover',
 
 'mark:overrule': 'O',
 'mark:referee': 'R',
@@ -303,6 +307,7 @@ var i18n_de = {
 'mark:injury': 'V',
 'mark:retired': 'A',
 'mark:disqualified': 'Disqualifiziert',
+'mark:walkover': 'Walkover',
 
 'scoresheet:Match': 'Spiel:',
 'scoresheet:Date': 'Datum:',

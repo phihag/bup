@@ -36,6 +36,9 @@
 #exception_retired > span {
 	background-image: url(../icons/exception_retired.svg);
 }
+#exception_walkover > span {
+	background-image: url(../icons/exception_walkover.svg);
+}
 
 .yellow-card-image,
 .red-card-image,
