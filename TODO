@@ -1,4 +1,8 @@
 option to fake time!
+referee rufen button
+
+Show match number on scoresheet
+displays incorrect at game end!!
 
 compat.is_samsung should be no_flexbox
 test displays in demos
@@ -6,6 +10,7 @@ redesign fullscreen to go on automatically -> Keiki
 prevent accidental shuttle setting / unsetting (conflicts with fullscreen buttony)
 display Moritz: prior games in detail between names
 Peeter Staats -> accidental scrolling (make simple mode that only shows umpire stuff)
+disable double-touch timeout if two very fast touches
 
 mid: show match time
 show button once out of fullscreen
@@ -21,6 +26,8 @@ displaymode: make cursor vanish after a while
 settings: remove duplication of color names
 displaymode: remove checks if (! event.courts) { in renderers
 btde Berlin
+
+Keike: court too large
 displaymode/international and others: courtspot empty shows server
 group "Wettkampf importieren" under manual match start
 Druckbutton Spielreihenfolge
@@ -37,6 +44,7 @@ eventsheet error does not get deleted
 	1. generate from localhost/bup while in eventsheet
 	2. load import
 displaymode: use includes in option_applies?
+reduce double touch time if frequent fast touches?
 
 displaymode: make all colors configurable (including winning and vs in tournament_overview)
 grep for uiu.el(..{'class': ''}) and use newer form

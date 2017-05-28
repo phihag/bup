@@ -588,8 +588,11 @@ function sheet_render(s, svg) {
 	}
 	_text('.scoresheet_event_name', event_name);
 
-
-	_text('.scoresheet_match_name', s.setup.match_name);
+	var match_name = s.setup.match_name || '';
+	if (s.setup.match_num) {
+		match_name += ' - #' + s.setup.match_num;
+	}
+	_text('.scoresheet_match_name', match_name);
 	_text('.scoresheet_date_value', s.metadata.start ? utils.human_date_str(s, s.metadata.start) : '');
 
 	_text('.scoresheet_court_id', compat.courtnum(s.match.court_id ? s.match.court_id : s.setup.court_id));
