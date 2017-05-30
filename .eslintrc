@@ -16,7 +16,7 @@
         "comma-dangle": [
             2,
             "always-multiline"
-        ],
+        ]
     },
     "env": {
         "node": true,
