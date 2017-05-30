@@ -1,10 +1,9 @@
 option to fake time!
-referee rufen button
+call referee button during injury
 
 Show match number on scoresheet
 displays incorrect at game end!!
 
-compat.is_samsung should be no_flexbox
 test displays in demos
 redesign fullscreen to go on automatically -> Keiki
 prevent accidental shuttle setting / unsetting (conflicts with fullscreen buttony)
@@ -16,11 +15,9 @@ mid: show match time
 show button once out of fullscreen
 test calc.players_present
 	yellow/red/black cards
-Evelyn Jantsch: Animation or delay at ends change7
+Evelyn Jantsch: Animation or delay at ends change?
 umpire mode -> display mode -> umpire mode can show court twice
 Björn Wüpping: Aufschläger punkt im displaymode
-Björn Wüpping: Aufschläger punkt im displaymode
-20s bei 25s -> Björn Wüpping
 Peter Staats -> Liga-Modus
 displaymode: make cursor vanish after a while
 settings: remove duplication of color names

@@ -689,7 +689,7 @@ function render_andre(s, container, event, court, match, colors) {
 			),
 		});
 
-		if (compat.is_samsung()) {
+		if (! compat.supports_flexbox()) { // Samsung TVs at DM O35 2017
 			var table = uiu.el(team_container, 'table', {
 				style: 'height: 45vh; width: 100vw; min-width: 95vw;',
 			});
