@@ -1,4 +1,5 @@
-.editmode_button {
+.editmode_button,
+.editmode_fix_time_container {
 	z-index: 80;
 }
 
@@ -85,6 +86,23 @@
 	-webkit-filter: grayscale(70%);
 	filter: grayscale(70%);
 }
+
+.editmode_fix_time_container {
+	position: absolute;
+	top: 1vmin;
+	right: 1vmin;
+	font-size: 1.5vmin;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.editmode_fix_time_container > input {
+	width: 17ch;
+}
+.editmode_fix_time_container > input:invalid {
+	border: 0.2em solid red;
+}
+
 
 /* Smartphones */
 @media screen and (max-width: 480px), screen and (max-height: 480px) {

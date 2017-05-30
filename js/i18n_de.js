@@ -535,6 +535,8 @@ var i18n_de = {
 
 'urlimport:error': 'Import fehlgeschlagen: {msg}',
 'urlimport:staticnet_message': 'Importierter Wettkampf',
+
+'editmode:fix_time': 'Zeit fixieren',
 };
 
 /*@DEV*/

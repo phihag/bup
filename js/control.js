@@ -201,7 +201,11 @@ function on_press(press, s) {
 	}
 
 	var on_end = netstats.perf('perfp.calc');
-	press.timestamp = Date.now();
+	press.timestamp = (
+		(state.ui && state.ui.faketime_enabled && state.ui.faketime_val) ?
+		state.ui.faketime_val :
+		Date.now()
+	);
 	s.presses.push(press);
 
 	calc.state(s);

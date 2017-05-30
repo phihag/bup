@@ -6,15 +6,8 @@ var fs = require('fs');
 var path = require('path');
 var process = require('process');
 
+var utils = require('../js/utils.js');
 
-/* Helper functions */
-function add_zeroes(n) {
-	if (n < 10) {
-		return '0' + n;
-	} else {
-		return '' + n;
-	}
-}
 
 function git_rev(cb) {
 	child_process.exec('git rev-parse --short HEAD', function (error, stdout) {
@@ -176,6 +169,12 @@ function main() {
 	var dist_dir = args[1];
 	var tmp_dir = args[2];
 
+	if (! dev_dir || !dist_dir || !tmp_dir) {
+		console.error('Usage: make_dist.js DEV_DIR DIST_DIR TMP_DIR');
+		process.exit(3);
+		return;
+	}
+
 	var html_in_fn = path.join(dev_dir, 'bup.html');
 	var html_out_fn = path.join(dist_dir, 'index.html');
 	var html_out_fn2 = path.join(dist_dir, 'bup.html');
@@ -207,7 +206,7 @@ function main() {
 					return cb(err);
 				}
 				var d = new Date();
-				var version_date = d.getFullYear() + '.' + add_zeroes(d.getMonth() + 1) + '.' + add_zeroes(d.getDate());
+				var version_date = d.getFullYear() + '.' + utils.pad(d.getMonth() + 1) + '.' + utils.pad(d.getDate());
 				var version = version_date + '.' + rev;
 				cb(err, version);
 			});

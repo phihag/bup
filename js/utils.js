@@ -55,22 +55,22 @@ function uuid() {
 }
 
 function iso8601(d) {
-	return d.getFullYear() + '-' + add_zeroes(d.getMonth()+1) + '-' + add_zeroes(d.getDate());
+	return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate());
 }
 
 function date_str(ts) {
 	var d = new Date(ts);
-	return add_zeroes(d.getDate()) + '.' + add_zeroes(d.getMonth()+1) + '.' + d.getFullYear();
+	return pad(d.getDate()) + '.' + pad(d.getMonth()+1) + '.' + d.getFullYear();
 }
 
 function time_str(ts) {
 	var d = new Date(ts);
-	return add_zeroes(d.getHours()) + ':' + add_zeroes(d.getMinutes());
+	return pad(d.getHours()) + ':' + pad(d.getMinutes());
 }
 
 function timesecs_str(ts) {
 	var d = new Date(ts);
-	return add_zeroes(d.getHours()) + ':' + add_zeroes(d.getMinutes()) + ':' + add_zeroes(d.getSeconds());
+	return pad(d.getHours()) + ':' + pad(d.getMinutes()) + ':' + pad(d.getSeconds());
 }
 
 function datetime_str(ts) {
@@ -82,7 +82,7 @@ function human_date_str(s, ts) {
 	return s._('weekday:' + d.getDay()) + ' ' + utils.date_str(d);
 }
 
-function add_zeroes(n) {
+function pad(n) {
 	if (n < 10) {
 		return '0' + n;
 	} else {
@@ -132,7 +132,7 @@ function duration_mins(start_timestamp, end_timestamp) {
 function duration_hours(start_timestamp, end_timestamp) {
 	var mins = duration_mins(start_timestamp, end_timestamp);
 	var hours = (mins - (mins % 60)) / 60;
-	return hours + ':' + add_zeroes(mins % 60);
+	return hours + ':' + pad(mins % 60);
 }
 
 function duration_secs(start_timestamp, end_timestamp) {
@@ -144,9 +144,9 @@ function duration_secs(start_timestamp, end_timestamp) {
 	var hours = (diff_mins - mins) / 60;
 
 	if (hours) {
-		return hours + ':' + add_zeroes(mins) + ':' + add_zeroes(secs);
+		return hours + ':' + pad(mins) + ':' + pad(secs);
 	} else {
-		return mins + ':' + add_zeroes(secs);
+		return mins + ':' + pad(secs);
 	}
 }
 
@@ -470,7 +470,6 @@ function includes(ar, el) {
 }
 
 return {
-	add_zeroes: add_zeroes,
 	any: any,
 	brightness: brightness,
 	contrast_color: contrast_color,
@@ -478,8 +477,8 @@ return {
 	date_str: date_str,
 	datetime_str: datetime_str,
 	decode_utf8: decode_utf8,
-	deep_equal: deep_equal,
 	deep_copy: deep_copy,
+	deep_equal: deep_equal,
 	duration_hours: duration_hours,
 	duration_mins: duration_mins,
 	duration_secs: duration_secs,
@@ -497,6 +496,7 @@ return {
 	match_all: match_all,
 	multiline_regexp: multiline_regexp,
 	obj_update: obj_update,
+	pad: pad,
 	parallel: parallel,
 	parse_json: parse_json,
 	parse_query_string: parse_query_string,

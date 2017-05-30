@@ -1,6 +1,5 @@
-var court = (function() {
 'use strict';
-
+var court = (function() {
 
 var POSITIONS = ['left_odd', 'left_even', 'right_even', 'right_odd'];
 function install(container) {
@@ -17,6 +16,7 @@ function install(container) {
 		editmode_switch_left: create_button({'class': 'editmode_switch_left editmode_button default-invisible'}),
 		editmode_switch_right: create_button({'class': 'editmode_switch_right editmode_button default-invisible'}),
 		editmode_leave: create_button({'class': 'editmode_leave editmode_button default-invisible'}),
+		editmode_fix_time: editmode.make_fix_time_ui(container),
 	};
 
 	function create_text(key) {
@@ -111,6 +111,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
+	var editmode = require('./editmode');
 	var network = require('./network');
 	var uiu = require('./uiu');
 

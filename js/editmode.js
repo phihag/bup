@@ -1,5 +1,5 @@
-var editmode = (function() {
 'use strict';
+var editmode = (function() {
 
 var last_click = 0;
 
@@ -224,12 +224,58 @@ function update_ui(s) {
 	}
 }
 
+function faketime_calc(s, input) {
+	var ts = Date.parse(input.value);
+	if (ts) {
+		s.ui.faketime_val = ts;
+	}
+}
+
+function make_fix_time_ui(container) {
+	var div = uiu.el(container, 'div', 'editmode_fix_time_container');
+
+	var cb_label = uiu.el(div, 'label');
+	var attrs = {
+		type: 'checkbox',
+	};
+	if (state.ui && state.ui.editmode_fixed_time) {
+		attrs.checked = 'checked';
+	}
+	var cb = uiu.el(cb_label, 'input', attrs);
+	uiu.el(cb_label, 'span', {
+		'data-i18n': 'editmode:fix_time',
+	}, state._('editmode:fix_time'));
+	var d = new Date();
+	var input = uiu.el(div, 'input', {
+		pattern: '[0-9]{4}-?[0-9]{1,2}-?[0-9]{1,2}[ T_][0-9]{1,2}:[0-9]{1,2}(?::[0-9]{1,2})?',
+		value: (
+			d.getFullYear() +
+			'-' + utils.pad(d.getMonth() + 1) +
+			'-' + utils.pad(d.getDate()) +
+			' ' + utils.pad(d.getHours()) +
+			':' + utils.pad(d.getMinutes()) +
+			':' + utils.pad(d.getSeconds())
+		),
+	});
+
+	cb.addEventListener('change', function() {
+		state.ui.faketime_enabled = cb.checked;
+		faketime_calc(state, input);
+	});
+	input.addEventListener('input', function() {
+		faketime_calc(state, input);
+	});
+
+	return div;
+}
+
 return {
 	enter: enter,
 	leave: leave,
 	ui_init: ui_init,
 	change_score: change_score,
 	update_ui: update_ui,
+	make_fix_time_ui: make_fix_time_ui,
 };
 
 })();

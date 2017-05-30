@@ -62,7 +62,7 @@ function calc(s, now) {
 		remaining = Math.max(0, remaining);
 		remaining_str = Math.round(remaining / 1000);
 		if (remaining_str >= 60) {
-			remaining_str = Math.floor(remaining_str / 60) + ':' + utils.add_zeroes(remaining_str % 60);
+			remaining_str = Math.floor(remaining_str / 60) + ':' + utils.pad(remaining_str % 60);
 		}
 	}
 
