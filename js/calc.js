@@ -77,23 +77,17 @@ function warmup_timer(s, cointoss_ts) {
 }
 
 function team_carded(s, team_id) {
-	var res = null;
-	s.match.cards.forEach(function(card) {
-		if (card.team_id === team_id) {
-			res = card;
-		}
-	});
-	return res;
+	return s.match.cards.reduce(function(res, card) {
+		return card.team_id === team_id ? card : res;
+	}, null);
 }
 
 function player_carded(s, team_id, player_id) {
-	var res = null;
-	s.match.cards.forEach(function(card) {
-		if ((card.team_id === team_id) && (card.player_id === player_id)) {
-			res = card;
-		}
-	});
-	return res;
+	return s.match.cards.reduce(function(res, card) {
+		return ((card.team_id === team_id) && (card.player_id === player_id))
+			? card
+			: res;
+	}, null);
 }
 
 // Returns null if score cannot be mapped
@@ -986,9 +980,8 @@ function netscore(s, always_zero) {
 		}
 	}
 
-	var scores = [];
-	s.match.finished_games.forEach(function(fg) {
-		scores.push(fg.score.slice());
+	var scores = s.match.finished_games.map(function(fg) {
+		return fg.score.slice();
 	});
 	if (! s.match.finish_confirmed && ((s.game.started || s.match.finished || (s.game.score[0] > 0) || (s.game.score[1] > 0) || always_zero))) {
 		scores.push(s.game.score.slice());

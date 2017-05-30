@@ -197,11 +197,10 @@ function reverse_every(ar, every) {
 }
 
 function map_dict(fields, func) {
-	var res = {};
-	fields.forEach(function(f) {
+	return fields.reduce(function(res, f) {
 		res[f] = func(f);
-	});
-	return res;
+		return res;
+	}, {});
 }
 
 function sum(ar) {
