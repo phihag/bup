@@ -809,6 +809,9 @@ function state(s) {
 	if (s.presses.length > 0) {
 		s.metadata.updated = s.presses[s.presses.length - 1].timestamp;
 	}
+	// Reset properties about to be recalculated
+	s.metadata.start = null;
+	s.metadata.end = null;
 
 	init_calc(s);
 	undo(s);

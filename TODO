@@ -1,10 +1,10 @@
-option to fake time!
-	metadata.end is incorrect! (scoresheet)
-
 displays incorrect at game end!!
 call referee button during injury
-increase bottom spacing on court
+btde Berlin
 
+transmit to turnier.de
+
+increase bottom spacing on court
 test displays in demos
 redesign fullscreen to go on automatically -> Keiki
 prevent accidental shuttle setting / unsetting (conflicts with fullscreen buttony)
@@ -23,7 +23,6 @@ Peter Staats -> Liga-Modus
 displaymode: make cursor vanish after a while
 settings: remove duplication of color names
 displaymode: remove checks if (! event.courts) { in renderers
-btde Berlin
 
 Keike: court too large
 displaymode/international and others: courtspot empty shows server
