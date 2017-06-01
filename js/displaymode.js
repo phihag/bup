@@ -1051,7 +1051,6 @@ var _last_painted_hash = null;
 var _last_err;
 function update(err, s, event) {
 	_last_err = err;
-
 	var container = uiu.qs('.displaymode_layout');
 	uiu.remove_qsa('.display_loading,.display_error', container);
 
@@ -1072,15 +1071,14 @@ function update(err, s, event) {
 		// report_problem.silent_error('network error in display mode: ' + err.msg);
 		return;
 	}
-
 	// Also update general state
 	network.update_event(s, event);
-
 	// If nothing has changed we can skip painting
 	var cur_event_hash = hash(s.settings, event);
 	if (utils.deep_equal(cur_event_hash, _last_painted_hash)) {
 		return;
 	}
+	_last_painted_hash = cur_event_hash;
 
 	var court_select = uiu.qs('[name="displaymode_court_id"]');
 	uiu.visible_qs('.settings_display_court_id', option_applies(style, 'court_id'));
@@ -1198,8 +1196,6 @@ function update(err, s, event) {
 			render_list(container, event);
 		}
 	}
-
-	_last_painted_hash = cur_event_hash;
 }
 
 function on_style_change(s) {
