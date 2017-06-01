@@ -2,6 +2,7 @@ test fde_import on aufschlagwechsel.de
 call referee button during injury
 transmit to turnier.de
 
+start match from bup (select newest from server)
 redesign fullscreen interface
 	big button on top
 	automatically if going out of fullscreen (for example turning off A88X tablets)
