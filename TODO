@@ -1,12 +1,12 @@
-displays incorrect at game end!!
+test fde_import on aufschlagwechsel.de
 call referee button during injury
-btde Berlin
-
 transmit to turnier.de
 
+redesign fullscreen interface
+	big button on top
+	automatically if going out of fullscreen (for example turning off A88X tablets)
 increase bottom spacing on court
 test displays in demos
-redesign fullscreen to go on automatically -> Keiki
 prevent accidental shuttle setting / unsetting (conflicts with fullscreen buttony)
 display Moritz: prior games in detail between names
 Peeter Staats -> accidental scrolling (make simple mode that only shows umpire stuff)

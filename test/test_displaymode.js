@@ -14,6 +14,72 @@ function _make_container() {
 }
 
 _describe('displaymode', function() {
+	_it('extract_netscore', function() {
+		assert.deepStrictEqual(bup.displaymode.extract_netscore({
+			network_score: [],
+			setup: {
+				counting: '3x21',
+			},
+		}, true), [[0, 0]]);
+		assert.deepStrictEqual(bup.displaymode.extract_netscore({
+			network_score: [[18, 1]],
+			setup: {
+				counting: '3x21',
+			},
+		}, true), [[18, 1]]);
+		assert.deepStrictEqual(bup.displaymode.extract_netscore({
+			network_score: [[21, 1], [5, 4]],
+			setup: {
+				counting: '3x21',
+			},
+		}, true), [[21, 1], [5, 4]]);
+		assert.deepStrictEqual(bup.displaymode.extract_netscore({
+			network_score: [[21, 1], [23, 25]],
+			setup: {
+				counting: '3x21',
+			},
+		}, true), [[21, 1], [23, 25], [0, 0]]);
+		assert.deepStrictEqual(bup.displaymode.extract_netscore({
+			network_score: [[21, 1], [27, 25]],
+			setup: {
+				counting: '3x21',
+			},
+		}, true), [[21, 1], [27, 25]]);
+		assert.deepStrictEqual(bup.displaymode.extract_netscore({
+			network_score: [[21, 1]],
+			setup: {
+				counting: '1x21',
+			},
+		}, true), [[21, 1]]);
+		assert.deepStrictEqual(bup.displaymode.extract_netscore({
+			network_score: [[11, 2], [14, 15]],
+			setup: {
+				counting: '5x11_15',
+			},
+		}, true), [[11, 2], [14, 15], [0, 0]]);
+		assert.deepStrictEqual(bup.displaymode.extract_netscore({
+			network_score: [[11, 2], [14, 15], [13, 11], [12, 14]],
+			setup: {
+				counting: '5x11_15',
+			},
+		}, true), [[11, 2], [14, 15], [13, 11], [12, 14], [0, 0]]);
+		assert.deepStrictEqual(bup.displaymode.extract_netscore({
+			network_score: [[11, 2], [14, 15], [13, 11], [12, 14], [11, 6]],
+			setup: {
+				counting: '5x11_15',
+			},
+		}, true), [[11, 2], [14, 15], [13, 11], [12, 14], [11, 6]]);
+		// Do not modify match
+		var m = {
+			network_score: [[21, 2]],
+			setup: {
+				counting: '3x21',
+			},
+		};
+		assert.deepStrictEqual(bup.displaymode.extract_netscore(m), [[21, 2], [0, 0]]);
+		assert.deepStrictEqual(m.network_score, [[21, 2]]);
+	});
+
 	_it('render_castall', function() {
 		var state = {
 			settings: {

@@ -658,8 +658,27 @@ function _gamescore_from_netscore(netscore, setup) {
 	return gscores;
 }
 
+function extract_netscore(match) {
+	var res = utils.deep_copy(match.network_score) || [];
+
+	if (res.length === 0) {
+		return [[0, 0]];
+	}
+
+	var counting = match.setup.counting;
+	var last_game = res[res.length - 1];
+	var last_winner = calc.game_winner(counting, res.length - 1, last_game[0], last_game[1]);
+	if ((last_winner === 'left') || (last_winner === 'right')) {
+		var mwinner = calc.match_winner(counting, res);
+		if ((mwinner !== 'left') && (mwinner !== 'right')) {
+			res.push([0, 0]);
+		}
+	}
+	return res;
+}
+
 function render_andre(s, container, event, court, match, colors) {
-	var nscore = match.network_score || [];
+	var nscore = extract_netscore(match);
 	var gscore = _gamescore_from_netscore(nscore, match.setup);
 	var is_doubles = match.setup.is_doubles;
 	var pcount = is_doubles ? 2 : 1;
@@ -773,15 +792,9 @@ function render_andre(s, container, event, court, match, colors) {
 	});
 }
 
-function render_international(s, container, event, court) {
-	var match = _match_by_court(event, court);
-	if (!match) {
-		return;
-	}
-
-	var nscore = match.network_score || [];
+function render_international(s, container, event, court, match, colors) {
+	var nscore = extract_netscore(match);
 	var gscore = _gamescore_from_netscore(nscore, match.setup);
-	var colors = calc_colors(s.settings, event);
 	var is_doubles = match.setup.is_doubles;
 	var pcount = is_doubles ? 2 : 1;
 	var current_score = nscore[nscore.length - 1] || [];
@@ -980,7 +993,7 @@ function render_2court(s, container, event) {
 			// TODO: test and improve handling when no match is on court
 			continue;
 		}
-		var nscore = match.network_score || [];
+		var nscore = extract_netscore(match);
 		var gscore = _gamescore_from_netscore(nscore, match.setup);
 		var current_score = nscore[nscore.length - 1] || [];
 		var server = determine_server(match, current_score);
@@ -1123,6 +1136,7 @@ function update(err, s, event) {
 
 	var xfunc = {
 		andre: render_andre,
+		international: render_international,
 	}[style];
 	if (xfunc) {
 		var court = _render_court(s, container, event);
@@ -1161,7 +1175,6 @@ function update(err, s, event) {
 
 	var func = {
 		'oncourt': render_oncourt,
-		'international': render_international,
 	}[style];
 	if (func) {
 		var court2 = _render_court(s, container, event);
@@ -1357,6 +1370,7 @@ return {
 	calc_team_colors: calc_team_colors,
 	// Testing only
 	render_castall: render_castall,
+	extract_netscore: extract_netscore,
 };
 
 })();
