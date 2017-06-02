@@ -310,6 +310,19 @@ function ui_render(s) {
 			(s.settings.show_pronunciation ? (pronunciation.pronounce(s)) : '')
 		);
 		var dialog = uiu.qs('#injury-resume-dialog');
+
+		var referee_called = s.match.marks.some(function(mark) {
+			return mark.type == 'referee';
+		});
+		if (!referee_called) {
+			var ref_btn = uiu.el(dialog, 'button', {}, s._('Call referee'));
+			click.on(ref_btn, function() {
+				control.on_press({
+					type: 'referee',
+				});
+			});
+		}
+
 		s.match.injuries.forEach(function(injury) {
 			var btn = uiu.el(
 				dialog, 'button', {},

@@ -2926,12 +2926,12 @@ _describe('pronunciation', function() {
 		});
 
 		var s = state_after(presses, DOUBLES_SETUP);
+		// This used to instruct the umpire to call referee.
+		// Now, there is a call referee button right there.
 		assert.equal(pronounce_de(s),
-			'[Referee rufen!]\n' +
 			'Werden Sie aufgeben?'
 		);
 		assert.equal(pronounce_en(s),
-			'[Call referee!]\n' +
 			'Are you retiring?'
 		);
 
@@ -2969,12 +2969,10 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Bob, Verwarnung wegen unsportlichen Verhaltens.\n' +
-			'[Referee rufen!]\n' +
 			'Werden Sie aufgeben?'
 		);
 		assert.equal(pronounce_en(s),
 			'Bob, warning for misconduct.\n' +
-			'[Call referee!]\n' +
 			'Are you retiring?'
 		);
 
@@ -2987,13 +2985,11 @@ _describe('pronunciation', function() {
 		assert.equal(pronounce_de(s),
 			'Bob, Verwarnung wegen unsportlichen Verhaltens.\n' +
 			'Birgit, Fehler wegen unsportlichen Verhaltens.\n' +
-			'[Referee rufen!]\n' +
 			'Werden Sie aufgeben?'
 		);
 		assert.equal(pronounce_en(s),
 			'Bob, warning for misconduct.\n' +
 			'Birgit, fault for misconduct.\n' +
-			'[Call referee!]\n' +
 			'Are you retiring?'
 		);
 
@@ -3028,11 +3024,9 @@ _describe('pronunciation', function() {
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
-			'[Referee rufen!]\n' +
 			'Werden Sie aufgeben?'
 		);
 		assert.equal(pronounce_en(s),
-			'[Call referee!]\n' +
 			'Are you retiring?'
 		);
 	});

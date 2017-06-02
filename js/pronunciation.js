@@ -185,10 +185,7 @@ function pronounce(s, now) {
 	}
 
 	if (s.match.injuries) {
-		var referee_called = s.match.marks.some(function(mark) {
-			return mark.type == 'referee';
-		});
-		return mark_str + (referee_called ? '' : (s._('[Call referee!]') + '\n')) + s._('Are you retiring?');
+		return mark_str + s._('Are you retiring?');
 	}
 
 	if (s.match.announce_pregame && s.match.finished_games.length === 0) {

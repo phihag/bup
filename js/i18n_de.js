@@ -12,7 +12,7 @@ var i18n_de = {
 'dialog-left': 'Spieler auf der linken Seite',
 'dialog-server': 'Aufschläger',
 'dialog-receiver': 'Rückschläger',
-'[Call referee!]': '[Referee rufen!]',
+'Call referee': 'Referee rufen',
 'Are you retiring?': 'Werden Sie aufgeben?',
 'import link': 'Aus Datei importieren ...',
 'send export': 'Export senden',

@@ -12,7 +12,7 @@ var i18n_en = {
 'dialog-left': 'Left court side',
 'dialog-server': 'Server',
 'dialog-receiver': 'Receiver',
-'[Call referee!]': '[Call referee!]',
+'Call referee': 'Call referee',
 'Are you retiring?': 'Are you retiring?',
 'import link': 'Import event from backup file ...',
 'send export': 'send export file',
