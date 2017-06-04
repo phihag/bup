@@ -1,12 +1,13 @@
-call referee button during injury
-transmit to turnier.de
+displaymode/courtspot: no courts!
 
-start match from bup (select newest from server)
+transmit to turnier.de
+start events in referee mode
+start match from bup (select newest from aufschlagwechsel.de)
 redesign fullscreen interface
 	big button on top
 	automatically if going out of fullscreen (for example turning off A88X tablets)
 increase bottom spacing on court
-test displays in demos
+test displays in demos / btde
 prevent accidental shuttle setting / unsetting (conflicts with fullscreen buttony)
 display Moritz: prior games in detail between names
 Peeter Staats -> accidental scrolling (make simple mode that only shows umpire stuff)

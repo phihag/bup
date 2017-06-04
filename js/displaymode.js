@@ -1078,7 +1078,8 @@ function update(err, s, event) {
 	if (utils.deep_equal(cur_event_hash, _last_painted_hash)) {
 		return;
 	}
-	_last_painted_hash = cur_event_hash;
+	var changed_courts = (
+		!_last_painted_hash || !utils.deep_equal(cur_event_hash.courts, _last_painted_hash.courts));
 
 	var court_select = uiu.qs('[name="displaymode_court_id"]');
 	uiu.visible_qs('.settings_display_court_id', option_applies(style, 'court_id'));
@@ -1089,7 +1090,8 @@ function update(err, s, event) {
 		!utils.deep_equal(
 			calc_team_colors(event, s.settings),
 			[s.settings.d_c0, s.settings.d_c1]));
-	if (event.courts && (!_last_painted_hash || !utils.deep_equal(cur_event_hash.courts, _last_painted_hash.courts))) {
+
+	if (event.courts && changed_courts) {
 		uiu.empty(court_select);
 		event.courts.forEach(function(c) {
 			var attrs = {
