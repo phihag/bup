@@ -538,7 +538,7 @@
 .d_andre_gscore {
 	height: 100%;
 	width: 10vw;
-	font-size: 10vh;
+	font-size: 15vh;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -579,4 +579,14 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+}
+
+.d_shuttle {
+	position: absolute;
+	left: -4vmin;
+	width: 4vmin;
+	height: 4vmin;
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-image: url(../icons/shuttlecock.svg);
 }

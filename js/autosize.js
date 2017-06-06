@@ -1,6 +1,6 @@
+'use strict';
 // resize fonts to fit a width
 var autosize = (function() {
-'use strict';
 
 var tasks = {};
 var task_id = 0;

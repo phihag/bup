@@ -17,7 +17,9 @@ function _setup_autosize(el, right_node, determine_height) {
 		var parent_node = el.parentNode;
 		var w = parent_node.offsetWidth;
 		if (right_node) {
-			w = Math.min(w, right_node.offsetLeft);
+			var prect = parent_node.getBoundingClientRect();
+			var rrect = right_node.getBoundingClientRect();
+			w = Math.max(10, Math.min(w, rrect.left - prect.left));
 		}
 
 		var h;
@@ -756,13 +758,16 @@ function render_andre(s, container, event, court, match, colors) {
 		uiu.el(team_container, 'div', 'd_andre_gscore', gscore[team_id]);
 
 		var players_container = uiu.el(team_container, 'div', 'd_andre_players');
-		var player_spans = player_names.map(function(pname) {
+		var player_spans = player_names.map(function(pname, player_id) {
 			var pel = uiu.el(players_container, 'div', {
 				'class': 'd_andre_player',
 				style: (
 					'height:' + (is_doubles ? '50%' : '100%') + ';'
 				),
 			});
+			if (server && server.team_id === team_id && server.player_id === player_id) {
+				uiu.el(pel, 'div', 'd_shuttle');
+			}
 			return uiu.el(pel, 'span', {}, pname);
 		});
 
