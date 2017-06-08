@@ -136,6 +136,8 @@ type*            What kind of button has been pressed. Determines the other keys
                   For instance, to start at 21:19 18:21 in the third game right away, call with
                   scores: [[21, 19], [18, 21]].
  "timer_restart" Restart the current (interval/warmup) timer.
+ "walkover"      Record a walkover, i.e. no match due to one side missing.
+    team_id*      The team which is missing. The other team wins by default.
  "note"          A plain-text note on the scoresheet.
     val*          Human-readable string of what happened.
 

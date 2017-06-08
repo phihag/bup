@@ -1,10 +1,11 @@
+write a test for i18n of all display mode names
 half display onlyplayers
+half display onlyclubplayers
 display onlyscore
 displaymode: cannot change colors in UI (gets reset!?)
 https://aufschlagwechsel.de/bup/#setupsheet crashes!
 https://aufschlagwechsel.de/bup/#setupsheet crashes after import?
 display: Team-Feld (variant of international) -> mail Heinz
-bug team_colors
 
 transmit to turnier.de
 start events in referee mode
