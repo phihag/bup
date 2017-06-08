@@ -1,4 +1,10 @@
-half displays (shuttlecock-live)
+half display onlyplayers
+display onlyscore
+displaymode: cannot change colors in UI (gets reset!?)
+https://aufschlagwechsel.de/bup/#setupsheet crashes!
+https://aufschlagwechsel.de/bup/#setupsheet crashes after import?
+display: Team-Feld (variant of international) -> mail Heinz
+bug team_colors
 
 transmit to turnier.de
 start events in referee mode
@@ -19,7 +25,6 @@ test calc.players_present
 	yellow/red/black cards
 Evelyn Jantsch: Animation or delay at ends change?
 umpire mode -> display mode -> umpire mode can show court twice
-Björn Wüpping: Aufschläger punkt im displaymode
 Peter Staats -> Liga-Modus
 displaymode: make cursor vanish after a while
 settings: remove duplication of color names

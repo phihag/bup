@@ -1061,7 +1061,7 @@ function update(err, s, event) {
 
 	var style = s.settings.displaymode_style;
 
-	if (err && (err.errtype === 'loading')) {
+	if ((err && (err.errtype === 'loading')) || !event) {
 		uiu.el(container, 'div', {
 			'class': 'display_loading',
 		});
@@ -1072,8 +1072,6 @@ function update(err, s, event) {
 		uiu.el(container, 'div', {
 			'class': 'display_error',
 		}, err.msg);
-		// TODO consider whether reenabling the following
-		// report_problem.silent_error('network error in display mode: ' + err.msg);
 		return;
 	}
 	// Also update general state
