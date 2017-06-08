@@ -128,7 +128,7 @@ type*            What kind of button has been pressed. Determines the other keys
                   Otherwise [19, 18], where the first value is the home team's score.
  "editmode_set-finished_games" Manual change of the scores of past games.
                                Can also be used to invent or ignore past games.
-    by_side*      Boolean, determines the format of score.
+    by_side*      Boolean, determines the format of scores.
     scores*       An array of the scores of the past games.
                   If by_side then [{left: 19, right: 18}].
                   Otherwise [[19, 18]], where the first value of each subarray is the home team's score.
