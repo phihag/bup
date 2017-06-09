@@ -115,4 +115,14 @@ _describe('displaymode', function() {
 		// TODO test with full
 		// TODO test with missing match presses
 	});
+
+	_it('all translations present', function() {
+		var state = {};
+		bup.i18n.update_state(state, 'de');
+		bup.displaymode.ALL_STYLES.forEach(function(style) {
+			assert.strictEqual(typeof style, 'string');
+			var label = state._('displaymode|' + style);
+			assert(!/:|untranslated/.test(label), 'untranslated displaymode style label: Missing \'displaymode|' + style + '\'');
+		});
+	});
 });
