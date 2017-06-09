@@ -9,6 +9,8 @@ var ALL_STYLES = [
 	'castall',
 	'tournament_overview',
 	'andre',
+	'onlyplayers',
+	'onlyscore',
 ];
 var ALL_COLORS = ['c0', 'c1', 'cbg', 'cfg', 'cbg2', 'cbg3', 'cfg2', 'ct', 'cserv', 'crecv', 'cborder'];
 
@@ -895,6 +897,104 @@ function _render_court(s, container, event) {
 	return court;
 }
 
+function _player_names(team, is_doubles) {
+	var pcount = is_doubles ? 2 : 1;
+	var player_names = team.players.map(function(player) {
+		return player.name;
+	});
+	while (player_names.length < pcount) {
+		player_names.push('');
+	}
+	return player_names;
+}
+
+function render_onlyplayers(s, container, event, court, match, colors) {
+	var nscore = extract_netscore(match);
+	var is_doubles = match.setup.is_doubles;
+	var current_score = nscore[nscore.length - 1] || [];
+	var server = determine_server(match, current_score);
+	var mwinner = calc.match_winner(match.setup.counting, nscore);
+	var match_over = (mwinner === 'left') || (mwinner === 'right');
+
+	match.setup.teams.forEach(function(team, team_id) {
+		var col = colors[team_id];
+		var gwinner = calc.game_winner(match.setup.counting, nscore.length - 1, current_score[0], current_score[1]);
+		var team_serving = (
+			(gwinner === 'left') ? (team_id === 0) : (
+			(gwinner === 'right') ? (team_id === 1) : (
+			(server.team_id === team_id))));
+
+		var pnames = _player_names(team, is_doubles);
+
+		var team_container = uiu.el(container, 'div', {
+			'class': 'd_half',
+			style: 'background:' + colors.bg + ';',
+		});
+
+		var player_spans = pnames.map(function(pname, player_id) {
+			var is_server = (!match_over) && team_serving && (server.player_id === player_id);
+			var style = (
+				'background: ' + colors.bg + ';' +
+				'color: ' + col + ';' +
+				'height: ' + (is_doubles ? '100%' : '100%') + ';'
+			);
+
+			var player_container = uiu.el(team_container, 'div', {
+				'style': 'height: ' + (is_doubles ? '50%' : '100%') + ';',
+				'class': 'd_onlyplayers_player_container',
+			});
+			var pel = uiu.el(player_container, 'div', {
+				style: style,
+				'class': 'd_onlyplayers_player',
+			});
+			if (is_server) {
+				uiu.el(pel, 'div', 'd_shuttle');
+			}
+			return uiu.el(pel, 'div', {}, pname);
+		});
+
+		player_spans.forEach(function(ps) {
+			_setup_autosize(ps, null, function(parent_node) {
+				return parent_node.offsetHeight * 0.7 * (is_doubles ? 1 : 0.5);
+			});
+		});
+	});
+}
+
+function render_onlyscore(s, container, event, court, match, colors) {
+	var nscore = extract_netscore(match);
+	var current_score = nscore[nscore.length - 1] || [];
+	var server = determine_server(match, current_score);
+	var max_game_count = calc.max_game_count(match.setup.counting);
+
+	match.setup.teams.forEach(function(team, team_id) {
+		var team_container = uiu.el(container, 'div', 'd_onlyscore_half');
+		for (var game_idx = 0;game_idx < max_game_count;game_idx++) {
+			var team_serving = false;
+			var current_score = nscore[game_idx];
+			if (current_score) {
+				var gwinner = calc.game_winner(match.setup.counting, nscore.length - 1, current_score[0], current_score[1]);
+				team_serving = (
+								(gwinner === 'left') ? (team_id === 0) : (
+								(gwinner === 'right') ? (team_id === 1) : (
+								(server.team_id === team_id))));
+			}
+
+			var score_container = uiu.el(team_container, 'div', {
+				'class': 'd_onlyscore_score',
+				style: (
+					'width:' + (99 / max_game_count) + 'vw;' +
+					'background:' + (team_serving ? colors[team_id] : colors.bg) + ';' +
+					'color:' + (team_serving ? colors.bg : colors[team_id]) + ';' +
+					'border-right:' + (1 / max_game_count) + 'vw solid ' + colors.bg + ';'
+				),
+			});
+			uiu.el(score_container, 'span', {}, (current_score ? current_score[team_id] : ''));
+		}
+	});
+}
+
+
 function calc_team_colors(event, settings) {
 	if (event.team_colors) {
 		return event.team_colors;
@@ -1140,6 +1240,8 @@ function update(err, s, event) {
 	var xfunc = {
 		andre: render_andre,
 		international: render_international,
+		onlyplayers: render_onlyplayers,
+		onlyscore: render_onlyscore,
 	}[style];
 	if (xfunc) {
 		var court = _render_court(s, container, event);
@@ -1330,6 +1432,8 @@ function option_applies(style_id, option_name) {
 	var BY_STYLE = {
 		tournament_overview: ['cfg', 'cbg', 'cbg3', 'cborder', 'cfg2'],
 		andre: ['court_id', 'cfg', 'cbg', 'cfg2'],
+		onlyplayers: ['court_id', 'c0', 'c1', 'cbg'],
+		onlyscore: ['court_id', 'c0', 'c1', 'cbg'],
 	};
 	var bs = BY_STYLE[style_id];
 	if (bs) {

@@ -590,3 +590,39 @@
 	background-size: contain;
 	background-image: url(../icons/shuttlecock.svg);
 }
+
+.d_half {
+	position: relative;
+	width: 100%;
+	height: 50vh;
+}
+
+
+.d_onlyplayers_player_container {
+	position: relative;
+	margin-left: 5%;
+	width: 95%;
+	display: flex;
+	align-items: center;
+}
+.d_onlyplayers_player {
+	white-space: pre;
+	width: 100%;
+	font-size: 12vh;
+	display: flex;
+	align-items: center;
+}
+
+.d_onlyscore_half {
+	position: relative;
+	width: 100%;
+	height: 50vh;
+	display: flex;
+	flex-direction: row;
+}
+.d_onlyscore_score {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 30vmin;
+}
