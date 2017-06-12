@@ -1,5 +1,3 @@
-display onlyscore
-	2-digits closer together
 half display clubplayers
 displaymode: cannot change colors in UI (gets reset!?)
 display: Team-Feld (variant of international) -> mail Heinz

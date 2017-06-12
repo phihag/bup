@@ -989,7 +989,17 @@ function render_onlyscore(s, container, event, court, match, colors) {
 					'border-right:' + (1 / max_game_count) + 'vw solid ' + colors.bg + ';'
 				),
 			});
-			uiu.el(score_container, 'span', {}, (current_score ? current_score[team_id] : ''));
+
+			var points_str = (current_score ? '' + current_score[team_id] : '');
+
+			if (points_str.length < 2) {
+				uiu.el(score_container, 'span', {}, points_str);
+			} else {
+				// Two digits, layout manually since we're extremely tight on space
+				utils.forEach(points_str, function(digit, digit_idx) {
+					uiu.el(score_container, 'div', 'd_onlyscore_digit' + digit_idx, digit);
+				});
+			}
 		}
 	});
 }
