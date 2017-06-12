@@ -594,7 +594,7 @@ function press_state_desc(s, press) {
 	case 'pick_side':
 		var left_team = pronunciation.teamtext_internal(s, press.team1_left ? 0 : 1);
 		var right_team = pronunciation.teamtext_internal(s, press.team1_left ? 1 : 0);
-		return s._('pressdesc:state:' + press.type, {
+		return s._('pressdesc|state:' + press.type, {
 			left_team: left_team,
 			right_team: right_team,
 		});
@@ -607,7 +607,7 @@ function press_state_desc(s, press) {
 			score: pronunciation.pronounce_score(s, undefined, undefined, false),
 		}) + '"';
 	case 'shuttle':
-		return s._('pressdesc:state:' + press.type, {
+		return s._('pressdesc|state:' + press.type, {
 			count: s.match.shuttle_count,
 		});
 	case 'timer_restart':
@@ -615,7 +615,7 @@ function press_state_desc(s, press) {
 	case 'correction':
 		var players = s.setup.teams[press.team_id].players;
 		var right_id = s.game.teams_player1_even[press.team_id] ? 0 : 1;
-		return s._('pressdesc:state:' + press.type, {
+		return s._('pressdesc|state:' + press.type, {
 			right_player: players[right_id].name,
 			left_player: players[1 - right_id].name,
 		});
@@ -638,19 +638,19 @@ function press_state_desc(s, press) {
 		}
 		return '';
 	case 'editmode_change-ends':
-		return s._('pressdesc:state:' + press.type, {
+		return s._('pressdesc|state:' + press.type, {
 			left_team: pronunciation.teamtext_internal(s, s.game.team1_left ? 0 : 1),
 			right_team: pronunciation.teamtext_internal(s, s.game.team1_left ? 1 : 0),
 		});
 	case 'editmode_change-serve':
-		return s._('pressdesc:state:' + press.type, {
+		return s._('pressdesc|state:' + press.type, {
 			player: calc.server(s).name,
 		});
 	case 'editmode_switch-sides':
 		var team_id = (s.game.team1_left == (press.side == 'left')) ? 0 : 1;
 		var team_players = s.setup.teams[team_id].players;
 		var right_player_id = s.game.teams_player1_even[team_id] ? 0 : 1;
-		return s._('pressdesc:state:' + press.type, {
+		return s._('pressdesc|state:' + press.type, {
 			left_player: team_players[1 - right_player_id].name,
 			right_player: team_players[right_player_id].name,
 		});
@@ -660,22 +660,22 @@ function press_state_desc(s, press) {
 	case 'pick_server':
 	case 'pick_receiver':
 	case 'injury':
-		return s._('pressdesc:state:' + press.type, {
+		return s._('pressdesc|state:' + press.type, {
 			player: s.setup.teams[press.team_id].players[press.player_id].name,
 		});
 	case 'yellow-card':
-		return s._('pressdesc:state:' + press.type, {
+		return s._('pressdesc|state:' + press.type, {
 			player: s.setup.teams[press.team_id].players[press.player_id].name,
 		});
 	case 'red-card':
-		return s._('pressdesc:state:' + press.type, {
+		return s._('pressdesc|state:' + press.type, {
 			player: s.setup.teams[press.team_id].players[press.player_id].name,
 			score_str: calc.score_str(s, s.game.team1_left ? 0 : 1),
 		});
 	case 'retired':
 	case 'disqualified':
 		var winner_id = 1 - press.team_id;
-		return s._('pressdesc:state:' + press.type, {
+		return s._('pressdesc|state:' + press.type, {
 			winner: pronunciation.teamtext_internal(s, winner_id),
 			score_str: calc.score_str(s, winner_id),
 		});
@@ -689,15 +689,15 @@ function press_state_desc(s, press) {
 function press_description(s, press) {
 	switch (press.type) {
 	case 'score':
-		return s._('pressdesc:score:' + press.side);
+		return s._('pressdesc|score:' + press.side);
 	case 'retired':
 	case 'disqualified':
-		return s._('pressdesc:' + press.type, {
+		return s._('pressdesc|' + press.type, {
 			player: s.setup.teams[press.team_id].players[press.player_id].name,
 		});
 	}
 
-	return s._('pressdesc:' + press.type, {}, '[' + press.type + ']');
+	return s._('pressdesc|' + press.type, {}, '[' + press.type + ']');
 }
 
 function render_presses(table, s, start_at) {
@@ -728,13 +728,13 @@ function render_presses(table, s, start_at) {
 		var desc = press_description(scopy, press);
 		var sdesc = '';
 		if (press.court_id) {
-			sdesc += s._('pressdesc:court_id', press);
+			sdesc += s._('pressdesc|court_id', press);
 		}
 		if (press.umpire_name) {
-			sdesc += s._('pressdesc:umpire_name', press);
+			sdesc += s._('pressdesc|umpire_name', press);
 		}
 		if (press.service_judge_name) {
-			sdesc += s._('pressdesc:service_judge_name', press);
+			sdesc += s._('pressdesc|service_judge_name', press);
 		}
 		sdesc += press_state_desc(scopy, press);
 
