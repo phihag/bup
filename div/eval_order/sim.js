@@ -44,7 +44,7 @@ function read_urls(cb) {
 		const lines = (
 			text.split(/\n/)
 			.map(line => line.trim())
-			.filter(line => ! /^(?:\#|$)/.test(line))
+			.filter(line => ! /^(?:#|$)/.test(line))
 		);
 
 		cb(null, lines);

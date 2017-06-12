@@ -415,7 +415,7 @@ function forEach(str, cb) {
 // Returns a value between 0 (extremely dark) and 1 (extremely bright)
 function brightness(rgb_str) {
 	// formula from https://www.w3.org/TR/AERT#color-contrast
-	var m = /^\#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/.exec(rgb_str);
+	var m = /^#([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/.exec(rgb_str);
 	if (!m) {
 		return; // undefined
 	}
@@ -428,7 +428,7 @@ function brightness(rgb_str) {
 }
 
 function parse_rgb(rgb_str) {
-	var m = /^\#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/.exec(rgb_str);
+	var m = /^#?([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{2})$/.exec(rgb_str);
 	if (!m) {
 		return; // undefined
 	}

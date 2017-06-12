@@ -1,6 +1,8 @@
 half display clubplayers
+logos in onlyplayers (if team and present)
 displaymode: cannot change colors in UI (gets reset!?)
 display: Team-Feld (variant of international) -> mail Heinz
+displaymode "Berlin": like courtspot vertical, but with border (red for finished green for server) -> BR 5/2017 S. 24
 
 https://aufschlagwechsel.de/bup/#setupsheet crashes!
 https://aufschlagwechsel.de/bup/#setupsheet crashes after import?
@@ -78,7 +80,6 @@ fix courtspot caching on android!?
 refmode: disable/enable pronouncing and other settings remotely
 order: construct a testcase where singles before doubles is advantageous
 
-displaymode "Berlin": like courtspot vertical, but with border (red for finished green for server) -> BR 5/2017 S. 24
 stats: use team colors if available (and distinct)
 edge Referee mode
 remove saving hall and other extra_data

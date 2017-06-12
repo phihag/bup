@@ -20,7 +20,7 @@ function render_page(svg, pdf) {
 
 		var mode = '';
 		if (style.fill != 'none') {
-			m = style.fill.match(/^rgb\(([0-9]+),\s*([0-9]+),\s*([0-9]+)\)|\#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/);
+			m = style.fill.match(/^rgb\(([0-9]+),\s*([0-9]+),\s*([0-9]+)\)|#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/);
 			var r = 0;
 			var g = 0;
 			var b = 0;
