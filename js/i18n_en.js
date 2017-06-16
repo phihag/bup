@@ -472,6 +472,7 @@ var i18n_en = {
 'displaymode|andre': 'André',
 'displaymode|onlyplayers': 'players only',
 'displaymode|onlyscore': 'score only',
+'displaymode|clubplayers': '',
 'displaymode|tournament_overview': 'tournament overview',
 'displaymode:court_id': 'court:',
 'displaymode:court_id:loading': 'loading ...',

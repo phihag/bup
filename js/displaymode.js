@@ -11,6 +11,7 @@ var ALL_STYLES = [
 	'andre',
 	'onlyplayers',
 	'onlyscore',
+	'clubplayers',
 ];
 var ALL_COLORS = ['c0', 'c1', 'cbg', 'cfg', 'cbg2', 'cbg3', 'cfg2', 'ct', 'cserv', 'crecv', 'cborder'];
 
@@ -936,6 +937,59 @@ function render_onlyplayers(s, container, event, court, match, colors) {
 			var style = (
 				'background: ' + colors.bg + ';' +
 				'color: ' + col + ';' +
+				'height: 100%;'
+			);
+
+			var player_container = uiu.el(team_container, 'div', {
+				'style': 'height: ' + (is_doubles ? '50%' : '100%') + ';',
+				'class': 'd_onlyplayers_player_container',
+			});
+			var pel = uiu.el(player_container, 'div', {
+				style: style,
+				'class': 'd_onlyplayers_player',
+			});
+			if (is_server) {
+				uiu.el(pel, 'div', 'd_shuttle');
+			}
+			return uiu.el(pel, 'div', {}, pname);
+		});
+
+		player_spans.forEach(function(ps) {
+			_setup_autosize(ps, null, function(parent_node) {
+				return parent_node.offsetHeight * 0.7 * (is_doubles ? 1 : 0.5);
+			});
+		});
+	});
+}
+
+function render_clubplayers(s, container, event, court, match, colors) {
+	var nscore = extract_netscore(match);
+	var is_doubles = match.setup.is_doubles;
+	var current_score = nscore[nscore.length - 1] || [];
+	var server = determine_server(match, current_score);
+	var mwinner = calc.match_winner(match.setup.counting, nscore);
+	var match_over = (mwinner === 'left') || (mwinner === 'right');
+
+	match.setup.teams.forEach(function(team, team_id) {
+		var col = colors[team_id];
+		var gwinner = calc.game_winner(match.setup.counting, nscore.length - 1, current_score[0], current_score[1]);
+		var team_serving = (
+			(gwinner === 'left') ? (team_id === 0) : (
+			(gwinner === 'right') ? (team_id === 1) : (
+			(server.team_id === team_id))));
+
+		var pnames = _player_names(team, is_doubles);
+
+		var team_container = uiu.el(container, 'div', {
+			'class': 'd_half',
+			style: 'background:' + colors.bg + ';',
+		});
+
+		var player_spans = pnames.map(function(pname, player_id) {
+			var is_server = (!match_over) && team_serving && (server.player_id === player_id);
+			var style = (
+				'background: ' + colors.bg + ';' +
+				'color: ' + col + ';' +
 				'height: ' + (is_doubles ? '100%' : '100%') + ';'
 			);
 
@@ -1250,6 +1304,7 @@ function update(err, s, event) {
 	var xfunc = {
 		andre: render_andre,
 		international: render_international,
+		clubplayers: render_clubplayers,
 		onlyplayers: render_onlyplayers,
 		onlyscore: render_onlyscore,
 	}[style];
@@ -1444,6 +1499,7 @@ function option_applies(style_id, option_name) {
 		andre: ['court_id', 'cfg', 'cbg', 'cfg2'],
 		onlyplayers: ['court_id', 'c0', 'c1', 'cbg'],
 		onlyscore: ['court_id', 'c0', 'c1', 'cbg'],
+		clubplayers: ['court_id', 'c0', 'c1', 'cbg'],
 	};
 	var bs = BY_STYLE[style_id];
 	if (bs) {

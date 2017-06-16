@@ -473,6 +473,7 @@ var i18n_de = {
 'displaymode|castall': 'Cast',
 'displaymode|onlyplayers': 'Nur Spieler',
 'displaymode|onlyscore': 'Nur Spielstand',
+'displaymode|clubplayers': 'Verein + Spieler',
 'displaymode:court_id': 'Court:',
 'displaymode:court_id:loading': 'lade ...',
 'displaymode:reverse_order': 'Umgekehrte Felder-Reihenfolge',
