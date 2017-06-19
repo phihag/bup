@@ -581,14 +581,20 @@
 	align-items: center;
 }
 
-.d_shuttle {
+.d_shuttle,
+.d_shuttle_after {
 	position: absolute;
-	left: -4vmin;
 	width: 4vmin;
 	height: 4vmin;
 	background-repeat: no-repeat;
 	background-size: contain;
 	background-image: url(../icons/shuttlecock.svg);
+}
+.d_shuttle {
+	left: -4vmin;
+}
+.d_shuttle_after {
+	right: -4.5vmin;
 }
 
 .d_half {
@@ -633,4 +639,12 @@
 .d_onlyscore_digit1 {
 	margin-left: -0.15ch;
 	margin-right: 0.15ch;
+}
+
+.d_clubplayerslr_player_container {
+	position: relative;
+	margin: 0 5%;
+	width: 90%;
+	display: flex;
+	align-items: center;
 }
