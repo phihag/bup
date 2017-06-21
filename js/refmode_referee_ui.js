@@ -710,6 +710,10 @@ function on_settings_change() {
 	}
 }
 
+function show_unsupported(err) {
+	throw err; // TODO: better display
+}
+
 function show() {
 	if (state.ui.referee_mode) {
 		return;
@@ -717,9 +721,14 @@ function show() {
 
 	delete state.event;
 
+	var err;
 	if (!rr) {
-		rr = refmode_referee(state, on_status_change, render_clients, render_event, key_storage);
-		rr.on_settings_change();
+		try {
+			rr = refmode_referee(state, on_status_change, render_clients, render_event, key_storage);
+			rr.on_settings_change();
+		} catch(e) {
+			err = e;
+		}
 	}
 
 	state.ui.referee_mode = true;
@@ -732,6 +741,11 @@ function show() {
 
 	uiu.addClass_qs('.settings_layout', 'settings_layout_refereemode');
 	uiu.visible_qs('.referee_layout', true);
+	if (err) {
+		show_unsupported(err);
+		return;
+	}
+
 	render_clients([]);
 	render_event(state);
 }
