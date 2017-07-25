@@ -1,5 +1,5 @@
-var fullscreen = (function() {
 'use strict';
+var fullscreen = (function() {
 
 function supported() {
 	return !!(

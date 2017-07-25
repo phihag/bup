@@ -1,6 +1,6 @@
 .click_button {
 	/* Remove delay after tapping */
-	touch-action: manipulation;
+	touch-action: none;
 }
 
 .click_active {

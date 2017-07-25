@@ -1,9 +1,15 @@
+add support for NLA
+	https://www.swiss-badminton.ch/page/32941/Reglemente
+	15 minutes pause between matches (2.11.1)
+set passive: false https://developers.google.com/web/updates/2017/01/scrolling-intervention
 referee w/ safari: show nice error message
+safari: switch to RSA-OAEP?
 logos in onlyplayers (if team and present)
 displaymode: cannot change colors in UI (gets reset!?)
 display: Team-Feld (variant of international) -> mail Heinz
 displaymode "Berlin": like courtspot vertical, but with border (red for finished green for server) -> BR 5/2017 S. 24
 
+link to update in settings
 https://aufschlagwechsel.de/bup/#setupsheet crashes!
 https://aufschlagwechsel.de/bup/#setupsheet crashes after import?
 transmit to turnier.de
@@ -14,7 +20,7 @@ redesign fullscreen interface
 	automatically if going out of fullscreen (for example turning off A88X tablets)
 increase bottom spacing on court
 test displays in demos / btde
-prevent accidental shuttle setting / unsetting (conflicts with fullscreen buttony)
+prevent accidental shuttle setting / unsetting (conflicts with fullscreen button)
 display Moritz: prior games in detail between names
 Peeter Staats -> accidental scrolling (make simple mode that only shows umpire stuff)
 disable double-touch timeout if two very fast touches
@@ -30,6 +36,7 @@ displaymode: make cursor vanish after a while
 settings: remove duplication of color names
 displaymode: remove checks if (! event.courts) { in renderers
 
+support para rules
 Keike: court too large
 displaymode/international and others: courtspot empty shows server
 group "Wettkampf importieren" under manual match start
@@ -49,6 +56,7 @@ eventsheet error does not get deleted
 displaymode: use includes in option_applies?
 reduce double touch time if frequent fast touches?
 
+referee: authenticate clients
 displaymode: make all colors configurable (including winning and vs in tournament_overview)
 grep for uiu.el(..{'class': ''}) and use newer form
 courtspot-like displays

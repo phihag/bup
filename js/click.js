@@ -10,7 +10,6 @@ function on_click(node, callback) {
 			return;
 		}
 
-		e.preventDefault();
 		if (node.getAttribute('disabled')) {
 			return;
 		}
@@ -25,8 +24,13 @@ function on_click(node, callback) {
 		}, 250);
 
 		callback(e);
-	}, false);
+	}, {
+		passive: true,
+	});
 	node.addEventListener('touchend', function(e) {
+		if (mode === 'touchstart') {
+			e.preventDefault(); // Make sure click is not called
+		}
 		if (mode !== 'touchend') {
 			return;
 		}
@@ -34,7 +38,9 @@ function on_click(node, callback) {
 		uiu.removeClass(node, 'click_active');
 		e.preventDefault();
 		callback(e);
-	}, false);
+	}, {
+		passive: false,
+	});
 	node.addEventListener('click', function(e) {
 		e.preventDefault();
 		callback(e);

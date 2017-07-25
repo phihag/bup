@@ -19,7 +19,6 @@
     "eslint": "*",
     "fs-walk": "*",
     "istanbul": "*",
-    "jshint": "*",
     "mocha": "*",
     "node-webcrypto-ossl": "*",
     "parse-appcache-manifest": "*",
