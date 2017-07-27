@@ -1,7 +1,3 @@
-add support for NLA
-	scoresheets and other metadata
-	https://www.swiss-badminton.ch/page/32941/Reglemente
-	15 minutes pause between matches (2.11.1)
 referee w/ safari: show nice error message
 safari: switch to RSA-OAEP?
 logos in onlyplayers (if team and present)
@@ -781,3 +777,12 @@ event analysis: which presses before undo
 remove calls to prompt and alert
 render in transparent windows -> Dieter Gläßer
 drucken wie BTP als Server (alles|bei Problemen|nie)
+
+blocked:
+add support for NLA
+	scoresheets
+	eventsheets
+	team sheets
+	ranking lists?
+	check 15 minutes pause between matches (2.11.1)
+	check demo

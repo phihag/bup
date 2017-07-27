@@ -625,5 +625,9 @@ _describe('eventutils', function() {
 		assert.deepStrictEqual(bup.eventutils.default_counting('2BLS-2017'), '5x11_15^90');
 		assert.deepStrictEqual(bup.eventutils.default_counting('NLA-2017'), '3x21');
 	});
+
+	_it('get_min_pause', function() {
+		assert.deepStrictEqual(bup.eventutils.get_min_pause('NLA-2017'), 900000);
+	});
 });
 

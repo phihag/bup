@@ -309,7 +309,7 @@ function setups_eq(e1, e2) {
 }
 
 function get_min_pause(league_key) {
-	if (/^(?:1BL|2BLN|2BLS)-(?:2015|2016)$/.test(league_key)) {
+	if (/^(?:1BL|2BLN|2BLS)-(?:2015|2016|2017)$/.test(league_key)) {
 		return 20 * 60000; // §10.1 BLO-DB
 	}
 	if ((league_key === 'RLW-2016') || (NRW2016_RE.test(league_key))) {
@@ -317,6 +317,9 @@ function get_min_pause(league_key) {
 	}
 	if (league_key === 'RLN-2016') {
 		return 20 * 60000; // §7.7 Gruppe Nord
+	}
+	if (league_key === 'NLA-2017') {
+		return 15 * 60000; // §2.11.1 https://www.swiss-badminton.ch/file/727622/?dl=1
 	}
 	return undefined;
 }
@@ -461,6 +464,7 @@ return {
 	default_counting: default_counting,
 	// Testing only
 	name_by_league: name_by_league,
+	get_min_pause: get_min_pause,
 };
 
 })();
