@@ -1,5 +1,5 @@
-var eventsheet = (function() {
 'use strict';
+var eventsheet = (function() {
 
 var SHEETS_BY_LEAGUE = {
 	'1BL-2015': ['1BL-2015', 'team-1BL-2015'],
@@ -12,6 +12,7 @@ var SHEETS_BY_LEAGUE = {
 	'RLW-2016': ['RLW-2016', 'NRW-Satzungen-2016'],
 	'RLN-2016': ['RLN-2016', 'RLN-Satzungen-2016'],
 	'RLM-2016': ['RLM-2016', 'RLM-SpO-2015'],
+	'NLA-2017': [],
 };
 
 var URLS = {

@@ -10,10 +10,14 @@ _describe('eventutils', function() {
 	_it('name_by_league', function() {
 		assert.strictEqual(bup.eventutils.name_by_league('1BL-2015'), '1. Bundesliga');
 		assert.strictEqual(bup.eventutils.name_by_league('1BL-2016'), '1. Bundesliga');
+		assert.strictEqual(bup.eventutils.name_by_league('1BL-2017'), '1. Bundesliga');
 		assert.strictEqual(bup.eventutils.name_by_league('2BLN-2015'), '2. Bundesliga Nord');
 		assert.strictEqual(bup.eventutils.name_by_league('2BLN-2016'), '2. Bundesliga Nord');
+		assert.strictEqual(bup.eventutils.name_by_league('2BLN-2017'), '2. Bundesliga Nord');
 		assert.strictEqual(bup.eventutils.name_by_league('2BLS-2015'), '2. Bundesliga Süd');
 		assert.strictEqual(bup.eventutils.name_by_league('2BLS-2016'), '2. Bundesliga Süd');
+		assert.strictEqual(bup.eventutils.name_by_league('2BLS-2017'), '2. Bundesliga Süd');
+		assert.strictEqual(bup.eventutils.name_by_league('NLA-2017'), 'NLA');
 		assert.strictEqual(bup.eventutils.name_by_league('RLN-2016'), 'Regionalliga Nord');
 		assert.strictEqual(bup.eventutils.name_by_league('RLW-2016'), 'Regionalliga West (001)');
 		assert.strictEqual(bup.eventutils.name_by_league('NRW-O19-RL-001-2016'), 'Regionalliga West (001)');
@@ -613,6 +617,13 @@ _describe('eventutils', function() {
 		match_states.forEach(function(ms) {
 			assert.deepStrictEqual(ms.not_before, undefined);
 		});
+	});
+
+	_it('default_counting', function() {
+		assert.deepStrictEqual(bup.eventutils.default_counting('1BL-2016'), '5x11_15');
+		assert.deepStrictEqual(bup.eventutils.default_counting('1BL-2017'), '5x11_15^90');
+		assert.deepStrictEqual(bup.eventutils.default_counting('2BLS-2017'), '5x11_15^90');
+		assert.deepStrictEqual(bup.eventutils.default_counting('NLA-2017'), '3x21');
 	});
 });
 

@@ -197,13 +197,13 @@ function annotate(s, event) {
 
 var NRW2016_RE = /^NRW-(O19)-(?:(?:([NS])([12]))-)?([A-Z]{2})-([0-9]{3})-2016$/;
 function name_by_league(league_key) {
-	if (/^1BL-(?:2015|2016)$/.test(league_key)) {
+	if (/^1BL-(?:2015|2016|2017)$/.test(league_key)) {
 		return '1. Bundesliga';
 	}
-	if (/^2BLN-(?:2015|2016)$/.test(league_key)) {
+	if (/^2BLN-(?:2015|2016|2017)$/.test(league_key)) {
 		return '2. Bundesliga Nord';
 	}
-	if (/^2BLS-(?:2015|2016)$/.test(league_key)) {
+	if (/^2BLS-(?:2015|2016|2017)$/.test(league_key)) {
 		return '2. Bundesliga Süd';
 	}
 	if (league_key === 'RLN-2016') {
@@ -211,6 +211,9 @@ function name_by_league(league_key) {
 	}
 	if (league_key === 'RLM-2016') {
 		return 'Regionalliga Mitte';
+	}
+	if (league_key === 'NLA-2017') {
+		return 'NLA';
 	}
 	if (league_key === 'RLW-2016') {
 		league_key = 'NRW-O19-RL-001-2016';
@@ -407,6 +410,9 @@ function default_counting(league_key) {
 	}
 	if (/^(?:1BL|2BLN|2BLS)-2017$/.test(league_key)) {
 		return '5x11_15^90';
+	}
+	if (league_key === 'NLA-2017') {
+		return '3x21';
 	}
 }
 
