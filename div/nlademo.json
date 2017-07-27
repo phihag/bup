@@ -1,0 +1,222 @@
+{
+  "type": "bup-export",
+  "version": 2,
+  "event": {
+    "staticnet_message": "NLA-Demo (nur lokal)",
+    "courts": [{
+      "court_id": 1,
+      "description": "1 (links)",
+      "match_id": "nlademo_HD1"
+    }, {
+      "court_id": 2,
+      "description": "2 (rechts)",
+      "match_id": "nlademo_DD"
+    }],
+    "matches": [
+      {
+        "setup": {
+          "match_name": "1.HD",
+          "teams": [
+            {
+              "players": [
+                {"name": "Nikita Khakimov"},
+                {"name": "Hafiz Shaharudin"}
+              ]
+            },
+            {
+              "players": [
+                {"name": "Iztok Utrosa"},
+                {"name": "Christian Bösiger"}
+              ]
+            }
+          ],
+          "is_doubles": true,
+          "match_id": "nlademo_HD1" 
+        }
+      },
+      {
+        "setup": {
+          "match_name": "2.HD",
+          "teams": [
+            {
+              "players": [
+                {"name": "Pedro Martins"},
+                {"name": "Joel König"}
+              ]
+            },
+            {
+              "players": [
+                {"name": "Stiliyan Makarski"},
+                {"name": "Ramon Kropf"}
+              ]
+            }
+          ],
+          "is_doubles": true,
+          "match_id": "nlademo_HD2" 
+        }
+      },
+      {
+        "setup": {
+          "match_name": "DD",
+          "teams": [
+            {
+              "players": [
+                {"name": "Ronja Stern"},
+                {"name": "Lea Müller"}
+              ]
+            },
+            {
+              "players": [
+                {"name": "Cendrine Hantz"},
+                {"name": "Tenzin Pelling"}
+              ]
+            }
+          ],
+
+          "is_doubles": true,
+          "match_id": "nlademo_DD"
+        }
+      },
+      {
+        "setup": {
+          "match_name": "DE",
+          "teams": [
+            {
+              "players": [
+                {"name": "Ronja Stern"}
+              ]
+            },
+            {
+              "players": [
+                {"name": "Cendrine Hantz"}
+              ]
+            }
+          ],
+          "is_doubles": false,
+          "match_id": "nlademo_DE"
+        }
+      },
+      {
+        "setup": {
+          "match_name": "GD",
+          "teams": [
+            {
+              "players": [
+                {"name": "Nikita Khakimov"},
+                {"name": "Lea Müller"}
+              ]
+            },
+            {
+              "players": [
+                {"name": "Nicolas Blondel"},
+                {"name": "Tenzin Pelling"}
+              ]
+            }
+          ],
+          "is_doubles": true,
+          "match_id": "nlademo_GD"
+        }
+      },
+      {
+        "setup": {
+          "match_name": "1.HE",
+          "teams": [
+            {
+              "players": [
+                {"name": "Hafiz Shaharudin"}
+              ]
+            },
+            {
+              "players": [
+                {"name": "Iztok Utrosa"}
+              ]
+            }
+          ],
+          "is_doubles": false,
+          "match_id": "nlademo_HE1"
+        }
+      },
+      {
+        "setup": {
+          "match_name": "2.HE",
+          "teams": [
+            {
+              "players": [
+                {"name": "Pedro Martins"}
+              ]
+            },
+            {
+              "players": [
+                {"name": "Nicolas Blondel"}
+              ]
+            }
+          ],
+          "is_doubles": false,
+          "match_id": "nlademo_HE2"
+        }
+      },
+      {
+        "setup": {
+          "match_name": "3.HE",
+          "teams": [
+            {
+              "players": [
+                {"name": "Joel König"}
+              ]
+            },
+            {
+              "players": [
+                {"name": "Christian Bösiger"}
+              ]
+            }
+          ],
+          "is_doubles": false,
+          "match_id": "nlademo_HE3"
+        }
+      }
+    ],
+    "id": "nlademo",
+    "event_name": "Team Argovia - BC Uzwil (Demo)",
+    "tournament_name": "Demo",
+    "team_names": ["Team Argovia", "BC Uzwil"],
+    "location": "Mehrzweckhalle Brüel",
+    "protest": "Coaching-Stühle zu gemütlich",
+    "umpires": "Ivo Kassel & Arnaud Verdon",
+    "starttime": "18:00",
+    "matchday": "1",
+    "notes": "",
+    "backup_players": [[
+      {"gender": "m", "name": "Tobias Künzi", "ranking": 4, "ranking_d": 5}
+    ], [
+      {"gender": "m", "name": "Julien Scheiwiller", "ranking": 7},
+      {"gender": "f", "name": "Aline Müller"}
+    ]],
+    "all_players": [
+      [
+        {"gender": "m", "name": "Hafiz Shaharudin", "ranking": 1, "ranking_d": 2},
+        {"gender": "m", "name": "Pedro Martins", "ranking": 2, "ranking_d": 3},
+        {"gender": "m", "name": "Joel König", "ranking": 3, "ranking_d": 4},
+        {"gender": "m", "name": "Tobias Künzi", "ranking": 4, "ranking_d": 5},
+        {"gender": "m", "name": "Nikita Khakimov", "ranking": 5, "ranking_d": 1},
+        {"gender": "f", "name": "Lea Müller"},
+        {"gender": "f", "name": "Ronja Stern"}
+      ],
+      [
+        {"gender": "m", "name": "Iztok Utrosa", "ranking": 1, "nationality": "SVN"},
+        {"gender": "m", "name": "Nicolas Blondel", "ranking": 2},
+        {"gender": "m", "name": "Stiliyan Makarski", "ranking": 3, "nationality": "BGR"},
+        {"gender": "m", "name": "Christian Bösiger", "ranking": 4},
+        {"gender": "m", "name": "Ramon Kropf", "ranking": 5},
+        {"gender": "m", "name": "Artem Pochtarev", "ranking": 6, "nationality": "UKR"},
+        {"gender": "m", "name": "Julien Scheiwiller", "ranking": 7},
+        {"gender": "f", "name": "Cendrine Hantz"},
+        {"gender": "f", "name": "Sereina Hofstetter"},
+        {"gender": "f", "name": "Diana Makarska", "nationality": "BGR"},
+        {"gender": "f", "name": "Aline Müller"},
+        {"gender": "f", "name": "Tenzin Pelling"}
+      ]
+    ],
+    "league_key": "NLA-2017",
+    "team_competition": true
+  }
+}

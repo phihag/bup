@@ -1,7 +1,6 @@
 add support for NLA
 	https://www.swiss-badminton.ch/page/32941/Reglemente
 	15 minutes pause between matches (2.11.1)
-set passive: false https://developers.google.com/web/updates/2017/01/scrolling-intervention
 referee w/ safari: show nice error message
 safari: switch to RSA-OAEP?
 logos in onlyplayers (if team and present)

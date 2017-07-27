@@ -19,7 +19,8 @@ div/edemo.json
 div/vdemo.json
 div/bldemo.json
 div/bldemo_inprogress.json
-# bldemo_incomplete.json is only for development, do not include
+div/bldemo_incomplete.json
+div/nlademo.json
 div/nrwdemo.json
 div/rlmdemo.json
 div/tdemo.json

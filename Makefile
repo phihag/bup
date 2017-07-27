@@ -54,6 +54,7 @@ dist: cleandist ## Create distribution files
 	node div/minify_json.js div/bldemo.json dist/bup/div/bldemo.json
 	node div/minify_json.js div/bldemo_inprogress.json dist/bup/div/bldemo_inprogress.json
 	node div/minify_json.js div/bldemo_incomplete.json dist/bup/div/bldemo_incomplete.json
+	node div/minify_json.js div/nlademo.json dist/bup/div/nlademo.json
 	node div/minify_json.js div/nrwdemo.json dist/bup/div/nrwdemo.json
 	node div/minify_json.js div/tdemo.json dist/bup/div/tdemo.json
 	node div/minify_json.js div/rlmdemo.json dist/bup/div/rlmdemo.json
