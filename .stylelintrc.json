@@ -4,8 +4,6 @@
     "indentation": "tab",
     "max-empty-lines": 2,
     "declaration-empty-line-before": null,
-    "rule-nested-empty-line-before": null,
-    "rule-non-nested-empty-line-before": null,
     "at-rule-empty-line-before": null,
     "shorthand-property-no-redundant-values": null,
     "declaration-block-no-duplicate-properties": null,
