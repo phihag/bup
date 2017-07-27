@@ -919,18 +919,18 @@ function sheet_name(setup) {
 function event_render(container) {
 	state.event.matches.forEach(function(match) {
 		load_sheet(sheet_name(match.setup), function(xml) {
-			var svg = make_sheet_node(s, xml);
-			svg.setAttribute('class', 'scoresheet multi_scoresheet');
-			container.appendChild(svg);
-
 			var s = {
 				settings: state.settings,
 				_: state._,
 				lang: state.lang,
 			};
+
+			var svg = make_sheet_node(s, xml);
+			svg.setAttribute('class', 'scoresheet multi_scoresheet');
+			container.appendChild(svg);
+
 			calc.init_state(s, match.setup, network.get_presses(match));
 			calc.state(s);
-			state.new_s = s;
 
 			sheet_render(s, svg);
 		});
