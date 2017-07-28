@@ -4,6 +4,7 @@ var displaymode = (function() {
 var ALL_STYLES = [
 	'oncourt',
 	'international',
+	'teamcourt',
 	'2court',
 	'top+list',
 	'castall',
@@ -872,6 +873,78 @@ function render_international(s, container, event, court, match, colors) {
 	});
 }
 
+function render_teamcourt(s, container, event, court, match, colors) {
+	var nscore = extract_netscore(match);
+	var gscore = _gamescore_from_netscore(nscore, match.setup);
+	var is_doubles = match.setup.is_doubles;
+	var pcount = is_doubles ? 2 : 1;
+	var current_score = nscore[nscore.length - 1] || [];
+	var server = determine_server(match, current_score);
+	var first_game = (nscore.length < 2);
+	var mwinner = calc.match_winner(match.setup.counting, nscore);
+	var match_over = (mwinner === 'left') || (mwinner === 'right');
+
+	match.setup.teams.forEach(function(team, team_id) {
+		var col = colors[team_id];
+		var gwinner = calc.game_winner(match.setup.counting, nscore.length - 1, current_score[0], current_score[1]);
+		var team_serving = (
+			(gwinner === 'left') ? (team_id === 0) : (
+			(gwinner === 'right') ? (team_id === 1) : (
+			(server.team_id === team_id))));
+
+		var player_names = team.players.map(function(player) {
+			return player.name;
+		});
+		while (player_names.length < pcount) {
+			player_names.push('');
+		}
+
+		var team_container = uiu.el(container, 'div', 'd_international_team');
+		var player_spans = player_names.map(function(pname, player_id) {
+			var is_server = (!match_over) && team_serving && (server.player_id === player_id);
+			var style = (
+				'background: ' + (is_server ? col : colors.bg) + ';' +
+				'color: ' + (is_server ? colors.bg : col) + ';' +
+				'height: ' + (is_doubles ? '100%' : '50%') + ';'
+			);
+
+			var player_container = uiu.el(team_container, 'div', {
+				'style': 'height: ' + (is_doubles ? '50%' : '100%') + ';',
+				'class': 'd_international_player_container',
+			});
+			var pel = uiu.el(player_container, 'div', {
+				style: style,
+				'class': 'd_international_player',
+			});
+			return uiu.el(pel, 'div', {}, pname);
+		});
+
+		var right_border;
+		if (! first_game) {
+			right_border = uiu.el(team_container, 'div', {
+				'class': 'd_international_gscore',
+				style: 'background: ' + colors.bg + '; color: ' + colors.fg + ';',
+			}, gscore[team_id]);
+		}
+
+		var points = current_score[team_id];
+		var points_el = uiu.el(team_container, 'div', {
+			'class': 'd_international_score' + ((points >= 10) ? ' d_international_score_dd' : ''),
+			style: 'background: ' + (team_serving ? col : colors.bg) + '; color: ' + (team_serving ? colors.bg : col),
+		}, points);
+		if (!right_border) {
+			right_border = points_el;
+		}
+
+		player_spans.forEach(function(ps) {
+			_setup_autosize(ps, right_border, function(parent_node) {
+				return parent_node.offsetHeight * 0.5;
+			});
+		});
+	});
+}
+
+
 function _render_court(s, container, event) {
 	if (!event.courts) {
 		uiu.el(container, 'div', {
@@ -937,7 +1010,7 @@ function render_onlyplayers(s, container, event, court, match, colors) {
 		});
 
 		if (logo_urls) {
-			var logo_container = uiu.el(team_container, 'div', {
+			uiu.el(team_container, 'div', {
 				style: (
 					'width:20%;height:100%;float:left;margin-right:5%;' +
 					'background: no-repeat url("' + logo_urls[team_id] + '") center center;'
@@ -1425,6 +1498,7 @@ function update(err, s, event) {
 		clubplayers: render_clubplayers,
 		clubplayerslr: render_clubplayerslr,
 		onlyscore: render_onlyscore,
+		teamcourt: render_teamcourt,
 	}[style];
 	if (xfunc) {
 		var court = _render_court(s, container, event);
@@ -1619,6 +1693,9 @@ function option_applies(style_id, option_name) {
 		onlyscore: ['court_id', 'c0', 'c1', 'cbg'],
 		clubplayers: ['court_id', 'c0', 'c1', 'cbg'],
 		clubplayerslr: ['court_id', 'c0', 'c1', 'cbg'],
+		international: ['court_id', 'c0', 'c1', 'cfg', 'cbg'],
+		teamcourt: ['court_id', 'c0', 'c1', 'cfg', 'cbg'],
+		oncourt: ['court_id'],
 	};
 	var bs = BY_STYLE[style_id];
 	if (bs) {
@@ -1631,7 +1708,6 @@ function option_applies(style_id, option_name) {
 	case 'cfg':
 	case 'cbg':
 		return (
-			(style_id === 'international') ||
 			(style_id === '2court') ||
 			(style_id === 'castall'));
 	case 'cbg2':
@@ -1639,9 +1715,6 @@ function option_applies(style_id, option_name) {
 	case 'cserv':
 	case 'crecv':
 		return (style_id === 'castall');
-
-	case 'court_id':
-		return (style_id === 'oncourt') || (style_id === 'international');
 	case 'reverse_order':
 		return (style_id === 'top+list') || (style_id === '2court') || (style_id === 'castall');
 	case 'scale':

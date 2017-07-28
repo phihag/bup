@@ -467,6 +467,7 @@ var i18n_de = {
 'displaymode|top+list': 'Aktuell/Liste',
 'displaymode|oncourt': 'Feld-Punktzahl',
 'displaymode|international': 'International',
+'displaymode|teamcourt': 'Mannschaftskampf',
 'displaymode|2court': '2 Felder',
 'displaymode|andre': 'André',
 'displaymode|tournament_overview': 'Turnier-Übersicht',
