@@ -17,12 +17,41 @@ var TEAM_COLORS = {
 	'Bischmisheim': '#1e3a8e',
 	'Düren': '#c81f1a',
 };
+var LOGOS = [
+	'bcbeuel',
+	'bcbsaarbruecken',
+	'bcwipperfeld',
+	'bvgifhorn',
+	'ebtberlin',
+	'funballdortelweil',
+	'sganspach',
+	'sgschorndorf',
+	'stcblauweisssolingen',
+	'tsvfreystadt',
+	'tsvneubibergottobrunn',
+	'tsvneuhausen',
+	'tsvtrittau',
+	'tuswiebelskirchen',
+	'tvdillingen',
+	'tvemsdetten',
+	'tvrefrath',
+	'unionluedinghausen',
+	'vfbfriedrichshafen',
+	'wittorfneumuenster',
+];
 
 function get_color(team_name) {
 	for (var keyword in TEAM_COLORS) {
 		if (team_name.includes(keyword)) {
 			return TEAM_COLORS[keyword];
 		}
+	}
+}
+
+function team_logo(team_name) {
+	var clean_name = team_name.toLowerCase().replace(/[^a-z]/g, '');
+	if (LOGOS.includes(clean_name)) {
+		return 'div/logos/' + clean_name + '.svg';
 	}
 }
 
@@ -57,6 +86,17 @@ function abbrevs(event) {
 	return event.team_names.map(calc_abbrev);
 }
 
+// Returns an array if at least one logo is present
+function team_logos(event) {
+	if (event.team_names) {
+		var logo_urls = event.team_names.map(team_logo);
+		if (utils.any(logo_urls)) {
+			return logo_urls;
+		}
+	}
+	// return undefined
+}
+
 function logo_url(event) {
 	if (eventutils.is_bundesliga(event.league_key)) {
 		return 'div/bundesliga-logo.svg';
@@ -65,8 +105,9 @@ function logo_url(event) {
 
 return {
 	abbrevs: abbrevs,
-	logo_url: logo_url,
+	logo_url: logo_url, // Of an event
 	get_color: get_color,
+	team_logos: team_logos,
 };
 
 })();
@@ -76,5 +117,6 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	module.exports = extradata;
 
 	var eventutils = require('./eventutils');
+	var utils = require('./utils');
 }
 /*/@DEV*/

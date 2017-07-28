@@ -917,6 +917,7 @@ function render_onlyplayers(s, container, event, court, match, colors) {
 	var server = determine_server(match, current_score);
 	var mwinner = calc.match_winner(match.setup.counting, nscore);
 	var match_over = (mwinner === 'left') || (mwinner === 'right');
+	var logo_urls = extradata.team_logos(event);
 
 	match.setup.teams.forEach(function(team, team_id) {
 		var col = colors[team_id];
@@ -930,8 +931,19 @@ function render_onlyplayers(s, container, event, court, match, colors) {
 
 		var team_container = uiu.el(container, 'div', {
 			'class': 'd_half',
-			style: 'background:' + colors.bg + ';',
+			style: (
+				'background:' + colors.bg + ';'
+			),
 		});
+
+		if (logo_urls) {
+			var logo_container = uiu.el(team_container, 'div', {
+				style: (
+					'width:20%;height:100%;float:left;margin-right:5%;' +
+					'background: no-repeat url("' + logo_urls[team_id] + '") center center;'
+				),
+			});
+		}
 
 		var player_spans = pnames.map(function(pname, player_id) {
 			var is_server = (!match_over) && team_serving && (server.player_id === player_id);
@@ -942,7 +954,10 @@ function render_onlyplayers(s, container, event, court, match, colors) {
 			);
 
 			var player_container = uiu.el(team_container, 'div', {
-				'style': 'height: ' + (is_doubles ? '50%' : '100%') + ';',
+				'style': (
+					'height: ' + (is_doubles ? '50%' : '100%') + ';' +
+					'width:' + (logo_urls ? 70 : 95) + '%'
+				),
 				'class': 'd_onlyplayers_player_container',
 			});
 			var pel = uiu.el(player_container, 'div', {

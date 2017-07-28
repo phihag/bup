@@ -1,9 +1,7 @@
-referee w/ safari: show nice error message
-safari: switch to RSA-OAEP?
-logos in onlyplayers (if team and present)
 displaymode: cannot change colors in UI (gets reset!?)
 display: Team-Feld (variant of international) -> mail Heinz
 displaymode "Berlin": like courtspot vertical, but with border (red for finished green for server) -> BR 5/2017 S. 24
+style Anaheim
 
 link to update in settings
 https://aufschlagwechsel.de/bup/#setupsheet crashes!
@@ -778,7 +776,7 @@ remove calls to prompt and alert
 render in transparent windows -> Dieter Gläßer
 drucken wie BTP als Server (alles|bei Problemen|nie)
 
-blocked:
+======= blocked =======
 add support for NLA
 	scoresheets
 	eventsheets
@@ -786,3 +784,5 @@ add support for NLA
 	ranking lists?
 	check 15 minutes pause between matches (2.11.1)
 	check demo
+referee w/ safari: show nice error message
+safari: switch to RSA-OAEP?

@@ -607,7 +607,6 @@
 .d_onlyplayers_player_container {
 	position: relative;
 	margin-left: 5%;
-	width: 95%;
 	display: flex;
 	align-items: center;
 }
