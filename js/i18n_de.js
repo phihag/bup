@@ -143,16 +143,6 @@ var i18n_de = {
 'demo:event_name': 'BCB - BCB (Demo)',
 'demo:tournament_name': 'Demo',
 
-'servedemo:team1': 'Team A',
-'servedemo:player1.1': 'Alice',
-'servedemo:player1.2': 'Alex',
-'servedemo:team2': 'Team B',
-'servedemo:player2.1': 'Bob',
-'servedemo:player2.2': 'Bella',
-'servedemo:match_name': 'Aufschlagswechsel-Demo',
-'servedemo:event_name': 'Aufschlagswechsel-Demo',
-'servedemo:tournament_name': 'Demo',
-
 'loveall_play': 'Bitte spielen.',
 'loveall_play.0': '{score}.\nBitte spielen.',
 'loveall_play.1': 'Zweiter Satz. {score}.\nBitte spielen.',
