@@ -1312,8 +1312,7 @@ function download(es_key, callback) {
 
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET', url, true);
-	var is_binary = true;
-	xhr.responseType = is_binary ? 'arraybuffer' : 'text';
+	xhr.responseType = 'arraybuffer';
 
 	xhr.onload = function() {
 		var ui8r = new Uint8Array(this.response);
