@@ -21,7 +21,6 @@ function autosize_once(task, deferred) {
 		});
 	}
 	var desired = task.desired_func(el);
-
 	var current_width = el.offsetWidth;
 	var current_height = el.offsetHeight;
 	var m = /^([0-9.]+)(\s*px)$/.exec(current_style);

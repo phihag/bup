@@ -1,5 +1,5 @@
-var control = (function() {
 'use strict';
+var control = (function() {
 
 function demo_match_start(setup) {
 	if (! setup) {
