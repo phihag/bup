@@ -1425,11 +1425,8 @@ function update(err, s, event) {
 	uiu.remove_qsa('.display_loading,.display_error', container);
 
 	var style = s.settings.displaymode_style;
-
-	if ((err && (err.errtype === 'loading')) || !event) {
-		uiu.el(container, 'div', {
-			'class': 'display_loading',
-		});
+	if (err && (err.errtype === 'loading')) {
+		uiu.el(container, 'div', 'display_loading');
 		return;
 	}
 

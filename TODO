@@ -1,7 +1,11 @@
+display: fix error message if no net
+demo&display should work!!!
+move all demo files to div/demos/ (and correctly generate them in makefile)
+
+d/teamcourt: show match name (gray, middle)
 displaymode "Berlin": like courtspot vertical, but with border (red for finished green for server) -> BR 5/2017 S. 24
 dstyle Anaheim
 
-demo&display should work!!!
 link to update in settings
 displaymode: cannot change colors in UI (gets reset!?)
 https://aufschlagwechsel.de/bup/#setupsheet crashes!
@@ -19,7 +23,6 @@ display Moritz: prior games in detail between names
 Peeter Staats -> accidental scrolling (make simple mode that only shows umpire stuff)
 disable double-touch timeout if two very fast touches
 
-mid: show match time
 show button once out of fullscreen
 test calc.players_present
 	yellow/red/black cards
@@ -82,6 +85,7 @@ fix courtspot caching on android!?
 refmode: disable/enable pronouncing and other settings remotely
 order: construct a testcase where singles before doubles is advantageous
 
+displaymode/André: show match time in mid
 stats: use team colors if available (and distinct)
 edge Referee mode
 remove saving hall and other extra_data
