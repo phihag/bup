@@ -1,11 +1,12 @@
-display: fix error message if no net
-demo&display should work!!!
-move all demo files to div/demos/ (and correctly generate them in makefile)
-
-d/teamcourt: show match name (gray, middle)
+dads!
 displaymode "Berlin": like courtspot vertical, but with border (red for finished green for server) -> BR 5/2017 S. 24
 dstyle Anaheim
 
+useful tracebacks!
+	generate source map
+	parse source map
+move all demo files to div/demos/ (and correctly generate them in makefile)
+demo&display should work!!!
 link to update in settings
 displaymode: cannot change colors in UI (gets reset!?)
 https://aufschlagwechsel.de/bup/#setupsheet crashes!

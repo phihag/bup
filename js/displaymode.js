@@ -7,6 +7,7 @@ var ALL_STYLES = [
 	'teamcourt',
 	'2court',
 	'top+list',
+	'tim',
 	'onlyplayers',
 	'clubplayers',
 	'clubplayerslr',
@@ -15,7 +16,7 @@ var ALL_STYLES = [
 	'tournament_overview',
 	'andre',
 ];
-var ALL_COLORS = ['c0', 'c1', 'cbg', 'cfg', 'cbg2', 'cbg3', 'cfg2', 'ct', 'cserv', 'crecv', 'cborder'];
+var ALL_COLORS = ['c0', 'c1', 'cbg', 'cfg', 'cbg2', 'cbg3', 'cfg2', 'ct', 'cserv', 'crecv', 'cborder', 'ctim_blue', 'ctim_active'];
 
 function _setup_autosize(el, right_node, determine_height) {
 	autosize.maintain(el, function() {
@@ -64,6 +65,18 @@ function _doubles_name(player) {
 		return player.name;
 	}
 	return m[1] + '.\xa0' + m[2];
+}
+
+function _lastname(player) {
+	if (player.lastname) {
+		return player.lastname;
+	}
+
+	var m = /^(.).*?\s+(\S+)$/.exec(player.name);
+	if (!m) {
+		return player.name;
+	}
+	return m[2];
 }
 
 function _list_render_player_names(container, players, winning) {
@@ -358,12 +371,11 @@ function render_tournament_overview(s, container, event) {
 	});
 }
 
-function render_castall(s, container, event) {
+function render_castall(s, container, event, colors) {
 	if (! event.courts) {
 		uiu.el(container, 'div', 'error', s._('displaymode:no courts'));
 		return;
 	}
-	var colors = calc_colors(s.settings, event);
 	var scale = s.settings.d_scale / 100;
 
 	uiu.el(container, 'div', {
@@ -873,6 +885,88 @@ function render_international(s, container, event, court, match, colors) {
 	});
 }
 
+function render_tim(s, container, event, colors) {
+	var max_game_count = _calc_max_games(event);
+	var match_score = _calc_matchscore(event.matches);
+	var team_names = event.team_names || ['', ''];
+	var active_match_ids = [];
+	if (event.courts) {
+		active_match_ids = event.courts.map(function(c) {
+			return c.match_id;
+		});
+	}
+
+	var table = uiu.el(container, 'table', {
+		'class': 'd_tim_table',
+		'style': (
+			'color:' + colors.fg + ';' +
+			'border-color:' + colors.fg + ';'
+		),
+	});
+	var thead = uiu.el(table, 'thead', {
+		style: (
+			'background-color:' + colors.tim_blue + ';'
+		),
+	});
+	var top_tr = uiu.el(thead, 'tr', {
+		style: 'height:20vh;',
+	});
+	uiu.el(top_tr, 'td');
+	team_names.forEach(function(team_name) {
+		uiu.el(top_tr, 'td', {
+			'style': (
+				'font-size:5vmin;'
+			),
+		}, team_name);
+	});
+	uiu.el(top_tr, 'td', {
+		style: (
+			'color:' + colors.tim_active + ';' +
+			'font-size:12vmin'
+		),
+		colspan: max_game_count,
+	}, match_score[0] + ' : ' + match_score[1]);
+
+	var tbody = uiu.el(table, 'tbody');
+	var match_count = event.matches.length;
+	event.matches.forEach(function(match, match_num) {
+		var setup = match.setup;
+		var is_active = active_match_ids.includes(setup.match_id);
+		var nscore = extract_netscore(match);
+		if (!is_active && utils.deep_equal(nscore, [[0, 0]])) {
+			// Do not list matches that have not yet been started
+			nscore = [];
+		}
+
+		var tr = uiu.el(tbody, 'tr', {
+			style: (
+				'height:' + ((80 - 0.1 * match_count) / match_count) + 'vh;' +
+				'background-color:' + ((match_num % 2 === 0) ? colors.bg : colors.tim_blue) + ';'
+			),
+		});
+		uiu.el(tr, 'td', {}, setup.match_name);
+		setup.teams.forEach(function(team) {
+			uiu.el(
+				tr, 'td', {
+					style: (
+						(is_active ? ('color:' + colors.tim_active) : '')
+					),
+				},
+				team.players.map(_lastname).join(' - '));
+		});
+		for (var game_idx = 0;game_idx < max_game_count;game_idx++) {
+			var gscore = nscore[game_idx];
+			uiu.el(tr, 'td', {
+				'style': (
+					'min-width:3em;'
+				),
+			},
+				gscore ? (gscore[0] + ' : ' + gscore[1]) : ''
+			);
+		}
+	});
+}
+
 function render_teamcourt(s, container, event, court, match, colors) {
 	var nscore = extract_netscore(match);
 	var gscore = _gamescore_from_netscore(nscore, match.setup);
@@ -883,6 +977,20 @@ function render_teamcourt(s, container, event, court, match, colors) {
 	var first_game = (nscore.length < 2);
 	var mwinner = calc.match_winner(match.setup.counting, nscore);
 	var match_over = (mwinner === 'left') || (mwinner === 'right');
+
+	var match_name_container = uiu.el(container, 'div', {
+		style: (
+			'z-index:1;' +
+			'position:absolute;' +
+			'right: 55vh;' +
+			'top:42vh;' +
+			'bottom:42vh;' +
+			'display:flex;align-items:center;' +
+			'font-size:10vh;' +
+			'color:' + colors.fg2
+		),
+	});
+	uiu.el(match_name_container, 'div', {}, match.setup.match_name);
 
 	match.setup.teams.forEach(function(team, team_id) {
 		var col = colors[team_id];
@@ -948,7 +1056,7 @@ function render_teamcourt(s, container, event, court, match, colors) {
 
 		player_spans.forEach(function(ps) {
 			_setup_autosize(ps, right_border, function(parent_node) {
-				return parent_node.offsetHeight * 0.5;
+				return parent_node.offsetHeight * 0.65;
 			});
 		});
 		_setup_autosize(team_name_el, right_border, function(parent_node) {
@@ -1328,15 +1436,13 @@ function abort_timers() {
 	});
 }
 
-function render_2court(s, container, event) {
+function render_2court(s, container, event, colors) {
 	if (!event.courts) {
 		uiu.el(container, 'div', {
 			'class': 'display_error',
 		}, 'Court information missing');
 		return;
 	}
-
-	var colors = calc_colors(s.settings, event);
 
 	uiu.el(container, 'div', {
 		'class': 'd_2court_divider',
@@ -1544,30 +1650,31 @@ function update(err, s, event) {
 	}
 
 	var func = {
-		'oncourt': render_oncourt,
+		oncourt: render_oncourt,
 	}[style];
 	if (func) {
 		var court2 = _render_court(s, container, event);
 		if (court2) {
 			func(s, container, event, court2);
 		}
-	} else {
-		switch (style) {
-		case '2court':
-			render_2court(s, container, event);
-			break;
-		case 'castall':
-			render_castall(s, container, event);
-			break;
-		case 'tournament_overview':
-			render_tournament_overview(s, container, event);
-			break;
-		case 'top+list':
-		default:
-			render_top(s, container, event);
-			render_list(container, event);
-		}
+		return;
 	}
+
+	var ofunc = {
+		'2court': render_2court,
+		castall: render_castall,
+		tournament_overview: render_tournament_overview,
+		tim: render_tim,
+	}[style];
+	if (ofunc) {
+		var o_colors = calc_colors(s.settings, event);
+		ofunc(s, container, event, o_colors);
+		return;
+	}
+
+	// Default: top+list
+	render_top(s, container, event);
+	render_list(container, event);
 }
 
 function on_style_change(s) {
@@ -1695,38 +1802,23 @@ function active_colors(style_id) {
 
 function option_applies(style_id, option_name) {
 	var BY_STYLE = {
-		tournament_overview: ['cfg', 'cbg', 'cbg3', 'cborder', 'cfg2'],
+		'2court': ['c0', 'c1', 'cfg', 'cbg', 'reverse_order'],
+		'top+list': ['reverse_order'],
 		andre: ['court_id', 'cfg', 'cbg', 'cfg2'],
-		onlyplayers: ['court_id', 'c0', 'c1', 'cbg'],
-		onlyscore: ['court_id', 'c0', 'c1', 'cbg'],
+		castall: ['c0', 'c1', 'cfg', 'cbg', 'cbg2', 'ct', 'cserv', 'crecv', 'reverse_order', 'scale'],
 		clubplayers: ['court_id', 'c0', 'c1', 'cbg'],
 		clubplayerslr: ['court_id', 'c0', 'c1', 'cbg'],
 		international: ['court_id', 'c0', 'c1', 'cfg', 'cbg'],
-		teamcourt: ['court_id', 'c0', 'c1', 'cfg', 'cbg'],
 		oncourt: ['court_id'],
+		onlyplayers: ['court_id', 'c0', 'c1', 'cbg'],
+		onlyscore: ['court_id', 'c0', 'c1', 'cbg'],
+		teamcourt: ['court_id', 'c0', 'c1', 'cfg', 'cfg2', 'cbg'],
+		tim: ['cbg', 'cfg', 'ctim_blue', 'ctim_active'],
+		tournament_overview: ['cfg', 'cbg', 'cbg3', 'cborder', 'cfg2'],
 	};
 	var bs = BY_STYLE[style_id];
 	if (bs) {
 		return utils.includes(bs, option_name);
-	}
-
-	switch (option_name) {
-	case 'c0':
-	case 'c1':
-	case 'cfg':
-	case 'cbg':
-		return (
-			(style_id === '2court') ||
-			(style_id === 'castall'));
-	case 'cbg2':
-	case 'ct':
-	case 'cserv':
-	case 'crecv':
-		return (style_id === 'castall');
-	case 'reverse_order':
-		return (style_id === 'top+list') || (style_id === '2court') || (style_id === 'castall');
-	case 'scale':
-		return (style_id === 'castall');
 	}
 }
 
@@ -1742,6 +1834,7 @@ return {
 	// Testing only
 	render_castall: render_castall,
 	extract_netscore: extract_netscore,
+	calc_colors: calc_colors,
 };
 
 })();

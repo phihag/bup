@@ -87,26 +87,27 @@ _describe('displaymode', function() {
 				d_team_colors: true,
 			},
 		};
+		var colors = bup.displaymode.calc_colors(state.settings);
 		bup.i18n.update_state(state, 'de');
 
 		var event = {};
 
 		var container = _make_container();
-		bup.displaymode.render_castall(state, container, event);
+		bup.displaymode.render_castall(state, container, event, colors);
 
 		event = {
 			league_key: '1BL-2016',
 			team_names: ['1. BC Bischmisheim', 'TV Refrath'],
 		};
 		container = _make_container();
-		bup.displaymode.render_castall(state, container, event);
+		bup.displaymode.render_castall(state, container, event, colors);
 		// Error: no courts available
 		assert(container.querySelectorAll('div[class="error"]').length > 0);
 
 		event.courts = [{}, {}];
 		event.matches = [];
 		container = _make_container();
-		bup.displaymode.render_castall(state, container, event);
+		bup.displaymode.render_castall(state, container, event, colors);
 		assert(container.querySelectorAll('div[class="error"]').length === 0);
 		assert(container.querySelectorAll('div[style*="bundesliga-logo.svg"]').length === 3);
 		// TODO: require team names to be present

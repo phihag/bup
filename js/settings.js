@@ -20,6 +20,8 @@ var default_settings = {
 	d_cfg2: '#aaaaaa',
 	d_cborder: '#444444',
 	d_ct: '#80ff00',
+	d_ctim_blue: '#0070c0',
+	d_ctim_active: '#ffc000',
 	d_cserv: '#fff200',
 	d_crecv: '#707676',
 	d_scale: 100,
@@ -183,6 +185,8 @@ var _settings_textfields = [
 	'd_cfg2',
 	'd_cborder',
 	'd_ct',
+	'd_ctim_active',
+	'd_ctim_blue',
 	'd_cserv',
 	'd_crecv',
 ];
@@ -269,6 +273,11 @@ function change_all(s, new_settings) {
 }
 
 function on_change(s, name) {
+	if (/^d_/.test(name)) {
+		displaymode.on_style_change(s);
+		return;
+	}
+
 	switch (name) {
 	case 'show_pronunciation':
 	case 'negative_timers':
@@ -299,16 +308,6 @@ function on_change(s, name) {
 	case 'displaymode_court_id':
 	case 'displaymode_reverse_order':
 	case 'displaymode_style':
-	case 'd_c0':
-	case 'd_c1':
-	case 'd_cbg':
-	case 'd_cfg':
-	case 'd_cbg2':
-	case 'd_cbg3':
-	case 'd_cfg2':
-	case 'd_cborder':
-	case 'd_ct':
-	case 'd_scale':
 		displaymode.on_style_change(s);
 		break;
 	case 'wakelock':
