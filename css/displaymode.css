@@ -651,7 +651,7 @@
 .d_tim_table {
 	width: 100%;
 	border-collapse: collapse;
-	font-size: 3vmin;
+	font-size: 3.5vmin;
 }
 .d_tim_table td {
 	border-width: 0.1vmin;
@@ -660,7 +660,6 @@
 	text-align: center;
 	border-color: inherit;
 }
-
 .d_tim_table > thead > tr > td {
 	border-top-width: 0;
 }

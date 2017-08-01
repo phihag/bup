@@ -915,7 +915,7 @@ function render_tim(s, container, event, colors) {
 	team_names.forEach(function(team_name) {
 		uiu.el(top_tr, 'td', {
 			'style': (
-				'font-size:5vmin;'
+				'font-size:5vmin;width:26vw;'
 			),
 		}, team_name);
 	});
