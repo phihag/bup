@@ -2,6 +2,7 @@ dads!
 displaymode "Berlin": like courtspot vertical, but with border (red for finished green for server) -> BR 5/2017 S. 24
 dstyle Anaheim
 
+bupdate on windows: close phardata
 useful tracebacks!
 	generate source map
 	parse source map
@@ -21,8 +22,16 @@ increase bottom spacing on court
 test displays in demos / btde
 prevent accidental shuttle setting / unsetting (conflicts with fullscreen button)
 display Moritz: prior games in detail between names
+
 Peeter Staats -> accidental scrolling (make simple mode that only shows umpire stuff)
 disable double-touch timeout if two very fast touches
+init from aufschlagwechsel.de
+	database on aufschlagwechsel.de
+	download event from there
+	courtspot: init from this
+		aw: include courtspot IDs
+
+make a tutorial video
 
 show button once out of fullscreen
 test calc.players_present

@@ -450,7 +450,7 @@ function render_clients(clients) {
 		} else if (c.mode === 'display') {
 			var dstyle_row = uiu.el(div, 'div', {
 				'class': 'referee_c_dstyle',
-			}, s._('displaymode:style') + ' ' + s._('displaymode:' + c.settings.displaymode_style));
+			}, s._('displaymode:style') + ' ' + s._('displaymode|' + c.settings.displaymode_style));
 
 			var dstyle_form = uiu.el(dstyle_row, 'form', {
 				'class': 'referee_c_dstyle_change_form',
@@ -469,7 +469,7 @@ function render_clients(clients) {
 				if (ds === cur_style) {
 					attrs.selected = 'selected';
 				}
-				uiu.el(change_dstyle_sel, 'option', attrs, s._('displaymode:' + ds));
+				uiu.el(change_dstyle_sel, 'option', attrs, s._('displaymode|' + ds));
 			});
 
 			displaymode.ALL_COLORS.forEach(function(col) {
