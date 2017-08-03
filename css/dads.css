@@ -1,0 +1,7 @@
+.dads_config_container {
+	background: #fff;
+	z-index: 10000;
+	position: fixed;
+	top: 0;
+	width: 100%;
+}

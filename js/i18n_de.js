@@ -532,6 +532,13 @@ var i18n_de = {
 'urlimport:staticnet_message': 'Importierter Wettkampf',
 
 'editmode:fix_time': 'Zeit fixieren',
+
+'dads:label': 'Werbung (experimentell):',
+'dads:configure': 'Konfigurieren',
+'dads|none': 'keine',
+'dads|always': 'aktiv',
+'dads|periodic': 'periodisch',
+'dads:heading': 'Werbung konfigurieren',
 };
 
 /*@DEV*/

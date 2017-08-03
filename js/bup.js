@@ -28,7 +28,9 @@ function ui_init() {
 	$('#script_pdfform').on('load', eventsheet.loaded('pdfform'));
 	$('#script_jszip').on('load', eventsheet.loaded('jszip'));
 
-	report_problem.ui_init();
+	report_problem.ui_init(); // First because it reports problems in all other modules
+	dads.ui_init(state); // Most be before settings
+
 	editmode.ui_init();
 	scoresheet.ui_init();
 	timer.ui_init();

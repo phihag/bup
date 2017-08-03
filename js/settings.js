@@ -203,6 +203,7 @@ var _settings_selects = [
 	'displaymode_style',
 	'language',
 	'wakelock',
+	'dads_mode',
 ];
 
 function update_court_settings(s) {

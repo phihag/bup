@@ -1,7 +1,12 @@
 dads
-	add module
-	configuration screen
+	make configuration screen modal
+	save/load ads configuration (like settings/as settings?)
+	add type: image (uploaded or linked)
+	add type: text
 	configure on referee
+	configure periodic length
+	change in settings should actually change
+	actually display ads
 
 bug: back from &order keeps order
 	use history API
