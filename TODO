@@ -11,7 +11,6 @@ dads
 bug: back from &order keeps order
 	use history API
 bug: black card at 0-0 with courtspot wrong netscore
-strike court=1 from URL
 bupdate on windows: close phardata
 	test in VM
 	-> mail Tim

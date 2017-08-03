@@ -36,7 +36,7 @@ function record(s) {
 
 	var orig_hval = window.location.hash.substr(1);
 	var hval = orig_hval;
-	hval = hval.replace(/(?:^|&)(?:m|display|settings|event_scoresheets|scoresheet|eventsheet|stats|netstats|order|editevent|setupsheet|referee_mode|dads)(?:=[^&]*)?(?=&|$)/g, '');
+	hval = hval.replace(/(?:^|&)(?:m|display|settings|event_scoresheets|scoresheet|eventsheet|stats|netstats|order|editevent|setupsheet|referee_mode|dads|court|dm_style)(?:=[^&]*)?(?=&|$)/g, '');
 	hval = hval.replace(/^&+|&+$/g, '');
 
 	if (s.initialized && (settings.get_mode(s) === 'umpire')) {
