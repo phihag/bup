@@ -1,12 +1,14 @@
 dads
-	drag&drop image
+	error message on quota overrun
+	change of settings should actually change
+	actually display ads in displaymode
+improve dads
 	edit dialog
+	mark as active/inactive
 	background color for image
 	add type: text
 	add type: refrath-gegen
 	configure periodic length
-	change in settings should actually change
-	actually display ads
 	configure on referee
 
 bug: back from &order keeps order

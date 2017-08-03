@@ -29,6 +29,37 @@ function ui_add(s, ad) {
 	render_preview(uiu.qs('.dads_previews'), ad);
 }
 
+function ui_add_image_from_dt(s, dt) {
+	if (dt.types.includes('text/html')) {
+		var html = dt.getData('text/html');
+		var dom = (new DOMParser()).parseFromString(
+			'<!doctype html><body>' + html, 'text/html');
+		var img = dom.querySelector('img');
+		if (img) {
+			var src = img.getAttribute('src');
+			ui_add(s, {
+				type: 'image',
+				url: src,
+			});
+			return;
+		}
+	}
+
+	utils.forEach(dt.files, function(f) {
+		if (! /^image/.test(f.type)) {
+			return;
+		}
+		var reader = new FileReader();
+		reader.onload = function(e) {
+			ui_add(s, {
+				type: 'image',
+				url: e.target.result,
+			});
+		};
+		reader.readAsDataURL(f);
+	});
+}
+
 function ui_rm(s, ad_id) {
 	utils.remove_cb(s.dads, function(ad) {
 		return ad.id === ad_id;
@@ -73,6 +104,17 @@ function render_previews(s, container) {
 	});
 }
 
+function drop_noop(e) {
+	e.stopPropagation();
+	e.preventDefault();
+}
+
+function on_drop(e) {
+	e.stopPropagation();
+	e.preventDefault();
+	ui_add_image_from_dt(state, e.dataTransfer);
+}
+
 function ui_make_config(s, outer_container) {
 	var container = uiu.el(outer_container, 'div', 'dads_config_container');
 	uiu.el(container, 'h1', {
@@ -115,6 +157,11 @@ function ui_make_config(s, outer_container) {
 		reader.readAsDataURL(file);
 	});
 
+	container.addEventListener('dragenter', drop_noop);
+	container.addEventListener('dragexit', drop_noop);
+	container.addEventListener('dragover', drop_noop);
+	container.addEventListener('drop', on_drop);
+
 	var back_container = uiu.el(container, 'div', {
 		style: 'padding:0.4em 0;font-size:120%;',
 	});
@@ -128,19 +175,7 @@ function ui_make_config(s, outer_container) {
 }
 
 function paste_handler(event) {
-	utils.forEach(event.clipboardData.files, function(f) {
-		if (! /^image/.test(f.type)) {
-			return;
-		}
-		var reader = new FileReader();
-		reader.onload = function(e) {
-			ui_add(state, {
-				type: 'image',
-				url: e.target.result,
-			});
-		};
-		reader.readAsDataURL(f);
-	});
+	ui_add_image_from_dt(state, event.clipboardData);
 }
 
 function show() {
