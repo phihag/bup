@@ -29,6 +29,14 @@ function ui_add(s, ad) {
 	render_preview(uiu.qs('.dads_previews'), ad);
 }
 
+function ui_rm(s, ad_id) {
+	utils.remove_cb(s.dads, function(ad) {
+		return ad.id === ad_id;
+	});
+	localStorage.removeItem('bup_dads_' + ad_id);
+	render_previews(s, uiu.qs('.dads_previews'));
+}
+
 function render_ad(container, ad) {
 	switch(ad.type) {
 	case 'image':
@@ -44,12 +52,22 @@ function render_ad(container, ad) {
 	}
 }
 
+function on_rm_click(e) {
+	var ad_id = uiu.closest_class(e.target, 'dads_preview').getAttribute('data-ad-id');
+	ui_rm(state, ad_id);
+}
+
 function render_preview(container, ad) {
 	var c = uiu.el(container, 'div', 'dads_preview');
 	render_ad(c, ad);
+	c.setAttribute('data-ad-id', ad.id);
+	var rm_btn = uiu.el(c, 'button', 'dads_rm');
+	uiu.el(rm_btn, 'span');
+	click.on(rm_btn, on_rm_click);
 }
 
 function render_previews(s, container) {
+	uiu.empty(container);
 	s.dads.forEach(function(ad) {
 		render_preview(container, ad);
 	});

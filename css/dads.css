@@ -11,8 +11,26 @@
 
 .dads_preview {
 	position: relative;
-	width: 20vmin;
-	height: 20vmin;
+	width: 30vmin;
+	height: 30vmin;
 	border: 0.2vmin solid #bbb;
 	margin: 0.5vmin 2vmin;
+	display: inline-block;
+}
+
+.dads_rm {
+	cursor: pointer;
+	position: absolute;
+	top: 0;
+	right: 0;
+	opacity: 0.4;
+}
+.dads_preview:hover .dads_rm {
+	opacity: 1;
+}
+.dads_rm > span {
+	display: block;
+	width: 3vmin;
+	height: 3vmin;
+	background: no-repeat center/contain url(../icons/delete.svg);
 }
