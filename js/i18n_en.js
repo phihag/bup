@@ -539,6 +539,7 @@ var i18n_en = {
 'dads|always': 'active',
 'dads|periodic': 'periodical',
 'dads:heading': 'Ads',
+'dads:mode': 'Mode:',
 };
 
 /*@DEV*/

@@ -4,8 +4,20 @@ var dads = (function() {
 
 var ALL_MODES = ['none', 'always', 'periodic'];
 
-function ui_config_show(s) {
-	var container = uiu.el(uiu.qs('body'), 'div', 'dads_config_container');
+function show() {
+	if (state.ui.dads_visible) {
+		return;
+	}
+
+	displaymode.hide();
+	state.ui.dads_visible = true;
+	control.set_current(state);
+
+	ui_make_config(state, uiu.qs('body'));
+}
+
+function ui_make_config(s, outer_container) {
+	var container = uiu.el(outer_container, 'div', 'dads_config_container');
 	uiu.el(container, 'h1', {
 		'data-i18n': 'dads:heading',
 		style: 'margin-top:0.2em;text-align: center;',
@@ -14,12 +26,22 @@ function ui_config_show(s) {
 	var mode_label = uiu.el(container, 'label');
 	uiu.el(mode_label, 'span', {
 		'data-i18n': 'dads:mode',
+		style: 'margin-right: 0.5ch;',
 	});
 	ui_make_mode_select(s, mode_label, s.settings.dads_mode);
 
 	// TODO if mode=periodic then show periodic config
 
 	i18n.translate_nodes(container, s);
+}
+
+function hide() {
+	if (!state.ui.dads_visible) {
+		return;
+	}
+
+	state.ui.dads_visible = false;
+	uiu.qsEach('.dads_config_container', uiu.remove);
 }
 
 function ui_make_mode_select(s, container, cur_val) {
@@ -53,7 +75,7 @@ function install_controls(s, container, cur_val) {
 		'data-i18n': 'dads:configure',
 	});
 	click.on(link, function() {
-		ui_config_show(s);
+		show(s);
 	});
 	i18n.translate_nodes(container, s);
 
@@ -67,12 +89,16 @@ function ui_init(s) {
 
 return {
 	ui_init: ui_init,
+	show: show,
+	hide: hide,
 };
 
 })();
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var bupui = require('./bupui');
+	var click = require('./click');
 	var i18n = require('./i18n');
 	var uiu = require('./uiu');
 

@@ -539,6 +539,7 @@ var i18n_de = {
 'dads|always': 'aktiv',
 'dads|periodic': 'periodisch',
 'dads:heading': 'Werbung konfigurieren',
+'dads:mode': 'Modus:',
 };
 
 /*@DEV*/

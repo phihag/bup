@@ -1,5 +1,5 @@
-var bupui = (function() {
 'use strict';
+var bupui = (function() {
 
 // Returns a function to cancel the dialog
 function make_pick(s, label, values, on_pick, on_cancel, container, select_at) {
@@ -160,7 +160,6 @@ function add_player_pick(s, container, type, team_id, player_id, on_click, namef
 		control.on_press(press);
 	});
 }
-
 
 return {
 	add_player_pick: add_player_pick,

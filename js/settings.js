@@ -411,7 +411,7 @@ function get_mode(s) {
 	if (!s.ui) {
 		return 'umpire'; // Tests?
 	}
-	if (s.ui.displaymode_visible) {
+	if (s.ui.displaymode_visible || s.ui.dads_visible) {
 		return 'display';
 	}
 	if (s.ui.referee_mode) {

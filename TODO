@@ -14,13 +14,16 @@ bug: black card at 0-0 with courtspot wrong netscore
 strike court=1 from URL
 bupdate on windows: close phardata
 	test in VM
-	-> Tim
+	-> mail Tim
 
 useful tracebacks!
 	generate source map
 	parse source map
 
+check/improve logos for all bundesliga clubs
+check/improve colors for all bundesliga clubs
 test that everything works with nlademo
+
 move all demo files to div/demos/ (and correctly generate them in makefile)
 demo&display should work!!!
 link to update in settings

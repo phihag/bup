@@ -339,7 +339,7 @@ function set_current(s) {
 	buphistory.record(s);
 
 	var title = '';
-	if (s.initialized) {
+	if (s.initialized && (settings.get_mode(s) === 'umpire')) {
 		if (s.setup.match_name) {
 			title += s.setup.match_name + ' - ';
 		}

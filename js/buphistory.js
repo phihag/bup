@@ -36,10 +36,10 @@ function record(s) {
 
 	var orig_hval = window.location.hash.substr(1);
 	var hval = orig_hval;
-	hval = hval.replace(/(?:^|&)(?:m|display|settings|event_scoresheets|scoresheet|eventsheet|stats|netstats|order|editevent|setupsheet|referee_mode)(?:=[^&]*)?(?=&|$)/g, '');
+	hval = hval.replace(/(?:^|&)(?:m|display|settings|event_scoresheets|scoresheet|eventsheet|stats|netstats|order|editevent|setupsheet|referee_mode|dads)(?:=[^&]*)?(?=&|$)/g, '');
 	hval = hval.replace(/^&+|&+$/g, '');
 
-	if (s.initialized) {
+	if (s.initialized && (settings.get_mode(s) === 'umpire')) {
 		if (hval.length > 1) {
 			hval += '&';
 		}
@@ -104,6 +104,11 @@ function record(s) {
 			hval += '&';
 		}
 		hval += 'stats';
+	} else if (s.ui.dads_visible) {
+		if (hval.length > 1) {
+			hval += '&';
+		}
+		hval += 'dads';
 	}
 
 	var orig_qs = utils.parse_query_string(orig_hval);
@@ -137,6 +142,13 @@ function load_by_hash() {
 		return;
 	} else {
 		refmode_referee_ui.hide();
+	}
+
+	if (typeof qs.dads != 'undefined') {
+		dads.show();
+		return;
+	} else {
+		dads.hide();
 	}
 
 	if (qs.eventsheet) {

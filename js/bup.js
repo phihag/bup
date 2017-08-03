@@ -88,6 +88,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var compat = require('./compat');
 	var control = require('./control');
 	var courtspot = require('./courtspot');
+	var dads = require('./dads');
 	var displaymode = require('./displaymode');
 	var editevent = require('./editevent');
 	var editmode = require('./editmode');
