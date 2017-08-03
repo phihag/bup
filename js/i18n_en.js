@@ -540,6 +540,9 @@ var i18n_en = {
 'dads|periodic': 'periodical',
 'dads:heading': 'Ads',
 'dads:mode': 'Mode:',
+'dads:add image': 'Add Image',
+'dads:add rg': 'Add announcement text',
+'dads:back': 'Back',
 };
 
 /*@DEV*/

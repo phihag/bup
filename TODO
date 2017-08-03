@@ -1,12 +1,12 @@
 dads
-	make configuration screen modal
-	save/load ads configuration (like settings/as settings?)
-	add type: image (uploaded or linked)
+	delete ad
+	drag&drop image
 	add type: text
-	configure on referee
+	add type: refrath-gegen
 	configure periodic length
 	change in settings should actually change
 	actually display ads
+	configure on referee
 
 bug: back from &order keeps order
 	use history API
@@ -15,10 +15,12 @@ bupdate on windows: close phardata
 	test in VM
 	-> mail Tim
 
+#settings only for main settings
 useful tracebacks!
 	generate source map
 	parse source map
 
+button to reset colors
 check/improve logos for all bundesliga clubs
 check/improve colors for all bundesliga clubs
 test that everything works with nlademo

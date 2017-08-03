@@ -406,9 +406,9 @@ function hash_new(hashed_obj, obj) {
 	return deep_equal(hashed_obj, obj) ? false : hash_obj(obj);
 }
 
-function forEach(str, cb) {
-	for (var i = 0;i < str.length;i++) {
-		cb(str[i], i);
+function forEach(array_like, cb) {
+	for (var i = 0;i < array_like.length;i++) {
+		cb(array_like[i], i);
 	}
 }
 

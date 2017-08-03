@@ -540,6 +540,9 @@ var i18n_de = {
 'dads|periodic': 'periodisch',
 'dads:heading': 'Werbung konfigurieren',
 'dads:mode': 'Modus:',
+'dads:add image': 'Bild hinzufügen',
+'dads:add rg': 'Ankündigungstext hinzufügen',
+'dads:back': 'Zurück',
 };
 
 /*@DEV*/

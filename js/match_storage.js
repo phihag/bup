@@ -1,5 +1,5 @@
-var match_storage = (function() {
 'use strict';
+var match_storage = (function() {
 
 function store(s) {
 	if (typeof localStorage == 'undefined') {

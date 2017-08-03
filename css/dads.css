@@ -1,0 +1,18 @@
+.dads_config_container {
+	border-radius: 0.2vmin;
+	background: #fff;
+	margin: 0 auto 0 auto;
+	max-width: 98%;
+}
+
+.dads_previews {
+	margin: 0.5em 0 0.5em 0;
+}
+
+.dads_preview {
+	position: relative;
+	width: 20vmin;
+	height: 20vmin;
+	border: 0.2vmin solid #bbb;
+	margin: 0.5vmin 2vmin;
+}

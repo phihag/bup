@@ -130,6 +130,13 @@ function load_by_hash() {
 		setupsheet.hide();
 	}*/
 
+	if (typeof qs.dads != 'undefined') {
+		dads.show();
+		return;
+	} else {
+		dads.hide();
+	}
+
 	if (typeof qs.display != 'undefined') {
 		displaymode.show();
 		return;
@@ -142,13 +149,6 @@ function load_by_hash() {
 		return;
 	} else {
 		refmode_referee_ui.hide();
-	}
-
-	if (typeof qs.dads != 'undefined') {
-		dads.show();
-		return;
-	} else {
-		dads.hide();
 	}
 
 	if (qs.eventsheet) {
@@ -236,6 +236,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
+	var dads = require('./dads');
 	var displaymode = require('./displaymode');
 	var editevent = require('./editevent');
 	var eventsheet = require('./eventsheet');
