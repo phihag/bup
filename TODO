@@ -1,11 +1,21 @@
-dads!
-displaymode "Berlin": like courtspot vertical, but with border (red for finished green for server) -> BR 5/2017 S. 24
-dstyle Anaheim
+dads
+	add module
+	configuration screen
+	configure on referee
 
+bug: back from &order keeps order
+	use history API
+bug: black card at 0-0 with courtspot wrong netscore
+strike court=1 from URL
 bupdate on windows: close phardata
+	test in VM
+	-> Tim
+
 useful tracebacks!
 	generate source map
 	parse source map
+
+test that everything works with nlademo
 move all demo files to div/demos/ (and correctly generate them in makefile)
 demo&display should work!!!
 link to update in settings
@@ -22,6 +32,8 @@ increase bottom spacing on court
 test displays in demos / btde
 prevent accidental shuttle setting / unsetting (conflicts with fullscreen button)
 display Moritz: prior games in detail between names
+displaymode "Berlin": like courtspot vertical, but with border (red for finished green for server) -> BS 5/2017 S. 24
+dstyle Anaheim
 
 Peeter Staats -> accidental scrolling (make simple mode that only shows umpire stuff)
 disable double-touch timeout if two very fast touches

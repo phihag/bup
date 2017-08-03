@@ -42,15 +42,15 @@ function init() {
 }
 
 function translate_nodes(root, s) {
-	root.find('*[data-i18n]').each(function(_, n) {
+	uiu.qsEach('*[data-i18n]', function(n) {
 		uiu.text(n, translate(s, n.getAttribute('data-i18n')));
-	});
-	root.find('*[data-i18n-placeholder]').each(function(_, n) {
+	}, root);
+	uiu.qsEach('*[data-i18n-placeholder]', function(n) {
 		n.setAttribute('placeholder', translate(s, n.getAttribute('data-i18n-placeholder')));
-	});
-	root.find('*[data-i18n-title]').each(function(_, n) {
+	}, root);
+	uiu.qsEach('*[data-i18n-title]', function(n) {
 		n.setAttribute('title', translate(s, n.getAttribute('data-i18n-title')));
-	});
+	}, root);
 }
 
 function ui_init() {
@@ -65,7 +65,7 @@ function ui_init() {
 		option.text(lang._name);
 		select.append(option);
 	});
-	translate_nodes($('html'), state);
+	translate_nodes(uiu.qs('html'), state);
 }
 
 function update_state(s, code) {
@@ -89,7 +89,7 @@ function update_state(s, code) {
 function ui_update_state(s, code) {
 	update_state(s, code);
 	render.ui_render(s);
-	translate_nodes($('html'), s);
+	translate_nodes(uiu.qs('html'), s);
 	report_problem.update();
 }
 
