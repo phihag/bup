@@ -25,8 +25,17 @@ function ui_add(s, ad) {
 	ad.id = utils.uuid();
 	s.dads.push(ad);
 	ad.images2 = [{url: 'foo'}];
-	localStorage.setItem('bup_dads_' + ad.id, JSON.stringify(ad));
 	render_preview(uiu.qs('.dads_previews'), ad);
+	var ad_json = JSON.stringify(ad);
+	try {
+		localStorage.setItem('bup_dads_' + ad.id, ad_json);
+	} catch(e) {
+		if (e.code === 22) {
+			uiu.text_qs('.dads_error', s._('dads:quota'));
+			return;
+		}
+		throw e;
+	}
 }
 
 function ui_add_image_from_dt(s, dt) {
@@ -117,6 +126,10 @@ function on_drop(e) {
 
 function ui_make_config(s, outer_container) {
 	var container = uiu.el(outer_container, 'div', 'dads_config_container');
+	uiu.el(container, 'div', {
+		'class': 'dads_error',
+		'style': 'float:right;color:red;font-size:3vmin;',
+	});
 	uiu.el(container, 'h1', {
 		'data-i18n': 'dads:heading',
 		style: 'margin:0;padding-top:0.2em;text-align:center;',
@@ -134,12 +147,14 @@ function ui_make_config(s, outer_container) {
 	var previews = uiu.el(container, 'div', 'dads_previews');
 	render_previews(s, previews);
 
-	var add_image_file = uiu.el(container, 'input', {
+	var buttons = uiu.el(container, 'div', 'dads_buttons');
+
+	var add_image_file = uiu.el(buttons, 'input', {
 		type: 'file',
 		accept: 'image/*',
 		style: 'display:none',
 	});
-	var add_image_btn = uiu.el(container, 'button', {
+	var add_image_btn = uiu.el(buttons, 'button', {
 		'data-i18n': 'dads:add image',
 	});
 	click.on(add_image_btn, function() {
@@ -155,6 +170,19 @@ function ui_make_config(s, outer_container) {
 			});
 		};
 		reader.readAsDataURL(file);
+	});
+
+	var add_image_url_btn = uiu.el(buttons, 'button', {
+		'data-i18n': 'dads:add image url',
+	});
+	click.on(add_image_url_btn, function() {
+		var url = prompt('URL');
+		if (url) {
+			ui_add(s, {
+				type: 'image',
+				url: url,
+			});
+		}
 	});
 
 	container.addEventListener('dragenter', drop_noop);

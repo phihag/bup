@@ -541,8 +541,10 @@ var i18n_de = {
 'dads:heading': 'Werbung konfigurieren',
 'dads:mode': 'Modus:',
 'dads:add image': 'Bild hinzufügen',
+'dads:add image url': 'Bild-URL hinzufügen',
 'dads:add rg': 'Ankündigungstext hinzufügen',
 'dads:back': 'Zurück',
+'dads:quota': 'Werbung konnte nicht gespeichert werden: Nicht genügend Speicherplatz auf diesem Browser verfügbar. Verwenden Sie URLs statt Bilder direkt einzubetten.',
 };
 
 /*@DEV*/

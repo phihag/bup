@@ -541,8 +541,10 @@ var i18n_en = {
 'dads:heading': 'Ads',
 'dads:mode': 'Mode:',
 'dads:add image': 'Add Image',
+'dads:add image url': 'Add Image URL',
 'dads:add rg': 'Add announcement text',
 'dads:back': 'Back',
+'dads:quota': 'Ad could not be saved: Insufficient storage space available. Try using URLs instead of image files.',
 };
 
 /*@DEV*/
