@@ -545,6 +545,9 @@ var i18n_de = {
 'dads:add rg': 'Ankündigungstext hinzufügen',
 'dads:back': 'Zurück',
 'dads:quota': 'Werbung konnte nicht gespeichert werden: Nicht genügend Speicherplatz auf diesem Browser verfügbar. Verwenden Sie URLs statt Bilder direkt einzubetten.',
+'dads|interval': 'Wechsel-Interval (s):',
+'dads|dtime': 'Anzeige-Dauer (s):',
+'dads|atime': 'Werbe-Dauer (s):',
 };
 
 /*@DEV*/

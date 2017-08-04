@@ -124,7 +124,31 @@ function on_drop(e) {
 	ui_add_image_from_dt(state, e.dataTransfer);
 }
 
+function interval_input(s, container, name) {
+	var label = uiu.el(container, 'label');
+	uiu.el(label, 'span', {
+		'data-i18n': 'dads|' + name,
+	});
+	var input = uiu.el(label, 'input', {
+		type: 'number',
+		min: 1,
+		step: 1,
+		name: 'dads_' + name,
+		value: s.settings['dads_' + name] / 1000,
+		style: 'width:4em;',
+	});
+	input.addEventListener('input', function() {
+		var val = input.value * 1000;
+		if (val > 0) {
+			var changed = {};
+			changed['dads_' + name] = val;
+			settings.change_all(state, changed);
+		}
+	});
+}
+
 function ui_make_config(s, outer_container) {
+	var dads_mode = s.settings.dads_mode;
 	var container = uiu.el(outer_container, 'div', 'dads_config_container');
 	uiu.el(container, 'div', {
 		'class': 'dads_error',
@@ -140,14 +164,20 @@ function ui_make_config(s, outer_container) {
 		'data-i18n': 'dads:mode',
 		style: 'margin-right: 0.5ch;',
 	});
-	var select = ui_make_mode_select(s, mode_label, s.settings.dads_mode);
+	var select = ui_make_mode_select(s, mode_label, dads_mode);
 	select.addEventListener('change', function() {
 		if (select.value) {
 			settings.change_all(s, {dads_mode: select.value});
 		}
 	});
 
-	// TODO if mode=periodic then show periodic config
+	var options = uiu.el(container, 'div', 'dads_options');
+	if (dads_mode === 'always') {
+		interval_input(s, options, 'interval');
+	} else if (dads_mode === 'periodic') {
+		interval_input(s, options, 'dtime');
+		interval_input(s, options, 'atime');
+	}
 
 	var previews = uiu.el(container, 'div', 'dads_previews');
 	render_previews(s, previews);
@@ -318,7 +348,6 @@ function d_update(container) {
 		clearTimeout(s.dad_periodic_to);
 		s.dad_periodic_to = null;
 	}
-
 
 	if (mode === 'none') {
 		uiu.hide(container);

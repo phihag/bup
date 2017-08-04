@@ -1,11 +1,11 @@
 improve dads
+	change config when mode changes
 	edit dialog
 	background color for image
 	mark as active/inactive
-	add type: text
+	add type: text (z.B. "gute Heimreise", "nächstes Heimspiel")
 	add type: refrath-gegen
-	configure always cycle length
-	configure periodic length
+	ad until time
 	configure on referee
 
 d/onlyplayers: correctly handle case where no icon is present (at the moment 404)

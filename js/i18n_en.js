@@ -545,6 +545,10 @@ var i18n_en = {
 'dads:add rg': 'Add announcement text',
 'dads:back': 'Back',
 'dads:quota': 'Ad could not be saved: Insufficient storage space available. Try using URLs instead of image files.',
+'dads|interval': 'change interval (s):',
+'dads|dtime': 'score duration (s):',
+'dads|atime': 'ad duration (s):',
+
 };
 
 /*@DEV*/

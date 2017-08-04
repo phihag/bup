@@ -1543,8 +1543,10 @@ function update(err, s, event) {
 		}, err.msg);
 		return;
 	}
+
 	// Also update general state
 	network.update_event(s, event);
+
 	// If nothing has changed we can skip painting
 	var cur_event_hash = hash(s.settings, event);
 	if (utils.deep_equal(cur_event_hash, _last_painted_hash)) {
@@ -1686,7 +1688,9 @@ function update(err, s, event) {
 }
 
 function on_style_change(s) {
-	update(_last_err, s, s.event);
+	if (s.ui && s.ui.displaymode_visible) {
+		update(_last_err, s, s.event);
+	}
 }
 
 var _cancel_updates = null;

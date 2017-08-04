@@ -25,6 +25,9 @@ var default_settings = {
 	d_cserv: '#fff200',
 	d_crecv: '#707676',
 	d_scale: 100,
+	dads_interval: 15000,
+	dads_dtime: 10000,
+	dads_atime: 5000,
 	double_click_timeout: 1000,
 	button_block_timeout: 1200,
 	negative_timers: false,
@@ -196,6 +199,8 @@ var _settings_numberfields = [
 	'displaymode_update_interval',
 	'button_block_timeout',
 	'd_scale',
+	'dads_interval',
+	'dads_interval_periodic',
 ];
 var _settings_selects = [
 	'click_mode',

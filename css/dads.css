@@ -37,3 +37,10 @@
 .dads_buttons button + button {
 	margin-left: 1em;
 }
+
+.dads_options {
+	margin: 0.8em 0 0.7em 0;
+}
+.dads_options > label + label {
+	margin-left: 1em;
+}
