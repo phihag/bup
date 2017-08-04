@@ -80,7 +80,7 @@ function ui_rm(s, ad_id) {
 function render_ad(container, ad) {
 	switch(ad.type) {
 	case 'image':
-		container.setAttribute('style', 'background:#000');
+		container.style.backgroundColor = '#000';
 		uiu.el(container, 'img', {
 			src: ad.url,
 			style: 'position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;',
@@ -277,6 +277,71 @@ function install_controls(s, container, cur_val) {
 	return select;
 }
 
+function advance_periodic(s, container) {
+	if (s.dad_periodic_to) {
+		clearTimeout(s.dad_periodic_to);
+	}
+	s.dad_periodic_active = !s.dad_periodic_active;
+	if (s.dad_periodic_active) {
+		uiu.show(container);
+		cycle(s, container);
+	} else {
+		uiu.hide(container);
+	}
+
+	s.dad_periodic_to = setTimeout(function() {
+		advance_periodic(s, container);
+	}, (s.dad_periodic_active ? 7500 : 15000));
+}
+
+function cycle(s, container) {
+	if (!s.dads.length) {
+		return;
+	}
+
+	s.dad_cycle_index = (s.dad_cycle_index + 1) % s.dads.length;
+	var ad = s.dads[s.dad_cycle_index];
+	uiu.empty(container);
+	render_ad(container, ad);
+}
+
+// Gets called when the configuration has changed
+function d_update(container) {
+	var s = state;
+	var mode = s.settings.dads_mode;
+
+	if (s.dad_cycle_interval) {
+		clearInterval(s.dad_cycle_interval);
+		s.dad_cycle_interval = null;
+	}
+	if (s.dad_periodic_to) {
+		clearTimeout(s.dad_periodic_to);
+		s.dad_periodic_to = null;
+	}
+
+
+	if (mode === 'none') {
+		uiu.hide(container);
+		return;
+	}
+
+	s.dad_cycle_index = -1;
+	cycle(s, container);
+	if (mode === 'always') {
+		s.dad_cycle_interval = setInterval(function() {
+			cycle(s, container);
+		}, 15000);
+		uiu.show(container);
+	} else if (mode === 'periodic') {
+		s.dad_periodic_active = true;
+		advance_periodic(s, container);
+	}
+}
+
+function d_hide(container) {
+	uiu.hide(container);
+}
+
 function ui_init(s) {
 	load(s);
 
@@ -288,6 +353,8 @@ return {
 	ui_init: ui_init,
 	show: show,
 	hide: hide,
+	d_update: d_update,
+	d_hide: d_hide,
 };
 
 })();
@@ -299,6 +366,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var displaymode = require('./displaymode');
 	var i18n = require('./i18n');
 	var report_problem = require('./report_problem');
+	var settings = require('./settings');
 	var uiu = require('./uiu');
 	var utils = require('./utils');
 

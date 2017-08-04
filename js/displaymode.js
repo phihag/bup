@@ -1524,6 +1524,7 @@ function on_color_select(e) {
 }
 
 var _last_painted_hash = null;
+var _last_settings_hash = null;
 var _last_err;
 function update(err, s, event) {
 	_last_err = err;
@@ -1549,6 +1550,13 @@ function update(err, s, event) {
 	if (utils.deep_equal(cur_event_hash, _last_painted_hash)) {
 		return;
 	}
+
+	var new_settings_hash = utils.hash_new(_last_settings_hash, s.settings);
+	if (new_settings_hash) {
+		_last_settings_hash = new_settings_hash;
+		dads.d_update(uiu.qs('.d_ads'));
+	}
+
 	var changed_courts = (
 		!_last_painted_hash || !utils.deep_equal(cur_event_hash.courts, _last_painted_hash.courts));
 
@@ -1696,6 +1704,7 @@ function show() {
 
 	control.set_current(state);
 	uiu.show_qs('.displaymode_layout');
+	dads.d_update(uiu.qs('.d_ads'));
 	uiu.addClass_qs('.settings_layout', 'settings_layout_displaymode');
 
 	update({
@@ -1721,6 +1730,7 @@ function hide() {
 	autosize.unmaintain_all(container);
 	uiu.empty(container);
 	uiu.hide(container);
+	dads.d_hide(uiu.qs('.d_ads'));
 	_last_painted_hash = null;
 
 	uiu.removeClass_qs('.settings_layout', 'settings_layout_displaymode');
@@ -1775,6 +1785,9 @@ function ui_init(s, hash_query) {
 	});
 
 	click.qs('.displaymode_layout', function() {
+		settings.show_displaymode();
+	});
+	click.qs('.d_ads', function() {
 		settings.show_displaymode();
 	});
 	click.qs('.settings_mode_display', function(e) {
@@ -1846,6 +1859,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var click = require('./click');
 	var control = require('./control');
 	var compat = require('./compat');
+	var dads = null; // break cycle, should be require('./dads');
 	var eventutils = require('./eventutils');
 	var extradata = require('./extradata');
 	var network = require('./network');

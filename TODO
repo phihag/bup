@@ -1,16 +1,14 @@
-dads
-	actually display ads in displaymode
-
 improve dads
-	test changing mode locally
 	edit dialog
-	mark as active/inactive
 	background color for image
+	mark as active/inactive
 	add type: text
 	add type: refrath-gegen
+	configure always cycle length
 	configure periodic length
 	configure on referee
 
+d/onlyplayers: correctly handle case where no icon is present (at the moment 404)
 bug: back from &order keeps order
 	use history API
 bug: black card at 0-0 with courtspot wrong netscore

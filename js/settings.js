@@ -274,7 +274,7 @@ function change_all(s, new_settings) {
 }
 
 function on_change(s, name) {
-	if (/^d_/.test(name)) {
+	if (/^(d|displaymode|dads)_/.test(name)) {
 		displaymode.on_style_change(s);
 		return;
 	}
@@ -305,11 +305,6 @@ function on_change(s, name) {
 		break;
 	case 'language':
 		i18n.ui_update_state(s);
-		break;
-	case 'displaymode_court_id':
-	case 'displaymode_reverse_order':
-	case 'displaymode_style':
-		displaymode.on_style_change(s);
 		break;
 	case 'wakelock':
 		wakelock.update(s);
