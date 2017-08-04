@@ -140,7 +140,12 @@ function ui_make_config(s, outer_container) {
 		'data-i18n': 'dads:mode',
 		style: 'margin-right: 0.5ch;',
 	});
-	ui_make_mode_select(s, mode_label, s.settings.dads_mode);
+	var select = ui_make_mode_select(s, mode_label, s.settings.dads_mode);
+	select.addEventListener('change', function() {
+		if (select.value) {
+			settings.change_all(s, {dads_mode: select.value});
+		}
+	});
 
 	// TODO if mode=periodic then show periodic config
 
