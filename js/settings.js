@@ -470,6 +470,7 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var click = require('./click');
 	var control = require('./control');
+	var dads = require('./dads');
 	var displaymode = require('./displaymode');
 	var fullscreen = require('./fullscreen');
 	var i18n = require('./i18n');
