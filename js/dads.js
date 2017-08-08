@@ -21,11 +21,7 @@ function load(s) {
 	}
 }
 
-function ui_add(s, ad) {
-	ad.id = utils.uuid();
-	s.dads.push(ad);
-	ad.images2 = [{url: 'foo'}];
-	render_preview(uiu.qs('.dads_previews'), ad);
+function store(s, ad) {
 	var ad_json = JSON.stringify(ad);
 	try {
 		localStorage.setItem('bup_dads_' + ad.id, ad_json);
@@ -36,6 +32,20 @@ function ui_add(s, ad) {
 		}
 		throw e;
 	}
+}
+
+function ui_add(s, ad) {
+	ad.id = utils.uuid();
+	s.dads.push(ad);
+	var c = uiu.el(uiu.qs('.dads_previews'), 'div', 'dads_preview');
+	render_preview(c, ad);
+	store(s, ad);
+}
+
+function ui_change(s, ad) {
+	var ad_el = uiu.qs('.dads_preview[data-ad-id="' + ad.id + '"]');
+	render_preview(ad_el, ad);
+	store(s, ad);
 }
 
 function ui_add_image_from_dt(s, dt) {
@@ -80,7 +90,7 @@ function ui_rm(s, ad_id) {
 function render_ad(container, ad) {
 	switch(ad.type) {
 	case 'image':
-		container.style.backgroundColor = '#000';
+		container.style.backgroundColor = ad.bgcolor || '#000';
 		uiu.el(container, 'img', {
 			src: ad.url,
 			style: 'position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;',
@@ -97,11 +107,28 @@ function on_rm_click(e) {
 	ui_rm(state, ad_id);
 }
 
+function on_bgcolor_change(e) {
+	var ad_id = uiu.closest_class(e.target, 'dads_preview').getAttribute('data-ad-id');
+	var ad = utils.find(state.dads, function(ad) {
+		return ad.id === ad_id;
+	});
+	ad.bgcolor = e.target.value;
+	ui_change(state, ad);
+}
+
 function render_preview(container, ad) {
-	var c = uiu.el(container, 'div', 'dads_preview');
-	render_ad(c, ad);
-	c.setAttribute('data-ad-id', ad.id);
-	var rm_btn = uiu.el(c, 'button', 'dads_rm');
+	uiu.empty(container);
+	render_ad(container, ad);
+	container.setAttribute('data-ad-id', ad.id);
+
+	var color_input = uiu.el(container, 'input', {
+		type: 'color',
+		value: ad.bgcolor,
+		class: 'dads_bgcolor',
+	});
+	color_input.addEventListener('change', on_bgcolor_change);
+
+	var rm_btn = uiu.el(container, 'button', 'dads_rm');
 	uiu.el(rm_btn, 'span');
 	click.on(rm_btn, on_rm_click);
 }
@@ -109,7 +136,8 @@ function render_preview(container, ad) {
 function render_previews(s, container) {
 	uiu.empty(container);
 	s.dads.forEach(function(ad) {
-		render_preview(container, ad);
+		var c = uiu.el(container, 'div', 'dads_preview');
+		render_preview(c, ad);
 	});
 }
 

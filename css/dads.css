@@ -18,13 +18,23 @@
 	display: inline-block;
 }
 
+.dads_bgcolor,
 .dads_rm {
-	cursor: pointer;
 	position: absolute;
-	top: 0;
-	right: 0;
 	opacity: 0.4;
 }
+.dads_bgcolor {
+	top: 0;
+	left: 0;
+	width: 3vmin;
+	height: 3vmin;
+}
+.dads_rm {
+	cursor: pointer;
+	top: 0;
+	right: 0;
+}
+.dads_preview:hover .dads_bgcolor,
 .dads_preview:hover .dads_rm {
 	opacity: 1;
 }
