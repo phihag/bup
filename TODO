@@ -1,4 +1,6 @@
 improve dads
+	use duration configuration
+	sometimes scrollbar?
 	change config when mode changes
 	edit dialog
 	background color for image
@@ -7,6 +9,7 @@ improve dads
 	add type: refrath-gegen
 	ad until time
 	configure on referee
+displaymode: make cursor vanish after a while
 
 d/onlyplayers: correctly handle case where no icon is present (at the moment 404)
 bug: back from &order keeps order
@@ -15,6 +18,13 @@ bug: black card at 0-0 with courtspot wrong netscore
 bupdate on windows: close phardata
 	test in VM
 	-> mail Tim
+
+NLA
+	scoresheet
+	configuration
+	eventsheet
+	french
+	test demo
 
 #settings only for main settings
 useful tracebacks!
@@ -61,7 +71,6 @@ test calc.players_present
 Evelyn Jantsch: Animation or delay at ends change?
 umpire mode -> display mode -> umpire mode can show court twice
 Peter Staats -> Liga-Modus
-displaymode: make cursor vanish after a while
 settings: remove duplication of color names
 displaymode: remove checks if (! event.courts) { in renderers
 
