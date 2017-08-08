@@ -41,15 +41,11 @@ function _send(obj) {
 }
 
 function report(info_obj) {
-	var is_dev = false;
 	/*@DEV*/
-	is_dev = true;
+	return;
 	/*/@DEV*/
-	if (is_dev) {
-		return;
-	}
 
-	reported_count++;
+	reported_count++; // eslint-disable-line no-unreachable
 	if (reported_count > 5) {
 		return;
 	}
