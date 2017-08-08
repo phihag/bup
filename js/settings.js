@@ -279,7 +279,11 @@ function change_all(s, new_settings) {
 }
 
 function on_change(s, name) {
-	if (/^(d|displaymode|dads)_/.test(name)) {
+	if (/^(dads)_/.test(name)) {
+		dads.on_style_change(s);
+		return;
+	}
+	if (/^(d|displaymode)_/.test(name)) {
 		displaymode.on_style_change(s);
 		return;
 	}

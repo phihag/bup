@@ -147,6 +147,24 @@ function interval_input(s, container, name) {
 	});
 }
 
+function render_options(s, options_container) {
+	var dads_mode = s.settings.dads_mode;
+
+	var old_mode = options_container.getAttribute('data-dads-mode');
+	if (old_mode === dads_mode) {
+		return;
+	}
+
+	options_container.setAttribute('data-dads-mode', dads_mode);
+	uiu.empty(options_container);
+	if (dads_mode === 'always') {
+		interval_input(s, options_container, 'interval');
+	} else if (dads_mode === 'periodic') {
+		interval_input(s, options_container, 'dtime');
+		interval_input(s, options_container, 'atime');
+	}
+}
+
 function ui_make_config(s, outer_container) {
 	var dads_mode = s.settings.dads_mode;
 	var container = uiu.el(outer_container, 'div', 'dads_config_container');
@@ -172,12 +190,7 @@ function ui_make_config(s, outer_container) {
 	});
 
 	var options = uiu.el(container, 'div', 'dads_options');
-	if (dads_mode === 'always') {
-		interval_input(s, options, 'interval');
-	} else if (dads_mode === 'periodic') {
-		interval_input(s, options, 'dtime');
-		interval_input(s, options, 'atime');
-	}
+	render_options(s, options);
 
 	var previews = uiu.el(container, 'div', 'dads_previews');
 	render_previews(s, previews);
@@ -239,6 +252,13 @@ function ui_make_config(s, outer_container) {
 
 function paste_handler(event) {
 	ui_add_image_from_dt(state, event.clipboardData);
+}
+
+function on_style_change(s) {
+	if (s.ui.dads_visible) {
+		render_options(s, uiu.qs('.dads_config_container .dads_options'));
+	}
+	displaymode.on_style_change(s);
 }
 
 function show() {
@@ -321,7 +341,7 @@ function advance_periodic(s, container) {
 
 	s.dad_periodic_to = setTimeout(function() {
 		advance_periodic(s, container);
-	}, (s.dad_periodic_active ? 7500 : 15000));
+	}, (s.dad_periodic_active ? s.settings.dads_atime : s.settings.dads_dtime));
 }
 
 function cycle(s, container) {
@@ -335,11 +355,7 @@ function cycle(s, container) {
 	render_ad(container, ad);
 }
 
-// Gets called when the configuration has changed
-function d_update(container) {
-	var s = state;
-	var mode = s.settings.dads_mode;
-
+function cancel_timeouts(s) {
 	if (s.dad_cycle_interval) {
 		clearInterval(s.dad_cycle_interval);
 		s.dad_cycle_interval = null;
@@ -348,7 +364,14 @@ function d_update(container) {
 		clearTimeout(s.dad_periodic_to);
 		s.dad_periodic_to = null;
 	}
+}
 
+// Gets called when the configuration has changed
+function d_update(container) {
+	var s = state;
+	var mode = s.settings.dads_mode;
+
+	cancel_timeouts(s);
 	if (mode === 'none') {
 		uiu.hide(container);
 		return;
@@ -359,7 +382,7 @@ function d_update(container) {
 	if (mode === 'always') {
 		s.dad_cycle_interval = setInterval(function() {
 			cycle(s, container);
-		}, 15000);
+		}, s.settings.dads_interval);
 		uiu.show(container);
 	} else if (mode === 'periodic') {
 		s.dad_periodic_active = true;
@@ -368,6 +391,7 @@ function d_update(container) {
 }
 
 function d_hide(container) {
+	cancel_timeouts(state);
 	uiu.hide(container);
 }
 
@@ -384,6 +408,7 @@ return {
 	hide: hide,
 	d_update: d_update,
 	d_hide: d_hide,
+	on_style_change: on_style_change,
 };
 
 })();
