@@ -141,6 +141,7 @@ if (ZIP_METHOD === 'phar') {
 
 	$phar = new \PharData($zip_fn);
     $phar->extractTo($new_dir);
+    $phar = null;
 } elseif (ZIP_METHOD === 'php') {
 	$zip = new \ZipArchive();
 	if (!$zip->open($zip_fn)) {
