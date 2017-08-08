@@ -59,12 +59,11 @@ dist: cleandist ## Create distribution files
 	node div/minify_json.js div/tdemo.json dist/bup/div/tdemo.json
 	node div/minify_json.js div/rlmdemo.json dist/bup/div/rlmdemo.json
 	cp -R div/teamlists --target-directory dist/bup/div/
+	cp -R div/courtspot --target-directory dist/bup/div/
 	cp -R http_proxy --target-directory dist/bup/
 	cp \
 		div/bundesliga-ballsorten-2016.pdf \
 		div/bupdate.php \
-		div/courtspot_screenshot_links.png \
-		div/courtspot_screenshot_rechts.png \
 		div/data_structures.md \
 		div/FAQ.de \
 		div/URLS.md \
@@ -81,6 +80,12 @@ dist: cleandist ## Create distribution files
 		div/setupsheet_bundesliga-2016.svg \
 		div/setupsheet_default.svg \
 		div/wakelock.mp4 \
+		--target-directory dist/bup/div/
+
+	# backwards compat, remove by 2018
+	cp \
+		div/courtspot_screenshot_links.png \
+		div/courtspot_screenshot_rechts.png \
 		--target-directory dist/bup/div/
 
 	$(MAKE) appcache-manifest
