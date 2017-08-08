@@ -107,12 +107,22 @@ function on_rm_click(e) {
 	ui_rm(state, ad_id);
 }
 
-function on_bgcolor_change(e) {
+function _find_ad(e) {
 	var ad_id = uiu.closest_class(e.target, 'dads_preview').getAttribute('data-ad-id');
-	var ad = utils.find(state.dads, function(ad) {
+	return utils.find(state.dads, function(ad) {
 		return ad.id === ad_id;
 	});
+}
+
+function on_bgcolor_change(e) {
+	var ad = _find_ad(e);
 	ad.bgcolor = e.target.value;
+	ui_change(state, ad);
+}
+
+function on_active_change(e) {
+	var ad = _find_ad(e);
+	ad.disabled = !e.target.checked;
 	ui_change(state, ad);
 }
 
@@ -131,6 +141,18 @@ function render_preview(container, ad) {
 	var rm_btn = uiu.el(container, 'button', 'dads_rm');
 	uiu.el(rm_btn, 'span');
 	click.on(rm_btn, on_rm_click);
+
+	var active_label = uiu.el(container, 'label', 'dads_active');
+	var active_cb = uiu.el(active_label, 'input', {
+		type: 'checkbox',
+	});
+	if (!ad.disabled) {
+		active_cb.setAttribute('checked', 'checked');
+	}
+	active_cb.addEventListener('change', on_active_change);
+	uiu.el(active_label, 'span', {
+		'data-i18n': 'dads:active',
+	}, state._('dads:active'));
 }
 
 function render_previews(s, container) {
@@ -377,8 +399,13 @@ function cycle(s, container) {
 		return;
 	}
 
-	s.dad_cycle_index = (s.dad_cycle_index + 1) % s.dads.length;
-	var ad = s.dads[s.dad_cycle_index];
+	for (var inc = 0;inc < s.dads.length;inc++) {
+		s.dad_cycle_index = (s.dad_cycle_index + 1) % s.dads.length;
+		var ad = s.dads[s.dad_cycle_index];
+		if (! ad.disabled) {
+			break;
+		}
+	}
 	uiu.empty(container);
 	render_ad(container, ad);
 }

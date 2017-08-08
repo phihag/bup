@@ -44,6 +44,13 @@
 	height: 3vmin;
 	background: no-repeat center/contain url(../icons/delete.svg);
 }
+.dads_active {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	background: #fff;
+	padding: 0.5vmin 1vmin 0 0;
+}
 .dads_buttons button + button {
 	margin-left: 1em;
 }

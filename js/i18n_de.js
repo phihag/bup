@@ -548,6 +548,7 @@ var i18n_de = {
 'dads|interval': 'Wechsel-Interval (s):',
 'dads|dtime': 'Anzeige-Dauer (s):',
 'dads|atime': 'Werbe-Dauer (s):',
+'dads:active': 'Aktiv',
 };
 
 /*@DEV*/
