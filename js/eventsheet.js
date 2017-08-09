@@ -1257,7 +1257,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 
 function direct_download(es_key, ui8r) {
 	var ext = /\.([a-z0-9]+)$/.exec(URLS[es_key])[1];
-	var filename = state._('eventsheet:label:' + es_key) + '.' + ext;
+	var filename = state._('eventsheet:label|' + es_key) + '.' + ext;
 	var blob = new Blob([ui8r], {type: MIME_TYPES[ext]});
 	saveAs(blob, filename);
 }
@@ -1352,7 +1352,7 @@ function render_links(s, container) {
 		eventsheets = [];
 	}
 	eventsheets.forEach(function(es_key) {
-		var i18n_key = 'eventsheet:label:' + es_key;
+		var i18n_key = 'eventsheet:label|' + es_key;
 		if (EXTERNAL_DOWNLOAD_SHEETS[es_key]) {
 			uiu.el(container, 'a', {
 				'href': URLS[es_key],
@@ -1363,7 +1363,7 @@ function render_links(s, container) {
 			}, s._(i18n_key));
 		} else if (DIRECT_DOWNLOAD_SHEETS[es_key]) {
 			var ext = /\.([a-z0-9]+)$/.exec(URLS[es_key])[1];
-			var filename = state._('eventsheet:label:' + es_key) + '.' + ext;
+			var filename = state._('eventsheet:label|' + es_key) + '.' + ext;
 
 			uiu.el(container, 'a', {
 				'href': URLS[es_key],
@@ -1557,7 +1557,7 @@ function show_dialog(es_key) {
 
 	uiu.text_qs('.eventsheet_generate_button',
 		state._('eventsheet:Generate', {
-			sheetname: state._('eventsheet:label:' + es_key),
+			sheetname: state._('eventsheet:label|' + es_key),
 		}));
 
 	dialog_fetch();
