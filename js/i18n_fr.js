@@ -27,13 +27,13 @@ var i18n_fr = {
 'court:right': 'droite',
 'court:referee': 'juge-arbitre',
 
-'postmatch:label': '(This match is over)',
-'postmatch:leave': 'Leave match',
+'postmatch:label': '(Cet jeu est terminé)',
+'postmatch:leave': 'quitter jeu',
 
-'mdesc:finished': 'finished',
-'mdesc:interval': 'interval',
-'mdesc:selected': 'preparing match',
-'mdesc:toss': 'inputing toss',
+'mdesc:finished': 'fini',
+'mdesc:interval': 'pause',
+'mdesc:selected': 'appel',
+'mdesc:toss': 'tirage au sort',
 'mdesc:warmup': 'warmup',
 'mdesc:incomplete': 'missing player names',
 'mdesc:blocked': 'waiting for players ({matches})',
@@ -530,7 +530,7 @@ var i18n_fr = {
 'refmode:referee:backwards clock': 'The internal clock of the tablet is late by {diff} minutes!',
 
 'urlimport:error': 'Import failed: {msg}',
-'urlimport:staticnet_message': 'Importierter Wettkampf',
+'urlimport:staticnet_message': 'Imported event',
 
 'editmode:fix_time': 'Stop time at',
 

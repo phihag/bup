@@ -530,7 +530,7 @@ var i18n_en = {
 'refmode:referee:backwards clock': 'The internal clock of the tablet is late by {diff} minutes!',
 
 'urlimport:error': 'Import failed: {msg}',
-'urlimport:staticnet_message': 'Importierter Wettkampf',
+'urlimport:staticnet_message': 'Imported event',
 
 'editmode:fix_time': 'Stop time at',
 
