@@ -20,7 +20,9 @@ function _match_all(rex, s, group) {
 
 _describe('i18n', function() {
 	_it('all keys present', function() {
-		var languages = bup.utils.values(bup.i18n.languages);
+		var languages = bup.utils.values(bup.i18n.languages).filter(function(lang) {
+			return ! lang._fallback;
+		});
 		var expect_keys = Object.keys(languages[0]);
 		expect_keys.sort();
 

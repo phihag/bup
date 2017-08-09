@@ -554,6 +554,6 @@ var i18n_fr = {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
-	module.exports = i18n_en;
+	module.exports = i18n_fr;
 }
 /*/@DEV*/
