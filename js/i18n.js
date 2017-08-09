@@ -1,5 +1,5 @@
-var i18n = (function() {
 'use strict';
+var i18n = (function() {
 
 var languages = {};
 
@@ -34,8 +34,10 @@ function is_supported(lcode) {
 }
 
 function init() {
-	register_lang(i18n_de);
 	register_lang(i18n_en);
+	register_lang(i18n_de);
+	register_lang(i18n_ch);
+	register_lang(i18n_fr);
 
 	var auto_code = detect_lang();
 	update_state(state, auto_code);
@@ -99,6 +101,13 @@ function translate(s, str, data, fallback) {
 		return 'Invalid Language [' + s.lang + ']:>> ' + str + ' <<';
 	}
 	var res = lang[str];
+	if ((res === undefined) && (lang._fallback)) {
+		lang = languages[lang._fallback];
+		if (! lang) {
+			return 'invalid fallback language [' + s.lang + ']:>> ' + str + ' <<';
+		}
+		res = lang[str];
+	}
 	if (res === undefined) {
 		if (fallback === undefined) {
 			/*@DEV*/
@@ -146,6 +155,10 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	i18n.register_lang(i18n_de);
 	var i18n_en = require('./i18n_en');
 	i18n.register_lang(i18n_en);
+	var i18n_fr = require('./i18n_fr');
+	i18n.register_lang(i18n_fr);
+	var i18n_ch = require('./i18n_ch');
+	i18n.register_lang(i18n_ch);
 
 	module.exports = i18n;
 }

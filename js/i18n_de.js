@@ -3,6 +3,7 @@ var i18n_de = {
 '_code': 'de',
 '_name': 'Deutsch',
 
+
 'Event Sheet': 'Spielbericht',
 'Automatic': 'Automatisch',
 'Court': 'Feld',
