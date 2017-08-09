@@ -1126,7 +1126,7 @@ function load_sheet(sheet_name, cb, url_prefix) {
 
 function make_sheet_node(s, xml) {
 	var doc = $.parseXML(xml);
-	i18n.translate_nodes($(doc), s);
+	i18n.translate_nodes(doc, s);
 	return doc.documentElement;
 }
 
