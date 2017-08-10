@@ -337,12 +337,12 @@ _describe('helper functions', function() {
 			'12:39:23'
 		);
 		assert.strictEqual(
-			bup.utils.parse_time('15:39', 1502335546914),
-			1502372340000
+			bup.utils.timesecs_str(bup.utils.parse_time('15:39', 1502335546914)),
+			'15:39:00'
 		);
 		assert.strictEqual(
-			bup.utils.parse_time('23:20:50.52', 1502350131246),
-			1502400050000
+			bup.utils.timesecs_str(bup.utils.parse_time('23:20:50.52', 1502350131246)),
+			'23:20:50'
 		);
 		assert.strictEqual(
 			bup.utils.parse_time('x', 1502350131246),
