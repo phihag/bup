@@ -67,7 +67,7 @@ function postgame_announcement(s) {
 		var gscore = calc.gamescore(s);
 		var games_leader_idx = (gscore[0] > gscore[1]) ? 0 : 1;
 		var games_leader_name = wonby_name(s, games_leader_idx);
-		res = s._('wonby.' + (gscore[0] + gscore[1]), {
+		res = s._('wonby|' + (gscore[0] + gscore[1])) + s._('wonby.winner', {
 			winner_name: winner_name,
 			winner_score: winner_score,
 			loser_score: loser_score,
@@ -213,7 +213,7 @@ function pronounce(s, now) {
 				left_team: _prematch_team(s, left_team),
 				right_team: _prematch_team(s, 1 - left_team),
 				serving_team: s.setup.teams[serving_team_id].name,
-				serving_str: serving_str,
+				serving_str: s._('onmyleft.serves') + serving_str,
 				score: pronounce_score(s),
 			};
 
@@ -224,7 +224,8 @@ function pronounce(s, now) {
 			);
 		} else {
 			var receiver_str = (s.setup.is_doubles ?
-				s._('onmyleft.serveto', {receiver: receiver_name}) : '');
+				s._('onmyleft.serveto', {receiver: receiver_name}) :
+				s._('onmyleft.serves'));
 
 			d = {
 				right_team: _prematch_team(s, (s.game.team1_left ? 1 : 0)),

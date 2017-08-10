@@ -37,7 +37,7 @@ _describe('i18n', function() {
 				var got_templates = _match_all(rex, lang[k], 1);
 				expected_templates.sort();
 				got_templates.sort();
-				assert.deepEqual(expected_templates, got_templates);
+				assert.deepEqual(expected_templates, got_templates, 'differing templates in ' + k);
 			}
 		});
 	});

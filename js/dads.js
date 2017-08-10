@@ -372,6 +372,11 @@ function install_controls(s, container, cur_val) {
 	click.on(link, function() {
 		show(s);
 	});
+
+	uiu.el(container, 'span', {
+		'data-i18n': 'experimental',
+	});
+
 	i18n.translate_nodes(container, s);
 
 	return select;

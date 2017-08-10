@@ -36,8 +36,8 @@ function is_supported(lcode) {
 function init() {
 	register_lang(i18n_en);
 	register_lang(i18n_de);
-	register_lang(i18n_ch);
-	register_lang(i18n_fr);
+	register_lang(i18n_dech);
+	register_lang(i18n_frch);
 
 	var auto_code = detect_lang();
 	update_state(state, auto_code);
@@ -155,10 +155,10 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	i18n.register_lang(i18n_de);
 	var i18n_en = require('./i18n_en');
 	i18n.register_lang(i18n_en);
-	var i18n_fr = require('./i18n_fr');
-	i18n.register_lang(i18n_fr);
-	var i18n_ch = require('./i18n_ch');
-	i18n.register_lang(i18n_ch);
+	var i18n_frch = require('./i18n_frch');
+	i18n.register_lang(i18n_frch);
+	var i18n_dech = require('./i18n_dech');
+	i18n.register_lang(i18n_dech);
 
 	module.exports = i18n;
 }

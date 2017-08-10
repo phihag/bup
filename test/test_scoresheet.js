@@ -2448,7 +2448,22 @@ _describe('scoresheet generation', function() {
 			val: 'Walkover',
 			width: 4,
 		});
+	});
 
+	_it('characters (french)', function() {
+		var s = tutils.state_after([], SINGLES_SETUP, {language: 'frch'});
+		assert.strictEqual(s._('scoresheet:server'), 'S');
+		assert.strictEqual(s._('scoresheet:receiver'), 'R');
+		assert.strictEqual(s._('mark:overrule'), 'O');
+		assert.strictEqual(s._('mark:referee'), 'JA');
+		assert.strictEqual(s._('mark:suspension'), 'S');
+		assert.strictEqual(s._('mark:correction'), 'C');
+		assert.strictEqual(s._('mark:yellow-card'), 'A');
+		assert.strictEqual(s._('mark:red-card'), 'F');
+		assert.strictEqual(s._('mark:injury'), 'B');
+		assert.strictEqual(s._('mark:retired'), 'Abandon');
+		assert.strictEqual(s._('mark:disqualified'), 'Disqualifié');
+		assert.strictEqual(s._('mark:walkover'), 'Walkover');
 	});
 });
 

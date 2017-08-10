@@ -28,6 +28,14 @@ function pronounce_en(s, now) {
 	return pronounce('en', s, now);
 }
 
+function pronounce_frch(s, now) {
+	return pronounce('frch', s, now);
+}
+
+function pronounce_dech(s, now) {
+	return pronounce('dech', s, now);
+}
+
 function loveall_de(s) {
 	bup.i18n.update_state(s, 'de');
 	return bup.pronunciation.loveall_announcement(s);
@@ -88,6 +96,17 @@ _describe('pronunciation', function() {
 			'Love all.\n' +
 			'Play.'
 		);
+		assert.strictEqual(
+			pronounce_frch(s),
+			'Mesdames et messieurs,\n' +
+			'à ma droite,\n' +
+			'Bob et Birgit,\n' +
+			'et à ma gauche,\n' +
+			'Andrew et Alice.\n' +
+			'Andrew sert sur Birgit.\n\n' +
+			'0 partout.\n' +
+			'Jouez.'
+		);
 		assert.equal(loveall_de(s),
 			'0 beide.\nBitte spielen.');
 
@@ -125,6 +144,17 @@ _describe('pronunciation', function() {
 			'Alice to serve to Birgit.\n\n' +
 			'Love all.\n' +
 			'Play.'
+		);
+		assert.strictEqual(
+			pronounce_frch(s),
+			'Mesdames et messieurs,\n' +
+			'à ma droite,\n' +
+			'Andrew et Alice,\n' +
+			'et à ma gauche,\n' +
+			'Bob et Birgit.\n' +
+			'Alice sert sur Birgit.\n\n' +
+			'0 partout.\n' +
+			'Jouez.'
 		);
 
 		presses = [{
@@ -204,7 +234,17 @@ _describe('pronunciation', function() {
 			'Love all.\n' +
 			'Play.'
 		);
-
+		assert.strictEqual(
+			pronounce_frch(s),
+			'Mesdames et messieurs,\n' +
+			'à ma droite,\n' +
+			'Bob,\n' +
+			'et à ma gauche,\n' +
+			'Alice.\n' +
+			'Alice au service.\n\n' +
+			'0 partout.\n' +
+			'Jouez.'
+		);
 
 		presses = [{
 			type: 'pick_side', // Alice picks right
@@ -340,7 +380,17 @@ _describe('pronunciation', function() {
 			'Love all.\n' +
 			'Play.'
 		);
-
+		assert.strictEqual(
+			pronounce_frch(s),
+			'Mesdames et messieurs,\n' +
+			'à ma droite,\n' +
+			'B team, representé par Bob et Birgit,\n' +
+			'et à ma gauche,\n' +
+			'A team, representé par Andrew et Alice.\n' +
+			'A team au service, Alice sur Birgit.\n\n' +
+			'0 partout.\n' +
+			'Jouez.'
+		);
 
 		presses = [{
 			type: 'pick_side', // Andrew&Alice pick right
@@ -526,6 +576,7 @@ _describe('pronunciation', function() {
 		var s = state_after(presses, SINGLES_TEAM_SETUP);
 		assert.strictEqual(pronounce_de(s), null);
 		assert.strictEqual(pronounce_en(s), null);
+		assert.strictEqual(pronounce_frch(s), null);
 
 		presses.push({
 			type: 'pick_side', // Alice picks left
@@ -562,6 +613,17 @@ _describe('pronunciation', function() {
 			'Love all.\n' +
 			'Play.'
 		);
+		assert.strictEqual(
+			pronounce_frch(s),
+			'Mesdames et messieurs,\n' +
+			'à ma droite,\n' +
+			'B team, representé par Bob,\n' +
+			'et à ma gauche,\n' +
+			'A team, representé par Alice.\n' +
+			'A team au service.\n\n' +
+			'0 partout.\n' +
+			'Jouez.'
+		);
 		s = state_after(presses, SINGLES_TEAM_SETUP_NEUTRALGROUND);
 		assert.strictEqual(
 			pronounce_de(s),
@@ -584,6 +646,17 @@ _describe('pronunciation', function() {
 			'A team to serve.\n\n' +
 			'Love all.\n' +
 			'Play.'
+		);
+		assert.strictEqual(
+			pronounce_frch(s),
+			'Mesdames et messieurs,\n' +
+			'à ma droite,\n' +
+			'B team, representé par Bob,\n' +
+			'et à ma gauche,\n' +
+			'A team, representé par Alice.\n' +
+			'A team au service.\n\n' +
+			'0 partout.\n' +
+			'Jouez.'
 		);
 
 		presses = [{
@@ -790,6 +863,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s), 'Aufschlagwechsel. 1-2');
 		assert.equal(pronounce_en(s), 'Service over. 1-2');
+		assert.equal(pronounce_frch(s), 'Changement de service. 1-2');
 
 		presses.push({
 			type: 'score',
@@ -798,6 +872,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s), '2 beide');
 		assert.equal(pronounce_en(s), '2 all');
+		assert.equal(pronounce_frch(s), '2 partout');
 
 		presses.push({
 			type: 'score',
@@ -985,6 +1060,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce_de(s), 'Aufschlagwechsel. 20 Satzpunkt 19');
 		assert.equal(pronounce_en(s), 'Service over. 20 game point 19');
+		assert.equal(pronounce_frch(s), 'Changement de service. 20 point de set 19');
 
 		alt_presses.push({
 			type: 'score',
@@ -1037,6 +1113,9 @@ _describe('pronunciation', function() {
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'First game won by Bob 23-21');
+		assert.equal(pronounce_frch(s),
+			'Set.\n\n' +
+			'Premier set gagné par Bob 23-21');
 
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
@@ -1116,6 +1195,9 @@ _describe('pronunciation', function() {
 		assert.equal(pronounce_en(s),
 			'Service over. 11-10 Interval\n\n' +
 			'11-10. Play.');
+		assert.equal(pronounce_frch(s),
+			'Changement de service. 11-10 pause\n\n' +
+			'11-10. Jouez.');
 
 		press_score(presses, 9, 6);
 		presses.push({
@@ -1138,6 +1220,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, SINGLES_SETUP);
 		assert.equal(pronounce_de(s), 'Aufschlagwechsel. 20 Spielpunkt 19');
 		assert.equal(pronounce_en(s), 'Service over. 20 match point 19');
+		assert.equal(pronounce_frch(s), 'Changement de service. 20 point de match 19');
 
 		presses.push({
 			type: 'score',
@@ -1255,6 +1338,9 @@ _describe('pronunciation', function() {
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'Second game won by A team 30-29; One game all');
+		assert.equal(pronounce_frch(s),
+			'Set.\n\n' +
+			'Deuxième set gagné par A team 30-29. Un set partout');
 		s = state_after(presses, DOUBLES_TEAM_SETUP);
 		assert.equal(pronounce_de(s), 
 			'Satz.\n\n' +
@@ -1303,6 +1389,8 @@ _describe('pronunciation', function() {
 			'Entscheidungssatz. 0 beide.\nBitte spielen.');
 		assert.equal(pronounce_en(s),
 			'Final game; Love all; play');
+		assert.equal(pronounce_frch(s),
+			'Set décisif. 0 partout.\nJouez.');
 		assert.equal(loveall_de(s),
 			'Entscheidungssatz. 0 beide.\nBitte spielen.');
 		assert.equal(loveall_en(s),
@@ -1335,6 +1423,12 @@ _describe('pronunciation', function() {
 		assert.equal(pronounce_en(s),
 			'Service over. 11-10 Interval; change ends\n\n' +
 			'11-10. Play.');
+		assert.equal(pronounce_dech(s),
+			'Aufschlagwechsel. 11-10 Pause. Seitenwechsel.\n\n' +
+			'11-10. Bitte spielen.');
+		assert.equal(pronounce_frch(s),
+			'Changement de service. 11-10 pause. Changez de côté\n\n' +
+			'11-10. Jouez.');
 
 		presses.push({
 			type: 'score',
@@ -1395,6 +1489,9 @@ _describe('pronunciation', function() {
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'Match won by B team 23-21 29-30 22-20');
+		assert.equal(pronounce_frch(s),
+			'Set.\n\n' +
+			'Match gagné par B team 23-21 29-30 22-20');
 		s = state_after(alt_presses, SINGLES_TEAM_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
@@ -1467,6 +1564,12 @@ _describe('pronunciation', function() {
 		assert.equal(pronounce_en(s),
 			'Andrew, warning for misconduct.\n' +
 			'Love all');
+		assert.equal(pronounce_frch(s),
+			'Andrew, avertissement pour mauvais comportement.\n' +
+			'0 partout');
+		assert.equal(pronounce_dech(s),
+			'Andrew, Verwarnung wegen schlechten Benehmens.\n' +
+			'0 beide');
 
 		presses.push({
 			type: 'score',
@@ -1484,6 +1587,12 @@ _describe('pronunciation', function() {
 		assert.equal(pronounce_en(s),
 			'Alice, fault for misconduct.\n' +
 			'Service over. 1 all');
+		assert.equal(pronounce_frch(s),
+			'Alice, faute pour mauvais comportement.\n' +
+			'Changement de service. 1 partout');
+		assert.equal(pronounce_dech(s),
+			'Alice, Fehler wegen schlechten Benehmens.\n' +
+			'Aufschlagwechsel. 1 beide');
 
 		presses.push({
 			type: 'score',
@@ -1566,6 +1675,12 @@ _describe('pronunciation', function() {
 		assert.equal(pronounce_en(s),
 			'Bob, disqualified for misconduct.\n\n' +
 			'Match won by Andrew and Alice 4-4');
+		assert.equal(pronounce_frch(s),
+			'Bob, disqualifié pour mauvais comportement.\n\n' +
+			'Match gagné par Andrew et Alice 4-4');
+		assert.equal(pronounce_dech(s),
+			'Bob, disqualifiziert wegen schlechten Benehmens.\n\n' +
+			'Spiel gewonnen von Andrew und Alice 4-4');
 
 		s = state_after(presses, DOUBLES_TEAM_SETUP);
 		assert.equal(pronounce_de(s),
@@ -3483,6 +3598,10 @@ _describe('pronunciation', function() {
 			'Court 5, 20 seconds. Court 5, 20 seconds.\n\n' +
 			'11-6. Play.'
 		);
+		assert.equal(pronounce_frch(s, 1040000),
+			'Court 5, 20 secondes. Court 5, 20 secondes.\n\n' +
+			'11-6. Jouez.'
+		);
 		assert.deepStrictEqual(s.timer, {
 			duration: 60000,
 			exigent: 25000,
@@ -3497,6 +3616,10 @@ _describe('pronunciation', function() {
 		assert.equal(pronounce_en(s, 1040000),
 			'20 seconds. 20 seconds.\n\n' +
 			'11-6. Play.'
+		);
+		assert.equal(pronounce_frch(s, 1040000),
+			'20 secondes. 20 secondes.\n\n' +
+			'11-6. Jouez.'
 		);
 
 		s = state_after(presses, DOUBLES_SETUP);
@@ -3574,6 +3697,8 @@ _describe('pronunciation', function() {
 			'Bitte spielen.');
 		assert.strictEqual(pronounce_en(s, 2050000),
 			'Second game; Love all; play');
+		assert.strictEqual(pronounce_frch(s, 2050000),
+			'Deuxième set. 0 partout.\nJouez.');
 		assert.deepStrictEqual(s.timer, {
 			start: 2000000,
 			duration: 120000,

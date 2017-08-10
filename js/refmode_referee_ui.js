@@ -536,7 +536,7 @@ function render_clients(clients) {
 			var unpush_button = uiu.el(event_row, 'button', {}, s._('refmode:referee:push:deactivate'));
 			click.on(unpush_button, on_push_end_button_click);
 		} else {
-			var push_button = uiu.el(event_row, 'button', {}, s._('refmode:referee:push:activate'));
+			var push_button = uiu.el(event_row, 'button', {}, s._('refmode:referee:push:activate') + s._('experimental'));
 			click.on(push_button, on_push_start_button_click);
 		}
 

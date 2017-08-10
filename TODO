@@ -9,28 +9,35 @@ d/onlyplayers: correctly handle case where no icon is present (at the moment 404
 bug: back from &order keeps order
 	use history API
 bug: black card at 0-0 with courtspot wrong netscore
-i18n: de_CH (fall back to de)
+displaymode: heinz middle
 
 NLA
 	scoresheet
 	configuration
 	eventsheet
-	french
 	test demo
 	go through ch vocabulary
+	check in btde
 
+referee w/ safari: show nice error message
+safari: switch to RSA-OAEP?
+
+i18n: check for i18n values that are the same in all languages (like cancel)
 #settings only for main settings
 useful tracebacks!
 	generate source map
 	parse source map
 
+refmode: test various timings (client before server at hub - does it still come up in display?)
 button to reset colors
 check/improve logos for all bundesliga clubs
 check/improve colors for all bundesliga clubs
 test that everything works with nlademo
 
+i18n: generate a table with all translations
 move all demo files to div/demos/ (and correctly generate them in makefile)
 demo&display should work!!!
+on error pop up a dialog (if the network allows it)
 link to update in settings
 displaymode: cannot change colors in UI (gets reset!?)
 https://aufschlagwechsel.de/bup/#setupsheet crashes!
@@ -813,14 +820,3 @@ event analysis: which presses before undo
 remove calls to prompt and alert
 render in transparent windows -> Dieter Gläßer
 drucken wie BTP als Server (alles|bei Problemen|nie)
-
-======= blocked =======
-add support for NLA
-	scoresheets
-	eventsheets
-	team sheets
-	ranking lists?
-	check 15 minutes pause between matches (2.11.1)
-	check demo
-referee w/ safari: show nice error message
-safari: switch to RSA-OAEP?
