@@ -552,6 +552,7 @@ var i18n_en = {
 'dads|interval': 'change interval (s):',
 'dads|dtime': 'score duration (s):',
 'dads|atime': 'ad duration (s):',
+'dads|until': 'until ..',
 'dads:active': 'active',
 };
 

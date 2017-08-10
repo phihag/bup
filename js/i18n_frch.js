@@ -547,6 +547,7 @@ var i18n_frch = {
 'dads|interval': 'Intervalle de changement (s):',
 'dads|dtime': 'Durée du affichage (s):',
 'dads|atime': 'Durée de la publicité (s):',
+'dads|until': 'Jusqu\'à ..',
 'dads:active': 'active',
 };
 

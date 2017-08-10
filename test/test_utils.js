@@ -330,4 +330,19 @@ _describe('helper functions', function() {
 		assert.deepStrictEqual(bup.utils.parse_json('{"x": 2}'), {x: 2});
 		assert.deepStrictEqual(bup.utils.parse_json('ERROR{"x": 2}'), undefined);
 	});
+
+	_it('parse_time', function() {
+		assert.strictEqual(
+			bup.utils.timesecs_str(bup.utils.parse_time('12:39:23', 1502335546914)),
+			'12:39:23'
+		);
+		assert.strictEqual(
+			bup.utils.parse_time('15:39', 1502335546914),
+			1502372340000
+		);
+		assert.strictEqual(
+			bup.utils.parse_time('1:2', 1502319940001),
+			1502319720000
+		);
+	});
 });

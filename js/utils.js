@@ -82,6 +82,19 @@ function human_date_str(s, ts) {
 	return s._('weekday:' + d.getDay()) + ' ' + utils.date_str(d);
 }
 
+// Returns a timestamp, or undefined if nothing can be parsed
+function parse_time(str, now_ts) {
+	var m = /^([0-9]{1,2}):([0-9]{1,2})(?::([0-9]{1,2}))?$/.exec(str);
+	var now = new Date(now_ts);
+	if (m) {
+		now.setMilliseconds(0);
+		now.setSeconds(m[3] ? parseInt(m[3]) : 0);
+		now.setMinutes(parseInt(m[2]));
+		now.setHours(parseInt(m[1]));
+		return now.getTime();
+	}
+}
+
 function pad(n) {
 	if (n < 10) {
 		return '0' + n;
@@ -500,6 +513,7 @@ return {
 	parallel: parallel,
 	parse_json: parse_json,
 	parse_query_string: parse_query_string,
+	parse_time: parse_time,
 	pluck: pluck,
 	plucked_deep_equal: plucked_deep_equal,
 	range: range,
