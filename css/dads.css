@@ -61,3 +61,8 @@
 .dads_options > label + label {
 	margin-left: 1em;
 }
+
+.dads_utime:invalid {
+	background: #ffd5d5;
+	outline: 0.1vmin solid red;
+}

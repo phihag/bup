@@ -141,6 +141,7 @@ if (ZIP_METHOD === 'phar') {
 
 	$phar = new \PharData($zip_fn);
     $phar->extractTo($new_dir);
+     // Release zip file object, this causes the zipe file to close so we can delete it later.
     $phar = null;
 } elseif (ZIP_METHOD === 'php') {
 	$zip = new \ZipArchive();

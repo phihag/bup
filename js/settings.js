@@ -28,6 +28,7 @@ var default_settings = {
 	dads_interval: 15000,
 	dads_dtime: 10000,
 	dads_atime: 5000,
+	dads_utime: '14:00',
 	double_click_timeout: 1000,
 	button_block_timeout: 1200,
 	negative_timers: false,
@@ -177,6 +178,7 @@ var _settings_textfields = [
 	'refmode_client_ws_url',
 	'refmode_referee_ws_url',
 	'refmode_client_node_name',
+	'dads_utime',
 
 	// really color fields
 	'd_c0',
@@ -200,7 +202,8 @@ var _settings_numberfields = [
 	'button_block_timeout',
 	'd_scale',
 	'dads_interval',
-	'dads_interval_periodic',
+	'dads_utime',
+	'dads_atime',
 ];
 var _settings_selects = [
 	'click_mode',

@@ -2,9 +2,9 @@ improve dads
 	ad during intervals
 	add type: text (z.B. "gute Heimreise", "nächstes Heimspiel")
 	add type: refrath-gegen
-	ad until time
 	configure on referee
 displaymode: make cursor vanish after a while
+	make sure no cursor either in dads
 
 d/onlyplayers: correctly handle case where no icon is present (at the moment 404)
 bug: back from &order keeps order
@@ -30,6 +30,7 @@ useful tracebacks!
 	parse source map
 
 refmode: test various timings (client before server at hub - does it still come up in display?)
+	update refmode server at global hub
 button to reset colors
 check/improve logos for all bundesliga clubs
 check/improve colors for all bundesliga clubs

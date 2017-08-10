@@ -341,8 +341,12 @@ _describe('helper functions', function() {
 			1502372340000
 		);
 		assert.strictEqual(
-			bup.utils.parse_time('1:2', 1502319940001),
-			1502319720000
+			bup.utils.parse_time('23:20:50.52', 1502350131246),
+			1502400050000
+		);
+		assert.strictEqual(
+			bup.utils.parse_time('x', 1502350131246),
+			undefined
 		);
 	});
 });

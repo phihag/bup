@@ -443,13 +443,13 @@ var i18n_frch = {
 'importexport:not an export file': 'Ce fichier n\'est pas bup-export!',
 'importexport:export sent': 'Merci! Export envoyé.',
 
-'weekday:0': 'Dim',
-'weekday:1': 'Lun',
-'weekday:2': 'Mar',
-'weekday:3': 'Mer',
-'weekday:4': 'Jeu',
-'weekday:5': 'Ven',
-'weekday:6': 'Sam',
+'weekday|0': 'Dim',
+'weekday|1': 'Lun',
+'weekday|2': 'Mar',
+'weekday|3': 'Mer',
+'weekday|4': 'Jeu',
+'weekday|5': 'Ven',
+'weekday|6': 'Sam',
 
 'displaymode:style': 'style:',
 'displaymode|top+list': 'Actuel/liste',
@@ -537,6 +537,7 @@ var i18n_frch = {
 'dads|none': 'aucun',
 'dads|always': 'actif',
 'dads|periodic': 'périodique',
+'dads|until': 'Jusqu\'à ..',
 'dads:heading': 'Publicité',
 'dads:mode': 'Mode:',
 'dads:add image': 'Ajouter une image',
@@ -547,7 +548,7 @@ var i18n_frch = {
 'dads|interval': 'Intervalle de changement (s):',
 'dads|dtime': 'Durée du affichage (s):',
 'dads|atime': 'Durée de la publicité (s):',
-'dads|until': 'Jusqu\'à ..',
+'dads:utime': 'Temps:',
 'dads:active': 'active',
 };
 

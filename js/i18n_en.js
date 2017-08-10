@@ -449,13 +449,13 @@ var i18n_en = {
 'importexport:not an export file': 'This file is not a bup-export file!',
 'importexport:export sent': 'Thanks! Export file sent.',
 
-'weekday:0': 'Sun',
-'weekday:1': 'Mon',
-'weekday:2': 'Tue',
-'weekday:3': 'Wed',
-'weekday:4': 'Thu',
-'weekday:5': 'Fri',
-'weekday:6': 'Sat',
+'weekday|0': 'Sun',
+'weekday|1': 'Mon',
+'weekday|2': 'Tue',
+'weekday|3': 'Wed',
+'weekday|4': 'Thu',
+'weekday|5': 'Fri',
+'weekday|6': 'Sat',
 
 'displaymode:style': 'style:',
 'displaymode|top+list': 'current/list',
@@ -542,6 +542,7 @@ var i18n_en = {
 'dads|none': 'none',
 'dads|always': 'active',
 'dads|periodic': 'periodical',
+'dads|until': 'until ..',
 'dads:heading': 'Ads',
 'dads:mode': 'Mode:',
 'dads:add image': 'Add Image',
@@ -552,7 +553,7 @@ var i18n_en = {
 'dads|interval': 'change interval (s):',
 'dads|dtime': 'score duration (s):',
 'dads|atime': 'ad duration (s):',
-'dads|until': 'until ..',
+'dads:utime': 'Time:',
 'dads:active': 'active',
 };
 

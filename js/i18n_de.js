@@ -449,13 +449,13 @@ var i18n_de = {
 'importexport:not an export file': 'Diese Datei ist keine bup-export-Datei!',
 'importexport:export sent': 'Danke! Export verschickt.',
 
-'weekday:0': 'So',
-'weekday:1': 'Mo',
-'weekday:2': 'Di',
-'weekday:3': 'Mi',
-'weekday:4': 'Do',
-'weekday:5': 'Fr',
-'weekday:6': 'Sa',
+'weekday|0': 'So',
+'weekday|1': 'Mo',
+'weekday|2': 'Di',
+'weekday|3': 'Mi',
+'weekday|4': 'Do',
+'weekday|5': 'Fr',
+'weekday|6': 'Sa',
 
 'displaymode:style': 'Ansicht:',
 'displaymode|top+list': 'Aktuell/Liste',
@@ -542,6 +542,7 @@ var i18n_de = {
 'dads|none': 'keine',
 'dads|always': 'aktiv',
 'dads|periodic': 'periodisch',
+'dads|until': 'Endzeit',
 'dads:heading': 'Werbung konfigurieren',
 'dads:mode': 'Modus:',
 'dads:add image': 'Bild hinzufügen',
@@ -552,7 +553,7 @@ var i18n_de = {
 'dads|interval': 'Wechsel-Interval (s):',
 'dads|dtime': 'Anzeige-Dauer (s):',
 'dads|atime': 'Werbe-Dauer (s):',
-'dads|until': 'Endzeit',
+'dads:utime': 'Zeit:',
 'dads:active': 'Aktiv',
 };
 

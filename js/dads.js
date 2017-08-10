@@ -2,7 +2,7 @@
 // Display ads
 var dads = (function() {
 
-var ALL_MODES = ['none', 'always', 'periodic'];
+var ALL_MODES = ['none', 'always', 'periodic', 'until'];
 
 function load(s) {
 	s.dads = [];
@@ -207,11 +207,32 @@ function render_options(s, options_container) {
 
 	options_container.setAttribute('data-dads-mode', dads_mode);
 	uiu.empty(options_container);
+
 	if (dads_mode === 'always') {
 		interval_input(s, options_container, 'interval');
 	} else if (dads_mode === 'periodic') {
 		interval_input(s, options_container, 'dtime');
 		interval_input(s, options_container, 'atime');
+	} else if (dads_mode === 'until') {
+		var label = uiu.el(options_container, 'label', {
+			lang: 'de',
+		});
+		uiu.el(label, 'span', {
+			'data-i18n': 'dads:utime',
+		});
+		var input = uiu.el(label, 'input', {
+			// no type: 'time' because that's not nicely supported everywhere, and 12h input sucks
+			class: 'dads_utime',
+			size: 6,
+			pattern: '[0-9]{1,2}:[0-9]{1,2}(:[0-9]{1,2})?([.][0-9]*)?',
+			required: 'required',
+			value: s.settings.dads_utime,
+		});
+		input.addEventListener('change', function() {
+			settings.change_all(s, {dads_utime: input.value});
+		});
+
+		interval_input(s, options_container, 'interval');
 	}
 }
 
@@ -424,6 +445,31 @@ function cancel_timeouts(s) {
 		clearTimeout(s.dad_periodic_to);
 		s.dad_periodic_to = null;
 	}
+	if (s.dad_until_to) {
+		clearTimeout(s.dad_until_to);
+		s.dad_until_to = null;
+	}
+}
+
+function update_utime(s, container) {
+	var now = Date.now();
+	var utime = utils.parse_time(s.settings.dads_utime, now);
+
+	if (!utime) {
+		return;
+	}
+
+	if (now >= utime) {
+		uiu.hide(container);
+	} else {
+		s.dad_cycle_interval = setInterval(function() {
+			cycle(s, container);
+		}, s.settings.dads_interval);
+		s.dad_until_to = setTimeout(function() {
+			update_utime(s, container);
+		}, utime - now);
+		uiu.show(container);
+	}
 }
 
 // Gets called when the configuration has changed
@@ -447,6 +493,8 @@ function d_update(container) {
 	} else if (mode === 'periodic') {
 		s.dad_periodic_active = true;
 		advance_periodic(s, container);
+	} else if (mode === 'until') {
+		update_utime(s, container);
 	}
 }
 

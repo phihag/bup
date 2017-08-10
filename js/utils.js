@@ -79,12 +79,12 @@ function datetime_str(ts) {
 
 function human_date_str(s, ts) {
 	var d = new Date(ts);
-	return s._('weekday:' + d.getDay()) + ' ' + utils.date_str(d);
+	return s._('weekday|' + d.getDay()) + ' ' + utils.date_str(d);
 }
 
 // Returns a timestamp, or undefined if nothing can be parsed
 function parse_time(str, now_ts) {
-	var m = /^([0-9]{1,2}):([0-9]{1,2})(?::([0-9]{1,2}))?$/.exec(str);
+	var m = /^([0-9]{1,2}):([0-9]{1,2})(?::([0-9]{1,2}))?(?:\.[0-9]*)?$/.exec(str);
 	var now = new Date(now_ts);
 	if (m) {
 		now.setMilliseconds(0);
