@@ -1283,6 +1283,9 @@ function es_render(ev, es_key, ui8r, extra_data) {
 	case '1BL-2016':
 	case '2BLN-2016':
 	case '2BLS-2016':
+	case '1BL-2017':
+	case '2BLN-2017':
+	case '2BLS-2017':
 		return render_bundesliga2016(ev, es_key, ui8r, extra_data);
 	default:
 	throw new Error('Unsupported eventsheet key ' + es_key);
