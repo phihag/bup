@@ -66,21 +66,33 @@ $tournament_name = null;
 $neutral_ground = false;
 switch ($verwaltung['Liga']) {
 case 1:
-	$league_key = '1BL-2016';
+	$league_key = '1BL-2017';
 	break;
 case 2:
-	$league_key = '2BLN-2016';
+	$league_key = '2BLN-2017';
 	break;
 case 3:
-	$league_key = '2BLS-2016';
+	$league_key = '2BLS-2017';
 	break;
-case 4: // Aufstiegsrunde
-	$league_key = '1BL-2016';
+case 4:
+	$league_key = 'RLN-2016';
+	break;
+case 5:
+	$league_key = 'RLW-2016';
+	break;
+case 6:
+case 7:
+	$league_key = '1BL-2017';
+	$tournament_name = 'Finalrunde 1. Bundesliga 2017/2018';
+	break;
+case 8:
+	$league_key = '1BL-2017';
+	$tournament_name = 'Bundesliga-Aufstiegsrunde 2017/2018';
 	$neutral_ground = true;
 	break;
-case 5: // Bundesliga-Finale
-	$league_key = '1BL-2016';
-	$tournament_name = 'Finalrunde 1. Bundesliga 2016/2017';
+case 9: // Bundesliga-Finale
+	$league_key = '1BL-2017';
+	$tournament_name = 'Finalrunde 1. Bundesliga 2017/2018';
 	$neutral_ground = true;
 	break;
 }

@@ -23,12 +23,14 @@ NLA
 referee w/ safari: show nice error message
 safari: switch to RSA-OAEP?
 
+generate an HTML with all networks and what features they support?
 i18n: check for i18n values that are the same in all languages (like cancel)
 #settings only for main settings
 useful tracebacks!
 	generate source map
 	parse source map
 
+test all dialogs with incorrect league_keys
 refmode: test various timings (client before server at hub - does it still come up in display?)
 	update refmode server at global hub
 button to reset colors
