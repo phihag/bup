@@ -13,6 +13,9 @@ bug: back from &order keeps order
 	use history API
 bug: black card at 0-0 with courtspot wrong netscore
 displaymode: heinz middle
+dmode Berlin
+dmode Saarbrücken
+	-> mail Janine
 
 NLA
 	scoresheet
