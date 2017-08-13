@@ -239,7 +239,7 @@ function _calc_setup_data(event) {
 				}
 				return {
 					firstname: '',
-					lastname: m.name,
+					lastname: player.name,
 				};
 			});
 		});
