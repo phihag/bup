@@ -538,6 +538,7 @@ var i18n_frch = {
 'dads|always': 'actif',
 'dads|periodic': 'périodique',
 'dads|until': 'Jusqu\'à ..',
+'dads|intervals': 'Pendant les pauses',
 'dads:heading': 'Publicité',
 'dads:mode': 'Mode:',
 'dads:add image': 'Ajouter une image',

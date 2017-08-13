@@ -543,6 +543,7 @@ var i18n_de = {
 'dads|always': 'aktiv',
 'dads|periodic': 'periodisch',
 'dads|until': 'Endzeit',
+'dads|intervals': 'In Spielpausen (in Arbeit)',
 'dads:heading': 'Werbung konfigurieren',
 'dads:mode': 'Modus:',
 'dads:add image': 'Bild hinzufügen',

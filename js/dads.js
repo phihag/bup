@@ -2,7 +2,7 @@
 // Display ads
 var dads = (function() {
 
-var ALL_MODES = ['none', 'always', 'periodic', 'until'];
+var ALL_MODES = ['none', 'always', 'periodic', 'until', 'intervals'];
 
 function load(s) {
 	s.dads = [];
@@ -232,6 +232,8 @@ function render_options(s, options_container) {
 			settings.change_all(s, {dads_utime: input.value});
 		});
 
+		interval_input(s, options_container, 'interval');
+	} else if (dads_mode === 'intervals') {
 		interval_input(s, options_container, 'interval');
 	}
 }
@@ -495,6 +497,8 @@ function d_update(container) {
 		advance_periodic(s, container);
 	} else if (mode === 'until') {
 		update_utime(s, container);
+	} else if (mode === 'intervals') {
+		// TODO: check if in interval
 	}
 }
 

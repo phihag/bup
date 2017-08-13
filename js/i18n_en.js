@@ -543,6 +543,7 @@ var i18n_en = {
 'dads|always': 'active',
 'dads|periodic': 'periodical',
 'dads|until': 'until ..',
+'dads|intervals': 'during intervals',
 'dads:heading': 'Ads',
 'dads:mode': 'Mode:',
 'dads:add image': 'Add Image',
