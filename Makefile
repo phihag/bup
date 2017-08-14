@@ -64,7 +64,7 @@ dist: cleandist ## Create distribution files
 	cp \
 		div/bundesliga-ballsorten-2016.pdf \
 		div/bupdate.php \
-		div/data_structures.md \
+		div/data_structures.txt \
 		div/FAQ.de \
 		div/URLS.md \
 		div/LICENSE.commercial.de \
