@@ -29,6 +29,7 @@ var default_settings = {
 	dads_dtime: 10000,
 	dads_atime: 5000,
 	dads_utime: '14:00',
+	dads_mode: 'none',
 	double_click_timeout: 1000,
 	button_block_timeout: 1200,
 	negative_timers: false,

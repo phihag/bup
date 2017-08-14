@@ -1,8 +1,11 @@
+Ulf: custom leagues
+
 improve dads
 	ad during intervals
 	add type: text (z.B. "gute Heimreise", "nächstes Heimspiel")
 	add type: refrath-gegen
 	configure on referee
+	switch to indexed db
 displaymode: make cursor vanish after a while
 	make sure no cursor either in dads
 
