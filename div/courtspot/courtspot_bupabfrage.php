@@ -5,7 +5,7 @@ set_error_handler('json_error_handler');
 include '../../DB_connection.php';
 $db = @mysqli_connect($DB_adress, $DB_name, $DB_pass, 'CourtSpot', $DB_port);
 if (!$db) {
-    jsonErr('Verbindungsfehler: ' . mysqli_connect_error());
+	jsonErr('Verbindungsfehler: ' . mysqli_connect_error());
 }
 mysqli_set_charset($db, 'utf8');
 
@@ -21,18 +21,26 @@ function make_player($name, $row) {
 		'firstname' => $row[$name . 'VN'],
 		'lastname' => $row[$name . 'NN'],
 	];
-	$p['name'] = $p['firstname'] . ' ' . $p['lastname'];
+	if ($p['firstname'] && $p['lastname']) {
+		$p['name'] = $p['firstname'] . ' ' . $p['lastname'];
+	} else if ($p['firstname']) {
+		$p['name'] = $p['firstname'];
+	} else if ($p['lastname']) {
+		$p['name'] = $p['lastname'];
+	} else {
+		$p['name'] = null;
+	}
 	return $p;
 }
 
 function make_team($name, $row, $verwaltung) {
 	$players = [];
 	$p1 = make_player($name . 'spieler1', $row);
-	if ($p1['firstname'] && $p1['lastname']) {
+	if ($p1['name']) {
 		array_push($players, $p1);
 	}
 	$p2 = make_player($name . 'spieler2', $row);
-	if ($p2['firstname'] && $p2['lastname']) {
+	if ($p2['name']) {
 		array_push($players, $p2);
 	}
 	return [
@@ -83,7 +91,7 @@ case 5:
 case 6:
 case 7:
 	$league_key = '1BL-2017';
-	$tournament_name = 'Finalrunde 1. Bundesliga 2017/2018';
+	$tournament_name = 'Viertelfinale 1. Bundesliga 2017/2018';
 	break;
 case 8:
 	$league_key = '1BL-2017';
