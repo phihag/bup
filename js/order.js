@@ -208,7 +208,14 @@ function optimize(costfunc, matches, preferred, locked, d3_cost) {
 function init(s) {
 	var event = s.event;
 
-	eventutils.set_metadata(event);
+	try {
+		eventutils.set_metadata(event);
+	} catch(e) {
+		report_problem.on_error('order init failed: ' + e.message, '(order.js)', null, e);
+		uiu.text_qs('.order_error_message', e.message);
+		uiu.show_qs('.order_error');
+		return;
+	}
 
 	var pref = event.preferred_order;
 	if (!pref && event.league_key) {

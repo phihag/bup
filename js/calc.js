@@ -326,6 +326,9 @@ function make_game_state(s, previous_game) {
 		finished: false,
 		team1_won: null,
 		won_by_score: null,
+
+		marks: [],
+		final_marks: [],
 	};
 	res.team1_left = res.start_team1_left;
 	if (!s.setup.is_doubles) {

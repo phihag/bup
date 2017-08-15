@@ -73,7 +73,7 @@ $league_key = null;
 $tournament_name = null;
 $neutral_ground = false;
 $counting = null;
-$verwaltung['Liga'] = 0;
+
 switch ($verwaltung['Liga']) {
 case 0:
 	$counting = (isset($verwaltung['Bundesliga']) && $verwaltung['Bundesliga']) ? '5x11_15' : '3x21';
