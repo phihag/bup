@@ -2,7 +2,7 @@
 var eventutils = (function() {
 
 function guess_gender(match_setup, player_id) {
-	var mname = match_setup.discipline_key ? match_setup.discipline_key : (match_setup.eventsheet_id ? match_setup.eventsheet_id : match_setup.match_name);
+	var mname = (match_setup.eventsheet_id ? match_setup.eventsheet_id : match_setup.match_name);
 	if (/(?:HD|HE|MD|MS)/.test(mname)) {
 		return 'm';
 	} else if (/(?:DD|DE|WD|WS)/.test(mname)) {

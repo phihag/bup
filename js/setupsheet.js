@@ -28,21 +28,6 @@ var URLS = {
 var dl;
 
 var GENDERS = ['m', 'f'];
-var LIMITS = {
-	m: {
-		'1.HD': 2,
-		'2.HD': 2,
-		'1.HE': 1,
-		'2.HE': 1,
-		'3.HE': 1,
-		'GD': 1,
-	}, 
-	f: {
-		'DD': 2,
-		'DE': 1,
-		'GD': 1,
-	},
-};
 var MIN_LENGTHS = {
 	'bundesliga-2016': {
 		m: 7,
@@ -189,11 +174,13 @@ function calc_config(ev) {
 				// Level doubles
 				known_matches[p1gender].push({
 					key: match_key,
+					limit: 2,
 					order: 1000 + mnum,
 				});
 			} else {
 				// Mixed
 				var match_info = {
+					limit: 1,
 					key: match_key,
 					order: 3000 + mnum,
 				};
@@ -203,11 +190,20 @@ function calc_config(ev) {
 		} else {
 			// Singles
 			known_matches[p1gender].push({
+				limit: 1,
 				key: match_key,
 				order: 2000 + mnum,
 			});
 		}
 	});
+
+	function _calc_limits(ar) {
+		var res = {};
+		ar.forEach(function(km) {
+			res[km.key] = km.limit;
+		});
+		return res;
+	}
 
 	function _get_res(ar) {
 		ar.sort(utils.cmp_key('order'));
@@ -221,6 +217,10 @@ function calc_config(ev) {
 	var res = {
 		m: _get_res(known_matches.m),
 		f: _get_res(known_matches.f),
+		limits: {
+			m: _calc_limits(known_matches.m),
+			f: _calc_limits(known_matches.f),
+		},
 	};
 	function _extend_dark(small, large) {
 		while (small.length < large.length) {
@@ -261,7 +261,7 @@ function on_cell_click(e) {
 		});
 	} else {
 		// Add player
-		var limit = LIMITS[gender][col];
+		var limit = cfg.limits[gender][col];
 		var cur_count = utils.sum(cps.map(function(cp) {
 			return (cp.gender === gender) ? 1 : 0;
 		}));
