@@ -127,6 +127,8 @@ _describe('stats', function() {
 		var s = tutils.state_after(presses, tutils.DOUBLES_SETUP, WITH_COUNTER);
 		var st = bup.stats.calc_stats(s).cols;
 		assert.strictEqual(st.length, 1 + 1);
+		assert.strictEqual(st[0].longest_series, '10-1');
+		assert.strictEqual(st[0].largest_lead, '10-0');
 		assert.strictEqual(st[0].points, '10-1');
 		assert.strictEqual(st[0].points_lr, '10/1');
 		assert.strictEqual(st[0].duration, '1:50');
@@ -142,6 +144,8 @@ _describe('stats', function() {
 			[[11, 0], [0, 0]]
 		);
 		assert.strictEqual(st[1].points, '10-1');
+		assert.strictEqual(st[1].longest_series, '10-1');
+		assert.strictEqual(st[1].largest_lead, '10-0');
 		assert.strictEqual(st[1].points_lr, '10/1');
 		assert.strictEqual(st[1].duration, '1:50');
 		assert.strictEqual(st[1].avg_rally_length, '0:10');
@@ -300,6 +304,334 @@ _describe('stats', function() {
 		assert.strictEqual(st[1].longest_rally_length, 26000);
 		assert.strictEqual(st[1].longest_rally, '0:26');
 		assert.strictEqual(st[1].longest_rally_desc, '0:26 (11-1 im 1. Satz)');
+	});
+
+	_it('series', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+			timestamp: 1000,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+			timestamp: 2000,
+		}, {
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 0,
+			timestamp: 3000,
+		}, {
+			type: 'love-all',
+			timestamp: 120000,
+		}];
+		var s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+		var st = bup.stats.calc_stats(s).cols;
+		assert.deepStrictEqual(s.game.score, [0, 0]);
+		assert.strictEqual(st[0].longest_series, '0-0');
+		assert.strictEqual(st[0].largest_lead, '0-0');
+		assert.strictEqual(st[0].lost_service, '0-0');
+		assert.strictEqual(st[0].lost_service_percent, '-');
+		assert.strictEqual(st[1].longest_series, '0-0');
+		assert.strictEqual(st[1].largest_lead, '0-0');
+		assert.strictEqual(st[1].lost_service, '0-0');
+		assert.strictEqual(st[1].lost_service_percent, '-');
+
+		tutils.press_score(presses, 1, 0);
+		s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+		st = bup.stats.calc_stats(s).cols;
+		assert.deepStrictEqual(s.game.score, [1, 0]);
+		assert.strictEqual(st[0].longest_series, '1-0');
+		assert.strictEqual(st[0].largest_lead, '1-0');
+		assert.strictEqual(st[0].lost_service, '0-0');
+		assert.strictEqual(st[0].lost_service_percent, '0-');
+		assert.strictEqual(st[1].longest_series, '1-0');
+		assert.strictEqual(st[1].largest_lead, '1-0');
+		assert.strictEqual(st[1].lost_service, '0-0');
+
+		tutils.press_score(presses, 1, 0);
+		s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+		st = bup.stats.calc_stats(s).cols;
+		assert.deepStrictEqual(s.game.score, [2, 0]);
+		assert.strictEqual(st[0].longest_series, '2-0');
+		assert.strictEqual(st[0].largest_lead, '2-0');
+		assert.strictEqual(st[0].lost_service, '0-0');
+		assert.strictEqual(st[0].lost_service_percent, '0-');
+		assert.strictEqual(st[1].longest_series, '2-0');
+		assert.strictEqual(st[1].largest_lead, '2-0');
+		assert.strictEqual(st[1].lost_service, '0-0');
+
+		tutils.press_score(presses, 1, 0);
+		s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+		st = bup.stats.calc_stats(s).cols;
+		assert.deepStrictEqual(s.game.score, [3, 0]);
+		assert.strictEqual(st[0].longest_series, '3-0');
+		assert.strictEqual(st[0].largest_lead, '3-0');
+		assert.strictEqual(st[0].lost_service, '0-0');
+		assert.strictEqual(st[0].lost_service_percent, '0-');
+		assert.strictEqual(st[1].longest_series, '3-0');
+		assert.strictEqual(st[1].largest_lead, '3-0');
+		assert.strictEqual(st[1].lost_service, '0-0');
+
+		tutils.press_score(presses, 0, 1);
+		s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+		st = bup.stats.calc_stats(s).cols;
+		assert.deepStrictEqual(s.game.score, [3, 1]);
+		assert.strictEqual(st[0].longest_series, '3-1');
+		assert.strictEqual(st[0].largest_lead, '3-0');
+		assert.strictEqual(st[0].lost_service, '1-0');
+		assert.strictEqual(st[0].lost_service_percent, '25-');
+		assert.strictEqual(st[1].longest_series, '3-1');
+		assert.strictEqual(st[1].largest_lead, '3-0');
+		assert.strictEqual(st[1].lost_service, '1-0');
+
+		tutils.press_score(presses, 0, 1);
+		s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+		st = bup.stats.calc_stats(s).cols;
+		assert.deepStrictEqual(s.game.score, [3, 2]);
+		assert.strictEqual(st[0].longest_series, '3-2');
+		assert.strictEqual(st[0].largest_lead, '3-0');
+		assert.strictEqual(st[0].lost_service, '1-0');
+		assert.strictEqual(st[0].lost_service_percent, '25-0');
+		assert.strictEqual(st[1].longest_series, '3-2');
+		assert.strictEqual(st[1].largest_lead, '3-0');
+		assert.strictEqual(st[1].lost_service, '1-0');
+
+		tutils.press_score(presses, 0, 3);
+		s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [3, 5]);
+		st = bup.stats.calc_stats(s).cols;
+		assert.strictEqual(st[0].longest_series, '3-5');
+		assert.strictEqual(st[0].largest_lead, '3-2');
+		assert.strictEqual(st[0].lost_service, '1-0');
+		assert.strictEqual(st[1].longest_series, '3-5');
+		assert.strictEqual(st[1].largest_lead, '3-2');
+		assert.strictEqual(st[1].lost_service, '1-0');
+
+		tutils.press_score(presses, 1, 0);
+		s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [4, 5]);
+		st = bup.stats.calc_stats(s).cols;
+		assert.strictEqual(st[0].longest_series, '3-5');
+		assert.strictEqual(st[0].largest_lead, '3-2');
+		assert.strictEqual(st[0].lost_service, '1-1');
+		assert.strictEqual(st[1].longest_series, '3-5');
+		assert.strictEqual(st[1].largest_lead, '3-2');
+		assert.strictEqual(st[1].lost_service, '1-1');
+
+		tutils.press_score(presses, 3, 0);
+		s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [7, 5]);
+		st = bup.stats.calc_stats(s).cols;
+		assert.strictEqual(st[0].longest_series, '4-5');
+		assert.strictEqual(st[0].largest_lead, '3-2');
+		assert.strictEqual(st[0].lost_service, '1-1');
+		assert.strictEqual(st[1].longest_series, '4-5');
+		assert.strictEqual(st[1].largest_lead, '3-2');
+		assert.strictEqual(st[1].lost_service, '1-1');
+
+		tutils.press_score(presses, 0, 1);
+		s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [7, 6]);
+		st = bup.stats.calc_stats(s).cols;
+		assert.strictEqual(st[0].longest_series, '4-5');
+		assert.strictEqual(st[0].largest_lead, '3-2');
+		assert.strictEqual(st[0].lost_service, '2-1');
+		assert.strictEqual(st[1].longest_series, '4-5');
+		assert.strictEqual(st[1].largest_lead, '3-2');
+		assert.strictEqual(st[1].lost_service, '2-1');
+
+		tutils.press_score(presses, 1, 0);
+		s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [8, 6]);
+		st = bup.stats.calc_stats(s).cols;
+		assert.strictEqual(st[0].longest_series, '4-5');
+		assert.strictEqual(st[0].largest_lead, '3-2');
+		assert.strictEqual(st[0].lost_service, '2-2');
+		assert.strictEqual(st[1].longest_series, '4-5');
+		assert.strictEqual(st[1].largest_lead, '3-2');
+		assert.strictEqual(st[1].lost_service, '2-2');
+
+		tutils.press_score(presses, 9, 0);
+		s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [17, 6]);
+		st = bup.stats.calc_stats(s).cols;
+		assert.strictEqual(st[0].longest_series, '10-5');
+		assert.strictEqual(st[0].largest_lead, '11-2');
+		assert.strictEqual(st[0].lost_service, '2-2');
+		assert.strictEqual(st[1].longest_series, '10-5');
+		assert.strictEqual(st[1].largest_lead, '11-2');
+		assert.strictEqual(st[1].lost_service, '2-2');
+
+		tutils.press_score(presses, 0, 5);
+		s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [17, 11]);
+		st = bup.stats.calc_stats(s).cols;
+		assert.strictEqual(st[0].longest_series, '10-5');
+		assert.strictEqual(st[0].largest_lead, '11-2');
+		assert.strictEqual(st[0].lost_service, '3-2');
+		assert.strictEqual(st[1].longest_series, '10-5');
+		assert.strictEqual(st[1].largest_lead, '11-2');
+		assert.strictEqual(st[1].lost_service, '3-2');
+
+		tutils.press_score(presses, 1, 0);
+		s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [18, 11]);
+		st = bup.stats.calc_stats(s).cols;
+		assert.strictEqual(st[0].longest_series, '10-5');
+		assert.strictEqual(st[0].largest_lead, '11-2');
+		assert.strictEqual(st[0].lost_service, '3-3');
+		assert.strictEqual(st[1].longest_series, '10-5');
+		assert.strictEqual(st[1].largest_lead, '11-2');
+		assert.strictEqual(st[1].lost_service, '3-3');
+
+		tutils.press_score(presses, 0, 4);
+		s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [18, 15]);
+		st = bup.stats.calc_stats(s).cols;
+		assert.strictEqual(st[0].longest_series, '10-5');
+		assert.strictEqual(st[0].largest_lead, '11-2');
+		assert.strictEqual(st[0].lost_service, '4-3');
+		assert.strictEqual(st[1].longest_series, '10-5');
+		assert.strictEqual(st[1].largest_lead, '11-2');
+		assert.strictEqual(st[1].lost_service, '4-3');
+
+		tutils.press_score(presses, 1, 0);
+		s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [19, 15]);
+		st = bup.stats.calc_stats(s).cols;
+		assert.strictEqual(st[0].longest_series, '10-5');
+		assert.strictEqual(st[0].largest_lead, '11-2');
+		assert.strictEqual(st[0].lost_service, '4-4');
+		assert.strictEqual(st[1].longest_series, '10-5');
+		assert.strictEqual(st[1].largest_lead, '11-2');
+		assert.strictEqual(st[1].lost_service, '4-4');
+
+		tutils.press_score(presses, 0, 6);
+		s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [19, 21]);
+		st = bup.stats.calc_stats(s).cols;
+		assert.strictEqual(st[0].longest_series, '10-6');
+		assert.strictEqual(st[0].largest_lead, '11-2');
+		assert.strictEqual(st[0].lost_service, '5-4');
+		assert.strictEqual(st[1].longest_series, '10-6');
+		assert.strictEqual(st[1].largest_lead, '11-2');
+		assert.strictEqual(st[1].lost_service, '5-4');
+
+		presses.push({
+			type: 'postgame-confirm',
+		});
+		s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [0, 0]);
+		st = bup.stats.calc_stats(s).cols;
+		assert.strictEqual(st[0].longest_series, '10-6');
+		assert.strictEqual(st[0].largest_lead, '11-2');
+		assert.strictEqual(st[0].lost_service, '5-4');
+		assert.strictEqual(st[1].longest_series, '0-0');
+		assert.strictEqual(st[1].largest_lead, '0-0');
+		assert.strictEqual(st[1].lost_service, '0-0');
+
+		presses.push({
+			type: 'pick_server',
+			team_id: 1,
+			player_id: 0,
+		});
+		s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [0, 0]);
+		st = bup.stats.calc_stats(s).cols;
+		assert.strictEqual(st[0].longest_series, '10-6');
+		assert.strictEqual(st[0].largest_lead, '11-2');
+		assert.strictEqual(st[0].lost_service, '5-4');
+		assert.strictEqual(st[1].longest_series, '0-0');
+		assert.strictEqual(st[1].largest_lead, '0-0');
+		assert.strictEqual(st[1].lost_service, '0-0');
+
+		presses.push({
+			type: 'pick_receiver',
+			team_id: 0,
+			player_id: 0,
+		});
+		s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [0, 0]);
+		st = bup.stats.calc_stats(s).cols;
+		assert.strictEqual(st[0].longest_series, '10-6');
+		assert.strictEqual(st[0].largest_lead, '11-2');
+		assert.strictEqual(st[0].lost_service, '5-4');
+		assert.strictEqual(st[1].longest_series, '0-0');
+		assert.strictEqual(st[1].largest_lead, '0-0');
+		assert.strictEqual(st[1].lost_service, '0-0');
+
+		presses.push({
+			type: 'love-all',
+		});
+		s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [0, 0]);
+		st = bup.stats.calc_stats(s).cols;
+		assert.strictEqual(st[0].longest_series, '10-6');
+		assert.strictEqual(st[0].largest_lead, '11-2');
+		assert.strictEqual(st[0].lost_service, '5-4');
+		assert.strictEqual(st[1].longest_series, '0-0');
+		assert.strictEqual(st[1].largest_lead, '0-0');
+		assert.strictEqual(st[1].lost_service, '0-0');
+		assert.strictEqual(st[2].longest_series, '10-6');
+		assert.strictEqual(st[2].largest_lead, '11-2');
+		assert.strictEqual(st[2].lost_service, '5-4');
+
+		tutils.press_score(presses, 1, 0);
+		s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [0, 1]);
+		st = bup.stats.calc_stats(s).cols;
+		assert.strictEqual(st[0].longest_series, '10-6');
+		assert.strictEqual(st[0].largest_lead, '11-2');
+		assert.strictEqual(st[0].lost_service, '5-4');
+		assert.strictEqual(st[1].longest_series, '0-1');
+		assert.strictEqual(st[1].largest_lead, '0-1');
+		assert.strictEqual(st[1].lost_service, '0-0');
+		assert.strictEqual(st[2].longest_series, '10-7');
+		assert.strictEqual(st[2].largest_lead, '11-2');
+		assert.strictEqual(st[2].lost_service, '5-4');
+
+		tutils.press_score(presses, 0, 1);
+		s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [1, 1]);
+		st = bup.stats.calc_stats(s).cols;
+		assert.strictEqual(st[0].longest_series, '10-6');
+		assert.strictEqual(st[0].largest_lead, '11-2');
+		assert.strictEqual(st[0].lost_service, '5-4');
+		assert.strictEqual(st[1].longest_series, '1-1');
+		assert.strictEqual(st[1].largest_lead, '0-1');
+		assert.strictEqual(st[1].lost_service, '0-1');
+		assert.strictEqual(st[2].longest_series, '10-7');
+		assert.strictEqual(st[2].largest_lead, '11-2');
+		assert.strictEqual(st[2].lost_service, '5-5');
+
+		tutils.press_score(presses, 0, 1);
+		s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [2, 1]);
+		st = bup.stats.calc_stats(s).cols;
+		assert.strictEqual(st[0].longest_series, '10-6');
+		assert.strictEqual(st[0].largest_lead, '11-2');
+		assert.strictEqual(st[0].lost_service, '5-4');
+		assert.strictEqual(st[1].longest_series, '2-1');
+		assert.strictEqual(st[1].largest_lead, '1-1');
+		assert.strictEqual(st[1].lost_service, '0-1');
+		assert.strictEqual(st[2].longest_series, '10-7');
+		assert.strictEqual(st[2].largest_lead, '11-2');
+		assert.strictEqual(st[2].lost_service, '5-5');
+
+		tutils.press_score(presses, 1, 0);
+		s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+		assert.deepStrictEqual(s.game.score, [2, 2]);
+		st = bup.stats.calc_stats(s).cols;
+		assert.strictEqual(st[0].longest_series, '10-6');
+		assert.strictEqual(st[0].largest_lead, '11-2');
+		assert.strictEqual(st[0].lost_service, '5-4');
+		assert.strictEqual(st[1].longest_series, '2-1');
+		assert.strictEqual(st[1].largest_lead, '1-1');
+		assert.strictEqual(st[1].lost_service, '1-1');
+		assert.strictEqual(st[2].longest_series, '10-7');
+		assert.strictEqual(st[2].largest_lead, '11-2');
+		assert.strictEqual(st[2].lost_service, '6-5');
 	});
 
 	_it('enable/disable shuttle stats depending on settings', function() {

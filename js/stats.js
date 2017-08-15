@@ -1,5 +1,5 @@
-var stats = (function() {
 'use strict';
+var stats = (function() {
 
 var _INTERESTING_TYPES = ['love-all', 'postgame-confirm', 'postmatch-confirm', 'suspension', 'resume'];
 var HEIGHT = 125;
@@ -375,6 +375,10 @@ function calc_stats(s) {
 			points_lr_ar: [0, 0],
 			rally_lengths: [],
 			serves: s.setup.is_doubles ? [[0, 0], [0, 0]] : [[0], [0]],
+			longest_series_ar: [0, 0],
+			cur_series_ar: [0, 0],
+			lost_service_ar: [0, 0],
+			largest_lead_ar: [0, 0],
 		};
 	});
 
@@ -388,6 +392,10 @@ function calc_stats(s) {
 		points: points_sum.join('-'),
 		shuttles: s.match.shuttle_count,
 		points_lr_ar: [0, 0],
+		longest_series_ar: [0, 0],
+		cur_series_ar: [0, 0],
+		lost_service_ar: [0, 0],
+		largest_lead_ar: [0, 0],
 		rally_lengths: [],
 		serves: s.setup.is_doubles ? [[0, 0], [0, 0]] : [[0], [0]],
 	};
@@ -446,14 +454,14 @@ function calc_stats(s) {
 					current_game.longest_rally_length = rally_length;
 					current_game.longest_rally_desc = (
 						utils.duration_secs(0, rally_length) +
-						s._('stats:longest rally (game)').replace('{score}', score_str)
+						s._('stats|longest rally (game)').replace('{score}', score_str)
 					);
 				}
 				if ((!mstats.longest_rally_length) || (rally_length > mstats.longest_rally_length)) {
 					mstats.longest_rally_length = rally_length;
 					mstats.longest_rally_desc = (
 						utils.duration_secs(0, rally_length) +
-						s._('stats:longest rally (match)').replace('{score}', score_str).replace('{game}', (current_game_idx + 1))
+						s._('stats|longest rally (match)').replace('{score}', score_str).replace('{game}', (current_game_idx + 1))
 					);
 				}
 			}
@@ -472,6 +480,34 @@ function calc_stats(s) {
 		mstats.last_ts = p.timestamp;
 
 		calc.calc_press(scopy, p);
+
+		if (p.type === 'score') {
+			var scoring_team = scopy.game.team1_serving ? 0 : 1;
+			var cscore = scopy.game.score;
+
+			current_game.cur_series_ar[1 - scoring_team] = 0;
+			current_game.cur_series_ar[scoring_team]++;
+			current_game.longest_series_ar[scoring_team] = Math.max(
+				current_game.cur_series_ar[scoring_team], current_game.longest_series_ar[scoring_team]);
+			mstats.cur_series_ar[1 - scoring_team] = 0;
+			mstats.cur_series_ar[scoring_team]++;
+			mstats.longest_series_ar[scoring_team] = Math.max(
+				mstats.cur_series_ar[scoring_team], mstats.longest_series_ar[scoring_team]);
+
+			if (scopy.game.service_over) {
+				current_game.lost_service_ar[1 - scoring_team]++;
+				mstats.lost_service_ar[1 - scoring_team]++;
+			}
+
+			var leading_team = (cscore[0] > cscore[1]) ? 0 : 1;
+			var lead = cscore[leading_team] - cscore[1 - leading_team];
+			current_game.largest_lead_ar[leading_team] = Math.max(
+				current_game.largest_lead_ar[leading_team],
+				lead);
+			mstats.largest_lead_ar[leading_team] = Math.max(
+				mstats.largest_lead_ar[leading_team],
+				lead);
+		}
 
 		if (p.timestamp) {
 			var interesting = ((i === presses.length - 1) || (_INTERESTING_TYPES.indexOf(p.type) >= 0));
@@ -498,6 +534,13 @@ function calc_stats(s) {
 		if (col.last_ts && col.start_ts) {
 			col.duration = utils.duration_secs(col.start_ts, col.last_ts);
 		}
+		col.longest_series = col.longest_series_ar.join('-');
+		col.lost_service = col.lost_service_ar.join('-');
+		col.lost_service_percent = col.lost_service_ar.map(function(lost_service_count, team_idx) {
+			var service_count = utils.sum(col.serves[team_idx]);
+			return service_count ? Math.round(100 * lost_service_count / service_count, 0) : '';
+		}).join('-');
+		col.largest_lead = col.largest_lead_ar.join('-');
 		col.points_lr = col.points_lr_ar.join('/');
 		if (col.rally_lengths.length > 0) {
 			col.avg_rally_length = utils.duration_secs(
@@ -537,8 +580,9 @@ function calc_stats(s) {
 	var keys = [].concat(
 		['points', 'points_lr'],
 		server_keys,
+		['lost_service_percent'],
 		((!s.settings || s.settings.shuttle_counter) ? ['shuttles'] : []),
-		['duration', 'avg_rally_length', 'longest_rally']
+		['duration', 'avg_rally_length', 'longest_rally', 'longest_series', 'largest_lead']
 	);
 
 	return {
@@ -567,7 +611,7 @@ function render_table($table, stats) {
 		tr.append(th);
 		var label = stats.labels[k];
 		if (!label) {
-			label = state._('stats:' + k);
+			label = state._('stats|' + k);
 		}
 		th.text(label);
 
