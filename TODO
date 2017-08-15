@@ -1,5 +1,3 @@
-displaymode: can't select colors with courtspot
-
 improve dads
 	ad during intervals
 	add type: text (z.B. "gute Heimreise", "nächstes Heimspiel")
@@ -48,7 +46,6 @@ i18n: generate a table with all translations
 move all demo files to div/demos/ (and correctly generate them in makefile)
 demo&display should work!!!
 on error pop up a dialog (if the network allows it)
-displaymode: cannot change colors in UI (gets reset!?)
 https://aufschlagwechsel.de/bup/#setupsheet crashes!
 https://aufschlagwechsel.de/bup/#setupsheet crashes after import?
 transmit to turnier.de

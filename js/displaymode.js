@@ -1587,7 +1587,9 @@ function update(err, s, event) {
 	var used_colors = active_colors(style);
 	uiu.visible_qs('.settings_d_colors', used_colors.length > 0);
 	var color_inputs = uiu.qs('.settings_d_colors_inputs');
-	if (color_inputs.getAttribute('data-json') !== JSON.stringify(used_colors)) {
+	var ui_colors_state_json = color_inputs.getAttribute('data-json');
+	var ui_colors_state = ui_colors_state_json ? JSON.parse(ui_colors_state_json) : '<no info>';
+	if (!utils.deep_equal(ui_colors_state, used_colors)) {
 		uiu.empty(color_inputs);
 		used_colors.forEach(function(uc) {
 			var color_input = uiu.el(color_inputs, 'input', {
@@ -1598,6 +1600,7 @@ function update(err, s, event) {
 			});
 			color_input.addEventListener('change', on_color_select);
 		});
+		color_inputs.setAttribute('data-json', JSON.stringify(used_colors));
 	}
 
 	// Redraw everything
