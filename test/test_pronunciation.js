@@ -1427,7 +1427,7 @@ _describe('pronunciation', function() {
 			'Aufschlagwechsel. 11-10 Pause. Seitenwechsel.\n\n' +
 			'11-10. Bitte spielen.');
 		assert.equal(pronounce_frch(s),
-			'Changement de service. 11-10 pause. Changez de côté\n\n' +
+			'Changement de service. 11-10 pause. Changez de côté.\n\n' +
 			'11-10. Jouez.');
 
 		presses.push({
@@ -3845,4 +3845,6 @@ _describe('pronunciation', function() {
 module.exports = {
 	pronounce_de: pronounce_de,
 	pronounce_en: pronounce_en,
+	pronounce_dech: pronounce_dech,
+	pronounce_frch: pronounce_frch,
 };

@@ -219,6 +219,7 @@ var i18n_de = {
 'settings:counting|5x11/3': 'BWF 2016 Experiment Option 2 (5x11, Verlängerung bis 13)',
 'settings:counting|1x21': 'Bundesliga Goldener Satz (1x21)',
 'settings:counting|1x11_15': 'Bundesliga Goldener Satz Experiment (1x11 bis max. 15)',
+'settings:counting|3x15_18': 'Verkürzt (3x15 bis max. 18)',
 
 'settings:warmup': 'Spielfeld\u00ADgewöhnungszeit',
 'settings:warmup:bwf-2016': 'BWF ab 2016 (90s)',

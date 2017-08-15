@@ -109,7 +109,7 @@ var i18n_frch = {
 'Interval': 'pause',
 '20secs': 'Court {court_id}, 20 secondes. Court {court_id}, 20 secondes.',
 '20secs:nocourt': '20 secondes. 20 secondes.',
-'change_ends': '. Changez de côté',
+'change_ends': '. Changez de côté.',
 'game point': 'point de set',
 'match point': 'point de match',
 'gamescore.0-0': '',
@@ -218,6 +218,7 @@ var i18n_frch = {
 'settings:counting|5x11/3': 'BWF 2016 Experiment Option 2 (5x11 aven l\'extension 3 points)',
 'settings:counting|1x21': 'Un set (1x21)',
 'settings:counting|1x11_15': 'Un set 2016 Experiment Option 1 (1x11 jusqu\'à au plus 15)',
+'settings:counting|3x15_18': 'Raccourci (3x15 jusqu\'à au plus 18)',
 
 'settings:warmup': 'Warmup:',
 'settings:warmup:bwf-2016': 'BWF 2016+ (120s, ready after 90s)',
