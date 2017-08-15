@@ -139,6 +139,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 		refmode_client: refmode_client,
 		refmode_referee: refmode_referee,
 		scoresheet: scoresheet,
+		setupsheet: setupsheet,
 		stats: stats,
 		timer: timer,
 		uiu: uiu,

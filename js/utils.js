@@ -482,9 +482,27 @@ function includes(ar, el) {
 	return false;
 }
 
+function cmp(a, b) {
+	if (a < b) {
+		return -1;
+	} else if (a > b) {
+		return 1;
+	} else {
+		return 0;
+	}
+}
+
+function cmp_key(key) {
+	return function(x, y) {
+		return cmp(x[key], y[key]);
+	};
+}
+
 return {
 	any: any,
 	brightness: brightness,
+	cmp: cmp,
+	cmp_key: cmp_key,
 	contrast_color: contrast_color,
 	count_lines: count_lines,
 	date_str: date_str,

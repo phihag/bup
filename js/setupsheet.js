@@ -163,11 +163,73 @@ function col_text(s, col) {
 	return col;
 }
 
-function calc_config(league_key) {
+function calc_config(ev) {
+	var league_key = ev.league_key;
 	if (eventutils.NRW2016_RE.test(league_key)) {
 		return DE_CONFIG;
 	}
-	return CONFIGS[league_key];
+	if (CONFIGS[league_key]) {
+		return CONFIGS[league_key];
+	}
+
+	// Guess
+	var known_matches = {
+		m: [],
+		f: [],
+	};
+	ev.matches.forEach(function(match) {
+		var setup = match.setup;
+		var p1gender = eventutils.guess_gender(setup, 0);
+		var match_key = (setup.eventsheet_id || setup.match_name);
+		var mnum_m = /^([0-9]+)\./.exec(match_key);
+		var mnum = mnum_m ? parseInt(mnum_m[0]) : 0;
+		if (setup.is_doubles) {
+			var p2gender = eventutils.guess_gender(setup, 1);
+			if (p1gender === p2gender) {
+				// Level doubles
+				known_matches[p1gender].push({
+					key: match_key,
+					order: 1000 + mnum,
+				});
+			} else {
+				// Mixed
+				var match_info = {
+					key: match_key,
+					order: 3000 + mnum,
+				};
+				known_matches[p1gender].push(match_info);
+				known_matches[p2gender].push(match_info);
+			}
+		} else {
+			// Singles
+			known_matches[p1gender].push({
+				key: match_key,
+				order: 2000 + mnum,
+			});
+		}
+	});
+
+	function _get_res(ar) {
+		ar.sort(utils.cmp_key('order'));
+		var res = ar.map(function(km) {
+			return km.key;
+		});
+		res.push('backup');
+		return res;
+	}
+
+	var res = {
+		m: _get_res(known_matches.m),
+		f: _get_res(known_matches.f),
+	};
+	function _extend_dark(small, large) {
+		while (small.length < large.length) {
+			small.splice(0, 0, 'dark');
+		}
+	}
+	_extend_dark(res.m, res.f);
+	_extend_dark(res.f, res.m);
+	return res;
 }
 
 function _get_player(cell) {
@@ -314,7 +376,7 @@ function ui_render_init(s) {
 	var err_display = uiu.qs('.setupsheet_error');
 	uiu.hide(err_display);
 	uiu.text(err_display);
-	cfg = calc_config(s.event.league_key);
+	cfg = calc_config(s.event);
 	if (!cfg) {
 		uiu.show(err_display);
 		uiu.text(err_display, 'Unsupported league: ' + s.event.league_key);
@@ -651,6 +713,10 @@ return {
 	show: show,
 	hide: hide,
 	jspdf_loaded: jspdf_loaded,
+	// Tests only
+	/*@DEV*/
+	calc_config: calc_config,
+	/*/@DEV*/
 };
 
 

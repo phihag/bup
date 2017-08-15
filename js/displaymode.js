@@ -574,7 +574,6 @@ function render_castall(s, container, event, colors) {
 	}
 }
 
-
 function render_list(container, event) {
 	render_html_list(container, event); // TODO switch to svg
 }
