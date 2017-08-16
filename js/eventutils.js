@@ -402,7 +402,7 @@ function set_not_before(league_key, match_states) {
 }
 
 function default_counting(league_key) {
-	if (NRW2016_RE.test(league_key) || (league_key === 'RLN-2016') || (league_key === 'RLM-2016')) {
+	if (NRW2016_RE.test(league_key) || /^RL[MNW]-2016$/.test(league_key)) {
 		return '3x21';
 	}
 	if (/^(?:1BL|2BLN|2BLS)-2015$/.test(league_key)) {

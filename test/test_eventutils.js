@@ -624,6 +624,10 @@ _describe('eventutils', function() {
 		assert.deepStrictEqual(bup.eventutils.default_counting('1BL-2017'), '5x11_15^90');
 		assert.deepStrictEqual(bup.eventutils.default_counting('2BLS-2017'), '5x11_15^90');
 		assert.deepStrictEqual(bup.eventutils.default_counting('NLA-2017'), '3x21');
+		assert.deepStrictEqual(bup.eventutils.default_counting('NRW-O19-OL-002-2016'), '3x21');
+		assert.deepStrictEqual(bup.eventutils.default_counting('RLW-2016'), '3x21');
+		assert.deepStrictEqual(bup.eventutils.default_counting('RLN-2016'), '3x21');
+		assert.deepStrictEqual(bup.eventutils.default_counting('RLM-2016'), '3x21');
 	});
 
 	_it('get_min_pause', function() {
