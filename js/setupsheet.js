@@ -1,26 +1,6 @@
 'use strict';
 var setupsheet = (function() {
 
-var BULI2016_CONFIG = {
-	m: ['1.HD', '2.HD', '1.HE', '2.HE', 'GD', 'backup', 'present'],
-	f: ['dark', 'dark', 'DE', 'DD', 'GD', 'backup', 'present'],
-};
-var DE_CONFIG = {
-	m: ['1.HD', '2.HD', '1.HE', '2.HE', '3.HE', 'GD', 'backup'],
-	f: ['dark', 'dark', 'dark', 'DE', 'DD', 'GD', 'backup'],
-};
-var CONFIGS = {
-	'1BL-2016': BULI2016_CONFIG,
-	'2BLN-2016': BULI2016_CONFIG,
-	'2BLS-2016': BULI2016_CONFIG,
-	'1BL-2017': BULI2016_CONFIG,
-	'2BLN-2017': BULI2016_CONFIG,
-	'2BLS-2017': BULI2016_CONFIG,
-	'RLW-2016': DE_CONFIG,
-	'RLN-2016': DE_CONFIG,
-	'RLM-2016': DE_CONFIG,
-};
-
 var URLS = {
 	'bundesliga-2016': 'div/setupsheet_bundesliga-2016.svg',
 	'default': 'div/setupsheet_default.svg',
@@ -149,14 +129,6 @@ function col_text(s, col) {
 }
 
 function calc_config(ev) {
-	var league_key = ev.league_key;
-	if (eventutils.NRW2016_RE.test(league_key)) {
-		return DE_CONFIG;
-	}
-	if (CONFIGS[league_key]) {
-		return CONFIGS[league_key];
-	}
-
 	// Guess
 	var known_matches = {
 		m: [],
@@ -211,6 +183,9 @@ function calc_config(ev) {
 			return km.key;
 		});
 		res.push('backup');
+		if (eventutils.is_bundesliga(ev.league_key)) {
+			res.push('present');
+		}
 		return res;
 	}
 
