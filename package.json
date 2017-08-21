@@ -11,8 +11,9 @@
     "test:watch": "npm run test -- -w"
   },
   "dependencies": {
-    "ws": "*",
-    "node-webcrypto-ossl": "*"
+    "node-webcrypto-ossl": "*",
+    "wrtc": "0.0.62",
+    "ws": "*"
   },
   "devDependencies": {
     "async": "*",
@@ -22,6 +23,7 @@
     "mocha": "*",
     "node-webcrypto-ossl": "*",
     "parse-appcache-manifest": "*",
+    "puppeteer": "*",
     "stylelint": "*",
     "stylelint-config-standard": "*"
   },
