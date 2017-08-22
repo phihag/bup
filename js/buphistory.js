@@ -36,7 +36,7 @@ function record(s) {
 
 	var orig_hval = window.location.hash.substr(1);
 	var hval = orig_hval;
-	hval = hval.replace(/(?:^|&)(?:m|display|settings|event_scoresheets|scoresheet|eventsheet|stats|netstats|order|editevent|setupsheet|referee_mode|dads|court|dm_style)(?:=[^&]*)?(?=&|$)/g, '');
+	hval = hval.replace(/(?:^|&)(?:m|display|settings|event_scoresheets|scoresheet|eventsheet|stats|netstats|order|mo|editevent|setupsheet|referee_mode|dads|court|dm_style)(?:=[^&]*)?(?=&|$)/g, '');
 	hval = hval.replace(/^&+|&+$/g, '');
 
 	if (s.initialized && (settings.get_mode(s) === 'umpire')) {
@@ -94,6 +94,11 @@ function record(s) {
 			hval += '&';
 		}
 		hval += 'order';
+	} else if (s.ui.mo_visible) {
+		if (hval.length > 1) {
+			hval += '&';
+		}
+		hval += 'mo';
 	} else if (s.ui.settings_visible) {
 		if (hval.length > 1) {
 			hval += '&';
@@ -163,6 +168,11 @@ function load_by_hash() {
 
 	if (typeof qs.netstats != 'undefined') {
 		netstats.show();
+		return;
+	}
+
+	if (typeof qs.mo != 'undefined') {
+		order.mshow(state);
 		return;
 	}
 

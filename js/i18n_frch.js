@@ -439,6 +439,13 @@ var i18n_frch = {
 'order:reset': 'Remettre',
 'order:print': 'Imprimer',
 'order:ignore match': 'Ignorer match',
+'order:manual network message': 'Événement créé manuellement',
+'order:add:match': 'Ajouter match',
+'order:add:placeholder': 'Simple: Nom',
+'order:add:placeholder2': 'Double: Nom / Nom',
+'order:add:invalid': 'Le nombre de joueurs doit être identique des deux côtés. Les noms des joueurs sont séparés par une barre oblique (/).',
+'order:add:discipline': 'discipline',
+
 'staticnet:switch back message': 'Événement importé. Les changements ici ne sont pas transférés!',
 'staticnet:switch back button': 'Passer à {service}',
 'staticnet:error': 'Erreur de téléchargement ({code})',

@@ -21,7 +21,6 @@
     "fs-walk": "*",
     "istanbul": "*",
     "mocha": "*",
-    "node-webcrypto-ossl": "*",
     "parse-appcache-manifest": "*",
     "puppeteer": "*",
     "stylelint": "*",

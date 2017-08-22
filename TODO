@@ -1,21 +1,9 @@
-use team colors does not change color displays
-improve dads
-	ad during intervals
-	add type: text (z.B. "gute Heimreise", "nächstes Heimspiel")
-	add type: refrath-gegen
-	configure on referee
-	switch to indexed db
-displaymode: make cursor vanish after a while
-	make sure no cursor either in dads
-
-d/onlyplayers: correctly handle case where no icon is present (at the moment 404)
-bug: back from &order keeps order
-	use history API
-bug: black card at 0-0 with courtspot wrong netscore
-displaymode: heinz middle
-dmode Berlin
-dmode Saarbrücken
-	-> mail Janine
+Optimierung Reihenfolge:
+	delete match
+	conflicts across teams! (always)
+	test conflicts across teams
+	import from turnier.de
+	mail kay@quantifoil.com
 
 NLA
 	scoresheet
@@ -25,6 +13,31 @@ NLA
 	go through ch vocabulary
 	check in btde
 
+UI test to test setupsheet
+bup all_players error report setupsheet
+http://localhost/bup/#setupsheet crashes
+use team colors does not change color displays
+improve dads
+	ad during intervals
+	add type: text (z.B. "gute Heimreise", "nächstes Heimspiel")
+	add type: refrath-gegen
+	configure on referee
+	switch to indexed db
+displaymode: make cursor vanish after a while
+	make sure no cursor either in dads
+order: print with background graphics
+
+automatic testing to see that setupsheet works (with browser)
+d/onlyplayers: correctly handle case where no icon is present (at the moment 404)
+bug: back from &order keeps order
+	use history API
+bug: black card at 0-0 with courtspot wrong netscore
+displaymode: heinz middle
+dmode Berlin
+dmode Saarbrücken
+	-> mail Janine
+
+replace report link with something better
 referee w/ safari: show nice error message
 safari: switch to RSA-OAEP?
 
@@ -827,3 +840,4 @@ event analysis: which presses before undo
 remove calls to prompt and alert
 render in transparent windows -> Dieter Gläßer
 drucken wie BTP als Server (alles|bei Problemen|nie)
+search for third argument of uiu.el(): {'class': 'foobar'}, replace with more modern version

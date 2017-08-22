@@ -208,3 +208,12 @@ div.order_container {
 		display: none;
 	}
 }
+
+.order_add>input {
+	margin-right: 0.5em;
+}
+
+.order_add>input,
+.order_add>button {
+	font-size: 60%;
+}

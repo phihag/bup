@@ -105,6 +105,9 @@ function available_players(s, listed, team_id, gender) {
 		listed_by_name[lp.name] = lp;
 	});
 
+	if (! s.event.all_players) {
+		return [];
+	}
 	var res = [];
 	s.event.all_players[team_id].forEach(function(p) {
 		if (p.gender !== gender) return;

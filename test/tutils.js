@@ -178,7 +178,6 @@ function load_event(fn, cb) {
 	});
 }
 
-
 module.exports = {
 	DOUBLES_SETUP: DOUBLES_SETUP,
 	SINGLES_SETUP: SINGLES_SETUP,

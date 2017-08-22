@@ -5,6 +5,7 @@ var current_from = null;
 var current_matches;
 var current_ignore_start;
 var current_locked;
+var current_enable_edit;
 
 function calc_players(match) {
 	var teams = match.setup.teams;
@@ -233,11 +234,13 @@ function init(s) {
 	ui_render();
 }
 
-function show() {
-	if (state.ui.order_visible) {
+function show(enable_edit) {
+	var k = enable_edit ? 'mo_visible' : 'order_visible';
+	if (state.ui[k]) {
 		return;
 	}
 
+	current_enable_edit = enable_edit;
 	printing.set_orientation('landscape');
 
 	if (state.ui.referee_mode) {
@@ -247,7 +250,7 @@ function show() {
 		settings.hide(true);
 	}
 
-	state.ui.order_visible = true;
+	state.ui[k] = true;
 	uiu.esc_stack_push(hide);
 	control.set_current(state);
 
@@ -530,16 +533,105 @@ function ui_render() {
 	if (current_ignore_start === current_matches.length) {
 		_create_ignore_after_mark(display);
 	}
+
+	if (current_enable_edit) {
+		var add_form = uiu.el(display, 'form', {
+			class: 'order_add',
+		});
+		var discipline = uiu.el(add_form, 'input', {
+			required: 'required',
+			placeholder: state._('order:add:discipline'),
+			size: 4,
+		});
+		var p1 = uiu.el(add_form, 'input', {
+			placeholder: state._('order:add:placeholder'),
+			required: 'required',
+			size: 40,
+		});
+		var p2 = uiu.el(add_form, 'input', {
+			placeholder: state._('order:add:placeholder2'),
+			size: 40,
+		});
+
+		function _parse_players(str) { // eslint-disable-line no-inner-declarations
+			return str.split('/').map(function(s) {
+				return s.trim();
+			}).filter(function(s) {
+				return s;
+			}).map(function(name) {
+				return {
+					name: name,
+				};
+			});
+		}
+
+		function _check_validity() { // eslint-disable-line no-inner-declarations
+			var p1_players = _parse_players(p1.value);
+			var p2_players = _parse_players(p2.value);
+
+			if ((p2_players.length > 2) || (p1_players.length !== p2_players.length)) {
+				p2.setCustomValidity(state._('order:add:invalid'));
+			} else {
+				p2.setCustomValidity('');
+			}
+		}
+
+		p1.addEventListener('input', _check_validity);
+		p2.addEventListener('input', _check_validity);
+
+		uiu.el(add_form, 'button', {
+			type: 'submit',
+		}, state._('order:add:match'));
+		add_form.addEventListener('submit', function(e) {
+			e.preventDefault();
+
+			var p1_players = _parse_players(p1.value);
+			var p2_players = _parse_players(p2.value);
+
+			var d = new Date();
+			var match_id = 'mo_' + utils.iso8601(d) + utils.timesecs_str(d) + '_' + discipline.value;
+
+			var setup = {
+				is_doubles: (p1_players.length === 2),
+				counting: '3x21',
+				match_name: discipline.value,
+				match_id: match_id,
+				teams: [{
+					players: p1_players,
+				}, {
+					players: p2_players,
+				}],
+				team_competition: false,
+			};
+			var match = {setup: setup};
+			state.event.matches.push(match);
+
+			network.on_edit_event(state, function() {
+				var event = state.event;
+				var pref = event.preferred_order;
+				if (!pref && event.league_key) {
+					pref = preferred_by_league(event.league_key);
+				}
+				current_matches = init_order_matches(event.matches, pref);
+
+				current_ignore_start = current_ignore_start ? current_ignore_start + 1 : current_ignore_start;
+				ui_render();
+			});
+		});
+
+		discipline.focus();
+	}
 }
 
 function hide() {
-	if (! state.ui.order_visible) {
+	if (! state.ui.order_visible && !state.ui.mo_visible) {
 		return;
 	}
 
 	uiu.esc_stack_pop();
 	uiu.hide_qs('.order_layout');
 	state.ui.order_visible = false;
+	state.ui.mo_visible = false;
 
 	if (state.ui.referee_mode) {
 		refmode_referee_ui.back_to_ui();
@@ -564,7 +656,8 @@ function ui_init() {
 		window.print();
 	});
 
-	click.qs('.order_layout', function(e) {
+	// No click.qs because that would block form submission
+	uiu.qs('.order_layout').addEventListener('click', function(e) {
 		if (e.target === this) {
 			ui_move_abort();
 		}
@@ -584,10 +677,16 @@ function ui_init() {
 	});
 }
 
+function mshow() {
+	// network is initialized separately
+	show(true);
+}
+
 return {
 	hide: hide,
 	show: show,
 	ui_init: ui_init,
+	mshow: mshow,
 	/*@DEV*/
 	// Testing only
 	calc_conflicting_players: calc_conflicting_players,

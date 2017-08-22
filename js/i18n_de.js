@@ -443,6 +443,12 @@ var i18n_de = {
 'order:reset': 'Zurücksetzen',
 'order:print': 'Drucken',
 'order:ignore match': 'Spiel herausnehmen',
+'order:manual network message': 'Manuell erstellter Wettkampf',
+'order:add:placeholder': 'Einzel: Name',
+'order:add:placeholder2': 'Doppel: Name / Name',
+'order:add:match': 'Spiel hinzufügen',
+'order:add:invalid': 'Anzahl der Spieler muss auf beiden Seiten gleich sein. Spieler-Namen werden durch einen Slash(/) getrennt.',
+'order:add:discipline': 'Disziplin',
 
 'staticnet:switch back message': 'Sicherungskopie des Wettkampfs geladen. Änderungen werden nicht übertragen! ',
 'staticnet:switch back button': 'Wechseln zu {service}',
