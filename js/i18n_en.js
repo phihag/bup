@@ -217,6 +217,7 @@ var i18n_en = {
 'settings:counting|5x11_15': 'BWF 2016 Experiment Option 1 (5x11 until max. 15)',
 'settings:counting|5x11_15^90': 'German Bundesliga 2017 (5x11 until max. 15, 90s intervals)',
 'settings:counting|5x11/3': 'BWF 2016 Experiment Option 2 (5x11 with 3 point challenge)',
+'settings:counting|5x11_11': 'UAE (5x11 sudden death)',
 'settings:counting|1x21': 'One Game (1x21)',
 'settings:counting|1x11_15': 'One Game 2016 Experiment Option 1 (1x11 until max. 15)',
 'settings:counting|3x15_18': 'Shortened (3x15 until max. 18)',

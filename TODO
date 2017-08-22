@@ -1,3 +1,4 @@
+test finish_score
 Optimierung Reihenfolge:
 	delete match
 	conflicts across teams! (always)
@@ -5,6 +6,7 @@ Optimierung Reihenfolge:
 	import from turnier.de
 	mail kay@quantifoil.com
 
+add UAE system (5x11_11)
 NLA
 	scoresheet
 	configuration

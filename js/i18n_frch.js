@@ -216,6 +216,7 @@ var i18n_frch = {
 'settings:counting|5x11_15': 'BWF 2016 Experiment Option 1 (5x11 jusqu\'à au plus 15)',
 'settings:counting|5x11_15^90': 'Bundesliga 2017 (5x11 jusqu\'à au plus 15, 90s intervals)',
 'settings:counting|5x11/3': 'BWF 2016 Experiment Option 2 (5x11 aven l\'extension 3 points)',
+'settings:counting|5x11_11': 'UAE (5x11 sans extension)',
 'settings:counting|1x21': 'Un set (1x21)',
 'settings:counting|1x11_15': 'Un set 2016 Experiment Option 1 (1x11 jusqu\'à au plus 15)',
 'settings:counting|3x15_18': 'Raccourci (3x15 jusqu\'à au plus 18)',
