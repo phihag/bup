@@ -3,7 +3,7 @@ var netstats = (function() {
 
 var MOVING_AVG_FACTOR = 0.9;
 
-var now = (((typeof window != 'undefined') && window.performance) ? function() {
+var now = (((typeof window != 'undefined') && window.performance && window.performance.now) ? function() {
 	return window.performance.now();
 } : Date.now);
 

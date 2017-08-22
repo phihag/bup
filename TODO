@@ -1,4 +1,3 @@
-test finish_score
 Optimierung Reihenfolge:
 	delete match
 	conflicts across teams! (always)
@@ -6,7 +5,6 @@ Optimierung Reihenfolge:
 	import from turnier.de
 	mail kay@quantifoil.com
 
-add UAE system (5x11_11)
 NLA
 	scoresheet
 	configuration
@@ -15,6 +13,7 @@ NLA
 	go through ch vocabulary
 	check in btde
 
+buli: update shuttles for 2017
 UI test to test setupsheet
 bup all_players error report setupsheet
 http://localhost/bup/#setupsheet crashes
