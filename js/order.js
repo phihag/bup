@@ -392,6 +392,30 @@ function ui_lock_click(e) {
 	ui_move_abort();
 }
 
+function ui_rm_click(e) {
+	var el = e.target;
+	var idx = parseInt(el.getAttribute('data-order-idx'));
+	var match = current_matches[idx];
+	if (confirm(state._('order:rm:prompt', {
+			match_name: match.setup.match_name}
+			))) {
+
+		utils.remove_cb(state.event.matches, function(m) {
+			return m === match;
+		});
+
+		var event = state.event;
+		utils.remove_cb(current_matches, function(m) {
+			return m.setup.match_id === match.setup.match_id;
+		});
+
+		if (idx <= current_ignore_start) {
+			current_ignore_start--;
+		}
+		ui_render();
+	}
+}
+
 function ui_move_abort() {
 	$('.order_insert_active').removeClass('order_insert_active');
 	$('.order_ignore_match_active').removeClass('order_ignore_match_active');
@@ -465,6 +489,13 @@ function ui_render() {
 		click.on(mark, ui_lock_click);
 	}
 
+	function _create_rm_mark(display, idx) {
+		var container = uiu.el(display, 'div', {'class': 'order_rm_container'});
+		var match_id = current_matches[idx].setup.match_id;
+		var mark = uiu.el(container, 'div', {'class': 'order_rm', 'data-order-idx': idx});
+		click.on(mark, ui_rm_click);
+	}
+
 	function _add_player(team_container, team, player_id) {
 		var player_class = 'order_player';
 		var player_name;
@@ -494,6 +525,9 @@ function ui_render() {
 		_create_num(display, i);
 		if (i < current_ignore_start) {
 			_create_lock_mark(display, i);
+		}
+		if (current_enable_edit) {
+			_create_rm_mark(display, i);
 		}
 
 		var setup = match.setup;
@@ -608,13 +642,8 @@ function ui_render() {
 
 			network.on_edit_event(state, function() {
 				var event = state.event;
-				var pref = event.preferred_order;
-				if (!pref && event.league_key) {
-					pref = preferred_by_league(event.league_key);
-				}
-				current_matches = init_order_matches(event.matches, pref);
-
-				current_ignore_start = current_ignore_start ? current_ignore_start + 1 : current_ignore_start;
+				current_matches.push(match);
+				current_ignore_start++;
 				ui_render();
 			});
 		});

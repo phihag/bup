@@ -449,6 +449,7 @@ var i18n_en = {
 'order:add:placeholder': 'Singles: name',
 'order:add:placeholder2': 'Doubles: name / name',
 'order:add:discipline': 'discipline',
+'order:rm:prompt': 'Really delete match {match_name}?',
 
 'order:add:invalid': 'Number of players must be the same on both sides. Player names are separated by a slash(/).',
 'staticnet:switch back message': 'Imported event. Changes here will not be transmitted! ',

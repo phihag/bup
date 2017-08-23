@@ -109,7 +109,8 @@ div.order_container {
 	opacity: 0.5;
 }
 
-.order_lock_container {
+.order_lock_container,
+.order_rm_container {
 	position: relative;
 	height: 0;
 }
@@ -130,6 +131,21 @@ div.order_container {
 }
 .order_lock.order_lock_locked {
 	background-image: url(../icons/locked.svg);
+	opacity: 1;
+}
+
+.order_rm {
+	position: absolute;
+	right: 0.5em;
+	top: 0.5em;
+	width: 2em;
+	height: 2em;
+	background-image: url(../icons/delete.svg);
+	background-size: 100%;
+	cursor: pointer;
+	opacity: 0.4;
+}
+.order_rm:hover {
 	opacity: 1;
 }
 
@@ -215,5 +231,6 @@ div.order_container {
 
 .order_add>input,
 .order_add>button {
-	font-size: 60%;
+	padding: 0.5vh 0.3vw;
+	font-size: 70%;
 }

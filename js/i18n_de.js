@@ -450,6 +450,7 @@ var i18n_de = {
 'order:add:match': 'Spiel hinzufügen',
 'order:add:invalid': 'Anzahl der Spieler muss auf beiden Seiten gleich sein. Spieler-Namen werden durch einen Slash(/) getrennt.',
 'order:add:discipline': 'Disziplin',
+'order:rm:prompt': 'Spiel {match_name} wirklich löschen?',
 
 'staticnet:switch back message': 'Sicherungskopie des Wettkampfs geladen. Änderungen werden nicht übertragen! ',
 'staticnet:switch back button': 'Wechseln zu {service}',
