@@ -447,6 +447,7 @@ var i18n_frch = {
 'order:add:invalid': 'Le nombre de joueurs doit être identique des deux côtés. Les noms des joueurs sont séparés par une barre oblique (/).',
 'order:add:discipline': 'discipline',
 'order:rm:prompt': 'Vraiment supprimer {match_name}?',
+'order:import matches': 'Importer',
 
 'staticnet:switch back message': 'Événement importé. Les changements ici ne sont pas transférés!',
 'staticnet:switch back button': 'Passer à {service}',

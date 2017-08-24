@@ -56,6 +56,10 @@ function import_tde(s, match_url, cb) {
 	});
 }
 
+function import_tde_day(s, day_url, cb) {
+
+}
+
 function ui_init() {
 	var m = window.location.pathname.match(/^(.*\/)bup(?:\/(?:bup\.html)?)?$/);
 	if (m) {

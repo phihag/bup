@@ -648,6 +648,23 @@ function ui_render() {
 			});
 		});
 
+		var import_form = uiu.el(display, 'form', {
+			class: 'order_import',
+		});
+		var import_url = uiu.el(import_form, 'input', {
+			type: 'url',
+			size: 50,
+			value: 'http://localhost/test/matches.html',
+		});
+		uiu.el(import_form, 'button', {
+			type: 'submit',
+		}, state._('order:import matches'));
+		import_form.addEventListener('submit', function() {
+			var url = import_url.value;
+			
+
+		});
+
 		discipline.focus();
 	}
 }

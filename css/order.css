@@ -225,12 +225,18 @@ div.order_container {
 	}
 }
 
-.order_add>input {
+.order_add > input,
+.order_import > input {
 	margin-right: 0.5em;
 }
+.order_import {
+	margin-top: 1em;
+}
 
-.order_add>input,
-.order_add>button {
+.order_add > input,
+.order_add > button,
+.order_import > input,
+.order_import > button {
 	padding: 0.5vh 0.3vw;
 	font-size: 70%;
 }
