@@ -404,7 +404,6 @@ function ui_rm_click(e) {
 			return m === match;
 		});
 
-		var event = state.event;
 		utils.remove_cb(current_matches, function(m) {
 			return m.setup.match_id === match.setup.match_id;
 		});
@@ -491,7 +490,6 @@ function ui_render() {
 
 	function _create_rm_mark(display, idx) {
 		var container = uiu.el(display, 'div', {'class': 'order_rm_container'});
-		var match_id = current_matches[idx].setup.match_id;
 		var mark = uiu.el(container, 'div', {'class': 'order_rm', 'data-order-idx': idx});
 		click.on(mark, ui_rm_click);
 	}
@@ -641,7 +639,6 @@ function ui_render() {
 			state.event.matches.push(match);
 
 			network.on_edit_event(state, function() {
-				var event = state.event;
 				current_matches.push(match);
 				current_ignore_start++;
 				ui_render();
@@ -663,7 +660,7 @@ function ui_render() {
 			e.preventDefault();
 			uiu.qsEach('.order_error', uiu.remove, import_form);
 			var url = import_url.value;
-			urlimport.download_tde_day(state, import_url.value, function(errmsg, imported_event) {
+			urlimport.download_tde_day(state, url, function(errmsg, imported_event) {
 				if (errmsg) {
 					uiu.el(import_form, 'div', 'order_error', state._('order:import:error', {
 						msg: errmsg,
@@ -771,6 +768,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var report_problem = require('./report_problem');
 	var settings = require('./settings');
 	var uiu = require('./uiu');
+	var urlimport = require('./urlimport');
 	var utils = require('./utils');
 
 	module.exports = order;
