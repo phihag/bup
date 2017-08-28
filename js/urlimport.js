@@ -56,8 +56,33 @@ function import_tde(s, match_url, cb) {
 	});
 }
 
-function import_tde_day(s, day_url, cb) {
+// cb gets called with an error message or null, and the downloaded event
+function download_tde_day(s, day_url, cb) {
+	var import_url = baseurl + 'bup/http_proxy/tde_dayimport?url=' + encodeURIComponent(day_url);
+	ajax.req({
+		method: 'GET',
+		url: import_url,
+	}, function(import_json) {
+		var data = utils.parse_json(import_json);
+		if (!data) {
+			return cb('JSON parse failed');
+		}
 
+		var event = importexport.load_data(s, data).event;
+		cb(null, event);
+	}, function(http_code, body, response) {
+		var content_type = response.getResponseHeader('content-type');
+		var msg = 'Code ' + http_code;
+		if (content_type === 'application/json') {
+			var data = utils.parse_json(body);
+			if (data) {
+				msg = data.message;
+			} else {
+				msg = 'invalid JSON (HTTP ' + http_code + ')';
+			}
+		}
+		cb(msg);
+	});
 }
 
 function ui_init() {
@@ -75,6 +100,7 @@ function ui_init() {
 
 return {
 	ui_init: ui_init,
+	download_tde_day: download_tde_day,
 };
 
 })();

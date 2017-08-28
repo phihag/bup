@@ -3,6 +3,10 @@
 // A pseudo-network interface for an event that is only changed locally
 function staticnet(event, url) {
 
+function swap_event(new_event) {
+	event = new_event;
+}
+
 /* s, press */
 function send_press(s) {
 	sync(s);
@@ -163,6 +167,7 @@ return {
 	ui_init: ui_init,
 	editable: editable,
 	on_edit_event: on_edit_event,
+	swap_event: swap_event,
 };
 
 }

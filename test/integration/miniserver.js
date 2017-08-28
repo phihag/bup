@@ -22,6 +22,7 @@ function server(callback) {
 
 		const parsed_url = url.parse(req.url);
 		console.log(parsed_url);
+		// TODO: prevent recursing into hidden files/dirs
 		// TODO determine filename
 		// TODO determine MIME type
 	});

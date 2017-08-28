@@ -658,11 +658,24 @@ function ui_render() {
 		});
 		uiu.el(import_form, 'button', {
 			type: 'submit',
-		}, state._('order:import matches'));
-		import_form.addEventListener('submit', function() {
+		}, state._('order:import matches') + state._('experimental'));
+		import_form.addEventListener('submit', function(e) {
+			e.preventDefault();
+			uiu.qsEach('.order_error', uiu.remove, import_form);
 			var url = import_url.value;
-			
+			urlimport.download_tde_day(state, import_url.value, function(errmsg, imported_event) {
+				if (errmsg) {
+					uiu.el(import_form, 'div', 'order_error', state._('order:import:error', {
+						msg: errmsg,
+					}));
+					return;
+				}
 
+				var netw = network.get_netw();
+				netw.swap_event(imported_event);
+
+				init();
+			});
 		});
 
 		discipline.focus();

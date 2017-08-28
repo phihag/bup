@@ -452,6 +452,7 @@ var i18n_de = {
 'order:add:discipline': 'Disziplin',
 'order:rm:prompt': 'Spiel {match_name} wirklich löschen?',
 'order:import matches': 'Importieren',
+'order:import:error': 'Import fehlgeschlagen: {msg}',
 
 'staticnet:switch back message': 'Sicherungskopie des Wettkampfs geladen. Änderungen werden nicht übertragen! ',
 'staticnet:switch back button': 'Wechseln zu {service}',

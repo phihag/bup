@@ -448,6 +448,7 @@ var i18n_frch = {
 'order:add:discipline': 'discipline',
 'order:rm:prompt': 'Vraiment supprimer {match_name}?',
 'order:import matches': 'Importer',
+'order:import:error': 'L\'importation a échoué: {msg}',
 
 'staticnet:switch back message': 'Événement importé. Les changements ici ne sont pas transférés!',
 'staticnet:switch back button': 'Passer à {service}',

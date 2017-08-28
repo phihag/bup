@@ -769,6 +769,7 @@ return {
 	errstate: errstate,
 	get_presses: get_presses,
 	get_real_netw: get_real_netw,
+	get_netw: get_netw,
 	install_refmode_push: install_refmode_push,
 	is_enabled: is_enabled,
 	list_all_players: list_all_players,
