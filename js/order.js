@@ -566,8 +566,10 @@ function ui_render() {
 		_create_ignore_after_mark(display);
 	}
 
+	var manual_ui = uiu.qs('.order_edit');
+	uiu.empty(manual_ui);
 	if (current_enable_edit) {
-		var add_form = uiu.el(display, 'form', {
+		var add_form = uiu.el(manual_ui, 'form', {
 			class: 'order_add',
 		});
 		var discipline = uiu.el(add_form, 'input', {
@@ -645,13 +647,15 @@ function ui_render() {
 			});
 		});
 
-		var import_form = uiu.el(display, 'form', {
+		var import_form = uiu.el(manual_ui, 'form', {
 			class: 'order_import',
 		});
 		var import_url = uiu.el(import_form, 'input', {
 			type: 'url',
 			size: 50,
-			value: 'http://localhost/test/matches.html',
+			required: 'required',
+			placeholder: state._('order:import:placeholder'),
+			value: '',
 		});
 		uiu.el(import_form, 'button', {
 			type: 'submit',
@@ -668,10 +672,12 @@ function ui_render() {
 					return;
 				}
 
+				imported_event.staticnet_message = 'none';
 				var netw = network.get_netw();
 				netw.swap_event(imported_event);
+				network.update_event(state, imported_event);
 
-				init();
+				init(state);
 			});
 		});
 

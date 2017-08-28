@@ -241,6 +241,12 @@ div.order_container {
 	font-size: 70%;
 }
 
+.order_edit {
+	text-align: left;
+	margin-top: 2em;
+}
 .order_error {
 	color: red;
 }
+
+

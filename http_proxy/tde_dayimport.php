@@ -39,7 +39,7 @@ function any($callback, $arr) {
 }
 
 function make_player($pname) {
-	$pname = \html_entity_decode($pname, \ENT_COMPAT | \ENT_HTML401, 'UTF-8');
+	$pname = decode_html($pname);
 	if (\preg_match('/^([^[]+)\s+\[/', $pname, $matches)) {
 		$pname = $matches[1];
 	}
@@ -72,8 +72,8 @@ function parse_score($html) {
 	}, $matches);
 }
 
-function parse_day($tm_html) {
-	if (!preg_match('/<table class="ruler matches">(.*?)<\/tbody>\s*<\/table>/s', $tm_html, $matches)) {
+function parse_day($full_html) {
+	if (!preg_match('/<table class="ruler matches">(.*?)<\/tbody>\s*<\/table>/s', $full_html, $matches)) {
 		throw new \Exception('Could not find table');
 	}
 	$table_html = $matches[1];
@@ -154,6 +154,7 @@ function parse_day($tm_html) {
 			'is_doubles' => $is_doubles,
 			'match_name' => $match_name,
 			'match_id' => $match_id,
+			'counting' => '3x21', // just assume
 		];
 		$bm = [
 			'setup' => $setup,
@@ -207,6 +208,10 @@ function parse_day($tm_html) {
 	$res = [
 		'matches' => $res_matches,
 	];
+
+	if (preg_match('/<div\s+class="title">\s*<h3>(?P<tournament_name>[^<]+)<\/h3>/', $full_html, $m)) {
+		$res['tournament_name'] = decode_html($m['tournament_name']);
+	}
 
 	return $res;
 }

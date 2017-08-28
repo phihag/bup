@@ -137,11 +137,16 @@ function on_load_data(s) {
 	var msg_container = uiu.qs('.setup_network_message');
 	uiu.empty(msg_container);
 
+	var msg = staticnet_message(s);
+	if (msg === 'none') {
+		return;
+	}
+
 	var snet_container = uiu.el(msg_container, 'div', {
 		'class': 'staticnet_message',
 	});
 
-	uiu.el(snet_container, 'span', {}, staticnet_message(s));
+	uiu.el(snet_container, 'span', {}, msg);
 	var real_netw = network.get_real_netw();
 	if (!url && real_netw) {
 		var button = uiu.el(snet_container, 'button', {

@@ -1,11 +1,3 @@
-Optimierung Reihenfolge:
-	import from turnier.de
-	fix actual import
-
-	conflicts across teams! (always)
-	test conflicts across teams
-	mail kay@quantifoil.com
-
 NLA
 	scoresheet
 	configuration
@@ -29,6 +21,7 @@ displaymode: make cursor vanish after a while
 	make sure no cursor either in dads
 order: print with background graphics
 
+dayimport in normal import view (unify with #mo import)
 automatic testing to see that setupsheet works (with browser)
 d/onlyplayers: correctly handle case where no icon is present (at the moment 404)
 bug: back from &order keeps order
@@ -43,6 +36,7 @@ replace report link with something better
 referee w/ safari: show nice error message
 safari: switch to RSA-OAEP?
 
+support 1x30 + 1x42
 generate an HTML with all networks and what features they support?
 i18n: check for i18n values that are the same in all languages (like cancel)
 #settings only for main settings

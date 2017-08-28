@@ -610,7 +610,7 @@ function ui_init(s, hash_query) {
 		networks.btsh = btsh(null, hash_query.btsh_e);
 	} else if (hash_query.mo !== undefined) {
 		networks.mo = staticnet({
-			message: s._('order:manual network message'),
+			staticnet_message: 'none',
 			matches: [],
 			counting: '3x21',
 		});
