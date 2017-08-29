@@ -9,7 +9,7 @@ $match_url = $_GET['url'];
 main($match_url);
 
 function main($match_url) {
-	if (! \preg_match('/^http:\/\/localhost\/test\/matches(?:[0-9]*)\.html$|https?:\/\/www\.turnier\.de\/sport\/matches\.aspx\?id=([a-fA-F0-9-]+)/', $match_url)) {
+	if (! \preg_match('/^http:\/\/localhost\/test\/matches(?:[0-9]*)\.html$|https?:\/\/www\.(?:turnier\.de|tournamentsoftware\.com)\/sport\/matches\.aspx\?id=([a-fA-F0-9-]+)/', $match_url)) {
 		throw new \Exception('Unsupported URL');
 	}
 
@@ -79,8 +79,8 @@ function parse_day($full_html) {
 	$table_html = $matches[1];
 
 	$mres = preg_match_all('/
-		<td\s+class="plannedtime"[^>]*>\s*[^<]*<\/td>\s*
-		<td><a\s+href="[^"]*">(?P<discipline_name>[^<]+)<\/a><\/td>\s*
+		#<td\s+class="plannedtime"[^>]*>\s*[^<]*<\/td>\s*
+		<td><a\s+href="draw\.aspx[^"]*">(?P<discipline_name>[^<]+)<\/a><\/td>\s*
 
 		<td(?:\s+align="right")?>\s*
 		<table(?:\s+align="Right")?>\s*

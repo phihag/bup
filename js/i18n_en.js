@@ -452,7 +452,7 @@ var i18n_en = {
 'order:rm:prompt': 'Really delete match {match_name}?',
 'order:import matches': 'Import',
 'order:import:error': 'Import failed: {msg}',
-'order:import:placeholder': 'https://www.turnier.de/sport/matches.aspx?...',
+'order:import:placeholder': 'https://www.tournamentsoftware.com/sport/matches.aspx?...',
 
 'order:add:invalid': 'Number of players must be the same on both sides. Player names are separated by a slash(/).',
 'staticnet:switch back message': 'Imported event. Changes here will not be transmitted! ',
