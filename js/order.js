@@ -659,7 +659,7 @@ function ui_render() {
 		});
 		uiu.el(import_form, 'button', {
 			type: 'submit',
-		}, state._('order:import matches') + state._('experimental'));
+		}, state._('order:import matches'));
 		import_form.addEventListener('submit', function(e) {
 			e.preventDefault();
 			uiu.qsEach('.order_error', uiu.remove, import_form);
