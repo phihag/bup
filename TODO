@@ -7,6 +7,7 @@ NLA
 	check in btde
 
 manual import for 2017
+update RLM link to http://www.dbv-mitte.de/web/images/Allgemein/Gruppenordnung/Gruppe_Mitte_im_DBV_Ordnungen_20170701.pdf
 UI test to test setupsheet
 bup all_players error report setupsheet
 http://localhost/bup/#setupsheet crashes

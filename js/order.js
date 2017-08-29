@@ -439,7 +439,7 @@ function on_match_click(e) {
 	if (from_idx === current_from) {
 		ui_move_abort();
 	} else {
-		ui_move_prepare(from_idx, 10);
+		ui_move_prepare(from_idx);
 	}
 }
 
