@@ -80,7 +80,7 @@ function parse_day($full_html) {
 
 	$mres = preg_match_all('/
 		#<td\s+class="plannedtime"[^>]*>\s*[^<]*<\/td>\s*
-		<td><a\s+href="draw\.aspx[^"]*">(?P<discipline_name>[^<]+)<\/a><\/td>\s*
+		<td><a\s+href="(?:\.\/)?draw\.aspx[^"]*">(?P<discipline_name>[^<]+)<\/a><\/td>\s*
 
 		<td(?:\s+align="right")?>\s*
 		<table(?:\s+align="Right")?>\s*
