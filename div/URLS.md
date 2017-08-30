@@ -17,6 +17,7 @@ tdemo     Tournament demo
 nrwdemo   Demo of a match in the lower divisions in NRW
 rlmdemo   German Regionalliga Nord Demo
 nlademo   Demo of Swiss National League
+jticker   Run under meyerjo/ticker (shuttlecock-live)
 
 Initial UI
 ==========
@@ -27,9 +28,11 @@ settings       Show settings UI
 display        Start in display mode
 eventsheet=foo Show the dialog for generating the eventsheet named foo
 order          Show the match order dialog
+mo             Start with the manual order dialog (allows easy match creation and import)
 
 Settings
 ========
 
-lang=LANGCODE   Set language to the specified one. LANGCODE can be either de or en at the moment.
-court=COURTCODE Run on the specified court. COURTCODE depends on the network. Normally, a number like 1, 2, or the string "referee".
+lang=LANGCODE       Set language to the specified one. LANGCODE can be either de or en at the moment.
+court=COURTCODE     Run on the specified court. COURTCODE depends on the network. Normally, a number like 1, 2, or the string "referee".
+dm_style=STYLECODE  In display mode, start with the specified style.

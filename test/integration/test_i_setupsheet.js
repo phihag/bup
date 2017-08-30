@@ -4,10 +4,9 @@ const assert = require('assert');
 
 const puppeteer = require('puppeteer');
 
-const tutils = require('./tutils');
+const tutils = require('../tutils');
 const _describe = tutils._describe;
 const _it = tutils._it;
-const bup = tutils.bup;
 
 _describe('integration tests', () => {
 	tutils._before(async () => {
@@ -15,11 +14,9 @@ _describe('integration tests', () => {
 	});
 
 	_it('setupsheet', async () => {
-		const browser = await puppeteer.launch();
+		const browser = await puppeteer.launch({args: ['--no-sandbox']}	);
 		const page = await browser.newPage();
 
 		browser.close();
-
-		done();
 	});
 });

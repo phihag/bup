@@ -6,7 +6,7 @@ var fs = require('fs');
 var bup = require('../js/bup');
 
 // Make linter happy
-/*global describe:false, it:false*/
+/*global describe:false, it:false, before:false*/
 
 // Trivial runner
 var _describe = ((typeof describe == 'undefined') ?
@@ -16,6 +16,10 @@ var _describe = ((typeof describe == 'undefined') ?
 var _it = ((typeof it == 'undefined') ?
 	function(s, f) {f();} :
 	it
+);
+var _before = ((typeof before == 'undefined') ?
+	function(s, f) {f();} :
+	before
 );
 
 
@@ -189,6 +193,7 @@ module.exports = {
 	DOUBLES_SETUP_EN: DOUBLES_SETUP_EN,
 	_describe: _describe,
 	_it: _it,
+	_before: _before,
 	bup: bup,
 
 	assert_u8r_eq: assert_u8r_eq,
