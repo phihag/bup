@@ -59,6 +59,7 @@ function ui_render_login(container) {
 }
 
 function _request(s, component, options, cb) {
+	var netstats_cb = netstats.pre_request(component);
 	var xhr = new XMLHttpRequest();
 	xhr.open(options.method || 'GET', options.url, true);
 	if (options.contentType) {
@@ -68,6 +69,7 @@ function _request(s, component, options, cb) {
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState !== 4) return;
 
+		netstats_cb(xhr);
 		if (xhr.status == 200) {
 			var res = xhr.responseText;
 			if (/<button>anmelden<\/button>/.exec(res)) {
@@ -132,11 +134,12 @@ function send_score(s) {
 	}
 	outstanding_requests++;
 	var match_id = s.metadata.id;
+	var data = JSON.stringify(post_data);
 
 	_request(s, 'btde.score', {
 		method: 'POST',
 		url: baseurl + 'login/write.php',
-		data: JSON.stringify(post_data),
+		data: data,
 		contentType: 'application/json; charset=utf-8',
 	}, function(err) {
 		outstanding_requests--;
