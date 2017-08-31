@@ -13,7 +13,23 @@ function _err(res, errcode) {
 
 function mimetype(pathname) {
 	const parsed_path = path.parse(pathname);
-	console.log('ext is');
+	return {
+		'.appcache': 'text/cache-manifest',
+		'.css': 'text/css',
+		'.gif': 'image/gif',
+		'.html': 'text/html',
+		'.jpg': 'image/jpeg',
+		'.js': 'application/javascript',
+		'.json': 'application/json',
+		'.md': 'text/markdown',
+		'.mp4': 'video/mp4',
+		'.pdf': 'application/pdf',
+		'.png': 'image/png',
+		'.svg': 'image/svg+xml',
+		'.txt': 'text/plain',
+		'.xlsm': 'application/vnd.ms-excel.sheet.macroEnabled.12',
+		'.xltm': 'application/vnd.ms-excel.template.macroEnabled.12',
+	}[parsed_path.ext];
 }
 
 // Safely resolves a path, without going into hidden files or path traversal
@@ -86,19 +102,22 @@ function server(callback, options) {
 				return _err(res, 500);
 			});
 
-			res.writeHead(200, {
+			const headers = {
 				'Cache-Control': 'no-store, must-revalidate',
 				'Expires': '0',
-			});
+			};
+			const mt = mimetype(fn);
+			if (mt) {
+				headers['Content-Type'] = mt;
+			}
+
+			res.writeHead(200, headers);
 
 			const pipe = stream.pipe(res);
 			pipe.on('error', (err) => {
 				console.error('pipe error: ' + err.message);
 				return _err(res, 500);
 			});
-
-			// TODO end?
-			// TODO determine MIME type
 		});
 	});
 	serv.listen(port, listen, () => {
@@ -115,6 +134,7 @@ function server(callback, options) {
 module.exports = {
 	server,
 	// Testing only
+	mimetype,
 	resolve_path,
 };
 

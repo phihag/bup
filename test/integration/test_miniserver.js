@@ -53,7 +53,10 @@ _describe('miniserver', () => {
 	});
 
 	_it('mimetype', () => {
-		assert.strictEqual(miniserver.mimetype('foo.txt', 'text/plain'));
-		assert.strictEqual(miniserver.mimetype('foo.txt', 'text/html'));
+		assert.strictEqual(miniserver.mimetype('foo.txt'), 'text/plain');
+		assert.strictEqual(miniserver.mimetype('foo.gif'), 'image/gif');
+		assert.strictEqual(miniserver.mimetype('bup/bup.css'), 'text/css');
+		assert.strictEqual(miniserver.mimetype('dist/bup.appcache'), 'text/cache-manifest');
+		assert.strictEqual(miniserver.mimetype('Makefile'), undefined); // follow apache
 	});
 });
