@@ -118,8 +118,8 @@ function send_score(s) {
 	};
 	var game_count = calc.max_game_count(s.setup.counting);
 	netscore.forEach(function(score, game_idx) {
-		post_data['satz' + (game_idx + 1)] = '' + score[0];
-		post_data['satz' + (game_count + game_idx + 1)] = '' + score[1];
+		post_data['satz' + (game_idx + 1)] = score[0] || '0';
+		post_data['satz' + (game_count + game_idx + 1)] = score[1] || '0';
 	});
 	for (var i = 1;i <= 2 * game_count;i++) {
 		if (post_data['satz' + i] === undefined) {
