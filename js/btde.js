@@ -473,6 +473,7 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
 	var eventutils = require('./eventutils');
+	var netstats = require('./netstats');
 	var network = require('./network');
 	var utils = require('./utils');
 

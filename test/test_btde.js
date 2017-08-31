@@ -22,7 +22,7 @@ _describe('btde', function() {
 		var expected = {
 			'event_name': 'TV Refrath - 1. BV Mülheim',
 			'team_names': ['TV Refrath', '1. BV Mülheim'],
-			'league_key': '1BL-2016',
+			'league_key': '1BL-2017',
 			'courts': [{
 				'court_id': 1,
 				'description': '1 (links)',
@@ -274,7 +274,7 @@ _describe('btde', function() {
 
 		var expected = {
 			'team_names': ['TV Refrath', '1. BV Mülheim'],
-			'league_key': '2BLN-2016',
+			'league_key': '2BLN-2017',
 			'event_name': 'TV Refrath - 1. BV Mülheim',
 			'courts': [{
 				'court_id': 1,
