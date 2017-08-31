@@ -11,6 +11,11 @@ function _err(res, errcode) {
 	res.end('Error ' + errcode);
 }
 
+function mimetype(pathname) {
+	const parsed_path = path.parse(pathname);
+	console.log('ext is');
+}
+
 // Safely resolves a path, without going into hidden files or path traversal
 function resolve_path(root_dir, url_path, cb, path_module, fs_module) {
 	path_module = path_module || path;
@@ -42,10 +47,8 @@ function resolve_path(root_dir, url_path, cb, path_module, fs_module) {
 		fs_module.realpath(rel_path, (err, res_fn) => {
 			if (err) return cb(err);
 
-			if (! nroot_dir.endsWith(path_module.sep)) {
-				nroot_dir += path_module.sep;
-			}
-			if (! res_fn.startsWith(nroot_dir)) {
+			const cmp_dir = nroot_dir + nroot_dir.endsWith(path_module.sep) ? '' : path_module.sep;
+			if ((!res_fn.startsWith(cmp_dir)) || (cmp_dir === nroot_dir)) {
 				return cb(new Error('Path traversal detected'));
 			}
 
@@ -68,19 +71,35 @@ function server(callback, options) {
 		}
 
 		const parsed_url = url.parse(req.url);
-		const fn = resolve_path(ROOT_DIR, parsed_url.pathname);
-		const stream = fs.createReadStream(fn);
-		stream.on('error', (err) => {
-			console.log('stream err', err);
-		});
-		const pipe = stream.pipe(res);
-		pipe.on('error', (err) => {
-			console.log('pipe err', err);
-		});
+		resolve_path(ROOT_DIR, parsed_url.pathname, (err, fn) => {
+			if (err) {
+				console.error('Error while trying to resolve ' + parsed_url.pathname + ': ' + err.message);
+				return _err(res, 404);
+			}
 
-		// TODO handle file not found errors
-		// TODO handle errors after file not found
-		// TODO determine MIME type
+			const stream = fs.createReadStream(fn);
+			stream.on('error', (err) => {
+				if (err.code === 'EISDIR') {
+					return _err(res, 404);
+				}
+				console.error('failed to create stream: ' + err.message);
+				return _err(res, 500);
+			});
+
+			res.writeHead(200, {
+				'Cache-Control': 'no-store, must-revalidate',
+				'Expires': '0',
+			});
+
+			const pipe = stream.pipe(res);
+			pipe.on('error', (err) => {
+				console.error('pipe error: ' + err.message);
+				return _err(res, 500);
+			});
+
+			// TODO end?
+			// TODO determine MIME type
+		});
 	});
 	serv.listen(port, listen, () => {
 		const domain = ((listen === '::') || (listen == '0.0.0.0')) ? 'localhost' : (
@@ -94,6 +113,7 @@ function server(callback, options) {
 }
 
 module.exports = {
+	server,
 	// Testing only
 	resolve_path,
 };

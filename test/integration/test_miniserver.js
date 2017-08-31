@@ -11,7 +11,7 @@ const miniserver = require('./miniserver');
 
 const fs_modules = {
 	posix: {
-		realpath: (p, cb) => cb(null, path.posix.normalize(p))
+		realpath: (p, cb) => cb(null, path.posix.normalize(p)),
 	},
 	win32: {
 		realpath: (p, cb) => cb(null, path.win32.normalize(p)),
@@ -50,5 +50,10 @@ _describe('miniserver', () => {
 		await test_resolve_path('win32', 'cwd', 'foo/bar/../baz/a.b.d', 'cwd\\foo\\baz\\a.b.d');
 		await test_resolve_path('win32', 'cwd', 'a\\b/c', 'cwd\\c');
 		await test_resolve_path('win32', 'cwd', '.git/.secret/show/.htaccess', 'cwd\\show');
+	});
+
+	_it('mimetype', () => {
+		assert.strictEqual(miniserver.mimetype('foo.txt', 'text/plain'));
+		assert.strictEqual(miniserver.mimetype('foo.txt', 'text/html'));
 	});
 });
