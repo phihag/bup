@@ -431,12 +431,8 @@ function get_mode(s) {
 function on_mode_change(s) {
 	var mode = get_mode(s);
 	uiu.qsEach('.settings_mode>a', function(a) {
-		var is_active = $(a).hasClass('settings_mode_' + mode);
-		if (is_active) {
-			$(a).addClass('settings_mode_active');
-		} else {
-			$(a).removeClass('settings_mode_active');
-		}
+		var is_active = uiu.hasClass(a, 'settings_mode_' + mode);
+		uiu.setClass(a, 'settings_mode_active', is_active);
 	});
 
 	uiu.qsEach('#settings_wrapper [data-bup-modes]', function(el) {

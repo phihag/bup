@@ -69,10 +69,10 @@ function ui_init() {
 }
 
 /*@DEV*/
-if (typeof $ !== 'undefined') {
+if (typeof module === 'undefined') {
 /*/@DEV*/
 	init();
-	$(ui_init);
+	document.addEventListener('DOMContentLoaded', ui_init);
 /*@DEV*/
 }
 /*/@DEV*/
