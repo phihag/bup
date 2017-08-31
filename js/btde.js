@@ -59,27 +59,41 @@ function ui_render_login(container) {
 }
 
 function _request(s, component, options, cb) {
-	options.dataType = 'text';
-	options.timeout = s.settings.network_timeout;
-	network.request(component, options).done(function(res) {
-		if (/<button>anmelden<\/button>/.exec(res)) {
+	var xhr = new XMLHttpRequest();
+	xhr.open(options.method || 'GET', options.url, true);
+	if (options.contentType) {
+		xhr.setRequestHeader('Content-Type', options.contentType);
+	}
+	xhr.timeout = s.settings.network_timeout;
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState !== 4) return;
+
+		if (xhr.status == 200) {
+			var res = xhr.responseText;
+			if (/<button>anmelden<\/button>/.exec(res)) {
+				return cb({
+					type: 'login-required',
+					msg: 'Login erforderlich',
+				}, res);
+			}
+			return cb(null, res);
+		} else {
+			var msg = ((xhr.status === 0) ?
+				'badmintonticker nicht erreichbar' :
+				('Netzwerk-Fehler (Code ' + xhr.status + ')')
+			);
 			return cb({
-				type: 'login-required',
-				msg: 'Login erforderlich',
-			}, res);
+				type: 'network-error',
+				status: xhr.status,
+				msg: msg,
+			});
 		}
-		return cb(null, res);
-	}).fail(function(xhr) {
-		var msg = ((xhr.status === 0) ?
-			'badmintonticker nicht erreichbar' :
-			('Netzwerk-Fehler (Code ' + xhr.status + ')')
-		);
-		return cb({
-			type: 'network-error',
-			status: xhr.status,
-			msg: msg,
-		});
-	});
+	};
+	if (options.data) {
+		xhr.send(options.data);
+	} else {
+		xhr.send();
+	}
 }
 
 var outstanding_requests = 0;
