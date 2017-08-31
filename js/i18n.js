@@ -56,16 +56,17 @@ function translate_nodes(root, s) {
 }
 
 function ui_init() {
-	var select = $('.settings_language');
+	var select = uiu.qs('.settings_language');
 
-	var auto = $('<option data-i18n="Automatic" value="auto">');
-	select.append(auto);
+	uiu.el(select, 'option', {
+		'data-i18n': 'Automatic',
+		value: 'auto',
+	});
 
 	utils.values(languages).forEach(function(lang) {
-		var option = $('<option>');
-		option.attr('value', lang._code);
-		option.text(lang._name);
-		select.append(option);
+		uiu.el(select, 'option', {
+			value: lang._code,
+		}, lang._name);
 	});
 	translate_nodes(uiu.qs('html'), state);
 }

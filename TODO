@@ -8,7 +8,6 @@ NLA
 	msg swiss guys
 fix btde
 
-abandon jquery
 btde-like dstyle
 manual import for 2017
 update RLM link to http://www.dbv-mitte.de/web/images/Allgemein/Gruppenordnung/Gruppe_Mitte_im_DBV_Ordnungen_20170701.pdf
@@ -42,7 +41,11 @@ replace report link with something better
 referee w/ safari: show nice error message
 safari: switch to RSA-OAEP?
 
-support 1x30 + 1x42
+abandon jquery
+	uiu.visible
+	i18n
+	network code
+	minor other stuff
 generate an HTML with all networks and what features they support?
 i18n: check for i18n values that are the same in all languages (like cancel)
 #settings only for main settings
