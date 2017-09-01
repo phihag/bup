@@ -359,6 +359,7 @@ var i18n_de = {
 'eventsheet:label|team-2BL-2015': 'Mannschaftsaufstellung (2015)',
 'eventsheet:label|NRW-2016': 'Spielbericht',
 'eventsheet:label|NRW-Satzungen-2016': 'Satzungen und Ordnungen BLV 2016',
+'eventsheet:label|NLA-2017': 'Resultatblatt',
 
 'stats:game': '{number}. Satz',
 'stats:match': 'Spiel',

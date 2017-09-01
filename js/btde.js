@@ -226,6 +226,7 @@ function _parse_match_list(doc, now) {
 		'2. Bundesliga Nord': '2BLN-2017',
 		'2. Bundesliga Süd': '2BLS-2017',
 		'Regionalliga Nord': 'RLN-2017',
+		'NLA': 'NLA-2017',
 	}[event_data.Liga.trim()];
 	if (!league_key) {
 		league_key = '1BL-2017';
@@ -295,7 +296,6 @@ function _parse_match_list(doc, now) {
 			is_doubles: is_doubles,
 			teams: teams,
 			btde_match_id: match.id,
-			team_competition: true,
 			match_id: match_id,
 		};
 		setup.incomplete = eventutils.is_incomplete(setup);
@@ -306,6 +306,7 @@ function _parse_match_list(doc, now) {
 		};
 	});
 	return {
+		team_competition: true,
 		team_names: [home_team_name, away_team_name],
 		event_name: home_team_name + ' - ' + away_team_name,
 		matches: matches,

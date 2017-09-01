@@ -15,7 +15,7 @@ var SHEETS_BY_LEAGUE = {
 	'RLW-2016': ['RLW-2016', 'NRW-Satzungen-2016'],
 	'RLN-2016': ['RLN-2016', 'RLN-Satzungen-2016'],
 	'RLM-2016': ['RLM-2016', 'RLM-SpO-2015'],
-	'NLA-2017': [],
+	'NLA-2017': ['NLA-2017'],
 };
 
 var URLS = {
@@ -32,6 +32,7 @@ var URLS = {
 	'RLN-Satzungen-2016': 'http://www.gruppe-nord.net/fileadmin/user_upload/schuch/GruppeNord/Satzung/Satzung%20und%20Ordnungen%20der%20Gruppe%20Nord%20Stand%2006-08-16.pdf',
 	'RLM-2016': 'div/Spielbericht_8x3x21.svg',
 	'RLM-SpO-2015': 'http://www.dbv-mitte.de/web/images/Allgemein/Gruppenordnung/Spielordnung/Spielordnung-aktuell.pdf',
+	'NLA-2017': 'div/NLA_Resultatblatt.svg',
 	'NRW-2016': 'div/Spielbericht_8x3x21.svg',
 	'NRW-Satzungen-2016': 'http://www.badminton-nrw.de/fileadmin/gstnrw/pdf_xls_doc/Satzungswerk/2016/SatzungOrdnungen2016.pdf',
 	'team-1BL-2015': 'div/Mannschaftsaufstellung_1BL-2015.pdf',
@@ -672,6 +673,98 @@ function render_svg(ev, es_key, ui8r, extra_data) {
 	container.remove();
 }
 
+function render_nla(ev, es_key, ui8r) {
+	var xml_str = (new TextDecoder('utf-8')).decode(ui8r);
+	var svg_doc = (new DOMParser()).parseFromString(xml_str, 'image/svg+xml');
+	var svg = svg_doc.getElementsByTagName('svg')[0];
+
+	eventutils.set_metadata(ev);
+
+	var body = uiu.qs('body');
+	var container = $('<div style="position: absolute; left: -999px; top: -2999px; width: 297px; height: 210px; overflow: hidden;">');
+	svg.setAttribute('style', 'width: 2970px; height: 2100px;');
+	container[0].appendChild(svg);
+	body.appendChild(container[0]);
+
+	var props = {
+		title: (state._('Event Sheet') + ' ' + ev.event_name),
+		subject: state._('Event Sheet'),
+		creator: 'bup (https://phihag.de/bup/)',
+	};
+	if (state.settings && state.settings.umpire_name) {
+		props.author = state.settings.umpire_name;
+	}
+
+	var sum_points = [0, 0];
+	var sum_games = [0, 0];
+	var sum_matches = [0, 0];
+
+	ev.matches.forEach(function(match) {
+		var netscore = match.netscore;
+		var eid = calc_match_id(match);
+
+		match.setup.teams.forEach(function(team, team_id) {
+			team.players.forEach(function(player, player_id) {
+				var key = 'match' + eid + '_player' + team_id + '.' + player_id;
+				_svg_text(svg, key, player.name);
+			});
+		});
+
+		var netscore_strs = netscore ? (netscore.map(function(nscore) {
+			return nscore[0] + ' - ' + nscore[1];
+		})) : [];
+		while (netscore_strs.length < 3) {
+			netscore_strs.push('');
+		}
+		netscore_strs.forEach(function(ns, i) {
+			_svg_text(svg, 'match' + eid + '_game' + i, ns);
+		});
+
+		if (netscore && (netscore.length > 0) && ((netscore[0][0] > 0) || (netscore[0][1] > 0))) {
+			var points = [0, 0];
+			netscore.forEach(function(game_score) {
+				points[0] += game_score[0];
+				points[1] += game_score[1];
+			});
+			sum_points[0] += points[0];
+			sum_points[1] += points[1];
+			_svg_text(svg, 'match' + eid + '_points0', points[0]);
+			_svg_text(svg, 'match' + eid + '_points1', points[1]);
+
+			var games = calc_gamescore(match.setup.counting, netscore);
+			sum_games[0] += games[0];
+			sum_games[1] += games[1];
+			_svg_text(svg, 'match' + eid + '_games0', games[0]);
+			_svg_text(svg, 'match' + eid + '_games1', games[1]);
+
+			var matches_score = calc_matchscore(match.setup.counting, netscore);
+			if (matches_score[0] !== undefined) {
+				sum_matches[0] += matches_score[0];
+				sum_matches[1] += matches_score[1];
+			}
+			_svg_text(svg, 'match' + eid + '_matches0', matches_score[0]);
+			_svg_text(svg, 'match' + eid + '_matches1', matches_score[1]);
+		} else {
+			_svg_text(svg, 'match' + eid + '_points0', '');
+			_svg_text(svg, 'match' + eid + '_points1', '');
+			_svg_text(svg, 'match' + eid + '_games0', '');
+			_svg_text(svg, 'match' + eid + '_games1', '');
+			_svg_text(svg, 'match' + eid + '_matches0', '');
+			_svg_text(svg, 'match' + eid + '_matches1', '');
+		}
+	});
+
+	_svg_text(svg, 'sum_games0', sum_games[0]);
+	_svg_text(svg, 'sum_games1', sum_games[1]);
+	_svg_text(svg, 'sum_matches0', sum_matches[0]);
+	_svg_text(svg, 'sum_matches1', sum_matches[1]);
+
+	var filename = state._('Event Sheet') + ' ' + ev.event_name + + '.pdf';
+	svg2pdf.save([svg], props, 'landscape', filename);
+
+	container.remove();
+}
+
 function calc_player_matches(ev, team_id) {
 	var res = [];
 	ev.matches.forEach(function(match) {
@@ -1290,6 +1383,8 @@ function es_render(ev, es_key, ui8r, extra_data) {
 	case '2BLN-2017':
 	case '2BLS-2017':
 		return render_bundesliga2016(ev, es_key, ui8r, extra_data);
+	case 'NLA-2017':
+		return render_nla(ev, es_key, ui8r);
 	default:
 	throw new Error('Unsupported eventsheet key ' + es_key);
 	}
@@ -1553,6 +1648,12 @@ function show_dialog(es_key) {
 		preview_team_bl(state, es_key);
 		download_link.setAttribute('href', URLS[es_key]);
 		uiu.visible(download_link_container, true);
+		break;
+	case 'NLA-2017':
+		uiu.visible_qs('.eventsheet_report', false);
+		uiu.visible_qs('label.eventsheet_backup_players_str', false);
+		uiu.visible(preview, false);
+		uiu.visible(download_link_container, false);
 		break;
 	}
 	if (DIRECT_DOWNLOAD_SHEETS[es_key]) {
