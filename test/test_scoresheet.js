@@ -2451,7 +2451,7 @@ _describe('scoresheet generation', function() {
 	});
 
 	_it('characters (french)', function() {
-		var s = tutils.state_after([], SINGLES_SETUP, {language: 'frch'});
+		var s = tutils.state_after([], SINGLES_SETUP, {language: 'fr-CH'});
 		assert.strictEqual(s._('scoresheet:server'), 'S');
 		assert.strictEqual(s._('scoresheet:receiver'), 'R');
 		assert.strictEqual(s._('mark:overrule'), 'O');

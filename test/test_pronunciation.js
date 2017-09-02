@@ -29,11 +29,11 @@ function pronounce_en(s, now) {
 }
 
 function pronounce_frch(s, now) {
-	return pronounce('frch', s, now);
+	return pronounce('fr-CH', s, now);
 }
 
 function pronounce_dech(s, now) {
-	return pronounce('dech', s, now);
+	return pronounce('de-CH', s, now);
 }
 
 function loveall_de(s) {
