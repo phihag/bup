@@ -15,7 +15,7 @@ async function convert(svg) {
 
 	const int_ar = await page.evaluate((svg) => {
 		// This runs in the browser
-		return convert_client(svg);
+		return convert_client(svg); // eslint-disable-line no-undef
 	}, svg);
 	browser.close();
 	const u8r = new Uint8Array(int_ar);
