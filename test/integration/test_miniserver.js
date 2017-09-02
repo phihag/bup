@@ -41,6 +41,7 @@ _describe('miniserver', () => {
 		await test_resolve_path('posix', '/a/b/c', 'y/../z', '/a/b/c/z');
 		await test_resolve_path('posix', 'cwd', 'foo/bar/..////./baz/a.b.d', 'cwd/foo/baz/a.b.d');
 		await test_resolve_path('posix', 'cwd', '.git/secret', 'cwd/secret');
+		await test_resolve_path('posix', 'cwd', 'node_modules/secret', 'cwd/secret');
 	});
 
 	_it('path calculation on Windows', async () => {
@@ -50,6 +51,7 @@ _describe('miniserver', () => {
 		await test_resolve_path('win32', 'cwd', 'foo/bar/../baz/a.b.d', 'cwd\\foo\\baz\\a.b.d');
 		await test_resolve_path('win32', 'cwd', 'a\\b/c', 'cwd\\c');
 		await test_resolve_path('win32', 'cwd', '.git/.secret/show/.htaccess', 'cwd\\show');
+		await test_resolve_path('win32', 'cwd', 'node_modules/secret', 'cwd\\node_modules');
 	});
 
 	_it('mimetype', () => {

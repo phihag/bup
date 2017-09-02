@@ -47,6 +47,8 @@ function resolve_path(root_dir, url_path, cb, path_module, fs_module) {
 			continue;
 		} else if (c === '.') {
 			continue;
+		} else if (c === 'node_modules') { // Not terribly secret, but not relevant for clients
+			continue;
 		} else if (!c) { // foo///bar
 			continue;
 		}
