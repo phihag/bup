@@ -25,6 +25,11 @@ displaymode: make cursor vanish after a while
 	make sure no cursor either in dads
 order: print with background graphics
 mo: make del button nicer
+buli scoresheet: use vector logo
+Aufstellung:
+	highlight changes
+	warn if changes and leaving
+	mail Ulf (update doc)
 
 dayimport in normal import view (unify with #mo import)
 automatic testing to see that setupsheet works (with browser)

@@ -95,8 +95,8 @@ function parse_path(d) {
 		} else if (c === 'c') {
 			for (i = 0;i < args.length;i += 6) {
 				acc.push(args.slice(i, i + 6));
-				x += args[i + 5];
-				y += args[i + 6];
+				x += args[i + 4];
+				y += args[i + 5];
 			}
 		}
 	}
@@ -205,8 +205,9 @@ function render_page(svg, pdf) {
 		case 'path':
 			var paths = parse_path(n.getAttribute('d'));
 			if (paths) {
-				paths.forEach(function(path) {
-					pdf.lines(path.acc, path.x1, path.y1, [1, 1], mode, path.closed);
+				paths.forEach(function(path, path_idx) {
+					var path_style = (path_idx === paths.length - 1) ? mode : null;
+					pdf.lines(path.acc, path.x1, path.y1, [1, 1], path_style, path.closed);
 				});
 			}
 			break;

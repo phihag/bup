@@ -93,6 +93,5 @@ _describe('svg2pdf', function() {
 				closed: false,
 			}]
 		);
-
 	});
 });
