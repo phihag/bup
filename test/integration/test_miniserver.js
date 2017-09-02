@@ -51,7 +51,7 @@ _describe('miniserver', () => {
 		await test_resolve_path('win32', 'cwd', 'foo/bar/../baz/a.b.d', 'cwd\\foo\\baz\\a.b.d');
 		await test_resolve_path('win32', 'cwd', 'a\\b/c', 'cwd\\c');
 		await test_resolve_path('win32', 'cwd', '.git/.secret/show/.htaccess', 'cwd\\show');
-		await test_resolve_path('win32', 'cwd', 'node_modules/secret', 'cwd\\node_modules');
+		await test_resolve_path('win32', 'cwd', 'node_modules/secret', 'cwd\\secret');
 	});
 
 	_it('mimetype', () => {
