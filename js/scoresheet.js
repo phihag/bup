@@ -573,7 +573,12 @@ function sheet_render(s, svg) {
 		if (str !== 0 && !str) {
 			str = '';
 		}
-		uiu.text(svg.querySelector(search), str);
+		var node = svg.querySelector(search);
+		if (! node) {
+			report_problem.silent_error('Cannot find scoresheet node ' + search + ' for ' + (s.setup ? s.setup.tournament_name : ' (no setup)'));
+			return;
+		}
+		uiu.text(node, str);
 	}
 
 	// Set text fields
