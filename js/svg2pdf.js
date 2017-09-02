@@ -52,7 +52,7 @@ function parse_path(d) {
 				y = a2;
 			}
 		} else {
-			console.error('Unsupported path data: ' + d);
+			// console.error('Unsupported path data: ' + d);
 			return;
 		}
 

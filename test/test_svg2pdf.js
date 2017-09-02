@@ -18,6 +18,7 @@ _describe('svg2pdf', function() {
 				x1: 12,
 				y1: 13,
 				acc: [[5, 2]],
+				closed: false,
 			}
 		);
 
@@ -29,6 +30,7 @@ _describe('svg2pdf', function() {
 				x1: -1.2,
 				y1: 1.5,
 				acc: [[4, -1], [9.2, 13.5]],
+				closed: false,
 			}
 		);
 
@@ -39,7 +41,8 @@ _describe('svg2pdf', function() {
 			{
 				x1: 10,
 				y1: 20,
-				acc: [[-1, -1], [1, 1]],
+				acc: [[-1, -1]],
+				closed: true,
 			}
 		);
 
@@ -55,8 +58,8 @@ _describe('svg2pdf', function() {
 					[0, 2],
 					[-105, 0],
 					[0, 797],
-					[95, -799],
 				],
+				closed: true,
 			}
 		);
 	});
