@@ -681,7 +681,7 @@ function render_nla(ev, es_key, ui8r) {
 	eventutils.set_metadata(ev);
 
 	var body = uiu.qs('body');
-	var container = $('<div style="position: absolute; left: -999px; top: -2999px; width: 297px; height: 210px; overflow: hidden;">');
+	var container = $('<div style="position: absolute; left: -9999px; top: -9999px; width: 2970px; height: 2100px; overflow: hidden;">');
 	svg.setAttribute('style', 'width: 2970px; height: 2100px;');
 	container[0].appendChild(svg);
 	body.appendChild(container[0]);
@@ -695,62 +695,47 @@ function render_nla(ev, es_key, ui8r) {
 		props.author = state.settings.umpire_name;
 	}
 
-	var sum_points = [0, 0];
 	var sum_games = [0, 0];
 	var sum_matches = [0, 0];
 
 	ev.matches.forEach(function(match) {
-		var netscore = match.netscore;
+		var netscore = match.network_score;
 		var eid = calc_match_id(match);
 
 		match.setup.teams.forEach(function(team, team_id) {
 			team.players.forEach(function(player, player_id) {
-				var key = 'match' + eid + '_player' + team_id + '.' + player_id;
+				var key = eid + '_player' + team_id + '.' + player_id;
 				_svg_text(svg, key, player.name);
 			});
 		});
 
-		var netscore_strs = netscore ? (netscore.map(function(nscore) {
-			return nscore[0] + ' - ' + nscore[1];
-		})) : [];
-		while (netscore_strs.length < 3) {
-			netscore_strs.push('');
+		if (netscore) {
+			netscore.forEach(function(ns, game_id) {
+				ns.forEach(function(score, team_id) {
+					_svg_text(svg, eid + '_score' + game_id + '_' + team_id, score);
+				});
+			});
 		}
-		netscore_strs.forEach(function(ns, i) {
-			_svg_text(svg, 'match' + eid + '_game' + i, ns);
-		});
 
 		if (netscore && (netscore.length > 0) && ((netscore[0][0] > 0) || (netscore[0][1] > 0))) {
-			var points = [0, 0];
-			netscore.forEach(function(game_score) {
-				points[0] += game_score[0];
-				points[1] += game_score[1];
-			});
-			sum_points[0] += points[0];
-			sum_points[1] += points[1];
-			_svg_text(svg, 'match' + eid + '_points0', points[0]);
-			_svg_text(svg, 'match' + eid + '_points1', points[1]);
-
 			var games = calc_gamescore(match.setup.counting, netscore);
 			sum_games[0] += games[0];
 			sum_games[1] += games[1];
-			_svg_text(svg, 'match' + eid + '_games0', games[0]);
-			_svg_text(svg, 'match' + eid + '_games1', games[1]);
+			_svg_text(svg, eid + '_games0', games[0]);
+			_svg_text(svg, eid + '_games1', games[1]);
 
 			var matches_score = calc_matchscore(match.setup.counting, netscore);
 			if (matches_score[0] !== undefined) {
 				sum_matches[0] += matches_score[0];
 				sum_matches[1] += matches_score[1];
 			}
-			_svg_text(svg, 'match' + eid + '_matches0', matches_score[0]);
-			_svg_text(svg, 'match' + eid + '_matches1', matches_score[1]);
+			_svg_text(svg, eid + '_matches0', matches_score[0]);
+			_svg_text(svg, eid + '_matches1', matches_score[1]);
 		} else {
-			_svg_text(svg, 'match' + eid + '_points0', '');
-			_svg_text(svg, 'match' + eid + '_points1', '');
-			_svg_text(svg, 'match' + eid + '_games0', '');
-			_svg_text(svg, 'match' + eid + '_games1', '');
-			_svg_text(svg, 'match' + eid + '_matches0', '');
-			_svg_text(svg, 'match' + eid + '_matches1', '');
+			_svg_text(svg, eid + '_games0', '');
+			_svg_text(svg, eid + '_games1', '');
+			_svg_text(svg, eid + '_matches0', '');
+			_svg_text(svg, eid + '_matches1', '');
 		}
 	});
 
@@ -758,8 +743,11 @@ function render_nla(ev, es_key, ui8r) {
 	_svg_text(svg, 'sum_games1', sum_games[1]);
 	_svg_text(svg, 'sum_matches0', sum_matches[0]);
 	_svg_text(svg, 'sum_matches1', sum_matches[1]);
+	(ev.team_names || []).forEach(function(team_name, team_id) {
+		_svg_text(svg, 'teamname' + team_id, team_name);
+	});
 
-	var filename = state._('Event Sheet') + ' ' + ev.event_name + + '.pdf';
+	var filename = state._('Event Sheet') + ' ' + ev.event_name + '.pdf';
 	svg2pdf.save([svg], props, 'landscape', filename);
 
 	container.remove();
