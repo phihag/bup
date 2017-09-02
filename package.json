@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "async": "*",
+    "clean-css": "*",
     "eslint": "*",
     "fs-walk": "*",
     "istanbul": "*",
@@ -24,7 +25,8 @@
     "parse-appcache-manifest": "*",
     "puppeteer": "*",
     "stylelint": "*",
-    "stylelint-config-standard": "*"
+    "stylelint-config-standard": "*",
+    "uglify": "*"
   },
   "private": true
 }

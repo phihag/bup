@@ -62,7 +62,9 @@ function uglify(js_files, jsdist_fn, cb) {
 	args.push('--');
 	args.push.apply(args, js_files);
 
-	var uglify_proc = child_process.spawn('uglifyjs', args, {
+	const uglify_path = path.normalize(path.join(__dirname, '..', 'node_modules', '.bin', 'uglifyjs'));
+
+	var uglify_proc = child_process.spawn(uglify_path, args, {
 		stdio: 'inherit',
 	});
 	uglify_proc.on('close', function (code) {
@@ -130,7 +132,9 @@ function cleancss(css_infile, cssdist_fn, cb) {
 		css_infile,
 	];
 
-	var proc = child_process.spawn('cleancss', args, {
+	const cleancss_path = path.normalize(path.join(__dirname, '..', 'node_modules', '.bin', 'cleancss'));
+
+	var proc = child_process.spawn(cleancss_path, args, {
 		stdio: 'inherit',
 	});
 	proc.on('close', function (code) {
