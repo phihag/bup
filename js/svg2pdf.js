@@ -3,10 +3,11 @@ var svg2pdf = (function() {
 
 function parse_path(d) {
 	if (!d) return null;
-	var x1 = 0;
-	var y1 = 0;
+	var x1;
+	var y1;
 	var x = 0;
 	var y = 0;
+	var i; // no let :(
 	var closed = false;
 
 	var acc = [];
@@ -25,31 +26,47 @@ function parse_path(d) {
 		if ((c === 'z') || (c === 'Z')) {
 			closed = true;
 		} else if (c === 'v') {
-			acc.push([0, a1]);
-			y += a1;
+			args.forEach(function(a) {
+				acc.push([0, a]);
+				y += a;
+			});
 		} else if (c === 'V') {
-			acc.push([0, a1 - y]);
-			y = a1;
+			args.forEach(function(a) {
+				acc.push([0, a - y]);
+				y = a;
+			});
 		} else if (c === 'h') {
-			acc.push([a1, 0]);
-			x += a1;
+			args.forEach(function(a) {
+				acc.push([a, 0]);
+				x += a;
+			});
 		} else if (c === 'H') {
-			acc.push([a1 - x, 0]);
-			x = a1;
+			args.forEach(function(a) {
+				acc.push([a - x, 0]);
+				x = a;
+			});
 		} else if (c === 'l') {
-			acc.push([a1, a2]);
-			x += a1;
-			y += a2;
+			for (i = 0; i < args.length;i += 2) {
+				acc.push([args[i], args[i + 1]]);
+				x += args[i];
+				y += args[i + 1];
+			}
 		} else if (c === 'L') {
-			acc.push([a1 - x, a2 - y]);
-			x = a1;
-			y = a2;
+			for (i = 0; i < args.length;i += 2) {
+				acc.push([args[i] - x, args[i + 1] - y]);
+				x = args[i];
+				y = args[i + 1];
+			}
 		} else if (c === 'm') {
 			x += a1;
-			x1 += a1;
+			if (x1 === undefined) {
+				x1 = a1;
+			}
 			y += a2;
-			y1 += a2;
-			for (var i = 2; i < args.length;i += 2) {
+			if (y1 === undefined) {
+				y1 = a2;
+			}
+			for (i = 2; i < args.length;i += 2) {
 				acc.push([args[i], args[i + 1]]);
 				x += args[i];
 				y += args[i + 1];
@@ -180,7 +197,7 @@ function render_page(svg, pdf) {
 		case 'path':
 			var path = parse_path(n.getAttribute('d'));
 			if (path) {
-				pdf.lines(path.acc, path.x1, path.y1, [1, 1], mode, path.closed);
+				pdf.lines(path.acc, path.x1, path.y1, [1, 1], 'f*', path.closed);
 			}
 			break;
 		case 'text':
