@@ -24,7 +24,7 @@ function parse_path(d) {
 	}
 
 	while (d && !/^\s*$/.test(d)) {
-		var m = /^\s*([ZzvVhHmMlLc])(?:\s+(-?[0-9.]+(?:(?:\s*,\s*|\s+)-?[0-9.]+)*))?/.exec(d);
+		var m = /^\s*([ZzvVhHmMlLc])(?:\s*(-?[0-9.]+(?:(?:\s*,\s*|\s+)-?[0-9.]+)*))?/.exec(d);
 		if (!m) {
 			// console.error('Unsupported path data: ' + JSON.stringify(d));
 			return;

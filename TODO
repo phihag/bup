@@ -1,6 +1,6 @@
-lint in test/svg2pdf/
 support arcs
 buli scoresheet: use vector logo (git stash pop)
+lint in test/svg2pdf/
 
 NLA
 	go through ch vocabulary

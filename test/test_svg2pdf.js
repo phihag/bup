@@ -93,5 +93,22 @@ _describe('svg2pdf', function() {
 				closed: false,
 			}]
 		);
+
+		// No spaces
+		assert.deepStrictEqual(
+			bup.svg2pdf.parse_path(
+				'M1 2 L3 24 5 36'
+			),
+			[{
+				x1: 1,
+				y1: 2,
+				acc: [
+					[2, 22],
+					[2, 12],
+				],
+				closed: false,
+			}]
+		);
+
 	});
 });
