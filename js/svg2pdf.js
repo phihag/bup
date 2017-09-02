@@ -3,14 +3,26 @@ var svg2pdf = (function() {
 
 function parse_path(d) {
 	if (!d) return null;
-	var x1;
-	var y1;
+
+	var res = [];
+
 	var x = 0;
 	var y = 0;
 	var i; // no let :(
-	var closed = false;
+	var acc;
+	var cur;
 
-	var acc = [];
+	function _new_subpath() {
+		acc = [];
+		cur = {
+			x1: x,
+			y1: y,
+			acc: acc,
+			closed: false,
+		};
+		res.push(cur);
+	}
+
 	while (d && !/^\s*$/.test(d)) {
 		var m = /^\s*([ZzvVhHmMlLc])(?:\s+(-?[0-9.]+(?:(?:\s*,\s*|\s+)-?[0-9.]+)*))?/.exec(d);
 		if (!m) {
@@ -24,7 +36,10 @@ function parse_path(d) {
 		var a2 = args[1];
 
 		if ((c === 'z') || (c === 'Z')) {
-			closed = true;
+			// acc.push([cur.x1 - x, cur.y1 - y]);
+			x = cur.x1;
+			y = cur.y1;
+			cur.closed = true;
 		} else if (c === 'v') {
 			args.forEach(function(a) {
 				acc.push([0, a]);
@@ -59,13 +74,9 @@ function parse_path(d) {
 			}
 		} else if (c === 'm') {
 			x += a1;
-			if (x1 === undefined) {
-				x1 = a1;
-			}
 			y += a2;
-			if (y1 === undefined) {
-				y1 = a2;
-			}
+			_new_subpath();
+
 			for (i = 2; i < args.length;i += 2) {
 				acc.push([args[i], args[i + 1]]);
 				x += args[i];
@@ -73,9 +84,9 @@ function parse_path(d) {
 			}
 		} else if (c === 'M') {
 			x = a1;
-			x1 = a1;
 			y = a2;
-			y1 = a2;
+			_new_subpath();
+
 			for (i = 2; i < args.length;i += 2) {
 				acc.push([args[i] - x, args[i + 1] - y]);
 				x = args[i];
@@ -84,15 +95,12 @@ function parse_path(d) {
 		} else if (c === 'c') {
 			for (i = 0;i < args.length;i += 6) {
 				acc.push(args.slice(i, i + 6));
+				x += args[i + 5];
+				y += args[i + 6];
 			}
 		}
 	}
-	return {
-		x1: x1,
-		y1: y1,
-		closed: closed,
-		acc: acc,
-	};
+	return res;
 }
 
 function render_page(svg, pdf) {
@@ -195,9 +203,11 @@ function render_page(svg, pdf) {
 			pdf.ellipse(cx, cy, rx, ry, mode);
 			break;
 		case 'path':
-			var path = parse_path(n.getAttribute('d'));
-			if (path) {
-				pdf.lines(path.acc, path.x1, path.y1, [1, 1], 'f*', path.closed);
+			var paths = parse_path(n.getAttribute('d'));
+			if (paths) {
+				paths.forEach(function(path) {
+					pdf.lines(path.acc, path.x1, path.y1, [1, 1], mode, path.closed);
+				});
 			}
 			break;
 		case 'text':
