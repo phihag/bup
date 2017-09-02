@@ -2476,11 +2476,11 @@ _describe('scoresheet generation', function() {
 
 		assert.strictEqual(bup.scoresheet.sheet_name({
 			counting: '5x11_15',
-			league_key: '1BL-2016'
+			league_key: '1BL-2016',
 		}), 'bundesliga-2016');
 		assert.strictEqual(bup.scoresheet.sheet_name({
 			counting: '5x11_15^90',
-			league_key: '1BL-2017'
+			league_key: '1BL-2017',
 		}), 'bundesliga-2016');
 	});
 });
