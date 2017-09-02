@@ -1,18 +1,9 @@
 NLA
-	configuration
-	eventsheet
 	test demo
 	go through ch vocabulary
-	resultatblatt swiss badminton logo
-	rblatt team names
-	test with 7 matches
-	pdf: support line ends
-	center 1. match
 	svg2pdf yonex logo (extended paths)
 	msg swiss guys
 
-instead of if (m = ..) // ignore try double-parens
-demo does not update scores
 test nrwdemo: setupsheet etc.
 NLA scoresheet
 miniserver: check chunking - do we need to call end

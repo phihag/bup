@@ -3,60 +3,72 @@ var svg2pdf = (function() {
 
 function parse_path(d) {
 	if (!d) return null;
-	var x1;
-	var y1;
-	var x;
-	var y;
-	var c; // no let :(
+	var x1 = 0;
+	var y1 = 0;
+	var x = 0;
+	var y = 0;
 	var closed = false;
 
 	var acc = [];
 	while (d && !/^\s*$/.test(d)) {
-		var m = /^\s*[Zz]/.exec(d);
-		if (m) {
-			closed = true;
-		} else if ((m = /^\s*([vVhH])\s*(-?[0-9.]+)/.exec(d))) {
-			c = m[1];
-			var a = parseFloat(m[2]);
-
-			if (c === 'v') {
-				acc.push([0, a]);
-				y += a;
-			} else if (c === 'V') {
-				acc.push([0, a - y]);
-				y = a;
-			} else if (c === 'h') {
-				acc.push([a, 0]);
-				x += a;
-			} else if (c === 'H') {
-				acc.push([a - x, 0]);
-				x = a;
-			}
-		} else if ((m = /^\s*([MlL])\s*(-?[0-9.]+)(?:\s+|\s*,\s*)(-?[0-9.]+)/.exec(d))) {
-			c = m[1];
-			var a1 = parseFloat(m[2]);
-			var a2 = parseFloat(m[3]);
-
-			if (c === 'M') {
-				x = a1;
-				x1 = a1;
-				y = a2;
-				y1 = a2;
-			} else if (c === 'l') {
-				acc.push([a1, a2]);
-				x += a1;
-				y += a2;
-			} else if (c === 'L') {
-				acc.push([a1 - x, a2 - y]);
-				x = a1;
-				y = a2;
-			}
-		} else {
-			// console.error('Unsupported path data: ' + d);
+		var m = /^\s*([ZzvVhHmMlLc])(?:\s+(-?[0-9.]+(?:(?:\s*,\s*|\s+)-?[0-9.]+)*))?/.exec(d);
+		if (!m) {
+			// console.error('Unsupported path data: ' + JSON.stringify(d));
 			return;
 		}
-
+		var c = m[1];
+		var args = m[2] ? m[2].split(/\s*,\s*|\s+/).map(parseFloat) : [];
 		d = d.substring(m[0].length);
+		var a1 = args[0];
+		var a2 = args[1];
+
+		if ((c === 'z') || (c === 'Z')) {
+			closed = true;
+		} else if (c === 'v') {
+			acc.push([0, a1]);
+			y += a1;
+		} else if (c === 'V') {
+			acc.push([0, a1 - y]);
+			y = a1;
+		} else if (c === 'h') {
+			acc.push([a1, 0]);
+			x += a1;
+		} else if (c === 'H') {
+			acc.push([a1 - x, 0]);
+			x = a1;
+		} else if (c === 'l') {
+			acc.push([a1, a2]);
+			x += a1;
+			y += a2;
+		} else if (c === 'L') {
+			acc.push([a1 - x, a2 - y]);
+			x = a1;
+			y = a2;
+		} else if (c === 'm') {
+			x += a1;
+			x1 += a1;
+			y += a2;
+			y1 += a2;
+			for (var i = 2; i < args.length;i += 2) {
+				acc.push([args[i], args[i + 1]]);
+				x += args[i];
+				y += args[i + 1];
+			}
+		} else if (c === 'M') {
+			x = a1;
+			x1 = a1;
+			y = a2;
+			y1 = a2;
+			for (i = 2; i < args.length;i += 2) {
+				acc.push([args[i] - x, args[i + 1] - y]);
+				x = args[i];
+				y = args[i + 1];
+			}
+		} else if (c === 'c') {
+			for (i = 0;i < args.length;i += 6) {
+				acc.push(args.slice(i, i + 6));
+			}
+		}
 	}
 	return {
 		x1: x1,
@@ -120,10 +132,10 @@ function render_page(svg, pdf) {
 			var dash_len = undefined;
 			var gap_len = undefined;
 			var style_dasharray = style['stroke-dasharray'];
-			if (m = style_dasharray.match(/^([0-9.]+)\s*px,\s*([0-9.]+)\s*px$/)) { // eslint-disable-line no-cond-assign
+			if ((m = style_dasharray.match(/^([0-9.]+)\s*px,\s*([0-9.]+)\s*px$/))) {
 				dash_len = parseFloat(m[1]);
 				gap_len = parseFloat(m[2]);
-			} else if (m = style_dasharray.match(/^([0-9.]+)\s*px$/)) { // eslint-disable-line no-cond-assign
+			} else if ((m = style_dasharray.match(/^([0-9.]+)\s*px$/))) {
 				dash_len = parseFloat(m[1]);
 				gap_len = dash_len;
 			}
