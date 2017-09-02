@@ -1,14 +1,18 @@
+lint in test/svg2pdf/
+support arcs
+buli scoresheet: use vector logo (git stash pop)
 
 NLA
 	go through ch vocabulary
-	msg swiss guys
+
+refmode: visible warning if no crypto.subtle
 
 test nrwdemo: setupsheet etc.
 NLA scoresheet
 miniserver: check chunking - do we need to call end
 direct link for zero-config eventsheets (show progress there)
 btde-like dstyle
-manual import for 2017
+manual import for 2017 Bundesliga matches
 update RLM link to http://www.dbv-mitte.de/web/images/Allgemein/Gruppenordnung/Gruppe_Mitte_im_DBV_Ordnungen_20170701.pdf
 UI test to test setupsheet
 bup all_players error report setupsheet
@@ -24,11 +28,12 @@ displaymode: make cursor vanish after a while
 	make sure no cursor either in dads
 order: print with background graphics
 mo: make del button nicer
-buli scoresheet: use vector logo
 Aufstellung:
 	highlight changes
 	warn if changes and leaving
 	mail Ulf (update doc)
+store order change in demo
+store order change in courtspot
 
 dayimport in normal import view (unify with #mo import)
 automatic testing to see that setupsheet works (with browser)
