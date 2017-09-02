@@ -24,9 +24,9 @@ function parse_path(d) {
 	}
 
 	while (d && !/^\s*$/.test(d)) {
-		var m = /^\s*([ZzvVhHmMlLc])(?:\s*(-?[0-9.]+(?:(?:\s*,\s*|\s+)-?[0-9.]+)*))?/.exec(d);
+		var m = /^\s*([ZzvVhHmMlLcA])(?:\s*(-?[0-9.]+(?:(?:\s*,\s*|\s+)-?[0-9.]+)*))?/.exec(d);
 		if (!m) {
-			// console.error('Unsupported path data: ' + JSON.stringify(d));
+			console.error('Unsupported path data: ' + JSON.stringify(d));
 			return;
 		}
 		var c = m[1];
@@ -93,6 +93,13 @@ function parse_path(d) {
 				y = args[i + 1];
 			}
 		} else if (c === 'c') {
+			for (i = 0;i < args.length;i += 6) {
+				acc.push(args.slice(i, i + 6));
+				x += args[i + 4];
+				y += args[i + 5];
+			}
+		} else if (c === 'A') {
+			// TODO: arc
 			for (i = 0;i < args.length;i += 6) {
 				acc.push(args.slice(i, i + 6));
 				x += args[i + 4];

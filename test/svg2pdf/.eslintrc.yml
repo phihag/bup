@@ -1,0 +1,31 @@
+{
+    "rules": {
+        "indent": 0,
+        "quotes": [
+            2,
+            "single"
+        ],
+        "linebreak-style": [
+            2,
+            "unix"
+        ],
+        "semi": [
+            2,
+            "always"
+        ],
+        "comma-dangle": [
+            2,
+            "always-multiline"
+        ],
+        "no-console": 0
+    },
+    "env": {
+        "node": true,
+        "es6": true
+    },
+    "parserOptions": {
+        "ecmaVersion": "2017",
+    },
+    "globals": {},
+    "extends": "eslint:recommended"
+}
