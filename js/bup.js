@@ -116,6 +116,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var shortcuts = require('./shortcuts');
 	var startmatch = require('./startmatch');
 	var stats = require('./stats');
+	var svg2pdf = require('./svg2pdf');
 	var timer = require('./timer');
 	var uiu = require('./uiu');
 	var urlimport = require('./urlimport');
@@ -141,6 +142,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 		scoresheet: scoresheet,
 		setupsheet: setupsheet,
 		stats: stats,
+		svg2pdf: svg2pdf,
 		timer: timer,
 		uiu: uiu,
 		utils: utils,

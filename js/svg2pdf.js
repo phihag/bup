@@ -1,5 +1,68 @@
-var svg2pdf = (function() {
 'use strict';
+var svg2pdf = (function() {
+
+function parse_path(d) {
+	if (!d) return null;
+	var x1;
+	var y1;
+	var x;
+	var y;
+	var c; // no let :(
+
+	var acc = [];
+	while (d && !/^\s*$/.test(d)) {
+		var m = /^\s*[Zz]/.exec(d);
+		if (m) {
+			acc.push([x1 - x, y1 - y]);
+		} else if ((m = /^\s*([vVhH])\s*(-?[0-9.]+)/.exec(d))) {
+			c = m[1];
+			var a = parseFloat(m[2]);
+
+			if (c === 'v') {
+				acc.push([0, a]);
+				y += a;
+			} else if (c === 'V') {
+				acc.push([0, a - y]);
+				y = a;
+			} else if (c === 'h') {
+				acc.push([a, 0]);
+				x += a;
+			} else if (c === 'H') {
+				acc.push([a - x, 0]);
+				x = a;
+			}
+		} else if ((m = /^\s*([MlL])\s*(-?[0-9.]+)(?:\s+|\s*,\s*)(-?[0-9.]+)/.exec(d))) {
+			c = m[1];
+			var a1 = parseFloat(m[2]);
+			var a2 = parseFloat(m[3]);
+
+			if (c === 'M') {
+				x = a1;
+				x1 = a1;
+				y = a2;
+				y1 = a2;
+			} else if (c === 'l') {
+				acc.push([a1, a2]);
+				x += a1;
+				y += a2;
+			} else if (c === 'L') {
+				acc.push([a1 - x, a2 - y]);
+				x = a1;
+				y = a2;
+			}
+		} else {
+			console.error('Unsupported path data: ' + d);
+			return;
+		}
+
+		d = d.substring(m[0].length);
+	}
+	return {
+		x1: x1,
+		y1: y1,
+		acc: acc,
+	};
+}
 
 function render_page(svg, pdf) {
 	var nodes = svg.querySelectorAll('*');
@@ -52,10 +115,18 @@ function render_page(svg, pdf) {
 			var y1 = parseFloat(n.getAttribute('y1'));
 			var y2 = parseFloat(n.getAttribute('y2'));
 
-			m = style['stroke-dasharray'].match(/^([0-9.]+)\s*px,\s*([0-9.]+)\s*px$/);
-			if (m) {
-				var dash_len = parseFloat(m[1]);
-				var gap_len = parseFloat(m[2]);
+			var dash_len = undefined;
+			var gap_len = undefined;
+			var style_dasharray = style['stroke-dasharray'];
+			if (m = style_dasharray.match(/^([0-9.]+)\s*px,\s*([0-9.]+)\s*px$/)) { // eslint-disable-line no-cond-assign
+				dash_len = parseFloat(m[1]);
+				gap_len = parseFloat(m[2]);
+			} else if (m = style_dasharray.match(/^([0-9.]+)\s*px$/)) { // eslint-disable-line no-cond-assign
+				dash_len = parseFloat(m[1]);
+				gap_len = dash_len;
+			}
+
+			if (dash_len !== undefined) {
 				x = x1;
 				y = y1;
 
@@ -93,17 +164,10 @@ function render_page(svg, pdf) {
 			pdf.ellipse(cx, cy, rx, ry, mode);
 			break;
 		case 'path':
-			m = /^M\s*([0-9.]+)\s+([0-9.]+)\s+L\s*((?:[0-9.]+\s+[0-9.]+(?:$|\s+))+)$/.exec(n.getAttribute('d'));
-			if (m) {
-				x = parseFloat(m[1]);
-				y = parseFloat(m[2]);
-
-				var lines = m[3].split(/\s+/).map(parseFloat);
-				for (var j = 0;j < lines.length;j+=2) {
-					pdf.line(x, y, lines[j], lines[j+1]);
-					x = lines[j];
-					y = lines[j+1];
-				}
+			var path = parse_path(n.getAttribute('d'));
+			if (path) {
+				console.log('plotting path', path);
+				pdf.lines(path.acc, path.x1, path.y1, 1, 'F');
 			}
 			break;
 		case 'text':
@@ -187,6 +251,8 @@ function save(svg_nodes, props, orientation, filename) {
 return {
 	make: make,
 	save: save,
+	// Testing only
+	parse_path: parse_path,
 };
 
 })();
