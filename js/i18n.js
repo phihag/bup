@@ -75,6 +75,14 @@ function update_state(s, code) {
 	if (! code) {
 		if (s.settings) {
 			code = s.settings.language;
+
+			// Remove in 2018: Fall back from temporary designations to real country codes
+			if (code === 'dech') {
+				code = 'de-CH';
+			}
+			if (code === 'frch') {
+				code = 'fr-CH';
+			}
 		}
 	}
 	if (!code) {

@@ -1,6 +1,6 @@
 var i18n_dech = {
 
-'_code': 'dech',
+'_code': 'de-CH',
 '_name': 'Deutsch (Schweiz)',
 '_fallback': 'de',
 

@@ -1,6 +1,6 @@
 var i18n_frch = {
 
-'_code': 'frch',
+'_code': 'fr-CH',
 '_name': 'Français (Suisse)',
 
 
