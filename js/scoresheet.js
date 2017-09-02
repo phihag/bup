@@ -908,17 +908,14 @@ function sheet_render(s, svg) {
 }
 
 function sheet_name(setup) {
-	if (setup.league_key && /^(?:1BL|2BLN|2BLS)-2016$/.test(setup.league_key)) {
+	if (setup.league_key && /^(?:1BL|2BLN|2BLS)-(2016|2017)$/.test(setup.league_key)) {
 		return 'bundesliga-2016';
 	}
 
-	switch (setup.counting) {
-	case '5x11_15':
-	case '5x11/3':
+	if (calc.max_game_count(setup.counting) === 5) {
 		return 'international_5x11';
-	default:
-		return 'international';
 	}
+	return 'international';
 }
 
 function event_render(container) {
@@ -1202,6 +1199,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var printing = require('./printing');
 	var refmode_referee_ui = require('./refmode_referee_ui');
 	var render = require('./render');
+	var report_problem = require('./report_problem');
 	var settings = require('./settings');
 	var stats = require('./stats');
 	var svg2pdf = require('./svg2pdf');

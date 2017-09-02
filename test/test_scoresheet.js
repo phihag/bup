@@ -2465,6 +2465,24 @@ _describe('scoresheet generation', function() {
 		assert.strictEqual(s._('mark:disqualified'), 'Disqualifié');
 		assert.strictEqual(s._('mark:walkover'), 'Walkover');
 	});
+
+	_it('sheet_name', function() {
+		assert.strictEqual(bup.scoresheet.sheet_name({
+			counting: '3x21',
+		}), 'international');
+		assert.strictEqual(bup.scoresheet.sheet_name({
+			counting: '5x11_11',
+		}), 'international_5x11');
+
+		assert.strictEqual(bup.scoresheet.sheet_name({
+			counting: '5x11_15',
+			league_key: '1BL-2016'
+		}), 'bundesliga-2016');
+		assert.strictEqual(bup.scoresheet.sheet_name({
+			counting: '5x11_15^90',
+			league_key: '1BL-2017'
+		}), 'bundesliga-2016');
+	});
 });
 
 })();
