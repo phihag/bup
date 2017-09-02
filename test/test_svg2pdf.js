@@ -18,7 +18,7 @@ _describe('svg2pdf', function() {
 				x1: 12,
 				y1: 13,
 				acc: [[5, 2]],
-			},
+			}
 		);
 
 		assert.deepStrictEqual(
@@ -29,7 +29,7 @@ _describe('svg2pdf', function() {
 				x1: -1.2,
 				y1: 1.5,
 				acc: [[4, -1], [9.2, 13.5]],
-			},
+			}
 		);
 
 		assert.deepStrictEqual(
@@ -40,7 +40,7 @@ _describe('svg2pdf', function() {
 				x1: 10,
 				y1: 20,
 				acc: [[-1, -1], [1, 1]],
-			},
+			}
 		);
 
 		assert.deepStrictEqual(

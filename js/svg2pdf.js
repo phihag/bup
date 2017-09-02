@@ -8,12 +8,13 @@ function parse_path(d) {
 	var x;
 	var y;
 	var c; // no let :(
+	var closed = false;
 
 	var acc = [];
 	while (d && !/^\s*$/.test(d)) {
 		var m = /^\s*[Zz]/.exec(d);
 		if (m) {
-			acc.push([x1 - x, y1 - y]);
+			closed = true;
 		} else if ((m = /^\s*([vVhH])\s*(-?[0-9.]+)/.exec(d))) {
 			c = m[1];
 			var a = parseFloat(m[2]);
@@ -60,6 +61,7 @@ function parse_path(d) {
 	return {
 		x1: x1,
 		y1: y1,
+		closed: closed,
 		acc: acc,
 	};
 }
@@ -166,8 +168,7 @@ function render_page(svg, pdf) {
 		case 'path':
 			var path = parse_path(n.getAttribute('d'));
 			if (path) {
-				console.log('plotting path', path);
-				pdf.lines(path.acc, path.x1, path.y1, 1, 'F');
+				pdf.lines(path.acc, path.x1, path.y1, [1, 1], mode, path.closed);
 			}
 			break;
 		case 'text':
