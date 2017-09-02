@@ -70,6 +70,7 @@ dist: cleandist ## Create distribution files
 		div/LICENSE.commercial.de \
 		div/Mannschaftsaufstellung_1BL-2015.pdf \
 		div/Mannschaftsaufstellung_2BL-2015.pdf \
+		div/NLA_Resultatblatt.svg \
 		div/scoresheet_bundesliga-2016.svg \
 		div/scoresheet_international.svg \
 		div/scoresheet_international_5x11.svg \
