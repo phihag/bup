@@ -109,6 +109,22 @@ _describe('svg2pdf', function() {
 				closed: false,
 			}]
 		);
+
+		// Minus as separator
+		assert.deepStrictEqual(
+			bup.svg2pdf.parse_path(
+				'M1,2L3-24-10,2'
+			),
+			[{
+				x1: 1,
+				y1: 2,
+				acc: [
+					[2, -26],
+					[-13, 26],
+				],
+				closed: false,
+			}]
+		);
 	});
 
 	_it('arc2beziers', function() {
