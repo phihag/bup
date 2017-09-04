@@ -26,7 +26,7 @@ function parse_path(d) {
 	while (d && !/^\s*$/.test(d)) {
 		var m = /^\s*([ZzvVhHmMlLcAa])(?:\s*(-?[0-9.]+(?:(?:\s*,\s*|\s+|(?=-))-?[0-9.]+)*))?/.exec(d);
 		if (!m) {
-			console.error('Unsupported path data: ' + JSON.stringify(d));
+			// console.error('Unsupported path data: ' + JSON.stringify(d));
 			return;
 		}
 		var c = m[1];
@@ -112,12 +112,10 @@ function parse_path(d) {
 			}
 		} else if (c === 'a') {
 			for (i = 0;i < args.length;i += 7) {
-				console.log('args: '+ JSON.stringify(args.slice(i, i+ 7)));
 				var bdraw = arc2beziers(
 					args[i], args[i + 1], args[i + 2],
 					args[i + 3], args[i + 4],
 					args[i + 5], args[i + 6]);
-				console.log('bdraw' + JSON.stringify(bdraw));
 				acc.push.apply(acc, bdraw);
 				x += args[i + 5];
 				y += args[i + 6];
@@ -231,18 +229,19 @@ function arc2beziers(rx, ry, angle, large_flag, sweep_flag, ex, ey) {
 	angleStart %= 360;
 
 	var bezierPoints = _make_beziers(angleStart, angleExtent);
-//console.log("rx: " + rx + ", ry: " + ry + ", angle: " + angle + " cx: " + cx + " cy: " + cy);
+	var  arad = _to_radians(angle);
+	var sinm = Math.sin(arad);
+	var cosm = Math.cos(arad);
+
 	bezierPoints = bezierPoints.map(function(p) {
 		var x = p[0] * rx;
 		var y = p[1] * ry;
 
-		var arad = _to_radians(angle);
-		x = Math.cos(arad) * x - Math.sin(arad) * y + cx;
-		y = Math.sin(arad) * x + Math.cos(arad) * y + cy;
-		//console.log('p: ' + JSON.stringify(p) + ' -> ' + JSON.stringify([x, y]));
+		x = cosm * x - sinm * y + cx;
+		y = sinm * x + cosm * y + cy;
 		return [x, y];
 	});
-	console.log('expecting end point ', bezierPoints[bezierPoints.length - 1], ' is ', [ex, ey]);
+
 	// The last point in the bezier set should match exactly the last coord pair in the arc (ie: x,y). But
 	// considering all the mathematical manipulation we have been doing, it is bound to be off by a tiny
 	// fraction. Experiments show that it can be up to around 0.00002.  So why don't we just set it to
@@ -272,9 +271,8 @@ function arc2beziers(rx, ry, angle, large_flag, sweep_flag, ex, ey) {
 
 // Helper function for arc2bezier above
 function _make_beziers(angleStart, angleExtent) {
-	//console.log('_make_beziers (' + angleStart + ', ' + angleExtent);
 	// copied / adapted from https://github.com/BigBadaboom/androidsvg/blob/418cf676849b200cacf3465478079f39709fe5b1/androidsvg/src/main/java/com/caverock/androidsvg/SVGAndroidRenderer.java#L2579 (ASL 2.0)
-	var numSegments = Math.ceil(Math.abs(angleExtent) / 90.0);
+	var numSegments = 1; // originally Math.ceil(Math.abs(angleExtent) / 90.0), but that interacts with SVG filling rules
 	angleStart = _to_radians(angleStart);
 	angleExtent = _to_radians(angleExtent);
 	var angleIncrement = (angleExtent / numSegments);
@@ -445,7 +443,7 @@ function render_page(svg, pdf) {
 
 			pdf.setFontStyle((style['font-weight'] == 'bold') ? 'bold' : 'normal');
 			pdf.setFontSize(72 / 25.4 * parseFloat(style['font-size']));
-			var str = $(n).text();
+			var str = n.textContent;
 
 			var transform = n.getAttribute('transform');
 			if (transform) {
