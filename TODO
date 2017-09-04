@@ -1,6 +1,8 @@
 support arcs
 buli scoresheet: use vector logo (git stash pop)
 
+dmode vertical
+
 NLA
 	go through ch vocabulary
 
@@ -44,6 +46,8 @@ displaymode: heinz middle
 dmode Berlin
 dmode Saarbrücken
 	-> mail Janine
+support fr
+contact french (see mails Ulf)
 
 replace report link with something better
 referee w/ safari: show nice error message

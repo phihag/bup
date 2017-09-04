@@ -109,6 +109,19 @@ _describe('svg2pdf', function() {
 				closed: false,
 			}]
 		);
+	});
 
+	_it('arc_center', function() {
+		assert.deepStrictEqual(
+			bup.svg2pdf.arc_center(50, 50, 0, 0, 1, -70, 10),
+			[-40, -30]
+		);
+	});
+
+	_it('arc2bezier', function() {
+		assert.deepStrictEqual(
+			bup.svg2pdf.arc2bezier(0, 1, 1, 1),
+			[]
+		);
 	});
 });

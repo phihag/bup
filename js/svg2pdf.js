@@ -24,9 +24,9 @@ function parse_path(d) {
 	}
 
 	while (d && !/^\s*$/.test(d)) {
-		var m = /^\s*([ZzvVhHmMlLcA])(?:\s*(-?[0-9.]+(?:(?:\s*,\s*|\s+)-?[0-9.]+)*))?/.exec(d);
+		var m = /^\s*([ZzvVhHmMlLcAa])(?:\s*(-?[0-9.]+(?:(?:\s*,\s*|\s+)-?[0-9.]+)*))?/.exec(d);
 		if (!m) {
-			console.error('Unsupported path data: ' + JSON.stringify(d));
+			// console.error('Unsupported path data: ' + JSON.stringify(d));
 			return;
 		}
 		var c = m[1];
@@ -99,15 +99,196 @@ function parse_path(d) {
 				y += args[i + 5];
 			}
 		} else if (c === 'A') {
-			// TODO: arc
-			for (i = 0;i < args.length;i += 6) {
-				acc.push(args.slice(i, i + 6));
-				x += args[i + 4];
-				y += args[i + 5];
+			for (i = 0;i < args.length;i += 7) {
+				var relex = args[i + 5] - x;
+				var reley = args[i + 6] - y;
+				var draw = arc2beziers(
+					args[i], args[i + 1], args[i + 2],
+					args[i + 3], args[i + 4],
+					relex, reley);
+				acc.push.apply(acc, draw);
+			}
+		} else if (c === 'a') {
+			for (i = 0;i < args.length;i += 7) {
+				var bdraw = arc2beziers(
+					args[i], args[i + 1], args[i + 2],
+					args[i + 3], args[i + 4],
+					args[i + 5], args[i + 6]);
+				acc.push.apply(acc, bdraw);
 			}
 		}
 	}
 	return res;
+}
+
+function _to_degrees(radians) {
+	return radians * 180 / Math.PI;
+}
+
+function _to_radians(degrees) {
+	return degrees / 180 * Math.PI;
+}
+
+// Find the bezier representation (if any) of an arc.
+// Start of the arc is [0, 0].
+// [rx, ry] is radius of the ellipse.
+// angle is the rotation of the ellipse
+// large_flag and sweep_flag determine which solution to find.
+// [ex, ey] is the end of the arc.
+// See https://www.w3.org/TR/SVG/paths.html#PathDataCurveCommands#PathDataEllipticalArcCommands for more details on the input
+// Returns an array of jsPDF specs for the bezier curves to draw
+function arc2beziers(rx, ry, angle, large_flag, sweep_flag, ex, ey) {
+	// See https://www.w3.org/TR/SVG/implnote.html#ArcConversionEndpointToCenter for the formulas used here.
+	// Much of this source has been copied/adapted from https://github.com/BigBadaboom/androidsvg/blob/418cf676849b200cacf3465478079f39709fe5b1/androidsvg/src/main/java/com/caverock/androidsvg/SVGAndroidRenderer.java#L2579 (ASL 2.0)
+
+	if (!ex && !ey) {
+		// End points = start points - nothing to draw (mandated by spec)
+		return [];
+	}
+
+	// Straight line
+	if (rx == 0 || ry == 0) {
+		return [[ex, ey]];
+	}
+
+	// Sign of the radii is ignored (behaviour specified by the spec)
+	rx = Math.abs(rx);
+	ry = Math.abs(ry);
+
+	// Convert angle from degrees to radians
+	var angleRad = (angle % 360.0) / 180 * Math.PI;
+	var cosAngle = Math.cos(angleRad);
+	var sinAngle = Math.sin(angleRad);
+
+	var dx2 = - ex / 2;
+	var dy2 = - ey / 2;
+
+	// Step 1 : Compute (x1', y1') - the transformed start point
+	var x1 = (cosAngle * dx2 + sinAngle * dy2);
+	var y1 = (-sinAngle * dx2 + cosAngle * dy2);
+
+	var x1_sq = x1 * x1;
+	var y1_sq = y1 * y1;
+
+	// Check that radii are large enough.
+	// If they are not, the spec says to scale them up so they are.
+	// This is to compensate for potential rounding errors/differences between SVG implementations.
+	var radiiCheck = x1_sq / rx_sq + y1_sq / ry_sq;
+	if (radiiCheck > 1) {
+		rx = Math.sqrt(radiiCheck) * rx;
+		ry = Math.sqrt(radiiCheck) * ry;
+	}
+	var rx_sq = rx * rx;
+	var ry_sq = ry * ry;
+
+	// Step 2 : Compute (cx1, cy1) - the transformed centre point
+	var sign = (large_flag == sweep_flag) ? -1 : 1;
+
+	var sq = ((rx_sq * ry_sq) - (rx_sq * y1_sq) - (ry_sq * x1_sq)) / ((rx_sq * y1_sq) + (ry_sq * x1_sq));
+	sq = (sq < 0) ? 0 : sq;
+	var coef = sign * Math.sqrt(sq);
+	var cx1 = coef * ((rx * y1) / ry);
+	var cy1 = coef * -((ry * x1) / rx);
+
+	// Step 3 : Compute (cx, cy) from (cx1, cy1)
+	var sx2 = ex / 2;
+	var sy2 = ey / 2;
+	var cx = sx2 + (cosAngle * cx1 - sinAngle * cy1);
+	var cy = sy2 + (sinAngle * cx1 + cosAngle * cy1);
+
+	// Step 4 : Compute the angleStart (angle1) and the angleExtent (dangle)
+	var ux = (x1 - cx1) / rx;
+
+	var uy = (y1 - cy1) / ry;
+	var vx = (-x1 - cx1) / rx;
+	var vy = (-y1 - cy1) / ry;
+
+	// Compute the angle start
+	var n = Math.sqrt((ux * ux) + (uy * uy));
+	var p = ux; // (1 * ux) + (0 * uy)
+	sign = (uy < 0) ? -1 : 1;
+	var angleStart = _to_degrees(sign * Math.acos(p / n));
+
+	// Compute the angle extent
+	n = Math.sqrt((ux * ux + uy * uy) * (vx * vx + vy * vy));
+	p = ux * vx + uy * vy;
+	sign = (ux * vy - uy * vx < 0) ? -1 : 1;
+	var angleExtent = _to_degrees(sign * Math.acos(p / n));
+
+	if (!sweep_flag && angleExtent > 0) {
+		angleExtent -= 360;
+	} else if (sweep_flag && angleExtent < 0) {
+		angleExtent += 360;
+	}
+
+	angleExtent %= 360;
+	angleStart %= 360;
+
+	var bezierPoints = _make_beziers(angleStart, angleExtent);
+	bezierPoints = bezierPoints.map(function(p) {
+		var x = p[0] * rx;
+		var y = p[1] * ry;
+
+		var arad = _to_radians(angle);
+		x = Math.cos(arad) * x - Math.sin(arad) * y + cx;
+		y = Math.sin(arad) * x + Math.cos(arad) * y + cy;
+		return [x, y];
+	});
+	// The last point in the bezier set should match exactly the last coord pair in the arc (ie: x,y). But
+	// considering all the mathematical manipulation we have been doing, it is bound to be off by a tiny
+	// fraction. Experiments show that it can be up to around 0.00002.  So why don't we just set it to
+	// exactly what it ought to be.
+	bezierPoints[bezierPoints.length - 1] = [ex, ey];
+
+	var res = [];
+	for (var i=0;i < bezierPoints.length;i += 3) {
+		var p1 = bezierPoints[i];
+		var p2 = bezierPoints[i + 1];
+		var p3 = bezierPoints[i + 2];
+
+		res.push([p1[0], p1[1], p2[0], p2[1], p3[0], p3[1]]);
+	}
+
+	return res;
+}
+
+// Helper function for arc2bezier above
+function _make_beziers(angleStart, angleExtent) {
+	// copied / adapted from https://github.com/BigBadaboom/androidsvg/blob/418cf676849b200cacf3465478079f39709fe5b1/androidsvg/src/main/java/com/caverock/androidsvg/SVGAndroidRenderer.java#L2579 (ASL 2.0)
+	var numSegments = Math.ceil(Math.abs(angleExtent) / 90.0);
+	angleStart = _to_radians(angleStart);
+	angleExtent = _to_radians(angleExtent);
+	var angleIncrement = (angleExtent / numSegments);
+
+	// The length of each control point vector is given by the following formula.
+	var controlLength = 4 / 3 * Math.sin(angleIncrement / 2) / (1 + Math.cos(angleIncrement / 2));
+	var coords = [];
+
+	for (var i = 0;i < numSegments;i++) {
+		var angle = angleStart + i * angleIncrement;
+		var dx = Math.cos(angle);
+		var dy = Math.sin(angle);
+		
+		// First control point
+		coords.push([
+			dx - controlLength * dy,
+			dy + controlLength * dx,
+		]);
+
+		// Second control point
+		angle += angleIncrement;
+		dx = Math.cos(angle);
+		dy = Math.sin(angle);
+		coords.push([
+			dx + controlLength * dy,
+			dy - controlLength * dx,
+		]);
+		
+		// Endpoint of bezier
+		coords.push([dx, dy]);
+	}
+
+	return coords;
 }
 
 function render_page(svg, pdf) {
@@ -301,6 +482,7 @@ return {
 	save: save,
 	// Testing only
 	parse_path: parse_path,
+	arc2beziers: arc2beziers,
 };
 
 })();
