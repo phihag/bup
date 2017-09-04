@@ -5,7 +5,7 @@ var ALL_STYLES = [
 	'oncourt',
 	'international',
 	'teamcourt',
-	'vertical',
+	'stripes',
 	'2court',
 	'top+list',
 	'tim',
@@ -1065,7 +1065,7 @@ function render_teamcourt(s, container, event, court, match, colors) {
 	});
 }
 
-function render_vertical(s, container, event, court, match, colors) {
+function render_stripes(s, container, event, court, match, colors) {
 	var nscore = extract_netscore(match);
 	var setup = match.setup;
 	var max_game_count = calc.max_game_count(setup.counting);
@@ -1101,7 +1101,7 @@ function render_vertical(s, container, event, court, match, colors) {
 	}
 
 	var table = uiu.el(container, 'table', {
-		'class': 'd_vertical_table',
+		'class': 'd_stripes_table',
 		'style': (
 			'color:' + colors.fg + ';' +
 			'background:' + colors.bg + ';'
@@ -1724,8 +1724,8 @@ function update(err, s, event) {
 		international: render_international,
 		onlyplayers: render_onlyplayers,
 		onlyscore: render_onlyscore,
+		stripes: render_stripes,
 		teamcourt: render_teamcourt,
-		vertical: render_vertical,
 	}[style];
 	if (xfunc) {
 		var court = _render_court(s, container, event);
@@ -1935,7 +1935,7 @@ function option_applies(style_id, option_name) {
 		teamcourt: ['court_id', 'c0', 'c1', 'cfg', 'cfg2', 'cbg'],
 		tim: ['cbg', 'cfg', 'ctim_blue', 'ctim_active'],
 		tournament_overview: ['cfg', 'cbg', 'cbg3', 'cborder', 'cfg2'],
-		vertical: ['court_id', 'cbg', 'c0', 'c1', 'cfg', 'cbg4', 'cserv'],
+		stripes: ['court_id', 'cbg', 'c0', 'c1', 'cfg', 'cbg4', 'cserv'],
 	};
 	var bs = BY_STYLE[style_id];
 	if (bs) {

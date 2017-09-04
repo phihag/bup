@@ -487,7 +487,7 @@ var i18n_en = {
 'displaymode|clubplayers': 'team + players',
 'displaymode|clubplayerslr': 'team + players (left / right)',
 'displaymode|tournament_overview': 'tournament overview',
-'displaymode|vertical': 'vertical',
+'displaymode|stripes': 'stripes',
 'displaymode:court_id': 'court:',
 'displaymode:court_id:loading': 'loading ...',
 'displaymode:reverse_order': 'reverse court order',
