@@ -1,11 +1,9 @@
-dmode vertical
-	-> mail Steffen
-
 NLA
 	go through ch vocabulary
 
 refmode: visible warning if no crypto.subtle
 
+option to reset colors
 test nrwdemo: setupsheet etc.
 NLA scoresheet
 miniserver: check chunking - do we need to call end

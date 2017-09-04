@@ -483,6 +483,7 @@ var i18n_frch = {
 'displaymode|clubplayers': 'Equipe + joueurs',
 'displaymode|clubplayerslr': 'Equipe + joueurs (gauche / droite)',
 'displaymode|tournament_overview': 'Aperçu du tournoi',
+'displaymode|vertical': 'Verticale',
 'displaymode:court_id': 'court:',
 'displaymode:court_id:loading': 'chargement ...',
 'displaymode:reverse_order': 'ordre inverse des terrains',
