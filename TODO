@@ -1,7 +1,9 @@
 support arcs
 buli scoresheet: use vector logo (git stash pop)
+svg2pdf: path stroke
 
 dmode vertical
+	-> mail Steffen
 
 NLA
 	go through ch vocabulary

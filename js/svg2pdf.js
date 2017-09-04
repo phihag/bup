@@ -107,14 +107,20 @@ function parse_path(d) {
 					args[i + 3], args[i + 4],
 					relex, reley);
 				acc.push.apply(acc, draw);
+				x = args[i + 5];
+				y = args[i + 6];
 			}
 		} else if (c === 'a') {
 			for (i = 0;i < args.length;i += 7) {
+				console.log('args: '+ JSON.stringify(args.slice(i, i+ 7)));
 				var bdraw = arc2beziers(
 					args[i], args[i + 1], args[i + 2],
 					args[i + 3], args[i + 4],
 					args[i + 5], args[i + 6]);
+				console.log('bdraw' + JSON.stringify(bdraw));
 				acc.push.apply(acc, bdraw);
+				x += args[i + 5];
+				y += args[i + 6];
 			}
 		}
 	}
@@ -225,6 +231,7 @@ function arc2beziers(rx, ry, angle, large_flag, sweep_flag, ex, ey) {
 	angleStart %= 360;
 
 	var bezierPoints = _make_beziers(angleStart, angleExtent);
+//console.log("rx: " + rx + ", ry: " + ry + ", angle: " + angle + " cx: " + cx + " cy: " + cy);
 	bezierPoints = bezierPoints.map(function(p) {
 		var x = p[0] * rx;
 		var y = p[1] * ry;
@@ -232,8 +239,10 @@ function arc2beziers(rx, ry, angle, large_flag, sweep_flag, ex, ey) {
 		var arad = _to_radians(angle);
 		x = Math.cos(arad) * x - Math.sin(arad) * y + cx;
 		y = Math.sin(arad) * x + Math.cos(arad) * y + cy;
+		//console.log('p: ' + JSON.stringify(p) + ' -> ' + JSON.stringify([x, y]));
 		return [x, y];
 	});
+	console.log('expecting end point ', bezierPoints[bezierPoints.length - 1], ' is ', [ex, ey]);
 	// The last point in the bezier set should match exactly the last coord pair in the arc (ie: x,y). But
 	// considering all the mathematical manipulation we have been doing, it is bound to be off by a tiny
 	// fraction. Experiments show that it can be up to around 0.00002.  So why don't we just set it to
@@ -241,12 +250,21 @@ function arc2beziers(rx, ry, angle, large_flag, sweep_flag, ex, ey) {
 	bezierPoints[bezierPoints.length - 1] = [ex, ey];
 
 	var res = [];
+	var offx = 0;
+	var offy = 0;
 	for (var i=0;i < bezierPoints.length;i += 3) {
 		var p1 = bezierPoints[i];
 		var p2 = bezierPoints[i + 1];
 		var p3 = bezierPoints[i + 2];
 
-		res.push([p1[0], p1[1], p2[0], p2[1], p3[0], p3[1]]);
+		res.push([
+			p1[0] - offx, p1[1] - offy,
+			p2[0] - offx, p2[1] - offy,
+			p3[0] - offx, p3[1] - offy,
+		]);
+
+		offx += p3[0];
+		offy += p3[1];
 	}
 
 	return res;
@@ -254,6 +272,7 @@ function arc2beziers(rx, ry, angle, large_flag, sweep_flag, ex, ey) {
 
 // Helper function for arc2bezier above
 function _make_beziers(angleStart, angleExtent) {
+	//console.log('_make_beziers (' + angleStart + ', ' + angleExtent);
 	// copied / adapted from https://github.com/BigBadaboom/androidsvg/blob/418cf676849b200cacf3465478079f39709fe5b1/androidsvg/src/main/java/com/caverock/androidsvg/SVGAndroidRenderer.java#L2579 (ASL 2.0)
 	var numSegments = Math.ceil(Math.abs(angleExtent) / 90.0);
 	angleStart = _to_radians(angleStart);
@@ -291,6 +310,27 @@ function _make_beziers(angleStart, angleExtent) {
 	return coords;
 }
 
+function parse_color(col_str) {
+	var m = col_str.match(/^rgb\(([0-9]+),\s*([0-9]+),\s*([0-9]+)\)|#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/);
+	var r = 0;
+	var g = 0;
+	var b = 0;
+	if (m && m[1]) {
+		r = parseInt(m[1], 10);
+		g = parseInt(m[2], 10);
+		b = parseInt(m[3], 10);
+	} else if (m && m[4]) {
+		r = parseInt(m[4], 16);
+		g = parseInt(m[5], 16);
+		b = parseInt(m[6], 16);
+	}
+	return {
+		r: r,
+		g: g,
+		b: b,
+	};
+}
+
 function render_page(svg, pdf) {
 	var nodes = svg.querySelectorAll('*');
 	for (var i = 0;i < nodes.length;i++) {
@@ -310,23 +350,14 @@ function render_page(svg, pdf) {
 
 		var mode = '';
 		if (style.fill != 'none') {
-			m = style.fill.match(/^rgb\(([0-9]+),\s*([0-9]+),\s*([0-9]+)\)|#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/);
-			var r = 0;
-			var g = 0;
-			var b = 0;
-			if (m && m[1]) {
-				r = parseInt(m[1], 10);
-				g = parseInt(m[2], 10);
-				b = parseInt(m[3], 10);
-			} else if (m && m[4]) {
-				r = parseInt(m[4], 16);
-				g = parseInt(m[5], 16);
-				b = parseInt(m[6], 16);
-			}
-			pdf.setFillColor(r, g, b);
+			var col = parse_color(style.fill);
+			pdf.setFillColor(col.r, col.g, col.b);
 			mode += 'F';
 		}
 		if (style.stroke != 'none') {
+			var scol = parse_color(style.stroke);
+			pdf.setDrawColor(scol.r, scol.g, scol.b);
+
 			var stroke_width = parseFloat(style['stroke-width']);
 			pdf.setLineWidth(stroke_width);
 
@@ -483,6 +514,7 @@ return {
 	// Testing only
 	parse_path: parse_path,
 	arc2beziers: arc2beziers,
+	_make_beziers: _make_beziers,
 };
 
 })();
