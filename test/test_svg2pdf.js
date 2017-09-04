@@ -111,17 +111,17 @@ _describe('svg2pdf', function() {
 		);
 	});
 
-	_it('arc_center', function() {
+	_it('arc2beziers', function() {
 		assert.deepStrictEqual(
-			bup.svg2pdf.arc_center(50, 50, 0, 0, 1, -70, 10),
-			[-40, -30]
-		);
-	});
-
-	_it('arc2bezier', function() {
-		assert.deepStrictEqual(
-			bup.svg2pdf.arc2bezier(0, 1, 1, 1),
-			[]
+			bup.svg2pdf.arc2beziers(50, 50, 0, 0, 1, -70, 10),
+			[[
+				-16.568542494923793,
+				22.09138999323173,
+				-47.90861000676826,
+				26.568542494923804,
+				-70,
+				10
+			]]
 		);
 	});
 });
