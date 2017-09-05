@@ -84,6 +84,8 @@ function server(callback, options) {
 	const ROOT_DIR = path.dirname(path.dirname(__dirname));
 
 	const serv = http.createServer((req, res) => {
+		req.socket.setNoDelay(true);
+
 		if (! ['GET', 'HEAD'].includes(req.method)) {
 			return _err(res, 405);
 		}

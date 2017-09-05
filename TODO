@@ -1,9 +1,6 @@
-test nrwdemo: setupsheet etc.
-
 refmode: visible warning if no crypto.subtle
 NLA:go through ch vocabulary
 NLA scoresheet
-miniserver: check chunking - do we need to call end
 direct link for zero-config eventsheets (show progress there)
 btde-like dstyle
 manual import for 2017 Bundesliga matches
