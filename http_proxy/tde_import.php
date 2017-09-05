@@ -9,7 +9,7 @@ $match_url = $_GET['url'];
 main($match_url);
 
 function main($match_url) {
-	if (! \preg_match('/^https?:\/\/www\.turnier\.de\/sport\/teammatch\.aspx\?id=([a-fA-F0-9-]+)&match=([0-9]+)$/', $match_url)) {
+	if (! \preg_match('/^https?:\/\/(?:www\.turnier\.de|[a-z]+\.tournamentsoftware\.com)\/sport\/teammatch\.aspx\?id=([a-fA-F0-9-]+)&match=([0-9]+)$/', $match_url)) {
 		throw new \Exception('Unsupported URL');
 	}
 

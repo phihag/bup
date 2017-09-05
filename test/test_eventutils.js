@@ -32,6 +32,7 @@ _describe('eventutils', function() {
 		assert.strictEqual(bup.eventutils.name_by_league('NRW-O19-S1-BK-051-2016'), 'Bezirksklasse Süd 1 (051)');
 		assert.strictEqual(bup.eventutils.name_by_league('NRW-O19-S1-KL-100-2016'), 'Kreisliga Süd 1 (100)');
 		assert.strictEqual(bup.eventutils.name_by_league('NRW-O19-S1-KK-194-2016'), 'Kreisklasse Süd 1 (194)');
+		assert.strictEqual(bup.eventutils.name_by_league('OBL-2017'), 'ÖBV-Bundesliga'); // Austria
 	});
 
 	_it('set_metadata with incomplete match', function() {
@@ -628,10 +629,12 @@ _describe('eventutils', function() {
 		assert.deepStrictEqual(bup.eventutils.default_counting('RLW-2016'), '3x21');
 		assert.deepStrictEqual(bup.eventutils.default_counting('RLN-2016'), '3x21');
 		assert.deepStrictEqual(bup.eventutils.default_counting('RLM-2016'), '3x21');
+		assert.deepStrictEqual(bup.eventutils.default_counting('OBL-2017'), '3x21');
 	});
 
 	_it('get_min_pause', function() {
 		assert.deepStrictEqual(bup.eventutils.get_min_pause('NLA-2017'), 900000);
+		assert.deepStrictEqual(bup.eventutils.get_min_pause('OBL-2017'), 900000);
 	});
 });
 

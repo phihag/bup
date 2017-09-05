@@ -331,6 +331,18 @@ function preferred_by_league(league_key) {
 			'2.HE',
 			'3.HE',
 		];
+	case 'OBL-2017':
+		// Bundesligaordnung §6.1
+		return [
+			'1.HD',
+			'2.HD',
+			'DD',
+			'1.HE',
+			'2.HE',
+			'DE',
+			'3.HE',
+			'GD',
+		];
 	}
 }
 
@@ -339,7 +351,7 @@ function ui_move_prepare(from_idx) {
 	$('.order_ignore_match').addClass('order_ignore_match_active');
 	uiu.qsEach('.order_insert', function(insert) {
 		var idx = parseInt(insert.getAttribute('data-order-idx'), 10);
-		uiu.visible(insert,
+			uiu.visible(insert,
 			(from_idx >= current_ignore_start) ?
 			((idx <= current_ignore_start) && (idx != -99)) :
 			((idx !== from_idx) && (idx !== from_idx + 1))

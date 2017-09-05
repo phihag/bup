@@ -1,5 +1,16 @@
-displaymode: don't update again if nothing changes
+manual import https://obv.tournamentsoftware.com/sport/tournament.aspx?id=8B5B8973-84CA-40D2-9450-1277233E3172
+obl
+	create demo from https://obv.tournamentsoftware.com/sport/teammatch.aspx?id=7AAA19D0-0E65-42BF-8E03-6F1F6AE31C9A&match=19
+	eventsheet: http://www.badminton.at/files/raster/SPI_MH_5.xls
+	scoresheet: http://www.badminton.at/files/raster/SCHIRIZE.xls
+	Logo from http://www.badminton.at/images/Logo_OEBV.png
 
+improve dads
+	ad during intervals
+	add type: text (z.B. "gute Heimreise", "nächstes Heimspiel")
+	add type: refrath-gegen
+	configure on referee!
+	switch to indexed db
 refmode: visible warning if no crypto.subtle
 NLA:go through ch vocabulary
 NLA scoresheet
@@ -11,12 +22,6 @@ UI test to test setupsheet
 bup all_players error report setupsheet
 http://localhost/bup/#setupsheet crashes
 use team colors does not change color displays
-improve dads
-	ad during intervals
-	add type: text (z.B. "gute Heimreise", "nächstes Heimspiel")
-	add type: refrath-gegen
-	configure on referee!
-	switch to indexed db
 order: print with background graphics
 mo: make del button nicer
 Aufstellung:

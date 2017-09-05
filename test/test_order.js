@@ -636,4 +636,16 @@ _describe('order', function() {
 		});		
 	});
 
+	_it('preferred_by_league', function() {
+		assert.deepStrictEqual(bup.order.preferred_by_league('OBL-2017'), [
+			'1.HD',
+			'2.HD',
+			'DD',
+			'1.HE',
+			'2.HE',
+			'DE',
+			'3.HE',
+			'GD',
+		]);
+	});
 });

@@ -206,6 +206,9 @@ function name_by_league(league_key) {
 	if (/^2BLS-(?:2015|2016|2017)$/.test(league_key)) {
 		return '2. Bundesliga Süd';
 	}
+	if (league_key === 'OBL-2017') {
+		return 'ÖBV-Bundesliga'; // Österreich
+	}
 	if (league_key === 'RLN-2016') {
 		return 'Regionalliga Nord';
 	}
@@ -321,6 +324,9 @@ function get_min_pause(league_key) {
 	if (league_key === 'NLA-2017') {
 		return 15 * 60000; // §2.11.1 https://www.swiss-badminton.ch/file/727622/?dl=1
 	}
+	if (league_key === 'OBL-2017') {
+		return 15 * 60000; // §6f Bundesligaordnung
+	}
 	return undefined;
 }
 
@@ -413,6 +419,9 @@ function default_counting(league_key) {
 	}
 	if (/^(?:1BL|2BLN|2BLS)-2017$/.test(league_key)) {
 		return '5x11_15^90';
+	}
+	if (league_key === 'OBL-2017') {
+		return '3x21';
 	}
 	if (league_key === 'NLA-2017') {
 		return '3x21';
