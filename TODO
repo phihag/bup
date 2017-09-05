@@ -209,9 +209,7 @@ refmode push!
 test with refmode that listed_players is being saved
 make court descriptions configurable
 displaymode/onecourt: score larger!
-displaymode: only points, way larger (left / right)
 displaymode: 2 monitor mode -> Markus
-displaymode: invert colors (Rheinhart@BVM)
 
 displaymode: only show options when applicable
 	(call option_applies in UI as well, not only in displaymode)

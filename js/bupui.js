@@ -27,7 +27,7 @@ function make_pick(s, label, values, on_pick, on_cancel, container, select_at) {
 	}
 
 	var kill_dialog = function() {
-		uiu.esc_stack_pop();
+		esc_stack_pop();
 		dlg_wrapper.remove();
 	};
 	if (s && on_cancel) {
@@ -43,7 +43,7 @@ function make_pick(s, label, values, on_pick, on_cancel, container, select_at) {
 		kill_dialog();
 		on_cancel();
 	};
-	uiu.esc_stack_push(cancel);
+	esc_stack_push(cancel);
 
 	var dlg_wrapper = $('<div class="modal-wrapper">');
 	dlg_wrapper.on('click', function(e) {
