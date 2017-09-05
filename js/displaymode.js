@@ -694,7 +694,6 @@ function render_oncourt(s, container, event, court, match, colors) {
 	var team_names = event.team_names || [];
 	var setup = match.setup;
 	var prev_scores = nscore.slice(0, -1);
-	var server = determine_server(match, current_score);
 
 	function _render_team(team_id) {
 		var team = setup.teams[team_id];
@@ -755,7 +754,6 @@ function render_oncourt(s, container, event, court, match, colors) {
 			'class': ((ps[1] > ps[0]) ? 'dcs_prev_score_won' : 'dcs_prev_score_lost'),
 		}, ps[1]);
 	});
-	var bottom_team = setup.teams[1];
 	var bottom_team_el = uiu.el(bottom_row, 'div', {
 		'class': 'dcs_team_name',
 		'style': (
