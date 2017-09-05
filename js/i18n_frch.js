@@ -354,7 +354,7 @@ var i18n_frch = {
 'eventsheet:label|team-1BL-2015': '(Bundesliga) composition d\'equipe (2015)',
 'eventsheet:label|team-2BL-2015': '(Allemagne 2. Bundesliga) composition d\'equipe (2015)',
 'eventsheet:label|NRW-2016': '(Allemagne, NRW leagues) feuille de résultats',
-'eventsheet:label|NRW-Satzungen-2016': '(Allemagne, NRW) lois et règlements (2016)',
+'eventsheet:label|NRW-Satzungen': '(Allemagne, NRW) lois et règlements',
 'eventsheet:label|NLA-2017': 'feuille de résultats',
 
 'stats:game': 'Set {number}',

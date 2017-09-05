@@ -11,8 +11,8 @@ var SHEETS_BY_LEAGUE = {
 	'1BL-2017': ['1BL-2016', 'DBV-Satzungen-2016'],
 	'2BLN-2017': ['2BLN-2016', 'DBV-Satzungen-2016'],
 	'2BLS-2017': ['2BLS-2016', 'DBV-Satzungen-2016'],
-	'NRW-2016': ['NRW-2016', 'NRW-Satzungen-2016'],
-	'RLW-2016': ['RLW-2016', 'NRW-Satzungen-2016'],
+	'NRW-2016': ['NRW-2016', 'NRW-Satzungen'],
+	'RLW-2016': ['RLW-2016', 'NRW-Satzungen'],
 	'RLN-2016': ['RLN-2016', 'RLN-Satzungen-2016'],
 	'RLM-2016': ['RLM-2016', 'RLM-SpO-2015'],
 	'NLA-2017': ['NLA-2017'],
@@ -34,7 +34,7 @@ var URLS = {
 	'RLM-SpO-2015': 'http://www.dbv-mitte.de/web/images/Allgemein/Gruppenordnung/Spielordnung/Spielordnung-aktuell.pdf',
 	'NLA-2017': 'div/NLA_Resultatblatt.svg',
 	'NRW-2016': 'div/Spielbericht_8x3x21.svg',
-	'NRW-Satzungen-2016': 'http://www.badminton-nrw.de/fileadmin/gstnrw/pdf_xls_doc/Satzungswerk/2016/SatzungOrdnungen2016.pdf',
+	'NRW-Satzungen': 'http://www.badminton-nrw.de/fileadmin/gstnrw/pdf_xls_doc/Satzungswerk/2017/SatzungOrdnungen2017.pdf',
 	'team-1BL-2015': 'div/Mannschaftsaufstellung_1BL-2015.pdf',
 	'team-2BL-2015': 'div/Mannschaftsaufstellung_2BL-2015.pdf',
 	'teamlist-1BL-2016': 'div/teamlists/teamlist-1BL-2016.html',
@@ -51,7 +51,7 @@ var EXTERNAL_DOWNLOAD_SHEETS = {
 	'DBV-Satzungen-2016': true,
 	'RLN-Satzungen-2016': true,
 	'RLM-SpO-2015': true,
-	'NRW-Satzungen-2016': true,
+	'NRW-Satzungen': true,
 };
 
 

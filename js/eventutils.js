@@ -195,7 +195,7 @@ function annotate(s, event) {
 	});
 }
 
-var NRW2016_RE = /^NRW-(O19)-(?:(?:([NS])([12]))-)?([A-Z]{2})-([0-9]{3})-2016$/;
+var NRW2016_RE = /^NRW-(O19)-(?:(?:([NS])([12]))-)?([A-Z]{2})-([0-9]{3})-(?:2016|2017)$/;
 function name_by_league(league_key) {
 	if (/^1BL-(?:2015|2016|2017)$/.test(league_key)) {
 		return '1. Bundesliga';
