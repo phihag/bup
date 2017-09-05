@@ -1,7 +1,5 @@
 test nrwdemo: setupsheet etc.
 
-displaymode: make cursor vanish after a while
-	make sure no cursor either in dads
 refmode: visible warning if no crypto.subtle
 NLA:go through ch vocabulary
 NLA scoresheet
@@ -176,7 +174,6 @@ Wettkampfstatistik
 	pauses
 
 block middle buttons like any other-> Jörg Hupertz
-cursor in fullscreen display should be none if settings are not visible (Chrome / Mac OS)
 error teamtext_internal bei Tablet wenn referee mode spiel auf incomplete ändert
 displaymode.option_applies for colors
 prevent going into incomplete match (update first, retry, if not then error)

@@ -19,6 +19,28 @@ var ALL_STYLES = [
 ];
 var ALL_COLORS = ['c0', 'c1', 'cbg', 'cfg', 'cbg2', 'cbg3', 'cbg4', 'cfg2', 'ct', 'cserv', 'crecv', 'cborder', 'ctim_blue', 'ctim_active'];
 
+var _hide_cursor_timeout;
+
+function show_cursor() {
+	if (_hide_cursor_timeout) {
+		clearTimeout(_hide_cursor_timeout);
+	} else {
+		var d_container = uiu.qs('.displaymode_layout');
+		var ads_container = uiu.qs('.d_ads');
+		d_container.style.cursor = 'default';
+		ads_container.style.cursor = 'default';
+	}
+	_hide_cursor_timeout = setTimeout(hide_cursor, 5000);
+}
+
+function hide_cursor() {
+	_hide_cursor_timeout = null;
+	var d_container = uiu.qs('.displaymode_layout');
+	var ads_container = uiu.qs('.d_ads');
+	d_container.style.cursor = 'none';
+	ads_container.style.cursor = 'none';
+}
+
 function _setup_autosize(el, right_node, determine_height) {
 	autosize.maintain(el, function() {
 		var parent_node = el.parentNode;
@@ -1908,6 +1930,11 @@ function ui_init(s, hash_query) {
 			d_c1: tc[1],
 		});
 	});
+
+	var d_container = uiu.qs('.displaymode_layout');
+	d_container.addEventListener('mousemove', show_cursor);
+	var ads_container = uiu.qs('.d_ads');
+	ads_container.addEventListener('mousemove', show_cursor);
 }
 
 function active_colors(style_id) {
