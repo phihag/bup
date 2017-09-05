@@ -1758,6 +1758,7 @@ function update(err, s, event) {
 	if (utils.deep_equal(cur_event_hash, _last_painted_hash)) {
 		return;
 	}
+	_last_painted_hash = cur_event_hash;
 
 	var new_settings_hash = utils.hash_new(_last_settings_hash, s.settings);
 	if (new_settings_hash) {
