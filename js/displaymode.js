@@ -17,7 +17,7 @@ var ALL_STYLES = [
 	'tournament_overview',
 	'andre',
 ];
-var ALL_COLORS = ['c0', 'c1', 'cbg', 'cfg', 'cbg2', 'cbg3', 'cbg4', 'cfg2', 'ct', 'cserv', 'crecv', 'cborder', 'ctim_blue', 'ctim_active'];
+var ALL_COLORS = ['c0', 'c1', 'cbg', 'cfg', 'cbg2', 'cbg3', 'cbg4', 'cfg2', 'cfg3', 'ct', 'cserv', 'cserv2', 'crecv', 'cborder', 'ctim_blue', 'ctim_active'];
 
 var _hide_cursor_timeout;
 
@@ -679,11 +679,96 @@ function render_html_list(container, event) {
 	});
 }
 
-function render_oncourt(s, container, event, court) {
+function render_oncourt(s, container, event, court, match, colors) {
 	var oncourt_container = uiu.el(container, 'div', {
 		'class': 'd_oncourt',
+		style: (
+			'background:' + colors.bg + ';' +
+			'color:' + colors.fg + ';'
+		),
 	});
-	_render_court_display(oncourt_container, event, court, 0);
+
+	var nscore = extract_netscore(match);
+	var current_score = (nscore.length > 0) ? nscore[nscore.length - 1] : ['', ''];
+	var server = determine_server(match, current_score);
+	var team_names = event.team_names || [];
+	var setup = match.setup;
+	var prev_scores = nscore.slice(0, -1);
+	var server = determine_server(match, current_score);
+
+	function _render_team(team_id) {
+		var team = setup.teams[team_id];
+
+		var pnames = _player_names(team, setup.is_doubles);
+		var player_container = uiu.el(oncourt_container, 'div', {
+			'class': (setup.is_doubles ? 'dcs_player_names_doubles' : 'dcs_player_names_singles'),
+		});
+		pnames.forEach(function(pname, player_id) {
+			var is_serving = (team_id === server.team_id) && (player_id === server.player_id);
+			var player_name_container = uiu.el(player_container, 'div', {
+				'class': 'dcs_player_name',
+				'style': (is_serving ? 'color:' + colors.cserv2 + ';' : ''),
+			});
+			var player_name_span = uiu.el(
+				player_name_container, 'span', {}, pname);
+			_setup_autosize(player_name_span, score_els[team_id]);
+		});
+	}
+
+	var top_current_score = uiu.el(oncourt_container, 'div', {
+		'class': 'dcs_current_score_top',
+	}, current_score[0]);
+	var bottom_current_score = uiu.el(oncourt_container, 'div', {
+		'class': 'dcs_current_score_bottom',
+	}, current_score[1]);
+	var score_els = [top_current_score, bottom_current_score];
+
+	_render_team(0);
+
+	var top_row = uiu.el(oncourt_container, 'div', {
+		'class': 'dcs_team_row dcs_team_row_top',
+	});
+	var top_prev_scores_container = uiu.el(top_row, 'div', {
+		'class': 'dcs_prev_scores_top',
+	});
+	prev_scores.forEach(function(ps) {
+		uiu.el(top_prev_scores_container, 'div', {
+			'style': ((ps[0] > ps[1]) ? 'color:' + colors.serv2 + ';' : ''),
+		}, ps[0]);
+	});
+	var top_team_el = uiu.el(top_row, 'div', {
+		'class': 'dcs_team_name',
+		'style': (
+			'color:' + colors.fg3 + ';'
+		),
+	});
+	var top_team_span = uiu.el(top_team_el, 'span', {}, team_names[0]);
+
+	var bottom_row = uiu.el(oncourt_container, 'div', {
+		'class': 'dcs_team_row dcs_team_row_bottom',
+	});
+	var bottom_prev_scores_container = uiu.el(bottom_row, 'div', {
+		'class': 'dcs_prev_scores_bottom',
+	});
+	prev_scores.forEach(function(ps) {
+		uiu.el(bottom_prev_scores_container, 'div', {
+			'class': ((ps[1] > ps[0]) ? 'dcs_prev_score_won' : 'dcs_prev_score_lost'),
+		}, ps[1]);
+	});
+	var bottom_team = setup.teams[1];
+	var bottom_team_el = uiu.el(bottom_row, 'div', {
+		'class': 'dcs_team_name',
+		'style': (
+			'color:' + colors.fg3 + ';'
+		),
+	});
+	var bottom_team_span = uiu.el(bottom_team_el, 'span', {}, team_names[1]);
+
+	_render_team(1);
+
+	_setup_autosize(top_team_span);
+	_setup_autosize(bottom_team_span);
+
 }
 
 function _gamescore_from_netscore(netscore, setup) {
@@ -1744,6 +1829,7 @@ function update(err, s, event) {
 		clubplayers: render_clubplayers,
 		clubplayerslr: render_clubplayerslr,
 		international: render_international,
+		oncourt: render_oncourt,
 		onlyplayers: render_onlyplayers,
 		onlyscore: render_onlyscore,
 		stripes: render_stripes,
@@ -1781,17 +1867,6 @@ function update(err, s, event) {
 		}
 
 		xfunc(s, container, event, court, match, colors);
-		return;
-	}
-
-	var func = {
-		oncourt: render_oncourt,
-	}[style];
-	if (func) {
-		var court2 = _render_court(s, container, event);
-		if (court2) {
-			func(s, container, event, court2);
-		}
 		return;
 	}
 
@@ -1956,7 +2031,7 @@ function option_applies(style_id, option_name) {
 		clubplayers: ['court_id', 'c0', 'c1', 'cbg'],
 		clubplayerslr: ['court_id', 'c0', 'c1', 'cbg'],
 		international: ['court_id', 'c0', 'c1', 'cfg', 'cbg'],
-		oncourt: ['court_id'],
+		oncourt: ['court_id', 'cfg', 'cfg3', 'cbg', 'cserv2'],
 		onlyplayers: ['court_id', 'c0', 'c1', 'cbg'],
 		onlyscore: ['court_id', 'c0', 'c1', 'cbg'],
 		teamcourt: ['court_id', 'c0', 'c1', 'cfg', 'cfg2', 'cbg'],

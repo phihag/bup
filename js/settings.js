@@ -19,11 +19,13 @@ var default_settings = {
 	d_cbg3: '#252525',
 	d_cbg4: '#404040',
 	d_cfg2: '#aaaaaa',
+	d_cfg3: '#cccccc',
 	d_cborder: '#444444',
 	d_ct: '#80ff00',
 	d_ctim_blue: '#0070c0',
 	d_ctim_active: '#ffc000',
 	d_cserv: '#fff200',
+	d_cserv2: '#dba766',
 	d_crecv: '#707676',
 	d_scale: 100,
 	dads_interval: 15000,
@@ -196,6 +198,7 @@ var _settings_textfields = [
 	'd_ctim_active',
 	'd_ctim_blue',
 	'd_cserv',
+	'd_cserv2',
 	'd_crecv',
 ];
 var _settings_numberfields = [
