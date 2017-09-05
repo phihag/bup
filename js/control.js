@@ -364,14 +364,14 @@ function ui_show_exception_dialog() {
 	uiu.visible_qs('#exception_walkover_container', !players_present);
 	uiu.visible_qs('#exception_overrule_container', players_present);
 
-	uiu.esc_stack_push(function() {
+	bupui.esc_stack_push(function() {
 		hide_exception_dialog();
 	});
 }
 
 function hide_exception_dialog() {
 	uninstall_destructor(state, hide_exception_dialog);
-	uiu.esc_stack_pop();
+	bupui.esc_stack_pop();
 	$('#exception_wrapper').hide();
 }
 

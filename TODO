@@ -1,10 +1,9 @@
-NLA
-	go through ch vocabulary
-
-refmode: visible warning if no crypto.subtle
-
-option to reset colors
 test nrwdemo: setupsheet etc.
+
+displaymode: make cursor vanish after a while
+	make sure no cursor either in dads
+refmode: visible warning if no crypto.subtle
+NLA:go through ch vocabulary
 NLA scoresheet
 miniserver: check chunking - do we need to call end
 direct link for zero-config eventsheets (show progress there)
@@ -21,8 +20,6 @@ improve dads
 	add type: refrath-gegen
 	configure on referee
 	switch to indexed db
-displaymode: make cursor vanish after a while
-	make sure no cursor either in dads
 order: print with background graphics
 mo: make del button nicer
 Aufstellung:
@@ -32,6 +29,7 @@ Aufstellung:
 store order change in demo
 store order change in courtspot
 
+displaymode: option to reset colors
 dayimport in normal import view (unify with #mo import)
 automatic testing to see that setupsheet works (with browser)
 d/onlyplayers: correctly handle case where no icon is present (at the moment 404)

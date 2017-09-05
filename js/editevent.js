@@ -251,7 +251,7 @@ function show() {
 	}
 
 	state.ui.editevent_visible = true;
-	uiu.esc_stack_push(hide_and_back);
+	bupui.esc_stack_push(hide_and_back);
 	control.set_current(state);
 
 	uiu.visible_qs('.editevent_layout', true);
@@ -319,7 +319,7 @@ function hide() {
 		return;
 	}
 
-	uiu.esc_stack_pop();
+	bupui.esc_stack_pop();
 	state.ui.editevent_visible = false;
 	uiu.visible_qs('.editevent_layout', false);
 	return true;
@@ -359,6 +359,7 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var bupui = require('./bupui');
 	var click = require('./click');
 	var control = require('./control');
 	var eventutils = require('./eventutils');

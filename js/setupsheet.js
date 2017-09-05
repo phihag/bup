@@ -604,7 +604,7 @@ function show() {
 	}
 
 	state.ui.setupsheet_visible = true;
-	uiu.esc_stack_push(ask_hide_and_back);
+	bupui.esc_stack_push(ask_hide_and_back);
 	control.set_current(state);
 
 	uiu.visible_qs('.setupsheet_layout', true);
@@ -630,7 +630,7 @@ function hide() {
 		return;
 	}
 
-	uiu.esc_stack_pop();
+	bupui.esc_stack_pop();
 	state.ui.setupsheet_visible = false;
 	uiu.visible_qs('.setupsheet_layout', false);
 	return true;
@@ -702,6 +702,7 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var bupui = require('./bupui');
 	var click = require('./click');
 	var control = require('./control');
 	var downloader = require('./downloader');

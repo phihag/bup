@@ -138,7 +138,7 @@ function show() {
 	settings.hide(true);
 
 	state.ui.netstats_visible = true;
-	uiu.esc_stack_push(hide);
+	bupui.esc_stack_push(hide);
 	control.set_current(state);
 
 	uiu.visible_qs('.netstats_layout', true);
@@ -150,7 +150,7 @@ function hide() {
 		return;
 	}
 
-	uiu.esc_stack_pop();
+	bupui.esc_stack_pop();
 	uiu.visible_qs('.netstats_layout', false);
 	state.ui.netstats_visible = false;
 	control.set_current(state);
@@ -196,6 +196,7 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var bupui = require('./bupui');
 	var click = require('./click');
 	var control = require('./control');
 	var network = require('./network');

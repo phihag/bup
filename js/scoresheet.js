@@ -971,7 +971,7 @@ function event_show() {
 	settings.hide(true);
 	stats.hide();
 	render.hide();
-	uiu.esc_stack_push(hide);
+	bupui.esc_stack_push(hide);
 
 	var container = uiu.qs('.scoresheet_container');
 	$(container).children('.scoresheet').remove();
@@ -1006,7 +1006,7 @@ function show() {
 	stats.hide();
 	render.hide();
 
-	uiu.esc_stack_push(hide);
+	bupui.esc_stack_push(hide);
 
 	uiu.removeClass_qs('.scoresheet_container', 'scoresheet_container_multi');
 	uiu.qs('#scoresheet_note_input').focus();
@@ -1037,7 +1037,7 @@ function hide() {
 	state.ui.event_scoresheets_visible = false;
 	control.set_current(state);
 
-	uiu.esc_stack_pop();
+	bupui.esc_stack_pop();
 	var $container = $('.scoresheet_container');
 	$container.hide();
 	$container.removeClass('event_scoresheet_container');
@@ -1189,6 +1189,7 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var bupui = require('./bupui');
 	var calc = require('./calc');
 	var click = require('./click');
 	var compat = require('./compat');

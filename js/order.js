@@ -251,7 +251,7 @@ function show(enable_edit) {
 	}
 
 	state.ui[k] = true;
-	uiu.esc_stack_push(hide);
+	bupui.esc_stack_push(hide);
 	control.set_current(state);
 
 	uiu.visible_qs('.order_layout', true);
@@ -690,7 +690,7 @@ function hide() {
 		return;
 	}
 
-	uiu.esc_stack_pop();
+	bupui.esc_stack_pop();
 	uiu.hide_qs('.order_layout');
 	state.ui.order_visible = false;
 	state.ui.mo_visible = false;
@@ -764,6 +764,7 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var bupui = require('./bupui');
 	var click = require('./click');
 	var control = require('./control');
 	var eventutils = require('./eventutils');

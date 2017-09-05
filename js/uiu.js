@@ -2,25 +2,6 @@
 var uiu = (function() {
 'use strict';
 
-var esc_stack = [];
-function esc_stack_push(cancel) {
-	esc_stack.push(cancel);
-	Mousetrap.bind('escape', function() {
-		cancel();
-	});
-}
-
-function esc_stack_pop() {
-	esc_stack.pop();
-	Mousetrap.unbind('escape');
-	var cancel = esc_stack[esc_stack.length - 1];
-	if (esc_stack.length > 0) {
-		Mousetrap.bind('escape', function() {
-			cancel();
-		});
-	}
-}
-
 function qsEach(selector, func, container) {
 	if (!container) {
 		container = document;
@@ -233,8 +214,6 @@ return {
 	disabled_qsa: disabled_qsa,
 	empty: empty,
 	el: el,
-	esc_stack_pop: esc_stack_pop,
-	esc_stack_push: esc_stack_push,
 	hasClass: hasClass,
 	hide: hide,
 	hide_qs: hide_qs,

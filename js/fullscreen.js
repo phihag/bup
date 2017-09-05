@@ -81,7 +81,7 @@ function autostart() {
 		return;
 	}
 	var go_fullscreen_hide = function() {
-		uiu.esc_stack_pop();
+		bupui.esc_stack_pop();
 		uiu.hide_qs('#go_fullscreen_wrapper');
 	};
 
@@ -94,7 +94,7 @@ function autostart() {
 		toggle();
 		go_fullscreen_hide();
 	});
-	uiu.esc_stack_push(go_fullscreen_hide);
+	bupui.esc_stack_push(go_fullscreen_hide);
 
 	uiu.show_qs('#go_fullscreen_wrapper', true);
 }
@@ -112,6 +112,7 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var bupui = require('./bupui');
 	var click = require('./click');
 	var uiu = require('./uiu');
 

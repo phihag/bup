@@ -802,7 +802,7 @@ function show() {
 	if (state.ui.stats_visible) {
 		return;
 	}
-	uiu.esc_stack_push(hide);
+	bupui.esc_stack_push(hide);
 
 	state.ui.stats_visible = true;
 	control.set_current(state);	
@@ -831,7 +831,7 @@ function hide() {
 		return;
 	}
 
-	uiu.esc_stack_pop();
+	bupui.esc_stack_pop();
 	uiu.hide_qs('.stats_layout');
 	state.ui.stats_visible = false;
 	control.set_current(state);
@@ -886,6 +886,7 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var bupui = require('./bupui');
 	var calc = require('./calc');
 	var click = require('./click');
 	var control = require('./control');

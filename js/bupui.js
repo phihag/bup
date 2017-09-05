@@ -1,6 +1,25 @@
 'use strict';
 var bupui = (function() {
 
+var esc_stack = [];
+function esc_stack_push(cancel) {
+	esc_stack.push(cancel);
+	Mousetrap.bind('escape', function() {
+		cancel();
+	});
+}
+
+function esc_stack_pop() {
+	esc_stack.pop();
+	Mousetrap.unbind('escape');
+	var cancel = esc_stack[esc_stack.length - 1];
+	if (esc_stack.length > 0) {
+		Mousetrap.bind('escape', function() {
+			cancel();
+		});
+	}
+}
+
 // Returns a function to cancel the dialog
 function make_pick(s, label, values, on_pick, on_cancel, container, select_at) {
 	if (! container) {
@@ -163,6 +182,8 @@ function add_player_pick(s, container, type, team_id, player_id, on_click, namef
 
 return {
 	add_player_pick: add_player_pick,
+	esc_stack_pop: esc_stack_pop,
+	esc_stack_push: esc_stack_push,
 	make_pick: make_pick,
 	make_player_pick: make_player_pick,
 	make_team_pick: make_team_pick,

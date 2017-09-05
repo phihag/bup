@@ -76,7 +76,7 @@ function show_displaymode() {
 	}
 	state.ui.displaymode_settings_visible = true;
 	uiu.visible_qs('#settings_wrapper', true);	
-	uiu.esc_stack_push(hide_displaymode);
+	bupui.esc_stack_push(hide_displaymode);
 }
 
 function hide_displaymode() {
@@ -85,7 +85,7 @@ function hide_displaymode() {
 	}
 	state.ui.displaymode_settings_visible = false;
 	uiu.visible_qs('#settings_wrapper', false);
-	uiu.esc_stack_pop();
+	bupui.esc_stack_pop();
 }
 
 function toggle_displaymode() {
@@ -124,7 +124,7 @@ function show() {
 		uiu.show_qs('.setup_show_manual');
 		_network_hide_cb = network.ui_list_matches(state);
 	}
-	uiu.esc_stack_push(function() {
+	bupui.esc_stack_push(function() {
 		hide();
 	});
 	match_storage.ui_init();
@@ -146,7 +146,7 @@ function hide(force, skip_state) {
 
 	state.ui.settings_visible = false;
 	uiu.visible_qs('#settings_wrapper', false);
-	uiu.esc_stack_pop();
+	bupui.esc_stack_pop();
 	if (!skip_state) {
 		control.set_current(state);
 	}
@@ -470,6 +470,7 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var bupui = require('./bupui');
 	var click = require('./click');
 	var control = require('./control');
 	var dads = require('./dads');

@@ -342,7 +342,7 @@ function show() {
 	displaymode.hide();
 	state.ui.dads_visible = true;
 	control.set_current(state);
-	uiu.esc_stack_push(back2displaymode);
+	bupui.esc_stack_push(back2displaymode);
 	uiu.qs('body').addEventListener('paste', paste_handler);
 
 	ui_make_config(state, uiu.qs('body'));
@@ -527,6 +527,7 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var bupui = require('./bupui');
 	var click = require('./click');
 	var control = require('./control');
 	var displaymode = require('./displaymode');
