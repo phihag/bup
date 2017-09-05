@@ -1,3 +1,5 @@
+btde: editevent fails!
+
 refmode: visible warning if no crypto.subtle
 NLA:go through ch vocabulary
 NLA scoresheet
@@ -13,7 +15,7 @@ improve dads
 	ad during intervals
 	add type: text (z.B. "gute Heimreise", "nächstes Heimspiel")
 	add type: refrath-gegen
-	configure on referee
+	configure on referee!
 	switch to indexed db
 order: print with background graphics
 mo: make del button nicer

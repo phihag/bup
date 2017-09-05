@@ -498,6 +498,14 @@ function cmp_key(key) {
 	};
 }
 
+function urlencode(obj) {
+	var res = '';
+	for (var k in obj) {
+		res += (res ? '&' : '') + encodeURIComponent(k) + '=' + encodeURIComponent(obj[k]);
+	}
+	return res;
+}
+
 return {
 	any: any,
 	brightness: brightness,
@@ -544,6 +552,7 @@ return {
 	svg_el: svg_el,
 	time_str: time_str,
 	timesecs_str: timesecs_str,
+	urlencode: urlencode,
 	unhex: unhex,
 	uuid: uuid,
 	values: values,

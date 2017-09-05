@@ -405,7 +405,8 @@ function on_edit_event(s, cb) {
 	var data = calc_setup_data(s.event);
 	_request(s, 'btde.changeevent', {
 		url: baseurl + 'login/start.php',
-		data: data,
+		data: utils.urlencode(data),
+		contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 		method: 'post',
 	}, function(err) {
 		if (err) {
