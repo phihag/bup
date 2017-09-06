@@ -78,6 +78,13 @@ function gen_data(s) {
 		data['HeimSatz' + (i+1)] = (i < netscore.length) ? netscore[i][0] : -1;
 		data['GastSatz' + (i+1)] = (i < netscore.length) ? netscore[i][1] : -1;
 	}
+
+	// Workaround: always report -1 for 5 games
+	for (i = s.match.max_games;i < 5;i++) {
+		data['HeimSatz' + (i+1)] = -1;
+		data['GastSatz' + (i+1)] = -1;
+	}
+
 	return data;
 }
 
