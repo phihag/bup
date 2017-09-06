@@ -152,8 +152,9 @@ function annotate(s, event) {
 		event_name: event.event_name,
 		team_competition: event.team_competition,
 		neutral_ground: event.neutral_ground,
+		counting: event.counting,
 	};
-	if (league_key) {
+	if (league_key && !event.counting) {
 		props.counting = default_counting(league_key);
 	}
 	event.matches.forEach(function(m) {

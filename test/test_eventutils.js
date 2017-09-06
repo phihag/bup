@@ -636,5 +636,71 @@ _describe('eventutils', function() {
 		assert.deepStrictEqual(bup.eventutils.get_min_pause('NLA-2017'), 900000);
 		assert.deepStrictEqual(bup.eventutils.get_min_pause('OBL-2017'), 900000);
 	});
+
+	_it('annotate', function() {
+		var s = {}
+		var ev = {
+			league_key: '1BL-2017',
+			matches: [{
+				setup: {
+					match_id: 'test_foo',
+				},
+			}],
+		};
+		bup.eventutils.annotate(s, ev);
+		assert.deepStrictEqual(ev.matches[0].setup.counting, '5x11_15^90');
+
+		// Match details should not be overwritten
+		ev = {
+			league_key: '1BL-2017',
+			matches: [{
+				setup: {
+					match_id: 'test_foo',
+					counting: '1x21',
+				},
+			}],
+		};
+		bup.eventutils.annotate(s, ev);
+		assert.deepStrictEqual(ev.matches[0].setup.counting, '1x21');
+
+		// counting works as well
+		ev = {
+			counting: '5x11_11',
+			matches: [{
+				setup: {
+					match_id: 'test_foo',
+				},
+			}],
+		};
+		bup.eventutils.annotate(s, ev);
+		assert.deepStrictEqual(ev.matches[0].setup.counting, '5x11_11');
+	
+		// counting supercedes league_key
+		ev = {
+			counting: '5x11_11',
+			league_key: '1BL-2017',
+			matches: [{
+				setup: {
+					match_id: 'test_foo',
+				},
+			}],
+		};
+		bup.eventutils.annotate(s, ev);
+		assert.deepStrictEqual(ev.matches[0].setup.counting, '5x11_11');
+
+		// match counting supercedes event counting
+		ev = {
+			counting: '5x11_11',
+			league_key: '1BL-2017',
+			matches: [{
+				setup: {
+					match_id: 'test_foo',
+					counting: '3x21',
+				},
+			}],
+		};
+		bup.eventutils.annotate(s, ev);
+		assert.deepStrictEqual(ev.matches[0].setup.counting, '3x21');
+	});
 });
 
