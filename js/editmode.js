@@ -49,7 +49,7 @@ function ui_init() {
 		}
 		settings.hide();
 	});
-	$('#court').on('click', function(e) {
+	uiu.qs('#court').addEventListener('click', function(e) {
 		if ((e.target.tagName.toLowerCase() == 'button') || (e.target.parentNode.tagName.toLowerCase() == 'button')) {
 			return;
 		}
