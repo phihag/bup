@@ -1,7 +1,7 @@
 var i18n_de = {
 
 '_code': 'de',
-'_name': 'Deutsch',
+'_name': 'Deutsch (Deutschland)',
 
 
 'experimental': ' (experimentell)',
