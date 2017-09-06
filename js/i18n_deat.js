@@ -4,10 +4,10 @@ var i18n_deat = {
 '_name': 'Deutsch (Österreich)',
 '_fallback': 'de',
 
-'game point': 'Satzpunkt',
-'match point': 'Spielpunkt',
-'scoredisplay:Game Point': 'Satzpunkt',
-'scoredisplay:Match Point': 'Spielpunkt',
+'game point': 'Satzball',
+'match point': 'Matchball',
+'scoredisplay:Game Point': 'Satzball',
+'scoredisplay:Match Point': 'Matchball',
 
 };
 
