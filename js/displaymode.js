@@ -680,93 +680,101 @@ function render_html_list(container, event) {
 }
 
 function render_oncourt(s, container, event, court, match, colors) {
-	var oncourt_container = uiu.el(container, 'div', {
-		'class': 'd_oncourt',
-		style: (
-			'background:' + colors.bg + ';' +
-			'color:' + colors.fg + ';'
-		),
-	});
-
 	var nscore = extract_netscore(match);
 	var current_score = (nscore.length > 0) ? nscore[nscore.length - 1] : ['', ''];
 	var server = determine_server(match, current_score);
 	var team_names = event.team_names || [];
 	var setup = match.setup;
 	var prev_scores = nscore.slice(0, -1);
+	var autosizes = [];
+
+	var outer_container = uiu.el(container, 'div', {
+		style: (
+			'background:' + colors.bg + ';' +
+			'color:' + colors.fg + ';' +
+			'width: 100%;height:100%;' +
+			'display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;'
+		),
+	});
+	var oncourt_container = uiu.el(outer_container, 'div', {
+		style: 'position:relative;',
+	});
 
 	function _render_team(team_id) {
 		var team = setup.teams[team_id];
 
 		var pnames = _player_names(team, setup.is_doubles);
 		var player_container = uiu.el(oncourt_container, 'div', {
-			'class': (setup.is_doubles ? 'dcs_player_names_doubles' : 'dcs_player_names_singles'),
+			'style': (
+				'height:30vh;' +
+				(setup.is_doubles ?
+					'' :
+					'display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;'
+				)
+			),
 		});
 		pnames.forEach(function(pname, player_id) {
 			var is_serving = (team_id === server.team_id) && (player_id === server.player_id);
 			var player_name_container = uiu.el(player_container, 'div', {
-				'class': 'dcs_player_name',
-				'style': (is_serving ? 'color:' + colors.cserv2 + ';' : ''),
+				'style': (
+					'height: 15vmin;font-size:12vmin;' +
+					'white-space:pre;' +
+					(is_serving ? 'color:' + colors.cserv2 + ';' : '')
+				),
 			});
 			var player_name_span = uiu.el(
 				player_name_container, 'span', {}, pname);
-			_setup_autosize(player_name_span, score_els[team_id]);
+			autosizes.push({el: player_name_span, right_node: score_els[team_id]});
 		});
 	}
 
 	var top_current_score = uiu.el(oncourt_container, 'div', {
-		'class': 'dcs_current_score_top',
+		'style': (
+			'position:absolute;right:0;top:0;' +
+			'font-size: 32vmin;line-height: 32vmin;'
+		),
 	}, current_score[0]);
 	var bottom_current_score = uiu.el(oncourt_container, 'div', {
-		'class': 'dcs_current_score_bottom',
+		'style': (
+			'position:absolute;right:0;bottom:0;' +
+			'font-size: 32vmin;line-height: 32vmin;'
+		),
 	}, current_score[1]);
 	var score_els = [top_current_score, bottom_current_score];
 
 	_render_team(0);
 
-	var top_row = uiu.el(oncourt_container, 'div', {
-		'class': 'dcs_team_row dcs_team_row_top',
+	var middle_table = uiu.el(oncourt_container, 'table', {
+		style: 'table-layout:fixed;width:100%;',
 	});
-	var top_prev_scores_container = uiu.el(top_row, 'div', {
-		'class': 'dcs_prev_scores_top',
-	});
-	prev_scores.forEach(function(ps) {
-		uiu.el(top_prev_scores_container, 'div', {
-			'style': ((ps[0] > ps[1]) ? 'color:' + colors.serv2 + ';' : ''),
-		}, ps[0]);
-	});
-	var top_team_el = uiu.el(top_row, 'div', {
-		'class': 'dcs_team_name',
-		'style': (
-			'color:' + colors.fg3 + ';'
-		),
-	});
-	var top_team_span = uiu.el(top_team_el, 'span', {}, team_names[0]);
+	team_names.forEach(function(team_name, team_id) {
+		var tr = uiu.el(middle_table, 'tr', {
+			style: 'height:11vmin;',
+		});
+		var name_td = uiu.el(tr, 'td', {
+			style: (
+				'color:' + colors.fg3 + ';' +
+				'font-size:10vmin;'
+			),
+		});
+		var team_span = uiu.el(name_td, 'span', {}, team_name);
+		autosizes.push({el: team_span});
 
-	var bottom_row = uiu.el(oncourt_container, 'div', {
-		'class': 'dcs_team_row dcs_team_row_bottom',
+		prev_scores.forEach(function(ps) {
+			uiu.el(tr, 'td', {
+				'style': (
+					((ps[team_id] > ps[1 - team_id]) ? 'color:' + colors.serv2 + ';' : '') +
+					'font-size:10vmin;text-align:right;width:3ch;'
+				),
+			}, ps[team_id]);
+		});
 	});
-	var bottom_prev_scores_container = uiu.el(bottom_row, 'div', {
-		'class': 'dcs_prev_scores_bottom',
-	});
-	prev_scores.forEach(function(ps) {
-		uiu.el(bottom_prev_scores_container, 'div', {
-			'class': ((ps[1] > ps[0]) ? 'dcs_prev_score_won' : 'dcs_prev_score_lost'),
-		}, ps[1]);
-	});
-	var bottom_team_el = uiu.el(bottom_row, 'div', {
-		'class': 'dcs_team_name',
-		'style': (
-			'color:' + colors.fg3 + ';'
-		),
-	});
-	var bottom_team_span = uiu.el(bottom_team_el, 'span', {}, team_names[1]);
 
 	_render_team(1);
 
-	_setup_autosize(top_team_span);
-	_setup_autosize(bottom_team_span);
-
+	autosizes.forEach(function(aus) {
+		_setup_autosize(aus.el, aus.right_node);
+	});
 }
 
 function _gamescore_from_netscore(netscore, setup) {

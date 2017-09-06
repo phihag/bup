@@ -1,6 +1,15 @@
-bup error Jan!!!
-ask Jan about single-court pause time
+austrian vocabulary (de_AT: Satzball / Matchball)
+	include a test
 
+dads ads between matches -> Daniel
+displaymode: test without event counting
+support event counting
+courtspot: update bupabfrage -> Ulf
+test how displays behave sans event counting
+remove courtspot debug code
+bup error Jan!!!
+
+ask Jan about single-court pause time display
 CourtSpot: test resetting (should not fail with display on)
 Swiss Badminton logo on event sheet
 NLA scoresheet: add logo
@@ -16,14 +25,14 @@ obl
 	Logo from http://www.badminton.at/images/Logo_OEBV.png?
 
 improve dads
-	ads between matches -> Daniel
 	ad during intervals
 	add type: text (z.B. "gute Heimreise", "nächstes Heimspiel")
 	add type: refrath-gegen
 	configure on referee!
+	check all i18n of names
 	switch to indexed db
 setupsheet: default to new player if no players are available
-check imports with all leagues
+check imports of all league matches
 refmode: visible warning if no crypto.subtle
 NLA:go through ch vocabulary
 direct link for zero-config eventsheets (show progress there)
@@ -42,6 +51,9 @@ Aufstellung:
 	mail Ulf (update doc)
 store order change in demo
 store order change in courtspot
+stats: + most consecutive points
+stats: + game points
+stats: + match points
 
 displaymode: option to reset colors
 dayimport in normal import view (unify with #mo import)
@@ -829,9 +841,6 @@ export: include timestamp/date of export
 import: restrict file types
 import: gracefully handle invalid input files, put out a warning
 rename teamtext_internal to teamtext
-stats: + most consecutive points
-stats: + game points
-stats: + match points
 switch network.ui_list_event for network.subscribe
 remove all mentions of home/away
 anroid chrome address bar background color

@@ -116,45 +116,6 @@
 	height: 6vmin;
 }
 
-
-.d_oncourt {
-	position: relative;
-	margin: 5vmin 2vmin 0 2vmin;
-}
-.d_oncourt .dcs_team_row {
-	height: 12vmin;
-}
-.d_oncourt .dcs_team_row_top {
-	margin-top: 2vmin;
-	margin-bottom: 3vmin;
-}
-.d_oncourt .dcs_team_row_bottom {
-	margin-top: 3vmin;
-	margin-bottom: 2vmin;
-}
-.d_oncourt .dcs_team_name {
-	font-size: 10vmin;
-	color: #888;
-}
-.d_oncourt .dcs_current_score_top,
-.d_oncourt .dcs_current_score_bottom {
-	font-size: 32vmin;
-	line-height: 32vmin;
-}
-.d_oncourt .dcs_prev_scores_top,
-.d_oncourt .dcs_prev_scores_bottom {
-	font-size: 10vmin;
-}
-.d_oncourt .dcs_player_names_singles,
-.d_oncourt .dcs_player_names_doubles {
-	height: 30vmin;
-}
-.d_oncourt .dcs_player_name {
-	font-size: 12vmin;
-	height: 15vmin;
-}
-
-
 .display_list_container {
 	margin-top: 3.5vmin;
 	font-size: 3.2vmin;
