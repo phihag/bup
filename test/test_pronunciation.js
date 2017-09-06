@@ -36,6 +36,10 @@ function pronounce_dech(s, now) {
 	return pronounce('de-CH', s, now);
 }
 
+function pronounce_deat(s, now) {
+	return pronounce('de-AT', s, now);
+}
+
 function loveall_de(s) {
 	bup.i18n.update_state(s, 'de');
 	return bup.pronunciation.loveall_announcement(s);
@@ -1061,6 +1065,7 @@ _describe('pronunciation', function() {
 		assert.equal(pronounce_de(s), 'Aufschlagwechsel. 20 Satzpunkt 19');
 		assert.equal(pronounce_en(s), 'Service over. 20 game point 19');
 		assert.equal(pronounce_frch(s), 'Changement de service. 20 point de set 19');
+		assert.equal(pronounce_deat(s), 'Aufschlagwechsel. 20 Satzball 19');
 
 		alt_presses.push({
 			type: 'score',
@@ -1069,6 +1074,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, SINGLES_SETUP);
 		assert.equal(pronounce_de(s), '20 Satzpunkt 19');
 		assert.equal(pronounce_en(s), '20 game point 19');
+		assert.equal(pronounce_deat(s), '20 Satzball 19');
 
 		presses.push({
 			type: 'score',
@@ -1221,6 +1227,7 @@ _describe('pronunciation', function() {
 		assert.equal(pronounce_de(s), 'Aufschlagwechsel. 20 Spielpunkt 19');
 		assert.equal(pronounce_en(s), 'Service over. 20 match point 19');
 		assert.equal(pronounce_frch(s), 'Changement de service. 20 point de match 19');
+		assert.equal(pronounce_deat(s), 'Aufschlagwechsel. 20 Matchball 19');
 
 		presses.push({
 			type: 'score',
@@ -1290,6 +1297,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, SINGLES_SETUP);
 		assert.equal(pronounce_de(s), '29 Spielpunkt 28');
 		assert.equal(pronounce_en(s), '29 match point 28');
+		assert.equal(pronounce_deat(s), '29 Matchball 28');
 
 		alt_presses.push({
 			type: 'score',
