@@ -30,14 +30,19 @@ function detect_lang() {
 }
 
 function is_supported(lcode) {
-	return !! ((lcode == 'auto') || languages[lcode]);
+	return (lcode === 'auto') || !!languages[lcode];
+}
+
+function register_all() {
+	register_lang(i18n_en);
+	register_lang(i18n_de);
+	register_lang(i18n_deat);
+	register_lang(i18n_dech);
+	register_lang(i18n_frch);
 }
 
 function init() {
-	register_lang(i18n_en);
-	register_lang(i18n_de);
-	register_lang(i18n_dech);
-	register_lang(i18n_frch);
+	register_all();
 
 	var auto_code = detect_lang();
 	update_state(state, auto_code);
@@ -150,6 +155,7 @@ simple_translate.register_lang = register_lang;
 simple_translate.translate_nodes = translate_nodes;
 // Testing only
 simple_translate.languages = languages;
+simple_translate.register_all = register_all;
 return simple_translate;
 })();
 
@@ -159,15 +165,13 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var report_problem = require('./report_problem');
 	var uiu = require('./uiu');
 	var utils = require('./utils');
-
 	var i18n_de = require('./i18n_de');
-	i18n.register_lang(i18n_de);
-	var i18n_en = require('./i18n_en');
-	i18n.register_lang(i18n_en);
-	var i18n_frch = require('./i18n_frch');
-	i18n.register_lang(i18n_frch);
+	var i18n_deat = require('./i18n_deat');
 	var i18n_dech = require('./i18n_dech');
-	i18n.register_lang(i18n_dech);
+	var i18n_en = require('./i18n_en');
+	var i18n_frch = require('./i18n_frch');
+
+	i18n.register_all();
 
 	module.exports = i18n;
 }
