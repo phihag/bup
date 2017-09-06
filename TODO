@@ -1,6 +1,7 @@
-CourtSpot: courts don't get set
 bup error Jan!!!
+ask Jan about single-court pause time
 
+CourtSpot: test resetting (should not fail with display on)
 Swiss Badminton logo on event sheet
 NLA scoresheet: add logo
 	-> mail Arnauld
@@ -15,6 +16,7 @@ obl
 	Logo from http://www.badminton.at/images/Logo_OEBV.png?
 
 improve dads
+	ads between matches -> Daniel
 	ad during intervals
 	add type: text (z.B. "gute Heimreise", "nächstes Heimspiel")
 	add type: refrath-gegen

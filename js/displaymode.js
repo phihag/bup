@@ -79,7 +79,7 @@ function _calc_matchscore(matches) {
 }
 
 function _doubles_name(player) {
-	if (player.lastname) {
+	if (player.firstname && player.lastname) {
 		return player.firstname[0] + '.\xa0' + player.lastname;
 	}
 	
