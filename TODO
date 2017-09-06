@@ -1,9 +1,18 @@
+CourtSpot: courts don't get set
+bup error Jan!!!
+
+Swiss Badminton logo on event sheet
+NLA scoresheet: add logo
+	-> mail Arnauld
+	-> thank Jürgen
 manual import https://obv.tournamentsoftware.com/sport/tournament.aspx?id=8B5B8973-84CA-40D2-9450-1277233E3172
+	import all_players
+	import current players
 obl
 	create demo from https://obv.tournamentsoftware.com/sport/teammatch.aspx?id=7AAA19D0-0E65-42BF-8E03-6F1F6AE31C9A&match=19
 	eventsheet: http://www.badminton.at/files/raster/SPI_MH_5.xls
 	scoresheet: http://www.badminton.at/files/raster/SCHIRIZE.xls
-	Logo from http://www.badminton.at/images/Logo_OEBV.png
+	Logo from http://www.badminton.at/images/Logo_OEBV.png?
 
 improve dads
 	ad during intervals
@@ -11,9 +20,10 @@ improve dads
 	add type: refrath-gegen
 	configure on referee!
 	switch to indexed db
+setupsheet: default to new player if no players are available
+check imports with all leagues
 refmode: visible warning if no crypto.subtle
 NLA:go through ch vocabulary
-NLA scoresheet
 direct link for zero-config eventsheets (show progress there)
 btde-like dstyle
 manual import for 2017 Bundesliga matches

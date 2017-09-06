@@ -58,14 +58,15 @@ function parse_teammatch($tm_html) {
 		'Bundesligen 2016/17:1. Bundesliga 1. Bundesliga - PlayOff - Viertelfinale 1' => '1BL-2016',
 		'Bundesligen 2016/17:1. Bundesliga 1. Bundesliga - PlayOff - Viertelfinale 2' => '1BL-2016',
 		'TEST - Ligen - Hagemeister Mai 2017:Test LIGA - Testliga' => '1BL-2016',
+		'BundesLiga 2016-2017:Bundesliga - 1. Bundesliga' => 'OBL-2017',
 	];
 
 	$res = [];
 
 	if (\preg_match('/<h3>
-			<a\s*href="\/sport\/team\.aspx\?id=[^"]+">(?P<team0>[^<]+?)\s*\([0-9-]+\)<\/a>
+			<a\s*href="\/sport\/team\.aspx\?id=[^"]+">(?P<team0>[^<]+?)(?:\s*\([0-9-]+\))?<\/a>
 			\s*-\s*
-			<a\s*href="\/sport\/team\.aspx\?id=[^"]+">(?P<team1>[^<]+?)\s*\([0-9-]+\)<\/a>
+			<a\s*href="\/sport\/team\.aspx\?id=[^"]+">(?P<team1>[^<]+?)(?:\s*\([0-9-]+\))?<\/a>
 			/xs', $tm_html, $teamnames_m)) {
 		$res['team_names'] = [
 			decode_html($teamnames_m['team0']),
