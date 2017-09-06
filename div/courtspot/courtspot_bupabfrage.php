@@ -174,9 +174,11 @@ while ($row = $result->fetch_assoc()) {
 		'courtspot_match_id' => $row['Art'],
 		'match_id' => $match_id,
 	];
+
 	if ($counting) {
 		$setup['counting'] = $counting;
 	}
+
 	$m = [
 		'setup' => $setup,
 		'network_score' => $network_score,
@@ -243,6 +245,9 @@ $res = [
 ];
 if ($tournament_name) {
 	$res['tournament_name'] = $tournament_name;
+}
+if ($counting) {
+	$res['counting'] = $counting;
 }
 
 if (array_key_exists('all_players', $_GET)) {

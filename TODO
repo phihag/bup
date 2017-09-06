@@ -1,9 +1,4 @@
-austrian vocabulary (de_AT: Satzball / Matchball)
-	include a test
-
 dads ads between matches -> Daniel
-displaymode: test without event counting
-support event counting
 courtspot: update bupabfrage -> Ulf
 test how displays behave sans event counting
 remove courtspot debug code
@@ -64,8 +59,6 @@ bug: back from &order keeps order
 bug: black card at 0-0 with courtspot wrong netscore
 displaymode: heinz middle
 dmode Berlin
-dmode Saarbrücken
-	-> mail Janine
 support fr
 contact french (see mails Ulf)
 
