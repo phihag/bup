@@ -550,7 +550,6 @@ var i18n_frch = {
 
 'editmode:fix_time': 'Arrêtez l\'heure à',
 
-// TODO continue here
 'dads:label': 'Publicité:',
 'dads:configure': 'Configurer',
 'dads|none': 'aucun',
@@ -558,6 +557,7 @@ var i18n_frch = {
 'dads|periodic': 'périodique',
 'dads|until': 'Jusqu\'à ..',
 'dads|intervals': 'Pendant les pauses',
+'dads|inbetween': 'Entre matches',
 'dads:heading': 'Publicité',
 'dads:mode': 'Mode:',
 'dads:add image': 'Ajouter une image',
@@ -566,6 +566,7 @@ var i18n_frch = {
 'dads:back': 'Retourner',
 'dads:quota': 'La publicité n\'a pas pu être enregistrée: espace de stockage insuffisant disponible. Essayez d\'utiliser les URL au lieu des fichiers image.',
 'dads|interval': 'Intervalle de changement (s):',
+'dads|wait': 'temps d\'attente (s):',
 'dads|dtime': 'Durée du affichage (s):',
 'dads|atime': 'Durée de la publicité (s):',
 'dads:utime': 'Temps:',

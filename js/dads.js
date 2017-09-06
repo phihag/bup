@@ -2,7 +2,7 @@
 // Display ads
 var dads = (function() {
 
-var ALL_MODES = ['none', 'always', 'periodic', 'until', 'intervals'];
+var ALL_MODES = ['none', 'always', 'periodic', 'until', 'inbetween', 'intervals'];
 
 function load(s) {
 	s.dads = [];
@@ -232,6 +232,9 @@ function render_options(s, options_container) {
 			settings.change_all(s, {dads_utime: input.value});
 		});
 
+		interval_input(s, options_container, 'interval');
+	} else if (dads_mode === 'inbetween') {
+		interval_input(s, options_container, 'wait');
 		interval_input(s, options_container, 'interval');
 	} else if (dads_mode === 'intervals') {
 		interval_input(s, options_container, 'interval');
