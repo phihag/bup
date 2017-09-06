@@ -14,7 +14,6 @@ function ui_visible(val) {
 
 function enter() {
 	ui_visible(true);
-	$('.editmode_ok').attr('disabled', 'disabled');
 	state.ui.editmode_active = true;
 
 	var k = 'settings:Abort Manual Edit';

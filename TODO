@@ -1,12 +1,9 @@
+Swiss Badminton logo on event sheet
 dads ads between matches -> Daniel
-courtspot: update bupabfrage -> Ulf
-test how displays behave sans event counting
-remove courtspot debug code
 bup error Jan!!!
 
 ask Jan about single-court pause time display
 CourtSpot: test resetting (should not fail with display on)
-Swiss Badminton logo on event sheet
 NLA scoresheet: add logo
 	-> mail Arnauld
 	-> thank Jürgen
@@ -18,6 +15,7 @@ obl
 	eventsheet: http://www.badminton.at/files/raster/SPI_MH_5.xls
 	scoresheet: http://www.badminton.at/files/raster/SCHIRIZE.xls
 	Logo from http://www.badminton.at/images/Logo_OEBV.png?
+editmode scores of last games not cleared upon going in a new one with fewer games
 
 improve dads
 	ad during intervals
