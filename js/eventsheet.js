@@ -739,10 +739,11 @@ function render_nla(ev, es_key, ui8r) {
 		}
 	});
 
-	_svg_text(svg, 'sum_games0', sum_games[0]);
-	_svg_text(svg, 'sum_games1', sum_games[1]);
-	_svg_text(svg, 'sum_matches0', sum_matches[0]);
-	_svg_text(svg, 'sum_matches1', sum_matches[1]);
+	var sums_active = sum_games[0] || sum_games[1];
+	_svg_text(svg, 'sum_games0', sums_active ? sum_games[0] : '');
+	_svg_text(svg, 'sum_games1', sums_active ? sum_games[1] : '');
+	_svg_text(svg, 'sum_matches0', sums_active ? sum_matches[0] : '');
+	_svg_text(svg, 'sum_matches1', sums_active ? sum_matches[1] : '');
 	(ev.team_names || []).forEach(function(team_name, team_id) {
 		_svg_text(svg, 'teamname' + team_id, team_name);
 	});
