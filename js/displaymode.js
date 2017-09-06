@@ -1756,6 +1756,9 @@ function update(err, s, event) {
 	if (utils.deep_equal(cur_event_hash, _last_painted_hash)) {
 		return;
 	}
+
+	var changed_courts = (
+		!_last_painted_hash || !utils.deep_equal(cur_event_hash.courts, _last_painted_hash.courts));
 	_last_painted_hash = cur_event_hash;
 
 	var new_settings_hash = utils.hash_new(_last_settings_hash, s.settings);
@@ -1763,9 +1766,6 @@ function update(err, s, event) {
 		_last_settings_hash = new_settings_hash;
 		dads.d_update(uiu.qs('.d_ads'));
 	}
-
-	var changed_courts = (
-		!_last_painted_hash || !utils.deep_equal(cur_event_hash.courts, _last_painted_hash.courts));
 
 	var court_select = uiu.qs('[name="displaymode_court_id"]');
 	uiu.visible_qs('.settings_display_court_id', option_applies(style, 'court_id'));
