@@ -1,4 +1,3 @@
-Swiss Badminton logo on event sheet
 dads ads between matches -> Daniel
 bup error Jan!!!
 
@@ -25,12 +24,19 @@ improve dads
 	check all i18n of names
 	switch to indexed db
 setupsheet: default to new player if no players are available
-check imports of all league matches
+check imports
+	2017 RLN
+	2017 RLM
+	2017 RLW
+	2017 VL/OL NRW
+	2017 Bundesliga matches
+	2017 ÖBV
+	2017 NLA
+	2017 NLB
 refmode: visible warning if no crypto.subtle
 NLA:go through ch vocabulary
 direct link for zero-config eventsheets (show progress there)
 btde-like dstyle
-manual import for 2017 Bundesliga matches
 update RLM link to http://www.dbv-mitte.de/web/images/Allgemein/Gruppenordnung/Gruppe_Mitte_im_DBV_Ordnungen_20170701.pdf
 UI test to test setupsheet
 bup all_players error report setupsheet
@@ -121,8 +127,10 @@ umpire mode -> display mode -> umpire mode can show court twice
 Peter Staats -> Liga-Modus
 settings: remove duplication of color names
 displaymode: remove checks if (! event.courts) { in renderers
-
 support para rules
+
+NLA resultsheet: shuttles
+NLA resultsheet: player IDs
 Keike: court too large
 displaymode/international and others: courtspot empty shows server
 group "Wettkampf importieren" under manual match start

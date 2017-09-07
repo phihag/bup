@@ -97,11 +97,21 @@
 	text-align: left;
 }
 .setupsheet_new {
-	text-align: left;
 	padding: 0.3em 0 0.7em 0;
+}
+.setupsheet_new > form {
+	display: flex;
+	vertical-align: middle;
+	justify-content: middle;
 }
 .setupsheet_new select {
 	min-width: 12em;
+}
+.setupsheet_new input {
+	font-size: inherit;
+	min-width: 12em;
+	display: inline-block;
+	padding: 0em 0.1em;
 }
 .setupsheet_new button {
 	font-size: inherit;

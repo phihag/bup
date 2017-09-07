@@ -427,28 +427,30 @@ function rerender(s) {
 				'data-gender': gender,
 			});
 			new_form.addEventListener('submit', on_new_form_submit);
-			var new_select = uiu.el(new_form, 'select', {
-				'class': 'setupsheet_newselect_' + team_id + '_' + gender,
-				required: 'required',
-			});
+
 			var avp = available_players(s, listed_g_players, team_id, gender);
-			avp.forEach(function(ap) {
-				uiu.el(new_select, 'option', {
-					value: ap.name,
-				}, ap.name);
-			});
 			if (avp.length === 0) {
+				var text = uiu.el(new_form, 'input', {
+					'class': 'setupsheet_newselect_' + team_id + '_' + gender,
+					required: 'required',
+					placeholder: s._('setupsheet:new player|' + gender),
+				});
+			} else {
+				var new_select = uiu.el(new_form, 'select', {
+					'class': 'setupsheet_newselect_' + team_id + '_' + gender,
+					required: 'required',
+				});
+				avp.forEach(function(ap) {
+					uiu.el(new_select, 'option', {
+						value: ap.name,
+					}, ap.name);
+				});
 				uiu.el(new_select, 'option', {
-					value: '',
-					disabled: 'disabled',
-					selected: 'selected',
-				}, '');
+					value: '__add_manual',
+					'class': 'setupsheet_option_manual',
+				}, s._('setupsheet:new player|' + gender));
+				new_select.addEventListener('change', on_add_change);
 			}
-			uiu.el(new_select, 'option', {
-				value: '__add_manual',
-				'class': 'setupsheet_option_manual',
-			}, s._('setupsheet:new player|' + gender));
-			new_select.addEventListener('change', on_add_change);
 
 			uiu.el(new_form, 'button', {
 				'data-i18n': 'setupsheet:add',
