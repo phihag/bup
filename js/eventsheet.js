@@ -917,10 +917,14 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 				sheet.rm_protection();
 
 				var league_key = ev.league_key;
+				var m = /^(.*)-[0-9]+$/.exec(league_key);
+				if (m) {
+					league_key = m[1];
+				}
 				var x_location = {
-					'1BL-2016': 'E4',
-					'2BLN-2016': 'E5',
-					'2BLS-2016': 'E6',
+					'1BL': 'E4',
+					'2BLN': 'E5',
+					'2BLS': 'E6',
 				}[league_key];
 				if (x_location) {
 					sheet.text(x_location, 'X');
