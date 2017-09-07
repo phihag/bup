@@ -64,6 +64,7 @@ function get_presses(match) {
 
 function set_metadata(event) {
 	var umpires_set = {}; // Poor man's set
+	var shuttle_count = 0;
 
 	event.matches.forEach(function(match) {
 		match.md_eid = match.setup.eventsheet_id || match.setup.match_name;
@@ -73,6 +74,7 @@ function set_metadata(event) {
 		var scopy = {};
 		calc.init_state(scopy, match.setup, presses);
 		calc.state(scopy);
+		shuttle_count += scopy.match.shuttle_count;
 		var fpresses = scopy.flattened_presses;
 		if (fpresses.length > 0) {
 			match.network_match_start = fpresses[0].timestamp;
@@ -108,9 +110,14 @@ function set_metadata(event) {
 			return g.score;
 		});
 	});
+
 	var umps = Object.keys(umpires_set);
 	umps.sort();
 	event.match_umpires = umps;
+
+	if (shuttle_count) {
+		event.shuttle_count = shuttle_count;
+	}
 }
 
 function annotate(s, event) {

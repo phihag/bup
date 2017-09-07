@@ -166,7 +166,10 @@ line.dotted {
 <text x="147" y="45" class="nla_entry" id="es_svg_teamname1"></text>
 
 <!-- header -->
-<!-- TODO day -->
+<text x="124" y="35" class="nla_entry" id="es_svg_shuttle_count">99</text>
+<text x="126.25" text-anchor="middle" y="26" class="nla_entry" id="es_svg_day"></text>
+<text x="136" text-anchor="middle" y="26" class="nla_entry" id="es_svg_month"></text>
+<text x="146" text-anchor="middle" y="26" class="nla_entry" id="es_svg_year"></text>
 
 <!-- player names -->
 <text x="56" y="53.5" class="nla_entry" id="es_svg_1.HE_player0.0"></text>

@@ -748,6 +748,16 @@ function render_nla(ev, es_key, ui8r) {
 		_svg_text(svg, 'teamname' + team_id, team_name);
 	});
 
+	var now = ev.last_update || Date.now();
+	var d = new Date(now);
+	_svg_text(svg, 'day', d.getDate());
+	_svg_text(svg, 'month', d.getMonth() + 1);
+	_svg_text(svg, 'year', d.getFullYear());
+
+	if (ev.shuttle_count) {
+		_svg_text(svg, 'shuttle_count', ev.shuttle_count);
+	}
+
 	var filename = state._('Event Sheet') + ' ' + ev.event_name + '.pdf';
 	svg2pdf.save([svg], props, 'landscape', filename);
 
