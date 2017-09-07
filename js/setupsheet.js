@@ -430,7 +430,7 @@ function rerender(s) {
 
 			var avp = available_players(s, listed_g_players, team_id, gender);
 			if (avp.length === 0) {
-				var text = uiu.el(new_form, 'input', {
+				uiu.el(new_form, 'input', {
 					'class': 'setupsheet_newselect_' + team_id + '_' + gender,
 					required: 'required',
 					placeholder: s._('setupsheet:new player|' + gender),
