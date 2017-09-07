@@ -79,7 +79,7 @@ function gen_data(s) {
 		data['GastSatz' + (i+1)] = (i < netscore.length) ? netscore[i][1] : -1;
 	}
 
-	// Workaround: always report -1 for 5 games
+	// Always report -1 for 5 games
 	for (i = s.match.max_games;i < 5;i++) {
 		data['HeimSatz' + (i+1)] = -1;
 		data['GastSatz' + (i+1)] = -1;
@@ -200,6 +200,15 @@ function list_matches(s, cb) {
 		}
 
 		eventutils.annotate(s, event);
+
+		// CourtSpot sometimes set the fourth game to 0 for 3x21. Clamp network_score
+		event.matches.forEach(function(m) {
+			var max_game_count = calc.max_game_count(m.setup.counting);
+			if (m.network_score.length > max_game_count) {
+				m.network_score = m.network_score.slice(0, max_game_count);
+			}
+		});
+
 		cb(err, event);
 	});
 }
