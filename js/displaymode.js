@@ -1772,7 +1772,7 @@ function update(err, s, event) {
 	var new_settings_hash = utils.hash_new(_last_settings_hash, s.settings);
 	if (new_settings_hash) {
 		_last_settings_hash = new_settings_hash;
-		dads.d_update(uiu.qs('.d_ads'));
+		dads.d_onconfchange(uiu.qs('.d_ads'));
 	}
 
 	var court_select = uiu.qs('[name="displaymode_court_id"]');

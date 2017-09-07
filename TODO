@@ -9,6 +9,7 @@ NLA scoresheet: add logo
 manual import https://obv.tournamentsoftware.com/sport/tournament.aspx?id=8B5B8973-84CA-40D2-9450-1277233E3172
 	import all_players
 	import current players
+	import score
 obl
 	create demo from https://obv.tournamentsoftware.com/sport/teammatch.aspx?id=7AAA19D0-0E65-42BF-8E03-6F1F6AE31C9A&match=19
 	eventsheet: http://www.badminton.at/files/raster/SPI_MH_5.xls

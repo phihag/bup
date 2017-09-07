@@ -478,7 +478,7 @@ function update_utime(s, container) {
 }
 
 // Gets called when the configuration has changed
-function d_update(container) {
+function d_onconfchange(container) {
 	var s = state;
 	var mode = s.settings.dads_mode;
 
@@ -521,7 +521,7 @@ return {
 	ui_init: ui_init,
 	show: show,
 	hide: hide,
-	d_update: d_update,
+	d_onconfchange: d_onconfchange,
 	d_hide: d_hide,
 	on_style_change: on_style_change,
 };
