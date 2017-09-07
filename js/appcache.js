@@ -1,7 +1,7 @@
-var appcache = (function() {
 'use strict';
+var appcache = (function() {
 
-var AUTOUPDATE_WITHIN = 1000;
+var AUTOUPDATE_WITHIN = 2000;
 var bup_start_time = Date.now();
 
 function update_now() {
