@@ -55,7 +55,7 @@ function gen_data(s) {
 		(s.game.teams_player1_even[0] !== null) &&
 		(s.game.teams_player1_even[1] !== null));
 
-	if (!side_is_determined) {
+	if (!side_is_determined && !s.match.finished) {
 		netscore = [];
 	}
 
