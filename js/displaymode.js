@@ -1915,7 +1915,7 @@ function show() {
 
 	control.set_current(state);
 	uiu.show_qs('.displaymode_layout');
-	dads.d_update(uiu.qs('.d_ads'));
+	dads.d_onconfchange(uiu.qs('.d_ads'));
 	uiu.addClass_qs('.settings_layout', 'settings_layout_displaymode');
 
 	update({
