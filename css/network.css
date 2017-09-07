@@ -34,6 +34,7 @@
 	margin: 0 0 1vh 0;
 }
 .network_desync_errmsg {
+	user-select: auto;
 	text-align: left;
 	clear: left;
 	color: red;
