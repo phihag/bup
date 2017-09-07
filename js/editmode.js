@@ -98,7 +98,7 @@ function ui_init() {
 
 function hide_inputs(since_game) {
 	uiu.qsEach('.editmode_score', function(n) {
-		$(n).removeClass('editmode_invalid');
+		uiu.removeClass(n, 'editmode_invalid');
 		var game_index = parseInt(n.getAttribute('data-game-index'), 10);
 		uiu.visible(n, game_index < since_game);
 	});
