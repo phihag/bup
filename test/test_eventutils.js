@@ -638,7 +638,7 @@ _describe('eventutils', function() {
 	});
 
 	_it('annotate', function() {
-		var s = {}
+		var s = {};
 		var ev = {
 			league_key: '1BL-2017',
 			matches: [{
