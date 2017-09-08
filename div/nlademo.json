@@ -198,8 +198,17 @@
         {"gender": "m", "name": "Joel König", "ranking": 3, "ranking_d": 4},
         {"gender": "m", "name": "Tobias Künzi", "ranking": 4, "ranking_d": 5},
         {"gender": "m", "name": "Nikita Khakimov", "ranking": 5, "ranking_d": 1},
+        {"gender": "m", "name": "Flurin Furrer"},
+        {"gender": "m", "name": "Silvan Furrer"},
+        {"gender": "m", "name": "Yanis Aurilio"},
+        {"gender": "m", "name": "Roger Bugmann"},
+        {"gender": "m", "name": "Timm Stern"},
         {"gender": "f", "name": "Lea Müller"},
-        {"gender": "f", "name": "Ronja Stern"}
+        {"gender": "f", "name": "Ronja Stern"},
+        {"gender": "f", "name": "Mirjam Abegglen"},
+        {"gender": "f", "name": "Céline Dagelet"},
+        {"gender": "f", "name": "Aki Sakai"},
+        {"gender": "f", "name": "Chantal von Rotz"}
       ],
       [
         {"gender": "m", "name": "Iztok Utrosa", "ranking": 1, "nationality": "SVN"},

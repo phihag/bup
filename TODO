@@ -1,6 +1,10 @@
-dads ads between matches -> Daniel
+more all_players for nlademo
 
-ask Jan about single-court pause time display
++ international_pause
+dads ads between matches -> Daniel
+swiss always neutral
+
+integration test for display (verify that it works!)
 CourtSpot: test resetting (should not fail with display on)
 NLA scoresheet: add logo
 	-> mail Arnauld
