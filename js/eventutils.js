@@ -161,6 +161,9 @@ function annotate(s, event) {
 		neutral_ground: event.neutral_ground,
 		counting: event.counting,
 	};
+	if ((event.league_key === 'NLA-2017') && (event.neutral_ground === undefined)) {
+		props.neutral_ground = true;
+	}
 	if (league_key && !event.counting) {
 		props.counting = default_counting(league_key);
 	}
@@ -180,7 +183,7 @@ function annotate(s, event) {
 			}
 			/*/@DEV*/
 
-			if (! setup[key]) {
+			if (setup[key] === undefined) {
 				setup[key] = val;
 			}
 		}

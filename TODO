@@ -1,13 +1,12 @@
-more all_players for nlademo
-
-+ international_pause
 dads ads between matches -> Daniel
-swiss always neutral
+
++ dmode international_pause
+	mail Jan
 
 integration test for display (verify that it works!)
 CourtSpot: test resetting (should not fail with display on)
 NLA scoresheet: add logo
-	-> mail Arnauld
+	-> mail Arnauld (right or guest first?)
 	-> thank Jürgen
 manual import https://obv.tournamentsoftware.com/sport/tournament.aspx?id=8B5B8973-84CA-40D2-9450-1277233E3172
 	import all_players
@@ -15,11 +14,11 @@ manual import https://obv.tournamentsoftware.com/sport/tournament.aspx?id=8B5B89
 	import score
 obl
 	create demo from https://obv.tournamentsoftware.com/sport/teammatch.aspx?id=7AAA19D0-0E65-42BF-8E03-6F1F6AE31C9A&match=19
-	eventsheet: http://www.badminton.at/files/raster/SPI_MH_5.xls
+	eventsheet: http://www.badminton.at/files/raster/SPI_MH_5.xls (already converted)
 	scoresheet: http://www.badminton.at/files/raster/SCHIRIZE.xls
-	Logo from http://www.badminton.at/images/Logo_OEBV.png?
-editmode scores of last games not cleared upon going in a new one with fewer games
+	vector logo
 
+make add to homescreen nice
 improve dads
 	ad during intervals
 	add type: text (z.B. "gute Heimreise", "nächstes Heimspiel")
@@ -255,17 +254,6 @@ adopt event: show difference
 adopt event: recalc upon event change
 Aufstellungen crashes in referee mode
 refmode: adopt: do not delete presses if match id stays the same
-Uncaught TypeError: Cannot read property 'name' of undefined
-    at press_state_desc (http://localhost/bup/js/restats.js:664:65)
-    at Object.render_presses (http://localhost/bup/js/stats.js:739:12)
-    at http://localhost/bup/js/refmode_referee_ui.js:545:11
-    at Array.forEach (native)
-    at render_event (http://localhost/bup/js/refmode_referee_ui.js:511:11)
-    at update_match (http://localhost/bup/js/refmode_referee.js:126:2)
-    at handle_dmsg (http://localhost/bup/js/refmode_referee.js:203:3)
-    at handle_msg (http://localhost/bup/js/refmode_referee.js:313:3)
-    at WebSocket.handle_msg_json (http://localhost/bup/js/refmode_conn.js:50:2)
-
 
 demo: add event
 test players_present with btde should be correctly adopted by referee
@@ -313,6 +301,7 @@ demo: make display work
 
 BTS support
 
+editmode scores of last games not cleared upon going in a new one with fewer games
 gelbe karte dauert lange zum Laden auf iPad?
 setupsheet
 	highlight column header on mouseover (remove CSS-based approach)
