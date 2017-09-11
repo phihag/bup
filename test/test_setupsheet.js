@@ -127,11 +127,11 @@ _describe('setupsheet', function() {
 			event: ev,
 		};
 		var listed = [{
-			name: 'Danel Ranked',
+			name: 'Daniel Ranked',
 			gender: 'm',
 			ranking: 4,
 		}];
-		assert.deepStrictEqual(bup.setupsheet.available_players(s, [], 0, 'm'), [{
+		assert.deepStrictEqual(bup.setupsheet.available_players(s, listed, 0, 'm'), [{
 			name: 'Dennis VRL',
 			gender: 'm',
 			ranking: 2,

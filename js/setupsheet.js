@@ -334,7 +334,7 @@ function on_new_form_submit(e) {
 			}
 			player.name = m[3];
 		}
-	};
+	}
 	listed[team_id][gender].push(player);
 
 	rerender(state);
