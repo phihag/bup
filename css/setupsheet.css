@@ -85,6 +85,10 @@
 .setupsheet_player_name > span {
 	user-select: auto;
 }
+.setupsheet_ranking {
+	color: #666;
+	margin-right: 0.8ch;
+}
 .setupsheet_team_name {
 	text-align: left;
 }
