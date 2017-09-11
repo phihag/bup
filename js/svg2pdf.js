@@ -517,10 +517,12 @@ function save(svg_nodes, props, orientation, filename) {
 return {
 	make: make,
 	save: save,
+/*@DEV*/
 	// Testing only
 	parse_path: parse_path,
 	arc2beziers: arc2beziers,
 	_make_beziers: _make_beziers,
+/*/@DEV*/
 };
 
 })();

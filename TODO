@@ -3,6 +3,7 @@ dads ads between matches -> Daniel
 + dmode international_pause
 	mail Jan
 
+test demo with ranking
 integration test for display (verify that it works!)
 CourtSpot: test resetting (should not fail with display on)
 NLA scoresheet: add logo
@@ -17,10 +18,12 @@ obl
 	eventsheet: http://www.badminton.at/files/raster/SPI_MH_5.xls (already converted)
 	scoresheet: http://www.badminton.at/files/raster/SCHIRIZE.xls
 	vector logo
+	-> Daniel
 
 make add to homescreen nice
 improve dads
 	ad during intervals
+	ad between games
 	add type: text (z.B. "gute Heimreise", "nächstes Heimspiel")
 	add type: refrath-gegen
 	configure on referee!

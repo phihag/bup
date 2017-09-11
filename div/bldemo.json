@@ -68,7 +68,6 @@
               ]
             }
           ],
-
           "is_doubles": true,
           "match_id": "bldemo_DD"
         }
@@ -237,9 +236,9 @@
       "gender": "m",
       "ranking": 8
     }, {
-      "name": "Ya Lan Chang",
+      "name": "Annika Dörr",
       "gender": "f",
-      "ranking": 3
+      "ranking": 4
     }], [{
       "name": "Matthias Deininger",
       "gender": "m",
@@ -264,8 +263,8 @@
         {"gender": "m", "name": "Kai Waldenberger", "ranking": 11},
         {"gender": "f", "name": "Chloe Magee", "ranking": 1, "nationality": "IRL"},
         {"gender": "f", "name": "Carla Nelte", "ranking": 2},
-        {"gender": "f", "name": "Ya Lan Chang", "ranking": 3, "nationality": "TPE"},
         {"gender": "f", "name": "Jennifer Karnott", "ranking": 3},
+        {"gender": "f", "name": "Annika Dörr", "ranking": 4},
         {"gender": "f", "name": "Elin Svensson", "ranking": 5, "nationality": "SWE"},
         {"gender": "f", "name": "Runa Plützer", "ranking": 6}
       ],

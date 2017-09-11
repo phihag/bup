@@ -466,7 +466,9 @@ return {
 	on_edit_event: on_edit_event,
 	list_all_players: list_all_players,
 	// Testing only
+	/*@DEV*/
 	_parse_match_list: _parse_match_list,
+	/*/@DEV*/
 };
 
 }

@@ -94,4 +94,67 @@ _describe('setupsheet', function() {
 			}
 		);
 	});
+
+	_it('available_players', function() {
+		var ev = {
+			all_players: [[{
+				name: 'Michael Mustermann',
+				gender: 'm',
+			}, {
+				name: 'Alex Aber',
+				gender: 'm',
+			}, {
+				name: 'Danel Ranked',
+				gender: 'm',
+				ranking: 4,
+			}, {
+				name: 'Dennis VRL',
+				gender: 'm',
+				ranking: 2,
+			}, {
+				name: 'David Listed',
+				gender: 'm',
+				ranking: 3,
+			}, {
+				name: 'Zulu Last',
+				gender: 'm',
+			}, {
+				name: 'Walter Pre',
+				gender: 'm',
+			}]],
+		};
+		var s = {
+			event: ev,
+		};
+		var listed = [{
+			name: 'Danel Ranked',
+			gender: 'm',
+			ranking: 4,
+		}];
+		assert.deepStrictEqual(bup.setupsheet.available_players(s, [], 0, 'm'), [{
+			name: 'Dennis VRL',
+			gender: 'm',
+			ranking: 2,
+		}, {
+			name: 'David Listed',
+			gender: 'm',
+			ranking: 3,
+		}, {
+			name: 'Danel Ranked',
+			gender: 'm',
+			ranking: 4,
+		}, {
+			name: 'Alex Aber',
+			gender: 'm',
+		}, {
+			name: 'Michael Mustermann',
+			gender: 'm',
+		}, {
+			name: 'Walter Pre',
+			gender: 'm',
+		}, {
+			name: 'Zulu Last',
+			gender: 'm',
+		}]);
+	});
 });

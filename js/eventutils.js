@@ -483,8 +483,10 @@ return {
 	setups_eq: setups_eq,
 	default_counting: default_counting,
 	// Testing only
+	/*@DEV*/
 	name_by_league: name_by_league,
 	get_min_pause: get_min_pause,
+	/*/@DEV*/
 };
 
 })();

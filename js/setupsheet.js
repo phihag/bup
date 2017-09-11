@@ -59,6 +59,22 @@ function cur_plays_in(col, team_id, p) {
 	});
 }
 
+function _ranking_name(p) {
+	return (p.ranking ? p.ranking + (p.ranking_d ? '-D' + p.ranking_d : '') + ' ' : '') + p.name;
+}
+
+function _cmp_players(p1, p2) {
+	if (p1.ranking || p2.ranking) {
+		if (!p1.ranking) return 1;
+		if (!p2.ranking) return -1;
+
+		if (p1.ranking < p2.ranking) return -1;
+		if (p1.ranking > p2.ranking) return 1;
+	}
+
+	return utils.cmp(p1.name, p2.name);
+}
+
 function calc_listed(event) {
 	var res = [];
 	for (var team_id = 0;team_id < 2;team_id++) {
@@ -81,6 +97,15 @@ function calc_listed(event) {
 		event.matches.forEach(function(match) {
 			var setup = match.setup;
 			setup.teams[team_id].players.forEach(function(p, player_id) {
+				if (event.all_players) {
+					var betterp = utils.find(event.all_players[team_id], function(ap) {
+						return ap.name === p.name;
+					});
+					if (betterp) {
+						p = betterp;
+					}
+				}
+
 				if (!p.gender) {
 					p = utils.deep_copy(p);
 					p.gender = eventutils.guess_gender(setup, player_id);
@@ -95,6 +120,8 @@ function calc_listed(event) {
 			event.present_players[team_id].forEach(_add);
 		}
 
+		team_res.m.sort(_cmp_players);
+		team_res.f.sort(_cmp_players);
 	}
 	return res;
 }
@@ -115,6 +142,8 @@ function available_players(s, listed, team_id, gender) {
 			res.push(p);
 		}
 	});
+
+	res.sort(_cmp_players);
 
 	return res;
 }
@@ -285,10 +314,25 @@ function on_new_form_submit(e) {
 		return;
 	}
 
-	listed[team_id][gender].push({
-		name: player_name,
-		gender: gender,
-	});
+	var player;
+	if (player_name[0] === '{') {
+		player = JSON.parse(player_name);
+	} else {
+		player = {
+			name: player_name,
+			gender: gender,
+		};
+		var m = /^(?:[0-9]+-)?([0-9]+)(?:-D([0-9]+))?\s+(.+)$/.exec(player_name);
+		if (m) {
+			player.ranking = parseInt(m[1]);
+			if (m[2]) {
+				player.ranking_d = parseInt(m[2]);
+			}
+			player.name = m[3];
+		}
+	};
+	listed[team_id][gender].push(player);
+
 	rerender(state);
 }
 
@@ -390,7 +434,7 @@ function rerender(s) {
 			var listed_g_players = team[gender];
 			listed_g_players.forEach(function(p) {
 				var tr = uiu.el(tbody, 'tr');
-				var first_cell = uiu.el(tr, 'td', 'setupsheet_player_name', p.name);
+				var first_cell = uiu.el(tr, 'td', 'setupsheet_player_name', _ranking_name(p));
 				var btn = uiu.el(first_cell, 'button', {
 					'class': 'setupsheet_delete_button image-button textsize-button',
 					'data-team_id': team_id,
@@ -442,8 +486,8 @@ function rerender(s) {
 				});
 				avp.forEach(function(ap) {
 					uiu.el(new_select, 'option', {
-						value: ap.name,
-					}, ap.name);
+						value: JSON.stringify(ap),
+					}, _ranking_name(ap));
 				});
 				uiu.el(new_select, 'option', {
 					value: '__add_manual',
@@ -696,6 +740,7 @@ return {
 	// Tests only
 	/*@DEV*/
 	calc_config: calc_config,
+	available_players: available_players,
 	/*/@DEV*/
 };
 

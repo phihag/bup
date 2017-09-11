@@ -21,6 +21,7 @@ function make_player($name, $row) {
 		'firstname' => $row[$name . 'VN'],
 		'lastname' => $row[$name . 'NN'],
 	];
+
 	if ($p['firstname'] && $p['lastname']) {
 		$p['name'] = $p['firstname'] . ' ' . $p['lastname'];
 	} else if ($p['firstname']) {
@@ -252,7 +253,7 @@ if ($counting) {
 
 if (array_key_exists('all_players', $_GET)) {
 	$all_players_result = mysqli_query($db, '
-	SELECT Art, Vorname, Nachname
+	SELECT Art, Vorname, Nachname, Rangliste, Status
 	FROM Spieler ORDER BY Art DESC;');
 	if (! $court_result) {
 		jsonErr(mysqli_error($db));
@@ -266,12 +267,21 @@ if (array_key_exists('all_players', $_GET)) {
 		$gender = ($art_m[2] === 'Herr') ? 'm' : 'f';
 		$name = $row['Vorname'] . ' ' . $row['Nachname'];
 
-		$all_players[$team_id][] = [
+		$p = [
 			'gender' => $gender,
 			'firstname' => $row['Nachname'],
 			'lastname' => $row['Vorname'],
 			'name' => $name,
 		];
+
+		if (\preg_match('/^[0-9]+-[0-9]+$/', $row['Rangliste'])) {
+			$p['ranking'] = \intval($row['Rangliste']);
+		} else if (\preg_match('/^[0-9]+-([0-9]+)-D([0-9]+)$/', $row['Rangliste'], $matches)) {
+			$p['ranking'] = \intval($matches[1]);
+			$p['ranking_d'] = \intval($matches[2]);
+		}
+
+		$all_players[$team_id][] = $p;
 	}
 	mysqli_free_result($all_players_result);
 	$res['all_players'] = $all_players;

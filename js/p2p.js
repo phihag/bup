@@ -260,9 +260,11 @@ function ui_init() {
 }
 return {
 	ui_init: ui_init,
+/*@DEV*/
 	// testing only
 	init: init,
 	request_node_status: request_node_status,
+/*/@DEV*/
 };
 
 });

@@ -153,9 +153,11 @@ simple_translate.ui_update_state = ui_update_state;
 simple_translate.is_supported = is_supported;
 simple_translate.register_lang = register_lang;
 simple_translate.translate_nodes = translate_nodes;
+/*@DEV*/
 // Testing only
 simple_translate.languages = languages;
 simple_translate.register_all = register_all;
+/*/@DEV*/
 return simple_translate;
 })();
 

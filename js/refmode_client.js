@@ -345,8 +345,10 @@ return {
 	connect_to_referee: connect_to_referee,
 	disconnect_referee: disconnect_referee,
 	notify_changed_settings: notify_changed_settings,
+/*@DEV*/
 	// Testing only
 	_subscriptions: subscriptions,
+/*/@DEV*/
 };
 
 });

@@ -274,9 +274,11 @@ return {
 	date: date,
 	add_col: add_col,
 	num2col: num2col,
+/*@DEV*/
 	// testing only
 	_col2num: _col2num,
 	_leap_year: _leap_year,
+/*/@DEV*/
 };
 
 })();
