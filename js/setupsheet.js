@@ -439,7 +439,9 @@ function rerender(s) {
 			listed_g_players.forEach(function(p) {
 				var tr = uiu.el(tbody, 'tr');
 				var first_cell = uiu.el(tr, 'td', 'setupsheet_player_name');
-				uiu.el(first_cell, 'span', 'setupsheet_ranking', _ranking_str(p));
+				if (p.ranking) {
+					uiu.el(first_cell, 'span', 'setupsheet_ranking', _ranking_str(p));
+				}
 				uiu.el(first_cell, 'span', {}, p.name);
 				var btn = uiu.el(first_cell, 'button', {
 					'class': 'setupsheet_delete_button image-button textsize-button',
