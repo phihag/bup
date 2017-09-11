@@ -434,7 +434,8 @@ function rerender(s) {
 			var listed_g_players = team[gender];
 			listed_g_players.forEach(function(p) {
 				var tr = uiu.el(tbody, 'tr');
-				var first_cell = uiu.el(tr, 'td', 'setupsheet_player_name', _ranking_name(p));
+				var first_cell = uiu.el(tr, 'td', 'setupsheet_player_name');
+				uiu.el(first_cell, 'span', {}, _ranking_name(p));
 				var btn = uiu.el(first_cell, 'button', {
 					'class': 'setupsheet_delete_button image-button textsize-button',
 					'data-team_id': team_id,

@@ -82,6 +82,9 @@
 .setupsheet_player_name {
 	min-width: 11em;
 }
+.setupsheet_player_name > span {
+	user-select: auto;
+}
 .setupsheet_team_name {
 	text-align: left;
 }

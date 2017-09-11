@@ -253,7 +253,7 @@ if ($counting) {
 
 if (array_key_exists('all_players', $_GET)) {
 	$all_players_result = mysqli_query($db, '
-	SELECT Art, Vorname, Nachname, Rangliste, Status
+	SELECT Art, Vorname, Nachname, Rangliste
 	FROM Spieler ORDER BY Art DESC;');
 	if (! $court_result) {
 		jsonErr(mysqli_error($db));
@@ -269,13 +269,13 @@ if (array_key_exists('all_players', $_GET)) {
 
 		$p = [
 			'gender' => $gender,
-			'firstname' => $row['Nachname'],
-			'lastname' => $row['Vorname'],
+			'firstname' => $row['Vorname'],
+			'lastname' => $row['Nachname'],
 			'name' => $name,
 		];
 
-		if (\preg_match('/^[0-9]+-[0-9]+$/', $row['Rangliste'])) {
-			$p['ranking'] = \intval($row['Rangliste']);
+		if (\preg_match('/^[0-9]+-([0-9]+)$/', $row['Rangliste'], $matches)) {
+			$p['ranking'] = \intval($matches[1]);
 		} else if (\preg_match('/^[0-9]+-([0-9]+)-D([0-9]+)$/', $row['Rangliste'], $matches)) {
 			$p['ranking'] = \intval($matches[1]);
 			$p['ranking_d'] = \intval($matches[2]);
