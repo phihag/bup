@@ -3,8 +3,7 @@ dads ads between matches -> Daniel
 + dmode international_pause
 	mail Jan
 
-test demo with ranking
-integration test for display (verify that it works!)
+integration test for display (verify a crash during display gets reported)
 CourtSpot: test resetting (should not fail with display on)
 NLA scoresheet: add logo
 	-> mail Arnauld (right or guest first?)
@@ -19,7 +18,12 @@ obl
 	scoresheet: http://www.badminton.at/files/raster/SCHIRIZE.xls
 	vector logo
 	-> Daniel
+setupsheet on smartphone
+	-> Marco
 
+test demo with ranking
+setupsheet: check ranking
+update bldemo to 2017
 make add to homescreen nice
 improve dads
 	ad during intervals
