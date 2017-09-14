@@ -561,7 +561,7 @@ var i18n_de = {
 'dads|periodic': 'periodisch',
 'dads|until': 'Endzeit',
 'dads|intervals': 'In Spielpausen (in Arbeit)',
-'dads|inbetween': 'Zwischen Spielen (in Arbeit)',
+'dads|inbetween': 'Zwischen Spielen',
 'dads:heading': 'Werbung konfigurieren',
 'dads:mode': 'Modus:',
 'dads:add image': 'Bild hinzufügen',

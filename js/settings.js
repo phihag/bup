@@ -211,6 +211,7 @@ var _settings_numberfields = [
 	'dads_interval',
 	'dads_utime',
 	'dads_atime',
+	'dads_wait',
 ];
 var _settings_selects = [
 	'click_mode',
@@ -289,7 +290,7 @@ function change_all(s, new_settings) {
 }
 
 function on_change(s, name) {
-	if (/^(dads)_/.test(name)) {
+	if (/^dads_/.test(name)) {
 		dads.on_style_change(s);
 		return;
 	}

@@ -561,7 +561,7 @@ var i18n_en = {
 'dads|periodic': 'periodical',
 'dads|until': 'until ..',
 'dads|intervals': 'during intervals (in development)',
-'dads|inbetween': 'between matches (in development)',
+'dads|inbetween': 'between matches',
 'dads:heading': 'Ads',
 'dads:mode': 'Mode:',
 'dads:add image': 'Add Image',

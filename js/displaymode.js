@@ -945,7 +945,7 @@ function render_international(s, container, event, court, match, colors) {
 			(gwinner === 'left') ? (team_id === 0) : (
 			(gwinner === 'right') ? (team_id === 1) : (
 			(server.team_id === team_id))));
-
+// var style = s.settings.displaymode_style;
 		var player_names = team.players.map(function(player) {
 			return player.name;
 		});
@@ -1765,6 +1765,7 @@ function update(err, s, event) {
 		return;
 	}
 
+	var ads_container = uiu.qs('.d_ads');
 	var changed_courts = (
 		!_last_painted_hash || !utils.deep_equal(cur_event_hash.courts, _last_painted_hash.courts));
 	_last_painted_hash = cur_event_hash;
@@ -1772,7 +1773,7 @@ function update(err, s, event) {
 	var new_settings_hash = utils.hash_new(_last_settings_hash, s.settings);
 	if (new_settings_hash) {
 		_last_settings_hash = new_settings_hash;
-		dads.d_onconfchange(uiu.qs('.d_ads'));
+		dads.d_onconfchange();
 	}
 
 	var court_select = uiu.qs('[name="displaymode_court_id"]');
@@ -1836,6 +1837,7 @@ function update(err, s, event) {
 		clubplayers: render_clubplayers,
 		clubplayerslr: render_clubplayerslr,
 		international: render_international,
+		international_pause: render_international,
 		oncourt: render_oncourt,
 		onlyplayers: render_onlyplayers,
 		onlyscore: render_onlyscore,
@@ -1845,11 +1847,15 @@ function update(err, s, event) {
 	if (xfunc) {
 		var court = _render_court(s, container, event);
 		if (!court) {
+			dads.d_onmatchchange(s, ads_container, false);
 			return;
 		}
 
 		var colors = calc_colors(s.settings, event);
 		var match = _match_by_court(event, court);
+
+		dads.d_onmatchchange(s, ads_container, match);
+
 		if (!match) {
 			var nomatch_el = uiu.el(container, 'div', {
 				'class': 'd_nomatch',
@@ -1876,6 +1882,8 @@ function update(err, s, event) {
 		xfunc(s, container, event, court, match, colors);
 		return;
 	}
+
+	dads.d_onmatchchange(s, ads_container, false);
 
 	var ofunc = {
 		'2court': render_2court,
@@ -1915,7 +1923,7 @@ function show() {
 
 	control.set_current(state);
 	uiu.show_qs('.displaymode_layout');
-	dads.d_onconfchange(uiu.qs('.d_ads'));
+	dads.d_onconfchange();
 	uiu.addClass_qs('.settings_layout', 'settings_layout_displaymode');
 
 	update({

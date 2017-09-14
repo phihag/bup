@@ -2,7 +2,7 @@
 // Display ads
 var dads = (function() {
 
-var ALL_MODES = ['none', 'always', 'periodic', 'until', 'inbetween', 'intervals'];
+var ALL_MODES = ['none', 'always', 'periodic', 'until', 'inbetween'/*, 'intervals'*/];
 
 function load(s) {
 	s.dads = [];
@@ -333,6 +333,8 @@ function paste_handler(event) {
 function on_style_change(s) {
 	if (s.ui.dads_visible) {
 		render_options(s, uiu.qs('.dads_config_container .dads_options'));
+	} else {
+		d_onconfchange(s);
 	}
 	displaymode.on_style_change(s);
 }
@@ -454,6 +456,10 @@ function cancel_timeouts(s) {
 		clearTimeout(s.dad_until_to);
 		s.dad_until_to = null;
 	}
+	if (s.dad_wait_timeout) {
+		clearTimeout(s.dads_wait_timeout);
+		s.dad_wait_timeout = null;
+	}
 }
 
 function update_utime(s, container) {
@@ -478,13 +484,23 @@ function update_utime(s, container) {
 }
 
 // Gets called when the configuration has changed
-function d_onconfchange(container) {
-	var s = state;
+function d_onconfchange(s, container) {
+	s = s || state;
+	container = container || uiu.qs('.d_ads');
+
 	var mode = s.settings.dads_mode;
 
 	cancel_timeouts(s);
 	if (mode === 'none') {
 		uiu.hide(container);
+		return;
+	}
+
+	if (mode === 'until') {
+		update_utime(s, container);
+		return;
+	} else if (mode === 'inbetween') {
+		
 		return;
 	}
 
@@ -498,10 +514,82 @@ function d_onconfchange(container) {
 	} else if (mode === 'periodic') {
 		s.dad_periodic_active = true;
 		advance_periodic(s, container);
-	} else if (mode === 'until') {
-		update_utime(s, container);
-	} else if (mode === 'intervals') {
-		// TODO: check if in interval
+	}
+}
+
+// Returns a timestamp of when the match was finished, or false if it's ongoing
+var _since_guess = {};
+function finished_since(match) {
+	if (match === false) {
+		return false; // N/A, for instance multi-match display
+	}
+	if (!match) {
+		return 1; // No match assigned on this court
+	}
+
+	if (!match.network_score) {
+		return false; // No idea, fail safe
+	}
+
+	var match_id = match.setup.match_id;
+
+	var winner = calc.match_winner(match.setup.counting, match.network_score);
+	if ((winner === 'inprogress') || (winner === 'invalid')) {
+		delete _since_guess[match_id];
+		return false;
+	}
+
+	if (match.network_last_update) {
+		return match.network_last_update * 1000;
+	}
+
+	var presses = eventutils.get_presses(match);
+	if (presses && presses.length > 0) {
+		return presses[presses.length - 1].timestamp;
+	}
+
+	if (_since_guess[match_id]) {
+		return _since_guess[match_id];
+	}
+
+	var now = Date.now();
+	_since_guess[match_id] = now;
+	return now;
+}
+
+function cycle_init(s, container) {
+	if (s.dad_cycle_interval) {
+		return; // Already running
+	}
+
+	s.dad_cycle_index = -1;
+	cycle(s, container);
+	s.dad_cycle_interval = setInterval(function() {
+		cycle(s, container);
+	}, s.settings.dads_interval);
+	uiu.show(container);
+}
+
+// Called when the match has (potentially) changed
+function d_onmatchchange(s, container, match) {
+	var mode = s.settings.dads_mode;
+
+	if (mode === 'inbetween') {
+		var since = finished_since(match);
+		if (since) {
+			if (s.dad_wait_timeout) {
+				clearTimeout(s.dad_wait_timeout);
+				s.dad_wait_timeout = null;
+			}
+			var remaining = Math.max(0, s.settings.dads_wait + since - Date.now());
+			s.dad_wait_timeout = setTimeout(function() {
+				s.dad_wait_timeout = null;
+				cycle_init(s, container);
+			}, remaining);
+		} else {
+			cancel_timeouts(s);
+			uiu.hide(container);
+		}
 	}
 }
 
@@ -522,6 +610,7 @@ return {
 	show: show,
 	hide: hide,
 	d_onconfchange: d_onconfchange,
+	d_onmatchchange: d_onmatchchange,
 	d_hide: d_hide,
 	on_style_change: on_style_change,
 };
@@ -531,9 +620,11 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var bupui = require('./bupui');
+	var calc = require('./calc');
 	var click = require('./click');
 	var control = require('./control');
 	var displaymode = require('./displaymode');
+	var eventutils = require('./eventutils');
 	var i18n = require('./i18n');
 	var report_problem = require('./report_problem');
 	var settings = require('./settings');
