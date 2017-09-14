@@ -1346,7 +1346,10 @@ function render_onlyplayers(s, container, event, court, match, colors) {
 			uiu.el(team_container, 'div', {
 				style: (
 					'width:20%;height:100%;float:left;margin-right:5%;' +
-					'background: no-repeat url("' + logo_urls[team_id] + '") center center;'
+					(logo_urls[team_id] ?
+					 'background: no-repeat url("' + logo_urls[team_id] + '") center center;' :
+					 ''
+					)
 				),
 			});
 		}
