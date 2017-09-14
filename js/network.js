@@ -334,8 +334,9 @@ function ui_list_matches(s, silent, no_timer) {
 
 		eventsheet.render_links(s, uiu.qs('.setup_eventsheets'));
 		var editable = netw.editable(s);
-		uiu.visible_qs('.setupsheet_link', editable && event.team_competition);
-		uiu.visible_qs('.editevent_link', editable && !event.team_competition);
+		var use_setupsheet = event.team_competition;
+		uiu.visible_qs('.setupsheet_link', editable && use_setupsheet);
+		uiu.visible_qs('.editevent_link', editable && !use_setupsheet);
 		ui_render_matchlist(s, event);
 	}, function(s) {
 		return no_timer ? 'abort' : s.settings.network_update_interval;

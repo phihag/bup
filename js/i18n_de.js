@@ -60,9 +60,9 @@ var i18n_de = {
 'editevent:add manual m': 'Anderer Spieler ..',
 'editevent:add manual f': 'Andere Spielerin ..',
 'editevent:enter player name': 'Spieler-Name:',
-'editevent:backup players': 'Ersatzspieler',
+'editevent:backup players': 'E',
 'editevent:add backup player': 'Ersatzspieler hinzufügen ...',
-'editevent:present players': 'Anwesende Spieler',
+'editevent:present players': 'A',
 'editevent:add present player': 'Anwesende hinzufügen ...',
 'editevent:select event': 'Auswählen',
 

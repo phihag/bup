@@ -60,9 +60,9 @@ var i18n_frch = {
 'editevent:add manual m': 'Ajouter un joueur ..',
 'editevent:add manual f': 'Ajouter une joueuse ..',
 'editevent:enter player name': 'Nome de joeuer/joueuse:',
-'editevent:backup players': 'joueurs remplaçant',
+'editevent:backup players': 'remplaçant',
 'editevent:add backup player': 'Ajouter un joueur remplaçant ...',
-'editevent:present players': 'joueurs présents',
+'editevent:present players': 'présents',
 'editevent:add present player': 'Ajouter un jouer présent ...',
 'editevent:select event': 'Sélectionnez l\'événement',
 

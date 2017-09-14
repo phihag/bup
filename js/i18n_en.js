@@ -60,9 +60,9 @@ var i18n_en = {
 'editevent:add manual m': 'Other player (m) ..',
 'editevent:add manual f': 'Other player (f) ..',
 'editevent:enter player name': 'player name:',
-'editevent:backup players': 'backup players',
+'editevent:backup players': 'Backup',
 'editevent:add backup player': 'Add backup player ...',
-'editevent:present players': 'Present players',
+'editevent:present players': 'Present',
 'editevent:add present player': 'Add present player ...',
 'editevent:select event': 'select event',
 

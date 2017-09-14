@@ -15,6 +15,11 @@
 	-moz-user-select: none;
 	-ms-user-select: none;
 }
+@media all and (max-width: 480px) {
+	.setupsheet_layout {
+		font-size: 10px;
+	}
+}
 
 .setupsheet_container {
 	background: #fff;
@@ -153,6 +158,11 @@ td:hover .setupsheet_delete_button {
 .setupsheet_buttons > button + button {
 	margin-left: 5vw;
 }
+@media all and (max-width: 480px) {
+	.setupsheet_buttons > button + button {
+		margin-left: 1ch;
+	}
+}
 
 .setupsheet_svg_container {
 	display: none;
@@ -171,5 +181,11 @@ td:hover .setupsheet_delete_button {
 	}
 	.setupsheet_svg_container svg + svg {
 		page-break-before: always;
+	}
+}
+
+@media all and (max-width: 480px) {
+	.setupsheet_player_name {
+		height: 2em;
 	}
 }
