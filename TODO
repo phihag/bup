@@ -1,9 +1,7 @@
 NLA scoresheet: add logo
 	-> mail Arnauld (right or guest first?)
 	-> thank Jürgen
-tde_import https://obv.tournamentsoftware.com/sport/teammatch.aspx?id=7AAA19D0-0E65-42BF-8E03-6F1F6AE31C9A&match=12
-	import current players
-	import score
+displaymode for imported events (courts missing)
 obl
 	create demo from https://obv.tournamentsoftware.com/sport/teammatch.aspx?id=7AAA19D0-0E65-42BF-8E03-6F1F6AE31C9A&match=19
 	eventsheet: http://www.badminton.at/files/raster/SPI_MH_5.xls (already converted)

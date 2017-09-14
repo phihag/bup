@@ -40,7 +40,7 @@ function main($match_url) {
 
 function parse_match_players($players_html) {
 	preg_match_all(
-		'/<a class="plynk" href="[^"]*">(?P<name>.*?)<\/a>/',
+		'/<a(?:\s+class="plynk")?\s+href="player\.aspx[^"]*">(?P<name>.*?)<\/a>/',
 		$players_html, $players_m, \PREG_SET_ORDER);
 	$players = \array_map(function($pm) {
 		return [
@@ -50,6 +50,20 @@ function parse_match_players($players_html) {
 	return [
 		'players' => $players,
 	];
+}
+
+function _parse_score($score_html) {
+	if (!\preg_match('/^\s*<span\s+class="score">(.*?)<\/span>\s*$/', $score_html, $m)) {
+		return null;
+	}
+
+	\preg_match_all('/<span>([0-9]+)-([0-9]+)<\/span>/', $m[1], $score_ms, \PREG_SET_ORDER);
+	return \array_map(function($score_m) {
+		return [
+			\intval($score_m[1]),
+			\intval($score_m[2])
+		];
+	}, $score_ms);
 }
 
 function _parse_players($players_html, $gender) {
@@ -168,7 +182,8 @@ function parse_teammatch($tm_html, $domain) {
 	}
 
 	$res['all_players'] = \array_map(function($ti) use ($domain) {
-		return download_all_players($ti, $domain);
+		$ap = download_all_players($ti, $domain);
+		return $ap ? $ap : [];
 	}, $team_infos);
 
 	if (!\preg_match('/
@@ -186,7 +201,6 @@ function parse_teammatch($tm_html, $domain) {
 	$res['league_key'] = $LEAGUE_KEYS[$long_league_id];
 	$res['team_competition'] = true;
 
-	// TODO all_players
 	// TODO match date
 	// TODO match time
 	if (\preg_match('/<th>Spielort:<\/th><td><a[^<]*>([^<]+)<\/a><\/td>/', $tm_html, $location_m)) {
@@ -206,8 +220,8 @@ function parse_teammatch($tm_html, $domain) {
 		'/<tr>\s*<td>(?P<match_name>[A-Z\.0-9\s]+)<\/td>
 		\s*<td[^>]*>(?:<table[^>]*>(?P<players_html0>.*?)<\/table>)?
 		<\/td><td[^>]*>-<\/td>
-		<td[^>]*>(?:<table[^>]*>(?P<players_html1>.*?)<\/table>)?
-		#<td>(?P<score_html>.*?)<\/td>
+		<td[^>]*>(?:<table[^>]*>(?P<players_html1>.*?)<\/table>)?<\/td>
+		<td>(?P<score_html>.*?)<\/td>
 		/xs', $matches_table_html, $matches_m, \PREG_SET_ORDER);
 	$matches = [];
 	foreach ($matches_m as $mm) {
@@ -234,10 +248,14 @@ function parse_teammatch($tm_html, $domain) {
 			$setup['eventsheet_id']	= $eid_m['num'] . '.' . $eid_m['discipline'];
 		}
 
-		// TODO score
-		$matches[] = [
+		$match = [
 			'setup' => $setup,
 		];
+		if (isset($mm['score_html'])) {
+			$match['network_score'] = _parse_score($mm['score_html']);
+		}
+
+		$matches[] = $match;
 	}
 	$res['matches'] = $matches;
 
