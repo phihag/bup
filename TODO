@@ -8,7 +8,8 @@ CourtSpot: test resetting (should not fail with display on)
 NLA scoresheet: add logo
 	-> mail Arnauld (right or guest first?)
 	-> thank Jürgen
-manual import https://obv.tournamentsoftware.com/sport/tournament.aspx?id=8B5B8973-84CA-40D2-9450-1277233E3172
+tde_import https://obv.tournamentsoftware.com/sport/teammatch.aspx?id=8B5B8973-84CA-40D2-9450-1277233E3172&match=12
+	handle missing players better (don't import them)
 	import all_players
 	import current players
 	import score
@@ -18,9 +19,13 @@ obl
 	scoresheet: http://www.badminton.at/files/raster/SCHIRIZE.xls
 	vector logo
 	-> Daniel
+
+block middle buttons like any other-> Jörg Hupertz
 setupsheet on smartphone
 	-> Marco
-
+test referee mode without event -> Manuel Lappe
+tde_import: import players from other teams (https://www.turnier.de/sport/teamrankingplayers.aspx?id=3AE85140-FD7F-4D47-8BEE-575B0334E9D8&tid=1477)
+tde_import: Rückrunde vs Hinrunde (check with old seasons)
 test demo with ranking
 setupsheet: check ranking
 update bldemo to 2017
@@ -34,12 +39,10 @@ improve dads
 	check all i18n of names
 	switch to indexed db
 setupsheet: default to new player if no players are available
-check imports
+tde_import: check that they work
 	2017 RLN
 	2017 RLM
-	2017 RLW
-	2017 VL/OL NRW
-	2017 Bundesliga matches
+	2017 VL/OL NRW!
 	2017 ÖBV
 	2017 NLA
 	2017 NLB
@@ -55,9 +58,12 @@ use team colors does not change color displays
 order: print with background graphics
 mo: make del button nicer
 Aufstellung:
-	highlight changes
-	warn if changes and leaving
+	Top Bar "Ungespeicherte Änderungen. Jetzt speichern"
+	Top bar should show warning if rankings don't match
+	prevent topbar printing
+	warn if changes and leaving tab
 	mail Ulf (update doc)
+	test that we don't print any backgrounds even with chrome setting print backgrounds
 store order change in demo
 store order change in courtspot
 stats: + most consecutive points
@@ -210,7 +216,6 @@ Wettkampfstatistik
 	match lengths
 	pauses
 
-block middle buttons like any other-> Jörg Hupertz
 error teamtext_internal bei Tablet wenn referee mode spiel auf incomplete ändert
 displaymode.option_applies for colors
 prevent going into incomplete match (update first, retry, if not then error)
