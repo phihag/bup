@@ -16,6 +16,7 @@ var SHEETS_BY_LEAGUE = {
 	'RLN-2016': ['RLN-2016', 'RLN-Satzungen-2016'],
 	'RLM-2016': ['RLM-2016', 'RLM-SpO-2015'],
 	'NLA-2017': ['NLA-2017'],
+	'OBL-2017': [],
 };
 
 var URLS = {

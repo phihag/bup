@@ -1,11 +1,7 @@
-integration test for display (verify a crash during display gets reported)
-CourtSpot: test resetting (should not fail with display on)
 NLA scoresheet: add logo
 	-> mail Arnauld (right or guest first?)
 	-> thank Jürgen
-tde_import https://obv.tournamentsoftware.com/sport/teammatch.aspx?id=8B5B8973-84CA-40D2-9450-1277233E3172&match=12
-	handle missing players better (don't import them)
-	import all_players
+tde_import https://obv.tournamentsoftware.com/sport/teammatch.aspx?id=7AAA19D0-0E65-42BF-8E03-6F1F6AE31C9A&match=12
 	import current players
 	import score
 obl
@@ -15,6 +11,7 @@ obl
 	vector logo
 	-> Daniel
 
+integration test for display (verify a crash during display gets reported)
 block middle buttons like any other-> Jörg Hupertz
 test referee mode without event -> Manuel Lappe
 tde_import: import players from other teams (https://www.turnier.de/sport/teamrankingplayers.aspx?id=3AE85140-FD7F-4D47-8BEE-575B0334E9D8&tid=1477)

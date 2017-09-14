@@ -104,21 +104,21 @@ function download_all_players($ti, $domain) {
 	if (!\preg_match(
 			'/<table\s+class="ruler">\s*<caption>\s*Herren(?P<tbody>.*?)<\/table>/s',
 			$players_html, $players_m_m)) {
-		throw new \Exception('Cannot find male players in ' . $players_url);
+		return null;
 	}
 	$male_players = _parse_players($players_m_m['tbody'], 'm');
 	if (\count($male_players) === 0) {
-		throw new \Exception('Could not find any male players in ' . $players_url);
+		return null;
 	}
 
 	if (!\preg_match(
 			'/<table\s+class="ruler">\s*<caption>\s*Damen(?P<tbody>.*?)<\/table>/s',
 			$players_html, $players_f_m)) {
-		throw new \Exception('Cannot find male players in ' . $players_url);
+		return null;
 	}
 	$female_players = _parse_players($players_f_m['tbody'], 'f');
 	if (\count($female_players) === 0) {
-		throw new \Exception('Could not find any female players in ' . $players_url);
+		return null;
 	}
 
 	$all_players = \array_merge([], $male_players, $female_players);
@@ -138,6 +138,7 @@ function parse_teammatch($tm_html, $domain) {
 		'Bundesligen 2017/18:1. Bundesliga (1. BL) - (001) 1. Bundesliga' => '1BL-2017',
 		'Bundesligen 2017/18:2. Bundesliga (2. BL-Nord) - (002) 2. Bundesliga Nord' => '2BLN-2017',
 		'Bundesligen 2017/18:2. Bundesliga (2. BL-Süd) - (003) 2. Bundesliga Süd' => '2BLS-2017',
+		'BundesLiga 2017-2018:Bundesliga - 1. Bundesliga' => 'OBL-2017',
 	];
 
 	$res = [];
