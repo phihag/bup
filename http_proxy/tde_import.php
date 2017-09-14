@@ -9,12 +9,13 @@ $match_url = $_GET['url'];
 main($match_url);
 
 function main($match_url) {
-	if (! \preg_match('/^https?:\/\/(?:www\.turnier\.de|[a-z]+\.tournamentsoftware\.com)\/sport\/teammatch\.aspx\?id=([a-fA-F0-9-]+)&match=([0-9]+)$/', $match_url)) {
+	if (! \preg_match('/^https?:\/\/(?P<domain>www\.turnier\.de|[a-z]+\.tournamentsoftware\.com)\/sport\/teammatch\.aspx\?id=([a-fA-F0-9-]+)&match=([0-9]+)$/', $match_url, $matches)) {
 		throw new \Exception('Unsupported URL');
 	}
 
-	$tm_url = \file_get_contents($match_url);
-	$tm = parse_teammatch($tm_url);
+	$domain = $matches['domain'];
+	$tm_html = \file_get_contents($match_url);
+	$tm = parse_teammatch($tm_html, $domain);
 
 	$data = $tm;
 	if (isset($_GET['format'])) {
@@ -51,7 +52,81 @@ function parse_match_players($players_html) {
 	];
 }
 
-function parse_teammatch($tm_html) {
+function _parse_players($players_html, $gender) {
+	if (\preg_match_all('/
+		<tr>\s*
+		<td>(?P<teamnum>[0-9]+)-(?P<ranking>[0-9]+)(?:-D(?P<ranking_d>[0-9]+))?<\/td>
+		<td><\/td>\s*
+		<td\s+id="playercell"><a\s+href="player\.aspx[^"]+">
+			(?P<lastname>[^<]+),\s*(?P<firstname>[^<]+)
+		<\/a><\/td>\s*
+		<td\s+class="flagcell">(?:
+			<img[^>]+\/><span\s*class="printonly\s*flag">\[(?P<nationality>[A-Z]{2,})\]\s*<\/span>
+		)?
+		<\/td>\s*
+		<td>(?P<textid>[0-9-]+)<\/td>\s*
+		<td>(?P<birthyear>[0-9]{4})?<\/td>
+		/xs', $players_html, $players_m, \PREG_SET_ORDER) === false) {
+		throw new \Exception('Failed to match players');
+	}
+
+	$res = \array_map(function($m) use ($gender) {
+		$p = [
+			'ranking' => \intval($m['ranking']),
+			'firstname' => $m['firstname'],
+			'lastname' => $m['lastname'],
+			'name' => $m['firstname'] . ' ' . $m['lastname'],
+			'textid' => $m['textid'],
+			'gender' => $gender,
+		];
+		if ($m['ranking_d']) {
+			$p['ranking_d'] = \intval($m['ranking_d']);
+		}
+		if ($m['nationality']) {
+			$p['nationality'] = $m['nationality'];
+		}
+		return $p;
+	}, $players_m);
+
+	if (\count($res) < 1) {
+		die($players_html);
+	}
+	return $res;
+}
+
+function download_all_players($ti, $domain) {
+	$players_url = (
+		'https://' . $domain . '/sport/teamrankingplayers.aspx?' .
+		'id=' . $ti['season'] . '&tid=' . $ti['id']
+	);
+	$players_html = \file_get_contents($players_url);
+
+	if (!\preg_match(
+			'/<table\s+class="ruler">\s*<caption>\s*Herren(?P<tbody>.*?)<\/table>/s',
+			$players_html, $players_m_m)) {
+		throw new \Exception('Cannot find male players in ' . $players_url);
+	}
+	$male_players = _parse_players($players_m_m['tbody'], 'm');
+	if (\count($male_players) === 0) {
+		throw new \Exception('Could not find any male players in ' . $players_url);
+	}
+
+	if (!\preg_match(
+			'/<table\s+class="ruler">\s*<caption>\s*Damen(?P<tbody>.*?)<\/table>/s',
+			$players_html, $players_f_m)) {
+		throw new \Exception('Cannot find male players in ' . $players_url);
+	}
+	$female_players = _parse_players($players_f_m['tbody'], 'f');
+	if (\count($female_players) === 0) {
+		throw new \Exception('Could not find any female players in ' . $players_url);
+	}
+
+	$all_players = \array_merge([], $male_players, $female_players);
+
+	return $all_players;
+}
+
+function parse_teammatch($tm_html, $domain) {
 	$LEAGUE_KEYS = [
 		'Bundesligen 2016/17:1. Bundesliga 1. Bundesliga' => '1BL-2016',
 		'Bundesligen 2016/17:1. Bundesliga 1. Bundesliga - Final Four' => '1BL-2016',
@@ -59,22 +134,41 @@ function parse_teammatch($tm_html) {
 		'Bundesligen 2016/17:1. Bundesliga 1. Bundesliga - PlayOff - Viertelfinale 2' => '1BL-2016',
 		'TEST - Ligen - Hagemeister Mai 2017:Test LIGA - Testliga' => '1BL-2016',
 		'BundesLiga 2016-2017:Bundesliga - 1. Bundesliga' => 'OBL-2017',
+		'Ligen NRW 2017-18:O19-NRW O19-RL - (001) Regionalliga West' => 'RLW-2016',
+		'Bundesligen 2017/18:1. Bundesliga (1. BL) - (001) 1. Bundesliga' => '1BL-2017',
+		'Bundesligen 2017/18:2. Bundesliga (2. BL-Nord) - (002) 2. Bundesliga Nord' => '2BLN-2017',
+		'Bundesligen 2017/18:2. Bundesliga (2. BL-Süd) - (003) 2. Bundesliga Süd' => '2BLS-2017',
 	];
 
 	$res = [];
-
 	if (\preg_match('/<h3>
-			<a\s*href="\/sport\/team\.aspx\?id=[^"]+">(?P<team0>[^<]+?)(?:\s*\([0-9-]+\))?<\/a>
+			<a\s*href="\/sport\/team\.aspx\?id=(?P<season0>[-A-Za-z0-9]+)&team=(?P<id0>[0-9]+)">\s*
+			(?P<team0>[^<]+?)(?:\s*\([0-9-]+\))?<\/a>
 			\s*-\s*
-			<a\s*href="\/sport\/team\.aspx\?id=[^"]+">(?P<team1>[^<]+?)(?:\s*\([0-9-]+\))?<\/a>
+			<a\s*href="\/sport\/team\.aspx\?id=(?P<season1>[-A-Za-z0-9]+)&team=(?P<id1>[0-9]+)">\s*
+			(?P<team1>[^<]+?)(?:\s*\([0-9-]+\))?<\/a>
 			/xs', $tm_html, $teamnames_m)) {
+
 		$res['team_names'] = [
 			decode_html($teamnames_m['team0']),
 			decode_html($teamnames_m['team1'])
 		];
+		$team_infos = [[
+			'season' => $teamnames_m['season0'],
+			'id' => $teamnames_m['id0'],
+			'name' => decode_html($teamnames_m['team0']),
+		], [
+			'season' => $teamnames_m['season1'],
+			'id' => $teamnames_m['id1'],
+			'name' => decode_html($teamnames_m['team1']),
+		]];
 	} else {
 		throw new \Exception('Cannot find team names!');
 	}
+
+	$res['all_players'] = \array_map(function($ti) use ($domain) {
+		return download_all_players($ti, $domain);
+	}, $team_infos);
 
 	if (!\preg_match('/
 			<div\s*class="title">\s*<h3>([^<]*)<\/h3>
@@ -89,6 +183,7 @@ function parse_teammatch($tm_html) {
 		throw new \Exception('Cannot find league ' . $long_league_id);
 	}
 	$res['league_key'] = $LEAGUE_KEYS[$long_league_id];
+	$res['team_competition'] = true;
 
 	// TODO all_players
 	// TODO match date
