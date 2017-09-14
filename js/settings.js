@@ -29,7 +29,7 @@ var default_settings = {
 	d_crecv: '#707676',
 	d_scale: 100,
 	dads_interval: 15000,
-	dads_wait: 10000,
+	dads_wait: 60000,
 	dads_dtime: 10000,
 	dads_atime: 5000,
 	dads_utime: '14:00',

@@ -517,8 +517,10 @@ function d_onconfchange(s, container) {
 	}
 }
 
+var _since_matchid = null;
+var _since_guess = null;
+
 // Returns a timestamp of when the match was finished, or false if it's ongoing
-var _since_guess = {};
 function finished_since(match) {
 	if (match === false) {
 		return false; // N/A, for instance multi-match display
@@ -531,11 +533,9 @@ function finished_since(match) {
 		return false; // No idea, fail safe
 	}
 
-	var match_id = match.setup.match_id;
-
 	var winner = calc.match_winner(match.setup.counting, match.network_score);
 	if ((winner === 'inprogress') || (winner === 'invalid')) {
-		delete _since_guess[match_id];
+		_since_matchid = null;
 		return false;
 	}
 
@@ -548,12 +548,14 @@ function finished_since(match) {
 		return presses[presses.length - 1].timestamp;
 	}
 
-	if (_since_guess[match_id]) {
-		return _since_guess[match_id];
+	var match_id = match.setup.match_id;
+	if (_since_matchid === match_id) {
+		return _since_guess;
 	}
 
 	var now = Date.now();
-	_since_guess[match_id] = now;
+	_since_matchid = match_id;
+	_since_guess = now;
 	return now;
 }
 
