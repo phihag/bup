@@ -1106,7 +1106,6 @@ function render_teamcourt(s, container, event, court, match, colors) {
 	});
 	if (s.settings.displaymode_style === 'teamcourt_pause') {
 		var timer_state = _extract_timer_state(s, match);
-		console.log('TIMER', timer_state)
 		if (timer_state) {
 			create_timer(timer_state, match_name_container, {
 				style: 'margin-right:1ch',
