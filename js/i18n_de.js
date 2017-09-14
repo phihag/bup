@@ -478,6 +478,7 @@ var i18n_de = {
 'displaymode|oncourt': 'Feld-Punktzahl',
 'displaymode|international': 'International',
 'displaymode|teamcourt': 'Mannschaftskampf',
+'displaymode|teamcourt_pause': 'Mannschaft mit Pausenzeit',
 'displaymode|2court': '2 Felder',
 'displaymode|andre': 'André',
 'displaymode|tim': 'Tim',

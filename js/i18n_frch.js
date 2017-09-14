@@ -474,6 +474,7 @@ var i18n_frch = {
 'displaymode|oncourt': 'Terrain score',
 'displaymode|international': 'International',
 'displaymode|teamcourt': 'Affichage de l\'équipe',
+'displaymode|teamcourt_pause': 'Équipe avec temps de pause',
 'displaymode|2court': '2 courts',
 'displaymode|castall': 'Greenscreen (tous les terrains)',
 'displaymode|andre': 'André',

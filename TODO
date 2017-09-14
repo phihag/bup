@@ -1,6 +1,3 @@
-+ dmode international_pause
-	mail Jan
-
 integration test for display (verify a crash during display gets reported)
 CourtSpot: test resetting (should not fail with display on)
 NLA scoresheet: add logo

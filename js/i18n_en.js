@@ -478,6 +478,7 @@ var i18n_en = {
 'displaymode|oncourt': 'court score',
 'displaymode|international': 'international',
 'displaymode|teamcourt': 'team display',
+'displaymode|teamcourt_pause': 'team with interval timer',
 'displaymode|2court': '2 courts',
 'displaymode|castall': 'greenscreen (all courts)',
 'displaymode|andre': 'André',

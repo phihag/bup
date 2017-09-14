@@ -5,6 +5,7 @@ var ALL_STYLES = [
 	'oncourt',
 	'international',
 	'teamcourt',
+	'teamcourt_pause',
 	'stripes',
 	'2court',
 	'top+list',
@@ -945,7 +946,7 @@ function render_international(s, container, event, court, match, colors) {
 			(gwinner === 'left') ? (team_id === 0) : (
 			(gwinner === 'right') ? (team_id === 1) : (
 			(server.team_id === team_id))));
-// var style = s.settings.displaymode_style;
+
 		var player_names = team.players.map(function(player) {
 			return player.name;
 		});
@@ -1103,6 +1104,15 @@ function render_teamcourt(s, container, event, court, match, colors) {
 			'color:' + colors.fg2
 		),
 	});
+	if (s.settings.displaymode_style === 'teamcourt_pause') {
+		var timer_state = _extract_timer_state(s, match);
+		console.log('TIMER', timer_state)
+		if (timer_state) {
+			create_timer(timer_state, match_name_container, {
+				style: 'margin-right:1ch',
+			});
+		}
+	}
 	uiu.el(match_name_container, 'div', {}, match.setup.match_name);
 
 	match.setup.teams.forEach(function(team, team_id) {
@@ -1608,7 +1618,7 @@ function calc_colors(cur_settings) {
 }
 
 function _extract_timer_state(s, match) {
-	if (s.settings.displaymode_style !== '2court') {
+	if (!['2court', 'teamcourt_pause'].includes(s.settings.displaymode_style)) {
 		return; // No timer required
 	}
 
@@ -1840,12 +1850,12 @@ function update(err, s, event) {
 		clubplayers: render_clubplayers,
 		clubplayerslr: render_clubplayerslr,
 		international: render_international,
-		international_pause: render_international,
 		oncourt: render_oncourt,
 		onlyplayers: render_onlyplayers,
 		onlyscore: render_onlyscore,
 		stripes: render_stripes,
 		teamcourt: render_teamcourt,
+		teamcourt_pause: render_teamcourt,
 	}[style];
 	if (xfunc) {
 		var court = _render_court(s, container, event);
@@ -2053,6 +2063,7 @@ function option_applies(style_id, option_name) {
 		onlyplayers: ['court_id', 'c0', 'c1', 'cbg'],
 		onlyscore: ['court_id', 'c0', 'c1', 'cbg'],
 		teamcourt: ['court_id', 'c0', 'c1', 'cfg', 'cfg2', 'cbg'],
+		teamcourt_pause: ['court_id', 'c0', 'c1', 'cfg', 'cfg2', 'cbg'],
 		tim: ['cbg', 'cfg', 'ctim_blue', 'ctim_active'],
 		tournament_overview: ['cfg', 'cbg', 'cbg3', 'cborder', 'cfg2'],
 		stripes: ['court_id', 'cbg', 'c0', 'c1', 'cfg', 'cbg4', 'cserv'],
