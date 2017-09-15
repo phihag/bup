@@ -1,6 +1,7 @@
+add time to version number
 NLA scoresheet: add logo
 	-> mail Arnauld (right or guest first?)
-	-> thank Jürgen
+	-> mail/thank Jürgen
 displaymode for imported events (courts missing)
 obl
 	create demo from https://obv.tournamentsoftware.com/sport/teammatch.aspx?id=7AAA19D0-0E65-42BF-8E03-6F1F6AE31C9A&match=19
@@ -9,6 +10,7 @@ obl
 	vector logo
 	-> Daniel
 
+i18n test: fallback identical to main?
 integration test for display (verify a crash during display gets reported)
 block middle buttons like any other-> Jörg Hupertz
 test referee mode without event -> Manuel Lappe
@@ -19,6 +21,7 @@ setupsheet: check ranking
 update bldemo to 2017
 make add to homescreen nice
 improve dads
+	ad while something incomplete
 	ad during intervals
 	ad between games
 	add type: text (z.B. "gute Heimreise", "nächstes Heimspiel")
@@ -57,6 +60,8 @@ store order change in courtspot
 stats: + most consecutive points
 stats: + game points
 stats: + match points
+use bup.ajax module instead of custom xmlhttprequest
+use bup.ajax module instead of jquery
 
 displaymode: option to reset colors
 dayimport in normal import view (unify with #mo import)

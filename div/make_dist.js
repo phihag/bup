@@ -53,7 +53,12 @@ function ensure_mkdir(path, cb) {
 /*   JavaScript   */
 
 function uglify(js_files, jsdist_fn, cb) {
-	var args = [];
+	const args = [];
+	args.push('--source-map');
+	args.push(jsdist_fn + '.map');
+	args.push('--source-map-include-sources');
+	args.push('--source-map-url');
+	args.push(path.basename(jsdist_fn) + '.map');
 	args.push('--mangle');
 	args.push('mangle_yes');
 	args.push('--compress');
@@ -63,11 +68,10 @@ function uglify(js_files, jsdist_fn, cb) {
 	args.push.apply(args, js_files);
 
 	const uglify_path = path.normalize(path.join(__dirname, '..', 'node_modules', '.bin', 'uglifyjs'));
-
-	var uglify_proc = child_process.spawn(uglify_path, args, {
+	const uglify_proc = child_process.spawn(uglify_path, args, {
 		stdio: 'inherit',
 	});
-	uglify_proc.on('close', function (code) {
+	uglify_proc.on('close', (code) => {
 		if (code === 0) {
 			cb(null);
 		} else {
