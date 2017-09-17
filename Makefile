@@ -14,7 +14,7 @@ deps: deps-essential ## Download and install all dependencies (for compiling / t
 deps-mandatory: deps-essential
 
 deps-essential:
-	(node --version && npm --version) >/dev/null 2>/dev/null || sudo apt-get install nodejs npm
+	# (node --version && npm --version) >/dev/null 2>/dev/null || sudo apt-get install nodejs npm
 	npm install
 	$(MAKE) download-libs
 

@@ -1,12 +1,12 @@
 'use strict';
 
-var async = require('async');
-var child_process = require('child_process');
-var fs = require('fs');
-var path = require('path');
-var process = require('process');
+const async = require('async');
+const child_process = require('child_process');
+const fs = require('fs');
+const path = require('path');
+const process = require('process');
 
-var utils = require('../js/utils.js');
+const utils = require('../js/utils.js');
 
 
 function git_rev(cb) {
@@ -31,7 +31,7 @@ function transform_file(in_fn, out_fn, func, cb) {
 
 function transform_files(in_files, out_dir, func, cb) {
 	async.map(in_files, function(fn, cb) {
-		var out_fn = path.join(out_dir, path.basename(fn));
+		const out_fn = path.join(out_dir, path.basename(fn));
 		transform_file(fn, out_fn, func, function(err) {
 			cb(err, out_fn);
 		});
@@ -114,7 +114,7 @@ function collect_css(css_files, cb) {
 			if (err) {
 				return cb(err);
 			}
-			var css = '/*   ' + fn + '   */\n\n' + contents + '\n\n';
+			const css = '/*   ' + fn + '   */\n\n' + contents + '\n\n';
 			cb(err, css);
 		});
 	}, function(err, ar) {
@@ -122,13 +122,13 @@ function collect_css(css_files, cb) {
 			return cb(err);
 		}
 
-		var css = ar.join('\n');
+		const css = ar.join('\n');
 		cb(err, css);
 	});
 }
 
 function cleancss(css_infile, cssdist_fn, cb) {
-	var args = [
+	const args = [
 		'--rounding-precision', '9',
 		'--skip-rebase',
 		'-o',
@@ -138,7 +138,7 @@ function cleancss(css_infile, cssdist_fn, cb) {
 
 	const cleancss_path = path.normalize(path.join(__dirname, '..', 'node_modules', '.bin', 'cleancss'));
 
-	var proc = child_process.spawn(cleancss_path, args, {
+	const proc = child_process.spawn(cleancss_path, args, {
 		stdio: 'inherit',
 	});
 	proc.on('close', function (code) {
@@ -151,7 +151,7 @@ function cleancss(css_infile, cssdist_fn, cb) {
 }
 
 function convert_css(css_files, cssdist_fn, tmp_dir, cb) {
-	var css_tmpfn = path.join(tmp_dir, 'bup.all.css');
+	const css_tmpfn = path.join(tmp_dir, 'bup.all.css');
 	async.waterfall([
 		function(cb) {
 			collect_css(css_files, cb);
@@ -172,10 +172,10 @@ function convert_css(css_files, cssdist_fn, tmp_dir, cb) {
 /*  Main function  */
 
 function main() {
-	var args = process.argv.slice(2);
-	var dev_dir = args[0];
-	var dist_dir = args[1];
-	var tmp_dir = args[2];
+	const args = process.argv.slice(2);
+	const dev_dir = args[0];
+	const dist_dir = args[1];
+	const tmp_dir = args[2];
 
 	if (! dev_dir || !dist_dir || !tmp_dir) {
 		console.error('Usage: make_dist.js DEV_DIR DIST_DIR TMP_DIR');
@@ -183,12 +183,12 @@ function main() {
 		return;
 	}
 
-	var html_in_fn = path.join(dev_dir, 'bup.html');
-	var html_out_fn = path.join(dist_dir, 'index.html');
-	var html_out_fn2 = path.join(dist_dir, 'bup.html');
-	var jsdist_fn = path.join(dist_dir, 'bup.dist.js');
-	var cssdist_fn = path.join(dist_dir, 'bup.dist.css');
-	var version_fn = path.join(dist_dir, 'VERSION');
+	const html_in_fn = path.join(dev_dir, 'bup.html');
+	const html_out_fn = path.join(dist_dir, 'index.html');
+	const html_out_fn2 = path.join(dist_dir, 'bup.html');
+	const jsdist_fn = path.join(dist_dir, 'bup.dist.js');
+	const cssdist_fn = path.join(dist_dir, 'bup.dist.css');
+	const version_fn = path.join(dist_dir, 'VERSION');
 
 	function transform_html(html) {
 		html = html.replace(/<!--@DEV-->[\s\S]*?<!--\/@DEV-->/g, '');
@@ -213,9 +213,14 @@ function main() {
 				if (err) {
 					return cb(err);
 				}
-				var d = new Date();
-				var version_date = d.getFullYear() + '.' + utils.pad(d.getMonth() + 1) + '.' + utils.pad(d.getDate());
-				var version = version_date + '.' + rev;
+				const d = new Date();
+				const version_date = (
+					d.getFullYear() + '.' +
+					utils.pad(d.getMonth() + 1) + '.' +
+					utils.pad(d.getDate()) + '.' +
+					utils.pad(d.getHours()) + utils.pad(d.getMinutes())
+				);
+				const version = version_date + rev;
 				cb(err, version);
 			});
 		},
@@ -231,12 +236,12 @@ function main() {
 		},
 		function(version, html, cb) {
 			// Get all scripts in HTML file
-			var script_files = [];
-			var dev_re = /<!--@DEV-->([\s\S]*?)<!--\/@DEV-->/g;
-			var dev_m;
+			const script_files = [];
+			const dev_re = /<!--@DEV-->([\s\S]*?)<!--\/@DEV-->/g;
+			let dev_m;
 			while ((dev_m = dev_re.exec(html))) {
-				var script_re = /<script src="([^"]+)"><\/script>/g;
-				var script_m;
+				const script_re = /<script src="([^"]+)"><\/script>/g;
+				let script_m;
 				while ((script_m = script_re.exec(dev_m[1]))) {
 					script_files.push(script_m[1]);
 				}
@@ -246,12 +251,12 @@ function main() {
 			});
 		},
 		function (html, cb) {
-			var css_files = [];
-			var dev_re = /<!--@DEV-->([\s\S]*?)<!--\/@DEV-->/g;
-			var dev_m;
+			const css_files = [];
+			const dev_re = /<!--@DEV-->([\s\S]*?)<!--\/@DEV-->/g;
+			let dev_m;
 			while ((dev_m = dev_re.exec(html))) {
-				var style_re = /<link\s+rel="stylesheet"\s+href="([^"]+)"/g;
-				var style_m;
+				const style_re = /<link\s+rel="stylesheet"\s+href="([^"]+)"/g;
+				let style_m;
 				while ((style_m = style_re.exec(dev_m[1]))) {
 					css_files.push(style_m[1]);
 				}

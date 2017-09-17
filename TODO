@@ -1,8 +1,8 @@
-schweiz gelbe / rote Karte newline
-add time to version number
 NLA scoresheet: add logo
 	-> mail Arnauld (right or guest first?)
 	-> mail/thank Jürgen
+support new btde codes
+
 displaymode for imported events (courts missing)
 obl
 	create demo from https://obv.tournamentsoftware.com/sport/teammatch.aspx?id=7AAA19D0-0E65-42BF-8E03-6F1F6AE31C9A&match=19
@@ -14,8 +14,11 @@ obl
 i18n test: fallback identical to main?
 integration test for display (verify a crash during display gets reported)
 block middle buttons like any other-> Jörg Hupertz
-test referee mode without event -> Manuel Lappe
+"20 Sekunden" im Ansagefeld nicht sichtbar wenn Auf- und Rückschläger bestimmt werden -> Jörg Hupertz
+	noch "20 Sekunden" neben der Uhr
+
 tde_import: import players from other teams (https://www.turnier.de/sport/teamrankingplayers.aspx?id=3AE85140-FD7F-4D47-8BEE-575B0334E9D8&tid=1477)
+test referee mode without event -> Manuel Lappe
 tde_import: Rückrunde vs Hinrunde (check with old seasons)
 test demo with ranking
 setupsheet: check ranking
@@ -254,8 +257,6 @@ override display to show a court as blank (Dario)
 displaymode: option to vacate a court
 	set via settings
 	set (via refmode)
-"20 Sekunden" im Ansagefeld nicht sichtbar wenn Auf- und Rückschläger bestimmt werden -> Jörg Hupertz
-	noch "20 Sekunden" neben der Uhr
 almost changed running match: ask again when changing if match is in progress!!!
 adopt event: show difference
 adopt event: recalc upon event change
