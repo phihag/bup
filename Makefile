@@ -44,11 +44,11 @@ dist: cleandist ## Create distribution files
 	cp libs/jspdf.min.js dist/bup/jspdf.dist.js
 	cp libs/jszip.min.js dist/bup/jszip.min.js
 	cp libs/pdfform.minipdf.dist.js dist/bup/pdfform.minipdf.dist.js
-	svgo -f icons/ -o dist/bup/icons/
+	svgo -q -f icons/ -o dist/bup/icons/
 	cp icons/*.gif icons/*.png dist/bup/icons/
 	cp div/dist_htaccess dist/bup/.htaccess
 	mkdir -p dist/bup/div/
-	svgo -i div/bundesliga-logo.svg -o dist/bup/div/bundesliga-logo.svg
+	svgo -q -i div/bundesliga-logo.svg -o dist/bup/div/bundesliga-logo.svg
 	node div/minify_json.js div/edemo.json dist/bup/div/edemo.json
 	node div/minify_json.js div/vdemo.json dist/bup/div/vdemo.json
 	node div/minify_json.js div/bldemo.json dist/bup/div/bldemo.json
@@ -61,6 +61,10 @@ dist: cleandist ## Create distribution files
 	cp -R div/teamlists --target-directory dist/bup/div/
 	cp -R div/courtspot --target-directory dist/bup/div/
 	cp -R http_proxy --target-directory dist/bup/
+	svgo -q --disable removeEmptyText --disable removeEmptyContainers -i div/scoresheet_bundesliga-2016.svg -o dist/bup/div/scoresheet_bundesliga-2016.svg
+	svgo -q --disable removeEmptyText --disable removeEmptyContainers -i div/scoresheet_international.svg -o dist/bup/div/scoresheet_international.svg
+	svgo -q --disable removeEmptyText --disable removeEmptyContainers -i div/scoresheet_international_5x11.svg -o dist/bup/div/scoresheet_international_5x11.svg
+	svgo -q --disable removeEmptyText --disable removeEmptyContainers -i div/scoresheet_nla.svg -o dist/bup/div/scoresheet_nla.svg
 	cp \
 		div/bundesliga-ballsorten-2016.pdf \
 		div/bupdate.php \
@@ -71,9 +75,6 @@ dist: cleandist ## Create distribution files
 		div/Mannschaftsaufstellung_1BL-2015.pdf \
 		div/Mannschaftsaufstellung_2BL-2015.pdf \
 		div/NLA_Resultatblatt.svg \
-		div/scoresheet_bundesliga-2016.svg \
-		div/scoresheet_international.svg \
-		div/scoresheet_international_5x11.svg \
 		div/Spielbericht-Buli-2016-17.xlsm \
 		div/Spielbericht_8x3x21.svg \
 		div/Spielberichtsbogen_1BL-2015.pdf \

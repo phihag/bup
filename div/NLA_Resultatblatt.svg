@@ -166,7 +166,7 @@ line.dotted {
 <text x="147" y="45" class="nla_entry" id="es_svg_teamname1"></text>
 
 <!-- header -->
-<text x="124" y="35" class="nla_entry" id="es_svg_shuttle_count">99</text>
+<text x="124" y="35" class="nla_entry" id="es_svg_shuttle_count"></text>
 <text x="126.25" text-anchor="middle" y="26" class="nla_entry" id="es_svg_day"></text>
 <text x="136" text-anchor="middle" y="26" class="nla_entry" id="es_svg_month"></text>
 <text x="146" text-anchor="middle" y="26" class="nla_entry" id="es_svg_year"></text>

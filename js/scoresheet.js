@@ -912,6 +912,10 @@ function sheet_name(setup) {
 		return 'bundesliga-2016';
 	}
 
+	if (setup.league_key === 'NLA-2017') {
+		return 'nla';
+	}
+
 	if (calc.max_game_count(setup.counting) === 5) {
 		return 'international_5x11';
 	}
@@ -1110,6 +1114,7 @@ var URLS = {
 	'international': 'div/scoresheet_international.svg',
 	'international_5x11': 'div/scoresheet_international_5x11.svg',
 	'bundesliga-2016': 'div/scoresheet_bundesliga-2016.svg',
+	'nla': 'div/scoresheet_nla.svg',
 };
 var dl;
 function load_sheet(sheet_name, cb, url_prefix) {
