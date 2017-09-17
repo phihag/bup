@@ -143,8 +143,8 @@ function parse_day($full_html) {
 	$matches_by_name = [];
 	$bm_matches = [];
 	foreach ($matches as $m) {
-		$t1 = make_team($m['player11_name'], $m['player12_name']);
-		$t2 = make_team($m['player21_name'], $m['player22_name']);
+		$t1 = make_team($m['player11_name'], isset($m['player12_name']) ? $m['player12_name'] : '');
+		$t2 = make_team($m['player21_name'], isset($m['player22_name']) ? $m['player22_name'] : '');
 		$is_doubles = \count($t1['players']) === 2;
 		$match_name = $m['discipline_name'];
 		$match_id = 'tde_dayimport_' . $match_name . '_' . \count($bm_matches);
@@ -175,9 +175,9 @@ function parse_day($full_html) {
 		return ! (\array_key_exists('network_score', $bm) && $bm['network_score']);
 	}, $bm_matches);
 	if ($unfinished) {
-		$res_matches = \array_filter($bm_matches, function($bm) {
+		$res_matches = \array_values(\array_filter($bm_matches, function($bm) {
 			return ! (\array_key_exists('network_score', $bm) && $bm['network_score']);
-		});
+		}));
 
 		$match_count_by_name = [];
 		$match_curcount_by_name = [];
