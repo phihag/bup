@@ -1,6 +1,18 @@
 'use strict';
 var svg2pdf = (function() {
 
+function _split_args(str) {
+	if (!str) return [];
+
+	str = str.replace(/[eE]-/g, '_');
+	return str.split(/\s*,\s*|\s+|(?=-)/).map(function(el) {
+		if (el.includes('_')) {
+			el = el.replace('_', 'e-');
+		}
+		return el;
+	});
+}
+
 function parse_path(d) {
 	if (!d) return null;
 
@@ -24,13 +36,13 @@ function parse_path(d) {
 	}
 
 	while (d && !/^\s*$/.test(d)) {
-		var m = /^\s*([ZzvVhHmMlLcAaC])(?:\s*(-?[0-9.]+(?:(?:\s*,\s*|\s+|(?=-))-?[0-9.]+)*))?/.exec(d);
+		var m = /^\s*([ZzvVhHmMlLcAaC])(?:\s*(-?[0-9.e]+(?:(?:\s*,\s*|\s+|(?=-))-?[0-9.e]+)*))?/.exec(d);
 		if (!m) {
 			// console.error('Unsupported path data: ' + JSON.stringify(d));
 			return;
 		}
 		var c = m[1];
-		var args = m[2] ? m[2].split(/\s*,\s*|\s+|(?=-)/).map(parseFloat) : [];
+		var args = _split_args(m[2]).map(parseFloat);
 		d = d.substring(m[0].length);
 		var a1 = args[0];
 		var a2 = args[1];

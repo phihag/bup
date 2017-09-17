@@ -125,6 +125,23 @@ _describe('svg2pdf', function() {
 				closed: false,
 			}]
 		);
+
+		// scientific notation
+		// Minus as separator
+		assert.deepStrictEqual(
+			bup.svg2pdf.parse_path(
+				'M.1e1,200e-2L30000000000e-10-24-10,2'
+			),
+			[{
+				x1: 1,
+				y1: 2,
+				acc: [
+					[2, -26],
+					[-13, 26],
+				],
+				closed: false,
+			}]
+		);
 	});
 
 	_it('arc2beziers', function() {
