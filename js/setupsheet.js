@@ -4,6 +4,7 @@ var setupsheet = (function() {
 var URLS = {
 	'bundesliga-2016': 'div/setupsheet_bundesliga-2016.svg',
 	'default': 'div/setupsheet_default.svg',
+	'nla': 'div/setupsheet_nla.svg',
 };
 var dl;
 
@@ -14,6 +15,10 @@ var MIN_LENGTHS = {
 		f: 4,
 	},
 	'default': {
+		m: 8,
+		f: 4,
+	},
+	'nla': {
 		m: 8,
 		f: 4,
 	},
@@ -515,7 +520,10 @@ function rerender(s) {
 }
 
 function render_svg(s) {
-	var sheet_name = eventutils.is_bundesliga(s.event.league_key) ? 'bundesliga-2016' : 'default';
+	var league_key = s.event.league_key;
+	var sheet_name = (
+		eventutils.is_bundesliga(league_key) ? 'bundesliga-2016' :
+		((league_key === 'NLA-2017') ? 'nla' : 'default'));
 	if (!dl) {
 		dl = downloader(URLS);
 	}
