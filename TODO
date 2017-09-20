@@ -1,10 +1,5 @@
-NLA scoresheet: add logo
-	-> mail Arnauld (right or guest first?)
-	-> mail/thank Jürgen
-support new btde codes
+https://obv.tournamentsoftware.com/sport/teammatch.aspx?id=7AAA19D0-0E65-42BF-8E03-6F1F6AE31C9A&match=36 : import all_players
 
-
-displaymode for imported events (courts missing)
 obl
 	create demo from https://obv.tournamentsoftware.com/sport/teammatch.aspx?id=7AAA19D0-0E65-42BF-8E03-6F1F6AE31C9A&match=19
 	eventsheet: http://www.badminton.at/files/raster/SPI_MH_5.xls (already converted)
@@ -12,12 +7,22 @@ obl
 	vector logo
 	-> Daniel
 
-i18n test: fallback identical to main?
-integration test for display (verify a crash during display gets reported)
+btde-like overview display 
+btde-like court display!
+	msg Julian with demo
+support new btde codes
 block middle buttons like any other-> Jörg Hupertz
 "20 Sekunden" im Ansagefeld nicht sichtbar wenn Auf- und Rückschläger bestimmt werden -> Jörg Hupertz
 	noch "20 Sekunden" neben der Uhr
+dads referee mode config
 
+
+RL SüdOst -> mail btde
+refmode: visible warning if no crypto.subtle
+i18n test: fallback identical to main?
+integration test for display (verify a crash during display gets reported)
+
+displaymode for imported events (courts missing)
 tde_import: import players from other teams (https://www.turnier.de/sport/teamrankingplayers.aspx?id=3AE85140-FD7F-4D47-8BEE-575B0334E9D8&tid=1477)
 test referee mode without event -> Manuel Lappe
 tde_import: Rückrunde vs Hinrunde (check with old seasons)
@@ -32,6 +37,7 @@ improve dads
 	add type: text (z.B. "gute Heimreise", "nächstes Heimspiel")
 	add type: refrath-gegen
 	configure on referee!
+	multiple different ads
 	check all i18n of names
 	switch to indexed db
 setupsheet: default to new player if no players are available
@@ -42,8 +48,6 @@ tde_import: check that they work
 	2017 ÖBV
 	2017 NLA
 	2017 NLB
-refmode: visible warning if no crypto.subtle
-NLA:go through ch vocabulary
 direct link for zero-config eventsheets (show progress there)
 btde-like dstyle
 update RLM link to http://www.dbv-mitte.de/web/images/Allgemein/Gruppenordnung/Gruppe_Mitte_im_DBV_Ordnungen_20170701.pdf
@@ -96,6 +100,8 @@ i18n: check for i18n values that are the same in all languages (like cancel)
 useful tracebacks!
 	generate source map
 	parse source map
+
+set up demoticker project
 
 test all dialogs with incorrect league_keys
 refmode: test various timings (client before server at hub - does it still come up in display?)

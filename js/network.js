@@ -6,6 +6,7 @@ var networks = {};
 function get_real_netw() {
 	return (
 		networks.mo ||
+		networks.demo ||
 		networks.rlmdemo || networks.nrwdemo ||
 		networks.bldemo || networks.bldemo_inprogress || networks.bldemo_incomplete ||
 		networks.vdemo || networks.edemo ||
@@ -607,6 +608,8 @@ function ui_init(s, hash_query) {
 		networks.nlademo = staticnet(null, 'div/nlademo.json');
 	} else if (hash_query.tdemo !== undefined) {
 		networks.tdemo = staticnet(null, 'div/tdemo.json');
+	} else if (hash_query.obldemo !== undefined) {
+		networks.demo = staticnet(null, 'div/demos/obl.json');
 	} else if (hash_query.btsh_e !== undefined) {
 		networks.btsh = btsh(null, hash_query.btsh_e);
 	} else if (hash_query.mo !== undefined) {

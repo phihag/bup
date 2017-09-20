@@ -69,7 +69,7 @@ function _parse_score($score_html) {
 function _parse_players($players_html, $gender) {
 	if (\preg_match_all('/
 		<tr>\s*
-		<td>(?P<teamnum>[0-9]+)-(?P<ranking>[0-9]+)(?:-D(?P<ranking_d>[0-9]+))?<\/td>
+		<td>(?:(?P<teamnum>[0-9]+)-(?P<ranking>[0-9]+)(?:-D(?P<ranking_d>[0-9]+))?)?<\/td>
 		<td><\/td>\s*
 		<td\s+id="playercell"><a\s+href="player\.aspx[^"]+">
 			(?P<lastname>[^<]+),\s*(?P<firstname>[^<]+)
@@ -86,13 +86,15 @@ function _parse_players($players_html, $gender) {
 
 	$res = \array_map(function($m) use ($gender) {
 		$p = [
-			'ranking' => \intval($m['ranking']),
 			'firstname' => $m['firstname'],
 			'lastname' => $m['lastname'],
 			'name' => $m['firstname'] . ' ' . $m['lastname'],
 			'textid' => $m['textid'],
 			'gender' => $gender,
 		];
+		if ($m['ranking']) {
+			$p['ranking'] = \intval($m['ranking']);
+		}
 		if ($m['ranking_d']) {
 			$p['ranking_d'] = \intval($m['ranking_d']);
 		}
@@ -102,21 +104,19 @@ function _parse_players($players_html, $gender) {
 		return $p;
 	}, $players_m);
 
-	if (\count($res) < 1) {
-		die($players_html);
-	}
 	return $res;
 }
 
 function download_all_players($ti, $domain) {
+	$pagename = ($domain === 'obv.tournamentsoftware.com') ? 'teamplayers' : 'teamrankingplayers';
 	$players_url = (
-		'https://' . $domain . '/sport/teamrankingplayers.aspx?' .
+		'https://' . $domain . '/sport/' . $pagename . '.aspx?' .
 		'id=' . $ti['season'] . '&tid=' . $ti['id']
 	);
 	$players_html = \file_get_contents($players_url);
 
 	if (!\preg_match(
-			'/<table\s+class="ruler">\s*<caption>\s*Herren(?P<tbody>.*?)<\/table>/s',
+			'/<table\s+class="ruler">\s*<caption>\s*(?:Herren|Männer)(?P<tbody>.*?)<\/table>/s',
 			$players_html, $players_m_m)) {
 		return null;
 	}
@@ -126,7 +126,7 @@ function download_all_players($ti, $domain) {
 	}
 
 	if (!\preg_match(
-			'/<table\s+class="ruler">\s*<caption>\s*Damen(?P<tbody>.*?)<\/table>/s',
+			'/<table\s+class="ruler">\s*<caption>\s*(?:Damen|Frauen)(?P<tbody>.*?)<\/table>/s',
 			$players_html, $players_f_m)) {
 		return null;
 	}
