@@ -43,7 +43,7 @@ function main(cb) {
 }
 
 function minify_json(in_fn, out_fn, cb) {
-	const contents = fs.readFile(in_fn, {encoding: 'utf8'}, (err, content) => {
+	fs.readFile(in_fn, {encoding: 'utf8'}, (err, content) => {
 		if (err) return cb(err);
 
 		const minified = JSON.stringify(JSON.parse(content));
