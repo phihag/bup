@@ -28,7 +28,6 @@ function ui_import() {
 function import_tde(s, match_url, cb) {
 	var import_url = baseurl + 'bup/http_proxy/tde_import?format=export&url=' + encodeURIComponent(match_url);
 	ajax.req({
-		method: 'GET',
 		url: import_url,
 	}, function(import_json) {
 		var data = utils.parse_json(import_json);
@@ -60,7 +59,6 @@ function import_tde(s, match_url, cb) {
 function download_tde_day(s, day_url, cb) {
 	var import_url = baseurl + 'bup/http_proxy/tde_dayimport?url=' + encodeURIComponent(day_url);
 	ajax.req({
-		method: 'GET',
 		url: import_url,
 	}, function(import_json) {
 		var data = utils.parse_json(import_json);
