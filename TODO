@@ -1,7 +1,4 @@
-https://obv.tournamentsoftware.com/sport/teammatch.aspx?id=7AAA19D0-0E65-42BF-8E03-6F1F6AE31C9A&match=36 : import all_players
-
 obl
-	create demo from https://obv.tournamentsoftware.com/sport/teammatch.aspx?id=7AAA19D0-0E65-42BF-8E03-6F1F6AE31C9A&match=19
 	eventsheet: http://www.badminton.at/files/raster/SPI_MH_5.xls (already converted)
 	scoresheet: http://www.badminton.at/files/raster/SCHIRIZE.xls
 	vector logo

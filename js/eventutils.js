@@ -149,6 +149,15 @@ function annotate(s, event) {
 	if (!event.tournament_name) {
 		event.tournament_name = name_by_league(league_key);
 	}
+	/*@DEV*/
+	if (event.team_names) {
+		var guessed_name = event.team_names[0] + ' - ' + event.team_names[1];
+		if (guessed_name === event.event_name) {
+			report_problem.silent_error('Redundant event_name in event');
+		}
+	}
+	/*/@DEV*/
+
 	if (!event.event_name && event.team_names) {
 		event.event_name = event.team_names[0] + ' - ' + event.team_names[1];
 	}

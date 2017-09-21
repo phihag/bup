@@ -1,17 +1,194 @@
 {
   "type": "bup-export",
-  "version": 1,
+  "version": 2,
   "event": {
     "team_names": [
       "AS Logistik Mödling",
       "BSC 70 Linz"
     ],
-    "all_players": [
-      [],
-      []
-    ],
     "league_key": "OBL-2017",
     "team_competition": true,
+    "all_players": [
+      [
+        {
+          "firstname": "Daniel",
+          "lastname": "Graßmück",
+          "name": "Daniel Graßmück",
+          "textid": "20616",
+          "gender": "m"
+        },
+        {
+          "firstname": "Philip",
+          "lastname": "Haidinger",
+          "name": "Philip Haidinger",
+          "textid": "21538",
+          "gender": "m"
+        },
+        {
+          "firstname": "Andras",
+          "lastname": "Nemeth",
+          "name": "Andras Nemeth",
+          "textid": "23073",
+          "gender": "m",
+          "nationality": "HUN"
+        },
+        {
+          "firstname": "Benjamin",
+          "lastname": "Schlemmer",
+          "name": "Benjamin Schlemmer",
+          "textid": "21064",
+          "gender": "m"
+        },
+        {
+          "firstname": "Dominik",
+          "lastname": "Stipsits",
+          "name": "Dominik Stipsits",
+          "textid": "10783",
+          "gender": "m"
+        },
+        {
+          "firstname": "Luka",
+          "lastname": "Wraber",
+          "name": "Luka Wraber",
+          "textid": "20774",
+          "gender": "m"
+        },
+        {
+          "firstname": "Reka",
+          "lastname": "Sarosi",
+          "name": "Reka Sarosi",
+          "textid": "24173",
+          "gender": "f",
+          "nationality": "HUN"
+        },
+        {
+          "firstname": "Bianca",
+          "lastname": "Schiester",
+          "name": "Bianca Schiester",
+          "textid": "20828",
+          "gender": "f"
+        }
+      ],
+      [
+        {
+          "firstname": "Andreas",
+          "lastname": "Böhm",
+          "name": "Andreas Böhm",
+          "textid": "32095",
+          "gender": "m"
+        },
+        {
+          "firstname": "Klaus",
+          "lastname": "Dornig",
+          "name": "Klaus Dornig",
+          "textid": "31577",
+          "gender": "m"
+        },
+        {
+          "firstname": "Wolfgang",
+          "lastname": "Gnedt",
+          "name": "Wolfgang Gnedt",
+          "textid": "21139",
+          "gender": "m"
+        },
+        {
+          "firstname": "Harald",
+          "lastname": "Hochgatterer",
+          "name": "Harald Hochgatterer",
+          "textid": "3602",
+          "gender": "m"
+        },
+        {
+          "firstname": "Christoph",
+          "lastname": "Horejs-Kainrath",
+          "name": "Christoph Horejs-Kainrath",
+          "textid": "337",
+          "gender": "m"
+        },
+        {
+          "firstname": "Miha",
+          "lastname": "Horvat",
+          "name": "Miha Horvat",
+          "textid": "80402",
+          "gender": "m",
+          "nationality": "SLO"
+        },
+        {
+          "firstname": "Miha",
+          "lastname": "Ivanic",
+          "name": "Miha Ivanic",
+          "textid": "36734",
+          "gender": "m",
+          "nationality": "SLO"
+        },
+        {
+          "firstname": "Miha",
+          "lastname": "Sepec",
+          "name": "Miha Sepec",
+          "textid": "21057",
+          "gender": "m",
+          "nationality": "SLO"
+        },
+        {
+          "firstname": "Daniel",
+          "lastname": "Walchshofer",
+          "name": "Daniel Walchshofer",
+          "textid": "32124",
+          "gender": "m"
+        },
+        {
+          "firstname": "Jessica",
+          "lastname": "Drinovac",
+          "name": "Jessica Drinovac",
+          "textid": "35015",
+          "gender": "f"
+        },
+        {
+          "firstname": "Ursula",
+          "lastname": "Edelmüller",
+          "name": "Ursula Edelmüller",
+          "textid": "3172",
+          "gender": "f"
+        },
+        {
+          "firstname": "Natalie",
+          "lastname": "Hofinger",
+          "name": "Natalie Hofinger",
+          "textid": "31522",
+          "gender": "f"
+        },
+        {
+          "firstname": "Nika",
+          "lastname": "Koncut",
+          "name": "Nika Koncut",
+          "textid": "70863",
+          "gender": "f",
+          "nationality": "SLO"
+        },
+        {
+          "firstname": "Sonja",
+          "lastname": "Langthaler",
+          "name": "Sonja Langthaler",
+          "textid": "20980",
+          "gender": "f"
+        },
+        {
+          "firstname": "Sandra",
+          "lastname": "Perneder",
+          "name": "Sandra Perneder",
+          "textid": "34157",
+          "gender": "f"
+        },
+        {
+          "firstname": "Ana Marija",
+          "lastname": "Setina",
+          "name": "Ana Marija Setina",
+          "textid": "36733",
+          "gender": "f",
+          "nationality": "SLO"
+        }
+      ]
+    ],
     "location": "EuropaSportMittelschule Mödling",
     "matches": [
       {
@@ -27,8 +204,7 @@
                 {
                   "name": "Daniel Graßmück"
                 }
-              ],
-              "name": "AS Logistik Mödling"
+              ]
             },
             {
               "players": [
@@ -38,28 +214,11 @@
                 {
                   "name": "Wolfgang Gnedt"
                 }
-              ],
-              "name": "BSC 70 Linz"
+              ]
             }
           ],
-          "incomplete": false,
-          "eventsheet_id": "1.HD",
-          "league_key": "OBL-2017",
-          "tournament_name": "ÖBV-Bundesliga",
-          "event_name": "AS Logistik Mödling - BSC 70 Linz",
-          "team_competition": true,
-          "counting": "3x21"
-        },
-        "network_score": [
-          [
-            21,
-            11
-          ],
-          [
-            21,
-            8
-          ]
-        ]
+          "eventsheet_id": "1.HD"
+        }
       },
       {
         "setup": {
@@ -74,8 +233,7 @@
                 {
                   "name": "Andras Nemeth"
                 }
-              ],
-              "name": "AS Logistik Mödling"
+              ]
             },
             {
               "players": [
@@ -85,28 +243,11 @@
                 {
                   "name": "Harald Hochgatterer"
                 }
-              ],
-              "name": "BSC 70 Linz"
+              ]
             }
           ],
-          "incomplete": false,
-          "eventsheet_id": "2.HD",
-          "league_key": "OBL-2017",
-          "tournament_name": "ÖBV-Bundesliga",
-          "event_name": "AS Logistik Mödling - BSC 70 Linz",
-          "team_competition": true,
-          "counting": "3x21"
-        },
-        "network_score": [
-          [
-            21,
-            19
-          ],
-          [
-            21,
-            11
-          ]
-        ]
+          "eventsheet_id": "2.HD"
+        }
       },
       {
         "setup": {
@@ -121,8 +262,7 @@
                 {
                   "name": "Bianca Schiester"
                 }
-              ],
-              "name": "AS Logistik Mödling"
+              ]
             },
             {
               "players": [
@@ -132,31 +272,10 @@
                 {
                   "name": "Sonja Langthaler"
                 }
-              ],
-              "name": "BSC 70 Linz"
+              ]
             }
-          ],
-          "incomplete": false,
-          "league_key": "OBL-2017",
-          "tournament_name": "ÖBV-Bundesliga",
-          "event_name": "AS Logistik Mödling - BSC 70 Linz",
-          "team_competition": true,
-          "counting": "3x21"
-        },
-        "network_score": [
-          [
-            21,
-            11
-          ],
-          [
-            19,
-            21
-          ],
-          [
-            24,
-            22
           ]
-        ]
+        }
       },
       {
         "setup": {
@@ -168,40 +287,18 @@
                 {
                   "name": "Luka Wraber"
                 }
-              ],
-              "name": "AS Logistik Mödling"
+              ]
             },
             {
               "players": [
                 {
                   "name": "Wolfgang Gnedt"
                 }
-              ],
-              "name": "BSC 70 Linz"
+              ]
             }
           ],
-          "incomplete": false,
-          "eventsheet_id": "1.HE",
-          "league_key": "OBL-2017",
-          "tournament_name": "ÖBV-Bundesliga",
-          "event_name": "AS Logistik Mödling - BSC 70 Linz",
-          "team_competition": true,
-          "counting": "3x21"
-        },
-        "network_score": [
-          [
-            21,
-            18
-          ],
-          [
-            20,
-            22
-          ],
-          [
-            23,
-            21
-          ]
-        ]
+          "eventsheet_id": "1.HE"
+        }
       },
       {
         "setup": {
@@ -213,36 +310,18 @@
                 {
                   "name": "Andras Nemeth"
                 }
-              ],
-              "name": "AS Logistik Mödling"
+              ]
             },
             {
               "players": [
                 {
                   "name": "Miha Sepec"
                 }
-              ],
-              "name": "BSC 70 Linz"
+              ]
             }
           ],
-          "incomplete": false,
-          "eventsheet_id": "2.HE",
-          "league_key": "OBL-2017",
-          "tournament_name": "ÖBV-Bundesliga",
-          "event_name": "AS Logistik Mödling - BSC 70 Linz",
-          "team_competition": true,
-          "counting": "3x21"
-        },
-        "network_score": [
-          [
-            21,
-            19
-          ],
-          [
-            21,
-            17
-          ]
-        ]
+          "eventsheet_id": "2.HE"
+        }
       },
       {
         "setup": {
@@ -254,35 +333,17 @@
                 {
                   "name": "Bianca Schiester"
                 }
-              ],
-              "name": "AS Logistik Mödling"
+              ]
             },
             {
               "players": [
                 {
                   "name": "Ana Marija Setina"
                 }
-              ],
-              "name": "BSC 70 Linz"
+              ]
             }
-          ],
-          "incomplete": false,
-          "league_key": "OBL-2017",
-          "tournament_name": "ÖBV-Bundesliga",
-          "event_name": "AS Logistik Mödling - BSC 70 Linz",
-          "team_competition": true,
-          "counting": "3x21"
-        },
-        "network_score": [
-          [
-            16,
-            21
-          ],
-          [
-            25,
-            27
           ]
-        ]
+        }
       },
       {
         "setup": {
@@ -294,36 +355,18 @@
                 {
                   "name": "Daniel Graßmück"
                 }
-              ],
-              "name": "AS Logistik Mödling"
+              ]
             },
             {
               "players": [
                 {
                   "name": "Daniel Walchshofer"
                 }
-              ],
-              "name": "BSC 70 Linz"
+              ]
             }
           ],
-          "incomplete": false,
-          "eventsheet_id": "3.HE",
-          "league_key": "OBL-2017",
-          "tournament_name": "ÖBV-Bundesliga",
-          "event_name": "AS Logistik Mödling - BSC 70 Linz",
-          "team_competition": true,
-          "counting": "3x21"
-        },
-        "network_score": [
-          [
-            21,
-            14
-          ],
-          [
-            21,
-            19
-          ]
-        ]
+          "eventsheet_id": "3.HE"
+        }
       },
       {
         "setup": {
@@ -338,8 +381,7 @@
                 {
                   "name": "Reka Sarosi"
                 }
-              ],
-              "name": "AS Logistik Mödling"
+              ]
             },
             {
               "players": [
@@ -349,101 +391,12 @@
                 {
                   "name": "Sonja Langthaler"
                 }
-              ],
-              "name": "BSC 70 Linz"
+              ]
             }
-          ],
-          "incomplete": false,
-          "league_key": "OBL-2017",
-          "tournament_name": "ÖBV-Bundesliga",
-          "event_name": "AS Logistik Mödling - BSC 70 Linz",
-          "team_competition": true,
-          "counting": "3x21"
-        },
-        "network_score": [
-          [
-            21,
-            11
-          ],
-          [
-            21,
-            19
           ]
-        ]
+        }
       }
     ],
-    "tournament_name": "ÖBV-Bundesliga",
-    "event_name": "AS Logistik Mödling - BSC 70 Linz",
-    "staticnet_message": "Importierter Wettkampf",
-    "last_update": 1505919759843
-  },
-  "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36",
-  "url": "http://localhost/bup/#settings",
-  "bup_version": "dev",
-  "league_key": "OBL-2017",
-  "state_ui": {
-    "settings_visible": true
-  },
-  "fullscreen": {
-    "supported": true,
-    "active": false
-  },
-  "lang": "de",
-  "size": "1732x898",
-  "screen": "1920x1080",
-  "settings": {
-    "go_fullscreen": false,
-    "show_pronunciation": true,
-    "umpire_name": "",
-    "service_judge_name": "",
-    "court_id": "1",
-    "court_description": "links",
-    "network_timeout": 10000,
-    "network_update_interval": 10000,
-    "displaymode_update_interval": 50000,
-    "d_c0": "#9bdaff",
-    "d_c1": "#e54e01",
-    "d_cbg": "#000000",
-    "d_cfg": "#ffffff",
-    "d_cbg2": "#d9d9d9",
-    "d_cbg3": "#252525",
-    "d_cbg4": "#404040",
-    "d_cfg2": "#aaaaaa",
-    "d_cfg3": "#cccccc",
-    "d_cborder": "#444444",
-    "d_ct": "#80ff00",
-    "d_ctim_blue": "#0070c0",
-    "d_ctim_active": "#ffc000",
-    "d_cserv": "#fff200",
-    "d_cserv2": "#dba766",
-    "d_crecv": "#707676",
-    "d_scale": 100,
-    "dads_interval": 3000,
-    "dads_wait": 10000,
-    "dads_dtime": 3000,
-    "dads_atime": 1000,
-    "dads_utime": "0:59:50",
-    "dads_mode": "none",
-    "double_click_timeout": 1000,
-    "button_block_timeout": 1,
-    "negative_timers": false,
-    "shuttle_counter": true,
-    "language": "de",
-    "editmode_doubleclick": true,
-    "displaymode_style": "clubplayers",
-    "displaymode_court_id": "1",
-    "wakelock": "display",
-    "click_mode": "auto",
-    "refmode_client_enabled": false,
-    "refmode_client_ws_url": "wss://live.aufschlagwechsel.de/refmode_hub/",
-    "refmode_referee_ws_url": "wss://live.aufschlagwechsel.de/refmode_hub/",
-    "refmode_client_node_name": "",
-    "referee_service_judges": false,
-    "dads_interval_periodic": 10000,
-    "name": 13000
-  },
-  "last_error": "-",
-  "reported_count": 0,
-  "click_mode": "click",
-  "netstats": {}
+    "staticnet_message": "ÖBV-Bundesliga-Demo (nur lokal)"
+  }
 }

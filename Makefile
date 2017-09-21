@@ -49,6 +49,8 @@ dist: cleandist ## Create distribution files
 	cp div/dist_htaccess dist/bup/.htaccess
 	mkdir -p dist/bup/div/
 	svgo -q -i div/bundesliga-logo.svg -o dist/bup/div/bundesliga-logo.svg
+	mkdir -p dist/bup/div/demos/
+	node div/minify_json.js --dir div/demos/ dist/bup/div/demos/
 	node div/minify_json.js div/edemo.json dist/bup/div/edemo.json
 	node div/minify_json.js div/vdemo.json dist/bup/div/vdemo.json
 	node div/minify_json.js div/bldemo.json dist/bup/div/bldemo.json
