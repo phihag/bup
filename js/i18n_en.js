@@ -359,7 +359,8 @@ var i18n_en = {
 'eventsheet:label|team-2BL-2015': '(German 2. Bundesliga) team selection sheet (2015)',
 'eventsheet:label|NRW-2016': '(NRW leagues) result report sheet',
 'eventsheet:label|NRW-Satzungen': '(Germany, NRW) laws & regulations',
-'eventsheet:label|NLA-2017': '(Swiss NLA) Result sheet',
+'eventsheet:label|NLA-2017': '(Swiss NLA) result sheet',
+'eventsheet:label|OBL-2017': '(Austrian Bundesliga) result sheet',
 
 'stats:game': 'Game {number}',
 'stats:match': 'Match',

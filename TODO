@@ -27,6 +27,7 @@ i18n test: fallback identical to main?
 integration test for display (verify a crash during display gets reported)
 
 use ajax module everywhere instead of custom XMLHttpRequest or jQuery
+eventsheet: map of key to extra_data fields (or do away with extra_data)
 set up rlwdemo
 	check that everything is correct, including (001)
 displaymode for imported events (courts missing)

@@ -360,6 +360,7 @@ var i18n_de = {
 'eventsheet:label|NRW-2016': 'Spielbericht',
 'eventsheet:label|NRW-Satzungen': 'Satzungen und Ordnungen BLV NRW',
 'eventsheet:label|NLA-2017': 'Resultatblatt',
+'eventsheet:label|OBL-2017': 'Spielbericht',
 
 'stats:game': '{number}. Satz',
 'stats:match': 'Spiel',

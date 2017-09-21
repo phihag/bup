@@ -19,9 +19,9 @@ function req(options, success_cb, fail_cb) {
 			return;
 		}
 		if (xhr.status === 200) {
-			success_cb(xhr.responseText);
+			success_cb(xhr.response);
 		} else {
-			fail_cb(xhr.status, xhr.responseText, xhr);
+			fail_cb(xhr.status, xhr.response, xhr);
 		}
 	};
 	xhr.send();

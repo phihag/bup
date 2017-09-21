@@ -356,6 +356,7 @@ var i18n_frch = {
 'eventsheet:label|NRW-2016': '(Allemagne, NRW leagues) feuille de résultats',
 'eventsheet:label|NRW-Satzungen': '(Allemagne, NRW) lois et règlements',
 'eventsheet:label|NLA-2017': 'feuille de résultats',
+'eventsheet:label|OBL-2017': '(Autriche) feuille de résultats',
 
 'stats:game': 'Set {number}',
 'stats:match': 'Match',

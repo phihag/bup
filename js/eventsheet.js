@@ -16,7 +16,7 @@ var SHEETS_BY_LEAGUE = {
 	'RLN-2016': ['RLN-2016', 'RLN-Satzungen-2016'],
 	'RLM-2016': ['RLM-2016', 'RLM-SpO-2015'],
 	'NLA-2017': ['NLA-2017'],
-	'OBL-2017': [],
+	'OBL-2017': ['OBL-2017'],
 };
 
 var URLS = {
@@ -41,6 +41,7 @@ var URLS = {
 	'teamlist-1BL-2016': 'div/teamlists/teamlist-1BL-2016.html',
 	'teamlist-2BLN-2016': 'div/teamlists/teamlist-2BLN-2016.html',
 	'teamlist-2BLS-2016': 'div/teamlists/teamlist-2BLS-2016.html',
+	'OBL-2017': 'div/eventsheet_obl.xlsx',
 };
 var DIRECT_DOWNLOAD_SHEETS = {
 	'BL-ballsorten-2016': true,
@@ -1355,6 +1356,24 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 	});
 }
 
+function render_obl(ev, es_key, ui8r, extra_data) {
+	eventutils.set_metadata(ev);
+	var last_update = calc_last_update(ev.matches);
+	var today = last_update ? last_update : Date.now();
+
+	xlsx.open(ui8r, function(xlsx_file) {
+		xlsx_file.modify_sheet('1', function() {
+			xlsx_file.save('Spielbericht ' + ev.event_name + '.xlsx');
+		}, function(sheet) {
+			/*sheet.val('D3', 'LEFT ' + ev.team_names[0]);
+			sheet.val('Q3', ev.team_names[1]);
+			sheet.val('C4', utils.date_str(today));
+			*/
+		});
+	});
+}
+
+
 function direct_download(es_key, ui8r) {
 	var ext = /\.([a-z0-9]+)$/.exec(URLS[es_key])[1];
 	var filename = state._('eventsheet:label|' + es_key) + '.' + ext;
@@ -1389,6 +1408,8 @@ function es_render(ev, es_key, ui8r, extra_data) {
 		return render_bundesliga2016(ev, es_key, ui8r, extra_data);
 	case 'NLA-2017':
 		return render_nla(ev, es_key, ui8r);
+	case 'OBL-2017':
+		return render_obl(ev, es_key, ui8r, extra_data);
 	default:
 	throw new Error('Unsupported eventsheet key ' + es_key);
 	}
@@ -1659,6 +1680,11 @@ function show_dialog(es_key) {
 		uiu.visible(preview, false);
 		uiu.visible(download_link_container, false);
 		break;
+	case 'OBL-2017':
+		uiu.hide('.eventsheet_matchday');
+		uiu.hide('label.eventsheet_backup_players_str');
+		uiu.hide(preview);
+		uiu.hide(download_link_container);
 	}
 	if (DIRECT_DOWNLOAD_SHEETS[es_key]) {
 		uiu.visible_qs('.eventsheet_report', false);
