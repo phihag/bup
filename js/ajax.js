@@ -4,25 +4,27 @@ var ajax = (function() {
 
 /**
 * options can contain (* = mandatory):
-* - method: The HTTP method (GET by default)
-* - url*:   The URL to download
+* - method:       HTTP request method (GET by default)
+* - responseType: The XHR response type, see https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseType
+* - url*:         URL to download
 * sucess_cb gets called with the data on success.
 * fail_cb gets called on error, with HTTP status, response text, and the XMLHTTPRequest object.
 */
 function req(options, success_cb, fail_cb) {
-	var r = new XMLHttpRequest();
-	r.open(options.method || 'GET', options.url, true);
-	r.onreadystatechange = function () {
-		if (r.readyState != 4) {
+	var xhr = new XMLHttpRequest();
+	xhr.open(options.method || 'GET', options.url, true);
+	xhr.responseType = options.responseType || '';
+	xhr.onreadystatechange = function () {
+		if (xhr.readyState != 4) {
 			return;
 		}
-		if (r.status === 200) {
-			success_cb(r.responseText);
+		if (xhr.status === 200) {
+			success_cb(xhr.responseText);
 		} else {
-			fail_cb(r.status, r.responseText, r);
+			fail_cb(xhr.status, xhr.responseText, xhr);
 		}
 	};
-	r.send();
+	xhr.send();
 }
 
 return {
