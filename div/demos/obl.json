@@ -6,6 +6,8 @@
       "AS Logistik Mödling",
       "BSC 70 Linz"
     ],
+    "umpires": "Klaus Schlieben",
+    "notes": "Coaching-Stühle viel zu gemütlich",
     "league_key": "OBL-2017",
     "team_competition": true,
     "all_players": [
@@ -199,9 +201,11 @@
             {
               "players": [
                 {
+                  "textid": "10783",
                   "name": "Dominik Stipsits"
                 },
                 {
+                  "textid": "20616",
                   "name": "Daniel Graßmück"
                 }
               ]
@@ -209,9 +213,11 @@
             {
               "players": [
                 {
+                  "textid": "21057",
                   "name": "Miha Sepec"
                 },
                 {
+                  "textid": "21139",
                   "name": "Wolfgang Gnedt"
                 }
               ]
@@ -228,9 +234,11 @@
             {
               "players": [
                 {
+                  "textid": "20774",
                   "name": "Luka Wraber"
                 },
                 {
+                  "textid": "23073",
                   "name": "Andras Nemeth"
                 }
               ]
@@ -238,9 +246,11 @@
             {
               "players": [
                 {
+                  "textid": "80402",
                   "name": "Miha Horvat"
                 },
                 {
+                  "textid": "3602",
                   "name": "Harald Hochgatterer"
                 }
               ]
@@ -257,9 +267,11 @@
             {
               "players": [
                 {
+                  "textid": "24173",
                   "name": "Reka Sarosi"
                 },
                 {
+                  "textid": "20828",
                   "name": "Bianca Schiester"
                 }
               ]
@@ -267,9 +279,11 @@
             {
               "players": [
                 {
+                  "textid": "70863",
                   "name": "Nika Koncut"
                 },
                 {
+                  "textid": "20980",
                   "name": "Sonja Langthaler"
                 }
               ]
@@ -285,6 +299,7 @@
             {
               "players": [
                 {
+                  "textid": "20774",
                   "name": "Luka Wraber"
                 }
               ]
@@ -292,6 +307,7 @@
             {
               "players": [
                 {
+                  "textid": "21139",
                   "name": "Wolfgang Gnedt"
                 }
               ]
@@ -308,6 +324,7 @@
             {
               "players": [
                 {
+                  "textid": "23073",
                   "name": "Andras Nemeth"
                 }
               ]
@@ -315,6 +332,7 @@
             {
               "players": [
                 {
+                  "textid": "21057",
                   "name": "Miha Sepec"
                 }
               ]
@@ -331,6 +349,7 @@
             {
               "players": [
                 {
+                  "textid": "20828",
                   "name": "Bianca Schiester"
                 }
               ]
@@ -338,6 +357,7 @@
             {
               "players": [
                 {
+                  "textid": "36733",
                   "name": "Ana Marija Setina"
                 }
               ]
@@ -353,6 +373,7 @@
             {
               "players": [
                 {
+                  "textid": "20616",
                   "name": "Daniel Graßmück"
                 }
               ]
@@ -360,6 +381,7 @@
             {
               "players": [
                 {
+                  "textid": "32124",
                   "name": "Daniel Walchshofer"
                 }
               ]
@@ -376,9 +398,11 @@
             {
               "players": [
                 {
+                  "textid": "10783",
                   "name": "Dominik Stipsits"
                 },
                 {
+                  "textid": "24173",
                   "name": "Reka Sarosi"
                 }
               ]
@@ -386,9 +410,11 @@
             {
               "players": [
                 {
+                  "textid": "80402",
                   "name": "Miha Horvat"
                 },
                 {
+                  "textid": "20980",
                   "name": "Sonja Langthaler"
                 }
               ]

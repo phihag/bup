@@ -55,6 +55,7 @@ _describe('XLSX', function() {
 	_it('date', function() {
 		assert.strictEqual(bup.xlsx.date(new Date(2000, 0, 1)), 36526);
 		assert.strictEqual(bup.xlsx.date(new Date(2017, 6, 6)), 42922);
+		assert.strictEqual(bup.xlsx.date(new Date(2017, 8, 22)), 43000);
 	});
 
 	_it('leap year', function() {

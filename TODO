@@ -1,11 +1,5 @@
-new 1bl links
-
 obl
 	eventsheet:
-		date
-		default umpires etc. in demo
-
-		player names
 		points
 		match results (necessary?)
 	scoresheet: http://www.badminton.at/files/raster/SCHIRIZE.xls
@@ -13,10 +7,11 @@ obl
 	-> update btde
 	-> mail Daniel
 
+
+support new btde codes
 btde-like overview display 
 btde-like court display!
 	msg Julian with demo
-support new btde codes
 block middle buttons like any other-> Jörg Hupertz
 "20 Sekunden" im Ansagefeld nicht sichtbar wenn Auf- und Rückschläger bestimmt werden -> Jörg Hupertz
 	noch "20 Sekunden" neben der Uhr

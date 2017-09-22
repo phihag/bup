@@ -8,9 +8,9 @@ var SHEETS_BY_LEAGUE = {
 	'1BL-2016': ['1BL-2016', 'BL-ballsorten-2016', 'DBV-Satzungen-2016', 'teamlist-1BL-2016'],
 	'2BLN-2016': ['2BLN-2016', 'BL-ballsorten-2016', 'DBV-Satzungen-2016', 'teamlist-2BLN-2016'],
 	'2BLS-2016': ['2BLS-2016', 'BL-ballsorten-2016', 'DBV-Satzungen-2016', 'teamlist-2BLS-2016'],
-	'1BL-2017': ['1BL-2016', 'DBV-Satzungen-2016'],
-	'2BLN-2017': ['2BLN-2016', 'DBV-Satzungen-2016'],
-	'2BLS-2017': ['2BLS-2016', 'DBV-Satzungen-2016'],
+	'1BL-2017': ['1BL-2016', 'DBV-Satzungen-2017'],
+	'2BLN-2017': ['2BLN-2016', 'DBV-Satzungen-2017'],
+	'2BLS-2017': ['2BLS-2016', 'DBV-Satzungen-2017'],
 	'NRW-2016': ['NRW-2016', 'NRW-Satzungen'],
 	'RLW-2016': ['RLW-2016', 'NRW-Satzungen'],
 	'RLN-2016': ['RLN-2016', 'RLN-Satzungen-2016'],
@@ -27,7 +27,8 @@ var URLS = {
 	'2BLN-2016': 'div/Spielbericht-Buli-2016-17.xlsm',
 	'2BLS-2016': 'div/Spielbericht-Buli-2016-17.xlsm',
 	'BL-ballsorten-2016': 'div/bundesliga-ballsorten-2016.pdf',
-	'DBV-Satzungen-2016': 'http://www.badminton.de/fileadmin/Dateibereich/Foto-Archiv/pdf-xls/DBV/Satzung/16-DBV-Druckwerk_Satzung-Ordnungen-Spielregeln201617-Website.pdf',
+	'DBV-Satzungen-2016': 'http://www.badminton.de/fileadmin/images/spielregeln/16-dbv-druckwerk_satzung-ordnungen-spielregeln201617-website.pdf',
+	'DBV-Satzungen-2017': 'http://www.badminton.de/fileadmin/user_upload/17-dbv-druckwerk_satzung-ordnungen-spielregeln201718-website.pdf.pdf',
 	'RLW-2016': 'div/Spielbericht_8x3x21.svg',
 	'RLN-2016': 'div/Spielbericht_8x3x21.svg',
 	'RLN-Satzungen-2016': 'http://www.gruppe-nord.net/fileadmin/user_upload/schuch/GruppeNord/Satzung/Satzung%20und%20Ordnungen%20der%20Gruppe%20Nord%20Stand%2006-08-16.pdf',
@@ -50,7 +51,7 @@ var DIRECT_DOWNLOAD_SHEETS = {
 	'teamlist-2BLS-2016': true,
 };
 var EXTERNAL_DOWNLOAD_SHEETS = {
-	'DBV-Satzungen-2016': true,
+	'DBV-Satzungen-2017': true,
 	'RLN-Satzungen-2016': true,
 	'RLM-SpO-2015': true,
 	'NRW-Satzungen': true,
@@ -80,10 +81,10 @@ function calc_backup_players_str(ev) {
 	}).filter(function(s) {return s;}).join(' / ');
 }
 
-function players2str(players) {
+function players2str(players, sep) {
 	return players.map(function(player) {
 		return player.name;
-	}).join(', ');
+	}).join(sep || ', ');
 }
 
 var _loaded = {
@@ -1365,10 +1366,55 @@ function render_obl(ev, es_key, ui8r, extra_data) {
 		xlsx_file.modify_sheet('1', function() {
 			xlsx_file.save('Spielbericht ' + ev.event_name + '.xlsx');
 		}, function(sheet) {
-			/*sheet.val('D3', 'LEFT ' + ev.team_names[0]);
-			sheet.val('Q3', ev.team_names[1]);
-			sheet.val('C4', utils.date_str(today));
-			*/
+			sheet.text('D3', ev.team_names[0]);
+			sheet.val('D7', ev.team_names[0]);
+			sheet.text('Q3', ev.team_names[1]);
+			sheet.val('L7', ev.team_names[1]);
+			sheet.text('C4', utils.date_str(today));
+			sheet.text('J4', extra_data.location);
+			sheet.text('T4', extra_data.umpires);
+			sheet.text('A19', extra_data.notes);
+			sheet.text('A20', extra_data.protest);
+
+			var MATCH_ROWS = {
+				'1.HE': 8,
+				'2.HE': 9,
+				'3.HE': 10,
+				'DE': 11,
+				'1.HD': 12,
+				'2.HD': 13,
+				'DD': 14,
+				'GD': 15, // called MD in the sheet itself
+			};
+
+			ev.matches.forEach(function(m) {
+				var row = MATCH_ROWS[calc_match_id(m)];
+				if (!row) {
+					report_problem.silent_error('OBL: Cannot find row for match '  + calc_match_id(m));
+					return;
+				}
+
+				var netscore = m.netscore;
+				var teams = m.setup.teams;
+				var ID_COLS = ['B', 'J'];
+				teams.forEach(function(team, team_idx) {
+					var col = ID_COLS[team_idx];
+					var text_ids = utils.filter_map(team.players, function(p) {
+						return p.textid;
+					});
+					sheet.text(col + row, text_ids.join('/'));
+
+					sheet.text(xlsx.add_col(col, 2) + row, players2str(team.players, ' / '));
+
+					if (netscore) {
+						netscore.forEach(function(game_score, game_idx) {
+							sheet.val(
+								xlsx.add_col('R' + 3 * game_idx + 2 * team_idx),
+								game_score[team_idx]);
+						});
+					}
+				});
+			});
 		});
 	});
 }
