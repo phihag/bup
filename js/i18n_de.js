@@ -350,6 +350,7 @@ var i18n_de = {
 'eventsheet:label|teamlist-2BLS-2016': 'Mannschaftsunterlagen',
 'eventsheet:label|BL-ballsorten-2016': 'Zugelassene Bälle',
 'eventsheet:label|DBV-Satzungen-2016': 'Regeln DBV 2016/2017',
+'eventsheet:label|DBV-Satzungen-2017': 'Regeln DBV 2017/2018',
 'eventsheet:label|RLW-2016': 'Spielbericht',
 'eventsheet:label|RLN-2016': 'Spielbericht',
 'eventsheet:label|RLN-Satzungen-2016': 'Satzungen und Ordnungen 2016',

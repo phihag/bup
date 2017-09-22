@@ -174,7 +174,7 @@ function list_matches(s, cb) {
 		}
 
 		// Annotate statically
-		event.league_key = '1BL-2016';
+		event.league_key = '1BL-2017';
 		event.team_names = [
 			TEAM_NAMES[m[1]],
 			TEAM_NAMES[m[2]],

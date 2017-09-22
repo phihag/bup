@@ -1,7 +1,10 @@
+new 1bl links
+
 obl
 	eventsheet:
 		date
-		location
+		default umpires etc. in demo
+
 		player names
 		points
 		match results (necessary?)
@@ -24,6 +27,7 @@ refmode: visible warning if no crypto.subtle
 i18n test: fallback identical to main?
 integration test for display (verify a crash during display gets reported)
 
+selectevent module (passcode for Ulf)
 use ajax module everywhere instead of custom XMLHttpRequest or jQuery
 eventsheet: map of key to extra_data fields (or do away with extra_data)
 set up rlwdemo
