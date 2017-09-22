@@ -20,6 +20,7 @@ _describe('eventutils', function() {
 		assert.strictEqual(bup.eventutils.name_by_league('NLA-2017'), 'NLA');
 		assert.strictEqual(bup.eventutils.name_by_league('RLN-2016'), 'Regionalliga Nord');
 		assert.strictEqual(bup.eventutils.name_by_league('RLW-2016'), 'Regionalliga West (001)');
+		assert.strictEqual(bup.eventutils.name_by_league('RLM-2016'), 'Regionalliga Mitte');
 		assert.strictEqual(bup.eventutils.name_by_league('NRW-O19-RL-001-2016'), 'Regionalliga West (001)');
 		assert.strictEqual(bup.eventutils.name_by_league('NRW-O19-OL-002-2016'), 'NRW-Oberliga Nord (002)');
 		assert.strictEqual(bup.eventutils.name_by_league('NRW-O19-OL-003-2016'), 'NRW-Oberliga Süd (003)');
