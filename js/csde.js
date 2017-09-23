@@ -33,12 +33,64 @@ function send_press() {
 }
 
 var TEAM_NAMES = {
-	2: '1. BC Bischmisheim',
-	3: '1. BC Düren',
-	9: 'TV Refrath',
-	10: 'TSV Trittau',
-	14: 'TV Refrath 2',
-	13: 'BV Gifhorn',
+	'1-1': '1.BC Sbr.-Bischmisheim',
+	'1-2': 'SC Union Lüdinghausen',
+	'1-3': 'TV Refrath',
+	'1-4': '1.BV Mülheim',
+	'1-5': '1.BC Beuel',
+	'1-6': '1.BC Wipperfeld',
+	'1-7': 'TSV Trittau',
+	'1-8': 'TSV Neuhausen-Nymphenburg',
+	'1-9': 'TSV 1906 Freystadt',
+	'1-10': 'SV Fun-Ball Dortelweil',
+	'2-11': 'Blau-Weiss Wittorf-NMS',
+	'2-12': 'TV Refrath 2',
+	'2-13': 'SG EBT Berlin',
+	'2-14': 'STC Blau-Weiss Solingen',
+	'2-15': 'TSV Trittau 2',
+	'2-16': '1.BV Mülheim 2',
+	'2-17': '1.BC Beuel 2',
+	'2-18': 'BC Hohenlimburg',
+	'2-19': 'Hamburg Horner TV',
+	'2-20': 'VfB/SC Peine',
+	'3-21': 'TuS Wiebelskirchen',
+	'3-22': '1.BC Sbr.-Bischmisheim 2',
+	'3-23': 'TSV Neubiberg/Ottobrunn 1920',
+	'3-24': 'TV Dillingen',
+	'3-25': 'VfB Friedrichshafen',
+	'3-26': 'SG Schorndorf',
+	'3-27': 'BSpfr. Neusatz',
+	'3-28': 'TV 1884 Marktheidenfeld',
+	'3-29': 'SV GutsMuths Jena',
+	'3-30': 'SV Fischbach',
+	'4-1': 'SG EBT Berlin 2',
+	'4-2': 'BV Gifhorn 1',
+	'4-3': 'SG Luckau/Blankenfelde 1',
+	'4-4': 'SG Vechelde/Lengede 1',
+	'4-5': 'BW Wittorf Neumünster 2',
+	'4-6': 'BC Eintracht Südring Berlin 1',
+	'4-7': 'SG FTV/HSV/VfL 93 Hamburg 1',
+	'4-8': 'SV Berliner Brauereien 1',
+	'5-1': 'STC BW Solingen 2',
+	'5-1477': 'BC Phönix Hövelhof 1',
+	'5-211': 'BV RW Wesel 1',
+	'5-505': 'Gladbecker FC 1',
+	'5-682': 'Bottroper BG 1',
+	'5-715': 'Spvgg.Sterkrade-N. 1',
+	'5-810': 'BC Hohenlimburg 2',
+	'5-89': '1.CfB Köln 1',
+};
+
+var LEAGUE_IDS = {
+	1: '1BL-2017',
+	2: '2BLN-2017',
+	3: '2BLS-2017',
+	4: 'RLN-2016',
+	5: 'RLW-2016',
+	6: '1BL-2017',
+	7: '1BL-2017',
+	8: '1BL-2017',
+	9: '1BL-2017',
 };
 
 function parse_court(cspec, court_id, matches) {
@@ -150,15 +202,16 @@ function parse_csde_xml(doc) {
 }
 
 function list_matches(s, cb) {
-	var m = /^([0-9]+)-([0-9]+)$/.exec(mid);
+	var m = /^([0-9]+)-([0-9]+)-([0-9]+)$/.exec(mid);
 	if (!m) {
 		return cb({
 			msg: 'Nicht unterstützter Wettkampf ' + JSON.stringify(mid),
 		});
 	}
 
+	var league_num = m[1];
 	var options = {
-		url: baseurl + 'php__Skripte/liveabfrage.php?v=' + m[1] + '&g=' + m[2] + '&n=99999&s=99999',
+		url: baseurl + 'php__Skripte/liveabfrage.php?l=' + league_num + '&v=' + m[2] + '&g=' + m[3] + '&n=99999&s=99999',
 		dataType: 'xml',
 	};
 	_request(s, 'csde.list', options, function(err, csde_xml) {
@@ -174,10 +227,10 @@ function list_matches(s, cb) {
 		}
 
 		// Annotate statically
-		event.league_key = '1BL-2017';
+		event.league_key = LEAGUE_IDS[league_num];
 		event.team_names = [
-			TEAM_NAMES[m[1]],
-			TEAM_NAMES[m[2]],
+			TEAM_NAMES[league_num + '-' + m[2]],
+			TEAM_NAMES[league_num + '-' + m[3]],
 		];
 
 		eventutils.annotate(s, event);
