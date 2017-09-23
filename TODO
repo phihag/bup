@@ -1,3 +1,5 @@
+jticker error reports
+
 obl
 	eventsheet:
 		points
@@ -6,6 +8,7 @@ obl
 		vector logo
 	-> update btde
 	-> mail Daniel
+
 
 
 support new btde codes
@@ -17,11 +20,23 @@ block middle buttons like any other-> Jörg Hupertz
 	noch "20 Sekunden" neben der Uhr
 
 dads referee mode config
+
+check out appcache update on CourtSpot on Pi
+find out what looped update
+
+setupsheet: button to add all?
+setupsheet: align rm buttons
+store order change in demo
+store order change in courtspot
 RL SüdOst -> mail btde
 refmode: visible warning if no crypto.subtle
 i18n test: fallback identical to main?
 integration test for display (verify a crash during display gets reported)
 
+courtspot: location, start time, round
+dads upload multiple images at once
+realistic court
+realistic court as overview
 selectevent module (passcode for Ulf)
 use ajax module everywhere instead of custom XMLHttpRequest or jQuery
 eventsheet: map of key to extra_data fields (or do away with extra_data)
@@ -69,15 +84,20 @@ Aufstellung:
 	warn if changes and leaving tab
 	mail Ulf (update doc)
 	test that we don't print any backgrounds even with chrome setting print backgrounds
-store order change in demo
-store order change in courtspot
 stats: + most consecutive points
 stats: + game points
 stats: + match points
 use bup.ajax module instead of custom xmlhttprequest
 use bup.ajax module instead of jquery
+error reporting courtspot
+
+*_pause displays: synchronize clocks
+
+referee mode via webrtc
+	bootstrap from courtspot	
 
 displaymode: option to reset colors
+excel 1BL-2017 scoresheets: umpire name
 dayimport in normal import view (unify with #mo import)
 automatic testing to see that setupsheet works (with browser)
 d/onlyplayers: correctly handle case where no icon is present (at the moment 404)
@@ -406,6 +426,8 @@ improve refmode
 	message to SRs
 	request shuttles
 	refmode: autosave (and offer to restore)
+
+calculate umpire costs (know location)
 
 improve display mode
 	like den-ger

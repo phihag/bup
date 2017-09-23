@@ -93,6 +93,10 @@ function sync(s, force) {
 			return;
 		}
 
+		if (!s.remote) {
+			s.remote = {};
+		}
+
 		if (!err) {
 			try {
 				var res = JSON.parse(content);
