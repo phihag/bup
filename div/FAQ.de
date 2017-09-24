@@ -36,3 +36,11 @@ Nachdem der Button "0 beide, bitte spielen" (unter der Ansage "Zu meiner Rechten
 Warum erscheint die Ansage "20 Sekunden" schon bevor die Uhr 20s anzeigt?
 
 Nach Auskunft von Björn Wüpping verbleiben 20s nach Ende der Ansage. Da die 20s-Ansage etwa 5s dauert, wird die bereits 25s vor Ende der Pause angezeigt.
+
+
+Warum kann wird mit 0 Bällen statt mit einem Ball begonnen?
+
+Aus mehreren Gründen:
+* In Statistiken wollen wir Spiele bei denen der Schiedsrichter nicht die Bälle gezählt hat auch als solche vermerken. Spiele mit einem Ball kommen gerade in den unteren Ligen oder junge Jugend / fortgeschrittene Altersklasse schon mal vor.
+* Beim Spielstart wird manchmal ein gebrauchter Ball genommen. Dieser sollte dann nicht in die Ballverbrauchsstatistiken einfließen.
+* Im Doppel werden auf hohem Niveau oft direkt zwei und nicht ein Ball ausgegeben.

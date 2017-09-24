@@ -1,5 +1,3 @@
-jticker error reports
-
 obl
 	eventsheet:
 		points
@@ -10,7 +8,7 @@ obl
 	-> mail Daniel
 
 
-
+dads logos
 support new btde codes
 btde-like overview display 
 btde-like court display!
@@ -90,6 +88,7 @@ stats: + match points
 use bup.ajax module instead of custom xmlhttprequest
 use bup.ajax module instead of jquery
 error reporting courtspot
+open scoresheets link in new tab
 
 *_pause displays: synchronize clocks
 
