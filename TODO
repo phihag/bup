@@ -95,6 +95,7 @@ open scoresheets link in new tab
 referee mode via webrtc
 	bootstrap from courtspot	
 
+dmode berlin (red border: finished, green border: serving)
 displaymode: option to reset colors
 excel 1BL-2017 scoresheets: umpire name
 dayimport in normal import view (unify with #mo import)
