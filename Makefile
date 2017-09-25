@@ -72,7 +72,7 @@ dist: cleandist ## Create distribution files
 		div/bupdate.php \
 		div/data_structures.txt \
 		div/FAQ.de \
-		div/URLS.md \
+		div/URLs.txt \
 		div/LICENSE.commercial.de \
 		div/Mannschaftsaufstellung_1BL-2015.pdf \
 		div/Mannschaftsaufstellung_2BL-2015.pdf \
