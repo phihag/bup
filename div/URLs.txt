@@ -34,12 +34,12 @@ Settings
 ========
 
 lang=LANGCODE       Set language to the specified one.
-                    LANGCODE can be one of:
-                      en     English
-                      de     German (Germany)
-                      de_at  German (Austria)
-                      de_ch  German (Switzerland)
-                      fr_ch  French (Switzerland)
+    LANGCODE can be one of:
+      en     English
+      de     German (Germany)
+      de_at  German (Austria)
+      de_ch  German (Switzerland)
+      fr_ch  French (Switzerland)
 court=COURTCODE     Run on the specified court. COURTCODE depends on the network. Normally, a number like 1, 2, or the string "referee".
 dm_style=STYLECODE  In display mode, start with the specified style.
 	Available styles:
@@ -49,13 +49,12 @@ dm_style=STYLECODE  In display mode, start with the specified style.
 	teamcourt       Great for team matches
 	teamcourt_pause teamcourt with interval timer
 	2court          2 courts (with interval timer)
-	castall         greenscreen (all courts)',
+	castall         greenscreen (all courts)
 	andre           André (for tournaments)
 	tim             Tim (colored overview)
 	onlyplayers     players only
 	onlyscore       score only
-	clubplayers     team + players',
-	clubplayerslr   team + players (left / right)',
-	tournament_overview tournament overview',
+	clubplayers     team + players
+	clubplayerslr   team + players (left / right)
+	tournament_overview tournament overview
 	stripes         stripes (team names, clubs, all scores, for one court)
-

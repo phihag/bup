@@ -216,21 +216,35 @@ function _parse_players(s) {
 	return res;
 }
 
+function _get_league_key(liga_code) {
+	return {
+		'(001) 1. Bundesliga': '1BL-2017',
+		'(002) 2. Bundesliga Nord': '2BLN-2017',
+		'(003) 2. Bundesliga Süd': '2BLS-2017',
+		'(001) Regionalliga SüdOst Ost': 'RLSOO-2017',
+		'(001) Regionalliga West': 'RLW-2016',
+		'(007) Verbandsliga Süd 2': 'NRW-O19-S2-VL-007-2016',
+		'(008) Landesliga Nord 1': 'NRW-O19-N1-LL-008-2016',
+		'(015) Landesliga Süd 2': 'NRW-O19-S2-LL-015-2016',
+		'NLA': 'NLA-2017',
+		'1. Bundesliga': 'OBL-2017',
+	}[liga_code.trim()];
+}
+
+function _get_counting(league_key, event_data) {
+	if (league_key) {
+		var league_counting = eventutils.default_counting(league_key);
+		if (league_counting) {
+			return league_counting;
+		}
+	}
+	return (event_data.GewS == 2) ? '3x21' : '5x11_15^90';
+}
+
 function _parse_match_list(doc, now) {
 	var event_data = doc[0];
 	var home_team_name = event_data.heim;
 	var away_team_name = event_data.gast;
-
-	var league_key = {
-		'1. Bundesliga': '1BL-2017',
-		'2. Bundesliga Nord': '2BLN-2017',
-		'2. Bundesliga Süd': '2BLS-2017',
-		'Regionalliga Nord': 'RLN-2017',
-		'NLA': 'NLA-2017',
-	}[event_data.Liga.trim()];
-	if (!league_key) {
-		league_key = '1BL-2017';
-	}
 
 	var used_courts = [{
 		court_id: 1,
@@ -239,7 +253,15 @@ function _parse_match_list(doc, now) {
 		court_id: 2,
 		description: '2 (rechts)',
 	}];
-	var counting = (doc[0].GewS == 2) ? '3x21' : '5x11_15';
+
+	var league_key = _get_league_key(event_data.Liga);
+	var counting = _get_counting(league_key, event_data);
+
+	// Fallback: if everything goes wrong, go for 1BL
+	if (! league_key) {
+		league_key = '1BL-2017';
+	}
+
 	var game_count = calc.max_game_count(counting);
 
 	var matches = doc.slice(1, doc.length).map(function(match) {
@@ -308,7 +330,6 @@ function _parse_match_list(doc, now) {
 	return {
 		team_competition: true,
 		team_names: [home_team_name, away_team_name],
-		event_name: home_team_name + ' - ' + away_team_name,
 		matches: matches,
 		courts: used_courts,
 		league_key: league_key,
@@ -467,6 +488,8 @@ return {
 	list_all_players: list_all_players,
 	// Testing only
 	/*@DEV*/
+	_get_counting: _get_counting,
+	_get_league_key: _get_league_key,
 	_parse_match_list: _parse_match_list,
 	/*/@DEV*/
 };
