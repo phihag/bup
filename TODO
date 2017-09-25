@@ -7,12 +7,21 @@ obl
 	-> update btde
 	-> mail Daniel
 
+update checklist
+2. BuLi: check team_colors
+btde-like overview display 
+	msg Julian with demo
+check caching header on appcache file on badmintonticker
+
+pi configuration script
+	download raspbian image and use it
+	autostart chromium full-screen with display
+	set desktop background
+	set hostname
+	enable and configure VNC
+	enable and configure ssh
 
 dads logos
-support new btde codes
-btde-like overview display 
-btde-like court display!
-	msg Julian with demo
 block middle buttons like any other-> Jörg Hupertz
 "20 Sekunden" im Ansagefeld nicht sichtbar wenn Auf- und Rückschläger bestimmt werden -> Jörg Hupertz
 	noch "20 Sekunden" neben der Uhr

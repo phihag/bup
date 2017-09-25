@@ -12,6 +12,7 @@ var ABBREVS = {
 	'SG Ddorf-Unterrath': 'SGU',
 };
 var TEAM_COLORS = {
+	'Beuel': '#ffed00',
 	'Refrath': '#8bd6ff',
 	'Trittau': '#fd77b2',
 	'Bischmisheim': '#1e3a8e',
