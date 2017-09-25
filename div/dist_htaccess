@@ -4,7 +4,13 @@ AddType text/cache-manifest .appcache
 
 <filesMatch "^cachesw.js$">
 <IfModule mod_headers.c>
-Header set Cache-Control "no-cache"
+Header set Cache-Control "no-cache, no-store, must-revalidate"
+</IfModule>
+</filesMatch>
+
+<filesMatch "^bup.appcache$">
+<IfModule mod_headers.c>
+Header set Cache-Control "no-cache, no-store, must-revalidate"
 </IfModule>
 </filesMatch>
 
