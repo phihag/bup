@@ -67,6 +67,7 @@ dist: cleandist ## Create distribution files
 	node_modules/.bin/svgo -q --disable removeEmptyText --disable removeEmptyContainers -i div/scoresheet_international.svg -o dist/bup/div/scoresheet_international.svg
 	node_modules/.bin/svgo -q --disable removeEmptyText --disable removeEmptyContainers -i div/scoresheet_international_5x11.svg -o dist/bup/div/scoresheet_international_5x11.svg
 	node_modules/.bin/svgo -q --disable removeEmptyText --disable removeEmptyContainers -i div/scoresheet_nla.svg -o dist/bup/div/scoresheet_nla.svg
+	node_modules/.bin/svgo -q --disable removeEmptyText --disable removeEmptyContainers -i div/scoresheet_obl.svg -o dist/bup/div/scoresheet_obl.svg
 	cp \
 		div/bundesliga-ballsorten-2016.pdf \
 		div/bupdate.php \
@@ -77,6 +78,7 @@ dist: cleandist ## Create distribution files
 		div/Mannschaftsaufstellung_1BL-2015.pdf \
 		div/Mannschaftsaufstellung_2BL-2015.pdf \
 		div/NLA_Resultatblatt.svg \
+		div/eventsheet_obl.xlsx \
 		div/Spielbericht-Buli-2016-17.xlsm \
 		div/Spielbericht_8x3x21.svg \
 		div/Spielberichtsbogen_1BL-2015.pdf \

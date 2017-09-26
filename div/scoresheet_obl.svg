@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 297 210">
+<style>
+	text {
+		font-family: Helvetica;
+		font-size: 4px;
+	}
+	text.small-text, text.table_name {font-size: 3px;}
+	.divider-line {stroke: #000; stroke-width: 0.2;}
+	.box {stroke: #000; stroke-width: 0.5; fill: none;}
+	.shade,.box.shaded,.table_longtext_background.shaded {fill: #d0d0d0;}
+	.scoresheet_results_circle_team1,.scoresheet_results_circle_team2 {
+		stroke: #000; stroke-width: 0.6; fill: none;
+	}
+	.dashed-line {
+		stroke: #000; stroke-width: 0.4; stroke-dasharray: 0.4, 0.4;
+	}
+	.table {
+		stroke: #000; stroke-width: 0.35; fill: none;
+	}
+	.table_line {
+		stroke: #000; stroke-width: 0.1;
+	}
+	.table_20all_dash {
+		stroke: #000; stroke-width: 0.4;
+	}
+	.editmode-sign {
+		stroke: #202020; stroke-width: 0.3; fill: none;
+	}
+	.table_thick-line {
+		stroke: #000; stroke-width: 0.35;
+	}
+	.table_game_result {
+		stroke: #000; stroke-width: 0.4; fill: none;
+	}
+	.table_longtext_background {
+		fill: #fff;
+		opacity: 0.75;
+	}
+</style>
+
+<!-- top left -->
+<text class="scoresheet_tournament_name" x="55" y="13"></text>
+<text class="scoresheet_event_name" font-weight="bold" y="13"></text>
+
+<!-- ÖBV Bundesliga logo -->
+
+
+
+
+<!-- left name box -->
+<rect class="box" x="72" y="20" width="5" height="7" />
+<rect class="box" x="77" y="20" width="59" height="21" />
+<line class="divider-line" x1="77" x2="136" y1="27" y2="27" />
+<line class="divider-line" x1="77" x2="136" y1="34" y2="34" />
+<text class="scoresheet_results_team1_side" x="74.5" y="25" text-anchor="middle"></text>
+<text class="scoresheet_results_team1_player1" x="78" y="25"></text>
+<text class="scoresheet_results_team1_player2" x="78" y="32"></text>
+<text class="scoresheet_results_team1_name small-text" x="78" y="38.5"></text>
+<ellipse class="scoresheet_results_circle_team1" visibility="hidden" cx="100" cy="30" rx="28" ry="13" />
+
+<!-- score box -->
+<text class="small-text" x="148.5" y="19" text-anchor="middle" data-i18n="scoresheet:points"></text>
+<rect class="box" x="138" width="21" y="20" height="21" />
+<line class="divider-line" x1="138" x2="159" y1="27" y2="27" />
+<line class="divider-line" x1="138" x2="159" y1="34" y2="34" />
+<text x="148.5" y="25" text-anchor="middle">:</text>
+<text x="148.5" y="32" text-anchor="middle">:</text>
+<text x="148.5" y="39" text-anchor="middle">:</text>
+
+<text class="scoresheet_results_team1_score1" x="143" y="25" text-anchor="middle"></text>
+<text class="scoresheet_results_team1_score2" x="143" y="32" text-anchor="middle"></text>
+<text class="scoresheet_results_team1_score3" x="143" y="39" text-anchor="middle"></text>
+<text class="scoresheet_results_team2_score1" x="154" y="25" text-anchor="middle"></text>
+<text class="scoresheet_results_team2_score2" x="154" y="32" text-anchor="middle"></text>
+<text class="scoresheet_results_team2_score3" x="154" y="39" text-anchor="middle"></text>
+
+<!-- right name box -->
+<rect class="box shaded" x="220" y="20" width="5" height="7" />
+<rect class="box shaded" x="161" y="20" width="59" height="21" />
+<line class="divider-line" x1="161" x2="220" y1="27" y2="27" />
+<line class="divider-line" x1="161" x2="220" y1="34" y2="34" />
+<text class="scoresheet_results_team2_side" x="222.5" y="25" text-anchor="middle"></text>
+<text class="scoresheet_results_team2_player1" x="162" y="25"></text>
+<text class="scoresheet_results_team2_player2" x="162" y="32"></text>
+<text class="scoresheet_results_team2_name small-text" x="162" y="38.5"></text>
+<ellipse class="scoresheet_results_circle_team2" visibility="hidden" cx="189" cy="30" rx="28" ry="13" />
+
+<!-- top right information about match -->
+<text class="small-text" x="228" y="15" data-i18n="scoresheet:Court"></text>
+<line class="dashed-line" x1="252" x2="282" y1="15.5" y2="15.5"/>
+<text class="scoresheet_court_id" x="253" y="14"></text>
+<text class="small-text" x="228" y="22" data-i18n="scoresheet:Umpire"></text>
+<line class="dashed-line" x1="252" x2="282" y1="22.5" y2="22.5"/>
+<text class="small-text scoresheet_umpire_name" x="253" y="21"></text>
+<text class="small-text" x="228" y="29" data-i18n="scoresheet:Service judge"></text>
+<line class="dashed-line" x1="252" x2="282" y1="29.5" y2="29.5"/>
+<text class="small-text scoresheet_service_judge_name" x="253" y="28"></text>
+<text class="small-text" x="228" y="36" data-i18n="scoresheet:Begin"></text>
+<line class="dashed-line" x1="252" x2="282" y1="36.5" y2="36.5"/>
+<text class="scoresheet_begin_value" x="253" y="35"></text>
+<text class="small-text" x="228" y="43" data-i18n="scoresheet:End"></text>
+<line class="dashed-line" x1="252" x2="282" y1="43.5" y2="43.5"/>
+<text class="scoresheet_end_value" x="253" y="42"></text>
+<text class="small-text" x="228" y="50" data-i18n="scoresheet:Duration"></text>
+<line class="dashed-line" x1="252" x2="282" y1="50.5" y2="50.5"/>
+<text class="scoresheet_duration_value" x="253" y="49"></text>
+
+<text class="scoresheet_match_label small-text" x="78" y="50" data-i18n="scoresheet:Match"></text>
+<text class="scoresheet_match_name" x="88" y="50"></text>
+<g class="scoresheet_shuttle_counter">
+	<text class="small-text" x="178" y="50" text-anchor="end" data-i18n="scoresheet:Shuttles"></text>
+	<text class="scoresheet_shuttle_counter_value" x="179" y="50"></text>
+</g>
+<text class="scoresheet_date_label small-text" x="188" y="50" data-i18n="scoresheet:Date"></text>
+<text class="scoresheet_date_value" x="199" y="50"></text>
+
+
+<g class="scoresheet_table_container"></g>
+
+<text class="small-text" x="118" y="200" data-i18n="scoresheet:Umpire"></text>
+<line class="dashed-line" x1="142" x2="202" y1="200.5" y2="200.5" />
+<text class="small-text" x="207" y="200" data-i18n="scoresheet:Referee"></text>
+<line class="dashed-line" x1="222" x2="282" y1="200.5" y2="200.5" />
+
+</svg>
