@@ -8,6 +8,7 @@ var i18n_deat = {
 'match point': 'Matchball',
 'scoredisplay:Game Point': 'Satzball',
 'scoredisplay:Match Point': 'Matchball',
+'eventsheet:Notes': 'Anmerkungen:',
 
 };
 

@@ -64,6 +64,9 @@ function Sheet(book, doc, drawing_doc) {
 		} else {
 			_create_el(cell, 'v', {}, val);
 		}
+		if (typeof val == 'string') {
+			cell.setAttribute('t', 'str');
+		}
 	}
 
 	function get_style_node(cell_id) {

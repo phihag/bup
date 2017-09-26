@@ -1366,10 +1366,11 @@ function render_obl(ev, es_key, ui8r, extra_data) {
 		xlsx_file.modify_sheet('1', function() {
 			xlsx_file.save('Spielbericht ' + ev.event_name + '.xlsx');
 		}, function(sheet) {
-			sheet.text('D3', ev.team_names[0]);
-			sheet.val('D7', ev.team_names[0]);
-			sheet.text('Q3', ev.team_names[1]);
-			sheet.val('L7', ev.team_names[1]);
+			var team_names = ev.team_names;
+			sheet.text('D3', team_names[0]);
+			sheet.val('D7', team_names[0]);
+			sheet.text('Q3', team_names[1]);
+			sheet.val('L7', team_names[1]);
 			sheet.text('C4', utils.date_str(today));
 			sheet.text('J4', extra_data.location);
 			sheet.text('T4', extra_data.umpires);
@@ -1386,6 +1387,9 @@ function render_obl(ev, es_key, ui8r, extra_data) {
 				'DD': 14,
 				'GD': 15, // called MD in the sheet itself
 			};
+			var rally_sums = [0, 0];
+			var game_sums = [0, 0];
+			var match_sums = [0, 0];
 
 			ev.matches.forEach(function(m) {
 				var row = MATCH_ROWS[calc_match_id(m)];
@@ -1394,9 +1398,12 @@ function render_obl(ev, es_key, ui8r, extra_data) {
 					return;
 				}
 
-				var netscore = m.netscore;
+				var netscore = m.netscore || m.network_score || [];
+				var counting = m.setup.counting;
+				var mwinner = calc.match_winner(counting, netscore);
 				var teams = m.setup.teams;
 				var ID_COLS = ['B', 'J'];
+
 				teams.forEach(function(team, team_idx) {
 					var col = ID_COLS[team_idx];
 					var text_ids = utils.filter_map(team.players, function(p) {
@@ -1406,15 +1413,54 @@ function render_obl(ev, es_key, ui8r, extra_data) {
 
 					sheet.text(xlsx.add_col(col, 2) + row, players2str(team.players, ' / '));
 
-					if (netscore) {
-						netscore.forEach(function(game_score, game_idx) {
-							sheet.val(
-								xlsx.add_col('R' + 3 * game_idx + 2 * team_idx),
-								game_score[team_idx]);
-						});
+					var match_rally_sum = 0;
+					var match_game_sum = 0;
+					netscore.forEach(function(game_score, game_idx) {
+						match_rally_sum += game_score[team_idx];
+						rally_sums[team_idx] += game_score[team_idx];
+						var won_game = calc.game_winner(
+							counting, game_idx,
+							game_score[team_idx], game_score[1 - team_idx]) === 'left';
+						if (won_game) {
+							match_game_sum++;
+							game_sums[team_idx]++;
+						}
+						sheet.val(
+							xlsx.add_col('R', (3 * game_idx + 2 * team_idx)) + row,
+							game_score[team_idx]);
+						sheet.val(
+							xlsx.add_col('AK', (game_idx + 4 * team_idx)) + row,
+							won_game ? 1 : 0);
+					});
+					sheet.val(xlsx.add_col('AA', 2 * team_idx) + row, match_rally_sum);
+					sheet.val(xlsx.add_col('AD', 2 * team_idx) + row, match_game_sum);
+					var won = ((team_idx === 0) ? 'left' : 'right') === mwinner;
+					sheet.val(xlsx.add_col('AG', 2 * team_idx) + row, won ? 1 : 0);
+					if (won) {
+						match_sums[team_idx]++;
 					}
 				});
 			});
+
+			for (var team_idx = 0;team_idx < 2;team_idx++) {
+				sheet.val(xlsx.add_col('AA', team_idx * 2) + 16, rally_sums[team_idx]);
+				sheet.val(xlsx.add_col('AD', team_idx * 2) + 16, game_sums[team_idx]);
+				sheet.val(xlsx.add_col('AG', team_idx * 2) + 16, match_sums[team_idx]);
+				sheet.val(xlsx.add_col('B', team_idx * 2) + 17, match_sums[team_idx]);
+				sheet.val(xlsx.add_col('G', team_idx * 2) + 17, game_sums[team_idx]);
+				sheet.val(xlsx.add_col('M', team_idx * 2) + 17, rally_sums[team_idx]);
+
+				if ((match_sums[team_idx] > match_sums[1 - team_idx]) ||
+					((match_sums[team_idx] == match_sums[1 - team_idx]) &&
+						((game_sums[team_idx] > game_sums[1 - team_idx]) ||
+							((game_sums[team_idx] == game_sums[1 - team_idx]) &&
+								(rally_sums[team_idx] > rally_sums[1 - team_idx])
+							)
+						)
+					)) {
+					sheet.val('D16', team_names[team_idx]);
+				}
+			}
 		});
 	});
 }
@@ -1698,7 +1744,10 @@ function show_dialog(es_key) {
 	case 'RLN-2016':
 	case 'RLM-2016':
 	case 'NRW-2016':
-		uiu.visible_qs('.eventsheet_report', true);
+		uiu.show_qs('.eventsheet_matchday');
+		uiu.show_qs('.eventsheet_starttime');
+		uiu.show_qs('.eventsheet_backup_players_str');
+		uiu.show_qs('.eventsheet_protest');
 		uiu.visible_qs('label.eventsheet_backup_players_str', true);
 		uiu.visible(preview, false);
 		uiu.visible(download_link_container, false);
@@ -1706,6 +1755,13 @@ function show_dialog(es_key) {
 	case '1BL-2016':
 	case '2BLN-2016':
 	case '2BLS-2016':
+	case '1BL-2017':
+	case '2BLN-2017':
+	case '2BLS-2017':
+		uiu.show_qs('.eventsheet_matchday');
+		uiu.show_qs('.eventsheet_starttime');
+		uiu.show_qs('.eventsheet_backup_players_str');
+		uiu.show_qs('.eventsheet_protest');
 		uiu.visible_qs('.eventsheet_report', true);
 		uiu.visible_qs('label.eventsheet_backup_players_str', false);
 		uiu.visible(preview, false);
@@ -1727,11 +1783,14 @@ function show_dialog(es_key) {
 		uiu.visible(download_link_container, false);
 		break;
 	case 'OBL-2017':
-		uiu.hide('.eventsheet_matchday');
-		uiu.hide('label.eventsheet_backup_players_str');
+		uiu.hide_qs('.eventsheet_matchday');
+		uiu.hide_qs('.eventsheet_starttime');
+		uiu.hide_qs('.eventsheet_backup_players_str');
+		uiu.hide_qs('.eventsheet_protest');
 		uiu.hide(preview);
 		uiu.hide(download_link_container);
 	}
+
 	if (DIRECT_DOWNLOAD_SHEETS[es_key]) {
 		uiu.visible_qs('.eventsheet_report', false);
 		uiu.visible(preview, false);

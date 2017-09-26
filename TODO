@@ -1,17 +1,19 @@
 obl
-	eventsheet:
-		points
-		match results (necessary?)
 	scoresheet: http://www.badminton.at/files/raster/SCHIRIZE.xls
 		vector logo
 	-> update btde
 	-> mail Daniel
 
 dads referee mode config
-update checklist
 check team_colors
 	1BL
 	2BLN
+
+store order change in demo
+store order change in courtspot
+store order change in referee mode
+
+update checklist
 btde-like overview display 
 	msg Julian with demo
 
@@ -24,18 +26,19 @@ pi configuration script
 	enable and configure ssh
 
 dads logos
+tde_import umpire, notes
 block middle buttons like any other-> Jörg Hupertz
 "20 Sekunden" im Ansagefeld nicht sichtbar wenn Auf- und Rückschläger bestimmt werden -> Jörg Hupertz
 	noch "20 Sekunden" neben der Uhr
 
 
+test right-click on all links
+	-> Mail Jan
 check out appcache update on CourtSpot on Pi
 find out what looped update
 
 setupsheet: button to add all?
 setupsheet: align rm buttons
-store order change in demo
-store order change in courtspot
 RL SüdOst -> mail btde
 refmode: visible warning if no crypto.subtle
 i18n test: fallback identical to main?
