@@ -370,7 +370,7 @@ function render_page(svg, pdf) {
 		if (style.fill != 'none') {
 			var col = parse_color(style.fill);
 			pdf.setFillColor(col.r, col.g, col.b);
-			mode += 'F';
+			mode = (style.fillRule === 'evenodd') ? 'f*' : 'f';
 		}
 		if (style.stroke != 'none') {
 			var scol = parse_color(style.stroke);
@@ -380,7 +380,11 @@ function render_page(svg, pdf) {
 			pdf.setLineWidth(stroke_width);
 
 			if (stroke_width > 0) {
-				mode += 'D';
+				if (style.fill != 'none') {
+					mode = (style.fillRule === 'evenodd') ? 'B*' : 'B';
+				} else {
+					mode = 'S';
+				}
 			}
 		}
 
