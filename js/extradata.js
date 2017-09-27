@@ -16,7 +16,18 @@ var TEAM_COLORS = {
 	'Refrath': '#8bd6ff',
 	'Trittau': '#fd77b2',
 	'Bischmisheim': '#1e3a8e',
-	'Düren': '#c81f1a',
+	'Lüdinghausen': '#ffffff',
+	'Wipperfeld': '#ff2149',
+	'Neuhausen': '#02c0ff',
+	'BV Mülheim': '#ff423f',
+	'Trittau': '#ff557a'
+	'Freystadt': '#ff161d',
+	'Dortelweil': '#f9f152',
+	'Wittorf': '#0091ff',
+	'Horner': '#ff2222', // Hamburg Horner TV
+	'BW Solingen': '#cbff81', // STC BW Solingen
+	'EBT Berlin': '#0d9aff',
+	'Hohenlimburg': '#0ebbff',
 };
 var LOGOS = [
 	'bcbeuel',

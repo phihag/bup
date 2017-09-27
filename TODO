@@ -1,13 +1,4 @@
-obl
-	scoresheet: http://www.badminton.at/files/raster/SCHIRIZE.xls
-		vector logo
-	-> update btde
-	-> mail Daniel
-
 dads referee mode config
-check team_colors
-	1BL
-	2BLN
 
 store order change in demo
 store order change in courtspot
@@ -22,6 +13,7 @@ pi configuration script
 	autostart chromium full-screen with display
 	set desktop background
 	set hostname
+	dpms etc.
 	enable and configure VNC
 	enable and configure ssh
 

@@ -1591,7 +1591,6 @@ function render_onlyscore(s, container, event, court, match, colors) {
 	});
 }
 
-
 function calc_team_colors(event, settings) {
 	if (event.team_colors) {
 		return event.team_colors;
