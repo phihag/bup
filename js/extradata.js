@@ -20,7 +20,7 @@ var TEAM_COLORS = {
 	'Wipperfeld': '#ff2149',
 	'Neuhausen': '#02c0ff',
 	'BV Mülheim': '#ff423f',
-	'Trittau': '#ff557a'
+	'Trittau': '#ff557a',
 	'Freystadt': '#ff161d',
 	'Dortelweil': '#f9f152',
 	'Wittorf': '#0091ff',
