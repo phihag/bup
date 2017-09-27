@@ -13,21 +13,20 @@ var ABBREVS = {
 };
 var TEAM_COLORS = {
 	'Beuel': '#ffed00',
-	'Refrath': '#8bd6ff',
-	'Trittau': '#fd77b2',
 	'Bischmisheim': '#1e3a8e',
-	'Lüdinghausen': '#ffffff',
-	'Wipperfeld': '#ff2149',
-	'Neuhausen': '#02c0ff',
 	'BV Mülheim': '#ff423f',
-	'Trittau': '#ff557a',
-	'Freystadt': '#ff161d',
-	'Dortelweil': '#f9f152',
-	'Wittorf': '#0091ff',
-	'Horner': '#ff2222', // Hamburg Horner TV
 	'BW Solingen': '#cbff81', // STC BW Solingen
+	'Dortelweil': '#f9f152',
 	'EBT Berlin': '#0d9aff',
+	'Freystadt': '#ff161d',
 	'Hohenlimburg': '#0ebbff',
+	'Horner': '#ff2222', // Hamburg Horner TV
+	'Lüdinghausen': '#ffffff',
+	'Neuhausen': '#02c0ff',
+	'Refrath': '#8bd6ff',
+	'Trittau': '#ff557a',
+	'Wipperfeld': '#ff2149',
+	'Wittorf': '#0091ff',
 };
 var LOGOS = [
 	'bcbeuel',
