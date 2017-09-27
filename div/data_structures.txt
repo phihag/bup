@@ -27,7 +27,17 @@ league_key      ID of the league being played (this determines which event sheet
                 The year is the first year that the specific ruleset was implemented in.
                 If the rules and descriptions of the league don't change (at least as far as bup is concerned),
                 the same league_key can be used for later seasons.
-counting        Default counting scheme. Implicitly set by league_key. Set this for leagues without
+counting        Default counting scheme. Implicitly set by league_key. Set this for events without league_key.
+                Available values:
+                  "3x21"       BWF since 2016
+                  "5x11_15"    BWF 2016 Experiment Option 1 (5x11 until max. 15)
+                  "5x11/3"     BWF 2016 Experiment Option 2 (5x11 with 3 point challenge)
+                  "5x11_15^90" German Bundesliga 2017 (5x11 until max. 15, 90s intervals)
+                  "2x21+11"    2x21, 3rd game until 11
+                  "5x11_11"    UAE (5x11 sudden death)
+                  "1x21"       One Game (1x21)
+                  "1x11_15"    One Game 2016 Experiment Option 1 (1x11 until max. 15)
+                  "3x15_18"    Shortened (3x15 until max. 18)
 location        Location name and address as a string, e.g. "SpH Steinbreche"
 matches*        A list of matches to be played (see below)
 preferred_order Array of eventsheet_id (recommended) or match_name values that indicate the best order of matches as set by the tournament organizers.
@@ -163,7 +173,7 @@ match_num          Match number in a tournament context.
 teams*             An array (0: home team, 1: away team) of teams (see below).
 is_doubles*        Boolean key. false => singles, true => mixed/doubles
 counting*          Scoring system.
-                   Valid values are "3x21", "1x21", "2x21+11", "5x11_15", "1x11_15", "5x11/3", "5x11_15^90", "5x11_11", "3x15_18".
+                   See the documentation on event for possible values.
                    Can be left out if the league_key or counting property of the event is set.
 team_competition   Are players competing for their teams(true) or for themselves(false)? Affects announcements
 neutral_ground     If team competition: Is the match played on neutral grounds? Affects announcements.     
