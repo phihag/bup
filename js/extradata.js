@@ -34,7 +34,7 @@ var LOGOS = [
 	'bcwipperfeld',
 	'bvgifhorn',
 	'ebtberlin',
-	'funballdortelweil',
+	'svfunballdortelweil',
 	'sganspach',
 	'sgschorndorf',
 	'stcblauweisssolingen',
