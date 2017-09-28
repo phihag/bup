@@ -33,6 +33,7 @@ var LOGOS = [
 	'bcbsaarbruecken',
 	'bcwipperfeld',
 	'bvgifhorn',
+	'bvmuelheim',
 	'ebtberlin',
 	'svfunballdortelweil',
 	'sganspach',
@@ -50,6 +51,12 @@ var LOGOS = [
 	'vfbfriedrichshafen',
 	'wittorfneumuenster',
 ];
+var LOGO_ALIASSE = {
+	'TSV Neuhausen-Nymphenburg': 'tsvneuhausen',
+	'1.BV Mülheim': 'bvmuelheim',
+	'1.BC Sbr.-Bischmisheim': 'bcbsaarbruecken',
+	'SC Union Lüdinghausen': 'unionluedinghausen',
+};
 
 function get_color(team_name) {
 	for (var keyword in TEAM_COLORS) {
@@ -60,6 +67,10 @@ function get_color(team_name) {
 }
 
 function team_logo(team_name) {
+	if (LOGO_ALIASSE[team_name]) {
+		team_name = LOGO_ALIASSE[team_name];
+	}
+
 	var clean_name = team_name.toLowerCase().replace(/[^a-z]/g, '');
 	if (LOGOS.includes(clean_name)) {
 		return 'div/logos/' + clean_name + '.svg';
