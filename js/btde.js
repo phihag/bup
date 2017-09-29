@@ -238,7 +238,7 @@ function _get_counting(league_key, event_data) {
 			return league_counting;
 		}
 	}
-	return (event_data.GewS == 2) ? '3x21' : '5x11_15^90';
+	return (event_data.gews == 2) ? '3x21' : '5x11_15^90';
 }
 
 function _parse_match_list(doc, now) {
@@ -254,7 +254,7 @@ function _parse_match_list(doc, now) {
 		description: '2 (rechts)',
 	}];
 
-	var league_key = _get_league_key(event_data.Liga);
+	var league_key = _get_league_key(event_data.liga);
 	var counting = _get_counting(league_key, event_data);
 
 	// Fallback: if everything goes wrong, go for 1BL
