@@ -249,6 +249,15 @@ if ($tournament_name) {
 if ($counting) {
 	$res['counting'] = $counting;
 }
+if ($verwaltung['Startzeit']) {
+	$res['starttime'] = $verwaltung['Startzeit'];
+}
+if ($verwaltung['Spieltag']) {
+	$res['matchday'] = $verwaltung['Spieltag'];
+}
+if ($verwaltung['Ort']) {
+	$res['location'] = $verwaltung['Ort'];
+}
 
 if (array_key_exists('all_players', $_GET)) {
 	$all_players_result = mysqli_query($db, '

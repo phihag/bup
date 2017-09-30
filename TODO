@@ -1,16 +1,15 @@
-btde: startdate
-btde: date
-http://login.badmintonticker.de//ticker/bup/#btde&settings fails
+remove scollbars in displaymode = tim
+
 btde-like overview display
 
 dads referee mode config
 
+dads gegen logo
+dads gegen simple
+
 store order change in demo
 store order change in courtspot
 store order change in referee mode
-
-
-remove scollbars in displaymode = tim
 
 update checklist
 
@@ -23,7 +22,6 @@ pi configuration script
 	enable and configure VNC
 	enable and configure ssh
 
-dads logos
 tde_import umpire, notes
 block middle buttons like any other-> Jörg Hupertz
 "20 Sekunden" im Ansagefeld nicht sichtbar wenn Auf- und Rückschläger bestimmt werden -> Jörg Hupertz
