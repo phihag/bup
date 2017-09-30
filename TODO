@@ -1,17 +1,18 @@
-
 btde: startdate
 btde: date
+http://login.badmintonticker.de//ticker/bup/#btde&settings fails
+btde-like overview display
+
 dads referee mode config
 
 store order change in demo
 store order change in courtspot
 store order change in referee mode
 
+
 remove scollbars in displaymode = tim
 
 update checklist
-btde-like overview display 
-	msg Julian with demo
 
 pi configuration script
 	download raspbian image and use it
@@ -40,6 +41,7 @@ RL SüdOst -> mail btde
 refmode: visible warning if no crypto.subtle
 i18n test: fallback identical to main?
 integration test for display (verify a crash during display gets reported)
+reload button looks funny in firefox
 
 courtspot: location, start time, round
 dads upload multiple images at once

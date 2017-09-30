@@ -375,9 +375,9 @@ function ui_init() {
 	if (!baseurl) {
 		baseurl = '../';
 	}
-	var m = window.location.pathname.match(/^(.*\/)bup\/(?:bup\.html|index\.html)?$/);
+	var m = window.location.pathname.match(/^\/+(.*\/)bup\/(?:bup\.html|index\.html)?$/);
 	if (m) {
-		baseurl = m[1];
+		baseurl = '/' + m[1];
 	}
 }
 
