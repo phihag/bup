@@ -1,4 +1,5 @@
 btde-like overview display
+	configure correct colors
 
 dads referee mode config
 
@@ -19,6 +20,8 @@ pi configuration script
 	dpms etc.
 	enable and configure VNC
 	enable and configure ssh
+	remote control
+dads until starttime - 0:15?
 
 tde_import umpire, notes
 block middle buttons like any other-> Jörg Hupertz
