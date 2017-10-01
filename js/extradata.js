@@ -55,6 +55,7 @@ var LOGO_ALIASSE = {
 	'TSV Neuhausen-Nymphenburg': 'tsvneuhausen',
 	'1.BV Mülheim': 'bvmuelheim',
 	'1.BC Sbr.-Bischmisheim': 'bcbsaarbruecken',
+	'BC Bischmisheim': 'bcbsaarbruecken',
 	'SC Union Lüdinghausen': 'unionluedinghausen',
 };
 

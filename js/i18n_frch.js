@@ -481,6 +481,7 @@ var i18n_frch = {
 'displaymode|castall': 'Greenscreen (tous les terrains)',
 'displaymode|andre': 'André',
 'displaymode|tim': 'Tim',
+'displaymode|greyish': 'grisonnant',
 'displaymode|onlyplayers': 'Joueurs seulement',
 'displaymode|onlyscore': 'Points seulement',
 'displaymode|clubplayers': 'Equipe + joueurs',

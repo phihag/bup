@@ -8,8 +8,9 @@ var ALL_STYLES = [
 	'teamcourt_pause',
 	'stripes',
 	'2court',
-	'top+list',
+	'greyish',
 	'tim',
+	'top+list',
 	'onlyplayers',
 	'clubplayers',
 	'clubplayerslr',
@@ -999,6 +1000,115 @@ function render_international(s, container, event, court, match, colors) {
 	});
 }
 
+function render_greyish(s, container, event, colors) {
+	var max_game_count = _calc_max_games(event);
+	var match_score = _calc_matchscore(event.matches);
+	var team_names = event.team_names || ['', ''];
+	var logo_urls = extradata.team_logos(event);
+
+	var bg = uiu.el(container, 'div', {
+		style: (
+			'background:' + colors.bg + ';' +
+			'position:fixed;left:0;top:0;bottom:0;right:0;' +
+			'padding:2vmin 2vmin 0 2vmin;'
+		),
+	});
+
+	var header = uiu.el(bg, 'table', {
+		style: (
+			'border-collapse:collapse;' +
+			'background:' + colors.bg3 + ';' +
+			'width:100%;margin-bottom:3vmin;'
+		),
+	});
+	var tr = uiu.el(header, 'tr');
+
+	function _render_logo(team_id) {
+		var td = uiu.el(tr, 'td', {
+			style: (
+				'background:' + colors.bg2 + ';padding:1vh 1vw;height:15vh;width:13vw;'
+			),
+		});
+		uiu.el(td, 'div', {
+			style: 'background:url("' + logo_urls[team_id] + '") 100% ' + colors.bg2 + ' no-repeat;' +
+			'height:100%; width:100%;'
+		});
+	}
+	function _render_team(team_id) {
+		uiu.el(tr, 'td', {
+			style: (
+				'width:30vw;text-align:center;' +
+				'color:' + colors.fg + ';' +
+				'font-size:4vmin;'
+			)
+		}, team_names[team_id]);
+	}
+
+	_render_logo(0);
+	_render_team(0);
+	uiu.el(tr, 'td', {
+		style: (
+			'text-align:center;font-size:8vmin;' +
+			'background:' + colors.bg2 + ';color:' + colors.bg
+		),
+	}, match_score[0] + ':' + match_score[1]);
+	_render_team(1);
+	_render_logo(1);
+
+	var table = uiu.el(bg, 'table', {
+		'class': 'd_greyish_table',
+		'style': (
+			'table-layout:fixed;width:100%;border-collapse:collapse;font-size:4vmin;' +
+			'color:' + colors.fg + ';'
+		),
+	});
+	var match_count = event.matches.length;
+	event.matches.forEach(function(match, match_num) {
+		var setup = match.setup;
+		var nscore = extract_netscore(match);
+		var mwinner = calc.match_winner(setup.counting, nscore);
+		var winner_num = (mwinner === 'left') ? 0 : ((mwinner === 'right') ? 1 : 2);
+
+		var tr = uiu.el(table, 'tr', {
+			style: (
+				'height:' + (76 / match_count) + 'vh;' +
+				'background:' + colors.bg3 + ';' +
+				'border-top:1vh solid ' + colors.bg
+			),
+		});
+		uiu.el(tr, 'td', {
+			style: (
+				'text-align:center;width:2.5em;' +
+				'border-right:0.5vw solid ' + colors.bg
+			),
+		}, setup.match_name);
+		setup.teams.forEach(function(team, team_num) {
+			var is_winner = team_num === winner_num;
+			uiu.el(tr, 'td', {
+				style: (
+					'width:28vw;' +
+					'padding-left:0.3em;' +
+					'border-right:0.5vw solid ' + colors.bg + ';' +
+					(is_winner ? ('background:' + colors.bg2 + ';color:' + colors.bg) : '') + ';'
+				),
+			}, namestr(team.players));
+		});
+		for (var game_idx = 0;game_idx < max_game_count;game_idx++) {
+			var gscore = nscore[game_idx];
+			var winner_game = gscore && ((mwinner === 'left') && (gscore[0] > gscore[1]) || (mwinner === 'right') && (gscore[1] > gscore[0]));
+			uiu.el(tr, 'td', {
+				'style': (
+					'text-align:center;' +
+					'width:' + (30 / max_game_count) + 'vw;' +
+					(winner_game ? ('background:' + colors.bg2 + ';color:' + colors.bg) : '')
+				),
+			},
+				gscore ? (gscore[0] + ':' + gscore[1]) : ''
+			);
+		}
+	});
+}
+
 function render_tim(s, container, event, colors) {
 	var max_game_count = _calc_max_games(event);
 	var match_score = _calc_matchscore(event.matches);
@@ -1899,6 +2009,7 @@ function update(err, s, event) {
 	var ofunc = {
 		'2court': render_2court,
 		castall: render_castall,
+		greyish: render_greyish,
 		tournament_overview: render_tournament_overview,
 		tim: render_tim,
 	}[style];
@@ -2056,6 +2167,7 @@ function option_applies(style_id, option_name) {
 		castall: ['c0', 'c1', 'cfg', 'cbg', 'cbg2', 'ct', 'cserv', 'crecv', 'reverse_order', 'scale'],
 		clubplayers: ['court_id', 'c0', 'c1', 'cbg'],
 		clubplayerslr: ['court_id', 'c0', 'c1', 'cbg'],
+		greyish: ['cbg', 'cbg2', 'cbg3', 'cbg4', 'cfg'],
 		international: ['court_id', 'c0', 'c1', 'cfg', 'cbg'],
 		oncourt: ['court_id', 'cfg', 'cfg3', 'cbg', 'cserv2'],
 		onlyplayers: ['court_id', 'c0', 'c1', 'cbg'],

@@ -1,6 +1,3 @@
-btde-like overview display
-	configure correct colors
-
 dads referee mode config
 
 dads gegen logo
@@ -9,8 +6,6 @@ dads gegen simple
 store order change in demo
 store order change in courtspot
 store order change in referee mode
-
-update checklist
 
 pi configuration script
 	download raspbian image and use it
@@ -27,6 +22,10 @@ tde_import umpire, notes
 block middle buttons like any other-> Jörg Hupertz
 "20 Sekunden" im Ansagefeld nicht sichtbar wenn Auf- und Rückschläger bestimmt werden -> Jörg Hupertz
 	noch "20 Sekunden" neben der Uhr
+
+abt fall-back for btde
+	report to abt in parallel
+	configure abt address
 
 
 test right-click on all links

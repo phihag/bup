@@ -484,6 +484,7 @@ var i18n_de = {
 'displaymode|2court': '2 Felder',
 'displaymode|andre': 'André',
 'displaymode|tim': 'Tim',
+'displaymode|greyish': 'Gräulich',
 'displaymode|tournament_overview': 'Turnier-Übersicht',
 'displaymode|castall': 'Cast',
 'displaymode|onlyplayers': 'Nur Spieler',

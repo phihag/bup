@@ -485,6 +485,7 @@ var i18n_en = {
 'displaymode|castall': 'greenscreen (all courts)',
 'displaymode|andre': 'André',
 'displaymode|tim': 'Tim',
+'displaymode|greyish': 'Greyish',
 'displaymode|onlyplayers': 'players only',
 'displaymode|onlyscore': 'score only',
 'displaymode|clubplayers': 'team + players',
