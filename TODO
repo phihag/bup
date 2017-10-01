@@ -11,6 +11,7 @@ store order change in courtspot
 store order change in referee mode
 
 pi configuration script
+	backgrounds for tablet
 	download raspbian image and use it
 	autostart chromium full-screen with display
 	set desktop background

@@ -46,6 +46,8 @@ dist: cleandist ## Create distribution files
 	cp libs/pdfform.minipdf.dist.js dist/bup/pdfform.minipdf.dist.js
 	node_modules/.bin/svgo -q -f icons/ -o dist/bup/icons/
 	cp icons/*.gif icons/*.png dist/bup/icons/
+	mkdir -p dist/bup/div/logos/
+	node_modules/.bin/svgo -q -f div/logos/ -o dist/bup/div/logos/
 	cp div/dist_htaccess dist/bup/.htaccess
 	mkdir -p dist/bup/div/
 	node_modules/.bin/svgo -q -i div/bundesliga-logo.svg -o dist/bup/div/bundesliga-logo.svg
