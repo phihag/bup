@@ -1030,8 +1030,10 @@ function render_greyish(s, container, event, colors) {
 			),
 		});
 		uiu.el(td, 'div', {
-			style: 'background:url("' + logo_urls[team_id] + '") 100% ' + colors.bg2 + ' no-repeat;' +
-			'height:100%; width:100%;'
+			style: (
+				'background:url("' + logo_urls[team_id] + '") 100% ' + colors.bg2 + ' no-repeat;' +
+				'height:100%; width:100%;'
+			),
 		});
 	}
 	function _render_team(team_id) {
@@ -1040,7 +1042,7 @@ function render_greyish(s, container, event, colors) {
 				'width:30vw;text-align:center;' +
 				'color:' + colors.fg + ';' +
 				'font-size:4vmin;'
-			)
+			),
 		}, team_names[team_id]);
 	}
 
@@ -1063,7 +1065,7 @@ function render_greyish(s, container, event, colors) {
 		),
 	});
 	var match_count = event.matches.length;
-	event.matches.forEach(function(match, match_num) {
+	event.matches.forEach(function(match) {
 		var setup = match.setup;
 		var nscore = extract_netscore(match);
 		var mwinner = calc.match_winner(setup.counting, nscore);
