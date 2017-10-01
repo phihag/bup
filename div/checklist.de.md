@@ -84,6 +84,7 @@
 
 Während des Spiels:
 
+- [ ] Zuschauerzahl schätzen
 - [ ] Auf Handzeichen der Schiedsrichter achten
 - [ ] Ggf. weitere Bälle bringen
 - [ ] Router-Statistiken beobachten
@@ -101,6 +102,7 @@ Nach Spielende:
   - [ ] Halle überprüfen
   - [ ] Vereinsnamen überprüfen
   - [ ] Schiedsrichter überprüfen
+  - [ ] Zuschauerzahl überprüfen
   - [ ] Anwesende/Ersatz-Spieler überprüfen
   - [ ] Besondere Vorkommnisse überprüfen
   - [ ] 3x ausdrucken
