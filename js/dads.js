@@ -96,6 +96,16 @@ function render_ad(container, ad) {
 			style: 'position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;',
 		});
 		break;
+	case 'video_file_url':
+		container.style.backgroundColor = ad.bgcolor || '#000';
+		uiu.el(container, 'video', {
+			src: ad.url,
+			autoplay: 'autoplay',
+			muted: 'muted',
+			loop: 'loop',
+			style: 'position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;',
+		});
+		break;
 	default:
 		uiu.text(container, 'Unsupported type ' + ad.type);
 		report_problem.silent_error('Unsupported ad type ' + ad.type);
@@ -304,6 +314,19 @@ function ui_make_config(s, outer_container) {
 		if (url) {
 			ui_add(s, {
 				type: 'image',
+				url: url,
+			});
+		}
+	});
+
+	var add_video_file_url = uiu.el(buttons, 'button', {
+		'data-i18n': 'dads:add video file url',
+	});
+	click.on(add_video_file_url, function() {
+		var url = prompt('URL');
+		if (url) {
+			ui_add(s, {
+				type: 'video_file_url',
 				url: url,
 			});
 		}

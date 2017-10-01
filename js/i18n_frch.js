@@ -566,6 +566,7 @@ var i18n_frch = {
 'dads:mode': 'Mode:',
 'dads:add image': 'Ajouter une image',
 'dads:add image url': 'Ajouter une URL de l\'image',
+'dads:add video file url': 'Ajouter l\'URL du fichier vidéo',
 'dads:add rg': 'Ajouter un texte d\'annonce',
 'dads:back': 'Retourner',
 'dads:quota': 'La publicité n\'a pas pu être enregistrée: espace de stockage insuffisant disponible. Essayez d\'utiliser les URL au lieu des fichiers image.',
