@@ -1069,7 +1069,6 @@ function render_greyish(s, container, event, colors) {
 		var setup = match.setup;
 		var nscore = extract_netscore(match);
 		var mwinner = calc.match_winner(setup.counting, nscore);
-		var winner_num = (mwinner === 'left') ? 0 : ((mwinner === 'right') ? 1 : 2);
 
 		var tr = uiu.el(table, 'tr', {
 			style: (
@@ -1084,16 +1083,38 @@ function render_greyish(s, container, event, colors) {
 				'border-right:0.5vw solid ' + colors.bg
 			),
 		}, setup.match_name);
-		setup.teams.forEach(function(team, team_num) {
-			var is_winner = team_num === winner_num;
-			uiu.el(tr, 'td', {
-				style: (
-					'width:28vw;' +
-					'padding-left:0.3em;' +
-					'border-right:0.5vw solid ' + colors.bg + ';' +
-					(is_winner ? ('background:' + colors.bg2 + ';color:' + colors.bg) : '') + ';'
-				),
-			}, namestr(team.players));
+		setup.teams.forEach(function(team, team_id) {
+			var is_winner = ((mwinner === 'left') && (team_id === 0) || (mwinner === 'right') && (team_id === 1));
+			var pnames = _player_names(team, setup.is_doubles, true);
+			var common_css = (
+				'text-align:center;' +
+				'padding-left:0.3em;' +
+				(is_winner ? ('background:' + colors.bg2 + ';color:' + colors.bg) : '') + ';'
+			);
+			if (pnames.length === 2) {
+				uiu.el(tr, 'td', {
+					style: (
+						'width:14vw;' +
+						common_css
+					),
+				}, pnames[0]);
+				uiu.el(tr, 'td', {
+					style: (
+						'width:14vw;' +
+						'border-right:0.5vw solid ' + colors.bg + ';' +
+						common_css
+					),
+				}, pnames[1]);
+			} else {
+				uiu.el(tr, 'td', {
+					colspan: 2,
+					style: (
+						'width:28vw;' +
+						'border-right:0.5vw solid ' + colors.bg + ';' +
+						common_css
+					),
+				}, namestr(team.players));
+			}
 		});
 		for (var game_idx = 0;game_idx < max_game_count;game_idx++) {
 			var gscore = nscore[game_idx];
@@ -2169,7 +2190,7 @@ function option_applies(style_id, option_name) {
 		castall: ['c0', 'c1', 'cfg', 'cbg', 'cbg2', 'ct', 'cserv', 'crecv', 'reverse_order', 'scale'],
 		clubplayers: ['court_id', 'c0', 'c1', 'cbg'],
 		clubplayerslr: ['court_id', 'c0', 'c1', 'cbg'],
-		greyish: ['cbg', 'cbg2', 'cbg3', 'cbg4', 'cfg'],
+		greyish: ['cbg', 'cbg2', 'cbg3', 'cfg'],
 		international: ['court_id', 'c0', 'c1', 'cfg', 'cbg'],
 		oncourt: ['court_id', 'cfg', 'cfg3', 'cbg', 'cserv2'],
 		onlyplayers: ['court_id', 'c0', 'c1', 'cbg'],
