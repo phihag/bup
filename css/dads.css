@@ -46,8 +46,8 @@
 }
 .dads_active {
 	position: absolute;
-	bottom: 0;
-	left: 0;
+	top: 0;
+	left: 5vmin;
 	background: #fff;
 	padding: 0.5vmin 1vmin 0 0;
 }

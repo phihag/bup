@@ -87,7 +87,7 @@ function ui_rm(s, ad_id) {
 	render_previews(s, uiu.qs('.dads_previews'));
 }
 
-function render_ad(container, ad) {
+function render_ad(container, ad, is_preview) {
 	switch(ad.type) {
 	case 'image':
 		container.style.backgroundColor = ad.bgcolor || '#000';
@@ -98,13 +98,18 @@ function render_ad(container, ad) {
 		break;
 	case 'video_file_url':
 		container.style.backgroundColor = ad.bgcolor || '#000';
-		uiu.el(container, 'video', {
+		var video_attrs = {
 			src: ad.url,
-			autoplay: 'autoplay',
 			muted: 'muted',
 			loop: 'loop',
 			style: 'position:absolute;top:0;left:0;width:100%;height:100%;object-fit:contain;',
-		});
+		};
+		if (is_preview) {
+			video_attrs.controls = 'controls';
+		} else {
+			video_attrs.autoplay = 'autoplay';
+		}
+		uiu.el(container, 'video', video_attrs);
 		break;
 	default:
 		uiu.text(container, 'Unsupported type ' + ad.type);
@@ -138,7 +143,7 @@ function on_active_change(e) {
 
 function render_preview(container, ad) {
 	uiu.empty(container);
-	render_ad(container, ad);
+	render_ad(container, ad, true);
 	container.setAttribute('data-ad-id', ad.id);
 
 	var color_input = uiu.el(container, 'input', {
