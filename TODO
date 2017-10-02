@@ -1,3 +1,5 @@
+test for missing dm_style in URLs
+ask before emergency restore
 dads referee mode config
 	UI
 	add ad
@@ -10,7 +12,13 @@ store order change in demo
 store order change in courtspot
 store order change in referee mode
 
+btde percourt
+
 pi configuration script
+	pis sleeping
+		xset s off # don't activate screensaver
+		xset -dpms # disable DPMS (Energy Star) features.
+		xset s noblank # don't blank the video device
 	backgrounds for tablet
 	download raspbian image and use it
 	autostart chromium full-screen with display
@@ -252,6 +260,7 @@ set event colors from referee mode
 highlight undo in stats
 source maps for errors
 	http://stackoverflow.com/a/33129856/35070
+	https://raw.githubusercontent.com/stacktracejs/stacktrace.js/master/dist/stacktrace.min.js | head -n 1
 
 hide lesser-used links
 

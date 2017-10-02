@@ -1,6 +1,8 @@
 'use strict';
 
 var assert = require('assert');
+var fs = require('fs');
+var path = require('path');
 
 var tutils = require('./tutils');
 var vdom = require('./vdom');
@@ -124,6 +126,20 @@ _describe('displaymode', function() {
 			assert.strictEqual(typeof style, 'string');
 			var label = state._('displaymode|' + style);
 			assert(!/:|untranslated/.test(label), 'untranslated displaymode style label: Missing \'displaymode|' + style + '\'');
+		});
+	});
+
+	_it('all dm_styles documented', function(done) {
+		var ROOT = path.dirname(__dirname);
+		var url_doc_fn = path.join(ROOT, 'div', 'URLs.txt');
+
+		fs.readFile(url_doc_fn, {encoding: 'utf8'}, function(err, doc) {
+			if (err) return done(err);
+
+			bup.displaymode.ALL_STYLES.forEach(function(style) {
+				assert(doc.includes(style), 'Missing dm_style doc in div/URLs.txt: ' + style);
+			});
+			done();
 		});
 	});
 });
