@@ -24,8 +24,9 @@ Initial UI
 
 These can be combined with any other options (but not each other), as in #bldemo&display .
 
-settings       Show settings UI
+settings       Show settings UI (currently by default)
 display        Start in display mode
+referee_mode   Start in referee mode
 eventsheet=foo Show the dialog for generating the eventsheet named foo
 order          Show the match order dialog
 mo             Start with the manual order dialog (allows easy match creation and import)
