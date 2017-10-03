@@ -28,36 +28,6 @@ var TEAM_COLORS = {
 	'Wipperfeld': '#ff2149',
 	'Wittorf': '#0091ff',
 };
-var LOGOS = [
-	'bcbeuel',
-	'bcbsaarbruecken',
-	'bcwipperfeld',
-	'bvgifhorn',
-	'bvmuelheim',
-	'ebtberlin',
-	'svfunballdortelweil',
-	'sganspach',
-	'sgschorndorf',
-	'stcblauweisssolingen',
-	'tsvfreystadt',
-	'tsvneubibergottobrunn',
-	'tsvneuhausen',
-	'tsvtrittau',
-	'tuswiebelskirchen',
-	'tvdillingen',
-	'tvemsdetten',
-	'tvrefrath',
-	'unionluedinghausen',
-	'vfbfriedrichshafen',
-	'wittorfneumuenster',
-];
-var LOGO_ALIASSE = {
-	'TSV Neuhausen-Nymphenburg': 'tsvneuhausen',
-	'1.BV Mülheim': 'bvmuelheim',
-	'1.BC Sbr.-Bischmisheim': 'bcbsaarbruecken',
-	'BC Bischmisheim': 'bcbsaarbruecken',
-	'SC Union Lüdinghausen': 'unionluedinghausen',
-};
 
 function get_color(team_name) {
 	for (var keyword in TEAM_COLORS) {
@@ -67,10 +37,48 @@ function get_color(team_name) {
 	}
 }
 
+
+var LOGOS = [
+	'bcbeuel',
+	'bcbsaarbruecken',
+	'bchohenlimburg',
+	'bcwipperfeld',
+	'bspfrneusatz',
+	'bvgifhorn',
+	'bvmuelheim',
+	'ebtberlin',
+	'hamburghornertv',
+	'sganspach',
+	'sgebtberlin',
+	'sgschorndorf',
+	'stcblauweisssolingen',
+	'svfischbach',
+	'svfunballdortelweil',
+	'svgutsmuthsjena',
+	'tsvfreystadt',
+	'tsvneubibergottobrunn',
+	'tsvneuhausen',
+	'tsvtrittau',
+	'tuswiebelskirchen',
+	'tvdillingen',
+	'tvemsdetten',
+	'tvmarktheidenfeld',
+	'tvrefrath',
+	'unionluedinghausen',
+	'vfbfriedrichshafen',
+	'vfbscpeine',
+	'wittorfneumuenster',
+];
+var LOGO_ALIASSE = {
+	'1.BC Sbr.-Bischmisheim': 'bcbsaarbruecken',
+	'1.BV Mülheim': 'bvmuelheim',
+	'BC Bischmisheim': 'bcbsaarbruecken',
+	'Blau-Weiss Wittorf-NMS': 'wittorfneumuenster',
+	'SC Union Lüdinghausen': 'unionluedinghausen',
+	'TSV Neuhausen-Nymphenburg': 'tsvneuhausen',
+};
 function team_logo(team_name) {
-	if (LOGO_ALIASSE[team_name]) {
-		team_name = LOGO_ALIASSE[team_name];
-	}
+	team_name = LOGO_ALIASSE[team2club(team_name)] || team_name;
 
 	var clean_name = team_name.toLowerCase().replace(/[^a-z]/g, '');
 	if (LOGOS.includes(clean_name)) {
@@ -131,6 +139,11 @@ return {
 	logo_url: logo_url, // Of an event
 	get_color: get_color,
 	team_logos: team_logos,
+
+	/*@DEV*/
+	// Testing only
+	team_logo: team_logo,
+	/*/@DEV*/
 };
 
 })();

@@ -1,12 +1,18 @@
 ask before emergency restore
+	-> msg Paul
+
+dads: bump default durations
+colors to display before match (+ larger font)
+2courts: show match score in parens
 
 dads referee mode config
 	UI
 	add ad
 
+dads test endtime etc.
 dads gegen logo
 dads gegen simple
-2courts: show match score in parens
+link order in referee mode
 
 store order change in demo
 store order change in courtspot
@@ -15,6 +21,7 @@ store order change in referee mode
 btde percourt
 
 pi configuration script
+	https://www.foxplex.com/sites/raspbian-aufloesung-auf-1920x1080-aendern/
 	pis sleeping
 		xset s off # don't activate screensaver
 		xset -dpms # disable DPMS (Energy Star) features.
@@ -28,7 +35,7 @@ pi configuration script
 	enable and configure VNC
 	enable and configure ssh
 	remote control
-	https://github.com/bbinet/reverse-ssh-manager?
+	https://github.com/fatedier/frp/blob/master/conf/frps_full.ini
 dads until starttime - 0:15?
 
 automatically set and show referee name
