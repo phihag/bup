@@ -1,5 +1,5 @@
-test for missing dm_style in URLs
 ask before emergency restore
+
 dads referee mode config
 	UI
 	add ad
@@ -28,7 +28,11 @@ pi configuration script
 	enable and configure VNC
 	enable and configure ssh
 	remote control
+	https://github.com/bbinet/reverse-ssh-manager?
 dads until starttime - 0:15?
+
+automatically set and show referee name
+referee selection: highlight if on same IP
 
 tde_import umpire, notes
 block middle buttons like any other-> Jörg Hupertz
