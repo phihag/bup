@@ -1,3 +1,5 @@
+* = optional, kann ohne Philipp übersprungen werden
+
 3h-90 Minuten vor Spielbeginn:
 
 - [ ] Strom zu Beamer/TVs legen
@@ -19,9 +21,9 @@
   - [ ] Rotation = Landscape
   - [ ] Chrome aufrufen und einloggen
   - [ ] An Stühle anschrauben
-  - [ ] Einstellungen überprüfen (Federballzähler an, Referee Mode?)
+  - [ ] *Einstellungen überprüfen (Federballzähler an, Referee Mode?)
   - [ ] Vollbildmodus
-  - [ ] USB-Akkus dranhängen
+  - [ ] *USB-Akkus dranhängen
 - [ ] Beamer aufbauen
   - [ ] Pi (inkl. Strom)
   - [ ] Ggf. URL / Vollbild konfigurieren
@@ -30,40 +32,40 @@
   - [ ] Mehrfachsteckdose
   - [ ] Fernseher
   - [ ] Pi + HDMI
-  - [ ] Ggf. In VNC laden
-- [ ] Backup-Tablets
-  - [ ] Batteriestand überprüfen, ggf. laden
-  - [ ] Auf lautlos stellen
-  - [ ] Ins richtige WLAN einbuchen
-  - [ ] Chrome aufrufen und einloggen
-- [ ] Demo-Tablet starten
-  - [ ] Batteriestand überprüfen, ggf. laden
-  - [ ] https://aufschlagwechsel.de/bup#bldemo
-  - [ ] Keep Screen on
-  - [ ] Vollbild
-- [ ] Tabletstifte bereitlegen
-- [ ] Zollstock bereitlegen
+  - [ ] *In VNC laden
+- [ ] *Backup-Tablets
+  - [ ] *Batteriestand überprüfen, ggf. laden
+  - [ ] *Auf lautlos stellen
+  - [ ] *Ins richtige WLAN einbuchen
+  - [ ] *Chrome aufrufen und einloggen
+- [ ] *Demo-Tablet starten
+  - [ ] *Batteriestand überprüfen, ggf. laden
+  - [ ] *https://aufschlagwechsel.de/bup#bldemo
+  - [ ] *Keep Screen on
+  - [ ] *Vollbild
+- [ ] *Tabletstifte bereitlegen
+- [ ] *Zollstock bereitlegen
 - [ ] Link zum Ticker auf Facebook gepostet?
 
 90-60 Minuten vor Spielbeginn:
 
-- [ ] bup im Referee Mode (auf 2. Laptop) starten
-  - [ ] Alle Tablets erkannt? (ggf. Referee Mode aktivieren)
-- [ ] Tabs Aufstellungen öffnen (von kroton.de)
+- [ ] *bup im Referee Mode (auf 2. Laptop) starten
+  - [ ] *Alle Tablets+Anzeigen erkannt?
+- [ ] *Tabs Aufstellungen öffnen (von kroton.de)
 - [ ] Aufstellungszettel
   - [ ] Ausfüllen mit in der Halle anwesenden Spielern
   - [ ] Ausdrucken
   - [ ] Heim geben
   - [ ] Gast geben
-- [ ] Netzwerk checken
-  - [ ] DSL-Modem als Tab öffnen
-  - [ ] WLAN-Hotspot als Tab öffnen
+- [ ] *Netzwerk checken
+  - [ ] *DSL-Modem als Tab öffnen
+  - [ ] *WLAN-Hotspot als Tab öffnen
 - [ ] Wischmöppe bereitgelegt?
 
 60-30 Minuten vor Spielbeginn:
 
-- [ ] Schiedsrichter ggf. mit Demo-Tablet einführen
-- [ ] Tabletstifte an Schiedsrichter geben
+- [ ] *Schiedsrichter ggf. mit Demo-Tablet einführen*
+- [ ] Tabletstifte an Schiedsrichter geben*
 
 30 Minuten vor Spielbeginn:
 
@@ -117,8 +119,8 @@ Nach Spielende:
 - [ ] Display-Pis einsammeln
 - [ ] Mehrfachsteckdosen einsammeln
 - [ ] Tablets einsammeln
-  - [ ] Export senden
-  - [ ] Statistiken anschauen
+  - [ ] *Export senden
+  - [ ] *Statistiken anschauen
 - [ ] Kabeltrommeln einsammeln und einpacken
 - [ ] Drucker abbauen und einpacken
 - [ ] Laptops und Zubehör abbauen und einpacken
