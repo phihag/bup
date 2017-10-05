@@ -1,5 +1,13 @@
+stripes: invert fg color if c[team_id] bright
+stripes: highlight won games
+stripes: first letter of last name?
+	-> msg Freystadt (Tim)
+
 ask before emergency restore
 	-> msg Paul
+
+docs
+	minimum hardware requirements
 
 dads: bump default durations
 colors to display before match (+ larger font)
