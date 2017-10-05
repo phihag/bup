@@ -131,7 +131,7 @@ _describe('displaymode', function() {
 
 	_it('all dm_styles documented', function(done) {
 		var ROOT = path.dirname(__dirname);
-		var url_doc_fn = path.join(ROOT, 'div', 'URLs.txt');
+		var url_doc_fn = path.join(ROOT, 'doc', 'URLs.txt');
 
 		fs.readFile(url_doc_fn, {encoding: 'utf8'}, function(err, doc) {
 			if (err) return done(err);
