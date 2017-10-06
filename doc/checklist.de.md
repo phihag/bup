@@ -1,4 +1,4 @@
-* = optional, kann ohne Philipp übersprungen werden
+\* = optional, kann ohne Philipp übersprungen werden
 
 3h-90 Minuten vor Spielbeginn:
 
