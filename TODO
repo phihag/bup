@@ -1,11 +1,7 @@
-stripes: invert fg color if c[team_id] bright
-stripes: highlight won games
-stripes: first letter of last name?
-	-> msg Freystadt (Tim)
-
 redesign manual as slides
 	redirect to slides
 
+verwende Team-Farben does not change color inputs
 ask before emergency restore
 	-> msg Paul
 

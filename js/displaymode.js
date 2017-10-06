@@ -19,7 +19,15 @@ var ALL_STYLES = [
 	'tournament_overview',
 	'andre',
 ];
-var ALL_COLORS = ['c0', 'c1', 'cbg', 'cfg', 'cbg2', 'cbg3', 'cbg4', 'cfg2', 'cfg3', 'ct', 'cserv', 'cserv2', 'crecv', 'cborder', 'ctim_blue', 'ctim_active'];
+var ALL_COLORS = [
+	'c0', 'c1',
+	'cbg', 'cbg2', 'cbg3', 'cbg4',
+	'cfg', 'cfg2', 'cfg3', 'cfgdark',
+	'ct', // transparent
+	'cborder',
+	'cserv', 'cserv2', 'crecv',
+	'ctim_blue', 'ctim_active',
+];
 
 var _hide_cursor_timeout;
 
@@ -1085,7 +1093,7 @@ function render_greyish(s, container, event, colors) {
 		}, setup.match_name);
 		setup.teams.forEach(function(team, team_id) {
 			var is_winner = ((mwinner === 'left') && (team_id === 0) || (mwinner === 'right') && (team_id === 1));
-			var pnames = _player_names(team, setup.is_doubles, true);
+			var pnames = _player_names(team, setup.is_doubles, _lastname);
 			var common_css = (
 				'text-align:center;' +
 				'padding-left:0.3em;' +
@@ -1330,10 +1338,14 @@ function render_stripes(s, container, event, court, match, colors) {
 	var match_score = _calc_matchscore(event.matches);
 
 	function _render_team(team_id) {
+		var bg_col = colors[team_id];
+		var fg_col = (utils.brightness(bg_col) > 128) ? colors.fgdark : colors.fg;
+
 		var tr = uiu.el(table, 'tr');
 		uiu.el(tr, 'td', {
 			style: (
-				'background:' + colors[team_id] + ';'
+				'color:' + fg_col + ';' +
+				'background:' + bg_col + ';'
 			),
 		}, team_names[team_id] + ' (' + match_score[team_id] + ')');
 	}
@@ -1341,7 +1353,7 @@ function render_stripes(s, container, event, court, match, colors) {
 	function _render_players(team_id) {
 		var tr = uiu.el(table, 'tr');
 		var td = uiu.el(tr, 'td', {});
-		var player_names = _player_names(setup.teams[team_id], setup.is_doubles, true);
+		var player_names = _player_names(setup.teams[team_id], setup.is_doubles, _doubles_name);
 		player_names.forEach(function(pname, player_id) {
 			if (player_id !== 0) {
 				uiu.el(td, 'span', {}, ' / ');
@@ -1398,7 +1410,12 @@ function render_stripes(s, container, event, court, match, colors) {
 		}
 
 		for (var game_id = 0;game_id < max_game_count;game_id++) {
-			var cur_serve = (team_id === server.team_id) && (nscore.length - 1 === game_id);
+			var gscore = nscore[game_id];
+			var cur_serve = (
+				(nscore.length - 1 === game_id) ?
+				((team_id === server.team_id) || (calc.match_winner(setup.counting, nscore) === ((team_id === 0) ? 'left' : 'right'))) :
+				(gscore && (gscore[team_id] > gscore[1 - team_id]))
+			);
 			uiu.el(tr, 'td', {
 				style: (
 					((team_id === 0) ? 'border-bottom' : 'border-top') + ':2vh solid ' + colors.bg + ';' +
@@ -1409,11 +1426,9 @@ function render_stripes(s, container, event, court, match, colors) {
 					'max-width:' + width_str + ';' +
 					(cur_serve ? 'color:' + colors.serv + ';' : '')
 				),
-			}, nscore[game_id] ? nscore[game_id][team_id] : '');
+			}, gscore ? gscore[team_id] : '');
 		}
 	}
-	// TODO highlight serving team
-	// TODO check all colors work
 
 	_render_players(1);
 	_render_team(1);
@@ -1447,10 +1462,10 @@ function _render_court(s, container, event) {
 	return court;
 }
 
-function _player_names(team, is_doubles, short_doubles) {
+function _player_names(team, is_doubles, doubles_func) {
 	var pcount = is_doubles ? 2 : 1;
 	var player_names = team.players.map(function(player) {
-		return (short_doubles && is_doubles) ? _lastname(player) : player.name;
+		return (doubles_func && is_doubles) ? doubles_func(player) : player.name;
 	});
 	while (player_names.length < pcount) {
 		player_names.push('');
@@ -2199,7 +2214,7 @@ function option_applies(style_id, option_name) {
 		teamcourt_pause: ['court_id', 'c0', 'c1', 'cfg', 'cfg2', 'cbg'],
 		tim: ['cbg', 'cfg', 'ctim_blue', 'ctim_active'],
 		tournament_overview: ['cfg', 'cbg', 'cbg3', 'cborder', 'cfg2'],
-		stripes: ['court_id', 'cbg', 'c0', 'c1', 'cfg', 'cbg4', 'cserv'],
+		stripes: ['court_id', 'cbg', 'c0', 'c1', 'cfg', 'cfgdark', 'cbg4', 'cserv'],
 	};
 	var bs = BY_STYLE[style_id];
 	if (bs) {
