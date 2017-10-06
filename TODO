@@ -3,11 +3,11 @@ stripes: highlight won games
 stripes: first letter of last name?
 	-> msg Freystadt (Tim)
 
+redesign manual as slides
+	redirect to slides
+
 ask before emergency restore
 	-> msg Paul
-
-docs
-	minimum hardware requirements
 
 dads: bump default durations
 colors to display before match (+ larger font)

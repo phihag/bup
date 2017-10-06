@@ -613,6 +613,7 @@
 	width: 99.999%;
 	border-collapse: collapse;
 	font-size: 3.5vmin;
+	table-layout: fixed;
 }
 .d_tim_table td {
 	border-width: 0.1vmin;
@@ -620,6 +621,7 @@
 	vertical-align: middle;
 	text-align: center;
 	border-color: inherit;
+	overflow: hidden;
 }
 .d_tim_table > thead > tr > td {
 	border-top-width: 0;
