@@ -64,8 +64,8 @@
 
 60-30 Minuten vor Spielbeginn:
 
-- [ ] *Schiedsrichter ggf. mit Demo-Tablet einführen*
-- [ ] Tabletstifte an Schiedsrichter geben*
+- [ ] \*Schiedsrichter ggf. mit Demo-Tablet einführen
+- [ ] \*Tabletstifte an Schiedsrichter geben
 
 30 Minuten vor Spielbeginn:
 
