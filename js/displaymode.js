@@ -2066,6 +2066,14 @@ function on_style_change(s) {
 	if (s.ui && s.ui.displaymode_visible) {
 		update(_last_err, s, s.event);
 	}
+
+	ALL_COLORS.forEach(function(col_name) {
+		var input = document.querySelector('.settings_d_colors_inputs [data-name="' + col_name + '"]');
+		var col = s.settings['d_' + col_name];
+		if (input && (input.value !== col)) {
+			input.value = col;
+		}
+	});
 }
 
 var _cancel_updates = null;
