@@ -1,4 +1,3 @@
-dads: select multiple images at once
 colors to display before match (+ larger font)
 
 ask before emergency restore
@@ -51,6 +50,8 @@ tde_import umpire, notes
 block middle buttons like any other-> Jörg Hupertz
 "20 Sekunden" im Ansagefeld nicht sichtbar wenn Auf- und Rückschläger bestimmt werden -> Jörg Hupertz
 	noch "20 Sekunden" neben der Uhr
+refmode: remove change button for colors
+D team_court colored (for Bischmisheim in bottom, ask for color scheme if not present)
 
 abt fall-back for btde
 	report to abt in parallel

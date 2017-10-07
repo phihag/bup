@@ -291,6 +291,7 @@ function ui_make_config(s, outer_container) {
 	var add_image_file = uiu.el(buttons, 'input', {
 		type: 'file',
 		accept: 'image/*',
+		multiple: 'multiple',
 		style: 'display:none',
 	});
 	var add_image_btn = uiu.el(buttons, 'button', {
@@ -300,15 +301,16 @@ function ui_make_config(s, outer_container) {
 		add_image_file.click();
 	});
 	add_image_file.addEventListener('change', function() {
-		var file = add_image_file.files[0];
-		var reader = new FileReader();
-		reader.onload = function(e) {
-			ui_add(s, {
-				type: 'image',
-				url: e.target.result,
-			});
-		};
-		reader.readAsDataURL(file);
+		utils.forEach(add_image_file.files, function(file) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				ui_add(s, {
+					type: 'image',
+					url: e.target.result,
+				});
+			};
+			reader.readAsDataURL(file);
+		});
 	});
 
 	var add_image_url_btn = uiu.el(buttons, 'button', {
