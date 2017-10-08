@@ -297,6 +297,8 @@ function on_edit_event(s, cb) {
 
 function list_all_players(s, cb) {
 	_list(s, '?all_players=1', function(err, event) {
+		if (err) return cb(err);
+
 		if (!event.all_players) {
 			return cb({
 				msg: 'Alte CourtSpot-Version: Bitte bupabfrage.php aktualisieren',

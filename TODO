@@ -1,5 +1,13 @@
+CourtSpot: test with failing database: does setupsheet fail?
+	-> Janine: Nachricht falsch
+
+add check courts to checklist
+label tablet background
+
+displaymode: hide settings after inactivity
 colors to display before match (+ larger font)
 
+use snyk
 ask before emergency restore
 	-> msg Paul
 2courts: show match score in parens
@@ -15,6 +23,11 @@ redesign manual as slides
 	short URL to slides
 	-> msg Julian
 
+buli spielbericht: set focus to Spielbericht
+buli spielbericht: remove del button
+print labels on tvr tablets
+
+unify court configuration for displaymode and umpire mode
 dads gegen logo
 dads gegen simple
 link order in referee mode
@@ -27,6 +40,7 @@ btde percourt
 
 pi configuration script
 	https://www.foxplex.com/sites/raspbian-aufloesung-auf-1920x1080-aendern/
+	correctly run autostart
 	pis sleeping
 		xset s off # don't activate screensaver
 		xset -dpms # disable DPMS (Energy Star) features.
@@ -53,7 +67,7 @@ block middle buttons like any other-> Jörg Hupertz
 refmode: remove change button for colors
 D team_court colored (for Bischmisheim in bottom, ask for color scheme if not present)
 
-abt fall-back for btde
+abt fall-back for btde and CourtSpot
 	report to abt in parallel
 	configure abt address
 
@@ -71,6 +85,7 @@ i18n test: fallback identical to main?
 integration test for display (verify a crash during display gets reported)
 reload button looks funny in firefox
 
+btde logout (displaymode & umpiremodey)
 courtspot: location, start time, round
 dads upload multiple images at once
 realistic court
@@ -149,6 +164,8 @@ dmode Berlin
 support fr
 contact french (see mails Ulf)
 
+reset netstats via referee mode
+stats: show precise time incl. ms on hover
 replace report link with something better
 referee w/ safari: show nice error message
 safari: switch to RSA-OAEP?
