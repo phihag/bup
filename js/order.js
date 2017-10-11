@@ -131,7 +131,6 @@ function calc_cost(order, conflict_map, preferred, d3_cost) {
 		}
 
 		// preferred order
-		// res += Math.abs(i - preferred.indexOf(order[i]));
 		for (var j = i + 1;j < order.length;j++) {
 			var ipos = preferred.indexOf(order[i]);
 			var jpos = preferred.indexOf(order[j]);

@@ -181,6 +181,30 @@ function calc_max_cost(order, conflict_map, preferred) {
 	return res;
 }
 
+function old_cost(order, conflict_map, preferred, d3_cost) {
+	if (d3_cost === undefined) {
+		throw new Error('Missing d3_cost');
+	}
+
+	var res = 0;
+	for (var i = 0;i < order.length;i++) {
+		// conflicts
+		if (i - 3 >= 0) {
+			res += d3_cost * conflict_map[order[i]][order[i - 3]];
+		}
+		if (i - 2 >= 0) {
+			res += 10000 * conflict_map[order[i]][order[i - 2]];
+		}
+		if (i - 1 >= 0) {
+			res += 100000 * conflict_map[order[i]][order[i - 1]];
+		}
+
+		// preferred order
+		res += Math.abs(i - preferred.indexOf(order[i]));
+	}
+	return res;
+}
+
 
 function run_experiment(tm, cb) {
 	const matches = tm.event.matches;
@@ -189,6 +213,7 @@ function run_experiment(tm, cb) {
 	
 	const orders = [
 		bup.order.optimize(bup.order.calc_cost, matches, preferred, {}, 0),
+		bup.order.optimize(old_cost, matches, preferred, {}, 100),
 		bup.order.optimize(bup.order.calc_cost, matches, preferred, {}, 100),
 		bup.order.optimize(calc_max_cost, matches, preferred, {}),
 		bup.order.optimize(bup.order.calc_cost, matches, preferred, {
