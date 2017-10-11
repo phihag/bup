@@ -1,4 +1,4 @@
-Warum wird bei Aufgabe/Disqualifikation im Gegensatz zu den Anweisungen für Techische Offizielle (nach §8) am Ende des Satzes das Spielergebnis umkreist?
+Warum wird bei Aufgabe/Disqualifikation im Gegensatz zu den Anweisungen für Technische Offizielle (nach §8) am Ende des Satzes das Spielergebnis umkreist?
 
 Nach Auskunft von Jens Köster handelt es sich hierbei um einen Übersetzungsfehler. Diagramm 3 und 4 im BWF Umpire Training Manual zeigen wie's richtig aussehen sollte.
 
@@ -44,3 +44,12 @@ Aus mehreren Gründen:
 * In Statistiken wollen wir Spiele bei denen der Schiedsrichter nicht die Bälle gezählt hat auch als solche vermerken. Spiele mit einem Ball kommen gerade in den unteren Ligen oder junge Jugend / fortgeschrittene Altersklasse schon mal vor.
 * Beim Spielstart wird manchmal ein gebrauchter Ball genommen. Dieser sollte dann nicht in die Ballverbrauchsstatistiken einfließen.
 * Im Doppel werden auf hohem Niveau oft direkt zwei und nicht ein Ball ausgegeben.
+
+
+Wie wird die optimale Reihenfolge berechnet?
+
+Zuerst werden aufeinanderfolgende Spiele eines Spielers (rot gekennzeichnet) minimiert.
+Dann werden Spiele mit einem Spiel "Pause" (orange) minimiert.
+Dann werden Spiele mit zwei Spielen "Pause" (braun) minimiert.
+Dann wird die Reihenfolge so optimiert, dass möglichst wenig paarweise Vertauschungen von der Standardreihenfolge (in den deutschen Bundesligen z.B. HD1-DD-HD2-HE1-DE-GD-HE2) nötig sind.
+Es werden alle möglichen Kombinationen durchprobiert; damit ist das Ergebnis gemäß dieser Kriterien optimal.

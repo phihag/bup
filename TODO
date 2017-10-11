@@ -1,13 +1,18 @@
-CourtSpot: test with failing database: does setupsheet fail?
-	-> Janine: Nachricht falsch
+order Michael
+
+order error does not get deleted on successful load
+make "send export" visible all the time
+FAQ: + Ansage Momme
+mail.templates: Ansage Momme
+remove neutral_ground, add guest_first
 
 add check courts to checklist
 label tablet background
-
+gewonnen von: add newlines?
 displaymode: hide settings after inactivity
 colors to display before match (+ larger font)
 
-use snyk
+greyish: center wittorf logo
 ask before emergency restore
 	-> msg Paul
 2courts: show match score in parens
@@ -85,7 +90,8 @@ i18n test: fallback identical to main?
 integration test for display (verify a crash during display gets reported)
 reload button looks funny in firefox
 
-btde logout (displaymode & umpiremodey)
+btde logout (displaymode & umpiremode)
+check fonts in display mode on Pis (should be sans-serif)
 courtspot: location, start time, round
 dads upload multiple images at once
 realistic court

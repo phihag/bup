@@ -1,0 +1,259 @@
+{
+    "type": "bup-export",
+    "version": 2,
+    "event": {
+        "league_key": "2BLN-2017",
+        "starttime": "13:00",
+        "team_competition": true,
+        "team_names": [
+            "TV Refrath 2",
+            "Blau-Weiss Wittorf-NMS"
+        ],
+        "matches": [
+            {
+                "setup": {
+                    "counting": "5x11_15^90",
+                    "eventsheet_id": "1.HD",
+                    "match_name": "HD1",
+                    "is_doubles": true,
+                    "teams": [
+                        {
+                            "players": [
+                                {
+                                    "firstname": "Joshua",
+                                    "lastname": "Magee",
+                                    "name": "Joshua Magee"
+                                },
+                                {
+                                    "firstname": "Lukas",
+                                    "lastname": "M\u00fchlhaus",
+                                    "name": "Lukas M\u00fchlhaus"
+                                }
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "firstname": "Gregory",
+                                    "lastname": "Mairs",
+                                    "name": "Gregory Mairs"
+                                },
+                                {
+                                    "firstname": "Bjarne",
+                                    "lastname": "Geiss",
+                                    "name": "Bjarne Geiss"
+                                }
+                            ]
+                        }
+                    ],
+                    "match_id": "btde_2017-10-08_HD1_TV Refrath 2-Blau-Weiss Wittorf-NMS"
+                }
+            },
+            {
+                "setup": {
+                    "counting": "5x11_15^90",
+                    "eventsheet_id": "DD",
+                    "match_name": "DD",
+                    "is_doubles": true,
+                    "teams": [
+                        {
+                            "players": [
+                                {
+                                    "firstname": "Elin",
+                                    "lastname": "Svensson",
+                                    "name": "Elin Svensson"
+                                },
+                                {
+                                    "firstname": "Runa",
+                                    "lastname": "Pl\u00fctzer",
+                                    "name": "Runa Pl\u00fctzer"
+                                }
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "firstname": "Stasa",
+                                    "lastname": "Poznanovic",
+                                    "name": "Stasa Poznanovic"
+                                },
+                                {
+                                    "firstname": "Petra",
+                                    "lastname": "Schl\u00fcter",
+                                    "name": "Petra Schl\u00fcter"
+                                }
+                            ]
+                        }
+                    ],
+                    "match_id": "btde_2017-10-08_DD_TV Refrath 2-Blau-Weiss Wittorf-NMS"
+                }
+            },
+            {
+                "setup": {
+                    "counting": "5x11_15^90",
+                    "eventsheet_id": "2.HD",
+                    "match_name": "HD2",
+                    "is_doubles": true,
+                    "teams": [
+                        {
+                            "players": [
+                                {
+                                    "firstname": "Christoph",
+                                    "lastname": "Offermann",
+                                    "name": "Christoph Offermann"
+                                },
+                                {
+                                    "firstname": "Kai",
+                                    "lastname": "Waldenberger",
+                                    "name": "Kai Waldenberger"
+                                }
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "firstname": "Sebastian",
+                                    "lastname": "Sch\u00f6ttler",
+                                    "name": "Sebastian Sch\u00f6ttler"
+                                },
+                                {
+                                    "firstname": "Lucas",
+                                    "lastname": "Bednorsch",
+                                    "name": "Lucas Bednorsch"
+                                }
+                            ]
+                        }
+                    ],
+                    "match_id": "btde_2017-10-08_HD2_TV Refrath 2-Blau-Weiss Wittorf-NMS"
+                }
+            },
+            {
+                "setup": {
+                    "counting": "5x11_15^90",
+                    "eventsheet_id": "1.HE",
+                    "match_name": "HE1",
+                    "is_doubles": false,
+                    "teams": [
+                        {
+                            "players": [
+                                {
+                                    "firstname": "Joshua",
+                                    "lastname": "Magee",
+                                    "name": "Joshua Magee"
+                                }
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "firstname": "Sebastian",
+                                    "lastname": "Sch\u00f6ttler",
+                                    "name": "Sebastian Sch\u00f6ttler"
+                                }
+                            ]
+                        }
+                    ],
+                    "match_id": "btde_2017-10-08_HE1_TV Refrath 2-Blau-Weiss Wittorf-NMS"
+                }
+            },
+            {
+                "setup": {
+                    "counting": "5x11_15^90",
+                    "eventsheet_id": "DE",
+                    "match_name": "DE",
+                    "is_doubles": false,
+                    "teams": [
+                        {
+                            "players": [
+                                {
+                                    "firstname": "Elin",
+                                    "lastname": "Svensson",
+                                    "name": "Elin Svensson"
+                                }
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "firstname": "Petra",
+                                    "lastname": "Schl\u00fcter",
+                                    "name": "Petra Schl\u00fcter"
+                                }
+                            ]
+                        }
+                    ],
+                    "match_id": "btde_2017-10-08_DE_TV Refrath 2-Blau-Weiss Wittorf-NMS"
+                }
+            },
+            {
+                "setup": {
+                    "counting": "5x11_15^90",
+                    "eventsheet_id": "GD",
+                    "match_name": "GD",
+                    "is_doubles": true,
+                    "teams": [
+                        {
+                            "players": [
+                                {
+                                    "firstname": "Christoph",
+                                    "lastname": "Offermann",
+                                    "name": "Christoph Offermann"
+                                },
+                                {
+                                    "firstname": "Runa",
+                                    "lastname": "Pl\u00fctzer",
+                                    "name": "Runa Pl\u00fctzer"
+                                }
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "firstname": "Gregory",
+                                    "lastname": "Mairs",
+                                    "name": "Gregory Mairs"
+                                },
+                                {
+                                    "firstname": "Stasa",
+                                    "lastname": "Poznanovic",
+                                    "name": "Stasa Poznanovic"
+                                }
+                            ]
+                        }
+                    ],
+                    "match_id": "btde_2017-10-08_GD_TV Refrath 2-Blau-Weiss Wittorf-NMS"
+                }
+            },
+            {
+                "setup": {
+                    "counting": "5x11_15^90",
+                    "eventsheet_id": "2.HE",
+                    "match_name": "HE2",
+                    "is_doubles": false,
+                    "teams": [
+                        {
+                            "players": [
+                                {
+                                    "firstname": "Kai",
+                                    "lastname": "Waldenberger",
+                                    "name": "Kai Waldenberger"
+                                }
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "firstname": "Lucas",
+                                    "lastname": "Bednorsch",
+                                    "name": "Lucas Bednorsch"
+                                }
+                            ]
+                        }
+                    ],
+                    "match_id": "btde_2017-10-08_HE2_TV Refrath 2-Blau-Weiss Wittorf-NMS"
+                }
+            }
+        ]
+    }
+}
+

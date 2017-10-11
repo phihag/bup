@@ -230,12 +230,12 @@ _describe('order', function() {
 		preferred = _calc_order(sample_matches, 'HD1-HE2-HD2-DD-HE1-HE3-DE-MX');
 		var order = _calc_order(sample_matches, 'HE2-HD1-HD2-DD-HE1-HE3-DE-MX');
 		cost = bup.order.calc_cost(order, conflicts, preferred, 1000);
-		assert.strictEqual(cost, 102002); // HD1<-1->HE2 + HD1<-3->HE1 + DD<-3->DE
+		assert.strictEqual(cost, 102001); // HD1<-1->HE2 + HD1<-3->HE1 + DD<-3->DE
 
 		preferred = _calc_order(sample_matches, 'HD1-HD2-DD-HE1-HE2-HE3-DE-MX');
 		order = _calc_order(sample_matches, 'MX-DE-HE3-HE2-HE1-DD-HD2-HD1');
 		cost = bup.order.calc_cost(order, conflicts, preferred, 1000);
-		assert.strictEqual(cost, 2000 + 7 + 5 + 3 + 1 + 1 + 3 + 5 + 7); // HD1<-3->HE1 + HE2<-3->MX
+		assert.strictEqual(cost, 2000 + 28); // HD1<-3->HE1 + HE2<-3->MX + 1xDE + 2xHE3 + 3xHE2 + 4xHE1 + 5xDD + 6xHD2 + 7xHD1
 
 		// Test optimization
 		preferred = _calc_order(sample_matches, 'HD1-HD2-DD-HE1-HE2-HE3-DE-MX');
@@ -384,7 +384,7 @@ _describe('order', function() {
 
 		var preferred = _calc_order(matches, 'HD1-DD-HD2-HE1-DE-GD-HE2-HE3');
 		var optimized = _calc_names(matches, bup.order.optimize(bup.order.calc_cost, matches, preferred, {}, 0));
-		assert.strictEqual(optimized, 'HD1-DD-HD2-HE2-DE-GD-HE1-HE3');
+		assert.strictEqual(optimized, 'DD-HD1-HD2-DE-HE2-HE1-GD-HE3');
 	});
 
 	_it('Gifhorn example (Saturday, hard, includes locking)', function() {
@@ -449,7 +449,7 @@ _describe('order', function() {
 				}],
 			}, {
 				players: [{
-					name: 'Hubert PaczekHubert Paczek',
+					name: 'Hubert Paczek',
 				}],
 			}],
 		}}, {setup: {
@@ -540,12 +540,12 @@ _describe('order', function() {
 			return res;
 		};
 		optimized = _calc_names(matches, bup.order.optimize(imagined_costfunc, matches, preferred, {}, 0));
-		assert.strictEqual(optimized, 'HD1-DD-HE1-HE2-HE3-GD-DE-HD2');
+		assert.strictEqual(optimized, 'HD1-DD-HE1-HE2-HE3-DE-GD-HD2');
 
 		// Restrict to HD1 at 1 and DD at 2, via locking
 		optimized = _calc_names(matches, bup.order.optimize(
 			imagined_costfunc, matches, preferred, {'HD1': true, 'DD': true}, 0));
-		assert.strictEqual(optimized, 'HD1-DD-HE1-HE2-HE3-GD-DE-HD2');
+		assert.strictEqual(optimized, 'HD1-DD-HE1-HE2-HE3-DE-GD-HD2');
 
 		// Make sure locking was not accidental
 		preferred = _calc_order(matches, 'HE1-HE2-HD1-DD-HE3-GD-DE-HD2');
@@ -584,11 +584,11 @@ _describe('order', function() {
 
 			order = _calc_order(matches, 'HD1-DD-HD2-HE1-DE-HE2-GD');
 			cost = bup.order.calc_cost(order, conflicts, preferred, 100);
-			assert.strictEqual(cost, 102); // DD<-3->DE
+			assert.strictEqual(cost, 101); // DD<-3->DE + GD_HE2
 
 			order = _calc_order(matches, 'HD1-DD-HE2-HE1-DE-GD-HD2');
 			cost = bup.order.calc_cost(order, conflicts, preferred, 100);
-			assert.strictEqual(cost, 100108); // GD<-1->HD2 + DD<-3->DE
+			assert.strictEqual(cost, 100107); // GD<-1->HD2 + DD<-3->DE + HE1_HE2 + DE_HE2 + GD_HE2 + HD2_HE2 + HD2_HE1 + HD2_DE + HD2_GD
 
 			var optimized = _calc_names(matches, bup.order.optimize(bup.order.calc_cost, matches, preferred, {}, 100));
 			assert.strictEqual(optimized, 'DD-HD1-HD2-HE1-DE-HE2-GD');
@@ -631,6 +631,37 @@ _describe('order', function() {
 			var pref = bup.order.preferred_by_league(event.league_key);
 			bup.eventutils.set_metadata(event);
 			bup.order.init_order_matches(event.matches, pref);
+
+			done(err);
+		});		
+	});
+
+	_it('Refrath 2 - Wittorf in 2017/2018', function(done) {
+		var fn = path.join(__dirname, 'order_2017_refrath2-wittorf.json');
+		tutils.load_event(fn, function(err, event) {
+			if (err) {
+				return done(err);
+			}
+
+			var matches = event.matches;
+			var conflicts = bup.order.calc_conflict_map(matches);
+			var preferred = _calc_order(matches, 'HD1-DD-HD2-HE1-DE-GD-HE2');
+
+			var wrong_order = _calc_order(matches, 'DD-HD2-HD1-DE-HE2-GD-HE1');
+			var cost = bup.order.calc_cost(wrong_order, conflicts, wrong_order, 100);
+			assert.strictEqual(cost, 300); // DD<-3->DE + HD2<-3->HE2 + HD1<->GD
+
+			cost = bup.order.calc_cost(wrong_order, conflicts, preferred, 100);
+			assert.strictEqual(cost, 306); // DD<-3->DE + HD2<-3->HE2 + HD1<->GD + pairwise HD1-DD + HD1-HD2 + GD-HE2 + HE1-DE + HE1-HE2 + HE1-GD
+
+			var correct_string = 'DD-HD2-HD1-DE-HE2-HE1-GD';
+			var correct_order = _calc_order(matches, correct_string);
+			cost = bup.order.calc_cost(correct_order, conflicts, preferred, 100);
+			assert.strictEqual(cost, 305); // DD<-3->DE + HD2<-3->HE2 + HD1<->GD + pairwise HD1-DD + HD1-HD2 + HE1-DE + HE1-HE2 + GD-HE2
+
+			var optimized = _calc_names(
+				matches, bup.order.optimize(bup.order.calc_cost, matches, preferred, {}, 100));
+			assert.strictEqual(optimized, correct_string);
 
 			done(err);
 		});		

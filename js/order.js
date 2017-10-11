@@ -130,8 +130,15 @@ function calc_cost(order, conflict_map, preferred, d3_cost) {
 			res += 100000 * conflict_map[order[i]][order[i - 1]];
 		}
 
-		// preferred
-		res += Math.abs(i - preferred.indexOf(order[i]));
+		// preferred order
+		// res += Math.abs(i - preferred.indexOf(order[i]));
+		for (var j = i + 1;j < order.length;j++) {
+			var ipos = preferred.indexOf(order[i]);
+			var jpos = preferred.indexOf(order[j]);
+			if (ipos > jpos) {
+				res++;
+			}
+		}
 	}
 	return res;
 }
