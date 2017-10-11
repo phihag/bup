@@ -703,33 +703,5 @@ _describe('eventutils', function() {
 		bup.eventutils.annotate(s, ev);
 		assert.deepStrictEqual(ev.matches[0].setup.counting, '3x21');
 	});
-
-	_it('annotate NLA', function() {
-		// The NLA should always use "neutral ground" announcements
-		var s = {};
-		var ev = {
-			league_key: 'NLA-2017',
-			matches: [{
-				setup: {
-					match_id: 'test_foo',
-				},
-			}],
-		};
-		bup.eventutils.annotate(s, ev);
-		assert.deepStrictEqual(ev.matches[0].setup.neutral_ground, true);
-
-		// But don't ever overwrite!
-		ev = {
-			league_key: 'NLA-2017',
-			matches: [{
-				setup: {
-					match_id: 'test_foo',
-					neutral_ground: false,
-				},
-			}],
-		};
-		bup.eventutils.annotate(s, ev);
-		assert.deepStrictEqual(ev.matches[0].setup.neutral_ground, false);
-	});
 });
 

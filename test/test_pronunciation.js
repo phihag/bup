@@ -7,10 +7,10 @@ var _describe = tutils._describe;
 var _it = tutils._it;
 var DOUBLES_SETUP = tutils.DOUBLES_SETUP;
 var DOUBLES_TEAM_SETUP = tutils.DOUBLES_TEAM_SETUP;
-var DOUBLES_TEAM_SETUP_NEUTRALGROUND = tutils.DOUBLES_TEAM_SETUP_NEUTRALGROUND;
+var DOUBLES_TEAM_SETUP_AWAY_FIRST = tutils.DOUBLES_TEAM_SETUP_AWAY_FIRST;
 var SINGLES_SETUP = tutils.SINGLES_SETUP;
 var SINGLES_TEAM_SETUP = tutils.SINGLES_TEAM_SETUP;
-var SINGLES_TEAM_SETUP_NEUTRALGROUND = tutils.SINGLES_TEAM_SETUP_NEUTRALGROUND;
+var SINGLES_TEAM_SETUP_AWAY_FIRST = tutils.SINGLES_TEAM_SETUP_AWAY_FIRST;
 var state_after = tutils.state_after;
 var press_score = tutils.press_score;
 var bup = tutils.bup;
@@ -408,7 +408,7 @@ _describe('pronunciation', function() {
 			team_id: 1,
 			player_id: 1,
 		}];
-		s = state_after(presses, DOUBLES_TEAM_SETUP);
+		s = state_after(presses, DOUBLES_TEAM_SETUP_AWAY_FIRST);
 		assert.strictEqual(
 			pronounce_de(s),
 			'Meine Damen und Herren:\n' +
@@ -431,7 +431,7 @@ _describe('pronunciation', function() {
 			'Love all.\n' +
 			'Play.'
 		);
-		s = state_after(presses, DOUBLES_TEAM_SETUP_NEUTRALGROUND);
+		s = state_after(presses, DOUBLES_TEAM_SETUP);
 		assert.strictEqual(
 			pronounce_de(s),
 			'Meine Damen und Herren:\n' +
@@ -468,7 +468,7 @@ _describe('pronunciation', function() {
 			team_id: 0,
 			player_id: 0,
 		}];
-		s = state_after(presses, DOUBLES_TEAM_SETUP);
+		s = state_after(presses, DOUBLES_TEAM_SETUP_AWAY_FIRST);
 		assert.strictEqual(
 			pronounce_de(s),
 			'Meine Damen und Herren:\n' +
@@ -491,7 +491,7 @@ _describe('pronunciation', function() {
 			'Love all.\n' +
 			'Play.'
 		);
-		s = state_after(presses, DOUBLES_TEAM_SETUP_NEUTRALGROUND);
+		s = state_after(presses, DOUBLES_TEAM_SETUP);
 		assert.strictEqual(
 			pronounce_de(s),
 			'Meine Damen und Herren:\n' +
@@ -527,7 +527,7 @@ _describe('pronunciation', function() {
 			team_id: 0,
 			player_id: 0,
 		}];
-		s = state_after(presses, DOUBLES_TEAM_SETUP);
+		s = state_after(presses, DOUBLES_TEAM_SETUP_AWAY_FIRST);
 		assert.strictEqual(
 			pronounce_de(s),
 			'Meine Damen und Herren:\n' +
@@ -550,7 +550,7 @@ _describe('pronunciation', function() {
 			'Love all.\n' +
 			'Play.'
 		);
-		s = state_after(presses, DOUBLES_TEAM_SETUP_NEUTRALGROUND);
+		s = state_after(presses, DOUBLES_TEAM_SETUP);
 		assert.strictEqual(
 			pronounce_de(s),
 			'Meine Damen und Herren:\n' +
@@ -594,7 +594,7 @@ _describe('pronunciation', function() {
 			team_id: 0,
 			player_id: 0,
 		});
-		s = state_after(presses, SINGLES_TEAM_SETUP);
+		s = state_after(presses, SINGLES_TEAM_SETUP_AWAY_FIRST);
 		assert.strictEqual(
 			pronounce_de(s),
 			'Meine Damen und Herren:\n' +
@@ -628,7 +628,7 @@ _describe('pronunciation', function() {
 			'0 partout.\n' +
 			'Jouez.'
 		);
-		s = state_after(presses, SINGLES_TEAM_SETUP_NEUTRALGROUND);
+		s = state_after(presses, SINGLES_TEAM_SETUP);
 		assert.strictEqual(
 			pronounce_de(s),
 			'Meine Damen und Herren:\n' +
@@ -675,29 +675,6 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_de(s),
 			'Meine Damen und Herren:\n' +
-			'Zu meiner Linken,\n' +
-			'B team, vertreten durch Bob,\n' +
-			'und zu meiner Rechten,\n' +
-			'A team, vertreten durch Alice.\n' +
-			'A team schlägt auf.\n\n' +
-			'0 beide.\n' +
-			'Bitte spielen.'
-		);
-		assert.strictEqual(
-			pronounce_en(s),
-			'Ladies and Gentlemen:\n' +
-			'On my left,\n' +
-			'B team, represented by Bob,\n' +
-			'and on my right,\n' +
-			'A team, represented by Alice.\n' +
-			'A team to serve.\n\n' +
-			'Love all.\n' +
-			'Play.'
-		);
-		s = state_after(presses, SINGLES_TEAM_SETUP_NEUTRALGROUND);
-		assert.strictEqual(
-			pronounce_de(s),
-			'Meine Damen und Herren:\n' +
 			'Zu meiner Rechten,\n' +
 			'A team, vertreten durch Alice,\n' +
 			'und zu meiner Linken,\n' +
@@ -713,6 +690,29 @@ _describe('pronunciation', function() {
 			'A team, represented by Alice,\n' +
 			'and on my left,\n' +
 			'B team, represented by Bob.\n' +
+			'A team to serve.\n\n' +
+			'Love all.\n' +
+			'Play.'
+		);
+		s = state_after(presses, SINGLES_TEAM_SETUP_AWAY_FIRST);
+		assert.strictEqual(
+			pronounce_de(s),
+			'Meine Damen und Herren:\n' +
+			'Zu meiner Linken,\n' +
+			'B team, vertreten durch Bob,\n' +
+			'und zu meiner Rechten,\n' +
+			'A team, vertreten durch Alice.\n' +
+			'A team schlägt auf.\n\n' +
+			'0 beide.\n' +
+			'Bitte spielen.'
+		);
+		assert.strictEqual(
+			pronounce_en(s),
+			'Ladies and Gentlemen:\n' +
+			'On my left,\n' +
+			'B team, represented by Bob,\n' +
+			'and on my right,\n' +
+			'A team, represented by Alice.\n' +
 			'A team to serve.\n\n' +
 			'Love all.\n' +
 			'Play.'
@@ -749,7 +749,7 @@ _describe('pronunciation', function() {
 			'Love all.\n' +
 			'Play.'
 		);
-		s = state_after(presses, SINGLES_TEAM_SETUP_NEUTRALGROUND);
+		s = state_after(presses, SINGLES_TEAM_SETUP_AWAY_FIRST);
 		assert.strictEqual(
 			pronounce_de(s),
 			'Meine Damen und Herren:\n' +
@@ -786,29 +786,6 @@ _describe('pronunciation', function() {
 		assert.strictEqual(
 			pronounce_de(s),
 			'Meine Damen und Herren:\n' +
-			'Zu meiner Linken,\n' +
-			'B team, vertreten durch Bob,\n' +
-			'und zu meiner Rechten,\n' +
-			'A team, vertreten durch Alice.\n' +
-			'B team schlägt auf.\n\n' +
-			'0 beide.\n' +
-			'Bitte spielen.'
-		);
-		assert.strictEqual(
-			pronounce_en(s),
-			'Ladies and Gentlemen:\n' +
-			'On my left,\n' +
-			'B team, represented by Bob,\n' +
-			'and on my right,\n' +
-			'A team, represented by Alice.\n' +
-			'B team to serve.\n\n' +
-			'Love all.\n' +
-			'Play.'
-		);
-		s = state_after(presses, SINGLES_TEAM_SETUP_NEUTRALGROUND);
-		assert.strictEqual(
-			pronounce_de(s),
-			'Meine Damen und Herren:\n' +
 			'Zu meiner Rechten,\n' +
 			'A team, vertreten durch Alice,\n' +
 			'und zu meiner Linken,\n' +
@@ -824,6 +801,29 @@ _describe('pronunciation', function() {
 			'A team, represented by Alice,\n' +
 			'and on my left,\n' +
 			'B team, represented by Bob.\n' +
+			'B team to serve.\n\n' +
+			'Love all.\n' +
+			'Play.'
+		);
+		s = state_after(presses, SINGLES_TEAM_SETUP_AWAY_FIRST);
+		assert.strictEqual(
+			pronounce_de(s),
+			'Meine Damen und Herren:\n' +
+			'Zu meiner Linken,\n' +
+			'B team, vertreten durch Bob,\n' +
+			'und zu meiner Rechten,\n' +
+			'A team, vertreten durch Alice.\n' +
+			'B team schlägt auf.\n\n' +
+			'0 beide.\n' +
+			'Bitte spielen.'
+		);
+		assert.strictEqual(
+			pronounce_en(s),
+			'Ladies and Gentlemen:\n' +
+			'On my left,\n' +
+			'B team, represented by Bob,\n' +
+			'and on my right,\n' +
+			'A team, represented by Alice.\n' +
 			'B team to serve.\n\n' +
 			'Love all.\n' +
 			'Play.'

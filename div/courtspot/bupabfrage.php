@@ -72,7 +72,6 @@ mysqli_free_result($result);
 
 $league_key = null;
 $tournament_name = null;
-$neutral_ground = false;
 $counting = null;
 
 switch ($verwaltung['Liga']) {
@@ -102,12 +101,10 @@ case 7:
 case 8:
 	$league_key = '1BL-2017';
 	$tournament_name = 'Bundesliga-Aufstiegsrunde 2017/2018';
-	$neutral_ground = true;
 	break;
 case 9: // Bundesliga-Finale
 	$league_key = '1BL-2017';
 	$tournament_name = 'Finalrunde 1. Bundesliga 2017/2018';
-	$neutral_ground = true;
 	break;
 }
 
@@ -241,7 +238,6 @@ $res = [
 	'team_names' => [$verwaltung['Heim'], $verwaltung['Gast']],
 	'league_key' => $league_key,
 	'team_competition' => true,
-	'neutral_ground' => $neutral_ground,
 ];
 if ($tournament_name) {
 	$res['tournament_name'] = $tournament_name;

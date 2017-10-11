@@ -82,10 +82,10 @@ function _prematch_team(s, team_id) {
 	var team = s.setup.teams[team_id];
 	var res = '';
 	if (s.setup.team_competition) {
-		res = team.name + s._('onmyleft.representedby');
+		res = team.name + s._('onmyright.representedby');
 	}
 	if (s.setup.is_doubles) {
-		res += s._('onmyleft.team.doubles', {
+		res += s._('onmyright.team.doubles', {
 			p1: team.players[0].name,
 			p2: team.players[1].name,
 		});
@@ -205,7 +205,7 @@ function pronounce(s, now) {
 		if (s.setup.team_competition) {
 			var serving_str = (
 				s.setup.is_doubles ?
-				(s.setup.is_doubles ? (', ' + server_name + s._('onmyleft.serve.to') + receiver_name) : '') :
+				(s.setup.is_doubles ? (', ' + server_name + s._('onmyright.serve.to') + receiver_name) : '') :
 				''
 			);
 			var left_team = (s.game.team1_left ? 0 : 1);
@@ -213,19 +213,19 @@ function pronounce(s, now) {
 				left_team: _prematch_team(s, left_team),
 				right_team: _prematch_team(s, 1 - left_team),
 				serving_team: s.setup.teams[serving_team_id].name,
-				serving_str: s._('onmyleft.serves') + serving_str,
+				serving_str: s._('onmyright.serves') + serving_str,
 				score: pronounce_score(s),
 			};
 
 			return (
 				ready_str +
 				mark_str +
-				s._((s.game.team1_left || s.setup.neutral_ground) ? 'onmyleft.home_team' : 'onmyleft.away_team', d)
+				((s.setup.away_first && !s.game.team1_left) ? s._('onmyleft.team', d) : s._('onmyright.team', d))
 			);
 		} else {
 			var receiver_str = (s.setup.is_doubles ?
-				s._('onmyleft.serveto', {receiver: receiver_name}) :
-				s._('onmyleft.serves'));
+				s._('onmyright.serveto', {receiver: receiver_name}) :
+				s._('onmyright.serves'));
 
 			d = {
 				right_team: _prematch_team(s, (s.game.team1_left ? 1 : 0)),
@@ -235,7 +235,7 @@ function pronounce(s, now) {
 				score: pronounce_score(s),
 			};
 
-			return ready_str + mark_str + s._('onmyleft', d);
+			return ready_str + mark_str + s._('onmyright', d);
 		}
 	} else if (s.match.announce_pregame) {
 		var glen = s.match.finished_games.length;

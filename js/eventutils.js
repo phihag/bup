@@ -167,12 +167,9 @@ function annotate(s, event) {
 		tournament_name: event.tournament_name,
 		event_name: event.event_name,
 		team_competition: event.team_competition,
-		neutral_ground: event.neutral_ground,
+		away_first: event.away_first,
 		counting: event.counting,
 	};
-	if ((event.league_key === 'NLA-2017') && (event.neutral_ground === undefined)) {
-		props.neutral_ground = true;
-	}
 	if (league_key && !event.counting) {
 		props.counting = default_counting(league_key);
 	}

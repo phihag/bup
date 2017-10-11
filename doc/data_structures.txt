@@ -42,9 +42,11 @@ location        Location name and address as a string, e.g. "SpH Steinbreche"
 matches*        A list of matches to be played (see below)
 preferred_order Array of eventsheet_id (recommended) or match_name values that indicate the best order of matches as set by the tournament organizers.
                 Example: ["MS1", "WS", "MS2", "MD1", "WD", "MD2", "MX"].
-protest         Text describing the protest of one team, e.g. "Court extremely slippery (Home team, 19:00)"
-team_competition* Are players competing for their teams(true) or for themselves(false)? Affects announcements.
-neutral_ground  Boolean. If true, the competition is happening at a neutral venue, so the guest team is not mentioned first. Affects announcements.
+protest         Text describing the protest of one team,
+                e.g. "Court extremely slippery (Home team, 19:00)"
+team_competition* Are players competing for their teams(true) or for themselves(false)?
+                Affects announcements.
+away_first      Boolean. If true, the guest team is mentioned first in announcements.
 team_names      Array of home and away team name. Required for team competitions.
                 Example: ["TV Refrath", "BC Bischmisheim"]
 team_shortnames Array of short home and away team names.
@@ -175,8 +177,6 @@ is_doubles*        Boolean key. false => singles, true => mixed/doubles
 counting*          Scoring system.
                    See the documentation on event for possible values.
                    Can be left out if the league_key or counting property of the event is set.
-team_competition   Are players competing for their teams(true) or for themselves(false)? Affects announcements
-neutral_ground     If team competition: Is the match played on neutral grounds? Affects announcements.     
 umpire_name        Name of the umpire assigned to this match (or the last one who touched it).
 service_judge_name Name of the service judge assigned to this match.
 court_id           ID of the court this match is played on.
@@ -185,10 +185,8 @@ warmup             Warmup time rules. Values are:
    "legacy"         120 seconds warmup time. (Default when the key is missing)
    "none"           No warmup time.
 
-
 The following keys are copied over from the event (see there for documentation):
-
-league_key, tournament_name, event_name, team_competition
+counting, league_key, tournament_name, event_name, team_competition, away_first
 
 These keys can also be set manually on a match, for example if the match is not connected to any event, or the match setup properties differ from the event.
 
