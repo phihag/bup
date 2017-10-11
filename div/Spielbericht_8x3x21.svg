@@ -11,7 +11,7 @@ line {
 }
 </style>
 
-<text style="font-size: 7px; font-weight:bold; fill: #000000;" x="20" y="15">Badminton-Spielbericht</text>
+<text style="font-size: 7px; font-weight:bold; fill: #000000;" x="20" y="15">Spielbericht</text>
 
 <text x="20" y="25">Heimverein:</text>
 <line x1="43" x2="130" y1="26" y2="26" />
@@ -19,21 +19,26 @@ line {
 <text x="20" y="35">Gastverein:</text>
 <line x1="43" x2="130" y1="36" y2="36" />
 <text x="45" y="35" id="es_svg_away_team_name"></text>
-<text x="110" y="15">Staffel:</text>
-<line x1="124" x2="182" y1="16" y2="16" />
-<text x="125" y="15" id="es_svg_tournament_name"></text>
 <text x="132" y="25">Austragungsort:</text>
 <line x1="162" x2="280" y1="26" y2="26" />
 <text id="es_svg_location" x="163" y="25"></text>
-<text x="200" y="15" style="text-anchor: end;">Spieltag:</text>
-<line x1="202" x2="210" y1="16" y2="16" />
-<text x="203" y="15" id="es_svg_matchday"></text>
-<text x="213" y="15">Datum:</text>
-<line x1="227" x2="249" y1="16" y2="16" />
-<text x="228" y="15" id="es_svg_date"></text>
-<text x="252" y="15">Beginn:</text>
+
+
+<text x="80" y="15">Staffel:</text>
+<line x1="94" x2="152" y1="16" y2="16" />
+<text x="95" y="15" id="es_svg_tournament_name"></text>
+<text x="170" y="15" style="text-anchor:end;">Spieltag:</text>
+<line x1="172" x2="180" y1="16" y2="16" />
+<text x="173" y="15" id="es_svg_matchday"></text>
+<text x="183" y="15">Datum:</text>
+<line x1="197" x2="219" y1="16" y2="16" />
+<text x="198" y="15" id="es_svg_date"></text>
+<text x="222" y="15">Beginn:</text>
+<line x1="237" x2="250" y1="16" y2="16" />
+<text x="238" y="15" id="es_svg_starttime"></text>
+<text x="254" y="15">Ende:</text>
 <line x1="267" x2="280" y1="16" y2="16" />
-<text x="268" y="15" id="es_svg_starttime"></text>
+<text x="268" y="15" id="es_svg_endtime"></text>
 
 <text x="132" y="35">Schiedsrichter:</text>
 <line x1="160" x2="280" y1="36" y2="36" />

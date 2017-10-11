@@ -568,7 +568,7 @@ function render_svg(ev, es_key, ui8r, extra_data) {
 	eventutils.set_metadata(ev);
 	var match_order = ['1.HD', '2.HD', 'DD', '1.HE', '2.HE', '3.HE', 'DE', 'GD'];
 	var matches = order_matches(ev, match_order);
-	var last_update = calc_last_update(ev.matches);
+	var last_update = calc_last_update(matches);
 
 	var body = uiu.qs('body');
 	var container = $('<div style="position: absolute; left: -999px; top: -2999px; width: 297px; height: 210px; overflow: hidden;">');
@@ -659,6 +659,7 @@ function render_svg(ev, es_key, ui8r, extra_data) {
 	_svg_text(svg, 'winner', winner_str);
 
 	_svg_text(svg, 'starttime', extra_data.starttime);
+	_svg_text(svg, 'endtime', last_update ? utils.time_str(last_update) : '');
 	_svg_text(svg, 'date', (last_update ? utils.date_str(last_update) : ''));
 	_svg_text(svg, 'matchday', extra_data.matchday);
 	_svg_text(svg, 'home_team_name', ev.team_names[0]);
