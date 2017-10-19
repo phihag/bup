@@ -1,3 +1,5 @@
+analyze Fischbach problem
+
 Kai Bonnekamp => Spielbericht manuell ändern
 	test that this works
 defect with MS Office: omit scoresheets in Excel for now
@@ -5,7 +7,9 @@ defect with MS Office: omit scoresheets in Excel for now
 order error does not get deleted on successful load
 make "send export" visible all the time
 
-greyish: use team colors for fg / bg
+dads: show displaymode -> Steffen Becker
+
+greyish+colors: use team colors for fg / bg
 	test with dark colors
 add check courts to checklist
 label tablet background
