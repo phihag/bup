@@ -493,6 +493,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var refmode_client_ui = null; // break cycle, should be require('./refmode_client_ui');
 	var refmode_referee_ui = null; // break cycle, should be require('./refmode_referee_ui');
 	var render = require('./render');
+	var report_problem = require('./report_problem');
 	var scoresheet = require('./scoresheet');
 	var stats = require('./stats');
 	var uiu = require('./uiu');
