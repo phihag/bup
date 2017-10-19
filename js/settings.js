@@ -71,7 +71,11 @@ function store(s) {
 		return;
 	}
 
-	window.localStorage.setItem('bup_settings', JSON.stringify(s.settings));
+	try {
+		window.localStorage.setItem('bup_settings', JSON.stringify(s.settings));
+	} catch (e) {
+		report_problem.silent_error('Failed to store settings: ' + e.stack);
+	}
 }
 
 function show_displaymode() {
