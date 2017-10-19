@@ -1,14 +1,16 @@
-FAQ: + Ansage Momme
-mail.templates: Ansage Momme
+CourtSpot: Startzeit
+CourtSpot: Versionsnummer
 
-Spielbericht NRW: Beginn / Ende
+Kai Bonnekamp => Spielbericht manuell ändern
+	test that this works
 
 order error does not get deleted on successful load
 make "send export" visible all the time
 
+greyish: use team colors for fg / bg
+	test with dark colors
 add check courts to checklist
 label tablet background
-gewonnen von: add newlines?
 displaymode: hide settings after inactivity
 colors to display before match (+ larger font)
 
@@ -40,8 +42,10 @@ link order in referee mode
 store order change in demo
 store order change in courtspot
 store order change in referee mode
+warn if order cannot be stored
 
 btde percourt
+Ansage TV Refrath 2 11-5 -> Simon Adams
 
 pi configuration script
 	https://www.foxplex.com/sites/raspbian-aufloesung-auf-1920x1080-aendern/

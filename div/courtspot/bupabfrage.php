@@ -230,6 +230,7 @@ while ($row = $court_result->fetch_assoc()) {
 }
 mysqli_free_result($court_result);
 
+$cs_version = isset($verwaltung['Version']) ? $verwaltung['Version'] : '0.9';
 $res = [
 	'status' => 'ok',
 	'matches' => $matches,
@@ -238,6 +239,7 @@ $res = [
 	'team_names' => [$verwaltung['Heim'], $verwaltung['Gast']],
 	'league_key' => $league_key,
 	'team_competition' => true,
+	'courtspot_version' => $cs_version,
 ];
 if ($tournament_name) {
 	$res['tournament_name'] = $tournament_name;
