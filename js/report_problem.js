@@ -8,13 +8,14 @@ var reported_count = 0;
 
 
 function get_info() {
-	return {
+	var ev = state.event;
+	var res = {
 		ua: window.navigator.userAgent,
 		url: window.location.href,
 		bup_version: bup_version,
 		setup: state.setup,
-		league_key: (state.event ? state.event.league_key : '(no event)'),
-		event_id: (state.event ? state.event.id : '(no event)'),
+		league_key: (ev ? ev.league_key : '(no event)'),
+		event_id: (ev ? ev.id : '(no event)'),
 		state_ui: state.ui,
 		fullscreen: {
 			supported: fullscreen.supported(),
@@ -30,6 +31,11 @@ function get_info() {
 		presses: state.presses,
 		netstats: netstats.all_stats,
 	};
+	if (ev && ev.courtspot_version) {
+		res.courtspot_version = ev.courtspot_version;
+	}
+
+	return res;
 }
 
 function _send(obj) {
