@@ -66,6 +66,8 @@ function Sheet(book, doc, drawing_doc) {
 		}
 		if (typeof val == 'string') {
 			cell.setAttribute('t', 'str');
+		} else if (typeof val === 'number') {
+			cell.setAttribute('t', 'n');
 		}
 	}
 
