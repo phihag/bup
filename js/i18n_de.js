@@ -348,6 +348,8 @@ var i18n_de = {
 'eventsheet:label|teamlist-1BL-2016': 'Mannschaftsunterlagen',
 'eventsheet:label|teamlist-2BLN-2016': 'Mannschaftsunterlagen',
 'eventsheet:label|teamlist-2BLS-2016': 'Mannschaftsunterlagen',
+'eventsheet:label|buli2017-minsr': 'Mindestanforderungen Schiedsrichter',
+'eventsheet:label|buli2017-minv': 'Mindestanforderungen Verein',
 'eventsheet:label|BL-ballsorten-2016': 'Zugelassene Bälle',
 'eventsheet:label|DBV-Satzungen-2016': 'Regeln DBV 2016/2017',
 'eventsheet:label|DBV-Satzungen-2017': 'Regeln DBV 2017/2018',

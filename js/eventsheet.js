@@ -8,9 +8,9 @@ var SHEETS_BY_LEAGUE = {
 	'1BL-2016': ['1BL-2016', 'BL-ballsorten-2016', 'DBV-Satzungen-2016', 'teamlist-1BL-2016'],
 	'2BLN-2016': ['2BLN-2016', 'BL-ballsorten-2016', 'DBV-Satzungen-2016', 'teamlist-2BLN-2016'],
 	'2BLS-2016': ['2BLS-2016', 'BL-ballsorten-2016', 'DBV-Satzungen-2016', 'teamlist-2BLS-2016'],
-	'1BL-2017': ['1BL-2016', 'DBV-Satzungen-2017'],
-	'2BLN-2017': ['2BLN-2016', 'DBV-Satzungen-2017'],
-	'2BLS-2017': ['2BLS-2016', 'DBV-Satzungen-2017'],
+	'1BL-2017': ['1BL-2016', 'buli2017-minsr', 'buli2017-minv', 'DBV-Satzungen-2017'],
+	'2BLN-2017': ['2BLN-2016', 'buli2017-minsr', 'buli2017-minv', 'DBV-Satzungen-2017'],
+	'2BLS-2017': ['2BLS-2016', 'buli2017-minsr', 'buli2017-minv', 'DBV-Satzungen-2017'],
 	'NRW-2016': ['NRW-2016', 'NRW-Satzungen'],
 	'RLW-2016': ['RLW-2016', 'NRW-Satzungen'],
 	'RLN-2016': ['RLN-2016', 'RLN-Satzungen-2016'],
@@ -42,6 +42,8 @@ var URLS = {
 	'teamlist-1BL-2016': 'div/teamlists/teamlist-1BL-2016.html',
 	'teamlist-2BLN-2016': 'div/teamlists/teamlist-2BLN-2016.html',
 	'teamlist-2BLS-2016': 'div/teamlists/teamlist-2BLS-2016.html',
+	'buli2017-minsr': 'div/buli2017_mindestanforderungen_schiedsrichter.pdf',
+	'buli2017-minv': 'div/buli2017_mindestanforderungen_verein.pdf',
 	'OBL-2017': 'div/eventsheet_obl.xlsx',
 };
 var DIRECT_DOWNLOAD_SHEETS = {
@@ -49,6 +51,8 @@ var DIRECT_DOWNLOAD_SHEETS = {
 	'teamlist-1BL-2016': true,
 	'teamlist-2BLN-2016': true,
 	'teamlist-2BLS-2016': true,
+	'buli2017-minsr': true,
+	'buli2017-minv': true,
 };
 var EXTERNAL_DOWNLOAD_SHEETS = {
 	'DBV-Satzungen-2017': true,

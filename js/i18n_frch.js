@@ -344,6 +344,8 @@ var i18n_frch = {
 'eventsheet:label|teamlist-1BL-2016': '(Bundesliga) rankings',
 'eventsheet:label|teamlist-2BLN-2016': '(2. Bundesliga Nord) rankings',
 'eventsheet:label|teamlist-2BLS-2016': '(2. Bundesliga Sud) rankings',
+'eventsheet:label|buli2017-minsr': 'Exigence minimale pour les arbitres',
+'eventsheet:label|buli2017-minv': 'Exigences minimales pour le club',
 'eventsheet:label|BL-ballsorten-2016': '(Bundesliga) liste des volants approuvées (2016)',
 'eventsheet:label|DBV-Satzungen-2016': '(Allemagne) Lois et règlements 2016/2017',
 'eventsheet:label|DBV-Satzungen-2017': '(Allemagne) Lois et règlements 2017/2018',
