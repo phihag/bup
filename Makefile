@@ -76,6 +76,8 @@ dist: cleandist ## Create distribution files
 		div/bupdate.php \
 		div/Mannschaftsaufstellung_1BL-2015.pdf \
 		div/Mannschaftsaufstellung_2BL-2015.pdf \
+		div/buli2017_mindestanforderungen_schiedsrichter.pdf \
+		div/buli2017_mindestanforderungen_verein.pdf \
 		div/NLA_Resultatblatt.svg \
 		div/eventsheet_obl.xlsx \
 		div/Spielbericht-Buli-2016-17.xlsm \
