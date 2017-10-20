@@ -130,8 +130,7 @@ function ui_init() {
 	update();
 	window.onerror = on_error;
 	click.qs('.version', function() {
-		uiu.visible_qs('.settings_test_reporting', true);
-		uiu.visible_qs('.settings_send_export', true);
+		uiu.show_qs('.settings_test_reporting');
 	});
 	click.qs('.settings_test_reporting', function() {
 		throw new Error('test error reporting');

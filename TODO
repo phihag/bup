@@ -1,11 +1,8 @@
-analyze Fischbach problem
-
 Kai Bonnekamp => Spielbericht manuell ändern
 	test that this works
 defect with MS Office: omit scoresheets in Excel for now
 
 order error does not get deleted on successful load
-make "send export" visible all the time
 
 dads: show displaymode -> Steffen Becker
 
