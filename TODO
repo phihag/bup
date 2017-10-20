@@ -1,9 +1,10 @@
+xlsx: remove button
+
 editevent crashes after mo -> mail Werner Durow
-
 Kai Bonnekamp => Spielbericht manuell ändern
-	test that this works
-defect with MS Office: omit scoresheets in Excel for now
+restore scoresheets in Excel
 
+btde error (see error report)
 order error does not get deleted on successful load
 
 dads: show displaymode -> Steffen Becker
