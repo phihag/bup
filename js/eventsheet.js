@@ -1129,88 +1129,6 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					sheet.text(xlsx.add_col('F', c.col) + (start_row + 6 + 5 * c.table + parseInt(Math.ceil(c.row))), c.val);
 
 					// TODO use a shape instead
-					/* XML should look like:
-	    <xdr:sp>
-      <xdr:nvSpPr>
-        <xdr:cNvPr id="0" name="TextShape 1"/>
-        <xdr:cNvSpPr txBox="1"/>
-      </xdr:nvSpPr>
-      <xdr:spPr>
-        <a:xfrm rot="16111200">
-          <a:off x="1067040" y="952200"/>
-          <a:ext cx="316080" cy="180720"/>
-        </a:xfrm>
-        <a:prstGeom prst="rect">
-          <a:avLst/>
-        </a:prstGeom>
-        <a:noFill/>
-        <a:ln>
-          <a:noFill/>
-        </a:ln>
-      </xdr:spPr>
-      <xdr:txBody>
-        <a:bodyPr lIns="0" rIns="0" tIns="0" bIns="0"/>
-        <a:p>
-          <a:r>
-            <a:rPr b="0" lang="de-DE" sz="1200" spc="-1" strike="noStrike">
-              <a:solidFill>
-                <a:srgbClr val="000000"/>
-              </a:solidFill>
-              <a:uFill>
-                <a:solidFill>
-                  <a:srgbClr val="ffffff"/>
-                </a:solidFill>
-              </a:uFill>
-              <a:latin typeface="Times New Roman"/>
-            </a:rPr>
-            <a:t>Text</a:t>
-          </a:r>
-          <a:endParaRPr b="0" lang="de-DE" sz="1200" spc="-1" strike="noStrike">
-            <a:solidFill>
-              <a:srgbClr val="000000"/>
-            </a:solidFill>
-            <a:uFill>
-              <a:solidFill>
-                <a:srgbClr val="ffffff"/>
-              </a:solidFill>
-            </a:uFill>
-            <a:latin typeface="Times New Roman"/>
-          </a:endParaRPr>
-        </a:p>
-      </xdr:txBody>
-    </xdr:sp>*/
-
-					/*
-					var row = start_row + 5 + 5 * c.table;
-					var col = 5 + c.col;
-
-					sheet.add_drawing(function(drawings) {
-						var anchor = uiu.el(drawings, 'xdr:twoCellAnchor');
-						var from = uiu.el(anchor, 'xdr:from');
-						uiu.el(from, 'xdr:col', {}, col + 1);
-						uiu.el(from, 'xdr:colOff', {}, -150000);
-						uiu.el(from, 'xdr:row', {}, row);
-						uiu.el(from, 'xdr:rowOff', {}, 20000);
-						var to = uiu.el(anchor, 'xdr:to');
-						uiu.el(to, 'xdr:col', {}, col + 2);
-						uiu.el(to, 'xdr:colOff', {}, 150000);
-						uiu.el(to, 'xdr:row', {}, row + 4);
-						uiu.el(to, 'xdr:rowOff', {}, -40000);
-
-						var sp = uiu.el(anchor, 'xdr:sp');
-
-						var nvSpPr = uiu.el(sp, 'xdr:nvSpPr');
-						uiu.el(nvSpPr, 'xdr:cNvPr', {'id': 1000 + d_count, 'name': 'bup ' + d_count});
-						d_count++;
-						uiu.el(nvSpPr, 'xdr:cNvSpPr');
-
-						var spPr = uiu.el(sp, 'xdr:spPr');
-						uiu.el(spPr, 'a:prstGeom', {prst: 'ellipse'});
-						var line = uiu.el(spPr, 'a:ln', {w: 12000});
-						var line_fill = uiu.el(line, 'a:solidFill');
-						uiu.el(line_fill, 'a:srgbClr', {val: '000000'});
-						uiu.el(anchor, 'xdr:clientData');
-					});*/
 				}
 
 				var MATCH_ROWS = {
@@ -1354,7 +1272,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 			fill_team_sheet('3', 1, cb);
 		},
 		fill_result_sheet,
-		fill_score_sheets,
+		// 	fill_score_sheets,
 		fill_minreq_sheet,
 		], function() {
 			xlsx_file.save('Spielbericht ' + ev.event_name + '.xlsm');
