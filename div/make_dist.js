@@ -41,7 +41,7 @@ function transform_files(in_files, out_dir, func, cb) {
 }
 
 function ensure_mkdir(path, cb) {
-	fs.mkdir(path, 0x1c0, function(err) {
+	fs.mkdir(path, 0o777, function(err) {
 		if (err && err.code == 'EEXIST') {
 			return cb(null);
 		}
@@ -54,9 +54,10 @@ function ensure_mkdir(path, cb) {
 
 function uglify(js_files, jsdist_fn, cb) {
 	const args = [];
+	args.push('-p');
+	args.push('relative');
 	args.push('--source-map');
 	args.push(jsdist_fn + '.map');
-	args.push('--source-map-include-sources');
 	args.push('--source-map-url');
 	args.push(path.basename(jsdist_fn) + '.map');
 	args.push('--mangle');
@@ -80,10 +81,10 @@ function uglify(js_files, jsdist_fn, cb) {
 	});
 }
 
-function convert_js(version, js_files, tmp_dir, jsdist_fn, cb) {
+function convert_js(version, js_files, sources_dir, jsdist_fn, cb) {
 	async.waterfall([
 		function(cb) {
-			transform_files(js_files, tmp_dir, function(js) {
+			transform_files(js_files, sources_dir, function(js) {
 				js = js.replace(
 					/(var\s+bup_version\s*=\s*')[^']*(';)/g,
 					function(m, g1, g2) {
@@ -96,11 +97,8 @@ function convert_js(version, js_files, tmp_dir, jsdist_fn, cb) {
 		},
 		function (tmp_files, cb) {
 			uglify(tmp_files, jsdist_fn, function(err) {
-				cb(err, tmp_files);
+				cb(err);
 			});
-		},
-		function (tmp_files, cb) {
-			async.each(tmp_files, fs.unlink, cb);
 		},
 	], cb);
 }
@@ -150,8 +148,8 @@ function cleancss(css_infile, cssdist_fn, cb) {
 	});
 }
 
-function convert_css(css_files, cssdist_fn, tmp_dir, cb) {
-	const css_tmpfn = path.join(tmp_dir, 'bup.all.css');
+function convert_css(css_files, cssdist_fn, sources_dir, cb) {
+	const css_tmpfn = path.join(sources_dir, 'bup.all.css');
 	async.waterfall([
 		function(cb) {
 			collect_css(css_files, cb);
@@ -175,10 +173,10 @@ function main() {
 	const args = process.argv.slice(2);
 	const dev_dir = args[0];
 	const dist_dir = args[1];
-	const tmp_dir = args[2];
+	const sources_dir = args[2];
 
-	if (! dev_dir || !dist_dir || !tmp_dir) {
-		console.error('Usage: make_dist.js DEV_DIR DIST_DIR TMP_DIR');
+	if (! dev_dir || !dist_dir || !sources_dir) {
+		console.error('Usage: make_dist.js DEV_DIR DIST_DIR SOURCES_DIR');
 		process.exit(3);
 		return;
 	}
@@ -206,7 +204,7 @@ function main() {
 			uglify([path.join(dev_dir, 'cachesw.js')], path.join(dist_dir, 'cachesw.js'), cb);
 		},
 		function(cb) {
-			ensure_mkdir(tmp_dir, cb);
+			ensure_mkdir(sources_dir, cb);
 		},
 		function(cb) {
 			git_rev(function(err, rev) {
@@ -246,7 +244,7 @@ function main() {
 					script_files.push(script_m[1]);
 				}
 			}
-			convert_js(version, script_files, tmp_dir, jsdist_fn, function(err) {
+			convert_js(version, script_files, sources_dir, jsdist_fn, function(err) {
 				cb(err, html);
 			});
 		},
@@ -261,10 +259,7 @@ function main() {
 					css_files.push(style_m[1]);
 				}
 			}
-			convert_css(css_files, cssdist_fn, tmp_dir, cb);
-		},
-		function (cb) {
-			fs.rmdir(tmp_dir, cb);
+			convert_css(css_files, cssdist_fn, sources_dir, cb);
 		},
 	], function (err) {
 		if (err) {

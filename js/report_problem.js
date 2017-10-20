@@ -57,7 +57,19 @@ function report(info_obj) {
 	}
 
 	info_obj._type = 'bup-error';
-	_send(info_obj);
+
+	if (!info_obj.last_error) {
+		_send(info_obj);
+		return;
+	}
+
+	StackTrace.fromError(info_obj.last_error).then(function(st) {
+		info_obj.last_error_annotated = st;
+		_send(info_obj);
+	}, function(err) {
+		info_obj.stack_trace_err = err.stack;
+		_send(info_obj);
+	});
 }
 
 function send_export(data) {

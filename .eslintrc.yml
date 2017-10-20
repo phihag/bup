@@ -34,6 +34,7 @@
         "saveAs": true,
         "FastClick": true,
         "JSZip": true,
+        "StackTrace": true,
 
         " (global variables) ": true,
         "state": true,

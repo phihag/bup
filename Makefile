@@ -39,7 +39,7 @@ dist: cleandist ## Create distribution files
 	@test -d div/teamlists || $(MAKE) teamlists
 	mkdir -p dist/bup
 
-	node div/make_dist.js . dist/bup/ dist/tmp
+	node div/make_dist.js . dist/bup/ dist/bup/sources
 
 	cp libs/jspdf.min.js dist/bup/jspdf.dist.js
 	cp libs/jszip.min.js dist/bup/jszip.min.js
