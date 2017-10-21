@@ -1050,7 +1050,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 				xf.setAttribute('xfId', 0);
 				xf.setAttribute('applyBorder', 1);
 				xf.setAttribute('applyAlignment', 1);
-				uiu.el(xf, 'alignment', {
+				uiu.ns_el(xf, xlsx.NS, 'alignment', {
 					horizontal: 'center',
 					vertical: 'center',
 				});
@@ -1272,7 +1272,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 			fill_team_sheet('3', 1, cb);
 		},
 		fill_result_sheet,
-		// 	fill_score_sheets,
+		fill_score_sheets,
 		fill_minreq_sheet,
 		], function() {
 			xlsx_file.save('Spielbericht ' + ev.event_name + '.xlsm');

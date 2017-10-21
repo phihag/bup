@@ -164,7 +164,8 @@ function open(ui8r, cb) {
 		function add_style(addfunc) {
 			var style_doc = book._style_doc;
 			var container = style_doc.querySelector('cellXfs');
-			var el = uiu.el(container, 'xf');
+			console.log('childnodes length', container.childNodes.length);
+			var el = uiu.ns_el(container, NS, 'xf');
 			addfunc(el);
 			var id = parseInt(container.getAttribute('count'));
 			container.setAttribute('count', id + 1);
@@ -279,6 +280,7 @@ return {
 	date: date,
 	add_col: add_col,
 	num2col: num2col,
+	NS: NS,
 /*@DEV*/
 	// testing only
 	_col2num: _col2num,

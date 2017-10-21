@@ -1,9 +1,6 @@
-xlsx: remove button
-
-editevent crashes after mo -> mail Werner Durow
-Kai Bonnekamp => Spielbericht manuell ändern
 restore scoresheets in Excel
 
+editevent crashes after mo -> mail Werner Durow
 btde error (see error report)
 order error does not get deleted on successful load
 
