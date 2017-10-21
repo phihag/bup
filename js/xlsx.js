@@ -164,7 +164,6 @@ function open(ui8r, cb) {
 		function add_style(addfunc) {
 			var style_doc = book._style_doc;
 			var container = style_doc.querySelector('cellXfs');
-			console.log('childnodes length', container.childNodes.length);
 			var el = uiu.ns_el(container, NS, 'xf');
 			addfunc(el);
 			var id = parseInt(container.getAttribute('count'));
