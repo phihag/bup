@@ -1554,25 +1554,6 @@ function ui_init() {
 		}
 		return false;
 	});
-
-	if (window.localStorage) {
-		var location_field = $('.eventsheet_form [name="location"]');
-		try {
-			var location = window.localStorage.getItem('bup_eventsheet_location');
-			location_field.val(location);
-		} catch(e) {
-			// Ignore error
-		}
-
-		location_field.on('input change', function() {
-			var location = $(this).val();
-			try {
-				window.localStorage.setItem('bup_eventsheet_location', location);
-			} catch(e) {
-				// Ignore error
-			}
-		});
-	}
 }
 
 function on_fetch() {
