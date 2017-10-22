@@ -7,7 +7,7 @@ btde error (see error report)
 order error does not get deleted on successful load
 
 dads: show displaymode -> Steffen Becker
-d: 2 numbers
+d: just 2 numbers (set score below)
 
 greyish+colors: use team colors for fg / bg
 	test with dark colors
