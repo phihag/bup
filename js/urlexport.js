@@ -73,12 +73,22 @@ function init(s, page) {
 		status.style.visibility = 'visible';
 		status_icon.setAttribute('class', 'loading-icon');
 
-		ajax.req(options, success_cb, function(code) {
+		ajax.req(options, success_cb, function(code, content, xhr) {
 			status_icon.setAttribute('class', 'error-icon');
+			uiu.addClass(status_text, 'network_error');
+
+			var ctype = xhr.getResponseHeader('Content-Type');
+			if ((code == 500) && (ctype === 'application/json')) {
+				var resp = utils.parse_json(content);
+				if (resp && (resp.status === 'error')) {
+					uiu.text(status_text, resp.message);
+					return;
+				}
+			}
+
 			uiu.text(status_text, s._('urlexport:http-error', {
 				code: code,
 			}));
-			uiu.addClass(status_text, 'network_error');
 			report_problem.silent_error('urlexport to ' + options.url + ' failed with HTTP ' + code);
 		});
 	}
@@ -91,10 +101,11 @@ function init(s, page) {
 	var status_text = uiu.el(status, 'span', {}, 'X'); // The X ensures height is already allocated
 
 	render_prepare(s, page, function(form_data) {
-		if (s.event.report_urls.length !== 1) {
+		var ev = s.event;
+		if (ev.report_urls.length !== 1) {
 			throw new Error('Internal error: invalid number of report_urls');
 		}
-		var r_url = s.event.report_urls[0];
+		var r_url = ev.report_urls[0];
 		var domain = utils.domain(r_url);
 
 		var user = form_data['urlexport_user_' + domain];
@@ -106,6 +117,7 @@ function init(s, page) {
 				url: r_url,
 				user: user,
 				password: password,
+				team_names: JSON.stringify(ev.team_names),
 			}),
 		}, function(data) {
 			status.style.visibility = 'hidden';

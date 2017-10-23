@@ -1,8 +1,7 @@
 turnier.de transmission
-	php: login
-	php: check that login works
-	php: return field representation
+	check all players present
 
+	php: return field representation
 	php: map fields with default values
 	php: load other fields
 
