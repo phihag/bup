@@ -1,11 +1,13 @@
-restore scoresheets in Excel
+turnier.de transmission
 
+restore scoresheets in Excel
 2felder: testen mit mac-Auflösung (@800x600)
 
 editevent crashes after mo -> mail Werner Durow
 btde error (see error report)
 order error does not get deleted on successful load
 
+login in displaymode
 dads: show displaymode -> Steffen Becker
 d: just 2 numbers (set score below)
 
@@ -16,11 +18,15 @@ label tablet background
 displaymode: hide settings after inactivity
 colors to display before match (+ larger font)
 
+referee mode: change order of points to the announcement
+checklist Mindestanforderungs-Formulare
 greyish: center wittorf logo
 ask before emergency restore
 	-> msg Paul
 2courts: show match score in parens
 dads test endtime etc.
+buli minimum requirements: print including team names
+display: teams + stand
 
 dads referee mode config
 	UI
