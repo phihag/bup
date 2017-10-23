@@ -67,13 +67,20 @@
 	background-image: url(../icons/reload.svg);
 }
 
-.loading-icon {
-	background-image: url(../icons/loading.gif);
+.loading-icon,
+.error-icon {
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
 	width: 2em;
 	height: 2em;
 }
+.loading-icon {
+	background-image: url(../icons/loading.gif);
+}
+.error-icon {
+	background-image: url(../icons/error.svg);
+}
+
 button > .loading-icon {
 	position: absolute;
 	top: 50%;

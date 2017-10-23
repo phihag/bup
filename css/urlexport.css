@@ -1,0 +1,28 @@
+.urlexport_status {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-bottom: 1em;
+}
+.urlexport_status .loading-icon,
+.urlexport_status .error-icon {
+	height: 1em;
+	width: 1em;
+	margin-right: 0.3em;
+}
+
+.urlexport_form {
+	margin-bottom: 1em;
+}
+
+.urlexport_form label {
+	display: block;
+	margin-bottom: 0.5em;
+}
+.urlexport_form label span + input {
+	margin-left: 0.5em;
+}
+.urlexport_form input,
+.urlexport_form button {
+	font-size: inherit;
+}

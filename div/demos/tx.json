@@ -1,0 +1,870 @@
+{
+  "type": "bup-export",
+  "version": 2,
+  "event": {
+    "team_names": [
+      "TV Refrath 1",
+      "BC Hohenlimburg 1"
+    ],
+    "report_urls": [
+      "https://www.turnier.de/sport/teammatch.aspx?id=82177632-168B-42A2-9B67-1AF18F9D79DA&match=9"
+    ],
+    "staticnet_message": "Demo zum Übertragen auf turnier.de",
+    "all_players": [
+      [
+        {
+          "firstname": "Fabian",
+          "lastname": "Roth",
+          "name": "Fabian Roth",
+          "textid": "01-139054",
+          "gender": "m",
+          "ranking": 1,
+          "ranking_d": 6
+        },
+        {
+          "firstname": "Giap Chin",
+          "lastname": "Goh",
+          "name": "Giap Chin Goh",
+          "textid": "01-150411",
+          "gender": "m",
+          "ranking": 2,
+          "ranking_d": 9,
+          "nationality": "MAS"
+        },
+        {
+          "firstname": "Sam",
+          "lastname": "Magee",
+          "name": "Sam Magee",
+          "textid": "01-147936",
+          "gender": "m",
+          "ranking": 3,
+          "ranking_d": 1,
+          "nationality": "IRL"
+        },
+        {
+          "firstname": "Fabian",
+          "lastname": "Holzer",
+          "name": "Fabian Holzer",
+          "textid": "07-030649",
+          "gender": "m",
+          "ranking": 4,
+          "ranking_d": 2
+        },
+        {
+          "firstname": "Lars",
+          "lastname": "Schänzler",
+          "name": "Lars Schänzler",
+          "textid": "01-109984",
+          "gender": "m",
+          "ranking": 5,
+          "ranking_d": 10
+        },
+        {
+          "firstname": "Richard",
+          "lastname": "Domke",
+          "name": "Richard Domke",
+          "textid": "01-139391",
+          "gender": "m",
+          "ranking": 6,
+          "ranking_d": 4
+        },
+        {
+          "firstname": "Joshua",
+          "lastname": "Magee",
+          "name": "Joshua Magee",
+          "textid": "01-148394",
+          "gender": "m",
+          "ranking": 7,
+          "ranking_d": 3,
+          "nationality": "IRL"
+        },
+        {
+          "firstname": "Kai",
+          "lastname": "Waldenberger",
+          "name": "Kai Waldenberger",
+          "textid": "01-110871",
+          "gender": "m",
+          "ranking": 8,
+          "ranking_d": 11
+        },
+        {
+          "firstname": "Mark",
+          "lastname": "Byerly",
+          "name": "Mark Byerly",
+          "textid": "01-103210",
+          "gender": "m",
+          "ranking": 9,
+          "ranking_d": 8
+        },
+        {
+          "firstname": "Denis",
+          "lastname": "Nyenhuis",
+          "name": "Denis Nyenhuis",
+          "textid": "01-085517",
+          "gender": "m",
+          "ranking": 10,
+          "ranking_d": 7
+        },
+        {
+          "firstname": "Max",
+          "lastname": "Schwenger",
+          "name": "Max Schwenger",
+          "textid": "01-132358",
+          "gender": "m",
+          "ranking": 11,
+          "ranking_d": 5
+        },
+        {
+          "firstname": "Fabian",
+          "lastname": "Roth",
+          "name": "Fabian Roth",
+          "textid": "01-139054",
+          "gender": "m",
+          "ranking": 1,
+          "ranking_d": 6
+        },
+        {
+          "firstname": "Giap Chin",
+          "lastname": "Goh",
+          "name": "Giap Chin Goh",
+          "textid": "01-150411",
+          "gender": "m",
+          "ranking": 2,
+          "ranking_d": 9,
+          "nationality": "MAS"
+        },
+        {
+          "firstname": "Sam",
+          "lastname": "Magee",
+          "name": "Sam Magee",
+          "textid": "01-147936",
+          "gender": "m",
+          "ranking": 3,
+          "ranking_d": 1,
+          "nationality": "IRL"
+        },
+        {
+          "firstname": "Fabian",
+          "lastname": "Holzer",
+          "name": "Fabian Holzer",
+          "textid": "07-030649",
+          "gender": "m",
+          "ranking": 4,
+          "ranking_d": 2
+        },
+        {
+          "firstname": "Lars",
+          "lastname": "Schänzler",
+          "name": "Lars Schänzler",
+          "textid": "01-109984",
+          "gender": "m",
+          "ranking": 5,
+          "ranking_d": 10
+        },
+        {
+          "firstname": "Richard",
+          "lastname": "Domke",
+          "name": "Richard Domke",
+          "textid": "01-139391",
+          "gender": "m",
+          "ranking": 6,
+          "ranking_d": 4
+        },
+        {
+          "firstname": "Joshua",
+          "lastname": "Magee",
+          "name": "Joshua Magee",
+          "textid": "01-148394",
+          "gender": "m",
+          "ranking": 7,
+          "ranking_d": 3,
+          "nationality": "IRL"
+        },
+        {
+          "firstname": "Kai",
+          "lastname": "Waldenberger",
+          "name": "Kai Waldenberger",
+          "textid": "01-110871",
+          "gender": "m",
+          "ranking": 8,
+          "ranking_d": 11
+        },
+        {
+          "firstname": "Mark",
+          "lastname": "Byerly",
+          "name": "Mark Byerly",
+          "textid": "01-103210",
+          "gender": "m",
+          "ranking": 9,
+          "ranking_d": 8
+        },
+        {
+          "firstname": "Denis",
+          "lastname": "Nyenhuis",
+          "name": "Denis Nyenhuis",
+          "textid": "01-085517",
+          "gender": "m",
+          "ranking": 10,
+          "ranking_d": 7
+        },
+        {
+          "firstname": "Max",
+          "lastname": "Schwenger",
+          "name": "Max Schwenger",
+          "textid": "01-132358",
+          "gender": "m",
+          "ranking": 11,
+          "ranking_d": 5
+        },
+        {
+          "firstname": "Chloe",
+          "lastname": "Magee",
+          "name": "Chloe Magee",
+          "textid": "01-136315",
+          "gender": "f",
+          "ranking": 1,
+          "nationality": "IRL"
+        },
+        {
+          "firstname": "Carla",
+          "lastname": "Nelte",
+          "name": "Carla Nelte",
+          "textid": "01-128902",
+          "gender": "f",
+          "ranking": 2
+        },
+        {
+          "firstname": "Ya Lan",
+          "lastname": "Chang",
+          "name": "Ya Lan Chang",
+          "textid": "01-148192",
+          "gender": "f",
+          "ranking": 3,
+          "nationality": "TPE"
+        },
+        {
+          "firstname": "Jennifer",
+          "lastname": "Karnott",
+          "name": "Jennifer Karnott",
+          "textid": "01-116150",
+          "gender": "f",
+          "ranking": 4
+        },
+        {
+          "firstname": "Elin",
+          "lastname": "Svensson",
+          "name": "Elin Svensson",
+          "textid": "01-150642",
+          "gender": "f",
+          "ranking": 5,
+          "nationality": "SWE"
+        },
+        {
+          "firstname": "Chloe",
+          "lastname": "Magee",
+          "name": "Chloe Magee",
+          "textid": "01-136315",
+          "gender": "f",
+          "ranking": 1,
+          "nationality": "IRL"
+        },
+        {
+          "firstname": "Carla",
+          "lastname": "Nelte",
+          "name": "Carla Nelte",
+          "textid": "01-128902",
+          "gender": "f",
+          "ranking": 2
+        },
+        {
+          "firstname": "Ya Lan",
+          "lastname": "Chang",
+          "name": "Ya Lan Chang",
+          "textid": "01-148192",
+          "gender": "f",
+          "ranking": 3,
+          "nationality": "TPE"
+        },
+        {
+          "firstname": "Jennifer",
+          "lastname": "Karnott",
+          "name": "Jennifer Karnott",
+          "textid": "01-116150",
+          "gender": "f",
+          "ranking": 4
+        },
+        {
+          "firstname": "Elin",
+          "lastname": "Svensson",
+          "name": "Elin Svensson",
+          "textid": "01-150642",
+          "gender": "f",
+          "ranking": 5,
+          "nationality": "SWE"
+        }
+      ],
+      [
+        {
+          "firstname": "Petri",
+          "lastname": "Hautala",
+          "name": "Petri Hautala",
+          "textid": "01-150641",
+          "gender": "m",
+          "ranking": 1,
+          "nationality": "FIN"
+        },
+        {
+          "firstname": "Malte",
+          "lastname": "Laibacher",
+          "name": "Malte Laibacher",
+          "textid": "01-104644",
+          "gender": "m",
+          "ranking": 2,
+          "ranking_d": 4
+        },
+        {
+          "firstname": "Christian",
+          "lastname": "Bald",
+          "name": "Christian Bald",
+          "textid": "01-096898",
+          "gender": "m",
+          "ranking": 3,
+          "ranking_d": 2
+        },
+        {
+          "firstname": "Julian",
+          "lastname": "Voigt",
+          "name": "Julian Voigt",
+          "textid": "18-001674",
+          "gender": "m",
+          "ranking": 4,
+          "ranking_d": 5
+        },
+        {
+          "firstname": "Hendrik",
+          "lastname": "Westermeyer",
+          "name": "Hendrik Westermeyer",
+          "textid": "01-062138",
+          "gender": "m",
+          "ranking": 5,
+          "ranking_d": 6
+        },
+        {
+          "firstname": "Fabian",
+          "lastname": "Stoppel",
+          "name": "Fabian Stoppel",
+          "textid": "01-096900",
+          "gender": "m",
+          "ranking": 6,
+          "ranking_d": 3
+        },
+        {
+          "firstname": "Tim-Phillip",
+          "lastname": "Buchelt",
+          "name": "Tim-Phillip Buchelt",
+          "textid": "01-096899",
+          "gender": "m",
+          "ranking": 7
+        },
+        {
+          "firstname": "Fabian",
+          "lastname": "Dietrich",
+          "name": "Fabian Dietrich",
+          "textid": "01-067586",
+          "gender": "m",
+          "ranking": 8
+        },
+        {
+          "firstname": "Petri",
+          "lastname": "Hautala",
+          "name": "Petri Hautala",
+          "textid": "01-150641",
+          "gender": "m",
+          "ranking": 1,
+          "ranking_d": 6,
+          "nationality": "FIN"
+        },
+        {
+          "firstname": "Malte",
+          "lastname": "Laibacher",
+          "name": "Malte Laibacher",
+          "textid": "01-104644",
+          "gender": "m",
+          "ranking": 2,
+          "ranking_d": 3
+        },
+        {
+          "firstname": "Christian",
+          "lastname": "Bald",
+          "name": "Christian Bald",
+          "textid": "01-096898",
+          "gender": "m",
+          "ranking": 3,
+          "ranking_d": 2
+        },
+        {
+          "firstname": "Julian",
+          "lastname": "Voigt",
+          "name": "Julian Voigt",
+          "textid": "18-001674",
+          "gender": "m",
+          "ranking": 4
+        },
+        {
+          "firstname": "Hendrik",
+          "lastname": "Westermeyer",
+          "name": "Hendrik Westermeyer",
+          "textid": "01-062138",
+          "gender": "m",
+          "ranking": 5
+        },
+        {
+          "firstname": "Fabian",
+          "lastname": "Stoppel",
+          "name": "Fabian Stoppel",
+          "textid": "01-096900",
+          "gender": "m",
+          "ranking": 6,
+          "ranking_d": 1
+        },
+        {
+          "firstname": "Tim-Phillip",
+          "lastname": "Buchelt",
+          "name": "Tim-Phillip Buchelt",
+          "textid": "01-096899",
+          "gender": "m",
+          "ranking": 7
+        },
+        {
+          "firstname": "Tim",
+          "lastname": "Porps",
+          "name": "Tim Porps",
+          "textid": "01-104683",
+          "gender": "m",
+          "ranking": 8
+        },
+        {
+          "firstname": "Fabian",
+          "lastname": "Dietrich",
+          "name": "Fabian Dietrich",
+          "textid": "01-067586",
+          "gender": "m",
+          "ranking": 9
+        },
+        {
+          "firstname": "Miriam",
+          "lastname": "Mantell",
+          "name": "Miriam Mantell",
+          "textid": "01-064392",
+          "gender": "f",
+          "ranking": 1
+        },
+        {
+          "firstname": "Laura",
+          "lastname": "Riffelmann",
+          "name": "Laura Riffelmann",
+          "textid": "01-094673",
+          "gender": "f",
+          "ranking": 2
+        },
+        {
+          "firstname": "Lisa",
+          "lastname": "Bomers",
+          "name": "Lisa Bomers",
+          "textid": "01-150639",
+          "gender": "f",
+          "ranking": 3,
+          "nationality": "NED"
+        },
+        {
+          "firstname": "Lara-Carina",
+          "lastname": "Buchelt",
+          "name": "Lara-Carina Buchelt",
+          "textid": "01-115994",
+          "gender": "f",
+          "ranking": 4
+        },
+        {
+          "firstname": "Sarolta",
+          "lastname": "Röhrnbacher",
+          "name": "Sarolta Röhrnbacher",
+          "textid": "01-136343",
+          "gender": "f",
+          "ranking": 5
+        },
+        {
+          "firstname": "Miriam",
+          "lastname": "Mantell",
+          "name": "Miriam Mantell",
+          "textid": "01-064392",
+          "gender": "f",
+          "ranking": 1
+        },
+        {
+          "firstname": "Laura",
+          "lastname": "Riffelmann",
+          "name": "Laura Riffelmann",
+          "textid": "01-094673",
+          "gender": "f",
+          "ranking": 2
+        },
+        {
+          "firstname": "Lisa",
+          "lastname": "Bomers",
+          "name": "Lisa Bomers",
+          "textid": "01-150639",
+          "gender": "f",
+          "ranking": 3,
+          "nationality": "NED"
+        },
+        {
+          "firstname": "Lena",
+          "lastname": "Seibert",
+          "name": "Lena Seibert",
+          "textid": "01-114934",
+          "gender": "f",
+          "ranking": 4
+        },
+        {
+          "firstname": "Sarolta",
+          "lastname": "Röhrnbacher",
+          "name": "Sarolta Röhrnbacher",
+          "textid": "01-136343",
+          "gender": "f",
+          "ranking": 5
+        }
+      ]
+    ],
+    "league_key": "1BL-2017",
+    "team_competition": true,
+    "location": "51427 Bergisch Gladbach, SpH Refrath, Steinbreche 1",
+    "matches": [
+      {
+        "setup": {
+          "match_name": "HD1",
+          "match_id": "txdemo_HD1",
+          "is_doubles": true,
+          "teams": [
+            {
+              "players": [
+                {
+                  "firstname": "Sam",
+                  "lastname": "Magee",
+                  "name": "Sam Magee",
+                  "textid": "01-147936",
+                  "gender": "m",
+                  "ranking": 3,
+                  "ranking_d": 1,
+                  "nationality": "IRL"
+                },
+                {
+                  "firstname": "Fabian",
+                  "lastname": "Holzer",
+                  "name": "Fabian Holzer",
+                  "textid": "07-030649",
+                  "gender": "m",
+                  "ranking": 4,
+                  "ranking_d": 2
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "firstname": "Christian",
+                  "lastname": "Bald",
+                  "name": "Christian Bald",
+                  "textid": "01-096898",
+                  "gender": "m",
+                  "ranking": 3,
+                  "ranking_d": 2
+                },
+                {
+                  "firstname": "Julian",
+                  "lastname": "Voigt",
+                  "name": "Julian Voigt",
+                  "textid": "18-001674",
+                  "gender": "m",
+                  "ranking": 4
+                }
+              ]
+            }
+          ],
+          "eventsheet_id": "1.HD"
+        },
+        "presses_json": "[{\"type\":\"pick_side\",\"team1_left\":false,\"court_id\":\"2\",\"timestamp\":1508591314565},{\"type\":\"pick_server\",\"team_id\":1,\"player_id\":0,\"timestamp\":1508591322775},{\"type\":\"pick_receiver\",\"team_id\":0,\"player_id\":0,\"timestamp\":1508591334597},{\"type\":\"love-all\",\"timestamp\":1508591548840},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508591569034},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508591580611},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508591600360},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508591618563},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508591629719},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508591642664},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508591654300},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508591670608},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508591692797},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508591707320},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508591724962},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508591735609},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508591765179},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508591780337},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508591795788},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508591816484},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508591827978},{\"type\":\"timer_restart\",\"timestamp\":1508591907960},{\"type\":\"postgame-confirm\",\"timestamp\":1508591909435},{\"type\":\"pick_server\",\"team_id\":0,\"player_id\":1,\"timestamp\":1508591912196},{\"type\":\"pick_receiver\",\"team_id\":1,\"player_id\":0,\"timestamp\":1508591916156},{\"type\":\"love-all\",\"timestamp\":1508591918648},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508591931585},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508591947381},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508591967648},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508591984268},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508591999570},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592013092},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592021917},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592032880},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592046478},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592069296},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592089931},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592106675},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592130645},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592147361},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592160808},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592204724},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592239220},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592258765},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592275024},{\"type\":\"postgame-confirm\",\"timestamp\":1508592346634},{\"type\":\"pick_server\",\"team_id\":0,\"player_id\":1,\"timestamp\":1508592348420},{\"type\":\"pick_receiver\",\"team_id\":1,\"player_id\":0,\"timestamp\":1508592351970},{\"type\":\"love-all\",\"timestamp\":1508592357247},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592379515},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592399789},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592418874},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592432908},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592447177},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592466917},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592482739},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592494969},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592511913},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592527434},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592550628},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592571046},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592588638},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592604206},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592637391},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592657113},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592673386},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592682741},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592708930},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592748071},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592766125},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592786433},{\"type\":\"postgame-confirm\",\"timestamp\":1508592864024},{\"type\":\"pick_server\",\"team_id\":1,\"player_id\":1,\"timestamp\":1508592872556},{\"type\":\"pick_receiver\",\"team_id\":0,\"player_id\":0,\"timestamp\":1508592875433},{\"type\":\"love-all\",\"timestamp\":1508592879841},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592903849},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592923610},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592937351},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592951708},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592970179},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592995310},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508593014010},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508593052017},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508593082923},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508593098290},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508593123926},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508593140368},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508593164780},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508593196255},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508593213160},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508593224023},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508593241833},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508593263234},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508593279257},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508593319019},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508593341066},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508593374737},{\"type\":\"postmatch-confirm\",\"timestamp\":1508593403679}]"
+      },
+      {
+        "setup": {
+          "match_name": "HD2",
+          "match_id": "txdemo_HD2",
+          "is_doubles": true,
+          "teams": [
+            {
+              "players": [
+                {
+                  "firstname": "Fabian",
+                  "lastname": "Roth",
+                  "name": "Fabian Roth",
+                  "textid": "01-139054",
+                  "gender": "m",
+                  "ranking": 1,
+                  "ranking_d": 6
+                },
+                {
+                  "firstname": "Giap Chin",
+                  "lastname": "Goh",
+                  "name": "Giap Chin Goh",
+                  "textid": "01-150411",
+                  "gender": "m",
+                  "ranking": 2,
+                  "ranking_d": 9,
+                  "nationality": "MAS"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "firstname": "Malte",
+                  "lastname": "Laibacher",
+                  "name": "Malte Laibacher",
+                  "textid": "01-104644",
+                  "gender": "m",
+                  "ranking": 2,
+                  "ranking_d": 3
+                },
+                {
+                  "firstname": "Petri",
+                  "lastname": "Hautala",
+                  "name": "Petri Hautala",
+                  "textid": "01-150641",
+                  "gender": "m",
+                  "ranking": 1,
+                  "ranking_d": 6,
+                  "nationality": "FIN"
+                }
+              ]
+            }
+          ],
+          "eventsheet_id": "2.HD"
+        },
+        "presses_json": "[{\"type\":\"pick_side\",\"team1_left\":false,\"court_id\":\"2\",\"timestamp\":1508593640589},{\"type\":\"pick_server\",\"team_id\":1,\"player_id\":0,\"timestamp\":1508593653093},{\"type\":\"pick_receiver\",\"team_id\":0,\"player_id\":0,\"timestamp\":1508593667321},{\"type\":\"love-all\",\"timestamp\":1508593895029},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508593904884},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508593929480},{\"type\":\"undo\",\"timestamp\":1508593932491},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508593933883},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508593944369},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508593966414},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508593988181},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508594007375},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508594039460},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508594065783},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508594104637},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508594115868},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508594132067},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508594154262},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508594175384},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508594194661},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508594213686},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508594235454},{\"type\":\"postgame-confirm\",\"timestamp\":1508594293310},{\"type\":\"pick_server\",\"team_id\":1,\"player_id\":0,\"timestamp\":1508594308151},{\"type\":\"pick_receiver\",\"team_id\":0,\"player_id\":0,\"timestamp\":1508594323956},{\"type\":\"love-all\",\"timestamp\":1508594330811},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508594341093},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508594351127},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508594366277},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508594387015},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508594401905},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508594414824},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508594432800},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508594448386},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508594471902},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508594487536},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508594504632},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508594523165},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508594544042},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508594568985},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508594589391},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508594607771},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508594640018},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508594676289},{\"type\":\"postgame-confirm\",\"timestamp\":1508594728174},{\"type\":\"pick_server\",\"team_id\":1,\"player_id\":0,\"timestamp\":1508594735548},{\"type\":\"pick_receiver\",\"team_id\":0,\"player_id\":0,\"timestamp\":1508594746801},{\"type\":\"love-all\",\"timestamp\":1508594749919},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508594760054},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508594775826},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508594791814},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508594813405},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508594831323},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508594846331},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508594860264},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508594875666},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508594904984},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508594919010},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508594932608},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508594952917},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508594965468},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508594977856},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508594988810},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508595004337},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508595016823},{\"type\":\"postmatch-confirm\",\"timestamp\":1508595033021}]"
+      },
+      {
+        "setup": {
+          "match_name": "DD",
+          "match_id": "txdemo_DD",
+          "is_doubles": true,
+          "teams": [
+            {
+              "players": [
+                {
+                  "firstname": "Chloe",
+                  "lastname": "Magee",
+                  "name": "Chloe Magee",
+                  "textid": "01-136315",
+                  "gender": "f",
+                  "ranking": 1,
+                  "nationality": "IRL"
+                },
+                {
+                  "firstname": "Carla",
+                  "lastname": "Nelte",
+                  "name": "Carla Nelte",
+                  "textid": "01-128902",
+                  "gender": "f",
+                  "ranking": 2
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "firstname": "Laura",
+                  "lastname": "Riffelmann",
+                  "name": "Laura Riffelmann",
+                  "textid": "01-094673",
+                  "gender": "f",
+                  "ranking": 2
+                },
+                {
+                  "firstname": "Lara-Carina",
+                  "lastname": "Buchelt",
+                  "name": "Lara-Carina Buchelt",
+                  "textid": "01-115994",
+                  "gender": "f",
+                  "ranking": 4
+                }
+              ]
+            }
+          ]
+        },
+        "presses_json": "[{\"type\":\"pick_side\",\"team1_left\":false,\"court_id\":\"1\",\"timestamp\":1508591332674},{\"type\":\"pick_server\",\"team_id\":1,\"player_id\":1,\"timestamp\":1508591337492},{\"type\":\"pick_receiver\",\"team_id\":0,\"player_id\":1,\"timestamp\":1508591340275},{\"type\":\"love-all\",\"timestamp\":1508591612930},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508591623821},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508591634081},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508591658840},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508591674195},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508591687717},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508591719108},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508591735279},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508591755619},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508591773843},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508591787937},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508591802000},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508591818227},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508591835613},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508591853956},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508591892527},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508591909845},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508591923348},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508591941076},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508591956764},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508591976610},{\"type\":\"postgame-confirm\",\"timestamp\":1508592024278},{\"type\":\"pick_server\",\"team_id\":1,\"player_id\":1,\"timestamp\":1508592026105},{\"type\":\"pick_receiver\",\"team_id\":0,\"player_id\":1,\"timestamp\":1508592033086},{\"type\":\"love-all\",\"timestamp\":1508592051152},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592061772},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592075250},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592110305},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592136730},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592162541},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592180175},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592207595},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592229871},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592247044},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592267776},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592283259},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592300200},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592317336},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592349319},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592367252},{\"type\":\"postgame-confirm\",\"timestamp\":1508592416615},{\"type\":\"pick_server\",\"team_id\":0,\"player_id\":1,\"timestamp\":1508592418354},{\"type\":\"pick_receiver\",\"team_id\":1,\"player_id\":0,\"timestamp\":1508592422094},{\"type\":\"love-all\",\"timestamp\":1508592436386},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592442198},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592461379},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592475752},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592492081},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592517868},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592536988},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592561732},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592576899},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592589105},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592601601},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592617357},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592663824},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592698085},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592735146},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592759882},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592777814},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592795423},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592811046},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592831075},{\"type\":\"postgame-confirm\",\"timestamp\":1508592844150},{\"type\":\"pick_server\",\"team_id\":0,\"player_id\":1,\"timestamp\":1508592888544},{\"type\":\"pick_receiver\",\"team_id\":1,\"player_id\":1,\"timestamp\":1508592893973},{\"type\":\"love-all\",\"timestamp\":1508592909272},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592917367},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592932450},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592958221},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508592976565},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508592990144},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508593011990},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508593032175},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508593056383},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508593094625},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508593138243},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508593153649},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508593170645},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508593197839},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508593219784},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508593238044},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508593260007},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508593281056},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508593312051},{\"type\":\"postgame-confirm\",\"timestamp\":1508593350152},{\"type\":\"pick_server\",\"team_id\":1,\"player_id\":1,\"timestamp\":1508593398042},{\"type\":\"pick_receiver\",\"team_id\":0,\"player_id\":1,\"timestamp\":1508593406186},{\"type\":\"love-all\",\"timestamp\":1508593427901},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508593444017},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508593510235},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508593546067},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508593561836},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508593586435},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508593604964},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508593623426},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508593642059},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508593664500},{\"type\":\"postinterval-confirm\",\"timestamp\":1508593732798},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508593746756},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508593779286},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508593802036},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508593832517},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508593853448},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508593896500},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508593923629},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508593951473},{\"type\":\"postmatch-confirm\",\"timestamp\":1508593973719}]"
+      },
+      {
+        "setup": {
+          "match_name": "HE1",
+          "match_id": "txdemo_HE1",
+          "is_doubles": false,
+          "teams": [
+            {
+              "players": [
+                {
+                  "firstname": "Fabian",
+                  "lastname": "Roth",
+                  "name": "Fabian Roth",
+                  "textid": "01-139054",
+                  "gender": "m",
+                  "ranking": 1,
+                  "ranking_d": 6
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "firstname": "Petri",
+                  "lastname": "Hautala",
+                  "name": "Petri Hautala",
+                  "textid": "01-150641",
+                  "gender": "m",
+                  "ranking": 1,
+                  "ranking_d": 6,
+                  "nationality": "FIN"
+                }
+              ]
+            }
+          ],
+          "eventsheet_id": "1.HE"
+        },
+        "presses_json": "[{\"type\":\"pick_side\",\"team1_left\":false,\"court_id\":\"2\",\"timestamp\":1508595725036},{\"type\":\"pick_server\",\"team_id\":1,\"player_id\":0,\"timestamp\":1508595732482},{\"type\":\"love-all\",\"timestamp\":1508595847107},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595859677},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508595870195},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595883558},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595898640},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508595912381},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595924629},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508595947551},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508595970041},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595984175},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596001455},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596013114},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596037700},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596052071},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596087712},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596107728},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596144149},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596165288},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596213924},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596237118},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596253642},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596288897},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596320385},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596346776},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596366085},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596395093},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596420376},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596442839},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596472567},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596494024},{\"type\":\"postgame-confirm\",\"timestamp\":1508596573450},{\"type\":\"love-all\",\"timestamp\":1508596581711},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596591195},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596605194},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596621249},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596634580},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596671681},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596703053},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596718195},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596734812},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596753494},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596767721},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596784162},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596808824},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596828528},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596843461},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596857912},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596873020},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596896778},{\"type\":\"postgame-confirm\",\"timestamp\":1508596921606},{\"type\":\"love-all\",\"timestamp\":1508596978332},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596985338},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508597007265},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508597026139},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508597040146},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508597060516},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508597090051},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508597105906},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508597115266},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508597125939},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508597143938},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508597166654},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508597181501},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508597198907},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508597220631},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508597280852},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508597331836},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508597357177},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508597410017},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508597461132},{\"type\":\"postmatch-confirm\",\"timestamp\":1508597473371}]"
+      },
+      {
+        "setup": {
+          "match_name": "HE2",
+          "match_id": "txdemo_HE2",
+          "is_doubles": false,
+          "teams": [
+            {
+              "players": [
+                {
+                  "firstname": "Giap Chin",
+                  "lastname": "Goh",
+                  "name": "Giap Chin Goh",
+                  "textid": "01-150411",
+                  "gender": "m",
+                  "ranking": 2,
+                  "ranking_d": 9,
+                  "nationality": "MAS"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "firstname": "Malte",
+                  "lastname": "Laibacher",
+                  "name": "Malte Laibacher",
+                  "textid": "01-104644",
+                  "gender": "m",
+                  "ranking": 2,
+                  "ranking_d": 3
+                }
+              ]
+            }
+          ],
+          "eventsheet_id": "2.HE"
+        },
+        "presses_json": "[{\"type\":\"pick_side\",\"team1_left\":false,\"court_id\":\"1\",\"timestamp\":1508594629161},{\"type\":\"pick_server\",\"team_id\":0,\"player_id\":0,\"timestamp\":1508594636772},{\"type\":\"love-all\",\"timestamp\":1508594869245},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508594874347},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508594893151},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508594913484},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508594952770},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508594969192},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508594992887},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508595009761},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595062482},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595105978},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508595129092},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508595147907},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595160553},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508595177718},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595193501},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595206559},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508595224621},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595239403},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595267792},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595284882},{\"type\":\"postgame-confirm\",\"timestamp\":1508595355829},{\"type\":\"love-all\",\"timestamp\":1508595362556},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595383573},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595399722},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595442671},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595463940},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508595478818},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508595500689},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595515129},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595528411},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595545105},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595559974},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595572503},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595588773},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508595604350},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508595619986},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508595640239},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595659795},{\"type\":\"postgame-confirm\",\"timestamp\":1508595723812},{\"type\":\"love-all\",\"timestamp\":1508595741083},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595748025},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508595768979},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595784181},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595800526},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508595824186},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508595847105},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595885870},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595900481},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595914388},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508595936646},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508595954297},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508595967791},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508595992124},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596024346},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596072126},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596082428},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596107369},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596142422},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596164128},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596203195},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596227521},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596269685},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596288832},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596306550},{\"type\":\"postgame-confirm\",\"timestamp\":1508596390434},{\"type\":\"love-all\",\"timestamp\":1508596408736},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596409749},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596427079},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596456296},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596479797},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596500662},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596519033},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596539979},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596555753},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596572943},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596589408},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596609504},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596628178},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596641681},{\"type\":\"postgame-confirm\",\"timestamp\":1508596699970},{\"type\":\"love-all\",\"timestamp\":1508596706875},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596723153},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596741447},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596762618},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596781547},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596796341},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596810176},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596840143},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596862173},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508596879289},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596907590},{\"type\":\"postinterval-confirm\",\"timestamp\":1508596968006},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508596997934},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508597023149},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508597066659},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508597102681},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508597132982},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508597150582},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508597171427},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508597189512},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508597209732},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508597227597},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508597248041},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508597267695},{\"type\":\"postmatch-confirm\",\"timestamp\":1508597283095}]"
+      },
+      {
+        "setup": {
+          "match_name": "DE",
+          "match_id": "txdemo_DE",
+          "is_doubles": false,
+          "teams": [
+            {
+              "players": [
+                {
+                  "firstname": "Chloe",
+                  "lastname": "Magee",
+                  "name": "Chloe Magee",
+                  "textid": "01-136315",
+                  "gender": "f",
+                  "ranking": 1,
+                  "nationality": "IRL"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "firstname": "Laura",
+                  "lastname": "Riffelmann",
+                  "name": "Laura Riffelmann",
+                  "textid": "01-094673",
+                  "gender": "f",
+                  "ranking": 2
+                }
+              ]
+            }
+          ]
+        },
+        "presses_json": "[{\"type\":\"pick_side\",\"team1_left\":false,\"court_id\":\"1\",\"timestamp\":1508597574594},{\"type\":\"pick_server\",\"team_id\":0,\"player_id\":0,\"timestamp\":1508597577836},{\"type\":\"love-all\",\"timestamp\":1508597894292},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508597900796},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508597914888},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508597928287},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508597939187},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508597952280},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508597971203},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508597995904},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598022168},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598041270},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598056550},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598082087},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598099952},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598114010},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598140710},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598153861},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598169966},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598191996},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598222185},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598243831},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598257862},{\"type\":\"postgame-confirm\",\"timestamp\":1508598327018},{\"type\":\"love-all\",\"timestamp\":1508598332517},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598341114},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598356076},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598373925},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598388963},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598420961},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598445928},{\"type\":\"undo\",\"timestamp\":1508598448248},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598449754},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598465619},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598483603},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598500342},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598528168},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598550878},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598568991},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598583315},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598607351},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598624464},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598648757},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598683084},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598705646},{\"type\":\"postgame-confirm\",\"timestamp\":1508598784319},{\"type\":\"love-all\",\"timestamp\":1508598792489},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598804587},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598819856},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598830081},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598846308},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598865946},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598885245},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598897793},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598913361},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598934351},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598952488},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598967373},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598987603},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599005639},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599019740},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599043921},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599056534},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599090435},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599121810},{\"type\":\"postgame-confirm\",\"timestamp\":1508599201621},{\"type\":\"love-all\",\"timestamp\":1508599211419},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599218626},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599232915},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599257155},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599273082},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599293071},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599327862},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599347985},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599364152},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599388810},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599406060},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599420279},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599435574},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599463005},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599477531},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599489790},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599509923},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599532148},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599555577},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599581004},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599610747},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599630174},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599654294},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599679509},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599700000},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599723070},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599745006},{\"type\":\"postmatch-confirm\",\"timestamp\":1508599759148}]"
+      },
+      {
+        "setup": {
+          "match_name": "GD",
+          "match_id": "txdemo_GD",
+          "is_doubles": true,
+          "teams": [
+            {
+              "players": [
+                {
+                  "firstname": "Sam",
+                  "lastname": "Magee",
+                  "name": "Sam Magee",
+                  "textid": "01-147936",
+                  "gender": "m",
+                  "ranking": 3,
+                  "ranking_d": 1,
+                  "nationality": "IRL"
+                },
+                {
+                  "firstname": "Carla",
+                  "lastname": "Nelte",
+                  "name": "Carla Nelte",
+                  "textid": "01-128902",
+                  "gender": "f",
+                  "ranking": 2
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "firstname": "Julian",
+                  "lastname": "Voigt",
+                  "name": "Julian Voigt",
+                  "textid": "18-001674",
+                  "gender": "m",
+                  "ranking": 4
+                },
+                {
+                  "firstname": "Lara-Carina",
+                  "lastname": "Buchelt",
+                  "name": "Lara-Carina Buchelt",
+                  "textid": "01-115994",
+                  "gender": "f",
+                  "ranking": 4
+                }
+              ]
+            }
+          ]
+        },
+        "presses_json": "[{\"type\":\"pick_side\",\"team1_left\":true,\"court_id\":\"2\",\"timestamp\":1508597946198},{\"type\":\"pick_server\",\"team_id\":0,\"player_id\":1,\"timestamp\":1508597955154},{\"type\":\"pick_receiver\",\"team_id\":1,\"player_id\":0,\"timestamp\":1508597959743},{\"type\":\"love-all\",\"timestamp\":1508598168971},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598175640},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598185186},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598203967},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598220031},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598235861},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598249718},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598265665},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598281341},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598297556},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598313998},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598336646},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598357634},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598374653},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598389232},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598404029},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598415420},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598427701},{\"type\":\"undo\",\"timestamp\":1508598436247},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598440922},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598451618},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598467740},{\"type\":\"postgame-confirm\",\"timestamp\":1508598520109},{\"type\":\"pick_server\",\"team_id\":0,\"player_id\":0,\"timestamp\":1508598540099},{\"type\":\"pick_receiver\",\"team_id\":1,\"player_id\":1,\"timestamp\":1508598545863},{\"type\":\"love-all\",\"timestamp\":1508598550537},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598559934},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598580115},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598595693},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598614139},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598630414},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598645571},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598669527},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598692017},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598713096},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598727624},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598742674},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598758553},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598773947},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598789775},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598800763},{\"type\":\"postgame-confirm\",\"timestamp\":1508598810460},{\"type\":\"pick_server\",\"team_id\":1,\"player_id\":1,\"timestamp\":1508598864187},{\"type\":\"pick_receiver\",\"team_id\":0,\"player_id\":0,\"timestamp\":1508598871403},{\"type\":\"love-all\",\"timestamp\":1508598874181},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598881019},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598898601},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598915128},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598934127},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598947491},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508598964748},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598988252},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508598999140},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599015716},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599049412},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599068489},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599080659},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599100299},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599122933},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599142429},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599169491},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599186242},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599207163},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599223084},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599245971},{\"type\":\"postgame-confirm\",\"timestamp\":1508599265690},{\"type\":\"pick_server\",\"team_id\":1,\"player_id\":0,\"timestamp\":1508599305939},{\"type\":\"pick_receiver\",\"team_id\":0,\"player_id\":0,\"timestamp\":1508599308646},{\"type\":\"love-all\",\"timestamp\":1508599318037},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599331141},{\"type\":\"undo\",\"timestamp\":1508599348798},{\"type\":\"undo\",\"timestamp\":1508599353858},{\"type\":\"love-all\",\"timestamp\":1508599355113},{\"type\":\"undo\",\"timestamp\":1508599355868},{\"type\":\"undo\",\"timestamp\":1508599356304},{\"type\":\"undo\",\"timestamp\":1508599358335},{\"type\":\"pick_server\",\"team_id\":1,\"player_id\":1,\"timestamp\":1508599359526},{\"type\":\"pick_receiver\",\"team_id\":0,\"player_id\":0,\"timestamp\":1508599360647},{\"type\":\"love-all\",\"timestamp\":1508599362254},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599363329},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599383629},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599400483},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599415932},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599428792},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599440468},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599464510},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599500570},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599533001},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599554600},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599583112},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599611632},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599621472},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599634559},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599647236},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599663055},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1508599688497},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1508599703237},{\"type\":\"postmatch-confirm\",\"timestamp\":1508599723898}]"
+      }
+    ]
+  }
+}

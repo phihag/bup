@@ -19,6 +19,7 @@ var i18n_de = {
 'import link': 'Aus Datei importieren ...',
 'send export': 'Export senden',
 'select pick': 'Auswählen',
+'back': 'Zurück',
 
 'fullscreen:go': 'Vollbildmodus',
 'fullscreen:no': 'Normalbildmodus',
@@ -582,6 +583,14 @@ var i18n_de = {
 'dads|atime': 'Werbe-Dauer (s):',
 'dads:utime': 'Zeit:',
 'dads:active': 'Aktiv',
+
+'urlexport:link': 'Auf {domain} eintragen',
+'urlexport:user': 'Benutzername auf {domain}:',
+'urlexport:password': 'Passwort:',
+'urlexport:prepare': 'Eintrag vorbereiten',
+'urlexport:preparing': 'Daten werden geladen ...',
+'urlexport:http-error': 'Übertragungs-Fehler (Code: {code})',
+
 };
 
 /*@DEV*/

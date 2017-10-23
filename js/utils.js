@@ -506,6 +506,11 @@ function urlencode(obj) {
 	return res;
 }
 
+function domain(url) {
+	var m = /^https?:\/\/(?:.*?\.)?([a-zA-Z0-9_]+\.[a-zA-Z]+)(?::[0-9]+)?\//.exec(url);
+	return m && m[1];
+}
+
 return {
 	any: any,
 	brightness: brightness,
@@ -518,6 +523,7 @@ return {
 	decode_utf8: decode_utf8,
 	deep_copy: deep_copy,
 	deep_equal: deep_equal,
+	domain: domain,
 	duration_hours: duration_hours,
 	duration_mins: duration_mins,
 	duration_secs: duration_secs,

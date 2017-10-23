@@ -1,5 +1,21 @@
 turnier.de transmission
+	php: login
+	php: return field representation
 
+	php: map fields with default values
+	php: load other fields
+	
+
+	test with resigned matches
+	test password
+	test status (can I still enter?)
+	support with courtspot
+	from referee mode as well
+	support with btde
+	support with sclive
+
+urlexport: back<->forward fails
+tde_import matches should have match_id
 restore scoresheets in Excel
 2felder: testen mit mac-Auflösung (@800x600)
 

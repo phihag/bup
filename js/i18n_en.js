@@ -19,6 +19,7 @@ var i18n_en = {
 'import link': 'Import event from backup file ...',
 'send export': 'send export file',
 'select pick': 'Select',
+'back': 'Back',
 
 'fullscreen:go': 'Go fullscreen',
 'fullscreen:no': 'Normal screen',
@@ -582,6 +583,14 @@ var i18n_en = {
 'dads|atime': 'ad duration (s):',
 'dads:utime': 'Time:',
 'dads:active': 'active',
+
+'urlexport:link': 'Upload to {domain}',
+'urlexport:user': 'Username {domain}:',
+'urlexport:password': 'Password:',
+'urlexport:prepare': 'Prepare entry',
+'urlexport:preparing': 'Loading data ...',
+'urlexport:http-error': 'Transmisison error (code {code})',
+
 };
 
 /*@DEV*/

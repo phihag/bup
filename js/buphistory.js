@@ -36,7 +36,7 @@ function record(s) {
 
 	var orig_hval = window.location.hash.substr(1);
 	var hval = orig_hval;
-	hval = hval.replace(/(?:^|&)(?:m|display|settings|event_scoresheets|scoresheet|eventsheet|stats|netstats|order|mo|editevent|setupsheet|referee_mode|dads|court|dm_style)(?:=[^&]*)?(?=&|$)/g, '');
+	hval = hval.replace(/(?:^|&)(?:m|display|settings|event_scoresheets|scoresheet|eventsheet|stats|netstats|order|urlexport|mo|editevent|setupsheet|referee_mode|dads|court|dm_style)(?:=[^&]*)?(?=&|$)/g, '');
 	hval = hval.replace(/^&+|&+$/g, '');
 
 	if (s.initialized && (settings.get_mode(s) === 'umpire')) {
@@ -94,6 +94,11 @@ function record(s) {
 			hval += '&';
 		}
 		hval += 'order';
+	} else if (s.ui.urlexport) {
+		if (hval.length > 1) {
+			hval += '&';
+		}
+		hval += 'urlexport';
 	} else if (s.ui.mo_visible) {
 		if (hval.length > 1) {
 			hval += '&';
@@ -181,6 +186,13 @@ function load_by_hash() {
 		return;
 	}
 
+	if (typeof qs.urlexport != 'undefined') {
+		urlexport.show();
+		return;
+	} else {
+		urlexport.hide();
+	}
+
 	if (typeof qs.editevent != 'undefined') {
 		editevent.show();
 		return;
@@ -260,6 +272,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var settings = require('./settings');
 	var setupsheet = require('./setupsheet');
 	var stats = require('./stats');
+	var urlexport = require('./urlexport');
 	var utils = require('./utils');
 
 	module.exports = buphistory;

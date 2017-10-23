@@ -349,4 +349,16 @@ _describe('helper functions', function() {
 			undefined
 		);
 	});
+
+	_it('domain', function() {
+		assert.strictEqual(
+			bup.utils.domain('http://ix.de:8080/foo?bar/x/z'),
+			'ix.de'
+		);
+		assert(!bup.utils.domain('nodomainx/z'));
+		assert.strictEqual(
+			bup.utils.domain('https://www.test.example.org/foo?bar/x/z'),
+			'example.org'
+		);
+	});
 });

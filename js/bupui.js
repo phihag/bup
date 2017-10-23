@@ -180,10 +180,79 @@ function add_player_pick(s, container, type, team_id, player_id, on_click, namef
 	});
 }
 
+// init_cb gets called with:
+// s - the state (passed through)
+// page - the page container
+// Returns the hiding function
+function make_page(s, page_name, init_cb, hide_cb) {
+	function hide() {
+		s.ui[page_name] = false;
+		uiu.remove(container);
+
+		if (s.ui.referee_mode) {
+			refmode_referee_ui.back_to_ui();
+		} else {
+			control.set_current(s);
+			settings.show();
+		}
+
+		hide_cb();
+	}
+
+	if (s.ui.referee_mode) {
+		refmode_referee_ui.hide_tmp();
+	} else {
+		render.hide();
+		settings.hide(true);
+	}
+	bupui.esc_stack_push(hide);
+
+	s.ui[page_name] = true;
+	control.set_current(s);
+
+	var body = uiu.qs('body');
+	var container = uiu.el(body, 'div');
+	var page = uiu.el(container, 'div', {
+		style: (
+			'position:relative;' +
+			'background:white;' +
+			'font-size:3vmin;' +
+			'min-height:10vh;' +
+			'padding:1vmin 1vmin 6vmin 2vmin;' + 
+			'border-bottom-left-radius:3vmin;border-bottom-right-radius:3vmin;'
+		),
+	});
+	var back_link = uiu.el(page, 'a', {
+		style: (
+			'position:absolute;bottom:2vmin;left:2vmin;'
+		),
+		href: '#',
+	}, s._('back'));
+	click.on(back_link, hide);
+
+	if (s.event && s.event.matches) {
+		init_cb(s, page);
+	} else {
+		var loading = uiu.el(page, 'div', 'loading-icon');
+		network.list_matches(s, function(err, ev) {
+			uiu.remove(loading);
+			if (err) {
+				uiu.el(page, 'div', 'network_error', err.msg);
+				return;
+			}
+			network.update_event(s, ev);
+			init_cb(s, page);
+		});
+	}
+
+	return hide;
+}
+
 return {
 	add_player_pick: add_player_pick,
 	esc_stack_pop: esc_stack_pop,
 	esc_stack_push: esc_stack_push,
+	make_page: make_page,
 	make_pick: make_pick,
 	make_player_pick: make_player_pick,
 	make_team_pick: make_team_pick,
@@ -196,7 +265,11 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var click = require('./click');
 	var control = require('./control');
+	var network = require('./network');
 	var pronunciation = require('./pronunciation');
+	var refmode_referee_ui = require('./refmode_referee_ui');
+	var render = require('./render');
+	var settings = require('./settings');
 	var uiu = require('./uiu');
 
 	module.exports = bupui;

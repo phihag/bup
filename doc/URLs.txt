@@ -18,6 +18,7 @@ nrwdemo   Demo of a match in the lower divisions in NRW
 rlmdemo   German Regionalliga Nord Demo
 nlademo   Demo of Swiss National League
 jticker   Run under meyerjo/ticker (shuttlecock-live)
+txdemo    Demo for transmission to turnier.de
 
 Initial UI
 ==========

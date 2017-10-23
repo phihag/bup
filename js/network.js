@@ -334,6 +334,7 @@ function ui_list_matches(s, silent, no_timer) {
 		update_event(s, event);
 
 		eventsheet.render_links(s, uiu.qs('.setup_eventsheets'));
+		urlexport.render_links(s, uiu.qs('.urlexport_links'));
 		var editable = netw.editable(s);
 		var use_setupsheet = event.team_competition;
 		uiu.visible_qs('.setupsheet_link', editable && use_setupsheet);
@@ -610,6 +611,8 @@ function ui_init(s, hash_query) {
 		networks.tdemo = staticnet(null, 'div/tdemo.json');
 	} else if (hash_query.obldemo !== undefined) {
 		networks.demo = staticnet(null, 'div/demos/obl.json');
+	} else if (hash_query.txdemo !== undefined) {
+		networks.demo = staticnet(null, 'div/demos/tx.json');
 	} else if (hash_query.btsh_e !== undefined) {
 		networks.btsh = btsh(null, hash_query.btsh_e);
 	} else if (hash_query.mo !== undefined) {
@@ -824,6 +827,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var settings = require('./settings');
 	var staticnet = require('./staticnet');
 	var uiu = require('./uiu');
+	var urlexport = require('./urlexport');
 	var utils = require('./utils');
 
 	module.exports = network;

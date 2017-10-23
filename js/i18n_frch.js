@@ -19,6 +19,7 @@ var i18n_frch = {
 'import link': 'Importer un événement à partir du fichier de sauvegarde ...',
 'send export': 'Envoyer un fichier d\'exportation',
 'select pick': 'Choisir',
+'back': 'Retourner',
 
 'fullscreen:go': 'plein écran',
 'fullscreen:no': 'écran normal',
@@ -578,6 +579,14 @@ var i18n_frch = {
 'dads|atime': 'Durée de la publicité (s):',
 'dads:utime': 'Temps:',
 'dads:active': 'active',
+
+'urlexport:link': 'Envoyer à {domain}',
+'urlexport:user': 'Nom d\'utilisateur {domain}:',
+'urlexport:password': 'Mot de passe de:',
+'urlexport:prepare': 'Préparer entrée de résultat',
+'urlexport:preparing': 'Chargement des données ...',
+'urlexport:http-error': 'Erreur de transmission (code {code})',
+
 };
 
 /*@DEV*/
