@@ -102,12 +102,11 @@ function init(s, page) {
 
 		uiu.text(status_text, s._('urlexport:preparing'));
 		_make_request({
-			url: BASE_URL + '?action=prepare',
-			data: {
+			url: BASE_URL + '?action=prepare&' + utils.urlencode({
 				url: r_url,
 				user: user,
 				password: password,
-			},
+			}),
 		}, function(data) {
 			status.style.visibility = 'hidden';
 

@@ -1,11 +1,12 @@
 turnier.de transmission
 	php: login
+	php: check that login works
 	php: return field representation
 
 	php: map fields with default values
 	php: load other fields
-	
 
+	correctly handle jsonErr
 	test with resigned matches
 	test password
 	test status (can I still enter?)
@@ -13,6 +14,9 @@ turnier.de transmission
 	from referee mode as well
 	support with btde
 	support with sclive
+
+	switch back to POST for communication with tde_export.php
+test urlimport after ajax changes
 
 urlexport: back<->forward fails
 tde_import matches should have match_id

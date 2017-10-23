@@ -7,9 +7,10 @@ function onsubmit(form, cb) {
 		e.preventDefault();
 
 		var fd = new FormData(form);
+		var entries = Array.from(fd.entries());
 		var data = {};
-		fd.keys().forEach(function(k) {
-			data[k] = fd.get(k);
+		entries.forEach(function(e) {
+			data[e[0]] = e[1];
 		});
 		cb(data);
 	});

@@ -34,3 +34,30 @@ function decode_html($html) {
 		return mb_convert_encoding($m[1], 'UTF-8', 'HTML-ENTITIES');
 	}, $named);
 }
+
+
+class CookieJar {
+	private $jar;
+
+	public function __construct() {
+		$this->jar = [];
+	}
+
+	public function read_from_stream($f) {
+		$meta = stream_get_meta_data($f);
+		$headers = $meta['wrapper_data'];
+		foreach ($headers as $h) {
+			if (\preg_match('/^Set-Cookie:\s*([A-Za-z_0-9.-]+)=(.*?)(?:$|;)/', $h, $m)) {
+				$this->jar[$m[1]] = $m[2];
+			}
+		}
+	}
+
+	public function make_header() {
+		$res = 'Cookie:';
+		foreach ($this->jar as $k => $v) {
+			$res .= ' ' . $k . '=' . $v . ';';
+		}
+		return $res . "\r\n";
+	}
+}
