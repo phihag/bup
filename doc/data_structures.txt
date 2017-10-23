@@ -15,13 +15,21 @@ id              Globally unique event id, e.g. "2016-bundesliga-refrath vs bisch
 league_key      ID of the league being played (this determines which event sheets are available, among others).
                 Strongly recommended if applicable.
                 Available values:
-                - German (1.&2.) Bundesliga: "1BL-2015", "2BLN-2015", "2BLS-2015", "1BL-2016", "2BLN-2016", "2BLS-2016", "1BL-2017", "2BLN-2017", "2BLS-2017"
-                - German Regionalliga (West, Nord, Mitte, SüdOst Ost): "RLW-2016", "RLN-2016", "RLM-2016", "RLSOO-2017" (SüdOst Ost is in development)
+                - German (1.&2.) Bundesliga:
+                   Season 2017/2018 (5x11_15 with 90s intervals): "1BL-2017", "2BLN-2017", "2BLS-2017"
+                   Season 2016/2017 (5x11_15, new Excel-based forms): "1BL-2016", "2BLN-2016", "2BLS-2016"
+                   Season 2015/2016 (3x21): "1BL-2015", "2BLN-2015", "2BLS-2015"
+                - German Regionalliga:
+                   RL West: "RLW-2016"
+                   RL Nord: "RLN-2016"
+                   RL Mitte: "RLM-2016"
+                   RL SüdOst Ost: "RLSOO-2017" (in development)
                 - NRW-Oberliga: "NRW-O19-OL-002-2016", "NRW-O19-OL-003-2016".
                 - Lower NRW leagues: Lots of IDs like "NRW-O19-S1-KK-194-2016". Replace in this example:
                   S1: is the district (one of N1, N2, S1, S2)
                   KK: the league abbreviation (one of "VL", "LL", "BL", "BK", "KL", "KK")
                   194: the league number (004 for Verbandsliga Nord 1, 005 for Verbandsliga Nord 2 etc.)
+                  2016 is always literally 2016.
                 - Swiss NLA: "NLA-2017"
                 - Austrian Bundesliga: "OBL-2017"
                 The year is the first year that the specific ruleset was implemented in.
