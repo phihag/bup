@@ -95,6 +95,7 @@ function set_metadata(event) {
 		match.network_team1_serving = scopy.game.team1_serving;
 		match.network_finished = scopy.match.finished;
 		match.network_team1_won = scopy.match.team1_won;
+		match.network_won_by_score = scopy.game.won_by_score;
 		if (scopy.match.umpire_name) {
 			umpires_set[scopy.match.umpire_name] = true;
 		}

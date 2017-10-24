@@ -1,20 +1,15 @@
 turnier.de transmission
-	check all players present
-
 	php: return field representation
 	php: map fields with default values
 	php: load other fields
 
-	correctly handle jsonErr
-	test with resigned matches
-	test password
-	test status (can I still enter?)
+	test status (can I still enter after someone entered?)
+	support with referee mode
 	support with courtspot
-	from referee mode as well
-	support with btde
-	support with sclive
-
 	switch back to POST for communication with tde_export.php
+	support with btde?
+	support with sclive?
+
 test urlimport after ajax changes
 
 urlexport: back<->forward fails

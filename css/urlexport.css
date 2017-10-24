@@ -5,7 +5,8 @@
 	margin-bottom: 1em;
 }
 .urlexport_status .loading-icon,
-.urlexport_status .error-icon {
+.urlexport_status .error-icon,
+.urlexport_status .success-icon {
 	height: 1em;
 	width: 1em;
 	margin-right: 0.3em;

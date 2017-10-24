@@ -590,6 +590,10 @@ var i18n_de = {
 'urlexport:prepare': 'Eintrag vorbereiten',
 'urlexport:preparing': 'Daten werden geladen ...',
 'urlexport:http-error': 'Übertragungs-Fehler (Code: {code})',
+'urlexport:winner_code:0': 'Läuft',
+'urlexport:winner_code:retired': 'Aufgabe durch {team_name}',
+'urlexport:submit': 'Eintragen',
+'urlexport:success': 'Erfolgreich übertragen',
 
 };
 

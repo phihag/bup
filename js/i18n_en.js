@@ -590,7 +590,10 @@ var i18n_en = {
 'urlexport:prepare': 'Prepare entry',
 'urlexport:preparing': 'Loading data ...',
 'urlexport:http-error': 'Transmisison error (code {code})',
-
+'urlexport:winner_code:0': 'ongoing',
+'urlexport:winner_code:retired': '{team_name} retired',
+'urlexport:submit': 'Submit',
+'urlexport:success': 'Upload successful.',
 };
 
 /*@DEV*/

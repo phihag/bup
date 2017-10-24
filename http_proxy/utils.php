@@ -28,6 +28,15 @@ function json_err($description) {
 	die(\json_encode($send));
 }
 
+function send_json($data) {
+	header('HTTP/1.1 200 OK');
+	header('Content-Type: application/json');
+	header('Cache-Control: no-cache, no-store, must-revalidate');
+	header('Pragma: no-cache');
+	header('Expires: 0');
+	echo \json_encode($data);
+}
+
 function decode_html($html) {
 	$named = \html_entity_decode($html);
 	return preg_replace_callback('/(&#[0-9]+;)/', function($m) {

@@ -68,7 +68,8 @@
 }
 
 .loading-icon,
-.error-icon {
+.error-icon,
+.success-icon {
 	background-size: 100% 100%;
 	background-repeat: no-repeat;
 	width: 2em;
@@ -79,6 +80,9 @@
 }
 .error-icon {
 	background-image: url(../icons/error.svg);
+}
+.success-icon {
+	background-image: url(../icons/checkmark.svg);
 }
 
 button > .loading-icon {
