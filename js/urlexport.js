@@ -102,7 +102,9 @@ function unify_name(match_name) {
 function render_submit(s, page, data, submit_cb) {
 	var submit_container = uiu.el(page, 'div');
 
-	var match_table = uiu.el(submit_container, 'table');
+	var match_table = uiu.el(submit_container, 'table', {
+		style: 'margin-bottom:1em;',
+	});
 	data.matches.forEach(function(dm) {
 		var tr = uiu.el(match_table, 'tr');
 		uiu.el(tr, 'th', {}, dm.name);
@@ -123,7 +125,21 @@ function render_submit(s, page, data, submit_cb) {
 	});
 
 	var submit_form = uiu.el(submit_container, 'form');
-	// TODO render text fields
+	var ef_table = uiu.el(submit_form, 'table');
+	data.extra_fields.forEach(function(ef) {
+		var tr = uiu.el(ef_table, 'tr');
+		uiu.el(tr, 'td', {
+			style: 'text-align:right;font-size:2vmin;',
+		}, ef.label);
+		var td = uiu.el(tr, 'td');
+		uiu.el(td, 'input', {
+			style: 'font-size: 2vmin;',
+			size: 50,
+			type: 'text',
+			name: 'ef_' + ef.tde_id,
+		});
+	});
+
 	uiu.el(submit_form, 'button', {
 		style: 'position:absolute;right:3vmin;bottom:2vmin;display:block;font-size:3vmin',
 	}, s._('urlexport:submit'));
@@ -219,7 +235,15 @@ function init(s, page) {
 			uiu.remove(uiu.qs('.urlexport_prepare'));
 			uiu.text(status_text, s._('urlexport:submitting'));
 
-			var submit_container = render_submit(s, page, data, function() {
+			var submit_container = render_submit(s, page, data, function(submit_data) {
+				var extra_fields = {};
+				for (var k in submit_data) {
+					var m = /^ef_(.*)$/.exec(k);
+					if (!m) continue;
+
+					extra_fields[m[1]] = submit_data[k];
+				}
+
 				_make_request({
 					url: BASE_URL + '?action=submit&' + utils.urlencode({
 						url: r_url,
@@ -228,12 +252,18 @@ function init(s, page) {
 						team_names: JSON.stringify(ev.team_names),
 						matches_json: JSON.stringify(xmatches),
 						max_game_count: calc.max_game_count(ev.matches[0].setup.counting),
+						extra_fields_json: JSON.stringify(extra_fields),
 					}),
-				}, function() {
+				}, function(data) {
 					status_icon.setAttribute('class', 'success-icon');
 					uiu.remove(submit_container);
 					uiu.text(status_text, s._('urlexport:success'));
-					// TODO render link
+
+					uiu.el(page, 'a', {
+						href: data.result_url,
+						target: '_blank',
+						rel: 'noopener noreferrer',
+					});
 				});
 			});
 		});
@@ -281,11 +311,11 @@ function hide() {
 	}
 }
 
-function supported_league(league_key) {
+function supported_leagues(league_key) {
 	if (eventutils.is_bundesliga(league_key) ||
 			eventutils.NRW2016_RE.test(league_key) ||
 			(league_key === 'RLW-2016') || (league_key === 'RLN-2016') || (league_key === 'RLM-2016')) {
-		return 'turnier.de';
+		return ['turnier.de'];
 	}
 }
 
@@ -299,9 +329,9 @@ function render_links(s, container) {
 	if (report_urls) {
 		domains = utils.filter_map(report_urls, utils.domain);
 	} else {
-		var sup = supported_league(ev.league_key);
+		var sup = supported_leagues(ev.league_key);
 		if (sup) {
-			domains = [sup];
+			domains = sup;
 		}
 	}
 

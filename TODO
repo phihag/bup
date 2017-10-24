@@ -1,13 +1,15 @@
-add spectators field
 turnier.de transmission
-	php: return field representation
-	php: load other fields
-	php: map fields with default values
+	HTTP/1.1
+	keep session between requests
+	confirm result entry
+	check that login is successful
+	automatically relogin if session goes bust
 
-	support without turnier.de-URL (ask for it)
+	php: store fields
+
+	fill fields with default values
 	show link after finished
-	clean up other UI after finished
-	test status (can I still enter after someone entered?)
+	test status (can I still enter after someone entered? show correct error)
 	support with courtspot
 	support with referee mode (with custom creation)
 	switch back to POST for communication with tde_export.php
@@ -17,7 +19,8 @@ turnier.de transmission
 
 test urlimport after ajax changes
 
-urlexport: back<->forward fails
+#urlexport: back<->forward fails
+
 tde_import matches should have match_id
 restore scoresheets in Excel
 2felder: testen mit mac-Auflösung (@800x600)
@@ -58,8 +61,8 @@ redesign manual as slides
 	short URL to slides
 	-> msg Julian
 
-buli spielbericht: set focus to Spielbericht
-buli spielbericht: remove del button
+order: use bupui.make_page
+scoresheets: use bupui.make_page
 print labels on tvr tablets
 
 unify court configuration for displaymode and umpire mode

@@ -217,10 +217,21 @@ if (($action === 'prepare') || ($action === 'submit')) {
 		$match['score_strs'] = $score_strs;
 	}
 
+	// Collect extra_fields
+	if (! preg_match_all('/<th\s+class="right"\s+colspan="6">([^<]+)<\/th><td\s+colspan="7"><input\s+id="matchfield_([0-9]+)" type="text" class="textfield matchfield"/', $input_page, $ms, \PREG_SET_ORDER)) {
+		json_err('could not find extra fields');
+	}
+	$extra_fields = array_map(function($m) {
+		return [
+			'label' => $m[1],
+			'tde_id' => $m[2],
+		];
+	}, $ms);
+
 	if ($action === 'prepare') {
-		// TODO return extra fields
 		send_json([
 			'matches' => $matches,
+			'extra_fields' => $extra_fields,
 		]);
 	} else { // submit
 		$sub_matches = \array_map(function($rm) use($matches) {
@@ -280,19 +291,18 @@ if (($action === 'prepare') || ($action === 'submit')) {
 		$validate_page = stream_get_contents($f);
 		fclose($f);
 
+		$user_extra_fields_json = _param('extra_fields_json');
+		$user_extra_fields = json_decode($user_extra_fields_json);
+
 		// Save whole result
-		// TODO determine these automatically
-		$extra_fields = [
-			["ID" => 1, "ValueString" => "TODO: value goes here"],
-			["ID" => 2, "ValueString" => ""],
-			["ID" => 3, "ValueString" => ""],
-			["ID" => 4, "ValueString" => ""],
-			["ID" => 5, "ValueString" => ""],
-			["ID" => 6, "ValueString" => "CHANGED / Andrea Vlach"],
-			["ID" => 7, "ValueString" => ""],
-			["ID" => 8, "ValueString" => ""],
-			["ID" => 9, "ValueString" => "etwa 1234 Zuschauer"]
-		];
+		$extra_fields = [];
+		foreach ($user_extra_fields as $tde_id => $v) {
+			$extra_fields[] = [
+				'ID' => intval($tde_id),
+				'ValueString' => $v,
+			];
+		}
+
 		$save_url = 'https://www.turnier.de/extension/matchvalidation.aspx/SaveMatch';
 		$data = [
 			'ACode' => $tde_id,
@@ -305,6 +315,7 @@ if (($action === 'prepare') || ($action === 'submit')) {
 			'AMinute' => 0,
 			'AMatchID' => $tde_tm,
 		];
+
 		$options = [
 			'http' => [
 				'header' => (
@@ -324,7 +335,7 @@ if (($action === 'prepare') || ($action === 'submit')) {
 		$jar->read_from_stream($f);
 		$save_page = stream_get_contents($f);
 		fclose($f);
-
+die($save_page);
 		send_json([
 			'status' => 'saved',
 			'result_url' => $url,
