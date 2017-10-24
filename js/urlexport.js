@@ -214,6 +214,8 @@ function init(s, page) {
 			status.style.visibility = 'hidden';
 
 			uiu.remove(uiu.qs('.urlexport_prepare'));
+			uiu.text(status_text, s._('urlexport:submitting'));
+
 			render_submit(s, page, data, function() {
 				_make_request({
 					url: BASE_URL + '?action=submit&' + utils.urlencode({

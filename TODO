@@ -3,12 +3,16 @@ turnier.de transmission
 	php: map fields with default values
 	php: load other fields
 
+	support without turnier.de-URL (ask for it)
+	show link after finished
+	clean up other UI after finished
 	test status (can I still enter after someone entered?)
-	support with referee mode
 	support with courtspot
+	support with referee mode (with custom creation)
 	switch back to POST for communication with tde_export.php
 	support with btde?
 	support with sclive?
+	grep for TODOs in urlexport + tde_export.php
 
 test urlimport after ajax changes
 

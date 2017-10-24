@@ -585,6 +585,7 @@ var i18n_frch = {
 'urlexport:password': 'Mot de passe de:',
 'urlexport:prepare': 'Préparer entrée de résultat',
 'urlexport:preparing': 'Chargement des données ...',
+'urlexport:submitting': 'Transmettrer ...',
 'urlexport:http-error': 'Erreur de transmission (code {code})',
 'urlexport:winner_code:0': 'en cours',
 'urlexport:winner_code:retired': 'retraité par {team_name}',

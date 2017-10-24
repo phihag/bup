@@ -589,6 +589,7 @@ var i18n_de = {
 'urlexport:password': 'Passwort:',
 'urlexport:prepare': 'Eintrag vorbereiten',
 'urlexport:preparing': 'Daten werden geladen ...',
+'urlexport:submitting': 'Übertrage ...',
 'urlexport:http-error': 'Übertragungs-Fehler (Code: {code})',
 'urlexport:winner_code:0': 'Läuft',
 'urlexport:winner_code:retired': 'Aufgabe durch {team_name}',

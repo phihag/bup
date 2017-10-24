@@ -144,6 +144,11 @@ if (($action === 'prepare') || ($action === 'submit')) {
 	$input_page = stream_get_contents($f);
 	fclose($f);
 
+	if (!preg_match('/"ALCID":([0-9]+)/', $input_page, $m)) {
+		json_err('Cannot find ALCID');
+	}
+	$alcid = $m[1];
+
 	// Check team names
 	if (!preg_match('/Eingabe Ergebnis für:\s+<a[^>]+>(.*?)\s*<span class="nobreak">[^<]*<\/span><\/a> - <a[^>]+>(.*?)\s*<span class="nobreak">/', $input_page, $m)) {
 		json_err('Cannot find team names');
@@ -218,14 +223,111 @@ if (($action === 'prepare') || ($action === 'submit')) {
 			'matches' => $matches,
 		]);
 	} else { // submit
-		foreach ($matches as $match) {
-			
-		}
+		$sub_matches = \array_map(function($rm) use($matches) {
+			$match = _find($matches, function($m) use ($rm) {
+				return $m['name'] === $rm['name'];
+			});
+			if (!$match) {
+				json_err('Cannot find match ' . $rm['name']);
+			}
 
-		// TODO save whole result
+			$sets = \array_map(function($game_id, $score_str) {
+				return [
+					'SetID' => ($game_id + 1),
+					'SetValue' => $score_str,
+				];
+			}, $match['score_strs'], \array_keys($match['score_strs']));
+
+			$players = $match['players'];
+			return [
+				'ID' => intval($match['tde_id']),
+				'Winner' => $match['winner_code'],
+				'DisableScoreValidation' => false,
+				'Sets' => $sets,
+				'Team1Player1ID' => strval($players[0][0]['tde_id']),
+				'Team1Player2ID' => strval(isset($players[0][1]) ? $players[0][1]['tde_id'] : 0),
+				'Team2Player1ID' => strval($players[1][0]['tde_id']),
+				'Team2Player2ID' => strval(isset($players[1][1]) ? $players[1][1]['tde_id'] : 0),
+			];
+		}, $real_matches);
+		$data =  [
+			'ACode' => $tde_id,
+			'AMatchID' => $tde_tm,
+			'AOnlyValidatePlayerSetup' => false,
+			'ASubMatches' => $sub_matches,
+			'AShootoutWinner' => 0,
+			'ALCID' => $alcid,
+		];
+
+		$submit_url = 'https://www.turnier.de/extension/matchvalidation.aspx/ValidateMatch';
+		$options = [
+			'http' => [
+				'header' => (
+					"Content-Type: application/json; charset=UTF-8\r\n" .
+					$jar->make_header()
+				),
+				'follow_location' => 0,
+				'method' => 'POST',
+				'content' => \json_encode($data),
+			],
+		];
+		$context = stream_context_create($options);
+		$f = fopen($submit_url, 'r', false, $context);
+		if ($f === false) {
+			return json_err('Failed to send ValidateMatch');
+		}
+		$jar->read_from_stream($f);
+		$validate_page = stream_get_contents($f);
+		fclose($f);
+
+		// Save whole result
+		// TODO determine these automatically
+		$extra_fields = [
+			["ID" => 1, "ValueString" => "TODO: value goes here"],
+			["ID" => 2, "ValueString" => ""],
+			["ID" => 3, "ValueString" => ""],
+			["ID" => 4, "ValueString" => ""],
+			["ID" => 5, "ValueString" => ""],
+			["ID" => 6, "ValueString" => "CHANGED / Andrea Vlach"],
+			["ID" => 7, "ValueString" => ""],
+			["ID" => 8, "ValueString" => ""],
+			["ID" => 9, "ValueString" => "1234 Zuschauer"]
+		];
+		$save_url = 'https://www.turnier.de/extension/matchvalidation.aspx/SaveMatch';
+		$data = [
+			'ACode' => $tde_id,
+			'AExtraItemList' => $extra_fields,
+			'AShootOutWinner' => 0,
+			'AYear' => 0,
+			'AMonth' => 0,
+			'ADay' => 0,
+			'AHour' => 0,
+			'AMinute' => 0,
+			'AMatchID' => $tde_tm,
+		];
+		$options = [
+			'http' => [
+				'header' => (
+					"Content-Type: application/json; charset=UTF-8\r\n" .
+					$jar->make_header()
+				),
+				'follow_location' => 0,
+				'method'  => 'POST',
+				'content' => \json_encode($data),
+			],
+		];
+		$context = stream_context_create($options);
+		$f = fopen($save_url, 'r', false, $context);
+		if ($f === false) {
+			return json_err('Failed to send SaveMatch');
+		}
+		$jar->read_from_stream($f);
+		$save_page = stream_get_contents($f);
+		fclose($f);
 
 		send_json([
 			'status' => 'saved',
+			'result_url' => $url,
 		]);
 	}
 } else {

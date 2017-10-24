@@ -589,6 +589,7 @@ var i18n_en = {
 'urlexport:password': 'Password:',
 'urlexport:prepare': 'Prepare entry',
 'urlexport:preparing': 'Loading data ...',
+'urlexport:submitting': 'Uploading ...',
 'urlexport:http-error': 'Transmisison error (code {code})',
 'urlexport:winner_code:0': 'ongoing',
 'urlexport:winner_code:retired': '{team_name} retired',
