@@ -9,7 +9,7 @@ var ajax = (function() {
 * - url*:         URL to download
 * - data:         The string to send.
 * - contentType:  The MIME response type
-* sucess_cb gets called with the data on success.
+* sucess_cb gets called with the data and XMLHTTPRequest object on success.
 * fail_cb gets called on error, with HTTP status, response text, and the XMLHTTPRequest object.
 */
 function req(options, success_cb, fail_cb) {
@@ -26,7 +26,7 @@ function req(options, success_cb, fail_cb) {
 			return;
 		}
 		if (xhr.status === 200) {
-			success_cb(xhr.response);
+			success_cb(xhr.response, xhr);
 		} else {
 			fail_cb(xhr.status, xhr.response, xhr);
 		}

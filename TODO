@@ -1,14 +1,16 @@
 turnier.de transmission
-	HTTP/1.1
-	keep session between requests
-	confirm result entry
-	check that login is successful
-	automatically relogin if session goes bust
-
 	php: store fields
 
 	fill fields with default values
-	show link after finished
+	HTTP/1.1
+	confirm result entry by urlimport
+	fix m/f order in MX
+	keep session between requests
+	check that login is successful
+	automatically relogin if session goes bust
+
+	usable with keyboard (correct autofocus)
+	show link all the time
 	test status (can I still enter after someone entered? show correct error)
 	support with courtspot
 	support with referee mode (with custom creation)

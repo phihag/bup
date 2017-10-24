@@ -295,18 +295,29 @@ if (($action === 'prepare') || ($action === 'submit')) {
 		$user_extra_fields = json_decode($user_extra_fields_json);
 
 		// Save whole result
-		$extra_fields = [];
+		$extra_items = [];
 		foreach ($user_extra_fields as $tde_id => $v) {
-			$extra_fields[] = [
+			$extra_items[] = [
 				'ID' => intval($tde_id),
 				'ValueString' => $v,
 			];
 		}
+$extra_items = [
+["ID" => 1, "ValueString" => "TODO: new value goes here"],
+["ID" => 2, "ValueString" => ""],
+["ID" => 3, "ValueString" => ""],
+["ID" => 4, "ValueString" => ""],
+["ID" => 5, "ValueString" => ""],
+["ID" => 6, "ValueString" => "CHANGED / Benedikt"],
+["ID" => 7, "ValueString" => ""],
+["ID" => 8, "ValueString" => ""],
+["ID" => 9, "ValueString" => "etwa 234 Zuschauer"]
+];
 
 		$save_url = 'https://www.turnier.de/extension/matchvalidation.aspx/SaveMatch';
 		$data = [
 			'ACode' => $tde_id,
-			'AExtraItemList' => $extra_fields,
+			'AExtraItemList' => $extra_items,
 			'AShootOutWinner' => 0,
 			'AYear' => 0,
 			'AMonth' => 0,
@@ -335,7 +346,7 @@ if (($action === 'prepare') || ($action === 'submit')) {
 		$jar->read_from_stream($f);
 		$save_page = stream_get_contents($f);
 		fclose($f);
-die($save_page);
+
 		send_json([
 			'status' => 'saved',
 			'result_url' => $url,

@@ -254,7 +254,18 @@ function init(s, page) {
 						max_game_count: calc.max_game_count(ev.matches[0].setup.counting),
 						extra_fields_json: JSON.stringify(extra_fields),
 					}),
-				}, function(data) {
+				}, function(data_json, xhr) {
+					var data = utils.parse_json(data_json);
+
+					if (!data || (data.status !== 'saved')) {
+						status_icon.setAttribute('class', 'error-icon');
+						uiu.addClass(status_text, 'network_error');
+						uiu.text(status_text, s._('urlexport:http-error', {
+							code: (data ? xhr.status : 'no-json'),
+						}));
+						return;
+					}
+
 					status_icon.setAttribute('class', 'success-icon');
 					uiu.remove(submit_container);
 					uiu.text(status_text, s._('urlexport:success'));
