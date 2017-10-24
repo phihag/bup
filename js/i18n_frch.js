@@ -591,7 +591,8 @@ var i18n_frch = {
 'urlexport:winner_code:retired': 'retraité par {team_name}',
 'urlexport:submit': 'Envoyer',
 'urlexport:success': 'Transmission réussie.',
-
+'urlexport:url': 'URL:',
+'urlexport:submit url': 'Prochain',
 };
 
 /*@DEV*/

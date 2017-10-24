@@ -291,7 +291,7 @@ if (($action === 'prepare') || ($action === 'submit')) {
 			["ID" => 6, "ValueString" => "CHANGED / Andrea Vlach"],
 			["ID" => 7, "ValueString" => ""],
 			["ID" => 8, "ValueString" => ""],
-			["ID" => 9, "ValueString" => "1234 Zuschauer"]
+			["ID" => 9, "ValueString" => "etwa 1234 Zuschauer"]
 		];
 		$save_url = 'https://www.turnier.de/extension/matchvalidation.aspx/SaveMatch';
 		$data = [

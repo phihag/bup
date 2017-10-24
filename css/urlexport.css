@@ -1,4 +1,5 @@
-.urlexport_status {
+.urlexport_status,
+.urlexport_urlform > label {
 	display: flex;
 	flex-direction: row;
 	align-items: center;

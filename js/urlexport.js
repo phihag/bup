@@ -100,7 +100,9 @@ function unify_name(match_name) {
 }
 
 function render_submit(s, page, data, submit_cb) {
-	var match_table = uiu.el(page, 'table');
+	var submit_container = uiu.el(page, 'div');
+
+	var match_table = uiu.el(submit_container, 'table');
 	data.matches.forEach(function(dm) {
 		var tr = uiu.el(match_table, 'tr');
 		uiu.el(tr, 'th', {}, dm.name);
@@ -120,7 +122,7 @@ function render_submit(s, page, data, submit_cb) {
 		});
 	});
 
-	var submit_form = uiu.el(page, 'form');
+	var submit_form = uiu.el(submit_container, 'form');
 	// TODO render text fields
 	uiu.el(submit_form, 'button', {
 		style: 'position:absolute;right:3vmin;bottom:2vmin;display:block;font-size:3vmin',
@@ -128,6 +130,7 @@ function render_submit(s, page, data, submit_cb) {
 	form_utils.onsubmit(submit_form, function(data) {
 		submit_cb(data);
 	});
+	return submit_container;
 }
 
 function init(s, page) {
@@ -216,7 +219,7 @@ function init(s, page) {
 			uiu.remove(uiu.qs('.urlexport_prepare'));
 			uiu.text(status_text, s._('urlexport:submitting'));
 
-			render_submit(s, page, data, function() {
+			var submit_container = render_submit(s, page, data, function() {
 				_make_request({
 					url: BASE_URL + '?action=submit&' + utils.urlencode({
 						url: r_url,
@@ -228,6 +231,7 @@ function init(s, page) {
 					}),
 				}, function() {
 					status_icon.setAttribute('class', 'success-icon');
+					uiu.remove(submit_container);
 					uiu.text(status_text, s._('urlexport:success'));
 					// TODO render link
 				});
@@ -236,10 +240,36 @@ function init(s, page) {
 	});
 }
 
+function outer_init(s, page) {
+	var ev = s.event;
+	if (ev.report_urls && (ev.report_urls.length > 0)) {
+		init(s, page);
+		return;
+	}
+
+	var url_form = uiu.el(page, 'form', 'urlexport_urlform');
+	var label = uiu.el(url_form, 'label');
+	uiu.el(label, 'span', {}, s._('urlexport:url'));
+	uiu.el(label, 'input', {
+		type: 'url',
+		required: 'required',
+		size: 70,
+		name: 'report_url',
+	});
+
+	uiu.el(label, 'button', {}, s._('urlexport:submit url'));
+
+	form_utils.onsubmit(url_form, function(data) {
+		ev.report_urls = [data.report_url];
+		uiu.remove(url_form);
+		init(s, page);
+	});
+}
+
 function show() {
 	if (hide_func) return; // Already displayed
 
-	hide_func = bupui.make_page(state, 'urlexport', init, function() {
+	hide_func = bupui.make_page(state, 'urlexport', outer_init, function() {
 		hide_func = null;
 	});
 }

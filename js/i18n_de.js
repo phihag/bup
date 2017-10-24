@@ -595,6 +595,8 @@ var i18n_de = {
 'urlexport:winner_code:retired': 'Aufgabe durch {team_name}',
 'urlexport:submit': 'Eintragen',
 'urlexport:success': 'Erfolgreich übertragen',
+'urlexport:url': 'URL:',
+'urlexport:submit url': 'Weiter',
 
 };
 
