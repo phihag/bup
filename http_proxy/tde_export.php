@@ -292,27 +292,16 @@ if (($action === 'prepare') || ($action === 'submit')) {
 		fclose($f);
 
 		$user_extra_fields_json = _param('extra_fields_json');
-		$user_extra_fields = json_decode($user_extra_fields_json);
+		$user_extra_fields = json_decode($user_extra_fields_json, true);
 
 		// Save whole result
 		$extra_items = [];
-		foreach ($user_extra_fields as $tde_id => $v) {
+		foreach ($user_extra_fields as $ef) {
 			$extra_items[] = [
-				'ID' => intval($tde_id),
-				'ValueString' => $v,
+				'ID' => intval($ef['tde_id']),
+				'ValueString' => $ef['val'],
 			];
 		}
-$extra_items = [
-["ID" => 1, "ValueString" => "TODO: new value goes here"],
-["ID" => 2, "ValueString" => ""],
-["ID" => 3, "ValueString" => ""],
-["ID" => 4, "ValueString" => ""],
-["ID" => 5, "ValueString" => ""],
-["ID" => 6, "ValueString" => "CHANGED / Benedikt"],
-["ID" => 7, "ValueString" => ""],
-["ID" => 8, "ValueString" => ""],
-["ID" => 9, "ValueString" => "etwa 234 Zuschauer"]
-];
 
 		$save_url = 'https://www.turnier.de/extension/matchvalidation.aspx/SaveMatch';
 		$data = [

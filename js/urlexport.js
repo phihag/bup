@@ -236,12 +236,15 @@ function init(s, page) {
 			uiu.text(status_text, s._('urlexport:submitting'));
 
 			var submit_container = render_submit(s, page, data, function(submit_data) {
-				var extra_fields = {};
+				var extra_fields = [];
 				for (var k in submit_data) {
 					var m = /^ef_(.*)$/.exec(k);
 					if (!m) continue;
 
-					extra_fields[m[1]] = submit_data[k];
+					extra_fields.push({
+						tde_id: parseInt(m[1]),
+						val: submit_data[k],
+					});
 				}
 
 				_make_request({

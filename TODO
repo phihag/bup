@@ -1,6 +1,4 @@
 turnier.de transmission
-	php: store fields
-
 	fill fields with default values
 	HTTP/1.1
 	confirm result entry by urlimport
