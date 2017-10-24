@@ -69,22 +69,6 @@ var MIME_TYPES = {
 
 var files = {};
 
-function calc_backup_players_str(ev) {
-	var bp = ev.backup_players;
-	if (!bp) {
-		return '';
-	}
-	return [0, 1].map(function(team_id) {
-		var res = bp[team_id].map(function(player) {
-			return player.name;
-		}).join(', ');
-		if (res) {
-			res += ' (' + ev.team_names[team_id] + ')';
-		}
-		return res;
-	}).filter(function(s) {return s;}).join(' / ');
-}
-
 function players2str(players, sep) {
 	return players.map(function(player) {
 		return player.name;
@@ -1573,7 +1557,7 @@ function on_fetch() {
 			event.match_umpires ? event.match_umpires.join(', ') : ''));
 	container.querySelector('[name="umpires"]').value = umpires_str;
 
-	var backup_players_str = calc_backup_players_str(state.event);
+	var backup_players_str = eventutils.calc_players_str(event, event.backup_players);
 	if (backup_players_str) {
 		container.querySelector('[name="backup_players_str"]').value = backup_players_str;
 	}

@@ -475,9 +475,25 @@ function make_empty_matches(league_key, event_id) {
 	throw new Error('Cannot create matches for ' + league_key);
 }
 
+function calc_players_str(ev, players) {
+	if (!players) {
+		return '';
+	}
+	return [0, 1].map(function(team_id) {
+		var res = players[team_id].map(function(player) {
+			return player.name;
+		}).join(', ');
+		if (res) {
+			res += ' (' + ev.team_names[team_id] + ')';
+		}
+		return res;
+	}).filter(function(s) {return s;}).join(' / ');
+}
+
 return {
 	annotate: annotate,
 	calc_all_players: calc_all_players,
+	calc_players_str: calc_players_str,
 	get_presses: get_presses,
 	guess_gender: guess_gender,
 	is_bundesliga: is_bundesliga,

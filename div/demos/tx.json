@@ -11,11 +11,38 @@
     ],
     "staticnet_message": "Demo zum Übertragen auf turnier.de",
     "notes": "Aufgabe von Julian Voigt im GD",
-    "umpires": "Manuel Lappe, Jan Striewski",
+    "umpires": "Manuel Lappe / Jan Striewski",
     "matchday": 5,
     "starttime": "12:00",
     "protest": "Halle zu dunkel",
     "spectators": "etwa 250",
+    "backup_players": [[
+      {
+        "name": "Lukas Mühlhaus",
+        "gender": "m"
+      },
+      {
+        "name": "Runa Plützer",
+        "gender": "f"
+      },
+      {
+        "name": "Jennifer Karnott",
+        "gender": "f"
+      }
+    ], [{
+        "name": "Sebastian Haardt",
+        "gender": "m"
+    }]],
+    "present_players": [[
+      {
+        "name": "Elias Beckmann",
+        "gender": "m"
+      },
+      {
+        "name": "Marie Kelzenberg",
+        "gender": "f"
+      }
+    ], []],
     "all_players": [
       [
         {

@@ -99,6 +99,29 @@ function unify_name(match_name) {
 	return match_name;
 }
 
+function extra_field_value(ev, label) {
+	if (/^vorgesehene Ersatzspieler/.test(label)) {
+		return eventutils.calc_players_str(ev, ev.backup_players);
+	}
+	if (label.includes('Schiedsrichter')) {
+		return (
+			ev.umpires ? ev.umpires : (
+			ev.match_umpires ? ev.match_umpires.join(', ') : ''));
+	}
+	if (/^weitere anwesende Spieler/.test(label)) {
+		return eventutils.calc_players_str(ev, ev.present_players);
+	}
+	if (/^Bemerkungen:?$/.test(label) && (ev.spectators)) {
+		return ev.spectators + ' Zuschauer';
+	}
+	if (label.includes('Protestvorbehalt')) {
+		return ev.protest;
+	}
+	if (/^andere besondere Vorkommnisse/.test(label)) {
+		return ev.notes;
+	}
+}
+
 function render_submit(s, page, data, submit_cb) {
 	var submit_container = uiu.el(page, 'div');
 
@@ -126,18 +149,22 @@ function render_submit(s, page, data, submit_cb) {
 
 	var submit_form = uiu.el(submit_container, 'form');
 	var ef_table = uiu.el(submit_form, 'table');
-	data.extra_fields.forEach(function(ef) {
+	data.extra_fields.forEach(function(ef, idx) {
 		var tr = uiu.el(ef_table, 'tr');
 		uiu.el(tr, 'td', {
 			style: 'text-align:right;font-size:2vmin;',
 		}, ef.label);
 		var td = uiu.el(tr, 'td');
-		uiu.el(td, 'input', {
+		var input = uiu.el(td, 'input', {
 			style: 'font-size: 2vmin;',
 			size: 50,
 			type: 'text',
 			name: 'ef_' + ef.tde_id,
+			value: (extra_field_value(s.event, ef.label) || ''),
 		});
+		if (idx === 0) {
+			input.focus();
+		}
 	});
 
 	uiu.el(submit_form, 'button', {
