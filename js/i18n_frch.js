@@ -332,6 +332,7 @@ var i18n_frch = {
 'eventsheet:Backup Players': 'Joueurs remplaçant:',
 'eventsheet:Notes': 'Notes:',
 'eventsheet:Protest': 'Protestation:',
+'eventsheet:Spectators': 'Spectateurs:',
 'eventsheet:back': 'Retourner',
 'eventsheet:Event Sheet': 'Feuille de résultats',
 'eventsheet:download empty': 'Télécharger le formulaire vide',

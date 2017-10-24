@@ -70,10 +70,12 @@ matchday        Match day according to league plan, e.g. "1" (first game of the 
 notes           Non-protest notes, e.g. "Bundesliga logo missing on front of information sheet"
 event_name      Name of the event (will be present on scoresheet), e.g. "Finals".
                 Will be calculated from team_names if those are present.
-tournament_name Name of the overall tournament (will be present on scoresheet), e.g. "Bundesliga 2015/2016".
+tournament_name Name of the overall tournament (will be present on scoresheet),
+                e.g. "1. Bundesliga 2015/2016".
                 Generated from league_key if not present (this is recommended).
 last_update     UNIX timestamp in ms: Date of last change to this event
 report_urls     An array of URLs where the result can be exported to.
+spectators      Estimate (or precise number) of spectators, e.g. 243 or "about 250"
 
 
 court
@@ -83,7 +85,8 @@ court_id*     ID of this court (often a number, can also be 2017dm_hall1_12)
 label         A short, human-readable name for the court. ("Big hall 12")
 description   Description of where this court is.
 match_id      The match_id property of the match currently being played on this court.
-chair         "west" - Umpire chair to the west at displaymode, "east" - Umpire chair to the east of the displaymode.
+chair         "west" - Umpire chair to the west at displaymode,
+              "east" - Umpire chair to the east of the displaymode.
 
 
 match

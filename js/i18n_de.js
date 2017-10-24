@@ -336,6 +336,7 @@ var i18n_de = {
 'eventsheet:Backup Players': 'Vorhergesehene Ersatzspieler:',
 'eventsheet:Notes': 'Besondere Vorkommnisse:',
 'eventsheet:Protest': 'Protest:',
+'eventsheet:Spectators': 'Zuschauer:',
 'eventsheet:back': 'Zurück',
 'eventsheet:Event Sheet': 'Spielbericht',
 'eventsheet:download empty': 'Leeres Formular',

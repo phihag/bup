@@ -1,7 +1,8 @@
+add spectators field
 turnier.de transmission
 	php: return field representation
-	php: map fields with default values
 	php: load other fields
+	php: map fields with default values
 
 	support without turnier.de-URL (ask for it)
 	show link after finished
@@ -49,6 +50,7 @@ display: teams + stand
 dads referee mode config
 	UI
 	add ad
+	-> msg Steffen
 
 redesign manual as slides
 	photos Tablets

@@ -336,6 +336,7 @@ var i18n_en = {
 'eventsheet:Backup Players': 'Backup players:',
 'eventsheet:Notes': 'Notes:',
 'eventsheet:Protest': 'Protest:',
+'eventsheet:Spectators': 'Spectators:',
 'eventsheet:back': 'Back',
 'eventsheet:Event Sheet': 'Event Report',
 'eventsheet:download empty': 'Download empty form',

@@ -1035,6 +1035,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 				}
 
 				sheet.text('D28', extra_data.notes);
+				sheet.text('D29', extra_data.spectators ? extra_data.spectators + ' Zuschauer' : '');
 				sheet.text('D31', extra_data.protest);
 				sheet.text('V33', 'X'); // Mindestanforderungen
 			});
@@ -1530,8 +1531,8 @@ function ui_init() {
 	var form = $('.eventsheet_form');
 	form.on('submit', function(e) {
 		e.preventDefault();
-		var es_key = $('.eventsheet_container').attr('data-eventsheet_key');
-		var fields = ['umpires', 'location', 'matchday', 'starttime', 'notes', 'backup_players_str', 'protest'];
+		var es_key = uiu.qs('.eventsheet_container').getAttribute('data-eventsheet_key');
+		var fields = ['umpires', 'location', 'matchday', 'starttime', 'notes', 'backup_players_str', 'protest', 'spectators'];
 		var extra_data = utils.map_dict(fields, function(field) {
 			return form.find('[name="' + field + '"]').val();
 		});
@@ -1559,7 +1560,7 @@ function ui_init() {
 function on_fetch() {
 	var event = state.event;
 	var container = uiu.qs('.eventsheet_container');
-	var KEYS = ['location', 'starttime', 'matchday', 'notes', 'protest'];
+	var KEYS = ['location', 'starttime', 'matchday', 'notes', 'protest', 'spectators'];
 	KEYS.forEach(function(k) {
 		if (event[k]) {
 			container.querySelector('[name="' + k + '"]').value = event[k];
@@ -1652,6 +1653,7 @@ function show_dialog(es_key) {
 		uiu.show_qs('.eventsheet_starttime');
 		uiu.show_qs('.eventsheet_backup_players_str');
 		uiu.show_qs('.eventsheet_protest');
+		uiu.hide_qs('.eventsheet_spectators');
 		uiu.visible_qs('label.eventsheet_backup_players_str', true);
 		uiu.visible(preview, false);
 		uiu.visible(download_link_container, false);
@@ -1666,6 +1668,7 @@ function show_dialog(es_key) {
 		uiu.show_qs('.eventsheet_starttime');
 		uiu.show_qs('.eventsheet_backup_players_str');
 		uiu.show_qs('.eventsheet_protest');
+		uiu.show_qs('.eventsheet_spectators');
 		uiu.visible_qs('.eventsheet_report', true);
 		uiu.visible_qs('label.eventsheet_backup_players_str', false);
 		uiu.visible(preview, false);
@@ -1691,8 +1694,12 @@ function show_dialog(es_key) {
 		uiu.hide_qs('.eventsheet_starttime');
 		uiu.hide_qs('.eventsheet_backup_players_str');
 		uiu.hide_qs('.eventsheet_protest');
+		uiu.hide_qs('.eventsheet_spectators');
 		uiu.hide(preview);
 		uiu.hide(download_link_container);
+		break;
+	default:
+		uiu.hide_qs('.eventsheet_spectators');
 	}
 
 	if (DIRECT_DOWNLOAD_SHEETS[es_key]) {
