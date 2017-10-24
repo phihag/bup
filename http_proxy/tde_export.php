@@ -3,13 +3,19 @@ require 'utils.php';
 setup_error_handler();
 
 function _param($name) {
-	if (!isset($_GET[$name])) {
-		header('HTTP/1.1 400 Bad Request');
-		header('Content-Type: text/plain');
-		echo 'Missing ' . $name;
-		exit();
+	if (isset($_POST[$name])) {
+		return $_POST[$name];
 	}
-	return $_GET[$name]; // TODO switch back to POST
+
+	// For debugging, we offer GET too
+	if (isset($_GET[$name])) {
+		return $_GET[$name];
+	}
+
+	header('HTTP/1.1 400 Bad Request');
+	header('Content-Type: text/plain');
+	echo 'Missing ' . $name;
+	exit();
 }
 
 function login($jar, $user, $password) {

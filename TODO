@@ -10,12 +10,8 @@ turnier.de transmission
 	test status (can I still enter after someone entered? show correct error)
 	courtspot: default report_url
 	support with referee mode (with custom creation)
-	switch back to POST for communication with tde_export.php
 	test with btde
 	test with sclive
-	grep for TODOs in urlexport + tde_export.php
-
-test urlimport after ajax changes
 
 #urlexport: back<->forward fails
 
