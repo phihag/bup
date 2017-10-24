@@ -251,9 +251,10 @@ function outer_init(s, page) {
 	var label = uiu.el(url_form, 'label');
 	uiu.el(label, 'span', {}, s._('urlexport:url'));
 	uiu.el(label, 'input', {
+		style: 'margin:0 0.5em;',
 		type: 'url',
 		required: 'required',
-		size: 70,
+		size: 100,
 		name: 'report_url',
 	});
 
@@ -280,14 +281,35 @@ function hide() {
 	}
 }
 
+function supported_league(league_key) {
+	if (eventutils.is_bundesliga(league_key) ||
+			eventutils.NRW2016_RE.test(league_key) ||
+			(league_key === 'RLW-2016') || (league_key === 'RLN-2016') || (league_key === 'RLM-2016')) {
+		return 'turnier.de';
+	}
+}
+
 function render_links(s, container) {
 	uiu.empty(container);
 	var ev = s.event;
-	if (!ev || !ev.report_urls) return;
-	ev.report_urls.forEach(function(r_url) {
-		var domain = utils.domain(r_url);
-		if (! domain) return;
-		
+	if (!ev) return;
+
+	var report_urls = ev.report_urls;
+	var domains;
+	if (report_urls) {
+		domains = utils.filter_map(report_urls, utils.domain);
+	} else {
+		var sup = supported_league(ev.league_key);
+		if (sup) {
+			domains = [sup];
+		}
+	}
+
+	if (!domains) {
+		return;
+	}
+
+	domains.forEach(function(domain) {
 		var link = uiu.el(container, 'a', {
 			href: '#',
 		}, s._('urlexport:link', {
