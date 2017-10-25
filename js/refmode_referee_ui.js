@@ -818,6 +818,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var setupsheet = require('./setupsheet');
 	var stats = require('./stats');
 	var uiu = require('./uiu');
+	var urlexport = require('./urlexport');
 	var utils = require('./utils');
 
 	module.exports = refmode_referee_ui;
