@@ -247,8 +247,8 @@ function init(s, page) {
 
 		uiu.text(status_text, s._('urlexport:preparing'));
 		_make_request({
-			url: BASE_URL + '?action=prepare',
-			data: utils.urlencode({
+			url: BASE_URL + '?action=prepare'/*,
+			data: */+'&'+utils.urlencode({
 				url: r_url,
 				user: user,
 				password: password,
@@ -257,7 +257,13 @@ function init(s, page) {
 				max_game_count: calc.max_game_count(ev.matches[0].setup.counting),
 			}),
 		}, function(data_json) {
-			var data = JSON.parse(data_json);
+			var data = utils.parse_json(data_json);
+			if (!data) {
+				uiu.text(status_text, s._('urlexport:http-error', {code: 'invalid-json'}));
+				status_icon.setAttribute('class', 'error-icon');
+				uiu.addClass(status_text, 'network_error');
+				return;
+			}
 			status.style.visibility = 'hidden';
 
 			uiu.remove(uiu.qs('.urlexport_prepare'));
@@ -362,8 +368,11 @@ function supported_leagues(league_key) {
 	}
 }
 
-function render_links(s, container) {
-	uiu.empty(container);
+function render_links(s, container, append) {
+	if (!append) {
+		uiu.empty(container);
+	}
+
 	var ev = s.event;
 	if (!ev) return;
 

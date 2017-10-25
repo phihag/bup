@@ -1,23 +1,14 @@
-restore eventsheets in Excel
-
 turnier.de transmission
-	test with new interfacce
-	HTTP/1.1: implement with curl
-
-	fix m/f order in MX if wrong
 	keep session cookie between requests
 	check that login is successful
 	automatically relogin if session goes bust
 	confirm result entry by urlimport
 
+	test partial transmission
 	show link all the time
 	test status (can I still enter after someone entered? show correct error)
-	courtspot: default report_url
 	support with referee mode (with custom creation)
-	test with btde
-	test with sclive
 
-remove scoresheet._svg_el in favor of uiu.svg_el
 #urlexport: back<->forward fails
 
 tde_import matches should have match_id
@@ -192,7 +183,6 @@ referee mode via webrtc
 
 dmode berlin (red border: finished, green border: serving)
 displaymode: option to reset colors
-excel 1BL-2017 scoresheets: umpire name
 dayimport in normal import view (unify with #mo import)
 automatic testing to see that setupsheet works (with browser)
 d/onlyplayers: correctly handle case where no icon is present (at the moment 404)
@@ -286,7 +276,6 @@ write castdyn (see later mail from Dieter)
 event changing fails to push!
 import y.json does not import everything!?
 refmode: on clicking show service judges immediately rerender
-note excel issue in mail, note issue with old bups
 eventsheet error does not get deleted
 	1. generate from localhost/bup while in eventsheet
 	2. load import

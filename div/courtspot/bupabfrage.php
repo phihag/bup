@@ -1,5 +1,4 @@
 <?php
-
 set_error_handler('json_error_handler');
 
 include '../../DB_connection.php';
@@ -255,6 +254,13 @@ if ($verwaltung['Spieltag']) {
 }
 if ($verwaltung['Ort']) {
 	$res['location'] = $verwaltung['Ort'];
+}
+if ($verwaltung['URL']) {
+	$tde_url = $verwaltung['URL'];
+	if (preg_match('/^teammatch/', $tde_url)) {
+		$tde_url = 'http://www.turnier.de/sport/' . $tde_url;
+	}
+	$res['report_urls'] = [$tde_url];
 }
 
 if (array_key_exists('all_players', $_GET)) {

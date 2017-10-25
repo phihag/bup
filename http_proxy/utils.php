@@ -6,12 +6,16 @@ function setup_error_handler() {
 }
 
 function json_exception_handler($exception) {
-	json_err($exception->getMessage());
+	json_err(
+		'php exception: ' .
+		$exception->getMessage() .
+		' at ' . $exception->getFile() . ':' . $exception->getLine()
+	);
 }
 
 function json_error_handler($level, $errstr, $errfile, $errline) {
 	if ((error_reporting() & $level) !== 0) {
-		json_err('php error: ' . $errstr. ' (Line ' . $errline . ')');
+		json_err('php error: ' . $errstr. ' (' . $errfile . ':' . $errline . ')');
 	}
 }
 
@@ -42,31 +46,4 @@ function decode_html($html) {
 	return preg_replace_callback('/(&#[0-9]+;)/', function($m) {
 		return mb_convert_encoding($m[1], 'UTF-8', 'HTML-ENTITIES');
 	}, $named);
-}
-
-
-class CookieJar {
-	private $jar;
-
-	public function __construct() {
-		$this->jar = [];
-	}
-
-	public function read_from_stream($f) {
-		$meta = stream_get_meta_data($f);
-		$headers = $meta['wrapper_data'];
-		foreach ($headers as $h) {
-			if (\preg_match('/^Set-Cookie:\s*([A-Za-z_0-9.-]+)=(.*?)(?:$|;)/', $h, $m)) {
-				$this->jar[$m[1]] = $m[2];
-			}
-		}
-	}
-
-	public function make_header() {
-		$res = 'Cookie:';
-		foreach ($this->jar as $k => $v) {
-			$res .= ' ' . $k . '=' . $v . ';';
-		}
-		return $res . "\r\n";
-	}
 }

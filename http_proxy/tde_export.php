@@ -1,6 +1,7 @@
 <?php
 require 'utils.php';
 setup_error_handler();
+require 'http_utils.php';
 
 function _param($name) {
 	if (isset($_POST[$name])) {
@@ -18,17 +19,13 @@ function _param($name) {
 	exit();
 }
 
-function login($jar, $user, $password) {
+function login($httpc, $user, $password) {
 	// Download login form
 	$login_url = 'https://www.turnier.de/member/login.aspx';
-	$f = fopen($login_url, 'r');
-	if ($f === false) {
+	$login_page = $httpc->request($login_url);
+	if ($login_page === false) {
 		return json_err('Failed to download login form');
 	}
-	$jar->read_from_stream($f);
-	$login_page = stream_get_contents($f);
-	fclose($f);
-
 	$LOGIN_RE = '/<form method="post" action="[^"]*login\.aspx"[^>]*>(.*?)<\/form>/s';
 	if (!preg_match($LOGIN_RE, $login_page, $matches)) {
 		json_err('Cannot find login form');
@@ -46,27 +43,18 @@ function login($jar, $user, $password) {
 	$data['ctl00$ctl00$ctl00$cphPage$cphPage$cphPage$pnlLogin$Password'] = $password;
 
 	// Perform login
-	$header = (
-		'Referer:' . $login_url . "\r\n" .
-		"Content-type: application/x-www-form-urlencoded\r\n" .
-		$jar->make_header()
-	);
-	$options = [
-		'http' => [
-			'header'  => $header,
-			'method'  => 'POST',
-			'content' => \http_build_query($data),
-			'follow_location' => 0,
+	$postlogin_page = $httpc->request(
+		$login_url,
+		[
+			'Content-Type: application/x-www-form-urlencoded',
+			'Referer:' . $login_url
 		],
-	];
-	$context = stream_context_create($options);
-	$f = fopen($login_url, 'r', false, $context);
-	if ($f === false) {
-		return json_err('Failed to perform login');
+		'POST',
+		\http_build_query($data)
+	);
+	if ($postlogin_page === false) {
+		json_err('Failed to perform login');
 	}
-	$jar->read_from_stream($f);
-	$postlogin_page = stream_get_contents($f);
-	fclose($f);
 
 	if (\preg_match('/<span class="error">(.*?)<\/span>/', $postlogin_page, $m)) {
 		json_err('Login failed: ' . $m[1]);
@@ -131,24 +119,14 @@ if (($action === 'prepare') || ($action === 'submit')) {
 	$matches = \json_decode(_param('matches_json'), true);
 	$max_game_count = \intval(_param('max_game_count'));
 
-	$jar = new CookieJar();
-	login($jar, $user, $password);
+	$httpc = AbstractHTTPClient::make();
+	login($httpc, $user, $password);
 
 	$input_url = 'https://www.turnier.de/sport/matchresult.aspx?id=' . $tde_id . '&match=' . $tde_tm;
-	$options = [
-		'http' => [
-			'header'  => $jar->make_header(),
-			'follow_location' => 0,
-		],
-	];
-	$context = stream_context_create($options);
-	$f = fopen($input_url, 'r', false, $context);
-	if ($f === false) {
+	$input_page = $httpc->request($input_url);
+	if ($input_page === false) {
 		return json_err('Failed to download input page');
 	}
-	$jar->read_from_stream($f);
-	$input_page = stream_get_contents($f);
-	fclose($f);
 
 	if (!preg_match('/"ALCID":([0-9]+)/', $input_page, $m)) {
 		json_err('Cannot find ALCID');
@@ -277,25 +255,15 @@ if (($action === 'prepare') || ($action === 'submit')) {
 		];
 
 		$submit_url = 'https://www.turnier.de/extension/matchvalidation.aspx/ValidateMatch';
-		$options = [
-			'http' => [
-				'header' => (
-					"Content-Type: application/json; charset=UTF-8\r\n" .
-					$jar->make_header()
-				),
-				'follow_location' => 0,
-				'method' => 'POST',
-				'content' => \json_encode($data),
-			],
-		];
-		$context = stream_context_create($options);
-		$f = fopen($submit_url, 'r', false, $context);
-		if ($f === false) {
+		$validate_page = $httpc->request(
+			$submit_url,
+			['Content-Type: application/json; charset=UTF-8'],
+			'POST',
+			\json_encode($data)
+		);
+		if ($validate_page === false) {
 			return json_err('Failed to send ValidateMatch');
 		}
-		$jar->read_from_stream($f);
-		$validate_page = stream_get_contents($f);
-		fclose($f);
 
 		$user_extra_fields_json = _param('extra_fields_json');
 		$user_extra_fields = json_decode($user_extra_fields_json, true);
@@ -321,26 +289,15 @@ if (($action === 'prepare') || ($action === 'submit')) {
 			'AMinute' => 0,
 			'AMatchID' => $tde_tm,
 		];
-
-		$options = [
-			'http' => [
-				'header' => (
-					"Content-Type: application/json; charset=UTF-8\r\n" .
-					$jar->make_header()
-				),
-				'follow_location' => 0,
-				'method'  => 'POST',
-				'content' => \json_encode($data),
-			],
-		];
-		$context = stream_context_create($options);
-		$f = fopen($save_url, 'r', false, $context);
-		if ($f === false) {
+		$save_page = $httpc->request(
+			$save_url,
+			['Content-Type: application/json; charset=UTF-8'],
+			'POST',
+			\json_encode($data)
+		);
+		if ($save_page === false) {
 			return json_err('Failed to send SaveMatch');
 		}
-		$jar->read_from_stream($f);
-		$save_page = stream_get_contents($f);
-		fclose($f);
 
 		send_json([
 			'status' => 'saved',
