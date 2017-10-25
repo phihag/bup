@@ -126,7 +126,7 @@ function ui_init() {
 		uiu.text(status, state._('importexport:export sent'));
 		window.setTimeout(function() {
 			uiu.text(status, '');
-		}, 2000);
+		}, 10000);
 	});
 }
 
