@@ -699,7 +699,7 @@ function render_event(s) {
 	click.on(export_link, function() {
 		importexport.ui_export_json(s);
 	});
-	urlexport.render_links(links_container, s, true);
+	urlexport.render_links(s, links_container, true);
 
 	uiu.text_qs('.referee_e_title', ev.event_name);
 	document.title = ev.event_name;
