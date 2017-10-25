@@ -107,14 +107,18 @@ function text_qs(selector, str) {
 	text(qs(selector), str);
 }
 
-function ns_el(parent, ns, tagName, attrs, text) {
-	var doc = parent ? parent.ownerDocument : document;
-	var el = doc.createElementNS(ns, tagName);
-	if (attrs) {
-		for (var k in attrs) {
-			el.setAttribute(k, attrs[k]);
+function attrs(el, init_attrs) {
+	if (init_attrs) {
+		for (var k in init_attrs) {
+			el.setAttribute(k, init_attrs[k]);
 		}
 	}
+}
+
+function ns_el(parent, ns, tagName, init_attrs, text) {
+	var doc = parent ? parent.ownerDocument : document;
+	var el = doc.createElementNS(ns, tagName);
+	attrs(el, init_attrs);
 	if ((text !== undefined) && (text !== null)) {
 		el.appendChild(doc.createTextNode(text));
 	}
@@ -124,19 +128,15 @@ function ns_el(parent, ns, tagName, attrs, text) {
 	return el;
 }
 
-function el(parent, tagName, attrs, text) {
+function el(parent, tagName, init_attrs, text) {
 	var doc = parent ? parent.ownerDocument : document;
 	var el = doc.createElement(tagName);
-	if (attrs) {
-		if (typeof attrs === 'string') {
-			attrs = {
-				'class': attrs,
-			};
-		}
-		for (var k in attrs) {
-			el.setAttribute(k, attrs[k]);
-		}
+	if (typeof init_attrs === 'string') {
+		init_attrs = {
+			'class': init_attrs,
+		};
 	}
+	attrs(el, init_attrs);
 	if ((text !== undefined) && (text !== null)) {
 		el.appendChild(doc.createTextNode(text));
 	}
@@ -209,6 +209,7 @@ function closest_class(el, className) {
 return {
 	addClass: addClass,
 	addClass_qs: addClass_qs,
+	attrs: attrs,
 	closest: closest,
 	closest_class: closest_class,
 	disabled_qsa: disabled_qsa,

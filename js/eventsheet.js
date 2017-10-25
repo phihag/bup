@@ -1030,11 +1030,13 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 
 			var thick_border_id = xlsx_file.add_border('medium');
 			var thick_center_style_id = xlsx_file.add_style(function(xf) {
-				xf.setAttribute('fontId', 0);
-				xf.setAttribute('borderId', thick_border_id);
-				xf.setAttribute('xfId', 0);
-				xf.setAttribute('applyBorder', 1);
-				xf.setAttribute('applyAlignment', 1);
+				uiu.attrs(xf, {
+					numFmtId: 0,
+					borderId: thick_border_id,
+					xfId: 0,
+					applyBorder: 1,
+					applyAlignment: 1,
+				});
 				uiu.ns_el(xf, xlsx.NS, 'alignment', {
 					horizontal: 'center',
 					vertical: 'center',

@@ -34,7 +34,7 @@ Element.prototype.setAttribute = function(k, v) {
 	this.attributes[k] = v;
 };
 Element.prototype.getAttribute = function(k) {
-	return this.attributes[k] || '';
+	return this.attributes[k] ? ('' + this.attributes[k]) : '';
 };
 Element.prototype.appendChild = function(node) {
 	this.childNodes.push(node);

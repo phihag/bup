@@ -175,9 +175,9 @@ function open(ui8r, cb) {
 		function add_border(thickness) {
 			var style_doc = book._style_doc;
 			var container = style_doc.querySelector('borders');
-			var el = uiu.el(container, 'border');
+			var el = uiu.ns_el(container, NS, 'border');
 			['left', 'right', 'top', 'bottom'].forEach(function(direction) {
-				var d = uiu.el(el, direction, {
+				var d = uiu.ns_el(el, NS, direction, {
 					style: thickness,
 				});
 				uiu.el(d, 'color', {indexed: 64});

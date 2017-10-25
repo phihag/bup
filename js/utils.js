@@ -230,12 +230,12 @@ function range(n) {
 	return res;
 }
 
-function svg_el(parent, tagName, attrs, text) {
+function svg_el(parent, tagName, init_attrs, text) {
 	var doc = parent.ownerDocument;
 	var el = doc.createElementNS('http://www.w3.org/2000/svg', tagName);
-	if (attrs) {
-		for (var k in attrs) {
-			el.setAttribute(k, attrs[k]);
+	if (init_attrs) {
+		for (var k in init_attrs) {
+			el.setAttribute(k, init_attrs[k]);
 		}
 	}
 	if (text !== undefined) {

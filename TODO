@@ -1,6 +1,9 @@
+restore eventsheets in Excel
+
 turnier.de transmission
 	test with new interfacce
 	HTTP/1.1: implement with curl
+
 	fix m/f order in MX if wrong
 	keep session cookie between requests
 	check that login is successful
@@ -14,10 +17,10 @@ turnier.de transmission
 	test with btde
 	test with sclive
 
+remove scoresheet._svg_el in favor of uiu.svg_el
 #urlexport: back<->forward fails
 
 tde_import matches should have match_id
-restore scoresheets in Excel
 2felder: testen mit mac-Auflösung (@800x600)
 
 editevent crashes after mo -> mail Werner Durow
