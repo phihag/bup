@@ -1,10 +1,11 @@
 turnier.de transmission
-	HTTP/1.1
-	confirm result entry by urlimport
+	test with new interfacce
+	HTTP/1.1: implement with curl
 	fix m/f order in MX if wrong
-	keep session between requests
+	keep session cookie between requests
 	check that login is successful
 	automatically relogin if session goes bust
+	confirm result entry by urlimport
 
 	show link all the time
 	test status (can I still enter after someone entered? show correct error)
@@ -180,6 +181,8 @@ error reporting courtspot
 open scoresheets link in new tab
 
 *_pause displays: synchronize clocks
+
+https://developers.google.com/web/fundamentals/app-install-banners/
 
 referee mode via webrtc
 	bootstrap from courtspot	
