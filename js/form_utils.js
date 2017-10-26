@@ -6,11 +6,11 @@ function onsubmit(form, cb) {
 	form.addEventListener('submit', function(e) {
 		e.preventDefault();
 
-		var fd = new FormData(form);
-		var entries = Array.from(fd.entries());
 		var data = {};
-		entries.forEach(function(e) {
-			data[e[0]] = e[1];
+		utils.forEach(e.target.elements, function(el) {
+			if (el.name && el.value) {
+				data[el.name] = el.value;
+			}
 		});
 		cb(data);
 	});
