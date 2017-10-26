@@ -235,7 +235,12 @@ if (($action === 'prepare') || ($action === 'submit')) {
 				json_err('Cannot find match ' . $rm['name']);
 			}
 
-			$sets = \array_map(function($game_id, $score_str) {
+			$sets = \array_map(function($score_str, $game_id) use($match) {
+				if (! preg_match('/^(?:[0-9]+-[0-9]+)?$/', $score_str)) {
+					json_err(
+						'Invalid score string ' . json_encode($score_str) .
+						' in match ' . $match['name']);
+				}
 				return [
 					'SetID' => ($game_id + 1),
 					'SetValue' => $score_str,
