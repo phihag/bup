@@ -27,5 +27,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	module.exports = form_utils;
+
+	var utils = require('./utils');
 }
 /*/@DEV*/
