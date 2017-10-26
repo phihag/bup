@@ -247,8 +247,8 @@ function init(s, page) {
 
 		uiu.text(status_text, s._('urlexport:preparing'));
 		_make_request({
-			url: BASE_URL + '?action=prepare'/*,
-			data: */+'&'+utils.urlencode({
+			url: BASE_URL + '?action=prepare',
+			data: utils.urlencode({
 				url: r_url,
 				user: user,
 				password: password,
@@ -285,6 +285,7 @@ function init(s, page) {
 					url: BASE_URL + '?action=submit',
 					data: utils.urlencode({
 						url: r_url,
+						cookies: data.cookies,
 						user: user,
 						password: password,
 						team_names: JSON.stringify(ev.team_names),
@@ -312,7 +313,8 @@ function init(s, page) {
 						href: data.result_url,
 						target: '_blank',
 						rel: 'noopener noreferrer',
-					});
+						style: 'display:block;margin-bottom:1em;',
+					}, data.result_url);
 				});
 			});
 		});

@@ -1,13 +1,9 @@
 turnier.de transmission
-	keep session cookie between requests
 	check that login is successful
 	automatically relogin if session goes bust
 	confirm result entry by urlimport
 
-	test partial transmission
-	show link all the time
-	test status (can I still enter after someone entered? show correct error)
-	support with referee mode (with custom creation)
+	test transmission when tm not finished yet
 
 #urlexport: back<->forward fails
 

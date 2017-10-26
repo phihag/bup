@@ -19,9 +19,9 @@ function _param($name) {
 	exit();
 }
 
-function login($httpc, $user, $password) {
+function login($httpc, $url_base, $user, $password) {
 	// Download login form
-	$login_url = 'https://www.turnier.de/member/login.aspx';
+	$login_url = $url_base . 'member/login.aspx';
 	$login_page = $httpc->request($login_url);
 	if ($login_page === false) {
 		return json_err('Failed to download login form');
@@ -110,19 +110,30 @@ if (($action === 'prepare') || ($action === 'submit')) {
 	$user = _param('user');
 	$password = _param('password');
 	$url = _param('url');
-	if (!\preg_match('/^https:\/\/www\.turnier\.de\/sport\/teammatch\.aspx\?id=([-A-Fa-f0-9]+)&match=([0-9]+)$/', $url, $m)) {
+	if (!\preg_match('/^(https:\/\/www\.turnier\.de\/)sport\/teammatch\.aspx\?id=([-A-Fa-f0-9]+)&match=([0-9]+)$/', $url, $m)) {
 		json_err('Unsupported URL ' . $url);
 	}
-	$tde_id = $m[1];
-	$tde_tm = $m[2];
+	$url_base = $m[1];
+	$tde_id = $m[2];
+	$tde_tm = $m[3];
 	$team_names = \json_decode(_param('team_names'), true);
 	$matches = \json_decode(_param('matches_json'), true);
 	$max_game_count = \intval(_param('max_game_count'));
 
 	$httpc = AbstractHTTPClient::make();
-	login($httpc, $user, $password);
+	$cookies_json = (
+		isset($_POST['cookies_json']) ? $_POST['cookies_json'] :
+		(isset($_GET['cookies_json']) ? $_GET['cookies_json'] : false
+	));
+	$cookies = $cookies_json ? json_decode($cookies_json) : null;
+	if ($cookies) {
+		$httpc->set_all_cookies($cookies);
+	} else {
+		login($httpc, $url_base, $user, $password);
+	}
+	// TODO test that login was successful
 
-	$input_url = 'https://www.turnier.de/sport/matchresult.aspx?id=' . $tde_id . '&match=' . $tde_tm;
+	$input_url = $url_base . 'sport/matchresult.aspx?id=' . $tde_id . '&match=' . $tde_tm;
 	$input_page = $httpc->request($input_url);
 	if ($input_page === false) {
 		return json_err('Failed to download input page');
@@ -172,9 +183,6 @@ if (($action === 'prepare') || ($action === 'submit')) {
 			json_err('Could not find match ' . $match['name'] . ' online');
 		}
 		$match['tde_id'] = $rm['tde_id'];
-		if (! $match['winner_code']) {
-			json_err('Invalid winner_code for ' . $match['name']);
-		}
 
 		foreach ($match['players'] as $team_id=>&$team) {
 			foreach ($team as &$player) {
@@ -193,7 +201,7 @@ if (($action === 'prepare') || ($action === 'submit')) {
 
 		$score_strs = [];
 		for ($i = 0;$i < $max_game_count;$i++) {
-			if (\array_key_exists($i, $match['score'])) {
+			if (isset($match['score']) && \array_key_exists($i, $match['score'])) {
 				$score = $match['score'][$i];
 				$score_strs[] = $score[0] . '-' . $score[1];
 			}
@@ -216,6 +224,7 @@ if (($action === 'prepare') || ($action === 'submit')) {
 		send_json([
 			'matches' => $matches,
 			'extra_fields' => $extra_fields,
+			'cookies' => $httpc->get_all_cookies(),
 		]);
 	} else { // submit
 		$sub_matches = \array_map(function($rm) use($matches) {
@@ -254,7 +263,7 @@ if (($action === 'prepare') || ($action === 'submit')) {
 			'ALCID' => $alcid,
 		];
 
-		$submit_url = 'https://www.turnier.de/extension/matchvalidation.aspx/ValidateMatch';
+		$submit_url = $url_base . 'extension/matchvalidation.aspx/ValidateMatch';
 		$validate_page = $httpc->request(
 			$submit_url,
 			['Content-Type: application/json; charset=UTF-8'],
@@ -277,7 +286,7 @@ if (($action === 'prepare') || ($action === 'submit')) {
 			];
 		}
 
-		$save_url = 'https://www.turnier.de/extension/matchvalidation.aspx/SaveMatch';
+		$save_url = $url_base . 'extension/matchvalidation.aspx/SaveMatch';
 		$data = [
 			'ACode' => $tde_id,
 			'AExtraItemList' => $extra_items,

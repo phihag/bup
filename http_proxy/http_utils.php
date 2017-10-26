@@ -38,6 +38,20 @@ class CookieJar {
 	public function get($name) {
 		return $this->jar[$name];
 	}
+
+	public function set($name, $val) {
+		$this->jar[$name] = $val;
+	}
+
+	public function get_all() {
+		return $this->jar;
+	}
+
+	public function set_all($cookies) {
+		foreach ($cookies as $k => $v) {
+			$this->set($k, v);
+		}
+	}
 }
 
 abstract class AbstractHTTPClient {
@@ -53,6 +67,8 @@ abstract class AbstractHTTPClient {
 	}
 
 	abstract public function get_cookie($name);
+	abstract public function set_cookie($name, $val);
+	abstract public function get_all_cookies();
 
 	/**
 	* Returns the response body, or false if the request failed.
@@ -60,12 +76,34 @@ abstract class AbstractHTTPClient {
 	abstract public function request($url, $headers=null, $method='GET', $body=null);
 }
 
-class PhpHTTPClient extends AbstractHTTPClient {
-	private $cjar;
+abstract class JarHTTPClient extends AbstractHTTPClient {
+	protected $cjar;
 
 	public function __construct() {
 		parent::__construct();
 		$this->cjar = new CookieJar();
+	}
+
+	public function get_cookie($name) {
+		return $this->cjar->get($name);
+	}
+
+	public function set_cookie($name, $val) {
+		$this->cjar->set($name, $val);
+	}
+
+	public function get_all_cookies() {
+		return $this->cjar->get_all();
+	}
+
+	public function set_all_cookies($cookies) {
+		$this->cjar->set_all($cookies);
+	}
+}
+
+class PhpHTTPClient extends JarHTTPClient {
+	public function __construct() {
+		parent::__construct();
 	}
 
 	public function request($url, $headers=null, $method='GET', $body=null) {
@@ -95,19 +133,13 @@ class PhpHTTPClient extends AbstractHTTPClient {
 		fclose($f);
 		return $page;
 	}
-
-	public function get_cookie($name) {
-		return $this->cjar->get($name);
-	}
 }
 
-class CurlHTTPClient extends AbstractHTTPClient {
+class CurlHTTPClient extends JarHTTPClient {
 	private $ch;
-	private $cjar;
 
 	public function __construct() {
 		parent::__construct();
-		$this->cjar = new CookieJar();
 		$this->ch = curl_init();
 		curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($this->ch, CURLOPT_FAILONERROR, true);
@@ -134,9 +166,5 @@ class CurlHTTPClient extends AbstractHTTPClient {
 
 	public static function is_supported() {
 		return function_exists('curl_version');
-	}
-
-	public function get_cookie($name) {
-		return $this->cjar->get($name);
 	}
 }
