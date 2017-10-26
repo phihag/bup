@@ -1,5 +1,5 @@
 DirectoryIndex slides.html
 
 RewriteEngine On
-RewriteRule ^(.*)manual.de.html "%{REQUEST_SCHEME}://%{HTTP_HOST}/x%{PATH_INFO}y/slide" [R=302]
-#RewriteRule ^manual.de.html$ "" [R=301]
+#RewriteRule ^(.*)manual.de.html "%{REQUEST_SCHEME}://%{HTTP_HOST}/x%{PATH_INFO}y/slide" [R=302]
+RewriteRule ^(.*)manual.de.html "https://aufschlagwechsel.de/bup/doc/" [R=302]
