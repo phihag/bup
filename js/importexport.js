@@ -11,6 +11,7 @@ function load_data(s, data) {
 
 	if (data.version >= 2) {
 		eventutils.annotate(s, data.event);
+		eventutils.set_incomplete(data.event);
 	}
 
 	return data;

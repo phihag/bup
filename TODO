@@ -1,11 +1,3 @@
-redesign manual as slides
-	check all fragments
-
-incomplete not corretly set!
-	test with bldemo_incomplete: eventutils.* should set it
-
-
-
 improve manual:
 	vertical align: header at very top, rest below that
 	generate PDF
