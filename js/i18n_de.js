@@ -140,7 +140,7 @@ var i18n_de = {
 
 'demo:team1': '1. BC Beuel',
 'demo:player1.1': 'Max Weißkirchen',
-'demo:player1.2': 'Eva Janssens',
+'demo:player1.2': 'Hannah Pohl',
 'demo:team2': '1.BC Sbr.-Bischmisheim',
 'demo:player2.1': 'Marvin Seidel',
 'demo:player2.2': 'Isabel Herttrich',

@@ -71,7 +71,15 @@ function main() {
 		});
 	}, function(libs, cb) {
 		async.each(libs, (lib, cb) => {
-			download_file_ifneeded(lib.url, path.join(lib_dir, lib.file), cb);
+			let basename = lib.file;
+			if (!basename) {
+				const m = /\/([-a-z0-9A-Z._]+)$/.exec(lib.url);
+				if (!m) {
+					return cb(new Error('Cannot determine basename of ' + lib.url));
+				}
+				basename = m[1];
+			}
+			download_file_ifneeded(lib.url, path.join(lib_dir, basename), cb);
 		}, cb);
 	}], function(err) {
 		if (err) throw err;

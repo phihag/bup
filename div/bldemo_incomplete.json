@@ -31,7 +31,7 @@
             {
               "players": [
                 {
-                  "name": "Michael Fuchs"
+                  "name": "Ruben Jille"
                 },
                 {
                   "name": "Peter Käsbauer"
@@ -48,27 +48,12 @@
           "match_name": "DD",
           "teams": [
             {
-              "players": [
-                {
-                  "name": "Carla Nelte"
-                },
-                {
-                  "name": "Jennifer Karnott"
-                }
-              ]
+              "players": []
             },
             {
-              "players": [
-                {
-                  "name": "Samantha Barning"
-                },
-                {
-                  "name": "Isabel Herttrich"
-                }
-              ]
+              "players": []
             }
           ],
-
           "is_doubles": true,
           "match_id": "bldemo_DD"
         }
@@ -79,24 +64,10 @@
           "match_name": "2.HD",
           "teams": [
             {
-              "players": [
-                {
-                  "name": "Fabian Roth"
-                },
-                {
-                  "name": "Richard Domke"
-                }
-              ]
+              "players": []
             },
             {
-              "players": [
-                {
-                  "name": "Marc Zwiebler"
-                },
-                {
-                  "name": "Johannes Schöttler"
-                }
-              ]
+              "players": []
             }
           ],
           "is_doubles": true,
@@ -108,18 +79,10 @@
           "match_name": "1.HE",
           "teams": [
             {
-              "players": [
-                {
-                  "name": "Fabian Roth"
-                }
-              ]
+              "players": []
             },
             {
-              "players": [
-                {
-                  "name": "Marc Zwiebler"
-                }
-              ]
+              "players": []
             }
           ],
           "is_doubles": false,
@@ -131,18 +94,10 @@
           "match_name": "DE",
           "teams": [
             {
-              "players": [
-                {
-                  "name": "Chloe Magee"
-                }
-              ]
+              "players": []
             },
             {
-              "players": [
-                {
-                  "name": "Olga Konon"
-                }
-              ]
+              "players": []
             }
           ],
           "is_doubles": false,
@@ -154,24 +109,10 @@
           "match_name": "GD",
           "teams": [
             {
-              "players": [
-                {
-                  "name": "Sam Magee"
-                },
-                {
-                  "name": "Carla Nelte"
-                }
-              ]
+              "players": []
             },
             {
-              "players": [
-                {
-                  "name": "Michael Fuchs"
-                },
-                {
-                  "name": "Isabel Herttrich"
-                }
-              ]
+              "players": []
             }
           ],
           "is_doubles": true,
@@ -183,15 +124,12 @@
           "match_name": "2.HE",
           "teams": [
             {
-              "players": [
-              ]
+              "players": []
             },
             {
-              "players": [
-              ]
+              "players": []
             }
           ],
-          "incomplete": true,
           "is_doubles": false,
           "match_id": "bldemo_HE2"
         }
@@ -202,51 +140,18 @@
     "tournament_name": "Demo",
     "team_names": ["TV Refrath", "BC Bischmisheim"],
     "location": "SpH Steinbreche",
-    "protest": "Coaching-Stühle zu gemütlich",
-    "umpires": "Barbara Bub & Markus Schwendtner",
     "starttime": "19:00",
     "matchday": "Finale",
-    "notes": "",
     "backup_players": [[{
       "name": "Dennis Nyenhuis",
       "gender": "m",
       "ranking": 9,
       "ranking_d": 7
-    }, {
-      "name": "Elin Svensson",
-      "gender": "f",
-      "ranking": 5
-    }], [{
-      "name": "Marvin Seidel",
-      "gender": "m",
-      "ranking": 7,
-      "ranking_d": 4
-    }, {
-      "name": "Simon Wang",
-      "gender": "m",
-      "ranking": 5,
-      "ranking_d": 7
-    }]],
-    "present_players": [[{
-      "name": "Mark Byerly",
-      "gender": "m",
-      "ranking": 8
-    }, {
-      "name": "Ya Lan Chang",
-      "gender": "f",
-      "ranking": 3
-    }], [{
-      "name": "Matthias Deininger",
-      "gender": "m",
-      "ranking": 9
-    }, {
-      "name": "Nadia Frankhauser",
-      "gender": "f",
-      "ranking": 5
-    }]],
+    }], []],
+    "present_players": [[], []],
     "all_players": [
       [
-        {"gender": "m", "name": "Fabian Roth", "ranking": 1, "ranking_d": 6},
+        {"gender": "m", "name": "Nhat Nguyen", "ranking": 1, "ranking_d": 6},
         {"gender": "m", "name": "Giap Chin Goh", "ranking": 2, "ranking_d": 9, "nationality": "MAS"},
         {"gender": "m", "name": "Sam Magee", "ranking": 3, "ranking_d": 1, "nationality": "IRL"},
         {"gender": "m", "name": "Fabian Holzer", "ranking": 4, "ranking_d": 2},
@@ -259,15 +164,15 @@
         {"gender": "m", "name": "Kai Waldenberger", "ranking": 11},
         {"gender": "f", "name": "Chloe Magee", "ranking": 1, "nationality": "IRL"},
         {"gender": "f", "name": "Carla Nelte", "ranking": 2},
-        {"gender": "f", "name": "Ya Lan Chang", "ranking": 3, "nationality": "TPE"},
         {"gender": "f", "name": "Jennifer Karnott", "ranking": 3},
+        {"gender": "f", "name": "Annika Dörr", "ranking": 4},
         {"gender": "f", "name": "Elin Svensson", "ranking": 5, "nationality": "SWE"},
         {"gender": "f", "name": "Runa Plützer", "ranking": 6}
       ],
       [
-        {"gender": "m", "name": "Marc Zwiebler", "ranking": 1, "ranking_d": 5},
+        {"gender": "m", "name": "Fabian Roth", "ranking": 1, "ranking_d": 5},
         {"gender": "m", "name": "Dieter Domke", "ranking": 2, "ranking_d": 6},
-        {"gender": "m", "name": "Michael Fuchs", "ranking": 3, "ranking_d": 1},
+        {"gender": "m", "name": "Ruben Jille", "ranking": 3, "ranking_d": 1},
         {"gender": "m", "name": "Peter Käsbauer", "ranking": 4, "ranking_d": 2},
         {"gender": "m", "name": "Simon Wang", "ranking": 5, "ranking_d": 7},
         {"gender": "m", "name": "Marvin Seidel", "ranking": 7, "ranking_d": 4},
@@ -282,7 +187,7 @@
         {"gender": "f", "name": "Lisa Heidenreich", "ranking": 6}
       ]
     ],
-    "league_key": "1BL-2016",
+    "league_key": "1BL-2017",
     "team_competition": true
   }
 }

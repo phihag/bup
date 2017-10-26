@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Badminton Umpire Panel: Dokumentation</title>
+<meta name="viewport" content="width=device-width" />
+<link rel="shortcut icon" type="image/png" href="../icons/favicon.png"/>
+
+<link rel="stylesheet" href="libs/reveal.css">
+<link rel="stylesheet" href="slides.css">
+</head>
+<body>
+
+<div class="reveal">
+
+<div class="slides">
+<section data-background="pics/front-background.png" data-background-size="1400px 1000px" class="front">
+<h1 class="title">bup-Handbuch</h1>
+<div class="title-sub"><strong>B</strong>adminton <strong>U</strong>mpire <strong>P</strong>anel</div>
+</section>
+
+<section id="ticker">
+<h2>bup: Badminton Umpire Panel</h2>
+
+<div class="test-now" style="text-align:left;margin-bottom:0.5em;"><a rel="noopener" target="_blank" href="https://aufschlagwechsel.de/bup/#bldemo">Sofort ausprobieren!</a></div>
+
+<div>bup ist in verschiedene Ticker integriert, u.a.</div>
+<ul>
+<li><a rel="noopener" target="_blank" href="http://www.badmintonticker.de/">badmintonticker.de</a></li>	
+<li><a rel="noopener" target="_blank" href="https://courtspot.de/">CourtSpot</a></li>
+<li><a rel="noopener" target="_blank" href="https://shuttlecock-live.com/">shuttlecock-live</a></li>
+<li>Für Turniere: <a href="https://github.com/phihag/bts/">bts</a> (in Entwicklung)</li>
+</ul>
+
+<p>bup ist kostenlos und kann mit dem Erwerb des Tickers sofort genutzt werden.</p>
+</section>
+
+<section id="tablets">
+<h2>Schiedsrichter-Tablets</h2>
+
+<div>Empfehlungen:</div>
+<ul>
+<li>Android 4.1+ (mit Chrome)</li>
+<li>iPad 4+/mini 2+/Pro</li>
+<li>Laptop mit modernem Webbrowser</li>
+</ul>
+
+<p>Fast alle halbwegs modernen Geräte genügen. Im Zweifel einfach mal mit <a href="https://aufschlagwechsel.de/bup/#bldemo">der Demo-Webseite</a> ausprobieren.</p>
+<p>Die meisten Schiedsrichter bevorzugen große Tablets; 9"-12" sind optimal.</p>
+<p>Optional: Tablet-Stifte (für besonders schwitzige Schiedsrichterhände)</p>
+</section>
+
+<section id="halterungen">
+<img alt="Am Schiedsrichterstuhl montiertes Tablet" src="pics/halterung.jpg" style="float:right; width: 400px;"/>
+<h2>Tablet-Halterungen</h2>
+<p>Optional, aber empfehlenswert</p>
+<p>Zahlreiche Anbieter, ggf. suchen nach <em>Tablet-Halterung</em> oder <em>Tablet-Ständer</em>.</p>
+<p>Sehr gut und kompakt, aber teuer: <a href="http://www.chargercity.com/Heavy-Duty-4-WAY-Multi-Adjustable-Joint-Aluminum-Alloy-Microphone-Muisc-PoleBar-Clamp-Mount-c-4238-p-732.html" rel="noopener" target="_blank">ChargerCity 4-Wege-Ständer</a></p>
+</section>
+
+<section id="tvs">
+<img alt="Raspberry Pi an fernseher" src="pics/tv-pi.jpg" style="float:right; width: 300px;"/>
+<h2>Fernseher / Beamer</h2>
+
+<p>Empfehlenswert: Mindestens 1 Fernseher pro Feld, etwa 50"</p>
+
+<p>Alternativ: 1 Beamer</p>
+
+<table>
+<thead>
+<tr><th>Ansteuerung</th><th style="text-align:right;">~€</th><th>Bedienung</th>
+</thead>
+<tbody>
+<tr><td>Smart-TV</td><td style="text-align:right;">0</td><td><span style="color:red;display:inline-block;width:0.5em;text-align:center;">-</span> Fernbedienung</td>
+<tr><td>Raspberry Pi</td><td style="text-align:right;">60</td><td><span style="color:grey">=</span> ssh, VNC</td>
+<tr><td>Mini-PC</td><td style="text-align:right;">150</td><td><span style="color:grey">=</span> VNC</td>
+<tr><td>Laptop</td><td style="text-align:right;">150+</td><td><span style="color:green">+</span> Direkt, VNC</td>
+</tbody>
+</table>
+</section>
+
+<section id="hardware">
+<h2>Weitere Hardware</h2>
+
+<p>Mindestens 1 Laptop für Aufstellungseingabe, Drucken etc.<br/>
+mit Chrome, Edge, Firefox oder Safari</p>
+<p>Drucker (empfehlenswert: Laserdrucker)</p>
+<p>Kabeltrommeln und Mehrfachsteckdosen</p>
+<p>Rückstandsfreies Abklebband (z.B. <a rel="noopener" target="_blank" href="http://tapes-and-more.de/oxid/gewebeband/Gewebe-Premium-Nichiban-50m-x-75mm-blau.html">teuer aber gut</a>)</p>
+<p>ggf. WLAN-Router mit Mobilfunkanbindung</p>
+<p>Empfehlenswert: Backup-/Demo-Tablet</p>
+<p>Empfehlenswert: 2. Laptop für Referee Mode o.ä.</p>
+</section>
+
+<section id="vorbereitungen">
+<h2>Vorbereitungen</h2>
+
+<p>Bei allen Geräten sollte automatische Abschaltung deaktiviert oder auf lange Intervalle gesetzt werden.
+
+<ul>
+<li>Bei Fernsehern: Energiesparmodus deaktivieren</li>
+<li>Raspberry Pi, Mini-PCs, Laptops: Automatische Abschaltung deaktivieren</li>
+<li>Tablets: Automatische Abschaltung maximal hoch einstellen</li>
+<li>Unter Android ganz abstellbar mit <a href="https://play.google.com/store/apps/details?id=si.formias.keepscreenon&hl=en" target="_blank" rel="noopener">Keep Screen On</a></li>
+</ul>
+
+<div class="test-now" style="text-align:left;margin-top:1em;"><a href="https://github.com/phihag/bup/blob/master/doc/checklist.de.md" target="_blank" rel="noopener">Komplette Checkliste zum Ausdrucken</a></div>
+</section>
+
+<section id="start">
+<h2>bup starten</h2>
+
+<ol>
+<li>Öffnen Sie die Hauptseite des Tickers</li>
+<li>Klicken Sie dort auf <em>Badminton Umpire Panel</em></li>
+</ol>
+
+<p>Tipp: Lesezeichen hinzufügen!</p>
+
+<p style="margin-top:1em;">Demo-Seite zum Testen und Ausprobieren ohne Ticker:</p>
+<div class="test-now" style="text-align:left;"><a href="https://aufschlagwechsel.de/bup/#bldemo" rel="nooopener" target="_blank">https://aufschlagwechsel.de/bup/#bldemo</a></div>
+
+<p>Voll funktionsfähig, allerdings bleiben alle Eingaben auf dem lokalem Gerät und werden nicht übertragen.</p>
+
+<p>Weitere Demos:
+<a href="https://aufschlagwechsel.de/bup/#rlmdemo" rel="nooopener" target="_blank">Regionalliga</a> (Mitte, ähnlich West/Nord),
+<a href="https://aufschlagwechsel.de/bup/#obldemo" rel="nooopener" target="_blank">NLA (Schweiz)</a>,
+<a href="https://aufschlagwechsel.de/bup/#obldemo" rel="nooopener" target="_blank">Österreichische BundesLiga</a>
+</p>
+</section>
+
+<section id="wettkampf1">
+<h2>Ein Wettkampf mit bup</h2>
+
+<ol>
+<li>Hardware aufbauen (<a href="https://github.com/phihag/bup/blob/master/doc/checklist.de.md">Checkliste</a> verwenden)</li>
+<li>Auf dem Kontroll-PC den Wettkampf im Menü des Tickers auswählen</li>
+<li>Auf dem Kontroll-PC bup öffnen. Als Feld sollte <em>Referee (keine Änderungen übertragen)</em> gewählt werden - dann kann man nicht versehentlich ein Spiel ändern.</li>
+<li>Auf allen Tablets bup öffnen und das Feld einstellen. Wenn bekannt sollte auch der Schiedsrichter-Name konfiguriert werden.</li>
+</ol>
+</section>
+
+<section id="wettkampf2">
+<h2>Anzeigetafeln</h2>
+<p>Auf allen Fernsehern und Beamern bup öffnen.<br/>
+Dann <em>Anzeigetafel</em> ganz unten in den Einstellungen, oder direkt <code>&amp;display</code> in der URL.
+</p>
+
+<a href="https://aufschlagwechsel.de/bup/#bldemo_inprogress&dm_style=teamcourt&display&court=1" target="_blank" rel="noopener"><img src="pics/displaymode.png" style="float:right;width:600px;" alt="Anzeigetafel-Modus von bup mit Einstellungen" /></a>
+
+<div>Ggf. Anzeigestil, Feld, Farben einstellen.</div>
+
+<div class="test-now" style="text-align:left;padding-top:1em;"><a href="https://aufschlagwechsel.de/bup/#bldemo_inprogress&dm_style=teamcourt&display&court=2" target="_blank" rel="noopener">Jetzt ausprobieren</a></div>
+</section>
+
+
+<section id="aufstellung">
+<h2>Aufstellung</h2>
+<ol>
+<li>Auf dem Kontroll-PC auf <em>Aufstellung</em> klicken.</li>
+<li>Anwesende Spieler eintragen</li>
+<li>Ausdrucken, Zettel an die Mannschaften geben</li>
+<li>Nach Rückgabe Kreuze abmalen.</li>
+</ol>
+<a href="https://aufschlagwechsel.de/bup/#bldemo&setupsheet&court=referee" target="_blank" rel="noopener"><img src="pics/aufstellung.png" style="float:right; width:500px;" /></a>
+
+<div class="test-now" style="text-align:left;padding-top:1em;"><a href="https://aufschlagwechsel.de/bup/#bldemo_incomplete&setupsheet&court=referee" target="_blank" rel="noopener">Jetzt ausprobieren</a></div>
+</section>
+
+<section id="reihenfolge">
+<h2>Reihenfolge</h2>
+
+<p>Auf <a href="https://aufschlagwechsel.de/bup/#bldemo&order&court=referee" target="_blank" rel="noopener">Reihenfolge</a> klicken</p>
+
+<a href="https://aufschlagwechsel.de/bup/#bldemo&order&court=referee" target="_blank" rel="noopener"><img src="pics/reihenfolge.png" style="float:right; width:500px;" /></a>
+
+<p>Reihenfolge automatisch (empfohlen) oder manuell optimieren</p>
+
+<p>Rot: Direkt hintereinander, gelb: 1 Spiel Pause, braun: 2 Spiele Pause</p>
+
+<p>Dann für Schiedsrichter, Heim, Gast ausdrucken</p>
+
+<div class="test-now" style="text-align:left;padding-top:.2em;"><a href="https://aufschlagwechsel.de/bup/#bldemo&order&court=referee" target="_blank" rel="noopener">Jetzt ausprobieren</a></div>
+</section>
+
+
+<section id="schiedsrichterzettel">
+<a href="https://aufschlagwechsel.de/bup/#bldemo&court=referee&event_scoresheets&court=1" target="_blank" rel="noopener"><img src="pics/scoresheets.png" style="float:right; width:300px;" /></a>
+<h2>Schiedsrichterzettel</h2>
+<p>Auf <a href="https://aufschlagwechsel.de/bup/#bldemo&court=referee&event_scoresheets&court=1" target="_blank" rel="noopener">Schiedsrichterzettel</a> klicken und drucken.</p>
+
+<p>Die Schiedsrichter falten den Zettel - nur der Kopf des Zettels wird für die Wahl benötigt, alles danach geschieht auf dem Tablet.</p>
+
+<p>Bei gelben Karten o.ä. Schiedsrichterzettel ausdrucken: Dafür einfach auf das Spiel klicken, dann Einstellungen (oben rechts), dann <em>Schiedsrichterzettel</em>.</p>
+
+<div class="test-now" style="text-align:left;padding-top:.2em;"><a href="https://aufschlagwechsel.de/bup/#bldemo&court=referee&event_scoresheets" target="_blank" rel="noopener">Jetzt ausprobieren<!--TODO: Schiedsrichterzettel für 1 Spiel--></a></div>
+</section>
+
+<section id="spielbericht">
+<h2>Spielbericht</h2>
+<p>Nachdem der Wettkampf vorbei ist auf <em>Spielbericht</em> klicken, ggf. weitere Daten eingeben und dann <em>generieren</em>.</p>
+
+<a href="https://aufschlagwechsel.de/bup/#txdemo&court=referee&eventsheet=1BL-2016" target="_blank" rel="noopener"><img src="pics/spielbericht.png" style="float:right;width:400px;" /></a>
+
+<p>Diesen Zettel dreimal ausdrucken und unterschreiben lassen.</p>
+
+<div class="test-now" style="text-align:left;padding-top:.2em;"><a href="https://aufschlagwechsel.de/bup/#txdemo&court=referee&eventsheet=1BL-2016" target="_blank" rel="noopener">Jetzt ausprobieren</a></div>
+</section>
+
+<section id="turnierde">
+<img src="pics/report_url.png" style="float:right;width:400px;" />
+<h2>Auf turnier.de melden</h2>
+
+<ol>
+<li>Im Hauptmenü <em>Auf turnier.de eintragen</em> anklicken</li>	
+<li>Benutzername und Passwort eingeben<br/>(wird automatisch gespeichert)</li>
+<li>Ggf. besondere Vorkommnisse, Zuschauernummern nachtragen.</li>
+<li>Auf Eintragen klicken - fertig!</li>
+</ol>
+
+<p>Im Moment (Oktober 2017) noch experimentell.</p>
+</section>
+
+<section id="refmode">
+<img src="pics/stats.png" style="float:right;width:220px;"/>
+<h2>Referee Mode</h2>
+<p>Mit dem optionalem <em>Referee Mode</em> kann man:
+<ul>
+<li>Tablets aus der Ferne konfigurieren<br/>z.B. Feld, Schiedsrichter, aktuelles Spiel</li>
+<li>Anzeigen aus der Ferne konfigurieren</li>
+<li>Aufruf-Zeiten sehen</li>
+<li>Tastendrücke in Echtzeit sehen</li>
+<li>Spiel-Statistiken in Echtzeit sehen</li>
+</ul>
+</p>
+<p>Start <a href="https://aufschlagwechsel.de/bup/#referee_mode">hier</a>, dann den Anweisungen folgen.</p>
+<p>Im Moment ist eine Internetverbindung erforderlich.</p>
+</section>
+
+<section id="fragen">
+<h2>Fragen? Verbesserungsideen? Fehlermeldungen?</h2>
+
+<p>Bei Fragen, Unklarheiten oder Fehlern helfe ich immer gerne.</p>
+<p>Genauso freue ich mich immer über Anregungen und Ideen zur Verbesserung von bup!</p>
+
+<ul>
+	<li>E-Mail: <a href="mailto:phihag@phihag.de?subject=Frage%20zu%20bup&body=Hallo%20Philipp%2C%0A%0Aich%20habe%20folgende%20Frage%20zum%20bup-Handbuch:%0A">phihag@phihag.de</a></li>
+	<li>WhatsApp oder telefonisch: <a href="tel:+491752583092">+491752583092</a></li>
+</ul>
+
+<div style="font-style:italic;margin-top:1em;margin-left:3em;color:#555;">- Philipp Hagemeister</div>
+
+</section>
+
+</div>
+
+<div class="footer">
+Fragen jederzeit gerne an <a href="mailto:phihag@phihag.de?subject=Frage%20zu%20bup&body=Hallo%20Philipp%2C%0A%0Aich%20habe%20folgende%20Frage%20zum%20bup-Handbuch:%0A">phihag@phihag.de</a>
+</div>
+
+</div>
+
+
+<script src="libs/reveal.js"></script>
+<script>
+Reveal.initialize({
+	transition: 'none',
+	slideNumber: 'c',
+	history: true,
+});
+</script>
+</body>
+</html>

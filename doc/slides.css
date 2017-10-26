@@ -1,0 +1,160 @@
+.reveal .controls .navigate-down, .reveal .controls .navigate-up {
+	display: none;
+}
+
+.reveal {
+	font-family: Helvetica, sans-serif;
+	font-size: 36px;
+	font-weight: normal;
+	color: #111;
+}
+.reveal section {
+	text-align: left;
+}
+.reveal section.front {
+	text-align: center;
+}
+
+.reveal a {
+	text-decoration: none;
+	color: #22a;
+}
+.reveal a:hover {
+	color: #0000ff;
+	text-decoration: underline;
+}
+
+.reveal .footer {
+	position: absolute;
+	font-size: 3vmin;
+	left: 0; right: 0;
+	text-align: center;
+	bottom: 6.5vh;
+	color: #666;
+	z-index: 3;
+}
+.reveal .footer a {
+	text-decoration: none;
+	color: #44c;
+}
+.reveal .footer a:hover {
+	color: #0000ff;
+	text-decoration: underline;
+}
+
+.reveal h1 {
+	font-size: 2.5em;
+	color: #000;
+	margin-bottom: 70px;
+}
+.reveal h2 {
+	color: #333;
+	font-size: 1.4em;
+	margin-bottom: 50px;
+}
+.reveal .slide-number {
+	left: 40px;
+	bottom: 44px;
+	color: #666;
+	background: #fff;
+	right: auto;
+	font-size: 34px;
+}
+
+.reveal .title-sub {
+	color: #595959;
+	font-size: 1.5em;
+}
+.reveal .title-sub strong {
+	font-weight: bold;
+	color: #505050;
+}
+.reveal .title,
+.reveal .title-sub {
+	border-radius: 0.1em;
+	padding: 0.1em 0.2em;
+	display: inline-block;
+	background: rgba(255, 255, 255, 0.8);
+}
+
+
+.reveal ol,
+.reveal dl,
+.reveal ul {
+	display: inline-block;
+	text-align: left;
+	margin: 0 0 0 1em;
+}
+.reveal ol li {
+	margin: 0.5em 0;
+}
+.reveal ul li {
+	margin: 0.3em 0;
+}
+
+.reveal ol {
+	list-style-type: decimal;
+}
+
+.reveal ul {
+	list-style-type: disc;
+}
+.reveal ul ul {
+	list-style-type: circle;
+}
+.reveal ul ul,
+.reveal ul ol,
+.reveal ol ol,
+.reveal ol ul {
+	display: block;
+	margin-left: 40px;
+}
+
+.reveal p {
+	margin: 0.6em 0;
+	line-height: 1.1em;
+}
+
+.test-now {
+	text-align: right;
+}
+.test-now > a {
+	display: inline-block;
+	padding: 0.2em 0.3em;
+	background: #f2f2f2;
+	border: 1px solid #000;
+	border-radius: 0.2em;
+}
+.reveal .test-now > a:hover {
+	color: #008;
+	background: #c0c0c0;
+	text-decoration: none;
+}
+
+.reveal table {
+	border-collapse: collapse;
+}
+.reveal thead th {
+	border-bottom: 1px solid #bbb;
+}
+.reveal th {
+	color: #666;
+	padding: 0 0.2em;
+	margin: 0 0 0.1em 0;
+}
+.reveal td {
+	padding: 0.3em 0.3em;
+}
+.reveal td + td,
+.reveal th + th {
+	border-left: 1px solid #bbb;
+}
+
+.reveal em {
+	white-space: pre;
+	font-style: italic;
+}
+.reveal code {
+	font-family: monospace;
+}
+

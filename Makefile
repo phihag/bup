@@ -7,6 +7,7 @@ help:
 
 download-libs:
 	node div/download_libs.js div/libs.json libs/
+	node div/download_libs.js doc/libs.json doc/libs/
 
 deps: deps-essential ## Download and install all dependencies (for compiling / testing / CLI operation)
 	$(MAKE) deps-optional

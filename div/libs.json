@@ -4,34 +4,26 @@
 	"file": "jquery.min.js"
 },
 {
-	"url": "https://craig.global.ssl.fastly.net/js/mousetrap/mousetrap.min.js",
-	"file": "mousetrap.min.js"
+	"url": "https://craig.global.ssl.fastly.net/js/mousetrap/mousetrap.min.js"
 },
 {
-	"url": "https://raw.githubusercontent.com/ftlabs/fastclick/master/lib/fastclick.js",
-	"file": "fastclick.js"
+	"url": "https://raw.githubusercontent.com/ftlabs/fastclick/master/lib/fastclick.js"
 },
 {
-	"url": "https://raw.githubusercontent.com/phihag/jsPDF/dist/dist/jspdf.min.js",
-	"file": "jspdf.min.js"
+	"url": "https://raw.githubusercontent.com/phihag/jsPDF/dist/dist/jspdf.min.js"
 },
 {
-	"url": "https://raw.githubusercontent.com/phihag/pdfform.js/dist/dist/pdfform.minipdf.dist.js",
-	"file": "pdfform.minipdf.dist.js"
+	"url": "https://raw.githubusercontent.com/phihag/pdfform.js/dist/dist/pdfform.minipdf.dist.js"
 },
 {
-	"url": "https://raw.githubusercontent.com/eligrey/FileSaver.js/master/FileSaver.min.js",
-	"file": "FileSaver.min.js"
+	"url": "https://raw.githubusercontent.com/eligrey/FileSaver.js/master/FileSaver.min.js"
 },
 {
-	"url": "https://raw.githubusercontent.com/phihag/text-encoding-utf-8/master/lib/encoding.js",
-	"file": "encoding.js"
+	"url": "https://raw.githubusercontent.com/phihag/text-encoding-utf-8/master/lib/encoding.js"
 },
 {
-	"url": "https://raw.githubusercontent.com/Stuk/jszip/master/dist/jszip.min.js",
-	"file": "jszip.min.js"
+	"url": "https://raw.githubusercontent.com/Stuk/jszip/master/dist/jszip.min.js"
 }, {
-	"url": "https://raw.githubusercontent.com/stacktracejs/stacktrace.js/master/dist/stacktrace.min.js",
-	"file": "stacktrace.min.js"
+	"url": "https://raw.githubusercontent.com/stacktracejs/stacktrace.js/master/dist/stacktrace.min.js"
 }
 ]

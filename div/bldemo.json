@@ -31,7 +31,7 @@
             {
               "players": [
                 {
-                  "name": "Michael Fuchs"
+                  "name": "Ruben Jille"
                 },
                 {
                   "name": "Peter Käsbauer"
@@ -60,7 +60,7 @@
             {
               "players": [
                 {
-                  "name": "Samantha Barning"
+                  "name": "Olga Konon"
                 },
                 {
                   "name": "Isabel Herttrich"
@@ -80,7 +80,7 @@
             {
               "players": [
                 {
-                  "name": "Fabian Roth"
+                  "name": "Nhat Nguyen"
                 },
                 {
                   "name": "Richard Domke"
@@ -90,7 +90,7 @@
             {
               "players": [
                 {
-                  "name": "Marc Zwiebler"
+                  "name": "Fabian Roth"
                 },
                 {
                   "name": "Johannes Schöttler"
@@ -109,14 +109,14 @@
             {
               "players": [
                 {
-                  "name": "Fabian Roth"
+                  "name": "Nhat Nguyen"
                 }
               ]
             },
             {
               "players": [
                 {
-                  "name": "Marc Zwiebler"
+                  "name": "Fabian Roth"
                 }
               ]
             }
@@ -165,7 +165,7 @@
             {
               "players": [
                 {
-                  "name": "Michael Fuchs"
+                  "name": "Peter Käsbauer"
                 },
                 {
                   "name": "Isabel Herttrich"
@@ -251,7 +251,7 @@
     }]],
     "all_players": [
       [
-        {"gender": "m", "name": "Fabian Roth", "ranking": 1, "ranking_d": 6},
+        {"gender": "m", "name": "Nhat Nguyen", "ranking": 1, "ranking_d": 6},
         {"gender": "m", "name": "Giap Chin Goh", "ranking": 2, "ranking_d": 9, "nationality": "MAS"},
         {"gender": "m", "name": "Sam Magee", "ranking": 3, "ranking_d": 1, "nationality": "IRL"},
         {"gender": "m", "name": "Fabian Holzer", "ranking": 4, "ranking_d": 2},
@@ -270,9 +270,9 @@
         {"gender": "f", "name": "Runa Plützer", "ranking": 6}
       ],
       [
-        {"gender": "m", "name": "Marc Zwiebler", "ranking": 1, "ranking_d": 5},
+        {"gender": "m", "name": "Fabian Roth", "ranking": 1, "ranking_d": 5},
         {"gender": "m", "name": "Dieter Domke", "ranking": 2, "ranking_d": 6},
-        {"gender": "m", "name": "Michael Fuchs", "ranking": 3, "ranking_d": 1},
+        {"gender": "m", "name": "Ruben Jille", "ranking": 3, "ranking_d": 1},
         {"gender": "m", "name": "Peter Käsbauer", "ranking": 4, "ranking_d": 2},
         {"gender": "m", "name": "Simon Wang", "ranking": 5, "ranking_d": 7},
         {"gender": "m", "name": "Marvin Seidel", "ranking": 7, "ranking_d": 4},

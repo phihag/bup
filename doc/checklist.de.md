@@ -25,13 +25,15 @@
   - [ ] Vollbildmodus
   - [ ] *USB-Akkus dranhängen
 - [ ] Beamer aufbauen
-  - [ ] Pi (inkl. Strom)
+  - [ ] Beamer
+  - [ ] Laptop/Pi (inkl. Strom)
   - [ ] Ggf. URL / Vollbild konfigurieren
 - [ ] Anzeigen aufbauen
   - [ ] Kabeltrommel
   - [ ] Mehrfachsteckdose
   - [ ] Fernseher
   - [ ] Pi + HDMI
+  - [ ] Ggf. URL / Vollbild konfigurieren
   - [ ] *In VNC laden
 - [ ] *Backup-Tablets
   - [ ] *Batteriestand überprüfen, ggf. laden

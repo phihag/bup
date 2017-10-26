@@ -1,9 +1,34 @@
+redesign manual as slides
+	copy everything from manual
+	mention checklist
+	explain all features
+	check all fragments
+	test all links in incognito
+	redirect old manual
+	-> msg Julian
+
+incomplete not corretly set!
+	test with bldemo_incomplete: eventutils.* should set it
+
+take better pictures
+	control PCs
+	umpire panel in action (from the chair)
+	Nahaufnahme der Halterung
+	Nahaufnahme Pi
+	screenshot referee mode
+
+improve manual:
+	vertical align: header at very top, rest below that
+	generate PDF
+
+URL to go into a match
+	create a demo match with cards etc.
+	link in doc to that
+
 turnier.de transmission
 	check that login is successful
 	automatically relogin if session goes bust
 	confirm result entry by urlimport
-
-	test transmission when tm not finished yet
 
 #urlexport: back<->forward fails
 
@@ -39,12 +64,6 @@ dads referee mode config
 	UI
 	add ad
 	-> msg Steffen
-
-redesign manual as slides
-	photos Tablets
-	photos Pis
-	short URL to slides
-	-> msg Julian
 
 order: use bupui.make_page
 scoresheets: use bupui.make_page
