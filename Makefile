@@ -111,6 +111,11 @@ upload: dist ## Upload to demo page
 upload-run:
 	cd dist && upload
 
+ta: testall
+
+tu: ta
+	$(MAKE) upload
+
 testall: test itest lint
 
 test: ## Run tests
@@ -158,4 +163,4 @@ install-hub: deps
 	systemctl enable buphub
 	systemctl start buphub
 
-.PHONY: default help deps deps-essential deps-mandatory deps-optional test clean download-libs upload dist cleandist coverage coverage-display cd lint jshint eslint appcache-manifest manifest upload-run stylelint doclint deps-essential sat-hub root-hub install-hub testall
+.PHONY: default help deps deps-essential deps-mandatory deps-optional test clean download-libs upload dist cleandist coverage coverage-display cd lint jshint eslint appcache-manifest manifest upload-run stylelint doclint deps-essential sat-hub root-hub install-hub testall ta tu
