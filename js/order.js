@@ -246,6 +246,7 @@ function show(enable_edit) {
 		return;
 	}
 
+	uiu.hide_qs('.order_error');
 	current_enable_edit = enable_edit;
 	printing.set_orientation('landscape');
 
