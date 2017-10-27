@@ -1,6 +1,9 @@
+d: use colors in empty court display
+
 block for middle buttons -> Jörg Hupertz
 
 tde_import matches should have match_id
+2courts: add teammatch score
 2felder: testen mit mac-Auflösung (@800x600)
 
 editevent crashes after mo -> mail Werner Durow

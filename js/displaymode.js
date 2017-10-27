@@ -405,10 +405,6 @@ function render_tournament_overview(s, container, event) {
 }
 
 function render_castall(s, container, event, colors) {
-	if (! event.courts) {
-		uiu.el(container, 'div', 'error', s._('displaymode:no courts'));
-		return;
-	}
 	var scale = s.settings.d_scale / 100;
 
 	uiu.el(container, 'div', {
@@ -1915,6 +1911,10 @@ function update(err, s, event) {
 		return;
 	}
 
+	if (!event.courts) {
+		uiu.el(container, 'div', 'display_error', s._('displaymode:no courts'));
+	}
+
 	// Also update general state
 	network.update_event(s, event);
 
@@ -1987,7 +1987,6 @@ function update(err, s, event) {
 	});
 
 	if (! event.courts) {
-		uiu.el(container, 'div', 'error', s._('displaymode:no courts'));
 		return;
 	}
 
