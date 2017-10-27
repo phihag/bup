@@ -155,14 +155,12 @@ function on_press(press, s) {
 	network.send_press(s, press);
 }
 
-function block_score_buttons() {
-	uiu.qsEach('.blocking_button', function(btn) {
-		uiu.attr(btn, {
-			'data-block-disabled': 'disabled',
-			disabled: 'disabled',
-		});
-	});
+var _block_buttons_active = false;
+function block_buttons() {
+	_block_buttons_active = true;
+	block_buttons_update();
 	window.setTimeout(function() {
+		_block_buttons_active = false;
 		uiu.qsEach('.blocking_button', function(btn) {
 			btn.removeAttribute('data-block-disabled');
 			if (! btn.getAttribute('data-render-disabled')) {
@@ -172,14 +170,27 @@ function block_score_buttons() {
 	}, state.settings.button_block_timeout);
 }
 
+function block_buttons_update() {
+	if (!_block_buttons_active) return;
+
+	uiu.qsEach('.blocking_button', function(btn) {
+		uiu.attr(btn, {
+			'data-block-disabled': 'disabled',
+			disabled: 'disabled',
+		});
+	});
+}
+
 function ui_init() {
 	click.qs('#pick_side_team1', function() {
+		block_buttons();
 		on_press({
 			type: 'pick_side',
 			team1_left: true,
 		});
 	});
 	click.qs('#pick_side_team2', function() {
+		block_buttons();
 		on_press({
 			type: 'pick_side',
 			team1_left: false,
@@ -191,6 +202,7 @@ function ui_init() {
 		});
 	});
 	click.qs('#postgame-confirm', function() {
+		block_buttons();
 		on_press({
 			type: 'postgame-confirm',
 		});
@@ -212,14 +224,14 @@ function ui_init() {
 		leave_match(state);
 	});
 	click.qs('#left_score', function() {
-		block_score_buttons();
+		block_buttons();
 		on_press({
 			type: 'score',
 			side: 'left',
 		});
 	});
 	click.qs('#right_score', function() {
-		block_score_buttons();
+		block_buttons();
 		on_press({
 			type: 'score',
 			side: 'right',
@@ -375,6 +387,8 @@ function hide_exception_dialog() {
 
 
 return {
+	block_buttons: block_buttons,
+	block_buttons_update: block_buttons_update,
 	demo_match_start: demo_match_start,
 	hide_exception_dialog: hide_exception_dialog,
 	install_destructor: install_destructor,

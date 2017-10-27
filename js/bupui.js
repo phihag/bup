@@ -155,8 +155,9 @@ function add_player_pick(s, container, type, team_id, player_id, on_click, namef
 	}
 
 	var player = s.setup.teams[team_id].players[player_id];
-	var btn = uiu.el(container, 'button', {}, namefunc(player));
+	var btn = uiu.el(container, 'button', 'blocking_button', namefunc(player));
 	click.on(btn, function() {
+		control.block_buttons();
 		var press = {
 			type: type,
 			team_id: team_id,

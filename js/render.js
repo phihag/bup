@@ -352,17 +352,17 @@ function ui_render(s) {
 	}
 
 	var score_enabled = s.game.started && !s.game.finished && !s.match.suspended && !s.match.injuries && !s.game.interval;
-	var buttons = $('#left_score,#right_score');
+	var $buttons = $('#left_score,#right_score');
 	if (score_enabled) {
-		buttons.removeAttr('data-render-disabled');
-		buttons.removeClass('half-invisible');
-		if (! buttons.attr('data-block-disabled')) {
-			buttons.removeAttr('disabled');
+		$buttons.removeAttr('data-render-disabled');
+		$buttons.removeClass('half-invisible');
+		if (! $buttons.attr('data-block-disabled')) {
+			$buttons.removeAttr('disabled');
 		}
 	} else {
-		buttons.attr('disabled', 'disabled');
-		buttons.attr('data-render-disabled', 'disabled');
-		buttons.addClass('half-invisible');
+		$buttons.attr('disabled', 'disabled');
+		$buttons.attr('data-render-disabled', 'disabled');
+		$buttons.addClass('half-invisible');
 	}
 
 	uiu.disabled_qsa('#button_undo', !s.undo_possible);
@@ -416,6 +416,7 @@ function ui_render(s) {
 			});
 
 			dialog_active = true;
+			control.block_buttons_update();
 			bupui.show_picker($pick_server);
 		} else if (s.game.start_receiver_player_id === null) {
 			$pick_receiver.find('button').remove();
@@ -423,21 +424,22 @@ function ui_render(s) {
 			var team_id = (s.game.start_server_team_id == 1) ? 0 : 1;
 			bupui.add_player_pick(s, $pick_receiver[0], 'pick_receiver', team_id, 0);
 			bupui.add_player_pick(s, $pick_receiver[0], 'pick_receiver', team_id, 1);
+			control.block_buttons_update();
 			bupui.show_picker($pick_receiver);
 		}
 	}
 
-	var pronunciation_el = $('#pronunciation');
+	var $pronunciation_el = $('#pronunciation');
 	if (s.settings.show_pronunciation && !dialog_active) {
 		var pronunciation_text = pronunciation.pronounce(s);
 		if (pronunciation_text) {
-			pronunciation_el.find('>span').text(pronunciation_text);
-			pronunciation_el.show();
+			$pronunciation_el.find('>span').text(pronunciation_text);
+			$pronunciation_el.show();
 		} else {
-			pronunciation_el.hide();
+			$pronunciation_el.hide();
 		}
 	} else {
-		pronunciation_el.hide();
+		$pronunciation_el.hide();
 	}
 }
 
