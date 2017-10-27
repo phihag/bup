@@ -192,13 +192,14 @@ function make_page(s, page_name, init_cb, hide_cb) {
 		if (s.ui.referee_mode) {
 			refmode_referee_ui.back_to_ui();
 		} else {
-			control.set_current(s);
 			settings.show();
+			control.set_current(s);
 		}
 
 		hide_cb();
 	}
 
+	s.ui[page_name] = true;
 	if (s.ui.referee_mode) {
 		refmode_referee_ui.hide_tmp();
 	} else {
@@ -207,7 +208,6 @@ function make_page(s, page_name, init_cb, hide_cb) {
 	}
 	bupui.esc_stack_push(hide);
 
-	s.ui[page_name] = true;
 	control.set_current(s);
 
 	var body = uiu.qs('body');
