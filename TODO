@@ -1,4 +1,3 @@
-referee mode: change order of points to the announcement
 block for middle buttons -> Jörg Hupertz
 
 tde_import matches should have match_id
@@ -18,7 +17,7 @@ add check courts to checklist
 label tablet background
 colors to display before match (+ larger font)
 
-greyish: center wittorf logo
+greyish: center wittorf and other small logos
 ask before emergency restore
 	-> msg Paul
 dads test endtime etc.
@@ -28,7 +27,7 @@ display: teams + stand
 dads referee mode config
 	UI
 	add ad
-	-> msg Steffen
+	-> msg Steffen Becker
 
 order: use bupui.make_page
 scoresheets: use bupui.make_page

@@ -643,9 +643,13 @@ function press_state_desc(s, press) {
 			right_team: right_team,
 		});
 	case 'score':
-		var score = s.game.score;
-		var left_idx = s.game.team1_left ? 0 : 1;
-		return score[left_idx] + '-' + score[1 - left_idx];
+		var game = s.game;
+		var score = game.score;
+		var serving_idx = game.team1_serving ? 0 : 1;
+		return (
+			(game.service_over ? s._('scoredisplay:Service Over') + ' ' : '') +
+			score[serving_idx] + '-' + score[1 - serving_idx]
+		);
 	case 'postinterval-confirm':
 		return '"' + s._('postinterval.play', {
 			score: pronunciation.pronounce_score(s, undefined, undefined, false),
