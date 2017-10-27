@@ -1,10 +1,8 @@
-d: use colors in empty court display
-
 block for middle buttons -> Jörg Hupertz
 
 tde_import matches should have match_id
-2courts: add teammatch score
 2felder: testen mit mac-Auflösung (@800x600)
+2courts: add teammatch score
 
 editevent crashes after mo -> mail Werner Durow
 
@@ -16,7 +14,6 @@ greyish+colors: use team colors for fg / bg
 	test with dark colors
 add check courts to checklist
 label tablet background
-colors to display before match (+ larger font)
 
 greyish: center wittorf and other small logos
 ask before emergency restore

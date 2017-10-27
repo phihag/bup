@@ -321,7 +321,7 @@ function render_top(s, container, event) {
 
 function namestr(players) {
 	if (players.length === 0) {
-		return '(Wird ermittelt)';
+		return '';
 	} else if (players.length === 1) {
 		return players[0].name;
 	} else {
@@ -1035,7 +1035,8 @@ function render_greyish(s, container, event, colors) {
 		});
 		uiu.el(td, 'div', {
 			style: (
-				'background:url("' + logo_urls[team_id] + '") 100% ' + colors.bg2 + ' no-repeat;' +
+				'background:' + colors.bg2 + ' url("' + logo_urls[team_id] + '") no-repeat center center;' +
+				'background-size:contain;' +
 				'height:100%; width:100%;'
 			),
 		});
@@ -2021,19 +2022,38 @@ function update(err, s, event) {
 					'color:' + colors.fg2
 				),
 			});
-			var tname = event.team_competition ? event.event_name : event.tournament_name;
-			if (tname) {
+
+			function _render_team_name(team_id) {
 				uiu.el(nomatch_el, 'div', {
 					style: (
-						'font-size:' + (event.team_competition ? '7vmin' : '18vmin') + ';'
+						'font-size:16vmin;text-align:center;' +
+						'color:' + colors[team_id] + ';' +
+						'margin-' + ((team_id === 0) ? 'bottom' : 'top') + ':8vmin;'
 					),
-				}, tname);
+				}, event.team_names[team_id]);
+			}
+
+			var is_team = event.team_competition;
+			if (is_team) {
+				_render_team_name(0);
+			} else {
+				var tname = event.tournament_name;
+				if (tname) {
+					uiu.el(nomatch_el, 'div', {
+						style: (
+							'font-size:18vmin;'
+						),
+					}, event.tname);
+				}
 			}
 			uiu.el(nomatch_el, 'div', {
 				style: (
-					'font-size:' + (event.team_competition ? '10vmin' : '18vmin') + ';'
+					'font-size:18vmin;'
 				),
 			}, s._('Court') + ' ' + (court.label || court.num || court.court_id));
+			if (is_team) {
+				_render_team_name(1);
+			}
 			return;
 		}
 
