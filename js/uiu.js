@@ -68,11 +68,11 @@ function show(node) {
 	visible(node, true);
 }
 
-function disabled_qsa(qs, val) {
+function disabled_qsa(qs, is_disabled) {
 	var nodes = document.querySelectorAll(qs);
 	for (var i = 0;i < nodes.length;i++) {
 		var n = nodes[i];
-		if (val) {
+		if (is_disabled) {
 			n.setAttribute('disabled', 'disabled');
 			addClass(n, 'half-invisible');
 		} else {
