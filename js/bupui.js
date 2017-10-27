@@ -23,7 +23,7 @@ function esc_stack_pop() {
 // Returns a function to cancel the dialog
 function make_pick(s, label, values, on_pick, on_cancel, container, select_at) {
 	if (! container) {
-		container = $('.bottom-ui');
+		container = uiu.qs('.bottom-ui');
 	}
 
 	var kill_dialog = function() {
@@ -45,19 +45,14 @@ function make_pick(s, label, values, on_pick, on_cancel, container, select_at) {
 	};
 	esc_stack_push(cancel);
 
-	var dlg_wrapper = $('<div class="modal-wrapper">');
-	dlg_wrapper.on('click', function(e) {
-		if (e.target == dlg_wrapper[0]) {
+	var dlg_wrapper = uiu.el(null, 'div', 'modal-wrapper');
+	dlg_wrapper.addEventListener('click', function(e) {
+		if (e.target == dlg_wrapper) {
 			cancel();
 		}
 	});
-	var $dlg = $('<div class="pick_dialog">');
-	$dlg.appendTo(dlg_wrapper);
-	var dlg = $dlg[0];
-
-	var label_span = $('<span>');
-	label_span.text(label);
-	label_span.appendTo($dlg);
+	var dlg = uiu.el(dlg_wrapper, 'div', 'pick_dialog');
+	uiu.el(dlg, 'span', {}, label);
 
 	if ((select_at !== undefined) && (values.length >= select_at)) {
 		var select = uiu.el(dlg, 'select', {
@@ -78,27 +73,23 @@ function make_pick(s, label, values, on_pick, on_cancel, container, select_at) {
 		});
 	} else {
 		values.forEach(function(v) {
-			var btn = $('<button>');
-			btn.text(v.label);
-			btn.on('click', function() {
+			var btn = uiu.el(dlg, 'button', {}, v.label);
+			click.on(btn, function() {
 				kill_dialog();
 				on_pick(v);
 			});
 			if (v.modify_button) {
 				v.modify_button(btn, v);
 			}
-			$dlg.append(btn);
 		});
 	}
 
 	if (on_cancel) {
-		var cancel_btn = $('<button class="cancel-button"></button>');
-		cancel_btn.text(s._('button:Cancel'));
-		cancel_btn.on('click', cancel);
-		cancel_btn.appendTo($dlg);
+		var cancel_btn = uiu.el(dlg, 'button', 'cancel-button', s._('button:Cancel'));
+		click.on(cancel_btn, cancel);
 	}
 
-	container.append(dlg_wrapper);
+	container.appendChild(dlg_wrapper);
 
 	return kill_dialog;
 }

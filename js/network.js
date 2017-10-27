@@ -209,7 +209,9 @@ function enter_match(match) {
 		};
 
 		if ((mwinner == 'inprogress') && calc.match_started(netscore)) {
-			bupui.make_pick(state, state._('network:in progress').replace('{match}', pronunciation.match_str(match.setup)), [{
+			bupui.make_pick(
+				state,
+				state._('network:in progress').replace('{match}', pronunciation.match_str(match.setup)), [{
 				label: state._('network:resume match').replace('{score}', _score_text(netscore)),
 				key: 'resume',
 			}, {
@@ -226,7 +228,10 @@ function enter_match(match) {
 		}
 
 		if (mwinner == 'left' || mwinner == 'right') {
-			bupui.make_pick(state, state._('network:match finished').replace('{score}', _score_text(netscore)).replace('{match}', pronunciation.match_str(match.setup)), [{
+			bupui.make_pick(
+				state,
+				state._('network:match finished').replace('{score}', _score_text(netscore)).replace('{match}',
+				pronunciation.match_str(match.setup)), [{
 				label: state._('network:restart match'),
 			}], function() {
 				control.start_match(state, match.setup);
@@ -483,7 +488,7 @@ function _court_by_id(all_courts, court_id) {
 function _court_pick_dialog(s, all_courts, on_cancel) {
 	bupui.make_pick(s, s._('Select Court'), all_courts, function(c) {
 		_set_court(s, c);
-	}, on_cancel, $('body'), 5);
+	}, on_cancel, uiu.qs('body'), 5);
 }
 
 function ui_init_court(s, hash_query) {
