@@ -337,6 +337,7 @@ function outer_init(s, page) {
 		required: 'required',
 		size: 100,
 		name: 'report_url',
+		autofocus: 'autofocus',
 	});
 
 	uiu.el(label, 'button', {}, s._('urlexport:submit url'));
