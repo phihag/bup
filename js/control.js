@@ -277,18 +277,23 @@ function ui_init() {
 		});
 	});
 
+	var _mark_carded = function(btn, v) {
+		var carded = calc.player_carded(state, v.team_id, v.player_id);
+		if (carded) {
+			var img = uiu.el(null, 'span', carded.type + '-image');
+			btn.insertBefore(img, btn.firstChild);
+		}
+	};
+
 	click.qs('#exception_yellow', function() {
 		hide_exception_dialog();
 		bupui.make_player_pick(
 			state, state._('exceptions:dialog:yellow-card'), 'yellow-card', ui_show_exception_dialog,
 			function(btn, v) {
-				var carded = calc.player_carded(state, v.team_id, v.player_id);
-				if (carded) {
-					btn.prepend('<span class="' + carded.type + '-image"></span>');
-				}
+				_mark_carded(btn, v);
 				var team_carded = calc.team_carded(state, v.team_id);
 				if (team_carded) {
-					btn.attr('disabled', 'disabled');
+					btn.setAttribute('disabled', 'disabled');
 				}
 			}
 		);
@@ -296,26 +301,16 @@ function ui_init() {
 	click.qs('#exception_red', function() {
 		hide_exception_dialog();
 		bupui.make_player_pick(
-			state, state._('exceptions:dialog:red-card'), 'red-card', ui_show_exception_dialog,
-			function(btn, v) {
-				var carded = calc.player_carded(state, v.team_id, v.player_id);
-				if (carded) {
-					btn.prepend('<span class="' + carded.type + '-image"></span>');
-				}
-			}
+			state, state._('exceptions:dialog:red-card'), 'red-card',
+			ui_show_exception_dialog, _mark_carded
 		);
 
 	});
 	click.qs('#exception_black', function() {
 		hide_exception_dialog();
 		bupui.make_player_pick(
-			state, state._('exceptions:dialog:black-card'), 'disqualified', ui_show_exception_dialog,
-			function(btn, v) {
-				var carded = calc.player_carded(state, v.team_id, v.player_id);
-				if (carded) {
-					btn.prepend('<span class="' + carded.type + '-image"></span>');
-				}
-			}
+			state, state._('exceptions:dialog:black-card'), 'disqualified',
+			ui_show_exception_dialog, _mark_carded
 		);
 	});
 
