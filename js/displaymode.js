@@ -2028,7 +2028,7 @@ function update(err, s, event) {
 				),
 			});
 
-			function _render_team_name(team_id) {
+			var _render_team_name = function(team_id) {
 				uiu.el(nomatch_el, 'div', {
 					style: (
 						'font-size:16vmin;text-align:center;' +
@@ -2036,7 +2036,7 @@ function update(err, s, event) {
 						'margin-' + ((team_id === 0) ? 'bottom' : 'top') + ':8vmin;'
 					),
 				}, event.team_names[team_id]);
-			}
+			};
 
 			var is_team = event.team_competition;
 			if (is_team) {
