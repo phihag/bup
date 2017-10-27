@@ -107,7 +107,7 @@ function text_qs(selector, str) {
 	text(qs(selector), str);
 }
 
-function attrs(el, init_attrs) {
+function attr(el, init_attrs) {
 	if (init_attrs) {
 		for (var k in init_attrs) {
 			el.setAttribute(k, init_attrs[k]);
@@ -118,7 +118,7 @@ function attrs(el, init_attrs) {
 function ns_el(parent, ns, tagName, init_attrs, text) {
 	var doc = parent ? parent.ownerDocument : document;
 	var el = doc.createElementNS(ns, tagName);
-	attrs(el, init_attrs);
+	attr(el, init_attrs);
 	if ((text !== undefined) && (text !== null)) {
 		el.appendChild(doc.createTextNode(text));
 	}
@@ -136,7 +136,7 @@ function el(parent, tagName, init_attrs, text) {
 			'class': init_attrs,
 		};
 	}
-	attrs(el, init_attrs);
+	attr(el, init_attrs);
 	if ((text !== undefined) && (text !== null)) {
 		el.appendChild(doc.createTextNode(text));
 	}
@@ -221,7 +221,7 @@ function mark_disabled(el, is_enabled) {
 return {
 	addClass: addClass,
 	addClass_qs: addClass_qs,
-	attrs: attrs,
+	attr: attr,
 	closest: closest,
 	closest_class: closest_class,
 	disabled_qsa: disabled_qsa,

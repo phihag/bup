@@ -1030,7 +1030,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 
 			var thick_border_id = xlsx_file.add_border('medium');
 			var thick_center_style_id = xlsx_file.add_style(function(xf) {
-				uiu.attrs(xf, {
+				uiu.attr(xf, {
 					numFmtId: 0,
 					borderId: thick_border_id,
 					xfId: 0,

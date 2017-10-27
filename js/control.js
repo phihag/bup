@@ -156,16 +156,19 @@ function on_press(press, s) {
 }
 
 function block_score_buttons() {
-	$('#right_score,#left_score').attr({
-		'data-block-disabled': 'disabled',
-		'disabled': 'disabled',
+	uiu.qsEach('.blocking_button', function(btn) {
+		uiu.attr(btn, {
+			'data-block-disabled': 'disabled',
+			disabled: 'disabled',
+		});
 	});
 	window.setTimeout(function() {
-		var buttons = $('#right_score,#left_score');
-		buttons.removeAttr('data-block-disabled');
-		if (! buttons.attr('data-render-disabled')) {
-			buttons.removeAttr('disabled');
-		}
+		uiu.qsEach('.blocking_button', function(btn) {
+			btn.removeAttribute('data-block-disabled');
+			if (! btn.getAttribute('data-render-disabled')) {
+				btn.removeAttribute('disabled');
+			}
+		});
 	}, state.settings.button_block_timeout);
 }
 

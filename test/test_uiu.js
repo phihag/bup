@@ -12,7 +12,7 @@ _describe('ui utils', function() {
 	_it('attrs', function() {
 		var doc = new vdom.Document('root');
 		var root = doc.documentElement;
-		bup.uiu.attrs(root, {
+		bup.uiu.attr(root, {
 			'foo': 'bar',
 			'a': 1,
 		});
