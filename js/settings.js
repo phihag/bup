@@ -29,6 +29,7 @@ var default_settings = {
 	d_cserv2: '#dba766',
 	d_crecv: '#707676',
 	d_scale: 100,
+	settings_autohide: 30000,
 	dads_interval: 20000,
 	dads_wait: 60000,
 	dads_dtime: 10000,
@@ -78,18 +79,35 @@ function store(s) {
 	}
 }
 
+var _autohide_to;
+function autohide_restart() {
+	if (_autohide_to) {
+		clearTimeout(_autohide_to);
+	}
+	_autohide_to = setTimeout(hide_displaymode, state.settings.settings_autohide || 30000);
+}
+
 function show_displaymode() {
 	if (state.ui.displaymode_settings_visible) {
 		return;
 	}
+	window.addEventListener('mousemove', autohide_restart);
+	window.addEventListener('click', autohide_restart);
 	state.ui.displaymode_settings_visible = true;
 	uiu.visible_qs('#settings_wrapper', true);	
 	bupui.esc_stack_push(hide_displaymode);
+	autohide_restart();
 }
 
 function hide_displaymode() {
 	if (!state.ui.displaymode_settings_visible) {
 		return;
+	}
+	window.removeEventListener('click', autohide_restart);
+	window.removeEventListener('mousemove', autohide_restart);
+	if (_autohide_to) {
+		clearTimeout(_autohide_to);
+		_autohide_to = null;
 	}
 	state.ui.displaymode_settings_visible = false;
 	uiu.visible_qs('#settings_wrapper', false);

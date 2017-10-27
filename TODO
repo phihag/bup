@@ -1,11 +1,3 @@
-improve manual:
-	vertical align: header at very top, rest below that
-	generate PDF
-
-URL to go into a match
-	create a demo match with cards etc.
-	link in doc to that
-
 turnier.de transmission
 	check that login is successful
 	automatically relogin if session goes bust
@@ -28,7 +20,6 @@ greyish+colors: use team colors for fg / bg
 	test with dark colors
 add check courts to checklist
 label tablet background
-displaymode: hide settings after inactivity
 colors to display before match (+ larger font)
 
 referee mode: change order of points to the announcement
@@ -335,7 +326,6 @@ prevent going into incomplete match (update first, retry, if not then error)
 initialize from turnier.de?
 initialize ticker from turnier.de?
 refmode: show netstats
-displaymode: hide mouse after a while
 
 test button on umpire panels to test all connected displays for 10 seconds
 find out why btde not updating tablets (appcache)
@@ -535,11 +525,15 @@ improve display mode
 	update court info with vdemo/edemo
 	implement courts with liveaw
 	switch to svg display for list
-	hide settings after timeout (10s?)
 	show last update in settings
 	support display mode without network
 	show games on the side that won them?
 	net status flickering when hub is away
+
+URL to go into a match
+	create a demo match with cards etc.
+	link in doc to that
+
 
 make an android app
 	badmintonticker
