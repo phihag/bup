@@ -149,6 +149,7 @@ function parse_teammatch($tm_html, $domain) {
 		'TEST - Ligen - Hagemeister Mai 2017:Test LIGA - Testliga' => '1BL-2016',
 		'BundesLiga 2016-2017:Bundesliga - 1. Bundesliga' => 'OBL-2017',
 		'Ligen NRW 2017-18:O19-NRW O19-RL - (001) Regionalliga West' => 'RLW-2016',
+		'Ligen DBV 2017/18 (ohne Bundesligen):Gruppe Nord (NO) - (001) Regionalliga Nord' => 'RLN-2016',
 		'Bundesligen 2017/18:1. Bundesliga (1. BL) - (001) 1. Bundesliga' => '1BL-2017',
 		'Bundesligen 2017/18:2. Bundesliga (2. BL-Nord) - (002) 2. Bundesliga Nord' => '2BLN-2017',
 		'Bundesligen 2017/18:2. Bundesliga (2. BL-Süd) - (003) 2. Bundesliga Süd' => '2BLS-2017',

@@ -20,6 +20,7 @@
   - [ ] Keep Screen On aktivieren
   - [ ] Rotation = Landscape
   - [ ] Chrome aufrufen und einloggen
+  - [ ] Auf richtiges Feld eingestellt?
   - [ ] An Stühle anschrauben
   - [ ] *Einstellungen überprüfen (Federballzähler an, Referee Mode?)
   - [ ] Vollbildmodus
@@ -34,6 +35,7 @@
   - [ ] Fernseher
   - [ ] Pi + HDMI
   - [ ] Ggf. URL / Vollbild konfigurieren
+  - [ ] Auf richtiges Feld eingestellt?
   - [ ] *In VNC laden
 - [ ] *Backup-Tablets
   - [ ] *Batteriestand überprüfen, ggf. laden

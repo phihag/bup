@@ -12,10 +12,8 @@ d: just 2 numbers (set score below)
 
 greyish+colors: use team colors for fg / bg
 	test with dark colors
-add check courts to checklist
 label tablet background
 
-greyish: center wittorf and other small logos
 ask before emergency restore
 	-> msg Paul
 dads test endtime etc.
@@ -590,8 +588,6 @@ order:
 	on change transmit to courtspot
 
 invented current match upon switching modes
-BuLi checkliste: redesign
-	=> mails Jörg Hupertz
 Cornelia Schröder: redesign display to select server / receiver
 alternate editevent (with checkboxes, same order as Mannschaftsaufstellungszettel)
 
