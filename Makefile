@@ -111,8 +111,13 @@ upload: dist ## Upload to demo page
 upload-run:
 	cd dist && upload
 
+testall: test itest lint
+
 test: ## Run tests
-	@npm test
+	@node_modules/.bin/mocha test/
+
+itest: ## Run integration tests
+	@node_modules/.bin/mocha test/integration/
 
 lint: eslint stylelint doclint ## Verify source code quality
 
@@ -153,4 +158,4 @@ install-hub: deps
 	systemctl enable buphub
 	systemctl start buphub
 
-.PHONY: default help deps deps-essential deps-mandatory deps-optional test clean download-libs upload dist cleandist coverage coverage-display cd lint jshint eslint appcache-manifest manifest upload-run stylelint doclint deps-essential sat-hub root-hub install-hub
+.PHONY: default help deps deps-essential deps-mandatory deps-optional test clean download-libs upload dist cleandist coverage coverage-display cd lint jshint eslint appcache-manifest manifest upload-run stylelint doclint deps-essential sat-hub root-hub install-hub testall
