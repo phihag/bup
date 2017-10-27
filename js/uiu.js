@@ -1,6 +1,6 @@
+'use strict';
 // ui utils
 var uiu = (function() {
-'use strict';
 
 function qsEach(selector, func, container) {
 	if (!container) {
@@ -190,6 +190,10 @@ function setClass(el, className, enabled) {
 	}
 }
 
+function setClass_qs(selector, className, enabled) {
+	setClass(qs(selector), className, enabled);
+}
+
 function closest(el, cb) {
 	while (el) {
 		if (cb(el)) {
@@ -204,6 +208,14 @@ function closest_class(el, className) {
 		// nodeType != 1: not an element (i.e. document)
 		return (node.nodeType === 1) && hasClass(node, className);
 	});
+}
+
+function mark_disabled(el, is_enabled) {
+	if (is_enabled) {
+		el.removeAttribute('disabled');
+	} else {
+		el.setAttribute('disabled', 'disabled');
+	}
 }
 
 return {
@@ -226,6 +238,8 @@ return {
 	removeClass: removeClass,
 	removeClass_qs: removeClass_qs,
 	setClass: setClass,
+	setClass_qs: setClass_qs,
+	mark_disabled: mark_disabled,
 	show: show,
 	show_qs: show_qs,
 	text: text,

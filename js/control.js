@@ -354,7 +354,7 @@ function set_current(s) {
 function ui_show_exception_dialog() {
 	install_destructor(state, hide_exception_dialog);
 	render.exception_dialog(state);
-	$('#exception_wrapper').show();
+	uiu.show_qs('#exception_wrapper');
 	var players_present = calc.players_present(state);
 	uiu.visible_qs('#exception_walkover_container', !players_present);
 	uiu.visible_qs('#exception_overrule_container', players_present);

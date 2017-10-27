@@ -1249,4 +1249,34 @@ _describe('stats graphs', function() {
 			assert.strictEqual(bup.stats.press_state_desc(s, press), press.sdesc);
 		}
 	});
+
+	_it('C in singles', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		}, {
+			type: 'score',
+			side: 'left',
+		}, {
+			type: 'score',
+			side: 'right',
+		}, {
+			type: 'correction',
+			team_id: 0,
+		}];
+
+		var s = tutils.state_after(presses, tutils.SINGLES_SETUP);
+		assert.deepStrictEqual(s.match.marks, [{
+			team_id: 0,
+			type: 'correction',
+		}]);
+		var press = presses[presses.length - 1];
+		assert.strictEqual(bup.stats.press_description(s, press), 'Vertauschung Aufschlagfeld');
+		assert.strictEqual(bup.stats.press_state_desc(s, press), '??');
+	});
+
 });

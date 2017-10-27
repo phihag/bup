@@ -1,25 +1,29 @@
-var render = (function() {
 'use strict';
+var render = (function() {
+
+function _mark_button(container, enabled) {
+	uiu.setClass(container, 'half-invisible', !enabled);
+	uiu.mark_disabled(
+		uiu.qs('button', container),
+		enabled
+	);
+}
 
 function exception_dialog(s) {
 	// Be careful not to restrict exotic scenarios such as disqualification after match end
-	var sc = $('.exception_suspension_container');
-	var button = sc.find('button');
-	if (s.match.suspended) {
-		sc.addClass('half-invisible');
-		button.attr('disabled', 'disabled');
-	} else {
-		sc.removeClass('half-invisible');
-		button.removeAttr('disabled');
-	}
+	_mark_button(
+		uiu.qs('.exception_suspension_container'),
+		!s.match.suspended
+	);
+
+	_mark_button(
+		uiu.qs('.exception_correction_container'),
+		s.setup.is_doubles
+	);
 }
 
 function shuttle_counter(s) {
-	if (s.settings.shuttle_counter) {
-		$('#button_shuttle').removeClass('hide_shuttle_counter');
-	} else {
-		$('#button_shuttle').addClass('hide_shuttle_counter');
-	}
+	uiu.setClass_qs('#button_shuttle', 'hide_shuttle_counter', !s.settings.shuttle_counter);
 }
 
 function _score_display_init(s) {

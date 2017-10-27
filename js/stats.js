@@ -662,6 +662,7 @@ function press_state_desc(s, press) {
 		return utils.duration_secs(0, s.timer.duration);
 	case 'correction':
 		var players = s.setup.teams[press.team_id].players;
+		if (players.length < 2) return '??';
 		var right_id = s.game.teams_player1_even[press.team_id] ? 0 : 1;
 		return s._('pressdesc|state:' + press.type, {
 			right_player: players[right_id].name,
