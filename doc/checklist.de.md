@@ -84,11 +84,11 @@
 
 20 Minuten vor Spielbeginn:
 
-- [ ] Kamera starten
+- [ ] *Kamera starten
 - [ ] USB-Akkus von Tablets abmachen und einsammeln
 - [ ] Tablets checken: Eingeloggt und richtiger Zustand?
-- [ ] Ggf. Werbung ausstellen
-- [ ] Ballrollen an Schiedsrichterstühle stellen
+- [ ] \*Ggf. Werbung deaktivieren
+- [ ] \*Ballrollen an Schiedsrichterstühle stellen
 
 Während des Spiels:
 
@@ -128,8 +128,8 @@ Nach Spielende:
 - [ ] Display-Pis einsammeln
 - [ ] Mehrfachsteckdosen einsammeln
 - [ ] Tablets einsammeln
-  - [ ] *Export senden
-  - [ ] *Statistiken anschauen
+  - [ ] \*Export senden
+  - [ ] \*Statistiken anschauen
 - [ ] Kabeltrommeln einsammeln und einpacken
 - [ ] Drucker abbauen und einpacken
 - [ ] Laptops und Zubehör abbauen und einpacken
