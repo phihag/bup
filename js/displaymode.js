@@ -405,6 +405,11 @@ function render_tournament_overview(s, container, event) {
 }
 
 function render_castall(s, container, event, colors) {
+	if (!event.courts) {
+		uiu.el(container, 'div', 'error', 'Court information missing');
+		return;
+	}
+
 	var scale = s.settings.d_scale / 100;
 
 	uiu.el(container, 'div', {

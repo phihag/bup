@@ -1030,17 +1030,17 @@ _describe('stats graphs', function() {
 			type: 'score',
 			side: 'left',
 			desc: 'Punkt links',
-			sdesc: '1-0',
+			sdesc: 'Aufschlagwechsel 1-0',
 		}, {
 			type: 'score',
 			side: 'right',
 			desc: 'Punkt rechts',
-			sdesc: '1-1',
+			sdesc: 'Aufschlagwechsel 1-1',
 		}, {
 			type: 'score',
 			side: 'left',
 			desc: 'Punkt links',
-			sdesc: '2-1',
+			sdesc: 'Aufschlagwechsel 2-1',
 		}, {
 			type: 'editmode_set-score',
 			score: [3, 8],
@@ -1050,12 +1050,12 @@ _describe('stats graphs', function() {
 			type: 'score',
 			side: 'right',
 			desc: 'Punkt rechts',
-			sdesc: '8-4',
+			sdesc: 'Aufschlagwechsel 4-8',
 		}, {
 			type: 'score',
 			side: 'left',
 			desc: 'Punkt links',
-			sdesc: '9-4',
+			sdesc: 'Aufschlagwechsel 9-4',
 		}, {
 			type: 'score',
 			side: 'left',
@@ -1074,7 +1074,7 @@ _describe('stats graphs', function() {
 			type: 'score',
 			side: 'right',
 			desc: 'Punkt rechts',
-			sdesc: '11-5',
+			sdesc: 'Aufschlagwechsel 5-11',
 		}, {
 			type: 'editmode_set-score',
 			score: [1, 1],
