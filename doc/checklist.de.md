@@ -59,6 +59,8 @@
   - [ ] Ausdrucken
   - [ ] Heim geben
   - [ ] Gast geben
+- [ ] Mindestanforderungsformular Schiedsrichter drucken
+- [ ] Mindestanforderungsformular Verein drucken
 - [ ] *Netzwerk checken
   - [ ] *DSL-Modem als Tab öffnen
   - [ ] *WLAN-Hotspot als Tab öffnen
@@ -114,6 +116,9 @@ Nach Spielende:
   - [ ] Von SR unterschreiben
   - [ ] 1 Exemplar an Gast
   - [ ] 2 Exemplare an Heim
+- [ ] Mindestanforderungsformular Schiedsrichter einpacken
+- [ ] Mindestanforderungsformular Verein einpacken
+- [ ] Bei gelben/roten Karten Schiedsrichterzettel einpacken
 - [ ] Melden
   - [ ] Helmut Ruppert anrufen
   - [ ] auf turnier.de eintragen
