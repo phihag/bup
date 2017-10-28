@@ -1,7 +1,3 @@
-remove old courtspot pics
-svg2pdf support dx
-svg2pdf support font-weight?
-
 selectevent module
 	debmlist: collect coordinates
 	download 5 most likely (and leagues + matches therein)

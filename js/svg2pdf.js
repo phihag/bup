@@ -466,31 +466,46 @@ function render_page(svg, pdf, scale) {
 			}
 
 			pdf.setFontStyle((style['font-weight'] == 'bold') ? 'bold' : 'normal');
-			pdf.setFontSize(scale * 72 / 25.4 * parseFloat(style['font-size']));
-			var str = n.textContent;
+			var pt_font_size = parseFloat(style['font-size']);
+			var font_size = scale * 72 / 25.6 * pt_font_size;
+			pdf.setFontSize(font_size);
 
 			var transform = n.getAttribute('transform');
-			if (transform) {
-				var transform_m = transform.match(/^rotate\(\s*(-?[0-9.]+)\s+(-?[0-9.]+),(-?[0-9.]+)\)$/);
-				if (!transform_m) {
+			var transform_m = transform && (
+				transform.match(/^rotate\(\s*(-?[0-9.]+)\s+(-?[0-9.]+),(-?[0-9.]+)\)$/));
+
+			var _render_text = function(str, x, y) {
+				if (transform_m) {
+					var angle = parseFloat(transform_m[1]);
+					var corex = parseFloat(transform_m[2]);
+					var corey = parseFloat(transform_m[3]);
+
+					var diffx = x - corex;
+					var diffy = y - corey;
+
+					var nx = corex + diffx * Math.cos(angle * Math.PI / 180) - diffy * Math.sin(angle * Math.PI / 180);
+					var ny = corey + diffx * Math.sin(angle * Math.PI / 180) + diffy * Math.cos(angle * Math.PI / 180);
+					pdf.text(nx * scale, ny * scale, str, null, -angle);
+				} else {
 					pdf.text(x * scale, y * scale, str);
-					break;
 				}
+			};
 
-				var angle = parseFloat(transform_m[1]);
-				var corex = parseFloat(transform_m[2]);
-				var corey = parseFloat(transform_m[3]);
-
-				var diffx = x - corex;
-				var diffy = y - corey;
-
-				var nx = corex + diffx * Math.cos(angle * Math.PI / 180) - diffy * Math.sin(angle * Math.PI / 180);
-				var ny = corey + diffx * Math.sin(angle * Math.PI / 180) + diffy * Math.cos(angle * Math.PI / 180);
-				pdf.text(nx * scale, ny * scale, str, null, -angle);
+			var text = n.textContent;
+			var dx_attr = n.getAttribute('dx');
+			if (dx_attr) {
+				var dx_vals = _split_args(dx_attr).map(parseFloat);
+				var ax = x;
+				for (var j = 0;j < text.length;j++) {
+					if (j < dx_vals.length) {
+						ax += dx_vals[j];
+					}
+					_render_text(text[j], ax, y);
+					ax += pdf.getStringUnitWidth(text[j]) * pt_font_size;
+				}
 			} else {
-				pdf.text(x * scale, y * scale, str);
+				_render_text(text, x, y);
 			}
-
 			break;
 		case 'image':
 			var imgData = n.getAttribute('xlink:href');
