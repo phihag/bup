@@ -71,14 +71,14 @@ dist: cleandist ## Create distribution files
 	node_modules/.bin/svgo -q --disable removeEmptyText --disable removeEmptyContainers -i div/scoresheet_international_5x11.svg -o dist/bup/div/scoresheet_international_5x11.svg
 	node_modules/.bin/svgo -q --disable removeEmptyText --disable removeEmptyContainers -i div/scoresheet_nla.svg -o dist/bup/div/scoresheet_nla.svg
 	node_modules/.bin/svgo -q --disable removeEmptyText --disable removeEmptyContainers -i div/scoresheet_obl.svg -o dist/bup/div/scoresheet_obl.svg
+	node_modules/.bin/svgo -q --disable removeEmptyText --disable removeEmptyContainers -i div/buli2017_mindestanforderungen_schiedsrichter.svg -o dist/bup/div/buli2017_mindestanforderungen_schiedsrichter.svg
+	node_modules/.bin/svgo -q --disable removeEmptyText --disable removeEmptyContainers -i div/buli2017_mindestanforderungen_verein.svg -o dist/bup/div/buli2017_mindestanforderungen_verein.svg
 	cp doc/ -R dist/bup/
 	cp \
 		div/bundesliga-ballsorten-2016.pdf \
 		div/bupdate.php \
 		div/Mannschaftsaufstellung_1BL-2015.pdf \
 		div/Mannschaftsaufstellung_2BL-2015.pdf \
-		div/buli2017_mindestanforderungen_schiedsrichter.pdf \
-		div/buli2017_mindestanforderungen_verein.pdf \
 		div/NLA_Resultatblatt.svg \
 		div/eventsheet_obl.xlsx \
 		div/Spielbericht-Buli-2016-17.xlsm \
