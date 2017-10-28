@@ -1,8 +1,8 @@
-svg2pdf support dx
-svg2pdf support font-weight?
-
 eventsheets: browser back fails
 eventsheets: esc from preview
+
+svg2pdf support dx
+svg2pdf support font-weight?
 
 selectevent module
 	debmlist: collect coordinates
@@ -22,7 +22,16 @@ redesign fullscreen interface
 	big button on top
 	automatically if going out of fullscreen (for example turning off A88X tablets)
 
-
+de-jqueryfy show
+	1. rename all show, hide, visible functions to $show, $hide, $visible
+	2. rename default-invisible to invisible
+	3. provide non-jquery show/hide/visible functions
+	4. start switching one by one to new functions
+provide native fadeOut
+de-jquerify network.request
+	1. rename to $request
+	2. provide request
+	3. switch step by step
 
 2felder: testen mit mac-Auflösung (@800x600)
 2courts: add teammatch score

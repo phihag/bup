@@ -516,17 +516,17 @@ function ui_init_court(s, hash_query) {
 	}
 
 	// Configure court select
-	var select = $('.settings select[name="court_select"]');
+	var $select = $('.settings select[name="court_select"]');
 	all_courts.forEach(function(c) {
-		var option = $('<option>');
-		option.text(c.label);
-		option.attr('value', c.id);
-		select.append(option);
+		var $option = $('<option>');
+		$option.text(c.label);
+		$option.attr('value', c.id);
+		$select.append($option);
 	});
-	select.attr('data-auto-available', 'true');
-	select.val(s.settings.court_id);
-	select.on('change', function() {
-		var c = _court_by_id(all_courts, $(select).val());
+	$select.attr('data-auto-available', 'true');
+	$select.val(s.settings.court_id);
+	$select.on('change', function() {
+		var c = _court_by_id(all_courts, $select.val());
 		if (c) {
 			_set_court(s, c);
 			resync();
