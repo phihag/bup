@@ -1,3 +1,8 @@
+svg2pdf support dx
+svg2pdf support font-weight?
+
+eventsheets: browser back fails
+eventsheets: esc from preview
 
 selectevent module
 	debmlist: collect coordinates
@@ -16,6 +21,8 @@ refmode:
 redesign fullscreen interface
 	big button on top
 	automatically if going out of fullscreen (for example turning off A88X tablets)
+
+
 
 2felder: testen mit mac-Auflösung (@800x600)
 2courts: add teammatch score
