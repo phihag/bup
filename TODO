@@ -3,7 +3,6 @@ set up rlwdemo
 	mention in doc/slides
 	mention in URLS.md
 
-tde_import matches should have match_id
 2felder: testen mit mac-Auflösung (@800x600)
 2courts: add teammatch score
 editevent crashes after mo -> mail Werner Durow
