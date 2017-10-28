@@ -2,8 +2,6 @@ buli minimum requirements: generate nicely
 	inline preview and print button (like scoresheet)
 	PDF generation
 	test in dist/
-minreqs to appcache
-clean up appcache
 
 
 set up rlwdemo

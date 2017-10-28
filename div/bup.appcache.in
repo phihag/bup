@@ -15,17 +15,10 @@ jszip.min.js
 div/scoresheet_international.svg
 div/scoresheet_international_5x11.svg
 div/scoresheet_bundesliga-2016.svg
-div/edemo.json
-div/vdemo.json
 div/bldemo.json
-div/bldemo_inprogress.json
-div/bldemo_incomplete.json
 div/nlademo.json
-div/nrwdemo.json
 div/rlmdemo.json
-div/tdemo.json
 div/bundesliga-logo.svg
-div/wakelock.mp4
 
 @svgfiles
 
