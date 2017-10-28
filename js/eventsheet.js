@@ -552,9 +552,6 @@ function _svg_text(svg, id, val) {
 function render_buli_minreq_svg(ev, es_key, ui8r) {
 	var preview = uiu.qs('.eventsheet_preview');
 	uiu.empty(preview);
-	var container = uiu.el(preview, 'div', {
-		style: 'height:85vh;width:100%;',
-	});
 
 	var xml_str = (new TextDecoder('utf-8')).decode(ui8r);
 	var svg_doc = (new DOMParser()).parseFromString(xml_str, 'image/svg+xml');
@@ -565,7 +562,9 @@ function render_buli_minreq_svg(ev, es_key, ui8r) {
 	_svg_text(svg, 'team1', ev.team_names[1]);
 	_svg_text(svg, 'date', ev.date);
 
-	container.appendChild(svg);
+	printing.set_orientation('portrait');
+
+	preview.appendChild(svg);
 }
 
 
@@ -1767,6 +1766,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var click = require('./click');
 	var eventutils = require('./eventutils');
 	var network = require('./network');
+	var printing = require('./printing');
 	var refmode_referee_ui = null; // break circle, really would be require('./refmode_referee_ui');
 	var render = require('./render');
 	var report_problem = require('./report_problem');

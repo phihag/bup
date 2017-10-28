@@ -1,5 +1,4 @@
 buli minimum requirements: generate nicely
-	print styles
 	inline preview and print button (like scoresheet)
 	PDF generation
 	test in dist/

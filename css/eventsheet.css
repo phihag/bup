@@ -95,3 +95,25 @@
 		margin: 0.5em auto 0 auto;
 	}
 }
+
+.eventsheet_preview {
+	height: 90vh;
+}
+
+@media print {
+	.eventsheet_button_row {
+		display: none;
+	}
+	.eventsheet_dialog {
+		display: block;
+		margin: 0;
+		padding: 0;
+	}
+	.eventsheet_form {
+		display: block;
+	}
+	.eventsheet_preview {
+		width: 99vw;
+		height: 99vh;
+	}
+}
