@@ -261,6 +261,8 @@ function show(enable_edit) {
 	bupui.esc_stack_push(hide);
 	control.set_current(state);
 
+	uiu.visible_qs('.order_change', network.supports_order());
+
 	uiu.visible_qs('.order_layout', true);
 	var display = uiu.qs('.order_display');
 	uiu.empty(display);
@@ -588,6 +590,7 @@ function ui_render() {
 	var manual_ui = uiu.qs('.order_edit');
 	uiu.empty(manual_ui);
 	if (current_enable_edit) {
+		uiu.show(manual_ui);
 		var add_form = uiu.el(manual_ui, 'form', {
 			class: 'order_add',
 		});
@@ -755,6 +758,17 @@ function ui_init() {
 
 	click.qs('.order_reset', function() {
 		init(state);
+	});
+
+	click.qs('.order_change', function() {
+		network.get_netw().save_order(state, current_matches, function(err) {
+			if (err) {
+				uiu.text_qs('.order_error', err.message);
+				uiu.show_qs('.order_error');
+			} else {
+				hide();
+			}
+		});
 	});
 }
 

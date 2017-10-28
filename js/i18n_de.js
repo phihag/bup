@@ -450,6 +450,7 @@ var i18n_de = {
 'order:optimize': 'Optimieren',
 'order:reset': 'Zurücksetzen',
 'order:print': 'Drucken',
+'order:change': 'Ändern',
 'order:ignore match': 'Spiel herausnehmen',
 'order:manual network message': 'Manuell erstellter Wettkampf',
 'order:add:placeholder': '1. Spieler, z.B. Marc Zwiebler',

@@ -188,11 +188,19 @@ div.order_container {
 }
 .order_reset,
 .order_optimize,
-.order_print {
+.order_change {
 	margin-left: 5vw;
 }
 
+.order_print {
+	font-size: 150%;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
 .order_container {
+	position: relative;
 	font-size: 3vmin;
 }
 
@@ -223,6 +231,9 @@ div.order_container {
 	.order_buttons {
 		display: none;
 	}
+	.order_print {
+		display: none;
+	}
 }
 
 .order_add > input,
@@ -246,5 +257,7 @@ div.order_container {
 	margin-top: 2em;
 }
 .order_error {
+	text-align: left;
+	font-size: 4vmin;
 	color: red;
 }

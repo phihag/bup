@@ -161,6 +161,19 @@ function on_load_data(s) {
 	}
 }
 
+function save_order(s, matches, cb) {
+	var new_order = matches.map(function(m) {
+		return m.setup.match_id;
+	});
+	event.matches.sort(function(m1, m2) {
+		return utils.cmp(
+			new_order.indexOf(m1.setup.match_id),
+			new_order.indexOf(m2.setup.match_id)
+		);
+	});
+	cb();
+}
+
 return {
 	send_press: send_press,
 	list_matches: list_matches,
@@ -173,6 +186,7 @@ return {
 	editable: editable,
 	on_edit_event: on_edit_event,
 	swap_event: swap_event,
+	save_order: save_order,
 };
 
 }

@@ -446,6 +446,7 @@ var i18n_frch = {
 'order:optimize': 'Optimiser',
 'order:reset': 'Remettre',
 'order:print': 'Imprimer',
+'order:change': 'Changer',
 'order:ignore match': 'Ignorer match',
 'order:manual network message': 'Événement créé manuellement',
 'order:add:match': 'Ajouter match',

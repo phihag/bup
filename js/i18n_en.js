@@ -450,6 +450,7 @@ var i18n_en = {
 'order:optimize': 'Optimize',
 'order:reset': 'Reset',
 'order:print': 'Print',
+'order:change': 'Change',
 'order:ignore match': 'ignore match',
 'order:manual network message': 'Manually created event',
 'order:add:match': 'add match',

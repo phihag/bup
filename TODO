@@ -1,7 +1,13 @@
+store order change in courtspot
+store order change in referee mode
+warn if order cannot be stored
+
+
+buli minimum requirements: print including team names
+
 tde_import matches should have match_id
 2felder: testen mit mac-Auflösung (@800x600)
 2courts: add teammatch score
-
 editevent crashes after mo -> mail Werner Durow
 
 login in displaymode
@@ -15,9 +21,6 @@ label tablet background
 ask before emergency restore
 	-> msg Paul
 dads test endtime etc.
-buli minimum requirements: print including team names
-display: teams + stand
-
 dads referee mode config
 	UI
 	add ad
@@ -32,12 +35,7 @@ dads gegen logo
 dads gegen simple
 link order in referee mode
 
-store order change in demo
-store order change in courtspot
-store order change in referee mode
-warn if order cannot be stored
-
-btde percourt
+d btde percourt display
 Ansage TV Refrath 2 11-5 -> Simon Adams
 
 pi configuration script

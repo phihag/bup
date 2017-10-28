@@ -695,6 +695,11 @@ function on_edit_event(s, cb) {
 	});
 }
 
+function supports_order() {
+	var netw = get_netw();
+	return netw && !!netw.save_order;
+}
+
 // Client communicates to server
 function ui_install_refmode_client(rc) {
 	networks.refmode_client = rc;
@@ -795,6 +800,7 @@ return {
 	select_event: select_event,
 	send_press: send_press,
 	subscribe: subscribe,
+	supports_order: supports_order,
 	ui_init: ui_init,
 	ui_install_refmode_client: ui_install_refmode_client,
 	ui_install_staticnet: ui_install_staticnet,
