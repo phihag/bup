@@ -945,16 +945,16 @@ function event_render(container) {
 			sheet_render(s, svg);
 		});
 
-		uiu.visible_qs('.scoresheet_loading-icon', false);
+		uiu.$visible_qs('.scoresheet_loading-icon', false);
 	});
 }
 
 function event_list_matches(container) {
 	network.list_matches(state, function(err, ev) {
-		uiu.visible_qs('.scoresheet_error', !!err);
+		uiu.$visible_qs('.scoresheet_error', !!err);
 		if (err) {
 			$('.scoresheet_error_message').text(err.msg);
-			uiu.visible_qs('.scoresheet_loading-icon', false);
+			uiu.$visible_qs('.scoresheet_loading-icon', false);
 			return;
 		}
 		network.update_event(state, ev);
@@ -983,8 +983,8 @@ function event_show() {
 
 	var container = uiu.qs('.scoresheet_container');
 	$(container).children('.scoresheet').remove();
-	uiu.visible_qs('.scoresheet_loading-icon', true);
-	uiu.visible(container, true);
+	uiu.$visible_qs('.scoresheet_loading-icon', true);
+	uiu.$visible(container, true);
 
 	if (state.event) {
 		event_render(container);
@@ -1022,17 +1022,17 @@ function show() {
 }
 
 function ui_show(s) {
-	uiu.visible_qs('.scoresheet_loading-icon', true);
+	uiu.$visible_qs('.scoresheet_loading-icon', true);
 	var container = uiu.qs('.scoresheet_container');
 	$(container).children('.scoresheet').remove();
-	uiu.visible(container, true);
+	uiu.$visible(container, true);
 	load_sheet(sheet_name(s.setup), function(xml) {
 		var svg = make_sheet_node(s, xml);
 		svg.setAttribute('class', 'scoresheet single_scoresheet');
 		// Usually we'd call importNode here to import the document here, but IE/Edge then ignores the styles
 		container.appendChild(svg);
 		sheet_render(s, svg);
-		uiu.visible_qs('.scoresheet_loading-icon', false);
+		uiu.$visible_qs('.scoresheet_loading-icon', false);
 	});
 }
 

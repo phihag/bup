@@ -220,7 +220,7 @@ function init(s) {
 	} catch(e) {
 		report_problem.on_error('order init failed: ' + e.message, '(order.js)', null, e);
 		uiu.text_qs('.order_error_message', e.message);
-		uiu.show_qs('.order_error');
+		uiu.$show_qs('.order_error');
 		return;
 	}
 
@@ -246,7 +246,7 @@ function show(enable_edit) {
 		return;
 	}
 
-	uiu.hide_qs('.order_error');
+	uiu.$hide_qs('.order_error');
 	current_enable_edit = enable_edit;
 	printing.set_orientation('landscape');
 
@@ -261,19 +261,19 @@ function show(enable_edit) {
 	bupui.esc_stack_push(hide);
 	control.set_current(state);
 
-	uiu.visible_qs('.order_change', network.supports_order());
+	uiu.$visible_qs('.order_change', network.supports_order());
 
-	uiu.visible_qs('.order_layout', true);
+	uiu.$visible_qs('.order_layout', true);
 	var display = uiu.qs('.order_display');
 	uiu.empty(display);
 
 	if (state.event && state.event.matches) {
 		init(state);
 	} else {
-		uiu.visible_qs('.order_loading-icon', true);
+		uiu.$visible_qs('.order_loading-icon', true);
 		network.list_matches(state, function(err, ev) {
-			uiu.visible_qs('.order_error', !!err);
-			uiu.visible_qs('.order_loading-icon', false);
+			uiu.$visible_qs('.order_error', !!err);
+			uiu.$visible_qs('.order_loading-icon', false);
 			if (err) {
 				uiu.text_qs('.order_error_message', err.msg);
 				return;
@@ -360,7 +360,7 @@ function ui_move_prepare(from_idx) {
 	$('.order_ignore_match').addClass('order_ignore_match_active');
 	uiu.qsEach('.order_insert', function(insert) {
 		var idx = parseInt(insert.getAttribute('data-order-idx'), 10);
-			uiu.visible(insert,
+			uiu.$visible(insert,
 			(from_idx >= current_ignore_start) ?
 			((idx <= current_ignore_start) && (idx != -99)) :
 			((idx !== from_idx) && (idx !== from_idx + 1))
@@ -370,7 +370,7 @@ function ui_move_prepare(from_idx) {
 	uiu.qsEach('.order_lock', function(lock) {
 		var idx = parseInt(lock.getAttribute('data-order-idx'), 10);
 		var match_id = current_matches[idx].setup.match_id;
-		uiu.visible(lock,
+		uiu.$visible(lock,
 			(current_locked[match_id]) ||
 			(from_idx === idx)
 		);
@@ -441,13 +441,13 @@ function ui_move_abort() {
 	$('.order_ignore_match_active').removeClass('order_ignore_match_active');
 	current_from = null;
 	uiu.qsEach('.order_insert', function(insert) {
-		uiu.visible(insert, false);
+		uiu.$visible(insert, false);
 	});
 
 	uiu.qsEach('.order_lock', function(lock) {
 		var idx = parseInt(lock.getAttribute('data-order-idx'), 10);
 		var match_id = current_matches[idx].setup.match_id;
-		uiu.visible(lock, current_locked[match_id]);
+		uiu.$visible(lock, current_locked[match_id]);
 	});
 }
 
@@ -590,7 +590,7 @@ function ui_render() {
 	var manual_ui = uiu.qs('.order_edit');
 	uiu.empty(manual_ui);
 	if (current_enable_edit) {
-		uiu.show(manual_ui);
+		uiu.$show(manual_ui);
 		var add_form = uiu.el(manual_ui, 'form', {
 			class: 'order_add',
 		});
@@ -713,7 +713,7 @@ function hide() {
 	}
 
 	bupui.esc_stack_pop();
-	uiu.hide_qs('.order_layout');
+	uiu.$hide_qs('.order_layout');
 	state.ui.order_visible = false;
 	state.ui.mo_visible = false;
 
@@ -764,7 +764,7 @@ function ui_init() {
 		network.get_netw().save_order(state, current_matches, function(err) {
 			if (err) {
 				uiu.text_qs('.order_error', err.message);
-				uiu.show_qs('.order_error');
+				uiu.$show_qs('.order_error');
 			} else {
 				hide();
 			}

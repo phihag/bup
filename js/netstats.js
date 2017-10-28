@@ -105,7 +105,7 @@ function render_table() {
 		cstats.last_str = (cstats.last !== null) ? (Math.round(cstats.last) + ' ms') : '-';
 		return cstats;
 	});
-	uiu.visible_qs('.netstats_empty', cols.length === 0);
+	uiu.$visible_qs('.netstats_empty', cols.length === 0);
 
 	var table = {
 		cols: cols,
@@ -141,7 +141,7 @@ function show() {
 	bupui.esc_stack_push(hide);
 	control.set_current(state);
 
-	uiu.visible_qs('.netstats_layout', true);
+	uiu.$visible_qs('.netstats_layout', true);
 	render_table();
 }
 
@@ -151,7 +151,7 @@ function hide() {
 	}
 
 	bupui.esc_stack_pop();
-	uiu.visible_qs('.netstats_layout', false);
+	uiu.$visible_qs('.netstats_layout', false);
 	state.ui.netstats_visible = false;
 	control.set_current(state);
 	settings.show();
@@ -159,7 +159,7 @@ function hide() {
 
 function ui_init() {
 	var link = uiu.qs('.netstats_link');
-	uiu.visible(link, true);
+	uiu.$visible(link, true);
 	click.on(link, function(e) {
 		e.preventDefault();
 		show();

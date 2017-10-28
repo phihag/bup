@@ -24,7 +24,7 @@ function on_status_change(new_status) {
 
 	uiu.text_qs('.referee_status', rr.status_str(state));
 	if (new_status.status === 'enabled') {
-		uiu.visible_qs('.refmode_referee_redir', !!new_status.local_addr);
+		uiu.$visible_qs('.refmode_referee_redir', !!new_status.local_addr);
 		if (new_status.local_addr) {
 			uiu.text_qs('.refmode_referee_redir_url', new_status.local_addr);
 		}
@@ -109,7 +109,7 @@ function on_client_match_link_click(e) {
 	if (!c) return;
 
 	hide_tmp();
-	uiu.visible_qs('#game', true);
+	uiu.$visible_qs('#game', true);
 	control.start_match(state, c.setup, c.presses);
 }
 
@@ -118,7 +118,7 @@ function on_event_match_link_click(e) {
 	if (!m) return;
 
 	hide_tmp();
-	uiu.visible_qs('#game', true);
+	uiu.$visible_qs('#game', true);
 	control.start_match(state, m.setup, m.presses);
 }
 
@@ -209,7 +209,7 @@ function make_editable(el, cb) {
 	var edit = function() {
 		var destroy = function() {
 			uiu.remove(form);
-			uiu.visible(el, true);
+			uiu.$visible(el, true);
 		};
 
 		var cur_val = el.firstChild.textContent;
@@ -242,9 +242,9 @@ function make_editable(el, cb) {
 		});
 		el.parentNode.insertBefore(form, el.nextSibling);
 
-		uiu.visible(el, false);
+		uiu.$visible(el, false);
 		if (edit_btn) {
-			uiu.visible(edit_btn, false);
+			uiu.$visible(edit_btn, false);
 		}
 		input.setSelectionRange(0, cur_val.length);
 		input.focus();
@@ -741,7 +741,7 @@ function show() {
 	control.set_current(state);
 
 	uiu.addClass_qs('.settings_layout', 'settings_layout_refereemode');
-	uiu.visible_qs('.referee_layout', true);
+	uiu.$visible_qs('.referee_layout', true);
 	if (err) {
 		show_unsupported(err);
 		return;
@@ -758,21 +758,21 @@ function hide() {
 	state.ui.referee_mode = false;
 	refmode_client_ui.on_settings_change(state);
 	uiu.removeClass_qs('.settings_layout', 'settings_layout_refereemode');
-	uiu.visible_qs('.referee_layout', false);
+	uiu.$visible_qs('.referee_layout', false);
 	settings.on_mode_change(state);
 	// TODO disconnect?
 	rr = null;
 }
 
 function hide_tmp() {
-	uiu.visible_qs('.referee_layout', false);
+	uiu.$visible_qs('.referee_layout', false);
 	settings.hide_refereemode();
 }
 
 function back_to_ui() {
 	settings.hide(true);
-	uiu.visible_qs('.referee_layout', true);
-	uiu.visible_qs('#game', false);
+	uiu.$visible_qs('.referee_layout', true);
+	uiu.$visible_qs('#game', false);
 	settings.show_refereemode();
 }
 

@@ -419,11 +419,11 @@ function pdf() {
 
 function ui_render_init(s) {
 	var err_display = uiu.qs('.setupsheet_error');
-	uiu.hide(err_display);
+	uiu.$hide(err_display);
 	uiu.text(err_display);
 	cfg = calc_config(s.event);
 	if (!cfg) {
-		uiu.show(err_display);
+		uiu.$show(err_display);
 		uiu.text(err_display, 'Unsupported league: ' + s.event.league_key);
 		return;
 	}
@@ -683,15 +683,15 @@ function show() {
 	bupui.esc_stack_push(ask_hide_and_back);
 	control.set_current(state);
 
-	uiu.visible_qs('.setupsheet_layout', true);
+	uiu.$visible_qs('.setupsheet_layout', true);
 	if (state.event && state.event.matches && state.event.all_players) {
-		uiu.visible_qs('.setupsheet_loading-icon', false);
+		uiu.$visible_qs('.setupsheet_loading-icon', false);
 		ui_render_init(state);
 	} else {
-		uiu.visible_qs('.setupsheet_loading-icon', true);
+		uiu.$visible_qs('.setupsheet_loading-icon', true);
 		network.list_full_event(state, function(err) {
-			uiu.visible_qs('.setupsheet_error', !!err);
-			uiu.visible_qs('.setupsheet_loading-icon', false);
+			uiu.$visible_qs('.setupsheet_error', !!err);
+			uiu.$visible_qs('.setupsheet_loading-icon', false);
 			if (err) {
 				uiu.text_qs('.setupsheet_error_message', err.msg);
 				return;
@@ -708,7 +708,7 @@ function hide() {
 
 	bupui.esc_stack_pop();
 	state.ui.setupsheet_visible = false;
-	uiu.visible_qs('.setupsheet_layout', false);
+	uiu.$visible_qs('.setupsheet_layout', false);
 	return true;
 }
 
@@ -748,7 +748,7 @@ function ui_init() {
 	click.qs('.setupsheet_cancel', ask_hide_and_back);
 	click.qs('.setupsheet_save', function() {
 		save(state, function(err) {
-			uiu.visible_qs('.setupsheet_error', err);
+			uiu.$visible_qs('.setupsheet_error', err);
 			if (err) {
 				uiu.text_qs('.setupsheet_error', err.msg);
 			} else {

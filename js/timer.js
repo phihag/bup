@@ -3,14 +3,14 @@ var timer = (function() {
 
 var ui_timer = null;
 function set() {
-	uiu.visible_qs('.timer_restart', !state.timer.upwards);
+	uiu.$visible_qs('.timer_restart', !state.timer.upwards);
 
 	if (ui_timer) {
 		window.clearTimeout(ui_timer);
 	}
 
 	if (update()) {
-		uiu.show_qs('.timer_container');
+		uiu.$show_qs('.timer_container');
 	}
 }
 
@@ -105,11 +105,11 @@ function remove(immediately) {
 	if (ui_timer) {
 		window.clearTimeout(ui_timer);
 		ui_timer = null;
-		var $container = $('.timer_container');
+		var container = uiu.qs('.timer_container');
 		if (immediately) {
-			$container.hide();
+			uiu.hide(container);
 		} else {
-			$container.fadeOut(500);
+			uiu.fadeout(container, 500);
 		}
 	}
 }

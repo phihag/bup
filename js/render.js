@@ -121,7 +121,7 @@ function _score_display_set_game(s, game, game_index, is_current) {
 		_val(left_input, left_points);
 		left_text.text(left_points);
 		if (editmode_active) {
-			uiu.visible(left_input, editmode_score_active);
+			uiu.$visible(left_input, editmode_score_active);
 		}
 	}
 
@@ -145,7 +145,7 @@ function _score_display_set_game(s, game, game_index, is_current) {
 		_val(right_input, right_points);
 		right_text.text(right_points);
 		if (editmode_active) {
-			uiu.visible(right_input, editmode_score_active);
+			uiu.$visible(right_input, editmode_score_active);
 		}
 	}
 
@@ -211,7 +211,7 @@ function render_score_display(s) {
 		}
 	}
 
-	uiu.visible_qs('.score_counting_container', (
+	uiu.$visible_qs('.score_counting_container', (
 		!s.ui.editmode_active &&
 		s.setup && s.setup.counting &&
 		s.match && (s.match.finished_games.length === 0) &&
@@ -270,43 +270,43 @@ function ui_render(s) {
 
 	uiu.text_qs('#shuttle_counter_value', s.match.shuttle_count);
 
-	uiu.visible_qs('#love-all-dialog', s.match.announce_pregame && !s.match.injuries && !s.match.suspended);
+	uiu.$visible_qs('#love-all-dialog', s.match.announce_pregame && !s.match.injuries && !s.match.suspended);
 	if (s.match.announce_pregame) {
 		dialog_active = true;
 		_set_dialog(s, '#love-all-dialog');
 	}
 
 	uiu.disabled_qsa('#button_shuttle,#button_exception', s.match.finish_confirmed);
-	uiu.visible_qs('#postmatch-leave-dialog', s.match.finish_confirmed);
+	uiu.$visible_qs('#postmatch-leave-dialog', s.match.finish_confirmed);
 	if (s.match.finish_confirmed) {
 		dialog_active = true;
 	}
-	uiu.visible_qs('.postmatch_options', s.match.finished);
-	uiu.visible_qs('#postmatch-confirm-dialog', s.match.finished && !s.match.finish_confirmed && !s.match.suspended && !s.match.injuries);
+	uiu.$visible_qs('.postmatch_options', s.match.finished);
+	uiu.$visible_qs('#postmatch-confirm-dialog', s.match.finished && !s.match.finish_confirmed && !s.match.suspended && !s.match.injuries);
 	if (s.match.finished && !s.match.finish_confirmed) {
 		dialog_active = true;
 		_set_dialog(s, '#postmatch-confirm-dialog');
 	}
 
-	uiu.visible_qs('#postgame-confirm-dialog', !s.match.finished && s.game.finished && !s.match.suspended && !s.match.injuries);
+	uiu.$visible_qs('#postgame-confirm-dialog', !s.match.finished && s.game.finished && !s.match.suspended && !s.match.injuries);
 	if (!s.match.finished && s.game.finished) {
 		dialog_active = true;
 		_set_dialog(s, '#postgame-confirm-dialog');
 	}
 
-	uiu.visible_qs('#postinterval-confirm-dialog', s.game.interval);
+	uiu.$visible_qs('#postinterval-confirm-dialog', s.game.interval);
 	if (s.game.interval) {
 		dialog_active = true;
 		_set_dialog(s, '#postinterval-confirm-dialog');
 	}
 
-	uiu.visible_qs('#suspension-resume-dialog', s.match.suspended);
+	uiu.$visible_qs('#suspension-resume-dialog', s.match.suspended);
 	if (s.match.suspended) {
 		dialog_active = true;
 		_set_dialog(s, '#suspension-resume-dialog', s._('button:Unsuspend'));
 	}
 
-	uiu.visible_qs('#injury-resume-dialog', s.match.injuries && !s.match.suspended);
+	uiu.$visible_qs('#injury-resume-dialog', s.match.injuries && !s.match.suspended);
 	$('#injury-resume-dialog button').remove();
 	if (s.match.injuries) {
 		dialog_active = true;
@@ -444,11 +444,11 @@ function ui_render(s) {
 }
 
 function show() {
-	uiu.visible_qs('#game', true);
+	uiu.$visible_qs('#game', true);
 }
 
 function hide() {
-	uiu.visible_qs('#game', false);
+	uiu.$visible_qs('#game', false);
 }
 
 return {

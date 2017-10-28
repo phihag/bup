@@ -114,7 +114,7 @@ function update_status_str(s) {
 
 function handle_change(estate) {
 	if (estate.status === 'enabled') {
-		uiu.visible_qs('.refmode_client_redir', !!estate.local_addr);
+		uiu.$visible_qs('.refmode_client_redir', !!estate.local_addr);
 		if (estate.local_addr) {
 			uiu.text_qs('.refmode_client_redir_url', estate.local_addr);
 		}
@@ -177,7 +177,7 @@ function set_list(s, enabled) {
 	var i18n = enabled ? 'refmode:client:no_select_referee' : 'refmode:client:select_referee';
 	btn.setAttribute('data-i18n', i18n);
 	uiu.text(btn, s._(i18n));
-	uiu.visible_qs('.refmode_client_referee_list', enabled);
+	uiu.$visible_qs('.refmode_client_referee_list', enabled);
 }
 
 function on_event_update() {

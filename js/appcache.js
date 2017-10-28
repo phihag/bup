@@ -20,7 +20,7 @@ function ui_init() {
 
 	click.qsa('.appcache_update_button', update_now);
 	click.qs('.appcache_later_button', function() {
-		uiu.visible_qs('.appcache_update_ingame', false);
+		uiu.hide_qs('.appcache_update_ingame');
 	});
 
 	window.applicationCache.addEventListener('updateready', function() {
@@ -41,8 +41,8 @@ function ui_init() {
 function on_post_update(new_version) {
 	uiu.text_qs('.appcache_updated_version', new_version);
 	var updated_wrapper = uiu.qs('.appcache_updated_wrapper');
-	uiu.visible(updated_wrapper, true);
-	$(updated_wrapper).fadeOut(2500);
+	uiu.show(updated_wrapper);
+	uiu.fadeout(updated_wrapper, 2500);
 
 	var hash = window.location.hash;
 	hash = hash.replace(/([&#])updated(?=&|$)/g, function(_, g1) {

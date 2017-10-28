@@ -7,7 +7,7 @@ function ui_visible(val) {
 	var main_cui = render.main_court_ui();
 	for (var k in main_cui) {
 		if (/^editmode_/.test(k)) {
-			uiu.visible(main_cui[k], !!val);
+			uiu.$visible(main_cui[k], !!val);
 		}
 	}
 }
@@ -21,7 +21,7 @@ function enter() {
 	uiu.text(toggle_button, state._(k));
 	toggle_button.setAttribute('data-i18n', k);
 
-	uiu.visible_qsa('#score td.score span', false);
+	uiu.$visible_qsa('#score td.score span', false);
 	uiu.addClass_qs('#game', 'editmode');
 	update_ui(state);
 }
@@ -37,7 +37,7 @@ function leave() {
 	toggle_button.setAttribute('data-i18n', k);
 
 	hide_inputs(0);
-	uiu.visible_qsa('#score td.score span', true);
+	uiu.$visible_qsa('#score td.score span', true);
 }
 
 function ui_init() {
@@ -100,7 +100,7 @@ function hide_inputs(since_game) {
 	uiu.qsEach('.editmode_score', function(n) {
 		uiu.removeClass(n, 'editmode_invalid');
 		var game_index = parseInt(n.getAttribute('data-game-index'), 10);
-		uiu.visible(n, game_index < since_game);
+		uiu.$visible(n, game_index < since_game);
 	});
 }
 

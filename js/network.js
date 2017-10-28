@@ -342,8 +342,8 @@ function ui_list_matches(s, silent, no_timer) {
 		urlexport.render_links(s, uiu.qs('.urlexport_links'));
 		var editable = netw.editable(s);
 		var use_setupsheet = event.team_competition;
-		uiu.visible_qs('.setupsheet_link', editable && use_setupsheet);
-		uiu.visible_qs('.editevent_link', editable && !use_setupsheet);
+		uiu.$visible_qs('.setupsheet_link', editable && use_setupsheet);
+		uiu.$visible_qs('.editevent_link', editable && !use_setupsheet);
 		ui_render_matchlist(s, event);
 	}, function(s) {
 		return no_timer ? 'abort' : s.settings.network_update_interval;
@@ -428,7 +428,7 @@ function errstate(component, err) {
 	if (err) {
 		erroneous[component] = true;
 
-		uiu.show_qs('.network_desync_container');
+		uiu.$show_qs('.network_desync_container');
 		if (resync_timeout === null) {
 			schedule_resync();
 		}
@@ -636,7 +636,7 @@ function ui_init(s, hash_query) {
 	var netw = get_netw();
 	if (netw) {
 		netw.ui_init(s);
-		uiu.visible_qs('.setup_network_container', true);
+		uiu.$visible_qs('.setup_network_container', true);
 
 		fetch_courts(s, function() {
 			ui_init_court(s, hash_query);

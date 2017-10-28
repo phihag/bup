@@ -68,13 +68,13 @@ function render(s, cui) {
 		cui.editmode_arrow.style.MsTransform = transform_val;
 		cui.editmode_arrow.style.WebkitTransform = transform_val;
 	}
-	uiu.visible(cui.arrow, (cdata.left_serving !== null));
+	uiu.$visible(cui.arrow, (cdata.left_serving !== null));
 
 	uiu.text(cui.match_name_text, s.setup.match_name ? s.setup.match_name : '');
 
 	var show_teams = (s.setup.team_competition && (s.game.team1_left !== null));
-	uiu.visible(cui.left_team, show_teams);
-	uiu.visible(cui.right_team, show_teams);
+	uiu.$visible(cui.left_team, show_teams);
+	uiu.$visible(cui.right_team, show_teams);
 	if (show_teams) {
 		var left_index = s.game.team1_left ? 0 : 1;
 		uiu.text(cui.left_team_text, s.setup.teams[left_index].name);

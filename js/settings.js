@@ -94,7 +94,7 @@ function show_displaymode() {
 	window.addEventListener('mousemove', autohide_restart);
 	window.addEventListener('click', autohide_restart);
 	state.ui.displaymode_settings_visible = true;
-	uiu.visible_qs('#settings_wrapper', true);	
+	uiu.$visible_qs('#settings_wrapper', true);
 	bupui.esc_stack_push(hide_displaymode);
 	autohide_restart();
 }
@@ -110,7 +110,7 @@ function hide_displaymode() {
 		_autohide_to = null;
 	}
 	state.ui.displaymode_settings_visible = false;
-	uiu.visible_qs('#settings_wrapper', false);
+	uiu.$visible_qs('#settings_wrapper', false);
 	bupui.esc_stack_pop();
 }
 
@@ -123,12 +123,12 @@ function toggle_displaymode() {
 }
 
 function show_refereemode() {
-	uiu.visible_qs('#settings_wrapper', true);
-	uiu.visible_qs('.ingame_options', false);
+	uiu.$visible_qs('#settings_wrapper', true);
+	uiu.$visible_qs('.ingame_options', false);
 }
 
 function hide_refereemode() {
-	uiu.visible_qs('#settings_wrapper', false);
+	uiu.$visible_qs('#settings_wrapper', false);
 }
 
 var _network_hide_cb = null;
@@ -141,21 +141,21 @@ function show() {
 	scoresheet.hide();
 	stats.hide();
 
-	uiu.visible_qs('#settings_wrapper', true);
+	uiu.$visible_qs('#settings_wrapper', true);
 	var net_enabled = network.is_enabled();
-	uiu.visible_qs('.setup_network_container', net_enabled);
-	uiu.visible_qs('.import_container', ! net_enabled);
-	uiu.visible_qs('#setup_manual_form', ! net_enabled);
+	uiu.$visible_qs('.setup_network_container', net_enabled);
+	uiu.$visible_qs('.import_container', ! net_enabled);
+	uiu.$visible_qs('#setup_manual_form', ! net_enabled);
 	if (net_enabled) {
-		uiu.show_qs('.setup_show_manual');
+		uiu.$show_qs('.setup_show_manual');
 		_network_hide_cb = network.ui_list_matches(state);
 	}
 	bupui.esc_stack_push(function() {
 		hide();
 	});
 	match_storage.ui_init();
-	uiu.visible_qs('.ingame_options', state.initialized);
-	uiu.visible_qs('.ingame_options_refmode', state.ui.referee_mode);
+	uiu.$visible_qs('.ingame_options', state.initialized);
+	uiu.$visible_qs('.ingame_options_refmode', state.ui.referee_mode);
 }
 
 function hide(force, skip_state) {
@@ -171,7 +171,7 @@ function hide(force, skip_state) {
 	}
 
 	state.ui.settings_visible = false;
-	uiu.visible_qs('#settings_wrapper', false);
+	uiu.$visible_qs('#settings_wrapper', false);
 	bupui.esc_stack_pop();
 	if (!skip_state) {
 		control.set_current(state);
@@ -184,7 +184,7 @@ function update_court(s) {
 }
 
 function update_refclient(s) {
-	uiu.visible_qs('.settings_refmode_client_container', (get_mode(s) !== 'referee') && s.settings.refmode_client_enabled);
+	uiu.$visible_qs('.settings_refmode_client_container', (get_mode(s) !== 'referee') && s.settings.refmode_client_enabled);
 	refmode_client_ui.on_settings_change(s);
 }
 
@@ -253,8 +253,8 @@ function update_court_settings(s) {
 		automatic = uiu.qs('.settings select[name="court_select"]').getAttribute('data-auto-available') === 'true';
 		manual = ! automatic;
 	}
-	uiu.visible_qs('.settings_court_manual', manual);
-	uiu.visible_qs('.settings_court_automatic', automatic);
+	uiu.$visible_qs('.settings_court_manual', manual);
+	uiu.$visible_qs('.settings_court_automatic', automatic);
 }
 
 function update(s) {
@@ -427,8 +427,8 @@ function ui_init(s) {
 	$('.setup_show_manual').on('click', function(e) {
 		e.preventDefault();
 		$('.setup_show_manual').hide();
-		uiu.show_qs('#setup_manual_form');
-		uiu.show_qs('.import_container');
+		uiu.$show_qs('#setup_manual_form');
+		uiu.$show_qs('.import_container');
 
 		return false;
 	});
@@ -468,7 +468,7 @@ function on_mode_change(s) {
 
 	uiu.qsEach('#settings_wrapper [data-bup-modes]', function(el) {
 		var modes = el.getAttribute('data-bup-modes');
-		uiu.visible(el, modes.indexOf(mode) >= 0);
+		uiu.$visible(el, modes.indexOf(mode) >= 0);
 	});
 	update_court_settings(s);
 

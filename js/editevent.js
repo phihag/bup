@@ -2,7 +2,7 @@
 var editevent = (function() {
 
 function err_handler(err) {
-	uiu.visible_qs('.editevent_error', err);
+	uiu.$visible_qs('.editevent_error', err);
 	if (err) {
 		uiu.text_qs('.editevent_error_message', err.msg);
 	}
@@ -254,15 +254,15 @@ function show() {
 	bupui.esc_stack_push(hide_and_back);
 	control.set_current(state);
 
-	uiu.visible_qs('.editevent_layout', true);
+	uiu.$visible_qs('.editevent_layout', true);
 	if (state.event && state.event.matches) {
-		uiu.visible_qs('.editevent_loading-icon', false);
+		uiu.$visible_qs('.editevent_loading-icon', false);
 		render_table(state);
 	} else {
-		uiu.show_qs('.editevent_loading-icon');
+		uiu.$show_qs('.editevent_loading-icon');
 		network.list_matches(state, function(err, ev) {
-			uiu.visible_qs('.editevent_error', !!err);
-			uiu.visible_qs('.editevent_loading-icon', false);
+			uiu.$visible_qs('.editevent_error', !!err);
+			uiu.$visible_qs('.editevent_loading-icon', false);
 			if (err) {
 				uiu.text_qs('.editevent_error_message', err.msg);
 				return;
@@ -275,7 +275,7 @@ function show() {
 	network.list_events(state, function(err, events) {
 		var sel_container = uiu.qs('.editevent_select');
 		if (err && (err.code === 'unsupported')) {
-			uiu.hide(sel_container);
+			uiu.$hide(sel_container);
 			return;
 		}
 
@@ -299,9 +299,9 @@ function show() {
 		}, state._('editevent:select event'));
 		form.addEventListener('submit', function(e) {
 			e.preventDefault();
-			uiu.show_qs('.editevent_loading-icon');
+			uiu.$show_qs('.editevent_loading-icon');
 			network.select_event(state, JSON.parse(select.value), function(err) {
-				uiu.hide_qs('.editevent_loading-icon');
+				uiu.$hide_qs('.editevent_loading-icon');
 				if (err) {
 					uiu.text_qs('.editevent_error_message', err.msg);
 				} else {
@@ -310,7 +310,7 @@ function show() {
 			});
 		});
 
-		uiu.show(sel_container);
+		uiu.$show(sel_container);
 	});
 }
 
@@ -321,7 +321,7 @@ function hide() {
 
 	bupui.esc_stack_pop();
 	state.ui.editevent_visible = false;
-	uiu.visible_qs('.editevent_layout', false);
+	uiu.$visible_qs('.editevent_layout', false);
 	return true;
 }
 

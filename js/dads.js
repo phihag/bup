@@ -446,10 +446,10 @@ function advance_periodic(s, container) {
 	}
 	s.dad_periodic_active = !s.dad_periodic_active;
 	if (s.dad_periodic_active) {
-		uiu.show(container);
+		uiu.$show(container);
 		cycle(s, container);
 	} else {
-		uiu.hide(container);
+		uiu.$hide(container);
 	}
 
 	s.dad_periodic_to = setTimeout(function() {
@@ -501,7 +501,7 @@ function update_utime(s, container) {
 	}
 
 	if (now >= utime) {
-		uiu.hide(container);
+		uiu.$hide(container);
 	} else {
 		s.dad_cycle_interval = setInterval(function() {
 			cycle(s, container);
@@ -509,7 +509,7 @@ function update_utime(s, container) {
 		s.dad_until_to = setTimeout(function() {
 			update_utime(s, container);
 		}, utime - now);
-		uiu.show(container);
+		uiu.$show(container);
 	}
 }
 
@@ -522,7 +522,7 @@ function d_onconfchange(s, container) {
 
 	cancel_timeouts(s);
 	if (mode === 'none') {
-		uiu.hide(container);
+		uiu.$hide(container);
 		return;
 	}
 
@@ -540,7 +540,7 @@ function d_onconfchange(s, container) {
 		s.dad_cycle_interval = setInterval(function() {
 			cycle(s, container);
 		}, s.settings.dads_interval);
-		uiu.show(container);
+		uiu.$show(container);
 	} else if (mode === 'periodic') {
 		s.dad_periodic_active = true;
 		advance_periodic(s, container);
@@ -599,7 +599,7 @@ function cycle_init(s, container) {
 	s.dad_cycle_interval = setInterval(function() {
 		cycle(s, container);
 	}, s.settings.dads_interval);
-	uiu.show(container);
+	uiu.$show(container);
 }
 
 // Called when the match has (potentially) changed
@@ -620,14 +620,14 @@ function d_onmatchchange(s, container, match) {
 			}, remaining);
 		} else {
 			cancel_timeouts(s);
-			uiu.hide(container);
+			uiu.$hide(container);
 		}
 	}
 }
 
 function d_hide(container) {
 	cancel_timeouts(state);
-	uiu.hide(container);
+	uiu.$hide(container);
 }
 
 function ui_init(s) {

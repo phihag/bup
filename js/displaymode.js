@@ -1942,10 +1942,10 @@ function update(err, s, event) {
 	}
 
 	var court_select = uiu.qs('[name="displaymode_court_id"]');
-	uiu.visible_qs('.settings_display_court_id', option_applies(style, 'court_id'));
-	uiu.visible_qs('.settings_display_reverse_order', option_applies(style, 'reverse_order'));
-	uiu.visible_qs('.settings_d_scale', option_applies(style, 'scale'));
-	uiu.visible_qs('.settings_d_team_colors',
+	uiu.$visible_qs('.settings_display_court_id', option_applies(style, 'court_id'));
+	uiu.$visible_qs('.settings_display_reverse_order', option_applies(style, 'reverse_order'));
+	uiu.$visible_qs('.settings_d_scale', option_applies(style, 'scale'));
+	uiu.$visible_qs('.settings_d_team_colors',
 		option_applies(style, 'c0') &&
 		!utils.deep_equal(
 			calc_team_colors(event, s.settings),
@@ -1965,7 +1965,7 @@ function update(err, s, event) {
 	}
 
 	var used_colors = active_colors(style);
-	uiu.visible_qs('.settings_d_colors', used_colors.length > 0);
+	uiu.$visible_qs('.settings_d_colors', used_colors.length > 0);
 	var color_inputs = uiu.qs('.settings_d_colors_inputs');
 	var ui_colors_state_json = color_inputs.getAttribute('data-json');
 	var ui_colors_state = ui_colors_state_json ? JSON.parse(ui_colors_state_json) : '<no info>';
@@ -2114,7 +2114,7 @@ function show() {
 	settings.show_displaymode();
 
 	control.set_current(state);
-	uiu.show_qs('.displaymode_layout');
+	uiu.$show_qs('.displaymode_layout');
 	dads.d_onconfchange();
 	uiu.addClass_qs('.settings_layout', 'settings_layout_displaymode');
 
@@ -2140,7 +2140,7 @@ function hide() {
 	var container = uiu.qs('.displaymode_layout');
 	autosize.unmaintain_all(container);
 	uiu.empty(container);
-	uiu.hide(container);
+	uiu.$hide(container);
 	dads.d_hide(uiu.qs('.d_ads'));
 	_last_painted_hash = null;
 

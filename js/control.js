@@ -382,7 +382,7 @@ function ui_show_exception_dialog() {
 function hide_exception_dialog() {
 	uninstall_destructor(state, hide_exception_dialog);
 	bupui.esc_stack_pop();
-	uiu.hide_qs('#exception_wrapper');
+	uiu.$hide_qs('#exception_wrapper');
 }
 
 

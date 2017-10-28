@@ -837,7 +837,7 @@ function hide() {
 	}
 
 	bupui.esc_stack_pop();
-	uiu.hide_qs('.stats_layout');
+	uiu.$hide_qs('.stats_layout');
 	state.ui.stats_visible = false;
 	control.set_current(state);
 

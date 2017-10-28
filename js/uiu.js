@@ -12,15 +12,6 @@ function qsEach(selector, func, container) {
 	}
 }
 
-function visible(node, val) {
-	// TODO test adding/removing invisible class here
-	if (val) {
-		$(node).show();
-	} else {
-		$(node).hide();
-	}
-}
-
 function qs(selector, container) {
 	if (! container) {
 		container = document;
@@ -41,6 +32,76 @@ function qs(selector, container) {
 	return node;
 }
 
+function $visible(node, val) {
+	// TODO test adding/removing invisible class here
+	if (val) {
+		$(node).show();
+	} else {
+		$(node).hide();
+	}
+}
+
+function $visible_qsa(selector, val) {
+	var nodes = document.querySelectorAll(selector);
+	for (var i = 0;i < nodes.length;i++) {
+		$visible(nodes[i], val);
+	}
+}
+
+function $visible_qs(selector, val) {
+	$visible(qs(selector), val);
+}
+
+function $hide_qs(selector) {
+	$visible_qs(selector, false);
+}
+
+function $show_qs(selector) {
+	$visible_qs(selector, true);
+}
+
+function $hide(node) {
+	$visible(node, false);
+}
+
+function $show(node) {
+	$visible(node, true);
+}
+
+function is_hidden(el) {
+	// Fast track: look if style is set
+	if (el.style.display === 'none') return true;
+	if (el.style.display) return false;
+
+	var cs = window.getComputedStyle(el);
+	return (cs.display === 'none');
+}
+
+function hide(el) {
+	var style = el.style;
+	if (! is_hidden(el)) {
+		el.setAttribute('data-uiu-display', style.display);
+		style.display = 'none';
+	}
+}
+
+function show(el) {
+	var style = el.style;
+	removeClass(el, 'default-invisible');
+	if (is_hidden(el)) {
+		style.display = el.getAttribute('data-uiu-display');
+		el.removeAttribute('data-uiu-display');
+	}
+}
+
+function visible(el, val) {
+	if (val) {
+		show(el);
+	} else {
+		hide(el);
+	}
+}
+
 function visible_qsa(selector, val) {
 	var nodes = document.querySelectorAll(selector);
 	for (var i = 0;i < nodes.length;i++) {
@@ -58,14 +119,6 @@ function hide_qs(selector) {
 
 function show_qs(selector) {
 	visible_qs(selector, true);
-}
-
-function hide(node) {
-	visible(node, false);
-}
-
-function show(node) {
-	visible(node, true);
 }
 
 function disabled_qsa(qs, is_disabled) {
@@ -218,6 +271,31 @@ function mark_disabled(el, is_enabled) {
 	}
 }
 
+function fadeout(el, timeout) {
+	var now = ((window.performance && window.performance.now) ? function() {
+		return window.performance.now();
+	} : Date.now);
+	var rfa = (window.requestAnimationFrame ? window.requestAnimationFrame : function(cb) {
+		setTimeout(cb, 16);
+	});
+
+	var start = now();
+	var style = el.style;
+	style.opacity = 1;
+
+	function step() {
+		var cur = now() - start;
+		if (cur >= timeout) {
+			style.opacity = '';
+			hide(el);
+		} else {
+			style.opacity = 0.5 + Math.cos((cur / timeout) * Math.PI) / 2;
+			rfa(step);
+		}
+	}
+	rfa(step);
+}
+
 return {
 	addClass: addClass,
 	addClass_qs: addClass_qs,
@@ -227,6 +305,7 @@ return {
 	disabled_qsa: disabled_qsa,
 	empty: empty,
 	el: el,
+	fadeout: fadeout,
 	hasClass: hasClass,
 	hide: hide,
 	hide_qs: hide_qs,
@@ -247,6 +326,13 @@ return {
 	visible: visible,
 	visible_qs: visible_qs,
 	visible_qsa: visible_qsa,
+	$show: $show,
+	$show_qs: $show_qs,
+	$hide: $hide,
+	$hide_qs: $hide_qs,
+	$visible: $visible,
+	$visible_qs: $visible_qs,
+	$visible_qsa: $visible_qsa,
 };
 
 })();
