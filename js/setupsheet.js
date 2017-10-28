@@ -85,23 +85,24 @@ function _cmp_players(p1, p2) {
 }
 
 function calc_listed(event) {
+	var _add = function(p) {
+		var g_players = team_res[p.gender];
+
+		if (!g_players.some(function(added_p) {
+			return added_p.name === p.name;
+		})) {
+			g_players.push(p);
+		}
+	};
+
 	var res = [];
+	var team_res;
 	for (var team_id = 0;team_id < 2;team_id++) {
-		var team_res = {
+		team_res = {
 			m: [],
 			f: [],
 		};
 		res.push(team_res);
-
-		var _add = function(p) {
-			var g_players = team_res[p.gender];
-
-			if (!g_players.some(function(added_p) {
-				return added_p.name === p.name;
-			})) {
-				g_players.push(p);
-			}
-		};
 
 		event.matches.forEach(function(match) {
 			var setup = match.setup;
@@ -131,6 +132,19 @@ function calc_listed(event) {
 
 		team_res.m.sort(_cmp_players);
 		team_res.f.sort(_cmp_players);
+	}
+
+	if (event.all_players && !res[0].m.length && !res[0].f.length && !res[1].m.length && !res[1].f.length) {
+		res = event.all_players.map(function(aps) {
+			team_res = {
+				m: [],
+				f: []
+			};
+			aps.forEach(_add);
+			team_res.m.sort(_cmp_players);
+			team_res.f.sort(_cmp_players);
+			return team_res;
+		});
 	}
 	return res;
 }
