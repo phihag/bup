@@ -355,7 +355,7 @@ var i18n_frch = {
 'eventsheet:label|RLN-2016': '(Allemagne, Regionalliga Nord) feuille de résultats',
 'eventsheet:label|RLN-Satzungen-2016': '(Allemagne, Groupe Nord) lois et règlements (2016)',
 'eventsheet:label|RLM-2016': '(Allemagne, Regionalliga Mitte) feuille de résultats',
-'eventsheet:label|RLM-SpO-2015': '(Allemagne, Groupe Mitte) regulations (9/2015)',
+'eventsheet:label|RLM-SpO': '(Allemagne, Groupe Mitte) regulations',
 'eventsheet:label|team-1BL-2015': '(Bundesliga) composition d\'equipe (2015)',
 'eventsheet:label|team-2BL-2015': '(Allemagne 2. Bundesliga) composition d\'equipe (2015)',
 'eventsheet:label|NRW-2016': '(Allemagne, NRW leagues) feuille de résultats',

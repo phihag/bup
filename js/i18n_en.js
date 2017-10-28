@@ -359,7 +359,7 @@ var i18n_en = {
 'eventsheet:label|RLN-2016': '(German Regionalliga North) result report sheet',
 'eventsheet:label|RLN-Satzungen-2016': '(German Group North) laws & regulations (2016)',
 'eventsheet:label|RLM-2016': '(German Regionalliga Middle) result report sheet',
-'eventsheet:label|RLM-SpO-2015': '(German Group Middle) regulations (9/2015)',
+'eventsheet:label|RLM-SpO': '(German Group Middle) regulations',
 'eventsheet:label|team-1BL-2015': '(German Bundesliga) team selection sheet (2015)',
 'eventsheet:label|team-2BL-2015': '(German 2. Bundesliga) team selection sheet (2015)',
 'eventsheet:label|NRW-2016': '(NRW leagues) result report sheet',
