@@ -1652,7 +1652,11 @@ function show_dialog(es_key) {
 	var preview = uiu.qs('.eventsheet_preview');
 	var generate_button = uiu.qs('.eventsheet_generate_button');
 
-	if (NO_DIALOG[es_key]) {
+	var no_dialog = NO_DIALOG[es_key];
+	uiu.visible_qs('.eventsheet_print_button', no_dialog);
+	uiu.visible_qs('.eventsheet_pdf_button', no_dialog);
+
+	if (no_dialog) {
 		uiu.hide_qs('.eventsheet_report');
 		uiu.hide(download_link_container);
 		uiu.hide(generate_button);
