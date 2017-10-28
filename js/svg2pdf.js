@@ -426,7 +426,7 @@ function render_page(svg, pdf, scale) {
 					remaining_len -= gap_len;
 				}
 			} else {
-				pdf.line(x1 * scale, y1 * sclae, x2 * scale, y2 * scale);
+				pdf.line(x1 * scale, y1 * scale, x2 * scale, y2 * scale);
 			}
 			break;
 		case 'rect':
