@@ -1,7 +1,11 @@
 set up rlwdemo
-	check that everything is correct, including (001)
 	mention in doc/slides
 	mention in URLS.md
+set up rlndemo
+	mention in doc/slides
+	mention in URLS.md
+tde_import: report_url please
+
 
 2felder: testen mit mac-Auflösung (@800x600)
 2courts: add teammatch score

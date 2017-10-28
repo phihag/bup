@@ -25,11 +25,16 @@
 	width: 15em;
 	font-size: inherit;
 }
+.eventsheet_report > * {
+	text-align: left;
+}
+.eventsheet_button_row {
+	text-align: center;
+}
 .eventsheet_report > *,
 .eventsheet_button_row {
 	width: auto;
 	display: block;
-	text-align: center;
 	margin: 1em 0 0.5em 0;
 }
 .eventsheet_report > label > span {

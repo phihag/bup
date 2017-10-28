@@ -671,19 +671,21 @@ function render_svg(ev, es_key, ui8r, extra_data) {
 		}
 	});
 
-	_svg_text(svg, 'sum_points0', sum_points[0]);
-	_svg_text(svg, 'sum_points1', sum_points[1]);
-	_svg_text(svg, 'sum_games0', sum_games[0]);
-	_svg_text(svg, 'sum_games1', sum_games[1]);
-	_svg_text(svg, 'sum_matches0', sum_matches[0]);
-	_svg_text(svg, 'sum_matches1', sum_matches[1]);
+	if (sum_points[0] || sum_points[1]) {
+		_svg_text(svg, 'sum_points0', sum_points[0]);
+		_svg_text(svg, 'sum_points1', sum_points[1]);
+		_svg_text(svg, 'sum_games0', sum_games[0]);
+		_svg_text(svg, 'sum_games1', sum_games[1]);
+		_svg_text(svg, 'sum_matches0', sum_matches[0]);
+		_svg_text(svg, 'sum_matches1', sum_matches[1]);
+	}
 
 	var winner_str = event_winner_str(ev, sum_matches[0], sum_matches[1]);
 	_svg_text(svg, 'winner', winner_str);
 
 	_svg_text(svg, 'starttime', extra_data.starttime);
 	_svg_text(svg, 'endtime', last_update ? utils.time_str(last_update) : '');
-	_svg_text(svg, 'date', (last_update ? utils.date_str(last_update) : ''));
+	_svg_text(svg, 'date', ev.date || (last_update ? utils.date_str(last_update) : ''));
 	_svg_text(svg, 'matchday', extra_data.matchday);
 	_svg_text(svg, 'home_team_name', ev.team_names[0]);
 	_svg_text(svg, 'away_team_name', ev.team_names[1]);
@@ -1774,7 +1776,7 @@ function show_dialog(es_key) {
 			sheetname: state._('eventsheet:label|' + es_key),
 		}));
 
-	dialog_fetch();
+	dialog_fetch(on_fetch);
 }
 
 function hide_dialog() {

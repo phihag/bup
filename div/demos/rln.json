@@ -1,0 +1,338 @@
+{
+    "type": "bup-export",
+    "version": 2,
+    "event": {
+        "team_names": [
+            "BV Gifhorn 1",
+            "SV Berliner Brauereien 1"
+        ],
+        "all_players": [
+            [
+                {
+                    "firstname": "Dennis",
+                    "lastname": "Friedenstab",
+                    "name": "Dennis Friedenstab",
+                    "textid": "04-058188",
+                    "gender": "m"
+                },
+                {
+                    "firstname": "Yannik",
+                    "lastname": "Joop",
+                    "name": "Yannik Joop",
+                    "textid": "04-051897",
+                    "gender": "m"
+                },
+                {
+                    "firstname": "Maurice",
+                    "lastname": "Niesner",
+                    "name": "Maurice Niesner",
+                    "textid": "04-028819",
+                    "gender": "m"
+                },
+                {
+                    "firstname": "Patrick",
+                    "lastname": "Th\u00f6ne",
+                    "name": "Patrick Th\u00f6ne",
+                    "textid": "04-074678",
+                    "gender": "m"
+                },
+                {
+                    "firstname": "Sonja",
+                    "lastname": "Melzer",
+                    "name": "Sonja Melzer",
+                    "textid": "04-048731",
+                    "gender": "f"
+                },
+                {
+                    "firstname": "Larina",
+                    "lastname": "Tornow",
+                    "name": "Larina Tornow",
+                    "textid": "04-062733",
+                    "gender": "f"
+                }
+            ],
+            [
+                {
+                    "firstname": "Timo",
+                    "lastname": "Ayush",
+                    "name": "Timo Ayush",
+                    "textid": "08-009830",
+                    "gender": "m"
+                },
+                {
+                    "firstname": "Marcel",
+                    "lastname": "Larisch",
+                    "name": "Marcel Larisch",
+                    "textid": "08-007534",
+                    "gender": "m"
+                },
+                {
+                    "firstname": "Lin-Yu",
+                    "lastname": "Oei",
+                    "name": "Lin-Yu Oei",
+                    "textid": "08-009699",
+                    "gender": "m"
+                },
+                {
+                    "firstname": "Saruul",
+                    "lastname": "Shafiq",
+                    "name": "Saruul Shafiq",
+                    "textid": "08-008446",
+                    "gender": "m"
+                },
+                {
+                    "firstname": "Franziska",
+                    "lastname": "Burkert",
+                    "name": "Franziska Burkert",
+                    "textid": "08-009185",
+                    "gender": "f"
+                },
+                {
+                    "firstname": "Olga",
+                    "lastname": "Miksza",
+                    "name": "Olga Miksza",
+                    "textid": "08-014743",
+                    "gender": "f"
+                }
+            ]
+        ],
+        "league_key": "RLN-2016",
+        "team_competition": true,
+        "date": "07.10.2017",
+        "starttime": "16:00",
+        "matchday": "3",
+        "location": "38518 Gifhorn, Sporthalle Otto-Hahn-Gymnasium",
+        "umpires": "Helmut Bodenstein, Werner Durow",
+        "staticnet_message": "Demo Regionalliga Nord (nur lokal)",
+        "notes": "5 Minuten Spielunterbrechung wegen Gänsen in der Halle",
+        "protest": "Gegner spielen zu gut",
+        "matches": [
+            {
+                "setup": {
+                    "match_name": "HD1",
+                    "match_id": "rlndemo_HD1",
+                    "is_doubles": true,
+                    "teams": [
+                        {
+                            "players": [
+                                {
+                                    "name": "Yannik Joop"
+                                },
+                                {
+                                    "name": "Alexander Ohk"
+                                }
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "name": "Lin-Yu Oei"
+                                },
+                                {
+                                    "name": "Saruul Shafiq"
+                                }
+                            ]
+                        }
+                    ],
+                    "incomplete": false,
+                    "eventsheet_id": "1.HD"
+                }
+            },
+            {
+                "setup": {
+                    "match_name": "HD2",
+                    "match_id": "rlndemo_HD2",
+                    "is_doubles": true,
+                    "teams": [
+                        {
+                            "players": [
+                                {
+                                    "name": "Benjamin Dieckhoff"
+                                },
+                                {
+                                    "name": "Patrick Th\u00f6ne"
+                                }
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "name": "Timo Ayush"
+                                },
+                                {
+                                    "name": "Philipp Salow"
+                                }
+                            ]
+                        }
+                    ],
+                    "incomplete": false,
+                    "eventsheet_id": "2.HD"
+                }
+            },
+            {
+                "setup": {
+                    "match_name": "DD",
+                    "match_id": "rlndemo_DD",
+                    "is_doubles": true,
+                    "teams": [
+                        {
+                            "players": [
+                                {
+                                    "name": "Lea Dingler"
+                                },
+                                {
+                                    "name": "Larina Tornow"
+                                }
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "name": "Matysiak Dorota"
+                                },
+                                {
+                                    "name": "Aija Pope"
+                                }
+                            ]
+                        }
+                    ],
+                    "incomplete": false
+                }
+            },
+            {
+                "setup": {
+                    "match_name": "HE1",
+                    "match_id": "rlndemo_HE1",
+                    "is_doubles": false,
+                    "teams": [
+                        {
+                            "players": [
+                                {
+                                    "name": "Patrick Th\u00f6ne"
+                                }
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "name": "Lin-Yu Oei"
+                                }
+                            ]
+                        }
+                    ],
+                    "incomplete": false,
+                    "eventsheet_id": "1.HE"
+                }
+            },
+            {
+                "setup": {
+                    "match_name": "HE2",
+                    "match_id": "rlndemo_HE2",
+                    "is_doubles": false,
+                    "teams": [
+                        {
+                            "players": [
+                                {
+                                    "name": "Benjamin Dieckhoff"
+                                }
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "name": "Saruul Shafiq"
+                                }
+                            ]
+                        }
+                    ],
+                    "incomplete": false,
+                    "eventsheet_id": "2.HE"
+                }
+            },
+            {
+                "setup": {
+                    "match_name": "HE3",
+                    "match_id": "rlndemo_HE3",
+                    "is_doubles": false,
+                    "teams": [
+                        {
+                            "players": [
+                                {
+                                    "name": "Alexander Ohk"
+                                }
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "name": "Philipp Salow"
+                                }
+                            ]
+                        }
+                    ],
+                    "incomplete": false,
+                    "eventsheet_id": "3.HE"
+                }
+            },
+            {
+                "setup": {
+                    "match_name": "DE",
+                    "match_id": "rlndemo_DE",
+                    "is_doubles": false,
+                    "teams": [
+                        {
+                            "players": [
+                                {
+                                    "name": "Larina Tornow"
+                                }
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "name": "Aija Pope"
+                                }
+                            ]
+                        }
+                    ],
+                    "incomplete": false
+                }
+            },
+            {
+                "setup": {
+                    "match_name": "GD",
+                    "match_id": "rlndemo_GD",
+                    "is_doubles": true,
+                    "teams": [
+                        {
+                            "players": [
+                                {
+                                    "name": "Yannik Joop"
+                                },
+                                {
+                                    "name": "Lea Dingler"
+                                }
+                            ]
+                        },
+                        {
+                            "players": [
+                                {
+                                    "name": "Timo Ayush"
+                                },
+                                {
+                                    "name": "Matysiak Dorota"
+                                }
+                            ]
+                        }
+                    ],
+                    "incomplete": false
+                }
+            }
+        ],
+        "backup_players": [[{
+            "name": "Holger Herbst",
+            "gender": "m"
+        }], []],
+        "report_urls": ["https://www.turnier.de/sport/teamrankingplayers.aspx?id=FD17FD03-359B-46C7-AAF2-7705D8FD2EB2&tid=2"]
+    }
+}

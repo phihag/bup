@@ -1,0 +1,385 @@
+{
+  "type": "bup-export",
+  "version": 2,
+  "event": {
+    "team_names": [
+      "1.CfB Köln 1",
+      "Spvgg.Sterkrade-N. 1"
+    ],
+    "league_key": "RLW-2016",
+    "team_competition": true,
+    "date": "08.10.2017",
+    "matchday": "4",
+    "starttime": "10:00",
+    "location": "50676 Köln, TH Hauptschule, Großer Griechenmarkt 76",
+    "umpires": "Günter Wagner, Jörg Hupertz",
+    "notes": "5 Minuten Spielunterbrechung wegen Gänsen in der Halle",
+    "protest": "Gegner spielen zu gut",
+    "matches": [
+      {
+        "setup": {
+          "match_name": "HD1",
+          "match_id": "rlwdemo_HD1",
+          "is_doubles": true,
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Julien Gupta"
+                },
+                {
+                  "name": "Rouven Schleifer"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Tobias Schröer"
+                },
+                {
+                  "name": "Benjamin Tzschoppe"
+                }
+              ]
+            }
+          ],
+          "eventsheet_id": "1.HD"
+        }
+      },
+      {
+        "setup": {
+          "match_name": "HD2",
+          "match_id": "rlwdemo_HD2",
+          "is_doubles": true,
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Jan Thiele"
+                },
+                {
+                  "name": "Marcus Barsch"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Marius Wefers"
+                },
+                {
+                  "name": "Markus Hennes"
+                }
+              ]
+            }
+          ],
+          "eventsheet_id": "2.HD"
+        }
+      },
+      {
+        "setup": {
+          "match_name": "DD",
+          "match_id": "rlwdemo_DD",
+          "is_doubles": true,
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Verena Venhaus"
+                },
+                {
+                  "name": "Sara Janssens"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Leona Michalski"
+                },
+                {
+                  "name": "Marie Schweitzer"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "setup": {
+          "match_name": "HE1",
+          "match_id": "rlwdemo_HE1",
+          "is_doubles": false,
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Julien Gupta"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Benjamin Tzschoppe"
+                }
+              ]
+            }
+          ],
+          "eventsheet_id": "1.HE"
+        }
+      },
+      {
+        "setup": {
+          "match_name": "HE2",
+          "match_id": "rlwdemo_HE2",
+          "is_doubles": false,
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Rouven Schleifer"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Markus Hennes"
+                }
+              ]
+            }
+          ],
+          "eventsheet_id": "2.HE"
+        }
+      },
+      {
+        "setup": {
+          "match_name": "HE3",
+          "match_id": "rlwdemo_HE3",
+          "is_doubles": false,
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Jan Thiele"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Tobias Schröer"
+                }
+              ]
+            }
+          ],
+          "eventsheet_id": "3.HE"
+        }
+      },
+      {
+        "setup": {
+          "match_name": "DE",
+          "match_id": "rlwdemo_DE",
+          "is_doubles": false,
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Verena Venhaus"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Leona Michalski"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "setup": {
+          "match_name": "GD",
+          "match_id": "rlwdemo_GD",
+          "is_doubles": true,
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Olaf Holstege"
+                },
+                {
+                  "name": "Sara Janssens"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Dave Eberhard"
+                },
+                {
+                  "name": "Marie Schweitzer"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "staticnet_message": "Demo Regionalliga West (nur lokal)",
+    "backup_players": [[], [{
+      "firstname": "Dana",
+      "lastname": "Kaufhold",
+      "name": "Dana Kaufhold",
+      "textid": "01-088911",
+      "gender": "f",
+      "ranking": 3
+    }]
+    ],
+    "all_players": [
+      [
+        {
+          "firstname": "Julien",
+          "lastname": "Gupta",
+          "name": "Julien Gupta",
+          "textid": "01-096446",
+          "gender": "m",
+          "ranking": 1
+        },
+        {
+          "firstname": "Rouven",
+          "lastname": "Schleifer",
+          "name": "Rouven Schleifer",
+          "textid": "01-135676",
+          "gender": "m",
+          "ranking": 2
+        },
+        {
+          "firstname": "Jan",
+          "lastname": "Thiele",
+          "name": "Jan Thiele",
+          "textid": "01-124585",
+          "gender": "m",
+          "ranking": 3
+        },
+        {
+          "firstname": "Olaf",
+          "lastname": "Holstege",
+          "name": "Olaf Holstege",
+          "textid": "01-073576",
+          "gender": "m",
+          "ranking": 4
+        },
+        {
+          "firstname": "Marcus",
+          "lastname": "Barsch",
+          "name": "Marcus Barsch",
+          "textid": "01-054752",
+          "gender": "m",
+          "ranking": 5
+        },
+        {
+          "firstname": "Verena",
+          "lastname": "Venhaus",
+          "name": "Verena Venhaus",
+          "textid": "01-115221",
+          "gender": "f",
+          "ranking": 1
+        },
+        {
+          "firstname": "Sara",
+          "lastname": "Janssens",
+          "name": "Sara Janssens",
+          "textid": "01-113511",
+          "gender": "f",
+          "ranking": 2
+        }
+      ],
+      [
+        {
+          "firstname": "Benjamin",
+          "lastname": "Tzschoppe",
+          "name": "Benjamin Tzschoppe",
+          "textid": "01-063929",
+          "gender": "m",
+          "ranking": 1,
+          "ranking_d": 2
+        },
+        {
+          "firstname": "Markus",
+          "lastname": "Hennes",
+          "name": "Markus Hennes",
+          "textid": "01-111168",
+          "gender": "m",
+          "ranking": 2,
+          "ranking_d": 3
+        },
+        {
+          "firstname": "Marius",
+          "lastname": "Wefers",
+          "name": "Marius Wefers",
+          "textid": "01-095454",
+          "gender": "m",
+          "ranking": 3,
+          "ranking_d": 4
+        },
+        {
+          "firstname": "Tobias",
+          "lastname": "Schröer",
+          "name": "Tobias Schröer",
+          "textid": "01-070128",
+          "gender": "m",
+          "ranking": 4,
+          "ranking_d": 5
+        },
+        {
+          "firstname": "Niclas",
+          "lastname": "Kirchgeßner",
+          "name": "Niclas Kirchgeßner",
+          "textid": "05-033722 ",
+          "gender": "m",
+          "ranking": 7,
+          "ranking_d": 1
+        },
+        {
+          "firstname": "Dave",
+          "lastname": "Eberhard",
+          "name": "Dave Eberhard",
+          "textid": "01-089631",
+          "gender": "m",
+          "ranking": 9,
+          "ranking_d": 1
+        },
+        {
+          "firstname": "Marie",
+          "lastname": "Schweitzer",
+          "name": "Marie Schweitzer",
+          "textid": "01-119566",
+          "gender": "f",
+          "ranking": 1
+        },
+        {
+          "firstname": "Leona",
+          "lastname": "Michalski",
+          "name": "Leona Michalski",
+          "textid": "01-134031",
+          "gender": "f",
+          "ranking": 2
+        },
+        {
+          "firstname": "Dana",
+          "lastname": "Kaufhold",
+          "name": "Dana Kaufhold",
+          "textid": "01-088911",
+          "gender": "f",
+          "ranking": 3
+        }
+      ]
+    ],
+    "report_urls": ["https://www.turnier.de/sport/teammatch.aspx?id=3AE85140-FD7F-4D47-8BEE-575B0334E9D8&match=53"]
+  }
+}
