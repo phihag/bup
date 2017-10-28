@@ -91,12 +91,6 @@ dist: cleandist ## Create distribution files
 		div/wakelock.mp4 \
 		--target-directory dist/bup/div/
 
-	# backwards compat, remove by 2018
-	cp \
-		div/courtspot_screenshot_links.png \
-		div/courtspot_screenshot_rechts.png \
-		--target-directory dist/bup/div/
-
 	$(MAKE) appcache-manifest
 	node div/calc_checksums.js dist/ bup/ dist/bup/checksums.json
 
