@@ -1,9 +1,10 @@
 store order change in courtspot
-store order change in referee mode
-warn if order cannot be stored
+	store
+	read in bupabfrage
+order: new screenshot into docs
+setupsheet: always add top 8!
+buli minimum requirements: print including team names!
 
-
-buli minimum requirements: print including team names
 
 tde_import matches should have match_id
 2felder: testen mit mac-Auflösung (@800x600)
@@ -26,6 +27,7 @@ dads referee mode config
 	add ad
 	-> msg Steffen Becker
 
+store order change in referee mode
 order: use bupui.make_page
 scoresheets: use bupui.make_page
 print labels on tvr tablets
@@ -77,7 +79,6 @@ test right-click on all links
 check out appcache update on CourtSpot on Pi
 find out what looped update
 
-setupsheet: button to add all?
 setupsheet: align rm buttons
 RL SüdOst -> mail btde
 refmode: visible warning if no crypto.subtle

@@ -6,16 +6,17 @@ function _request(s, component, options, cb) {
 	network.request(component, options).done(function(res) {
 		return cb(null, res);
 	}).fail(function(xhr) {
-		var msg = 'Netzwerk-Fehler (Code ' + xhr.status + ')';
+		var message = 'Netzwerk-Fehler (Code ' + xhr.status + ')';
 		if (xhr.status === 0) {
-			msg = 'CourtSpot nicht erreichbar';
+			message = 'CourtSpot nicht erreichbar';
 		} else if ((xhr.status === 200) && (options.dataType === 'json')) {
-			msg = 'Kein gültiges JSON-Dokument';
+			message = 'Kein gültiges JSON-Dokument';
 		}
 		return cb({
 			type: 'network-error',
 			status: xhr.status,
-			msg: msg,
+			msg: message, // deprecated
+			message: message,
 		});
 	});
 }
@@ -308,6 +309,26 @@ function list_all_players(s, cb) {
 	});
 }
 
+function save_order(s, matches, cb) {
+	var order_list = matches.map(function(m) {
+		return m.setup.courtspot_match_id;
+	});
+
+	_request(s, 'order', {
+		url: baseurl + 'php/bupreihenfolge.php',
+		data: JSON.stringify(order_list),
+		method: 'post',
+		dataType: 'text',
+	}, function(err) {
+		if (err && err.status === 404) {
+			return cb({
+				message: 'Ändern fehlgeschlagen: Alte CourtSpot-Version. Bitte updaten!',
+			});
+		}
+		return cb(err);
+	});
+}
+
 return {
 	ui_init: ui_init,
 	list_matches: list_matches,
@@ -319,6 +340,7 @@ return {
 	editable: editable,
 	on_edit_event: on_edit_event,
 	list_all_players: list_all_players,
+	save_order: save_order,
 	// Testing only
 	/*@DEV*/
 	gen_data: gen_data,

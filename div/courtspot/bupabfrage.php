@@ -130,6 +130,8 @@ INNER JOIN (
 	GROUP BY sv2.Art
 ) sv_first
 ON Spiele.Spiel = sv_first.Art
+
+ORDER BY Spiele.Reihenfolge
 ;');
 if (! $result) {
 	jsonErr(mysqli_error($db));
