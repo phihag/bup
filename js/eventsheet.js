@@ -90,7 +90,7 @@ function loaded(key) {
 	_loaded_all_libs = utils.values(_loaded).every(function(x) {return x;});
 	if (_loaded_all_libs) {
 		uiu.qs('.eventsheet_generate_button').removeAttribute('disabled');
-		uiu.$visible_qs('.eventsheet_generate_loading_icon', !state.event);
+		uiu.visible_qs('.eventsheet_generate_loading_icon', !state.event);
 	}
 }
 
@@ -529,11 +529,6 @@ function render_team_bl(ev, es_key, ui8r) {
 	saveAs(blob, filename);
 }
 
-/*params: s, es_key*/
-function preview_team_bl() {
-	// TODO download
-}
-
 function _svg_text(svg, id, val) {
 	var whole_id = 'es_svg_' + id;
 	var text_el = svg.getElementById(whole_id);
@@ -583,7 +578,7 @@ function render_buli_minreq_svg(ev, es_key, ui8r) {
 }
 
 
-function render_svg(ev, es_key, ui8r, extra_data) {
+function render_basic_eventsheet(ev, es_key, ui8r, extra_data) {
 	var xml_str = (new TextDecoder('utf-8')).decode(ui8r);
 	var svg_doc = (new DOMParser()).parseFromString(xml_str, 'image/svg+xml');
 	var svg = svg_doc.getElementsByTagName('svg')[0];
@@ -1437,7 +1432,7 @@ function es_render(ev, es_key, ui8r, extra_data) {
 	case 'RLN-2016':
 	case 'RLM-2016':
 	case 'NRW-2016':
-		return render_svg(ev, es_key, ui8r, extra_data);
+		return render_basic_eventsheet(ev, es_key, ui8r, extra_data);
 	case '1BL-2016':
 	case '2BLN-2016':
 	case '2BLS-2016':
@@ -1623,7 +1618,7 @@ function on_fetch() {
 }
 
 function dialog_fetch(cb) {
-	uiu.$visible_qs('.eventsheet_generate_loading_icon', !state.event || !_loaded_all_libs);
+	uiu.visible_qs('.eventsheet_generate_loading_icon', !state.event || !_loaded_all_libs);
 	var btn = $('.eventsheet_generate_button');
 	if (state.event) {
 		btn.removeAttr('disabled');
@@ -1631,10 +1626,10 @@ function dialog_fetch(cb) {
 	} else {
 		btn.attr('disabled', 'disabled');
 		network.list_matches(state, function(err, ev) {
-			uiu.$visible_qs('.eventsheet_generate_loading_icon', !_loaded_all_libs);
+			uiu.visible_qs('.eventsheet_generate_loading_icon', !_loaded_all_libs);
 			if (err) {
 				$('.eventsheet_error_message').text(err.msg);
-				uiu.$visible_qs('.eventsheet_error', true);
+				uiu.visible_qs('.eventsheet_error', true);
 				return;
 			}
 			network.update_event(state, ev);
@@ -1679,7 +1674,7 @@ function show_dialog(es_key) {
 
 	var $container = $('.eventsheet_container');
 	$container.attr('data-eventsheet_key', es_key);
-	uiu.$show_qs('.eventsheet_container');
+	uiu.show_qs('.eventsheet_container');
 
 	var download_link_container = uiu.qs('.eventsheet_download_link_container');
 	var download_link = uiu.qs('.eventsheet_download_link');
@@ -1687,14 +1682,14 @@ function show_dialog(es_key) {
 	var generate_button = uiu.qs('.eventsheet_generate_button');
 
 	var no_dialog = NO_DIALOG[es_key];
-	uiu.$visible_qs('.eventsheet_print_button', no_dialog);
-	uiu.$visible_qs('.eventsheet_pdf_button', no_dialog);
+	uiu.visible_qs('.eventsheet_print_button', no_dialog);
+	uiu.visible_qs('.eventsheet_pdf_button', no_dialog);
 
 	if (no_dialog) {
-		uiu.$hide_qs('.eventsheet_report');
-		uiu.$hide(download_link_container);
-		uiu.$hide(generate_button);
-		uiu.$show(preview);
+		uiu.hide_qs('.eventsheet_report');
+		uiu.hide(download_link_container);
+		uiu.hide(generate_button);
+		uiu.show(preview);
 		dialog_fetch(function() {
 			var button_row = uiu.qs('.eventsheet_button_row');
 			prepare_render(button_row, es_key, {});
@@ -1702,7 +1697,7 @@ function show_dialog(es_key) {
 		return;
 	}
 
-	uiu.$show(generate_button);
+	uiu.show(generate_button);
 
 	switch (es_key) {
 	case '1BL-2015':
@@ -1712,14 +1707,14 @@ function show_dialog(es_key) {
 	case 'RLN-2016':
 	case 'RLM-2016':
 	case 'NRW-2016':
-		uiu.$show_qs('.eventsheet_matchday');
-		uiu.$show_qs('.eventsheet_starttime');
-		uiu.$show_qs('.eventsheet_backup_players_str');
-		uiu.$show_qs('.eventsheet_protest');
-		uiu.$hide_qs('.eventsheet_spectators');
-		uiu.$visible_qs('label.eventsheet_backup_players_str', true);
-		uiu.$visible(preview, false);
-		uiu.$visible(download_link_container, false);
+		uiu.show_qs('.eventsheet_matchday');
+		uiu.show_qs('.eventsheet_starttime');
+		uiu.show_qs('.eventsheet_backup_players_str');
+		uiu.show_qs('.eventsheet_protest');
+		uiu.hide_qs('.eventsheet_spectators');
+		uiu.show_qs('label.eventsheet_backup_players_str');
+		uiu.hide(preview);
+		uiu.hide(download_link_container);
 		break;
 	case '1BL-2016':
 	case '2BLN-2016':
@@ -1727,48 +1722,47 @@ function show_dialog(es_key) {
 	case '1BL-2017':
 	case '2BLN-2017':
 	case '2BLS-2017':
-		uiu.$show_qs('.eventsheet_matchday');
-		uiu.$show_qs('.eventsheet_starttime');
-		uiu.$show_qs('.eventsheet_backup_players_str');
-		uiu.$show_qs('.eventsheet_protest');
-		uiu.$show_qs('.eventsheet_spectators');
-		uiu.$visible_qs('.eventsheet_report', true);
-		uiu.$visible_qs('label.eventsheet_backup_players_str', false);
-		uiu.$visible(preview, false);
-		uiu.$visible(download_link_container, false);
+		uiu.show_qs('.eventsheet_matchday');
+		uiu.show_qs('.eventsheet_starttime');
+		uiu.show_qs('.eventsheet_backup_players_str');
+		uiu.show_qs('.eventsheet_protest');
+		uiu.show_qs('.eventsheet_spectators');
+		uiu.show_qs('.eventsheet_report');
+		uiu.hide_qs('label.eventsheet_backup_players_str');
+		uiu.hide(preview);
+		uiu.hide(download_link_container);
 		break;
 	case 'team-1BL':
 	case 'team-2BL':
-		uiu.$visible_qs('.eventsheet_report', false);
+		uiu.hide_qs('.eventsheet_report');
 		// backup_players are children of _report
-		uiu.$visible(preview, true);
-		preview_team_bl(state, es_key);
+		uiu.hide(preview);
 		download_link.setAttribute('href', URLS[es_key]);
-		uiu.$visible(download_link_container, true);
+		uiu.show(download_link_container);
 		break;
 	case 'NLA-2017':
-		uiu.$visible_qs('.eventsheet_report', false);
-		uiu.$visible_qs('label.eventsheet_backup_players_str', false);
-		uiu.$visible(preview, false);
-		uiu.$visible(download_link_container, false);
+		uiu.hide_qs('.eventsheet_report');
+		uiu.hide_qs('label.eventsheet_backup_players_str');
+		uiu.hide(preview);
+		uiu.hide(download_link_container);
 		break;
 	case 'OBL-2017':
-		uiu.$hide_qs('.eventsheet_matchday');
-		uiu.$hide_qs('.eventsheet_starttime');
-		uiu.$hide_qs('.eventsheet_backup_players_str');
-		uiu.$hide_qs('.eventsheet_protest');
-		uiu.$hide_qs('.eventsheet_spectators');
-		uiu.$hide(preview);
-		uiu.$hide(download_link_container);
+		uiu.hide_qs('.eventsheet_matchday');
+		uiu.hide_qs('.eventsheet_starttime');
+		uiu.hide_qs('.eventsheet_backup_players_str');
+		uiu.hide_qs('.eventsheet_protest');
+		uiu.hide_qs('.eventsheet_spectators');
+		uiu.hide(preview);
+		uiu.hide(download_link_container);
 		break;
 	default:
-		uiu.$hide_qs('.eventsheet_spectators');
+		uiu.hide_qs('.eventsheet_spectators');
 	}
 
 	if (DIRECT_DOWNLOAD_SHEETS[es_key]) {
-		uiu.$visible_qs('.eventsheet_report', false);
-		uiu.$visible(preview, false);
-		uiu.$visible(download_link_container, false);
+		uiu.visible_qs('.eventsheet_report', false);
+		uiu.visible(preview, false);
+		uiu.visible(download_link_container, false);
 	}
 
 	uiu.text_qs('.eventsheet_generate_button',
@@ -1781,7 +1775,7 @@ function show_dialog(es_key) {
 
 function hide_dialog() {
 	state.ui.eventsheet = null;
-	uiu.$visible_qs('.eventsheet_container', false);
+	uiu.visible_qs('.eventsheet_container', false);
 	if (state.ui.referee_mode) {
 		refmode_referee_ui.back_to_ui();
 	} else {

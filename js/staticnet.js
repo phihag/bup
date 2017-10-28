@@ -127,7 +127,7 @@ function staticnet_message(s) {
 }
 
 function ui_init(s) {
-	uiu.$visible_qs('.setup_network_container', true);
+	uiu.show_qs('.setup_network_container');
 	if (event) {
 		on_load_data(s);
 	}

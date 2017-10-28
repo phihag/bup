@@ -837,7 +837,7 @@ function hide() {
 	}
 
 	bupui.esc_stack_pop();
-	uiu.$hide_qs('.stats_layout');
+	uiu.hide_qs('.stats_layout');
 	state.ui.stats_visible = false;
 	control.set_current(state);
 
@@ -849,7 +849,7 @@ function hide() {
 
 function ui_init() {
 	click.qs('.postmatch_stats_button', show);
-	$('.stats_layout').on('click', function(e) {
+	uiu.qs('.stats_layout').addEventListener('click', function(e) {
 		if (e.target === this) {
 			hide();
 		}

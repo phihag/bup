@@ -1,3 +1,5 @@
+eventsheet/nlademo: set NO_DIALOG
+
 selectevent module
 	debmlist: collect coordinates
 	download 5 most likely (and leagues + matches therein)
