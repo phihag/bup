@@ -202,8 +202,13 @@ function parse_teammatch($tm_html, $domain) {
 	$res['league_key'] = $LEAGUE_KEYS[$long_league_id];
 	$res['team_competition'] = true;
 
-	// TODO match date
-	// TODO match time
+	if (\preg_match('/<th>Spieltermin:<\/th><td>[A-Za-z]+\s*([0-9]{1,2}\.[0-9]{1,2}.[0-9]{4,})\s*<span class="time">([0-9]{2}:[0-9]{2})<\/span><\/td>/', $tm_html, $time_m)) {
+		$res['date'] = $time_m[1];
+		$res['starttime'] = $time_m[2];
+	} else {
+		throw new \Exception('Cannot find starttime');
+	}
+
 	if (\preg_match('/<th>Spielort:<\/th><td><a[^<]*>([^<]+)<\/a><\/td>/', $tm_html, $location_m)) {
 		$res['location'] = $location_m[1];
 	}
@@ -238,8 +243,15 @@ function parse_teammatch($tm_html, $domain) {
 			(\count($teams[0]['players']) !== $expect_players) ||
 			(\count($teams[1]['players']) !== $expect_players)
 		);
+		$match_id = (
+			'tde:' .
+			$res['team_names'][0] . '-' . $res['team_names'][1] .
+			'_' . $res['date'] .
+			'_' . $match_name
+		);
 		$setup = [
 			'match_name' => $match_name,
+			'match_id' => $match_id,
 			'is_doubles' => $is_doubles,
 			'teams' => $teams,
 			'incomplete' => $incomplete,

@@ -1,7 +1,3 @@
-buli minimum requirements: generate nicely
-	test in dist/
-
-tde_import should import date as well
 set up rlwdemo
 	check that everything is correct, including (001)
 	mention in doc/slides
