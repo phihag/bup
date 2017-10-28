@@ -51,7 +51,6 @@ dist: cleandist ## Create distribution files
 	node_modules/.bin/svgo -q -f div/logos/ -o dist/bup/div/logos/
 	cp div/dist_htaccess dist/bup/.htaccess
 	mkdir -p dist/bup/div/
-	node_modules/.bin/svgo -q -i div/bundesliga-logo.svg -o dist/bup/div/bundesliga-logo.svg
 	mkdir -p dist/bup/div/demos/
 	node div/minify_json.js --dir div/demos/ dist/bup/div/demos/
 	node div/minify_json.js div/edemo.json dist/bup/div/edemo.json
@@ -66,13 +65,15 @@ dist: cleandist ## Create distribution files
 	cp -R div/teamlists --target-directory dist/bup/div/
 	cp -R div/courtspot --target-directory dist/bup/div/
 	cp -R http_proxy --target-directory dist/bup/
-	node_modules/.bin/svgo -q --disable removeEmptyText --disable removeEmptyContainers -i div/scoresheet_bundesliga-2016.svg -o dist/bup/div/scoresheet_bundesliga-2016.svg
-	node_modules/.bin/svgo -q --disable removeEmptyText --disable removeEmptyContainers -i div/scoresheet_international.svg -o dist/bup/div/scoresheet_international.svg
-	node_modules/.bin/svgo -q --disable removeEmptyText --disable removeEmptyContainers -i div/scoresheet_international_5x11.svg -o dist/bup/div/scoresheet_international_5x11.svg
-	node_modules/.bin/svgo -q --disable removeEmptyText --disable removeEmptyContainers -i div/scoresheet_nla.svg -o dist/bup/div/scoresheet_nla.svg
-	node_modules/.bin/svgo -q --disable removeEmptyText --disable removeEmptyContainers -i div/scoresheet_obl.svg -o dist/bup/div/scoresheet_obl.svg
-	node_modules/.bin/svgo -q --disable removeEmptyText --disable removeEmptyContainers -i div/buli2017_mindestanforderungen_schiedsrichter.svg -o dist/bup/div/buli2017_mindestanforderungen_schiedsrichter.svg
-	node_modules/.bin/svgo -q --disable removeEmptyText --disable removeEmptyContainers -i div/buli2017_mindestanforderungen_verein.svg -o dist/bup/div/buli2017_mindestanforderungen_verein.svg
+	node div/minify_svg.js dist/bup/div/ \
+		div/bundesliga-logo.svg \
+		div/scoresheet_bundesliga-2016.svg \
+		div/scoresheet_international.svg \
+		div/scoresheet_international_5x11.svg \
+		div/scoresheet_nla.svg \
+		div/scoresheet_obl.svg \
+		div/buli2017_mindestanforderungen_schiedsrichter.svg \
+		div/buli2017_mindestanforderungen_verein.svg
 	cp doc/ -R dist/bup/
 	cp \
 		div/bundesliga-ballsorten-2016.pdf \
