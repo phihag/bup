@@ -1,9 +1,5 @@
 buli minimum requirements: generate nicely
-	fails if spielbericht first
-	inline preview and print button (like scoresheet)
-	PDF generation
 	test in dist/
-
 
 set up rlwdemo
 	check that everything is correct, including (001)

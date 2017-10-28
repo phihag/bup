@@ -349,7 +349,7 @@ function parse_color(col_str) {
 	};
 }
 
-function render_page(svg, pdf) {
+function render_page(svg, pdf, scale) {
 	var nodes = svg.querySelectorAll('*');
 	for (var i = 0;i < nodes.length;i++) {
 		// Due to absence of let, declare vars here
@@ -377,7 +377,7 @@ function render_page(svg, pdf) {
 			pdf.setDrawColor(scol.r, scol.g, scol.b);
 
 			var stroke_width = parseFloat(style['stroke-width']);
-			pdf.setLineWidth(stroke_width);
+			pdf.setLineWidth(scale * stroke_width);
 
 			if (stroke_width > 0) {
 				if (style.fill != 'none') {
@@ -419,14 +419,14 @@ function render_page(svg, pdf) {
 					dash_len = Math.min(dash_len, remaining_len);
 					var next_x = x + dx * dash_len;
 					var next_y = y + dy * dash_len;
-					pdf.line(x, y, next_x, next_y);
+					pdf.line(x * scale, y  * scale, next_x  * scale, next_y * scale);
 					remaining_len -= dash_len;
 					x = next_x + dx * gap_len;
 					y = next_y + dy * gap_len;
 					remaining_len -= gap_len;
 				}
 			} else {
-				pdf.line(x1, y1, x2, y2);
+				pdf.line(x1 * scale, y1 * sclae, x2 * scale, y2 * scale);
 			}
 			break;
 		case 'rect':
@@ -434,21 +434,21 @@ function render_page(svg, pdf) {
 			y = parseFloat(n.getAttribute('y'));
 			width = parseFloat(n.getAttribute('width'));
 			height = parseFloat(n.getAttribute('height'));
-			pdf.rect(x, y, width, height, mode);
+			pdf.rect(x * scale, y * scale, width * scale, height * scale, mode);
 			break;
 		case 'ellipse':
 			var cx = parseFloat(n.getAttribute('cx'));
 			var cy = parseFloat(n.getAttribute('cy'));
 			var rx = parseFloat(n.getAttribute('rx'));
 			var ry = parseFloat(n.getAttribute('ry'));
-			pdf.ellipse(cx, cy, rx, ry, mode);
+			pdf.ellipse(cx * scale, cy * scale, rx * scale, ry * scale, mode);
 			break;
 		case 'path':
 			var paths = parse_path(n.getAttribute('d'));
 			if (paths) {
 				paths.forEach(function(path, path_idx) {
 					var path_style = (path_idx === paths.length - 1) ? mode : null;
-					pdf.lines(path.acc, path.x1, path.y1, [1, 1], path_style, path.closed);
+					pdf.lines(path.acc, path.x1 * scale, path.y1 * scale, [scale, scale], path_style, path.closed);
 				});
 			}
 			break;
@@ -466,14 +466,14 @@ function render_page(svg, pdf) {
 			}
 
 			pdf.setFontStyle((style['font-weight'] == 'bold') ? 'bold' : 'normal');
-			pdf.setFontSize(72 / 25.4 * parseFloat(style['font-size']));
+			pdf.setFontSize(scale * 72 / 25.4 * parseFloat(style['font-size']));
 			var str = n.textContent;
 
 			var transform = n.getAttribute('transform');
 			if (transform) {
 				var transform_m = transform.match(/^rotate\(\s*(-?[0-9.]+)\s+(-?[0-9.]+),(-?[0-9.]+)\)$/);
 				if (!transform_m) {
-					pdf.text(x, y, str);
+					pdf.text(x * scale, y * scale, str);
 					break;
 				}
 
@@ -486,9 +486,9 @@ function render_page(svg, pdf) {
 
 				var nx = corex + diffx * Math.cos(angle * Math.PI / 180) - diffy * Math.sin(angle * Math.PI / 180);
 				var ny = corey + diffx * Math.sin(angle * Math.PI / 180) + diffy * Math.cos(angle * Math.PI / 180);
-				pdf.text(nx, ny, str, null, -angle);
+				pdf.text(nx * scale, ny * scale, str, null, -angle);
 			} else {
-				pdf.text(x, y, str);
+				pdf.text(x * scale, y * scale, str);
 			}
 
 			break;
@@ -498,13 +498,13 @@ function render_page(svg, pdf) {
 			y = parseFloat(n.getAttribute('y'));
 			width = parseFloat(n.getAttribute('width'));
 			height = parseFloat(n.getAttribute('height'));
-			pdf.addImage(imgData, x, y, width, height);
+			pdf.addImage(imgData, x * scale, y * scale, width, height);
 			break;
 		}
 	}
 }
 
-function make(svg_nodes, props, orientation) {
+function make(svg_nodes, props, orientation, scale) {
 	var pdf = new jsPDF({
 		orientation: orientation,
 		unit: 'mm',
@@ -514,19 +514,20 @@ function make(svg_nodes, props, orientation) {
 	pdf.addFont('Helvetica', 'helvetica', 'normal');
 	pdf.addFont('Helvetica-Bold', 'helvetica', 'bold');
 	pdf.setFont('helvetica', 'normal');
+	scale = scale || 1;
 
 	for (var i = 0;i < svg_nodes.length;i++) {
 		if (i > 0) {
 			pdf.addPage();
 		}
-		render_page(svg_nodes[i], pdf);
+		render_page(svg_nodes[i], pdf, scale);
 	}
 	pdf.setProperties(props);
 	return pdf;
 }
 
-function save(svg_nodes, props, orientation, filename) {
-	var pdf = make(svg_nodes, props, orientation);
+function save(svg_nodes, props, orientation, filename, scale) {
+	var pdf = make(svg_nodes, props, orientation, scale);
 	pdf.save(filename);
 }
 

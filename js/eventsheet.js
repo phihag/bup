@@ -562,7 +562,22 @@ function render_buli_minreq_svg(ev, es_key, ui8r) {
 	_svg_text(svg, 'team1', ev.team_names[1]);
 	_svg_text(svg, 'date', ev.date);
 
-	printing.set_orientation('portrait');
+	var orientation = 'portrait';
+	printing.set_orientation(orientation);
+
+	var subject = state._('eventsheet:label|' + es_key);
+	var title = subject + ' ' + ev.event_name;
+
+	preview.setAttribute('data-info_json', JSON.stringify({
+		props: {
+			title: title,
+			subject: subject,
+			creator: 'bup (https://phihag.de/bup/)',
+		},
+		orientation: orientation,
+		filename: title + '.pdf',
+		scale: 0.228,
+	}));
 
 	preview.appendChild(svg);
 }
@@ -1554,6 +1569,23 @@ function ui_init() {
 		dialog_fetch(on_fetch);
 	});
 
+	click.qs('.eventsheet_pdf_button', function() {
+		var preview = uiu.qs('.eventsheet_preview');
+		var svg = uiu.qs('svg', preview);
+		var info = JSON.parse(preview.getAttribute('data-info_json'));
+		svg2pdf.save(
+			[svg],
+			info.props,
+			info.orientation,
+			info.filename,
+			info.scale
+		);
+	});
+
+	click.qs('.eventsheet_print_button', function() {
+		window.print();
+	});
+
 	$('.eventsheet_back').on('click', function(e) {
 		e.preventDefault();
 		var from_bup = $('.eventsheet_container').attr('data-eventsheet_key') != 'auto-direct';
@@ -1660,6 +1692,7 @@ function show_dialog(es_key) {
 		uiu.hide_qs('.eventsheet_report');
 		uiu.hide(download_link_container);
 		uiu.hide(generate_button);
+		uiu.show(preview);
 		dialog_fetch(function() {
 			var button_row = uiu.qs('.eventsheet_button_row');
 			prepare_render(button_row, es_key, {});
