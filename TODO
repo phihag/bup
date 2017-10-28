@@ -1,3 +1,12 @@
+
+selectevent module (passcode for Ulf)
+
+refmode: visible warning if no crypto.subtle
+
+redesign fullscreen interface
+	big button on top
+	automatically if going out of fullscreen (for example turning off A88X tablets)
+
 2felder: testen mit mac-Auflösung (@800x600)
 2courts: add teammatch score
 editevent crashes after mo -> mail Werner Durow
@@ -53,8 +62,6 @@ dads until starttime - 0:15?
 automatically set and show referee name
 referee selection: highlight if on same IP
 
-tde_import umpire, notes
-block middle buttons like any other-> Jörg Hupertz
 "20 Sekunden" im Ansagefeld nicht sichtbar wenn Auf- und Rückschläger bestimmt werden -> Jörg Hupertz
 	noch "20 Sekunden" neben der Uhr
 refmode: remove change button for colors
@@ -72,7 +79,6 @@ find out what looped update
 
 setupsheet: align rm buttons
 RL SüdOst -> mail btde
-refmode: visible warning if no crypto.subtle
 i18n test: fallback identical to main?
 integration test for display (verify a crash during display gets reported)
 reload button looks funny in firefox
@@ -82,7 +88,6 @@ check fonts in display mode on Pis (should be sans-serif)
 dads upload multiple images at once
 realistic court
 realistic court as overview
-selectevent module (passcode for Ulf)
 use ajax module everywhere instead of custom XMLHttpRequest or jQuery
 eventsheet: map of key to extra_data fields (or do away with extra_data)
 displaymode for imported events (courts missing)
@@ -113,7 +118,6 @@ tde_import: check that they work
 	2017 NLB
 direct link for zero-config eventsheets (show progress there)
 btde-like dstyle
-update RLM link to http://www.dbv-mitte.de/web/images/Allgemein/Gruppenordnung/Gruppe_Mitte_im_DBV_Ordnungen_20170701.pdf
 UI test to test setupsheet
 bup all_players error report setupsheet
 http://localhost/bup/#setupsheet crashes
@@ -193,9 +197,6 @@ https://aufschlagwechsel.de/bup/#setupsheet crashes after import?
 transmit to turnier.de
 start events in referee mode
 start match from bup (select newest from aufschlagwechsel.de)
-redesign fullscreen interface
-	big button on top
-	automatically if going out of fullscreen (for example turning off A88X tablets)
 increase bottom spacing on court
 test displays in demos / btde
 prevent accidental shuttle setting / unsetting (conflicts with fullscreen button)
@@ -932,7 +933,6 @@ improve yellow-card.svg / red-card.svg
 replace state.match.max_games by a function
 allow challenges
 	failsafe (http://www.badmintoncentral.com/forums/showthread.php/160170-sub-standard-umpire-gave-a-free-point-to-Okuhara-in-first-set?p=2413636#post2413636)
-CourtSpot: Spielreihenfolge festlegen
 remove s.match.max_games in favor of a calc function
 remove !important
 add a test that all public functions are in use
