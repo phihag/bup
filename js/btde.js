@@ -255,9 +255,11 @@ function _parse_match_list(doc, now) {
 	}];
 
 	var starttime;
+	var date;
 	var starttime_m;
-	if (event_data.datum && (starttime_m = /^[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{4}\s+([0-9]{1,2}:[0-9]{1,2})$/.exec(event_data.datum))) {
-		starttime = starttime_m[1];
+	if (event_data.datum && (starttime_m = /^([0-9]{1,2}\.[0-9]{1,2}\.[0-9]{4})\s+([0-9]{1,2}:[0-9]{1,2})$/.exec(event_data.datum))) {
+		date = starttime_m[1];
+		starttime = starttime_m[2];
 	}
 	var league_key = _get_league_key(event_data.liga);
 	var counting = _get_counting(league_key, event_data);
@@ -335,6 +337,7 @@ function _parse_match_list(doc, now) {
 
 	return {
 		starttime: starttime,
+		date: date,
 		team_competition: true,
 		team_names: [home_team_name, away_team_name],
 		matches: matches,

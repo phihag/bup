@@ -141,6 +141,7 @@
     "team_names": ["TV Refrath", "BC Bischmisheim"],
     "location": "SpH Steinbreche",
     "starttime": "19:00",
+    "date": "21.5.2018",
     "matchday": "Finale",
     "backup_players": [[{
       "name": "Dennis Nyenhuis",

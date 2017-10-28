@@ -1,4 +1,23 @@
-buli minimum requirements: print including team names!
+buli minimum requirements: generate nicely
+	inline preview and print button (like scoresheet)
+	fill out club names + date
+	add matchdate to data_structures
+	parse matchdate from btde
+	PDF generation
+	test with F5
+	test with going from main menu
+	convert club version as well
+	test in dist/
+minreqs to appcache
+clean up appcache
+date field in courtspot
+date field in btde: parse it
+
+
+set up rlwdemo
+	check that everything is correct, including (001)
+	mention in doc/slides
+	mention in URLS.md
 
 tde_import matches should have match_id
 2felder: testen mit mac-Auflösung (@800x600)
@@ -88,8 +107,6 @@ realistic court as overview
 selectevent module (passcode for Ulf)
 use ajax module everywhere instead of custom XMLHttpRequest or jQuery
 eventsheet: map of key to extra_data fields (or do away with extra_data)
-set up rlwdemo
-	check that everything is correct, including (001)
 displaymode for imported events (courts missing)
 tde_import: import players from other teams (https://www.turnier.de/sport/teamrankingplayers.aspx?id=3AE85140-FD7F-4D47-8BEE-575B0334E9D8&tid=1477)
 test referee mode without event -> Manuel Lappe

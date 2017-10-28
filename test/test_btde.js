@@ -23,6 +23,7 @@ _describe('btde', function() {
 			'team_names': ['TV Refrath', '1. BV Mülheim'],
 			'team_competition': true,
 			'league_key': '1BL-2017',
+			'date': '01.10.2017',
 			'starttime': '16:00',
 			'courts': [{
 				'court_id': 1,
@@ -275,6 +276,7 @@ _describe('btde', function() {
 			'team_names': ['TV Refrath', '1. BV Mülheim'],
 			'league_key': '2BLN-2017',
 			'team_competition': true,
+			'date': '01.10.2017',
 			'starttime': '16:00',
 			'courts': [{
 				'court_id': 1,
