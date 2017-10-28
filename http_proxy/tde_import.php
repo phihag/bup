@@ -16,6 +16,7 @@ function main($match_url) {
 	$domain = $matches['domain'];
 	$tm_html = \file_get_contents($match_url);
 	$tm = parse_teammatch($tm_html, $domain);
+	$tm['report_urls'] = [$match_url];
 
 	$data = $tm;
 	if (isset($_GET['format'])) {
