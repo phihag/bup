@@ -1,7 +1,17 @@
 
-selectevent module (passcode for Ulf)
+selectevent module
+	debmlist: collect coordinates
+	download 5 most likely (and leagues + matches therein)
+	start via league
+	start via URL input
+	if courtspot: ask for passcode
+	allow on referee
+	checkbox on referee: store event permanently (do not load from clients)
 
 refmode: visible warning if no crypto.subtle
+refmode:
+	make settings a pop-up dialog
+	redesign left side: 1 or 2 lines, configure button
 
 redesign fullscreen interface
 	big button on top
