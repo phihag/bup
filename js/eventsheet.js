@@ -42,8 +42,8 @@ var URLS = {
 	'teamlist-1BL-2016': 'div/teamlists/teamlist-1BL-2016.html',
 	'teamlist-2BLN-2016': 'div/teamlists/teamlist-2BLN-2016.html',
 	'teamlist-2BLS-2016': 'div/teamlists/teamlist-2BLS-2016.html',
-	'buli2017-minsr': 'div/buli2017_mindestanforderungen_schiedsrichter.pdf',
-	'buli2017-minv': 'div/buli2017_mindestanforderungen_verein.pdf',
+	'buli2017-minsr': 'div/buli2017_mindestanforderungen_schiedsrichter.svg',
+	'buli2017-minv': 'div/buli2017_mindestanforderungen_verein.svg',
 	'OBL-2017': 'div/eventsheet_obl.xlsx',
 };
 var DIRECT_DOWNLOAD_SHEETS = {
@@ -51,8 +51,6 @@ var DIRECT_DOWNLOAD_SHEETS = {
 	'teamlist-1BL-2016': true,
 	'teamlist-2BLN-2016': true,
 	'teamlist-2BLS-2016': true,
-	'buli2017-minsr': true,
-	'buli2017-minv': true,
 };
 var EXTERNAL_DOWNLOAD_SHEETS = {
 	'DBV-Satzungen-2017': true,
@@ -60,7 +58,10 @@ var EXTERNAL_DOWNLOAD_SHEETS = {
 	'RLM-SpO-2015': true,
 	'NRW-Satzungen': true,
 };
-
+var NO_DIALOG = {
+	'buli2017-minsr': true,
+	'buli2017-minv': true,
+};
 
 var MIME_TYPES = {
 	pdf: 'application/pdf',
@@ -548,6 +549,26 @@ function _svg_text(svg, id, val) {
 	}
 }
 
+function render_buli_minreq_svg(ev, es_key, ui8r) {
+	var preview = uiu.qs('.eventsheet_preview');
+	uiu.empty(preview);
+	var container = uiu.el(preview, 'div', {
+		style: 'height:85vh;width:100%;',
+	});
+
+	var xml_str = (new TextDecoder('utf-8')).decode(ui8r);
+	var svg_doc = (new DOMParser()).parseFromString(xml_str, 'image/svg+xml');
+	var svg = svg_doc.getElementsByTagName('svg')[0];
+	svg.setAttribute('style', 'max-width:100%;max-height:100%;');
+
+	_svg_text(svg, 'team0', ev.team_names[0]);
+	_svg_text(svg, 'team1', ev.team_names[1]);
+	_svg_text(svg, 'date', ev.date);
+
+	container.appendChild(svg);
+}
+
+
 function render_svg(ev, es_key, ui8r, extra_data) {
 	var xml_str = (new TextDecoder('utf-8')).decode(ui8r);
 	var svg_doc = (new DOMParser()).parseFromString(xml_str, 'image/svg+xml');
@@ -559,10 +580,10 @@ function render_svg(ev, es_key, ui8r, extra_data) {
 	var last_update = calc_last_update(matches);
 
 	var body = uiu.qs('body');
-	var container = $('<div style="position: absolute; left: -999px; top: -2999px; width: 297px; height: 210px; overflow: hidden;">');
+	var $container = $('<div style="position: absolute; left: -999px; top: -2999px; width: 297px; height: 210px; overflow: hidden;">');
 	svg.setAttribute('style', 'width: 2970px; height: 2100px;');
-	container[0].appendChild(svg);
-	body.appendChild(container[0]);
+	$container[0].appendChild(svg);
+	body.appendChild($container[0]);
 
 	var props = {
 		title: (state._('Event Sheet') + ' ' + ev.event_name + (last_update ? (' ' + utils.date_str(last_update)) : '')),
@@ -662,7 +683,7 @@ function render_svg(ev, es_key, ui8r, extra_data) {
 	var filename = state._('Event Sheet') + ' ' + ev.event_name + (last_update ? (' ' + utils.date_str(last_update)) : '') + '.pdf';
 	svg2pdf.save([svg], props, 'landscape', filename);
 
-	container.remove();
+	$container.remove();
 }
 
 function render_nla(ev, es_key, ui8r) {
@@ -673,10 +694,10 @@ function render_nla(ev, es_key, ui8r) {
 	eventutils.set_metadata(ev);
 
 	var body = uiu.qs('body');
-	var container = $('<div style="position: absolute; left: -9999px; top: -9999px; width: 2970px; height: 2100px; overflow: hidden;">');
+	var $container = $('<div style="position: absolute; left: -9999px; top: -9999px; width: 2970px; height: 2100px; overflow: hidden;">');
 	svg.setAttribute('style', 'width: 2970px; height: 2100px;');
-	container[0].appendChild(svg);
-	body.appendChild(container[0]);
+	$container[0].appendChild(svg);
+	body.appendChild($container[0]);
 
 	var props = {
 		title: (state._('Event Sheet') + ' ' + ev.event_name),
@@ -753,7 +774,7 @@ function render_nla(ev, es_key, ui8r) {
 	var filename = state._('Event Sheet') + ' ' + ev.event_name + '.pdf';
 	svg2pdf.save([svg], props, 'landscape', filename);
 
-	container.remove();
+	$container.remove();
 }
 
 function calc_player_matches(ev, team_id) {
@@ -1412,6 +1433,9 @@ function es_render(ev, es_key, ui8r, extra_data) {
 		return render_nla(ev, es_key, ui8r);
 	case 'OBL-2017':
 		return render_obl(ev, es_key, ui8r, extra_data);
+	case 'buli2017-minsr':
+	case 'buli2017-minv':
+		return render_buli_minreq_svg(ev, es_key, ui8r);
 	default:
 	throw new Error('Unsupported eventsheet key ' + es_key);
 	}
@@ -1528,7 +1552,7 @@ function ui_init() {
 	});
 
 	click.qs('.eventsheet_reload', function() {
-		dialog_fetch();
+		dialog_fetch(on_fetch);
 	});
 
 	$('.eventsheet_back').on('click', function(e) {
@@ -1565,12 +1589,12 @@ function on_fetch() {
 	}
 }
 
-function dialog_fetch() {
+function dialog_fetch(cb) {
 	uiu.visible_qs('.eventsheet_generate_loading_icon', !state.event || !_loaded_all_libs);
 	var btn = $('.eventsheet_generate_button');
 	if (state.event) {
 		btn.removeAttr('disabled');
-		on_fetch();
+		cb();
 	} else {
 		btn.attr('disabled', 'disabled');
 		network.list_matches(state, function(err, ev) {
@@ -1587,7 +1611,7 @@ function dialog_fetch() {
 			es_key = resolve_key(es_key);
 			container.attr('data-eventsheet_key', es_key);
 			btn.removeAttr('disabled');
-			on_fetch();
+			cb();
 		});
 	}
 }
@@ -1620,13 +1644,28 @@ function show_dialog(es_key) {
 		download(es_key);
 	}
 
-	var container = $('.eventsheet_container');
-	container.attr('data-eventsheet_key', es_key);
-	uiu.visible_qs('.eventsheet_container', true);
+	var $container = $('.eventsheet_container');
+	$container.attr('data-eventsheet_key', es_key);
+	uiu.show_qs('.eventsheet_container');
 
-	var download_link = uiu.qs('.eventsheet_download_link');
 	var download_link_container = uiu.qs('.eventsheet_download_link_container');
+	var download_link = uiu.qs('.eventsheet_download_link');
 	var preview = uiu.qs('.eventsheet_preview');
+	var generate_button = uiu.qs('.eventsheet_generate_button');
+
+	if (NO_DIALOG[es_key]) {
+		uiu.hide_qs('.eventsheet_report');
+		uiu.hide(download_link_container);
+		uiu.hide(generate_button);
+		dialog_fetch(function() {
+			var button_row = uiu.qs('.eventsheet_button_row');
+			prepare_render(button_row, es_key, {});
+		});
+		return;
+	}
+
+	uiu.show(generate_button);
+
 	switch (es_key) {
 	case '1BL-2015':
 	case '2BLN-2015':

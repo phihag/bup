@@ -1,17 +1,10 @@
 buli minimum requirements: generate nicely
+	print styles
 	inline preview and print button (like scoresheet)
-	fill out club names + date
-	add matchdate to data_structures
-	parse matchdate from btde
 	PDF generation
-	test with F5
-	test with going from main menu
-	convert club version as well
 	test in dist/
 minreqs to appcache
 clean up appcache
-date field in courtspot
-date field in btde: parse it
 
 
 set up rlwdemo
