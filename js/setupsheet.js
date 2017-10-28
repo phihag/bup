@@ -138,7 +138,7 @@ function calc_listed(event) {
 		res = event.all_players.map(function(aps) {
 			team_res = {
 				m: [],
-				f: []
+				f: [],
 			};
 			aps.forEach(_add);
 			team_res.m.sort(_cmp_players);
