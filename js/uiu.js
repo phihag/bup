@@ -80,7 +80,9 @@ function is_hidden(el) {
 function hide(el) {
 	var style = el.style;
 	if (! is_hidden(el)) {
-		el.setAttribute('data-uiu-display', style.display);
+		if (style.display) {
+			el.setAttribute('data-uiu-display', style.display);
+		}
 		style.display = 'none';
 	}
 }

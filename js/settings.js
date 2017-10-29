@@ -94,7 +94,7 @@ function show_displaymode() {
 	window.addEventListener('mousemove', autohide_restart);
 	window.addEventListener('click', autohide_restart);
 	state.ui.displaymode_settings_visible = true;
-	uiu.$visible_qs('#settings_wrapper', true);
+	uiu.show_qs('#settings_wrapper');
 	bupui.esc_stack_push(hide_displaymode);
 	autohide_restart();
 }
@@ -110,7 +110,7 @@ function hide_displaymode() {
 		_autohide_to = null;
 	}
 	state.ui.displaymode_settings_visible = false;
-	uiu.$visible_qs('#settings_wrapper', false);
+	uiu.hide_qs('#settings_wrapper');
 	bupui.esc_stack_pop();
 }
 
@@ -468,7 +468,7 @@ function on_mode_change(s) {
 
 	uiu.qsEach('#settings_wrapper [data-bup-modes]', function(el) {
 		var modes = el.getAttribute('data-bup-modes');
-		uiu.$visible(el, modes.indexOf(mode) >= 0);
+		uiu.visible(el, modes.indexOf(mode) >= 0);
 	});
 	update_court_settings(s);
 

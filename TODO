@@ -1,5 +1,3 @@
-eventsheet/nlademo: set NO_DIALOG
-
 selectevent module
 	debmlist: collect coordinates
 	download 5 most likely (and leagues + matches therein)
@@ -19,10 +17,7 @@ redesign fullscreen interface
 	automatically if going out of fullscreen (for example turning off A88X tablets)
 
 de-jqueryfy show
-	3. provide non-jquery show/hide/visible functions
-	4. start switching one by one to new functions
-	rename default-invisible to invisible
-provide native fadeOut
+	remove all uiu.$ invocations
 de-jquerify network.request
 	1. rename to $request
 	2. provide request
