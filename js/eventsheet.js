@@ -61,6 +61,7 @@ var EXTERNAL_DOWNLOAD_SHEETS = {
 var NO_DIALOG = {
 	'buli2017-minsr': true,
 	'buli2017-minv': true,
+	'NLA-2017': true,
 };
 
 var MIME_TYPES = {
@@ -544,39 +545,121 @@ function _svg_text(svg, id, val) {
 	}
 }
 
-function render_buli_minreq_svg(ev, es_key, ui8r) {
-	var preview = uiu.qs('.eventsheet_preview');
-	uiu.empty(preview);
+// Decorator for svg-based NO_DIALOG sheets.
+// The function gets called with (svg, ev), and must return {orientation, optionally scale}.
+function _svg_nd_func(func) {
+	return function(ev, es_key, ui8r) {
+		var preview = uiu.qs('.eventsheet_preview');
+		uiu.empty(preview);
 
-	var xml_str = (new TextDecoder('utf-8')).decode(ui8r);
-	var svg_doc = (new DOMParser()).parseFromString(xml_str, 'image/svg+xml');
-	var svg = svg_doc.getElementsByTagName('svg')[0];
-	svg.setAttribute('style', 'max-width:100%;max-height:100%;');
+		var xml_str = (new TextDecoder('utf-8')).decode(ui8r);
+		var svg_doc = (new DOMParser()).parseFromString(xml_str, 'image/svg+xml');
+		var svg = svg_doc.getElementsByTagName('svg')[0];
+		svg.setAttribute('style', 'max-width:100%;max-height:100%;');
 
+		var info = func(svg, ev);
+		var subject = state._('eventsheet:label|' + es_key);
+		var title = subject + ' ' + ev.event_name;
+		info.props = {
+			subject: subject,
+			title: title,
+			creator: 'bup (https://phihag.de/bup/)',
+		};
+		if (state.settings && state.settings.umpire_name) {
+			info.props.author = state.settings.umpire_name;
+		}
+		info.filename = title + '.pdf';
+		preview.setAttribute('data-info_json', JSON.stringify(info));
+
+		printing.set_orientation(info.orientation);
+		preview.appendChild(svg);
+
+		preview.style.width = (info.orientation === 'landscape') ? 'calc(100vw - 4em)' : '';
+	};
+}
+
+var render_buli_minreq_svg = _svg_nd_func(function(svg, ev) {
 	_svg_text(svg, 'team0', ev.team_names[0]);
 	_svg_text(svg, 'team1', ev.team_names[1]);
 	_svg_text(svg, 'date', ev.date);
 
-	var orientation = 'portrait';
-	printing.set_orientation(orientation);
-
-	var subject = state._('eventsheet:label|' + es_key);
-	var title = subject + ' ' + ev.event_name;
-
-	preview.setAttribute('data-info_json', JSON.stringify({
-		props: {
-			title: title,
-			subject: subject,
-			creator: 'bup (https://phihag.de/bup/)',
-		},
-		orientation: orientation,
-		filename: title + '.pdf',
+	return {
+		orientation: 'portrait',
 		scale: 0.228,
-	}));
+	};
+});
 
-	preview.appendChild(svg);
-}
+var render_nla = _svg_nd_func(function(svg, ev) {
+	eventutils.set_metadata(ev);
 
+	var sum_games = [0, 0];
+	var sum_matches = [0, 0];
+
+	ev.matches.forEach(function(match) {
+		var netscore = match.network_score;
+		var eid = calc_match_id(match);
+
+		match.setup.teams.forEach(function(team, team_id) {
+			team.players.forEach(function(player, player_id) {
+				var key = eid + '_player' + team_id + '.' + player_id;
+				_svg_text(svg, key, player.name);
+			});
+		});
+
+		if (netscore) {
+			netscore.forEach(function(ns, game_id) {
+				ns.forEach(function(score, team_id) {
+					_svg_text(svg, eid + '_score' + game_id + '_' + team_id, score);
+				});
+			});
+		}
+
+		if (netscore && (netscore.length > 0) && ((netscore[0][0] > 0) || (netscore[0][1] > 0))) {
+			var games = calc_gamescore(match.setup.counting, netscore);
+			sum_games[0] += games[0];
+			sum_games[1] += games[1];
+			_svg_text(svg, eid + '_games0', games[0]);
+			_svg_text(svg, eid + '_games1', games[1]);
+
+			var matches_score = calc_matchscore(match.setup.counting, netscore);
+			if (matches_score[0] !== undefined) {
+				sum_matches[0] += matches_score[0];
+				sum_matches[1] += matches_score[1];
+			}
+			_svg_text(svg, eid + '_matches0', matches_score[0]);
+			_svg_text(svg, eid + '_matches1', matches_score[1]);
+		} else {
+			_svg_text(svg, eid + '_games0', '');
+			_svg_text(svg, eid + '_games1', '');
+			_svg_text(svg, eid + '_matches0', '');
+			_svg_text(svg, eid + '_matches1', '');
+		}
+	});
+
+	var sums_active = sum_games[0] || sum_games[1];
+	_svg_text(svg, 'sum_games0', sums_active ? sum_games[0] : '');
+	_svg_text(svg, 'sum_games1', sums_active ? sum_games[1] : '');
+	_svg_text(svg, 'sum_matches0', sums_active ? sum_matches[0] : '');
+	_svg_text(svg, 'sum_matches1', sums_active ? sum_matches[1] : '');
+	(ev.team_names || []).forEach(function(team_name, team_id) {
+		_svg_text(svg, 'teamname' + team_id, team_name);
+	});
+
+	if (ev.date) {
+		var d = ev.date.split('.');
+		_svg_text(svg, 'day', d[0]);
+		_svg_text(svg, 'month', d[1]);
+		_svg_text(svg, 'year', d[2]);
+	}
+
+	if (ev.shuttle_count) {
+		_svg_text(svg, 'shuttle_count', ev.shuttle_count);
+	}
+
+	return {
+		orientation: 'landscape',
+	};
+});
 
 function render_basic_eventsheet(ev, es_key, ui8r, extra_data) {
 	var xml_str = (new TextDecoder('utf-8')).decode(ui8r);
@@ -692,97 +775,6 @@ function render_basic_eventsheet(ev, es_key, ui8r, extra_data) {
 	_svg_text(svg, 'umpires', extra_data.umpires);
 
 	var filename = state._('Event Sheet') + ' ' + ev.event_name + (last_update ? (' ' + utils.date_str(last_update)) : '') + '.pdf';
-	svg2pdf.save([svg], props, 'landscape', filename);
-
-	$container.remove();
-}
-
-function render_nla(ev, es_key, ui8r) {
-	var xml_str = (new TextDecoder('utf-8')).decode(ui8r);
-	var svg_doc = (new DOMParser()).parseFromString(xml_str, 'image/svg+xml');
-	var svg = svg_doc.getElementsByTagName('svg')[0];
-
-	eventutils.set_metadata(ev);
-
-	var body = uiu.qs('body');
-	var $container = $('<div style="position: absolute; left: -9999px; top: -9999px; width: 2970px; height: 2100px; overflow: hidden;">');
-	svg.setAttribute('style', 'width: 2970px; height: 2100px;');
-	$container[0].appendChild(svg);
-	body.appendChild($container[0]);
-
-	var props = {
-		title: (state._('Event Sheet') + ' ' + ev.event_name),
-		subject: state._('Event Sheet'),
-		creator: 'bup (https://phihag.de/bup/)',
-	};
-	if (state.settings && state.settings.umpire_name) {
-		props.author = state.settings.umpire_name;
-	}
-
-	var sum_games = [0, 0];
-	var sum_matches = [0, 0];
-
-	ev.matches.forEach(function(match) {
-		var netscore = match.network_score;
-		var eid = calc_match_id(match);
-
-		match.setup.teams.forEach(function(team, team_id) {
-			team.players.forEach(function(player, player_id) {
-				var key = eid + '_player' + team_id + '.' + player_id;
-				_svg_text(svg, key, player.name);
-			});
-		});
-
-		if (netscore) {
-			netscore.forEach(function(ns, game_id) {
-				ns.forEach(function(score, team_id) {
-					_svg_text(svg, eid + '_score' + game_id + '_' + team_id, score);
-				});
-			});
-		}
-
-		if (netscore && (netscore.length > 0) && ((netscore[0][0] > 0) || (netscore[0][1] > 0))) {
-			var games = calc_gamescore(match.setup.counting, netscore);
-			sum_games[0] += games[0];
-			sum_games[1] += games[1];
-			_svg_text(svg, eid + '_games0', games[0]);
-			_svg_text(svg, eid + '_games1', games[1]);
-
-			var matches_score = calc_matchscore(match.setup.counting, netscore);
-			if (matches_score[0] !== undefined) {
-				sum_matches[0] += matches_score[0];
-				sum_matches[1] += matches_score[1];
-			}
-			_svg_text(svg, eid + '_matches0', matches_score[0]);
-			_svg_text(svg, eid + '_matches1', matches_score[1]);
-		} else {
-			_svg_text(svg, eid + '_games0', '');
-			_svg_text(svg, eid + '_games1', '');
-			_svg_text(svg, eid + '_matches0', '');
-			_svg_text(svg, eid + '_matches1', '');
-		}
-	});
-
-	var sums_active = sum_games[0] || sum_games[1];
-	_svg_text(svg, 'sum_games0', sums_active ? sum_games[0] : '');
-	_svg_text(svg, 'sum_games1', sums_active ? sum_games[1] : '');
-	_svg_text(svg, 'sum_matches0', sums_active ? sum_matches[0] : '');
-	_svg_text(svg, 'sum_matches1', sums_active ? sum_matches[1] : '');
-	(ev.team_names || []).forEach(function(team_name, team_id) {
-		_svg_text(svg, 'teamname' + team_id, team_name);
-	});
-
-	var now = ev.last_update || Date.now();
-	var d = new Date(now);
-	_svg_text(svg, 'day', d.getDate());
-	_svg_text(svg, 'month', d.getMonth() + 1);
-	_svg_text(svg, 'year', d.getFullYear());
-
-	if (ev.shuttle_count) {
-		_svg_text(svg, 'shuttle_count', ev.shuttle_count);
-	}
-
-	var filename = state._('Event Sheet') + ' ' + ev.event_name + '.pdf';
 	svg2pdf.save([svg], props, 'landscape', filename);
 
 	$container.remove();
