@@ -251,6 +251,10 @@ if ($counting) {
 if ($verwaltung['Startzeit']) {
 	$res['starttime'] = $verwaltung['Startzeit'];
 }
+if ($verwaltung['Datum']) {
+	$res['date'] = $verwaltung['Datum'];
+}
+
 if ($verwaltung['Spieltag']) {
 	$res['matchday'] = $verwaltung['Spieltag'];
 }

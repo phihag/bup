@@ -1,7 +1,9 @@
 drop experimental label
+minreqs: esc fails ($visible?)
+minreqs: back fails ($visible?)
 
 use network.$request
-referee mode: anderer Status für "Spiel auf dem Tablet geladen"
+referee mode: anderer Status für "Spiel auf dem Tablet geladen"?
 new Uzwil error report
 esc fails in Mindestanforderungen-verein
 use aufschlagwechsel.de to report
