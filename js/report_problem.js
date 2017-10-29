@@ -48,10 +48,12 @@ function _send(obj) {
 
 function report(info_obj) {
 	/*@DEV*/
-	return;
+	if (reported_count >= 0) {
+		return;
+	}
 	/*/@DEV*/
 
-	reported_count++; // eslint-disable-line no-unreachable
+	reported_count++;
 	if (reported_count > 5) {
 		return;
 	}
