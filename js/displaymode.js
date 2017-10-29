@@ -1019,7 +1019,7 @@ function render_greyish(s, container, event, colors) {
 		style: (
 			'background:' + colors.bg + ';' +
 			'position:fixed;left:0;top:0;bottom:0;right:0;' +
-			'padding:2vmin 2vmin 0 2vmin;'
+			'padding:0;'
 		),
 	});
 
