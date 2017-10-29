@@ -271,47 +271,6 @@ function show() {
 			render_table(state);
 		});
 	}
-
-	network.list_events(state, function(err, events) {
-		var sel_container = uiu.qs('.editevent_select');
-		if (err && (err.code === 'unsupported')) {
-			uiu.$hide(sel_container);
-			return;
-		}
-
-		uiu.empty(sel_container);
-		var form = uiu.el(sel_container, 'form');
-		var select = uiu.el(form, 'select', {
-			required: 'required',
-		});
-		uiu.el(select, 'option', {
-			selected: 'selected',
-			disabled: 'disabled',
-			value: '',
-		});
-		events.forEach(function(ev) {
-			uiu.el(select, 'option', {
-				value: JSON.stringify(ev),
-			}, ev.date + ' ' + ev.starttime + ' ' + ev.team_names[0] + ' - ' + ev.team_names[1]);
-		});
-		uiu.el(form, 'button', {
-			type: 'submit',
-		}, state._('editevent:select event'));
-		form.addEventListener('submit', function(e) {
-			e.preventDefault();
-			uiu.$show_qs('.editevent_loading-icon');
-			network.select_event(state, JSON.parse(select.value), function(err) {
-				uiu.$hide_qs('.editevent_loading-icon');
-				if (err) {
-					uiu.text_qs('.editevent_error_message', err.msg);
-				} else {
-					hide_and_back();
-				}
-			});
-		});
-
-		uiu.$show(sel_container);
-	});
 }
 
 function hide() {

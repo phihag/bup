@@ -14,7 +14,6 @@ function get_real_netw() {
 		networks.tdemo ||
 		networks.btsh ||
 		networks.btde ||
-		networks.mt ||
 		networks.courtspot ||
 		networks.liveaw ||
 		networks.jticker ||
@@ -590,8 +589,6 @@ function ui_init(s, hash_query) {
 		networks.csde = csde(hash_query.csde);
 	} else if (hash_query.btde !== undefined) {
 		networks.btde = btde();
-	} else if (hash_query.mt !== undefined) {
-		networks.mt = mt();
 	} else if (hash_query.liveaw_event_id) {
 		networks.liveaw = liveaw(hash_query.liveaw_event_id);
 	} else if (hash_query.jt_id !== undefined) {
@@ -764,10 +761,6 @@ function list_events(s, cb) {
 	netw.list_events(s, cb);
 }
 
-function select_event(s, evdef, cb) {
-	get_netw().select_event(s, evdef, cb);
-}
-
 function court_label(s, court_id) {
 	var all_courts = courts(s);
 	if (!all_courts) {
@@ -801,7 +794,6 @@ return {
 	on_edit_event: on_edit_event,
 	request: request,
 	resync: resync,
-	select_event: select_event,
 	send_press: send_press,
 	subscribe: subscribe,
 	supports_order: supports_order,
@@ -832,7 +824,6 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var jticker = require('./jticker');
 	var liveaw = require('./liveaw');
 	var match_storage = require('./match_storage');
-	var mt = require('./mt');
 	var netstats = require('./netstats');
 	var p2p = require('./p2p');
 	var pronunciation = require('./pronunciation');

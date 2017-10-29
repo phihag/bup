@@ -1,16 +1,18 @@
-drop experimental label
+check editevent (apparantly calls list_events)
+setupsheet fails in referee mode
 minreqs: esc fails ($visible?)
 minreqs: back fails ($visible?)
-
-use network.$request
+rename to network.$request
+use network.request to communicate with tde_export
+btde: urlexport should go to aufschlagwechsel.de outside dev
+jticker: urlexport should to to aufschlagwechsel.de all the time
 referee mode: anderer Status für "Spiel auf dem Tablet geladen"?
 new Uzwil error report
 esc fails in Mindestanforderungen-verein
-use aufschlagwechsel.de to report
 btde: guess turnier.de URL
 referee mode: ask before someone joins
-reihenfolge im referee mode
-abt: support tournaments
+order in referee mode: tablets first please
+
 
 selectevent module
 	debmlist: collect coordinates
