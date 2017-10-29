@@ -49,7 +49,6 @@ function render_prepare(s, page, submit_cb) {
 		});
 	});
 	var prepare_btn = uiu.el(prepare_form, 'button', {}, s._('urlexport:prepare'));
-	uiu.el(prepare_btn, 'span', {}, s._('experimental'));
 
 	form_utils.onsubmit(prepare_form, function(data) {
 				if (typeof localStorage !== 'undefined') {
@@ -400,7 +399,6 @@ function render_links(s, container, append) {
 		}, s._('urlexport:link', {
 			domain: domain,
 		}));
-		uiu.el(link, 'span', {}, s._('experimental'));
 		click.on(link, show);
 	});
 }
