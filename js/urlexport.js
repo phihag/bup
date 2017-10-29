@@ -48,7 +48,7 @@ function render_prepare(s, page, submit_cb) {
 			),
 		});
 	});
-	var prepare_btn = uiu.el(prepare_form, 'button', {}, s._('urlexport:prepare'));
+	uiu.el(prepare_form, 'button', {}, s._('urlexport:prepare'));
 
 	form_utils.onsubmit(prepare_form, function(data) {
 				if (typeof localStorage !== 'undefined') {
