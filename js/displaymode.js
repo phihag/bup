@@ -1033,6 +1033,7 @@ function render_greyish(s, container, event, colors) {
 	var tr = uiu.el(header, 'tr');
 
 	function _render_logo(team_id) {
+		if (!logo_urls) return;
 		var td = uiu.el(tr, 'td', {
 			style: (
 				'background:' + colors.bg2 + ';padding:1vh 1vw;height:15vh;width:13vw;'
