@@ -11,7 +11,7 @@ listed_players  Order of players listed in the setup sheet. 2 element list(home/
                 Each element is a dictionary with the keys "m" and "f".
                 Each element of that dictionary is an array for each player.
 courts          An array describing the current configuration of courts.
-id              Globally unique event id, e.g. "2016-bundesliga-refrath vs bischmisheim"
+id              Globally unique event id, e.g. "CourtSpot:2016-bundesliga-refrath vs bischmisheim"
 league_key      ID of the league being played (this determines which event sheets are available, among others).
                 Strongly recommended if applicable.
                 Available values:

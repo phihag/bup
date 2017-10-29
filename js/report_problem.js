@@ -15,7 +15,7 @@ function get_info() {
 		bup_version: bup_version,
 		setup: state.setup,
 		league_key: (ev ? ev.league_key : '(no event)'),
-		event_id: (ev ? ev.id : '(no event)'),
+		event: (ev ? (ev.id || event.event_name) : '(no event)'),
 		state_ui: state.ui,
 		fullscreen: {
 			supported: fullscreen.supported(),
