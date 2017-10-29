@@ -101,6 +101,13 @@ function _find($ar, $cb) {
 	return null;
 }
 
+function _unify_team_name($team_name) {
+	if (preg_match('/^(.*?)\s*\[[MN]\]$/', $team_name, $m)) {
+		$team_name = $m[1];
+	}
+	return $team_name;
+}
+
 if (!isset($_GET['action'])) {
 	throw new \Exception('Missing action');
 }
@@ -148,7 +155,10 @@ if (($action === 'prepare') || ($action === 'submit')) {
 	if (!preg_match('/Eingabe Ergebnis für:\s+<a[^>]+>(.*?)\s*<span class="nobreak">[^<]*<\/span><\/a> - <a[^>]+>(.*?)\s*<span class="nobreak">/', $input_page, $m)) {
 		json_err('Cannot find team names');
 	}
-	$real_team_names = [$m[1], $m[2]];
+	$real_team_names = [
+		_unify_team_name($m[1]),
+		_unify_team_name($m[2])
+	];
 	if (($team_names[0] !== $real_team_names[0]) || ($team_names[1] !== $real_team_names[1])) {
 		json_err('Incorrect team names: This match URL points to ' . $real_team_names[0] . ' - ' . $real_team_names[1] . ', but expected ' . $team_names[0] . ' - ' . $team_names[1]);
 	}

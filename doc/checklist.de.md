@@ -57,7 +57,7 @@
   - [ ] *Alle Tablets+Anzeigen erkannt?
 - [ ] *Tabs Aufstellungen öffnen (von kroton.de)
 - [ ] Aufstellungszettel
-  - [ ] Ausfüllen mit in der Halle anwesenden Spielern
+  - [ ] *Ausfüllen mit in der Halle anwesenden Spielern
   - [ ] Ausdrucken
   - [ ] Heim geben
   - [ ] Gast geben

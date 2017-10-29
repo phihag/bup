@@ -1,5 +1,9 @@
-why no event id
-nlademo: error in displaymode
+abt: support tournaments
+referee mode: anderer Status
+new Uzwil error report
+esc fails in Mindestanforderungen-verein
+use aufschlagwechsel.de to report
+btde: guess URL
 
 selectevent module
 	debmlist: collect coordinates
@@ -29,6 +33,7 @@ de-jquerify network.request
 2felder: testen mit mac-Auflösung (@800x600)
 2courts: add teammatch score
 editevent crashes after mo -> mail Werner Durow
+dads countdown to time
 
 login in displaymode
 dads: show displaymode -> Steffen Becker
