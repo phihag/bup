@@ -1050,7 +1050,8 @@ function render_greyish(s, container, event, colors) {
 	function _render_team(team_id) {
 		uiu.el(tr, 'td', {
 			style: (
-				'width:30vw;text-align:center;' +
+				'width:' + (30 + (logo_urls ? 0 : 15)) + 'vw;' +
+				'text-align:center;' +
 				'color:' + colors.fg + ';' +
 				'font-size:4vmin;'
 			),
