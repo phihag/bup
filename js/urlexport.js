@@ -181,7 +181,8 @@ function init(s, page) {
 		status.style.visibility = 'visible';
 		status_icon.setAttribute('class', 'loading-icon');
 
-		ajax.req(options, success_cb, function(code, content, xhr) {
+		options.success = success_cb;
+		options.error = function(code, content, xhr) {
 			status_icon.setAttribute('class', 'error-icon');
 			uiu.addClass(status_text, 'network_error');
 
@@ -198,7 +199,8 @@ function init(s, page) {
 				code: code,
 			}));
 			report_problem.silent_error('urlexport to ' + options.url + ' failed with HTTP ' + code);
-		});
+		};
+		ajax.req(options);
 	}
 
 	var status = uiu.el(page, 'div', {

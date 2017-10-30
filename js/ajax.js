@@ -9,10 +9,10 @@ var ajax = (function() {
 * - url*:         URL to download
 * - data:         The string to send.
 * - contentType:  The MIME response type
-* sucess_cb gets called with the data and XMLHTTPRequest object on success.
-* fail_cb gets called on error, with HTTP status, response text, and the XMLHTTPRequest object.
+* - success:       Function which gets called with the data and XMLHTTPRequest object on success.
+* - error:        Function which gets called on error, with HTTP status, response text, and the XMLHTTPRequest object.
 */
-function req(options, success_cb, fail_cb) {
+function req(options) {
 	var xhr = new XMLHttpRequest();
 	var method = options.method || (options.data ? 'POST' : 'GET');
 	xhr.open(method, options.url, true);
@@ -26,9 +26,13 @@ function req(options, success_cb, fail_cb) {
 			return;
 		}
 		if (xhr.status === 200) {
-			success_cb(xhr.response, xhr);
+			if (options.success) {
+				options.success(xhr.response, xhr);
+			}
 		} else {
-			fail_cb(xhr.status, xhr.response, xhr);
+			if (options.error) {
+				options.error(xhr.status, xhr.response, xhr);
+			}
 		}
 	};
 	xhr.send(options.data);
