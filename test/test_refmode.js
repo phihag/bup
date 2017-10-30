@@ -33,7 +33,7 @@ var tutil_key_storage = (function() {
 
 _describe('refmode', function() {
 	var hub;
-	after(function() {
+	after(function() { // eslint-disable-line no-undef
 		if (hub) {
 			hub.close();
 		}
