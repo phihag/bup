@@ -32,9 +32,17 @@ var tutil_key_storage = (function() {
 
 
 _describe('refmode', function() {
+	var hub;
+	after(function() {
+		if (hub) {
+			hub.close();
+		}
+	});
+
 	_it('ws integration test', function(done) {
+		var terminated = false;
 		async.waterfall([function(cb) {
-			var hub = refmode_hub({port: 0});
+			hub = refmode_hub({port: 0});
 			hub.on('listening', function() {
 				var port = hub._server.address().port;
 				var ws_url = 'ws://localhost:' + port + '/';
@@ -83,6 +91,8 @@ _describe('refmode', function() {
 			};
 
 			function on_change(new_state) {
+				if (terminated) return;
+
 				if (new_state.status === 'error') {
 					return cb(new_state);
 				}
@@ -373,6 +383,8 @@ _describe('refmode', function() {
 			client.net_send_press(s, press);
 		}, function(client, referee, cb) {
 			referee.test_render_clients = function(clients) {
+				if (terminated) return;
+
 				assert(Array.isArray(clients));
 				assert.strictEqual(clients.length, 1);
 				var c = clients[0];
@@ -460,6 +472,9 @@ _describe('refmode', function() {
 			assert.deepStrictEqual(gd.presses.length, 7);
 
 			cb();
-		}], done);
+		}], function(err) {
+			terminated = true;
+			done(err);
+		});
 	});
 });
