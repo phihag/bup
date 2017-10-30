@@ -3,7 +3,7 @@ function courtspot(baseurl) {
 
 function _request(s, component, options, cb) {
 	options.timeout = s.settings.network_timeout;
-	network.request(component, options).done(function(res) {
+	network.$request(component, options).done(function(res) {
 		return cb(null, res);
 	}).fail(function(xhr) {
 		var message = 'Netzwerk-Fehler (Code ' + xhr.status + ')';

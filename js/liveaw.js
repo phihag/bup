@@ -146,7 +146,7 @@ function ui_render_login(container) {
 		loading_icon.show();
 		login_button.attr('disabled', 'disabled');
 
-		network.request('liveaw.login', {
+		network.$request('liveaw.login', {
 			dataType: 'text',
 			url: baseurl + 'login/',
 			method: 'POST',

@@ -49,7 +49,7 @@ function list_matches(s, cb) {
 		return;
 	}
 	if (!event && url) {
-		network.request('staticnet.download', {
+		network.$request('staticnet.download', {
 			url: url,
 			dataType: 'json',
 		}).done(function(data) {

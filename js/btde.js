@@ -19,7 +19,7 @@ function ui_render_login(container) {
 		loading_icon.show();
 		login_button.attr('disabled', 'disabled');
 
-		network.request('btde.login', {
+		network.$request('btde.login', {
 			dataType: 'text',
 			url: baseurl + 'login/index.php',
 			method: 'POST',

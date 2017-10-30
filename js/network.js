@@ -655,7 +655,7 @@ function match_by_id(id) {
 }
 
 // Follows the jQuery AJAX promise
-function request(component, options) {
+function $request(component, options) {
 	var cb = netstats.pre_request(component);
 	var res = $.ajax(options);
 	res.always(cb);
@@ -792,7 +792,7 @@ return {
 	list_matches: list_matches,
 	match_by_id: match_by_id,
 	on_edit_event: on_edit_event,
-	request: request,
+	$request: $request,
 	resync: resync,
 	send_press: send_press,
 	subscribe: subscribe,

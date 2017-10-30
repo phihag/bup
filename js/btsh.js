@@ -6,7 +6,7 @@ function btsh(baseurl, tournament_key) {
 function _request_json(s, component, options, cb) {
 	options.dataType = 'text';
 	options.timeout = s.settings.network_timeout;
-	network.request(component, options).done(function(res_json) {
+	network.$request(component, options).done(function(res_json) {
 		try {
 			var res = JSON.parse(res_json);
 		} catch (e) {

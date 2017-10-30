@@ -1,4 +1,4 @@
-rename network.request to network.$request
+ajax.req: move success and fail into options
 use correct setupsheet in referee mode as well (see existing logic)
 check editevent (apparantly calls list_events)
 setupsheet fails in referee mode
