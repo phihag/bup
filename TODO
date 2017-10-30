@@ -1,3 +1,10 @@
+sclive: make sure that reverse order in mixed does not crash
+	set up jticker in a docker container
+	reproduce issue
+	-> msg Johannes
+
+btde: send export should include status
+nlademo: add date
 use correct setupsheet in referee mode as well (see existing logic)
 check editevent (apparantly calls list_events)
 setupsheet fails in referee mode
@@ -13,8 +20,6 @@ esc fails in Mindestanforderungen-verein
 btde: guess turnier.de URL
 referee mode: ask before someone joins
 order in referee mode: tablets first please
-sclive: make sure that reverse order in mixed does not crash
-	-> msg Johannes
 referee mode: query netstats
 referee mode: reset netstats
 referee mode: timeout earlier
