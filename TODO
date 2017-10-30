@@ -15,6 +15,9 @@ referee mode: ask before someone joins
 order in referee mode: tablets first please
 sclive: make sure that reverse order in mixed does not crash
 	-> msg Johannes
+referee mode: query netstats
+referee mode: reset netstats
+referee mode: timeout earlier
 
 selectevent module
 	debmlist: collect coordinates
@@ -978,7 +981,6 @@ editevent: check ranking
 doc about all main features (HTML table, compare with other projects)
 upload to turnier.de?
 rework settings.show => split stuff into ui_init
-i18n: use uiu instead of $
 UI (& refmode) in konqueror
 refmode: screenshot
 replace msg with message everywhere (msg: msg. msg=)
@@ -990,3 +992,12 @@ remove calls to prompt and alert
 render in transparent windows -> Dieter Gläßer
 drucken wie BTP als Server (alles|bei Problemen|nie)
 search for third argument of uiu.el(): {'class': 'foobar'}, replace with more modern version
+
+@tvr:
+check Pi font
+take better pictures
+	control PCs
+	umpire panel in action (from the chair)
+	Nahaufnahme der Halterung
+	Nahaufnahme Pi
+	screenshot referee mode
