@@ -28,7 +28,7 @@ function make_pick(s, label, values, on_pick, on_cancel, container, select_at) {
 
 	var kill_dialog = function() {
 		esc_stack_pop();
-		dlg_wrapper.remove();
+		uiu.remove(dlg_wrapper);
 	};
 	if (s && on_cancel) {
 		control.install_destructor(s, kill_dialog);

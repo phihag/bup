@@ -1,3 +1,4 @@
+use correct setupsheet in referee mode as well (see existing logic)
 check editevent (apparantly calls list_events)
 setupsheet fails in referee mode
 minreqs: esc fails ($visible?)
