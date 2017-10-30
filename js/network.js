@@ -752,15 +752,6 @@ function list_full_event(s, callback) {
 	});
 }
 
-function list_events(s, cb) {
-	var netw = get_netw();
-	if (! netw.list_events) {
-		cb({code: 'unsupported'});
-		return;
-	}
-	netw.list_events(s, cb);
-}
-
 function court_label(s, court_id) {
 	var all_courts = courts(s);
 	if (!all_courts) {
@@ -787,7 +778,6 @@ return {
 	install_refmode_push: install_refmode_push,
 	is_enabled: is_enabled,
 	list_all_players: list_all_players,
-	list_events: list_events,
 	list_full_event: list_full_event,
 	list_matches: list_matches,
 	match_by_id: match_by_id,
