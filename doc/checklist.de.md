@@ -135,3 +135,8 @@ Nach Spielende:
 - [ ] Laptops und Zubehör abbauen und einpacken
 - [ ] Tablets einpacken
 - [ ] Tabletständer einpacken
+
+URLs mit badmintonticker:
+
+bup: http://login.badmintonticker.de/ -> Spielbeginn -> Badminton Umpire Panel oder direkt http://login.badmintonticker.de/ticker/bup/#btde
+Anzeigetafel in bup: in den Einstellungen nach unten scrollen -> Spielbeginn
