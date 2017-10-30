@@ -13,6 +13,34 @@ function _split_args(str) {
 	});
 }
 
+// Returns: null (parse failed) or
+// - rest: remaining string
+// - c: The actual command
+// - args: Array of arguments
+function parse_cmd(str) {
+	var m = /^\s*([ZzvVhHmMlLcAaC])/.exec(str);
+	if (!m) return;
+	var c = m[1];
+
+	var args = [];
+	var search = /(?:\s*,\s*|\s*)(-?(?:[0-9]*\.[0-9]+|[0-9]+\.?)(?:e-?[0-9]+)?)/g;
+	var rest_pos = m[0].length;
+	search.lastIndex = rest_pos;
+	while ((m = search.exec(str))) {
+		if (m.index !== rest_pos) {
+			// Skipped over characters
+			break;
+		}
+		args.push(parseFloat(m[1]));
+		rest_pos = search.lastIndex;
+	}
+	return {
+		c: c,
+		args: args,
+		rest: str.substr(rest_pos),
+	};
+}
+
 function parse_path(d) {
 	if (!d) return null;
 
@@ -36,14 +64,14 @@ function parse_path(d) {
 	}
 
 	while (d && !/^\s*$/.test(d)) {
-		var m = /^\s*([ZzvVhHmMlLcAaC])(?:\s*(-?[0-9.e]+(?:(?:\s*,\s*|\s+|(?=-))-?[0-9.e]+)*))?/.exec(d);
-		if (!m) {
+		var cmd = parse_cmd(d);
+		if (!cmd) {
 			// console.error('Unsupported path data: ' + JSON.stringify(d));
 			return;
 		}
-		var c = m[1];
-		var args = _split_args(m[2]).map(parseFloat);
-		d = d.substring(m[0].length);
+		d = cmd.rest;
+		var c = cmd.c;
+		var args = cmd.args;
 		var a1 = args[0];
 		var a2 = args[1];
 
@@ -552,6 +580,7 @@ return {
 /*@DEV*/
 	// Testing only
 	parse_path: parse_path,
+	parse_cmd: parse_cmd,
 	arc2beziers: arc2beziers,
 	_make_beziers: _make_beziers,
 /*/@DEV*/

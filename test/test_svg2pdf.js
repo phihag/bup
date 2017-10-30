@@ -144,6 +144,45 @@ _describe('svg2pdf', function() {
 		);
 	});
 
+	_it('parse_path of svgo', function() {
+		assert.deepStrictEqual(
+			bup.svg2pdf.parse_path(
+				'M1,2l-.038.012'
+			),
+			[{
+				x1: 1,
+				y1: 2,
+				acc: [[-.038, .012]],
+				closed: false,
+			}]
+		);
+	});
+
+	_it('parse_cmd', function() {
+		assert.deepStrictEqual(
+			bup.svg2pdf.parse_cmd(
+				'm 123 M1,2.3 4.5-6 -.038.012 L 91,92'
+			),
+			{
+				c: 'm',
+				args: [123],
+				rest: ' M1,2.3 4.5-6 -.038.012 L 91,92',
+			}
+		);
+
+		assert.deepStrictEqual(
+			bup.svg2pdf.parse_cmd(
+				'M1,2.3 4.5-6 -.038.12 5e2-3e-2 L 91,92'
+			),
+			{
+				c: 'M',
+				args: [1, 2.3, 4.5, -6, -.038, .12, 500, -.03],
+				rest: ' L 91,92',
+			}
+		);
+	});
+
+
 	_it('arc2beziers', function() {
 		assert.deepStrictEqual(
 			bup.svg2pdf.arc2beziers(50, 50, 0, 0, 1, -70, 10),
