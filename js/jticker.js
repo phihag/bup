@@ -161,7 +161,7 @@ function list_matches(s, cb) {
 
 		event.matches.forEach(function(m) {
 			var setup = m.setup;
-			var eid = {
+			var short_name = {
 				'1. Herrendoppel': '1.HD',
 				'2. Herrendoppel': '2.HD',
 				'Damendoppel': 'DD',
@@ -171,9 +171,8 @@ function list_matches(s, cb) {
 				'3. Herreneinzel': '3.HE',
 				'Gemischtes Doppel': 'GD',
 			}[setup.match_name];
-			if (eid) {
-				setup.eventsheet_id = eid;
-				setup.short_name = eid;
+			if (short_name) {
+				setup.match_name = short_name;
 			}
 		});
 		eventutils.annotate(s, event);
