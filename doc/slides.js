@@ -8,10 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
 		center: false,
 	});
 
-	document.querySelector('.next-slide').addEventListener('click', function() {
-		Reveal.next();
-	});
-
 	document.querySelector('body').addEventListener('click', function(e) {
 		var el = e.target;
 		do {
