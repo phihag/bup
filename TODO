@@ -1,12 +1,11 @@
 jticker:
-	nice short names in UI
-	delete function for old versions
 	login
-	make sure that reverse order in mixed does not crash
-	reproduce issue
+	delete function for old versions
 	turnier.de: use aufschlagwechsel.de
 	-> msg Johannes
 
+turnier.de support field names
+refmode: visible warning if no crypto.subtle
 use correct setupsheet in referee mode as well (see existing logic)
 check editevent (apparantly calls list_events)
 setupsheet fails in referee mode
@@ -35,7 +34,6 @@ selectevent module
 	allow on referee
 	checkbox on referee: store event permanently (do not load from clients)
 
-refmode: visible warning if no crypto.subtle
 refmode:
 	make settings a pop-up dialog
 	redesign left side: 1 or 2 lines, configure button

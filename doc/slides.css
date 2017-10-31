@@ -45,6 +45,7 @@
 .reveal h1 {
 	font-size: 2.5em;
 	color: #000;
+	margin-top: 50px;
 	margin-bottom: 70px;
 }
 .reveal h2 {
@@ -61,6 +62,11 @@
 	font-size: 34px;
 }
 
+.reveal div.next-slide {
+	color: #777;
+	margin-top: 240px;
+	cursor: pointer;
+}
 .reveal .title-sub {
 	color: #595959;
 	font-size: 1.5em;
@@ -159,3 +165,16 @@
 	font-family: monospace;
 }
 
+.reveal kbd {
+	font-family: Consolas, "Lucida Console", monospace;
+	display: inline-block;
+	border-radius: 6px;
+	padding: 0px 4px;
+	box-shadow: 3px 3px 3px #777;
+	margin: 0 0 4px 0;
+	vertical-align: text-bottom;
+	background: #eee;
+	font-weight: 500;
+	color: #555;
+	font-weight: 600;
+}
