@@ -10,7 +10,7 @@ function update_now() {
 	hash += hash ? '&' : '#';
 	hash += 'updated';
 	window.location.replace(hash);
-	window.location.reload();
+	window.location.reload(true);
 }
 
 function ui_init() {

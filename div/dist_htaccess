@@ -12,6 +12,11 @@ Header set Cache-Control "no-cache, no-store, must-revalidate"
 <IfModule mod_headers.c>
 Header set Cache-Control "no-cache, no-store, must-revalidate"
 </IfModule>
+
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresDefault "access"
+</IfModule>
 </filesMatch>
 
 <IfModule mod_rewrite.c>

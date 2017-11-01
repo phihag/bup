@@ -1,10 +1,15 @@
+switch from appcache to service worker
+	test that updating works in Chrome
+	test that updating works in Firefox
+	test that updating works in Safari
+
 jticker:
 	login
 	delete function for old versions
 	turnier.de: use aufschlagwechsel.de
 	-> msg Johannes
 
-turnier.de support field names
+turnier.de support field names in RLW
 refmode: visible warning if no crypto.subtle
 use correct setupsheet in referee mode as well (see existing logic)
 check editevent (apparantly calls list_events)
