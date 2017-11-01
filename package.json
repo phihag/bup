@@ -11,22 +11,8 @@
     "test:watch": "npm run test -- -w"
   },
   "dependencies": {
-    "node-webcrypto-ossl": "*",
-    "ws": "*"
   },
   "devDependencies": {
-    "async": "*",
-    "clean-css": "*",
-    "eslint": "*",
-    "fs-walk": "*",
-    "istanbul": "*",
-    "mocha": "*",
-    "parse-appcache-manifest": "*",
-    "puppeteer": "*",
-    "stylelint": "*",
-    "stylelint-config-standard": "*",
-    "uglify": "*",
-    "svgo": "*"
   },
   "private": true
 }
