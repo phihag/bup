@@ -80,7 +80,7 @@ function resolve_path(root_dir, url_path, cb, path_module, fs_module) {
 function server(callback, options) {
 	options = options || {};
 	const port = options.port || 0;
-	const listen = options.listen || '::1';
+	const listen = options.listen || '127.0.0.1';
 	const ROOT_DIR = path.dirname(path.dirname(__dirname));
 
 	const serv = http.createServer((req, res) => {
