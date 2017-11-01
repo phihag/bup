@@ -1,9 +1,6 @@
 sudo: false
 
-language: node_js
-node_js:
-  - 8
-  - node
+language: c
 script:
   - gcc travis_bind.c -std=c99 -o travis_bind
   - ./travis_bind
