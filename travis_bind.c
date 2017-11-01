@@ -30,6 +30,7 @@ int main() {
 	addr.sin6_scope_id = 0;
 	if (bind(sock, (const struct sockaddr *) &addr, sizeof addr) != 0) {
 		perror("bind failed");
+		return 4;
 	}
 
 	printf("BOUND successfully!\n");
