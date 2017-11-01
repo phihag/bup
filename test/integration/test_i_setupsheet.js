@@ -16,6 +16,8 @@ _describe('integration tests', () => {
 			miniserver.server((err, _base_url) => {
 				if (err) return reject(err);
 				resolve(_base_url);
+			}, {
+				listen: '127.0.0.1', // For some weird reasons, travis.ci does not support IPv6 yet. So go with IPv4 for now
 			});
 		});
 	});
