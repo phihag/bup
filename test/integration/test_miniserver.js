@@ -30,6 +30,8 @@ function test_resolve_path(platform, cwd, urlpath, expect) {
 			assert.strictEqual(result, expect);
 			return resolve();
 		}, path_module, fs_module);
+	}, {
+		listen: '127.0.0.1', // For some weird reasons, travis.ci does not support IPv6 yet. So go with IPv4 for now
 	});
 }
 
