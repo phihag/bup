@@ -1,8 +1,4 @@
 buli-spielbericht as PDF
-	fix dbv logo
-	remove all tspans
-	simplify svg
-
 	fill out
 	back should go to previous dialog if not NO_DIALOG
 

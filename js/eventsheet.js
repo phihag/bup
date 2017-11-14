@@ -8,9 +8,9 @@ var SHEETS_BY_LEAGUE = {
 	'1BL-2016': ['1BL-2016', 'BL-ballsorten-2016', 'DBV-Satzungen-2016', 'teamlist-1BL-2016'],
 	'2BLN-2016': ['2BLN-2016', 'BL-ballsorten-2016', 'DBV-Satzungen-2016', 'teamlist-2BLN-2016'],
 	'2BLS-2016': ['2BLS-2016', 'BL-ballsorten-2016', 'DBV-Satzungen-2016', 'teamlist-2BLS-2016'],
-	'1BL-2017': ['1BL-2016', 'buli2017-minsr', 'buli2017-minv', 'DBV-Satzungen-2017'],
-	'2BLN-2017': ['2BLN-2016', 'buli2017-minsr', 'buli2017-minv', 'DBV-Satzungen-2017'],
-	'2BLS-2017': ['2BLS-2016', 'buli2017-minsr', 'buli2017-minv', 'DBV-Satzungen-2017'],
+	'1BL-2017': ['1BL-2017_pdf', '1BL-2016', 'buli2017-minsr', 'buli2017-minv', 'DBV-Satzungen-2017'],
+	'2BLN-2017': ['2BLN-2017_pdf', '2BLN-2016', 'buli2017-minsr', 'buli2017-minv', 'DBV-Satzungen-2017'],
+	'2BLS-2017': ['2BLS-2017_pdf', '2BLS-2016', 'buli2017-minsr', 'buli2017-minv', 'DBV-Satzungen-2017'],
 	'NRW-2016': ['NRW-2016', 'NRW-Satzungen'],
 	'RLW-2016': ['RLW-2016', 'NRW-Satzungen'],
 	'RLN-2016': ['RLN-2016', 'RLN-Satzungen-2016'],
@@ -26,6 +26,9 @@ var URLS = {
 	'1BL-2016': 'div/Spielbericht-Buli-2016-17.xlsm',
 	'2BLN-2016': 'div/Spielbericht-Buli-2016-17.xlsm',
 	'2BLS-2016': 'div/Spielbericht-Buli-2016-17.xlsm',
+	'1BL-2017_pdf': 'div/buli2017_spielbericht.svg',
+	'2BLN-2017_pdf': 'div/buli2017_spielbericht.svg',
+	'2BLS-2017_pdf': 'div/buli2017_spielbericht.svg',
 	'BL-ballsorten-2016': 'div/bundesliga-ballsorten-2016.pdf',
 	'DBV-Satzungen-2016': 'http://www.badminton.de/fileadmin/images/spielregeln/16-dbv-druckwerk_satzung-ordnungen-spielregeln201617-website.pdf',
 	'DBV-Satzungen-2017': 'http://www.badminton.de/fileadmin/user_upload/17-dbv-druckwerk_satzung-ordnungen-spielregeln201718-website.pdf.pdf',
@@ -62,6 +65,7 @@ var NO_DIALOG = {
 	'buli2017-minsr': true,
 	'buli2017-minv': true,
 	'NLA-2017': true,
+'1BL-2017_pdf': true, // TODO: debug
 };
 
 var MIME_TYPES = {
@@ -545,11 +549,18 @@ function _svg_text(svg, id, val) {
 	}
 }
 
-// Decorator for svg-based NO_DIALOG sheets.
-// The function gets called with (svg, ev), and must return {orientation, optionally scale}.
-function _svg_nd_func(func) {
-	return function(ev, es_key, ui8r) {
+// Decorator for svg-based sheets.
+// The function gets called with (svg, ev, es_key, extra_data), and must return {orientation, optionally scale}.
+function _svg_func(func) {
+	return function(ev, es_key, ui8r, extra_data) {
+		uiu.hide_qs('.eventsheet_report');
+		uiu.show_qs('.eventsheet_print_button');
+		uiu.show_qs('.eventsheet_pdf_button');
+		uiu.hide_qs('.eventsheet_generate_button');
+
 		var preview = uiu.qs('.eventsheet_preview');
+		uiu.show(preview);
+
 		uiu.empty(preview);
 
 		var xml_str = (new TextDecoder('utf-8')).decode(ui8r);
@@ -557,7 +568,7 @@ function _svg_nd_func(func) {
 		var svg = svg_doc.getElementsByTagName('svg')[0];
 		svg.setAttribute('style', 'max-width:100%;max-height:100%;');
 
-		var info = func(svg, ev);
+		var info = func(svg, ev, es_key, extra_data);
 		var subject = state._('eventsheet:label|' + es_key);
 		var title = subject + ' ' + ev.event_name;
 		info.props = {
@@ -578,7 +589,7 @@ function _svg_nd_func(func) {
 	};
 }
 
-var render_buli_minreq_svg = _svg_nd_func(function(svg, ev) {
+var render_buli_minreq_svg = _svg_func(function(svg, ev) {
 	_svg_text(svg, 'team0', ev.team_names[0]);
 	_svg_text(svg, 'team1', ev.team_names[1]);
 	_svg_text(svg, 'date', ev.date);
@@ -589,7 +600,7 @@ var render_buli_minreq_svg = _svg_nd_func(function(svg, ev) {
 	};
 });
 
-var render_nla = _svg_nd_func(function(svg, ev) {
+var render_nla = _svg_func(function(svg, ev) {
 	eventutils.set_metadata(ev);
 
 	var sum_games = [0, 0];
@@ -655,6 +666,22 @@ var render_nla = _svg_nd_func(function(svg, ev) {
 	if (ev.shuttle_count) {
 		_svg_text(svg, 'shuttle_count', ev.shuttle_count);
 	}
+
+	return {
+		orientation: 'landscape',
+	};
+});
+
+var render_buli2017_pdf = _svg_func(function(svg, ev, es_key, extra_data) {
+	// TODO players
+	// TODO points
+	// TODO sums
+	// TODO winner
+	// TODO top fields
+	// TODO club names
+	// TODO protest
+	// TODO notes
+	// TODO notes2 (= spectators)
 
 	return {
 		orientation: 'landscape',
@@ -1428,10 +1455,11 @@ function es_render(ev, es_key, ui8r, extra_data) {
 	case '1BL-2016':
 	case '2BLN-2016':
 	case '2BLS-2016':
-	case '1BL-2017':
-	case '2BLN-2017':
-	case '2BLS-2017':
 		return render_bundesliga2016(ev, es_key, ui8r, extra_data);
+	case '1BL-2017_pdf':
+	case '2BLN-2017_pdf':
+	case '2BLS-2017_pdf':
+		return render_buli2017_pdf(ev, es_key, ui8r, extra_data);
 	case 'NLA-2017':
 		return render_nla(ev, es_key, ui8r);
 	case 'OBL-2017':
@@ -1690,6 +1718,7 @@ function show_dialog(es_key) {
 	}
 
 	uiu.show(generate_button);
+	uiu.hide(preview);
 
 	switch (es_key) {
 	case '1BL-2015':
@@ -1705,15 +1734,14 @@ function show_dialog(es_key) {
 		uiu.show_qs('.eventsheet_protest');
 		uiu.hide_qs('.eventsheet_spectators');
 		uiu.show_qs('label.eventsheet_backup_players_str');
-		uiu.hide(preview);
 		uiu.hide(download_link_container);
 		break;
 	case '1BL-2016':
 	case '2BLN-2016':
 	case '2BLS-2016':
-	case '1BL-2017':
-	case '2BLN-2017':
-	case '2BLS-2017':
+	case '1BL-2017_pdf':
+	case '2BLN-2017_pdf':
+	case '2BLS-2017_pdf':
 		uiu.show_qs('.eventsheet_matchday');
 		uiu.show_qs('.eventsheet_starttime');
 		uiu.show_qs('.eventsheet_backup_players_str');
@@ -1721,21 +1749,18 @@ function show_dialog(es_key) {
 		uiu.show_qs('.eventsheet_spectators');
 		uiu.show_qs('.eventsheet_report');
 		uiu.hide_qs('label.eventsheet_backup_players_str');
-		uiu.hide(preview);
 		uiu.hide(download_link_container);
 		break;
 	case 'team-1BL':
 	case 'team-2BL':
 		uiu.hide_qs('.eventsheet_report');
 		// backup_players are children of _report
-		uiu.hide(preview);
 		download_link.setAttribute('href', URLS[es_key]);
 		uiu.show(download_link_container);
 		break;
 	case 'NLA-2017':
 		uiu.hide_qs('.eventsheet_report');
 		uiu.hide_qs('label.eventsheet_backup_players_str');
-		uiu.hide(preview);
 		uiu.hide(download_link_container);
 		break;
 	case 'OBL-2017':
@@ -1744,7 +1769,6 @@ function show_dialog(es_key) {
 		uiu.hide_qs('.eventsheet_backup_players_str');
 		uiu.hide_qs('.eventsheet_protest');
 		uiu.hide_qs('.eventsheet_spectators');
-		uiu.hide(preview);
 		uiu.hide(download_link_container);
 		break;
 	default:
