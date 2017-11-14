@@ -1190,7 +1190,7 @@ function render_tim(s, container, event, colors) {
 	var match_count = event.matches.length;
 	event.matches.forEach(function(match, match_num) {
 		var setup = match.setup;
-		var is_active = active_match_ids.includes(setup.match_id);
+		var is_active = utils.includes(active_match_ids, setup.match_id);
 		var nscore = extract_netscore(match);
 		if (!is_active && utils.deep_equal(nscore, [[0, 0]])) {
 			// Do not list matches that have not yet been started
@@ -1768,7 +1768,7 @@ function calc_colors(cur_settings) {
 }
 
 function _extract_timer_state(s, match) {
-	if (!['2court', 'teamcourt_pause'].includes(s.settings.displaymode_style)) {
+	if (!utils.includes(['2court', 'teamcourt_pause'], s.settings.displaymode_style)) {
 		return; // No timer required
 	}
 
