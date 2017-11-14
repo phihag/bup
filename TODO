@@ -1,7 +1,56 @@
+buli-spielbericht as PDF
+	fix dbv logo
+	remove all tspans
+	simplify svg
+
+	fill out
+	back should go to previous dialog if not NO_DIALOG
+
+btde Spielort etc.
+	-> Marius
+	update doc
+
+Firefox Mehrfachausdruck Schiedsrichterzettel
+	-> Henry
+
+Windows Firefox PDF Bundesliga-Logo
+	-> Henry
+
+cannot parse player spec in der RL Nord
+	-> Ulf
+
+includes@displaymode -> Hövelhof
+
+urlexport errors in Mülheim
+
+request parameters for colors
+	-> Paul Puschmann
+
+urlexport: support players written wrong in some form (ask?)
+	-> Ulf
+	-> Olaf Schley
+
+d Option für 2courts ohne Pausenzeiten
+	-> Benedikt
+
+Schiedsrichternamen speichern wenn keine da (bei CourtSpot)
+	-> Ulf
+	-> Benedikt
+
+urlexport could not load login page
+	-> Henry
+
+test cs order in detail
+	-> Ulf
+
+check that btde send export sends event
+import from b.aufschlagwechsel.de
 switch from appcache to service worker
 	test that updating works in Chrome
 	test that updating works in Firefox
 	test that updating works in Safari
+btde: urlexport should go to aufschlagwechsel.de outside dev
+turnier.de report with injury and btde
 
 jticker:
 	login
@@ -18,10 +67,8 @@ do not use bare ajax.req. Instead, use network.request
 minreqs: esc fails ($visible?)
 minreqs: back fails ($visible?)
 use network.request to communicate with tde_export
-btde: urlexport should go to aufschlagwechsel.de outside dev
 jticker: urlexport should to to aufschlagwechsel.de all the time
 referee mode: anderer Status für "Spiel auf dem Tablet geladen"?
-new Uzwil error report
 esc fails in Mindestanforderungen-verein
 btde: guess turnier.de URL
 referee mode: ask before someone joins
