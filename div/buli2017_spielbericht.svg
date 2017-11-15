@@ -648,10 +648,10 @@
  class="default_text"
  x="276.71887"
  y="55.02494">Gast</text>
-<text
+<text id="es_svg_1.HD_order"
  style="font-size:3.88055539px"
  x="17.74472"
- y="64.091324">1</text>
+ y="64.091324"></text>
 <text
  class="default_text"
  x="24.729721"
@@ -756,10 +756,10 @@
  class="default_text"
  x="87.876945"
  y="67.266327"></text>
-<text
+<text id="es_svg_DD_order"
  style="font-size:3.88055539px"
  x="17.74472"
- y="77.320503">2</text>
+ y="77.320503"></text>
 <text
  class="default_text"
  x="26.21139"
@@ -864,10 +864,10 @@
  class="default_text"
  x="87.876945"
  y="80.495483"></text>
-<text
+<text id="es_svg_2.HD_order"
  style="font-size:3.88055539px"
  x="17.74472"
- y="90.549652">3</text>
+ y="90.549652"></text>
 <text
  class="default_text"
  x="24.729721"
@@ -972,10 +972,10 @@
  class="default_text"
  x="87.876945"
  y="93.724663"></text>
-<text
+<text id="es_svg_1.HE_order"
  style="font-size:3.88055539px"
  x="17.74472"
- y="100.46271">4</text>
+ y="100.46271"></text>
 <text
  class="default_text"
  x="24.800278"
@@ -1072,10 +1072,10 @@
  style="font-weight:bold;font-size:3.88055539px"
  x="279.39999"
  y="100.46271">0</text>
-<text
+<text id="es_svg_DE_order"
  style="font-size:3.88055539px"
  x="17.74472"
- y="107.05967">5</text>
+ y="107.05967"></text>
 <text
  class="default_text"
  x="26.281944"
@@ -1172,10 +1172,10 @@
  style="font-weight:bold;font-size:3.88055539px"
  x="279.39999"
  y="107.05967">0</text>
-<text
+<text id="es_svg_GD_order"
  style="font-size:3.88055539px"
  x="17.74472"
- y="116.97271">6</text>
+ y="116.97271"></text>
 <text
  class="default_text"
  x="26.281944"
@@ -1280,10 +1280,10 @@
  class="default_text"
  x="87.876945"
  y="120.14771"></text>
-<text
+<text id="es_svg_2.HE_order"
  style="font-size:3.88055539px"
  x="17.74472"
- y="126.88579">7</text>
+ y="126.88579"></text>
 <text
  class="default_text"
  x="24.800278"

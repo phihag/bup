@@ -1,12 +1,5 @@
 buli-spielbericht as PDF
 	fill out
-		location
-		umpires
-		date
-		matchday
-		starttime
-		order
-		endtime
 		player names
 		score
 		sums
