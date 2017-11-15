@@ -673,15 +673,40 @@ var render_nla = _svg_func(function(svg, ev) {
 });
 
 var render_buli2017_pdf = _svg_func(function(svg, ev, es_key, extra_data) {
+	eventutils.set_metadata(ev);
+
+	var matches = ev.matches;
+	var last_update = calc_last_update(matches);
+
+	_svg_text(svg, 'x_1BL', (ev.league_key === '1BL-2017') ? 'X' : '');
+	_svg_text(svg, 'x_2BLN', (ev.league_key === '2BLN-2017') ? 'X' : '');
+	_svg_text(svg, 'x_2BLS', (ev.league_key === '2BLS-2017') ? 'X' : '');
+	_svg_text(svg, 'umpires', extra_data.umpires);
+	_svg_text(svg, 'location', extra_data.location);
+	_svg_text(svg, 'date', extra_data.date);
+	_svg_text(svg, 'matchday', extra_data.matchday);
+	_svg_text(svg, 'starttime', extra_data.starttime);
+	_svg_text(svg, 'endtime', last_update ? utils.time_str(last_update) : '');
+
+	_svg_text(svg, 'team0', ev.team_names[0]);
+	_svg_text(svg, 'team1', ev.team_names[1]);
+
 	// TODO players
 	// TODO points
+	// TODO order
 	// TODO sums
 	// TODO winner
-	// TODO top fields
-	// TODO club names
-	// TODO protest
-	// TODO notes
-	// TODO notes2 (= spectators)
+
+	_svg_text(svg, 'backup_players0', extra_data.backup_players0);
+	_svg_text(svg, 'backup_players1', extra_data.backup_players1);
+	_svg_text(svg, 'present_players0', extra_data.present_players0);
+	_svg_text(svg, 'present_players1', extra_data.present_players1);
+
+	_svg_text(svg, 'protest', extra_data.protest);
+	_svg_text(svg, 'notes', extra_data.notes);
+	if (extra_data.spectators) {
+		_svg_text(svg, 'notes2', extra_data.spectators + ' Zuschauer');
+	}
 
 	return {
 		orientation: 'landscape',
@@ -1439,6 +1464,22 @@ function es_render(ev, es_key, ui8r, extra_data) {
 		return direct_download(es_key, ui8r);
 	}
 
+	['umpires', 'location', 'date', 'matchday', 'starttime', 'protest', 'notes', 'spectators'].forEach(function(key) {
+		extra_data[key] = extra_data[key] || ev[key];
+	});
+	['backup_players', 'present_players'].forEach(function(k) {
+		var ar = ev[k];
+		if (!ar) {
+			return;
+		}
+		for (var team_id = 0;team_id < 2;team_id++) {
+			if (!ar[team_id]) continue;
+			extra_data[k + team_id] = ar[team_id].map(function(p) {
+				return p.name;
+			}).join(' / ');
+		}
+	});
+
 	switch(es_key) {
 	case '1BL-2015':
 	case '2BLN-2015':
@@ -1805,6 +1846,7 @@ return {
 	show_dialog: show_dialog,
 	render_links: render_links,
 	calc_match_id: calc_match_id,
+	calc_last_update,
 };
 
 })();

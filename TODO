@@ -1,5 +1,17 @@
 buli-spielbericht as PDF
 	fill out
+		location
+		umpires
+		date
+		matchday
+		starttime
+		order
+		endtime
+		player names
+		score
+		sums
+
+	input fields backup_players0, backup_players1, present_players0, present_players1
 	back should go to previous dialog if not NO_DIALOG
 
 btde Spielort etc.

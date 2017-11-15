@@ -1,6 +1,4 @@
 <svg
-   width="297mm"
-   height="210mm"
    viewBox="0 0 297 210"
    version="1.1"
    xmlns="http://www.w3.org/2000/svg"
@@ -502,15 +500,25 @@
 <text
  style="font-size:3.88055539px"
  x="83.008614"
- y="22.710505">X</text>
+ y="22.710505" id="es_svg_x_1BL">X</text>
+<text
+ style="font-size:3.88055539px"
+ x="83.008614"
+ y="29.0" id="es_svg_x_2BLN">X</text>
+<text
+ style="font-size:3.88055539px"
+ x="83.008614"
+ y="35.2" id="es_svg_x_2BLS">X</text>
+
 <text
  style="font-size:3.88055539px"
  x="88.967377"
  y="23.239664">1. Bundesliga</text>
 <text
  class="default_text"
+ id="es_svg_umpires"
  x="210.67889"
- y="23.310221">Barbara Bub &amp; Markus Schwendtner</text>
+ y="23.310221"></text>
 <text
  style="font-size:3.88055539px"
  x="88.967377"
@@ -523,42 +531,43 @@
  style="font-size:3.17499995px"
  x="199.5311"
  y="35.551598">Datum</text>
-<text
+<text id="es_svg_date"
  style="font-size:3.88055539px"
  x="210.67889"
- y="34.88134">02.11.2017</text>
+ y="34.88134"></text>
 <text
  style="font-size:3.17499995px"
  x="253.01222"
  y="35.551598">Beginn</text>
-<text
+<text id="es_svg_starttime"
  style="font-size:3.88055539px"
  x="263.59555"
- y="34.88134">19:00</text>
+ y="34.88134"></text>
 <text
  style="font-size:3.17499995px"
  x="54.257225"
  y="43.489098">Austragungsstätte</text>
 <text
  class="default_text"
+ id="es_svg_location"
  x="81.421112"
- y="42.677727">SpH Steinbreche</text>
+ y="42.677727"></text>
 <text
  style="font-size:3.17499995px"
  x="197.41444"
  y="43.489098">Spieltag</text>
-<text
+<text id="es_svg_matchday"
  style="font-size:3.88055539px"
  x="210.67889"
- y="42.81884">Finale</text>
+ y="42.81884"></text>
 <text
  style="font-size:3.17499995px"
  x="255.48166"
  y="43.489098">Ende</text>
-<text
+<text id="es_svg_endtime"
  style="font-size:3.88055539px"
  x="263.59555"
- y="42.81884">09:00:00 PM</text>
+ y="42.81884"></text>
 <text
  style="font-size:3.17499995px"
  x="14.569721"
@@ -567,14 +576,14 @@
  style="font-size:3.17499995px"
  x="23.777222"
  y="50.86216">Diszi</text>
-<text
+<text id="es_svg_team0"
  style="font-size:3.88055539px"
  x="51.399719"
- y="53.261055">TV Refrath</text>
-<text
+ y="53.261055"></text>
+<text id="es_svg_team1"
  style="font-size:3.88055539px"
  x="99.624435"
- y="53.261055">BC Bischmisheim</text>
+ y="53.261055"></text>
 <text
  class="default_text"
  x="144.10973"
@@ -1411,10 +1420,10 @@
  style="font-size:2.82222199px"
  x="34.395832"
  y="145.1244">Heim</text>
-<text
+<text id="es_svg_backup_players0"
  class="default_text"
  x="42.227497"
- y="145.40662">Dennis Nyenhuis, Elin Svensson</text>
+ y="145.40662"></text>
 <text
  style="font-size:2.82222199px"
  x="166.12305"
@@ -1423,10 +1432,10 @@
  style="font-size:2.82222199px"
  x="194.48639"
  y="145.1244">Heim</text>
-<text
+<text id="es_svg_present_players0"
  class="default_text"
  x="202.565"
- y="145.40662">Mark Byerly, Annika Dörr</text>
+ y="145.40662"></text>
 <text
  style="font-size:2.82222199px"
  x="15.345833"
@@ -1435,10 +1444,10 @@
  style="font-size:2.82222199px"
  x="34.395832"
  y="150.41606">Gast</text>
-<text
+<text id="es_svg_backup_players1"
  class="default_text"
  x="42.227497"
- y="151.01579">Marvin Seidel, Simon Wang</text>
+ y="151.01579"></text>
 <text
  style="font-size:2.82222199px"
  x="166.89917"
@@ -1447,34 +1456,34 @@
  style="font-size:2.82222199px"
  x="194.48639"
  y="151.15689">Gast</text>
-<text
+<text id="es_svg_present_players1"
  class="default_text"
  x="202.565"
- y="151.01579">Matthias Deininger, Nadia Frankhauser</text>
+ y="151.01579"></text>
 <text
  style="font-size:2.82222199px"
  x="15.345833"
  y="160.39967">Besondere</text>
-<text
+<text id="es_svg_notes"
  class="default_text"
  x="42.227497"
- y="160.25856">Start 3 Minuten später wegen Rennmäusen in der Halle</text>
+ y="160.25856"></text>
 <text
  style="font-size:2.82222199px"
  x="19.226389"
  y="164.95052">Vorkommnisse</text>
-<text
+<text id="es_svg_notes2"
  class="default_text"
  x="42.227497"
- y="165.55023">300 Zuschauer</text>
+ y="165.55023"></text>
 <text
  style="font-size:2.82222199px"
  x="15.345833"
  y="174.9341">Protestvorbehalt /</text>
-<text
+<text id="es_svg_protest"
  class="default_text"
  x="42.227497"
- y="174.79298">Coaching-Stühle zu gemütlich</text>
+ y="174.79298"></text>
 <text
  style="font-size:2.82222199px"
  x="264.51276"
