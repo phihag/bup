@@ -336,6 +336,8 @@ var i18n_frch = {
 'eventsheet:back': 'Retourner',
 'eventsheet:Event Sheet': 'Feuille de résultats',
 'eventsheet:download empty': 'Télécharger le formulaire vide',
+'eventsheet|backup_players': 'Remplaçants {team_name}:',
+'eventsheet|present_players': 'Joueurs présents {team_name}:',
 
 'eventsheet:label|1BL-2015': '(Bundesliga) feuille de résultats (2015)',
 'eventsheet:label|2BLN-2015': '(2. Bundesliga Nord) feuille de résultats (2015)',

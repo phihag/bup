@@ -1,17 +1,12 @@
-buli-spielbericht as PDF
-	fill out
-		player names
-		score
-		sums
-
-	input fields backup_players0, backup_players1, present_players0, present_players1
-	back should go to previous dialog if not NO_DIALOG
-
 btde Spielort etc.
 	-> Marius
 	update doc
 
-Firefox Mehrfachausdruck Schiedsrichterzettel
+abt
+
+buli-spielbericht as PDF: browser back should go to previous dialog if not NO_DIALOG
+
+Firefox event_scoresheets
 	-> Henry
 
 Windows Firefox PDF Bundesliga-Logo
@@ -31,18 +26,25 @@ urlexport: support players written wrong in some form (ask?)
 	-> Ulf
 	-> Olaf Schley
 
-d Option für 2courts ohne Pausenzeiten
+d 2courts without pause timers
 	-> Benedikt
 
-Schiedsrichternamen speichern wenn keine da (bei CourtSpot)
+save inputted umpire names (for CourtSpot)
 	-> Ulf
 	-> Benedikt
 
 urlexport could not load login page
+	return $http_response_header
+	check file_get_contents (and curl) disabled by security
+	check no DNS
+	check server unavailable (RST or silent)
 	-> Henry
 
 test cs order in detail
 	-> Ulf
+
+d teamscore
+d shortsets
 
 check that btde send export sends event
 import from b.aufschlagwechsel.de

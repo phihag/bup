@@ -65,7 +65,6 @@ var NO_DIALOG = {
 	'buli2017-minsr': true,
 	'buli2017-minv': true,
 	'NLA-2017': true,
-'1BL-2017_pdf': true, // TODO: debug
 };
 
 var MIME_TYPES = {
@@ -97,6 +96,21 @@ function loaded(key) {
 		uiu.qs('.eventsheet_generate_button').removeAttribute('disabled');
 		uiu.visible_qs('.eventsheet_generate_loading_icon', !state.event);
 	}
+}
+
+function _default_extra_data(extra_data, ev) {
+	['umpires', 'location', 'date', 'matchday', 'starttime', 'protest', 'notes', 'spectators'].forEach(function(key) {
+		extra_data[key] = extra_data[key] || ev[key];
+	});
+	['backup_players', 'present_players'].forEach(function(k) {
+		var ar = ev[k];
+		if (!ar) {
+			return;
+		}
+		ar.forEach(function(players, team_id) {
+			extra_data[k + team_id] = extra_data[k + team_id] || players2str(players);
+		});
+	});
 }
 
 function _player_names(match, team_id) {
@@ -692,9 +706,15 @@ var render_buli2017_pdf = _svg_func(function(svg, ev, es_key, extra_data) {
 	_svg_text(svg, 'team1', ev.team_names[1]);
 
 	var match_order = get_match_order(matches);
+	var total_sums = {
+		p: [0, 0],
+		g: [0, 0],
+		m: [0, 0],
+	};
 
 	matches.forEach(function(m, match_id) {
 		var match_eventsheet_id = calc_match_id(m);
+		var netscore = m.netscore || m.network_score || [];
 
 		var mo = match_order[match_id];
 		if (mo) {
@@ -703,15 +723,40 @@ var render_buli2017_pdf = _svg_func(function(svg, ev, es_key, extra_data) {
 
 		m.setup.teams.forEach(function(team, team_id){
 			team.players.forEach(function(player, player_id) {
-				_svg_text(svg, match_eventsheet_id + '_p_' + team_id + '_' + player_id, player.name);
+				_svg_text(svg, match_eventsheet_id + '_n_' + team_id + '_' + player_id, player.name);
+			});
+
+			netscore.forEach(function(game, game_id) {
+				_svg_text(svg, match_eventsheet_id + '_p' + game_id + '_' + team_id, game[team_id]);
 			});
 		});
-	})
 
-	// TODO points
-	// TODO sums
-	// TODO total sums
-	// TODO winner
+		var sums = calc_sums(m);
+		if (sums.show) {
+			['p', 'g', 'm'].forEach(function(key) {
+				sums[key].forEach(function(val, team_id) {
+					_svg_text(svg, match_eventsheet_id + '_' + key + 'sum' + team_id, val);
+				});
+			});
+
+			_add_totals(total_sums, sums);
+		}
+	});
+
+	if (total_sums.show) {
+		['p', 'g', 'm'].forEach(function(key) {
+			total_sums[key].forEach(function(val, team_id) {
+				_svg_text(svg, key + 'sum' + team_id, val);
+			});
+		});
+	}
+
+	total_sums.m.forEach(function(mval, team_id) {
+		// No draw because 7 matches
+		if (mval > matches.length / 2) {
+			_svg_text(svg, 'winner', ev.team_names[team_id]);
+		}
+	});
 
 	_svg_text(svg, 'backup_players0', extra_data.backup_players0);
 	_svg_text(svg, 'backup_players1', extra_data.backup_players1);
@@ -870,38 +915,51 @@ function calc_player_matches(ev, team_id) {
 	return res;
 }
 
+function _add_totals(totals, add) {
+	totals.show = totals.show || add.show;
+	['p', 'g', 'm'].forEach(function(key) {
+		totals[key][0] += add[key][0];
+		totals[key][1] += add[key][1];
+	});
+}
+
+// p: points, g: games, m:matches
 function calc_sums(match) {
 	var netscore = match.netscore || match.network_score || [];
 	if (!netscore.length) {
 		return {
-			points: [],
-			games: [],
-			matches: [],
+			p: [],
+			g: [],
+			m: [],
+			show: false,
 		};
 	}
 	var res = {
-		points: [0, 0],
-		games: [0, 0],
-		matches: [],
+		p: [0, 0],
+		g: [0, 0],
+		m: [],
 	};
 	netscore.forEach(function(ngame, game_idx) {
-		res.points[0] += ngame[0];
-		res.points[1] += ngame[1];
+		res.p[0] += ngame[0];
+		res.p[1] += ngame[1];
 
 		var winner = calc.game_winner(match.setup.counting, game_idx, ngame[0], ngame[1]);
 		if (winner === 'left') {
-			res.games[0]++;
+			res.g[0]++;
 		} else if (winner === 'right') {
-			res.games[1]++;
+			res.g[1]++;
 		}
 	});
 
 	var mwinner = calc.match_winner(match.setup.counting, netscore);
 	if (mwinner === 'left') {
-		res.matches = [1, 0];
+		res.m = [1, 0];
 	} else if (mwinner === 'right') {
-		res.matches = [0, 1];
+		res.m = [0, 1];
 	}
+
+	res.show = (res.p[0] > 0) || (res.p[1] > 0);
+
 	return res;
 }
 
@@ -1084,9 +1142,9 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 					}
 
 					var sums = calc_sums(match);
-					_enter_sums('X', sums.points);
-					_enter_sums('Z', sums.games);
-					_enter_sums('AB', sums.matches);
+					_enter_sums('X', sums.p);
+					_enter_sums('Z', sums.g);
+					_enter_sums('AB', sums.m);
 				});
 
 				for (var col in col_sums) {
@@ -1206,8 +1264,6 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 
 				function gen_vertical_text(start_row, c) {
 					sheet.text(xlsx.add_col('F', c.col) + (start_row + 6 + 5 * c.table + parseInt(Math.ceil(c.row))), c.val);
-
-					// TODO use a shape instead
 				}
 
 				var MATCH_ROWS = {
@@ -1480,22 +1536,6 @@ function es_render(ev, es_key, ui8r, extra_data) {
 		return direct_download(es_key, ui8r);
 	}
 
-	['umpires', 'location', 'date', 'matchday', 'starttime', 'protest', 'notes', 'spectators'].forEach(function(key) {
-		extra_data[key] = extra_data[key] || ev[key];
-	});
-	['backup_players', 'present_players'].forEach(function(k) {
-		var ar = ev[k];
-		if (!ar) {
-			return;
-		}
-		for (var team_id = 0;team_id < 2;team_id++) {
-			if (!ar[team_id]) continue;
-			extra_data[k + team_id] = ar[team_id].map(function(p) {
-				return p.name;
-			}).join(' / ');
-		}
-	});
-
 	switch(es_key) {
 	case '1BL-2015':
 	case '2BLN-2015':
@@ -1626,14 +1666,19 @@ function render_links(s, container) {
 }
 
 function ui_init() {
-	var form = $('.eventsheet_form');
-	form.on('submit', function(e) {
+	var $form = $('.eventsheet_form');
+	$form.on('submit', function(e) {
 		e.preventDefault();
 		var es_key = uiu.qs('.eventsheet_container').getAttribute('data-eventsheet_key');
-		var fields = ['umpires', 'location', 'matchday', 'starttime', 'notes', 'backup_players_str', 'protest', 'spectators'];
+		var fields = [
+			'umpires', 'location', 'matchday', 'starttime', 'notes', 'backup_players_str', 'protest', 'spectators',
+			'date',
+			'backup_players0', 'backup_players1', 'present_players0', 'present_players1',
+		];
 		var extra_data = utils.map_dict(fields, function(field) {
-			return form.find('[name="' + field + '"]').val();
+			return $form.find('[name="' + field + '"]').val();
 		});
+		_default_extra_data(extra_data, state.event);
 
 		prepare_render(uiu.qs('.eventsheet_generate_button'), es_key, extra_data);
 		return false;
@@ -1692,16 +1737,32 @@ function on_fetch() {
 	if (backup_players_str) {
 		container.querySelector('[name="backup_players_str"]').value = backup_players_str;
 	}
+
+	var extra_data = {};
+	_default_extra_data(extra_data, event);
+
+	uiu.qsEach('.eventsheet_dynamic', function(label) {
+		var input = label.querySelector('input');
+		var name = input.getAttribute('name');
+		input.setAttribute('value', extra_data[name] || '');
+
+		var span = label.querySelector('span');
+		var team_id = parseInt(name.substr(-1));
+		var key = name.substr(0, name.length - 1);
+		uiu.text(span, state._('eventsheet|' + key, {
+			team_name: event.team_names[team_id],
+		}));
+	});
 }
 
 function dialog_fetch(cb) {
 	uiu.visible_qs('.eventsheet_generate_loading_icon', !state.event || !_loaded_all_libs);
-	var btn = $('.eventsheet_generate_button');
+	var $btn = $('.eventsheet_generate_button');
 	if (state.event) {
-		btn.removeAttr('disabled');
+		$btn.removeAttr('disabled');
 		cb();
 	} else {
-		btn.attr('disabled', 'disabled');
+		$btn.attr('disabled', 'disabled');
 		network.list_matches(state, function(err, ev) {
 			uiu.visible_qs('.eventsheet_generate_loading_icon', !_loaded_all_libs);
 			if (err) {
@@ -1715,7 +1776,7 @@ function dialog_fetch(cb) {
 			var es_key = container.attr('data-eventsheet_key');
 			es_key = resolve_key(es_key);
 			container.attr('data-eventsheet_key', es_key);
-			btn.removeAttr('disabled');
+			$btn.removeAttr('disabled');
 			cb();
 		});
 	}
@@ -1777,6 +1838,8 @@ function show_dialog(es_key) {
 	uiu.show(generate_button);
 	uiu.hide(preview);
 
+	uiu.qsEach('.eventsheet_dynamic', uiu.remove);
+
 	switch (es_key) {
 	case '1BL-2015':
 	case '2BLN-2015':
@@ -1790,22 +1853,47 @@ function show_dialog(es_key) {
 		uiu.show_qs('.eventsheet_backup_players_str');
 		uiu.show_qs('.eventsheet_protest');
 		uiu.hide_qs('.eventsheet_spectators');
-		uiu.show_qs('label.eventsheet_backup_players_str');
 		uiu.hide(download_link_container);
 		break;
 	case '1BL-2016':
 	case '2BLN-2016':
 	case '2BLS-2016':
+		uiu.show_qs('.eventsheet_matchday');
+		uiu.show_qs('.eventsheet_starttime');
+		uiu.hide_qs('.eventsheet_backup_players_str');
+		uiu.show_qs('.eventsheet_protest');
+		uiu.show_qs('.eventsheet_spectators');
+		uiu.show_qs('.eventsheet_report');
+		uiu.hide(download_link_container);
+		break;
 	case '1BL-2017_pdf':
 	case '2BLN-2017_pdf':
 	case '2BLS-2017_pdf':
 		uiu.show_qs('.eventsheet_matchday');
 		uiu.show_qs('.eventsheet_starttime');
-		uiu.show_qs('.eventsheet_backup_players_str');
+		uiu.hide_qs('.eventsheet_backup_players_str');
 		uiu.show_qs('.eventsheet_protest');
 		uiu.show_qs('.eventsheet_spectators');
-		uiu.show_qs('.eventsheet_report');
-		uiu.hide_qs('label.eventsheet_backup_players_str');
+
+		var report = uiu.qs('.eventsheet_report');
+		var team_names = ['team 1', 'team 2'];
+		['backup_players', 'present_players'].forEach(function(key) {
+			team_names.forEach(function(team_name, team_id) {
+				var whole_key = key + team_id;
+				var label = uiu.el(report, 'label', 'eventsheet_dynamic');
+				uiu.el(label, 'span', {
+					'data-es-i18n': 'eventsheet|' + key,
+				}, state._('eventsheet|' + key, {
+					team_name: team_name,
+				}));
+				label.appendChild(document.createTextNode(' ')); // compatibility to HTML UI
+				uiu.el(label, 'input', {
+					name: whole_key,
+				});
+			});
+		});
+		uiu.show(report);
+
 		uiu.hide(download_link_container);
 		break;
 	case 'team-1BL':
@@ -1862,7 +1950,6 @@ return {
 	show_dialog: show_dialog,
 	render_links: render_links,
 	calc_match_id: calc_match_id,
-	calc_last_update,
 };
 
 })();

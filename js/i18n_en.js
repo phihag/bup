@@ -340,6 +340,8 @@ var i18n_en = {
 'eventsheet:back': 'Back',
 'eventsheet:Event Sheet': 'Event Report',
 'eventsheet:download empty': 'Download empty form',
+'eventsheet|backup_players': 'Backup {team_name}:',
+'eventsheet|present_players': 'Present {team_name}:',
 
 'eventsheet:label|1BL-2015': '(German Bundesliga) result report sheet (2015)',
 'eventsheet:label|2BLN-2015': '(German 2. Bundesliga North) result report sheet (2015)',

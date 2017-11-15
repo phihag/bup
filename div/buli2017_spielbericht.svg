@@ -656,103 +656,103 @@
  class="default_text"
  x="24.729721"
  y="63.950214">1.HD</text>
-<text id="es_svg_1.HD_p_0_0"
+<text id="es_svg_1.HD_n_0_0"
  class="default_text"
  x="34.395832"
  y="60.669388"></text>
-<text id="es_svg_1.HD_p_1_0"
+<text id="es_svg_1.HD_n_1_0"
  class="default_text"
  x="87.876945"
  y="60.669388"></text>
-<text
+<text id="es_svg_1.HD_p0_0"
  class="default_text"
  x="143.61583"
- y="63.950214">12</text>
+ y="63.950214"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="149.04861"
  y="63.950214">:</text>
-<text
+<text id="es_svg_1.HD_p0_1"
  class="default_text"
  x="151.72972"
- y="63.950214">14</text>
-<text
+ y="63.950214"></text>
+<text id="es_svg_1.HD_p1_0"
  class="default_text"
  x="158.57361"
- y="63.950214">12</text>
+ y="63.950214"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="163.86528"
  y="63.950214">:</text>
-<text
+<text id="es_svg_1.HD_p1_1"
  class="default_text"
  x="166.54639"
- y="63.950214">14</text>
-<text
+ y="63.950214"></text>
+<text id="es_svg_1.HD_p2_0"
  class="default_text"
  x="173.53139"
- y="63.950214">15</text>
+ y="63.950214"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="178.96416"
  y="63.950214">:</text>
-<text
+<text id="es_svg_1.HD_p2_1"
  class="default_text"
  x="181.64528"
- y="63.950214">13</text>
-<text
+ y="63.950214"></text>
+<text id="es_svg_1.HD_p3_0"
  class="default_text"
  x="188.63028"
- y="63.950214">15</text>
+ y="63.950214"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="194.09833"
  y="63.950214">:</text>
-<text
+<text id="es_svg_1.HD_p3_1"
  class="default_text"
  x="196.74416"
- y="63.950214">13</text>
-<text
+ y="63.950214"></text>
+<text id="es_svg_1.HD_p4_0"
  class="default_text"
  x="203.76443"
- y="63.950214">13</text>
+ y="63.950214"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="209.19722"
  y="63.950214">:</text>
-<text
+<text id="es_svg_1.HD_p4_1"
  class="default_text"
  x="211.84305"
- y="63.950214">11</text>
-<text
+ y="63.950214"></text>
+<text id="es_svg_1.HD_psum0"
  class="default_text"
  x="221.08583"
- y="63.950214">67</text>
-<text
+ y="63.950214"></text>
+<text id="es_svg_1.HD_psum1"
  class="default_text"
  x="232.58638"
- y="63.950214">65</text>
-<text
+ y="63.950214"></text>
+<text id="es_svg_1.HD_gsum0"
  class="default_text"
  x="245.03944"
- y="63.950214">3</text>
-<text
+ y="63.950214"></text>
+<text id="es_svg_1.HD_gsum1"
  class="default_text"
  x="256.5047"
- y="63.950214">2</text>
-<text
+ y="63.950214"></text>
+<text id="es_svg_1.HD_msum0"
  style="font-weight:bold;font-size:3.88055539px"
  x="267.93469"
- y="64.091324">1</text>
-<text
+ y="64.091324"></text>
+<text id="es_svg_1.HD_msum1"
  style="font-weight:bold;font-size:3.88055539px"
  x="279.39999"
- y="64.091324">0</text>
-<text id="es_svg_1.HD_p_0_1"
+ y="64.091324"></text>
+<text id="es_svg_1.HD_n_0_1"
  class="default_text"
  x="34.395832"
  y="67.266327"></text>
-<text id="es_svg_1.HD_p_1_1"
+<text id="es_svg_1.HD_n_1_1"
  class="default_text"
  x="87.876945"
  y="67.266327"></text>
@@ -764,103 +764,103 @@
  class="default_text"
  x="26.21139"
  y="77.179382">DD</text>
-<text id="es_svg_DD_p_0_0"
+<text id="es_svg_DD_n_0_0"
  class="default_text"
  x="34.395832"
  y="73.89856"></text>
-<text id="es_svg_DD_p_1_0"
+<text id="es_svg_DD_n_1_0"
  class="default_text"
  x="87.876945"
  y="73.89856"></text>
-<text
+<text id="es_svg_DD_p0_0"
  class="default_text"
  x="143.61583"
- y="77.179382">10</text>
+ y="77.179382"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="149.04861"
  y="77.179382">:</text>
-<text
+<text id="es_svg_DD_p0_1"
  class="default_text"
  x="151.72972"
- y="77.179382">12</text>
-<text
+ y="77.179382"></text>
+<text id="es_svg_DD_p1_0"
  class="default_text"
  x="158.57361"
- y="77.179382">10</text>
+ y="77.179382"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="163.86528"
  y="77.179382">:</text>
-<text
+<text id="es_svg_DD_p1_1"
  class="default_text"
  x="166.54639"
- y="77.179382">12</text>
-<text
+ y="77.179382"></text>
+<text id="es_svg_DD_p2_0"
  class="default_text"
  x="173.53139"
- y="77.179382">12</text>
+ y="77.179382"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="178.96416"
  y="77.179382">:</text>
-<text
+<text id="es_svg_DD_p2_1"
  class="default_text"
  x="181.64528"
- y="77.179382">10</text>
-<text
+ y="77.179382"></text>
+<text id="es_svg_DD_p3_0"
  class="default_text"
  x="188.63028"
- y="77.179382">12</text>
+ y="77.179382"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="194.09833"
  y="77.179382">:</text>
-<text
+<text id="es_svg_DD_p3_1"
  class="default_text"
  x="196.74416"
- y="77.179382">10</text>
-<text
+ y="77.179382"></text>
+<text id="es_svg_DD_p4_0"
  class="default_text"
  x="203.76443"
- y="77.179382">12</text>
+ y="77.179382"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="209.19722"
  y="77.179382">:</text>
-<text
+<text id="es_svg_DD_p4_1"
  class="default_text"
  x="211.84305"
- y="77.179382">10</text>
-<text
+ y="77.179382"></text>
+<text id="es_svg_DD_psum0"
  class="default_text"
  x="221.08583"
- y="77.179382">56</text>
-<text
+ y="77.179382"></text>
+<text id="es_svg_DD_psum1"
  class="default_text"
  x="232.58638"
- y="77.179382">54</text>
-<text
+ y="77.179382"></text>
+<text id="es_svg_DD_gsum0"
  class="default_text"
  x="245.03944"
- y="77.179382">3</text>
-<text
+ y="77.179382"></text>
+<text id="es_svg_DD_gsum1"
  class="default_text"
  x="256.5047"
- y="77.179382">2</text>
-<text
+ y="77.179382"></text>
+<text id="es_svg_DD_msum0"
  style="font-weight:bold;font-size:3.88055539px"
  x="267.93469"
- y="77.320503">1</text>
-<text
+ y="77.320503"></text>
+<text id="es_svg_DD_msum1"
  style="font-weight:bold;font-size:3.88055539px"
  x="279.39999"
- y="77.320503">0</text>
-<text id="es_svg_DD_p_0_1"
+ y="77.320503"></text>
+<text id="es_svg_DD_n_0_1"
  class="default_text"
  x="34.395832"
  y="80.495483"></text>
-<text id="es_svg_DD_p_1_1"
+<text id="es_svg_DD_n_1_1"
  class="default_text"
  x="87.876945"
  y="80.495483"></text>
@@ -872,103 +872,103 @@
  class="default_text"
  x="24.729721"
  y="90.408539">2.HD</text>
-<text id="es_svg_2.HD_p_0_0"
+<text id="es_svg_2.HD_n_0_0"
  class="default_text"
  x="34.395832"
  y="87.092438"></text>
-<text id="es_svg_2.HD_p_1_0"
+<text id="es_svg_2.HD_n_1_0"
  class="default_text"
  x="87.876945"
  y="87.092438"></text>
-<text
+<text id="es_svg_2.HD_p0_0"
  class="default_text"
  x="143.61583"
- y="90.408539">10</text>
+ y="90.408539"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="149.04861"
  y="90.408539">:</text>
-<text
+<text id="es_svg_2.HD_p0_1"
  class="default_text"
  x="151.72972"
- y="90.408539">12</text>
-<text
+ y="90.408539"></text>
+<text id="es_svg_2.HD_p1_0"
  class="default_text"
  x="158.57361"
- y="90.408539">10</text>
+ y="90.408539"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="163.86528"
  y="90.408539">:</text>
-<text
+<text id="es_svg_2.HD_p1_1"
  class="default_text"
  x="166.54639"
- y="90.408539">12</text>
-<text
+ y="90.408539"></text>
+<text id="es_svg_2.HD_p2_0"
  class="default_text"
  x="173.53139"
- y="90.408539">12</text>
+ y="90.408539"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="178.96416"
  y="90.408539">:</text>
-<text
+<text id="es_svg_2.HD_p2_1"
  class="default_text"
  x="181.64528"
- y="90.408539">10</text>
-<text
+ y="90.408539"></text>
+<text id="es_svg_2.HD_p3_0"
  class="default_text"
  x="188.63028"
- y="90.408539">12</text>
+ y="90.408539"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="194.09833"
  y="90.408539">:</text>
-<text
+<text id="es_svg_2.HD_p3_1"
  class="default_text"
  x="196.74416"
- y="90.408539">10</text>
-<text
+ y="90.408539"></text>
+<text id="es_svg_2.HD_p4_0"
  class="default_text"
  x="203.76443"
- y="90.408539">12</text>
+ y="90.408539"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="209.19722"
  y="90.408539">:</text>
-<text
+<text id="es_svg_2.HD_p4_1"
  class="default_text"
  x="211.84305"
- y="90.408539">10</text>
-<text
+ y="90.408539"></text>
+<text id="es_svg_2.HD_psum0"
  class="default_text"
  x="221.08583"
- y="90.408539">56</text>
-<text
+ y="90.408539"></text>
+<text id="es_svg_2.HD_psum1"
  class="default_text"
  x="232.58638"
- y="90.408539">54</text>
-<text
+ y="90.408539"></text>
+<text id="es_svg_2.HD_gsum0"
  class="default_text"
  x="245.03944"
- y="90.408539">3</text>
-<text
+ y="90.408539"></text>
+<text id="es_svg_2.HD_gsum1"
  class="default_text"
  x="256.5047"
- y="90.408539">2</text>
-<text
+ y="90.408539"></text>
+<text id="es_svg_2.HD_msum0"
  style="font-weight:bold;font-size:3.88055539px"
  x="267.93469"
- y="90.549652">1</text>
-<text
+ y="90.549652"></text>
+<text id="es_svg_2.HD_msum1"
  style="font-weight:bold;font-size:3.88055539px"
  x="279.39999"
- y="90.549652">0</text>
-<text id="es_svg_2.HD_p_0_1"
+ y="90.549652"></text>
+<text id="es_svg_2.HD_n_0_1"
  class="default_text"
  x="34.395832"
  y="93.724663"></text>
-<text id="es_svg_2.HD_p_1_1"
+<text id="es_svg_2.HD_n_1_1"
  class="default_text"
  x="87.876945"
  y="93.724663"></text>
@@ -980,98 +980,98 @@
  class="default_text"
  x="24.800278"
  y="100.32162">1.HE</text>
-<text id="es_svg_1.HE_p_0_0"
+<text id="es_svg_1.HE_n_0_0"
  class="default_text"
  x="34.395832"
  y="100.32162"></text>
-<text id="es_svg_1.HE_p_1_0"
+<text id="es_svg_1.HE_n_1_0"
  class="default_text"
  x="87.876945"
  y="100.32162"></text>
-<text
+<text id="es_svg_1.HE_p0_0"
  class="default_text"
  x="143.61583"
- y="100.32162">10</text>
+ y="100.32162"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="149.04861"
  y="100.32162">:</text>
-<text
+<text id="es_svg_1.HE_p0_1"
  class="default_text"
  x="151.72972"
- y="100.32162">12</text>
-<text
+ y="100.32162"></text>
+<text id="es_svg_1.HE_p1_0"
  class="default_text"
  x="158.57361"
- y="100.32162">12</text>
+ y="100.32162"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="163.86528"
  y="100.32162">:</text>
-<text
+<text id="es_svg_1.HE_p1_1"
  class="default_text"
  x="166.54639"
- y="100.32162">10</text>
-<text
+ y="100.32162"></text>
+<text id="es_svg_1.HE_p2_0"
  class="default_text"
  x="173.53139"
- y="100.32162">10</text>
+ y="100.32162"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="178.96416"
  y="100.32162">:</text>
-<text
+<text id="es_svg_1.HE_p2_1"
  class="default_text"
  x="181.64528"
- y="100.32162">12</text>
-<text
+ y="100.32162"></text>
+<text id="es_svg_1.HE_p3_0"
  class="default_text"
  x="188.63028"
- y="100.32162">12</text>
+ y="100.32162"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="194.09833"
  y="100.32162">:</text>
-<text
+<text id="es_svg_1.HE_p3_1"
  class="default_text"
  x="196.74416"
- y="100.32162">10</text>
-<text
+ y="100.32162"></text>
+<text id="es_svg_1.HE_p4_0"
  class="default_text"
  x="203.76443"
- y="100.32162">15</text>
+ y="100.32162"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="209.19722"
  y="100.32162">:</text>
-<text
+<text id="es_svg_1.HE_p4_1"
  class="default_text"
  x="211.84305"
- y="100.32162">13</text>
-<text
+ y="100.32162"></text>
+<text id="es_svg_1.HE_psum0"
  class="default_text"
  x="221.08583"
- y="100.32162">59</text>
-<text
+ y="100.32162"></text>
+<text id="es_svg_1.HE_psum1"
  class="default_text"
  x="232.58638"
- y="100.32162">57</text>
-<text
+ y="100.32162"></text>
+<text id="es_svg_1.HE_gsum0"
  class="default_text"
  x="245.03944"
- y="100.32162">3</text>
-<text
+ y="100.32162"></text>
+<text id="es_svg_1.HE_gsum1"
  class="default_text"
  x="256.5047"
- y="100.32162">2</text>
-<text
+ y="100.32162"></text>
+<text id="es_svg_1.HE_msum0"
  style="font-weight:bold;font-size:3.88055539px"
  x="267.93469"
- y="100.46271">1</text>
-<text
+ y="100.46271"></text>
+<text id="es_svg_1.HE_msum1"
  style="font-weight:bold;font-size:3.88055539px"
  x="279.39999"
- y="100.46271">0</text>
+ y="100.46271"></text>
 <text id="es_svg_DE_order"
  style="font-size:3.88055539px"
  x="17.74472"
@@ -1080,98 +1080,98 @@
  class="default_text"
  x="26.281944"
  y="106.95383">DE</text>
-<text id="es_svg_DE_p_0_0"
+<text id="es_svg_DE_n_0_0"
  class="default_text"
  x="34.395832"
  y="106.95383"></text>
-<text id="es_svg_DE_p_1_0"
+<text id="es_svg_DE_n_1_0"
  class="default_text"
  x="87.876945"
  y="106.95383"></text>
-<text
+<text id="es_svg_DE_p0_0"
  class="default_text"
  x="143.61583"
- y="106.95383">10</text>
+ y="106.95383"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="149.04861"
  y="106.95383">:</text>
-<text
+<text id="es_svg_DE_p0_1"
  class="default_text"
  x="151.72972"
- y="106.95383">12</text>
-<text
+ y="106.95383"></text>
+<text id="es_svg_DE_p1_0"
  class="default_text"
  x="158.57361"
- y="106.95383">12</text>
+ y="106.95383"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="163.86528"
  y="106.95383">:</text>
-<text
+<text id="es_svg_DE_p1_1"
  class="default_text"
  x="166.54639"
- y="106.95383">10</text>
-<text
+ y="106.95383"></text>
+<text id="es_svg_DE_p2_0"
  class="default_text"
  x="173.53139"
- y="106.95383">10</text>
+ y="106.95383"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="178.96416"
  y="106.95383">:</text>
-<text
+<text id="es_svg_DE_p2_1"
  class="default_text"
  x="181.64528"
- y="106.95383">12</text>
-<text
+ y="106.95383"></text>
+<text id="es_svg_DE_p3_0"
  class="default_text"
  x="188.63028"
- y="106.95383">12</text>
+ y="106.95383"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="194.09833"
  y="106.95383">:</text>
-<text
+<text id="es_svg_DE_p3_1"
  class="default_text"
  x="196.74416"
- y="106.95383">10</text>
-<text
+ y="106.95383"></text>
+<text id="es_svg_DE_p4_0"
  class="default_text"
  x="203.76443"
- y="106.95383">15</text>
+ y="106.95383"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="209.19722"
  y="106.95383">:</text>
-<text
+<text id="es_svg_DE_p4_1"
  class="default_text"
  x="211.84305"
- y="106.95383">13</text>
-<text
+ y="106.95383"></text>
+<text id="es_svg_DE_psum0"
  class="default_text"
  x="221.08583"
- y="106.95383">59</text>
-<text
+ y="106.95383"></text>
+<text id="es_svg_DE_psum1"
  class="default_text"
  x="232.58638"
- y="106.95383">57</text>
-<text
+ y="106.95383"></text>
+<text id="es_svg_DE_gsum0"
  class="default_text"
  x="245.03944"
- y="106.95383">3</text>
-<text
+ y="106.95383"></text>
+<text id="es_svg_DE_gsum1"
  class="default_text"
  x="256.5047"
- y="106.95383">2</text>
-<text
+ y="106.95383"></text>
+<text id="es_svg_DE_msum0"
  style="font-weight:bold;font-size:3.88055539px"
  x="267.93469"
- y="107.05967">1</text>
-<text
+ y="107.05967"></text>
+<text id="es_svg_DE_msum1"
  style="font-weight:bold;font-size:3.88055539px"
  x="279.39999"
- y="107.05967">0</text>
+ y="107.05967"></text>
 <text id="es_svg_GD_order"
  style="font-size:3.88055539px"
  x="17.74472"
@@ -1180,103 +1180,103 @@
  class="default_text"
  x="26.281944"
  y="116.8316">XD</text>
-<text id="es_svg_GD_p_0_0"
+<text id="es_svg_GD_n_0_0"
  class="default_text"
  x="34.395832"
  y="113.55077"></text>
-<text id="es_svg_GD_p_1_0"
+<text id="es_svg_GD_n_1_0"
  class="default_text"
  x="87.876945"
  y="113.55077"></text>
-<text
+<text id="es_svg_GD_p0_0"
  class="default_text"
  x="143.61583"
- y="116.8316">10</text>
+ y="116.8316"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="149.04861"
  y="116.8316">:</text>
-<text
+<text id="es_svg_GD_p0_1"
  class="default_text"
  x="151.72972"
- y="116.8316">12</text>
-<text
+ y="116.8316"></text>
+<text id="es_svg_GD_p1_0"
  class="default_text"
  x="158.57361"
- y="116.8316">10</text>
+ y="116.8316"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="163.86528"
  y="116.8316">:</text>
-<text
+<text id="es_svg_GD_p1_1"
  class="default_text"
  x="166.54639"
- y="116.8316">12</text>
-<text
+ y="116.8316"></text>
+<text id="es_svg_GD_p2_0"
  class="default_text"
  x="173.53139"
- y="116.8316">12</text>
+ y="116.8316"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="178.96416"
  y="116.8316">:</text>
-<text
+<text id="es_svg_GD_p2_1"
  class="default_text"
  x="181.64528"
- y="116.8316">10</text>
-<text
+ y="116.8316"></text>
+<text id="es_svg_GD_p3_0"
  class="default_text"
  x="188.63028"
- y="116.8316">12</text>
+ y="116.8316"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="194.09833"
  y="116.8316">:</text>
-<text
+<text id="es_svg_GD_p3_1"
  class="default_text"
  x="196.74416"
- y="116.8316">10</text>
-<text
+ y="116.8316"></text>
+<text id="es_svg_GD_p4_0"
  class="default_text"
  x="203.76443"
- y="116.8316">12</text>
+ y="116.8316"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="209.19722"
  y="116.8316">:</text>
-<text
+<text id="es_svg_GD_p4_1"
  class="default_text"
  x="211.84305"
- y="116.8316">10</text>
-<text
+ y="116.8316"></text>
+<text id="es_svg_GD_psum0"
  class="default_text"
  x="221.08583"
- y="116.8316">56</text>
-<text
+ y="116.8316"></text>
+<text id="es_svg_GD_psum1"
  class="default_text"
  x="232.58638"
- y="116.8316">54</text>
-<text
+ y="116.8316"></text>
+<text id="es_svg_GD_gsum0"
  class="default_text"
  x="245.03944"
- y="116.8316">3</text>
-<text
+ y="116.8316"></text>
+<text id="es_svg_GD_gsum1"
  class="default_text"
  x="256.5047"
- y="116.8316">2</text>
-<text
+ y="116.8316"></text>
+<text id="es_svg_GD_msum0"
  style="font-weight:bold;font-size:3.88055539px"
  x="267.93469"
- y="116.97271">1</text>
-<text
+ y="116.97271"></text>
+<text id="es_svg_GD_msum1"
  style="font-weight:bold;font-size:3.88055539px"
  x="279.39999"
- y="116.97271">0</text>
-<text id="es_svg_GD_p_0_1"
+ y="116.97271"></text>
+<text id="es_svg_GD_n_0_1"
  class="default_text"
  x="34.395832"
  y="120.14771"></text>
-<text id="es_svg_GD_p_1_1"
+<text id="es_svg_GD_n_1_1"
  class="default_text"
  x="87.876945"
  y="120.14771"></text>
@@ -1288,130 +1288,130 @@
  class="default_text"
  x="24.800278"
  y="126.77995">2.HE</text>
-<text id="es_svg_2.HE_p_0_0"
+<text id="es_svg_2.HE_n_0_0"
  class="default_text"
  x="34.395832"
  y="126.77995"></text>
-<text id="es_svg_2.HE_p_1_0"
+<text id="es_svg_2.HE_n_1_0"
  class="default_text"
  x="87.876945"
  y="126.77995"></text>
-<text
+<text id="es_svg_2.HE_p0_0"
  class="default_text"
  x="143.61583"
- y="126.77995">10</text>
+ y="126.77995"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="149.04861"
  y="126.77995">:</text>
-<text
+<text id="es_svg_2.HE_p0_1"
  class="default_text"
  x="151.72972"
- y="126.77995">12</text>
-<text
+ y="126.77995"></text>
+<text id="es_svg_2.HE_p1_0"
  class="default_text"
  x="158.57361"
- y="126.77995">12</text>
+ y="126.77995"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="163.86528"
  y="126.77995">:</text>
-<text
+<text id="es_svg_2.HE_p1_1"
  class="default_text"
  x="166.54639"
- y="126.77995">10</text>
-<text
+ y="126.77995"></text>
+<text id="es_svg_2.HE_p2_0"
  class="default_text"
  x="173.53139"
- y="126.77995">10</text>
+ y="126.77995"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="178.96416"
  y="126.77995">:</text>
-<text
+<text id="es_svg_2.HE_p2_1"
  class="default_text"
  x="181.64528"
- y="126.77995">12</text>
-<text
+ y="126.77995"></text>
+<text id="es_svg_2.HE_p3_0"
  class="default_text"
  x="188.63028"
- y="126.77995">12</text>
+ y="126.77995"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="194.09833"
  y="126.77995">:</text>
-<text
+<text id="es_svg_2.HE_p3_1"
  class="default_text"
  x="196.74416"
- y="126.77995">10</text>
-<text
+ y="126.77995"></text>
+<text id="es_svg_2.HE_p4_0"
  class="default_text"
  x="203.76443"
- y="126.77995">15</text>
+ y="126.77995"></text>
 <text
  style="font-weight:bold;font-size:3.52777767px"
  x="209.19722"
  y="126.77995">:</text>
-<text
+<text id="es_svg_2.HE_p4_1"
  class="default_text"
  x="211.84305"
- y="126.77995">13</text>
-<text
+ y="126.77995"></text>
+<text id="es_svg_2.HE_psum0"
  class="default_text"
  x="221.08583"
- y="126.77995">59</text>
-<text
+ y="126.77995"></text>
+<text id="es_svg_2.HE_psum1"
  class="default_text"
  x="232.58638"
- y="126.77995">57</text>
-<text
+ y="126.77995"></text>
+<text id="es_svg_2.HE_gsum0"
  class="default_text"
  x="245.03944"
- y="126.77995">3</text>
-<text
+ y="126.77995"></text>
+<text id="es_svg_2.HE_gsum1"
  class="default_text"
  x="256.5047"
- y="126.77995">2</text>
-<text
+ y="126.77995"></text>
+<text id="es_svg_2.HE_msum0"
  style="font-weight:bold;font-size:3.88055539px"
  x="267.93469"
- y="126.88579">1</text>
-<text
+ y="126.88579"></text>
+<text id="es_svg_2.HE_msum1"
  style="font-weight:bold;font-size:3.88055539px"
  x="279.39999"
- y="126.88579">0</text>
+ y="126.88579"></text>
 <text
  class="default_text"
  x="22.471945"
  y="133.76495">Sieger:</text>
-<text
- style="font-weight:bold;font-size:4.23333311px"
- x="77.364166"
- y="134.0119">TV Refrath</text>
-<text
+<text id="es_svg_winner"
+ style="font-weight:bold;font-size:4.23333311px;text-anchor:middle"
+ x="87.488888"
+ y="134.0119"></text>
+<text id="es_svg_psum0"
  class="default_text"
  x="220.09807"
- y="133.76495">412</text>
-<text
+ y="133.76495"></text>
+<text id="es_svg_psum1"
  class="default_text"
  x="231.5986"
- y="133.76495">398</text>
-<text
+ y="133.76495"></text>
+<text id="es_svg_gsum0"
  class="default_text"
  x="244.05167"
- y="133.76495">21</text>
-<text
+ y="133.76495"></text>
+<text id="es_svg_gsum1"
  class="default_text"
  x="255.55222"
- y="133.76495">14</text>
-<text
+ y="133.76495"></text>
+<text id="es_svg_msum0"
  style="font-weight:bold;font-size:4.23333311px"
  x="267.79358"
- y="134.0119">7</text>
-<text
+ y="134.0119"></text>
+<text id="es_svg_msum1"
  style="font-weight:bold;font-size:4.23333311px"
  x="279.29419"
- y="134.0119">0</text>
+ y="134.0119"></text>
 <text
  style="font-size:2.82222199px"
  x="14.569721"

@@ -39,7 +39,7 @@
 }
 .eventsheet_report > label > span {
 	display: inline-block;
-	min-width: 14em;
+	min-width: 16em;
 }
 .eventsheet_form button {
 	font-size: inherit;
