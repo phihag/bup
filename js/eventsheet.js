@@ -691,10 +691,22 @@ var render_buli2017_pdf = _svg_func(function(svg, ev, es_key, extra_data) {
 	_svg_text(svg, 'team0', ev.team_names[0]);
 	_svg_text(svg, 'team1', ev.team_names[1]);
 
+	matches.forEach(function(m) {
+		var match_eventsheet_id = calc_match_id(m);
+		m.setup.teams.forEach(function(team, team_id){
+			team.players.forEach(function(player, player_id) {
+				_svg_text(svg, match_eventsheet_id + '_p_' + team_id + '_' + player_id, player.name);
+			});
+		});
+	})
+
 	// TODO players
+
+
 	// TODO points
 	// TODO order
 	// TODO sums
+	// TODO total sums
 	// TODO winner
 
 	_svg_text(svg, 'backup_players0', extra_data.backup_players0);

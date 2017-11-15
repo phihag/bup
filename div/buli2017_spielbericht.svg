@@ -656,14 +656,14 @@
  class="default_text"
  x="24.729721"
  y="63.950214">1.HD</text>
-<text
+<text id="es_svg_1.HD_p_0_0"
  class="default_text"
  x="34.395832"
- y="60.669388">Sam Magee</text>
-<text
+ y="60.669388"></text>
+<text id="es_svg_1.HD_p_1_0"
  class="default_text"
  x="87.876945"
- y="60.669388">Ruben Jille</text>
+ y="60.669388"></text>
 <text
  class="default_text"
  x="143.61583"
@@ -748,14 +748,14 @@
  style="font-weight:bold;font-size:3.88055539px"
  x="279.39999"
  y="64.091324">0</text>
-<text
+<text id="es_svg_1.HD_p_0_1"
  class="default_text"
  x="34.395832"
- y="67.266327">Fabian Holzer</text>
-<text
+ y="67.266327"></text>
+<text id="es_svg_1.HD_p_1_1"
  class="default_text"
  x="87.876945"
- y="67.266327">Peter Käsbauer</text>
+ y="67.266327"></text>
 <text
  style="font-size:3.88055539px"
  x="17.74472"
@@ -764,14 +764,14 @@
  class="default_text"
  x="26.21139"
  y="77.179382">DD</text>
-<text
+<text id="es_svg_DD_p_0_0"
  class="default_text"
  x="34.395832"
- y="73.89856">Carla Nelte</text>
-<text
+ y="73.89856"></text>
+<text id="es_svg_DD_p_1_0"
  class="default_text"
  x="87.876945"
- y="73.89856">Olga Konon</text>
+ y="73.89856"></text>
 <text
  class="default_text"
  x="143.61583"
@@ -856,14 +856,14 @@
  style="font-weight:bold;font-size:3.88055539px"
  x="279.39999"
  y="77.320503">0</text>
-<text
+<text id="es_svg_DD_p_0_1"
  class="default_text"
  x="34.395832"
- y="80.495483">Jennifer Karnott</text>
-<text
+ y="80.495483"></text>
+<text id="es_svg_DD_p_1_1"
  class="default_text"
  x="87.876945"
- y="80.495483">Isabel Herttrich</text>
+ y="80.495483"></text>
 <text
  style="font-size:3.88055539px"
  x="17.74472"
@@ -872,14 +872,14 @@
  class="default_text"
  x="24.729721"
  y="90.408539">2.HD</text>
-<text
+<text id="es_svg_2.HD_p_0_0"
  class="default_text"
  x="34.395832"
- y="87.092438">Nhat Nguyen</text>
-<text
+ y="87.092438"></text>
+<text id="es_svg_2.HD_p_1_0"
  class="default_text"
  x="87.876945"
- y="87.092438">Fabian Roth</text>
+ y="87.092438"></text>
 <text
  class="default_text"
  x="143.61583"
@@ -964,14 +964,14 @@
  style="font-weight:bold;font-size:3.88055539px"
  x="279.39999"
  y="90.549652">0</text>
-<text
+<text id="es_svg_2.HD_p_0_1"
  class="default_text"
  x="34.395832"
- y="93.724663">Richard Domke</text>
-<text
+ y="93.724663"></text>
+<text id="es_svg_2.HD_p_1_1"
  class="default_text"
  x="87.876945"
- y="93.724663">Johannes Schöttler</text>
+ y="93.724663"></text>
 <text
  style="font-size:3.88055539px"
  x="17.74472"
@@ -980,14 +980,14 @@
  class="default_text"
  x="24.800278"
  y="100.32162">1.HE</text>
-<text
+<text id="es_svg_1.HE_p_0_0"
  class="default_text"
  x="34.395832"
- y="100.32162">Nhat Nguyen</text>
-<text
+ y="100.32162"></text>
+<text id="es_svg_1.HE_p_1_0"
  class="default_text"
  x="87.876945"
- y="100.32162">Fabian Roth</text>
+ y="100.32162"></text>
 <text
  class="default_text"
  x="143.61583"
@@ -1080,14 +1080,14 @@
  class="default_text"
  x="26.281944"
  y="106.95383">DE</text>
-<text
+<text id="es_svg_DE_p_0_0"
  class="default_text"
  x="34.395832"
- y="106.95383">Chloe Magee</text>
-<text
+ y="106.95383"></text>
+<text id="es_svg_DE_p_1_0"
  class="default_text"
  x="87.876945"
- y="106.95383">Olga Konon</text>
+ y="106.95383"></text>
 <text
  class="default_text"
  x="143.61583"
@@ -1180,14 +1180,14 @@
  class="default_text"
  x="26.281944"
  y="116.8316">XD</text>
-<text
+<text id="es_svg_GD_p_0_0"
  class="default_text"
  x="34.395832"
- y="113.55077">Sam Magee</text>
-<text
+ y="113.55077"></text>
+<text id="es_svg_GD_p_1_0"
  class="default_text"
  x="87.876945"
- y="113.55077">Peter Käsbauer</text>
+ y="113.55077"></text>
 <text
  class="default_text"
  x="143.61583"
@@ -1272,14 +1272,14 @@
  style="font-weight:bold;font-size:3.88055539px"
  x="279.39999"
  y="116.97271">0</text>
-<text
+<text id="es_svg_GD_p_0_1"
  class="default_text"
  x="34.395832"
- y="120.14771">Carla Nelte</text>
-<text
+ y="120.14771"></text>
+<text id="es_svg_GD_p_1_1"
  class="default_text"
  x="87.876945"
- y="120.14771">Isabel Herttrich</text>
+ y="120.14771"></text>
 <text
  style="font-size:3.88055539px"
  x="17.74472"
@@ -1288,14 +1288,14 @@
  class="default_text"
  x="24.800278"
  y="126.77995">2.HE</text>
-<text
+<text id="es_svg_2.HE_p_0_0"
  class="default_text"
  x="34.395832"
- y="126.77995">Richard Domke</text>
-<text
+ y="126.77995"></text>
+<text id="es_svg_2.HE_p_1_0"
  class="default_text"
  x="87.876945"
- y="126.77995">Dieter Domke</text>
+ y="126.77995"></text>
 <text
  class="default_text"
  x="143.61583"
