@@ -178,3 +178,7 @@
 	color: #555;
 	font-weight: 600;
 }
+
+.center-table td:not(:first-child) {
+	text-align: center;
+}

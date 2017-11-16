@@ -335,6 +335,11 @@ function _parse_match_list(doc, now) {
 		};
 	});
 
+	var report_urls = [];
+	if (event_data.url) {
+		report_urls.push(event_data.url);
+	}
+
 	return {
 		starttime: starttime,
 		date: date,
@@ -343,6 +348,9 @@ function _parse_match_list(doc, now) {
 		matches: matches,
 		courts: used_courts,
 		league_key: league_key,
+		location: event_data.ort,
+		matchday: event_data.spieltag,
+		report_urls: report_urls,
 	};
 }
 
