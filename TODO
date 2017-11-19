@@ -1,6 +1,11 @@
-abt
+spielbericht from demo: write test
+nrw-eventsheet: new version of rendering?
+setupsheet: do not show all players if > 20
 
-buli-spielbericht as PDF: browser back should go to previous dialog if not NO_DIALOG
+scoresheet PDF on iOS Chrome -> badmintoncentral
+
+d 2courts without pause timers
+	-> Benedikt
 
 Firefox event_scoresheets
 	-> Henry
@@ -8,7 +13,7 @@ Firefox event_scoresheets
 Windows Firefox PDF Bundesliga-Logo
 	-> Henry
 
-cannot parse player spec in der RL Nord
+cannot parse player spec in RL Nord
 	-> Ulf
 
 includes@displaymode -> Hövelhof
@@ -21,9 +26,6 @@ request parameters for colors
 urlexport: support players written wrong in some form (ask?)
 	-> Ulf
 	-> Olaf Schley
-
-d 2courts without pause timers
-	-> Benedikt
 
 save inputted umpire names (for CourtSpot)
 	-> Ulf
@@ -39,8 +41,10 @@ urlexport could not load login page
 test cs order in detail
 	-> Ulf
 
-d teamscore
-d shortsets
+d teamscore [see pic]
+d shortsets [see pic]
+
+test back and F5 everywhere in referee mode
 
 check that btde send export sends event
 import from b.aufschlagwechsel.de

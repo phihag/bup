@@ -728,7 +728,6 @@ function ask_hide_and_back() {
 function hide_and_back() {
 	if (!hide()) return;
 
-	control.set_current(state);
 	if (state.ui.referee_mode) {
 		refmode_referee_ui.back_to_ui();
 	} else {

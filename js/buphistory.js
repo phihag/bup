@@ -132,79 +132,85 @@ function record(s) {
 function load_by_hash() {
 	var qs = utils.parse_query_string(window.location.hash.substr(1));
 
-	// TODO hide editevent/setupsheet etc.
-	/*if (!qs.editevent) {
-		editevent.hide();
-	}
-	if (!qs.setupsheet) {
-		setupsheet.hide();
-	}*/
+	var show_func;
+	var hide_funcs = [];
 
 	if (typeof qs.dads != 'undefined') {
-		dads.show();
-		return;
+		show_func = dads.show;
 	} else {
-		dads.hide();
+		hide_funcs.push(dads.hide);
 	}
 
 	if (typeof qs.display != 'undefined') {
-		displaymode.show();
-		return;
+		show_func = displaymode.show;
 	} else {
-		displaymode.hide();
+		hide_funcs.push(displaymode.hide);
 	}
 
 	if (typeof qs.referee_mode != 'undefined') {
-		refmode_referee_ui.show();
-		return;
+		show_func = refmode_referee_ui.show;
 	} else {
-		refmode_referee_ui.hide();
+		hide_funcs.push(refmode_referee_ui.hide);
 	}
 
 	if (qs.eventsheet) {
-		eventsheet.show_dialog(qs.eventsheet);
-		return;
+		show_func = function() {
+			eventsheet.show_dialog(qs.eventsheet);
+		};
+	} else {
+		hide_funcs.push(eventsheet.hide);
 	}
 
 	if (typeof qs.event_scoresheets != 'undefined') {
-		scoresheet.event_show();
-		return;
+		show_func = scoresheet.event_show();
+	} else {
+		hide_funcs.push(scoresheet.hide);
 	}
 
 	if (typeof qs.netstats != 'undefined') {
-		netstats.show();
-		return;
+		show_func = netstats.show;
+	} else {
+		hide_funcs.push(netstats.hide);
 	}
 
 	if (typeof qs.mo != 'undefined') {
-		order.mshow(state);
-		return;
-	}
-
-	if (typeof qs.order != 'undefined') {
-		order.show();
-		return;
+		show_func = order.mshow;
+	} else if (typeof qs.order != 'undefined') {
+		show_func = order.show;
+	} else {
+		hide_funcs.push(order.hide);
 	}
 
 	if (typeof qs.urlexport != 'undefined') {
-		urlexport.show();
-		return;
+		show_func = urlexport.show;
 	} else {
-		urlexport.hide();
+		hide_funcs.push(urlexport.hide);
 	}
 
 	if (typeof qs.editevent != 'undefined') {
-		editevent.show();
-		return;
+		show_func = editevent.show;
+	} else {
+		hide_funcs.push(editevent.hide);
 	}
 
 	if (typeof qs.setupsheet != 'undefined') {
-		setupsheet.show();
+		show_func = setupsheet.show;
+	} else {
+		hide_funcs.push(setupsheet.hide);
+	}
+
+	is_loading = true;
+	hide_funcs.forEach(function(hf) {
+		hf();
+	});
+
+	if (show_func) {
+		show_func();
+		is_loading = false;
 		return;
 	}
 
 	if (state.metadata && (qs.m == state.metadata.id)) {
-		is_loading = true;
 		load_ui_by_hash_qs(qs);
 		is_loading = false;
 		return;
@@ -214,7 +220,6 @@ function load_by_hash() {
 		// Load match
 		var m = match_storage.get(qs.m);
 		if (m) {
-			is_loading = true;
 			control.resume_match(m);
 			load_ui_by_hash_qs(qs);
 			is_loading = false;
@@ -223,7 +228,6 @@ function load_by_hash() {
 
 		m = network.match_by_id(qs.m);
 		if (m) {
-			is_loading = true;
 			network.enter_match(m);
 			load_ui_by_hash_qs(qs);
 			is_loading = false;
@@ -233,7 +237,6 @@ function load_by_hash() {
 
 	// no match to load, so always no settings and no scoresheet
 	if (qs.demo !== undefined) {
-		is_loading = true;
 		control.demo_match_start();
 		load_ui_by_hash_qs(qs);
 		is_loading = false;
@@ -241,6 +244,7 @@ function load_by_hash() {
 	} else {
 		settings.show();
 	}
+	is_loading = false;
 }
 
 function ui_init() {

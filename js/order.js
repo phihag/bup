@@ -720,7 +720,6 @@ function hide() {
 	if (state.ui.referee_mode) {
 		refmode_referee_ui.back_to_ui();
 	} else {
-		control.set_current(state);
 		settings.show();
 	}
 }

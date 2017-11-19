@@ -809,7 +809,7 @@ function render_basic_eventsheet(ev, es_key, ui8r, extra_data) {
 	var sum_matches = [0, 0];
 
 	matches.forEach(function(match, match_id) {
-		var netscore = match.netscore;
+		var netscore = match.netscore || match.network_score;
 
 		match.setup.teams.forEach(function(team, team_id) {
 			team.players.forEach(function(player, player_id) {
@@ -1934,9 +1934,16 @@ function show_dialog(es_key) {
 	dialog_fetch(on_fetch);
 }
 
-function hide_dialog() {
+function hide() {
+	if (!state.ui.eventsheet) {
+		return;
+	}
 	state.ui.eventsheet = null;
-	uiu.visible_qs('.eventsheet_container', false);
+	uiu.hide_qs('.eventsheet_container');
+}
+
+function hide_dialog() {
+	hide();
 	if (state.ui.referee_mode) {
 		refmode_referee_ui.back_to_ui();
 	} else {
@@ -1947,6 +1954,7 @@ function hide_dialog() {
 return {
 	loaded: loaded,
 	ui_init: ui_init,
+	hide: hide,
 	show_dialog: show_dialog,
 	render_links: render_links,
 	calc_match_id: calc_match_id,
