@@ -140,9 +140,11 @@ function calc_listed(event) {
 				m: [],
 				f: [],
 			};
-			aps.forEach(_add);
-			team_res.m.sort(_cmp_players);
-			team_res.f.sort(_cmp_players);
+			if (aps.length < 20) {
+				aps.forEach(_add);
+				team_res.m.sort(_cmp_players);
+				team_res.f.sort(_cmp_players);
+			}
 			return team_res;
 		});
 	}
@@ -419,11 +421,11 @@ function pdf() {
 
 function ui_render_init(s) {
 	var err_display = uiu.qs('.setupsheet_error');
-	uiu.$hide(err_display);
+	uiu.hide(err_display);
 	uiu.text(err_display);
 	cfg = calc_config(s.event);
 	if (!cfg) {
-		uiu.$show(err_display);
+		uiu.show(err_display);
 		uiu.text(err_display, 'Unsupported league: ' + s.event.league_key);
 		return;
 	}
@@ -683,15 +685,15 @@ function show() {
 	bupui.esc_stack_push(ask_hide_and_back);
 	control.set_current(state);
 
-	uiu.$visible_qs('.setupsheet_layout', true);
+	uiu.show_qs('.setupsheet_layout');
 	if (state.event && state.event.matches && state.event.all_players) {
-		uiu.$visible_qs('.setupsheet_loading-icon', false);
+		uiu.hide_qs('.setupsheet_loading-icon');
 		ui_render_init(state);
 	} else {
-		uiu.$visible_qs('.setupsheet_loading-icon', true);
+		uiu.show_qs('.setupsheet_loading-icon');
 		network.list_full_event(state, function(err) {
-			uiu.$visible_qs('.setupsheet_error', !!err);
-			uiu.$visible_qs('.setupsheet_loading-icon', false);
+			uiu.visible_qs('.setupsheet_error', !!err);
+			uiu.hide_qs('.setupsheet_loading-icon');
 			if (err) {
 				uiu.text_qs('.setupsheet_error_message', err.msg);
 				return;
@@ -708,7 +710,7 @@ function hide() {
 
 	bupui.esc_stack_pop();
 	state.ui.setupsheet_visible = false;
-	uiu.$visible_qs('.setupsheet_layout', false);
+	uiu.hide_qs('.setupsheet_layout');
 	return true;
 }
 
@@ -747,7 +749,7 @@ function ui_init() {
 	click.qs('.setupsheet_cancel', ask_hide_and_back);
 	click.qs('.setupsheet_save', function() {
 		save(state, function(err) {
-			uiu.$visible_qs('.setupsheet_error', err);
+			uiu.visible_qs('.setupsheet_error', err);
 			if (err) {
 				uiu.text_qs('.setupsheet_error', err.msg);
 			} else {
