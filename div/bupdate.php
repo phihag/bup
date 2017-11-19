@@ -23,6 +23,18 @@ function error($msg) {
 	die();
 }
 
+function compat_rename($src, $dst) {
+	if (@\rename($src, $dst)) {
+		return true;
+	}
+
+	// On AUFS (e.g. docker), rename is not supported:
+	// https://docs.docker.com/engine/userguide/storagedriver/aufs-driver/#modifying-files-or-directories
+	// Fall back to mv instead.
+	\exec('mv -T -- ' . \escapeshellarg($src) . ' ' . \escapeshellarg($dst), $mv_output, $mv_ret);
+	return $mv_ret === 0;
+}
+
 function rmrf($dir) {
 	if (\strpos($dir, 'bup_update') === false) {
 		throw new \ErrorException('Sanity check failed, refusing to rmrf ' . $dir);
@@ -181,19 +193,13 @@ foreach ($checksums as $vfn => $cs) {
 // Switch new and old version.
 // This is not quite atomically since we're not using a symlink
 if (\file_exists($bup_dir)) {
-	if (! \rename($bup_dir, $tmp_dir . '/oldbup.' . $tmp_id)) {
+	if (! compat_rename($bup_dir, $tmp_dir . '/oldbup.' . $tmp_id)) {
 		error('Failed to move old bup dir');
 	}
 }
-if (! @\rename($new_bup, $bup_dir)) {
-	// On AUFS (e.g. docker), rename is not supported:
-	// https://docs.docker.com/engine/userguide/storagedriver/aufs-driver/#modifying-files-or-directories
-	// Fall back to mv instead.
 
-	\exec('mv -T -- ' . \escapeshellarg($new_bup) . ' ' . \escapeshellarg($bup_dir), $mv_output, $mv_ret);
-	if ($mv_ret !== 0) {
-		error('Failed to move in new bup dir');
-	}
+if (! compat_rename($new_bup, $bup_dir)) {
+	error('Failed to move in new bup dir');
 }
 
 $new_version = \file_get_contents($bup_dir . '/VERSION');
