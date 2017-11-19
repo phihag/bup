@@ -260,11 +260,12 @@ function render_bundesliga(ev, es_key, ui8r, extra_data) {
 	}
 
 	var point_scores_arrays = matches.map(function(m) {
+		var netscore = m.network_score;
 		var res;
-		if (utils.deep_equal(m.netscore, [[0, 0]])) {
+		if (utils.deep_equal(netscore, [[0, 0]])) {
 			res = [];
 		} else {
-			res = m.netscore.map(function(nscore) {
+			res = netscore.map(function(nscore) {
 				return nscore[0] + '-' + nscore[1];
 			});
 		}
@@ -286,7 +287,7 @@ function render_bundesliga(ev, es_key, ui8r, extra_data) {
 		var games = [undefined, undefined];
 		var matches = [undefined, undefined];
 
-		var netscore = m.netscore;
+		var netscore = m.network_score;
 		if (netscore && (netscore.length > 0) && ((netscore[0][0] > 0) || (netscore[0][1] > 0))) {
 			points = [0, 0];
 			netscore.forEach(function(game_score) {
@@ -714,7 +715,7 @@ var render_buli2017_pdf = _svg_func(function(svg, ev, es_key, extra_data) {
 
 	matches.forEach(function(m, match_id) {
 		var match_eventsheet_id = calc_match_id(m);
-		var netscore = m.netscore || m.network_score || [];
+		var netscore = m.network_score || [];
 
 		var mo = match_order[match_id];
 		if (mo) {
@@ -809,7 +810,7 @@ function render_basic_eventsheet(ev, es_key, ui8r, extra_data) {
 	var sum_matches = [0, 0];
 
 	matches.forEach(function(match, match_id) {
-		var netscore = match.netscore || match.network_score;
+		var netscore = match.network_score;
 
 		match.setup.teams.forEach(function(team, team_id) {
 			team.players.forEach(function(player, player_id) {
@@ -925,7 +926,7 @@ function _add_totals(totals, add) {
 
 // p: points, g: games, m:matches
 function calc_sums(match) {
-	var netscore = match.netscore || match.network_score || [];
+	var netscore = match.network_score || [];
 	if (!netscore.length) {
 		return {
 			p: [],
@@ -1119,7 +1120,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 						});
 					});
 
-					var netscore = match.netscore || match.network_score || [];
+					var netscore = match.network_score || [];
 					if (utils.deep_equal(netscore, [[0, 0]])) {
 						netscore = [];
 					}
@@ -1456,7 +1457,7 @@ function render_obl(ev, es_key, ui8r, extra_data) {
 					return;
 				}
 
-				var netscore = m.netscore || m.network_score || [];
+				var netscore = m.network_score || [];
 				var counting = m.setup.counting;
 				var mwinner = calc.match_winner(counting, netscore);
 				var teams = m.setup.teams;

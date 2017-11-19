@@ -90,7 +90,6 @@ function set_metadata(event) {
 				match.md_end = fpresses[fpresses.length - 1].timestamp;
 			}
 		}
-		match.netscore = calc.netscore(scopy);
 		match.network_score = calc.netscore(scopy);
 		match.network_team1_serving = scopy.game.team1_serving;
 		match.network_finished = scopy.match.finished;
