@@ -594,7 +594,7 @@ function _svg_func(func) {
 		if (state.settings && state.settings.umpire_name) {
 			info.props.author = state.settings.umpire_name;
 		}
-		info.filename = title + '.pdf';
+		info.filename = info.filename || (title + '.pdf');
 		preview.setAttribute('data-info_json', JSON.stringify(info));
 
 		printing.set_orientation(info.orientation);
@@ -775,30 +775,12 @@ var render_buli2017_pdf = _svg_func(function(svg, ev, es_key, extra_data) {
 	};
 });
 
-function render_basic_eventsheet(ev, es_key, ui8r, extra_data) {
-	var xml_str = (new TextDecoder('utf-8')).decode(ui8r);
-	var svg_doc = (new DOMParser()).parseFromString(xml_str, 'image/svg+xml');
-	var svg = svg_doc.getElementsByTagName('svg')[0];
-
+var render_basic_eventsheet =  _svg_func(function(svg, ev, es_key, extra_data) {
 	eventutils.set_metadata(ev);
+
 	var match_order = ['1.HD', '2.HD', 'DD', '1.HE', '2.HE', '3.HE', 'DE', 'GD'];
 	var matches = order_matches(ev, match_order);
 	var last_update = calc_last_update(matches);
-
-	var body = uiu.qs('body');
-	var $container = $('<div style="position: absolute; left: -999px; top: -2999px; width: 297px; height: 210px; overflow: hidden;">');
-	svg.setAttribute('style', 'width: 2970px; height: 2100px;');
-	$container[0].appendChild(svg);
-	body.appendChild($container[0]);
-
-	var props = {
-		title: (state._('Event Sheet') + ' ' + ev.event_name + (last_update ? (' ' + utils.date_str(last_update)) : '')),
-		subject: state._('Event Sheet'),
-		creator: 'bup (https://phihag.de/bup/)',
-	};
-	if (state.settings && state.settings.umpire_name) {
-		props.author = state.settings.umpire_name;
-	}
 
 	var match_order_nums = get_match_order(matches);
 	match_order_nums.forEach(function(mon, i) {
@@ -888,11 +870,11 @@ function render_basic_eventsheet(ev, es_key, ui8r, extra_data) {
 	_svg_text(svg, 'protest', extra_data.protest);
 	_svg_text(svg, 'umpires', extra_data.umpires);
 
-	var filename = state._('Event Sheet') + ' ' + ev.event_name + (last_update ? (' ' + utils.date_str(last_update)) : '') + '.pdf';
-	svg2pdf.save([svg], props, 'landscape', filename);
-
-	$container.remove();
-}
+	return {
+		filename: state._('Event Sheet') + ' ' + ev.event_name + (last_update ? (' ' + utils.date_str(last_update)) : '') + '.pdf',
+		orientation: 'landscape',
+	};
+});
 
 function calc_player_matches(ev, team_id) {
 	var res = [];
