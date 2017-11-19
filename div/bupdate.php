@@ -185,8 +185,15 @@ if (\file_exists($bup_dir)) {
 		error('Failed to move old bup dir');
 	}
 }
-if (! \rename($new_bup, $bup_dir)) {
-	error('Failed to move in new bup dir');
+if (! @\rename($new_bup, $bup_dir)) {
+	// On AUFS (e.g. docker), rename is not supported:
+	// https://docs.docker.com/engine/userguide/storagedriver/aufs-driver/#modifying-files-or-directories
+	// Fall back to mv instead.
+
+	\exec('mv -T -- ' . \escapeshellarg($new_bup) . ' ' . \escapeshellarg($bup_dir), $mv_output, $mv_ret);
+	if ($mv_ret !== 0) {
+		error('Failed to move in new bup dir');
+	}
 }
 
 $new_version = \file_get_contents($bup_dir . '/VERSION');
