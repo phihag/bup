@@ -1806,6 +1806,8 @@ function show_dialog(es_key) {
 		render.hide();
 	}
 
+	uiu.hide_qs('.eventsheet_error');
+
 	es_key = resolve_key(es_key);
 	if (es_key != 'auto-direct') {
 		download(es_key);
