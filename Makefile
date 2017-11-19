@@ -75,6 +75,7 @@ dist: cleandist ## Create distribution files
 		div/buli2017_mindestanforderungen_schiedsrichter.svg \
 		div/buli2017_mindestanforderungen_verein.svg
 	cp doc/ -R dist/bup/
+	cp div/bupdate.php dist/bup/div/bupdate.txt
 	cp \
 		div/bundesliga-ballsorten-2016.pdf \
 		div/bupdate.php \
