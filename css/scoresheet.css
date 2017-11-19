@@ -13,7 +13,7 @@
 .scoresheet_buttons > button {
 	margin: 0;
 	font-size: inherit;
-	padding: 0.1em 0.1em;
+	padding: 0.5em 0.1em;
 	min-width: 7em;
 	opacity: 0.9;
 }
