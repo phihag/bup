@@ -464,6 +464,18 @@ function on_match_click(e) {
 	}
 }
 
+function _parse_players(str) {
+	return str.split('/').map(function(s) {
+		return s.trim();
+	}).filter(function(s) {
+		return s;
+	}).map(function(name) {
+		return {
+			name: name,
+		};
+	});
+}
+
 function ui_render() {
 	var conflicts = calc_conflicting_players(current_matches, current_ignore_start);
 	var display = uiu.qs('.order_display');
@@ -609,19 +621,7 @@ function ui_render() {
 			size: 40,
 		});
 
-		function _parse_players(str) { // eslint-disable-line no-inner-declarations
-			return str.split('/').map(function(s) {
-				return s.trim();
-			}).filter(function(s) {
-				return s;
-			}).map(function(name) {
-				return {
-					name: name,
-				};
-			});
-		}
-
-		function _check_validity() { // eslint-disable-line no-inner-declarations
+		var _check_validity = function() {
 			var p1_players = _parse_players(p1.value);
 			var p2_players = _parse_players(p2.value);
 
@@ -630,7 +630,7 @@ function ui_render() {
 			} else {
 				p2.setCustomValidity('');
 			}
-		}
+		};
 
 		p1.addEventListener('input', _check_validity);
 		p2.addEventListener('input', _check_validity);

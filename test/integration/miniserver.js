@@ -28,6 +28,7 @@ function mimetype(pathname) {
 		'.svg': 'image/svg+xml',
 		'.txt': 'text/plain',
 		'.xlsm': 'application/vnd.ms-excel.sheet.macroEnabled.12',
+		'.xlsx': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
 		'.xltm': 'application/vnd.ms-excel.template.macroEnabled.12',
 	}[parsed_path.ext];
 }

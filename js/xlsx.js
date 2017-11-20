@@ -154,8 +154,8 @@ function open(ui8r, cb) {
 			zipfile.generateAsync({
 				type: 'blob',
 				mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-			}).then(function(content) {
-				saveAs(content, fn);
+			}).then(function(blob) {
+				saveAs(blob, fn);
 			});
 		}
 
