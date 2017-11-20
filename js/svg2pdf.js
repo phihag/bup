@@ -571,7 +571,8 @@ function make(svg_nodes, props, orientation, scale) {
 
 function save(svg_nodes, props, orientation, filename, scale) {
 	var pdf = make(svg_nodes, props, orientation, scale);
-	pdf.save(filename);
+	var blob = pdf.output('blob');
+	save_file(blob, filename);
 }
 
 return {
@@ -591,5 +592,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	module.exports = svg2pdf;
+
+	var save_file = require('./save_file');
 }
 /*/@DEV*/
