@@ -1,15 +1,6 @@
-event_scoresheets click fails!!!
-event_scoresheets F5 fails
-
-htaccess to fake last_modified dates in js/ and css/
-
-test saving
-	Browser on oldandroid
-	Safari on iOS
-	Chrome on iOS
-
 scoresheet PDF on iOS Chrome -> badmintoncentral
 
+htaccess to fake last_modified dates in js/ and css/
 d 2courts without pause timers
 	-> Benedikt
 
@@ -37,7 +28,7 @@ save inputted umpire names (for CourtSpot)
 	-> Ulf
 	-> Benedikt
 
-actually sign PDFs in code
+eventsheet: sign!
 
 urlexport could not load login page
 	return $http_response_header

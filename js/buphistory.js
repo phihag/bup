@@ -162,7 +162,7 @@ function load_by_hash() {
 	}
 
 	if (typeof qs.event_scoresheets != 'undefined') {
-		show_func = scoresheet.event_show();
+		show_func = scoresheet.event_show;
 	} else {
 		hide_funcs.push(scoresheet.hide);
 	}

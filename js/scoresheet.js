@@ -945,7 +945,7 @@ function event_render(container) {
 			sheet_render(s, svg);
 		});
 
-		uiu.$visible_qs('.scoresheet_loading-icon', false);
+		uiu.hide_qs('.scoresheet_loading-icon');
 	});
 }
 
@@ -969,22 +969,23 @@ function event_show() {
 	uiu.addClass_qs('.scoresheet_container', 'scoresheet_container_multi');
 
 	printing.set_orientation('landscape');
-	state.ui.event_scoresheets_visible = true;
-	control.set_current(state);
 
 	if (typeof jsPDF != 'undefined') {
 		jspdf_loaded();
 	}
 
-	settings.hide(true);
-	stats.hide();
+	state.ui.event_scoresheets_visible = true;
 	render.hide();
+	stats.hide();
+	settings.hide(true, true);
+
+	control.set_current(state);
 	bupui.esc_stack_push(hide);
 
 	var container = uiu.qs('.scoresheet_container');
-	$(container).children('.scoresheet').remove();
-	uiu.$visible_qs('.scoresheet_loading-icon', true);
-	uiu.$visible(container, true);
+	uiu.qsEach('.scoresheet', uiu.remove, container);
+	uiu.show_qs('.scoresheet_loading-icon');
+	uiu.show(container);
 
 	if (state.event) {
 		event_render(container);

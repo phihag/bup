@@ -12,9 +12,9 @@ function save_file(blob, filename) {
 
 	if (compat.is_crios()) {
 		var reader = new FileReader();
-		reader.onload = function(e){
+		reader.onload = function(){
 			window.location.href = reader.result;
-		}
+		};
 		reader.readAsDataURL(blob);
 	} else if (compat.is_mobile_safari()) {
 		var win = window.open(url, '_blank');

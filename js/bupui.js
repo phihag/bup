@@ -197,7 +197,7 @@ function make_page(s, page_name, init_cb, hide_cb) {
 		refmode_referee_ui.hide_tmp();
 	} else {
 		render.hide();
-		settings.hide(true);
+		settings.hide(true, true);
 	}
 	bupui.esc_stack_push(hide);
 
