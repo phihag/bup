@@ -182,6 +182,59 @@ _describe('svg2pdf', function() {
 		);
 	});
 
+	_it('parse_color', function() {
+		assert.deepStrictEqual(
+			bup.svg2pdf.parse_color('rgb(12, 233, 0)'),
+			{
+				r: 12,
+				g: 233,
+				b: 0,
+			}
+		);
+		assert.deepStrictEqual(
+			bup.svg2pdf.parse_color('rgb(220,233,255)'),
+			{
+				r: 220,
+				g: 233,
+				b: 255,
+			}
+		);
+
+		assert.deepStrictEqual(
+			bup.svg2pdf.parse_color('#0123af'),
+			{
+				r: 1,
+				g: 35,
+				b: 175,
+			}
+		);
+		assert.deepStrictEqual(
+			bup.svg2pdf.parse_color('#000000'),
+			{
+				r: 0,
+				g: 0,
+				b: 0,
+			}
+		);
+
+		assert.deepStrictEqual(
+			bup.svg2pdf.parse_color('#bbb'),
+			{
+				r: 187,
+				g: 187,
+				b: 187,
+			}
+		);
+		assert.deepStrictEqual(
+			bup.svg2pdf.parse_color('#012'),
+			{
+				r: 0,
+				g: 17,
+				b: 34,
+			}
+		);
+
+	});
 
 	_it('arc2beziers', function() {
 		assert.deepStrictEqual(

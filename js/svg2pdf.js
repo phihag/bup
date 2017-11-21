@@ -357,28 +357,43 @@ function _make_beziers(angleStart, angleExtent) {
 }
 
 function parse_color(col_str) {
-	var m = col_str.match(/^rgb\(([0-9]+),\s*([0-9]+),\s*([0-9]+)\)|#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/);
-	var r = 0;
-	var g = 0;
-	var b = 0;
-	if (m && m[1]) {
-		r = parseInt(m[1], 10);
-		g = parseInt(m[2], 10);
-		b = parseInt(m[3], 10);
-	} else if (m && m[4]) {
-		r = parseInt(m[4], 16);
-		g = parseInt(m[5], 16);
-		b = parseInt(m[6], 16);
+	var m = col_str.match(/^rgb\(([0-9]+),\s*([0-9]+),\s*([0-9]+)\)$/);
+	if (m) {
+		return {
+			r: parseInt(m[1], 10),
+			g: parseInt(m[2], 10),
+			b: parseInt(m[3], 10),
+		};
 	}
+
+	m = col_str.match(/^#([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})$/);
+	if (m) {
+		return {
+			r: parseInt(m[1], 16),
+			g: parseInt(m[2], 16),
+			b: parseInt(m[3], 16),
+		};
+	}
+
+	m = col_str.match(/^#[0-9a-fA-F]{3}$/);
+	if (m) {
+		return {
+			r: (17 * parseInt(col_str[1], 16)),
+			g: (17 * parseInt(col_str[2], 16)),
+			b: (17 * parseInt(col_str[3], 16)),
+		};
+	}
+
 	return {
-		r: r,
-		g: g,
-		b: b,
+		r: 0,
+		g: 0,
+		b: 0,
 	};
 }
 
 function render_page(svg, pdf, scale) {
 	var nodes = svg.querySelectorAll('*');
+
 	for (var i = 0;i < nodes.length;i++) {
 		// Due to absence of let, declare vars here
 		var x;
@@ -400,7 +415,7 @@ function render_page(svg, pdf, scale) {
 			pdf.setFillColor(col.r, col.g, col.b);
 			mode = (style.fillRule === 'evenodd') ? 'f*' : 'f';
 		}
-		if (style.stroke != 'none') {
+		if ((style.stroke != 'none') && (style.stroke)) {
 			var scol = parse_color(style.stroke);
 			pdf.setDrawColor(scol.r, scol.g, scol.b);
 
@@ -435,6 +450,11 @@ function render_page(svg, pdf, scale) {
 			}
 
 			if (dash_len !== undefined) {
+				if (dash_len + gap_len <= 0) {
+					report_problem.silent_error('svg line dash/gap too small: ' + (dash_len + gap_len));
+					continue;
+				}
+
 				x = x1;
 				y = y1;
 
@@ -584,6 +604,7 @@ return {
 	parse_cmd: parse_cmd,
 	arc2beziers: arc2beziers,
 	_make_beziers: _make_beziers,
+	parse_color: parse_color,
 /*/@DEV*/
 };
 
@@ -594,5 +615,6 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	module.exports = svg2pdf;
 
 	var save_file = require('./save_file');
+	var report_problem = require('./report_problem');
 }
 /*/@DEV*/
