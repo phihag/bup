@@ -1,19 +1,14 @@
-scoresheet PDF on IE10: stroke
+event_scoresheets click fails!!!
+event_scoresheets F5 fails
+
+htaccess to fake last_modified dates in js/ and css/
 
 test saving
-	Edge on Windows
-	IE on Windows
-	Chrome on macOS
-	FF on macOS
-	Safari on macOS
-	Chrome on android
-	Browser on android
+	Browser on oldandroid
 	Safari on iOS
 	Chrome on iOS
 
 scoresheet PDF on iOS Chrome -> badmintoncentral
-
-actually sign PDFs in code
 
 d 2courts without pause timers
 	-> Benedikt
@@ -41,6 +36,8 @@ urlexport: support players written wrong in some form (ask?)
 save inputted umpire names (for CourtSpot)
 	-> Ulf
 	-> Benedikt
+
+actually sign PDFs in code
 
 urlexport could not load login page
 	return $http_response_header

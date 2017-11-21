@@ -5,6 +5,10 @@ function is_mobile_safari() {
 	return ua.match(/AppleWebKit/) && ua.match(/(?:iPod|iPhone|iPad)/);
 }
 
+function is_crios() { // Chrome on iOS
+	return /CriOS\//.test(navigator.userAgent);
+}
+
 function ui_init() {
 	if (is_mobile_safari()) {
 		uiu.addClass_qs('html', 'mobile_safari');
@@ -25,6 +29,8 @@ return {
 	ui_init: ui_init,
 	courtnum: courtnum,
 	supports_flexbox: supports_flexbox,
+	is_mobile_safari: is_mobile_safari,
+	is_crios: is_crios,
 };
 
 })();

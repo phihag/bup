@@ -364,7 +364,7 @@ function render_bundesliga(ev, es_key, ui8r, extra_data) {
 	var res_pdf = pdfform.transform(ui8r, fields);
 	var filename = 'Spielbericht ' + ev.event_name + (last_update ? (' ' + utils.date_str(last_update * 1000)) : '') + '.pdf';
 	var blob = new Blob([res_pdf], {type: MIME_TYPES.pdf});
-	saveAs(blob, filename);
+	save_file(blob, filename);
 }
 
 function render_team_bl(ev, es_key, ui8r) {
@@ -546,7 +546,7 @@ function render_team_bl(ev, es_key, ui8r) {
 	var res_pdf = pdfform.transform(ui8r, fields);
 	var filename = 'Mannschaftsaufstellung ' + ev.event_name + (last_update ? (' ' + utils.date_str(last_update * 1000)) : '') + '.pdf';
 	var blob = new Blob([res_pdf], {type: MIME_TYPES.pdf});
-	saveAs(blob, filename);
+	save_file(blob, filename);
 }
 
 function _svg_text(svg, id, val) {
@@ -1511,7 +1511,7 @@ function direct_download(es_key, ui8r) {
 	var ext = /\.([a-z0-9]+)$/.exec(URLS[es_key])[1];
 	var filename = state._('eventsheet:label|' + es_key) + '.' + ext;
 	var blob = new Blob([ui8r], {type: MIME_TYPES[ext]});
-	saveAs(blob, filename);
+	save_file(blob, filename);
 }
 
 function es_render(ev, es_key, ui8r, extra_data) {
@@ -1962,6 +1962,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var svg2pdf = require('./svg2pdf');
 	var uiu = require('./uiu');
 	var utils = require('./utils');
+	var save_file = require('./save_file');
 	var xlsx = require('./xlsx');
 
 	module.exports = eventsheet;

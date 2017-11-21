@@ -31,7 +31,6 @@
         "jsPDF": true,
         "Mousetrap": true,
         "pdfform": true,
-        "saveAs": true,
         "FastClick": true,
         "JSZip": true,
         "StackTrace": true,

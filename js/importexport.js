@@ -99,7 +99,7 @@ function ui_export_json(s) {
 	var now = new Date();
 	var filename = utils.iso8601(now) + ' ' + utils.time_str(now.getTime()).replace(':', '-') + (name ? ' ' : '') + name + '.json';
 	var blob = new Blob([data_json], {type: 'application/json'});
-	saveAs(blob, filename);
+	save_file(blob, filename);
 }
 
 function send_export(s) {
@@ -149,6 +149,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var match_storage = require('./match_storage');
 	var network = require('./network');
 	var report_problem = require('./report_problem');
+	var save_file = require('./save_file');
 	var staticnet = require('./staticnet');
 	var uiu = require('./uiu');
 	var utils = require('./utils');

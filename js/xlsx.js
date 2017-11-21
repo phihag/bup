@@ -155,7 +155,7 @@ function open(ui8r, cb) {
 				type: 'blob',
 				mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
 			}).then(function(blob) {
-				saveAs(blob, fn);
+				save_file(blob, fn);
 			});
 		}
 
@@ -292,6 +292,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var report_problem = require('./report_problem');
+	var save_file = require('./save_file');
 	var uiu = require('./uiu');
 
 	module.exports = xlsx;

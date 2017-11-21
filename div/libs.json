@@ -16,9 +16,6 @@
 	"url": "https://raw.githubusercontent.com/phihag/pdfform.js/dist/dist/pdfform.minipdf.dist.js"
 },
 {
-	"url": "https://raw.githubusercontent.com/eligrey/FileSaver.js/master/FileSaver.min.js"
-},
-{
 	"url": "https://raw.githubusercontent.com/phihag/text-encoding-utf-8/master/lib/encoding.js"
 },
 {
