@@ -24,14 +24,14 @@
                   "name": "Sam Magee"
                 },
                 {
-                  "name": "Fabian Holzer"
+                  "name": "Max Schwenger"
                 }
               ]
             },
             {
               "players": [
                 {
-                  "name": "Michael Fuchs"
+                  "name": "Marvin Seidel"
                 },
                 {
                   "name": "Peter Käsbauer"
@@ -66,7 +66,7 @@
             {
               "players": [
                 {
-                  "name": "Samantha Barning"
+                  "name": "Olga Konon"
                 },
                 {
                   "name": "Isabel Herttrich"
@@ -93,7 +93,7 @@
             {
               "players": [
                 {
-                  "name": "Fabian Roth"
+                  "name": "Nhat Nguyen"
                 },
                 {
                   "name": "Richard Domke"
@@ -103,7 +103,7 @@
             {
               "players": [
                 {
-                  "name": "Marc Zwiebler"
+                  "name": "Fabian Roth"
                 },
                 {
                   "name": "Johannes Schöttler"
@@ -119,7 +119,7 @@
           "court_id": 1
         },
         "network_score": [[11,8], [11,0], [11, 0]],
-        "presses_json": "[{\"type\":\"note\",\"val\":\"Dies ist ein fiktives Spiel zur Demonstration von Karten etc.\",\"timestamp\":1494093300000},{\"type\":\"pick_side\",\"team1_left\":true,\"timestamp\":1494093308302},{\"type\":\"pick_server\",\"team_id\":0,\"player_id\":1,\"timestamp\":1494093311063},{\"type\":\"pick_receiver\",\"team_id\":1,\"player_id\":0,\"timestamp\":1494093314053},{\"type\":\"shuttle\",\"timestamp\":1494093321894},{\"type\":\"shuttle\",\"timestamp\":1494093322723},{\"type\":\"shuttle\",\"timestamp\":1494093430767},{\"type\":\"love-all\",\"timestamp\":1494093450676},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1494093457266},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1494093473245},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1494093485821},{\"type\":\"yellow-card\",\"team_id\":0,\"player_id\":0,\"timestamp\":1494093491704},{\"type\":\"note\",\"val\":\"Gelbe und rote Karte Fabian Roth wegen zu vielen Netzrollern.\",\"timestamp\":1494093524809},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1494093530767},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1494093538567},{\"type\":\"shuttle\",\"timestamp\":1494093541344},{\"type\":\"red-card\",\"team_id\":0,\"player_id\":0,\"timestamp\":1494093555696},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1494093561142},{\"type\":\"suspension\",\"timestamp\":1494093567787},{\"type\":\"note\",\"val\":\"Unterbrechung wegen Gans in der Halle. Federn wurden direkt verarbeitet.\",\"timestamp\":1494093607827},{\"type\":\"resume\",\"timestamp\":1494093613322},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1494093617035},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1494093622292},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1494093633274},{\"type\":\"shuttle\",\"timestamp\":1494093636591},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1494093648692},{\"type\":\"overrule\",\"timestamp\":1494093653127},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1494093658016},{\"type\":\"correction\",\"team_id\":0,\"timestamp\":1494093661943},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1494093666743},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1494093670571},{\"type\":\"undo\",\"timestamp\":1494093673154},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1494093682460},{\"type\":\"injury\",\"team_id\":1,\"player_id\":1,\"timestamp\":1494093693018},{\"type\":\"retired\",\"team_id\":1,\"player_id\":1,\"timestamp\":1494093719246},{\"type\":\"postmatch-confirm\",\"timestamp\":1494093723275}]"
+        "presses_json": "[{\"type\":\"note\",\"val\":\"Dies ist ein fiktives Spiel zur Demonstration von Karten etc.\",\"timestamp\":1494093300000},{\"type\":\"pick_side\",\"team1_left\":true,\"timestamp\":1494093308302},{\"type\":\"pick_server\",\"team_id\":0,\"player_id\":1,\"timestamp\":1494093311063},{\"type\":\"pick_receiver\",\"team_id\":1,\"player_id\":0,\"timestamp\":1494093314053},{\"type\":\"shuttle\",\"timestamp\":1494093321894},{\"type\":\"shuttle\",\"timestamp\":1494093322723},{\"type\":\"shuttle\",\"timestamp\":1494093430767},{\"type\":\"love-all\",\"timestamp\":1494093450676},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1494093457266},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1494093473245},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1494093485821},{\"type\":\"yellow-card\",\"team_id\":0,\"player_id\":0,\"timestamp\":1494093491704},{\"type\":\"note\",\"val\":\"Gelbe und rote Karte Nhat Nguyen wegen zu vielen Netzrollern.\",\"timestamp\":1494093524809},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1494093530767},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1494093538567},{\"type\":\"shuttle\",\"timestamp\":1494093541344},{\"type\":\"red-card\",\"team_id\":0,\"player_id\":0,\"timestamp\":1494093555696},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1494093561142},{\"type\":\"suspension\",\"timestamp\":1494093567787},{\"type\":\"note\",\"val\":\"Unterbrechung wegen Gans in der Halle. Federn wurden direkt verarbeitet.\",\"timestamp\":1494093607827},{\"type\":\"resume\",\"timestamp\":1494093613322},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1494093617035},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1494093622292},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1494093633274},{\"type\":\"shuttle\",\"timestamp\":1494093636591},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1494093648692},{\"type\":\"overrule\",\"timestamp\":1494093653127},{\"type\":\"score\",\"side\":\"right\",\"timestamp\":1494093658016},{\"type\":\"correction\",\"team_id\":0,\"timestamp\":1494093661943},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1494093666743},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1494093670571},{\"type\":\"undo\",\"timestamp\":1494093673154},{\"type\":\"score\",\"side\":\"left\",\"timestamp\":1494093682460},{\"type\":\"injury\",\"team_id\":1,\"player_id\":1,\"timestamp\":1494093693018},{\"type\":\"retired\",\"team_id\":1,\"player_id\":1,\"timestamp\":1494093719246},{\"type\":\"postmatch-confirm\",\"timestamp\":1494093723275}]"
       },
       {
         "setup": {
@@ -128,14 +128,14 @@
             {
               "players": [
                 {
-                  "name": "Fabian Roth"
+                  "name": "Nhat Nguyen"
                 }
               ]
             },
             {
               "players": [
                 {
-                  "name": "Marc Zwiebler"
+                  "name": "Fabian Roth"
                 }
               ]
             }
@@ -196,7 +196,7 @@
             {
               "players": [
                 {
-                  "name": "Michael Fuchs"
+                  "name": "Marvin Seidel"
                 },
                 {
                   "name": "Isabel Herttrich"
@@ -254,6 +254,10 @@
     "matchday": "Finale",
     "notes": "Diverse Karten und Aufgabe im 2.HD",
     "backup_players": [[{
+      "name": "Kai Waldenberger",
+      "gender": "m",
+      "ranking": 7, "ranking_d": 10
+    }, {
       "name": "Dennis Nyenhuis",
       "gender": "m",
       "ranking": 9,
@@ -261,71 +265,73 @@
     }, {
       "name": "Elin Svensson",
       "gender": "f",
-      "ranking": 5
+      "ranking": 3
     }], [{
-      "name": "Marvin Seidel",
-      "gender": "m",
-      "ranking": 7,
-      "ranking_d": 4
-    }, {
       "name": "Simon Wang",
       "gender": "m",
       "ranking": 5,
-      "ranking_d": 7
-    }]],
-    "present_players": [[{
-      "name": "Mark Byerly",
-      "gender": "m",
-      "ranking": 8
+      "ranking_d": 9
     }, {
-      "name": "Ya Lan Chang",
-      "gender": "f",
-      "ranking": 3
-    }], [{
-      "name": "Matthias Deininger",
-      "gender": "m",
-      "ranking": 9
-    }, {
-      "name": "Nadia Frankhauser",
+      "name": "Nadia Fankhauser",
       "gender": "f",
       "ranking": 5
     }]],
+    "present_players": [[{
+      "name": "Jan-Colin Völker",
+      "gender": "m",
+      "ranking": 8
+    }, {
+      "name": "Annika Dörr",
+      "gender": "f",
+      "ranking": 4
+    }], [{
+      "name": "Matthias Deininger",
+      "gender": "m",
+      "ranking": 7
+    }, {
+      "gender": "m",
+      "name": "Michael Fuchs",
+      "ranking": 11,
+      "ranking_d": 4
+    }]],
     "all_players": [
       [
-        {"gender": "m", "name": "Fabian Roth", "ranking": 1, "ranking_d": 6},
-        {"gender": "m", "name": "Giap Chin Goh", "ranking": 2, "ranking_d": 9, "nationality": "MAS"},
-        {"gender": "m", "name": "Sam Magee", "ranking": 3, "ranking_d": 1, "nationality": "IRL"},
-        {"gender": "m", "name": "Fabian Holzer", "ranking": 4, "ranking_d": 2},
-        {"gender": "m", "name": "Lars Schänzler", "ranking": 5, "ranking_d": 10},
-        {"gender": "m", "name": "Richard Domke", "ranking": 6, "ranking_d": 4},
-        {"gender": "m", "name": "Joshua Magee", "ranking": 7, "ranking_d": 3, "nationality": "IRL"},
-        {"gender": "m", "name": "Mark Byerly", "ranking": 8},
+        {"gender": "m", "name": "Lars Schänzler", "ranking": 1, "ranking_d": 9, "regular": true},
+        {"gender": "m", "name": "Nhat Nguyen", "ranking": 2, "ranking_d": 6, "nationality": "IRL", "regular": true},
+        {"gender": "m", "name": "Joshua Magee", "ranking": 3, "nationality": "IRL"},
+        {"gender": "m", "name": "Richard Domke", "ranking": 4, "ranking_d": 5},
+        {"gender": "m", "name": "Sam Magee", "ranking": 5, "ranking_d": 2, "nationality": "IRL", "regular": true},
+        {"gender": "m", "name": "Raphael Beck", "ranking": 6, "ranking_d": 1, "regular": true},
+        {"gender": "m", "name": "Kai Waldenberger", "ranking": 7, "ranking_d": 10},
+        {"gender": "m", "name": "Jan-Colin Völker", "ranking": 8},
         {"gender": "m", "name": "Dennis Nyenhuis", "ranking": 9, "ranking_d": 7},
-        {"gender": "m", "name": "Max Schwenger", "ranking": 10, "ranking_d": 5},
-        {"gender": "m", "name": "Kai Waldenberger", "ranking": 11},
-        {"gender": "f", "name": "Chloe Magee", "ranking": 1, "nationality": "IRL"},
-        {"gender": "f", "name": "Carla Nelte", "ranking": 2},
-        {"gender": "f", "name": "Ya Lan Chang", "ranking": 3, "nationality": "TPE"},
-        {"gender": "f", "name": "Jennifer Karnott", "ranking": 3},
-        {"gender": "f", "name": "Elin Svensson", "ranking": 5, "nationality": "SWE"},
-        {"gender": "f", "name": "Runa Plützer", "ranking": 6}
+        {"gender": "m", "name": "Max Schwenger", "ranking": 10, "ranking_d": 4},
+        {"gender": "f", "name": "Chloe Magee", "ranking": 1, "nationality": "IRL", "regular": true},
+        {"gender": "f", "name": "Carla Nelte", "ranking": 2, "regular": true},
+        {"gender": "f", "name": "Elin Svensson", "ranking": 3, "nationality": "SWE"},
+        {"gender": "f", "name": "Annika Dörr", "ranking": 4},
+        {"gender": "f", "name": "Jennifer Karnott", "ranking": 7},
+        {"gender": "f", "name": "Paula Kick", "ranking": 6},
+        {"gender": "f", "name": "Runa Plützer", "ranking": 5}
       ],
       [
-        {"gender": "m", "name": "Marc Zwiebler", "ranking": 1, "ranking_d": 5},
-        {"gender": "m", "name": "Dieter Domke", "ranking": 2, "ranking_d": 6},
-        {"gender": "m", "name": "Michael Fuchs", "ranking": 3, "ranking_d": 1},
-        {"gender": "m", "name": "Peter Käsbauer", "ranking": 4, "ranking_d": 2},
-        {"gender": "m", "name": "Simon Wang", "ranking": 5, "ranking_d": 7},
-        {"gender": "m", "name": "Marvin Seidel", "ranking": 7, "ranking_d": 4},
-        {"gender": "m", "name": "Johannes Schöttler", "ranking": 8, "ranking_d": 3},
-        {"gender": "m", "name": "Matthias Deininger", "ranking": 9},
-        {"gender": "m", "name": "Marcel Reuter", "ranking": 10},
-        {"gender": "f", "name": "Olga Konon", "ranking": 1},
-        {"gender": "f", "name": "Samantha Barning", "ranking": 2},
-        {"gender": "f", "name": "Isabel Herttrich", "ranking": 3},
-        {"gender": "f", "name": "Cisita Joitiy Jansen", "ranking": 4},
-        {"gender": "f", "name": "Nadia Frankhauser", "ranking": 5, "nationality": "SUI"},
-        {"gender": "f", "name": "Lisa Heidenreich", "ranking": 6}
+        {"gender": "m", "name": "Fabian Roth", "ranking": 1, "ranking_d": 6, "regular": true},
+        {"gender": "m", "name": "Luka Wraber", "ranking": 2, "ranking_d": 8, "nationality": "AUT", "regular": true},
+        {"gender": "m", "name": "Dieter Domke", "ranking": 3, "ranking_d": 7},
+        {"gender": "m", "name": "Peter Käsbauer", "ranking": 4, "ranking_d": 2, "regular": true},
+        {"gender": "m", "name": "Simon Wang", "ranking": 5, "ranking_d": 9},
+        {"gender": "m", "name": "Marvin Seidel", "ranking": 6, "ranking_d": 1, "regular": true},
+        {"gender": "m", "name": "Matthias Deininger", "ranking": 7},
+        {"gender": "m", "name": "Marcel Reuter", "ranking": 8},
+        {"gender": "m", "name": "Ruben Jille", "ranking": 9, "ranking_d": 3, "nationality": "NED"},
+        {"gender": "m", "name": "Alen Roj", "ranking": 10, "ranking_d": 12, "nationality": "SLO"},
+        {"gender": "m", "name": "Michael Fuchs", "ranking": 11, "ranking_d": 4},
+        {"gender": "m", "name": "Johannes Schöttler", "ranking": 12, "ranking_d": 5},
+        {"gender": "f", "name": "Natalia Perminova", "ranking": 1, "nationality": "RUS", "regular": true},
+        {"gender": "f", "name": "Isabel Herttrich", "ranking": 2, "regular": true},
+        {"gender": "f", "name": "Olga Konon", "ranking": 3},
+        {"gender": "f", "name": "Cisita Joitiy Jansen", "ranking": 4, "nationality": "INA"},
+        {"gender": "f", "name": "Nadia Fankhauser", "ranking": 5, "nationality": "SUI"}
       ]
     ],
     "league_key": "1BL-2017",
