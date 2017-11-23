@@ -1,8 +1,5 @@
-update bldemo
-update bldemo_*
 setupsheet form: mark Stammspieler
 
-tde_import: strip [N] and [M]
 
 URL options for display don't get deleted anymore!
 
@@ -53,6 +50,7 @@ d teamscore [see pic]
 d shortsets [see pic]
 
 tde_import: use curl if possible (use same API as tde_export!)
+tde_import: aufgegeben (https://www.turnier.de/sport/teammatch.aspx?id=107D0FC0-C153-4EAF-A39D-EBAECB424B16&match=230)
 
 test back and F5 everywhere in referee mode
 

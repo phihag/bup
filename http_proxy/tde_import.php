@@ -56,6 +56,13 @@ function parse_match_players($players_html) {
 	];
 }
 
+function _unify_team_name($team_name) {
+	if (preg_match('/^(.*?)\s*\[[MN]\]$/', $team_name, $m)) {
+		$team_name = $m[1];
+	}
+	return $team_name;
+}
+
 function _parse_score($score_html) {
 	if (!\preg_match('/^\s*<span\s+class="score">(.*?)<\/span>\s*$/', $score_html, $m)) {
 		return null;
@@ -343,17 +350,17 @@ function parse_teammatch($httpc, $tm_html, $domain, $match_id) {
 			/xs', $tm_html, $teamnames_m)) {
 
 		$res['team_names'] = [
-			decode_html($teamnames_m['team0']),
-			decode_html($teamnames_m['team1'])
+			_unify_team_name(decode_html($teamnames_m['team0'])),
+			_unify_team_name(decode_html($teamnames_m['team1']))
 		];
 		$team_infos = [[
 			'season' => $teamnames_m['season0'],
 			'id' => $teamnames_m['id0'],
-			'name' => decode_html($teamnames_m['team0']),
+			'name' => $res['team_names'][0],
 		], [
 			'season' => $teamnames_m['season1'],
 			'id' => $teamnames_m['id1'],
-			'name' => decode_html($teamnames_m['team1']),
+			'name' => $res['team_names'][1],
 		]];
 	} else {
 		throw new \Exception('Cannot find team names!');
