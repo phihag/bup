@@ -435,6 +435,7 @@ function ui_render_init(s) {
 }
 
 function rerender(s) {
+	var is_buli = eventutils.is_bundesliga(s.event.league_key);
 	listed.forEach(function(team, team_id) {
 		var table = uiu.qs('#setupsheet_table_team' + team_id);
 		uiu.empty(table);
@@ -473,7 +474,7 @@ function rerender(s) {
 				click.on(btn, on_delete_click);
 				uiu.el(btn, 'span');
 				cfg[gender].forEach(function(col) {
-					if (col === 'dark') {
+					if ((col === 'dark') || (is_buli && (col === 'backup') && p.regular)) {
 						uiu.el(tr, 'td', 'setupsheet_dark');
 					} else {
 						var plays_in = cur_plays_in(col, team_id, p);
