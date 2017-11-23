@@ -1,6 +1,8 @@
-setupsheet form: mark Stammspieler
 update bldemo
 update bldemo_*
+setupsheet form: mark Stammspieler
+
+tde_import: strip [N] and [M]
 
 URL options for display don't get deleted anymore!
 
