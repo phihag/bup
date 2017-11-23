@@ -213,15 +213,16 @@ players* Array of players (1 element in singles, 2 in doubles/mixed).
 player
 ======
 
-firstname    Given name. If present lastname must be present as well.
-lastname     Surname. If present firstname must be set as well.
-name*        Full name of the player
+firstname    Given name ("Viktor"). If present lastname must be present as well.
+lastname     Surname ("Axelsen"). If present firstname must be set as well.
+name*        Full name of the player ("Viktor Axelsen")
 gender       "m" or "f". If missing this is guessed by eventutils.guess_gender.
 nationality  Three-digit country code according to ISO 3166-1 alpha-3, like "DEU" (Germany) or "FRA" (France)
 ranking      An integer denoting the ranking number in singles (and default in doubles).
 ranking_d    An integer denoting the ranking number in doubles, if differing from the one in singles.
 ranking_team The ID of the team the player is ranked in.
 textid       Human-readable ID of this player (e.g. "01-062459" or "50858")
+regular      Boolean, whether this player is considered a regular player according to federation regulations.
 
 
 * required key

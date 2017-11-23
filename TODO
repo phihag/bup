@@ -1,6 +1,9 @@
-scoresheet PDF on iOS Chrome -> badmintoncentral
+setupsheet form: mark Stammspieler
+update bldemo
+update bldemo_*
 
-htaccess to fake last_modified dates in js/ and css/
+URL options for display don't get deleted anymore!
+
 d 2courts without pause timers
 	-> Benedikt
 
@@ -29,6 +32,10 @@ save inputted umpire names (for CourtSpot)
 	-> Benedikt
 
 eventsheet: sign!
+	store signatures in CourtSpot
+	store signatures with referee mode
+	-> mail Arno Schley
+	-> send via mail
 
 urlexport could not load login page
 	return $http_response_header
@@ -42,6 +49,8 @@ test cs order in detail
 
 d teamscore [see pic]
 d shortsets [see pic]
+
+tde_import: use curl if possible (use same API as tde_export!)
 
 test back and F5 everywhere in referee mode
 
@@ -81,6 +90,7 @@ referee mode: timeout earlier
 
 selectevent module
 	debmlist: collect coordinates
+	debmlist: collect from VRL instead of something else. Also collekt Stammspieler
 	download 5 most likely (and leagues + matches therein)
 	start via league
 	start via URL input
