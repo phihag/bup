@@ -140,7 +140,7 @@ function calc_listed(event) {
 				m: [],
 				f: [],
 			};
-			if (aps.length < 20) {
+			if (aps.length < 22) {
 				aps.forEach(_add);
 				team_res.m.sort(_cmp_players);
 				team_res.f.sort(_cmp_players);
