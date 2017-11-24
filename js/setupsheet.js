@@ -576,6 +576,7 @@ function fill_text(container, fill_id, text) {
 }
 
 function fill_svg(s, svg_root, sheet_name, team_id)  {
+	var is_buli = eventutils.is_bundesliga(s.event.league_key);
 	fill_text(svg_root, 'tournament_name', s.event.tournament_name);
 	fill_text(svg_root, 'event_name', s.event.event_name);
 	fill_text(svg_root, 'setup_desc', s._('setupsheet:setup|' + team_id));
@@ -604,6 +605,11 @@ function fill_svg(s, svg_root, sheet_name, team_id)  {
 						return;
 					}
 
+					if (is_buli && (col === 'backup') && listed_player.regular) {
+						var darkbackup_rect = uiu.qs('rect[data-fill-id="darkbackup"]', g);
+						darkbackup_rect.removeAttribute('visibility');
+					}
+
 					if (cur_plays_in(col, team_id, listed_player)) {
 						fill_text(g, 'x_' + col_id, 'x');
 					}
@@ -627,9 +633,12 @@ function fill_svg(s, svg_root, sheet_name, team_id)  {
 			var y2 = parseFloat(vline.getAttribute('y2'));
 			vline.setAttribute('y2', y2 + height * (num_lines - 1));
 		}, vlines);
-		uiu.qsEach('rect', function(vline) {
-			var h = parseFloat(vline.getAttribute('height'));
-			vline.setAttribute('height', h + height * (num_lines - 1));
+		uiu.qsEach('rect', function(rect) {
+			if (rect.getAttribute('data-fill-id') === 'darkbackup') {
+				return;
+			}
+			var h = parseFloat(rect.getAttribute('height'));
+			rect.setAttribute('height', h + height * (num_lines - 1));
 		}, vlines);
 
 		var fixed = uiu.qs('g[data-fill-id="fixed_' + gender + '"]', svg_root);
