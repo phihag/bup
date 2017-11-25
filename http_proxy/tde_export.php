@@ -73,19 +73,29 @@ function parse_team($html, $team_num) {
 	});
 
 	$players = array_map(function($pd) {
-		if (!preg_match('/^([0-9]+)-([0-9]+)(?:-(D[0-9]+))? ([^,]+), ([^(]+?) \([^)]+\)$/', $pd['Name'], $m)) {
+		if (!preg_match('/^
+				(?:
+					(?P<ranking_team>[0-9]+)-(?P<ranking>[0-9]+)
+					(?:-D(?P<ranking_d>[0-9]+))?
+				)?\s*
+				(?P<lastname>[^,0-9]+),\s+(?P<firstname>[^(0-9]+?)\s+
+				\([^)]+\)$/x', $pd['Name'], $m)) {
 			json_err('Cannot parse player spec ' . json_encode($pd['Name']));
 		}
 
 		$res = [
-			'ranking_team' => $m[1],
-			'ranking' => $m[2],
 			'tde_id' => $pd['ID'],
 			'gender' => (($pd['GenderID'] === 1) ? 'm' : 'f'),
-			'name' => $m[5] . ' ' . $m[4],
+			'name' => $m['firstname'] . ' ' . $m['lastname'],
 		];
-		if ($m[3]) {
-			$res['ranking_d'] = $m[3];
+		if (isset($m['ranking_team']) && $m['ranking_team']) {
+			$res['ranking_team'] = $m['ranking_team'];
+		}
+		if (isset($m['ranking_d']) && $m['ranking_d']) {
+			$res['ranking_d'] = \intval($m['ranking_d']);
+		}
+		if (isset($m['ranking']) && $m['ranking']) {
+			$res['ranking'] = \intval($m['ranking']);
 		}
 		return $res;
 	}, $players_data);
