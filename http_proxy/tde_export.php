@@ -24,7 +24,7 @@ function login($httpc, $url_base, $user, $password) {
 	$login_url = $url_base . 'member/login.aspx';
 	$login_page = $httpc->request($login_url);
 	if ($login_page === false) {
-		return json_err('Failed to download login form');
+		json_err('Failed to download login form');
 	}
 	$LOGIN_RE = '/<form method="post" action="[^"]*login\.aspx"[^>]*>(.*?)<\/form>/s';
 	if (!preg_match($LOGIN_RE, $login_page, $matches)) {
@@ -157,20 +157,20 @@ if (($action === 'prepare') || ($action === 'submit')) {
 	}
 
 	if (!preg_match('/"ALCID":([0-9]+)/', $input_page, $m)) {
-		json_err('Cannot find ALCID');
+		json_err('Cannot find ALCID', $input_page);
 	}
 	$alcid = $m[1];
 
 	// Check team names
 	if (!preg_match('/Eingabe Ergebnis für:\s+<a[^>]+>(.*?)\s*<span class="nobreak">[^<]*<\/span><\/a> - <a[^>]+>(.*?)\s*<span class="nobreak">/', $input_page, $m)) {
-		json_err('Cannot find team names');
+		json_err('Cannot find team names', $input_page);
 	}
 	$real_team_names = [
 		_unify_team_name($m[1]),
 		_unify_team_name($m[2])
 	];
 	if (($team_names[0] !== $real_team_names[0]) || ($team_names[1] !== $real_team_names[1])) {
-		json_err('Incorrect team names: This match URL points to ' . $real_team_names[0] . ' - ' . $real_team_names[1] . ', but expected ' . $team_names[0] . ' - ' . $team_names[1]);
+		json_err('Incorrect team names: This match URL points to ' . $real_team_names[0] . ' - ' . $real_team_names[1] . ', but expected ' . $team_names[0] . ' - ' . $team_names[1], $input_page);
 	}
 
 	$real_players = [
@@ -178,7 +178,7 @@ if (($action === 'prepare') || ($action === 'submit')) {
 		parse_team($input_page, '2')
 	];
 	if (! preg_match_all('/<th class="valign_middle">([A-Z0-9]+)<\/th><td[^>]*><select id="match_([0-9]+)_t1p1"/', $input_page, $ms, \PREG_SET_ORDER)) {
-		json_err('Canot find matches');
+		json_err('Canot find matches', $input_page);
 	}
 	$real_matches = array_map(function($m) {
 		return [
@@ -200,7 +200,7 @@ if (($action === 'prepare') || ($action === 'submit')) {
 			return $rm['name'] === $match['name'];
 		});
 		if (!$rm) {
-			json_err('Could not find match ' . $match['name'] . ' online');
+			json_err('Could not find match ' . $match['name'] . ' online', $input_page);
 		}
 		$match['tde_id'] = $rm['tde_id'];
 
@@ -213,7 +213,7 @@ if (($action === 'prepare') || ($action === 'submit')) {
 					$avp = implode(', ', array_map(function($rp) {
 						return $rp['name'];
 					}, $real_players[$team_id]));
-					json_err('Cannot find player ' . $player['name'] . ' in team ' . $team_id . ' . All known players are ' . $avp);
+					json_err('Cannot find player ' . $player['name'] . ' in team ' . $team_id . ' . All known players are ' . $avp, $input_page);
 				}
 				$player['tde_id'] = $rp['tde_id'];
 			}
@@ -230,8 +230,8 @@ if (($action === 'prepare') || ($action === 'submit')) {
 	}
 
 	// Collect extra_fields
-	if (! preg_match_all('/<th\s+class="right"\s+colspan="6">([^<]+)<\/th><td\s+colspan="7"><input\s+id="matchfield_([0-9]+)" type="text" class="textfield matchfield"/', $input_page, $ms, \PREG_SET_ORDER)) {
-		json_err('could not find extra fields');
+	if (! preg_match_all('/<th\s+class="right"\s+colspan="[0-9]+">([^<]+)<\/th><td\s+colspan="[0-9]+"><input\s+id="matchfield_([0-9]+)" type="text" class="textfield matchfield"/', $input_page, $ms, \PREG_SET_ORDER)) {
+		json_err('could not find extra fields', $input_page);
 	}
 	$extra_fields = array_map(function($m) {
 		return [

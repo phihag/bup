@@ -191,6 +191,8 @@ function init(s, page) {
 				var resp = utils.parse_json(content);
 				if (resp && (resp.status === 'error')) {
 					uiu.text(status_text, resp.message);
+					resp.request_url = options.url;
+					report_problem.silent_error('urlexport failed', resp);
 					return;
 				}
 			}

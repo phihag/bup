@@ -1,4 +1,3 @@
-tde_export: error reports when turnier.de transmission fails
 URL options for display don't get deleted anymore!
 filename PDF-Spielbericht / Excel-Spielbericht
 pdf-spielbericht: generate date from last_update

@@ -19,7 +19,7 @@ function json_error_handler($level, $errstr, $errfile, $errline) {
 	}
 }
 
-function json_err($description) {
+function json_err($description, $haystack=false) {
 	header('HTTP/1.1 500 Internal Server Error');
 	header('Content-Type: application/json');
 	header('Cache-Control: no-cache, no-store, must-revalidate');
@@ -29,6 +29,9 @@ function json_err($description) {
 		'status' => 'error',
 		'message' => $description,
 	];
+	if ($haystack) {
+		$send['haystack'] = $haystack;
+	}
 	die(\json_encode($send));
 }
 

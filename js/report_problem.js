@@ -112,7 +112,7 @@ function on_error(msg, script_url, line, col, err) {
 	report(get_info());
 }
 
-function silent_error(msg) {
+function silent_error(msg, extra_data) {
 	console.error(msg); // eslint-disable-line no-console
 	/*@DEV*/
 	if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
@@ -124,6 +124,9 @@ function silent_error(msg) {
 		msg: msg,
 		type: 'silent-error',
 	};
+	if (extra_data) {
+		last_error.extra_data = extra_data;
+	}
 	update();
 	report(get_info());
 }
