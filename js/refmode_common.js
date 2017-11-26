@@ -7,7 +7,9 @@ function craft_event(s, match_storage_module) {
 	var res = utils.pluck(ev, [
 		'id', 'event_name', 'tournament_name',
 		'courts',
-		'location', 'protest', 'matchday', 'starttime', 'notes', 'spectators', 'umpires',
+		'matchday', 'starttime', 'date',
+		'location',
+		'protest', 'notes', 'spectators', 'umpires',
 		'team_competition', 'team_names', 'league_key',
 		'all_players', 'backup_players', 'present_players', 'listed_players',
 		'report_urls',
