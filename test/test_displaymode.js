@@ -89,10 +89,10 @@ _describe('displaymode', function() {
 				d_team_colors: true,
 			},
 		};
-		var colors = bup.displaymode.calc_colors(state.settings);
-		bup.i18n.update_state(state, 'de');
-
 		var event = {};
+
+		var colors = bup.displaymode.calc_colors(state.settings, event);
+		bup.i18n.update_state(state, 'de');
 
 		var container = _make_container();
 		bup.displaymode.render_castall(state, container, event, colors);

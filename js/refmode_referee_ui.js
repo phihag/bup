@@ -84,19 +84,6 @@ function on_dmode_show_pause_change(e) {
 	});
 }
 
-function on_tc_button_click(e) {
-	var client_id = _client_id(e);
-	var c = rr.client_by_conn_id(client_id);
-	if (!c) return;
-
-	var tc = displaymode.calc_team_colors(c.event, c.settings);
-	rr.update_settings(client_id, {
-		d_c0: tc[0],
-		d_c1: tc[1],
-	});
-}
-
-
 function on_push_start_button_click(e) {
 	var client_id = _client_id(e);
 	var c = rr.client_by_conn_id(client_id);
