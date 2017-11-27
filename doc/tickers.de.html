@@ -61,12 +61,26 @@ a:hover {
 .procontra td:not(:first-child) {
 	text-align: left;
 }
+tbody .listy td {
+	text-align: left;
+}
+tbody .listy th,
+tbody .listy td {
+	vertical-align: top;
+}
+tbody .listy ul {
+	padding: 0;
+	list-style: none;
+}
+
+ul {
+	margin: 0;
+}
 ul.pro,
 ul.contra {
-	margin: 0;
+	padding: 0;
 	list-style: none;
 	list-style-position: inside;
-	padding: 0;
 }
 ul.pro li:before,
 ul.contra li:before{
@@ -96,12 +110,12 @@ ul.contra li:before{
 <tbody>
 
 <tr><th>Ticker-Übersicht</th><td><span class="red">✘</span> (aber auf <a href="https://b.aufschlagwechsel.de/">b.aufschlagwechsel.de</a> eingebunden)</td><td><a href="https://courtspot.de/live/">courtspot.de/live</a></td><td><a href="https://shuttlecock-live.com/">shuttlecock-live.com</a></td></tr>
-<!--<tr><th>Unterstützte Ligen</th><td>Bundesligen, Regionalliga West, Regionalliga SüdOstOst, BundesLiga Österreich</td></tr>-->
 <tr><th>Dokumentation</th><td><a href="https://hilfe.badmintonticker.de/">online</a></td><td><a href="https://courtspot.de/Downloads/CourtSpot-Installation%20und%20-Einsatz.pdf">als PDF</a></td><td><span class="red">✘</span></td></tr>
 <tr><th>Kosten 2017/2018</th><td>29€ / 79€ / 149€</td><td>0€</td><td>kostenlos</td></tr>
 <!--<tr><th>Quellcode verfügbar</th><td><span class="red">✘</span></td><td>teilweise</td><td><a href="https://github.com/meyerjo/ticker/"><span class="green">✔</span></a></td></tr>-->
 <tr><th>Installation</th><td><ul class="pro"><li>nicht erforderlich</li></ul></td><td><ul class="contra"><li>komplex</li></ul></td><td>benötigt Konfiguration</td></tr>
 <tr><th>Hallen-Anzeigen bei Internetausfall</th><td><ul class="contra"><li>fallen aus</li></ul></td><td><ul class="pro"><li>nicht betroffen</li></ul></td><td><ul class="contra"><li>fallen aus</li></ul></td></tr>
+<tr class="listy"><th>Unterstützte Ligen</th><td><ul><li>1. &amp; 2. Bundesliga</li><li>Regionalliga West</li><li>Regionalliga SüdOst Ost</li><li>Alle Ligen in NRW</li><li>BundesLiga Österreich</li><li>NLA (Schweiz)</li></ul></td><td><ul><li>1. &amp; 2. Bundesliga</li><li>Regionalliga West</li><li>Regionalliga Nord</li><li>Manuell erstellte Wettkämpfe</li></ul></td><td><ul><li>1. &amp; 2. Bundesliga</li></ul></td></tr>
 
 
 <tr><th colspan="4" style="border-top: 4px solid #aaa;background:#eee;text-align: center;">mit bup verfügbare Features</th></tr>
