@@ -74,6 +74,8 @@ abstract class AbstractHTTPClient {
 	* Returns the response body, or false if the request failed.
 	*/
 	abstract public function request($url, $headers=null, $method='GET', $body=null);
+
+	abstract public function get_error_info();
 }
 
 abstract class JarHTTPClient extends AbstractHTTPClient {
@@ -118,7 +120,7 @@ class PhpHTTPClient extends JarHTTPClient {
 				'follow_location' => 0,
 				'user_agent' => BUP_USER_AGENT,
 			],
-		];
+			];
 		if ($body) {
 			$options['http']['content'] = $body;
 		}
@@ -132,6 +134,10 @@ class PhpHTTPClient extends JarHTTPClient {
 		$page = stream_get_contents($f);
 		fclose($f);
 		return $page;
+	}
+
+	public function get_error_info() {
+		return json_encode($http_response_header);
 	}
 }
 
@@ -162,6 +168,10 @@ class CurlHTTPClient extends JarHTTPClient {
 			curl_setopt($this->ch, CURLOPT_POSTFIELDS, $body);
 		}
 		return curl_exec($this->ch);
+	}
+
+	public function get_error_info() {
+		return curl_error($this->ch);
 	}
 
 	public static function is_supported() {

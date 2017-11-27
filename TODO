@@ -1,18 +1,3 @@
-scoresheets missing buli logo in dist!
-
-urlexport could not load login page
-	return $http_response_header
-	check file_get_contents (and curl) disabled by security
-	check no DNS
-	check server unavailable (RST or silent)
-	-> Henry
-
-Firefox event_scoresheets
-	-> Henry
-
-Windows Firefox PDF Bundesliga-Logo
-	-> Henry
-
 includes@displaymode -> Hövelhof
 
 make use_team_colors a checkbox (always use)

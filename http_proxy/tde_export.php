@@ -24,7 +24,7 @@ function login($httpc, $url_base, $user, $password) {
 	$login_url = $url_base . 'member/login.aspx';
 	$login_page = $httpc->request($login_url);
 	if ($login_page === false) {
-		json_err('Failed to download login form');
+		json_err('Failed to download login form: ' . $httpc->get_error_info());
 	}
 	$LOGIN_RE = '/<form method="post" action="[^"]*login\.aspx"[^>]*>(.*?)<\/form>/s';
 	if (!preg_match($LOGIN_RE, $login_page, $matches)) {
