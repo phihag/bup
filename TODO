@@ -2,6 +2,8 @@ save inputted umpire names (for CourtSpot)
 	-> Ulf
 	-> Benedikt
 
+button to hide displaymode settings at small resolutions
+
 generate receipts
 	include club logo with <image x="10" y="20" width="80" height="80" xlink:href="club/logo.svg" />
 	configure costs in eventutils
