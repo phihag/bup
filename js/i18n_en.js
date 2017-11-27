@@ -490,7 +490,6 @@ var i18n_en = {
 'displaymode|oncourt': 'court score',
 'displaymode|international': 'international',
 'displaymode|teamcourt': 'team display',
-'displaymode|teamcourt_pause': 'team with interval timer',
 'displaymode|2court': '2 courts',
 'displaymode|castall': 'greenscreen (all courts)',
 'displaymode|andre': 'André',
@@ -509,6 +508,7 @@ var i18n_en = {
 'displaymode:scale': 'Scale:',
 'displaymode:colors': 'Colors:',
 'displaymode:use team colors': 'use team colors',
+'displaymode:show_pause': 'Show interval timer',
 
 'liveaw:lost connection': 'Reconnecting ...',
 

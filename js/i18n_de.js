@@ -490,7 +490,6 @@ var i18n_de = {
 'displaymode|oncourt': 'Feld-Punktzahl',
 'displaymode|international': 'International',
 'displaymode|teamcourt': 'Mannschaftskampf',
-'displaymode|teamcourt_pause': 'Mannschaft mit Pausenzeit',
 'displaymode|2court': '2 Felder',
 'displaymode|andre': 'André',
 'displaymode|tim': 'Tim',
@@ -509,6 +508,7 @@ var i18n_de = {
 'displaymode:scale': 'Größen-Skalierung:',
 'displaymode:colors': 'Farben:',
 'displaymode:use team colors': 'Verwende Team-Farben',
+'displaymode:show_pause': 'Zeige verbleibende Pausenzeit',
 
 'liveaw:lost connection': 'Verbindung wird wiederhergestellt ...',
 

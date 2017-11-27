@@ -29,6 +29,7 @@ var default_settings = {
 	d_cserv2: '#dba766',
 	d_crecv: '#707676',
 	d_scale: 100,
+	d_show_pause: false,
 	settings_autohide: 30000,
 	dads_interval: 20000,
 	dads_wait: 60000,
@@ -196,6 +197,7 @@ var _settings_checkboxes = [
 	'editmode_doubleclick',
 	'refmode_client_enabled',
 	'displaymode_reverse_order',
+	'd_show_pause',
 	'referee_service_judges',
 ];
 var _settings_textfields = [
@@ -259,23 +261,23 @@ function update_court_settings(s) {
 
 function update(s) {
 	_settings_checkboxes.forEach(function(name) {
-		var box = $('.settings [name="' + name + '"]');
-		box.prop('checked', s.settings[name]);
+		var $box = $('.settings [name="' + name + '"]');
+		$box.prop('checked', s.settings[name]);
 	});
 
 	_settings_textfields.forEach(function(name) {
-		var input = $('.settings [name="' + name + '"]');
-		input.val(s.settings[name] ? s.settings[name] : '');
+		var $input = $('.settings [name="' + name + '"]');
+		$input.val(s.settings[name] ? s.settings[name] : '');
 	});
 
 	_settings_numberfields.forEach(function(name) {
-		var input = $('.settings [name="' + name + '"]');
-		input.val(s.settings[name] ? s.settings[name] : '');
+		var $input = $('.settings [name="' + name + '"]');
+		$input.val(s.settings[name] ? s.settings[name] : '');
 	});
 
 	_settings_selects.forEach(function(name) {
-		var select = $('.settings [name="' + name + '"]');
-		select.val(s.settings[name]);
+		var $select = $('.settings [name="' + name + '"]');
+		$select.val(s.settings[name]);
 	});
 
 	update_court(s);
@@ -396,9 +398,9 @@ function ui_init(s) {
 	});
 
 	_settings_checkboxes.forEach(function(name) {
-		var box = $('.settings [name="' + name + '"]');
-		box.on('change', function() {
-			change_setting(s, name, box.prop('checked'));
+		var box = uiu.qs('.settings [name="' + name + '"]');
+		box.addEventListener('change', function() {
+			change_setting(s, name, box.checked);
 		});
 	});
 

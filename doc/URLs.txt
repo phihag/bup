@@ -27,7 +27,7 @@ Initial UI
 
 These can be combined with any other options (but not each other), as in #bldemo&display .
 
-settings       Show settings UI (currently by default)
+settings       Show settings UI (currently the default)
 display        Start in display mode
 referee_mode   Start in referee mode
 eventsheet=foo Show the dialog for generating the eventsheet named foo
@@ -47,10 +47,9 @@ lang=LANGCODE       Set language to the specified one.
 court=COURTCODE     Run on the specified court. COURTCODE depends on the network. Normally, a number like 1, 2, or the string "referee".
 dm_style=STYLECODE  In display mode, start with the specified style.
 	Available styles:
-	teamcourt       Best for team matches
-	teamcourt_pause teamcourt with interval timer (best for screens intended for players)
+	teamcourt       Best for team matches. Supports interval timer.
 	international   Best for individual tournaments
-	2court          2 courts (with interval timer)
+	2court          Large scores for 2 courts. Supports interval timer.
 	andre           Simple 1-court display, shows game count to the left
 	castall         Greenscreen (all courts)
 	greyish         Overview for team competitions with muted gray colors
@@ -63,3 +62,6 @@ dm_style=STYLECODE  In display mode, start with the specified style.
 	tim             Colored overview of a team competition
 	top+list        Current matches on top, list of all matche sbelow
 	tournament_overview Shows all courts at once
+show_pause=BOOLEAN  Show or hide interval timers.
+                    BOOLEAN can be either "true" or "false".
+                    At the moment only supported for some styles, see above.

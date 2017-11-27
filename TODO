@@ -1,7 +1,6 @@
-URL options for display don't get deleted anymore!
-
 d 2courts without pause timers
 	-> Benedikt
+
 
 Firefox event_scoresheets
 	-> Henry
@@ -22,6 +21,8 @@ save inputted umpire names (for CourtSpot)
 	-> Ulf
 	-> Benedikt
 
+generate quittung
+
 eventsheet: sign!
 	store signatures in CourtSpot
 	store signatures with referee mode
@@ -40,10 +41,10 @@ test cs order in detail
 
 d teamscore [see pic]
 d shortsets [see pic]
+d a nice modern overview
 
 refmode make more efficient
 refmode remove flickers
-generate quittung
 
 tde_import: use curl if possible (use same API as tde_export!)
 tde_import: aufgegeben (https://www.turnier.de/sport/teammatch.aspx?id=107D0FC0-C153-4EAF-A39D-EBAECB424B16&match=230)

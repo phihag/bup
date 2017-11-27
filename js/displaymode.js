@@ -5,7 +5,6 @@ var ALL_STYLES = [
 	'oncourt',
 	'international',
 	'teamcourt',
-	'teamcourt_pause',
 	'stripes',
 	'2court',
 	'greyish',
@@ -158,6 +157,7 @@ function hash(settings, event) {
 		scale: settings.d_scale,
 		court_id: settings.displaymode_court_id,
 		reverse_order: settings.displaymode_reverse_order,
+		show_pause: settings.d_show_pause,
 		courts: utils.deep_copy(event.courts),
 		matches: utils.deep_copy(event.matches),
 	};
@@ -1249,13 +1249,11 @@ function render_teamcourt(s, container, event, court, match, colors) {
 			'color:' + colors.fg2
 		),
 	});
-	if (s.settings.displaymode_style === 'teamcourt_pause') {
-		var timer_state = _extract_timer_state(s, match);
-		if (timer_state) {
-			create_timer(timer_state, match_name_container, {
-				style: 'margin-right:1ch',
-			});
-		}
+	var timer_state = _extract_timer_state(s, match);
+	if (timer_state) {
+		create_timer(timer_state, match_name_container, {
+			style: 'margin-right:1ch',
+		});
 	}
 	uiu.el(match_name_container, 'div', {}, match.setup.match_name);
 
@@ -1768,8 +1766,12 @@ function calc_colors(cur_settings) {
 }
 
 function _extract_timer_state(s, match) {
-	if (!utils.includes(['2court', 'teamcourt_pause'], s.settings.displaymode_style)) {
+	if (!option_applies(s.settings.displaymode_style, 'show_pause')) {
 		return; // No timer required
+	}
+
+	if (!s.settings.d_show_pause) {
+		return; // Disabled now
 	}
 
 	var presses = eventutils.get_presses(match);
@@ -1944,10 +1946,11 @@ function update(err, s, event) {
 	}
 
 	var court_select = uiu.qs('[name="displaymode_court_id"]');
-	uiu.$visible_qs('.settings_display_court_id', option_applies(style, 'court_id'));
-	uiu.$visible_qs('.settings_display_reverse_order', option_applies(style, 'reverse_order'));
-	uiu.$visible_qs('.settings_d_scale', option_applies(style, 'scale'));
-	uiu.$visible_qs('.settings_d_team_colors',
+	uiu.visible_qs('.settings_display_court_id', option_applies(style, 'court_id'));
+	uiu.visible_qs('.settings_display_reverse_order', option_applies(style, 'reverse_order'));
+	uiu.visible_qs('.settings_d_show_pause', option_applies(style, 'show_pause'));
+	uiu.visible_qs('.settings_d_scale', option_applies(style, 'scale'));
+	uiu.visible_qs('.settings_d_team_colors',
 		option_applies(style, 'c0') &&
 		!utils.deep_equal(
 			calc_team_colors(event, s.settings),
@@ -1967,7 +1970,7 @@ function update(err, s, event) {
 	}
 
 	var used_colors = active_colors(style);
-	uiu.$visible_qs('.settings_d_colors', used_colors.length > 0);
+	uiu.visible_qs('.settings_d_colors', used_colors.length > 0);
 	var color_inputs = uiu.qs('.settings_d_colors_inputs');
 	var ui_colors_state_json = color_inputs.getAttribute('data-json');
 	var ui_colors_state = ui_colors_state_json ? JSON.parse(ui_colors_state_json) : '<no info>';
@@ -2008,7 +2011,6 @@ function update(err, s, event) {
 		onlyscore: render_onlyscore,
 		stripes: render_stripes,
 		teamcourt: render_teamcourt,
-		teamcourt_pause: render_teamcourt,
 	}[style];
 	if (xfunc) {
 		var court = _render_court(s, container, event);
@@ -2116,7 +2118,7 @@ function show() {
 	settings.show_displaymode();
 
 	control.set_current(state);
-	uiu.$show_qs('.displaymode_layout');
+	uiu.show_qs('.displaymode_layout');
 	dads.d_onconfchange();
 	uiu.addClass_qs('.settings_layout', 'settings_layout_displaymode');
 
@@ -2142,7 +2144,7 @@ function hide() {
 	var container = uiu.qs('.displaymode_layout');
 	autosize.unmaintain_all(container);
 	uiu.empty(container);
-	uiu.$hide(container);
+	uiu.hide(container);
 	dads.d_hide(uiu.qs('.d_ads'));
 	_last_painted_hash = null;
 
@@ -2173,6 +2175,11 @@ function ui_init(s, hash_query) {
 	if (hash_query.dm_style !== undefined) {
 		s.settings.displaymode_style = hash_query.dm_style;
 		settings.update(s);
+	}
+	if (hash_query.show_pause !== undefined) {
+		settings.change_all(s, {
+			d_show_pause: (hash_query.show_pause === 'true'),
+		});
 	}
 
 	var cur_style = s.settings.displaymode_style;
@@ -2233,7 +2240,7 @@ function active_colors(style_id) {
 
 function option_applies(style_id, option_name) {
 	var BY_STYLE = {
-		'2court': ['c0', 'c1', 'cfg', 'cbg', 'reverse_order'],
+		'2court': ['c0', 'c1', 'cfg', 'cbg', 'reverse_order', 'show_pause'],
 		'top+list': ['reverse_order'],
 		andre: ['court_id', 'cfg', 'cbg', 'cfg2'],
 		castall: ['c0', 'c1', 'cfg', 'cbg', 'cbg2', 'ct', 'cserv', 'crecv', 'reverse_order', 'scale'],
@@ -2244,8 +2251,7 @@ function option_applies(style_id, option_name) {
 		oncourt: ['court_id', 'cfg', 'cfg3', 'cbg', 'cserv2'],
 		onlyplayers: ['court_id', 'c0', 'c1', 'cbg'],
 		onlyscore: ['court_id', 'c0', 'c1', 'cbg'],
-		teamcourt: ['court_id', 'c0', 'c1', 'cfg', 'cfg2', 'cbg'],
-		teamcourt_pause: ['court_id', 'c0', 'c1', 'cfg', 'cfg2', 'cbg'],
+		teamcourt: ['court_id', 'c0', 'c1', 'cfg', 'cfg2', 'cbg', 'show_pause'],
 		tim: ['cbg', 'cfg', 'ctim_blue', 'ctim_active'],
 		tournament_overview: ['cfg', 'cbg', 'cbg3', 'cborder', 'cfg2'],
 		stripes: ['court_id', 'cbg', 'c0', 'c1', 'cfg', 'cfgdark', 'cbg4', 'cserv'],

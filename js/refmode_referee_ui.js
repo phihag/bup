@@ -68,6 +68,14 @@ function on_dmode_reverse_order_change(e) {
 	});
 }
 
+function on_dmode_show_pause_change(e) {
+	var client_id = _client_id(e);
+
+	rr.update_settings(client_id, {
+		d_show_pause: e.target.checked,
+	});
+}
+
 function on_tc_button_click(e) {
 	var client_id = _client_id(e);
 	var c = rr.client_by_conn_id(client_id);
@@ -514,10 +522,7 @@ function render_clients(clients) {
 				'type': 'submit',
 			}, s._('refmode:referee:change display style'));
 
-			var can_reverse = (
-				displaymode.option_applies(c.settings.displaymode_style, 'reverse_order')
-			);
-			if (can_reverse) {
+			if (displaymode.option_applies(cur_style, 'reverse_order')) {
 				var reverse_label = uiu.el(dstyle_row, 'label', 'referee_c_blocklabel');
 				var attrs = {
 					type: 'checkbox',
@@ -528,6 +533,19 @@ function render_clients(clients) {
 				var reverse_checkbox = uiu.el(reverse_label, 'input', attrs);
 				uiu.el(reverse_label, 'span', {}, s._('displaymode:reverse_order'));
 				reverse_checkbox.addEventListener('change', on_dmode_reverse_order_change);
+			}
+
+			if (displaymode.option_applies(cur_style, 'show_pause')) {
+				var show_pause_label = uiu.el(dstyle_row, 'label', 'referee_c_blocklabel');
+				var attrs = {
+					type: 'checkbox',
+				};
+				if (c.settings.d_show_pause) {
+					attrs.checked = 'checked';
+				}
+				var show_pause_checkbox = uiu.el(show_pause_label, 'input', attrs);
+				uiu.el(show_pause_label, 'span', {}, s._('displaymode:show_pause'));
+				show_pause_checkbox.addEventListener('change', on_dmode_show_pause_change);
 			}
 		}
 
