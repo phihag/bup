@@ -30,6 +30,7 @@ function minify_svg(in_fn, out_fn, cb) {
 		'-q',
 		'--disable', 'removeEmptyText',
 		'--disable', 'removeEmptyContainers',
+		'--disable', 'convertPathData',
 		'-i', in_fn,
 		'-o', out_fn,
 	];

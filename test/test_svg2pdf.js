@@ -182,6 +182,21 @@ _describe('svg2pdf', function() {
 		);
 	});
 
+/* // Not yet supported, worked around
+	_it('parse_cmd of svgo', function() {
+		assert.deepStrictEqual(
+			bup.svg2pdf.parse_cmd(
+				's-25.2-.002-25.2 0a.592.592 0 0 0 .664.624'
+			),
+			{
+				c: 's',
+				args: [-25.2, -.002, -25.2, 0],
+				rest: 'a.592.592 0 0 0 .664.624',
+			}
+		);
+	});
+*/
+
 	_it('parse_color', function() {
 		assert.deepStrictEqual(
 			bup.svg2pdf.parse_color('rgb(12, 233, 0)'),

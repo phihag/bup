@@ -1,6 +1,4 @@
-make use_team_colors a checkbox (always use)
-request parameters for colors
-	-> Paul Puschmann
+scoresheets missing buli logo in dist!
 
 urlexport could not load login page
 	return $http_response_header
@@ -17,6 +15,10 @@ Windows Firefox PDF Bundesliga-Logo
 
 includes@displaymode -> Hövelhof
 
+make use_team_colors a checkbox (always use)
+request parameters for colors
+	-> Paul Puschmann
+
 save inputted umpire names (for CourtSpot)
 	-> Ulf
 	-> Benedikt
@@ -30,6 +32,8 @@ eventsheet: sign!
 	store signatures with referee mode
 	-> mail Arno Schley
 	-> send via mail
+
+2courts with low resolution
 
 test cs order in detail
 	-> Ulf
