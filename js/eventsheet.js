@@ -698,7 +698,7 @@ var render_buli2017_pdf = _svg_func(function(svg, ev, es_key, extra_data) {
 	_svg_text(svg, 'x_2BLS', (ev.league_key === '2BLS-2017') ? 'X' : '');
 	_svg_text(svg, 'umpires', extra_data.umpires);
 	_svg_text(svg, 'location', extra_data.location);
-	_svg_text(svg, 'date', extra_data.date);
+	_svg_text(svg, 'date', ev.date || (last_update ? utils.date_str(last_update) : ''));
 	_svg_text(svg, 'matchday', extra_data.matchday);
 	_svg_text(svg, 'starttime', extra_data.starttime);
 	_svg_text(svg, 'endtime', last_update ? utils.time_str(last_update) : '');
@@ -901,8 +901,8 @@ function calc_player_matches(ev, team_id) {
 function _add_totals(totals, add) {
 	totals.show = totals.show || add.show;
 	['p', 'g', 'm'].forEach(function(key) {
-		totals[key][0] += add[key][0];
-		totals[key][1] += add[key][1];
+		totals[key][0] += add[key][0] || 0;
+		totals[key][1] += add[key][1] || 0;
 	});
 }
 

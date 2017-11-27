@@ -1,6 +1,6 @@
-URL options for display don't get deleted anymore!
 filename PDF-Spielbericht / Excel-Spielbericht
-pdf-spielbericht: generate date from last_update
+URL options for display don't get deleted anymore!
+pdf-spielbericht: 3rd line is missing!?
 
 d 2courts without pause timers
 	-> Benedikt
@@ -12,8 +12,6 @@ Windows Firefox PDF Bundesliga-Logo
 	-> Henry
 
 includes@displaymode -> Hövelhof
-
-urlexport errors in Mülheim
 
 request parameters for colors
 	-> Paul Puschmann
