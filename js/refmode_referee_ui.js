@@ -537,13 +537,13 @@ function render_clients(clients) {
 
 			if (displaymode.option_applies(cur_style, 'show_pause')) {
 				var show_pause_label = uiu.el(dstyle_row, 'label', 'referee_c_blocklabel');
-				var attrs = {
+				var show_pause_attrs = {
 					type: 'checkbox',
 				};
 				if (c.settings.d_show_pause) {
-					attrs.checked = 'checked';
+					show_pause_attrs.checked = 'checked';
 				}
-				var show_pause_checkbox = uiu.el(show_pause_label, 'input', attrs);
+				var show_pause_checkbox = uiu.el(show_pause_label, 'input', show_pause_attrs);
 				uiu.el(show_pause_label, 'span', {}, s._('displaymode:show_pause'));
 				show_pause_checkbox.addEventListener('change', on_dmode_show_pause_change);
 			}
