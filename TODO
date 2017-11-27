@@ -1,6 +1,13 @@
-d 2courts without pause timers
-	-> Benedikt
+make use_team_colors a checkbox (always use)
+request parameters for colors
+	-> Paul Puschmann
 
+urlexport could not load login page
+	return $http_response_header
+	check file_get_contents (and curl) disabled by security
+	check no DNS
+	check server unavailable (RST or silent)
+	-> Henry
 
 Firefox event_scoresheets
 	-> Henry
@@ -10,18 +17,13 @@ Windows Firefox PDF Bundesliga-Logo
 
 includes@displaymode -> Hövelhof
 
-request parameters for colors
-	-> Paul Puschmann
-
-urlexport: support players written wrong in some form (ask?)
-	-> Ulf
-	-> Olaf Schley
-
 save inputted umpire names (for CourtSpot)
 	-> Ulf
 	-> Benedikt
 
 generate quittung
+	include club logo
+	configure costs in eventutils
 
 eventsheet: sign!
 	store signatures in CourtSpot
@@ -29,19 +31,12 @@ eventsheet: sign!
 	-> mail Arno Schley
 	-> send via mail
 
-urlexport could not load login page
-	return $http_response_header
-	check file_get_contents (and curl) disabled by security
-	check no DNS
-	check server unavailable (RST or silent)
-	-> Henry
-
 test cs order in detail
 	-> Ulf
 
 d teamscore [see pic]
 d shortsets [see pic]
-d a nice modern overview
+d a nice modern overview of all matches, similar to tim
 
 refmode make more efficient
 refmode remove flickers
