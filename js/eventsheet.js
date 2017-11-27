@@ -771,6 +771,7 @@ var render_buli2017_pdf = _svg_func(function(svg, ev, es_key, extra_data) {
 	}
 
 	return {
+		filename: state._('Event Sheet') + ' ' + ev.event_name + (last_update ? (' ' + utils.date_str(last_update)) : '') + '.pdf',
 		orientation: 'landscape',
 	};
 });
