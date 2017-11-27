@@ -2,6 +2,10 @@ DirectoryIndex slides.html
 
 RewriteEngine On
 
+Options -MultiViews
+RewriteRule ^tickers/? tickers.de.html [L]
+
 RewriteCond $0#%{REQUEST_URI} ^([^#]*)#(.*)\1$
 RewriteRule ^.*$ - [E=BASE:%2]
 RewriteRule ^manual\.de\.html$ %{ENV:BASE} [L,R=301,NC]
+

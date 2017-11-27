@@ -66,9 +66,10 @@ show_pause=BOOLEAN  Show or hide interval timers.
                     BOOLEAN can be either "true" or "false".
                     At the moment only supported for some styles, see above.
 team_colors=BOOLEAN Use team colors (if applicable in the given style).
-					BOOLEAN can be either "true" or "false".
+                    BOOLEAN can be either "true" or "false".
 d_c0=COLOR,         This group of options can be used to set displaymode colors.
 d_c1=COLOR,         COLOR can be an RGB color value, for instance "0f0" or "00ff00" for lime.
 d_fg=COLOR,         d_c0 and d_c1 are the colors for the home and away team,
 d_bg=COLOR ...      d_cfg the foreground and d_bg the background color.
-                    Different styles use different colors. Hover over a color input to get the color code.
+                    Different styles use different colors.
+                    Hover over a color input to get the settings key.

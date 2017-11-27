@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Ticker-Vergleich</title>
+<style>
+html, body {
+	font-size: 22px;
+}
+
+h1 {
+	margin-top: 0;
+	text-align: center;
+}
+
+table {
+	border-collapse: collapse;
+}
+thead th {
+	border-bottom: 1px solid #bbb;
+	padding: 0.4em 0.5em;
+	margin: 0;
+}
+tfoot th {
+	border-top: 1px solid #bbb;
+	padding: 0.4em 0.5em;
+	margin: 0 0 0.1em 0;
+}
+td, tbody th {
+	padding: 0.4em 0.5em;
+	vertical-align: middle;
+}
+td + td,
+th + td,
+th + th {
+	border-left: 1px solid #bbb;
+}
+tbody th {
+	text-align: left;
+}
+td {
+	text-align: center;
+}
+
+a {
+	text-decoration: none;
+	color: #22a;
+}
+a:hover {
+	color: #0000ff;
+	text-decoration: underline;
+}
+
+.red {
+	color: red;
+}
+.green {
+	color: green;
+}
+
+.procontra td:not(:first-child) {
+	text-align: left;
+}
+ul.pro,
+ul.contra {
+	margin: 0;
+	list-style: none;
+	list-style-position: inside;
+	padding: 0;
+}
+ul.pro li:before,
+ul.contra li:before{
+   content: '';
+   display: inline-block;
+   height: .7em;
+   width: .7em;
+   margin-right: 0.3em;
+   background-size: contain;
+}
+ul.pro li:before {
+   background-image: url('plus.svg');
+}
+ul.contra li:before{
+   background-image: url('minus.svg');
+}
+</style>
+</head>
+<body>
+
+<h1>Ticker-Vergleich</h1>
+
+<p>bup unterstützt mehrere Ticker. Hier ein kurzer Vergleich der Ticker selber und der unterstützten Features:</p>
+
+<table>
+<thead><tr><th></th><th><a href="https://badmintonticker.de/">badmintonticker</a></th><th><a href="https://courtspot.de/">CourtSpot</a></th><th><a href="https://github.com/meyerjo/ticker/">shuttlecock-live</a></th></tr></thead>
+<tbody>
+
+<tr><th>Ticker-Übersicht</th><td><span class="red">✘</span> (aber auf <a href="https://b.aufschlagwechsel.de/">b.aufschlagwechsel.de</a> eingebunden)</td><td><a href="https://courtspot.de/live/">courtspot.de/live</a></td><td><a href="https://shuttlecock-live.com/">shuttlecock-live.com</a></td></tr>
+<tr><th>Dokumentation</th><td><a href="https://hilfe.badmintonticker.de/">online</a></td><td><a href="https://courtspot.de/Downloads/CourtSpot-Installation%20und%20-Einsatz.pdf">als PDF</a></td><td><span class="red">✘</span></td></tr>
+<tr><th>Kosten 2017/2018</th><td>29€ / 79€ / 149€</td><td>0€</td><td>kostenlos</td></tr>
+<!--<tr><th>Quellcode verfügbar</th><td><span class="red">✘</span></td><td>teilweise</td><td><a href="https://github.com/meyerjo/ticker/"><span class="green">✔</span></a></td></tr>-->
+<tr><th>Installation</th><td><ul class="pro"><li>nicht erforderlich</li></ul></td><td><ul class="contra"><li>komplex</li></ul></td><td>benötigt Konfiguration</td></tr>
+<tr><th>Hallen-Anzeigen bei Internetausfall</th><td><ul class="contra"><li>fallen aus</li></ul></td><td><ul class="pro"><li>nicht betroffen</li></ul></td><td><ul class="contra"><li>fallen aus</li></ul></td></tr>
+
+
+<tr><th colspan="4" style="border-top: 4px solid #aaa;background:#eee;text-align: center;">mit bup verfügbare Features</th></tr>
+<tr><th>Aufstellung ändern</th><td class="green">✔</td><td class="green">✔</td><td class="red">✘</td></tr>
+<tr><th>Vereins-Ranglisten</th><td class="red">✘</td><td><span class="green">✔</span> außer Stammspieler-Attribut</td><td class="red">✘</td></tr>
+<tr><th>Spielreihenfolge speichern</th><td class="red">✘</td><td class="green">✔</td><td class="red">✘</td></tr>
+<tr><th>Spielverlauf</th><td><span class="red">✘</span> (✔ mit Referee Mode)</td><td class="green">✔</td><td class="green">✔</td></tr>
+<tr><th>Metadaten im Spielbericht</th><td class="green">✔</td><td class="green">✔</td><td class="red">✘</td></tr>
+<tr><th>turnier.de-Übertragung</th><td class="green">✔</td><td class="green">✔</td><td class="red">✘</td></tr>
+</tbody>
+
+<tfoot><tr><th></th><th><a href="https://badmintonticker.de/">badmintonticker</a></th><th><a href="https://courtspot.de/">CourtSpot</a></th><th><a href="https://github.com/meyerjo/ticker/">shuttlecock-live</a></th></tr></tfoot>
+
+</table>
+
+
+</body>
+</html>
