@@ -68,6 +68,14 @@ function on_dmode_reverse_order_change(e) {
 	});
 }
 
+function on_dmode_team_colors_change(e) {
+	var client_id = _client_id(e);
+
+	rr.update_settings(client_id, {
+		d_team_colors: e.target.checked,
+	});
+}
+
 function on_dmode_show_pause_change(e) {
 	var client_id = _client_id(e);
 
@@ -480,28 +488,33 @@ function render_clients(clients) {
 				uiu.el(change_dstyle_sel, 'option', attrs, s._('displaymode|' + ds));
 			});
 
+			if (displaymode.option_applies(cur_style, 'team_colors')) {
+				var team_colors_label = uiu.el(dstyle_form, 'label', 'referee_c_blocklabel');
+				var tc_attrs = {
+					type: 'checkbox',
+				};
+				if (c.settings.d_team_colors) {
+					tc_attrs.checked = 'checked';
+				}
+				var team_colors_checkbox = uiu.el(team_colors_label, 'input', tc_attrs);
+				uiu.el(team_colors_label, 'span', {}, s._('displaymode:use team colors'));
+				team_colors_checkbox.addEventListener('change', on_dmode_team_colors_change);
+			}
+
 			displaymode.ALL_COLORS.forEach(function(col) {
+				if (c.settings.d_team_colors && utils.includes(['c0', 'c1'], col)) {
+					return;
+				}
+
 				if (displaymode.option_applies(cur_style, col)) {
 					uiu.el(dstyle_form, 'input', {
 						type: 'color',
 						'class': 'referee_c_dstyle_' + col,
+						title: col,
 						value: c.settings['d_' + col],
 					});
 				}
 			});
-
-			if (
-				displaymode.option_applies(cur_style, 'c0') &&
-				c.event &&
-				!utils.deep_equal(
-					displaymode.calc_team_colors(c.event, c.settings),
-					[c.settings.d_c0, c.settings.d_c1])
-			) {
-				var tc_button = uiu.el(dstyle_form, 'button', {
-					type: 'button',
-				}, s._('displaymode:use team colors'));
-				click.on(tc_button, on_tc_button_click);
-			}
 
 			if (displaymode.option_applies(cur_style, 'scale')) {
 				var scale_label = uiu.el(

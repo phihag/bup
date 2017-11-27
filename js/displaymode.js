@@ -158,6 +158,7 @@ function hash(settings, event) {
 		court_id: settings.displaymode_court_id,
 		reverse_order: settings.displaymode_reverse_order,
 		show_pause: settings.d_show_pause,
+		team_colors: settings.d_team_colors,
 		courts: utils.deep_copy(event.courts),
 		matches: utils.deep_copy(event.matches),
 	};
@@ -1756,12 +1757,17 @@ function calc_team_colors(event, settings) {
 	];
 }
 
-function calc_colors(cur_settings) {
+function calc_colors(cur_settings, event) {
 	var res = {};
 	ALL_COLORS.forEach(function(k) {
 		var ek = 'd_' + k;
 		res[k.substr(1)] = cur_settings[ek] || settings.default_settings[ek];
 	});
+	if (cur_settings.d_team_colors) {
+		var tc = calc_team_colors(event, cur_settings);
+		res[0] = tc[0];
+		res[1] = tc[1];
+	}
 	return res;
 }
 
@@ -1950,11 +1956,7 @@ function update(err, s, event) {
 	uiu.visible_qs('.settings_display_reverse_order', option_applies(style, 'reverse_order'));
 	uiu.visible_qs('.settings_d_show_pause', option_applies(style, 'show_pause'));
 	uiu.visible_qs('.settings_d_scale', option_applies(style, 'scale'));
-	uiu.visible_qs('.settings_d_team_colors',
-		option_applies(style, 'c0') &&
-		!utils.deep_equal(
-			calc_team_colors(event, s.settings),
-			[s.settings.d_c0, s.settings.d_c1]));
+	uiu.visible_qs('.settings_d_team_colors', option_applies(style, 'team_colors'));
 
 	if (event.courts && changed_courts) {
 		uiu.empty(court_select);
@@ -1969,7 +1971,7 @@ function update(err, s, event) {
 		});
 	}
 
-	var used_colors = active_colors(style);
+	var used_colors = active_colors(s, style);
 	uiu.visible_qs('.settings_d_colors', used_colors.length > 0);
 	var color_inputs = uiu.qs('.settings_d_colors_inputs');
 	var ui_colors_state_json = color_inputs.getAttribute('data-json');
@@ -2172,15 +2174,25 @@ function advance_style(s, direction) {
 }
 
 function ui_init(s, hash_query) {
-	if (hash_query.dm_style !== undefined) {
+	if (hash_query.dm_style) {
 		s.settings.displaymode_style = hash_query.dm_style;
 		settings.update(s);
 	}
-	if (hash_query.show_pause !== undefined) {
-		settings.change_all(s, {
-			d_show_pause: (hash_query.show_pause === 'true'),
-		});
+	if (hash_query.show_pause) {
+		settings.change(s, 'd_show_pause', (hash_query.show_pause === 'true'));
 	}
+	if (hash_query.team_colors) {
+		settings.change(s, 'd_team_colors', (hash_query.team_colors === 'true'));
+	}
+	ALL_COLORS.forEach(function(col_name) {
+		var k = 'd_' + col_name;
+		var v = hash_query[k];
+		if (!v) return;
+		var m = /^#?([0-9a-fA-F]{3,6})$/.exec(v);
+		if (m) {
+			settings.change(s, k, '#' + m[1]);
+		}
+	});
 
 	var cur_style = s.settings.displaymode_style;
 	uiu.qsEach('select[name="displaymode_style"]', function(select) {
@@ -2214,13 +2226,6 @@ function ui_init(s, hash_query) {
 		e.preventDefault();
 		show();
 	});
-	click.qs('.settings_d_team_colors', function() {
-		var tc = calc_team_colors(state.event, state.settings);
-		settings.change_all(state, {
-			d_c0: tc[0],
-			d_c1: tc[1],
-		});
-	});
 
 	var d_container = uiu.qs('.displaymode_layout');
 	d_container.addEventListener('mousemove', show_cursor);
@@ -2228,10 +2233,10 @@ function ui_init(s, hash_query) {
 	ads_container.addEventListener('mousemove', show_cursor);
 }
 
-function active_colors(style_id) {
+function active_colors(s, style_id) {
 	var res = [];
 	ALL_COLORS.forEach(function(col) {
-		if (option_applies(style_id, col)) {
+		if (option_applies(style_id, col) && !(s.settings.d_team_colors && utils.includes(['c0', 'c1'], col))) {
 			res.push(col);
 		}
 	});
@@ -2240,21 +2245,21 @@ function active_colors(style_id) {
 
 function option_applies(style_id, option_name) {
 	var BY_STYLE = {
-		'2court': ['c0', 'c1', 'cfg', 'cbg', 'reverse_order', 'show_pause'],
+		'2court': ['team_colors', 'c0', 'c1', 'cfg', 'cbg', 'reverse_order', 'show_pause'],
 		'top+list': ['reverse_order'],
 		andre: ['court_id', 'cfg', 'cbg', 'cfg2'],
-		castall: ['c0', 'c1', 'cfg', 'cbg', 'cbg2', 'ct', 'cserv', 'crecv', 'reverse_order', 'scale'],
-		clubplayers: ['court_id', 'c0', 'c1', 'cbg'],
-		clubplayerslr: ['court_id', 'c0', 'c1', 'cbg'],
+		castall: ['team_colors', 'c0', 'c1', 'cfg', 'cbg', 'cbg2', 'ct', 'cserv', 'crecv', 'reverse_order', 'scale'],
+		clubplayers: ['court_id', 'team_colors', 'c0', 'c1', 'cbg'],
+		clubplayerslr: ['court_id', 'team_colors', 'c0', 'c1', 'cbg'],
 		greyish: ['cbg', 'cbg2', 'cbg3', 'cfg'],
-		international: ['court_id', 'c0', 'c1', 'cfg', 'cbg'],
+		international: ['court_id', 'team_colors', 'c0', 'c1', 'cfg', 'cbg'],
 		oncourt: ['court_id', 'cfg', 'cfg3', 'cbg', 'cserv2'],
-		onlyplayers: ['court_id', 'c0', 'c1', 'cbg'],
-		onlyscore: ['court_id', 'c0', 'c1', 'cbg'],
-		teamcourt: ['court_id', 'c0', 'c1', 'cfg', 'cfg2', 'cbg', 'show_pause'],
+		onlyplayers: ['court_id', 'team_colors', 'c0', 'c1', 'cbg'],
+		onlyscore: ['court_id', 'team_colors', 'c0', 'c1', 'cbg'],
+		teamcourt: ['court_id', 'team_colors', 'c0', 'c1', 'cfg', 'cfg2', 'cbg', 'show_pause'],
 		tim: ['cbg', 'cfg', 'ctim_blue', 'ctim_active'],
 		tournament_overview: ['cfg', 'cbg', 'cbg3', 'cborder', 'cfg2'],
-		stripes: ['court_id', 'cbg', 'c0', 'c1', 'cfg', 'cfgdark', 'cbg4', 'cserv'],
+		stripes: ['court_id', 'cbg', 'team_colors', 'c0', 'c1', 'cfg', 'cfgdark', 'cbg4', 'cserv'],
 	};
 	var bs = BY_STYLE[style_id];
 	if (bs) {

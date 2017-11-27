@@ -29,6 +29,7 @@ var default_settings = {
 	d_cserv2: '#dba766',
 	d_crecv: '#707676',
 	d_scale: 100,
+	d_team_colors: false,
 	d_show_pause: false,
 	settings_autohide: 30000,
 	dads_interval: 20000,
@@ -198,6 +199,7 @@ var _settings_checkboxes = [
 	'refmode_client_enabled',
 	'displaymode_reverse_order',
 	'd_show_pause',
+	'd_team_colors',
 	'referee_service_judges',
 ];
 var _settings_textfields = [
@@ -287,6 +289,12 @@ function update(s) {
 	render.shuttle_counter(s);
 	click.update_mode(s.settings.click_mode);
 	update_refclient(s);
+}
+
+function change(s, key, value) {
+	var to_change = {};
+	to_change[key] = value;
+	change_all(s, to_change);
 }
 
 function change_all(s, new_settings) {
@@ -485,6 +493,7 @@ return {
 	hide_displaymode: hide_displaymode,
 	hide_refereemode: hide_refereemode,
 	load: load,
+	change: change,
 	change_all: change_all,
 	on_mode_change: on_mode_change,
 	show: show,

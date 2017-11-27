@@ -1,22 +1,21 @@
-includes@displaymode -> Hövelhof
-
-make use_team_colors a checkbox (always use)
-request parameters for colors
-	-> Paul Puschmann
-
 save inputted umpire names (for CourtSpot)
 	-> Ulf
 	-> Benedikt
 
-generate quittung
-	include club logo
+generate receipts
+	include club logo with <image x="10" y="20" width="80" height="80" xlink:href="club/logo.svg" />
 	configure costs in eventutils
+	link to google maps if hall location present
+	print button right on the page
+	make PDF button right on the page
+
+includes@displaymode -> Hövelhof
 
 eventsheet: sign!
 	store signatures in CourtSpot
 	store signatures with referee mode
+	send via mail: set up server
 	-> mail Arno Schley
-	-> send via mail
 
 2courts with low resolution
 
@@ -27,10 +26,11 @@ d teamscore [see pic]
 d shortsets [see pic]
 d a nice modern overview of all matches, similar to tim
 
+refmode redesign UI for change dialogs
 refmode make more efficient
 refmode remove flickers
+refmode verify that push mode is not active by default
 
-tde_import: use curl if possible (use same API as tde_export!)
 tde_import: aufgegeben (https://www.turnier.de/sport/teammatch.aspx?id=107D0FC0-C153-4EAF-A39D-EBAECB424B16&match=230)
 
 test back and F5 everywhere in referee mode
