@@ -4,6 +4,7 @@ var setupsheet = (function() {
 var URLS = {
 	'bundesliga-2016': 'div/setupsheet_bundesliga-2016.svg',
 	'default': 'div/setupsheet_default.svg',
+	'international': 'div/setupsheet_international.svg',
 	'nla': 'div/setupsheet_nla.svg',
 };
 var dl;
@@ -18,7 +19,11 @@ var MIN_LENGTHS = {
 		m: 8,
 		f: 4,
 	},
-	'nla': {
+	international: {
+		m: 4,
+		f: 4,
+	},
+	nla: {
 		m: 8,
 		f: 4,
 	},
@@ -540,12 +545,16 @@ function render_svg(s) {
 	var league_key = s.event.league_key;
 	var sheet_name = (
 		eventutils.is_bundesliga(league_key) ? 'bundesliga-2016' :
-		((league_key === 'NLA-2017') ? 'nla' : 'default'));
+		((league_key === 'NLA-2017') ? 'nla' :
+		((league_key === 'international-2017') ? 'international' :
+		'default'
+	)));
 	if (!dl) {
 		dl = downloader(URLS);
 	}
 	dl.load(sheet_name, function(xml_str) {
 		var svg_container = uiu.qs('.setupsheet_svg_container');
+
 		uiu.empty(svg_container);
 		for (var team_id = 0;team_id < 2;team_id++) {
 			var svg_doc = (new DOMParser()).parseFromString(xml_str, 'text/xml');
@@ -670,7 +679,6 @@ function fill_svg(s, svg_root, sheet_name, team_id)  {
 	change_yoffset(lower, yoffset);
 	fill_text(lower, 'teamster_label', s._('setupsheet:teamster'));
 	fill_text(lower, 'signature', s._('setupsheet:signature'));
-
 }
 
 function show() {
