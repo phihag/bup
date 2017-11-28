@@ -1,0 +1,236 @@
+{
+  "type": "bup-export",
+  "version": 2,
+  "event": {
+    "league_key": "international-2017",
+    "team_names": [
+      "Deutschland",
+      "Dänemark"
+    ],
+    "all_players": [
+      [
+        {
+          "firstname": "Michael",
+          "lastname": "Fuchs",
+          "name": "Michael Fuchs",
+          "gender": "m"
+        },
+        {
+          "firstname": "Mark",
+          "lastname": "Lamsfuss",
+          "name": "Mark Lamsfuss",
+          "gender": "m"
+        },
+        {
+          "firstname": "Fabian",
+          "lastname": "Roth",
+          "name": "Fabian Roth",
+          "gender": "m"
+        },
+        {
+          "firstname": "Marvin",
+          "lastname": "Seidel",
+          "name": "Marvin Seidel",
+          "gender": "m"
+        },
+        {
+          "firstname": "Linda",
+          "lastname": "Efler",
+          "name": "Linda Efler",
+          "gender": "f"
+        },
+        {
+          "firstname": "Luise",
+          "lastname": "Heim",
+          "name": "Luise Heim",
+          "gender": "f"
+        },
+        {
+          "firstname": "Lara",
+          "lastname": "Käpplein",
+          "name": "Lara Käpplein",
+          "gender": "f"
+        }
+      ],
+      [
+        {
+          "firstname": "Anders",
+          "lastname": "Antonsen",
+          "name": "Anders Antonsen",
+          "gender": "m"
+        },
+        {
+          "firstname": "Mathias",
+          "lastname": "Christiansen",
+          "name": "Mathias Christiansen",
+          "gender": "m"
+        },
+        {
+          "firstname": "David",
+          "lastname": "Daugaard",
+          "name": "David Daugaard",
+          "gender": "m"
+        },
+        {
+          "firstname": "Maiken",
+          "lastname": "Fruergaard",
+          "name": "Maiken Fruergaard",
+          "gender": "f"
+        },
+        {
+          "firstname": "Natalia Koch",
+          "lastname": "Rohde",
+          "name": "Natalia Koch Rohde",
+          "gender": "f"
+        },
+        {
+          "firstname": "Sara",
+          "lastname": "Thygesen",
+          "name": "Sara Thygesen",
+          "gender": "f"
+        }
+      ]
+    ],
+    "team_competition": true,
+    "date": "11.11.2016",
+    "starttime": "19:00",
+    "matches": [
+      {
+        "setup": {
+          "match_name": "GD",
+          "match_id": "intdemo:GD",
+          "is_doubles": true,
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Linda Efler"
+                },
+                {
+                  "name": "Michael Fuchs"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Mathias Christiansen"
+                },
+                {
+                  "name": "Sara Thygesen"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "setup": {
+          "match_name": "HE",
+          "match_id": "intdemo:HE",
+          "is_doubles": false,
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Fabian Roth"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Anders Antonsen"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "setup": {
+          "match_name": "DE",
+          "match_id": "intdemo:DE",
+          "is_doubles": false,
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Luise Heim"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Natalia Koch Rohde"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "setup": {
+          "match_name": "DD",
+          "match_id": "intdemo:DD",
+          "is_doubles": true,
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Linda Efler"
+                },
+                {
+                  "name": "Lara Käpplein"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Maiken Fruergaard"
+                },
+                {
+                  "name": "Sara Thygesen"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "setup": {
+          "match_name": "HD",
+          "match_id": "intdemo:HD",
+          "is_doubles": true,
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Mark Lamsfuss"
+                },
+                {
+                  "name": "Marvin Seidel"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Anders Antonsen"
+                },
+                {
+                  "name": "David Daugaard"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "report_urls": [
+      "https://www.turnier.de/sport/teammatch.aspx?id=62B8341E-9B7C-4D3F-85FC-13127838677C&match=12"
+    ]
+  }
+}

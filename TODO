@@ -1,4 +1,8 @@
-setupsheet: tournament_name is null
+support international matches
+	create a demo
+	setupsheet print crashes at the moment
+	add an eventsheet
+
 eventsheet: preview back should go back to dialog
 
 
@@ -35,6 +39,17 @@ stats: + game points / match points
 
 test cs order in detail
 	-> Ulf
+
+selectevent module
+	debmlist: collect coordinates
+	debmlist: collect from VRL instead of something else. Also collekt Stammspieler
+	download 5 most likely (and leagues + matches therein)
+	start via league
+	start via URL input
+	manual event creation
+	if courtspot: ask for passcode
+	allow on referee
+	checkbox on referee: store event permanently (do not load from clients)
 
 d teamscore [see pic]
 d shortsets [see pic]
@@ -83,16 +98,6 @@ order in referee mode: tablets first please
 referee mode: query netstats
 referee mode: reset netstats
 referee mode: timeout earlier
-
-selectevent module
-	debmlist: collect coordinates
-	debmlist: collect from VRL instead of something else. Also collekt Stammspieler
-	download 5 most likely (and leagues + matches therein)
-	start via league
-	start via URL input
-	if courtspot: ask for passcode
-	allow on referee
-	checkbox on referee: store event permanently (do not load from clients)
 
 refmode:
 	make settings a pop-up dialog

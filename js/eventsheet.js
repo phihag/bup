@@ -17,6 +17,7 @@ var SHEETS_BY_LEAGUE = {
 	'RLM-2016': ['RLM-2016', 'RLM-SpO'],
 	'NLA-2017': ['NLA-2017'],
 	'OBL-2017': ['OBL-2017'],
+	'international-2017': [],
 };
 
 var URLS = {

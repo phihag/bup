@@ -32,6 +32,7 @@ league_key      ID of the league being played (this determines which event sheet
                   2016 is always literally 2016.
                 - Swiss NLA: "NLA-2017"
                 - Austrian Bundesliga: "OBL-2017"
+                - International matches: "international-2017" (each discipline once, 3x21)
                 The year is the first year that the specific ruleset was implemented in.
                 If the rules and descriptions of the league don't change (at least as far as bup is concerned),
                 the same league_key can be used for later seasons.

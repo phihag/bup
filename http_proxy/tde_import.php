@@ -80,19 +80,27 @@ function _parse_score($score_html) {
 function _parse_players($players_html, $gender) {
 	if (\preg_match_all('/
 		<tr>\s*
-		<td>(?:(?P<teamnum>[0-9]+)-(?P<ranking>[0-9]+)(?:-D(?P<ranking_d>[0-9]+))?)?<\/td>
+		(?:<td>(?:(?P<teamnum>[0-9]+)-(?P<ranking>[0-9]+)(?:-D(?P<ranking_d>[0-9]+))?)?<\/td>)?
 		<td><\/td>\s*
 		<td\s+id="playercell"><a\s+href="player\.aspx[^"]+">
 			(?P<lastname>[^<]+),\s*(?P<firstname>[^<]+)
 		<\/a><\/td>\s*
-		<td\s+class="flagcell">(?:
-			<img[^>]+\/><span\s*class="printonly\s*flag">\[(?P<nationality>[A-Z]{2,})\]\s*<\/span>
-		)?
-		<\/td>\s*
-		<td>(?P<textid>[0-9-]+)<\/td>\s*
-		<td>(?P<birthyear>[0-9]{4})?<\/td>
+		(?:
+			<td\s+class="flagcell">(?:
+				<img[^>]+\/><span\s*class="printonly\s*flag">\[(?P<nationality>[A-Z]{2,})\]\s*<\/span>
+			)?
+			<\/td>\s*
+			<td>(?P<textid>[0-9-]+)<\/td>\s*
+			<td>(?P<birthyear>[0-9]{4})?<\/td>
+		|
+			<\/tr>
+		)
 		/xs', $players_html, $players_m, \PREG_SET_ORDER) === false) {
 		throw new \Exception('Failed to match players');
+	}
+
+	if (count($players_m) === 0) {
+		die('failed to find any players');
 	}
 
 	$res = \array_map(function($m) use ($gender) {
@@ -100,16 +108,22 @@ function _parse_players($players_html, $gender) {
 			'firstname' => $m['firstname'],
 			'lastname' => $m['lastname'],
 			'name' => $m['firstname'] . ' ' . $m['lastname'],
-			'textid' => $m['textid'],
-			'gender' => $gender,
 		];
-		if ($m['ranking']) {
+		if (isset($m['textid']) && $m['textid']) {
+			$p['textid'] = $m['textid'];
+		}
+		if (isset($m['gender']) && $m['gender']) {
+			$p['gender'] = $m['gender'];
+		} else {
+			$p['gender'] = $gender;
+		}
+		if (isset($m['ranking']) && $m['ranking']) {
 			$p['ranking'] = \intval($m['ranking']);
 		}
-		if ($m['ranking_d']) {
+		if (isset($m['ranking_d']) && $m['ranking_d']) {
 			$p['ranking_d'] = \intval($m['ranking_d']);
 		}
-		if ($m['nationality']) {
+		if (isset($m['nationality']) && $m['nationality']) {
 			$p['nationality'] = $m['nationality'];
 		}
 		return $p;
@@ -273,8 +287,12 @@ function buli_download_all_players($httpc, $league_key, $domain, $season_id, $dr
 	return $all_players;
 }
 
-function download_all_players($httpc, $ti, $domain) {
-	$pagename = ($domain === 'obv.tournamentsoftware.com') ? 'teamplayers' : 'teamrankingplayers';
+function download_all_players($httpc, $ti, $domain, $league_key) {
+	$pagename = (
+		($domain === 'obv.tournamentsoftware.com') ? 'teamplayers' :
+		(($league_key === 'international-2017') ? 'teamplayers' :
+		'teamrankingplayers'
+	));
 	$players_url = (
 		'https://' . $domain . '/sport/' . $pagename . '.aspx?' .
 		'id=' . $ti['season'] . '&tid=' . $ti['id']
@@ -327,28 +345,28 @@ function parse_teammatch($httpc, $tm_html, $domain, $match_id) {
 			/xs', $tm_html, $header_m)) {
 		throw new \Exception('Cannot find team names!');
 	}
-	if (!\preg_match('/<th>Staffel:<\/th><td><a\s+href="[^"]*&draw=([0-9]+)">([^<]+)<\/a><\/td>/sx', $tm_html, $division_m)) {
-		throw new \Exception('Cannot find division!');
-	}
-	$draw_id = $division_m[1];
-	$long_league_id = $header_m[1] . ':' . $division_m[2];
-	if (!\array_key_exists($long_league_id, $LEAGUE_KEYS)) {
-		throw new \Exception('Cannot find league ' . $long_league_id);
-	}
-	$league_key = $LEAGUE_KEYS[$long_league_id];
+	if (\preg_match('/<th>Staffel:<\/th><td><a\s+href="[^"]*&draw=([0-9]+)">([^<]+)<\/a><\/td>/sx', $tm_html, $division_m)) {
+		$draw_id = $division_m[1];
+		$long_league_id = $header_m[1] . ':' . $division_m[2];
+		if (!\array_key_exists($long_league_id, $LEAGUE_KEYS)) {
+			throw new \Exception('Cannot find league ' . $long_league_id);
+		}
+		$league_key = $LEAGUE_KEYS[$long_league_id];
 
-	$res = [
-		'league_key' => $league_key,
-	];
+		if (!\preg_match('/<h3>
+				<a\s*href="\/sport\/team\.aspx\?id=(?P<season0>[-A-Za-z0-9]+)&team=(?P<id0>[0-9]+)">\s*
+				(?P<team0>[^<]+?)(?:\s*\([0-9-]+\))?<\/a>
+				\s*-\s*
+				<a\s*href="\/sport\/team\.aspx\?id=(?P<season1>[-A-Za-z0-9]+)&team=(?P<id1>[0-9]+)">\s*
+				(?P<team1>[^<]+?)(?:\s*\([0-9-]+\))?<\/a>
+				/xs', $tm_html, $teamnames_m)) {
 
-	if (\preg_match('/<h3>
-			<a\s*href="\/sport\/team\.aspx\?id=(?P<season0>[-A-Za-z0-9]+)&team=(?P<id0>[0-9]+)">\s*
-			(?P<team0>[^<]+?)(?:\s*\([0-9-]+\))?<\/a>
-			\s*-\s*
-			<a\s*href="\/sport\/team\.aspx\?id=(?P<season1>[-A-Za-z0-9]+)&team=(?P<id1>[0-9]+)">\s*
-			(?P<team1>[^<]+?)(?:\s*\([0-9-]+\))?<\/a>
-			/xs', $tm_html, $teamnames_m)) {
+			throw new \Exception('Cannot find team names!');
+		}
 
+		$res = [
+			'league_key' => $league_key,
+		];
 		$res['team_names'] = [
 			_unify_team_name(decode_html($teamnames_m['team0'])),
 			_unify_team_name(decode_html($teamnames_m['team1']))
@@ -362,8 +380,43 @@ function parse_teammatch($httpc, $tm_html, $domain, $match_id) {
 			'id' => $teamnames_m['id1'],
 			'name' => $res['team_names'][1],
 		]];
+	} else if (\preg_match('/<th>Disziplin:<\/th><td><a href="draw\.aspx\?id=(?P<season_id>[-a-fA-F0-9]+)&draw=(?P<draw_id>[0-9]+)">(?P<team0>.*?)\s*-\s*(?P<team1>.*?)<\/a><\/td>/', $tm_html, $international_m)) {
+
+		if (! \preg_match('/
+			<h3>
+			<a\s+href="\/sport\/team\.aspx\?id=[-a-fA-F0-9]+&team=(?P<id0>[0-9]+)">[^<]+<\/a>\s*
+			<img[^<>]+>\s*
+			<span\s+class="printonly\sflag">\[[A-Z]+\]\s*<\/span>\s*
+			-\s*
+			<img[^<>]+>\s*
+			<span\s+class="printonly\sflag">\[[A-Z]+\]\s*<\/span>\s*
+			<a\s+href="\/sport\/team\.aspx\?id=[-a-fA-F0-9]+&team=(?P<id1>[0-9]+)">[^<]+<\/a>\s*
+			/x', $tm_html, $team_names_m)) {
+			throw new \Exception('Cannot find international team IDs');
+		}
+
+		$draw_id = $international_m['draw_id'];
+		$long_league_id = 'international:' . $international_m['team0'] . ' - ' . $international_m['team1'];
+		$league_key = 'international-2017';
+		$res = [
+			'league_key' => $league_key,
+		];
+		$res['team_names'] = [
+			_unify_team_name(decode_html($international_m['team0'])),
+			_unify_team_name(decode_html($international_m['team1']))
+		];
+		$season_id = $international_m['season_id'];
+		$team_infos = [[
+			'season' => $season_id,
+			'id' => $team_names_m['id0'],
+			'name' => $res['team_names'][0],
+		], [
+			'season' => $season_id,
+			'id' => $team_names_m['id1'],
+			'name' => $res['team_names'][1],
+		]];
 	} else {
-		throw new \Exception('Cannot find team names!');
+		throw new \Exception('Cannot find division!');
 	}
 
 	$is_buli = \preg_match('/^[12]BL[NS]?-/', $league_key);
@@ -371,8 +424,8 @@ function parse_teammatch($httpc, $tm_html, $domain, $match_id) {
 		$res['all_players'] = buli_download_all_players(
 			$httpc, $league_key, $domain, $teamnames_m['season0'], $draw_id, $match_id, $team_infos);
 	} else {
-		$res['all_players'] = \array_map(function($ti) use ($httpc, $domain) {
-			$ap = download_all_players($httpc, $ti, $domain);
+		$res['all_players'] = \array_map(function($ti) use ($httpc, $domain, $league_key) {
+			$ap = download_all_players($httpc, $ti, $domain, $league_key);
 			return $ap ? $ap : [];
 		}, $team_infos);
 	}
@@ -399,8 +452,10 @@ function parse_teammatch($httpc, $tm_html, $domain, $match_id) {
 		throw new \Exception('Cannot find table in teammatch HTML');
 	}
 	$matches_table_html = $table_m['html'];
-	\preg_match_all(
-		'/<tr>\s*<td>(?P<match_name>[A-Z\.0-9\s]+)<\/td>
+	\preg_match_all('/
+		<tr>\s*
+		(?:<td>\s*[0-9]*\s*<\/td>)? # match order
+		<td>(?P<match_name>[A-Z\.0-9\s]+)<\/td>
 		\s*<td[^>]*>(?:<table[^>]*>(?P<players_html0>.*?)<\/table>)?
 		<\/td><td[^>]*>-<\/td>
 		<td[^>]*>(?:<table[^>]*>(?P<players_html1>.*?)<\/table>)?<\/td>

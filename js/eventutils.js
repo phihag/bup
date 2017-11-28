@@ -235,6 +235,9 @@ function name_by_league(league_key) {
 	if (league_key === 'NLA-2017') {
 		return 'NLA';
 	}
+	if (league_key === 'international-2017') {
+		return 'International match';
+	}
 	if (league_key === 'RLW-2016') {
 		league_key = 'NRW-O19-RL-001-2016';
 	}
@@ -441,6 +444,9 @@ function default_counting(league_key) {
 		return '3x21';
 	}
 	if (league_key === 'NLA-2017') {
+		return '3x21';
+	}
+	if (league_key === 'international-2017') {
 		return '3x21';
 	}
 }
