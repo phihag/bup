@@ -371,6 +371,7 @@ var i18n_de = {
 'eventsheet:label|NRW-Satzungen': 'Satzungen und Ordnungen BLV NRW',
 'eventsheet:label|NLA-2017': 'Resultatblatt',
 'eventsheet:label|OBL-2017': 'Spielbericht',
+'eventsheet:label|receipt': 'Schiedsrichter-Quittung',
 
 'stats:game': '{number}. Satz',
 'stats:match': 'Spiel',
@@ -605,6 +606,8 @@ var i18n_de = {
 'urlexport:success': 'Erfolgreich übertragen',
 'urlexport:url': 'URL:',
 'urlexport:submit url': 'Weiter',
+
+'receipt:header': 'Quittung',
 
 };
 

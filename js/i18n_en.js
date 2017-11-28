@@ -371,6 +371,7 @@ var i18n_en = {
 'eventsheet:label|NRW-Satzungen': '(Germany, NRW) laws & regulations',
 'eventsheet:label|NLA-2017': '(Swiss NLA) result sheet',
 'eventsheet:label|OBL-2017': '(Austrian Bundesliga) result sheet',
+'eventsheet:label|receipt': 'umpire receipt',
 
 'stats:game': 'Game {number}',
 'stats:match': 'Match',
@@ -605,6 +606,8 @@ var i18n_en = {
 'urlexport:success': 'Upload successful.',
 'urlexport:url': 'URL:',
 'urlexport:submit url': 'Next',
+
+'receipt:header': 'Receipt',
 };
 
 /*@DEV*/

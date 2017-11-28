@@ -48,6 +48,7 @@ var URLS = {
 	'buli2017-minsr': 'div/buli2017_mindestanforderungen_schiedsrichter.svg',
 	'buli2017-minv': 'div/buli2017_mindestanforderungen_verein.svg',
 	'OBL-2017': 'div/eventsheet_obl.xlsx',
+	'receipt': 'div/receipt.svg',
 };
 var DIRECT_DOWNLOAD_SHEETS = {
 	'BL-ballsorten-2016': true,

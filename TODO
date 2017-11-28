@@ -1,4 +1,3 @@
-button to hide displaymode settings at small resolutions
 includes@displaymode
 
 save inputted umpire names (for CourtSpot)
@@ -8,9 +7,11 @@ save inputted umpire names (for CourtSpot)
 eventsheet: modern svg2pdf: print and PDf buttons right on the page?
 
 generate receipts
+	question UI
 	include club logo with <image x="10" y="20" width="80" height="80" xlink:href="club/logo.svg" />
 	configure costs in eventutils
 	link to google maps if hall location present
+	i18n svg
 
 eventsheet: sign!
 	store signatures in CourtSpot
