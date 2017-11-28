@@ -1,5 +1,3 @@
-includes@displaymode
-
 save inputted umpire names (for CourtSpot)
 	-> Ulf
 	-> Benedikt
@@ -7,10 +5,11 @@ save inputted umpire names (for CourtSpot)
 eventsheet: modern svg2pdf: print and PDf buttons right on the page?
 
 generate receipts
-	question UI
+	set up UI
 	include club logo with <image x="10" y="20" width="80" height="80" xlink:href="club/logo.svg" />
 	configure costs in eventutils
-	link to google maps if hall location present
+	http proxy for distance (using google maps API)
+	link to google maps if hall location present (or better, autocalc)
 	i18n svg
 
 eventsheet: sign!

@@ -22,7 +22,7 @@ function courtnum(cn) {
 }
 
 function supports_flexbox() {
-	return (CSS && CSS.supports('display', 'flex'));
+	return (window.CSS && CSS.supports('display', 'flex'));
 }
 
 return {

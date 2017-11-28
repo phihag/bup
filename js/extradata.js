@@ -81,7 +81,7 @@ function team_logo(team_name) {
 	team_name = LOGO_ALIASSE[team2club(team_name)] || team_name;
 
 	var clean_name = team_name.toLowerCase().replace(/[^a-z]/g, '');
-	if (LOGOS.includes(clean_name)) {
+	if (utils.includes(LOGOS, clean_name)) {
 		return 'div/logos/' + clean_name + '.svg';
 	}
 }
