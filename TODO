@@ -1,9 +1,3 @@
-save inputted umpire names (for CourtSpot)
-	-> Ulf
-	-> Benedikt
-
-eventsheet: modern svg2pdf: print and PDf buttons right on the page?
-
 generate receipts
 	set up UI
 	include club logo with <image x="10" y="20" width="80" height="80" xlink:href="club/logo.svg" />
@@ -11,6 +5,12 @@ generate receipts
 	http proxy for distance (using google maps API)
 	link to google maps if hall location present (or better, autocalc)
 	i18n svg
+
+save inputted umpire names (for CourtSpot)
+	-> Ulf
+	-> Benedikt
+
+eventsheet: modern svg2pdf: print and PDf buttons right on the page?
 
 eventsheet: sign!
 	store signatures in CourtSpot
@@ -31,6 +31,7 @@ refmode redesign UI for change dialogs
 refmode make more efficient
 refmode remove flickers
 refmode verify that push mode is not active by default
+refmode use WebRTC
 
 tde_import: aufgegeben (https://www.turnier.de/sport/teammatch.aspx?id=107D0FC0-C153-4EAF-A39D-EBAECB424B16&match=230)
 
