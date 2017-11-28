@@ -505,6 +505,7 @@ var i18n_frch = {
 'displaymode:colors': 'Couleurs:',
 'displaymode:use team colors': 'Utiliser les couleurs de l\'équipe',
 'displaymode:show_pause': 'Afficher le temps de repos',
+'displaymode:hide settings': 'Cacher',
 
 'liveaw:lost connection': 'Reconnecter ...',
 

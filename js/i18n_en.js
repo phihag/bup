@@ -509,6 +509,7 @@ var i18n_en = {
 'displaymode:colors': 'Colors:',
 'displaymode:use team colors': 'use team colors',
 'displaymode:show_pause': 'Show interval timer',
+'displaymode:hide settings': 'Hide',
 
 'liveaw:lost connection': 'Reconnecting ...',
 

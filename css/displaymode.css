@@ -655,3 +655,9 @@
 .d_stripes_table td {
 	text-align: center;
 }
+
+.d_hide_settings {
+	position: absolute;
+	right: 1em;
+	top: 1em;
+}

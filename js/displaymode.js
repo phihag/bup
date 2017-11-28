@@ -2222,9 +2222,11 @@ function ui_init(s, hash_query) {
 	click.qs('.d_ads', function() {
 		settings.show_displaymode();
 	});
-	click.qs('.settings_mode_display', function(e) {
-		e.preventDefault();
+	click.qs('.settings_mode_display', function() {
 		show();
+	});
+	click.qs('.d_hide_settings', function() {
+		settings.hide_displaymode();
 	});
 
 	var d_container = uiu.qs('.displaymode_layout');
