@@ -20,6 +20,10 @@ eventsheet: sign!
 
 2courts with low resolution
 
+stats: add team name to graph
+stats: + game points / match points
+	-> Tim Bambach
+
 test cs order in detail
 	-> Ulf
 
@@ -221,9 +225,7 @@ Aufstellung:
 	warn if changes and leaving tab
 	mail Ulf (update doc)
 	test that we don't print any backgrounds even with chrome setting print backgrounds
-stats: + most consecutive points
-stats: + game points
-stats: + match points
+
 use bup.ajax module instead of custom xmlhttprequest
 use bup.ajax module instead of jquery
 error reporting courtspot
