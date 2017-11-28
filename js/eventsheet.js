@@ -559,7 +559,7 @@ function _svg_text(svg, id, val) {
 	while (text_el.firstChild) {
 		text_el.removeChild(text_el.firstChild);
 	}
-	if (val !== undefined) {
+	if ((val !== undefined) && (val !== null)) {
 		var text_node = svg.ownerDocument.createTextNode(val);
 		text_el.appendChild(text_node);
 	}
