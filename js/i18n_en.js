@@ -608,6 +608,8 @@ var i18n_en = {
 'urlexport:submit url': 'Next',
 
 'receipt:header': 'Receipt',
+'receipt:umpire': 'Umpire:',
+'receipt:distance': 'Distance (km):',
 };
 
 /*@DEV*/

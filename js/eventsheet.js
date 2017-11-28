@@ -778,6 +778,13 @@ var render_buli2017_pdf = _svg_func(function(svg, ev, es_key, extra_data) {
 	};
 });
 
+var render_receipt = _svg_func(function(svg, ev, es_key, extra_data) {
+	// console.log('TODO would now render receipt', extra_data);
+	return {
+		filename: state._('receipt:header') + (extra_data.receipt_umpire ? ' ' + extra_data.receipt_umpire : '') + '.pdf',
+	};
+});
+
 var render_basic_eventsheet =  _svg_func(function(svg, ev, es_key, extra_data) {
 	eventutils.set_metadata(ev);
 
@@ -1550,6 +1557,8 @@ function es_render(ev, es_key, ui8r, extra_data) {
 	case 'buli2017-minsr':
 	case 'buli2017-minv':
 		return render_buli_minreq_svg(ev, es_key, ui8r);
+	case 'receipt':
+		return render_receipt(ev, es_key, ui8r, extra_data);
 	default:
 	throw new Error('Unsupported eventsheet key ' + es_key);
 	}
@@ -1728,6 +1737,7 @@ function on_fetch() {
 	_default_extra_data(extra_data, event);
 
 	uiu.qsEach('.eventsheet_dynamic', function(label) {
+		if (!uiu.hasClass(label, 'eventsheet_dynamic_recalc')) return;
 		var input = label.querySelector('input');
 		var name = input.getAttribute('name');
 		input.setAttribute('value', extra_data[name] || '');
@@ -1827,6 +1837,7 @@ function show_dialog(es_key) {
 	uiu.hide(preview);
 
 	uiu.qsEach('.eventsheet_dynamic', uiu.remove);
+	var report = uiu.qs('.eventsheet_report');
 
 	switch (es_key) {
 	case '1BL-2015':
@@ -1837,6 +1848,9 @@ function show_dialog(es_key) {
 	case 'RLM-2016':
 	case 'NRW-2016':
 		uiu.show_qs('.eventsheet_matchday');
+		uiu.show_qs('.eventsheet_umpires');
+		uiu.show_qs('.eventsheet_notes');
+		uiu.show_qs('.eventsheet_location');
 		uiu.show_qs('.eventsheet_starttime');
 		uiu.show_qs('.eventsheet_backup_players_str');
 		uiu.show_qs('.eventsheet_protest');
@@ -1846,29 +1860,34 @@ function show_dialog(es_key) {
 	case '1BL-2016':
 	case '2BLN-2016':
 	case '2BLS-2016':
+		uiu.show_qs('.eventsheet_umpires');
+		uiu.show_qs('.eventsheet_notes');
+		uiu.show_qs('.eventsheet_location');
 		uiu.show_qs('.eventsheet_matchday');
 		uiu.show_qs('.eventsheet_starttime');
 		uiu.hide_qs('.eventsheet_backup_players_str');
 		uiu.show_qs('.eventsheet_protest');
 		uiu.show_qs('.eventsheet_spectators');
-		uiu.show_qs('.eventsheet_report');
+		uiu.show(report);
 		uiu.hide(download_link_container);
 		break;
 	case '1BL-2017_pdf':
 	case '2BLN-2017_pdf':
 	case '2BLS-2017_pdf':
+		uiu.show_qs('.eventsheet_umpires');
+		uiu.show_qs('.eventsheet_notes');
+		uiu.show_qs('.eventsheet_location');
 		uiu.show_qs('.eventsheet_matchday');
 		uiu.show_qs('.eventsheet_starttime');
 		uiu.hide_qs('.eventsheet_backup_players_str');
 		uiu.show_qs('.eventsheet_protest');
 		uiu.show_qs('.eventsheet_spectators');
 
-		var report = uiu.qs('.eventsheet_report');
 		var team_names = ['team 1', 'team 2'];
 		['backup_players', 'present_players'].forEach(function(key) {
 			team_names.forEach(function(team_name, team_id) {
 				var whole_key = key + team_id;
-				var label = uiu.el(report, 'label', 'eventsheet_dynamic');
+				var label = uiu.el(report, 'label', 'eventsheet_dynamic eventsheet_dynamic_recalc');
 				uiu.el(label, 'span', {
 					'data-es-i18n': 'eventsheet|' + key,
 				}, state._('eventsheet|' + key, {
@@ -1886,23 +1905,54 @@ function show_dialog(es_key) {
 		break;
 	case 'team-1BL':
 	case 'team-2BL':
-		uiu.hide_qs('.eventsheet_report');
+		uiu.hide(report);
 		// backup_players are children of _report
 		download_link.setAttribute('href', URLS[es_key]);
 		uiu.show(download_link_container);
 		break;
 	case 'NLA-2017':
-		uiu.hide_qs('.eventsheet_report');
+		uiu.hide(report);
 		uiu.hide_qs('label.eventsheet_backup_players_str');
 		uiu.hide(download_link_container);
 		break;
 	case 'OBL-2017':
+		uiu.show_qs('.eventsheet_umpires');
+		uiu.show_qs('.eventsheet_notes');
+		uiu.show_qs('.eventsheet_location');
 		uiu.hide_qs('.eventsheet_matchday');
 		uiu.hide_qs('.eventsheet_starttime');
 		uiu.hide_qs('.eventsheet_backup_players_str');
 		uiu.hide_qs('.eventsheet_protest');
 		uiu.hide_qs('.eventsheet_spectators');
 		uiu.hide(download_link_container);
+		break;
+	case 'receipt':
+		uiu.hide_qs('.eventsheet_umpires');
+		uiu.hide_qs('.eventsheet_matchday');
+		uiu.hide_qs('.eventsheet_starttime');
+		uiu.hide_qs('.eventsheet_backup_players_str');
+		uiu.hide_qs('.eventsheet_protest');
+		uiu.hide_qs('.eventsheet_spectators');
+		uiu.hide_qs('.eventsheet_notes');
+		uiu.hide_qs('.eventsheet_location');
+		uiu.hide(download_link_container);
+
+		var umpire_label = uiu.el(report, 'label', 'eventsheet_dynamic', state._('receipt:umpire'));
+		umpire_label.appendChild(document.createTextNode(' ')); // compatibility to HTML UI
+		uiu.el(umpire_label, 'input', {
+			name: 'receipt_umpire',
+		});
+
+		var distance_label = uiu.el(report, 'label', 'eventsheet_dynamic', state._('receipt:distance'));
+		distance_label.appendChild(document.createTextNode(' ')); // compatibility to HTML UI
+		uiu.el(distance_label, 'input', {
+			type: 'number',
+			min: 0,
+			name: 'receipt_distance',
+			style: 'width:2.4em;',
+		});
+
+		uiu.show(report);
 		break;
 	default:
 		uiu.hide_qs('.eventsheet_spectators');

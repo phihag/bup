@@ -608,7 +608,8 @@ var i18n_de = {
 'urlexport:submit url': 'Weiter',
 
 'receipt:header': 'Quittung',
-
+'receipt:umpire': 'Schiedsrichter:',
+'receipt:distance': 'Entfernung (km):',
 };
 
 /*@DEV*/

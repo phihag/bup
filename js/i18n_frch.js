@@ -604,6 +604,9 @@ var i18n_frch = {
 'urlexport:submit url': 'Prochain',
 
 'receipt:header': 'réception',
+'receipt:umpire': 'Arbitre:',
+'receipt:distance': 'distance (km):',
+
 };
 
 /*@DEV*/
