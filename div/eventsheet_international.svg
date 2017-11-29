@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 297 210">
+<style>
+text {
+	font-family: Helvetica;
+	font-size: 4px;
+}
+line {
+	stroke: #000;
+	stroke-width: 0.2px;
+}
+</style>
+
+<text style="font-size: 7px; font-weight:bold; fill: #000000;" x="20" y="15">Match Report</text>
+
+
+<text x="186" y="15">Date:</text>
+<line x1="197" x2="219" y1="16" y2="16" />
+<text x="198" y="15" id="es_svg_date"></text>
+<text x="224" y="15">Begin:</text>
+<line x1="237" x2="250" y1="16" y2="16" />
+<text x="238" y="15" id="es_svg_starttime"></text>
+<text x="257" y="15">End:</text>
+<line x1="267" x2="280" y1="16" y2="16" />
+<text x="268" y="15" id="es_svg_endtime"></text>
+
+<line x1="20" x2="70" y1="26" y2="26" />
+<text x="45" y="25" id="es_svg_team0" text-anchor="middle"></text>
+<text x="75" y="25" text-anchor="middle">vs</text>
+<line x1="80" x2="130" y1="26" y2="26" />
+<text x="105" y="25" id="es_svg_team1" text-anchor="middle"></text>
+<text x="135" y="25">Location:</text>
+<line x1="153" x2="280" y1="26" y2="26" />
+<text id="es_svg_location" x="154" y="25"></text>
+
+<text x="20" y="35">Referee:</text>
+<line x1="37" x2="90" y1="36" y2="36" />
+<text x="38" y="35" id="es_svg_referee"></text>
+<text x="94" y="35">Umpires:</text>
+<line x1="112" x2="280" y1="36" y2="36" />
+<text x="113" y="35" id="es_svg_umpires"></text>
+
+<!-- horizontal lines -->
+<line x1="20" x2="280" y1="44" y2="44" />
+<line x1="20" x2="280" y1="50" y2="50" />
+<line x1="20" x2="280" y1="60" y2="60" />
+<line x1="20" x2="280" y1="70" y2="70" />
+<line x1="20" x2="280" y1="80" y2="80" />
+<line x1="20" x2="280" y1="90" y2="90" />
+<line x1="20" x2="280" y1="100" y2="100" />
+<line x1="232" x2="280" y1="110" y2="110" />
+
+<!-- vertical lines -->
+<line x1="20" x2="20" y1="44" y2="100" />
+<line x1="28" x2="28" y1="44" y2="100" />
+<line x1="40" x2="40" y1="44" y2="100" />
+<line x1="109" x2="109" y1="44" y2="100" />
+<line x1="178" x2="178" y1="44" y2="100" />
+<line x1="196" x2="196" y1="44" y2="100" />
+<line x1="214" x2="214" y1="44" y2="100" />
+<line x1="232" x2="232" y1="44" y2="110" />
+<line x1="242" x2="242" y1="47" y2="110" />
+<line x1="252" x2="252" y1="44" y2="110" />
+<line x1="259" x2="259" y1="47" y2="110" />
+<line x1="266" x2="266" y1="44" y2="110" />
+<line x1="273" x2="273" y1="47" y2="110" />
+<line x1="280" x2="280" y1="44" y2="110" />
+
+
+<text x="24" y="48" style="text-anchor:middle; font-size: 3px">Order</text>
+<text x="24" y="56.5" id="es_svg_order0" style="text-anchor:middle;"></text>
+<text x="24" y="66.5" id="es_svg_order1" style="text-anchor:middle;"></text>
+<text x="24" y="76.5" id="es_svg_order2" style="text-anchor:middle;"></text>
+<text x="24" y="86.5" id="es_svg_order3" style="text-anchor:middle;"></text>
+<text x="24" y="96.5" id="es_svg_order4" style="text-anchor:middle;"></text>
+
+<text x="34" y="48" style="text-anchor:middle; font-size: 3px">Match</text>
+<text x="34" y="56.5" style="text-anchor:middle;" id="es_svg_name0"></text>
+<text x="34" y="66.5" style="text-anchor:middle;" id="es_svg_name1"></text>
+<text x="34" y="76.5" style="text-anchor:middle;" id="es_svg_name2"></text>
+<text x="34" y="86.5" style="text-anchor:middle;" id="es_svg_name3"></text>
+<text x="34" y="96.5" style="text-anchor:middle;" id="es_svg_name4"></text>
+
+<text x="74.5" y="48.5" style="text-anchor:middle;" id="es_svg_teamh0"></text>
+<text x="41" y="54" id="es_svg_0n0.0"></text>
+<text x="41" y="58.5" id="es_svg_0n0.1"></text>
+<text x="41" y="64" id="es_svg_1n0.0"></text>
+<text x="41" y="68.5" id="es_svg_1n0.1"></text>
+<text x="41" y="74" id="es_svg_2n0.0"></text>
+<text x="41" y="78.5" id="es_svg_2n0.1"></text>
+<text x="41" y="84" id="es_svg_3n0.0"></text>
+<text x="41" y="88.5" id="es_svg_3n0.1"></text>
+<text x="41" y="94" id="es_svg_4n0.0"></text>
+<text x="41" y="98.5" id="es_svg_4n0.1"></text>
+
+<text x="142.5" y="48.5" style="text-anchor:middle;" id="es_svg_teamh1"></text>
+<text x="110" y="54" id="es_svg_0n1.0"></text>
+<text x="110" y="58.5" id="es_svg_0n1.1"></text>
+<text x="110" y="64" id="es_svg_1n1.0"></text>
+<text x="110" y="68.5" id="es_svg_1n1.1"></text>
+<text x="110" y="74" id="es_svg_2n1.0"></text>
+<text x="110" y="78.5" id="es_svg_2n1.1"></text>
+<text x="110" y="84" id="es_svg_3n1.0"></text>
+<text x="110" y="88.5" id="es_svg_3n1.1"></text>
+<text x="110" y="94" id="es_svg_4n1.0"></text>
+<text x="110" y="98.5" id="es_svg_4n1.1"></text>
+
+<text x="187" y="48.5" style="text-anchor:middle;">Game 1</text>
+<text x="185" y="56.5" style="text-anchor:end;" id="es_svg_0p0.0"></text>
+<text x="187" y="56.5" style="text-anchor:middle;" id="es_svg_0d0"></text>
+<text x="194" y="56.5" style="text-anchor:end;" id="es_svg_0p1.0"></text>
+<text x="185" y="66.5" style="text-anchor:end;" id="es_svg_1p0.0"></text>
+<text x="187" y="66.5" style="text-anchor:middle;" id="es_svg_1d0"></text>
+<text x="194" y="66.5" style="text-anchor:end;" id="es_svg_1p1.0"></text>
+<text x="185" y="76.5" style="text-anchor:end;" id="es_svg_2p0.0"></text>
+<text x="187" y="76.5" style="text-anchor:middle;" id="es_svg_2d0"></text>
+<text x="194" y="76.5" style="text-anchor:end;" id="es_svg_2p1.0"></text>
+<text x="185" y="86.5" style="text-anchor:end;" id="es_svg_3p0.0"></text>
+<text x="187" y="86.5" style="text-anchor:middle;" id="es_svg_3d0"></text>
+<text x="194" y="86.5" style="text-anchor:end;" id="es_svg_3p1.0"></text>
+<text x="185" y="96.5" style="text-anchor:end;" id="es_svg_4p0.0"></text>
+<text x="187" y="96.5" style="text-anchor:middle;" id="es_svg_4d0"></text>
+<text x="194" y="96.5" style="text-anchor:end;" id="es_svg_4p1.0"></text>
+
+<text x="205" y="48.5" style="text-anchor:middle;">Game 2</text>
+<text x="203" y="56.5" style="text-anchor:end;" id="es_svg_0p0.1"></text>
+<text x="205" y="56.5" style="text-anchor:middle;" id="es_svg_0d1"></text>
+<text x="212" y="56.5" style="text-anchor:end;" id="es_svg_0p1.1"></text>
+<text x="203" y="66.5" style="text-anchor:end;" id="es_svg_1p0.1"></text>
+<text x="205" y="66.5" style="text-anchor:middle;" id="es_svg_1d1"></text>
+<text x="212" y="66.5" style="text-anchor:end;" id="es_svg_1p1.1"></text>
+<text x="203" y="76.5" style="text-anchor:end;" id="es_svg_2p0.1"></text>
+<text x="205" y="76.5" style="text-anchor:middle;" id="es_svg_2d1"></text>
+<text x="212" y="76.5" style="text-anchor:end;" id="es_svg_2p1.1"></text>
+<text x="203" y="86.5" style="text-anchor:end;" id="es_svg_3p0.1"></text>
+<text x="205" y="86.5" style="text-anchor:middle;" id="es_svg_3d1"></text>
+<text x="212" y="86.5" style="text-anchor:end;" id="es_svg_3p1.1"></text>
+<text x="203" y="96.5" style="text-anchor:end;" id="es_svg_4p0.1"></text>
+<text x="205" y="96.5" style="text-anchor:middle;" id="es_svg_4d1"></text>
+<text x="212" y="96.5" style="text-anchor:end;" id="es_svg_4p1.1"></text>
+
+<text x="223" y="48.5" style="text-anchor:middle;">Game 3</text>
+<text x="221" y="56.5" style="text-anchor:end;" id="es_svg_0p0.2"></text>
+<text x="223" y="56.5" style="text-anchor:middle;" id="es_svg_0d2"></text>
+<text x="230" y="56.5" style="text-anchor:end;" id="es_svg_0p1.2"></text>
+<text x="221" y="66.5" style="text-anchor:end;" id="es_svg_1p0.2"></text>
+<text x="223" y="66.5" style="text-anchor:middle;" id="es_svg_1d2"></text>
+<text x="230" y="66.5" style="text-anchor:end;" id="es_svg_1p1.2"></text>
+<text x="221" y="76.5" style="text-anchor:end;" id="es_svg_2p0.2"></text>
+<text x="223" y="76.5" style="text-anchor:middle;" id="es_svg_2d2"></text>
+<text x="230" y="76.5" style="text-anchor:end;" id="es_svg_2p1.2"></text>
+<text x="221" y="86.5" style="text-anchor:end;" id="es_svg_3p0.2"></text>
+<text x="223" y="86.5" style="text-anchor:middle;" id="es_svg_3d2"></text>
+<text x="230" y="86.5" style="text-anchor:end;" id="es_svg_3p1.2"></text>
+<text x="221" y="96.5" style="text-anchor:end;" id="es_svg_4p0.2"></text>
+<text x="223" y="96.5" style="text-anchor:middle;" id="es_svg_4d2"></text>
+<text x="230" y="96.5" style="text-anchor:end;" id="es_svg_4p1.2"></text>
+
+<text x="242" y="46.5" style="text-anchor:middle; font-size: 2.5px;">Points</text>
+
+<text x="237" y="49" style="text-anchor:middle; font-size: 2.5px;">Home</text>
+<text x="237" y="56.5" style="text-anchor:middle;" id="es_svg_0psum0"></text>
+<text x="237" y="66.5" style="text-anchor:middle;" id="es_svg_1psum0"></text>
+<text x="237" y="76.5" style="text-anchor:middle;" id="es_svg_2psum0"></text>
+<text x="237" y="86.5" style="text-anchor:middle;" id="es_svg_3psum0"></text>
+<text x="237" y="96.5" style="text-anchor:middle;" id="es_svg_4psum0"></text>
+
+<text x="247" y="49" style="text-anchor:middle; font-size: 2.5px;">Away</text>
+<text x="247" y="56.5" style="text-anchor:middle;" id="es_svg_0psum1"></text>
+<text x="247" y="66.5" style="text-anchor:middle;" id="es_svg_1psum1"></text>
+<text x="247" y="76.5" style="text-anchor:middle;" id="es_svg_2psum1"></text>
+<text x="247" y="86.5" style="text-anchor:middle;" id="es_svg_3psum1"></text>
+<text x="247" y="96.5" style="text-anchor:middle;" id="es_svg_4psum1"></text>
+
+<text x="259" y="46.5" style="text-anchor:middle; font-size: 2.5px;">Games</text>
+
+<text x="255.5" y="49" style="text-anchor:middle; font-size: 2.5px;">Home</text>
+<text x="255.5" y="56.5" style="text-anchor:middle;" id="es_svg_0gsum0"></text>
+<text x="255.5" y="66.5" style="text-anchor:middle;" id="es_svg_1gsum0"></text>
+<text x="255.5" y="76.5" style="text-anchor:middle;" id="es_svg_2gsum0"></text>
+<text x="255.5" y="86.5" style="text-anchor:middle;" id="es_svg_3gsum0"></text>
+<text x="255.5" y="96.5" style="text-anchor:middle;" id="es_svg_4gsum0"></text>
+
+<text x="262.5" y="49" style="text-anchor:middle; font-size: 2.5px;">Away</text>
+<text x="262.5" y="56.5" style="text-anchor:middle;" id="es_svg_0gsum1"></text>
+<text x="262.5" y="66.5" style="text-anchor:middle;" id="es_svg_1gsum1"></text>
+<text x="262.5" y="76.5" style="text-anchor:middle;" id="es_svg_2gsum1"></text>
+<text x="262.5" y="86.5" style="text-anchor:middle;" id="es_svg_3gsum1"></text>
+<text x="262.5" y="96.5" style="text-anchor:middle;" id="es_svg_4gsum1"></text>
+
+
+<text x="273" y="46.5" style="text-anchor:middle; font-size: 2.5px;">Matches</text>
+
+<text x="269.5" y="49" style="text-anchor:middle; font-size: 2.5px;">Home</text>
+<text x="269.5" y="56.5" style="text-anchor:middle;" id="es_svg_0msum0"></text>
+<text x="269.5" y="66.5" style="text-anchor:middle;" id="es_svg_1msum0"></text>
+<text x="269.5" y="76.5" style="text-anchor:middle;" id="es_svg_2msum0"></text>
+<text x="269.5" y="86.5" style="text-anchor:middle;" id="es_svg_3msum0"></text>
+<text x="269.5" y="96.5" style="text-anchor:middle;" id="es_svg_4msum0"></text>
+
+<text x="276.5" y="49" style="text-anchor:middle; font-size: 2.5px;">Away</text>
+<text x="276.5" y="56.5" style="text-anchor:middle;" id="es_svg_0msum1"></text>
+<text x="276.5" y="66.5" style="text-anchor:middle;" id="es_svg_1msum1"></text>
+<text x="276.5" y="76.5" style="text-anchor:middle;" id="es_svg_2msum1"></text>
+<text x="276.5" y="86.5" style="text-anchor:middle;" id="es_svg_3msum1"></text>
+<text x="276.5" y="96.5" style="text-anchor:middle;" id="es_svg_4msum1"></text>
+
+
+<text x="20" y="106.5">Winner:</text>
+<line x1="35" x2="90" y1="107.5" y2="107.5" />
+<text x="36" y="106.5" id="es_svg_winner"></text>
+
+<text x="230" y="106.5" style="text-anchor: end;">Result:</text>
+<text x="237" y="106.5" style="text-anchor:middle;" id="es_svg_psum0"></text>
+<text x="247" y="106.5" style="text-anchor:middle;" id="es_svg_psum1"></text>
+<text x="255.5" y="106.5" style="text-anchor:middle;" id="es_svg_gsum0"></text>
+<text x="262.5" y="106.5" style="text-anchor:middle;" id="es_svg_gsum1"></text>
+<text x="269.5" y="106.5" style="text-anchor:middle;" id="es_svg_msum0"></text>
+<text x="276.5" y="106.5" style="text-anchor:middle;" id="es_svg_msum1"></text>
+
+<text x="20" y="116">Backup players:</text>
+<text x="51" y="116" id="es_svg_backup_players_str"></text>
+<line x1="50" x2="280" y1="117" y2="117" />
+
+<text x="20" y="124">Notes:</text>
+<line x1="33" x2="280" y1="125" y2="125" />
+<text x="34" y="124" id="es_svg_notes"></text>
+<line x1="20" x2="280" y1="132" y2="132" />
+
+<text x="20" y="139">Protest:</text>
+<text x="36" y="139" id="es_svg_protest"></text>
+<line x1="35" x2="280" y1="140" y2="140" />
+
+<line x1="80" x2="140" y1="160" y2="160" />
+<text x="110" y="164" style="text-anchor: middle;">Referee</text>
+<line x1="150" x2="210" y1="160" y2="160" />
+<text x="180" y="164" style="text-anchor: middle;" id="es_svg_teamster0"></text>
+<line x1="220" x2="280" y1="160" y2="160" />
+<text x="250" y="164" style="text-anchor: middle;" id="es_svg_teamster1"></text>
+
+
+
+</svg>

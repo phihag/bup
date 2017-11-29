@@ -65,6 +65,7 @@ team_abbrevs    Array of home and away team name abbreviation (3 letters).
 team_colors     Array of home and away team colors (in #aabbcc format).
                 Example: ["#ffffff", "#0000f3"]
 umpires         String describing umpires (for eventsheet), e.g. "Barbara Bub & Klaus-Michael Becker"
+referee         Name of the referee, e.g. "Carsten Koch".
 starttime       Human-readable official start time, e.g. "19:00"
 date            Human-readable official day of match, e.g. "12.3.2017"
 matchday        Match day according to league plan, e.g. "1" (first game of the season) or "semi-finals"

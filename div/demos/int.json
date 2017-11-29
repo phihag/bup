@@ -4,10 +4,25 @@
   "event": {
     "league_key": "international-2017",
     "team_names": [
-      "Deutschland",
-      "Dänemark"
+      "Germany",
+      "Denmark"
     ],
+    "location": "Barbarossahalle, Ludwig-Thoma-Straße 1, Kaiserslautern",
+    "referee": "Carsten Koch",
+    "umpires": "Anna Offermann, Barbara Bub, Jörg Hupertz, Manuel Lappe",
     "staticnet_message": "International match demo (changes will not be transmitted anywhere)",
+    "protest": "Coaching chairs too comfortable",
+    "notes": "Coaches slept through most of the matches",
+    "backup_players": [[{
+      "name": "Kai Schäfer",
+      "gender": "m"
+    }, {
+      "name": "Yvonne Li",
+      "gender": "f"
+    }], [{
+      "name": "Viktor Axelsen",
+      "gender": "m"
+    }]],
     "all_players": [
       [
         {
@@ -35,6 +50,10 @@
           "gender": "m"
         },
         {
+          "name": "Kai Schäfer",
+          "gender": "m"
+        },
+        {
           "firstname": "Linda",
           "lastname": "Efler",
           "name": "Linda Efler",
@@ -50,6 +69,10 @@
           "firstname": "Lara",
           "lastname": "Käpplein",
           "name": "Lara Käpplein",
+          "gender": "f"
+        },
+        {
+          "name": "Yvonne Li",
           "gender": "f"
         }
       ],
@@ -70,6 +93,10 @@
           "firstname": "David",
           "lastname": "Daugaard",
           "name": "David Daugaard",
+          "gender": "m"
+        },
+        {
+          "name": "Viktor Axelsen",
           "gender": "m"
         },
         {

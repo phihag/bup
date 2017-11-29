@@ -17,7 +17,7 @@ var SHEETS_BY_LEAGUE = {
 	'RLM-2016': ['RLM-2016', 'RLM-SpO'],
 	'NLA-2017': ['NLA-2017'],
 	'OBL-2017': ['OBL-2017'],
-	'international-2017': [],
+	'international-2017': ['int'],
 };
 
 var URLS = {
@@ -50,6 +50,7 @@ var URLS = {
 	'buli2017-minv': 'div/buli2017_mindestanforderungen_verein.svg',
 	'OBL-2017': 'div/eventsheet_obl.xlsx',
 	'receipt': 'div/receipt.svg',
+	'int': 'div/eventsheet_international.svg',
 };
 var DIRECT_DOWNLOAD_SHEETS = {
 	'BL-ballsorten-2016': true,
@@ -101,7 +102,7 @@ function loaded(key) {
 }
 
 function _default_extra_data(extra_data, ev) {
-	['umpires', 'location', 'date', 'matchday', 'starttime', 'protest', 'notes', 'spectators'].forEach(function(key) {
+	['umpires', 'referee', 'location', 'date', 'matchday', 'starttime', 'protest', 'notes', 'spectators'].forEach(function(key) {
 		extra_data[key] = extra_data[key] || ev[key];
 	});
 	['backup_players', 'present_players'].forEach(function(k) {
@@ -551,7 +552,7 @@ function render_team_bl(ev, es_key, ui8r) {
 	save_file(blob, filename);
 }
 
-function _svg_text(svg, id, val) {
+function _svg_text(svg, id, val, move_y) {
 	var whole_id = 'es_svg_' + id;
 	var text_el = svg.getElementById(whole_id);
 	if (!text_el) {
@@ -563,6 +564,10 @@ function _svg_text(svg, id, val) {
 	if ((val !== undefined) && (val !== null)) {
 		var text_node = svg.ownerDocument.createTextNode(val);
 		text_el.appendChild(text_node);
+	}
+	if (move_y) {
+		var y = parseFloat(text_el.getAttribute('y'));
+		text_el.setAttribute('y', y + move_y);
 	}
 }
 
@@ -774,6 +779,107 @@ var render_buli2017_pdf = _svg_func(function(svg, ev, es_key, extra_data) {
 
 	return {
 		filename: state._('Event Sheet') + ' ' + ev.event_name + (last_update ? (' ' + utils.date_str(last_update)) : '') + '.pdf',
+		orientation: 'landscape',
+	};
+});
+
+function _international_name(match_name) {
+	return {
+		'HD': 'MD',
+		'DD': 'WD',
+		'HE': 'MS',
+		'DE': 'WS',
+		'GD': 'XD',
+	}[match_name] || match_name;
+}
+
+var render_int = _svg_func(function(svg, ev, es_key, extra_data) {
+	eventutils.set_metadata(ev);
+
+	var matches = ev.matches;
+	var last_update = calc_last_update(matches);
+
+	_svg_text(svg, 'referee', extra_data.referee);
+	_svg_text(svg, 'umpires', extra_data.umpires);
+	_svg_text(svg, 'location', extra_data.location);
+	_svg_text(svg, 'date', ev.date || (last_update ? utils.date_str(last_update) : ''));
+	_svg_text(svg, 'starttime', extra_data.starttime);
+	_svg_text(svg, 'endtime', last_update ? utils.time_str(last_update) : '');
+
+	_svg_text(svg, 'team0', ev.team_names[0]);
+	_svg_text(svg, 'team1', ev.team_names[1]);
+	_svg_text(svg, 'teamh0', ev.team_names[0]);
+	_svg_text(svg, 'teamh1', ev.team_names[1]);
+	_svg_text(svg, 'teamster0', 'Teamster ' + ev.team_names[0]);
+	_svg_text(svg, 'teamster1', 'Teamster ' + ev.team_names[1]);
+
+	var match_order = get_match_order(matches);
+	var total_sums = {
+		p: [0, 0],
+		g: [0, 0],
+		m: [0, 0],
+	};
+
+	matches.forEach(function(m, match_num) {
+		var netscore = m.network_score || [];
+
+		var mo = match_order[match_num];
+		if (mo) {
+			_svg_text(svg, 'order' + match_num, mo);
+		}
+
+		_svg_text(svg, 'name' + match_num, _international_name(calc_match_id(m)));
+		m.setup.teams.forEach(function(team, team_id){
+			team.players.forEach(function(player, player_id) {
+				_svg_text(
+					svg,
+					match_num + 'n' + team_id + '.' + player_id,
+					player.name,
+					(m.setup.is_doubles ? 0 : 2.5));
+			});
+
+			netscore.forEach(function(game, game_id) {
+				_svg_text(svg, match_num + 'p' + team_id + '.' + game_id, game[team_id]);
+			});
+		});
+
+		netscore.forEach(function(game, game_id) {
+			_svg_text(svg, match_num + 'd' + game_id, '-');
+		});
+
+		var sums = calc_sums(m);
+		if (sums.show) {
+			['p', 'g', 'm'].forEach(function(key) {
+				sums[key].forEach(function(val, team_id) {
+					_svg_text(svg, match_num + key + 'sum' + team_id, val);
+				});
+			});
+
+			_add_totals(total_sums, sums);
+		}
+	});
+
+	if (total_sums.show) {
+		['p', 'g', 'm'].forEach(function(key) {
+			total_sums[key].forEach(function(val, team_id) {
+				_svg_text(svg, key + 'sum' + team_id, val);
+			});
+		});
+	}
+
+	total_sums.m.forEach(function(mval, team_id) {
+		// No draw because 7 matches
+		if (mval > matches.length / 2) {
+			_svg_text(svg, 'winner', ev.team_names[team_id]);
+		}
+	});
+
+	_svg_text(svg, 'backup_players_str', extra_data.backup_players_str);
+	_svg_text(svg, 'protest', extra_data.protest);
+	_svg_text(svg, 'notes', extra_data.notes);
+
+	return {
+		filename: ev.event_name + (last_update ? (' ' + utils.date_str(last_update)) : '') + '.pdf',
 		orientation: 'landscape',
 	};
 });
@@ -1557,10 +1663,12 @@ function es_render(ev, es_key, ui8r, extra_data) {
 	case 'buli2017-minsr':
 	case 'buli2017-minv':
 		return render_buli_minreq_svg(ev, es_key, ui8r);
+	case 'int':
+		return render_int(ev, es_key, ui8r, extra_data);
 	case 'receipt':
 		return render_receipt(ev, es_key, ui8r, extra_data);
 	default:
-	throw new Error('Unsupported eventsheet key ' + es_key);
+		throw new Error('Unsupported eventsheet key ' + es_key);
 	}
 }
 
@@ -1666,7 +1774,7 @@ function ui_init() {
 		e.preventDefault();
 		var es_key = uiu.qs('.eventsheet_container').getAttribute('data-eventsheet_key');
 		var fields = [
-			'umpires', 'location', 'matchday', 'starttime', 'notes', 'backup_players_str', 'protest', 'spectators',
+			'referee', 'umpires', 'location', 'matchday', 'starttime', 'notes', 'backup_players_str', 'protest', 'spectators',
 			'date',
 			'backup_players0', 'backup_players1', 'present_players0', 'present_players1',
 		];
@@ -1715,7 +1823,7 @@ function ui_init() {
 function on_fetch() {
 	var event = state.event;
 	var container = uiu.qs('.eventsheet_container');
-	var KEYS = ['location', 'starttime', 'matchday', 'notes', 'protest', 'spectators'];
+	var KEYS = ['referee', 'location', 'starttime', 'matchday', 'notes', 'protest', 'spectators'];
 	KEYS.forEach(function(k) {
 		if (event[k]) {
 			container.querySelector('[name="' + k + '"]').value = event[k];
@@ -1792,6 +1900,29 @@ function resolve_key(es_key) {
 	return ev.eventsheets[0].key;
 }
 
+// cfg is a list of fields to show
+function configure_report(cfg) {
+	var ALL_FIELDS = [
+		'matchday',
+		'umpires',
+		'referee',
+		'notes',
+		'location',
+		'starttime',
+		'backup_players_str',
+		'protest',
+		'spectators',
+	];
+
+	ALL_FIELDS.forEach(function(field_name) {
+		uiu.visible_qs(
+			'.eventsheet_' + field_name, utils.includes(cfg, field_name)
+		);
+	});
+
+	uiu.show_qs('.eventsheet_report');
+}
+
 function show_dialog(es_key) {
 	state.ui.eventsheet = es_key;
 	if (state.ui.referee_mode) {
@@ -1847,41 +1978,19 @@ function show_dialog(es_key) {
 	case 'RLN-2016':
 	case 'RLM-2016':
 	case 'NRW-2016':
-		uiu.show_qs('.eventsheet_matchday');
-		uiu.show_qs('.eventsheet_umpires');
-		uiu.show_qs('.eventsheet_notes');
-		uiu.show_qs('.eventsheet_location');
-		uiu.show_qs('.eventsheet_starttime');
-		uiu.show_qs('.eventsheet_backup_players_str');
-		uiu.show_qs('.eventsheet_protest');
-		uiu.hide_qs('.eventsheet_spectators');
+		configure_report(['umpires', 'location', 'starttime', 'matchday',  'backup_players_str', 'notes', 'protest']);
 		uiu.hide(download_link_container);
 		break;
 	case '1BL-2016':
 	case '2BLN-2016':
 	case '2BLS-2016':
-		uiu.show_qs('.eventsheet_umpires');
-		uiu.show_qs('.eventsheet_notes');
-		uiu.show_qs('.eventsheet_location');
-		uiu.show_qs('.eventsheet_matchday');
-		uiu.show_qs('.eventsheet_starttime');
-		uiu.hide_qs('.eventsheet_backup_players_str');
-		uiu.show_qs('.eventsheet_protest');
-		uiu.show_qs('.eventsheet_spectators');
-		uiu.show(report);
+		configure_report(['umpires', 'location', 'starttime', 'matchday', 'notes', 'protest', 'spectators']);
 		uiu.hide(download_link_container);
 		break;
 	case '1BL-2017_pdf':
 	case '2BLN-2017_pdf':
 	case '2BLS-2017_pdf':
-		uiu.show_qs('.eventsheet_umpires');
-		uiu.show_qs('.eventsheet_notes');
-		uiu.show_qs('.eventsheet_location');
-		uiu.show_qs('.eventsheet_matchday');
-		uiu.show_qs('.eventsheet_starttime');
-		uiu.hide_qs('.eventsheet_backup_players_str');
-		uiu.show_qs('.eventsheet_protest');
-		uiu.show_qs('.eventsheet_spectators');
+		configure_report(['umpires', 'location', 'starttime', 'matchday', 'notes', 'protest', 'spectators']);
 
 		var team_names = ['team 1', 'team 2'];
 		['backup_players', 'present_players'].forEach(function(key) {
@@ -1899,7 +2008,6 @@ function show_dialog(es_key) {
 				});
 			});
 		});
-		uiu.show(report);
 
 		uiu.hide(download_link_container);
 		break;
@@ -1916,25 +2024,15 @@ function show_dialog(es_key) {
 		uiu.hide(download_link_container);
 		break;
 	case 'OBL-2017':
-		uiu.show_qs('.eventsheet_umpires');
-		uiu.show_qs('.eventsheet_notes');
-		uiu.show_qs('.eventsheet_location');
-		uiu.hide_qs('.eventsheet_matchday');
-		uiu.hide_qs('.eventsheet_starttime');
-		uiu.hide_qs('.eventsheet_backup_players_str');
-		uiu.hide_qs('.eventsheet_protest');
-		uiu.hide_qs('.eventsheet_spectators');
+		configure_report(['umpires', 'location', 'notes']);
+		uiu.hide(download_link_container);
+		break;
+	case 'int':
+		configure_report(['referee', 'umpires', 'location', 'starttime', 'backup_players_str', 'notes', 'protest']);
 		uiu.hide(download_link_container);
 		break;
 	case 'receipt':
-		uiu.hide_qs('.eventsheet_umpires');
-		uiu.hide_qs('.eventsheet_matchday');
-		uiu.hide_qs('.eventsheet_starttime');
-		uiu.hide_qs('.eventsheet_backup_players_str');
-		uiu.hide_qs('.eventsheet_protest');
-		uiu.hide_qs('.eventsheet_spectators');
-		uiu.hide_qs('.eventsheet_notes');
-		uiu.hide_qs('.eventsheet_location');
+		configure_report([]);
 		uiu.hide(download_link_container);
 
 		var umpire_label = uiu.el(report, 'label', 'eventsheet_dynamic', state._('receipt:umpire'));
@@ -1952,7 +2050,6 @@ function show_dialog(es_key) {
 			style: 'width:2.4em;',
 		});
 
-		uiu.show(report);
 		break;
 	default:
 		uiu.hide_qs('.eventsheet_spectators');
