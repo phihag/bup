@@ -36,7 +36,7 @@ function record(s) {
 
 	var orig_hval = window.location.hash.substr(1);
 	var hval = orig_hval;
-	hval = hval.replace(/(?:^|&)(?:m|display|settings|event_scoresheets|scoresheet|eventsheet|stats|netstats|order|urlexport|mo|editevent|setupsheet|referee_mode|dads|court|dm_style)(?:=[^&]*)?(?=&|$)/g, '');
+	hval = hval.replace(/(?:^|&)(?:m|display|settings|event_scoresheets|scoresheet|eventsheet|es_preview|stats|netstats|order|urlexport|mo|editevent|setupsheet|referee_mode|dads|court|dm_style)(?:=[^&]*)?(?=&|$)/g, '');
 	hval = hval.replace(/^&+|&+$/g, '');
 
 	if (s.initialized && (settings.get_mode(s) === 'umpire')) {
@@ -74,6 +74,11 @@ function record(s) {
 			hval += '&';
 		}
 		hval += 'eventsheet=' + encodeURIComponent(s.ui.eventsheet);
+	} else if (s.ui.es_preview) {
+		if (hval.length > 1) {
+			hval += '&';
+		}
+		hval += 'es_preview=' + encodeURIComponent(s.ui.es_preview);
 	} else if (s.ui.netstats_visible) {
 		if (hval.length > 1) {
 			hval += '&';
@@ -125,12 +130,21 @@ function record(s) {
 	var new_qs = utils.parse_query_string(hval);
 	if (! utils.deep_equal(orig_qs, new_qs)) {
 		// TODO use history API here to avoid changing?
+		_expect_hash = hval;
 		window.location.hash = '#' + hval;
 	}
 }
 
+var _expect_hash;
 function load_by_hash() {
-	var qs = utils.parse_query_string(window.location.hash.substr(1));
+	var hval = window.location.hash.substr(1);
+	if (hval === _expect_hash) {
+		// Loaded after navigating
+		_expect_hash = null;
+		return;
+	}
+
+	var qs = utils.parse_query_string(hval);
 
 	var show_func;
 	var hide_funcs = [];
@@ -156,6 +170,10 @@ function load_by_hash() {
 	if (qs.eventsheet) {
 		show_func = function() {
 			eventsheet.show_dialog(qs.eventsheet);
+		};
+	} else if (qs.es_preview) {
+		show_func = function() {
+			eventsheet.show_preview(qs.es_preview);
 		};
 	} else {
 		hide_funcs.push(eventsheet.hide);

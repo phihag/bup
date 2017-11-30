@@ -373,7 +373,7 @@ var i18n_de = {
 'eventsheet:label|NRW-Satzungen': 'Satzungen und Ordnungen BLV NRW',
 'eventsheet:label|NLA-2017': 'Resultatblatt',
 'eventsheet:label|OBL-2017': 'Spielbericht',
-'eventsheet:label|receipt': 'Schiedsrichter-Quittung',
+'eventsheet:label|receipt': 'Schiedsrichter-Quittung (experimentell)',
 'eventsheet:label|int': 'Spielbericht',
 
 'stats:game': '{number}. Satz',

@@ -1,26 +1,12 @@
-support international matches
-	add an eventsheet (from buli2017_pdf?)
-		dashes
-		fill psum
-		fill gsum
-		fill msum
-		fill tsum
-		fill winner
-	demo: notes etc.
-bupabfrage: 0 with Deutschland means international
-	filter other matches (even rename?)
-	-> Paul
-
-eventsheet: preview back should go back to dialog
-
+update eventsheet framework
+	back fails
+	keep extra_data when moving around!
+	modify DIRECT* family to go to es_preview immediately
 
 generate receipts
-	set up UI
-	filename
 	configure costs in eventutils
 	include club logo with <image x="10" y="20" width="80" height="80" xlink:href="club/logo.svg" />
 	i18n svg
-	link to in BuLi, RLN, RLW
 
 receipts: autocalc distance
 	http proxy for distance (using google maps API)

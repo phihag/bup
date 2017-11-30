@@ -4,8 +4,12 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:xlink="http://www.w3.org/1999/xlink">
 
-<text data-i18n="receipt:header" x="20" y="20" style="text-anchor:middle;font-size:40px;">TODO: Quittung</text>
+<text x="105" y="20" style="text-anchor:middle;font-size:20px;" data-i18n="receipt:header"></text>
 
+<text x="10" y="50" style="font-size:4px;" data-i18n="receipt:umpire"></text>
+<text x="50" y="50" style="font-size:4px;" id="es_svg_receipt_umpire"></text>
 
+<text x="10" y="70" style="font-size:4px;" data-i18n="receipt:distance"></text>
+<text x="50" y="70" style="font-size:4px;" id="es_svg_receipt_distance"></text>
 
 </svg>

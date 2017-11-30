@@ -8,13 +8,13 @@ var SHEETS_BY_LEAGUE = {
 	'1BL-2016': ['1BL-2016', 'BL-ballsorten-2016', 'DBV-Satzungen-2016', 'teamlist-1BL-2016'],
 	'2BLN-2016': ['2BLN-2016', 'BL-ballsorten-2016', 'DBV-Satzungen-2016', 'teamlist-2BLN-2016'],
 	'2BLS-2016': ['2BLS-2016', 'BL-ballsorten-2016', 'DBV-Satzungen-2016', 'teamlist-2BLS-2016'],
-	'1BL-2017': ['1BL-2017_pdf', '1BL-2016', 'buli2017-minsr', 'buli2017-minv', 'DBV-Satzungen-2017'],
-	'2BLN-2017': ['2BLN-2017_pdf', '2BLN-2016', 'buli2017-minsr', 'buli2017-minv', 'DBV-Satzungen-2017'],
-	'2BLS-2017': ['2BLS-2017_pdf', '2BLS-2016', 'buli2017-minsr', 'buli2017-minv', 'DBV-Satzungen-2017'],
+	'1BL-2017': ['1BL-2017_pdf', '1BL-2016', 'buli2017-minsr', 'buli2017-minv', 'receipt', 'DBV-Satzungen-2017'],
+	'2BLN-2017': ['2BLN-2017_pdf', '2BLN-2016', 'buli2017-minsr', 'buli2017-minv', 'receipt', 'DBV-Satzungen-2017'],
+	'2BLS-2017': ['2BLS-2017_pdf', '2BLS-2016', 'buli2017-minsr', 'buli2017-minv', 'receipt', 'DBV-Satzungen-2017'],
 	'NRW-2016': ['NRW-2016', 'NRW-Satzungen'],
-	'RLW-2016': ['RLW-2016', 'NRW-Satzungen'],
-	'RLN-2016': ['RLN-2016', 'RLN-Satzungen-2016'],
-	'RLM-2016': ['RLM-2016', 'RLM-SpO'],
+	'RLW-2016': ['RLW-2016', 'receipt', 'NRW-Satzungen'],
+	'RLN-2016': ['RLN-2016', 'receipt', 'RLN-Satzungen-2016'],
+	'RLM-2016': ['RLM-2016', 'receipt', 'RLM-SpO'],
 	'NLA-2017': ['NLA-2017'],
 	'OBL-2017': ['OBL-2017'],
 	'international-2017': ['int'],
@@ -234,7 +234,7 @@ function order_matches(ev, match_order) {
 	return matches;
 }
 
-function render_bundesliga(ev, es_key, ui8r, extra_data) {
+function save_bundesliga(ev, es_key, ui8r, extra_data) {
 	var i; // "let" is not available even in modern browsers
 	var match_order;
 	if (es_key == '1BL-2015') {
@@ -370,7 +370,7 @@ function render_bundesliga(ev, es_key, ui8r, extra_data) {
 	save_file(blob, filename);
 }
 
-function render_team_bl(ev, es_key, ui8r) {
+function save_team_bl(ev, es_key, ui8r) {
 	// No let in modern browsers
 	var team_id;
 
@@ -574,21 +574,13 @@ function _svg_text(svg, id, val, move_y) {
 // Decorator for svg-based sheets.
 // The function gets called with (svg, ev, es_key, extra_data), and must return {orientation, optionally scale}.
 function _svg_func(func) {
-	return function(ev, es_key, ui8r, extra_data) {
-		uiu.hide_qs('.eventsheet_report');
-		uiu.show_qs('.eventsheet_print_button');
-		uiu.show_qs('.eventsheet_pdf_button');
-		uiu.hide_qs('.eventsheet_generate_button');
-
-		var preview = uiu.qs('.eventsheet_preview');
-		uiu.show(preview);
-
-		uiu.empty(preview);
-
+	return function(preview, ev, es_key, ui8r, extra_data) {
 		var xml_str = (new TextDecoder('utf-8')).decode(ui8r);
 		var svg_doc = (new DOMParser()).parseFromString(xml_str, 'image/svg+xml');
 		var svg = svg_doc.getElementsByTagName('svg')[0];
 		svg.setAttribute('style', 'max-width:100%;max-height:100%;');
+
+		i18n.translate_nodes(svg, state);
 
 		var info = func(svg, ev, es_key, extra_data);
 		var subject = state._('eventsheet:label|' + es_key);
@@ -885,13 +877,15 @@ var render_int = _svg_func(function(svg, ev, es_key, extra_data) {
 });
 
 var render_receipt = _svg_func(function(svg, ev, es_key, extra_data) {
-	// console.log('TODO would now render receipt', extra_data);
+	_svg_text(svg, 'receipt_umpire', extra_data.receipt_umpire);
+	_svg_text(svg, 'receipt_distance', extra_data.receipt_distance);
+
 	return {
 		filename: state._('receipt:header') + (extra_data.receipt_umpire ? ' ' + extra_data.receipt_umpire : '') + '.pdf',
 	};
 });
 
-var render_basic_eventsheet =  _svg_func(function(svg, ev, es_key, extra_data) {
+var render_basic_eventsheet = _svg_func(function(svg, ev, es_key, extra_data) {
 	eventutils.set_metadata(ev);
 
 	var match_order = ['1.HD', '2.HD', 'DD', '1.HE', '2.HE', '3.HE', 'DE', 'GD'];
@@ -1062,7 +1056,7 @@ function calc_sums(match) {
 	return res;
 }
 
-function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
+function save_bundesliga2016(ev, es_key, ui8r, extra_data) {
 	eventutils.set_metadata(ev);
 	var match_order = get_match_order(ev.matches);
 	var last_update = calc_last_update(ev.matches);
@@ -1514,7 +1508,7 @@ function render_bundesliga2016(ev, es_key, ui8r, extra_data) {
 	});
 }
 
-function render_obl(ev, es_key, ui8r, extra_data) {
+function save_obl(ev, es_key, ui8r, extra_data) {
 	eventutils.set_metadata(ev);
 	var last_update = calc_last_update(ev.matches);
 	var today = last_update ? last_update : Date.now();
@@ -1639,34 +1633,57 @@ function es_render(ev, es_key, ui8r, extra_data) {
 	case '1BL-2015':
 	case '2BLN-2015':
 	case '2BLS-2015':
-		return render_bundesliga(ev, es_key, ui8r, extra_data);
+		return save_bundesliga(ev, es_key, ui8r, extra_data);
 	case 'team-1BL-2015':
 	case 'team-2BL-2015':
-		return render_team_bl(ev, es_key, ui8r);
+		return save_team_bl(ev, es_key, ui8r);
+	case '1BL-2016':
+	case '2BLN-2016':
+	case '2BLS-2016':
+		return save_bundesliga2016(ev, es_key, ui8r, extra_data);
+	case 'OBL-2017':
+		return save_obl(ev, es_key, ui8r, extra_data);
+	}
+
+	// Configure preview
+	state.ui.es_preview = es_key;
+	delete state.ui.eventsheet;
+	control.set_current(state);
+
+	uiu.hide_qs('.eventsheet_report');
+	uiu.hide_qs('.eventsheet_back');
+	uiu.show_qs('.eventsheet_preview_back');
+	uiu.show_qs('.eventsheet_print_button');
+	uiu.show_qs('.eventsheet_pdf_button');
+	uiu.hide_qs('.eventsheet_generate_button');
+
+	var preview_el = uiu.qs('.eventsheet_preview');
+	uiu.show(preview_el);
+	uiu.empty(preview_el);
+
+	render_previewable(preview_el, ev, es_key, ui8r, extra_data);
+}
+
+function render_previewable(preview_el, ev, es_key, ui8r, extra_data) {
+	switch(es_key) {
 	case 'RLW-2016':
 	case 'RLN-2016':
 	case 'RLM-2016':
 	case 'NRW-2016':
-		return render_basic_eventsheet(ev, es_key, ui8r, extra_data);
-	case '1BL-2016':
-	case '2BLN-2016':
-	case '2BLS-2016':
-		return render_bundesliga2016(ev, es_key, ui8r, extra_data);
+		return render_basic_eventsheet(preview_el, ev, es_key, ui8r, extra_data);
 	case '1BL-2017_pdf':
 	case '2BLN-2017_pdf':
 	case '2BLS-2017_pdf':
-		return render_buli2017_pdf(ev, es_key, ui8r, extra_data);
+		return render_buli2017_pdf(preview_el, ev, es_key, ui8r, extra_data);
 	case 'NLA-2017':
-		return render_nla(ev, es_key, ui8r);
-	case 'OBL-2017':
-		return render_obl(ev, es_key, ui8r, extra_data);
+		return render_nla(preview_el, ev, es_key, ui8r);
 	case 'buli2017-minsr':
 	case 'buli2017-minv':
-		return render_buli_minreq_svg(ev, es_key, ui8r);
+		return render_buli_minreq_svg(preview_el, ev, es_key, ui8r);
 	case 'int':
-		return render_int(ev, es_key, ui8r, extra_data);
+		return render_int(preview_el, ev, es_key, ui8r, extra_data);
 	case 'receipt':
-		return render_receipt(ev, es_key, ui8r, extra_data);
+		return render_receipt(preview_el, ev, es_key, ui8r, extra_data);
 	default:
 		throw new Error('Unsupported eventsheet key ' + es_key);
 	}
@@ -1769,22 +1786,12 @@ function render_links(s, container) {
 }
 
 function ui_init() {
-	var $form = $('.eventsheet_form');
-	$form.on('submit', function(e) {
-		e.preventDefault();
+	form_utils.onsubmit(uiu.qs('.eventsheet_form'), function(extra_data) {
 		var es_key = uiu.qs('.eventsheet_container').getAttribute('data-eventsheet_key');
-		var fields = [
-			'referee', 'umpires', 'location', 'matchday', 'starttime', 'notes', 'backup_players_str', 'protest', 'spectators',
-			'date',
-			'backup_players0', 'backup_players1', 'present_players0', 'present_players1',
-		];
-		var extra_data = utils.map_dict(fields, function(field) {
-			return $form.find('[name="' + field + '"]').val();
-		});
+
 		_default_extra_data(extra_data, state.event);
 
 		prepare_render(uiu.qs('.eventsheet_generate_button'), es_key, extra_data);
-		return false;
 	});
 
 	click.qs('.eventsheet_reload', function() {
@@ -1808,15 +1815,18 @@ function ui_init() {
 		window.print();
 	});
 
-	$('.eventsheet_back').on('click', function(e) {
-		e.preventDefault();
+	click.qs('.eventsheet_back', function() {
 		var from_bup = $('.eventsheet_container').attr('data-eventsheet_key') != 'auto-direct';
 		if (from_bup) {
 			hide_dialog();
 		} else {
 			window.history.back();
 		}
-		return false;
+	});
+
+	click.qs('.eventsheet_preview_back', function() {
+		uiu.hide_qs('.eventsheet_preview');
+		show_dialog(state.ui.es_preview);
 	});
 }
 
@@ -1923,8 +1933,8 @@ function configure_report(cfg) {
 	uiu.show_qs('.eventsheet_report');
 }
 
-function show_dialog(es_key) {
-	state.ui.eventsheet = es_key;
+function show_preview(es_key) {
+	state.ui.es_preview = es_key;
 	if (state.ui.referee_mode) {
 		refmode_referee_ui.hide_tmp();
 	} else {
@@ -1932,6 +1942,29 @@ function show_dialog(es_key) {
 		render.hide();
 	}
 
+	uiu.hide_qs('.eventsheet_report');
+	uiu.hide_qs('.eventsheet_download_link_container');
+
+	var extra_data = {};
+	uiu.show_qs('.eventsheet_container');
+	dialog_fetch(function() {
+		prepare_render(uiu.qs('.eventsheet_dialog'), es_key, extra_data);
+	});
+}
+
+function show_dialog(es_key) {
+	delete state.ui.es_preview;
+	state.ui.eventsheet = es_key;
+	if (state.ui.referee_mode) {
+		refmode_referee_ui.hide_tmp();
+	} else {
+		settings.hide(true);
+		render.hide();
+	}
+	control.set_current(state);
+
+	uiu.hide_qs('.eventsheet_preview_back');
+	uiu.show_qs('.eventsheet_back');
 	uiu.hide_qs('.eventsheet_error');
 
 	es_key = resolve_key(es_key);
@@ -2091,6 +2124,7 @@ return {
 	ui_init: ui_init,
 	hide: hide,
 	show_dialog: show_dialog,
+	show_preview: show_preview,
 	render_links: render_links,
 	calc_match_id: calc_match_id,
 };
@@ -2102,6 +2136,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
 	var click = require('./click');
 	var eventutils = require('./eventutils');
+	var form_utils = require('./form_utils');
 	var network = require('./network');
 	var printing = require('./printing');
 	var refmode_referee_ui = null; // break circle, really would be require('./refmode_referee_ui');
