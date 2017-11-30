@@ -363,7 +363,7 @@ var i18n_en = {
 'eventsheet:label|DBV-Satzungen-2017': 'German Laws&Regulations 2017/2018',
 'eventsheet:label|RLW-2016': '(German Regionalliga West) result report sheet',
 'eventsheet:label|RLN-2016': '(German Regionalliga North) result report sheet',
-'eventsheet:label|RLN-Satzungen-2016': '(German Group North) laws & regulations (2016)',
+'eventsheet:label|RLN-Satzungen': '(German Group North) laws & regulations',
 'eventsheet:label|RLM-2016': '(German Regionalliga Middle) result report sheet',
 'eventsheet:label|RLM-SpO': '(German Group Middle) regulations',
 'eventsheet:label|team-1BL-2015': '(German Bundesliga) team selection sheet (2015)',

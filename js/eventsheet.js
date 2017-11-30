@@ -13,7 +13,7 @@ var SHEETS_BY_LEAGUE = {
 	'2BLS-2017': ['2BLS-2017_pdf', '2BLS-2016', 'buli2017-minsr', 'buli2017-minv', 'receipt', 'DBV-Satzungen-2017'],
 	'NRW-2016': ['NRW-2016', 'NRW-Satzungen'],
 	'RLW-2016': ['RLW-2016', 'receipt', 'NRW-Satzungen'],
-	'RLN-2016': ['RLN-2016', 'receipt', 'RLN-Satzungen-2016'],
+	'RLN-2016': ['RLN-2016', 'receipt', 'RLN-Satzungen'],
 	'RLM-2016': ['RLM-2016', 'receipt', 'RLM-SpO'],
 	'NLA-2017': ['NLA-2017'],
 	'OBL-2017': ['OBL-2017'],
@@ -35,7 +35,7 @@ var URLS = {
 	'DBV-Satzungen-2017': 'http://www.badminton.de/fileadmin/user_upload/17-dbv-druckwerk_satzung-ordnungen-spielregeln201718-website.pdf.pdf',
 	'RLW-2016': 'div/Spielbericht_8x3x21.svg',
 	'RLN-2016': 'div/Spielbericht_8x3x21.svg',
-	'RLN-Satzungen-2016': 'http://www.gruppe-nord.net/fileadmin/user_upload/schuch/GruppeNord/Satzung/Satzung%20und%20Ordnungen%20der%20Gruppe%20Nord%20Stand%2006-08-16.pdf',
+	'RLN-Satzungen': 'http://www.gruppe-nord.net/fileadmin/user_upload/schuch/GruppeNord/Satzung/Satzung%20und%20Ordnungen%20der%20Gruppe%20Nord%20Stand%2005-08-17.pdf',
 	'RLM-2016': 'div/Spielbericht_8x3x21.svg',
 	'RLM-SpO': 'http://www.dbv-mitte.de/web/images/Allgemein/Gruppenordnung/Gruppe_Mitte_im_DBV_Ordnungen_20170701.pdf',
 	'NLA-2017': 'div/NLA_Resultatblatt.svg',
@@ -60,7 +60,7 @@ var DIRECT_DOWNLOAD_SHEETS = {
 };
 var EXTERNAL_DOWNLOAD_SHEETS = {
 	'DBV-Satzungen-2017': true,
-	'RLN-Satzungen-2016': true,
+	'RLN-Satzungen': true,
 	'RLM-SpO': true,
 	'NRW-Satzungen': true,
 };

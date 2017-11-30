@@ -364,7 +364,7 @@ var i18n_de = {
 'eventsheet:label|DBV-Satzungen-2017': 'Regeln DBV 2017/2018',
 'eventsheet:label|RLW-2016': 'Spielbericht',
 'eventsheet:label|RLN-2016': 'Spielbericht',
-'eventsheet:label|RLN-Satzungen-2016': 'Satzungen und Ordnungen 2016',
+'eventsheet:label|RLN-Satzungen': 'Satzungen und Ordnungen',
 'eventsheet:label|RLM-2016': 'Spielbericht',
 'eventsheet:label|RLM-SpO': 'Spielordnung',
 'eventsheet:label|team-1BL-2015': 'Mannschaftsaufstellung (2015)',
