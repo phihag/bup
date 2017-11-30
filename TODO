@@ -1,13 +1,10 @@
 generate receipts
 	configure costs in eventutils
-	include club logo with <image x="10" y="20" width="80" height="80" xlink:href="club/logo.svg" />
-	i18n svg
+	include club logo with <image x="10" y="20" width="80" height="80" xlink:href="BASE64" />
 
 receipts: autocalc distance
 	http proxy for distance (using google maps API)
 	link to google maps if hall location present (or better, autocalc)
-
-eventsheet: modern svg2pdf: print and PDF buttons right on the page
 
 save inputted umpire names (for CourtSpot)
 	-> Ulf
@@ -30,7 +27,7 @@ test cs order in detail
 
 selectevent module
 	debmlist: collect coordinates
-	debmlist: collect from VRL instead of something else. Also collekt Stammspieler
+	debmlist: collect from VRL instead of something else. Also collect Stammspieler
 	download 5 most likely (and leagues + matches therein)
 	start via league
 	start via URL input
@@ -40,9 +37,12 @@ selectevent module
 	checkbox on referee: store event permanently (do not load from clients)
 
 d teamscore [see pic]
+d teamscore only logos
+d teamscore with small won matches
 d shortsets [see pic]
 d a nice modern overview of all matches, similar to tim
 
+eventsheet: modern svg2pdf: print and PDF buttons right on the page
 eventsheet: modify DIRECT* family to go to es_preview immediately
 
 refmode redesign UI for change dialogs
