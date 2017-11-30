@@ -1,8 +1,3 @@
-update eventsheet framework
-	back fails
-	keep extra_data when moving around!
-	modify DIRECT* family to go to es_preview immediately
-
 generate receipts
 	configure costs in eventutils
 	include club logo with <image x="10" y="20" width="80" height="80" xlink:href="club/logo.svg" />
@@ -17,7 +12,6 @@ eventsheet: modern svg2pdf: print and PDF buttons right on the page
 save inputted umpire names (for CourtSpot)
 	-> Ulf
 	-> Benedikt
-
 
 eventsheet: sign!
 	store signatures in CourtSpot
@@ -48,6 +42,8 @@ selectevent module
 d teamscore [see pic]
 d shortsets [see pic]
 d a nice modern overview of all matches, similar to tim
+
+eventsheet: modify DIRECT* family to go to es_preview immediately
 
 refmode redesign UI for change dialogs
 refmode make more efficient

@@ -1788,6 +1788,9 @@ function render_links(s, container) {
 function ui_init() {
 	form_utils.onsubmit(uiu.qs('.eventsheet_form'), function(extra_data) {
 		var es_key = uiu.qs('.eventsheet_container').getAttribute('data-eventsheet_key');
+		if (state.event) {
+			state.event._es_extra_data = utils.deep_copy(extra_data);
+		}
 
 		_default_extra_data(extra_data, state.event);
 
@@ -1826,17 +1829,27 @@ function ui_init() {
 
 	click.qs('.eventsheet_preview_back', function() {
 		uiu.hide_qs('.eventsheet_preview');
-		show_dialog(state.ui.es_preview);
+		if (state.event && state.event._es_extra_data) {
+			window.history.back(); // Actually go back so that history is kept
+		} else {
+			show_dialog(state.ui.es_preview);
+		}
 	});
 }
 
 function on_fetch() {
 	var event = state.event;
 	var container = uiu.qs('.eventsheet_container');
-	var KEYS = ['referee', 'location', 'starttime', 'matchday', 'notes', 'protest', 'spectators'];
+	var KEYS = [
+		'referee', 'location', 'starttime', 'matchday', 'notes', 'protest', 'spectators',
+		// only from saved extra_data
+		'receipt_umpire', 'receipt_distance',
+	];
+	var saved_ed = event._es_extra_data;
 	KEYS.forEach(function(k) {
-		if (event[k]) {
-			container.querySelector('[name="' + k + '"]').value = event[k];
+		var val = (saved_ed && saved_ed[k]) || event[k];
+		if (val) {
+			container.querySelector('[name="' + k + '"]').value = val;
 		}
 	});
 
@@ -2135,8 +2148,10 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
 	var click = require('./click');
+	var control = require('./control');
 	var eventutils = require('./eventutils');
 	var form_utils = require('./form_utils');
+	var i18n = require('./i18n');
 	var network = require('./network');
 	var printing = require('./printing');
 	var refmode_referee_ui = null; // break circle, really would be require('./refmode_referee_ui');
