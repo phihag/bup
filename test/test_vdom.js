@@ -37,4 +37,17 @@ _describe('vdom', function() {
 			'  </el2>\n' +
 			'</root>');
 	});
+
+	_it('appendChild', function() {
+		var doc = new vdom.Document('root');
+		var c = doc.createElement('c');
+		assert.strictEqual(c, doc.documentElement.appendChild(c));
+
+		var t = doc.createTextNode('foobar');
+		assert.strictEqual(t, c.appendChild(t));
+
+		assert.strictEqual(
+			doc.toxml(),
+			'<?xml version="1.0"?><root><c>foobar</c></root>');
+	});
 });

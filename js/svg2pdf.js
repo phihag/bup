@@ -13,34 +13,6 @@ function _split_args(str) {
 	});
 }
 
-// Returns: null (parse failed) or
-// - rest: remaining string
-// - c: The actual command
-// - args: Array of arguments
-function parse_cmd(str) {
-	var m = /^\s*([ZzvVhHmMlLcAaC])/.exec(str);
-	if (!m) return;
-	var c = m[1];
-
-	var args = [];
-	var search = /(?:\s*,\s*|\s*)(-?(?:[0-9]*\.[0-9]+|[0-9]+\.?)(?:e-?[0-9]+)?)/g;
-	var rest_pos = m[0].length;
-	search.lastIndex = rest_pos;
-	while ((m = search.exec(str))) {
-		if (m.index !== rest_pos) {
-			// Skipped over characters
-			break;
-		}
-		args.push(parseFloat(m[1]));
-		rest_pos = search.lastIndex;
-	}
-	return {
-		c: c,
-		args: args,
-		rest: str.substr(rest_pos),
-	};
-}
-
 function parse_path(d) {
 	if (!d) return null;
 
@@ -64,7 +36,7 @@ function parse_path(d) {
 	}
 
 	while (d && !/^\s*$/.test(d)) {
-		var cmd = parse_cmd(d);
+		var cmd = svg_utils.parse_cmd(d);
 		if (!cmd) {
 			// console.error('Unsupported path data: ' + JSON.stringify(d));
 			return;
@@ -601,7 +573,6 @@ return {
 /*@DEV*/
 	// Testing only
 	parse_path: parse_path,
-	parse_cmd: parse_cmd,
 	arc2beziers: arc2beziers,
 	_make_beziers: _make_beziers,
 	parse_color: parse_color,
@@ -614,7 +585,8 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	module.exports = svg2pdf;
 
-	var save_file = require('./save_file');
 	var report_problem = require('./report_problem');
+	var save_file = require('./save_file');
+	var svg_utils = require('./svg_utils');
 }
 /*/@DEV*/

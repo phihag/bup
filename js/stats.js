@@ -131,7 +131,7 @@ function draw_graph(s, container, gpoints, max_score) {
 	var bottom_y;
 	var mark_y;
 
-	var connectors = utils.svg_el(container, 'g', {});
+	var connectors = svg_utils.el(container, 'g', {});
 
 	var marks = [];
 	var max_normalized = gpoints[gpoints.length - 1].normalized;
@@ -175,13 +175,13 @@ function draw_graph(s, container, gpoints, max_score) {
 				attrib.transform = 'rotate(-90 ' + attrib.x + ' ' + attrib.y + ')';
 			}
 
-			utils.svg_el(container, 'text', attrib, str);
+			svg_utils.el(container, 'text', attrib, str);
 
 			if (press.team_id !== undefined) {
 				line_y = gpys[press.team_id];
 				bottom_y = mark_y + ((mark_y > line_y) ? -1 : 1) * height / 2;
 
-				utils.svg_el(connectors, 'line', {
+				svg_utils.el(connectors, 'line', {
 					x1: gpx,
 					x2: gpx,
 					y1: gpys[press.team_id],
@@ -194,7 +194,7 @@ function draw_graph(s, container, gpoints, max_score) {
 		case 'red-card':
 		case 'disqualified':
 			mark_y = _calc_mark_y(marks, gpoints, gpoints_index, CARD_WIDTH, CARD_HEIGHT);
-			utils.svg_el(container, 'rect', {
+			svg_utils.el(container, 'rect', {
 				x: (gpx - CARD_WIDTH / 2),
 				y: (mark_y - CARD_HEIGHT / 2),
 				rx: CARD_RADIUS,
@@ -207,7 +207,7 @@ function draw_graph(s, container, gpoints, max_score) {
 			line_y = gpys[press.team_id];
 			bottom_y = mark_y + ((mark_y > line_y) ? -1 : 1) * CARD_HEIGHT / 2;
 
-			utils.svg_el(connectors, 'line', {
+			svg_utils.el(connectors, 'line', {
 				x1: gpx,
 				x2: gpx,
 				y1: gpys[press.team_id],
@@ -222,7 +222,7 @@ function draw_graph(s, container, gpoints, max_score) {
 
 			if (gp.draw_line) {
 				if (x[team] !== gpx) {
-					utils.svg_el(container, 'line', {
+					svg_utils.el(container, 'line', {
 						x1: x[team],
 						x2: gpx,
 						y1: y[team],
@@ -231,7 +231,7 @@ function draw_graph(s, container, gpoints, max_score) {
 					});
 				}
 				if (y[team] !== gpy) {
-					utils.svg_el(container, 'line', {
+					svg_utils.el(container, 'line', {
 						x1: gpx,
 						x2: gpx,
 						y1: y[team],
@@ -309,7 +309,7 @@ function render_graph(svg, s, all_gpoints) {
 	uiu.empty(grid);
 	for (var i = 0;i <= max_score;i++) {
 		var grid_y = GRAPH_BOTTOM - i * GRAPH_HEIGHT / max_score;
-		utils.svg_el(grid, 'line', {
+		svg_utils.el(grid, 'line', {
 			x1: LEFT_PADDING,
 			x2: (WIDTH - RIGHT_PADDING),
 			y1: grid_y,
@@ -320,14 +320,14 @@ function render_graph(svg, s, all_gpoints) {
 
 	// Y axis labels
 	for (i = 0;i <= max_score;i++) {
-		utils.svg_el(grid, 'text', {
+		svg_utils.el(grid, 'text', {
 			x: LEFT_PADDING,
 			y: GRAPH_BOTTOM - i * GRAPH_HEIGHT / max_score,
 			'text-anchor': 'end',
 			'alignment-baseline': 'middle',
 			'class': 'axis_score_label',
 		}, i);
-		utils.svg_el(grid, 'text', {
+		svg_utils.el(grid, 'text', {
 			x: WIDTH,
 			y: GRAPH_BOTTOM - i * GRAPH_HEIGHT / max_score,
 			'text-anchor': 'end',
@@ -350,7 +350,7 @@ function render_graph(svg, s, all_gpoints) {
 			return;
 		}
 		last_x = gpx;
-		utils.svg_el(grid, 'text', {
+		svg_utils.el(grid, 'text', {
 			x: gpx,
 			y: XAXIS_Y,
 			'text-anchor': 'middle',
@@ -897,6 +897,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
 	var pronunciation = require('./pronunciation');
 	var refmode_referee_ui = null; // break cycle, should be require('./refmode_referee_ui');
+	var svg_utils = require('./svg_utils');
 	var uiu = require('./uiu');
 	var utils = require('./utils');
 

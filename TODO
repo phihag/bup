@@ -1,8 +1,11 @@
 generate receipts
-	set up svg with lines, sums etc.
-	configure costs in eventutils
-	test empty + full
-	include club logo with <image x="10" y="20" width="80" height="80" xlink:href="BASE64" />
+	include club logo
+		copy stuff from logo into main svg
+	layout svg with lines, sums etc.
+	calc distance price
+	calc total
+	test empty
+	test full
 
 receipts: autocalc distance
 	http proxy for distance (using google maps API)
@@ -44,10 +47,6 @@ d teamscore with small won matches
 d shortsets [see pic]
 d a nice modern overview of all matches, similar to tim
 
-drop eventutils.make_empty_matches
-eventsheet: modern svg2pdf: print and PDF buttons right on the page
-eventsheet: modify DIRECT* family to go to es_preview immediately
-
 refmode redesign UI for change dialogs
 refmode make more efficient
 refmode remove flickers
@@ -55,6 +54,15 @@ refmode verify that push mode is not active by default
 refmode use WebRTC
 
 tde_import: aufgegeben (https://www.turnier.de/sport/teammatch.aspx?id=107D0FC0-C153-4EAF-A39D-EBAECB424B16&match=230)
+
+stats graph: include team name
+
+remove svg2pdf.parse_color in favor of utils.parse_rgb
+remove scoresheet._svg_el in favor of svg_utils.el
+drop eventutils.make_empty_matches
+eventsheet: modern svg2pdf: print and PDF buttons right on the page
+eventsheet: modify DIRECT* family to go to es_preview immediately
+eventsheet: handle error when failing to download template
 
 test back and F5 everywhere in referee mode
 

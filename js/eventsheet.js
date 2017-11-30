@@ -574,15 +574,13 @@ function _svg_text(svg, id, val, move_y) {
 // Decorator for svg-based sheets.
 // The function gets called with (svg, ev, es_key, extra_data), and must return {orientation, optionally scale}.
 function _svg_func(func) {
-	return function(preview, ev, es_key, ui8r, extra_data) {
-		var xml_str = (new TextDecoder('utf-8')).decode(ui8r);
-		var svg_doc = (new DOMParser()).parseFromString(xml_str, 'image/svg+xml');
-		var svg = svg_doc.getElementsByTagName('svg')[0];
+	return function(preview, ev, es_key, ui8r, extra_data, extra_files) {
+		var svg = svg_utils.parse(ui8r);
 		svg.setAttribute('style', 'max-width:100%;max-height:100%;');
 
 		i18n.translate_nodes(svg, state);
 
-		var info = func(svg, ev, es_key, extra_data);
+		var info = func(svg, ev, es_key, extra_data, extra_files);
 		var subject = state._('eventsheet:label|' + es_key);
 		var title = subject + ' ' + ev.event_name;
 		info.props = {
@@ -876,9 +874,14 @@ var render_int = _svg_func(function(svg, ev, es_key, extra_data) {
 	};
 });
 
-var render_receipt = _svg_func(function(svg, ev, es_key, extra_data) {
+var render_receipt = _svg_func(function(svg, ev, es_key, extra_data, extra_files) {
 	_svg_text(svg, 'receipt_umpire', extra_data.receipt_umpire);
 	_svg_text(svg, 'receipt_distance', extra_data.receipt_distance);
+
+	if (extra_files) {
+		var logo_container = svg.getElementById('es_svg_receipt_logo');
+		svg_utils.copy(logo_container, svg_utils.parse(extra_files.logo), 120, 18, 70);
+	}
 
 	return {
 		filename: state._('receipt:header') + (extra_data.receipt_umpire ? ' ' + extra_data.receipt_umpire : '') + '.pdf',
@@ -1624,7 +1627,7 @@ function direct_download(es_key, ui8r) {
 	save_file(blob, filename);
 }
 
-function es_render(ev, es_key, ui8r, extra_data) {
+function es_render(ev, es_key, ui8r, extra_data, extra_files) {
 	if (DIRECT_DOWNLOAD_SHEETS[es_key]) {
 		return direct_download(es_key, ui8r);
 	}
@@ -1661,10 +1664,10 @@ function es_render(ev, es_key, ui8r, extra_data) {
 	uiu.show(preview_el);
 	uiu.empty(preview_el);
 
-	render_previewable(preview_el, ev, es_key, ui8r, extra_data);
+	render_previewable(preview_el, ev, es_key, ui8r, extra_data, extra_files);
 }
 
-function render_previewable(preview_el, ev, es_key, ui8r, extra_data) {
+function render_previewable(preview_el, ev, es_key, ui8r, extra_data, extra_files) {
 	switch(es_key) {
 	case 'RLW-2016':
 	case 'RLN-2016':
@@ -1683,7 +1686,7 @@ function render_previewable(preview_el, ev, es_key, ui8r, extra_data) {
 	case 'int':
 		return render_int(preview_el, ev, es_key, ui8r, extra_data);
 	case 'receipt':
-		return render_receipt(preview_el, ev, es_key, ui8r, extra_data);
+		return render_receipt(preview_el, ev, es_key, ui8r, extra_data, extra_files);
 	default:
 		throw new Error('Unsupported eventsheet key ' + es_key);
 	}
@@ -1692,9 +1695,33 @@ function render_previewable(preview_el, ev, es_key, ui8r, extra_data) {
 function prepare_render(btn, es_key, extra_data) {
 	var progress = uiu.el(btn, 'div', 'loading-icon');
 	download(es_key, function(ui8r) {
-		uiu.remove(progress);
-		es_render(state.event, es_key, ui8r, extra_data);
+		download_extra(es_key, state.event, function(extra_files) {
+			uiu.remove(progress);
+			es_render(state.event, es_key, ui8r, extra_data, extra_files);
+		});
 	});
+}
+
+function download_extra(es_key, event, callback) {
+	if (es_key === 'receipt') {
+		var team_logos = extradata.team_logos(event);
+		if (team_logos && team_logos[0]) {
+			return ajax.req({
+				url: team_logos[0],
+				responseType: 'arraybuffer',
+				error: function() {
+					callback();
+				},
+				success: function(ab) {
+					callback({
+						logo: ab,
+					});
+				},
+			});
+		}
+	}
+
+	callback();
 }
 
 function download(es_key, callback) {
@@ -2146,10 +2173,12 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var ajax = require('./ajax');
 	var calc = require('./calc');
 	var click = require('./click');
 	var control = require('./control');
 	var eventutils = require('./eventutils');
+	var extradata = require('./extradata');
 	var form_utils = require('./form_utils');
 	var i18n = require('./i18n');
 	var network = require('./network');
@@ -2163,6 +2192,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var uiu = require('./uiu');
 	var utils = require('./utils');
 	var save_file = require('./save_file');
+	var svg_utils = require('./svg_utils');
 	var xlsx = require('./xlsx');
 
 	module.exports = eventsheet;

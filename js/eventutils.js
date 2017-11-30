@@ -451,6 +451,40 @@ function default_counting(league_key) {
 	}
 }
 
+function umpire_pay(league_key) {
+	if (/^1BL-/.test(league_key)) {
+		return { // §3.2 BLO
+			base: 50,
+			per_km: .3,
+			currency: '€',
+		};
+	} else if (/^2BL[NS]-/.test(league_key)) {
+		return { // §3.2 BLO
+			base: 35,
+			per_km: .3,
+			currency: '€',
+		};
+	} else if (/^RLW-/.test(league_key) || NRW2016_RE.test(league_key)) {
+		return { // §1.1 SpO A2
+			base: 25,
+			per_km: .3,
+			currency: '€',
+		};
+	} else if (/^RLN-/.test(league_key)) {
+		return { // §4 Finanzordnung Gruppe Nord
+			base: 20,
+			per_km: .3,
+			currency: '€',
+		};
+	} else if (/^RLM-/.test(league_key)) {
+		return { // §2.23.1.2.14 SpO / §.7 Finanzordnung
+			base: 35,
+			per_km: .3, // §6.1c HBV FO
+			currency: '€',
+		};
+	}
+}
+
 function make_empty_matches(league_key, event_id) {
 	if (/^(?:1BL|2BLN|2BLS)-(?:2016|2017)$/.test(league_key)) {
 		var rawdef = [
@@ -510,6 +544,7 @@ return {
 	set_not_before: set_not_before,
 	setups_eq: setups_eq,
 	default_counting: default_counting,
+	umpire_pay: umpire_pay,
 	// Testing only
 	/*@DEV*/
 	name_by_league: name_by_league,

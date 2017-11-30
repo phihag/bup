@@ -38,6 +38,7 @@ Element.prototype.getAttribute = function(k) {
 };
 Element.prototype.appendChild = function(node) {
 	this.childNodes.push(node);
+	return node;
 };
 
 function _parse_attrqs(aqs) {
