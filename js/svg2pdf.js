@@ -136,7 +136,8 @@ function parse_path(d) {
 					args[i + 1] * 2 / 3,
 					args[i + 2] + ((args[i] - args[i + 2]) * 2 / 3),
 					args[i + 3] + ((args[i + 1] - args[i + 3]) * 2 / 3),
-					args[i + 2], args[i + 3]
+					args[i + 2],
+					args[i + 3],
 				]);
 				x += args[i + 2];
 				y += args[i + 3];
