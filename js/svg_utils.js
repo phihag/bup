@@ -198,8 +198,6 @@ function copy(dst, src_svg, x, y, width) {
 			el = dst_doc.importNode(node);
 			el.setAttribute('d', d);
 			el.removeAttribute('transform');
-el.setAttribute('data-d', node.getAttribute('d'))
-el.setAttribute('data-transform', node.getAttribute('transform'));
 			break;
 		default:
 			report_problem.silent_error('Unsupported element to copy: ' + tagName);
