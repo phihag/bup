@@ -495,7 +495,7 @@ function render_page(svg, pdf, scale) {
 				x = px;
 				y = py;
 			}
-			pdf.lines(acc, x1, y1, [1, 1], mode, true);
+			pdf.lines(acc, px1, py1, [1, 1], mode, true);
 			break;
 		case 'text':
 			x = parseFloat(n.getAttribute('x'));
