@@ -1,3 +1,6 @@
+svg2pdf script: verify that report_problem crashes
+svg2pdf polygons missing?
+
 generate receipts
 	include club logo
 		copy stuff from logo into main svg

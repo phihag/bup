@@ -26,7 +26,7 @@ function parse_path(d) {
 	while (d && !/^\s*$/.test(d)) {
 		var cmd = svg_utils.parse_cmd(d);
 		if (!cmd) {
-			// console.error('Unsupported path data: ' + JSON.stringify(d));
+			console.error('Unsupported path data: ' + JSON.stringify(d));
 			return;
 		}
 		d = cmd.rest;
@@ -523,6 +523,15 @@ function render_page(svg, pdf, scale) {
 			height = parseFloat(n.getAttribute('height'));
 			pdf.addImage(imgData, x * scale, y * scale, width, height);
 			break;
+		/*@DEV*/
+		case 'defs':
+		case 'style':
+		case 'title':
+			// We don't care
+			break;
+		default:
+			report_problem.silent_error('Unsupported element: ' + n.tagName.toLowerCase());
+		/*/@DEV*/
 		}
 	}
 }

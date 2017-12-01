@@ -14,6 +14,16 @@ function convert_client(xml_str) { // eslint-disable-line no-unused-vars
 	return ir;
 }
 
+var report_problem = (() => {
+function silent_error(msg) {
+	throw new Error(msg);
+}
+
+return {
+	silent_error,
+};
+})();
+
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var svg2pdf = require('../../js/svg2pdf.js');
