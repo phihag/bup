@@ -91,6 +91,8 @@ function translate_path(d, scale, dx, dy) {
 		case 'l':
 		case 'm':
 		case 'v':
+		case 'q':
+		case 'c':
 			res += args.map(function(a) {
 				return scale * a;
 			}).join(' ');
@@ -115,6 +117,15 @@ function translate_path(d, scale, dx, dy) {
 				args[i + 1] *= scale;
 				args[i + 5] = args[i + 5] * scale + dx;
 				args[i + 6] = args[i + 6] * scale + dy;
+			}
+			res += args.join(' ');
+			break;
+		case 'a':
+			for (var j = 0;j < args.length;j += 7) {
+				args[j] *= scale;
+				args[j + 1] *= scale;
+				args[j + 5] = args[j + 5] * scale;
+				args[j + 6] = args[j + 6] * scale;
 			}
 			res += args.join(' ');
 			break;
