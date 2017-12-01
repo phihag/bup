@@ -157,13 +157,14 @@ function copy(dst, src_svg, x, y, width) {
 		if (node.nodeType === 3) {
 			// Text
 			into.appendChild(dst_doc.createTextNode(node.data));
+			return;
 		}
 
 		if (node.nodeType !== 1) {
 			return; // Not an element, ignore
 		}
-
 		var tagName = node.tagName.toLowerCase();
+
 		var el;
 
 		switch (tagName) {

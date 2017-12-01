@@ -221,7 +221,7 @@ Document.prototype.importNode = function(node, deep) {
 		var children = node.childNodes;
 		for (var i = 0;i < children.length;i++) {
 			var imported_child = this.importNode(children[i], deep);
-			node.appendChild(imported_child);
+			el.appendChild(imported_child);
 		}
 	}
 
