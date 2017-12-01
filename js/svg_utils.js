@@ -137,7 +137,7 @@ function translate_path(d, scale, dx, dy) {
 		d = cmd.rest;
 	}
 	return res;
-};
+}
 
 // dst is a destination container where all the elements will be put into
 // Silently fails (because that's best for our applications)

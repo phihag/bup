@@ -48,7 +48,7 @@ _describe('svg_utils', function() {
 	});
 */
 
-	it('translate_path', function() {
+	_it('translate_path', function() {
 		assert.strictEqual(
 			bup.svg_utils._translate_path(
 				'M108.923,216.777h22.631L89.785,288.29h-24.6l-7.3-44.843h22l2.178,23.707Z',
