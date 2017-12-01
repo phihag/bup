@@ -1,6 +1,3 @@
-svg_utils.copy: scale styles!
-	add tests for this
-
 generate receipts
 	svg2pdf all_logos
 	include club logo
