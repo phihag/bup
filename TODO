@@ -1,5 +1,5 @@
 all_logos: scope styles
-all_logos: fix various
+all_logos: fix various logos
 
 generate receipts
 	include club logo
