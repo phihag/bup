@@ -140,6 +140,7 @@ function translate_path(d, scale, dx, dy) {
 }
 
 // dst is a destination container where all the elements will be put into
+// src_svg is the root node of an SVG document
 // Silently fails (because that's best for our applications)
 function copy(dst, src_svg, x, y, width) {
 	var viewBox = src_svg.getAttribute('viewBox');

@@ -50,4 +50,41 @@ _describe('vdom', function() {
 			doc.toxml(),
 			'<?xml version="1.0"?><root><c>foobar</c></root>');
 	});
+
+	_it('attributes', function() {
+		var doc = new vdom.Document('root');
+		var el = doc.documentElement;
+		assert.strictEqual(el.attributes.length, 0);
+
+		el.setAttribute('foo', 'bar');
+		assert.strictEqual(el.getAttribute('foo'), 'bar');
+		assert.strictEqual(el.attributes.length, 1);
+		assert.strictEqual(el.attributes[0].name, 'foo');
+		assert.strictEqual(el.attributes[0].value, 'bar');
+
+		el.removeAttribute('foo');
+		assert.strictEqual(el.getAttribute('foo'), '');
+		assert.strictEqual(el.attributes.length, 0);
+	});
+
+	_it('texContent', function() {
+		var doc = new vdom.Document('root');
+		var el = doc.documentElement;
+		el.appendChild(doc.createTextNode('foo'));
+		var c = el.appendChild(doc.createElement('c'));
+		c.appendChild(doc.createTextNode('bar'));
+		c.appendChild(doc.createTextNode('baz'));
+		el.appendChild(doc.createTextNode('qwup'));
+
+		assert.strictEqual(c.textContent, 'barbaz');
+		assert.strictEqual(el.textContent, 'fooqwup');
+	});
+
+	_it('nodeTypes', function() {
+		var doc = new vdom.Document('root');
+		assert.strictEqual(doc.nodeType, 9);
+		assert.strictEqual(doc.documentElement.nodeType, 1);
+		assert.strictEqual(doc.createElement('foo').nodeType, 1);
+		assert.strictEqual(doc.createTextNode('bar').nodeType, 3);
+	});
 });

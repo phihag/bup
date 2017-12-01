@@ -3,38 +3,65 @@
 
 var assert = require('assert');
 
-function TextNode(ownerDocument, text) {
+function TextNode(ownerDocument, data) {
 	this.ownerDocument = ownerDocument;
-	this.text = text;
+	this.data = data;
+
+	Object.defineProperty(this, 'nodeType', {
+		get: function() {
+			return 3;
+		},
+	});
 }
 // Nonstandard
 TextNode.prototype.toxml = function() {
-	return encode(this.text);
+	return encode(this.data);
 };
+
 
 function Element(ownerDocument, tagName) {
 	this.ownerDocument = ownerDocument;
 	this.tagName = tagName;
-	this.attributes = {};
+	this.attrs = {};
 	this.childNodes = [];
+	Object.defineProperty(this, 'nodeType', {
+		get: function() {
+			return 1;
+		},
+	});
 	Object.defineProperty(this, 'textContent', {
 		get: function() {
 			var res = '';
 			for (var i = 0;i < this.childNodes.length;i++) {
 				var node = this.childNodes[i];
 				if (node instanceof TextNode) {
-					res += node.text;
+					res += node.data;
 				}
+			}
+			return res;
+		},
+	});
+	Object.defineProperty(this, 'attributes', {
+		get: function() {
+			var res = [];
+			for (var name in this.attrs) {
+				res.push({
+					name: name,
+					value: this.attrs[name],
+				});
 			}
 			return res;
 		},
 	});
 }
 Element.prototype.setAttribute = function(k, v) {
-	this.attributes[k] = v;
+	this.attrs[k] = v;
 };
 Element.prototype.getAttribute = function(k) {
-	return this.attributes[k] ? ('' + this.attributes[k]) : '';
+	return this.attrs[k] ? ('' + this.attrs[k]) : '';
+};
+Element.prototype.removeAttribute = function(k) {
+	delete this.attrs[k];
 };
 Element.prototype.appendChild = function(node) {
 	this.childNodes.push(node);
@@ -127,7 +154,7 @@ function encode(text) {
 }
 
 Element.prototype._toxml = function(indent, add_indent) {
-	var attrs = this.attributes;
+	var attrs = this.attrs;
 	var keys = Object.keys(attrs);
 	keys.sort();
 	var attrs_str = keys.map(function(k) {
@@ -158,6 +185,11 @@ Element.prototype.toxml = function(indent) {
 
 function Document(tagName) {
 	this.documentElement = new Element(this, tagName);
+	Object.defineProperty(this, 'nodeType', {
+		get: function() {
+			return 9;
+		},
+	});
 }
 Document.prototype.createElement = function(tagName) {
 	return new Element(this, tagName);
@@ -170,6 +202,30 @@ Document.prototype.createTextNode = function(text) {
 };
 Document.prototype.toxml = function(indent) {
 	return '<?xml version="1.0"?>' + (indent ? '\n' : '') + this.documentElement.toxml(indent);
+};
+Document.prototype.importNode = function(node, deep) {
+	if (node.nodeType === 3) {
+		return new TextNode(node.data);
+	}
+	if (node.nodeType !== 1) {
+		throw new Error('Unsupported nodeType ' + node.nodeType);
+	}
+
+	var el = this.createElement(node.tagName);
+	for (var i = 0;i < el.attributes.length;i++) {
+		var a = el.attributes[i];
+		el.setAttribute(a.name, a.value);
+	}
+
+	if (deep) {
+		var children = node.childNodes;
+		for (var i = 0;i < children.length;i++) {
+			var imported_child = this.importNode(children[i], deep);
+			node.appendChild(imported_child);
+		}
+	}
+
+	return el;
 };
 
 module.exports = {

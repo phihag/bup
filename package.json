@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "node-webcrypto-ossl": "*",
+    "wrtc": "0.0.63",
     "ws": "*"
   },
   "devDependencies": {
@@ -26,7 +27,8 @@
     "stylelint": "*",
     "stylelint-config-standard": "*",
     "uglify": "*",
-    "svgo": "*"
+    "svgo": "*",
+    "xmldom": "*"
   },
   "private": true
 }

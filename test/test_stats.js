@@ -25,24 +25,24 @@ function _outline(el) {
 		var width = bup.stats.TEXT_WIDTH * el.textContent.length;
 		var height = bup.stats.TEXT_HEIGHT;
 
-		var rotate = !! el.attributes.transform;
+		var rotate = !! el.attrs.transform;
 		if (rotate) {
 			height = width;
 			width = bup.stats.TEXT_HEIGHT;
 		}
 		res = {
-			x1: el.attributes.x - width / 2,
-			x2: el.attributes.x + width / 2,
-			y1: el.attributes.y - height / 2,
-			y2: el.attributes.y + height / 2,
+			x1: el.attrs.x - width / 2,
+			x2: el.attrs.x + width / 2,
+			y1: el.attrs.y - height / 2,
+			y2: el.attrs.y + height / 2,
 		};
 		break;
 	case 'rect':
 		res = {
-			x1: el.attributes.x,
-			x2: el.attributes.x + el.attributes.width,
-			y1: el.attributes.y,
-			y2: el.attributes.y + el.attributes.height,
+			x1: el.attrs.x,
+			x2: el.attrs.x + el.attrs.width,
+			y1: el.attrs.y,
+			y2: el.attrs.y + el.attrs.height,
 		};
 		break;
 	default:
@@ -55,11 +55,11 @@ function _intersects(el1, el2) {
 	var o1 = _outline(el1);
 
 	if (el2.tagName === 'line') {
-		var x1 = el2.attributes.x1;
-		var x2 = el2.attributes.x2;
+		var x1 = el2.attrs.x1;
+		var x2 = el2.attrs.x2;
 		assert.ok(x1 <= x2);
-		var y1 = Math.min(el2.attributes.y1, el2.attributes.y2);
-		var y2 = Math.max(el2.attributes.y1, el2.attributes.y2);
+		var y1 = Math.min(el2.attrs.y1, el2.attrs.y2);
+		var y2 = Math.max(el2.attrs.y1, el2.attrs.y2);
 		assert.ok(y1 <= y2);
 
 		if (x1 === x2) {
@@ -665,9 +665,9 @@ _describe('stats graphs', function() {
 
 				if (el2.tagName === 'line') {
 					assert.ok(
-						((el2.attributes.x1 !== el2.attributes.x2) ||
-							(el2.attributes.y1 !== el2.attributes.y2)),
-						'trivial line ' + JSON.stringify(el2.attributes));
+						((el2.attrs.x1 !== el2.attrs.x2) ||
+							(el2.attrs.y1 !== el2.attrs.y2)),
+						'trivial line ' + JSON.stringify(el2.attrs));
 				}
 
 				assert.ok(! _intersects(el1, el2));
@@ -740,13 +740,13 @@ _describe('stats graphs', function() {
 		});
 		var line = tutils.find_object(els, {
 			tagName: 'line',
-			attributes: {
+			attrs: {
 				x2: 34,
 			},
 		});
 
 		// Clearly, given that team 1 is above team 2, the yellow card should be painted above (= smaller)
-		assert.equal(text.attributes.y, line.attributes.y2 - bup.stats.TEXT_HEIGHT / 2 - bup.stats.CARD_PADDING);
+		assert.equal(text.attrs.y, line.attrs.y2 - bup.stats.TEXT_HEIGHT / 2 - bup.stats.CARD_PADDING);
 	});
 
 	_it('retiring', function() {
