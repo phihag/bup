@@ -462,10 +462,10 @@ function render_page(svg, pdf, scale) {
 			break;
 		case 'polygon':
 			var points = svg_utils.split_args(n.getAttribute('points')).map(parseFloat);
-			var x1 = scale * points[0];
-			var y1 = scale * points[1];
-			x = x1;
-			y = y1;
+			var px1 = scale * points[0];
+			var py1 = scale * points[1];
+			x = px1;
+			y = py1;
 			var acc = [];
 			for (var point_i = 2;point_i < points.length;point_i += 2) {
 				var px = scale * points[point_i];
