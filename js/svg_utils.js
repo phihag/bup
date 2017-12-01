@@ -145,10 +145,11 @@ function translate_path(d, scale, dx, dy) {
 	return res;
 }
 
-function translate_css(css, prefix) {
-	var matches = utils.match_all(/([^{]+)(\{[^}]*\})/g, css);
+function translate_css(css, prefix, scale) {
+	var matches = utils.match_all(/([^{]+)\{([^}]*)\}/g, css);
 	return matches.map(function(m) {
-		return utils.replace_all(utils.replace_all(m[1], '#', '#' + prefix), '.', '.' + prefix) + m[2];
+		var defs = m[2]; // TODO rescale
+		return utils.replace_all(utils.replace_all(m[1], '#', '#' + prefix), '.', '.' + prefix) + '{' + defs + '}';
 	}).join('');
 }
 
@@ -204,6 +205,8 @@ function copy(dst, src_svg, x_offset, y_offset, width) {
 		switch (tagName) {
 		case 'title':
 		case 'desc':
+		case 'sodipodi:namedview':
+		case 'metadata':
 			// suppress
 			break;
 		case 'g':
@@ -212,7 +215,7 @@ function copy(dst, src_svg, x_offset, y_offset, width) {
 			break;
 		case 'style':
 			el = import_el(dst_doc, node);
-			el.appendChild(dst_doc.createTextNode(translate_css(node.textContent, prefix)));
+			el.appendChild(dst_doc.createTextNode(translate_css(node.textContent, prefix, scale)));
 			into.appendChild(el);
 			return;
 		case 'polygon':
