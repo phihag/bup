@@ -15,8 +15,10 @@ function parse_path(d) {
 	var epy;
 	var p1x;
 	var p1y;
-	var last_segment_ax = null;
-	var last_segment_ay = null;
+	var last_sc_segment_ax = null;
+	var last_sc_segment_ay = null;
+	var last_qt_segment_ax = null;
+	var last_qt_segment_ay = null;
 
 	function _new_subpath() {
 		acc = [];
@@ -122,8 +124,8 @@ function parse_path(d) {
 		} else if (c === 'c') {
 			for (i = 0;i < args.length;i += 6) {
 				acc.push(args.slice(i, i + 6));
-				last_segment_ax = x + args[i + 2];
-				last_segment_ay = y + args[i + 3];
+				last_sc_segment_ax = x + args[i + 2];
+				last_sc_segment_ay = y + args[i + 3];
 				x += args[i + 4];
 				y += args[i + 5];
 			}
@@ -132,8 +134,8 @@ function parse_path(d) {
 				acc.push(args.slice(i, i + 6).map(function(a, i) {
 					return a - ((i % 2) ? y : x);
 				}));
-				last_segment_ax = args[i + 2];
-				last_segment_ay = args[i + 3];
+				last_sc_segment_ax = args[i + 2];
+				last_sc_segment_ay = args[i + 3];
 				x = args[i + 4];
 				y = args[i + 5];
 			}
@@ -143,17 +145,35 @@ function parse_path(d) {
 				epy = args[i + 3];
 
 				acc.push([
-					(last_segment_ax === null) ? 0 : (x - last_segment_ax),
-					(last_segment_ay === null) ? 0 : (y - last_segment_ay),
+					(last_sc_segment_ax === null) ? 0 : (x - last_sc_segment_ax),
+					(last_sc_segment_ay === null) ? 0 : (y - last_sc_segment_ay),
 					args[i],
 					args[i + 1],
 					epx,
 					epy,
 				]);
-				last_segment_ax = x + args[i];
-				last_segment_ay = y + args[i + 1];
+				last_sc_segment_ax = x + args[i];
+				last_sc_segment_ay = y + args[i + 1];
 				x += epx;
 				y += epy;
+			}
+		} else if (c === 'S') {
+			for (i = 0;i < args.length;i += 4) {
+				epx = args[i + 2];
+				epy = args[i + 3];
+
+				acc.push([
+					(last_sc_segment_ax === null) ? 0 : (x - last_sc_segment_ax),
+					(last_sc_segment_ay === null) ? 0 : (y - last_sc_segment_ay),
+					args[i] - x,
+					args[i + 1] - y,
+					epx - x,
+					epy - y,
+				]);
+				last_sc_segment_ax = args[i];
+				last_sc_segment_ay = args[i + 1];
+				x = epx;
+				y = epy;
 			}
 		} else if (c === 'q') {
 			for (i = 0;i < args.length;i += 4) {
@@ -166,11 +186,13 @@ function parse_path(d) {
 				acc.push([
 					p1x * 2 / 3,
 					p1y * 2 / 3,
-					epx + ((args[i] - epx) * 2 / 3),
+					epx + ((p1x - epx) * 2 / 3),
 					epy + ((p1y - epy) * 2 / 3),
 					epx,
 					epy,
 				]);
+				last_qt_segment_ax = x + args[i];
+				last_qt_segment_ay = y +args[i + 1];
 				x += epx;
 				y += epy;
 			}
@@ -189,15 +211,60 @@ function parse_path(d) {
 					epx,
 					epy,
 				]);
+				last_qt_segment_ax = args[i];
+				last_qt_segment_ay = args[i + 1];
 				x = args[i + 2];
 				y = args[i + 3];
+			}
+		} else if (c === 't') {
+			for (i = 0;i < args.length;i += 4) {
+				p1x = (last_sc_segment_ax === null) ? 0 : (x - last_sc_segment_ax);
+				p1y = (last_sc_segment_ay === null) ? 0 : (y - last_sc_segment_ay);
+				epx = args[i];
+				epy = args[i + 1];
+				last_qt_segment_ax = x + p1x;
+				last_qt_segment_ay = y + p1y;
+
+				acc.push([
+					p1x * 2 / 3,
+					p1y * 2 / 3,
+					epx + ((p1x - epx) * 2 / 3),
+					epy + ((p1y - epy) * 2 / 3),
+					epx,
+					epy,
+				]);
+				x += epx;
+				y += epy;
+			}
+		} else if (c === 'T') {
+			for (i = 0;i < args.length;i += 4) {
+				p1x = (last_sc_segment_ax === null) ? 0 : (x - last_sc_segment_ax);
+				p1y = (last_sc_segment_ay === null) ? 0 : (y - last_sc_segment_ay);
+				epx = args[i];
+				epy = args[i + 1];
+				last_qt_segment_ax = x + p1x;
+				last_qt_segment_ay = y + p1y;
+
+				acc.push([
+					p1x * 2 / 3,
+					p1y * 2 / 3,
+					epx + ((p1x - epx) * 2 / 3),
+					epy + ((p1y - epy) * 2 / 3),
+					epx - x,
+					epy - y,
+				]);
+				x = epx;
+				y = epy;
 			}
 		} else {
 			report_problem.silent_error('Unsupported SVG command ' + c);
 		}
 
 		if ((c !== 'c') && (c !== 'C') && (c === 's') && (c !== 'S')) {
-			last_segment_ax = last_segment_ay = null;
+			last_sc_segment_ax = last_sc_segment_ay = null;
+		}
+		if ((c !== 'q') && (c !== 'Q') && (c === 't') && (c !== 'T')) {
+			last_qt_segment_ax = last_qt_segment_ay = null;
 		}
 	}
 	return res;

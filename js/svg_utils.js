@@ -94,6 +94,7 @@ function translate_path(d, scale, dx, dy) {
 		case 'q':
 		case 'v':
 		case 's':
+		case 't':
 			res += args.map(function(a) {
 				return scale * a;
 			}).join(' ');
@@ -102,6 +103,8 @@ function translate_path(d, scale, dx, dy) {
 		case 'L':
 		case 'M':
 		case 'Q':
+		case 'S':
+		case 'T':
 			res += translate_points(args, scale, dx, dy).join(' ');
 			break;
 		case 'H':
