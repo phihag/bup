@@ -391,7 +391,11 @@ function render_page(svg, pdf, scale) {
 			}
 		}
 
-		switch (n.tagName.toLowerCase()) {
+		var tagName = n.tagName.toLowerCase();
+		if (tagName.indexOf(':') >= 0) {
+			continue;
+		}
+		switch (tagName) {
 		case 'line':
 			var x1 = parseFloat(n.getAttribute('x1'));
 			var x2 = parseFloat(n.getAttribute('x2'));
@@ -544,6 +548,7 @@ function render_page(svg, pdf, scale) {
 		case 'defs':
 		case 'style':
 		case 'title':
+		case 'metadata':
 			// We don't care
 			break;
 		default:
