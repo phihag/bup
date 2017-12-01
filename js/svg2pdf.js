@@ -128,6 +128,21 @@ function parse_path(d) {
 				x += args[i + 5];
 				y += args[i + 6];
 			}
+		} else if (c === 'q') {
+			for (i = 0;i < args.length;i += 4) {
+				// See https://stackoverflow.com/q/9485788/35070
+				acc.push([
+					args[i] * 2 / 3,
+					args[i + 1] * 2 / 3,
+					args[i + 2] + ((args[i] - args[i + 2]) * 2 / 3),
+					args[i + 3] + ((args[i + 1] - args[i + 3]) * 2 / 3),
+					args[i + 2], args[i + 3]
+				]);
+				x += args[i + 2];
+				y += args[i + 3];
+			}
+		} else {
+			report_problem.silent_error('Unsupported SVG command ' + c);
 		}
 	}
 	return res;
