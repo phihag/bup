@@ -69,6 +69,22 @@ _describe('svg_utils', function() {
 				2, 1000, 2000),
 			' M 1217.846 2433.554 h 45.262 L 1179.57 2576.58 h -49.2 l -14.6 -89.686 h 44 l 4.356 47.414 Z '
 		);		
+	});
 
+	_it('transform_css', function() {
+		assert.strictEqual(
+			bup.svg_utils._transform_css('.c1 , .c2 {content: ".c4 .c5";} .c2 {}', 'copy-'),
+			'.copy-c1 , .copy-c2 {content: ".c4 .c5";} .copy-c2 {}'
+		);
+
+		assert.strictEqual(
+			bup.svg_utils._transform_css('#id1 {content: ".c4 .c5";} el #id2 {}', 'copy-'),
+			'#copy-id1 {content: ".c4 .c5";} el #copy-id2 {}'
+		);
+
+		assert.strictEqual(
+			bup.svg_utils._transform_css('.classa,\n.classb #id1 \n,\ng.classc text .classd {content:\n".c4 .c5";\n\n\n} text#id2 { \t \nmargin:\n1px;}', 'copy-'),
+			'.copy-classa,\n.copy-classb #copy-id1 \n,\ng.copy-classc text .copy-classd {content:\n".c4 .c5";\n\n\n} text#copy-id2 { \t \nmargin:\n1px;}'
+		);
 	});
 });

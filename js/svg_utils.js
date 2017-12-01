@@ -99,6 +99,7 @@ function translate_path(d, scale, dx, dy) {
 			break;
 		case 'M':
 		case 'L':
+		case 'C':
 			res += translate_points(args, scale, dx, dy).join(' ');
 			break;
 		case 'H':
@@ -139,6 +140,21 @@ function translate_path(d, scale, dx, dy) {
 	return res;
 }
 
+function transform_css(css, prefix) {
+	var matches = utils.match_all(/([^{]+)(\{[^}]*\})/g, css);
+	return matches.map(function(m) {
+		return utils.replace_all(utils.replace_all(m[1], '#', '#' + prefix), '.', '.' + prefix) + m[2];
+	}).join('');
+}
+
+function import_el(dst_doc, el) {
+	var res = dst_doc.importNode(el);
+	utils.forEach(el.attributes, function(anode) {
+		res.setAttribute(anode.name, anode.value);
+	});
+	return res;
+}
+
 // dst is a destination container where all the elements will be put into
 // src_svg is the root node of an SVG document
 // Silently fails (because that's best for our applications)
@@ -149,6 +165,7 @@ function copy(dst, src_svg, x, y, width) {
 		return;
 	}
 
+	var prefix = 'copy_' + utils.uuid() + '_';
 	var vb = viewBox.split(' ').map(parseFloat);
 	var scale = width / vb[2];
 	var dst_doc = dst.ownerDocument;
@@ -174,13 +191,16 @@ function copy(dst, src_svg, x, y, width) {
 			break;
 		case 'g':
 		case 'defs':
-			el = dst_doc.importNode(node);
+			el = import_el(dst_doc, node);
 			break;
 		case 'style':
-			return into.appendChild(dst_doc.importNode(node, true));
+			el = import_el(dst_doc, node);
+			el.appendChild(dst_doc.createTextNode(transform_css(node.textContent, prefix)));
+			into.appendChild(el);
+			return;
 		case 'polygon':
 			var points = translate_points(split_args(node.getAttribute('points')), scale, x, y);
-			el = dst_doc.importNode(node);
+			el = import_el(dst_doc, node);
 			el.setAttribute('points', points.join(' '));
 			break;
 		case 'path':
@@ -199,9 +219,16 @@ function copy(dst, src_svg, x, y, width) {
 			}
 
 			var d = translate_path(node.getAttribute('d'), scale, dx, dy);
-			el = dst_doc.importNode(node);
+			el = import_el(dst_doc, node);
 			el.setAttribute('d', d);
 			el.removeAttribute('transform');
+			break;
+		case 'image':
+			el = import_el(dst_doc, node);
+			el.setAttribute('x', scale * parseFloat(node.getAttribute('x') || 0) + x);
+			el.setAttribute('y', scale * parseFloat(node.getAttribute('y') || 0) + y);
+			el.setAttribute('width', scale * parseFloat(node.getAttribute('width')));
+			el.setAttribute('height', scale * parseFloat(node.getAttribute('height')));
 			break;
 		default:
 			report_problem.silent_error('Unsupported element to copy: ' + tagName);
@@ -209,9 +236,22 @@ function copy(dst, src_svg, x, y, width) {
 
 		if (el) {
 			into.appendChild(el);
+
 			utils.forEach(node.childNodes, function(child) {
 				do_copy(el, child);
 			});
+
+			var el_id = el.getAttribute('id');
+			if (el_id) {
+				el.setAttribute('id', prefix + el_id);
+			}
+
+			var classes = el.getAttribute('class');
+			if (classes) {
+				el.setAttribute('class', classes.split(/\s+/).map(function(cname) {
+					return prefix + cname;
+				}).join(' '));
+			}
 		}
 	};
 	utils.forEach(src_svg.childNodes, function(el) {
@@ -228,6 +268,7 @@ return {
 /*@DEV*/
 	// Testing only
 	_translate_path: translate_path,
+	_transform_css: transform_css,
 /*/@DEV*/
 };
 })();

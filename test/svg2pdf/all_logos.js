@@ -56,20 +56,21 @@ function main() {
 		var doc = new vdom.Document('svg');
 		var root = doc.documentElement;
 		root.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+		root.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
 		root.setAttribute('viewBox', '0 0 ' + DOC_WIDTH + ' ' + DOC_HEIGHT);
 
 		svg_files.forEach((svg_file, num) => {
 			var g = svg_utils.el(root, 'g', {
-				'data-filename': svg_file.filename,
+				'id': svg_file.filename.replace('.svg', ''),
 			});
 			var svg_doc = (new xmldom.DOMParser()).parseFromString(svg_file.contents, 'image/svg+xml');
 
 			const col = num % COLS;
 			const row = Math.floor(num / COLS);
 
-			const x = col * cell_size + 0.1 * cell_size;
-			const y = row * cell_size + 0.1 * cell_size;
-			const width = 0.8 * cell_size;
+			const x = col * cell_size + 0.2 * cell_size;
+			const y = row * cell_size + 0.2 * cell_size;
+			const width = 0.6 * cell_size;
 
 			svg_utils.copy(g, svg_doc.documentElement, x, y, width);
 		});

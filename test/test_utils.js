@@ -57,6 +57,13 @@ _describe('helper functions', function() {
 		assert.deepEqual(bup.utils.repeat('abc', 3), ['abc', 'abc', 'abc']);
 	});
 
+	_it('replace_all', function() {
+		assert.strictEqual(
+			bup.utils.replace_all('a.b c.d..', '.', '_-_'),
+			'a_-_b c_-_d_-__-_'
+		);
+	});
+
 	_it('values', function() {
 		assert.deepEqual(bup.utils.values({
 			'x': 1,
