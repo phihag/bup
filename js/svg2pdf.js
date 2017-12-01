@@ -460,6 +460,23 @@ function render_page(svg, pdf, scale) {
 				});
 			}
 			break;
+		case 'polygon':
+			var points = svg_utils.split_args(n.getAttribute('points')).map(parseFloat);
+			var x1 = scale * points[0];
+			var y1 = scale * points[1];
+			x = x1;
+			y = y1;
+			var acc = [];
+			for (var point_i = 2;point_i < points.length;point_i += 2) {
+				var px = scale * points[point_i];
+				var py = scale * points[point_i + 1];
+
+				acc.push([px - x, py - y]);
+				x = px;
+				y = py;
+			}
+			pdf.lines(acc, x1, y1, [1, 1], mode, true);
+			break;
 		case 'text':
 			x = parseFloat(n.getAttribute('x'));
 			y = parseFloat(n.getAttribute('y'));
