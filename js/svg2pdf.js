@@ -1,18 +1,6 @@
 'use strict';
 var svg2pdf = (function() {
 
-function _split_args(str) {
-	if (!str) return [];
-
-	str = str.replace(/[eE]-/g, '_');
-	return str.split(/\s*,\s*|\s+|(?=-)/).map(function(el) {
-		if (el.includes('_')) {
-			el = el.replace('_', 'e-');
-		}
-		return el;
-	});
-}
-
 function parse_path(d) {
 	if (!d) return null;
 
@@ -514,7 +502,7 @@ function render_page(svg, pdf, scale) {
 			var text = n.textContent;
 			var dx_attr = n.getAttribute('dx');
 			if (dx_attr) {
-				var dx_vals = _split_args(dx_attr).map(parseFloat);
+				var dx_vals = svg_utils.split_args(dx_attr).map(parseFloat);
 				var ax = x;
 				for (var j = 0;j < text.length;j++) {
 					if (j < dx_vals.length) {

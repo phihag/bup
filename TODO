@@ -1,6 +1,7 @@
 generate receipts
 	include club logo
 		copy stuff from logo into main svg
+	test script that copies all logos into one file and makes a PDF
 	layout svg with lines, sums etc.
 	calc distance price
 	calc total
