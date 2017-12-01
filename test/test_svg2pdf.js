@@ -144,6 +144,22 @@ _describe('svg2pdf', function() {
 		);
 	});
 
+	_it('parse_path shorthands', function() {
+		assert.deepStrictEqual(
+			bup.svg2pdf.parse_path(
+				'M 5,5 s 1,2 3,4'
+			),
+			[{
+				x1: 5,
+				y1: 5,
+				acc: [
+					[0, 0, 1, 2, 3, 4],
+				],
+				closed: false,
+			}]
+		);
+	});
+
 	_it('parse_path of svgo', function() {
 		assert.deepStrictEqual(
 			bup.svg2pdf.parse_path(

@@ -29,7 +29,7 @@ function parse(ab) {
 // - c: The actual command
 // - args: Array of arguments
 function parse_cmd(str) {
-	var m = /^\s*([ZzvVhHmMlLcAaCq])/.exec(str);
+	var m = /^\s*([ZzvVhHmMlLcAaCqQsStT])/.exec(str);
 	if (!m) return;
 	var c = m[1];
 
@@ -87,19 +87,21 @@ function translate_path(d, scale, dx, dy) {
 		case 'Z':
 		case 'z':
 			break;
+		case 'c':
 		case 'h':
 		case 'l':
 		case 'm':
-		case 'v':
 		case 'q':
-		case 'c':
+		case 'v':
+		case 's':
 			res += args.map(function(a) {
 				return scale * a;
 			}).join(' ');
 			break;
-		case 'M':
-		case 'L':
 		case 'C':
+		case 'L':
+		case 'M':
+		case 'Q':
 			res += translate_points(args, scale, dx, dy).join(' ');
 			break;
 		case 'H':
@@ -140,7 +142,7 @@ function translate_path(d, scale, dx, dy) {
 	return res;
 }
 
-function transform_css(css, prefix) {
+function translate_css(css, prefix) {
 	var matches = utils.match_all(/([^{]+)(\{[^}]*\})/g, css);
 	return matches.map(function(m) {
 		return utils.replace_all(utils.replace_all(m[1], '#', '#' + prefix), '.', '.' + prefix) + m[2];
@@ -158,7 +160,7 @@ function import_el(dst_doc, el) {
 // dst is a destination container where all the elements will be put into
 // src_svg is the root node of an SVG document
 // Silently fails (because that's best for our applications)
-function copy(dst, src_svg, x, y, width) {
+function copy(dst, src_svg, x_offset, y_offset, width) {
 	var viewBox = src_svg.getAttribute('viewBox');
 	if (!viewBox) {
 		report_problem.silent_error('SVG copy failed: no viewBox');
@@ -170,7 +172,7 @@ function copy(dst, src_svg, x, y, width) {
 	var scale = width / vb[2];
 	var dst_doc = dst.ownerDocument;
 
-	var do_copy = function(into, node) {
+	var do_copy = function(into, node, dx, dy) {
 		if (node.nodeType === 3) {
 			// Text
 			into.appendChild(dst_doc.createTextNode(node.data));
@@ -184,6 +186,18 @@ function copy(dst, src_svg, x, y, width) {
 
 		var el;
 
+		var transform_attr = node.getAttribute('transform');
+		if (transform_attr) {
+			var transform_m = /^translate\(([-0-9.]+)(?:,\s*|\s+)([-0-9.]+)\)$/.exec(transform_attr);
+			if (!transform_m) {
+				report_problem.silent_error('Cannot parse transformation ' + transform_attr + ', skipping element.');
+				return;
+			}
+
+			dx += parseFloat(transform_m[1]) * scale;
+			dy += parseFloat(transform_m[2]) * scale;
+		}
+
 		switch (tagName) {
 		case 'title':
 		case 'desc':
@@ -195,38 +209,31 @@ function copy(dst, src_svg, x, y, width) {
 			break;
 		case 'style':
 			el = import_el(dst_doc, node);
-			el.appendChild(dst_doc.createTextNode(transform_css(node.textContent, prefix)));
+			el.appendChild(dst_doc.createTextNode(translate_css(node.textContent, prefix)));
 			into.appendChild(el);
 			return;
 		case 'polygon':
-			var points = translate_points(split_args(node.getAttribute('points')), scale, x, y);
+			var points = translate_points(split_args(node.getAttribute('points')), scale, dx, dy);
 			el = import_el(dst_doc, node);
 			el.setAttribute('points', points.join(' '));
 			break;
 		case 'path':
-			var transform_attr = node.getAttribute('transform');
-			var dx = x;
-			var dy = y;
-			if (transform_attr) {
-				var transform_m = /^translate\(([-0-9.]+)(?:,\s*|\s+)([-0-9.]+)\)$/.exec(transform_attr);
-				if (!transform_m) {
-					report_problem.silent_error('Cannot parse transformation ' + transform_attr + ', skipping.');
-					break;
-				}
-
-				dx += parseFloat(transform_m[1]) * scale;
-				dy += parseFloat(transform_m[2]) * scale;
-			}
-
 			var d = translate_path(node.getAttribute('d'), scale, dx, dy);
 			el = import_el(dst_doc, node);
 			el.setAttribute('d', d);
 			el.removeAttribute('transform');
 			break;
+		case 'line':
+			el = import_el(dst_doc, node);
+			el.setAttribute('x1', scale * parseFloat(node.getAttribute('x1')) + dx);
+			el.setAttribute('y1', scale * parseFloat(node.getAttribute('y1')) + dy);
+			el.setAttribute('x2', scale * parseFloat(node.getAttribute('x2')) + dx);
+			el.setAttribute('y2', scale * parseFloat(node.getAttribute('y2')) + dy);
+			break;
 		case 'image':
 			el = import_el(dst_doc, node);
-			el.setAttribute('x', scale * parseFloat(node.getAttribute('x') || 0) + x);
-			el.setAttribute('y', scale * parseFloat(node.getAttribute('y') || 0) + y);
+			el.setAttribute('x', scale * parseFloat(node.getAttribute('x') || 0) + dx);
+			el.setAttribute('y', scale * parseFloat(node.getAttribute('y') || 0) + dy);
 			el.setAttribute('width', scale * parseFloat(node.getAttribute('width')));
 			el.setAttribute('height', scale * parseFloat(node.getAttribute('height')));
 			break;
@@ -238,8 +245,10 @@ function copy(dst, src_svg, x, y, width) {
 			into.appendChild(el);
 
 			utils.forEach(node.childNodes, function(child) {
-				do_copy(el, child);
+				do_copy(el, child, dx, dy);
 			});
+
+			el.removeAttribute('transform');
 
 			var el_id = el.getAttribute('id');
 			if (el_id) {
@@ -255,7 +264,7 @@ function copy(dst, src_svg, x, y, width) {
 		}
 	};
 	utils.forEach(src_svg.childNodes, function(el) {
-		do_copy(dst, el);
+		do_copy(dst, el, x_offset, y_offset);
 	});
 }
 
@@ -268,7 +277,7 @@ return {
 /*@DEV*/
 	// Testing only
 	_translate_path: translate_path,
-	_transform_css: transform_css,
+	_translate_css: translate_css,
 /*/@DEV*/
 };
 })();

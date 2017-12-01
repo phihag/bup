@@ -11,6 +11,12 @@ function parse_path(d) {
 	var i; // no let :(
 	var acc;
 	var cur;
+	var epx;
+	var epy;
+	var p1x;
+	var p1y;
+	var last_segment_ax = null;
+	var last_segment_ay = null;
 
 	function _new_subpath() {
 		acc = [];
@@ -36,7 +42,6 @@ function parse_path(d) {
 		var a2 = args[1];
 
 		if ((c === 'z') || (c === 'Z')) {
-			// acc.push([cur.x1 - x, cur.y1 - y]);
 			x = cur.x1;
 			y = cur.y1;
 			cur.closed = true;
@@ -92,20 +97,6 @@ function parse_path(d) {
 				x = args[i];
 				y = args[i + 1];
 			}
-		} else if (c === 'c') {
-			for (i = 0;i < args.length;i += 6) {
-				acc.push(args.slice(i, i + 6));
-				x += args[i + 4];
-				y += args[i + 5];
-			}
-		} else if (c === 'C') {
-			for (i = 0;i < args.length;i += 6) {
-				acc.push(args.slice(i, i + 6).map(function(a, i) {
-					return a - ((i % 2) ? y : x);
-				}));
-				x = args[i + 4];
-				y = args[i + 5];
-			}
 		} else if (c === 'A') {
 			for (i = 0;i < args.length;i += 7) {
 				var relex = args[i + 5] - x;
@@ -128,22 +119,85 @@ function parse_path(d) {
 				x += args[i + 5];
 				y += args[i + 6];
 			}
+		} else if (c === 'c') {
+			for (i = 0;i < args.length;i += 6) {
+				acc.push(args.slice(i, i + 6));
+				last_segment_ax = x + args[i + 2];
+				last_segment_ay = y + args[i + 3];
+				x += args[i + 4];
+				y += args[i + 5];
+			}
+		} else if (c === 'C') {
+			for (i = 0;i < args.length;i += 6) {
+				acc.push(args.slice(i, i + 6).map(function(a, i) {
+					return a - ((i % 2) ? y : x);
+				}));
+				last_segment_ax = args[i + 2];
+				last_segment_ay = args[i + 3];
+				x = args[i + 4];
+				y = args[i + 5];
+			}
+		} else if (c === 's') {
+			for (i = 0;i < args.length;i += 4) {
+				epx = args[i + 2];
+				epy = args[i + 3];
+
+				acc.push([
+					(last_segment_ax === null) ? 0 : (x - last_segment_ax),
+					(last_segment_ay === null) ? 0 : (y - last_segment_ay),
+					args[i],
+					args[i + 1],
+					epx,
+					epy,
+				]);
+				last_segment_ax = x + args[i];
+				last_segment_ay = y + args[i + 1];
+				x += epx;
+				y += epy;
+			}
 		} else if (c === 'q') {
 			for (i = 0;i < args.length;i += 4) {
 				// See https://stackoverflow.com/q/9485788/35070
+				p1x = args[i];
+				p1y = args[i + 1];
+				epx = args[i + 2];
+				epy = args[i + 3];
+
 				acc.push([
-					args[i] * 2 / 3,
-					args[i + 1] * 2 / 3,
-					args[i + 2] + ((args[i] - args[i + 2]) * 2 / 3),
-					args[i + 3] + ((args[i + 1] - args[i + 3]) * 2 / 3),
-					args[i + 2],
-					args[i + 3],
+					p1x * 2 / 3,
+					p1y * 2 / 3,
+					epx + ((args[i] - epx) * 2 / 3),
+					epy + ((p1y - epy) * 2 / 3),
+					epx,
+					epy,
 				]);
-				x += args[i + 2];
-				y += args[i + 3];
+				x += epx;
+				y += epy;
+			}
+		} else if (c === 'Q') {
+			for (i = 0;i < args.length;i += 4) {
+				p1x = args[i] - x;
+				p1y = args[i + 1] - y;
+				epx = args[i + 2] - x;
+				epy = args[i + 3] - y;
+
+				acc.push([
+					p1x * 2 / 3,
+					p1y * 2 / 3,
+					epx + ((p1x - epx) * 2 / 3),
+					epy + ((p1y - epy) * 2 / 3),
+					epx,
+					epy,
+				]);
+				x = args[i + 2];
+				y = args[i + 3];
 			}
 		} else {
 			report_problem.silent_error('Unsupported SVG command ' + c);
+		}
+
+		if ((c !== 'c') && (c !== 'C') && (c === 's') && (c !== 'S')) {
+			last_segment_ax = last_segment_ay = null;
 		}
 	}
 	return res;

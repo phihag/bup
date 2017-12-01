@@ -43,27 +43,30 @@ function main() {
 	const svg_out_fn = argv[1] || 'logos.svg';
 	const pdf_out_fn = argv[1] || 'logos.pdf';
 
-	const DOC_WIDTH = 210;
-	const DOC_HEIGHT = 297;
+	const DOC_WIDTH = 297;
+	const DOC_HEIGHT = 210;
 
-	const COLS = 4;
+	const COLS = 7;
 
 	read_svgs(in_dir, (err, svg_files) => {
 		if (err) throw err;
 
-		const cell_size = Math.floor(DOC_HEIGHT * COLS / svg_files.length);
+		const cell_size_h = Math.floor(DOC_HEIGHT / Math.ceil(svg_files.length / COLS));
+		const cell_size_w = Math.floor(DOC_WIDTH / COLS);
+		const cell_size = Math.min(cell_size_w, cell_size_h);
 
-		var doc = new vdom.Document('svg');
-		var root = doc.documentElement;
+		const doc = new vdom.Document('svg');
+		const root = doc.documentElement;
 		root.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
 		root.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
 		root.setAttribute('viewBox', '0 0 ' + DOC_WIDTH + ' ' + DOC_HEIGHT);
 
 		svg_files.forEach((svg_file, num) => {
-			var g = svg_utils.el(root, 'g', {
-				'id': svg_file.filename.replace('.svg', ''),
+			const club_name = svg_file.filename.replace('.svg', '');
+			const g = svg_utils.el(root, 'g', {
+				'id': club_name,
 			});
-			var svg_doc = (new xmldom.DOMParser()).parseFromString(svg_file.contents, 'image/svg+xml');
+			const svg_doc = (new xmldom.DOMParser()).parseFromString(svg_file.contents, 'image/svg+xml');
 
 			const col = num % COLS;
 			const row = Math.floor(num / COLS);

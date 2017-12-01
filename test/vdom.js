@@ -159,7 +159,7 @@ Element.prototype._toxml = function(indent, add_indent) {
 	keys.sort();
 	var attrs_str = keys.map(function(k) {
 		var val = attrs[k];
-		assert(/^[-:_a-zA-Z]+$/.test(k), 'Unsupported attribute name ' + JSON.stringify(k));
+		assert(/^[-:_a-zA-Z0-9]+$/.test(k), 'Unsupported attribute name ' + JSON.stringify(k));
 		return k + '="' + encode(val) + '"';
 	}).join(' ');
 

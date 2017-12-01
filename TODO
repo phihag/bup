@@ -1,4 +1,5 @@
-all_logos: scope styles
+svg2pdf: Q seems wrong
+svg2pdf: omit polygon in defs
 all_logos: fix various logos
 
 generate receipts

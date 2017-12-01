@@ -71,19 +71,19 @@ _describe('svg_utils', function() {
 		);		
 	});
 
-	_it('transform_css', function() {
+	_it('translate_css', function() {
 		assert.strictEqual(
-			bup.svg_utils._transform_css('.c1 , .c2 {content: ".c4 .c5";} .c2 {}', 'copy-'),
+			bup.svg_utils._translate_css('.c1 , .c2 {content: ".c4 .c5";} .c2 {}', 'copy-'),
 			'.copy-c1 , .copy-c2 {content: ".c4 .c5";} .copy-c2 {}'
 		);
 
 		assert.strictEqual(
-			bup.svg_utils._transform_css('#id1 {content: ".c4 .c5";} el #id2 {}', 'copy-'),
+			bup.svg_utils._translate_css('#id1 {content: ".c4 .c5";} el #id2 {}', 'copy-'),
 			'#copy-id1 {content: ".c4 .c5";} el #copy-id2 {}'
 		);
 
 		assert.strictEqual(
-			bup.svg_utils._transform_css('.classa,\n.classb #id1 \n,\ng.classc text .classd {content:\n".c4 .c5";\n\n\n} text#id2 { \t \nmargin:\n1px;}', 'copy-'),
+			bup.svg_utils._translate_css('.classa,\n.classb #id1 \n,\ng.classc text .classd {content:\n".c4 .c5";\n\n\n} text#id2 { \t \nmargin:\n1px;}', 'copy-'),
 			'.copy-classa,\n.copy-classb #copy-id1 \n,\ng.copy-classc text .copy-classd {content:\n".c4 .c5";\n\n\n} text#copy-id2 { \t \nmargin:\n1px;}'
 		);
 	});
