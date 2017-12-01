@@ -14,7 +14,7 @@ function convert_client(xml_str) { // eslint-disable-line no-unused-vars
 	return ir;
 }
 
-var report_problem = (() => {
+var report_problem = (() => { // eslint-disable-line no-unused-vars
 function silent_error(msg) {
 	throw new Error(msg);
 }

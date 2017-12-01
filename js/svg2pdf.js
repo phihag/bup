@@ -26,7 +26,7 @@ function parse_path(d) {
 	while (d && !/^\s*$/.test(d)) {
 		var cmd = svg_utils.parse_cmd(d);
 		if (!cmd) {
-			console.error('Unsupported path data: ' + JSON.stringify(d));
+			report_problem.silent_error('Unsupported path data: ' + JSON.stringify(d));
 			return;
 		}
 		d = cmd.rest;
