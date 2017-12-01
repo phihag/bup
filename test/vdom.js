@@ -205,7 +205,7 @@ Document.prototype.toxml = function(indent) {
 };
 Document.prototype.importNode = function(node, deep) {
 	if (node.nodeType === 3) {
-		return new TextNode(node.data);
+		return new TextNode(this, node.data);
 	}
 	if (node.nodeType !== 1) {
 		throw new Error('Unsupported nodeType ' + node.nodeType);

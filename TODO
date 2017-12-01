@@ -1,3 +1,6 @@
+all_logos: scope styles
+all_logos: fix various
+
 generate receipts
 	include club logo
 		copy stuff from logo into main svg

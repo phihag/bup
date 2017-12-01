@@ -12,7 +12,7 @@ const vdom = require('../vdom');
 const svg_utils = require('../../js/svg_utils');
 
 function usage() {
-	console.log('Usage: all_logos.js [DIR [OUT.pdf]]');
+	console.log('Usage: all_logos.js [DIR [OUT.svg [OUT.pdf]]]');
 	console.log('Renders all SVG files from the specified directory to one PDF file');
 	process.exit(1);
 }
@@ -35,12 +35,13 @@ function read_svgs(in_dir, callback) {
 
 function main() {
 	const argv = process.argv.slice(2);
-	if ((argv.length > 2) || (argv[0] === '--help')) {
+	if ((argv.length > 3) || (argv[0] === '--help')) {
 		usage();
 	}
 
 	const in_dir = argv[0] || path.normalize(path.join(__dirname, '..', '..', 'div', 'logos'));
-	const out_fn = argv[1] || 'logos.pdf';
+	const svg_out_fn = argv[1] || 'logos.svg';
+	const pdf_out_fn = argv[1] || 'logos.pdf';
 
 	const DOC_WIDTH = 210;
 	const DOC_HEIGHT = 297;
@@ -73,8 +74,11 @@ function main() {
 			svg_utils.copy(g, svg_doc.documentElement, x, y, width);
 		});
 
-		convert(svg).then((pdf_u8r) => {
-			fs.writeFile(out_fn, pdf_u8r, (err) => {
+		const svg_xml = doc.toxml('  ');
+		fs.writeFileSync(svg_out_fn, svg_xml);
+
+		svg2pdf.convert(svg_xml).then((pdf_u8r) => {
+			fs.writeFile(pdf_out_fn, pdf_u8r, (err) => {
 				if (err) throw err;
 			});
 		}).catch(err => {

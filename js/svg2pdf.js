@@ -565,6 +565,7 @@ function render_page(svg, pdf, scale) {
 		case 'style':
 		case 'title':
 		case 'metadata':
+		case 'g':
 			// We don't care
 			break;
 		default:
