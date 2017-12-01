@@ -64,6 +64,70 @@ function split_args(str) {
 	});
 }
 
+function translate_points(points, scale, dx, dy) {
+	for (var i = 0;i < points.length;i+=2) {
+		points[i] = points[i] * scale + dx;
+		points[i + 1] = points[i + 1] * scale + dy;
+	}
+	return points;
+}
+
+function translate_path(d, scale, dx, dy) {
+	var res = (/^M/.test(d) ? '' : 'M ' + dx + ' ' + dy);
+	while (d) {
+		var cmd = parse_cmd(d);
+		if (!cmd) {
+			report_problem.silent_error('Cannot parse path ' + d);
+			break;
+		}
+		var args = cmd.args;
+
+		res += ' ' + cmd.c + ' ';
+		switch (cmd.c) {
+		case 'Z':
+		case 'z':
+			break;
+		case 'h':
+		case 'l':
+		case 'm':
+		case 'v':
+			res += args.map(function(a) {
+				return scale * a;
+			}).join(' ');
+			break;
+		case 'M':
+		case 'L':
+			res += translate_points(args, scale, dx, dy).join(' ');
+			break;
+		case 'H':
+			res += args.map(function(a) {
+				return a * scale + dx;
+			}).join(' ');
+			break;
+		case 'V':
+			res += args.map(function(a) {
+				return a * scale + dy;
+			}).join(' ');
+			break;
+		case 'A':
+			for (var i = 0;i < args.length;i += 7) {
+				args[i] *= scale;
+				args[i + 1] *= scale;
+				args[i + 5] = args[i + 5] * scale + dx;
+				args[i + 6] = args[i + 6] * scale + dy;
+			}
+			res += args.join(' ');
+			break;
+		default:
+			report_problem.silent_error('Cannot copy path cmd ' + cmd.c);
+			return '';
+		}
+
+		d = cmd.rest;
+	}
+	return res;
+};
+
 // dst is a destination container where all the elements will be put into
 // Silently fails (because that's best for our applications)
 function copy(dst, src_svg, x, y, width) {
@@ -76,68 +140,6 @@ function copy(dst, src_svg, x, y, width) {
 	var vb = viewBox.split(' ').map(parseFloat);
 	var scale = width / vb[2];
 	var dst_doc = dst.ownerDocument;
-
-	var translate_points = function(points, dx, dy) {
-		for (var i = 0;i < points.length;i+=2) {
-			points[i] = points[i] * scale + dx;
-			points[i + 1] = points[i + 1] * scale + dy;
-		}
-		return points;
-	};
-
-	var translate_path = function(d, dx, dy) {
-		var res = 'M ' + dx + ' ' + dy;
-		while (d) {
-			var cmd = parse_cmd(d);
-			if (!cmd) {
-				report_problem.silent_error('Cannot parse path ' + d);
-				break;
-			}
-			var args = cmd.args;
-
-			res += ' ' + cmd.c + ' ';
-			switch (cmd.c) {
-			case 'Z':
-			case 'z':
-				break;
-			case 'a':
-			case 'c':
-			case 'h':
-			case 'l':
-			case 'm':
-			case 'q':
-			case 'v':
-				// relative, simply keep
-				res += args.join(' ');
-				break;
-			case 'M':
-			case 'L':
-				res += translate_points(args, dx, dy).join(' ');
-				break;
-			case 'H':
-				res += args[0] * scale + dx;
-				break;
-			case 'V':
-				res += args[0] * scale + dy;
-				break;
-			case 'A':
-				for (var i = 0;i < args.length;i += 7) {
-					args[i] *= scale;
-					args[i + 1] *= scale;
-					args[i + 5] = args[i + 5] * scale + dx;
-					args[i + 6] = args[i + 6] * scale + dy;
-				}
-				res += args.join(' ');
-				break;
-			default:
-				report_problem.silent_error('Cannot copy path cmd ' + cmd.c);
-				return '';
-			}
-
-			d = cmd.rest;
-		}
-		return res;
-	};
 
 	var do_copy = function(into, node) {
 		if (node.nodeType === 3) {
@@ -162,7 +164,7 @@ function copy(dst, src_svg, x, y, width) {
 		case 'style':
 			return dst.appendChild(dst_doc.importNode(node, true));
 		case 'polygon':
-			var points = translate_points(split_args(node.getAttribute('points')), x, y);
+			var points = translate_points(split_args(node.getAttribute('points')), scale, x, y);
 			el = dst_doc.importNode(node);
 			el.setAttribute('points', points.join(' '));
 			break;
@@ -181,10 +183,12 @@ function copy(dst, src_svg, x, y, width) {
 				dy += parseFloat(transform_m[2]) * scale;
 			}
 
-			var d = translate_path(node.getAttribute('d'), dx, dy);
+			var d = translate_path(node.getAttribute('d'), scale, dx, dy);
 			el = dst_doc.importNode(node);
 			el.setAttribute('d', d);
 			el.removeAttribute('transform');
+el.setAttribute('data-d', node.getAttribute('d'))
+el.setAttribute('data-transform', node.getAttribute('transform'));
 			break;
 		default:
 			report_problem.silent_error('Unsupported element to copy: ' + tagName);
@@ -208,6 +212,10 @@ return {
 	parse_cmd: parse_cmd,
 	copy: copy,
 	split_args: split_args,
+/*@DEV*/
+	// Testing only
+	_translate_path: translate_path,
+/*/@DEV*/
 };
 })();
 
