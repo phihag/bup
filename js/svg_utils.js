@@ -137,7 +137,7 @@ function copy(dst, src_svg, x, y, width) {
 			d = cmd.rest;
 		}
 		return res;
-	}
+	};
 
 	var do_copy = function(into, node) {
 		if (node.nodeType === 3) {
