@@ -173,7 +173,7 @@ function copy(dst, src_svg, x, y, width) {
 			el = dst_doc.importNode(node);
 			break;
 		case 'style':
-			return dst.appendChild(dst_doc.importNode(node, true));
+			return into.appendChild(dst_doc.importNode(node, true));
 		case 'polygon':
 			var points = translate_points(split_args(node.getAttribute('points')), scale, x, y);
 			el = dst_doc.importNode(node);
