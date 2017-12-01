@@ -169,8 +169,10 @@ function copy(dst, src_svg, x, y, width) {
 
 		switch (tagName) {
 		case 'title':
+		case 'desc':
 			// suppress
 			break;
+		case 'g':
 		case 'defs':
 			el = dst_doc.importNode(node);
 			break;
