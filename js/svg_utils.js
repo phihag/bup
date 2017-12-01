@@ -118,14 +118,14 @@ function copy(dst, src_svg, x, y, width) {
 				res += args[0] * scale + dx;
 				break;
 			case 'V':
-				res += args[0] * scale + y;
+				res += args[0] * scale + dy;
 				break;
 			case 'A':
 				for (var i = 0;i < args.length;i += 7) {
 					args[i] *= scale;
 					args[i + 1] *= scale;
 					args[i + 5] = args[i + 5] * scale + dx;
-					args[i + 6] = args[i + 6] * scale + y;
+					args[i + 6] = args[i + 6] * scale + dy;
 				}
 				res += args.join(' ');
 				break;
