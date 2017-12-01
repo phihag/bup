@@ -73,18 +73,32 @@ _describe('svg_utils', function() {
 
 	_it('translate_css', function() {
 		assert.strictEqual(
-			bup.svg_utils._translate_css('.c1 , .c2 {content: ".c4 .c5";} .c2 {}', 'copy-'),
-			'.copy-c1 , .copy-c2 {content: ".c4 .c5";} .copy-c2 {}'
+			bup.svg_utils._translate_css('.c1 , .c2 {content: ".c4 .c5"} .c2 {}', 'copy-', 1),
+			'.copy-c1 , .copy-c2 {content: ".c4 .c5"} .copy-c2 {}'
 		);
 
 		assert.strictEqual(
-			bup.svg_utils._translate_css('#id1 {content: ".c4 .c5";} el #id2 {}', 'copy-'),
-			'#copy-id1 {content: ".c4 .c5";} el #copy-id2 {}'
+			bup.svg_utils._translate_css('#id1 {content: ".c4 .c5"} el #id2 {}', 'copy-', 1),
+			'#copy-id1 {content: ".c4 .c5"} el #copy-id2 {}'
 		);
 
 		assert.strictEqual(
-			bup.svg_utils._translate_css('.classa,\n.classb #id1 \n,\ng.classc text .classd {content:\n".c4 .c5";\n\n\n} text#id2 { \t \nmargin:\n1px;}', 'copy-'),
-			'.copy-classa,\n.copy-classb #copy-id1 \n,\ng.copy-classc text .copy-classd {content:\n".c4 .c5";\n\n\n} text#copy-id2 { \t \nmargin:\n1px;}'
+			bup.svg_utils._translate_css('.classa,\n.classb #id1 \n,\ng.classc text .classd {content:\n".c4 .c5";\n\n\n} text#id2 { \t \nmargin:\n1px;}', 'copy-', 1),
+			'.copy-classa,\n.copy-classb #copy-id1 \n,\ng.copy-classc text .copy-classd {content:\n".c4 .c5"} text#copy-id2 { \t \nmargin:\n1px}'
+		);
+
+		// Rescale
+		assert.strictEqual(
+			bup.svg_utils._translate_css('.foo {fill:#ff0;stroke-width:2px;}', 'copy-', 2),
+			'.copy-foo {fill:#ff0;stroke-width:4px}'
+		);
+		assert.strictEqual(
+			bup.svg_utils._translate_css('.foo {fill:#ff0;stroke-width:2;}', 'copy-', 2),
+			'.copy-foo {fill:#ff0;stroke-width:4}'
+		);
+		assert.strictEqual(
+			bup.svg_utils._translate_css('.foo {fill:#ff0;stroke-width:.2cm;}', 'copy-', 2),
+			'.copy-foo {fill:#ff0;stroke-width:0.4cm}'
 		);
 	});
 });

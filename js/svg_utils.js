@@ -148,8 +148,23 @@ function translate_path(d, scale, dx, dy) {
 function translate_css(css, prefix, scale) {
 	var matches = utils.match_all(/([^{]+)\{([^}]*)\}/g, css);
 	return matches.map(function(m) {
-		var defs = m[2]; // TODO rescale
-		return utils.replace_all(utils.replace_all(m[1], '#', '#' + prefix), '.', '.' + prefix) + '{' + defs + '}';
+		var defs = m[2].split(';').filter(function(def) {
+			return !/^\s*$/.test(def);
+		}).map(function(def) {
+			var css_m = /^([^:]+:\s*)(-?[0-9.]*)?([-a-z]*|#[0-9a-fA-F]+|"[^"]*")$/.exec(def);
+			if (!css_m) {
+				report_problem.silent_error('Failed to parse SVG-CSS ' + def);
+				return def; // Just hope for the best
+			}
+
+			if (!css_m[2]) {
+				return def;
+			}
+
+			// numeric value, rescale
+			return css_m[1] + scale * parseFloat(css_m[2]) + css_m[3];
+		});
+		return utils.replace_all(utils.replace_all(m[1], '#', '#' + prefix), '.', '.' + prefix) + '{' + defs.join(';') + '}';
 	}).join('');
 }
 
