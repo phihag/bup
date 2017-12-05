@@ -114,7 +114,8 @@ function parse_path(d) {
 		} else if (c === 'a') {
 			for (i = 0;i < args.length;i += 7) {
 				var bdraw = arc2beziers(
-					args[i], args[i + 1], args[i + 2],
+					args[i], args[i + 1],
+					args[i + 2],
 					args[i + 3], args[i + 4],
 					args[i + 5], args[i + 6]);
 				acc.push.apply(acc, bdraw);
@@ -315,7 +316,6 @@ function arc2beziers(rx, ry, angle, large_flag, sweep_flag, ex, ey) {
 	// Step 1 : Compute (x1', y1') - the transformed start point
 	var x1 = (cosAngle * dx2 + sinAngle * dy2);
 	var y1 = (-sinAngle * dx2 + cosAngle * dy2);
-
 	var x1_sq = x1 * x1;
 	var y1_sq = y1 * y1;
 
@@ -370,11 +370,11 @@ function arc2beziers(rx, ry, angle, large_flag, sweep_flag, ex, ey) {
 		angleExtent += 360;
 	}
 
-	angleExtent %= 360;
 	angleStart %= 360;
+	angleExtent %= 360;
 
 	var bezierPoints = _make_beziers(angleStart, angleExtent);
-	var  arad = _to_radians(angle);
+	var arad = _to_radians(angle);
 	var sinm = Math.sin(arad);
 	var cosm = Math.cos(arad);
 
@@ -407,8 +407,8 @@ function arc2beziers(rx, ry, angle, large_flag, sweep_flag, ex, ey) {
 			p3[0] - offx, p3[1] - offy,
 		]);
 
-		offx += p3[0];
-		offy += p3[1];
+		offx = p3[0];
+		offy = p3[1];
 	}
 
 	return res;
@@ -417,7 +417,7 @@ function arc2beziers(rx, ry, angle, large_flag, sweep_flag, ex, ey) {
 // Helper function for arc2bezier above
 function _make_beziers(angleStart, angleExtent) {
 	// copied / adapted from https://github.com/BigBadaboom/androidsvg/blob/418cf676849b200cacf3465478079f39709fe5b1/androidsvg/src/main/java/com/caverock/androidsvg/SVGAndroidRenderer.java#L2579 (ASL 2.0)
-	var numSegments = 1; // originally Math.ceil(Math.abs(angleExtent) / 90.0), but that interacts with SVG filling rules
+	var numSegments = Math.ceil(Math.abs(angleExtent) / 90.0);
 	angleStart = _to_radians(angleStart);
 	angleExtent = _to_radians(angleExtent);
 	var angleIncrement = (angleExtent / numSegments);
