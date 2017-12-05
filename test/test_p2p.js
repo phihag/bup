@@ -10,8 +10,10 @@ var liveaw_server = require('./mock/liveaw_server.js');
 
 (function() {
 'use strict';
+var DISABLED = true;
 
 _describe('p2p', function() {
+	if (DISABLED) return;
 	var ws_module = require('ws');
 
 	_it('test connection and basic communication', function(done) {
