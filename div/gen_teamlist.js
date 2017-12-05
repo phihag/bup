@@ -3,14 +3,14 @@
 
 var async = require('async');
 var fs = require('fs');
-var http = require('http');
+var https = require('https');
 var process = require('process');
 var url = require('url');
 
 var utils = (function() {
 function download_page(url, cb, encoding) {
 	if (!encoding) encoding = 'utf8'; // TODO read actual page encoding
-	http.get(url, function(res) {
+	https.get(url, function(res) {
 		res.setEncoding(encoding);
 		var body = '';
 		res.on('data', function(chunk) {
@@ -25,7 +25,7 @@ function download_page(url, cb, encoding) {
 }
 
 function download_bin(url, cb) {
-	http.request(url, function(response) {
+	https.request(url, function(response) {
 		var buffers = [];
 
 		response.on('data', function(chunk) {                                       
@@ -83,7 +83,7 @@ function _parse_team(page_url, page_html, cb) {
 }
 
 function download_team(tournament_id, team_id, cb) {
-	var team_url = 'http://www.turnier.de/sport/teamrankingplayers.aspx?id=' + tournament_id + '&tid=' + team_id;
+	var team_url = 'https://www.turnier.de/sport/teamrankingplayers.aspx?id=' + tournament_id + '&tid=' + team_id;
 	utils.download_page(team_url, function(err, _, team_html) {
 		if (err) return cb(err);
 		_parse_team(team_url, team_html, cb);
@@ -91,11 +91,11 @@ function download_team(tournament_id, team_id, cb) {
 }
 
 function download_league(league_id, draw_id, callback) {
-	var list_url = 'http://www.turnier.de/sport/draw.aspx?id=' + league_id + '&draw=' + draw_id;
+	var list_url = 'https://www.turnier.de/sport/draw.aspx?id=' + league_id + '&draw=' + draw_id;
 	utils.download_page(list_url, function(err, _, list_html) {
 		if (err) return callback(err);
 
-		var name_m = /<th>Konkurrenz:<\/th>\s*<td><a href="event\.aspx\?id=[0-9-A-Za-z-]+&event=[0-9]+">(.*?)<\/a>/.exec(list_html);
+		var name_m = /<caption>\s*Tabelle\s*(.*?)\s*<\/caption>/.exec(list_html);
 		if (!name_m) {
 			return callback(new Error('Cannot find league name at ' + list_url));
 		}
@@ -161,7 +161,9 @@ function main() {
 				'<body><h1>Mannschaftsunterlagen ' + league_info.name + '</h1>' +
 				main_content +
 				'\n</body></html>\n');
-			fs.writeFile(out_fn, html);
+			fs.writeFile(out_fn, html, (err) => {
+				if (err) throw err;
+			});
 		});
 	});
 }

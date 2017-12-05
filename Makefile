@@ -32,9 +32,9 @@ appcache-manifest:
 
 teamlists:
 	mkdir -p div/teamlists
-	div/gen_teamlist.js 'http://www.turnier.de/sport/draw.aspx?id=2E6B5BAC-8F64-46E8-94FC-804611281DF1&draw=1' div/teamlists/teamlist-1BL-2016.html
-	div/gen_teamlist.js 'http://www.turnier.de/sport/draw.aspx?id=2E6B5BAC-8F64-46E8-94FC-804611281DF1&draw=2' div/teamlists/teamlist-2BLN-2016.html
-	div/gen_teamlist.js 'http://www.turnier.de/sport/draw.aspx?id=2E6B5BAC-8F64-46E8-94FC-804611281DF1&draw=3' div/teamlists/teamlist-2BLS-2016.html
+	div/gen_teamlist.js 'https://www.turnier.de/sport/draw.aspx?id=2E6B5BAC-8F64-46E8-94FC-804611281DF1&draw=1' div/teamlists/teamlist-1BL-2016.html
+	div/gen_teamlist.js 'https://www.turnier.de/sport/draw.aspx?id=2E6B5BAC-8F64-46E8-94FC-804611281DF1&draw=2' div/teamlists/teamlist-2BLN-2016.html
+	div/gen_teamlist.js 'https://www.turnier.de/sport/draw.aspx?id=2E6B5BAC-8F64-46E8-94FC-804611281DF1&draw=3' div/teamlists/teamlist-2BLS-2016.html
 
 dist: cleandist ## Create distribution files
 	@test -d div/teamlists || $(MAKE) teamlists
