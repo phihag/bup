@@ -6,6 +6,7 @@ const path = require('path');
 
 const puppeteer = require('puppeteer');
 
+
 async function convert(svg) {
 	const browser = await puppeteer.launch({args: ['--no-sandbox'], headless: true});
 	const page = await browser.newPage();
@@ -29,6 +30,7 @@ function usage() {
 
 function main() {
 	const argv = process.argv.slice(2);
+
 	if ((argv.length !== 2) || argv[0].startsWith('-') || argv[1].startsWith('-')) {
 		usage();
 	}

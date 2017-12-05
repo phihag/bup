@@ -1,3 +1,6 @@
+svg2pdf: option to copy
+investigate svg2pdf failures (from all_logos)
+
 generate receipts
 	svg2pdf all_logos
 	include club logo

@@ -218,8 +218,8 @@ function parse_path(d) {
 			}
 		} else if (c === 't') {
 			for (i = 0;i < args.length;i += 4) {
-				p1x = (last_sc_segment_ax === null) ? 0 : (x - last_sc_segment_ax);
-				p1y = (last_sc_segment_ay === null) ? 0 : (y - last_sc_segment_ay);
+				p1x = (last_qt_segment_ax === null) ? 0 : (x - last_qt_segment_ax);
+				p1y = (last_qt_segment_ay === null) ? 0 : (y - last_qt_segment_ay);
 				epx = args[i];
 				epy = args[i + 1];
 				last_qt_segment_ax = x + p1x;
@@ -238,8 +238,8 @@ function parse_path(d) {
 			}
 		} else if (c === 'T') {
 			for (i = 0;i < args.length;i += 4) {
-				p1x = (last_sc_segment_ax === null) ? 0 : (x - last_sc_segment_ax);
-				p1y = (last_sc_segment_ay === null) ? 0 : (y - last_sc_segment_ay);
+				p1x = (last_qt_segment_ax === null) ? 0 : (x - last_qt_segment_ax);
+				p1y = (last_qt_segment_ay === null) ? 0 : (y - last_qt_segment_ay);
 				epx = args[i];
 				epy = args[i + 1];
 				last_qt_segment_ax = x + p1x;
