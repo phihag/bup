@@ -240,8 +240,8 @@ function parse_path(d) {
 			for (i = 0;i < args.length;i += 4) {
 				p1x = (last_qt_segment_ax === null) ? 0 : (x - last_qt_segment_ax);
 				p1y = (last_qt_segment_ay === null) ? 0 : (y - last_qt_segment_ay);
-				epx = args[i];
-				epy = args[i + 1];
+				epx = args[i] - x;
+				epy = args[i + 1] - y;
 				last_qt_segment_ax = x + p1x;
 				last_qt_segment_ay = y + p1y;
 
@@ -250,11 +250,11 @@ function parse_path(d) {
 					p1y * 2 / 3,
 					epx + ((p1x - epx) * 2 / 3),
 					epy + ((p1y - epy) * 2 / 3),
-					epx - x,
-					epy - y,
+					epx,
+					epy,
 				]);
-				x = epx;
-				y = epy;
+				x += epx;
+				y += epy;
 			}
 		} else {
 			report_problem.silent_error('Unsupported SVG command ' + c);
