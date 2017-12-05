@@ -45,6 +45,7 @@ dist: cleandist ## Create distribution files
 	cp libs/jspdf.min.js dist/bup/jspdf.dist.js
 	cp libs/jszip.min.js dist/bup/jszip.min.js
 	cp libs/pdfform.minipdf.dist.js dist/bup/pdfform.minipdf.dist.js
+	mkdir -p dist/bup/icons
 	node_modules/.bin/svgo -q -f icons/ -o dist/bup/icons/
 	cp icons/*.gif icons/*.png dist/bup/icons/
 	mkdir -p dist/bup/div/logos/
