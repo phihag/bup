@@ -8,6 +8,7 @@
     "shorthand-property-no-redundant-values": null,
     "declaration-block-no-duplicate-properties": null,
     "rule-empty-line-before": null,
-    "color-hex-length": null
+    "color-hex-length": null,
+    "no-descending-specificity": null
   }
 }

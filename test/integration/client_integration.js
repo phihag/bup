@@ -13,3 +13,11 @@ function client_find_text(qs, text) {
 
 	return null;
 }
+
+
+// The following is more for the benefit of the linter than actually useful
+if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	module.exports = {
+		client_find_text,
+	};
+}

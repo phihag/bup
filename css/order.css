@@ -24,6 +24,8 @@ div.order_container {
 }
 .order_ignore_match {
 	height: 2em;
+	position: relative;
+	visibility: hidden;
 }
 
 
@@ -66,10 +68,6 @@ div.order_container {
 	visibility: hidden;
 }
 
-.order_ignore_match {
-	position: relative;
-	visibility: hidden;
-}
 .order_ignore_match.order_ignore_match_active {
 	visibility: visible;
 }

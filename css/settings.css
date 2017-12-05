@@ -134,7 +134,7 @@
 	min-width: 17em;
 }
 .setup_manual_details th,
-.setup_manual_details th {
+.setup_manual_details td {
 	padding: 0.5em 0;
 }
 .settings_container button.setup_manual_start {

@@ -1,4 +1,8 @@
 #pronunciation {
+	z-index: 100;
+	min-width: calc(100vw - 60vmin);
+	max-width: calc(100vw - 60vmin);
+
 	padding-top: 0;
 }
 #pronunciation > span,
@@ -63,11 +67,6 @@
 .pick_dialog,
 .exception_dialog {
 	z-index: 300;
-}
-#pronunciation {
-	z-index: 100;
-	min-width: calc(100vw - 60vmin);
-	max-width: calc(100vw - 60vmin);
 }
 .pick_dialog button {
 	font-size: inherit;

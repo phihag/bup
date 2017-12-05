@@ -23,7 +23,7 @@ var _before = ((typeof before == 'undefined') ?
 );
 var _after = ((typeof after == 'undefined') ?
 	function() {/* ignore */ } :
-	after
+	after  // eslint-disable-line no-undef
 );
 
 
