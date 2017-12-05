@@ -224,6 +224,7 @@ function copy(dst, src_svg, x_offset, y_offset, width) {
 		}
 
 		switch (tagName) {
+		case 'mask': // Surprisingly, with all our test SVGs work fine, so ignore mask for now.
 		case 'title':
 		case 'desc':
 		case 'sodipodi:namedview':

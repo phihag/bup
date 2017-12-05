@@ -488,211 +488,238 @@ function parse_color(col_str) {
 	};
 }
 
+function _all_els(svg) {
+	var to_visit = [(svg.nodeType === 1) ? svg : svg.documentElement];
+	var res = [];
+	while (to_visit.length > 0) {
+		var el = to_visit.pop();
+
+		if (el.nodeType !== 1) {
+			continue; // Not an element, not interested
+		}
+		var tagName = el.tagName.toLowerCase();
+		if (tagName === 'defs') {
+			continue; // Not interested
+		}
+
+		if (tagName !== 'svg') {
+			res.push(el);
+		}
+
+		var children = el.childNodes;
+		for (var i = children.length - 1;i >= 0;i--) {
+			to_visit.push(children[i]);
+		}
+	}
+	return res;
+}
+
 function render_page(svg, pdf, scale) {
-	var nodes = svg.querySelectorAll('*');
+	_all_els(svg).forEach(function(el) {
+		render_el(el, pdf, scale);
+	});
+}
 
-	for (var i = 0;i < nodes.length;i++) {
-		// Due to absence of let, declare vars here
-		var x;
-		var y;
-		var m;
-		var width;
-		var height;
+function render_el(el, pdf, scale) {
+	// Due to absence of let, declare vars here
+	var x;
+	var y;
+	var m;
+	var width;
+	var height;
 
-		var n = nodes[i];
-		var style = window.getComputedStyle(n);
+	var style = window.getComputedStyle(el);
 
-		if (style.visibility === 'hidden') {
-			continue;
-		}
+	if (style.visibility === 'hidden') {
+		return;
+	}
 
-		var mode = '';
-		if (style.fill != 'none') {
-			var col = parse_color(style.fill);
-			pdf.setFillColor(col.r, col.g, col.b);
-			mode = (style.fillRule === 'evenodd') ? 'f*' : 'f';
-		}
-		if ((style.stroke != 'none') && (style.stroke)) {
-			var scol = parse_color(style.stroke);
-			pdf.setDrawColor(scol.r, scol.g, scol.b);
+	var mode = '';
+	if (style.fill != 'none') {
+		var col = parse_color(style.fill);
+		pdf.setFillColor(col.r, col.g, col.b);
+		mode = (style.fillRule === 'evenodd') ? 'f*' : 'f';
+	}
+	if ((style.stroke != 'none') && (style.stroke)) {
+		var scol = parse_color(style.stroke);
+		pdf.setDrawColor(scol.r, scol.g, scol.b);
 
-			var stroke_width = parseFloat(style['stroke-width']);
-			pdf.setLineWidth(scale * stroke_width);
+		var stroke_width = parseFloat(style['stroke-width']);
+		pdf.setLineWidth(scale * stroke_width);
 
-			if (stroke_width > 0) {
-				if (style.fill != 'none') {
-					mode = (style.fillRule === 'evenodd') ? 'B*' : 'B';
-				} else {
-					mode = 'S';
-				}
-			}
-		}
-
-		var tagName = n.tagName.toLowerCase();
-		if (tagName.indexOf(':') >= 0) {
-			continue;
-		}
-		switch (tagName) {
-		case 'line':
-			var x1 = parseFloat(n.getAttribute('x1'));
-			var x2 = parseFloat(n.getAttribute('x2'));
-			var y1 = parseFloat(n.getAttribute('y1'));
-			var y2 = parseFloat(n.getAttribute('y2'));
-
-			var dash_len = undefined;
-			var gap_len = undefined;
-			var style_dasharray = style['stroke-dasharray'];
-			if ((m = style_dasharray.match(/^([0-9.]+)\s*px,\s*([0-9.]+)\s*px$/))) {
-				dash_len = parseFloat(m[1]);
-				gap_len = parseFloat(m[2]);
-			} else if ((m = style_dasharray.match(/^([0-9.]+)\s*px$/))) {
-				dash_len = parseFloat(m[1]);
-				gap_len = dash_len;
-			}
-
-			if (dash_len !== undefined) {
-				if (dash_len + gap_len <= 0) {
-					report_problem.silent_error('svg line dash/gap too small: ' + (dash_len + gap_len));
-					continue;
-				}
-
-				x = x1;
-				y = y1;
-
-				// Normalize vector
-				var vector_len = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
-				var dx = (x2 - x1) / vector_len;
-				var dy = (y2 - y1) / vector_len;
-				var remaining_len = vector_len;
-				while (remaining_len > 0) {
-					dash_len = Math.min(dash_len, remaining_len);
-					var next_x = x + dx * dash_len;
-					var next_y = y + dy * dash_len;
-					pdf.line(x * scale, y  * scale, next_x  * scale, next_y * scale);
-					remaining_len -= dash_len;
-					x = next_x + dx * gap_len;
-					y = next_y + dy * gap_len;
-					remaining_len -= gap_len;
-				}
+		if (stroke_width > 0) {
+			if (style.fill != 'none') {
+				mode = (style.fillRule === 'evenodd') ? 'B*' : 'B';
 			} else {
-				pdf.line(x1 * scale, y1 * scale, x2 * scale, y2 * scale);
+				mode = 'S';
 			}
-			break;
-		case 'rect':
-			x = parseFloat(n.getAttribute('x'));
-			y = parseFloat(n.getAttribute('y'));
-			width = parseFloat(n.getAttribute('width'));
-			height = parseFloat(n.getAttribute('height'));
-			pdf.rect(x * scale, y * scale, width * scale, height * scale, mode);
-			break;
-		case 'ellipse':
-			var cx = parseFloat(n.getAttribute('cx'));
-			var cy = parseFloat(n.getAttribute('cy'));
-			var rx = parseFloat(n.getAttribute('rx'));
-			var ry = parseFloat(n.getAttribute('ry'));
-			pdf.ellipse(cx * scale, cy * scale, rx * scale, ry * scale, mode);
-			break;
-		case 'path':
-			var paths = parse_path(n.getAttribute('d'));
-			if (paths) {
-				paths.forEach(function(path, path_idx) {
-					var path_style = (path_idx === paths.length - 1) ? mode : null;
-					pdf.lines(path.acc, path.x1 * scale, path.y1 * scale, [scale, scale], path_style, path.closed);
-				});
-			}
-			break;
-		case 'polygon':
-			var points = svg_utils.split_args(n.getAttribute('points')).map(parseFloat);
-			var px1 = scale * points[0];
-			var py1 = scale * points[1];
-			x = px1;
-			y = py1;
-			var acc = [];
-			for (var point_i = 2;point_i < points.length;point_i += 2) {
-				var px = scale * points[point_i];
-				var py = scale * points[point_i + 1];
-
-				acc.push([px - x, py - y]);
-				x = px;
-				y = py;
-			}
-			pdf.lines(acc, px1, py1, [1, 1], mode, true);
-			break;
-		case 'text':
-			x = parseFloat(n.getAttribute('x'));
-			y = parseFloat(n.getAttribute('y'));
-
-			switch (style['text-anchor']) {
-			case 'middle':
-				x -= (n.getBBox().width / 2);
-				break;
-			case 'end':
-				x -= n.getBBox().width;
-				break;
-			}
-
-			pdf.setFontStyle((style['font-weight'] == 'bold') ? 'bold' : 'normal');
-			var pt_font_size = parseFloat(style['font-size']);
-			var font_size = scale * 72 / 25.6 * pt_font_size;
-			pdf.setFontSize(font_size);
-
-			var transform = n.getAttribute('transform');
-			var transform_m = transform && (
-				transform.match(/^rotate\(\s*(-?[0-9.]+)\s+(-?[0-9.]+),(-?[0-9.]+)\)$/));
-
-			var _render_text = function(str, x, y) {
-				if (transform_m) {
-					var angle = parseFloat(transform_m[1]);
-					var corex = parseFloat(transform_m[2]);
-					var corey = parseFloat(transform_m[3]);
-
-					var diffx = x - corex;
-					var diffy = y - corey;
-
-					var nx = corex + diffx * Math.cos(angle * Math.PI / 180) - diffy * Math.sin(angle * Math.PI / 180);
-					var ny = corey + diffx * Math.sin(angle * Math.PI / 180) + diffy * Math.cos(angle * Math.PI / 180);
-					pdf.text(nx * scale, ny * scale, str, null, -angle);
-				} else {
-					pdf.text(x * scale, y * scale, str);
-				}
-			};
-
-			var text = n.textContent;
-			var dx_attr = n.getAttribute('dx');
-			if (dx_attr) {
-				var dx_vals = svg_utils.split_args(dx_attr).map(parseFloat);
-				var ax = x;
-				for (var j = 0;j < text.length;j++) {
-					if (j < dx_vals.length) {
-						ax += dx_vals[j];
-					}
-					_render_text(text[j], ax, y);
-					ax += pdf.getStringUnitWidth(text[j]) * pt_font_size;
-				}
-			} else {
-				_render_text(text, x, y);
-			}
-			break;
-		case 'image':
-			var imgData = n.getAttribute('xlink:href');
-			x = parseFloat(n.getAttribute('x'));
-			y = parseFloat(n.getAttribute('y'));
-			width = parseFloat(n.getAttribute('width'));
-			height = parseFloat(n.getAttribute('height'));
-			pdf.addImage(imgData, x * scale, y * scale, width, height);
-			break;
-		/*@DEV*/
-		case 'defs':
-		case 'style':
-		case 'title':
-		case 'metadata':
-		case 'g':
-			// We don't care
-			break;
-		default:
-			report_problem.silent_error('Unsupported element: ' + n.tagName.toLowerCase());
-		/*/@DEV*/
 		}
+	}
+
+	var tagName = el.tagName.toLowerCase();
+	if (tagName.indexOf(':') >= 0) {
+		return;
+	}
+	switch (tagName) {
+	case 'line':
+		var x1 = parseFloat(el.getAttribute('x1'));
+		var x2 = parseFloat(el.getAttribute('x2'));
+		var y1 = parseFloat(el.getAttribute('y1'));
+		var y2 = parseFloat(el.getAttribute('y2'));
+
+		var dash_len = undefined;
+		var gap_len = undefined;
+		var style_dasharray = style['stroke-dasharray'];
+		if ((m = style_dasharray.match(/^([0-9.]+)\s*px,\s*([0-9.]+)\s*px$/))) {
+			dash_len = parseFloat(m[1]);
+			gap_len = parseFloat(m[2]);
+		} else if ((m = style_dasharray.match(/^([0-9.]+)\s*px$/))) {
+			dash_len = parseFloat(m[1]);
+			gap_len = dash_len;
+		}
+
+		if (dash_len !== undefined) {
+			if (dash_len + gap_len <= 0) {
+				report_problem.silent_error('svg line dash/gap too small: ' + (dash_len + gap_len));
+				return;
+			}
+
+			x = x1;
+			y = y1;
+
+			// Normalize vector
+			var vector_len = Math.sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+			var dx = (x2 - x1) / vector_len;
+			var dy = (y2 - y1) / vector_len;
+			var remaining_len = vector_len;
+			while (remaining_len > 0) {
+				dash_len = Math.min(dash_len, remaining_len);
+				var next_x = x + dx * dash_len;
+				var next_y = y + dy * dash_len;
+				pdf.line(x * scale, y  * scale, next_x  * scale, next_y * scale);
+				remaining_len -= dash_len;
+				x = next_x + dx * gap_len;
+				y = next_y + dy * gap_len;
+				remaining_len -= gap_len;
+			}
+		} else {
+			pdf.line(x1 * scale, y1 * scale, x2 * scale, y2 * scale);
+		}
+		break;
+	case 'rect':
+		x = parseFloat(el.getAttribute('x'));
+		y = parseFloat(el.getAttribute('y'));
+		width = parseFloat(el.getAttribute('width'));
+		height = parseFloat(el.getAttribute('height'));
+		pdf.rect(x * scale, y * scale, width * scale, height * scale, mode);
+		break;
+	case 'ellipse':
+		var cx = parseFloat(el.getAttribute('cx'));
+		var cy = parseFloat(el.getAttribute('cy'));
+		var rx = parseFloat(el.getAttribute('rx'));
+		var ry = parseFloat(el.getAttribute('ry'));
+		pdf.ellipse(cx * scale, cy * scale, rx * scale, ry * scale, mode);
+		break;
+	case 'path':
+		var paths = parse_path(el.getAttribute('d'));
+		if (paths) {
+			paths.forEach(function(path, path_idx) {
+				var path_style = (path_idx === paths.length - 1) ? mode : null;
+				pdf.lines(path.acc, path.x1 * scale, path.y1 * scale, [scale, scale], path_style, path.closed);
+			});
+		}
+		break;
+	case 'polygon':
+		var points = svg_utils.split_args(el.getAttribute('points')).map(parseFloat);
+		var px1 = scale * points[0];
+		var py1 = scale * points[1];
+		x = px1;
+		y = py1;
+		var acc = [];
+		for (var point_i = 2;point_i < points.length;point_i += 2) {
+			var px = scale * points[point_i];
+			var py = scale * points[point_i + 1];
+
+			acc.push([px - x, py - y]);
+			x = px;
+			y = py;
+		}
+		pdf.lines(acc, px1, py1, [1, 1], mode, true);
+		break;
+	case 'text':
+		x = parseFloat(el.getAttribute('x'));
+		y = parseFloat(el.getAttribute('y'));
+
+		switch (style['text-anchor']) {
+		case 'middle':
+			x -= (el.getBBox().width / 2);
+			break;
+		case 'end':
+			x -= el.getBBox().width;
+			break;
+		}
+
+		pdf.setFontStyle((style['font-weight'] == 'bold') ? 'bold' : 'normal');
+		var pt_font_size = parseFloat(style['font-size']);
+		var font_size = scale * 72 / 25.6 * pt_font_size;
+		pdf.setFontSize(font_size);
+
+		var transform = el.getAttribute('transform');
+		var transform_m = transform && (
+			transform.match(/^rotate\(\s*(-?[0-9.]+)\s+(-?[0-9.]+),(-?[0-9.]+)\)$/));
+
+		var _render_text = function(str, x, y) {
+			if (transform_m) {
+				var angle = parseFloat(transform_m[1]);
+				var corex = parseFloat(transform_m[2]);
+				var corey = parseFloat(transform_m[3]);
+
+				var diffx = x - corex;
+				var diffy = y - corey;
+
+				var nx = corex + diffx * Math.cos(angle * Math.PI / 180) - diffy * Math.sin(angle * Math.PI / 180);
+				var ny = corey + diffx * Math.sin(angle * Math.PI / 180) + diffy * Math.cos(angle * Math.PI / 180);
+				pdf.text(nx * scale, ny * scale, str, null, -angle);
+			} else {
+				pdf.text(x * scale, y * scale, str);
+			}
+		};
+
+		var text = el.textContent;
+		var dx_attr = el.getAttribute('dx');
+		if (dx_attr) {
+			var dx_vals = svg_utils.split_args(dx_attr).map(parseFloat);
+			var ax = x;
+			for (var j = 0;j < text.length;j++) {
+				if (j < dx_vals.length) {
+					ax += dx_vals[j];
+				}
+				_render_text(text[j], ax, y);
+				ax += pdf.getStringUnitWidth(text[j]) * pt_font_size;
+			}
+		} else {
+			_render_text(text, x, y);
+		}
+		break;
+	case 'image':
+		var imgData = el.getAttribute('xlink:href');
+		x = parseFloat(el.getAttribute('x'));
+		y = parseFloat(el.getAttribute('y'));
+		width = parseFloat(el.getAttribute('width'));
+		height = parseFloat(el.getAttribute('height'));
+		pdf.addImage(imgData, x * scale, y * scale, width, height);
+		break;
+	/*@DEV*/
+	case 'defs':
+	case 'style':
+	case 'title':
+	case 'metadata':
+	case 'g':
+		// We don't care
+		break;
+	default:
+		report_problem.silent_error('Unsupported element: ' + el.tagName.toLowerCase());
+	/*/@DEV*/
 	}
 }
 
@@ -733,6 +760,7 @@ return {
 	arc2beziers: arc2beziers,
 	_make_beziers: _make_beziers,
 	parse_color: parse_color,
+	_all_els: _all_els,
 /*/@DEV*/
 };
 

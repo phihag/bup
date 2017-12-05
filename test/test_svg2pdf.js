@@ -3,6 +3,7 @@
 var assert = require('assert');
 
 var tutils = require('./tutils');
+var vdom = require('./vdom');
 var bup = tutils.bup;
 var _describe = tutils._describe;
 var _it = tutils._it;
@@ -275,5 +276,49 @@ _describe('svg2pdf', function() {
 				1.0533340179104562,
 			]]
 		);
+	});
+
+	_it('_all_els', function() {
+		var doc = new vdom.Document('svg');
+		var root = doc.documentElement;
+		root.setAttribute('id', 'root');
+		var defs = bup.svg_utils.el(root, 'defs');
+		bup.svg_utils.el(defs, 'style', {}, '* {fill: lime;}');
+		bup.svg_utils.el(defs, 'polygon', {
+			points: '0,0 100,0 300,300 250,250',
+			fill: '#000',
+			id: 'defs_polygon',
+		});
+
+		var g1 = bup.svg_utils.el(root, 'g', {id: 'g1'});
+		bup.svg_utils.el(g1, 'g', {id: 'g1a'});
+		var g1b = bup.svg_utils.el(g1, 'g', {id: 'g1b'});
+		bup.svg_utils.el(g1, 'g', {id: 'g1c'});
+		bup.svg_utils.el(g1, 'g', {id: 'g1d'});
+		bup.svg_utils.el(g1b, 'g', {id: 'g1b1'});
+		var g1b2 = bup.svg_utils.el(g1b, 'g', {id: 'g1b2'});
+		bup.svg_utils.el(g1b, 'g', {id: 'g1b3'});
+		bup.svg_utils.el(root, 'g', {id: 'g2'});
+
+		bup.svg_utils.el(g1b2, 'polygon', {
+			points: '1,1 101,0 301,301 251,251',
+			fill: '#000',
+			id: 'normal_polygon',
+		});
+
+		assert.deepStrictEqual(bup.svg2pdf._all_els(doc).map(function(e) {
+			return e.getAttribute('id');
+		}), [
+			'g1',
+			'g1a',
+			'g1b',
+			'g1b1',
+			'g1b2',
+			'normal_polygon',
+			'g1b3',
+			'g1c',
+			'g1d',
+			'g2',
+		]);
 	});
 });
