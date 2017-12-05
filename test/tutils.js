@@ -21,6 +21,10 @@ var _before = ((typeof before == 'undefined') ?
 	function(s, f) {f();} :
 	before
 );
+var _after = ((typeof after == 'undefined') ?
+	function() {/* ignore */ } :
+	after
+);
 
 
 var SINGLES_SETUP = {
@@ -194,6 +198,7 @@ module.exports = {
 	_describe: _describe,
 	_it: _it,
 	_before: _before,
+	_after: _after,
 	bup: bup,
 
 	assert_u8r_eq: assert_u8r_eq,

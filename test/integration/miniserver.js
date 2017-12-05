@@ -134,6 +134,7 @@ function server(callback, options) {
 	serv.on('error', (err) => {
 		throw err;
 	});
+	return serv;
 }
 
 module.exports = {
