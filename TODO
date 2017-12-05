@@ -1,9 +1,12 @@
 esc/back from event_scoresheets leads to empty page!
+CLICKING MATCH FAILS
+
+puppeteer unit tests for going into scoresheets
+
+
 
 generate receipts
-	svg2pdf all_logos
 	include club logo
-	test script that copies all logos into one file and makes a PDF
 	layout svg with lines, sums etc.
 	calc distance price
 	calc total
