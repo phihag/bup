@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "async": "*",
-    "clean-css": "*",
+    "clean-css-cli": "*",
     "eslint": "*",
     "fs-walk": "*",
     "istanbul": "*",
@@ -26,8 +26,8 @@
     "puppeteer": "*",
     "stylelint": "*",
     "stylelint-config-standard": "*",
-    "uglify": "*",
     "svgo": "*",
+    "uglify": "*",
     "xmldom": "*"
   },
   "private": true
