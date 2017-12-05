@@ -19,6 +19,7 @@ script:
   - make test
   - make itest
   - make lint
+  - make dist
 notifications:
   email:
     - phihag@phihag.de
