@@ -1,9 +1,4 @@
-esc/back from event_scoresheets leads to empty page!
-CLICKING MATCH FAILS
-
-puppeteer unit tests for going into scoresheets
-
-
+scoresheet in game does not return to the game
 
 generate receipts
 	include club logo

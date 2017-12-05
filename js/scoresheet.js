@@ -1054,6 +1054,8 @@ function hide() {
 
 	if (state.ui.referee_mode) {
 		refmode_referee_ui.back_to_ui();
+	} else {
+		settings.show();
 	}
 }
 
@@ -1144,21 +1146,19 @@ function make_sheet_node(s, xml) {
 }
 
 function ui_init() {
-	$('.postmatch_scoresheet_button').on('click', show);
-	$('.scoresheet_button').on('click', show);
-	$('.scoresheet_button_pdf').on('click', ui_pdf);
-	$('.scoresheet_button_back').on('click', function() {
+	click.qs('.postmatch_scoresheet_button', show);
+	click.qs('.scoresheet_button', show);
+	click.qs('.scoresheet_button_pdf', ui_pdf);
+	click.qs('.scoresheet_button_back', function() {
 		hide();
 	});
-	$('.scoresheet_button_print').on('click', function() {
+	click.qs('.scoresheet_button_print', function() {
 		window.print();
 	});
-	click.qs('.setup_event_scoresheets', function(e) {
-		e.preventDefault();
+	click.qs('.setup_event_scoresheets', function() {
 		event_show();
-		return false;
 	});
-	$('.scoresheet_reload').on('click', function() {
+	click.qs('.scoresheet_reload', function() {
 		event_list_matches($('.scoresheet_container'));
 	});
 

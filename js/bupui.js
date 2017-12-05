@@ -20,6 +20,12 @@ function esc_stack_pop() {
 	}
 }
 
+/*@DEV*/
+function esc_stack_length() {
+	return esc_stack.length;
+}
+/*/@DEV*/
+
 // Returns a function to cancel the dialog
 function make_pick(s, label, values, on_pick, on_cancel, container, select_at) {
 	if (! container) {
@@ -250,6 +256,10 @@ return {
 	make_player_pick: make_player_pick,
 	make_team_pick: make_team_pick,
 	show_picker: show_picker,
+	// Tests only
+	/*@DEV*/
+	esc_stack_length: esc_stack_length,
+	/*/@DEV*/
 };
 
 })();

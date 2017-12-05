@@ -265,6 +265,7 @@ function ui_render(s) {
 		return;
 	}
 
+	uiu.show_qs('#game');
 	court.render(s, main_court_ui());
 	editmode.update_ui(s);
 
@@ -444,11 +445,11 @@ function ui_render(s) {
 }
 
 function show() {
-	uiu.$visible_qs('#game', true);
+	uiu.show_qs('#game', true);
 }
 
 function hide() {
-	uiu.$visible_qs('#game', false);
+	uiu.hide_qs('#game', false);
 }
 
 return {
