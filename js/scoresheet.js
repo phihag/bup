@@ -1118,11 +1118,11 @@ function jspdf_loaded() {
 }
 
 var URLS = {
-	'international': 'div/scoresheet_international.svg',
-	'international_5x11': 'div/scoresheet_international_5x11.svg',
-	'bundesliga-2016': 'div/scoresheet_bundesliga-2016.svg',
-	'nla': 'div/scoresheet_nla.svg',
-	'obl': 'div/scoresheet_obl.svg',
+	'international': 'div/scoresheet/international.svg',
+	'international_5x11': 'div/scoresheet/international_5x11.svg',
+	'bundesliga-2016': 'div/scoresheet/bundesliga-2016.svg',
+	'nla': 'div/scoresheet/nla.svg',
+	'obl': 'div/scoresheet/obl.svg',
 };
 var dl;
 function load_sheet(sheet_name, cb, url_prefix) {

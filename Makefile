@@ -66,13 +66,11 @@ dist: cleandist ## Create distribution files
 	cp -R div/teamlists --target-directory dist/bup/div/
 	cp -R div/courtspot --target-directory dist/bup/div/
 	cp -R http_proxy --target-directory dist/bup/
+	mkdir -p dist/bup/div/scoresheet
+	node div/minify_svg.js dist/bup/div/scoresheet/ \
+		div/scoresheet/*.svg \
 	node div/minify_svg.js dist/bup/div/ \
 		div/bundesliga-logo.svg \
-		div/scoresheet_bundesliga-2016.svg \
-		div/scoresheet_international.svg \
-		div/scoresheet_international_5x11.svg \
-		div/scoresheet_nla.svg \
-		div/scoresheet_obl.svg \
 		div/buli2017_mindestanforderungen_schiedsrichter.svg \
 		div/buli2017_mindestanforderungen_verein.svg
 	cp doc/ -R dist/bup/

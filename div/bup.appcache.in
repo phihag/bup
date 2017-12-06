@@ -12,12 +12,10 @@ bup.dist.js
 jspdf.dist.js
 pdfform.minipdf.dist.js
 jszip.min.js
-div/scoresheet_international.svg
-div/scoresheet_international_5x11.svg
-div/scoresheet_bundesliga-2016.svg
+div/scoresheet/international.svg
+div/scoresheet/international_5x11.svg
+div/scoresheet/bundesliga-2016.svg
 div/bldemo.json
-div/nlademo.json
-div/rlmdemo.json
 div/bundesliga-logo.svg
 
 @svgfiles
