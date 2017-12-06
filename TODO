@@ -16,6 +16,17 @@ save inputted umpire names (for CourtSpot)
 	-> Ulf
 	-> Benedikt
 
+stats: add team name to graph
+stats: + game points / match points
+	-> Tim Bambach
+
+d teamscore [see pic, i18n_de "Siegerfoto"]
+d teamscore only logos
+d teamscore with small won matches
+
+-> send newsletter
+
+
 eventsheet: sign!
 	store signatures in CourtSpot
 	store signatures with referee mode
@@ -24,9 +35,6 @@ eventsheet: sign!
 
 2courts with low resolution
 
-stats: add team name to graph
-stats: + game points / match points
-	-> Tim Bambach
 
 test cs order in detail
 	-> Ulf
@@ -42,9 +50,6 @@ selectevent module
 	allow on referee
 	checkbox on referee: store event permanently (do not load from clients)
 
-d teamscore [see pic]
-d teamscore only logos
-d teamscore with small won matches
 d shortsets [see pic]
 d a nice modern overview of all matches, similar to tim
 
