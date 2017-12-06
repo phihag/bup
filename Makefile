@@ -68,7 +68,7 @@ dist: cleandist ## Create distribution files
 	cp -R http_proxy --target-directory dist/bup/
 	mkdir -p dist/bup/div/scoresheet
 	node div/minify_svg.js dist/bup/div/scoresheet/ \
-		div/scoresheet/*.svg \
+		div/scoresheet/*.svg
 	node div/minify_svg.js dist/bup/div/ \
 		div/bundesliga-logo.svg \
 		div/buli2017_mindestanforderungen_schiedsrichter.svg \
