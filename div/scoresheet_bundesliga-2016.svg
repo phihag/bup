@@ -1,41 +1,41 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 297 210">
 <style>
-	text {
-		font-family: Helvetica;
-		font-size: 4px;
-	}
-	text.small-text, text.table_name {font-size: 3px;}
-	.divider-line {stroke: #000; stroke-width: 0.2;}
-	.box {stroke: #000; stroke-width: 0.5; fill: none;}
-	.shade,.box.shaded,.table_longtext_background.shaded {fill: #d0d0d0;}
-	.scoresheet_results_circle_team1,.scoresheet_results_circle_team2 {
-		stroke: #000; stroke-width: 0.6; fill: none;
-	}
-	.dashed-line {
-		stroke: #000; stroke-width: 0.4; stroke-dasharray: 0.4px, 0.4px;
-	}
-	.table {
-		stroke: #000; stroke-width: 0.35; fill: none;
-	}
-	.table_line {
-		stroke: #000; stroke-width: 0.1;
-	}
-	.table_20all_dash {
-		stroke: #000; stroke-width: 0.4;
-	}
-	.editmode-sign {
-		stroke: #202020; stroke-width: 0.3; fill: none;
-	}
-	.table_thick-line {
-		stroke: #000; stroke-width: 0.35;
-	}
-	.table_game_result {
-		stroke: #000; stroke-width: 0.4; fill: none;
-	}
-	.table_longtext_background {
-		fill: #fff;
-		opacity: 0.75;
-	}
+text {
+	font-family: Helvetica;
+	font-size: 4px;
+}
+text.small-text, text.table_name {font-size: 3px;}
+.divider-line {stroke: #000; stroke-width: 0.2;}
+.box {stroke: #000; stroke-width: 0.5; fill: none;}
+.shade,.box.shaded,.table_longtext_background.shaded {fill: #d0d0d0;}
+.scoresheet_results_circle_team1,.scoresheet_results_circle_team2 {
+	stroke: #000; stroke-width: 0.6; fill: none;
+}
+.dashed-line {
+	stroke: #000; stroke-width: 0.4; stroke-dasharray: 0.4px, 0.4px;
+}
+.table {
+	stroke: #000; stroke-width: 0.35; fill: none;
+}
+.table_line {
+	stroke: #000; stroke-width: 0.1;
+}
+.table_20all_dash {
+	stroke: #000; stroke-width: 0.4;
+}
+.editmode-sign {
+	stroke: #202020; stroke-width: 0.3; fill: none;
+}
+.table_thick-line {
+	stroke: #000; stroke-width: 0.35;
+}
+.table_game_result {
+	stroke: #000; stroke-width: 0.4; fill: none;
+}
+.table_longtext_background {
+	fill: #fff;
+	opacity: 0.75;
+}
 </style>
 
 <!-- top left -->
