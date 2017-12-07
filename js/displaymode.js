@@ -10,6 +10,7 @@ var ALL_STYLES = [
 	'greyish',
 	'tim',
 	'top+list',
+	'teamscore',
 	'onlyplayers',
 	'clubplayers',
 	'clubplayerslr',
@@ -1227,6 +1228,56 @@ function render_tim(s, container, event, colors) {
 	});
 }
 
+function render_teamscore(s, container, event, colors) {
+	var match_score = _calc_matchscore(event.matches);
+	var team_names = event.team_names || ['', ''];
+	var autosize_els = [];
+
+	var _render_team = function(team_id) {
+		var div = uiu.el(container, 'div', {
+			style: (
+				'display:flex;' +
+				'justify-content: center;' +
+				'align-items: center;' +
+				'height:20%;' +
+				'background:' + colors.bg +
+				';color:' + colors[team_id]
+			),
+		});
+		autosize_els.push(uiu.el(div, 'span', {}, team_names[team_id]));
+	};
+
+	_render_team(0);
+	var middle = uiu.el(container, 'div', {
+		style: (
+			'display:flex;' +
+			'justify-content: center;' +
+			'align-items: center;' +
+			'font-size:60vh;' +
+			'height:60%;' +
+			'background:' + colors.bg
+		),
+	});
+	uiu.el(middle, 'span', {
+		style: 'color:' + colors[0],
+	}, match_score[0]);
+	uiu.el(middle, 'span', {
+		style: 'color:' + colors.fg,
+	}, ':');
+	uiu.el(middle, 'span', {
+		style: 'color:' + colors[1],
+	}, match_score[1]);
+	// TODO score
+	// TODO logos?
+	_render_team(1);
+
+	autosize_els.forEach(function(as_el) {
+		_setup_autosize(as_el, undefined, function(parent_node) {
+			return parent_node.offsetHeight * 0.8;
+		});
+	});
+}
+
 function render_teamcourt(s, container, event, court, match, colors) {
 	var nscore = extract_netscore(match);
 	var gscore = _gamescore_from_netscore(nscore, match.setup);
@@ -1280,6 +1331,7 @@ function render_teamcourt(s, container, event, court, match, colors) {
 				((team_id === 0) ? 'position:absolute; bottom: 0;' : '') +
 				'width:100%;height:20%;' +
 				'color:' + col + ';' +
+				'background:' + colors.bg + ';' +
 				'font-size: 10vh;' +
 				'display: flex;align-items: center;'
 			),
@@ -2080,6 +2132,7 @@ function update(err, s, event) {
 		greyish: render_greyish,
 		tournament_overview: render_tournament_overview,
 		tim: render_tim,
+		teamscore: render_teamscore,
 	}[style];
 	if (ofunc) {
 		var o_colors = calc_colors(s.settings, event);
@@ -2259,6 +2312,7 @@ function option_applies(style_id, option_name) {
 		onlyplayers: ['court_id', 'team_colors', 'c0', 'c1', 'cbg'],
 		onlyscore: ['court_id', 'team_colors', 'c0', 'c1', 'cbg'],
 		teamcourt: ['court_id', 'team_colors', 'c0', 'c1', 'cfg', 'cfg2', 'cbg', 'show_pause'],
+		teamscore: ['team_colors', 'c0', 'c1', 'cfg', 'cbg'],
 		tim: ['cbg', 'cfg', 'ctim_blue', 'ctim_active'],
 		tournament_overview: ['cfg', 'cbg', 'cbg3', 'cborder', 'cfg2'],
 		stripes: ['court_id', 'cbg', 'team_colors', 'c0', 'c1', 'cfg', 'cfgdark', 'cbg4', 'cserv'],

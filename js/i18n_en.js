@@ -503,6 +503,7 @@ var i18n_en = {
 'displaymode|clubplayers': 'team + players',
 'displaymode|clubplayerslr': 'team + players (left / right)',
 'displaymode|tournament_overview': 'tournament overview',
+'displaymode|teamscore': 'team score',
 'displaymode|stripes': 'stripes',
 'displaymode:court_id': 'court:',
 'displaymode:court_id:loading': 'loading ...',

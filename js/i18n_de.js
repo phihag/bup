@@ -504,6 +504,7 @@ var i18n_de = {
 'displaymode|onlyscore': 'Nur Spielstand',
 'displaymode|clubplayers': 'Verein + Spieler',
 'displaymode|clubplayerslr': 'Verein + Spieler (links / rechts)',
+'displaymode|teamscore': 'Siegerfoto',
 'displaymode|stripes': 'Streifen',
 'displaymode:court_id': 'Court:',
 'displaymode:court_id:loading': 'lade ...',

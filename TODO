@@ -1,3 +1,5 @@
+d teamscore [see pic, i18n_de "Siegerfoto"]
+
 save inputted umpire names (for CourtSpot)
 	-> Ulf
 	-> Benedikt
@@ -6,7 +8,6 @@ stats: add team name to graph
 stats: + game points / match points
 	-> Tim Bambach
 
-d teamscore [see pic, i18n_de "Siegerfoto"]
 d teamscore only logos
 d teamscore with small won matches
 
