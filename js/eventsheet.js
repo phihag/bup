@@ -1832,9 +1832,12 @@ function render_links(s, container) {
 				'class': 'eventsheet_link',
 				'data-i18n': i18n_key,
 			}, s._(i18n_key));
-			click.on(link, function(e) {
-				e.preventDefault();
-				show_dialog(es_key);
+			click.on(link, function() {
+				if (NO_DIALOG[es_key]) {
+					show_preview(es_key);
+				} else {
+					show_dialog(es_key);
+				}
 			});
 		}
 	});
@@ -1884,8 +1887,9 @@ function ui_init() {
 
 	click.qs('.eventsheet_preview_back', function() {
 		uiu.hide_qs('.eventsheet_preview');
-		if (state.event && state.event._es_extra_data) {
-			window.history.back(); // Actually go back so that history is kept
+		var es_key = state.ui.es_preview;
+		if (NO_DIALOG[es_key]) {
+			hide_dialog();
 		} else {
 			show_dialog(state.ui.es_preview);
 		}
@@ -2049,21 +2053,8 @@ function show_dialog(es_key) {
 	var preview = uiu.qs('.eventsheet_preview');
 	var generate_button = uiu.qs('.eventsheet_generate_button');
 
-	var no_dialog = NO_DIALOG[es_key];
-	uiu.visible_qs('.eventsheet_print_button', no_dialog);
-	uiu.visible_qs('.eventsheet_pdf_button', no_dialog);
-
-	if (no_dialog) {
-		uiu.hide_qs('.eventsheet_report');
-		uiu.hide(download_link_container);
-		uiu.hide(generate_button);
-		uiu.show(preview);
-		dialog_fetch(function() {
-			var button_row = uiu.qs('.eventsheet_button_row');
-			prepare_render(button_row, es_key, {});
-		});
-		return;
-	}
+	uiu.hide_qs('.eventsheet_print_button');
+	uiu.hide_qs('.eventsheet_pdf_button');
 
 	uiu.show(generate_button);
 	uiu.hide(preview);
@@ -2132,6 +2123,13 @@ function show_dialog(es_key) {
 		configure_report(['referee', 'umpires', 'location', 'starttime', 'backup_players_str', 'notes', 'protest']);
 		uiu.hide(download_link_container);
 		break;
+	case 'buli2017-minsr':
+	case 'buli2017-minv':
+	case 'nla':
+		// NODIALOG options
+		configure_report([]);
+		uiu.hide(download_link_container);
+		break;
 	case 'receipt':
 		configure_report([]);
 		uiu.hide(download_link_container);
@@ -2148,9 +2146,12 @@ function show_dialog(es_key) {
 			type: 'number',
 			min: 0,
 			name: 'receipt_distance',
-			style: 'width:2.4em;',
+			style: 'width:3em;',
 		});
 
+		uiu.el(distance_label, 'span', {
+			style: 'display:inline-block;margin-left:0.2em;'
+		}, 'km');
 		break;
 	default:
 		uiu.hide_qs('.eventsheet_spectators');
@@ -2171,10 +2172,11 @@ function show_dialog(es_key) {
 }
 
 function hide() {
-	if (!state.ui.eventsheet) {
+	if (!state.ui.eventsheet && !state.ui.es_preview) {
 		return;
 	}
 	state.ui.eventsheet = null;
+	state.ui.es_preview = null;
 	uiu.hide_qs('.eventsheet_container');
 }
 

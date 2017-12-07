@@ -1,10 +1,3 @@
-back from preview of minreq is broken!?
-
-receipts: autocalc distance
-	http proxy for distance (using google maps API)
-	link to google maps if hall location present (or better, autocalc)
-	-> Jonathan Radtke
-
 save inputted umpire names (for CourtSpot)
 	-> Ulf
 	-> Benedikt
@@ -79,6 +72,10 @@ jticker:
 	delete function for old versions
 	turnier.de: use aufschlagwechsel.de
 	-> msg Johannes
+
+receipts: autocalc distance
+	http proxy for distance (using google maps API)
+	link to google maps if hall location present (or better, autocalc)
 
 turnier.de support field names in RLW
 refmode: visible warning if no crypto.subtle

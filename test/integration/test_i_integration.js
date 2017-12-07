@@ -10,12 +10,7 @@ const _describe = tutils._describe;
 const _it = tutils._it;
 
 async function is_visible(page, qs) {
-	return await page.evaluate((qs) => {
-		const e = document.querySelector(qs);
-		if (!e) return false;
-		const style = window.getComputedStyle(e);
-		return style && style.display !== 'none' && style.visibility !== 'hidden' && style.opacity !== 0;
-	}, qs);
+	return await page.evaluate((qs) => client_qs_visible(qs), qs);
 }
 
 _describe('integration tests', () => {
@@ -46,19 +41,8 @@ _describe('integration tests', () => {
 		return [browser, page];
 	}
 
-	_it('setupsheet UI test', async () => {
-		const browser = await puppeteer.launch({args: ['--no-sandbox']});
-		const page = await browser.newPage();
-		const setupsheet_url = base_url + 'bup.html#bldemo';
-		await page.goto(setupsheet_url, {waitUntil: 'load'});
-		browser.close();
-	}).timeout(20000);
-
 	_it('event_scoresheets and back', async () => {
-		const browser = await puppeteer.launch({args: ['--no-sandbox']});
-		const page = await browser.newPage();
-		const bldemo_url = base_url + 'bup.html#bldemo&court=1';
-		await page.goto(bldemo_url, {waitUntil: 'load'});
+		const [browser, page] = await start('bup.html#bldemo&court=1');
 
 		assert.strictEqual(await page.evaluate(() =>
 			document.querySelector('.setup_network_match_match_name').innerText),
@@ -170,7 +154,7 @@ _describe('integration tests', () => {
 		await page.keyboard.press('Enter');
 		assert(! await is_visible(page, '#game'));
 
-		assert.strictEqual(await page.evaluate(() => 
+		assert.strictEqual(await page.evaluate(() =>
 			client_find_text('.scoresheet_container text', 'This is a test note').tagName.toLowerCase()),
 			'text');
 		const last_press = await page.evaluate(() => state.presses[state.presses.length - 1]);
@@ -219,6 +203,7 @@ _describe('integration tests', () => {
 		});
 		const generate_btn = await page.$('.eventsheet_generate_button');
 		await generate_btn.click();
+		await generate_btn.dispose();
 
 		assert.strictEqual(await page.evaluate(() =>
 			window.location.hash),
@@ -227,6 +212,40 @@ _describe('integration tests', () => {
 			document.querySelector('svg text#es_svg_location').textContent),
 			'SpH Steinbreche'
 		);
+
+		browser.close();
+	}).timeout(20000);
+
+	_it('eventsheet minreqs', async () => {
+		const [browser, page] = await start('bup.html#bldemo&court=referee&lang=de');
+
+		assert(!await is_visible(page, '.eventsheet_container'));
+		assert(await is_visible(page, '#settings_wrapper'));
+
+		const minreq_link = await page.evaluateHandle(() =>
+			client_find_text('a.eventsheet_link', 'Mindestanforderungen Schiedsrichter')
+		);
+		await minreq_link.click();
+		await minreq_link.dispose();
+
+		assert.strictEqual(await page.evaluate(() =>
+			window.location.hash),
+			'#bldemo&lang=de&es_preview=buli2017-minsr');
+		assert(await is_visible(page, '.eventsheet_container'));
+		assert(!await is_visible(page, '#settings_wrapper'));
+
+
+		const back_btn = await page.evaluateHandle(() =>
+			client_find_text('.eventsheet_container a', 'Zurück')
+		);
+		await back_btn.click();
+		await back_btn.dispose();
+
+		assert.strictEqual(await page.evaluate(() =>
+			window.location.hash),
+			'#bldemo&lang=de&settings');
+		assert(!await is_visible(page, '.eventsheet_container'));
+		assert(await is_visible(page, '#settings_wrapper'));
 
 		browser.close();
 	}).timeout(20000);
