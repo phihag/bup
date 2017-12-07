@@ -445,11 +445,11 @@ function ui_render(s) {
 }
 
 function show() {
-	uiu.show_qs('#game', true);
+	uiu.show_qs('#game');
 }
 
 function hide() {
-	uiu.hide_qs('#game', false);
+	uiu.hide_qs('#game');
 }
 
 return {

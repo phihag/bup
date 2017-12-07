@@ -401,8 +401,9 @@ function ui_init(s) {
 	});
 
 	click.qs('.backtogame_button', function() {
-		control.set_current(s);
 		hide();
+		control.set_current(s);
+		render.show();
 	});
 
 	_settings_checkboxes.forEach(function(name) {
