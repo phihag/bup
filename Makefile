@@ -82,6 +82,7 @@ dist: cleandist ## Create distribution files
 		div/Mannschaftsaufstellung_2BL-2015.pdf \
 		div/NLA_Resultatblatt.svg \
 		div/eventsheet_obl.xlsx \
+		div/receipt.svg \
 		div/eventsheet_international.svg \
 		div/buli2017_spielbericht.svg \
 		div/Spielbericht-Buli-2016-17.xlsm \
