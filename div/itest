@@ -1,0 +1,3 @@
+#!/bin/sh
+
+headless=false exec mocha -g "$1" test/integration/
