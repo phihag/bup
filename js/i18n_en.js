@@ -609,9 +609,13 @@ var i18n_en = {
 'urlexport:url': 'URL:',
 'urlexport:submit url': 'Next',
 
+'receipt:base': 'Base:',
+'receipt:date': 'Date:',
+'receipt:distance': 'Distance:',
 'receipt:header': 'Receipt',
+'receipt:total': 'Received:',
+'receipt:travelcosts': 'Travel costs:',
 'receipt:umpire': 'Umpire:',
-'receipt:distance': 'Distance (km):',
 };
 
 /*@DEV*/

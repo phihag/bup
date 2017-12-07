@@ -606,10 +606,13 @@ var i18n_frch = {
 'urlexport:url': 'URL:',
 'urlexport:submit url': 'Prochain',
 
+'receipt:base': 'Coût de base:',
+'receipt:date': 'Date:',
+'receipt:distance': 'Distance:',
 'receipt:header': 'réception',
+'receipt:total': 'Reçu:',
+'receipt:travelcosts': 'Voyage:',
 'receipt:umpire': 'Arbitre:',
-'receipt:distance': 'distance (km):',
-
 };
 
 /*@DEV*/

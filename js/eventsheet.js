@@ -875,8 +875,34 @@ var render_int = _svg_func(function(svg, ev, es_key, extra_data) {
 });
 
 var render_receipt = _svg_func(function(svg, ev, es_key, extra_data, extra_files) {
+	_svg_text(svg, 'event', ev.event_name);
+	_svg_text(svg, 'date', ev.date || utils.date_str(Date.now()));
 	_svg_text(svg, 'receipt_umpire', extra_data.receipt_umpire);
 	_svg_text(svg, 'receipt_distance', extra_data.receipt_distance);
+	_svg_text(svg, 'signature', extra_data.receipt_umpire || state._('setupsheet:signature'));
+
+	var pay = eventutils.umpire_pay(ev.league_key);
+	if (pay) {
+		var tcost = 0;
+		_svg_text(svg, 'travelcurrency', pay.currency);
+		_svg_text(svg, 'totalcurrency', pay.currency);
+		if (pay.per_km) {
+			_svg_text(svg, 'perkm', '(' + i18n.format_money(state.lang, pay.per_km) + pay.currency + ' / km)');
+
+			var dist = parseFloat((extra_data.receipt_distance || '').replace(',', '.'));
+			if (!isNaN(dist)) {
+				tcost = dist * pay.per_km;
+				_svg_text(svg, 'travelcosts', i18n.format_money(state.lang, tcost));
+				_svg_text(svg, 'total', i18n.format_money(state.lang, tcost + pay.base));
+			}
+		}
+
+		_svg_text(svg, 'basecost',
+			i18n.format_money(state.lang, pay.base) + pay.currency +
+			' (' + eventutils.name_by_league(ev.league_key) + ')'
+		);
+
+	}
 
 	if (extra_files) {
 		var logo_container = svg.getElementById('es_svg_receipt_logo');

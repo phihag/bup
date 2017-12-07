@@ -1,16 +1,9 @@
-test add_note scoresheet!
-
-generate receipts
-	include club logo
-	layout svg with lines, sums etc.
-	calc distance price
-	calc total
-	test empty
-	test full
+back from preview of minreq is broken!?
 
 receipts: autocalc distance
 	http proxy for distance (using google maps API)
 	link to google maps if hall location present (or better, autocalc)
+	-> Jonathan Radtke
 
 save inputted umpire names (for CourtSpot)
 	-> Ulf

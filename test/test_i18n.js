@@ -1,3 +1,5 @@
+'use strict';
+
 var assert = require('assert');
 
 var tutils = require('./tutils');
@@ -5,8 +7,6 @@ var bup = tutils.bup;
 var _describe = tutils._describe;
 var _it = tutils._it;
 
-(function() {
-'use strict';
 
 function _match_all(rex, s, group) {
 	rex.lastIndex = 0;
@@ -41,6 +41,12 @@ _describe('i18n', function() {
 			}
 		});
 	});
-});
 
-})();
+	_it('format_money', function() {
+		assert.strictEqual(bup.i18n.format_money('de', 1), '1,00');
+		assert.strictEqual(bup.i18n.format_money('en', 1), '1.00');
+		assert.strictEqual(bup.i18n.format_money('de', .3), '0,30');
+		assert.strictEqual(bup.i18n.format_money('en', .3), '0.30');
+		assert.strictEqual(bup.i18n.format_money('en', .35), '0.35');
+	});
+});

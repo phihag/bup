@@ -373,7 +373,7 @@ var i18n_de = {
 'eventsheet:label|NRW-Satzungen': 'Satzungen und Ordnungen BLV NRW',
 'eventsheet:label|NLA-2017': 'Resultatblatt',
 'eventsheet:label|OBL-2017': 'Spielbericht',
-'eventsheet:label|receipt': 'Schiedsrichter-Quittung (experimentell)',
+'eventsheet:label|receipt': 'Schiedsrichter-Quittung',
 'eventsheet:label|int': 'Spielbericht',
 
 'stats:game': '{number}. Satz',
@@ -610,9 +610,13 @@ var i18n_de = {
 'urlexport:url': 'URL:',
 'urlexport:submit url': 'Weiter',
 
+'receipt:base': 'Einsatz:',
+'receipt:date': 'Datum:',
+'receipt:distance': 'Entfernung:',
 'receipt:header': 'Quittung',
+'receipt:total': 'Erhalten:',
+'receipt:travelcosts': 'Reisekosten:',
 'receipt:umpire': 'Schiedsrichter:',
-'receipt:distance': 'Entfernung (km):',
 };
 
 /*@DEV*/

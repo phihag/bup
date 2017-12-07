@@ -145,6 +145,14 @@ function simple_translate(str) {
 	return translate(state, str);
 }
 
+function format_money(lang, amount) {
+	var res = amount.toFixed(2);
+	if (lang !== 'en') {
+		res = res.replace('.', ',');
+	}
+	return res;
+}
+
 // Make this module itself callable
 simple_translate.init = init;
 simple_translate.ui_init = ui_init;
@@ -153,6 +161,7 @@ simple_translate.ui_update_state = ui_update_state;
 simple_translate.is_supported = is_supported;
 simple_translate.register_lang = register_lang;
 simple_translate.translate_nodes = translate_nodes;
+simple_translate.format_money = format_money;
 /*@DEV*/
 // Testing only
 simple_translate.languages = languages;
