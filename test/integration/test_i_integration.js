@@ -37,6 +37,15 @@ _describe('integration tests', () => {
 		srv.close();
 	});
 
+	// returns [browser, page]
+	async function start(url_suffix) {
+		const browser = await puppeteer.launch({args: ['--no-sandbox'], headless: (process.env.headless !== 'false')});
+		const page = await browser.newPage();
+		await page.goto(base_url + url_suffix, {waitUntil: 'load'});
+		await page.addScriptTag({url: base_url + 'test/integration/client_integration.js'});
+		return [browser, page];
+	}
+
 	_it('setupsheet UI test', async () => {
 		const browser = await puppeteer.launch({args: ['--no-sandbox']});
 		const page = await browser.newPage();
@@ -124,7 +133,6 @@ _describe('integration tests', () => {
 			state.settings.court_id),
 			'1');
 
-
 		// Click the button for the first match
 		assert.strictEqual(await page.evaluate(() =>
 			document.querySelector('.setup_network_match .setup_network_match_match_name').innerText),
@@ -142,6 +150,51 @@ _describe('integration tests', () => {
 			'#bldemo&m=bldemo_HD1');
 		assert(! await is_visible(page, '#settings_wrapper'));
 		assert(await is_visible(page, '#game'));
+
+		browser.close();
+	}).timeout(20000);
+
+	_it('eventsheet preview: initializing extra_data from event by default', async () => {
+		const [browser, page] = await start('bup.html#intdemo&es_preview=int&court=referee');
+
+		assert.strictEqual(await page.evaluate(() =>
+			document.querySelector('svg text#es_svg_team0').textContent),
+			'Germany'
+		);
+		assert.strictEqual(await page.evaluate(() =>
+			document.querySelector('svg text#es_svg_1n0_0').textContent),
+			'Fabian Roth'
+		);
+		assert.strictEqual(await page.evaluate(() =>
+			document.querySelector('svg text#es_svg_date').textContent),
+			'11.11.2016'
+		);
+		assert.strictEqual(await page.evaluate(() =>
+			document.querySelector('svg text#es_svg_location').textContent),
+			'Barbarossahalle, Ludwig-Thoma-Straße 1, Kaiserslautern'
+		);
+
+		// Click back
+		const back_btn = await page.$('.eventsheet_preview_back');
+		await back_btn.click();
+
+		assert.strictEqual(await page.evaluate(() =>
+			window.location.hash),
+			'#intdemo&eventsheet=int');
+
+		await page.evaluate(() => {
+			uiu.qs('.eventsheet_form input[name="location"]').value = 'SpH Steinbreche';
+		});
+		const generate_btn = await page.$('.eventsheet_generate_button');
+		await generate_btn.click();
+
+		assert.strictEqual(await page.evaluate(() =>
+			window.location.hash),
+			'#intdemo&es_preview=int');
+		assert.strictEqual(await page.evaluate(() =>
+			document.querySelector('svg text#es_svg_location').textContent),
+			'SpH Steinbreche'
+		);
 
 		browser.close();
 	}).timeout(20000);

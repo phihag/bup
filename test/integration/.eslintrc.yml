@@ -27,7 +27,8 @@
         "ecmaVersion": "2017",
     },
     "globals": {
-        "client_find_text": "*"
+        "client_find_text": "*",
+        "uiu": "*"
     },
     "extends": "eslint:recommended"
 }

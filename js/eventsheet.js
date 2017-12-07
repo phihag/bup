@@ -1695,9 +1695,11 @@ function render_previewable(preview_el, ev, es_key, ui8r, extra_data, extra_file
 function prepare_render(btn, es_key, extra_data) {
 	var progress = uiu.el(btn, 'div', 'loading-icon');
 	download(es_key, function(ui8r) {
-		download_extra(es_key, state.event, function(extra_files) {
+		var event = state.event;
+		download_extra(es_key, event, function(extra_files) {
 			uiu.remove(progress);
-			es_render(state.event, es_key, ui8r, extra_data, extra_files);
+			_default_extra_data(extra_data, event);
+			es_render(event, es_key, ui8r, extra_data, extra_files);
 		});
 	});
 }
