@@ -2,6 +2,8 @@ scoresheet in game does not return to the game!
 	write/extend test
 	fix: helper function
 
+test add_note scoresheet!
+
 generate receipts
 	include club logo
 	layout svg with lines, sums etc.

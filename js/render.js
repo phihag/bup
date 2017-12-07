@@ -265,7 +265,6 @@ function ui_render(s) {
 		return;
 	}
 
-	uiu.show_qs('#game');
 	court.render(s, main_court_ui());
 	editmode.update_ui(s);
 

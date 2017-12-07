@@ -112,12 +112,8 @@ _describe('integration tests', () => {
 		browser.close();
 	}).timeout(20000);
 
-	_it('entering a match (with court selection)', async () => {
-		const browser = await puppeteer.launch({args: ['--no-sandbox']});
-		const page = await browser.newPage();
-		const bldemo_url = base_url + 'bup.html#bldemo';
-		await page.goto(bldemo_url, {waitUntil: 'load'});
-		await page.addScriptTag({url: base_url + 'test/integration/client_integration.js'});
+	_it('match navigation (with court selection and scoresheet)', async () => {
+		const [browser, page] = await start('bup.html#bldemo');
 
 		assert.strictEqual(await page.evaluate(() =>
 			state.settings.court_id),
@@ -150,6 +146,34 @@ _describe('integration tests', () => {
 			'#bldemo&m=bldemo_HD1');
 		assert(! await is_visible(page, '#settings_wrapper'));
 		assert(await is_visible(page, '#game'));
+
+
+		// Go into scoresheet by pressing s
+		await page.keyboard.press('KeyS');
+		assert.strictEqual(await page.evaluate(() =>
+			window.location.hash),
+			'#bldemo&m=bldemo_HD1&scoresheet');
+		assert(await is_visible(page, '.scoresheet_container'));
+		assert(! await is_visible(page, '#game'));
+		assert.strictEqual(await page.evaluate(() =>
+			document.querySelector('.scoresheet_event_name').textContent),
+			'TV Refrath - BC Bischmisheim (Demo)'
+		);
+		assert.strictEqual(await page.evaluate(() =>
+			document.querySelector('.scoresheet_match_name').textContent),
+			'1.HD'
+		);
+
+		const note_input = await page.$('#scoresheet_note_input');
+		await note_input.focus();
+		await page.keyboard.type('This is a test note');
+		await page.keyboard.press('Enter');
+		assert(! await is_visible(page, '#game'));
+
+		// TODO test note is present in state
+		// TODO test note is displayed
+
+		// TODO that stest going back works!
 
 		browser.close();
 	}).timeout(20000);

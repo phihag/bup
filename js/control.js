@@ -41,6 +41,7 @@ function resume_match(s) {
 	calc.init_state(state, null, s.presses, true);
 	calc.state(state);
 	set_current(state);
+	render.show();
 	render.ui_render(state);
 	// Do not explicitly send anything to the network - we're just looking
 }
@@ -62,6 +63,7 @@ function start_match(s, setup, init_presses, metadata) {
 	calc.init_state(s, setup, init_presses, !!metadata);
 	calc.state(s);
 	set_current(s);
+	render.show();
 	render.ui_render(s);
 	network.send_press(s, {
 		type: '_start_match',
