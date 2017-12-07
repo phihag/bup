@@ -1204,6 +1204,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var compat = require('./compat');
 	var control = require('./control');
 	var downloader = require('./downloader');
+	var form_utils = require('./form_utils');
 	var i18n = require('./i18n');
 	var network = require('./network');
 	var printing = require('./printing');
