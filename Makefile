@@ -83,6 +83,7 @@ dist: cleandist ## Create distribution files
 		div/NLA_Resultatblatt.svg \
 		div/eventsheet_obl.xlsx \
 		div/eventsheet_international.svg \
+		div/buli2017_spielbericht.svg \
 		div/Spielbericht-Buli-2016-17.xlsm \
 		div/Spielbericht_8x3x21.svg \
 		div/Spielberichtsbogen_1BL-2015.pdf \

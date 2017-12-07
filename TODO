@@ -1,9 +1,7 @@
-extradata does not get updated correctly when loading in preview
-	write test for #intdemo&es_preview=int
-	fix
+eventsheet - back destroys extra_data?
 
 scoresheet in game does not return to the game!
-	write test
+	write/extend test
 	fix: helper function
 
 generate receipts
