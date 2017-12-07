@@ -823,13 +823,13 @@ var render_int = _svg_func(function(svg, ev, es_key, extra_data) {
 			team.players.forEach(function(player, player_id) {
 				_svg_text(
 					svg,
-					match_num + 'n' + team_id + '.' + player_id,
+					match_num + 'n' + team_id + '_' + player_id,
 					player.name,
 					(m.setup.is_doubles ? 0 : 2.5));
 			});
 
 			netscore.forEach(function(game, game_id) {
-				_svg_text(svg, match_num + 'p' + team_id + '.' + game_id, game[team_id]);
+				_svg_text(svg, match_num + 'p' + team_id + '_' + game_id, game[team_id]);
 			});
 		});
 

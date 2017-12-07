@@ -1,12 +1,10 @@
-test source map under CourtSpot
-
-scoresheet in game does not return to the game!
-	write test
-	fix
-
 extradata does not get updated correctly when loading in preview
 	write test for #intdemo&es_preview=int
 	fix
+
+scoresheet in game does not return to the game!
+	write test
+	fix: helper function
 
 generate receipts
 	include club logo
