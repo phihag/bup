@@ -2150,7 +2150,7 @@ function show_dialog(es_key) {
 		});
 
 		uiu.el(distance_label, 'span', {
-			style: 'display:inline-block;margin-left:0.2em;'
+			style: 'display:inline-block;margin-left:0.2em;',
 		}, 'km');
 		break;
 	default:

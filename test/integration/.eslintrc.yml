@@ -28,6 +28,7 @@
     },
     "globals": {
         "client_find_text": "*",
+        "client_qs_visible": "*",
         "uiu": "*"
     },
     "extends": "eslint:recommended"
