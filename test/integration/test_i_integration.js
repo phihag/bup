@@ -170,10 +170,18 @@ _describe('integration tests', () => {
 		await page.keyboard.press('Enter');
 		assert(! await is_visible(page, '#game'));
 
-		// TODO test note is present in state
-		// TODO test note is displayed
+		assert.strictEqual(await page.evaluate(() => 
+			client_find_text('.scoresheet_container text', 'This is a test note').tagName.toLowerCase()),
+			'text');
+		const last_press = await page.evaluate(() => state.presses[state.presses.length - 1]);
+		delete last_press.court_id;
+		delete last_press.timestamp;
+		assert.deepStrictEqual(last_press, {
+			type: 'note',
+			val: 'This is a test note',
+		});
 
-		// TODO that stest going back works!
+		// TODO test that going back works!
 
 		browser.close();
 	}).timeout(20000);

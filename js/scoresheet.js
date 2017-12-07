@@ -1162,8 +1162,7 @@ function ui_init() {
 		event_list_matches($('.scoresheet_container'));
 	});
 
-	$('.scoresheet_note_dialog').on('submit', function(e) {
-		e.preventDefault();
+	form_utils.onsubmit(uiu.qs('.scoresheet_note_dialog'), function() {
 		var input = uiu.qs('#scoresheet_note_input');
 
 		control.on_press({
@@ -1173,7 +1172,6 @@ function ui_init() {
 		ui_show(state);
 
 		input.value = '';
-		return false;
 	});
 
 	load_sheet('international');
