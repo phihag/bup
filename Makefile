@@ -118,7 +118,7 @@ tu: ta
 testall: test itest lint
 
 test: ## Run tests
-	@node_modules/.bin/mocha test/
+	@node_modules/.bin/mocha test/ test/mock/
 
 itest: ## Run integration tests
 	@node_modules/.bin/mocha test/integration/

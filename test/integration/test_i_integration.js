@@ -4,7 +4,7 @@ const assert = require('assert');
 
 const puppeteer = require('puppeteer');
 
-const miniserver = require('./miniserver');
+const mockserver = require('../mock/mockserver');
 const tutils = require('../tutils');
 const _describe = tutils._describe;
 const _it = tutils._it;
@@ -19,11 +19,12 @@ _describe('integration tests', () => {
 	base_url = 'http://localhost/bup/';
 	tutils._before(async () => {
 		base_url = await new Promise((resolve, reject) => {
-			srv = miniserver.server((err, _base_url) => {
-				if (err) return reject(err);
-				resolve(_base_url);
-			}, {
-				listen: '127.0.0.1', // For some weird reasons, travis.ci does not support IPv6 yet. So go with IPv4 for now
+			srv = mockserver.server({
+				start_callback: (err, _base_url) => {
+					if (err) return reject(err);
+					resolve(_base_url);
+				},
+				listen: '127.0.0.1', // For some weird reasons, travis-ci does not support IPv6 yet. So go with IPv4 for now
 			});
 		});
 	});
