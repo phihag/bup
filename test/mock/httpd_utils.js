@@ -8,8 +8,7 @@ function prefixed(prefix, handler) {
 		if (! pathname.startsWith(prefix)) {
 			return 'unhandled';
 		}
-		const remaining_pathname = pathname.substring(prefix.length - 1);
-		return handler(req, res, remaining_pathname);
+		return handler(req, res, pathname.substring(prefix.length - 1));
 	};
 }
 
@@ -18,13 +17,44 @@ function err(res, errcode) {
 	res.end('Error ' + errcode);
 }
 
-/*
-function redirect_handler(from, to) {
-	// TODO implement this
+function multi_handler(handlers) {
+	return (req, res, pathname) => {
+		for (const h of handlers) {
+			const handler_result = h(req, res, pathname);
+			if (handler_result !== 'unhandled') {
+				return handler_result;
+			}
+		}
+		return 'unhandled';
+	};
 }
-*/
+
+function redirect(res, location) {
+	res.writeHead(302, {
+		Location: location,
+		'Content-Type': 'text/plain',
+	});
+	res.end('Redirect to ' + location);
+}
+
+function redirect_handler(from, to) {
+	return (req, res, pathname) => {
+		if (pathname !== from) return 'unhandled';
+
+		let location = to;
+		if (!location.startsWith('/')) {
+			// TODO calculate new location from relative path!
+
+		}
+
+		redirect(res, location);
+	};
+}
 
 module.exports = {
 	err,
 	prefixed,
+	multi_handler,
+	redirect,
+	redirect_handler,
 };

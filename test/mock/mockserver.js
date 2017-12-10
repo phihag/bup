@@ -14,7 +14,7 @@ function server(options) {
 	const btde = new mock_btde.BTDEMock();
 
 	options.handlers = [
-		httpd_utils.prefixed('/btde/', btde.handle),
+		httpd_utils.prefixed('/btde/', btde.handler),
 		miniserver.file_handler('/', miniserver.ROOT_DIR),
 	];
 

@@ -1,4 +1,15 @@
-displaymode login
+bup: test faulted in intervals
+
+improve login
+	mock btde
+		main page
+		login / logout
+		serve bup
+	de-jquerify
+	test
+	displaymode login
+	logout
+
 
 save inputted umpire names (for CourtSpot)
 	-> Ulf
@@ -13,6 +24,10 @@ d teamscore with small won matches
 
 -> send newsletter
 
+
+tx allow resignation
+resignation/card: auto-write text
+	write a test for this
 
 eventsheet: sign!
 	store signatures in CourtSpot
