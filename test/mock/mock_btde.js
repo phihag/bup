@@ -37,7 +37,7 @@ fetch_data (user, callback) {
 		throw new Error('Invalid user');
 	}
 
-	lock.acquire(user, (cb) => {
+	this.lock.acquire(user, (cb) => {
 		if (this.data[user]) {
 			cb(null, this.data[user]);
 			return;
@@ -64,7 +64,7 @@ login_handler(req, res, pathname) {
 		const {user} = JSON.parse(cookies.btde_mock_session);
 		this.fetch_data(user, (err) => {
 			if (err) throw err;
-			redirect(res, 'start.php');
+			httpd_utils.redirect(res, 'start.php');
 		});
 		return;
 	}

@@ -33,11 +33,11 @@ function multi_handler(handlers) {
 function redirect(req, res, location) {
 	if (!location.startsWith('/')) {
 		const full_pathname = url_module.parse(req.url).pathname;
-		const m = /^(.*\/)[^\/]*/.exec(full_pathname);
+		const m = /^(.*\/)[^/]*/.exec(full_pathname);
 		if (!m) {
 			return err(res, 400, 'URL without slash');
 		}
-		location = m[1] + to;
+		location = m[1] + location;
 	}
 
 	res.writeHead(302, {
