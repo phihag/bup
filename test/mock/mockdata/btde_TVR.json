@@ -1,0 +1,433 @@
+{
+    "type": "bup-export",
+    "version": 2,
+    "event": {
+        "league_key": "1BL-2017",
+        "team_names": [
+            "TV Refrath",
+            "TSV Neuhausen-Nymphenburg"
+        ],
+        "all_players": [
+            [
+                {
+                    "firstname": "Lars",
+                    "lastname": "Sch\u00e4nzler",
+                    "name": "Lars Sch\u00e4nzler",
+                    "textid": "01-109984",
+                    "regular": true,
+                    "gender": "m",
+                    "ranking": 1,
+                    "ranking_d": 9
+                },
+                {
+                    "firstname": "Nhat",
+                    "lastname": "Nguyen",
+                    "name": "Nhat Nguyen",
+                    "textid": "01-152382",
+                    "regular": true,
+                    "gender": "m",
+                    "ranking": 2,
+                    "ranking_d": 6,
+                    "nationality": "IRL"
+                },
+                {
+                    "firstname": "Joshua",
+                    "lastname": "Magee",
+                    "name": "Joshua Magee",
+                    "textid": "01-148394",
+                    "regular": false,
+                    "gender": "m",
+                    "ranking": 3,
+                    "nationality": "IRL"
+                },
+                {
+                    "firstname": "Richard",
+                    "lastname": "Domke",
+                    "name": "Richard Domke",
+                    "textid": "01-139391",
+                    "regular": false,
+                    "gender": "m",
+                    "ranking": 4,
+                    "ranking_d": 5
+                },
+                {
+                    "firstname": "Sam",
+                    "lastname": "Magee",
+                    "name": "Sam Magee",
+                    "textid": "01-147936",
+                    "regular": true,
+                    "gender": "m",
+                    "ranking": 5,
+                    "ranking_d": 2,
+                    "nationality": "IRL"
+                },
+                {
+                    "firstname": "Raphael",
+                    "lastname": "Beck",
+                    "name": "Raphael Beck",
+                    "textid": "01-101930",
+                    "regular": true,
+                    "gender": "m",
+                    "ranking": 6,
+                    "ranking_d": 1
+                },
+                {
+                    "firstname": "Kai",
+                    "lastname": "Waldenberger",
+                    "name": "Kai Waldenberger",
+                    "textid": "01-110871",
+                    "regular": false,
+                    "gender": "m",
+                    "ranking": 7,
+                    "ranking_d": 10
+                },
+                {
+                    "firstname": "Jan-Colin",
+                    "lastname": "V\u00f6lker",
+                    "name": "Jan-Colin V\u00f6lker",
+                    "textid": "06-151773",
+                    "regular": false,
+                    "gender": "m",
+                    "ranking": 8
+                },
+                {
+                    "firstname": "Denis",
+                    "lastname": "Nyenhuis",
+                    "name": "Denis Nyenhuis",
+                    "textid": "01-085517",
+                    "regular": false,
+                    "gender": "m",
+                    "ranking": 9,
+                    "ranking_d": 7
+                },
+                {
+                    "firstname": "Max",
+                    "lastname": "Schwenger",
+                    "name": "Max Schwenger",
+                    "textid": "01-132358",
+                    "regular": false,
+                    "gender": "m",
+                    "ranking": 10,
+                    "ranking_d": 4
+                },
+                {
+                    "firstname": "Chloe",
+                    "lastname": "Magee",
+                    "name": "Chloe Magee",
+                    "textid": "01-136315",
+                    "regular": true,
+                    "gender": "f",
+                    "ranking": 1,
+                    "nationality": "IRL"
+                },
+                {
+                    "firstname": "Carla",
+                    "lastname": "Nelte",
+                    "name": "Carla Nelte",
+                    "textid": "01-128902",
+                    "regular": true,
+                    "gender": "f",
+                    "ranking": 2
+                },
+                {
+                    "firstname": "Elin",
+                    "lastname": "Svensson",
+                    "name": "Elin Svensson",
+                    "textid": "01-150642",
+                    "regular": false,
+                    "gender": "f",
+                    "ranking": 3,
+                    "nationality": "SWE"
+                },
+                {
+                    "firstname": "Anika",
+                    "lastname": "D\u00f6rr",
+                    "name": "Anika D\u00f6rr",
+                    "textid": "02-034959",
+                    "regular": false,
+                    "gender": "f",
+                    "ranking": 4
+                },
+                {
+                    "firstname": "Jennifer",
+                    "lastname": "Karnott",
+                    "name": "Jennifer Karnott",
+                    "textid": "01-116150",
+                    "regular": false,
+                    "gender": "f",
+                    "ranking": 7
+                },
+                {
+                    "firstname": "Paula",
+                    "lastname": "Kick",
+                    "name": "Paula Kick",
+                    "textid": "07-034304",
+                    "regular": false,
+                    "gender": "f",
+                    "ranking": 6
+                },
+                {
+                    "firstname": "Runa",
+                    "lastname": "Pl\u00fctzer",
+                    "name": "Runa Pl\u00fctzer",
+                    "textid": "01-121966",
+                    "regular": false,
+                    "gender": "f",
+                    "ranking": 5
+                }
+            ],
+            [
+                {
+                    "firstname": "Tobias",
+                    "lastname": "Wadenka",
+                    "name": "Tobias Wadenka",
+                    "textid": "07-023747",
+                    "regular": true,
+                    "gender": "m",
+                    "ranking": 1,
+                    "ranking_d": 3
+                },
+                {
+                    "firstname": "Yankov",
+                    "lastname": "Krasimir",
+                    "name": "Yankov Krasimir",
+                    "textid": "07-041594",
+                    "regular": true,
+                    "gender": "m",
+                    "ranking": 2,
+                    "ranking_d": 2,
+                    "nationality": "BUL"
+                },
+                {
+                    "firstname": "Manuel",
+                    "lastname": "Heumann",
+                    "name": "Manuel Heumann",
+                    "textid": "07-024941",
+                    "regular": true,
+                    "gender": "m",
+                    "ranking": 3,
+                    "ranking_d": 5
+                },
+                {
+                    "firstname": "Fabian",
+                    "lastname": "Holzer",
+                    "name": "Fabian Holzer",
+                    "textid": "07-030649",
+                    "regular": true,
+                    "gender": "m",
+                    "ranking": 4,
+                    "ranking_d": 1
+                },
+                {
+                    "firstname": "Przemyskaw",
+                    "lastname": "Szydlowski",
+                    "name": "Przemyskaw Szydlowski",
+                    "textid": "07-041496",
+                    "regular": false,
+                    "gender": "m",
+                    "ranking": 5,
+                    "ranking_d": 4,
+                    "nationality": "POL"
+                },
+                {
+                    "firstname": "Kevin",
+                    "lastname": "Feibicke",
+                    "name": "Kevin Feibicke",
+                    "textid": "07-036058",
+                    "regular": false,
+                    "gender": "m",
+                    "ranking": 6
+                },
+                {
+                    "firstname": "Eric",
+                    "lastname": "Patz",
+                    "name": "Eric Patz",
+                    "textid": "08-003396",
+                    "regular": false,
+                    "gender": "m",
+                    "ranking": 7
+                },
+                {
+                    "firstname": "Daniel",
+                    "lastname": "Beier",
+                    "name": "Daniel Beier",
+                    "textid": "07-022858",
+                    "regular": false,
+                    "gender": "m",
+                    "ranking": 8
+                },
+                {
+                    "firstname": "Elisabeth",
+                    "lastname": "Baldauf",
+                    "name": "Elisabeth Baldauf",
+                    "textid": "07-039971",
+                    "regular": true,
+                    "gender": "f",
+                    "ranking": 1,
+                    "nationality": "AUT"
+                },
+                {
+                    "firstname": "Natalya",
+                    "lastname": "Voytsekh",
+                    "name": "Natalya Voytsekh",
+                    "textid": "07-039950",
+                    "regular": true,
+                    "gender": "f",
+                    "ranking": 2,
+                    "nationality": "UKR"
+                },
+                {
+                    "firstname": "Kaja",
+                    "lastname": "Stankovic",
+                    "name": "Kaja Stankovic",
+                    "textid": "07-037403",
+                    "regular": false,
+                    "gender": "f",
+                    "ranking": 3,
+                    "nationality": "SLO"
+                },
+                {
+                    "firstname": "Monika",
+                    "lastname": "Weigert",
+                    "name": "Monika Weigert",
+                    "textid": "07-035210",
+                    "regular": false,
+                    "gender": "f",
+                    "ranking": 4
+                }
+            ]
+        ],
+        "team_competition": true,
+        "date": "17.12.2017",
+        "starttime": "16:00",
+        "location": "51427 Bergisch Gladbach-Refrath, SpH, Steinbreche",
+        "matches": [
+            {
+                "setup": {
+                    "match_name": "HD1",
+                    "match_id": "tde:TV Refrath-TSV Neuhausen-Nymphenburg_17.12.2017_HD1",
+                    "is_doubles": true,
+                    "teams": [
+                        {
+                            "players": []
+                        },
+                        {
+                            "players": []
+                        }
+                    ],
+                    "incomplete": true,
+                    "eventsheet_id": "1.HD"
+                },
+                "network_score": null
+            },
+            {
+                "setup": {
+                    "match_name": "DD",
+                    "match_id": "tde:TV Refrath-TSV Neuhausen-Nymphenburg_17.12.2017_DD",
+                    "is_doubles": true,
+                    "teams": [
+                        {
+                            "players": []
+                        },
+                        {
+                            "players": []
+                        }
+                    ],
+                    "incomplete": true
+                },
+                "network_score": null
+            },
+            {
+                "setup": {
+                    "match_name": "HD2",
+                    "match_id": "tde:TV Refrath-TSV Neuhausen-Nymphenburg_17.12.2017_HD2",
+                    "is_doubles": true,
+                    "teams": [
+                        {
+                            "players": []
+                        },
+                        {
+                            "players": []
+                        }
+                    ],
+                    "incomplete": true,
+                    "eventsheet_id": "2.HD"
+                },
+                "network_score": null
+            },
+            {
+                "setup": {
+                    "match_name": "HE1",
+                    "match_id": "tde:TV Refrath-TSV Neuhausen-Nymphenburg_17.12.2017_HE1",
+                    "is_doubles": false,
+                    "teams": [
+                        {
+                            "players": []
+                        },
+                        {
+                            "players": []
+                        }
+                    ],
+                    "incomplete": true,
+                    "eventsheet_id": "1.HE"
+                },
+                "network_score": null
+            },
+            {
+                "setup": {
+                    "match_name": "DE",
+                    "match_id": "tde:TV Refrath-TSV Neuhausen-Nymphenburg_17.12.2017_DE",
+                    "is_doubles": false,
+                    "teams": [
+                        {
+                            "players": []
+                        },
+                        {
+                            "players": []
+                        }
+                    ],
+                    "incomplete": true
+                },
+                "network_score": null
+            },
+            {
+                "setup": {
+                    "match_name": "GD",
+                    "match_id": "tde:TV Refrath-TSV Neuhausen-Nymphenburg_17.12.2017_GD",
+                    "is_doubles": true,
+                    "teams": [
+                        {
+                            "players": []
+                        },
+                        {
+                            "players": []
+                        }
+                    ],
+                    "incomplete": true
+                },
+                "network_score": null
+            },
+            {
+                "setup": {
+                    "match_name": "HE2",
+                    "match_id": "tde:TV Refrath-TSV Neuhausen-Nymphenburg_17.12.2017_HE2",
+                    "is_doubles": false,
+                    "teams": [
+                        {
+                            "players": []
+                        },
+                        {
+                            "players": []
+                        }
+                    ],
+                    "incomplete": true,
+                    "eventsheet_id": "2.HE"
+                },
+                "network_score": null
+            }
+        ],
+        "report_urls": [
+            "https:\/\/www.turnier.de\/sport\/teammatch.aspx?id=107D0FC0-C153-4EAF-A39D-EBAECB424B16&match=76"
+        ]
+    }
+}

@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "async": "*",
+    "async-lock": "*",
     "clean-css-cli": "*",
     "eslint": "*",
     "fs-walk": "*",

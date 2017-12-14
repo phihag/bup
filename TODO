@@ -1,10 +1,5 @@
-update debmlist
-	VRLs in buli
-	rerun
-
 improve login
 	mock btde
-		read test data from debmlist
 		main page
 		login / logout
 		serve bup
