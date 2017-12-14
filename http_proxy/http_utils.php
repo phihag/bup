@@ -178,3 +178,49 @@ class CurlHTTPClient extends JarHTTPClient {
 		return function_exists('curl_version');
 	}
 }
+
+
+class CacheHTTPClient extends AbstractHTTPClient {
+	private $cache_dir;
+	private $real_httpc;
+
+	public function __construct($real_httpc, $cache_dir) {
+		parent::__construct();
+		$this->real_httpc = $real_httpc;
+		$this->cache_dir = $cache_dir;
+		if (!\is_dir($cache_dir)) {
+			\mkdir($cache_dir);
+		}
+	}
+
+	public function request($url, $headers=null, $method='GET', $body=null) {
+		if ($method !== 'GET') {
+			throw new \Exception('CacheHTTPClient only suppors GET!');
+		}
+
+		$cache_fn = $this->cache_dir . '/' . \preg_replace('/[^a-z0-9\.]+/', '_', $url) . '.html';
+		if (\file_exists($cache_fn)) {
+			return \file_get_contents($cache_fn);
+		}
+
+		$res = $this->real_httpc->request($url, $headers, $method, $body);
+		\file_put_contents($cache_fn, $res);
+		return $res;
+	}
+
+	public function get_cookie($name) {
+		return $this->real_httpc->get_cookie($name);
+	}
+
+	public function set_cookie($name, $val) {
+		return $this->real_httpc->set_cookie($name, $val);
+	}
+
+	public function get_all_cookies() {
+		return $this->real_httpc->get_all_cookies();
+	}
+
+	public function get_error_info() {
+		return $this->real_httpc->get_error_info();
+	}
+}
