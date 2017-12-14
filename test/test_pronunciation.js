@@ -97,7 +97,7 @@ _describe('pronunciation', function() {
 			'and on my left,\n' +
 			'Andrew and Alice.\n' +
 			'Andrew to serve to Birgit.\n\n' +
-			'Love all.\n' +
+			'love all.\n' +
 			'Play.'
 		);
 		assert.strictEqual(
@@ -146,7 +146,7 @@ _describe('pronunciation', function() {
 			'and on my left,\n' +
 			'Bob and Birgit.\n' +
 			'Alice to serve to Birgit.\n\n' +
-			'Love all.\n' +
+			'love all.\n' +
 			'Play.'
 		);
 		assert.strictEqual(
@@ -193,7 +193,7 @@ _describe('pronunciation', function() {
 			'and on my left,\n' +
 			'Andrew and Alice.\n' +
 			'Bob to serve to Alice.\n\n' +
-			'Love all.\n' +
+			'love all.\n' +
 			'Play.'
 		);
 	});
@@ -235,7 +235,7 @@ _describe('pronunciation', function() {
 			'and on my left,\n' +
 			'Alice.\n' +
 			'Alice to serve.\n\n' +
-			'Love all.\n' +
+			'love all.\n' +
 			'Play.'
 		);
 		assert.strictEqual(
@@ -278,7 +278,7 @@ _describe('pronunciation', function() {
 			'and on my left,\n' +
 			'Bob.\n' +
 			'Alice to serve.\n\n' +
-			'Love all.\n' +
+			'love all.\n' +
 			'Play.'
 		);
 
@@ -311,7 +311,7 @@ _describe('pronunciation', function() {
 			'and on my left,\n' +
 			'Alice.\n' +
 			'Bob to serve.\n\n' +
-			'Love all.\n' +
+			'love all.\n' +
 			'Play.'
 		);
 
@@ -343,7 +343,7 @@ _describe('pronunciation', function() {
 			'and on my left,\n' +
 			'Bob.\n' +
 			'Bob to serve.\n\n' +
-			'Love all.\n' +
+			'love all.\n' +
 			'Play.'
 		);
 	});
@@ -381,7 +381,7 @@ _describe('pronunciation', function() {
 			'and on my left,\n' +
 			'A team, represented by Andrew and Alice.\n' +
 			'A team to serve, Alice to Birgit.\n\n' +
-			'Love all.\n' +
+			'love all.\n' +
 			'Play.'
 		);
 		assert.strictEqual(
@@ -428,7 +428,7 @@ _describe('pronunciation', function() {
 			'and on my right,\n' +
 			'A team, represented by Andrew and Alice.\n' +
 			'A team to serve, Alice to Birgit.\n\n' +
-			'Love all.\n' +
+			'love all.\n' +
 			'Play.'
 		);
 		s = state_after(presses, DOUBLES_TEAM_SETUP);
@@ -451,7 +451,7 @@ _describe('pronunciation', function() {
 			'and on my left,\n' +
 			'B team, represented by Bob and Birgit.\n' +
 			'A team to serve, Alice to Birgit.\n\n' +
-			'Love all.\n' +
+			'love all.\n' +
 			'Play.'
 		);
 
@@ -488,7 +488,7 @@ _describe('pronunciation', function() {
 			'and on my right,\n' +
 			'A team, represented by Andrew and Alice.\n' +
 			'B team to serve, Bob to Andrew.\n\n' +
-			'Love all.\n' +
+			'love all.\n' +
 			'Play.'
 		);
 		s = state_after(presses, DOUBLES_TEAM_SETUP);
@@ -511,7 +511,7 @@ _describe('pronunciation', function() {
 			'and on my left,\n' +
 			'B team, represented by Bob and Birgit.\n' +
 			'B team to serve, Bob to Andrew.\n\n' +
-			'Love all.\n' +
+			'love all.\n' +
 			'Play.'
 		);
 
@@ -547,7 +547,7 @@ _describe('pronunciation', function() {
 			'and on my left,\n' +
 			'A team, represented by Andrew and Alice.\n' +
 			'B team to serve, Birgit to Andrew.\n\n' +
-			'Love all.\n' +
+			'love all.\n' +
 			'Play.'
 		);
 		s = state_after(presses, DOUBLES_TEAM_SETUP);
@@ -570,7 +570,7 @@ _describe('pronunciation', function() {
 			'and on my left,\n' +
 			'A team, represented by Andrew and Alice.\n' +
 			'B team to serve, Birgit to Andrew.\n\n' +
-			'Love all.\n' +
+			'love all.\n' +
 			'Play.'
 		);
 	});
@@ -614,7 +614,7 @@ _describe('pronunciation', function() {
 			'and on my left,\n' +
 			'A team, represented by Alice.\n' +
 			'A team to serve.\n\n' +
-			'Love all.\n' +
+			'love all.\n' +
 			'Play.'
 		);
 		assert.strictEqual(
@@ -648,7 +648,7 @@ _describe('pronunciation', function() {
 			'and on my left,\n' +
 			'A team, represented by Alice.\n' +
 			'A team to serve.\n\n' +
-			'Love all.\n' +
+			'love all.\n' +
 			'Play.'
 		);
 		assert.strictEqual(
@@ -691,7 +691,7 @@ _describe('pronunciation', function() {
 			'and on my left,\n' +
 			'B team, represented by Bob.\n' +
 			'A team to serve.\n\n' +
-			'Love all.\n' +
+			'love all.\n' +
 			'Play.'
 		);
 		s = state_after(presses, SINGLES_TEAM_SETUP_AWAY_FIRST);
@@ -714,7 +714,7 @@ _describe('pronunciation', function() {
 			'and on my right,\n' +
 			'A team, represented by Alice.\n' +
 			'A team to serve.\n\n' +
-			'Love all.\n' +
+			'love all.\n' +
 			'Play.'
 		);
 
@@ -746,7 +746,7 @@ _describe('pronunciation', function() {
 			'and on my left,\n' +
 			'A team, represented by Alice.\n' +
 			'B team to serve.\n\n' +
-			'Love all.\n' +
+			'love all.\n' +
 			'Play.'
 		);
 		s = state_after(presses, SINGLES_TEAM_SETUP_AWAY_FIRST);
@@ -769,7 +769,7 @@ _describe('pronunciation', function() {
 			'and on my left,\n' +
 			'A team, represented by Alice.\n' +
 			'B team to serve.\n\n' +
-			'Love all.\n' +
+			'love all.\n' +
 			'Play.'
 		);
 
@@ -802,7 +802,7 @@ _describe('pronunciation', function() {
 			'and on my left,\n' +
 			'B team, represented by Bob.\n' +
 			'B team to serve.\n\n' +
-			'Love all.\n' +
+			'love all.\n' +
 			'Play.'
 		);
 		s = state_after(presses, SINGLES_TEAM_SETUP_AWAY_FIRST);
@@ -825,7 +825,7 @@ _describe('pronunciation', function() {
 			'and on my right,\n' +
 			'A team, represented by Alice.\n' +
 			'B team to serve.\n\n' +
-			'Love all.\n' +
+			'love all.\n' +
 			'Play.'
 		);
 	});
@@ -850,7 +850,7 @@ _describe('pronunciation', function() {
 		}];
 		var s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s), '1-0');
-		assert.equal(pronounce_en(s), '1-Love');
+		assert.equal(pronounce_en(s), '1-love');
 
 		presses.push({
 			type: 'score',
@@ -858,7 +858,7 @@ _describe('pronunciation', function() {
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s), '2-0');
-		assert.equal(pronounce_en(s), '2-Love');
+		assert.equal(pronounce_en(s), '2-love');
 
 		presses.push({
 			type: 'score',
@@ -943,7 +943,7 @@ _describe('pronunciation', function() {
 		}];
 		var s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce_de(s), '1-0');
-		assert.equal(pronounce_en(s), '1-Love');
+		assert.equal(pronounce_en(s), '1-love');
 
 		presses.push({
 			type: 'score',
@@ -951,7 +951,7 @@ _describe('pronunciation', function() {
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce_de(s), '2-0');
-		assert.equal(pronounce_en(s), '2-Love');
+		assert.equal(pronounce_en(s), '2-love');
 
 		presses.push({
 			type: 'score',
@@ -1115,7 +1115,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der erste Satz wurde gewonnen von Bob 23-21');
+			'Der erste Satz wurde gewonnen von Bob mit 23-21');
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'First game won by Bob 23-21');
@@ -1126,7 +1126,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der erste Satz wurde gewonnen von Bob und Birgit 23-21');
+			'Der erste Satz wurde gewonnen von Bob und Birgit mit 23-21');
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'First game won by Bob and Birgit 23-21');
@@ -1134,7 +1134,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, SINGLES_TEAM_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der erste Satz wurde gewonnen von B team 23-21');
+			'Der erste Satz wurde gewonnen von B team mit 23-21');
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'First game won by B team 23-21');
@@ -1142,7 +1142,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_TEAM_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der erste Satz wurde gewonnen von B team 23-21');
+			'Der erste Satz wurde gewonnen von B team mit 23-21');
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'First game won by B team 23-21');
@@ -1169,11 +1169,11 @@ _describe('pronunciation', function() {
 		assert.strictEqual(pronounce_de(s),
 			'Zweiter Satz. 0 beide.\nBitte spielen.');
 		assert.strictEqual(pronounce_en(s),
-			'Second game; Love all; play');
+			'Second game; love all; play');
 		assert.strictEqual(loveall_de(s),
 			'Zweiter Satz. 0 beide.\nBitte spielen.');
 		assert.strictEqual(loveall_en(s),
-			'Second game; Love all; play');
+			'Second game; love all; play');
 
 		presses.push({
 			type: 'love-all',
@@ -1314,7 +1314,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, SINGLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Bob 23-21 30-29');
+			'Das Spiel wurde gewonnen von Bob mit 23-21 30-29');
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'Match won by Bob 23-21 30-29');
@@ -1342,7 +1342,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, SINGLES_TEAM_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der zweite Satz wurde gewonnen von A team 30-29; einen Satz beide');
+			'Der zweite Satz wurde gewonnen von A team mit 30-29; einen Satz beide');
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'Second game won by A team 30-29; One game all');
@@ -1352,21 +1352,21 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_TEAM_SETUP);
 		assert.equal(pronounce_de(s), 
 			'Satz.\n\n' +
-			'Der zweite Satz wurde gewonnen von A team 30-29; einen Satz beide');
+			'Der zweite Satz wurde gewonnen von A team mit 30-29; einen Satz beide');
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'Second game won by A team 30-29; One game all');
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der zweite Satz wurde gewonnen von Alice 30-29; einen Satz beide');
+			'Der zweite Satz wurde gewonnen von Alice mit 30-29; einen Satz beide');
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'Second game won by Alice 30-29; One game all');
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s), 
 			'Satz.\n\n' +
-			'Der zweite Satz wurde gewonnen von Andrew und Alice 30-29; einen Satz beide');
+			'Der zweite Satz wurde gewonnen von Andrew und Alice mit 30-29; einen Satz beide');
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'Second game won by Andrew and Alice 30-29; One game all');
@@ -1396,13 +1396,13 @@ _describe('pronunciation', function() {
 		assert.equal(pronounce_de(s),
 			'Entscheidungssatz. 0 beide.\nBitte spielen.');
 		assert.equal(pronounce_en(s),
-			'Final game; Love all; play');
+			'Final game; love all; play');
 		assert.equal(pronounce_frch(s),
 			'Set décisif. 0 partout.\nJouez.');
 		assert.equal(loveall_de(s),
 			'Entscheidungssatz. 0 beide.\nBitte spielen.');
 		assert.equal(loveall_en(s),
-			'Final game; Love all; play');
+			'Final game; love all; play');
 		
 		presses.push({
 			type: 'love-all',
@@ -1493,7 +1493,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, DOUBLES_TEAM_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von B team 23-21 29-30 22-20');
+			'Das Spiel wurde gewonnen von B team mit 23-21 29-30 22-20');
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'Match won by B team 23-21 29-30 22-20');
@@ -1503,21 +1503,21 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, SINGLES_TEAM_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von B team 23-21 29-30 22-20');
+			'Das Spiel wurde gewonnen von B team mit 23-21 29-30 22-20');
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'Match won by B team 23-21 29-30 22-20');
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Bob und Birgit 23-21 29-30 22-20');
+			'Das Spiel wurde gewonnen von Bob und Birgit mit 23-21 29-30 22-20');
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'Match won by Bob and Birgit 23-21 29-30 22-20');
 		s = state_after(alt_presses, SINGLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Bob 23-21 29-30 22-20');
+			'Das Spiel wurde gewonnen von Bob mit 23-21 29-30 22-20');
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'Match won by Bob 23-21 29-30 22-20');
@@ -1529,19 +1529,19 @@ _describe('pronunciation', function() {
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Alice 21-23 30-29 21-19');
+			'Das Spiel wurde gewonnen von Alice mit 21-23 30-29 21-19');
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Andrew und Alice 21-23 30-29 21-19');
+			'Das Spiel wurde gewonnen von Andrew und Alice mit 21-23 30-29 21-19');
 		s = state_after(presses, SINGLES_TEAM_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von A team 21-23 30-29 21-19');
+			'Das Spiel wurde gewonnen von A team mit 21-23 30-29 21-19');
 		s = state_after(presses, DOUBLES_TEAM_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von A team 21-23 30-29 21-19');
+			'Das Spiel wurde gewonnen von A team mit 21-23 30-29 21-19');
 	});
 
 	_it('cards basics', function() {
@@ -1571,7 +1571,7 @@ _describe('pronunciation', function() {
 			'0 beide');
 		assert.equal(pronounce_en(s),
 			'Andrew, warning for misconduct.\n' +
-			'Love all');
+			'love all');
 		assert.equal(pronounce_frch(s),
 			'Andrew, avertissement pour mauvais comportement.\n' +
 			'0 partout');
@@ -1679,7 +1679,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Bob, disqualifiziert wegen unsportlichen Verhaltens.\n\n' +
-			'Das Spiel wurde gewonnen von Andrew und Alice 4-4');
+			'Das Spiel wurde gewonnen von Andrew und Alice mit 4-4');
 		assert.equal(pronounce_en(s),
 			'Bob, disqualified for misconduct.\n\n' +
 			'Match won by Andrew and Alice 4-4');
@@ -1693,7 +1693,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_TEAM_SETUP);
 		assert.equal(pronounce_de(s),
 			'Bob, disqualifiziert wegen unsportlichen Verhaltens.\n\n' +
-			'Das Spiel wurde gewonnen von A team 4-4');
+			'Das Spiel wurde gewonnen von A team mit 4-4');
 		assert.equal(pronounce_en(s),
 			'Bob, disqualified for misconduct.\n\n' +
 			'Match won by A team 4-4');
@@ -1731,7 +1731,7 @@ _describe('pronunciation', function() {
 			'Bob, Fehler wegen unsportlichen Verhaltens.');
 		assert.equal(pronounce_en(s),
 			'Andrew, warning for misconduct.\n' +
-			'Bob, faulted.');
+			'Bob, fault for misconduct.');
 		assert.deepEqual(s.match.pending_red_cards, []); // See RTTO 3.7.7
 
 		presses.push({
@@ -1773,7 +1773,7 @@ _describe('pronunciation', function() {
 			'and on my left,\n' +
 			'Andrew and Alice.\n' +
 			'Andrew to serve to Birgit.\n\n' +
-			'Love all.\n' +
+			'love all.\n' +
 			'Play.'
 		);
 		s = state_after(presses, DOUBLES_TEAM_SETUP);
@@ -1797,7 +1797,7 @@ _describe('pronunciation', function() {
 			'and on my left,\n' +
 			'A team, represented by Andrew and Alice.\n' +
 			'A team to serve, Andrew to Birgit.\n\n' +
-			'Love all.\n' +
+			'love all.\n' +
 			'Play.'
 		);
 		presses.push({
@@ -1828,7 +1828,7 @@ _describe('pronunciation', function() {
 			'and on my left,\n' +
 			'Andrew and Alice.\n' +
 			'Andrew to serve to Birgit.\n\n' +
-			'Love all.\n' +
+			'love all.\n' +
 			'Play.'
 		);
 		s = state_after(presses, DOUBLES_TEAM_SETUP);
@@ -1854,7 +1854,7 @@ _describe('pronunciation', function() {
 			'and on my left,\n' +
 			'A team, represented by Andrew and Alice.\n' +
 			'A team to serve, Andrew to Birgit.\n\n' +
-			'Love all.\n' +
+			'love all.\n' +
 			'Play.'
 		);
 
@@ -1885,6 +1885,7 @@ _describe('pronunciation', function() {
 			type: 'love-all',
 		});
 		press_score(presses, 21, 19);
+
 		var card_birgit = {
 			type: 'red-card',
 			team_id: 1,
@@ -1894,14 +1895,16 @@ _describe('pronunciation', function() {
 		var s = state_after(presses, DOUBLES_SETUP);
 		assert.deepEqual(s.game.score, [21, 19]);
 		assert.deepEqual(s.match.pending_red_cards, [card_birgit]);
-		assert.equal(pronounce_de(s),
-			'Satz.\n' +
-			'Birgit, Fehler wegen unsportlichen Verhaltens.\n\n' +
-			'Der erste Satz wurde gewonnen von Andrew und Alice 21-19');
 		assert.equal(pronounce_en(s),
 			'Game.\n' +
-			'Birgit, faulted.\n\n' +
+			'Birgit, fault for misconduct.\n' +
+			'\n' +
 			'First game won by Andrew and Alice 21-19');
+		assert.equal(pronounce_de(s),
+			'Satz.\n' +
+			'Birgit, Fehler wegen unsportlichen Verhaltens.\n' +
+			'\n' +
+			'Der erste Satz wurde gewonnen von Andrew und Alice mit 21-19');
 
 		presses.push({
 			type: 'postgame-confirm',
@@ -1919,7 +1922,7 @@ _describe('pronunciation', function() {
 		assert.equal(pronounce_de(s),
 			'Birgit, Fehler wegen unsportlichen Verhaltens.');
 		assert.equal(pronounce_en(s),
-			'Birgit, faulted.');
+			'Birgit, fault for misconduct.');
 
 		presses.push({
 			type: 'pick_receiver',
@@ -1928,14 +1931,19 @@ _describe('pronunciation', function() {
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.deepEqual(s.match.pending_red_cards, []);
-		assert.equal(pronounce_de(s),
-			'Zweiter Satz. 0 beide.\n' +
-			'Birgit, Fehler wegen unsportlichen Verhaltens.\n' +
-			'1-0. Bitte spielen.');
 		assert.equal(pronounce_en(s),
+			'Birgit, fault for misconduct.\n' +
+			'\n' +
 			'Second game; love all.\n' +
 			'Birgit, faulted.\n' +
-			'1-Love. Play.');
+			'1-love; play');
+		assert.equal(pronounce_de(s),
+			'Birgit, Fehler wegen unsportlichen Verhaltens.\n' +
+			'\n' +
+			'Zweiter Satz. 0 beide.\n' +
+			'Birgit, Fehler wegen unsportlichen Verhaltens.\n' +
+			'1-0.\n' +
+			'Bitte spielen.');
 
 		presses.push({
 			type: 'love-all',
@@ -1943,7 +1951,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.deepEqual(s.game.score, [1, 0]);
 		assert.strictEqual(pronounce_de(s), '1-0');
-		assert.strictEqual(pronounce_en(s), '1-Love');
+		assert.strictEqual(pronounce_en(s), '1-love');
 
 		press_score(presses, 19, 18);
 		press_score(presses, 2, 0);
@@ -1958,14 +1966,16 @@ _describe('pronunciation', function() {
 		presses.push(card_alice);
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.deepEqual(s.match.pending_red_cards, [card_alice]);
-		assert.equal(pronounce_de(s),
-			'Satz.\n' +
-			'Alice, Fehler wegen unsportlichen Verhaltens.\n\n' +
-			'Der zweite Satz wurde gewonnen von Bob und Birgit 21-19; einen Satz beide');
 		assert.equal(pronounce_en(s),
 			'Game.\n' +
-			'Alice, faulted.\n\n' +
+			'Alice, fault for misconduct.\n' +
+			'\n' +
 			'Second game won by Bob and Birgit 21-19; One game all');
+		assert.equal(pronounce_de(s),
+			'Satz.\n' +
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'\n' +
+			'Der zweite Satz wurde gewonnen von Bob und Birgit mit 21-19; einen Satz beide');
 		assert.deepEqual(s.game.score, [19, 21]);
 
 		presses.push({
@@ -1978,12 +1988,12 @@ _describe('pronunciation', function() {
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.deepEqual(s.game.score, [1, 1]);
+		assert.equal(pronounce_en(s),
+			'Alice, fault for misconduct.\n' +
+			'Bob, fault for misconduct.');
 		assert.equal(pronounce_de(s),
 			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Bob, Fehler wegen unsportlichen Verhaltens.');
-		assert.equal(pronounce_en(s),
-			'Alice, faulted.\n' +
-			'Bob, faulted.');
 
 		presses.push({
 			type: 'pick_server',
@@ -1992,12 +2002,12 @@ _describe('pronunciation', function() {
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.deepEqual(s.game.score, [1, 1]);
+		assert.equal(pronounce_en(s),
+			'Alice, fault for misconduct.\n' +
+			'Bob, fault for misconduct.');
 		assert.equal(pronounce_de(s),
 			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Bob, Fehler wegen unsportlichen Verhaltens.');
-		assert.equal(pronounce_en(s),
-			'Alice, faulted.\n' +
-			'Bob, faulted.');
 
 		presses.push({
 			type: 'pick_receiver',
@@ -2006,17 +2016,24 @@ _describe('pronunciation', function() {
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.deepEqual(s.game.score, [1, 1]);
-		assert.equal(pronounce_de(s),
-			'Entscheidungssatz. 0 beide.\n' +
-			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
-			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
-			'Aufschlagwechsel. 1 beide. Bitte spielen.'
-		);
 		assert.equal(pronounce_en(s),
+			'Alice, fault for misconduct.\n' +
+			'Bob, fault for misconduct.\n' +
+			'\n' +
 			'Final game; love all.\n' +
 			'Alice, faulted.\n' +
 			'Bob, faulted.\n' +
-			'Service over. 1 all. Play.');
+			'Service over. 1 all; play');
+		assert.equal(pronounce_de(s),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'\n' +
+			'Entscheidungssatz. 0 beide.\n' +
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 1 beide.\n' +
+			'Bitte spielen.'
+		);
 
 		presses.push({
 			type: 'love-all',
@@ -2043,7 +2060,7 @@ _describe('pronunciation', function() {
 		assert.deepEqual(s.game.score, [21, 12]);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Andrew und Alice 21-19 19-21 21-12'
+			'Das Spiel wurde gewonnen von Andrew und Alice mit 21-19 19-21 21-12'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -2057,15 +2074,17 @@ _describe('pronunciation', function() {
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.deepEqual(s.game.score, [21, 12]);
-		assert.equal(pronounce_de(s),
-			'Satz.\n' +
-			'Bob, Fehler wegen unsportlichen Verhaltens.\n\n' +
-			'Das Spiel wurde gewonnen von Andrew und Alice 21-19 19-21 21-12'
-		);
 		assert.equal(pronounce_en(s),
 			'Game.\n' +
-			'Bob, faulted.\n\n' +
+			'Bob, fault for misconduct.\n' +
+			'\n' +
 			'Match won by Andrew and Alice 21-19 19-21 21-12'
+		);
+		assert.equal(pronounce_de(s),
+			'Satz.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'\n' +
+			'Das Spiel wurde gewonnen von Andrew und Alice mit 21-19 19-21 21-12'
 		);
 
 		presses.push({
@@ -2075,17 +2094,17 @@ _describe('pronunciation', function() {
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.deepEqual(s.game.score, [21, 12]);
+		assert.equal(pronounce_en(s),
+			'Game.\n' +
+			'Bob, fault for misconduct.\n' +
+			'Alice, fault for misconduct.\n\n' +
+			'Match won by Andrew and Alice 21-19 19-21 21-12'
+		);
 		assert.equal(pronounce_de(s),
 			'Satz.\n' +
 			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Alice, Fehler wegen unsportlichen Verhaltens.\n\n' +
-			'Das Spiel wurde gewonnen von Andrew und Alice 21-19 19-21 21-12'
-		);
-		assert.equal(pronounce_en(s),
-			'Game.\n' +
-			'Bob, faulted.\n' +
-			'Alice, faulted.\n\n' +
-			'Match won by Andrew and Alice 21-19 19-21 21-12'
+			'Das Spiel wurde gewonnen von Andrew und Alice mit 21-19 19-21 21-12'
 		);
 	});
 
@@ -2119,14 +2138,16 @@ _describe('pronunciation', function() {
 		var s = state_after(presses, DOUBLES_SETUP);
 		assert.deepEqual(s.game.score, [21, 19]);
 		assert.deepEqual(s.match.pending_red_cards, [card_alice]);
-		assert.equal(pronounce_de(s),
-			'Satz.\n' +
-			'Andrew, Fehler wegen unsportlichen Verhaltens.\n\n' +
-			'Der erste Satz wurde gewonnen von Andrew und Alice 21-19');
 		assert.equal(pronounce_en(s),
 			'Game.\n' +
-			'Andrew, faulted.\n\n' +
+			'Andrew, fault for misconduct.\n' +
+			'\n' +
 			'First game won by Andrew and Alice 21-19');
+		assert.equal(pronounce_de(s),
+			'Satz.\n' +
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'\n' +
+			'Der erste Satz wurde gewonnen von Andrew und Alice mit 21-19');
 
 		presses.push({
 			type: 'postgame-confirm',
@@ -2146,14 +2167,18 @@ _describe('pronunciation', function() {
 		assert.equal(s.game.service_over, true);
 		assert.equal(s.game.team1_serving, false);
 		// See RTT 3.7.2
-		assert.equal(pronounce_de(s),
-			'Zweiter Satz. 0 beide.\n' +
-			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
-			'Aufschlagwechsel. 1-0. Bitte spielen.');
 		assert.equal(pronounce_en(s),
+			'Andrew, fault for misconduct.\n' +
+			'\n' +
 			'Second game; love all.\n' +
 			'Andrew, faulted.\n' +
-			'Service over. 1-Love. Play.');
+			'Service over. 1-love; play');
+		assert.equal(pronounce_de(s),
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'\n' +
+			'Zweiter Satz. 0 beide.\n' +
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 1-0.\nBitte spielen.');
 
 		presses.push({
 			type: 'love-all',
@@ -2164,7 +2189,7 @@ _describe('pronunciation', function() {
 		assert.equal(pronounce_de(s),
 			'Aufschlagwechsel. 1-0');
 		assert.equal(pronounce_en(s),
-			'Service over. 1-Love');
+			'Service over. 1-love');
 	});
 
 	_it('retiring', function() {
@@ -2192,7 +2217,7 @@ _describe('pronunciation', function() {
 		var s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Bob gibt auf.\n\n' +
-			'Das Spiel wurde gewonnen von Andrew und Alice 0-0');
+			'Das Spiel wurde gewonnen von Andrew und Alice mit 0-0');
 		assert.equal(pronounce_en(s),
 			'Bob retired.\n\n' +
 			'Match won by Andrew and Alice 0-0');
@@ -2207,7 +2232,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, DOUBLES_TEAM_SETUP);
 		assert.equal(pronounce_de(s),
 			'Alice gibt auf.\n\n' +
-			'Das Spiel wurde gewonnen von B team 2-3');
+			'Das Spiel wurde gewonnen von B team mit 2-3');
 		assert.equal(pronounce_en(s),
 			'Alice retired.\n\n' +
 			'Match won by B team 2-3');
@@ -2239,7 +2264,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Andrew gibt auf.\n\n' +
-			'Das Spiel wurde gewonnen von Bob und Birgit 19-21 2-2');
+			'Das Spiel wurde gewonnen von Bob und Birgit mit 19-21 2-2');
 		assert.equal(pronounce_en(s),
 			'Andrew retired.\n\n' +
 			'Match won by Bob and Birgit 19-21 2-2');
@@ -2256,7 +2281,7 @@ _describe('pronunciation', function() {
 		var s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Bob gibt auf.\n\n' +
-			'Das Spiel wurde gewonnen von Andrew und Alice 0-0');
+			'Das Spiel wurde gewonnen von Andrew und Alice mit 0-0');
 		assert.equal(pronounce_en(s),
 			'Bob retired.\n\n' +
 			'Match won by Andrew and Alice 0-0');
@@ -2274,7 +2299,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Andrew gibt auf.\n\n' +
-			'Das Spiel wurde gewonnen von Bob und Birgit 0-0');
+			'Das Spiel wurde gewonnen von Bob und Birgit mit 0-0');
 		assert.equal(pronounce_en(s),
 			'Andrew retired.\n\n' +
 			'Match won by Bob and Birgit 0-0');
@@ -2293,7 +2318,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Birgit gibt auf.\n\n' +
-			'Das Spiel wurde gewonnen von Andrew und Alice 0-0');
+			'Das Spiel wurde gewonnen von Andrew und Alice mit 0-0');
 		assert.equal(pronounce_en(s),
 			'Birgit retired.\n\n' +
 			'Match won by Andrew and Alice 0-0');
@@ -2312,7 +2337,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Alice gibt auf.\n\n' +
-			'Das Spiel wurde gewonnen von Bob und Birgit 0-0');
+			'Das Spiel wurde gewonnen von Bob und Birgit mit 0-0');
 		assert.equal(pronounce_en(s),
 			'Alice retired.\n\n' +
 			'Match won by Bob and Birgit 0-0');
@@ -2329,7 +2354,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Andrew gibt auf.\n\n' +
-			'Das Spiel wurde gewonnen von Bob und Birgit 0-0');
+			'Das Spiel wurde gewonnen von Bob und Birgit mit 0-0');
 		assert.equal(pronounce_en(s),
 			'Andrew retired.\n\n' +
 			'Match won by Bob and Birgit 0-0');
@@ -2344,7 +2369,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Andrew gibt auf.\n\n' +
-			'Das Spiel wurde gewonnen von Bob und Birgit 19-21');
+			'Das Spiel wurde gewonnen von Bob und Birgit mit 19-21');
 		assert.equal(pronounce_en(s),
 			'Andrew retired.\n\n' +
 			'Match won by Bob and Birgit 19-21');
@@ -2361,7 +2386,7 @@ _describe('pronunciation', function() {
 		var s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Bob, disqualifiziert wegen unsportlichen Verhaltens.\n\n' +
-			'Das Spiel wurde gewonnen von Andrew und Alice 0-0');
+			'Das Spiel wurde gewonnen von Andrew und Alice mit 0-0');
 		assert.equal(pronounce_en(s),
 			'Bob, disqualified for misconduct.\n\n' +
 			'Match won by Andrew and Alice 0-0');
@@ -2379,7 +2404,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Andrew, disqualifiziert wegen unsportlichen Verhaltens.\n\n' +
-			'Das Spiel wurde gewonnen von Bob und Birgit 0-0');
+			'Das Spiel wurde gewonnen von Bob und Birgit mit 0-0');
 		assert.equal(pronounce_en(s),
 			'Andrew, disqualified for misconduct.\n\n' +
 			'Match won by Bob and Birgit 0-0');
@@ -2398,7 +2423,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Birgit, disqualifiziert wegen unsportlichen Verhaltens.\n\n' +
-			'Das Spiel wurde gewonnen von Andrew und Alice 0-0');
+			'Das Spiel wurde gewonnen von Andrew und Alice mit 0-0');
 		assert.equal(pronounce_en(s),
 			'Birgit, disqualified for misconduct.\n\n' +
 			'Match won by Andrew and Alice 0-0');
@@ -2417,7 +2442,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Alice, disqualifiziert wegen unsportlichen Verhaltens.\n\n' +
-			'Das Spiel wurde gewonnen von Bob und Birgit 0-0');
+			'Das Spiel wurde gewonnen von Bob und Birgit mit 0-0');
 		assert.equal(pronounce_en(s),
 			'Alice, disqualified for misconduct.\n\n' +
 			'Match won by Bob and Birgit 0-0');
@@ -2434,7 +2459,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Andrew, disqualifiziert wegen unsportlichen Verhaltens.\n\n' +
-			'Das Spiel wurde gewonnen von Bob und Birgit 0-0');
+			'Das Spiel wurde gewonnen von Bob und Birgit mit 0-0');
 		assert.equal(pronounce_en(s),
 			'Andrew, disqualified for misconduct.\n\n' +
 			'Match won by Bob and Birgit 0-0');
@@ -2449,7 +2474,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Andrew, disqualifiziert wegen unsportlichen Verhaltens.\n\n' +
-			'Das Spiel wurde gewonnen von Bob und Birgit 19-21');
+			'Das Spiel wurde gewonnen von Bob und Birgit mit 19-21');
 		assert.equal(pronounce_en(s),
 			'Andrew, disqualified for misconduct.\n\n' +
 			'Match won by Bob and Birgit 19-21');
@@ -2494,14 +2519,18 @@ _describe('pronunciation', function() {
 		assert.strictEqual(s.game.interval, true);
 		assert.deepEqual(s.game.score, [12, 7]);
 		assert.deepEqual(s.game.interval_score, [11, 7]);
-		assert.equal(pronounce_de(s),
-			'11-7 Pause.\n\n' +
-			'Birgit, Fehler wegen unsportlichen Verhaltens.\n' +
-			'12-7. Bitte spielen.');
 		assert.equal(pronounce_en(s),
-			'11-7 Interval\n\n' +
+			'11-7 Interval\n' +
+			'Birgit, fault for misconduct.\n' +
+			'\n' +
 			'Birgit, faulted.\n' +
 			'12-7. Play.');
+		assert.equal(pronounce_de(s),
+			'11-7 Pause.\n' +
+			'Birgit, Fehler wegen unsportlichen Verhaltens.\n' +
+			'\n' +
+			'Birgit, Fehler wegen unsportlichen Verhaltens.\n' +
+			'12-7. Bitte spielen.');
 
 		presses = base_presses.slice();
 		press_score(presses, 9, 7);
@@ -2515,14 +2544,18 @@ _describe('pronunciation', function() {
 		assert.strictEqual(s.game.interval, true);
 		assert.deepEqual(s.game.score, [11, 8]);
 		assert.deepEqual(s.game.interval_score, [11, 7]);
-		assert.equal(pronounce_de(s),
-			'11-7 Pause.\n\n' +
-			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
-			'Aufschlagwechsel. 8-11. Bitte spielen.');
 		assert.equal(pronounce_en(s),
-			'11-7 Interval\n\n' +
+			'11-7 Interval\n' +
+			'Alice, fault for misconduct.\n' +
+			'\n' +
 			'Alice, faulted.\n' +
 			'Service over. 8-11. Play.');
+		assert.equal(pronounce_de(s),
+			'11-7 Pause.\n' +
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'\n' +
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 8-11. Bitte spielen.');
 
 		presses.push({
 			type: 'red-card',
@@ -2533,16 +2566,22 @@ _describe('pronunciation', function() {
 		assert.strictEqual(s.game.interval, true);
 		assert.deepEqual(s.game.score, [12, 8]);
 		assert.deepEqual(s.game.interval_score, [11, 7]);
-		assert.equal(pronounce_de(s),
-			'11-7 Pause.\n\n' +
-			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
-			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
-			'Aufschlagwechsel. 12-8. Bitte spielen.');
 		assert.equal(pronounce_en(s),
-			'11-7 Interval\n\n' +
+			'11-7 Interval\n' +
+			'Alice, fault for misconduct.\n' +
+			'Bob, fault for misconduct.\n' +
+			'\n' +
 			'Alice, faulted.\n' +
 			'Bob, faulted.\n' +
 			'Service over. 12-8. Play.');
+		assert.equal(pronounce_de(s),
+			'11-7 Pause.\n' +
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'\n' +
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 12-8. Bitte spielen.');
 	});
 
 	_it('Getting to the interval with a red card', function() {
@@ -2618,16 +2657,20 @@ _describe('pronunciation', function() {
 			referee,
 			second_red_card,
 		]);
-		assert.equal(pronounce_de(s),
-			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
-			'Aufschlagwechsel. 11-10 Pause.\n\n' +
-			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
-			'Aufschlagwechsel. 11 beide. Bitte spielen.');
 		assert.equal(pronounce_en(s),
 			'Andrew, fault for misconduct.\n' +
-			'Service over. 11-10 Interval\n\n' +
+			'Service over. 11-10 Interval\n' +
+			'Bob, fault for misconduct.\n' +
+			'\n' +
 			'Bob, faulted.\n' +
 			'Service over. 11 all. Play.');
+		assert.equal(pronounce_de(s),
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 11-10 Pause.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 11 beide. Bitte spielen.');
 
 		var red_card2b = {
 			type: 'red-card',
@@ -2644,16 +2687,20 @@ _describe('pronunciation', function() {
 			referee,
 			red_card2b,
 		]);
-		assert.equal(pronounce_de(s),
-			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
-			'Aufschlagwechsel. 11-10 Pause.\n\n' +
-			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
-			'12-10. Bitte spielen.');
 		assert.equal(pronounce_en(s),
 			'Andrew, fault for misconduct.\n' +
-			'Service over. 11-10 Interval\n\n' +
+			'Service over. 11-10 Interval\n' +
+			'Alice, fault for misconduct.\n' +
+			'\n' +
 			'Alice, faulted.\n' +
 			'12-10. Play.');
+		assert.equal(pronounce_de(s),
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 11-10 Pause.\n' +
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'\n' +
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'12-10. Bitte spielen.');
 
 		presses.push({
 			type: 'postinterval-confirm',
@@ -2661,14 +2708,16 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.strictEqual(s.game.interval, false);
 		assert.deepEqual(s.game.score, [10, 12]);
-		assert.strictEqual(pronounce_de(s),
-			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
-			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
-			'12-10. Bitte spielen.');
 		assert.strictEqual(pronounce_en(s),
-			'Andrew, fault for misconduct.\n' +
+			'Alice, fault for misconduct.\n' +
+			'\n' +
 			'Alice, faulted.\n' +
 			'12-10. Play.');
+		assert.strictEqual(pronounce_de(s),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'\n' +
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'12-10. Bitte spielen.');
 
 		presses = sav_presses.slice();
 		var yellow_card = {
@@ -2685,16 +2734,18 @@ _describe('pronunciation', function() {
 			referee,
 			yellow_card,
 		]);
-		assert.equal(pronounce_de(s),
-			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
-			'Aufschlagwechsel. 11-10 Pause.\n\n' +
-			'Bob, Verwarnung wegen unsportlichen Verhaltens.\n' +
-			'11-10. Bitte spielen.');
 		assert.equal(pronounce_en(s),
 			'Andrew, fault for misconduct.\n' +
-			'Service over. 11-10 Interval\n\n' +
+			'Service over. 11-10 Interval\n' +
 			'Bob, warning for misconduct.\n' +
+			'\n' +
 			'11-10. Play.');
+		assert.equal(pronounce_de(s),
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 11-10 Pause.\n' +
+			'Bob, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'\n' +
+			'11-10. Bitte spielen.');
 
 		presses.push({
 			type: 'postinterval-confirm',
@@ -2702,14 +2753,12 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.strictEqual(s.game.interval, false);
 		assert.deepEqual(s.game.score, [10, 11]);
-		assert.equal(pronounce_de(s),
-			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
-			'Bob, Verwarnung wegen unsportlichen Verhaltens.\n' +
-			'11-10. Bitte spielen.');
 		assert.equal(pronounce_en(s),
-			'Andrew, fault for misconduct.\n' +
 			'Bob, warning for misconduct.\n' +
 			'11-10. Play.');
+		assert.equal(pronounce_de(s),
+			'Bob, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'11-10. Bitte spielen.');
 	});
 
 	_it('ending game / match with a red card', function() {
@@ -2759,7 +2808,7 @@ _describe('pronunciation', function() {
 		assert.equal(pronounce_de(s),
 			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Satz.\n\n' +
-			'Der erste Satz wurde gewonnen von Alice 21-16');
+			'Der erste Satz wurde gewonnen von Alice mit 21-16');
 		assert.equal(pronounce_en(s),
 			'Bob, fault for misconduct.\n' +
 			'Game.\n\n' +
@@ -2779,7 +2828,7 @@ _describe('pronunciation', function() {
 		assert.equal(pronounce_de(s),
 			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Satz.\n\n' +
-			'Der erste Satz wurde gewonnen von Alice 21-16');
+			'Der erste Satz wurde gewonnen von Alice mit 21-16');
 		assert.equal(pronounce_en(s),
 			'Bob, fault for misconduct.\n' +
 			'Game.\n\n' +
@@ -2804,11 +2853,11 @@ _describe('pronunciation', function() {
 			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Satz.\n' +
 			'Alice, Fehler wegen unsportlichen Verhaltens.\n\n' +
-			'Der erste Satz wurde gewonnen von Alice 21-16');
+			'Der erste Satz wurde gewonnen von Alice mit 21-16');
 		assert.equal(pronounce_en(s),
 			'Bob, fault for misconduct.\n' +
 			'Game.\n' +
-			'Alice, faulted.\n\n' +
+			'Alice, fault for misconduct.\n\n' +
 			'First game won by Alice 21-16');
 		assert.strictEqual(s.timer.start, red_card1.timestamp);
 
@@ -2822,14 +2871,17 @@ _describe('pronunciation', function() {
 		]);
 		assert.deepEqual(s.game.score, [0, 1]);
 		assert.equal(pronounce_de(s),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'\n' +
 			'Zweiter Satz. 0 beide.\n' +
 			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
-			'Aufschlagwechsel. 1-0. Bitte spielen.');
+			'Aufschlagwechsel. 1-0.\nBitte spielen.');
 		assert.equal(pronounce_en(s),
+			'Alice, fault for misconduct.\n' +
+			'\n' +
 			'Second game; love all.\n' +
 			'Alice, faulted.\n' +
-			'Service over. 1-Love. Play.');
-		assert.ok(! s.timer);
+			'Service over. 1-love; play');
 
 		presses.push({
 			type: 'love-all',
@@ -2838,7 +2890,7 @@ _describe('pronunciation', function() {
 		assert.deepEqual(s.match.marks, []);
 		assert.deepEqual(s.game.score, [0, 1]);
 		assert.strictEqual(pronounce_de(s), 'Aufschlagwechsel. 1-0');
-		assert.strictEqual(pronounce_en(s), 'Service over. 1-Love');
+		assert.strictEqual(pronounce_en(s), 'Service over. 1-love');
 		assert.ok(! s.timer);
 
 		// Test at end of match
@@ -2855,7 +2907,7 @@ _describe('pronunciation', function() {
 		assert.equal(pronounce_de(s),
 			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Alice 21-23 30-29 21-16');
+			'Das Spiel wurde gewonnen von Alice mit 21-23 30-29 21-16');
 		assert.equal(pronounce_en(s),
 			'Bob, fault for misconduct.\n' +
 			'Game.\n\n' +
@@ -2878,7 +2930,7 @@ _describe('pronunciation', function() {
 			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Satz.\n' +
 			'Alice, Verwarnung wegen unsportlichen Verhaltens.\n\n' +
-			'Das Spiel wurde gewonnen von Alice 21-23 30-29 21-16');
+			'Das Spiel wurde gewonnen von Alice mit 21-23 30-29 21-16');
 		assert.equal(pronounce_en(s),
 			'Bob, fault for misconduct.\n' +
 			'Game.\n' +
@@ -2898,13 +2950,15 @@ _describe('pronunciation', function() {
 			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Satz.\n' +
 			'Alice, Verwarnung wegen unsportlichen Verhaltens.\n' +
-			'Alice, Fehler wegen unsportlichen Verhaltens.\n\n' +
-			'Das Spiel wurde gewonnen von Alice 21-23 30-29 21-16');
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'\n' +
+			'Das Spiel wurde gewonnen von Alice mit 21-23 30-29 21-16');
 		assert.equal(pronounce_en(s),
 			'Bob, fault for misconduct.\n' +
 			'Game.\n' +
 			'Alice, warning for misconduct.\n' +
-			'Alice, faulted.\n\n' +
+			'Alice, fault for misconduct.\n' +
+			'\n' +
 			'Match won by Alice 21-23 30-29 21-16');
 		assert.ok(! s.timer);
 
@@ -3025,7 +3079,7 @@ _describe('pronunciation', function() {
 			'and on my left,\n' +
 			'Chen Long, China.\n' +
 			'Marc Zwiebler to serve.\n\n' +
-			'Love all.\n' +
+			'love all.\n' +
 			'Play.'
 		);
 	});
@@ -3128,14 +3182,14 @@ _describe('pronunciation', function() {
 		assert.equal(pronounce_en(s),
 			'Bob, warning for misconduct.\n' +
 			'Birgit, fault for misconduct.\n' +
-			'2-Love'
+			'2-love'
 		);
 
 		press_score(presses, 19, 0);
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der erste Satz wurde gewonnen von Alice 21-0');
+			'Der erste Satz wurde gewonnen von Alice mit 21-0');
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'First game won by Alice 21-0');
@@ -3183,7 +3237,7 @@ _describe('pronunciation', function() {
 		var s = state_after(presses, SINGLES_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der erste Satz wurde gewonnen von Alice 11-1'
+			'Der erste Satz wurde gewonnen von Alice mit 11-1'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3192,7 +3246,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der erste Satz wurde gewonnen von Andrew und Alice 11-1'
+			'Der erste Satz wurde gewonnen von Andrew und Alice mit 11-1'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3201,7 +3255,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, SINGLES_TEAM_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der erste Satz wurde gewonnen von A team 11-1'
+			'Der erste Satz wurde gewonnen von A team mit 11-1'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3210,7 +3264,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_TEAM_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der erste Satz wurde gewonnen von A team 11-1'
+			'Der erste Satz wurde gewonnen von A team mit 11-1'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3235,7 +3289,7 @@ _describe('pronunciation', function() {
 			'Zweiter Satz. 0 beide.\nBitte spielen.'
 		);
 		assert.equal(pronounce_en(s),
-			'Second game; Love all; play'
+			'Second game; love all; play'
 		);
 		presses.push({
 			type: 'love-all',
@@ -3246,7 +3300,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, SINGLES_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der zweite Satz wurde gewonnen von Bob 11-2; einen Satz beide'
+			'Der zweite Satz wurde gewonnen von Bob mit 11-2; einen Satz beide'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3255,7 +3309,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, DOUBLES_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der zweite Satz wurde gewonnen von Bob und Birgit 11-2; einen Satz beide'
+			'Der zweite Satz wurde gewonnen von Bob und Birgit mit 11-2; einen Satz beide'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3264,7 +3318,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, SINGLES_TEAM_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der zweite Satz wurde gewonnen von B team 11-2; einen Satz beide'
+			'Der zweite Satz wurde gewonnen von B team mit 11-2; einen Satz beide'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3273,7 +3327,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, DOUBLES_TEAM_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der zweite Satz wurde gewonnen von B team 11-2; einen Satz beide'
+			'Der zweite Satz wurde gewonnen von B team mit 11-2; einen Satz beide'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3284,7 +3338,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, SINGLES_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der zweite Satz wurde gewonnen von Alice 11-3. Alice führt mit 2:0 Sätzen'
+			'Der zweite Satz wurde gewonnen von Alice mit 11-3. Alice führt mit 2:0 Sätzen'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3293,7 +3347,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der zweite Satz wurde gewonnen von Andrew und Alice 11-3. Andrew und Alice führen mit 2:0 Sätzen'
+			'Der zweite Satz wurde gewonnen von Andrew und Alice mit 11-3. Andrew und Alice führen mit 2:0 Sätzen'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3302,7 +3356,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, SINGLES_TEAM_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der zweite Satz wurde gewonnen von A team 11-3. A team führt mit 2:0 Sätzen'
+			'Der zweite Satz wurde gewonnen von A team mit 11-3. A team führt mit 2:0 Sätzen'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3311,7 +3365,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_TEAM_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der zweite Satz wurde gewonnen von A team 11-3. A team führt mit 2:0 Sätzen'
+			'Der zweite Satz wurde gewonnen von A team mit 11-3. A team führt mit 2:0 Sätzen'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3336,7 +3390,7 @@ _describe('pronunciation', function() {
 			'Dritter Satz. 0 beide.\nBitte spielen.'
 		);
 		assert.equal(pronounce_en(s),
-			'Third game; Love all; play'
+			'Third game; love all; play'
 		);
 		presses.push({
 			type: 'love-all',
@@ -3346,7 +3400,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, SINGLES_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der dritte Satz wurde gewonnen von Bob 11-4. Alice führt mit 2:1 Sätzen'
+			'Der dritte Satz wurde gewonnen von Bob mit 11-4. Alice führt mit 2:1 Sätzen'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3355,7 +3409,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der dritte Satz wurde gewonnen von Bob und Birgit 11-4. Andrew und Alice führen mit 2:1 Sätzen'
+			'Der dritte Satz wurde gewonnen von Bob und Birgit mit 11-4. Andrew und Alice führen mit 2:1 Sätzen'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3364,7 +3418,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, SINGLES_TEAM_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der dritte Satz wurde gewonnen von B team 11-4. A team führt mit 2:1 Sätzen'
+			'Der dritte Satz wurde gewonnen von B team mit 11-4. A team führt mit 2:1 Sätzen'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3373,7 +3427,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_TEAM_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der dritte Satz wurde gewonnen von B team 11-4. A team führt mit 2:1 Sätzen'
+			'Der dritte Satz wurde gewonnen von B team mit 11-4. A team führt mit 2:1 Sätzen'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3398,7 +3452,7 @@ _describe('pronunciation', function() {
 			'Vierter Satz. 0 beide.\nBitte spielen.'
 		);
 		assert.equal(pronounce_en(s),
-			'Fourth game; Love all; play'
+			'Fourth game; love all; play'
 		);
 		presses.push({
 			type: 'love-all',
@@ -3408,7 +3462,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, SINGLES_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der vierte Satz wurde gewonnen von Bob 11-5; zwei Sätze beide'
+			'Der vierte Satz wurde gewonnen von Bob mit 11-5; zwei Sätze beide'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3417,7 +3471,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der vierte Satz wurde gewonnen von Bob und Birgit 11-5; zwei Sätze beide'
+			'Der vierte Satz wurde gewonnen von Bob und Birgit mit 11-5; zwei Sätze beide'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3426,7 +3480,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, SINGLES_TEAM_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der vierte Satz wurde gewonnen von B team 11-5; zwei Sätze beide'
+			'Der vierte Satz wurde gewonnen von B team mit 11-5; zwei Sätze beide'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3435,7 +3489,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_TEAM_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der vierte Satz wurde gewonnen von B team 11-5; zwei Sätze beide'
+			'Der vierte Satz wurde gewonnen von B team mit 11-5; zwei Sätze beide'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3460,7 +3514,7 @@ _describe('pronunciation', function() {
 			'Entscheidungssatz. 0 beide.\nBitte spielen.'
 		);
 		assert.equal(pronounce_en(s),
-			'Final game; Love all; play'
+			'Final game; love all; play'
 		);
 		presses.push({
 			type: 'love-all',
@@ -3471,7 +3525,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, SINGLES_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Alice 11-1 11-3 4-11 5-11 11-6'
+			'Das Spiel wurde gewonnen von Alice mit 11-1 11-3 4-11 5-11 11-6'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3480,7 +3534,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Andrew und Alice 11-1 11-3 4-11 5-11 11-6'
+			'Das Spiel wurde gewonnen von Andrew und Alice mit 11-1 11-3 4-11 5-11 11-6'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3489,7 +3543,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, SINGLES_TEAM_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von A team 11-1 11-3 4-11 5-11 11-6'
+			'Das Spiel wurde gewonnen von A team mit 11-1 11-3 4-11 5-11 11-6'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3498,7 +3552,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_TEAM_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von A team 11-1 11-3 4-11 5-11 11-6'
+			'Das Spiel wurde gewonnen von A team mit 11-1 11-3 4-11 5-11 11-6'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3685,7 +3739,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.strictEqual(pronounce_de(s, 2000000),
 			'Satz.\n\n' +
-			'Der erste Satz wurde gewonnen von Andrew und Alice 21-11');
+			'Der erste Satz wurde gewonnen von Andrew und Alice mit 21-11');
 		assert.strictEqual(pronounce_en(s, 2000000),
 			'Game.\n\n' +
 			'First game won by Andrew and Alice 21-11');
@@ -3704,7 +3758,7 @@ _describe('pronunciation', function() {
 			'Zweiter Satz. 0 beide.\n' +
 			'Bitte spielen.');
 		assert.strictEqual(pronounce_en(s, 2050000),
-			'Second game; Love all; play');
+			'Second game; love all; play');
 		assert.strictEqual(pronounce_frch(s, 2050000),
 			'Deuxième set. 0 partout.\nJouez.');
 		assert.deepStrictEqual(s.timer, {
@@ -3720,14 +3774,14 @@ _describe('pronunciation', function() {
 			'Bitte spielen.');
 		assert.strictEqual(pronounce_en(s, 2100000),
 			'20 seconds. 20 seconds.\n\n' +
-			'Second game; Love all; play');
+			'Second game; love all; play');
 
 		s = state_after(presses, SINGLES_SETUP);
 		assert.strictEqual(pronounce_de(s, 2200000),
 			'Zweiter Satz. 0 beide.\n' +
 			'Bitte spielen.');
 		assert.strictEqual(pronounce_en(s, 2200000),
-			'Second game; Love all; play');
+			'Second game; love all; play');
 
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.strictEqual(pronounce_de(s, 2080000), null);
@@ -3755,7 +3809,7 @@ _describe('pronunciation', function() {
 			'Zweiter Satz. 0 beide.\n' +
 			'Bitte spielen.');
 		assert.strictEqual(pronounce_en(s, 2090000),
-			'Second game; Love all; play');
+			'Second game; love all; play');
 		assert.deepStrictEqual(s.timer, {
 			start: 2000000,
 			duration: 120000,
@@ -3769,14 +3823,14 @@ _describe('pronunciation', function() {
 			'Bitte spielen.');
 		assert.strictEqual(pronounce_en(s, 2100000),
 			'20 seconds. 20 seconds.\n\n' +
-			'Second game; Love all; play');
+			'Second game; love all; play');
 
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.strictEqual(pronounce_de(s, 2200000),
 			'Zweiter Satz. 0 beide.\n' +
 			'Bitte spielen.');
 		assert.strictEqual(pronounce_en(s, 2200000),
-			'Second game; Love all; play');
+			'Second game; love all; play');
 
 		presses.push({
 			type: 'love-all',
@@ -3847,6 +3901,747 @@ _describe('pronunciation', function() {
 		};
 		assert.strictEqual(bup.pronunciation.teamtext_internal(s, 0), 'Ohne Partner / ');
 		assert.strictEqual(bup.pronunciation.teamtext_internal(s, 1), '');
+	});
+
+	_it('general correct handling around intervals', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		}, {
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 0,
+		}, {
+			type: 'love-all',
+		}];
+		press_score(presses, 5, 10);
+		press_score(presses, 1, 0);
+		presses.push({
+			type: 'red-card',
+			team_id: 0,
+			player_id: 1,
+			timestamp: 1000000,
+		});
+
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(pronounce_de(s, 1000000),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 11-6 Pause.\n\n' +
+			'11-6. Bitte spielen.'
+		);
+		assert.equal(pronounce_en(s, 1000000),
+			'Alice, fault for misconduct.\n' +
+			'Service over. 11-6 Interval\n\n' +
+			'11-6. Play.'
+		);
+		assert.equal(pronounce_de(s, 1040000),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'20 Sekunden. 20 Sekunden.\n\n' +
+			'11-6. Bitte spielen.'
+		);
+		assert.equal(pronounce_en(s, 1040000),
+			'Alice, fault for misconduct.\n' +
+			'20 seconds. 20 seconds.\n\n' +
+			'11-6. Play.'
+		);
+		assert.equal(pronounce_de(s, 1070000),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'\n' +
+			'11-6. Bitte spielen.'
+		);
+		assert.equal(pronounce_en(s, 1070000),
+			'Alice, fault for misconduct.\n' +
+			'\n' +
+			'11-6. Play.'
+		);
+
+		presses.push({
+			type: 'referee',
+			timestamp: 1010000,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(pronounce_de(s, 1000000),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 11-6 Pause.\n\n' +
+			'11-6. Bitte spielen.'
+		);
+		assert.equal(pronounce_en(s, 1000000),
+			'Alice, fault for misconduct.\n' +
+			'Service over. 11-6 Interval\n\n' +
+			'11-6. Play.'
+		);
+
+		var presses_sav = presses.slice();
+		presses.push({
+			type: 'disqualified',
+			team_id: 0,
+			player_id: 0,
+			timestamp: 1030000,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(pronounce_de(s, 1040000),
+			'Andrew, disqualifiziert wegen unsportlichen Verhaltens.\n\n' +
+			'Das Spiel wurde gewonnen von Bob und Birgit mit 11-6'
+		);
+		assert.equal(pronounce_en(s, 1040000),
+			'Andrew, disqualified for misconduct.\n\n' +
+			'Match won by Bob and Birgit 11-6'
+		);
+		presses = presses_sav.slice();
+
+		presses.push({
+			type: 'yellow-card',
+			timestamp: 1020000,
+			team_id: 1,
+			player_id: 1,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(pronounce_de(s, 1020000),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 11-6 Pause.\n' +
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n\n' +
+			'11-6. Bitte spielen.'
+		);
+		assert.equal(pronounce_en(s, 1020000),
+			'Alice, fault for misconduct.\n' +
+			'Service over. 11-6 Interval\n' +
+			'Birgit, warning for misconduct.\n\n' +
+			'11-6. Play.'
+		);
+		assert.equal(pronounce_de(s, 1040000),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'20 Sekunden. 20 Sekunden.\n' +
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n\n' +
+			'11-6. Bitte spielen.'
+		);
+		assert.equal(pronounce_en(s, 1040000),
+			'Alice, fault for misconduct.\n' +
+			'20 seconds. 20 seconds.\n' +
+			'Birgit, warning for misconduct.\n\n' +
+			'11-6. Play.'
+		);
+		assert.equal(pronounce_de(s, 1070000),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n\n' +
+			'11-6. Bitte spielen.'
+		);
+		assert.equal(pronounce_en(s, 1070000),
+			'Alice, fault for misconduct.\n' +
+			'Birgit, warning for misconduct.\n\n' +
+			'11-6. Play.'
+		);
+
+		presses.push({
+			type: 'red-card',
+			timestamp: 1030000,
+			team_id: 0,
+			player_id: 0,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(pronounce_en(s, 1020000),
+			'Alice, fault for misconduct.\n' +
+			'Service over. 11-6 Interval\n' +
+			'Birgit, warning for misconduct.\n' +
+			'Andrew, fault for misconduct.\n\n' +
+			'Andrew, faulted.\n' +
+			'12-6. Play.'
+		);
+		assert.equal(pronounce_de(s, 1020000),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 11-6 Pause.\n' +
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n\n' +
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'12-6. Bitte spielen.'
+		);
+		assert.equal(pronounce_de(s, 1040000),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'20 Sekunden. 20 Sekunden.\n' +
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n\n' +
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'12-6. Bitte spielen.'
+		);
+		assert.equal(pronounce_en(s, 1040000),
+			'Alice, fault for misconduct.\n' +
+			'20 seconds. 20 seconds.\n' +
+			'Birgit, warning for misconduct.\n' +
+			'Andrew, fault for misconduct.\n\n' +
+			'Andrew, faulted.\n' +
+			'12-6. Play.'
+		);
+		assert.equal(pronounce_de(s, 1070000),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n\n' +
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'12-6. Bitte spielen.'
+		);
+		assert.equal(pronounce_en(s, 1070000),
+			'Alice, fault for misconduct.\n' +
+			'Birgit, warning for misconduct.\n' +
+			'Andrew, fault for misconduct.\n\n' +
+			'Andrew, faulted.\n' +
+			'12-6. Play.'
+		);
+
+		presses.push({
+			type: 'red-card',
+			timestamp: 1035000,
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(pronounce_en(s, 1020000),
+			'Alice, fault for misconduct.\n' +
+			'Service over. 11-6 Interval\n' +
+			'Birgit, warning for misconduct.\n' +
+			'Andrew, fault for misconduct.\n' +
+			'Bob, fault for misconduct.\n\n' +
+			'Andrew, faulted.\n' +
+			'Bob, faulted.\n' +
+			'Service over. 7-12. Play.'
+		);
+		assert.equal(pronounce_de(s, 1020000),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 11-6 Pause.\n' +
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n\n' +
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 7-12. Bitte spielen.'
+		);
+		assert.equal(pronounce_de(s, 1040000),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'20 Sekunden. 20 Sekunden.\n' +
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n\n' +
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 7-12. Bitte spielen.'
+		);
+		assert.equal(pronounce_en(s, 1040000),
+			'Alice, fault for misconduct.\n' +
+			'20 seconds. 20 seconds.\n' +
+			'Birgit, warning for misconduct.\n' +
+			'Andrew, fault for misconduct.\n' +
+			'Bob, fault for misconduct.\n\n' +
+			'Andrew, faulted.\n' +
+			'Bob, faulted.\n' +
+			'Service over. 7-12. Play.'
+		);
+		assert.equal(pronounce_de(s, 1070000),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n\n' +
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 7-12. Bitte spielen.'
+		);
+		assert.equal(pronounce_en(s, 1070000),
+			'Alice, fault for misconduct.\n' +
+			'Birgit, warning for misconduct.\n' +
+			'Andrew, fault for misconduct.\n' +
+			'Bob, fault for misconduct.\n\n' +
+			'Andrew, faulted.\n' +
+			'Bob, faulted.\n' +
+			'Service over. 7-12. Play.'
+		);
+
+		// Remove pre-interval marks after confirmation
+		presses.push({
+			type: 'postinterval-confirm',
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(pronounce_en(s, 1020000),
+			'Birgit, warning for misconduct.\n' +
+			'Andrew, fault for misconduct.\n' +
+			'Bob, fault for misconduct.\n\n' +
+			'Andrew, faulted.\n' +
+			'Bob, faulted.\n' +
+			'Service over. 7-12. Play.'
+		);
+		assert.equal(pronounce_de(s, 1020000),
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n\n' +
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 7-12. Bitte spielen.'
+		);
+		assert.equal(pronounce_de(s, 1040000),
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n\n' +
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 7-12. Bitte spielen.'
+		);
+		assert.equal(pronounce_en(s, 1040000),
+			'Birgit, warning for misconduct.\n' +
+			'Andrew, fault for misconduct.\n' +
+			'Bob, fault for misconduct.\n\n' +
+			'Andrew, faulted.\n' +
+			'Bob, faulted.\n' +
+			'Service over. 7-12. Play.'
+		);
+		assert.equal(pronounce_de(s, 1070000),
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n\n' +
+			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 7-12. Bitte spielen.'
+		);
+		assert.equal(pronounce_en(s, 1070000),
+			'Birgit, warning for misconduct.\n' +
+			'Andrew, fault for misconduct.\n' +
+			'Bob, fault for misconduct.\n\n' +
+			'Andrew, faulted.\n' +
+			'Bob, faulted.\n' +
+			'Service over. 7-12. Play.'
+		);
+	});
+
+	_it('red cards around game end', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		}, {
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 0,
+		}, {
+			type: 'love-all',
+		}];
+		press_score(presses, 5, 20);
+		press_score(presses, 1, 0);
+		presses.push({
+			type: 'red-card',
+			team_id: 0,
+			player_id: 1,
+			timestamp: 1000000,
+		});
+
+		var s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.timer, {
+			duration: 120000,
+			exigent: 25000,
+			start: 1000000,
+		});
+		assert.equal(pronounce_de(s, 1000000),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Satz.\n\n' +
+			'Der erste Satz wurde gewonnen von Bob und Birgit mit 21-6'
+		);
+		assert.equal(pronounce_en(s, 1000000),
+			'Alice, fault for misconduct.\n' +
+			'Game.\n\n' +
+			'First game won by Bob and Birgit 21-6'
+		);
+		assert.equal(pronounce_de(s, 1100000),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Satz.\n\n' +
+			'Der erste Satz wurde gewonnen von Bob und Birgit mit 21-6'
+		);
+		assert.equal(pronounce_en(s, 1100000),
+			'Alice, fault for misconduct.\n' +
+			'Game.\n\n' +
+			'First game won by Bob and Birgit 21-6'
+		);
+
+		presses.push({
+			type: 'referee',
+			timestamp: 1010000,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(pronounce_de(s, 1000000),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Satz.\n\n' +
+			'Der erste Satz wurde gewonnen von Bob und Birgit mit 21-6'
+		);
+		assert.equal(pronounce_en(s, 1000000),
+			'Alice, fault for misconduct.\n' +
+			'Game.\n\n' +
+			'First game won by Bob and Birgit 21-6'
+		);
+		assert.deepStrictEqual(s.timer, {
+			duration: 120000,
+			exigent: 25000,
+			start: 1000000,
+		});
+
+		var presses_sav = presses.slice();
+		presses.push({
+			type: 'disqualified',
+			team_id: 0,
+			player_id: 0,
+			timestamp: 1030000,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(pronounce_de(s, 1040000),
+			'Andrew, disqualifiziert wegen unsportlichen Verhaltens.\n\n' +
+			'Das Spiel wurde gewonnen von Bob und Birgit mit 21-6'
+		);
+		assert.equal(pronounce_en(s, 1040000),
+			'Andrew, disqualified for misconduct.\n\n' +
+			'Match won by Bob and Birgit 21-6'
+		);
+
+		presses.push({
+			type: 'red-card',
+			team_id: 1,
+			player_id: 1,
+			timestamp: 1030000,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(pronounce_de(s, 1040000),
+			'Andrew, disqualifiziert wegen unsportlichen Verhaltens.\n' +
+			'Birgit, Fehler wegen unsportlichen Verhaltens.\n\n' +
+			'Das Spiel wurde gewonnen von Bob und Birgit mit 21-6'
+		);
+		assert.equal(pronounce_en(s, 1040000),
+			'Andrew, disqualified for misconduct.\n' +
+			'Birgit, fault for misconduct.\n\n' +
+			'Match won by Bob and Birgit 21-6'
+		);
+
+
+		presses = presses_sav.slice();
+
+		presses.push({
+			type: 'yellow-card',
+			timestamp: 1020000,
+			team_id: 1,
+			player_id: 1,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.timer, {
+			duration: 120000,
+			exigent: 25000,
+			start: 1000000,
+		});
+		assert.equal(pronounce_de(s, 1020000),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Satz.\n' +
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n\n' +
+			'Der erste Satz wurde gewonnen von Bob und Birgit mit 21-6'
+		);
+		assert.equal(pronounce_en(s, 1020000),
+			'Alice, fault for misconduct.\n' +
+			'Game.\n' +
+			'Birgit, warning for misconduct.\n\n' +
+			'First game won by Bob and Birgit 21-6'
+		);
+		assert.equal(pronounce_de(s, 1100000),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Satz.\n' +
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n\n' +
+			'Der erste Satz wurde gewonnen von Bob und Birgit mit 21-6'
+		);
+		assert.equal(pronounce_en(s, 1100000),
+			'Alice, fault for misconduct.\n' +
+			'Game.\n' +
+			'Birgit, warning for misconduct.\n\n' +
+			'First game won by Bob and Birgit 21-6'
+		);
+		assert.equal(pronounce_de(s, 1130000),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Satz.\n' +
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n\n' +
+			'Der erste Satz wurde gewonnen von Bob und Birgit mit 21-6'
+		);
+		assert.equal(pronounce_en(s, 1130000),
+			'Alice, fault for misconduct.\n' +
+			'Game.\n' +
+			'Birgit, warning for misconduct.\n\n' +
+			'First game won by Bob and Birgit 21-6'
+		);
+
+		presses_sav = presses.slice();
+		presses.push({
+			type: 'red-card',
+			timestamp: 1020000,
+			team_id: 1,
+			player_id: 0,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.timer, {
+			duration: 120000,
+			exigent: 25000,
+			start: 1000000,
+		});
+		assert.equal(pronounce_de(s, 1020000),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Satz.\n' +
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n\n' +
+			'Der erste Satz wurde gewonnen von Bob und Birgit mit 21-6'
+		);
+		assert.equal(pronounce_en(s, 1020000),
+			'Alice, fault for misconduct.\n' +
+			'Game.\n' +
+			'Birgit, warning for misconduct.\n' +
+			'Bob, fault for misconduct.\n\n' +
+			'First game won by Bob and Birgit 21-6'
+		);
+		assert.equal(pronounce_de(s, 1100000),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Satz.\n' +
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n\n' +
+			'Der erste Satz wurde gewonnen von Bob und Birgit mit 21-6'
+		);
+		assert.equal(pronounce_en(s, 1100000),
+			'Alice, fault for misconduct.\n' +
+			'Game.\n' +
+			'Birgit, warning for misconduct.\n' +
+			'Bob, fault for misconduct.\n\n' +
+			'First game won by Bob and Birgit 21-6'
+		);
+		assert.equal(pronounce_de(s, 1130000),
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Satz.\n' +
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n\n' +
+			'Der erste Satz wurde gewonnen von Bob und Birgit mit 21-6'
+		);
+		assert.equal(pronounce_en(s, 1130000),
+			'Alice, fault for misconduct.\n' +
+			'Game.\n' +
+			'Birgit, warning for misconduct.\n' +
+			'Bob, fault for misconduct.\n\n' +
+			'First game won by Bob and Birgit 21-6'
+		);
+
+		presses.push({
+			type: 'postgame-confirm',
+			timestamp: 1020005,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.timer, {
+			duration: 120000,
+			exigent: 25000,
+			start: 1000000,
+		});
+
+		presses.push({
+			type: 'pick_server',
+			timestamp: 1020006,
+			team_id: 1,
+			player_id: 1,
+		});
+		var presses_save_inbetween = presses.slice();
+		presses.push({
+			type: 'pick_receiver',
+			timestamp: 1020007,
+			team_id: 1,
+			player_id: 1,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(pronounce_en(s, 1020000),
+			'Birgit, warning for misconduct.\n' +
+			'Bob, fault for misconduct.\n\n' +
+			'Second game; love all.\n' +
+			'Bob, faulted.\n' +
+			'Service over. 1-love; play'
+		);
+		assert.equal(pronounce_de(s, 1020000),
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n\n' +
+			'Zweiter Satz. 0 beide.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 1-0.\n' +
+			'Bitte spielen.'
+		);
+		assert.equal(pronounce_en(s, 1100000),
+			'20 seconds. 20 seconds.\n' +
+			'Birgit, warning for misconduct.\n' +
+			'Bob, fault for misconduct.\n\n' +
+			'Second game; love all.\n' +
+			'Bob, faulted.\n' +
+			'Service over. 1-love; play'
+		);
+		assert.equal(pronounce_de(s, 1100000),
+			'20 Sekunden. 20 Sekunden.\n' +
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n\n' +
+			'Zweiter Satz. 0 beide.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 1-0.\n' +
+			'Bitte spielen.'
+		);
+		assert.equal(pronounce_en(s, 1130000),
+			'Birgit, warning for misconduct.\n' +
+			'Bob, fault for misconduct.\n\n' +
+			'Second game; love all.\n' +
+			'Bob, faulted.\n' +
+			'Service over. 1-love; play'		);
+		assert.equal(pronounce_de(s, 1130000),
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n\n' +
+			'Zweiter Satz. 0 beide.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 1-0.\n' +
+			'Bitte spielen.'
+		);
+
+		// test red card during receiver selection
+		presses = presses_save_inbetween;
+		presses.push({
+			type: 'red-card',
+			team_id: 0,
+			player_id: 1,
+		});
+		presses.push({
+			type: 'pick_receiver',
+			timestamp: 1020007,
+			team_id: 1,
+			player_id: 1,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.deepStrictEqual(s.timer, {
+			duration: 120000,
+			exigent: 25000,
+			start: 1000000,
+		});
+		assert.equal(pronounce_en(s, 1020000),
+			'Birgit, warning for misconduct.\n' +
+			'Bob, fault for misconduct.\n' +
+			'Alice, fault for misconduct.\n\n' +
+			'Second game; love all.\n' +
+			'Bob, faulted.\n' +
+			'Alice, faulted.\n' +
+			'Service over. 1 all; play'
+		);
+		assert.equal(pronounce_de(s, 1020000),
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n\n' +
+			'Zweiter Satz. 0 beide.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 1 beide.\n' +
+			'Bitte spielen.'
+		);
+		assert.equal(pronounce_en(s, 1100000),
+			'20 seconds. 20 seconds.\n' +
+			'Birgit, warning for misconduct.\n' +
+			'Bob, fault for misconduct.\n' +
+			'Alice, fault for misconduct.\n\n' +
+			'Second game; love all.\n' +
+			'Bob, faulted.\n' +
+			'Alice, faulted.\n' +
+			'Service over. 1 all; play'
+		);
+		assert.equal(pronounce_de(s, 1100000),
+			'20 Sekunden. 20 Sekunden.\n' +
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n\n' +
+			'Zweiter Satz. 0 beide.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 1 beide.\n' +
+			'Bitte spielen.'
+		);
+		assert.equal(pronounce_en(s, 1130000),
+			'Birgit, warning for misconduct.\n' +
+			'Bob, fault for misconduct.\n' +
+			'Alice, fault for misconduct.\n\n' +
+			'Second game; love all.\n' +
+			'Bob, faulted.\n' +
+			'Alice, faulted.\n' +
+			'Service over. 1 all; play'
+		);
+		assert.equal(pronounce_de(s, 1130000),
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n\n' +
+			'Zweiter Satz. 0 beide.\n' +
+			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
+			'Aufschlagwechsel. 1 beide.\n' +
+			'Bitte spielen.'
+		);
+
+
+		// test postgame-confirm before more cards
+		presses = presses_sav;
+		presses.push({
+			type: 'postgame-confirm',
+			timestamp: 1020000,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(pronounce_de(s, 1020000),
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.'
+		);
+		assert.equal(pronounce_en(s, 1020000),
+			'Birgit, warning for misconduct.'
+		);
+		assert.equal(pronounce_de(s, 1100000),
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.'
+		);
+		assert.equal(pronounce_en(s, 1100000),
+			'Birgit, warning for misconduct.'
+		);
+		assert.equal(pronounce_de(s, 1130000),
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.'
+		);
+		assert.equal(pronounce_en(s, 1130000),
+			'Birgit, warning for misconduct.'
+		);
+
+		presses.push({
+			type: 'pick_server',
+			timestamp: 1020002,
+			team_id: 1,
+			player_id: 1,
+		});
+		presses.push({
+			type: 'pick_receiver',
+			timestamp: 1020003,
+			team_id: 1,
+			player_id: 1,
+		});
+		s = state_after(presses, DOUBLES_SETUP);
+		assert.equal(pronounce_de(s, 1020000),
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n\n' +
+			'Zweiter Satz. 0 beide.\nBitte spielen.'
+		);
+		assert.equal(pronounce_en(s, 1020000),
+			'Birgit, warning for misconduct.\n\n' +
+			'Second game; love all; play'
+		);
+		assert.equal(pronounce_de(s, 1100000),
+			'20 Sekunden. 20 Sekunden.\n' +
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n\n' +
+			'Zweiter Satz. 0 beide.\nBitte spielen.'
+		);
+		assert.equal(pronounce_en(s, 1100000),
+			'20 seconds. 20 seconds.\n' +
+			'Birgit, warning for misconduct.\n\n' +
+			'Second game; love all; play'
+		);
+		assert.equal(pronounce_de(s, 1130000),
+			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n\n' +
+			'Zweiter Satz. 0 beide.\nBitte spielen.'
+		);
+		assert.equal(pronounce_en(s, 1130000),
+			'Birgit, warning for misconduct.\n\n' +
+			'Second game; love all; play'
+		);
 	});
 });
 

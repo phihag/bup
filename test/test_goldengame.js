@@ -137,7 +137,7 @@ _describe('Golden game (1x21) counting', function() {
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Alice 21-9');
+			'Das Spiel wurde gewonnen von Alice mit 21-9');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\n\n' +
 			'Match won by Alice 21-9');

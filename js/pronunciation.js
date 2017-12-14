@@ -30,10 +30,11 @@ function teamtext_internal(s, team_id) {
 function loveall_announcement(s) {
 	var glen = s.match.finished_games.length;
 	var game_id = (s.match.max_games - 1 === glen) ? 'final' : glen;
-	return s._('loveall_play.' + game_id, {
-		mark_extra: '',
-		score: pronounce_score(s),
-	});
+	return (
+		s._('loveall_game|' + game_id) + 
+		pronounce_score(s) +
+		s._('loveall_play')
+	);
 }
 
 function wonby_name(s, winner_idx) {
@@ -112,10 +113,10 @@ function pronounce_score(s, score, team1_serving, service_over) {
 	var second_score = score[team1_serving ? 1 : 0];
 	if (s.lang == 'en') {
 		if (first_score === 0) {
-			first_score = 'Love';
+			first_score = 'love';
 		}
 		if (second_score === 0) {
-			second_score = 'Love';
+			second_score = 'love';
 		}
 	}
 	var point_str = (s.game.gamepoint ? (' ' + s._('game point')) : (s.game.matchpoint ? (' ' + s._('match point')) : ''));
@@ -128,7 +129,7 @@ function pronounce_score(s, score, team1_serving, service_over) {
 	return service_over_str + score_str;
 }
 
-function marks2str(s, marks, during_interval) {
+function marks2str(s, marks) {
 	return marks.reduce(function(res, mark) {
 		var d = {};
 		if ((mark.team_id !== undefined) && (mark.player_id !== undefined)) {
@@ -140,7 +141,7 @@ function marks2str(s, marks, during_interval) {
 			res += s._('card.yellow', d);
 			break;
 		case 'red-card':
-			res += s._('card.red' + (during_interval ? '.interval' : ''), d);
+			res += s._('card.red', d);
 			break;
 		case 'disqualified':
 			res += s._('card.black', d);
@@ -163,6 +164,16 @@ function ready_announcement(s) {
 	} else {
 		return s._('20secs:nocourt');
 	}
+}
+
+function faulted_str(s, marks) {
+	return marks.filter(function(m) {
+		return m.type === 'red-card';
+	}).map(function(c) {
+		return s._('card.red.interval', {
+			player_name: s.setup.teams[c.team_id].players[c.player_id].name,
+		});
+	}).join('');
 }
 
 function pronounce(s, now) {
@@ -240,18 +251,26 @@ function pronounce(s, now) {
 	} else if (s.match.announce_pregame) {
 		var glen = s.match.finished_games.length;
 		var game_id_str = (s.match.max_games - 1 === glen) ? 'final' : glen;
-		var rtp = timer_exigent ? (ready_announcement(s) + '\n\n') : '';
+		var rtp = timer_exigent ? (ready_announcement(s) + '\n') : '';
+		var red_cards_faulted_str = faulted_str(s, s.match.marks);
 
-		if (mark_str) {
-			return (rtp + s._('loveall_play.' + game_id_str + '.mark', {
-				mark_str: marks2str(s, s.match.marks, true),
-				score: pronounce_score(s),
-			}));
-		} else {
-			return (rtp + s._('loveall_play.' + game_id_str, {
-				score: pronounce_score(s),
-			}));
+		var res = (
+			rtp + marks2str(s, s.match.marks)
+		);
+		if (res) {
+			res += '\n';
 		}
+		return (
+			res +
+			s._('loveall_game|' + game_id_str) +
+			(red_cards_faulted_str ? (
+				pronounce_score(s, [0, 0], undefined, false) +
+				'.\n' +
+				red_cards_faulted_str
+			) : '') +
+			pronounce_score(s) +
+			s._('loveall_play')
+		);
 	}
 
 	if (s.game.finished) {
@@ -260,7 +279,7 @@ function pronounce(s, now) {
 		if (s.game.final_marks) {
 			pre_mark_str = marks2str(s, s.game.final_marks);
 			var post_marks = s.match.marks.slice(s.game.final_marks.length);
-			post_mark_str = marks2str(s, post_marks, true);
+			post_mark_str = marks2str(s, post_marks);
 		}
 
 		if (s.match.walkover) {
@@ -294,69 +313,75 @@ function pronounce(s, now) {
 	var interval_pre_mark_str;
 	var post_interval_marks;
 	var interval_post_mark_str;
+	var post_red_cards_str;
 
 	if (!s.game.finished && s.game.started) {
 		if ((s.game.score[0] === 0) && (s.game.score[1] === 0) && !mark_str) {
 			return null;  // Special case at 0-0, we just showed the long text. Time to focus on the game.
 		}
 
-		var interval_str = '';
 		if (s.game.interval) {
+			var interval_str = '';
 			if (timer_exigent) {
-				score_str = '';
-				interval_str += ready_announcement(s) + '\n';
-			} else if (timer_done) {
-				score_str = '';
-			} else {
-				interval_str += ' ' + s._('Interval');
+				interval_str = ready_announcement(s) + '\n';
+			} else if (!timer_done) {
+				if (score_str) {
+					score_str = pronounce_score(s, s.game.interval_score, s.game.interval_team1_serving, s.game.interval_service_over);
+				}
+
+				interval_str = score_str + ' ' + s._('Interval');
 				if (s.game.change_sides) {
 					interval_str += s._('change_ends');
 				}
 				interval_str += '\n';
 			}
-			if (mark_str) {
-				interval_pre_mark_str = marks2str(s, s.game.interval_marks);
-				post_interval_marks = s.match.marks.slice(s.game.interval_marks.length);
 
-				if (post_interval_marks.length > 0) {
-					interval_post_mark_str = marks2str(s, post_interval_marks, true);
-					if (interval_post_mark_str) {
-						// Only use extended form if it's more than just a referee call
-						var service_over_param = utils.deep_equal(s.game.interval_score, s.game.score) ? false : undefined;
-						if (score_str) {
-							score_str = pronounce_score(s, s.game.interval_score, s.game.interval_team1_serving, s.game.interval_service_over);
-						}
-						var res = (
-							interval_pre_mark_str +
-							score_str +
-							interval_str);
-						if (res) {
-							res += '\n';
-						}
-						return (res +
-							interval_post_mark_str +
-							pronounce_score(s, undefined, undefined, service_over_param) +
-							s._('card.play')
-						);
-					}
-				}
-			}
-			if (interval_str) {
-				interval_str += '\n';
-			}
-			interval_str += s._('postinterval.play', {
-				score: pronounce_score(s, undefined, undefined, false),
-			});
-		} else if (s.game.just_interval) {
 			if (mark_str) {
-				interval_pre_mark_str = marks2str(s, s.game.interval_marks);
 				post_interval_marks = s.match.marks.slice(s.game.interval_marks.length);
-				if (post_interval_marks.length > 0) {
-					interval_post_mark_str = marks2str(s, post_interval_marks, true);
-				} else {
-					interval_post_mark_str = '';
+				interval_pre_mark_str = marks2str(s, s.game.interval_marks);
+				interval_post_mark_str = marks2str(s, post_interval_marks);
+				post_red_cards_str = faulted_str(s, post_interval_marks);
+				if (post_red_cards_str) {
+					return (
+						interval_pre_mark_str +
+						interval_str +
+						interval_post_mark_str +
+						'\n' +
+						post_red_cards_str +
+						pronounce_score(s) +
+						s._('card.play')
+					);
 				}
-				return interval_pre_mark_str + interval_post_mark_str + s._('postinterval.play', {
+			} else {
+				interval_pre_mark_str = interval_post_mark_str = '';
+			}
+
+			var interval_res = (
+				interval_pre_mark_str +
+				interval_str +
+				interval_post_mark_str
+			);
+			return (
+				interval_res +
+				(interval_res ? '\n' : '') +
+				s._('postinterval.play', {
+					score: pronounce_score(s, undefined, undefined, false),
+				})
+			);
+		} else if (s.game.just_interval) {
+			post_interval_marks = s.match.marks.slice(s.game.interval_marks.length);
+			interval_post_mark_str = marks2str(s, post_interval_marks);
+			post_red_cards_str = faulted_str(s, post_interval_marks);
+			if (post_red_cards_str) {
+				return (interval_post_mark_str + '\n' +
+					post_red_cards_str +
+					pronounce_score(s) +
+					s._('card.play')
+				);
+			}
+
+			if (interval_post_mark_str) {
+				return interval_post_mark_str + s._('postinterval.play', {
 					score: pronounce_score(s, undefined, undefined, false),
 				});
 			} else {
@@ -364,15 +389,11 @@ function pronounce(s, now) {
 			}
 		}
 
-		return mark_str + score_str + interval_str;
+		return mark_str + score_str;
 	}
 
 	if (mark_str) {
-		if (s.game.started && !s.game.finished) {
-			return mark_str.trim();
-		} else {
-			return marks2str(s, s.match.marks, true).trim();
-		}
+		return mark_str.trim();
 	}
 
 	return null;
@@ -393,7 +414,6 @@ return {
 if (typeof module !== 'undefined') {
 	var calc = require('./calc');
 	var compat = require('./compat');
-	var utils = require('./utils');
 
 	module.exports = pronunciation;
 }

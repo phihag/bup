@@ -480,7 +480,9 @@ function recalc_after_score(s, team_id, press) {
 			exigent: 25000,
 		};
 	} else if (!s.game.interval && !s.match.suspended && !s.match.injuries) {
-		s.timer = false;
+		if (press.type !== 'red-card') {
+			s.timer = false;
+		}
 	}
 
 	if ((press.type != 'red-card') && (s.match.marks.length > 0)) {
@@ -676,7 +678,10 @@ function calc_press(s, press) {
 		s.match.injuries = false;
 		break;
 	case 'disqualified':
-		s.match.marks = [];  // Red cards do not matter now
+		// Clear previous other cards, don't matter now
+		s.match.marks = [];
+		s.game.final_marks = [];
+
 		s.match.marks.push(press);
 		s.game.won_by_score = false;
 		s.game.finished = true;
