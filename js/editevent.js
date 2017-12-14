@@ -143,7 +143,7 @@ function render_player_sel(s, tbody, all_players, key) {
 			'disabled': 'disabled',
 			'value': '',
 			'selected': 'selected',
-		}, s._('editevent:add ' + key + ' player'));
+		}, s._('editevent|add ' + key + ' player'));
 		for (var pid = 0;pid < all_players[team_id].length;pid++) {
 			var p = all_players[team_id][pid];
 			if (sel_player_names[team_id][p.name]) {

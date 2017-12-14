@@ -14,8 +14,8 @@ var SPECIAL_PRESSES = [
 	'walkover',
 ];
 function press_char(s, press) {
-	if (SPECIAL_PRESSES.indexOf(press.type) >= 0) {
-		return s._('mark:' + press.type);
+	if (utils.includes(SPECIAL_PRESSES, press.type)) {
+		return s._('mark|' + press.type);
 	}
 }
 
@@ -1134,10 +1134,10 @@ function desc(s, now) {
 		) : (
 			s._(
 				(((s.game.start_server_player_id === null) || (s.game.start_receiver_player_id === null)) ?
-				'mdesc:toss' :
+				/*i18n-term:*/'mdesc:toss' :
 				((s.match.finished_games.length > 0) ?
 				'mdesc:interval' :
-				'mdesc:warmup'
+				/*i18n-term:*/'mdesc:warmup'
 		)))));
 	}
 	return res;

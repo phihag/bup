@@ -373,7 +373,7 @@ function on_add_change(e) {
 		return;
 	}
 	if ((val === '__add_manual')) {
-		var player_name = prompt(state._('editevent:enter player name'));
+		var player_name = prompt(state._('setupsheet:enter player name'));
 		if (!player_name) {
 			select.value = '';
 			return;

@@ -72,7 +72,7 @@ function postgame_announcement(s) {
 			winner_name: winner_name,
 			winner_score: winner_score,
 			loser_score: loser_score,
-		}) + s._('gamescore.' + (is_individual_doubles ? 'doubles.' : '') + gscore[games_leader_idx] + '-' + gscore[1 - games_leader_idx], {
+		}) + s._('gamescore|' + (is_individual_doubles ? 'doubles|' : '') + gscore[games_leader_idx] + '-' + gscore[1 - games_leader_idx], {
 			games_leader_name: games_leader_name,
 		});
 	}

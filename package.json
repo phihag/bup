@@ -26,6 +26,7 @@
     "puppeteer": "*",
     "stylelint": "*",
     "stylelint-config-standard": "*",
+    "supervisor": "*",
     "svgo": "*",
     "uglify": "*",
     "xmldom": "*"

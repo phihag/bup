@@ -57,7 +57,7 @@ function toggle() {
 
 function update_fullscreen_button() {
 	uiu.text_qs('.fullscreen_button',
-		state._(active() ? 'settings:Leave Fullscreen' : 'settings:Go Fullscreen')
+		state._(active() ? /*i18n-term:*/'settings:Leave Fullscreen' : 'settings:Go Fullscreen')
 	);
 }
 

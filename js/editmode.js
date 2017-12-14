@@ -16,7 +16,7 @@ function enter() {
 	ui_visible(true);
 	state.ui.editmode_active = true;
 
-	var k = 'settings:Abort Manual Edit';
+	var k = /*i18n-term:*/'settings:Abort Manual Edit';
 	var toggle_button = uiu.qs('.go_editmode_button');
 	uiu.text(toggle_button, state._(k));
 	toggle_button.setAttribute('data-i18n', k);

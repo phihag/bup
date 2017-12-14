@@ -147,6 +147,9 @@ clean: cleandist ## Remove temporary files
 	rm -rf -- node_modules
 	rm -rf -- div/teamlists/
 
+mockserver:
+	node_modules/.bin/node-supervisor -w test/mock/ -- test/mock/mockserver.js 4201
+
 root-hub:
 	node refmode_hub/refmode_hub.js
 
@@ -162,4 +165,4 @@ install-hub: deps
 	systemctl enable buphub
 	systemctl start buphub
 
-.PHONY: default help deps deps-essential deps-mandatory deps-optional test clean download-libs upload dist cleandist coverage coverage-display cd lint jshint eslint appcache-manifest manifest upload-run stylelint doclint deps-essential sat-hub root-hub install-hub testall ta tu
+.PHONY: default help deps deps-essential deps-mandatory deps-optional test clean download-libs upload dist cleandist coverage coverage-display cd lint jshint eslint appcache-manifest manifest upload-run stylelint doclint deps-essential sat-hub root-hub install-hub testall ta tu mockserver

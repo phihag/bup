@@ -179,7 +179,7 @@ function status_str(s) {
 	if (last_status.status === 'error') {
 		return s._(last_status.message_i18n);
 	}
-	return s._('refmode:status:' + last_status.status, last_status);
+	return s._('refmode:status|' + last_status.status, last_status);
 }
 
 function send(msg) {

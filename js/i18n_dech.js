@@ -12,7 +12,6 @@ var i18n_dech = {
 'card.yellow': '{player_name}, Verwarnung wegen schlechten Benehmens.\n',
 'change_ends': ' Seitenwechsel.',
 'Event Sheet': 'Resultatblatt',
-'eventsheet:Event Sheet': 'Resultatblatt',
 'match suspended': 'Das Spiel ist suspendiert',
 'ready to play': 'Bereit zum Spielen.',
 'wonby.match': 'Spiel gewonnen von {winner_name} {score_str}',

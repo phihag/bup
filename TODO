@@ -1,5 +1,10 @@
+update debmlist
+	VRLs in buli
+	rerun
+
 improve login
 	mock btde
+		read test data from debmlist
 		main page
 		login / logout
 		serve bup
@@ -7,7 +12,6 @@ improve login
 	test
 	displaymode login
 	logout
-	login via refmode
 
 save inputted umpire names (for CourtSpot)
 	-> Ulf
@@ -28,7 +32,7 @@ resignation/card: auto-write text
 
 -> send newsletter
 
-test: collect all i18n
+btde login via refmode
 
 eventsheet: sign!
 	store signatures in CourtSpot

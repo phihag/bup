@@ -174,10 +174,10 @@ function set_list(s, enabled) {
 			abort_list = null;
 		}
 	}
-	var i18n = enabled ? 'refmode:client:no_select_referee' : 'refmode:client:select_referee';
+	var i18n = enabled ? /*i18n-term:*/'refmode:client:no_select_referee' : 'refmode:client:select_referee';
 	btn.setAttribute('data-i18n', i18n);
 	uiu.text(btn, s._(i18n));
-	uiu.$visible_qs('.refmode_client_referee_list', enabled);
+	uiu.visible_qs('.refmode_client_referee_list', enabled);
 }
 
 function on_event_update() {

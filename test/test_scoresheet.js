@@ -1,22 +1,22 @@
-var assert = require('assert');
-
-var tutils = require('./tutils');
-var _describe = tutils._describe;
-var _it = tutils._it;
-var DOUBLES_SETUP = tutils.DOUBLES_SETUP;
-var SINGLES_SETUP = tutils.SINGLES_SETUP;
-var DOUBLES_SETUP_EN = tutils.DOUBLES_SETUP_EN;
-var SINGLES_SETUP_EN = tutils.SINGLES_SETUP_EN;
-var press_score = tutils.press_score;
-var state_after = tutils.state_after;
-var bup = tutils.bup;
-
-(function() {
 'use strict';
 
-_describe('scoresheet generation', function() {
+const assert = require('assert');
+
+const tutils = require('./tutils');
+const _describe = tutils._describe;
+const _it = tutils._it;
+const DOUBLES_SETUP = tutils.DOUBLES_SETUP;
+const SINGLES_SETUP = tutils.SINGLES_SETUP;
+const DOUBLES_SETUP_EN = tutils.DOUBLES_SETUP_EN;
+const SINGLES_SETUP_EN = tutils.SINGLES_SETUP_EN;
+const press_score = tutils.press_score;
+const state_after = tutils.state_after;
+const bup = tutils.bup;
+
+
+_describe('scoresheet generation', () => {
 	function _scoresheet_cells(presses, setup) {
-		var s = state_after(presses, setup);
+		const s = state_after(presses, setup);
 		return bup.scoresheet.parse_match(s, 35);
 	}
 
@@ -26,7 +26,7 @@ _describe('scoresheet generation', function() {
 		}), 'Cannot find cell ' + JSON.stringify(cell) + ' in ' + JSON.stringify(cells, undefined, 2));
 	}
 
-	_it('0-0 in third game', function() {
+	_it('0-0 in third game', () => {
 		var presses = [{
 			type: 'pick_side', // Andrew&Alice pick left
 			team1_left: true,
@@ -118,7 +118,7 @@ _describe('scoresheet generation', function() {
 		});
 	});
 
-	_it('overrule', function() {
+	_it('overrule', () => {
 		var presses = [{
 			type: 'pick_side', // Andrew&Alice pick left
 			team1_left: true,
@@ -217,7 +217,7 @@ _describe('scoresheet generation', function() {
 		});
 	});
 
-	_it('injuries', function() {
+	_it('injuries', () => {
 		var presses = [];
 		presses.push({
 			type: 'pick_side', // Andrew&Alice pick left
@@ -347,7 +347,7 @@ _describe('scoresheet generation', function() {
 		});
 	});
 
-	_it('yellow card', function() {
+	_it('yellow card', () => {
 		var base_presses = [];
 		base_presses.push({
 			type: 'pick_side', // Andrew&Alice pick left
@@ -454,7 +454,7 @@ _describe('scoresheet generation', function() {
 		});
 	});
 
-	_it('referee', function() {
+	_it('referee', () => {
 		var presses = [];
 		presses.push({
 			type: 'pick_side', // Andrew&Alice pick left
@@ -487,7 +487,7 @@ _describe('scoresheet generation', function() {
 		});
 	});
 
-	_it('suspension', function() {
+	_it('suspension', () => {
 		var presses = [];
 		presses.push({
 			type: 'pick_side', // Andrew&Alice pick left
@@ -579,7 +579,7 @@ _describe('scoresheet generation', function() {
 
 	});
 
-	_it('red card', function() {
+	_it('red card', () => {
 		var presses = [];
 		presses.push({
 			type: 'pick_side', // Andrew&Alice pick left
@@ -674,7 +674,7 @@ _describe('scoresheet generation', function() {
 		});
 	});
 
-	_it('red card in singles', function() {
+	_it('red card in singles', () => {
 		var presses = [];
 		presses.push({
 			type: 'pick_side', // Alice picks left
@@ -797,7 +797,7 @@ _describe('scoresheet generation', function() {
 		});
 	});
 
-	_it('red card after match', function() {
+	_it('red card after match', () => {
 		var presses = [];
 		presses.push({
 			type: 'pick_side', // Andrew&Alice pick left
@@ -870,7 +870,7 @@ _describe('scoresheet generation', function() {
 		});
 	});
 
-	_it('retired', function() {
+	_it('retired', () => {
 		var base_presses = [];
 		base_presses.push({
 			type: 'pick_side', // Andrew&Alice pick left
@@ -939,7 +939,7 @@ _describe('scoresheet generation', function() {
 		});
 	});
 
-	_it('disqualified', function() {
+	_it('disqualified', () => {
 		var base_presses = [];
 		base_presses.push({
 			type: 'pick_side', // Andrew&Alice pick left
@@ -1020,7 +1020,7 @@ _describe('scoresheet generation', function() {
 		});
 	});	
 
-	_it('correction (service court error)', function() {
+	_it('correction (service court error)', () => {
 		var presses = [{
 			type: 'pick_side', // Andrew&Alice pick left
 			team1_left: true,
@@ -1332,7 +1332,7 @@ _describe('scoresheet generation', function() {
 		});
 	});
 
-	_it('server mark in second game in singles', function() {
+	_it('server mark in second game in singles', () => {
 		var presses = [{
 			type: 'pick_side', // Alice picks left
 			team1_left: true,
@@ -1426,7 +1426,7 @@ _describe('scoresheet generation', function() {
 
 	});
 
-	_it('aesthetic considerations for final circle', function() {
+	_it('aesthetic considerations for final circle', () => {
 		var start_presses = [{
 			type: 'pick_side', // Alice picks left
 			team1_left: true,
@@ -1464,7 +1464,7 @@ _describe('scoresheet generation', function() {
 		});
 	});
 
-	_it('editmode set-score', function() {
+	_it('editmode set-score', () => {
 		var presses = [];
 		presses.push({
 			type: 'editmode_set-score',
@@ -1551,7 +1551,7 @@ _describe('scoresheet generation', function() {
 		});
 	});
 
-	_it('editmode set-finished_games without by_side', function() {
+	_it('editmode set-finished_games without by_side', () => {
 		var presses = [];
 		presses.push({
 			type: 'editmode_set-finished_games',
@@ -1627,7 +1627,7 @@ _describe('scoresheet generation', function() {
 		assert.equal(cells.length, 0);
 	});
 
-	_it('editmode set-finished_games with by_side', function() {
+	_it('editmode set-finished_games with by_side', () => {
 		var presses = [];
 		presses.push({
 			type: 'editmode_set-finished_games',
@@ -1832,7 +1832,7 @@ _describe('scoresheet generation', function() {
 		});
 	});
 
-	_it('setting past games multiple times', function() {
+	_it('setting past games multiple times', () => {
 		var presses = [{
 			type: 'editmode_set-finished_games',
 			scores: [[4, 21], [21, 0]],
@@ -1858,7 +1858,7 @@ _describe('scoresheet generation', function() {
 		});
 	});
 
-	_it('a natural game should stay that way', function() {
+	_it('a natural game should stay that way', () => {
 		var presses = [];
 		presses.push({
 			type: 'pick_side', // Andrew&Alice pick left
@@ -1892,7 +1892,7 @@ _describe('scoresheet generation', function() {
 		}));
 	});
 
-	_it('correctly show resumed matches', function() {
+	_it('correctly show resumed matches', () => {
 		var presses = [{
 			type: 'editmode_set-score',
 			score: [2, 5],
@@ -1985,7 +1985,7 @@ _describe('scoresheet generation', function() {
 		});
 	});
 
-	_it('English symbols', function() {
+	_it('English symbols', () => {
 		var presses = [{
 			type: 'pick_side',
 			team1_left: true,
@@ -2077,7 +2077,7 @@ _describe('scoresheet generation', function() {
 		});
 	});
 
-	_it('red card at match start', function() {
+	_it('red card at match start', () => {
 		// According to RTTO 3.7.7, red cards before or after the match do not influence the score
 		var presses = [{
 			type: 'pick_side',
@@ -2195,7 +2195,7 @@ _describe('scoresheet generation', function() {
 		});
 	});
 
-	_it('match end after injury', function() {
+	_it('match end after injury', () => {
 		var presses = [{
 			type: 'pick_side',
 			team1_left: true,
@@ -2263,7 +2263,7 @@ _describe('scoresheet generation', function() {
 		});
 	});
 
-	_it('interplay of injuries and red cards', function() {
+	_it('interplay of injuries and red cards', () => {
 		var presses = [{
 			type: 'pick_side',
 			team1_left: true,
@@ -2392,7 +2392,7 @@ _describe('scoresheet generation', function() {
 		});
 	});
 
-	_it('walkover', function() {
+	_it('walkover', () => {
 		var presses = [{
 			type: 'walkover',
 			team_id: 0,
@@ -2450,23 +2450,23 @@ _describe('scoresheet generation', function() {
 		});
 	});
 
-	_it('characters (french)', function() {
+	_it('characters (french)', () => {
 		var s = tutils.state_after([], SINGLES_SETUP, {language: 'fr-CH'});
 		assert.strictEqual(s._('scoresheet:server'), 'S');
 		assert.strictEqual(s._('scoresheet:receiver'), 'R');
-		assert.strictEqual(s._('mark:overrule'), 'O');
-		assert.strictEqual(s._('mark:referee'), 'JA');
-		assert.strictEqual(s._('mark:suspension'), 'S');
-		assert.strictEqual(s._('mark:correction'), 'C');
-		assert.strictEqual(s._('mark:yellow-card'), 'A');
-		assert.strictEqual(s._('mark:red-card'), 'F');
-		assert.strictEqual(s._('mark:injury'), 'B');
-		assert.strictEqual(s._('mark:retired'), 'Abandon');
-		assert.strictEqual(s._('mark:disqualified'), 'Disqualifié');
-		assert.strictEqual(s._('mark:walkover'), 'Walkover');
+		assert.strictEqual(s._('mark|overrule'), 'O');
+		assert.strictEqual(s._('mark|referee'), 'JA');
+		assert.strictEqual(s._('mark|suspension'), 'S');
+		assert.strictEqual(s._('mark|correction'), 'C');
+		assert.strictEqual(s._('mark|yellow-card'), 'A');
+		assert.strictEqual(s._('mark|red-card'), 'F');
+		assert.strictEqual(s._('mark|injury'), 'B');
+		assert.strictEqual(s._('mark|retired'), 'Abandon');
+		assert.strictEqual(s._('mark|disqualified'), 'Disqualifié');
+		assert.strictEqual(s._('mark|walkover'), 'Walkover');
 	});
 
-	_it('sheet_name', function() {
+	_it('sheet_name', () => {
 		assert.strictEqual(bup.scoresheet.sheet_name({
 			counting: '3x21',
 		}), 'international');
@@ -2484,5 +2484,3 @@ _describe('scoresheet generation', function() {
 		}), 'bundesliga-2016');
 	});
 });
-
-})();
