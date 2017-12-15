@@ -38,7 +38,7 @@ label {display: block;margin: 0.5em 0;}
 ` + (message ? ('<p class="fehler">' + message + '</p>') : '') + `
 
 <label>Benutzername: <input name="benutzername" type="text" placeholder="Benutzername" autofocus="autofocus"></label>
-<label>Passwort: <input name="password" type="text" placeholder="Passwort"></label>
+<label>Passwort: <input name="password" type="password" placeholder="Passwort"></label>
 <button>anmelden</button>
 </form>
 </form>
@@ -64,6 +64,7 @@ constructor() {
 	this.handler = httpd_utils.multi_handler([
 		httpd_utils.redirect_handler('/', 'ticker/login/'),
 		(...a) => this.login_handler(...a),
+		(...a) => this.logout_handler(...a),
 		(...a) => this.start_handler(...a),
 
 		(req, res, pathname) => {
@@ -98,7 +99,7 @@ fetch_data (user, callback) {
 
 login_handler(req, res, pathname) {
 	const users = this.users;
-	if (pathname != '/ticker/login/') return 'unhandled';
+	if (! ((pathname === '/ticker/login/') || (pathname === '/ticker/login/index.php'))) return 'unhandled';
 
 	if (req.method === 'POST') {
 		httpd_utils.read_post(req, (err, post_data) => {
@@ -121,13 +122,31 @@ login_handler(req, res, pathname) {
 		const {user} = JSON.parse(cookies.btde_mock_session);
 		this.fetch_data(user, (err) => {
 			if (err) throw err;
-			httpd_utils.redirect(res, 'start.php');
+			httpd_utils.redirect(req, res, 'start.php');
 		});
 		return;
 	}
 
 	_render_login(res);
 }
+
+logout_handler(req, res, pathname) {
+	if (pathname != '/ticker/login/logout.php') return 'unhandled';
+
+	this.require_user(req, res, (err) => {
+		if (err) throw err;
+
+		httpd_utils.render_html(res, `<!DOCYTPE html>
+
+<p><b>Die Abmeldung war erfolgreich.</b></p>
+
+<p><a href="index.php">Zur Anmeldung</a></p>
+`, {
+			'Set-Cookie': 'btde_mock_session=',
+		});
+	});
+}
+
 
 start_handler(req, res, pathname) {
 	if (pathname !== '/ticker/login/start.php') return 'unhandled';

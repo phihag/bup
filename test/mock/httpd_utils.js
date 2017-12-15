@@ -75,12 +75,16 @@ function parse_cookies(req) {
 	return res;
 }
 
-function render_html(res, html) {
-	res.writeHead(200, {
+function render_html(res, html, extra_headers) {
+	const headers = {
 		'Cache-Control': 'no-cache, no-store, must-revalidate',
 		'Pragma': 'no-cache',
 		'Content-Type': 'text/html; charset=UTF-8',
-	});
+	};
+	if (extra_headers) {
+		Object.assign(headers, extra_headers);
+	}
+	res.writeHead(200, headers);
 	res.end(html);
 }
 
