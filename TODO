@@ -1,4 +1,7 @@
 improve login
+	mock logout
+	write an integration test for login so far
+
 	mock btde
 		main page
 		login / logout

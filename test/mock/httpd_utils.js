@@ -2,6 +2,7 @@
 
 const assert = require('assert');
 const url_module = require('url');
+const querystring = require('querystring');
 
 function prefixed(prefix, handler) {
 	assert(prefix.endsWith('/'));
@@ -30,7 +31,7 @@ function multi_handler(handlers) {
 	};
 }
 
-function redirect(req, res, location) {
+function redirect(req, res, location, extra_headers) {
 	if (!location.startsWith('/')) {
 		const full_pathname = url_module.parse(req.url).pathname;
 		const m = /^(.*\/)[^/]*/.exec(full_pathname);
@@ -40,10 +41,15 @@ function redirect(req, res, location) {
 		location = m[1] + location;
 	}
 
-	res.writeHead(302, {
+	const headers = {
 		Location: location,
 		'Content-Type': 'text/plain',
-	});
+	};
+	if (extra_headers) {
+		Object.assign(headers, extra_headers);
+	}
+
+	res.writeHead(302, headers);
 	res.end('Redirect to ' + location);
 }
 
@@ -78,12 +84,28 @@ function render_html(res, html) {
 	res.end(html);
 }
 
+function read_post(req, cb) {
+	let body = '';
+	req.on('data', function (data) {
+		body += data;
+	});
+	req.on('end',function(){
+		return cb(null, querystring.parse(body));
+	});
+}
+
+function encode_html(text) {
+	return text.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/&/g, '&amp;').replace(/'/g, '&#39;');
+}
+
 module.exports = {
 	err,
 	prefixed,
+	encode_html,
 	multi_handler,
 	parse_cookies,
 	redirect,
 	render_html,
 	redirect_handler,
+	read_post,
 };
