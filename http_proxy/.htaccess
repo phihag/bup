@@ -4,4 +4,4 @@ Options -MultiViews
 RewriteEngine On
 RewriteRule ^tde_import$ tde_import.php [L]
 RewriteRule ^tde_dayimport$ tde_dayimport.php [L]
-</IfModule mod_rewrite.c>
+</IfModule>
