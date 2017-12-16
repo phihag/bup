@@ -1,6 +1,10 @@
+urlexport failure: make sure we get better info
+
 improve login
 	write an integration test for login so far
 
+	make login generic
+	add a logout link
 	mock btde
 		main page
 		login / logout
@@ -8,7 +12,10 @@ improve login
 	de-jquerify
 	test
 	displaymode login
-	logout
+	login as ... (including log out)
+
+resignation/card: auto-write text
+	write a test for this
 
 save inputted umpire names (for CourtSpot)
 	-> Ulf
@@ -22,13 +29,12 @@ d teamscore only logos
 d teamscore with small won matches
 
 tx allow selecting resignation
-resignation/card: auto-write text
-	write a test for this
 
 
 
 -> send newsletter
 
+option to store passwords
 btde login via refmode
 
 eventsheet: sign!

@@ -250,4 +250,13 @@ _describe('integration tests', () => {
 
 		browser.close();
 	}).timeout(20000);
+
+	_it('btde login', async () => {
+		const [browser, page] = await start('btde/ticker/login/bup/bup.html#btde&court=referee');
+
+		assert(await is_visible(page, '#settings_wrapper'));
+		// TODO assert login visible
+
+		browser.close();
+	}).timeout(20000);
 });

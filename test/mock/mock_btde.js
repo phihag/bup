@@ -7,6 +7,8 @@ const fs = require('fs');
 const path = require('path');
 
 const httpd_utils = require('./httpd_utils');
+const miniserver = require('./miniserver');
+const static_handler = require('./static_handler');
 
 const bup = require('../../js/bup');
 
@@ -66,6 +68,7 @@ constructor() {
 		(...a) => this.login_handler(...a),
 		(...a) => this.logout_handler(...a),
 		(...a) => this.start_handler(...a),
+		static_handler.file_handler('/ticker/login/bup/', miniserver.ROOT_DIR),
 
 		(req, res, pathname) => {
 			console.log('BTDE mock: unhandled ', pathname);
@@ -166,7 +169,6 @@ start_handler(req, res, pathname) {
 <div class="logout">
 <a href="logout.php">Abmelden</a>
 </div>
-
 
 </body>
 </html>

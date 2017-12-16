@@ -6,6 +6,7 @@ const miniserver = require('./miniserver');
 
 const mock_btde = require('./mock_btde');
 const httpd_utils = require('./httpd_utils');
+const static_handler = require('./static_handler');
 
 
 function server(options) {
@@ -15,7 +16,7 @@ function server(options) {
 
 	options.handlers = [
 		httpd_utils.prefixed('/btde/', btde.handler),
-		miniserver.file_handler('/', miniserver.ROOT_DIR),
+		static_handler.file_handler('/', miniserver.ROOT_DIR),
 	];
 
 	return miniserver.server(options);

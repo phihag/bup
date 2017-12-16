@@ -7,7 +7,7 @@ const tutils = require('../tutils');
 const _describe = tutils._describe;
 const _it = tutils._it;
 
-const miniserver = require('./miniserver');
+const static_handler = require('./static_handler');
 
 const fs_modules = {
 	posix: {
@@ -24,7 +24,7 @@ function test_resolve_path(platform, cwd, urlpath, expect) {
 		const fs_module = fs_modules[platform];
 		const path_module = path[platform];
 
-		miniserver.resolve_path(cwd, urlpath, (err, result) => {
+		static_handler.resolve_path(cwd, urlpath, (err, result) => {
 			if (err) return reject(err);
 
 			assert.strictEqual(result, expect);
@@ -34,7 +34,7 @@ function test_resolve_path(platform, cwd, urlpath, expect) {
 }
 
 
-_describe('miniserver', () => {
+_describe('static_handler', () => {
 	_it('path calculation', async () => {
 		await test_resolve_path('posix', '/a/b/c', 'x', '/a/b/c/x');
 		await test_resolve_path('posix', '/a/b/c', '../x', '/a/b/c/x');
@@ -55,10 +55,10 @@ _describe('miniserver', () => {
 	});
 
 	_it('mimetype', () => {
-		assert.strictEqual(miniserver.mimetype('foo.txt'), 'text/plain');
-		assert.strictEqual(miniserver.mimetype('foo.gif'), 'image/gif');
-		assert.strictEqual(miniserver.mimetype('bup/bup.css'), 'text/css');
-		assert.strictEqual(miniserver.mimetype('dist/bup.appcache'), 'text/cache-manifest');
-		assert.strictEqual(miniserver.mimetype('Makefile'), undefined); // follow apache
+		assert.strictEqual(static_handler.mimetype('foo.txt'), 'text/plain');
+		assert.strictEqual(static_handler.mimetype('foo.gif'), 'image/gif');
+		assert.strictEqual(static_handler.mimetype('bup/bup.css'), 'text/css');
+		assert.strictEqual(static_handler.mimetype('dist/bup.appcache'), 'text/cache-manifest');
+		assert.strictEqual(static_handler.mimetype('Makefile'), undefined); // follow apache
 	});
 });

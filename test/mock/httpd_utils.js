@@ -103,13 +103,13 @@ function encode_html(text) {
 }
 
 module.exports = {
-	err,
-	prefixed,
 	encode_html,
+	err,
 	multi_handler,
 	parse_cookies,
-	redirect,
-	render_html,
-	redirect_handler,
+	prefixed,
 	read_post,
+	redirect,
+	redirect_handler,
+	render_html,
 };
