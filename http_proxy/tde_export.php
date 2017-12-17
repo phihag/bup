@@ -138,7 +138,9 @@ if (($action === 'prepare') || ($action === 'submit')) {
 	$url_base = $m[1];
 	$tde_id = $m[2];
 	$tde_tm = $m[3];
-	$team_names = \json_decode(_param('team_names'), true);
+	$team_names = \array_map(function($tn) {
+		return _unify_team_name($tn);
+	}, \json_decode(_param('team_names'), true));
 	$matches = \json_decode(_param('matches_json'), true);
 	$max_game_count = \intval(_param('max_game_count'));
 
