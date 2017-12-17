@@ -155,6 +155,7 @@
 	white-space: pre;
 	text-align: left;
 	font-weight: normal;
+	font-size: 4vmin;
 	color: #cfcfcf;
 }
 .display_list_teamname > div {
@@ -179,6 +180,7 @@
 .display_list_matchscore {
 	text-align: center;
 	font-weight: bold;
+	font-size: 6vmin;
 }
 .display_list_game_score {
 	text-align: center;
