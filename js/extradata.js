@@ -76,6 +76,7 @@ var LOGO_ALIASSE = {
 	'Blau-Weiss Wittorf-NMS': 'wittorfneumuenster',
 	'SC Union Lüdinghausen': 'unionluedinghausen',
 	'TSV Neuhausen-Nymphenburg': 'tsvneuhausen',
+	'STC BW Solingen': 'stcblauweisssolingen',
 };
 function team_logo(team_name) {
 	team_name = LOGO_ALIASSE[team2club(team_name)] || team_name;
