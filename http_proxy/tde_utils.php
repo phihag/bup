@@ -199,7 +199,7 @@ function download_team_vrl($httpc, $domain, $season_id, $league_key, $team_id, $
 	// Determine VRL IDs
 	$VRL_IDS = [
 		'1BL' => [[1, 2], [3, 4]],
-		'2BLN' => [[57, 58], [59, 50]], // These IDs are from the select values, not the IDs for humans
+		'2BLN' => [[57, 58], [59, 60]], // These IDs are from the select values, not the IDs for humans
 		'2BLS' => [[61, 62], [63, 64]],
 	];
 	if (!isset($VRL_IDS[$league_key_yearless])) {
