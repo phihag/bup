@@ -113,7 +113,7 @@ login_handler(req, res, pathname) {
 
 			// Successful login: set cookie
 			const cookieval = JSON.stringify({user: u.name});
-			httpd_utils.redirect(req, res, 'start.php', {
+			httpd_utils.redirect(res, 'start.php', {
 				'Set-Cookie': 'btde_mock_session=' + encodeURIComponent(cookieval),
 			});
 		});
@@ -125,7 +125,7 @@ login_handler(req, res, pathname) {
 		const {user} = JSON.parse(cookies.btde_mock_session);
 		this.fetch_data(user, (err) => {
 			if (err) throw err;
-			httpd_utils.redirect(req, res, 'start.php');
+			httpd_utils.redirect(res, 'start.php');
 		});
 		return;
 	}
@@ -176,30 +176,52 @@ start_handler(req, res, pathname) {
 	});
 }
 
+write_handler(req, res, pathname) {
+	// TODO get_user
+	if (!user) {
+		redirect(res, 'index.php', {
+			'Access-Control-Allow-Origin': '*',
+		});
+	}
+}
+
+}
+
 // callback gets only called if the user is logged in, with (err, user_info, user_data)
 require_user(req, res, callback) {
-	const cookies = httpd_utils.parse_cookies(req);
-	if (cookies.btde_mock_session) {
-		const req_user_name = JSON.parse(cookies.btde_mock_session).user;
-		const user_info = bup.utils.find(this.users, su => su.name === req_user_name);
-		if (!user_info) {
-			httpd_utils.redirect(req, res, '/btde/ticker/login/');
-			return;
+	this.get_user((err, user_info, user_data) => {
+		if (err) throw err;
+
+		if (! user_info) {
+			return httpd_utils.redirect(res, '/btde/ticker/login/');
 		}
 
-		this.fetch_data(user_info.name, (err, user_data) => {
-			if (err) throw err;
+		return callback(err, user_info, user_data);
+	});
+}
 
-			if (user_data) {
-				callback(null, user_info, user_data);
-			} else {
-				httpd_utils.redirect(req, res, '/btde/ticker/login/');
-			}
-		});
-		return;
+// callback gets called with (err, user_info, user_data)
+get_user(req, callback) {
+	const cookies = httpd_utils.parse_cookies(req);
+	if (!cookies.btde_mock_session) {
+		return callback();
 	}
 
-	httpd_utils.redirect(req, res, '/btde/ticker/login/');
+	const req_user_name = JSON.parse(cookies.btde_mock_session).user;
+	const user_info = bup.utils.find(this.users, su => su.name === req_user_name);
+	if (!user_info) {
+		return callback();
+	}
+
+	this.fetch_data(user_info.name, (err, user_data) => {
+		if (err) return callback(err);
+
+		if (user_data) {
+			callback(null, user_info, user_data);
+		} else {
+			callback();
+		}
+	});
 }
 
 }

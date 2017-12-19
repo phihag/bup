@@ -31,16 +31,7 @@ function multi_handler(handlers) {
 	};
 }
 
-function redirect(req, res, location, extra_headers) {
-	if (!location.startsWith('/')) {
-		const full_pathname = url_module.parse(req.url).pathname;
-		const m = /^(.*\/)[^/]*/.exec(full_pathname);
-		if (!m) {
-			return err(res, 400, 'URL without slash');
-		}
-		location = m[1] + location;
-	}
-
+function redirect(res, location, extra_headers) {
 	const headers = {
 		Location: location,
 		'Content-Type': 'text/plain',
@@ -56,7 +47,7 @@ function redirect(req, res, location, extra_headers) {
 function redirect_handler(from, to) {
 	return (req, res, pathname) => {
 		if (pathname !== from) return 'unhandled';
-		redirect(req, res, to);
+		redirect(res, to);
 	};
 }
 

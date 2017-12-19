@@ -578,12 +578,14 @@
  y="50.86216">Diszi</text>
 <text id="es_svg_team0"
  style="font-size:3.88055539px"
- x="51.399719"
- y="53.261055"></text>
+ x="60.765971"
+ y="53.261055"
+ text-anchor="middle"></text>
 <text id="es_svg_team1"
  style="font-size:3.88055539px"
- x="99.624435"
- y="53.261055"></text>
+ x="114.776244"
+ y="53.261055"
+ text-anchor="middle"></text>
 <text
  class="default_text"
  x="144.10973"

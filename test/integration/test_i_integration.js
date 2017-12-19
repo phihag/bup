@@ -257,6 +257,10 @@ _describe('integration tests', () => {
 		assert(await is_visible(page, '#settings_wrapper'));
 		// TODO assert login visible
 
+		// TODO click login
+
+		// TODO assert that we're seeing some game buttons
+
 		browser.close();
 	}).timeout(20000);
 });
