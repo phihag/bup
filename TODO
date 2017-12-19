@@ -1,5 +1,3 @@
-urlexport failure: make sure we get better info
-
 improve login
 	write an integration test for login so far
 
@@ -33,6 +31,8 @@ tx allow selecting resignation
 
 
 -> send newsletter
+
+autosend export upon change from unfinished to finished
 
 urlexport: add player from lower team
 

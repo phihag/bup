@@ -23,7 +23,7 @@ var TEAM_COLORS = {
 	'Horner': '#ff2222', // Hamburg Horner TV
 	'Lüdinghausen': '#ffffff',
 	'Neuhausen': '#a6cb8b',
-	'Refrath': '#8bd6ff',
+	'Refrath': '#dbf3ff',
 	'Trittau': '#ff557a',
 	'Wipperfeld': '#ff2149',
 	'Wittorf': '#0091ff',
