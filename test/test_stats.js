@@ -186,7 +186,7 @@ _describe('stats', function() {
 
 		var at_interval_presses = presses.slice();
 
-		// Without postconfirm-interval, we have no idea how long the time was, so ignore it for duration calculation
+		// Without postinterval-confirm, we have no idea how long the time was, so ignore it for duration calculation
 		presses.push({
 			type: 'score',
 			side: 'left',
@@ -1279,4 +1279,112 @@ _describe('stats graphs', function() {
 		assert.strictEqual(bup.stats.press_state_desc(s, press), '??');
 	});
 
+	_it('duration of games vs match', () => {
+		const presses = [{
+			type: 'pick_side',
+			team1_left: true,
+			timestamp: 10000,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+			timestamp: 20000,
+		}, {
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 0,
+			timestamp: 30000,
+		}, {
+			type: 'love-all',
+			timestamp: 100000,
+		}];
+		const love_all_press = presses[presses.length - 1];
+		for (let i = 1;i <= 11;i++) {
+			presses.push({
+				type: 'score',
+				side: 'left',
+				timestamp: 200000 + i * 1000,
+			});
+		}
+		presses.push({
+			type: 'postinterval-confirm',
+			timestamp: 300000,
+		});
+		for (let i = 12;i <= 21;i++) {
+			presses.push({
+				type: 'score',
+				side: 'left',
+				timestamp: 400000 + i * 1000,
+			});
+		}
+		const game0_last_press = presses[presses.length - 1];
+
+		presses.push({
+			type: 'postgame-confirm',
+			timestamp: 500000,
+		});
+		presses.push({
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+			timestamp: 501000,
+		});
+		presses.push({
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 0,
+			timestamp: 502000,
+		});
+		presses.push({
+			type: 'love-all',
+			timestamp: 503000,
+		});
+		const game1_start_press = presses[presses.length - 1];
+		for (let i = 1;i <= 11;i++) {
+			presses.push({
+				type: 'score',
+				side: 'right',
+				timestamp: 600000 + i * 1000,
+			});
+		}
+		presses.push({
+			type: 'postinterval-confirm',
+			timestamp: 700000,
+		});
+		for (let i = 12;i <= 21;i++) {
+			presses.push({
+				type: 'score',
+				side: 'right',
+				timestamp: 800000 + i * 1000,
+			});
+		}
+		const game1_last_press = presses[presses.length - 1];
+		assert.strictEqual(game1_last_press.timestamp, 821000);
+		presses.push({
+			type: 'postmatch-confirm',
+			timestamp: 900000,
+		});
+
+		const s = tutils.state_after(presses, tutils.DOUBLES_SETUP, WITH_COUNTER);
+		const st = bup.stats.calc_stats(s).cols;
+
+		assert.strictEqual(st[0].label, '1. Satz');
+		assert.strictEqual(love_all_press.timestamp, 100000);
+		assert.strictEqual(st[0].start_ts, 100000);
+		assert.strictEqual(game0_last_press.timestamp, 421000);
+		assert.strictEqual(st[0].last_ts, 421000);
+		assert.strictEqual(st[0].duration, '5:21');
+
+		assert.strictEqual(st[1].label, '2. Satz');
+		assert.strictEqual(game1_start_press.timestamp, 503000);
+		assert.strictEqual(st[1].start_ts, 503000);
+		assert.strictEqual(game1_last_press.timestamp, 821000);
+		assert.strictEqual(st[1].last_ts, 821000);
+		assert.strictEqual(st[1].duration, '5:18');
+
+		assert.strictEqual(st[2].label, 'Spiel');
+		assert.strictEqual(st[2].start_ts, love_all_press.timestamp);
+		assert.strictEqual(st[2].last_ts, 900000);
+		assert.strictEqual(st[2].duration, '13:20');
+	});
 });

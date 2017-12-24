@@ -55,7 +55,7 @@ Dann wird die Reihenfolge so optimiert, dass möglichst wenig paarweise Vertausc
 Es werden alle möglichen Kombinationen durchprobiert; damit ist das Ergebnis gemäß dieser Kriterien optimal.
 
 
-Warum wird der Gastverein in Ansagen nicht mehr zuerst genannt?
+Warum wird der Gastverein in Ansagen nicht zuerst genannt?
 
 Nach Auskunft am 10.10.2017 vom Referatsleiter Schiedsrichterwesen Momme Schröder ist diese Form nicht korrekt. Es soll immer der Verein auf der Rechten zuerst angesagt werden, wie es auch im Regelwerk steht.
 
@@ -68,3 +68,9 @@ Das ist die korrekte Ansage nach dem aktuellem deutschem Regelwerk. Das erste Ma
 In den Vokabeln im Regelwerk wird die Absage als "Das Spiel wurde gewonnen von (Name) (Punktzahl)" angegeben. Woher kommt das "mit" in der Ansage?
 
 In §3.3.8 Anweisungen für technische Offizielle enthält die Absage ein "mit". Diese Form ist außerdem leichter zu formulieren wenn der Mannschaftsname mit einer Nummer endet.
+
+
+Warum ist die Spieldauer in den Statistiken nicht gleich die Summe der Satzdauern?
+
+Die Spieldauer folgt den Konventionen des Schiedsrichterzettels: Vom ersten "0 beide, bitte spielen" bis zur Absage (letzter Tastendruck). Die Satzdauern folgen dem analog. Die Differenz zwischen der Spieldauer und der Summe der Satzdauern ist die Summe der Pausen zwischen den Sätzen.
+

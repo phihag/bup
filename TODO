@@ -1,3 +1,8 @@
+Button Verbergen: test & fix
+teamcourt/international: also color game
+2court: game in color as well, and discipline grey
+
+
 improve login
 	write an integration test for login so far
 

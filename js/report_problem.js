@@ -116,7 +116,7 @@ function silent_error(msg, extra_data) {
 	console.error(msg); // eslint-disable-line no-console
 	/*@DEV*/
 	if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
-		return;
+		throw new Error(msg);
 	}
 	/*/@DEV*/
 

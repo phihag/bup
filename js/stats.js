@@ -476,7 +476,9 @@ function calc_stats(s) {
 			mstats.serves[server_team_id][server_player_id]++;
 			break;
 		}
-		current_game.last_ts = p.timestamp;
+		if (utils.includes(['score', 'red-card', 'disqualified', 'retired'], p.type)) {
+			current_game.last_ts = p.timestamp;
+		}
 		mstats.last_ts = p.timestamp;
 
 		calc.calc_press(scopy, p);
