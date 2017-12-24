@@ -15,7 +15,7 @@ var TEAM_COLORS = {
 	'Beuel': '#ffed00',
 	'Bischmisheim': '#1e3a8e',
 	'BV Mülheim': '#ff423f',
-	'BW Solingen': '#cbff81', // STC BW Solingen
+	'Solingen': '#89deff', // STC BW Solingen
 	'Dortelweil': '#f9f152',
 	'EBT Berlin': '#0d9aff',
 	'Freystadt': '#ff161d',
