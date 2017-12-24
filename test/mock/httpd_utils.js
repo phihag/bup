@@ -1,7 +1,6 @@
 'use strict';
 
 const assert = require('assert');
-const url_module = require('url');
 const querystring = require('querystring');
 
 function prefixed(prefix, handler) {
@@ -17,6 +16,11 @@ function prefixed(prefix, handler) {
 function err(res, errcode, message) {
 	res.writeHead(errcode, {'Content-Type': 'text/plain'});
 	res.end('Error ' + errcode + (message ? ': ' + message : ''));
+}
+
+function send_err(res, err) {
+	console.error(err.stack);
+	err(res, 500, 'Internal Server Error');
 }
 
 function multi_handler(handlers) {
@@ -103,4 +107,5 @@ module.exports = {
 	redirect,
 	redirect_handler,
 	render_html,
+	send_err,
 };

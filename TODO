@@ -1,9 +1,5 @@
-Button Verbergen: test & fix
-teamcourt/international: also color game
-2court: game in color as well, and discipline grey
-
-
 improve login
+	fix redirect (see messages)
 	write an integration test for login so far
 
 	make login generic
@@ -16,6 +12,7 @@ improve login
 	test
 	displaymode login
 	login as ... (including log out)
+	Button Verbergen: test & fix
 
 resignation/card: auto-write text
 	write a test for this
@@ -33,6 +30,8 @@ d teamscore with small won matches
 
 tx allow selecting resignation
 
+teamcourt/international: also color game
+2court: game in color as well, and discipline grey
 
 
 -> send newsletter

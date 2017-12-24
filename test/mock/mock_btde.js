@@ -64,6 +64,7 @@ constructor() {
 	}];
 	this.data = {};
 	this.handler = httpd_utils.multi_handler([
+		(...a) => this.write_handler(...a),
 		httpd_utils.redirect_handler('/', 'ticker/login/'),
 		(...a) => this.login_handler(...a),
 		(...a) => this.logout_handler(...a),
@@ -76,7 +77,7 @@ constructor() {
 	]);
 }
 
-fetch_data (user, callback) {
+fetch_data(user, callback) {
 	if (!/^[a-zA-Z0-9]+$/.test(user)) {
 		throw new Error('Invalid user');
 	}
@@ -124,7 +125,7 @@ login_handler(req, res, pathname) {
 	if (cookies.btde_mock_session) {
 		const {user} = JSON.parse(cookies.btde_mock_session);
 		this.fetch_data(user, (err) => {
-			if (err) throw err;
+			if (err) return httpd_utils.send_err(res, err);
 			httpd_utils.redirect(res, 'start.php');
 		});
 		return;
@@ -137,7 +138,7 @@ logout_handler(req, res, pathname) {
 	if (pathname != '/ticker/login/logout.php') return 'unhandled';
 
 	this.require_user(req, res, (err) => {
-		if (err) throw err;
+		if (err) return httpd_utils.send_err(res, err);
 
 		httpd_utils.render_html(res, `<!DOCYTPE html>
 
@@ -155,7 +156,7 @@ start_handler(req, res, pathname) {
 	if (pathname !== '/ticker/login/start.php') return 'unhandled';
 
 	this.require_user(req, res, (err, user_info) => {
-		if (err) throw err;
+		if (err) return httpd_utils.send_err(res, err);
 
 		httpd_utils.render_html(res, `<!DOCTYPE html>
 <html lang="de">
@@ -177,18 +178,25 @@ start_handler(req, res, pathname) {
 }
 
 write_handler(req, res, pathname) {
-	// TODO get_user
-	if (!user) {
-		redirect(res, 'index.php', {
-			'Access-Control-Allow-Origin': '*',
-		});
-	}
+	if (pathname !== '/ticker/login/write.php') return 'unhandled';
+
+	this.get_user(req, (err, user_info, user_data) => {
+		if (err) return httpd_utils.send_err(res, err);
+
+		if (! user_info) {
+			return httpd_utils. redirect(res, 'index.php', {
+				'Access-Control-Allow-Origin': '*',
+			});
+		}
+
+		console.log('write handler with logged-in user: ', user_data);
+	});
 }
 
 // callback gets only called if the user is logged in, with (err, user_info, user_data)
 require_user(req, res, callback) {
 	this.get_user((err, user_info, user_data) => {
-		if (err) throw err;
+		if (err) return httpd_utils.send_err(res, err);
 
 		if (! user_info) {
 			return httpd_utils.redirect(res, '/btde/ticker/login/');

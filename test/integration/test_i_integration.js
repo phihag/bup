@@ -256,15 +256,17 @@ _describe('integration tests', () => {
 		const [dbrowser, dpage] = await start('btde/ticker/login/bup/bup.html#btde&display&dm_style=teamcourt&court=referee');
 
 		assert(await is_visible(upage, '#settings_wrapper'));
+
 		// TODO assert login visible
 		// TODO click login
 		// TODO assert that we're seeing some game buttons
 		// TODO login and relogin in umpiremode
 
-
-		// TODO login and relogin in displaymode
-
-		// TODO verbergen button
+		// login and relogin in displaymode
+		assert(await is_visible(dpage, '#settings_wrapper'));
+		// TODO hide button
+		// TODO assert: should be in fullscreen now
+		// TODO clicking now should bring settings back
 
 		ubrowser.close();
 		dbrowser.close();
