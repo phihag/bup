@@ -185,8 +185,6 @@ write_handler(req, res, pathname) {
 	}
 }
 
-}
-
 // callback gets only called if the user is logged in, with (err, user_info, user_data)
 require_user(req, res, callback) {
 	this.get_user((err, user_info, user_data) => {

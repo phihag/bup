@@ -251,16 +251,22 @@ _describe('integration tests', () => {
 		browser.close();
 	}).timeout(20000);
 
-	_it('btde login', async () => {
-		const [browser, page] = await start('btde/ticker/login/bup/bup.html#btde&court=referee');
+	_it('grand btde integration test', async () => {
+		const [ubrowser, upage] = await start('btde/ticker/login/bup/bup.html#btde&court=referee');
+		const [dbrowser, dpage] = await start('btde/ticker/login/bup/bup.html#btde&display&dm_style=teamcourt&court=referee');
 
-		assert(await is_visible(page, '#settings_wrapper'));
+		assert(await is_visible(upage, '#settings_wrapper'));
 		// TODO assert login visible
-
 		// TODO click login
-
 		// TODO assert that we're seeing some game buttons
+		// TODO login and relogin in umpiremode
 
-		browser.close();
+
+		// TODO login and relogin in displaymode
+
+		// TODO verbergen button
+
+		ubrowser.close();
+		dbrowser.close();
 	}).timeout(20000);
 });
