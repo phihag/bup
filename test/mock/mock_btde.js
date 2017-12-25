@@ -69,7 +69,7 @@ constructor() {
 		(...a) => this.login_handler(...a),
 		(...a) => this.logout_handler(...a),
 		(...a) => this.start_handler(...a),
-		static_handler.file_handler('/ticker/login/bup/', miniserver.ROOT_DIR),
+		static_handler.file_handler('/ticker/bup/', miniserver.ROOT_DIR),
 
 		(req, res, pathname) => {
 			console.log('BTDE mock: unhandled ', pathname);

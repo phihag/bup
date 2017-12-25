@@ -252,8 +252,8 @@ _describe('integration tests', () => {
 	}).timeout(20000);
 
 	_it('grand btde integration test', async () => {
-		const [ubrowser, upage] = await start('btde/ticker/login/bup/bup.html#btde&court=referee');
-		const [dbrowser, dpage] = await start('btde/ticker/login/bup/bup.html#btde&display&dm_style=teamcourt&court=referee');
+		const [ubrowser, upage] = await start('btde/ticker/bup/bup.html#btde&court=referee');
+		const [dbrowser, dpage] = await start('btde/ticker/bup/bup.html#btde&display&dm_style=teamcourt&court=referee');
 
 		assert(await is_visible(upage, '#settings_wrapper'));
 
