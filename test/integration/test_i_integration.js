@@ -323,7 +323,7 @@ _describe('integration tests', () => {
 		// TODO set up player names
 
 		// TODO relogin in umpiremode
-//		await uclose();
+		await uclose();
 
 		// login and relogin in displaymode
 /*		const [dbrowser, dpage] = await start('btde/ticker/bup/bup.html#btde&display&dm_style=teamcourt&court=referee');
