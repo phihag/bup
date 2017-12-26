@@ -1,20 +1,12 @@
 improve login
-	login fails under integration test!
-		test that error message correctly appears!
-
-	make login generic
 	add a login as ... link
-	mock btde
-		main page
-		login / logout
-		serve bup
-	de-jquerify
-	test
 	displaymode login
 	offer historic logins
-	Button Verbergen: test & fix
+		for new login
+		for relogin
+	dmode hide button: test & fix
 
-check reload button
+check reload button graphic
 
 resignation/card: auto-write text
 	write a test for this

@@ -92,20 +92,18 @@ function send_file(res, root_dir, pathname, index_filename) {
 			console.error('failed to create stream: ' + err.message);
 			return httpd_utils.err(res, 500);
 		});
-		stream.on('pipe', () => {
-			const headers = {
-				'Cache-Control': 'no-store, must-revalidate',
-				'Expires': '0',
-			};
-			const mt = mimetype(fn);
-			if (mt) {
-				headers['Content-Type'] = mt;
-			}
+		const headers = {
+			'Cache-Control': 'no-store, must-revalidate',
+			'Expires': '0',
+		};
+		const mt = mimetype(fn);
+		if (mt) {
+			headers['Content-Type'] = mt;
+		}
 
-			res.writeHead(200, headers);
-		});
+		res.writeHead(200, headers);
 
-		const pipe = stream.pipe(res);
+		const pipe = stream.pipe(res, {end: true});
 		pipe.on('error', (err) => {
 			console.error('pipe error: ' + err.message);
 			return httpd_utils.err(res, 500);

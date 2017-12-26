@@ -13,6 +13,14 @@ async function is_visible(page, qs) {
 	return await page.evaluate((qs) => client_qs_visible(qs), qs);
 }
 
+async function eventually_visible(page, qs) {
+	return await page.evaluate((qs) => client_eventual_visibility(qs, true), qs);
+}
+
+async function eventually_invisible(page, qs) {
+	return await page.evaluate((qs) => client_eventual_visibility(qs, false), qs);
+}
+
 _describe('integration tests', () => {
 	let base_url;
 	let srv;
@@ -272,7 +280,7 @@ _describe('integration tests', () => {
 			document.querySelector('.setup_network_container .network_error').innerText),
 			'Login erforderlich'
 		);
-		assert(await is_visible(upage, '.settings_login'));
+		await eventually_visible(upage, '.settings_login');
 		assert.strictEqual(await upage.evaluate(() =>
 			document.querySelector('.settings_login h2').innerText),
 			'Login badmintonticker'
@@ -298,7 +306,9 @@ _describe('integration tests', () => {
 		await (await upage.evaluateHandle(() => {
 			return client_find_text('.settings_container .settings_login button.login_button', 'Einloggen');
 		})).click();
-		// TODO assert(! await is_visible(upage, '.settings_login'));
+
+		await eventually_invisible(upage, '.settings_container .settings_login');
+		// await eventually_invisible(upage, '.setup_network_container .network_error');
 
 		// TODO assert that we're seeing some game buttons
 		// TODO assert no more form

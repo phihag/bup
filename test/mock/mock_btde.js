@@ -14,6 +14,10 @@ const bup = require('../../js/bup');
 
 const data_dir = path.join(__dirname, 'mockdata');
 
+const BTDE_LEAGUE_NAME = {
+	'1BL-2017': '(001) 1. Bundesliga',
+};
+
 
 function _render_login(res, message) {
 	httpd_utils.render_html(res, `<!DOCTYPE html>
@@ -40,7 +44,7 @@ label {display: block;margin: 0.5em 0;}
 ` + (message ? ('<p class="fehler">' + message + '</p>') : '') + `
 
 <label>Benutzername: <input name="benutzername" type="text" placeholder="Benutzername" autofocus="autofocus"></label>
-<label>Passwort: <input name="password" type="password" placeholder="Passwort"></label>
+<label>Passwort: <input name="passwort" type="password" placeholder="Passwort"></label>
 <button>anmelden</button>
 </form>
 </form>
@@ -108,7 +112,7 @@ login_handler(req, res, pathname) {
 	if (req.method === 'POST') {
 		httpd_utils.read_post(req, (err, post_data) => {
 			const u = bup.utils.find(users, su => su.name === post_data.benutzername);
-			if (!u || (u.password !== post_data.password)) {
+			if (!u || (u.password !== post_data.passwort)) {
 				return _render_login(res, 'Der Benutzername und das Passwort stimmen nicht überein.');
 			}
 
@@ -191,7 +195,43 @@ write_handler(req, res, pathname) {
 			});
 		}
 
-		console.log('write handler with logged-in user: ', user_data);
+		const ev = user_data.event;
+		const btde_league_name = BTDE_LEAGUE_NAME[ev.league_key];
+		if (!btde_league_name) {
+			return httpd_utils.send_err(res,
+				new Error(
+					'Invalid league key of user ' + user_info.name + ': ' + JSON.stringify(ev.league_key)));
+		}
+
+		const counting = ev.counting || bup.eventutils.default_counting(ev.league_key);
+		const btde_gews = bup.calc.max_game_count(counting);
+		if (!btde_gews) {
+			return httpd_utils.send_err(res,
+				new Error(
+					'Invalid counting ' + counting + ', derived from ' + ev.league_key));
+		}
+
+		const btdev = [{
+			liga: btde_league_name,
+			spieltag: ('' + ev.matchday),
+			datum: ev.date + ' ' + ev.starttime,
+			heim: ev.team_names[0],
+			gast: ev.team_names[1],
+			ort: ev.location,
+			gews: btde_gews,
+			url: ev.report_urls[0],
+		}];
+
+		res.writeHead(200, {
+			'Access-Control-Allow-Origin': '*',
+			'Cache-Control': 'no-store, no-cache, must-revalidate, post-check=0, pre-check=0',
+			'Content-Type': 'text/html; charset=utf-8', // This is what is sent by the actual btde implementation!
+			'Expires': 'Thu, 19 Nov 1981 08:52:00 GMT',
+			'Pragma': 'no-cache',
+		});
+		res.end(JSON.stringify(btdev));
+
+		// [{"id":"1","dis":"HD1","heim":"Beck, Raphael~V\u00f6lker, Jan-Colin","gast":"Krasimir, Yankov~Heumann, Manuel","satz1":"11","satz2":"11","satz3":"12","satz4":"","satz5":"","satz6":"2","satz7":"8","satz8":"10","satz9":"","satz10":"","feld":"0"},{"id":"2","dis":"DD","heim":"Nelte, Carla~Svensson, Elin","gast":"Voytsekh, Natalya~Stankovic, Kaja","satz1":"11","satz2":"5","satz3":"11","satz4":"4","satz5":"11","satz6":"8","satz7":"11","satz8":"8","satz9":"11","satz10":"4","feld":"0"},{"id":"3","dis":"HD2","heim":"Schwenger, Max~Nyenhuis, Denis","gast":"Wadenka, Tobias~Beier, Daniel","satz1":"12","satz2":"11","satz3":"8","satz4":"11","satz5":"11","satz6":"14","satz7":"3","satz8":"11","satz9":"2","satz10":"3","feld":"0"},{"id":"4","dis":"HE1","heim":"Waldenberger, Kai","gast":"Wadenka, Tobias","satz1":"10","satz2":"5","satz3":"11","satz4":"11","satz5":"8","satz6":"12","satz7":"11","satz8":"5","satz9":"7","satz10":"11","feld":"0"},{"id":"5","dis":"DE","heim":"Svensson, Elin","gast":"Voytsekh, Natalya","satz1":"12","satz2":"4","satz3":"6","satz4":"11","satz5":"","satz6":"10","satz7":"11","satz8":"11","satz9":"13","satz10":"","feld":"0"},{"id":"6","dis":"GD","heim":"Nelte, Carla~Schwenger, Max","gast":"Stankovic, Kaja~Heumann, Manuel","satz1":"11","satz2":"11","satz3":"11","satz4":"","satz5":"","satz6":"9","satz7":"9","satz8":"5","satz9":"","satz10":"","feld":"1"},{"id":"7","dis":"HE2","heim":"V\u00f6lker, Jan-Colin","gast":"Krasimir, Yankov","satz1":"6","satz2":"2","satz3":"8","satz4":"","satz5":"","satz6":"11","satz7":"11","satz8":"11","satz9":"","satz10":"","feld":"2"}]
 	});
 }
 

@@ -29,6 +29,7 @@
     "globals": {
         "client_find_text": "*",
         "client_qs_visible": "*",
+        client_eventual_visibility: "*",
         client_wait_nonempty: "*",
         client_wait_nonempty_text: "*",
         "uiu": "*"
