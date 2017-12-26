@@ -307,13 +307,23 @@ _describe('integration tests', () => {
 			return client_find_text('.settings_container .settings_login button.login_button', 'Einloggen');
 		})).click();
 
+		// Check initial UI
 		await eventually_invisible(upage, '.settings_container .settings_login');
-		// await eventually_invisible(upage, '.setup_network_container .network_error');
+		await eventually_invisible(upage, '.setup_network_container .network_error');
+		assert(await is_visible(upage, '.setup_network_container .setup_network_heading .setup_network_event'));
+		assert.strictEqual(await upage.evaluate(() =>
+			document.querySelector('.setup_network_container .setup_network_heading .setup_network_event').innerText),
+			'TV Refrath - TSV Neuhausen-Nymphenburg'
+		);
+		assert.strictEqual(await upage.evaluate(() =>
+			document.querySelectorAll('#setup_network_matches button').length),
+			7
+		);
 
-		// TODO assert that we're seeing some game buttons
-		// TODO assert no more form
+		// TODO set up player names
+
 		// TODO relogin in umpiremode
-		await uclose();
+//		await uclose();
 
 		// login and relogin in displaymode
 /*		const [dbrowser, dpage] = await start('btde/ticker/bup/bup.html#btde&display&dm_style=teamcourt&court=referee');

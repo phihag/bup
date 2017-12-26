@@ -427,6 +427,10 @@
                 "network_score": null
             }
         ],
+        "courts": [
+            {"court_id": 1, "match_id": "tde:TV Refrath-TSV Neuhausen-Nymphenburg_17.12.2017_DD"},
+            {"court_id": 2}
+        ],
         "report_urls": [
             "https:\/\/www.turnier.de\/sport\/teammatch.aspx?id=107D0FC0-C153-4EAF-A39D-EBAECB424B16&match=76"
         ]

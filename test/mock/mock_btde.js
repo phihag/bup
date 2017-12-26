@@ -53,6 +53,18 @@ label {display: block;margin: 0.5em 0;}
 `);
 }
 
+function _btde_players_string(players) {
+	return players.map(p => {
+		if (p.lastname) {
+			return p.lastname + ', ' + p.firstname;
+		}
+
+		const m = /^(.*)\s*(\S+)$/.exec(p.name);
+		assert(m);
+		return m[2] + ', ' + m[1];
+	}).join('~');
+}
+
 class BTDEMock {
 
 constructor() {
@@ -204,8 +216,8 @@ write_handler(req, res, pathname) {
 		}
 
 		const counting = ev.counting || bup.eventutils.default_counting(ev.league_key);
-		const btde_gews = bup.calc.max_game_count(counting);
-		if (!btde_gews) {
+		const max_game_count = bup.calc.max_game_count(counting);
+		if (!max_game_count) {
 			return httpd_utils.send_err(res,
 				new Error(
 					'Invalid counting ' + counting + ', derived from ' + ev.league_key));
@@ -218,9 +230,15 @@ write_handler(req, res, pathname) {
 			heim: ev.team_names[0],
 			gast: ev.team_names[1],
 			ort: ev.location,
-			gews: btde_gews,
+			gews: max_game_count,
 			url: ev.report_urls[0],
 		}];
+		const by_court = new Map();
+		for (const c of ev.courts) {
+			if (c.match_id) {
+				by_court.set(c.match_id, c.court_id);
+			}
+		}
 
 		res.writeHead(200, {
 			'Access-Control-Allow-Origin': '*',
@@ -229,9 +247,29 @@ write_handler(req, res, pathname) {
 			'Expires': 'Thu, 19 Nov 1981 08:52:00 GMT',
 			'Pragma': 'no-cache',
 		});
-		res.end(JSON.stringify(btdev));
 
-		// [{"id":"1","dis":"HD1","heim":"Beck, Raphael~V\u00f6lker, Jan-Colin","gast":"Krasimir, Yankov~Heumann, Manuel","satz1":"11","satz2":"11","satz3":"12","satz4":"","satz5":"","satz6":"2","satz7":"8","satz8":"10","satz9":"","satz10":"","feld":"0"},{"id":"2","dis":"DD","heim":"Nelte, Carla~Svensson, Elin","gast":"Voytsekh, Natalya~Stankovic, Kaja","satz1":"11","satz2":"5","satz3":"11","satz4":"4","satz5":"11","satz6":"8","satz7":"11","satz8":"8","satz9":"11","satz10":"4","feld":"0"},{"id":"3","dis":"HD2","heim":"Schwenger, Max~Nyenhuis, Denis","gast":"Wadenka, Tobias~Beier, Daniel","satz1":"12","satz2":"11","satz3":"8","satz4":"11","satz5":"11","satz6":"14","satz7":"3","satz8":"11","satz9":"2","satz10":"3","feld":"0"},{"id":"4","dis":"HE1","heim":"Waldenberger, Kai","gast":"Wadenka, Tobias","satz1":"10","satz2":"5","satz3":"11","satz4":"11","satz5":"8","satz6":"12","satz7":"11","satz8":"5","satz9":"7","satz10":"11","feld":"0"},{"id":"5","dis":"DE","heim":"Svensson, Elin","gast":"Voytsekh, Natalya","satz1":"12","satz2":"4","satz3":"6","satz4":"11","satz5":"","satz6":"10","satz7":"11","satz8":"11","satz9":"13","satz10":"","feld":"0"},{"id":"6","dis":"GD","heim":"Nelte, Carla~Schwenger, Max","gast":"Stankovic, Kaja~Heumann, Manuel","satz1":"11","satz2":"11","satz3":"11","satz4":"","satz5":"","satz6":"9","satz7":"9","satz8":"5","satz9":"","satz10":"","feld":"1"},{"id":"7","dis":"HE2","heim":"V\u00f6lker, Jan-Colin","gast":"Krasimir, Yankov","satz1":"6","satz2":"2","satz3":"8","satz4":"","satz5":"","satz6":"11","satz7":"11","satz8":"11","satz9":"","satz10":"","feld":"2"}]
+		let btde_id = 1;
+		for (const m of ev.matches) {
+			const court = by_court.get(m.setup.match_id) || 0;
+			const btde_match = {
+				id: ('' + btde_id),
+				heim: _btde_players_string(m.setup.teams[0].players),
+				gast: _btde_players_string(m.setup.teams[1].players),
+				dis: m.setup.match_name,
+				feld: court,
+			};
+			const netscore = m.network_score || [];
+			for (let game_id = 0;game_id < max_game_count;game_id++) {
+				const gscore = netscore[game_id] || ['', ''];
+				btde_match['satz' + (game_id * 2 + 1)] = '' + gscore[0];
+				btde_match['satz' + (game_id * 2 + 2)] = '' + gscore[1];
+			}
+
+			btdev.push(btde_match);
+
+			btde_id++;
+		}
+		res.end(JSON.stringify(btdev));
 	});
 }
 
