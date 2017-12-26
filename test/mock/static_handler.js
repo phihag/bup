@@ -73,27 +73,26 @@ function resolve_path(root_dir, url_path, cb, path_module, fs_module) {
 	});
 }
 
-function file_handler(prefix, root_dir) {
-	return httpd_utils.prefixed(prefix, (req, res, pathname) => {
-		if (! ['GET', 'HEAD'].includes(req.method)) {
-			return httpd_utils.err(res, 405);
+function send_file(res, root_dir, pathname, index_filename) {
+	resolve_path(root_dir, pathname, (err, fn) => {
+		if (err) {
+			console.error('Error while trying to resolve ' + pathname + ': ' + err.message);
+			return httpd_utils.err(res, 404);
 		}
 
-		resolve_path(root_dir, pathname, (err, fn) => {
-			if (err) {
-				console.error('Error while trying to resolve ' + pathname + ': ' + err.message);
+		const stream = fs.createReadStream(fn);
+		stream.on('error', (err) => {
+			if (err.code === 'EISDIR') {
+				if (index_filename) {
+					const index_pathname = path.join(pathname, index_filename);
+					return send_file(res, root_dir, index_pathname); // No index filename, we don't want endless recursion
+				}
 				return httpd_utils.err(res, 404);
 			}
-
-			const stream = fs.createReadStream(fn);
-			stream.on('error', (err) => {
-				if (err.code === 'EISDIR') {
-					return httpd_utils.err(res, 404);
-				}
-				console.error('failed to create stream: ' + err.message);
-				return httpd_utils.err(res, 500);
-			});
-
+			console.error('failed to create stream: ' + err.message);
+			return httpd_utils.err(res, 500);
+		});
+		stream.on('pipe', () => {
 			const headers = {
 				'Cache-Control': 'no-store, must-revalidate',
 				'Expires': '0',
@@ -104,13 +103,23 @@ function file_handler(prefix, root_dir) {
 			}
 
 			res.writeHead(200, headers);
-
-			const pipe = stream.pipe(res);
-			pipe.on('error', (err) => {
-				console.error('pipe error: ' + err.message);
-				return httpd_utils.err(res, 500);
-			});
 		});
+
+		const pipe = stream.pipe(res);
+		pipe.on('error', (err) => {
+			console.error('pipe error: ' + err.message);
+			return httpd_utils.err(res, 500);
+		});
+	});
+}
+
+function file_handler(prefix, root_dir, index_filename) {
+	return httpd_utils.prefixed(prefix, (req, res, pathname) => {
+		if (! ['GET', 'HEAD'].includes(req.method)) {
+			return httpd_utils.err(res, 405);
+		}
+
+		send_file(res, root_dir, pathname, index_filename);
 	});
 }
 

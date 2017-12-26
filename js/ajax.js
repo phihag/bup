@@ -8,14 +8,16 @@ var ajax = (function() {
 * - responseType: The XHR response type, see https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/responseType
 * - url*:         URL to download
 * - data:         The string to send.
-* - contentType:  The MIME response type
-* - success:       Function which gets called with the data and XMLHTTPRequest object on success.
+* - contentType:  The MIME type of the request data
+* - timeout:      Number of ms until the request is aborted.
+* - success:      Function which gets called with the data and XMLHTTPRequest object on success.
 * - error:        Function which gets called on error, with HTTP status, response text, and the XMLHTTPRequest object.
 */
 function req(options) {
 	var xhr = new XMLHttpRequest();
 	var method = options.method || (options.data ? 'POST' : 'GET');
 	xhr.open(method, options.url, true);
+	if (options.timeout) xhr.timeout = options.timeout;
 	xhr.responseType = options.responseType || '';
 	var contentType = options.contentType || (options.data && 'application/x-www-form-urlencoded');
 	if (contentType) {

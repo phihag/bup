@@ -69,7 +69,7 @@ constructor() {
 		(...a) => this.login_handler(...a),
 		(...a) => this.logout_handler(...a),
 		(...a) => this.start_handler(...a),
-		static_handler.file_handler('/ticker/bup/', miniserver.ROOT_DIR),
+		static_handler.file_handler('/ticker/bup/', miniserver.ROOT_DIR, 'bup.html'),
 
 		(req, res, pathname) => {
 			console.log('BTDE mock: unhandled ', pathname);
@@ -171,6 +171,8 @@ start_handler(req, res, pathname) {
 <a href="logout.php">Abmelden</a>
 </div>
 
+<a id="bup" class="button" href="../bup/#btde" target="_blank">Badminton Umpire Panel</a>
+
 </body>
 </html>
 `);
@@ -195,7 +197,7 @@ write_handler(req, res, pathname) {
 
 // callback gets only called if the user is logged in, with (err, user_info, user_data)
 require_user(req, res, callback) {
-	this.get_user((err, user_info, user_data) => {
+	this.get_user(req, (err, user_info, user_data) => {
 		if (err) return httpd_utils.send_err(res, err);
 
 		if (! user_info) {

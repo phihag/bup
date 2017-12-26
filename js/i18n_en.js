@@ -607,6 +607,11 @@ var i18n_en = {
 'receipt:total': 'Received:',
 'receipt:travelcosts': 'Travel costs:',
 'receipt:umpire': 'Umpire:',
+
+'login:header': 'Login {service_name}',
+'login:user': 'user name',
+'login:password': 'password',
+'login:button': 'Sign in',
 };
 
 /*@DEV*/

@@ -1,9 +1,8 @@
 improve login
-	fix redirect (see messages)
-	write an integration test for login so far
+	login fails under integration test!
 
 	make login generic
-	add a logout link
+	add a login as ... link
 	mock btde
 		main page
 		login / logout
@@ -11,8 +10,10 @@ improve login
 	de-jquerify
 	test
 	displaymode login
-	login as ... (including log out)
+	offer historic logins
 	Button Verbergen: test & fix
+
+check reload button
 
 resignation/card: auto-write text
 	write a test for this
@@ -36,6 +37,7 @@ teamcourt/international: also color game
 
 -> send newsletter
 
+ajax: implement timeout
 autosend export upon change from unfinished to finished
 
 urlexport: add player from lower team

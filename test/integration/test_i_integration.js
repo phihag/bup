@@ -37,13 +37,25 @@ _describe('integration tests', () => {
 	async function start(url_suffix) {
 		const browser = await puppeteer.launch({args: ['--no-sandbox'], headless: (process.env.headless !== 'false')});
 		const page = await browser.newPage();
+		let errs = [];
+		page.on('pageerror', (err) => {
+			errs.push(err);
+			console.error('Client error:', err);
+		});
+		async function close() {
+			if (errs.length > 0) {
+				throw new Error(errs.length + ' client-side error(s) occured, first one: ' + errs[0]);
+			}
+			await browser.close();
+		}
+
 		await page.goto(base_url + url_suffix, {waitUntil: 'load'});
 		await page.addScriptTag({url: base_url + 'test/integration/client_integration.js'});
-		return [browser, page];
+		return [page, close];
 	}
 
 	_it('event_scoresheets and back', async () => {
-		const [browser, page] = await start('bup.html#bldemo&court=1');
+		const [page, close] = await start('bup.html#bldemo&court=1');
 
 		assert.strictEqual(await page.evaluate(() =>
 			document.querySelector('.setup_network_match_match_name').innerText),
@@ -94,11 +106,11 @@ _describe('integration tests', () => {
 
 		assert(await is_visible(page, '#settings_wrapper'));
 
-		browser.close();
+		await close();
 	}).timeout(20000);
 
 	_it('match navigation (with court selection and scoresheet)', async () => {
-		const [browser, page] = await start('bup.html#bldemo');
+		const [page, close] = await start('bup.html#bldemo');
 
 		assert.strictEqual(await page.evaluate(() =>
 			state.settings.court_id),
@@ -168,11 +180,11 @@ _describe('integration tests', () => {
 
 		// TODO test that going back works!
 
-		browser.close();
+		await close();
 	}).timeout(20000);
 
 	_it('eventsheet preview: initializing extra_data from event by default', async () => {
-		const [browser, page] = await start('bup.html#intdemo&es_preview=int&court=referee');
+		const [page, close] = await start('bup.html#intdemo&es_preview=int&court=referee');
 
 		assert.strictEqual(await page.evaluate(() =>
 			document.querySelector('svg text#es_svg_team0').textContent),
@@ -214,11 +226,11 @@ _describe('integration tests', () => {
 			'SpH Steinbreche'
 		);
 
-		browser.close();
+		await close();
 	}).timeout(20000);
 
 	_it('eventsheet minreqs', async () => {
-		const [browser, page] = await start('bup.html#bldemo&court=referee&lang=de');
+		const [page, close] = await start('bup.html#bldemo&court=referee&lang=de');
 
 		assert(!await is_visible(page, '.eventsheet_container'));
 		assert(await is_visible(page, '#settings_wrapper'));
@@ -248,27 +260,57 @@ _describe('integration tests', () => {
 		assert(!await is_visible(page, '.eventsheet_container'));
 		assert(await is_visible(page, '#settings_wrapper'));
 
-		browser.close();
+		await close();
 	}).timeout(20000);
 
 	_it('grand btde integration test', async () => {
-		const [ubrowser, upage] = await start('btde/ticker/bup/bup.html#btde&court=referee');
-		const [dbrowser, dpage] = await start('btde/ticker/bup/bup.html#btde&display&dm_style=teamcourt&court=referee');
+		const [upage, uclose] = await start('btde/ticker/bup/bup.html#btde&court=referee&lang=de');
 
+		// Login form present?
 		assert(await is_visible(upage, '#settings_wrapper'));
+		assert.strictEqual(await upage.evaluate(() =>
+			document.querySelector('.setup_network_container .network_error').innerText),
+			'Login erforderlich'
+		);
+		assert(await is_visible(upage, '.settings_login'));
+		assert.strictEqual(await upage.evaluate(() =>
+			document.querySelector('.settings_login h2').innerText),
+			'Login badmintonticker'
+		);
 
-		// TODO assert login visible
-		// TODO click login
+		// Log in with incorrect credentials
+		await upage.type('.settings_container .settings_login input[name="user"]', 'invalid_user');
+		await upage.type('.settings_container .settings_login input[name="password"]', 'invalid_pw');
+		await (await upage.evaluateHandle(() => {
+			return client_find_text('.settings_container .settings_login button.login_button', 'Einloggen');
+		})).click();
+
+		assert.strictEqual(await upage.evaluate(() =>
+			document.querySelector('.settings_container .settings_login .network_error').innerText),
+			'Login fehlgeschlagen'
+		);
+
+		// Log in with correct credentials
+		await upage.evaluate(() => {
+			document.querySelector('.settings_container .settings_login input[name="user"]').value = 'TVR';
+			document.querySelector('.settings_container .settings_login input[name="password"]').value = 'secret_TVR';
+		});
+		await (await upage.evaluateHandle(() => {
+			return client_find_text('.settings_container .settings_login button.login_button', 'Einloggen');
+		})).click();
+
 		// TODO assert that we're seeing some game buttons
-		// TODO login and relogin in umpiremode
+		// TODO relogin in umpiremode
+		//await uclose();
 
 		// login and relogin in displaymode
+/*		const [dbrowser, dpage] = await start('btde/ticker/bup/bup.html#btde&display&dm_style=teamcourt&court=referee');
 		assert(await is_visible(dpage, '#settings_wrapper'));
 		// TODO hide button
 		// TODO assert: should be in fullscreen now
 		// TODO clicking now should bring settings back
 
-		ubrowser.close();
-		dbrowser.close();
-	}).timeout(20000);
+		//close();
+		await close();
+*/	}).timeout(20000);
 });

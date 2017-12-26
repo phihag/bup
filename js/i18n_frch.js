@@ -605,6 +605,11 @@ var i18n_frch = {
 'receipt:total': 'Reçu:',
 'receipt:travelcosts': 'Voyage:',
 'receipt:umpire': 'Arbitre:',
+
+'login:header': 'Login {service_name}',
+'login:user': 'Nom d\'utilisateur',
+'login:password': 'mot de passe',
+'login:button': 'Identifiez-vous',
 };
 
 /*@DEV*/

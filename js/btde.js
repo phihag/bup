@@ -1,60 +1,34 @@
-function btde(baseurl) {
 'use strict';
+function btde(baseurl) {
 
-function ui_render_login(container) {
-	var login_form = $('<form class="settings_login">');
-	login_form.append($('<h2>Login badmintonticker</h2>'));
-	var login_error = $('<div class="network_error"></div>');
-	login_form.append(login_error);
-	login_form.append($('<input name="benutzername" type="text" placeholder="Benutzername">'));
-	login_form.append($('<input name="passwort" type="password" placeholder="Passwort">'));
-	var login_button = $('<button class="login_button"/>');
-	login_form.append(login_button);
-	var loading_icon = $('<div class="default-invisible loading-icon" />');
-	login_button.append(loading_icon);
-	login_button.append($('<span>Anmelden</span>'));
-	container.append(login_form);
-	login_form.on('submit', function(e) {
-		e.preventDefault();
-		loading_icon.show();
-		login_button.attr('disabled', 'disabled');
+function login(user, password, message_callback) {
+	network.$request('btde.login', {
+		dataType: 'text',
+		url: baseurl + 'login/index.php',
+		method: 'POST',
+		data: utils.urlencode({
+			benutzername: user,
+			passwort: password,
+		}),
+		contentType: 'application/x-www-form-urlencoded',
+		timeout: state.settings.network_timeout,
+	}).done(function(res) {
+		var m = /<div class="login">\s*<p class="rot">([^<]*)</.exec(res);
+		var msg = 'Login fehlgeschlagen';
+		if (m) {
+			msg = m[1];
+		} else if (/<div class="logout">/.exec(res)) {
+			// Successful
+			return;
+		}
 
-		network.$request('btde.login', {
-			dataType: 'text',
-			url: baseurl + 'login/index.php',
-			method: 'POST',
-			data: login_form.serializeArray(),
-			contentType: 'application/x-www-form-urlencoded',
-			timeout: state.settings.network_timeout,
-		}).done(function(res) {
-			loading_icon.hide();
-			login_button.removeAttr('disabled');
-
-			var m = /<div class="login">\s*<p class="rot">([^<]*)</.exec(res);
-			var msg = 'Login fehlgeschlagen';
-			if (m) {
-				msg = m[1];
-			} else if (/<div class="logout">/.exec(res)) {
-				// Successful
-				network.errstate('all', null);
-				return;
-			}
-
-			login_error.text(msg);
-			network.errstate('btde.login', {
-				msg: 'Login fehlgeschlagen',
-			});
-		}).fail(function(xhr) {
-			var code = xhr.status;
-			loading_icon.hide();
-			login_button.removeAttr('disabled');
-			login_error.text('Login fehlgeschlagen (Fehler ' + code + ')');
-			network.errstate('btde.login', {
-				msg: 'Login fehlgeschlagen (Fehler ' + code + ')',
-			});
+		return message_callback(msg);
+	}).fail(function(xhr) {
+		var code = xhr.status;
+		login_error.text('Login fehlgeschlagen (Fehler ' + code + ')');
+		network.errstate('btde.login', {
+			msg: 'Login fehlgeschlagen (Fehler ' + code + ')',
 		});
-
-		return false;
 	});
 }
 
@@ -495,7 +469,7 @@ function list_all_players(s, cb) {
 
 return {
 	ui_init: ui_init,
-	ui_render_login: ui_render_login,
+	login: login,
 	send_press: send_press,
 	list_matches: list_matches,
 	sync: sync,
