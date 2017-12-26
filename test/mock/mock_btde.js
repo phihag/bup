@@ -109,7 +109,7 @@ login_handler(req, res, pathname) {
 		httpd_utils.read_post(req, (err, post_data) => {
 			const u = bup.utils.find(users, su => su.name === post_data.benutzername);
 			if (!u || (u.password !== post_data.password)) {
-				return _render_login(res, 'Der Benutzername und das Passwort stimmen nicht überein');
+				return _render_login(res, 'Der Benutzername und das Passwort stimmen nicht überein.');
 			}
 
 			// Successful login: set cookie

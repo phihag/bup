@@ -37,12 +37,42 @@ function client_find_text(qs, text) {
 	return null;
 }
 
+// Wait for an element (as a promise), until it contains text
+function client_wait_nonempty(qs) {
+	const start = window.performance.now();
+	const MAX_WAIT = 10000;
 
+	function _wait(resolve, reject) {
+		const el = document.querySelector(qs);
+		if (el && el.innerText) {
+			return resolve(el);
+		}
+
+		const elapsed = window.performance.now();
+		if (elapsed - start > MAX_WAIT) {
+			return reject(new Error('Cannot find non-empty ' + qs + (el ? '(currently empty)' : '')));
+		}
+
+		window.requestAnimationFrame(() => _wait(resolve, reject));
+	}
+
+	return new Promise(_wait);
+}
+
+function client_wait_nonempty_text(qs) {
+	return new Promise((resolve, reject) => {
+		client_wait_nonempty(qs).then((el) => {
+			resolve(el.innerText);
+		}, (err) => reject(err));
+	});
+}
 
 // The following is more for the benefit of the linter than actually useful
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	module.exports = {
 		client_find_text,
 		client_qs_visible,
+		client_wait_nonempty,
+		client_wait_nonempty_text,
 	};
 }

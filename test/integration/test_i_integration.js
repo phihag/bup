@@ -284,10 +284,10 @@ _describe('integration tests', () => {
 		await (await upage.evaluateHandle(() => {
 			return client_find_text('.settings_container .settings_login button.login_button', 'Einloggen');
 		})).click();
-
-		assert.strictEqual(await upage.evaluate(() =>
-			document.querySelector('.settings_container .settings_login .network_error').innerText),
-			'Login fehlgeschlagen'
+		assert.strictEqual(await upage.evaluate(() => {
+				return client_wait_nonempty_text('.settings_container .settings_login .network_error');
+			}),
+			'Der Benutzername und das Passwort stimmen nicht überein.'
 		);
 
 		// Log in with correct credentials
@@ -298,10 +298,12 @@ _describe('integration tests', () => {
 		await (await upage.evaluateHandle(() => {
 			return client_find_text('.settings_container .settings_login button.login_button', 'Einloggen');
 		})).click();
+		// TODO assert(! await is_visible(upage, '.settings_login'));
 
 		// TODO assert that we're seeing some game buttons
+		// TODO assert no more form
 		// TODO relogin in umpiremode
-		//await uclose();
+		await uclose();
 
 		// login and relogin in displaymode
 /*		const [dbrowser, dpage] = await start('btde/ticker/bup/bup.html#btde&display&dm_style=teamcourt&court=referee');

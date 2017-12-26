@@ -13,22 +13,19 @@ function login(user, password, message_callback) {
 		contentType: 'application/x-www-form-urlencoded',
 		timeout: state.settings.network_timeout,
 	}).done(function(res) {
-		var m = /<div class="login">\s*<p class="rot">([^<]*)</.exec(res);
+		var m = /<form[^>]*>\s*<p class="fehler">([^<]*)</.exec(res);
 		var msg = 'Login fehlgeschlagen';
 		if (m) {
 			msg = m[1];
 		} else if (/<div class="logout">/.exec(res)) {
 			// Successful
+			message_callback();
 			return;
 		}
 
-		return message_callback(msg);
+		message_callback(msg);
 	}).fail(function(xhr) {
-		var code = xhr.status;
-		login_error.text('Login fehlgeschlagen (Fehler ' + code + ')');
-		network.errstate('btde.login', {
-			msg: 'Login fehlgeschlagen (Fehler ' + code + ')',
-		});
+		message_callback('Login fehlgeschlagen (Fehler ' + xhr.status + ')');
 	});
 }
 

@@ -1,5 +1,6 @@
 improve login
 	login fails under integration test!
+		test that error message correctly appears!
 
 	make login generic
 	add a login as ... link
