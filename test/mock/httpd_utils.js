@@ -18,8 +18,8 @@ function err(res, errcode, message) {
 	res.end('Error ' + errcode + (message ? ': ' + message : ''));
 }
 
-function send_err(res, err) {
-	console.error(err.stack);
+function send_err(res, err_obj) {
+	console.error(err_obj.stack);
 	err(res, 500, 'Internal Server Error');
 }
 

@@ -16,6 +16,7 @@ const data_dir = path.join(__dirname, 'mockdata');
 
 const BTDE_LEAGUE_NAME = {
 	'1BL-2017': '(001) 1. Bundesliga',
+	'2BLN-2017': '(002) 2. Bundesliga Nord',
 };
 
 
@@ -59,7 +60,7 @@ function _btde_players_string(players) {
 			return p.lastname + ', ' + p.firstname;
 		}
 
-		const m = /^(.*)\s*(\S+)$/.exec(p.name);
+		const m = /^(.*)\s+(\S+)$/.exec(p.name);
 		assert(m);
 		return m[2] + ', ' + m[1];
 	}).join('~');
@@ -261,8 +262,8 @@ write_handler(req, res, pathname) {
 			const netscore = m.network_score || [];
 			for (let game_id = 0;game_id < max_game_count;game_id++) {
 				const gscore = netscore[game_id] || ['', ''];
-				btde_match['satz' + (game_id * 2 + 1)] = '' + gscore[0];
-				btde_match['satz' + (game_id * 2 + 2)] = '' + gscore[1];
+				btde_match['satz' + (game_id + 1)] = '' + gscore[0];
+				btde_match['satz' + (max_game_count + game_id + 1)] = '' + gscore[1];
 			}
 
 			btdev.push(btde_match);

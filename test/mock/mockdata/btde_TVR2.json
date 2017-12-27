@@ -1,0 +1,627 @@
+{
+  "type": "bup-export",
+  "version": 2,
+  "event": {
+    "league_key": "2BLN-2017",
+    "team_names": [
+      "TV Refrath 2",
+      "STC Blau-Weiss Solingen"
+    ],
+    "courts": [
+      {"court_id": 1, "match_id": "tde:TV Refrath 2-STC Blau-Weiss Solingen_17.12.2017_GD"},
+      {"court_id": 2, "match_id": "tde:TV Refrath 2-STC Blau-Weiss Solingen_17.12.2017_HE2"}
+    ],
+    "matchday": "10",
+    "all_players": [
+      [
+        {
+          "firstname": "Joshua",
+          "lastname": "Magee",
+          "name": "Joshua Magee",
+          "textid": "01-148394",
+          "regular": true,
+          "gender": "m",
+          "ranking": 1,
+          "nationality": "IRL"
+        },
+        {
+          "firstname": "Richard",
+          "lastname": "Domke",
+          "name": "Richard Domke",
+          "textid": "01-139391",
+          "regular": true,
+          "gender": "m",
+          "ranking": 2,
+          "ranking_d": 3
+        },
+        {
+          "firstname": "Kai",
+          "lastname": "Waldenberger",
+          "name": "Kai Waldenberger",
+          "textid": "01-110871",
+          "regular": true,
+          "gender": "m",
+          "ranking": 3,
+          "ranking_d": 7
+        },
+        {
+          "firstname": "Jan-Colin",
+          "lastname": "Völker",
+          "name": "Jan-Colin Völker",
+          "textid": "06-151773",
+          "regular": true,
+          "gender": "m",
+          "ranking": 4,
+          "ranking_d": 5
+        },
+        {
+          "firstname": "Denis",
+          "lastname": "Nyenhuis",
+          "name": "Denis Nyenhuis",
+          "textid": "01-085517",
+          "regular": true,
+          "gender": "m",
+          "ranking": 5,
+          "ranking_d": 4
+        },
+        {
+          "firstname": "Max",
+          "lastname": "Schwenger",
+          "name": "Max Schwenger",
+          "textid": "01-132358",
+          "regular": true,
+          "gender": "m",
+          "ranking": 6,
+          "ranking_d": 2
+        },
+        {
+          "firstname": "Christoph",
+          "lastname": "Offermann",
+          "name": "Christoph Offermann",
+          "textid": "01-106063",
+          "regular": false,
+          "gender": "m",
+          "ranking": 7,
+          "ranking_d": 8
+        },
+        {
+          "firstname": "Mark",
+          "lastname": "Byerly",
+          "name": "Mark Byerly",
+          "textid": "01-103210",
+          "regular": false,
+          "gender": "m",
+          "ranking": 8,
+          "ranking_d": 6
+        },
+        {
+          "firstname": "Lukas",
+          "lastname": "Mühlhaus",
+          "name": "Lukas Mühlhaus",
+          "textid": "01-105810",
+          "regular": false,
+          "gender": "m",
+          "ranking": 9
+        },
+        {
+          "firstname": "Elias",
+          "lastname": "Beckmann",
+          "name": "Elias Beckmann",
+          "textid": "01-118075",
+          "regular": false,
+          "gender": "m",
+          "ranking": 10
+        },
+        {
+          "firstname": "Sebastian",
+          "lastname": "Brings",
+          "name": "Sebastian Brings",
+          "textid": "01-095364",
+          "regular": false,
+          "gender": "m",
+          "ranking": 11
+        },
+        {
+          "firstname": "Erik",
+          "lastname": "Rose",
+          "name": "Erik Rose",
+          "textid": "01-103204",
+          "regular": false,
+          "gender": "m",
+          "ranking": 12
+        },
+        {
+          "firstname": "Simon",
+          "lastname": "Dettmer",
+          "name": "Simon Dettmer",
+          "textid": "04-059232",
+          "regular": false,
+          "gender": "m",
+          "ranking": 13
+        },
+        {
+          "firstname": "Elin",
+          "lastname": "Svensson",
+          "name": "Elin Svensson",
+          "textid": "01-150642",
+          "regular": true,
+          "gender": "f",
+          "ranking": 1,
+          "nationality": "SWE"
+        },
+        {
+          "firstname": "Anika",
+          "lastname": "Dörr",
+          "name": "Anika Dörr",
+          "textid": "02-034959",
+          "regular": true,
+          "gender": "f",
+          "ranking": 2
+        },
+        {
+          "firstname": "Jennifer",
+          "lastname": "Karnott",
+          "name": "Jennifer Karnott",
+          "textid": "01-116150",
+          "regular": true,
+          "gender": "f",
+          "ranking": 3
+        },
+        {
+          "firstname": "Paula",
+          "lastname": "Kick",
+          "name": "Paula Kick",
+          "textid": "07-034304",
+          "regular": false,
+          "gender": "f",
+          "ranking": 4
+        },
+        {
+          "firstname": "Runa",
+          "lastname": "Plützer",
+          "name": "Runa Plützer",
+          "textid": "01-121966",
+          "regular": false,
+          "gender": "f",
+          "ranking": 5
+        },
+        {
+          "firstname": "Marie",
+          "lastname": "Kelzenberg",
+          "name": "Marie Kelzenberg",
+          "textid": "01-103214",
+          "regular": false,
+          "gender": "f",
+          "ranking": 6
+        }
+      ],
+      [
+        {
+          "firstname": "Niklas",
+          "lastname": "Niemczyk",
+          "name": "Niklas Niemczyk",
+          "textid": "01-097225",
+          "regular": true,
+          "gender": "m",
+          "ranking": 1,
+          "ranking_d": 3
+        },
+        {
+          "firstname": "Philipp",
+          "lastname": "Wachenfeld",
+          "name": "Philipp Wachenfeld",
+          "textid": "01-091524",
+          "regular": true,
+          "gender": "m",
+          "ranking": 2,
+          "ranking_d": 2
+        },
+        {
+          "firstname": "Niclas",
+          "lastname": "Lohau",
+          "name": "Niclas Lohau",
+          "textid": "01-095920",
+          "regular": true,
+          "gender": "m",
+          "ranking": 3,
+          "ranking_d": 1
+        },
+        {
+          "firstname": "Tim",
+          "lastname": "Fischer",
+          "name": "Tim Fischer",
+          "textid": "07-034007",
+          "regular": true,
+          "gender": "m",
+          "ranking": 4
+        },
+        {
+          "firstname": "Janik",
+          "lastname": "Osthöver",
+          "name": "Janik Osthöver",
+          "textid": "01-110432",
+          "regular": false,
+          "gender": "m",
+          "ranking": 5
+        },
+        {
+          "firstname": "Alexander",
+          "lastname": "Bock",
+          "name": "Alexander Bock",
+          "textid": "01-099134",
+          "regular": false,
+          "gender": "m",
+          "ranking": 6,
+          "ranking_d": 7
+        },
+        {
+          "firstname": "Steffen",
+          "lastname": "Becker",
+          "name": "Steffen Becker",
+          "textid": "01-098814",
+          "regular": false,
+          "gender": "m",
+          "ranking": 7,
+          "ranking_d": 6
+        },
+        {
+          "firstname": "Jessica",
+          "lastname": "Röthel",
+          "name": "Jessica Röthel",
+          "textid": "01-091751",
+          "regular": true,
+          "gender": "f",
+          "ranking": 1
+        },
+        {
+          "firstname": "Fabienne",
+          "lastname": "Köhler",
+          "name": "Fabienne Köhler",
+          "textid": "01-100526",
+          "regular": true,
+          "gender": "f",
+          "ranking": 2
+        },
+        {
+          "firstname": "Linda",
+          "lastname": "Hartjes",
+          "name": "Linda Hartjes",
+          "textid": "01-091367",
+          "regular": false,
+          "gender": "f",
+          "ranking": 3
+        },
+        {
+          "firstname": "Laura",
+          "lastname": "Ufermann",
+          "name": "Laura Ufermann",
+          "textid": "01-073687",
+          "regular": false,
+          "gender": "f",
+          "ranking": 4
+        },
+        {
+          "firstname": "Janice",
+          "lastname": "Kaulitzky",
+          "name": "Janice Kaulitzky",
+          "textid": "01-108714",
+          "regular": false,
+          "gender": "f",
+          "ranking": 5
+        }
+      ]
+    ],
+    "date": "17.12.2017",
+    "starttime": "11:00",
+    "location": "51427 Bergisch Gladbach-Refrath, SpH, Steinbreche",
+    "umpires": "Jörn Renke, Jochen Abele",
+    "matches": [
+      {
+        "setup": {
+          "match_name": "HD1",
+          "match_id": "tde:TV Refrath 2-STC Blau-Weiss Solingen_17.12.2017_HD1",
+          "is_doubles": true,
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Christoph Offermann"
+                },
+                {
+                  "name": "Elias Beckmann"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Niklas Niemczyk"
+                },
+                {
+                  "name": "Niclas Lohau"
+                }
+              ]
+            }
+          ],
+          "eventsheet_id": "1.HD"
+        },
+        "network_score": [
+          [
+            14,
+            15
+          ],
+          [
+            9,
+            11
+          ],
+          [
+            2,
+            11
+          ]
+        ]
+      },
+      {
+        "setup": {
+          "match_name": "DD",
+          "match_id": "tde:TV Refrath 2-STC Blau-Weiss Solingen_17.12.2017_DD",
+          "is_doubles": true,
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Runa Plützer"
+                },
+                {
+                  "name": "Paula Kick"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Linda Hartjes"
+                },
+                {
+                  "name": "Jessica Röthel"
+                }
+              ]
+            }
+          ]
+        },
+        "network_score": [
+          [
+            11,
+            8
+          ],
+          [
+            11,
+            6
+          ],
+          [
+            12,
+            10
+          ]
+        ]
+      },
+      {
+        "setup": {
+          "match_name": "HD2",
+          "match_id": "tde:TV Refrath 2-STC Blau-Weiss Solingen_17.12.2017_HD2",
+          "is_doubles": true,
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Erik Rose"
+                },
+                {
+                  "name": "Simon Dettmer"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Philipp Wachenfeld"
+                },
+                {
+                  "name": "Tim Fischer"
+                }
+              ]
+            }
+          ],
+          "eventsheet_id": "2.HD"
+        },
+        "network_score": [
+          [
+            5,
+            11
+          ],
+          [
+            9,
+            11
+          ],
+          [
+            4,
+            11
+          ]
+        ]
+      },
+      {
+        "setup": {
+          "match_name": "HE1",
+          "match_id": "tde:TV Refrath 2-STC Blau-Weiss Solingen_17.12.2017_HE1",
+          "is_doubles": false,
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Christoph Offermann"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Niklas Niemczyk"
+                }
+              ]
+            }
+          ],
+          "eventsheet_id": "1.HE"
+        },
+        "network_score": [
+          [
+            8,
+            11
+          ],
+          [
+            9,
+            11
+          ],
+          [
+            7,
+            11
+          ]
+        ]
+      },
+      {
+        "setup": {
+          "match_name": "DE",
+          "match_id": "tde:TV Refrath 2-STC Blau-Weiss Solingen_17.12.2017_DE",
+          "is_doubles": false,
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Paula Kick"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Linda Hartjes"
+                }
+              ]
+            }
+          ]
+        },
+        "network_score": [
+          [
+            11,
+            6
+          ],
+          [
+            15,
+            14
+          ],
+          [
+            8,
+            11
+          ],
+          [
+            9,
+            11
+          ],
+          [
+            8,
+            11
+          ]
+        ]
+      },
+      {
+        "setup": {
+          "match_name": "GD",
+          "match_id": "tde:TV Refrath 2-STC Blau-Weiss Solingen_17.12.2017_GD",
+          "is_doubles": true,
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Elias Beckmann"
+                },
+                {
+                  "name": "Runa Plützer"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Philipp Wachenfeld"
+                },
+                {
+                  "name": "Fabienne Köhler"
+                }
+              ]
+            }
+          ]
+        },
+        "network_score": [
+          [
+            6,
+            11
+          ],
+          [
+            5,
+            11
+          ],
+          [
+            4,
+            11
+          ]
+        ]
+      },
+      {
+        "setup": {
+          "match_name": "HE2",
+          "match_id": "tde:TV Refrath 2-STC Blau-Weiss Solingen_17.12.2017_HE2",
+          "is_doubles": false,
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Erik Rose"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Tim Fischer"
+                }
+              ]
+            }
+          ],
+          "eventsheet_id": "2.HE"
+        },
+        "network_score": [
+          [
+            9,
+            11
+          ],
+          [
+            11,
+            4
+          ],
+          [
+            4,
+            11
+          ],
+          [
+            11,
+            8
+          ],
+          [
+            5,
+            11
+          ]
+        ]
+      }
+    ],
+    "report_urls": [
+      "https://www.turnier.de/sport/teammatch.aspx?id=107D0FC0-C153-4EAF-A39D-EBAECB424B16&match=172"
+    ]
+  }
+}

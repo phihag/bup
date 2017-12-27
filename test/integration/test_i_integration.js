@@ -298,7 +298,45 @@ _describe('integration tests', () => {
 			'Der Benutzername und das Passwort stimmen nicht überein.'
 		);
 
-		// Log in with correct credentials
+		// Log in with correct credentials (TVR2)
+		await upage.evaluate(() => {
+			document.querySelector('.settings_container .settings_login input[name="user"]').value = 'TVR2';
+			document.querySelector('.settings_container .settings_login input[name="password"]').value = '123456';
+		});
+		await (await upage.evaluateHandle(() => {
+			return client_find_text('.settings_container .settings_login button.login_button', 'Einloggen');
+		})).click();
+
+		await eventually_invisible(upage, '.settings_container .settings_login');
+		await eventually_invisible(upage, '.setup_network_container .network_error');
+		assert(await is_visible(upage, '.setup_network_container .setup_network_heading .setup_network_event'));
+		assert.strictEqual(await upage.evaluate(() =>
+			document.querySelector('.setup_network_container .setup_network_heading .setup_network_event').innerText),
+			'TV Refrath 2 - STC Blau-Weiss Solingen'
+		);
+		assert.strictEqual(await upage.evaluate(() =>
+			document.querySelectorAll('#setup_network_matches button').length),
+			7
+		);
+		assert.strictEqual(await upage.evaluate(() =>
+			document.querySelector('#setup_network_matches button:first-child .setup_network_match_match_name').innerText),
+			'HD1'
+		);
+		assert.strictEqual(await upage.evaluate(() =>
+			document.querySelector('#setup_network_matches button:first-child .setup_network_match_home_players').innerText),
+			'Christoph Offermann / Elias Beckmann'
+		);
+		assert.strictEqual(await upage.evaluate(() =>
+			document.querySelector('#setup_network_matches button:first-child .setup_network_match_away_players').innerText),
+			'Niklas Niemczyk / Niclas Lohau'
+		);
+		assert.strictEqual(await upage.evaluate(() =>
+			document.querySelector('#setup_network_matches button:first-child .setup_network_match_score').innerText),
+			'14-15 9-11 2-11'
+		);
+
+		// TODO relogin with TVR
+/*
 		await upage.evaluate(() => {
 			document.querySelector('.settings_container .settings_login input[name="user"]').value = 'TVR';
 			document.querySelector('.settings_container .settings_login input[name="password"]').value = 'secret_TVR';
@@ -319,6 +357,7 @@ _describe('integration tests', () => {
 			document.querySelectorAll('#setup_network_matches button').length),
 			7
 		);
+*/
 
 		// TODO set up player names
 
