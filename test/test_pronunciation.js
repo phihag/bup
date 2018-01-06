@@ -1935,7 +1935,7 @@ _describe('pronunciation', function() {
 			'Birgit, fault for misconduct.\n' +
 			'\n' +
 			'Second game; love all.\n' +
-			'Birgit, faulted.\n' +
+			'Birgit, faulted for misconduct.\n' +
 			'1-love; play');
 		assert.equal(pronounce_de(s),
 			'Birgit, Fehler wegen unsportlichen Verhaltens.\n' +
@@ -2021,8 +2021,8 @@ _describe('pronunciation', function() {
 			'Bob, fault for misconduct.\n' +
 			'\n' +
 			'Final game; love all.\n' +
-			'Alice, faulted.\n' +
-			'Bob, faulted.\n' +
+			'Alice, faulted for misconduct.\n' +
+			'Bob, faulted for misconduct.\n' +
 			'Service over. 1 all; play');
 		assert.equal(pronounce_de(s),
 			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
@@ -2171,7 +2171,7 @@ _describe('pronunciation', function() {
 			'Andrew, fault for misconduct.\n' +
 			'\n' +
 			'Second game; love all.\n' +
-			'Andrew, faulted.\n' +
+			'Andrew, faulted for misconduct.\n' +
 			'Service over. 1-love; play');
 		assert.equal(pronounce_de(s),
 			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
@@ -2523,7 +2523,7 @@ _describe('pronunciation', function() {
 			'11-7 Interval\n' +
 			'Birgit, fault for misconduct.\n' +
 			'\n' +
-			'Birgit, faulted.\n' +
+			'Birgit, faulted for misconduct.\n' +
 			'12-7. Play.');
 		assert.equal(pronounce_de(s),
 			'11-7 Pause.\n' +
@@ -2548,7 +2548,7 @@ _describe('pronunciation', function() {
 			'11-7 Interval\n' +
 			'Alice, fault for misconduct.\n' +
 			'\n' +
-			'Alice, faulted.\n' +
+			'Alice, faulted for misconduct.\n' +
 			'Service over. 8-11. Play.');
 		assert.equal(pronounce_de(s),
 			'11-7 Pause.\n' +
@@ -2571,8 +2571,8 @@ _describe('pronunciation', function() {
 			'Alice, fault for misconduct.\n' +
 			'Bob, fault for misconduct.\n' +
 			'\n' +
-			'Alice, faulted.\n' +
-			'Bob, faulted.\n' +
+			'Alice, faulted for misconduct.\n' +
+			'Bob, faulted for misconduct.\n' +
 			'Service over. 12-8. Play.');
 		assert.equal(pronounce_de(s),
 			'11-7 Pause.\n' +
@@ -2662,7 +2662,7 @@ _describe('pronunciation', function() {
 			'Service over. 11-10 Interval\n' +
 			'Bob, fault for misconduct.\n' +
 			'\n' +
-			'Bob, faulted.\n' +
+			'Bob, faulted for misconduct.\n' +
 			'Service over. 11 all. Play.');
 		assert.equal(pronounce_de(s),
 			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
@@ -2692,7 +2692,7 @@ _describe('pronunciation', function() {
 			'Service over. 11-10 Interval\n' +
 			'Alice, fault for misconduct.\n' +
 			'\n' +
-			'Alice, faulted.\n' +
+			'Alice, faulted for misconduct.\n' +
 			'12-10. Play.');
 		assert.equal(pronounce_de(s),
 			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
@@ -2711,7 +2711,7 @@ _describe('pronunciation', function() {
 		assert.strictEqual(pronounce_en(s),
 			'Alice, fault for misconduct.\n' +
 			'\n' +
-			'Alice, faulted.\n' +
+			'Alice, faulted for misconduct.\n' +
 			'12-10. Play.');
 		assert.strictEqual(pronounce_de(s),
 			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
@@ -2880,7 +2880,7 @@ _describe('pronunciation', function() {
 			'Alice, fault for misconduct.\n' +
 			'\n' +
 			'Second game; love all.\n' +
-			'Alice, faulted.\n' +
+			'Alice, faulted for misconduct.\n' +
 			'Service over. 1-love; play');
 
 		presses.push({
@@ -4047,7 +4047,7 @@ _describe('pronunciation', function() {
 			'Service over. 11-6 Interval\n' +
 			'Birgit, warning for misconduct.\n' +
 			'Andrew, fault for misconduct.\n\n' +
-			'Andrew, faulted.\n' +
+			'Andrew, faulted for misconduct.\n' +
 			'12-6. Play.'
 		);
 		assert.equal(pronounce_de(s, 1020000),
@@ -4071,7 +4071,7 @@ _describe('pronunciation', function() {
 			'20 seconds. 20 seconds.\n' +
 			'Birgit, warning for misconduct.\n' +
 			'Andrew, fault for misconduct.\n\n' +
-			'Andrew, faulted.\n' +
+			'Andrew, faulted for misconduct.\n' +
 			'12-6. Play.'
 		);
 		assert.equal(pronounce_de(s, 1070000),
@@ -4085,7 +4085,7 @@ _describe('pronunciation', function() {
 			'Alice, fault for misconduct.\n' +
 			'Birgit, warning for misconduct.\n' +
 			'Andrew, fault for misconduct.\n\n' +
-			'Andrew, faulted.\n' +
+			'Andrew, faulted for misconduct.\n' +
 			'12-6. Play.'
 		);
 
@@ -4102,8 +4102,8 @@ _describe('pronunciation', function() {
 			'Birgit, warning for misconduct.\n' +
 			'Andrew, fault for misconduct.\n' +
 			'Bob, fault for misconduct.\n\n' +
-			'Andrew, faulted.\n' +
-			'Bob, faulted.\n' +
+			'Andrew, faulted for misconduct.\n' +
+			'Bob, faulted for misconduct.\n' +
 			'Service over. 7-12. Play.'
 		);
 		assert.equal(pronounce_de(s, 1020000),
@@ -4132,8 +4132,8 @@ _describe('pronunciation', function() {
 			'Birgit, warning for misconduct.\n' +
 			'Andrew, fault for misconduct.\n' +
 			'Bob, fault for misconduct.\n\n' +
-			'Andrew, faulted.\n' +
-			'Bob, faulted.\n' +
+			'Andrew, faulted for misconduct.\n' +
+			'Bob, faulted for misconduct.\n' +
 			'Service over. 7-12. Play.'
 		);
 		assert.equal(pronounce_de(s, 1070000),
@@ -4150,8 +4150,8 @@ _describe('pronunciation', function() {
 			'Birgit, warning for misconduct.\n' +
 			'Andrew, fault for misconduct.\n' +
 			'Bob, fault for misconduct.\n\n' +
-			'Andrew, faulted.\n' +
-			'Bob, faulted.\n' +
+			'Andrew, faulted for misconduct.\n' +
+			'Bob, faulted for misconduct.\n' +
 			'Service over. 7-12. Play.'
 		);
 
@@ -4164,8 +4164,8 @@ _describe('pronunciation', function() {
 			'Birgit, warning for misconduct.\n' +
 			'Andrew, fault for misconduct.\n' +
 			'Bob, fault for misconduct.\n\n' +
-			'Andrew, faulted.\n' +
-			'Bob, faulted.\n' +
+			'Andrew, faulted for misconduct.\n' +
+			'Bob, faulted for misconduct.\n' +
 			'Service over. 7-12. Play.'
 		);
 		assert.equal(pronounce_de(s, 1020000),
@@ -4188,8 +4188,8 @@ _describe('pronunciation', function() {
 			'Birgit, warning for misconduct.\n' +
 			'Andrew, fault for misconduct.\n' +
 			'Bob, fault for misconduct.\n\n' +
-			'Andrew, faulted.\n' +
-			'Bob, faulted.\n' +
+			'Andrew, faulted for misconduct.\n' +
+			'Bob, faulted for misconduct.\n' +
 			'Service over. 7-12. Play.'
 		);
 		assert.equal(pronounce_de(s, 1070000),
@@ -4204,8 +4204,8 @@ _describe('pronunciation', function() {
 			'Birgit, warning for misconduct.\n' +
 			'Andrew, fault for misconduct.\n' +
 			'Bob, fault for misconduct.\n\n' +
-			'Andrew, faulted.\n' +
-			'Bob, faulted.\n' +
+			'Andrew, faulted for misconduct.\n' +
+			'Bob, faulted for misconduct.\n' +
 			'Service over. 7-12. Play.'
 		);
 	});
@@ -4454,7 +4454,7 @@ _describe('pronunciation', function() {
 			'Birgit, warning for misconduct.\n' +
 			'Bob, fault for misconduct.\n\n' +
 			'Second game; love all.\n' +
-			'Bob, faulted.\n' +
+			'Bob, faulted for misconduct.\n' +
 			'Service over. 1-love; play'
 		);
 		assert.equal(pronounce_de(s, 1020000),
@@ -4470,7 +4470,7 @@ _describe('pronunciation', function() {
 			'Birgit, warning for misconduct.\n' +
 			'Bob, fault for misconduct.\n\n' +
 			'Second game; love all.\n' +
-			'Bob, faulted.\n' +
+			'Bob, faulted for misconduct.\n' +
 			'Service over. 1-love; play'
 		);
 		assert.equal(pronounce_de(s, 1100000),
@@ -4486,7 +4486,7 @@ _describe('pronunciation', function() {
 			'Birgit, warning for misconduct.\n' +
 			'Bob, fault for misconduct.\n\n' +
 			'Second game; love all.\n' +
-			'Bob, faulted.\n' +
+			'Bob, faulted for misconduct.\n' +
 			'Service over. 1-love; play'		);
 		assert.equal(pronounce_de(s, 1130000),
 			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n' +
@@ -4521,8 +4521,8 @@ _describe('pronunciation', function() {
 			'Bob, fault for misconduct.\n' +
 			'Alice, fault for misconduct.\n\n' +
 			'Second game; love all.\n' +
-			'Bob, faulted.\n' +
-			'Alice, faulted.\n' +
+			'Bob, faulted for misconduct.\n' +
+			'Alice, faulted for misconduct.\n' +
 			'Service over. 1 all; play'
 		);
 		assert.equal(pronounce_de(s, 1020000),
@@ -4541,8 +4541,8 @@ _describe('pronunciation', function() {
 			'Bob, fault for misconduct.\n' +
 			'Alice, fault for misconduct.\n\n' +
 			'Second game; love all.\n' +
-			'Bob, faulted.\n' +
-			'Alice, faulted.\n' +
+			'Bob, faulted for misconduct.\n' +
+			'Alice, faulted for misconduct.\n' +
 			'Service over. 1 all; play'
 		);
 		assert.equal(pronounce_de(s, 1100000),
@@ -4561,8 +4561,8 @@ _describe('pronunciation', function() {
 			'Bob, fault for misconduct.\n' +
 			'Alice, fault for misconduct.\n\n' +
 			'Second game; love all.\n' +
-			'Bob, faulted.\n' +
-			'Alice, faulted.\n' +
+			'Bob, faulted for misconduct.\n' +
+			'Alice, faulted for misconduct.\n' +
 			'Service over. 1 all; play'
 		);
 		assert.equal(pronounce_de(s, 1130000),

@@ -157,7 +157,7 @@ var i18n_en = {
 
 'card.yellow': '{player_name}, warning for misconduct.\n',
 'card.red': '{player_name}, fault for misconduct.\n',
-'card.red.interval': '{player_name}, faulted.\n',
+'card.red.interval': '{player_name}, faulted for misconduct.\n',
 'card.black': '{player_name}, disqualified for misconduct.\n',
 'card.retired': '{player_name} retired.\n',
 'card.play': '. Play.',
