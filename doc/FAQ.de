@@ -73,3 +73,10 @@ In §3.3.8 Anweisungen für technische Offizielle enthält die Absage ein "mit".
 Warum ist die Spieldauer in den Statistiken nicht gleich die Summe der Satzdauern?
 
 Die Spieldauer folgt den Konventionen des Schiedsrichterzettels: Vom ersten "0 beide, bitte spielen" bis zur Absage (letzter Tastendruck). Die Satzdauern folgen dem analog. Die Differenz zwischen der Spieldauer und der Summe der Satzdauern ist die Summe der Pausen zwischen den Sätzen.
+
+
+Warum sind im Aufstellungszettel die Spielreihenfolgen anders als in der Bundesliga-Excel-Datei?
+
+In der Bundesliga ist die Spielreihenfolge fast immer grob Einzel-Doppel-Mixed. Daher hält sich das Formular in bup auch grob an diese Reihenfolge.
+Vorteile des Spielreihenfolge-Formulars gegenüber der Excel-Datei sind insbesondere die Möglichkeit Anwesende Spieler als solche zu kennzeichen, die Schattierung des Ersatzspieler-Felds bei Stammspielern, und die Möglichkeit mehr als 7 Herren und 4 Damen aufzuführen.
+Daher empfehle ich das Spielreihenfolge-Formular direkt leer aus bup auszudrucken (dann müssen die Kreuze nur noch abgemalt werden), und die Excel-Datei gar nicht mehr zu verwenden.

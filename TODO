@@ -15,6 +15,10 @@ save inputted umpire names (for CourtSpot)
 	-> Ulf
 	-> Benedikt
 
+courtspot: save inputted backup_players / listed_players
+	-> Tim Bambach
+refmode: save inputted backup_players
+
 stats: add team name to graph
 stats: + game points / match points
 	-> Tim Bambach
