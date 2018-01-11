@@ -153,7 +153,11 @@ function open(ui8r, cb) {
 
 			zipfile.generateAsync({
 				type: 'blob',
-				mimeType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+				mimeType: (
+					/xlsm$/.test(fn) ?
+					'application/vnd.ms-excel.sheet.macroEnabled.12' :
+					'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+				),
 			}).then(function(blob) {
 				save_file(blob, fn);
 			});
