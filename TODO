@@ -22,6 +22,7 @@ refmode: save inputted backup_players
 stats: add team name to graph
 stats: + game points / match points
 	-> Tim Bambach
+stats: improve printing
 
 d teamscore only logos
 d teamscore with small won matches
