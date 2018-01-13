@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
 	document.querySelector('body').addEventListener('click', function(e) {
 		var el = e.target;
 		do {
-			console.log(el);
 			var tagName = el.tagName.toLowerCase();
 			if ((tagName === 'a') || (tagName === 'button')) {
 				return;
