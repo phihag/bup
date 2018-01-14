@@ -14,6 +14,7 @@ courtspot Run under CourtSpot
 csde      Run under courtspot.de
 btsh      Badminton tournament server (HTTP protocol)
 tdemo     Tournament demo
+wdmudemo  Youth tournament demo (with lots of finals on Sunday)
 nrwdemo   Demo of a match in the lower divisions in NRW
 rlmdemo   German Regionalliga Mitte Demo
 rlwdemo   German Regionalliga West Demo

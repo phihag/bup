@@ -644,6 +644,8 @@ function ui_init(s, hash_query) {
 		networks.nlademo = staticnet(null, 'div/nlademo.json');
 	} else if (hash_query.tdemo !== undefined) {
 		networks.tdemo = staticnet(null, 'div/tdemo.json');
+	} else if (hash_query.wdmudemo !== undefined) {
+		networks.demo = staticnet(null, 'div/demos/wdmu.json');
 	} else if (hash_query.obldemo !== undefined) {
 		networks.demo = staticnet(null, 'div/demos/obl.json');
 	} else if (hash_query.txdemo !== undefined) {
