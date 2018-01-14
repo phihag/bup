@@ -1,6 +1,6 @@
 {
   "type": "bup-export",
-  "version": 1,
+  "version": 2,
   "event": {
     "matches": [
       {
@@ -28,22 +28,10 @@
             }
           ],
           "is_doubles": true,
-          "match_name": "MD U15 ",
-          "match_id": "tde_dayimport_MD U15 _0",
-          "counting": "3x21",
-          "tournament_name": "Westdeutsche Meisterschaften U11-U19 2018-1"
-        },
-        "network_score": [
-          [
-            21,
-            14
-          ],
-          [
-            21,
-            17
-          ]
-        ],
-        "md_eid": "MD U15 "
+          "match_name": "MD U15",
+          "match_id": "wdmudemo_MD U15_0",
+          "counting": "3x21"
+        }
       },
       {
         "setup": {
@@ -64,22 +52,10 @@
             }
           ],
           "is_doubles": false,
-          "match_name": "JE U17 ",
-          "match_id": "tde_dayimport_JE U17 _1",
-          "counting": "3x21",
-          "tournament_name": "Westdeutsche Meisterschaften U11-U19 2018-1"
-        },
-        "network_score": [
-          [
-            21,
-            12
-          ],
-          [
-            21,
-            16
-          ]
-        ],
-        "md_eid": "JE U17 "
+          "match_name": "JE U17",
+          "match_id": "wdmudemo_JE U17_1",
+          "counting": "3x21"
+        }
       },
       {
         "setup": {
@@ -100,22 +76,10 @@
             }
           ],
           "is_doubles": false,
-          "match_name": "ME U15 ",
-          "match_id": "tde_dayimport_ME U15 _2",
-          "counting": "3x21",
-          "tournament_name": "Westdeutsche Meisterschaften U11-U19 2018-1"
-        },
-        "network_score": [
-          [
-            21,
-            14
-          ],
-          [
-            21,
-            13
-          ]
-        ],
-        "md_eid": "ME U15 "
+          "match_name": "ME U15",
+          "match_id": "wdmudemo_ME U15_2",
+          "counting": "3x21"
+        }
       },
       {
         "setup": {
@@ -142,26 +106,10 @@
             }
           ],
           "is_doubles": true,
-          "match_name": "JD U13 ",
-          "match_id": "tde_dayimport_JD U13 _3",
-          "counting": "3x21",
-          "tournament_name": "Westdeutsche Meisterschaften U11-U19 2018-1"
-        },
-        "network_score": [
-          [
-            21,
-            16
-          ],
-          [
-            11,
-            21
-          ],
-          [
-            21,
-            15
-          ]
-        ],
-        "md_eid": "JD U13 "
+          "match_name": "JD U13",
+          "match_id": "wdmudemo_JD U13_3",
+          "counting": "3x21"
+        }
       },
       {
         "setup": {
@@ -188,26 +136,10 @@
             }
           ],
           "is_doubles": true,
-          "match_name": "MD U13 ",
-          "match_id": "tde_dayimport_MD U13 _4",
-          "counting": "3x21",
-          "tournament_name": "Westdeutsche Meisterschaften U11-U19 2018-1"
-        },
-        "network_score": [
-          [
-            21,
-            14
-          ],
-          [
-            22,
-            24
-          ],
-          [
-            21,
-            10
-          ]
-        ],
-        "md_eid": "MD U13 "
+          "match_name": "MD U13",
+          "match_id": "wdmudemo_MD U13_4",
+          "counting": "3x21"
+        }
       },
       {
         "setup": {
@@ -234,22 +166,10 @@
             }
           ],
           "is_doubles": true,
-          "match_name": "GD U13 ",
-          "match_id": "tde_dayimport_GD U13 _5",
-          "counting": "3x21",
-          "tournament_name": "Westdeutsche Meisterschaften U11-U19 2018-1"
-        },
-        "network_score": [
-          [
-            21,
-            17
-          ],
-          [
-            21,
-            15
-          ]
-        ],
-        "md_eid": "GD U13 "
+          "match_name": "GD U13",
+          "match_id": "wdmudemo_GD U13_5",
+          "counting": "3x21"
+        }
       },
       {
         "setup": {
@@ -276,26 +196,10 @@
             }
           ],
           "is_doubles": true,
-          "match_name": "JD U19 ",
-          "match_id": "tde_dayimport_JD U19 _6",
-          "counting": "3x21",
-          "tournament_name": "Westdeutsche Meisterschaften U11-U19 2018-1"
-        },
-        "network_score": [
-          [
-            16,
-            21
-          ],
-          [
-            21,
-            19
-          ],
-          [
-            21,
-            11
-          ]
-        ],
-        "md_eid": "JD U19 "
+          "match_name": "JD U19",
+          "match_id": "wdmudemo_JD U19_6",
+          "counting": "3x21"
+        }
       },
       {
         "setup": {
@@ -316,26 +220,10 @@
             }
           ],
           "is_doubles": false,
-          "match_name": "JE U13 ",
-          "match_id": "tde_dayimport_JE U13 _7",
-          "counting": "3x21",
-          "tournament_name": "Westdeutsche Meisterschaften U11-U19 2018-1"
-        },
-        "network_score": [
-          [
-            21,
-            12
-          ],
-          [
-            17,
-            21
-          ],
-          [
-            21,
-            16
-          ]
-        ],
-        "md_eid": "JE U13 "
+          "match_name": "JE U13",
+          "match_id": "wdmudemo_JE U13_7",
+          "counting": "3x21"
+        }
       },
       {
         "setup": {
@@ -362,22 +250,10 @@
             }
           ],
           "is_doubles": true,
-          "match_name": "MD U19 ",
-          "match_id": "tde_dayimport_MD U19 _8",
-          "counting": "3x21",
-          "tournament_name": "Westdeutsche Meisterschaften U11-U19 2018-1"
-        },
-        "network_score": [
-          [
-            21,
-            15
-          ],
-          [
-            21,
-            12
-          ]
-        ],
-        "md_eid": "MD U19 "
+          "match_name": "MD U19",
+          "match_id": "wdmudemo_MD U19_8",
+          "counting": "3x21"
+        }
       },
       {
         "setup": {
@@ -398,22 +274,10 @@
             }
           ],
           "is_doubles": false,
-          "match_name": "ME U19 ",
-          "match_id": "tde_dayimport_ME U19 _9",
-          "counting": "3x21",
-          "tournament_name": "Westdeutsche Meisterschaften U11-U19 2018-1"
-        },
-        "network_score": [
-          [
-            21,
-            10
-          ],
-          [
-            21,
-            16
-          ]
-        ],
-        "md_eid": "ME U19 "
+          "match_name": "ME U19",
+          "match_id": "wdmudemo_ME U19_9",
+          "counting": "3x21"
+        }
       },
       {
         "setup": {
@@ -434,26 +298,10 @@
             }
           ],
           "is_doubles": false,
-          "match_name": "JE U15 ",
-          "match_id": "tde_dayimport_JE U15 _10",
-          "counting": "3x21",
-          "tournament_name": "Westdeutsche Meisterschaften U11-U19 2018-1"
-        },
-        "network_score": [
-          [
-            21,
-            12
-          ],
-          [
-            13,
-            21
-          ],
-          [
-            21,
-            19
-          ]
-        ],
-        "md_eid": "JE U15 "
+          "match_name": "JE U15",
+          "match_id": "wdmudemo_JE U15_10",
+          "counting": "3x21"
+        }
       },
       {
         "setup": {
@@ -474,22 +322,10 @@
             }
           ],
           "is_doubles": false,
-          "match_name": "JE U11 ",
-          "match_id": "tde_dayimport_JE U11 _11",
-          "counting": "3x21",
-          "tournament_name": "Westdeutsche Meisterschaften U11-U19 2018-1"
-        },
-        "network_score": [
-          [
-            21,
-            10
-          ],
-          [
-            21,
-            16
-          ]
-        ],
-        "md_eid": "JE U11 "
+          "match_name": "JE U11",
+          "match_id": "wdmudemo_JE U11_11",
+          "counting": "3x21"
+        }
       },
       {
         "setup": {
@@ -516,22 +352,10 @@
             }
           ],
           "is_doubles": true,
-          "match_name": "JD U15 ",
-          "match_id": "tde_dayimport_JD U15 _12",
-          "counting": "3x21",
-          "tournament_name": "Westdeutsche Meisterschaften U11-U19 2018-1"
-        },
-        "network_score": [
-          [
-            21,
-            12
-          ],
-          [
-            21,
-            15
-          ]
-        ],
-        "md_eid": "JD U15 "
+          "match_name": "JD U15",
+          "match_id": "wdmudemo_JD U15_12",
+          "counting": "3x21"
+        }
       },
       {
         "setup": {
@@ -558,26 +382,10 @@
             }
           ],
           "is_doubles": true,
-          "match_name": "GD U15 ",
-          "match_id": "tde_dayimport_GD U15 _13",
-          "counting": "3x21",
-          "tournament_name": "Westdeutsche Meisterschaften U11-U19 2018-1"
-        },
-        "network_score": [
-          [
-            21,
-            14
-          ],
-          [
-            13,
-            21
-          ],
-          [
-            21,
-            15
-          ]
-        ],
-        "md_eid": "GD U15 "
+          "match_name": "GD U15",
+          "match_id": "wdmudemo_GD U15_13",
+          "counting": "3x21"
+        }
       },
       {
         "setup": {
@@ -604,22 +412,10 @@
             }
           ],
           "is_doubles": true,
-          "match_name": "GD U19 ",
-          "match_id": "tde_dayimport_GD U19 _14",
-          "counting": "3x21",
-          "tournament_name": "Westdeutsche Meisterschaften U11-U19 2018-1"
-        },
-        "network_score": [
-          [
-            22,
-            20
-          ],
-          [
-            21,
-            15
-          ]
-        ],
-        "md_eid": "GD U19 "
+          "match_name": "GD U19",
+          "match_id": "wdmudemo_GD U19_14",
+          "counting": "3x21"
+        }
       },
       {
         "setup": {
@@ -640,26 +436,10 @@
             }
           ],
           "is_doubles": false,
-          "match_name": "ME U17 ",
-          "match_id": "tde_dayimport_ME U17 _15",
-          "counting": "3x21",
-          "tournament_name": "Westdeutsche Meisterschaften U11-U19 2018-1"
-        },
-        "network_score": [
-          [
-            22,
-            20
-          ],
-          [
-            14,
-            21
-          ],
-          [
-            21,
-            17
-          ]
-        ],
-        "md_eid": "ME U17 "
+          "match_name": "ME U17",
+          "match_id": "wdmudemo_ME U17_15",
+          "counting": "3x21"
+        }
       },
       {
         "setup": {
@@ -680,22 +460,10 @@
             }
           ],
           "is_doubles": false,
-          "match_name": "ME U13 ",
-          "match_id": "tde_dayimport_ME U13 _16",
-          "counting": "3x21",
-          "tournament_name": "Westdeutsche Meisterschaften U11-U19 2018-1"
-        },
-        "network_score": [
-          [
-            21,
-            19
-          ],
-          [
-            26,
-            24
-          ]
-        ],
-        "md_eid": "ME U13 "
+          "match_name": "ME U13",
+          "match_id": "wdmudemo_ME U13_16",
+          "counting": "3x21"
+        }
       },
       {
         "setup": {
@@ -716,26 +484,10 @@
             }
           ],
           "is_doubles": false,
-          "match_name": "JE U19 ",
-          "match_id": "tde_dayimport_JE U19 _17",
-          "counting": "3x21",
-          "tournament_name": "Westdeutsche Meisterschaften U11-U19 2018-1"
-        },
-        "network_score": [
-          [
-            21,
-            11
-          ],
-          [
-            16,
-            21
-          ],
-          [
-            21,
-            12
-          ]
-        ],
-        "md_eid": "JE U19 "
+          "match_name": "JE U19",
+          "match_id": "wdmudemo_JE U19_17",
+          "counting": "3x21"
+        }
       },
       {
         "setup": {
@@ -762,22 +514,10 @@
             }
           ],
           "is_doubles": true,
-          "match_name": "JD U17 ",
-          "match_id": "tde_dayimport_JD U17 _18",
-          "counting": "3x21",
-          "tournament_name": "Westdeutsche Meisterschaften U11-U19 2018-1"
-        },
-        "network_score": [
-          [
-            21,
-            16
-          ],
-          [
-            21,
-            18
-          ]
-        ],
-        "md_eid": "JD U17 "
+          "match_name": "JD U17",
+          "match_id": "wdmudemo_JD U17_18",
+          "counting": "3x21"
+        }
       },
       {
         "setup": {
@@ -804,22 +544,10 @@
             }
           ],
           "is_doubles": true,
-          "match_name": "MD U17 ",
-          "match_id": "tde_dayimport_MD U17 _19",
-          "counting": "3x21",
-          "tournament_name": "Westdeutsche Meisterschaften U11-U19 2018-1"
-        },
-        "network_score": [
-          [
-            21,
-            17
-          ],
-          [
-            21,
-            15
-          ]
-        ],
-        "md_eid": "MD U17 "
+          "match_name": "MD U17",
+          "match_id": "wdmudemo_MD U17_19",
+          "counting": "3x21"
+        }
       },
       {
         "setup": {
@@ -840,22 +568,10 @@
             }
           ],
           "is_doubles": false,
-          "match_name": "ME U11 ",
-          "match_id": "tde_dayimport_ME U11 _20",
-          "counting": "3x21",
-          "tournament_name": "Westdeutsche Meisterschaften U11-U19 2018-1"
-        },
-        "network_score": [
-          [
-            21,
-            17
-          ],
-          [
-            21,
-            17
-          ]
-        ],
-        "md_eid": "ME U11 "
+          "match_name": "ME U11",
+          "match_id": "wdmudemo_ME U11_20",
+          "counting": "3x21"
+        }
       },
       {
         "setup": {
@@ -882,103 +598,14 @@
             }
           ],
           "is_doubles": true,
-          "match_name": "GD U17 ",
-          "match_id": "tde_dayimport_GD U17 _21",
-          "counting": "3x21",
-          "tournament_name": "Westdeutsche Meisterschaften U11-U19 2018-1"
-        },
-        "network_score": [
-          [
-            21,
-            16
-          ],
-          [
-            29,
-            30
-          ],
-          [
-            21,
-            14
-          ]
-        ],
-        "md_eid": "GD U17 "
+          "match_name": "GD U17",
+          "match_id": "wdmudemo_GD U17_21",
+          "counting": "3x21"
+        }
       }
     ],
-    "tournament_name": "Westdeutsche Meisterschaften U11-U19 2018-1",
-    "staticnet_message": "none",
-    "last_update": 1515954662064,
-    "match_umpires": []
-  },
-  "ua": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36",
-  "url": "http://localhost/bup/#settings",
-  "bup_version": "dev",
-  "state_ui": {
-    "mo_visible": false,
-    "order_visible": false,
-    "settings_visible": true
-  },
-  "fullscreen": {
-    "supported": true,
-    "active": false
-  },
-  "lang": "de",
-  "size": "1905x988",
-  "screen": "1920x1080",
-  "settings": {
-    "go_fullscreen": false,
-    "show_pronunciation": true,
-    "umpire_name": "",
-    "service_judge_name": "",
-    "court_id": "referee",
-    "court_description": "Änderungen werden nicht übertragen",
-    "network_timeout": 10000,
-    "network_update_interval": 10000,
-    "displaymode_update_interval": 500,
-    "d_c0": "#f90000",
-    "d_c1": "#1e3a8e",
-    "d_cbg": "#000000",
-    "d_cfg": "#ffffff",
-    "d_cfgdark": "#000000",
-    "d_cbg2": "#d9d9d9",
-    "d_cbg3": "#252525",
-    "d_cbg4": "#404040",
-    "d_cfg2": "#aaaaaa",
-    "d_cfg3": "#cccccc",
-    "d_cborder": "#444444",
-    "d_ct": "#80ff00",
-    "d_ctim_blue": "#0070c0",
-    "d_ctim_active": "#ffc000",
-    "d_cserv": "#fff200",
-    "d_cserv2": "#dba766",
-    "d_crecv": "#707676",
-    "d_scale": 100,
-    "d_team_colors": true,
-    "d_show_pause": false,
-    "settings_autohide": 30000,
-    "dads_interval": 15000,
-    "dads_wait": 60000,
-    "dads_dtime": 10000,
-    "dads_atime": 5000,
-    "dads_utime": "14:00",
-    "dads_mode": "none",
-    "double_click_timeout": 1000,
-    "button_block_timeout": 1,
-    "negative_timers": true,
-    "shuttle_counter": true,
-    "language": "de",
-    "editmode_doubleclick": false,
-    "displaymode_style": "castall",
-    "displaymode_court_id": "1",
-    "wakelock": "display",
-    "click_mode": "auto",
-    "refmode_client_enabled": true,
-    "refmode_client_ws_url": "wss://live.aufschlagwechsel.de/refmode_hub/",
-    "refmode_referee_ws_url": "wss://live.aufschlagwechsel.de/refmode_hub/",
-    "refmode_client_node_name": "t4 dev",
-    "referee_service_judges": false
-  },
-  "last_error": "-",
-  "reported_count": 0,
-  "click_mode": "click",
-  "netstats": {}
+    "tournament_name": "Westdeutsche Meisterschaften U11-U19 2018",
+    "event_name": "WDM U11-U19 2018 Finale (Demo)",
+    "staticnet_message": "Demo. Änderungen werden nicht gespeichert."
+  }
 }

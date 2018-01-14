@@ -244,7 +244,7 @@ function enter_match(match) {
 function ui_render_matchlist(s, event) {
 	var container = uiu.qs('#setup_network_matches');
 	uiu.empty(container); // TODO better transition if we're updating?
-	uiu.text_qs('.setup_network_event', (event.event_name ? event.event_name : s._('network:Matches')));
+	uiu.text_qs('.setup_network_event', (event.event_name || s._('network:Matches')));
 
 	event.matches.forEach(function(match) {
 		var btn = uiu.el(container, 'button', {
