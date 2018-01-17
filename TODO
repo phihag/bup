@@ -1,10 +1,3 @@
-Reihenfolge bei U19-Turnieren
-	tournament optimization
-	support locked
-	tests
-	-> Günter Klützke
-	-> Peter Veit
-
 improve login
 	add a login as ... link
 	displaymode login
@@ -41,6 +34,16 @@ teamcourt/international: also color game
 
 
 -> send newsletter
+
+order @wdmu19
+	tournament optimization
+	UI for probabilistic optimization
+	webworker?
+	support locked
+	tests
+	-> Günter Klützke
+	-> Peter Veit
+
 
 import tournament name (example: https://www.turnier.de/sport/tournament.aspx?id=DB5AB88F-98B5-4B52-B10E-D256C7B8A8B4)
 https://www.turnier.de/sport/tournament.aspx?id=DB5AB88F-98B5-4B52-B10E-D256C7B8A8B4 : no spaces behind match names please
