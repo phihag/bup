@@ -102,7 +102,7 @@ function extra_field_value(ev, label) {
 	if (/^vorgesehene Ersatzspieler/.test(label)) {
 		return eventutils.calc_players_str(ev, ev.backup_players);
 	}
-	if (label.includes('Schiedsrichter')) {
+	if (label.indexOf('Schiedsrichter') > -1) {
 		return (
 			ev.umpires ? ev.umpires : (
 			ev.match_umpires ? ev.match_umpires.join(', ') : ''));
@@ -113,7 +113,7 @@ function extra_field_value(ev, label) {
 	if (/^Bemerkungen:?$/.test(label) && (ev.spectators)) {
 		return ev.spectators + ' Zuschauer';
 	}
-	if (label.includes('Protestvorbehalt')) {
+	if (label.indexOf('Protestvorbehalt') > -1) {
 		return ev.protest;
 	}
 	if (/^andere besondere Vorkommnisse/.test(label)) {
