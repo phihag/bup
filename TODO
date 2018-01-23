@@ -1,13 +1,11 @@
-doc f11 (+Android +iOS) -> Markus Schwendtner
-Wipperfeld: translated text
-PDF-Spielbericht Umbruch bei langem Text!
-Wipperfeld: Spielbericht falsch umgebrochen?
-support i18n da
+jticker: set up docker image for development
 jticker: unify team names
-Button zur Pause bei 11 wenn Seiten wechseln? -> Jörg Hupertz
 jticker: support transmitting to turnier.de.
-Fernsteuerung vom Referee? -> Jörg Hupertz (wie Visual Reality)
-2 umpire quittung (-> like BC Beuel)
+
+doc f11 (+Android +iOS) -> Markus Schwendtner
+2 umpire receipt (-> like BC Beuel)
+PDF-Spielbericht Umbruch bei langem Text! -> Jörg Hupertz
+Button zur Pause bei 11 wenn Seiten wechseln? -> Jörg Hupertz
 
 improve login
 	add a login as ... link
@@ -15,6 +13,8 @@ improve login
 	offer historic logins
 		for new login
 		for relogin
+	automatically log in upon load if necessary (with last-saved user name)
+		-> Dario
 	dmode hide button: test & fix
 
 check reload button graphic
@@ -75,6 +75,7 @@ eventsheet: sign!
 
 2courts with low resolution
 
+support i18n da
 
 test cs order in detail
 	-> Ulf
@@ -92,12 +93,16 @@ selectevent module
 
 d shortsets [see pic]
 d a nice modern overview of all matches, similar to tim
+d halfcourt (for bundesliga finals)
+	-> iframe with fullscreen
+	-> Ulf
 
 refmode redesign UI for change dialogs
 refmode make more efficient
 refmode remove flickers
 refmode verify that push mode is not active by default
 refmode use WebRTC
+referee to remote-control the match -> Jörg Hupertz (like Visual Reality)
 
 tde_import: aufgegeben (https://www.turnier.de/sport/teammatch.aspx?id=107D0FC0-C153-4EAF-A39D-EBAECB424B16&match=230)
 
@@ -1098,7 +1103,6 @@ move eventsheet._xlsx into separate module
 reduce common occurences of a single string with dots in it (automatically?) Example: uiu.create_el
 editevent: check ranking
 doc about all main features (HTML table, compare with other projects)
-upload to turnier.de?
 rework settings.show => split stuff into ui_init
 UI (& refmode) in konqueror
 refmode: screenshot
@@ -1114,9 +1118,4 @@ search for third argument of uiu.el(): {'class': 'foobar'}, replace with more mo
 
 @tvr:
 check Pi font
-take better pictures
-	control PCs
-	umpire panel in action (from the chair)
-	Nahaufnahme der Halterung
-	Nahaufnahme Pi
-	screenshot referee mode
+bring USB cables + adapters
