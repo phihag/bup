@@ -140,6 +140,23 @@ function send_press(s) {
 	sync(s);
 }
 
+function _unify_teamname(team_name) {
+	return {
+		'1. BC Bischmisheim': '1.BC Sbr.-Bischmisheim',
+		'1. BC Beuel 2': '1.BC Beuel 2',
+		'1. BC Beuel 1': '1.BC Beuel',
+		'1. BC Beuel': '1.BC Beuel',
+		'1. BV Mülheim': '1.BV Mülheim',
+		'1. BV Muelheim': '1.BV Mülheim',
+		'1. BV Mülheim 2': '1.BV Mülheim 2',
+		'1. BV Muelheim 2': '1.BV Mülheim 2',
+		'SV Fun-Ball Dortelweil 1': 'SV Fun-Ball Dortelweil',
+		'Blau-Weiss Wittorf-NMS 1': 'Blau-Weiss Wittorf-NMS',
+		'TSV Freystadt': 'TSV 1906 Freystadt',
+		'Union Lüdinghausen': 'SC Union Lüdinghausen',
+	}[team_name] || team_name;
+}
+
 function list_matches(s, cb) {
 	var options = {
 		url: baseurl + 'ticker/manage/bup/list?id=' + tm_id,
@@ -159,6 +176,7 @@ function list_matches(s, cb) {
 			});
 		}
 
+		event.team_names = event.team_names.map(_unify_teamname);
 		event.matches.forEach(function(m) {
 			var setup = m.setup;
 			var short_name = {
