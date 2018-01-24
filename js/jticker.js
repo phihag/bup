@@ -174,6 +174,7 @@ function list_matches(s, cb) {
 			if (short_name) {
 				setup.match_name = short_name;
 			}
+			setup.incomplete = eventutils.is_incomplete(setup);
 		});
 		eventutils.annotate(s, event);
 
