@@ -157,9 +157,69 @@ function _unify_teamname(team_name) {
 	}[team_name] || team_name;
 }
 
-function list_matches(s, cb) {
+function list_all_players(s, cb) {
+	list_matches(s, function(err, event) {
+		if (err) return cb(err);
+		cb(err, event.all_players);
+	}, true);
+}
+
+function _calc_setup_spec(event) {
+	var res = {};
+	event.matches.forEach(function(m) {
+		var setup = m.setup;
+
+		res[setup.jticker_match_id] = setup.teams.map(function(t) {
+			return t.players.map(function(p, player_id) {
+				var resp = {};
+				if (p.firstname && p.lastname) {
+					resp.firstname = p.firstname;
+					resp.lastname = p.lastname;
+				} else {
+					var m = /^(.+)\s+(\S+)$/.exec(p.name);
+					if (m) {
+						resp.firstname = m[1];
+						resp.lastname = m[2];
+					} else {
+						resp.firstname = resp.lastname = p.name;
+					}
+				}
+
+				resp.gender = p.gender ? p.gender : eventutils.guess_gender(setup, player_id);
+				return resp;
+			});
+		});
+	});
+	return res;
+}
+
+function on_edit_event(s, cb) {
+	var spec = _calc_setup_spec(s.event);
+
+	var m = /csrftoken="?([a-z0-9A-Z]+)"?/.exec(document.cookie);
+	if (!m) {
+		return cb(new Error('CSRF-Token fehlt - bitte einloggen!'));
+	}
+	var data = {
+		csrfmiddlewaretoken: m[1],
+		players_json: JSON.stringify(spec),
+	};
+
+	_request(s, 'jticker.editevent', {
+		url: baseurl + 'ticker/manage/bup/teamsetup?tm_id=' + tm_id,
+		method: 'POST',
+		data: data,
+		dataType: 'json',
+	}, function(err, response) {
+		if (err) return cb(err);
+
+		return cb((response.status === 'ok') ? null : 'Unbekannter sclive-Fehler');
+	});
+}
+
+function list_matches(s, cb, all_players) {
 	var options = {
-		url: baseurl + 'ticker/manage/bup/list?id=' + tm_id,
+		url: baseurl + 'ticker/manage/bup/list?id=' + tm_id + (all_players ? '&all=true' : ''),
 		dataType: 'json',
 	};
 	_request(s, 'jticker.list', options, function(err, event) {
@@ -219,12 +279,14 @@ function service_name() {
 
 /* Parameter: s */
 function editable() {
-	return false;
+	return true;
 }
 
 return {
 	ui_init: ui_init,
 	list_matches: list_matches,
+	list_all_players: list_all_players,
+	on_edit_event: on_edit_event,
 	send_press: send_press,
 	sync: sync,
 	courts: courts,
