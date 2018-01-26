@@ -1,0 +1,178 @@
+{
+  "type": "bup-export",
+  "version": 2,
+  "event": {
+    "staticnet_message": "Bundesliga-Demo (nur lokal)",
+    "courts": [{
+      "court_id": 1,
+      "description": "1 (links)",
+      "match_id": "bldemo_HD1"
+    }, {
+      "court_id": 2,
+      "description": "2 (rechts)",
+      "match_id": "bldemo_DD"
+    }],
+    "matches": [
+      {
+        "setup": {
+          "eventsheet_id": "1.HD",
+          "match_name": "1.HD",
+          "teams": [
+            {
+              "players": []
+            },
+            {
+              "players": []
+            }
+          ],
+          "is_doubles": true,
+          "match_id": "bldemo_HD1" 
+        }
+      },
+      {
+        "setup": {
+          "match_name": "DD",
+          "teams": [
+            {
+              "players": []
+            },
+            {
+              "players": []
+            }
+          ],
+          "is_doubles": true,
+          "match_id": "bldemo_DD"
+        }
+      },
+      {
+        "setup": {
+          "eventsheet_id": "2.HD",
+          "match_name": "2.HD",
+          "teams": [
+            {
+              "players": []
+            },
+            {
+              "players": []
+            }
+          ],
+          "is_doubles": true,
+          "match_id": "bldemo_HD2"
+        }
+      },
+      {
+        "setup": {
+          "match_name": "1.HE",
+          "teams": [
+            {
+              "players": []
+            },
+            {
+              "players": []
+            }
+          ],
+          "is_doubles": false,
+          "match_id": "bldemo_HE1"
+        }
+      },
+      {
+        "setup": {
+          "match_name": "DE",
+          "teams": [
+            {
+              "players": []
+            },
+            {
+              "players": []
+            }
+          ],
+          "is_doubles": false,
+          "match_id": "bldemo_DE"
+        }
+      },
+      {
+        "setup": {
+          "match_name": "GD",
+          "teams": [
+            {
+              "players": []
+            },
+            {
+              "players": []
+            }
+          ],
+          "is_doubles": true,
+          "match_id": "bldemo_GD"
+        }
+      },
+      {
+        "setup": {
+          "match_name": "2.HE",
+          "teams": [
+            {
+              "players": []
+            },
+            {
+              "players": []
+            }
+          ],
+          "is_doubles": false,
+          "match_id": "bldemo_HE2"
+        }
+      }
+    ],
+    "id": "bldemo",
+    "event_name": "TV Refrath - BC Bischmisheim (Demo)",
+    "tournament_name": "Demo",
+    "team_names": ["TV Refrath", "BC Bischmisheim"],
+    "location": "SpH Steinbreche",
+    "umpires": "Barbara Bub & Markus Schwendtner",
+    "starttime": "19:00",
+    "date": "21.5.2018",
+    "matchday": "Finale",
+    "backup_players": [[], []],
+    "present_players": [[], []],
+    "all_players": [
+      [
+        {"gender": "m", "name": "Lars Schänzler", "ranking": 1, "ranking_d": 9, "regular": true},
+        {"gender": "m", "name": "Nhat Nguyen", "ranking": 2, "ranking_d": 6, "nationality": "IRL", "regular": true},
+        {"gender": "m", "name": "Joshua Magee", "ranking": 3, "nationality": "IRL"},
+        {"gender": "m", "name": "Richard Domke", "ranking": 4, "ranking_d": 5},
+        {"gender": "m", "name": "Sam Magee", "ranking": 5, "ranking_d": 2, "nationality": "IRL", "regular": true},
+        {"gender": "m", "name": "Raphael Beck", "ranking": 6, "ranking_d": 1, "regular": true},
+        {"gender": "m", "name": "Kai Waldenberger", "ranking": 7, "ranking_d": 10},
+        {"gender": "m", "name": "Jan-Colin Völker", "ranking": 8},
+        {"gender": "m", "name": "Dennis Nyenhuis", "ranking": 9, "ranking_d": 7},
+        {"gender": "m", "name": "Max Schwenger", "ranking": 10, "ranking_d": 4},
+        {"gender": "f", "name": "Chloe Magee", "ranking": 1, "nationality": "IRL", "regular": true},
+        {"gender": "f", "name": "Carla Nelte", "ranking": 2, "regular": true},
+        {"gender": "f", "name": "Elin Svensson", "ranking": 3, "nationality": "SWE"},
+        {"gender": "f", "name": "Annika Dörr", "ranking": 4},
+        {"gender": "f", "name": "Jennifer Karnott", "ranking": 7},
+        {"gender": "f", "name": "Paula Kick", "ranking": 6},
+        {"gender": "f", "name": "Runa Plützer", "ranking": 5}
+      ],
+      [
+        {"gender": "m", "name": "Fabian Roth", "ranking": 1, "ranking_d": 6, "regular": true},
+        {"gender": "m", "name": "Luka Wraber", "ranking": 2, "ranking_d": 8, "nationality": "AUT", "regular": true},
+        {"gender": "m", "name": "Dieter Domke", "ranking": 3, "ranking_d": 7},
+        {"gender": "m", "name": "Peter Käsbauer", "ranking": 4, "ranking_d": 2, "regular": true},
+        {"gender": "m", "name": "Simon Wang", "ranking": 5, "ranking_d": 9},
+        {"gender": "m", "name": "Marvin Seidel", "ranking": 6, "ranking_d": 1, "regular": true},
+        {"gender": "m", "name": "Matthias Deininger", "ranking": 7},
+        {"gender": "m", "name": "Marcel Reuter", "ranking": 8},
+        {"gender": "m", "name": "Ruben Jille", "ranking": 9, "ranking_d": 3, "nationality": "NED"},
+        {"gender": "m", "name": "Alen Roj", "ranking": 10, "ranking_d": 12, "nationality": "SLO"},
+        {"gender": "m", "name": "Michael Fuchs", "ranking": 11, "ranking_d": 4},
+        {"gender": "m", "name": "Johannes Schöttler", "ranking": 12, "ranking_d": 5},
+        {"gender": "f", "name": "Natalia Perminova", "ranking": 1, "nationality": "RUS", "regular": true},
+        {"gender": "f", "name": "Isabel Herttrich", "ranking": 2, "regular": true},
+        {"gender": "f", "name": "Olga Konon", "ranking": 3},
+        {"gender": "f", "name": "Cisita Joitiy Jansen", "ranking": 4, "nationality": "INA"},
+        {"gender": "f", "name": "Nadia Fankhauser", "ranking": 5, "nationality": "SUI"}
+      ]
+    ],
+    "league_key": "1BL-2017",
+    "team_competition": true
+  }
+}
