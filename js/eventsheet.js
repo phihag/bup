@@ -877,31 +877,34 @@ var render_int = _svg_func(function(svg, ev, es_key, extra_data) {
 var render_receipt = _svg_func(function(svg, ev, es_key, extra_data, extra_files) {
 	_svg_text(svg, 'event', ev.event_name);
 	_svg_text(svg, 'date', ev.date || utils.date_str(Date.now()));
-	_svg_text(svg, 'receipt_umpire', extra_data.receipt_umpire);
-	_svg_text(svg, 'receipt_distance', extra_data.receipt_distance);
-	_svg_text(svg, 'signature', extra_data.receipt_umpire || state._('setupsheet:signature'));
 
-	var pay = eventutils.umpire_pay(ev.league_key);
-	if (pay) {
-		var tcost = 0;
-		_svg_text(svg, 'travelcurrency', pay.currency);
-		_svg_text(svg, 'totalcurrency', pay.currency);
-		if (pay.per_km) {
-			_svg_text(svg, 'perkm', '(' + i18n.format_money(state.lang, pay.per_km) + pay.currency + ' / km)');
+	for (var i = 0;i < 2;i++) {
+		_svg_text(svg, 'receipt_umpire' + i, extra_data['receipt_umpire' + i]);
+		_svg_text(svg, 'receipt_distance' + i, extra_data['receipt_distance' + i]);
+		_svg_text(svg, 'signature' + i, extra_data['receipt_umpire' + i] || state._('setupsheet:signature'));
 
-			var dist = parseFloat((extra_data.receipt_distance || '').replace(',', '.'));
-			if (!isNaN(dist)) {
-				tcost = dist * pay.per_km;
-				_svg_text(svg, 'travelcosts', i18n.format_money(state.lang, tcost));
-				_svg_text(svg, 'total', i18n.format_money(state.lang, tcost + pay.base));
+		var pay = eventutils.umpire_pay(ev.league_key);
+		if (pay) {
+			var tcost = 0;
+			_svg_text(svg, 'travelcurrency' + i, pay.currency);
+			_svg_text(svg, 'totalcurrency' + i, pay.currency);
+			if (pay.per_km) {
+				_svg_text(svg, 'perkm' + i, '(' + i18n.format_money(state.lang, pay.per_km) + pay.currency + ' / km)');
+
+				var dist = parseFloat((extra_data['receipt_distance' + i] || '').replace(',', '.'));
+				if (!isNaN(dist)) {
+					tcost = dist * pay.per_km;
+					_svg_text(svg, 'travelcosts' + i, i18n.format_money(state.lang, tcost));
+					_svg_text(svg, 'total' + i, i18n.format_money(state.lang, tcost + pay.base));
+				}
 			}
+
+			_svg_text(svg, 'basecost' + i,
+				i18n.format_money(state.lang, pay.base) + pay.currency +
+				' (' + eventutils.name_by_league(ev.league_key) + ')'
+			);
+
 		}
-
-		_svg_text(svg, 'basecost',
-			i18n.format_money(state.lang, pay.base) + pay.currency +
-			' (' + eventutils.name_by_league(ev.league_key) + ')'
-		);
-
 	}
 
 	if (extra_files) {
@@ -910,7 +913,7 @@ var render_receipt = _svg_func(function(svg, ev, es_key, extra_data, extra_files
 	}
 
 	return {
-		filename: state._('receipt:header') + (extra_data.receipt_umpire ? ' ' + extra_data.receipt_umpire : '') + '.pdf',
+		filename: state._('receipt:header') + ' ' + ev.event_name + '.pdf',
 	};
 });
 
@@ -1902,7 +1905,7 @@ function on_fetch() {
 	var KEYS = [
 		'referee', 'location', 'starttime', 'matchday', 'notes', 'protest', 'spectators',
 		// only from saved extra_data
-		'receipt_umpire', 'receipt_distance',
+		'receipt_umpire0', 'receipt_distance0', 'receipt_umpire1', 'receipt_distance1',
 	];
 	var saved_ed = event._es_extra_data;
 	KEYS.forEach(function(k) {
@@ -2134,24 +2137,27 @@ function show_dialog(es_key) {
 		configure_report([]);
 		uiu.hide(download_link_container);
 
-		var umpire_label = uiu.el(report, 'label', 'eventsheet_dynamic', state._('receipt:umpire'));
-		umpire_label.appendChild(document.createTextNode(' ')); // compatibility to HTML UI
-		uiu.el(umpire_label, 'input', {
-			name: 'receipt_umpire',
-		});
+		for (var i = 0;i < 2;i++) {
+			var umpire_label = uiu.el(report, 'label', 'eventsheet_dynamic', state._('receipt:umpire'));
+			umpire_label.appendChild(document.createTextNode(' ')); // compatibility to HTML UI
+			uiu.el(umpire_label, 'input', {
+				name: 'receipt_umpire' + i,
+			});
 
-		var distance_label = uiu.el(report, 'label', 'eventsheet_dynamic', state._('receipt:distance'));
-		distance_label.appendChild(document.createTextNode(' ')); // compatibility to HTML UI
-		uiu.el(distance_label, 'input', {
-			type: 'number',
-			min: 0,
-			name: 'receipt_distance',
-			style: 'width:3em;',
-		});
+			var distance_label = uiu.el(report, 'label', 'eventsheet_dynamic', state._('receipt:distance'));
+			distance_label.appendChild(document.createTextNode(' ')); // compatibility to HTML UI
+			uiu.el(distance_label, 'input', {
+				type: 'number',
+				min: 0,
+				name: 'receipt_distance' + i,
+				style: 'width:3em;',
+			});
 
-		uiu.el(distance_label, 'span', {
-			style: 'display:inline-block;margin-left:0.2em;',
-		}, 'km');
+			uiu.el(distance_label, 'span', {
+				style: 'display:inline-block;margin-left:0.2em;',
+			}, 'km');
+
+		}
 		break;
 	default:
 		uiu.hide_qs('.eventsheet_spectators');

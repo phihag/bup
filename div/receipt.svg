@@ -13,31 +13,61 @@
 <text x="20" y="60" style="font-size:4px;" data-i18n="receipt:date"></text>
 <text x="49" y="60" style="font-size:4px;" id="es_svg_date"></text>
 
-<text x="20" y="70" style="font-size:4px;" data-i18n="receipt:umpire"></text>
-<line x1="48" y1="71" x2="115" y2="71" style="stroke-width:0.2;stroke:#000" />
-<text x="49" y="70" style="font-size:4px;" id="es_svg_receipt_umpire"></text>
 
-<text x="20" y="80" style="font-size:4px;" data-i18n="receipt:distance"></text>
-<line x1="48" y1="81" x2="68" y2="81" style="stroke-width:0.2;stroke:#000" />
-<text x="58" y="80" style="font-size:4px;" text-anchor="middle" id="es_svg_receipt_distance"></text>
-<text x="69" y="80" style="font-size:4px;">km</text>
+<text x="20" y="90" style="font-size:4px;" data-i18n="receipt:umpire"></text>
+<line x1="48" y1="91" x2="115" y2="91" style="stroke-width:0.2;stroke:#000" />
+<text x="49" y="90" style="font-size:4px;" id="es_svg_receipt_umpire0"></text>
 
-<text x="20" y="90" style="font-size:4px;" data-i18n="receipt:travelcosts"></text>
-<line x1="48" y1="91" x2="68" y2="91" style="stroke-width:0.2;stroke:#000" />
-<text x="58" y="90" style="font-size:4px;" text-anchor="middle" id="es_svg_travelcosts"></text>
-<text x="69" y="90" style="font-size:4px;" id="es_svg_travelcurrency"></text>
-<text x="75" y="90" style="font-size:4px;" id="es_svg_perkm"></text>
+<text x="20" y="100" style="font-size:4px;" data-i18n="receipt:distance"></text>
+<line x1="48" y1="101" x2="68" y2="101" style="stroke-width:0.2;stroke:#000" />
+<text x="58" y="100" style="font-size:4px;" text-anchor="middle" id="es_svg_receipt_distance0"></text>
+<text x="69" y="100" style="font-size:4px;">km</text>
 
-<text x="20" y="100" style="font-size:4px;" data-i18n="receipt:base"></text>
-<text x="49" y="100" style="font-size:4px;" id="es_svg_basecost"></text>
-
-<text x="20" y="110" style="font-size:4px;" data-i18n="receipt:total"></text>
+<text x="20" y="110" style="font-size:4px;" data-i18n="receipt:travelcosts"></text>
 <line x1="48" y1="111" x2="68" y2="111" style="stroke-width:0.2;stroke:#000" />
-<line x1="48" y1="111.5" x2="68" y2="111.5" style="stroke-width:0.2;stroke:#000" />
-<text x="58" y="110" style="font-size:4px;" text-anchor="middle" id="es_svg_total"></text>
-<text x="69" y="110" style="font-size:4px;" id="es_svg_totalcurrency"></text>
+<text x="58" y="110" style="font-size:4px;" text-anchor="middle" id="es_svg_travelcosts0"></text>
+<text x="69" y="110" style="font-size:4px;" id="es_svg_travelcurrency0"></text>
+<text x="75" y="110" style="font-size:4px;" id="es_svg_perkm0"></text>
 
-<line x1="40" y1="130" x2="110" y2="130" style="stroke-width:0.2;stroke:#000" />
-<text x="75" y="133" style="font-size:2px;" text-anchor="middle" id="es_svg_signature"></text>
+<text x="20" y="120" style="font-size:4px;" data-i18n="receipt:base"></text>
+<text x="49" y="120" style="font-size:4px;" id="es_svg_basecost0"></text>
+
+<text x="20" y="130" style="font-size:4px;" data-i18n="receipt:total"></text>
+<line x1="48" y1="131" x2="68" y2="131" style="stroke-width:0.2;stroke:#000" />
+<line x1="48" y1="131.5" x2="68" y2="131.5" style="stroke-width:0.2;stroke:#000" />
+<text x="58" y="130" style="font-size:4px;" text-anchor="middle" id="es_svg_total0"></text>
+<text x="69" y="130" style="font-size:4px;" id="es_svg_totalcurrency0"></text>
+
+<line x1="40" y1="150" x2="110" y2="150" style="stroke-width:0.2;stroke:#000" />
+<text x="75" y="153" style="font-size:2px;" text-anchor="middle" id="es_svg_signature0"></text>
+
+
+<text x="20" y="190" style="font-size:4px;" data-i18n="receipt:umpire"></text>
+<line x1="48" y1="191" x2="115" y2="191" style="stroke-width:0.2;stroke:#000" />
+<text x="49" y="190" style="font-size:4px;" id="es_svg_receipt_umpire1"></text>
+
+<text x="20" y="200" style="font-size:4px;" data-i18n="receipt:distance"></text>
+<line x1="48" y1="201" x2="68" y2="201" style="stroke-width:0.2;stroke:#000" />
+<text x="58" y="200" style="font-size:4px;" text-anchor="middle" id="es_svg_receipt_distance1"></text>
+<text x="69" y="200" style="font-size:4px;">km</text>
+
+<text x="20" y="210" style="font-size:4px;" data-i18n="receipt:travelcosts"></text>
+<line x1="48" y1="211" x2="68" y2="211" style="stroke-width:0.2;stroke:#000" />
+<text x="58" y="210" style="font-size:4px;" text-anchor="middle" id="es_svg_travelcosts1"></text>
+<text x="69" y="210" style="font-size:4px;" id="es_svg_travelcurrency1"></text>
+<text x="75" y="210" style="font-size:4px;" id="es_svg_perkm1"></text>
+
+<text x="20" y="220" style="font-size:4px;" data-i18n="receipt:base"></text>
+<text x="49" y="220" style="font-size:4px;" id="es_svg_basecost1"></text>
+
+<text x="20" y="230" style="font-size:4px;" data-i18n="receipt:total"></text>
+<line x1="48" y1="231" x2="68" y2="231" style="stroke-width:0.2;stroke:#000" />
+<line x1="48" y1="231.5" x2="68" y2="231.5" style="stroke-width:0.2;stroke:#000" />
+<text x="58" y="230" style="font-size:4px;" text-anchor="middle" id="es_svg_total1"></text>
+<text x="69" y="230" style="font-size:4px;" id="es_svg_totalcurrency1"></text>
+
+<line x1="40" y1="250" x2="110" y2="250" style="stroke-width:0.2;stroke:#000" />
+<text x="75" y="253" style="font-size:2px;" text-anchor="middle" id="es_svg_signature1"></text>
+
 
 </svg>

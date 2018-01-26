@@ -7,6 +7,7 @@ demo      A one-match demo (will start right in the match)
 bldemo    Demo of a Bundesliga match
 bldemo_inprogress Demo of a Bundesliga match already running
 bldemo_incomplete Demo of a Bundesliga match where not all players have been configured yet
+e_bldemo  Demo of a Bundesliga match where nothing has been configured yet
 edemo     Demo of an event (empty)
 vdemo     Demo of an event (in progress)
 btde      Run under badmintonticker
