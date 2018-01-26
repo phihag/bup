@@ -34,11 +34,24 @@ function parse_teammatch($httpc, $tm_html, $domain, $match_id) {
 	}
 	if (\preg_match('/<th>Staffel:<\/th><td><a\s+href="[^"]*&draw=([0-9]+)">([^<]+)<\/a><\/td>/sx', $tm_html, $division_m)) {
 		$draw_id = $division_m[1];
-		$long_league_id = $header_m[1] . ':' . $division_m[2];
-		if (!\array_key_exists($long_league_id, $LEAGUE_KEYS)) {
-			throw new \Exception('Cannot find league ' . $long_league_id);
+
+		$league_key = null;
+		if (\preg_match('/^Ligen NRW/', $header_m[1])) {
+			if (\preg_match('/^O19-NRW (O19-(?:RL|OL))\s*-\s*\(([0-9]+)\)/', $division_m[2], $nrw_olrl_m)) {
+				$league_key = 'NRW-' . $nrw_olrl_m[1] . '-' . $nrw_olrl_m[2] . '-2016';
+			} else if (\preg_match('/^[UO]19-(?:NRW|[NS][12]) ([UO]19-(?:NRW|[NS][12])-(?:VL|LL|BL|BK|KL|KK))\s*-\s*\(([0-9]+)\)/', $division_m[2], $nrw_m)) {
+
+				$league_key = 'NRW-' . $nrw_m[1] . '-' . $nrw_m[2] . '-2016';
+			}
 		}
-		$league_key = $LEAGUE_KEYS[$long_league_id];
+
+		if ($league_key === null) {
+			$long_league_id = $header_m[1] . ':' . $division_m[2];
+			if (!\array_key_exists($long_league_id, $LEAGUE_KEYS)) {
+				throw new \Exception('Cannot find league ' . $long_league_id);
+			}
+			$league_key = $LEAGUE_KEYS[$long_league_id];
+		}
 
 		if (!\preg_match('/<h3>
 				<a\s*href="\/sport\/team\.aspx\?id=(?P<season0>[-A-Za-z0-9]+)&team=(?P<id0>[0-9]+)">\s*
@@ -119,7 +132,7 @@ function parse_teammatch($httpc, $tm_html, $domain, $match_id) {
 
 	$res['team_competition'] = true;
 
-	if (\preg_match('/<th>Spieltermin:<\/th><td>[A-Za-z]+\s*([0-9]{1,2}\.[0-9]{1,2}.[0-9]{4,})\s*<span class="time">([0-9]{2}:[0-9]{2})<\/span><\/td>/', $tm_html, $time_m)) {
+	if (\preg_match('/<th>Spieltermin:<\/th><td>(?:<img\s+class="icon_planningchanged"[^>]*>)?\s*[A-Za-z]+\s*([0-9]{1,2}\.[0-9]{1,2}.[0-9]{4,})\s*<span class="time">([0-9]{2}:[0-9]{2})<\/span>/', $tm_html, $time_m)) {
 		$res['date'] = $time_m[1];
 		$res['starttime'] = $time_m[2];
 	} else {

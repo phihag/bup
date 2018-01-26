@@ -1,5 +1,8 @@
+import KK: correct VRL
 PDF-Spielbericht Umbruch bei langem Text! -> Jörg Hupertz
-Button zur Pause bei 11 wenn Seiten wechseln? -> Jörg Hupertz
+
+
+-> send newsletter
 
 improve login
 	add a login as ... link
@@ -39,7 +42,6 @@ teamcourt/international: also color game
 2court: game in color as well, and discipline grey
 
 
--> send newsletter
 
 order @wdmu19
 	tournament optimization
@@ -1110,6 +1112,7 @@ remove calls to prompt and alert
 render in transparent windows -> Dieter Gläßer
 drucken wie BTP als Server (alles|bei Problemen|nie)
 search for third argument of uiu.el(): {'class': 'foobar'}, replace with more modern version
+Button zur Pause bei 11 wenn Seiten wechseln? -> Jörg Hupertz
 
 @tvr:
 check Pi font
