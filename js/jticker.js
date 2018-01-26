@@ -292,6 +292,7 @@ return {
 	courts: courts,
 	service_name: service_name,
 	editable: editable,
+	aw_proxy: 1,
 };
 
 }

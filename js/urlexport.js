@@ -2,7 +2,13 @@
 var urlexport = (function() {
 var hide_func;
 
-var BASE_URL = 'http_proxy/tde_export.php';
+function determine_base_url() {
+	var netw = network.get_netw();
+	if (netw && netw.aw_proxy) { // No php support, use global server
+		return 'https://aufschlagwechsel.de/bup/http_proxy/tde_export.php';
+	}
+	return 'http_proxy/tde_export.php';
+}
 
 function render_prepare(s, page, submit_cb) {
 	var prepare_form = uiu.el(page, 'form', 'urlexport_form urlexport_prepare');
@@ -250,7 +256,7 @@ function init(s, page) {
 
 		uiu.text(status_text, s._('urlexport:preparing'));
 		_make_request({
-			url: BASE_URL + '?action=prepare',
+			url: determine_base_url() + '?action=prepare',
 			data: utils.urlencode({
 				url: r_url,
 				user: user,
@@ -285,7 +291,7 @@ function init(s, page) {
 				}
 
 				_make_request({
-					url: BASE_URL + '?action=submit',
+					url: determine_base_url() + '?action=submit',
 					data: utils.urlencode({
 						url: r_url,
 						cookies: data.cookies,
@@ -424,6 +430,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var click = require('./click');
 	var eventutils = require('./eventutils');
 	var form_utils = require('./form_utils');
+	var network = require('./network');
 	var report_problem = require('./report_problem');
 	var uiu = require('./uiu');
 	var utils = require('./utils');

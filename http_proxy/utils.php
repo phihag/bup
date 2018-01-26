@@ -22,6 +22,7 @@ function json_error_handler($level, $errstr, $errfile, $errline) {
 function json_err($description, $haystack=false) {
 	header('HTTP/1.1 500 Internal Server Error');
 	header('Content-Type: application/json');
+	header('Access-Control-Allow-Origin: *');
 	header('Cache-Control: no-cache, no-store, must-revalidate');
 	header('Pragma: no-cache');
 	header('Expires: 0');
@@ -38,6 +39,7 @@ function json_err($description, $haystack=false) {
 function send_json($data) {
 	header('HTTP/1.1 200 OK');
 	header('Content-Type: application/json');
+	header('Access-Control-Allow-Origin: *');
 	header('Cache-Control: no-cache, no-store, must-revalidate');
 	header('Pragma: no-cache');
 	header('Expires: 0');

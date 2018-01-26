@@ -475,6 +475,7 @@ return {
 	editable: editable,
 	on_edit_event: on_edit_event,
 	list_all_players: list_all_players,
+	aw_proxy: 1,
 	// Testing only
 	/*@DEV*/
 	_get_counting: _get_counting,
