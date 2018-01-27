@@ -258,7 +258,7 @@ function download_all_players($httpc, $ti, $domain, $league_key) {
 	$players_html = $httpc->request($players_url);
 
 	if (!\preg_match(
-			'/<table\s+class="ruler">\s*<caption>\s*(?:Herren|Männer)(?P<tbody>.*?)<\/table>/s',
+			'/<table\s+class="ruler">\s*<caption>\s*(?:Herren|Männer)(?:.*?<th[^>]*>Rückrunde<\/th>)?(?P<tbody>.*?)<\/table>/s',
 			$players_html, $players_m_m)) {
 		return null;
 	}
@@ -268,7 +268,7 @@ function download_all_players($httpc, $ti, $domain, $league_key) {
 	}
 
 	if (!\preg_match(
-			'/<table\s+class="ruler">\s*<caption>\s*(?:Damen|Frauen)(?P<tbody>.*?)<\/table>/s',
+			'/<table\s+class="ruler">\s*<caption>\s*(?:Damen|Frauen)(?:.*?<th[^>]*>Rückrunde<\/th>)?(?P<tbody>.*?)<\/table>/s',
 			$players_html, $players_f_m)) {
 		return null;
 	}
