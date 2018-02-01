@@ -227,6 +227,7 @@ function enter_match(match) {
 		}
 
 		if (mwinner == 'left' || mwinner == 'right') {
+			uiu.show_qs('#game');
 			bupui.make_pick(
 				state,
 				state._('network:match finished').replace('{score}', _score_text(netscore)).replace('{match}',
@@ -290,6 +291,7 @@ function ui_render_matchlist(s, event) {
 		}, (score_text ? score_text : '\xA0'));
 
 		click.on(btn, function() {
+			console.log('entering', match);
 			enter_match(match);
 		});
 	});
