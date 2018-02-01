@@ -1,4 +1,6 @@
 <?php
+namespace aufschlagwechsel\bup\tde_utils;
+use aufschlagwechsel\bup\utils;
 
 function parse_match_players($players_html) {
 	preg_match_all(
@@ -6,7 +8,7 @@ function parse_match_players($players_html) {
 		$players_html, $players_m, \PREG_SET_ORDER);
 	$players = \array_map(function($pm) {
 		return [
-			'name' => decode_html($pm['name']),
+			'name' => utils\decode_html($pm['name']),
 		];
 	}, $players_m);
 	return [
@@ -18,10 +20,15 @@ function unify_team_name($team_name) {
 	if (preg_match('/^(.*?)\s*\[[MN]\]$/', $team_name, $m)) {
 		$team_name = $m[1];
 	}
+
+	if ($team_name === 'STC BW Solingen') {
+		return 'STC Blau-Weiss Solingen';
+	}
+
 	return $team_name;
 }
 
-function _parse_score($score_html) {
+function parse_score($score_html) {
 	if (!\preg_match('/^\s*<span\s+class="score">(.*?)<\/span>\s*$/', $score_html, $m)) {
 		return null;
 	}
@@ -35,7 +42,7 @@ function _parse_score($score_html) {
 	}, $score_ms);
 }
 
-function _parse_players($players_html, $gender) {
+function parse_players($players_html, $gender) {
 	if (\preg_match_all('/
 		<tr>\s*
 		(?:<td>(?:(?P<teamnum>[0-9]+)-(?P<ranking>[0-9]+)(?:-D(?P<ranking_d>[0-9]+))?)?<\/td>)?

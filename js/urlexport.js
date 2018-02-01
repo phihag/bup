@@ -5,9 +5,9 @@ var hide_func;
 function determine_base_url() {
 	var netw = network.get_netw();
 	if (netw && netw.aw_proxy) { // No php support, use global server
-		return 'https://aufschlagwechsel.de/bup/http_proxy/tde_export.php';
+		return 'https://aufschlagwechsel.de/bup/http_proxy/';
 	}
-	return 'http_proxy/tde_export.php';
+	return 'http_proxy/';
 }
 
 function render_prepare(s, page, submit_cb) {
@@ -256,7 +256,7 @@ function init(s, page) {
 
 		uiu.text(status_text, s._('urlexport:preparing'));
 		_make_request({
-			url: determine_base_url() + '?action=prepare',
+			url: determine_base_url() + 'export2url.php?action=prepare',
 			data: utils.urlencode({
 				url: r_url,
 				user: user,
@@ -291,7 +291,7 @@ function init(s, page) {
 				}
 
 				_make_request({
-					url: determine_base_url() + '?action=submit',
+					url: determine_base_url() + 'export2url.php?action=submit',
 					data: utils.urlencode({
 						url: r_url,
 						cookies: data.cookies,

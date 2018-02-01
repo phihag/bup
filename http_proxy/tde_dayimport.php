@@ -1,45 +1,9 @@
 <?php
-require 'utils.php';
-setup_error_handler();
-
-if (!isset($_GET['url'])) {
-	throw new \Exception('Missing URL');
-}
-$match_url = $_GET['url'];
-main($match_url);
-
-function main($match_url) {
-	if (! \preg_match('/^http:\/\/localhost\/test\/matches(?:[0-9]*)\.html$|https?:\/\/www\.(?:turnier\.de|tournamentsoftware\.com)\/sport\/matches\.aspx\?id=([a-fA-F0-9-]+)/', $match_url)) {
-		throw new \Exception('Unsupported URL');
-	}
-
-	$day_html = \file_get_contents($match_url);
-	$event = parse_day($day_html);
-	$data = [
-		'type' => 'bup-export',
-		'version' => 2,
-		'event' => $event,
-	];
-
-	header('Content-Type: application/json');
-	header('Cache-Control: no-cache, no-store, must-revalidate');
-	header('Pragma: no-cache');
-	header('Expires: 0');
-
-	echo \json_encode($data, \JSON_PRETTY_PRINT);
-}
-
-function any($callback, $arr) {
-	foreach ($arr as $el) {
-		if ($callback($el)) {
-			return true;
-		}
-	}
-	return false;
-}
+namespace aufschlagwechsel\bup\tde_dayimport;
+use aufschlagwechsel\bup\utils;
 
 function make_player($pname) {
-	$pname = decode_html($pname);
+	$pname = utils\decode_html($pname);
 	if (\preg_match('/^([^[]+)\s+\[/', $pname, $matches)) {
 		$pname = $matches[1];
 	}
@@ -51,7 +15,7 @@ function make_player($pname) {
 
 function make_team($n1, $n2) {
 	$names = $n2 ? [$n1, $n2] : [$n1];
-	$players = \array_map('make_player', $names);
+	$players = \array_map('aufschlagwechsel\\bup\\tde_dayimport\\make_player', $names);
 	return [
 		'players' => $players
 	];
@@ -171,7 +135,7 @@ function parse_day($full_html) {
 		\array_push($bm_matches, $bm);
 	}
 
-	$unfinished = any(function($bm) {
+	$unfinished = utils\any(function($bm) {
 		return ! (\array_key_exists('network_score', $bm) && $bm['network_score']);
 	}, $bm_matches);
 	if ($unfinished) {
@@ -209,8 +173,8 @@ function parse_day($full_html) {
 		'matches' => $res_matches,
 	];
 
-	if (preg_match('/<div\s+class="title">\s*<h3>(?P<tournament_name>[^<]+)<\/h3>/', $full_html, $m)) {
-		$res['tournament_name'] = decode_html($m['tournament_name']);
+	if (\preg_match('/<div\s+class="title">\s*<h3>(?P<tournament_name>[^<]+)<\/h3>/', $full_html, $m)) {
+		$res['tournament_name'] = utils\decode_html($m['tournament_name']);
 	}
 
 	return $res;

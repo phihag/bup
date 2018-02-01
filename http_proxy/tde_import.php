@@ -1,15 +1,10 @@
 <?php
-require 'utils.php';
-setup_error_handler();
-require 'http_utils.php';
-require 'tde_utils.php';
+namespace aufschlagwechsel\bup\tde_import;
+use aufschlagwechsel\bup\tde_utils;
+use aufschlagwechsel\bup\utils;
 
-if (!isset($_GET['url'])) {
-	throw new \Exception('Missing URL');
-}
-$match_url = $_GET['url'];
-main($match_url);
-
+require_once './tde_utils.php';
+require_once './utils.php';
 
 function parse_teammatch($httpc, $tm_html, $domain, $match_id) {
 	$LEAGUE_KEYS = [
@@ -68,8 +63,8 @@ function parse_teammatch($httpc, $tm_html, $domain, $match_id) {
 			'league_key' => $league_key,
 		];
 		$res['team_names'] = [
-			unify_team_name(decode_html($teamnames_m['team0'])),
-			unify_team_name(decode_html($teamnames_m['team1']))
+			tde_utils\unify_team_name(utils\decode_html($teamnames_m['team0'])),
+			tde_utils\unify_team_name(utils\decode_html($teamnames_m['team1']))
 		];
 		$team_infos = [[
 			'season' => $teamnames_m['season0'],
@@ -102,8 +97,8 @@ function parse_teammatch($httpc, $tm_html, $domain, $match_id) {
 			'league_key' => $league_key,
 		];
 		$res['team_names'] = [
-			unify_team_name(decode_html($international_m['team0'])),
-			unify_team_name(decode_html($international_m['team1']))
+			tde_utils\unify_team_name(utils\decode_html($international_m['team0'])),
+			tde_utils\unify_team_name(utils\decode_html($international_m['team1']))
 		];
 		$season_id = $international_m['season_id'];
 		$team_infos = [[
@@ -168,8 +163,8 @@ function parse_teammatch($httpc, $tm_html, $domain, $match_id) {
 		$expect_players = $is_doubles ? 2 : 1;
 
 		$teams = [
-			parse_match_players(isset($mm['players_html0']) ? $mm['players_html0'] : ''),
-			parse_match_players(isset($mm['players_html1']) ? $mm['players_html1'] : ''),
+			tde_utils\parse_match_players(isset($mm['players_html0']) ? $mm['players_html0'] : ''),
+			tde_utils\parse_match_players(isset($mm['players_html1']) ? $mm['players_html1'] : ''),
 		];
 		$incomplete = (
 			(\count($teams[0]['players']) !== $expect_players) ||
@@ -197,7 +192,7 @@ function parse_teammatch($httpc, $tm_html, $domain, $match_id) {
 			'setup' => $setup,
 		];
 		if (isset($mm['score_html'])) {
-			$match['network_score'] = _parse_score($mm['score_html']);
+			$match['network_score'] = tde_utils\parse_score($mm['score_html']);
 		}
 
 		$matches[] = $match;
@@ -239,7 +234,7 @@ function buli_download_all_players($httpc, $league_key, $domain, $season_id, $dr
 
 	// Parse VRLs
 	$all_players = \array_map(function($ti) use($httpc, $domain, $season_id, $league_key, $is_hr) {
-		return download_team_vrl($httpc, $domain, $season_id, $league_key, $ti['id'], $is_hr);
+		return tde_utils\download_team_vrl($httpc, $domain, $season_id, $league_key, $ti['id'], $is_hr);
 	}, $team_infos);
 
 	return $all_players;
@@ -262,7 +257,7 @@ function download_all_players($httpc, $ti, $domain, $league_key) {
 			$players_html, $players_m_m)) {
 		return null;
 	}
-	$male_players = _parse_players($players_m_m['tbody'], 'm');
+	$male_players = tde_utils\parse_players($players_m_m['tbody'], 'm');
 	if (\count($male_players) === 0) {
 		return null;
 	}
@@ -272,7 +267,7 @@ function download_all_players($httpc, $ti, $domain, $league_key) {
 			$players_html, $players_f_m)) {
 		return null;
 	}
-	$female_players = _parse_players($players_f_m['tbody'], 'f');
+	$female_players = tde_utils\parse_players($players_f_m['tbody'], 'f');
 	if (\count($female_players) === 0) {
 		return null;
 	}
@@ -281,38 +276,3 @@ function download_all_players($httpc, $ti, $domain, $league_key) {
 
 	return $all_players;
 }
-
-
-function main($match_url) {
-	if (! \preg_match('/^https?:\/\/(?P<domain>www\.turnier\.de|[a-z]+\.tournamentsoftware\.com)\/sport\/teammatch\.aspx\?id=([a-fA-F0-9-]+)&match=(?P<match_id>[0-9]+)$/', $match_url, $matches)) {
-		throw new \Exception('Unsupported URL');
-	}
-	$httpc = AbstractHTTPClient::make();
-
-	$domain = $matches['domain'];
-	$match_id = $matches['match_id'];
-	$tm_html = $httpc->request($match_url);
-	$tm = parse_teammatch($httpc, $tm_html, $domain, $match_id);
-	$tm['report_urls'] = [$match_url];
-
-	$data = $tm;
-	if (isset($_GET['format'])) {
-		switch($_GET['format']) {
-		case 'export':
-			$data = [
-				'type' => 'bup-export',
-				'version' => 2,
-				'event' => $tm,
-			];
-			break;
-		}
-	}
-
-	header('Content-Type: application/json');
-	header('Cache-Control: no-cache, no-store, must-revalidate');
-	header('Pragma: no-cache');
-	header('Expires: 0');
-
-	echo \json_encode($data, \JSON_PRETTY_PRINT);
-}
-

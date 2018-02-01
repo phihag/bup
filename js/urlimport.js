@@ -16,7 +16,7 @@ function ui_import() {
 	var url = uiu.qs('input[name="urlimport_url"]').value;
 	var btn = uiu.qs('.urlimport_button');
 	var progress = uiu.el(btn, 'div', 'loading-icon');
-	import_tde(state, url, function(err_msg) {
+	import_url(state, url, function(err_msg) {
 		uiu.remove(progress);
 		display_error(state, err_msg);
 		if (!err_msg) {
@@ -25,8 +25,8 @@ function ui_import() {
 	});
 }
 
-function import_tde(s, match_url, cb) {
-	var import_url = baseurl + 'bup/http_proxy/tde_import.php?format=export&url=' + encodeURIComponent(match_url);
+function import_url(s, match_url, cb) {
+	var import_url = baseurl + 'bup/http_proxy/import_url.php?format=export&url=' + encodeURIComponent(match_url);
 	ajax.req({
 		url: import_url,
 		success: function(import_json) {
@@ -59,7 +59,7 @@ function import_tde(s, match_url, cb) {
 
 // cb gets called with an error message or null, and the downloaded event
 function download_tde_day(s, day_url, cb) {
-	var import_url = baseurl + 'bup/http_proxy/tde_dayimport.php?url=' + encodeURIComponent(day_url);
+	var import_url = baseurl + 'bup/http_proxy/import_url.php?format=export&url=' + encodeURIComponent(day_url);
 	ajax.req({
 		url: import_url,
 		success: function(import_json) {

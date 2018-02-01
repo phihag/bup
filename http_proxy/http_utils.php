@@ -1,4 +1,5 @@
 <?php
+namespace aufschlagwechsel\bup\http_utils;
 
 define('BUP_USER_AGENT', 'bup (phihag@phihag.de)');
 
@@ -10,7 +11,7 @@ class CookieJar {
 	}
 
 	public function read_from_stream($f) {
-		$meta = stream_get_meta_data($f);
+		$meta = \stream_get_meta_data($f);
 		$headers = $meta['wrapper_data'];
 		foreach ($headers as $h) {
 			$this->read_from_header($h);
@@ -49,7 +50,7 @@ class CookieJar {
 
 	public function set_all($cookies) {
 		foreach ($cookies as $k => $v) {
-			$this->set($k, v);
+			$this->set($k, $v);
 		}
 	}
 }
@@ -110,7 +111,7 @@ class PhpHTTPClient extends JarHTTPClient {
 
 	public function request($url, $headers=null, $method='GET', $body=null) {
 		$header = (
-			($headers ? implode("\r\n", $headers) . "\r\n" : '') .
+			($headers ? \implode("\r\n", $headers) . "\r\n" : '') .
 			$this->cjar->make_header()
 		);
 		$options = [
@@ -125,19 +126,19 @@ class PhpHTTPClient extends JarHTTPClient {
 			$options['http']['content'] = $body;
 		}
 
-		$context = stream_context_create($options);
-		$f = fopen($url, 'r', false, $context);
+		$context = \stream_context_create($options);
+		$f = \fopen($url, 'r', false, $context);
 		if ($f === false) {
 			return false;
 		}
 		$this->cjar->read_from_stream($f);
-		$page = stream_get_contents($f);
-		fclose($f);
+		$page = \stream_get_contents($f);
+		\fclose($f);
 		return $page;
 	}
 
 	public function get_error_info() {
-		return json_encode($http_response_header);
+		return \json_encode($http_response_header);
 	}
 }
 
@@ -146,36 +147,36 @@ class CurlHTTPClient extends JarHTTPClient {
 
 	public function __construct() {
 		parent::__construct();
-		$this->ch = curl_init();
-		curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($this->ch, CURLOPT_FAILONERROR, true);
+		$this->ch = \curl_init();
+		\curl_setopt($this->ch, \CURLOPT_RETURNTRANSFER, true);
+		\curl_setopt($this->ch, \CURLOPT_FAILONERROR, true);
 	}
 
 	public function request($url, $headers=null, $method='GET', $body=null) {
 		$cjar = $this->cjar;
-		curl_setopt($this->ch, CURLOPT_HEADERFUNCTION, function($ch, $header_line) use ($cjar) {
+		\curl_setopt($this->ch, \CURLOPT_HEADERFUNCTION, function($ch, $header_line) use ($cjar) {
 			$cjar->read_from_header($header_line);
-			return strlen($header_line);
+			return \strlen($header_line);
 		});
-		curl_setopt($this->ch, CURLOPT_COOKIE, $cjar->get_line());
-		curl_setopt($this->ch, CURLOPT_USERAGENT, BUP_USER_AGENT);
-		curl_setopt($this->ch, CURLOPT_URL, $url);
-		curl_setopt($this->ch, CURLOPT_CUSTOMREQUEST, $method);
+		\curl_setopt($this->ch, \CURLOPT_COOKIE, $cjar->get_line());
+		\curl_setopt($this->ch, \CURLOPT_USERAGENT, BUP_USER_AGENT);
+		\curl_setopt($this->ch, \CURLOPT_URL, $url);
+		\curl_setopt($this->ch, \CURLOPT_CUSTOMREQUEST, $method);
 		if ($headers) {
-			curl_setopt($this->ch, CURLOPT_HTTPHEADER, $headers);
+			\curl_setopt($this->ch, \CURLOPT_HTTPHEADER, $headers);
 		}
 		if ($body) {
-			curl_setopt($this->ch, CURLOPT_POSTFIELDS, $body);
+			\curl_setopt($this->ch, \CURLOPT_POSTFIELDS, $body);
 		}
-		return curl_exec($this->ch);
+		return \curl_exec($this->ch);
 	}
 
 	public function get_error_info() {
-		return curl_error($this->ch);
+		return \curl_error($this->ch);
 	}
 
 	public static function is_supported() {
-		return function_exists('curl_version');
+		return \function_exists('curl_version');
 	}
 }
 

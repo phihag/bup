@@ -4,12 +4,6 @@
 	right: 0;
 	top: 0;
 	z-index: 10000;
-
-	user-select: none;
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
 }
 .settings_layout {
 	position: absolute;
@@ -144,6 +138,7 @@
 	min-width: 10em;
 }
 
+
 #setup_manual_form th {
 	text-align: left;
 	padding-right: 0.2em;
@@ -241,4 +236,10 @@ a.settings_mode_active:visited {
 	.ingame_options > h2 {
 		display: none;
 	}
+}
+
+
+#setup_manual_form,
+.settings {
+	user-select: none;
 }
