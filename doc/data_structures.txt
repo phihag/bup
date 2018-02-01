@@ -82,6 +82,7 @@ tournament_name Name of the overall tournament (will be present on scoresheet),
 series_name     Name of the tournament series.
                 Will be used on selected event report sheets.
                 e.g. "Mannschaftsmeisterschaft Bayern 2018/2019"
+confirmed       true iff the result of this team match has been confirmed by the league organizers.
 last_update     UNIX timestamp in ms: Date of last change to this event
 report_urls     An array of URLs where the result can be exported to.
 

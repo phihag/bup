@@ -1,8 +1,15 @@
-import https://badminton-bbv.de/site/liga/liga/17/18/22951/meeting/225274
-
 BayernLiga
-	support
-	bayern-2018
+	eventsheet
+		footer?
+		last change
+		metadata
+		league names
+		team names
+		confirmed
+		comments
+		player names
+		results
+		sums
 	demo
 
 
@@ -18,11 +25,7 @@ PDF-Spielbericht Umbruch bei langem Text! -> Jörg Hupertz
 
 -> send newsletter
 
-urlimport / urlexport: common base URL facilities
-
 tunnel error reports through courtspot
-
-import https://badminton-bbv.de/site/liga/liga/17/18/22951/meeting/225324
 
 improve login
 	add a login as ... link
@@ -36,6 +39,7 @@ improve login
 
 check reload button graphic
 doc f11 (+Android +iOS) -> Markus Schwendtner
+check main design on iPad mini -> Markus Schwendtner
 
 resignation/card: auto-write text
 	write a test for this

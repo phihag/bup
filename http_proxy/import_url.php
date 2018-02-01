@@ -1,13 +1,15 @@
 <?php
 namespace aufschlagwechsel\bup\import_url;
-use aufschlagwechsel\bup\tde_import;
-use aufschlagwechsel\bup\tde_dayimport;
+use aufschlagwechsel\bup\bbv_import;
 use aufschlagwechsel\bup\http_utils;
+use aufschlagwechsel\bup\tde_dayimport;
+use aufschlagwechsel\bup\tde_import;
 use aufschlagwechsel\bup\utils;
 
 require 'utils.php';
 utils\setup_error_handler();
 require 'http_utils.php';
+require 'bbv_import.php';
 require 'tde_import.php';
 require 'tde_dayimport.php';
 
@@ -34,6 +36,8 @@ function main($match_url) {
 
 		$day_html = $httpc->request($match_url);
 		$event = tde_dayimport\parse_day($day_html);
+	} else if (bbv_import\match_url($match_url)) {
+		$event = bbv_import\import($httpc, $match_url);
 	} else {
 		throw new \Exception('Unsupported URL');
 	}

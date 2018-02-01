@@ -291,7 +291,6 @@ function ui_render_matchlist(s, event) {
 		}, (score_text ? score_text : '\xA0'));
 
 		click.on(btn, function() {
-			console.log('entering', match);
 			enter_match(match);
 		});
 	});

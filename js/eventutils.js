@@ -449,6 +449,9 @@ function default_counting(league_key) {
 	if (league_key === 'international-2017') {
 		return '3x21';
 	}
+	if (league_key === 'bayern-2018') {
+		return '3x21';
+	}
 }
 
 function umpire_pay(league_key) {
