@@ -366,6 +366,7 @@ var i18n_en = {
 'eventsheet:label|OBL-2017': '(Austrian Bundesliga) result sheet',
 'eventsheet:label|receipt': 'umpire receipt',
 'eventsheet:label|int': 'result report sheet',
+'eventsheet:label|bayern-2018': '(Bavaria) result report sheet',
 
 'stats:game': 'Game {number}',
 'stats:match': 'Match',

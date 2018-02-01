@@ -1,8 +1,28 @@
-import KK: correct VRL
+import https://badminton-bbv.de/site/liga/liga/17/18/22951/meeting/225274
+
+BayernLiga
+	support
+	bayern-2018
+	demo
+
+
+export / error handling: record start time
+report_error: store last hashchange time
+resume: warning if local copy is ahead of remote match
+	-> Olli
+disable bupabfrage when going into match
+
+
+buli pdf: checkbox Mindestanforderungen
 PDF-Spielbericht Umbruch bei langem Text! -> Jörg Hupertz
 
-
 -> send newsletter
+
+urlimport / urlexport: common base URL facilities
+
+tunnel error reports through courtspot
+
+import https://badminton-bbv.de/site/liga/liga/17/18/22951/meeting/225324
 
 improve login
 	add a login as ... link

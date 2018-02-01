@@ -17,6 +17,7 @@ var SHEETS_BY_LEAGUE = {
 	'RLM-2016': ['RLM-2016', 'receipt', 'RLM-SpO'],
 	'NLA-2017': ['NLA-2017'],
 	'OBL-2017': ['OBL-2017'],
+	'bayern-2018': ['bayern-2018'],
 	'international-2017': ['int'],
 };
 
@@ -51,6 +52,7 @@ var URLS = {
 	'OBL-2017': 'div/eventsheet_obl.xlsx',
 	'receipt': 'div/receipt.svg',
 	'int': 'div/eventsheet_international.svg',
+	'bayern-2018': 'div/eventsheet/bayern-2018.svg',
 };
 var DIRECT_DOWNLOAD_SHEETS = {
 	'BL-ballsorten-2016': true,

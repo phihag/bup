@@ -189,6 +189,15 @@ function _list(s, suffix, cb) {
 			});
 		}
 
+		// manual CourtSpot event, fill in league
+		if (!event.league_key) {
+			if (/TSV Neubiberg-Ottobrunn\s*(?:2|II)/.test(event.team_names[0])) {
+				event.league_key = 'bayern-2018';
+				event.series_name = 'Mannschaftsmeisterschaft 2017/2018 - Bayern';
+				event.tournament_name = 'Bayernliga Süd';
+			}
+		}
+
 		cb(err, event);
 	});
 

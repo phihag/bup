@@ -12,8 +12,10 @@ listed_players  Order of players listed in the setup sheet. 2 element list(home/
                 Each element of that dictionary is an array for each player.
 courts          An array describing the current configuration of courts.
 id              Globally unique event id, e.g. "CourtSpot:2016-bundesliga-refrath vs bischmisheim"
-league_key      ID of the league being played (this determines which event sheets are available, among others).
+league_key      ID of the league being played.
+                This determines which event sheets are available, what the rest times are, how the umpires get paid.
                 Strongly recommended if applicable.
+
                 Available values:
                 - German (1.&2.) Bundesliga:
                    Season 2017/2018 (5x11_15 with 90s intervals): "1BL-2017", "2BLN-2017", "2BLS-2017"
@@ -30,12 +32,13 @@ league_key      ID of the league being played (this determines which event sheet
                   KK: the league abbreviation (one of VL, LL, BL, BK, KL, KK)
                   194: the league number (004 for Verbandsliga Nord 1, 005 for Verbandsliga Nord 2 etc.)
                   2016 is always literally 2016.
+                - BayernLiga and below: "bayern-2018"
                 - Swiss NLA: "NLA-2017"
                 - Austrian Bundesliga: "OBL-2017"
                 - International matches: "international-2017" (each discipline once, 3x21)
+
                 The year is the first year that the specific ruleset was implemented in.
-                If the rules and descriptions of the league don't change (at least as far as bup is concerned),
-                the same league_key can be used for later seasons.
+                If the rules and descriptions of the league don't change (at least as far as bup is concerned), the same league_key can be used for later seasons.
 counting        Default counting scheme. Implicitly set by league_key. Set this for events without league_key.
                 Available values:
                   "3x21"       BWF since 2016
@@ -74,8 +77,11 @@ spectators      Estimate (or precise number) of spectators, e.g. 243 or "about 2
 event_name      Name of the event (will be present on scoresheet), e.g. "Finals".
                 Will be calculated from team_names if those are present.
 tournament_name Name of the overall tournament (will be present on scoresheet),
-                e.g. "1. Bundesliga 2015/2016".
+                e.g. "1. Bundesliga 2018/2019".
                 Generated from league_key if not present (this is recommended).
+series_name     Name of the tournament series.
+                Will be used on selected event report sheets.
+                e.g. "Mannschaftsmeisterschaft Bayern 2018/2019"
 last_update     UNIX timestamp in ms: Date of last change to this event
 report_urls     An array of URLs where the result can be exported to.
 
