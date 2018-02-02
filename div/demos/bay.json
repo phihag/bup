@@ -1,0 +1,330 @@
+{
+  "type": "bup-export",
+  "version": 2,
+  "event": {
+    "league_key": "bayern-2018",
+    "series_name": "Mannschaftsmeisterschaft 2017/2018 - Bayern",
+    "tournament_name": "Bayernliga Süd",
+    "team_names": [
+      "TSV Neubiberg-Ottobrunn III",
+      "TV Dillingen II"
+    ],
+    "umpires": "Markus Schwendtner / Lina Engl",
+    "matches": [
+      {
+        "setup": {
+          "match_name": "1.HD",
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Martin Kröger"
+                },
+                {
+                  "name": "Patrick Fischer"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Tim Cramer"
+                },
+                {
+                  "name": "Christian Heufelder"
+                }
+              ]
+            }
+          ],
+          "match_id": "baydemo:1.HD",
+          "is_doubles": true
+        },
+        "network_score": [
+          [
+            17,
+            21
+          ],
+          [
+            18,
+            21
+          ]
+        ]
+      },
+      {
+        "setup": {
+          "match_name": "2.HD",
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Andreas Schnurrer"
+                },
+                {
+                  "name": "Matthias Becker"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Tobias Schiegg"
+                },
+                {
+                  "name": "Thomas Roller"
+                }
+              ]
+            }
+          ],
+          "match_id": "baydemo:2.HD",
+          "is_doubles": true
+        },
+        "network_score": [
+          [
+            14,
+            21
+          ],
+          [
+            21,
+            13
+          ],
+          [
+            13,
+            21
+          ]
+        ]
+      },
+      {
+        "setup": {
+          "match_name": "DD",
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Julia Hauber"
+                },
+                {
+                  "name": "Tanja Eberl"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Elke Cramer"
+                },
+                {
+                  "name": "Natalie Paul"
+                }
+              ]
+            }
+          ],
+          "match_id": "baydemo:DD",
+          "is_doubles": true
+        },
+        "network_score": [
+          [
+            21,
+            17
+          ],
+          [
+            21,
+            14
+          ]
+        ]
+      },
+      {
+        "setup": {
+          "match_name": "1.HE",
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Martin Kröger"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Tobias Schiegg"
+                }
+              ]
+            }
+          ],
+          "match_id": "baydemo:1.HE",
+          "is_doubles": false
+        },
+        "network_score": [
+          [
+            15,
+            21
+          ],
+          [
+            22,
+            20
+          ],
+          [
+            17,
+            21
+          ]
+        ]
+      },
+      {
+        "setup": {
+          "match_name": "2.HE",
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Patrick Fischer"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Tim Cramer"
+                }
+              ]
+            }
+          ],
+          "match_id": "baydemo:2.HE",
+          "is_doubles": false
+        },
+        "network_score": [
+          [
+            18,
+            21
+          ],
+          [
+            13,
+            21
+          ]
+        ]
+      },
+      {
+        "setup": {
+          "match_name": "DE",
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Tanja Eberl"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Elke Cramer"
+                }
+              ]
+            }
+          ],
+          "match_id": "baydemo:DE",
+          "is_doubles": false
+        },
+        "network_score": [
+          [
+            17,
+            21
+          ],
+          [
+            21,
+            16
+          ],
+          [
+            16,
+            21
+          ]
+        ]
+      },
+      {
+        "setup": {
+          "match_name": "3.HE",
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Kilian Ming-Zhe Maurer"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Thomas Roller"
+                }
+              ]
+            }
+          ],
+          "match_id": "baydemo:3.HE",
+          "is_doubles": false
+        },
+        "network_score": [
+          [
+            21,
+            18
+          ],
+          [
+            21,
+            18
+          ]
+        ]
+      },
+      {
+        "setup": {
+          "match_name": "GD",
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "Andreas Schnurrer"
+                },
+                {
+                  "name": "Julia Hauber"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "Christian Heufelder"
+                },
+                {
+                  "name": "Natalie Paul"
+                }
+              ]
+            }
+          ],
+          "match_id": "baydemo:GD",
+          "is_doubles": true
+        },
+        "network_score": [
+          [
+            16,
+            21
+          ],
+          [
+            21,
+            19
+          ],
+          [
+            21,
+            15
+          ]
+        ]
+      }
+    ],
+    "location": "Sportzentrum Neubiberg",
+    "confirmed": true,
+    "starttime": "18:00",
+    "date": "27.01.2018",
+    "report_urls": [
+      "https://badminton-bbv.de/site/liga/liga/17/18/22951/meeting/225274/"
+    ],
+    "notes": "Nichts passiert",
+    "staticnet_message": "Bayernliga-Demo (nur lokal)",
+    "last_update": 1517084625000
+  }
+}

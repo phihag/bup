@@ -11,7 +11,9 @@ BayernLiga
 		results
 		sums
 	demo
+		demo to doc/slides
 
+-> send newsletter
 
 export / error handling: record start time
 report_error: store last hashchange time
@@ -22,8 +24,6 @@ disable bupabfrage when going into match
 
 buli pdf: checkbox Mindestanforderungen
 PDF-Spielbericht Umbruch bei langem Text! -> Jörg Hupertz
-
--> send newsletter
 
 tunnel error reports through courtspot
 
