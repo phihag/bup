@@ -631,11 +631,13 @@ _describe('eventutils', function() {
 		assert.deepStrictEqual(bup.eventutils.default_counting('RLN-2016'), '3x21');
 		assert.deepStrictEqual(bup.eventutils.default_counting('RLM-2016'), '3x21');
 		assert.deepStrictEqual(bup.eventutils.default_counting('OBL-2017'), '3x21');
+		assert.deepStrictEqual(bup.eventutils.default_counting('bayern-2018'), '3x21');
 	});
 
 	_it('get_min_pause', function() {
 		assert.deepStrictEqual(bup.eventutils.get_min_pause('NLA-2017'), 900000);
 		assert.deepStrictEqual(bup.eventutils.get_min_pause('OBL-2017'), 900000);
+		assert.deepStrictEqual(bup.eventutils.get_min_pause('bayern-2018'), 20 * 60 * 1000);
 	});
 
 	_it('annotate counting', function() {

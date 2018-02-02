@@ -347,6 +347,9 @@ function get_min_pause(league_key) {
 	if (league_key === 'OBL-2017') {
 		return 15 * 60000; // §6f Bundesligaordnung
 	}
+	if (league_key === 'bayern-2018') {
+		return 20 * 60000; // §41.6 Spielordnung
+	}
 	return undefined;
 }
 
