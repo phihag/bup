@@ -1,9 +1,5 @@
 BayernLiga
-	eventsheet
-		start + endtime
-		player names
-		results
-		sums
+	eventsheet: extradata (starttime + notes)
 	demo
 		demo to doc/slides
 

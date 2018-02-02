@@ -920,6 +920,7 @@ var render_receipt = _svg_func(function(svg, ev, es_key, extra_data, extra_files
 });
 
 var render_bayern = _svg_func(function(svg, ev, es_key, extra_data) {
+	eventutils.set_metadata(ev);
 	var total_sums = {
 		p: [0, 0],
 		g: [0, 0],
@@ -1010,15 +1011,15 @@ var render_bayern = _svg_func(function(svg, ev, es_key, extra_data) {
 		(ev.confirmed === true) ?
 		'(genehmigt)' :
 		((ev.confirmed === false) ? '(noch nicht genehmigt)': '')));
-	_svg_text(svg, 'dateline', ev.date + ', ' + ev.starttime + ' Uhr');
+	_svg_text(svg, 'dateline', ev.date + ', ' + extra_data.starttime + ' Uhr');
 	_svg_text(svg, 'eventline', ev.event_name + ' - ' + total_sums.m.join(' : '));
 
 	var last_update = calc_last_update(ev.matches) || ev.last_update;
 	_svg_text(svg, 'timeline',
-		'Spielbeginn: ' + ev.starttime + ' Uhr' +
+		'Spielbeginn: ' + extra_data.starttime + ' Uhr' +
 		(last_update ? ' - Spielende: ' + utils.time_str(last_update) : ''));
 
-	_svg_text(svg, 'notes', ev.notes);
+	_svg_text(svg, 'notes', extra_data.notes);
 
 
 	if (ev.last_update) {
@@ -2276,7 +2277,7 @@ function show_dialog(es_key) {
 		}
 		break;
 	case 'bayern-2018':
-		configure_report(['location', 'starttime', 'notes']);
+		configure_report(['starttime', 'notes']);
 		uiu.hide(download_link_container);
 		break;
 	default:
