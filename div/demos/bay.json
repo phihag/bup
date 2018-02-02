@@ -3,6 +3,7 @@
   "version": 2,
   "event": {
     "league_key": "bayern-2018",
+    "team_competition": true,
     "series_name": "Mannschaftsmeisterschaft 2017/2018 - Bayern",
     "tournament_name": "Bayernliga Süd",
     "team_names": [
@@ -323,7 +324,7 @@
     "report_urls": [
       "https://badminton-bbv.de/site/liga/liga/17/18/22951/meeting/225274/"
     ],
-    "notes": "Nichts passiert",
+    "notes": "Spielverzögerung durch Gänse in der Halle.",
     "staticnet_message": "Bayernliga-Demo (nur lokal)",
     "last_update": 1517084625000
   }

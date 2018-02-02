@@ -110,7 +110,7 @@ function render_player_sel(s, tbody, all_players, key) {
 	var tr = uiu.el(tbody, 'tr', {});
 	uiu.el(tr, 'th', {
 		'class': 'editevent_' + key + '_players',
-	}, s._('editevent:' + key + ' players'));
+	}, s._('editevent|' + key + ' players'));
 	for (var team_id = 0;team_id < 2;team_id++) {
 		var td = uiu.el(tr, 'td', {
 			'class': 'editevent_' + key + '_players',

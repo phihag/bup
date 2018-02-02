@@ -919,6 +919,118 @@ var render_receipt = _svg_func(function(svg, ev, es_key, extra_data, extra_files
 	};
 });
 
+var render_bayern = _svg_func(function(svg, ev, es_key, extra_data) {
+	var total_sums = {
+		p: [0, 0],
+		g: [0, 0],
+		m: [0, 0],
+	};
+	var match_container = svg.getElementById('es_svg_table');
+	var y = 62;
+	var FONT_SIZE = 2.85;
+	var TEXT_OFFSET = 3.53;
+	var TEXT_STYLE = 'font-size:' + FONT_SIZE;
+	ev.matches.forEach(function(m, i) {
+		var sums = calc_sums(m);
+		_add_totals(total_sums, sums);
+
+		if (i > 0) {
+			utils.svg_el(match_container, 'line', {
+				x1: 15,
+				x2: 275,
+				y1: y,
+				y2: y,
+				style: 'stroke-width:.1',
+			});
+		}
+
+		var height = m.setup.is_doubles ? 10 : 5;
+		var my = (y + height / 2 - 2.5 + TEXT_OFFSET);
+		utils.svg_el(match_container, 'text', {
+			x: 24,
+			y: my,
+			'text-anchor': 'middle',
+			style: TEXT_STYLE,
+		}, m.setup.match_name);
+
+		m.setup.teams.forEach(function(team, team_idx) {
+			team.players.forEach(function(player, player_idx) {
+				utils.svg_el(match_container, 'text', {
+					x: 33 + 73 * team_idx,
+					y: y + TEXT_OFFSET + 5 * player_idx,
+					style: TEXT_STYLE,
+				}, player.name);
+			});
+		});
+
+		var netscore = m.network_score || [];
+		netscore.forEach(function(game_score, game_idx) {
+			utils.svg_el(match_container, 'text', {
+				x: 187 + 16 * game_idx,
+				y: my,
+				style: TEXT_STYLE,
+				'text-anchor': 'middle',
+			}, game_score.join(':'));
+		});
+
+		if (sums.show) {
+			utils.svg_el(match_container, 'text', {
+				x: 235,
+				y: my,
+				style: TEXT_STYLE,
+				'text-anchor': 'middle',
+			}, sums.p.join(':'));
+			utils.svg_el(match_container, 'text', {
+				x: 251,
+				y: my,
+				style: TEXT_STYLE,
+				'text-anchor': 'middle',
+			}, sums.g.join(':'));
+			utils.svg_el(match_container, 'text', {
+				x: 267,
+				y: my,
+				style: TEXT_STYLE,
+				'text-anchor': 'middle',
+			}, sums.m.join(':'));
+		}
+
+		y += height;
+	});
+
+	_svg_text(svg, 'psum', total_sums.p.join(':'));
+	_svg_text(svg, 'gsum', total_sums.g.join(':'));
+	_svg_text(svg, 'msum', total_sums.m.join(':'));
+
+	_svg_text(svg, 'team0', ev.team_names[0]);
+	_svg_text(svg, 'team1', ev.team_names[1]);
+
+	_svg_text(svg, 'series_name', ev.series_name);
+	_svg_text(svg, 'tournament_name', ev.tournament_name);
+	_svg_text(svg, 'confirmed', (
+		(ev.confirmed === true) ?
+		'(genehmigt)' :
+		((ev.confirmed === false) ? '(noch nicht genehmigt)': '')));
+	_svg_text(svg, 'dateline', ev.date + ', ' + ev.starttime + ' Uhr');
+	_svg_text(svg, 'eventline', ev.event_name + ' - ' + total_sums.m.join(' : '));
+
+	var last_update = calc_last_update(ev.matches) || ev.last_update;
+	_svg_text(svg, 'timeline',
+		'Spielbeginn: ' + ev.starttime + ' Uhr' +
+		(last_update ? ' - Spielende: ' + utils.time_str(last_update) : ''));
+
+	_svg_text(svg, 'notes', ev.notes);
+
+
+	if (ev.last_update) {
+		_svg_text(svg, 'last_update', 'Letzte Änderung: ' + utils.datetime_str(ev.last_update));
+	}
+
+	return {
+		filename: state._('eventsheet:label|bayern-2018') + ' ' + ev.event_name + '.pdf',
+		orientation: 'landscape',
+	};
+});
+
 var render_basic_eventsheet = _svg_func(function(svg, ev, es_key, extra_data) {
 	eventutils.set_metadata(ev);
 
@@ -1718,6 +1830,8 @@ function render_previewable(preview_el, ev, es_key, ui8r, extra_data, extra_file
 		return render_int(preview_el, ev, es_key, ui8r, extra_data);
 	case 'receipt':
 		return render_receipt(preview_el, ev, es_key, ui8r, extra_data, extra_files);
+	case 'bayern-2018':
+		return render_bayern(preview_el, ev, es_key, ui8r, extra_data);
 	default:
 		throw new Error('Unsupported eventsheet key ' + es_key);
 	}
@@ -2160,6 +2274,10 @@ function show_dialog(es_key) {
 			}, 'km');
 
 		}
+		break;
+	case 'bayern-2018':
+		configure_report(['location', 'starttime', 'notes']);
+		uiu.hide(download_link_container);
 		break;
 	default:
 		uiu.hide_qs('.eventsheet_spectators');

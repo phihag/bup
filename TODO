@@ -1,12 +1,6 @@
 BayernLiga
 	eventsheet
-		footer?
-		last change
-		metadata
-		league names
-		team names
-		confirmed
-		comments
+		start + endtime
 		player names
 		results
 		sums

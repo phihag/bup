@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="297cm" height="210cm" viewBox="0 0 297 210">
+
+<style>
+text {
+  font-family: 'Helvetica Neue', Helvetica, Arial, Arial, sans-serif;
+}
+line {
+  stroke: #000;
+}
+</style>
+
+<text x="15" y="15" style="font-size:5;font-weight:bold" id="es_svg_series_name"></text>
+
+<text x="15" y="22" style="font-size:4.2;font-weight:bold" id="es_svg_tournament_name"></text>
+
+<text x="15" y="28" style="font-size:3.5">Spielbericht</text>
+<text x="35" y="28" style="font-size:3.5" id="es_svg_confirmed"></text>
+
+<text x="15" y="38" style="font-size:3.6;font-weight:bold;" id="es_svg_eventline"></text>
+
+<text x="15" y="43.5" style="font-size:3.5" id="es_svg_dateline"></text>
+
+<!-- header -->
+<text x="33" y="60" style="font-size:2.85" id="es_svg_team0"></text>
+<text x="106" y="60" style="font-size:2.85" id="es_svg_team1"></text>
+<text x="187" y="60" text-anchor="middle" style="font-size:2.85">1. Satz</text>
+<text x="203" y="60" text-anchor="middle" style="font-size:2.85">2. Satz</text>
+<text x="219" y="60" text-anchor="middle" style="font-size:2.85">3. Satz</text>
+<text x="235" y="60" text-anchor="middle" style="font-size:2.85">Spielpunkte</text>
+<text x="251" y="60" text-anchor="middle" style="font-size:2.85">Sätze</text>
+<text x="267" y="60" text-anchor="middle" style="font-size:2.85">Spiele</text>
+<line x1="15" x2="275" y1="62" y2="62" style="stroke-width:.3" />
+
+<g id="es_svg_table" />
+
+<line x1="15" x2="275" y1="122" y2="122" style="stroke-width:.3" />
+<text x="235" y="126.8" text-anchor="middle" style="font-size:3;font-weight:bold" id="es_svg_psum"></text>
+<text x="251" y="126.8" text-anchor="middle" style="font-size:3;font-weight:bold" id="es_svg_gsum"></text>
+<text x="267" y="126.8" text-anchor="middle" style="font-size:3;font-weight:bold" id="es_svg_msum"></text>
+<line x1="15" x2="275" y1="129" y2="129" style="stroke-width:.1" />
+
+
+<text x="15" y="139.5" style="font-size:2.85" id="es_svg_timeline"></text>
+
+<text x="15" y="148.5" style="font-size:2.85">Bemerkungen:</text>
+<text x="34" y="148.5" style="font-size:2.85" id="es_svg_notes"></text>
+
+<text x="15" y="157.5" style="font-size:2.85" id="es_svg_last_update"></text>
+
+</svg>
