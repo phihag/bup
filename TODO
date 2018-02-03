@@ -1,13 +1,6 @@
-BayernLiga
-	umpire pay (in bayernliga only?)
-	enable receipt?
-	demo
-		demo to doc/slides
-	ask hubert: is this the correct form?
-	update newsletter
-		requested from BBV, but negative answer
-
 -> send newsletter
+
+RLSO (both - Ost and -Süd)
 
 export / error handling: record start time
 report_error: store last hashchange time
