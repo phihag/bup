@@ -25,7 +25,8 @@ league_key      ID of the league being played.
                    RL West: "RLW-2016"
                    RL Nord: "RLN-2016"
                    RL Mitte: "RLM-2016"
-                   RL SüdOst Ost: "RLSOO-2017" (in development)
+                   RL SüdOst Ost: "RLSOO-2017"
+                   RL SüdOst Süd: "RLSOS-2017"
                 - NRW-Oberliga: "NRW-O19-OL-002-2016", "NRW-O19-OL-003-2016".
                 - Lower NRW leagues: Lots of IDs like "NRW-O19-S1-KK-194-2016". Replace in this example:
                   S1: is the district (one of N1, N2, S1, S2)

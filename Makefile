@@ -73,6 +73,9 @@ dist: cleandist ## Create distribution files
 		div/bundesliga-logo.svg \
 		div/buli2017_mindestanforderungen_schiedsrichter.svg \
 		div/buli2017_mindestanforderungen_verein.svg
+	mkdir -p dist/bup/div/eventsheet
+	node div/minify_svg dist/bup/div/eventsheet \
+		div/eventsheet/*.svg
 	cp doc/ -R dist/bup/
 	cp div/bupdate.php dist/bup/div/bupdate.txt
 	cp \
