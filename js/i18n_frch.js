@@ -366,6 +366,7 @@ var i18n_frch = {
 'eventsheet:label|receipt': 'bon pour la réception',
 'eventsheet:label|int': 'feuille de résultats',
 'eventsheet:label|bayern-2018': '(Bavière) feuille de résultats',
+'eventsheet:label|RLSO-2017': '(German Group Sud-est) feuille de résultats',
 
 'stats:game': 'Set {number}',
 'stats:match': 'Match',

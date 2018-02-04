@@ -20,6 +20,8 @@ function parse_teammatch($httpc, $tm_html, $domain, $match_id) {
 		'Bundesligen 2017/18:2. Bundesliga (2. BL-Nord) - (002) 2. Bundesliga Nord' => '2BLN-2017',
 		'Bundesligen 2017/18:2. Bundesliga (2. BL-Süd) - (003) 2. Bundesliga Süd' => '2BLS-2017',
 		'BundesLiga 2017-2018:Bundesliga - 1. Bundesliga' => 'OBL-2017',
+		'Ligen DBV 2017/18 (ohne Bundesligen):Gruppe SüdOst (SO) - (002) Regionalliga SüdOst Süd' => 'RLSOS-2017',
+		'Ligen DBV 2017/18 (ohne Bundesligen):Gruppe SüdOst (SO) - (001) Regionalliga SüdOst Ost' => 'RLSOO-2017',
 	];
 
 	if (!\preg_match('/

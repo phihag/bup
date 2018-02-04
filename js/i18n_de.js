@@ -370,6 +370,7 @@ var i18n_de = {
 'eventsheet:label|receipt': 'Schiedsrichter-Quittung',
 'eventsheet:label|int': 'Spielbericht',
 'eventsheet:label|bayern-2018': 'Spielbericht',
+'eventsheet:label|RLSO-2017': 'Spielbericht',
 
 'stats:game': '{number}. Satz',
 'stats:match': 'Spiel',

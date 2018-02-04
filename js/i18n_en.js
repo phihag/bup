@@ -368,6 +368,7 @@ var i18n_en = {
 'eventsheet:label|receipt': 'umpire receipt',
 'eventsheet:label|int': 'result report sheet',
 'eventsheet:label|bayern-2018': '(Bavaria) result report sheet',
+'eventsheet:label|RLSO-2017': '(German Group SouthEast) result report sheet',
 
 'stats:game': 'Game {number}',
 'stats:match': 'Match',
