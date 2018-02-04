@@ -15,6 +15,8 @@ var SHEETS_BY_LEAGUE = {
 	'RLW-2016': ['RLW-2016', 'receipt', 'NRW-Satzungen'],
 	'RLN-2016': ['RLN-2016', 'receipt', 'RLN-Satzungen'],
 	'RLM-2016': ['RLM-2016', 'receipt', 'RLM-SpO'],
+	'RLSOO-2017': ['RLSO-2017', 'receipt', 'RLSO-SpO'],
+	'RLSOS-2017': ['RLSO-2017', 'receipt', 'RLSO-SpO'],
 	'NLA-2017': ['NLA-2017'],
 	'OBL-2017': ['OBL-2017'],
 	'bayern-2018': ['bayern-2018'],
@@ -53,6 +55,7 @@ var URLS = {
 	'receipt': 'div/receipt.svg',
 	'int': 'div/eventsheet_international.svg',
 	'bayern-2018': 'div/eventsheet/bayern-2018.svg',
+	'RLSO-SpO': 'http://www.badminton-gruppe-suedost.de/ordnungen/GrSO_SpO-2017.pdf',
 };
 var DIRECT_DOWNLOAD_SHEETS = {
 	'BL-ballsorten-2016': true,
@@ -65,6 +68,7 @@ var EXTERNAL_DOWNLOAD_SHEETS = {
 	'RLN-Satzungen': true,
 	'RLM-SpO': true,
 	'NRW-Satzungen': true,
+	'RLSO-SpO': true,
 };
 var NO_DIALOG = {
 	'buli2017-minsr': true,
@@ -2324,6 +2328,11 @@ return {
 	show_preview: show_preview,
 	render_links: render_links,
 	calc_match_id: calc_match_id,
+
+	// Testing only
+	/*@DEV*/
+	_SHEETS_BY_LEAGUE: SHEETS_BY_LEAGUE,
+	/*/@DEV*/
 };
 
 })();

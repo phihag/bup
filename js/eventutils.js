@@ -238,6 +238,13 @@ function name_by_league(league_key) {
 	if (league_key === 'international-2017') {
 		return 'International match';
 	}
+	if (league_key === 'RLSOO-2017') {
+		return 'Regionalliga SüdOst Ost';
+	}
+	if (league_key === 'RLSOS-2017') {
+		return 'Regionalliga SüdOst Süd';
+	}
+
 	if (league_key === 'RLW-2016') {
 		league_key = 'NRW-O19-RL-001-2016';
 	}
@@ -350,6 +357,9 @@ function get_min_pause(league_key) {
 	if (league_key === 'bayern-2018') {
 		return 20 * 60000; // §41.6 Spielordnung
 	}
+	if (/^RLSO[SO]-2017$/.test(league_key)) {
+		return 20 * 60000; // §7.7 Spielordnung der Gruppe SüdOst (= 30 - 10 minutes)
+	}
 	return undefined;
 }
 
@@ -455,6 +465,9 @@ function default_counting(league_key) {
 	if (league_key === 'bayern-2018') {
 		return '3x21';
 	}
+	if (/^RLSO[SO]-2017$/.test(league_key)) {
+		return '3x21';
+	}
 }
 
 function umpire_pay(league_key) {
@@ -464,28 +477,39 @@ function umpire_pay(league_key) {
 			per_km: .3,
 			currency: '€',
 		};
-	} else if (/^2BL[NS]-/.test(league_key)) {
+	}
+	if (/^2BL[NS]-/.test(league_key)) {
 		return { // §3.2 BLO
 			base: 35,
 			per_km: .3,
 			currency: '€',
 		};
-	} else if (/^RLW-/.test(league_key) || NRW2016_RE.test(league_key)) {
+	}
+	if (/^RLW-/.test(league_key) || NRW2016_RE.test(league_key)) {
 		return { // §1.1 SpO A2
 			base: 25,
 			per_km: .3,
 			currency: '€',
 		};
-	} else if (/^RLN-/.test(league_key)) {
+	}
+	if (/^RLN-/.test(league_key)) {
 		return { // §4 Finanzordnung Gruppe Nord
 			base: 20,
 			per_km: .3,
 			currency: '€',
 		};
-	} else if (/^RLM-/.test(league_key)) {
+	}
+	if (/^RLM-/.test(league_key)) {
 		return { // §2.23.1.2.14 SpO / §.7 Finanzordnung
 			base: 35,
 			per_km: .3, // §6.1c HBV FO
+			currency: '€',
+		};
+	}
+	if (/^RLSO[SO]-/.test(league_key)) {
+		return { // 10.2c SpO
+			base: 25,
+			per_km: .3,
 			currency: '€',
 		};
 	}

@@ -340,8 +340,8 @@ function preferred_by_league(league_key) {
 			'2.HE',
 			'3.HE',
 		];
-	case 'OBL-2017':
-		// Bundesligaordnung §6.1
+	case 'bayern-2018': // Spielordnung §41.5
+	case 'OBL-2017': // Bundesligaordnung §6.1
 		return [
 			'1.HD',
 			'2.HD',
@@ -351,6 +351,19 @@ function preferred_by_league(league_key) {
 			'DE',
 			'3.HE',
 			'GD',
+		];
+	case 'RLSOO-2017':
+	case 'RLSOS-2017':
+		// Spielordnung §7.9
+		return [
+			'1.HD',
+			'DD',
+			'2.HD',
+			'1.HE',
+			'DE',
+			'GD',
+			'2.HE',
+			'3.HE',
 		];
 	}
 }

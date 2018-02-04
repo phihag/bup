@@ -1,8 +1,14 @@
 RLSO (both - Ost and -Süd)
-	league names
+	import from turnier.de
+	demo
+	demo -> doc/slides
 	eventsheet
-	umpire pay (test)
-	rest times (test)
+		create template file
+		pass through template (with fields)
+		notes
+		team names
+		other header
+
 
 export / error handling: record start time
 report_error: store last hashchange time
@@ -10,10 +16,8 @@ resume: warning if local copy is ahead of remote match
 	-> Olli
 disable bupabfrage when going into match
 
-eventsheet: handle 404
-
 buli pdf: checkbox Mindestanforderungen
-PDF-Spielbericht Umbruch bei langem Text! -> Jörg Hupertz
+PDF-Spielbericht Umbruch bei langem Text! -> Jörg Hupertz (Wipperfeld - Trittau)
 
 tunnel error reports through courtspot
 
@@ -55,7 +59,7 @@ tx allow selecting resignation
 teamcourt/international: also color game
 2court: game in color as well, and discipline grey
 
-
+eventsheet: handle 404
 
 order @wdmu19
 	tournament optimization

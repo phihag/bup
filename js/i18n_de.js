@@ -360,6 +360,7 @@ var i18n_de = {
 'eventsheet:label|RLN-Satzungen': 'Satzungen und Ordnungen',
 'eventsheet:label|RLM-2016': 'Spielbericht',
 'eventsheet:label|RLM-SpO': 'Spielordnung',
+'eventsheet:label|RLSO-SpO': 'Spielordnung',
 'eventsheet:label|team-1BL-2015': 'Mannschaftsaufstellung (2015)',
 'eventsheet:label|team-2BL-2015': 'Mannschaftsaufstellung (2015)',
 'eventsheet:label|NRW-2016': 'Spielbericht',

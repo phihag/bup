@@ -129,6 +129,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 		calc: calc,
 		courtspot: courtspot,
 		displaymode: displaymode,
+		eventsheet: eventsheet,
 		eventutils: eventutils,
 		extradata: extradata,
 		i18n: i18n,
