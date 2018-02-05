@@ -8,8 +8,10 @@
       "TSV Neuhausen-Nymphenburg 2"
     ],
     "team_competition": true,
+    "last_update": 1513511112000,
     "date": "17.12.2017",
     "starttime": "10:00",
+    "notes": "Start 3 Minuten später wegen Rennmäusen in der Halle",
     "location": "85579 Neubiberg, Halle des TSV Neubiberg, Zwergerstr. 28",
     "umpires": "Lina Engl, Andreas Handtmann",
     "staticnet_message": "Demo Regionalliga SüdOst (nur lokal)",
@@ -856,6 +858,22 @@
         }
       ]
     ],
+    "backup_players": [[{
+      "firstname": "Julian",
+      "lastname": "Blaumoser",
+      "name": "Julian Blaumoser",
+      "textid": "07-036132",
+      "gender": "m",
+      "ranking": 18,
+      "ranking_d": 20
+    }], [{
+      "firstname": "Anke",
+      "lastname": "Betz",
+      "name": "Anke Betz",
+      "textid": "07-017063",
+      "gender": "f",
+      "ranking": 21
+    }]],
     "matches": [
       {
         "setup": {

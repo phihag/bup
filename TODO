@@ -1,11 +1,9 @@
 RLSO (both - Ost and -Süd)
-	demo -> doc/slides
 	eventsheet
-		create template file
-		pass through template (with fields)
-		notes
-		team names
-		other header
+		sums
+		totals
+		winner
+		test with MSO
 
 
 export / error handling: record start time

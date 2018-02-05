@@ -56,6 +56,7 @@ var URLS = {
 	'int': 'div/eventsheet_international.svg',
 	'bayern-2018': 'div/eventsheet/bayern-2018.svg',
 	'RLSO-SpO': 'http://www.badminton-gruppe-suedost.de/ordnungen/GrSO_SpO-2017.pdf',
+	'RLSO-2017': 'div/eventsheet/rlso-2017.xlsx',
 };
 var DIRECT_DOWNLOAD_SHEETS = {
 	'BL-ballsorten-2016': true,
@@ -1767,6 +1768,117 @@ function save_obl(ev, es_key, ui8r, extra_data) {
 	});
 }
 
+function save_rlso2017(ev, es_key, ui8r, extra_data) {
+	eventutils.set_metadata(ev);
+	var last_update = calc_last_update(ev.matches) || ev.last_update;
+
+	var total_sums = {
+		p: [0, 0],
+		g: [0, 0],
+		m: [0, 0],
+	};
+
+	xlsx.open(ui8r, function(xlsx_file) {
+		xlsx_file.modify_sheet('1', function() {
+			xlsx_file.save('Spielbericht ' + ev.event_name + '.xlsx');
+		}, function(sheet) {
+			var team_names = ev.team_names;
+			sheet.text('D3', ev.tournament_name);
+			sheet.text('D5', team_names[0]);
+			sheet.text('D7', team_names[1]);
+			sheet.text('O7', extra_data.umpires.replace(',', ' /'));
+			sheet.text('E30', extra_data.notes);
+			sheet.text('E28', extra_data.backup_players0);
+			sheet.text('I28', extra_data.backup_players1);
+			sheet.text('A10', extra_data.starttime);
+
+			if (last_update) {
+				sheet.text('A26', utils.time_str(last_update));
+			}
+
+			if (ev.date) {
+				sheet.text('E34', ', den ' + ev.date);
+			}
+
+			// Location
+			var location_m = /^\s*[0-9]{5}\s+([^,]+),\s*(.+)$/.exec(extra_data.location);
+			if (location_m) {
+				sheet.text('A34', location_m[1]);
+				sheet.text('O5', location_m[2]);
+			} else {
+				sheet.text('O5', extra_data.location);
+			}
+
+			ev.matches.forEach(function(match) {
+				var eid = calc_match_id(match);
+				var row = {
+					'1.HD': 12,
+					'HD1': 12,
+					'DD': 14,
+					'2.HD': 16,
+					'HD2': 16,
+					'1.HE': 18,
+					'HE1': 18,
+					'DE': 19,
+					'GD': 20,
+					'2.HE': 22,
+					'HE2': 22,
+					'3.HE': 23,
+					'HE3': 23,
+				}[eid];
+				if (!row) {
+					report_problem.silent_error('Cannot find row in RLSO-2017 sheet for ' + eid);
+					return;
+				}
+
+				match.setup.teams.forEach(function(team, team_idx) {
+					team.players.forEach(function(player, player_idx) {
+						sheet.text((team_idx ? 'G' : 'D') + (row + player_idx), player.name);
+
+						var p = player;
+						if (!player.ranking && ev.all_players) {
+							p = utils.find(ev.all_players[team_idx], function(ap) {
+								return ap.name === player.name;
+							}) || player;
+						}
+						sheet.text(
+							(team_idx ? 'F' : 'C') + (row + player_idx),
+							match.setup.is_doubles ? (p.ranking_d || p.ranking) : p.ranking);
+					});
+				});
+
+				var netscore = match.network_score || [];
+				if (netscore.length > 0) {
+					netscore.forEach(function(game, game_idx) {
+						game.forEach(function(score, team_idx) {
+							sheet.val(xlsx.add_col('I', 3 * game_idx + 2 * team_idx) + row, score);
+						});
+					});
+
+					var sums = calc_sums(match);
+					if (sums.show) {
+						['p', 'g', 'm'].forEach(function(key, sum_idx) {
+							sheet.val(xlsx.add_col('R', 2 * sum_idx) + row, sums[key].join(' : '));
+						});
+
+						_add_totals(total_sums, sums);
+					}
+				}
+			});
+
+			if (total_sums.show) {
+				['p', 'g', 'm'].forEach(function(key, sum_idx) {
+					sheet.val(xlsx.add_col('R', 2 * sum_idx) + 25, total_sums[key].join(' : '));
+				});
+			}
+
+			if ((total_sums.m[0] >= 4) || (total_sums.m[1] >= 4))  {
+				sheet.val('E25', (total_sums.m[0] === 4) ? 'Unentschieden' : (total_sums.m[0] > 4 ? team_names[0] : team_names[1]));
+			}
+		});
+	});
+}
+
 
 function direct_download(es_key, ui8r) {
 	var ext = /\.([a-z0-9]+)$/.exec(URLS[es_key])[1];
@@ -1794,6 +1906,8 @@ function es_render(ev, es_key, ui8r, extra_data, extra_files) {
 		return save_bundesliga2016(ev, es_key, ui8r, extra_data);
 	case 'OBL-2017':
 		return save_obl(ev, es_key, ui8r, extra_data);
+	case 'RLSO-2017':
+		return save_rlso2017(ev, es_key, ui8r, extra_data);
 	}
 
 	// Configure preview
@@ -2282,6 +2396,26 @@ function show_dialog(es_key) {
 		break;
 	case 'bayern-2018':
 		configure_report(['starttime', 'notes']);
+		uiu.hide(download_link_container);
+		break;
+	case 'RLSO-2017':
+		// TODO configure this more
+		configure_report(['umpires', 'location', 'notes', 'starttime']);
+		['backup_players'].forEach(function(key) {
+			['team 1', 'team 2'].forEach(function(team_name, team_id) {
+				var whole_key = key + team_id;
+				var label = uiu.el(report, 'label', 'eventsheet_dynamic eventsheet_dynamic_recalc');
+				uiu.el(label, 'span', {
+					'data-es-i18n': 'eventsheet|' + key,
+				}, state._('eventsheet|' + key, {
+					team_name: team_name,
+				}));
+				label.appendChild(document.createTextNode(' ')); // compatibility to HTML UI
+				uiu.el(label, 'input', {
+					name: whole_key,
+				});
+			});
+		});
 		uiu.hide(download_link_container);
 		break;
 	default:
