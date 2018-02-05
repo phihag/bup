@@ -3,28 +3,32 @@ Depending on the initial URL (the hash part of it), bup runs in different modes.
 Ticker(backend) setup
 =====================
 
-demo      A one-match demo (will start right in the match)
-bldemo    Demo of a Bundesliga match
-bldemo_inprogress Demo of a Bundesliga match already running
-bldemo_incomplete Demo of a Bundesliga match where not all players have been configured yet
-e_bldemo  Demo of a Bundesliga match where nothing has been configured yet
-edemo     Demo of an event (empty)
-vdemo     Demo of an event (in progress)
 btde      Run under badmintonticker
 courtspot Run under CourtSpot
 csde      Run under courtspot.de
 btsh      Badminton tournament server (HTTP protocol)
-tdemo     Tournament demo
-wdmudemo  Youth tournament demo (with lots of finals on Sunday)
+jticker   Run under meyerjo/ticker (shuttlecock-live)
+
+There are also many demos (which only run locally) available:
+
+demo      A one-match demo (will start right in the match)
+baydemo   Bayernliga demo (also applies to lower divisions)
+bldemo    Demo of a Bundesliga match
+bldemo_incomplete Demo of a Bundesliga match where not all players have been configured yet
+bldemo_inprogress Demo of a Bundesliga match already running
+e_bldemo  Demo of a Bundesliga match where nothing has been configured yet
+edemo     Demo of an event (empty)
+intdemo   International match demo
+nlademo   Demo of Swiss National League
 nrwdemo   Demo of a match in the lower divisions in NRW
 rlmdemo   German Regionalliga Mitte demo
-rlwdemo   German Regionalliga West demo
 rlndemo   German Regionalliga Nord demo
-nlademo   Demo of Swiss National League
-jticker   Run under meyerjo/ticker (shuttlecock-live)
+rlsodemo  German Regionalliga SüdOst demo
+rlwdemo   German Regionalliga West demo
+tdemo     Tournament demo
 txdemo    Demo for transmission to turnier.de
-intdemo   International match demo
-baydemo   Bayernliga demo (also applies to lower divisions)
+vdemo     Demo of an event (in progress)
+wdmudemo  Youth tournament demo (with lots of finals on Sunday)
 
 Initial UI
 ==========
