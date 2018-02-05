@@ -1,13 +1,3 @@
-RLSO (both - Ost and -Süd)
-	eventsheet
-		sums
-		totals
-		winner
-		test with MSO
-
-
-export / error handling: record start time
-report_error: store last hashchange time
 resume: warning if local copy is ahead of remote match
 	-> Olli
 disable bupabfrage when going into match

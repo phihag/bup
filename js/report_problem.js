@@ -5,7 +5,12 @@ var report_problem = (function() {
 var REPORT_URL = 'https://aufschlagwechsel.de/bupbug/';
 var last_error = '-';
 var reported_count = 0;
+var start_ts = Date.now();
+var hashchange_ts = null;
 
+function on_hash_change() {
+	hashchange_ts = Date.now();
+}
 
 function get_info() {
 	var ev = state.event;
@@ -30,6 +35,9 @@ function get_info() {
 		click_mode: click.get_mode(),
 		presses: state.presses,
 		netstats: netstats.all_stats,
+		start: start_ts,
+		now: Date.now(),
+		hashchange_ts: hashchange_ts,
 	};
 	if (ev && ev.courtspot_version) {
 		res.courtspot_version = ev.courtspot_version;
@@ -150,6 +158,7 @@ return {
 	on_error: on_error,
 	ui_init: ui_init,
 	update: update,
+	on_hash_change: on_hash_change,
 };
 
 })();

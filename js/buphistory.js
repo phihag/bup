@@ -137,6 +137,8 @@ function record(s) {
 
 var _expect_hash;
 function load_by_hash() {
+	report_problem.on_hash_change();
+
 	var hval = window.location.hash.substr(1);
 	if (hval === _expect_hash) {
 		// Loaded after navigating
@@ -290,6 +292,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var order = require('./order');
 	var refmode_referee_ui = null; // break cycle, should be require('./refmode_referee_ui');
 	var render = require('./render');
+	var report_problem = require('./report_problem');
 	var scoresheet = require('./scoresheet');
 	var settings = require('./settings');
 	var setupsheet = require('./setupsheet');
