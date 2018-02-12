@@ -74,9 +74,6 @@ $tournament_name = null;
 $counting = null;
 
 switch ($verwaltung['Liga']) {
-case 0:
-	$counting = (isset($verwaltung['Bundesliga']) && $verwaltung['Bundesliga']) ? '5x11_15' : '3x21';
-	break;
 case 1:
 	$league_key = '1BL-2017';
 	break;
@@ -105,6 +102,10 @@ case 9: // Bundesliga-Finale
 	$league_key = '1BL-2017';
 	$tournament_name = 'Finalrunde 1. Bundesliga 2017/2018';
 	break;
+}
+
+if ($league_key === null) {
+	$counting = (isset($verwaltung['Bundesliga']) && $verwaltung['Bundesliga']) ? '5x11_15' : '3x21';
 }
 
 
