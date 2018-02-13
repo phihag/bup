@@ -2399,6 +2399,7 @@ function show_dialog(es_key) {
 			umpire_label.appendChild(document.createTextNode(' ')); // compatibility to HTML UI
 			uiu.el(umpire_label, 'input', {
 				name: 'receipt_umpire' + i,
+				type: 'text',
 			});
 
 			var distance_label = uiu.el(report, 'label', 'eventsheet_dynamic', state._('receipt:distance'));
