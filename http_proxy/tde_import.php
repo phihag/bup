@@ -144,6 +144,14 @@ function parse_teammatch($httpc, $tm_html, $domain, $match_id) {
 		$res['umpires'] = $umpire_m[1];
 	}
 
+	if (\preg_match('/<th>[^><]*besondere Vorkommnisse[^><]*<\/th><td>([^<]+)<\/td>/', $tm_html, $notes_m)) {
+		$res['notes'] = $notes_m[1];
+	}
+
+	if (\preg_match('/<th>[^><]*Bemerkungen[^><]*<\/th><td>\s*([0-9]+)\s*Zuschauer\s*<\/td>/', $tm_html, $spectators_m)) {
+		$res['spectators'] = $spectators_m[1];
+	}
+
 	// Matches
 	if (!\preg_match('/<table\s+class="ruler matches">(?P<html>.+?)<\/tbody>\s*<\/table>/s', $tm_html, $table_m)) {
 		throw new \Exception('Cannot find table in teammatch HTML');

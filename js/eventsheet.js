@@ -585,6 +585,7 @@ function _svg_func(func) {
 
 		i18n.translate_nodes(svg, state);
 
+		preview.appendChild(svg);
 		var info = func(svg, ev, es_key, extra_data, extra_files);
 		var subject = state._('eventsheet:label|' + es_key);
 		var title = subject + ' ' + ev.event_name;
@@ -600,7 +601,6 @@ function _svg_func(func) {
 		preview.setAttribute('data-info_json', JSON.stringify(info));
 
 		printing.set_orientation(info.orientation);
-		preview.appendChild(svg);
 
 		preview.style.width = (info.orientation === 'landscape') ? 'calc(100vw - 4em)' : '';
 	};
@@ -770,10 +770,22 @@ var render_buli2017_pdf = _svg_func(function(svg, ev, es_key, extra_data) {
 
 	_svg_text(svg, 'protest', extra_data.protest);
 
-	_svg_text(svg, 'notes', extra_data.notes);
-	if (extra_data.spectators) {
-		_svg_text(svg, 'notes2', extra_data.spectators + ' Zuschauer');
+	var notes_el = svg.getElementById('es_svg_notes');
+	var notes = extra_data.notes;
+	var notes2 = '';
+	uiu.text(notes_el, notes);
+	while (notes_el.getComputedTextLength() > 245) {
+		var notes_m = /^(.*)(\s+\S+\s*)$/.exec(notes);
+		if (!notes_m) break;
+		notes = notes_m[1];
+		notes2 = notes_m[2] + notes2;
+		uiu.text(notes_el, notes);
 	}
+	state.notes = notes_el;
+	if (extra_data.spectators) {
+		notes2 += (notes2 ? '  ' : '') + extra_data.spectators + ' Zuschauer';
+	}
+	_svg_text(svg, 'notes2', notes2);
 
 	return {
 		filename: state._('Event Sheet') + ' ' + ev.event_name + (last_update ? (' ' + utils.date_str(last_update)) : '') + '.pdf',
