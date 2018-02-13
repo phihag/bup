@@ -569,13 +569,7 @@ function _svg_text(svg, id, val, move_y) {
 	if (!text_el) {
 		return;
 	}
-	while (text_el.firstChild) {
-		text_el.removeChild(text_el.firstChild);
-	}
-	if ((val !== undefined) && (val !== null)) {
-		var text_node = svg.ownerDocument.createTextNode(val);
-		text_el.appendChild(text_node);
-	}
+	uiu.text(text_el, val);
 	if (move_y) {
 		var y = parseFloat(text_el.getAttribute('y'));
 		text_el.setAttribute('y', y + move_y);
@@ -775,6 +769,7 @@ var render_buli2017_pdf = _svg_func(function(svg, ev, es_key, extra_data) {
 	_svg_text(svg, 'present_players1', extra_data.present_players1);
 
 	_svg_text(svg, 'protest', extra_data.protest);
+
 	_svg_text(svg, 'notes', extra_data.notes);
 	if (extra_data.spectators) {
 		_svg_text(svg, 'notes2', extra_data.spectators + ' Zuschauer');

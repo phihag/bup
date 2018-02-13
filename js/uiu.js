@@ -155,7 +155,9 @@ function remove_qsa(qs, container) {
 
 function text(node, str) {
 	empty(node);
-	node.appendChild(node.ownerDocument.createTextNode(str));
+	if ((str !== undefined) && (str !== null)) {
+		node.appendChild(node.ownerDocument.createTextNode(str));
+	}
 }
 
 function text_qs(selector, str) {
