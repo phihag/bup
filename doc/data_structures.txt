@@ -85,7 +85,8 @@ series_name     Name of the tournament series.
 confirmed       true iff the result of this team match has been confirmed by the league organizers.
 last_update     UNIX timestamp in ms: Date of last change to this event
 report_urls     An array of URLs where the result can be exported to.
-
+minreqs_met     Boolean: true if the league/tournaments minimum requirements (e.g. advertisements, facilities, staff etc.) are met.
+                Used in some event sheets.
 
 court
 =====

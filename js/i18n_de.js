@@ -337,6 +337,8 @@ var i18n_de = {
 'eventsheet:protest': 'Protest:',
 'eventsheet:spectators': 'Zuschauer:',
 'eventsheet:referee': 'Referee:',
+'eventsheet:minreqs': 'Mindestanforderungen:',
+'eventsheet:minreqs_met': 'erfüllt',
 
 'eventsheet:label|1BL-2016': 'Excel-Spielbericht',
 'eventsheet:label|2BLN-2016': 'Excel-Spielbericht',

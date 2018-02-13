@@ -333,6 +333,8 @@ var i18n_frch = {
 'eventsheet:notes': 'Notes:',
 'eventsheet:protest': 'Protestation:',
 'eventsheet:spectators': 'Spectateurs:',
+'eventsheet:minreqs': 'Minimum requis:',
+'eventsheet:minreqs_met': 'satisfait',
 
 'eventsheet:label|1BL-2015': '(Bundesliga) feuille de résultats (2015)',
 'eventsheet:label|2BLN-2015': '(2. Bundesliga Nord) feuille de résultats (2015)',

@@ -121,6 +121,10 @@ function _default_extra_data(extra_data, ev) {
 			extra_data[k + team_id] = extra_data[k + team_id] || players2str(players);
 		});
 	});
+
+	if (extra_data.minreqs_met === undefined) {
+		extra_data.minreqs_met = ev.minreqs_met !== false;
+	}
 }
 
 function _player_names(match, team_id) {
@@ -706,6 +710,8 @@ var render_buli2017_pdf = _svg_func(function(svg, ev, es_key, extra_data) {
 	_svg_text(svg, 'matchday', extra_data.matchday);
 	_svg_text(svg, 'starttime', extra_data.starttime);
 	_svg_text(svg, 'endtime', last_update ? utils.time_str(last_update) : '');
+
+	_svg_text(svg, 'minreqs_' + ((extra_data.minreqs_met !== false) ? 'true' : 'false'), 'X');
 
 	_svg_text(svg, 'team0', ev.team_names[0]);
 	_svg_text(svg, 'team1', ev.team_names[1]);
@@ -2177,6 +2183,11 @@ function on_fetch() {
 			team_name: event.team_names[team_id],
 		}));
 	});
+
+	var minreqs_cb = document.querySelector('input[name="minreqs_met"]');
+	if (minreqs_cb) {
+		minreqs_cb.checked = event.minreqs_met !== false;
+	}
 }
 
 function dialog_fetch(cb) {
@@ -2335,9 +2346,20 @@ function show_dialog(es_key) {
 				label.appendChild(document.createTextNode(' ')); // compatibility to HTML UI
 				uiu.el(label, 'input', {
 					name: whole_key,
+					type: 'text',
 				});
 			});
 		});
+
+		var minreqs_label = uiu.el(report, 'label', 'eventsheet_dynamic');
+		uiu.el(minreqs_label, 'span', {}, state._('eventsheet:minreqs'));
+		minreqs_label.appendChild(document.createTextNode(' ')); // compatibility to HTML UI
+		uiu.el(minreqs_label, 'input', {
+			type: 'checkbox',
+			name: 'minreqs_met',
+			checked: 'checked',
+		});
+		uiu.el(minreqs_label, 'span', {}, state._('eventsheet:minreqs_met'));
 
 		uiu.hide(download_link_container);
 		break;
@@ -2399,7 +2421,6 @@ function show_dialog(es_key) {
 		uiu.hide(download_link_container);
 		break;
 	case 'RLSO-2017':
-		// TODO configure this more
 		configure_report(['umpires', 'location', 'notes', 'starttime']);
 		['backup_players'].forEach(function(key) {
 			['team 1', 'team 2'].forEach(function(team_name, team_id) {

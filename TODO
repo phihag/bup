@@ -1,9 +1,10 @@
+buli excel: checkbox minreqs
+
+PDF-Spielbericht Umbruch bei langem Text! -> Jörg Hupertz (Wipperfeld - Trittau)
+
 resume: warning if local copy is ahead of remote match
 	-> Olli
 disable bupabfrage when going into match
-
-buli pdf: checkbox Mindestanforderungen
-PDF-Spielbericht Umbruch bei langem Text! -> Jörg Hupertz (Wipperfeld - Trittau)
 
 tunnel error reports through courtspot
 
@@ -31,6 +32,8 @@ save inputted umpire names (for CourtSpot)
 courtspot: save inputted backup_players / listed_players
 	-> Tim Bambach
 refmode: save inputted backup_players
+
+eventsheet: extra_data: going back should not destroy values
 
 stats: add team name to graph
 stats: + game points / match points
@@ -97,6 +100,8 @@ d a nice modern overview of all matches, similar to tim
 d halfcourt (for bundesliga finals)
 	-> iframe with fullscreen
 	-> Ulf
+
+dads in intervals -> Jan
 
 refmode redesign UI for change dialogs
 refmode make more efficient

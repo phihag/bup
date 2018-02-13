@@ -8,7 +8,13 @@ function onsubmit(form, cb) {
 
 		var data = {};
 		utils.forEach(e.target.elements, function(el) {
-			if (el.name && el.value) {
+			if (!el.name) {
+				return;
+			}
+
+			if (el.type === 'checkbox') {
+				data[el.name] = el.checked;
+			} else if (el.value) {
 				data[el.name] = el.value;
 			}
 		});

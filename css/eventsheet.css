@@ -21,7 +21,7 @@
 .eventsheet_form {
 	display: inline-block;
 }
-.eventsheet_form input {
+.eventsheet_form input[type="text"] {
 	width: 15em;
 	font-size: inherit;
 }
