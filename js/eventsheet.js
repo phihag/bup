@@ -1422,7 +1422,7 @@ function save_bundesliga2016(ev, es_key, ui8r, extra_data) {
 				sheet.text('D28', extra_data.notes);
 				sheet.text('D29', extra_data.spectators ? extra_data.spectators + ' Zuschauer' : '');
 				sheet.text('D31', extra_data.protest);
-				sheet.text('V33', 'X'); // Mindestanforderungen
+				sheet.text(extra_data.minreqs_met ? 'V33' : 'Y33', 'X'); // Mindestanforderungen
 			});
 		}
 
@@ -2273,6 +2273,18 @@ function show_preview(es_key) {
 	});
 }
 
+function _minreqs_cb(container) {
+	var minreqs_label = uiu.el(container, 'label', 'eventsheet_dynamic');
+	uiu.el(minreqs_label, 'span', {}, state._('eventsheet:minreqs'));
+	minreqs_label.appendChild(document.createTextNode(' ')); // compatibility to HTML UI
+	uiu.el(minreqs_label, 'input', {
+		type: 'checkbox',
+		name: 'minreqs_met',
+		checked: 'checked',
+	});
+	uiu.el(minreqs_label, 'span', {}, state._('eventsheet:minreqs_met'));
+}
+
 function show_dialog(es_key) {
 	delete state.ui.es_preview;
 	state.ui.eventsheet = es_key;
@@ -2326,6 +2338,7 @@ function show_dialog(es_key) {
 	case '2BLN-2016':
 	case '2BLS-2016':
 		configure_report(['umpires', 'location', 'starttime', 'matchday', 'notes', 'protest', 'spectators']);
+		_minreqs_cb(report);
 		uiu.hide(download_link_container);
 		break;
 	case '1BL-2017_pdf':
@@ -2351,16 +2364,7 @@ function show_dialog(es_key) {
 			});
 		});
 
-		var minreqs_label = uiu.el(report, 'label', 'eventsheet_dynamic');
-		uiu.el(minreqs_label, 'span', {}, state._('eventsheet:minreqs'));
-		minreqs_label.appendChild(document.createTextNode(' ')); // compatibility to HTML UI
-		uiu.el(minreqs_label, 'input', {
-			type: 'checkbox',
-			name: 'minreqs_met',
-			checked: 'checked',
-		});
-		uiu.el(minreqs_label, 'span', {}, state._('eventsheet:minreqs_met'));
-
+		_minreqs_cb(report);
 		uiu.hide(download_link_container);
 		break;
 	case 'team-1BL':
