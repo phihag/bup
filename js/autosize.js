@@ -23,12 +23,12 @@ function autosize_once(task, deferred) {
 	var desired = task.desired_func(el);
 	var current_width = el.offsetWidth;
 	var current_height = el.offsetHeight;
-	var m = /^([0-9.]+)(\s*px)$/.exec(current_style);
+	var m = /^([0-9.,]+)(\s*px)$/.exec(current_style);
 	if (!m) {
 		report_problem.silent_error('Could not parse font-size for autosizing: ' + current_style + ' (deferred: ' + JSON.stringify(deferred) + ')');
 		return;
 	}
-	var cur_size = parseFloat(m[1]);
+	var cur_size = parseFloat(m[1].replace(',', '.'));
 	var by_width = Math.floor(cur_size / (current_width / desired.width));
 	var by_height = Math.floor(cur_size / (current_height / desired.height));
 	var new_size = Math.min(by_width, by_height);

@@ -1,7 +1,17 @@
-PDF-Spielbericht Umbruch bei langem Text! -> Jörg Hupertz (Wipperfeld - Trittau)
+selectevent module
+	debmlist: collect coordinates
+	debmlist: collect from VRL instead of something else. Also collect Stammspieler
+	download 5 most likely (and leagues + matches therein)
+	start via league
+	start via URL input
+	manual event creation
+	if courtspot: ask for passcode
+	allow on referee
+	checkbox on referee: store event permanently (do not load from clients)
 
 resume: warning if local copy is ahead of remote match
 	-> Olli
+
 disable bupabfrage when going into match
 
 tunnel error reports through courtspot
@@ -16,7 +26,7 @@ improve login
 		-> Dario
 	dmode hide button: test & fix
 
-check reload button graphic
+check reload button graphic on Firefox etc.
 doc f11 (+Android +iOS) -> Markus Schwendtner
 check main design on iPad mini -> Markus Schwendtner
 
@@ -81,17 +91,6 @@ support i18n da
 
 test cs order in detail
 	-> Ulf
-
-selectevent module
-	debmlist: collect coordinates
-	debmlist: collect from VRL instead of something else. Also collect Stammspieler
-	download 5 most likely (and leagues + matches therein)
-	start via league
-	start via URL input
-	manual event creation
-	if courtspot: ask for passcode
-	allow on referee
-	checkbox on referee: store event permanently (do not load from clients)
 
 d shortsets [see pic]
 d a nice modern overview of all matches, similar to tim
