@@ -1,9 +1,12 @@
 selectevent module
-	debmlist: collect coordinates
-	debmlist: collect from VRL instead of something else. Also collect Stammspieler
+	download database automatically (lock to prevent multi-download)
+	use download_lib in debmlist
+
 	download 5 most likely (and leagues + matches therein)
+	start via most likely
 	start via league
 	start via URL input
+	start from export file
 	manual event creation
 	if courtspot: ask for passcode
 	allow on referee
