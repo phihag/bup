@@ -1,3 +1,6 @@
+score does not get updated in demo!!!!!!!!!!!
+	write a test for that
+
 selectevent module
 	download database automatically (lock to prevent multi-download)
 	use download_lib in debmlist
@@ -11,6 +14,9 @@ selectevent module
 	if courtspot: ask for passcode
 	allow on referee
 	checkbox on referee: store event permanently (do not load from clients)
+	ticker to courtspot from referee
+	serviceover
+	-> Benedikt
 
 resume: warning if local copy is ahead of remote match
 	-> Olli

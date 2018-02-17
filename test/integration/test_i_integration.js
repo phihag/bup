@@ -169,6 +169,10 @@ _describe('integration tests', () => {
 			'1.HD'
 		);
 
+		assert(/^[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{4,}$/.test(await page.evaluate(() =>
+			document.querySelector('.scoresheet_date_value').textContent))
+		);
+
 		const note_input = await page.$('#scoresheet_note_input');
 		await note_input.focus();
 		await page.keyboard.type('This is a test note');

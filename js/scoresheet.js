@@ -598,7 +598,9 @@ function sheet_render(s, svg) {
 		match_name += ' - #' + s.setup.match_num;
 	}
 	_text('.scoresheet_match_name', match_name);
-	_text('.scoresheet_date_value', s.metadata.start ? utils.human_date_str(s, s.metadata.start) : '');
+	_text('.scoresheet_date_value',
+		s.metadata.start ? utils.human_date_str(s, s.metadata.start) : (
+		s.setup.date || utils.human_date_str(s, Date.now())));
 
 	_text('.scoresheet_court_id', compat.courtnum(s.match.court_id ? s.match.court_id : s.setup.court_id));
 	_text('.scoresheet_umpire_name', s.match.umpire_name ? s.match.umpire_name : s.setup.umpire_name);

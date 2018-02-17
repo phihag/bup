@@ -169,6 +169,7 @@ function annotate(s, event) {
 		team_competition: event.team_competition,
 		away_first: event.away_first,
 		counting: event.counting,
+		date: event.date,
 	};
 	if (league_key && !event.counting) {
 		props.counting = default_counting(league_key);

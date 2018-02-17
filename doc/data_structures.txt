@@ -201,6 +201,8 @@ is_doubles*        Boolean key. false => singles, true => mixed/doubles
 counting*          Scoring system.
                    See the documentation on event for possible values.
                    Can be left out if the league_key or counting property of the event is set.
+date               Human-readable official day of match, e.g. "12.3.2017".
+                   Copied over from the date propert of the event.
 umpire_name        Name of the umpire assigned to this match (or the last one who touched it).
 service_judge_name Name of the service judge assigned to this match.
 court_id           ID of the court this match is played on.
