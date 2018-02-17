@@ -1,13 +1,10 @@
 <?php
-namespace aufschlagwechsel\bup\download_lib;
+namespace aufschlagwechsel\bup\league_download;
 use \aufschlagwechsel\bup\tde_utils;
 use \aufschlagwechsel\bup\http_utils;
-use \aufschlagwechsel\bup\utils;
 
-require('../../http_proxy/utils.php');
-require('../../http_proxy/http_utils.php');
-require('../../http_proxy/tde_utils.php');
-utils\setup_error_handler();
+require __DIR__ . '/../../http_proxy/http_utils.php';
+require __DIR__ . '/../../http_proxy/tde_utils.php';
 
 
 function _make_url($page, $tournament_id, $suffix) {
@@ -136,7 +133,7 @@ function download_league($httpc, $url, $league_key, $use_vrl, $use_hr) {
 		<td[^>]*>(?:<strong>)?<a\s+class="teamname"[^>]+>(?P<name1>[^<]+)<\/a>(?:<\/strong>)?<\/td>
 		<td\s+align="center">-<\/td>
 		<td[^>]*>(?:<strong>)?<a\s+class="teamname"[^>]+>(?P<name2>[^<]+)<\/a>(?:<\/strong>)?<\/td>
-		<td>(?:<span\s+class="score"><span>[^<]*<\/span><\/span>)?<\/td>
+		<td>(?:<span\s+class="score"><span>[^<]*<\/span>(?:\s*U)?<\/span>)?<\/td>
 		<td><a\s+href="\.\/location\.aspx\?id=[A-F0-9-]+&lid=[0-9]+">
 			(?P<location>[^<]+)<\/a>
 		<\/td>
@@ -199,7 +196,7 @@ function download_league($httpc, $url, $league_key, $use_vrl, $use_hr) {
 	return $res;
 }
 
-function download($config) {
+function download_leagues($config) {
 	$httpc = http_utils\AbstractHTTPClient::make();
 	if ($config['use_cache']) {
 		$httpc = new http_utils\CacheHTTPClient($httpc, __DIR__ . '/cache');
