@@ -1,5 +1,10 @@
-score does not get updated in demo!!!!!!!!!!!
-	write a test for that
+reduce size of error icon
+	-> Benedikt
+
+setupsheet
+	date
+	free lines max 21
+	-> Benedikt
 
 selectevent module
 	download database automatically (lock to prevent multi-download)
@@ -110,7 +115,9 @@ d halfcourt (for bundesliga finals)
 dads in intervals -> Jan
 
 refmode redesign UI for change dialogs
+refmode highlight if R pressed
 refmode make more efficient
+refmode if new event show diffs
 refmode remove flickers
 refmode verify that push mode is not active by default
 refmode use WebRTC
@@ -185,7 +192,7 @@ de-jquerify network.request
 2felder: testen mit mac-Auflösung (@800x600)
 2courts: add teammatch score
 editevent crashes after mo -> mail Werner Durow
-dads countdown to time
+dads countdown to time ("DE in 10 Minuten")
 
 login in displaymode
 dads: show displaymode -> Steffen Becker
