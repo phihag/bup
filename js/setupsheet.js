@@ -28,6 +28,13 @@ var MIN_LENGTHS = {
 		f: 4,
 	},
 };
+var MAX_LENGTH = 21;
+var EXTRA_LINES = {
+	'bundesliga-2016': 0,
+	'default': 2,
+	international: 0,
+	nla: 2,
+};
 
 // Current state
 var listed; // Array of teams -> dict of genders -> array of players
@@ -584,6 +591,24 @@ function fill_text(container, fill_id, text) {
 	uiu.text(el, text);
 }
 
+function calc_linecounts(player_counts, minlens, maxlen, empty_lines) {
+	var res = {};
+	GENDERS.forEach(function(gender) {
+		res[gender] = Math.max(player_counts[gender], minlens[gender]);
+	});
+	var changed = true;
+	while (changed) {
+		changed = false;
+		GENDERS.forEach(function(gender) {
+			if ((res.m + res.f < maxlen) && (res[gender] < player_counts[gender] + empty_lines)) {
+				res[gender]++;
+				changed = true;
+			}
+		});
+	}
+	return res;
+}
+
 function fill_svg(s, svg_root, sheet_name, team_id)  {
 	var event = s.event;
 	var is_buli = eventutils.is_bundesliga(event.league_key);
@@ -594,8 +619,13 @@ function fill_svg(s, svg_root, sheet_name, team_id)  {
 	fill_text(svg_root, 'date', event.date);
 
 	var yoffset = 0;
+	var line_counts = calc_linecounts({
+		m: listed[team_id].m.length,
+		f: listed[team_id].f.length,
+	}, MIN_LENGTHS[sheet_name], MAX_LENGTH, EXTRA_LINES[sheet_name]);
+
 	GENDERS.forEach(function(gender) {
-		var num_lines = Math.max(MIN_LENGTHS[sheet_name][gender], listed[team_id][gender].length);
+		var num_lines = line_counts[gender];
 		var g_cfg = cfg[gender];
 
 		var template = uiu.qs('g[data-fill-id="template_' + gender + '"]', svg_root);
@@ -792,6 +822,7 @@ return {
 	/*@DEV*/
 	calc_config: calc_config,
 	available_players: available_players,
+	calc_linecounts: calc_linecounts,
 	/*/@DEV*/
 };
 

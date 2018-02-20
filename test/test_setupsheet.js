@@ -1,15 +1,15 @@
 'use strict';
 
-var assert = require('assert');
+const assert = require('assert');
 
-var tutils = require('./tutils');
-var _describe = tutils._describe;
-var _it = tutils._it;
-var bup = tutils.bup;
+const tutils = require('./tutils');
+const _describe = tutils._describe;
+const _it = tutils._it;
+const bup = tutils.bup;
 
-_describe('setupsheet', function() {
-	_it('configuration guessing', function() {
-		var matches = [
+_describe('setupsheet', () => {
+	_it('configuration guessing', () => {
+		let matches = [
 			{setup: {eventsheet_id: '1.HD', is_doubles: true}},
 			{setup: {match_name: '2.MX', is_doubles: true}},
 			{setup: {match_name: '1.HE', is_doubles: false}},
@@ -20,7 +20,7 @@ _describe('setupsheet', function() {
 			{setup: {match_name: '3.HE', is_doubles: false}},
 			{setup: {match_name: '1.MX', is_doubles: true}},
 		];
-		var ev = {
+		let ev = {
 			matches: matches,
 		};
 		assert.deepStrictEqual(
@@ -95,8 +95,8 @@ _describe('setupsheet', function() {
 		);
 	});
 
-	_it('available_players', function() {
-		var ev = {
+	_it('available_players', () => {
+		const ev = {
 			all_players: [[{
 				name: 'Michael Mustermann',
 				gender: 'm',
@@ -123,10 +123,10 @@ _describe('setupsheet', function() {
 				gender: 'm',
 			}]],
 		};
-		var s = {
+		const s = {
 			event: ev,
 		};
-		var listed = [{
+		const listed = [{
 			name: 'Daniel Ranked',
 			gender: 'm',
 			ranking: 4,
@@ -156,5 +156,35 @@ _describe('setupsheet', function() {
 			name: 'Zulu Last',
 			gender: 'm',
 		}]);
+	});
+
+	_it('calc_linecounts', () => {
+		assert.deepStrictEqual(
+			bup.setupsheet.calc_linecounts({m: 1, f: 1}, {m:8, f:4}, 22, 2),
+			{m: 8, f: 4});
+		assert.deepStrictEqual(
+			bup.setupsheet.calc_linecounts({m: 14, f: 15}, {m:8, f:4}, 22, 2),
+			{m: 14, f: 15});
+		assert.deepStrictEqual(
+			bup.setupsheet.calc_linecounts({m: 7, f: 5}, {m:8, f:4}, 22, 2),
+			{m: 9, f: 7});
+		assert.deepStrictEqual(
+			bup.setupsheet.calc_linecounts({m: 7, f: 1}, {m:8, f:4}, 22, 2),
+			{m: 9, f: 4});
+		assert.deepStrictEqual(
+			bup.setupsheet.calc_linecounts({m: 7, f: 1}, {m:8, f:4}, 13, 1),
+			{m: 8, f: 4});
+		assert.deepStrictEqual(
+			bup.setupsheet.calc_linecounts({m: 7, f: 1}, {m:8, f:4}, 13, 2),
+			{m: 9, f: 4});
+		assert.deepStrictEqual(
+			bup.setupsheet.calc_linecounts({m: 7, f: 1}, {m:8, f:4}, 13, 3),
+			{m: 9, f: 4});
+		assert.deepStrictEqual(
+			bup.setupsheet.calc_linecounts({m: 10, f: 10}, {m:10, f:10}, 22, 2),
+			{m: 11, f: 11});
+		assert.deepStrictEqual(
+			bup.setupsheet.calc_linecounts({m: 10, f: 10}, {m:10, f:10}, 23, 2),
+			{m: 12, f: 11});
 	});
 });
