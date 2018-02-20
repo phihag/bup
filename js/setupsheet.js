@@ -585,11 +585,13 @@ function fill_text(container, fill_id, text) {
 }
 
 function fill_svg(s, svg_root, sheet_name, team_id)  {
-	var is_buli = eventutils.is_bundesliga(s.event.league_key);
-	fill_text(svg_root, 'tournament_name', s.event.tournament_name || '');
-	fill_text(svg_root, 'event_name', s.event.event_name);
+	var event = s.event;
+	var is_buli = eventutils.is_bundesliga(event.league_key);
+	fill_text(svg_root, 'tournament_name', event.tournament_name || '');
+	fill_text(svg_root, 'event_name', event.event_name);
 	fill_text(svg_root, 'setup_desc', s._('setupsheet:setup|' + team_id));
-	fill_text(svg_root, 'team_name', s.event.team_names[team_id]);
+	fill_text(svg_root, 'team_name', event.team_names[team_id]);
+	fill_text(svg_root, 'date', event.date);
 
 	var yoffset = 0;
 	GENDERS.forEach(function(gender) {
