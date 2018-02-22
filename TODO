@@ -8,6 +8,9 @@ improve login
 		-> Dario
 dmode hide button: test & fix
 
+manually refreshing has cascading effect!!!
+	(when logged out, in btde-mock)
+
 selectevent module
 	download database automatically (lock to prevent multi-download)
 	use download_lib in debmlist

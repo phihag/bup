@@ -92,7 +92,7 @@ function _matchlist_install_reload_button(s) {
 	}
 	var reload_button = $('<button class="setup_network_matches_reload image-button"><span></span></button>');
 	reload_button.on('click', function() {
-		ui_list_matches(s);
+		ui_list_matches(s, false, true);
 	});
 	event_container.append(reload_button);
 }
