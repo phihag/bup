@@ -89,7 +89,8 @@ constructor() {
 		static_handler.file_handler('/ticker/bup/', miniserver.ROOT_DIR, 'bup.html'),
 
 		(req, res, pathname) => {
-			console.log('BTDE mock: unhandled ', pathname);
+			console.log('BTDE mock: error 404 ' + pathname);
+			return httpd_utils.err(res, 404);
 		},
 	]);
 }

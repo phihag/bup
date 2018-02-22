@@ -1,6 +1,12 @@
-setupsheet
-	free lines max 21
-	-> Benedikt
+improve login
+	add a login as ... link
+	offer last 3 logins
+		for new login
+		for relogin
+	displaymode login
+	automatically log in upon load if necessary (with last-saved user name)
+		-> Dario
+dmode hide button: test & fix
 
 selectevent module
 	download database automatically (lock to prevent multi-download)
@@ -26,15 +32,6 @@ disable bupabfrage when going into match
 
 tunnel error reports through courtspot
 
-improve login
-	add a login as ... link
-	displaymode login
-	offer historic logins
-		for new login
-		for relogin
-	automatically log in upon load if necessary (with last-saved user name)
-		-> Dario
-	dmode hide button: test & fix
 
 check reload button graphic on Firefox etc.
 doc f11 (+Android +iOS) -> Markus Schwendtner
@@ -78,6 +75,7 @@ order @wdmu19
 	-> Peter Veit
 
 
+separate settings and main screen
 import tournament name (example: https://www.turnier.de/sport/tournament.aspx?id=DB5AB88F-98B5-4B52-B10E-D256C7B8A8B4)
 https://www.turnier.de/sport/tournament.aspx?id=DB5AB88F-98B5-4B52-B10E-D256C7B8A8B4 : no spaces behind match names please
 
