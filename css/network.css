@@ -1,6 +1,16 @@
 .login_button {
 	position: relative;
 }
+.login_close {
+	text-decoration: none;
+	color: #444;
+	position: absolute;
+	top: 1.5em;
+	right: 2em;
+}
+.login_close:hover {
+	color: #000;
+}
 .network_desync_container {
 	position: absolute;
 	top: 16vh;

@@ -619,6 +619,7 @@ var i18n_en = {
 'login:password': 'password',
 'login:button': 'Sign in',
 'login:link': 'Log in as ...',
+'login:close': 'Close',
 
 };
 

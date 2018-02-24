@@ -616,6 +616,7 @@ var i18n_frch = {
 'login:password': 'mot de passe',
 'login:button': 'Identifiez-vous',
 'login:link': 'Formulaire de connexion',
+'login:close': 'Fermer',
 };
 
 /*@DEV*/

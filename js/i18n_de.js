@@ -620,6 +620,7 @@ var i18n_de = {
 'login:password': 'Passwort',
 'login:button': 'Einloggen',
 'login:link': 'Login als ...',
+'login:close': 'Schließen',
 };
 
 /*@DEV*/

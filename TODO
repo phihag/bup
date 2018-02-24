@@ -9,7 +9,11 @@ improve login
 		-> Dario
 
 
-btde-mock: 2 requests if not logged in
+3x7 -> Markus Schwendtner
+Anzeige mit Seiten (wie für Schiedsrichter)
+	1 | 2 -> Markus Schwendtner
+
+btde-mock: 2 requests if not logged in (should be one)
 dmode hide button: test & fix
 
 selectevent module

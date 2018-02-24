@@ -14,7 +14,7 @@ function render_links(s, container) {
 	click.on(link, link_click);
 }
 
-function render_form(container) {
+function render_form(container, include_close) {
 	if (container.querySelector('.settings_login')) {
 		return; // Form already rendered
 	}
@@ -25,6 +25,18 @@ function render_form(container) {
 	uiu.el(login_form, 'h2', {}, state._('login:header', {
 		service_name: netw.service_name(),
 	}));
+
+	if (include_close) {
+		var close_button = uiu.el(login_form, 'a', {
+			href: '#',
+			'class': 'login_close',
+			'data-i18n': 'login:close',
+		}, state._('login:close'));
+		click.on(close_button, function() {
+			uiu.empty(container);
+		});
+	}
+
 	var login_error = uiu.el(login_form, 'div', 'network_error');
 	uiu.el(login_form, 'input', {
 		name: 'user',
@@ -55,7 +67,7 @@ function render_form(container) {
 
 function link_click() {
 	var login_container = uiu.qs('.settings_network_login_container');
-	render_form(login_container);
+	render_form(login_container, true);
 	login_container.scrollIntoView();
 	login_container.querySelector('input[name="user"]').focus();
 }
