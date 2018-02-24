@@ -51,8 +51,14 @@ function ui_init() {
 
 	var hash_query = utils.parse_query_string(window.location.hash.substr(1));
 	if (hash_query.lang) {
-		state.settings.language = hash_query.lang;
-		settings.update(state);
+		settings.change(state, 'language', hash_query.lang);
+	}
+	var hub_url = hash_query.hub_url;
+	if (hub_url) {
+		settings.change_all(state, {
+			refmode_client_ws_url: hub_url,
+			refmode_referee_ws_url: hub_url,
+		});
 	}
 	displaymode.ui_init(state, hash_query);
 	network.ui_init(state, hash_query);

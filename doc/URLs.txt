@@ -83,3 +83,4 @@ d_cbg=COLOR,        d_cfg the foreground and d_bg the background color,
 d_cbg2=COLOR, ...   and there are a lot more color names available.
                     Different styles use different color names.
                     Hover over a color input in the displaymode or referee UI to get the color names.
+hub_url=WSURL       WebSocket URL (starting with ws:// or wss://) of the referee mode hub.
