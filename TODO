@@ -1,15 +1,17 @@
+btde-mock: 2 requests if not logged in
+
 improve login
-	add a login as ... link
+	login as ... link
+
 	offer last 3 logins
 		for new login
 		for relogin
 	displaymode login
 	automatically log in upon load if necessary (with last-saved user name)
 		-> Dario
-dmode hide button: test & fix
 
-manually refreshing has cascading effect!!!
-	(when logged out, in btde-mock)
+
+dmode hide button: test & fix
 
 selectevent module
 	download database automatically (lock to prevent multi-download)

@@ -85,18 +85,6 @@ function send_press(s, press) {
 	}
 }
 
-function _matchlist_install_reload_button(s) {
-	var event_container = $('.setup_network_heading');
-	if (event_container.find('.setup_network_matches_reload').length > 0) {
-		return;
-	}
-	var reload_button = $('<button class="setup_network_matches_reload image-button"><span></span></button>');
-	reload_button.on('click', function() {
-		ui_list_matches(s, false, true);
-	});
-	event_container.append(reload_button);
-}
-
 function _score_text(network_score) {
 	if (!network_score) {
 		return '';
@@ -313,12 +301,10 @@ function list_matches(s, callback) {
 
 // Returns a callback to be called when the list is no longer required
 function ui_list_matches(s, silent, no_timer) {
-	_matchlist_install_reload_button(s);
-
-	var status_container = $('.setup_network_status');
-	if (!silent && status_container.find('.setup_network_matches_loading').length === 0) {
-		var loading = $('<div class="setup_network_matches_loading"><div class="loading-icon"></div><span>Lade Spiele ...</span></div>');
-		status_container.append(loading);
+	var status_container = uiu.qs('.setup_network_status');
+	if (!silent && !status_container.querySelector('.setup_network_matches_loading')) {
+		var loading = uiu.el(status_container, 'div', 'setup_network_matches_loading');
+		uiu.el(loading, 'div', 'loading-icon');
 	}
 
 	var netw = get_netw();
@@ -327,12 +313,11 @@ function ui_list_matches(s, silent, no_timer) {
 	}
 
 	return subscribe(s, function(err, s, event) {
-		status_container.empty();
+		uiu.empty(status_container);
 		errstate('list_matches', err);
+		login.render_links(s, uiu.qs('.login_links'));
 		if (err) {
-			var err_msg = $('<div class="network_error">');
-			err_msg.text(err.msg);
-			status_container.append(err_msg);
+			uiu.el(status_container, 'div', 'network_error', err.msg);
 			return;
 		}
 
@@ -342,8 +327,8 @@ function ui_list_matches(s, silent, no_timer) {
 		urlexport.render_links(s, uiu.qs('.urlexport_links'));
 		var editable = netw.editable(s);
 		var use_setupsheet = event.team_competition;
-		uiu.$visible_qs('.setupsheet_link', editable && use_setupsheet);
-		uiu.$visible_qs('.editevent_link', editable && !use_setupsheet);
+		uiu.visible_qs('.setupsheet_link', editable && use_setupsheet);
+		uiu.visible_qs('.editevent_link', editable && !use_setupsheet);
 		ui_render_matchlist(s, event);
 	}, function(s) {
 		return no_timer ? 'abort' : s.settings.network_update_interval;
@@ -424,40 +409,6 @@ function resync() {
 	}
 }
 
-function ui_render_login(container) {
-	var netw = get_netw();
-	var login_form = uiu.el(container, 'form', 'settings_login');
-	uiu.el(login_form, 'h2', {}, state._('login:header', {
-		service_name: netw.service_name(),
-	}));
-	var login_error = uiu.el(login_form, 'div', 'network_error');
-	uiu.el(login_form, 'input', {
-		name: 'user',
-		placeholder: state._('login:user'),
-		required: 'required',
-	});
-	uiu.el(login_form, 'input', {
-		name: 'password',
-		type: 'password',
-		placeholder: state._('login:password'),
-		required: 'required',
-	});
-	uiu.el(login_form, 'button', 'login_button', state._('login:button'));
-	var loading_icon = uiu.el(login_form, 'div', 'default-invisible loading-icon');
-
-	form_utils.onsubmit(login_form, function(inputs) {
-		uiu.show(loading_icon);
-		netw.login(inputs.user, inputs.password, function(message) {
-			uiu.hide(loading_icon);
-			if (message) {
-				uiu.text(login_error, message);
-			} else { // Login successful
-				network.errstate('all', null);
-			}
-		});
-	});
-}
-
 function errstate(component, err) {
 	if (err) {
 		erroneous[component] = true;
@@ -467,13 +418,11 @@ function errstate(component, err) {
 			schedule_resync();
 		}
 
-		if ((err.type == 'login-required') && !login_rendered) {
-			login_rendered = true;
-			ui_render_login(uiu.qs('.settings_network_login_container'));
-			ui_render_login(uiu.qs('.network_desync_login_container'));
+		if (err.type == 'login-required') {
+			login.required();
 		}
 
-		$('.network_desync_errmsg').text(err.msg);
+		uiu.text_qs('.network_desync_errmsg', err.msg);
 	} else {
 		var was_erroneous;
 		if (component == 'all') {
@@ -611,6 +560,10 @@ function fetch_courts(s, success_callback) {
 
 function ui_init(s, hash_query) {
 	click.qs('.network_desync_image', resync);
+	click.qs('.setup_network_matches_reload', function() {
+		ui_list_matches(s, false, true);
+	});
+
 	netstats.ui_init();
 
 	// Load networking module(s)
@@ -855,9 +808,9 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
 	var courtspot = require('./courtspot');
 	var eventsheet = require('./eventsheet');
-	var form_utils = require('./form_utils');
 	var jticker = require('./jticker');
 	var liveaw = require('./liveaw');
+	var login = require('./login');
 	var match_storage = require('./match_storage');
 	var netstats = require('./netstats');
 	var p2p = require('./p2p');

@@ -180,8 +180,8 @@ function add_player_pick(s, container, type, team_id, player_id, on_click, namef
 }
 
 // init_cb gets called with:
-// s - the state (passed through)
-// page - the page container
+//   s - the state (passed through)
+//   page - the page container (where the page should be rendered in)
 // Returns the hiding function
 function make_page(s, page_name, init_cb, hide_cb) {
 	function hide() {

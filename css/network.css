@@ -122,6 +122,8 @@ button > .loading-icon {
 .setup_network_matches_loading > .loading-icon {
 	margin-left: 1.5vmin;
 	display: inline-block;
+	width: 1em;
+	height: 1em;
 }
 #setup_network_matches > .network_error {
 	margin-left: 1.5vmin;
@@ -170,4 +172,12 @@ button > .loading-icon {
 	#setup_network_matches {
 		text-align: center;
 	}
+}
+
+.setup_network_status {
+	display: inline-block;
+	margin-left: 0.8em;
+}
+.setup_network_status > div {
+	display: inline-block;
 }

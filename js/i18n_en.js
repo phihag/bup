@@ -618,6 +618,8 @@ var i18n_en = {
 'login:user': 'user name',
 'login:password': 'password',
 'login:button': 'Sign in',
+'login:link': 'Log in as ...',
+
 };
 
 /*@DEV*/
