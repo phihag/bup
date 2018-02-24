@@ -3,8 +3,7 @@
 var login = (function() {
 
 function render_links(s, container) {
-	// TODO enable this and implement a useful show
-/*	var netw = network.get_netw();
+	var netw = network.get_netw();
 	uiu.empty(container);
 	if (!netw || !netw.login) return;
 
@@ -12,7 +11,7 @@ function render_links(s, container) {
 		href: '#',
 		'data-i18n': 'login:link',
 	}, s._('login:link'));
-	click.on(link, show);*/
+	click.on(link, link_click);
 }
 
 function render_form(container) {
@@ -54,9 +53,11 @@ function render_form(container) {
 	});
 }
 
-
-function show() {
-
+function link_click() {
+	var login_container = uiu.qs('.settings_network_login_container');
+	render_form(login_container);
+	login_container.scrollIntoView();
+	login_container.querySelector('input[name="user"]').focus();
 }
 
 function required() {
@@ -76,7 +77,6 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var form_utils = require('./form_utils');
 	var network = require('./network');
-	var utils = require('./utils');
 	var uiu = require('./uiu');
 
 	module.exports = login;

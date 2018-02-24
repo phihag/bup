@@ -21,6 +21,12 @@ async function eventually_invisible(page, qs) {
 	return await page.evaluate((qs) => client_eventual_visibility(qs, false), qs);
 }
 
+async function click_qs(page, qs)  {
+	const clickable = await page.$(qs);
+	await clickable.click();
+	await clickable.dispose();
+}
+
 _describe('integration tests', () => {
 	let base_url;
 	let srv;
@@ -72,9 +78,7 @@ _describe('integration tests', () => {
 		assert(await is_visible(page, '#settings_wrapper'));
 
 		// Click "event scoresheets"
-		const scoresheets_link = await page.$('.setup_event_scoresheets');
-		await scoresheets_link.click();
-		await scoresheets_link.dispose();
+		await click_qs(page, '.setup_event_scoresheets');
 
 		assert.strictEqual(await page.evaluate(() =>
 			window.location.hash),
@@ -339,17 +343,19 @@ _describe('integration tests', () => {
 			'14-15 9-11 2-11'
 		);
 
-		// TODO relogin with TVR
-/*
-		await upage.evaluate(() => {
-			document.querySelector('.settings_container .settings_login input[name="user"]').value = 'TVR';
-			document.querySelector('.settings_container .settings_login input[name="password"]').value = 'secret_TVR';
-		});
-		await (await upage.evaluateHandle(() => {
-			return client_find_text('.settings_container .settings_login button.login_button', 'Einloggen');
-		})).click();
+		// Relogin as TVR1
+		click_qs(upage, 'a[data-i18n="login:link"]');
 
-		// Check initial UI
+		await eventually_visible(upage, '.settings_network_login_container>.settings_login');
+		await eventually_visible(upage, '.settings_network_login_container>.settings_login button.login_button');
+		await upage.evaluate(() => {
+			uiu.qs('.settings_network_login_container>.settings_login input[name="user"]').value = 'TVR';
+		});
+		await upage.evaluate(() => {
+			uiu.qs('.settings_network_login_container>.settings_login input[name="password"]').value = 'secret_TVR';
+		});
+		await click_qs(upage, '.settings_network_login_container>.settings_login button.login_button');
+
 		await eventually_invisible(upage, '.settings_container .settings_login');
 		await eventually_invisible(upage, '.setup_network_container .network_error');
 		assert(await is_visible(upage, '.setup_network_container .setup_network_heading .setup_network_event'));
@@ -358,24 +364,18 @@ _describe('integration tests', () => {
 			'TV Refrath - TSV Neuhausen-Nymphenburg'
 		);
 		assert.strictEqual(await upage.evaluate(() =>
-			document.querySelectorAll('#setup_network_matches button').length),
-			7
+			document.querySelector('#setup_network_matches button:first-child .setup_network_match_match_name').innerText),
+			'HD1'
 		);
-*/
+		assert.strictEqual(await upage.evaluate(() =>
+			document.querySelector('#setup_network_matches button:first-child .setup_network_match_home_players').innerText),
+			'N.N. / N.N.'
+		);
+		assert.strictEqual(await upage.evaluate(() =>
+			document.querySelector('#setup_network_matches button:first-child .setup_network_match_away_players').innerText),
+			'N.N. / N.N.'
+		);
 
-		// TODO set up player names
-
-		// TODO relogin in umpiremode
 		await uclose();
-
-		// login and relogin in displaymode
-/*		const [dbrowser, dpage] = await start('btde/ticker/bup/bup.html#btde&display&dm_style=teamcourt&court=referee');
-		assert(await is_visible(dpage, '#settings_wrapper'));
-		// TODO hide button
-		// TODO assert: should be in fullscreen now
-		// TODO clicking now should bring settings back
-
-		//close();
-		await close();
-*/	}).timeout(20000);
+	}).timeout(20000);
 });

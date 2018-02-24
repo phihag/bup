@@ -1,7 +1,5 @@
-btde-mock: 2 requests if not logged in
-
 improve login
-	login as ... link
+	close button on login form
 
 	offer last 3 logins
 		for new login
@@ -11,6 +9,7 @@ improve login
 		-> Dario
 
 
+btde-mock: 2 requests if not logged in
 dmode hide button: test & fix
 
 selectevent module
