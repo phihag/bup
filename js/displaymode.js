@@ -88,6 +88,35 @@ function _calc_matchscore(matches) {
 	return res;
 }
 
+function _double_doubles_namefunc(matches) {
+	var by_lastname = {};
+	matches.forEach(function(match) {
+		match.setup.teams.forEach(function(team) {
+			team.players.forEach(function(player) {
+				var ln = _lastname(player);
+				var name = player.name;
+				var byl = by_lastname[ln];
+				if (byl) {
+					if (!utils.includes(byl, name)) {
+						byl.push(name);
+					}
+				} else {
+					by_lastname[ln] = [name];
+				}
+			});
+		});
+	});
+
+	return function(player) {
+		var ln = _lastname(player);
+		var byl = by_lastname[ln];
+		if (byl && (byl.length > 1)) { // !byl should never happen, but guard against unforeseen problems
+			return _doubles_name(player);
+		}
+		return ln;
+	};
+}
+
 function _doubles_name(player) {
 	if (player.firstname && player.lastname) {
 		return player.firstname[0] + '.\xa0' + player.lastname;
@@ -1016,6 +1045,7 @@ function render_greyish(s, container, event, colors) {
 	var match_score = _calc_matchscore(event.matches);
 	var team_names = event.team_names || ['', ''];
 	var logo_urls = extradata.team_logos(event);
+	var namefunc = _double_doubles_namefunc(event.matches);
 
 	var bg = uiu.el(container, 'div', {
 		style: (
@@ -1099,7 +1129,7 @@ function render_greyish(s, container, event, colors) {
 		}, setup.match_name);
 		setup.teams.forEach(function(team, team_id) {
 			var is_winner = ((mwinner === 'left') && (team_id === 0) || (mwinner === 'right') && (team_id === 1));
-			var pnames = _player_names(team, setup.is_doubles, _lastname);
+			var pnames = _player_names(team, setup.is_doubles, namefunc);
 			var common_css = (
 				'text-align:center;' +
 				'padding-left:0.3em;' +

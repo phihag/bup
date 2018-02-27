@@ -5,6 +5,8 @@ improve login
 Anzeige mit Seiten (wie für Schiedsrichter)
 	-> Markus
 
+shuttle stats
+
 btde-mock: 2 requests if not logged in (should be one)
 dmode hide button: test & fix
 
@@ -31,6 +33,8 @@ resume: warning if local copy is ahead of remote match
 disable bupabfrage when going into match
 
 tunnel error reports through courtspot
+
+displaymode: add spacing option
 
 check reload button graphic on Firefox etc.
 doc f11 (+Android +iOS) -> Markus Schwendtner
@@ -1137,4 +1141,5 @@ Button zur Pause bei 11 wenn Seiten wechseln? -> Jörg Hupertz
 
 @tvr:
 check Pi font
+check Pi colors
 bring USB batteries
