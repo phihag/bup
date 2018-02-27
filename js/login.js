@@ -131,6 +131,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var form_utils = require('./form_utils');
 	var network = require('./network');
 	var uiu = require('./uiu');
+	var utils = require('./utils');
 
 	module.exports = login;
 }
