@@ -612,6 +612,7 @@ var i18n_frch = {
 'receipt:umpire': 'Arbitre:',
 
 'login:header': 'Login {service_name}',
+'login:as': 'Login comme {user}',
 'login:user': 'Nom d\'utilisateur',
 'login:password': 'mot de passe',
 'login:button': 'Identifiez-vous',

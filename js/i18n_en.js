@@ -615,6 +615,7 @@ var i18n_en = {
 'receipt:umpire': 'Umpire:',
 
 'login:header': 'Login {service_name}',
+'login:as': 'Sign in as {user}',
 'login:user': 'user name',
 'login:password': 'password',
 'login:button': 'Sign in',

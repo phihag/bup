@@ -14,6 +14,31 @@ function render_links(s, container) {
 	click.on(link, link_click);
 }
 
+function get_stored() {
+	if (typeof localStorage === 'undefined') {
+		return [];
+	}
+
+	return utils.parse_json(localStorage.getItem('bup_logins')) || [];
+}
+
+function store(user, password) {
+	if (typeof localStorage === 'undefined') {
+		return;
+	}
+
+	var cur = get_stored();
+	cur = cur.filter(function(acc) {
+		return acc.user !== user;
+	});
+	cur.splice(0, 0, {
+		user: user,
+		password_b64: btoa(password),
+	});
+	cur = cur.slice(0, 4);
+	localStorage.setItem('bup_logins', JSON.stringify(cur));
+}
+
 function render_form(container, include_close) {
 	if (container.querySelector('.settings_login')) {
 		return; // Form already rendered
@@ -21,13 +46,13 @@ function render_form(container, include_close) {
 
 	var netw = network.get_netw();
 	uiu.empty(container);
-	var login_form = uiu.el(container, 'form', 'settings_login');
-	uiu.el(login_form, 'h2', {}, state._('login:header', {
+	var outer_container = uiu.el(container, 'div', 'settings_login');
+	uiu.el(outer_container, 'h2', {}, state._('login:header', {
 		service_name: netw.service_name(),
 	}));
 
 	if (include_close) {
-		var close_button = uiu.el(login_form, 'a', {
+		var close_button = uiu.el(outer_container, 'a', {
 			href: '#',
 			'class': 'login_close',
 			'data-i18n': 'login:close',
@@ -37,30 +62,45 @@ function render_form(container, include_close) {
 		});
 	}
 
-	var login_error = uiu.el(login_form, 'div', 'network_error');
-	uiu.el(login_form, 'input', {
+	var login_error = uiu.el(outer_container, 'div', 'network_error');
+
+	var input_form = uiu.el(outer_container, 'form', 'login_input_form');
+	uiu.el(input_form, 'input', {
 		name: 'user',
 		placeholder: state._('login:user'),
 		required: 'required',
 	});
-	uiu.el(login_form, 'input', {
+	uiu.el(input_form, 'input', {
 		name: 'password',
 		type: 'password',
 		placeholder: state._('login:password'),
 		required: 'required',
 	});
-	uiu.el(login_form, 'button', 'login_button', state._('login:button'));
-	var loading_icon = uiu.el(login_form, 'div', 'default-invisible loading-icon');
+	uiu.el(input_form, 'button', 'login_button', state._('login:button'));
+	var loading_icon = uiu.el(input_form, 'div', 'default-invisible loading-icon');
 
-	form_utils.onsubmit(login_form, function(inputs) {
+	var login = function(user, password) {
 		uiu.show(loading_icon);
-		netw.login(inputs.user, inputs.password, function(message) {
+		netw.login(user, password, function(message) {
 			uiu.hide(loading_icon);
 			if (message) {
 				uiu.text(login_error, message);
 			} else { // Login successful
 				network.errstate('all', null);
+				store(user, password);
 			}
+		});
+	};
+
+	form_utils.onsubmit(input_form, function(inputs) {
+		login(inputs.user, inputs.password);
+	});
+
+	var presets_form = uiu.el(outer_container, 'div', 'login_presets');
+	get_stored().forEach(function(stored) {
+		var btn = uiu.el(presets_form, 'button', {}, state._('login:as', {user: stored.user}));
+		click.on(btn, function() {
+			login(stored.user, atob(stored.password_b64));
 		});
 	});
 }

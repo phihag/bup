@@ -1,0 +1,30 @@
+.login_button {
+	position: relative;
+}
+.login_close {
+	text-decoration: none;
+	color: #444;
+	position: absolute;
+	top: 1.5em;
+	right: 2em;
+}
+.login_close:hover {
+	color: #000;
+}
+
+.login_input_form {
+	display: inline-block;
+	margin-right: 5em;
+}
+.login_input_form > * {
+	display: block;
+	margin: 1em auto 1em auto;
+}
+
+.login_presets {
+	display: inline-block;
+}
+.login_presets > * {
+	display: block;
+	margin: 1em 0;
+}

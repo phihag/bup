@@ -1,17 +1,9 @@
 improve login
-	close button on login form
-
-	offer last 3 logins
-		for new login
-		for relogin
-	displaymode login
+	test displaymode login
 	automatically log in upon load if necessary (with last-saved user name)
-		-> Dario
 
-
-3x7 -> Markus Schwendtner
 Anzeige mit Seiten (wie für Schiedsrichter)
-	1 | 2 -> Markus Schwendtner
+	-> Markus
 
 btde-mock: 2 requests if not logged in (should be one)
 dmode hide button: test & fix
@@ -39,7 +31,6 @@ resume: warning if local copy is ahead of remote match
 disable bupabfrage when going into match
 
 tunnel error reports through courtspot
-
 
 check reload button graphic on Firefox etc.
 doc f11 (+Android +iOS) -> Markus Schwendtner
@@ -82,6 +73,7 @@ order @wdmu19
 	-> Günter Klützke
 	-> Peter Veit
 
+find uused CSS rules
 
 separate settings and main screen
 import tournament name (example: https://www.turnier.de/sport/tournament.aspx?id=DB5AB88F-98B5-4B52-B10E-D256C7B8A8B4)
@@ -256,6 +248,9 @@ abt fall-back for btde and CourtSpot
 	report to abt in parallel
 	configure abt address
 
+open a secondary window (display window) from the same source
+	&client in the URL
+	postmessage or so?
 
 test right-click on all links
 	-> Mail Jan
@@ -1138,7 +1133,8 @@ render in transparent windows -> Dieter Gläßer
 drucken wie BTP als Server (alles|bei Problemen|nie)
 search for third argument of uiu.el(): {'class': 'foobar'}, replace with more modern version
 Button zur Pause bei 11 wenn Seiten wechseln? -> Jörg Hupertz
+3x7 -> Markus Schwendtner
 
 @tvr:
 check Pi font
-bring USB cables + adapters
+bring USB batteries
