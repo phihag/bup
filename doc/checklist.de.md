@@ -1,4 +1,4 @@
-\* = optional, kann ohne Philipp übersprungen werden
+\* = optional
 
 3h-90 Minuten vor Spielbeginn:
 
@@ -24,7 +24,7 @@
   - [ ] An Stühle anschrauben
   - [ ] *Einstellungen überprüfen (Federballzähler an, Referee Mode?)
   - [ ] Vollbildmodus
-  - [ ] *USB-Akkus dranhängen
+  - [ ] *USB-Akkus dranhängen, ggf. am Stuhl festkleben
 - [ ] Beamer aufbauen
   - [ ] Beamer
   - [ ] Laptop/Pi (inkl. Strom)
@@ -39,7 +39,6 @@
   - [ ] *In VNC laden
 - [ ] *Backup-Tablets
   - [ ] *Batteriestand überprüfen, ggf. laden
-  - [ ] *Auf lautlos stellen
   - [ ] *Ins richtige WLAN einbuchen
   - [ ] *Chrome aufrufen und einloggen
 - [ ] *Demo-Tablet starten
@@ -57,7 +56,6 @@
   - [ ] *Alle Tablets+Anzeigen erkannt?
 - [ ] *Tabs Aufstellungen öffnen (von kroton.de)
 - [ ] Aufstellungszettel
-  - [ ] *Ausfüllen mit in der Halle anwesenden Spielern
   - [ ] Ausdrucken
   - [ ] Heim geben
   - [ ] Gast geben
@@ -85,7 +83,7 @@
 20 Minuten vor Spielbeginn:
 
 - [ ] *Kamera starten
-- [ ] USB-Akkus von Tablets abmachen und einsammeln
+- [ ] *Wenn genügend Akku der Tablets: USB-Akkus von Tablets abmachen
 - [ ] Tablets checken: Eingeloggt und richtiger Zustand?
 - [ ] \*Ggf. Werbung deaktivieren
 - [ ] \*Ballrollen an Schiedsrichterstühle stellen
@@ -95,7 +93,7 @@ Während des Spiels:
 - [ ] Zuschauerzahl schätzen
 - [ ] Auf Handzeichen der Schiedsrichter achten
 - [ ] Ggf. weitere Bälle bringen
-- [ ] Router-Statistiken beobachten
+- [ ] *Router-Statistiken beobachten
 - [ ] Falls kein Referee-Mode: Spielendzeiten notieren
 - [ ] Zuschauer mit Blitzlicht ermahnen
 - [ ] Bei gelben/roten Karten:
@@ -121,9 +119,7 @@ Nach Spielende:
 - [ ] Mindestanforderungsformular Schiedsrichter einpacken
 - [ ] Mindestanforderungsformular Verein einpacken
 - [ ] Bei gelben/roten Karten Schiedsrichterzettel einpacken
-- [ ] Melden
-  - [ ] Helmut Ruppert anrufen
-  - [ ] auf turnier.de eintragen
+- [ ] auf turnier.de eintragen
 - [ ] Beamer-Pi einsammeln
 - [ ] Display-Pis einsammeln
 - [ ] Mehrfachsteckdosen einsammeln
@@ -134,9 +130,8 @@ Nach Spielende:
 - [ ] Drucker abbauen und einpacken
 - [ ] Laptops und Zubehör abbauen und einpacken
 - [ ] Tablets einpacken
-- [ ] Tabletständer einpacken
+- [ ] \*Tabletständer einpacken
 
 URLs mit badmintonticker:
 
-bup: http://login.badmintonticker.de/ -> Spielbeginn -> Badminton Umpire Panel oder direkt http://login.badmintonticker.de/ticker/bup/#btde
-Anzeigetafel in bup: in den Einstellungen nach unten scrollen -> Spielbeginn
+bup: https://login.badmintonticker.de/ -> Spielbeginn -> Badminton Umpire Panel oder direkt https://badmintonticker.de/ticker/bup/#btde
