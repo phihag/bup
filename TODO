@@ -1,5 +1,27 @@
+doc greyish first name Magee / Persson
+
+doc/checklist:
+	- Aufstellungszettel add players
+	- Helmut ruppert
+	update URLs
+	line break last line
+	option to fix batteries on umpire chairs
+doc:
+	doc Login as
+
+evaluate Trittau color
+
+fullscreen check: do not show if already in browser-native fullscreen
+
+mock: add a ?delay= option
+
 improve login
+	adapt mock: login has no effect
+	option: if multiple btde accounts configured, automatically log in to the one with the next upcoming match
+	test with btde
+	update changelog
 	test displaymode login
+	check location of progress (with ?delay)
 	automatically log in upon load if necessary (with last-saved user name)
 
 Anzeige mit Seiten (wie für Schiedsrichter)
@@ -1143,3 +1165,4 @@ Button zur Pause bei 11 wenn Seiten wechseln? -> Jörg Hupertz
 check Pi font
 check Pi colors
 bring USB batteries
+prepare a Pi for beamer

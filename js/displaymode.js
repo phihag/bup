@@ -1180,6 +1180,7 @@ function render_tim(s, container, event, colors) {
 	var max_game_count = _calc_max_games(event);
 	var match_score = _calc_matchscore(event.matches);
 	var team_names = event.team_names || ['', ''];
+	var namefunc = _double_doubles_namefunc(event.matches);
 	var active_match_ids = [];
 	if (event.courts) {
 		active_match_ids = event.courts.map(function(c) {
@@ -1243,7 +1244,7 @@ function render_tim(s, container, event, colors) {
 						(is_active ? ('color:' + colors.tim_active) : '')
 					),
 				},
-				team.players.map(_lastname).join(' - '));
+				team.players.map(namefunc).join(' - '));
 		});
 		for (var game_idx = 0;game_idx < max_game_count;game_idx++) {
 			var gscore = nscore[game_idx];
