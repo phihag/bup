@@ -21,6 +21,10 @@ function unify_team_name($team_name) {
 		$team_name = $m[1];
 	}
 
+	if (preg_match('/^(.*?)\s+1$/', $team_name, $m)) {
+		$team_name = $m[1];
+	}
+
 	if ($team_name === 'STC BW Solingen') {
 		return 'STC Blau-Weiss Solingen';
 	}

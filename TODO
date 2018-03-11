@@ -1,12 +1,3 @@
-better checklist URL
-doc: Login as
-
-evaluate Trittau color
-
-fullscreen check: do not show if already in browser-native fullscreen
-
-mock: add a ?delay= option
-
 improve login
 	adapt mock: login has no effect
 	option: if multiple btde accounts configured, automatically log in to the one with the next upcoming match
@@ -15,6 +6,13 @@ improve login
 	test displaymode login
 	check location of progress (with ?delay)
 	automatically log in upon load if necessary (with last-saved user name)
+
+evaluate Trittau color
+
+fullscreen check: do not show if already in browser-native fullscreen
+
+mock: add a ?delay= option
+
 
 Anzeige mit Seiten (wie für Schiedsrichter)
 	-> Markus

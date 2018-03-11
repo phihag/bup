@@ -29,7 +29,7 @@
     "stylelint-config-standard": "*",
     "supervisor": "*",
     "svgo": "*",
-    "uglify": "*",
+    "uglify-js": "3.x",
     "xmldom": "*"
   },
   "private": true
