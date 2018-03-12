@@ -1,5 +1,6 @@
 'use strict';
 
+const assert = require('assert');
 const async = require('async');
 const child_process = require('child_process');
 const fs = require('fs');
@@ -54,14 +55,11 @@ function ensure_mkdir(path, cb) {
 
 function uglify(js_files, jsdist_fn, cb) {
 	const args = [];
-	args.push('-p');
-	args.push('relative');
+	assert(!/[']/.test(jsdist_fn));
 	args.push('--source-map');
-	args.push(jsdist_fn + '.map');
-	args.push('--source-map-url');
-	args.push(path.basename(jsdist_fn) + '.map');
+	args.push('filename=\'' + jsdist_fn + '.map\',url=\'' + path.basename(jsdist_fn) + '.map\',base=dist/bup');
+	args.push();
 	args.push('--mangle');
-	args.push('mangle_yes');
 	args.push('--compress');
 	args.push('-o');
 	args.push(jsdist_fn);

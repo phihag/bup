@@ -1,3 +1,11 @@
+urlexport error icon looks funny
+
+blue btde dmode?
+
+scoresheet is too dark for printer, lighten up
+
+player import in rlw should include backup players
+
 improve login
 	adapt mock: login has no effect
 	option: if multiple btde accounts configured, automatically log in to the one with the next upcoming match
@@ -15,7 +23,7 @@ mock: add a ?delay= option
 
 
 Anzeige mit Seiten (wie für Schiedsrichter)
-	-> Markus
+	-> Markus Schwendtner
 
 shuttle stats
 
