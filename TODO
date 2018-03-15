@@ -21,6 +21,7 @@ fullscreen check: do not show if already in browser-native fullscreen
 
 mock: add a ?delay= option
 
+prevent https://www.turnier.de/sport/teammatch.aspx?id=107D0FC0-C153-4EAF-A39D-EBAECB424B16&match=45
 
 Anzeige mit Seiten (wie für Schiedsrichter)
 	-> Markus Schwendtner
