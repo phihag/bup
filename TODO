@@ -1,5 +1,3 @@
-fullscreen check: do not show if already in browser-native fullscreen
-
 improve login
 	test displaymode login
 	check css location of progress (with ?delay)
