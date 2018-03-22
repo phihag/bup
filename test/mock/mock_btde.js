@@ -119,13 +119,19 @@ fetch_data(user, callback) {
 	}, callback);
 }
 
-login_handler(req, res, pathname) {
-	const users = this.users;
-	if (! ((pathname === '/ticker/login/') || (pathname === '/ticker/login/index.php'))) return 'unhandled';
+do_login(req, res) {
+	this.get_user(req, (err, user_info) => {
+		if (err) return httpd_utils.send_err(res, err);
 
-	if (req.method === 'POST') {
+		if (user_info) {
+			// When the user is already logged-in, login does nothing.
+			// This is of course totally brain-dead since it prevents logging in as another user.
+			// But we're just reproducing the real btde behavior here.
+			return httpd_utils.redirect(res, 'start.php');
+		}
+
 		httpd_utils.read_post(req, (err, post_data) => {
-			const u = bup.utils.find(users, su => su.name === post_data.benutzername);
+			const u = bup.utils.find(this.users, su => su.name === post_data.benutzername);
 			if (!u || (u.password !== post_data.passwort)) {
 				return _render_login(res, 'Der Benutzername und das Passwort stimmen nicht überein.');
 			}
@@ -136,7 +142,14 @@ login_handler(req, res, pathname) {
 				'Set-Cookie': 'btde_mock_session=' + encodeURIComponent(cookieval),
 			});
 		});
-		return;
+	});
+}
+
+login_handler(req, res, pathname) {
+	if (! ((pathname === '/ticker/login/') || (pathname === '/ticker/login/index.php'))) return 'unhandled';
+
+	if (req.method === 'POST') {
+		return this.do_login(req, res);
 	}
 
 	const cookies = httpd_utils.parse_cookies(req);

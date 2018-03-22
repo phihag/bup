@@ -1,25 +1,20 @@
-add a VERSION.txt as well in dist (-> shuttlecock-live)
-urlexport error icon looks funny
-
-blue btde dmode?
-umpire pro dmode
-
-scoresheet is too dark for printer, lighten up
-
-player import in rlw should include backup players
+fullscreen check: do not show if already in browser-native fullscreen
 
 improve login
-	adapt mock: login has no effect
-	option: if multiple btde accounts configured, automatically log in to the one with the next upcoming match
-	test with btde
-	update changelog
 	test displaymode login
-	check location of progress (with ?delay)
-	automatically log in upon load if necessary (with last-saved user name)
+	check css location of progress (with ?delay)
 
 evaluate Trittau color
 
-fullscreen check: do not show if already in browser-native fullscreen
+urlexport error icon looks funny
+
+player import in rlw should include backup players
+
+blue btde dmode?
+umpire pro dmode but with time
+
+scoresheet is too dark for printer, lighten up
+
 
 mock: add a ?delay= option
 
@@ -1161,6 +1156,9 @@ drucken wie BTP als Server (alles|bei Problemen|nie)
 search for third argument of uiu.el(): {'class': 'foobar'}, replace with more modern version
 Button zur Pause bei 11 wenn Seiten wechseln? -> Jörg Hupertz
 3x7 -> Markus Schwendtner
+
+@maybe
+automatically log in upon load if necessary (with last-saved user name)
 
 @tvr:
 check Pi font

@@ -2,30 +2,34 @@
 function btde(baseurl) {
 
 function login(user, password, message_callback) {
-	network.$request('btde.login', {
-		dataType: 'text',
-		url: baseurl + 'login/index.php',
-		method: 'POST',
-		data: utils.urlencode({
-			benutzername: user,
-			passwort: password,
-		}),
-		contentType: 'application/x-www-form-urlencoded',
-		timeout: state.settings.network_timeout,
-	}).done(function(res) {
-		var m = /<form[^>]*>\s*<p class="fehler">([^<]*)</.exec(res);
-		var msg = 'Login fehlgeschlagen';
-		if (m) {
-			msg = m[1];
-		} else if (/<div class="logout">/.exec(res)) {
-			// Successful
-			message_callback();
-			return;
-		}
+	network.$request('btde.logout', {
+		url: baseurl + 'login/logout.php',
+	}).always(function() {
+		network.$request('btde.login', {
+			dataType: 'text',
+			url: baseurl + 'login/index.php',
+			method: 'POST',
+			data: utils.urlencode({
+				benutzername: user,
+				passwort: password,
+			}),
+			contentType: 'application/x-www-form-urlencoded',
+			timeout: state.settings.network_timeout,
+		}).done(function(res) {
+			var m = /<form[^>]*>\s*<p class="fehler">([^<]*)</.exec(res);
+			var msg = 'Login fehlgeschlagen';
+			if (m) {
+				msg = m[1];
+			} else if (/<div class="logout">/.exec(res)) {
+				// Successful
+				message_callback();
+				return;
+			}
 
-		message_callback(msg);
-	}).fail(function(xhr) {
-		message_callback('Login fehlgeschlagen (Fehler ' + xhr.status + ')');
+			message_callback(msg);
+		}).fail(function(xhr) {
+			message_callback('Login fehlgeschlagen (Fehler ' + xhr.status + ')');
+		});
 	});
 }
 
