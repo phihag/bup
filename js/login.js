@@ -5,7 +5,9 @@ var login = (function() {
 function render_links(s, container) {
 	var netw = network.get_netw();
 	uiu.empty(container);
-	if (!netw || !netw.login) return;
+	if (!netw || !netw.login) {
+		return;
+	}
 
 	var link = uiu.el(container, 'a', {
 		href: '#',
