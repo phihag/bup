@@ -7,7 +7,7 @@
 	text.small-text, text.table_name {font-size: 3px;}
 	.divider-line {stroke: #000; stroke-width: 0.2;}
 	.box {stroke: #000; stroke-width: 0.5; fill: none;}
-	.shade,.box.shaded,.table_longtext_background.shaded {fill: #d0d0d0;}
+	.shade,.box.shaded,.table_longtext_background.shaded {fill: #e0e0e0;}
 	.scoresheet_results_circle_team1,.scoresheet_results_circle_team2 {
 		stroke: #000; stroke-width: 0.6; fill: none;
 	}
