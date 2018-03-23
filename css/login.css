@@ -20,6 +20,10 @@
 	display: block;
 	margin: 1em auto 1em auto;
 }
+.login_input_form > .loading-icon {
+	position: absolute;
+	margin: 0;
+}
 
 .login_presets {
 	display: inline-block;

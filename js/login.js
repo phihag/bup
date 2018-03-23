@@ -78,8 +78,8 @@ function render_form(container, include_close) {
 		placeholder: state._('login:password'),
 		required: 'required',
 	});
-	uiu.el(input_form, 'button', 'login_button', state._('login:button'));
 	var loading_icon = uiu.el(input_form, 'div', 'default-invisible loading-icon');
+	uiu.el(input_form, 'button', 'login_button', state._('login:button'));
 
 	var login = function(user, password) {
 		uiu.show(loading_icon);
