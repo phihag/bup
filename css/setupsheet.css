@@ -143,6 +143,14 @@ td:hover .setupsheet_delete_button {
 	background-image: url(../icons/delete.svg);
 }
 
+.setupsheet_table td.setupsheet_warning {
+	border: none;
+	font-weight: bold;
+	color: #f00;
+	padding-bottom: 1em;
+	text-align: left;
+}
+
 
 .setupsheet_buttons {
 	font-size: 24px; /* legacy */

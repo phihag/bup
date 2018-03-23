@@ -187,4 +187,84 @@ _describe('setupsheet', () => {
 			bup.setupsheet.calc_linecounts({m: 10, f: 10}, {m:10, f:10}, 23, 2),
 			{m: 12, f: 11});
 	});
+
+	_it('check_setup', () => {
+		const s = {};
+		const team = {
+		'm': [{
+			'gender': 'm',
+			'name': 'Lars Schänzler',
+			'ranking': 1,
+			'ranking_d': 9,
+			'regular': true,
+		}, {
+			'gender': 'm',
+			'name': 'Nhat Nguyen',
+			'ranking': 2,
+			'ranking_d': 6,
+			'nationality': 'IRL',
+			'regular': true,
+		}, {
+			'gender': 'm',
+			'name': 'Sam Magee',
+			'ranking': 5,
+			'ranking_d': 2,
+			'nationality': 'IRL',
+			'regular': true,
+		}, {
+			'gender': 'm',
+			'name': 'Raphael Beck',
+			'ranking': 6,
+			'ranking_d': 1,
+			'regular': true,
+		}, {
+			'name': 'Kai Waldenberger',
+			'gender': 'm',
+			'ranking': 7,
+			'ranking_d': 10,
+		}, {
+			'name': 'Jan-Colin Völker',
+			'gender': 'm',
+			'ranking': 8,
+		}, {
+			'name': 'Dennis Nyenhuis',
+			'gender': 'm',
+			'ranking': 9,
+			'ranking_d': 7,
+		}],
+		'f': [{
+			'gender': 'f',
+			'name': 'Chloe Magee',
+			'ranking': 1,
+			'nationality': 'IRL',
+			'regular': true,
+		}, {
+			'gender': 'f',
+			'name': 'Carla Nelte',
+			'ranking': 2,
+			'regular': true,
+		}, {
+			'name': 'Elin Svensson',
+			'gender': 'f',
+			'ranking': 3,
+		}, {
+			'name': 'Annika Dörr',
+			'gender': 'f',
+			'ranking': 4,
+		}]};
+
+		// No assignments
+		assert.deepStrictEqual(
+			bup.setupsheet.check_setup(s, team, 0, {
+				'1.HD': [[], []],
+				'2.HD': [[], []],
+				'1.HE': [[], []],
+				'2.HE': [[], []],
+			}),
+			[]
+		);
+
+		// TODO one setup that's fine
+		// TODO double setups
+	});
 });

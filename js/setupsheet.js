@@ -446,6 +446,28 @@ function ui_render_init(s) {
 	rerender(s);
 }
 
+
+function check_setup(s, team, team_id, cur_players) {
+	var res = [];
+
+	var check = function check(match0_id, match1_id, is_doubles) {
+		var match0_players = cur_players[match0_id][team_id];
+		var match1_players = cur_players[match1_id][team_id];
+
+		var pcount = is_doubles ? 2 : 1;
+		if ((match0_players.length < pcount) || (match1_players.length < pcount)) {
+			return; // Incomplete
+		}
+
+		// TODO useful implementation
+	};
+
+	check('1.HE', '2.HE', false);
+
+	// TODO implement
+	return res;
+}
+
 function rerender(s) {
 	var is_buli = eventutils.is_bundesliga(s.event.league_key);
 	listed.forEach(function(team, team_id) {
@@ -542,6 +564,14 @@ function rerender(s) {
 				'data-i18n': 'setupsheet:add',
 				'role': 'submit',
 			}, s._('setupsheet:add'));
+		});
+
+		check_setup(s, team, team_id, cur_players).forEach(function(errmsg) {
+			var tr = uiu.el(tbody, 'tr');
+			uiu.el(tr, 'td', {
+				'class': 'setupsheet_warning',
+				colspan: (1 + cfg.m.length),
+			}, errmsg);
 		});
 	});
 
@@ -820,9 +850,10 @@ return {
 	jspdf_loaded: jspdf_loaded,
 	// Tests only
 	/*@DEV*/
-	calc_config: calc_config,
 	available_players: available_players,
+	calc_config: calc_config,
 	calc_linecounts: calc_linecounts,
+	check_setup: check_setup,
 	/*/@DEV*/
 };
 
