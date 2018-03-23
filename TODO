@@ -1,5 +1,8 @@
+login: login of wheel is not right
+
 improve login
 	test displaymode login
+	displaymode login
 	check css location of progress (with ?delay)
 
 evaluate Trittau color
@@ -13,8 +16,6 @@ umpire pro dmode but with time
 
 scoresheet is too dark for printer, lighten up
 
-
-mock: add a ?delay= option
 
 prevent https://www.turnier.de/sport/teammatch.aspx?id=107D0FC0-C153-4EAF-A39D-EBAECB424B16&match=45
 

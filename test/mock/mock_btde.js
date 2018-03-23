@@ -68,6 +68,28 @@ function _btde_players_string(players) {
 	}).join('~');
 }
 
+function options_middleware(real_handler) {
+	return (req, res, pathname) => {
+		const m = /^\/delay=([0-9]+)(\/.*)$/.exec(pathname);
+		if (m) {
+			req.btde_mock_delay = parseInt(m[1]);
+			req.btde_mock_options_url = '/delay=' + m[1];
+			pathname = m[2];
+		}
+		return real_handler(req, res, pathname);
+	};
+}
+
+function delayed(real_handler) {
+	return (req, res, pathname) => {
+		if (req.btde_mock_delay) {
+			setTimeout(real_handler, req.btde_mock_delay, req, res, pathname);
+			return;
+		}
+		real_handler(req, res, pathname);
+	};
+}
+
 class BTDEMock {
 
 constructor() {
@@ -82,19 +104,21 @@ constructor() {
 		password: '123456',
 	}];
 	this.data = {};
-	this.handler = httpd_utils.multi_handler([
-		(...a) => this.write_handler(...a),
-		httpd_utils.redirect_handler('/', 'ticker/login/'),
-		(...a) => this.login_handler(...a),
-		(...a) => this.logout_handler(...a),
-		(...a) => this.start_handler(...a),
+	this.handler = options_middleware(httpd_utils.multi_handler([
 		static_handler.file_handler('/ticker/bup/', miniserver.ROOT_DIR, 'bup.html'),
+		delayed(httpd_utils.multi_handler([
+			(...a) => this.write_handler(...a),
+			httpd_utils.redirect_handler('/', 'ticker/login/'),
+			(...a) => this.login_handler(...a),
+			(...a) => this.logout_handler(...a),
+			(...a) => this.start_handler(...a),
 
-		(req, res, pathname) => {
-			console.log('BTDE mock: error 404 ' + pathname);
-			return httpd_utils.err(res, 404);
-		},
-	]);
+			(req, res, pathname) => {
+				console.log('BTDE mock: error 404 ' + pathname);
+				return httpd_utils.err(res, 404);
+			},
+		])),
+	]));
 }
 
 fetch_data(user, callback) {
@@ -296,7 +320,7 @@ require_user(req, res, callback) {
 		if (err) return httpd_utils.send_err(res, err);
 
 		if (! user_info) {
-			return httpd_utils.redirect(res, '/btde/ticker/login/');
+			return httpd_utils.redirect(res, '/btde' + (req.btde_mock_options_url || '') + '/ticker/login/');
 		}
 
 		return callback(err, user_info, user_data);
