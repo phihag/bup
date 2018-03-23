@@ -20,7 +20,7 @@ const BTDE_LEAGUE_NAME = {
 };
 
 
-function _render_login(res, message) {
+function _render_login(res, message, username) {
 	httpd_utils.render_html(res, `<!DOCTYPE html>
 <html lang="de">
 <head>
@@ -42,9 +42,11 @@ label {display: block;margin: 0.5em 0;}
 <h2>Login</h2>
 <form method="post">
 
-` + (message ? ('<p class="fehler">' + message + '</p>') : '') + `
+` + (message ? ('<p class="fehler">' + httpd_utils.encode_html(message) + '</p>') : '') + `
 
-<label>Benutzername: <input name="benutzername" type="text" placeholder="Benutzername" autofocus="autofocus"></label>
+<label>Benutzername: <input name="benutzername" type="text" placeholder="Benutzername" autofocus="autofocus"` +
+	(username ? ' value="' + httpd_utils.encode_html(username) + '"' : '') +
+`></label>
 <label>Passwort: <input name="passwort" type="password" placeholder="Passwort"></label>
 <button>anmelden</button>
 </form>
@@ -133,7 +135,7 @@ do_login(req, res) {
 		httpd_utils.read_post(req, (err, post_data) => {
 			const u = bup.utils.find(this.users, su => su.name === post_data.benutzername);
 			if (!u || (u.password !== post_data.passwort)) {
-				return _render_login(res, 'Der Benutzername und das Passwort stimmen nicht überein.');
+				return _render_login(res, 'Der Benutzername und das Passwort stimmen nicht überein.', post_data.benutzername);
 			}
 
 			// Successful login: set cookie
