@@ -222,6 +222,10 @@ function sum(ar) {
 	}, 0);
 }
 
+function min(ar) {
+	return Math.min.apply(Math, ar);
+}
+
 function range(n) {
 	var res = [];
 	for (var i = 0;i < n;i++) {
@@ -539,6 +543,7 @@ return {
 	iso8601: iso8601,
 	map_dict: map_dict,
 	match_all: match_all,
+	min: min,
 	multiline_regexp: multiline_regexp,
 	obj_update: obj_update,
 	pad: pad,

@@ -120,12 +120,9 @@ function calc_listed(event) {
 			var setup = match.setup;
 			setup.teams[team_id].players.forEach(function(p, player_id) {
 				if (event.all_players) {
-					var betterp = utils.find(event.all_players[team_id], function(ap) {
+					p = utils.find(event.all_players[team_id], function(ap) {
 						return ap.name === p.name;
-					});
-					if (betterp) {
-						p = betterp;
-					}
+					}) || p;
 				}
 
 				if (!p.gender) {
@@ -446,25 +443,78 @@ function ui_render_init(s) {
 	rerender(s);
 }
 
+function _find_player(all_players, p) {
+	return utils.find(all_players, function(ap) {
+		return ap.name === p.name;
+	});
+}
 
 function check_setup(s, team, team_id, cur_players) {
 	var res = [];
 
-	var check = function check(match0_id, match1_id, is_doubles) {
-		var match0_players = cur_players[match0_id][team_id];
-		var match1_players = cur_players[match1_id][team_id];
-
-		var pcount = is_doubles ? 2 : 1;
-		if ((match0_players.length < pcount) || (match1_players.length < pcount)) {
-			return; // Incomplete
-		}
-
-		// TODO useful implementation
+	var match_str = function(match_id, players, rankings) {
+		return match_id + ': ' + players.map(function(p, p_id) {
+			return p.name + ' #' + rankings[p_id];
+		}).join(' / ');
 	};
 
-	check('1.HE', '2.HE', false);
+	var check = function check(match0_id, match1_id, is_doubles) {
+		var calc_rankings = function(players) {
+			return utils.filter_map(players, function(p) {
+				p = _find_player(team.m, p) || _find_player(team.f, p) || p;
 
-	// TODO implement
+				return is_doubles ? (p.ranking_d || p.ranking) : p.ranking;
+			});
+		};
+
+		var match0 = cur_players[match0_id];
+		var match1 = cur_players[match1_id];
+
+		if (!match0) {
+			report_problem.silent_error('setupsheet: Could not find match ' + match0_id);
+			return;
+		}
+		if (!match1) {
+			report_problem.silent_error('setupsheet: Could not find match ' + match1_id);
+			return;
+		}
+
+		var match0_players = match0[team_id];
+		var match1_players = match1[team_id];
+
+		var match0_rankings = calc_rankings(match0_players);
+		var match1_rankings = calc_rankings(match1_players);
+
+		var pcount = is_doubles ? 2 : 1;
+		if ((match0_rankings.length < pcount) || (match1_rankings.length < pcount)) {
+			return; // Incomplete player count or ranking information
+		}
+
+		var sum0 = utils.sum(match0_rankings);
+		var sum1 = utils.sum(match1_rankings);
+		if ((sum0 > sum1) || ((sum0 === sum1) && (utils.min(match0_rankings) > utils.min(match1_rankings)))) {
+			res.push(s._('setupsheet:rank warning', {
+				m0: match_str(match0_id, match0_players, match0_rankings),
+				m1: match_str(match1_id, match1_players, match1_rankings),
+			}));
+		}
+	};
+
+	var league_key = s.event.league_key;
+	if (eventutils.is_bundesliga(league_key)) {
+		check('1.HE', '2.HE', false);
+		check('1.HD', '2.HD', true);
+	} else if (eventutils.is_german8(league_key)) {
+		check('1.HE', '2.HE', false);
+		check('2.HE', '3.HE', false);
+		check('1.HD', '2.HD', true);
+	} else if (!utils.includes(['NLA-2017', 'international-2017'], league_key)) {
+		// NLA: crazy separate sysystem
+		// international: no checks necessary, every discipline once
+
+		report_problem.silent_error('Unsupported league for checks: ' + league_key);
+	}
+
 	return res;
 }
 
@@ -871,6 +921,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var network = require('./network');
 	var printing = require('./printing');
 	var refmode_referee_ui = null; // break cycle, should be require('./refmode_referee_ui');
+	var report_problem = null; // break cycle, should be require('./report_problem');
 	var render = require('./render');
 	var settings = require('./settings');
 	var svg2pdf = require('./svg2pdf');

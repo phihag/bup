@@ -87,6 +87,7 @@ var i18n_de = {
 'setupsheet:longlabel:present': 'Anwesend',
 'setupsheet:filename': 'Aufstellungszettel {event_name}.pdf',
 'setupsheet:confirm cancel': 'Änderungen an der Aufstellung verwerfen?',
+'setupsheet:rank warning': 'Falsche Aufstellung: {m0}, {m1}',
 
 'button:undo': 'Rückgängig',
 'button:settings': 'Konfiguration',

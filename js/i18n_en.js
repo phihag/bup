@@ -87,6 +87,7 @@ var i18n_en = {
 'setupsheet:longlabel:present': 'present',
 'setupsheet:filename': 'Setup sheets {event_name}.pdf',
 'setupsheet:confirm cancel': 'Discard changes to the setup?',
+'setupsheet:rank warning': 'Invalid setup: {m0}, {m1}',
 
 'button:undo': 'Undo',
 'button:settings': 'Configuration',

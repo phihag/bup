@@ -87,6 +87,7 @@ var i18n_frch = {
 'setupsheet:longlabel:present': 'présent',
 'setupsheet:filename': 'ordre de jeu {event_name}.pdf',
 'setupsheet:confirm cancel': 'Jeter des modifications à l\'ordre de jeu?',
+'setupsheet:rank warning': 'Mauvaise équipe: {m0}, {m1}',
 
 'button:undo': 'Annuler',
 'button:settings': 'Paramètres',

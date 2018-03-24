@@ -83,6 +83,13 @@ _describe('helper functions', function() {
 		assert.strictEqual(bup.utils.sum([2]), 2);
 	});
 
+	_it('min', function() {
+		assert.strictEqual(bup.utils.min([]), Infinity);
+		assert.strictEqual(bup.utils.min([1, 2, 3]), 1);
+		assert.strictEqual(bup.utils.min([2, 1, 99, -5, 22]), -5);
+		assert.strictEqual(bup.utils.min([1]), 1);
+	});
+
 	_it('reverse_every', function() {
 		assert.deepStrictEqual(
 			bup.utils.reverse_every(['a', 'b', 'c', 'd', 'e', 'f'], 2),

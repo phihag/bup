@@ -189,7 +189,10 @@ _describe('setupsheet', () => {
 	});
 
 	_it('check_setup', () => {
-		const s = {};
+		const s = tutils.state_after([], tutils.DOUBLES_TEAM_SETUP);
+		s.event = {
+			league_key: '1BL-2017'
+		};
 		const team = {
 		'm': [{
 			'gender': 'm',
@@ -264,7 +267,31 @@ _describe('setupsheet', () => {
 			[]
 		);
 
-		// TODO one setup that's fine
-		// TODO double setups
+		// Incorrect
+		assert.deepStrictEqual(
+			bup.setupsheet.check_setup(s, team, 0, {
+				'1.HD': [[{name: 'Dennis Nyenhuis'}, {name: 'Kai Waldenberger'}], []],
+				'2.HD': [[{name: 'Raphael Beck'}, {name: 'Sam Magee'}], []],
+				'1.HE': [[{name: 'Dennis Nyenhuis'}], []],
+				'2.HE': [[{name: 'Nhat Nguyen'}], []],
+			}),
+			[
+				'Falsche Aufstellung: 1.HE: Dennis Nyenhuis #9, 2.HE: Nhat Nguyen #2',
+				'Falsche Aufstellung: 1.HD: Dennis Nyenhuis #7 / Kai Waldenberger #10, 2.HD: Raphael Beck #1 / Sam Magee #2',
+			]
+		);
+
+		// Doubles sum equal
+		assert.deepStrictEqual(
+			bup.setupsheet.check_setup(s, team, 0, {
+				'1.HD': [[{name: 'Sam Magee'}, {name: 'Nhat Nguyen'}], []],
+				'2.HD': [[{name: 'Raphael Beck'}, {name: 'Dennis Nyenhuis'}], []],
+				'1.HE': [[{name: 'Nhat Nguyen'}], []],
+				'2.HE': [[], []],
+			}),
+			[
+				'Falsche Aufstellung: 1.HD: Sam Magee #2 / Nhat Nguyen #6, 2.HD: Raphael Beck #1 / Dennis Nyenhuis #7',
+			]
+		);
 	});
 });

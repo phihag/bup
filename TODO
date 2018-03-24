@@ -1,8 +1,3 @@
-prevent https://www.turnier.de/sport/teammatch.aspx?id=107D0FC0-C153-4EAF-A39D-EBAECB424B16&match=45
-	write test for check_setup
-	check singles
-	check doubles
-
 improve login
 	test displaymode login
 	displaymode login
@@ -23,7 +18,6 @@ Anzeige mit Seiten (wie für Schiedsrichter)
 shuttle stats
 
 btde-mock: 2 requests if not logged in (should be one)
-dmode hide button: test & fix
 
 selectevent module
 	download database automatically (lock to prevent multi-download)
