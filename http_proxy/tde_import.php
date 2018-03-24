@@ -55,7 +55,7 @@ function parse_teammatch($httpc, $tm_html, $domain, $match_id) {
 				(?P<team0>[^<]+?)(?:\s*\([0-9-]+\))?<\/a>
 				\s*-\s*
 				<a\s*href="\/sport\/team\.aspx\?id=(?P<season1>[-A-Za-z0-9]+)&team=(?P<id1>[0-9]+)">\s*
-				(?P<team1>[^<]+?)(?:\s*\([0-9-]+\))?<\/a>
+				(?P<team1>[^<]+?)(?:\s*\([0-9a-zA-Z-]+\))?<\/a>
 				/xs', $tm_html, $teamnames_m)) {
 
 			throw new \Exception('Cannot find team names!');

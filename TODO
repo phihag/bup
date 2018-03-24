@@ -3,10 +3,6 @@ improve login
 	displaymode login
 	check css location of progress (with ?delay)
 
-evaluate Trittau color
-
-urlexport error icon looks funny
-
 player import in rlw should include backup players
 
 blue btde dmode?
@@ -1156,3 +1152,4 @@ check Pi font
 check Pi colors
 bring USB batteries
 prepare a Pi for beamer
+evaluate Trittau color
