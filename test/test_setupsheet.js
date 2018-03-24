@@ -191,7 +191,7 @@ _describe('setupsheet', () => {
 	_it('check_setup', () => {
 		const s = tutils.state_after([], tutils.DOUBLES_TEAM_SETUP);
 		s.event = {
-			league_key: '1BL-2017'
+			league_key: '1BL-2017',
 		};
 		const team = {
 		'm': [{
