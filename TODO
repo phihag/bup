@@ -1,7 +1,14 @@
+setupsheet check crashes if m is missing!
+
+setupsheet checks:
+	3 Disziplinen (Petra Schönborn)
+	2x gleiche Disziplin
+	buli: Ersatzspieler obwohl keine erlaubt
+
+
 improve login
 	test displaymode login
-	displaymode login
-	check css location of progress (with ?delay)
+	dmode when logged out: does it show the form?
 
 player import in rlw should include backup players
 

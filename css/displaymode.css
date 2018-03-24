@@ -241,6 +241,7 @@
 	height: 100%;
 	text-align: center;
 	overflow: hidden;
+	font-family: 'Droid Sans', 'Noto Mono', Arial, sans-serif;
 }
 .d_international_score.d_international_score_dd {
 	letter-spacing: -4vh;
