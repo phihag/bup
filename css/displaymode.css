@@ -664,3 +664,8 @@
 	right: 1em;
 	top: 1em;
 }
+.d_login_links {
+	position: absolute;
+	right: 8em;
+	top: 1em;
+}

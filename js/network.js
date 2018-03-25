@@ -631,6 +631,7 @@ function ui_init(s, hash_query) {
 		netw.ui_init(s);
 		uiu.show_qs('.setup_network_container');
 		login.render_links(s, uiu.qs('.login_links'));
+		login.render_links(s, uiu.qs('.d_login_links'));
 
 		fetch_courts(s, function() {
 			ui_init_court(s, hash_query);
