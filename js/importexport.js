@@ -113,16 +113,16 @@ function send_export(s) {
 }
 
 function ui_init() {
-	click.qs('.export_link', function(e) {
-		e.preventDefault();
+	click.qs('.export_link', function() {
 		ui_export_json(state);
-		return false;
 	});
 
-	click.qs('.import_link', function(e) {
-		e.preventDefault();
+	click.qs('.export_link_nonet', function() {
+		ui_export_json(state);
+	});
+
+	click.qs('.import_link', function() {
 		ui_import_json(state);
-		return false;
 	});
 
 	click.qs('.settings_send_export', function(e) {

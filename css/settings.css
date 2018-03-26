@@ -243,3 +243,7 @@ a.settings_mode_active:visited {
 .settings {
 	user-select: none;
 }
+
+.nonet_links {
+	margin: 1.5em 0 1em 0;
+}
