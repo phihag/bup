@@ -1,13 +1,25 @@
+https://aufschlagwechsel.de/bup/#empty_match&scoresheet&court=%20 fails!!!!
+
+link export should be visible in offline mode
+
+stats: never served is wrong
+
 setupsheet check crashes if m is missing!
 	-> see reports
 
 urlimport in URL
+
+dmode: show error message when errors for longer than 30s
 
 setupsheet checks:
 	3 Disziplinen (Petra Schönborn)
 	2x gleiche Disziplin
 	buli: Ersatzspieler obwohl keine erlaubt
 
+dmoto Siegerfoto with logos instead/on top of team names
+dmode automatically switch to Siegerfoto after end
+
+buphub kill conns earlier
 
 improve login
 	test displaymode login
