@@ -43,6 +43,7 @@ var cfg;
 
 function calc_cur_players(cfg, event) {
 	var res = {};
+
 	GENDERS.forEach(function(gender) {
 		cfg[gender].forEach(function(match_key) {
 			event.matches.forEach(function(m) {
@@ -845,6 +846,10 @@ function hide() {
 }
 
 function ask_hide_and_back() {
+	if (!cfg) {
+		return hide_and_back();
+	}
+
 	var old_cur_players = calc_cur_players(cfg, state.event);
 	var old_listed = calc_listed(state.event);
 
