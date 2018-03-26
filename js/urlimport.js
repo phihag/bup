@@ -16,10 +16,14 @@ function ui_import() {
 	var url = uiu.qs('input[name="urlimport_url"]').value;
 	var btn = uiu.qs('.urlimport_button');
 	var progress = uiu.el(btn, 'div', 'loading-icon');
-	import_url(state, url, function(err_msg) {
+	import_url(state, url, function(err_msg, event) {
 		uiu.remove(progress);
 		display_error(state, err_msg);
 		if (!err_msg) {
+			event.staticnet_message = state._('urlimport:staticnet_message');
+			var snet = staticnet(event);
+			network.ui_install_staticnet(state, snet);
+
 			window.scrollTo(0, 0);
 		}
 	});
@@ -36,10 +40,7 @@ function import_url(s, match_url, cb) {
 			}
 
 			var event = importexport.load_data(s, data).event;
-			event.staticnet_message = s._('urlimport:staticnet_message');
-			var snet = staticnet(event);
-			network.ui_install_staticnet(s, snet);
-			cb();
+			cb(null, event);
 		},
 		error: function(http_code, body, response) {
 			var content_type = response.getResponseHeader('content-type');
@@ -103,6 +104,7 @@ function ui_init() {
 return {
 	ui_init: ui_init,
 	download_tde_day: download_tde_day,
+	import_url: import_url,
 };
 
 })();

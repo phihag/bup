@@ -1,7 +1,7 @@
 'use strict';
 
 // A pseudo-network interface for an event that is only changed locally
-function staticnet(event, url) {
+function staticnet(event, url, fetcher) {
 
 function swap_event(new_event) {
 	event = new_event;
@@ -48,7 +48,18 @@ function list_matches(s, cb) {
 		cb(null, utils.deep_copy(event));
 		return;
 	}
-	if (!event && url) {
+
+	if (fetcher) {
+		return fetcher(s, url, function(err, imported_event) {
+			if (!err) {
+				event = imported_event; 
+				on_load_data(s);
+			}
+			cb(err, imported_event);
+		});
+	}
+
+	if (url) {
 		network.$request('staticnet.download', {
 			url: url,
 			dataType: 'json',

@@ -17,7 +17,8 @@ function get_real_netw() {
 		networks.courtspot ||
 		networks.liveaw ||
 		networks.jticker ||
-		networks.csde
+		networks.csde ||
+		networks.imported
 	);
 }
 
@@ -623,7 +624,15 @@ function ui_init(s, hash_query) {
 			matches: [],
 			counting: '3x21',
 		});
+	} else if (hash_query.import_url) {
+		networks.imported = staticnet(null, hash_query.import_url, function(s, url, cb) {
+			urlimport.import_url(s, url, function(errmsg, event) {
+				var err = errmsg ? {msg: errmsg} : err;
+				cb(err, event);
+			});
+		});
 	}
+
 
 	// Initialize networking module
 	var netw = get_netw();
@@ -824,6 +833,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var staticnet = require('./staticnet');
 	var uiu = require('./uiu');
 	var urlexport = require('./urlexport');
+	var urlimport = require('./urlimport');
 	var utils = require('./utils');
 
 	module.exports = network;

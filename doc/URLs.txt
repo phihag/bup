@@ -8,6 +8,7 @@ courtspot Run under CourtSpot
 csde      Run under courtspot.de
 btsh      Badminton tournament server (HTTP protocol)
 jticker   Run under meyerjo/ticker (shuttlecock-live)
+import_url=https://...  Import from the specified match URL (e.g. https://www.turnier.de/sport/teammatch.aspx?id=107D0FC0-C153-4EAF-A39D-EBAECB424B16&match=32 ).
 
 There are also many demos (which only run locally) available:
 
