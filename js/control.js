@@ -34,6 +34,29 @@ function demo_match_start(setup) {
 	start_match(state, setup);
 }
 
+function empty_match_start() {
+	var setup = {
+		counting: '3x21',
+		is_doubles: false,
+		date: ' ',
+		teams: [{
+			players: [{
+				name: '',
+			}],
+		}, {
+			players: [{
+				name: '',
+			}],
+		}],
+		team_competition: false,
+	};
+
+	settings.hide(true);
+	start_match(state, setup, [], {
+		id: 'empty',
+	});
+}
+
 function resume_match(s) {
 	stop_match(state);
 	state.setup = s.setup;
@@ -392,6 +415,7 @@ return {
 	block_buttons: block_buttons,
 	block_buttons_update: block_buttons_update,
 	demo_match_start: demo_match_start,
+	empty_match_start: empty_match_start,
 	hide_exception_dialog: hide_exception_dialog,
 	install_destructor: install_destructor,
 	on_press: on_press,

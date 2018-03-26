@@ -30,6 +30,11 @@ txdemo    Demo for transmission to turnier.de
 vdemo     Demo of an event (in progress)
 wdmudemo  Youth tournament demo (with lots of finals on Sunday)
 
+There is also:
+
+empty_match Start right into a match without player names. Primarily used to generate empty scoresheets.
+
+
 Initial UI
 ==========
 
