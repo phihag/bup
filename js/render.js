@@ -281,8 +281,8 @@ function ui_render(s) {
 	if (s.match.finish_confirmed) {
 		dialog_active = true;
 	}
-	uiu.$visible_qs('.postmatch_options', s.match.finished);
-	uiu.$visible_qs('#postmatch-confirm-dialog', s.match.finished && !s.match.finish_confirmed && !s.match.suspended && !s.match.injuries);
+	uiu.visible_qs('.postmatch_options', s.match.finished);
+	uiu.visible_qs('#postmatch-confirm-dialog', s.match.finished && !s.match.finish_confirmed && !s.match.suspended && !s.match.injuries);
 	if (s.match.finished && !s.match.finish_confirmed) {
 		dialog_active = true;
 		_set_dialog(s, '#postmatch-confirm-dialog');

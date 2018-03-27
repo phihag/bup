@@ -118,6 +118,8 @@ function leave_match(s) {
 		refmode_referee_ui.back_to_ui();
 	} else {
 		// Umpire mode
+
+		settings.clear_manual();
 		settings.show();
 	}
 	set_current(s);

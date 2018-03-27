@@ -487,7 +487,17 @@ function on_mode_change(s) {
 	update_refclient(s);
 }
 
+function clear_manual() {
+	// Empty the values of the manual match start boxes, for the next match
+	var manual_form = uiu.qs('#setup_manual_form');
+	['team1_player1', 'team1_player2', 'team2_player1', 'team2_player2',
+	'team1_name', 'team2_name', 'match_name'].forEach(function(name) {
+		uiu.qs('[name="' + name + '"]', manual_form).value = '';
+	});
+}
+
 return {
+	clear_manual: clear_manual,
 	default_settings: default_settings,
 	get_mode: get_mode,
 	hide: hide,
