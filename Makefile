@@ -30,14 +30,7 @@ manifest: appcache-manifest
 appcache-manifest:
 	node div/make_manifest.js dist/bup/ div/bup.appcache.in dist/bup/bup.appcache
 
-teamlists:
-	mkdir -p div/teamlists
-	div/gen_teamlist.js 'https://www.turnier.de/sport/draw.aspx?id=2E6B5BAC-8F64-46E8-94FC-804611281DF1&draw=1' div/teamlists/teamlist-1BL-2016.html
-	div/gen_teamlist.js 'https://www.turnier.de/sport/draw.aspx?id=2E6B5BAC-8F64-46E8-94FC-804611281DF1&draw=2' div/teamlists/teamlist-2BLN-2016.html
-	div/gen_teamlist.js 'https://www.turnier.de/sport/draw.aspx?id=2E6B5BAC-8F64-46E8-94FC-804611281DF1&draw=3' div/teamlists/teamlist-2BLS-2016.html
-
 dist: cleandist ## Create distribution files
-	@test -d div/teamlists || $(MAKE) teamlists
 	mkdir -p dist/bup
 
 	node div/make_dist.js . dist/bup/ dist/bup/sources
@@ -63,7 +56,6 @@ dist: cleandist ## Create distribution files
 	node div/minify_json.js div/nrwdemo.json dist/bup/div/nrwdemo.json
 	node div/minify_json.js div/tdemo.json dist/bup/div/tdemo.json
 	node div/minify_json.js div/rlmdemo.json dist/bup/div/rlmdemo.json
-	cp -R div/teamlists --target-directory dist/bup/div/
 	cp -R div/courtspot --target-directory dist/bup/div/
 	cp -R http_proxy --target-directory dist/bup/
 	mkdir -p dist/bup/div/scoresheet
@@ -148,7 +140,6 @@ cd: coverage-display
 clean: cleandist ## Remove temporary files
 	rm -rf -- libs
 	rm -rf -- node_modules
-	rm -rf -- div/teamlists/
 
 mockserver:
 	node_modules/.bin/node-supervisor -w test/mock/ -- test/mock/mockserver.js 4201

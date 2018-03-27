@@ -5,9 +5,9 @@ var SHEETS_BY_LEAGUE = {
 	'1BL-2015': ['1BL-2015', 'team-1BL-2015'],
 	'2BLN-2015': ['2BLN-2015', 'team-2BL-2015'],
 	'2BLS-2015': ['2BLS-2015', 'team-2BL-2015'],
-	'1BL-2016': ['1BL-2016', 'BL-ballsorten-2016', 'DBV-Satzungen-2016', 'teamlist-1BL-2016'],
-	'2BLN-2016': ['2BLN-2016', 'BL-ballsorten-2016', 'DBV-Satzungen-2016', 'teamlist-2BLN-2016'],
-	'2BLS-2016': ['2BLS-2016', 'BL-ballsorten-2016', 'DBV-Satzungen-2016', 'teamlist-2BLS-2016'],
+	'1BL-2016': ['1BL-2016', 'BL-ballsorten-2016', 'DBV-Satzungen-2016'],
+	'2BLN-2016': ['2BLN-2016', 'BL-ballsorten-2016', 'DBV-Satzungen-2016'],
+	'2BLS-2016': ['2BLS-2016', 'BL-ballsorten-2016', 'DBV-Satzungen-2016'],
 	'1BL-2017': ['1BL-2017_pdf', '1BL-2016', 'buli2017-minsr', 'buli2017-minv', 'receipt', 'DBV-Satzungen-2017'],
 	'2BLN-2017': ['2BLN-2017_pdf', '2BLN-2016', 'buli2017-minsr', 'buli2017-minv', 'receipt', 'DBV-Satzungen-2017'],
 	'2BLS-2017': ['2BLS-2017_pdf', '2BLS-2016', 'buli2017-minsr', 'buli2017-minv', 'receipt', 'DBV-Satzungen-2017'],
@@ -46,9 +46,6 @@ var URLS = {
 	'NRW-Satzungen': 'http://www.badminton-nrw.de/fileadmin/gstnrw/pdf_xls_doc/Satzungswerk/2017/SatzungOrdnungen2017.pdf',
 	'team-1BL-2015': 'div/Mannschaftsaufstellung_1BL-2015.pdf',
 	'team-2BL-2015': 'div/Mannschaftsaufstellung_2BL-2015.pdf',
-	'teamlist-1BL-2016': 'div/teamlists/teamlist-1BL-2016.html',
-	'teamlist-2BLN-2016': 'div/teamlists/teamlist-2BLN-2016.html',
-	'teamlist-2BLS-2016': 'div/teamlists/teamlist-2BLS-2016.html',
 	'buli2017-minsr': 'div/buli2017_mindestanforderungen_schiedsrichter.svg',
 	'buli2017-minv': 'div/buli2017_mindestanforderungen_verein.svg',
 	'OBL-2017': 'div/eventsheet_obl.xlsx',
@@ -60,9 +57,6 @@ var URLS = {
 };
 var DIRECT_DOWNLOAD_SHEETS = {
 	'BL-ballsorten-2016': true,
-	'teamlist-1BL-2016': true,
-	'teamlist-2BLN-2016': true,
-	'teamlist-2BLS-2016': true,
 };
 var EXTERNAL_DOWNLOAD_SHEETS = {
 	'DBV-Satzungen-2017': true,
