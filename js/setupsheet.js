@@ -501,16 +501,93 @@ function check_setup(s, team, team_id, cur_players) {
 		}
 	};
 
+	var _by_players = function(filterp) {
+		var ret = {};
+		for (var match_name in cur_players) {
+			if ((match_name === 'backup') || (match_name === 'present')) {
+				continue;
+			}
+			cur_players[match_name][team_id].forEach(function(p) {
+				if (!filterp(p)) return;
+
+				var matches = ret[p.name];
+				if (!matches) {
+					ret[p.name] = matches = [];
+				}
+				matches.push(match_name);
+			});
+		}
+
+		return ret;
+	};
+
+	var _match_type = function(match_name) {
+		return match_name.replace(/[^a-zA-Z]/g, '');
+	};
+
 	var league_key = s.event.league_key;
+	var backup_counts = GENDERS.map(function(gender) {
+		var backups = cur_players.backup;
+		if (!backups) return 0;
+		return backups[team_id].filter(function(p) {
+			return p.gender === gender;
+		}).length;
+	});
+	var matches_by_pname = _by_players(function() {return true;});
+
+	for (var pname in matches_by_pname) {
+		var pmatches = matches_by_pname[pname];
+		var count = pmatches.length;
+		if (count > 2) {
+			res.push(s._('setupsheet:3 matches', {
+				pname: pname,
+				count: count,
+				matches: pmatches.join(', '),
+			}));
+		}
+
+		pmatches.forEach(function(pm, pm_idx) {
+			for (var i = pm_idx + 1;i < pmatches.length;i++) {
+				if (_match_type(pmatches[i]) === _match_type(pm)) {
+					res.push(s._('setupsheet:discipline twice', {
+						pname: pname,
+						m0: pm,
+						m1: pmatches[i],
+					}));
+				}
+			}
+		});
+	}
+
 	if (eventutils.is_bundesliga(league_key)) {
 		check('1.HE', '2.HE', false);
 		check('1.HD', '2.HD', true);
+
+		// §9.6 BLO-DB
+		if ((backup_counts[0] > 2) || (backup_counts[1] > 2)) {
+			res.push(s._('setupsheet:buli backup'));
+		}
+
+		// §9.2 BLO-DB
+		var player_counts_by_gender = GENDERS.map(function(gender) {
+			var mbp = _by_players(function(p) {
+				p = _find_player(team.m, p) || _find_player(team.f, p) || p;
+				return p.gender === gender;
+			});
+			return Object.keys(mbp).length;
+		});
+		if (((player_counts_by_gender[0] >= 7) && (backup_counts[0] > 0)) || ((player_counts_by_gender[1] >= 4) && (backup_counts[1] > 0))) {
+			res.push(s._('setupsheet:buli backup7'));
+		}
 	} else if (eventutils.is_german8(league_key)) {
 		check('1.HE', '2.HE', false);
 		check('2.HE', '3.HE', false);
 		check('1.HD', '2.HD', true);
+		if ((backup_counts[0] > 1) || (backup_counts[1] > 1)) {
+			res.push(s._('setupsheet:too many backups'));
+		}
 	} else if (!utils.includes(['NLA-2017', 'international-2017'], league_key)) {
-		// NLA: crazy separate sysystem
+		// NLA: crazy separate system
 		// international: no checks necessary, every discipline once
 
 		report_problem.silent_error('Unsupported league for checks: ' + league_key);

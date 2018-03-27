@@ -88,6 +88,11 @@ var i18n_en = {
 'setupsheet:filename': 'Setup sheets {event_name}.pdf',
 'setupsheet:confirm cancel': 'Discard changes to the setup?',
 'setupsheet:rank warning': 'Invalid setup: {m0}, {m1}',
+'setupsheet:buli backup': 'Too many substitutes (§9.6 BLO-DB)',
+'setupsheet:buli backup7': 'substitutes not allowed with 7/4 regulars (§9.2 BLO-DB)',
+'setupsheet:too many backups': 'Too many substitutes',
+'setupsheet:3 matches': '{pname} in {count} matches: {matches}',
+'setupsheet:discipline twice': '{pname} in {m0} and {m1}',
 
 'button:undo': 'Undo',
 'button:settings': 'Configuration',

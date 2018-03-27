@@ -283,15 +283,159 @@ _describe('setupsheet', () => {
 
 		// Doubles sum equal
 		assert.deepStrictEqual(
-			bup.setupsheet.check_setup(s, team, 0, {
-				'1.HD': [[{name: 'Sam Magee'}, {name: 'Nhat Nguyen'}], []],
-				'2.HD': [[{name: 'Raphael Beck'}, {name: 'Dennis Nyenhuis'}], []],
-				'1.HE': [[{name: 'Nhat Nguyen'}], []],
+			bup.setupsheet.check_setup(s, team, 1, {
+				'1.HD': [[], [{name: 'Sam Magee'}, {name: 'Nhat Nguyen'}]],
+				'2.HD': [[], [{name: 'Raphael Beck'}, {name: 'Dennis Nyenhuis'}]],
+				'1.HE': [[], [{name: 'Nhat Nguyen'}]],
 				'2.HE': [[], []],
 			}),
 			[
 				'Falsche Aufstellung: 1.HD: Sam Magee #2 / Nhat Nguyen #6, 2.HD: Raphael Beck #1 / Dennis Nyenhuis #7',
 			]
+		);
+
+		// Player playing in 3 matches
+		assert.deepStrictEqual(
+			bup.setupsheet.check_setup(s, team, 0, {
+				'1.HD': [[{name: 'Sam Magee'}], []],
+				'2.HD': [[{name: 'Raphael Beck'}, {name: 'Dennis Nyenhuis'}], []],
+				'1.HE': [[{name: 'Nhat Nguyen'}], []],
+				'2.HE': [[{name: 'Sam Magee'}], []],
+				'GD': [[{name: 'Sam Magee'}, {name: 'Carla Nelte'}], []],
+			}),
+			[
+				'Sam Magee in 3 Spielen: 1.HD, 2.HE, GD',
+			]
+		);
+
+		// Player playing in 3 matches
+		assert.deepStrictEqual(
+			bup.setupsheet.check_setup(s, team, 0, {
+				'1.HD': [[{name: 'Sam Magee'}, {name: 'Raphael Beck'}], []],
+				'2.HD': [[{name: 'Sam Magee'}, {name: 'Dennis Nyenhuis'}], []],
+				'1.HE': [[{name: 'Nhat Nguyen'}], []],
+				'2.HE': [[{name: 'Nhat Nguyen'}], []],
+				'GD': [[{name: 'Raphael Beck'}, {name: 'Carla Nelte'}], []],
+				'backup': [[{name: 'Sebastian Brings', gender: 'm'}, {name: 'Kai Waldenberger', gender: 'm'}, {name: 'Runa Plützer', gender: 'f'}, {name: 'Paula Kick', gender: 'f'}]],
+			}),
+			[
+				'Sam Magee in 1.HD und 2.HD',
+				'Nhat Nguyen in 1.HE und 2.HE',
+			]
+		);
+
+		// too many backup players of the same gender
+		assert.deepStrictEqual(
+			bup.setupsheet.check_setup(s, team, 0, {
+				'1.HD': [[{name: 'Sam Magee'}, {name: 'Raphael Beck'}], []],
+				'2.HD': [[{name: 'Nhat Nguyen'}, {name: 'Dennis Nyenhuis'}], []],
+				'1.HE': [[{name: 'Lars Schänzler'}], []],
+				'2.HE': [[{name: 'Nhat Nguyen'}], []],
+				'GD': [[{name: 'Raphael Beck'}, {name: 'Carla Nelte'}], []],
+				'backup': [[{name: 'Sebastian Brings', gender: 'm'}, {name: 'Kai Waldenberger', gender: 'm'}, {name: 'Jan-Colin Völker', gender: 'm'}]],
+			}),
+			[
+				'Zu viele Ersatzspieler (§9.6 BLO-DB)',
+			]
+		);
+
+		// Bundesliga: backup players not allowed once 7 male or 4 female regular players
+		assert.deepStrictEqual(
+			bup.setupsheet.check_setup(s, team, 0, {
+				'1.HD': [[{name: 'Sam Magee'}, {name: 'Raphael Beck'}], []],
+				'2.HD': [[{name: 'Nhat Nguyen'}, {name: 'Dennis Nyenhuis'}], []],
+				'1.HE': [[{name: 'Lars Schänzler'}], []],
+				'2.HE': [[{name: 'Kai Waldenberger'}], []],
+				'GD': [[{name: 'Jan-Colin Völker'}, {name: 'Carla Nelte'}], []],
+				'DE': [[{name: 'Elin Svensson'}], []],
+				'DD': [[{name: 'Annika Dörr'}, {name: 'Carla Nelte'}], []],
+				'backup': [[{name: 'Sebastian Brings', gender: 'm'}, {name: 'Christoph Offermann', gender: 'm'}, {name: 'Runa Plützer', gender: 'f'}]],
+			}),
+			[
+				'Ersatzspieler obwohl 7/4 reguläre Spieler/innen (§9.2 BLO-DB)',
+			]
+		);
+		assert.deepStrictEqual(
+			bup.setupsheet.check_setup(s, team, 0, {
+				'1.HD': [[{name: 'Sam Magee'}, {name: 'Raphael Beck'}], []],
+				'2.HD': [[{name: 'Nhat Nguyen'}, {name: 'Dennis Nyenhuis'}], []],
+				'1.HE': [[{name: 'Lars Schänzler'}], []],
+				'2.HE': [[{name: 'Kai Waldenberger'}], []],
+				'GD': [[{name: 'Sam Magee'}, {name: 'Carla Nelte'}], []],
+				'DE': [[{name: 'Elin Svensson'}], []],
+				'DD': [[{name: 'Annika Dörr'}, {name: 'Carla Nelte'}], []],
+				'backup': [[{name: 'Sebastian Brings', gender: 'm'}, {name: 'Christoph Offermann', gender: 'm'}, {name: 'Runa Plützer', gender: 'f'}]],
+			}),
+			[
+				
+			]
+		);
+		assert.deepStrictEqual(
+			bup.setupsheet.check_setup(s, team, 0, {
+				'1.HD': [[{name: 'Sam Magee'}, {name: 'Raphael Beck'}], []],
+				'2.HD': [[{name: 'Nhat Nguyen'}, {name: 'Dennis Nyenhuis'}], []],
+				'1.HE': [[{name: 'Lars Schänzler'}], []],
+				'2.HE': [[{name: 'Kai Waldenberger'}], []],
+				'GD': [[{name: 'Sam Magee'}, {name: 'Carla Nelte'}], []],
+				'DE': [[{name: 'Elin Svensson'}], []],
+				'DD': [[{name: 'Annika Dörr'}, {name: 'Chloe Magee'}], []],
+				'backup': [[{name: 'Sebastian Brings', gender: 'm'}, {name: 'Christoph Offermann', gender: 'm'}, {name: 'Runa Plützer', gender: 'f'}]],
+			}),
+			[
+				'Ersatzspieler obwohl 7/4 reguläre Spieler/innen (§9.2 BLO-DB)',
+			]
+		);
+
+		// Test in RLW
+		const srl = tutils.state_after([], tutils.DOUBLES_TEAM_SETUP);
+		srl.event = {
+			league_key: 'RLW-2016',
+		};
+		assert.deepStrictEqual(
+			bup.setupsheet.check_setup(srl, team, 0, {
+				'1.HD': [[{name: 'Sam Magee'}, {name: 'Raphael Beck'}], []],
+				'2.HD': [[{name: 'Nhat Nguyen'}, {name: 'Dennis Nyenhuis'}], []],
+				'1.HE': [[{name: 'Lars Schänzler'}], []],
+				'2.HE': [[{name: 'Kai Waldenberger'}], []],
+				'3.HE': [[{name: 'Dario Wittstock'}], []],
+				'GD': [[{name: 'Sam Magee'}, {name: 'Carla Nelte'}], []],
+				'DE': [[{name: 'Elin Svensson'}], []],
+				'DD': [[{name: 'Annika Dörr'}, {name: 'Carla Nelte'}], []],
+				'backup': [[{name: 'Sebastian Brings', gender: 'm'}, {name: 'Christoph Offermann', gender: 'm'}, {name: 'Runa Plützer', gender: 'f'}]],
+			}),
+			[
+				'Zu viele Ersatzspieler/innen',
+			]
+		);
+		assert.deepStrictEqual(
+			bup.setupsheet.check_setup(srl, team, 0, {
+				'1.HD': [[{name: 'Sam Magee'}, {name: 'Raphael Beck'}], []],
+				'2.HD': [[{name: 'Nhat Nguyen'}, {name: 'Dennis Nyenhuis'}], []],
+				'1.HE': [[{name: 'Lars Schänzler'}], []],
+				'2.HE': [[{name: 'Kai Waldenberger'}], []],
+				'3.HE': [[{name: 'Dario Wittstock'}], []],
+				'GD': [[{name: 'Sam Magee'}, {name: 'Carla Nelte'}], []],
+				'DE': [[{name: 'Elin Svensson'}], []],
+				'DD': [[{name: 'Annika Dörr'}, {name: 'Carla Nelte'}], []],
+				'backup': [[{name: 'Sebastian Brings', gender: 'm'}, {name: 'Runa Plützer', gender: 'f'}, {name: 'Paula Kick', gender: 'f'}]],
+			}),
+			[
+				'Zu viele Ersatzspieler/innen',
+			]
+		);
+		assert.deepStrictEqual(
+			bup.setupsheet.check_setup(srl, team, 0, {
+				'1.HD': [[{name: 'Sam Magee'}, {name: 'Raphael Beck'}], []],
+				'2.HD': [[{name: 'Nhat Nguyen'}, {name: 'Dennis Nyenhuis'}], []],
+				'1.HE': [[{name: 'Lars Schänzler'}], []],
+				'2.HE': [[{name: 'Kai Waldenberger'}], []],
+				'3.HE': [[{name: 'Dario Wittstock'}], []],
+				'GD': [[{name: 'Sam Magee'}, {name: 'Carla Nelte'}], []],
+				'DE': [[{name: 'Elin Svensson'}], []],
+				'DD': [[{name: 'Annika Dörr'}, {name: 'Carla Nelte'}], []],
+				'backup': [[{name: 'Sebastian Brings', gender: 'm'}, {name: 'Runa Plützer', gender: 'f'}]],
+			}),
+			[]
 		);
 	});
 });

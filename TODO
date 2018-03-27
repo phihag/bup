@@ -1,8 +1,7 @@
 setupsheet checks:
-	3 Disziplinen (Petra Schönborn)
-	2x gleiche Disziplin
 	buli: Ersatzspieler obwohl keine erlaubt
 	zu viele Ersatzspieler
+	-> Petra Schönborn with screenshots
 
 dmode show error message when errors for longer than 30s
 dmode Siegerfoto with logos instead/on top of team names
