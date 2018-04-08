@@ -227,3 +227,40 @@ function download_team_vrl($httpc, $domain, $season_id, $league_key, $team_id, $
 
 	return $team_players;
 }
+
+function download_team_players($httpc, $domain, $league_key, $season_id, $team_id) {
+	$pagename = (
+		($domain === 'obv.tournamentsoftware.com') ? 'teamplayers' :
+		(($league_key === 'international-2017') ? 'teamplayers' :
+		'teamrankingplayers'
+	));
+	$players_url = (
+		'https://' . $domain . '/sport/' . $pagename . '.aspx?' .
+		'id=' . $season_id . '&tid=' . $team_id
+	);
+	$players_html = $httpc->request($players_url);
+
+	if (!\preg_match(
+			'/<table\s+class="ruler">\s*<caption>\s*(?:Herren|Männer)(?:.*?<th[^>]*>Rückrunde<\/th>)?(?P<tbody>.*?)<\/table>/s',
+			$players_html, $players_m_m)) {
+		return null;
+	}
+	$male_players = parse_players($players_m_m['tbody'], 'm');
+	if (\count($male_players) === 0) {
+		return null;
+	}
+
+	if (!\preg_match(
+			'/<table\s+class="ruler">\s*<caption>\s*(?:Damen|Frauen)(?:.*?<th[^>]*>Rückrunde<\/th>)?(?P<tbody>.*?)<\/table>/s',
+			$players_html, $players_f_m)) {
+		return null;
+	}
+	$female_players = parse_players($players_f_m['tbody'], 'f');
+	if (\count($female_players) === 0) {
+		return null;
+	}
+
+	$all_players = \array_merge([], $male_players, $female_players);
+
+	return $all_players;
+}

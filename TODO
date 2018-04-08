@@ -1,6 +1,10 @@
+check whether we use broetli compression for static assets
+
 dmode show error message when errors for longer than 30s
 dmode Siegerfoto with logos instead/on top of team names
 dmode automatically switch to Siegerfoto after end
+dmode half display
+dmode realistic court(s)
 
 buphub kill conns earlier
 

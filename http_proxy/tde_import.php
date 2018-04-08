@@ -15,6 +15,7 @@ function parse_teammatch($httpc, $tm_html, $domain, $match_id) {
 		'TEST - Ligen - Hagemeister Mai 2017:Test LIGA - Testliga' => '1BL-2016',
 		'BundesLiga 2016-2017:Bundesliga - 1. Bundesliga' => 'OBL-2017',
 		'Ligen NRW 2017-18:O19-NRW O19-RL - (001) Regionalliga West' => 'RLW-2016',
+		'Ligen NRW 2017-18:O19-NRW – O19-RL – (001) Regionalliga West' => 'RLW-2016',
 		'Ligen DBV 2017/18 (ohne Bundesligen):Gruppe Nord (NO) - (001) Regionalliga Nord' => 'RLN-2016',
 		'Bundesligen 2017/18:1. Bundesliga (1. BL) - (001) 1. Bundesliga' => '1BL-2017',
 		'Bundesligen 2017/18:2. Bundesliga (2. BL-Nord) - (002) 2. Bundesliga Nord' => '2BLN-2017',
@@ -34,9 +35,9 @@ function parse_teammatch($httpc, $tm_html, $domain, $match_id) {
 
 		$league_key = null;
 		if (\preg_match('/^Ligen NRW/', $header_m[1])) {
-			if (\preg_match('/^O19-NRW (O19-(?:RL|OL))\s*-\s*\(([0-9]+)\)/', $division_m[2], $nrw_olrl_m)) {
+			if (\preg_match('/^O19-NRW\s+(?:–\s+)?(O19-(?:RL|OL))\s*[–-]\s*\(([0-9]+)\)/', $division_m[2], $nrw_olrl_m)) {
 				$league_key = 'NRW-' . $nrw_olrl_m[1] . '-' . $nrw_olrl_m[2] . '-2016';
-			} else if (\preg_match('/^[UO]19-(?:NRW|[NS][12]) ([UO]19-(?:NRW|[NS][12])-(?:VL|LL|BL|BK|KL|KK))\s*-\s*\(([0-9]+)\)/', $division_m[2], $nrw_m)) {
+			} else if (\preg_match('/^[UO]19-(?:NRW|[NS][12])\s+(?:–\s+)?([UO]19-(?:NRW|[NS][12])-(?:VL|LL|BL|BK|KL|KK))\s*(?:–|-)\s*\(([0-9]+)\)/', $division_m[2], $nrw_m)) {
 
 				$league_key = 'NRW-' . $nrw_m[1] . '-' . $nrw_m[2] . '-2016';
 			}
@@ -122,7 +123,7 @@ function parse_teammatch($httpc, $tm_html, $domain, $match_id) {
 			$httpc, $league_key, $domain, $teamnames_m['season0'], $draw_id, $match_id, $team_infos);
 	} else {
 		$res['all_players'] = \array_map(function($ti) use ($httpc, $domain, $league_key) {
-			$ap = download_all_players($httpc, $ti, $domain, $league_key);
+			$ap = tde_utils\download_team_players($httpc, $domain, $league_key, $ti['season'], $ti['id']);
 			return $ap ? $ap : [];
 		}, $team_infos);
 	}
@@ -246,43 +247,6 @@ function buli_download_all_players($httpc, $league_key, $domain, $season_id, $dr
 	$all_players = \array_map(function($ti) use($httpc, $domain, $season_id, $league_key, $is_hr) {
 		return tde_utils\download_team_vrl($httpc, $domain, $season_id, $league_key, $ti['id'], $is_hr);
 	}, $team_infos);
-
-	return $all_players;
-}
-
-function download_all_players($httpc, $ti, $domain, $league_key) {
-	$pagename = (
-		($domain === 'obv.tournamentsoftware.com') ? 'teamplayers' :
-		(($league_key === 'international-2017') ? 'teamplayers' :
-		'teamrankingplayers'
-	));
-	$players_url = (
-		'https://' . $domain . '/sport/' . $pagename . '.aspx?' .
-		'id=' . $ti['season'] . '&tid=' . $ti['id']
-	);
-	$players_html = $httpc->request($players_url);
-
-	if (!\preg_match(
-			'/<table\s+class="ruler">\s*<caption>\s*(?:Herren|Männer)(?:.*?<th[^>]*>Rückrunde<\/th>)?(?P<tbody>.*?)<\/table>/s',
-			$players_html, $players_m_m)) {
-		return null;
-	}
-	$male_players = tde_utils\parse_players($players_m_m['tbody'], 'm');
-	if (\count($male_players) === 0) {
-		return null;
-	}
-
-	if (!\preg_match(
-			'/<table\s+class="ruler">\s*<caption>\s*(?:Damen|Frauen)(?:.*?<th[^>]*>Rückrunde<\/th>)?(?P<tbody>.*?)<\/table>/s',
-			$players_html, $players_f_m)) {
-		return null;
-	}
-	$female_players = tde_utils\parse_players($players_f_m['tbody'], 'f');
-	if (\count($female_players) === 0) {
-		return null;
-	}
-
-	$all_players = \array_merge([], $male_players, $female_players);
 
 	return $all_players;
 }

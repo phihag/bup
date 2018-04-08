@@ -170,20 +170,29 @@ function download_league($httpc, $url, $league_key, $use_vrl, $use_hr) {
 		];
 	}
 
-	if (!$use_vrl) {
-		throw new \Exception('non-VRL download not implemented yet.');
+	if ($use_vrl) {
+		$teams_info = \array_map(function($t) use ($httpc, $tournament_id, $league_key, $use_hr) {
+			$all_players = tde_utils\download_team_vrl(
+				$httpc, 'www.turnier.de', $tournament_id, $league_key, $t['team_id'], $use_hr);
+
+			return [
+				'id' => $t['team_id'],
+				'name' => $t['name'],
+				'players' => $all_players,
+			];
+		}, $teams);
+	} else {
+		$teams_info = \array_map(function($t) use ($httpc, $tournament_id, $league_key, $use_hr) {
+			$all_players = tde_utils\download_team_vrl(
+				$httpc, 'www.turnier.de', $tournament_id, $league_key, $t['team_id'], $use_hr);
+
+			return [
+				'id' => $t['team_id'],
+				'name' => $t['name'],
+				'players' => $all_players,
+			];
+		}, $teams);
 	}
-
-	$teams_info = \array_map(function($t) use ($httpc, $tournament_id, $league_key, $use_hr) {
-		$all_players = tde_utils\download_team_vrl(
-			$httpc, 'www.turnier.de', $tournament_id, $league_key, $t['team_id'], $use_hr);
-
-		return [
-			'id' => $t['team_id'],
-			'name' => $t['name'],
-			'players' => $all_players,
-		];
-	}, $teams);
 
 	$res = [
 		'name' => $league_name,
