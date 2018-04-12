@@ -72,13 +72,20 @@ var TEAM_NAMES = {
 	'4-7': 'SG FTV/HSV/VfL 93 Hamburg 1',
 	'4-8': 'SV Berliner Brauereien 1',
 	'5-1': 'STC BW Solingen 2',
-	'5-1477': 'BC Phönix Hövelhof 1',
+	'5-89': '1.CfB Köln 1',
 	'5-211': 'BV RW Wesel 1',
 	'5-505': 'Gladbecker FC 1',
 	'5-682': 'Bottroper BG 1',
 	'5-715': 'Spvgg.Sterkrade-N. 1',
 	'5-810': 'BC Hohenlimburg 2',
-	'5-89': '1.CfB Köln 1',
+	'5-1477': 'BC Phönix Hövelhof 1',
+	'6-2': 'SC Union Lüdinghausen',
+	'6-7': 'TSV Trittau',
+	'7-3': 'TV Refrath',
+	'7-4': '1.BV Mülheim',
+	'8-9': 'TSV 1906 Freystadt',
+	'8-11': 'Blau-Weiss Wittorf-NMS',
+	'8-28': 'TV 1884 Marktheidenfeld',
 };
 
 var LEAGUE_IDS = {
