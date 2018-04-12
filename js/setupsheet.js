@@ -154,6 +154,14 @@ function calc_listed(event) {
 				aps.forEach(_add);
 				team_res.m.sort(_cmp_players);
 				team_res.f.sort(_cmp_players);
+			} else if (aps.every(function(p) {
+				return p.ranking;
+			})) {
+				aps.forEach(_add);
+				team_res.m.sort(_cmp_players);
+				team_res.f.sort(_cmp_players);
+				team_res.m = team_res.m.slice(0, 9);
+				team_res.f = team_res.f.slice(0, 9);
 			}
 			return team_res;
 		});

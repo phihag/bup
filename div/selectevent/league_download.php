@@ -183,8 +183,8 @@ function download_league($httpc, $url, $league_key, $use_vrl, $use_hr) {
 		}, $teams);
 	} else {
 		$teams_info = \array_map(function($t) use ($httpc, $tournament_id, $league_key, $use_hr) {
-			$all_players = tde_utils\download_team_vrl(
-				$httpc, 'www.turnier.de', $tournament_id, $league_key, $t['team_id'], $use_hr);
+			$all_players = tde_utils\download_team_players(
+				$httpc, 'www.turnier.de', $league_key, $tournament_id, $t['team_id']);
 
 			return [
 				'id' => $t['team_id'],
