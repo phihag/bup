@@ -92,7 +92,7 @@ function download_league($httpc, $url, $league_key, $use_vrl, $use_hr) {
 	$league_name = \html_entity_decode($header_m['name']);
 
 	if (!\preg_match('/<table\s+class="ruler">(?P<html>.+?)<\/table>/s', $teams_html, $team_table_m)) {
-		throw new \Exception('Cannot find table in ' . $team_url);
+		throw new \Exception('Cannot find table in ' . $teams_url);
 	}
 	$team_table_html = $team_table_m['html'];
 

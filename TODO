@@ -1,3 +1,11 @@
+BWF with timeouts:
+	5x11, 60s intervals, 120s timeouts per player, one more timeout in the fifth game
+	if during interval: 120s total
+swap exceptions:
+	1. yellow, red, black
+	2. UVR
+	3. RCO
+
 check whether we use broetli compression for static assets
 
 dmode show error message when errors for longer than 30s
