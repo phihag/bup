@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script>
+var until = 1525608000000;
+
+function empty(node) {
+	var last;
+	while ((last = node.lastChild)) {
+		node.removeChild(last);
+	}
+}
+
+function text(node, str) {
+	empty(node);
+	if ((str !== undefined) && (str !== null)) {
+		node.appendChild(node.ownerDocument.createTextNode(str));
+	}
+}
+
+function pad(n) {
+	if (n < 10) {
+		return '0' + n;
+	} else {
+		return '' + n;
+	}
+}
+
+function duration_secs(start_timestamp, end_timestamp) {
+	var diff = end_timestamp ? (end_timestamp - start_timestamp) : start_timestamp;
+	var diff_s = Math.round(diff / 1000);
+	var secs = diff_s % 60;
+	var diff_mins = (diff_s - secs) / 60;
+	var mins = diff_mins % 60;
+	var hours = (diff_mins - mins) / 60;
+
+	if (hours) {
+		return hours + ':' + pad(mins) + ':' + pad(secs);
+	} else {
+		return mins + ':' + pad(secs);
+	}
+}
+
+
+function update() {
+	var now = Date.now();
+
+	var countdown = document.querySelector('.countdown');
+
+	text(countdown, duration_secs(now, until));
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+	setInterval(update, 500);
+});
+
+</script>
+<style>
+body {
+	background: #000;
+	color: white;
+	font-size: 60px;
+	font-family: sans-serif;
+}
+.countdown {
+	margin: 10px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="countdown"></div>
+
+</body>
+</html>
