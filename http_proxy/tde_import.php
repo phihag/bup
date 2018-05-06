@@ -23,6 +23,7 @@ function parse_teammatch($httpc, $tm_html, $domain, $match_id) {
 		'BundesLiga 2017-2018:Bundesliga - 1. Bundesliga' => 'OBL-2017',
 		'Ligen DBV 2017/18 (ohne Bundesligen):Gruppe SüdOst (SO) - (002) Regionalliga SüdOst Süd' => 'RLSOS-2017',
 		'Ligen DBV 2017/18 (ohne Bundesligen):Gruppe SüdOst (SO) - (001) Regionalliga SüdOst Ost' => 'RLSOO-2017',
+		'Bundesligen 2017/18:1. Bundesliga – (1. BL) – Final Four' => '1BL-2017',
 	];
 
 	if (!\preg_match('/

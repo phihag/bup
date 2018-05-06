@@ -1,3 +1,11 @@
+courtspot configurable database name
+bup-courtspot: initial servers wrong
+button to delete stored matches
+option to not talk about court
+battery driven bup backups: add hostapd emergency configuration script
+Spielreihenfolge: Show team names and date
+bup: double color displays
+
 BWF with timeouts:
 	5x11, 60s intervals, 120s timeouts per player, one more timeout in the fifth game
 	if during interval: 120s total
