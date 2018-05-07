@@ -1,10 +1,24 @@
-courtspot configurable database name
-bup-courtspot: initial servers wrong
+ad: countdown until game with icons
+
+delete countdown and implement one as ad
+courtspot: add configurable database name
+bup-courtspot: initial servers wrong in display?
 button to delete stored matches
 option to not talk about court
 battery driven bup backups: add hostapd emergency configuration script
 Spielreihenfolge: Show team names and date
 bup: double color displays
+document wirecast: webanzeige
+make bup doc printable
+english doc on README
+
+document demodhcpd + hostapd
+hosted remote-controlled windows app
+	search for bup / badmintonticker / referee mode
+	controllable via referee mode
+	if only one found connect to that automatically after 30s or so, and save
+	go fullscreen
+build a linux app too
 
 BWF with timeouts:
 	5x11, 60s intervals, 120s timeouts per player, one more timeout in the fifth game
