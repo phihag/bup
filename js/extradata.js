@@ -27,6 +27,10 @@ var TEAM_COLORS = {
 	'Trittau': '#ff557a',
 	'Wipperfeld': '#ff2149',
 	'Wittorf': '#0091ff',
+	'WG Duisburg-Essen': '#ffffff',
+	'WG Karlsruhe': '#80ff8a',
+	'WG Köln': '#5C8DD2',
+	'Uni Bayreuth': '#ffffff',
 };
 
 function get_color(team_name) {
