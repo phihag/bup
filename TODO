@@ -1,7 +1,9 @@
-ad: countdown until game with icons
+Aufstellung: check non-EU
+2018: Stammspieler dürfen Ersatzspieler sein
+support 3x11
+support 7x11
 
-delete countdown and implement one as ad
-courtspot: add configurable database name
+ad: countdown until game with icons
 bup-courtspot: initial servers wrong in display?
 button to delete stored matches
 option to not talk about court
@@ -29,6 +31,7 @@ swap exceptions:
 	3. RCO
 
 check whether we use broetli compression for static assets
+make settings ro?
 
 dmode show error message when errors for longer than 30s
 dmode Siegerfoto with logos instead/on top of team names
