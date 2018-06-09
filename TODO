@@ -1,7 +1,14 @@
-Aufstellung: check non-EU
+fix integration tests
+
+Feld Display at tournaments: larger and show tournament
+Aufstellung: check non-EU (update to new regulations)
 2018: Stammspieler dürfen Ersatzspieler sein
 support 3x11
 support 7x11
+Rückschläger anzeigen?
+Anzeige mit Mannschaftsspielstand
+Anzeige hochkant 1 Feld
+Anzeige hochkand 2 Felder
 
 ad: countdown until game with icons
 bup-courtspot: initial servers wrong in display?
@@ -12,7 +19,7 @@ Spielreihenfolge: Show team names and date
 bup: double color displays
 document wirecast: webanzeige
 make bup doc printable
-english doc on README
+some basic english doc in README
 
 document demodhcpd + hostapd
 hosted remote-controlled windows app
@@ -21,10 +28,8 @@ hosted remote-controlled windows app
 	if only one found connect to that automatically after 30s or so, and save
 	go fullscreen
 build a linux app too
+tool to set up raspberry pi SD card
 
-BWF with timeouts:
-	5x11, 60s intervals, 120s timeouts per player, one more timeout in the fifth game
-	if during interval: 120s total
 swap exceptions:
 	1. yellow, red, black
 	2. UVR
