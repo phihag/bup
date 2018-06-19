@@ -8,12 +8,15 @@
   },
   "scripts": {
     "test": "mocha test/ test/integration/",
-    "test:watch": "npm run test -- -w"
+    "test:watch": "npm run test -- -w",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "node-webcrypto-ossl": "*",
     "wrtc": "0.0.63",
-    "ws": "*"
+    "ws": "*",
+    "snyk": "^1.83.0"
   },
   "devDependencies": {
     "async": "*",
@@ -32,5 +35,6 @@
     "uglify-js": "3.x",
     "xmldom": "*"
   },
-  "private": true
+  "private": true,
+  "snyk": true
 }
