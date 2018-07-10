@@ -61,6 +61,8 @@ protest         Text describing the protest of one team,
                 e.g. "Court extremely slippery (Home team, 19:00)"
 team_competition* Are players competing for their teams(true) or for themselves(false)?
                 Affects announcements.
+nation_competition Are players competing under their nation's banner?
+                true for international tournaments, false or unset otherwise.
 away_first      Boolean. If true, the guest team is mentioned first in announcements.
 team_names      Array of home and away team name. Required for team competitions.
                 Example: ["TV Refrath", "BC Bischmisheim"]

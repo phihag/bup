@@ -1367,6 +1367,7 @@ function render_teamcourt(s, container, event, court, match, colors) {
 				'display: flex;align-items: center;'
 			),
 		});
+		console.log('nation_competition', match.nation_competition);
 		var team_name_el = uiu.el(team_name_container, 'div', {}, team.name);
 
 		var player_spans = player_names.map(function(pname, player_id) {
