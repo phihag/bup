@@ -8,26 +8,26 @@ require_once 'tde_utils.php';
 
 function login($httpc, $url_base, $user, $password) {
 	// Download login form
-	$login_url = $url_base . 'member/login.aspx';
+	$login_url = $url_base . 'user/login';
 	$login_page = $httpc->request($login_url);
 	if ($login_page === false) {
 		utils\json_err('Failed to download login form: ' . $httpc->get_error_info());
 	}
-	$LOGIN_RE = '/<form method="post" action="[^"]*login\.aspx"[^>]*>(.*?)<\/form>/s';
+	$LOGIN_RE = '/<form\s+action="\/user"\s+(?:class="auth__body"\s+)?id="form_login"(.*?)<\/form>/s';
 	if (!preg_match($LOGIN_RE, $login_page, $matches)) {
 		utils\json_err('Cannot find login form');
 	}
 	$login_form = $matches[1];
 
-	if (!preg_match_all('/<input\s+type="(?:hidden|submit)"\s+name="([^"]*)"(?:\s+id="[^"]*")?\s+value="([^"]+)"/', $login_form, $matches, \PREG_SET_ORDER)) {
+	if (!preg_match_all('/<input\s+name="([^"]*)"\s+type="(?:hidden|submit)"\s+value="([^"]+)"/', $login_form, $matches, \PREG_SET_ORDER)) {
 		utils\json_err('Failed to find hidden login fields');
 	}
 	$data = [];
 	foreach ($matches as $m) {
 		$data[$m[1]] = $m[2];
 	}
-	$data['ctl00$ctl00$ctl00$cphPage$cphPage$cphPage$pnlLogin$UserName'] = $user;
-	$data['ctl00$ctl00$ctl00$cphPage$cphPage$cphPage$pnlLogin$Password'] = $password;
+	$data['Login'] = $user;
+	$data['Password'] = $password;
 
 	// Perform login
 	$postlogin_page = $httpc->request(
@@ -43,7 +43,7 @@ function login($httpc, $url_base, $user, $password) {
 		utils\json_err('Failed to perform login');
 	}
 
-	if (\preg_match('/<span class="error">(.*?)<\/span>/', $postlogin_page, $m)) {
+	if (\preg_match('/<span class="field-validation-error[^>]*>(.*?)<\/span>/', $postlogin_page, $m)) {
 		utils\json_err('Login failed: ' . $m[1]);
 	}
 }

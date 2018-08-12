@@ -1,5 +1,14 @@
+fix login
+
 support buli-2018
 	update bldemo
+	Stammspieler-Änderungen?
+	Aufstellung: check non-EU (update to new regulations)
+	2018: Stammspieler dürfen Ersatzspieler sein?
+display as iframe: suppress menu, suppress click
+
+add bts to table
+add sterkrade colors: yellow-black
 
 support nation team names (when nation competition then prefer player's nation names)
 bts: at beginning player marked before server determined
@@ -7,10 +16,6 @@ show nations in green main display when nation competition is set
 fix integration tests
 
 Feld Display at tournaments: larger and show tournament
-Aufstellung: check non-EU (update to new regulations)
-2018: Stammspieler dürfen Ersatzspieler sein
-support 3x11
-support 7x11
 Rückschläger anzeigen?
 Anzeige mit Mannschaftsspielstand
 Anzeige hochkant 1 Feld
