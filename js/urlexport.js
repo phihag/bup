@@ -160,13 +160,18 @@ function render_submit(s, page, data, submit_cb) {
 			style: 'text-align:right;font-size:2vmin;',
 		}, ef.label);
 		var td = uiu.el(tr, 'td');
-		var input = uiu.el(td, 'input', {
+		var input_attrs = {
 			style: 'font-size: 2vmin;',
 			size: 50,
 			type: 'text',
 			name: 'ef_' + ef.tde_id,
+			'class': 'urlexport_input',
 			value: (extra_field_value(s.event, ef.label) || ''),
-		});
+		};
+		if (/Schiedsrichter/.test(ef.label) && eventutils.umpire_required(s.event.league_key)) {
+			input_attrs.required = 'required';
+		}
+		var input = uiu.el(td, 'input', input_attrs);
 		if (idx === 0) {
 			input.focus();
 		}

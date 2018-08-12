@@ -294,6 +294,10 @@ function is_bundesliga(league_key) {
 	return /^(?:1BL|2BLN|2BLS)-(?:2015|2016|2017)$/.test(league_key);
 }
 
+function is_rlw(league_key) {
+	return /^RLW-|^NRW-O19-RL/.test(league_key);
+}
+
 function is_incomplete(setup) {
 	return (
 		(setup.teams[0].players.length !== setup.teams[1].players.length) ||
@@ -522,6 +526,10 @@ function umpire_pay(league_key) {
 	}
 }
 
+function umpire_required(league_key) {
+	return is_bundesliga(league_key) || is_rlw(league_key);
+}
+
 function make_empty_matches(league_key, event_id) {
 	if (/^(?:1BL|2BLN|2BLS)-(?:2016|2017)$/.test(league_key)) {
 		var rawdef = [
@@ -584,6 +592,7 @@ return {
 	umpire_pay: umpire_pay,
 	name_by_league: name_by_league,
 	is_german8: is_german8,
+	umpire_required: umpire_required,
 	// Testing only
 	/*@DEV*/
 	get_min_pause: get_min_pause,

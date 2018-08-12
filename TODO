@@ -1,4 +1,6 @@
-fix login
+test import RLW
+test import OLN
+test import KK
 
 support buli-2018
 	update bldemo
@@ -7,6 +9,7 @@ support buli-2018
 	2018: Stammspieler dürfen Ersatzspieler sein?
 display as iframe: suppress menu, suppress click
 
+multi-color team config
 add bts to table
 add sterkrade colors: yellow-black
 

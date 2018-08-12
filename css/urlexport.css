@@ -28,3 +28,7 @@
 .urlexport_form button {
 	font-size: inherit;
 }
+
+.urlexport_input:invalid {
+	outline: 1px solid red;
+}
