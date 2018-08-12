@@ -7,9 +7,6 @@
 	"url": "https://craig.global.ssl.fastly.net/js/mousetrap/mousetrap.min.js"
 },
 {
-	"url": "https://raw.githubusercontent.com/ftlabs/fastclick/master/lib/fastclick.js"
-},
-{
 	"url": "https://raw.githubusercontent.com/phihag/jsPDF/dist/dist/jspdf.min.js"
 },
 {
