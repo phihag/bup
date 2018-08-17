@@ -271,6 +271,8 @@
         {"gender": "m", "name": "Jan-Colin Völker", "ranking": 8},
         {"gender": "m", "name": "Dennis Nyenhuis", "ranking": 9, "ranking_d": 7},
         {"gender": "m", "name": "Max Schwenger", "ranking": 10, "ranking_d": 4},
+        {"gender": "m", "name": "Kento Momota", "ranking": 11, "nationality": "JPN"},
+        {"gender": "m", "name": "Lin Dan", "ranking": 12, "nationality": "CHN"},
         {"gender": "f", "name": "Chloe Magee", "ranking": 1, "nationality": "IRL", "regular": true},
         {"gender": "f", "name": "Carla Nelte", "ranking": 2, "regular": true},
         {"gender": "f", "name": "Elin Svensson", "ranking": 3, "nationality": "SWE"},

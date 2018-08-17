@@ -234,6 +234,16 @@ _describe('setupsheet', () => {
 			'gender': 'm',
 			'ranking': 9,
 			'ranking_d': 7,
+		}, {
+			'name': 'Lin Dan',
+			'gender': 'm',
+			'ranking': 10,
+			'nationality': 'CHN',
+		}, {
+			'name': 'Kento Momota',
+			'gender': 'm',
+			'ranking': 11,
+			'nationality': 'JPN',
 		}],
 		'f': [{
 			'gender': 'f',
@@ -383,6 +393,21 @@ _describe('setupsheet', () => {
 			}),
 			[
 				'Ersatzspieler obwohl 7/4 reguläre Spieler/innen (§9.2 BLO-DB)',
+			]
+		);
+		assert.deepStrictEqual(
+			bup.setupsheet.check_setup(s, team, 0, {
+				'1.HD': [[{name: 'Sam Magee'}, {name: 'Raphael Beck'}], []],
+				'2.HD': [[{name: 'Lin Dan'}, {name: 'Kento Momota'}], []],
+				'1.HE': [[{name: 'Lin Dan'}], []],
+				'2.HE': [[{name: 'Kento Momota'}], []],
+				'GD': [[{name: 'Sam Magee'}, {name: 'Carla Nelte'}], []],
+				'DE': [[{name: 'Elin Svensson'}], []],
+				'DD': [[{name: 'Annika Dörr'}, {name: 'Chloe Magee'}], []],
+				'backup': [[], []],
+			}),
+			[
+				'Mehr als ein Nicht-Unionsbürger: Lin Dan, Kento Momota (§5.1 BLO-DB)',
 			]
 		);
 

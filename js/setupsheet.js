@@ -35,6 +35,10 @@ var EXTRA_LINES = {
 	international: 0,
 	nla: 2,
 };
+var EU_COUNTRIES = [
+	'AUT', 'BEL', 'BGR', 'HRV', 'CYP', 'CZE', 'DNK', 'EST', 'FIN',
+	'FRA', 'DEU', 'GRC', 'HUN', 'IRL', 'ITA', 'LVA', 'LTU', 'LUX',
+	'MLT', 'NLD', 'POL', 'PRT', 'ROU', 'SVK', 'SVN', 'ESP', 'SWE', 'GBR'];
 
 // Current state
 var listed; // Array of teams -> dict of genders -> array of players
@@ -587,6 +591,22 @@ function check_setup(s, team, team_id, cur_players) {
 		if (((player_counts_by_gender[0] >= 7) && (backup_counts[0] > 0)) || ((player_counts_by_gender[1] >= 4) && (backup_counts[1] > 0))) {
 			res.push(s._('setupsheet:buli backup7'));
 		}
+
+		// §5.1 BLO-DB
+		var noneu = [];
+		for (var match_name in cur_players) {
+			cur_players[match_name][team_id].forEach(function(p) {
+				p = _find_player(team.m, p) || _find_player(team.f, p) || p;
+				if (p.nationality &&
+						!utils.includes(EU_COUNTRIES, p.nationality) &&
+						!noneu.includes(p.name)) {
+					noneu.push(p.name);
+				}
+			});
+		}
+		if (noneu.length > 1) {
+			res.push(s._('setupsheet:buli non-eu', {names: noneu.join(', ')}));
+		}
 	} else if (eventutils.is_german8(league_key)) {
 		check('1.HE', '2.HE', false);
 		check('2.HE', '3.HE', false);
@@ -606,6 +626,7 @@ function check_setup(s, team, team_id, cur_players) {
 
 function rerender(s) {
 	var regular_nobackup = /^(1BL|2BLN|2BLS)-(2016|2017)$/.test(s.event.league_key);
+
 	listed.forEach(function(team, team_id) {
 		var table = uiu.qs('#setupsheet_table_team' + team_id);
 		uiu.empty(table);
