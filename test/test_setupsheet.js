@@ -407,7 +407,7 @@ _describe('setupsheet', () => {
 				'backup': [[], []],
 			}),
 			[
-				'Mehr als ein Nicht-Unionsbürger: Lin Dan, Kento Momota (§5.1 BLO-DB)',
+				'Mehr als ein Nicht-EU-Bürger: Lin Dan, Kento Momota (§5.1 BLO-DB)',
 			]
 		);
 
