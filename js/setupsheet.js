@@ -605,7 +605,7 @@ function check_setup(s, team, team_id, cur_players) {
 }
 
 function rerender(s) {
-	var is_buli = eventutils.is_bundesliga(s.event.league_key);
+	var regular_nobackup = /^(1BL|2BLN|2BLS)-(2016|2017)$/.test(s.event.league_key);
 	listed.forEach(function(team, team_id) {
 		var table = uiu.qs('#setupsheet_table_team' + team_id);
 		uiu.empty(table);
@@ -644,7 +644,7 @@ function rerender(s) {
 				click.on(btn, on_delete_click);
 				uiu.el(btn, 'span');
 				cfg[gender].forEach(function(col) {
-					if ((col === 'dark') || (is_buli && (col === 'backup') && p.regular)) {
+					if ((col === 'dark') || (regular_nobackup && (col === 'backup') && p.regular)) {
 						uiu.el(tr, 'td', 'setupsheet_dark');
 					} else {
 						var plays_in = cur_plays_in(col, team_id, p);
