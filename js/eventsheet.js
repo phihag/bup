@@ -38,7 +38,7 @@ var URLS = {
 	'DBV-Satzungen-2017': 'http://www.badminton.de/fileadmin/user_upload/17-dbv-druckwerk_satzung-ordnungen-spielregeln201718-website.pdf.pdf',
 	'RLW-2016': 'div/Spielbericht_8x3x21.svg',
 	'RLN-2016': 'div/Spielbericht_8x3x21.svg',
-	'RLN-Satzungen': 'http://www.gruppe-nord.net/fileadmin/user_upload/schuch/GruppeNord/Satzung/Satzung%20und%20Ordnungen%20der%20Gruppe%20Nord%20Stand%2005-08-17.pdf',
+	'RLN-Satzungen': 'https://gruppe-nord.net/download/satzung-und-ordnungen-der-gruppe-nord-stand-08-01-18/?wpdmdl=271',
 	'RLM-2016': 'div/Spielbericht_8x3x21.svg',
 	'RLM-SpO': 'http://www.dbv-mitte.de/web/images/Allgemein/Gruppenordnung/Gruppe_Mitte_im_DBV_Ordnungen_20170701.pdf',
 	'NLA-2017': 'div/NLA_Resultatblatt.svg',
