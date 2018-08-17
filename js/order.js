@@ -299,13 +299,7 @@ function preferred_by_league(league_key) {
 		];
 	}
 
-	switch (league_key) {
-	case '1BL-2016':
-	case '2BLN-2016':
-	case '2BLS-2016':
-	case '1BL-2017':
-	case '2BLN-2017':
-	case '2BLS-2017':
+	if (eventutils.is_bundesliga(league_key)) {
 		// See BLO-DB §8.8
 		return [
 			'1.HD',
@@ -316,6 +310,9 @@ function preferred_by_league(league_key) {
 			'GD',
 			'2.HE',
 		];
+	}
+
+	switch (league_key) {
 	case 'RLN-2016':
 		// Gruppenspielordnung Nord §7.9
 		return [

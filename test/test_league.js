@@ -25,6 +25,52 @@ _describe('eventutils', function() {
 		});
 	});
 
+	_it('Bundesliga 2018/2019', function() {
+		assert.strictEqual(bup.eventutils.name_by_league('1BL-2018'), '1. Bundesliga');
+		assert.strictEqual(bup.eventutils.name_by_league('2BLN-2018'), '2. Bundesliga Nord');
+		assert.strictEqual(bup.eventutils.name_by_league('2BLS-2018'), '2. Bundesliga Süd');
+		assert.deepStrictEqual(bup.eventutils.default_counting('1BL-2018'), '5x11_15^90');
+		assert.deepStrictEqual(bup.eventutils.get_min_pause('1BL-2018'), 1200000);
+		assert(bup.eventsheet._SHEETS_BY_LEAGUE['1BL-2018'].length > 0);
+		assert.deepStrictEqual(bup.order.preferred_by_league('1BL-2018'), [
+			'1.HD', 'DD', '2.HD', '1.HE', 'DE', 'GD', '2.HE',
+		]);
+		assert.deepStrictEqual(bup.eventutils.umpire_pay('1BL-2018'), {
+			base: 50,
+			per_km: .3,
+			currency: '€',
+		});
+		assert.deepStrictEqual(bup.eventutils.make_empty_matches('1BL-2018', 'testev'), [{setup: {
+			counting: '5x11_15^90',
+			match_id: 'testev_1.HD', match_name: '1.HD', is_doubles: true,
+			teams: [{players: []}, {players: []}],
+		}}, {setup: {
+			counting: '5x11_15^90',
+			match_id: 'testev_DD', match_name: 'DD', is_doubles: true,
+			teams: [{players: []}, {players: []}],
+		}}, {setup: {
+			counting: '5x11_15^90',
+			match_id: 'testev_2.HD', match_name: '2.HD', is_doubles: true,
+			teams: [{players: []}, {players: []}],
+		}}, {setup: {
+			counting: '5x11_15^90',
+			match_id: 'testev_1.HE', match_name: '1.HE', is_doubles: false,
+			teams: [{players: []}, {players: []}],
+		}}, {setup: {
+			counting: '5x11_15^90',
+			match_id: 'testev_DE', match_name: 'DE', is_doubles: false,
+			teams: [{players: []}, {players: []}],
+		}}, {setup: {
+			counting: '5x11_15^90',
+			match_id: 'testev_GD', match_name: 'GD', is_doubles: true,
+			teams: [{players: []}, {players: []}],
+		}}, {setup: {
+			counting: '5x11_15^90',
+			match_id: 'testev_2.HE', match_name: '2.HE', is_doubles: false,
+			teams: [{players: []}, {players: []}],
+		}}]);
+	});
+
 	_it('Regionalliga SüdOst Ost 2017/2018', function() {
 		assert.strictEqual(bup.eventutils.name_by_league('RLSOO-2017'), 'Regionalliga SüdOst Ost');
 		assert.deepStrictEqual(bup.eventutils.default_counting('RLSOO-2017'), '3x21');

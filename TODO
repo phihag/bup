@@ -1,12 +1,10 @@
-test import 2BLN
-test import 2BLS
 test import RLN
 test import RLW
 test import OLN
 test import KK
 support buli-2018
 	update bldemo
-	go through all parts
+	go through all instances of checks
 	Stammspieler-Änderungen: Wieder als Ersatzspieler
 	Aufstellung: check non-EU (update to new regulations)
 

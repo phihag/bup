@@ -193,9 +193,9 @@ function _parse_players(s) {
 
 function _get_league_key(liga_code) {
 	return {
-		'(001) 1. Bundesliga': '1BL-2017',
-		'(002) 2. Bundesliga Nord': '2BLN-2017',
-		'(003) 2. Bundesliga Süd': '2BLS-2017',
+		'(001) 1. Bundesliga': '1BL-2018',
+		'(002) 2. Bundesliga Nord': '2BLN-2018',
+		'(003) 2. Bundesliga Süd': '2BLS-2018',
 		'(001) Regionalliga SüdOst Ost': 'RLSOO-2017',
 		'(001) Regionalliga West': 'RLW-2016',
 		'(007) Verbandsliga Süd 2': 'NRW-O19-S2-VL-007-2016',
@@ -241,7 +241,7 @@ function _parse_match_list(doc, now) {
 
 	// Fallback: if everything goes wrong, go for 1BL
 	if (! league_key) {
-		league_key = '1BL-2017';
+		league_key = '1BL-2018';
 	}
 
 	var game_count = calc.max_game_count(counting);

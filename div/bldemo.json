@@ -210,7 +210,7 @@
     "umpires": "Barbara Bub & Markus Schwendtner",
     "spectators": 300,
     "starttime": "19:00",
-    "date": "21.5.2018",
+    "date": "21.5.2019",
     "matchday": "Finale",
     "notes": "Um 3 Minuten verspäteter Spielbeginn wegen Gänsen in der Halle. Mindestanforderungen nicht eingehalten: Einige der Federbälle waren nicht zugelassen. Gelbe Karte im 1.HD gegen Sam Magee wegen zu gutem Spiel.",
     "backup_players": [[{
@@ -300,7 +300,7 @@
         {"gender": "f", "name": "Nadia Fankhauser", "ranking": 6, "nationality": "SUI"}
       ]
     ],
-    "league_key": "1BL-2017",
+    "league_key": "1BL-2018",
     "team_competition": true
   }
 }

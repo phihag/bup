@@ -141,7 +141,7 @@
     "team_names": ["TV Refrath", "BC Bischmisheim"],
     "location": "SpH Steinbreche",
     "starttime": "19:00",
-    "date": "21.5.2018",
+    "date": "21.5.2019",
     "matchday": "Finale",
     "backup_players": [[{
       "name": "Dennis Nyenhuis",
@@ -190,7 +190,7 @@
         {"gender": "f", "name": "Nadia Fankhauser", "ranking": 5, "nationality": "SUI"}
       ]
     ],
-    "league_key": "1BL-2017",
+    "league_key": "1BL-2018",
     "team_competition": true
   }
 }

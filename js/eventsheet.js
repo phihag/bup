@@ -11,6 +11,9 @@ var SHEETS_BY_LEAGUE = {
 	'1BL-2017': ['1BL-2017_pdf', '1BL-2016', 'buli2017-minsr', 'buli2017-minv', 'receipt', 'DBV-Satzungen-2017'],
 	'2BLN-2017': ['2BLN-2017_pdf', '2BLN-2016', 'buli2017-minsr', 'buli2017-minv', 'receipt', 'DBV-Satzungen-2017'],
 	'2BLS-2017': ['2BLS-2017_pdf', '2BLS-2016', 'buli2017-minsr', 'buli2017-minv', 'receipt', 'DBV-Satzungen-2017'],
+	'1BL-2018': ['1BL-2017_pdf', '1BL-2016', 'buli2017-minsr', 'buli2017-minv', 'receipt', 'DBV-Satzungen-2017'],
+	'2BLN-2018': ['2BLN-2017_pdf', '2BLN-2016', 'buli2017-minsr', 'buli2017-minv', 'receipt', 'DBV-Satzungen-2017'],
+	'2BLS-2018': ['2BLS-2017_pdf', '2BLS-2016', 'buli2017-minsr', 'buli2017-minv', 'receipt', 'DBV-Satzungen-2017'],
 	'NRW-2016': ['NRW-2016', 'NRW-Satzungen'],
 	'RLW-2016': ['RLW-2016', 'receipt', 'NRW-Satzungen'],
 	'RLN-2016': ['RLN-2016', 'receipt', 'RLN-Satzungen'],
@@ -689,9 +692,9 @@ var render_buli2017_pdf = _svg_func(function(svg, ev, es_key, extra_data) {
 	var matches = ev.matches;
 	var last_update = calc_last_update(matches);
 
-	_svg_text(svg, 'x_1BL', (ev.league_key === '1BL-2017') ? 'X' : '');
-	_svg_text(svg, 'x_2BLN', (ev.league_key === '2BLN-2017') ? 'X' : '');
-	_svg_text(svg, 'x_2BLS', (ev.league_key === '2BLS-2017') ? 'X' : '');
+	_svg_text(svg, 'x_1BL', /^1BL/.test(ev.league_key) ? 'X' : '');
+	_svg_text(svg, 'x_2BLN', /^2BLN/.test(ev.league_key) ? 'X' : '');
+	_svg_text(svg, 'x_2BLS', /^2BLS/.test(ev.league_key) ? 'X' : '');
 	_svg_text(svg, 'umpires', extra_data.umpires);
 	_svg_text(svg, 'location', extra_data.location);
 	_svg_text(svg, 'date', ev.date || (last_update ? utils.date_str(last_update) : ''));

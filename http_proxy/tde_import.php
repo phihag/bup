@@ -27,6 +27,7 @@ function parse_teammatch($httpc, $tm_html, $domain, $match_id) {
 		'Bundesligen 2018/19:1. Bundesliga – (1. BL) – (001) 1. Bundesliga' => '1BL-2018',
 		'Bundesligen 2018/19:2. Bundesliga – (2. BL-Nord) – (002) 2. Bundesliga Nord' => '2BLN-2018',
 		'Bundesligen 2018/19:2. Bundesliga – (2. BL-Süd) – (003) 2. Bundesliga Süd' => '2BLS-2018',
+		'Ligen DBV 2018/19 (ohne Bundesligen):Gruppe Nord – (NO) – (001) Regionalliga Nord' => 'RLN-2016',
 	];
 
 	if (!\preg_match('/
@@ -39,9 +40,9 @@ function parse_teammatch($httpc, $tm_html, $domain, $match_id) {
 
 		$league_key = null;
 		if (\preg_match('/^Ligen NRW/', $header_m[1])) {
-			if (\preg_match('/^O19-NRW\s+(?:–\s+)?(O19-(?:RL|OL))\s*[–-]\s*\(([0-9]+)\)/', $division_m[2], $nrw_olrl_m)) {
+			if (\preg_match('/^O19-NRW\s+(?:–\s+)?(O19-(?:RL|OL))\s*[–-]\s*\(([0-9]+)\)/', $division_m[2], $nrw_olrl_m)) { // OL/RL West until 2017/2018
 				$league_key = 'NRW-' . $nrw_olrl_m[1] . '-' . $nrw_olrl_m[2] . '-2016';
-			} else if (\preg_match('/^[UO]19-(?:NRW|[NS][12])\s+(?:–\s+)?([UO]19-(?:NRW|[NS][12])-(?:VL|LL|BL|BK|KL|KK))\s*(?:–|-)\s*\(([0-9]+)\)/', $division_m[2], $nrw_m)) {
+			} else if (\preg_match('/^[UO]19-(?:GW|[NS][12])\s+(?:–\s+)?([UO]19-(?:GW|[NS][12])-(?:RL|OL|VL|LL|BL|BK|KL|KK))\s*(?:–|-)\s*\(([0-9]+)\)/', $division_m[2], $nrw_m)) {
 
 				$league_key = 'NRW-' . $nrw_m[1] . '-' . $nrw_m[2] . '-2016';
 			}
@@ -50,7 +51,7 @@ function parse_teammatch($httpc, $tm_html, $domain, $match_id) {
 		if ($league_key === null) {
 			$long_league_id = $header_m[1] . ':' . $division_m[2];
 			if (!\array_key_exists($long_league_id, $LEAGUE_KEYS)) {
-				throw new \Exception('Cannot find league ' . $long_league_id);
+				throw new \Exception('Cannot find league \'' . $long_league_id . '\'');
 			}
 			$league_key = $LEAGUE_KEYS[$long_league_id];
 		}

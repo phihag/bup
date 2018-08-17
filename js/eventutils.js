@@ -213,15 +213,15 @@ function annotate(s, event) {
 	});
 }
 
-var NRW2016_RE = /^NRW-(O19)-(?:(?:([NS])([12]))-)?([A-Z]{2})-([0-9]{3})-(?:2016|2017)$/;
+var NRW2016_RE = /^NRW-(O19)-(?:(?:([NS])([12]))-|GW-)?([A-Z]{2})-([0-9]{3})-(?:2016|2017)$/;
 function name_by_league(league_key) {
-	if (/^1BL-(?:2015|2016|2017)$/.test(league_key)) {
+	if (/^1BL-(?:2015|2016|2017|2018)$/.test(league_key)) {
 		return '1. Bundesliga';
 	}
-	if (/^2BLN-(?:2015|2016|2017)$/.test(league_key)) {
+	if (/^2BLN-(?:2015|2016|2017|2018)$/.test(league_key)) {
 		return '2. Bundesliga Nord';
 	}
-	if (/^2BLS-(?:2015|2016|2017)$/.test(league_key)) {
+	if (/^2BLS-(?:2015|2016|2017|2018)$/.test(league_key)) {
 		return '2. Bundesliga Süd';
 	}
 	if (league_key === 'OBL-2017') {
@@ -291,11 +291,11 @@ function name_by_league(league_key) {
 }
 
 function is_bundesliga(league_key) {
-	return /^(?:1BL|2BLN|2BLS)-(?:2015|2016|2017)$/.test(league_key);
+	return /^(?:1BL|2BLN|2BLS)-(?:2015|2016|2017|2018)$/.test(league_key);
 }
 
 function is_rlw(league_key) {
-	return /^RLW-|^NRW-O19-RL/.test(league_key);
+	return /^RLW-|^NRW-O19-(?:GW-)?RL/.test(league_key);
 }
 
 function is_incomplete(setup) {
@@ -350,7 +350,7 @@ function is_german8(league_key) {
 }
 
 function get_min_pause(league_key) {
-	if (/^(?:1BL|2BLN|2BLS)-(?:2015|2016|2017)$/.test(league_key)) {
+	if (/^(?:1BL|2BLN|2BLS)-(?:2015|2016|2017|2018)$/.test(league_key)) {
 		return 20 * 60000; // §10.1 BLO-DB
 	}
 	if ((league_key === 'RLW-2016') || (NRW2016_RE.test(league_key))) {
@@ -461,7 +461,7 @@ function default_counting(league_key) {
 	if (/^(?:1BL|2BLN|2BLS)-2016$/.test(league_key)) {
 		return '5x11_15';
 	}
-	if (/^(?:1BL|2BLN|2BLS)-2017$/.test(league_key)) {
+	if (/^(?:1BL|2BLN|2BLS)-(?:2017|2018)$/.test(league_key)) {
 		return '5x11_15^90';
 	}
 	if (league_key === 'OBL-2017') {
@@ -527,11 +527,11 @@ function umpire_pay(league_key) {
 }
 
 function umpire_required(league_key) {
-	return is_bundesliga(league_key) || is_rlw(league_key);
+	return (is_bundesliga(league_key) || is_rlw(league_key)) ? 2 : false;
 }
 
 function make_empty_matches(league_key, event_id) {
-	if (/^(?:1BL|2BLN|2BLS)-(?:2016|2017)$/.test(league_key)) {
+	if (/^(?:1BL|2BLN|2BLS)-(?:2016|2017|2018)$/.test(league_key)) {
 		var rawdef = [
 			{name: '1.HD', is_doubles: true},
 			{name: 'DD', is_doubles: true},
