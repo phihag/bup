@@ -125,6 +125,10 @@ function parse_vrl_players($httpc, $domain, $season_id, $club_id, $vrl_id) {
 		throw new \Exception('Failed to download VRL page ' . $vrl_url);
 	}
 
+	if (\preg_match('/<th>Freigeschaltet:<\/th>\s+<td>Nein<\/td>/', $vrl_page)) {
+		return [];
+	}
+
 	if (!\preg_match_all('/
 		<tr>\s*
 		<td\s+align="right">(?P<lfd_num>[0-9]+)<\/td> # LfdNum
@@ -150,7 +154,7 @@ function parse_vrl_players($httpc, $domain, $season_id, $club_id, $vrl_id) {
 		<td\s+align="right">(?P<ranking>[0-9]+)<\/td>
 		<td>(?P<ranking_d>[0-9]+)?<\/td>
 		/x', $vrl_page, $line_matches, \PREG_SET_ORDER)) {
-		throw new \Exception('Failed to find lines in ' . $vrl_url);
+		throw new \Exception('Failed to find any VRL rows in ' . $vrl_url);
 	}
 
 	$players = [];

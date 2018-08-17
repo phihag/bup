@@ -24,12 +24,15 @@ function parse_teammatch($httpc, $tm_html, $domain, $match_id) {
 		'Ligen DBV 2017/18 (ohne Bundesligen):Gruppe SüdOst (SO) - (002) Regionalliga SüdOst Süd' => 'RLSOS-2017',
 		'Ligen DBV 2017/18 (ohne Bundesligen):Gruppe SüdOst (SO) - (001) Regionalliga SüdOst Ost' => 'RLSOO-2017',
 		'Bundesligen 2017/18:1. Bundesliga – (1. BL) – Final Four' => '1BL-2017',
+		'Bundesligen 2018/19:1. Bundesliga – (1. BL) – (001) 1. Bundesliga' => '1BL-2018',
+		'Bundesligen 2018/19:2. Bundesliga – (2. BL-Nord) – (002) 2. Bundesliga Nord' => '2BLN-2018',
+		'Bundesligen 2018/19:2. Bundesliga – (2. BL-Süd) – (003) 2. Bundesliga Süd' => '2BLS-2018',
 	];
 
 	if (!\preg_match('/
-			<div\s*class="title">\s*<h3>([^<]*)<\/h3>
+			<h2\s+class="media__title[^>]+>([^<]*)<\/h2>
 			/xs', $tm_html, $header_m)) {
-		throw new \Exception('Cannot find team names!');
+		throw new \Exception('Cannot find league name!');
 	}
 	if (\preg_match('/<th>Staffel:<\/th><td><a\s+href="[^"]*&draw=([0-9]+)">([^<]+)<\/a><\/td>/sx', $tm_html, $division_m)) {
 		$draw_id = $division_m[1];

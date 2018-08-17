@@ -1,13 +1,25 @@
+test import 2BLN
+test import 2BLS
+test import RLN
 test import RLW
 test import OLN
 test import KK
-
 support buli-2018
 	update bldemo
-	Stammspieler-Änderungen?
+	go through all parts
+	Stammspieler-Änderungen: Wieder als Ersatzspieler
 	Aufstellung: check non-EU (update to new regulations)
-	2018: Stammspieler dürfen Ersatzspieler sein?
+
+update NRW Satzungen
+
+Vorname Nachname @tde_export -> Björn
+shot clock -> Morten
+
 display as iframe: suppress menu, suppress click
+
+bup &ro mode (no saving settings, no loading settings, no menu, ...) -> Dieter
+	document ro
+various dmode changes -> Dieter
 
 multi-color team config
 add bts to table
