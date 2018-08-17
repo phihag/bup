@@ -277,9 +277,10 @@
         {"gender": "f", "name": "Carla Nelte", "ranking": 2, "regular": true},
         {"gender": "f", "name": "Elin Svensson", "ranking": 3, "nationality": "SWE"},
         {"gender": "f", "name": "Annika Dörr", "ranking": 4},
-        {"gender": "f", "name": "Jennifer Karnott", "ranking": 7},
+        {"gender": "f", "name": "Runa Plützer", "ranking": 5},
         {"gender": "f", "name": "Paula Kick", "ranking": 6},
-        {"gender": "f", "name": "Runa Plützer", "ranking": 5}
+        {"gender": "f", "name": "Jennifer Karnott", "ranking": 7},
+        {"gender": "f", "name": "Akane Yamaguchi", "ranking": 8, "nationality": "JPN"}
       ],
       [
         {"gender": "m", "name": "Fabian Roth", "ranking": 1, "ranking_d": 6, "regular": true},
