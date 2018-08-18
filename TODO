@@ -1,11 +1,15 @@
+bug: side change at game end not happening after manually editing sides in the beginning!
+low battery warning
+
+better fullscreen button on tablets + smartphones
 test import RLN
 test import RLW
 test import OLN
 test import KK
-
 update NRW Satzungen
 
-Vorname Nachname @tde_export -> Björn
+
+Vorname Nachname @tde_export -> Björn Wüpping
 shot clock -> Morten
 
 display as iframe: suppress menu, suppress click
