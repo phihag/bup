@@ -125,8 +125,8 @@
     "matches": [
       {
         "setup": {
-          "match_name": "GD",
-          "match_id": "intdemo:GD",
+          "match_name": "MX",
+          "match_id": "intdemo:MX",
           "is_doubles": true,
           "teams": [
             {
@@ -161,7 +161,7 @@
             {
               "players": [
                 {
-                  "name": "Fabian Roth"
+                  "name": "Max Weißkirchen"
                 }
               ]
             },
@@ -177,8 +177,8 @@
       },
       {
         "setup": {
-          "match_name": "DE",
-          "match_id": "intdemo:DE",
+          "match_name": "WS",
+          "match_id": "intdemo:WS",
           "is_doubles": false,
           "teams": [
             {
