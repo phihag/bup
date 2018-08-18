@@ -208,7 +208,7 @@ _describe('integration tests', () => {
 		);
 		assert.strictEqual(await page.evaluate(() =>
 			document.querySelector('svg text#es_svg_1n0_0').textContent),
-			'Fabian Roth'
+			'Max Weißkirchen'
 		);
 		assert.strictEqual(await page.evaluate(() =>
 			document.querySelector('svg text#es_svg_date').textContent),
