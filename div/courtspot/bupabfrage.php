@@ -90,15 +90,18 @@ case 5:
 	$league_key = 'RLW-2016';
 	break;
 case 6:
+	$league_key = 'RLM-2016';
+	break;
 case 7:
+case 8:
 	$league_key = '1BL-2017';
 	$tournament_name = 'Viertelfinale 1. Bundesliga 2017/2018';
 	break;
-case 8:
+case 9:
 	$league_key = '1BL-2017';
 	$tournament_name = 'Bundesliga-Aufstiegsrunde 2017/2018';
 	break;
-case 9: // Bundesliga-Finale
+case 10: // Bundesliga-Finale
 	$league_key = '1BL-2017';
 	$tournament_name = 'Finalrunde 1. Bundesliga 2017/2018';
 	break;
