@@ -851,7 +851,7 @@ _describe('Bundesliga 2017 5x11_15 counting with 90s intervals', function() {
 			exigent: 25000,
 		});
 		assert.strictEqual(pronounce_de(s, 300001),
-			'6-5 Pause. Bitte die Spielfeldseiten wechseln.\n\n' +
+			'6-5 Pause. Feldseiten wechseln.\n\n' +
 			'6-5. Bitte spielen.');
 		assert.strictEqual(pronounce_en(s, 300001),
 			'6-5 Interval; change ends\n\n' +

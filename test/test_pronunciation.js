@@ -1426,7 +1426,7 @@ _describe('pronunciation', function() {
 		});
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce_de(s),
-			'Aufschlagwechsel. 11-10 Pause. Bitte die Spielfeldseiten wechseln.\n\n' +
+			'Aufschlagwechsel. 11-10 Pause. Feldseiten wechseln.\n\n' +
 			'11-10. Bitte spielen.');
 		assert.equal(pronounce_en(s),
 			'Service over. 11-10 Interval; change ends\n\n' +
@@ -3652,8 +3652,8 @@ _describe('pronunciation', function() {
 
 		s = state_after(presses, DOUBLES_SETUP, {court_id: 5});
 		assert.equal(pronounce_de(s, 1040000),
-			'Spielfeld 5, 20 Sekunden.\n' +
-			'Spielfeld 5, 20 Sekunden.\n\n' +
+			'Feld 5, 20 Sekunden.\n' +
+			'Feld 5, 20 Sekunden.\n\n' +
 			'11-6. Bitte spielen.'
 		);
 		assert.equal(pronounce_en(s, 1040000),

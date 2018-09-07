@@ -753,7 +753,7 @@ _describe('BWF experimental 5x11/3 counting', function() {
 			exigent: 25000,
 		});
 		assert.strictEqual(pronounce_de(s, 300001),
-			'6-5 Pause. Bitte die Spielfeldseiten wechseln.\n\n' +
+			'6-5 Pause. Feldseiten wechseln.\n\n' +
 			'6-5. Bitte spielen.');
 		assert.strictEqual(pronounce_en(s, 300001),
 			'6-5 Interval; change ends\n\n' + 

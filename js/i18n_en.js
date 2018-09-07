@@ -360,6 +360,7 @@ var i18n_en = {
 'eventsheet:label|BL-ballsorten-2016': '(German 1./2. Bundesliga) list of approved shuttles (2016)',
 'eventsheet:label|DBV-Satzungen-2016': 'German Laws&Regulations 2016/2017',
 'eventsheet:label|DBV-Satzungen-2017': 'German Laws&Regulations 2017/2018',
+'eventsheet:label|DBV-Satzungen-2018': 'German Laws&Regulations 2018/2019',
 'eventsheet:label|RLW-2016': '(German Regionalliga West) result report sheet',
 'eventsheet:label|RLN-2016': '(German Regionalliga North) result report sheet',
 'eventsheet:label|RLN-Satzungen': '(German Group North) laws & regulations',

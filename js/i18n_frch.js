@@ -357,6 +357,7 @@ var i18n_frch = {
 'eventsheet:label|BL-ballsorten-2016': '(Bundesliga) liste des volants approuvées (2016)',
 'eventsheet:label|DBV-Satzungen-2016': '(Allemagne) Lois et règlements 2016/2017',
 'eventsheet:label|DBV-Satzungen-2017': '(Allemagne) Lois et règlements 2017/2018',
+'eventsheet:label|DBV-Satzungen-2018': '(Allemagne) Lois et règlements 2018/2019',
 'eventsheet:label|RLW-2016': '(Allemagne, Regionalliga Ouest) feuille de résultats',
 'eventsheet:label|RLN-2016': '(Allemagne, Regionalliga Nord) feuille de résultats',
 'eventsheet:label|RLN-Satzungen': '(Allemagne, Groupe Nord) lois et règlements',
