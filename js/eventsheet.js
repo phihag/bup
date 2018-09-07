@@ -64,6 +64,7 @@ var DIRECT_DOWNLOAD_SHEETS = {
 };
 var EXTERNAL_DOWNLOAD_SHEETS = {
 	'DBV-Satzungen-2017': true,
+	'DBV-Satzungen-2018': true,
 	'RLN-Satzungen': true,
 	'RLM-SpO': true,
 	'NRW-Satzungen': true,
