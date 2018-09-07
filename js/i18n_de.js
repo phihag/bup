@@ -142,7 +142,7 @@ var i18n_de = {
 'game(won)': 'Satz',
 'match suspended': 'Das Spiel ist unterbrochen',
 'ready to unsuspend': 'Sind Sie spielbereit?\n',
-'ready to play': 'Spielbereit.',
+'ready to play': 'Spielbereit machen.',
 
 'demo:team1': '1. BC Beuel',
 'demo:player1.1': 'Max Weißkirchen',
