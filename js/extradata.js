@@ -53,6 +53,7 @@ var LOGOS = [
 	'bvgifhorn',
 	'bvmuelheim',
 	'ebtberlin',
+	'geretsried',
 	'hamburghornertv',
 	'sganspach',
 	'sgebtberlin',
@@ -67,7 +68,6 @@ var LOGOS = [
 	'tsvneuhausen',
 	'tsvtrittau',
 	'tuswiebelskirchen',
-	'geretsried',
 	'tvdillingen',
 	'tvemsdetten',
 	'tvmarktheidenfeld',
@@ -79,14 +79,15 @@ var LOGOS = [
 	'wittorfneumuenster',
 ];
 var LOGO_ALIASSE = {
-	'1.BC Sbr.-Bischmisheim': 'bcbsaarbruecken',
 	'1. BC Sbr.-Bischmisheim': 'bcbsaarbruecken',
+	'1.BC Sbr.-Bischmisheim': 'bcbsaarbruecken',
 	'1.BV Mülheim': 'bvmuelheim',
 	'BC Bischmisheim': 'bcbsaarbruecken',
 	'Blau-Weiss Wittorf-NMS': 'wittorfneumuenster',
 	'SC Union Lüdinghausen': 'unionluedinghausen',
-	'TSV Neuhausen-Nymphenburg': 'tsvneuhausen',
+	'SG VfB/SC Peine': 'vfbscpeine',
 	'STC BW Solingen': 'stcblauweisssolingen',
+	'TSV Neuhausen-Nymphenburg': 'tsvneuhausen',
 };
 function team_logo(team_name) {
 	team_name = LOGO_ALIASSE[team2club(team_name)] || team_name;
