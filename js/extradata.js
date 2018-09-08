@@ -56,6 +56,7 @@ var LOGOS = [
 	'sgebtberlin',
 	'sgschorndorf',
 	'stcblauweisssolingen',
+	'sterkrade',
 	'svfischbach',
 	'svfunballdortelweil',
 	'svgutsmuthsjena',

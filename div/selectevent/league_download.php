@@ -86,7 +86,7 @@ function download_league($httpc, $url, $league_key, $use_vrl, $use_hr) {
 	$teams_html = $httpc->request($teams_url);
 
 	if (!\preg_match('/
-			<div\s*class="title">\s*<h3>\s*(?P<name>[^<(]+)
+			<div\s*class="title">\s*<h3>\s*(?P<name>[^<(–]+)
 			/xs', $teams_html, $header_m)) {
 		throw new \Exception('Cannot find league name!');
 	}
