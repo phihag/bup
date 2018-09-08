@@ -53,7 +53,6 @@ var LOGOS = [
 	'bvgifhorn',
 	'bvmuelheim',
 	'ebtberlin',
-	'geretsried',
 	'hamburghornertv',
 	'sganspach',
 	'sgebtberlin',
@@ -67,6 +66,7 @@ var LOGOS = [
 	'tsvneubibergottobrunn',
 	'tsvneuhausen',
 	'tsvtrittau',
+	'tusgeretsried',
 	'tuswiebelskirchen',
 	'tvdillingen',
 	'tvemsdetten',
@@ -86,6 +86,7 @@ var LOGO_ALIASSE = {
 	'Blau-Weiss Wittorf-NMS': 'wittorfneumuenster',
 	'SC Union Lüdinghausen': 'unionluedinghausen',
 	'SG VfB/SC Peine': 'vfbscpeine',
+	'Spvgg.Sterkrade-N.': 'sterkrade',
 	'STC BW Solingen': 'stcblauweisssolingen',
 	'TSV Neuhausen-Nymphenburg': 'tsvneuhausen',
 };
