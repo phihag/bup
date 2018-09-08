@@ -65,7 +65,7 @@ var LOGOS = [
 	'tsvneuhausen',
 	'tsvtrittau',
 	'tuswiebelskirchen',
-	'tusgeretsried',
+	'geretsried',
 	'tvdillingen',
 	'tvemsdetten',
 	'tvmarktheidenfeld',
@@ -73,10 +73,12 @@ var LOGOS = [
 	'unionluedinghausen',
 	'vfbfriedrichshafen',
 	'vfbscpeine',
+	'wesel',
 	'wittorfneumuenster',
 ];
 var LOGO_ALIASSE = {
 	'1.BC Sbr.-Bischmisheim': 'bcbsaarbruecken',
+	'1. BC Sbr.-Bischmisheim': 'bcbsaarbruecken',
 	'1.BV Mülheim': 'bvmuelheim',
 	'BC Bischmisheim': 'bcbsaarbruecken',
 	'Blau-Weiss Wittorf-NMS': 'wittorfneumuenster',
