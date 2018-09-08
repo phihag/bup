@@ -24,6 +24,7 @@ var TEAM_COLORS = {
 	'Lüdinghausen': '#ffffff',
 	'Neuhausen': '#a6cb8b',
 	'Refrath': '#dbf3ff',
+	'Sterkrade': '#fefa42',
 	'Trittau': '#ff557a',
 	'Wipperfeld': '#ff2149',
 	'Wittorf': '#0091ff',
