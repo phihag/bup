@@ -26,6 +26,7 @@ var TEAM_COLORS = {
 	'Refrath': '#dbf3ff',
 	'Sterkrade': '#fefa42',
 	'Trittau': '#9dc2fc',
+	'Geretsried': '#f0f0f0',
 	'Wesel': '#ed1a24',
 	'Wipperfeld': '#ff2149',
 	'Wittorf': '#0091ff',

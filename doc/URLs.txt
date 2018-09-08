@@ -75,7 +75,7 @@ dm_style=STYLECODE  In display mode, start with the specified style.
 	stripes         stripes (vertically: team names, clubs, all scores, for one court)
 	teamscore       Just team names and number of won matches
 	tim             Colored overview of a team competition
-	top+list        Current matches on top, list of all matche sbelow
+	top+list        Current matches on top, list of all matches below
 	tournament_overview Shows all courts at once
 show_pause=BOOLEAN  Show or hide interval timers.
                     BOOLEAN can be either "true" or "false".
