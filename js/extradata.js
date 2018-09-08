@@ -52,6 +52,7 @@ var LOGOS = [
 	'bspfrneusatz',
 	'bvgifhorn',
 	'bvmuelheim',
+	'bvrwwesel',
 	'ebtberlin',
 	'hamburghornertv',
 	'sganspach',
@@ -75,7 +76,6 @@ var LOGOS = [
 	'unionluedinghausen',
 	'vfbfriedrichshafen',
 	'vfbscpeine',
-	'wesel',
 	'wittorfneumuenster',
 ];
 var LOGO_ALIASSE = {
@@ -89,6 +89,7 @@ var LOGO_ALIASSE = {
 	'Spvgg.Sterkrade-N.': 'sterkrade',
 	'STC BW Solingen': 'stcblauweisssolingen',
 	'TSV Neuhausen-Nymphenburg': 'tsvneuhausen',
+	'Union Lüdinghausen': 'unionluedinghausen',
 };
 function team_logo(team_name) {
 	team_name = LOGO_ALIASSE[team2club(team_name)] || team_name;
