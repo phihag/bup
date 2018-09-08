@@ -65,6 +65,7 @@ var LOGOS = [
 	'tsvneuhausen',
 	'tsvtrittau',
 	'tuswiebelskirchen',
+	'tusgeretsried',
 	'tvdillingen',
 	'tvemsdetten',
 	'tvmarktheidenfeld',
