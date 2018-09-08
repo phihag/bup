@@ -140,7 +140,7 @@ function parse_vrl_players($httpc, $domain, $season_id, $club_id, $vrl_id) {
 			<img[^>]+\/><span\s*class="printonly\s*flag">\[(?P<nationality>[A-Z]{2,})\]\s*<\/span>
 		)?
 		<\/td>\s*
-		<td>(?P<textid>[-0-9]+)<\/td>
+		<td>(?P<textid>[-0-9]+|00-KrauszGergely)<\/td>
 		<td>(?P<birthyear>[0-9]{4,})?<\/td>
 		<td>[^<]*<\/td>  # JUG
 		<td>[^<]*<\/td>  # AKL

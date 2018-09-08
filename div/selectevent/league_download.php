@@ -32,15 +32,13 @@ function geolocate($httpc, $address, $orig_address=null) {
 
 	$address = \str_replace('SpH', 'Sporthalle', $address);
 
-	$API_KEY = \base64_decode('QUl6YVN5Q2VNS08zZkVFNldCTjhwYzQ1eEFUNURPY09BR2ZtRTlj');
 	$geo_json = $httpc->request(
-		'https://maps.google.com/maps/api/geocode/json?' .
-		'address=' . \urlencode($address) .
-		'&key=' . \urlencode($API_KEY)
+		'https://locationiq.com/v1/search_sandbox.php?format=json&' .
+		'q=' . \urlencode($address) .
+		'&accept-language=en'
 	);
-	$geo = \json_decode($geo_json, true);
-	$results = $geo['results'];
-	if (\count($results) === 0) {
+	$results = \json_decode($geo_json, true);
+	if ((\count($results) === 0) || ($results[0]['importance'] < 0.1)) {
 		// Try stripping ZIP code
 		if (\preg_match('/^[0-9]+\s+(.*)$/', $address, $address_m)) {
 			return geolocate($httpc, $address_m[1], $orig_address);
@@ -59,7 +57,10 @@ function geolocate($httpc, $address, $orig_address=null) {
 		throw new \Exception('Cannot locate ' . $address);
 	}
 
-	$coords = $results[0]['geometry']['location'];
+	$coords = [
+		'lat' => $results[0]['lat'],
+		'lng' => $results[0]['lon'],
+	];
 	$loc_cache[$orig_address] = $coords;
 	return $coords;
 }
