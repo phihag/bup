@@ -1,14 +1,14 @@
-logo sterkrade bbt
-hardcode color trittau + sterkrade
+@Refrath: Anzeige viel zu klein?
 
-Spvgg in Ansagen = Sportvereinigung
+improve display before start
+hardcode color trittau + sterkrade
+ticker from b.aufschlagwechsel.de
 show rest time if available
 Fehlermeldung Refrath
 
-Refrath: Anzeige viel zu klein
-
-firefox drucken
+firefox print scoresheets
 can't change displays @btde?
+bup add display before
 with bts: incorrectly shows server in second game start
 tournament display: increase font size
 bldemo: check double
