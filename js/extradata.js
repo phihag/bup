@@ -13,7 +13,7 @@ var ABBREVS = {
 };
 var TEAM_COLORS = {
 	'Beuel': '#ffed00',
-	'Bischmisheim': '#1e3a8e',
+	'Bischmisheim': '#0077d3',
 	'BV Mülheim': '#ff423f',
 	'Solingen': '#89deff', // STC BW Solingen
 	'Dortelweil': '#f55a44',
