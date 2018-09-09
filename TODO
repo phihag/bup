@@ -1,11 +1,19 @@
 
-
-
+strike "nicht dem allgemeinen Stand der Technik entsprechen"
+Feldauswahl mit Tastatur
 improve display before start
 hardcode color trittau + sterkrade
 ticker from b.aufschlagwechsel.de
 show rest time if available
-Fehlermeldung Refrath
+btde: detect empty 200
+btde: before teammatch: switch pages
+before game: if logos include them
+separate umpire and user view
+
+
+greyish on Pi with double-digits: text too large
+refrath: check Pi beamer overscan etc.
+
 
 firefox print scoresheets
 can't change displays @btde?
