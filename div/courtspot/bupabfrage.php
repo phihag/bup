@@ -296,11 +296,18 @@ if (array_key_exists('all_players', $_GET)) {
 			'name' => $name,
 		];
 
-		if (\preg_match('/^[0-9]+-([0-9]+)$/', $row['Rangliste'], $matches)) {
-			$p['ranking'] = \intval($matches[1]);
-		} else if (\preg_match('/^[0-9]+-([0-9]+)-D([0-9]+)$/', $row['Rangliste'], $matches)) {
-			$p['ranking'] = \intval($matches[1]);
-			$p['ranking_d'] = \intval($matches[2]);
+		if (\preg_match('/^([SMJ]?[0-9]+)-([0-9]+)$/', $row['Rangliste'], $m)) {
+			$p['ranking_team'] = $m[1];
+			$p['ranking'] = \intval($m[2]);
+		} else if (\preg_match('/^([SMJ]?[0-9]+)-([0-9]+)-D([0-9]+)$/', $row['Rangliste'], $m)) {
+			$p['ranking_team'] = $m[1];
+			$p['ranking'] = \intval($m[2]);
+			$p['ranking_d'] = \intval($m[3]);
+		} else if (\preg_match('/^([0-9]+)$/', $row['Rangliste'], $m)) {
+			$p['ranking'] = \intval($m[1]);
+		} else if (\preg_match('/^([0-9]+)-D([0-9]+)$/', $row['Rangliste'], $m)) {
+			$p['ranking'] = \intval($m[1]);
+			$p['ranking_d'] = \intval($m[2]);
 		}
 
 		$all_players[$team_id][] = $p;

@@ -1,4 +1,9 @@
+courtspot mannschaftsnummer
+https://gruppe-nord.net/download/satzung-und-ordnungen-der-gruppe-nord-stand-31-08-2018/?wpdmdl=372
+Fehler Markus Schwendtner: manual swapping
+Jan: Referee Mode Werbung
 
+update NRW satzungen & Ordnungen
 strike "nicht dem allgemeinen Stand der Technik entsprechen"
 Feldauswahl mit Tastatur
 improve display before start
@@ -9,11 +14,16 @@ btde: detect empty 200
 btde: before teammatch: switch pages
 before game: if logos include them
 separate umpire and user view
-
+referee mode: umpire changes not saved
+fix import RLN (use VRL)
 
 greyish on Pi with double-digits: text too large
-refrath: check Pi beamer overscan etc.
 
+@refrath
+	check Pi beamer overscan etc.
+	invert colors display
+@sterkrade
+	check tablet
 
 firefox print scoresheets
 can't change displays @btde?
