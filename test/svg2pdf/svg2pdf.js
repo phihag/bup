@@ -12,7 +12,7 @@ async function convert(svg) {
 	const page = await browser.newPage();
 	page.on('console', (...args) => console.log('error:', ...args));
 	const url = 'file://' + path.join(__dirname, 'host.html');
-	await page.goto(url, {waitUntil: 'networkidle'});
+	await page.goto(url, {waitUntil: 'networkidle2'});
 
 	const int_ar = await page.evaluate((svg) => {
 		// This runs in the browser

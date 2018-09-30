@@ -77,6 +77,10 @@ function translate_path(d, scale, dx, dy) {
 	while (d) {
 		var cmd = parse_cmd(d);
 		if (!cmd) {
+			if (/^\s*$/.test(d)) {
+				break;
+			}
+
 			report_problem.silent_error('Cannot parse path ' + d);
 			break;
 		}

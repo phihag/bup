@@ -1,4 +1,3 @@
-receipt PDF Unsupported element to copy: circle -> Sterkrade
 Enter umpire name in minreq sheet
 disqualifiziert wegen groben unsportlichen Verhaltens
 hat aufgegeben
@@ -9,6 +8,7 @@ strike "nicht dem allgemeinen Stand der Technik entsprechen"
 urlexport: support players from lower teams
 Fehler Markus Schwendtner: manual swapping
 BWF-Einspielregeln, Michael Pütz
+urlexport, strip [A] "Incorrect team names: This match URL points to TSV Neuhausen-Nymphenburg [A] - TV Dillingen, but expected TSV Neuhausen-Nymphenburg - TV Dillingen
 
 mail with changes in announcements
 

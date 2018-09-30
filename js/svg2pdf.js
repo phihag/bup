@@ -613,6 +613,12 @@ function render_el(el, pdf, scale) {
 		height = parseFloat(el.getAttribute('height'));
 		pdf.rect(x * scale, y * scale, width * scale, height * scale, mode);
 		break;
+	case 'circle':
+		var cx = parseFloat(el.getAttribute('cx'));
+		var cy = parseFloat(el.getAttribute('cy'));
+		var r = parseFloat(el.getAttribute('r'));
+		pdf.ellipse(cx * scale, cy * scale, r * scale, r * scale, mode);
+		break;
 	case 'ellipse':
 		var cx = parseFloat(el.getAttribute('cx'));
 		var cy = parseFloat(el.getAttribute('cy'));
