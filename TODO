@@ -1,11 +1,24 @@
-courtspot mannschaftsnummer
-https://gruppe-nord.net/download/satzung-und-ordnungen-der-gruppe-nord-stand-31-08-2018/?wpdmdl=372
-Fehler Markus Schwendtner: manual swapping
-Jan: Referee Mode Werbung
-
+receipt PDF Unsupported element to copy: circle -> Sterkrade
+Enter umpire name in minreq sheet
+disqualifiziert wegen groben unsportlichen Verhaltens
+hat aufgegeben
+scoresheet: D for disqualifiziert
+	record changes in mail template
 update NRW satzungen & Ordnungen
 strike "nicht dem allgemeinen Stand der Technik entsprechen"
-Feldauswahl mit Tastatur
+urlexport: support players from lower teams
+Fehler Markus Schwendtner: manual swapping
+BWF-Einspielregeln, Michael Pütz
+
+mail with changes in announcements
+
+shorten #referee_mode to #ref
+grey: numbers bleeding into each other
+test import RLN
+https://gruppe-nord.net/download/satzung-und-ordnungen-der-gruppe-nord-stand-31-08-2018/?wpdmdl=372
+
+Jan: Referee Mode Werbung
+Feldauswahl mit Tastatur => Jan
 improve display before start
 hardcode color trittau + sterkrade
 ticker from b.aufschlagwechsel.de
@@ -16,6 +29,7 @@ before game: if logos include them
 separate umpire and user view
 referee mode: umpire changes not saved
 fix import RLN (use VRL)
++verkürzt DBV https://www.badminton-nrw.de/index.php?id=123&tx_ttnews%5Btt_news%5D=3143&cHash=60f0a49addb275c2f5892c1bb692882e
 
 greyish on Pi with double-digits: text too large
 

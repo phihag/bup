@@ -265,6 +265,12 @@ function copy(dst, src_svg, x_offset, y_offset, width) {
 			el.setAttribute('width', scale * parseFloat(node.getAttribute('width')));
 			el.setAttribute('height', scale * parseFloat(node.getAttribute('height')));
 			break;
+		case 'circle':
+			el = import_el(dst_doc, node);
+			el.setAttribute('cx', scale * parseFloat(node.getAttribute('cx')) + dx);
+			el.setAttribute('cy', scale * parseFloat(node.getAttribute('cy')) + dy);
+			el.setAttribute('r', scale * parseFloat(node.getAttribute('r')));
+			break;
 		default:
 			report_problem.silent_error('Unsupported element to copy: ' + tagName);
 		}
