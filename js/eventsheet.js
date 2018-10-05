@@ -39,7 +39,7 @@ var URLS = {
 	'BL-ballsorten-2016': 'div/bundesliga-ballsorten-2016.pdf',
 	'DBV-Satzungen-2016': 'http://www.badminton.de/fileadmin/images/spielregeln/16-dbv-druckwerk_satzung-ordnungen-spielregeln201617-website.pdf',
 	'DBV-Satzungen-2017': 'http://www.badminton.de/fileadmin/user_upload/17-dbv-druckwerk_satzung-ordnungen-spielregeln201718-website.pdf.pdf',
-	'DBV-Satzungen-2018': 'https://aufschlagwechsel.de/2018/DBV%20Satzungswerk%202018-19%20Entwurf.pdf',
+	'DBV-Satzungen-2018': 'https://www.badminton.de/fileadmin/user_upload/18-dbv-druckwerk_satzung-ordnungen-spielregeln201819-website.pdf.pdf',
 	'RLW-2016': 'div/Spielbericht_8x3x21.svg',
 	'RLN-2016': 'div/Spielbericht_8x3x21.svg',
 	'RLN-Satzungen': 'https://gruppe-nord.net/download/satzung-und-ordnungen-der-gruppe-nord-stand-08-01-18/?wpdmdl=271',
