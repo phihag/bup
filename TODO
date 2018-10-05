@@ -1,19 +1,12 @@
-Neuhausen [A]
-
-Link to offical rules https://www.badminton.de/fileadmin/user_upload/18-dbv-druckwerk_satzung-ordnungen-spielregeln201819-website.pdf.pdf
 update logo sterkrade
-greyish: reduce font size of scores
+d greyish colorful
 Enter umpire name in minreq sheet
-disqualifiziert wegen groben unsportlichen Verhaltens
 hat aufgegeben
-scoresheet: D for disqualifiziert
-	record changes in mail template
 update NRW satzungen & Ordnungen
 strike "nicht dem allgemeinen Stand der Technik entsprechen"
 urlexport: support players from lower teams
 Fehler Markus Schwendtner: manual swapping
 BWF-Einspielregeln, Michael Pütz
-urlexport, strip [A] "Incorrect team names: This match URL points to TSV Neuhausen-Nymphenburg [A] - TV Dillingen, but expected TSV Neuhausen-Nymphenburg - TV Dillingen
 urlexport: Jan Felix vs Jan Matulat (-> Joachim Resch)
 Referee Mode: players on court when match assigned to court assigned
 
