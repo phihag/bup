@@ -273,7 +273,10 @@ function init(s, page) {
 		}, function(data_json) {
 			var data = utils.parse_json(data_json);
 			if (!data) {
-				uiu.text(status_text, s._('urlexport:http-error', {code: 'invalid-json'}));
+				report_problem.silent_error(
+					'urlexport to ' + r_url + ' failed: Invalid JSON. data is: ' + data_json);
+				uiu.text(status_text, s._('urlexport:http-error', {
+					code: 'invalid-json - got ' + data_json.substring(0, 50)}));
 				status_icon.setAttribute('class', 'error-icon');
 				uiu.addClass(status_text, 'network_error');
 				return;
