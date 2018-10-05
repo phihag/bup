@@ -527,6 +527,8 @@ function render_el(el, pdf, scale) {
 	var m;
 	var width;
 	var height;
+	var cx;
+	var cy;
 
 	var style = window.getComputedStyle(el);
 
@@ -614,14 +616,14 @@ function render_el(el, pdf, scale) {
 		pdf.rect(x * scale, y * scale, width * scale, height * scale, mode);
 		break;
 	case 'circle':
-		var cx = parseFloat(el.getAttribute('cx'));
-		var cy = parseFloat(el.getAttribute('cy'));
+		cx = parseFloat(el.getAttribute('cx'));
+		cy = parseFloat(el.getAttribute('cy'));
 		var r = parseFloat(el.getAttribute('r'));
 		pdf.ellipse(cx * scale, cy * scale, r * scale, r * scale, mode);
 		break;
 	case 'ellipse':
-		var cx = parseFloat(el.getAttribute('cx'));
-		var cy = parseFloat(el.getAttribute('cy'));
+		cx = parseFloat(el.getAttribute('cx'));
+		cy = parseFloat(el.getAttribute('cy'));
 		var rx = parseFloat(el.getAttribute('rx'));
 		var ry = parseFloat(el.getAttribute('ry'));
 		pdf.ellipse(cx * scale, cy * scale, rx * scale, ry * scale, mode);
