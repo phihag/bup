@@ -17,7 +17,7 @@ function parse_match_players($players_html) {
 }
 
 function unify_team_name($team_name) {
-	if (preg_match('/^(.*?)\s*\[[MN]\]$/', $team_name, $m)) {
+	if (preg_match('/^(.*?)\s*\[[A-Z]\]$/', $team_name, $m)) {
 		$team_name = $m[1];
 	}
 
