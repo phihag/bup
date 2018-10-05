@@ -2216,7 +2216,7 @@ _describe('pronunciation', function() {
 		});
 		var s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
-			'Bob gibt auf.\n\n' +
+			'Bob hat aufgegeben.\n\n' +
 			'Das Spiel wurde gewonnen von Andrew und Alice mit 0-0');
 		assert.equal(pronounce_en(s),
 			'Bob retired.\n\n' +
@@ -2231,7 +2231,7 @@ _describe('pronunciation', function() {
 		});
 		s = state_after(alt_presses, DOUBLES_TEAM_SETUP);
 		assert.equal(pronounce_de(s),
-			'Alice gibt auf.\n\n' +
+			'Alice hat aufgegeben.\n\n' +
 			'Das Spiel wurde gewonnen von B team mit 2-3');
 		assert.equal(pronounce_en(s),
 			'Alice retired.\n\n' +
@@ -2263,7 +2263,7 @@ _describe('pronunciation', function() {
 		});
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
-			'Andrew gibt auf.\n\n' +
+			'Andrew hat aufgegeben.\n\n' +
 			'Das Spiel wurde gewonnen von Bob und Birgit mit 19-21 2-2');
 		assert.equal(pronounce_en(s),
 			'Andrew retired.\n\n' +
@@ -2280,7 +2280,7 @@ _describe('pronunciation', function() {
 		});
 		var s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
-			'Bob gibt auf.\n\n' +
+			'Bob hat aufgegeben.\n\n' +
 			'Das Spiel wurde gewonnen von Andrew und Alice mit 0-0');
 		assert.equal(pronounce_en(s),
 			'Bob retired.\n\n' +
@@ -2298,7 +2298,7 @@ _describe('pronunciation', function() {
 		});
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
-			'Andrew gibt auf.\n\n' +
+			'Andrew hat aufgegeben.\n\n' +
 			'Das Spiel wurde gewonnen von Bob und Birgit mit 0-0');
 		assert.equal(pronounce_en(s),
 			'Andrew retired.\n\n' +
@@ -2317,7 +2317,7 @@ _describe('pronunciation', function() {
 		});
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
-			'Birgit gibt auf.\n\n' +
+			'Birgit hat aufgegeben.\n\n' +
 			'Das Spiel wurde gewonnen von Andrew und Alice mit 0-0');
 		assert.equal(pronounce_en(s),
 			'Birgit retired.\n\n' +
@@ -2336,7 +2336,7 @@ _describe('pronunciation', function() {
 		});
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
-			'Alice gibt auf.\n\n' +
+			'Alice hat aufgegeben.\n\n' +
 			'Das Spiel wurde gewonnen von Bob und Birgit mit 0-0');
 		assert.equal(pronounce_en(s),
 			'Alice retired.\n\n' +
@@ -2353,7 +2353,7 @@ _describe('pronunciation', function() {
 		});
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
-			'Andrew gibt auf.\n\n' +
+			'Andrew hat aufgegeben.\n\n' +
 			'Das Spiel wurde gewonnen von Bob und Birgit mit 0-0');
 		assert.equal(pronounce_en(s),
 			'Andrew retired.\n\n' +
@@ -2368,7 +2368,7 @@ _describe('pronunciation', function() {
 		});
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
-			'Andrew gibt auf.\n\n' +
+			'Andrew hat aufgegeben.\n\n' +
 			'Das Spiel wurde gewonnen von Bob und Birgit mit 19-21');
 		assert.equal(pronounce_en(s),
 			'Andrew retired.\n\n' +

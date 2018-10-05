@@ -167,7 +167,7 @@ var i18n_de = {
 'card.red': '{player_name}, Fehler wegen unsportlichen Verhaltens.\n',
 'card.red.interval': '{player_name}, Fehler wegen unsportlichen Verhaltens.\n',
 'card.black': '{player_name}, disqualifiziert wegen unsportlichen Verhaltens.\n',
-'card.retired': '{player_name} gibt auf.\n',
+'card.retired': '{player_name} hat aufgegeben.\n',
 'card.play': '. Bitte spielen.',
 
 'scoredisplay:Service Over': 'Aufschlagwechsel',
@@ -449,7 +449,7 @@ var i18n_de = {
 'pressdesc|postgame-confirm': 'Satz-Bestätigung',
 'pressdesc|postmatch-confirm': 'Spiel-Bestätigung',
 'pressdesc|postinterval-confirm': 'Ende der Pause',
-'pressdesc|retired': '{player} gibt auf',
+'pressdesc|retired': '{player} hat aufgegeben',
 'pressdesc|state:retired': '{winner} gewinnt {score_str}',
 'pressdesc|disqualified': 'Schwarze Karte {player}.',
 'pressdesc|state:disqualified': '{winner} gewinnt {score_str}',

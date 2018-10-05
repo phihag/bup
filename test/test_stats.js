@@ -1222,7 +1222,7 @@ _describe('stats graphs', function() {
 			type: 'retired',
 			team_id: 0,
 			player_id: 1,
-			desc: 'Alice gibt auf',
+			desc: 'Alice hat aufgegeben',
 			sdesc: 'Bob / Birgit gewinnt 16-21 21-13 0-0',
 		}, {
 			type: 'undo',
