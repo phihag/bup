@@ -20,7 +20,7 @@ var ALL_STYLES = [
 	'andre',
 ];
 var ALL_COLORS = [
-	'c0', 'c1',
+	'c0', 'c1', 'cb0', 'cb1',
 	'cbg', 'cbg2', 'cbg3', 'cbg4',
 	'cfg', 'cfg2', 'cfg3', 'cfgdark',
 	'ct', // transparent
@@ -1342,6 +1342,8 @@ function render_teamcourt(s, container, event, court, match, colors) {
 
 	match.setup.teams.forEach(function(team, team_id) {
 		var col = colors[team_id];
+		var bg_col = colors['b' + team_id] || '#000';
+
 		var gwinner = calc.game_winner(match.setup.counting, nscore.length - 1, current_score[0], current_score[1]);
 		var team_serving = (
 			(gwinner === 'left') ? (team_id === 0) : (
@@ -1362,7 +1364,7 @@ function render_teamcourt(s, container, event, court, match, colors) {
 				((team_id === 0) ? 'position:absolute; bottom: 0;' : '') +
 				'width:100%;height:20%;' +
 				'color:' + col + ';' +
-				'background:' + colors.bg + ';' +
+				'background:' + bg_col + ';' +
 				'font-size: 10vh;' +
 				'display: flex;align-items: center;'
 			),
@@ -1377,8 +1379,8 @@ function render_teamcourt(s, container, event, court, match, colors) {
 			});
 			var pel = uiu.el(player_container, 'div', {
 				style: (
-					'background: ' + (is_server ? col : colors.bg) + ';' +
-					'color: ' + (is_server ? colors.bg : col) + ';' +
+					'background: ' + (is_server ? col : bg_col) + ';' +
+					'color: ' + (is_server ? bg_col : col) + ';' +
 					'height: ' + (is_doubles ? '100%' : '50%') + ';'
 				),
 				'class': 'd_international_player',
@@ -1390,14 +1392,14 @@ function render_teamcourt(s, container, event, court, match, colors) {
 		if (! first_game) {
 			right_border = uiu.el(team_container, 'div', {
 				'class': 'd_international_gscore',
-				style: 'background: ' + colors.bg + '; color: ' + colors.fg + ';',
+				style: 'background: ' + bg_col + '; color: ' + colors.fg + ';',
 			}, gscore[team_id]);
 		}
 
 		var points = current_score[team_id];
 		var points_el = uiu.el(team_container, 'div', {
 			'class': 'd_international_score' + ((points >= 10) ? ' d_international_score_dd' : ''),
-			style: 'background: ' + (team_serving ? col : colors.bg) + '; color: ' + (team_serving ? colors.bg : col),
+			style: 'background: ' + (team_serving ? col : bg_col) + '; color: ' + (team_serving ? bg_col : col),
 		}, points);
 		if (!right_border) {
 			right_border = points_el;
@@ -1830,14 +1832,26 @@ function calc_team_colors(event, settings) {
 		return event.team_colors;
 	}
 	if (event.team_names) {
-		return event.team_names.map(function(tn, team_idx) {
-			return extradata.get_color(tn) || settings['d_c' + team_idx];
+		var res = {};
+		event.team_names.forEach(function(tn, team_idx) {
+			var tc = extradata.get_color(tn);
+			if (tc) {
+				if (tc.fg) {
+					res[team_idx] = tc.fg;
+				}
+				if (tc.bg) {
+					res['b' + team_idx] = tc.bg;
+				}
+			}
 		});
+		return res;
 	}
-	return [
-		settings.d_c0,
-		settings.d_c1,
-	];
+	return {
+		'0': settings.d_c0,
+		'b0': settings.d_cb0,
+		'1': settings.d_c1,
+		'b1': settings.d_cb1,
+	};
 }
 
 function calc_colors(cur_settings, event) {
@@ -1848,8 +1862,7 @@ function calc_colors(cur_settings, event) {
 	});
 	if (cur_settings.d_team_colors) {
 		var tc = calc_team_colors(event, cur_settings);
-		res[0] = tc[0];
-		res[1] = tc[1];
+		utils.obj_update(res, tc);
 	}
 	return res;
 }
@@ -2322,7 +2335,8 @@ function ui_init(s, hash_query) {
 function active_colors(s, style_id) {
 	var res = [];
 	ALL_COLORS.forEach(function(col) {
-		if (option_applies(style_id, col) && !(s.settings.d_team_colors && utils.includes(['c0', 'c1'], col))) {
+		if (option_applies(style_id, col) &&
+				!(s.settings.d_team_colors && utils.includes(['c0', 'cb0', 'c1', 'cb1'], col))) {
 			res.push(col);
 		}
 	});
@@ -2342,7 +2356,7 @@ function option_applies(style_id, option_name) {
 		oncourt: ['court_id', 'cfg', 'cfg3', 'cbg', 'cserv2'],
 		onlyplayers: ['court_id', 'team_colors', 'c0', 'c1', 'cbg'],
 		onlyscore: ['court_id', 'team_colors', 'c0', 'c1', 'cbg'],
-		teamcourt: ['court_id', 'team_colors', 'c0', 'c1', 'cfg', 'cfg2', 'cbg', 'show_pause'],
+		teamcourt: ['court_id', 'team_colors', 'c0', 'cb0', 'c1', 'cb1', 'cfg', 'cfg2', 'show_pause'],
 		teamscore: ['team_colors', 'c0', 'c1', 'cfg', 'cbg'],
 		tim: ['cbg', 'cfg', 'ctim_blue', 'ctim_active'],
 		tournament_overview: ['cfg', 'cbg', 'cbg3', 'cborder', 'cfg2'],

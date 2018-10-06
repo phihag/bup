@@ -1,9 +1,13 @@
+team bg colors also for other than teamcourt
+
+bldemo should not refresh all the time!
+strike "nicht dem allgemeinen Stand der Technik entsprechen"
+fullscreen on top
+remove option to ask for fullsceen
 update logo sterkrade
 d greyish colorful
 Enter umpire name in minreq sheet
-hat aufgegeben
 update NRW satzungen & Ordnungen
-strike "nicht dem allgemeinen Stand der Technik entsprechen"
 urlexport: support players from lower teams
 Fehler Markus Schwendtner: manual swapping
 BWF-Einspielregeln, Michael Pütz
@@ -13,7 +17,6 @@ Referee Mode: players on court when match assigned to court assigned
 mail with changes in announcements
 
 shorten #referee_mode to #ref
-grey: numbers bleeding into each other
 test import RLN
 https://gruppe-nord.net/download/satzung-und-ordnungen-der-gruppe-nord-stand-31-08-2018/?wpdmdl=372
 

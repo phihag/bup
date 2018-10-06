@@ -12,28 +12,28 @@ var ABBREVS = {
 	'SG Ddorf-Unterrath': 'SGU',
 };
 var TEAM_COLORS = {
-	'Beuel': '#ffed00',
-	'Bischmisheim': '#0077d3',
-	'BV Mülheim': '#ff423f',
-	'Solingen': '#89deff', // STC BW Solingen
-	'Dortelweil': '#f55a44',
-	'EBT Berlin': '#0d9aff',
-	'Freystadt': '#ff161d',
-	'Hohenlimburg': '#0ebbff',
-	'Horner': '#ff2222', // Hamburg Horner TV
-	'Lüdinghausen': '#ffffff',
-	'Neuhausen': '#a6cb8b',
-	'Refrath': '#dbf3ff',
-	'Sterkrade': '#fefa42',
-	'Trittau': '#9dc2fc',
-	'Geretsried': '#f0f0f0',
-	'Wesel': '#ed1a24',
-	'Wipperfeld': '#ff2149',
-	'Wittorf': '#0091ff',
-	'WG Duisburg-Essen': '#ffffff',
-	'WG Karlsruhe': '#80ff8a',
-	'WG Köln': '#5C8DD2',
-	'Uni Bayreuth': '#ffffff',
+	'Beuel': {fg: '#ffed00'},
+	'Bischmisheim': {fg: '#0077d3'},
+	'BV Mülheim': {fg: '#ff423f'},
+	'Solingen': {fg: '#89deff'}, // STC BW Solingen
+	'Dortelweil': {fg: '#f55a44'},
+	'EBT Berlin': {fg: '#0d9aff'},
+	'Freystadt': {fg: '#ff161d'},
+	'Hohenlimburg': {fg: '#0ebbff'},
+	'Horner': {fg: '#ff2222'}, // Hamburg Horner TV
+	'Lüdinghausen': {fg: '#ffffff'},
+	'Neuhausen': {fg: '#a6cb8b'},
+	'Refrath': {fg: '#dbf3ff', bg: '#0b3772'},
+	'Sterkrade': {fg: '#fefa42'},
+	'Trittau': {fg: '#9dc2fc'},
+	'Geretsried': {fg: '#f0f0f0'},
+	'Wesel': {fg: '#ed1a24'},
+	'Wipperfeld': {fg: '#ff2149'},
+	'Wittorf': {fg: '#0091ff'},
+	'WG Duisburg-Essen': {fg: '#ffffff'},
+	'WG Karlsruhe': {fg: '#80ff8a'},
+	'WG Köln': {fg: '#5C8DD2'},
+	'Uni Bayreuth': {fg: '#ffffff'},
 };
 
 function get_color(team_name) {
