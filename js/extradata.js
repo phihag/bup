@@ -23,7 +23,7 @@ var TEAM_COLORS = {
 	'Horner': {fg: '#ff2222'}, // Hamburg Horner TV
 	'Lüdinghausen': {fg: '#ffffff'},
 	'Neuhausen': {fg: '#a6cb8b'},
-	'Refrath': {fg: '#dbf3ff', bg: '#0b3772'},
+	'Refrath': {fg: '#ffffff', bg: '#000b18'},
 	'Sterkrade': {fg: '#fefa42'},
 	'Trittau': {fg: '#9dc2fc'},
 	'Geretsried': {fg: '#f0f0f0'},
