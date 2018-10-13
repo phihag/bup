@@ -1165,7 +1165,7 @@ function render_greyish(s, container, event, colors) {
 			var winner_game = gscore && ((mwinner === 'left') && (gscore[0] > gscore[1]) || (mwinner === 'right') && (gscore[1] > gscore[0]));
 			uiu.el(tr, 'td', {
 				'style': (
-					'text-align:center;font-size:2vw;' +
+					'text-align:center;font-size:2.3vw;' +
 					'width:' + (30 / max_game_count) + 'vw;' +
 					(winner_game ? ('background:' + colors.bg2 + ';color:' + colors.bg) : '')
 				),
