@@ -712,5 +712,12 @@ _describe('eventutils', function() {
 		bup.eventutils.annotate(s, ev);
 		assert.deepStrictEqual(ev.matches[0].setup.counting, '3x21');
 	});
+
+	_it('pronounce_teamname', function() {
+		assert.equal(
+			bup.eventutils.pronounce_teamname('Spvgg.Sterkrade-N.'), 'Sportvereinigung Sterkrade-Nord');
+		assert.equal(
+			bup.eventutils.pronounce_teamname('TV Refrath'), 'TV Refrath');
+	});
 });
 

@@ -4643,6 +4643,43 @@ _describe('pronunciation', function() {
 			'Second game; love all; play'
 		);
 	});
+
+	_it('Pronounce full team name', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: false,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		}];
+		var s = state_after(presses, {
+			teams: [{
+				players: [{name: 'Andrew'}],
+				name: 'Spvgg.Sterkrade-N.',
+			}, {
+				players: [{name: 'Bob'}],
+				name: 'TV Refrath',
+			}],
+			is_doubles: false,
+			team_competition: true,
+			counting: '3x21',
+		});
+
+		assert.strictEqual(
+			pronounce_de(s),
+			'Meine Damen und Herren:\n' +
+			'Zu meiner Rechten,\n' +
+			'Sportvereinigung Sterkrade-Nord, vertreten durch Andrew,\n' +
+			'und zu meiner Linken,\n' +
+			'TV Refrath, vertreten durch Bob.\n' +
+			'Sportvereinigung Sterkrade-Nord schlägt auf.\n\n' +
+			'0 beide.\n' +
+			'Bitte spielen.'
+		);
+
+	});
+
 });
 
 module.exports = {

@@ -574,6 +574,12 @@ function calc_players_str(ev, players) {
 	}).filter(function(s) {return s;}).join(' / ');
 }
 
+function pronounce_teamname(team_name) {
+	return {
+		'Spvgg.Sterkrade-N.': 'Sportvereinigung Sterkrade-Nord',
+	}[team_name] || team_name;
+}
+
 return {
 	annotate: annotate,
 	calc_all_players: calc_all_players,
@@ -593,6 +599,7 @@ return {
 	name_by_league: name_by_league,
 	is_german8: is_german8,
 	umpire_required: umpire_required,
+	pronounce_teamname: pronounce_teamname,
 	// Testing only
 	/*@DEV*/
 	get_min_pause: get_min_pause,

@@ -41,7 +41,7 @@ function wonby_name(s, winner_idx) {
 	var winner = s.setup.teams[winner_idx];
 
 	if (s.setup.team_competition) {
-		return winner.name;
+		return eventutils.pronounce_teamname(winner.name);
 	} else {
 		if (s.setup.is_doubles) {
 			return winner.players[0].name + s._('wonby.and') + winner.players[1].name;
@@ -83,7 +83,7 @@ function _prematch_team(s, team_id) {
 	var team = s.setup.teams[team_id];
 	var res = '';
 	if (s.setup.team_competition) {
-		res = team.name + s._('onmyright.representedby');
+		res = eventutils.pronounce_teamname(team.name) + s._('onmyright.representedby');
 	}
 	if (s.setup.is_doubles) {
 		res += s._('onmyright.team.doubles', {
@@ -94,7 +94,7 @@ function _prematch_team(s, team_id) {
 		res += team.players[0].name;
 	}
 	if (team.name && !s.setup.team_competition) {
-		res += ', ' + team.name;
+		res += ', ' + eventutils.pronounce_teamname(team.name);
 	}
 	return res;
 }
@@ -223,7 +223,7 @@ function pronounce(s, now) {
 			d = {
 				left_team: _prematch_team(s, left_team),
 				right_team: _prematch_team(s, 1 - left_team),
-				serving_team: s.setup.teams[serving_team_id].name,
+				serving_team: eventutils.pronounce_teamname(s.setup.teams[serving_team_id].name),
 				serving_str: s._('onmyright.serves') + serving_str,
 				score: pronounce_score(s),
 			};
@@ -414,6 +414,7 @@ return {
 if (typeof module !== 'undefined') {
 	var calc = require('./calc');
 	var compat = require('./compat');
+	var eventutils = require('./eventutils');
 
 	module.exports = pronunciation;
 }
