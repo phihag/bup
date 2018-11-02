@@ -10,9 +10,6 @@ download-libs:
 	node div/download_libs.js doc/libs.json doc/libs/
 
 deps: deps-essential ## Download and install all dependencies (for compiling / testing / CLI operation)
-	$(MAKE) deps-optional
-
-deps-mandatory: deps-essential
 
 deps-essential:
 	# (node --version && npm --version) >/dev/null 2>/dev/null || sudo apt-get install nodejs npm
@@ -159,4 +156,4 @@ install-hub: deps
 	systemctl enable buphub
 	systemctl start buphub
 
-.PHONY: default help deps deps-essential deps-mandatory deps-optional test clean download-libs upload dist cleandist coverage coverage-display cd lint jshint eslint appcache-manifest manifest upload-run stylelint doclint deps-essential sat-hub root-hub install-hub testall ta tu mockserver
+.PHONY: default help deps deps-essential deps-optional test clean download-libs upload dist cleandist coverage coverage-display cd lint jshint eslint appcache-manifest manifest upload-run stylelint doclint deps-essential sat-hub root-hub install-hub testall ta tu mockserver
