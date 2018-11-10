@@ -577,6 +577,7 @@ function calc_players_str(ev, players) {
 function pronounce_teamname(team_name) {
 	return {
 		'Spvgg.Sterkrade-N.': 'Sportvereinigung Sterkrade-Nord',
+		'BV RW Wesel': 'BV Wesel Rot-Weiss',
 	}[team_name] || team_name;
 }
 
