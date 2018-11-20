@@ -1,12 +1,15 @@
+@Refrath: check background colors
+
+Syntax 38: font stack
+background colors bg in field view
 referee team bg colors
-Bundesliga BWF
-Ansageblatt
+Ansageblatt DD GD-W DE 1HD 2HD GD-H 2HE 1HE
 fonts in various displays (test with one)
 courtspot server false
-
 Schiedsrichterzettel unten -> Markus
+virtuelle Anzeige lokal rendern
 
-
+Bundesliga: BWF timing?
 test RLM
 exception icon: show something else but R
 team bg colors in singles
