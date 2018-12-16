@@ -718,6 +718,16 @@ _describe('eventutils', function() {
 			bup.eventutils.pronounce_teamname('Spvgg.Sterkrade-N.'), 'Sportvereinigung Sterkrade-Nord');
 		assert.equal(
 			bup.eventutils.pronounce_teamname('TV Refrath'), 'TV Refrath');
+		assert.equal(
+			bup.eventutils.pronounce_teamname('Blau-Weiss Wittorf-NMS'), 'Blau-Weiss Wittorf-Neumünster');
+		assert.equal(
+			bup.eventutils.pronounce_teamname('SC BW Ostenland'), 'SC Blau-Weiss Ostenland');
+		assert.equal(
+			bup.eventutils.pronounce_teamname('SC BW Ostenland 1'), 'SC Blau-Weiss Ostenland');
+		assert.equal(
+			bup.eventutils.pronounce_teamname('STC BW Solingen'), 'STC Blau-Weiss Solingen');
+		assert.equal(
+			bup.eventutils.pronounce_teamname('STC BW Solingen 1'), 'STC Blau-Weiss Solingen');
 	});
 });
 

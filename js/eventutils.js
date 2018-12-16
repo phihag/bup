@@ -575,10 +575,14 @@ function calc_players_str(ev, players) {
 }
 
 function pronounce_teamname(team_name) {
-	return {
+	var table = {
 		'Spvgg.Sterkrade-N.': 'Sportvereinigung Sterkrade-Nord',
 		'BV RW Wesel': 'BV Wesel Rot-Weiss',
-	}[team_name] || team_name;
+		'STC BW Solingen': 'STC Blau-Weiss Solingen',
+		'SC BW Ostenland': 'SC Blau-Weiss Ostenland',
+		'Blau-Weiss Wittorf-NMS': 'Blau-Weiss Wittorf-Neumünster',
+	};
+	return table[team_name] || table[team_name.replace(/\s+1$/, '')] || team_name;
 }
 
 return {
