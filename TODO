@@ -1,9 +1,13 @@
-new forms!
-@Refrath: check background colors
+fix tests
+start integration tests
+change color Refrath (needs to be darker)
+change color Wittorf (orange)
 
-
+Referee Mode: Time of next play after going back from choice (is shownas NaN)
+check stammspieler ersatz
 background colors bg in field view
 Support 5 sets to 11 sudden death
+PBL counting (sudden death at 15)
 Ersatzspieler eintragen!
 PWA native web app
 Syntax 38: font stack
@@ -13,6 +17,7 @@ fonts in various displays (test with one)
 courtspot server false
 Schiedsrichterzettel unten -> Markus
 virtuelle Anzeige lokal rendern
+turnier.de-upload: automatically fix small typos, first-/lastname
 
 Bundesliga: BWF timing?
 test RLM
