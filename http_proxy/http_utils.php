@@ -121,7 +121,7 @@ class PhpHTTPClient extends JarHTTPClient {
 				'follow_location' => 0,
 				'user_agent' => BUP_USER_AGENT,
 			],
-			];
+		];
 		if ($body) {
 			$options['http']['content'] = $body;
 		}
@@ -196,7 +196,7 @@ class CacheHTTPClient extends AbstractHTTPClient {
 
 	public function request($url, $headers=null, $method='GET', $body=null) {
 		if ($method !== 'GET') {
-			throw new \Exception('CacheHTTPClient only suppors GET!');
+			throw new \Exception('CacheHTTPClient only supports GET!');
 		}
 
 		$cache_fn = $this->cache_dir . '/' . \preg_replace('/[^a-z0-9\.]+/', '_', $url) . '.html';
