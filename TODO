@@ -1,7 +1,9 @@
+dont gray out Stamm-Ersatzspieler
 fix tests
 start integration tests
 change color Refrath (needs to be darker)
 change color Wittorf (orange)
+demo mode (with red demo)
 
 Referee Mode: Time of next play after going back from choice (is shownas NaN)
 check stammspieler ersatz
