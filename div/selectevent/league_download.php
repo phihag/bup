@@ -23,21 +23,29 @@ function geolocate($httpc, $address, $orig_address=null) {
 		return $loc_cache[$orig_address];
 	}
 
+	$address = \str_replace('SpH', 'Sporthalle', $address);
+
 	$ADDRESS_ALIAS = [
 		'07749 Jena, Sporthalle des Sportgymnasiums Jena' => 'Jena Wöllnitzer Str. 40',
+		'51427 Bergisch Gladbach-Refrath, Sporthalle, Steinbreche' => 'Steinbreche 1, 51427 Bergisch Gladbach',
 	];
 	if (\array_key_exists($address, $ADDRESS_ALIAS)) {
 		$address = $ADDRESS_ALIAS[$address];
 	}
 
-	$address = \str_replace('SpH', 'Sporthalle', $address);
-
-	$geo_json = $httpc->request(
-		'https://locationiq.com/v1/search_sandbox.php?format=json&' .
+	$geo_url = 'https://locationiq.com/v1/search_sandbox.php?format=json&' .
 		'q=' . \urlencode($address) .
-		'&accept-language=en'
-	);
+		'&accept-language=en';
+	$geo_json = $httpc->request($geo_url);
+	if (! $geo_json) {
+		throw new \Exception('Failed to download ' . $geo_url);
+	}
+
 	$results = \json_decode($geo_json, true);
+	if (array_key_exists('error', $results)) {
+		throw new \Exception('Failed to download ' . $geo_url . ' error ' . json_encode($results['error']));
+	}
+
 	if ((\count($results) === 0) || ($results[0]['importance'] < 0.1)) {
 		// Try stripping ZIP code
 		if (\preg_match('/^[0-9]+\s+(.*)$/', $address, $address_m)) {
