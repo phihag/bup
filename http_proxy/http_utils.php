@@ -205,7 +205,9 @@ class CacheHTTPClient extends AbstractHTTPClient {
 		}
 
 		$res = $this->real_httpc->request($url, $headers, $method, $body);
-		\file_put_contents($cache_fn, $res);
+		if (!preg_match('/^{"error/', $res)) {
+			\file_put_contents($cache_fn, $res);
+		}
 		return $res;
 	}
 
