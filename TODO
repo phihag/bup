@@ -1,3 +1,9 @@
+40 Zuschauer
+
+Pause/upcoming match Display
+courtspot dont default server / receiver
+courtspot dont default matches
+team colors in stats
 dont gray out Stamm-Ersatzspieler
 fix tests
 start integration tests
@@ -31,6 +37,7 @@ ask before syncing after entering in game
 refmode note should not change court
 Safari drucken
 contact scoreboardlive.se
+d greyish in colors, like CourtSpot
 
 bup Neuhausen Misha Zilberman
 https://www.facebook.com/hanskristianvittinghus/photos/a.10152176145076206/10156684530746206/
