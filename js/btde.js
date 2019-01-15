@@ -177,7 +177,7 @@ function _parse_player(s) {
 }
 
 function _parse_players(s) {
-	var m = /^([^~]*)(?:~(.*))?$/.exec(s);
+	var m = /^([^~/]*)(?:[~/](.*))?$/.exec(s);
 	var res = [];
 
 	if (m) {
