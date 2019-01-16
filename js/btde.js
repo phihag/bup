@@ -405,10 +405,10 @@ function calc_setup_data(event) {
 			}
 
 			if (match.setup.is_doubles) {
-				res[team_id + (match_idx + 1) + '0'] = (pnames.length >= 1) ? pnames[0] : '';
-				res[team_id + (match_idx + 1) + '1'] = (pnames.length == 2) ? pnames[1] : '';
+				res[team_id + '_' + (match_idx + 1) + '_d'] = (pnames.length >= 1) ? pnames[0] : '';
+				res[team_id + '_' + (match_idx + 1) + '_p'] = (pnames.length == 2) ? pnames[1] : '';
 			} else {
-				res[team_id + (match_idx + 1)] = (pnames.length === 1) ? pnames[0] : '';
+				res[team_id + '_' + (match_idx + 1)] = (pnames.length === 1) ? pnames[0] : '';
 			}
 		});
 	});
