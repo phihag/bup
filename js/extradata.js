@@ -21,7 +21,7 @@ var TEAM_COLORS = {
 	'Freystadt': {fg: '#ff161d'},
 	'Hohenlimburg': {fg: '#0ebbff'},
 	'Horner': {fg: '#ff2222'}, // Hamburg Horner TV
-	'Lüdinghausen': {fg: '#ffffff'},
+	'Lüdinghausen': {fg: '#cb232a'},
 	'Neuhausen': {fg: '#a6cb8b'},
 	'Refrath': {fg: '#ffffff', bg: '#000b18'},
 	'Sterkrade': {fg: '#fefa42'},

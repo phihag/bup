@@ -1,4 +1,6 @@
+remove Object.values
 greyish autoscale long names
+background on start display
 
 run through all tests
 Pause/upcoming match Display
