@@ -31,7 +31,7 @@ function parse_teammatch($httpc, $tm_html, $domain, $match_id) {
 	];
 
 	if (!\preg_match('/
-			<h2\s+class="media__title[^>]+>([^<]*)<\/h2>
+			<h2\s+class="media__title[^"]*"\s+title="(?P<name>[^"]+)"
 			/xs', $tm_html, $header_m)) {
 		throw new \Exception('Cannot find league name!');
 	}
