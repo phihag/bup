@@ -3,6 +3,8 @@ improve changing colors with team color from refmode
 error in refmode when going back from match (Aufruf nicht vor NaN:NaN)
 refmode should preview display
 
+hard-code locations (so we don't have to download all the time)
+
 https://www.turnier.de/sport/teammatch.aspx?id=95E4D9B3-8ECF-4B90-AC3E-3187852F20FD&match=100
 	better error message
 

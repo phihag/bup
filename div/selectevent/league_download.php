@@ -33,9 +33,8 @@ function geolocate($httpc, $address, $orig_address=null) {
 		$address = $ADDRESS_ALIAS[$address];
 	}
 
-	$geo_url = 'https://locationiq.com/v1/search_sandbox.php?format=json&' .
-		'q=' . \urlencode($address) .
-		'&accept-language=en';
+	$geo_url = 'http://eu1.locationiq.com/v1/search.php?key=1a28e74d8cb421&format=json&' .
+		'q=' . \urlencode($address);
 	$geo_json = $httpc->request($geo_url);
 	if (! $geo_json) {
 		throw new \Exception('Failed to download ' . $geo_url);
