@@ -248,9 +248,24 @@ function download_team_players($httpc, $domain, $league_key, $season_id, $team_i
 	);
 	$players_html = $httpc->request($players_url);
 
+	if (! \preg_match('/<h3>Spieler<\/h3>(?P<tables>.*?)(?:$|<h3>)/s', $players_html, $players_m)) {
+		return null;
+	}
+	$players = parse_team_players($players_m['tables']);
+
+	if (\preg_match('/<h3>Spieler aus anderen Mannschaften<\/h3>(?P<tables>.*?)$/s', $players_html, $backup_m)) {
+		$backup_players = parse_team_players($backup_m['tables']);
+		if ($backup_players) {
+			$players = \array_merge([], $players, $backup_players);
+		}
+	}
+	return $players;
+}
+
+function parse_team_players($html) {
 	if (!\preg_match(
 			'/<table\s+class="ruler">\s*<caption>\s*(?:Herren|Männer)(?:.*?<th[^>]*>Rückrunde<\/th>)?(?P<tbody>.*?)<\/table>/s',
-			$players_html, $players_m_m)) {
+			$html, $players_m_m)) {
 		return null;
 	}
 	$male_players = parse_players($players_m_m['tbody'], 'm');
@@ -260,7 +275,7 @@ function download_team_players($httpc, $domain, $league_key, $season_id, $team_i
 
 	if (!\preg_match(
 			'/<table\s+class="ruler">\s*<caption>\s*(?:Damen|Frauen)(?:.*?<th[^>]*>Rückrunde<\/th>)?(?P<tbody>.*?)<\/table>/s',
-			$players_html, $players_f_m)) {
+			$html, $players_f_m)) {
 		return null;
 	}
 	$female_players = parse_players($players_f_m['tbody'], 'f');
