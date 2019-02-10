@@ -1,4 +1,22 @@
-fix Incorrect team names: This match URL points to 1. BC Sbr.-Bischmisheim 2 - TSV Neuhausen-Nymphenburg [A], but expected 1. BC Sbr.-Bischmisheim 2 - TSV Neuhausen-Nymphenburg",
+https://www.turnier.de/sport/teammatch.aspx?id=95E4D9B3-8ECF-4B90-AC3E-3187852F20FD&match=100
+	better error message
+
+fix Incorrect team names: This match URL points to 1. BC Sbr.-Bischmisheim 2 - TSV
+Neuhausen-Nymphenburg [A], but expected 1. BC Sbr.-Bischmisheim 2 - TSV Neuhausen-Nymphenburg",
+
+team pronouncements: strip 1
+
+order printout without colors!
+bug morten
+suggestion morten
+
+< GH issues
+
+add player tde
+default tde account number
+
+try receipt Hohenlimburg
+Doppelrangliste
 	-> msg Bischmisheim
 remove Object.values
 greyish autoscale long names
@@ -14,8 +32,6 @@ team colors in stats
 dont gray out Stamm-Ersatzspieler
 fix tests
 start integration tests
-change color Refrath (needs to be darker)
-change color Wittorf (orange)
 demo mode (with red demo)
 
 Referee Mode: Time of next play after going back from choice (is shownas NaN)
