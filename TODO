@@ -1,6 +1,5 @@
 Wipperfeld #b90a1e
 error in refmode when going back from match (Aufruf nicht vor NaN:NaN)
-refmode should preview display
 
 hard-code locations (so we don't have to download all the time)
 
@@ -20,6 +19,7 @@ order printout without colors!
 
 
 
+refmode should preview display
 fix Incorrect team names: This match URL points to 1. BC Sbr.-Bischmisheim 2 - TSV
 Neuhausen-Nymphenburg [A], but expected 1. BC Sbr.-Bischmisheim 2 - TSV Neuhausen-Nymphenburg",
 bug morten

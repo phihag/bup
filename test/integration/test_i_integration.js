@@ -259,7 +259,7 @@ _describe('integration tests', () => {
 
 		assert.strictEqual(await page.evaluate(() =>
 			window.location.hash),
-			'#bldemo&lang=de&es_preview=buli2017-minsr');
+			'#bldemo&lang=de&es_preview=buli2018-minsr');
 		assert(await is_visible(page, '.eventsheet_container'));
 		assert(!await is_visible(page, '#settings_wrapper'));
 
