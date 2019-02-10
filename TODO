@@ -6,13 +6,14 @@ hard-code locations (so we don't have to download all the time)
 https://www.turnier.de/sport/teammatch.aspx?id=95E4D9B3-8ECF-4B90-AC3E-3187852F20FD&match=100
 	better error message
 
+bug morten
 spell djk teut st tönis
 team pronouncements: strip 1
 
 can't save on firefox (on bts laptop)
 setupsheet in refmode
 
-Schuhfarbe
+shoe color
 order printout without colors!
 < GH issues
 
@@ -22,10 +23,10 @@ order printout without colors!
 refmode should preview display
 fix Incorrect team names: This match URL points to 1. BC Sbr.-Bischmisheim 2 - TSV
 Neuhausen-Nymphenburg [A], but expected 1. BC Sbr.-Bischmisheim 2 - TSV Neuhausen-Nymphenburg",
-bug morten
 suggestion morten
 
 
+add a service worker
 improve changing colors with team color from refmode
 add player tde
 default tde account number
