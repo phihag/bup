@@ -31,7 +31,7 @@ var tutil_key_storage = (function() {
 })();
 
 
-_describe('refmode', function() {
+_describe.skip('refmode', function() {
 	var hub;
 	after(function() { // eslint-disable-line no-undef
 		if (hub) {
