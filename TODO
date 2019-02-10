@@ -1,5 +1,4 @@
 Wipperfeld #b90a1e
-improve changing colors with team color from refmode
 error in refmode when going back from match (Aufruf nicht vor NaN:NaN)
 refmode should preview display
 
@@ -16,14 +15,18 @@ setupsheet in refmode
 
 Schuhfarbe
 order printout without colors!
+< GH issues
+
+
+
 
 fix Incorrect team names: This match URL points to 1. BC Sbr.-Bischmisheim 2 - TSV
 Neuhausen-Nymphenburg [A], but expected 1. BC Sbr.-Bischmisheim 2 - TSV Neuhausen-Nymphenburg",
 bug morten
 suggestion morten
 
-< GH issues
 
+improve changing colors with team color from refmode
 add player tde
 default tde account number
 

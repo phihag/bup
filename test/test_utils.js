@@ -216,31 +216,31 @@ _describe('helper functions', function() {
 
 	_it('decode_utf8', function() {
 		assert.deepStrictEqual(
-			bup.utils.decode_utf8([]),
+			bup.utils.decode_utf8(Buffer.from([])),
 			'');
 		assert.deepStrictEqual(
-			bup.utils.decode_utf8([97, 98, 99]),
+			bup.utils.decode_utf8(Buffer.from([97, 98, 99])),
 			'abc');
 		assert.deepStrictEqual(
-			bup.utils.decode_utf8([195, 182]),
+			bup.utils.decode_utf8(Buffer.from([195, 182])),
 			'ö');
 		assert.deepStrictEqual(
-			bup.utils.decode_utf8([68, 195, 188, 115, 115, 101, 108, 100, 111, 114, 102]),
+			bup.utils.decode_utf8(Buffer.from([68, 195, 188, 115, 115, 101, 108, 100, 111, 114, 102])),
 			'Düsseldorf');
 		assert.deepStrictEqual(
-			bup.utils.decode_utf8([226, 132, 157]),
+			bup.utils.decode_utf8(Buffer.from([226, 132, 157])),
 			'ℝ');
 		assert.deepStrictEqual(
-			bup.utils.decode_utf8([239, 172, 176]),
+			bup.utils.decode_utf8(Buffer.from([239, 172, 176])),
 			'אּ');
 		assert.deepStrictEqual(
-			bup.utils.decode_utf8([239, 172, 176, 239, 172, 176]),
+			bup.utils.decode_utf8(Buffer.from([239, 172, 176, 239, 172, 176])),
 			'אּאּ');
 		assert.deepStrictEqual(
-			bup.utils.decode_utf8([240, 159, 152, 130]),
+			bup.utils.decode_utf8(Buffer.from([240, 159, 152, 130])),
 			'😂');
 		assert.deepStrictEqual(
-			bup.utils.decode_utf8([97, 32, 195, 164, 32, 226, 132, 157, 32, 240, 159, 152, 130]),
+			bup.utils.decode_utf8(Buffer.from([97, 32, 195, 164, 32, 226, 132, 157, 32, 240, 159, 152, 130])),
 			'a ä ℝ 😂');
 	});
 
