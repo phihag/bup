@@ -138,7 +138,7 @@ function parse_vrl_players($httpc, $domain, $season_id, $club_id, $vrl_id) {
 		<td\s+align="right">(?P<lfd_num>[0-9]+)<\/td> # LfdNum
 		<td><\/td>       # empty
 		<td\s+id="playercell"><a\s+href="player\.aspx\?id=[-A-Za-z0-9]+&player=[0-9]+">
-			(?P<lastname>[^,<]+),\s*(?P<firstname>[^,<]+)
+			(?P<lastname>[^<]+),\s*(?P<firstname>[^,<]+)
 		<\/a><\/td>
 		<td\s+class="flagcell">(?:
 			<img[^>]+\/><span\s*class="printonly\s*flag">\[(?P<nationality>[A-Z]{2,})\]\s*<\/span>
