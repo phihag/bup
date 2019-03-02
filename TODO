@@ -1,5 +1,7 @@
+bup fix Olga Konon geboren Roj
+
 Wipperfeld #b90a1e
-error in refmode when going back from match (Aufruf nicht vor NaN:NaN)
+error in refmode when going back from match start(Aufruf nicht vor NaN:NaN)
 
 hard-code locations (so we don't have to download all the time)
 
@@ -18,8 +20,10 @@ order printout without colors!
 < GH issues
 
 
+Stammspieler not black
 
-
+color offset by machine
+add to home screen nicer
 refmode should preview display
 fix Incorrect team names: This match URL points to 1. BC Sbr.-Bischmisheim 2 - TSV
 Neuhausen-Nymphenburg [A], but expected 1. BC Sbr.-Bischmisheim 2 - TSV Neuhausen-Nymphenburg",

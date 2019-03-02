@@ -65,7 +65,7 @@ function parse_team($html, $team_num) {
 					(?P<ranking_team>[0-9]+)-(?P<ranking>[0-9]+)
 					(?:-D(?P<ranking_d>[0-9]+))?
 				)?\s*
-				(?P<lastname>[^,0-9]+),\s+(?P<firstname>[^(0-9]+?)\s+
+				(?P<lastname>[^0-9]+),\s+(?P<firstname>[^0-9,]+?)\s+
 				\([^)]+\)$/x', $pd['Name'], $m)) {
 			utils\json_err('Cannot parse player spec ' . json_encode($pd['Name']));
 		}
