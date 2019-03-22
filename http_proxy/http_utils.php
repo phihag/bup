@@ -122,6 +122,10 @@ class PhpHTTPClient extends JarHTTPClient {
 				'user_agent' => BUP_USER_AGENT,
 			],
 		];
+		if ($_SERVER['HTTP_HOST'] === 'aufschlagwechsel.de') {
+			$options['ssl'] = ['verify_peer' => false];
+		}
+
 		if ($body) {
 			$options['http']['content'] = $body;
 		}
