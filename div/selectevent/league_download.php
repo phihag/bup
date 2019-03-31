@@ -72,6 +72,17 @@ function geolocate($httpc, $address, $orig_address=null) {
 	return $coords;
 }
 
+function init_geolocation_cache() {
+	global $loc_cache;
+
+	$preset_fn = __DIR__ . '/default_locations.json';
+	$locations_json = \file_get_contents($preset_fn);
+	if (!$locations_json) {
+		throw new Error('Cannot read locations preset file ' . $preset_fn);
+	}
+	$loc_cache = \json_decode($locations_json, true, 512, \JSON_THROW_ON_ERROR);
+}
+
 function download_team($httpc, $tournament_id, $team_id, $team_name, $use_vrl) {
 	if ($use_vrl) {
 		return buli_download_all_players(
@@ -249,6 +260,8 @@ function download_leagues($config) {
 		}
 		$httpc = new http_utils\CacheHTTPClient($httpc, $cache_dir);
 	}
+
+	init_geolocation_cache();
 
 	$leagues = [];
 	foreach ($config['leagues'] as $l) {
