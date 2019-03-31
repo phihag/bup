@@ -1,9 +1,34 @@
-bup fix Olga Konon geboren Roj
+22 optimization -> Peter Veit
+
+font https://www.facebook.com/maria.sonne.315/posts/2187941424620170?__xts__%5B0%5D=68.ARByWvRIEUOfg-wSLrE8Q1Dx5mXn2dnFQSaUljff2NoE5wIExA0tcGcQDfVRtLVoI67KmBMBAcIb6h6Ahe89AqmZwHOYJ6Dl5DFjtsXuevcod2lcQ9eJGWD6zW2XKGtOLMIpLDWDjRWOcxuQI1cYOiIn6OrXzdQJEFcdVdkgmDB86erRUVLPZIo2BHgbPj5mJBxp7cmFLpkBQ0mEvX7T6VAOowLGP80GEIRKgcPqXTjrxnBRNCIiMiPd5ounr2T3bpt6O340kBarDAWyqRpXVnr-tijPAJf1tTCOrGGFDdIiCA01wIhHVIrSjmzbbPiHH2sYZVEYi97IRkdlYnCRf8Si0tXVYublOrDs_8zQX3h5k-83HOrsDf70&__tn__=-R
+
+
+colors in Aktuelle Liste
+Tim double colors
+Tim two colors for ogoing on top right
+redesign ads
+d add a button to reset colors
+dads automatic background color
+shortcut w to go through ad modes
+shortcut shift+w to disable ads
+Aufgabe automatisch als Text eintragen
+
+Wartezeit in Werbung
+CourtSpot order not saved (save order, then reload, during match)
+
+logo gladbaecker FC
+refmode in CourtSpot without Internet
 
 Wipperfeld #b90a1e
 error in refmode when going back from match start(Aufruf nicht vor NaN:NaN)
-
 hard-code locations (so we don't have to download all the time)
+.score_counting needs border
+
+ad as text
+refmode animate wait time
+refmode 2-11 shown instead of 11-2 on win?
+refmode protect against ongoing match when changing match (warning)
+
 
 https://www.turnier.de/sport/teammatch.aspx?id=95E4D9B3-8ECF-4B90-AC3E-3187852F20FD&match=100
 	better error message
