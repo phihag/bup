@@ -242,7 +242,12 @@ function download_league($httpc, $url, $league_key, $use_vrl, $use_hr) {
 function download_leagues($config) {
 	$httpc = http_utils\AbstractHTTPClient::make();
 	if ($config['use_cache']) {
-		$httpc = new http_utils\CacheHTTPClient($httpc, __DIR__ . '/cache');
+		if (\array_key_exists('cache_dir', $config)) {
+			$cache_dir = $config['cache_dir'];
+		} else {
+			$cache_dir = __DIR__ . '/cache';
+		}
+		$httpc = new http_utils\CacheHTTPClient($httpc, $cache_dir);
 	}
 
 	$leagues = [];
