@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "node-webcrypto-ossl": "*",
-    "wrtc": "0.0.63",
+    "wrtc": "0.2.0",
     "ws": "*"
   },
   "devDependencies": {
