@@ -170,11 +170,11 @@ function download_league($httpc, $url, $league_key, $use_vrl, $use_hr) {
 		<td><\/td>
 		<td\s+class="plannedtime"\s+align="right">
 			\s*[A-Za-z]{2}\s*(?P<date>[0-9]{1,2}\.[0-9]{1,2}\.[0-9]{4})\s*
-			<span\s+class="time">\s*(?P<starttime>[0-9]{2}:[0-9]{2})\s*<\/span>
+			(?:<span\s+class="time">\s*(?P<starttime>[0-9]{2}:[0-9]{2})\s*<\/span>)?
 		<\/td>
-		<td\s+align="right">(?P<matchday>[0-9]+)<\/td>
-		<td\s+align="right">(?P<round>[HR])<\/td>
-		<td>(?P<matchnum>[0-9]+)<\/td>
+		<td\s+align="right">(?P<matchday>[0-9]+|)<\/td>
+		<td\s+align="right">(?P<round>[HR]|)<\/td>
+		<td>(?P<matchnum>[0-9]+|)<\/td>
 		<td[^>]*>(?:<strong>)?<a\s+class="teamname"[^>]+>(?P<name1>[^<]+)<\/a>(?:<\/strong>)?<\/td>
 		<td\s+align="center">-<\/td>
 		<td[^>]*>(?:<strong>)?<a\s+class="teamname"[^>]+>(?P<name2>[^<]+)<\/a>(?:<\/strong>)?<\/td>
