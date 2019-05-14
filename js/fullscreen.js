@@ -56,15 +56,29 @@ function toggle() {
 }
 
 function update_fullscreen_button() {
+	var is_active = active();
 	uiu.text_qs('.fullscreen_button',
-		state._(active() ? /*i18n-term:*/'settings:Leave Fullscreen' : 'settings:Go Fullscreen')
+		state._(is_active ? /*i18n-term:*/'settings:Leave Fullscreen' : 'settings:Go Fullscreen')
 	);
+	var all_active = ((window.innerHeight === screen.height) || is_active);
+	var ask_setting = state.settings.fullscreen_ask;
+	var show_button;
+	if (ask_setting === 'always') {
+		show_button = !all_active;
+	} else if (ask_setting === 'never') {
+		show_button = false;
+	} else {
+		// Automatic
+		show_button = /mobi|android/i.test(navigator.userAgent) && !all_active;
+	}
+	uiu.visible_qs('.fullscreen_top', show_button);
 }
 
 function ui_init() {
 	['webkitfullscreenchange', 'mozfullscreenchange', 'fullscreenchange', 'MSFullscreenChange'].forEach(function(event_name) {
 		document.addEventListener(event_name, update_fullscreen_button);
 	});
+	window.addEventListener('resize', update_fullscreen_button);
 
 	if (! supported()) {
 		var fullscreen_line = uiu.qs('.fullscreen_line');
@@ -74,6 +88,7 @@ function ui_init() {
 
 	// Do not use click module: We need an actual click, not a touch here
 	uiu.qs('.fullscreen_button').addEventListener('click', toggle);
+	uiu.qs('.fullscreen_top_button').addEventListener('click', toggle);
 }
 
 function autostart() {
@@ -95,7 +110,7 @@ function autostart() {
 	});
 
 	// Do not use the click module: We need an actual click event
-	uiu.qs('.go_fullscreen_go').addEventListener('click', function() {
+	uiu.qs('.go_fullscreen_go,').addEventListener('click', function() {
 		toggle();
 		go_fullscreen_hide();
 	});
@@ -111,6 +126,7 @@ return {
 	supported: supported,
 	active: active,
 	start: start,
+	update_fullscreen_button: update_fullscreen_button,
 };
 
 })();

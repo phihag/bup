@@ -12,6 +12,7 @@ function init() {
 	i18n.ui_update_state(state);
 	register_sworker();
 	state.settings = settings.load();
+	fullscreen.update_fullscreen_button();
 }
 
 function ui_init() {

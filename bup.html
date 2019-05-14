@@ -208,6 +208,8 @@
 
 <div class="appcache_update default-invisible"><span data-i18n="bup.update_available"></span> <button class="appcache_update_button" data-i18n="bup.update_now"></button></div>
 
+<div class="fullscreen_top"><button class="fullscreen_top_button" data-i18n="fullscreen:go"></button></div>
+
 <div class="settings_network_login_container">
 </div>
 
@@ -325,6 +327,7 @@
 </div>
 
 <div class="settings">
+
 <h2 data-i18n="settings:Settings"></h2>
 <div class="d_login_links"></div><button data-bup-modes="display" class="d_hide_settings" data-i18n="displaymode:hide settings"></button>
 
@@ -357,7 +360,7 @@
 <label data-bup-modes="umpire"><span data-i18n="settings:Service judge"></span>: <input type="text" name="service_judge_name" /></label>
 <label><span data-i18n="settings:Language"></span>: <select size="1" class="settings_language" name="language"></select></label>
 <div data-bup-modes="DEBUG"><label><span data-i18n="settings:wakelock:label"></span> <select name="wakelock" size="1"><option data-i18n="settings:wakelock:display" value="display"></option><option data-i18n="settings:wakelock:always" value="always"></option><option data-i18n="settings:wakelock:never" value="never"></option></select></label></div>
-<div class="fullscreen_line" data-bup-modes="umpire display"><label><input type="checkbox" name="go_fullscreen" /><span data-i18n="settings:Request Fullscreen on Startup"></span></label> <button class="fullscreen_button" data-i18n="settings:Go Fullscreen"></button></div>
+<div class="fullscreen_line" data-bup-modes="umpire display"><label><span data-i18n="settings:Request Fullscreen on Startup"></span><select name="fullscreen_ask"><option value="always" data-i18n="settings:fullscreen_ask|always"></option><option value="auto" data-i18n="settings:fullscreen_ask|auto"></option><option value="never" data-i18n="settings:fullscreen_ask|never"></option></select></label> <button class="fullscreen_button" style="margin-left: 1em;" data-i18n="settings:Go Fullscreen"></button></div>
 <label data-bup-modes="umpire"><input type="checkbox" name="shuttle_counter" /><span data-i18n="settings:Shuttle Counter"></span></label>
 <label data-bup-modes="umpire"><input type="checkbox" name="show_pronunciation" /><span data-i18n="settings:Show Pronunciation"></span></label>
 <label data-bup-modes="umpire"><input type="checkbox" name="negative_timers" /><span data-i18n="settings:Negative Timers"></span></label>

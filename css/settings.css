@@ -247,3 +247,13 @@ a.settings_mode_active:visited {
 .nonet_links {
 	margin: 1.5em 0 1em 0;
 }
+
+.fullscreen_top {
+	margin: 0.6em 0 0.2em 0;
+	text-align: center;
+}
+button.fullscreen_top_button {
+	font-size: 250%;
+	width: 100%;
+	padding: 0.2em 0;
+}
