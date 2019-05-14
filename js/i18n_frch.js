@@ -236,7 +236,7 @@ var i18n_frch = {
 'settings:Service judge': 'Juge de service',
 'settings:Language': 'Langue',
 'settings:editmode doubleclick': 'Entrez le mode d\'edition manuelle en touchant le terrain',
-'settings:show_announcements': 'Afficher les annonces:',
+'settings:show_announcements': 'Afficher les annonces: ',
 'settings:show_announcements|all': 'Tout',
 'settings:show_announcements|except-first': 'Tous sauf le début du match',
 'settings:show_announcements|none': 'Aucun',

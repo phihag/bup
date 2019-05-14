@@ -238,7 +238,7 @@ var i18n_de = {
 'settings:Service judge': 'Aufschlagrichter',
 'settings:Language': 'Sprache',
 'settings:editmode doubleclick': 'Manuelles Bearbeiten mit Doppelklick auf Feld',
-'settings:show_announcements': 'Ansagen zeigen:',
+'settings:show_announcements': 'Ansagen zeigen: ',
 'settings:show_announcements|all': 'Alle',
 'settings:show_announcements|except-first': 'Alle außer Spielbeginn',
 'settings:show_announcements|none': 'Keine',

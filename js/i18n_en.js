@@ -237,7 +237,7 @@ var i18n_en = {
 'settings:Service judge': 'Service judge',
 'settings:Language': 'Language',
 'settings:editmode doubleclick': 'Enter manual edit mode by touching court twice',
-'settings:show_announcements': 'Show announcements',
+'settings:show_announcements': 'Show announcements: ',
 'settings:show_announcements|all': 'All',
 'settings:show_announcements|except-first': 'All except start of match',
 'settings:show_announcements|none': 'None',
