@@ -234,8 +234,12 @@ function _set_dialog(s, dialog_qs, btn_str) {
 		btn_str = m ? m[2] : pr_str;
 	}
 
-	if (! s.settings.show_pronunciation) {
+	if (s.settings.show_announcements === 'none') {
 		span_str = '';
+	} else if(s.settings.show_announcements === 'except-first') {
+		if (s.match.announce_pregame && s.match.finished_games.length === 0) {
+			span_str = '';
+		}
 	}
 
 	uiu.setClass(pronunciation_span, 'pronunciation_nonempty', span_str);
@@ -311,7 +315,7 @@ function ui_render(s) {
 	if (s.match.injuries) {
 		dialog_active = true;
 		$('#injury-pronunciation').text(
-			(s.settings.show_pronunciation ? (pronunciation.pronounce(s)) : '')
+			((s.settings.show_announcements !== 'none') ? (pronunciation.pronounce(s)) : '')
 		);
 		var dialog = uiu.qs('#injury-resume-dialog');
 
@@ -430,7 +434,7 @@ function ui_render(s) {
 	}
 
 	var $pronunciation_el = $('#pronunciation');
-	if (s.settings.show_pronunciation && !dialog_active) {
+	if ((s.settings.show_announcements !== 'none') && !dialog_active) {
 		var pronunciation_text = pronunciation.pronounce(s);
 		if (pronunciation_text) {
 			$pronunciation_el.find('>span').text(pronunciation_text);

@@ -3,7 +3,7 @@ var settings = (function() {
 
 var default_settings = {
 	fullscreen_ask: 'auto',
-	show_pronunciation: true,
+	show_announcements: 'all',
 	umpire_name: '',
 	service_judge_name: '',
 	court_id: '',
@@ -193,7 +193,6 @@ function update_refclient(s) {
 }
 
 var _settings_checkboxes = [
-	'show_pronunciation',
 	'negative_timers',
 	'shuttle_counter',
 	'editmode_doubleclick',
@@ -244,6 +243,7 @@ var _settings_numberfields = [
 ];
 var _settings_selects = [
 	'fullscreen_ask',
+	'show_announcements',
 	'click_mode',
 	'displaymode_court_id',
 	'displaymode_style',
@@ -336,7 +336,7 @@ function on_change(s, name) {
 	}
 
 	switch (name) {
-	case 'show_pronunciation':
+	case 'show_announcements':
 	case 'negative_timers':
 		render.ui_render(s);
 		break;

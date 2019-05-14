@@ -31,11 +31,9 @@ function ui_init(s) {
 		}
 	});
 	Mousetrap.bind('a', function() {
-		s.settings.show_pronunciation = ! s.settings.show_pronunciation;
-		if (s.initialized) {
-			render.ui_render(state);
-		}
-		settings.store(state);
+		settings.change(
+			state, 'show_announcements',
+			(s.settings.show_announcements === 'none') ? 'all' : 'none');
 	});
 	Mousetrap.bind('v', function() {
 		editevent.show();
@@ -97,7 +95,6 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var importexport = require('./importexport');
 	var netstats = require('./netstats');
 	var refmode_referee_ui = require('./refmode_referee_ui');
-	var render = require('./render');
 	var scoresheet = require('./scoresheet');
 	var settings = require('./settings');
 	var stats = require('./stats');
