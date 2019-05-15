@@ -52,6 +52,7 @@
 	font-size: 5vmin;
 	top: 50%;
 	transform: translate(0, -50%);
+	white-space: pre-wrap;
 }
 
 .court_court_str {

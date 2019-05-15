@@ -45,6 +45,37 @@ function update_court_str(s, cui) {
 	uiu.text(cui.court_str_text, calc_court_str(s));
 }
 
+function _team_names(s) {
+	if (s.game.team1_left === null) {
+		return; // No sides yet, cannot see team names
+	}
+
+	if (s.setup.team_competition) {
+		return [s.setup.teams[0].name, s.setup.teams[1].name];
+	}
+
+	if (s.setup.teams[0].players[0] && s.setup.teams[0].players[0].nationality) {
+		// International tournament
+		return s.setup.teams.map(function(team, team_idx) {
+			var players = team.players;
+			if ((players.length > 1) && (players[0].nationality !== players[1].nationality)) {
+				var idxs = [0, 1];
+				if (s.game && s.game.teams_player1_even && (s.game.teams_player1_even[team_idx] !== s.game.team1_left)) {
+					idxs = [1, 0];
+				}
+
+				return idxs.map(function(player_idx) {
+					return countrycodes.lookup(players[player_idx].nationality);
+				}).join('\n');
+			} else {
+				return countrycodes.lookup(players[0].nationality);
+			}
+		});
+    }
+
+    // No team names
+}
+
 function render(s, cui) {
 	var cdata = calc.court(s);
 
@@ -72,14 +103,17 @@ function render(s, cui) {
 
 	uiu.text(cui.match_name_text, s.setup.match_name ? s.setup.match_name : '');
 
-	var show_teams = (s.setup.team_competition && (s.game.team1_left !== null));
-	uiu.$visible(cui.left_team, show_teams);
-	uiu.$visible(cui.right_team, show_teams);
+	// Teams
+	var team_names = _team_names(s);
+	var show_teams = !!team_names;
 	if (show_teams) {
 		var left_index = s.game.team1_left ? 0 : 1;
-		uiu.text(cui.left_team_text, s.setup.teams[left_index].name);
-		uiu.text(cui.right_team_text, s.setup.teams[1 - left_index].name);
+		uiu.text(cui.left_team_text, team_names[left_index]);
+		uiu.text(cui.right_team_text, team_names[1 - left_index]);
 	}
+
+	uiu.$visible(cui.left_team, show_teams);
+	uiu.$visible(cui.right_team, show_teams);
 }
 
 function calc_court_str(s) {
@@ -111,6 +145,7 @@ return {
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var calc = require('./calc');
+	var countrycodes = require('./countrycodes');
 	var editmode = require('./editmode');
 	var network = require('./network');
 	var uiu = require('./uiu');
