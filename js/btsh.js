@@ -54,6 +54,8 @@ function send_score(s) {
 		presses: s.presses,
 		duration_ms: duration_ms,
 		end_ts: end_ts,
+		marks: s.match.marks,
+		shuttle_count: s.match.shuttle_count,
 	};
 
 	var url = baseurl + 'h/' + encodeURIComponent(tournament_key) + '/m/' + encodeURIComponent(match_id) + '/score';
