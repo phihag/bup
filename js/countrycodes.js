@@ -206,7 +206,7 @@ function lookup(code) {
 }
 
 return {
-	lookup,
+	lookup: lookup,
 };
 })();
 
