@@ -1034,7 +1034,7 @@ function render_international(s, container, event, court, match, colors) {
 
 		player_spans.forEach(function(ps) {
 			_setup_autosize(ps, right_border, function(parent_node) {
-				return parent_node.offsetHeight * 0.5;
+				return parent_node.offsetHeight;
 			});
 		});
 	});
