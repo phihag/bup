@@ -205,7 +205,7 @@ counting*          Scoring system.
                    See the documentation on event for possible values.
                    Can be left out if the league_key or counting property of the event is set.
 date               Human-readable official day of match, e.g. "12.3.2017".
-                   Copied over from the date propert of the event.
+                   Copied over from the date property of the event.
 umpire_name        Name of the umpire assigned to this match (or the last one who touched it).
 service_judge_name Name of the service judge assigned to this match.
 court_id           ID of the court this match is played on.
@@ -213,6 +213,8 @@ warmup             Warmup time rules. Values are:
    "bwf-2016"       BWF laws starting June 2016 (120s total, ready to play after 90s)
    "legacy"         120 seconds warmup time. (Default when the key is missing)
    "none"           No warmup time.
+scheduled_time_str Official start time of the match, e.g. "09:00".
+scheduled_date     Official date of the match in ISO8601, e.g. "2019-05-30".
 
 The following keys are copied over from the event (see there for documentation):
 counting, league_key, tournament_name, event_name, team_competition, away_first
