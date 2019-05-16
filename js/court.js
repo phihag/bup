@@ -60,7 +60,7 @@ function _team_names(s) {
 			var players = team.players;
 			if ((players.length > 1) && (players[0].nationality !== players[1].nationality)) {
 				var idxs = [0, 1];
-				if (s.game && s.game.teams_player1_even && (s.game.teams_player1_even[team_idx] !== s.game.team1_left)) {
+				if (s.game && s.game.teams_player1_even && (s.game.teams_player1_even[team_idx] !== (s.game.team1_left === (team_idx !== 0)))) {
 					idxs = [1, 0];
 				}
 
