@@ -502,6 +502,7 @@ var i18n_en = {
 'displaymode|top+list': 'current/list',
 'displaymode|oncourt': 'court score',
 'displaymode|international': 'international',
+'displaymode|clean': 'clean',
 'displaymode|teamcourt': 'team display',
 'displaymode|2court': '2 courts',
 'displaymode|castall': 'greenscreen (all courts)',

@@ -214,24 +214,28 @@
 	border-top-right-radius: 4vmin;
 }
 
-.d_international_team {
+.d_international_team,
+.d_clean_team {
 	font-stretch: condensed;
 	position: relative;
 	height: 50%;
 }
-.d_international_player_container {
+.d_international_player_container,
+.d_clean_player_container {
 	position: relative;
 	width: 100%;
 	display: flex;
 	align-items: center;
 }
-.d_international_player {
+.d_international_player,
+.d_clean_player {
 	width: 100%;
 	font-size: 12vh;
 	display: flex;
 	align-items: center;
 }
-.d_international_score {
+.d_international_score,
+.d_clean_score {
 	font-size: 50vh;
 	line-height: 50vh;
 	width: 52vh;
@@ -243,11 +247,13 @@
 	overflow: hidden;
 	font-family: 'Droid Sans', 'Noto Mono', Arial, sans-serif;
 }
-.d_international_score.d_international_score_dd {
+.d_international_score.d_international_score_dd,
+.d_clean_score.d_clean_score_dd {
 	letter-spacing: -4vh;
 	text-align: left;
 }
-.d_international_gscore {
+.d_international_gscore,
+.d_clean_gscore {
 	font-size: 20vh;
 	line-height: 20vh;
 	position: absolute;
