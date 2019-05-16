@@ -58,6 +58,7 @@ dist: cleandist ## Create distribution files
 	mkdir -p dist/bup/div/scoresheet
 	node div/minify_svg.js dist/bup/div/scoresheet/ \
 		div/scoresheet/*.svg
+	cp -R div/flags --target-directory dist/bup/div/
 	node div/minify_svg.js dist/bup/div/ \
 		div/bundesliga-logo.svg \
 		div/buli2017_mindestanforderungen_schiedsrichter.svg \
