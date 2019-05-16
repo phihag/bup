@@ -499,6 +499,7 @@ var i18n_frch = {
 'displaymode|top+list': 'Actuel/liste',
 'displaymode|oncourt': 'Terrain score',
 'displaymode|international': 'International',
+'displaymode|bwf': 'BWF',
 'displaymode|clean': 'Clean',
 'displaymode|teamcourt': 'Affichage de l\'équipe',
 'displaymode|2court': '2 courts',

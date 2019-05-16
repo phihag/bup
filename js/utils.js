@@ -515,7 +515,21 @@ function domain(url) {
 	return m && m[1];
 }
 
+function annotate_lastname(player) {
+	if (player.lastname) return;
+
+	const m = /^(.*)\s+(\S+)$/.exec(player.name);
+	if (m) {
+		player.firstname = m[1];
+		player.lastname = m[2];
+	} else {
+		player.firstname = '';
+		player.lastname = p.name;
+	}
+}
+
 return {
+	annotate_lastname: annotate_lastname,
 	any: any,
 	brightness: brightness,
 	cmp: cmp,

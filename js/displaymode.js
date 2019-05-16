@@ -4,6 +4,7 @@ var displaymode = (function() {
 var ALL_STYLES = [
 	'oncourt',
 	'international',
+	'bwf',
 	'clean',
 	'teamcourt',
 	'stripes',
@@ -1053,6 +1054,87 @@ function render_international(s, container, event, court, match, colors) {
 				return 0.7 * parent_node.offsetHeight;
 			});
 		});
+	});
+}
+
+function render_bwf(s, container, event, court, match, colors) {
+	var nscore = extract_netscore(match);
+	var gscore = _gamescore_from_netscore(nscore, match.setup);
+	var is_doubles = match.setup.is_doubles;
+	var pcount = is_doubles ? 2 : 1;
+	var current_score = nscore[nscore.length - 1] || [];
+	var server = determine_server(match, current_score);
+	var first_game = (nscore.length < 2);
+	var mwinner = calc.match_winner(match.setup.counting, nscore);
+	var match_over = (mwinner === 'left') || (mwinner === 'right');
+
+	match.setup.teams.forEach(function(team, team_id) {
+		var col = colors[team_id];
+		var gwinner = calc.game_winner(match.setup.counting, nscore.length - 1, current_score[0], current_score[1]);
+		var team_serving = (
+			(gwinner === 'left') ? (team_id === 0) : (
+			(gwinner === 'right') ? (team_id === 1) : (
+			(server.team_id === team_id))));
+
+		var players = team.players.slice();
+		while (players.length < pcount) {
+			players.push({
+				name: '',
+			});
+		}
+
+		var team_container = uiu.el(container, 'div', 'd_international_team');
+		var player_spans = players.map(function(player, player_id) {
+			var is_server = (!match_over) && team_serving && (server.player_id === player_id);
+			var bg_css = 'background: ' + (is_server ? col : colors.bg) + ';';
+			var style = (
+				bg_css +
+				'color: ' + (is_server ? colors.bg : col) + ';' +
+				'height: ' + (is_doubles ? '100%' : '50%') + ';'
+			);
+
+			var player_container = uiu.el(team_container, 'div', {
+				'style': 'height: ' + (is_doubles ? '50%' : '100%') + ';',
+				'class': 'd_international_player_container',
+			});
+			var flag_container = uiu.el(player_container, 'div', {
+				style: (
+					'width: 14vh;' +
+					'height: ' + (is_doubles ? '100%' : '50%') + ';' +
+					bg_css +
+					'display:flex; align-items: center; justify-content:center;'),
+			});
+			if (player.nationality) {
+				uiu.el(flag_container, 'img', {
+					style: 'display:block;height:14vh;width:14vh;',
+					src: 'div/flags/' + player.nationality + '.svg',
+					alt: player.nationality,
+				});
+			}
+			var pel = uiu.el(player_container, 'div', {
+				style: style,
+				'class': 'd_bwf_player',
+			});
+			utils.annotate_lastname(player);
+			var player_name = player.lastname.toUpperCase() + (player.firstname ? ', ' + player.firstname : '');
+
+			return uiu.el(pel, 'div', {
+				'style': 'white-space:pre;overflow-x:hidden',
+			}, player_name);
+		});
+
+		if (! first_game) {
+			uiu.el(team_container, 'div', {
+				'class': 'd_international_gscore',
+				style: 'background: ' + colors.bg + '; color: ' + colors.fg + ';',
+			}, gscore[team_id]);
+		}
+
+		var points = current_score[team_id];
+		var points_el = uiu.el(team_container, 'div', {
+			'class': 'd_international_score' + ((points >= 10) ? ' d_international_score_dd' : ''),
+			style: 'background: ' + (team_serving ? col : colors.bg) + '; color: ' + (team_serving ? colors.bg : col),
+		}, points);
 	});
 }
 
@@ -2190,6 +2272,7 @@ function update(err, s, event) {
 		andre: render_andre,
 		clubplayers: render_clubplayers,
 		clubplayerslr: render_clubplayerslr,
+		bwf: render_bwf,
 		international: render_international,
 		clean: render_clean,
 		oncourt: render_oncourt,
@@ -2436,6 +2519,7 @@ function option_applies(style_id, option_name) {
 		'2court': ['team_colors', 'c0', 'c1', 'cfg', 'cbg', 'reverse_order', 'show_pause'],
 		'top+list': ['reverse_order'],
 		andre: ['court_id', 'cfg', 'cbg', 'cfg2'],
+		bwf: ['court_id', 'team_colors', 'c0', 'c1', 'cfg', 'cbg'],
 		castall: ['team_colors', 'c0', 'c1', 'cfg', 'cbg', 'cbg2', 'ct', 'cserv', 'crecv', 'reverse_order', 'scale'],
 		clubplayers: ['court_id', 'team_colors', 'c0', 'c1', 'cbg'],
 		clubplayerslr: ['court_id', 'team_colors', 'c0', 'c1', 'cbg'],

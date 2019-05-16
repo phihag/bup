@@ -234,6 +234,12 @@
 	display: flex;
 	align-items: center;
 }
+.d_bwf_player {
+	width: 100%;
+	font-size:11vh;
+	display: flex;
+	align-items: center;
+}
 .d_international_score,
 .d_clean_score {
 	font-size: 50vh;
