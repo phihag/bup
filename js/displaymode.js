@@ -1084,7 +1084,7 @@ function render_bwf(s, container, event, court, match, colors) {
 		}
 
 		var team_container = uiu.el(container, 'div', 'd_international_team');
-		var player_spans = players.map(function(player, player_id) {
+		players.map(function(player, player_id) {
 			var is_server = (!match_over) && team_serving && (server.player_id === player_id);
 			var bg_css = 'background: ' + (is_server ? col : colors.bg) + ';';
 			var style = (
@@ -1131,7 +1131,7 @@ function render_bwf(s, container, event, court, match, colors) {
 		}
 
 		var points = current_score[team_id];
-		var points_el = uiu.el(team_container, 'div', {
+		uiu.el(team_container, 'div', {
 			'class': 'd_international_score' + ((points >= 10) ? ' d_international_score_dd' : ''),
 			style: 'background: ' + (team_serving ? col : colors.bg) + '; color: ' + (team_serving ? colors.bg : col),
 		}, points);
