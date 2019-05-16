@@ -5,6 +5,12 @@ function load_data(s, data) {
 	if (data.data && data.data.type === 'bup-export') {
 		data = data.data;
 	}
+
+	if ((data.status === 'ok') && Array.isArray(data.match)) {
+		// BTS export
+		return data.match[0];
+	}
+
 	if (data.type !== 'bup-export') {
 		throw new Error(s._('importexport:not an export file'));
 	}
@@ -18,7 +24,13 @@ function load_data(s, data) {
 }
 
 function import_data(s, data) {
-	var event = load_data(s, data).event;
+	var event_data = load_data(s, data);
+	var event = event_data.event;
+	if (! event) {
+		event = {
+			matches: [event_data],
+		};
+	}
 	var snet = staticnet(event);
 	network.ui_install_staticnet(s, snet);
 }
