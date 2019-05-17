@@ -2399,14 +2399,20 @@ function update(err, s, event) {
 			var is_team = event.team_competition;
 			if (is_team) {
 				_render_team_name(0);
+			} else if (event.tournament_logo_url) {
+				uiu.el(nomatch_el, 'img', {
+					src: event.tournament_logo_url,
+					style: 'height: 50vw;',
+					alt: (event.tournament_name || ''),
+				});
 			} else {
 				var tname = event.tournament_name;
 				if (tname) {
 					uiu.el(nomatch_el, 'div', {
 						style: (
-							'font-size:18vmin;'
+							'font-size:16vmin;text-align:center;'
 						),
-					}, event.tname);
+					}, tname);
 				}
 			}
 			uiu.el(nomatch_el, 'div', {
