@@ -604,20 +604,6 @@
 	display: flex;
 	flex-direction: row;
 }
-.d_onlyscore_score {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 35vmin;
-}
-.d_onlyscore_digit0 {
-	margin-left: 0.15ch;
-	margin-right: -0.15ch;
-}
-.d_onlyscore_digit1 {
-	margin-left: -0.15ch;
-	margin-right: 0.15ch;
-}
 
 .d_clubplayerslr_player_container {
 	position: relative;

@@ -2030,6 +2030,9 @@ function render_onlyscore(s, container, event, court, match, colors) {
 	var max_game_count = calc.max_game_count(match.setup.counting);
 
 	match.setup.teams.forEach(function(team, team_id) {
+		var col = colors[team_id];
+		var bg_col = colors.bg;
+
 		var team_container = uiu.el(container, 'div', 'd_onlyscore_half');
 		for (var game_idx = 0;game_idx < max_game_count;game_idx++) {
 			var team_serving = false;
@@ -2043,12 +2046,16 @@ function render_onlyscore(s, container, event, court, match, colors) {
 			}
 
 			var score_container = uiu.el(team_container, 'div', {
-				'class': 'd_onlyscore_score',
 				style: (
-					'width:' + (99 / max_game_count) + 'vw;' +
-					'background:' + (team_serving ? colors[team_id] : colors.bg) + ';' +
-					'color:' + (team_serving ? colors.bg : colors[team_id]) + ';' +
-					'border-right:' + (1 / max_game_count) + 'vw solid ' + colors.bg + ';'
+					'width:' + (95 / max_game_count) + 'vw;' +
+					'background:' + (team_serving ? col : bg_col) + ';' +
+					'color:' + (team_serving ? bg_col : col) + ';' +
+					'border-right:' + (5 / max_game_count) + 'vw solid ' + bg_col + ';' +
+					'display: flex;' +
+					'align-items: center;' +
+					'justify-content: center;' +
+					'font-size: 50vmin;' +
+					'overflow: visible hidden;'
 				),
 			});
 
@@ -2057,9 +2064,16 @@ function render_onlyscore(s, container, event, court, match, colors) {
 			if (points_str.length < 2) {
 				uiu.el(score_container, 'span', {}, points_str);
 			} else {
+				var margin = (max_game_count === 5) ? '0.15ch' : '0.07ch';
+
 				// Two digits, layout manually since we're extremely tight on space
 				utils.forEach(points_str, function(digit, digit_idx) {
-					uiu.el(score_container, 'div', 'd_onlyscore_digit' + digit_idx, digit);
+					uiu.el(score_container, 'div', {
+						style: (
+							'margin-left: ' + ((digit_idx === 0) ? '' : '-') + margin + ';' +
+							'margin-right: ' + ((digit_idx === 0) ? '-' : '') + margin
+						),
+					}, digit);
 				});
 			}
 		}
