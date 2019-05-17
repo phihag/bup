@@ -71,6 +71,7 @@ dm_style=STYLECODE  In display mode, start with the specified style.
 	greyish         Overview for team competitions with muted gray colors
 	oncourt         court score with teams, not colored, including points in all games
 	onlyplayers     players only
+	bwfonlyplayers  players only, in BWF definition of names ("LASTNAME, Firstname" and fixed font size)
 	onlyscore       score (all games) only
 	clubplayers     team + players
 	clubplayerslr   team + players (home left / away right)

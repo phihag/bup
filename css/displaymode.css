@@ -221,9 +221,12 @@
 	height: 50%;
 }
 .d_international_player_container,
-.d_clean_player_container {
+.d_clean_player_container,
+.d_bwfonlyplayers_player_container {
 	position: relative;
 	width: 100%;
+	max-width: 100%;
+	overflow-x: hidden;
 	display: flex;
 	align-items: center;
 }

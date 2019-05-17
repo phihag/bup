@@ -511,6 +511,7 @@ var i18n_en = {
 'displaymode|tim': 'Tim',
 'displaymode|greyish': 'Greyish',
 'displaymode|onlyplayers': 'players only',
+'displaymode|bwfonlyplayers': 'BWF players only',
 'displaymode|onlyscore': 'score only',
 'displaymode|clubplayers': 'team + players',
 'displaymode|clubplayerslr': 'team + players (left / right)',

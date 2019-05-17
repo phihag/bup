@@ -508,6 +508,7 @@ var i18n_frch = {
 'displaymode|tim': 'Tim',
 'displaymode|greyish': 'grisonnant',
 'displaymode|onlyplayers': 'Joueurs seulement',
+'displaymode|bwfonlyplayers': 'BWF joueurs seulement',
 'displaymode|onlyscore': 'Points seulement',
 'displaymode|clubplayers': 'Equipe + joueurs',
 'displaymode|clubplayerslr': 'Equipe + joueurs (gauche / droite)',

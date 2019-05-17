@@ -512,6 +512,7 @@ var i18n_de = {
 'displaymode|greyish': 'Gräulich',
 'displaymode|tournament_overview': 'Turnier-Übersicht',
 'displaymode|castall': 'Cast',
+'displaymode|bwfonlyplayers': 'BWF nur Spieler',
 'displaymode|onlyplayers': 'Nur Spieler',
 'displaymode|onlyscore': 'Nur Spielstand',
 'displaymode|clubplayers': 'Verein + Spieler',
