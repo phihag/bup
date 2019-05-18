@@ -2382,7 +2382,8 @@ function update(err, s, event) {
 			var nomatch_el = uiu.el(container, 'div', {
 				'class': 'd_nomatch',
 				style: (
-					'color:' + colors.fg2
+					'color:' + (event.tournament_logo_foreground_color || colors.fg2) + ';' +
+					'background:' + (event.tournament_logo_background_color || '#000') + ';'
 				),
 			});
 

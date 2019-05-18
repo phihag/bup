@@ -85,6 +85,8 @@ tournament_name Name of the overall tournament (will be present on scoresheet),
                 e.g. "1. Bundesliga 2018/2019".
                 Generated from league_key if not present (this is recommended).
 tournament_logo_url An URL for a logo of this tournament, to use as a default graphic.
+tournament_logo_background_color CSS background color behind the logo.
+tournament_logo_foreground_color CSS color for text in front of the logo.
 series_name     Name of the tournament series.
                 Will be used on selected event report sheets.
                 e.g. "Mannschaftsmeisterschaft Bayern 2018/2019"

@@ -1,5 +1,7 @@
 show nationality in choice of server / receiver
 
+check for memory leaks, especially after hours of errors
+
 PDF / print scoresheet buttons smaller
 
 firefox bug: dmode click anywhere, then cannot go out
