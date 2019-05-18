@@ -442,9 +442,17 @@ function render_clients(clients) {
 					selected: 'selected',
 				}, '');
 				ev.matches.forEach(function(m) {
+					var match_name = m.setup.match_name;
+					if (! ev.team_competition) {
+						match_name += ' ' + m.setup.event_name + ' ' + m.setup.teams.map(function(team) {
+							return team.players.map(function(p) {
+								return p.name;
+							}).join('/')
+						}).join(' v ');
+					}
 					uiu.el(change_match_sel, 'option', {
 						value: m.setup.match_id,
-					}, m.setup.match_name);
+					}, match_name);
 				});
 				uiu.el(match_change_form, 'button', {
 					'role': 'submit',
