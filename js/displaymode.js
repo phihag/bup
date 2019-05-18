@@ -2055,7 +2055,7 @@ function render_onlyscore(s, container, event, court, match, colors) {
 					'align-items: center;' +
 					'justify-content: center;' +
 					'font-size: 50vmin;' +
-					'overflow: visible hidden;'
+					'overflow: hidden;'
 				),
 			});
 

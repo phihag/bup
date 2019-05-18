@@ -1,5 +1,8 @@
 show nationality in choice of server / receiver
 
+add a debug option to send all source code files, also via referee mode
+	and compare them to what the referee mode gets
+
 check for memory leaks, especially after hours of errors
 
 PDF / print scoresheet buttons smaller
