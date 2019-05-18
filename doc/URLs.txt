@@ -22,6 +22,7 @@ edemo     Demo of an event (empty)
 intdemo   International match demo
 nlademo   Demo of Swiss National League
 nrwdemo   Demo of a match in the lower divisions in NRW
+obldemo   Austrian Bundesliga demo
 rlmdemo   German Regionalliga Mitte demo
 rlndemo   German Regionalliga Nord demo
 rlsodemo  German Regionalliga SüdOst demo

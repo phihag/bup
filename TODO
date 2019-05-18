@@ -1,3 +1,5 @@
+import from clipboard
+
 show nationality in choice of server / receiver
 
 add a debug option to send all source code files, also via referee mode
@@ -16,6 +18,8 @@ referee mode for tournaments
 tournamentsoftware
 
 "Mannschaft" hat aufgegeben
+
+ad: clock until (with text)
 
 create video of progress (to embed) -> bc MrArc2
 	add new module
