@@ -447,7 +447,7 @@ function render_clients(clients) {
 						match_name += ' ' + m.setup.event_name + ' ' + m.setup.teams.map(function(team) {
 							return team.players.map(function(p) {
 								return p.name;
-							}).join('/')
+							}).join('/');
 						}).join(' v ');
 					}
 					uiu.el(change_match_sel, 'option', {
