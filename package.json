@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "node-webcrypto-ossl": "*",
-    "wrtc": "0.0.63",
+    "wrtc": "^0.4.1",
     "ws": "*"
   },
   "devDependencies": {
@@ -24,7 +24,7 @@
     "istanbul": "*",
     "mocha": "*",
     "parse-appcache-manifest": "*",
-    "puppeteer": "*",
+    "puppeteer": "^1.16.0",
     "stylelint": "*",
     "stylelint-config-standard": "*",
     "supervisor": "*",
