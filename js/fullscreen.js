@@ -110,7 +110,7 @@ function autostart() {
 	});
 
 	// Do not use the click module: We need an actual click event
-	uiu.qs('.go_fullscreen_go,').addEventListener('click', function() {
+	uiu.qs('.go_fullscreen_go').addEventListener('click', function() {
 		toggle();
 		go_fullscreen_hide();
 	});
