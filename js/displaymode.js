@@ -2403,7 +2403,7 @@ function update(err, s, event) {
 			} else if (event.tournament_logo_url) {
 				uiu.el(nomatch_el, 'img', {
 					src: event.tournament_logo_url,
-					style: 'height: 50vw;',
+					style: 'height: 70vh;',
 					alt: (event.tournament_name || ''),
 				});
 			} else {
