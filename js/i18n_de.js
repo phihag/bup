@@ -17,6 +17,7 @@ var i18n_de = {
 'Call referee': 'Referee rufen',
 'Are you retiring?': 'Werden Sie aufgeben?',
 'import link': 'Aus Datei importieren ...',
+'import:clipboard': 'Aus Zwischenablage importieren',
 'send export': 'Export senden',
 'select pick': 'Auswählen',
 'back': 'Zurück',
