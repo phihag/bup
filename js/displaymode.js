@@ -1012,19 +1012,21 @@ function render_international(s, container, event, court, match, colors) {
 				'style': 'height: ' + (is_doubles ? '50%' : '100%') + ';',
 				'class': 'd_international_player_container',
 			});
-			var flag_container = uiu.el(player_container, 'div', {
-				style: (
-					'width: 14vh;' +
-					'height: ' + (is_doubles ? '100%' : '50%') + ';' +
-					bg_css +
-					'display:flex; align-items: center; justify-content:center;'),
-			});
-			if (player.nationality) {
-				uiu.el(flag_container, 'img', {
-					style: 'display:block;height:14vh;width:14vh;',
-					src: 'div/flags/' + player.nationality + '.svg',
-					alt: player.nationality,
+			if (event.nation_competition) {
+				var flag_container = uiu.el(player_container, 'div', {
+					style: (
+						'width: 14vh;' +
+						'height: ' + (is_doubles ? '100%' : '50%') + ';' +
+						bg_css +
+						'display:flex; align-items: center; justify-content:center;'),
 				});
+				if (player.nationality) {
+					uiu.el(flag_container, 'img', {
+						style: 'display:block;height:14vh;width:14vh;',
+						src: 'div/flags/' + player.nationality + '.svg',
+						alt: player.nationality,
+					});
+				}
 			}
 			var pel = uiu.el(player_container, 'div', {
 				style: style,
@@ -1052,7 +1054,7 @@ function render_international(s, container, event, court, match, colors) {
 
 		player_spans.forEach(function(ps) {
 			_setup_autosize(ps, right_border, function(parent_node) {
-				return 0.7 * parent_node.offsetHeight;
+				return 0.8 * parent_node.offsetHeight;
 			});
 		});
 	});
