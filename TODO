@@ -1,10 +1,11 @@
-dmode clean: show 0 if no setupsheet
-
 clean UI
 
 battery watch
 
 show umpire name if set up in start
+
+
+lower fullscreen button does not switch text if upper is pressed
 
 
 dmode empty: court larger
