@@ -1353,7 +1353,6 @@ function render_clean(s, container, event, court, match, colors) {
 	var pcount = is_doubles ? 2 : 1;
 	var current_score = nscore[nscore.length - 1] || [];
 	var server = determine_server(match, current_score);
-	var first_game = (nscore.length < 2);
 	var mwinner = calc.match_winner(match.setup.counting, nscore);
 	var match_over = (mwinner === 'left') || (mwinner === 'right');
 
@@ -1392,22 +1391,16 @@ function render_clean(s, container, event, court, match, colors) {
 			return uiu.el(pel, 'div', {}, pname);
 		});
 
-		var right_border;
-		if (! first_game) {
-			right_border = uiu.el(team_container, 'div', {
-				'class': 'd_clean_gscore',
-				style: 'background: ' + colors.bg + '; color: ' + colors.fg + ';',
-			}, gscore[team_id]);
-		}
+		var right_border = uiu.el(team_container, 'div', {
+			'class': 'd_clean_gscore',
+			style: 'background: ' + colors.bg + '; color: ' + colors.fg + ';',
+		}, gscore[team_id]);
 
 		var points = current_score[team_id];
-		var points_el = uiu.el(team_container, 'div', {
+		uiu.el(team_container, 'div', {
 			'class': 'd_clean_score' + ((points >= 10) ? ' d_clean_score_dd' : ''),
 			style: 'background: ' + (team_serving ? col : colors.bg) + '; color: ' + (team_serving ? colors.bg : col),
 		}, points);
-		if (!right_border) {
-			right_border = points_el;
-		}
 
 		player_spans.forEach(function(ps) {
 			_setup_autosize(ps, right_border, function(parent_node) {

@@ -1,10 +1,15 @@
-international looks funny without flags at a non-international tournament
-... and should show discipline
+dmode clean: show 0 if no setupsheet
 
 clean UI
 
 battery watch
 
+show umpire name if set up in start
+
+
+dmode empty: court larger
+
+dmode like international but with discipline
 
 tdemo_inprogress (for national + international)
 
