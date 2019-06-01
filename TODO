@@ -1,10 +1,23 @@
-import from clipboard
+international looks funny without flags at a non-international tournament
+... and should show discipline
 
 clean UI
+
+battery watch
+
+
+tdemo_inprogress (for national + international)
+
+scoresheet to PDF printing
+
+import from clipboard
+
 
 show nationality in choice of server / receiver
 
 allow BWF without flags
+
+disable changing of courts during match
 
 add a debug option to send all source code files, also via referee mode
 	and compare them to what the referee mode gets
@@ -41,6 +54,8 @@ remove gewonnen von mit
 remove go_fullscreen_wrapper?
 
 show umpire name in top left in bts
+
+correctly sync walkover
 
 doc: pin windows https://support.google.com/android/answer/6118421?hl=en-GB
 
