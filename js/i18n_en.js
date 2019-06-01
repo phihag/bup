@@ -222,6 +222,10 @@ var i18n_en = {
 'settings:counting|1x21': 'One Game (1x21)',
 'settings:counting|1x11_15': 'One Game 2016 Experiment Option 1 (1x11 until max. 15)',
 'settings:counting|3x15_18': 'Shortened (3x15 until max. 18)',
+'settings:style': 'User Interface',
+'settings:style:default': 'Default',
+'settings:style:complete': 'Complete',
+'settings:style:onlycourt': 'Only court',
 
 'settings:warmup': 'Warmup:',
 'settings:warmup:bwf-2016': 'BWF 2016+ (120s, ready after 90s)',

@@ -55,6 +55,7 @@ var default_settings = {
 	refmode_referee_ws_url: 'wss://live.aufschlagwechsel.de/refmode_hub/',
 	refmode_client_node_name: '',
 	referee_service_judges: false,
+	settings_style: 'default',
 };
 
 function load() {
@@ -250,6 +251,7 @@ var _settings_selects = [
 	'language',
 	'wakelock',
 	'dads_mode',
+	'settings_style',
 ];
 
 function update_court_settings(s) {
@@ -482,9 +484,18 @@ function on_mode_change(s) {
 		uiu.setClass(a, 'settings_mode_active', is_active);
 	});
 
-	uiu.qsEach('#settings_wrapper [data-bup-modes]', function(el) {
+	uiu.qsEach('#settings_wrapper', function(el) {
 		var modes = el.getAttribute('data-bup-modes');
-		uiu.visible(el, modes.indexOf(mode) >= 0);
+		var visible = false;
+		if (modes && (modes.indexOf(mode) < 0)) {
+			visible = false;
+		} else if (mode === 'umpire') {
+			var settings_style = s.settings.settings_style;
+			if (settings_style === '') {
+
+			} // else: default, everything visible
+		}
+		uiu.visible(el, visible);
 	});
 	update_court_settings(s);
 

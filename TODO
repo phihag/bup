@@ -12,9 +12,9 @@ dmode empty: court larger
 
 dmode like international but with discipline
 
-tdemo_inprogress (for national + international)
+new dmode: international with discipline
 
-scoresheet to PDF printing
+tdemo_inprogress (for national + international)
 
 import from clipboard
 
