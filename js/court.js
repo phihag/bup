@@ -26,6 +26,7 @@ function install(container) {
 		res[key + '_text'] = span;
 	}
 	create_text('court_str');
+	create_text('umpire_name');
 	create_text('left_team');
 	create_text('right_team');
 	create_text('match_name');
@@ -100,6 +101,8 @@ function render(s, cui) {
 		cui.editmode_arrow.style.WebkitTransform = transform_val;
 	}
 	uiu.$visible(cui.arrow, (cdata.left_serving !== null));
+	uiu.text(cui.umpire_name, s.setup.umpire_name || '');
+	uiu.visible(cui.umpire_name, (cdata.left_serving === null));
 
 	uiu.text(cui.match_name_text, s.setup.match_name ? s.setup.match_name : '');
 

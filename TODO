@@ -1,8 +1,12 @@
+show umpire name if set up in start
+
+
 check that reloading in game works in clean UI
 
 battery watch
 
-show umpire name if set up in start
+leave match button
+
 
 
 lower fullscreen button does not switch text if upper is pressed

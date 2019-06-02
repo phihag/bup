@@ -28,7 +28,8 @@
 .court_right_team,
 .court_left_team,
 .court_match_name,
-.court_court_str {
+.court_court_str,
+.court_umpire_name {
 	position: absolute;
 	text-align: center;
 	font-size: inherit;
@@ -42,6 +43,7 @@
 	background-color: rgba(194, 211, 194, 0.4);
 }
 .court_court_str > span,
+.court_umpire_name > span,
 .court_match_name > span {
 	background-color: rgba(194, 211, 194, 0.8);
 }
@@ -61,6 +63,13 @@
 	top: 1%;
 	left: 50%;
 	cursor: pointer;
+	transform: translate(-50%, 0);
+}
+.court_umpire_name {
+	color: #555;
+	font-size: 5vmin;
+	top: 8vmin;
+	left: 50%;
 	transform: translate(-50%, 0);
 }
 .court_match_name {
