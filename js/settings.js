@@ -373,6 +373,9 @@ function on_change(s, name) {
 	case 'fullscreen_ask':
 		fullscreen.update_fullscreen_button();
 		break;
+	case 'settings_style':
+		on_mode_change(s);
+		break;
 	}
 }
 
@@ -484,16 +487,29 @@ function on_mode_change(s) {
 		uiu.setClass(a, 'settings_mode_active', is_active);
 	});
 
-	uiu.qsEach('#settings_wrapper', function(el) {
+	var settings_style = s.settings.settings_style;
+	if (settings_style === 'default') {
+		var netw = network.get_netw();
+		settings_style = (netw && netw.limited_ui) ? 'clean' : 'complete';
+	}
+	uiu.qsEach('#settings_wrapper *[data-bup-modes]', function(el) {
 		var modes = el.getAttribute('data-bup-modes');
-		var visible = false;
-		if (modes && (modes.indexOf(mode) < 0)) {
+		var visible = true;
+		if (modes.indexOf(mode) < 0) {
 			visible = false;
-		} else if (mode === 'umpire') {
-			var settings_style = s.settings.settings_style;
-			if (settings_style === '') {
-
-			} // else: default, everything visible
+		} else {
+			if (mode === 'umpire') {
+				var styles = el.getAttribute('data-bup-styles');
+				if (styles && (styles.indexOf(settings_style) >= 0)) {
+					visible = true;
+				} else {
+					if (styles) {
+						visible = false;
+					} else if (settings_style === 'clean') {
+						visible = false;
+					} // else: complete, everything visible
+				}
+			}
 		}
 		uiu.visible(el, visible);
 	});

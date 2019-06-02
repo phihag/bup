@@ -225,7 +225,7 @@ var i18n_en = {
 'settings:style': 'User Interface',
 'settings:style:default': 'Default',
 'settings:style:complete': 'Complete',
-'settings:style:onlycourt': 'Only court',
+'settings:style:clean': 'Clean',
 
 'settings:warmup': 'Warmup:',
 'settings:warmup:bwf-2016': 'BWF 2016+ (120s, ready after 90s)',

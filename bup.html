@@ -225,13 +225,13 @@
 	<button class="go_editmode_button" data-i18n="settings:Edit Manually"></button>
 </div>
 
-<div class="setup" data-bup-modes="umpire">
+<div class="setup" data-bup-modes="umpire" data-bup-styles="clean complete">
 	<div class="setup_network_container default-invisible">
 	<div class="setup_network_message"></div>
 	<h2 class="setup_network_heading"><span class="setup_network_event" data-i18n="settings:Matches"></span><button class="setup_network_matches_reload image-button"><span></span></button><div class="setup_network_status"></div></h2>
 	<div id="setup_network_matches"></div>
 
-	<div class="setup_linkline">
+	<div class="setup_linkline" data-bup-modes="umpire" data-bup-styles="complete">
 		<a href="#" class="setupsheet_link default-invisible" data-i18n="setupsheet:link"></a>
 		<a href="#" class="editevent_link default-invisible" data-i18n="editevent:link"></a>
 		<a href="#" class="order_link" data-i18n="settings:Order link"></a>
@@ -326,6 +326,8 @@
 	</div>
 </div>
 
+<div class="default-invisible" data-bup-modes="umpire" data-bup-styles="clean" style="height: 10em;"></div>
+
 <div class="settings">
 
 <div class="d_login_links"></div><button data-bup-modes="display" class="d_hide_settings" data-i18n="displaymode:hide settings"></button>
@@ -358,19 +360,19 @@
 <div class="settings_court_automatic default-invisible"><label><span data-i18n="settings:Select Court"></span> <select name="court_select" size="1"></select></label></div>
 <label data-bup-modes="umpire"><span data-i18n="settings:Umpire"></span>: <input type="text" name="umpire_name" /></label>
 <label data-bup-modes="umpire"><span data-i18n="settings:Service judge"></span>: <input type="text" name="service_judge_name" /></label>
-<label><span data-i18n="settings:Language"></span>: <select size="1" class="settings_language" name="language"></select></label>
+<label data-bup-modes="umpire display referee"><span data-i18n="settings:Language"></span>: <select size="1" class="settings_language" name="language"></select></label>
 <div data-bup-modes="DEBUG"><label><span data-i18n="settings:wakelock:label"></span> <select name="wakelock" size="1"><option data-i18n="settings:wakelock:display" value="display"></option><option data-i18n="settings:wakelock:always" value="always"></option><option data-i18n="settings:wakelock:never" value="never"></option></select></label></div>
-<div class="fullscreen_line" data-bup-modes="umpire display"><label><span data-i18n="settings:Request Fullscreen on Startup"></span><select name="fullscreen_ask"><option value="always" data-i18n="settings:fullscreen_ask|always"></option><option value="auto" data-i18n="settings:fullscreen_ask|auto"></option><option value="never" data-i18n="settings:fullscreen_ask|never"></option></select></label> <button class="fullscreen_button" style="margin-left: 1em;" data-i18n="settings:Go Fullscreen"></button></div>
+<div class="fullscreen_line" data-bup-modes="umpire display" data-bup-styles="clean complete"><label><span data-i18n="settings:Request Fullscreen on Startup"></span><select name="fullscreen_ask"><option value="always" data-i18n="settings:fullscreen_ask|always"></option><option value="auto" data-i18n="settings:fullscreen_ask|auto"></option><option value="never" data-i18n="settings:fullscreen_ask|never"></option></select></label> <button class="fullscreen_button" style="margin-left: 1em;" data-i18n="settings:Go Fullscreen"></button></div>
 <label data-bup-modes="umpire"><input type="checkbox" name="shuttle_counter" /><span data-i18n="settings:Shuttle Counter"></span></label>
 <label data-bup-modes="umpire"><span data-i18n="settings:show_announcements"></span><select name="show_announcements"><option value="all" data-i18n="settings:show_announcements|all"></option><option value="except-first" data-i18n="settings:show_announcements|except-first"></option><option value="none" data-i18n="settings:show_announcements|none"></option></select></label>
 <label data-bup-modes="umpire"><input type="checkbox" name="negative_timers" /><span data-i18n="settings:Negative Timers"></span></label>
 <label data-bup-modes="umpire"><input type="checkbox" name="editmode_doubleclick" /><span data-i18n="settings:editmode doubleclick"></span></label>
 <label data-bup-modes="umpire"><span data-i18n="settings:click_mode"></span>: <select name="click_mode" size="1"><option data-i18n="settings:click_mode:auto" value="auto"></option><option data-i18n="settings:click_mode:click" value="click"></option><option data-i18n="settings:click_mode:touchstart" value="touchstart"></option><option data-i18n="settings:click_mode:touchend" value="touchend"></option></select></label>
 <label data-bup-modes="umpire"><span data-i18n="settings:Button Block Timeout"></span>: <input type="number" name="button_block_timeout" min="0" value="1500" max="5000" /></label>
-<label><span data-i18n="settings:Network Timeout"></span>: <input type="number" name="network_timeout" min="1" value="1000" max="600000" /></label>
+<label data-bup-modes="umpire display referee"><span data-i18n="settings:Network Timeout"></span>: <input type="number" name="network_timeout" min="1" value="1000" max="600000" /></label>
 <label data-bup-modes="umpire"><span data-i18n="settings:Network Repeat Interval"></span>: <input type="number" name="network_update_interval" min="1" value="10000" max="600000" /></label>
 <label class="default-invisible" data-bup-modes="display"><span data-i18n="settings:Network Repeat Interval"></span>: <input type="number" name="displaymode_update_interval" min="1" value="500" max="600000" /></label>
-<label data-bup-modes="umpire"><span data-i18n="settings:style"></span>: <select name="settings_style"><option data-i18n="settings:style:default" value="default"></option><option data-i18n="settings:style:complete" value="complete"></option><option data-i18n="settings:style:onlycourt" value="onlycourt"></option></select></label>
+<label data-bup-modes="umpire" data-bup-styles="complete clean"><span data-i18n="settings:style"></span>: <select name="settings_style"><option data-i18n="settings:style:default" value="default"></option><option data-i18n="settings:style:complete" value="complete"></option><option data-i18n="settings:style:clean" value="clean"></option></select></label>
 </div>
 
 <div class="settings_mode"><span data-i18n="settings:mode:label"></span>

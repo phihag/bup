@@ -265,6 +265,10 @@ var i18n_frch = {
 'settings:refmode:ws_url': 'URL du hub:',
 'settings:refmode:redirected': 'Hub local: ',
 'settings:refmode:service judges': 'Match avec juge de service',
+'settings:style': 'Interface utilisateur',
+'settings:style:default': 'Défaut',
+'settings:style:complete': 'Achevée',
+'settings:style:clean': 'Nettoyer',
 
 'settings:mode:label': 'Mode:',
 'settings:mode:umpire': 'Arbitre',

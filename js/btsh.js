@@ -166,6 +166,7 @@ return {
 	fetch_courts: fetch_courts,
 	service_name: service_name,
 	editable: editable,
+	limited_ui: true,
 };
 
 }

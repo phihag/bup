@@ -642,6 +642,7 @@ function ui_init(s, hash_query) {
 		uiu.hide_qs('.nonet_links');
 		login.render_links(s, uiu.qs('.login_links'));
 		login.render_links(s, uiu.qs('.d_login_links'));
+		settings.on_mode_change(s);
 
 		fetch_courts(s, function() {
 			ui_init_court(s, hash_query);
