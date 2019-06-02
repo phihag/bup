@@ -273,7 +273,16 @@ function ui_render_matchlist(s, event) {
 			'class': 'setup_network_match_away_players',
 		}, _players_str(match.setup.teams[1]));
 
+		var umpire_name = match.setup.umpire_name;
+		if (umpire_name) {
+			if (match.setup.service_judge_name) {
+				umpire_name += ' + ' + match.setup.service_judge_name;
+			}
 
+			uiu.el(btn, 'span', {
+				'class': 'setup_network_umpire_name',
+			}, umpire_name);
+		}
 		var score_text = _score_text(match.network_score);
 		uiu.el(btn, 'span', {
 			'class': 'setup_network_match_score',

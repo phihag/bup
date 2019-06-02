@@ -120,6 +120,9 @@ button > .loading-icon {
 .setup_network_match_score {
 	font-style: italic;
 }
+.setup_network_umpire_name {
+	color: #444;
+}
 
 .setup_network_heading::after {
 	/* Set line-height to height, so that we can vertically center with vertical-align: middle; */
