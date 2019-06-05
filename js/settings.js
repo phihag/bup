@@ -505,7 +505,7 @@ function on_mode_change(s) {
 				} else {
 					if (styles) {
 						visible = false;
-					} else if (settings_style === 'clean') {
+					} else if ((settings_style === 'clean') || (settings_style === 'focus')) {
 						visible = false;
 					} // else: complete, everything visible
 				}

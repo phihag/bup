@@ -269,6 +269,7 @@ var i18n_frch = {
 'settings:style:default': 'Défaut',
 'settings:style:complete': 'Achevée',
 'settings:style:clean': 'Nettoyer',
+'settings:style:focus': 'Concentré',
 
 'settings:mode:label': 'Mode:',
 'settings:mode:umpire': 'Arbitre',

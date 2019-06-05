@@ -227,6 +227,7 @@ var i18n_de = {
 'settings:style:default': 'Standard',
 'settings:style:complete': 'Vollständig',
 'settings:style:clean': 'Nur Feld und Vollbild',
+'settings:style:focus': 'Fokus',
 
 'settings:warmup': 'Spielfeld\u00ADgewöhnungszeit',
 'settings:warmup:bwf-2016': 'BWF ab 2016 (90s)',

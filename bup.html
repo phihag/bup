@@ -225,7 +225,7 @@
 	<button class="go_editmode_button" data-i18n="settings:Edit Manually"></button>
 </div>
 
-<div class="setup" data-bup-modes="umpire" data-bup-styles="clean complete">
+<div class="setup" data-bup-modes="umpire" data-bup-styles="clean focus complete">
 	<div class="setup_network_container default-invisible">
 	<div class="setup_network_message"></div>
 	<h2 class="setup_network_heading"><span class="setup_network_event" data-i18n="settings:Matches"></span><button class="setup_network_matches_reload image-button"><span></span></button><div class="setup_network_status"></div></h2>
@@ -326,7 +326,7 @@
 	</div>
 </div>
 
-<div class="default-invisible" data-bup-modes="umpire" data-bup-styles="clean" style="height:6em;"></div>
+<div class="default-invisible" data-bup-modes="umpire" data-bup-styles="clean focus" style="height:6em;"></div>
 
 <div class="settings">
 
@@ -357,7 +357,7 @@
 <div data-bup-modes="display" class="settings_d_scale"><label><span data-i18n="displaymode:scale"></span> <input name="d_scale" type="number" min="20" max="500" /></label></div>
 
 <div class="settings_court_manual"><label><span data-i18n="settings:Court Description"></span> <input type="text" name="court_description" size="8" data-i18n-placeholder="settings:Court Description.placeholder" /></label> <span data-i18n="settings:Court Number"></span> <label> <input type="number" name="court_id" min="1" /></label></div>
-<div class="settings_court_automatic default-invisible"><label><span data-i18n="settings:Select Court"></span> <select name="court_select" size="1"></select></label></div>
+<div class="settings_court_automatic default-invisible"><label data-bup-modes="umpire" data-bup-styles="clean complete"><span data-i18n="settings:Select Court"></span> <select name="court_select" size="1"></select></label></div>
 
 <div class="default-invisible" data-bup-modes="umpire" data-bup-styles="clean" style="height: 1em;"></div>
 
@@ -375,7 +375,7 @@
 <label data-bup-modes="umpire display referee"><span data-i18n="settings:Network Timeout"></span>: <input type="number" name="network_timeout" min="1" value="1000" max="600000" /></label>
 <label data-bup-modes="umpire"><span data-i18n="settings:Network Repeat Interval"></span>: <input type="number" name="network_update_interval" min="1" value="10000" max="600000" /></label>
 <label class="default-invisible" data-bup-modes="display"><span data-i18n="settings:Network Repeat Interval"></span>: <input type="number" name="displaymode_update_interval" min="1" value="500" max="600000" /></label>
-<label data-bup-modes="umpire" data-bup-styles="complete clean"><span data-i18n="settings:style"></span>: <select name="settings_style"><option data-i18n="settings:style:default" value="default"></option><option data-i18n="settings:style:complete" value="complete"></option><option data-i18n="settings:style:clean" value="clean"></option></select></label>
+<label data-bup-modes="umpire" data-bup-styles="complete clean focus"><span data-i18n="settings:style"></span>: <select name="settings_style"><option data-i18n="settings:style:default" value="default"></option><option data-i18n="settings:style:complete" value="complete"></option><option data-i18n="settings:style:clean" value="clean"></option><option data-i18n="settings:style:focus" value="focus"></option></select></label>
 </div>
 
 <div class="settings_mode" data-bup-modes="umpire display referee"><span data-i18n="settings:mode:label"></span>
