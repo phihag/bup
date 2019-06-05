@@ -1,15 +1,12 @@
 dmode tournament_overview: option to hide done matches
 
-check that reloading in game works in clean UI
-
 battery watch
 
 leave match button
 
-
+"none" mode: hide export, mode switcher, fullscreen
 
 lower fullscreen button does not switch text if upper is pressed
-
 
 dmode empty: court larger
 
@@ -20,7 +17,6 @@ new dmode: international with discipline
 tdemo_inprogress (for national + international)
 
 import from clipboard
-
 
 show nationality in choice of server / receiver
 
