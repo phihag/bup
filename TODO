@@ -1,8 +1,12 @@
+scoresheet PDF font size in Chrome is broken
+
 dmode tournament_overview: option to hide done matches
 
 battery watch
 
 leave match button
+
+correctly transmit resignation
 
 lower fullscreen button does not switch text if upper is pressed
 
@@ -15,6 +19,8 @@ new dmode: international with discipline
 tdemo_inprogress (for national + international)
 
 import from clipboard
+
+correctly show let
 
 show nationality in choice of server / receiver
 
