@@ -2164,7 +2164,7 @@ function abort_timers() {
 }
 
 function render_2court(s, container, event, colors) {
-	if (!event.courts) {
+	if (!event.courts || !event.courts.length) {
 		uiu.el(container, 'div', {
 			'class': 'display_error',
 		}, 'Court information missing');
@@ -2185,10 +2185,18 @@ function render_2court(s, container, event, colors) {
 		_setup_autosize(teamname_span);
 	});
 
+	var startcourt_idx = 0;
+	event.courts.forEach(function(c, cnum) {
+		if (c.court_id == s.settings.displaymode_court_id) {
+			startcourt_idx = cnum;
+		}
+	});
+
+	var direction = (s.settings.displaymode_reverse_order ? -1 : 1);
 	for (var court_idx = 0;court_idx < 2;court_idx++) {
 		var court_container = uiu.el(container, 'div', 'd_2court_side' + court_idx);
 
-		var real_court_idx = s.settings.displaymode_reverse_order ? (1 - court_idx) : court_idx;
+		var real_court_idx = (startcourt_idx + court_idx * direction + event.courts.length) % event.courts.length;
 		var court = event.courts[real_court_idx];
 		var match = _match_by_court(event, court);
 
@@ -2231,7 +2239,8 @@ function render_2court(s, container, event, colors) {
 			}, gscore[team_id]);
 		});
 
-		uiu.el(court_container, 'div', 'd_2court_info', match.setup.match_name);
+		var match_name = (match.setup.event_name || '').replace(/(?:\s*-)?\s*Qualification/, 'Q');
+		uiu.el(court_container, 'div', 'd_2court_info', match_name);
 
 		var timer_state = _extract_timer_state(s, match);
 		if (timer_state) {
@@ -2603,7 +2612,7 @@ function active_colors(s, style_id) {
 
 function option_applies(style_id, option_name) {
 	var BY_STYLE = {
-		'2court': ['team_colors', 'c0', 'c1', 'cfg', 'cbg', 'reverse_order', 'show_pause'],
+		'2court': ['court_id', 'team_colors', 'c0', 'c1', 'cfg', 'cbg', 'reverse_order', 'show_pause'],
 		'top+list': ['reverse_order'],
 		andre: ['court_id', 'cfg', 'cbg', 'cfg2'],
 		bwf: ['court_id', 'team_colors', 'c0', 'c1', 'cfg', 'cbg'],

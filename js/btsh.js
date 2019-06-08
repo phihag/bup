@@ -86,7 +86,8 @@ function send_press(s) {
 function list_matches(s, cb) {
 	var court_id = '';
 	if ((s.ui && s.ui.displaymode_visible)) {
-		if (displaymode.option_applies(s.settings.displaymode_style, 'court_id')) {
+		var style = s.settings.displaymode_style;
+		if (displaymode.option_applies(style, 'court_id') && (style != '2court')) {
 			court_id = s.settings.displaymode_court_id;
 		}
 	} else {
