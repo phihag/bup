@@ -1,4 +1,9 @@
-scoresheet PDF font size in Chrome is broken
+onmyright wrong if combined nationalities!
+
+with bts: server wrongly indicated at start of second game
+
+
+scoresheet PDF font size in Chrome is broken (see stash)
 
 dmode tournament_overview: option to hide done matches
 
@@ -6,7 +11,7 @@ battery watch
 
 leave match button
 
-correctly transmit resignation
+correctly transmit resignation/walkover
 
 lower fullscreen button does not switch text if upper is pressed
 
@@ -20,9 +25,9 @@ tdemo_inprogress (for national + international)
 
 import from clipboard
 
-correctly show let
-
 show nationality in choice of server / receiver
+
+at international tournaments: show nationality on match buttons
 
 allow BWF without flags
 
@@ -32,8 +37,6 @@ add a debug option to send all source code files, also via referee mode
 	and compare them to what the referee mode gets
 
 check for memory leaks, especially after hours of errors
-
-PDF / print scoresheet buttons smaller
 
 firefox bug: dmode click anywhere, then cannot go out
 
