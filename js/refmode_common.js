@@ -10,7 +10,7 @@ function craft_event(s, match_storage_module) {
 		'matchday', 'starttime', 'date',
 		'location',
 		'protest', 'notes', 'spectators', 'umpires',
-		'team_competition', 'team_names', 'league_key',
+		'team_competition', 'nation_competition', 'team_names', 'league_key',
 		'all_players', 'backup_players', 'present_players', 'listed_players',
 		'report_urls',
 	]);

@@ -4677,7 +4677,107 @@ _describe('pronunciation', function() {
 			'0 beide.\n' +
 			'Bitte spielen.'
 		);
+	});
 
+	_it('mixed-nationality teams in international tournaments', () => {
+		const presses = [{
+			type: 'pick_side',
+			team1_left: false,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		}, {
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 0,
+		}];
+		const s = state_after(presses, {
+			teams: [{
+				players: [{name: 'Denise', nationality: 'DEN'}, {name: 'Svea', nationality: 'SWE'}],
+				name: 'Denmark / Sweden (generated)',
+			}, {
+				players: [{name: 'Beatrix', nationality: 'BEL'}, {name: 'Natalia', nationality: 'NED'}],
+				name: 'Belgium / Netherlands (generated)',
+			}],
+			is_doubles: true,
+			team_competition: false,
+			nation_competition: true,
+			counting: '3x21',
+		});
+
+		assert.strictEqual(
+			pronounce_en(s),
+			'Ladies and Gentlemen:\n' +
+			'On my right,\n' +
+			'Denise, Denmark and Svea, Sweden,\n' +
+			'and on my left,\n' +
+			'Beatrix, Belgium and Natalia, Netherlands.\n' +
+			'Denise to serve to Beatrix.\n\n' +
+			'love all.\n' +
+			'Play.'
+		);
+		assert.strictEqual(
+			pronounce_de(s),
+			'Meine Damen und Herren:\n' +
+			'Zu meiner Rechten,\n' +
+			'Denise, Denmark und Svea, Sweden,\n' +
+			'und zu meiner Linken,\n' +
+			'Beatrix, Belgium und Natalia, Netherlands.\n' +
+			'Denise schlägt auf zu Beatrix.\n\n' +
+			'0 beide.\n' +
+			'Bitte spielen.'
+		);
+	});
+
+	_it('nationalities in international tournaments', () => {
+		const presses = [{
+			type: 'pick_side',
+			team1_left: false,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		}, {
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 0,
+		}];
+		const s = state_after(presses, {
+			teams: [{
+				players: [{name: 'Michael', nationality: 'GER'}, {name: 'Michaela', nationality: 'GER'}],
+				name: 'generated',
+			}, {
+				players: [{name: 'John', nationality: 'USA'}, {name: 'Jane', nationality: 'USA'}],
+			}],
+			is_doubles: true,
+			team_competition: false,
+			nation_competition: true,
+			counting: '3x21',
+		});
+
+		assert.strictEqual(
+			pronounce_en(s),
+			'Ladies and Gentlemen:\n' +
+			'On my right,\n' +
+			'Michael and Michaela, Germany,\n' +
+			'and on my left,\n' +
+			'John and Jane, USA.\n' + // Not United States of America
+			'Michael to serve to John.\n\n' +
+			'love all.\n' +
+			'Play.'
+		);
+		assert.strictEqual(
+			pronounce_de(s),
+			'Meine Damen und Herren:\n' +
+			'Zu meiner Rechten,\n' +
+			'Michael und Michaela, Germany,\n' +
+			'und zu meiner Linken,\n' +
+			'John und Jane, USA.\n' +
+			'Michael schlägt auf zu John.\n\n' +
+			'0 beide.\n' +
+			'Bitte spielen.'
+		);
 	});
 
 });

@@ -167,6 +167,7 @@ function annotate(s, event) {
 		tournament_name: event.tournament_name,
 		event_name: event.event_name,
 		team_competition: event.team_competition,
+		nation_competition: event.nation_competition,
 		away_first: event.away_first,
 		counting: event.counting,
 		date: event.date,

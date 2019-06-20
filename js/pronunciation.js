@@ -80,20 +80,30 @@ function postgame_announcement(s) {
 }
 
 function _prematch_team(s, team_id) {
-	var team = s.setup.teams[team_id];
+	var setup = s.setup;
+	var team = setup.teams[team_id];
 	var res = '';
-	if (s.setup.team_competition) {
+	if (setup.team_competition) {
 		res = eventutils.pronounce_teamname(team.name) + s._('onmyright.representedby');
 	}
-	if (s.setup.is_doubles) {
+	var different_nationalities = (team.players.length >= 2) && (team.players[0].nationality !== team.players[1].nationality);
+	var names = team.players.map(function(p, pidx) {
+		if (setup.nation_competition && !setup.team_competition && p.nationality &&
+				((pidx === 1) || different_nationalities)) {
+			return p.name + ', ' + countrycodes.lookup(p.nationality);
+		}
+		return p.name;
+	});
+	if (setup.is_doubles) {
 		res += s._('onmyright.team.doubles', {
-			p1: team.players[0].name,
-			p2: team.players[1].name,
+			p1: names[0],
+			p2: names[1],
 		});
 	} else {
-		res += team.players[0].name;
+		res += names[0];
 	}
-	if (team.name && !s.setup.team_competition) {
+
+	if (team.name && !setup.team_competition && !setup.nation_competition) {
 		res += ', ' + eventutils.pronounce_teamname(team.name);
 	}
 	return res;
@@ -414,6 +424,7 @@ return {
 if (typeof module !== 'undefined') {
 	var calc = require('./calc');
 	var compat = require('./compat');
+	var countrycodes = require('./countrycodes');
 	var eventutils = require('./eventutils');
 
 	module.exports = pronunciation;
