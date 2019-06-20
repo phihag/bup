@@ -2,16 +2,15 @@ var importexport = (function() {
 'use strict';
 
 function load_data(s, data) {
-	if (data.data && data.data.type === 'bup-export') {
+	if (data.event && Array.isArray(data.event.matches)) {
+		// Standard event format (documented in data_structures.txt)
+		if (!data.version) {
+			data.version = 2;
+		}
+	} else if (data.data && data.data.type === 'bup-export') {
+		// bup export format
 		data = data.data;
-	}
-
-	if ((data.status === 'ok') && Array.isArray(data.match)) {
-		// BTS export
-		return data.match[0];
-	}
-
-	if (data.type !== 'bup-export') {
+	} else {
 		throw new Error(s._('importexport:not an export file'));
 	}
 
