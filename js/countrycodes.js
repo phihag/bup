@@ -210,6 +210,7 @@ function lookup(code) {
 
 return {
 	lookup: lookup,
+	TABLE: IOC_TABLE, // Used by bts
 };
 })();
 
