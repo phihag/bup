@@ -693,18 +693,18 @@ function sheet_render(s, svg) {
 	var t = svg.querySelector('.scoresheet_table_container');
 	uiu.empty(t);
 
-	var padding_left = 0.5;
-	var table_left = 15;
-	var table_height = 21;
-	var table_width = 297 - table_left * 2;
-	var cols_left = 59;
+	var padding_left = 5;
+	var table_left = 150;
+	var table_height = 210;
+	var table_width = 2970 - table_left * 2;
+	var cols_left = 590;
 	var cell_width = (table_width - (cols_left - table_left)) / SCORESHEET_COL_COUNT;
 	var cell_height = table_height / 4;
 	for (var table_idx = 0;table_idx < 6;table_idx++) {
 		// Due to absence of let, declare vars here
 		var text;
 
-		var table_top = 57 + 22 * table_idx;
+		var table_top = 570 + 220 * table_idx;
 
 		_svg_el('rect', {
 			'class': 'shade',
@@ -786,13 +786,13 @@ function sheet_render(s, svg) {
 		}
 	}
 
-	var text_y_padding = 0.3;
+	var text_y_padding = 3;
 	cells.forEach(function(cell) {
 		// No let in current browsers, so declare some variables here
 		var bg;
 		var bb;
 
-		var table_top = 57 + 22 * cell.table;
+		var table_top = 570 + 220 * cell.table;
 
 		switch (cell.type) {
 		case 'dash':
@@ -882,13 +882,13 @@ function sheet_render(s, svg) {
 			break;
 		case 'editmode-sign':
 			var EDITMODE_SIGN_LINE_COUNT = 15;
-			var EDITMODE_SIGN_XR = 0.15;
+			var EDITMODE_SIGN_X_MULTIPLIER = .15;
 			var cell_left = cols_left + cell.col * cell_width;
 			var sign_top = table_top;
 			var sign_height = 4 * cell_height;
-			var path_data = 'M ' + (cell_left - EDITMODE_SIGN_XR * cell_width) + ' ' + sign_top + ' L';
+			var path_data = 'M ' + (cell_left - EDITMODE_SIGN_X_MULTIPLIER * cell_width) + ' ' + sign_top + ' L';
 			for (var i = 0;i < EDITMODE_SIGN_LINE_COUNT;i++) {
-				path_data += ' ' + (cell_left + ((i % 2 == 1) ? -1 : 1) * EDITMODE_SIGN_XR * cell_width) + ' ' + (sign_top + sign_height * (i + 1) / EDITMODE_SIGN_LINE_COUNT);
+				path_data += ' ' + (cell_left + ((i % 2 == 1) ? -1 : 1) * EDITMODE_SIGN_X_MULTIPLIER * cell_width) + ' ' + (sign_top + sign_height * (i + 1) / EDITMODE_SIGN_LINE_COUNT);
 			}
 			_svg_el('path', {
 				'class': 'editmode-sign',
@@ -1112,7 +1112,7 @@ function save_pdf(s, svg_nodes) {
 		(s._('scoresheet:[Event Scoresheet Filename]').replace('{event_name}', s.event.event_name) + '.pdf') :
 		(_match_title(s, ',') + '.pdf')
 	);
-	svg2pdf.save(svg_nodes, props, 'landscape', filename);
+	svg2pdf.save(svg_nodes, props, 'landscape', filename, 0.1);
 }
 
 function jspdf_loaded() {
