@@ -40,7 +40,7 @@
 
 <!-- top left -->
 <text class="scoresheet_tournament_name" x="15" y="13"/>
-<text class="scoresheet_event_name" font-weight="bold" y="13"/>
+<text class="scoresheet_event_name" font-weight="bold" x="50" y="13"/><!-- x will be set automatically -->
 <text class="scoresheet_match_label small-text" x="15" y="31.5" data-i18n="scoresheet:Match"/>
 <text class="scoresheet_match_name" x="29" y="32"/>
 <text class="scoresheet_date_label small-text" x="15" y="38.5" data-i18n="scoresheet:Date"/>
