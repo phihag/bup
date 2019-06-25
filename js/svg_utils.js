@@ -73,7 +73,7 @@ function translate_points(points, scale, dx, dy) {
 }
 
 function translate_path(d, scale, dx, dy) {
-	var res = (/^M/.test(d) ? '' : 'M ' + dx + ' ' + dy);
+	var res = (/^M/.test(d) || ((dx === 0) && (dy === 0)) ? '' : 'M ' + dx + ' ' + dy);
 	while (d) {
 		var cmd = parse_cmd(d);
 		if (!cmd) {
@@ -146,7 +146,7 @@ function translate_path(d, scale, dx, dy) {
 
 		d = cmd.rest;
 	}
-	return res;
+	return res.trim();
 }
 
 function translate_css_defs(defs, scale) {
@@ -312,9 +312,9 @@ return {
 	parse_cmd: parse_cmd,
 	copy: copy,
 	split_args: split_args,
+	translate_path: translate_path,
 /*@DEV*/
 	// Testing only
-	_translate_path: translate_path,
 	_translate_css: translate_css,
 /*/@DEV*/
 };
