@@ -45,9 +45,9 @@
 	.scoresheet_buttons > button {
 		display: block;
 		float: none;
-		font-size: 8vmin;
+		font-size: 5vmin;
 		margin: 0 1vmin 10vh 0 !important;
-		padding: 3vmin 0;
+		padding: 2vmin 0;
 	}
 	.scoresheet_buttons > button:last-child {
 		margin-bottom: 1vmin !important;
