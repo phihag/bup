@@ -202,6 +202,7 @@ function determine_server(match, current_score) {
 	if (typeof match.network_team1_serving === 'boolean') {
 		team_id = match.network_team1_serving ? 0 : 1;
 	}
+	if (team_id === undefined) return {};
 	if (!match.network_teams_player1_even) {
 		return {
 			team_id: team_id,
@@ -210,7 +211,14 @@ function determine_server(match, current_score) {
 
 	var player_id = 0;
 	if (match.setup.is_doubles) {
-		player_id = (match.network_teams_player1_even[team_id] == (current_score[team_id] % 2 == 0)) ? 0 : 1;
+		var p0even = match.network_teams_player1_even[team_id];
+		if (p0even === null) {
+			// only team known
+			return {
+				team_id: team_id,
+			};
+		}
+		player_id = (p0even == (current_score[team_id] % 2 === 0)) ? 0 : 1;
 	}
 
 	return {
@@ -2648,9 +2656,10 @@ return {
 	ALL_COLORS: ALL_COLORS,
 	calc_team_colors: calc_team_colors,
 	// Testing only
-	render_castall: render_castall,
-	extract_netscore: extract_netscore,
 	calc_colors: calc_colors,
+	determine_server: determine_server,
+	extract_netscore: extract_netscore,
+	render_castall: render_castall,
 };
 
 })();

@@ -16,6 +16,74 @@ function _make_container() {
 }
 
 _describe('displaymode', function() {
+	_it('determine_server', () => {
+		// No info at all
+		assert.deepStrictEqual(bup.displaymode.determine_server({setup: tutils.DOUBLES_SETUP}), {});
+
+		const determine_doubles_server = (presses) => {
+			const s = tutils.state_after(presses, tutils.DOUBLES_SETUP);
+			const nscore = bup.calc.netscore(s, true);
+			const current_score = (nscore.length > 0) ? nscore[nscore.length - 1] : ['', ''];
+			const pseudo_match = {
+				network_team1_serving: s.game.team1_serving,
+				network_teams_player1_even: s.game.teams_player1_even,
+				setup: tutils.DOUBLES_SETUP,
+			};
+			return bup.displaymode.determine_server(pseudo_match, current_score);
+		};
+
+		let presses = [];
+		assert.deepStrictEqual(determine_doubles_server(presses), {});
+
+		presses.push({
+			type: 'pick_side',
+			team1_left: true,
+		});
+		assert.deepStrictEqual(determine_doubles_server(presses), {});
+
+		presses.push({
+			type: 'pick_server',
+			team_id: 1,
+			player_id: 0,
+		});
+		assert.deepStrictEqual(determine_doubles_server(presses), {team_id: 1, player_id: 0});
+
+		presses.push({
+			type: 'undo',
+		});
+		presses.push({
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 1,
+		});
+		assert.deepStrictEqual(determine_doubles_server(presses), {team_id: 0, player_id: 1});
+
+		presses.push({
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 0,
+		});
+		assert.deepStrictEqual(determine_doubles_server(presses), {team_id: 0, player_id: 1});
+
+		tutils.press_score(presses, 20, 0);
+		assert.deepStrictEqual(determine_doubles_server(presses), {team_id: 0, player_id: 1});
+
+		tutils.press_score(presses, 1, 0);
+		assert.deepStrictEqual(determine_doubles_server(presses), {});
+
+		presses.push({
+			type: 'postgame-confirm',
+		});
+		assert.deepStrictEqual(determine_doubles_server(presses), {team_id: 0});
+
+		presses.push({
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		});
+		assert.deepStrictEqual(determine_doubles_server(presses), {team_id: 0, player_id: 0});
+	});
+
 	_it('extract_netscore', function() {
 		assert.deepStrictEqual(bup.displaymode.extract_netscore({
 			network_score: [],

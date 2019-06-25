@@ -1,6 +1,5 @@
-with bts: server wrongly indicated at start of second game
-
 scoresheet PDF font size in Chrome is broken (see stash)
+
 
 dmode tournament_overview: option to hide done matches
 
@@ -27,6 +26,8 @@ show nationality in choice of server / receiver
 at international tournaments: show nationality on match buttons
 
 allow BWF without flags
+
+rename internal stuff team0_serving, player0even
 
 disable changing of courts during match
 
