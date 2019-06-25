@@ -40,7 +40,7 @@
 
 <!-- top left -->
 <text class="scoresheet_tournament_name" x="55" y="13"></text>
-<text class="scoresheet_event_name" font-weight="bold" y="13"></text>
+<text class="scoresheet_event_name" font-weight="bold" x="50" y="13"/><!-- x will be set automatically -->
 
 <!-- ÖBV Bundesliga logo -->
 <path style="fill:#231f20;fill-rule:evenodd" d="m 30.084681,8.7386801 h 13.582291 c 1.328676,0 2.41461,1.0861628 2.41461,2.4146089 v 35.170776 c 0,1.328647 -1.085934,2.414621 -2.41461,2.414621 H 17.802454 c -1.328453,0 -2.414604,-1.085974 -2.414604,-2.414621 V 23.435534 Z m 0.125028,0.3018262 h 13.457263 c 1.162048,0 2.112841,0.9509067 2.112841,2.1127827 v 35.170776 c 0,1.162042 -0.950793,2.112772 -2.112841,2.112772 H 17.802454 c -1.161865,0 -2.112772,-0.95073 -2.112772,-2.112772 V 23.560562 Z" />
