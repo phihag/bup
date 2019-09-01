@@ -1,5 +1,31 @@
+aufstellung: doubles incorrect!
+
+cursor still visible on rpi
+
+d: stripes: orientation
+	doc fields
+	add in demo (if necessary)
+	check with bts
+	check with courtspot
+	close https://github.com/phihag/bup/issues/14
+
+docker
+	finish dockerfile
+	document in README
+
 gh bug reports!
 
+update international demo player names
+
+
+improve stats:
+	mouseover to see state?
+	click on time for relative time
+	button to go to (end of) stats?
+
+show undo as text?
+
+relay scoring?
 
 dmode tournament_overview: option to hide done matches
 
@@ -18,6 +44,7 @@ new dmode: international with discipline
 tdemo_inprogress (for national + international)
 
 import from clipboard
+	https://developers.google.com/web/updates/2019/07/image-support-for-async-clipboard?utm_source=feed&utm_medium=feed&utm_campaign=updates_feed
 
 show nationality in choice of server / receiver
 
