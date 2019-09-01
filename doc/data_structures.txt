@@ -112,14 +112,27 @@ match
 
 setup*        All properties that don't change during the match
 presses       Array of press, contains all button presses in the match so far.
+incomplete    Boolean. If set then the match is not yet ready to be started,
+              for instance because no players have been assigned yet.
+
+The following properties of a match are only relevant for network communication:
+
 presses_json  JSON encoding of presses (in order to not construct a large number of objects)
 network_score The score displayed in the network system
               (may be different to actual score in case of retiring or disqualification).
               A list of 2-element lists, e.g. [[21, 19], [29, 30], [15, 4]].
               First element is home team, second away team.
-incomplete    Boolean. If set then the match is not yet ready to be started,
-              for instance because no players have been assigned yet.
-
+network_team1_left Position of the home team.
+              true: the home team is one the left
+              false: he away team is on the left
+              null: Undetermined (e.g. match not yet started)
+              undefined: Unsupported by backend
+network_teams_player1_even An array, indicating whether the first player is on the right side.
+              e.g. [true, false] if the first home team player is on the right side.
+              true: The first player is one the right. In doubles, the second player is on the left.
+              false: The first player is one the left. In doubles, the second player is on the right.
+              null: Undetermined (e.g. match not started)
+              undefined: Unsupported by backend
 
 press
 =====
