@@ -240,8 +240,16 @@ function submit($httpc, $url, $user, $password, $team_names, $matches, $max_game
 		}, $match['score_strs'], \array_keys($match['score_strs']));
 
 		$players = $match['players'];
+
+		if (\count($players[0]) < 1) {
+			throw new \Exception('No players in home team in ' . $match['name']);
+		}
+		if (\count($players[1]) < 1) {
+			throw new \Exception('No players in away team in ' . $match['name']);
+		}
+
 		return [
-			'ID' => intval($match['tde_id']),
+			'ID' => \intval($match['tde_id']),
 			'Winner' => $match['winner_code'],
 			'DisableScoreValidation' => false,
 			'Sets' => $sets,
