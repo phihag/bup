@@ -1662,7 +1662,7 @@ function render_stripes(s, container, event, court, match, colors) {
 	var nscore = extract_netscore(match);
 	var setup = match.setup;
 	var max_game_count = calc.max_game_count(setup.counting);
-	var team_names = event.team_names || ['', ''];
+	var team_names = event.team_names || (setup.teams[0].clubName || setup.teams[1].clubName) ? [setup.teams[0].clubName, setup.teams[1].clubName] : ['', ''];
 	var current_score = nscore[nscore.length - 1];
 	var server = determine_server(match, current_score);
 	var match_score = _calc_matchscore(event.matches);
@@ -1672,18 +1672,23 @@ function render_stripes(s, container, event, court, match, colors) {
 		var fg_col = (utils.brightness(bg_col) > 128) ? colors.fgdark : colors.fg;
 
 		var tr = uiu.el(table, 'tr');
+		var score = setup.team_competition ? ' (' + match_score[team_id] + ')' : '';
+
 		uiu.el(tr, 'td', {
 			style: (
 				'color:' + fg_col + ';' +
 				'background:' + bg_col + ';'
 			),
-		}, team_names[team_id] + ' (' + match_score[team_id] + ')');
+		}, team_names[team_id] + score);
 	}
 
 	function _render_players(team_id) {
 		var tr = uiu.el(table, 'tr');
 		var td = uiu.el(tr, 'td', {});
 		var player_names = _player_names(setup.teams[team_id], setup.is_doubles, _doubles_name);
+		var seeded = setup.teams[team_id].seed ? '[' + setup.teams[team_id].seed + '] ' : '';
+
+		uiu.el(td, 'span', {}, seeded);
 		player_names.forEach(function(pname, player_id) {
 			if (player_id !== 0) {
 				uiu.el(td, 'span', {}, ' / ');
@@ -1732,6 +1737,11 @@ function render_stripes(s, container, event, court, match, colors) {
 					'border-right:' + border_str + ' solid ' + colors.bg + ';'
 				),
 			});
+			if (!setup.team_competition) {
+				uiu.el(match_name_td, 'span', {
+					style: 'display:inline-block;',
+				}, setup.event_name);
+			}
 			(setup.match_name || '').split(/(\.)/).forEach(function(part) {
 				uiu.el(match_name_td, 'span', {
 					style: 'display:inline-block;',

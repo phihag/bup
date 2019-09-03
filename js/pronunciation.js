@@ -87,8 +87,12 @@ function _prematch_team(s, team_id) {
 		res = eventutils.pronounce_teamname(team.name) + s._('onmyright.representedby');
 	}
 	var different_nationalities = (team.players.length >= 2) && (team.players[0].nationality !== team.players[1].nationality);
+	var different_clubs = (team.players.length >= 2) && (team.players[0].clubName !== team.players[1].clubName);
 	var names = team.players.map(function(p, pidx) {
-		if (setup.nation_competition && !setup.team_competition && p.nationality &&
+		if (!setup.nation_competition && !setup.team_competition && p.clubName &&
+				((pidx === 1) || different_clubs)) {
+			return p.name + ', ' + p.clubName;
+		} else if (setup.nation_competition && !setup.team_competition && p.nationality &&
 				((pidx === 1) || different_nationalities)) {
 			return p.name + ', ' + countrycodes.lookup(p.nationality);
 		}
@@ -103,7 +107,9 @@ function _prematch_team(s, team_id) {
 		res += names[0];
 	}
 
-	if (team.name && !setup.team_competition && !setup.nation_competition) {
+	if (team.clubName && !setup.team_competition && !setup.nation_competition) {
+		res += !setup.is_doubles ? ', ' + eventutils.pronounce_teamname(team.clubName) : '';
+	} else if (team.name && !setup.team_competition && setup.nation_competition) {
 		res += ', ' + eventutils.pronounce_teamname(team.name);
 	}
 	return res;
