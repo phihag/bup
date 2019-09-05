@@ -137,7 +137,7 @@ function parse_vrl_players($httpc, $domain, $season_id, $club_id, $vrl_id) {
 		<tr>\s*
 		<td\s+align="right">(?P<lfd_num>[0-9]+)<\/td> # LfdNum
 		<td><\/td>       # empty
-		<td\s+id="playercell"><a\s+href="player\.aspx\?id=[-A-Za-z0-9]+&player=[0-9]+">
+		<td\s+id="playercell"><a\s+href="(?:\/sport\/)?player\.aspx\?id=[-A-Za-z0-9]+&player=[0-9]+">
 			(?P<lastname>[^<]+),\s*(?P<firstname>[^,<]+)
 		<\/a><\/td>
 		<td\s+class="flagcell">(?:
@@ -179,7 +179,7 @@ function parse_vrl_players($httpc, $domain, $season_id, $club_id, $vrl_id) {
 
 		if (!$line_m['vkz3']) {
 			$p['regular'] = false;
-		} else if ($line_m['vkz3'] === 'X') {
+		} else if (($line_m['vkz3'] === 'X') || ($line_m['vkz3'] === 'x')) {
 			$p['regular'] = true;
 		} else {
 			throw new \Exception('Unsupported vkz3: ' . \json_encode($line_m['vkz3']));
