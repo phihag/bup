@@ -166,7 +166,10 @@ function parse_vrl_players($httpc, $domain, $season_id, $club_id, $vrl_id) {
 	foreach ($line_matches as $line_m) {
 		$line_num = \intval($line_m['lfd_num']);
 		if ($line_num !== $lfd_num) {
-			throw new \Exception('Got line ' . $line_num . ', expected ' . $lfd_num . ' in ' . $vrl_url);
+			if (!\in_array($vrl_url, ['https://www.turnier.de/sport/clubranking.aspx?id=DCA64B96-526B-415F-831C-0F30E39546BC&cid=17&rid=58', 'https://www.turnier.de/sport/clubranking.aspx?id=DCA64B96-526B-415F-831C-0F30E39546BC&cid=9&rid=61'])) {
+				throw new \Exception(
+					'Got line ' . $line_num . ', expected ' . $lfd_num . ' in ' . $vrl_url);
+			}
 		}
 		$lfd_num++;
 
