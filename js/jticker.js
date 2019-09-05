@@ -237,6 +237,10 @@ function list_matches(s, cb, all_players) {
 		}
 
 		event.team_names = event.team_names.map(_unify_teamname);
+		if (!event.league_key) {
+			event.league_key = /2/.test(event.team_names[0]) ? '2BLN-2018' : '1BL-2018';
+		}
+
 		event.matches.forEach(function(m) {
 			var setup = m.setup;
 			var short_name = {
