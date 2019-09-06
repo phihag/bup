@@ -89,18 +89,13 @@ function send_score(s) {
 
 	var post_data = {
 		id: s.setup.btde_match_id,
-		feld: s.settings.court_id,
+		court: s.settings.court_id,
 	};
-	var game_count = calc.max_game_count(s.setup.counting);
+	var course = [];
 	netscore.forEach(function(score, game_idx) {
-		post_data['satz' + (game_idx + 1)] = score[0] || '0';
-		post_data['satz' + (game_count + game_idx + 1)] = score[1] || '0';
+		course.append((score[0] || '0') + ':' + (score[1] || '0'));
 	});
-	for (var i = 1;i <= 2 * game_count;i++) {
-		if (post_data['satz' + i] === undefined) {
-			post_data['satz' + i] = '';
-		}
-	}
+	post_data.course = course;
 
 	if (outstanding_requests > 0) {
 		// Another request is currently underway; ours may come to late
@@ -113,7 +108,7 @@ function send_score(s) {
 
 	_request(s, 'btde.score', {
 		method: 'POST',
-		url: baseurl + 'login/write.php',
+		url: baseurl + 'login/count.php',
 		data: data,
 		contentType: 'application/json; charset=utf-8',
 	}, function(err) {
@@ -217,9 +212,9 @@ function _get_counting(league_key, event_data) {
 }
 
 function _parse_match_list(doc, now) {
-	var event_data = doc[0];
-	var home_team_name = event_data.heim;
-	var away_team_name = event_data.gast;
+	var event_data = doc;
+	var home_team_name = event_data.home;
+	var away_team_name = event_data.guest;
 
 	var used_courts = [{
 		court_id: 1,
@@ -236,7 +231,7 @@ function _parse_match_list(doc, now) {
 		date = starttime_m[1];
 		starttime = starttime_m[2];
 	}
-	var league_key = _get_league_key(event_data.liga);
+	var league_key = _get_league_key(event_data.league);
 	var counting = _get_counting(league_key, event_data);
 
 	// Fallback: if everything goes wrong, go for 1BL
@@ -246,12 +241,12 @@ function _parse_match_list(doc, now) {
 
 	var game_count = calc.max_game_count(counting);
 
-	var matches = doc.slice(1, doc.length).map(function(match) {
+	var matches = doc.fixtures.map(function(match) {
 		var is_doubles = /HD|DD|GD/.test(match.dis);
 		var teams = [{
-			players: _parse_players(match.heim),
+			players: _parse_players(match.home),
 		}, {
-			players: _parse_players(match.gast),
+			players: _parse_players(match.guest),
 		}];
 
 		// btde always lists the woman first, but all other materials
@@ -265,17 +260,14 @@ function _parse_match_list(doc, now) {
 			});
 		}
 
-		var network_score = [];
-		for (var game_idx = 0;game_idx < game_count;game_idx++) {
-			var home_score_str = match['satz' + (1 + game_idx)];
-			var away_score_str = match['satz' + (1 + game_count + game_idx)];
-			if (home_score_str !== '' && away_score_str !== '') {
-				network_score.push([
-					parseInt(home_score_str, 10),
-					parseInt(away_score_str, 10),
-				]);
-			}
-		}
+		var network_score = []
+		match.course.forEach(function(lst) {
+			if (!lst.length) return;
+			var last = lst[lst.length - 1];
+			if (!last) return;
+			var game_score = last.split(':').map(function(num) {return parseInt(num);});
+			network_score.push(game_score);
+		});
 
 		var match_id = 'btde_' + utils.iso8601(now) + '_' + match.dis + '_' + home_team_name + '-' + away_team_name;
 		if (match.feld) {
@@ -331,7 +323,7 @@ function _parse_match_list(doc, now) {
 
 function list_matches(s, cb) {
 	_request(s, 'btde.list', {
-		url: baseurl + 'login/write.php?id=all',
+		url: baseurl + 'login/count.php?id=all',
 	}, function(err, json) {
 		if (err) {
 			return cb(err);
@@ -365,12 +357,15 @@ function courts(s) {
 }
 
 function ui_init() {
+	/* work around blocks for punkte.php
+	var meta = document.createElement('meta');
+	meta.name = 'referrer';
+	meta.content = 'no-referrer';
+	document.getElementsByTagName('head')[0].appendChild(meta);
+	*/
+
 	if (!baseurl) {
-		baseurl = '../';
-	}
-	var m = window.location.pathname.match(/^\/+(.*\/)bup\/(?:bup\.html|index\.html)?$/);
-	if (m) {
-		baseurl = '/' + m[1];
+		baseurl = '/';
 	}
 }
 
@@ -451,6 +446,9 @@ function parse_key_players(html, key, gender) {
 }
 
 function list_all_players(s, cb) {
+	// Seems broken on badmintonticker.de at the moment
+	return cb(null, [[], []]);
+
 	_request(s, 'btde.list_all_players', {
 		url: baseurl + 'login/start.php',
 	}, function(err, html) {
