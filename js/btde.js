@@ -270,9 +270,9 @@ function _parse_match_list(doc, now) {
 		});
 
 		var match_id = 'btde_' + utils.iso8601(now) + '_' + match.dis + '_' + home_team_name + '-' + away_team_name;
-		if (match.feld) {
+		if (match.court) {
 			var on_court = utils.find(used_courts, function(c) {
-				return c.court_id == match.feld;
+				return c.court_id == match.court;
 			});
 			if (on_court) {
 				on_court.match_id = match_id;
