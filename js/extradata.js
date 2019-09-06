@@ -72,6 +72,7 @@ var LOGOS = [
 	'tusgeretsried',
 	'tuswiebelskirchen',
 	'tvdillingen',
+	'tvhofheim',
 	'tvemsdetten',
 	'tvmarktheidenfeld',
 	'tvrefrath',
