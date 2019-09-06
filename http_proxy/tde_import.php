@@ -27,6 +27,9 @@ function parse_teammatch($httpc, $tm_html, $domain, $match_id) {
 		'Bundesligen 2018/19:1. Bundesliga – (1. BL) – (001) 1. Bundesliga' => '1BL-2018',
 		'Bundesligen 2018/19:2. Bundesliga – (2. BL-Nord) – (002) 2. Bundesliga Nord' => '2BLN-2018',
 		'Bundesligen 2018/19:2. Bundesliga – (2. BL-Süd) – (003) 2. Bundesliga Süd' => '2BLS-2018',
+		'Bundesligen 2019/20:1. Bundesliga – (1. BL) – (001) 1. Bundesliga' => '1BL-2019',
+		'Bundesligen 2019/20:2. Bundesliga – (2. BL-Nord) – (002) 2. Bundesliga Nord' => '2BLN-2019',
+		'Bundesligen 2019/20:2. Bundesliga – (2. BL-Süd) – (003) 2. Bundesliga Süd' => '2BLS-2019',
 		'Ligen DBV 2018/19 (ohne Bundesligen):Gruppe Nord – (NO) – (001) Regionalliga Nord' => 'RLN-2016',
 	];
 
