@@ -25,14 +25,6 @@ function unify_team_name($team_name) {
 		$team_name = $m[1];
 	}
 
-	if ($team_name === 'STC BW Solingen') {
-		return 'STC Blau-Weiss Solingen';
-	}
-
-	if ($team_name === 'SC Union Lüdinghausen') {
-		return 'Union Lüdinghausen';
-	}
-
 	return $team_name;
 }
 
