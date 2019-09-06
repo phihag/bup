@@ -1,12 +1,17 @@
 A fehlt auf setupsheet!!!
 
-2courts is broken!
+2courts: order change does not work
+
+refmode is nigh unusable
+
+missing location etc.
 
 btde login detection does not work
 
 focus mode should hide referee mode UI + Login as
 
 
+use is_bundesliga helper function at more places
 
 
 btde: test login required
