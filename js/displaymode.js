@@ -2247,7 +2247,10 @@ function render_2court(s, container, event, colors) {
 			}, gscore[team_id]);
 		});
 
-		var match_name = (match.setup.event_name || '').replace(/(?:\s*-)?\s*Qualification/, 'Q');
+		var match_name = (
+			match.setup.team_competition ?
+			match.setup.match_name :
+			(match.setup.event_name || '').replace(/(?:\s*-)?\s*Qualification/, 'Q'));
 		uiu.el(court_container, 'div', 'd_2court_info', match_name);
 
 		var timer_state = _extract_timer_state(s, match);
