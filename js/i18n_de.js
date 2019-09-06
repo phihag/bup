@@ -375,6 +375,7 @@ var i18n_de = {
 'eventsheet:label|DBV-Satzungen-2016': 'Regeln DBV 2016/2017',
 'eventsheet:label|DBV-Satzungen-2017': 'Regeln DBV 2017/2018',
 'eventsheet:label|DBV-Satzungen-2018': 'Regeln DBV 2018/2019',
+'eventsheet:label|DBV-Satzungen-2019': 'Regeln DBV 2019/2020',
 'eventsheet:label|RLW-2016': 'Spielbericht',
 'eventsheet:label|RLN-2016': 'Spielbericht',
 'eventsheet:label|RLN-Satzungen': 'Satzungen und Ordnungen',
