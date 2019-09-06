@@ -292,7 +292,7 @@ function name_by_league(league_key) {
 }
 
 function is_bundesliga(league_key) {
-	return /^(?:1BL|2BLN|2BLS)-(?:2015|2016|2017|2018)$/.test(league_key);
+	return /^(?:1BL|2BLN|2BLS)-(?:2015|2016|2017|2018|2019)$/.test(league_key);
 }
 
 function is_rlw(league_key) {
