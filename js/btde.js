@@ -93,7 +93,7 @@ function send_score(s) {
 	};
 	var course = [];
 	netscore.forEach(function(score, game_idx) {
-		course.append((score[0] || '0') + ':' + (score[1] || '0'));
+		course.push([(score[0] || '0') + ':' + (score[1] || '0')]);
 	});
 	post_data.course = course;
 
@@ -446,9 +446,6 @@ function parse_key_players(html, key, gender) {
 }
 
 function list_all_players(s, cb) {
-	// Seems broken on badmintonticker.de at the moment
-	return cb(null, [[], []]);
-
 	_request(s, 'btde.list_all_players', {
 		url: baseurl + 'login/start.php',
 	}, function(err, html) {
