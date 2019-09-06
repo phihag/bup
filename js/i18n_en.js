@@ -374,6 +374,7 @@ var i18n_en = {
 'eventsheet:label|DBV-Satzungen-2016': 'German Laws&Regulations 2016/2017',
 'eventsheet:label|DBV-Satzungen-2017': 'German Laws&Regulations 2017/2018',
 'eventsheet:label|DBV-Satzungen-2018': 'German Laws&Regulations 2018/2019',
+'eventsheet:label|DBV-Satzungen-2019': 'German Laws&Regulations 2019/2020',
 'eventsheet:label|RLW-2016': '(German Regionalliga West) result report sheet',
 'eventsheet:label|RLN-2016': '(German Regionalliga North) result report sheet',
 'eventsheet:label|RLN-Satzungen': '(German Group North) laws & regulations',
