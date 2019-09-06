@@ -11,6 +11,8 @@ btde login detection does not work
 focus mode should hide referee mode UI + Login as
 
 
+bldemo: setupsheet looks funny in PDF
+
 use is_bundesliga helper function at more places
 
 
