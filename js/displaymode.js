@@ -2402,6 +2402,16 @@ function update(err, s, event) {
 				),
 			});
 
+			// background for colors
+			for (var team_id = 0;team_id < 2;team_id++) {
+				uiu.el(nomatch_el, 'div', {
+					style: (
+						'background:' + colors['b' + team_id] + ';' +
+						'position:absolute;width:100%;height:50%;top:' + (team_id * 50) + '%;'
+					),
+				});
+			}
+
 			var _render_team_name = function(team_id) {
 				uiu.el(nomatch_el, 'div', {
 					style: (
