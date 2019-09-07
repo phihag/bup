@@ -2406,7 +2406,7 @@ function update(err, s, event) {
 			for (var team_id = 0;team_id < 2;team_id++) {
 				uiu.el(nomatch_el, 'div', {
 					style: (
-						'background:' + colors['b' + team_id] + ';' +
+						'background:' + colors['b' + team_id] + ';z-index:-1;' +
 						'position:absolute;width:100%;height:50%;top:' + (team_id * 50) + '%;'
 					),
 				});
@@ -2415,7 +2415,7 @@ function update(err, s, event) {
 			var _render_team_name = function(team_id) {
 				uiu.el(nomatch_el, 'div', {
 					style: (
-						'font-size:16vmin;text-align:center;z-index:-1;' +
+						'font-size:16vmin;text-align:center;' +
 						'color:' + colors[team_id] + ';' +
 						'margin-' + ((team_id === 0) ? 'bottom' : 'top') + ':8vmin;'
 					),
