@@ -25,7 +25,7 @@ var TEAM_COLORS = {
 	'Lüdinghausen': {fg: '#cb232a'},
 	'Neuhausen': {fg: '#a6cb8b'},
 	'Refrath': {fg: '#ffffff', bg: '#000b18'},
-	'Remagen': {fg: '#ffffff', bg: '#182651'},
+	'Remagen': {fg: '#ffffff', bg: '#0f1731f'},
 	'Sterkrade': {fg: '#fefa42'},
 	'Trittau': {fg: '#9dc2fc'},
 	'Geretsried': {fg: '#f0f0f0'},
