@@ -187,6 +187,7 @@ function _parse_players(s) {
 }
 
 function _get_league_key(liga_code) {
+	if (!liga_code) return null;
 	return {
 		'(001) 1. Bundesliga': '1BL-2019',
 		'(002) 2. Bundesliga Nord': '2BLN-2019',
