@@ -187,7 +187,6 @@ function _parse_players(s) {
 }
 
 function _get_league_key(liga_code) {
-	if (!liga_code) return null;
 	return {
 		'(001) 1. Bundesliga': '1BL-2019',
 		'(002) 2. Bundesliga Nord': '2BLN-2019',
@@ -232,7 +231,13 @@ function _parse_match_list(doc, now) {
 		date = starttime_m[1];
 		starttime = starttime_m[2];
 	}
-	var league_key = _get_league_key(event_data.league);
+	var league_key;
+	if (event_data.league) {
+		league_key = _get_league_key(event_data.league);
+	} else {
+		// No league key, guess
+		league_key = (doc.fixtures.length === 8) ? 'RLW-2016' : '1BL-2019';
+	}
 	var counting = _get_counting(league_key, event_data);
 
 	// Fallback: if everything goes wrong, go for 1BL
