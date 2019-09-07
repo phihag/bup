@@ -2393,7 +2393,7 @@ function update(err, s, event) {
 
 		dads.d_onmatchchange(s, ads_container, match);
 
-		if (!match) {
+		if (!match || (event.courtspot_version && (!match.setup.teams || !match.setup.teams[0].players.length))) {
 			var nomatch_el = uiu.el(container, 'div', {
 				'class': 'd_nomatch',
 				style: (

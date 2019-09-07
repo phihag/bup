@@ -197,6 +197,13 @@ function _list(s, suffix, cb) {
 				event.tournament_name = 'Bayernliga Süd';
 			}
 		}
+		// Patch: apply 2019 rules
+		if (event.league_key) {
+			var league_m = /^(1BL|2BLN|2BLS)-[0-9]*/.exec(event.league_key);
+			if (league_m) {
+				event.league_key = league_m[1] + '-2019';
+			}
+		}
 
 		cb(err, event);
 	});
