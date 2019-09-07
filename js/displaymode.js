@@ -2415,7 +2415,7 @@ function update(err, s, event) {
 			var _render_team_name = function(team_id) {
 				uiu.el(nomatch_el, 'div', {
 					style: (
-						'font-size:16vmin;text-align:center;' +
+						'font-size:16vmin;text-align:center;z-index:0;' +
 						'color:' + colors[team_id] + ';' +
 						'margin-' + ((team_id === 0) ? 'bottom' : 'top') + ':8vmin;'
 					),
