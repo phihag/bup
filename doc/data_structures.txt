@@ -18,6 +18,8 @@ league_key      ID of the league being played.
 
                 Available values:
                 - German (1.&2.) Bundesliga:
+                   Season 2019/2020 (5x11_15 with 90s intervals): "1BL-2019", "2BLN-2019", "2BLS-2019"
+                   Season 2018/2019 (5x11_15 with 90s intervals): "1BL-2018", "2BLN-2018", "2BLS-2018"
                    Season 2017/2018 (5x11_15 with 90s intervals): "1BL-2017", "2BLN-2017", "2BLS-2017"
                    Season 2016/2017 (5x11_15, new Excel-based forms): "1BL-2016", "2BLN-2016", "2BLS-2016"
                    Season 2015/2016 (3x21): "1BL-2015", "2BLN-2015", "2BLS-2015"

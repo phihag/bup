@@ -1,3 +1,5 @@
+courtspot server is marked initially!
+
 2courts: order change does not work
 
 refmode is nigh unusable
@@ -10,6 +12,7 @@ focus mode should hide referee mode UI + Login as..
 
 bldemo: setupsheet looks funny in PDF in Chrome
 
+courtspot: check that it does not send if team is different (BVM1 after BVM2)
 
 btde: test login required
 
