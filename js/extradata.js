@@ -29,7 +29,7 @@ var TEAM_COLORS = {
 	'Sterkrade': {fg: '#fefa42'},
 	'Trittau': {fg: '#9dc2fc'},
 	'Geretsried': {fg: '#f0f0f0'},
-	'Offenburg': {fg: '#81a4d0'},
+	'Offenburg': {fg: '#af090a'},
 	'Wesel': {fg: '#ed1a24'},
 	'Wipperfeld': {fg: '#ff2149'},
 	'Wittorf': {fg: '#0091ff'},
