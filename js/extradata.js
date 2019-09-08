@@ -14,7 +14,7 @@ var ABBREVS = {
 var TEAM_COLORS = {
 	'Beuel': {fg: '#ffed00'},
 	'Bischmisheim': {fg: '#0077d3'},
-	'BV Mülheim': {fg: '#ff423f'},
+	'BV Mülheim': {fg: '#ee0000'},
 	'Solingen': {fg: '#89deff'}, // STC BW Solingen
 	'Dortelweil': {fg: '#f55a44'},
 	'EBT Berlin': {fg: '#0d9aff'},
