@@ -227,7 +227,7 @@ function _parse_match_list(doc, now) {
 	var starttime;
 	var date;
 	var starttime_m;
-	if (event_data.datum && (starttime_m = /^([0-9]{1,2}\.[0-9]{1,2}\.[0-9]{4})\s+([0-9]{1,2}:[0-9]{1,2})$/.exec(event_data.datum))) {
+	if (event_data.datum && (starttime_m = /^([0-9]{1,2}\.[0-9]{1,2}\.[0-9]{4})\s+([0-9]{1,2}:[0-9]{1,2})$/.exec(event_data.datetime))) {
 		date = starttime_m[1];
 		starttime = starttime_m[2];
 	}
@@ -321,8 +321,8 @@ function _parse_match_list(doc, now) {
 		matches: matches,
 		courts: used_courts,
 		league_key: league_key,
-		location: event_data.ort,
-		matchday: event_data.spieltag,
+		location: event_data.venue,
+		matchday: event_data.matchday,
 		report_urls: report_urls,
 	};
 }
