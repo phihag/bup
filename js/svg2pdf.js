@@ -667,7 +667,9 @@ function render_el(el, pdf, scale) {
 			break;
 		}
 
-		pdf.setFontStyle((style['font-weight'] == 'bold') ? 'bold' : 'normal');
+		var font_weight = style['font-weight'];
+		var is_bold = (font_weight == 'bold') || (font_weight == '700');
+		pdf.setFontStyle(is_bold ? 'bold' : 'normal');
 		var pt_font_size = parseFloat(style['font-size']);
 		var font_size = scale * 72 / 25.6 * pt_font_size;
 		pdf.setFontSize(font_size);
