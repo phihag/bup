@@ -197,6 +197,7 @@ function _get_league_key(liga_code) {
 		'(008) Landesliga Nord 1': 'NRW-O19-N1-LL-008-2016',
 		'(015) Landesliga Süd 2': 'NRW-O19-S2-LL-015-2016',
 		'NLA': 'NLA-2017',
+		'NLB': 'NLA-2017',
 		'1. Bundesliga': 'OBL-2017',
 	}[liga_code.trim()];
 }
@@ -211,7 +212,7 @@ function _get_counting(league_key, event_data) {
 	return (event_data.gews == 2) ? '3x21' : '5x11_15^90';
 }
 
-function _parse_match_list(doc, now) {
+function _parse_event(doc, now) {
 	var event_data = doc;
 	var home_team_name = event_data.home;
 	var away_team_name = event_data.guest;
@@ -227,7 +228,7 @@ function _parse_match_list(doc, now) {
 	var starttime;
 	var date;
 	var starttime_m;
-	if (event_data.datum && (starttime_m = /^([0-9]{1,2}\.[0-9]{1,2}\.[0-9]{4})\s+([0-9]{1,2}:[0-9]{1,2})$/.exec(event_data.datetime))) {
+	if (event_data.datetime && (starttime_m = /^([0-9]{1,2}\.[0-9]{1,2}\.[0-9]{4})\s+([0-9]{1,2}:[0-9]{1,2})$/.exec(event_data.datetime))) {
 		date = starttime_m[1];
 		starttime = starttime_m[2];
 	}
@@ -241,8 +242,8 @@ function _parse_match_list(doc, now) {
 	var counting = _get_counting(league_key, event_data);
 
 	// Fallback: if everything goes wrong, go for 1BL
-	if (! league_key) {
-		league_key = '1BL-2018';
+	if (! league_key && (counting == '5x11_15^90')) {
+		league_key = '1BL-2019';
 	}
 
 	var game_count = calc.max_game_count(counting);
@@ -313,6 +314,9 @@ function _parse_match_list(doc, now) {
 		report_urls.push(event_data.url);
 	}
 
+	var matchday_m = /([0-9]+)\.\s*Spieltag/.exec(event_data.matchday);
+	var matchday = matchday_m ? matchday_m[1]: event_data.matchday;
+
 	return {
 		starttime: starttime,
 		date: date,
@@ -322,7 +326,7 @@ function _parse_match_list(doc, now) {
 		courts: used_courts,
 		league_key: league_key,
 		location: event_data.venue,
-		matchday: event_data.matchday,
+		matchday: matchday,
 		report_urls: report_urls,
 	};
 }
@@ -343,7 +347,7 @@ function list_matches(s, cb) {
 				msg: 'badmintonticker-Aktualisierung fehlgeschlagen: Server-Fehler erkannt',
 			});
 		}
-		var ev = _parse_match_list(doc, new Date());
+		var ev = _parse_event(doc, new Date());
 		eventutils.annotate(state, ev);
 		return cb(null, ev);
 	});
@@ -485,7 +489,7 @@ return {
 	/*@DEV*/
 	_get_counting: _get_counting,
 	_get_league_key: _get_league_key,
-	_parse_match_list: _parse_match_list,
+	_parse_event: _parse_event,
 	/*/@DEV*/
 };
 
