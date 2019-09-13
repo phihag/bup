@@ -54,7 +54,7 @@ counting        Default counting scheme. Implicitly set by league_key.
                   "1x11_15"    One Game 2016 Experiment Option 1 (1x11 until max. 15)
                   "3x15_18"    Shortened (3x15 until max. 18)
 location        Location name and address as a string, e.g. "SpH Steinbreche"
-loc_coords      Location geocoordinates, e.g. "SpH Steinbreche".
+loc_coords      Location geocoordinates, e.g. {"lat" : 50.9582384, "lng" : 7.1118084"}
                 An object with the keys "lat" and "lng".
 matches*        A list of matches to be played (see below)
 preferred_order Array of eventsheet_id (recommended) or match_name values that indicate the best order of matches as set by the tournament organizers.
