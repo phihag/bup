@@ -8,77 +8,135 @@ var _describe = tutils._describe;
 var _it = tutils._it;
 
 _describe('btde', function() {
-	_it('parse_match_list', function() {
-		var doc = [
-			{'heim':'TV Refrath','gast': '1. BV M\u00fclheim', gews: 3, liga: '(001) 1. Bundesliga', 'datum': '01.10.2017 16:00', 'ort': 'SpH Friedrich-Albert-Lange-GS, Wittkuller Str. 70, 42719 Solingen', 'spieltag': '9','url': 'https://www.turnier.de/sport/teammatch.aspx?id=107D0FC0-C153-4EAF-A39D-EBAECB424B16&match=155'},
-			{'id':'1','dis':'HD 1','heim':'Magee, Sam~Holzer, Fabian','gast':'Ellis, Marcus~de Ruiter, Jorrit','satz1':'6','satz2':'','satz3':'','satz4':'','satz5':'','satz6':'0','satz7':'','satz8':'','satz9':'','satz10':'','feld':'1'},
-			{'id':'2','dis':'DD','heim':'Magee, Chloe~Nelte, Carla','gast':'Goliszewski, Johanna~K\u00e4pplein, Lara','satz1':'4','satz2':'12','satz3':'','satz4':'','satz5':'','satz6':'11','satz7':'10','satz8':'','satz9':'','satz10':'','feld':'2'},
-			{'id':'3','dis':'HE 1','heim':'Domke, Richard','gast':'Zavadsky, Dmytro','satz1':'11','satz2':'11','satz3':'11','satz4':'','satz5':'','satz6':'5','satz7':'8','satz8':'2','satz9':'','satz10':'','feld':'0'},
-			{'id':'4','dis':'DE','heim':'Magee, Chloe','gast':'K\u00e4pplein, Lara','satz1':'11','satz2':'0','satz3':'','satz4':'','satz5':'','satz6':'4','satz7':'3','satz8':'','satz9':'','satz10':'','feld':'0'},
-			{'id':'5','dis':'GD','heim':'Nelte, Carla~Magee, Sam','gast':'Goliszewski, Johanna~Ellis, Marcus','satz1':'12','satz2':'10','satz3':'10','satz4':'11','satz5':'11','satz6':'9','satz7':'12','satz8':'12','satz9':'3','satz10':'13','feld':'0'},
-			{'id':'6','dis':'HE 2','heim':'Sch\u00e4nzler, Lars','gast':'Roovers, Alexander','satz1':'11','satz2':'11','satz3':'11','satz4':'','satz5':'','satz6':'8','satz7':'2','satz8':'3','satz9':'','satz10':'','feld':'0'},
-		];
+	_it('parse_event', function() {
+		var doc = {
+			'home': 'TV Refrath 2',
+			'guest': 'BC Hohenlimburg',
+			'league': '(002) 2. Bundesliga Nord',
+			'matchday': '1. Spieltag',
+			'datetime': '07.09.2019 13:00',
+			'venue': 'SpH, Steinbreche, 51427 Bergisch Gladbach-Refrath',
+			'url': 'https://www.turnier.de/sport/teammatch.aspx?id=DCA64B96-526B-415F-831C-0F30E39546BC&match=208',
+			'gews': '3',
+			'fixtures': [{
+				'id':'1',
+				'dis':'HD1',
+				'home':'Holtschke, Brian/Graalmann, Hauke',
+				'guest':'Magee, Joshua/Laibacher, Malte',
+				'course': [
+					['0:0','1:0','2:0','3:0','4:0','5:0','6:0','7:0','8:0','9:0','10:0','10:1','10:2','10:3','10:4','10:5','10:6','10:7','11:7'],
+					['0:0','1:0','2:0','3:0','4:0','5:0','6:0','7:0','8:0','9:0','9:1','9:2','9:3','9:4','9:5','9:6','9:7','9:8','9:9','9:10','10:10','11:10','12:10'],
+					['0:0','1:0','2:0','3:0','4:0','5:0','6:0','7:0','8:0','9:0','10:0','10:1','10:2','10:3','10:4','10:5','10:6','10:7','10:8','10:9','11:9'],
+				],
+				'court':'0',
+			},{
+				'id':'2',
+				'dis':'DD',
+				'home':'Sp\u00f6ri, Ann-Kathrin/Karnott, Jennifer',
+				'guest':'Romanova, Jekaterina/Fischer, Lena',
+				'course': [
+					['0:0','1:0','2:0','3:0','4:0','5:0','6:0','7:0','8:0','9:0','9:1','9:2','9:3','9:4','9:5','9:6','10:6','11:6'],
+					['0:0','1:0','2:0','3:0','4:0','5:0','6:0','7:0','8:0','9:0','10:0','10:1','10:2','10:3','11:3'],
+					['0:0','1:0','2:0','2:1','2:2','2:3','3:3','3:4','4:4','4:5','5:5','6:5','7:5','7:6','7:7','7:8','7:9','7:10','7:11'],
+					['0:0','1:0','2:0','3:0','4:0','5:0','6:0','7:0','8:0','9:0','10:0','10:1','10:2','10:3','10:4','10:5','11:5']],
+				'court':'0',
+			}, {
+				'id':'3',
+				'dis':'HD2',
+				'home':'Klauer, Christopher/Nyenhuis, Denis',
+				'guest':'Bald, Christian/Stoppel, Fabian',
+				'course': [['9:11'],['8:11'],['8:11']],
+				'court':'0',
+			}, {
+				'id':'4',
+				'dis':'HE1',
+				'home':'Klauer, Christopher',
+				'guest':'Magee, Joshua',
+				'course': [['11:6'],['11:7'],['6:11'],['6:11'],['7:11']],
+				'court':'2',
+			}, {
+				'id':'5', 'dis':'DE',
+				'home':'Sp\u00f6ri, Ann-Kathrin',
+				'guest':'Romanova, Jekaterina',
+				'course':[['11:3'],['12:10'],['11:3']],
+				'court':'0',
+			}, {
+				'id':'6',
+				'dis':'GD',
+				'home': 'Karnott, Jennifer/Graalmann, Hauke',
+				'guest':'Fischer, Lena/Stoppel, Fabian',
+				'course': [['12:10'],['9:11'],['4:11'],['11:8'],['8:11']],
+				'court':'1',
+			}, {
+				'id':'7',
+				'dis':'HE2',
+				'home':'Holtschke, Brian',
+				'guest':'Laibacher, Malte',
+				'course': [['12:14'],['9:11'],['11:9'],['11:2'],['11:1']],
+				'court':'0',
+			}],
+		};
 
 		var expected = {
-			'team_names': ['TV Refrath', '1. BV Mülheim'],
+			'team_names': ['TV Refrath 2', 'BC Hohenlimburg'],
 			'team_competition': true,
-			'league_key': '1BL-2018',
-			'date': '01.10.2017',
-			'starttime': '16:00',
-			'matchday': '9',
-			'report_urls': ['https://www.turnier.de/sport/teammatch.aspx?id=107D0FC0-C153-4EAF-A39D-EBAECB424B16&match=155'],
-			'location': 'SpH Friedrich-Albert-Lange-GS, Wittkuller Str. 70, 42719 Solingen',
+			'league_key': '2BLN-2019',
+			'date': '07.09.2019',
+			'starttime': '13:00',
+			'matchday': '1',
+			'report_urls': ['https://www.turnier.de/sport/teammatch.aspx?id=DCA64B96-526B-415F-831C-0F30E39546BC&match=208'],
+			'location': 'SpH, Steinbreche, 51427 Bergisch Gladbach-Refrath',
 			'courts': [{
 				'court_id': 1,
 				'description': '1 (links)',
-				'match_id': 'btde_2016-11-05_HD 1_TV Refrath-1. BV Mülheim',
+				'match_id': 'btde_2019-10-12_GD_TV Refrath 2-BC Hohenlimburg',
 			}, {
 				'court_id': 2,
 				'description': '2 (rechts)',
-				'match_id': 'btde_2016-11-05_DD_TV Refrath-1. BV Mülheim',
+				'match_id': 'btde_2019-10-12_HE1_TV Refrath 2-BC Hohenlimburg',
 			}],
 			'matches': [
 				{
 					'setup': {
 						'incomplete': false,
 						'counting': '5x11_15^90',
-						'match_name': 'HD 1',
+						'match_name': 'HD1',
 						'eventsheet_id': '1.HD',
 						'is_doubles': true,
 						'teams': [
 							{
 								'players': [
 									{
-										'firstname': 'Sam',
-										'lastname': 'Magee',
-										'name': 'Sam Magee',
+										'firstname': 'Brian',
+										'lastname': 'Holtschke',
+										'name': 'Brian Holtschke',
 									},
 									{
-										'firstname': 'Fabian',
-										'lastname': 'Holzer',
-										'name': 'Fabian Holzer',
+										'firstname': 'Hauke',
+										'lastname': 'Graalmann',
+										'name': 'Hauke Graalmann',
 									},
 								],
 							},
 							{
 								'players': [
 									{
-										'firstname': 'Marcus',
-										'lastname': 'Ellis',
-										'name': 'Marcus Ellis',
+										'firstname': 'Joshua',
+										'lastname': 'Magee',
+										'name': 'Joshua Magee',
 									},
 									{
-										'firstname': 'Jorrit',
-										'lastname': 'de Ruiter',
-										'name': 'Jorrit de Ruiter',
+										'firstname': 'Malte',
+										'lastname': 'Laibacher',
+										'name': 'Malte Laibacher',
 									},
 								],
 							},
 						],
 						'btde_match_id': '1',
-						'match_id': 'btde_2016-11-05_HD 1_TV Refrath-1. BV Mülheim',
+						'match_id': 'btde_2019-10-12_HD1_TV Refrath 2-BC Hohenlimburg',
 					},
-					'network_score': [[6, 0]],
+					'network_score': [[11, 7], [12, 10], [11, 9]],
 				},
 				{
 					'setup': {
@@ -91,68 +149,110 @@ _describe('btde', function() {
 							{
 								'players': [
 									{
-										'firstname': 'Chloe',
-										'lastname': 'Magee',
-										'name': 'Chloe Magee',
+										'firstname': 'Ann-Kathrin',
+										'lastname': 'Spöri',
+										'name': 'Ann-Kathrin Spöri',
 									},
 									{
-										'firstname': 'Carla',
-										'lastname': 'Nelte',
-										'name': 'Carla Nelte',
+										'firstname': 'Jennifer',
+										'lastname': 'Karnott',
+										'name': 'Jennifer Karnott',
 									},
 								],
 							},
 							{
 								'players': [
 									{
-										'firstname': 'Johanna',
-										'lastname': 'Goliszewski',
-										'name': 'Johanna Goliszewski',
+										'firstname': 'Jekaterina',
+										'lastname': 'Romanova',
+										'name': 'Jekaterina Romanova',
 									},
 									{
-										'firstname': 'Lara',
-										'lastname': 'Käpplein',
-										'name': 'Lara Käpplein',
+										'firstname': 'Lena',
+										'lastname': 'Fischer',
+										'name': 'Lena Fischer',
 									},
 								],
 							},
 						],
 						'btde_match_id': '2',
-						'match_id': 'btde_2016-11-05_DD_TV Refrath-1. BV Mülheim',
+						'match_id': 'btde_2019-10-12_DD_TV Refrath 2-BC Hohenlimburg',
 					},
-					'network_score': [[4, 11], [12, 10]],
+					'network_score': [[11, 6], [11, 3], [7, 11], [11, 5]],
+				},
+				{
+					'setup': {
+						'incomplete': false,
+						'counting': '5x11_15^90',
+						'match_name': 'HD2',
+						'eventsheet_id': '2.HD',
+						'is_doubles': true,
+						'teams': [
+							{
+								'players': [
+									{
+										'firstname': 'Christopher',
+										'lastname': 'Klauer',
+										'name': 'Christopher Klauer',
+									},
+									{
+										'firstname': 'Denis',
+										'lastname': 'Nyenhuis',
+										'name': 'Denis Nyenhuis',
+									},
+								],
+							},
+							{
+								'players': [
+									{
+										'firstname': 'Christian',
+										'lastname': 'Bald',
+										'name': 'Christian Bald',
+									},
+									{
+										'firstname': 'Fabian',
+										'lastname': 'Stoppel',
+										'name': 'Fabian Stoppel',
+									},
+								],
+							},
+						],
+						'btde_match_id': '3',
+						'match_id': 'btde_2019-10-12_HD2_TV Refrath 2-BC Hohenlimburg',
+					},
+					'network_score': [[9, 11], [8, 11], [8, 11]],
 				},
 				{
 					'setup': {
 						'counting': '5x11_15^90',
 						'incomplete': false,
-						'match_name': 'HE 1',
+						'match_name': 'HE1',
 						'eventsheet_id': '1.HE',
 						'is_doubles': false,
 						'teams': [
 							{
 								'players': [
 									{
-										'firstname': 'Richard',
-										'lastname': 'Domke',
-										'name': 'Richard Domke',
+										'firstname': 'Christopher',
+										'lastname': 'Klauer',
+										'name': 'Christopher Klauer',
 									},
 								],
 							},
 							{
 								'players': [
 									{
-										'firstname': 'Dmytro',
-										'lastname': 'Zavadsky',
-										'name': 'Dmytro Zavadsky',
+										'firstname': 'Joshua',
+										'lastname': 'Magee',
+										'name': 'Joshua Magee',
 									},
 								],
 							},
 						],
-						'btde_match_id': '3',
-						'match_id': 'btde_2016-11-05_HE 1_TV Refrath-1. BV Mülheim',
+						'btde_match_id': '4',
+						'match_id': 'btde_2019-10-12_HE1_TV Refrath 2-BC Hohenlimburg',
 					},
-					'network_score': [[11, 5], [11, 8], [11, 2]],
+					'network_score': [[11, 6], [11, 7], [6, 11], [6, 11], [7, 11]],
 				},
 				{
 					'setup': {
@@ -165,26 +265,26 @@ _describe('btde', function() {
 							{
 								'players': [
 									{
-										'firstname': 'Chloe',
-										'lastname': 'Magee',
-										'name': 'Chloe Magee',
+										'firstname': 'Ann-Kathrin',
+										'lastname': 'Spöri',
+										'name': 'Ann-Kathrin Spöri',
 									},
 								],
 							},
 							{
 								'players': [
 									{
-										'firstname': 'Lara',
-										'lastname': 'Käpplein',
-										'name': 'Lara Käpplein',
+										'firstname': 'Jekaterina',
+										'lastname': 'Romanova',
+										'name': 'Jekaterina Romanova',
 									},
 								],
 							},
 						],
-						'btde_match_id': '4',
-						'match_id': 'btde_2016-11-05_DE_TV Refrath-1. BV Mülheim',
+						'btde_match_id': '5',
+						'match_id': 'btde_2019-10-12_DE_TV Refrath 2-BC Hohenlimburg',
 					},
-					'network_score': [[11, 4], [0, 3]],
+					'network_score': [[11, 3], [12, 10], [11, 3]],
 				},
 				{
 					'setup': {
@@ -197,318 +297,86 @@ _describe('btde', function() {
 							{
 								'players': [
 									{
-										'firstname': 'Sam',
-										'lastname': 'Magee',
-										'name': 'Sam Magee',
+										'firstname': 'Hauke',
+										'lastname': 'Graalmann',
+										'name': 'Hauke Graalmann',
 									},
 									{
-										'firstname': 'Carla',
-										'lastname': 'Nelte',
-										'name': 'Carla Nelte',
+										'firstname': 'Jennifer',
+										'lastname': 'Karnott',
+										'name': 'Jennifer Karnott',
 									},
 								],
 							},
 							{
 								'players': [
 									{
-										'firstname': 'Marcus',
-										'lastname': 'Ellis',
-										'name': 'Marcus Ellis',
+										'firstname': 'Fabian',
+										'lastname': 'Stoppel',
+										'name': 'Fabian Stoppel',
 									},
 									{
-										'firstname': 'Johanna',
-										'lastname': 'Goliszewski',
-										'name': 'Johanna Goliszewski',
+										'firstname': 'Lena',
+										'lastname': 'Fischer',
+										'name': 'Lena Fischer',
 									},
 								],
 							},
 						],
-						'btde_match_id': '5',
-						'match_id': 'btde_2016-11-05_GD_TV Refrath-1. BV Mülheim',
+						'btde_match_id': '6',
+						'match_id': 'btde_2019-10-12_GD_TV Refrath 2-BC Hohenlimburg',
 					},
-					'network_score': [[12, 9], [10, 12], [10, 12], [11, 3], [11, 13]],
+					'network_score': [[12, 10], [9, 11], [4, 11], [11, 8], [8, 11]],
 				},  {
 					'setup': {
 						'incomplete': false,
 						'is_doubles': false,
 						'teams': [{
 							'players': [{
-								'firstname': 'Lars',
-								'lastname': 'Schänzler',
-								'name': 'Lars Schänzler',
+								'firstname': 'Brian',
+								'lastname': 'Holtschke',
+								'name': 'Brian Holtschke',
 							}],
 						}, {
 							'players': [{
-								'firstname': 'Alexander',
-								'lastname': 'Roovers',
-								'name': 'Alexander Roovers',
+								'firstname': 'Malte',
+								'lastname': 'Laibacher',
+								'name': 'Malte Laibacher',
 							}],
 						}],
 						'counting': '5x11_15^90',
-						'match_name': 'HE 2',
+						'match_name': 'HE2',
 						'eventsheet_id': '2.HE',
-						'btde_match_id': '6',
-						'match_id': 'btde_2016-11-05_HE 2_TV Refrath-1. BV Mülheim',
+						'btde_match_id': '7',
+						'match_id': 'btde_2019-10-12_HE2_TV Refrath 2-BC Hohenlimburg',
 					},
-					'network_score': [[11, 8], [11, 2], [11, 3]],
+					'network_score': [[12, 14], [9, 11], [11, 9], [11, 2], [11, 1]],
 				},
 			],
 		};
 
-		var date = new Date(2016, 10, 5);
-		var ml = bup.btde()._parse_match_list(doc, date);
+		var date = new Date(2019, 9, 12);
+		var ml = bup.btde()._parse_event(doc, date);
 		assert.deepEqual(ml, expected);
 
 		var s = {event: ml};
 		bup.eventutils.annotate(s, ml);
-		assert.deepStrictEqual(ml.event_name, 'TV Refrath - 1. BV Mülheim');
-	});
-
-	_it('parse_match_list with holes', function() {
-		var doc = [
-			{'heim':'TV Refrath','gast':'1. BV M\u00fclheim', liga: '(002) 2. Bundesliga Nord', 'datum': '01.10.2017 16:00', 'ort': 'SpH Steinbreche', 'spieltag': '9','url': 'https://www.turnier.de/sport/teammatch.aspx?id=107D0FC0-C153-4EAF-A39D-EBAECB424B16&match=155'},
-			{'id':'1','dis':'HD 1','heim':'Magee, Sam~Holzer, Fabian','gast':'Ellis, Marcus~de Ruiter, Jorrit','satz1':'6','satz2':'','satz3':'','satz4':'','satz5':'','satz6':'0','satz7':'','satz8':'','satz9':'','satz10':'','feld':'1'},
-			{'id':'2','dis':'DD','heim':'~','gast':'Meulendijks, Judith~','satz1':'4','satz2':'2','satz3':'','satz4':'','satz5':'','satz6':'11','satz7':'4','satz8':'','satz9':'','satz10':'','feld':'0'},
-			{'id':'3','dis':'HE 1','heim':'Richard Domke','gast':'Zavadsky, Dmytro','satz1':'','satz2':'','satz3':'','satz4':'','satz5':'','satz6':'','satz7':'','satz8':'','satz9':'','satz10':'','feld':'0'},
-			{'id':'4','dis':'DE','heim':'Magee, Chloe','gast':'K\u00e4pplein, Lara','satz1':'11','satz2':'0','satz3':'','satz4':'','satz5':'','satz6':'4','satz7':'3','satz8':'','satz9':'','satz10':'','feld':'0'},
-			{'id':'5','dis':'GD','heim':'Carla Nelte~Magee, Sam','gast':'Johanna~Marcus Ellis','satz1':'3','satz2':'0','satz3':'2','satz4':'','satz5':'','satz6':'11','satz7':'11','satz8':'11','satz9':'','satz10':'','feld':'0'},
-			{'id':'6','dis':'HE 2','heim':'Sch\u00e4nzler, Lars','gast':'Alexander Roovers','satz1':'','satz2':'','satz3':'','satz4':'','satz5':'','satz6':'','satz7':'','satz8':'','satz9':'','satz10':'','feld':'0'},
-		];
-
-		var expected = {
-			'team_names': ['TV Refrath', '1. BV Mülheim'],
-			'league_key': '2BLN-2018',
-			'team_competition': true,
-			'date': '01.10.2017',
-			'starttime': '16:00',
-			'matchday': '9',
-			'location': 'SpH Steinbreche',
-			'report_urls': ['https://www.turnier.de/sport/teammatch.aspx?id=107D0FC0-C153-4EAF-A39D-EBAECB424B16&match=155'],
-			'courts': [{
-				'court_id': 1,
-				'description': '1 (links)',
-				'match_id':'btde_2016-11-05_HD 1_TV Refrath-1. BV Mülheim',
-			}, {
-				'court_id': 2,
-				'description': '2 (rechts)',
-			}],
-			'matches': [
-				{
-					'setup': {
-						'incomplete': false,
-						'counting': '5x11_15^90',
-						'match_name': 'HD 1',
-						'eventsheet_id': '1.HD',
-						'is_doubles': true,
-						'teams': [
-							{
-								'players': [
-									{
-										'firstname': 'Sam',
-										'lastname': 'Magee',
-										'name': 'Sam Magee',
-									},
-									{
-										'firstname': 'Fabian',
-										'lastname': 'Holzer',
-										'name': 'Fabian Holzer',
-									},
-								],
-							},
-							{
-								'players': [
-									{
-										'firstname': 'Marcus',
-										'lastname': 'Ellis',
-										'name': 'Marcus Ellis',
-									},
-									{
-										'firstname': 'Jorrit',
-										'lastname': 'de Ruiter',
-										'name': 'Jorrit de Ruiter',
-									},
-								],
-							},
-						],
-						'btde_match_id': '1',
-						'match_id': 'btde_2016-11-05_HD 1_TV Refrath-1. BV Mülheim',
-					},
-					'network_score': [[6, 0]],
-				},
-				{
-					'setup': {
-						'incomplete': true,
-						'counting': '5x11_15^90',
-						'match_name': 'DD',
-						'eventsheet_id': 'DD',
-						'is_doubles': true,
-						'teams': [
-							{
-								'players': [],
-							},
-							{
-								'players': [
-									{
-										'firstname': 'Judith',
-										'lastname': 'Meulendijks',
-										'name': 'Judith Meulendijks',
-									},
-								],
-							},
-						],
-						'btde_match_id': '2',
-						'match_id': 'btde_2016-11-05_DD_TV Refrath-1. BV Mülheim',
-					},
-					'network_score': [[4, 11], [2, 4]],
-				},
-				{
-					'setup': {
-						'incomplete': false,
-						'counting': '5x11_15^90',
-						'match_name': 'HE 1',
-						'eventsheet_id': '1.HE',
-						'is_doubles': false,
-						'teams': [
-							{
-								'players': [
-									{
-										'firstname': 'Richard',
-										'lastname': 'Domke',
-										'name': 'Richard Domke',
-									},
-								],
-							},
-							{
-								'players': [
-									{
-										'firstname': 'Dmytro',
-										'lastname': 'Zavadsky',
-										'name': 'Dmytro Zavadsky',
-									},
-								],
-							},
-						],
-						'btde_match_id': '3',
-						'match_id': 'btde_2016-11-05_HE 1_TV Refrath-1. BV Mülheim',
-					},
-					'network_score': [],
-				},
-				{
-					'setup': {
-						'incomplete': false,
-						'counting': '5x11_15^90',
-						'match_name': 'DE',
-						'eventsheet_id': 'DE',
-						'is_doubles': false,
-						'teams': [
-							{
-								'players': [
-									{
-										'firstname': 'Chloe',
-										'lastname': 'Magee',
-										'name': 'Chloe Magee',
-									},
-								],
-							},
-							{
-								'players': [
-									{
-										'firstname': 'Lara',
-										'lastname': 'Käpplein',
-										'name': 'Lara Käpplein',
-									},
-								],
-							},
-						],
-						'btde_match_id': '4',
-						'match_id': 'btde_2016-11-05_DE_TV Refrath-1. BV Mülheim',
-					},
-					'network_score': [[11, 4], [0, 3]],
-				},
-				{
-					'setup': {
-						'incomplete': false,
-						'counting': '5x11_15^90',
-						'match_name': 'GD',
-						'eventsheet_id': 'GD',
-						'is_doubles': true,
-						'teams': [
-							{
-								'players': [
-									{
-										'firstname': 'Sam',
-										'lastname': 'Magee',
-										'name': 'Sam Magee',
-									},
-									{
-										'firstname': 'Carla',
-										'lastname': 'Nelte',
-										'name': 'Carla Nelte',
-									},
-								],
-							},
-							{
-								'players': [
-									{
-										'firstname': 'Marcus',
-										'lastname': 'Ellis',
-										'name': 'Marcus Ellis',
-									},
-									{
-										'name': 'Johanna',
-									},
-								],
-							},
-						],
-						'btde_match_id': '5',
-						'match_id': 'btde_2016-11-05_GD_TV Refrath-1. BV Mülheim',
-					},
-					'network_score': [[3, 11], [0, 11], [2, 11]],
-				}, {
-					'setup': {
-						'incomplete': false,
-						'is_doubles': false,
-						'teams': [{
-							'players': [{
-								'firstname': 'Lars',
-								'lastname': 'Schänzler',
-								'name': 'Lars Schänzler',
-							}],
-						}, {
-							'players': [{
-								'firstname': 'Alexander',
-								'lastname': 'Roovers',
-								'name': 'Alexander Roovers',
-							}],
-						}],
-						'counting': '5x11_15^90',
-						'match_name': 'HE 2',
-						'eventsheet_id': '2.HE',
-						'btde_match_id': '6',
-						'match_id': 'btde_2016-11-05_HE 2_TV Refrath-1. BV Mülheim',
-					},
-					'network_score': [],
-				},
-			],
-		};
-
-		var date = new Date(2016, 10, 5);
-		var ml = bup.btde()._parse_match_list(doc, date);
-		assert.deepEqual(ml, expected);
+		assert.deepStrictEqual(ml.event_name, 'TV Refrath 2 - BC Hohenlimburg');
 	});
 
 	_it('league_key parsing', function() {
 		var b = bup.btde();
 
-		assert.strictEqual(b._get_league_key('(001) 1. Bundesliga'), '1BL-2018');
-		assert.strictEqual(b._get_league_key('(002) 2. Bundesliga Nord'), '2BLN-2018');
-		assert.strictEqual(b._get_league_key('(003) 2. Bundesliga Süd'), '2BLS-2018');
+		assert.strictEqual(b._get_league_key('(001) 1. Bundesliga'), '1BL-2019');
+		assert.strictEqual(b._get_league_key('(002) 2. Bundesliga Nord'), '2BLN-2019');
+		assert.strictEqual(b._get_league_key('(003) 2. Bundesliga Süd'), '2BLS-2019');
 		assert.strictEqual(b._get_league_key('(001) Regionalliga SüdOst Ost'), 'RLSOO-2017');
 		assert.strictEqual(b._get_league_key('(001) Regionalliga West'), 'RLW-2016');
 		assert.strictEqual(b._get_league_key('(007) Verbandsliga Süd 2'), 'NRW-O19-S2-VL-007-2016');
 		assert.strictEqual(b._get_league_key('(008) Landesliga Nord 1'), 'NRW-O19-N1-LL-008-2016');
 		assert.strictEqual(b._get_league_key('(015) Landesliga Süd 2'), 'NRW-O19-S2-LL-015-2016');
 		assert.strictEqual(b._get_league_key('NLA'), 'NLA-2017');
+		assert.strictEqual(b._get_league_key('NLB'), 'NLA-2017');
 		assert.strictEqual(b._get_league_key('1. Bundesliga'), 'OBL-2017');
 
 		assert(! b._get_league_key('foo bar'));
