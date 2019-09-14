@@ -5,7 +5,7 @@ d/teamscore: team bg color
 d/teamscore: logos
 
 shell script to download (including cached)
-tde_import: support right-clicking (teammatch.aspx)
+tde_import: fix player import
 
 Janine check Bischmisheim player sheet
 
