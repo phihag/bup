@@ -98,7 +98,7 @@ function parse_players($players_html, $gender) {
 }
 
 function determine_club_id($httpc, $domain, $season_id, $team_id) {
-	$team_url = 'https://' . $domain . '/sport/team.aspx?id=' . $season_id . '&team=' . $team_id;
+	$team_url = 'https://' . $domain . '/sport/league/team?id=' . $season_id . '&team=' . $team_id;
 	$team_page = $httpc->request($team_url);
 	if ($team_page === false) {
 		throw new \Exception('Cannot download team page ' . $team_url);
@@ -106,7 +106,7 @@ function determine_club_id($httpc, $domain, $season_id, $team_id) {
 
 	if (!preg_match('/
 			<th>Verein:<\/th>\s*
-			<td><a\s+href="club\.aspx\?id=[^&]+&club=(?P<club_id>[0-9]+)">
+			<td><a\s+href="[^"]*club\.aspx\?id=[^&]+&club=(?P<club_id>[0-9]+)">
 			/x', $team_page, $club_m)) {
 
 		throw new \Exception('Cannot find club id in ' . $team_url);
