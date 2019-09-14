@@ -22,7 +22,7 @@ var TEAM_COLORS = {
 	'Hofheim': {fg: '#82dcff'},
 	'Hohenlimburg': {fg: '#0ebbff'},
 	'Horner': {fg: '#ff2222'}, // Hamburg Horner TV
-	'Lüdinghausen': {fg: '#cb232a'},
+	'Lüdinghausen': {fg: '#ff2200'},
 	'Neuhausen': {fg: '#a6cb8b'},
 	'Refrath': {fg: '#ffffff', bg: '#000b18'},
 	'Remagen': {fg: '#ffffff', bg: '#0f1731f'},
