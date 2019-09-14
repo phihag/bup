@@ -24,6 +24,8 @@ function main($match_url) {
 
 	if (\preg_match('/^https?:\/\/(?P<domain>www\.turnier\.de|[a-z]+\.tournamentsoftware\.com)\/sport\/(?:league\/match|teammatch\.aspx)\?id=([a-fA-F0-9-]+)&match=(?P<match_id>[0-9]+)$/', $match_url, $matches)) {
 
+		$match_url = \preg_replace('/\/teammatch\.aspx/', '/league/match', $match_url);
+
 		$domain = $matches['domain'];
 		$match_id = $matches['match_id'];
 		$tm_html = $httpc->request($match_url);
