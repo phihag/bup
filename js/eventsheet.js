@@ -46,7 +46,7 @@ var URLS = {
 	'DBV-Satzungen-2019': 'https://aufschlagwechsel.de/2019/dbv_satzung_2019.pdf',
 	'RLW-2016': 'div/Spielbericht_8x3x21.svg',
 	'RLN-2016': 'div/Spielbericht_8x3x21.svg',
-	'RLN-Satzungen': 'https://gruppe-nord.net/download/satzung-und-ordnungen-der-gruppe-nord-stand-31-08-2018/?wpdmdl=372',
+	'RLN-Satzungen': 'https://gruppe-nord.net/download/satzung-und-ordnungen-der-gruppe-nord/?wpdmdl=372',
 	'RLM-2016': 'div/Spielbericht_8x3x21.svg',
 	'RLM-SpO': 'http://www.dbv-mitte.de/web/images/Allgemein/Gruppenordnung/Gruppe_Mitte_im_DBV_Ordnungen_20170701.pdf',
 	'NLA-2017': 'div/NLA_Resultatblatt.svg',
