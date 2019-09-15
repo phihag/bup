@@ -1,6 +1,7 @@
-colors Remagen!
+colors Sterkrade + Hövelhof
 
 
+test for all colors to match ^#[0-9a-f]{6}$
 d/teamscore: team bg color
 d/teamscore: logos
 
