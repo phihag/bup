@@ -22,7 +22,7 @@ function active() {
 function start() {
 	var doc = document.documentElement;
 	if (doc.requestFullscreen) {
-		doc.requestFullscreen();
+		doc.requestFullscreen({navigationUI: 'hide'});
 	} else if (doc.webkitRequestFullscreen) {
 		doc.webkitRequestFullscreen(doc.ALLOW_KEYBOARD_INPUT);
 	} else if (doc.mozRequestFullScreen) {
