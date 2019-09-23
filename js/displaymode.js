@@ -1662,7 +1662,7 @@ function render_stripes(s, container, event, court, match, colors) {
 	var nscore = extract_netscore(match);
 	var setup = match.setup;
 	var max_game_count = calc.max_game_count(setup.counting);
-	var team_names = event.team_names || (setup.teams[0].clubName || setup.teams[1].clubName) ? [setup.teams[0].clubName, setup.teams[1].clubName] : ['', ''];
+	var team_names = event.team_names || ((typeof setup.teams[0].clubName !== 'undefined' || typeof setup.teams[1].clubName !== 'undefined') ? [setup.teams[0].clubName, setup.teams[1].clubName] : ['', '']);
 	var current_score = nscore[nscore.length - 1];
 	var server = determine_server(match, current_score);
 	var match_score = _calc_matchscore(event.matches);
