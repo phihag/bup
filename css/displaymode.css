@@ -655,9 +655,14 @@
 	font-size: 10vmin;
 	border-collapse: collapse;
 	table-layout: fixed;
+	overflow: hidden;
 }
 .d_stripes_table td {
 	text-align: center;
+}
+
+.d_stripes_table > tr:not(:nth-child(3)) td {
+	white-space: nowrap;
 }
 
 .d_hide_settings {
