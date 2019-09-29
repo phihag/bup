@@ -391,4 +391,28 @@ _describe('btde', function() {
 		assert.strictEqual(b._get_counting('newleague', {gews: 3}), '5x11_15^90');
 		assert.strictEqual(b._get_counting('newleague', {gews: 2}), '3x21');
 	});
+
+	_it('send_score', function() {
+		const presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		}];
+		tutils.press_score(presses, 21, 5);
+		presses.push({type: 'postgame-confirm'});
+		tutils.press_score(presses, 11, 5);
+		const setup = bup.utils.deep_copy(tutils.SINGLES_SETUP);
+		setup.btde_match_id = '4';
+		const s = tutils.state_after(presses, setup, {court_id: 2});
+		const netscore = bup.calc.netscore(s, true);
+
+		assert.deepStrictEqual(bup.btde()._calc_send_data(s, netscore), {
+			court: 2,
+			id: '4',
+			course: [['21:5'], ['5:11']],
+		});
+	});
 });

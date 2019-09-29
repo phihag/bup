@@ -73,15 +73,7 @@ function _request(s, component, options, cb) {
 	}
 }
 
-var outstanding_requests = 0;
-function send_score(s) {
-	if (s.settings.court_id === 'referee') {
-		network.errstate('btde.score', null);
-		return;
-	}
-
-	var netscore = calc.netscore(s, true);
-
+function _calc_send_data(s, netscore) {
 	// badminticker requirements - show 0:0 before match start
 	if (netscore.length === 0) {
 		netscore = [[0, 0]];
@@ -91,11 +83,21 @@ function send_score(s) {
 		id: s.setup.btde_match_id,
 		court: s.settings.court_id,
 	};
-	var course = netscore.map(function(score) {
-		return (score[0] || '0') + ':' + (score[1] || '0');
+	post_data.course = netscore.map(function(score) {
+		return [(score[0] || '0') + ':' + (score[1] || '0')];
 	});
-	post_data.course = course;
+	return post_data;
+}
 
+var outstanding_requests = 0;
+function send_score(s) {
+	if (s.settings.court_id === 'referee') {
+		network.errstate('btde.score', null);
+		return;
+	}
+
+	var netscore = calc.netscore(s, true);
+	var data = JSON.stringify(_calc_send_data(s, netscore));
 	if (outstanding_requests > 0) {
 		// Another request is currently underway; ours may come to late
 		// Send our request anyways, but send it once again as soon as there are no more open requests
@@ -103,7 +105,6 @@ function send_score(s) {
 	}
 	outstanding_requests++;
 	var match_id = s.metadata.id;
-	var data = JSON.stringify(post_data);
 
 	_request(s, 'btde.score', {
 		method: 'POST',
@@ -491,6 +492,7 @@ return {
 	_get_counting: _get_counting,
 	_get_league_key: _get_league_key,
 	_parse_event: _parse_event,
+	_calc_send_data: _calc_send_data,
 	/*/@DEV*/
 };
 
