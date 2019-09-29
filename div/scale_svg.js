@@ -42,15 +42,17 @@ function convert_css_prop(prop, factor) {
 
 	const key = prop_m[1].trim();
 	switch (key) {
-	case 'font-family':
 	case 'fill':
-	case 'opacity':
 	case 'fill-opacity':
 	case 'fill-rule':
+	case 'font-family':
+	case 'font-weight':
+	case 'opacity':
 	case 'stroke-linecap':
 	case 'stroke-linejoin':
 	case 'stroke-miterlimit': // numerical, but a ratio
 	case 'stroke-opacity':
+	case 'text-anchor':
 		return prop;
 	case 'stroke':
 		assert(/^\s*(?:#[0-9a-f]{3,6}|none)\s*$/.test(prop_m[2]),
