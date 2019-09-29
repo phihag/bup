@@ -234,8 +234,12 @@ function _parse_event(doc, now) {
 	var league_key;
 	if (event_data.league) {
 		league_key = _get_league_key(event_data.league);
+		if (!league_key) {
+			report_problem.silent_error('Cannot associate btde league name ' + JSON.stringify(event_data.league));
+		}
 	} else {
 		// No league key, guess
+		report_problem.silent_error('btde: league key missing');
 		league_key = (doc.fixtures.length === 8) ? 'RLW-2016' : '1BL-2019';
 	}
 	var counting = _get_counting(league_key, event_data);
@@ -498,6 +502,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var eventutils = require('./eventutils');
 	var netstats = require('./netstats');
 	var network = require('./network');
+	var report_problem = require('./report_problem');
 	var utils = require('./utils');
 
 	module.exports = btde;
