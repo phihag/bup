@@ -11,7 +11,7 @@ text.nla_entry {
 }
 text.nla_score {
 	text-anchor: middle;
-	font-size: 4px;	
+	font-size: 4px;
 }
 line {
 	stroke: #000;
