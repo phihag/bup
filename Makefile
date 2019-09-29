@@ -73,7 +73,6 @@ dist: cleandist ## Create distribution files
 		div/bupdate.php \
 		div/Mannschaftsaufstellung_1BL-2015.pdf \
 		div/Mannschaftsaufstellung_2BL-2015.pdf \
-		div/NLA_Resultatblatt.svg \
 		div/eventsheet_obl.xlsx \
 		div/receipt.svg \
 		div/eventsheet_international.svg \
