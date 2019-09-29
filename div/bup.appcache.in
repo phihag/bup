@@ -4,21 +4,7 @@ CACHE MANIFEST
 # @version
 
 CACHE:
-index.html
-icons/favicon.png
-icons/loading.gif
-bup.dist.css
-bup.dist.js
-jspdf.dist.js
-pdfform.minipdf.dist.js
-jszip.min.js
-div/scoresheet/international.svg
-div/scoresheet/international_5x11.svg
-div/scoresheet/bundesliga-2016.svg
-div/bldemo.json
-div/bundesliga-logo.svg
-
-@svgfiles
+# This file is now totally disabled; we want to use service workers instead
 
 NETWORK:
 *
