@@ -2264,7 +2264,7 @@ function render_2court(s, container, event, colors) {
 			(match.setup.event_name || '').replace(/(?:\s*-)?\s*Qualification/, 'Q'));
 		var d_2court_info_container = uiu.el(court_container, 'div', 'd_2court_info');
 		uiu.el(d_2court_info_container, 'div', {
-			style: 'color:' + colors.fg + ';'
+			style: 'color:' + colors.fg + ';',
 		}, match_name);
 
 		var timer_state = _extract_timer_state(s, match);

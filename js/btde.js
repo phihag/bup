@@ -91,9 +91,8 @@ function send_score(s) {
 		id: s.setup.btde_match_id,
 		court: s.settings.court_id,
 	};
-	var course = [];
-	netscore.forEach(function(score, game_idx) {
-		course.push([(score[0] || '0') + ':' + (score[1] || '0')]);
+	var course = netscore.map(function(score) {
+		return (score[0] || '0') + ':' + (score[1] || '0');
 	});
 	post_data.course = course;
 
@@ -246,8 +245,6 @@ function _parse_event(doc, now) {
 		league_key = '1BL-2019';
 	}
 
-	var game_count = calc.max_game_count(counting);
-
 	var matches = doc.fixtures.map(function(match) {
 		var is_doubles = /HD|DD|GD/.test(match.dis);
 		var teams = [{
@@ -267,7 +264,7 @@ function _parse_event(doc, now) {
 			});
 		}
 
-		var network_score = []
+		var network_score = [];
 		match.course.forEach(function(lst) {
 			if (!lst.length) return;
 			var last = lst[lst.length - 1];
