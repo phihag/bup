@@ -389,6 +389,7 @@ var i18n_de = {
 'eventsheet:label|NRW-2016': 'Spielbericht',
 'eventsheet:label|NRW-Satzungen': 'Satzungen und Ordnungen BLV NRW',
 'eventsheet:label|NLA-2017': 'Resultatblatt',
+'eventsheet:label|NLA-2019': 'Resultatblatt',
 'eventsheet:label|OBL-2017': 'Spielbericht',
 'eventsheet:label|receipt': 'Schiedsrichter-Quittung',
 'eventsheet:label|int': 'Spielbericht',

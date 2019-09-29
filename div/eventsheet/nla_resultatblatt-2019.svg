@@ -1,0 +1,714 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 297 210">
+<style>
+text {
+	font-family: Helvetica;
+	font-size: 2px;
+	fill: #000000;
+}
+text.nla_entry {
+	font-size: 4px;
+}
+text.nla_score {
+	text-anchor: middle;
+	font-size: 4px;	
+}
+line {
+	stroke: #000;
+	stroke-width: .4px;
+	stroke-linecap: square;
+}
+line.thick {
+	stroke-width: .6px;
+}
+line.verythick {
+	stroke-width: .8px;
+}
+line.dotted {
+	stroke-dasharray: .4;
+	stroke-linecap: butt;
+}
+</style>
+
+<!-- header -->
+<line x1="7.5" x2="7.5" y1="11.5" y2="164" class="thick" />
+<line x1="7.5" x2="131" y1="11.5" y2="11.5" class="thick" />
+<line x1="109" x2="109" y1="11.5" y2="38" class="thick" />
+<line x1="131" x2="131" y1="11.5" y2="20" class="thick" />
+<line x1="131" x2="151" y1="20" y2="20" class="thick" />
+<line x1="151" x2="151" y1="20" y2="38" class="thick" />
+<line x1="121.5" x2="121.5" y1="11.5" y2="164" class="thick" />
+<line x1="109" x2="131" y1="20" y2="20" />
+<line x1="109" x2="151" y1="29" y2="29" />
+<line x1="131" x2="131" y1="20" y2="29" />
+<line x1="141" x2="141" y1="20" y2="29" />
+<line x1="15" x2="272" y1="38" y2="38" class="thick" />
+<line x1="272" x2="296" y1="38" y2="38" class="verythick" />
+<line x1="7.5" x2="296" y1="47" y2="47" class="thick" />
+<line x1="15" x2="15" y1="38" y2="155" class="thick" />
+<line x1="20" x2="20" y1="41" y2="47" />
+<line x1="25" x2="25" y1="41" y2="47" />
+<line x1="30" x2="30" y1="41" y2="47" />
+<line x1="35" x2="35" y1="41" y2="47" />
+<line x1="40" x2="40" y1="41" y2="47" />
+<line x1="126" x2="126" y1="41" y2="47" />
+<line x1="131" x2="131" y1="41" y2="47" />
+<line x1="136" x2="136" y1="41" y2="47" />
+<line x1="141" x2="141" y1="41" y2="47" />
+<line x1="146" x2="146" y1="41" y2="47" />
+<line x1="212" x2="212" y1="38" y2="164" class="thick" />
+<line x1="224" x2="224" y1="38" y2="155" />
+<line x1="236" x2="236" y1="38" y2="155" />
+<line x1="248" x2="248" y1="38" y2="155" />
+<line x1="260" x2="260" y1="38" y2="155" />
+<line x1="272" x2="272" y1="38" y2="164" class="verythick" />
+<line x1="284" x2="284" y1="38" y2="164" />
+<line x1="296" x2="296" y1="38" y2="164" class="verythick" />
+<text style="font-size: 2.5px; font-weight:bold;" x="11" y="17">FEUILLE DE RESULTATS</text>
+<text style="font-size: 2.5px; font-weight:bold;" x="46.5" y="17">RESULTATBLATT</text>
+<text x="109.5" y="16">Tour</text>
+<text x="109.5" y="18.5">Runde</text>
+<text x="109.5" y="25">Disputé le</text>
+<text x="109.5" y="27.5">Spieldatum</text>
+<text x="109.5" y="34">Volants</text>
+<text x="109.5" y="36.5">Shuttles</text>
+<text x="15.5" y="40">Club recevant - Heimclub</text>
+<text x="45" y="40">Nom de l'équipe</text>
+<text x="15.5" y="43">IC</text>
+<text x="15.5" y="45.5">No</text>
+<text x="122" y="40">Club visiteur - Gastclub</text>
+<text x="151.5" y="40">Mannschaftsname</text>
+<text x="122" y="43">IC</text>
+<text x="122" y="45.5">Nr</text>
+<text text-anchor="middle" x="218" y="40.5">1.</text>
+<text text-anchor="middle" x="218" y="43">Manche</text>
+<text text-anchor="middle" x="218" y="45.5">Satz</text>
+<text text-anchor="middle" x="230" y="40.5">2.</text>
+<text text-anchor="middle" x="230" y="43">Manche</text>
+<text text-anchor="middle" x="230" y="45.5">Satz</text>
+<text text-anchor="middle" x="242" y="40.5">3.</text>
+<text text-anchor="middle" x="242" y="43">Manche</text>
+<text text-anchor="middle" x="242" y="45.5">Satz</text>
+<text text-anchor="middle" x="254" y="40.5">4.</text>
+<text text-anchor="middle" x="254" y="43">Manche</text>
+<text text-anchor="middle" x="254" y="45.5">Satz</text>
+<text text-anchor="middle" x="266" y="40.5">5.</text>
+<text text-anchor="middle" x="266" y="43">Manche</text>
+<text text-anchor="middle" x="266" y="45.5">Satz</text>
+<text text-anchor="middle" x="278" y="41.5">Matches</text>
+<text text-anchor="middle" x="278" y="44.5">Spiele</text>
+<text text-anchor="middle" x="290" y="41.5">Manches</text>
+<text text-anchor="middle" x="290" y="44.5">Sätze</text>
+
+<!-- main table -->
+<line x1="7.5" x2="296" y1="56" y2="56" />
+<line x1="7.5" x2="296" y1="65" y2="65" />
+<line x1="7.5" x2="296" y1="74" y2="74" />
+<line x1="7.5" x2="296" y1="83" y2="83" class="thick" />
+<line x1="7.5" x2="296" y1="101" y2="101" class="thick" />
+<line x1="7.5" x2="296" y1="119" y2="119" class="thick" />
+<line x1="7.5" x2="296" y1="137" y2="137" class="thick" />
+<line x1="25" x2="25" y1="47" y2="155" />
+<line x1="55" x2="55" y1="47" y2="155" />
+<line x1="131" x2="131" y1="47" y2="155" />
+<line x1="161" x2="161" y1="47" y2="155" />
+<line x1="15" x2="55" y1="92" y2="92"/>
+<line x1="55" x2="121.5" y1="92" y2="92" class="dotted"/>
+<line x1="121.5" x2="161" y1="92" y2="92"/>
+<line x1="161" x2="212" y1="92" y2="92" class="dotted"/>
+<line x1="15" x2="55" y1="110" y2="110"/>
+<line x1="55" x2="121.5" y1="110" y2="110" class="dotted"/>
+<line x1="121.5" x2="161" y1="110" y2="110"/>
+<line x1="161" x2="212" y1="110" y2="110" class="dotted"/>
+<line x1="15" x2="55" y1="128" y2="128"/>
+<line x1="55" x2="121.5" y1="128" y2="128" class="dotted"/>
+<line x1="121.5" x2="161" y1="128" y2="128"/>
+<line x1="161" x2="212" y1="128" y2="128" class="dotted"/>
+<line x1="15" x2="55" y1="146" y2="146"/>
+<line x1="55" x2="121.5" y1="146" y2="146" class="dotted"/>
+<line x1="121.5" x2="161" y1="146" y2="146"/>
+<line x1="161" x2="212" y1="146" y2="146" class="dotted"/>
+<line x1="7.5" x2="272" y1="155" y2="155" class="thick" />
+<line x1="272" x2="296" y1="155" y2="155" class="verythick" />
+<text x="15.5" y="49">Cl</text>
+<text x="15.5" y="85">Cl</text>
+<text x="25.5" y="49">Numéro de License</text>
+<text x="25.5" y="85">Numéro de License</text>
+<text x="55.5" y="49">Nom, Prénom</text>
+<text x="55.5" y="85">Nom, Prénom</text>
+<text x="122" y="49">Kl</text>
+<text x="122" y="85">Kl</text>
+<text x="131.5" y="49">Lizenz-Nummer</text>
+<text x="131.5" y="85">Lizenz-Nummer</text>
+<text x="161.5" y="49">Name, Vorname</text>
+<text x="161.5" y="85">Name, Vorname</text>
+<text x="55.5" y="103">2. DM seulement en Ligue National</text>
+<text x="161.5" y="103">2. HD nur in der Nationalliga</text>
+
+<!-- discipline labels -->
+<text x="11.25" y="49.5" text-anchor="middle">1.</text>
+<text x="11.25" y="52" text-anchor="middle">SM</text>
+<text x="11.25" y="54.5" text-anchor="middle">HE</text>
+<text x="11.25" y="58.5" text-anchor="middle">2.</text>
+<text x="11.25" y="61" text-anchor="middle">SM</text>
+<text x="11.25" y="63.5" text-anchor="middle">HE</text>
+<text x="11.25" y="67.5" text-anchor="middle">3.</text>
+<text x="11.25" y="70" text-anchor="middle">SM</text>
+<text x="11.25" y="72.5" text-anchor="middle">HE</text>
+<text x="11.25" y="79" text-anchor="middle">SD</text>
+<text x="11.25" y="81.5" text-anchor="middle">HE</text>
+<text x="11.25" y="90" text-anchor="middle">1.</text>
+<text x="11.25" y="92.5" text-anchor="middle">DM</text>
+<text x="11.25" y="95" text-anchor="middle">HD</text>
+<text x="11.25" y="108" text-anchor="middle">2.</text>
+<text x="11.25" y="110.5" text-anchor="middle">DM</text>
+<text x="11.25" y="113" text-anchor="middle">HD</text>
+<text x="11.25" y="127" text-anchor="middle">DD</text>
+<text x="11.25" y="130" text-anchor="middle">DD</text>
+<text x="11.25" y="145" text-anchor="middle">MX</text>
+<text x="11.25" y="148" text-anchor="middle">MX</text>
+
+
+<!-- team names -->
+<text x="41" y="45" class="nla_entry" id="es_svg_teamname0"></text>
+<text x="147" y="45" class="nla_entry" id="es_svg_teamname1"></text>
+
+<!-- header -->
+<text x="124" y="35" class="nla_entry" id="es_svg_shuttle_count"></text>
+<text x="126.25" text-anchor="middle" y="26" class="nla_entry" id="es_svg_day"></text>
+<text x="136" text-anchor="middle" y="26" class="nla_entry" id="es_svg_month"></text>
+<text x="146" text-anchor="middle" y="26" class="nla_entry" id="es_svg_year"></text>
+
+<!-- player names -->
+<text x="56" y="53.5" class="nla_entry" id="es_svg_1.HE_player0.0"></text>
+<text x="162" y="53.5" class="nla_entry" id="es_svg_1.HE_player1.0"></text>
+<text x="56" y="62.5" class="nla_entry" id="es_svg_2.HE_player0.0"></text>
+<text x="162" y="62.5" class="nla_entry" id="es_svg_2.HE_player1.0"></text>
+<text x="56" y="71.5" class="nla_entry" id="es_svg_3.HE_player0.0"></text>
+<text x="162" y="71.5" class="nla_entry" id="es_svg_3.HE_player1.0"></text>
+<text x="56" y="80.5" class="nla_entry" id="es_svg_DE_player0.0"></text>
+<text x="162" y="80.5" class="nla_entry" id="es_svg_DE_player1.0"></text>
+<text x="56" y="89.5" class="nla_entry" id="es_svg_1.HD_player0.0"></text>
+<text x="162" y="89.5" class="nla_entry" id="es_svg_1.HD_player1.0"></text>
+<text x="56" y="98.5" class="nla_entry" id="es_svg_1.HD_player0.1"></text>
+<text x="162" y="98.5" class="nla_entry" id="es_svg_1.HD_player1.1"></text>
+<text x="56" y="107.5" class="nla_entry" id="es_svg_2.HD_player0.0"></text>
+<text x="162" y="107.5" class="nla_entry" id="es_svg_2.HD_player1.0"></text>
+<text x="56" y="116.5" class="nla_entry" id="es_svg_2.HD_player0.1"></text>
+<text x="162" y="116.5" class="nla_entry" id="es_svg_2.HD_player1.1"></text>
+<text x="56" y="125.5" class="nla_entry" id="es_svg_DD_player0.0"></text>
+<text x="162" y="125.5" class="nla_entry" id="es_svg_DD_player1.0"></text>
+<text x="56" y="134.5" class="nla_entry" id="es_svg_DD_player0.1"></text>
+<text x="162" y="134.5" class="nla_entry" id="es_svg_DD_player1.1"></text>
+<text x="56" y="143.5" class="nla_entry" id="es_svg_GD_player0.0"></text>
+<text x="162" y="143.5" class="nla_entry" id="es_svg_GD_player1.0"></text>
+<text x="56" y="152.5" class="nla_entry" id="es_svg_GD_player0.1"></text>
+<text x="162" y="152.5" class="nla_entry" id="es_svg_GD_player1.1"></text>
+
+<!-- scores -->
+<text x="215" y="53.5" class="nla_score" id="es_svg_1.HE_score0_0"></text>
+<text x="221" y="53.5" class="nla_score" id="es_svg_1.HE_score0_1"></text>
+<text x="227" y="53.5" class="nla_score" id="es_svg_1.HE_score1_0"></text>
+<text x="233" y="53.5" class="nla_score" id="es_svg_1.HE_score1_1"></text>
+<text x="239" y="53.5" class="nla_score" id="es_svg_1.HE_score2_0"></text>
+<text x="245" y="53.5" class="nla_score" id="es_svg_1.HE_score2_1"></text>
+<text x="251" y="53.5" class="nla_score" id="es_svg_1.HE_score3_0"></text>
+<text x="257" y="53.5" class="nla_score" id="es_svg_1.HE_score3_1"></text>
+<text x="263" y="53.5" class="nla_score" id="es_svg_1.HE_score4_0"></text>
+<text x="269" y="53.5" class="nla_score" id="es_svg_1.HE_score4_1"></text>
+<text x="275" y="53.5" class="nla_score" id="es_svg_1.HE_matches0"></text>
+<text x="281" y="53.5" class="nla_score" id="es_svg_1.HE_matches1"></text>
+<text x="287" y="53.5" class="nla_score" id="es_svg_1.HE_games0"></text>
+<text x="293" y="53.5" class="nla_score" id="es_svg_1.HE_games1"></text>
+<text x="215" y="62.5" class="nla_score" id="es_svg_2.HE_score0_0"></text>
+<text x="221" y="62.5" class="nla_score" id="es_svg_2.HE_score0_1"></text>
+<text x="227" y="62.5" class="nla_score" id="es_svg_2.HE_score1_0"></text>
+<text x="233" y="62.5" class="nla_score" id="es_svg_2.HE_score1_1"></text>
+<text x="239" y="62.5" class="nla_score" id="es_svg_2.HE_score2_0"></text>
+<text x="245" y="62.5" class="nla_score" id="es_svg_2.HE_score2_1"></text>
+<text x="251" y="62.5" class="nla_score" id="es_svg_2.HE_score3_0"></text>
+<text x="257" y="62.5" class="nla_score" id="es_svg_2.HE_score3_1"></text>
+<text x="263" y="62.5" class="nla_score" id="es_svg_2.HE_score4_0"></text>
+<text x="269" y="62.5" class="nla_score" id="es_svg_2.HE_score4_1"></text>
+<text x="275" y="62.5" class="nla_score" id="es_svg_2.HE_matches0"></text>
+<text x="281" y="62.5" class="nla_score" id="es_svg_2.HE_matches1"></text>
+<text x="287" y="62.5" class="nla_score" id="es_svg_2.HE_games0"></text>
+<text x="293" y="62.5" class="nla_score" id="es_svg_2.HE_games1"></text>
+<text x="215" y="71.5" class="nla_score" id="es_svg_3.HE_score0_0"></text>
+<text x="221" y="71.5" class="nla_score" id="es_svg_3.HE_score0_1"></text>
+<text x="227" y="71.5" class="nla_score" id="es_svg_3.HE_score1_0"></text>
+<text x="233" y="71.5" class="nla_score" id="es_svg_3.HE_score1_1"></text>
+<text x="239" y="71.5" class="nla_score" id="es_svg_3.HE_score2_0"></text>
+<text x="245" y="71.5" class="nla_score" id="es_svg_3.HE_score2_1"></text>
+<text x="251" y="71.5" class="nla_score" id="es_svg_3.HE_score3_0"></text>
+<text x="257" y="71.5" class="nla_score" id="es_svg_3.HE_score3_1"></text>
+<text x="263" y="71.5" class="nla_score" id="es_svg_3.HE_score4_0"></text>
+<text x="269" y="71.5" class="nla_score" id="es_svg_3.HE_score4_1"></text>
+<text x="275" y="71.5" class="nla_score" id="es_svg_3.HE_matches0"></text>
+<text x="281" y="71.5" class="nla_score" id="es_svg_3.HE_matches1"></text>
+<text x="287" y="71.5" class="nla_score" id="es_svg_3.HE_games0"></text>
+<text x="293" y="71.5" class="nla_score" id="es_svg_3.HE_games1"></text>
+<text x="215" y="80.5" class="nla_score" id="es_svg_DE_score0_0"></text>
+<text x="221" y="80.5" class="nla_score" id="es_svg_DE_score0_1"></text>
+<text x="227" y="80.5" class="nla_score" id="es_svg_DE_score1_0"></text>
+<text x="233" y="80.5" class="nla_score" id="es_svg_DE_score1_1"></text>
+<text x="239" y="80.5" class="nla_score" id="es_svg_DE_score2_0"></text>
+<text x="245" y="80.5" class="nla_score" id="es_svg_DE_score2_1"></text>
+<text x="251" y="80.5" class="nla_score" id="es_svg_DE_score3_0"></text>
+<text x="257" y="80.5" class="nla_score" id="es_svg_DE_score3_1"></text>
+<text x="263" y="80.5" class="nla_score" id="es_svg_DE_score4_0"></text>
+<text x="269" y="80.5" class="nla_score" id="es_svg_DE_score4_1"></text>
+<text x="275" y="80.5" class="nla_score" id="es_svg_DE_matches0"></text>
+<text x="281" y="80.5" class="nla_score" id="es_svg_DE_matches1"></text>
+<text x="287" y="80.5" class="nla_score" id="es_svg_DE_games0"></text>
+<text x="293" y="80.5" class="nla_score" id="es_svg_DE_games1"></text>
+<text x="215" y="98.5" class="nla_score" id="es_svg_1.HD_score0_0"></text>
+<text x="221" y="98.5" class="nla_score" id="es_svg_1.HD_score0_1"></text>
+<text x="227" y="98.5" class="nla_score" id="es_svg_1.HD_score1_0"></text>
+<text x="233" y="98.5" class="nla_score" id="es_svg_1.HD_score1_1"></text>
+<text x="239" y="98.5" class="nla_score" id="es_svg_1.HD_score2_0"></text>
+<text x="245" y="98.5" class="nla_score" id="es_svg_1.HD_score2_1"></text>
+<text x="251" y="98.5" class="nla_score" id="es_svg_1.HD_score3_0"></text>
+<text x="257" y="98.5" class="nla_score" id="es_svg_1.HD_score3_1"></text>
+<text x="263" y="98.5" class="nla_score" id="es_svg_1.HD_score4_0"></text>
+<text x="269" y="98.5" class="nla_score" id="es_svg_1.HD_score4_1"></text>
+<text x="275" y="98.5" class="nla_score" id="es_svg_1.HD_matches0"></text>
+<text x="281" y="98.5" class="nla_score" id="es_svg_1.HD_matches1"></text>
+<text x="287" y="98.5" class="nla_score" id="es_svg_1.HD_games0"></text>
+<text x="293" y="98.5" class="nla_score" id="es_svg_1.HD_games1"></text>
+<text x="215" y="116.5" class="nla_score" id="es_svg_2.HD_score0_0"></text>
+<text x="221" y="116.5" class="nla_score" id="es_svg_2.HD_score0_1"></text>
+<text x="227" y="116.5" class="nla_score" id="es_svg_2.HD_score1_0"></text>
+<text x="233" y="116.5" class="nla_score" id="es_svg_2.HD_score1_1"></text>
+<text x="239" y="116.5" class="nla_score" id="es_svg_2.HD_score2_0"></text>
+<text x="245" y="116.5" class="nla_score" id="es_svg_2.HD_score2_1"></text>
+<text x="251" y="116.5" class="nla_score" id="es_svg_2.HD_score3_0"></text>
+<text x="257" y="116.5" class="nla_score" id="es_svg_2.HD_score3_1"></text>
+<text x="263" y="116.5" class="nla_score" id="es_svg_2.HD_score4_0"></text>
+<text x="269" y="116.5" class="nla_score" id="es_svg_2.HD_score4_1"></text>
+<text x="275" y="116.5" class="nla_score" id="es_svg_2.HD_matches0"></text>
+<text x="281" y="116.5" class="nla_score" id="es_svg_2.HD_matches1"></text>
+<text x="287" y="116.5" class="nla_score" id="es_svg_2.HD_games0"></text>
+<text x="293" y="116.5" class="nla_score" id="es_svg_2.HD_games1"></text>
+<text x="215" y="134.5" class="nla_score" id="es_svg_DD_score0_0"></text>
+<text x="221" y="134.5" class="nla_score" id="es_svg_DD_score0_1"></text>
+<text x="227" y="134.5" class="nla_score" id="es_svg_DD_score1_0"></text>
+<text x="233" y="134.5" class="nla_score" id="es_svg_DD_score1_1"></text>
+<text x="239" y="134.5" class="nla_score" id="es_svg_DD_score2_0"></text>
+<text x="245" y="134.5" class="nla_score" id="es_svg_DD_score2_1"></text>
+<text x="251" y="134.5" class="nla_score" id="es_svg_DD_score3_0"></text>
+<text x="257" y="134.5" class="nla_score" id="es_svg_DD_score3_1"></text>
+<text x="263" y="134.5" class="nla_score" id="es_svg_DD_score4_0"></text>
+<text x="269" y="134.5" class="nla_score" id="es_svg_DD_score4_1"></text>
+<text x="275" y="134.5" class="nla_score" id="es_svg_DD_matches0"></text>
+<text x="281" y="134.5" class="nla_score" id="es_svg_DD_matches1"></text>
+<text x="287" y="134.5" class="nla_score" id="es_svg_DD_games0"></text>
+<text x="293" y="134.5" class="nla_score" id="es_svg_DD_games1"></text>
+<text x="215" y="152.5" class="nla_score" id="es_svg_GD_score0_0"></text>
+<text x="221" y="152.5" class="nla_score" id="es_svg_GD_score0_1"></text>
+<text x="227" y="152.5" class="nla_score" id="es_svg_GD_score1_0"></text>
+<text x="233" y="152.5" class="nla_score" id="es_svg_GD_score1_1"></text>
+<text x="239" y="152.5" class="nla_score" id="es_svg_GD_score2_0"></text>
+<text x="245" y="152.5" class="nla_score" id="es_svg_GD_score2_1"></text>
+<text x="251" y="152.5" class="nla_score" id="es_svg_GD_score3_0"></text>
+<text x="257" y="152.5" class="nla_score" id="es_svg_GD_score3_1"></text>
+<text x="263" y="152.5" class="nla_score" id="es_svg_GD_score4_0"></text>
+<text x="269" y="152.5" class="nla_score" id="es_svg_GD_score4_1"></text>
+<text x="275" y="152.5" class="nla_score" id="es_svg_GD_matches0"></text>
+<text x="281" y="152.5" class="nla_score" id="es_svg_GD_matches1"></text>
+<text x="287" y="152.5" class="nla_score" id="es_svg_GD_games0"></text>
+<text x="293" y="152.5" class="nla_score" id="es_svg_GD_games1"></text>
+
+<!-- sums -->
+<text x="246" y="160.5" text-anchor="middle" style="font-weight: bold; font-size: 3px;">Total</text>
+<line x1="278" x2="278" y1="158" y2="164" />
+<line x1="290" x2="290" y1="158" y2="164" />
+<text x="275" y="161" class="nla_score" id="es_svg_sum_matches0"></text>
+<text x="281" y="161" class="nla_score" id="es_svg_sum_matches1"></text>
+<text x="287" y="161" class="nla_score" id="es_svg_sum_games0"></text>
+<text x="293" y="161" class="nla_score" id="es_svg_sum_games1"></text>
+
+<!-- vertical short lines -->
+<line x1="30" x2="30" y1="50" y2="56" />
+<line x1="35" x2="35" y1="50" y2="56" />
+<line x1="40" x2="40" y1="50" y2="56" />
+<line x1="45" x2="45" y1="50" y2="56" />
+<line x1="50" x2="50" y1="50" y2="56" />
+<line x1="126" x2="126" y1="50" y2="56" />
+<line x1="136" x2="136" y1="50" y2="56" />
+<line x1="141" x2="141" y1="50" y2="56" />
+<line x1="146" x2="146" y1="50" y2="56" />
+<line x1="151" x2="151" y1="50" y2="56" />
+<line x1="156" x2="156" y1="50" y2="56" />
+<line x1="218" x2="218" y1="50" y2="56" />
+<line x1="230" x2="230" y1="50" y2="56" />
+<line x1="242" x2="242" y1="50" y2="56" />
+<line x1="254" x2="254" y1="50" y2="56" />
+<line x1="266" x2="266" y1="50" y2="56" />
+<line x1="278" x2="278" y1="50" y2="56" />
+<line x1="290" x2="290" y1="50" y2="56" />
+
+<line x1="30" x2="30" y1="59" y2="65" />
+<line x1="35" x2="35" y1="59" y2="65" />
+<line x1="40" x2="40" y1="59" y2="65" />
+<line x1="45" x2="45" y1="59" y2="65" />
+<line x1="50" x2="50" y1="59" y2="65" />
+<line x1="126" x2="126" y1="59" y2="65" />
+<line x1="136" x2="136" y1="59" y2="65" />
+<line x1="141" x2="141" y1="59" y2="65" />
+<line x1="146" x2="146" y1="59" y2="65" />
+<line x1="151" x2="151" y1="59" y2="65" />
+<line x1="156" x2="156" y1="59" y2="65" />
+<line x1="218" x2="218" y1="59" y2="65" />
+<line x1="230" x2="230" y1="59" y2="65" />
+<line x1="242" x2="242" y1="59" y2="65" />
+<line x1="254" x2="254" y1="59" y2="65" />
+<line x1="266" x2="266" y1="59" y2="65" />
+<line x1="278" x2="278" y1="59" y2="65" />
+<line x1="290" x2="290" y1="59" y2="65" />
+
+<line x1="30" x2="30" y1="68" y2="74" />
+<line x1="35" x2="35" y1="68" y2="74" />
+<line x1="40" x2="40" y1="68" y2="74" />
+<line x1="45" x2="45" y1="68" y2="74" />
+<line x1="50" x2="50" y1="68" y2="74" />
+<line x1="126" x2="126" y1="68" y2="74" />
+<line x1="136" x2="136" y1="68" y2="74" />
+<line x1="141" x2="141" y1="68" y2="74" />
+<line x1="146" x2="146" y1="68" y2="74" />
+<line x1="151" x2="151" y1="68" y2="74" />
+<line x1="156" x2="156" y1="68" y2="74" />
+<line x1="218" x2="218" y1="68" y2="74" />
+<line x1="230" x2="230" y1="68" y2="74" />
+<line x1="242" x2="242" y1="68" y2="74" />
+<line x1="254" x2="254" y1="68" y2="74" />
+<line x1="266" x2="266" y1="68" y2="74" />
+<line x1="278" x2="278" y1="68" y2="74" />
+<line x1="290" x2="290" y1="68" y2="74" />
+
+<line x1="30" x2="30" y1="77" y2="83" />
+<line x1="35" x2="35" y1="77" y2="83" />
+<line x1="40" x2="40" y1="77" y2="83" />
+<line x1="45" x2="45" y1="77" y2="83" />
+<line x1="50" x2="50" y1="77" y2="83" />
+<line x1="126" x2="126" y1="77" y2="83" />
+<line x1="136" x2="136" y1="77" y2="83" />
+<line x1="141" x2="141" y1="77" y2="83" />
+<line x1="146" x2="146" y1="77" y2="83" />
+<line x1="151" x2="151" y1="77" y2="83" />
+<line x1="156" x2="156" y1="77" y2="83" />
+<line x1="218" x2="218" y1="77" y2="83" />
+<line x1="230" x2="230" y1="77" y2="83" />
+<line x1="242" x2="242" y1="77" y2="83" />
+<line x1="254" x2="254" y1="77" y2="83" />
+<line x1="266" x2="266" y1="77" y2="83" />
+<line x1="278" x2="278" y1="77" y2="83" />
+<line x1="290" x2="290" y1="77" y2="83" />
+
+<line x1="30" x2="30" y1="86" y2="92" />
+<line x1="35" x2="35" y1="86" y2="92" />
+<line x1="40" x2="40" y1="86" y2="92" />
+<line x1="45" x2="45" y1="86" y2="92" />
+<line x1="50" x2="50" y1="86" y2="92" />
+<line x1="126" x2="126" y1="86" y2="92" />
+<line x1="136" x2="136" y1="86" y2="92" />
+<line x1="141" x2="141" y1="86" y2="92" />
+<line x1="146" x2="146" y1="86" y2="92" />
+<line x1="151" x2="151" y1="86" y2="92" />
+<line x1="156" x2="156" y1="86" y2="92" />
+
+<line x1="30" x2="30" y1="95" y2="101" />
+<line x1="35" x2="35" y1="95" y2="101" />
+<line x1="40" x2="40" y1="95" y2="101" />
+<line x1="45" x2="45" y1="95" y2="101" />
+<line x1="50" x2="50" y1="95" y2="101" />
+<line x1="126" x2="126" y1="95" y2="101" />
+<line x1="136" x2="136" y1="95" y2="101" />
+<line x1="141" x2="141" y1="95" y2="101" />
+<line x1="146" x2="146" y1="95" y2="101" />
+<line x1="151" x2="151" y1="95" y2="101" />
+<line x1="156" x2="156" y1="95" y2="101" />
+<line x1="218" x2="218" y1="92" y2="101" />
+<line x1="230" x2="230" y1="92" y2="101" />
+<line x1="242" x2="242" y1="92" y2="101" />
+<line x1="254" x2="254" y1="92" y2="101" />
+<line x1="266" x2="266" y1="92" y2="101" />
+<line x1="278" x2="278" y1="92" y2="101" />
+<line x1="290" x2="290" y1="92" y2="101" />
+
+<line x1="30" x2="30" y1="104" y2="110" />
+<line x1="35" x2="35" y1="104" y2="110" />
+<line x1="40" x2="40" y1="104" y2="110" />
+<line x1="45" x2="45" y1="104" y2="110" />
+<line x1="50" x2="50" y1="104" y2="110" />
+<line x1="126" x2="126" y1="104" y2="110" />
+<line x1="136" x2="136" y1="104" y2="110" />
+<line x1="141" x2="141" y1="104" y2="110" />
+<line x1="146" x2="146" y1="104" y2="110" />
+<line x1="151" x2="151" y1="104" y2="110" />
+<line x1="156" x2="156" y1="104" y2="110" />
+
+<line x1="30" x2="30" y1="113" y2="119" />
+<line x1="35" x2="35" y1="113" y2="119" />
+<line x1="40" x2="40" y1="113" y2="119" />
+<line x1="45" x2="45" y1="113" y2="119" />
+<line x1="50" x2="50" y1="113" y2="119" />
+<line x1="126" x2="126" y1="113" y2="119" />
+<line x1="136" x2="136" y1="113" y2="119" />
+<line x1="141" x2="141" y1="113" y2="119" />
+<line x1="146" x2="146" y1="113" y2="119" />
+<line x1="151" x2="151" y1="113" y2="119" />
+<line x1="156" x2="156" y1="113" y2="119" />
+<line x1="218" x2="218" y1="111" y2="119" />
+<line x1="230" x2="230" y1="111" y2="119" />
+<line x1="242" x2="242" y1="111" y2="119" />
+<line x1="254" x2="254" y1="111" y2="119" />
+<line x1="266" x2="266" y1="111" y2="119" />
+<line x1="278" x2="278" y1="111" y2="119" />
+<line x1="290" x2="290" y1="111" y2="119" />
+
+<line x1="30" x2="30" y1="122" y2="128" />
+<line x1="35" x2="35" y1="122" y2="128" />
+<line x1="40" x2="40" y1="122" y2="128" />
+<line x1="45" x2="45" y1="122" y2="128" />
+<line x1="50" x2="50" y1="122" y2="128" />
+<line x1="126" x2="126" y1="122" y2="128" />
+<line x1="136" x2="136" y1="122" y2="128" />
+<line x1="141" x2="141" y1="122" y2="128" />
+<line x1="146" x2="146" y1="122" y2="128" />
+<line x1="151" x2="151" y1="122" y2="128" />
+<line x1="156" x2="156" y1="122" y2="128" />
+
+<line x1="30" x2="30" y1="131" y2="137" />
+<line x1="35" x2="35" y1="131" y2="137" />
+<line x1="40" x2="40" y1="131" y2="137" />
+<line x1="45" x2="45" y1="131" y2="137" />
+<line x1="50" x2="50" y1="131" y2="137" />
+<line x1="126" x2="126" y1="131" y2="137" />
+<line x1="136" x2="136" y1="131" y2="137" />
+<line x1="141" x2="141" y1="131" y2="137" />
+<line x1="146" x2="146" y1="131" y2="137" />
+<line x1="151" x2="151" y1="131" y2="137" />
+<line x1="156" x2="156" y1="131" y2="137" />
+<line x1="218" x2="218" y1="129" y2="137" />
+<line x1="230" x2="230" y1="129" y2="137" />
+<line x1="242" x2="242" y1="129" y2="137" />
+<line x1="254" x2="254" y1="129" y2="137" />
+<line x1="266" x2="266" y1="129" y2="137" />
+<line x1="278" x2="278" y1="129" y2="137" />
+<line x1="290" x2="290" y1="129" y2="137" />
+
+<line x1="30" x2="30" y1="140" y2="146" />
+<line x1="35" x2="35" y1="140" y2="146" />
+<line x1="40" x2="40" y1="140" y2="146" />
+<line x1="45" x2="45" y1="140" y2="146" />
+<line x1="50" x2="50" y1="140" y2="146" />
+<line x1="126" x2="126" y1="140" y2="146" />
+<line x1="136" x2="136" y1="140" y2="146" />
+<line x1="141" x2="141" y1="140" y2="146" />
+<line x1="146" x2="146" y1="140" y2="146" />
+<line x1="151" x2="151" y1="140" y2="146" />
+<line x1="156" x2="156" y1="140" y2="146" />
+
+<line x1="30" x2="30" y1="149" y2="155" />
+<line x1="35" x2="35" y1="149" y2="155" />
+<line x1="40" x2="40" y1="149" y2="155" />
+<line x1="45" x2="45" y1="149" y2="155" />
+<line x1="50" x2="50" y1="149" y2="155" />
+<line x1="126" x2="126" y1="149" y2="155" />
+<line x1="136" x2="136" y1="149" y2="155" />
+<line x1="141" x2="141" y1="149" y2="155" />
+<line x1="146" x2="146" y1="149" y2="155" />
+<line x1="151" x2="151" y1="149" y2="155" />
+<line x1="156" x2="156" y1="149" y2="155" />
+<line x1="218" x2="218" y1="146" y2="155" />
+<line x1="230" x2="230" y1="146" y2="155" />
+<line x1="242" x2="242" y1="146" y2="155" />
+<line x1="254" x2="254" y1="146" y2="155" />
+<line x1="266" x2="266" y1="146" y2="155" />
+<line x1="278" x2="278" y1="146" y2="155" />
+<line x1="290" x2="290" y1="146" y2="155" />
+
+
+<!-- footer -->
+<line x1="7.5" x2="272" y1="164" y2="164" class="thick" />
+<line x1="272" x2="296" y1="164" y2="164" class="verythick" />
+<text x="7.5" y="170">NLA/LNA: Die Resultatmeldung hat unmittelbar nach dem Spiel zu erfolgen (spätestens 1 Std. nach Spielschluss) / Les résultats doivenêtre enregistrés directement à la fin de la rencontre (au plus tard 1h après la fin).</text>
+<text x="7.5" y="173.5">NLB/LNB: Die Resultatmeldung hat auch bei Wochenspielen noch am Tag der Begegnung zu erfolgen / Aussi en semaine ils doivenêtre enregistrés le jour-ême de la rencontre.</text>
+<text x="7.5" y="177">1.-.5. Liga/ligues: Das Resultat muss innerhalb von 48 Std. gemeldet werden / Les résultats doivenêtre enregistrés dans les 48 heures.</text>
+<text x="7.5" y="184">Verspätete Meldungen werden mit einer Busse von Fr. 40.- geahndet / Les annonces tardives seront pénalisées d'une amende de Fr. 40.-</text>
+<text x="7.5" y="187.5">Für die Begegnung dürfen nur ofizielle anerkennte Shuttles verwendet werden. Seuls les volants reconnus comme officiels sont autorisés pour les rencontres.</text>
+<text x="16" y="157">Signature</text>
+<text x="127" y="157">Unterschrift</text>
+<text x="240" y="178">Original</text>
+<text x="240" y="182">Kopie</text>
+<text x="260" y="178">club recevant / für Heimclub</text>
+<text x="260" y="182">visiteur / Gast</text>
+<path d="M 251 178 v -1.6 h 3 v -1 l 2 1.8 l -2 1.8 v -1 z" fill="#000" />
+<path d="M 251 182 v -1.6 h 3 v -1 l 2 1.8 l -2 1.8 v -1 z" fill="#000" />
+
+<!-- YONEX logo -->
+<g>
+  <path
+     fill="#1d9533"
+     d="m 226.5,20.1624 h 39.0132 v -3.6411 l 4.0203,7.6056 v -3.9645 h 18.6195 v 8.2821 H 226.5 Z"
+  />
+  <path
+     fill="#0b50a1"
+     d="M 269.5335,20.2242 H 288.153 V 12 H 226.5 v 8.2242 h 39.0132 v -3.6405 l 4.0203,7.6047 z"
+  />
+  <path
+     fill="#feffff"
+     d="m 240.4443,25.3479 c 1.5645,0 2.8449,-1.2732 2.8449,-2.8509 0,-1.5717 -1.2804,-2.8446 -2.8449,-2.8446 -1.57755,0 -2.84319,1.2729 -2.84319,2.8446 0,1.5777 1.26564,2.8509 2.84319,2.8509"
+  />
+  <path
+     fill="#feffff"
+     d="m 248.1195,15.3762 h -8.2272 c 2.4537,1.4205 4.1142,4.0803 4.1142,7.1217 l 4.113,-7.1211 z"
+  />
+  <path
+     fill="#feffff"
+     d="m 239.8932,15.3762 h -8.22684 c 2.46675,1.4205 4.11339,4.0803 4.11339,7.1217 l 4.11345,-7.1211 z"
+  />
+  <path
+     fill="#feffff"
+     d="m 232.221,25.3479 c 1.57911,0 2.844,-1.2732 2.844,-2.8509 0,-1.5717 -1.26489,-2.8446 -2.844,-2.8446 -1.57539,0 -2.84325,1.2729 -2.84325,2.8446 0,1.5777 1.26786,2.8509 2.84325,2.8509"
+  />
+  <path
+     fill="#feffff"
+     d="m 261.6012,20.2302 c 0,-0.8892 -0.063,-1.335 -0.063,-1.5942 0,-0.9216 -0.243,-1.8012 -1.2873,-1.8012 -1.0998,0 -1.275,0.8607 -1.275,1.8012 0,0.2472 -0.0591,0.7212 -0.0591,1.5942 0,0.8496 0.0522,1.4028 0.0567,1.6173 0.027,1.3212 0.4542,1.8033 1.2633,1.8033 0.8109,0 1.2873,-0.4509 1.302,-1.8183 0,-0.2361 0.0624,-0.6573 0.0624,-1.6023 m 1.8372,0.015 c 0,0.6432 -0.0522,1.3593 -0.0714,1.5864 -0.1617,1.9851 -0.6687,3.5181 -3.1161,3.5181 -2.3622,0 -2.9811,-1.5969 -3.1137,-3.5181 -0.006,-0.1164 -0.0771,-0.7368 -0.0771,-1.6026 0,-0.7773 0.0639,-1.3923 0.0786,-1.5939 0.1311,-1.7787 0.6546,-3.5016 3.1119,-3.5016 2.6061,0 3.0024,1.6485 3.1224,3.5016 0.012,0.1851 0.0651,0.8637 0.0651,1.6101"
+  />
+  <path
+     fill="#feffff"
+     d="m 255.3366,15.3744 -1.5531,3.4164 -1.4562,-3.4164 h -1.9341 l 2.4792,5.7408 v 3.9966 h 1.7703 v -4.0113 l 2.6181,-5.7261 z"
+  />
+  <path
+     fill="#feffff"
+     d="m 271.6998,15.3762 v 9.7341 h 5.151 V 23.3514 H 273.471 V 21.096 h 3.0723 v -1.7505 -0.012 h -0.012 -3.0546 v -2.1933 h 3.372 v -1.764 h -5.151 z"
+  />
+  <path
+     fill="#feffff"
+     d="m 281.6733,20.2272 2.3355,-4.8504 h -1.9548 -0.009 l -0.012,0.006 -1.3437,2.8074 -1.3602,-2.8143 h -1.9527 l 2.3319,4.8495 -2.3532,4.8825 h 1.9452 l 1.3875,-2.8605 1.3731,2.8605 h 1.962 l -2.3532,-4.8834 z"
+  />
+  <path
+     fill="#feffff"
+     d="m 268.662,15.3753 v 5.295 l -2.5542,-5.295 h -1.5723 v 9.7377 h 1.77 v -5.2827 l 2.5431,5.2821 h 1.5819 v -9.7371 h -1.7694 z"
+  />
+  <path
+     fill="#feffff"
+     d="m 284.9925,23.6199 h 0.4695 c 0.1671,0 0.3303,0.03 0.3441,0.2763 0.006,0.141 -0.0336,0.1896 -0.1413,0.2643 0.1098,0.0699 0.1227,0.0987 0.1254,0.2769 0,0.1359 0.012,0.1866 0.0579,0.2223 v 0.0336 h -0.1671 c -0.018,-0.0498 -0.027,-0.0936 -0.03,-0.1356 -0.012,-0.1278 0.0507,-0.3285 -0.1764,-0.3285 h -0.3408 v 0.4641 h -0.1398 v -1.0746 z m 0.1398,0.1233 v 0.366 h 0.3342 c 0.0915,0 0.1836,-0.021 0.1983,-0.1599 0.018,-0.1836 -0.1131,-0.2061 -0.1998,-0.2061 z m 0.2544,1.3245 c 0.4944,0 0.903,-0.4083 0.903,-0.9108 0,-0.495 -0.4086,-0.9039 -0.903,-0.9039 -0.495,0 -0.9039,0.4089 -0.9039,0.9039 0,0.5025 0.4089,0.9108 0.9039,0.9108 m -1.0005,-0.9108 c 0,-0.5496 0.4518,-1.0014 1.0005,-1.0014 0.5484,0 1.0005,0.4518 1.0005,1.0014 0,0.5556 -0.4521,1.0083 -1.0005,1.0083 -0.5487,0 -1.0005,-0.4527 -1.0005,-1.0083"
+  />
+</g>
+
+<!-- Swiss badminton logo -->
+<g>
+  <path
+     style="fill:#ee272c;"
+     d="m 95.923449,29.334109 c -0.760057,1.514235 -3.173046,2.491353 -4.462081,0.442048 1.641632,-0.09315 1.872712,-0.832935 1.93347,-1.073202 -0.752851,0.112265 -2.599686,0.04293 -3.100004,-0.0716 0.313292,3.5196 4.679403,4.340432 5.628615,0.702754" />
+  <path
+     style="fill:#ee272c;"
+     d="m 95.407245,27.257864 c -1.348974,0.573523 -2.738072,1.096245 -5.353317,0.77234 l -0.270712,-0.992725 c 1.963767,0.340396 3.998447,0.01695 5.347258,-0.556556 l 0.276771,0.776941" />
+  <path
+     style="fill:#ee272c;"
+     d="m 86.345846,21.423948 c -0.191775,0.452349 0.356363,0.959463 4.330736,0.452349 3.974373,-0.50718 5.714758,-1.397942 2.685994,-1.79533 3.590659,0.246671 2.686157,1.457996 -2.576432,2.156902 -4.310265,0.572491 -5.002357,-0.01906 -4.440298,-0.813921" />
+  <path
+     style="fill:#ee272c;"
+     d="m 88.237226,24.151227 c -0.109725,0.794859 1.260703,0.890697 3.562983,0.479601 2.302444,-0.411079 3.16584,-1.16488 2.672564,-1.548577 0.75367,0.12327 1.12379,1.164815 -2.562838,1.87746 -3.686465,0.712662 -3.90559,-0.246605 -3.672709,-0.808484" />
+  <path
+     style="fill:#ee272c;"
+     d="M 89.525115,25.617609 88.8946,25.220204 c -1.343079,-2.823102 -4.125205,-6.235563 -4.933738,-7.263384 0.04111,-0.315257 -0.246638,-1.507504 -0.246638,-1.507504 1.877624,0.959202 5.289938,8.044551 5.810891,9.168293" />
+  <path
+     style="fill:#ee272c;"
+     d="m 90.692304,26.267317 c 0,0 -0.450368,-0.368482 -0.614138,-0.511781 -0.921207,-2.088069 -1.924299,-4.483207 -4.524149,-8.229431 0,-0.511782 -0.122827,-1.596759 -0.16377,-1.801471 1.801471,1.187333 5.097344,10.030902 5.302057,10.542683" />
+  <path
+     style="fill:#ee272c;"
+     d="m 91.736338,26.328731 c 0,0 -0.122827,-0.122827 -0.368482,-0.266126 -1.330632,-3.869069 -2.088069,-5.772896 -3.766713,-8.597914 0.102357,-0.655081 0.08188,-1.187333 0.06141,-1.678644 1.45346,1.596759 2.599851,4.585547 4.073781,10.542684" />
+  <path
+     style="fill:#ee272c;"
+     d="m 93.026028,26.083076 c 0,0 -0.204713,-0.32754 -0.429897,-0.511782 -0.49131,-3.295873 -1.351103,-6.714557 -1.780999,-7.758592 0.16377,-0.368482 0.245655,-1.330632 0.245655,-1.330632 1.330632,1.228276 1.801471,8.188489 1.965241,9.601006" />
+  <path
+     style="fill:#ee272c;"
+     d="m 94.336189,25.448467 c 0,0 -0.122828,-0.368483 -0.266127,-0.532253 0.204713,-2.681735 0.204713,-4.237551 -0.04094,-6.120891 0.16377,-0.286598 0.388954,-0.859793 0.429896,-1.064506 0.388954,1.023563 0.409426,1.88334 -0.122827,7.71765" />
+  <path
+     style="fill:#c8c7c7;"
+     d="m 85.215996,29.150179 c 0.416631,2.082189 2.8835,4.774537 9.225988,4.774537 6.342656,0 7.816096,-5.682954 2.62589,-8.295398 7.580756,2.113077 6.710646,10.159118 -2.655041,10.159118 -8.005574,0 -9.448061,-5.891826 -9.196837,-6.638257" />
+  <path
+     style="fill:#2078c6;"
+     d="m 100.81903,29.815495 c 0,0.303417 -0.0352,0.608193 -0.10727,0.911364 -0.5483,2.309273 -3.009441,3.801379 -6.269776,3.801379 -2.673383,0 -4.719363,-0.469247 -6.2457,-1.194372 1.250712,0.979679 3.208092,1.851051 6.216549,1.851051 4.853327,0 6.868027,-2.139303 7.118597,-3.971546 0.0185,-0.135176 0.0278,-0.273169 0.0278,-0.412946 0,-0.835621 -0.33753,-1.738207 -1.06647,-2.548673 0.20651,0.507753 0.32623,1.032456 0.32623,1.563743" />
+  <path
+     style="fill:#2078c6;"
+     d="m 95.848933,29.490706 c -0.760057,1.514235 -3.173046,2.491287 -4.46208,0.442048 1.641632,-0.09314 1.872547,-0.832918 1.93347,-1.073267 -0.752851,0.112281 -2.599687,0.04299 -3.100004,-0.07152 0.313292,3.519518 4.679403,4.340481 5.628614,0.702738" />
+  <path
+     style="fill:#2078c6;"
+     d="m 95.33273,27.414478 c -1.348974,0.573506 -2.738072,1.096228 -5.353317,0.772274 l -0.270712,-0.99266 c 1.963767,0.340396 3.998447,0.01695 5.347257,-0.556572 l 0.276772,0.776958" />
+  <path
+     style="fill:#2078c6;"
+     d="m 86.27133,21.580545 c -0.191775,0.452283 0.356364,0.959398 4.330737,0.452283 3.974372,-0.507163 5.714757,-1.397859 2.685993,-1.795329 3.59066,0.246752 2.686157,1.458012 -2.576431,2.156917 -4.310265,0.572492 -5.002358,-0.01901 -4.440299,-0.813871" />
+  <path
+     style="fill:#2078c6;"
+     d="m 88.162547,24.307775 c -0.109726,0.794858 1.260866,0.890746 3.563146,0.479667 2.302444,-0.411162 3.16584,-1.164881 2.672565,-1.54866 0.75367,0.123336 1.12379,1.164881 -2.562839,1.877543 -3.686628,0.712645 -3.905589,-0.246622 -3.672872,-0.80855" />
+  <path
+     style="fill:#2078c6;"
+     d="m 89.450599,25.774222 -0.630515,-0.39747 c -1.343078,-2.823118 -4.125205,-6.235547 -4.933738,-7.263368 0.04111,-0.315257 -0.246638,-1.507504 -0.246638,-1.507504 1.877625,0.959202 5.289938,8.044519 5.810891,9.168342" />
+  <path
+     style="fill:#2078c6;"
+     d="m 90.617789,26.423914 c 0,0 -0.450368,-0.368482 -0.614138,-0.511781 -0.921207,-2.088069 -1.924299,-4.483207 -4.524149,-8.229464 0,-0.511782 -0.122828,-1.596759 -0.16377,-1.801471 1.801471,1.187333 5.097344,10.030935 5.302057,10.542716" />
+  <path
+     style="fill:#2078c6;"
+     d="m 91.661823,26.485328 c 0,0 -0.122828,-0.122827 -0.368483,-0.266126 -1.330632,-3.869069 -2.088068,-5.772896 -3.766712,-8.597947 0.102356,-0.65508 0.08188,-1.187333 0.06141,-1.678643 1.453459,1.596758 2.59985,4.585579 4.073781,10.542716" />
+  <path
+     style="fill:#2078c6;"
+     d="m 92.951513,26.239673 c 0,0 -0.204713,-0.32754 -0.429897,-0.511782 -0.49131,-3.295873 -1.351103,-6.71459 -1.781,-7.758625 0.16377,-0.368482 0.245655,-1.330632 0.245655,-1.330632 1.330632,1.228276 1.801471,8.188522 1.965242,9.601039" />
+  <path
+     style="fill:#2078c6;"
+     d="m 94.261673,25.605064 c 0,0 -0.122827,-0.368483 -0.266126,-0.532253 0.204713,-2.681735 0.204713,-4.237551 -0.04094,-6.120924 0.163771,-0.286598 0.388954,-0.859793 0.429897,-1.064506 0.388954,1.023564 0.409425,1.883373 -0.122828,7.717683" />
+  <path
+     style="fill:#ee272c;"
+     d="m 95.737897,28.787968 v -1.160589 l 0.273987,-0.273938 h 1.370756 v 1.4408 h 1.456408 v 1.361339 l -0.265963,0.266061 h -1.185859 v 1.159574 l -0.257119,0.256972 h -1.4248 v -0.906746 l 0.306577,-0.306627 v 0.901882 h 1.102501 v -1.098079 l 0.268255,-0.26837 H 98.5911 V 29.0557 h -1.460993 v -1.39614 h -1.118223 v 1.139152 L 95.759351,29.0557 h -1.896785 l 0.32492,-0.256988 1.550411,-0.01074" />
+  <path
+     style="fill:#ee272c;"
+     d="m 44.189062,22.261468 c 0.275596,0.04497 0.744962,0.09564 1.193987,0.09564 0.64286,0 0.949028,-0.08719 0.949028,-0.2026 0,-0.118095 -0.255186,-0.182768 -0.908277,-0.250257 -0.897986,-0.09007 -1.316367,-0.222236 -1.316367,-0.385433 0,-0.219436 0.653162,-0.399452 1.704166,-0.399452 0.500007,0 0.938862,0.03654 1.204169,0.08437 l -0.214309,0.177281 c -0.193904,-0.0309 -0.551005,-0.07876 -1.010265,-0.07876 -0.530653,0 -0.816355,0.08438 -0.816355,0.185585 0,0.115409 0.285702,0.166013 0.928635,0.233503 0.846987,0.08726 1.296012,0.205351 1.296012,0.410703 0,0.241888 -0.683741,0.410702 -1.836844,0.410702 -0.540889,0 -1.0409,-0.0394 -1.387888,-0.09564 l 0.214308,-0.18565" />
+  <path
+     style="fill:#ee272c;"
+     d="m 48.709626,21.150337 0.663334,0.689112 c 0.132621,0.151929 0.265292,0.295425 0.357167,0.436103 h 0.03058 c 0.112264,-0.137862 0.275526,-0.284174 0.438854,-0.433221 l 0.806109,-0.691994 h 0.755144 l 0.765364,0.680727 c 0.183668,0.160314 0.32659,0.306626 0.438723,0.444488 h 0.03064 c 0.08164,-0.137862 0.214309,-0.281357 0.377637,-0.441671 l 0.704081,-0.683544 h 0.887748 l -1.591829,1.361454 H 52.556749 L 51.801687,21.862033 C 51.628124,21.70727 51.485333,21.572291 51.362833,21.411976 h -0.02041 c -0.122451,0.163131 -0.275461,0.306627 -0.449025,0.452873 l -0.79589,0.646942 h -0.816345 l -1.489931,-1.361454 h 0.91839" />
+  <path
+     style="fill:#ee272c;"
+     d="m 56.291477,20.899949 c -0.336678,0 -0.561158,-0.07306 -0.561158,-0.160315 0,-0.08721 0.234715,-0.157579 0.58163,-0.157579 0.34693,0 0.571475,0.07037 0.571475,0.157579 0,0.08726 -0.224545,0.160315 -0.581711,0.160315 z m -0.428488,1.611842 v -1.361454 h 0.897985 v 1.361454 h -0.897985" />
+  <path
+     style="fill:#ee272c;"
+     d="m 58.128323,22.261468 c 0.275478,0.04497 0.744908,0.09564 1.193868,0.09564 0.642928,0 0.949096,-0.08719 0.949096,-0.2026 0,-0.118095 -0.255121,-0.182768 -0.908285,-0.250257 -0.897919,-0.09007 -1.316302,-0.222236 -1.316302,-0.385433 0,-0.219436 0.653033,-0.399452 1.70411,-0.399452 0.500072,0 0.938812,0.03654 1.204283,0.08437 l -0.214375,0.177281 c -0.193904,-0.0309 -0.551119,-0.07876 -1.01038,-0.07876 -0.530533,0 -0.816295,0.08438 -0.816295,0.185585 0,0.115409 0.285762,0.166013 0.92856,0.233503 0.847019,0.08726 1.296076,0.205351 1.296076,0.410703 0,0.241888 -0.68374,0.410702 -1.836829,0.410702 -0.5409,0 -1.040972,-0.0394 -1.387837,-0.09564 l 0.21431,-0.18565" />
+  <path
+     style="fill:#ee272c;"
+     d="m 62.169285,22.261468 c 0.275461,0.04497 0.74499,0.09564 1.194047,0.09564 0.642798,0 0.948884,-0.08719 0.948884,-0.2026 0,-0.118095 -0.25499,-0.182768 -0.908105,-0.250257 -0.898115,-0.09007 -1.316384,-0.222236 -1.316384,-0.385433 0,-0.219436 0.652951,-0.399452 1.704028,-0.399452 0.500154,0 0.938894,0.03654 1.204201,0.08437 l -0.214375,0.177281 c -0.19374,-0.0309 -0.550922,-0.07876 -1.010134,-0.07876 -0.530615,0 -0.816393,0.08438 -0.816393,0.185585 0,0.115409 0.285778,0.166013 0.928576,0.233503 0.847019,0.08726 1.296077,0.205351 1.296077,0.410703 0,0.241888 -0.683741,0.410702 -1.836846,0.410702 -0.540933,0 -1.040923,-0.0394 -1.387788,-0.09564 l 0.214212,-0.18565" />
+  <path
+     style="fill:#2078c6;"
+     d="m 44.116453,23.105719 h 1.060028 l 0.345132,2.042082 h 0.01567 c 0.236562,-0.332404 0.575042,-0.52919 1.128864,-0.52919 1.249893,0 1.853091,0.854798 2.015977,1.818176 0.161592,0.956646 -0.148163,1.838565 -1.398073,1.838565 -0.45081,0 -0.964311,-0.135684 -1.335807,-0.508769 h -0.01587 l 0.07222,0.427391 h -1.028357 z m 2.755623,4.464078 c 0.69622,0 0.783853,-0.651297 0.702492,-1.13301 -0.07902,-0.468039 -0.377768,-1.112556 -1.06611,-1.112556 -0.680351,0 -0.843793,0.624111 -0.761269,1.112556 0.08374,0.495339 0.420872,1.13301 1.124887,1.13301" />
+  <path
+     style="fill:#2078c6;"
+     d="m 49.432016,24.883198 c 0.383828,-0.162804 0.920437,-0.264587 1.371247,-0.264587 1.241901,0 1.830704,0.441033 2.005037,1.47226 l 0.07561,0.447682 c 0.05956,0.35281 0.11215,0.617479 0.163639,0.875155 0.05265,0.264653 0.109595,0.508834 0.179246,0.780266 H 52.29344 C 52.223,28.010765 52.183927,27.780144 52.15756,27.671515 h -0.01567 c -0.180082,0.38671 -0.673177,0.603837 -1.155726,0.603837 -0.719818,0 -1.486983,-0.373085 -1.599313,-1.037959 -0.08829,-0.522394 0.152896,-0.827743 0.527651,-0.997327 0.374673,-0.1696 0.891008,-0.203501 1.334022,-0.203501 h 0.585347 c -0.09507,-0.563156 -0.41986,-0.753015 -1.044872,-0.753015 -0.450876,0 -0.876432,0.149179 -1.193541,0.379931 z m 1.702816,2.727345 c 0.324347,0 0.556818,-0.122123 0.690717,-0.312113 0.140989,-0.19672 0.145984,-0.447747 0.09998,-0.719114 h -0.458671 c -0.474687,0 -1.167255,0.0678 -1.076608,0.603771 0.05041,0.298553 0.364913,0.427456 0.744581,0.427456" />
+  <path
+     style="fill:#2078c6;"
+     d="m 56.854568,27.800418 h -0.01587 c -0.25915,0.33925 -0.671196,0.474934 -1.169548,0.474934 -1.249893,0 -1.857759,-0.881919 -2.019416,-1.838565 -0.16269,-0.963378 0.151487,-1.818176 1.401511,-1.818176 0.53001,0 0.928053,0.156089 1.300695,0.488493 h 0.01585 l -0.338349,-2.001385 h 1.060035 l 0.85999,5.088255 h -1.028362 z m -1.011919,-0.230621 c 0.704015,0 0.825565,-0.637671 0.742026,-1.13301 -0.08272,-0.488445 -0.457099,-1.112556 -1.137318,-1.112556 -0.688276,0 -0.769261,0.644517 -0.690062,1.112556 0.0813,0.481713 0.3892,1.13301 1.085354,1.13301" />
+  <path
+     style="fill:#2078c6;"
+     d="m 58.434753,24.699988 h 0.988828 l 0.08252,0.488559 h 0.01587 c 0.259985,-0.427472 0.71841,-0.569936 1.113931,-0.569936 0.569593,0 1.004075,0.183226 1.306886,0.617397 0.174087,-0.420611 0.670802,-0.617397 1.169154,-0.617397 1.004566,0 1.389098,0.590211 1.520933,1.370428 l 0.372741,2.204935 H 63.945532 L 63.59359,26.111163 c -0.05503,-0.325625 -0.132981,-0.786932 -0.742042,-0.786932 -0.704048,0 -0.669492,0.719114 -0.592684,1.173642 l 0.286597,1.696101 h -1.060083 l -0.352106,-2.082811 c -0.05486,-0.325625 -0.132818,-0.786932 -0.742042,-0.786932 -0.704081,0 -0.669345,0.719114 -0.592766,1.173642 l 0.286728,1.696101 H 59.025158 L 58.43475,24.699988" />
+  <path
+     style="fill:#2078c6;"
+     d="m 65.252093,23.193942 h 1.060084 l 0.146902,0.868424 h -1.060084 z m 0.254662,1.506046 h 1.059921 l 0.590391,3.493986 h -1.05992 l -0.590392,-3.493986" />
+  <path
+     style="fill:#2078c6;"
+     d="m 67.682114,24.699988 h 1.004729 l 0.08025,0.474934 h 0.01556 c 0.264816,-0.400222 0.689308,-0.556311 1.243015,-0.556311 0.965097,0 1.483102,0.583496 1.615919,1.370428 l 0.372577,2.204935 h -1.05992 l -0.315257,-1.865685 c -0.07222,-0.427407 -0.177691,-1.004058 -0.857992,-1.004058 -0.767263,0 -0.813118,0.712334 -0.737293,1.160082 l 0.288727,1.709661 h -1.05992 l -0.590391,-3.493986" />
+  <path
+     style="fill:#2078c6;"
+     d="m 72.975818,25.364911 h -0.783312 l -0.112183,-0.664923 h 0.782985 l -0.117914,-0.698708 1.010298,-0.291724 0.167536,0.990432 h 0.941351 l 0.112182,0.664923 h -0.94135 l 0.275134,1.62817 c 0.0506,0.298569 0.19243,0.576716 0.595959,0.576716 0.18981,0 0.365863,-0.0339 0.466581,-0.095 l 0.153125,0.71918 c -0.21241,0.05432 -0.452988,0.08138 -0.769392,0.08138 -0.830642,0 -1.363713,-0.441033 -1.480645,-1.132962 l -0.300355,-1.777479" />
+  <path
+     style="fill:#2078c6;"
+     d="m 77.445268,24.618611 c 1.210425,0 2.254132,0.69884 2.448854,1.852142 0.169666,1.004041 -0.478208,1.804599 -1.830949,1.804599 -1.344553,0 -2.263139,-0.800558 -2.432805,-1.804599 -0.194723,-1.153302 0.6125,-1.852142 1.8149,-1.852142 z m 0.49868,2.951186 c 0.81492,0 0.923008,-0.624177 0.824255,-1.207608 -0.09056,-0.53597 -0.507523,-1.037958 -1.203546,-1.037958 -0.68849,0 -0.93349,0.515614 -0.845218,1.037958 0.09744,0.576717 0.417614,1.207608 1.224509,1.207608" />
+  <path
+     style="fill:#2078c6;"
+     d="m 80.425393,24.699988 h 1.004729 l 0.08025,0.474934 h 0.01572 c 0.264488,-0.400222 0.68898,-0.556311 1.243015,-0.556311 0.964933,0 1.482938,0.583496 1.615919,1.370428 l 0.372577,2.204935 h -1.05992 l -0.315257,-1.865685 c -0.07206,-0.427407 -0.177691,-1.004058 -0.857992,-1.004058 -0.767427,0 -0.813118,0.712334 -0.737293,1.160082 l 0.288727,1.709661 h -1.05992 l -0.590555,-3.493986" />
+  <path
+     style="fill:#ee272c;"
+     d="m 44.96019,28.967919 h 44.536623 v -0.16377 H 44.96019 Z" />
+</g>
+
+</svg>

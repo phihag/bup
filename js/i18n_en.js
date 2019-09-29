@@ -388,6 +388,7 @@ var i18n_en = {
 'eventsheet:label|NRW-2016': '(NRW leagues) result report sheet',
 'eventsheet:label|NRW-Satzungen': '(Germany, NRW) laws & regulations',
 'eventsheet:label|NLA-2017': '(Swiss NLA) result sheet',
+'eventsheet:label|NLA-2019': '(Swiss NLA/NLB) result sheet',
 'eventsheet:label|OBL-2017': '(Austrian Bundesliga) result sheet',
 'eventsheet:label|receipt': 'umpire receipt',
 'eventsheet:label|int': 'result report sheet',

@@ -375,8 +375,8 @@ _describe('btde', function() {
 		assert.strictEqual(b._get_league_key('(007) Verbandsliga Süd 2'), 'NRW-O19-S2-VL-007-2016');
 		assert.strictEqual(b._get_league_key('(008) Landesliga Nord 1'), 'NRW-O19-N1-LL-008-2016');
 		assert.strictEqual(b._get_league_key('(015) Landesliga Süd 2'), 'NRW-O19-S2-LL-015-2016');
-		assert.strictEqual(b._get_league_key('NLA'), 'NLA-2017');
-		assert.strictEqual(b._get_league_key('NLB'), 'NLA-2017');
+		assert.strictEqual(b._get_league_key('NLA'), 'NLA-2019');
+		assert.strictEqual(b._get_league_key('NLB'), 'NLA-2019');
 		assert.strictEqual(b._get_league_key('1. Bundesliga'), 'OBL-2017');
 
 		assert(! b._get_league_key('foo bar'));

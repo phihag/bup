@@ -24,6 +24,7 @@ var SHEETS_BY_LEAGUE = {
 	'RLSOO-2017': ['RLSO-2017', 'receipt', 'RLSO-SpO'],
 	'RLSOS-2017': ['RLSO-2017', 'receipt', 'RLSO-SpO'],
 	'NLA-2017': ['NLA-2017'],
+	'NLA-2019': ['NLA-2019'],
 	'OBL-2017': ['OBL-2017'],
 	'bayern-2018': ['bayern-2018'],
 	'international-2017': ['int'],
@@ -49,7 +50,8 @@ var URLS = {
 	'RLN-Satzungen': 'https://gruppe-nord.net/download/satzung-und-ordnungen-der-gruppe-nord/?wpdmdl=372',
 	'RLM-2016': 'div/Spielbericht_8x3x21.svg',
 	'RLM-SpO': 'http://www.dbv-mitte.de/web/images/Allgemein/Gruppenordnung/Gruppe_Mitte_im_DBV_Ordnungen_20170701.pdf',
-	'NLA-2017': 'div/NLA_Resultatblatt.svg',
+	'NLA-2017': 'div/eventsheet/nla_resultatblatt.svg',
+	'NLA-2019': 'div/eventsheet/nla_resultatblatt-2019.svg',
 	'NRW-2016': 'div/Spielbericht_8x3x21.svg',
 	'NRW-Satzungen': 'https://www.badminton-nrw.de/fileadmin/gstnrw/pdf_xls_doc/Satzungswerk/2019/SatzungOrdnungen19-20_0407.pdf',
 	'team-1BL-2015': 'div/Mannschaftsaufstellung_1BL-2015.pdf',
@@ -87,6 +89,7 @@ var NO_DIALOG = {
 	'buli2019-minsr': true,
 	'buli2019-minv': true,
 	'NLA-2017': true,
+	'NLA-2019': true,
 };
 
 var MIME_TYPES = {
@@ -1966,6 +1969,7 @@ function render_previewable(preview_el, ev, es_key, ui8r, extra_data, extra_file
 	case '2BLS-2017_pdf':
 		return render_buli2017_pdf(preview_el, ev, es_key, ui8r, extra_data);
 	case 'NLA-2017':
+	case 'NLA-2019':
 		return render_nla(preview_el, ev, es_key, ui8r);
 	case 'buli2017-minsr':
 	case 'buli2017-minv':

@@ -614,7 +614,7 @@ function check_setup(s, team, team_id, cur_players) {
 		if ((backup_counts[0] > 1) || (backup_counts[1] > 1)) {
 			res.push(s._('setupsheet:too many backups'));
 		}
-	} else if (!utils.includes(['NLA-2017', 'international-2017'], league_key)) {
+	} else if (!utils.includes(['NLA-2017', 'NLA-2019', 'international-2017'], league_key)) {
 		// NLA: crazy separate system
 		// international: no checks necessary, every discipline once
 
@@ -739,7 +739,7 @@ function render_svg(s) {
 	var league_key = s.event.league_key;
 	var sheet_name = (
 		eventutils.is_bundesliga(league_key) ? 'bundesliga-2016' :
-		((league_key === 'NLA-2017') ? 'nla' :
+		(((league_key === 'NLA-2017') || (league_key === 'NLA-2019')) ? 'nla' :
 		((league_key === 'international-2017') ? 'international' :
 		'default'
 	)));

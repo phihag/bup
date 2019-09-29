@@ -914,6 +914,10 @@ function sheet_name(setup) {
 		return 'bundesliga-2016';
 	}
 
+	if (setup.league_key === 'NLA-2019') {
+		return 'nla-2019';
+	}
+
 	if (setup.league_key === 'NLA-2017') {
 		return 'nla';
 	}
@@ -1124,6 +1128,7 @@ var URLS = {
 	'international_5x11': 'div/scoresheet/international_5x11.svg',
 	'bundesliga-2016': 'div/scoresheet/bundesliga-2016.svg',
 	'nla': 'div/scoresheet/nla.svg',
+	'nla-2019': 'div/scoresheet/nla-2019.svg',
 	'obl': 'div/scoresheet/obl.svg',
 };
 var dl;

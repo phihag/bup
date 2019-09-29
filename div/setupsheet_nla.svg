@@ -25,7 +25,7 @@ text {
 <text x="25" y="28.5" class="setupsheet_normal" data-fill-id="event_name"></text>
 <text x="25" y="34" class="setupsheet_normal" data-fill-id="setup_desc"></text>
 <text x="25" y="44" style="font-size: 8px;" data-fill-id="team_name"></text>
-<text x="185" y="23" class="setupsheet_normal" data-fill-id="date" text-anchor="end"></text>
+<text x="155" y="23" class="setupsheet_normal" data-fill-id="date" text-anchor="end"></text>
 
 <g data-fill-id="vlines_m">
 	<line class="thick" x1="25" x2="25" y1="60" y2="76" />

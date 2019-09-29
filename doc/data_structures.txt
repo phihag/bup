@@ -35,7 +35,7 @@ league_key      ID of the league being played.
                   194: the league number (004 for Verbandsliga Nord 1, 005 for Verbandsliga Nord 2 etc.)
                   2016 is always literally 2016.
                 - BayernLiga and below: "bayern-2018"
-                - Swiss NLA: "NLA-2017"
+                - Swiss NLA/NLB: "NLA-2017" (3x21) or "NLA-2019" (5x11)
                 - Austrian Bundesliga: "OBL-2017"
                 - International matches: "international-2017" (each discipline once, 3x21)
 

@@ -239,6 +239,9 @@ function name_by_league(league_key) {
 	if (league_key === 'NLA-2017') {
 		return 'NLA';
 	}
+	if (league_key === 'NLA-2019') {
+		return 'NLA';
+	}
 	if (league_key === 'international-2017') {
 		return 'International match';
 	}
@@ -365,6 +368,9 @@ function get_min_pause(league_key) {
 	if (league_key === 'NLA-2017') {
 		return 15 * 60000; // §2.11.1 https://www.swiss-badminton.ch/file/727622/?dl=1
 	}
+	if (league_key === 'NLA-2019') {
+		return 15 * 60000; // §3.12.1 https://www.swiss-badminton.ch/file/847650/?dl=1
+	}
 	if (league_key === 'OBL-2017') {
 		return 15 * 60000; // §6f Bundesligaordnung
 	}
@@ -472,6 +478,9 @@ function default_counting(league_key) {
 	}
 	if (league_key === 'NLA-2017') {
 		return '3x21';
+	}
+	if (league_key === 'NLA-2019') {
+		return '5x11_15';
 	}
 	if (league_key === 'international-2017') {
 		return '3x21';

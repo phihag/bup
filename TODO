@@ -1,9 +1,18 @@
-colors Sterkrade + Hövelhof
+btde
+	eventsheet
 
 
+
+fix NLA result sheet (scale_svg)
+
+init screen with logos, a little bit btde-like
+refmode option to distrust this referee
 test for all colors to match ^#[0-9a-f]{6}$
 d/teamscore: team bg color
 d/teamscore: logos
+receipt should not list (001) Regionalliga
+
+tde_export: backup players
 
 shell script to download (including cached)
 tde_import: fix player import

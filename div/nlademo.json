@@ -183,8 +183,8 @@
     "protest": "Coaching-Stühle zu gemütlich",
     "umpires": "Ivo Kassel & Arnaud Verdon",
     "starttime": "18:00",
-    "matchday": "1",
-    "date": "29.10.2017",
+    "matchday": "2",
+    "date": "29.9.2019",
     "notes": "",
     "backup_players": [[
       {"gender": "m", "name": "Tobias Künzi", "ranking": 4, "ranking_d": 5}
@@ -226,7 +226,7 @@
         {"gender": "f", "name": "Tenzin Pelling"}
       ]
     ],
-    "league_key": "NLA-2017",
+    "league_key": "NLA-2019",
     "team_competition": true
   }
 }
