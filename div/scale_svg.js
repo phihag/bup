@@ -8,7 +8,7 @@ const {promisify} = require('util');
 const DOMParser = require('xmldom').DOMParser;
 const XMLSerializer = require('xmldom').XMLSerializer;
 
-const svg_utils = require('../../js/svg_utils.js');
+const svg_utils = require('../js/svg_utils.js');
 
 function* traverse_dom(element) {
 	yield element;
