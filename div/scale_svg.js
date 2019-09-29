@@ -98,15 +98,19 @@ function scale_element(el, factor) {
 
 	switch(el.tagName) {
 	case 'svg':
-		let viewBox = el.getAttribute('viewBox');
-		assert(viewBox);
-		viewBox = viewBox.split(/\s+/).map(str => factor * parseFloat(str)).join(' ');
-		el.setAttribute('viewBox', viewBox);
+		{
+			let viewBox = el.getAttribute('viewBox');
+			assert(viewBox);
+			viewBox = viewBox.split(/\s+/).map(str => factor * parseFloat(str)).join(' ');
+			el.setAttribute('viewBox', viewBox);
+		}
 		break;
 	case 'style':
-		const css = el.firstChild.nodeValue;
-		el.removeChild(el.firstChild);
-		el.appendChild(el.ownerDocument.createTextNode(convert_css(css, factor)));
+		{
+			const css = el.firstChild.nodeValue;
+			el.removeChild(el.firstChild);
+			el.appendChild(el.ownerDocument.createTextNode(convert_css(css, factor)));
+		}
 		break;
 	case 'text':
 		scale_attrs(el, factor, ['x', 'y']);

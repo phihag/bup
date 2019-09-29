@@ -48,7 +48,9 @@ div.order_container {
 	.order_conflict1 {
 		font-weight: bold;
 	}
-	.order_conflict1, .order_conflict2, .order_conflict3 {
+	.order_conflict1,
+	.order_conflict2,
+	.order_conflict3 {
 		color: #000;
 	}
 }
