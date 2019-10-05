@@ -92,7 +92,11 @@ function ui_init() {
 
 	// Do not use click module: We need an actual click, not a touch here
 	uiu.qs('.fullscreen_button').addEventListener('click', toggle);
-	uiu.qs('.fullscreen_top_button').addEventListener('click', toggle);
+	try {
+		uiu.qs('.fullscreen_top_button').addEventListener('click', toggle);
+	} catch (e) {
+		report_problem.silent_error('Cannot find .fullscreen_top_button');
+	}
 }
 
 function autostart() {
