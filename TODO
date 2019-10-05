@@ -1,4 +1,6 @@
-add support for RLSO(see stash)
+btde: use test/ from test installation
+
+add support for RLSO (see stash)
 
 fix NLA result sheet (scale_svg)
 

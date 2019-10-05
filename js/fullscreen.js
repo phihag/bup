@@ -71,7 +71,11 @@ function update_fullscreen_button() {
 		// Automatic
 		show_button = /mobi|android/i.test(navigator.userAgent) && !all_active;
 	}
-	uiu.visible_qs('.fullscreen_top', show_button);
+	try {
+		uiu.visible_qs('.fullscreen_top', show_button);
+	} catch (e) {
+		report_problem.silent_error('Cannot find .fullscreen_top');
+	}
 }
 
 function ui_init() {
@@ -135,6 +139,7 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var bupui = require('./bupui');
 	var click = require('./click');
+	var report_problem = require('./report_problem');
 	var uiu = require('./uiu');
 
 	module.exports = fullscreen;
