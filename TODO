@@ -1,5 +1,7 @@
 btde: use test/ from test installation
 
+courtspot: should not show server when none set
+
 add support for RLSO (see stash)
 
 fix NLA result sheet (scale_svg)

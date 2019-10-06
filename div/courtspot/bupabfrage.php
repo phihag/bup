@@ -315,7 +315,7 @@ if (array_key_exists('all_players', $_GET)) {
 	mysqli_free_result($all_players_result);
 	$res['all_players'] = $all_players;
 }
-
+@mysqli_close($db);
 
 header('Cache-Control: no-cache, no-store, must-revalidate');
 header('Pragma: no-cache');
