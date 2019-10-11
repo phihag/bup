@@ -47,7 +47,7 @@ function parse_players($players_html, $gender) {
 		<tr>\s*
 		(?:<td>(?:(?P<teamnum>[0-9]+)-(?P<ranking>[0-9]+)(?:-D(?P<ranking_d>[0-9]+))?)?<\/td>)?
 		<td><\/td>\s*
-		<td\s+id="playercell"><a\s+href="player\.aspx[^"]+">
+		<td\s+id="playercell"><a\s+href="(\/sport\/)?player\.aspx[^"]+">
 			(?P<lastname>[^<]+),\s*(?P<firstname>[^<]+)
 		<\/a><\/td>\s*
 		(?:
