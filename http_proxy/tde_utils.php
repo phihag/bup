@@ -65,7 +65,7 @@ function parse_players($players_html, $gender) {
 	}
 
 	if (count($players_m) === 0) {
-		die('failed to find any players');
+		throw new \Exception('failed to find any players');
 	}
 
 	$res = \array_map(function($m) use ($gender) {
