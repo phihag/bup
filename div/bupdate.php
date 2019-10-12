@@ -210,8 +210,25 @@ if ($new_version === false) {
 rmrf($tmp_dir);
 @\rmdir($tmp_root);
 
-header('Content-Type: text/plain');
+header('Content-Type: text/html');
 header('Cache-Control: no-cache, no-store, must-revalidate');
 header('Pragma: no-cache');
 header('Expires: 0');
-echo 'Updated to bup ' . $new_version;
+
+?><!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>bupdate</title>
+<style>
+html, body {font-size: 30px;}
+</style>
+</head><body>
+<p>
+Update erfolgreich!<br/>
+Jetzt installiert: bup <strong><?php echo $new_version; ?></strong>
+</p>
+
+<a href="../">Zurück</a>
+</body>
+</html>
