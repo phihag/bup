@@ -1,3 +1,5 @@
+courtspot: should not show server when none set
+
 update logo stcbw
 
 selectevent
@@ -10,7 +12,9 @@ d bup-like overview display
 
 btde: use test/ from test installation
 
-courtspot: should not show server when none set
+export should export version:2
+
+tde_import import players
 
 add support for RLSO (see stash)
 

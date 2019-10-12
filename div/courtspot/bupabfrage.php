@@ -98,6 +98,8 @@ case 6:
 	$league_key = 'RLM-2016';
 	break;
 case 7:
+	$league_key = 'RLSO-2019';
+	break;
 case 8:
 	$league_key = '1BL-2019';
 	$tournament_name = 'Viertelfinale 1. Bundesliga 2019/2020';

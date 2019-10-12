@@ -23,6 +23,7 @@ var SHEETS_BY_LEAGUE = {
 	'RLM-2016': ['RLM-2016', 'receipt', 'RLM-SpO'],
 	'RLSOO-2017': ['RLSO-2017', 'receipt', 'RLSO-SpO'],
 	'RLSOS-2017': ['RLSO-2017', 'receipt', 'RLSO-SpO'],
+	'RLSO-2019': ['RLSO-2017', 'receipt', 'RLSO-SpO'],
 	'NLA-2017': ['NLA-2017'],
 	'NLA-2019': ['NLA-2019'],
 	'OBL-2017': ['OBL-2017'],
@@ -1814,7 +1815,7 @@ function save_rlso2017(ev, es_key, ui8r, extra_data) {
 			sheet.text('D3', ev.tournament_name);
 			sheet.text('D5', team_names[0]);
 			sheet.text('D7', team_names[1]);
-			sheet.text('O7', extra_data.umpires.replace(',', ' /'));
+			sheet.text('O7', (extra_data.umpires || '').replace(',', ' /'));
 			sheet.text('E30', extra_data.notes);
 			sheet.text('E28', extra_data.backup_players0);
 			sheet.text('I28', extra_data.backup_players1);
@@ -2466,6 +2467,7 @@ function show_dialog(es_key) {
 				label.appendChild(document.createTextNode(' ')); // compatibility to HTML UI
 				uiu.el(label, 'input', {
 					name: whole_key,
+					type: 'text',
 				});
 			});
 		});

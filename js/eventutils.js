@@ -245,6 +245,9 @@ function name_by_league(league_key) {
 	if (league_key === 'international-2017') {
 		return 'International match';
 	}
+	if (league_key === 'RLSO-2019') {
+		return 'Regionalliga SüdOst';
+	}
 	if (league_key === 'RLSOO-2017') {
 		return 'Regionalliga SüdOst Ost';
 	}
@@ -352,7 +355,7 @@ function setups_eq(e1, e2) {
 // I this a league with 2 MD, 3 MS, 1 WS, 1 XD, 1 WD, with the typical German regulations for doubles setup?
 function is_german8(league_key) {
 	return NRW2016_RE.test(league_key) || utils.includes([
-		'RLW-2016', 'RLN-2016', 'RLSOS-2017', 'RLSOO-2017', 'bayern-2018', 'OBL-2017'], league_key);
+		'RLW-2016', 'RLN-2016', 'RLSO-2019', 'RLSOS-2017', 'RLSOO-2017', 'bayern-2018', 'OBL-2017'], league_key);
 }
 
 function get_min_pause(league_key) {
@@ -377,7 +380,7 @@ function get_min_pause(league_key) {
 	if (league_key === 'bayern-2018') {
 		return 20 * 60000; // §41.6 Spielordnung
 	}
-	if (/^RLSO[SO]-2017$/.test(league_key)) {
+	if (/^RLSO[SO]-2017|RLSO-2019$/.test(league_key)) {
 		return 20 * 60000; // §7.7 Spielordnung der Gruppe SüdOst (= 30 - 10 minutes)
 	}
 	return undefined;
@@ -488,7 +491,7 @@ function default_counting(league_key) {
 	if (league_key === 'bayern-2018') {
 		return '3x21';
 	}
-	if (/^RLSO[SO]-2017$/.test(league_key)) {
+	if (/^RLSO[SO]-2017|RLSO-2019$/.test(league_key)) {
 		return '3x21';
 	}
 }
@@ -529,7 +532,7 @@ function umpire_pay(league_key) {
 			currency: '€',
 		};
 	}
-	if (/^RLSO[SO]-/.test(league_key)) {
+	if (/^RLSO[SO]-|^RLSO-2019/.test(league_key)) {
 		return { // 10.2c SpO
 			base: 25,
 			per_km: .3,

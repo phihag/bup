@@ -24,6 +24,7 @@ _describe('eventutils', function() {
 		assert.strictEqual(bup.eventutils.name_by_league('RLM-2016'), 'Regionalliga Mitte');
 		assert.strictEqual(bup.eventutils.name_by_league('RLSOO-2017'), 'Regionalliga SüdOst Ost');
 		assert.strictEqual(bup.eventutils.name_by_league('RLSOS-2017'), 'Regionalliga SüdOst Süd');
+		assert.strictEqual(bup.eventutils.name_by_league('RLSO-2019'), 'Regionalliga SüdOst');
 		assert.strictEqual(bup.eventutils.name_by_league('NRW-O19-RL-001-2016'), 'Regionalliga West (001)');
 		assert.strictEqual(bup.eventutils.name_by_league('NRW-O19-GW-RL-001-2016'), 'Regionalliga West (001)');
 		assert.strictEqual(bup.eventutils.name_by_league('NRW-O19-GW-OL-002-2016'), 'NRW-Oberliga Nord (002)');
@@ -639,6 +640,7 @@ _describe('eventutils', function() {
 		assert.deepStrictEqual(bup.eventutils.default_counting('RLM-2016'), '3x21');
 		assert.deepStrictEqual(bup.eventutils.default_counting('RLSOS-2017'), '3x21');
 		assert.deepStrictEqual(bup.eventutils.default_counting('RLSOO-2017'), '3x21');
+		assert.deepStrictEqual(bup.eventutils.default_counting('RLSO-2019'), '3x21');
 		assert.deepStrictEqual(bup.eventutils.default_counting('OBL-2017'), '3x21');
 		assert.deepStrictEqual(bup.eventutils.default_counting('bayern-2018'), '3x21');
 	});
@@ -648,6 +650,7 @@ _describe('eventutils', function() {
 		assert.deepStrictEqual(bup.eventutils.get_min_pause('NLA-2019'), 900000);
 		assert.deepStrictEqual(bup.eventutils.get_min_pause('OBL-2017'), 900000);
 		assert.deepStrictEqual(bup.eventutils.get_min_pause('bayern-2018'), 20 * 60 * 1000);
+		assert.deepStrictEqual(bup.eventutils.get_min_pause('RLSO-2019'), 20 * 60 * 1000);
 	});
 
 	_it('annotate counting', function() {

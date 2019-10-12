@@ -2,1178 +2,1175 @@
   "type": "bup-export",
   "version": 2,
   "event": {
-    "league_key": "RLSOS-2017",
-    "team_names": [
-      "TSV Neubiberg/Ottobrunn 1920 2",
-      "TSV Neuhausen-Nymphenburg 2"
-    ],
-    "team_competition": true,
-    "last_update": 1513511112000,
-    "date": "17.12.2017",
-    "starttime": "10:00",
+    "league_key": "RLSO-2019",
     "notes": "Start 3 Minuten später wegen Rennmäusen in der Halle",
-    "location": "85579 Neubiberg, Halle des TSV Neubiberg, Zwergerstr. 28",
+    "location": "82538 Geretsried, Sporthalle des Gymnasiums, Adalbert-Stifter-Str. 14",
     "umpires": "Lina Engl, Andreas Handtmann",
     "staticnet_message": "Demo Regionalliga SüdOst (nur lokal)",
+    "team_names": [
+      "TuS Geretsried",
+      "BSV Eggenstein-Leopoldshafen"
+    ],
     "all_players": [
       [
         {
-          "firstname": "Gregory",
-          "lastname": "Schneider",
-          "name": "Gregory Schneider",
-          "textid": "01-075648",
+          "firstname": "Noah",
+          "lastname": "Gnalian",
+          "name": "Noah Gnalian",
+          "textid": "07-034921",
+          "gender": "m",
+          "ranking": 1,
+          "ranking_d": 2
+        },
+        {
+          "firstname": "Ji?í",
+          "lastname": "Louda",
+          "name": "Ji?í Louda",
+          "textid": "07-044170",
+          "gender": "m",
+          "ranking": 2,
+          "ranking_d": 3,
+          "nationality": "CZE"
+        },
+        {
+          "firstname": "Philip",
+          "lastname": "Bußler",
+          "name": "Philip Bußler",
+          "textid": "07-036996",
+          "gender": "m",
+          "ranking": 3,
+          "ranking_d": 4
+        },
+        {
+          "firstname": "Samuel",
+          "lastname": "Gnalian",
+          "name": "Samuel Gnalian",
+          "textid": "07-034923",
+          "gender": "m",
+          "ranking": 4,
+          "ranking_d": 1
+        },
+        {
+          "firstname": "Simranjeet",
+          "lastname": "Pal",
+          "name": "Simranjeet Pal",
+          "textid": "07-032500",
+          "gender": "m",
+          "ranking": 5
+        },
+        {
+          "firstname": "Sebastian",
+          "lastname": "Keller",
+          "name": "Sebastian Keller",
+          "textid": "07-023850",
+          "gender": "m",
+          "ranking": 6
+        },
+        {
+          "firstname": "Michael",
+          "lastname": "Hopp",
+          "name": "Michael Hopp",
+          "textid": "07-011599",
+          "gender": "m",
+          "ranking": 7,
+          "ranking_d": 8
+        },
+        {
+          "firstname": "Matthias",
+          "lastname": "Minz",
+          "name": "Matthias Minz",
+          "textid": "07-034111",
+          "gender": "m",
+          "ranking": 8,
+          "ranking_d": 7
+        },
+        {
+          "firstname": "Martin",
+          "lastname": "Leinauer",
+          "name": "Martin Leinauer",
+          "textid": "07-028577",
+          "gender": "m",
+          "ranking": 9,
+          "ranking_d": 10
+        },
+        {
+          "firstname": "Markus",
+          "lastname": "Krekemeyer",
+          "name": "Markus Krekemeyer",
+          "textid": "07-030847",
+          "gender": "m",
+          "ranking": 10,
+          "ranking_d": 9
+        },
+        {
+          "firstname": "Johannes",
+          "lastname": "Leinauer",
+          "name": "Johannes Leinauer",
+          "textid": "07-028870",
+          "gender": "m",
+          "ranking": 11,
+          "ranking_d": 12
+        },
+        {
+          "firstname": "Udo",
+          "lastname": "Lehmann",
+          "name": "Udo Lehmann",
+          "textid": "01-016370",
+          "gender": "m",
+          "ranking": 12,
+          "ranking_d": 11
+        },
+        {
+          "firstname": "Sascha",
+          "lastname": "Gnalian",
+          "name": "Sascha Gnalian",
+          "textid": "07-034610",
+          "gender": "m",
+          "ranking": 13
+        },
+        {
+          "firstname": "Uwe",
+          "lastname": "Eckhoff",
+          "name": "Uwe Eckhoff",
+          "textid": "04-004867",
+          "gender": "m",
+          "ranking": 14
+        },
+        {
+          "firstname": "Felix",
+          "lastname": "Bauereiß",
+          "name": "Felix Bauereiß",
+          "textid": "07-038625",
+          "gender": "m",
+          "ranking": 15
+        },
+        {
+          "firstname": "Michael",
+          "lastname": "Leinauer",
+          "name": "Michael Leinauer",
+          "textid": "07-033590",
+          "gender": "m",
+          "ranking": 16
+        },
+        {
+          "firstname": "Stephan",
+          "lastname": "Heinle",
+          "name": "Stephan Heinle",
+          "textid": "07-010323",
+          "gender": "m",
+          "ranking": 17
+        },
+        {
+          "firstname": "Michael",
+          "lastname": "Be",
+          "name": "Michael Be",
+          "textid": "07-008525",
+          "gender": "m",
+          "ranking": 18
+        },
+        {
+          "firstname": "Mathias",
+          "lastname": "Renz",
+          "name": "Mathias Renz",
+          "textid": "07-011166",
+          "gender": "m",
+          "ranking": 19
+        },
+        {
+          "firstname": "Sebastian",
+          "lastname": "Düster",
+          "name": "Sebastian Düster",
+          "textid": "07-016375",
+          "gender": "m",
+          "ranking": 20
+        },
+        {
+          "firstname": "Walter",
+          "lastname": "Bader",
+          "name": "Walter Bader",
+          "textid": "07-031060",
+          "gender": "m",
+          "ranking": 21
+        },
+        {
+          "firstname": "Hans-Dieter",
+          "lastname": "Hechtl",
+          "name": "Hans-Dieter Hechtl",
+          "textid": "07-017798",
+          "gender": "m",
+          "ranking": 22
+        },
+        {
+          "firstname": "Jens",
+          "lastname": "Teichmann",
+          "name": "Jens Teichmann",
+          "textid": "01-109046",
+          "gender": "m",
+          "ranking": 23
+        },
+        {
+          "firstname": "Ulrich",
+          "lastname": "Pangerl",
+          "name": "Ulrich Pangerl",
+          "textid": "07-032841",
+          "gender": "m",
+          "ranking": 24
+        },
+        {
+          "firstname": "Benedikt",
+          "lastname": "Leinauer",
+          "name": "Benedikt Leinauer",
+          "textid": "07-033591",
+          "gender": "m",
+          "ranking": 25
+        },
+        {
+          "firstname": "Hubert",
+          "lastname": "Vitzthum",
+          "name": "Hubert Vitzthum",
+          "textid": "07-004971",
+          "gender": "m",
+          "ranking": 26
+        },
+        {
+          "firstname": "Norbert",
+          "lastname": "Gatzka",
+          "name": "Norbert Gatzka",
+          "textid": "07-039059",
+          "gender": "m",
+          "ranking": 27
+        },
+        {
+          "firstname": "Andreas",
+          "lastname": "Deschle",
+          "name": "Andreas Deschle",
+          "textid": "07-043647",
+          "gender": "m",
+          "ranking": 28
+        },
+        {
+          "firstname": "Michael",
+          "lastname": "Heina",
+          "name": "Michael Heina",
+          "textid": "07-035496",
+          "gender": "m",
+          "ranking": 29
+        },
+        {
+          "firstname": "Helmut",
+          "lastname": "Hummler",
+          "name": "Helmut Hummler",
+          "textid": "07-029689",
+          "gender": "m",
+          "ranking": 30
+        },
+        {
+          "firstname": "Mathias",
+          "lastname": "Klemt",
+          "name": "Mathias Klemt",
+          "textid": "07-042985",
+          "gender": "m",
+          "ranking": 31
+        },
+        {
+          "firstname": "Johannes",
+          "lastname": "Kling",
+          "name": "Johannes Kling",
+          "textid": "07-038628",
+          "gender": "m",
+          "ranking": 32
+        },
+        {
+          "firstname": "Milo",
+          "lastname": "Lammers",
+          "name": "Milo Lammers",
+          "textid": "07-041108",
+          "gender": "m",
+          "ranking": 33
+        },
+        {
+          "firstname": "Lars",
+          "lastname": "Lang",
+          "name": "Lars Lang",
+          "textid": "07-041800",
+          "gender": "m",
+          "ranking": 34
+        },
+        {
+          "firstname": "Patrick",
+          "lastname": "Rose",
+          "name": "Patrick Rose",
+          "textid": "07-038629",
+          "gender": "m",
+          "ranking": 35
+        },
+        {
+          "firstname": "Eric",
+          "lastname": "Held",
+          "name": "Eric Held",
+          "textid": "07-042813",
+          "gender": "m",
+          "ranking": 36
+        },
+        {
+          "firstname": "Leonard",
+          "lastname": "Husmann",
+          "name": "Leonard Husmann",
+          "textid": "07-036224",
+          "gender": "m",
+          "ranking": 37
+        },
+        {
+          "firstname": "Oskar",
+          "lastname": "Artner",
+          "name": "Oskar Artner",
+          "textid": "07-003453",
+          "gender": "m",
+          "ranking": 38
+        },
+        {
+          "firstname": "Maximilian",
+          "lastname": "Becker-Platen",
+          "name": "Maximilian Becker-Platen",
+          "textid": "07-042251",
+          "gender": "m",
+          "ranking": 39
+        },
+        {
+          "firstname": "Michelle",
+          "lastname": "Deschle",
+          "name": "Michelle Deschle",
+          "textid": "07-035267",
+          "gender": "f",
+          "ranking": 1
+        },
+        {
+          "firstname": "Julia",
+          "lastname": "Bitsoukova",
+          "name": "Julia Bitsoukova",
+          "textid": "07-044059",
+          "gender": "f",
+          "ranking": 2,
+          "nationality": "BLR"
+        },
+        {
+          "firstname": "Antonia",
+          "lastname": "Schaller",
+          "name": "Antonia Schaller",
+          "textid": "07-038551",
+          "gender": "f",
+          "ranking": 3
+        },
+        {
+          "firstname": "Mona",
+          "lastname": "Künzer",
+          "name": "Mona Künzer",
+          "textid": "02-025242",
+          "gender": "f",
+          "ranking": 4
+        },
+        {
+          "firstname": "Sabrina",
+          "lastname": "Aschenbrenner",
+          "name": "Sabrina Aschenbrenner",
+          "textid": "07-033165",
+          "gender": "f",
+          "ranking": 5
+        },
+        {
+          "firstname": "Viktoria",
+          "lastname": "Aschenbrenner",
+          "name": "Viktoria Aschenbrenner",
+          "textid": "07-036225",
+          "gender": "f",
+          "ranking": 6
+        },
+        {
+          "firstname": "Benita",
+          "lastname": "Heinle",
+          "name": "Benita Heinle",
+          "textid": "07-037984",
+          "gender": "f",
+          "ranking": 7
+        },
+        {
+          "firstname": "Caroline",
+          "lastname": "Rieth",
+          "name": "Caroline Rieth",
+          "textid": "07-036997",
+          "gender": "f",
+          "ranking": 8
+        },
+        {
+          "firstname": "Teresa",
+          "lastname": "Ratschiller",
+          "name": "Teresa Ratschiller",
+          "textid": "07-037828",
+          "gender": "f",
+          "ranking": 9
+        },
+        {
+          "firstname": "Andrea",
+          "lastname": "Fischer",
+          "name": "Andrea Fischer",
+          "textid": "07-016376",
+          "gender": "f",
+          "ranking": 10
+        },
+        {
+          "firstname": "Sarka",
+          "lastname": "Meier",
+          "name": "Sarka Meier",
+          "textid": "07-036087",
+          "gender": "f",
+          "ranking": 11,
+          "nationality": "CZE"
+        },
+        {
+          "firstname": "Lea",
+          "lastname": "Heinle",
+          "name": "Lea Heinle",
+          "textid": "07-033754",
+          "gender": "f",
+          "ranking": 12
+        },
+        {
+          "firstname": "Helena",
+          "lastname": "Aschenbrenner",
+          "name": "Helena Aschenbrenner",
+          "textid": "07-006442",
+          "gender": "f",
+          "ranking": 13
+        },
+        {
+          "firstname": "Lisa",
+          "lastname": "Bußler",
+          "name": "Lisa Bußler",
+          "textid": "07-038626",
+          "gender": "f",
+          "ranking": 14
+        },
+        {
+          "firstname": "Claudia",
+          "lastname": "Frey",
+          "name": "Claudia Frey",
+          "textid": "07-038355",
+          "gender": "f",
+          "ranking": 15
+        },
+        {
+          "firstname": "Stephanie",
+          "lastname": "Niemetz",
+          "name": "Stephanie Niemetz",
+          "textid": "07-039097",
+          "gender": "f",
+          "ranking": 16
+        },
+        {
+          "firstname": "Usha",
+          "lastname": "Gnalian",
+          "name": "Usha Gnalian",
+          "textid": "07-034737",
+          "gender": "f",
+          "ranking": 17,
+          "nationality": "IND"
+        },
+        {
+          "firstname": "Katrin",
+          "lastname": "Leinauer",
+          "name": "Katrin Leinauer",
+          "textid": "07-038354",
+          "gender": "f",
+          "ranking": 18
+        },
+        {
+          "firstname": "Claudia",
+          "lastname": "Heina",
+          "name": "Claudia Heina",
+          "textid": "07-036543",
+          "gender": "f",
+          "ranking": 19
+        },
+        {
+          "firstname": "Claudia",
+          "lastname": "Sonst",
+          "name": "Claudia Sonst",
+          "textid": "01-067506",
+          "gender": "f",
+          "ranking": 21
+        },
+        {
+          "firstname": "Alma",
+          "lastname": "Lichtenauer",
+          "name": "Alma Lichtenauer",
+          "textid": "07-041086",
+          "gender": "f",
+          "ranking": 23
+        },
+        {
+          "firstname": "Anna",
+          "lastname": "Leinauer",
+          "name": "Anna Leinauer",
+          "textid": "07-033989",
+          "gender": "f",
+          "ranking": 24
+        },
+        {
+          "firstname": "Katrin",
+          "lastname": "Klemt",
+          "name": "Katrin Klemt",
+          "textid": "07-042979",
+          "gender": "f",
+          "ranking": 25
+        },
+        {
+          "firstname": "Adriana",
+          "lastname": "Hopfauf",
+          "name": "Adriana Hopfauf",
+          "textid": "07-040969",
+          "gender": "f",
+          "ranking": 26
+        },
+        {
+          "firstname": "Maja",
+          "lastname": "Hechtl",
+          "name": "Maja Hechtl",
+          "textid": "07-043704",
+          "gender": "f",
+          "ranking": 27
+        }
+      ],
+      [
+        {
+          "firstname": "Fabian",
+          "lastname": "Schlenga",
+          "name": "Fabian Schlenga",
+          "textid": "05-036820",
           "gender": "m",
           "ranking": 1
         },
         {
-          "firstname": "Benjamin",
-          "lastname": "Placzek",
-          "name": "Benjamin Placzek",
-          "textid": "07-015710",
+          "firstname": "Andreano",
+          "lastname": "Boris",
+          "name": "Andreano Boris",
+          "textid": "05-049324",
           "gender": "m",
-          "ranking": 2
+          "ranking": 2,
+          "nationality": "INA"
+        },
+        {
+          "firstname": "Mihkel",
+          "lastname": "Laanes",
+          "name": "Mihkel Laanes",
+          "textid": "05-060367",
+          "gender": "m",
+          "ranking": 3,
+          "nationality": "EST"
+        },
+        {
+          "firstname": "Simon",
+          "lastname": "Junker",
+          "name": "Simon Junker",
+          "textid": "05-031149",
+          "gender": "m",
+          "ranking": 4
+        },
+        {
+          "firstname": "Maximilian",
+          "lastname": "Rudolf",
+          "name": "Maximilian Rudolf",
+          "textid": "05-036029",
+          "gender": "m",
+          "ranking": 5
+        },
+        {
+          "firstname": "Marcus",
+          "lastname": "Bayer",
+          "name": "Marcus Bayer",
+          "textid": "05-022516",
+          "gender": "m",
+          "ranking": 6
+        },
+        {
+          "firstname": "Lukas",
+          "lastname": "Förschner",
+          "name": "Lukas Förschner",
+          "textid": "05-044702",
+          "gender": "m",
+          "ranking": 7,
+          "ranking_d": 16
+        },
+        {
+          "firstname": "Hai Ha",
+          "lastname": "Nguyen",
+          "name": "Hai Ha Nguyen",
+          "textid": "05-043729",
+          "gender": "m",
+          "ranking": 8,
+          "ranking_d": 14,
+          "nationality": "VIE"
+        },
+        {
+          "firstname": "Christoph",
+          "lastname": "Lechner",
+          "name": "Christoph Lechner",
+          "textid": "05-036817",
+          "gender": "m",
+          "ranking": 9,
+          "ranking_d": 7
         },
         {
           "firstname": "Stefan",
-          "lastname": "Waffler",
-          "name": "Stefan Waffler",
-          "textid": "07-031655",
+          "lastname": "Pfleging",
+          "name": "Stefan Pfleging",
+          "textid": "05-032217",
           "gender": "m",
-          "ranking": 3
+          "ranking": 10
         },
         {
-          "firstname": "Benjamin",
-          "lastname": "Dierks",
-          "name": "Benjamin Dierks",
-          "textid": "07-032062",
+          "firstname": "Richard",
+          "lastname": "Samman",
+          "name": "Richard Samman",
+          "textid": "05-036030",
           "gender": "m",
-          "ranking": 4,
-          "ranking_d": 6
-        },
-        {
-          "firstname": "Andreas",
-          "lastname": "Fuchs",
-          "name": "Andreas Fuchs",
-          "textid": "07-018372",
-          "gender": "m",
-          "ranking": 5,
-          "ranking_d": 4
-        },
-        {
-          "firstname": "Michael",
-          "lastname": "Hauber",
-          "name": "Michael Hauber",
-          "textid": "07-018059",
-          "gender": "m",
-          "ranking": 6,
-          "ranking_d": 5
-        },
-        {
-          "firstname": "Max",
-          "lastname": "Kick",
-          "name": "Max Kick",
-          "textid": "07-034306",
-          "gender": "m",
-          "ranking": 7
-        },
-        {
-          "firstname": "Martin",
-          "lastname": "Kröger",
-          "name": "Martin Kröger",
-          "textid": "01-113514",
-          "gender": "m",
-          "ranking": 8
-        },
-        {
-          "firstname": "Fabian",
-          "lastname": "Specht",
-          "name": "Fabian Specht",
-          "textid": "07-028525",
-          "gender": "m",
-          "ranking": 9
-        },
-        {
-          "firstname": "Patrick",
-          "lastname": "Fischer",
-          "name": "Patrick Fischer",
-          "textid": "07-035986",
-          "gender": "m",
-          "ranking": 10,
+          "ranking": 11,
           "ranking_d": 12
         },
         {
-          "firstname": "Andreas",
-          "lastname": "Schnurrer",
-          "name": "Andreas Schnurrer",
-          "textid": "10-007361",
-          "gender": "m",
-          "ranking": 11
-        },
-        {
-          "firstname": "Filip",
-          "lastname": "Hermanns",
-          "name": "Filip Hermanns",
-          "textid": "07-037103",
+          "firstname": "Jannis",
+          "lastname": "König",
+          "name": "Jannis König",
+          "textid": "05-034153",
           "gender": "m",
           "ranking": 12,
           "ranking_d": 13
         },
         {
-          "firstname": "Dennis",
-          "lastname": "Gleber",
-          "name": "Dennis Gleber",
-          "textid": "11-009486",
+          "firstname": "Mathis",
+          "lastname": "Alt",
+          "name": "Mathis Alt",
+          "textid": "05-036025",
           "gender": "m",
           "ranking": 13,
-          "ranking_d": 14
-        },
-        {
-          "firstname": "Thomas",
-          "lastname": "Knäpper",
-          "name": "Thomas Knäpper",
-          "textid": "03-005627",
-          "gender": "m",
-          "ranking": 14,
-          "ranking_d": 15
-        },
-        {
-          "firstname": "Chuan Seng",
-          "lastname": "Lee",
-          "name": "Chuan Seng Lee",
-          "textid": "07-040107",
-          "gender": "m",
-          "ranking": 15,
-          "ranking_d": 16,
-          "nationality": "MAS"
-        },
-        {
-          "firstname": "Dushan",
-          "lastname": "Pamunuwa",
-          "name": "Dushan Pamunuwa",
-          "textid": "07-041668",
-          "gender": "m",
-          "ranking": 16,
-          "ranking_d": 17,
-          "nationality": "SRI"
-        },
-        {
-          "firstname": "Kilian Ming-Zhe",
-          "lastname": "Maurer",
-          "name": "Kilian Ming-Zhe Maurer",
-          "textid": "07-038676",
-          "gender": "m",
-          "ranking": 17,
-          "ranking_d": 18
-        },
-        {
-          "firstname": "Julian",
-          "lastname": "Blaumoser",
-          "name": "Julian Blaumoser",
-          "textid": "07-036132",
-          "gender": "m",
-          "ranking": 18,
-          "ranking_d": 20
-        },
-        {
-          "firstname": "Matthias",
-          "lastname": "Becker",
-          "name": "Matthias Becker",
-          "textid": "02-018392",
-          "gender": "m",
-          "ranking": 19,
-          "ranking_d": 10
-        },
-        {
-          "firstname": "Philipp",
-          "lastname": "Rocholl",
-          "name": "Philipp Rocholl",
-          "textid": "05-018339",
-          "gender": "m",
-          "ranking": 20,
-          "ranking_d": 19
-        },
-        {
-          "firstname": "Helena",
-          "lastname": "Storch",
-          "name": "Helena Storch",
-          "textid": "07-030127",
-          "gender": "f",
-          "ranking": 1
-        },
-        {
-          "firstname": "Johanna",
-          "lastname": "Reinhardt",
-          "name": "Johanna Reinhardt",
-          "textid": "07-030642",
-          "gender": "f",
-          "ranking": 2
-        },
-        {
-          "firstname": "Lotte Lundoe",
-          "lastname": "Noergaard",
-          "name": "Lotte Lundoe Noergaard",
-          "textid": "07-040080",
-          "gender": "f",
-          "ranking": 3,
-          "nationality": "DEN"
-        },
-        {
-          "firstname": "Julia",
-          "lastname": "Hauber",
-          "name": "Julia Hauber",
-          "textid": "07-018058",
-          "gender": "f",
-          "ranking": 4
-        },
-        {
-          "firstname": "Verena",
-          "lastname": "Roth",
-          "name": "Verena Roth",
-          "textid": "07-020792",
-          "gender": "f",
-          "ranking": 5
-        },
-        {
-          "firstname": "Tanja",
-          "lastname": "Eberl",
-          "name": "Tanja Eberl",
-          "textid": "05-004825",
-          "gender": "f",
-          "ranking": 6
-        },
-        {
-          "firstname": "Monika",
-          "lastname": "Meier",
-          "name": "Monika Meier",
-          "textid": "07-029414",
-          "gender": "f",
-          "ranking": 7
-        },
-        {
-          "firstname": "Eva",
-          "lastname": "Reinhardt",
-          "name": "Eva Reinhardt",
-          "textid": "07-033188",
-          "gender": "f",
-          "ranking": 8
-        },
-        {
-          "firstname": "Thi Xuan Anh",
-          "lastname": "Bui",
-          "name": "Thi Xuan Anh Bui",
-          "textid": "07-036591",
-          "gender": "f",
-          "ranking": 9
-        },
-        {
-          "firstname": "Ann-Kathrin",
-          "lastname": "Bürkle",
-          "name": "Ann-Kathrin Bürkle",
-          "textid": "07-039505",
-          "gender": "f",
-          "ranking": 10
-        },
-        {
-          "firstname": "Patricia",
-          "lastname": "Engel",
-          "name": "Patricia Engel",
-          "textid": "07-034925",
-          "gender": "f",
-          "ranking": 11
-        },
-        {
-          "firstname": "Serafina",
-          "lastname": "Starke",
-          "name": "Serafina Starke",
-          "textid": "07-041469",
-          "gender": "f",
-          "ranking": 12
-        },
-        {
-          "firstname": "Daniela",
-          "lastname": "Surrer",
-          "name": "Daniela Surrer",
-          "textid": "07-035059",
-          "gender": "f",
-          "ranking": 13
-        },
-        {
-          "firstname": "Jasmin",
-          "lastname": "Wierer",
-          "name": "Jasmin Wierer",
-          "textid": "07-041448",
-          "gender": "f",
-          "ranking": 14
-        }
-      ],
-      [
-        {
-          "firstname": "Przemyskaw",
-          "lastname": "Szydlowski",
-          "name": "Przemyskaw Szydlowski",
-          "textid": "07-041496",
-          "gender": "m",
-          "ranking": 1,
-          "ranking_d": 7,
-          "nationality": "POL"
-        },
-        {
-          "firstname": "Kevin",
-          "lastname": "Feibicke",
-          "name": "Kevin Feibicke",
-          "textid": "07-036058",
-          "gender": "m",
-          "ranking": 2,
-          "ranking_d": 5
-        },
-        {
-          "firstname": "Dennis",
-          "lastname": "Gankin",
-          "name": "Dennis Gankin",
-          "textid": "04-066113",
-          "gender": "m",
-          "ranking": 3
-        },
-        {
-          "firstname": "Yauheni",
-          "lastname": "Ykauchuk",
-          "name": "Yauheni Ykauchuk",
-          "textid": "07-035632",
-          "gender": "m",
-          "ranking": 4,
-          "nationality": "BLR"
-        },
-        {
-          "firstname": "Eric",
-          "lastname": "Patz",
-          "name": "Eric Patz",
-          "textid": "08-003396",
-          "gender": "m",
-          "ranking": 5,
-          "ranking_d": 17
-        },
-        {
-          "firstname": "Jonas",
-          "lastname": "Braun",
-          "name": "Jonas Braun",
-          "textid": "07-034022",
-          "gender": "m",
-          "ranking": 6
-        },
-        {
-          "firstname": "Justin",
-          "lastname": "Seibel",
-          "name": "Justin Seibel",
-          "textid": "07-037123",
-          "gender": "m",
-          "ranking": 7
-        },
-        {
-          "firstname": "Daniel",
-          "lastname": "Beier",
-          "name": "Daniel Beier",
-          "textid": "07-022858",
-          "gender": "m",
-          "ranking": 8,
-          "ranking_d": 12
-        },
-        {
-          "firstname": "Konstantin",
-          "lastname": "Dubs",
-          "name": "Konstantin Dubs",
-          "textid": "07-024615",
-          "gender": "m",
-          "ranking": 9,
-          "ranking_d": 15
-        },
-        {
-          "firstname": "Sebastian",
-          "lastname": "Buijze",
-          "name": "Sebastian Buijze",
-          "textid": "07-029618",
-          "gender": "m",
-          "ranking": 10,
-          "ranking_d": 16
-        },
-        {
-          "firstname": "Chi Dat",
-          "lastname": "Tran",
-          "name": "Chi Dat Tran",
-          "textid": "04-079784",
-          "gender": "m",
-          "ranking": 11,
-          "ranking_d": 23
-        },
-        {
-          "firstname": "Robert",
-          "lastname": "Lembke",
-          "name": "Robert Lembke",
-          "textid": "18-001267",
-          "gender": "m",
-          "ranking": 12,
-          "ranking_d": 20
-        },
-        {
-          "firstname": "Carsten",
-          "lastname": "Eschert",
-          "name": "Carsten Eschert",
-          "textid": "05-030118",
-          "gender": "m",
-          "ranking": 13,
-          "ranking_d": 25
-        },
-        {
-          "firstname": "Guido",
-          "lastname": "Feldmann",
-          "name": "Guido Feldmann",
-          "textid": "07-034324",
-          "gender": "m",
-          "ranking": 14,
-          "ranking_d": 19
-        },
-        {
-          "firstname": "Roland",
-          "lastname": "Schumacher",
-          "name": "Roland Schumacher",
-          "textid": "01-029497",
-          "gender": "m",
-          "ranking": 15,
-          "ranking_d": 18
-        },
-        {
-          "firstname": "Philipp",
-          "lastname": "Blonck",
-          "name": "Philipp Blonck",
-          "textid": "07-012230",
-          "gender": "m",
-          "ranking": 16,
-          "ranking_d": 28
-        },
-        {
-          "firstname": "Philipp",
-          "lastname": "Schwarze",
-          "name": "Philipp Schwarze",
-          "textid": "14-001968",
-          "gender": "m",
-          "ranking": 17
-        },
-        {
-          "firstname": "Rene",
-          "lastname": "Koburger",
-          "name": "Rene Koburger",
-          "textid": "07-037283",
-          "gender": "m",
-          "ranking": 18,
-          "ranking_d": 27
+          "ranking_d": 8
         },
         {
           "firstname": "Fabrice",
-          "lastname": "Hipp",
-          "name": "Fabrice Hipp",
-          "textid": "07-041584",
+          "lastname": "Müller",
+          "name": "Fabrice Müller",
+          "textid": "05-030572",
+          "gender": "m",
+          "ranking": 14,
+          "ranking_d": 11
+        },
+        {
+          "firstname": "Markus",
+          "lastname": "Döllken",
+          "name": "Markus Döllken",
+          "textid": "05-029381",
+          "gender": "m",
+          "ranking": 15,
+          "ranking_d": 17
+        },
+        {
+          "firstname": "Jochen",
+          "lastname": "Richter",
+          "name": "Jochen Richter",
+          "textid": "05-014285",
+          "gender": "m",
+          "ranking": 16,
+          "ranking_d": 18
+        },
+        {
+          "firstname": "Artyom",
+          "lastname": "Vasilev",
+          "name": "Artyom Vasilev",
+          "textid": "05-058267",
+          "gender": "m",
+          "ranking": 17,
+          "ranking_d": 19,
+          "nationality": "RUS"
+        },
+        {
+          "firstname": "Han-Ting",
+          "lastname": "Chuang",
+          "name": "Han-Ting Chuang",
+          "textid": "05-057258",
+          "gender": "m",
+          "ranking": 18,
+          "ranking_d": 20,
+          "nationality": "TPE"
+        },
+        {
+          "firstname": "Niklas",
+          "lastname": "Ditter",
+          "name": "Niklas Ditter",
+          "textid": "05-042315",
           "gender": "m",
           "ranking": 19,
+          "ranking_d": 9
+        },
+        {
+          "firstname": "Michael",
+          "lastname": "Trumm",
+          "name": "Michael Trumm",
+          "textid": "05-032788",
+          "gender": "m",
+          "ranking": 20,
           "ranking_d": 21
         },
         {
-          "firstname": "Jéròme",
-          "lastname": "Berganz",
-          "name": "Jéròme Berganz",
-          "textid": "07-040998",
+          "firstname": "Clement",
+          "lastname": "Kervio",
+          "name": "Clement Kervio",
+          "textid": "05-037597",
           "gender": "m",
-          "ranking": 20,
-          "ranking_d": 30,
+          "ranking": 21,
+          "ranking_d": 15,
           "nationality": "FRA"
         },
         {
-          "firstname": "Oliver",
-          "lastname": "Zirwes",
-          "name": "Oliver Zirwes",
-          "textid": "07-041017",
-          "gender": "m",
-          "ranking": 21,
-          "ranking_d": 26
-        },
-        {
-          "firstname": "Gerd",
-          "lastname": "Pottendorfer",
-          "name": "Gerd Pottendorfer",
-          "textid": "07-037284",
+          "firstname": "Sun",
+          "lastname": "Guo",
+          "name": "Sun Guo",
+          "textid": "05-039116",
           "gender": "m",
           "ranking": 22,
-          "nationality": "AUT"
+          "nationality": "CHN"
         },
         {
-          "firstname": "Valentin",
-          "lastname": "Kraus",
-          "name": "Valentin Kraus",
-          "textid": "07-027557",
+          "firstname": "Tzu Hsiang",
+          "lastname": "Lin",
+          "name": "Tzu Hsiang Lin",
+          "textid": "05-044808",
           "gender": "m",
           "ranking": 23,
-          "ranking_d": 32
+          "nationality": "TPE"
         },
         {
-          "firstname": "Domenik",
-          "lastname": "Wehling",
-          "name": "Domenik Wehling",
-          "textid": "02-034998",
+          "firstname": "Sebastian",
+          "lastname": "Senst",
+          "name": "Sebastian Senst",
+          "textid": "05-028647",
           "gender": "m",
-          "ranking": 24,
-          "ranking_d": 33
+          "ranking": 24
         },
         {
-          "firstname": "Manuel",
-          "lastname": "Hart",
-          "name": "Manuel Hart",
-          "textid": "07-038574",
+          "firstname": "Simon",
+          "lastname": "Sander",
+          "name": "Simon Sander",
+          "textid": "16-007264",
           "gender": "m",
-          "ranking": 25,
-          "ranking_d": 34
+          "ranking": 25
         },
         {
-          "firstname": "Lars",
-          "lastname": "Peuser",
-          "name": "Lars Peuser",
-          "textid": "01-030605",
+          "firstname": "Frank",
+          "lastname": "Kiefer",
+          "name": "Frank Kiefer",
+          "textid": "05-007128",
           "gender": "m",
-          "ranking": 26,
-          "ranking_d": 22
+          "ranking": 26
         },
         {
-          "firstname": "Immo",
-          "lastname": "Korus",
-          "name": "Immo Korus",
-          "textid": "07-013133",
+          "firstname": "Michael",
+          "lastname": "Samman",
+          "name": "Michael Samman",
+          "textid": "05-032001",
           "gender": "m",
-          "ranking": 27,
-          "ranking_d": 35
-        },
-        {
-          "firstname": "Gurdeep Singh",
-          "lastname": "Kundi",
-          "name": "Gurdeep Singh Kundi",
-          "textid": "16-003260",
-          "gender": "m",
-          "ranking": 28,
-          "ranking_d": 31,
-          "nationality": "IND"
+          "ranking": 27
         },
         {
           "firstname": "Stefan",
-          "lastname": "Braun",
-          "name": "Stefan Braun",
-          "textid": "07-010510",
+          "lastname": "Gabriel",
+          "name": "Stefan Gabriel",
+          "textid": "05-027085",
+          "gender": "m",
+          "ranking": 28
+        },
+        {
+          "firstname": "Ingo",
+          "lastname": "Bartsch",
+          "name": "Ingo Bartsch",
+          "textid": "05-014399",
           "gender": "m",
           "ranking": 29
         },
         {
-          "firstname": "Jakob",
-          "lastname": "Jagemann",
-          "name": "Jakob Jagemann",
-          "textid": "07-036963",
+          "firstname": "Lauritz",
+          "lastname": "Büttner",
+          "name": "Lauritz Büttner",
+          "textid": "05-031795",
           "gender": "m",
           "ranking": 30
         },
         {
-          "firstname": "Florian",
-          "lastname": "Menacher",
-          "name": "Florian Menacher",
-          "textid": "07-037181",
+          "firstname": "Michael",
+          "lastname": "Waidmann",
+          "name": "Michael Waidmann",
+          "textid": "05-012318",
           "gender": "m",
           "ranking": 31
         },
         {
-          "firstname": "Yannick",
-          "lastname": "Ernesti",
-          "name": "Yannick Ernesti",
-          "textid": "07-039746",
+          "firstname": "Benjamin",
+          "lastname": "Kervio",
+          "name": "Benjamin Kervio",
+          "textid": "05-034332",
           "gender": "m",
-          "ranking": 32
+          "ranking": 32,
+          "nationality": "FRA"
         },
         {
-          "firstname": "Florian",
-          "lastname": "Betz",
-          "name": "Florian Betz",
-          "textid": "07-012330",
+          "firstname": "Heiko",
+          "lastname": "Hötzel",
+          "name": "Heiko Hötzel",
+          "textid": "05-029955",
           "gender": "m",
           "ranking": 33
         },
         {
-          "firstname": "Andreas",
-          "lastname": "Lind",
-          "name": "Andreas Lind",
-          "textid": "07-017680",
+          "firstname": "Alexander",
+          "lastname": "Pfleging",
+          "name": "Alexander Pfleging",
+          "textid": "05-036821",
           "gender": "m",
           "ranking": 34
         },
         {
-          "firstname": "Christian",
-          "lastname": "Otte",
-          "name": "Christian Otte",
-          "textid": "07-023671",
+          "firstname": "Niklas",
+          "lastname": "Hummel",
+          "name": "Niklas Hummel",
+          "textid": "05-058701",
           "gender": "m",
           "ranking": 35
         },
         {
-          "firstname": "Axel",
-          "lastname": "Clausnitzer",
-          "name": "Axel Clausnitzer",
-          "textid": "07-012682",
+          "firstname": "Noah",
+          "lastname": "Fischer",
+          "name": "Noah Fischer",
+          "textid": "05-055745",
           "gender": "m",
           "ranking": 36
         },
         {
-          "firstname": "Raimund",
-          "lastname": "Fuhrmann",
-          "name": "Raimund Fuhrmann",
-          "textid": "07-008016",
+          "firstname": "Alexander",
+          "lastname": "Schlenga",
+          "name": "Alexander Schlenga",
+          "textid": "05-048787",
           "gender": "m",
           "ranking": 37
         },
         {
-          "firstname": "Karlheinz",
-          "lastname": "Wahler",
-          "name": "Karlheinz Wahler",
-          "textid": "07-000901",
-          "gender": "m",
-          "ranking": 38
-        },
-        {
-          "firstname": "Noah",
-          "lastname": "Marti-Stangl",
-          "name": "Noah Marti-Stangl",
-          "textid": "07-040287",
-          "gender": "m",
-          "ranking": 39
-        },
-        {
-          "firstname": "Jakob",
-          "lastname": "Susewind",
-          "name": "Jakob Susewind",
-          "textid": "07-040288",
-          "gender": "m",
-          "ranking": 40
-        },
-        {
-          "firstname": "Kaja",
-          "lastname": "Stankovic",
-          "name": "Kaja Stankovic",
-          "textid": "07-037403",
+          "firstname": "Liisa-Lotta",
+          "lastname": "Tannik",
+          "name": "Liisa-Lotta Tannik",
+          "textid": "05-065743",
           "gender": "f",
           "ranking": 1,
-          "nationality": "SLO"
+          "nationality": "EST"
         },
         {
-          "firstname": "Monika",
-          "lastname": "Weigert",
-          "name": "Monika Weigert",
-          "textid": "07-035210",
+          "firstname": "Elisa",
+          "lastname": "Herzig de Almeida",
+          "name": "Elisa Herzig de Almeida",
+          "textid": "05-036322",
           "gender": "f",
           "ranking": 2
         },
         {
-          "firstname": "Jessica",
-          "lastname": "Willems",
-          "name": "Jessica Willems",
-          "textid": "01-015085",
+          "firstname": "Dorothee",
+          "lastname": "Ledermann",
+          "name": "Dorothee Ledermann",
+          "textid": "05-043467",
           "gender": "f",
           "ranking": 3
         },
         {
-          "firstname": "Christina",
-          "lastname": "Weigert",
-          "name": "Christina Weigert",
-          "textid": "07-035669",
+          "firstname": "Julia",
+          "lastname": "Selbmann",
+          "name": "Julia Selbmann",
+          "textid": "05-039143",
           "gender": "f",
           "ranking": 4
         },
         {
-          "firstname": "Nicola",
-          "lastname": "Oltersdorff",
-          "name": "Nicola Oltersdorff",
-          "textid": "07-036181",
+          "firstname": "Saskia",
+          "lastname": "Richter",
+          "name": "Saskia Richter",
+          "textid": "05-023223",
           "gender": "f",
           "ranking": 5
         },
         {
-          "firstname": "Amelie",
-          "lastname": "Oliwa",
-          "name": "Amelie Oliwa",
-          "textid": "07-028872",
+          "firstname": "Melanie",
+          "lastname": "Schober",
+          "name": "Melanie Schober",
+          "textid": "05-011655",
           "gender": "f",
           "ranking": 6
         },
         {
-          "firstname": "Christina",
-          "lastname": "Kunzmann",
-          "name": "Christina Kunzmann",
-          "textid": "07-029018",
+          "firstname": "Franziska",
+          "lastname": "Lüdtke",
+          "name": "Franziska Lüdtke",
+          "textid": "05-022983",
           "gender": "f",
           "ranking": 7
         },
         {
-          "firstname": "Marlene",
-          "lastname": "Ott",
-          "name": "Marlene Ott",
-          "textid": "07-028580",
+          "firstname": "Mathilde",
+          "lastname": "Kervio",
+          "name": "Mathilde Kervio",
+          "textid": "05-039264",
           "gender": "f",
-          "ranking": 8
+          "ranking": 8,
+          "nationality": "FRA"
         },
         {
-          "firstname": "Alexandra",
-          "lastname": "Högger",
-          "name": "Alexandra Högger",
-          "textid": "07-038362",
+          "firstname": "Rebecca",
+          "lastname": "Linder",
+          "name": "Rebecca Linder",
+          "textid": "05-036966",
           "gender": "f",
-          "ranking": 9,
-          "nationality": "AUT"
+          "ranking": 9
         },
         {
-          "firstname": "Alva",
-          "lastname": "Joa",
-          "name": "Alva Joa",
-          "textid": "07-041781",
+          "firstname": "Melanie",
+          "lastname": "Ortinau",
+          "name": "Melanie Ortinau",
+          "textid": "05-030571",
           "gender": "f",
           "ranking": 10
         },
         {
-          "firstname": "Anke",
-          "lastname": "Lütticke",
-          "name": "Anke Lütticke",
-          "textid": "07-012231",
+          "firstname": "Rongrong",
+          "lastname": "Shen",
+          "name": "Rongrong Shen",
+          "textid": "05-058608",
           "gender": "f",
-          "ranking": 11
+          "ranking": 11,
+          "nationality": "CHN"
         },
         {
-          "firstname": "Lara",
-          "lastname": "Hart",
-          "name": "Lara Hart",
-          "textid": "07-039643",
+          "firstname": "Meng",
+          "lastname": "Huang",
+          "name": "Meng Huang",
+          "textid": "05-039121",
           "gender": "f",
-          "ranking": 12
+          "ranking": 12,
+          "nationality": "CHN"
         },
         {
-          "firstname": "Letitia",
-          "lastname": "Gailus",
-          "name": "Letitia Gailus",
-          "textid": "07-041014",
+          "firstname": "Qinlan",
+          "lastname": "Kang",
+          "name": "Qinlan Kang",
+          "textid": "05-048067",
           "gender": "f",
-          "ranking": 13
+          "ranking": 13,
+          "nationality": "CHN"
         },
         {
-          "firstname": "Flora",
-          "lastname": "Lehmann",
-          "name": "Flora Lehmann",
-          "textid": "07-040265",
+          "firstname": "Fia",
+          "lastname": "Müller",
+          "name": "Fia Müller",
+          "textid": "05-061424",
           "gender": "f",
           "ranking": 14
         },
         {
-          "firstname": "Nicole",
-          "lastname": "Schmitt",
-          "name": "Nicole Schmitt",
-          "textid": "07-013174",
+          "firstname": "Katharina",
+          "lastname": "Nürnberger",
+          "name": "Katharina Nürnberger",
+          "textid": "05-061420",
           "gender": "f",
           "ranking": 15
         },
         {
-          "firstname": "Yvette",
-          "lastname": "Petras",
-          "name": "Yvette Petras",
-          "textid": "07-034672",
+          "firstname": "Heike",
+          "lastname": "Seith",
+          "name": "Heike Seith",
+          "textid": "05-047927",
           "gender": "f",
           "ranking": 16
         },
         {
           "firstname": "Claudia",
-          "lastname": "Klingelhöfer",
-          "name": "Claudia Klingelhöfer",
-          "textid": "07-015490",
+          "lastname": "Kandler",
+          "name": "Claudia Kandler",
+          "textid": "05-027827",
           "gender": "f",
           "ranking": 17
         },
         {
-          "firstname": "Verena",
-          "lastname": "Nadler",
-          "name": "Verena Nadler",
-          "textid": "07-026885",
+          "firstname": "Simone",
+          "lastname": "Braun",
+          "name": "Simone Braun",
+          "textid": "05-027082",
           "gender": "f",
           "ranking": 18
         },
         {
-          "firstname": "Karoline",
-          "lastname": "Neumann",
-          "name": "Karoline Neumann",
-          "textid": "07-016773",
+          "firstname": "Birgit",
+          "lastname": "Alt",
+          "name": "Birgit Alt",
+          "textid": "05-047214",
           "gender": "f",
           "ranking": 19
         },
         {
-          "firstname": "Christa",
-          "lastname": "Wagner",
-          "name": "Christa Wagner",
-          "textid": "07-002645",
+          "firstname": "Claudia",
+          "lastname": "Rudolf",
+          "name": "Claudia Rudolf",
+          "textid": "05-009088",
           "gender": "f",
           "ranking": 20
-        },
-        {
-          "firstname": "Anke",
-          "lastname": "Betz",
-          "name": "Anke Betz",
-          "textid": "07-017063",
-          "gender": "f",
-          "ranking": 21
-        },
-        {
-          "firstname": "Brigitte",
-          "lastname": "Daiker",
-          "name": "Brigitte Daiker",
-          "textid": "07-016345",
-          "gender": "f",
-          "ranking": 22
-        },
-        {
-          "firstname": "Julika",
-          "lastname": "Neumann",
-          "name": "Julika Neumann",
-          "textid": "07-013225",
-          "gender": "f",
-          "ranking": 23
-        },
-        {
-          "firstname": "Waltraud",
-          "lastname": "Wahler",
-          "name": "Waltraud Wahler",
-          "textid": "07-004909",
-          "gender": "f",
-          "ranking": 24
-        },
-        {
-          "firstname": "Heidi",
-          "lastname": "Menacher",
-          "name": "Heidi Menacher",
-          "textid": "07-000274",
-          "gender": "f",
-          "ranking": 25
         }
       ]
     ],
-    "backup_players": [[{
-      "firstname": "Julian",
-      "lastname": "Blaumoser",
-      "name": "Julian Blaumoser",
-      "textid": "07-036132",
-      "gender": "m",
-      "ranking": 18,
-      "ranking_d": 20
-    }], [{
-      "firstname": "Anke",
-      "lastname": "Betz",
-      "name": "Anke Betz",
-      "textid": "07-017063",
-      "gender": "f",
-      "ranking": 21
-    }]],
+    "team_competition": true,
+    "date": "12.10.2019",
+    "starttime": "15:00",
+    "location": "82538 Geretsried, Sporthalle des Gymnasiums, Adalbert-Stifter-Str. 14",
     "matches": [
       {
         "setup": {
           "match_name": "HD1",
-          "match_id": "rlodemo:HD1",
+          "match_id": "rlsodemo_HD1",
           "is_doubles": true,
           "teams": [
             {
-              "players": [
-                {
-                  "name": "Michael Hauber"
-                },
-                {
-                  "name": "Gregory Schneider"
-                }
-              ]
+              "players": []
             },
             {
-              "players": [
-                {
-                  "name": "Jonas Braun"
-                },
-                {
-                  "name": "Kevin Feibicke"
-                }
-              ]
+              "players": []
             }
-          ]
-        },
-        "network_score": [
-          [
-            21,
-            13
           ],
-          [
-            21,
-            19
-          ]
-        ]
+          "incomplete": true
+        }
       },
       {
         "setup": {
           "match_name": "DD",
-          "match_id": "rlodemo:DD",
+          "match_id": "rlsodemo_DD",
           "is_doubles": true,
           "teams": [
             {
-              "players": [
-                {
-                  "name": "Helena Storch"
-                },
-                {
-                  "name": "Julia Hauber"
-                }
-              ]
+              "players": []
             },
             {
-              "players": [
-                {
-                  "name": "Monika Weigert"
-                },
-                {
-                  "name": "Christina Weigert"
-                }
-              ]
+              "players": []
             }
-          ]
-        },
-        "network_score": [
-          [
-            19,
-            21
           ],
-          [
-            13,
-            21
-          ]
-        ]
+          "incomplete": true
+        }
       },
       {
         "setup": {
           "match_name": "HD2",
-          "match_id": "rlodemo:HD2",
+          "match_id": "rlsodemo_HD2",
           "is_doubles": true,
           "teams": [
             {
-              "players": [
-                {
-                  "name": "Benjamin Dierks"
-                },
-                {
-                  "name": "Benjamin Placzek"
-                }
-              ]
+              "players": []
             },
             {
-              "players": [
-                {
-                  "name": "Eric Patz"
-                },
-                {
-                  "name": "Justin Seibel"
-                }
-              ]
+              "players": []
             }
-          ]
-        },
-        "network_score": [
-          [
-            21,
-            16
           ],
-          [
-            21,
-            13
-          ]
-        ]
+          "incomplete": true,
+          "eventsheet_id": "2.HD"
+        }
       },
       {
         "setup": {
           "match_name": "HE1",
-          "match_id": "rlodemo:HE1",
+          "match_id": "rlsodemo_HE1",
           "is_doubles": false,
           "teams": [
             {
-              "players": [
-                {
-                  "name": "Gregory Schneider"
-                }
-              ]
+              "players": []
             },
             {
-              "players": [
-                {
-                  "name": "Kevin Feibicke"
-                }
-              ]
+              "players": []
             }
-          ]
-        },
-        "network_score": [
-          [
-            21,
-            15
           ],
-          [
-            21,
-            18
-          ]
-        ]
+          "incomplete": true,
+          "eventsheet_id": "1.HE"
+        }
       },
       {
         "setup": {
           "match_name": "DE",
-          "match_id": "rlodemo:DE",
+          "match_id": "rlsodemo_DE",
           "is_doubles": false,
           "teams": [
             {
-              "players": [
-                {
-                  "name": "Helena Storch"
-                }
-              ]
+              "players": []
             },
             {
-              "players": [
-                {
-                  "name": "Monika Weigert"
-                }
-              ]
+              "players": []
             }
-          ]
-        },
-        "network_score": [
-          [
-            4,
-            21
           ],
-          [
-            11,
-            21
-          ]
-        ]
+          "incomplete": true
+        }
       },
       {
         "setup": {
           "match_name": "GD",
-          "match_id": "rlodemo:GD",
+          "match_id": "rlsodemo_GD",
           "is_doubles": true,
           "teams": [
             {
-              "players": [
-                {
-                  "name": "Michael Hauber"
-                },
-                {
-                  "name": "Julia Hauber"
-                }
-              ]
+              "players": []
             },
             {
-              "players": [
-                {
-                  "name": "Eric Patz"
-                },
-                {
-                  "name": "Jessica Willems"
-                }
-              ]
+              "players": []
             }
-          ]
-        },
-        "network_score": [
-          [
-            14,
-            21
           ],
-          [
-            21,
-            19
-          ],
-          [
-            21,
-            12
-          ]
-        ]
+          "incomplete": true
+        }
       },
       {
         "setup": {
           "match_name": "HE2",
-          "match_id": "rlodemo:HE2",
+          "match_id": "rlsodemo_HE2",
           "is_doubles": false,
           "teams": [
             {
-              "players": [
-                {
-                  "name": "Benjamin Placzek"
-                }
-              ]
+              "players": []
             },
             {
-              "players": [
-                {
-                  "name": "Jonas Braun"
-                }
-              ]
+              "players": []
             }
-          ]
-        },
-        "network_score": [
-          [
-            21,
-            8
           ],
-          [
-            21,
-            16
-          ]
-        ]
+          "incomplete": true,
+          "eventsheet_id": "2.HE"
+        }
       },
       {
         "setup": {
           "match_name": "HE3",
-          "match_id": "rlodemo:HE3",
+          "match_id": "rlsodemo_HE3",
           "is_doubles": false,
           "teams": [
             {
-              "players": [
-                {
-                  "name": "Benjamin Dierks"
-                }
-              ]
+              "players": []
             },
             {
-              "players": [
-                {
-                  "name": "Justin Seibel"
-                }
-              ]
+              "players": []
             }
-          ]
-        },
-        "network_score": [
-          [
-            21,
-            13
           ],
-          [
-            12,
-            21
-          ],
-          [
-            22,
-            24
-          ]
-        ]
+          "incomplete": true,
+          "eventsheet_id": "3.HE"
+        }
       }
     ],
     "report_urls": [
-      "https://www.turnier.de/sport/teammatch.aspx?id=FD17FD03-359B-46C7-AAF2-7705D8FD2EB2&match=408"
-    ]
+      "https://www.turnier.de/sport/league/match?id=E723B985-F222-40E8-847A-6360204A2980&match=388"
+    ],
+    "tournament_name": "Regionalliga SüdOst",
+    "event_name": "TuS Geretsried - BSV Eggenstein-Leopoldshafen",
+    "staticnet_message": "Importierter Wettkampf",
+    "last_update": 1570847586757
   }
 }
