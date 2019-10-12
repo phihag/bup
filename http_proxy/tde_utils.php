@@ -4,7 +4,7 @@ use aufschlagwechsel\bup\utils;
 
 function parse_match_players($players_html) {
 	preg_match_all(
-		'/<a(?:\s+class="plynk")?\s+href="player\.aspx[^"]*">(?P<name>.*?)<\/a>/',
+		'/<a(?:\s+class="plynk")?\s+href="[^"]*player\.aspx[^"]*">(?P<name>.*?)<\/a>/',
 		$players_html, $players_m, \PREG_SET_ORDER);
 	$players = \array_map(function($pm) {
 		return [
