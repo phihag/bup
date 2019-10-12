@@ -210,6 +210,12 @@ if ($new_version === false) {
 rmrf($tmp_dir);
 @\rmdir($tmp_root);
 
+if (php_sapi_name() === 'cli') {
+	echo 'Updated to bup ' . $new_version . "\n";
+	exit();
+}
+
+
 header('Content-Type: text/html');
 header('Cache-Control: no-cache, no-store, must-revalidate');
 header('Pragma: no-cache');
