@@ -1,3 +1,7 @@
+set up scl
+
+bupdate should be simple in the shell
+
 courtspot: should not show server when none set
 
 update logo stcbw
