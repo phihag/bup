@@ -62,7 +62,7 @@ function parse_team($html, $team_num) {
 	$players = \array_map(function($pd) {
 		if (!\preg_match('/^
 				(?:
-					(?P<ranking_team>[0-9]+)-(?P<ranking>[0-9]+)
+					(?P<ranking_team>J?[0-9]+)-(?P<ranking>[0-9]+)
 					(?:-D(?P<ranking_d>[0-9]+))?
 				)?\s*
 				(?P<lastname>[^0-9]+),\s+(?P<firstname>[^0-9,]+?)\s+
