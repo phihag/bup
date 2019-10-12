@@ -172,7 +172,7 @@ function send_press(s) {
 
 function _list(s, suffix, cb) {
 	var options = {
-		url: baseurl + 'php/bupabfrage.php' + suffix,
+		url: baseurl + 'bup/div/courtspot/bupabfrage.php' + suffix,
 		dataType: 'json',
 	};
 	_request(s, 'courtspot.list', options, function(err, event) {

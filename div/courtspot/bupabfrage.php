@@ -1,7 +1,12 @@
 <?php
 set_error_handler('json_error_handler');
 
-include '../../DB_connection.php';
+$COURTSPOT_ROOT = '../../';
+if (\strpos($_SERVER['REQUEST_URI'], 'bup/div/courtspot/bupabfrage') !== false) {
+	$COURTSPOT_ROOT = '../../../../';
+}
+
+include $COURTSPOT_ROOT . 'DB_connection.php';
 $db = @mysqli_connect($DB_adress, $DB_name, $DB_pass, 'CourtSpot', $DB_port);
 if (!$db) {
 	jsonErr('Verbindungsfehler: ' . mysqli_connect_error());
