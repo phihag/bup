@@ -19,6 +19,7 @@ var TEAM_COLORS = {
 	'Dortelweil': {fg: '#f55a44'},
 	'EBT Berlin': {fg: '#0d9aff'},
 	'Freystadt': {fg: '#ff161d'},
+	'Gladbecker FC': {fg: '#ea3f3d', bg: '#052844'},
 	'Hofheim': {fg: '#82dcff'},
 	'Hohenlimburg': {fg: '#0ebbff'},
 	'Horner': {fg: '#ff2222'}, // Hamburg Horner TV

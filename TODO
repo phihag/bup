@@ -1,6 +1,4 @@
-set up scl
-
-bupdate should be simple in the shell
+tablets font smaller
 
 courtspot: should not show server when none set
 
@@ -111,6 +109,8 @@ dmode like international but with discipline
 new dmode: international with discipline
 
 tdemo_inprogress (for national + international)
+
+d 2courts with players
 
 import from clipboard
 	https://developers.google.com/web/updates/2019/07/image-support-for-async-clipboard?utm_source=feed&utm_medium=feed&utm_campaign=updates_feed
