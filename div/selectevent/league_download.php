@@ -8,7 +8,11 @@ require __DIR__ . '/../../http_proxy/tde_utils.php';
 
 
 function _make_url($page, $tournament_id, $suffix) {
-	return 'https://www.turnier.de/sport/' . $page . '.aspx?id=' . $tournament_id . $suffix;
+	if (\in_array($page, array('drawmatches'))) {
+		return 'https://www.turnier.de/sport/' . $page . '.aspx?id=' . $tournament_id . $suffix;
+	}
+	// New-style format
+	return 'https://www.turnier.de/sport/league/' . $page . '?id=' . $tournament_id . $suffix;
 }
 
 
@@ -93,7 +97,7 @@ function download_team($httpc, $tournament_id, $team_id, $team_name, $use_vrl) {
 }
 
 function download_league($httpc, $url, $league_key, $use_vrl, $use_hr) {
-	$m = \preg_match('/https?:\/\/www\.turnier\.de\/sport\/[a-z0-9_]+\.aspx\?id=(?P<id>[0-9A-F-]+)&draw=(?P<draw>[0-9]+)/', $url, $groups);
+	$m = \preg_match('/https?:\/\/www\.turnier\.de\/sport\/league\/draw\?id=(?P<id>[0-9A-F-]+)&draw=(?P<draw>[0-9]+)/', $url, $groups);
 	if (!$m) {
 		throw new \Exception('Cannot parse URL ' . $url);
 	}
@@ -106,7 +110,7 @@ function download_league($httpc, $url, $league_key, $use_vrl, $use_hr) {
 	if (!\preg_match('/
 			<div\s*class="title">\s*<h3>\s*(?P<name>[^<(–]+)
 			/xs', $teams_html, $header_m)) {
-		throw new \Exception('Cannot find league name in ' . $url);
+		throw new \Exception('Cannot find league name in ' . $url . $teams_html);
 	}
 	$league_name = \html_entity_decode($header_m['name']);
 
