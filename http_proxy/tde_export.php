@@ -114,7 +114,7 @@ function prepare($httpc, $url, $user, $password, $team_names, $matches, $max_gam
 	}
 
 	if (!preg_match('/"ALCID":([0-9]+)/', $input_page, $m)) {
-		utils\json_err('Cannot parse input page (can the account ' . $user . ' access it?)', $input_page);
+		utils\json_err('Cannot parse input page ' . $input_url . ' (can the account ' . $user . ' access it?)', $input_page);
 	}
 	$alcid = $m[1];
 
