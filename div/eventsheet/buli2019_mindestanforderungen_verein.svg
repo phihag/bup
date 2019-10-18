@@ -190,8 +190,9 @@ fill="#FFFFFF" stroke="none" />
 <path fill-rule="evenodd" d="M790.2,667.3h1.1V642h-1.1v25.3Z" class="g0_1" />
 <path fill-rule="evenodd" d="M876.7,667.3h1.1V642h-1.1v25.3Z" class="g0_1" />
 <text x="36" y="682" class="s4_1">7 </text>
-<text x="70" y="682" dx="0,-0.1,0,-0.1,0,-0.1,0,0,-0.1,0,0,0,0,0,0,0.1,0,-0.1,0,-0.3,0,0,-0.1,0,0,0,0.1,0.1,0,-0.1,0,-0.1,0,-0.3,0,-0.1,-0.1,0,0,-0.1,0.2,0,0,-0.1,0.3,0,-0.1,0,-0.1,0,-0.1,0,-0.1,0,-0.1,0.1,0,0,-0.1,0,-0.1,0,0.4,0,0,0,-0.1,-0.1,0.3,-0.1,0,0,0,-0.1,0,0,-0.1,0,0,-0.1,0,0,0,0,0,0.1,0,-0.1" class="s4_1">Angabe der geschätzten Zuschauerzahl auf dem Spielbericht durch Heimverein in Absprache </text>
-<text x="70" y="699" dx="0,0.3,-0.1,0,0,0.1,0,0,0,-0.1,0,0,0,-0.1,0" class="s4_1">mit Gastverein </text>
+<text x="70" y="682" class="s4_1">Angabe der geschätzten Zuschauerzahl durch Heimverein in Absprache mit Gastverein</text>
+<text x="70" y="699" class="s4_1" style="font-weight: bold">bitte hier eintragen!</text>
+<text x="805" y="688" class="s4_1" style="font-weight: bold">----------</text>
 <path fill-rule="evenodd" d="M15.8,668.4h1.1v-1.1H15.8v1.1Z" class="g0_1" />
 <path fill-rule="evenodd" d="M16.9,668.4H64.3v-1.1H16.9v1.1Z" class="g0_1" />
 <path fill-rule="evenodd" d="M64.3,668.4h1.2v-1.1H64.3v1.1Z" class="g0_1" />
