@@ -15,7 +15,7 @@ function login($httpc, $url_base, $user, $password) {
 	}
 	$LOGIN_RE = '/<form\s+action="\/user"\s+(?:class="auth__body"\s+)?id="form_login"(.*?)<\/form>/s';
 	if (!preg_match($LOGIN_RE, $login_page, $matches)) {
-		utils\json_err('Cannot find login form');
+		utils\json_err('Cannot find login form at ' . $login_url);
 	}
 	$login_form = $matches[1];
 
@@ -90,9 +90,11 @@ function parse_team($html, $team_num) {
 }
 
 function prepare($httpc, $url, $user, $password, $team_names, $matches, $max_game_count, $cookies) {
-	if (!\preg_match('/^(https:\/\/www\.turnier\.de\/)sport\/teammatch\.aspx\?id=([-A-Fa-f0-9]+)&match=([0-9]+)$/', $url, $m)) {
+	$url = \preg_replace('/^https:\/\/www\.turnier\.de\//', 'https://turnier.de/', $url);
+	if (!\preg_match('/^(https:\/\/(?:dbv|www\.)?turnier\.de\/)sport\/teammatch\.aspx\?id=([-A-Fa-f0-9]+)&match=([0-9]+)$/', $url, $m)) {
 		utils\json_err('Unsupported URL ' . $url);
 	}
+
 	$url_base = $m[1];
 	$tde_id = $m[2];
 	$tde_tm = $m[3];
