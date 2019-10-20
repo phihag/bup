@@ -19,7 +19,7 @@ class CookieJar {
 	}
 
 	public function read_from_header($header) {
-		if (\preg_match('/^Set-Cookie:\s*([A-Za-z_0-9.-]+)=(.*?)(?:$|;)/', $header, $m)) {
+		if (\preg_match('/^Set-Cookie:\s*([A-Za-z_0-9.-]+)=(.*?)(?:$|;)/i', $header, $m)) {
 			$this->jar[$m[1]] = $m[2];
 		}
 	}
