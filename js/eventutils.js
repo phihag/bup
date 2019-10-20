@@ -303,6 +303,10 @@ function is_bundesliga(league_key) {
 	return /^(?:1BL|2BLN|2BLS)-(?:2015|2016|2017|2018|2019)$/.test(league_key);
 }
 
+function is_5x1190_bundesliga(league_key) {
+	return /^(?:1BL|2BLN|2BLS)-(?:2017|2018|2019)$/.test(league_key);
+}
+
 function is_rlw(league_key) {
 	return /^RLW-|^NRW-O19-(?:GW-)?RL/.test(league_key);
 }
@@ -473,7 +477,7 @@ function default_counting(league_key) {
 	if (/^(?:1BL|2BLN|2BLS)-2016$/.test(league_key)) {
 		return '5x11_15';
 	}
-	if (/^(?:1BL|2BLN|2BLS)-(?:2017|2018|2019)$/.test(league_key)) {
+	if (is_5x1190_bundesliga(league_key)) {
 		return '5x11_15^90';
 	}
 	if (league_key === 'OBL-2017') {
@@ -607,6 +611,7 @@ return {
 	get_presses: get_presses,
 	guess_gender: guess_gender,
 	is_bundesliga: is_bundesliga,
+	is_5x1190_bundesliga: is_5x1190_bundesliga,
 	is_incomplete: is_incomplete,
 	make_empty_matches: make_empty_matches,
 	NRW2016_RE: NRW2016_RE,

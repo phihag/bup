@@ -910,6 +910,10 @@ function sheet_render(s, svg) {
 }
 
 function sheet_name(setup) {
+	if (setup.league_key && eventutils.is_5x1190_bundesliga(setup.league_key)) {
+		return 'bundesliga-2016';
+	}
+
 	if (setup.league_key && /^(?:1BL|2BLN|2BLS)-(2016|2017)$/.test(setup.league_key)) {
 		return 'bundesliga-2016';
 	}
@@ -1211,6 +1215,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var compat = require('./compat');
 	var control = require('./control');
 	var downloader = require('./downloader');
+	var eventutils = require('./eventutils');
 	var form_utils = require('./form_utils');
 	var i18n = require('./i18n');
 	var network = require('./network');

@@ -11,12 +11,15 @@ _describe('eventutils', function() {
 		assert.strictEqual(bup.eventutils.name_by_league('1BL-2015'), '1. Bundesliga');
 		assert.strictEqual(bup.eventutils.name_by_league('1BL-2016'), '1. Bundesliga');
 		assert.strictEqual(bup.eventutils.name_by_league('1BL-2017'), '1. Bundesliga');
+		assert.strictEqual(bup.eventutils.name_by_league('1BL-2019'), '1. Bundesliga');
 		assert.strictEqual(bup.eventutils.name_by_league('2BLN-2015'), '2. Bundesliga Nord');
 		assert.strictEqual(bup.eventutils.name_by_league('2BLN-2016'), '2. Bundesliga Nord');
 		assert.strictEqual(bup.eventutils.name_by_league('2BLN-2017'), '2. Bundesliga Nord');
+		assert.strictEqual(bup.eventutils.name_by_league('2BLN-2019'), '2. Bundesliga Nord');
 		assert.strictEqual(bup.eventutils.name_by_league('2BLS-2015'), '2. Bundesliga Süd');
 		assert.strictEqual(bup.eventutils.name_by_league('2BLS-2016'), '2. Bundesliga Süd');
 		assert.strictEqual(bup.eventutils.name_by_league('2BLS-2017'), '2. Bundesliga Süd');
+		assert.strictEqual(bup.eventutils.name_by_league('2BLS-2019'), '2. Bundesliga Süd');
 		assert.strictEqual(bup.eventutils.name_by_league('NLA-2017'), 'NLA');
 		assert.strictEqual(bup.eventutils.name_by_league('NLA-2019'), 'NLA');
 		assert.strictEqual(bup.eventutils.name_by_league('RLN-2016'), 'Regionalliga Nord');
