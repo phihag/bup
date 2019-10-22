@@ -55,7 +55,11 @@ function _team_names(s) {
 		return [s.setup.teams[0].name, s.setup.teams[1].name];
 	}
 
-	if (s.setup.teams[0].players[0] && s.setup.teams[0].players[0].nationality) {
+	if (!s.setup.nation_competition && (s.setup.teams[0].clubName || s.setup.teams[1].clubName)) {
+		return [s.setup.teams[0].clubName || '', s.setup.teams[1].clubName || ''];
+	}
+
+	if (s.setup.nation_competition && s.setup.teams[0].players[0] && s.setup.teams[0].players[0].nationality) {
 		// International tournament
 		return s.setup.teams.map(function(team, team_idx) {
 			var players = team.players;
@@ -108,7 +112,8 @@ function render(s, cui) {
 	uiu.text(cui.umpire_name, umpire_name);
 	uiu.visible(cui.umpire_name, (cdata.left_serving === null));
 
-	uiu.text(cui.match_name_text, s.setup.match_name ? s.setup.match_name : '');
+	var event_name = s.setup.event_name && !s.setup.team_competition ? s.setup.event_name + ' - ' : '';
+	uiu.text(cui.match_name_text, s.setup.match_name ? event_name + s.setup.match_name : event_name);
 
 	// Teams
 	var team_names = _team_names(s);

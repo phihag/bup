@@ -618,10 +618,10 @@ function sheet_render(s, svg) {
 	var teams = s.setup.teams;
 	_text('.scoresheet_results_team1_player1', teams[0].players[0] ? teams[0].players[0].name : '');
 	_text('.scoresheet_results_team1_player2', (s.setup.is_doubles && teams[0].players[1]) ? teams[0].players[1].name : '');
-	_text('.scoresheet_results_team1_name', teams[0].name);
+	_text('.scoresheet_results_team1_name', s.setup.nation_competition || s.setup.team_competition ? teams[0].name : teams[0].clubName || '');
 	_text('.scoresheet_results_team2_player1', teams[1].players[0] ? teams[1].players[0].name : '');
 	_text('.scoresheet_results_team2_player2', (s.setup.is_doubles && teams[1].players[1]) ? teams[1].players[1].name: '');
-	_text('.scoresheet_results_team2_name', teams[1].name);
+	_text('.scoresheet_results_team2_name', s.setup.nation_competition || s.setup.team_competition ? teams[1].name : teams[1].clubName || '');
 
 	svg.querySelector('.scoresheet_results_circle_team1').setAttribute(
 		'visibility',
