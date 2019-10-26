@@ -1,9 +1,11 @@
-fix tde_export, follow 302https://turnier.de/user/login
-
-
+fix tde_export, follow 302 https://turnier.de/user/login
 
 d ubuntu check font
 	add Droid sans font in CSS
+
+
+
+update single-match demo (en)
 
 d in only views: different placeholder
 
