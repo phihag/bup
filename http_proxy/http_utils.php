@@ -30,7 +30,13 @@ class CookieJar {
 
 	public function get_line() {
 		$res = '';
+		$first = true;
 		foreach ($this->jar as $k => $v) {
+			if ($first) {
+				$first = false;
+			} else {
+				$res .= ' ';
+			}
 			$res .= $k . '=' . $v . ';';
 		}
 		return $res;
