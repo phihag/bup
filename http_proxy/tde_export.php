@@ -94,7 +94,7 @@ function parse_team($html, $team_num) {
 }
 
 function prepare($httpc, $url, $user, $password, $team_names, $matches, $max_game_count, $cookies) {
-	if (!\preg_match('/^(https:\/\/(?:dbv\.|www\.|)turnier\.de\/)sport\/teammatch\.aspx\?id=([-A-Fa-f0-9]+)&match=([0-9]+)$/', $url, $m)) {
+	if (!\preg_match('/^(https:\/\/(?:dbv\.|www\.|)turnier\.de\/)sport\/(?:league\/match|teammatch\.aspx)\?id=([-A-Fa-f0-9]+)&match=([0-9]+)$/', $url, $m)) {
 		utils\json_err('Unsupported URL ' . $url);
 	}
 
