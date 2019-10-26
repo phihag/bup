@@ -1672,12 +1672,21 @@ function render_stripes(s, container, event, court, match, colors) {
 		var fg_col = (utils.brightness(bg_col) > 128) ? colors.fgdark : colors.fg;
 
 		var tr = uiu.el(table, 'tr');
-		uiu.el(tr, 'td', {
+		var td = uiu.el(tr, 'td', {
 			style: (
 				'color:' + fg_col + ';' +
 				'background:' + bg_col + ';'
 			),
-		}, team_names[team_id] + ' (' + match_score[team_id] + ')');
+		});
+		var container = uiu.el(td, 'div', {
+			style: 'height:10vh;width:100%;display:-webkit-flex;display:flex;justify-content:center;align-items:center;',
+		});
+		var span = uiu.el(
+			container, 'span', {
+				style: 'white-space:pre;',
+			},
+			team_names[team_id] + (setup.team_competition ? ' (' + match_score[team_id] + ')' : ''));
+		_setup_autosize(span);
 	}
 
 	function _render_players(team_id) {
