@@ -77,6 +77,8 @@ abstract class AbstractHTTPClient {
 	abstract public function request($url, $headers=null, $method='GET', $body=null);
 
 	abstract public function get_error_info();
+
+	abstract public function request_as_curl($url, $headers=null, $method='GET', $body=null);
 }
 
 abstract class JarHTTPClient extends AbstractHTTPClient {
@@ -101,6 +103,30 @@ abstract class JarHTTPClient extends AbstractHTTPClient {
 
 	public function set_all_cookies($cookies) {
 		$this->cjar->set_all($cookies);
+	}
+
+	public function request_as_curl($url, $headers=null, $method='GET', $body=null) {
+		$res = 'curl';
+		$cline = $this->cjar->get_line();
+		$res .= ' --user-agent ' . \escapeshellarg(BUP_USER_AGENT);
+		if ($cline) {
+			$res .= ' --cookie ' . \escapeshellarg($cline);
+		}
+		if ($method !== 'GET') {
+			$res .= ' -X ' . \escapeshellarg($method);
+		}
+
+		if ($headers) {
+			foreach ($headers as $header) {
+				$res .= ' -H ' . \escapeshellarg($header);
+			}
+		}
+		if ($body) {
+			$res .= ' -d ' . \escapeshellarg($body);
+		}
+
+		$res .= ' ' . $url;
+		return $res;
 	}
 }
 
@@ -229,5 +255,9 @@ class CacheHTTPClient extends AbstractHTTPClient {
 
 	public function get_error_info() {
 		return $this->real_httpc->get_error_info();
+	}
+
+	public function request_as_curl($url, $headers=null, $method='GET', $body=null) {
+		return $this->real_httpc->request_as_curl();
 	}
 }
