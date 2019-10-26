@@ -277,6 +277,9 @@ if ($verwaltung['URL']) {
 	if (preg_match('/^teammatch/', $tde_url)) {
 		$tde_url = 'https://www.turnier.de/sport/' . $tde_url;
 	}
+	if (preg_match('/^sport\/league/', $tde_url)) {
+		$tde_url = 'https://dbv.turnier.de/' . $tde_url;
+	}
 	$res['report_urls'] = [$tde_url];
 }
 
