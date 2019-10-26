@@ -2049,6 +2049,7 @@ function render_onlyscore(s, container, event, court, match, colors) {
 			}
 
 			var score_container = uiu.el(team_container, 'div', {
+				'class': 'd_score_default',
 				style: (
 					'width:' + (95 / max_game_count) + 'vw;' +
 					'background:' + (team_serving ? col : bg_col) + ';' +
@@ -2057,7 +2058,7 @@ function render_onlyscore(s, container, event, court, match, colors) {
 					'display: flex;' +
 					'align-items: center;' +
 					'justify-content: center;' +
-					'font-size: 50vmin;' +
+					'font-size: ' + (max_game_count === 5 ? 23 : 30) + 'vw;' +
 					'overflow: hidden;'
 				),
 			});
