@@ -384,7 +384,7 @@ function supported_leagues(league_key) {
 	if (eventutils.is_bundesliga(league_key) ||
 			eventutils.NRW2016_RE.test(league_key) ||
 			(league_key === 'RLW-2016') || (league_key === 'RLN-2016') || (league_key === 'RLM-2016')) {
-		return ['turnier.de'];
+		return ['dbv.turnier.de', 'www.turnier.de', 'turnier.de'];
 	}
 }
 
