@@ -4,9 +4,10 @@ html, body {
 	margin: 0; padding: 0;
 	width: 100%; height: 100%;
 }
-html, body, button {
-	font-family: 'Droid Sans', Arial, sans-serif;
+html, body, button, input, select {
+	font-family: sans-serif;
 }
+
 
 :visited {
 	color: #0000ee;

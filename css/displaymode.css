@@ -1,3 +1,9 @@
+.d_international_score,
+.d_clean_score,
+.d_score_default {
+	font-family: 'Droid Sans', 'droid_sansregular', 'Noto Mono', Arial, sans-serif;
+}
+
 .displaymode_layout {
 	position: absolute;
 	left: 0;
@@ -254,7 +260,6 @@
 	height: 100%;
 	text-align: center;
 	overflow: hidden;
-	font-family: 'Droid Sans', 'Noto Mono', Arial, sans-serif;
 }
 .d_international_score.d_international_score_dd,
 .d_clean_score.d_clean_score_dd {

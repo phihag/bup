@@ -67,6 +67,8 @@ dist: cleandist ## Create distribution files
 	node div/minify_svg dist/bup/div/eventsheet/ div/eventsheet/*.svg
 	cp div/eventsheet/*.xlsx dist/bup/div/eventsheet/
 	cp doc/ -R dist/bup/
+	mkdir -p dist/bup/fonts
+	cp css/fonts/ -R dist/bup/
 	cp div/bupdate.php dist/bup/div/bupdate.txt
 	cp \
 		div/bundesliga-ballsorten-2016.pdf \
