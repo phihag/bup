@@ -2486,5 +2486,11 @@ _describe('scoresheet generation', () => {
 			counting: '5x11_15^90',
 			league_key: '1BL-2019',
 		}), 'bundesliga-2016');
+
+		assert.strictEqual(bup.scoresheet.sheet_name({
+			counting: '5x11_15~NLA',
+			league_key: 'NLA-2019',
+		}), 'nla-2019');
+
 	});
 });

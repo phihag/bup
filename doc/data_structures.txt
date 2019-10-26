@@ -48,7 +48,8 @@ counting        Default counting scheme. Implicitly set by league_key.
                   "3x21"       BWF since 2016
                   "5x11_15"    BWF 2016 Experiment Option 1 (5x11 until max. 15)
                   "5x11/3"     BWF 2016 Experiment Option 2 (5x11 with 3 point challenge)
-                  "5x11_15^90" German Bundesliga 2017 (5x11 until max. 15, 90s intervals)
+                  "5x11_15^90" German Bundesliga 2017- (5x11 until max. 15, 90s intervals)
+                  "5x11_15~NLA"NLA 2019 (5x11 until max. 15, 120s intervals, 60s in final game)
                   "2x21+11"    2x21, 3rd game until 11
                   "5x11_11"    UAE (5x11 sudden death)
                   "1x21"       One Game (1x21)

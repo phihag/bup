@@ -148,5 +148,12 @@ _describe('eventutils', function() {
 		});
 	});
 
+	_it('NLA-2019', function() {
+		assert.strictEqual(bup.eventutils.name_by_league('NLA-2019'), 'NLA');
+		assert.deepStrictEqual(bup.eventutils.default_counting('NLA-2019'), '5x11_15~NLA');
+		assert.deepStrictEqual(bup.eventutils.get_min_pause('NLA-2019'), 15 * 60000);
+		assert(bup.eventsheet._SHEETS_BY_LEAGUE['NLA-2019'].length > 0);
+		assert.deepStrictEqual(bup.order.preferred_by_league('NLA-2019'), undefined);
+	});
 });
 

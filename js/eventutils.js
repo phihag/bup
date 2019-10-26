@@ -487,7 +487,7 @@ function default_counting(league_key) {
 		return '3x21';
 	}
 	if (league_key === 'NLA-2019') {
-		return '5x11_15';
+		return '5x11_15~NLA';
 	}
 	if (league_key === 'international-2017') {
 		return '3x21';
