@@ -28,6 +28,7 @@ $cookies = $cookies_json ? \json_decode($cookies_json) : null;
 
 
 $httpc = http_utils\AbstractHTTPClient::make();
+$url = \preg_replace('/^https:\/\/(?:www\.)?turnier\.de\//', 'https://dbv.turnier.de/', $url);
 
 if ($action === 'prepare') {
 	$prepared = tde_export\prepare(

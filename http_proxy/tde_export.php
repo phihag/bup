@@ -8,14 +8,15 @@ require_once 'tde_utils.php';
 
 function login($httpc, $url_base, $user, $password) {
 	// Download login form
-	$login_url = $url_base . 'user/login';
-	$login_page = $httpc->request($login_url);
+	$login_page_url = $url_base . 'user/login';
+	$login_page = $httpc->request($login_page_url);
+
 	if ($login_page === false) {
 		utils\json_err('Failed to download login form: ' . $httpc->get_error_info());
 	}
 	$LOGIN_RE = '/<form\s+action="\/user"\s+(?:class="auth__body"\s+)?id="form_login"(.*?)<\/form>/s';
 	if (!preg_match($LOGIN_RE, $login_page, $matches)) {
-		utils\json_err('Cannot find login form at ' . $login_url);
+		utils\json_err('Cannot find login form at ' . $login_page_url);
 	}
 	$login_form = $matches[1];
 
@@ -28,8 +29,11 @@ function login($httpc, $url_base, $user, $password) {
 	}
 	$data['Login'] = $user;
 	$data['Password'] = $password;
+	$data['ReturnUrl'] = '/';
+	$data['LogoUrl'] = '~/Content/images/themes/dbv/logo.png';
 
 	// Perform login
+	$login_url = $url_base . 'user';
 	$postlogin_page = $httpc->request(
 		$login_url,
 		[
@@ -90,8 +94,7 @@ function parse_team($html, $team_num) {
 }
 
 function prepare($httpc, $url, $user, $password, $team_names, $matches, $max_game_count, $cookies) {
-	$url = \preg_replace('/^https:\/\/www\.turnier\.de\//', 'https://turnier.de/', $url);
-	if (!\preg_match('/^(https:\/\/(?:dbv|www\.)?turnier\.de\/)sport\/teammatch\.aspx\?id=([-A-Fa-f0-9]+)&match=([0-9]+)$/', $url, $m)) {
+	if (!\preg_match('/^(https:\/\/(?:dbv\.|www\.|)turnier\.de\/)sport\/teammatch\.aspx\?id=([-A-Fa-f0-9]+)&match=([0-9]+)$/', $url, $m)) {
 		utils\json_err('Unsupported URL ' . $url);
 	}
 
@@ -108,7 +111,6 @@ function prepare($httpc, $url, $user, $password, $team_names, $matches, $max_gam
 		login($httpc, $url_base, $user, $password);
 	}
 	// TODO test that login was successful
-
 	$input_url = $url_base . 'sport/matchresult.aspx?id=' . $tde_id . '&match=' . $tde_tm;
 	$input_page = $httpc->request($input_url);
 	if ($input_page === false) {
