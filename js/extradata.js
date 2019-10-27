@@ -25,7 +25,7 @@ var TEAM_COLORS = {
 	'Horner': {fg: '#ff2222'}, // Hamburg Horner TV
 	'Hövelhof': {fg: '#ff0000'},
 	'Lüdinghausen': {fg: '#ff0000'},
-	'Neuhausen': {fg: '#a6cb8b'},
+	'Neuhausen': {fg: '#ff6600'},
 	'Refrath': {fg: '#ffffff', bg: '#000b18'},
 	'Remagen': {fg: '#ffffff', bg: '#0f1731'},
 	'Sterkrade': {fg: '#ffffff'},
