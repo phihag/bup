@@ -2,6 +2,13 @@
   "type": "bup-export",
   "version": 2,
   "event": {
+    "courts": [{
+      "court_id": 1,
+      "description": "1 (links)"
+    }, {
+      "court_id": 2,
+      "description": "2 (rechts)"
+    }],
     "league_key": "RLSO-2019",
     "notes": "Start 3 Minuten später wegen Rennmäusen in der Halle",
     "location": "82538 Geretsried, Sporthalle des Gymnasiums, Adalbert-Stifter-Str. 14",
