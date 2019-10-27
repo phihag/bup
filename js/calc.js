@@ -1115,8 +1115,7 @@ function desc(s, now) {
 	}
 	if (s.match.finished) {
 		res += ' ' + s._('mdesc:finished');
-	}
-	if (!s.game.started) {
+	} else if (!s.game.started) {
 		res += (res ? ' ' : '') + ((s.game.start_team1_left === null) ? (
 			(s.not_before === undefined) ? s._('mdesc:selected') : (
 				(s.not_before === 'playing') ?
