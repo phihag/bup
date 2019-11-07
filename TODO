@@ -1,10 +1,16 @@
 !annoncement team on resigning should include netscore (according to Michael Pütz) -> Jens?
 
+tde_export allow switch firstname <-> lastname
+
+
+d autosize team names when nothing on Court -> Maximilian
+
 CourtSpot do not default matches -> Maximilian
 
-autosize team names when nothing on Court -> Maximilian
-
 presentation sheet with players & umpires
+	women before men
+	doubles before singles
+	lower-ranked before higher-ranked
 
 d export URL for Stephan
 
