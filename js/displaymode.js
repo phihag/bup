@@ -1834,7 +1834,7 @@ function render_onlyplayers(s, container, event, court, match, colors) {
 		var team_container = uiu.el(container, 'div', {
 			'class': 'd_half',
 			style: (
-				'background:' + colors.bg + ';'
+				'background:' + colors['b' + team_id] + ';'
 			),
 		});
 
@@ -1843,7 +1843,7 @@ function render_onlyplayers(s, container, event, court, match, colors) {
 				style: (
 					'width:20%;height:100%;float:left;margin-right:5%;' +
 					(logo_urls[team_id] ?
-					'background: no-repeat url("' + logo_urls[team_id] + '") center center;' :
+					'background: no-repeat url("' + logo_urls[team_id] + '") #000 center center;' :
 					''
 					)
 				),
@@ -1861,7 +1861,7 @@ function render_onlyplayers(s, container, event, court, match, colors) {
 			});
 			var pel = uiu.el(player_container, 'div', {
 				style: (
-					'background: ' + colors.bg + ';' +
+					'background: ' + colors['b' + team_id] + ';' +
 					'color: ' + col + ';' +
 					'height: 100%;'
 				),
@@ -2043,7 +2043,7 @@ function render_onlyscore(s, container, event, court, match, colors) {
 
 	match.setup.teams.forEach(function(team, team_id) {
 		var col = colors[team_id];
-		var bg_col = colors.bg;
+		var bg_col = colors['b' + team_id];
 
 		var team_container = uiu.el(container, 'div', 'd_onlyscore_half');
 		for (var game_idx = 0;game_idx < max_game_count;game_idx++) {
@@ -2669,8 +2669,8 @@ function option_applies(style_id, option_name) {
 		clean: ['court_id', 'team_colors', 'c0', 'c1', 'cfg', 'cbg'],
 		oncourt: ['court_id', 'cfg', 'cfg3', 'cbg', 'cserv2'],
 		bwfonlyplayers: ['court_id', 'c0', 'c1', 'cb0', 'cb1'],
-		onlyplayers: ['court_id', 'team_colors', 'c0', 'c1', 'cbg'],
-		onlyscore: ['court_id', 'team_colors', 'c0', 'c1', 'cbg'],
+		onlyplayers: ['court_id', 'team_colors', 'c0', 'cb0', 'c1', 'cb1'],
+		onlyscore: ['court_id', 'team_colors', 'c0', 'cb0', 'c1', 'cb1'],
 		teamcourt: ['court_id', 'team_colors', 'c0', 'cb0', 'c1', 'cb1', 'cfg', 'cfg2', 'show_pause'],
 		teamscore: ['team_colors', 'c0', 'c1', 'cfg', 'cbg'],
 		tim: ['cbg', 'cfg', 'ctim_blue', 'ctim_active'],
