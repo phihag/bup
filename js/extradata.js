@@ -45,7 +45,11 @@ var TEAM_COLORS = {
 function get_color(team_name) {
 	for (var keyword in TEAM_COLORS) {
 		if (team_name.includes(keyword)) {
-			return TEAM_COLORS[keyword];
+			var res = TEAM_COLORS[keyword];
+			if (!res.bg) {
+				res.bg = '#000000';
+			}
+			return res;
 		}
 	}
 }
