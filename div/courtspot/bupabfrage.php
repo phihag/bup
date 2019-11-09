@@ -1,12 +1,12 @@
 <?php
 set_error_handler('json_error_handler');
 
-$COURTSPOT_ROOT = '../../';
-if (\strpos($_SERVER['REQUEST_URI'], 'bup/div/courtspot/bupabfrage') !== false) {
-	$COURTSPOT_ROOT = '../../../../';
-}
+$COURTSPOT_ROOT = __DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR;
 
-include $COURTSPOT_ROOT . 'DB_connection.php';
+$config_fn = $COURTSPOT_ROOT . 'DB_connection.php';
+if (!@include($config_fn)) {
+	jsonErr('CourtSpot-Datenbankkonfiguration kann nicht geladen werden von ' . $config_fn);
+}
 $db = @mysqli_connect($DB_adress, $DB_name, $DB_pass, 'CourtSpot', $DB_port);
 if (!$db) {
 	jsonErr('Verbindungsfehler: ' . mysqli_connect_error());
