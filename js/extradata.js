@@ -33,7 +33,7 @@ var TEAM_COLORS = {
 	'Geretsried': {fg: '#f0f0f0'},
 	'Offenburg': {fg: '#ff4546'},
 	'Wesel': {fg: '#ed1a24'},
-	'Wipperfeld': {fg: '#ff2149'},
+	'Wipperfeld': {fg: '#ff2d2d'},
 	'Wittorf': {fg: '#0091ff'},
 	'WG Duisburg-Essen': {fg: '#ffffff'},
 	'WG Karlsruhe': {fg: '#80ff8a'},
