@@ -18,6 +18,7 @@ var ALL_STYLES = [
 	'clubplayers',
 	'clubplayerslr',
 	'onlyscore',
+	'giantscore',
 	'castall',
 	'tournament_overview',
 	'andre',
@@ -2093,6 +2094,46 @@ function render_onlyscore(s, container, event, court, match, colors) {
 	});
 }
 
+function render_giantscore(s, container, event, court, match, colors) {
+	var nscore = extract_netscore(match);
+	var gscore = _gamescore_from_netscore(nscore, match.setup);
+	var current_score = nscore[nscore.length - 1] || [];
+	var server = determine_server(match, current_score);
+
+	match.setup.teams.forEach(function(team, team_id) {
+		var col = colors[team_id];
+		var bg_col = colors['b' + team_id];
+
+		var mwinner = calc.match_winner(match.setup.counting, nscore);
+		var is_winner = ((mwinner === 'left') && (team_id === 0) || (mwinner === 'right') && (team_id === 1));
+		var invert = is_winner || (server.team_id === team_id);
+
+		var team_container = uiu.el(container, 'div', {
+			style: (
+				'position:absolute;width:50%;height:100%;top:0;left:' + (team_id * 50) + '%;' +
+				'background:' + bg_col + ';color:' + col + ';' +
+				'overflow:hidden;'
+			),
+		});
+
+		// Points
+		uiu.el(team_container, 'div', {
+			style: ('width:100%;text-align:center;font-size:75vh;margin-top:-9vh;' + 
+				(invert ? 'color:' + bg_col + ';background:' + col + ';' : '')
+			),
+		}, nscore[nscore.length - 1][team_id]);
+
+		// Games
+		uiu.el(team_container, 'div', {
+			style: (
+				'position: absolute;bottom:-1vh;left:0;right:0;text-align:center;' +
+				'font-size: 30vh; background:' + bg_col + ';'
+			),
+		}, gscore[team_id]);
+	});
+}
+
+
 function calc_team_colors(event, settings) {
 	if (event.team_colors) {
 		return event.team_colors;
@@ -2398,6 +2439,7 @@ function update(err, s, event) {
 		clean: render_clean,
 		clubplayers: render_clubplayers,
 		clubplayerslr: render_clubplayerslr,
+		giantscore: render_giantscore,
 		international: render_international,
 		oncourt: render_oncourt,
 		onlyplayers: render_onlyplayers,
@@ -2663,6 +2705,7 @@ function option_applies(style_id, option_name) {
 		bwf: ['court_id', 'team_colors', 'c0', 'c1', 'cfg', 'cbg'],
 		castall: ['team_colors', 'c0', 'c1', 'cfg', 'cbg', 'cbg2', 'ct', 'cserv', 'crecv', 'reverse_order', 'scale'],
 		clubplayers: ['court_id', 'team_colors', 'c0', 'c1', 'cbg'],
+		giantscore: ['court_id', 'team_colors', 'c0', 'cb0', 'c1', 'cb1'],
 		clubplayerslr: ['court_id', 'team_colors', 'c0', 'c1', 'cbg'],
 		greyish: ['cbg', 'cbg2', 'cbg3', 'cfg'],
 		international: ['court_id', 'team_colors', 'c0', 'c1', 'cfg', 'cbg'],

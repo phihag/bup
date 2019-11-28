@@ -523,6 +523,7 @@ var i18n_en = {
 'displaymode|onlyplayers': 'players only',
 'displaymode|bwfonlyplayers': 'BWF players only',
 'displaymode|onlyscore': 'score only',
+'displaymode|giantscore': 'giant score',
 'displaymode|clubplayers': 'team + players',
 'displaymode|clubplayerslr': 'team + players (left / right)',
 'displaymode|tournament_overview': 'tournament overview',

@@ -520,6 +520,7 @@ var i18n_frch = {
 'displaymode|onlyplayers': 'Joueurs seulement',
 'displaymode|bwfonlyplayers': 'BWF joueurs seulement',
 'displaymode|onlyscore': 'Points seulement',
+'displaymode|giantscore': 'score gigantesque',
 'displaymode|clubplayers': 'Equipe + joueurs',
 'displaymode|clubplayerslr': 'Equipe + joueurs (gauche / droite)',
 'displaymode|tournament_overview': 'Aperçu du tournoi',

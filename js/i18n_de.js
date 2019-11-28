@@ -525,6 +525,7 @@ var i18n_de = {
 'displaymode|bwfonlyplayers': 'BWF nur Spieler',
 'displaymode|onlyplayers': 'Nur Spieler',
 'displaymode|onlyscore': 'Nur Spielstand',
+'displaymode|giantscore': 'Großer Spielstand',
 'displaymode|clubplayers': 'Verein + Spieler',
 'displaymode|clubplayerslr': 'Verein + Spieler (links / rechts)',
 'displaymode|teamscore': 'Siegerfoto',
