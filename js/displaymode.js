@@ -2360,7 +2360,7 @@ function update(err, s, event) {
 	}
 
 	var used_colors = active_colors(s, style);
-	uiu.visible_qs('.settings_d_colors', used_colors.length > 0);
+	uiu.visible_qs('.settings_d_colors', (used_colors.length > 0) || option_applies(style, 'team_colors'));
 	var color_inputs = uiu.qs('.settings_d_colors_inputs');
 	var ui_colors_state_json = color_inputs.getAttribute('data-json');
 	var ui_colors_state = ui_colors_state_json ? JSON.parse(ui_colors_state_json) : '<no info>';
