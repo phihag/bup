@@ -1,12 +1,12 @@
-d giantscore
-
 bts transmit battery
 
 
 
 
-after DMU15/U19
+after DMU15-U19
 ================
+fix itests & enable itests on travis
+
 update Announcement to Jens'
 
 d error message if no contact for minutes
