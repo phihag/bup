@@ -219,6 +219,12 @@ function load_by_hash() {
 		hide_funcs.push(setupsheet.hide);
 	}
 
+	if (qs.hasOwnProperty('gothaer')) {
+		show_func = gothaer.show;
+	} else {
+		hide_funcs.push(gothaer.hide);
+	}
+
 	is_loading = true;
 	hide_funcs.forEach(function(hf) {
 		hf();
