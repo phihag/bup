@@ -24,7 +24,7 @@
     "istanbul": "*",
     "mocha": "*",
     "parse-appcache-manifest": "*",
-    "pintf": "^1.0.28",
+    "pintf": "^1.0.32",
     "puppeteer": "^1.20.0",
     "stylelint": "^10.1.0",
     "stylelint-config-standard": "*",
