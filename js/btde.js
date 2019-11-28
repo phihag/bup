@@ -193,7 +193,6 @@ function _get_league_key(liga_code) {
 		'(003) 2. Bundesliga Süd': '2BLS-2019',
 		'(001) Regionalliga SüdOst Ost': 'RLSOO-2017',
 		'(001) Regionalliga West': 'RLW-2016',
-		'(001) Regionalliga SüdOst Ost': 'RLSOO-2017',
 		'(001) Regionalliga SüdOst': 'RLSO-2019',
 		'(007) Verbandsliga Süd 2': 'NRW-O19-S2-VL-007-2016',
 		'(008) Landesliga Nord 1': 'NRW-O19-N1-LL-008-2016',
