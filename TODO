@@ -5,6 +5,14 @@ bts transmit battery
 
 after DMU15-U19
 ================
+bts: retirement not transmitted correctly	
+
+giantscore: depend on side
+
+ticker: iphone 7
+
+allow sending notes to display
+
 fix itests & enable itests on travis
 
 update Announcement to Jens'
