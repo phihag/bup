@@ -2,6 +2,32 @@
 // BTS support (https://github.com/phihag/bts/) via HTTP
 
 function btsh(baseurl, tournament_key) {
+var battery;
+if (!battery && (typeof navigator != 'undefined') && navigator.getBattery) {
+	navigator.getBattery().then(function(bat) {
+		battery = bat;
+	});
+}
+
+function _bat_status() {
+	if (!battery) {
+		return undefined;
+	}
+	return {
+		charging: battery.charging,
+		level: battery.level,
+		chargingTime: battery.chargingTime,
+		dischargingTime: battery.dischargingTime,
+	};
+}
+
+function _device_data(s) {
+	return {
+		id: refmode_client_ui.get_node_id(),
+		battery: _bat_status(),
+		court: state.settings.court_id,
+	};
+}
 
 function _request_json(s, component, options, cb) {
 	options.dataType = 'text';
@@ -56,6 +82,7 @@ function send_score(s) {
 		end_ts: end_ts,
 		marks: s.match.marks,
 		shuttle_count: s.match.shuttle_count,
+		device: _device_data(s, post_data),
 	};
 
 	var url = baseurl + 'h/' + encodeURIComponent(tournament_key) + '/m/' + encodeURIComponent(match_id) + '/score';
@@ -94,9 +121,10 @@ function list_matches(s, cb) {
 		court_id = s.settings.court_id;
 	}
 	var filter = court_id ? ('court=' + encodeURIComponent(court_id)) : '';
+	var device_url = '&device=' + encodeURIComponent(btoa(JSON.stringify(_device_data(s))));
 
 	_request_json(s, 'btsh.list', {
-		url: baseurl + 'h/' + encodeURIComponent(tournament_key) + '/matches?' + filter,
+		url: baseurl + 'h/' + encodeURIComponent(tournament_key) + '/matches?' + filter + device_url,
 	}, function(err, answer) {
 		if (err) {
 			return cb(err);
@@ -110,8 +138,9 @@ function list_matches(s, cb) {
 }
 
 function fetch_courts(s, callback) {
+	var device_url = '?device=' + encodeURIComponent(btoa(JSON.stringify(_device_data(s))));
 	_request_json(s, 'btsh.courts', {
-		url: baseurl + 'h/' + encodeURIComponent(tournament_key) + '/courts',
+		url: baseurl + 'h/' + encodeURIComponent(tournament_key) + '/courts' + device_url,
 	}, function(err, response) {
 		if (err) {
 			return callback(err);

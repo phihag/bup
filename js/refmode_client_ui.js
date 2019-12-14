@@ -190,6 +190,7 @@ return {
 	on_settings_change: on_settings_change,
 	on_event_update: on_event_update,
 	ui_init: ui_init,
+	get_node_id: get_node_id,
 };
 
 })();
