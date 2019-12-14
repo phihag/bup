@@ -4780,6 +4780,54 @@ _describe('pronunciation', function() {
 		);
 	});
 
+	_it('nationalities if incorrectly specified in a national tournament', () => {
+		const presses = [{
+			type: 'pick_side',
+			team1_left: false,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		}, {
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 0,
+		}];
+		const s = state_after(presses, {
+			teams: [{
+				players: [{name: 'Michael', nationality: 'GER'}, {name: 'Michaela', nationality: 'GER'}],
+			}, {
+				players: [{name: 'John', nationality: 'USA'}, {name: 'Jane', nationality: 'USA'}],
+			}],
+			is_doubles: true,
+			team_competition: false,
+			nation_competition: false,
+			counting: '3x21',
+		});
+
+		assert.strictEqual(
+			pronounce_en(s),
+			'Ladies and Gentlemen:\n' +
+			'On my right,\n' +
+			'Michael and Michaela,\n' +
+			'and on my left,\n' +
+			'John and Jane.\n' +
+			'Michael to serve to John.\n\n' +
+			'love all.\n' +
+			'Play.'
+		);
+		assert.strictEqual(
+			pronounce_de(s),
+			'Meine Damen und Herren:\n' +
+			'Zu meiner Rechten,\n' +
+			'Michael und Michaela,\n' +
+			'und zu meiner Linken,\n' +
+			'John und Jane.\n' +
+			'Michael schlägt auf zu John.\n\n' +
+			'0 beide.\n' +
+			'Bitte spielen.'
+		);
+	});
 });
 
 module.exports = {
