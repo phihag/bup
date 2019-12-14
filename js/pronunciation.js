@@ -103,8 +103,12 @@ function _prematch_team(s, team_id) {
 		res += names[0];
 	}
 
-	if (team.name && !setup.team_competition && !setup.nation_competition) {
-		res += ', ' + eventutils.pronounce_teamname(team.name);
+	if (team.name && setup.nation_competition) {
+		var has_nationalities = utils.any(team.players.map(function(p) {return p.nationality;}));
+		if (! has_nationalities) {
+			// Nation competition, but nations manually specified
+			res += ', ' + eventutils.pronounce_teamname(team.name);
+		}
 	}
 	return res;
 }
@@ -426,6 +430,7 @@ if (typeof module !== 'undefined') {
 	var compat = require('./compat');
 	var countrycodes = require('./countrycodes');
 	var eventutils = require('./eventutils');
+	var utils = require('./utils');
 
 	module.exports = pronunciation;
 }

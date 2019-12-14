@@ -3057,6 +3057,7 @@ _describe('pronunciation', function() {
 				players: [{name: 'Chen Long'}],
 				name: 'China',
 			}],
+			nation_competition: true,
 			is_doubles: false,
 			counting: '3x21',
 		};
@@ -4796,8 +4797,10 @@ _describe('pronunciation', function() {
 		const s = state_after(presses, {
 			teams: [{
 				players: [{name: 'Michael', nationality: 'GER'}, {name: 'Michaela', nationality: 'GER'}],
+				name: 'Germany',
 			}, {
-				players: [{name: 'John', nationality: 'USA'}, {name: 'Jane', nationality: 'USA'}],
+				players: [{name: 'John', nationality: 'GER'}, {name: 'Jane', nationality: 'GER'}],
+				name: 'Germany',
 			}],
 			is_doubles: true,
 			team_competition: false,
