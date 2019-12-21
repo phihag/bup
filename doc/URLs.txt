@@ -35,6 +35,7 @@ wdmudemo  Youth tournament demo (with lots of finals on Sunday)
 There is also:
 
 empty_match Start right into a match without player names. Primarily used to generate empty scoresheets.
+empty_match5 Start right into a match without player names (5x11 scoring). Primarily used to generate empty scoresheets.
 
 
 Initial UI

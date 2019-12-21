@@ -261,9 +261,9 @@ function load_by_hash() {
 		load_ui_by_hash_qs(qs);
 		is_loading = false;
 		record(state);
-	} else if (qs.empty_match !== undefined) {
+	} else if ((qs.empty_match !== undefined) || (qs.empty_match5 !== undefined)) {
 		is_loading = true;
-		control.empty_match_start();
+		control.empty_match_start((qs.empty_match5 !== undefined) ? '5x11_15' : '3x21');
 		load_ui_by_hash_qs(qs);
 		is_loading = false;
 		record(state);

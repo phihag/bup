@@ -34,9 +34,9 @@ function demo_match_start(setup) {
 	start_match(state, setup);
 }
 
-function empty_match_start() {
+function empty_match_start(counting) {
 	var setup = {
-		counting: '3x21',
+		counting: counting,
 		is_doubles: false,
 		date: ' ',
 		teams: [{
@@ -53,7 +53,7 @@ function empty_match_start() {
 
 	settings.hide(true);
 	start_match(state, setup, [], {
-		id: 'empty',
+		id: 'empty' + counting,
 	});
 }
 
