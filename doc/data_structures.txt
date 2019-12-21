@@ -1,16 +1,22 @@
-event
+This document explains common data structures in bup and related projects. * denotes a required key. Types start with a Capital letter.
+
+Event is the root data structure for the whole state, but these structures are also used in other contexts.
+
+
+
+Event
 =====
 
-all_players     2-element list (home/away), each element is a list of all players that can play for the team.
+all_players     2-element list (home/away), each element is a list of all Players that can play for the team.
                 gender key required for each player.
-backup_players  2-element list (home/away), each element is another list of all the players (see below).
+backup_players  2-element list (home/away), each element is another list of Player that can substitute on injury.
                 gender key required for each player. These players can fill in in case of injury.
-present_players 2-element list (home/away), each element is another list of all the players (see below).
+present_players 2-element list (home/away), each element is another list of Player.
                 gender key required for each player. These players are present in the hall (e.g. injured, coaching).
 listed_players  Order of players listed in the setup sheet. 2 element list(home/away).
                 Each element is a dictionary with the keys "m" and "f".
-                Each element of that dictionary is an array for each player.
-courts          An array describing the current configuration of courts.
+                Each element of that dictionary is an array for each Player.
+courts          An array describing the current configuration of Courts.
 id              Globally unique event id, e.g. "CourtSpot:2016-bundesliga-refrath vs bischmisheim"
 league_key      ID of the league being played.
                 This determines which event sheets are available, what the rest times are, how the umpires get paid.
@@ -41,7 +47,7 @@ league_key      ID of the league being played.
                 - International matches: "international-2017" (each discipline once, 3x21)
 
                 The year is the first year that the specific ruleset was implemented in.
-                If the rules and descriptions of the league don't change (at least as far as bup is concerned), the same league_key can be used for later seasons.
+                If the rules and descriptions of the league don't change (at least as far as bup is concerned), the same league_key is kept for later seasons.
 counting        Default counting scheme. Implicitly set by league_key.
                 Set this for events without league_key.
                 Available values:
@@ -100,22 +106,22 @@ report_urls     An array of URLs where the result can be exported to.
 minreqs_met     Boolean: true if the league/tournaments minimum requirements (e.g. advertisements, facilities, staff etc.) are met.
                 Used in some event sheets.
 
-court
+Court
 =====
 
 court_id*     ID of this court (often a number, can also be 2017dm_hall1_12)
 label         A short, human-readable name for the court. ("Big hall 12")
 description   Description of where this court is.
-match_id      The match_id property of the match currently being played on this court.
+match_id      The match_id property of the Match currently being played on this court.
 chair         "west" - Umpire chair to the west at displaymode,
               "east" - Umpire chair to the east of the displaymode.
 
 
-match
+Match
 =====
 
-setup*        All properties that don't change during the match
-presses       Array of press, contains all button presses in the match so far.
+setup*        All properties that don't change during the match. A Setup object.
+presses       Array of Press, contains all button presses in the match so far.
 incomplete    Boolean. If set then the match is not yet ready to be started,
               for instance because no players have been assigned yet.
 
@@ -138,7 +144,7 @@ network_teams_player1_even An array, indicating whether the first player is on t
               null: Undetermined (e.g. match not started)
               undefined: Unsupported by backend
 
-press
+Press
 =====
 
 team_id is always 0: home team, 1: away_team.
@@ -210,8 +216,8 @@ type*            What kind of button has been pressed. Determines the other keys
  "note"          A plain-text note on the scoresheet.
     val*          Human-readable string of what happened.
 
-match setup
-===========
+Setup
+=====
 
 eventsheet_id      Language-independent ID of the match describing match type and number, e.g. "MS1".
                    If missing match_name will be used.
@@ -219,7 +225,7 @@ match_name*        Human-readable name of the match, e.g. "1. MS"
 short_name         Short human-readable name of the match, e.g. "MS1" (recommended if match_name is 10+ chars)
 match_id*          (Globally) unique ID, e.g. "20160825-Bundesliga-finale-MS1"
 match_num          Match number in a tournament context.
-teams*             An array (0: home team, 1: away team) of teams (see below).
+teams*             An array (0: home team, 1: away team) of Team.
 is_doubles*        Boolean key. false => singles, true => mixed/doubles
 counting*          Scoring system.
                    See the documentation on event for possible values.
@@ -241,15 +247,14 @@ counting, league_key, tournament_name, event_name, team_competition, nation_comp
 
 These keys can also be set manually on a match, for example if the match is not connected to any event, or the match setup properties differ from the event.
 
-team
+Team
 ====
 
 name     The team, club, or country name the player is competing for, e.g. "TV Refrath".
          Required when team_competition is set in match setup.
-players* Array of players (1 element in singles, 2 in doubles/mixed).
-         Each element of that array is a player object (see below).
+players* Array of Player (1 element in singles, 2 in doubles/mixed).
 
-player
+Player
 ======
 
 firstname    Given name ("Viktor"). If present lastname must be present as well.
@@ -263,7 +268,7 @@ ranking_team The ID of the team the player is ranked in.
 textid       Human-readable ID of this player (e.g. "01-062459" or "50858")
 regular      Boolean, whether this player is considered a regular player according to federation regulations.
 
-umpire
+Umpire
 ======
 Note: This object definition is currently not used in bup.
 
@@ -272,5 +277,3 @@ lastname     Surname ("Hupertz"). If present firstname must be set as well.
 name*        Full name of the official ("Jörg Hupertz")
 nationality  Three-digit country code according to IOC/FIFA, like "GER" (Germany) or "FRA" (France)
 
-
-* required key
