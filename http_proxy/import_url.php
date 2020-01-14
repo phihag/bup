@@ -34,7 +34,7 @@ function main($match_url) {
 		}
 		$event = tde_import\parse_teammatch($httpc, $tm_html, $domain, $match_id);
 		$event['report_urls'] = [$match_url];
-	} else if (\preg_match('/^http:\/\/localhost\/test\/matches(?:[0-9]*)\.html$|https?:\/\/www\.(?P<domain>turnier\.de|tournamentsoftware\.com)\/sport\/matches\.aspx\?id=([a-fA-F0-9-]+)/', $match_url, $domain_m)) {
+	} else if (\preg_match('/^http:\/\/localhost\/test\/matches(?:[0-9]*)\.html$|https?:\/\/(?:dbv|www)\.(?P<domain>turnier\.de|tournamentsoftware\.com)\/sport\/matches\.aspx\?id=([a-fA-F0-9-]+)/', $match_url, $domain_m)) {
 
 		if ($domain_m['domain'] === 'tournamentsoftware.com') {
 			$httpc->request('http://www.tournamentsoftware.com/CookieWall/AcceptCookie?ReturnURL=/');
