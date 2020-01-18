@@ -32,6 +32,7 @@ function parse_teammatch($httpc, $tm_html, $domain, $match_id) {
 		'Bundesligen 2019/20:2. Bundesliga – (2. BL-Süd) – (003) 2. Bundesliga Süd' => '2BLS-2019',
 		'Ligen DBV 2018/19 (ohne Bundesligen):Gruppe Nord – (NO) – (001) Regionalliga Nord' => 'RLN-2016',
 		'Ligen DBV 2019/20 (ohne Bundesligen):Gruppe SüdOst – (SO) – (001) Regionalliga SüdOst' => 'RLSO-2019',
+		'Ligen DBV 2019/20 (ohne Bundesligen):Gruppe Mitte – (MI) – (001) Regionalliga Mitte' => 'RLM-2016',
 	];
 
 	if (!\preg_match('/
