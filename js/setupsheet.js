@@ -478,6 +478,7 @@ function _find_noneu(cur_players, team, team_id) {
 }
 
 function check_setup(s, team, team_id, cur_players) {
+	var noneu;
 	var res = [];
 
 	var match_str = function(match_id, players, rankings) {
@@ -608,7 +609,7 @@ function check_setup(s, team, team_id, cur_players) {
 		}
 
 		// §5.1 BLO-DB
-		var noneu = _find_noneu(cur_players, team, team_id);
+		noneu = _find_noneu(cur_players, team, team_id);
 		if (noneu.length > 1) {
 			res.push(s._('setupsheet:buli non-eu', {names: noneu.join(', ')}));
 		}
@@ -627,7 +628,7 @@ function check_setup(s, team, team_id, cur_players) {
 			res.push(s._('setupsheet:too many backups'));
 		}
 		// §2.12.9.5.2: non-EU players
-		var noneu = _find_noneu(cur_players, team, team_id);
+		noneu = _find_noneu(cur_players, team, team_id);
 		if (noneu.length > 1) {
 			res.push(s._('setupsheet:rlm non-eu', {names: noneu.join(', ')}));
 		}
