@@ -728,6 +728,10 @@ _describe('eventutils', function() {
 		assert.equal(
 			bup.eventutils.pronounce_teamname('TV Refrath'), 'TV Refrath');
 		assert.equal(
+			bup.eventutils.pronounce_teamname('TV Refrath 3'), 'TV Refrath 3');
+		assert.equal(
+			bup.eventutils.pronounce_teamname('TV Refrath 15'), 'TV Refrath 15');
+		assert.equal(
 			bup.eventutils.pronounce_teamname('Blau-Weiss Wittorf-NMS'), 'Blau-Weiss Wittorf-Neumünster');
 		assert.equal(
 			bup.eventutils.pronounce_teamname('SC BW Ostenland'), 'SC Blau-Weiss Ostenland');
@@ -738,7 +742,7 @@ _describe('eventutils', function() {
 		assert.equal(
 			bup.eventutils.pronounce_teamname('STC BW Solingen 1'), 'STC Blau-Weiss Solingen');
 		assert.equal(
-			bup.eventutils.pronounce_teamname('1.BC Sbr.-Bischmisheim', '1.BC Saarbrücken-Bischmisheim'));
+			bup.eventutils.pronounce_teamname('1.BC Sbr.-Bischmisheim 3'), '1.BC Saarbrücken-Bischmisheim 3');
 	});
 });
 

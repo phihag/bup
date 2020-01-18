@@ -597,14 +597,23 @@ function calc_players_str(ev, players) {
 }
 
 function pronounce_teamname(team_name) {
+	var m = /^(.*)(\s[MJ]?[0-9]+)$/.exec(team_name);
+	var core_name = m ? m[1] : team_name;
+	var team_num = m ? m[2] : '';
+	if (/\s1$/.test(team_num)) {
+		team_num = '';
+	}
+
 	var table = {
 		'Spvgg.Sterkrade-N.': 'Sportvereinigung Sterkrade-Nord',
 		'BV RW Wesel': 'BV Wesel Rot-Weiss',
 		'STC BW Solingen': 'STC Blau-Weiss Solingen',
 		'SC BW Ostenland': 'SC Blau-Weiss Ostenland',
 		'Blau-Weiss Wittorf-NMS': 'Blau-Weiss Wittorf-Neumünster',
+		'1.BC Sbr.-Bischmisheim': '1.BC Saarbrücken-Bischmisheim',
 	};
-	return table[team_name] || table[team_name.replace(/\s+1$/, '')] || team_name;
+	var core_name = table[core_name] || core_name;
+	return core_name + team_num;
 }
 
 return {
