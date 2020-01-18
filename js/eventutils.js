@@ -372,6 +372,9 @@ function get_min_pause(league_key) {
 	if (league_key === 'RLN-2016') {
 		return 20 * 60000; // §7.7 Gruppe Nord
 	}
+	if (league_key === 'RLM-2016') {
+		return 20 * 60000; // Not specified, but chosen in practice
+	}
 	if (league_key === 'NLA-2017') {
 		return 15 * 60000; // §2.11.1 https://www.swiss-badminton.ch/file/727622/?dl=1
 	}
