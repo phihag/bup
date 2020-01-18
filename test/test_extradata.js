@@ -104,6 +104,8 @@ _describe('helper functions', function() {
 		'SG Schorndorf': 'sgschorndorf',
 		'VfB Friedrichshafen': 'vfbfriedrichshafen',
 		'SV Fischbach': 'svfischbach',
+		'TuS Schwanheim ': 'tusschwanheim',
+		'1. BV Maintal': 'bvmaintal',
 	};
 
 	_it('logo associations', function() {
