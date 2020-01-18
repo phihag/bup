@@ -1,4 +1,4 @@
-rlm link https://www.dbv-mitte.de/wp-content/uploads/2019/06/Gruppe_Mitte_im_DBV_Ordnungen_20190604.pdf
+rlm check checks in setupsheet
 
 cs check server/receiver all the time
 
