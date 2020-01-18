@@ -737,6 +737,8 @@ _describe('eventutils', function() {
 			bup.eventutils.pronounce_teamname('STC BW Solingen'), 'STC Blau-Weiss Solingen');
 		assert.equal(
 			bup.eventutils.pronounce_teamname('STC BW Solingen 1'), 'STC Blau-Weiss Solingen');
+		assert.equal(
+			bup.eventutils.pronounce_teamname('1.BC Sbr.-Bischmisheim', '1.BC Saarbrücken-Bischmisheim'));
 	});
 });
 

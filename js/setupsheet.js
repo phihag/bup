@@ -462,6 +462,21 @@ function _find_player(all_players, p) {
 	});
 }
 
+function _find_noneu(cur_players, team, team_id) {
+	var noneu = [];
+	for (var match_name in cur_players) {
+		cur_players[match_name][team_id].forEach(function(p) {
+			p = _find_player(team.m, p) || _find_player(team.f, p) || p;
+			if (p.nationality &&
+					!utils.includes(EU_COUNTRIES, p.nationality) &&
+					!noneu.includes(p.name)) {
+				noneu.push(p.name);
+			}
+		});
+	}
+	return noneu;
+}
+
 function check_setup(s, team, team_id, cur_players) {
 	var res = [];
 
@@ -593,17 +608,7 @@ function check_setup(s, team, team_id, cur_players) {
 		}
 
 		// §5.1 BLO-DB
-		var noneu = [];
-		for (var match_name in cur_players) {
-			cur_players[match_name][team_id].forEach(function(p) {
-				p = _find_player(team.m, p) || _find_player(team.f, p) || p;
-				if (p.nationality &&
-						!utils.includes(EU_COUNTRIES, p.nationality) &&
-						!noneu.includes(p.name)) {
-					noneu.push(p.name);
-				}
-			});
-		}
+		var noneu = _find_noneu(cur_players, team, team_id);
 		if (noneu.length > 1) {
 			res.push(s._('setupsheet:buli non-eu', {names: noneu.join(', ')}));
 		}
@@ -613,6 +618,18 @@ function check_setup(s, team, team_id, cur_players) {
 		check('1.HD', '2.HD', true);
 		if ((backup_counts[0] > 1) || (backup_counts[1] > 1)) {
 			res.push(s._('setupsheet:too many backups'));
+		}
+	} else if (league_key === 'RLM-2016') {
+		check('1.HE', '2.HE', false);
+		check('2.HE', '3.HE', false);
+		check('1.HD', '2.HD', true);
+		if ((backup_counts[0] > 1) || (backup_counts[1] > 1)) {
+			res.push(s._('setupsheet:too many backups'));
+		}
+		// §2.12.9.5.2: non-EU players
+		var noneu = _find_noneu(cur_players, team, team_id);
+		if (noneu.length > 1) {
+			res.push(s._('setupsheet:rlm non-eu', {names: noneu.join(', ')}));
 		}
 	} else if (!utils.includes(['NLA-2017', 'NLA-2019', 'international-2017'], league_key)) {
 		// NLA: crazy separate system

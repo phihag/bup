@@ -91,6 +91,7 @@ var i18n_de = {
 'setupsheet:buli backup': 'Zu viele Ersatzspieler (§9.6 BLO-DB)',
 'setupsheet:buli backup7': 'Ersatzspieler obwohl 7/4 reguläre Spieler/innen (§9.2 BLO-DB)',
 'setupsheet:buli non-eu': 'Mehr als ein Nicht-EU-Bürger: {names} (§5.1 BLO-DB)',
+'setupsheet:rlm non-eu': 'Mehr als ein Nicht-EU-Bürger: {names} (§2.12.9.5.2)',
 'setupsheet:too many backups': 'Zu viele Ersatzspieler/innen',
 'setupsheet:3 matches': '{pname} in {count} Spielen: {matches}',
 'setupsheet:discipline twice': '{pname} in {m0} und {m1}',

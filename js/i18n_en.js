@@ -91,6 +91,7 @@ var i18n_en = {
 'setupsheet:buli backup': 'Too many substitutes (§9.6 BLO-DB)',
 'setupsheet:buli backup7': 'substitutes not allowed with 7/4 regulars (§9.2 BLO-DB)',
 'setupsheet:buli non-eu': 'More than 1 non-EU player: {names} (§5.1 BLO-DB)',
+'setupsheet:rlm non-eu': 'More than 1 non-EU player: {names} (§2.12.9.5.2)',
 'setupsheet:too many backups': 'Too many substitutes',
 'setupsheet:3 matches': '{pname} in {count} matches: {matches}',
 'setupsheet:discipline twice': '{pname} in {m0} and {m1}',

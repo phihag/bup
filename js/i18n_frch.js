@@ -91,6 +91,7 @@ var i18n_frch = {
 'setupsheet:buli backup': 'Trop de substituts (§9.6 BLO-DB)',
 'setupsheet:buli backup7': 'Remplacer le joueur par 7/4 joueurs réguliers (§9.2 BLO-DB)',
 'setupsheet:buli non-eu': 'plus d\'un citoyen non-EU: {names} (§5.1 BLO-DB)',
+'setupsheet:rlm non-eu': 'plus d\'un citoyen non-EU: {names} (§2.12.9.5.2)',
 'setupsheet:too many backups': 'Trop de substituts',
 'setupsheet:3 matches': '{pname} en {count} matchs: {matches}',
 'setupsheet:discipline twice': '{pname} en {m0} et {m1}',
