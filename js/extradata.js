@@ -105,6 +105,7 @@ var LOGO_ALIASSE = {
 	'SG VfB/SC Peine': 'vfbscpeine',
 	'Spvgg.Sterkrade-N.': 'sterkrade',
 	'STC BW Solingen': 'stcblauweisssolingen',
+	'SV Berliner Brauereien': 'berlinerbrauereien',
 	'TSV Neuhausen-Nymphenburg': 'tsvneuhausen',
 	'Union Lüdinghausen': 'unionluedinghausen',
 };

@@ -106,6 +106,7 @@ _describe('helper functions', function() {
 		'SV Fischbach': 'svfischbach',
 		'TuS Schwanheim ': 'tusschwanheim',
 		'1. BV Maintal': 'bvmaintal',
+		'SV Berliner Brauereien': 'berlinerbrauereien',
 	};
 
 	_it('logo associations', function() {
