@@ -1600,14 +1600,17 @@ function render_teamcourt(s, container, event, court, match, colors) {
 			player_names.push('');
 		}
 
-		var team_container = uiu.el(container, 'div', 'd_international_team');
+		var team_container = uiu.el(container, 'div', {
+			'class': 'd_international_team',
+			style: (
+				'color:' + col + ';' +
+				'background:' + bg_col + ';'
+			)});
 
 		var team_name_container = uiu.el(team_container, 'div', {
 			style: (
 				((team_id === 0) ? 'position:absolute; bottom: 0;' : '') +
 				'width:100%;height:20%;' +
-				'color:' + col + ';' +
-				'background:' + bg_col + ';' +
 				'font-size: 10vh;' +
 				'display: flex;align-items: center;'
 			),
