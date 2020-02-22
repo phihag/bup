@@ -1824,6 +1824,7 @@ function render_onlyplayers(s, container, event, court, match, colors) {
 
 	match.setup.teams.forEach(function(team, team_id) {
 		var col = colors[team_id];
+		var bg_col = colors['b' + team_id];
 		var gwinner = calc.game_winner(match.setup.counting, nscore.length - 1, current_score[0], current_score[1]);
 		var team_serving = (
 			(gwinner === 'left') ? (team_id === 0) : (
@@ -1835,16 +1836,16 @@ function render_onlyplayers(s, container, event, court, match, colors) {
 		var team_container = uiu.el(container, 'div', {
 			'class': 'd_half',
 			style: (
-				'background:' + colors['b' + team_id] + ';'
+				'background:' + bg_col + ';'
 			),
 		});
 
 		if (logo_urls) {
 			uiu.el(team_container, 'div', {
 				style: (
-					'width:20%;height:100%;float:left;margin-right:5%;' +
+					'width:20%;height:100%;float:left;margin-right:4vw;' +
 					(logo_urls[team_id] ?
-					'background: no-repeat url("' + logo_urls[team_id] + '") #000 center center;' :
+					'background: no-repeat url("' + logo_urls[team_id] + '") center center;' :
 					''
 					)
 				),
@@ -1856,21 +1857,21 @@ function render_onlyplayers(s, container, event, court, match, colors) {
 			var player_container = uiu.el(team_container, 'div', {
 				'style': (
 					'height: ' + (is_doubles ? '50%' : '100%') + ';' +
-					'width:' + (logo_urls ? 70 : 95) + '%'
+					'width:' + (logo_urls ? 80 : 100) + '%' +
+					'position: relative;' +
+					(logo_urls ? 'padding-left: 1vw;' : '') +
+					'display: flex;' +
+					'align-items: center;' +
+					'background: ' + (is_server ? col : bg_col) + ';' +
+					'color: ' + (is_server ? bg_col : col) + ';'
 				),
-				'class': 'd_onlyplayers_player_container',
 			});
 			var pel = uiu.el(player_container, 'div', {
 				style: (
-					'background: ' + colors['b' + team_id] + ';' +
-					'color: ' + col + ';' +
 					'height: 100%;'
 				),
 				'class': 'd_onlyplayers_player',
 			});
-			if (is_server) {
-				uiu.el(pel, 'div', 'd_shuttle');
-			}
 			return uiu.el(pel, 'div', {}, pname);
 		});
 
