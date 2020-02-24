@@ -222,6 +222,20 @@ function determine_server(match, current_score) {
 		player_id = (p0even == (current_score[team_id] % 2 === 0)) ? 0 : 1;
 	}
 
+	// Network score only, but at end of game?
+	// (the positions of players may be relayed, but should not be shown)
+	var netscore = match.network_score;
+	if (netscore && netscore.length > 0) {
+		var game_idx = netscore.length - 1;
+		var last_game = netscore[game_idx];
+		var gwinner = calc.game_winner(match.setup.counting, game_idx - 1, last_game[0], last_game[1]);
+		if (gwinner !== 'inprogress') {
+			return {
+				team_id: team_id,
+			};
+		}
+	}
+
 	return {
 		team_id: team_id,
 		player_id: player_id,

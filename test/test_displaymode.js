@@ -84,6 +84,27 @@ _describe('displaymode', function() {
 		assert.deepStrictEqual(determine_doubles_server(presses), {team_id: 0, player_id: 0});
 	});
 
+	_it('determine_server with network score', () => {
+		const pseudo_match = {
+			setup: {
+				is_doubles: true,
+				counting: '5x11_15',
+			},
+			network_score: [[11, 5]],
+			network_team1_serving: true,
+			network_teams_player1_even: [true, true],
+		};
+		assert.deepStrictEqual(bup.displaymode.determine_server(pseudo_match, [0, 0]), {
+			team_id: 0,
+		});
+
+		pseudo_match.network_score = [[11, 5], [15, 14], [1, 11]];
+		pseudo_match.network_team1_serving = false;
+		assert.deepStrictEqual(bup.displaymode.determine_server(pseudo_match, [0, 0]), {
+			team_id: 1,
+		});
+	});
+
 	_it('extract_netscore', function() {
 		assert.deepStrictEqual(bup.displaymode.extract_netscore({
 			network_score: [],
