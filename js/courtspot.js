@@ -42,6 +42,16 @@ function prepare_match(current_settings, match) {
 	}
 }
 
+function courtspot_boolean(value, true_str, false_str) {
+	if (value === true) {
+		return true_str;
+	} else if (value === false) {
+		return false_str;
+	} else {
+		return '';
+	}
+}
+
 function gen_data(s) {
 	var netscore = calc.netscore(s, true);
 
@@ -65,14 +75,14 @@ function gen_data(s) {
 		'Satz': Math.max(1, netscore.length),
 		'gewonnenHeim': game_score[0],
 		'gewonnenGast': game_score[1],
-		'team_links': (s.game.team1_left ? 'heim' : 'gast'),
-		'team_aufschlag': (team1_serving ? 'Heim' : 'Gast'),
+		'team_links': courtspot_boolean(s.game.team1_left, 'heim', 'gast'),
+		'team_aufschlag': courtspot_boolean(team1_serving, 'Heim', 'Gast'),
 		'aufschlag_score': s.game.score[team1_serving ? 0 : 1],
-		'heim_spieler1_links': (s.game.teams_player1_even[0] ? 'false' : 'true'),
-		'gast_spieler1_links': (s.game.teams_player1_even[1] ? 'false' : 'true'),
+		'heim_spieler1_links': courtspot_boolean(s.game.teams_player1_even[0], 'false', 'true'),
+		'gast_spieler1_links': courtspot_boolean(s.game.teams_player1_even[1], 'false', 'true'),
 		'court': s.settings.court_id,
 		'art': s.setup.match_name,
-		'verein': (team1_serving ? 'heim' : 'gast'),
+		'verein': courtspot_boolean(team1_serving, 'heim', 'gast'),
 		'presses_json': JSON.stringify(s.presses),
 	};
 	for (var i = 0;i < s.match.max_games;i++) {

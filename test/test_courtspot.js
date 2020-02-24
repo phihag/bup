@@ -52,12 +52,11 @@ _describe('CourtSpot', function() {
 			aufschlag_score: 0,
 			gewonnenHeim: 0,
 			gewonnenGast: 0,
-			// These values are just set this way, but could be set differently at the very start of the match
-			team_aufschlag: 'Gast',
-			team_links: 'gast',
-			gast_spieler1_links: 'true',
-			heim_spieler1_links: 'true',
-			verein: 'gast',
+			team_aufschlag: '',
+			team_links: '',
+			gast_spieler1_links: '',
+			heim_spieler1_links: '',
+			verein: '',
 		});
 
 		presses.push({
@@ -82,11 +81,10 @@ _describe('CourtSpot', function() {
 			Satz: 1,
 			aufschlag_score: 0,
 			team_links: 'heim',
-			// These values are just set this way, but could be set differently at the very start of the match
-			team_aufschlag: 'Gast',
-			gast_spieler1_links: 'true',
-			heim_spieler1_links: 'true',
-			verein: 'gast',
+			team_aufschlag: '',
+			gast_spieler1_links: '',
+			heim_spieler1_links: '',
+			verein: '',
 		});
 
 		presses.push({
@@ -115,8 +113,7 @@ _describe('CourtSpot', function() {
 			heim_spieler1_links: 'false',
 			verein: 'heim',
 			team_aufschlag: 'Heim',
-			// These values are just set this way, but could be set differently at the very start of the match
-			gast_spieler1_links: 'true',
+			gast_spieler1_links: '',
 		});
 
 		presses.push({
@@ -444,9 +441,8 @@ _describe('CourtSpot', function() {
 			verein: 'heim',
 			team_aufschlag: 'Heim',
 			team_links: 'gast',
-			// vv Implementation details vv
-			heim_spieler1_links: 'true',
-			gast_spieler1_links: 'true',
+			heim_spieler1_links: '',
+			gast_spieler1_links: '',
 		});
 
 		var alt_presses = presses.slice();
@@ -476,8 +472,7 @@ _describe('CourtSpot', function() {
 			team_aufschlag: 'Heim',
 			team_links: 'gast',
 			heim_spieler1_links: 'false',
-			// vv Implementation detail vv
-			gast_spieler1_links: 'true',
+			gast_spieler1_links: '',
 		});
 
 		presses.push({
@@ -506,8 +501,7 @@ _describe('CourtSpot', function() {
 			team_aufschlag: 'Heim',
 			team_links: 'gast',
 			heim_spieler1_links: 'true',
-			// vv Implementation detail vv
-			gast_spieler1_links: 'true',
+			gast_spieler1_links: '',
 		});
 
 		alt_presses = presses.slice();
@@ -617,9 +611,8 @@ _describe('CourtSpot', function() {
 			verein: 'gast',
 			team_aufschlag: 'Gast',
 			team_links: 'heim',
-			// vv implementation detail vv
-			heim_spieler1_links: 'true',
-			gast_spieler1_links: 'true',
+			heim_spieler1_links: '',
+			gast_spieler1_links: '',
 		});
 
 		presses.push({
@@ -648,8 +641,7 @@ _describe('CourtSpot', function() {
 			team_aufschlag: 'Gast',
 			team_links: 'heim',
 			gast_spieler1_links: 'false',
-			// vv implementation detail vv
-			heim_spieler1_links: 'true',
+			heim_spieler1_links: '',
 		});
 
 		presses.push({
@@ -781,9 +773,8 @@ _describe('CourtSpot', function() {
 			verein: 'heim',
 			team_aufschlag: 'Heim',
 			team_links: 'gast',
-			// vv Implementation detail vv
-			gast_spieler1_links: 'true',
-			heim_spieler1_links: 'true',
+			gast_spieler1_links: '',
+			heim_spieler1_links: '',
 		});
 
 		presses.push({
@@ -812,8 +803,7 @@ _describe('CourtSpot', function() {
 			team_aufschlag: 'Heim',
 			team_links: 'gast',
 			heim_spieler1_links: 'false',
-			// vv Implementation detail vv
-			gast_spieler1_links: 'true',
+			gast_spieler1_links: '',
 		});
 
 		presses.push({
@@ -946,9 +936,8 @@ _describe('CourtSpot', function() {
 			verein: 'gast',
 			team_aufschlag: 'Gast',
 			team_links: 'heim',
-			// vv Implementation detail vv
-			heim_spieler1_links: 'true',
-			gast_spieler1_links: 'true',
+			heim_spieler1_links: '',
+			gast_spieler1_links: '',
 		});
 
 		presses.push({
@@ -977,8 +966,7 @@ _describe('CourtSpot', function() {
 			team_aufschlag: 'Gast',
 			team_links: 'heim',
 			gast_spieler1_links: 'true',
-			// vv Implementation detail vv
-			heim_spieler1_links: 'true',
+			heim_spieler1_links: '',
 		});
 
 		presses.push({
@@ -1187,12 +1175,11 @@ _describe('CourtSpot', function() {
 			aufschlag_score: 0,
 			gewonnenHeim: 0,
 			gewonnenGast: 0,
-			// These values are just set this way, but could be set differently at the very start of the match
-			team_aufschlag: 'Gast',
-			team_links: 'gast',
-			gast_spieler1_links: 'true',
-			heim_spieler1_links: 'true',
-			verein: 'gast',
+			team_aufschlag: '',
+			team_links: '',
+			gast_spieler1_links: '',
+			heim_spieler1_links: '',
+			verein: '',
 		});
 
 		presses.push({
@@ -1217,11 +1204,10 @@ _describe('CourtSpot', function() {
 			Satz: 1,
 			aufschlag_score: 0,
 			team_links: 'gast',
-			// These values are just set this way, but could be set differently at the very start of the match
-			team_aufschlag: 'Gast',
-			gast_spieler1_links: 'true',
-			heim_spieler1_links: 'true',
-			verein: 'gast',
+			team_aufschlag: '',
+			gast_spieler1_links: '',
+			heim_spieler1_links: '',
+			verein: '',
 		});
 
 		presses.push({
@@ -1250,8 +1236,7 @@ _describe('CourtSpot', function() {
 			heim_spieler1_links: 'false',
 			verein: 'heim',
 			team_aufschlag: 'Heim',
-			// These values are just set this way, but could be set differently at the very start of the match
-			gast_spieler1_links: 'true',
+			gast_spieler1_links: '',
 		});
 
 		presses.push({
