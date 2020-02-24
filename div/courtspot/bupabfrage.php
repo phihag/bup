@@ -189,13 +189,16 @@ while ($row = $result->fetch_assoc()) {
 		$setup['counting'] = $counting;
 	}
 
+	$team1_serving = (
+		($row['lastPoint'] == 'heim') ? true :
+		(($row['lastPoint'] == 'gast') ? false : null));
 	$m = [
 		'setup' => $setup,
 		'network_score' => $network_score,
-		'network_team1_serving' => ($row['lastPoint'] == 'heim'),
+		'network_team1_serving' => $team1_serving,
 		'network_teams_player1_even' => [
-			($row['linksheim'] == 'Spieler1') == ($row['oben'] == 'heim'),
-			($row['linksgast'] == 'Spieler1') == ($row['oben'] == 'gast'),
+			$row['linksheim'] ? (($row['linksheim'] == 'Spieler1') == ($row['oben'] == 'heim')) : null,
+			$row['linksgast'] ? (($row['linksgast'] == 'Spieler1') == ($row['oben'] == 'gast')) : null,
 		],
 		'network_last_update' => intval($row['last_timestamp']),
 		'network_match_start' => intval($row['first_timestamp']),
