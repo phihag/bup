@@ -27,12 +27,12 @@
         "ecmaVersion": "2017",
     },
     "globals": {
-        "client_find_text": "*",
-        "client_qs_visible": "*",
-        client_eventual_visibility: "*",
-        client_wait_nonempty: "*",
-        client_wait_nonempty_text: "*",
-        "uiu": "*"
+        "client_find_text": "readonly",
+        "client_qs_visible": "readonly",
+        client_eventual_visibility: "readonly",
+        client_wait_nonempty: "readonly",
+        client_wait_nonempty_text: "readonly",
+        "uiu": "readonly"
     },
     "extends": "eslint:recommended"
 }
