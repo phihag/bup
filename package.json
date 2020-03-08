@@ -16,11 +16,11 @@
     "ws": "*"
   },
   "devDependencies": {
+    "argparse": "*",
     "async": "*",
     "async-lock": "*",
     "clean-css-cli": "*",
     "eslint": "*",
-    "fs-walk": "*",
     "istanbul": "*",
     "mocha": "*",
     "parse-appcache-manifest": "*",
