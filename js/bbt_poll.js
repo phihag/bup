@@ -2,8 +2,8 @@
 function bbt_poll(team_shortname) {
 
 function _bbt2bup(bbt_event) {
-	const event_id = 'bbt-' + bbt_event.team_names[0] + '-' + bbt_event.team_names[1] + '-' + bbt_event.date;
-	const res = {
+	var event_id = 'bbt-' + bbt_event.team_names[0] + '-' + bbt_event.team_names[1] + '-' + bbt_event.date;
+	var res = {
 		id: event_id,
 		league_key: bbt_event.league_key,
 		team_names: bbt_event.team_names,
@@ -14,7 +14,7 @@ function _bbt2bup(bbt_event) {
 
 	if (bbt_event.courts) {
 		res.courts = bbt_event.courts.map(function (c) {
-			const court = {
+			var court = {
 				court_id: c.label,
 			};
 			if (c.match_id) {
@@ -26,7 +26,7 @@ function _bbt2bup(bbt_event) {
 
 	if (bbt_event.matches) {
 		res.matches = bbt_event.matches.map(function (m) {
-			const match = {
+			var match = {
 				network_score: m.score,
 				setup: {
 					match_name: m.name,
