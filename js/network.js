@@ -14,6 +14,7 @@ function get_real_netw() {
 		networks.tdemo ||
 		networks.btsh ||
 		networks.btde ||
+		networks.bbt ||
 		networks.courtspot ||
 		networks.liveaw ||
 		networks.jticker ||
@@ -585,6 +586,8 @@ function ui_init(s, hash_query) {
 		networks.csde = csde(hash_query.csde);
 	} else if (hash_query.btde !== undefined) {
 		networks.btde = btde();
+	} else if (hash_query.bbt_poll !== undefined) {
+		networks.bbt = bbt_poll(hash_query.bbt_poll);
 	} else if (hash_query.liveaw_event_id) {
 		networks.liveaw = liveaw(hash_query.liveaw_event_id);
 	} else if (hash_query.jt_id !== undefined) {
