@@ -137,6 +137,11 @@ network_team1_left Position of the home team.
               false: he away team is on the left
               null: Undetermined (e.g. match not yet started)
               undefined: Unsupported by backend
+network_team1_serving Which team is currently serving
+              true: the home team is serving
+              false: he away team is serving
+              null: Undetermined (e.g. match not yet started)
+              undefined: Unsupported by backend
 network_teams_player1_even An array, indicating whether the first player is on the right side.
               e.g. [true, false] if the first home team player is on the right side.
               true: The first player is one the right. In doubles, the second player is on the left.
