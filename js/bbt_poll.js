@@ -128,7 +128,7 @@ function list_matches(s, cb) {
 }
 
 return {
-	editable: function(s) {return false;},
+	editable: function() {return false;},
 	list_matches: list_matches,
 	courts: courts,
 	ui_init: ui_init,
@@ -138,6 +138,9 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var netstats = require('./netstats');
+	var eventutils = require('./eventutils');
+
 	module.exports = bbt_poll;
 }
 /*/@DEV*/

@@ -612,7 +612,7 @@ function pronounce_teamname(team_name) {
 		'Blau-Weiss Wittorf-NMS': 'Blau-Weiss Wittorf-Neumünster',
 		'1.BC Sbr.-Bischmisheim': '1.BC Saarbrücken-Bischmisheim',
 	};
-	var core_name = table[core_name] || core_name;
+	core_name = table[core_name] || core_name;
 	return core_name + team_num;
 }
 

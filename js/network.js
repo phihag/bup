@@ -823,6 +823,7 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var bbt_poll = require('./bbt_poll');
 	var btde = require('./btde');
 	var btsh = require('./btsh');
 	var bupui = require('./bupui');

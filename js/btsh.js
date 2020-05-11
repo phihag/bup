@@ -21,7 +21,7 @@ function _bat_status() {
 	};
 }
 
-function _device_data(s) {
+function _device_data() {
 	return {
 		id: refmode_client_ui.get_node_id(),
 		battery: _bat_status(),
@@ -207,6 +207,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var displaymode = require('./displaymode');
 	var eventutils = require('./eventutils');
 	var network = require('./network');
+	var refmode_client_ui = require('./refmode_client_ui');
 
 	module.exports = btsh;
 }
