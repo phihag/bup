@@ -20,7 +20,7 @@ function _svg_align_hcenter(text, hcenter) {
 function _svg_el(tagName, attrs, parent, text) {
 	var el = document.createElementNS('http://www.w3.org/2000/svg', tagName);
 	for (var key in attrs) {
-		if (attrs.hasOwnProperty(key)) {
+		if (Object.prototype.hasOwnProperty.call(attrs, key)) {
 			el.setAttribute(key, attrs[key]);
 		}
 	}

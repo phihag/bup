@@ -40,7 +40,7 @@ function find(ar, cb) {
 function pluck(obj, keys) {
 	var res = {};
 	keys.forEach(function(k) {
-		if (obj.hasOwnProperty(k)) {
+		if (Object.prototype.hasOwnProperty.call(obj, k)) {
 			res[k] = obj[k];
 		}
 	});

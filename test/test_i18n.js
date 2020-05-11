@@ -134,7 +134,7 @@ _describe('i18n', function() {
 			// Test that all references are present in i18n file
 			for (const ref of all_refs) {
 				assert(
-					lang.hasOwnProperty(ref.key),
+					Object.prototype.hasOwnProperty.call(lang, ref.key),
 					'Can not find key ' + JSON.stringify(ref.key) + ', referenced in ' + ref.filename
 				);
 			}

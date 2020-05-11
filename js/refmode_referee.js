@@ -160,7 +160,7 @@ function handle_dmsg(msg) {
 	case 'event-update':
 	case 'state':
 		['event', 'presses', 'setup', 'settings', 'node_id', 'battery', 'bup_version', 'mode'].forEach(function(k) {
-			if (msg.hasOwnProperty(k)) {
+			if (Object.prototype.hasOwnProperty.call(msg, k)) {
 				c[k] = msg[k];
 			}
 		});
@@ -171,7 +171,7 @@ function handle_dmsg(msg) {
 			c.time_difference = now - (c.ping / 2) - msg.response_ts;
 		}
 
-		if (msg.hasOwnProperty('rid')) {
+		if (Object.prototype.hasOwnProperty.call(msg, 'rid')) {
 			c.last_state_rid = msg.rid;
 		}
 		calc_client_title(c);
