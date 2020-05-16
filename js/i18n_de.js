@@ -531,6 +531,7 @@ var i18n_de = {
 'displaymode|clubplayerslr': 'Verein + Spieler (links / rechts)',
 'displaymode|teamscore': 'Siegerfoto',
 'displaymode|stripes': 'Streifen',
+'displaymode|stream': 'Stream',
 'displaymode:court_id': 'Court:',
 'displaymode:court_id:loading': 'lade ...',
 'displaymode:reverse_order': 'Umgekehrte Felder-Reihenfolge',

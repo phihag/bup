@@ -530,6 +530,7 @@ var i18n_en = {
 'displaymode|tournament_overview': 'tournament overview',
 'displaymode|teamscore': 'team score',
 'displaymode|stripes': 'stripes',
+'displaymode|stream': 'stream',
 'displaymode:court_id': 'court:',
 'displaymode:court_id:loading': 'loading ...',
 'displaymode:reverse_order': 'reverse court order',
