@@ -225,7 +225,8 @@ function load_by_hash() {
 	});
 
 	if (show_func) {
-		show_func();
+		var show_settings = typeof qs.nosettings !== 'undefined';
+		show_func({show_settings: show_settings});
 		is_loading = false;
 		return;
 	}

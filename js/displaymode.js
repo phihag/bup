@@ -714,7 +714,7 @@ function render_stream(s, container, event, colors) {
 				}
 			}
 
-			console.log({event, match})
+			// console.log({event, match})
 			uiu.el(
 				tr, 'td', {
 					style: 'padding-right:' + (scale * 10) + 'px;',
@@ -2652,7 +2652,7 @@ function on_style_change(s) {
 }
 
 var _cancel_updates = null;
-function show() {
+function show(params) {
 	if (state.ui.displaymode_visible) {
 		return;
 	}
@@ -2662,7 +2662,9 @@ function show() {
 	render.hide();
 	settings.hide(true, true);
 	settings.on_mode_change(state);
-	settings.show_displaymode();
+	if (params && !params.show_settings) {
+		settings.show_displaymode();
+	}
 
 	control.set_current(state);
 	uiu.show_qs('.displaymode_layout');

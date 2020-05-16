@@ -44,6 +44,7 @@ Initial UI
 These can be combined with any other options (but not each other), as in #bldemo&display .
 
 settings       Show settings UI (currently the default)
+nosettings     Hide settings by default (click to see)
 display        Start in display mode
 referee_mode   Start in referee mode
 eventsheet=foo Show the dialog for generating the eventsheet named foo

@@ -46,6 +46,8 @@ function _bbt2bup(bbt_event) {
 			}
 			return match;
 		});
+	} else {
+		res.matches = [];
 	}
 
 	return res;
