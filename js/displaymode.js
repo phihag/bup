@@ -678,7 +678,7 @@ function render_stream(s, container, event, colors) {
 	var team_names = event.team_names || ['', ''];
 
 	uiu.el(container, 'div', {
-		'style': ('position:fixed; top:0; bottom:0; left:0; right:0; background: #fff;'),
+		'style': ('position:fixed; top:0; bottom:0; left:0; right:0;'),
 	});
 
 	// TODO limit to one court / all courts
