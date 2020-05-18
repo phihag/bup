@@ -2662,7 +2662,7 @@ function show(params) {
 	render.hide();
 	settings.hide(true, true);
 	settings.on_mode_change(state);
-	if (params && !params.show_settings) {
+	if (params && params.show_settings) {
 		settings.show_displaymode();
 	}
 
@@ -2763,12 +2763,14 @@ function ui_init(s, hash_query) {
 		advance_style(s, 1);
 	});
 
-	click.qs('.displaymode_layout', function() {
-		settings.show_displaymode();
-	});
-	click.qs('.d_ads', function() {
-		settings.show_displaymode();
-	});
+	if (hash_query.neversettings === undefined) {
+		click.qs('.displaymode_layout', function() {
+			settings.show_displaymode();
+		});
+		click.qs('.d_ads', function() {
+			settings.show_displaymode();
+		});
+	}
 	click.qs('.settings_mode_display', function() {
 		show();
 	});
