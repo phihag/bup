@@ -145,9 +145,9 @@ var i18n_de = {
 'ready to unsuspend': 'Sind Sie spielbereit?\n',
 'ready to play': 'Spielbereit machen.',
 
-'demo:team1': '1. BC Beuel',
-'demo:player1.1': 'Max Weißkirchen',
-'demo:player1.2': 'Hannah Pohl',
+'demo:team1': 'TV Refrath',
+'demo:player1.1': 'Jan Colin Völker',
+'demo:player1.2': 'Kilasu Ostermeyer',
 'demo:team2': '1.BC Sbr.-Bischmisheim',
 'demo:player2.1': 'Marvin Seidel',
 'demo:player2.2': 'Isabel Herttrich',
