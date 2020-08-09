@@ -31,6 +31,7 @@ function _bbt2bup(bbt_event) {
 				setup: {
 					match_name: m.name,
 					match_id: event_id + '-' + m.name,
+					is_doubles: /DD|HD|GD/.test(m.name),
 					teams: [{}, {}],
 				},
 			};
