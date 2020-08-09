@@ -1,10 +1,22 @@
+onymright: bold right, and change to that
+
 go through all displaymodes and check that they set their background
 
+wake lock API
+
+import https://www.turnier.de/sport/league/match?id=1EE9AE51-2B4E-41A0-9815-381422DC24EC&match=112
+
+displaymode error and many details look broken!
+
+airbadminton scoring
+
+map §2.1.4 (@ DBV RLT only reference countries in German if at least one non-DE)
+
+request logos / color from new teams
+
+better error message on 404 from bbt
 
 display like https://www.youtube.com/watch?v=ZfKacJsxHUs
-
-
-onymright: bold right, and change to that
 
 fix itests!
 
@@ -15,9 +27,6 @@ pronounce TSV Freystadt
 test turnier.de import
 
 btde support (002) NRW-Oberliga Nord
-
-
-
 
 Berliner Brauereien: light blue
 
