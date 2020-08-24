@@ -1,24 +1,47 @@
+fix dmode
+	big score
+	club name
+	autosize name
+	autosize club name
+
+fix order showing crap (should only be visible for &to)
+
+2.BuLi 50€ für SR
+
+transmit btde
+
+doc obs
+
+gw Mülheim pronounciation
+
+order should not show adding (should be to only)
+
+d fix top+list
+	check all styles gone
+
+wake lock API
+
+support Mainz-Zahlbach
+
 go through all displaymodes and check that they set their background
 displaymode error and many details look broken!
 
-onymright: bold right, and change to that
-
-bupdate problem as described by Ulf
-
-displaymode / streamining in obs
-
-wake lock API
+onmyright: bold right, and change to that
 
 import https://www.turnier.de/sport/league/match?id=1EE9AE51-2B4E-41A0-9815-381422DC24EC&match=112
 
 airbadminton scoring
 
-displaymode support teamcolor background everywhere
+bup new forms buli 2020/2021
 
+
+script to init a Pi
+---------------------
+
+displaymode support teamcolor background everywhere
 
 map §2.1.4 (@ DBV RLT only reference countries in German if at least one non-DE)
 
-request logos / color from new teams
 
 better error message on 404 from bbt
 
