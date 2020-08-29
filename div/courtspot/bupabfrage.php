@@ -89,10 +89,10 @@ case 3:
 	$league_key = '2BLS-2019';
 	break;
 case 4:
-	$league_key = 'RLN-2016';
+	$league_key = 'RLW-2016';
 	break;
 case 5:
-	$league_key = 'RLW-2016';
+	$league_key = 'RLN-2016';
 	break;
 case 6:
 	$league_key = 'RLM-2016';
