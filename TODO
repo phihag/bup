@@ -4,15 +4,32 @@ fix dmode
 	autosize name
 	autosize club name
 
-fix order showing crap (should only be visible for &to)
+test größte Führung in stats WTF
+
+cs league parameter
+	8 = OL?
 
 2.BuLi 50€ für SR
 
+league parameters
+
+
+Uncaught ReferenceError: court_count is not defined" error
+
+fix order showing crap (should only be visible for &to)
+
+
 transmit btde
+
+allow URL parameter for scale
+
+test dm_style=stream documented
 
 doc obs
 
 gw Mülheim pronounciation
+
+dmode Marius Mail
 
 order should not show adding (should be to only)
 
@@ -20,6 +37,8 @@ d fix top+list
 	check all styles gone
 
 wake lock API
+
+remove sclive from doc
 
 support Mainz-Zahlbach
 
