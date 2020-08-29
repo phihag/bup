@@ -100,17 +100,13 @@ case 6:
 case 7:
 	$league_key = 'RLSO-2019';
 	break;
-case 8:
-	$league_key = '1BL-2019';
-	$tournament_name = 'Viertelfinale 1. Bundesliga 2019/2020';
-	break;
 case 9:
-	$league_key = '1BL-2019';
-	$tournament_name = 'Bundesliga-Aufstiegsrunde 2019/2020';
+	$league_key = 'NRW-O19-GW-OL-002-2016';
+	//$tournament_name = 'NRW-Oberliga Nord';
 	break;
-case 10: // Bundesliga-Finale
-	$league_key = '1BL-2019';
-	$tournament_name = 'Finalrunde 1. Bundesliga 2019/2020';
+case 10:
+	$league_key = 'NRW-O19-GW-OL-003-2016';
+	//$tournament_name = 'NRW-Oberliga Süd';
 	break;
 }
 
