@@ -27,7 +27,7 @@ var ALL_STYLES = [
 var ALL_COLORS = [
 	'c0', 'c1', 'cb0', 'cb1',
 	'cbg', 'cbg2', 'cbg3', 'cbg4',
-	'cfg', 'cfg2', 'cfg3', 'cfgdark',
+	'cfg', 'cfg2', 'cfg3', 'cfg3', 'cfgdark',
 	'ct', // transparent
 	'cborder',
 	'cserv', 'cserv2', 'crecv',
@@ -249,7 +249,7 @@ function _match_by_court(event, court) {
 	}) : null;
 }
 
-function _render_court_display(container, event, court, top_team_idx) {
+function _render_court_display(container, event, court, colors, top_team_idx) {
 	var match = _match_by_court(event, court);
 	if (top_team_idx === undefined) {
 		top_team_idx = 0;
@@ -260,7 +260,6 @@ function _render_court_display(container, event, court, top_team_idx) {
 			}
 		}
 	}
-	var bottom_team_idx = 1 - top_team_idx;
 
 	var team_names = event.team_names || [];
 	var nscore = (match && match.network_score) ? match.network_score : [];
@@ -275,105 +274,109 @@ function _render_court_display(container, event, court, top_team_idx) {
 	};
 	var prev_scores = nscore.slice(0, -1);
 	var current_score = (nscore.length > 0) ? nscore[nscore.length - 1] : ['', ''];
-
-	var top_current_score = uiu.el(container, 'div', {
-		'class': 'dcs_current_score_top',
-	}, current_score[top_team_idx]);
-	var bottom_current_score = uiu.el(container, 'div', {
-		'class': 'dcs_current_score_bottom',
-	}, current_score[bottom_team_idx]);
-
-	var top_team = match_setup.teams[top_team_idx];
-
-	var player_container = uiu.el(container, 'div', {
-		'class': (match_setup.is_doubles ? 'dcs_player_names_doubles' : 'dcs_player_names_singles'),
-	});
 	var server = match ? determine_server(match, current_score) : {};
-	for (var player_id = 0;player_id < top_team.players.length;player_id++) {
-		var top_is_serving = (top_team_idx === server.team_id) && (player_id === server.player_id);
-		var top_player_name_container = uiu.el(player_container, 'div', {
-			'class': 'dcs_player_name' + (top_is_serving ? ' dcs_player_serving' : ''),
+
+	for (var i = 0;i < 2;i++) {
+		var is_top = i === 0;
+		var top_key = is_top ? 'top' : 'bottom';
+		var bottom_key = is_top ? 'bottom' : 'top';
+		var team_idx = is_top ? top_team_idx : 1 - top_team_idx;
+		var team = match_setup.teams[team_idx];
+
+		var team_container = uiu.el(container, 'div', {
+			style: (
+				'position: absolute;left:0;height:50%;top:' + (i * 50) + '%;width:100%;' +
+				'white-space:pre;'
+			),
 		});
-		var top_player_name_span = uiu.el(
-			top_player_name_container, 'span', {}, top_team.players[player_id].name);
-		_setup_autosize(top_player_name_span, top_current_score);
-	}
 
-	var top_row = uiu.el(container, 'div', {
-		'class': 'dcs_team_row dcs_team_row_top',
-	});
-	var top_prev_scores_container = uiu.el(top_row, 'div', {
-		'class': 'dcs_prev_scores_top',
-	});
-	prev_scores.forEach(function(ps) {
-		uiu.el(top_prev_scores_container, 'div', {
-			'class': ((ps[top_team_idx] > ps[bottom_team_idx]) ? 'dcs_prev_score_won' : 'dcs_prev_score_lost'),
-		}, ps[top_team_idx]);
-	});
-	var top_team_el = uiu.el(top_row, 'div', {
-		'class': 'dcs_team_name',
-	});
-	var top_team_span = uiu.el(top_team_el, 'span', {}, top_team.name);
-
-	var bottom_row = uiu.el(container, 'div', {
-		'class': 'dcs_team_row dcs_team_row_bottom',
-	});
-	var bottom_prev_scores_container = uiu.el(bottom_row, 'div', {
-		'class': 'dcs_prev_scores_bottom',
-	});
-	prev_scores.forEach(function(ps) {
-		uiu.el(bottom_prev_scores_container, 'div', {
-			'class': ((ps[bottom_team_idx] > ps[top_team_idx]) ? 'dcs_prev_score_won' : 'dcs_prev_score_lost'),
-		}, ps[bottom_team_idx]);
-	});
-	var bottom_team = match_setup.teams[bottom_team_idx];
-	var bottom_team_el = uiu.el(bottom_row, 'div', {
-		'class': 'dcs_team_name',
-	});
-	var bottom_team_span = uiu.el(bottom_team_el, 'span', {}, bottom_team.name);
-
-	player_container = uiu.el(container, 'div', {
-		'class': (match_setup.is_doubles ? 'dcs_player_names_doubles' : 'dcs_player_names_singles'),
-	});
-	for (player_id = 0;player_id < bottom_team.players.length;player_id++) {
-		var bottom_is_serving = (bottom_team_idx === server.team_id) && (player_id === server.player_id);
-		var bottom_player_name_container = uiu.el(player_container, 'div', {
-			'class': 'dcs_player_name' + (bottom_is_serving ? ' dcs_player_serving' : ''),
+		var team_name_container = uiu.el(team_container, 'div', {
+			style: (
+				'position:absolute;' + bottom_key + ':0;height:4vh;width:100%;' +
+				'color:' + colors.fg3 + ';display:flex;align-items:center;'
+			),
 		});
-		var bottom_player_name_span = uiu.el(
-			bottom_player_name_container, 'span', {}, bottom_team.players[player_id].name);
-		_setup_autosize(bottom_player_name_span, bottom_current_score);
-	}
+		var team_name_el = uiu.el(team_name_container, 'span', {}, team.name);
+		var prev_score_container = uiu.el(team_name_container, 'div', {
+			style: 'position:absolute;right:0;height:100%;display:flex;align-items:center;',
+		});
+		prev_scores.forEach(function(ps) {
+			var won = ps[team_idx] > ps[1 - team_idx];
+			uiu.el(prev_score_container, 'div', {
+				'style': (
+					'display: inline-block;' +
+					'margin: 0 0.4em;' +
+					'min-width: 1.2em;' +
+					'text-align: right;' +
+					'font-size:3vh;' +
+					'color:' + (won ? colors.serv2 : colors.recv)
+				),
+			}, ps[team_idx]);
+		});
+		_setup_autosize(team_name_el, prev_score_container);
 
-	_setup_autosize(top_team_span);
-	_setup_autosize(bottom_team_span);
+		var players_container = uiu.el(team_container, 'div', {
+			style: (
+				'position:absolute;' + top_key + ':0;height:12vh;width:100%;' +
+				'display:flex;flex-direction:column;justify-content:center;'),
+		});
+
+		var current_score_el = uiu.el(players_container, 'div', {
+			style: (
+				'line-height:12vh;font-size:12vh;' +
+				'position:absolute;right:0;' + top_key + ':0;' +
+				'color:' + colors.fg
+			),
+		}, current_score[team_idx]);
+
+		for (var player_id = 0;player_id < team.players.length;player_id++) {
+			var is_serving = (team_idx === server.team_id) && (player_id === server.player_id);
+			var player_name_container = uiu.el(players_container, 'div', {
+				'style': (
+					'color:' + (is_serving ? colors.serv2 : colors.fg) + ';' +
+					'height:50%;width:100%;'
+				),
+			});
+			var span = uiu.el(player_name_container, 'span', {}, team.players[player_id].name);
+			_setup_autosize(span, current_score_el);
+		}
+	}
 }
 
-function render_top(s, container, event) {
+function render_top_list(s, container, event) {
+	var colors = calc_colors(s.settings, event);
+	var inner_container = uiu.el(
+		container, 'div',
+		{style: 'position:absolute;left:0;top:0;bottom:0;right:0;background:' + colors.bg});
+	render_top(s, inner_container, event, colors);
+	render_list(inner_container, event);
+}
+
+function render_top(s, container, event, colors) {
 	if (! event.courts) {
 		return;
 	}
 
-	var courts_container = uiu.el(container, 'div', {
+	var courts_outer_container = uiu.el(container, 'div', {
 		'class': 'display_courts_container',
 	});
+	var courts_container = uiu.el(courts_outer_container, 'div', {
+		style: 'position:absolute;left:1vw;right:1vw;top:0;bottom:0;',
+	});
 	var court_count = event.courts.length;
-	var court_width = Math.floor((100.0 - (4 * (court_count - 1))) / court_count);
+	var spacer_width = 4 * (court_count - 1);
+	var court_width = ((100.0 - (court_count - 1) * spacer_width) / court_count);
 	for (var court_idx = 0;court_idx < court_count;court_idx++) {
-		if (court_idx > 0) {
-			uiu.el(courts_container, 'div', {
-				'class': 'display_courts_separator',
-			});
-		}
-
+		var left = (court_width + spacer_width) * court_idx;
 		var court_container = uiu.el(courts_container, 'div', {
 			'class': 'display_courts_court',
-			'style': ('width: ' + court_width + '%;'),
+			'style': (
+				'position:absolute;top:0;bottom:0;left:' + left + '%;width:' + court_width + '%'),
 		});
 
 		var real_court_idx = s.settings.displaymode_reverse_order ? (court_count - 1 - court_idx) : court_idx;
 		var court = event.courts[real_court_idx];
-		_render_court_display(court_container, event, court);
+		_render_court_display(court_container, event, court, colors);
 	}
 }
 
@@ -2633,8 +2636,7 @@ function update(err, s, event) {
 	}
 
 	// Default: top+list
-	render_top(s, container, event);
-	render_list(container, event);
+	render_top_list(s, container, event);
 }
 
 function on_style_change(s) {
@@ -2798,7 +2800,7 @@ function active_colors(s, style_id) {
 function option_applies(style_id, option_name) {
 	var BY_STYLE = {
 		'2court': ['court_id', 'team_colors', 'c0', 'cb0', 'c1', 'cb1', 'cfg', 'reverse_order', 'show_pause'],
-		'top+list': ['reverse_order'],
+		'top+list': ['reverse_order', 'cbg', 'cserv2', 'crecv', 'cfg', 'cfg3'],
 		andre: ['court_id', 'cfg', 'cbg', 'cfg2'],
 		bwf: ['court_id', 'team_colors', 'c0', 'c1', 'cfg', 'cbg'],
 		castall: ['team_colors', 'c0', 'c1', 'cfg', 'cbg', 'cbg2', 'ct', 'cserv', 'crecv', 'reverse_order', 'scale'],

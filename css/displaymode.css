@@ -13,15 +13,16 @@
 	z-index: 2000;
 }
 
-.display_courts_container,
 .display_list_container {
 	position: relative;
 	margin: 0 1vw;
 }
 
 .display_courts_container {
-	margin-top: 1vmin;
+	height: 32vmin;
+	width: 100%;
 	text-align: center;
+	position: relative;
 }
 .display_courts_container::after {
 	clear: both;
@@ -32,92 +33,6 @@
 	margin: 0 0 0 0;
 	text-align: left;
 	position: relative;
-}
-.display_courts_court,
-.display_courts_separator {
-	display: inline-block;
-	overflow: hidden;
-}
-.display_courts_separator {
-	height: 32vmin;
-	width: 4%;
-}
-
-/* dcs = display court score (score display for one court) */
-.dcs_player_names_singles {
-	display: -webkit-flex;
-	display: flex;
-
-	-webkit-align-items: center;
-	align-items: center;
-}
-.dcs_player_name {
-	white-space: pre;
-}
-.dcs_player_serving {
-	color: #ddf;
-}
-.dcs_team_name {
-	height: 100%;
-	white-space: pre;
-	color: #cfcfcf;
-
-	display: -webkit-flex;
-	display: flex;
-
-	-webkit-align-items: center;
-	align-items: center;
-}
-
-.dcs_current_score_top,
-.dcs_current_score_bottom {
-	position: absolute;
-	right: 0;
-}
-.dcs_current_score_top {
-	top: 0;
-}
-.dcs_current_score_bottom {
-	bottom: 0;
-}
-.dcs_prev_scores_top,
-.dcs_prev_scores_bottom {
-	float: right;
-}
-.dcs_prev_score_lost,
-.dcs_prev_score_won {
-	display: inline-block;
-	margin: 0 0.4em;
-	min-width: 1.2em;
-	text-align: right;
-}
-.dcs_prev_score_won {
-	color: #dba766;
-}
-
-
-.display_courts_court .dcs_team_row {
-	height: 4vmin;
-}
-.display_courts_court .dcs_team_name {
-	font-size: 3vmin;
-}
-.display_courts_court .dcs_current_score_top,
-.display_courts_court .dcs_current_score_bottom {
-	font-size: 12vmin;
-	line-height: 12vmin;
-}
-.display_courts_court .dcs_prev_scores_top,
-.display_courts_court .dcs_prev_scores_bottom {
-	font-size: 3vmin;
-}
-.display_courts_court .dcs_player_names_singles,
-.display_courts_court .dcs_player_names_doubles {
-	height: 12vmin;
-}
-.display_courts_court .dcs_player_name {
-	font-size: 5vmin;
-	height: 6vmin;
 }
 
 .display_list_container {
