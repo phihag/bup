@@ -1,17 +1,8 @@
-fix dmode
-	big score
-	club name
-	autosize name
-	autosize club name
+cs league RLM (8)
 
 test größte Führung in stats WTF
 
-cs league parameter
-	8 = OL?
-
 2.BuLi 50€ für SR
-
-league parameters
 
 
 Uncaught ReferenceError: court_count is not defined" error
