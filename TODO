@@ -1,25 +1,39 @@
+courtspot filter by team if not buli
+
+fix turnier.de export
+
+courtspot mainz-zahlbach
+
+gw Mülheim pronounciation
+
+fix (rlw?) scoresheet scaling!
+
+pdf of buli eventsheet check font size in chrome
+
 cs league RLM (8)
 
 test größte Führung in stats WTF
 
 2.BuLi 50€ für SR
 
-courtspot filter by team
-
 Uncaught ReferenceError: court_count is not defined" error
 
 fix order showing crap (should only be visible for &to)
 
+make tests green
 
-transmit btde
+buli 2020 (forms, code, courtspot, btde etc.)
+
+update docs ticker
+
+stream test court1/court2
+
 
 allow URL parameter for scale
 
 test dm_style=stream documented
 
-doc obs
-
-gw Mülheim pronounciation
+doc obs / streaming setup
 
 dmode Marius Mail
 
@@ -90,8 +104,6 @@ order: Pause + Space
 bup order wrong colors if triple problem
 
 #mo deleting a match should not reset new match inputs
-
-pdf of buli eventsheet check font size in chrome
 
 cs ignore players of upper teams
 
