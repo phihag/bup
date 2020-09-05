@@ -102,11 +102,9 @@ case 7:
 	break;
 case 9:
 	$league_key = 'NRW-O19-GW-OL-002-2016';
-	//$tournament_name = 'NRW-Oberliga Nord';
 	break;
 case 10:
 	$league_key = 'NRW-O19-GW-OL-003-2016';
-	//$tournament_name = 'NRW-Oberliga Süd';
 	break;
 }
 
@@ -283,6 +281,14 @@ if ($verwaltung['URL']) {
 }
 
 if (array_key_exists('all_players', $_GET)) {
+	$since_teams = [0, 0];
+	for ($team_idx = 0;$team_idx <= 1;$team_idx++) {
+		$team_name = $res['team_names'][$team_idx];
+		if (preg_match('/\s([2-9])$/', $team_name, $matches)) {
+			$since_teams[$team_idx] = \intval($matches[0][1]);
+		}
+	}
+
 	$all_players_result = mysqli_query($db, '
 	SELECT Art, Vorname, Nachname, Rangliste
 	FROM Spieler ORDER BY Art DESC;');
@@ -318,6 +324,17 @@ if (array_key_exists('all_players', $_GET)) {
 			$p['ranking'] = \intval($m[1]);
 			$p['ranking_d'] = \intval($m[2]);
 		}
+
+		if (\array_key_exists('ranking_team', $p)) {
+			if (is_numeric($p['ranking_team'])) {
+				$team_number = \intval($p['ranking_team']);
+				if ($since_teams[$team_id] > $team_number) {
+					continue;
+				}
+			}
+
+		}
+
 
 		$all_players[$team_id][] = $p;
 	}
