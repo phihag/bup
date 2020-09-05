@@ -110,7 +110,7 @@ return {
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var control = require('./control');
 	var pronunciation = require('./pronunciation');
-	var settings = require('./settings');
+	var settings = null; // avoid cyclic imports
 	var uiu = require('./uiu');
 	var utils = require('./utils');
 
