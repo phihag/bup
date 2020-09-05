@@ -282,3 +282,9 @@ function parse_team_players($html) {
 
 	return $all_players;
 }
+
+function accept_cookies($httpc, $domain) {
+	$url = 'https://' . $domain . '/cookiewall/Save';
+	$body = 'ReturnUrl=/&SettingsOpen=false&CookiePurposes=4&CookiePurposes=16';
+	$httpc->request($url, null, 'POST', $body);
+}

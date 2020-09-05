@@ -232,7 +232,7 @@ class CacheHTTPClient extends AbstractHTTPClient {
 
 	public function request($url, $headers=null, $method='GET', $body=null) {
 		if ($method !== 'GET') {
-			throw new \Exception('CacheHTTPClient only supports GET!');
+			return $this->real_httpc->request($url, $headers, $method, $body);
 		}
 
 		$cache_fn = $this->cache_dir . '/' . \preg_replace('/[^a-z0-9\.]+/', '_', $url) . '.html';

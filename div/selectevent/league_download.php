@@ -97,20 +97,22 @@ function download_team($httpc, $tournament_id, $team_id, $team_name, $use_vrl) {
 }
 
 function download_league($httpc, $url, $league_key, $use_vrl, $use_hr) {
-	$m = \preg_match('/https?:\/\/www\.turnier\.de\/sport\/league\/draw\?id=(?P<id>[0-9A-F-]+)&draw=(?P<draw>[0-9]+)/', $url, $groups);
+	$m = \preg_match('/https?:\/\/(?P<domain>(?:dbv|www)\.turnier\.de)\/sport\/league\/draw\?id=(?P<id>[0-9A-F-]+)&draw=(?P<draw>[0-9]+)/', $url, $groups);
 	if (!$m) {
 		throw new \Exception('Cannot parse URL ' . $url);
 	}
+
+	tde_utils\accept_cookies($httpc, $groups['domain']);
+
 	$tournament_id = $groups['id'];
 	$draw = $groups['draw'];
-
 	$teams_url = _make_url('draw', $tournament_id, '&draw=' . $draw);
 	$teams_html = $httpc->request($teams_url);
 
 	if (!\preg_match('/
 			<div\s*class="title">\s*<h3>\s*(?P<name>[^<(–]+)
 			/xs', $teams_html, $header_m)) {
-		throw new \Exception('Cannot find league name in ' . $url . $teams_html);
+		throw new \Exception('Cannot find league name in ' . $url . ' / ' . $teams_html);
 	}
 	$league_name = \html_entity_decode($header_m['name']);
 
