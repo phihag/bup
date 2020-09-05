@@ -182,7 +182,7 @@ function enter_match(match) {
 		return;
 	}
 
-	var stored = match_storage.get(match.setup.match_id);
+	var stored = match_storage.load_match(match.setup.match_id);
 	if (stored && stored.presses) {
 		control.start_match(state, match.setup, stored.presses);
 		return;

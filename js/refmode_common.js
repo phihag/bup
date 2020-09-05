@@ -20,7 +20,7 @@ function craft_event(s, match_storage_module) {
 			var mr = utils.pluck(
 				m, ['setup', 'network_score', 'presses', 'presses_json']);
 			if (!m.presses && !m.presses_json && match_storage_module) {
-				var loaded = match_storage_module.get(m.setup.match_id);
+				var loaded = match_storage_module.load_match(m.setup.match_id);
 				if (loaded) {
 					mr.presses = loaded.presses;
 				}

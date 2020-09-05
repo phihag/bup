@@ -239,7 +239,7 @@ function load_by_hash() {
 
 	if (qs.m) {
 		// Load match
-		var m = match_storage.get(qs.m);
+		var m = match_storage.load_match(qs.m);
 		if (m) {
 			control.resume_match(m);
 			load_ui_by_hash_qs(qs);

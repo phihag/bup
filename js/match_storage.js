@@ -40,7 +40,7 @@ function load() {
 	return res;
 }
 
-function get(match_id) {
+function load_match(match_id) {
 	if (typeof localStorage == 'undefined') {
 		return;
 	}
@@ -101,7 +101,7 @@ return {
 	ui_init: ui_init,
 	store: store,
 	remove: remove,
-	get: get,
+	load_match: load_match,
 };
 
 })();

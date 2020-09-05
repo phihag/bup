@@ -83,7 +83,7 @@ function gen_export_data(s, include_debug) {
 			if (m.presses || m.presses_json) {
 				return;
 			}
-			var stored = match_storage.get(m.setup.match_id);
+			var stored = match_storage.load_match(m.setup.match_id);
 			if (!stored) {
 				return;
 			}
