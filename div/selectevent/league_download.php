@@ -97,12 +97,12 @@ function download_team($httpc, $tournament_id, $team_id, $team_name, $use_vrl) {
 }
 
 function download_league($httpc, $url, $league_key, $use_vrl, $use_hr) {
-	$m = \preg_match('/https?:\/\/(?P<domain>(?:dbv|www)\.turnier\.de)\/sport\/league\/draw\?id=(?P<id>[0-9A-F-]+)&draw=(?P<draw>[0-9]+)/', $url, $groups);
+	$m = \preg_match('/(?P<base_url>https?:\/\/(?:dbv|www)\.turnier\.de\/)sport\/league\/draw\?id=(?P<id>[0-9A-F-]+)&draw=(?P<draw>[0-9]+)/', $url, $groups);
 	if (!$m) {
-		throw new \Exception('Cannot parse URL ' . $url);
+		throw new \Exception('Cannot parse URL ' . $url . ' for league download');
 	}
 
-	tde_utils\accept_cookies($httpc, $groups['domain']);
+	tde_utils\accept_cookies($httpc, $groups['base_url']);
 
 	$tournament_id = $groups['id'];
 	$draw = $groups['draw'];

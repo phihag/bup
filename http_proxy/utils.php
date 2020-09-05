@@ -88,3 +88,7 @@ function find($ar, $cb) {
 	}
 	return null;
 }
+
+function endswith($haystack, $needle) {
+	return substr($haystack, -strlen($needle)) === $needle;
+}

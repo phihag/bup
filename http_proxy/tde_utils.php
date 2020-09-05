@@ -1,5 +1,7 @@
 <?php
 namespace aufschlagwechsel\bup\tde_utils;
+
+require_once __DIR__ . \DIRECTORY_SEPARATOR . 'utils.php';
 use aufschlagwechsel\bup\utils;
 
 function parse_match_players($players_html) {
@@ -283,8 +285,15 @@ function parse_team_players($html) {
 	return $all_players;
 }
 
-function accept_cookies($httpc, $domain) {
-	$url = 'https://' . $domain . '/cookiewall/Save';
+function accept_cookies($httpc, $base_url) {
+	if (! utils\endswith($base_url, '/')) {
+		$base_url .= '/';
+	}
+	if (! \preg_match('/^https:\/\/(?:[a-z0-9]+\.)?(?:turnier\.de|tournamentsoftware\.com)\//', $base_url)) {
+		throw new Error('No cookie accepting implemented for ' . $base_url);
+	}
+
+	$url = $base_url . 'cookiewall/Save';
 	$body = 'ReturnUrl=/&SettingsOpen=false&CookiePurposes=4&CookiePurposes=16';
 	$httpc->request($url, null, 'POST', $body);
 }

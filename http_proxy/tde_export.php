@@ -14,6 +14,7 @@ function login($httpc, $url_base, $user, $password) {
 	if ($login_page === false) {
 		utils\json_err('Failed to download login form: ' . $httpc->get_error_info());
 	}
+
 	$LOGIN_RE = '/<form\s+action="\/user"\s+(?:class="auth__body"\s+)?id="form_login"(.*?)<\/form>/s';
 	if (!preg_match($LOGIN_RE, $login_page, $matches)) {
 		utils\json_err('Cannot find login form at ' . $login_page_url);
@@ -97,6 +98,8 @@ function prepare($httpc, $url, $user, $password, $team_names, $matches, $max_gam
 	if (!\preg_match('/^(https:\/\/(?:dbv\.|www\.|)turnier\.de\/)sport\/(?:league\/match|teammatch\.aspx)\?id=([-A-Fa-f0-9]+)&match=([0-9]+)$/', $url, $m)) {
 		utils\json_err('Unsupported URL ' . $url);
 	}
+
+	tde_utils\accept_cookies($httpc, $m[1]);
 
 	$url_base = $m[1];
 	$tde_id = $m[2];

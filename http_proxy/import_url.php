@@ -6,12 +6,12 @@ use aufschlagwechsel\bup\tde_dayimport;
 use aufschlagwechsel\bup\tde_import;
 use aufschlagwechsel\bup\utils;
 
-require 'utils.php';
+require_once 'utils.php';
 utils\setup_error_handler();
-require 'http_utils.php';
-require 'bbv_import.php';
-require 'tde_import.php';
-require 'tde_dayimport.php';
+require_once 'http_utils.php';
+require_once 'bbv_import.php';
+require_once 'tde_import.php';
+require_once 'tde_dayimport.php';
 
 if (!isset($_GET['url'])) {
 	throw new \Exception('Missing URL');
