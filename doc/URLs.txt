@@ -72,6 +72,7 @@ dm_style=STYLECODE  In display mode, start with the specified style.
 	2court          Large scores for 2 courts. Supports interval timer.
 	andre           Simple 1-court display, shows game count to the left
 	castall         Greenscreen (all courts)
+	stream          Transparent video overlay
 	greyish         Overview for team competitions with muted gray colors
 	oncourt         court score with teams, not colored, including points in all games
 	onlyplayers     players only
