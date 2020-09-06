@@ -80,13 +80,13 @@ $counting = null;
 
 switch ($verwaltung['Liga']) {
 case 1:
-	$league_key = '1BL-2019';
+	$league_key = '1BL-2020';
 	break;
 case 2:
-	$league_key = '2BLN-2019';
+	$league_key = '2BLN-2020';
 	break;
 case 3:
-	$league_key = '2BLS-2019';
+	$league_key = '2BLS-2020';
 	break;
 case 4:
 	$league_key = 'RLW-2016';

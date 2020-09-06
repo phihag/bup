@@ -188,9 +188,9 @@ function _parse_players(s) {
 
 function _get_league_key(liga_code) {
 	return {
-		'(001) 1. Bundesliga': '1BL-2019',
-		'(002) 2. Bundesliga Nord': '2BLN-2019',
-		'(003) 2. Bundesliga Süd': '2BLS-2019',
+		'(001) 1. Bundesliga': '1BL-2020',
+		'(002) 2. Bundesliga Nord': '2BLN-2020',
+		'(003) 2. Bundesliga Süd': '2BLS-2020',
 		'(001) Regionalliga SüdOst Ost': 'RLSOO-2017',
 		'(001) Regionalliga West': 'RLW-2016',
 		'(001) Regionalliga SüdOst': 'RLSO-2019',
@@ -242,13 +242,13 @@ function _parse_event(doc, now) {
 	} else {
 		// No league key, guess
 		report_problem.silent_error('btde: league key missing');
-		league_key = (doc.fixtures.length === 8) ? 'RLW-2016' : '1BL-2019';
+		league_key = (doc.fixtures.length === 8) ? 'RLW-2016' : '1BL-2020';
 	}
 	var counting = _get_counting(league_key, event_data);
 
 	// Fallback: if everything goes wrong, go for 1BL
 	if (! league_key && (counting == '5x11_15^90')) {
-		league_key = '1BL-2019';
+		league_key = '1BL-2020';
 	}
 
 	var matches = doc.fixtures.map(function(match) {

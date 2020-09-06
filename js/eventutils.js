@@ -300,11 +300,11 @@ function name_by_league(league_key) {
 }
 
 function is_bundesliga(league_key) {
-	return /^(?:1BL|2BLN|2BLS)-(?:2015|2016|2017|2018|2019)$/.test(league_key);
+	return /^(?:1BL|2BLN|2BLS)-/.test(league_key);
 }
 
 function is_5x1190_bundesliga(league_key) {
-	return /^(?:1BL|2BLN|2BLS)-(?:2017|2018|2019)$/.test(league_key);
+	return /^(?:1BL|2BLN|2BLS)-(?:2017|2018|2019|2020)$/.test(league_key);
 }
 
 function is_rlw(league_key) {
@@ -504,20 +504,21 @@ function default_counting(league_key) {
 }
 
 function umpire_pay(league_key) {
-	if (/^1BL-/.test(league_key)) {
-		return { // §3.2 BLO
-			base: 50,
-			per_km: .3,
-			currency: '€',
-		};
-	}
-	if (/^2BL[NS]-/.test(league_key)) {
+	if (/^2BL[NS]-(?:2017|2018|2019)/.test(league_key)) {
 		return { // §3.2 BLO
 			base: 35,
 			per_km: .3,
 			currency: '€',
 		};
 	}
+	if (is_bundesliga(league_key)) {
+		return { // §3.2 BLO
+			base: 50,
+			per_km: .3,
+			currency: '€',
+		};
+	}
+
 	if (/^RLW-/.test(league_key) || NRW2016_RE.test(league_key)) {
 		return { // §1.1 SpO A2
 			base: 25,
@@ -611,6 +612,7 @@ function pronounce_teamname(team_name) {
 		'SC BW Ostenland': 'SC Blau-Weiss Ostenland',
 		'Blau-Weiss Wittorf-NMS': 'Blau-Weiss Wittorf-Neumünster',
 		'1.BC Sbr.-Bischmisheim': '1.BC Saarbrücken-Bischmisheim',
+		'VfB GW Mülheim': 'Grün-Weiß Mülheim',
 	};
 	core_name = table[core_name] || core_name;
 	return core_name + team_num;
