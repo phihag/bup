@@ -95,6 +95,7 @@ var LOGOS = [
 	'unionluedinghausen',
 	'vfbfriedrichshafen',
 	'vfbscpeine',
+	'vfbgwmuelheim',
 	'wittorfneumuenster',
 ];
 var LOGO_ALIASSE = {
@@ -109,6 +110,7 @@ var LOGO_ALIASSE = {
 	'STC BW Solingen': 'stcblauweisssolingen',
 	'SV Berliner Brauereien': 'berlinerbrauereien',
 	'TSV Neuhausen-Nymphenburg': 'tsvneuhausen',
+	'VfB GW Mülheim': 'vfbgwmuelheim',
 	'Union Lüdinghausen': 'unionluedinghausen',
 };
 function team_logo(team_name) {
