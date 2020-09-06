@@ -528,6 +528,7 @@ var i18n_frch = {
 'displaymode|teamscore': 'photo gagnante',
 'displaymode|stripes': 'Bandes',
 'displaymode|stream': 'Stream',
+'displaymode|streamcourt': 'court stream',
 'displaymode:court_id': 'court:',
 'displaymode:court_id:loading': 'chargement ...',
 'displaymode:reverse_order': 'ordre inverse des terrains',
