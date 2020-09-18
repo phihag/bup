@@ -726,6 +726,9 @@ _describe('eventutils', function() {
 		assert.equal(
 			bup.eventutils.pronounce_teamname('Spvgg.Sterkrade-N.'), 'Sportvereinigung Sterkrade-Nord');
 		assert.equal(
+			bup.eventutils.pronounce_teamname('VfB GW Mülheim'),
+			'Grün-Weiß Mülheim');
+		assert.equal(
 			bup.eventutils.pronounce_teamname('TV Refrath'), 'TV Refrath');
 		assert.equal(
 			bup.eventutils.pronounce_teamname('TV Refrath 3'), 'TV Refrath 3');
