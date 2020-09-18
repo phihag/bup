@@ -1,3 +1,24 @@
+courtspot mainz-zahlbach
+	
+	create olswdemo
+
+
+dmodes stream
+	streamcourt should be fullsize
+	bundesliga
+	test with
+		OBS
+		wireshark
+		Air:Solo & friends
+		android version of that
+	-> ChrisK
+
+Ulf move scripts
+Ulf predefault database name
+Ulf more?
+
+btde fix location
+
 stream scale
 
 fix (rlw?) scoresheet scaling!
@@ -6,8 +27,7 @@ bup new onestream
 
 test with Live:Air Solo
 
-courtspot mainz-zahlbach
-
+new buli form
 
 pdf of buli eventsheet check font size in chrome
 
