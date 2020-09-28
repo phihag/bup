@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "node-webcrypto-ossl": "*",
+    "pentf": "^1.4.3",
+    "puppeteer": "^5.3.1",
     "wrtc": "^0.4.1",
     "ws": "*"
   },
@@ -22,10 +24,9 @@
     "clean-css-cli": "*",
     "eslint": "*",
     "istanbul": "*",
+    "jszip": "*",
     "mocha": "*",
     "parse-appcache-manifest": "*",
-    "pentf": "^1.0.63",
-    "puppeteer": "^3.0.4",
     "stylelint": "^13.3.3",
     "stylelint-config-standard": "*",
     "supervisor": "*",
