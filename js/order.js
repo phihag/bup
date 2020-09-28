@@ -240,7 +240,8 @@ function init(s) {
 	ui_render();
 }
 
-function show(enable_edit) {
+function show(options) {
+	var enable_edit = options.enable_edit;
 	var k = enable_edit ? 'mo_visible' : 'order_visible';
 	if (state.ui[k]) {
 		return;
@@ -785,7 +786,7 @@ function ui_init() {
 
 function mshow() {
 	// network is initialized separately
-	show(true);
+	show({enable_edit: true});
 }
 
 return {
