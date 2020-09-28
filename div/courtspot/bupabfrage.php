@@ -100,6 +100,9 @@ case 6:
 case 7:
 	$league_key = 'RLSO-2019';
 	break;
+case 8:
+	$league_key = 'OLSW-2020';
+	break;
 case 9:
 	$league_key = 'NRW-O19-GW-OL-002-2016';
 	break;

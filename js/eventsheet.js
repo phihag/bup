@@ -24,6 +24,8 @@ var SHEETS_BY_LEAGUE = {
 	'RLW-2016': ['RLW-2016', 'receipt', 'NRW-Satzungen'],
 	'RLN-2016': ['RLN-2016', 'receipt', 'RLN-Satzungen'],
 	'RLM-2016': ['RLM-2016', 'receipt', 'RLM-SpO'],
+	'OLSW-2020': ['RLM-2016'],
+	'OLM-2020': ['RLM-2016'],
 	'RLSOO-2017': ['RLSO-2017', 'receipt', 'RLSO-SpO'],
 	'RLSOS-2017': ['RLSO-2017', 'receipt', 'RLSO-SpO'],
 	'RLSO-2019': ['RLSO-2017', 'receipt', 'RLSO-SpO'],

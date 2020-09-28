@@ -1,7 +1,12 @@
 courtspot mainz-zahlbach
-	
 	create olswdemo
 
+Ulf move scripts
+Ulf predefault database name
+
+new buli form
+
+=================
 
 dmodes stream
 	streamcourt should be fullsize
@@ -13,10 +18,6 @@ dmodes stream
 		android version of that
 	-> ChrisK
 
-Ulf move scripts
-Ulf predefault database name
-Ulf more?
-
 btde fix location
 
 stream scale
@@ -27,13 +28,13 @@ bup new onestream
 
 test with Live:Air Solo
 
-new buli form
-
 pdf of buli eventsheet check font size in chrome
 
 cs league RLM (8)
 
 test größte Führung in stats WTF
+----------------
+
 
 Uncaught ReferenceError: court_count is not defined" error
 

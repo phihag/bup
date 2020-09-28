@@ -326,6 +326,8 @@ function preferred_by_league(league_key) {
 			'3.HE',
 		];
 	case 'RLM-2016':
+	case 'OLM-2020':
+	case 'OLSW-2020':
 		// SpO Gruppe Mitte §12c
 		return [
 			'1.HD',

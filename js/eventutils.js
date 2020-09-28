@@ -254,6 +254,12 @@ function name_by_league(league_key) {
 	if (league_key === 'RLSOS-2017') {
 		return 'Regionalliga SüdOst Süd';
 	}
+	if (league_key === 'OLSW-2020') {
+		return 'Oberliga Südwest';
+	}
+	if (league_key === 'OLM-2020') {
+		return 'Oberliga Mitte';
+	}
 
 	if (league_key === 'RLW-2016') {
 		league_key = 'NRW-O19-RL-001-2016';
@@ -359,7 +365,8 @@ function setups_eq(e1, e2) {
 // I this a league with 2 MD, 3 MS, 1 WS, 1 XD, 1 WD, with the typical German regulations for doubles setup?
 function is_german8(league_key) {
 	return NRW2016_RE.test(league_key) || utils.includes([
-		'RLW-2016', 'RLN-2016', 'RLSO-2019', 'RLSOS-2017', 'RLSOO-2017', 'bayern-2018', 'OBL-2017'], league_key);
+		'RLW-2016', 'RLN-2016', 'RLSO-2019', 'RLSOS-2017', 'RLSOO-2017', 'bayern-2018', 'OBL-2017',
+		'OLSW-2020', 'OLM-2020'], league_key);
 }
 
 function get_min_pause(league_key) {
@@ -499,6 +506,9 @@ function default_counting(league_key) {
 		return '3x21';
 	}
 	if (/^RLSO[SO]-2017|RLSO-2019$/.test(league_key)) {
+		return '3x21';
+	}
+	if (/^(?:OLM|OLSW)-2020/.test(league_key)) {
 		return '3x21';
 	}
 }
