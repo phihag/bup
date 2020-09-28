@@ -3,7 +3,9 @@
 set_error_handler('json_error_handler');
 
 include '../../DB_connection.php';
-$db = @mysqli_connect($DB_adress, $DB_name, $DB_pass, 'CourtSpot', $DB_port);
+
+$COURTSPOT_DB = isset($CS_name) ? $CS_name : 'CourtSpot';
+$db = @mysqli_connect($DB_adress, $DB_name, $DB_pass, $COURTSPOT_DB, $DB_port);
 if (!$db) {
     jsonErr('Verbindungsfehler: ' . mysqli_connect_error());
 }

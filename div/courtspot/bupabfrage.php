@@ -7,7 +7,9 @@ $config_fn = $COURTSPOT_ROOT . 'DB_connection.php';
 if (!@include($config_fn)) {
 	jsonErr('CourtSpot-Datenbankkonfiguration kann nicht geladen werden von ' . $config_fn);
 }
-$db = @mysqli_connect($DB_adress, $DB_name, $DB_pass, 'CourtSpot', $DB_port);
+
+$COURTSPOT_DB = isset($CS_name) ? $CS_name : 'CourtSpot';
+$db = @mysqli_connect($DB_adress, $DB_name, $DB_pass, $COURTSPOT_DB, $DB_port);
 if (!$db) {
 	jsonErr('Verbindungsfehler: ' . mysqli_connect_error());
 }
