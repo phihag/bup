@@ -17,9 +17,9 @@ var SHEETS_BY_LEAGUE = {
 	'1BL-2019': ['1BL-2017_pdf', '1BL-2016', 'buli2019-minsr', 'buli2019-minv', 'receipt', 'DBV-Satzungen-2019'],
 	'2BLN-2019': ['2BLN-2017_pdf', '2BLN-2016', 'buli2019-minsr', 'buli2019-minv', 'receipt', 'DBV-Satzungen-2019'],
 	'2BLS-2019': ['2BLS-2017_pdf', '2BLS-2016', 'buli2019-minsr', 'buli2019-minv', 'receipt', 'DBV-Satzungen-2019'],
-	'1BL-2020': ['1BL-2017_pdf', '1BL-2016', 'buli2019-minsr', 'buli2019-minv', 'receipt'],
-	'2BLN-2020': ['2BLN-2017_pdf', '2BLN-2016', 'buli2019-minsr', 'buli2019-minv', 'receipt'],
-	'2BLS-2020': ['2BLS-2017_pdf', '2BLS-2016', 'buli2019-minsr', 'buli2019-minv', 'receipt'],
+	'1BL-2020': ['1BL-2017_pdf', '1BL-2016', 'buli2020-minsr', 'buli2019-minv', 'receipt'],
+	'2BLN-2020': ['2BLN-2017_pdf', '2BLN-2016', 'buli2020-minsr', 'buli2019-minv', 'receipt'],
+	'2BLS-2020': ['2BLS-2017_pdf', '2BLS-2016', 'buli2020-minsr', 'buli2019-minv', 'receipt'],
 	'NRW-2016': ['NRW-2016', 'NRW-Satzungen'],
 	'RLW-2016': ['RLW-2016', 'receipt', 'NRW-Satzungen'],
 	'RLN-2016': ['RLN-2016', 'receipt', 'RLN-Satzungen'],
@@ -68,6 +68,7 @@ var URLS = {
 	'buli2018-minv': 'div/eventsheet/buli2018_mindestanforderungen_verein.svg',
 	'buli2019-minsr': 'div/eventsheet/buli2019_mindestanforderungen_schiedsrichter.svg',
 	'buli2019-minv': 'div/eventsheet/buli2019_mindestanforderungen_verein.svg',
+	'buli2020-minsr': 'div/eventsheet/buli2020_mindestanforderungen_schiedsrichter.svg',
 	'OBL-2017': 'div/eventsheet_obl.xlsx',
 	'receipt': 'div/receipt.svg',
 	'int': 'div/eventsheet_international.svg',
@@ -94,6 +95,7 @@ var NO_DIALOG = {
 	'buli2018-minv': true,
 	'buli2019-minsr': true,
 	'buli2019-minv': true,
+	'buli2020-minsr': true,
 	'NLA-2017': true,
 	'NLA-2019': true,
 };
@@ -1983,6 +1985,7 @@ function render_previewable(preview_el, ev, es_key, ui8r, extra_data, extra_file
 	case 'buli2018-minv':
 	case 'buli2019-minsr':
 	case 'buli2019-minv':
+	case 'buli2020-minsr':
 		return render_buli_minreq_svg(preview_el, ev, es_key, ui8r);
 	case 'int':
 		return render_int(preview_el, ev, es_key, ui8r, extra_data);
