@@ -379,7 +379,7 @@ function get_min_pause(league_key) {
 	if (league_key === 'RLN-2016') {
 		return 20 * 60000; // §7.7 Gruppe Nord
 	}
-	if (league_key === 'RLM-2016') {
+	if ((league_key === 'RLM-2016') || /^(?:OLM|OLSW)-2020$/.test(league_key)) {
 		return 20 * 60000; // Not specified, but chosen in practice
 	}
 	if (league_key === 'NLA-2017') {

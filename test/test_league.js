@@ -208,6 +208,7 @@ _describe('eventutils', function() {
 	_it('Oberliga Mitte / Oberliga Südwest', () => {
 		assert.strictEqual(bup.eventutils.name_by_league('OLM-2020'), 'Oberliga Mitte');
 		assert.strictEqual(bup.eventutils.name_by_league('OLSW-2020'), 'Oberliga Südwest');
+		assert.deepStrictEqual(bup.eventutils.get_min_pause('OLSW-2020'), 20 * 60000);
 		assert.deepStrictEqual(bup.eventutils.default_counting('OLSW-2020'), '3x21');
 		assert.deepStrictEqual(bup.eventutils.default_counting('OLM-2020'), '3x21');
 		assert.deepStrictEqual(bup.order.preferred_by_league('OLSW-2020'), [
