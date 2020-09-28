@@ -293,7 +293,7 @@ function _calc_setup_data(event) {
 function on_edit_event(s, cb) {
 	var data = _calc_setup_data(s.event);
 	_request(s, 'courtspot.editevent', {
-		url: baseurl + 'php/bupaufstellung.php',
+		url: baseurl + 'bup/div/courtspot/bupaufstellung.php',
 		data: JSON.stringify(data),
 		method: 'post',
 		dataType: 'text',
@@ -341,7 +341,7 @@ function save_order(s, matches, cb) {
 	});
 
 	_request(s, 'order', {
-		url: baseurl + 'php/bupreihenfolge.php',
+		url: baseurl + 'bup/div/courtspot/bupreihenfolge.php',
 		data: JSON.stringify(order_list),
 		method: 'post',
 		dataType: 'text',
