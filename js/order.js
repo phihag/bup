@@ -241,6 +241,7 @@ function init(s) {
 }
 
 function show(options) {
+	options = options || {};
 	var enable_edit = options.enable_edit;
 	var k = enable_edit ? 'mo_visible' : 'order_visible';
 	if (state.ui[k]) {
