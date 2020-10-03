@@ -68,6 +68,7 @@ var LOGOS = [
 	'bvmaintal',
 	'bvmuelheim',
 	'bvrwwesel',
+	'cfbkoeln',
 	'djkteutsttnis',
 	'ebtberlin',
 	'fclangenfeld',
