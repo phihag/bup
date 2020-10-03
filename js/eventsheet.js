@@ -17,9 +17,9 @@ var SHEETS_BY_LEAGUE = {
 	'1BL-2019': ['1BL-2017_pdf', '1BL-2016', 'buli2019-minsr', 'buli2019-minv', 'receipt', 'DBV-Satzungen-2019'],
 	'2BLN-2019': ['2BLN-2017_pdf', '2BLN-2016', 'buli2019-minsr', 'buli2019-minv', 'receipt', 'DBV-Satzungen-2019'],
 	'2BLS-2019': ['2BLS-2017_pdf', '2BLS-2016', 'buli2019-minsr', 'buli2019-minv', 'receipt', 'DBV-Satzungen-2019'],
-	'1BL-2020': ['1BL-2017_pdf', '1BL-2016', 'receipt'],
-	'2BLN-2020': ['2BLN-2017_pdf', '2BLN-2016', 'receipt'],
-	'2BLS-2020': ['2BLS-2017_pdf', '2BLS-2016', 'receipt'],
+	'1BL-2020': ['1BL-2017_pdf', '1BL-2016', '1BL-minreqs-2020', 'receipt'],
+	'2BLN-2020': ['2BLN-2017_pdf', '2BLN-2016', '2BL-minreqs-2020', 'receipt'],
+	'2BLS-2020': ['2BLS-2017_pdf', '2BLS-2016', '2BL-minreqs-2020', 'receipt'],
 	'NRW-2016': ['NRW-2016', 'NRW-Satzungen'],
 	'RLW-2016': ['RLW-2016', 'receipt', 'NRW-Satzungen'],
 	'RLN-2016': ['RLN-2016', 'receipt', 'RLN-Satzungen'],
@@ -68,6 +68,8 @@ var URLS = {
 	'buli2018-minv': 'div/eventsheet/buli2018_mindestanforderungen_verein.svg',
 	'buli2019-minsr': 'div/eventsheet/buli2019_mindestanforderungen_schiedsrichter.svg',
 	'buli2019-minv': 'div/eventsheet/buli2019_mindestanforderungen_verein.svg',
+	'1BL-minreqs-2020': 'div/eventsheet/1BL-minreqs-2020.xlsx',
+	'2BL-minreqs-2020': 'div/eventsheet/2BL-minreqs-2020.xlsx',
 	'OBL-2017': 'div/eventsheet_obl.xlsx',
 	'receipt': 'div/receipt.svg',
 	'int': 'div/eventsheet_international.svg',
@@ -77,6 +79,10 @@ var URLS = {
 };
 var DIRECT_DOWNLOAD_SHEETS = {
 	'BL-ballsorten-2016': true,
+};
+var GENERATED_DOWNLOAD = {
+	'1BL-minreqs-2020': true,
+	'2BL-minreqs-2020': true,
 };
 var EXTERNAL_DOWNLOAD_SHEETS = {
 	'DBV-Satzungen-2017': true,
@@ -1802,6 +1808,28 @@ function save_obl(ev, es_key, ui8r, extra_data) {
 	});
 }
 
+function save_buli2020_minreq(ev, es_key, ui8r, extra_data) {
+	var last_update = calc_last_update(ev.matches);
+	var today = last_update ? new Date(last_update) : new Date();
+
+	xlsx.open(ui8r, function(xlsx_file) {
+		xlsx_file.modify_sheet('1', function() {
+			xlsx_file.modify_sheet('2', function() {
+				var fn = utils.iso8601(today) + ' ' + ev.event_name + ' Mindestanforderungen.xlsx';
+				xlsx_file.save(fn);
+			}, function(sheet) {
+				sheet.val('D3', ev.team_names[0]);
+				sheet.val('F3', ev.team_names[1]);
+				sheet.val('H3', utils.date_str(today));
+			});
+		}, function(sheet) {
+			sheet.val('D3', ev.team_names[0]);
+			sheet.val('F3', ev.team_names[1]);
+			sheet.val('H3', utils.date_str(today));
+		});
+	});
+}
+
 function save_rlso2017(ev, es_key, ui8r, extra_data) {
 	eventutils.set_metadata(ev);
 	var last_update = calc_last_update(ev.matches) || ev.last_update;
@@ -1938,6 +1966,9 @@ function es_render(ev, es_key, ui8r, extra_data, extra_files) {
 	case '2BLN-2016':
 	case '2BLS-2016':
 		return save_bundesliga2016(ev, es_key, ui8r, extra_data);
+	case '1BL-minreqs-2020':
+	case '2BL-minreqs-2020':
+		return save_buli2020_minreq(ev, es_key, ui8r, extra_data);
 	case 'OBL-2017':
 		return save_obl(ev, es_key, ui8r, extra_data);
 	case 'RLSO-2017':
@@ -2110,7 +2141,9 @@ function render_links(s, container) {
 				'data-i18n': i18n_key,
 			}, s._(i18n_key));
 			click.on(link, function() {
-				if (NO_DIALOG[es_key]) {
+				if (GENERATED_DOWNLOAD[es_key]) {
+					prepare_render(link, es_key, {});
+				} else if (NO_DIALOG[es_key]) {
 					show_preview(es_key);
 				} else {
 					show_dialog(es_key);

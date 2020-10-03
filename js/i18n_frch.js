@@ -373,6 +373,8 @@ var i18n_frch = {
 'eventsheet:label|buli2019-minv': 'Exigences minimales pour le club',
 'eventsheet:label|buli2020-minsr': 'Exigence minimale pour les arbitres',
 'eventsheet:label|buli2020-minv': 'Exigences minimales pour le club',
+'eventsheet:label|1BL-minreqs-2020': 'Exigences minimales',
+'eventsheet:label|2BL-minreqs-2020': 'Exigences minimales',
 'eventsheet:label|BL-ballsorten-2016': '(Bundesliga) liste des volants approuvées (2016)',
 'eventsheet:label|DBV-Satzungen-2016': '(Allemagne) Lois et règlements 2016/2017',
 'eventsheet:label|DBV-Satzungen-2017': '(Allemagne) Lois et règlements 2017/2018',

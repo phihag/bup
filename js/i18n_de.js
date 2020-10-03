@@ -377,6 +377,8 @@ var i18n_de = {
 'eventsheet:label|buli2019-minv': 'Mindestanforderungen Verein',
 'eventsheet:label|buli2020-minsr': 'Mindestanforderungen Schiedsrichter',
 'eventsheet:label|buli2020-minv': 'Mindestanforderungen Verein',
+'eventsheet:label|1BL-minreqs-2020': 'Mindestanforderungen',
+'eventsheet:label|2BL-minreqs-2020': 'Mindestanforderungen',
 'eventsheet:label|BL-ballsorten-2016': 'Zugelassene Bälle',
 'eventsheet:label|DBV-Satzungen-2016': 'Regeln DBV 2016/2017',
 'eventsheet:label|DBV-Satzungen-2017': 'Regeln DBV 2017/2018',

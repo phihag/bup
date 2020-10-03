@@ -376,6 +376,8 @@ var i18n_en = {
 'eventsheet:label|buli2019-minv': 'minimum requirements form for clubs',
 'eventsheet:label|buli2020-minsr': 'minimum requirements form for umpires',
 'eventsheet:label|buli2020-minv': 'minimum requirements form for clubs',
+'eventsheet:label|1BL-minreqs-2020': 'minimum requirements form',
+'eventsheet:label|2BL-minreqs-2020': 'minimum requirements form',
 'eventsheet:label|BL-ballsorten-2016': '(German 1./2. Bundesliga) list of approved shuttles (2016)',
 'eventsheet:label|DBV-Satzungen-2016': 'German Laws&Regulations 2016/2017',
 'eventsheet:label|DBV-Satzungen-2017': 'German Laws&Regulations 2017/2018',
