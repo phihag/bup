@@ -164,6 +164,7 @@ function _list_render_player_names(container, players, winning) {
 	var span = uiu.el(
 		div, 'span', {
 			'class': (winning ? 'display_list_winning' : ''),
+			'style': (winning ? '' : 'color: #ddd;'),
 		}, names_str
 	);
 	_setup_autosize(span);
@@ -844,10 +845,12 @@ function render_html_list(container, event) {
 	});
 	uiu.el(match_score_el, 'span', {
 		'class': (home_winning ? 'display_list_winning' : ''),
+		'style': (home_winning ? '' : 'color: #ddd;'),
 	}, match_score[0]);
 	uiu.el(match_score_el, 'span', {'class': 'display_list_vs'}, ' : ');
 	uiu.el(match_score_el, 'span', {
 		'class': (away_winning ? 'display_list_winning' : ''),
+		'style': (away_winning ? '' : 'color: #ddd;'),
 	}, match_score[1]);
 
 	// Now that we're done with initializing the first row, actually call autosizing
@@ -883,12 +886,14 @@ function render_html_list(container, event) {
 			var gwinner = calc.game_winner(m.setup.counting, game_idx, nscore[0], nscore[1]);
 			uiu.el(score_td, 'span', {
 				'class': ((gwinner === 'left') ? 'display_list_winning' : ''),
+				'style': ((gwinner === 'left') ? '' : 'color:#ddd;'),
 			}, nscore[0]);
 			uiu.el(score_td, 'span', {
 				'class': 'display_list_vs',
 			}, ':');
 			uiu.el(score_td, 'span', {
 				'class': ((gwinner === 'right') ? 'display_list_winning' : ''),
+				'style': ((gwinner === 'right') ? '' : 'color:#ddd;'),
 			}, nscore[1]);
 		}
 	});
