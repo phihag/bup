@@ -1,3 +1,13 @@
+pronounce remove gewonnen mit
+
+courtspot: should not show HD1/DD initially
+
+name colors?
+
+BVM fix logo
+
+dmode update top+list colors configurable
+
 fix reveal.js download
 
 error in xlsx: use proper promises!
@@ -28,24 +38,16 @@ test with Live:Air Solo
 
 pdf of buli eventsheet check font size in chrome
 
-cs league RLM (8)
-
 test größte Führung in stats WTF
-----------------
-
 
 Uncaught ReferenceError: court_count is not defined" error
 
-fix order showing crap (should only be visible for &to)
-
 make tests green
 
-buli 2020 (forms, code, courtspot, btde etc.)
-
 update docs ticker
+----------------
 
 stream test court1/court2
-
 
 allow URL parameter for scale
 
