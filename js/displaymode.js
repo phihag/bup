@@ -2014,7 +2014,10 @@ function render_onlyplayers(s, container, event, court, match, colors) {
 				style: (
 					'width:20%;height:100%;float:left;margin-right:4vw;' +
 					(logo_urls[team_id] ?
-					'background: no-repeat url("' + logo_urls[team_id] + '") center center;' :
+						('background-repeat: no-repeat;' +
+						 'background-image:url("' + logo_urls[team_id] + '");' +
+						 'background-position:center; background-size: contain;'
+						) :
 					''
 					)
 				),
