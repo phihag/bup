@@ -1115,7 +1115,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der erste Satz wurde gewonnen von Bob mit 23-21');
+			'Der erste Satz wurde gewonnen von Bob 23-21');
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'First game won by Bob 23-21');
@@ -1126,7 +1126,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der erste Satz wurde gewonnen von Bob und Birgit mit 23-21');
+			'Der erste Satz wurde gewonnen von Bob und Birgit 23-21');
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'First game won by Bob and Birgit 23-21');
@@ -1134,7 +1134,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, SINGLES_TEAM_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der erste Satz wurde gewonnen von B team mit 23-21');
+			'Der erste Satz wurde gewonnen von B team 23-21');
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'First game won by B team 23-21');
@@ -1142,7 +1142,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_TEAM_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der erste Satz wurde gewonnen von B team mit 23-21');
+			'Der erste Satz wurde gewonnen von B team 23-21');
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'First game won by B team 23-21');
@@ -1314,7 +1314,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, SINGLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Bob mit 23-21 30-29');
+			'Das Spiel wurde gewonnen von Bob 23-21 30-29');
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'Match won by Bob 23-21 30-29');
@@ -1342,7 +1342,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, SINGLES_TEAM_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der zweite Satz wurde gewonnen von A team mit 30-29; einen Satz beide');
+			'Der zweite Satz wurde gewonnen von A team 30-29; einen Satz beide');
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'Second game won by A team 30-29; One game all');
@@ -1352,21 +1352,21 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_TEAM_SETUP);
 		assert.equal(pronounce_de(s), 
 			'Satz.\n\n' +
-			'Der zweite Satz wurde gewonnen von A team mit 30-29; einen Satz beide');
+			'Der zweite Satz wurde gewonnen von A team 30-29; einen Satz beide');
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'Second game won by A team 30-29; One game all');
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der zweite Satz wurde gewonnen von Alice mit 30-29; einen Satz beide');
+			'Der zweite Satz wurde gewonnen von Alice 30-29; einen Satz beide');
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'Second game won by Alice 30-29; One game all');
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s), 
 			'Satz.\n\n' +
-			'Der zweite Satz wurde gewonnen von Andrew und Alice mit 30-29; einen Satz beide');
+			'Der zweite Satz wurde gewonnen von Andrew und Alice 30-29; einen Satz beide');
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'Second game won by Andrew and Alice 30-29; One game all');
@@ -1493,7 +1493,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, DOUBLES_TEAM_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von B team mit 23-21 29-30 22-20');
+			'Das Spiel wurde gewonnen von B team 23-21 29-30 22-20');
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'Match won by B team 23-21 29-30 22-20');
@@ -1503,21 +1503,21 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, SINGLES_TEAM_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von B team mit 23-21 29-30 22-20');
+			'Das Spiel wurde gewonnen von B team 23-21 29-30 22-20');
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'Match won by B team 23-21 29-30 22-20');
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Bob und Birgit mit 23-21 29-30 22-20');
+			'Das Spiel wurde gewonnen von Bob und Birgit 23-21 29-30 22-20');
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'Match won by Bob and Birgit 23-21 29-30 22-20');
 		s = state_after(alt_presses, SINGLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Bob mit 23-21 29-30 22-20');
+			'Das Spiel wurde gewonnen von Bob 23-21 29-30 22-20');
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'Match won by Bob 23-21 29-30 22-20');
@@ -1529,19 +1529,19 @@ _describe('pronunciation', function() {
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Alice mit 21-23 30-29 21-19');
+			'Das Spiel wurde gewonnen von Alice 21-23 30-29 21-19');
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Andrew und Alice mit 21-23 30-29 21-19');
+			'Das Spiel wurde gewonnen von Andrew und Alice 21-23 30-29 21-19');
 		s = state_after(presses, SINGLES_TEAM_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von A team mit 21-23 30-29 21-19');
+			'Das Spiel wurde gewonnen von A team 21-23 30-29 21-19');
 		s = state_after(presses, DOUBLES_TEAM_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von A team mit 21-23 30-29 21-19');
+			'Das Spiel wurde gewonnen von A team 21-23 30-29 21-19');
 	});
 
 	_it('cards basics', function() {
@@ -1679,7 +1679,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Bob, disqualifiziert wegen unsportlichen Verhaltens.\n\n' +
-			'Das Spiel wurde gewonnen von Andrew und Alice mit 4-4');
+			'Das Spiel wurde gewonnen von Andrew und Alice 4-4');
 		assert.equal(pronounce_en(s),
 			'Bob, disqualified for misconduct.\n\n' +
 			'Match won by Andrew and Alice 4-4');
@@ -1693,7 +1693,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_TEAM_SETUP);
 		assert.equal(pronounce_de(s),
 			'Bob, disqualifiziert wegen unsportlichen Verhaltens.\n\n' +
-			'Das Spiel wurde gewonnen von A team mit 4-4');
+			'Das Spiel wurde gewonnen von A team 4-4');
 		assert.equal(pronounce_en(s),
 			'Bob, disqualified for misconduct.\n\n' +
 			'Match won by A team 4-4');
@@ -1904,7 +1904,7 @@ _describe('pronunciation', function() {
 			'Satz.\n' +
 			'Birgit, Fehler wegen unsportlichen Verhaltens.\n' +
 			'\n' +
-			'Der erste Satz wurde gewonnen von Andrew und Alice mit 21-19');
+			'Der erste Satz wurde gewonnen von Andrew und Alice 21-19');
 
 		presses.push({
 			type: 'postgame-confirm',
@@ -1975,7 +1975,7 @@ _describe('pronunciation', function() {
 			'Satz.\n' +
 			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
 			'\n' +
-			'Der zweite Satz wurde gewonnen von Bob und Birgit mit 21-19; einen Satz beide');
+			'Der zweite Satz wurde gewonnen von Bob und Birgit 21-19; einen Satz beide');
 		assert.deepEqual(s.game.score, [19, 21]);
 
 		presses.push({
@@ -2060,7 +2060,7 @@ _describe('pronunciation', function() {
 		assert.deepEqual(s.game.score, [21, 12]);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Andrew und Alice mit 21-19 19-21 21-12'
+			'Das Spiel wurde gewonnen von Andrew und Alice 21-19 19-21 21-12'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -2084,7 +2084,7 @@ _describe('pronunciation', function() {
 			'Satz.\n' +
 			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
 			'\n' +
-			'Das Spiel wurde gewonnen von Andrew und Alice mit 21-19 19-21 21-12'
+			'Das Spiel wurde gewonnen von Andrew und Alice 21-19 19-21 21-12'
 		);
 
 		presses.push({
@@ -2104,7 +2104,7 @@ _describe('pronunciation', function() {
 			'Satz.\n' +
 			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Alice, Fehler wegen unsportlichen Verhaltens.\n\n' +
-			'Das Spiel wurde gewonnen von Andrew und Alice mit 21-19 19-21 21-12'
+			'Das Spiel wurde gewonnen von Andrew und Alice 21-19 19-21 21-12'
 		);
 	});
 
@@ -2147,7 +2147,7 @@ _describe('pronunciation', function() {
 			'Satz.\n' +
 			'Andrew, Fehler wegen unsportlichen Verhaltens.\n' +
 			'\n' +
-			'Der erste Satz wurde gewonnen von Andrew und Alice mit 21-19');
+			'Der erste Satz wurde gewonnen von Andrew und Alice 21-19');
 
 		presses.push({
 			type: 'postgame-confirm',
@@ -2217,7 +2217,7 @@ _describe('pronunciation', function() {
 		var s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Bob hat aufgegeben.\n\n' +
-			'Das Spiel wurde gewonnen von Andrew und Alice mit 0-0');
+			'Das Spiel wurde gewonnen von Andrew und Alice 0-0');
 		assert.equal(pronounce_en(s),
 			'Bob retired.\n\n' +
 			'Match won by Andrew and Alice 0-0');
@@ -2232,7 +2232,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, DOUBLES_TEAM_SETUP);
 		assert.equal(pronounce_de(s),
 			'Alice hat aufgegeben.\n\n' +
-			'Das Spiel wurde gewonnen von B team mit 2-3');
+			'Das Spiel wurde gewonnen von B team 2-3');
 		assert.equal(pronounce_en(s),
 			'Alice retired.\n\n' +
 			'Match won by B team 2-3');
@@ -2264,7 +2264,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Andrew hat aufgegeben.\n\n' +
-			'Das Spiel wurde gewonnen von Bob und Birgit mit 19-21 2-2');
+			'Das Spiel wurde gewonnen von Bob und Birgit 19-21 2-2');
 		assert.equal(pronounce_en(s),
 			'Andrew retired.\n\n' +
 			'Match won by Bob and Birgit 19-21 2-2');
@@ -2281,7 +2281,7 @@ _describe('pronunciation', function() {
 		var s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Bob hat aufgegeben.\n\n' +
-			'Das Spiel wurde gewonnen von Andrew und Alice mit 0-0');
+			'Das Spiel wurde gewonnen von Andrew und Alice 0-0');
 		assert.equal(pronounce_en(s),
 			'Bob retired.\n\n' +
 			'Match won by Andrew and Alice 0-0');
@@ -2299,7 +2299,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Andrew hat aufgegeben.\n\n' +
-			'Das Spiel wurde gewonnen von Bob und Birgit mit 0-0');
+			'Das Spiel wurde gewonnen von Bob und Birgit 0-0');
 		assert.equal(pronounce_en(s),
 			'Andrew retired.\n\n' +
 			'Match won by Bob and Birgit 0-0');
@@ -2318,7 +2318,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Birgit hat aufgegeben.\n\n' +
-			'Das Spiel wurde gewonnen von Andrew und Alice mit 0-0');
+			'Das Spiel wurde gewonnen von Andrew und Alice 0-0');
 		assert.equal(pronounce_en(s),
 			'Birgit retired.\n\n' +
 			'Match won by Andrew and Alice 0-0');
@@ -2337,7 +2337,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Alice hat aufgegeben.\n\n' +
-			'Das Spiel wurde gewonnen von Bob und Birgit mit 0-0');
+			'Das Spiel wurde gewonnen von Bob und Birgit 0-0');
 		assert.equal(pronounce_en(s),
 			'Alice retired.\n\n' +
 			'Match won by Bob and Birgit 0-0');
@@ -2354,7 +2354,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Andrew hat aufgegeben.\n\n' +
-			'Das Spiel wurde gewonnen von Bob und Birgit mit 0-0');
+			'Das Spiel wurde gewonnen von Bob und Birgit 0-0');
 		assert.equal(pronounce_en(s),
 			'Andrew retired.\n\n' +
 			'Match won by Bob and Birgit 0-0');
@@ -2369,7 +2369,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Andrew hat aufgegeben.\n\n' +
-			'Das Spiel wurde gewonnen von Bob und Birgit mit 19-21');
+			'Das Spiel wurde gewonnen von Bob und Birgit 19-21');
 		assert.equal(pronounce_en(s),
 			'Andrew retired.\n\n' +
 			'Match won by Bob and Birgit 19-21');
@@ -2386,7 +2386,7 @@ _describe('pronunciation', function() {
 		var s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Bob, disqualifiziert wegen unsportlichen Verhaltens.\n\n' +
-			'Das Spiel wurde gewonnen von Andrew und Alice mit 0-0');
+			'Das Spiel wurde gewonnen von Andrew und Alice 0-0');
 		assert.equal(pronounce_en(s),
 			'Bob, disqualified for misconduct.\n\n' +
 			'Match won by Andrew and Alice 0-0');
@@ -2404,7 +2404,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Andrew, disqualifiziert wegen unsportlichen Verhaltens.\n\n' +
-			'Das Spiel wurde gewonnen von Bob und Birgit mit 0-0');
+			'Das Spiel wurde gewonnen von Bob und Birgit 0-0');
 		assert.equal(pronounce_en(s),
 			'Andrew, disqualified for misconduct.\n\n' +
 			'Match won by Bob and Birgit 0-0');
@@ -2423,7 +2423,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Birgit, disqualifiziert wegen unsportlichen Verhaltens.\n\n' +
-			'Das Spiel wurde gewonnen von Andrew und Alice mit 0-0');
+			'Das Spiel wurde gewonnen von Andrew und Alice 0-0');
 		assert.equal(pronounce_en(s),
 			'Birgit, disqualified for misconduct.\n\n' +
 			'Match won by Andrew and Alice 0-0');
@@ -2442,7 +2442,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Alice, disqualifiziert wegen unsportlichen Verhaltens.\n\n' +
-			'Das Spiel wurde gewonnen von Bob und Birgit mit 0-0');
+			'Das Spiel wurde gewonnen von Bob und Birgit 0-0');
 		assert.equal(pronounce_en(s),
 			'Alice, disqualified for misconduct.\n\n' +
 			'Match won by Bob and Birgit 0-0');
@@ -2459,7 +2459,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Andrew, disqualifiziert wegen unsportlichen Verhaltens.\n\n' +
-			'Das Spiel wurde gewonnen von Bob und Birgit mit 0-0');
+			'Das Spiel wurde gewonnen von Bob und Birgit 0-0');
 		assert.equal(pronounce_en(s),
 			'Andrew, disqualified for misconduct.\n\n' +
 			'Match won by Bob and Birgit 0-0');
@@ -2474,7 +2474,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Andrew, disqualifiziert wegen unsportlichen Verhaltens.\n\n' +
-			'Das Spiel wurde gewonnen von Bob und Birgit mit 19-21');
+			'Das Spiel wurde gewonnen von Bob und Birgit 19-21');
 		assert.equal(pronounce_en(s),
 			'Andrew, disqualified for misconduct.\n\n' +
 			'Match won by Bob and Birgit 19-21');
@@ -2808,7 +2808,7 @@ _describe('pronunciation', function() {
 		assert.equal(pronounce_de(s),
 			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Satz.\n\n' +
-			'Der erste Satz wurde gewonnen von Alice mit 21-16');
+			'Der erste Satz wurde gewonnen von Alice 21-16');
 		assert.equal(pronounce_en(s),
 			'Bob, fault for misconduct.\n' +
 			'Game.\n\n' +
@@ -2828,7 +2828,7 @@ _describe('pronunciation', function() {
 		assert.equal(pronounce_de(s),
 			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Satz.\n\n' +
-			'Der erste Satz wurde gewonnen von Alice mit 21-16');
+			'Der erste Satz wurde gewonnen von Alice 21-16');
 		assert.equal(pronounce_en(s),
 			'Bob, fault for misconduct.\n' +
 			'Game.\n\n' +
@@ -2853,7 +2853,7 @@ _describe('pronunciation', function() {
 			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Satz.\n' +
 			'Alice, Fehler wegen unsportlichen Verhaltens.\n\n' +
-			'Der erste Satz wurde gewonnen von Alice mit 21-16');
+			'Der erste Satz wurde gewonnen von Alice 21-16');
 		assert.equal(pronounce_en(s),
 			'Bob, fault for misconduct.\n' +
 			'Game.\n' +
@@ -2907,7 +2907,7 @@ _describe('pronunciation', function() {
 		assert.equal(pronounce_de(s),
 			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Alice mit 21-23 30-29 21-16');
+			'Das Spiel wurde gewonnen von Alice 21-23 30-29 21-16');
 		assert.equal(pronounce_en(s),
 			'Bob, fault for misconduct.\n' +
 			'Game.\n\n' +
@@ -2930,7 +2930,7 @@ _describe('pronunciation', function() {
 			'Bob, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Satz.\n' +
 			'Alice, Verwarnung wegen unsportlichen Verhaltens.\n\n' +
-			'Das Spiel wurde gewonnen von Alice mit 21-23 30-29 21-16');
+			'Das Spiel wurde gewonnen von Alice 21-23 30-29 21-16');
 		assert.equal(pronounce_en(s),
 			'Bob, fault for misconduct.\n' +
 			'Game.\n' +
@@ -2952,7 +2952,7 @@ _describe('pronunciation', function() {
 			'Alice, Verwarnung wegen unsportlichen Verhaltens.\n' +
 			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
 			'\n' +
-			'Das Spiel wurde gewonnen von Alice mit 21-23 30-29 21-16');
+			'Das Spiel wurde gewonnen von Alice 21-23 30-29 21-16');
 		assert.equal(pronounce_en(s),
 			'Bob, fault for misconduct.\n' +
 			'Game.\n' +
@@ -3190,7 +3190,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, SINGLES_SETUP);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der erste Satz wurde gewonnen von Alice mit 21-0');
+			'Der erste Satz wurde gewonnen von Alice 21-0');
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
 			'First game won by Alice 21-0');
@@ -3238,7 +3238,7 @@ _describe('pronunciation', function() {
 		var s = state_after(presses, SINGLES_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der erste Satz wurde gewonnen von Alice mit 11-1'
+			'Der erste Satz wurde gewonnen von Alice 11-1'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3247,7 +3247,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der erste Satz wurde gewonnen von Andrew und Alice mit 11-1'
+			'Der erste Satz wurde gewonnen von Andrew und Alice 11-1'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3256,7 +3256,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, SINGLES_TEAM_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der erste Satz wurde gewonnen von A team mit 11-1'
+			'Der erste Satz wurde gewonnen von A team 11-1'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3265,7 +3265,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_TEAM_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der erste Satz wurde gewonnen von A team mit 11-1'
+			'Der erste Satz wurde gewonnen von A team 11-1'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3301,7 +3301,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, SINGLES_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der zweite Satz wurde gewonnen von Bob mit 11-2; einen Satz beide'
+			'Der zweite Satz wurde gewonnen von Bob 11-2; einen Satz beide'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3310,7 +3310,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, DOUBLES_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der zweite Satz wurde gewonnen von Bob und Birgit mit 11-2; einen Satz beide'
+			'Der zweite Satz wurde gewonnen von Bob und Birgit 11-2; einen Satz beide'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3319,7 +3319,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, SINGLES_TEAM_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der zweite Satz wurde gewonnen von B team mit 11-2; einen Satz beide'
+			'Der zweite Satz wurde gewonnen von B team 11-2; einen Satz beide'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3328,7 +3328,7 @@ _describe('pronunciation', function() {
 		s = state_after(alt_presses, DOUBLES_TEAM_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der zweite Satz wurde gewonnen von B team mit 11-2; einen Satz beide'
+			'Der zweite Satz wurde gewonnen von B team 11-2; einen Satz beide'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3339,7 +3339,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, SINGLES_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der zweite Satz wurde gewonnen von Alice mit 11-3. Alice führt mit 2:0 Sätzen'
+			'Der zweite Satz wurde gewonnen von Alice 11-3. Alice führt mit 2:0 Sätzen'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3348,7 +3348,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der zweite Satz wurde gewonnen von Andrew und Alice mit 11-3. Andrew und Alice führen mit 2:0 Sätzen'
+			'Der zweite Satz wurde gewonnen von Andrew und Alice 11-3. Andrew und Alice führen mit 2:0 Sätzen'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3357,7 +3357,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, SINGLES_TEAM_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der zweite Satz wurde gewonnen von A team mit 11-3. A team führt mit 2:0 Sätzen'
+			'Der zweite Satz wurde gewonnen von A team 11-3. A team führt mit 2:0 Sätzen'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3366,7 +3366,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_TEAM_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der zweite Satz wurde gewonnen von A team mit 11-3. A team führt mit 2:0 Sätzen'
+			'Der zweite Satz wurde gewonnen von A team 11-3. A team führt mit 2:0 Sätzen'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3401,7 +3401,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, SINGLES_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der dritte Satz wurde gewonnen von Bob mit 11-4. Alice führt mit 2:1 Sätzen'
+			'Der dritte Satz wurde gewonnen von Bob 11-4. Alice führt mit 2:1 Sätzen'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3410,7 +3410,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der dritte Satz wurde gewonnen von Bob und Birgit mit 11-4. Andrew und Alice führen mit 2:1 Sätzen'
+			'Der dritte Satz wurde gewonnen von Bob und Birgit 11-4. Andrew und Alice führen mit 2:1 Sätzen'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3419,7 +3419,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, SINGLES_TEAM_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der dritte Satz wurde gewonnen von B team mit 11-4. A team führt mit 2:1 Sätzen'
+			'Der dritte Satz wurde gewonnen von B team 11-4. A team führt mit 2:1 Sätzen'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3428,7 +3428,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_TEAM_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der dritte Satz wurde gewonnen von B team mit 11-4. A team führt mit 2:1 Sätzen'
+			'Der dritte Satz wurde gewonnen von B team 11-4. A team führt mit 2:1 Sätzen'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3463,7 +3463,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, SINGLES_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der vierte Satz wurde gewonnen von Bob mit 11-5; zwei Sätze beide'
+			'Der vierte Satz wurde gewonnen von Bob 11-5; zwei Sätze beide'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3472,7 +3472,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der vierte Satz wurde gewonnen von Bob und Birgit mit 11-5; zwei Sätze beide'
+			'Der vierte Satz wurde gewonnen von Bob und Birgit 11-5; zwei Sätze beide'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3481,7 +3481,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, SINGLES_TEAM_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der vierte Satz wurde gewonnen von B team mit 11-5; zwei Sätze beide'
+			'Der vierte Satz wurde gewonnen von B team 11-5; zwei Sätze beide'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3490,7 +3490,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_TEAM_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der vierte Satz wurde gewonnen von B team mit 11-5; zwei Sätze beide'
+			'Der vierte Satz wurde gewonnen von B team 11-5; zwei Sätze beide'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3526,7 +3526,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, SINGLES_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Alice mit 11-1 11-3 4-11 5-11 11-6'
+			'Das Spiel wurde gewonnen von Alice 11-1 11-3 4-11 5-11 11-6'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3535,7 +3535,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Andrew und Alice mit 11-1 11-3 4-11 5-11 11-6'
+			'Das Spiel wurde gewonnen von Andrew und Alice 11-1 11-3 4-11 5-11 11-6'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3544,7 +3544,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, SINGLES_TEAM_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von A team mit 11-1 11-3 4-11 5-11 11-6'
+			'Das Spiel wurde gewonnen von A team 11-1 11-3 4-11 5-11 11-6'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3553,7 +3553,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_TEAM_SETUP_5x11);
 		assert.equal(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von A team mit 11-1 11-3 4-11 5-11 11-6'
+			'Das Spiel wurde gewonnen von A team 11-1 11-3 4-11 5-11 11-6'
 		);
 		assert.equal(pronounce_en(s),
 			'Game.\n\n' +
@@ -3740,7 +3740,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.strictEqual(pronounce_de(s, 2000000),
 			'Satz.\n\n' +
-			'Der erste Satz wurde gewonnen von Andrew und Alice mit 21-11');
+			'Der erste Satz wurde gewonnen von Andrew und Alice 21-11');
 		assert.strictEqual(pronounce_en(s, 2000000),
 			'Game.\n\n' +
 			'First game won by Andrew and Alice 21-11');
@@ -3986,7 +3986,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s, 1040000),
 			'Andrew, disqualifiziert wegen unsportlichen Verhaltens.\n\n' +
-			'Das Spiel wurde gewonnen von Bob und Birgit mit 11-6'
+			'Das Spiel wurde gewonnen von Bob und Birgit 11-6'
 		);
 		assert.equal(pronounce_en(s, 1040000),
 			'Andrew, disqualified for misconduct.\n\n' +
@@ -4244,7 +4244,7 @@ _describe('pronunciation', function() {
 		assert.equal(pronounce_de(s, 1000000),
 			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Satz.\n\n' +
-			'Der erste Satz wurde gewonnen von Bob und Birgit mit 21-6'
+			'Der erste Satz wurde gewonnen von Bob und Birgit 21-6'
 		);
 		assert.equal(pronounce_en(s, 1000000),
 			'Alice, fault for misconduct.\n' +
@@ -4254,7 +4254,7 @@ _describe('pronunciation', function() {
 		assert.equal(pronounce_de(s, 1100000),
 			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Satz.\n\n' +
-			'Der erste Satz wurde gewonnen von Bob und Birgit mit 21-6'
+			'Der erste Satz wurde gewonnen von Bob und Birgit 21-6'
 		);
 		assert.equal(pronounce_en(s, 1100000),
 			'Alice, fault for misconduct.\n' +
@@ -4270,7 +4270,7 @@ _describe('pronunciation', function() {
 		assert.equal(pronounce_de(s, 1000000),
 			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Satz.\n\n' +
-			'Der erste Satz wurde gewonnen von Bob und Birgit mit 21-6'
+			'Der erste Satz wurde gewonnen von Bob und Birgit 21-6'
 		);
 		assert.equal(pronounce_en(s, 1000000),
 			'Alice, fault for misconduct.\n' +
@@ -4293,7 +4293,7 @@ _describe('pronunciation', function() {
 		s = state_after(presses, DOUBLES_SETUP);
 		assert.equal(pronounce_de(s, 1040000),
 			'Andrew, disqualifiziert wegen unsportlichen Verhaltens.\n\n' +
-			'Das Spiel wurde gewonnen von Bob und Birgit mit 21-6'
+			'Das Spiel wurde gewonnen von Bob und Birgit 21-6'
 		);
 		assert.equal(pronounce_en(s, 1040000),
 			'Andrew, disqualified for misconduct.\n\n' +
@@ -4310,7 +4310,7 @@ _describe('pronunciation', function() {
 		assert.equal(pronounce_de(s, 1040000),
 			'Andrew, disqualifiziert wegen unsportlichen Verhaltens.\n' +
 			'Birgit, Fehler wegen unsportlichen Verhaltens.\n\n' +
-			'Das Spiel wurde gewonnen von Bob und Birgit mit 21-6'
+			'Das Spiel wurde gewonnen von Bob und Birgit 21-6'
 		);
 		assert.equal(pronounce_en(s, 1040000),
 			'Andrew, disqualified for misconduct.\n' +
@@ -4337,7 +4337,7 @@ _describe('pronunciation', function() {
 			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Satz.\n' +
 			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n\n' +
-			'Der erste Satz wurde gewonnen von Bob und Birgit mit 21-6'
+			'Der erste Satz wurde gewonnen von Bob und Birgit 21-6'
 		);
 		assert.equal(pronounce_en(s, 1020000),
 			'Alice, fault for misconduct.\n' +
@@ -4349,7 +4349,7 @@ _describe('pronunciation', function() {
 			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Satz.\n' +
 			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n\n' +
-			'Der erste Satz wurde gewonnen von Bob und Birgit mit 21-6'
+			'Der erste Satz wurde gewonnen von Bob und Birgit 21-6'
 		);
 		assert.equal(pronounce_en(s, 1100000),
 			'Alice, fault for misconduct.\n' +
@@ -4361,7 +4361,7 @@ _describe('pronunciation', function() {
 			'Alice, Fehler wegen unsportlichen Verhaltens.\n' +
 			'Satz.\n' +
 			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n\n' +
-			'Der erste Satz wurde gewonnen von Bob und Birgit mit 21-6'
+			'Der erste Satz wurde gewonnen von Bob und Birgit 21-6'
 		);
 		assert.equal(pronounce_en(s, 1130000),
 			'Alice, fault for misconduct.\n' +
@@ -4388,7 +4388,7 @@ _describe('pronunciation', function() {
 			'Satz.\n' +
 			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n' +
 			'Bob, Fehler wegen unsportlichen Verhaltens.\n\n' +
-			'Der erste Satz wurde gewonnen von Bob und Birgit mit 21-6'
+			'Der erste Satz wurde gewonnen von Bob und Birgit 21-6'
 		);
 		assert.equal(pronounce_en(s, 1020000),
 			'Alice, fault for misconduct.\n' +
@@ -4402,7 +4402,7 @@ _describe('pronunciation', function() {
 			'Satz.\n' +
 			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n' +
 			'Bob, Fehler wegen unsportlichen Verhaltens.\n\n' +
-			'Der erste Satz wurde gewonnen von Bob und Birgit mit 21-6'
+			'Der erste Satz wurde gewonnen von Bob und Birgit 21-6'
 		);
 		assert.equal(pronounce_en(s, 1100000),
 			'Alice, fault for misconduct.\n' +
@@ -4416,7 +4416,7 @@ _describe('pronunciation', function() {
 			'Satz.\n' +
 			'Birgit, Verwarnung wegen unsportlichen Verhaltens.\n' +
 			'Bob, Fehler wegen unsportlichen Verhaltens.\n\n' +
-			'Der erste Satz wurde gewonnen von Bob und Birgit mit 21-6'
+			'Der erste Satz wurde gewonnen von Bob und Birgit 21-6'
 		);
 		assert.equal(pronounce_en(s, 1130000),
 			'Alice, fault for misconduct.\n' +

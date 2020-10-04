@@ -137,7 +137,7 @@ _describe('Golden game (1x11_15) counting', function() {
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Alice mit 11-4');
+			'Das Spiel wurde gewonnen von Alice 11-4');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\n\n' +
 			'Match won by Alice 11-4');
@@ -219,7 +219,7 @@ _describe('Golden game (1x11_15) counting', function() {
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Alice mit 13-11');
+			'Das Spiel wurde gewonnen von Alice 13-11');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\n\n' +
 			'Match won by Alice 13-11');
@@ -275,7 +275,7 @@ _describe('Golden game (1x11_15) counting', function() {
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Alice mit 15-13');
+			'Das Spiel wurde gewonnen von Alice 15-13');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\n\n' +
 			'Match won by Alice 15-13');
@@ -316,7 +316,7 @@ _describe('Golden game (1x11_15) counting', function() {
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Alice mit 15-14');
+			'Das Spiel wurde gewonnen von Alice 15-14');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\n\n' +
 			'Match won by Alice 15-14');
@@ -337,7 +337,7 @@ _describe('Golden game (1x11_15) counting', function() {
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Bob mit 15-14');
+			'Das Spiel wurde gewonnen von Bob 15-14');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\n\n' +
 			'Match won by Bob 15-14');

@@ -101,7 +101,7 @@ _describe('UAE 5x11_11 sudden death scoring', function() {
 		});
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der erste Satz wurde gewonnen von Alice mit 11-6');
+			'Der erste Satz wurde gewonnen von Alice 11-6');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\n\n' +
 			'First game won by Alice 11-6');
@@ -212,7 +212,7 @@ _describe('UAE 5x11_11 sudden death scoring', function() {
 		});
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der zweite Satz wurde gewonnen von Bob mit 11-10; einen Satz beide');
+			'Der zweite Satz wurde gewonnen von Bob 11-10; einen Satz beide');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\n\n' +
 			'Second game won by Bob 11-10; One game all');
@@ -253,7 +253,7 @@ _describe('UAE 5x11_11 sudden death scoring', function() {
 		});
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der zweite Satz wurde gewonnen von Alice mit 11-10. Alice führt mit 2:0 Sätzen');
+			'Der zweite Satz wurde gewonnen von Alice 11-10. Alice führt mit 2:0 Sätzen');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\n\n' +
 			'Second game won by Alice 11-10. Alice leads two games to love');
@@ -348,7 +348,7 @@ _describe('UAE 5x11_11 sudden death scoring', function() {
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Alice mit 11-6 11-10 11-5');
+			'Das Spiel wurde gewonnen von Alice 11-6 11-10 11-5');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\n\n' +
 			'Match won by Alice 11-6 11-10 11-5');
@@ -371,7 +371,7 @@ _describe('UAE 5x11_11 sudden death scoring', function() {
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Alice mit 11-6 11-10 11-5');
+			'Das Spiel wurde gewonnen von Alice 11-6 11-10 11-5');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\n\n' +
 			'Match won by Alice 11-6 11-10 11-5');
@@ -415,7 +415,7 @@ _describe('UAE 5x11_11 sudden death scoring', function() {
 		});
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der dritte Satz wurde gewonnen von Bob mit 11-10. Alice führt mit 2:1 Sätzen');
+			'Der dritte Satz wurde gewonnen von Bob 11-10. Alice führt mit 2:1 Sätzen');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\n\n' +
 			'Third game won by Bob 11-10. Alice leads two games to one');
@@ -548,7 +548,7 @@ _describe('UAE 5x11_11 sudden death scoring', function() {
 		});
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
-			'Der vierte Satz wurde gewonnen von Bob mit 11-2; zwei Sätze beide');
+			'Der vierte Satz wurde gewonnen von Bob 11-2; zwei Sätze beide');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\n\n' +
 			'Fourth game won by Bob 11-2; Two games all');
@@ -696,7 +696,7 @@ _describe('UAE 5x11_11 sudden death scoring', function() {
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Bob mit 6-11 10-11 11-10 11-2 11-9');
+			'Das Spiel wurde gewonnen von Bob 6-11 10-11 11-10 11-2 11-9');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\n\n' +
 			'Match won by Bob 6-11 10-11 11-10 11-2 11-9');
@@ -738,7 +738,7 @@ _describe('UAE 5x11_11 sudden death scoring', function() {
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Bob mit 6-11 10-11 11-10 11-2 11-10');
+			'Das Spiel wurde gewonnen von Bob 6-11 10-11 11-10 11-2 11-10');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\n\n' +
 			'Match won by Bob 6-11 10-11 11-10 11-2 11-10');
@@ -760,7 +760,7 @@ _describe('UAE 5x11_11 sudden death scoring', function() {
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Alice mit 11-6 11-10 10-11 2-11 11-10');
+			'Das Spiel wurde gewonnen von Alice 11-6 11-10 10-11 2-11 11-10');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\n\n' +
 			'Match won by Alice 11-6 11-10 10-11 2-11 11-10');
@@ -784,7 +784,7 @@ _describe('UAE 5x11_11 sudden death scoring', function() {
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Alice mit 11-6 11-10 10-11 2-11 11-10');
+			'Das Spiel wurde gewonnen von Alice 11-6 11-10 10-11 2-11 11-10');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\n\n' +
 			'Match won by Alice 11-6 11-10 10-11 2-11 11-10');
