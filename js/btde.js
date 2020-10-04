@@ -199,6 +199,8 @@ function _get_league_key(liga_code) {
 		'(015) Landesliga Süd 2': 'NRW-O19-S2-LL-015-2016',
 		'NLA': 'NLA-2019',
 		'NLB': 'NLA-2019',
+		'NLB Ost': 'NLA-2019',
+		'NLB West': 'NLA-2019',
 		'1. Bundesliga': 'OBL-2017',
 	}[liga_code.trim()];
 }
