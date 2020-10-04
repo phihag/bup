@@ -1,4 +1,6 @@
-pronounce remove gewonnen mit
+CourtSpot: do not transmit if older than 1 hour (-> Michael / Reinhard)
+
+check ads, court_count is not defined
 
 courtspot: should not show HD1/DD initially
 
