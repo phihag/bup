@@ -38,7 +38,7 @@ var TEAM_COLORS = {
 	'WG Duisburg-Essen': {fg: '#ffffff'},
 	'WG Karlsruhe': {fg: '#80ff8a'},
 	'WG Köln': {fg: '#5C8DD2'},
-	'Peine': {fg: '#0b0d4c'},
+	'Peine': {fg: '#ffffff', bg: '#0b0d4c'},
 	'Uni Bayreuth': {fg: '#ffffff'},
 };
 
