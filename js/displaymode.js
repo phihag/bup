@@ -392,6 +392,17 @@ function namestr(players) {
 	}
 }
 
+function namestr_short(players) {
+	if (players.length === 0) {
+		return '';
+	} else if (players.length === 1) {
+		return players[0].name;
+	} else {
+		return _lastname(players[0]) + ' / ' + _lastname(players[1]);
+	}
+}
+
+
 function _match_name(setup) {
 	var res = '';
 	if (setup.event_name) {
@@ -694,7 +705,7 @@ function render_stream(s, container, event, colors) {
 		var table = uiu.el(container, 'table', {
 			style: (
 				'position: fixed;top:2%;' + (court_idx === 0 ? 'left' : 'right') + ':2%;' +
-				'border-radius:1vw;border-collapse:collapse;' +
+				'border-radius:0.5vw;border-collapse:collapse;' +
 				'font-size:' + font_size + ';color:#000;background:#ddd;'
 			),
 		});
@@ -717,8 +728,8 @@ function render_stream(s, container, event, colors) {
 
 			uiu.el(
 				tr, 'td', {
-					style: 'padding-right:2vw;',
-				}, match ? namestr(match.setup.teams[team_idx].players) : '');
+					style: 'padding-right:2vw;overflow:hidden;white-space:pre;width:7em;max-width:7em;',
+				}, match ? namestr_short(match.setup.teams[team_idx].players) : '');
 
 			for (var game_idx = 0;game_idx < max_games;game_idx++) {
 				// TODO highlight server & winner
