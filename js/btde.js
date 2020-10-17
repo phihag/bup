@@ -314,9 +314,16 @@ function _parse_event(doc, now) {
 		};
 	});
 
+	var location = event_data.venue;
+
 	var report_urls = [];
-	if (event_data.url) {
+	if (event_data.url && /^http/.test(event_data.url)) {
 		report_urls.push(event_data.url);
+	}
+	// Handle invalid location
+	if (/^http/.test(location)) {
+		report_urls.push(location);
+		location = '';
 	}
 
 	var matchday_m = /([0-9]+)\.\s*Spieltag/.exec(event_data.matchday);
@@ -330,7 +337,7 @@ function _parse_event(doc, now) {
 		matches: matches,
 		courts: used_courts,
 		league_key: league_key,
-		location: event_data.venue,
+		location: location,
 		matchday: matchday,
 		report_urls: report_urls,
 	};
