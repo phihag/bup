@@ -692,8 +692,6 @@ function render_stream(s, container, event, colors) {
 	var match_score = _calc_matchscore(event.matches);
 	var team_names = event.team_names || ['', ''];
 
-	var font_size = '1.5vw';
-
 	for (var court_idx = 0;court_idx < event.courts.length;court_idx++) {
 		var real_court_idx = s.settings.displaymode_reverse_order ? (court_count - 1 - court_idx) : court_idx;
 		var court = event.courts[real_court_idx];
@@ -701,17 +699,38 @@ function render_stream(s, container, event, colors) {
 		var counting = match ? match.setup.counting : eventutils.default_counting(event.league_key);
 		var max_games = counting ? calc.max_game_count(counting) : 0;
 		var nscore = (match ? match.network_score : 0) || [];
+		var current_score = (nscore.length > 0) ? nscore[nscore.length - 1] : ['', ''];
+		var server = determine_server(match, current_score);
 
+		var border_radius = '0.2vw';
 		var table = uiu.el(container, 'table', {
 			style: (
-				'position: fixed;top:2%;' + (court_idx === 0 ? 'left' : 'right') + ':2%;' +
-				'border-radius:0.5vw;border-collapse:collapse;' +
-				'font-size:' + font_size + ';color:#000;background:#ddd;'
+				'position: fixed;top:1vw;' + (court_idx === 0 ? 'left' : 'right') + ':1.3vw;' +
+				'border-radius:' + border_radius + ';border-collapse:collapse;' +
+				'vertical-align:middle;' +
+				'font-size:1.4vw;color:#000;background:#ddd;'
 			),
 		});
 
+		var event_logo_url = extradata.logo_url(event);
 		for (var team_idx = 0;team_idx < 2;team_idx++) {
-			var tr = uiu.el(table, 'tr');
+			var tr = uiu.el(table, 'tr', {
+				style: (team_idx === 0) ? '' : 'border-top:0.05vw solid #fff;'});
+
+			if ((team_idx === 0) && event_logo_url) {
+				var logo_td = uiu.el(tr, 'td', {
+					rowspan: '2',
+				});
+				uiu.el(logo_td, 'div', {
+					style: (
+						'height:2.4em;width:4em;margin-left:0.2em;' +
+						'background-repeat: no-repeat;' +
+						'background-position:center;' +
+						'background-size:contain;' +
+						'background-image:url("' + event_logo_url + '");'
+					),
+				});
+			}
 
 			if (logo_urls) {
 				var logo_td = uiu.el(tr, 'td');
@@ -719,8 +738,8 @@ function render_stream(s, container, event, colors) {
 					uiu.el(logo_td, 'div', {
 						style: (
 							'background: url("' + logo_urls[team_idx] + '") no-repeat center center;' +
-							'background-size:contain;' +
-							'height:1.8vw;width:3vw;'
+							'background-size:contain;margin-left:0.3vw;' +
+							'height:1.4em;width:2em;'
 						),
 					});
 				}
@@ -728,30 +747,43 @@ function render_stream(s, container, event, colors) {
 
 			uiu.el(
 				tr, 'td', {
-					style: 'padding-right:2vw;overflow:hidden;white-space:pre;width:7em;max-width:7em;',
+					style: (
+						'padding-right:0.5em;overflow:hidden;white-space:pre;' +
+						'width:8em;max-width:8em;min-width:8em;' +
+						'font-size:80%;'
+					),
 				}, match ? namestr_short(match.setup.teams[team_idx].players) : '');
 
 			for (var game_idx = 0;game_idx < max_games;game_idx++) {
-				// TODO highlight server & winner
+				var team_serving = false;
+				if (game_idx < nscore.length) {
+					var gwinner = calc.game_winner(
+						match.setup.counting, game_idx, nscore[game_idx][0], nscore[game_idx][1]);
+					team_serving = (
+						(gwinner === 'left') ? (team_idx === 0) : (
+						(gwinner === 'right') ? (team_idx === 1) : (
+						(server.team_id === team_idx))));
+				}
+
+				var extra_style = '';
+				if (game_idx === max_games - 1) {
+					if (team_idx === 0) {
+						extra_style += 'border-top-right-radius:' + border_radius + ';';
+					} else {
+						extra_style += 'border-bottom-right-radius:' + border_radius + ';';
+					}
+				}
+
 				uiu.el(tr, 'td', {
 					style: (
-						'width:1.2em;border-left:0.1vw solid #888;' +
-						'padding:0 0.2em;text-align:center;'),
+						'width:1.2em;border-left:0.1vw solid #888;font-family:Arial Black;' +
+						'padding:0 0.2em;text-align:center;background:#555;' +
+						'font-size:90%;' +
+						'color:' + (team_serving ? '#ee0' : '#fff') + ';' +
+						extra_style),
 				}, (game_idx < nscore.length) ? nscore[game_idx][team_idx] : '');
 			}
 		}
-
-		var summary_tr = uiu.el(table, 'tr', {});
-		if (logo_urls) {
-			uiu.el(summary_tr, 'td', {
-				'style': 'color:#888;text-align:center;font-size:' + font_size,
-			}, match ? match.setup.match_name : '');
-		}
-
-		var summary_td = uiu.el(summary_tr, 'td', {
-			colspan: max_games + 1,
-			style: 'text-align: center;color:#666;font-size:1.3vw;',
-		}, team_names[0] + ' - ' + team_names[1] + '  ' + match_score[0] + '-' + match_score[1]);
 	}
 
 	// TODO make all used colors configurable
