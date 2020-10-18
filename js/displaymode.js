@@ -682,15 +682,15 @@ function render_castall(s, container, event, colors) {
 	}
 }
 
-function render_stream(s, container, event, colors) {
+function render_stream(s, container, event/*, colors*/) {
 	if (!event.courts) {
 		uiu.el(container, 'div', 'error', 'Court information missing');
 		return;
 	}
 
 	var logo_urls = extradata.team_logos(event);
-	var match_score = _calc_matchscore(event.matches);
 	var team_names = event.team_names || ['', ''];
+	var court_count = event.courts.length;
 
 	for (var court_idx = 0;court_idx < event.courts.length;court_idx++) {
 		var real_court_idx = s.settings.displaymode_reverse_order ? (court_count - 1 - court_idx) : court_idx;
@@ -722,6 +722,7 @@ function render_stream(s, container, event, colors) {
 					rowspan: '2',
 				});
 				uiu.el(logo_td, 'div', {
+					title: team_names[team_idx],
 					style: (
 						'height:2.4em;width:4em;margin-left:0.2em;' +
 						'background-repeat: no-repeat;' +
@@ -733,9 +734,9 @@ function render_stream(s, container, event, colors) {
 			}
 
 			if (logo_urls) {
-				var logo_td = uiu.el(tr, 'td');
+				var team_logo_td = uiu.el(tr, 'td');
 				if (logo_urls[team_idx]) {
-					uiu.el(logo_td, 'div', {
+					uiu.el(team_logo_td, 'div', {
 						style: (
 							'background: url("' + logo_urls[team_idx] + '") no-repeat center center;' +
 							'background-size:contain;margin-left:0.3vw;' +
@@ -789,7 +790,7 @@ function render_stream(s, container, event, colors) {
 	// TODO make all used colors configurable
 }
 
-function render_streamcourt(s, container, event, colors) {
+function render_streamcourt(s, container, event/*, colors*/) {
 	if (!event.courts) {
 		uiu.el(container, 'div', 'error', 'Court information missing');
 		return;
@@ -837,9 +838,9 @@ function render_streamcourt(s, container, event, colors) {
 		}
 
 		if (logo_urls) {
-			var logo_td = uiu.el(tr, 'td');
+			var team_logo_td = uiu.el(tr, 'td');
 			if (logo_urls[team_idx]) {
-				uiu.el(logo_td, 'div', {
+				uiu.el(team_logo_td, 'div', {
 					style: (
 						'background: url("' + logo_urls[team_idx] + '") no-repeat center center;' +
 						'background-size:contain;margin-left:0.3vw;' +
@@ -2093,8 +2094,8 @@ function render_onlyplayers(s, container, event, court, match, colors) {
 					'width:20%;height:100%;float:left;margin-right:4vw;' +
 					(logo_urls[team_id] ?
 						('background-repeat: no-repeat;' +
-						 'background-image:url("' + logo_urls[team_id] + '");' +
-						 'background-position:center; background-size: contain;'
+							'background-image:url("' + logo_urls[team_id] + '");' +
+							'background-position:center; background-size: contain;'
 						) :
 					''
 					)
@@ -2970,7 +2971,7 @@ function option_applies(style_id, option_name) {
 		bwfonlyplayers: ['court_id', 'c0', 'c1', 'cb0', 'cb1'],
 		onlyplayers: ['court_id', 'team_colors', 'c0', 'cb0', 'c1', 'cb1'],
 		onlyscore: ['court_id', 'team_colors', 'c0', 'cb0', 'c1', 'cb1'],
-		stream: [],
+		stream: ['reverse_order'],
 		streamcourt: ['court_id'],
 		teamcourt: ['court_id', 'team_colors', 'c0', 'cb0', 'c1', 'cb1', 'cfg', 'cfg2', 'show_pause'],
 		teamscore: ['team_colors', 'c0', 'c1', 'cfg', 'cbg'],

@@ -1808,7 +1808,7 @@ function save_obl(ev, es_key, ui8r, extra_data) {
 	});
 }
 
-function save_buli2020_minreq(ev, es_key, ui8r, extra_data) {
+function save_buli2020_minreq(ev, es_key, ui8r) {
 	var last_update = calc_last_update(ev.matches);
 	var today = last_update ? new Date(last_update) : new Date();
 
