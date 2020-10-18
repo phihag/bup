@@ -700,7 +700,7 @@ function render_stream(s, container, event, colors) {
 		var max_games = counting ? calc.max_game_count(counting) : 0;
 		var nscore = (match ? match.network_score : 0) || [];
 		var current_score = (nscore.length > 0) ? nscore[nscore.length - 1] : ['', ''];
-		var server = determine_server(match, current_score);
+		var server = match ? determine_server(match, current_score) : {};
 
 		var border_radius = '0.2vw';
 		var table = uiu.el(container, 'table', {
@@ -803,7 +803,7 @@ function render_streamcourt(s, container, event, colors) {
 	var max_games = counting ? calc.max_game_count(counting) : 0;
 	var nscore = (match ? match.network_score : 0) || [];
 	var current_score = (nscore.length > 0) ? nscore[nscore.length - 1] : ['', ''];
-	var server = determine_server(match, current_score);
+	var server = match ? determine_server(match, current_score) : {};
 	var logo_urls = extradata.team_logos(event);
 
 	var border_radius = '0.8vw';
