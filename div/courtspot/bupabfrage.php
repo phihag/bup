@@ -199,7 +199,7 @@ while ($row = $result->fetch_assoc()) {
 			$row['linksheim'] ? (($row['linksheim'] == 'Spieler1') == ($row['oben'] == 'heim')) : null,
 			$row['linksgast'] ? (($row['linksgast'] == 'Spieler1') == ($row['oben'] == 'gast')) : null,
 		],
-		'network_last_update' => intval($row['last_timestamp']),
+		'network_last_update' => intval($row['last_timestamp']) * 1000,
 		'network_match_start' => intval($row['first_timestamp']),
 		'courtspot' => [
 			'heim_oben' => ($row['oben'] == 'heim'),
