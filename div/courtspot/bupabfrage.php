@@ -111,6 +111,17 @@ case 9:
 case 10:
 	$league_key = 'NRW-O19-GW-OL-003-2016';
 	break;
+case 11:
+	$league_key = '1BL-2020';
+	break;
+case 12:
+	$league_key = '1BL-2020';
+	break;
+case 13:
+	$league_key = '1BL-2020';
+	break;
+
+
 }
 
 if ($league_key === null) {
