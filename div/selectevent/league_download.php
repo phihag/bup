@@ -96,6 +96,17 @@ function download_team($httpc, $tournament_id, $team_id, $team_name, $use_vrl) {
 	}
 }
 
+function _lookup_team($teams_by_name, $team_name) {
+	if (! \array_key_exists($team_name, $teams_by_name)) {
+		$all_teams = \array_keys($teams_by_name);
+		\sort($all_teams);
+		$all_teams_str = \implode(', ', $all_teams);
+		throw new \Exception('Cannot find team ' . $team_name . ' in list of all teams (' . $all_teams_str . ')');
+	}
+
+	return $teams_by_name[$team_name];
+}
+
 function download_league($httpc, $url, $league_key, $use_vrl, $use_hr) {
 	$m = \preg_match('/(?P<base_url>https?:\/\/(?:dbv|www)\.turnier\.de\/)sport\/league\/draw\?id=(?P<id>[0-9A-F-]+)&draw=(?P<draw>[0-9]+)/', $url, $groups);
 	if (!$m) {
@@ -116,7 +127,8 @@ function download_league($httpc, $url, $league_key, $use_vrl, $use_hr) {
 	}
 	$league_name = \html_entity_decode($header_m['name']);
 
-	if (\preg_match('/<table\s+class="ruler">(?P<html>.+?)<\/table>/s', $teams_html, $team_table_m)) {
+	$found_table = \preg_match('/<table\s+class="ruler[^"]*">(?P<html>.+?)<\/table>/s', $teams_html, $team_table_m);
+	if ($found_table) {
 		$team_table_html = $team_table_m['html'];
 
 		if (\preg_match_all('/
@@ -137,7 +149,7 @@ function download_league($httpc, $url, $league_key, $use_vrl, $use_hr) {
 		$drawsheet_html = $httpc->request($drawsheet_url);
 
 		if (!\preg_match('/\s*<div\s+class="draw">(.*)<\/table>\s*<\/div>\s*<p>/', $drawsheet_html, $draw_m)) {
-			throw new \Exception('Nether table in ' . $teams_url . ' nor draws in ' . $drawsheet_url . 'could be found');
+			throw new \Exception('Neither table in ' . $teams_url . ' nor draws in ' . $drawsheet_url . ' could be found');
 		}
 		$draw_html = $draw_m[0];
 
@@ -198,15 +210,10 @@ function download_league($httpc, $url, $league_key, $use_vrl, $use_hr) {
 	$tms = [];
 	foreach ($matches_m as $m) {
 		$team1_name = tde_utils\unify_team_name($m['name1']);
-		$team1 = $teams_by_name[$team1_name];
-		if (!$team1) {
-			throw new Exception('Cannot find team ' . $team1_name);
-		}
+		$team1 = _lookup_team($teams_by_name, $team1_name);
+
 		$team2_name = tde_utils\unify_team_name($m['name2']);
-		$team2 = $teams_by_name[$team2_name];
-		if (!$team2) {
-			throw new Exception('Cannot find team ' . $team2_name);
-		}
+		$team2 = _lookup_team($teams_by_name, $team2_name);
 
 		$location = \html_entity_decode($m['location']);
 		$tms[] = [
