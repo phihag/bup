@@ -295,5 +295,5 @@ function accept_cookies($httpc, $base_url) {
 
 	$url = $base_url . 'cookiewall/Save';
 	$body = 'ReturnUrl=/&SettingsOpen=false&CookiePurposes=4&CookiePurposes=16';
-	$httpc->request($url, null, 'POST', $body);
+	$httpc->request($url, array('Content-Type: application/x-www-form-urlencoded'), 'POST', $body);
 }
