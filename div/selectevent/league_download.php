@@ -32,6 +32,7 @@ function geolocate($httpc, $address, $orig_address=null) {
 	$ADDRESS_ALIAS = [
 		'07749 Jena, Sporthalle des Sportgymnasiums Jena' => 'Jena Wöllnitzer Str. 40',
 		'51427 Bergisch Gladbach-Refrath, Sporthalle, Steinbreche' => 'Steinbreche 1, 51427 Bergisch Gladbach',
+		'67677 Enkenbach, Integrierte Gesamtschule, Am Mühlberg 23-25' => '67677 Enkenbach Am Mühlberg 23',
 	];
 	if (\array_key_exists($address, $ADDRESS_ALIAS)) {
 		$address = $ADDRESS_ALIAS[$address];
