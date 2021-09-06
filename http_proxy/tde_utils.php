@@ -138,7 +138,7 @@ function parse_vrl_players($httpc, $domain, $season_id, $club_id, $vrl_id) {
 			<img[^>]+\/><span\s*class="printonly\s*flag">\[(?P<nationality>[A-Z]{2,})\]\s*<\/span>
 		)?
 		<\/td>\s*
-		<td>(?P<textid>[-0-9]+|00-KrauszGergely)<\/td>
+		<td>(?P<textid>[-0-9]+|[0-9]{2}-\w+)<\/td>
 		<td>(?P<birthyear>[0-9]{4,})?<\/td>
 		<td>[^<]*<\/td>  # JUG
 		<td>[^<]*<\/td>  # AKL
@@ -162,7 +162,7 @@ function parse_vrl_players($httpc, $domain, $season_id, $club_id, $vrl_id) {
 		if ($line_num !== $lfd_num) {
 			if (!\in_array($vrl_url, ['https://www.turnier.de/sport/clubranking.aspx?id=B3510C02-5438-4B68-B55F-4A2B86B6BF26&cid=10&rid=62'])) {
 				throw new \Exception(
-					'Got line ' . $line_num . ', expected ' . $lfd_num . ' in ' . $vrl_url);
+					'Got line ' . $line_num . ', expected ' . $lfd_num . ' in ' . $vrl_url . ' (' . $line_m['firstname'] . ' ' . $line_m['lastname'] . ')');
 			}
 		}
 		$lfd_num++;
