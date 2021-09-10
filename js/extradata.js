@@ -64,6 +64,7 @@ var LOGOS = [
 	'bcwipperfeld',
 	'berlinerbrauereien',
 	'bspfrneusatz',
+	'bsveggensteinleopoldshafen',
 	'bvgifhorn',
 	'bvmaintal',
 	'bvmuelheim',
