@@ -530,8 +530,8 @@ function umpire_pay(league_key) {
 	}
 
 	if (/^RLW-/.test(league_key) || NRW2016_RE.test(league_key)) {
-		return { // §1.1 SpO A2
-			base: 25,
+		return { // §1.1 Anlage 8 SpO
+			base: 35,
 			per_km: .3,
 			currency: '€',
 		};
