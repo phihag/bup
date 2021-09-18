@@ -107,6 +107,7 @@ var LOGO_ALIASSE = {
 	'BC Bischmisheim': 'bcbsaarbruecken',
 	'Blau-Weiss Wittorf-NMS': 'wittorfneumuenster',
 	'SC Union Lüdinghausen': 'unionluedinghausen',
+	'SC Union 08 Lüdinghausen': 'unionluedinghausen',
 	'SG VfB/SC Peine': 'vfbscpeine',
 	'Spvgg.Sterkrade-N.': 'sterkrade',
 	'STC BW Solingen': 'stcblauweisssolingen',
