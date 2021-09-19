@@ -7,12 +7,14 @@ require __DIR__ . '/../../http_proxy/http_utils.php';
 require __DIR__ . '/../../http_proxy/tde_utils.php';
 
 
+define('TDE_SERVER_DOMAIN', 'dbv.turnier.de');
+
 function _make_url($page, $tournament_id, $suffix) {
 	if (\in_array($page, array('drawmatches'))) {
-		return 'https://www.turnier.de/sport/' . $page . '.aspx?id=' . $tournament_id . $suffix;
+		return 'https://' . TDE_SERVER_DOMAIN . '/sport/' . $page . '.aspx?id=' . $tournament_id . $suffix;
 	}
 	// New-style format
-	return 'https://www.turnier.de/sport/league/' . $page . '?id=' . $tournament_id . $suffix;
+	return 'https://' . TDE_SERVER_DOMAIN . '/sport/league/' . $page . '?id=' . $tournament_id . $suffix;
 }
 
 
@@ -91,7 +93,7 @@ function init_geolocation_cache() {
 function download_team($httpc, $tournament_id, $team_id, $team_name, $use_vrl) {
 	if ($use_vrl) {
 		return buli_download_all_players(
-			$httpc, $league_key, 'www.turnier.de', $season_id, $draw_id, $match_id, $team_infos);
+			$httpc, $league_key, TDE_SERVER_DOMAIN, $season_id, $draw_id, $match_id, $team_infos);
 	} else {
 		throw new \Exception('Non-Bundesliga support not implemented yet!');
 	}
@@ -232,7 +234,7 @@ function download_league($httpc, $url, $league_key, $use_vrl, $use_hr) {
 	if ($use_vrl) {
 		$teams_info = \array_map(function($t) use ($httpc, $tournament_id, $league_key, $use_hr) {
 			$all_players = tde_utils\download_team_vrl(
-				$httpc, 'www.turnier.de', $tournament_id, $league_key, $t['team_id'], $use_hr);
+				$httpc, TDE_SERVER_DOMAIN, $tournament_id, $league_key, $t['team_id'], $use_hr);
 
 			return [
 				'id' => $t['team_id'],
