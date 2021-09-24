@@ -143,6 +143,7 @@ function send_press(s) {
 function _unify_teamname(team_name) {
 	return {
 		'1. BC Bischmisheim': '1.BC Sbr.-Bischmisheim',
+		'1. BC Bischmisheim 2': '1.BC Sbr.-Bischmisheim 2',
 		'1. BC Beuel 2': '1.BC Beuel 2',
 		'1. BC Beuel 1': '1.BC Beuel',
 		'1. BC Beuel': '1.BC Beuel',

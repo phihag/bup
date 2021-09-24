@@ -27,6 +27,8 @@ function unify_team_name($team_name) {
 		$team_name = $m[1];
 	}
 
+	$team_name = \preg_replace('/\\s{2,}/', ' ', $team_name);
+
 	return $team_name;
 }
 
