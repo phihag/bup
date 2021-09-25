@@ -1,18 +1,15 @@
-cli to download
-
-mail Heinz minreq form
+cli to download, fix import
 
 quittung TV refrath logo broken
 
-PaulP 3G-Formular
-
-fix import
+PaulP 3G-Formular!
 
 fix transmission of results (bundesliga)
 This match URL points to TSV Neuhausen-Nymphenburg - 1. BC Sbr.-Bischmisheim, but expected TSV Neuhausen-Nymphenburg - 1.BC Sbr.-Bischmisheim
 
 fix transmission of results (missing players)
 
+use github actions instead of travis CI
 
 tournament or league?
 	CP first, at one event
@@ -172,8 +169,6 @@ map §2.1.4 (@ DBV RLT only reference countries in German if at least one non-DE
 better error message on 404 from bbt
 
 display like https://www.youtube.com/watch?v=ZfKacJsxHUs
-
-use github actions instead of travis CI
 
 fix itests, pentf
 
