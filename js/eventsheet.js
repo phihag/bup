@@ -55,7 +55,7 @@ var URLS = {
 	'RLN-2016': 'div/Spielbericht_8x3x21.svg',
 	'RLN-Satzungen': 'https://gruppe-nord.net/download/satzung-und-ordnungen-der-gruppe-nord/?wpdmdl=372',
 	'RLM-2016': 'div/Spielbericht_8x3x21.svg',
-	'RLM-SpO': 'https://www.dbv-mitte.de/wp-content/uploads/2019/06/Gruppe_Mitte_im_DBV_Ordnungen_20190604.pdf',
+	'RLM-SpO': 'https://www.dbv-mitte.de/wp-content/uploads/2020/05/Gruppe_Mitte_im_DBV_Ordnungen_20200425.pdf',
 	'NLA-2017': 'div/eventsheet/nla_resultatblatt.svg',
 	'NLA-2019': 'div/eventsheet/nla_resultatblatt-2019.svg',
 	'NRW-2016': 'div/Spielbericht_8x3x21.svg',
