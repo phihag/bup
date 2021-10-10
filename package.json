@@ -32,7 +32,8 @@
     "supervisor": "*",
     "svgo": "*",
     "uglify-js": "3.x",
-    "xmldom": "*"
+    "xmldom": "*",
+    "@mapbox/node-pre-gyp": "*"
   },
   "private": true
 }
