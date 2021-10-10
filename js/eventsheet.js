@@ -74,7 +74,7 @@ var URLS = {
 	'receipt': 'div/receipt.svg',
 	'int': 'div/eventsheet_international.svg',
 	'bayern-2018': 'div/eventsheet/bayern-2018.svg',
-	'RLSO-SpO': 'http://www.badminton-gruppe-suedost.de/ordnungen/GrSO_SpO-2017.pdf',
+	'RLSO-SpO': 'http://www.badminton-gruppe-suedost.de/ordnungen/GrSO_SpO-2021.pdf',
 	'RLSO-2017': 'div/eventsheet/rlso-2017.xlsx',
 };
 var DIRECT_DOWNLOAD_SHEETS = {
