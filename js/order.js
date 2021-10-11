@@ -355,6 +355,7 @@ function preferred_by_league(league_key) {
 		];
 	case 'RLSOO-2017':
 	case 'RLSOS-2017':
+	case 'RLSO-2019':
 		// Spielordnung §7.9
 		return [
 			'1.HD',
