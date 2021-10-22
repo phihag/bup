@@ -1,16 +1,19 @@
-btde Regionalliga Nord
+quittung TV refrath logo broken
+
+heinz corona form: Add "Keine", fix naming
+
+cli to download, fix import
+	https://www.turnier.de/sport/league/match?id=915EE244-50FD-429B-B7C8-C02CDB0B3AA1&match=154
+
+Stephan Irsen Background
 
 Heinz Mail, new forms
 	add keine
 	other criteria
 
-quittung TV refrath logo broken
-
-cli to download, fix import
+fix export
 
 setupsheet: space for one more male name
-
-fix export
 
 PaulP 3G-Formular!
 
@@ -19,7 +22,6 @@ export copy URL
 rlmdemo, check dm_style=streamcourt
 
 print ansage
-
 
 fix transmission of results (bundesliga)
 This match URL points to TSV Neuhausen-Nymphenburg - 1. BC Sbr.-Bischmisheim, but expected TSV Neuhausen-Nymphenburg - 1.BC Sbr.-Bischmisheim
