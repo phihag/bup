@@ -58,6 +58,10 @@ function iso8601(d) {
 	return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate());
 }
 
+function german_date(d) {
+	return pad(d.getDate()) + '.' + pad(d.getMonth()+1) + '.' + d.getFullYear();
+}
+
 function date_str(ts) {
 	var d = new Date(ts);
 	return pad(d.getDate()) + '.' + pad(d.getMonth()+1) + '.' + d.getFullYear();
@@ -549,6 +553,7 @@ return {
 	filter_map: filter_map,
 	find: find,
 	forEach: forEach,
+	german_date: german_date,
 	hash_new: hash_new,
 	hash_obj: hash_obj,
 	hex: hex,

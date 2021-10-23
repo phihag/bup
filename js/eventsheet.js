@@ -1816,17 +1816,27 @@ function save_buli2020_minreq(ev, es_key, ui8r) {
 	xlsx.open(ui8r, function(xlsx_file) {
 		xlsx_file.modify_sheet('1', function() {
 			xlsx_file.modify_sheet('2', function() {
-				var fn = utils.iso8601(today) + ' ' + ev.event_name + ' Mindestanforderungen.xlsx';
+				// Example given: '1. BL - 1. BC Bischmisheim - 1. BC Wipperfeld - 12.09.2021'
+				var league_short_name = {
+					'1BL': '1. BL',
+					'2BLN': '2. BL Nord',
+					'2BLS': '2. BL Süd',
+				}[ev.league_key.split('-')[0]] || ev.league_key;
+				var fn = (
+					league_short_name + ' - ' + ev.event_name + ' - ' +
+					utils.german_date(today) + '.xlsx');
 				xlsx_file.save(fn);
 			}, function(sheet) {
 				sheet.val('D3', ev.team_names[0]);
 				sheet.val('F3', ev.team_names[1]);
 				sheet.val('H3', utils.date_str(today));
+				sheet.val('D36', 'keine');
 			});
 		}, function(sheet) {
 			sheet.val('D3', ev.team_names[0]);
 			sheet.val('F3', ev.team_names[1]);
 			sheet.val('H3', utils.date_str(today));
+			sheet.val('D34', 'keine');
 		});
 	});
 }
