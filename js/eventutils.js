@@ -538,7 +538,7 @@ function umpire_pay(league_key) {
 	}
 	if (/^RLN-/.test(league_key)) {
 		return { // §4 Finanzordnung Gruppe Nord
-			base: 20,
+			base: 35,
 			per_km: .3,
 			currency: '€',
 		};
