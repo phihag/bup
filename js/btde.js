@@ -194,6 +194,7 @@ function _get_league_key(liga_code) {
 		'(001) Regionalliga SüdOst Ost': 'RLSOO-2017',
 		'(001) Regionalliga West': 'RLW-2016',
 		'(001) Regionalliga SüdOst': 'RLSO-2019',
+		'(001) Regionalliga Nord': 'RLN-2016',
 		'Regionalliga Nord': 'RLN-2016',
 		'(007) Verbandsliga Süd 2': 'NRW-O19-S2-VL-007-2016',
 		'(008) Landesliga Nord 1': 'NRW-O19-N1-LL-008-2016',
@@ -203,6 +204,7 @@ function _get_league_key(liga_code) {
 		'NLB Ost': 'NLA-2019',
 		'NLB West': 'NLA-2019',
 		'1. Bundesliga': 'OBL-2017',
+		'2. Bundesliga': 'OBL-2017',
 	}[liga_code.trim()];
 }
 
