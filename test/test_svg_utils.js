@@ -33,7 +33,19 @@ _describe('svg_utils', function() {
 		);
 	});
 
-/* // Not yet supported, worked around
+	_it('parse_cmd with flags', () => {
+		assert.deepStrictEqual(
+			bup.svg_utils.parse_cmd(
+				'a1 3 0 005 7M0 0'
+			),
+			{
+				c: 'a',
+				args: [1, 3, 0, 0, 0, 5, 7],
+				rest: 'M0 0',
+			}
+		);
+	});
+
 	_it('parse_cmd of svgo', function() {
 		assert.deepStrictEqual(
 			bup.svg_utils.parse_cmd(
@@ -46,7 +58,6 @@ _describe('svg_utils', function() {
 			}
 		);
 	});
-*/
 
 	_it('translate_path', function() {
 		assert.strictEqual(
@@ -75,7 +86,15 @@ _describe('svg_utils', function() {
 				'M108.923,216.777h22.631L89.785,288.29h-24.6l-7.3-44.843h22l2.178,23.707Z',
 				2, 1000, 2000),
 			'M 1217.846 2433.554 h 45.262 L 1179.57 2576.58 h -49.2 l -14.6 -89.686 h 44 l 4.356 47.414 Z'
-		);		
+		);
+
+		// Wild arcs with double zeroes
+		assert.strictEqual(
+			bup.svg_utils.translate_path(
+				'M0 0a1 3 0 005 7',
+				2, 0, 0),
+			'M 0 0 a 2 6 0 0 0 10 14'
+		);
 	});
 
 	_it('translate_css', function() {

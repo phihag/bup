@@ -34,16 +34,41 @@ function parse_cmd(str) {
 	var c = m[1];
 
 	var args = [];
-	var search = /(?:\s*,\s*|\s*)(-?(?:[0-9]*\.[0-9]+|[0-9]+\.?)(?:e-?[0-9]+)?)/g;
+	var numeric_search = /(?:\s*,\s*|\s*)(-?(?:[0-9]*\.[0-9]+|[0-9]+\.?)(?:e-?[0-9]+)?)/g;
+	var flag_search = /\s*([01])/g;
 	var rest_pos = m[0].length;
-	search.lastIndex = rest_pos;
-	while ((m = search.exec(str))) {
+	while (true) {
+		var is_flag = false;
+		if (c === 'a' || c === 'A') {
+			is_flag = (
+				(args.length % 7 === 3) ||  // large-arc-flag
+				(args.length % 7 === 4));  // sweep-flag
+		}
+
+		if (is_flag) {
+			flag_search.lastIndex = rest_pos;
+			var m = flag_search.exec(str);
+			if (!m) {
+				break;
+			}
+			args.push(parseInt(m[1]));
+			rest_pos = flag_search.lastIndex;
+			continue;
+		}
+
+		// Normal numeric argument
+		numeric_search.lastIndex = rest_pos;
+		var m = numeric_search.exec(str);
+		if (!m) {
+			break;
+		}
+
 		if (m.index !== rest_pos) {
 			// Skipped over characters
 			break;
 		}
 		args.push(parseFloat(m[1]));
-		rest_pos = search.lastIndex;
+		rest_pos = numeric_search.lastIndex;
 	}
 	return {
 		c: c,
