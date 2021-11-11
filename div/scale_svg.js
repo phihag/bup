@@ -151,9 +151,9 @@ async function scaleFile(filename, factor) {
 
 async function main() {
 	const parser = argparse.ArgumentParser({description: 'Scale all numbers in an SVG'});
-	parser.addArgument('files', {nargs: '+', help: 'The SVG files to modify'});
-	parser.addArgument(['-f', '--factor'], {defaultValue: 1, type: 'float', help: 'Scaling factor'});
-	const args = parser.parseArgs();
+	parser.add_argument('files', {nargs: '+', help: 'The SVG files to modify'});
+	parser.add_argument(['-f', '--factor'], {defaultValue: 1, type: 'float', help: 'Scaling factor'});
+	const args = parser.parse_args();
 
 	for (const f of args.files) {
 		await scaleFile(f, args.factor);
