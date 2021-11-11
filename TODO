@@ -1,17 +1,17 @@
 quittung TV refrath logo broken
 
-heinz corona form: Add "Keine", fix naming
+andreasP old Chrome
+
+fix jersey colors Berlin + Neuhausen
+
+read + allow umpire minreq
 
 cli to download, fix import
 	https://www.turnier.de/sport/league/match?id=915EE244-50FD-429B-B7C8-C02CDB0B3AA1&match=154
 
-Stephan Irsen Background
-
-Heinz Mail, new forms
-	add keine
-	other criteria
-
 fix export
+
+Stephan Irsen Background
 
 setupsheet: space for one more male name
 
@@ -29,6 +29,8 @@ This match URL points to TSV Neuhausen-Nymphenburg - 1. BC Sbr.-Bischmisheim, bu
 fix transmission of results (missing players)
 
 use github actions instead of travis CI
+
+udo voigt: Switch between two modes
 
 tournament or league?
 	CP first, at one event
