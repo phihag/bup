@@ -1263,7 +1263,7 @@ function render_international(s, container, event, court, match, colors) {
 			);
 
 			var player_container = uiu.el(team_container, 'div', {
-				'style': 'height: ' + (is_doubles ? '50%' : '100%') + ';',
+				'style': 'height: ' + (is_doubles ? '50%' : '100%') + ';' + bg_css,
 				'class': 'd_international_player_container',
 			});
 			if (event.nation_competition) {
