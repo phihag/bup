@@ -136,7 +136,9 @@ function download_league($httpc, $url, $league_key, $use_vrl, $use_hr) {
 
 		if (\preg_match_all('/
 				<td\s+class="standingsrank">[0-9]+<\/td>
-				<td><a\s+href="\/sport\/team\.aspx\?id=[A-Z0-9-]+&team=(?P<team_id>[0-9]+)">(?P<name>[^<]+)<\/a>
+				<td><a\s+href="\/sport\/team\.aspx\?id=[A-Z0-9-]+&team=(?P<team_id>[0-9]+)">
+				(?P<retracted><s>)?(?P<name>[^<]+)(?:<\/s>)?
+				<\/a>
 				/x', $team_table_html, $team_name_m, \PREG_SET_ORDER) === false) {
 			throw new \Exception('Failed to match teams in ' . $teams_url);
 		}
@@ -144,11 +146,12 @@ function download_league($httpc, $url, $league_key, $use_vrl, $use_hr) {
 			return [
 				'name' => tde_utils\unify_team_name($m['name']),
 				'team_id' => $m['team_id'],
+				'retracted' => boolval(isset($m['retracted']) && $m['retracted']),
 			];
 		}, $team_name_m);
 	} else {
 		// Maybe a KO tournament?
-		$drawsheet_url =  _make_url('drawsheet', $tournament_id, '&draw=' . $draw);
+		$drawsheet_url = _make_url('drawsheet', $tournament_id, '&draw=' . $draw);
 		$drawsheet_html = $httpc->request($drawsheet_url);
 
 		if (!\preg_match('/\s*<div\s+class="draw">(.*)<\/table>\s*<\/div>\s*<p>/', $drawsheet_html, $draw_m)) {
@@ -160,10 +163,10 @@ function download_league($httpc, $url, $league_key, $use_vrl, $use_hr) {
 				<tr>\s*
 				<td\s+class="line_b">[0-9]+[\s\x{00a0}]*<\/td>
 				<td\s+class="line_(?:br|b)">\s*
-				<a\s+href="team\.aspx\?id=[A-Z0-9-]+&(?:amp;)?team=(?P<team_id>[0-9]+)">(?P<name>[^<]+)<\/a>
+				<a\s+href="team\.aspx\?id=[A-Z0-9-]+&(?:amp;)?team=(?P<team_id>[0-9]+)">(?:<s>)?(?P<name>[^<]+)(?:<\/s>)?<\/a>
 				/xu',
 				$draw_html, $team_name_m, \PREG_SET_ORDER) === false) {
-			throw new \Exception('Failed to match teams in ' . $drawsheet_url_url);
+			throw new \Exception('Failed to match teams in ' . $drawsheet_url);
 		}
 
 		$teams = \array_map(function($m) {
