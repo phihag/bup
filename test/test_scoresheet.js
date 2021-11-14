@@ -21,9 +21,24 @@ _describe('scoresheet generation', () => {
 	}
 
 	function _assert_cell(cells, cell) {
-		assert(cells.some(function(c) {
+		const check = cells.some(function(c) {
 			return bup.utils.deep_equal(cell, c);
-		}), 'Cannot find cell ' + JSON.stringify(cell) + ' in ' + JSON.stringify(cells, undefined, 2));
+		});
+		if (check) return;
+
+		const matching_cells = cells.filter(c => c.type === cell.type);
+		if (matching_cells.length === 1) {
+			assert.deepStrictEqual(
+				matching_cells[0], cell,
+				`Cannot find cell ${JSON.stringify(cell)} in ${cells.length} cells; showing differences to closest cell.`
+			);
+		} else {
+			assert(
+				check,
+				`Cannot find cell\n${JSON.stringify(cell, undefined, 2)}\nin\n` +
+				JSON.stringify(cells, undefined, 2)
+			);
+		}
 	}
 
 	_it('0-0 in third game', () => {
