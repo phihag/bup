@@ -1,33 +1,34 @@
 'use strict';
 
-var assert = require('assert');
-var fs = require('fs');
+const assert = require('assert');
+const fs = require('fs');
+const path = require('path');
 
-var bup = require('../js/bup');
+const bup = require('../js/bup');
 
 // Make linter happy
 /*global describe:false, it:false, before:false*/
 
 // Trivial runner
-var _describe = ((typeof describe == 'undefined') ?
+const _describe = ((typeof describe == 'undefined') ?
 	function(s, f) {f();} :
 	describe
 );
-var _it = ((typeof it == 'undefined') ?
+const _it = ((typeof it == 'undefined') ?
 	function(s, f) {f();} :
 	it
 );
-var _before = ((typeof before == 'undefined') ?
+const _before = ((typeof before == 'undefined') ?
 	function(s, f) {f();} :
 	before
 );
-var _after = ((typeof after == 'undefined') ?
+const _after = ((typeof after == 'undefined') ?
 	function() {/* ignore */ } :
 	after  // eslint-disable-line no-undef
 );
 
 
-var SINGLES_SETUP = {
+const SINGLES_SETUP = {
 	teams: [{
 		players: [{name: 'Alice'}],
 	}, {
@@ -186,25 +187,43 @@ function load_event(fn, cb) {
 	});
 }
 
-module.exports = {
-	DOUBLES_SETUP: DOUBLES_SETUP,
-	SINGLES_SETUP: SINGLES_SETUP,
-	DOUBLES_TEAM_SETUP: DOUBLES_TEAM_SETUP,
-	DOUBLES_TEAM_SETUP_AWAY_FIRST: DOUBLES_TEAM_SETUP_AWAY_FIRST,
-	SINGLES_TEAM_SETUP: SINGLES_TEAM_SETUP,
-	SINGLES_TEAM_SETUP_AWAY_FIRST: SINGLES_TEAM_SETUP_AWAY_FIRST,
-	SINGLES_SETUP_EN: SINGLES_SETUP_EN,
-	DOUBLES_SETUP_EN: DOUBLES_SETUP_EN,
-	_describe: _describe,
-	_it: _it,
-	_before: _before,
-	_after: _after,
-	bup: bup,
+async function assert_snapshot(test_name, actual) {
+	const file_name = path.join(__dirname, `${test_name}.snapshot.json`);
+	let expected;
+	try {
+		const contents = await fs.promises.readFile(file_name, 'utf-8');
+		expected = JSON.parse(contents);
+	} catch (e) {
+		expected = `(Error while reading ${file_name}: ${e})`;
+	}
 
-	assert_u8r_eq: assert_u8r_eq,
-	press_score: press_score,
-	load_event: load_event,
-	state_after: state_after,
-	state_at: state_at,
-	find_object: find_object,
+	if (! bup.utils.deep_equal(actual, expected)) {
+		const actual_json = JSON.stringify(actual, undefined, 2);
+		await fs.promises.writeFile(file_name, actual_json);
+		assert.deepStrictEqual(actual, expected);
+	}
+}
+
+module.exports = {
+	DOUBLES_SETUP,
+	SINGLES_SETUP,
+	DOUBLES_TEAM_SETUP,
+	DOUBLES_TEAM_SETUP_AWAY_FIRST,
+	SINGLES_TEAM_SETUP,
+	SINGLES_TEAM_SETUP_AWAY_FIRST,
+	SINGLES_SETUP_EN,
+	DOUBLES_SETUP_EN,
+	_describe,
+	_it,
+	_before,
+	_after,
+	bup,
+
+	assert_u8r_eq,
+	assert_snapshot,
+	press_score,
+	load_event,
+	state_after,
+	state_at,
+	find_object,
 };
