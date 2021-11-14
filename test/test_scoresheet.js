@@ -2210,6 +2210,62 @@ _describe('scoresheet generation', () => {
 		});
 	});
 
+	_it('recovered injury after game end', async () => {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		}, {
+			type: 'love-all',
+		}];
+
+		press_score(presses, 20, 10);
+		presses.push({
+			type: 'score',
+			side: 'left',
+		});
+		presses.push({
+			type: 'injury',
+			team_id: 0,
+			player_id: 0,
+			timestamp: 1000000,
+		});
+		presses.push({
+			type: 'referee',
+			team_id: 0,
+			player_id: 0,
+			timestamp: 1003000,
+		});
+		// 9s later player recovers
+		presses.push({
+			type: 'injury-resume',
+			team_id: 0,
+			player_id: 0,
+			timestamp: 1009000,
+		});
+		presses.push({
+			type: 'postgame-confirm',
+			team_id: 0,
+			player_id: 0,
+			timestamp: 1010000,
+		});
+		presses.push({
+			type: 'love-all',
+		});
+
+		const cells = _scoresheet_cells(presses, SINGLES_SETUP);
+		_assert_cell(cells, {
+			type: 'vertical-text',
+			col: 32,
+			row: 2.5,
+			val: '0:09',
+			table: 0,
+		});
+	});
+
 	_it('match end after injury', () => {
 		var presses = [{
 			type: 'pick_side',
