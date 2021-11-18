@@ -6,7 +6,7 @@ use aufschlagwechsel\bup\utils;
 require_once './tde_utils.php';
 require_once './utils.php';
 
-function parse_teammatch($httpc, $tm_html, $domain, $match_id) {
+function parse_teammatch($httpc, $tm_html, $domain, $match_id, $match_url) {
 	$LEAGUE_KEYS = [
 		'Bundesligen 2016/17:1. Bundesliga 1. Bundesliga' => '1BL-2016',
 		'Bundesligen 2016/17:1. Bundesliga 1. Bundesliga - Final Four' => '1BL-2016',
@@ -33,12 +33,16 @@ function parse_teammatch($httpc, $tm_html, $domain, $match_id) {
 		'Ligen DBV 2018/19 (ohne Bundesligen):Gruppe Nord – (NO) – (001) Regionalliga Nord' => 'RLN-2016',
 		'Ligen DBV 2019/20 (ohne Bundesligen):Gruppe SüdOst – (SO) – (001) Regionalliga SüdOst' => 'RLSO-2019',
 		'Ligen DBV 2019/20 (ohne Bundesligen):Gruppe Mitte – (MI) – (001) Regionalliga Mitte' => 'RLM-2016',
+
+		'Bundesligen 2020/21:1. Bundesliga – 1. BL – (001) 1. Bundesliga' => '1BL-2020',
+		'Bundesligen 2020/21:2. Bundesliga – 2. BL-Nord – (002) 2. Bundesliga Nord' => '2BLN-2020',
+		'Bundesligen 2021/22:2. Bundesliga – 2. BL-Süd – (003) 2. Bundesliga Süd' => '2BLS-2020',
 	];
 
 	if (!\preg_match('/
 			<h2\s+class="media__title[^"]*"\s+title="(?P<name>[^"]+)"
 			/xs', $tm_html, $header_m)) {
-		throw new \Exception('Cannot find league name!');
+		throw new \Exception('Cannot find league name in ' . $match_url . '!');
 	}
 	if (\preg_match('/<th>Staffel:<\/th><td><a\s+href="[^"]*&draw=([0-9]+)">([^<]+)<\/a><\/td>/sx', $tm_html, $division_m)) {
 		$draw_id = $division_m[1];
