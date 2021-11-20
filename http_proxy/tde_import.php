@@ -34,8 +34,8 @@ function parse_teammatch($httpc, $tm_html, $domain, $match_id, $match_url) {
 		'Ligen DBV 2019/20 (ohne Bundesligen):Gruppe SüdOst – (SO) – (001) Regionalliga SüdOst' => 'RLSO-2019',
 		'Ligen DBV 2019/20 (ohne Bundesligen):Gruppe Mitte – (MI) – (001) Regionalliga Mitte' => 'RLM-2016',
 
-		'Bundesligen 2020/21:1. Bundesliga – 1. BL – (001) 1. Bundesliga' => '1BL-2020',
-		'Bundesligen 2020/21:2. Bundesliga – 2. BL-Nord – (002) 2. Bundesliga Nord' => '2BLN-2020',
+		'Bundesligen 2021/22:1. Bundesliga – 1. BL – (001) 1. Bundesliga' => '1BL-2020',
+		'Bundesligen 2021/22:2. Bundesliga – 2. BL-Nord – (002) 2. Bundesliga Nord' => '2BLN-2020',
 		'Bundesligen 2021/22:2. Bundesliga – 2. BL-Süd – (003) 2. Bundesliga Süd' => '2BLS-2020',
 	];
 
