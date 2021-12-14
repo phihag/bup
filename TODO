@@ -1,7 +1,13 @@
-cli to download, fix import
+black card after match should not change result
+	-> Stijn
+
+cli to download
 	https://www.turnier.de/sport/league/match?id=915EE244-50FD-429B-B7C8-C02CDB0B3AA1&match=154
 
 fix export
+	export players from file
+
+multiline scoresheet notes @RLW / default
 
 dmode simplified stripes (Marcus)
 	Spieler A
@@ -13,6 +19,8 @@ dmode simplified stripes (Marcus)
 	make color
 
 bg0 + bg1 for international (&clean&bwf)
+
+dblv upload
 
 https://newbluefx.com/products/titling/titler-pro/ (Marcus)
 
