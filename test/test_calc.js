@@ -2546,6 +2546,40 @@ _describe('calc_state', function() {
 		assert.strictEqual(s.game.won_by_score, false);
 	});
 
+	_it('Black card after match end', function() {
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}];
+		presses.push({
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'love-all',
+		});
+		press_score(presses, 21, 0);
+		presses.push({
+			type: 'postgame-confirm',
+		});
+		press_score(presses, 0, 21);
+
+		var s = state_after(presses, SINGLES_SETUP);
+		assert.strictEqual(s.match.finished, true);
+		assert.strictEqual(s.match.team1_won, true);
+
+		var presses_disqualified = presses.slice();
+		presses_disqualified.push({
+			type: 'disqualified',
+			team_id: 0,
+			player_id: 0,
+		});
+		s = state_after(presses_disqualified, SINGLES_SETUP);
+		assert.strictEqual(s.match.finished, true);
+		assert.strictEqual(s.match.team1_won, true);
+	});
+
 	_it('timer should continue after red card at 11', function() {
 		var presses = [{
 			type: 'pick_side', // Andrew&Alice pick left

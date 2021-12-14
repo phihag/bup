@@ -686,14 +686,16 @@ function calc_press(s, press) {
 		s.game.final_marks = [];
 
 		s.match.marks.push(press);
-		s.game.won_by_score = false;
-		s.game.finished = true;
-		s.game.team1_won = press.team_id !== 0;
-		s.match.team1_won = s.game.team1_won;
-		s.match.finished = true;
+		if (! s.match.finished) {
+			s.game.won_by_score = false;
+			s.game.finished = true;
+			s.game.team1_won = press.team_id !== 0;
+			s.game.team1_serving = null;
+			s.game.service_over = null;
+			s.match.team1_won = s.game.team1_won;
+			s.match.finished = true;
+		}
 		s.metadata.end = press.timestamp;
-		s.game.team1_serving = null;
-		s.game.service_over = null;
 		s.timer = false;
 		s.match.injuries = false;
 		s.match.cards.push(press);
