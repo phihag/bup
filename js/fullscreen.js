@@ -135,6 +135,7 @@ return {
 	active: active,
 	start: start,
 	update_fullscreen_button: update_fullscreen_button,
+	toggle: toggle,
 };
 
 })();
