@@ -107,6 +107,7 @@ _describe('helper functions', function() {
 		'TuS Schwanheim ': 'tusschwanheim',
 		'1. BV Maintal': 'bvmaintal',
 		'SV Berliner Brauereien': 'berlinerbrauereien',
+		'1. CfB Köln': 'cfbkoeln',
 	};
 
 	_it('logo associations', function() {

@@ -24,6 +24,7 @@ var TEAM_COLORS = {
 	'Hohenlimburg': {fg: '#0ebbff'},
 	'Horner': {fg: '#ff2222'}, // Hamburg Horner TV
 	'Hövelhof': {fg: '#ff0000'},
+	'CfB Köln': {fg: '#ddc75a', bg: '#000000'},
 	'Lüdinghausen': {fg: '#ff0000'},
 	'Neuhausen': {fg: '#ff6600'},
 	'Refrath': {fg: '#ffffff', bg: '#000b18'},
@@ -104,6 +105,8 @@ var LOGO_ALIASSE = {
 	'1. BC Sbr.-Bischmisheim': 'bcbsaarbruecken',
 	'1.BC Sbr.-Bischmisheim': 'bcbsaarbruecken',
 	'1.BV Mülheim': 'bvmuelheim',
+	'1.CfB Köln': 'cfbkoeln',
+	'1. CfB Köln': 'cfbkoeln',
 	'BC Bischmisheim': 'bcbsaarbruecken',
 	'Blau-Weiss Wittorf-NMS': 'wittorfneumuenster',
 	'SC Union Lüdinghausen': 'unionluedinghausen',
