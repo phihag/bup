@@ -1,6 +1,3 @@
-black card after match should not change result
-	-> Stijn
-
 cli to download
 	https://www.turnier.de/sport/league/match?id=915EE244-50FD-429B-B7C8-C02CDB0B3AA1&match=154
 
@@ -8,6 +5,8 @@ fix export
 	export players from file
 
 multiline scoresheet notes @RLW / default
+
+international: show receiver (plain without)
 
 dmode simplified stripes (Marcus)
 	Spieler A
@@ -17,6 +16,8 @@ dmode simplified stripes (Marcus)
 	main UI
 	colors
 	make color
+
+bolden names (|| color: #000;) (->Patrick Schober)
 
 bg0 + bg1 for international (&clean&bwf)
 
