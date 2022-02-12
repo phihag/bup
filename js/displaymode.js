@@ -825,6 +825,7 @@ function render_streamcourt(s, container, event/*, colors*/) {
 		if ((team_idx === 0) && event_logo_url) {
 			var logo_td = uiu.el(tr, 'td', {
 				rowspan: '2',
+				style: 'width:4em;',
 			});
 			uiu.el(logo_td, 'div', {
 				style: (
@@ -838,7 +839,9 @@ function render_streamcourt(s, container, event/*, colors*/) {
 		}
 
 		if (logo_urls) {
-			var team_logo_td = uiu.el(tr, 'td');
+			var team_logo_td = uiu.el(tr, 'td', {
+				style: 'width: 2em;',
+			});
 			if (logo_urls[team_idx]) {
 				uiu.el(team_logo_td, 'div', {
 					style: (
@@ -854,7 +857,7 @@ function render_streamcourt(s, container, event/*, colors*/) {
 			tr, 'td', {
 				style: (
 					'padding-right:0.5em;overflow:hidden;white-space:pre;' +
-					'width:8em;max-width:8em;min-width:8em;' +
+					'min-width:8em;' +
 					'font-size:80%;'
 				),
 			}, match ? namestr_short(match.setup.teams[team_idx].players) : '');
