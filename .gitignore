@@ -8,3 +8,5 @@ mail.*
 # Intellij IDEA
 .idea
 
+
+/vendor/

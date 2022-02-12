@@ -1,0 +1,14 @@
+{
+    "name": "phihag/bup",
+    "description": "Badminton Umpire Panel",
+    "type": "project",
+    "require": {
+        "ulrichsg/getopt-php": "^3.1"
+    },
+    "authors": [
+        {
+            "name": "Philipp Hagemeister",
+            "email": "phihag@phihag.de"
+        }
+    ]
+}

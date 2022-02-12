@@ -11,12 +11,15 @@ download-libs:
 
 deps: deps-essential ## Download and install all dependencies (for compiling / testing / CLI operation)
 
+script-deps:
+	composer.phar install
+
 deps-essential:
 	# (node --version && npm --version) >/dev/null 2>/dev/null || sudo apt-get install nodejs npm
 	npm install
 	$(MAKE) download-libs
 
-deps-optional:
+deps-optional: script-deps
 	test -e ./node_modules/wrtc/build/Release/obj.target/wrtc/src/peerconnection.o || npm install wrtc || echo 'wrtc installation failed. Continuing without wrtc...'
 
 cleandist:
