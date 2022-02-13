@@ -515,7 +515,7 @@ function parse_match(state, col_count) {
 			break;
 		}
 
-		const INJURY_ENDING_TYPES = ['postmatch-confirm', 'resigned', 'red-card', 'disqualified', 'score'];
+		var INJURY_ENDING_TYPES = ['postmatch-confirm', 'resigned', 'red-card', 'disqualified', 'score'];
 		if (s.match.finished && INJURY_ENDING_TYPES.includes(press.type)) {
 			_after_injuries(s, press);
 		}
