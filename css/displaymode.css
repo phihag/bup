@@ -15,7 +15,11 @@
 
 .display_list_container {
 	position: relative;
-	margin: 0 1vw;
+	margin: 3.5vmin 1vw 0 1vw;
+	font-size: 3.2vmin;
+	width: 98vw;
+	border-collapse: collapse;
+	table-layout: fixed;
 }
 
 .display_courts_container {
@@ -35,13 +39,6 @@
 	position: relative;
 }
 
-.display_list_container {
-	margin-top: 3.5vmin;
-	font-size: 3.2vmin;
-	width: 98vw;
-	border-collapse: collapse;
-	table-layout: fixed;
-}
 .display_list_thead {
 	border-bottom: 0.3vmin solid #666;
 }
