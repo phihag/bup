@@ -1,3 +1,7 @@
+default to minimal UI on tablets
+
+courtspot do not accept score from a loaded game
+
 cli to download
 	https://www.turnier.de/sport/league/match?id=915EE244-50FD-429B-B7C8-C02CDB0B3AA1&match=154
 
