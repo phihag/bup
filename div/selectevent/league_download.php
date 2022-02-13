@@ -202,7 +202,15 @@ function download_league($httpc, $url, $league_key, $use_vrl, $use_hr) {
 		<td[^>]*>(?:<strong>)?<a\s+class="teamname"[^>]+>(?P<name1>[^<]+)<\/a>(?:<\/strong>)?<\/td>
 		<td\s+align="center">-<\/td>
 		<td[^>]*>(?:<strong>)?<a\s+class="teamname"[^>]+>(?P<name2>[^<]+)<\/a>(?:<\/strong>)?<\/td>
-		<td>(?:<span\s+class="score"><span>[^<]*<\/span>(?:\s*U)?<\/span>)?<\/td>
+		<td>
+			(?P<score_html>
+			(?:\s*\[\s*)?
+			<span\s+class="score"><span>[^<]*<\/span>
+			(?:\s*U|\s*o\.\s*K\.)?
+			<\/span>
+			(?:\s*\]\s*)?
+			)?
+		<\/td>
 		<td><a\s+href="\.\/location\.aspx\?id=[A-F0-9-]+&lid=[0-9]+">
 			(?P<location>[^<]+)<\/a>
 		<\/td>
@@ -222,7 +230,7 @@ function download_league($httpc, $url, $league_key, $use_vrl, $use_hr) {
 		$team2 = _lookup_team($teams_by_name, $team2_name);
 
 		$location = \html_entity_decode($m['location']);
-		$tms[] = [
+		$this_tm = [
 			'date' => $m['date'],
 			'starttime' => $m['starttime'],
 			'matchday' => $m['matchday'],
@@ -232,6 +240,14 @@ function download_league($httpc, $url, $league_key, $use_vrl, $use_hr) {
 			'loc_coords' => geolocate($httpc, $location),
 			'team_ids' => [$team1['team_id'], $team2['team_id']],
 		];
+
+		// Only set cancelled when it's true, we want diffs to be reasonably clear
+		$score_html = isset($m['score_html']) ? $m['score_html'] : '';
+		if (\preg_match('/o\.\s*K\./', $m['score_html'])) {
+			$this_tm['cancelled'] = true;
+		}
+
+		$tms[] = $this_tm;
 	}
 
 	if ($use_vrl) {

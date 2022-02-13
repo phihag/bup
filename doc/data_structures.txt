@@ -102,6 +102,7 @@ tournament_logo_foreground_color CSS color for text in front of the logo.
 series_name     Name of the tournament series.
                 Will be used on selected event report sheets.
                 e.g. "Mannschaftsmeisterschaft Bayern 2018/2019"
+cancelled       true to indicate that the match has been cancelled, e.g. because a team retracted or due to unforeseen circumstances.
 confirmed       true iff the result of this team match has been confirmed by the league organizers.
 last_update     UNIX timestamp in ms: Date of last change to this event
 report_urls     An array of URLs where the result can be exported to.
