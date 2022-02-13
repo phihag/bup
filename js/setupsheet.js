@@ -643,7 +643,7 @@ function check_setup(s, team, team_id, cur_players) {
 }
 
 function rerender(s) {
-	var regular_nobackup = /^(1BL|2BLN|2BLS)-(2016|2017)$/.test(s.event.league_key);
+	var regular_nobackup = eventutils.regular_nobackup(s.event.league_key);
 
 	listed.forEach(function(team, team_id) {
 		var table = uiu.qs('#setupsheet_table_team' + team_id);
@@ -816,7 +816,7 @@ function calc_linecounts(player_counts, minlens, maxlen, empty_lines) {
 
 function fill_svg(s, svg_root, sheet_name, team_id)  {
 	var event = s.event;
-	var is_buli = eventutils.is_bundesliga(event.league_key);
+	var regular_nobackup = eventutils.regular_nobackup(event.league_key);
 	fill_text(svg_root, 'tournament_name', event.tournament_name || '');
 	fill_text(svg_root, 'event_name', event.event_name);
 	fill_text(svg_root, 'setup_desc', s._('setupsheet:setup|' + team_id));
@@ -851,7 +851,7 @@ function fill_svg(s, svg_root, sheet_name, team_id)  {
 						return;
 					}
 
-					if (is_buli && (col === 'backup') && listed_player.regular) {
+					if (regular_nobackup && (col === 'backup') && listed_player.regular) {
 						var darkbackup_rect = uiu.qs('rect[data-fill-id="darkbackup"]', g);
 						darkbackup_rect.removeAttribute('visibility');
 					}

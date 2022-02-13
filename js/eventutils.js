@@ -628,6 +628,13 @@ function pronounce_teamname(team_name) {
 	return core_name + team_num;
 }
 
+/**
+ * @returns true iff regular players cannot be backup players in the specified league.
+ */
+function regular_nobackup(league_key) {
+	return /^(1BL|2BLN|2BLS)-(2016|2017)$/.test(league_key);
+}
+
 return {
 	annotate: annotate,
 	calc_all_players: calc_all_players,
@@ -649,6 +656,7 @@ return {
 	is_german8: is_german8,
 	umpire_required: umpire_required,
 	pronounce_teamname: pronounce_teamname,
+	regular_nobackup: regular_nobackup,
 	// Testing only
 	/*@DEV*/
 	get_min_pause: get_min_pause,
