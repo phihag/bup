@@ -29,15 +29,15 @@ function parse(ab) {
 // - c: The actual command
 // - args: Array of arguments
 function parse_cmd(str) {
-	var m = /^\s*([ZzvVhHmMlLcAaCqQsStT])/.exec(str);
-	if (!m) return;
-	var c = m[1];
+	var command_m = /^\s*([ZzvVhHmMlLcAaCqQsStT])/.exec(str);
+	if (!command_m) return;
+	var c = command_m[1];
 
 	var args = [];
 	var numeric_search = /(?:\s*,\s*|\s*)(-?(?:[0-9]*\.[0-9]+|[0-9]+\.?)(?:e-?[0-9]+)?)/g;
 	var flag_search = /\s*([01])/g;
-	var rest_pos = m[0].length;
-	while (true) {
+	var rest_pos = command_m[0].length;
+	for (;;) {
 		var is_flag = false;
 		if (c === 'a' || c === 'A') {
 			is_flag = (
@@ -47,27 +47,27 @@ function parse_cmd(str) {
 
 		if (is_flag) {
 			flag_search.lastIndex = rest_pos;
-			var m = flag_search.exec(str);
-			if (!m) {
+			var flag_m = flag_search.exec(str);
+			if (!flag_m) {
 				break;
 			}
-			args.push(parseInt(m[1]));
+			args.push(parseInt(flag_m[1]));
 			rest_pos = flag_search.lastIndex;
 			continue;
 		}
 
 		// Normal numeric argument
 		numeric_search.lastIndex = rest_pos;
-		var m = numeric_search.exec(str);
-		if (!m) {
+		var numeric_m = numeric_search.exec(str);
+		if (!numeric_m) {
 			break;
 		}
 
-		if (m.index !== rest_pos) {
+		if (numeric_m.index !== rest_pos) {
 			// Skipped over characters
 			break;
 		}
-		args.push(parseFloat(m[1]));
+		args.push(parseFloat(numeric_m[1]));
 		rest_pos = numeric_search.lastIndex;
 	}
 	return {
