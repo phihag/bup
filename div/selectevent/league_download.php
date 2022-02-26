@@ -200,11 +200,11 @@ function download_league($httpc, $url, $league_key, $use_vrl, $use_hr) {
 		<td\s+align="right">(?P<round>[HR]|)<\/td>
 		<td>(?P<matchnum>[0-9]+|)<\/td>
 		<td[^>]*>(?:<strong>)?
-			<a\s+class="teamname"[^>]+>(?:<s>)?(?P<name1>[^<]+)(?:<\/s>)?<\/a>
+			<a\s+class="teamname"[^>]+>(?P<retracted_team1><s>)?(?P<name1>[^<]+)(?:<\/s>)?<\/a>
 		(?:<\/strong>)?<\/td>
 		<td\s+align="center">-<\/td>
 		<td[^>]*>(?:<strong>)?
-			<a\s+class="teamname"[^>]+>(?:<s>)?(?P<name2>[^<]+)(?:<\/s>)?<\/a>
+			<a\s+class="teamname"[^>]+>(?P<retracted_team2><s>)?(?P<name2>[^<]+)(?:<\/s>)?<\/a>
 		(?:<\/strong>)?<\/td>
 		<td>
 			(?P<score_html>
@@ -249,7 +249,12 @@ function download_league($httpc, $url, $league_key, $use_vrl, $use_hr) {
 
 		// Only set cancelled when it's true, we want diffs to be reasonably clear
 		$score_html = isset($m['score_html']) ? $m['score_html'] : '';
-		if (\preg_match('/o\.\s*K\.|<s>/', $m['score_html'])) {
+		$cancelled_by_score = \preg_match('/o\.\s*K\.|<s>/', $m['score_html']);
+		$retracted_team = (
+			(isset($m['retracted_team1']) && $m['retracted_team1']) ||
+			(isset($m['retracted_team2']) && $m['retracted_team2'])
+		);
+		if ($cancelled_by_score || $retracted_team) {
 			$this_tm['cancelled'] = true;
 		}
 
