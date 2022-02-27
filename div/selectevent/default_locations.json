@@ -3,6 +3,22 @@
         "lat": "51.293644",
         "lng": "12.380431"
     },
+    "07546 Gera, Sporthalle Gera-Tinz, Berliner Str. 157": {
+        "lat": "50.895682",
+        "lng": "12.07677"
+    },
+    "07548 Gera, Panndorfhalle Gera, Neue Str. 23": {
+        "lat": "50.880379",
+        "lng": "12.073169"
+    },
+    "07549 Gera, Sporthalle der Integrierten Gesamtschule, Ahornstr. 3": {
+        "lat": "50.876279",
+        "lng": "12.08387"
+    },
+    "07749 Jena, Mehrzweckhalle, Wöllnitzer Str. 40": {
+        "lat": "50.916266",
+        "lng": "11.591418"
+    },
     "07749 Jena, Sportforum Halle 1, Am Stadion 2": {
         "lat": "50.914953",
         "lng": "11.588145"
@@ -123,6 +139,14 @@
         "lat": "50.575935",
         "lng": "7.244928"
     },
+    "56470 Bad Marienberg, Großsporthalle, Kirburger Straße": {
+        "lat": "50.66462",
+        "lng": "7.953837"
+    },
+    "56626 Andernach, Kreissporthalle, Beethovenstraße": {
+        "lat": "50.431032",
+        "lng": "7.406462"
+    },
     "58119 Hagen, Sporthalle, Wiesenstr. 27": {
         "lat": "51.371236",
         "lng": "7.487553"
@@ -159,6 +183,18 @@
         "lat": "50.176486",
         "lng": "8.735053"
     },
+    "61267 Neu-Anspach, Neue Sporthalle Adolf-Reichwein-Schule, Wiesenau 30": {
+        "lat": "50.298048",
+        "lng": "8.507817"
+    },
+    "63477 Maintal, Maintalhalle, Berliner-Str. 64": {
+        "lat": "50.136413",
+        "lng": "8.844628"
+    },
+    "63477 Maintal, Sporthalle Albert-Einstein-Schule. Goethestr. 61": {
+        "lat": "50.1374",
+        "lng": "8.837979"
+    },
     "65719 Hofheim am Taunus, Brühlwiesenhalle, Rudolf-Mohr-Str. 4": {
         "lat": "50.087126",
         "lng": "8.444456"
@@ -166,6 +202,18 @@
     "66121 Saarbrücken, Joachim-Deckarm-Halle, Halbergstr. 84-86": {
         "lat": "49.230344",
         "lng": "7.015146"
+    },
+    "66123 Saarbrücken, Herman-Neuberger-Sportschule 1, Badmintonhalle 72, Herman-Neuberger-Sportschule 1": {
+        "lat": "49.263541",
+        "lng": "7.082895"
+    },
+    "66130 Saarbrücken, Sporthalle Brebach, Rosenstr. 16": {
+        "lat": "49.20876",
+        "lng": "7.044172"
+    },
+    "67059 Ludwigshafen, Post Sport Halle, Bayreuther Str. 3": {
+        "lat": "49.47525",
+        "lng": "8.422187"
     },
     "67141 Neuhofen, Rehbachhalle, Jahnstr. 20": {
         "lat": "49.420986",
