@@ -8,19 +8,19 @@ var i18n_nlbe = {
 'dialog-left': 'Linkerkant',
 'dialog-server': 'Server',
 'dialog-receiver': 'Ontvanger',
-'Call referee': 'referee bellen',
+'Call referee': 'Referee bellen',
 'Are you retiring?': 'Geef je op?',
 
 'fullscreen:go': 'Ga in volledig scherm modus',
-'fullscreen:no': 'normaal scherm',
-'timer:restart': 'herstart timer',
+'fullscreen:no': 'Normaal scherm',
+'timer:restart': 'Herstart timer',
 
 'postmatch:label': '(Deze match is voorbij)',
-'postmatch:leave': 'match verlaten',
+'postmatch:leave': 'Match verlaten',
 
 
-'button:Unsuspend': 'verder spelen',
-'button:Resume after injury': 'verder spelen',
+'button:Unsuspend': 'Verder spelen',
+'button:Resume after injury': 'Verder spelen',
 
 'onmyright.team': 'Dames en heren,\nrechts van mij\n{right_team}\nen links van mij\n{left_team}.\n{serving_team}{serving_str}.\n\n{score}.\nSpeel.',
 'onmyleft.team': 'Dames en heren,\nlinks van mij\n{right_team}\nen rechts van mij\n{left_team}.\n{serving_team}{serving_str}.\n\n{score}.\nSpeel.',
@@ -74,12 +74,12 @@ var i18n_nlbe = {
 'exceptions:overrule': 'Overrule\nline judge <---',
 'exceptions:walkover': 'Walkover',
 
-'exceptions:dialog:correction': 'service court correction <---',
-'exceptions:dialog:red-card': 'fout voor wangedrag (rode kaart)',
-'exceptions:dialog:yellow-card': 'waarschuwing voor wangedrag (gele kaart)',
+'exceptions:dialog:correction': 'Service court correction <---',
+'exceptions:dialog:red-card': 'Fout voor wangedrag (rode kaart)',
+'exceptions:dialog:yellow-card': 'Waarschuwing voor wangedrag (gele kaart)',
 'exceptions:dialog:injury': 'Kwetsuur',
 'exceptions:dialog:retired': 'Opgave',
-'exceptions:dialog:black-card': 'diskwalificatie (zwarte kaart)',
+'exceptions:dialog:black-card': 'Diskwalificatie (zwarte kaart)',
 'exceptions:dialog:walkover': 'Walkover',
 
 'mark|overrule': 'O',
@@ -114,7 +114,7 @@ var i18n_nlbe = {
 'scoresheet:Empty Scoresheet': 'Scoresheet <---',
 'scoresheet:[Event Scoresheet Filename]': 'Scoresheets {event_name} <---',
 
-'settings:Language': 'Language',
+'settings:Language': 'Taal',
 };
 
 /*@DEV*/
