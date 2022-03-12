@@ -419,6 +419,17 @@ function resync() {
 	}
 }
 
+function score_transmitted() {
+	for (var key in erroneous) {
+		if (key.indexOf('.score') > 0) {
+			if (erroneous[key]) {
+				return false;
+			}
+		}
+	}
+	return true;
+}
+
 function errstate(component, err) {
 	if (err) {
 		erroneous[component] = true;
@@ -805,6 +816,7 @@ return {
 	on_edit_event: on_edit_event,
 	$request: $request,
 	resync: resync,
+	score_transmitted: score_transmitted,
 	send_press: send_press,
 	subscribe: subscribe,
 	supports_order: supports_order,

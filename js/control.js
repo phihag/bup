@@ -111,6 +111,28 @@ function stop_match(s) {
 	s.initialized = false;
 }
 
+function ask_leave_match(s) {
+	if (!network.is_enabled()) {
+		leave_match(s);
+		return;
+	}
+
+	if (network.score_transmitted()) {
+		leave_match(s);
+		return;
+	}
+
+	// error state
+	if (window.confirm(s._('network:leave match?'))) {
+		leave_match(s);
+	} else {
+		if (s.presses && s.presses.length > 0) {
+			var last_press = s.presses[s.presses.length - 1];
+			network.send_press(s, last_press);
+		}
+	}
+}
+
 function leave_match(s) {
 	stop_match(s);
 
@@ -245,10 +267,10 @@ function ui_init() {
 				type: 'postmatch-confirm',
 			});
 		}
-		leave_match(state);
+		ask_leave_match(state);
 	});
 	click.qs('#postmatch-leave', function() {
-		leave_match(state);
+		ask_leave_match(state);
 	});
 	click.qs('#left_score', function() {
 		block_buttons();

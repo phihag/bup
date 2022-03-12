@@ -58,6 +58,7 @@ var i18n_en = {
 'network:in progress': 'Match {match} has already been started',
 'network:match finished': 'Match {match} already finished ({score})!',
 'network:fetching courts': 'Fetching court list ...',
+'network:leave match?': 'Match result not transmitted yet. Leave match without transmitting result?',
 
 'editevent:link': 'edit event',
 'editevent:back': 'Back',

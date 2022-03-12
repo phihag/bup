@@ -58,6 +58,7 @@ var i18n_de = {
 'network:in progress': 'Das Spiel {match} wurde bereits angefangen',
 'network:match finished': 'Das Spiel {match} ist bereits beendet ({score})!',
 'network:fetching courts': 'Hole Spielfeld-Liste ...',
+'network:leave match?': 'Das Spielergebnis wurde noch nicht übertragen. Spiel wirklich verlassen, ohne das das Ergebnis übertragen wurde?',
 
 'editevent:link': 'Wettkampf bearbeiten',
 'editevent:back': 'Zurück',
