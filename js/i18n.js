@@ -39,6 +39,7 @@ function register_all() {
 	register_lang(i18n_deat);
 	register_lang(i18n_dech);
 	register_lang(i18n_frch);
+	register_lang(i18n_nlbe);
 }
 
 function init() {
