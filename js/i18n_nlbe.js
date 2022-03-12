@@ -114,6 +114,7 @@ var i18n_nlbe = {
 'scoresheet:Empty Scoresheet': 'Scoresheet <---',
 'scoresheet:[Event Scoresheet Filename]': 'Scoresheets {event_name} <---',
 
+'settings:Language': 'Language',
 };
 
 /*@DEV*/
