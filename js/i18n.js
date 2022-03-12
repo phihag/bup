@@ -182,6 +182,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var i18n_dech = require('./i18n_dech');
 	var i18n_en = require('./i18n_en');
 	var i18n_frch = require('./i18n_frch');
+	var i18n_nlbe = require('./i18n_nlbe');
 
 	i18n.register_all();
 
