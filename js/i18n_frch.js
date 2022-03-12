@@ -2,6 +2,7 @@ var i18n_frch = {
 
 '_code': 'fr-CH',
 '_name': 'Français (Suisse)',
+'_fallback': 'en',
 
 
 'experimental': ' (expérimental)',
