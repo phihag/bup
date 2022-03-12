@@ -40,14 +40,14 @@ function _request_json(s, component, options, cb) {
 		}
 
 		if (res.status !== 'ok') {
-			return cb({msg: res.message + ' (Status ist ' + res.status + ')'});
+			return cb({msg: res.message + ' ' + s._('network:error:status', {status: res.status})});
 		}
 
 		return cb(null, res);
 	}).fail(function (xhr) {
 		var msg = ((xhr.status === 0) ?
-			'BTS nicht via HTTP erreichbar' :
-			('Netzwerk-Fehler (Code ' + xhr.status + ')')
+			s._('network:error:bts') :
+			s._('network:error:http', {code: xhr.status})
 		);
 		return cb({
 			type: 'network-error',

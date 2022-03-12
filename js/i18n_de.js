@@ -49,6 +49,9 @@ var i18n_de = {
 
 'network:error': 'Fehler bei der Netzwerk-Übertragung',
 'network:error:unconfigured': 'Keine Netzwerk-Anbindung konfiguriert! (Einzel-Demo-Modus statt #bldemo?)',
+'network:error:bts': 'BTS nicht via HTTP erreichbar',
+'network:error:http': 'Netzwerk-Fehler (Code {code})',
+'network:error:status': '(Status ist {status})',
 'network:Matches': 'Spiele',
 'network:restart match': 'Spiel bei 0-0 neu starten',
 'network:resume match': 'Spiel bei {score} fortsetzen',

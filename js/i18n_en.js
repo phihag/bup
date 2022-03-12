@@ -49,6 +49,9 @@ var i18n_en = {
 
 'network:error': 'Network transmission error',
 'network:error:unconfigured': 'Network connection not configured (demo mode? put #bldemo into the URL to see it)',
+'network:error:bts': 'BTS not reachable',
+'network:error:http': 'network error (code {code})',
+'network:error:status': '(State is {status})',
 'network:Matches': 'Matches',
 'network:restart match': 'Restart match at 0-0',
 'network:resume match': 'Resume match at {score}',
