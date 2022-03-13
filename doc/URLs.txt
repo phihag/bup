@@ -59,9 +59,10 @@ lang=LANGCODE       Set language to the specified one.
     LANGCODE can be one of:
       en     English
       de     German (Germany)
-      de_at  German (Austria)
-      de_ch  German (Switzerland)
-      fr_ch  French (Switzerland)
+      de-AT  German (Austria)
+      de-CH  German (Switzerland)
+      fr-CH  French (Switzerland)
+      nl-BE  Flemish (Belgian Dutch)
 court=COURTCODE     Run on the specified court. COURTCODE depends on the network. Normally, a number like 1, 2, or the string "referee".
 dm_style=STYLECODE  In display mode, start with the specified style.
 	Available styles:
