@@ -183,12 +183,6 @@ var i18n_en = {
 
 'button:Cancel': 'Cancel',
 
-'bup.update_available': 'A new version of the umpire panel is now available.',
-'bup.update_now': 'Update now',
-'bup.update_later': 'Later',
-'bup.updating': 'Updating ...',
-'bup.updated.version': 'Version',
-
 'settings:Back to Match': 'Back to match',
 'settings:Current Match': 'Current match',
 'settings:Edit Manually': 'Manual edit',

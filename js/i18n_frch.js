@@ -180,11 +180,6 @@ var i18n_frch = {
 
 'button:Cancel': 'Annuler',
 
-'bup.update_available': 'Une nouvelle version du panneau des arbitres est maintenant disponible.',
-'bup.update_now': 'Mettre à jour maintenant',
-'bup.update_later': 'Plus tard',
-'bup.updating': 'Mettre à jour ...',
-'bup.updated.version': 'version',
 'settings:Back to Match': 'Retour au jeu',
 'settings:Current Match': 'Jeu actuel',
 'settings:Edit Manually': 'Modification manuelle',

@@ -184,12 +184,6 @@ var i18n_de = {
 
 'button:Cancel': 'Abbrechen',
 
-'bup.update_available': 'Eine neue Version des Schiedsrichter-Panels ist verfügbar.',
-'bup.update_now': 'Jetzt aktualisieren',
-'bup.update_later': 'Später',
-'bup.updating': 'Aktualisiere ...',
-'bup.updated.version': 'Version',
-
 'settings:Back to Match': 'Zurück zum Spiel',
 'settings:Current Match': 'Aktuelles Spiel',
 'settings:Edit Manually': 'Manuell Bearbeiten',
