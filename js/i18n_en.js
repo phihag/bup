@@ -200,7 +200,7 @@ var i18n_en = {
 'settings:team2-placeholder': 'e.g. China',
 'settings:match_name-placeholder': 'e.g. MS',
 'settings:event_name-placeholder': 'e.g. Finals',
-'settings:tournament_name-placeholder': 'e.g. All-England 2018',
+'settings:tournament_name-placeholder': 'e.g. All-England 2023',
 'settings:match_name-label': 'Match',
 'settings:event-label': 'Event',
 'settings:tournament_name-label': 'Tourn.',
