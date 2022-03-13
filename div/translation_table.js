@@ -67,7 +67,7 @@ async function main() {
         assert(lang, `Cannot find language ${language_id}`);
         all_keys.push(...Object.keys(lang));
     }
-    all_keys = unique(all_keys).filter(k => !k.startsWith('_'));
+    all_keys = unique(all_keys);
 
     const workbook = new ExcelJS.Workbook();
     const now = new Date();

@@ -1,7 +1,7 @@
 var i18n_nlbe = {
 
 '_code': 'nl-BE',
-'_name': 'Vlaams (experimenteel)',
+'_name': 'Vlaams',
 '_fallback': 'en',
 
 
