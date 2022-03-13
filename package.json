@@ -10,14 +10,9 @@
     "test": "mocha test/ test/integration/",
     "test:watch": "npm run test -- -w"
   },
-  "dependencies": {
-    "node-webcrypto-ossl": "*",
-    "pentf": "^1.4.3",
-    "puppeteer": "^5.3.1",
-    "wrtc": "^0.4.1",
-    "ws": "*"
-  },
+  "dependencies": {},
   "devDependencies": {
+    "@mapbox/node-pre-gyp": "*",
     "argparse": "*",
     "async": "*",
     "async-lock": "*",
@@ -26,14 +21,16 @@
     "istanbul": "*",
     "jszip": "*",
     "mocha": "*",
-    "parse-appcache-manifest": "*",
+    "node-webcrypto-ossl": "*",
     "stylelint": "^13.3.3",
     "stylelint-config-standard": "*",
     "supervisor": "*",
     "svgo": "*",
     "uglify-js": "3.x",
-    "xmldom": "*",
-    "@mapbox/node-pre-gyp": "*"
+    "wrtc": "^0.4.1",
+    "ws": "*",
+    "xlsx": "^0.18.3",
+    "xmldom": "*"
   },
   "private": true
 }

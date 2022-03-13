@@ -21,7 +21,6 @@ function ui_init() {
 
 	uiu.text_qs('.version', bup_version);
 
-	appcache.ui_init();
 	$('#script_jspdf').on('load', function() {
 		scoresheet.jspdf_loaded();
 		setupsheet.jspdf_loaded();
@@ -69,10 +68,6 @@ function ui_init() {
 	if (state.settings.go_fullscreen) {
 		fullscreen.autostart();
 	}
-
-	if (hash_query.updated !== undefined) {
-		appcache.on_post_update(bup_version);
-	}
 }
 
 /*@DEV*/
@@ -88,7 +83,6 @@ if (typeof module === 'undefined') {
 
 /* @DEV */
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
-	var appcache = require('./appcache');
 	var btde = require('./btde');
 	var buphistory = require('./buphistory');
 	var calc = require('./calc');

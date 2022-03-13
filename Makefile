@@ -25,11 +25,6 @@ deps-optional: script-deps
 cleandist:
 	rm -rf -- dist
 
-manifest: appcache-manifest
-
-appcache-manifest:
-	node div/make_manifest.js dist/bup/ div/bup.appcache.in dist/bup/bup.appcache
-
 dist: cleandist ## Create distribution files
 	mkdir -p dist/bup
 
@@ -93,7 +88,6 @@ dist: cleandist ## Create distribution files
 		div/wakelock.mp4 \
 		--target-directory dist/bup/div/
 
-	$(MAKE) appcache-manifest
 	node div/calc_checksums.js dist/ bup/ dist/bup/checksums.json
 
 	find dist -exec touch --date "$$(git log -1 --date=iso | sed -n -e 's/Date:\s*\([0-9 :-]*\)+.*/\1/p')" '{}' ';'
@@ -161,4 +155,4 @@ install-hub: deps
 	systemctl enable buphub
 	systemctl start buphub
 
-.PHONY: default help deps deps-essential deps-optional test clean download-libs upload dist cleandist coverage coverage-display cd lint jshint eslint appcache-manifest manifest upload-run stylelint doclint deps-essential sat-hub root-hub install-hub testall ta tu mockserver
+.PHONY: default help deps deps-essential deps-optional test clean download-libs upload dist cleandist coverage coverage-display cd lint jshint eslint upload-run stylelint doclint deps-essential sat-hub root-hub install-hub testall ta tu mockserver

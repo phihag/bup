@@ -58,7 +58,6 @@ _describe('static_handler', () => {
 		assert.strictEqual(static_handler.mimetype('foo.txt'), 'text/plain');
 		assert.strictEqual(static_handler.mimetype('foo.gif'), 'image/gif');
 		assert.strictEqual(static_handler.mimetype('bup/bup.css'), 'text/css');
-		assert.strictEqual(static_handler.mimetype('dist/bup.appcache'), 'text/cache-manifest');
 		assert.strictEqual(static_handler.mimetype('Makefile'), undefined); // follow apache
 	});
 });
