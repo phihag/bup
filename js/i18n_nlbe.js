@@ -8,7 +8,7 @@ var i18n_nlbe = {
 'dialog-left': 'Linkerkant',
 'dialog-server': 'Server',
 'dialog-receiver': 'Ontvanger',
-'Call referee': 'Referee bellen',
+'Call referee': 'Referee oproepen',
 'Are you retiring?': 'Geef je op?',
 
 'fullscreen:go': 'Ga in volledig scherm modus',
@@ -115,6 +115,7 @@ var i18n_nlbe = {
 'scoresheet:[Event Scoresheet Filename]': 'Scoresheets {event_name} <---',
 
 'settings:Language': 'Taal',
+'settings:Settings': 'Instellingen',
 };
 
 /*@DEV*/
