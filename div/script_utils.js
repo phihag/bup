@@ -29,6 +29,20 @@ function hash_file(fn, cb, algo) {
 	});
 }
 
+function unique(iterable) {
+	const res = [];
+	const seen = new Set();
+
+	for (const el of iterable) {
+		if (seen.has(el)) continue;
+
+		seen.add(el);
+		res.push(el);
+	}
+	return res;
+}
+
 module.exports = {
 	hash_file,
+	unique,
 };
