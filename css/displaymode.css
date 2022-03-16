@@ -530,6 +530,7 @@
 
 .d_tim_table {
 	width: 99.999%;
+	height: 100%;
 	border-collapse: collapse;
 	font-size: 3.5vmin;
 	table-layout: fixed;
