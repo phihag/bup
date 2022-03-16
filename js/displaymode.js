@@ -1428,6 +1428,7 @@ function render_bwfonlyplayers(s, container, event, court, match, colors) {
 
 		var team_container = uiu.el(container, 'div', {
 			'class': 'd_international_team',
+			'style': 'background:' + bg_col + ';',
 		});
 		players.map(function(player, player_id) {
 			var is_server = (!match_over) && team_serving && (server.player_id === player_id);
