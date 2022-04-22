@@ -534,6 +534,7 @@ var i18n_en = {
 'displaymode|stripes': 'stripes',
 'displaymode|stream': 'stream',
 'displaymode|streamcourt': 'court stream',
+'displaymode|streamteam': 'stream team',
 'displaymode:court_id': 'court:',
 'displaymode:court_id:loading': 'loading ...',
 'displaymode:reverse_order': 'reverse court order',
