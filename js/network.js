@@ -247,10 +247,10 @@ function ui_render_matchlist(s, event) {
 
 	var top_label = event.event_name;
 	if (!top_label) {
-		if (s.settings && (s.settings.court_description || s.settings.court_id)) {
+		if (s.settings && s.settings.court_id) {
 			top_label = s._(
 				'network:Matches on court',
-				{court: (s.settings.court_description || _short_court_id(s.settings.court_id))});
+				{court: _short_court_id(s.settings.court_id)});
 		} else {
 			top_label = s._('network:Matches');
 		}
