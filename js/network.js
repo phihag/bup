@@ -235,7 +235,18 @@ function enter_match(match) {
 function ui_render_matchlist(s, event) {
 	var container = uiu.qs('#setup_network_matches');
 	uiu.empty(container); // TODO better transition if we're updating?
-	uiu.text_qs('.setup_network_event', (event.event_name || s._('network:Matches')));
+
+	var top_label = event.event_name;
+	if (!top_label) {
+		if (s.settings && (s.settings.court_description || s.settings.court_id)) {
+			top_label = s._(
+				'network:Matches on court',
+				{court: (s.settings.court_description || s.settings.court_id)});
+		} else {
+			top_label = s._('network:Matches');
+		}
+	}
+	uiu.text_qs('.setup_network_event', top_label);
 
 	event.matches.forEach(function(match) {
 		var btn = uiu.el(container, 'button', {
