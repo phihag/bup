@@ -247,7 +247,7 @@ function ui_render_matchlist(s, event) {
 
 	var top_label = event.event_name;
 	if (!top_label) {
-		if (s.settings && s.settings.court_id) {
+		if (s.settings && s.settings.court_id && s.settings.court_id !== 'referee') {
 			top_label = s._(
 				'network:Matches on court',
 				{court: _short_court_id(s.settings.court_id)});
