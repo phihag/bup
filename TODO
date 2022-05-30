@@ -1,4 +1,19 @@
+red cross for injury
+	Jörg + Conni
+
+tournament display mode with handschuhmacher on 1024 should never scroll
+
+dmode tournament_overview
+
+in focus mode show "Spiele" -> "Spiele auf Court 5"
+
 translations_table: import
+	import flemish, see email
+
+show receivers during server dialog
+	benedikt
+
+fix displaymode bwfplayersonly
 
 doc flemish, test
 
