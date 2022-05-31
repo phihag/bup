@@ -356,7 +356,7 @@ _describe('btde', function() {
 		};
 
 		var date = new Date(2019, 9, 12);
-		var ml = bup.btde()._parse_event(doc, date);
+		var ml = bup.btde()._parse_event({team_competition: true}, doc, date);
 		assert.deepEqual(ml, expected);
 
 		var s = {event: ml};

@@ -218,18 +218,10 @@ function _get_counting(league_key, event_data) {
 	return (event_data.gews == 2) ? '3x21' : '5x11_15^90';
 }
 
-function _parse_event(doc, now) {
+function _parse_event(s, doc, now) {
 	var event_data = doc;
 	var home_team_name = event_data.home;
 	var away_team_name = event_data.guest;
-
-	var used_courts = [{
-		court_id: 1,
-		description: '1 (links)',
-	}, {
-		court_id: 2,
-		description: '2 (rechts)',
-	}];
 
 	var starttime;
 	var date;
@@ -238,24 +230,32 @@ function _parse_event(doc, now) {
 		date = starttime_m[1];
 		starttime = starttime_m[2];
 	}
+
+	var counting;
 	var league_key;
-	if (event_data.league) {
-		league_key = _get_league_key(event_data.league);
-		if (!league_key) {
-			report_problem.silent_error('Cannot associate btde league name ' + JSON.stringify(event_data.league));
-		}
+	var team_competition = true;
+	if (event_data.league === 'Turnier') {
+		counting = '3x21';
+		team_competition = false;
 	} else {
-		// No league key, guess
-		report_problem.silent_error('btde: league key missing');
-		league_key = (doc.fixtures.length === 8) ? 'RLW-2016' : '1BL-2020';
+		if (event_data.league) {
+			league_key = _get_league_key(event_data.league);
+			if (!league_key) {
+				report_problem.silent_error('Cannot associate btde league name ' + JSON.stringify(event_data.league));
+			}
+		} else {
+			// No league key, guess
+			report_problem.silent_error('btde: league key missing');
+			league_key = (doc.fixtures.length === 8) ? 'RLW-2016' : '1BL-2020';
+		}
+		counting = _get_counting(league_key, event_data);
+		// Fallback: if everything goes wrong, go for 1BL
+		if (! league_key && (counting == '5x11_15^90')) {
+			league_key = '1BL-2020';
+		}
 	}
-	var counting = _get_counting(league_key, event_data);
 
-	// Fallback: if everything goes wrong, go for 1BL
-	if (! league_key && (counting == '5x11_15^90')) {
-		league_key = '1BL-2020';
-	}
-
+	var used_courts = courts_by_event(s, {team_competition: team_competition}, false);
 	var matches = doc.fixtures.map(function(match) {
 		var is_doubles = /HD|DD|GD/.test(match.dis);
 		var teams = [{
@@ -335,7 +335,7 @@ function _parse_event(doc, now) {
 	return {
 		starttime: starttime,
 		date: date,
-		team_competition: true,
+		team_competition: team_competition,
 		team_names: [home_team_name, away_team_name],
 		matches: matches,
 		courts: used_courts,
@@ -362,23 +362,66 @@ function list_matches(s, cb) {
 				msg: 'badmintonticker-Aktualisierung fehlgeschlagen: Server-Fehler erkannt',
 			});
 		}
-		var ev = _parse_event(doc, new Date());
+		var ev = _parse_event(s, doc, new Date());
 		eventutils.annotate(state, ev);
 		return cb(null, ev);
 	});
 }
 
+function fetch_courts(s, callback) {
+	list_matches(s, function(err, event) {
+		if (err) return callback(err);
+
+		var courts = courts_by_event(s, event, true);
+		s.btde_courts = courts;
+		return callback(err, courts);
+	});
+}
+
 function courts(s) {
-	return [{
-		id: '1',
-		description: s._('court:left'),
-	}, {
-		id: '2',
-		description: s._('court:right'),
-	}, {
-		id: 'referee',
-		description: s._('court:referee'),
-	}];
+	return s.btde_courts;
+}
+
+function courts_by_event(s, event, include_referee) {
+	var res;
+	if (event && !event.team_competition) {
+		res = [{
+			id: '1',
+			label: '1',
+		}, {
+			id: '2',
+			label: '2',
+		}, {
+			id: '3',
+			label: '3',
+		}, {
+			id: '4',
+			label: '4',
+		}, {
+			id: '5',
+			label: '5',
+		}, {
+			id: '6',
+			label: '6',
+		}];
+	} else {
+		res = [{
+			id: '1',
+			description: s._('court:left'),
+		}, {
+			id: '2',
+			description: s._('court:right'),
+		}];
+	}
+
+	if (include_referee) {
+		res.push({
+			id: 'referee',
+			description: s._('court:referee'),
+		});
+	}
+
+	return res;
 }
 
 function ui_init() {
@@ -495,6 +538,7 @@ return {
 	list_matches: list_matches,
 	sync: sync,
 	courts: courts,
+	fetch_courts: fetch_courts,
 	service_name: service_name,
 	editable: editable,
 	on_edit_event: on_edit_event,
