@@ -2503,7 +2503,7 @@ function calc_team_colors(event, settings) {
 	};
 }
 
-function calc_colors(cur_settings, event) {
+function calc_colors(cur_settings, event, match) {
 	var res = {};
 	ALL_COLORS.forEach(function(k) {
 		var ek = 'd_' + k;
@@ -2513,6 +2513,11 @@ function calc_colors(cur_settings, event) {
 		var tc = calc_team_colors(event, cur_settings);
 		utils.obj_update(res, tc);
 	}
+
+	if (match && match.setup && match.setup.override_colors) {
+		utils.obj_update(res, match.setup.override_colors);
+	}
+
 	return res;
 }
 
@@ -2796,8 +2801,8 @@ function update(err, s, event) {
 			return;
 		}
 
-		var colors = calc_colors(s.settings, event);
 		var match = _match_by_court(event, court);
+		var colors = calc_colors(s.settings, event, match);
 
 		dads.d_onmatchchange(s, ads_container, match);
 

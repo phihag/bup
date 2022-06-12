@@ -249,6 +249,8 @@ warmup             Warmup time rules. Values are:
    "none"           No warmup time.
 scheduled_time_str Official start time of the match, e.g. "09:00".
 scheduled_date     Official date of the match in ISO8601, e.g. "2019-05-30".
+override_colors    Special colors for the match. Either undefined (=use default color settings), or
+                   an object containing color keys keys, e.g. {"0": "#ff0000", "bg0": "#000000", "1": "#00ff00", "bg0": "#000044"} .
 
 The following keys are copied over from the event (see there for documentation):
 counting, league_key, tournament_name, event_name, team_competition, nation_competition, away_first
