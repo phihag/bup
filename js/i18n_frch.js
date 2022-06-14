@@ -12,7 +12,7 @@ var i18n_frch = {
 'Select Court': 'Choisir un court',
 'Score Sheet': 'Feuille de score',
 'Statistics': 'Statistiques de jeu',
-'dialog-left': 'Joueurs à gauche',
+'dialog-right': 'Joueurs à droite',
 'dialog-server': 'Serveur',
 'dialog-receiver': 'Receveur',
 'Call referee': 'Appelle juge-arbitre',

@@ -11,7 +11,7 @@ var i18n_de = {
 'Select Court': 'Feld auswählen',
 'Score Sheet': 'Schiedsrichterzettel',
 'Statistics': 'Spiel-Statistiken',
-'dialog-left': 'Spieler auf der linken Seite',
+'dialog-right': 'Spieler auf der rechten Seite',
 'dialog-server': 'Aufschläger',
 'dialog-receiver': 'Rückschläger',
 'Call referee': 'Referee rufen',

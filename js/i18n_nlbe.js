@@ -5,7 +5,7 @@ var i18n_nlbe = {
 '_fallback': 'en',
 
 
-'dialog-left': 'Linkerkant',
+'dialog-right': 'Rechterkant',
 'dialog-server': 'Server',
 'dialog-receiver': 'Ontvanger',
 'Call referee': 'Referee oproepen',

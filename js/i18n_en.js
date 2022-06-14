@@ -11,7 +11,7 @@ var i18n_en = {
 'Select Court': 'Select Court',
 'Score Sheet': 'Score Sheet',
 'Statistics': 'Statistics',
-'dialog-left': 'Left court side',
+'dialog-right': 'Right court side',
 'dialog-server': 'Server',
 'dialog-receiver': 'Receiver',
 'Call referee': 'Call referee',
