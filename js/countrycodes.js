@@ -183,7 +183,7 @@ var IOC_TABLE = {
 	'TKM': 'Turkmenistan',
 	'TLS': 'Timor-Leste',
 	'TOG': 'Togo',
-	'TPE': 'Taiwan',
+	'TPE': 'Chinese Taipei',
 	'TRI': 'Trinidad and Tobago',
 	'TTO': 'Trinidad and Tobago',
 	'TUN': 'Tunisia',
