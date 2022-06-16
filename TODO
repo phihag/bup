@@ -1,11 +1,17 @@
+scoresheet: circles around special characters
+
+check: retransmit not automatic after error with BTS?
+
+hide referee stuff in foucs mode
+
+promoted to main draw
+
 red cross for injury
 	Jörg + Conni
 
 tournament display mode with handschuhmacher on 1024 should never scroll
 
 dmode tournament_overview
-
-in focus mode show "Spiele" -> "Spiele auf Court 5"
 
 translations_table: import
 	import flemish, see email
