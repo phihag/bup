@@ -94,9 +94,7 @@
           "timestamp": 1655371382149
         },
         {
-          "type": "yellow-card",
-          "team_id": 0,
-          "player_id": 0,
+          "type": "referee",
           "timestamp": 1655371385277
         },
         {
@@ -110,13 +108,19 @@
           "timestamp": 1655371387869
         },
         {
-          "type": "referee",
-          "timestamp": 1655371392677
+          "type": "yellow-card",
+          "timestamp": 1655371392677,
+          "team_id": 0,
+          "player_id": 0
         },
         {
           "type": "injury",
           "team_id": 0,
           "player_id": 0,
+          "timestamp": 1655371395149
+        },
+        {
+          "type": "referee",
           "timestamp": 1655371395149
         },
         {
@@ -371,12 +375,80 @@
           "timestamp": 1655375584323
         },
         {
-          "type": "undo",
-          "timestamp": 1655375612082
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655386201328
         },
         {
-          "type": "redo",
-          "timestamp": 1655375613050
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655386232632
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655386233944
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655386235240
+        },
+        {
+          "type": "score",
+          "side": "right",
+          "timestamp": 1655386236608
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655386238808
+        },
+        {
+          "type": "postgame-confirm",
+          "timestamp": 1655386240208
+        },
+        {
+          "type": "pick_server",
+          "team_id": 1,
+          "player_id": 0,
+          "timestamp": 1655386241561
+        },
+        {
+          "type": "pick_receiver",
+          "team_id": 0,
+          "player_id": 1,
+          "timestamp": 1655386242832
+        },
+        {
+          "type": "love-all",
+          "timestamp": 1655386244136
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655386244417
+        },
+        {
+          "type": "red-card",
+          "team_id": 0,
+          "player_id": 0,
+          "timestamp": 1655386246658
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655386247368
+        },
+        {
+          "type": "score",
+          "side": "right",
+          "timestamp": 1655386248752
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655386250488
         },
         {
           "type": "disqualified",
