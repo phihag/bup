@@ -270,6 +270,7 @@ Player
 firstname    Given name ("Viktor"). If present lastname must be present as well.
 lastname     Surname ("Axelsen"). If present firstname must be set as well.
 name*        Full name of the player ("Viktor Axelsen")
+asian_name   Boolean, true if the last name comes first.
 gender       "m" or "f". If missing this is guessed by eventutils.guess_gender.
 nationality  Three-digit country code according to IOC/FIFA, like "DEU" (Germany) or "FRA" (France)
 ranking      An integer denoting the ranking number in singles (and default in doubles).
