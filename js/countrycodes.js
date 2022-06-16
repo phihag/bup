@@ -81,7 +81,7 @@ var IOC_TABLE = {
 	'GUM': 'Guam',
 	'GUY': 'Guyana',
 	'HAI': 'Haiti',
-	'HKG': 'Hong Kong',
+	'HKG': 'Hong Kong China',
 	'HON': 'Honduras',
 	'HUN': 'Hungary',
 	'INA': 'Indonesia',
