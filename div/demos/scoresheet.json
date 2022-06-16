@@ -228,6 +228,166 @@
           "type": "note",
           "val": "What a crazy game",
           "timestamp": 1655371562629
+        },
+        {
+          "type": "undo",
+          "timestamp": 1655375516946
+        },
+        {
+          "type": "undo",
+          "timestamp": 1655375518218
+        },
+        {
+          "type": "undo",
+          "timestamp": 1655375518474
+        },
+        {
+          "type": "score",
+          "side": "right",
+          "timestamp": 1655375519371
+        },
+        {
+          "type": "score",
+          "side": "right",
+          "timestamp": 1655375520778
+        },
+        {
+          "type": "score",
+          "side": "right",
+          "timestamp": 1655375522171
+        },
+        {
+          "type": "score",
+          "side": "right",
+          "timestamp": 1655375523378
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655375527067
+        },
+        {
+          "type": "score",
+          "side": "right",
+          "timestamp": 1655375528682
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655375530083
+        },
+        {
+          "type": "score",
+          "side": "right",
+          "timestamp": 1655375531378
+        },
+        {
+          "type": "postinterval-confirm",
+          "timestamp": 1655375532738
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655375533338
+        },
+        {
+          "type": "score",
+          "side": "right",
+          "timestamp": 1655375537450
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655375541266
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655375543459
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655375545090
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655375546642
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655375550107
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655375552395
+        },
+        {
+          "type": "undo",
+          "timestamp": 1655375556786
+        },
+        {
+          "type": "undo",
+          "timestamp": 1655375556946
+        },
+        {
+          "type": "undo",
+          "timestamp": 1655375557122
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655375561018
+        },
+        {
+          "type": "referee",
+          "timestamp": 1655375571074
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655375574459
+        },
+        {
+          "type": "undo",
+          "timestamp": 1655375575658
+        },
+        {
+          "type": "injury",
+          "team_id": 0,
+          "player_id": 0,
+          "timestamp": 1655375582163
+        },
+        {
+          "type": "injury-resume",
+          "timestamp": 1655375583642
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655375584323
+        },
+        {
+          "type": "undo",
+          "timestamp": 1655375612082
+        },
+        {
+          "type": "redo",
+          "timestamp": 1655375613050
+        },
+        {
+          "type": "disqualified",
+          "team_id": 0,
+          "player_id": 0,
+          "timestamp": 1655375620899
+        },
+        {
+          "type": "note",
+          "val": "What a crazy game",
+          "timestamp": 1655371562629
         }
       ]
     }]
