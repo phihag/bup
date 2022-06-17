@@ -18,6 +18,7 @@
         "warmup": "bwf-2016",
         "team_competition": false,
         "is_doubles": true,
+        "scheduled_time_str": "12:42",
         "teams": [
           {
             "name": "TV Refrath",
