@@ -243,6 +243,7 @@ date               Human-readable official day of match, e.g. "12.3.2017".
 umpire_name        Name of the umpire assigned to this match (or the last one who touched it).
 service_judge_name Name of the service judge assigned to this match.
 court_id           ID of the court this match is played on.
+now_on_court       Boolean: true to indicate that the match is on court right now.
 warmup             Warmup time rules. Values are:
    "bwf-2016"       BWF laws starting June 2016 (120s total, ready to play after 90s)
    "legacy"         120 seconds warmup time. (Default when the key is missing)
