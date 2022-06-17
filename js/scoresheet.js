@@ -661,7 +661,7 @@ function sheet_render(s, svg) {
 	_text('.scoresheet_date_value',
 		s.metadata.start ? utils.human_date_str(s, s.metadata.start) : (
 		s.setup.date || utils.human_date_str(s, Date.now())));
-	if (s.setup.scheduled_time_str) {
+	if (s.setup.scheduled_time_str && s.setup.scheduled_time_str != '00:00') {
 		_text('.scoresheet_scheduled_time_value', s.setup.scheduled_time_str);
 	}
 
