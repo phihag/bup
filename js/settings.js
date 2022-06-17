@@ -188,8 +188,13 @@ function update_court(s) {
 	court_select.val(s.settings.court_id);
 }
 
-function update_refclient(s) {
-	uiu.$visible_qs('.settings_refmode_client_container', (get_mode(s) !== 'referee') && s.settings.refmode_client_enabled);
+function update_refclient(s, settings_style) {
+	var ref_ui_visible = (
+		(get_mode(s) !== 'referee')
+		&& s.settings.refmode_client_enabled
+		&& settings_style === 'complete');
+	uiu.$visible_qs(
+		'.settings_refmode_client_container', ref_ui_visible);
 	refmode_client_ui.on_settings_change(s);
 }
 
@@ -516,7 +521,7 @@ function on_mode_change(s) {
 	update_court_settings(s);
 
 	wakelock.update(s);
-	update_refclient(s);
+	update_refclient(s, settings_style);
 }
 
 function clear_manual() {
