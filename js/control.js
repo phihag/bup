@@ -235,14 +235,14 @@ function ui_init() {
 		block_buttons();
 		on_press({
 			type: 'pick_side',
-			team1_left: true,
+			team1_left: false,
 		});
 	});
 	click.qs('#pick_side_team2', function() {
 		block_buttons();
 		on_press({
 			type: 'pick_side',
-			team1_left: false,
+			team1_left: true,
 		});
 	});
 	click.qs('#love-all', function() {

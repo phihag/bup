@@ -45,6 +45,7 @@
 <text class="scoresheet_match_name" x="290" y="320"/>
 <text class="scoresheet_date_label small-text" x="150" y="385" data-i18n="scoresheet:Date"/>
 <text class="scoresheet_date_value" x="290" y="390"/>
+<text class="scoresheet_scheduled_time_value" x="290" y="450"/>
 
 <!-- left name box -->
 <rect class="box" x="720" y="200" width="50" height="70"/>

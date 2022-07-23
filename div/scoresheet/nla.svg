@@ -156,6 +156,7 @@
 </g>
 <text class="scoresheet_date_label small-text" x="1880" y="500" data-i18n="scoresheet:Date"/>
 <text class="scoresheet_date_value" x="1990" y="500"/>
+<text class="scoresheet_scheduled_time_value" x="1990" y="550"/>
 
 
 <g class="scoresheet_table_container"/>

@@ -243,12 +243,15 @@ date               Human-readable official day of match, e.g. "12.3.2017".
 umpire_name        Name of the umpire assigned to this match (or the last one who touched it).
 service_judge_name Name of the service judge assigned to this match.
 court_id           ID of the court this match is played on.
+now_on_court       Boolean: true to indicate that the match is on court right now.
 warmup             Warmup time rules. Values are:
    "bwf-2016"       BWF laws starting June 2016 (120s total, ready to play after 90s)
    "legacy"         120 seconds warmup time. (Default when the key is missing)
    "none"           No warmup time.
 scheduled_time_str Official start time of the match, e.g. "09:00".
 scheduled_date     Official date of the match in ISO8601, e.g. "2019-05-30".
+override_colors    Special colors for the match. Either undefined (=use default color settings), or
+                   an object containing color keys keys, e.g. {"0": "#ff0000", "bg0": "#000000", "1": "#00ff00", "bg0": "#000044"} .
 
 The following keys are copied over from the event (see there for documentation):
 counting, league_key, tournament_name, event_name, team_competition, nation_competition, away_first
@@ -268,6 +271,7 @@ Player
 firstname    Given name ("Viktor"). If present lastname must be present as well.
 lastname     Surname ("Axelsen"). If present firstname must be set as well.
 name*        Full name of the player ("Viktor Axelsen")
+asian_name   Boolean, true if the last name comes first.
 gender       "m" or "f". If missing this is guessed by eventutils.guess_gender.
 nationality  Three-digit country code according to IOC/FIFA, like "DEU" (Germany) or "FRA" (France)
 ranking      An integer denoting the ranking number in singles (and default in doubles).

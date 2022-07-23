@@ -89,7 +89,7 @@ function _prematch_team(s, team_id) {
 	var different_nationalities = (team.players.length >= 2) && (team.players[0].nationality !== team.players[1].nationality);
 	var names = team.players.map(function(p, pidx) {
 		if (setup.nation_competition && !setup.team_competition && p.nationality &&
-				((pidx === 1) || different_nationalities)) {
+				((team.players.length < 2) || (pidx === 1) || different_nationalities)) {
 			return p.name + ', ' + countrycodes.lookup(p.nationality);
 		}
 		return p.name;

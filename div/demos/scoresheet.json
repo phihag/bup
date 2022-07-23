@@ -1,0 +1,468 @@
+{
+  "type": "bup-export",
+  "version": 1,
+  "event": {
+    "staticnet_message": "Scoresheet demo",
+    "courts": [{
+      "court_id": 1,
+      "description": "1 (links)"
+    }, {
+      "court_id": 2,
+      "description": "2 (rechts)"
+    }],
+    "league_key": "RLSO-2019",
+    "matches": [{
+      "setup": {
+        "match_id": "scoresheetdemo",
+        "counting": "3x21",
+        "warmup": "bwf-2016",
+        "team_competition": false,
+        "is_doubles": true,
+        "scheduled_time_str": "12:42",
+        "teams": [
+          {
+            "name": "TV Refrath",
+            "players": [
+              {
+                "name": "Jan Colin Völker"
+              },
+              {
+                "name": "Kilasu Ostermeyer"
+              }
+            ]
+          },
+          {
+            "name": "1.BC Sbr.-Bischmisheim",
+            "players": [
+              {
+                "name": "Marvin Seidel"
+              },
+              {
+                "name": "Isabel Herttrich"
+              }
+            ]
+          }
+        ],
+        "match_name": "MX",
+        "event_name": "Test event",
+        "tournament_name": "Demo"
+      },
+      "event_name": "Test event",
+      "presses": [
+        {
+          "type": "pick_side",
+          "team1_left": false,
+          "court_id": "1",
+          "timestamp": 1655371287893
+        },
+        {
+          "type": "pick_server",
+          "team_id": 0,
+          "player_id": 0,
+          "timestamp": 1655371375189
+        },
+        {
+          "type": "pick_receiver",
+          "team_id": 1,
+          "player_id": 0,
+          "timestamp": 1655371376541
+        },
+        {
+          "type": "love-all",
+          "timestamp": 1655371377980
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655371378476
+        },
+        {
+          "type": "score",
+          "side": "right",
+          "timestamp": 1655371380061
+        },
+        {
+          "type": "shuttle",
+          "timestamp": 1655371380732
+        },
+        {
+          "type": "shuttle",
+          "timestamp": 1655371381404
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655371382149
+        },
+        {
+          "type": "referee",
+          "timestamp": 1655371385277
+        },
+        {
+          "type": "score",
+          "side": "right",
+          "timestamp": 1655371386325
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655371387869
+        },
+        {
+          "type": "yellow-card",
+          "timestamp": 1655371392677,
+          "team_id": 0,
+          "player_id": 0
+        },
+        {
+          "type": "injury",
+          "team_id": 0,
+          "player_id": 0,
+          "timestamp": 1655371395149
+        },
+        {
+          "type": "referee",
+          "timestamp": 1655371395149
+        },
+        {
+          "type": "injury-resume",
+          "timestamp": 1655371437516
+        },
+        {
+          "type": "yellow-card",
+          "team_id": 1,
+          "player_id": 0,
+          "timestamp": 1655371441653
+        },
+        {
+          "type": "suspension",
+          "timestamp": 1655371445053
+        },
+        {
+          "type": "undo",
+          "timestamp": 1655371449316
+        },
+        {
+          "type": "injury",
+          "team_id": 1,
+          "player_id": 1,
+          "timestamp": 1655371451900
+        },
+        {
+          "type": "injury-resume",
+          "timestamp": 1655371459372
+        },
+        {
+          "type": "score",
+          "side": "right",
+          "timestamp": 1655371460004
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655371462101
+        },
+        {
+          "type": "red-card",
+          "team_id": 0,
+          "player_id": 0,
+          "timestamp": 1655371464829
+        },
+        {
+          "type": "red-card",
+          "team_id": 0,
+          "player_id": 0,
+          "timestamp": 1655371466814
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655371469805
+        },
+        {
+          "type": "disqualified",
+          "team_id": 0,
+          "player_id": 0,
+          "timestamp": 1655371472661
+        },
+        {
+          "type": "undo",
+          "timestamp": 1655371511668
+        },
+        {
+          "type": "score",
+          "side": "right",
+          "timestamp": 1655371512973
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655371514325
+        },
+        {
+          "type": "injury",
+          "team_id": 0,
+          "player_id": 1,
+          "timestamp": 1655371518221
+        },
+        {
+          "type": "referee",
+          "timestamp": 1655371521533
+        },
+        {
+          "type": "injury-resume",
+          "timestamp": 1655371523388
+        },
+        {
+          "type": "score",
+          "side": "right",
+          "timestamp": 1655371523989
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655371525341
+        },
+        {
+          "type": "disqualified",
+          "team_id": 0,
+          "player_id": 0,
+          "timestamp": 1655371527389
+        },
+        {
+          "type": "note",
+          "val": "What a crazy game",
+          "timestamp": 1655371562629
+        },
+        {
+          "type": "undo",
+          "timestamp": 1655375516946
+        },
+        {
+          "type": "undo",
+          "timestamp": 1655375518218
+        },
+        {
+          "type": "undo",
+          "timestamp": 1655375518474
+        },
+        {
+          "type": "score",
+          "side": "right",
+          "timestamp": 1655375519371
+        },
+        {
+          "type": "score",
+          "side": "right",
+          "timestamp": 1655375520778
+        },
+        {
+          "type": "score",
+          "side": "right",
+          "timestamp": 1655375522171
+        },
+        {
+          "type": "score",
+          "side": "right",
+          "timestamp": 1655375523378
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655375527067
+        },
+        {
+          "type": "score",
+          "side": "right",
+          "timestamp": 1655375528682
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655375530083
+        },
+        {
+          "type": "score",
+          "side": "right",
+          "timestamp": 1655375531378
+        },
+        {
+          "type": "postinterval-confirm",
+          "timestamp": 1655375532738
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655375533338
+        },
+        {
+          "type": "score",
+          "side": "right",
+          "timestamp": 1655375537450
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655375541266
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655375543459
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655375545090
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655375546642
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655375550107
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655375552395
+        },
+        {
+          "type": "undo",
+          "timestamp": 1655375556786
+        },
+        {
+          "type": "undo",
+          "timestamp": 1655375556946
+        },
+        {
+          "type": "undo",
+          "timestamp": 1655375557122
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655375561018
+        },
+        {
+          "type": "referee",
+          "timestamp": 1655375571074
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655375574459
+        },
+        {
+          "type": "undo",
+          "timestamp": 1655375575658
+        },
+        {
+          "type": "injury",
+          "team_id": 0,
+          "player_id": 0,
+          "timestamp": 1655375582163
+        },
+        {
+          "type": "injury-resume",
+          "timestamp": 1655375583642
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655375584323
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655386201328
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655386232632
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655386233944
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655386235240
+        },
+        {
+          "type": "score",
+          "side": "right",
+          "timestamp": 1655386236608
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655386238808
+        },
+        {
+          "type": "postgame-confirm",
+          "timestamp": 1655386240208
+        },
+        {
+          "type": "pick_server",
+          "team_id": 1,
+          "player_id": 0,
+          "timestamp": 1655386241561
+        },
+        {
+          "type": "pick_receiver",
+          "team_id": 0,
+          "player_id": 1,
+          "timestamp": 1655386242832
+        },
+        {
+          "type": "love-all",
+          "timestamp": 1655386244136
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655386244417
+        },
+        {
+          "type": "red-card",
+          "team_id": 0,
+          "player_id": 0,
+          "timestamp": 1655386246658
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655386247368
+        },
+        {
+          "type": "score",
+          "side": "right",
+          "timestamp": 1655386248752
+        },
+        {
+          "type": "score",
+          "side": "left",
+          "timestamp": 1655386250488
+        },
+        {
+          "type": "disqualified",
+          "team_id": 0,
+          "player_id": 0,
+          "timestamp": 1655375620899
+        },
+        {
+          "type": "note",
+          "val": "What a crazy game",
+          "timestamp": 1655371562629
+        }
+      ]
+    }]
+  }
+}

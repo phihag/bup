@@ -9,6 +9,7 @@ function _bbt2bup(bbt_event) {
 		team_names: bbt_event.team_names,
 		date: bbt_event.date,
 		starttime: bbt_event.starttime,
+		team_competition: bbt_event.team_competition,
 		ts: bbt_event.ts,
 	};
 

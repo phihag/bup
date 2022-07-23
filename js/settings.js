@@ -189,7 +189,14 @@ function update_court(s) {
 }
 
 function update_refclient(s) {
-	uiu.$visible_qs('.settings_refmode_client_container', (get_mode(s) !== 'referee') && s.settings.refmode_client_enabled);
+	var settings_style = get_settings_style(s);
+
+	var ref_ui_visible = (
+		(get_mode(s) !== 'referee')
+		&& s.settings.refmode_client_enabled
+		&& settings_style === 'complete');
+	uiu.$visible_qs(
+		'.settings_refmode_client_container', ref_ui_visible);
 	refmode_client_ui.on_settings_change(s);
 }
 
@@ -480,6 +487,15 @@ function get_mode(s) {
 	return 'umpire';
 }
 
+function get_settings_style(s) {
+	var res = s.settings.settings_style;
+	if (res === 'default') {
+		var netw = network.get_netw();
+		res = (netw && netw.limited_ui) ? 'clean' : 'complete';
+	}
+	return res;
+}
+
 function on_mode_change(s) {
 	var mode = get_mode(s);
 	uiu.qsEach('.settings_mode>a', function(a) {
@@ -487,11 +503,7 @@ function on_mode_change(s) {
 		uiu.setClass(a, 'settings_mode_active', is_active);
 	});
 
-	var settings_style = s.settings.settings_style;
-	if (settings_style === 'default') {
-		var netw = network.get_netw();
-		settings_style = (netw && netw.limited_ui) ? 'clean' : 'complete';
-	}
+	var settings_style = get_settings_style(s);
 	uiu.qsEach('#settings_wrapper *[data-bup-modes]', function(el) {
 		var modes = el.getAttribute('data-bup-modes');
 		var visible = true;

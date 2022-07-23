@@ -4779,6 +4779,41 @@ _describe('pronunciation', function() {
 			'0 beide.\n' +
 			'Bitte spielen.'
 		);
+
+		const singles_s = state_after(presses, {
+			teams: [{
+				players: [{name: 'Michael', nationality: 'GER'}],
+			}, {
+				players: [{name: 'Xu Yie', nationality: 'TPE'}],
+			}],
+			is_doubles: false,
+			team_competition: false,
+			nation_competition: true,
+			counting: '3x21',
+		});
+
+		assert.strictEqual(
+			pronounce_en(singles_s),
+			'Ladies and Gentlemen:\n' +
+			'On my right,\n' +
+			'Michael, Germany,\n' +
+			'and on my left,\n' +
+			'Xu Yie, Chinese Taipei.\n' +
+			'Michael to serve.\n\n' +
+			'love all.\n' +
+			'Play.'
+		);
+		assert.strictEqual(
+			pronounce_de(singles_s),
+			'Meine Damen und Herren:\n' +
+			'Zu meiner Rechten,\n' +
+			'Michael, Germany,\n' +
+			'und zu meiner Linken,\n' +
+			'Xu Yie, Chinese Taipei.\n' +
+			'Michael schlägt auf.\n\n' +
+			'0 beide.\n' +
+			'Bitte spielen.'
+		);
 	});
 
 	_it('nationalities if incorrectly specified in a national tournament', () => {

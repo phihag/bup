@@ -75,6 +75,7 @@ dm_style=STYLECODE  In display mode, start with the specified style.
 	castall         Greenscreen (all courts)
 	stream          Transparent video overlay
 	streamcourt     Transparent video overlay, one court only (to be scaled in streaming software)
+	streamteam      Transparent video overlay, only team names & match result (scales by width)
 	greyish         Overview for team competitions with muted gray colors
 	oncourt         court score with teams, not colored, including points in all games
 	onlyplayers     players only

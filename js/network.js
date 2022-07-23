@@ -232,10 +232,30 @@ function enter_match(match) {
 	control.start_match(state, match.setup);
 }
 
+function _short_court_id(court_id) {
+	var m = /_([0-9]+)$/.exec(court_id);
+	if (m) {
+		return m[1];
+	} else {
+		return court_id;
+	}
+}
+
 function ui_render_matchlist(s, event) {
 	var container = uiu.qs('#setup_network_matches');
 	uiu.empty(container); // TODO better transition if we're updating?
-	uiu.text_qs('.setup_network_event', (event.event_name || s._('network:Matches')));
+
+	var top_label = event.event_name;
+	if (!top_label) {
+		if (s.settings && s.settings.court_id && s.settings.court_id !== 'referee') {
+			top_label = s._(
+				'network:Matches on court',
+				{court: _short_court_id(s.settings.court_id)});
+		} else {
+			top_label = s._('network:Matches');
+		}
+	}
+	uiu.text_qs('.setup_network_event', top_label);
 
 	event.matches.forEach(function(match) {
 		var btn = uiu.el(container, 'button', {
@@ -639,6 +659,8 @@ function ui_init(s, hash_query) {
 		networks.demo = staticnet(null, 'div/demos/e_bl.json');
 	} else if (hash_query.baydemo !== undefined) {
 		networks.demo = staticnet(null, 'div/demos/bay.json');
+	} else if (hash_query.scoresheetdemo !== undefined) {
+		networks.demo = staticnet(null, 'div/demos/scoresheet.json');
 	} else if (hash_query.btsh_e !== undefined) {
 		networks.btsh = btsh(null, hash_query.btsh_e);
 	} else if (hash_query.mo !== undefined) {

@@ -321,6 +321,9 @@ function count_lines(s) {
 }
 
 function replace_all(str, search, replacement) {
+	if (typeof replacement != 'string') {
+		replacement = '' + replacement;
+	}
 	return str.split(search).join(replacement);
 }
 
