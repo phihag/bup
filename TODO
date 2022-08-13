@@ -1,3 +1,18 @@
+manual edit breaks sides!
+
+new display multi-court tiles
+
+btde: sponsor true/false
+
+btde: more data fields
+
+translations_table: import
+	import flemish, see email
+
+test color change with bts during match
+
+sync now_on_court with display, if only one then show it
+
 umpire nationality on scoresheet
 
 editmode if no sides: just assume something
@@ -14,9 +29,6 @@ red cross for injury
 tournament display mode with handschuhmacher on 1024 should never scroll
 
 dmode tournament_overview
-
-translations_table: import
-	import flemish, see email
 
 show receivers during server dialog
 	benedikt
