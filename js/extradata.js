@@ -19,6 +19,7 @@ var TEAM_COLORS = {
 	'Solingen': {fg: '#89deff'}, // STC BW Solingen
 	'Dortelweil': {fg: '#f55a44'},
 	'EBT Berlin': {fg: '#0d9aff'},
+	'Friedrichsdorf': {bg: '#008131', fg: '#ffffff'},
 	'Freystadt': {fg: '#ff161d'},
 	'Gladbecker FC': {fg: '#ea3f3d', bg: '#052844'},
 	'Hofheim': {fg: '#82dcff'},
@@ -76,6 +77,7 @@ var LOGOS = [
 	'ebtberlin',
 	'fclangenfeld',
 	'hamburghornertv',
+	'harkenbleck',
 	'sganspach',
 	'sgebtberlin',
 	'sgschorndorf',
