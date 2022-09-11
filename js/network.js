@@ -59,7 +59,7 @@ function courts(s) {
 	if (res) {
 		res.forEach(function(c) {
 			if (!c.label && c.description) {
-				c.label = c.id + ' (' + c.description + ')';
+				c.label = (c.court_id || c.id) + ' (' + c.description + ')';
 			}
 		});
 	}
@@ -489,10 +489,10 @@ function errstate(component, err) {
 }
 
 function _set_court(s, c) {
-	s.settings.court_id = c.id;
+	s.settings.court_id = (c.court_id || c.id);
 	s.settings.court_description = c.description;
 	if (c.id !== 'referee') {
-		s.settings.displaymode_court_id = c.id;
+		s.settings.displaymode_court_id = c.court_id || c.id;
 	}
 	settings.store(s);
 	settings.update(s);
@@ -501,7 +501,7 @@ function _set_court(s, c) {
 function _court_by_id(all_courts, court_id) {
 	for (var i = 0;i < all_courts.length;i++) {
 		var c = all_courts[i];
-		if (c.id == court_id) {
+		if (c.court_id == court_id || c.id == court_id) {
 			return c;
 		}
 	}
@@ -529,7 +529,9 @@ function ui_init_court(s, hash_query) {
 	}
 	var configured = (hash_query.select_court === undefined) && all_courts.some(function(c) {
 		var desc = s.settings.court_description;
-		return (s.settings.court_id == c.id) && ((!desc && !c.description) || (desc == c.description));
+		return (
+			((s.settings.court_id == c.court_id) || (s.settings.court_id == c.id))
+			&& ((!desc && !c.description) || (desc == c.description));
 	});
 	if (! configured) {
 		// Prevent updates while we select a court
@@ -543,7 +545,7 @@ function ui_init_court(s, hash_query) {
 	all_courts.forEach(function(c) {
 		var $option = $('<option>');
 		$option.text(c.label);
-		$option.attr('value', c.id);
+		$option.attr('value', c.court_id || c.id);
 		$select.append($option);
 	});
 	$select.attr('data-auto-available', 'true');
@@ -812,7 +814,7 @@ function court_label(s, court_id) {
 		return court_id;
 	}
 	var cur_court = utils.find(all_courts, function(c) {
-		return c.id == court_id;
+		return (c.court_id == court_id) || (c.id == court_id);
 	});
 	if (cur_court && (cur_court.label !== undefined)) {
 		return cur_court.label;

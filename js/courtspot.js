@@ -23,13 +23,13 @@ function _request(s, component, options, cb) {
 
 function courts(s) {
 	return [{
-		id: '1',
+		court_id: '1',
 		description: s._('court:left'),
 	}, {
-		id: '2',
+		court_id: '2',
 		description: s._('court:right'),
 	}, {
-		id: 'referee',
+		court_id: 'referee',
 		description: s._('court:referee'),
 	}];
 }
