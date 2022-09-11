@@ -187,8 +187,8 @@ function load_event(fn, cb) {
 	});
 }
 
-async function assert_snapshot(test_name, actual) {
-	const file_name = path.join(__dirname, `${test_name}.snapshot.json`);
+async function assert_snapshot(test_name, actual, {dirname=__dirname} = {}) {
+	const file_name = path.join(dirname, `${test_name}.snapshot.json`);
 	let expected;
 	try {
 		const contents = await fs.promises.readFile(file_name, 'utf-8');
