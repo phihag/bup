@@ -531,7 +531,8 @@ function ui_init_court(s, hash_query) {
 		var desc = s.settings.court_description;
 		return (
 			((s.settings.court_id == c.court_id) || (s.settings.court_id == c.id))
-			&& ((!desc && !c.description) || (desc == c.description));
+			&& ((!desc && !c.description) || (desc == c.description))
+		);
 	});
 	if (! configured) {
 		// Prevent updates while we select a court
