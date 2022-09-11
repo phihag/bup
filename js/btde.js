@@ -386,37 +386,37 @@ function courts_by_event(s, event, include_referee) {
 	var res;
 	if (event && !event.team_competition) {
 		res = [{
-			id: '1',
+			court_id: '1',
 			label: '1',
 		}, {
-			id: '2',
+			court_id: '2',
 			label: '2',
 		}, {
-			id: '3',
+			court_id: '3',
 			label: '3',
 		}, {
-			id: '4',
+			court_id: '4',
 			label: '4',
 		}, {
-			id: '5',
+			court_id: '5',
 			label: '5',
 		}, {
-			id: '6',
+			court_id: '6',
 			label: '6',
 		}];
 	} else {
 		res = [{
-			id: '1',
+			court_id: '1',
 			description: s._('court:left'),
 		}, {
-			id: '2',
+			court_id: '2',
 			description: s._('court:right'),
 		}];
 	}
 
 	if (include_referee) {
 		res.push({
-			id: 'referee',
+			court_id: 'referee',
 			description: s._('court:referee'),
 		});
 	}
