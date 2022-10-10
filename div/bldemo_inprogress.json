@@ -21,20 +21,24 @@
             {
               "players": [
                 {
-                  "name": "Sam Magee"
+                  "name": "Sam Magee",
+                  "nationality": "IRL"
                 },
                 {
-                  "name": "Max Schwenger"
+                  "name": "Max Schwenger",
+                  "nationality": "GER"
                 }
               ]
             },
             {
               "players": [
                 {
-                  "name": "Marvin Seidel"
+                  "name": "Marvin Seidel",
+                  "nationality": "GER"
                 },
                 {
-                  "name": "Peter Käsbauer"
+                  "name": "Peter Käsbauer",
+                  "nationality": "GER"
                 }
               ]
             }
@@ -56,20 +60,24 @@
             {
               "players": [
                 {
-                  "name": "Carla Nelte"
+                  "name": "Debora Jille",
+                  "nationality": "NED"
                 },
                 {
-                  "name": "Chloe Magee"
+                  "name": "Leona Michalski",
+                  "nationality": "GER"
                 }
               ]
             },
             {
               "players": [
                 {
-                  "name": "Olga Konon"
+                  "name": "Priskila Siahaya",
+                  "nationality": "INA"
                 },
                 {
-                  "name": "Isabel Herttrich"
+                  "name": "Isabel Lohau",
+                  "nationality": "GER"
                 }
               ]
             }
@@ -93,20 +101,24 @@
             {
               "players": [
                 {
-                  "name": "Nhat Nguyen"
+                  "name": "Nhat Nguyen",
+                  "nationality": "IRL"
                 },
                 {
-                  "name": "Joshua Magee"
+                  "name": "Adam Hall",
+                  "nationality": "SCO"
                 }
               ]
             },
             {
               "players": [
                 {
-                  "name": "Fabian Roth"
+                  "name": "Fabian Roth",
+                  "nationality": "GER"
                 },
                 {
-                  "name": "Johannes Schöttler"
+                  "name": "Johannes Schöttler",
+                  "nationality": "GER"
                 }
               ]
             }
@@ -128,14 +140,16 @@
             {
               "players": [
                 {
-                  "name": "Nhat Nguyen"
+                  "name": "Nhat Nguyen",
+                  "nationality": "IRL"
                 }
               ]
             },
             {
               "players": [
                 {
-                  "name": "Fabian Roth"
+                  "name": "Fabian Roth",
+                  "nationality": "GER"
                 }
               ]
             }
@@ -157,14 +171,16 @@
             {
               "players": [
                 {
-                  "name": "Chloe Magee"
+                  "name": "Ann-Katrin Spöri",
+                  "nationality": "GER"
                 }
               ]
             },
             {
               "players": [
                 {
-                  "name": "Olga Konon"
+                  "name": "Priskila Siahaya",
+                  "nationality": "INA"
                 }
               ]
             }
@@ -186,20 +202,24 @@
             {
               "players": [
                 {
-                  "name": "Sam Magee"
+                  "name": "Sam Magee",
+                  "nationality": "IRL"
                 },
                 {
-                  "name": "Carla Nelte"
+                  "name": "Debora Jille",
+                  "nationality": "NED"
                 }
               ]
             },
             {
               "players": [
                 {
-                  "name": "Marvin Seidel"
+                  "name": "Marvin Seidel",
+                  "nationality": "GER"
                 },
                 {
-                  "name": "Isabel Herttrich"
+                  "name": "Isabel Lohau",
+                  "nationality": "GER"
                 }
               ]
             }
@@ -223,14 +243,16 @@
             {
               "players": [
                 {
-                  "name": "Joshua Magee"
+                  "name": "Adam Hall",
+                  "nationality": "SCO"
                 }
               ]
             },
             {
               "players": [
                 {
-                  "name": "Dieter Domke"
+                  "name": "Dieter Domke",
+                  "nationality": "GER"
                 }
               ]
             }
@@ -300,7 +322,7 @@
       [
         {"gender": "m", "name": "Lars Schänzler", "ranking": 1, "ranking_d": 9, "regular": true},
         {"gender": "m", "name": "Nhat Nguyen", "ranking": 2, "ranking_d": 6, "nationality": "IRL", "regular": true},
-        {"gender": "m", "name": "Joshua Magee", "ranking": 3, "nationality": "IRL"},
+        {"gender": "m", "name": "Adam Hall", "ranking": 3, "nationality": "SCO"},
         {"gender": "m", "name": "Richard Domke", "ranking": 4, "ranking_d": 5},
         {"gender": "m", "name": "Sam Magee", "ranking": 5, "ranking_d": 2, "nationality": "IRL", "regular": true},
         {"gender": "m", "name": "Raphael Beck", "ranking": 6, "ranking_d": 1, "regular": true},
@@ -308,8 +330,8 @@
         {"gender": "m", "name": "Jan-Colin Völker", "ranking": 8},
         {"gender": "m", "name": "Dennis Nyenhuis", "ranking": 9, "ranking_d": 7},
         {"gender": "m", "name": "Max Schwenger", "ranking": 10, "ranking_d": 4},
-        {"gender": "f", "name": "Chloe Magee", "ranking": 1, "nationality": "IRL", "regular": true},
-        {"gender": "f", "name": "Carla Nelte", "ranking": 2, "regular": true},
+        {"gender": "f", "name": "Leona Michalski", "ranking": 1, "nationality": "GER", "regular": true},
+        {"gender": "f", "name": "Debora Jille", "ranking": 2, "regular": true},
         {"gender": "f", "name": "Elin Svensson", "ranking": 3, "nationality": "SWE"},
         {"gender": "f", "name": "Annika Dörr", "ranking": 4},
         {"gender": "f", "name": "Jennifer Karnott", "ranking": 7},
@@ -317,21 +339,21 @@
         {"gender": "f", "name": "Runa Plützer", "ranking": 5}
       ],
       [
-        {"gender": "m", "name": "Fabian Roth", "ranking": 1, "ranking_d": 6, "regular": true},
+        {"gender": "m", "name": "Fabian Roth", "ranking": 1, "ranking_d": 6, "regular": true, "nationality": "GER"},
         {"gender": "m", "name": "Luka Wraber", "ranking": 2, "ranking_d": 8, "nationality": "AUT", "regular": true},
-        {"gender": "m", "name": "Dieter Domke", "ranking": 3, "ranking_d": 7},
-        {"gender": "m", "name": "Peter Käsbauer", "ranking": 4, "ranking_d": 2, "regular": true},
-        {"gender": "m", "name": "Simon Wang", "ranking": 5, "ranking_d": 9},
-        {"gender": "m", "name": "Marvin Seidel", "ranking": 6, "ranking_d": 1, "regular": true},
-        {"gender": "m", "name": "Matthias Deininger", "ranking": 7},
-        {"gender": "m", "name": "Marcel Reuter", "ranking": 8},
+        {"gender": "m", "name": "Dieter Domke", "ranking": 3, "ranking_d": 7, "nationality": "GER"},
+        {"gender": "m", "name": "Peter Käsbauer", "ranking": 4, "ranking_d": 2, "regular": true, "nationality": "GER"},
+        {"gender": "m", "name": "Simon Wang", "ranking": 5, "ranking_d": 9, "nationality": "GER"},
+        {"gender": "m", "name": "Marvin Seidel", "ranking": 6, "ranking_d": 1, "regular": true, "nationality": "GER"},
+        {"gender": "m", "name": "Matthias Deininger", "ranking": 7, "nationality": "GER"},
+        {"gender": "m", "name": "Marcel Reuter", "ranking": 8, "nationality": "GER"},
         {"gender": "m", "name": "Ruben Jille", "ranking": 9, "ranking_d": 3, "nationality": "NED"},
         {"gender": "m", "name": "Alen Roj", "ranking": 10, "ranking_d": 12, "nationality": "SLO"},
         {"gender": "m", "name": "Michael Fuchs", "ranking": 11, "ranking_d": 4},
         {"gender": "m", "name": "Johannes Schöttler", "ranking": 12, "ranking_d": 5},
         {"gender": "f", "name": "Natalia Perminova", "ranking": 1, "nationality": "RUS", "regular": true},
-        {"gender": "f", "name": "Isabel Herttrich", "ranking": 2, "regular": true},
-        {"gender": "f", "name": "Olga Konon", "ranking": 3},
+        {"gender": "f", "name": "Isabel Lohau", "ranking": 2, "regular": true, "nationality": "GER"},
+        {"gender": "f", "name": "Priskila Siahaya", "ranking": 3, "nationality": "INA"},
         {"gender": "f", "name": "Cisita Joitiy Jansen", "ranking": 4, "nationality": "INA"},
         {"gender": "f", "name": "Nadia Fankhauser", "ranking": 5, "nationality": "SUI"}
       ]
