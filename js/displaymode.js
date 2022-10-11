@@ -1547,7 +1547,7 @@ function render_bwfonlyplayers(s, container, event, court, match, colors) {
 			var player_name = uiu.el(player_name_container, 'div', {
 				style: 'font-size: 150px;', // reasonable default if autosize fails
 			}, player_name);
-			//_setup_autosize(player_name);
+			_setup_autosize(player_name);
 		});
 	});
 }
