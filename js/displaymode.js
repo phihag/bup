@@ -1538,16 +1538,16 @@ function render_bwfonlyplayers(s, container, event, court, match, colors) {
 
 			var player_name_container = uiu.el(player_container, 'div', {
 				style: (
-					'height: 18vh;' +
+					'height: 20vh;' +
 					'position:absolute; left: 21vh; right:0;' +
-					'white-space:pre;overflow-x:hidden;' +
+					'white-space:pre;overflow:hidden;' +
 					'display:flex;align-items: center;'
 				),
 			});
 			var player_name = uiu.el(player_name_container, 'div', {
-				style: 'font-size: 80px;', // reasonable default if autosize fails
+				style: 'font-size: 150px;', // reasonable default if autosize fails
 			}, player_name);
-			_setup_autosize(player_name);
+			//_setup_autosize(player_name);
 		});
 	});
 }
