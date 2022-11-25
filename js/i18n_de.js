@@ -155,7 +155,7 @@ var i18n_de = {
 'demo:player1.2': 'Kilasu Ostermeyer',
 'demo:team2': '1.BC Sbr.-Bischmisheim',
 'demo:player2.1': 'Marvin Seidel',
-'demo:player2.2': 'Isabel Herttrich',
+'demo:player2.2': 'Isabel Lohau',
 'demo:match_name': 'GD',
 'demo:event_name': 'BCB - BCB (Demo)',
 'demo:tournament_name': 'Demo',

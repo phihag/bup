@@ -425,7 +425,7 @@ _describe('eventutils', function() {
 				}, {
 					players: [
 						{name: 'Linda Efler'},
-						{name: 'Isabel Herttrich'},
+						{name: 'Isabel Lohau'},
 					],
 				}],
 			},
@@ -443,7 +443,7 @@ _describe('eventutils', function() {
 				}, {
 					players: [
 						{name: 'Peter Käsbauer'},
-						{name: 'Isabel Herttrich'},
+						{name: 'Isabel Lohau'},
 					],
 				}],
 			},
