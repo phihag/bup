@@ -8,6 +8,9 @@ var _it = tutils._it;
 var DOUBLES_SETUP = tutils.DOUBLES_SETUP;
 var DOUBLES_TEAM_SETUP = tutils.DOUBLES_TEAM_SETUP;
 var DOUBLES_TEAM_SETUP_AWAY_FIRST = tutils.DOUBLES_TEAM_SETUP_AWAY_FIRST;
+const {
+	DOUBLES_SETUP_5x11
+} = tutils;
 var SINGLES_SETUP = tutils.SINGLES_SETUP;
 var SINGLES_TEAM_SETUP = tutils.SINGLES_TEAM_SETUP;
 var SINGLES_TEAM_SETUP_AWAY_FIRST = tutils.SINGLES_TEAM_SETUP_AWAY_FIRST;
@@ -3212,8 +3215,6 @@ _describe('pronunciation', function() {
 	_it('5x11 end-of game pronunciation', function() {
 		var SINGLES_SETUP_5x11 = bup.utils.deep_copy(SINGLES_SETUP);
 		SINGLES_SETUP_5x11.counting = '5x11_15';
-		var DOUBLES_SETUP_5x11 = bup.utils.deep_copy(DOUBLES_SETUP);
-		DOUBLES_SETUP_5x11.counting = '5x11_15';
 		var SINGLES_TEAM_SETUP_5x11 = bup.utils.deep_copy(SINGLES_TEAM_SETUP);
 		SINGLES_TEAM_SETUP_5x11.counting = '5x11_15';
 		var DOUBLES_TEAM_SETUP_5x11 = bup.utils.deep_copy(DOUBLES_TEAM_SETUP);
