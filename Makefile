@@ -6,21 +6,18 @@ help:
 	@echo '  help          This message'
 
 download-libs:
-	node div/download_libs.js div/libs.json libs/
-	node div/download_libs.js doc/libs.json doc/libs/
+	install/download_libs.js install/libs.json libs/
+	install/download_libs.js install/doc_libs.json doc/libs/
 
 deps: deps-essential ## Download and install all dependencies (for compiling / testing / CLI operation)
-
-script-deps:
-	composer.phar install
-
-deps-essential:
 	# (node --version && npm --version) >/dev/null 2>/dev/null || sudo apt-get install nodejs npm
 	npm install
 	$(MAKE) download-libs
 
-deps-optional: script-deps
-	test -e ./node_modules/wrtc/build/Release/obj.target/wrtc/src/peerconnection.o || npm install wrtc || echo 'wrtc installation failed. Continuing without wrtc...'
+install: deps
+
+script-deps:
+	composer.phar install
 
 cleandist:
 	rm -rf -- dist
@@ -155,4 +152,4 @@ install-hub: deps
 	systemctl enable buphub
 	systemctl start buphub
 
-.PHONY: default help deps deps-essential deps-optional test clean download-libs upload dist cleandist coverage coverage-display cd lint jshint eslint upload-run stylelint doclint deps-essential sat-hub root-hub install-hub testall ta tu mockserver
+.PHONY: default help deps deps-essential deps-optional install test clean download-libs upload dist cleandist coverage coverage-display cd lint jshint eslint upload-run stylelint doclint deps-essential sat-hub root-hub install-hub testall ta tu mockserver
