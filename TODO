@@ -1,4 +1,13 @@
-fix all tests
+update make dist
+	argparse
+	async
+	make version configurable
+
+Dockerfile: include doc, how to start, dist etc.
+
+fix all tests + lint
+
+custom background from bts doesn't work with international
 
 btde: sponsor true/false
 
