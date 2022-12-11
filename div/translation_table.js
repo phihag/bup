@@ -14,9 +14,9 @@ function autoHeight(worksheet) {
         let maxLine = 1;
         row.eachCell((cell) => {
             maxLine = Math.max(cell.value.split('\n').length - 1, maxLine);
-        })
+        });
         row.height = lineHeight * maxLine;
-    })
+    });
 }
 
 
@@ -29,7 +29,7 @@ async function main() {
     });
     parser.add_argument('-l', '--languages', {
         help: 'Comma-separted list of languages to export',
-    })
+    });
     parser.add_argument('FILE.xlsx', {help: 'File to write (or read with -i)'});
     const args = parser.parse_args();
     const file = args['FILE.xlsx'];
