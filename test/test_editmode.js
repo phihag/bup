@@ -9,7 +9,6 @@ const {
 	DOUBLES_SETUP,
 	DOUBLES_SETUP_5x11,
 	SINGLES_SETUP,
-	SINGLES_SETUP_5x11,
 } = tutils;
 
 var press_score = tutils.press_score;
