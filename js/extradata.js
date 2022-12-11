@@ -112,6 +112,8 @@ var LOGO_ALIASSE = {
 	'1. CfB Köln': 'cfbkoeln',
 	'BC Bischmisheim': 'bcbsaarbruecken',
 	'Blau-Weiss Wittorf-NMS': 'wittorfneumuenster',
+	'Blau-Weiss Wittorf': 'wittorfneumuenster',
+	'Blau-Weiss Wittorf NMS': 'wittorfneumuenster',
 	'SC Union Lüdinghausen': 'unionluedinghausen',
 	'SC Union 08 Lüdinghausen': 'unionluedinghausen',
 	'SG VfB/SC Peine': 'vfbscpeine',
