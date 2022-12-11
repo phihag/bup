@@ -3,12 +3,9 @@
 
 const argparse = require('argparse');
 const assert = require('assert').strict;
-const async = require('async');
-const child_process = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const process = require('process');
-const {promisify} = require('util');
 
 const { optimize } = require('svgo');
 
@@ -21,7 +18,7 @@ const SVGO_CONFIG = {
 };
 
 
-async function minify_svg(in_fn, out_fn, cb) {
+async function minify_svg(in_fn, out_fn) {
 	const svg = await fs.promises.readFile(in_fn, {encoding: 'utf-8'});
 	const optimized = optimize(svg, SVGO_CONFIG).data;
 	assert(optimized);
