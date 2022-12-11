@@ -1,19 +1,20 @@
 'use strict';
 
 const assert = require('assert');
+const argparse = require('argparse');
 const async = require('async');
 const child_process = require('child_process');
 const fs = require('fs');
 const path = require('path');
 const process = require('process');
+const { promisify } = require('util');
 
 const utils = require('../js/utils.js');
 
 
-function git_rev(cb) {
-	child_process.exec('git rev-parse --short HEAD', function (error, stdout) {
-		cb(error, stdout.trim());
-	});
+async function git_rev() {
+	const { stdout } = await (promisify(child_process.exec))('git rev-parse --short HEAD');
+	return stdout.trim();
 }
 
 function transform_file(in_fn, out_fn, func, cb) {
@@ -165,19 +166,24 @@ function convert_css(css_files, cssdist_fn, sources_dir, cb) {
 	], cb);
 }
 
-/*  Main function  */
+function transform_html(html) {
+	html = html.replace(/<!--@DEV-->[\s\S]*?<!--\/@DEV-->/g, '');
+	html = html.replace(/<!--@PRODUCTION([\s\S]*?)-->/g, function(m, m1) {return m1;});
+	html = html.replace(/PRODUCTIONATTR-/g, '');
+	return html;
+}
 
-function main() {
-	const args = process.argv.slice(2);
-	const dev_dir = args[0];
-	const dist_dir = args[1];
-	const sources_dir = args[2];
+async function main() {
+	const parser = new argparse.ArgumentParser({description: 'Create distribution version of bup'});
+	parser.add_argument('DEV_DIR', {help: 'input bup root directory'});
+	parser.add_argument('DIST_DIR', {help: 'output directory, where to write the combined version'});
+	parser.add_argument('SOURCES_DIR', {help: 'output directory, where to write the combined version'});
+	parser.add_argument('-v', '--version', {metavar: 'VERSION', help: 'Set version manually rather than auto-detecting it'});
+	const args = parser.parse_args();
 
-	if (! dev_dir || !dist_dir || !sources_dir) {
-		console.error('Usage: make_dist.js DEV_DIR DIST_DIR SOURCES_DIR');
-		process.exit(3);
-		return;
-	}
+	const dev_dir = args.DEV_DIR;
+	const dist_dir = args.DIST_DIR;
+	const sources_dir = args.SOURCES_DIR;
 
 	const html_in_fn = path.join(dev_dir, 'bup.html');
 	const html_out_fn = path.join(dist_dir, 'index.html');
@@ -187,89 +193,62 @@ function main() {
 	const version_fn = path.join(dist_dir, 'VERSION');
 	const version2_fn = path.join(dist_dir, 'VERSION.txt');
 
-	function transform_html(html) {
-		html = html.replace(/<!--@DEV-->[\s\S]*?<!--\/@DEV-->/g, '');
-		html = html.replace(/<!--@PRODUCTION([\s\S]*?)-->/g, function(m, m1) {return m1;});
-		html = html.replace(/PRODUCTIONATTR-/g, '');
-		return html;
+	await (promisify(transform_file))(html_in_fn, html_out_fn, transform_html);
+	await (promisify(transform_file))(html_in_fn, html_out_fn2, transform_html);
+	await (promisify(uglify))([path.join(dev_dir, 'cachesw.js')], path.join(dist_dir, 'cachesw.js'));
+	await (promisify(ensure_mkdir))(sources_dir);
+
+	let version = args.version;
+	if (!version) {
+		const rev = await git_rev();
+		const d = new Date();
+		const version_date = (
+			d.getFullYear() + '.' +
+			utils.pad(d.getMonth() + 1) + '.' +
+			utils.pad(d.getDate()) + '.' +
+			utils.pad(d.getHours()) + utils.pad(d.getMinutes()) + utils.pad(d.getSeconds())
+		);
+		version = version_date + rev;
 	}
 
-	async.waterfall([
-		function(cb) {
-			transform_file(html_in_fn, html_out_fn, transform_html, cb);
-		}, function(cb) {
-			transform_file(html_in_fn, html_out_fn2, transform_html, cb);
-		}, function(cb) {
-			uglify([path.join(dev_dir, 'cachesw.js')], path.join(dist_dir, 'cachesw.js'), cb);
-		},
-		function(cb) {
-			ensure_mkdir(sources_dir, cb);
-		},
-		function(cb) {
-			git_rev(function(err, rev) {
-				if (err) {
-					return cb(err);
-				}
-				const d = new Date();
-				const version_date = (
-					d.getFullYear() + '.' +
-					utils.pad(d.getMonth() + 1) + '.' +
-					utils.pad(d.getDate()) + '.' +
-					utils.pad(d.getHours()) + utils.pad(d.getMinutes())
-				);
-				const version = version_date + rev;
-				cb(err, version);
-			});
-		},
-		(version, cb) => {
-			fs.writeFile(version_fn, version, {encoding: 'utf8'}, (err) => {
-				cb(err, version);
-			});
-		},
-		(version, cb) => {
-			fs.writeFile(version2_fn, version, {encoding: 'utf8'}, (err) => {
-				cb(err, version);
-			});
-		},
-		(version, cb) => {
-			fs.readFile(html_in_fn, 'utf8', (err, content) => {
-				cb(err, version, content);
-			});
-		},
-		function(version, html, cb) {
-			// Get all scripts in HTML file
-			const script_files = [];
-			const dev_re = /<!--@DEV-->([\s\S]*?)<!--\/@DEV-->/g;
-			let dev_m;
-			while ((dev_m = dev_re.exec(html))) {
-				const script_re = /<script src="([^"]+)"><\/script>/g;
-				let script_m;
-				while ((script_m = script_re.exec(dev_m[1]))) {
-					script_files.push(script_m[1]);
-				}
+	await fs.promises.writeFile(version_fn, version, {encoding: 'utf8'});
+	await fs.promises.writeFile(version2_fn, version, {encoding: 'utf8'});
+
+	// Rewrite HTML + JS + CSS files
+	const html = await fs.promises.readFile(html_in_fn, 'utf8');
+	{
+		const script_files = [];
+		const dev_re = /<!--@DEV-->([\s\S]*?)<!--\/@DEV-->/g;
+		let dev_m;
+		while ((dev_m = dev_re.exec(html))) {
+			const script_re = /<script src="([^"]+)"><\/script>/g;
+			let script_m;
+			while ((script_m = script_re.exec(dev_m[1]))) {
+				script_files.push(script_m[1]);
 			}
-			convert_js(version, script_files, sources_dir, jsdist_fn, function(err) {
-				cb(err, html);
-			});
-		},
-		function (html, cb) {
-			const css_files = [];
-			const dev_re = /<!--@DEV-->([\s\S]*?)<!--\/@DEV-->/g;
-			let dev_m;
-			while ((dev_m = dev_re.exec(html))) {
-				const style_re = /<link\s+rel="stylesheet"\s+href="([^"]+)"/g;
-				let style_m;
-				while ((style_m = style_re.exec(dev_m[1]))) {
-					css_files.push(style_m[1]);
-				}
-			}
-			convert_css(css_files, cssdist_fn, sources_dir, cb);
-		},
-	], function (err) {
-		if (err) {
-			throw err;
 		}
-	});
+		await (promisify(convert_js))(version, script_files, sources_dir, jsdist_fn);
+	}
+	{
+		const css_files = [];
+		const dev_re = /<!--@DEV-->([\s\S]*?)<!--\/@DEV-->/g;
+		let dev_m;
+		while ((dev_m = dev_re.exec(html))) {
+			const style_re = /<link\s+rel="stylesheet"\s+href="([^"]+)"/g;
+			let style_m;
+			while ((style_m = style_re.exec(dev_m[1]))) {
+				css_files.push(style_m[1]);
+			}
+		}
+		await (promisify(convert_css))(css_files, cssdist_fn, sources_dir);
+	}
 }
 
-main();
+(async () => {
+    try {
+        await main();
+    } catch (e) {
+        console.error(e.stack);
+        process.exit(2);
+    }
+})();
