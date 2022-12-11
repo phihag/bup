@@ -86,8 +86,8 @@ dist: cleandist ## Create distribution files
 		--target-directory dist/bup/div/
 
 	node div/calc_checksums.js dist/ bup/ dist/bup/checksums.json
+	node div/unify_timestamps.js dist/
 
-	find dist -exec touch --date "$$(git log -1 --date=iso | sed -n -e 's/Date:\s*\([0-9 :-]*\)+.*/\1/p')" '{}' ';'
 	cd dist && zip bup.zip bup/ -rqX
 
 upload: dist ## Upload to demo page
