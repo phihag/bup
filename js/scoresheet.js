@@ -628,6 +628,30 @@ function parse_match(state, col_count) {
 	return _layout(s.scoresheet_games, col_count, notes);
 }
 
+function _draw_mark_circle(container, cell, cell_width, cell_height, cols_left, table_top) {
+	var rx = cell.width * cell_width / 2;
+	var ry = cell.height * cell_height / 2;
+
+	var cx = cols_left + cell.col * cell_width + rx;
+	var cy = table_top + cell.row * cell_height + ry;
+	if (cell.height === 1 && cell.width === 1) {
+		var max_dimension = Math.max(rx, ry);
+		ry = max_dimension;
+		rx = max_dimension;
+	} else {
+		rx += 0.2 * cell_width;
+		ry += 0.2 * cell_width;
+	}
+
+	_svg_el('ellipse', {
+		'class': 'table_game_result',
+		'cx': cx,
+		'rx': rx,
+		'cy': cy,
+		'ry': ry,
+	}, container);
+}
+
 function sheet_render(s, svg) {
 	function _text(search, str) {
 		if (str !== 0 && !str) {
@@ -961,28 +985,7 @@ function sheet_render(s, svg) {
 			break;
 		case 'mark-circle':
 			// Circle around special marks
-			var rx = cell.width * cell_width / 2;
-			var ry = cell.height * cell_height / 2;
-
-			var cx = cols_left + cell.col * cell_width + rx;
-			var cy = table_top + cell.row * cell_height + ry;
-			if (cell.height === 1 && cell.width === 1) {
-				var max_dimension = Math.max(rx, ry);
-				ry = max_dimension;
-				rx = max_dimension;
-			} else {
-				rx += 0.2 * cell_width;
-				ry += 0.2 * cell_width;
-			}
-
-			_svg_el('ellipse', {
-				'class': 'table_game_result',
-				'cx': cx,
-				'rx': rx,
-				'cy': cy,
-				'ry': ry,
-			}, t);
-
+			_draw_mark_circle(t, cell, cell_width, cell_height, cols_left, table_top);
 			break;
 		case 'score':
 			/* falls through */
