@@ -9,6 +9,13 @@ var bup = tutils.bup;
 
 _describe('key_utils', function() {
 	_it('fingerprint', function(done) {
+		try {
+			require('node-webcrypto-ossl');
+		} catch(e) {
+			done();
+			return; // Not supported in this environment
+		}
+
 		var example_str = 'foobar';
 		bup.key_utils.fingerprint(example_str, function(err, fp) {
 			if (err) throw err;
