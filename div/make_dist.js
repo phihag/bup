@@ -200,7 +200,7 @@ async function main() {
 
 	let version = args.version;
 	if (!version) {
-		const rev = await git_rev();
+		const rev = process.env.BUP_DIST_GIT_REVISION || (await git_rev());
 		const d = new Date();
 		const version_date = (
 			d.getFullYear() + '.' +

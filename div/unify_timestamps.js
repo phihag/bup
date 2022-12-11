@@ -33,7 +33,11 @@ async function main() {
 
 	let date;
 	if (process.env.BUP_DIST_DATE) {
-		date = new Date(process.env.BUP_DIST_DATE);
+		if (process.env.BUP_DIST_DATE === 'now') {
+			date = new Date();
+		} else {
+			date = new Date(process.env.BUP_DIST_DATE);
+		}
 	} else {
 		const { stdout } = await (promisify(child_process.exec))('git log -1 --date=iso');
 		const m = /Date:\s*([-+:\s0-9]+)\n/.exec(stdout);
