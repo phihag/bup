@@ -7,6 +7,8 @@ var bup = tutils.bup;
 var _describe = tutils._describe;
 var _it = tutils._it;
 
+var i18n = tutils.bup.i18n;
+
 _describe('btde', function() {
 	_it('parse_event', function() {
 		var doc = {
@@ -88,11 +90,11 @@ _describe('btde', function() {
 			'location': 'SpH, Steinbreche, 51427 Bergisch Gladbach-Refrath',
 			'courts': [{
 				'court_id': 1,
-				'description': '1 (links)',
+				'description': 'links',
 				'match_id': 'btde_2019-10-12_GD_TV Refrath 2-BC Hohenlimburg',
 			}, {
 				'court_id': 2,
-				'description': '2 (rechts)',
+				'description': 'rechts',
 				'match_id': 'btde_2019-10-12_HE1_TV Refrath 2-BC Hohenlimburg',
 			}],
 			'matches': [
@@ -356,10 +358,13 @@ _describe('btde', function() {
 		};
 
 		var date = new Date(2019, 9, 12);
-		var ml = bup.btde()._parse_event({team_competition: true}, doc, date);
+		let s = {team_competition: true};
+		i18n.update_state(s, 'de');
+		var ml = bup.btde()._parse_event(s, doc, date);
 		assert.deepEqual(ml, expected);
 
-		var s = {event: ml};
+		s = {event: ml};
+		i18n.update_state(s, 'de');
 		bup.eventutils.annotate(s, ml);
 		assert.deepStrictEqual(ml.event_name, 'TV Refrath 2 - BC Hohenlimburg');
 	});
