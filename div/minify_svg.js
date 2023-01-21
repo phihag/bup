@@ -12,7 +12,6 @@ const { optimize } = require('svgo');
 const SVGO_CONFIG = {
 	multipass: true,
 	plugins: [
-		'minifyStyles',
 		'removeComments',
 	],
 };
