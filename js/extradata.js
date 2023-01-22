@@ -115,6 +115,7 @@ var LOGO_ALIASSE = {
 	'Blau-Weiss Wittorf': 'wittorfneumuenster',
 	'Blau-Weiss Wittorf NMS': 'wittorfneumuenster',
 	'SC Union Lüdinghausen': 'unionluedinghausen',
+	'SV Harkenbleck': 'harkenbleck',
 	'SC Union 08 Lüdinghausen': 'unionluedinghausen',
 	'SG VfB/SC Peine': 'vfbscpeine',
 	'Spvgg.Sterkrade-N.': 'sterkrade',
