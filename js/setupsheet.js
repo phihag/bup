@@ -28,9 +28,9 @@ var MIN_LENGTHS = {
 		f: 4,
 	},
 };
-var MAX_LENGTH = 21;
+var MAX_LENGTH = 23;
 var EXTRA_LINES = {
-	'bundesliga-2016': 0,
+	'bundesliga-2016': 2,
 	'default': 2,
 	international: 0,
 	nla: 2,
@@ -149,12 +149,14 @@ function calc_listed(event) {
 	}
 
 	if (event.all_players && !res[0].m.length && !res[0].f.length && !res[1].m.length && !res[1].f.length) {
+		var sheet_name = sheet_name_for(event.league_key);
+
 		res = event.all_players.map(function(aps) {
 			team_res = {
 				m: [],
 				f: [],
 			};
-			if (aps.length < 22) {
+			if (aps.length <= MAX_LENGTH) {
 				aps.forEach(_add);
 				team_res.m.sort(_cmp_players);
 				team_res.f.sort(_cmp_players);
@@ -164,8 +166,16 @@ function calc_listed(event) {
 				aps.forEach(_add);
 				team_res.m.sort(_cmp_players);
 				team_res.f.sort(_cmp_players);
-				team_res.m = team_res.m.slice(0, 9);
-				team_res.f = team_res.f.slice(0, 9);
+
+				var ROW_COUNT = 18;
+
+				var desired_player_counts = MIN_LENGTHS[sheet_name];
+				var total_count = desired_player_counts.f + desired_player_counts.m;
+				var count_m = parseInt(Math.ceil(ROW_COUNT * desired_player_counts.m / total_count));
+				var count_f = parseInt(Math.ceil(ROW_COUNT * desired_player_counts.f / total_count));
+
+				team_res.m = team_res.m.slice(0, count_m);
+				team_res.f = team_res.f.slice(0, count_f);
 			}
 			return team_res;
 		});
@@ -753,14 +763,18 @@ function rerender(s) {
 	render_svg(s);
 }
 
-function render_svg(s) {
-	var league_key = s.event.league_key;
-	var sheet_name = (
+function sheet_name_for(league_key) {
+	return (
 		eventutils.is_bundesliga(league_key) ? 'bundesliga-2016' :
 		(((league_key === 'NLA-2017') || (league_key === 'NLA-2019')) ? 'nla' :
 		((league_key === 'international-2017') ? 'international' :
 		'default'
 	)));
+}
+
+function render_svg(s) {
+	var league_key = s.event.league_key;
+	var sheet_name = sheet_name_for(league_key);
 	if (!dl) {
 		dl = downloader(URLS);
 	}

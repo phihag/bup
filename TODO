@@ -1,4 +1,9 @@
+!courtspot make sure no server by default
+
+logo Neuhausen-Nymphenburg
+
 PaulP display
+
 
 snapshot test for scoresheet -> svg
 
@@ -15,8 +20,6 @@ show when next game where score would be (test w/ CourtSpot)
 show country in onmyright for international events!
 
 temporarily disable if 3 rallies with <2s each
-
-more men on setupsheet
 
 greyish with transparency -> Jannick
 
