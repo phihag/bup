@@ -163,6 +163,7 @@ if (! $result) {
 
 $matches = [];
 $today = @date('Y-m-d');
+$preferred_order = [];
 while ($row = $result->fetch_assoc()) {
 	$network_score = [];
 	for ($i = 1;array_key_exists('HeimSatz' . $i, $row);$i++) {
@@ -197,6 +198,7 @@ while ($row = $result->fetch_assoc()) {
 		'courtspot_match_id' => $row['Art'],
 		'match_id' => $match_id,
 	];
+	$preferred_order[] = $setup['match_name'];
 
 	if ($counting) {
 		$setup['counting'] = $counting;
@@ -268,6 +270,7 @@ $res = [
 	'league_key' => $league_key,
 	'team_competition' => true,
 	'courtspot_version' => $cs_version,
+	'preferred_order' => $preferred_order,
 ];
 if ($tournament_name) {
 	$res['tournament_name'] = $tournament_name;
