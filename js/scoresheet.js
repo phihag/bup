@@ -559,6 +559,16 @@ function parse_match(state, col_count) {
 				_loveall(s, s.game, s.scoresheet_game, {editmode_related: true});
 			}
 			break;
+		case 'editmode_switch-sides':
+			_clean_editmode(s.scoresheet_game);
+			s.scoresheet_game.cells.push({
+				col: s.scoresheet_game.col_idx,
+				type: 'editmode-sign',
+				editmode_related: true,
+			});
+			var team_id = (s.game.start_team1_left == (press.side === 'left')) ? 0 : 1;
+			s.scoresheet_game.servers[team_id] = 1 - s.scoresheet_game.servers[team_id];
+			break;
 		case 'editmode_set-finished_games':
 			s.scoresheet_games = s.match.finished_games.map(function(fgame, i) {
 				var sgame = s.scoresheet_games[i];
