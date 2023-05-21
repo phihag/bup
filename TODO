@@ -1,4 +1,16 @@
+
 !courtspot make sure no server by default
+
+
+btde: sponsor true/false
+
+export
+	teamster names
+
+BerndW tde_export
+
+show pause state on buttons
+
 
 logo Neuhausen-Nymphenburg
 
@@ -9,7 +21,6 @@ snapshot test for scoresheet -> svg
 
 custom background from bts doesn't work with international
 
-btde: sponsor true/false
 
 btde: more data fields
 
