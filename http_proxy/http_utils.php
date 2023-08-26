@@ -261,7 +261,7 @@ class CacheHTTPClient extends AbstractExtensionHTTPClient {
 			return $this->httpc->request($url, $headers, $method, $body);
 		}
 
-		$cache_fn = $this->cache_dir . '/' . \preg_replace('/[^a-z0-9\.]+/', '_', $url) . '.html';
+		$cache_fn = $this->cache_dir . '/' . \preg_replace('/[^a-zA-Z0-9\.]+/', '_', $url) . '.html';
 		if (\file_exists($cache_fn)) {
 			return \file_get_contents($cache_fn);
 		}
