@@ -37,6 +37,7 @@ function geolocate($httpc, $address, $orig_address=null) {
 		'67677 Enkenbach, Integrierte Gesamtschule, Am Mühlberg 23-25' => '67677 Enkenbach Am Mühlberg 23',
 		'66123 Saarbrücken, Herman-Neuberger-Sportschule 1, Badmintonhalle 72, Herman-Neuberger-Sportschule 1' => '66123 Saarbrücken Herman-Neuberger-Sportschule 1',
 		'66123 Saarbrücken, Herman-Neuberger-Sportschule 1, MultiFunkHalle 80, Herman-Neuberger-Sportschule 1' => '66123 Saarbrücken Herman-Neuberger-Sportschule 1',
+		'66123 Saarbrücken, Herman-Neuberger-Sportschule 1, Badmintonhalle 72, Herman-Neu' => '66123 Saarbrücken Herman-Neuberger-Sportschule 1',
 	];
 	if (\array_key_exists($address, $ADDRESS_ALIAS)) {
 		$address = $ADDRESS_ALIAS[$address];
