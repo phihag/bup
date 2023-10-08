@@ -309,6 +309,9 @@ function download_leagues($config) {
 		}
 		$httpc = new http_utils\CacheHTTPClient($httpc, $cache_dir);
 	}
+	if ($config['debug']) {
+		$httpc = new http_utils\DebugHTTPClient($httpc);
+	}
 
 	init_geolocation_cache();
 
