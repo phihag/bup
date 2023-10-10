@@ -1,6 +1,10 @@
+fix scoresheet editmode handling; calculate left & right from s.game
+
+optional circles? for scoresheet
 
 !courtspot make sure no server by default
 
+umpire name when no first name
 
 btde: sponsor true/false
 
