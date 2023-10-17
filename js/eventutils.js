@@ -514,17 +514,10 @@ function default_counting(league_key) {
 }
 
 function umpire_pay(league_key) {
-	if (/^2BL[NS]-(?:2017|2018|2019)/.test(league_key)) {
-		return { // §3.2 BLO
-			base: 35,
-			per_km: .3,
-			currency: '€',
-		};
-	}
 	if (is_bundesliga(league_key)) {
 		return { // §3.2 BLO
 			base: 50,
-			per_km: .3,
+			per_km: .35,
 			currency: '€',
 		};
 	}
