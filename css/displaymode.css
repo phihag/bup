@@ -1,4 +1,5 @@
 .d_international_score,
+.d_tournament_score,
 .d_clean_score,
 .d_score_default {
 	font-family: 'Droid Sans', 'droid_sansregular', 'Noto Mono', Arial, sans-serif;
@@ -131,12 +132,14 @@
 }
 
 .d_international_team,
+.d_tournament,
 .d_clean_team {
 	font-stretch: condensed;
 	position: relative;
 	height: 50%;
 }
 .d_international_player_container,
+.d_tournament_player_container
 .d_clean_player_container,
 .d_bwfonlyplayers_player_container {
 	position: relative;
@@ -153,6 +156,12 @@
 	display: flex;
 	align-items: center;
 }
+.d_tournament_player{
+	width: 100%;
+	font-size: 1vh;
+	display: flex;
+	align-items: center;
+}
 .d_bwf_player {
 	width: 100%;
 	font-size: 13vh;
@@ -160,6 +169,7 @@
 	align-items: center;
 }
 .d_international_score,
+.d_tournament_score,
 .d_clean_score {
 	font-size: 50vh;
 	line-height: 50vh;
@@ -172,6 +182,7 @@
 	overflow: hidden;
 }
 .d_international_score.d_international_score_dd,
+.d_tournament_score.d_tournament_score_dd,
 .d_clean_score.d_clean_score_dd {
 	letter-spacing: -4vh;
 	text-align: left;
@@ -191,6 +202,19 @@
 	justify-content: center;
 }
 
+.d_tournament_gscore {
+	font-size: 25vh;
+	line-height: 25vh;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 52vh;
+	width: 20vh;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
 
 .d_2court_side0,
 .d_2court_side1 {
@@ -254,7 +278,9 @@
 	bottom: 0;
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: right;
+	text-wrap: nowrap;
+	width: calc(50vw - 44vh - 20px);
 }
 .d_2court_side0 .d_2court_info,
 .d_2court_side0 .d_2court_gscore {
