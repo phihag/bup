@@ -23,13 +23,11 @@
     "istanbul": "*",
     "jszip": "*",
     "mocha": "*",
-    "node-webcrypto-ossl": "*",
     "stylelint": "^13.3.3",
     "stylelint-config-standard": "*",
     "supervisor": "*",
     "svgo": "*",
     "uglify-js": "3.x",
-    "wrtc": "^0.4.1",
     "ws": "*",
     "xmldom": "*"
   },

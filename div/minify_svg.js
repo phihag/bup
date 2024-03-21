@@ -1,63 +1,49 @@
 #!/usr/bin/env node
 'use strict';
 
-const async = require('async');
-const child_process = require('child_process');
+const argparse = require('argparse');
+const assert = require('assert').strict;
+const fs = require('fs');
 const path = require('path');
 const process = require('process');
 
+const { optimize } = require('svgo');
 
-function usage() {
-	console.log('Usage: ' + process.argv[1] + ' OUT_DIR IN.svg..');
-	process.exit(1);
+const SVGO_CONFIG = {
+	multipass: true,
+	plugins: [
+		'removeComments',
+	],
+};
+
+
+async function minify_svg(in_fn, out_fn) {
+	const svg = await fs.promises.readFile(in_fn, {encoding: 'utf-8'});
+	const optimized = optimize(svg, SVGO_CONFIG).data;
+	assert(optimized);
+	await fs.promises.writeFile(out_fn, optimized, {encoding: 'utf-8'});
 }
 
-function main(callback) {
-	const args = process.argv.slice(2);
+async function main() {
+	const parser = new argparse.ArgumentParser();
+	parser.add_argument('OUT_DIR');
+	parser.add_argument('IN_FNS', {nargs: '+'});
 
-	if (args.length < 2) {
-		return usage();
-	}
-	const [out_dir, ...in_fns] = args;
+	const args = parser.parse_args();
+	const out_dir = args.OUT_DIR;
+	const in_fns = args.IN_FNS;
 
-	async.each(in_fns, (in_fn, cb) => {
+	await Promise.all(in_fns.map(in_fn => {
 		const out_fn = path.join(out_dir, path.basename(in_fn));
-		minify_svg(in_fn, out_fn, cb);
-	}, callback);
+		return minify_svg(in_fn, out_fn);
+	}));
 }
 
-function minify_svg(in_fn, out_fn, cb) {
-	const args = [
-		'-q',
-		'--disable=removeEmptyText',
-		'--disable=removeEmptyContainers',
-		'--disable=convertPathData',
-		'--disable=cleanupIDs',
-		'--disable=removeViewBox',
-		'--disable=removeHiddenElems',
-		'--disable=convertStyleToAttrs',
-		'--disable=moveElemsAttrsToGroup',
-		'--disable=moveGroupAttrsToElems',
-		'--disable=convertShapeToPath',
-		'--disable=inlineStyles',
-		'--disable=minifyStyles',
-		'-i', in_fn,
-		'-o', out_fn,
-	];
-	const svgo_path = path.normalize(path.join(__dirname, '..', 'node_modules', '.bin', 'svgo'));
-	const proc = child_process.spawn(svgo_path, args, {
-		stdio: 'inherit',
-	});
-	proc.on('close', (code) => {
-		if (code === 0) {
-			cb(null);
-		} else {
-			cb(new Error('svgo exited with code ' + code));
-		}
-	});
-
-}
-
-main((err) => {
-	if (err) throw err;
-});
+(async () => {
+    try {
+        await main();
+    } catch (e) {
+        console.error(e.stack);
+        process.exit(2);
+    }
+})();

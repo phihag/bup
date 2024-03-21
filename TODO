@@ -1,3 +1,61 @@
+fix scoresheet editmode handling; calculate left & right from s.game
+
+optional circles? for scoresheet
+
+!courtspot make sure no server by default
+
+umpire name when no first name
+
+btde: sponsor true/false
+
+export
+	teamster names
+
+BerndW tde_export
+
+show pause state on buttons
+
+
+logo Neuhausen-Nymphenburg
+
+PaulP display
+
+
+snapshot test for scoresheet -> svg
+
+custom background from bts doesn't work with international
+
+
+btde: more data fields
+
+show when next game where score would be (test w/ CourtSpot)
+
++tdemo for an international tournament?
+
+show country in onmyright for international events!
+
+temporarily disable if 3 rallies with <2s each
+
+greyish with transparency -> Jannick
+
+correct with long player names (=> SMS Paul)
+
+fix tests for mark
+
+new display multi-court tiles
+
+greyish with long names
+	-> Paul
+
+font size on eventsheet mac
+
+translations_table: import
+	import flemish, see email
+
+test color change with bts during match
+
+sync now_on_court with display, if only one then show it
+
 umpire nationality on scoresheet
 
 editmode if no sides: just assume something
@@ -14,9 +72,6 @@ red cross for injury
 tournament display mode with handschuhmacher on 1024 should never scroll
 
 dmode tournament_overview
-
-translations_table: import
-	import flemish, see email
 
 show receivers during server dialog
 	benedikt

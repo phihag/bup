@@ -270,6 +270,7 @@ _describe('scoresheet generation', () => {
 			row: 0,
 			val: 'V',
 			press_type: 'injury',
+			mark: true,
 		});
 		_assert_cell(cells, {
 			type: 'text',
@@ -277,6 +278,7 @@ _describe('scoresheet generation', () => {
 			col: 1,
 			row: 1,
 			val: 'R',
+			mark: true,
 		});
 
 		presses.push({
@@ -289,7 +291,7 @@ _describe('scoresheet generation', () => {
 			type: 'referee',
 		});
 		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
-		assert.equal(cells.length, 8);
+		assert.equal(cells.length, 9);
 		_assert_cell(cells, {
 			type: 'text',
 			table: 0,
@@ -297,6 +299,7 @@ _describe('scoresheet generation', () => {
 			row: 3,
 			val: 'V',
 			press_type: 'injury',
+			mark: true,
 		});
 		_assert_cell(cells, {
 			type: 'text',
@@ -304,6 +307,7 @@ _describe('scoresheet generation', () => {
 			col: 2,
 			row: 2,
 			val: 'R',
+			mark: true,
 		});
 
 		presses.push({
@@ -316,7 +320,7 @@ _describe('scoresheet generation', () => {
 			type: 'referee',
 		});
 		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
-		assert.equal(cells.length, 10);
+		assert.equal(cells.length, 12);
 		_assert_cell(cells, {
 			type: 'text',
 			table: 0,
@@ -324,6 +328,7 @@ _describe('scoresheet generation', () => {
 			row: 2,
 			val: 'V',
 			press_type: 'injury',
+			mark: true,
 		});
 		_assert_cell(cells, {
 			type: 'text',
@@ -331,6 +336,7 @@ _describe('scoresheet generation', () => {
 			col: 2,
 			row: 2,
 			val: 'R',
+			mark: true,
 		});
 
 		presses.push({
@@ -338,13 +344,14 @@ _describe('scoresheet generation', () => {
 			timestamp: 130000,
 		});
 		cells = _scoresheet_cells(presses, DOUBLES_SETUP);
-		assert.equal(cells.length, 13);
+		assert.equal(cells.length, 18);
 		_assert_cell(cells, {
 			type: 'vertical-text',
 			table: 0,
 			col: 1,
 			row: 2.5,
 			val: '2:09',
+			mark: true,
 		});
 		_assert_cell(cells, {
 			type: 'vertical-text',
@@ -352,6 +359,7 @@ _describe('scoresheet generation', () => {
 			col: 2,
 			row: 0.5,
 			val: '2:08',
+			mark: true,
 		});
 		_assert_cell(cells, {
 			type: 'vertical-text',
@@ -359,6 +367,7 @@ _describe('scoresheet generation', () => {
 			col: 3,
 			row: 0.5,
 			val: '2:07',
+			mark: true,
 		});
 	});
 
@@ -398,6 +407,7 @@ _describe('scoresheet generation', () => {
 			col: 1,
 			row: 1,
 			val: 'W',
+			mark: true,
 		});
 		_assert_cell(cells, {
 			type: 'text',
@@ -405,6 +415,7 @@ _describe('scoresheet generation', () => {
 			col: 2,
 			row: 1,
 			val: 'R',
+			mark: true,
 		});
 
 		presses.push({
@@ -422,6 +433,7 @@ _describe('scoresheet generation', () => {
 			col: 3,
 			row: 2,
 			val: 'W',
+			mark: true,
 		});
 		_assert_cell(cells, {
 			type: 'text',
@@ -429,6 +441,7 @@ _describe('scoresheet generation', () => {
 			col: 4,
 			row: 2,
 			val: 'R',
+			mark: true,
 		});
 
 		presses = base_presses.slice();
@@ -452,6 +465,7 @@ _describe('scoresheet generation', () => {
 			col: 1,
 			row: 1,
 			val: 'W',
+			mark: true,
 		});
 		_assert_cell(cells, {
 			table: 0,
@@ -499,6 +513,7 @@ _describe('scoresheet generation', () => {
 			col: 1,
 			row: 1,
 			val: 'R',
+			mark: true,
 		});
 	});
 
@@ -548,6 +563,7 @@ _describe('scoresheet generation', () => {
 			row: 1,
 			val: 'U',
 			_suspension_timestamp: 1000000,
+			mark: true,
 		});
 		_assert_cell(cells, {
 			type: 'text',
@@ -555,6 +571,7 @@ _describe('scoresheet generation', () => {
 			col: 3,
 			row: 1,
 			val: 'R',
+			mark: true,
 		});
 
 		presses.push({
@@ -575,6 +592,7 @@ _describe('scoresheet generation', () => {
 			col: 2,
 			row: 1,
 			val: 'U',
+			mark: true,
 			_suspension_timestamp: 1000000,
 		});
 		_assert_cell(cells, {
@@ -583,6 +601,7 @@ _describe('scoresheet generation', () => {
 			col: 2,
 			row: 2.5,
 			val: '8:39',
+			mark: true,
 		});
 		_assert_cell(cells, {
 			type: 'text',
@@ -590,6 +609,7 @@ _describe('scoresheet generation', () => {
 			col: 3,
 			row: 1,
 			val: 'R',
+			mark: true,
 		});
 
 	});
@@ -635,6 +655,7 @@ _describe('scoresheet generation', () => {
 			row: 1,
 			val: 'F',
 			press_type: 'red-card',
+			mark: true,
 		});
 		_assert_cell(cells, {
 			table: 0,
@@ -649,6 +670,7 @@ _describe('scoresheet generation', () => {
 			col: 1,
 			row: 0,
 			val: 'R',
+			mark: true,
 		});
 		_assert_cell(cells, {
 			type: 'text',
@@ -657,6 +679,7 @@ _describe('scoresheet generation', () => {
 			row: 0,
 			val: 'F',
 			press_type: 'red-card',
+			mark: true,
 		});
 		_assert_cell(cells, {
 			table: 0,
@@ -679,6 +702,7 @@ _describe('scoresheet generation', () => {
 			row: 3,
 			val: 'F',
 			press_type: 'red-card',
+			mark: true,
 		});
 		_assert_cell(cells, {
 			table: 0,
@@ -725,6 +749,7 @@ _describe('scoresheet generation', () => {
 			row: 2,
 			val: 'F',
 			press_type: 'red-card',
+			mark: true,
 		});
 		_assert_cell(cells, {
 			type: 'text',
@@ -732,6 +757,7 @@ _describe('scoresheet generation', () => {
 			col: 1,
 			row: 3,
 			val: 'R',
+			mark: true,
 		});
 		_assert_cell(cells, {
 			table: 0,
@@ -747,6 +773,7 @@ _describe('scoresheet generation', () => {
 			row: 2,
 			val: 'F',
 			press_type: 'red-card',
+			mark: true,
 		});
 		_assert_cell(cells, {
 			table: 0,
@@ -769,6 +796,7 @@ _describe('scoresheet generation', () => {
 			row: 0,
 			val: 'F',
 			press_type: 'red-card',
+			mark: true,
 		});
 		_assert_cell(cells, {
 			table: 0,
@@ -795,6 +823,7 @@ _describe('scoresheet generation', () => {
 			row: 2,
 			val: 'F',
 			press_type: 'red-card',
+			mark: true,
 		});
 		_assert_cell(cells, {
 			table: 0,
@@ -809,6 +838,7 @@ _describe('scoresheet generation', () => {
 			col: 4,
 			row: 3,
 			val: 'R',
+			mark: true,
 		});
 	});
 
@@ -877,6 +907,7 @@ _describe('scoresheet generation', () => {
 			row: 2,
 			val: 'F',
 			press_type: 'red-card',
+			mark: true,
 		});
 		cells.forEach(function(cell) {
 			if (cell.type == 'score') {
@@ -1087,6 +1118,7 @@ _describe('scoresheet generation', () => {
 			row: 0,
 			val: 'C',
 			type: 'text',
+			mark: true,
 		});
 
 		presses.push({
@@ -1122,6 +1154,7 @@ _describe('scoresheet generation', () => {
 			row: 1,
 			val: 'C',
 			type: 'text',
+			mark: true,
 		});
 
 		presses.push({
@@ -1157,6 +1190,7 @@ _describe('scoresheet generation', () => {
 			row: 2,
 			val: 'C',
 			type: 'text',
+			mark: true,
 		});
 
 		presses.push({
@@ -1192,6 +1226,7 @@ _describe('scoresheet generation', () => {
 			row: 3,
 			val: 'C',
 			type: 'text',
+			mark: true,
 		});
 
 		// Now against the receiver
@@ -1239,6 +1274,7 @@ _describe('scoresheet generation', () => {
 			row: 0,
 			val: 'C',
 			type: 'text',
+			mark: true,
 		});
 
 		presses.push({
@@ -1274,6 +1310,7 @@ _describe('scoresheet generation', () => {
 			row: 0,
 			val: 'C',
 			type: 'text',
+			mark: true,
 		});
 
 		presses.push({
@@ -1309,6 +1346,7 @@ _describe('scoresheet generation', () => {
 			row: 3,
 			val: 'C',
 			type: 'text',
+			mark: true,
 		});
 
 		presses.push({
@@ -1344,6 +1382,7 @@ _describe('scoresheet generation', () => {
 			row: 3,
 			val: 'C',
 			type: 'text',
+			mark: true,
 		});
 	});
 
@@ -2115,6 +2154,7 @@ _describe('scoresheet generation', () => {
 			table: 0,
 			val: 'F',
 			press_type: 'red-card',
+			mark: true,
 		}]);
 
 		presses.push({
@@ -2123,7 +2163,7 @@ _describe('scoresheet generation', () => {
 			player_id: 0,
 		});
 		cells = _scoresheet_cells(presses, SINGLES_SETUP);
-		assert.deepStrictEqual(cells.length, 2);
+		assert.deepStrictEqual(cells.length, 3);
 
 		presses.push({
 			type: 'red-card',
@@ -2131,7 +2171,7 @@ _describe('scoresheet generation', () => {
 			player_id: 0,
 		});
 		cells = _scoresheet_cells(presses, SINGLES_SETUP);
-		assert.deepStrictEqual(cells.length, 3);
+		assert.deepStrictEqual(cells.length, 4);
 		_assert_cell(cells, {
 			type: 'text',
 			col: 1,
@@ -2139,13 +2179,14 @@ _describe('scoresheet generation', () => {
 			table: 0,
 			val: 'F',
 			press_type: 'red-card',
+			mark: true,
 		});
 
 		presses.push({
 			type: 'love-all',
 		});
 		cells = _scoresheet_cells(presses, SINGLES_SETUP);
-		assert.deepStrictEqual(cells.length, 5);
+		assert.deepStrictEqual(cells.length, 7);
 		_assert_cell(cells, {
 			type: 'score',
 			col: 2,
@@ -2170,7 +2211,7 @@ _describe('scoresheet generation', () => {
 		});
 		press_score(presses, 0, 21);
 		cells = _scoresheet_cells(presses, SINGLES_SETUP);
-		assert.deepStrictEqual(cells.length, 52);
+		assert.deepStrictEqual(cells.length, 54);
 		_assert_cell(cells, {
 			type: 'score',
 			col: 21,
@@ -2192,7 +2233,7 @@ _describe('scoresheet generation', () => {
 			player_id: 0,
 		});
 		cells = _scoresheet_cells(presses, SINGLES_SETUP);
-		assert.deepStrictEqual(cells.length, 53);
+		assert.deepStrictEqual(cells.length, 55);
 		_assert_cell(cells, {
 			type: 'text',
 			table: 1,
@@ -2200,6 +2241,7 @@ _describe('scoresheet generation', () => {
 			row: 0,
 			val: 'F',
 			press_type: 'red-card',
+			mark: true,
 		});
 		_assert_cell(cells, {
 			table: 1,
@@ -2259,6 +2301,7 @@ _describe('scoresheet generation', () => {
 		const cells = _scoresheet_cells(presses, SINGLES_SETUP);
 		_assert_cell(cells, {
 			type: 'vertical-text',
+			mark: true,
 			col: 32,
 			row: 2.5,
 			val: '0:09',
@@ -2300,6 +2343,7 @@ _describe('scoresheet generation', () => {
 			table: 0,
 			val: 'V',
 			press_type: 'injury',
+			mark: true,
 		});
 		_assert_cell(cells, {
 			type: 'vertical-text',
@@ -2307,6 +2351,7 @@ _describe('scoresheet generation', () => {
 			row: 2.5,
 			table: 0,
 			val: '0:09',
+			mark: true,
 		});
 
 		presses = base_presses.slice();
@@ -2324,6 +2369,7 @@ _describe('scoresheet generation', () => {
 			table: 0,
 			val: 'V',
 			press_type: 'injury',
+			mark: true,
 		});
 		_assert_cell(cells, {
 			type: 'vertical-text',
@@ -2331,6 +2377,7 @@ _describe('scoresheet generation', () => {
 			row: 2.5,
 			table: 0,
 			val: '0:09',
+			mark: true,
 		});
 	});
 
@@ -2365,13 +2412,14 @@ _describe('scoresheet generation', () => {
 		cells = _scoresheet_cells(presses, SINGLES_SETUP);
 		_assert_cell(cells, {
 			type: 'text',
+			mark: true,
 			col: 2,
 			row: 2,
 			table: 0,
 			val: 'F',
 			press_type: 'red-card',
 		});
-		assert.equal(cells.length, 6);
+		assert.equal(cells.length, 7);
 
 		presses.push({
 			type: 'editmode_set-finished_games',
@@ -2388,7 +2436,7 @@ _describe('scoresheet generation', () => {
 			timestamp: 20000,
 		});
 		cells = _scoresheet_cells(presses, SINGLES_SETUP);
-		assert.equal(cells.length, 18);
+		assert.equal(cells.length, 20);
 
 		// still not ...
 		presses.push({
@@ -2405,6 +2453,7 @@ _describe('scoresheet generation', () => {
 			table: 2,
 			val: 'F',
 			press_type: 'red-card',
+			mark: true,
 		});
 		_assert_cell(cells, {
 			type: 'score',
@@ -2413,7 +2462,7 @@ _describe('scoresheet generation', () => {
 			table: 2,
 			val: 16,
 		});
-		assert.equal(cells.length, 20);
+		assert.equal(cells.length, 23);
 		_assert_cell(cells, {
 			type: 'text',
 			col: 4,
@@ -2421,6 +2470,7 @@ _describe('scoresheet generation', () => {
 			table: 2,
 			val: 'V',
 			press_type: 'injury',
+			mark: true,
 		});
 
 		// but if the match ends then yes
@@ -2438,6 +2488,7 @@ _describe('scoresheet generation', () => {
 			table: 2,
 			val: 'F',
 			press_type: 'red-card',
+			mark: true,
 		});
 		_assert_cell(cells, {
 			type: 'score',
@@ -2453,6 +2504,7 @@ _describe('scoresheet generation', () => {
 			table: 2,
 			val: 'V',
 			press_type: 'injury',
+			mark: true,
 		});
 		_assert_cell(cells, {
 			type: 'vertical-text',
@@ -2460,6 +2512,7 @@ _describe('scoresheet generation', () => {
 			row: 2.5,
 			table: 2,
 			val: '0:03',
+			mark: true,
 		});
 	});
 

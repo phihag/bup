@@ -62,7 +62,7 @@
                   "name": "Samantha Barning"
                 },
                 {
-                  "name": "Isabel Herttrich"
+                  "name": "Isabel Lohau"
                 }
               ]
             }
@@ -168,7 +168,7 @@
                   "name": "Michael Fuchs"
                 },
                 {
-                  "name": "Isabel Herttrich"
+                  "name": "Isabel Lohau"
                 }
               ]
             }
@@ -278,7 +278,7 @@
         {"gender": "m", "name": "Marcel Reuter", "ranking": 10},
         {"gender": "f", "name": "Olga Konon", "ranking": 1},
         {"gender": "f", "name": "Samantha Barning", "ranking": 2},
-        {"gender": "f", "name": "Isabel Herttrich", "ranking": 3},
+        {"gender": "f", "name": "Isabel Lohau", "ranking": 3},
         {"gender": "f", "name": "Cisita Joitiy Jansen", "ranking": 4},
         {"gender": "f", "name": "Nadia Frankhauser", "ranking": 5}
       ]

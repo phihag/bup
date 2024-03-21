@@ -722,6 +722,7 @@ function calc_press(s, press) {
 		break;
 	case 'editmode_change-ends':
 		s.game.team1_left = !s.game.team1_left;
+		s.game.start_team1_left = !s.game.start_team1_left;
 		break;
 	case 'editmode_switch-sides':
 		var team_id = (s.game.team1_left == (press.side == 'left')) ? 0 : 1;

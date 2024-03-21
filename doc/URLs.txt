@@ -19,7 +19,8 @@ bldemo_incomplete Demo of a Bundesliga match where not all players have been con
 bldemo_inprogress Demo of a Bundesliga match already running
 e_bldemo  Demo of a Bundesliga match where nothing has been configured yet
 edemo     Demo of an event (empty)
-intdemo   International match demo
+intdemo   International team match demo
+tdemo     International tournament demo
 nlademo   Demo of Swiss National League
 nrwdemo   Demo of a match in the lower divisions in NRW
 obldemo   Austrian Bundesliga demo

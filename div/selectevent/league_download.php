@@ -36,6 +36,8 @@ function geolocate($httpc, $address, $orig_address=null) {
 		'51427 Bergisch Gladbach-Refrath, Sporthalle, Steinbreche' => 'Steinbreche 1, 51427 Bergisch Gladbach',
 		'67677 Enkenbach, Integrierte Gesamtschule, Am Mühlberg 23-25' => '67677 Enkenbach Am Mühlberg 23',
 		'66123 Saarbrücken, Herman-Neuberger-Sportschule 1, Badmintonhalle 72, Herman-Neuberger-Sportschule 1' => '66123 Saarbrücken Herman-Neuberger-Sportschule 1',
+		'66123 Saarbrücken, Herman-Neuberger-Sportschule 1, MultiFunkHalle 80, Herman-Neuberger-Sportschule 1' => '66123 Saarbrücken Herman-Neuberger-Sportschule 1',
+		'66123 Saarbrücken, Herman-Neuberger-Sportschule 1, Badmintonhalle 72, Herman-Neu' => '66123 Saarbrücken Herman-Neuberger-Sportschule 1',
 	];
 	if (\array_key_exists($address, $ADDRESS_ALIAS)) {
 		$address = $ADDRESS_ALIAS[$address];
@@ -306,6 +308,9 @@ function download_leagues($config) {
 			$cache_dir = __DIR__ . '/cache';
 		}
 		$httpc = new http_utils\CacheHTTPClient($httpc, $cache_dir);
+	}
+	if ($config['debug']) {
+		$httpc = new http_utils\DebugHTTPClient($httpc);
 	}
 
 	init_geolocation_cache();

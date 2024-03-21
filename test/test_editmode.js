@@ -3,10 +3,14 @@
 var assert = require('assert');
 
 var tutils = require('./tutils');
-var _describe = tutils._describe;
-var _it = tutils._it;
-var SINGLES_SETUP = tutils.SINGLES_SETUP;
-var DOUBLES_SETUP = tutils.DOUBLES_SETUP;
+const {
+	_describe,
+	_it,
+	DOUBLES_SETUP,
+	DOUBLES_SETUP_5x11,
+	SINGLES_SETUP,
+} = tutils;
+
 var press_score = tutils.press_score;
 var state_after = tutils.state_after;
 var bup = tutils.bup;
@@ -1411,6 +1415,83 @@ _describe('editmode', function() {
 		assert.equal(court.left_odd.player.name, 'Andrew');
 		assert.equal(court.right_even.player.name, 'Birgit');
 		assert.equal(court.right_odd.player.name, 'Bob');
+	});
+
+	_it('manual ends switch edit should be corrected later', function() {
+		function _calc_position(presses) {
+			const s = state_after(presses, DOUBLES_SETUP_5x11);
+
+			const court = bup.calc.court(s);
+			return {
+				left_even: court.left_even.player.name,
+				left_odd: court.left_odd.player.name,
+				right_even: court.right_even.player.name,
+				right_odd: court.right_odd.player.name,
+			};
+		}
+
+		var presses = [{
+			type: 'pick_side',
+			team1_left: true,
+		}, {
+			type: 'pick_server',
+			team_id: 0,
+			player_id: 0,
+		}, {
+			type: 'pick_receiver',
+			team_id: 1,
+			player_id: 1,
+		}, {
+			type: 'love-all',
+		}];
+		let s = state_after(presses, DOUBLES_SETUP_5x11);
+		assert.strictEqual(s.game.start_team1_left, true);
+
+		press_score(presses, 2, 2);
+		assert.deepStrictEqual(_calc_position(presses), {
+			left_even: 'Alice',
+			left_odd: 'Andrew',
+			right_even: 'Birgit',
+			right_odd: 'Bob',
+		});
+
+		// Umpire notices ends are switched, corrects it
+		presses.push({
+			type: 'editmode_change-ends',
+		});
+		s = state_after(presses, DOUBLES_SETUP_5x11);
+		assert.strictEqual(s.game.start_team1_left, false);
+		assert.deepStrictEqual(_calc_position(presses), {
+			left_even: 'Birgit',
+			left_odd: 'Bob',
+			right_even: 'Alice',
+			right_odd: 'Andrew',
+		});
+
+		// game ends
+		press_score(presses, 9, 0);
+		presses.push({
+			type: 'postgame-confirm',
+		});
+		presses.push({
+			type: 'pick_server',
+			team_id: 1,
+			player_id: 0,
+		});
+		presses.push({
+			type: 'pick_receiver',
+			team_id: 0,
+			player_id: 0,
+		});
+		s = state_after(presses, DOUBLES_SETUP_5x11);
+		assert.strictEqual(s.game.start_team1_left, true);
+		assert.deepStrictEqual(s.game.score, [0, 0]);
+		assert.deepStrictEqual(_calc_position(presses), {
+			left_even: 'Andrew',
+			left_odd: 'Alice',
+			right_even: 'Bob',
+			right_odd: 'Birgit',
+		});
 	});
 
 	_it('score setting in singles should update sides', function() {

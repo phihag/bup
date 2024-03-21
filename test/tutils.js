@@ -43,6 +43,8 @@ SINGLES_TEAM_SETUP.teams[1].name = 'B team';
 SINGLES_TEAM_SETUP.team_competition = true;
 var SINGLES_TEAM_SETUP_AWAY_FIRST = bup.utils.deep_copy(SINGLES_TEAM_SETUP);
 SINGLES_TEAM_SETUP_AWAY_FIRST.away_first = true;
+var SINGLES_SETUP_5x11 = bup.utils.deep_copy(SINGLES_SETUP);
+SINGLES_SETUP_5x11.counting = '5x11_15';
 
 var DOUBLES_SETUP = {
 	teams: [{
@@ -59,6 +61,8 @@ DOUBLES_TEAM_SETUP.teams[1].name = 'B team';
 DOUBLES_TEAM_SETUP.team_competition = true;
 var DOUBLES_TEAM_SETUP_AWAY_FIRST = bup.utils.deep_copy(DOUBLES_TEAM_SETUP);
 DOUBLES_TEAM_SETUP_AWAY_FIRST.away_first = true;
+var DOUBLES_SETUP_5x11 = bup.utils.deep_copy(DOUBLES_SETUP);
+DOUBLES_SETUP_5x11.counting = '5x11_15';
 
 
 var DOUBLES_SETUP_EN = bup.utils.deep_copy(DOUBLES_SETUP);
@@ -187,8 +191,8 @@ function load_event(fn, cb) {
 	});
 }
 
-async function assert_snapshot(test_name, actual) {
-	const file_name = path.join(__dirname, `${test_name}.snapshot.json`);
+async function assert_snapshot(test_name, actual, {dirname=__dirname} = {}) {
+	const file_name = path.join(dirname, `${test_name}.snapshot.json`);
 	let expected;
 	try {
 		const contents = await fs.promises.readFile(file_name, 'utf-8');
@@ -209,6 +213,8 @@ module.exports = {
 	SINGLES_SETUP,
 	DOUBLES_TEAM_SETUP,
 	DOUBLES_TEAM_SETUP_AWAY_FIRST,
+	SINGLES_SETUP_5x11,
+	DOUBLES_SETUP_5x11,
 	SINGLES_TEAM_SETUP,
 	SINGLES_TEAM_SETUP_AWAY_FIRST,
 	SINGLES_SETUP_EN,

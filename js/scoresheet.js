@@ -559,6 +559,16 @@ function parse_match(state, col_count) {
 				_loveall(s, s.game, s.scoresheet_game, {editmode_related: true});
 			}
 			break;
+		case 'editmode_switch-sides':
+			_clean_editmode(s.scoresheet_game);
+			s.scoresheet_game.cells.push({
+				col: s.scoresheet_game.col_idx,
+				type: 'editmode-sign',
+				editmode_related: true,
+			});
+			var team_id = (s.game.start_team1_left == (press.side === 'left')) ? 0 : 1;
+			s.scoresheet_game.servers[team_id] = 1 - s.scoresheet_game.servers[team_id];
+			break;
 		case 'editmode_set-finished_games':
 			s.scoresheet_games = s.match.finished_games.map(function(fgame, i) {
 				var sgame = s.scoresheet_games[i];
@@ -626,6 +636,30 @@ function parse_match(state, col_count) {
 	});
 
 	return _layout(s.scoresheet_games, col_count, notes);
+}
+
+function _draw_mark_circle(container, cell, cell_width, cell_height, cols_left, table_top) {
+	var rx = cell.width * cell_width / 2;
+	var ry = cell.height * cell_height / 2;
+
+	var cx = cols_left + cell.col * cell_width + rx;
+	var cy = table_top + cell.row * cell_height + ry;
+	if (cell.height === 1 && cell.width === 1) {
+		var max_dimension = Math.max(rx, ry);
+		ry = max_dimension;
+		rx = max_dimension;
+	} else {
+		rx += 0.2 * cell_width;
+		ry += 0.2 * cell_width;
+	}
+
+	_svg_el('ellipse', {
+		'class': 'table_game_result',
+		'cx': cx,
+		'rx': rx,
+		'cy': cy,
+		'ry': ry,
+	}, container);
 }
 
 function sheet_render(s, svg) {
@@ -961,28 +995,7 @@ function sheet_render(s, svg) {
 			break;
 		case 'mark-circle':
 			// Circle around special marks
-			var rx = cell.width * cell_width / 2;
-			var ry = cell.height * cell_height / 2;
-
-			var cx = cols_left + cell.col * cell_width + rx;
-			var cy = table_top + cell.row * cell_height + ry;
-			if (cell.height === 1 && cell.width === 1) {
-				var max_dimension = Math.max(rx, ry);
-				ry = max_dimension;
-				rx = max_dimension;
-			} else {
-				rx += 0.2 * cell_width;
-				ry += 0.2 * cell_width;
-			}
-
-			_svg_el('ellipse', {
-				'class': 'table_game_result',
-				'cx': cx,
-				'rx': rx,
-				'cy': cy,
-				'ry': ry,
-			}, t);
-
+			_draw_mark_circle(t, cell, cell_width, cell_height, cols_left, table_top);
 			break;
 		case 'score':
 			/* falls through */
