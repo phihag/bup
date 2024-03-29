@@ -17,7 +17,8 @@ var i18n_en = {
 'Call referee': 'Call referee',
 'Are you retiring?': 'Are you retiring?',
 'import link': 'Import event from backup file ...',
-'send export': 'send export file',
+'send export': 'Save setting',
+'reset export': 'Reset setting',
 'select pick': 'Select',
 'back': 'Back',
 

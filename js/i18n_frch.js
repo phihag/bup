@@ -18,7 +18,8 @@ var i18n_frch = {
 'Call referee': 'Appelle juge-arbitre',
 'Are you retiring?': 'Abandonnez-vous?',
 'import link': 'Importer un événement à partir du fichier de sauvegarde ...',
-'send export': 'Envoyer un fichier d\'exportation',
+'send export': 'Enregistrer les paramètres',
+'reset export': 'Réinitialiser les paramètres',
 'select pick': 'Choisir',
 'back': 'Retourner',
 

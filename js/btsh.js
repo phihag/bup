@@ -153,6 +153,23 @@ function btsh(baseurl, tournament_key) {
 		if (m) {
 			baseurl = m[1];
 		}
+
+		click.qs('.settings_send_export', function (e) {
+			e.preventDefault();
+			persist_display_settings();
+		});
+		click.qs('.settings_reset_export', function (e) {
+			e.preventDefault();
+			reset_display_settings();
+		});
+	}
+
+	function persist_display_settings() {
+		ws.sendmsg({ type: 'persist_display_settings', tournament_key: tournament_key, panel_settings: state.settings });
+	}
+
+	function reset_display_settings() {
+		ws.sendmsg({ type: 'reset_display_settings', tournament_key: tournament_key, panel_settings: state.settings });
 	}
 
 	function service_name() {
@@ -294,6 +311,7 @@ if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
 	var eventutils = require('./eventutils');
 	var network = require('./network');
 	var refmode_client_ui = require('./refmode_client_ui');
+	var click = require('./click');
 
 	module.exports = btsh;
 }
