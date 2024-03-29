@@ -6,7 +6,7 @@ function btsh(baseurl, tournament_key) {
 	var WS_PATH = '/ws/bup';
 	var reconnect_timeout = 1000;
 	var bts_update_callback = null;
-
+	var display_initialized = false;
 	var battery;
 	
 
@@ -235,6 +235,9 @@ function btsh(baseurl, tournament_key) {
 					}
 				}
 				break;
+			case 'settings-update':
+				state.settings = c.val;
+				break;
 			default:
 				break;
 		}
@@ -252,7 +255,8 @@ function btsh(baseurl, tournament_key) {
 		} else {
 			state.settings.court_id = state.settings.displaymode_court_id;
 		}
-		ws.sendmsg({ type: 'init', tournament_key: tournament_key, panel_settings: state.settings });
+		ws.sendmsg({ type: 'init', initialize_display: !display_initialized, tournament_key: tournament_key, panel_settings: state.settings });
+		display_initialized = true;
 	}
 	
 	function subscribe(s, cb, calc_timeout) {
