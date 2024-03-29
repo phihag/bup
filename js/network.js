@@ -365,43 +365,57 @@ function ui_list_matches(s, silent, no_timer) {
 	});
 }
 
+function reload_match_information() {
+	var netw = get_netw();
+	if (netw.push_service) {
+		netw.reload_match_information();
+	}
+}
+
 // Returns a callback to be called when the updates are no longer required.
 // cb gets called with (err, s, event); s is NOT updated implicitly
 // calc_timeout is called with s and must return immediately the timeout or the string 'abort'
 function subscribe(s, cb, calc_timeout) {
-	var cancelled = false;
-	var timeout = null;
 
-	function query() {
-		if (cancelled) {
-			return;
+	var netw = get_netw();
+	if (netw.push_service) {
+		netw.subscribe(s, cb, calc_timeout);
+	} else { 
+
+		var cancelled = false;
+		var timeout = null;
+
+		function query() {
+			if (cancelled) {
+				return;
+			}
+			var netw = get_netw();
+			if (!netw) {
+				cb({
+					msg: s._('network:error:unconfigured'),
+				}, s);
+				return;
+			}
+			list_matches(s, function(err, event) {
+				cb(err, s, event);
+			});
+			var new_timeout = calc_timeout(s);
+			if (new_timeout === 'abort') {
+				cancelled = true;
+				return;
+			}
+			timeout = setTimeout(query, new_timeout);
 		}
-		var netw = get_netw();
-		if (!netw) {
-			cb({
-				msg: s._('network:error:unconfigured'),
-			}, s);
-			return;
-		}
-		list_matches(s, function(err, event) {
-			cb(err, s, event);
-		});
-		var new_timeout = calc_timeout(s);
-		if (new_timeout === 'abort') {
+		query();
+
+		return function() {
 			cancelled = true;
-			return;
-		}
-		timeout = setTimeout(query, new_timeout);
+			if (timeout) {
+				clearTimeout(timeout);
+				timeout = null;
+			}
+		};
 	}
-	query();
-
-	return function() {
-		cancelled = true;
-		if (timeout) {
-			clearTimeout(timeout);
-			timeout = null;
-		}
-	};
 
 }
 
@@ -853,6 +867,7 @@ return {
 	ui_uninstall_staticnet: ui_uninstall_staticnet,
 	uninstall_refmode_push: uninstall_refmode_push,
 	update_event: update_event,
+	reload_match_information: reload_match_information,
 };
 
 

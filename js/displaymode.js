@@ -3045,7 +3045,7 @@ function update(err, s, event) {
 				title: uc,
 				value: s.settings['d_' + uc],
 			});
-			color_input.addEventListener('change', on_color_select);
+			color_input.addEventListener('change', on_style_change);
 		});
 		color_inputs.setAttribute('data-json', JSON.stringify(used_colors));
 	}
@@ -3176,7 +3176,6 @@ function update(err, s, event) {
 	// Default: top+list
 	render_top_list(s, container, event);
 }
-
 function on_style_change(s) {
 	if (s.ui && s.ui.displaymode_visible) {
 		update(_last_err, s, s.event);
@@ -3189,6 +3188,7 @@ function on_style_change(s) {
 			input.value = col;
 		}
 	});
+	network.reload_match_information();
 }
 
 var _cancel_updates = null;

@@ -49,7 +49,7 @@ var i18n_de = {
 
 'network:error': 'Fehler bei der Netzwerk-Übertragung',
 'network:error:unconfigured': 'Keine Netzwerk-Anbindung konfiguriert! (Einzel-Demo-Modus statt #bldemo?)',
-'network:error:bts': 'BTS nicht via HTTP erreichbar',
+'network:error:bts': 'Verbindung zum BTS unterbrochen',
 'network:error:http': 'Netzwerk-Fehler (Code {code})',
 'network:error:status': '(Status ist {status})',
 'network:Matches': 'Spiele',
