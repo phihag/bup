@@ -192,6 +192,7 @@ function hide(force, skip_state) {
 function update_court(s) {
 	var court_select = $('.settings [name="court_select"]');
 	court_select.val(s.settings.court_id);
+	network.reload_match_information();
 }
 
 function update_refclient(s) {
