@@ -2767,12 +2767,10 @@ function show_match_meta(timer_state, parent, default_color, exigent_color, matc
 
 	var auto_size_alternative_strings = function(parrent_el) {
 		var parrent_width = parrent_el.offsetWidth;
-		console.log(parrent_width);
 		var child_width = 0;
 		timer_alternative_text.forEach(function(item) {
 			let [el, origFontSize] = item;
 			el.style.fontSize = origFontSize;
-			console.log(el.offsetWidthX);
 			child_width += el.offsetWidth;
 		});
 
