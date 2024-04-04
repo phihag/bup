@@ -367,7 +367,7 @@ function ui_list_matches(s, silent, no_timer) {
 
 function reload_match_information() {
 	var netw = get_netw();
-	if (netw.push_service) {
+	if (netw && netw.push_service) {
 		netw.reload_match_information();
 	}
 }

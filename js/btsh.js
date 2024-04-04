@@ -215,9 +215,29 @@ function btsh(baseurl, tournament_key) {
 		);
 	}
 
-	function ws_sendmsg(msg) {
-		const msg_json = JSON.stringify(msg);
-		ws.send(msg_json);
+	async function ws_sendmsg(msg) {
+		
+		waitForSocketConnection(ws, () => {
+			const msg_json = JSON.stringify(msg);
+			ws.send(msg_json);
+		});
+
+	}
+
+	// Make the function wait until the connection is made...
+	function waitForSocketConnection(socket, callback){
+	    setTimeout(
+	        function () {
+	            if (socket.readyState === 1) {
+	                if (callback != null){
+	                    callback();
+	                }
+	            } else {
+	                console.log("wait for connection...")
+	                waitForSocketConnection(socket, callback);
+	            }
+
+	        }, 5); // wait 5 milisecond for the connection...
 	}
 
 	function handle_message(ws_msg) {
