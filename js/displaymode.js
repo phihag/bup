@@ -3098,6 +3098,7 @@ function update(err, s, event) {
 				),
 			});
 
+			/*
 			// background for colors
 			for (var team_id = 0;team_id < 2;team_id++) {
 				uiu.el(nomatch_el, 'div', {
@@ -3107,6 +3108,7 @@ function update(err, s, event) {
 					),
 				});
 			}
+			*/
 
 			var _render_team_name = function(team_id) {
 				uiu.el(nomatch_el, 'div', {
@@ -3124,9 +3126,10 @@ function update(err, s, event) {
 			} else if (event.tournament_logo_url) {
 				uiu.el(nomatch_el, 'img', {
 					src: event.tournament_logo_url,
-					style: 'height: 70vh;',
+					style: 'max-height: 70vh; max-width: 90vw;',
 					alt: (event.tournament_name || ''),
 				});
+		
 			} else {
 				var tname = event.tournament_name;
 				if (tname) {
@@ -3139,7 +3142,7 @@ function update(err, s, event) {
 			}
 			uiu.el(nomatch_el, 'div', {
 				style: (
-					'font-size:18vmin;'
+					'font-size:22vmin;'
 				),
 			}, s._('Court') + ' ' + (court.label || court.num || court.court_id));
 			if (is_team) {
