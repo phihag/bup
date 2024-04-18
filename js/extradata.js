@@ -10,6 +10,7 @@ var ABBREVS = {
 	'BC Hohenlimburg': 'BCH',
 	'STC Blau-Weiss Solingen': 'STC',
 	'SG Ddorf-Unterrath': 'SGU',
+	'SG Lengede/Vechelde': 'L/V',
 };
 var TEAM_COLORS = {
 	'Beuel': {fg: '#ffed00'},
@@ -35,6 +36,7 @@ var TEAM_COLORS = {
 	'Trittau': {fg: '#9dc2fc'},
 	'Geretsried': {fg: '#f0f0f0'},
 	'Offenburg': {fg: '#d6172b'},
+	'Vechelde': {fd: '#00ff00', bg: '#132650'},
 	'Wesel': {fg: '#ed1a24'},
 	'Wipperfeld': {fg: '#ff2d2d'},
 	'Wittorf': {fg: '#0091ff'},
