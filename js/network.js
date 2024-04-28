@@ -304,6 +304,27 @@ function ui_render_matchlist(s, event) {
 				'class': 'setup_network_umpire_name',
 			}, umpire_name);
 		}
+
+		var _tabletoperator_str = function (tabletoperators) {
+			if (tabletoperators.length === 0) {
+				return 'N.N';
+			} else if (tabletoperators.length == 1) {
+				return tabletoperators[0].name;
+			} else {
+				return tabletoperators[0].name + ' / ' + tabletoperators[1].name;
+			}
+
+		};
+
+		if (match.setup.tabletoperators && match.setup.tabletoperators.length > 0) {
+			uiu.el(btn, 'span', {
+				'class': 'setup_network_tabletoperator',
+			}, s._('network:Tabletoperator'));
+			uiu.el(btn, 'span', {
+				'class': 'setup_network_tabletoperator',
+			}, _tabletoperator_str(match.setup.tabletoperators));
+		}
+
 		var score_text = _score_text(match.network_score);
 		uiu.el(btn, 'span', {
 			'class': 'setup_network_match_score',

@@ -105,6 +105,23 @@ function render(s, cui) {
 	if (umpire_name && s.setup.service_judge_name) {
 		umpire_name += ' / ' + s.setup.service_judge_name;
 	}
+
+	if (s.setup.tabletoperators && s.setup.tabletoperators.length > 0) {
+		var _tabletoperator_str = function (tabletoperators) {
+			if (tabletoperators.length === 0) {
+				return 'N.N';
+			} else if (tabletoperators.length == 1) {
+				return tabletoperators[0].name;
+			} else {
+				return tabletoperators[0].name + ' / ' + tabletoperators[1].name;
+			}
+		};
+		if (umpire_name.length > 0) {
+			umpire_name += ' / ';
+		}
+		umpire_name += _tabletoperator_str(s.setup.tabletoperators);
+	}
+
 	uiu.text(cui.umpire_name, umpire_name);
 	uiu.visible(cui.umpire_name, (cdata.left_serving === null));
 

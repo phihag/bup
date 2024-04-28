@@ -55,6 +55,7 @@ var i18n_en = {
 'network:error:status': '(State is {status})',
 'network:Matches': 'Matches',
 'network:Matches on court': 'Matches on court {court}',
+'network:Tabletoperator': 'Tablet service:',
 'network:restart match': 'Restart match at 0-0',
 'network:resume match': 'Resume match at {score}',
 'network:in progress': 'Match {match} has already been started',

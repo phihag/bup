@@ -53,6 +53,7 @@ var i18n_frch = {
 'network:error:unconfigured': 'Connexion réseau non configurée (mode de démonstration? Mettre #nlademo dans l\'URL)',
 'network:Matches': 'Jeux',
 'network:Matches on court': 'Jeux sur {court}',
+'network:Tabletoperator': 'Commande de la tablette:',
 'network:restart match': 'Redémarrer le jeu à 0-0',
 'network:resume match': 'Reprendre le jeu à {score}',
 'network:in progress': 'Le jeu {match} a déjà été lancé',

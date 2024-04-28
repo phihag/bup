@@ -55,6 +55,7 @@ var i18n_de = {
 'network:error:status': '(Status ist {status})',
 'network:Matches': 'Spiele',
 'network:Matches on court': 'Spiele auf Feld {court}',
+'network:Tabletoperator': 'Tabletbedienung:',
 'network:restart match': 'Spiel bei 0-0 neu starten',
 'network:resume match': 'Spiel bei {score} fortsetzen',
 'network:in progress': 'Das Spiel {match} wurde bereits angefangen',
