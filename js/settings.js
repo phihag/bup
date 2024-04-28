@@ -23,6 +23,7 @@ var default_settings = {
 	d_cbg4: '#404040',
 	d_cfg2: '#aaaaaa',
 	d_cfg3: '#cccccc',
+	d_cexp: '#ff0000',
 	d_cborder: '#444444',
 	d_ct: '#80ff00',
 	d_ctim_blue: '#0070c0',
@@ -32,7 +33,12 @@ var default_settings = {
 	d_crecv: '#707676',
 	d_scale: 100,
 	d_team_colors: false,
-	d_show_pause: false,
+	d_show_pause: true,
+	d_show_court_number: true,
+	d_show_competition: true,
+	d_show_round: true,
+	d_show_middle_name: false,
+	d_show_doubles_receiving: false,
 	settings_autohide: 30000,
 	dads_interval: 20000,
 	dads_wait: 60000,
@@ -186,6 +192,7 @@ function hide(force, skip_state) {
 function update_court(s) {
 	var court_select = $('.settings [name="court_select"]');
 	court_select.val(s.settings.court_id);
+	network.reload_match_information();
 }
 
 function update_refclient(s) {
@@ -207,6 +214,11 @@ var _settings_checkboxes = [
 	'refmode_client_enabled',
 	'displaymode_reverse_order',
 	'd_show_pause',
+	'd_show_court_number',
+	'd_show_competition',
+	'd_show_round',
+	'd_show_middle_name',
+	'd_show_doubles_receiving',
 	'd_team_colors',
 	'referee_service_judges',
 ];

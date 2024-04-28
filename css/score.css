@@ -89,10 +89,10 @@ table[data-game-count="5"] .score_future-game {
 	padding-right: 0;
 }
 .score > input {
-	max-width: 1.9em;
+	width: 1.9em;
 	vertical-align: top;
-	font-size: 2vh;
-	max-height: 3vh;
+	font-size: 7.5vh;
+	height: 8vh;
 }
 .score_current-game > .score > input {
 	font-size: 7.5vh;

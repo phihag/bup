@@ -135,16 +135,6 @@ function ui_init() {
 	click.qs('.import_link', function() {
 		ui_import_json(state);
 	});
-
-	click.qs('.settings_send_export', function(e) {
-		e.preventDefault();
-		var status = uiu.qs('.settings_footer_status');
-		send_export(state);
-		uiu.text(status, state._('importexport:export sent'));
-		window.setTimeout(function() {
-			uiu.text(status, '');
-		}, 10000);
-	});
 }
 
 return {

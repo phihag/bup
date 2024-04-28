@@ -105,14 +105,14 @@ function _score_display_set_game(s, game, game_index, is_current) {
 	var left_input = left.children('input');
 	left.attr('class', 'score score_left');
 	if (game) {
-		if (! game.started && !game.finished) {
+		if (!game.started && !game.finished) {
 			left.addClass('score_empty');
 		}
 		if (game.finished) {
 			if (game.team1_won == s.game.team1_left) {
 				left.addClass('score_won');
 			}
-		} else if ((game.team1_serving !== null) && (game.team1_serving == s.game.team1_left)) { 
+		} else if ((game.team1_serving !== null) && (game.team1_serving == s.game.team1_left)) {
 			left.addClass('score_serving');
 		}
 
@@ -123,13 +123,23 @@ function _score_display_set_game(s, game, game_index, is_current) {
 		if (editmode_active) {
 			uiu.$visible(left_input, editmode_score_active);
 		}
+	} else {
+		left.addClass('score_empty');
+		var left_text = left.children('span');
+		var left_points = 0;
+		_val(left_input, left_points);
+		left_text.text(left_points);
+		if (editmode_active) {
+			uiu.$visible(left_input, editmode_score_active);
+		}
+
 	}
 
 	var right = $(tr.querySelector('.score_right'));
 	var right_input = right.children('input');
 	right.attr('class', 'score score_right');
 	if (game) {
-		if (! game.started && !game.finished) {
+		if (!game.started && !game.finished) {
 			right.addClass('score_empty');
 		}
 		if (game.finished) {
@@ -142,6 +152,15 @@ function _score_display_set_game(s, game, game_index, is_current) {
 
 		var right_text = right.children('span');
 		var right_points = game.score[s.game.team1_left ? 1 : 0];
+		_val(right_input, right_points);
+		right_text.text(right_points);
+		if (editmode_active) {
+			uiu.$visible(right_input, editmode_score_active);
+		}
+	} else {
+		right.addClass('score_empty');
+		var right_text = right.children('span');
+		var right_points = 0;
 		_val(right_input, right_points);
 		right_text.text(right_points);
 		if (editmode_active) {
