@@ -373,7 +373,7 @@ var eventsheet = (function () {
     scores = [].concat(
       scores.slice(0, 6 * 6),
       sums,
-      utils.reverse_every(scores.slice(6 * 6), 6),
+      utils.reverse_every(scores.slice(6 * 6), 6)
     );
 
     var match_score_home = sums[sums.length - 2];
@@ -960,7 +960,7 @@ var eventsheet = (function () {
 
         _svg_text(svg, 'basecost' + i,
           i18n.format_money(state.lang, pay.base) + pay.currency +
-          ' (' + eventutils.name_by_league(ev.league_key) + ')',
+          ' (' + eventutils.name_by_league(ev.league_key) + ')'
         );
 
       }
@@ -2009,7 +2009,9 @@ var eventsheet = (function () {
     uiu.show_qs('.eventsheet_print_button');
     uiu.show_qs('.eventsheet_pdf_button');
     uiu.hide_qs('.eventsheet_generate_button');
-    uiu.hide_qs('.eventsheet_send_to_dblv');
+    if (bundesligaLeagueKeys.includes(es_key)) {
+      uiu.show_qs('.eventsheet_send_to_dblv');
+    }
 
     var preview_el = uiu.qs('.eventsheet_preview');
     uiu.show(preview_el);
@@ -2202,7 +2204,7 @@ var eventsheet = (function () {
         info.props,
         info.orientation,
         info.filename,
-        info.scale,
+        info.scale
       );
     });
 
@@ -2210,18 +2212,18 @@ var eventsheet = (function () {
       window.print();
     });
 
-    click.qs('eventsheet_send_to_dblv', async function () {
-      const preview = uiu.qs('.eventsheet_preview');
-      const svg = uiu.qs('svg', preview);
-      const info = JSON.parse(preview.getAttribute('data-info_json'));
-      const pdf = svg2pdf.make([svg], info.props, info.orientation, info.scale);
+    click.qs('eventsheet_send_to_dblv', function ()  {
+      var preview = uiu.qs('.eventsheet_preview');
+      var svg = uiu.qs('svg', preview);
+      var info = JSON.parse(preview.getAttribute('data-info_json'));
+      var pdf = svg2pdf.make([svg], info.props, info.orientation, info.scale);
 
-      const pdfBinaryString = pdf.output('arraybuffer');
-      const base64String = toBase64(String.fromCharCode.apply(null, new Uint8Array(pdfBinaryString)));
-      const matchJson = state.event;
+      var pdfBinaryString = pdf.output('arraybuffer');
+      var base64String = toBase64(String.fromCharCode.apply(null, new Uint8Array(pdfBinaryString)));
+      var matchJson = state.event;
 
 
-      await fetch('https://dblv.saschahei.nl/matches', {
+      fetch('https://dblv.saschahei.nl/api/matches', {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
@@ -2231,7 +2233,9 @@ var eventsheet = (function () {
           pdfFile: base64String,
           matchJson: matchJson
         }
-      })
+      }).then( {
+        
+      });
     });
 
     click.qs('.eventsheet_back', function () {
@@ -2365,7 +2369,7 @@ var eventsheet = (function () {
 
     ALL_FIELDS.forEach(function (field_name) {
       uiu.visible_qs(
-        '.eventsheet_' + field_name, utils.includes(cfg, field_name),
+        '.eventsheet_' + field_name, utils.includes(cfg, field_name)
       );
     });
 
@@ -2381,9 +2385,7 @@ var eventsheet = (function () {
       render.hide();
     }
 
-    if (bundesligaLeagueKeys.includes(es_key)) {
-      uiu.show_qs('.eventsheet_send_to_dblv');
-    }
+
     uiu.hide_qs('.eventsheet_report');
     uiu.hide_qs('.eventsheet_download_link_container');
 
