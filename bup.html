@@ -1,598 +1,783 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8" />
-	<title>Badminton Umpire Panel</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
-	<meta name="mobile-web-app-capable" content="yes"/>
-	<meta name="apple-mobile-web-app-capable" content="yes" />
-	<meta name="theme-color" content="#000"/>
-	<link rel="shortcut icon" type="image/png" href="icons/favicon.png"/>
-<!--@DEV-->
-	<link rel="stylesheet" href="css/fonts.css" />
-	<link rel="stylesheet" href="css/settings.css" />
-	<link rel="stylesheet" href="css/editmode.css" />
-	<link rel="stylesheet" href="css/scoresheet.css" />
-	<link rel="stylesheet" href="css/court.css" />
-	<link rel="stylesheet" href="css/score.css" />
-	<link rel="stylesheet" href="css/timer.css" />
-	<link rel="stylesheet" href="css/network.css" />
-	<link rel="stylesheet" href="css/login.css" />
-	<link rel="stylesheet" href="css/eventsheet.css" />
-	<link rel="stylesheet" href="css/exceptions.css" />
-	<link rel="stylesheet" href="css/topbuttons.css" />
-	<link rel="stylesheet" href="css/bottombuttons.css" />
-	<link rel="stylesheet" href="css/bupui.css" />
-	<link rel="stylesheet" href="css/dads.css" />
-	<link rel="stylesheet" href="css/stats.css" />
-	<link rel="stylesheet" href="css/netstats.css" />
-	<link rel="stylesheet" href="css/order.css" />
-	<link rel="stylesheet" href="css/compat.css" />
-	<link rel="stylesheet" href="css/importexport.css" />
-	<link rel="stylesheet" href="css/urlexport.css" />
-	<link rel="stylesheet" href="css/staticnet.css" />
-	<link rel="stylesheet" href="css/editevent.css" />
-	<link rel="stylesheet" href="css/setupsheet.css" />
-	<link rel="stylesheet" href="css/displaymode.css" />
-	<link rel="stylesheet" href="css/click.css" />
-	<link rel="stylesheet" href="css/urlimport.css" />
-	<link rel="stylesheet" href="css/refmode_client.css" />
-	<link rel="stylesheet" href="css/refmode_referee.css" />
-	<link rel="stylesheet" href="bup.css" />
-<!--/@DEV-->
-<!--@PRODUCTION
-	<link rel="stylesheet" href="bup.dist.css" />
--->
-	<style id="printing_orientation"></style>
+    <meta charset="utf-8"/>
+    <title>Badminton Umpire Panel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
+    <meta name="mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="theme-color" content="#000"/>
+    <link rel="shortcut icon" type="image/png" href="icons/favicon.png"/>
+    <!--@DEV-->
+    <link rel="stylesheet" href="css/fonts.css"/>
+    <link rel="stylesheet" href="css/settings.css"/>
+    <link rel="stylesheet" href="css/editmode.css"/>
+    <link rel="stylesheet" href="css/scoresheet.css"/>
+    <link rel="stylesheet" href="css/court.css"/>
+    <link rel="stylesheet" href="css/score.css"/>
+    <link rel="stylesheet" href="css/timer.css"/>
+    <link rel="stylesheet" href="css/network.css"/>
+    <link rel="stylesheet" href="css/login.css"/>
+    <link rel="stylesheet" href="css/eventsheet.css"/>
+    <link rel="stylesheet" href="css/exceptions.css"/>
+    <link rel="stylesheet" href="css/topbuttons.css"/>
+    <link rel="stylesheet" href="css/bottombuttons.css"/>
+    <link rel="stylesheet" href="css/bupui.css"/>
+    <link rel="stylesheet" href="css/dads.css"/>
+    <link rel="stylesheet" href="css/stats.css"/>
+    <link rel="stylesheet" href="css/netstats.css"/>
+    <link rel="stylesheet" href="css/order.css"/>
+    <link rel="stylesheet" href="css/compat.css"/>
+    <link rel="stylesheet" href="css/importexport.css"/>
+    <link rel="stylesheet" href="css/urlexport.css"/>
+    <link rel="stylesheet" href="css/staticnet.css"/>
+    <link rel="stylesheet" href="css/editevent.css"/>
+    <link rel="stylesheet" href="css/setupsheet.css"/>
+    <link rel="stylesheet" href="css/displaymode.css"/>
+    <link rel="stylesheet" href="css/click.css"/>
+    <link rel="stylesheet" href="css/urlimport.css"/>
+    <link rel="stylesheet" href="css/refmode_client.css"/>
+    <link rel="stylesheet" href="css/refmode_referee.css"/>
+    <link rel="stylesheet" href="bup.css"/>
+    <!--/@DEV-->
+    <!--@PRODUCTION
+        <link rel="stylesheet" href="bup.dist.css" />
+    -->
+    <style id="printing_orientation"></style>
 </head>
 <body>
 <noscript>Please enable JavaScript.</noscript>
 
 <div id="game" class="default-invisible">
-<div class="topleft_buttons">
-	<!-- careful not to insert spaces in between buttons-->
-<button id="button_undo" data-i18n-title="button:undo" disabled="disabled" class="image-button half-invisible"><span></span></button
-><button id="button_exception" data-i18n-title="button:exception" class="image-button"><span></span></button
-></div>
+    <div class="topleft_buttons">
+        <!-- careful not to insert spaces in between buttons-->
+        <button id="button_undo" data-i18n-title="button:undo" disabled="disabled" class="image-button half-invisible">
+            <span></span></button
+        >
+        <button id="button_exception" data-i18n-title="button:exception" class="image-button"><span></span></button
+        >
+    </div>
 
-<div class="topright_buttons">
+    <div class="topright_buttons">
 
-<button id="button_shuttle" data-i18n-title="button:shuttle" class="image-button">
-	<div id="shuttle_counter_value"></div>
-	<span class="button_icon"></span></button
-><button id="button_settings" data-i18n-title="button:settings" class="image-button"><span></span></button>
-</div>
+        <button id="button_shuttle" data-i18n-title="button:shuttle" class="image-button">
+            <div id="shuttle_counter_value"></div>
+            <span class="button_icon"></span></button
+        >
+        <button id="button_settings" data-i18n-title="button:settings" class="image-button"><span></span></button>
+    </div>
 
-<button id="button_redo" data-i18n-title="button:redo" class="image-button default-invisible"><span></span></button>
+    <button id="button_redo" data-i18n-title="button:redo" class="image-button default-invisible"><span></span></button>
 
-<div id="score">
-<table id="score_table">
-<tr class="score_announcements"><td colspan="2">&nbsp;</td></tr>
-<tr class="score_current-game"><td class="score score_left">&nbsp;</td><td class="score score_right">&nbsp;</td></tr>
-<tr class="score_future-game"><td class="score score_left">&nbsp;</td><td class="score score_right">&nbsp;</td></tr>
-<tr class="score_future-game"><td class="score score_left">&nbsp;</td><td class="score score_right">&nbsp;</td></tr>
+    <div id="score">
+        <table id="score_table">
+            <tr class="score_announcements">
+                <td colspan="2">&nbsp;</td>
+            </tr>
+            <tr class="score_current-game">
+                <td class="score score_left">&nbsp;</td>
+                <td class="score score_right">&nbsp;</td>
+            </tr>
+            <tr class="score_future-game">
+                <td class="score score_left">&nbsp;</td>
+                <td class="score score_right">&nbsp;</td>
+            </tr>
+            <tr class="score_future-game">
+                <td class="score score_left">&nbsp;</td>
+                <td class="score score_right">&nbsp;</td>
+            </tr>
 
-</table>
-</div>
+        </table>
+    </div>
 
-<div id="court">
-</div>
+    <div id="court">
+    </div>
 
-<div class="network_desync_container default-invisible">
-	<div class="network_desync_image" data-i18n-title="network:error"></div>
-	<div class="network_desync_login_container"></div>
-	<div class="network_desync_errmsg"></div>
-</div>
-<div class="network_desync_image_preload"></div>
+    <div class="network_desync_container default-invisible">
+        <div class="network_desync_image" data-i18n-title="network:error"></div>
+        <div class="network_desync_login_container"></div>
+        <div class="network_desync_errmsg"></div>
+    </div>
+    <div class="network_desync_image_preload"></div>
 
 
-<div class="bottom-ui">
+    <div class="bottom-ui">
 
-<button disabled="disabled" id="left_score" class="half-invisible blocking_button">+1</button>
-<button disabled="disabled" id="right_score" class="half-invisible blocking_button">+1</button>
+        <button disabled="disabled" id="left_score" class="half-invisible blocking_button">+1</button>
+        <button disabled="disabled" id="right_score" class="half-invisible blocking_button">+1</button>
 
-<div id="love-all-dialog" class="pick_dialog default-invisible">
-<span class="pronunciation"></span>
-<button id="love-all" class="blocking_button"></button>
-</div>
+        <div id="love-all-dialog" class="pick_dialog default-invisible">
+            <span class="pronunciation"></span>
+            <button id="love-all" class="blocking_button"></button>
+        </div>
 
-<div id="postinterval-confirm-dialog" class="pick_dialog default-invisible">
-<span class="pronunciation"></span>
-<button id="postinterval-confirm" class="blocking_button"></button>
-</div>
+        <div id="postinterval-confirm-dialog" class="pick_dialog default-invisible">
+            <span class="pronunciation"></span>
+            <button id="postinterval-confirm" class="blocking_button"></button>
+        </div>
 
-<div id="postgame-confirm-dialog" class="pick_dialog default-invisible">
-<span class="pronunciation"></span>
-<button id="postgame-confirm" class="blocking_button"></button>
-</div>
+        <div id="postgame-confirm-dialog" class="pick_dialog default-invisible">
+            <span class="pronunciation"></span>
+            <button id="postgame-confirm" class="blocking_button"></button>
+        </div>
 
-<div id="postmatch-confirm-dialog" class="pick_dialog default-invisible">
-<span class="pronunciation"></span>
-<button id="postmatch-confirm"></button>
-</div>
+        <div id="postmatch-confirm-dialog" class="pick_dialog default-invisible">
+            <span class="pronunciation"></span>
+            <button id="postmatch-confirm"></button>
+        </div>
 
-<div id="postmatch-leave-dialog" class="pick_dialog default-invisible">
-<span data-i18n="postmatch:label"></span>
-<button id="postmatch-leave" data-i18n="postmatch:leave"></button>
-</div>
+        <div id="postmatch-leave-dialog" class="pick_dialog default-invisible">
+            <span data-i18n="postmatch:label"></span>
+            <button id="postmatch-leave" data-i18n="postmatch:leave"></button>
+        </div>
 
-<div id="pick_side" class="pick_dialog default-invisible">
-<span data-i18n="dialog-right"></span>
-<button id="pick_side_team1"></button>
-<button id="pick_side_team2"></button>
-</div>
+        <div id="pick_side" class="pick_dialog default-invisible">
+            <span data-i18n="dialog-right"></span>
+            <button id="pick_side_team1"></button>
+            <button id="pick_side_team2"></button>
+        </div>
 
-<div id="pick_server" class="pick_dialog default-invisible">
-<span data-i18n="dialog-server"></span>
-</div>
+        <div id="pick_server" class="pick_dialog default-invisible">
+            <span data-i18n="dialog-server"></span>
+        </div>
 
-<div id="pick_receiver" class="pick_dialog default-invisible">
-<span data-i18n="dialog-receiver"></span>
-</div>
+        <div id="pick_receiver" class="pick_dialog default-invisible">
+            <span data-i18n="dialog-receiver"></span>
+        </div>
 
-<div id="suspension-resume-dialog" class="pick_dialog default-invisible">
-<span class="pronunciation"></span>
-<button id="suspension-resume" data-i18n="button:Unsuspend"></button>
-</div>
+        <div id="suspension-resume-dialog" class="pick_dialog default-invisible">
+            <span class="pronunciation"></span>
+            <button id="suspension-resume" data-i18n="button:Unsuspend"></button>
+        </div>
 
-<div id="injury-resume-dialog" class="pick_dialog default-invisible">
-<span class="pronunciation" id="injury-pronunciation"></span>
-</div>
+        <div id="injury-resume-dialog" class="pick_dialog default-invisible">
+            <span class="pronunciation" id="injury-pronunciation"></span>
+        </div>
 
-<div id="exception_wrapper" class="modal-wrapper default-invisible">
-<div class="exception_dialog">
-	<div>
-	<button id="exception_yellow" data-i18n-title="exceptions:yellow-card-title" class="image-button"><span></span></button>
-	<span data-i18n="exceptions:yellow-card"></span>
-	</div>
-	<div>
-	<button id="exception_red" data-i18n-title="exceptions:red-card-title" class="image-button"><span></span></button>
-	<span data-i18n="exceptions:red-card"></span>
-	</div>
-	<div>
-	<button id="exception_black" data-i18n-title="exceptions:black-card-title" class="image-button"><span></span></button>
-	<span data-i18n="exceptions:black-card"></span>
-	</div>
-	<div class="exception_suspension_container">
-	<button id="exception_suspension" data-i18n-title="exceptions:suspension-title"><span data-i18n="mark|suspension"></span></button>
-	<span data-i18n="exceptions:suspension"></span>
-	</div>
-	<div>
-	<button id="exception_injury" data-i18n-title="exceptions:injury-title"><span data-i18n="mark|injury"></span></button>
-	<span data-i18n="exceptions:injury"></span>
-	</div>
-	<div>
-	<button id="exception_retired" data-i18n-title="exceptions:retired-title" class="image-button"><span></span></button>
-	<span data-i18n="exceptions:retired"></span>
-	</div>
-	<div>
-	<button id="exception_referee" data-i18n-title="exceptions:referee-title"><span data-i18n="mark|referee"></span></button>
-	<span data-i18n="exceptions:referee"></span>
-	</div>
-	<div class="exception_correction_container">
-	<button id="exception_correction" data-i18n-title="exceptions:correction-title"><span data-i18n="mark|correction"></span></button>
-	<span data-i18n="exceptions:correction"></span>
-	</div>
-	<div id="exception_overrule_container">
-	<button id="exception_overrule" data-i18n-title="exceptions:overrule-title"><span data-i18n="mark|overrule"></span></button>
-	<span data-i18n="exceptions:overrule"></span>
-	</div>
-	<div id="exception_walkover_container">
-	<button id="exception_walkover" data-i18n-title="exceptions:walkover-title" class="image-button"><span></span></button>
-	<span data-i18n="exceptions:walkover"></span>
-	</div>
+        <div id="exception_wrapper" class="modal-wrapper default-invisible">
+            <div class="exception_dialog">
+                <div>
+                    <button id="exception_yellow" data-i18n-title="exceptions:yellow-card-title" class="image-button">
+                        <span></span></button>
+                    <span data-i18n="exceptions:yellow-card"></span>
+                </div>
+                <div>
+                    <button id="exception_red" data-i18n-title="exceptions:red-card-title" class="image-button">
+                        <span></span></button>
+                    <span data-i18n="exceptions:red-card"></span>
+                </div>
+                <div>
+                    <button id="exception_black" data-i18n-title="exceptions:black-card-title" class="image-button">
+                        <span></span></button>
+                    <span data-i18n="exceptions:black-card"></span>
+                </div>
+                <div class="exception_suspension_container">
+                    <button id="exception_suspension" data-i18n-title="exceptions:suspension-title"><span
+                            data-i18n="mark|suspension"></span></button>
+                    <span data-i18n="exceptions:suspension"></span>
+                </div>
+                <div>
+                    <button id="exception_injury" data-i18n-title="exceptions:injury-title"><span
+                            data-i18n="mark|injury"></span></button>
+                    <span data-i18n="exceptions:injury"></span>
+                </div>
+                <div>
+                    <button id="exception_retired" data-i18n-title="exceptions:retired-title" class="image-button">
+                        <span></span></button>
+                    <span data-i18n="exceptions:retired"></span>
+                </div>
+                <div>
+                    <button id="exception_referee" data-i18n-title="exceptions:referee-title"><span
+                            data-i18n="mark|referee"></span></button>
+                    <span data-i18n="exceptions:referee"></span>
+                </div>
+                <div class="exception_correction_container">
+                    <button id="exception_correction" data-i18n-title="exceptions:correction-title"><span
+                            data-i18n="mark|correction"></span></button>
+                    <span data-i18n="exceptions:correction"></span>
+                </div>
+                <div id="exception_overrule_container">
+                    <button id="exception_overrule" data-i18n-title="exceptions:overrule-title"><span
+                            data-i18n="mark|overrule"></span></button>
+                    <span data-i18n="exceptions:overrule"></span>
+                </div>
+                <div id="exception_walkover_container">
+                    <button id="exception_walkover" data-i18n-title="exceptions:walkover-title" class="image-button">
+                        <span></span></button>
+                    <span data-i18n="exceptions:walkover"></span>
+                </div>
 
-	<button class="cancel-button" data-i18n="button:Cancel"></button>
-</div>
-</div>
+                <button class="cancel-button" data-i18n="button:Cancel"></button>
+            </div>
+        </div>
 
-<div class="timer_container default-invisible">
-	<span class="timer_restart" data-i18n-title="timer:restart"></span><span class="timer"></span>
-</div>
+        <div class="timer_container default-invisible">
+            <span class="timer_restart" data-i18n-title="timer:restart"></span><span class="timer"></span>
+        </div>
 
-<div class="postmatch_options default-invisible">
-<button class="postmatch_scoresheet_button" data-i18n="Score Sheet"></button>
-<button class="postmatch_stats_button" data-i18n="Statistics"></button>
-</div>
+        <div class="postmatch_options default-invisible">
+            <button class="postmatch_scoresheet_button" data-i18n="Score Sheet"></button>
+            <button class="postmatch_stats_button" data-i18n="Statistics"></button>
+        </div>
 
-<div id="pronunciation" class="default-invisible"><span></span></div>
+        <div id="pronunciation" class="default-invisible"><span></span></div>
 
-</div>
+    </div>
 </div>
 
 <div id="settings_wrapper" class="default-invisible" data-settings-visible="false">
-<div class="settings_layout">
-<div class="settings_container">
+    <div class="settings_layout">
+        <div class="settings_container">
 
-<div class="fullscreen_top"><button class="fullscreen_top_button" data-i18n="fullscreen:go"></button></div>
+            <div class="fullscreen_top">
+                <button class="fullscreen_top_button" data-i18n="fullscreen:go"></button>
+            </div>
 
-<div class="settings_network_login_container">
-</div>
+            <div class="settings_network_login_container">
+            </div>
 
-<div class="ingame_options default-invisible" data-bup-modes="umpire">
-	<div class="ingame_options_refmode default-invisible">
-	<button class="refmode_referee_from_settings" data-i18n="refmode:referee:back from settings"></button>
-	</div>
+            <div class="ingame_options default-invisible" data-bup-modes="umpire">
+                <div class="ingame_options_refmode default-invisible">
+                    <button class="refmode_referee_from_settings"
+                            data-i18n="refmode:referee:back from settings"></button>
+                </div>
 
-	<h2 data-i18n="settings:Current Match"></h2>
+                <h2 data-i18n="settings:Current Match"></h2>
 
-	<button class="backtogame_button" data-i18n="settings:Back to Match"></button>
-	<button class="scoresheet_button" data-i18n="Score Sheet"></button>
-	<button class="go_editmode_button" data-i18n="settings:Edit Manually"></button>
-</div>
+                <button class="backtogame_button" data-i18n="settings:Back to Match"></button>
+                <button class="scoresheet_button" data-i18n="Score Sheet"></button>
+                <button class="go_editmode_button" data-i18n="settings:Edit Manually"></button>
+            </div>
 
-<div class="setup" data-bup-modes="umpire" data-bup-styles="clean focus complete">
-	<div class="setup_network_container default-invisible">
-	<div class="setup_network_message"></div>
-	<h2 class="setup_network_heading"><span class="setup_network_event" data-i18n="settings:Matches"></span><button class="setup_network_matches_reload image-button"><span></span></button><div class="setup_network_status"></div></h2>
-	<div id="setup_network_matches"></div>
+            <div class="setup" data-bup-modes="umpire" data-bup-styles="clean focus complete">
+                <div class="setup_network_container default-invisible">
+                    <div class="setup_network_message"></div>
+                    <h2 class="setup_network_heading"><span class="setup_network_event"
+                                                            data-i18n="settings:Matches"></span>
+                        <button class="setup_network_matches_reload image-button"><span></span></button>
+                        <div class="setup_network_status"></div>
+                    </h2>
+                    <div id="setup_network_matches"></div>
 
-	<div class="setup_linkline" data-bup-modes="umpire" data-bup-styles="complete">
-		<a href="#" class="setupsheet_link default-invisible" data-i18n="setupsheet:link"></a>
-		<a href="#" class="editevent_link default-invisible" data-i18n="editevent:link"></a>
-		<a href="#" class="order_link" data-i18n="settings:Order link"></a>
-		<a href="#" class="setup_event_scoresheets" data-i18n="settings:Event Scoresheets"></a>
-		<div class="setup_eventsheets"></div>
-		<div class="urlexport_links" style="display:inline-block;"></div>
-		<a href="#" class="netstats_link default-invisible" data-i18n="settings:Network statistics"></a>
-		<a href="#" class="export_link" data-i18n="settings:Export link"></a>
-		<div class="login_links" style="display:inline-block;"></div>
-		<a href="#" class="setup_show_manual" data-i18n="settings:Custom match details"></a>
-	</div>
-	</div>
+                    <div class="setup_linkline" data-bup-modes="umpire" data-bup-styles="complete">
+                        <a href="#" class="setupsheet_link default-invisible" data-i18n="setupsheet:link"></a>
+                        <a href="#" class="editevent_link default-invisible" data-i18n="editevent:link"></a>
+                        <a href="#" class="order_link" data-i18n="settings:Order link"></a>
+                        <a href="#" class="setup_event_scoresheets" data-i18n="settings:Event Scoresheets"></a>
+                        <div class="setup_eventsheets"></div>
+                        <div class="urlexport_links" style="display:inline-block;"></div>
+                        <a href="#" class="netstats_link default-invisible" data-i18n="settings:Network statistics"></a>
+                        <a href="#" class="export_link" data-i18n="settings:Export link"></a>
+                        <div class="login_links" style="display:inline-block;"></div>
+                        <a href="#" class="setup_show_manual" data-i18n="settings:Custom match details"></a>
+                    </div>
+                </div>
 
-	<form id="setup_manual_form" class="slim_form">
-	<h2 data-i18n="settings:New match"></h2>
-	<fieldset class="setup_manual_discipline">
-	<label><input type="radio" name="gametype" value="singles" tabindex="1" /><span data-i18n="settings:Singles"></span></label>
-	<label><input type="radio" name="gametype" value="doubles" tabindex="2" checked="checked"/><span data-i18n="settings:Doubles"></span></label>
-	</fieldset>
+                <form id="setup_manual_form" class="slim_form">
+                    <h2 data-i18n="settings:New match"></h2>
+                    <fieldset class="setup_manual_discipline">
+                        <label><input type="radio" name="gametype" value="singles" tabindex="1"/><span
+                                data-i18n="settings:Singles"></span></label>
+                        <label><input type="radio" name="gametype" value="doubles" tabindex="2" checked="checked"/><span
+                                data-i18n="settings:Doubles"></span></label>
+                    </fieldset>
 
-	<div class="setup_manual_teams">
-		<div class="setup_manual_team">
-			<div><input type="text" name="team1_player1" tabindex="11" /></div>
-			<div><input type="text" name="team1_player2" tabindex="12" class="only-doubles" /></div>
-			<div><input type="text" name="team1_name" tabindex="31" data-i18n-placeholder="settings:team1-placeholder" /></div>
-		</div>
+                    <div class="setup_manual_teams">
+                        <div class="setup_manual_team">
+                            <div><input type="text" name="team1_player1" tabindex="11"/></div>
+                            <div><input type="text" name="team1_player2" tabindex="12" class="only-doubles"/></div>
+                            <div><input type="text" name="team1_name" tabindex="31"
+                                        data-i18n-placeholder="settings:team1-placeholder"/></div>
+                        </div>
 
-		<div class="setup_manual_vs">vs</div>
+                        <div class="setup_manual_vs">vs</div>
 
-		<div class="setup_manual_team">
-			<div><input type="text" name="team2_player1" tabindex="21" /></div>
-			<div><input type="text" name="team2_player2" tabindex="22" class="only-doubles" /></div>
-			<div><input type="text" name="team2_name" tabindex="32" data-i18n-placeholder="settings:team2-placeholder"/></div>
-		</div>
-	</div>
+                        <div class="setup_manual_team">
+                            <div><input type="text" name="team2_player1" tabindex="21"/></div>
+                            <div><input type="text" name="team2_player2" tabindex="22" class="only-doubles"/></div>
+                            <div><input type="text" name="team2_name" tabindex="32"
+                                        data-i18n-placeholder="settings:team2-placeholder"/></div>
+                        </div>
+                    </div>
 
-	<table class="setup_manual_details">
-	<tbody>
-	<tr>
-		<th data-i18n="settings:match_name-label"></th>
-		<td><input type="text" name="match_name" tabindex="41" data-i18n-placeholder="settings:match_name-placeholder" /></td>
-	</tr>
-	<tr>
-		<th data-i18n="settings:event-label"></th>
-		<td><input type="text" name="event_name" tabindex="42" data-i18n-placeholder="settings:event_name-placeholder" /></td>
-	</tr>
-	<tr>
-		<th data-i18n="settings:tournament_name-label"></th>
-		<td><input type="text" name="tournament_name" tabindex="43" data-i18n-placeholder="settings:tournament_name-placeholder" /></td>
-	</tr>
-	<tr>
-		<th data-i18n="settings:counting"></th>
-		<td><select name="counting" size="1"><option data-i18n="settings:counting|3x21" value="3x21"></option><option data-i18n="settings:counting|5x11_15" value="5x11_15"></option><option data-i18n="settings:counting|5x11_15^90" value="5x11_15^90"></option><option data-i18n="settings:counting|5x11_15^90" value="5x11_15~NLA"></option><option data-i18n="settings:counting|5x11/3" value="5x11/3"></option><option data-i18n="settings:counting|5x11_11" value="5x11_11"></option><option data-i18n="settings:counting|3x15_18" value="3x15_18"></option><option data-i18n="settings:counting|2x21+11" value="2x21+11"></option><option data-i18n="settings:counting|1x21" value="1x21"></option><option data-i18n="settings:counting|1x11_15" value="1x11_15"></option></select></td>
-	</tr>
-	<tr>
-		<th data-i18n="settings:warmup"></th>
-		<td><select name="warmup" size="1"><option data-i18n="settings:warmup:bwf-2016" value="bwf-2016"></option><option data-i18n="settings:warmup:legacy" value="legacy"></option><option data-i18n="settings:warmup:none" value="none"></option></select></td>
-	</tr>
-    <tr>
-        <th></th>
-        <td><label><input type="checkbox" name="team_competition" tabindex="51"/><span data-i18n="settings:team_competition"></span></label></td>
-    </tr>
-	</tbody>
-	</table>
+                    <table class="setup_manual_details">
+                        <tbody>
+                        <tr>
+                            <th data-i18n="settings:match_name-label"></th>
+                            <td><input type="text" name="match_name" tabindex="41"
+                                       data-i18n-placeholder="settings:match_name-placeholder"/></td>
+                        </tr>
+                        <tr>
+                            <th data-i18n="settings:event-label"></th>
+                            <td><input type="text" name="event_name" tabindex="42"
+                                       data-i18n-placeholder="settings:event_name-placeholder"/></td>
+                        </tr>
+                        <tr>
+                            <th data-i18n="settings:tournament_name-label"></th>
+                            <td><input type="text" name="tournament_name" tabindex="43"
+                                       data-i18n-placeholder="settings:tournament_name-placeholder"/></td>
+                        </tr>
+                        <tr>
+                            <th data-i18n="settings:counting"></th>
+                            <td><select name="counting" size="1">
+                                <option data-i18n="settings:counting|3x21" value="3x21"></option>
+                                <option data-i18n="settings:counting|5x11_15" value="5x11_15"></option>
+                                <option data-i18n="settings:counting|5x11_15^90" value="5x11_15^90"></option>
+                                <option data-i18n="settings:counting|5x11_15^90" value="5x11_15~NLA"></option>
+                                <option data-i18n="settings:counting|5x11/3" value="5x11/3"></option>
+                                <option data-i18n="settings:counting|5x11_11" value="5x11_11"></option>
+                                <option data-i18n="settings:counting|3x15_18" value="3x15_18"></option>
+                                <option data-i18n="settings:counting|2x21+11" value="2x21+11"></option>
+                                <option data-i18n="settings:counting|1x21" value="1x21"></option>
+                                <option data-i18n="settings:counting|1x11_15" value="1x11_15"></option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <th data-i18n="settings:warmup"></th>
+                            <td><select name="warmup" size="1">
+                                <option data-i18n="settings:warmup:bwf-2016" value="bwf-2016"></option>
+                                <option data-i18n="settings:warmup:legacy" value="legacy"></option>
+                                <option data-i18n="settings:warmup:none" value="none"></option>
+                            </select></td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <td><label><input type="checkbox" name="team_competition" tabindex="51"/><span
+                                    data-i18n="settings:team_competition"></span></label></td>
+                        </tr>
+                        </tbody>
+                    </table>
 
-	<div class="setup_manual_start_container">
-		<button tabindex="101" class="setup_manual_start" data-i18n="settings:Start Match"></button>
-	</div>
+                    <div class="setup_manual_start_container">
+                        <button tabindex="101" class="setup_manual_start" data-i18n="settings:Start Match"></button>
+                    </div>
 
-	<h2 data-i18n="settings:Resume Match"></h2>
+                    <h2 data-i18n="settings:Resume Match"></h2>
 
-	<div class="setup_loadmatch_none" data-i18n="settings:loadmatch_none"></div>
+                    <div class="setup_loadmatch_none" data-i18n="settings:loadmatch_none"></div>
 
-	<ul class="setup_loadmatch_list">
-	</ul>
-	</form>
+                    <ul class="setup_loadmatch_list">
+                    </ul>
+                </form>
 
-	<div class="import_container">
-	<h2 data-i18n="settings:Import Event"></h2>
-		<div class="import_link_container">
-		<a href="#" class="import_link" data-i18n="import link"></a>
-	</div>
+                <div class="import_container">
+                    <h2 data-i18n="settings:Import Event"></h2>
+                    <div class="import_link_container">
+                        <a href="#" class="import_link" data-i18n="import link"></a>
+                    </div>
 
-	<form class="urlimport_form">
-		<input type="url" required="required" name="urlimport_url" data-i18n-placeholder="settings:import_url-placeholder" size="60" />
-		<button type="submit" data-i18n="settings:import from URL" class="urlimport_button"></button>
-	</form>
-	</div>
+                    <form class="urlimport_form">
+                        <input type="url" required="required" name="urlimport_url"
+                               data-i18n-placeholder="settings:import_url-placeholder" size="60"/>
+                        <button type="submit" data-i18n="settings:import from URL" class="urlimport_button"></button>
+                    </form>
+                </div>
 
-	<div class="nonet_links">
-		<a href="#" class="export_link_nonet" data-i18n="settings:Export link"></a>
-	</div>
-</div>
+                <div class="nonet_links">
+                    <a href="#" class="export_link_nonet" data-i18n="settings:Export link"></a>
+                </div>
+            </div>
 
-<div class="default-invisible" data-bup-modes="umpire" data-bup-styles="clean focus" style="height:6em;"></div>
+            <div class="default-invisible" data-bup-modes="umpire" data-bup-styles="clean focus"
+                 style="height:6em;"></div>
 
-<div class="settings">
+            <div class="settings">
 
-<div class="d_login_links"></div><button data-bup-modes="display" class="d_hide_settings" data-i18n="displaymode:hide settings"></button>
-<h2 data-i18n="settings:Settings"></h2>
+                <div class="d_login_links"></div>
+                <button data-bup-modes="display" class="d_hide_settings" data-i18n="displaymode:hide settings"></button>
+                <h2 data-i18n="settings:Settings"></h2>
 
-<label data-bup-modes="display umpire"><span data-i18n="settings:refmode:client:status"></span><input type="checkbox" name="refmode_client_enabled" class="refmode_client_settings"/><span class="refmode_status"></span></label>
-<div class="settings_refmode_client_container default-invisible">
-	<label><span data-i18n="settings:refmode:ws_url"></span> <input type="text" size="50" name="refmode_client_ws_url" />
-	<div classs="default-invisible" class="refmode_client_redir"><span data-i18n="settings:refmode:redirected"></span><span class="refmode_client_redir_url"></span></div>
-	</label>
-	<div class="refmode_client_paired"></div>
-	<div><button class="refmode_client_selref" data-i18n="refmode:client:select_referee"></button></div>
-	<div class="refmode_client_referee_list default-invisible"></div>
-	<label><span data-i18n="settings:refmode:client:node_name"></span> <input type="text" name="refmode_client_node_name" /></label>
-</div>
-<label data-bup-modes="referee"><span data-i18n="settings:refmode:ws_url"></span> <input type="text" size="50" name="refmode_referee_ws_url" /> <span class="referee_status"></span>
-<div classs="default-invisible" class="refmode_referee_redir"><span data-i18n="settings:refmode:redirected"></span><span class="refmode_referee_redir_url"></span></div>
-</label>
-<label data-bup-modes="referee"><input type="checkbox" name="referee_service_judges" /> <span data-i18n="settings:refmode:service judges"></span></label>
+                <label data-bup-modes="display umpire"><span data-i18n="settings:refmode:client:status"></span><input
+                        type="checkbox" name="refmode_client_enabled" class="refmode_client_settings"/><span
+                        class="refmode_status"></span></label>
+                <div class="settings_refmode_client_container default-invisible">
+                    <label><span data-i18n="settings:refmode:ws_url"></span> <input type="text" size="50"
+                                                                                    name="refmode_client_ws_url"/>
+                        <div classs="default-invisible" class="refmode_client_redir"><span
+                                data-i18n="settings:refmode:redirected"></span><span
+                                class="refmode_client_redir_url"></span></div>
+                    </label>
+                    <div class="refmode_client_paired"></div>
+                    <div>
+                        <button class="refmode_client_selref" data-i18n="refmode:client:select_referee"></button>
+                    </div>
+                    <div class="refmode_client_referee_list default-invisible"></div>
+                    <label><span data-i18n="settings:refmode:client:node_name"></span> <input type="text"
+                                                                                              name="refmode_client_node_name"/></label>
+                </div>
+                <label data-bup-modes="referee"><span data-i18n="settings:refmode:ws_url"></span> <input type="text"
+                                                                                                         size="50"
+                                                                                                         name="refmode_referee_ws_url"/>
+                    <span class="referee_status"></span>
+                    <div classs="default-invisible" class="refmode_referee_redir"><span
+                            data-i18n="settings:refmode:redirected"></span><span
+                            class="refmode_referee_redir_url"></span></div>
+                </label>
+                <label data-bup-modes="referee"><input type="checkbox" name="referee_service_judges"/> <span
+                        data-i18n="settings:refmode:service judges"></span></label>
 
-<div data-bup-modes="display" class="d_dads_config"></div>
-<div data-bup-modes="display" class="settings_display_style"><label><span data-i18n="displaymode:style"></span> <select name="displaymode_style" size="1"></select></label></div>
-<div data-bup-modes="display" class="settings_display_court_id"><label><span data-i18n="displaymode:court_id"></span> <select name="displaymode_court_id" size="1"><option value="" data-i18n="displaymode:court_id:loading"></option></select></label></div>
-<div data-bup-modes="display" class="settings_display_reverse_order"><label><input type="checkbox" name="displaymode_reverse_order"/><span data-i18n="displaymode:reverse_order"></span></label></div>
-<div data-bup-modes="display" class="settings_d_show_pause"><label><input type="checkbox" name="d_show_pause"/><span data-i18n="displaymode:show_pause"></span></label></div>
-<div data-bup-modes="display" class="settings_d_colors"><span data-i18n="displaymode:colors"></span> <span class="settings_d_colors_inputs"></span> <label class="settings_d_team_colors"><input type="checkbox" name="d_team_colors" /><span data-i18n="displaymode:use team colors"></span></label></div>
-<div data-bup-modes="display" class="settings_d_scale"><label><span data-i18n="displaymode:scale"></span> <input name="d_scale" type="number" min="20" max="500" /></label></div>
+                <div data-bup-modes="display" class="d_dads_config"></div>
+                <div data-bup-modes="display" class="settings_display_style"><label><span
+                        data-i18n="displaymode:style"></span> <select name="displaymode_style"
+                                                                      size="1"></select></label></div>
+                <div data-bup-modes="display" class="settings_display_court_id"><label><span
+                        data-i18n="displaymode:court_id"></span> <select name="displaymode_court_id" size="1">
+                    <option value="" data-i18n="displaymode:court_id:loading"></option>
+                </select></label></div>
+                <div data-bup-modes="display" class="settings_display_reverse_order"><label><input type="checkbox"
+                                                                                                   name="displaymode_reverse_order"/><span
+                        data-i18n="displaymode:reverse_order"></span></label></div>
+                <div data-bup-modes="display" class="settings_d_show_pause"><label><input type="checkbox"
+                                                                                          name="d_show_pause"/><span
+                        data-i18n="displaymode:show_pause"></span></label></div>
+                <div data-bup-modes="display" class="settings_d_colors"><span data-i18n="displaymode:colors"></span>
+                    <span class="settings_d_colors_inputs"></span> <label class="settings_d_team_colors"><input
+                            type="checkbox" name="d_team_colors"/><span data-i18n="displaymode:use team colors"></span></label>
+                </div>
+                <div data-bup-modes="display" class="settings_d_scale"><label><span
+                        data-i18n="displaymode:scale"></span> <input name="d_scale" type="number" min="20"
+                                                                     max="500"/></label></div>
 
-<div class="settings_court_manual"><label><span data-i18n="settings:Court Description"></span> <input type="text" name="court_description" size="8" data-i18n-placeholder="settings:Court Description.placeholder" /></label> <span data-i18n="settings:Court Number"></span> <label> <input type="number" name="court_id" min="1" /></label></div>
-<div class="settings_court_automatic default-invisible"><label data-bup-modes="umpire" data-bup-styles="clean complete"><span data-i18n="settings:Select Court"></span> <select name="court_select" size="1"></select></label></div>
+                <div class="settings_court_manual"><label><span data-i18n="settings:Court Description"></span> <input
+                        type="text" name="court_description" size="8"
+                        data-i18n-placeholder="settings:Court Description.placeholder"/></label> <span
+                        data-i18n="settings:Court Number"></span> <label> <input type="number" name="court_id" min="1"/></label>
+                </div>
+                <div class="settings_court_automatic default-invisible"><label data-bup-modes="umpire"
+                                                                               data-bup-styles="clean complete"><span
+                        data-i18n="settings:Select Court"></span> <select name="court_select" size="1"></select></label>
+                </div>
 
-<div class="default-invisible" data-bup-modes="umpire" data-bup-styles="clean" style="height: 1em;"></div>
+                <div class="default-invisible" data-bup-modes="umpire" data-bup-styles="clean"
+                     style="height: 1em;"></div>
 
-<label data-bup-modes="umpire"><span data-i18n="settings:Umpire"></span>: <input type="text" name="umpire_name" /></label>
-<label data-bup-modes="umpire"><span data-i18n="settings:Service judge"></span>: <input type="text" name="service_judge_name" /></label>
-<label data-bup-modes="umpire display referee"><span data-i18n="settings:Language"></span>: <select size="1" class="settings_language" name="language"></select></label>
-<div data-bup-modes="DEBUG"><label><span data-i18n="settings:wakelock:label"></span> <select name="wakelock" size="1"><option data-i18n="settings:wakelock:display" value="display"></option><option data-i18n="settings:wakelock:always" value="always"></option><option data-i18n="settings:wakelock:never" value="never"></option></select></label></div>
-<div class="fullscreen_line" data-bup-modes="umpire display" data-bup-styles="clean complete"><label><span data-i18n="settings:Request Fullscreen on Startup"></span><select name="fullscreen_ask"><option value="always" data-i18n="settings:fullscreen_ask|always"></option><option value="auto" data-i18n="settings:fullscreen_ask|auto"></option><option value="never" data-i18n="settings:fullscreen_ask|never"></option></select></label> <button class="fullscreen_button" style="margin-left: 1em;" data-i18n="settings:Go Fullscreen"></button></div>
-<label data-bup-modes="umpire"><input type="checkbox" name="shuttle_counter" /><span data-i18n="settings:Shuttle Counter"></span></label>
-<label data-bup-modes="umpire"><span data-i18n="settings:show_announcements"></span><select name="show_announcements"><option value="all" data-i18n="settings:show_announcements|all"></option><option value="except-first" data-i18n="settings:show_announcements|except-first"></option><option value="none" data-i18n="settings:show_announcements|none"></option></select></label>
-<label data-bup-modes="umpire"><input type="checkbox" name="negative_timers" /><span data-i18n="settings:Negative Timers"></span></label>
-<label data-bup-modes="umpire"><input type="checkbox" name="editmode_doubleclick" /><span data-i18n="settings:editmode doubleclick"></span></label>
-<label data-bup-modes="umpire"><span data-i18n="settings:click_mode"></span>: <select name="click_mode" size="1"><option data-i18n="settings:click_mode:auto" value="auto"></option><option data-i18n="settings:click_mode:click" value="click"></option><option data-i18n="settings:click_mode:touchstart" value="touchstart"></option><option data-i18n="settings:click_mode:touchend" value="touchend"></option></select></label>
-<label data-bup-modes="umpire"><span data-i18n="settings:Button Block Timeout"></span>: <input type="number" name="button_block_timeout" min="0" value="1500" max="5000" /></label>
-<label data-bup-modes="umpire display referee"><span data-i18n="settings:Network Timeout"></span>: <input type="number" name="network_timeout" min="1" value="1000" max="600000" /></label>
-<label data-bup-modes="umpire"><span data-i18n="settings:Network Repeat Interval"></span>: <input type="number" name="network_update_interval" min="1" value="10000" max="600000" /></label>
-<label class="default-invisible" data-bup-modes="display"><span data-i18n="settings:Network Repeat Interval"></span>: <input type="number" name="displaymode_update_interval" min="1" value="500" max="600000" /></label>
-<label data-bup-modes="umpire" data-bup-styles="complete clean focus"><span data-i18n="settings:style"></span>: <select name="settings_style"><option data-i18n="settings:style:default" value="default"></option><option data-i18n="settings:style:complete" value="complete"></option><option data-i18n="settings:style:clean" value="clean"></option><option data-i18n="settings:style:focus" value="focus"></option></select></label>
-</div>
+                <label data-bup-modes="umpire"><span data-i18n="settings:Umpire"></span>: <input type="text"
+                                                                                                 name="umpire_name"/></label>
+                <label data-bup-modes="umpire"><span data-i18n="settings:Service judge"></span>: <input type="text"
+                                                                                                        name="service_judge_name"/></label>
+                <label data-bup-modes="umpire display referee"><span data-i18n="settings:Language"></span>: <select
+                        size="1" class="settings_language" name="language"></select></label>
+                <div data-bup-modes="DEBUG"><label><span data-i18n="settings:wakelock:label"></span> <select
+                        name="wakelock" size="1">
+                    <option data-i18n="settings:wakelock:display" value="display"></option>
+                    <option data-i18n="settings:wakelock:always" value="always"></option>
+                    <option data-i18n="settings:wakelock:never" value="never"></option>
+                </select></label></div>
+                <div class="fullscreen_line" data-bup-modes="umpire display" data-bup-styles="clean complete">
+                    <label><span data-i18n="settings:Request Fullscreen on Startup"></span><select
+                            name="fullscreen_ask">
+                        <option value="always" data-i18n="settings:fullscreen_ask|always"></option>
+                        <option value="auto" data-i18n="settings:fullscreen_ask|auto"></option>
+                        <option value="never" data-i18n="settings:fullscreen_ask|never"></option>
+                    </select></label>
+                    <button class="fullscreen_button" style="margin-left: 1em;"
+                            data-i18n="settings:Go Fullscreen"></button>
+                </div>
+                <label data-bup-modes="umpire"><input type="checkbox" name="shuttle_counter"/><span
+                        data-i18n="settings:Shuttle Counter"></span></label>
+                <label data-bup-modes="umpire"><span data-i18n="settings:show_announcements"></span><select
+                        name="show_announcements">
+                    <option value="all" data-i18n="settings:show_announcements|all"></option>
+                    <option value="except-first" data-i18n="settings:show_announcements|except-first"></option>
+                    <option value="none" data-i18n="settings:show_announcements|none"></option>
+                </select></label>
+                <label data-bup-modes="umpire"><input type="checkbox" name="negative_timers"/><span
+                        data-i18n="settings:Negative Timers"></span></label>
+                <label data-bup-modes="umpire"><input type="checkbox" name="editmode_doubleclick"/><span
+                        data-i18n="settings:editmode doubleclick"></span></label>
+                <label data-bup-modes="umpire"><span data-i18n="settings:click_mode"></span>: <select name="click_mode"
+                                                                                                      size="1">
+                    <option data-i18n="settings:click_mode:auto" value="auto"></option>
+                    <option data-i18n="settings:click_mode:click" value="click"></option>
+                    <option data-i18n="settings:click_mode:touchstart" value="touchstart"></option>
+                    <option data-i18n="settings:click_mode:touchend" value="touchend"></option>
+                </select></label>
+                <label data-bup-modes="umpire"><span data-i18n="settings:Button Block Timeout"></span>: <input
+                        type="number" name="button_block_timeout" min="0" value="1500" max="5000"/></label>
+                <label data-bup-modes="umpire display referee"><span data-i18n="settings:Network Timeout"></span>:
+                    <input type="number" name="network_timeout" min="1" value="1000" max="600000"/></label>
+                <label data-bup-modes="umpire"><span data-i18n="settings:Network Repeat Interval"></span>: <input
+                        type="number" name="network_update_interval" min="1" value="10000" max="600000"/></label>
+                <label class="default-invisible" data-bup-modes="display"><span
+                        data-i18n="settings:Network Repeat Interval"></span>: <input type="number"
+                                                                                     name="displaymode_update_interval"
+                                                                                     min="1" value="500" max="600000"/></label>
+                <label data-bup-modes="umpire" data-bup-styles="complete clean focus"><span
+                        data-i18n="settings:style"></span>: <select name="settings_style">
+                    <option data-i18n="settings:style:default" value="default"></option>
+                    <option data-i18n="settings:style:complete" value="complete"></option>
+                    <option data-i18n="settings:style:clean" value="clean"></option>
+                    <option data-i18n="settings:style:focus" value="focus"></option>
+                </select></label>
+            </div>
 
-<div class="settings_mode" data-bup-modes="umpire display referee"><span data-i18n="settings:mode:label"></span>
-<a href="#settings" class="settings_mode_umpire" data-i18n="settings:mode:umpire"></a>
-<a href="#display" class="settings_mode_display" data-i18n="settings:mode:display"></a>
-<a href="#referee_mode" class="settings_mode_referee" data-i18n="settings:mode:referee"></a>
-</div>
+            <div class="settings_mode" data-bup-modes="umpire display referee"><span
+                    data-i18n="settings:mode:label"></span>
+                <a href="#settings" class="settings_mode_umpire" data-i18n="settings:mode:umpire"></a>
+                <a href="#display" class="settings_mode_display" data-i18n="settings:mode:display"></a>
+                <a href="#referee_mode" class="settings_mode_referee" data-i18n="settings:mode:referee"></a>
+            </div>
 
-<div class="settings_footer" data-bup-modes="umpire display referee">
-<span class="settings_footer_status"></span>
-<button class="settings_send_export" data-i18n="send export"></button>
-<button class="settings_test_reporting default-invisible" data-i18n="report:test"></button>
-<a href="mailto:phihag@phihag.de" data-i18n="report problem" class="settings_report_problem"></a>
-<span class="version">[script error]</span>
-</div>
+            <div class="settings_footer" data-bup-modes="umpire display referee">
+                <span class="settings_footer_status"></span>
+                <button class="settings_send_export" data-i18n="send export"></button>
+                <button class="settings_test_reporting default-invisible" data-i18n="report:test"></button>
+                <a href="mailto:phihag@phihag.de" data-i18n="report problem" class="settings_report_problem"></a>
+                <span class="version">[script error]</span>
+            </div>
 
-</div>
-</div>
+        </div>
+    </div>
 </div>
 
 <div class="scoresheet_container default-invisible">
-	<div class="scoresheet_loading-icon loading-icon"></div>
-	<div class="scoresheet_error default-invisible"><span class="scoresheet_error_message network_error"></span><button class="scoresheet_reload" type="button"></button></div>
-	<div class="scoresheet_buttons only-screen">
-		<!-- careful with spacing -->
-		<button class="scoresheet_button_print" data-i18n="scoresheet:button:print"></button
-		><button class="scoresheet_button_pdf" disabled="disabled" data-i18n="scoresheet:button:pdf"></button
-		><button class="scoresheet_button_back" data-i18n="scoresheet:button:back"></button>
-	</div>
-	<form class="scoresheet_note_dialog">
-		<input type="text" data-i18n-placeholder="scoresheet:note:placeholder" id="scoresheet_note_input" />
-		<button type="submit" data-i18n="scoresheet:button:note" id="scoresheet_note_button"></button>
-	</form>
+    <div class="scoresheet_loading-icon loading-icon"></div>
+    <div class="scoresheet_error default-invisible"><span class="scoresheet_error_message network_error"></span>
+        <button class="scoresheet_reload" type="button"></button>
+    </div>
+    <div class="scoresheet_buttons only-screen">
+        <!-- careful with spacing -->
+        <button class="scoresheet_button_print" data-i18n="scoresheet:button:print"></button
+        >
+        <button class="scoresheet_button_pdf" disabled="disabled" data-i18n="scoresheet:button:pdf"></button
+        >
+        <button class="scoresheet_button_back" data-i18n="scoresheet:button:back"></button>
+    </div>
+    <form class="scoresheet_note_dialog">
+        <input type="text" data-i18n-placeholder="scoresheet:note:placeholder" id="scoresheet_note_input"/>
+        <button type="submit" data-i18n="scoresheet:button:note" id="scoresheet_note_button"></button>
+    </form>
 </div>
 
 <div id="go_fullscreen_wrapper" class="modal-wrapper default-invisible">
-<div id="go_fullscreen" class="pick_dialog">
-<button class="go_fullscreen_go">
-<span class="go_fullscreen_go_icon"></span>
-<span data-i18n="fullscreen:go"></span></button>
-<button class="go_fullscreen_normal" data-i18n="fullscreen:no"></button>
-</div>
+    <div id="go_fullscreen" class="pick_dialog">
+        <button class="go_fullscreen_go">
+            <span class="go_fullscreen_go_icon"></span>
+            <span data-i18n="fullscreen:go"></span></button>
+        <button class="go_fullscreen_normal" data-i18n="fullscreen:no"></button>
+    </div>
 </div>
 
 <div class="eventsheet_container default-invisible">
-<div class="eventsheet_dialog">
-<form class="eventsheet_form">
+    <div class="eventsheet_dialog">
+        <form class="eventsheet_form">
 
-<div class="eventsheet_report">
-<label class="eventsheet_referee"><span data-i18n="eventsheet:referee"></span> <input type="text" name="referee" /></label>
-<label class="eventsheet_umpires"><span data-i18n="eventsheet:umpires"></span> <input type="text" name="umpires" /></label>
-<label class="eventsheet_location"><span data-i18n="eventsheet:location"></span> <input type="text" name="location" /></label>
-<label class="eventsheet_starttime"><span data-i18n="eventsheet:starttime"></span> <input type="text" name="starttime" /></label>
-<label class="eventsheet_matchday"><span data-i18n="eventsheet:matchday"></span> <input type="text" name="matchday" /></label>
-<label class="eventsheet_notes"><span data-i18n="eventsheet:notes"></span> <input type="text" name="notes" /></label>
-<label class="eventsheet_backup_players_str"><span data-i18n="eventsheet:backup_players_str"></span> <input type="text" name="backup_players_str" /></label>
-<label class="eventsheet_protest"><span data-i18n="eventsheet:protest"></span> <input type="text" name="protest" /></label>
-<label class="eventsheet_spectators"><span data-i18n="eventsheet:spectators"></span> <input type="text" name="spectators" /></label>
-</div>
+            <div class="eventsheet_report">
+                <label class="eventsheet_referee"><span data-i18n="eventsheet:referee"></span> <input type="text"
+                                                                                                      name="referee"/></label>
+                <label class="eventsheet_umpires"><span data-i18n="eventsheet:umpires"></span> <input type="text"
+                                                                                                      name="umpires"/></label>
+                <label class="eventsheet_location"><span data-i18n="eventsheet:location"></span> <input type="text"
+                                                                                                        name="location"/></label>
+                <label class="eventsheet_starttime"><span data-i18n="eventsheet:starttime"></span> <input type="text"
+                                                                                                          name="starttime"/></label>
+                <label class="eventsheet_matchday"><span data-i18n="eventsheet:matchday"></span> <input type="text"
+                                                                                                        name="matchday"/></label>
+                <label class="eventsheet_notes"><span data-i18n="eventsheet:notes"></span> <input type="text"
+                                                                                                  name="notes"/></label>
+                <label class="eventsheet_backup_players_str"><span data-i18n="eventsheet:backup_players_str"></span>
+                    <input type="text" name="backup_players_str"/></label>
+                <label class="eventsheet_protest"><span data-i18n="eventsheet:protest"></span> <input type="text"
+                                                                                                      name="protest"/></label>
+                <label class="eventsheet_spectators"><span data-i18n="eventsheet:spectators"></span> <input type="text"
+                                                                                                            name="spectators"/></label>
+            </div>
 
-<div class="eventsheet_preview"></div>
+            <div class="eventsheet_preview"></div>
 
-<div class="eventsheet_download_link_container">
-<a class="eventsheet_download_link" data-i18n="eventsheet:download empty" download=""></a>
-</div>
+            <div class="eventsheet_download_link_container">
+                <a class="eventsheet_download_link" data-i18n="eventsheet:download empty" download=""></a>
+            </div>
 
-<div class="eventsheet_error default-invisible"><span class="eventsheet_error_message"></span><button class="eventsheet_reload" type="button"></button></div>
-<div class="eventsheet_button_row"><a href="#" class="eventsheet_back" data-i18n="eventsheet:back"></a><a href="#" class="eventsheet_preview_back" data-i18n="eventsheet:back"></a><div class="loading-icon eventsheet_generate_loading_icon"></div><button type="submit" class="eventsheet_generate_button" disabled="disabled"></button><button class="eventsheet_pdf_button" data-i18n="setupsheet:pdf"></button><button class="eventsheet_print_button" data-i18n="setupsheet:print"></button></div>
-</form>
-</div>
+            <div class="eventsheet_error default-invisible"><span class="eventsheet_error_message"></span>
+                <button class="eventsheet_reload" type="button"></button>
+            </div>
+            <div class="eventsheet_button_row"><a href="#" class="eventsheet_back" data-i18n="eventsheet:back"></a><a
+                    href="#" class="eventsheet_preview_back" data-i18n="eventsheet:back"></a>
+                <div class="loading-icon eventsheet_generate_loading_icon"></div>
+                <button type="submit" class="eventsheet_generate_button" disabled="disabled"></button>
+                <button class="eventsheet_send_to_dblv" data-i18n="eventsheet:send"></button>
+                <button class="eventsheet_pdf_button" data-i18n="setupsheet:pdf"></button>
+                <button class="eventsheet_print_button" data-i18n="setupsheet:print"></button>
+            </div>
+        </form>
+    </div>
 </div>
 
 <div class="stats_layout default-invisible">
-<div class="stats_container">
-<a href="#" class="stats_top_back_link" data-i18n="stats:back"></a>
-<h3 class="stats_match_name"></h3>
-<table class="stats_table">
-<thead><tr><th></th></tr></thead>
-<tbody></tbody>
-</table>
-<svg class="stats_graph" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 300 125">
-<style>
-line.team0, line.team1 {
-	stroke-width: 1;
-}
-line.team0 {
-	stroke: #0000bb;
-}
-line.team1 {
-	stroke: #ff0000;
-}
-line.stats_graph_connector.team0, line.stats_graph_connector.team1 {
-	stroke-width: 0.3;
-	opacity: 0.7;
-}
+    <div class="stats_container">
+        <a href="#" class="stats_top_back_link" data-i18n="stats:back"></a>
+        <h3 class="stats_match_name"></h3>
+        <table class="stats_table">
+            <thead>
+            <tr>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <svg class="stats_graph" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 300 125">
+            <style>
+                line.team0, line.team1 {
+                    stroke-width: 1;
+                }
 
-.legend_background {
-	fill: #fff;
-}
-.legend_team0, .legend_team1 {
-	font-size: 6px;
-}
-text.team0 {
-	fill: #0000bb;
-}
-text.team1 {
-	fill: #ff0000;
-}
+                line.team0 {
+                    stroke: #0000bb;
+                }
 
-.stats_graph_mark {
-	text-anchor: middle;
-	alignment-baseline: middle;
-	font-size: 6px;
-}
+                line.team1 {
+                    stroke: #ff0000;
+                }
 
-.xaxis_label {
-	font-size: 4px;
-	fill: #aaa;
-}
-.axis_score_label {
-	font-size: 4px;
-	fill: #aaa;
-}
-.stats_graph_grid>line {
-	stroke-width: 0.1;
-	stroke: #bbb;
-}
-.stats_graph_grid>line.important {
-	stroke-width: 0.2;
-	stroke: #888;
-}
+                line.stats_graph_connector.team0, line.stats_graph_connector.team1 {
+                    stroke-width: 0.3;
+                    opacity: 0.7;
+                }
 
-.stats_graph_yellow-card {
-	fill:#ffd10d;
-}
-.stats_graph_red-card {
-	fill:#ff1717;
-}
-.stats_graph_disqualified {
-	fill: #000;
-}
+                .legend_background {
+                    fill: #fff;
+                }
 
-</style>
+                .legend_team0, .legend_team1 {
+                    font-size: 6px;
+                }
 
-<g class="stats_graph_grid"></g>
+                text.team0 {
+                    fill: #0000bb;
+                }
 
-<rect x="6" y="0" width="100" height="14" class="legend_background"></rect>
-<text x="7" y="6" class="legend_team0 team0">team0</text>
-<text x="7" y="13" class="legend_team1 team1">team1</text>
+                text.team1 {
+                    fill: #ff0000;
+                }
 
-<g class="stats_graph_lines"></g>
-</svg>
+                .stats_graph_mark {
+                    text-anchor: middle;
+                    alignment-baseline: middle;
+                    font-size: 6px;
+                }
 
-<table class="stats_presses"></table>
+                .xaxis_label {
+                    font-size: 4px;
+                    fill: #aaa;
+                }
 
-<a href="#" class="stats_back" data-i18n="stats:back"></a>
-</div>
+                .axis_score_label {
+                    font-size: 4px;
+                    fill: #aaa;
+                }
+
+                .stats_graph_grid > line {
+                    stroke-width: 0.1;
+                    stroke: #bbb;
+                }
+
+                .stats_graph_grid > line.important {
+                    stroke-width: 0.2;
+                    stroke: #888;
+                }
+
+                .stats_graph_yellow-card {
+                    fill: #ffd10d;
+                }
+
+                .stats_graph_red-card {
+                    fill: #ff1717;
+                }
+
+                .stats_graph_disqualified {
+                    fill: #000;
+                }
+
+                #buli_send {
+                    display: none;
+                }
+
+            </style>
+
+            <g class="stats_graph_grid"></g>
+
+            <rect x="6" y="0" width="100" height="14" class="legend_background"></rect>
+            <text x="7" y="6" class="legend_team0 team0">team0</text>
+            <text x="7" y="13" class="legend_team1 team1">team1</text>
+
+            <g class="stats_graph_lines"></g>
+        </svg>
+
+        <table class="stats_presses"></table>
+
+        <a href="#" class="stats_back" data-i18n="stats:back"></a>
+    </div>
 </div>
 
 <div class="netstats_layout default-invisible">
-<div class="netstats_container">
-<div class="netstats_empty" data-i18n="netstats:No stats available"></div>
-<table class="netstats_table">
-<thead><tr><th><button class="netstats_resync image-button"><span></span></button></th></tr><thead>
-<tbody></tbody>
-</table>
-<a href="#" class="netstats_back" data-i18n="stats:back"></a>
-</div>
+    <div class="netstats_container">
+        <div class="netstats_empty" data-i18n="netstats:No stats available"></div>
+        <table class="netstats_table">
+            <thead>
+            <tr>
+                <th>
+                    <button class="netstats_resync image-button"><span></span></button>
+                </th>
+            </tr>
+            <thead>
+            <tbody></tbody>
+        </table>
+        <a href="#" class="netstats_back" data-i18n="stats:back"></a>
+    </div>
 </div>
 
 
 <div class="order_layout default-invisible">
-<div class="order_container">
-	<h2 class="order_header" data-i18n="order:header"></h2>
+    <div class="order_container">
+        <h2 class="order_header" data-i18n="order:header"></h2>
 
-	<div class="order_loading-icon loading-icon default-invisible"></div>
-	<div class="order_error default-invisible"><span class="order_error_message network_error"></span></div>
+        <div class="order_loading-icon loading-icon default-invisible"></div>
+        <div class="order_error default-invisible"><span class="order_error_message network_error"></span></div>
 
-	<div class="order_display_container">
-		<div class="order_display"></div>
-	</div>
-	<div class="order_clear"></div>
+        <div class="order_display_container">
+            <div class="order_display"></div>
+        </div>
+        <div class="order_clear"></div>
 
-	<div class="order_buttons">
-		<a href="#" class="order_back" data-i18n="order:back"></a>
-		<button class="order_reset" data-i18n="order:reset"></button>
-		<button class="order_optimize" data-i18n="order:optimize"></button>
-		<button class="order_change" data-i18n="order:change"></button>
-	</div>
-	<button class="order_print" data-i18n="order:print"></button>
+        <div class="order_buttons">
+            <a href="#" class="order_back" data-i18n="order:back"></a>
+            <button class="order_reset" data-i18n="order:reset"></button>
+            <button class="order_optimize" data-i18n="order:optimize"></button>
+            <button class="order_change" data-i18n="order:change"></button>
+        </div>
+        <button class="order_print" data-i18n="order:print"></button>
 
-	<div class="order_edit default-invisible"></div>
-</div>
+        <div class="order_edit default-invisible"></div>
+    </div>
 </div>
 
 <div class="editevent_layout default-invisible">
-<div class="editevent_container">
-	<div class="editevent_loading-icon loading-icon"></div>
-	<div class="editevent_error"><span class="editevent_error_message"></span></div>
-	<div class="editevent_select"></div>
-	<table class="editevent_table"></table>
-	<a href="#" class="editevent_back" data-i18n="editevent:back"></a>
-</div>
+    <div class="editevent_container">
+        <div class="editevent_loading-icon loading-icon"></div>
+        <div class="editevent_error"><span class="editevent_error_message"></span></div>
+        <div class="editevent_select"></div>
+        <table class="editevent_table"></table>
+        <a href="#" class="editevent_back" data-i18n="editevent:back"></a>
+    </div>
 </div>
 
 <div class="setupsheet_layout default-invisible">
-<div class="setupsheet_container">
-	<div class="setupsheet_loading-icon loading-icon"></div>
-	<div class="setupsheet_error"><span class="setupsheet_error_message"></span></div>
-	<div class="setupsheet_tables">
-		<table class="setupsheet_table" id="setupsheet_table_team0"></table>
-		<table class="setupsheet_table" id="setupsheet_table_team1"></table>
-	</div>
-	<div class="setupsheet_buttons">
-		<button class="setupsheet_cancel" data-i18n="setupsheet:cancel"></button>
-		<button class="setupsheet_pdf" data-i18n="setupsheet:pdf" disabled="disabled"></button>
-		<button class="setupsheet_print" data-i18n="setupsheet:print"></button>
-		<button class="setupsheet_save" data-i18n="setupsheet:save"></button>
-	</div>
-</div>
-<div class="setupsheet_svg_container"></div>
+    <div class="setupsheet_container">
+        <div class="setupsheet_loading-icon loading-icon"></div>
+        <div class="setupsheet_error"><span class="setupsheet_error_message"></span></div>
+        <div class="setupsheet_tables">
+            <table class="setupsheet_table" id="setupsheet_table_team0"></table>
+            <table class="setupsheet_table" id="setupsheet_table_team1"></table>
+        </div>
+        <div class="setupsheet_buttons">
+            <button class="setupsheet_cancel" data-i18n="setupsheet:cancel"></button>
+            <button class="setupsheet_pdf" data-i18n="setupsheet:pdf" disabled="disabled"></button>
+            <button class="setupsheet_print" data-i18n="setupsheet:print"></button>
+            <button class="setupsheet_save" data-i18n="setupsheet:save"></button>
+        </div>
+    </div>
+    <div class="setupsheet_svg_container"></div>
 </div>
 
 
@@ -600,15 +785,15 @@ text.team1 {
 <div class="d_ads default-invisible"></div>
 
 <div class="referee_layout default-invisible">
-	<div class="referee_top">
-		<div class="referee_e_title"></div>
-		<div class="referee_key"></div>
-	</div>
-	<div class="referee_clients"></div>
-	<div class="referee_event">
-		<div class="referee_matches"></div>
-		<div class="referee_e_links"></div>
-	</div>
+    <div class="referee_top">
+        <div class="referee_e_title"></div>
+        <div class="referee_key"></div>
+    </div>
+    <div class="referee_clients"></div>
+    <div class="referee_event">
+        <div class="referee_matches"></div>
+        <div class="referee_e_links"></div>
+    </div>
 </div>
 
 <!--@DEV-->
