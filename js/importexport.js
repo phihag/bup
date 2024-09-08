@@ -135,6 +135,10 @@ function ui_init() {
 	click.qs('.import_link', function() {
 		ui_import_json(state);
 	});
+
+	click.qs('.delete_matches_link', function () {
+		match_storage.remove_all("ALL");
+	});
 }
 
 return {

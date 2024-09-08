@@ -55,6 +55,16 @@ function load_match(match_id) {
 
 function remove(match_id) {
 	window.localStorage.removeItem('bup_match_' + match_id);
+	}
+
+function remove_all(match_id) {
+	var matches = load();
+	matches.forEach(function (m) {
+		const m_id = m.metadata.id;
+		if (match_id != m_id) { 
+			window.localStorage.removeItem('bup_match_' + m_id);
+		}
+	});
 }
 
 function ui_init() {
@@ -102,6 +112,7 @@ return {
 	store: store,
 	remove: remove,
 	load_match: load_match,
+	remove_all: remove_all,
 };
 
 })();

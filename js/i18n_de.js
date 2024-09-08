@@ -197,6 +197,7 @@ var i18n_de = {
 'settings:Network statistics': 'Netzwerkstatistiken',
 'settings:Order link': 'Reihenfolge',
 'settings:Export link': 'Exportieren',
+'settings:Clear Match Archive': 'Alte Spiele löschen',
 'settings:New match': 'Neues Spiel',
 'settings:Singles': 'Einzel',
 'settings:Doubles': 'Doppel',
