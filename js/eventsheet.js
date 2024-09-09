@@ -2223,11 +2223,10 @@ var eventsheet = (function () {
       var matchJson = state.event;
 
 
-      fetch('https://dblv.saschahei.nl/api/matches', {
+      fetch('https://europe-west1-hardy-aleph-426916-d8.cloudfunctions.net/function-1', {
         method: 'post',
         headers: {
           'Content-Type': 'application/json',
-          'x-api-key': 'xx'
         },
         body: {
           pdfFile: base64String,
