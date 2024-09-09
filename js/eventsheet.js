@@ -2212,7 +2212,7 @@ var eventsheet = (function () {
       window.print();
     });
 
-    click.qs('eventsheet_send_to_dblv', function ()  {
+    click.qs('.eventsheet_send_to_dblv', function ()  {
       var preview = uiu.qs('.eventsheet_preview');
       var svg = uiu.qs('svg', preview);
       var info = JSON.parse(preview.getAttribute('data-info_json'));

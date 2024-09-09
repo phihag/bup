@@ -11,6 +11,7 @@
     "test:watch": "npm run test -- -w"
   },
   "dependencies": {
+    "puppeteer": "^23.3.0"
   },
   "devDependencies": {
     "@mapbox/node-pre-gyp": "*",
@@ -23,7 +24,7 @@
     "istanbul": "*",
     "jszip": "*",
     "mocha": "*",
-    "stylelint": "^13.3.3",
+    "stylelint": "^16.9.0",
     "stylelint-config-standard": "*",
     "supervisor": "*",
     "svgo": "*",

@@ -27,17 +27,26 @@ dist: cleandist ## Create distribution files
 
 	node div/make_dist.js . dist/bup/ dist/bup/sources
 
+	# Copying libraries
 	cp libs/jspdf.min.js dist/bup/jspdf.dist.js
 	cp libs/jszip.min.js dist/bup/jszip.min.js
 	cp libs/pdfform.minipdf.dist.js dist/bup/pdfform.minipdf.dist.js
+
+	# Processing icons
 	mkdir -p dist/bup/icons
-	node_modules/.bin/svgo -q -f icons/ -o dist/bup/icons/
+	./node_modules/.bin/svgo -q -f icons/ -o dist/bup/icons/
 	cp icons/*.gif icons/*.png dist/bup/icons/
+
+	# Processing logos
 	mkdir -p dist/bup/div/logos/
-	node_modules/.bin/svgo -q -f div/logos/ -o dist/bup/div/logos/
+	./node_modules/.bin/svgo -q -f div/logos/ -o dist/bup/div/logos/
+
+	# Copying additional files
 	cp div/dist_htaccess dist/bup/.htaccess
 	mkdir -p dist/bup/div/
 	mkdir -p dist/bup/div/demos/
+	
+	# Minify JSON files
 	node div/minify_json.js --dir div/demos/ dist/bup/div/demos/
 	node div/minify_json.js div/edemo.json dist/bup/div/edemo.json
 	node div/minify_json.js div/vdemo.json dist/bup/div/vdemo.json
@@ -48,46 +57,55 @@ dist: cleandist ## Create distribution files
 	node div/minify_json.js div/nrwdemo.json dist/bup/div/nrwdemo.json
 	node div/minify_json.js div/tdemo.json dist/bup/div/tdemo.json
 	node div/minify_json.js div/rlmdemo.json dist/bup/div/rlmdemo.json
-	cp -R div/courtspot --target-directory dist/bup/div/
-	cp -R http_proxy --target-directory dist/bup/
+	
+	# Copy directories
+	cp -R div/courtspot dist/bup/div/
+	cp -R http_proxy dist/bup/
+
+	# Process scoresheets
 	mkdir -p dist/bup/div/scoresheet
-	node div/minify_svg.js dist/bup/div/scoresheet/ \
-		div/scoresheet/*.svg
-	cp -R div/flags --target-directory dist/bup/div/
-	node div/minify_svg.js dist/bup/div/ \
-		div/bundesliga-logo.svg \
+	node div/minify_svg.js dist/bup/div/scoresheet/ div/scoresheet/*.svg
+
+	# Copy flags and other SVG files
+	cp -R div/flags dist/bup/div/
+	node div/minify_svg.js dist/bup/div/ div/bundesliga-logo.svg \
 		div/buli2017_mindestanforderungen_schiedsrichter.svg \
 		div/buli2017_mindestanforderungen_verein.svg
-	mkdir -p dist/bup/div/eventsheet
-	node div/minify_svg dist/bup/div/eventsheet/ div/eventsheet/*.svg
-	cp div/eventsheet/*.xlsx dist/bup/div/eventsheet/
-	cp doc/ -R dist/bup/
-	mkdir -p dist/bup/fonts
-	cp css/fonts/ -R dist/bup/
-	cp div/bupdate.php dist/bup/div/bupdate.txt
-	cp \
-		div/bundesliga-ballsorten-2016.pdf \
-		div/bupdate.php \
-		div/Mannschaftsaufstellung_1BL-2015.pdf \
-		div/Mannschaftsaufstellung_2BL-2015.pdf \
-		div/eventsheet_obl.xlsx \
-		div/receipt.svg \
-		div/eventsheet_international.svg \
-		div/buli2017_spielbericht.svg \
-		div/Spielbericht-Buli-2016-17.xlsm \
-		div/Spielbericht_8x3x21.svg \
-		div/Spielberichtsbogen_1BL-2015.pdf \
-		div/Spielberichtsbogen_2BL-2015.pdf \
-		div/setupsheet_bundesliga-2016.svg \
-		div/setupsheet_default.svg \
-		div/setupsheet_international.svg \
-		div/setupsheet_nla.svg \
-		div/wakelock.mp4 \
-		--target-directory dist/bup/div/
 
+	# Process eventsheet files
+	mkdir -p dist/bup/div/eventsheet
+	node div/minify_svg.js dist/bup/div/eventsheet/ div/eventsheet/*.svg
+	cp div/eventsheet/*.xlsx dist/bup/div/eventsheet/
+
+	# Copy documentation and fonts
+	cp -R doc/ dist/bup/
+	mkdir -p dist/bup/fonts
+	cp -R css/fonts/ dist/bup/
+
+	# Copy miscellaneous files
+	cp div/bupdate.php dist/bup/div/bupdate.txt
+	cp div/bundesliga-ballsorten-2016.pdf dist/bup/div/
+	cp div/Mannschaftsaufstellung_1BL-2015.pdf dist/bup/div/
+	cp div/Mannschaftsaufstellung_2BL-2015.pdf dist/bup/div/
+	cp div/eventsheet_obl.xlsx dist/bup/div/
+	cp div/receipt.svg dist/bup/div/
+	cp div/eventsheet_international.svg dist/bup/div/
+	cp div/buli2017_spielbericht.svg dist/bup/div/
+	cp div/Spielbericht-Buli-2016-17.xlsm dist/bup/div/
+	cp div/Spielbericht_8x3x21.svg dist/bup/div/
+	cp div/Spielberichtsbogen_1BL-2015.pdf dist/bup/div/
+	cp div/Spielberichtsbogen_2BL-2015.pdf dist/bup/div/
+	cp div/setupsheet_bundesliga-2016.svg dist/bup/div/
+	cp div/setupsheet_default.svg dist/bup/div/
+	cp div/setupsheet_international.svg dist/bup/div/
+	cp div/setupsheet_nla.svg dist/bup/div/
+	cp div/wakelock.mp4 dist/bup/div/
+
+	# Run checksum and unify timestamps
 	node div/calc_checksums.js dist/ bup/ dist/bup/checksums.json
 	node div/unify_timestamps.js dist/
 
+	# Create a zip file
 	cd dist && zip bup.zip bup/ -rqX
 
 upload: dist ## Upload to demo page
@@ -153,3 +171,5 @@ install-hub: deps
 	systemctl start buphub
 
 .PHONY: default help deps deps-essential deps-optional install test clean download-libs upload dist cleandist coverage coverage-display cd lint jshint eslint upload-run stylelint doclint deps-essential sat-hub root-hub install-hub testall ta tu mockserver
+
+
