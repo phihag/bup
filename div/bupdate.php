@@ -193,8 +193,9 @@ foreach ($checksums as $vfn => $cs) {
 // Switch new and old version.
 // This is not quite atomically since we're not using a symlink
 if (\file_exists($bup_dir)) {
-	if (! compat_rename($bup_dir, $tmp_dir . '/oldbup.' . $tmp_id)) {
-		error('Failed to move old bup dir');
+	$oldbup_dir = tmp_dir . '/oldbup.' . $tmp_id;
+	if (! compat_rename($bup_dir, $oldbup_dir)) {
+		error('Failed to move old bup dir ' . $bup_dir . ' to ' . $oldbup_dir);
 	}
 }
 
