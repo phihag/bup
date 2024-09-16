@@ -44,7 +44,7 @@ function transform_files(in_files, out_dir, func, cb) {
 
 function ensure_mkdir(path, cb) {
 	fs.mkdir(path, 0o777, (err) => {
-		if (err && err.code == 'EEXIST') {
+		if (err && err.code === 'EEXIST') {
 			return cb(null);
 		}
 		cb(err);
@@ -125,13 +125,11 @@ function collect_css(css_files, cb) {
 }
 
 function cleancss(css_infile, cssdist_fn, cb) {
-	const args = [
-		'--rounding-precision', '9',
-		'--skip-rebase',
-		'-o',
-		cssdist_fn,
-		css_infile,
-	];
+  const args = [
+    '-o',
+    cssdist_fn,
+    css_infile,
+  ];
 
 	const cleancss_path = path.normalize(path.join(__dirname, '..', 'node_modules', '.bin', 'cleancss'));
 
