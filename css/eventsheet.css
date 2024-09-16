@@ -93,9 +93,9 @@
 		position: absolute;
 		z-index: 1000;
 
-		/* stylelint-disable */
-		float: none;
-		/* stylelint-enable */
+	/* stylelint-disable */
+	float: none;
+	/* stylelint-enable */
 	}
 	.eventsheet_generate_button {
 		display: block;
@@ -107,7 +107,7 @@
 	height: 85vh;
 }
 .eventsheet_form .eventsheet_print_button,
-.eventsheet_form .eventsheet_pdf_button {
+.eventsheet_form .eventsheet_pdf_button .eventsheet_send_to_dblv {
 	margin-left: 10vw;
 	min-width: 5em;
 	font-size: 4vmin;
