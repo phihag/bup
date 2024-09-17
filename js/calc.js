@@ -70,11 +70,38 @@ function warmup_timer(s, cointoss_ts) {
 	switch (s.setup.warmup) {
 	case 'none':
 		return false;
+	case 'call-down':
+		// This case covers a feature of BTS in which the warm-up countdown starts the moment 
+		// the game is called. The time can be set in BTS.
+		return {
+			start: s.setup.called_timestamp,
+			duration: s.setup.warmup_start * 1000,
+			exigent: Math.max(0, s.setup.warmup_start-s.setup.warmup_ready) * 1000 + 499,
+			restart: false,
+		};
+	case 'call-up': 
+		// This case covers a feature of BTS in which the warm-up timer starts the moment 
+		// the game is called. The timer runs upward until the Game starts.
+		return {
+			start: s.setup.called_timestamp,
+			upwards: true,
+			restart: false,
+		};
+	case 'choise':
+		// This case covers a feature of BTS in which the warm-up timer starts the moment 
+		// of the cointoss (first tablet interaction of the umpire). The time can be set in BTS.
+		return {
+			start: cointoss_ts,
+			duration: s.setup.warmup_start * 1000,
+			exigent: Math.max(0, s.setup.warmup_start-s.setup.warmup_ready) * 1000 + 499,
+			restart: true,
+		};
 	case 'bwf-2016':
 		return {
 			start: cointoss_ts,
 			duration: 120000,
 			exigent: 30499,
+			restart: true,
 		};
 	case 'legacy':
 	default:
@@ -82,6 +109,7 @@ function warmup_timer(s, cointoss_ts) {
 			start: cointoss_ts,
 			duration: 120000,
 			exigent: 5499,
+			restart: true,
 		};
 	}
 }
@@ -318,6 +346,24 @@ function init_state(s, setup, presses, keep_metadata) {
 	s.initialized = true;
 	s.presses = presses ? presses : [];
 	s.timer = false;
+
+	// These calls ensure that the timers are started before the first tablet interaction. 
+	// This is only necessary for warm-up timers that are not started by the referee.
+	if (s.setup.warmup === 'call-down') {
+		s.timer = {
+			start: s.setup.called_timestamp,
+			duration: s.setup.warmup_start * 1000,
+			exigent: Math.max(0, s.setup.warmup_start-s.setup.warmup_ready) * 1000 + 499,
+			restart: false,
+		};
+	} else if (s.setup.warmup === 'call-up') {
+		s.timer = {
+			start: s.setup.called_timestamp,
+			upwards: true,
+			restart: false,
+		};
+	}
+
 	s.remote = {};
 
 	delete s.match;
@@ -447,6 +493,7 @@ function recalc_after_score(s, team_id, press) {
 				start: press.timestamp,
 				duration: (counting === '5x11_15^90' ? 90000 : 60000),
 				exigent: 25000,
+				restart: true,
 			};
 		}
 		if ((press.type != 'red-card') || is_interval) {
@@ -481,6 +528,7 @@ function recalc_after_score(s, team_id, press) {
 			start: press.timestamp,
 			duration: rest_duration,
 			exigent: 25000,
+			restart: true,
 		};
 	} else if (!s.game.interval && !s.match.suspended && !s.match.injuries) {
 		if (press.type !== 'red-card') {
@@ -810,6 +858,7 @@ function calc_press(s, press) {
 				start: press.timestamp,
 				duration: s.timer.duration,
 				exigent: s.timer.exigent,
+				restart: s.timer.restart,
 			};
 		}
 		break;

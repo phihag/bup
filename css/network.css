@@ -124,6 +124,11 @@ button > .loading-icon {
 	color: #444;
 }
 
+.setup_network_tabletoperator {
+	color: #c14949;
+	font-weight: bold;
+}
+
 .setup_network_heading::after {
 	/* Set line-height to height, so that we can vertically center with vertical-align: middle; */
 	content: '';
