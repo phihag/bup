@@ -84,6 +84,7 @@ function btsh(baseurl, tournament_key) {
 			network_teams_player1_even: s.game.teams_player1_even,
 			network_score: netscore,
 			team1_won: s.match.team1_won,
+			finish_confirmed: s.match.finish_confirmed,
 			presses: s.presses,
 			duration_ms: duration_ms,
 			end_ts: end_ts,
