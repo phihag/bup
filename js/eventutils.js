@@ -388,7 +388,7 @@ function get_min_pause(league_key) {
 	if (league_key === 'NLA-2019') {
 		return 15 * 60000; // §3.12.1 https://www.swiss-badminton.ch/file/847650/?dl=1
 	}
-	if (league_key === 'OBL-2017') {
+	if (league_key === 'OBL-2017' || league_key === 'OBL-2024') {
 		return 15 * 60000; // §6f Bundesligaordnung
 	}
 	if (league_key === 'bayern-2018') {
@@ -488,6 +488,9 @@ function default_counting(league_key) {
 		return '5x11_15';
 	}
 	if (is_5x1190_bundesliga(league_key)) {
+		return '5x11_15^90';
+	}
+	if (league_key === 'OBL-2024') {
 		return '5x11_15^90';
 	}
 	if (league_key === 'OBL-2017') {

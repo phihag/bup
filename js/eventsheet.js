@@ -32,6 +32,7 @@ var SHEETS_BY_LEAGUE = {
 	'NLA-2017': ['NLA-2017'],
 	'NLA-2019': ['NLA-2019'],
 	'OBL-2017': ['OBL-2017'],
+	'OBL-2024': [],
 	'bayern-2018': ['bayern-2018'],
 	'international-2017': ['int'],
 };
