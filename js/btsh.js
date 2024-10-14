@@ -165,12 +165,17 @@ function btsh(baseurl, tournament_key) {
 		});
 	}
 
-	function persist_display_settings() {
+	async function persist_display_settings() {
 		ws.sendmsg({ type: 'persist_display_settings', tournament_key: tournament_key, panel_settings: state.settings });
 	}
 
-	function reset_display_settings() {
+	async function reset_display_settings() {
 		ws.sendmsg({ type: 'reset_display_settings', tournament_key: tournament_key, panel_settings: state.settings });
+	}
+
+	async function send_device_info() {
+		ws.sendmsg({ type: 'device_info', tournament_key: tournament_key, device: _device_data() });
+		setTimeout(send_device_info, 1000*60*5);
 	}
 
 	function service_name() {
@@ -192,6 +197,7 @@ function btsh(baseurl, tournament_key) {
 				ws.sendmsg = ws_sendmsg;
 				ws.onopen = function () {
 					reload_match_information();
+					send_device_info();
 				};
 				ws.onmessage = handle_message;
 				ws.onclose = function () {
