@@ -45,7 +45,7 @@ league_key      ID of the league being played.
                 - BayernLiga and below: "bayern-2018"
                 - Oberliga Mitte "OLM-2020" and Oberliga Südwest "OLSW-2020"
                 - Swiss NLA/NLB: "NLA-2017" (3x21) or "NLA-2019" (5x11)
-                - Austrian Bundesliga: "OBL-2017"
+                - Austrian Bundesliga: "OBL-2017" (3x21) or "OBL-2024" (5x11)
                 - International matches: "international-2017" (each discipline once, 3x21)
 
                 The year is the first year that the specific ruleset was implemented in.

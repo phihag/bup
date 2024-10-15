@@ -38,6 +38,7 @@ function geolocate($httpc, $address, $orig_address=null) {
 		'66123 Saarbrücken, Herman-Neuberger-Sportschule 1, Badmintonhalle 72, Herman-Neuberger-Sportschule 1' => '66123 Saarbrücken Herman-Neuberger-Sportschule 1',
 		'66123 Saarbrücken, Herman-Neuberger-Sportschule 1, MultiFunkHalle 80, Herman-Neuberger-Sportschule 1' => '66123 Saarbrücken Herman-Neuberger-Sportschule 1',
 		'66123 Saarbrücken, Herman-Neuberger-Sportschule 1, Badmintonhalle 72, Herman-Neu' => '66123 Saarbrücken Herman-Neuberger-Sportschule 1',
+		'44894 Bochum-Werne, 3-fach TH Willy-Brandt-Gesamtschule, Deutsches Reich 58' => 'Bochum Deutsches Reich 58',
 	];
 	if (\array_key_exists($address, $ADDRESS_ALIAS)) {
 		$address = $ADDRESS_ALIAS[$address];

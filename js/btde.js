@@ -203,8 +203,8 @@ function _get_league_key(liga_code) {
 		'NLB': 'NLA-2019',
 		'NLB Ost': 'NLA-2019',
 		'NLB West': 'NLA-2019',
-		'1. Bundesliga': 'OBL-2017',
-		'2. Bundesliga': 'OBL-2017',
+		'1. Bundesliga': 'OBL-2024',
+		'2. Bundesliga': 'OBL-2024',
 	}[liga_code.trim()];
 }
 
