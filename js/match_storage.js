@@ -55,16 +55,23 @@ function load_match(match_id) {
 
 function remove(match_id) {
 	window.localStorage.removeItem('bup_match_' + match_id);
-	}
+}
 
-function remove_all(match_id) {
+function remove_all(hours_ago)  {
 	var matches = load();
-	matches.forEach(function (m) {
-		const m_id = m.metadata.id;
-		if (match_id != m_id) { 
-			window.localStorage.removeItem('bup_match_' + m_id);
-		}
-	});
+	if (matches && matches.length > 0) { 
+		const now = new Date();
+		const hours_ago_ms = hours_ago * 60 * 60 * 1000;
+		matches.forEach(function (m) {
+			if (m.metadata && m.metadata.end && m.metadata.end != null) {
+				const end_time = new Date(m.metadata.end);
+				const match_diff_ms = now - end_time;
+				if (match_diff_ms > hours_ago_ms) {
+					window.localStorage.removeItem('bup_match_' + m.metadata.id);
+				}
+			}
+		});
+	}
 }
 
 function ui_init() {

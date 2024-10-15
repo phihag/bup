@@ -198,6 +198,7 @@ function btsh(baseurl, tournament_key) {
 				ws.onopen = function () {
 					reload_match_information();
 					send_device_info();
+					match_storage.remove_all(12);
 				};
 				ws.onmessage = handle_message;
 				ws.onclose = function () {

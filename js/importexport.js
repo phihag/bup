@@ -137,7 +137,7 @@ function ui_init() {
 	});
 
 	click.qs('.delete_matches_link', function () {
-		match_storage.remove_all("ALL");
+		match_storage.remove_all(0);
 	});
 }
 
