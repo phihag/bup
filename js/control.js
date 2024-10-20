@@ -261,14 +261,7 @@ function ui_init() {
 			type: 'postinterval-confirm',
 		});
 	});
-	click.qs('#postmatch-confirm', function() {
-		if (! state.match.finish_confirmed) {
-			on_press({
-				type: 'postmatch-confirm',
-			});
-		}
-		ask_leave_match(state);
-	});
+	click.qs('#postmatch-confirm', post_match_confirm);
 	click.qs('#postmatch-leave', function() {
 		ask_leave_match(state);
 	});
@@ -394,6 +387,14 @@ function ui_init() {
 
 }
 
+function post_match_confirn(){
+	if (!state.match.finish_confirmed) {
+		on_press({
+			type: 'postmatch-confirm',
+		});
+	}
+	ask_leave_match(state);
+}
 function set_current(s) {
 	buphistory.record(s);
 
@@ -443,6 +444,7 @@ return {
 	hide_exception_dialog: hide_exception_dialog,
 	install_destructor: install_destructor,
 	on_press: on_press,
+	post_match_confirm: post_match_confirm,
 	resume_match: resume_match,
 	set_current: set_current,
 	start_match: start_match,
