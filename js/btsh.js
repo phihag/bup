@@ -6,6 +6,7 @@ function btsh(baseurl, tournament_key) {
 	var WS_PATH = '/ws/bup';
 	var reconnect_timeout = 1000;
 	var bts_update_callback = null;
+	var bts_update_courts_callback = null;
 	var display_initialized = false;
 	var battery;
 	
@@ -72,14 +73,15 @@ function btsh(baseurl, tournament_key) {
 		if (! /^bts_/.test(s.setup.match_id)) {
 			return;
 		}
-		var req_match_id = s.setup.match_id;
-		var match_id = req_match_id.substring('bts_'.length);
+		const req_match_id = s.setup.match_id;
+		const match_id = req_match_id.substring('bts_'.length);
 
-		var netscore = calc.netscore(s, true);
-		var duration_ms = (s.metadata.start && s.metadata.end) ? (s.metadata.end - s.metadata.start) : null;
-		var end_ts = s.metadata.end ? s.metadata.end : null;
-		var post_data = {
+		const netscore = calc.netscore(s, true);
+		const duration_ms = (s.metadata.start && s.metadata.end) ? (s.metadata.end - s.metadata.start) : null;
+		const end_ts = s.metadata.end ? s.metadata.end : null;
+		const score_data = {
 			court_id: s.settings.court_id,
+			match_id: match_id,
 			network_team1_serving: s.game.team1_serving,
 			network_teams_player1_even: s.game.teams_player1_even,
 			network_score: netscore,
@@ -90,23 +92,9 @@ function btsh(baseurl, tournament_key) {
 			end_ts: end_ts,
 			marks: s.match.marks,
 			shuttle_count: s.match.shuttle_count,
-			device: _device_data(s, post_data),
+			device: _device_data(),
 		};
-
-		var url = baseurl + 'h/' + encodeURIComponent(tournament_key) + '/m/' + encodeURIComponent(match_id) + '/score';
-
-		_request_json(s, 'btsh.score', {
-			method: 'POST',
-			url: url,
-			data: JSON.stringify(post_data),
-			contentType: 'application/json; charset=utf-8',
-		}, function(err) {
-			if (s.setup.match_id !== req_match_id) { // Match changed while the request was underway
-				return;
-			}
-
-			network.errstate('btsh.score', err);
-		});
+		send_score_changed(score_data);
 	}
 
 	function sync(s) {
@@ -119,31 +107,11 @@ function btsh(baseurl, tournament_key) {
 	}
 
 	function fetch_courts(s, callback) {
-		var device_url = '?device=' + encodeURIComponent(btoa(JSON.stringify(_device_data(s))));
-		_request_json(s, 'btsh.courts', {
-			url: baseurl + 'h/' + encodeURIComponent(tournament_key) + '/courts' + device_url,
-		}, function(err, response) {
-			if (err) {
-				return callback(err);
-			}
-
-			var courts = response.courts.map(function(rc) {
-				var res = {
-					id: rc._id,
-					label: rc.num,
-				};
-				if (rc.match_id) {
-					res.match_id = 'bts_' + rc.match_id;
-				}
-				return res;
-			});
-			courts.push({
-				id: 'referee',
-				description: s._('court:referee'),
-			});
-			s.btsh_courts = courts;
-			return callback(err, courts);
-		});
+		bts_update_courts_callback = callback;
+		connect();
+		if (s.btsh_courts && s.btsh_courts != null){
+			callback(null, s.btsh_courts);
+		}
 	}
 
 	function ui_init() {
@@ -166,16 +134,32 @@ function btsh(baseurl, tournament_key) {
 	}
 
 	async function persist_display_settings() {
-		ws.sendmsg({ type: 'persist_display_settings', tournament_key: tournament_key, panel_settings: state.settings });
+		ws_send({ type: 'persist_display_settings', tournament_key: tournament_key, panel_settings: state.settings });
 	}
 
 	async function reset_display_settings() {
-		ws.sendmsg({ type: 'reset_display_settings', tournament_key: tournament_key, panel_settings: state.settings });
+		ws_send({ type: 'reset_display_settings', tournament_key: tournament_key, panel_settings: state.settings });
 	}
 
 	async function send_device_info() {
-		ws.sendmsg({ type: 'device_info', tournament_key: tournament_key, device: _device_data() });
+		ws_send({ type: 'device_info', tournament_key: tournament_key, device: _device_data() });
 		setTimeout(send_device_info, 1000*60*5);
+	}
+	async function send_score_changed(score) {
+		ws_send({ type: 'score_update', tournament_key: tournament_key, score: score});
+	}
+
+	function confirm_match_finished() {
+		if (state.match && state.match.team1_won && state.metadata.end && state.metadata.end != null){
+			control.post_match_confirm(state);
+		}	
+	}
+
+	async function ws_send(json) {
+		if (ws == null) {
+			connect();
+		}
+		ws.sendmsg(json);
 	}
 
 	function service_name() {
@@ -190,7 +174,7 @@ function btsh(baseurl, tournament_key) {
 		return s.btsh_courts;
 	}
 
-	function connect(cb, s) {
+	function connect() {
 		try {
 			if (ws == null) {
 				ws = new WebSocket(construct_url(WS_PATH), 'bts-bup');
@@ -203,14 +187,14 @@ function btsh(baseurl, tournament_key) {
 				ws.onmessage = handle_message;
 				ws.onclose = function () {
 					ws = null;
-					send_bts_not_reachable(cb, s);
-					setTimeout(connect, reconnect_timeout, cb, s);
+					send_bts_not_reachable();
+					setTimeout(connect, reconnect_timeout);
 				};
 			}
 		} catch (e) {
 			ws = null;
-			send_bts_not_reachable(cb, s);
-			setTimeout(connect, reconnect_timeout, cb, s);
+			send_bts_not_reachable();
+			setTimeout(connect, reconnect_timeout);
 		}
 	}
 	function construct_url(abspath) {
@@ -261,6 +245,9 @@ function btsh(baseurl, tournament_key) {
 			case 'change':
 				default_change_handler(msg);
 				break;
+			case 'error':
+				network.errstate('btsh.score', msg);
+				break;
 			default:
 				send({
 					type: 'error',
@@ -278,10 +265,39 @@ function btsh(baseurl, tournament_key) {
 					if (state.settings.court_id != '' && c.val.event.matches[0] && c.val.event.matches[0].end_ts != null) {
 						setTimeout(reload_match_information, 60000);
 					}
+				} else {
+					if (state && state != null) {
+						state.bts_event = c.val.event;
+					}
 				}
 				break;
 			case 'settings-update':
 				state.settings = c.val;
+				break;
+			case 'confirm-match-finished':
+				confirm_match_finished();
+				break;
+			case 'courts-update':
+
+				var courts = c.val.map(function (rc) {
+					var res = {
+						id: rc._id,
+						label: rc.num,
+					};
+					if (rc.match_id) {
+						res.match_id = 'bts_' + rc.match_id;
+					}
+					return res;
+				});
+				courts.push({
+					id: 'referee',
+					description: state._('court:referee'),
+				});
+
+				state.btsh_courts = courts;
+				if (bts_update_courts_callback && bts_update_courts_callback != null) {
+					bts_update_courts_callback(null, state.btsh_courts);
+				}
 				break;
 			default:
 				break;
@@ -306,15 +322,21 @@ function btsh(baseurl, tournament_key) {
 	
 	function subscribe(s, cb, calc_timeout) {
 		bts_update_callback = cb;
-		connect(cb,s);
+		if (state && state.bts_event && state.bts_event != null) {
+			bts_update_callback(null, state, state.bts_event);
+			state.bts_event = null;
+		}
+		connect();
 	}
 
-	function send_bts_not_reachable(cb,s) {
-		var msg = s._('network:error:bts');
-		cb({
-			type: 'network-error',
-			msg: msg,
-		}, s, null);
+	function send_bts_not_reachable() {
+		if (bts_update_callback && bts_update_callback != null) {
+			var msg = state._('network:error:bts');
+			bts_update_callback({
+				type: 'network-error',
+				msg: msg,
+			}, state, null);
+		}
 	}
 
 	return {
