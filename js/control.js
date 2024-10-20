@@ -387,7 +387,7 @@ function ui_init() {
 
 }
 
-function post_match_confirn(){
+function post_match_confirm(){
 	if (!state.match.finish_confirmed) {
 		on_press({
 			type: 'postmatch-confirm',
