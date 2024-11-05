@@ -146,7 +146,8 @@ function btsh(baseurl, tournament_key) {
 		setTimeout(send_device_info, 1000*60*5);
 	}
 	async function send_score_changed(score) {
-		ws_send({ type: 'score_update', tournament_key: tournament_key, score: score});
+		network.errstate('btsh.score', null);
+		ws_send({ type: 'score_update', tournament_key: tournament_key, score: score });
 	}
 
 	function confirm_match_finished() {
