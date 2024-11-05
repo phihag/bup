@@ -117,7 +117,7 @@ function ask_leave_match(s) {
 		return;
 	}
 
-	if (network.score_transmitted()) {
+	if (s.match.finish_confirmed || network.score_transmitted()) {
 		leave_match(s);
 		return;
 	}
