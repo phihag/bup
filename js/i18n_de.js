@@ -524,6 +524,7 @@ var i18n_de = {
 'displaymode|clean': 'Clean',
 'displaymode|teamcourt': 'Mannschaftskampf',
 'displaymode|tournamentcourt': 'Individual-Turnier',
+'displaymode|tournamentplayers': 'Individual-Turnier: Nur Spieler',
 'displaymode|2court': '2 Felder',
 'displaymode|andre': 'André',
 'displaymode|tim': 'Tim',

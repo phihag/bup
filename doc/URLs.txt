@@ -71,6 +71,7 @@ dm_style=STYLECODE  In display mode, start with the specified style.
 	international   			Best for individual international tournaments
 	bwf		        			Like international, but geared towards the BWF understanding of names ("LASTNAME, Firstname")
 	tournamentcourt 			Best for (national) individual tournaments. Supports interval timer, court number, competition, round, remove middle names and underline the receiving player in doubles.
+	tournamentplayers 			Best for (national) individual tournaments. Supports interval timer, court number, competition, round, remove middle names and underline the receiving player in doubles. Show only the Players. Use it in combination with onlyscore.
 	clean		    			Classic style for (national) individual tournaments
 	2court          			Large scores for 2 courts. Supports interval timer.
 	andre           			Simple 1-court display, shows game count to the left

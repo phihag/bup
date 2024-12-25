@@ -517,6 +517,7 @@ var i18n_frch = {
 'displaymode|clean': 'Clean',
 'displaymode|teamcourt': 'Affichage de l\'équipe',
 'displaymode|tournamentcourt': 'Tournoi individuel',
+'displaymode|tournamentplayers': 'Tournoi individuel: Joueurs seulement',
 'displaymode|2court': '2 courts',
 'displaymode|castall': 'Greenscreen (tous les terrains)',
 'displaymode|andre': 'André',

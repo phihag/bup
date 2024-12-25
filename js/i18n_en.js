@@ -522,6 +522,7 @@ var i18n_en = {
 'displaymode|clean': 'clean',
 'displaymode|teamcourt': 'team display',
 'displaymode|tournamentcourt': 'individual tournament',
+'displaymode|tournamentplayers': 'individual tournament: players only',
 'displaymode|2court': '2 courts',
 'displaymode|castall': 'greenscreen (all courts)',
 'displaymode|andre': 'André',
