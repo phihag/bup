@@ -141,7 +141,7 @@ var i18n_frch = {
 'wonby|2': 'Deuxième set',
 'wonby|3': 'Troisième set',
 'wonby|4': 'Quatrième set',
-'wonby.match': 'Match gagné par {winner_name} {score_str}',
+'wonby.match': 'Match gagné par {winner_name} {score_str}\n\nConfirmer le résultat en cliquant.',
 'wonby.walkover': '(Walkover pour {winner_name}.\n{loser_name} ne s\'est pas présenté.)',
 'wonby.and': ' et ',
 'game(won)': 'Set',
