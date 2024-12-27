@@ -274,6 +274,7 @@ function btsh(baseurl, tournament_key) {
 				break;
 			case 'settings-update':
 				state.settings = c.val;
+				state.dads = c.val.advertisements;
 				break;
 			case 'confirm-match-finished':
 				confirm_match_finished();
