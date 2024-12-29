@@ -279,6 +279,17 @@ function btsh(baseurl, tournament_key) {
 			case 'confirm-match-finished':
 				confirm_match_finished();
 				break;
+			case 'advertisement_add':
+				state.dads.push(c.val)
+				break;
+			case 'advertisement_remove':
+				if (state.dads) {
+					const changed_t = utils.find(state.dads, m => m._id === c.val.advertisement_id);
+					if (changed_t) {
+						state.dads.splice(state.dads.indexOf(changed_t), 1);
+					}
+				}
+				break;
 			case 'courts-update':
 
 				var courts = c.val.map(function (rc) {
