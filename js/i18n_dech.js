@@ -14,7 +14,7 @@ var i18n_dech = {
 'Event Sheet': 'Resultatblatt',
 'match suspended': 'Das Spiel ist suspendiert',
 'ready to play': 'Bereit zum Spielen.',
-'wonby.match': 'Spiel gewonnen von {winner_name} {score_str}',
+'wonby.match': 'Spiel gewonnen von {winner_name} {score_str}\n\nBestätigen des Ergebnisses durch Klick.',
 'wonby.winner': ' gewonnen von {winner_name} {winner_score}-{loser_score}',
 'wonby|1': 'Erster Satz',
 'wonby|2': 'Zweiter Satz',

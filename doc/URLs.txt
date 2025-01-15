@@ -12,26 +12,26 @@ import_url=https://...  Import from the specified match URL (e.g. https://www.tu
 
 There are also many demos (which only run locally) available:
 
-demo      A one-match demo (will start right in the match)
-baydemo   Bayernliga demo (also applies to lower divisions)
-bldemo    Demo of a Bundesliga match
-bldemo_incomplete Demo of a Bundesliga match where not all players have been configured yet
-bldemo_inprogress Demo of a Bundesliga match already running
-e_bldemo  Demo of a Bundesliga match where nothing has been configured yet
-edemo     Demo of an event (empty)
-intdemo   International team match demo
-tdemo     International tournament demo
-nlademo   Demo of Swiss National League
-nrwdemo   Demo of a match in the lower divisions in NRW
-obldemo   Austrian Bundesliga demo
-rlmdemo   German Regionalliga Mitte demo
-rlndemo   German Regionalliga Nord demo
-rlsodemo  German Regionalliga SüdOst demo
-rlwdemo   German Regionalliga West demo
-tdemo     Tournament demo
-txdemo    Demo for transmission to turnier.de
-vdemo     Demo of an event (in progress)
-wdmudemo  Youth tournament demo (with lots of finals on Sunday)
+demo      			A one-match demo (will start right in the match)
+baydemo   			Bayernliga demo (also applies to lower divisions)
+bldemo    			Demo of a Bundesliga match
+bldemo_incomplete 	Demo of a Bundesliga match where not all players have been configured yet
+bldemo_inprogress 	Demo of a Bundesliga match already running
+e_bldemo  			Demo of a Bundesliga match where nothing has been configured yet
+edemo     			Demo of an event (empty)
+intdemo   			International team match demo
+tdemo     			International tournament demo
+nlademo   			Demo of Swiss National League
+nrwdemo   			Demo of a match in the lower divisions in NRW
+obldemo   			Austrian Bundesliga demo
+rlmdemo   			German Regionalliga Mitte demo
+rlndemo   			German Regionalliga Nord demo
+rlsodemo  			German Regionalliga SüdOst demo
+rlwdemo   			German Regionalliga West demo
+tdemo     			Tournament demo
+txdemo    			Demo for transmission to turnier.de
+vdemo     			Demo of an event (in progress)
+wdmudemo  			Youth tournament demo (with lots of finals on Sunday)
 
 There is also:
 
@@ -44,19 +44,19 @@ Initial UI
 
 These can be combined with any other options (but not each other), as in #bldemo&display .
 
-settings       Show settings UI (currently the default)
-nosettings     Hide settings by default (click to see)
-neversettings  Completely hide settings in displaymode
-display        Start in display mode
-referee_mode   Start in referee mode
-eventsheet=foo Show the dialog for generating the eventsheet named foo
-order          Show the match order dialog
-mo             Start with the manual order dialog (allows easy match creation and import)
+settings       				Show settings UI (currently the default)
+nosettings     				Hide settings by default (click to see)
+neversettings  				Completely hide settings in displaymode
+display        				Start in display mode
+referee_mode   				Start in referee mode
+eventsheet=foo 				Show the dialog for generating the eventsheet named foo
+order          				Show the match order dialog
+mo             				Start with the manual order dialog (allows easy match creation and import)
 
 Settings
 ========
 
-lang=LANGCODE       Set language to the specified one.
+lang=LANGCODE       		Set language to the specified one.
     LANGCODE can be one of:
       en     English
       de     German (Germany)
@@ -67,39 +67,56 @@ lang=LANGCODE       Set language to the specified one.
 court=COURTCODE     Run on the specified court. COURTCODE depends on the network. Normally, a number like 1, 2, or the string "referee".
 dm_style=STYLECODE  In display mode, start with the specified style.
 	Available styles:
-	teamcourt       Best for team matches. Supports interval timer.
-	international   Best for individual international tournaments
-	bwf		        Like international, but geared towards the BWF understanding of names ("LASTNAME, Firstname")
-	clean		    Classic style for (national) individual tournaments
-	2court          Large scores for 2 courts. Supports interval timer.
-	andre           Simple 1-court display, shows game count to the left
-	castall         Greenscreen (all courts)
-	stream          Transparent video overlay
-	streamcourt     Transparent video overlay, one court only (to be scaled in streaming software)
-	streamteam      Transparent video overlay, only team names & match result (scales by width)
-	greyish         Overview for team competitions with muted gray colors
-	oncourt         court score with teams, not colored, including points in all games
-	onlyplayers     players only
-	bwfonlyplayers  players only, in BWF definition of names ("LASTNAME, Firstname" and fixed font size)
-	onlyscore       score (all games) only
-	giantscore      score (current game + game count) only, for very small screens
-	clubplayers     team + players
-	clubplayerslr   team + players (home left / away right)
-	stripes         stripes (vertically: team names, clubs, all scores, for one court)
-	teamscore       Just team names and number of won matches
-	tim             Colored overview of a team competition
-	top+list        Current matches on top, list of all matches below
-	tournament_overview Shows all courts at once
-show_pause=BOOLEAN  Show or hide interval timers.
-                    BOOLEAN can be either "true" or "false".
-                    At the moment only supported for some styles, see above.
-team_colors=BOOLEAN Use team colors (if applicable in the given style).
-                    BOOLEAN can be either "true" or "false".
-d_c0=COLOR,         This group of options can be used to set displaymode colors.
-d_c1=COLOR,         COLOR can be an RGB color value, for instance "0f0" or "00ff00" for lime.
-d_cfg=COLOR,        d_c0 and d_c1 are the colors for the home and away team,
-d_cbg=COLOR,        d_cfg the foreground and d_bg the background color,
-d_cbg2=COLOR, ...   and there are a lot more color names available.
-                    Different styles use different color names.
-                    Hover over a color input in the displaymode or referee UI to get the color names.
-hub_url=WSURL       WebSocket URL (starting with ws:// or wss://) of the referee mode hub.
+	teamcourt       			Best for team matches. Supports interval timer.
+	international   			Best for individual international tournaments
+	bwf		        			Like international, but geared towards the BWF understanding of names ("LASTNAME, Firstname")
+	tournamentcourt 			Best for (national) individual tournaments. Supports interval timer, court number, competition, round, remove middle names and underline the receiving player in doubles.
+	tournamentplayers 			Best for (national) individual tournaments. Supports interval timer, court number, competition, round, remove middle names and underline the receiving player in doubles. Show only the Players. Use it in combination with onlyscore.
+	clean		    			Classic style for (national) individual tournaments
+	2court          			Large scores for 2 courts. Supports interval timer.
+	andre           			Simple 1-court display, shows game count to the left
+	castall         			Greenscreen (all courts)
+	stream          			Transparent video overlay
+	streamcourt     			Transparent video overlay, one court only (to be scaled in streaming software)
+	streamteam      			Transparent video overlay, only team names & match result (scales by width)
+	greyish         			Overview for team competitions with muted gray colors
+	oncourt         			court score with teams, not colored, including points in all games
+	onlyplayers     			players only
+	bwfonlyplayers  			players only, in BWF definition of names ("LASTNAME, Firstname" and fixed font size)
+	onlyscore       			score (all games) only
+	giantscore      			score (current game + game count) only, for very small screens
+	clubplayers     			team + players
+	clubplayerslr   			team + players (home left / away right)
+	stripes         			stripes (vertically: team names, clubs, all scores, for one court)
+	teamscore       			Just team names and number of won matches
+	tim             			Colored overview of a team competition
+	top+list        			Current matches on top, list of all matches below
+	tournament_overview 		Shows all courts at once
+show_pause=BOOLEAN  			Show or hide interval timers.
+                    			BOOLEAN can be either "true" or "false".
+                    			At the moment only supported for some styles, see above.
+show_court_number=BOOLEAN 		Show or hide court number. 
+                    			BOOLEAN can be either "true" or "false".
+                    			At the moment only supported for some styles, see above.
+show_competition=BOOLEAN 		Show or hide competition. 
+                    			BOOLEAN can be either "true" or "false".
+                    			At the moment only supported for some styles, see above.
+show_round=BOOLEAN 				Show or hide round. 
+                    			BOOLEAN can be either "true" or "false".
+                    			At the moment only supported for some styles, see above.
+show_middle_name=BOOLEAN 		Show or hide the middle name of the players.
+								BOOLEAN can be either "true" or "false".
+                    			At the moment only supported for some styles, see above.
+show_doubles_receiving=BOOLEAN	Underline the receiving player in doubles.
+								BOOLEAN can be either "true" or "false".
+                    			At the moment only supported for some styles, see above.
+team_colors=BOOLEAN 			Use team colors (if applicable in the given style).
+                    			BOOLEAN can be either "true" or "false".
+d_c0=COLOR,         			This group of options can be used to set displaymode colors.
+d_c1=COLOR,         			COLOR can be an RGB color value, for instance "0f0" or "00ff00" for lime.
+d_cfg=COLOR,        			d_c0 and d_c1 are the colors for the home and away team,
+d_cbg=COLOR,        			d_cfg the foreground and d_bg the background color,
+d_cbg2=COLOR, ...   			and there are a lot more color names available.
+                    			Different styles use different color names.
+                    			Hover over a color input in the displaymode or referee UI to get the color names.
+hub_url=WSURL       			WebSocket URL (starting with ws:// or wss://) of the referee mode hub.
