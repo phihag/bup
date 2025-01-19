@@ -144,7 +144,7 @@ var i18n_de = {
 'wonby|2': 'Der zweite Satz',
 'wonby|3': 'Der dritte Satz',
 'wonby|4': 'Der vierte Satz',
-'wonby.match': 'Das Spiel wurde gewonnen von {winner_name} {score_str}',
+'wonby.match': 'Das Spiel wurde gewonnen von {winner_name} {score_str}\n\nBestätigen des Ergebnisses durch Klick.',
 'wonby.walkover': '(Walkover zugunsten von {winner_name}.\n{loser_name} waren nicht anwesend.)',
 'wonby.and': ' und ',
 'game(won)': 'Satz',

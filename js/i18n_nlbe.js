@@ -56,7 +56,7 @@ var i18n_nlbe = {
 'wonby|2': 'Tweede game',
 'wonby|3': 'Derde game',
 'wonby|4': 'Vierde game',
-'wonby.match': 'Wedstrijd gewonnen door {winner_name} {score_str}',
+'wonby.match': 'Wedstrijd gewonnen door {winner_name} {score_str}\n\nHet resultaat bevestigen door te klikken.',
 'wonby.walkover': '(Walkover in favor of {winner_name}.\n{loser_name} did not show up.) <---',
 'wonby.and': ' en ',
 'game(won)': 'Game',

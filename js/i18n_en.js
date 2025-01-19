@@ -144,7 +144,7 @@ var i18n_en = {
 'wonby|2': 'Second game',
 'wonby|3': 'Third game',
 'wonby|4': 'Fourth game',
-'wonby.match': 'Match won by {winner_name} {score_str}',
+'wonby.match': 'Match won by {winner_name} {score_str}\n\nConfirming the result by clicking.',
 'wonby.walkover': '(Walkover in favor of {winner_name}.\n{loser_name} did not show up.)',
 'wonby.and': ' and ',
 'game(won)': 'Game',
