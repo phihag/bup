@@ -78,6 +78,7 @@ dm_style=STYLECODE  In display mode, start with the specified style.
 	castall         			Greenscreen (all courts)
 	stream          			Transparent video overlay
 	streamcourt     			Transparent video overlay, one court only (to be scaled in streaming software)
+	streamcourt_dm     			Transparent video overlay, one court only with additional information and ci of dm 2025 in Cloppenburg
 	streamteam      			Transparent video overlay, only team names & match result (scales by width)
 	greyish         			Overview for team competitions with muted gray colors
 	oncourt         			court score with teams, not colored, including points in all games

@@ -271,6 +271,7 @@ var i18n_frch = {
 'settings:style:complete': 'Achevée',
 'settings:style:clean': 'Nettoyer',
 'settings:style:focus': 'Concentré',
+'settings:style:hidden': 'Caché',
 
 'settings:mode:label': 'Mode:',
 'settings:mode:umpire': 'Arbitre',
@@ -534,6 +535,7 @@ var i18n_frch = {
 'displaymode|stripes': 'Bandes',
 'displaymode|stream': 'Stream',
 'displaymode|streamcourt': 'court stream',
+'displaymode|streamcourt_dm': 'Court-Stream für DM 2025',
 'displaymode|streamteam': 'stream team',
 'displaymode:court_id': 'court:',
 'displaymode:court_id:loading': 'chargement ...',
