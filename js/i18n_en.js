@@ -541,6 +541,7 @@ var i18n_en = {
 'displaymode|stream': 'stream',
 'displaymode|streamcourt': 'court stream',
 'displaymode|streamcourt_dm': 'Court-Stream for DM 2025',
+'displaymode|tournament_overview_dm': 'Current Scoresfor DM 2025',
 'displaymode|streamteam': 'stream team',
 'displaymode:court_id': 'court:',
 'displaymode:court_id:loading': 'loading ...',
