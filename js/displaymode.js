@@ -546,7 +546,7 @@ function render_tournament_overview_dm(s, container, event) {
 		style: (
 			'position:absolute;top:0vh;left:0vh;' +
 			'height:100vh;width:100vw;' + 
-			'background-color: #333333;' +
+			'background-color: #000000;' +
 			'z-index:10;'
 		),
 	});
@@ -569,8 +569,8 @@ function render_tournament_overview_dm(s, container, event) {
 
 		var logo = uiu.el(court, 'div', {
 			style: (
-				'position:absolute;top:3vh;left:18vh;' +
-				'height:14vh;width:13.6vh;' +
+				'position:absolute;top:1vh;left:2vh;' +
+				'height:18vh;width:17.6vh;' +
 				'background-repeat: no-repeat;' +
 				'background-position:center;' +
 				'background-size:contain;' +
@@ -580,8 +580,8 @@ function render_tournament_overview_dm(s, container, event) {
 		});
 		var top_bar = uiu.el(court, 'div', {
 			style: (
-				'position:absolute;top:3.84vh;left:22vh;' +
-				'height:12.32vh;' +
+				'position:absolute;top:2vh;left:7.3vh;' +
+				'height:16vh;' +
 				'z-index:-1;' +
 				'display: flex;' +
 				'flex-direction: row;'
@@ -591,7 +591,7 @@ function render_tournament_overview_dm(s, container, event) {
 		var top_bar_left = uiu.el(top_bar, 'div', {
 			style: (
 				'position:static;' +
-				'height:12.32vh;width:65vw;' +
+				'height:16vh;width:80vw;' +
 				'display: flex;' +
 				'flex-direction: column;' +
 				'justify-content: space-between;'
@@ -650,8 +650,8 @@ function render_tournament_overview_dm(s, container, event) {
 		for (var team_idx = 0;team_idx < 2;team_idx++) {
 			var team_name = uiu.el(teams[team_idx], 'div', {
 				style: (
-					'margin-left:10vh;' +
-					'font-size:4vh;' + 
+					'margin-left:12vh;' +
+					'font-size:5.5vh;' + 
 					'height: 100%;' +
 					'align-content: center;' +
 					'width: fit-content;'
@@ -663,7 +663,7 @@ function render_tournament_overview_dm(s, container, event) {
 				style: (
 					'height: 100%;' +
 					'align-content: center;' +
-					'width: 4vh;' +
+					'width: 6.5vh;' +
 					'background-repeat: no-repeat;' +
 					'background-position:center;' +
 					'background-size:contain;' +
@@ -701,7 +701,7 @@ function render_tournament_overview_dm(s, container, event) {
 				var top_bar_set = uiu.el(top_bar, 'div', {
 					style: (
 						'position:static;' +
-						'height:12.32vh;width:6.6vh;' +
+						'height:16vh;width:9vh;' +
 						'display: flex;' +
 						'flex-direction: column;' +
 						'justify-content: space-between;' +
@@ -727,7 +727,7 @@ function render_tournament_overview_dm(s, container, event) {
 						'background-color: #ffffffbb;'  +
 						'display: flex;' +
 						'justify-content: center;' + 
-						'font-size:5vh;' +
+						'font-size:7vh;' +
 						'align-items: center;'
 					),
 				}, game_idx < nscore.length ? nscore[game_idx][0] : ''));
@@ -746,7 +746,7 @@ function render_tournament_overview_dm(s, container, event) {
 						'background-color: #ffffffbb;'  +
 						'display: flex;' +
 						'justify-content: center;' + 
-						'font-size:5vh;' +
+						'font-size:7vh;' +
 						'align-items: center;'
 					),
 				}, game_idx < nscore.length ? nscore[game_idx][1] : ''));
