@@ -651,10 +651,11 @@ function render_tournament_overview_dm(s, container, event) {
 			var team_name = uiu.el(teams[team_idx], 'div', {
 				style: (
 					'margin-left:12vh;' +
-					'font-size:5.5vh;' + 
+					'font-size:6.0vh;' + 
 					'height: 100%;' +
 					'align-content: center;' +
-					'width: fit-content;'
+					'width: fit-content;' +
+					'font-weight: bold;'
 				)
 			},
 			match ? match.setup.teams[team_idx].players[0].name +(match.setup.teams[team_idx].players.length > 1 ? ' / ' + match.setup.teams[team_idx].players[1].name : '')  : '');
@@ -728,7 +729,8 @@ function render_tournament_overview_dm(s, container, event) {
 						'display: flex;' +
 						'justify-content: center;' + 
 						'font-size:7vh;' +
-						'align-items: center;'
+						'align-items: center;'+
+						'font-weight: bold;'
 					),
 				}, game_idx < nscore.length ? nscore[game_idx][0] : ''));
 
@@ -747,7 +749,8 @@ function render_tournament_overview_dm(s, container, event) {
 						'display: flex;' +
 						'justify-content: center;' + 
 						'font-size:7vh;' +
-						'align-items: center;'
+						'align-items: center;'+
+						'font-weight: bold;'
 					),
 				}, game_idx < nscore.length ? nscore[game_idx][1] : ''));
 
