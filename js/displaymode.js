@@ -2832,9 +2832,13 @@ function render_tournamentplayers(s, container, event, court, match, colors) {
 			});
 			return uiu.el(pel, 'div', (s.settings.d_show_doubles_receiving && is_doubles && is_receiver ? {style: ('text-decoration: underline;')} : {}), pname);
 		});
-
 		var right_border;
 
+		right_border = uiu.el(team_container, 'div', {
+			style: 	'position: absolute;' +
+					'right: 1vw;',
+		}, '');
+		
 		player_spans.forEach(function(ps) {
 			_setup_autosize(ps, right_border, function(parent_node) {
 				return parent_node.offsetHeight * 0.94;

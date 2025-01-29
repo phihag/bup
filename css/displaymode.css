@@ -137,6 +137,7 @@
 	font-stretch: condensed;
 	position: relative;
 	height: 50%;
+	text-wrap: nowrap;
 }
 .d_international_player_container,
 .d_tournament_player_container
