@@ -3875,7 +3875,7 @@ function update(err, s, event) {
 			} else if (event.tournament_logo_url) {
 				uiu.el(nomatch_el, 'img', {
 					src: event.tournament_logo_url,
-					style: 'max-height: 70vh; max-width: 90vw;',
+					style: 'max-height: 70vh; max-width: 90vw; height:70vh;',
 					alt: (event.tournament_name || ''),
 				});
 		
