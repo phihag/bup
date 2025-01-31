@@ -560,14 +560,15 @@ function render_tournament_overview_dm(s, container, event) {
 		var current_score = (nscore.length > 0) ? nscore[nscore.length - 1] : ['', ''];
 		var server = match ? determine_server(match, current_score) : {};
 
-		var court = uiu.el(background, 'div', {
+		var court_el = uiu.el(background, 'div', {
 			style: (
 				'position:absolute;top:'+idx*20+'vh;left:0vh;' +
 				'height:20vh;width:100vw;'
 			),
 		});
 
-		var logo = uiu.el(court, 'div', {
+
+		var logo = uiu.el(court_el, 'div', {
 			style: (
 				'position:absolute;top:1vh;left:2vh;' +
 				'height:18vh;width:17.6vh;' +
@@ -575,10 +576,17 @@ function render_tournament_overview_dm(s, container, event) {
 				'background-position:center;' +
 				'background-size:contain;' +
 				'background-image:url("icons/Ball_DM_Cloppenburg.svg");'+
-				'z-index:10;'
-			),
-		});
-		var top_bar = uiu.el(court, 'div', {
+				'z-index:10;'+
+				'font-size: 15vh;'+
+				'color: #000;'+
+    			'display: flex;'+
+    			'justify-content: center;'+
+    			'align-items: center;'+
+    			'font-weight: bold;'+
+    			'font-style: oblique;'
+			), 
+		}, idx+1);
+		var top_bar = uiu.el(court_el, 'div', {
 			style: (
 				'position:absolute;top:2vh;left:7.3vh;' +
 				'height:16vh;' +
