@@ -567,15 +567,11 @@ function render_tournament_overview_dm(s, container, event) {
 			),
 		});
 
-
+/*
 		var logo = uiu.el(court_el, 'div', {
 			style: (
 				'position:absolute;top:1vh;left:2vh;' +
 				'height:18vh;width:17.6vh;' +
-				'background-repeat: no-repeat;' +
-				'background-position:center;' +
-				'background-size:contain;' +
-				'background-image:url("icons/Ball_DM_Cloppenburg.svg");'+
 				'z-index:10;'+
 				'font-size: 15vh;'+
 				'color: #000;'+
@@ -585,10 +581,10 @@ function render_tournament_overview_dm(s, container, event) {
     			'font-weight: bold;'+
     			'font-style: oblique;'
 			), 
-		}, idx+1);
+		}, idx+1);*/
 		var top_bar = uiu.el(court_el, 'div', {
 			style: (
-				'position:absolute;top:2vh;left:7.3vh;' +
+				'position:absolute;top:2vh;left:2vw;' +
 				'height:16vh;' +
 				'z-index:-1;' +
 				'display: flex;' +
@@ -596,13 +592,65 @@ function render_tournament_overview_dm(s, container, event) {
 			),
 		});
 		
-		var top_bar_left = uiu.el(top_bar, 'div', {
+
+		var top_bar_court = uiu.el(top_bar, 'div', {
 			style: (
 				'position:static;' +
-				'height:16vh;width:80vw;' +
+				'height:16vh;width:10vw;' +
 				'display: flex;' +
 				'flex-direction: column;' +
 				'justify-content: space-between;'
+			),
+		});
+
+		uiu.el(top_bar_court, 'div', {
+			style: (
+				'position:static;' +
+				'height:5%;width:100%;' +
+				'background-color: #ffffff;' +
+				'border-top-right-radius: 1vh;'+
+				'border-top-left-radius: 1vh;'
+			),
+		});
+
+		var court_number = uiu.el(top_bar_court, 'div', {
+			style: (
+				'position:static;' +
+				'height:90%;width:100%;' +
+				'background-color: #ffffffbb;'  +
+				'text-align: center;'
+			),
+		});
+
+		uiu.el(court_number, 'div', {
+			style: (
+				'font-size: 12.5vh;'+
+				'height: 100%;' +
+    			'font-weight: bold;' +
+    			'font-style: oblique;'
+			),
+		},idx+1);
+
+		uiu.el(top_bar_court, 'div', {
+			style: (
+				'position:static;' +
+				'height:5%;width:100%;' +
+				'background-color: #ffffff;' +
+				'border-bottom-right-radius: 1vh;'+
+				'border-bottom-left-radius: 1vh;'
+			),
+		});
+
+		
+
+		var top_bar_left = uiu.el(top_bar, 'div', {
+			style: (
+				'position:static;' +
+				'height:16vh;width:70vw;' +
+				'display: flex;' +
+				'flex-direction: column;' +
+				'justify-content: space-between;' +
+				'margin-left: 0.5vh;'
 			),
 		});
 				
@@ -611,7 +659,8 @@ function render_tournament_overview_dm(s, container, event) {
 				'position:static;' +
 				'height:5%;width:100%;' +
 				'background-color: #ffffff;' +
-				'border-top-right-radius: 1vh;'
+				'border-top-right-radius: 1vh;'+
+				'border-top-left-radius: 1vh;'
 			),
 		});
 		
@@ -650,6 +699,7 @@ function render_tournament_overview_dm(s, container, event) {
 				'position:static;' +
 				'height:5%;width:100%;' +
 				'background-color: #ffffff;' +
+				'border-bottom-left-radius: 1vh;'+
 				'border-bottom-right-radius: 1vh;'
 			),
 		});
@@ -658,7 +708,7 @@ function render_tournament_overview_dm(s, container, event) {
 		for (var team_idx = 0;team_idx < 2;team_idx++) {
 			var team_name = uiu.el(teams[team_idx], 'div', {
 				style: (
-					'margin-left:12vh;' +
+					'margin-left:1vh;' +
 					'font-size:6.0vh;' + 
 					'height: 100%;' +
 					'align-content: center;' +
