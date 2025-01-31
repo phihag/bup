@@ -28,6 +28,7 @@ var ALL_STYLES = [
 	'streamteam',
 	'tournament_overview',
 	'tournament_overview_dm',
+	'tournament_overview_dm_finals',
 	'andre',
 ];
 var ALL_COLORS = [
@@ -832,7 +833,357 @@ function render_tournament_overview_dm(s, container, event) {
 	});
 }
 
+	function render_tournament_overview_dm_finals(s, container, event) {
+		var max_game_count = _calc_max_games(event);
+		var colors = calc_colors(s.settings, event);
 
+		var background = uiu.el(container, 'div', {
+			style: (
+				'position:absolute;top:0vh;left:0vh;' +
+				'height:100vh;width:100vw;' +
+				'background-color: #000000;' +
+				'z-index:10;'
+			),
+		});
+
+		var courts = [1, 0, 2];
+		var duration = -1;
+		courts.forEach(function (id , idx) {
+			var match = _match_by_court(event, event.courts[id]);
+			if (match != null) {
+				if (match.presses_json && match.presses_json != null) {
+
+
+					var presses = JSON.parse(match.presses_json);
+					const foundpress = presses.find(press => press.type === "love-all");
+					if (foundpress && foundpress != null) {
+						var start = foundpress.timestamp;
+						duration = Math.floor((Date.now() - start) / 1000/60);
+					}
+					
+
+				}
+			}
+			var nscore = (match ? match.network_score : 0) || [];
+
+			var counting = match ? match.setup.counting : eventutils.default_counting(event.league_key);
+			var max_games = counting ? calc.max_game_count(counting) : 0;
+			var current_score = (nscore.length > 0) ? nscore[nscore.length - 1] : ['', ''];
+			var server = match ? determine_server(match, current_score) : {};
+
+			var court_el = uiu.el(background, 'div', {
+				style: (
+					'position:absolute;top:' + idx * 33 + 'vh;left:0vh;' +
+					'height:20vh;width:100vw;'
+				),
+			});
+
+			/*
+					var logo = uiu.el(court_el, 'div', {
+						style: (
+							'position:absolute;top:1vh;left:2vh;' +
+							'height:18vh;width:17.6vh;' +
+							'z-index:10;'+
+							'font-size: 15vh;'+
+							'color: #000;'+
+							'display: flex;'+
+							'justify-content: center;'+
+							'align-items: center;'+
+							'font-weight: bold;'+
+							'font-style: oblique;'
+						), 
+					}, idx+1);*/
+			var top_bar = uiu.el(court_el, 'div', {
+				style: (
+					'position:absolute;top:2vh;left:2vw;' +
+					'height:16vh;' +
+					'z-index:-1;' +
+					'display: flex;' +
+					'flex-direction: row;'
+				),
+			});
+
+
+			var top_bar_court = uiu.el(top_bar, 'div', {
+				style: (
+					'position:static;' +
+					'height:30vh;width:18vw;' +
+					'display: flex;' +
+					'flex-direction: column;' +
+					'justify-content: space-between;'
+				),
+			});
+
+			uiu.el(top_bar_court, 'div', {
+				style: (
+					'position:static;' +
+					'height:3%;width:100%;' +
+					'background-color: #ffffff;' +
+					'border-top-right-radius: 1vh;' +
+					'border-top-left-radius: 1vh;'
+				),
+			});
+
+			var court_number = uiu.el(top_bar_court, 'div', {
+				style: (
+					'position:static;' +
+					'height:94%;width:100%;' +
+					'background-color: #ffffffbb;' +
+					'text-align: center;'
+				),
+			});
+
+			uiu.el(court_number, 'div', {
+				style: (
+					'font-size: 12.5vh;' +
+					'font-weight: bold;' +
+					'font-style: oblique;'
+				),
+			}, id + 1);
+
+			uiu.el(court_number, 'div', {
+				style: (
+					'font-size: 4vh;' +
+					'font-weight: bold;' +
+					'font-style: oblique;'
+				),
+			}, (match && match.setup) ? match.setup.event_name+' - '+match.setup.match_name : "");
+
+
+			uiu.el(court_number, 'div', {
+				style: (
+					'font-size: 6vh;' +
+					'font-weight: bold;' +
+					'font-style: oblique;'
+				),
+			}, (duration == -1 ) ? "" : duration+"'");
+
+			uiu.el(top_bar_court, 'div', {
+				style: (
+					'position:static;' +
+					'height:3%;width:100%;' +
+					'background-color: #ffffff;' +
+					'border-bottom-right-radius: 1vh;' +
+					'border-bottom-left-radius: 1vh;'
+				),
+			});
+
+
+
+			var top_bar_left = uiu.el(top_bar, 'div', {
+				style: (
+					'position:static;' +
+					'height:30vh;width:55vw;' +
+					'display: flex;' +
+					'flex-direction: column;' +
+					'justify-content: space-between;' +
+					'margin-left: 0.5vh;'
+				),
+			});
+
+			var border_top = uiu.el(top_bar_left, 'div', {
+				style: (
+					'position:static;' +
+					'height:3%;width:100%;' +
+					'background-color: #ffffff;' +
+					'border-top-right-radius: 1vh;' +
+					'border-top-left-radius: 1vh;'
+				),
+			});
+
+			var teams = [];
+
+			teams.push(uiu.el(top_bar_left, 'div', {
+				style: (
+					'position:static;' +
+					'height:46%;width:100%;' +
+					'background-color: #ffffffbb;' +
+					'display: flex;' +
+					'justify-content: space-between;'
+				),
+			}));
+
+			var border_middle = uiu.el(top_bar_left, 'div', {
+				style: (
+					'position:static;' +
+					'height:2%;width:100%;'
+				),
+			});
+
+
+			teams.push(uiu.el(top_bar_left, 'div', {
+				style: (
+					'position:static;' +
+					'height:46%;width:100%;' +
+					'background-color: #ffffffbb;' +
+					'display: flex;' +
+					'justify-content: space-between;'
+				),
+			}));
+
+			var border_bottom = uiu.el(top_bar_left, 'div', {
+				style: (
+					'position:static;' +
+					'height:3%;width:100%;' +
+					'background-color: #ffffff;' +
+					'border-bottom-left-radius: 1vh;' +
+					'border-bottom-right-radius: 1vh;'
+				),
+			});
+
+			var team_service = [];
+			for (var team_idx = 0; team_idx < 2; team_idx++) {
+
+				var team_name = uiu.el(teams[team_idx], 'div', {
+					style: (
+						'margin-left:1vh;' +
+						'height: 100%;' +
+						'display: flex;' +
+						'justify-content: center;' +
+						'flex-direction: column;' 
+					)
+				});
+
+				uiu.el(team_name, 'div', {
+					style: (
+						'margin-left:1vh;' +
+						'font-size:6.0vh;' +
+						'height: 100%;' +
+						'align-content: center;' +
+						'width: fit-content;' +
+						'font-weight: bold;'
+					)
+				},
+					match ? match.setup.teams[team_idx].players[0].name :  '');
+
+				if (match && match.setup.teams[team_idx].players.length > 1) {
+					uiu.el(team_name, 'div', {
+						style: (
+							'margin-left:1vh;' +
+							'font-size:6.0vh;' +
+							'height: 100%;' +
+							'align-content: center;' +
+							'width: fit-content;' +
+							'font-weight: bold;'
+						)
+					},
+						match.setup.teams[team_idx].players[1].name  );
+				}
+
+				let service = uiu.el(teams[team_idx], 'div', {
+					style: (
+						'height: 100%;' +
+						'align-content: center;' +
+						'width: 6.5vh;' +
+						'background-repeat: no-repeat;' +
+						'background-position:center;' +
+						'background-size:contain;' +
+						'background-image:url("icons/Ball_DM_Cloppenburg_schwarz.svg");'
+					)
+				});
+
+				service.style.visibility = "hidden";
+
+				team_service.push(service);
+
+			}
+
+			var sets = [];
+
+			var team_serving = -1;
+
+			// for (var game_idx = 0;game_idx < max_games;game_idx++) {
+			for (var game_idx = 0; game_idx < 3; game_idx++) {
+				if (nscore.length > game_idx) {
+					for (var team_idx = 0; team_idx < 2; team_idx++) {
+						var gwinner = calc.game_winner(
+							match.setup.counting, game_idx, nscore[game_idx][0], nscore[game_idx][1]);
+						var is_team_serving = (
+							(gwinner === 'left') ? (team_idx === 0) : (
+								(gwinner === 'right') ? (team_idx === 1) : (
+									(server.team_id === team_idx))));
+
+						if (is_team_serving) {
+							team_serving = team_idx;
+							console.log(team_serving);
+						}
+					}
+				}
+
+				var top_bar_set = uiu.el(top_bar, 'div', {
+					style: (
+						'position:static;' +
+						'height:30vh;width:8vw;' +
+						'display: flex;' +
+						'flex-direction: column;' +
+						'justify-content: space-between;' +
+						'margin-left: 0.5vh;'
+					),
+				});
+
+				uiu.el(top_bar_set, 'div', {
+					style: (
+						'position:static;' +
+						'height:3%;width:100%;' +
+						'background-color: #ffffff;' +
+						'border-top-left-radius: 1vh;' +
+						'border-top-right-radius: 1vh;'
+					),
+				});
+
+				let set = [];
+				set.push(uiu.el(top_bar_set, 'div', {
+					style: (
+						'position:static;' +
+						'height:46%;width:100%;' +
+						'background-color: #ffffffbb;' +
+						'display: flex;' +
+						'justify-content: center;' +
+						'font-size:10vh;' +
+						'align-items: center;' +
+						'font-weight: bold;'
+					),
+				}, game_idx < nscore.length ? nscore[game_idx][0] : ''));
+
+				uiu.el(top_bar_set, 'div', {
+					style: (
+						'position:static;' +
+						'height:2%;width:100%;'
+					),
+				});
+
+				set.push(uiu.el(top_bar_set, 'div', {
+					style: (
+						'position:static;' +
+						'height:46%;width:100%;' +
+						'background-color: #ffffffbb;' +
+						'display: flex;' +
+						'justify-content: center;' +
+						'font-size:10vh;' +
+						'align-items: center;' +
+						'font-weight: bold;'
+					),
+				}, game_idx < nscore.length ? nscore[game_idx][1] : ''));
+
+				uiu.el(top_bar_set, 'div', {
+					style: (
+						'position:static;' +
+						'height:3%;width:100%;' +
+						'background-color: #ffffff;' +
+						'border-bottom-left-radius: 1vh;' +
+						'border-bottom-right-radius: 1vh;'
+					),
+				});
+
+				sets.push(set);
+			}
+
+			if (team_serving >= 0) {
+				team_service[team_serving].style.visibility = 'visible';
+			}
+
+		});
+	}
 
 
 
@@ -3974,6 +4325,7 @@ function update(err, s, event) {
 		greyish: render_greyish,
 		tournament_overview: render_tournament_overview,
 		tournament_overview_dm: render_tournament_overview_dm,
+		tournament_overview_dm_finals: render_tournament_overview_dm_finals,
 		tim: render_tim,
 		teamscore: render_teamscore,
 		stream: render_stream,
@@ -4192,6 +4544,7 @@ function option_applies(style_id, option_name) {
 		tim: ['cbg', 'cfg', 'ctim_blue', 'ctim_active'],
 		tournament_overview: ['cfg', 'cbg', 'cbg3', 'cborder', 'cfg2'],
 		tournament_overview_dm: ['cfg', 'cbg', 'cbg3', 'cborder', 'cfg2'],
+		tournament_overview_dm_finals: ['cfg', 'cbg', 'cbg3', 'cborder', 'cfg2'],
 		stripes: ['court_id', 'cbg', 'team_colors', 'c0', 'c1', 'cfg', 'cfgdark', 'cbg4', 'cserv'],
 	};
 	var bs = BY_STYLE[style_id];

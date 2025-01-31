@@ -544,6 +544,7 @@ var i18n_de = {
 'displaymode|streamcourt': 'Court-Stream',
 'displaymode|streamcourt_dm': 'Court-Stream für DM 2025',
 'displaymode|tournament_overview_dm': 'Aktuelle Spielstände für DM 2025',
+'displaymode|tournament_overview_dm_finals': 'Aktuelle Spielstände für DM 2025 - Finals',
 'displaymode|streamteam': 'Stream-Team',
 'displaymode:court_id': 'Court:',
 'displaymode:court_id:loading': 'lade ...',
