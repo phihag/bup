@@ -700,8 +700,8 @@ function sheet_render(s, svg) {
 	}
 
 	_text('.scoresheet_court_id', compat.courtnum(s.match.court_id ? s.match.court_id : s.setup.court_id));
-	_text('.scoresheet_umpire_name', s.match.umpire_name ? s.match.umpire_name : s.setup.umpire_name);
-	_text('.scoresheet_service_judge_name', s.match.service_judge_name ? s.match.service_judge_name : s.setup.service_judge_name);
+	_text('.scoresheet_umpire_name', s.match.umpire_name ? s.match.umpire_name : (s.setup.umpire &&  s.setup.umpire.name ? s.setup.umpire.name : ""));
+	_text('.scoresheet_service_judge_name', s.match.service_judge_name ? s.match.service_judge_name : (s.setup.service_judge && s.setup.service_judge.name ? s.setup.service_judge.name : ""));
 
 	_text('.scoresheet_begin_value', ((s.metadata.start && !s.match.walkover) ? utils.time_str(s.metadata.start) : ''));
 	if (s.match.finished) {
