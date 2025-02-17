@@ -1,7 +1,8 @@
 'use strict';
-// BTS support (https://github.com/phihag/bts/) via HTTP
+// BTS support (https://github.com/phihag/bts/) via HTTP & WebSocket
 
 function btsh(baseurl, tournament_key) {
+
 var battery;
 if (!battery && (typeof navigator != 'undefined') && navigator.getBattery) {
 	navigator.getBattery().then(function(bat) {
@@ -165,13 +166,17 @@ function fetch_courts(s, callback) {
 	});
 }
 
-function ui_init() {
+function ui_init(s, hash_query) {
 	if (!baseurl) {
 		baseurl = '../';
 	}
 	var m = window.location.pathname.match(/^(.*\/)bup\/(?:bup\.html|index\.html)?$/);
 	if (m) {
 		baseurl = m[1];
+	}
+
+	if (hash_query.btsws !== undefined) {
+		btsws.init(s, baseurl);
 	}
 }
 
@@ -203,6 +208,7 @@ return {
 
 /*@DEV*/
 if ((typeof module !== 'undefined') && (typeof require !== 'undefined')) {
+	var btsws = require('./btsws');
 	var calc = require('./calc');
 	var displaymode = require('./displaymode');
 	var eventutils = require('./eventutils');
