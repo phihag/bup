@@ -382,7 +382,7 @@ _describe('btde', function() {
 		assert.strictEqual(b._get_league_key('(015) Landesliga Süd 2'), 'NRW-O19-S2-LL-015-2016');
 		assert.strictEqual(b._get_league_key('NLA'), 'NLA-2019');
 		assert.strictEqual(b._get_league_key('NLB'), 'NLA-2019');
-		assert.strictEqual(b._get_league_key('1. Bundesliga'), 'OBL-2017');
+		assert.strictEqual(b._get_league_key('1. Bundesliga'), 'OBL-2024');
 		assert.strictEqual(b._get_league_key('(001) Regionalliga SüdOst'), 'RLSO-2019');
 
 		assert(! b._get_league_key('foo bar'));
