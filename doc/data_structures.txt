@@ -62,6 +62,7 @@ counting        Default counting scheme. Implicitly set by league_key.
                   "5x11_11"    UAE (5x11 sudden death)
                   "1x21"       One Game (1x21)
                   "1x11_15"    One Game 2016 Experiment Option 1 (1x11 until max. 15)
+                  "3x11_15"    Shortened (3x11 until max. 15)
                   "3x15_18"    Shortened (3x15 until max. 18)
 location        Location name and address as a string, e.g. "SpH Steinbreche"
 loc_coords      Location geocoordinates, e.g. {"lat" : 50.9582384, "lng" : 7.1118084"}
