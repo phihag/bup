@@ -150,6 +150,10 @@ function btsh(baseurl, tournament_key) {
 		ws_send({ type: 'score_update', tournament_key: tournament_key, score: score });
 	}
 
+	async function send_command_done(command) {
+		ws_send({ type: 'command_done', tournament_key: tournament_key, wait_for_command: command})
+	}
+
 	function confirm_match_finished() {
 		if (state.match && state.match.team1_won && state.metadata.end && state.metadata.end != null){
 			control.post_match_confirm(state);
@@ -300,6 +304,7 @@ function btsh(baseurl, tournament_key) {
 					if (rc.match_id) {
 						res.match_id = 'bts_' + rc.match_id;
 					}
+					send_command_done(c);
 					return res;
 				});
 				courts.push({
@@ -315,6 +320,7 @@ function btsh(baseurl, tournament_key) {
 			default:
 				break;
 		}
+		send_command_done(c);
 	}
 
 	function reload_match_information() {

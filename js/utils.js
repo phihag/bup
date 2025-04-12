@@ -505,6 +505,9 @@ function cmp(a, b) {
 
 function cmp_key(key) {
 	return function(x, y) {
+		if(!isNaN(Number(x[key])) && !isNaN(Number(y[key]))) {
+			return cmp(Number(x[key]), Number(y[key]));
+		}
 		return cmp(x[key], y[key]);
 	};
 }
