@@ -544,9 +544,9 @@ function _court_by_id(all_courts, court_id) {
 }
 
 function _court_pick_dialog(s, all_courts, on_cancel) {
-	bupui.make_pick(s, s._('Select Court'), all_courts, function(c) {
-		_set_court(s, c);
-	}, on_cancel, uiu.qs('body'), 5);
+	//bupui.make_pick(s, s._('Select Court'), all_courts, function(c) {
+	//	_set_court(s, c);
+	//}, on_cancel, uiu.qs('body'), 5);
 }
 
 function ui_init_court(s, hash_query) {

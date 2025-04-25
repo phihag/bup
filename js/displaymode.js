@@ -2966,9 +2966,21 @@ function render_teamscore(s, container, event, colors) {
 	});
 }
 
+function sleepSync(ms) {
+	const end = Date.now() + ms;
+	while (Date.now() < end) {
+	  // tut nichts – blockiert einfach alles
+	}
+  }
+
+
 var timer_alternative_text = [];
 
 function render_tournamentcourt(s, container, event, court, match, colors) {
+
+	//sleepSync(3000); // blockiert synchron für 3 Sekunden
+
+
 	var nscore = extract_netscore(match);
 	var gscore = _gamescore_from_netscore(nscore, match.setup);
 	var is_doubles = match.setup.is_doubles;
@@ -3117,6 +3129,7 @@ function render_tournamentcourt(s, container, event, court, match, colors) {
 			});
 		});
 	});
+	console.log("RENDERN is DONE!");
 }
 
 function render_tournamentplayers(s, container, event, court, match, colors) {
@@ -4546,6 +4559,7 @@ function option_applies(style_id, option_name) {
 		tournament_overview_dm: ['cfg', 'cbg', 'cbg3', 'cborder', 'cfg2'],
 		tournament_overview_dm_finals: ['cfg', 'cbg', 'cbg3', 'cborder', 'cfg2'],
 		stripes: ['court_id', 'cbg', 'team_colors', 'c0', 'c1', 'cfg', 'cfgdark', 'cbg4', 'cserv'],
+		umpire: ['fullscreen_ask', 'shuttle_counter', 'show_announcements', 'negative_timers', 'editmode_doubleclick', 'click_mode', 'button_block_timeout', 'network_timeout', 'network_update_interval', 'style'],
 	};
 	var bs = BY_STYLE[style_id];
 	if (bs) {

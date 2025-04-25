@@ -154,8 +154,8 @@ function btsh(baseurl, tournament_key) {
 		ws_send({ type: 'command_done', tournament_key: tournament_key, wait_for_command: command})
 	}
 
-	function confirm_match_finished() {
-		if (state.match && state.match.team1_won && state.metadata.end && state.metadata.end != null){
+	function confirm_match_finished() {		
+		if (state.match && (state.match.team1_won != null) && state.metadata.end && state.metadata.end != null){
 			control.post_match_confirm(state);
 		}	
 	}
@@ -230,7 +230,6 @@ function btsh(baseurl, tournament_key) {
 	                    callback();
 	                }
 	            } else {
-	                console.log("wait for connection...")
 	                waitForSocketConnection(socket, callback);
 	            }
 

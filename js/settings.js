@@ -277,7 +277,7 @@ function update_court_settings(s) {
 	var automatic = false;
 	var manual = false;
 	if (get_mode(s) === 'umpire') {
-		automatic = uiu.qs('.settings select[name="court_select"]').getAttribute('data-auto-available') === 'true';
+		automatic = true; //uiu.qs('.settings select[name="court_select"]').getAttribute('data-auto-available') === 'true';
 		manual = ! automatic;
 	}
 	uiu.$visible_qs('.settings_court_manual', manual);
@@ -529,7 +529,7 @@ function on_mode_change(s) {
 				} else {
 					if (styles) {
 						visible = false;
-					} else if ((settings_style === 'clean') || (settings_style === 'focus')) {
+					} else if ((settings_style === 'clean') || (settings_style === 'focus')|| (settings_style === 'hidden')) {
 						visible = false;
 					} // else: complete, everything visible
 				}

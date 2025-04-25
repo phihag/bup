@@ -221,7 +221,7 @@
 	<button class="go_editmode_button" data-i18n="settings:Edit Manually"></button>
 </div>
 
-<div class="setup" data-bup-modes="umpire" data-bup-styles="clean focus complete">
+<div class="setup" data-bup-modes="umpire" data-bup-styles="clean focus complete hidden">
 	<div class="setup_network_container default-invisible">
 	<div class="setup_network_message"></div>
 	<h2 class="setup_network_heading"><span class="setup_network_event" data-i18n="settings:Matches"></span><button class="setup_network_matches_reload image-button"><span></span></button><div class="setup_network_status"></div></h2>
@@ -323,12 +323,12 @@
 	</div>
 </div>
 
-<div class="default-invisible" data-bup-modes="umpire" data-bup-styles="clean focus" style="height:6em;"></div>
+<div class="default-invisible" data-bup-modes="umpire" data-bup-styles="clean focus hidden" style="height:6em;"></div>
 
 <div class="settings">
 
 <div class="d_login_links"></div><button data-bup-modes="display" class="d_hide_settings" data-i18n="displaymode:hide settings"></button>
-<h2 data-i18n="settings:Settings"></h2>
+<label data-bup-modes="umpire" data-bup-styles="complete clean focus"><h2 data-i18n="settings:Settings"></h2></label>
 
 <label data-bup-modes="display umpire"><span data-i18n="settings:refmode:client:status"></span><input type="checkbox" name="refmode_client_enabled" class="refmode_client_settings"/><span class="refmode_status"></span></label>
 <div class="settings_refmode_client_container default-invisible">
@@ -377,7 +377,7 @@
 <label data-bup-modes="umpire display referee"><span data-i18n="settings:Network Timeout"></span>: <input type="number" name="network_timeout" min="1" value="1000" max="600000" /></label>
 <label data-bup-modes="umpire"><span data-i18n="settings:Network Repeat Interval"></span>: <input type="number" name="network_update_interval" min="1" value="10000" max="600000" /></label>
 <label class="default-invisible" data-bup-modes="display"><span data-i18n="settings:Network Repeat Interval"></span>: <input type="number" name="displaymode_update_interval" min="1" value="500" max="600000" /></label>
-<label data-bup-modes="umpire" data-bup-styles="complete clean focus"><span data-i18n="settings:style"></span>: <select name="settings_style"><option data-i18n="settings:style:default" value="default"></option><option data-i18n="settings:style:complete" value="complete"></option><option data-i18n="settings:style:clean" value="clean"></option><option data-i18n="settings:style:focus" value="focus"></option></select></label>
+<label data-bup-modes="umpire" data-bup-styles="complete clean focus hidden"><span data-i18n="settings:style"></span>: <select name="settings_style"><option data-i18n="settings:style:default" value="default"></option><option data-i18n="settings:style:complete" value="complete"></option><option data-i18n="settings:style:clean" value="clean"></option><option data-i18n="settings:style:focus" value="focus"></option><option disabled data-i18n="settings:style:hidden" value="hidden"></option></select></label>
 </div>
 
 <div class="settings_mode" data-bup-modes="umpire display referee"><span data-i18n="settings:mode:label"></span>
