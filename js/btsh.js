@@ -278,6 +278,8 @@ function btsh(baseurl, tournament_key) {
 			case 'settings-update':
 				state.settings = c.val;
 				state.dads = c.val.advertisements;
+				settings.update(state);
+				settings.on_mode_change(state);
 				break;
 			case 'confirm-match-finished':
 				confirm_match_finished();
@@ -294,7 +296,6 @@ function btsh(baseurl, tournament_key) {
 				}
 				break;
 			case 'courts-update':
-
 				var courts = c.val.map(function (rc) {
 					var res = {
 						id: rc._id,
@@ -314,6 +315,12 @@ function btsh(baseurl, tournament_key) {
 				state.btsh_courts = courts;
 				if (bts_update_courts_callback && bts_update_courts_callback != null) {
 					bts_update_courts_callback(null, state.btsh_courts);
+				}
+				if(state.settings.devicemode == "umpire") {
+					settings.show();
+					settings.on_mode_change(state);
+				} else {
+					settings.hide_displaymode();
 				}
 				break;
 			default:

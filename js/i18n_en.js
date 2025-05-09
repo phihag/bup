@@ -230,7 +230,7 @@ var i18n_en = {
 'settings:style:complete': 'Complete',
 'settings:style:clean': 'Clean',
 'settings:style:focus': 'Focus Mode',
-'settings:style:hidden': 'Hidden Mode',
+'settings:style:hidden': 'Hidden Mode (central administration)',
 
 'settings:warmup': 'Warmup:',
 'settings:warmup:bwf-2016': 'BWF 2016+ (120s, ready after 90s)',

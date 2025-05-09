@@ -372,15 +372,20 @@ function ui_list_matches(s, silent, no_timer) {
 			return;
 		}
 
-		update_event(s, event);
+		if(event){
+			update_event(s, event);
+		}
+		
 
 		eventsheet.render_links(s, uiu.qs('.setup_eventsheets'));
 		urlexport.render_links(s, uiu.qs('.urlexport_links'));
 		var editable = netw.editable(s);
-		var use_setupsheet = event.team_competition;
+		var use_setupsheet = event ? event.team_competition : false;
 		uiu.visible_qs('.setupsheet_link', editable && use_setupsheet);
 		uiu.visible_qs('.editevent_link', editable && !use_setupsheet);
-		ui_render_matchlist(s, event);
+		if(event){
+			ui_render_matchlist(s, event);
+		}
 	}, function(s) {
 		return no_timer ? 'abort' : s.settings.network_update_interval;
 	});

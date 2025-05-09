@@ -61,7 +61,7 @@ var default_settings = {
 	refmode_referee_ws_url: 'wss://live.aufschlagwechsel.de/refmode_hub/',
 	refmode_client_node_name: '',
 	referee_service_judges: false,
-	settings_style: 'default',
+	style: 'default',
 };
 
 function load() {
@@ -196,12 +196,12 @@ function update_court(s) {
 }
 
 function update_refclient(s) {
-	var settings_style = get_settings_style(s);
+	var style = get_settings_style(s);
 
 	var ref_ui_visible = (
 		(get_mode(s) !== 'referee')
 		&& s.settings.refmode_client_enabled
-		&& settings_style === 'complete');
+		&& style === 'complete');
 	uiu.$visible_qs(
 		'.settings_refmode_client_container', ref_ui_visible);
 	refmode_client_ui.on_settings_change(s);
@@ -270,7 +270,7 @@ var _settings_selects = [
 	'language',
 	'wakelock',
 	'dads_mode',
-	'settings_style',
+	'style',
 ];
 
 function update_court_settings(s) {
@@ -303,6 +303,11 @@ function update(s) {
 	_settings_selects.forEach(function(name) {
 		var $select = $('.settings [name="' + name + '"]');
 		$select.val(s.settings[name]);
+		if(name === 'style' && s.settings[name] == 'hidden') {
+			$select[0].disabled = true;
+		} else {
+			$select[0].disabled = false;
+		}
 	});
 
 	update_court(s);
@@ -392,7 +397,7 @@ function on_change(s, name) {
 	case 'fullscreen_ask':
 		fullscreen.update_fullscreen_button();
 		break;
-	case 'settings_style':
+	case 'style':
 		on_mode_change(s);
 		break;
 	}
@@ -500,7 +505,7 @@ function get_mode(s) {
 }
 
 function get_settings_style(s) {
-	var res = s.settings.settings_style;
+	var res = s.settings.style;
 	if (res === 'default') {
 		var netw = network.get_netw();
 		res = (netw && netw.limited_ui) ? 'clean' : 'complete';

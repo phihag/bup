@@ -753,7 +753,6 @@ function render_tournament_overview_dm(s, container, event) {
 
 					if(is_team_serving) {
 						team_serving = team_idx;
-						console.log(team_serving);
 					}
 				}
 			}
@@ -1105,7 +1104,6 @@ function render_tournament_overview_dm(s, container, event) {
 
 						if (is_team_serving) {
 							team_serving = team_idx;
-							console.log(team_serving);
 						}
 					}
 				}
@@ -1832,7 +1830,6 @@ function render_streamcourt_dm(s, container, event/*, colors*/) {
 
 				if(is_team_serving) {
 					team_serving = team_idx;
-					console.log(team_serving);
 				}
 			}
 			
@@ -1942,8 +1939,6 @@ function render_streamcourt_dm(s, container, event/*, colors*/) {
 		),
 	}, s._('Court') + ' ' + (court.label || court.num || court.court_id));
 
-
-	console.log();
 	uiu.el(top_bar_right, 'div', {
 		style: (
 			'position:static;' +
@@ -3129,7 +3124,6 @@ function render_tournamentcourt(s, container, event, court, match, colors) {
 			});
 		});
 	});
-	console.log("RENDERN is DONE!");
 }
 
 function render_tournamentplayers(s, container, event, court, match, colors) {
