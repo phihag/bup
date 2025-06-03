@@ -1121,22 +1121,9 @@ function netscore(s, always_zero) {
 	if (s.match.finished && !s.match.won_by_score) {
 		if (scores.length > 0) {
 			var last_score = scores[scores.length - 1];
-			if (game_winner(counting, scores.length - 1, last_score[0], last_score[1]) === 'inprogress') {
-				_finish_score(scores.length - 1, last_score, s.match.team1_won);
-			}
 		}
 
 		var max_games = max_game_count(counting);
-		while (scores.length < max_games) {
-			var mwinner = match_winner(counting, scores);
-			if ((mwinner == 'left') || (mwinner == 'right')) {
-				break;
-			}
-
-			var new_score = [0, 0];
-			_finish_score(scores.length, new_score, s.match.team1_won);
-			scores.push(new_score);
-		}
 	}
 
 	return scores;
