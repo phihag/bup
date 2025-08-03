@@ -1,9 +1,24 @@
+BWF new counting
+
+issue with flags?
+https://github.com/phihag/bup/issues/46
+
+
+fix background in tournament overview
+
+checklist for android devices
+	disable updates
+	disable sleep
+	screen lock
+	VNC server
 
 WebSocket conn
 	server needs to ping regularly
 	server show clients
 
-show battery percentage
+show battery percentage in UI if available
+
+check that fullscreen button is always visible
 
 
 displaymde: mouse cursor on pi
@@ -29,6 +44,7 @@ BerndW tde_export
 
 show pause state on buttons
 
+bup internal log of actions?
 
 logo Neuhausen-Nymphenburg
 
