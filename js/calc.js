@@ -916,9 +916,18 @@ function state(s) {
 	var counting = s.setup.counting;
 	var game_idx = s.match.finished_games.length;
 
+	console.log(s);
+
 	if (! s.game.finished) {
 		var team_id; // No let in modern browsers :(
-		if ((counting === '3x21') || ((counting === '2x21+11') && (game_idx < 2))) {
+		
+		
+		
+		if (s.scoring_format) {
+			if (s.game.team1_serving) && (s.game.score[0] > )} {
+				console.log(s.game);
+			}
+		}else if ((counting === '3x21') || ((counting === '2x21+11') && (game_idx < 2))) {
 			if ((s.game.team1_serving) && (((s.game.score[0] === 20) && (s.game.score[1] < 20)) || (s.game.score[0] == 29))) {
 				if (s.match.game_score[0] === 0) {
 					s.game.gamepoint = true;
