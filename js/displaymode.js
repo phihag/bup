@@ -552,8 +552,23 @@ function render_tournament_overview_dm(s, container, event) {
 		),
 	});
 
-	event.courts.forEach(function(court, idx) {
-		var match = _match_by_court(event, court);
+	var courts = [4, 1, 0, 2, 3];
+	courts.forEach(function (id , idx) {
+		var match = _match_by_court(event, event.courts[id]);
+		var duration = -1;
+		if (match != null) {
+			
+			if (match.presses_json && match.presses_json != null) {
+
+				var presses = JSON.parse(match.presses_json);
+				const foundpress = presses.find(press => press.type === "love-all");
+				if (foundpress && foundpress != null) {
+					var start = foundpress.timestamp;
+					duration = Math.floor((Date.now() - start) / 1000/60);
+				}
+
+			}
+		}
 		var nscore = (match ? match.network_score : 0) || [];
 
 		var counting = match ? match.setup.counting : eventutils.default_counting(event.league_key);
@@ -568,21 +583,6 @@ function render_tournament_overview_dm(s, container, event) {
 			),
 		});
 
-/*
-		var logo = uiu.el(court_el, 'div', {
-			style: (
-				'position:absolute;top:1vh;left:2vh;' +
-				'height:18vh;width:17.6vh;' +
-				'z-index:10;'+
-				'font-size: 15vh;'+
-				'color: #000;'+
-    			'display: flex;'+
-    			'justify-content: center;'+
-    			'align-items: center;'+
-    			'font-weight: bold;'+
-    			'font-style: oblique;'
-			), 
-		}, idx+1);*/
 		var top_bar = uiu.el(court_el, 'div', {
 			style: (
 				'position:absolute;top:2vh;left:2vw;' +
@@ -597,7 +597,7 @@ function render_tournament_overview_dm(s, container, event) {
 		var top_bar_court = uiu.el(top_bar, 'div', {
 			style: (
 				'position:static;' +
-				'height:16vh;width:10vw;' +
+				'height:16vh;width:7.5vw;' +
 				'display: flex;' +
 				'flex-direction: column;' +
 				'justify-content: space-between;'
@@ -625,12 +625,68 @@ function render_tournament_overview_dm(s, container, event) {
 
 		uiu.el(court_number, 'div', {
 			style: (
-				'font-size: 12.5vh;'+
+				'font-size: 17.0vh;'+
 				'height: 100%;' +
     			'font-weight: bold;' +
-    			'font-style: oblique;'
+    			'font-style: oblique;' +
+				'margin-top: -2.5vh'
 			),
-		},idx+1);
+		},id+1);
+
+		var top_bar_match = uiu.el(top_bar, 'div', {
+			style: (
+				'position:static;' +
+				'height:16vh;width:7.5vw;' +
+				'display: flex;' +
+				'flex-direction: column;' +
+				'justify-content: space-between;'+
+				'margin-left: 0.5vh;'
+			),
+		});
+		uiu.el(top_bar_match, 'div', {
+
+			style: (
+				'position:static;' +
+				'height:5%;width:100%;' +
+				'background-color: #ffffff;' +
+				'border-top-right-radius: 1vh;'+
+				'border-top-left-radius: 1vh;'
+			),
+		});
+
+		var match_div = uiu.el(top_bar_match, 'div', {
+			style: (
+				'position:static;' +
+				'height:90%;width:100%;' +
+				'background-color: #ffffffbb;'  +
+				'text-align: center;'
+			),
+		});
+
+		uiu.el(match_div, 'div', {
+			style: (
+				'font-size: 3.5vh;' +
+				'font-weight: bold;' +
+				'font-style: oblique;'
+			),
+		}, (match && match.setup) ? match.setup.event_name: "");
+
+		uiu.el(match_div, 'div', {
+			style: (
+				'font-size: 3.5vh;' +
+				'font-weight: bold;' +
+				'font-style: oblique;'
+			),
+		}, (match && match.setup) ? match.setup.match_name : "");
+
+
+		uiu.el(match_div, 'div', {
+			style: (
+				'font-size: 6vh;' +
+				'font-weight: bold;' +
+				'font-style: oblique;'
+			),
+		}, (duration == -1 ) ? "" : duration+"'");
 
 		uiu.el(top_bar_court, 'div', {
 			style: (
@@ -642,12 +698,20 @@ function render_tournament_overview_dm(s, container, event) {
 			),
 		});
 
-		
+		uiu.el(top_bar_match, 'div', {
+			style: (
+				'position:static;' +
+				'height:5%;width:100%;' +
+				'background-color: #ffffff;' +
+				'border-bottom-right-radius: 1vh;'+
+				'border-bottom-left-radius: 1vh;'
+			),
+		});
 
 		var top_bar_left = uiu.el(top_bar, 'div', {
 			style: (
 				'position:static;' +
-				'height:16vh;width:70vw;' +
+				'height:16vh;width:64.5vw;' +
 				'display: flex;' +
 				'flex-direction: column;' +
 				'justify-content: space-between;' +
@@ -852,14 +916,12 @@ function render_tournament_overview_dm(s, container, event) {
 			if (match != null) {
 				if (match.presses_json && match.presses_json != null) {
 
-
 					var presses = JSON.parse(match.presses_json);
 					const foundpress = presses.find(press => press.type === "love-all");
 					if (foundpress && foundpress != null) {
 						var start = foundpress.timestamp;
 						duration = Math.floor((Date.now() - start) / 1000/60);
 					}
-					
 
 				}
 			}
@@ -906,7 +968,7 @@ function render_tournament_overview_dm(s, container, event) {
 			var top_bar_court = uiu.el(top_bar, 'div', {
 				style: (
 					'position:static;' +
-					'height:30vh;width:18vw;' +
+					'height:30vh;width:17vw;' +
 					'display: flex;' +
 					'flex-direction: column;' +
 					'justify-content: space-between;'
@@ -934,9 +996,10 @@ function render_tournament_overview_dm(s, container, event) {
 
 			uiu.el(court_number, 'div', {
 				style: (
-					'font-size: 12.5vh;' +
+					'font-size: 18.5vh;' +
 					'font-weight: bold;' +
-					'font-style: oblique;'
+					'font-style: oblique;'+
+					'margin: -2.5vh;'
 				),
 			}, id + 1);
 

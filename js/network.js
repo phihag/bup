@@ -267,7 +267,7 @@ function ui_render_matchlist(s, event) {
 
 		uiu.el(btn, 'span', {
 			'class': 'setup_network_match_match_name',
-		}, match.setup.match_name);
+		}, match.setup.event_name + ' ' + match.setup.match_name);
 
 		var _players_str = function(team) {
 			if (match.setup.is_doubles) {
@@ -294,16 +294,26 @@ function ui_render_matchlist(s, event) {
 			'class': 'setup_network_match_away_players',
 		}, _players_str(match.setup.teams[1]));
 
-		var umpire_name = match.setup.umpire_name;
+		var umpire_name = match?.setup?.umpire?.name;
 		if (umpire_name) {
-			if (match.setup.service_judge_name) {
-				umpire_name += ' + ' + match.setup.service_judge_name;
-			}
-
+			uiu.el(btn, 'span', {
+				'class': 'setup_network_umpire',
+			}, s._('settings:Umpire')+':');
 			uiu.el(btn, 'span', {
 				'class': 'setup_network_umpire_name',
 			}, umpire_name);
 		}
+
+		var service_judge_name = match?.setup?.service_judge?.name;
+		if (service_judge_name) {
+			uiu.el(btn, 'span', {
+				'class': 'setup_network_umpire',
+			}, s._('settings:Service judge')+':');
+			uiu.el(btn, 'span', {
+				'class': 'setup_network_umpire_name',
+			}, service_judge_name);
+		}
+
 
 		var _tabletoperator_str = function (tabletoperators) {
 			if (tabletoperators.length === 0) {
@@ -316,12 +326,12 @@ function ui_render_matchlist(s, event) {
 
 		};
 
-		if (match.setup.tabletoperators && match.setup.tabletoperators.length > 0) {
+		if (match.setup.tabletoperators && match.setup.tabletoperators.length >= 0) {
 			uiu.el(btn, 'span', {
 				'class': 'setup_network_tabletoperator',
 			}, s._('network:Tabletoperator'));
 			uiu.el(btn, 'span', {
-				'class': 'setup_network_tabletoperator',
+				'class': 'setup_network_tabletoperator_name',
 			}, _tabletoperator_str(match.setup.tabletoperators));
 		}
 

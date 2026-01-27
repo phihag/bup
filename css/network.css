@@ -119,11 +119,22 @@ button > .loading-icon {
 }
 .setup_network_match_score {
 	font-style: italic;
+	font-size: 150%;
+	font-weight: bold;
+	margin-top: 10px;
 }
 .setup_network_umpire_name {
-	color: #444;
+	color: #c14949;
+}
+.setup_network_umpire {
+	color: #c14949;
+	font-weight: bold;
+	margin-top: 10px;
 }
 
+.setup_network_tabletoperator_name {
+	color: #c14949;
+}
 .setup_network_tabletoperator {
 	color: #c14949;
 	font-weight: bold;
