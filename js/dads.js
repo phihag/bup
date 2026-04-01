@@ -563,7 +563,7 @@ function finished_since(match) {
 		return false; // No idea, fail safe
 	}
 
-	var winner = calc.match_winner(match.setup.counting, match.network_score);
+	var winner = calc.match_winner(match.setup, match.network_score);
 	if ((winner === 'inprogress') || (winner === 'invalid')) {
 		_since_matchid = null;
 		return false;

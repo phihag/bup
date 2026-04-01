@@ -648,6 +648,14 @@ _describe('eventutils', function() {
 		assert.deepStrictEqual(bup.eventutils.default_counting('bayern-2018'), '3x21');
 	});
 
+
+	_it('default_scoring_format', function() {
+		assert.deepStrictEqual(bup.eventutils.default_scoring_format('1BL-2016'), bup.calc.scoring_format_from_counting('5x11_15'));
+		assert.deepStrictEqual(bup.eventutils.default_scoring_format('1BL-2017'), bup.calc.scoring_format_from_counting('5x11_15^90'));
+		assert.deepStrictEqual(bup.eventutils.default_scoring_format('NLA-2019'), bup.calc.scoring_format_from_counting('5x11_15~NLA'));
+		assert.deepStrictEqual(bup.eventutils.default_scoring_format('OLM-2020'), bup.calc.scoring_format_from_counting('3x21'));
+	});
+
 	_it('get_min_pause', function() {
 		assert.deepStrictEqual(bup.eventutils.get_min_pause('NLA-2017'), 900000);
 		assert.deepStrictEqual(bup.eventutils.get_min_pause('NLA-2019'), 900000);
@@ -656,7 +664,7 @@ _describe('eventutils', function() {
 		assert.deepStrictEqual(bup.eventutils.get_min_pause('RLSO-2019'), 20 * 60 * 1000);
 	});
 
-	_it('annotate counting', function() {
+	_it('annotate scoring_format', function() {
 		var s = {};
 		var ev = {
 			league_key: '1BL-2017',
@@ -668,6 +676,7 @@ _describe('eventutils', function() {
 		};
 		bup.eventutils.annotate(s, ev);
 		assert.deepStrictEqual(ev.matches[0].setup.counting, '5x11_15^90');
+		assert.deepStrictEqual(ev.matches[0].setup.scoring_format, bup.calc.scoring_format_from_counting('5x11_15^90'));
 
 		// Match details should not be overwritten
 		ev = {
@@ -681,8 +690,9 @@ _describe('eventutils', function() {
 		};
 		bup.eventutils.annotate(s, ev);
 		assert.deepStrictEqual(ev.matches[0].setup.counting, '1x21');
+		assert.deepStrictEqual(ev.matches[0].setup.scoring_format, bup.calc.scoring_format_from_counting('1x21'));
 
-		// counting works as well
+		// event-level scoring data works as well
 		ev = {
 			counting: '5x11_11',
 			matches: [{
@@ -693,8 +703,9 @@ _describe('eventutils', function() {
 		};
 		bup.eventutils.annotate(s, ev);
 		assert.deepStrictEqual(ev.matches[0].setup.counting, '5x11_11');
+		assert.deepStrictEqual(ev.matches[0].setup.scoring_format, bup.calc.scoring_format_from_counting('5x11_11'));
 	
-		// counting supercedes league_key
+		// event-level scoring data supercedes league defaults
 		ev = {
 			counting: '5x11_11',
 			league_key: '1BL-2017',
@@ -706,8 +717,9 @@ _describe('eventutils', function() {
 		};
 		bup.eventutils.annotate(s, ev);
 		assert.deepStrictEqual(ev.matches[0].setup.counting, '5x11_11');
+		assert.deepStrictEqual(ev.matches[0].setup.scoring_format, bup.calc.scoring_format_from_counting('5x11_11'));
 
-		// match counting supercedes event counting
+		// match-level scoring data supercedes event-level scoring data
 		ev = {
 			counting: '5x11_11',
 			league_key: '1BL-2017',
@@ -720,6 +732,7 @@ _describe('eventutils', function() {
 		};
 		bup.eventutils.annotate(s, ev);
 		assert.deepStrictEqual(ev.matches[0].setup.counting, '3x21');
+		assert.deepStrictEqual(ev.matches[0].setup.scoring_format, bup.calc.scoring_format_from_counting('3x21'));
 	});
 
 	_it('pronounce_teamname', function() {

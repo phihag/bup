@@ -5,6 +5,7 @@ var assert = require('assert');
 var tutils = require('./tutils');
 var press_score = tutils.press_score;
 var bup = tutils.bup;
+var set_counting = tutils.set_counting;
 var state_after = tutils.state_after;
 var _describe = tutils._describe;
 var _it = tutils._it;
@@ -14,11 +15,11 @@ var settings = {
 	language: 'de',
 };
 var doubles_setup = bup.utils.deep_copy(tutils.DOUBLES_SETUP);
-doubles_setup.counting = '5x11_15';
+set_counting(doubles_setup, '5x11_15');
 doubles_setup.match_id = 'courtspot_testmatch';
 doubles_setup.match_name = 'GD';
 var singles_setup = bup.utils.deep_copy(tutils.SINGLES_SETUP);
-singles_setup.counting = '5x11_15';
+set_counting(singles_setup, '5x11_15');
 singles_setup.match_id = 'courtspot_testmatch_singles';
 singles_setup.match_name = 'DE';
 

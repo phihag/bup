@@ -257,7 +257,8 @@ write_handler(req, res, pathname) {
 		}
 
 		const counting = ev.counting || bup.eventutils.default_counting(ev.league_key);
-		const max_game_count = bup.calc.max_game_count(counting);
+		const setup = {counting, scoring_format: ev.scoring_format || bup.calc.scoring_format_from_counting(counting)};
+		const max_game_count = bup.calc.max_game_count(setup);
 		if (!max_game_count) {
 			return httpd_utils.send_err(res,
 				new Error(

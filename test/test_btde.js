@@ -357,6 +357,13 @@ _describe('btde', function() {
 			],
 		};
 
+		expected.courts.forEach(function(court) {
+			court.court_id = '' + court.court_id;
+		});
+		expected.matches.forEach(function(match) {
+			match.setup.scoring_format = bup.calc.scoring_format_from_counting(match.setup.counting);
+		});
+
 		var date = new Date(2019, 9, 12);
 		let s = {team_competition: true};
 		i18n.update_state(s, 'de');

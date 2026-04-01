@@ -29,7 +29,8 @@ function ui_init() {
 		var team1, team2;
 		var setup = {
 			is_doubles: $('#setup_manual_form [name="gametype"]:checked').val() == 'doubles',
-			counting: _formval('counting'),
+			scoring_format: calc.scoring_format_from_counting(_formval('scoring_format')),
+			counting: _formval('scoring_format'),
 			warmup: _formval('warmup'),
 		};
 
@@ -48,6 +49,7 @@ function ui_init() {
 			// Demo mode
 			var demo_setup = {
 				counting: setup.counting,
+				scoring_format: setup.scoring_format,
 				warmup: setup.warmup,
 				team_competition: setup.team_competition,
 			};

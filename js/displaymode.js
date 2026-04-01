@@ -94,7 +94,7 @@ function _setup_autosize(el, right_node, determine_height) {
 function _calc_matchscore(matches) {
 	var res = [0, 0];
 	matches.forEach(function(m) {
-		var winner = calc.match_winner(m.setup.counting, m.network_score || []);
+		var winner = calc.match_winner(m.setup, m.network_score || []);
 		if (winner === 'left') {
 			res[0] += 1;
 		} else if (winner === 'right') {
@@ -192,7 +192,7 @@ function _list_render_team_name(tr, team_name) {
 function _calc_max_games(event) {
 	var res = 0;
 	event.matches.forEach(function(match) {
-		res = Math.max(res, calc.max_game_count(match.setup.counting));
+		res = Math.max(res, calc.max_game_count(match.setup));
 	});
 	return res;
 }
@@ -246,7 +246,7 @@ function determine_server(match, current_score) {
 	if (netscore && netscore.length > 0) {
 		var game_idx = netscore.length - 1;
 		var last_game = netscore[game_idx];
-		var gwinner = calc.game_winner(match.setup.counting, game_idx - 1, last_game[0], last_game[1]);
+		var gwinner = calc.game_winner(match.setup, game_idx - 1, last_game[0], last_game[1]);
 		if (gwinner !== 'inprogress') {
 			return {
 				team_id: team_id,
@@ -290,7 +290,7 @@ function determine_receiver(match, current_score) {
 	if (netscore && netscore.length > 0) {
 		var game_idx = netscore.length - 1;
 		var last_game = netscore[game_idx];
-		var gwinner = calc.game_winner(match.setup.counting, game_idx - 1, last_game[0], last_game[1]);
+		var gwinner = calc.game_winner(match.setup, game_idx - 1, last_game[0], last_game[1]);
 		if (gwinner !== 'inprogress') {
 			return {
 				team_id: team_id,
@@ -519,7 +519,7 @@ function render_tournament_overview(s, container, event) {
 
 			var n = nscore[game_idx];
 			if (match && n) {
-				var gwinner = calc.game_winner(match.setup.counting, game_idx, n[0], n[1]);
+				var gwinner = calc.game_winner(match.setup, game_idx, n[0], n[1]);
 				uiu.el(score_td, 'span', {
 					'class': ((gwinner === 'left') ? 'd_to_winning' : ''),
 				}, n[0]);
@@ -571,8 +571,8 @@ function render_tournament_overview_dm(s, container, event) {
 		}
 		var nscore = (match ? match.network_score : 0) || [];
 
-		var counting = match ? match.setup.counting : eventutils.default_counting(event.league_key);
-		var max_games = counting ? calc.max_game_count(counting) : 0;
+		var setup = match ? match.setup : eventutils.default_setup(event.league_key);
+		var max_games = calc.max_game_count(setup);
 		var current_score = (nscore.length > 0) ? nscore[nscore.length - 1] : ['', ''];
 		var server = match ? determine_server(match, current_score) : {};
 
@@ -809,7 +809,7 @@ function render_tournament_overview_dm(s, container, event) {
 			if (nscore.length > game_idx) {
 				for (var team_idx = 0;team_idx < 2;team_idx++) {
 					var gwinner = calc.game_winner(
-						match.setup.counting, game_idx, nscore[game_idx][0], nscore[game_idx][1]);
+						match.setup, game_idx, nscore[game_idx][0], nscore[game_idx][1]);
 					var is_team_serving = (
 						(gwinner === 'left') ? (team_idx === 0) : (
 						(gwinner === 'right') ? (team_idx === 1) : (
@@ -927,8 +927,8 @@ function render_tournament_overview_dm(s, container, event) {
 			}
 			var nscore = (match ? match.network_score : 0) || [];
 
-			var counting = match ? match.setup.counting : eventutils.default_counting(event.league_key);
-			var max_games = counting ? calc.max_game_count(counting) : 0;
+			var setup = match ? match.setup : eventutils.default_setup(event.league_key);
+			var max_games = calc.max_game_count(setup);
 			var current_score = (nscore.length > 0) ? nscore[nscore.length - 1] : ['', ''];
 			var server = match ? determine_server(match, current_score) : {};
 
@@ -1159,7 +1159,7 @@ function render_tournament_overview_dm(s, container, event) {
 				if (nscore.length > game_idx) {
 					for (var team_idx = 0; team_idx < 2; team_idx++) {
 						var gwinner = calc.game_winner(
-							match.setup.counting, game_idx, nscore[game_idx][0], nscore[game_idx][1]);
+							match.setup, game_idx, nscore[game_idx][0], nscore[game_idx][1]);
 						var is_team_serving = (
 							(gwinner === 'left') ? (team_idx === 0) : (
 								(gwinner === 'right') ? (team_idx === 1) : (
@@ -1270,8 +1270,8 @@ function render_castall(s, container, event, colors) {
 		var real_court_idx = s.settings.displaymode_reverse_order ? (court_count - 1 - court_idx) : court_idx;
 		var court = event.courts[real_court_idx];
 		var match = _match_by_court(event, court);
-		var counting = match ? match.setup.counting : eventutils.default_counting(event.league_key);
-		var max_games = counting ? calc.max_game_count(counting) : 0;
+		var setup = match ? match.setup : eventutils.default_setup(event.league_key);
+		var max_games = calc.max_game_count(setup);
 		var nscore = (match ? match.network_score : 0) || [];
 
 		var match_container = uiu.el(container, 'div', {
@@ -1468,8 +1468,8 @@ function render_stream(s, container, event/*, colors*/) {
 		var real_court_idx = s.settings.displaymode_reverse_order ? (court_count - 1 - court_idx) : court_idx;
 		var court = event.courts[real_court_idx];
 		var match = _match_by_court(event, court);
-		var counting = match ? match.setup.counting : eventutils.default_counting(event.league_key);
-		var max_games = counting ? calc.max_game_count(counting) : 0;
+		var setup = match ? match.setup : eventutils.default_setup(event.league_key);
+		var max_games = calc.max_game_count(setup);
 		var nscore = (match ? match.network_score : 0) || [];
 		var current_score = (nscore.length > 0) ? nscore[nscore.length - 1] : ['', ''];
 		var server = match ? determine_server(match, current_score) : {};
@@ -1531,7 +1531,7 @@ function render_stream(s, container, event/*, colors*/) {
 				var team_serving = false;
 				if (game_idx < nscore.length) {
 					var gwinner = calc.game_winner(
-						match.setup.counting, game_idx, nscore[game_idx][0], nscore[game_idx][1]);
+						match.setup, game_idx, nscore[game_idx][0], nscore[game_idx][1]);
 					team_serving = (
 						(gwinner === 'left') ? (team_idx === 0) : (
 						(gwinner === 'right') ? (team_idx === 1) : (
@@ -1649,8 +1649,8 @@ function render_streamcourt(s, container, event/*, colors*/) {
 		return c.court_id == s.settings.displaymode_court_id;
 	}) || event.courts[0];
 	var match = _match_by_court(event, court);
-	var counting = match ? match.setup.counting : eventutils.default_counting(event.league_key);
-	var max_games = counting ? calc.max_game_count(counting) : 0;
+	var setup = match ? match.setup : eventutils.default_setup(event.league_key);
+	var max_games = calc.max_game_count(setup);
 	var nscore = (match ? match.network_score : 0) || [];
 	var current_score = (nscore.length > 0) ? nscore[nscore.length - 1] : ['', ''];
 	var server = match ? determine_server(match, current_score) : {};
@@ -1715,7 +1715,7 @@ function render_streamcourt(s, container, event/*, colors*/) {
 			var team_serving = false;
 			if (game_idx < nscore.length) {
 				var gwinner = calc.game_winner(
-					match.setup.counting, game_idx, nscore[game_idx][0], nscore[game_idx][1]);
+					match.setup, game_idx, nscore[game_idx][0], nscore[game_idx][1]);
 				team_serving = (
 					(gwinner === 'left') ? (team_idx === 0) : (
 					(gwinner === 'right') ? (team_idx === 1) : (
@@ -1754,8 +1754,8 @@ function render_streamcourt_dm(s, container, event/*, colors*/) {
 		return c.court_id == s.settings.displaymode_court_id;
 	}) || event.courts[0];
 	var match = _match_by_court(event, court);
-	var counting = match ? match.setup.counting : eventutils.default_counting(event.league_key);
-	var max_games = counting ? calc.max_game_count(counting) : 0;
+	var setup = match ? match.setup : eventutils.default_setup(event.league_key);
+	var max_games = calc.max_game_count(setup);
 	var nscore = (match ? match.network_score : 0) || [];
 	var current_score = (nscore.length > 0) ? nscore[nscore.length - 1] : ['', ''];
 	var server = match ? determine_server(match, current_score) : {};
@@ -1885,7 +1885,7 @@ function render_streamcourt_dm(s, container, event/*, colors*/) {
 
 			for (var team_idx = 0;team_idx < 2;team_idx++) {
 				var gwinner = calc.game_winner(
-					match.setup.counting, game_idx, nscore[game_idx][0], nscore[game_idx][1]);
+					match.setup, game_idx, nscore[game_idx][0], nscore[game_idx][1]);
 				var is_team_serving = (
 					(gwinner === 'left') ? (team_idx === 0) : (
 					(gwinner === 'right') ? (team_idx === 1) : (
@@ -2155,7 +2155,7 @@ function render_html_list(container, event) {
 
 	event.matches.forEach(function(m) {
 		var netscore = m.network_score || [];
-		var mwinner = calc.match_winner(m.setup.counting, netscore);
+		var mwinner = calc.match_winner(m.setup, netscore);
 
 		var row = uiu.el(match_list, 'tr');
 		uiu.el(row, 'td', {
@@ -2179,7 +2179,7 @@ function render_html_list(container, event) {
 				continue;
 			}
 			var nscore = netscore[game_idx];
-			var gwinner = calc.game_winner(m.setup.counting, game_idx, nscore[0], nscore[1]);
+			var gwinner = calc.game_winner(m.setup, game_idx, nscore[0], nscore[1]);
 			uiu.el(score_td, 'span', {
 				'class': ((gwinner === 'left') ? 'display_list_winning' : ''),
 				'style': ((gwinner === 'left') ? '' : 'color:#ddd;'),
@@ -2296,7 +2296,7 @@ function render_oncourt(s, container, event, court, match, colors) {
 function _gamescore_from_netscore(netscore, setup) {
 	var gscores = [0, 0];
 	netscore.forEach(function(gs, game_idx) {
-		var winner = calc.game_winner(setup.counting, game_idx, gs[0], gs[1]);
+		var winner = calc.game_winner(setup, game_idx, gs[0], gs[1]);
 		if (winner == 'left') {
 			gscores[0]++;
 		} else if (winner == 'right') {
@@ -2313,11 +2313,11 @@ function extract_netscore(match) {
 		return [[0, 0]];
 	}
 
-	var counting = match.setup.counting;
+	var setup = match.setup;
 	var last_game = res[res.length - 1];
-	var last_winner = calc.game_winner(counting, res.length - 1, last_game[0], last_game[1]);
+	var last_winner = calc.game_winner(setup, res.length - 1, last_game[0], last_game[1]);
 	if ((last_winner === 'left') || (last_winner === 'right')) {
-		var mwinner = calc.match_winner(counting, res);
+		var mwinner = calc.match_winner(setup, res);
 		if ((mwinner !== 'left') && (mwinner !== 'right')) {
 			res.push([0, 0]);
 		}
@@ -2334,7 +2334,7 @@ function render_andre(s, container, event, court, match, colors) {
 	var server = determine_server(match, current_score);
 
 	match.setup.teams.forEach(function(team, team_id) {
-		var gwinner = calc.game_winner(match.setup.counting, nscore.length - 1, current_score[0], current_score[1]);
+		var gwinner = calc.game_winner(match.setup, nscore.length - 1, current_score[0], current_score[1]);
 		var team_serving = (
 			(gwinner === 'left') ? (team_id === 0) : (
 			(gwinner === 'right') ? (team_id === 1) : (
@@ -2451,12 +2451,12 @@ function render_international(s, container, event, court, match, colors) {
 	var current_score = nscore[nscore.length - 1] || [];
 	var server = determine_server(match, current_score);
 	var first_game = (nscore.length < 2);
-	var mwinner = calc.match_winner(match.setup.counting, nscore);
+	var mwinner = calc.match_winner(match.setup, nscore);
 	var match_over = (mwinner === 'left') || (mwinner === 'right');
 
 	match.setup.teams.forEach(function(team, team_id) {
 		var col = colors[team_id];
-		var gwinner = calc.game_winner(match.setup.counting, nscore.length - 1, current_score[0], current_score[1]);
+		var gwinner = calc.game_winner(match.setup, nscore.length - 1, current_score[0], current_score[1]);
 		var team_serving = (
 			(gwinner === 'left') ? (team_id === 0) : (
 			(gwinner === 'right') ? (team_id === 1) : (
@@ -2539,12 +2539,12 @@ function render_bwf(s, container, event, court, match, colors) {
 	var current_score = nscore[nscore.length - 1] || [];
 	var server = determine_server(match, current_score);
 	var first_game = (nscore.length < 2);
-	var mwinner = calc.match_winner(match.setup.counting, nscore);
+	var mwinner = calc.match_winner(match.setup, nscore);
 	var match_over = (mwinner === 'left') || (mwinner === 'right');
 
 	match.setup.teams.forEach(function(team, team_id) {
 		var col = colors[team_id];
-		var gwinner = calc.game_winner(match.setup.counting, nscore.length - 1, current_score[0], current_score[1]);
+		var gwinner = calc.game_winner(match.setup, nscore.length - 1, current_score[0], current_score[1]);
 		var team_serving = (
 			(gwinner === 'left') ? (team_id === 0) : (
 			(gwinner === 'right') ? (team_id === 1) : (
@@ -2621,13 +2621,13 @@ function render_bwfonlyplayers(s, container, event, court, match, colors) {
 	var pcount = is_doubles ? 2 : 1;
 	var current_score = nscore[nscore.length - 1] || [];
 	var server = determine_server(match, current_score);
-	var mwinner = calc.match_winner(match.setup.counting, nscore);
+	var mwinner = calc.match_winner(match.setup, nscore);
 	var match_over = (mwinner === 'left') || (mwinner === 'right');
 
 	match.setup.teams.forEach(function(team, team_id) {
 		var col = colors[team_id];
 		var bg_col = colors['b' + team_id] || '#000';
-		var gwinner = calc.game_winner(match.setup.counting, nscore.length - 1, current_score[0], current_score[1]);
+		var gwinner = calc.game_winner(match.setup, nscore.length - 1, current_score[0], current_score[1]);
 		var team_serving = (
 			(gwinner === 'left') ? (team_id === 0) : (
 			(gwinner === 'right') ? (team_id === 1) : (
@@ -2760,7 +2760,7 @@ function render_greyish(s, container, event, colors) {
 	event.matches.forEach(function(match) {
 		var setup = match.setup;
 		var nscore = extract_netscore(match);
-		var mwinner = calc.match_winner(setup.counting, nscore);
+		var mwinner = calc.match_winner(setup, nscore);
 
 		var tr = uiu.el(table, 'tr', {
 			style: (
@@ -2831,12 +2831,12 @@ function render_clean(s, container, event, court, match, colors) {
 	var pcount = is_doubles ? 2 : 1;
 	var current_score = nscore[nscore.length - 1] || [];
 	var server = determine_server(match, current_score);
-	var mwinner = calc.match_winner(match.setup.counting, nscore);
+	var mwinner = calc.match_winner(match.setup, nscore);
 	var match_over = (mwinner === 'left') || (mwinner === 'right');
 
 	match.setup.teams.forEach(function(team, team_id) {
 		var col = colors[team_id];
-		var gwinner = calc.game_winner(match.setup.counting, nscore.length - 1, current_score[0], current_score[1]);
+		var gwinner = calc.game_winner(match.setup, nscore.length - 1, current_score[0], current_score[1]);
 		var team_serving = (
 			(gwinner === 'left') ? (team_id === 0) : (
 			(gwinner === 'right') ? (team_id === 1) : (
@@ -3047,7 +3047,7 @@ function render_tournamentcourt(s, container, event, court, match, colors) {
 	var server = determine_server(match, current_score);
 	var receiver = determine_receiver(match, current_score);
 	var first_game = (nscore.length < 2);
-	var mwinner = calc.match_winner(match.setup.counting, nscore);
+	var mwinner = calc.match_winner(match.setup, nscore);
 	var match_over = (mwinner === 'left') || (mwinner === 'right');
 
 	var match_meta_container = uiu.el(container, 'div', {
@@ -3101,7 +3101,7 @@ function render_tournamentcourt(s, container, event, court, match, colors) {
 		var col = colors[team_id];
 		var bg_col = colors['b' + team_id] || '#000';
 
-		var gwinner = calc.game_winner(match.setup.counting, nscore.length - 1, current_score[0], current_score[1]);
+		var gwinner = calc.game_winner(match.setup, nscore.length - 1, current_score[0], current_score[1]);
 		var team_serving = (
 			(gwinner === 'left') ? (team_id === 0) : (
 			(gwinner === 'right') ? (team_id === 1) : (
@@ -3198,7 +3198,7 @@ function render_tournamentplayers(s, container, event, court, match, colors) {
 	var server = determine_server(match, current_score);
 	var receiver = determine_receiver(match, current_score);
 	var first_game = (nscore.length < 2);
-	var mwinner = calc.match_winner(match.setup.counting, nscore);
+	var mwinner = calc.match_winner(match.setup, nscore);
 	var match_over = (mwinner === 'left') || (mwinner === 'right');
 
 	var match_meta_container = uiu.el(container, 'div', {
@@ -3252,7 +3252,7 @@ function render_tournamentplayers(s, container, event, court, match, colors) {
 		var col = colors[team_id];
 		var bg_col = colors['b' + team_id] || '#000';
 
-		var gwinner = calc.game_winner(match.setup.counting, nscore.length - 1, current_score[0], current_score[1]);
+		var gwinner = calc.game_winner(match.setup, nscore.length - 1, current_score[0], current_score[1]);
 		var team_serving = (
 			(gwinner === 'left') ? (team_id === 0) : (
 			(gwinner === 'right') ? (team_id === 1) : (
@@ -3335,7 +3335,7 @@ function render_teamcourt(s, container, event, court, match, colors) {
 	var current_score = nscore[nscore.length - 1] || [];
 	var server = determine_server(match, current_score);
 	var first_game = (nscore.length < 2);
-	var mwinner = calc.match_winner(match.setup.counting, nscore);
+	var mwinner = calc.match_winner(match.setup, nscore);
 	var match_over = (mwinner === 'left') || (mwinner === 'right');
 
 	var match_name_container = uiu.el(container, 'div', {
@@ -3366,7 +3366,7 @@ function render_teamcourt(s, container, event, court, match, colors) {
 		var col = colors[team_id];
 		var bg_col = colors['b' + team_id] || '#000';
 
-		var gwinner = calc.game_winner(match.setup.counting, nscore.length - 1, current_score[0], current_score[1]);
+		var gwinner = calc.game_winner(match.setup, nscore.length - 1, current_score[0], current_score[1]);
 		var team_serving = (
 			(gwinner === 'left') ? (team_id === 0) : (
 			(gwinner === 'right') ? (team_id === 1) : (
@@ -3445,7 +3445,7 @@ function render_teamcourt(s, container, event, court, match, colors) {
 function render_stripes(s, container, event, court, match, colors) {
 	var nscore = extract_netscore(match);
 	var setup = match.setup;
-	var max_game_count = calc.max_game_count(setup.counting);
+	var max_game_count = calc.max_game_count(setup);
 	var team_names = event.team_names || ['', ''];
 	var current_score = nscore[nscore.length - 1];
 	var server = determine_server(match, current_score);
@@ -3538,7 +3538,7 @@ function render_stripes(s, container, event, court, match, colors) {
 			var gscore = nscore[game_id];
 			var cur_serve = (
 				(nscore.length - 1 === game_id) ?
-				((team_id === server.team_id) || (calc.match_winner(setup.counting, nscore) === ((team_id === 0) ? 'left' : 'right'))) :
+				((team_id === server.team_id) || (calc.match_winner(setup, nscore) === ((team_id === 0) ? 'left' : 'right'))) :
 				(gscore && (gscore[team_id] > gscore[1 - team_id]))
 			);
 			uiu.el(tr, 'td', {
@@ -3603,14 +3603,14 @@ function render_onlyplayers(s, container, event, court, match, colors) {
 	var is_doubles = match.setup.is_doubles;
 	var current_score = nscore[nscore.length - 1] || [];
 	var server = determine_server(match, current_score);
-	var mwinner = calc.match_winner(match.setup.counting, nscore);
+	var mwinner = calc.match_winner(match.setup, nscore);
 	var match_over = (mwinner === 'left') || (mwinner === 'right');
 	var logo_urls = extradata.team_logos(event);
 
 	match.setup.teams.forEach(function(team, team_id) {
 		var col = colors[team_id];
 		var bg_col = colors['b' + team_id];
-		var gwinner = calc.game_winner(match.setup.counting, nscore.length - 1, current_score[0], current_score[1]);
+		var gwinner = calc.game_winner(match.setup, nscore.length - 1, current_score[0], current_score[1]);
 		var team_serving = (
 			(gwinner === 'left') ? (team_id === 0) : (
 			(gwinner === 'right') ? (team_id === 1) : (
@@ -3689,12 +3689,12 @@ function render_clubplayers(s, container, event, court, match, colors) {
 	var is_doubles = match.setup.is_doubles;
 	var current_score = nscore[nscore.length - 1] || [];
 	var server = determine_server(match, current_score);
-	var mwinner = calc.match_winner(match.setup.counting, nscore);
+	var mwinner = calc.match_winner(match.setup, nscore);
 	var match_over = (mwinner === 'left') || (mwinner === 'right');
 
 	match.setup.teams.forEach(function(team, team_id) {
 		var col = colors[team_id];
-		var gwinner = calc.game_winner(match.setup.counting, nscore.length - 1, current_score[0], current_score[1]);
+		var gwinner = calc.game_winner(match.setup, nscore.length - 1, current_score[0], current_score[1]);
 		var team_serving = (
 			(gwinner === 'left') ? (team_id === 0) : (
 			(gwinner === 'right') ? (team_id === 1) : (
@@ -3762,12 +3762,12 @@ function render_clubplayerslr(s, container, event, court, match, colors) {
 	var is_doubles = match.setup.is_doubles;
 	var current_score = nscore[nscore.length - 1] || [];
 	var server = determine_server(match, current_score);
-	var mwinner = calc.match_winner(match.setup.counting, nscore);
+	var mwinner = calc.match_winner(match.setup, nscore);
 	var match_over = (mwinner === 'left') || (mwinner === 'right');
 
 	match.setup.teams.forEach(function(team, team_id) {
 		var col = colors[team_id];
-		var gwinner = calc.game_winner(match.setup.counting, nscore.length - 1, current_score[0], current_score[1]);
+		var gwinner = calc.game_winner(match.setup, nscore.length - 1, current_score[0], current_score[1]);
 		var team_serving = (
 			(gwinner === 'left') ? (team_id === 0) : (
 			(gwinner === 'right') ? (team_id === 1) : (
@@ -3829,7 +3829,7 @@ function render_onlyscore(s, container, event, court, match, colors) {
 	var nscore = extract_netscore(match);
 	var current_score = nscore[nscore.length - 1] || [];
 	var server = determine_server(match, current_score);
-	var max_game_count = calc.max_game_count(match.setup.counting);
+	var max_game_count = calc.max_game_count(match.setup);
 
 	match.setup.teams.forEach(function(team, team_id) {
 		var col = colors[team_id];
@@ -3840,7 +3840,7 @@ function render_onlyscore(s, container, event, court, match, colors) {
 			var team_serving = false;
 			var current_score = nscore[game_idx];
 			if (current_score) {
-				var gwinner = calc.game_winner(match.setup.counting, nscore.length - 1, current_score[0], current_score[1]);
+				var gwinner = calc.game_winner(match.setup, nscore.length - 1, current_score[0], current_score[1]);
 				team_serving = (
 								(gwinner === 'left') ? (team_id === 0) : (
 								(gwinner === 'right') ? (team_id === 1) : (
@@ -3893,7 +3893,7 @@ function render_giantscore(s, container, event, court, match, colors) {
 		var col = colors[team_id];
 		var bg_col = colors['b' + team_id];
 
-		var mwinner = calc.match_winner(match.setup.counting, nscore);
+		var mwinner = calc.match_winner(match.setup, nscore);
 		var is_winner = ((mwinner === 'left') && (team_id === 0) || (mwinner === 'right') && (team_id === 1));
 		var invert = is_winner || (server.team_id === team_id);
 
@@ -4130,7 +4130,7 @@ function render_2court(s, container, event, colors) {
 		var gscore = _gamescore_from_netscore(nscore, match.setup);
 		var current_score = nscore[nscore.length - 1] || [];
 		var server = determine_server(match, current_score);
-		var gwinner = calc.game_winner(match.setup.counting, nscore.length - 1, current_score[0], current_score[1]);
+		var gwinner = calc.game_winner(match.setup, nscore.length - 1, current_score[0], current_score[1]);
 
 		match.setup.teams.forEach(function(team, team_id) {
 			var team_container = uiu.el(court_container, 'div', 'd_2court_team' + team_id);

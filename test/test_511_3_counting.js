@@ -9,11 +9,12 @@ var _it = tutils._it;
 var press_score = tutils.press_score;
 var state_after = tutils.state_after;
 var bup = tutils.bup;
+var set_counting = tutils.set_counting;
 
 var DOUBLES_SETUP = bup.utils.deep_copy(tutils.DOUBLES_SETUP);
-DOUBLES_SETUP.counting = '5x11/3';
+set_counting(DOUBLES_SETUP, '5x11/3');
 var SINGLES_SETUP = bup.utils.deep_copy(tutils.SINGLES_SETUP);
-SINGLES_SETUP.counting = '5x11/3';
+set_counting(SINGLES_SETUP, '5x11/3');
 
 
 _describe('BWF experimental 5x11/3 counting', function() {
@@ -429,10 +430,10 @@ _describe('BWF experimental 5x11/3 counting', function() {
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Alice 11-6 13-12 11-5');
+			'Das Spiel wurde gewonnen von Alice 11-6 13-12 11-5\n\nBestätigen des Ergebnisses durch Klick.');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\n\n' +
-			'Match won by Alice 11-6 13-12 11-5');
+			'Match won by Alice 11-6 13-12 11-5\n\nConfirming the result by clicking.');
 
 		alt_presses.push({
 			type: 'postmatch-confirm',
@@ -452,10 +453,10 @@ _describe('BWF experimental 5x11/3 counting', function() {
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Alice 11-6 13-12 11-5');
+			'Das Spiel wurde gewonnen von Alice 11-6 13-12 11-5\n\nBestätigen des Ergebnisses durch Klick.');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\n\n' +
-			'Match won by Alice 11-6 13-12 11-5');
+			'Match won by Alice 11-6 13-12 11-5\n\nConfirming the result by clicking.');
 
 		press_score(presses, 0, 6);
 		s = state_after(presses, SINGLES_SETUP);
@@ -809,10 +810,10 @@ _describe('BWF experimental 5x11/3 counting', function() {
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Bob 6-11 12-13 13-10 11-2 11-9');
+			'Das Spiel wurde gewonnen von Bob 6-11 12-13 13-10 11-2 11-9\n\nBestätigen des Ergebnisses durch Klick.');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\n\n' +
-			'Match won by Bob 6-11 12-13 13-10 11-2 11-9');
+			'Match won by Bob 6-11 12-13 13-10 11-2 11-9\n\nConfirming the result by clicking.');
 
 		press_score(presses, 0, 1);
 		s = state_after(presses, SINGLES_SETUP);
@@ -867,10 +868,10 @@ _describe('BWF experimental 5x11/3 counting', function() {
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Bob 6-11 12-13 13-10 11-2 13-12');
+			'Das Spiel wurde gewonnen von Bob 6-11 12-13 13-10 11-2 13-12\n\nBestätigen des Ergebnisses durch Klick.');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\n\n' +
-			'Match won by Bob 6-11 12-13 13-10 11-2 13-12');
+			'Match won by Bob 6-11 12-13 13-10 11-2 13-12\n\nConfirming the result by clicking.');
 
 		press_score(presses, 0, 1);
 		s = state_after(presses, SINGLES_SETUP);
@@ -889,10 +890,10 @@ _describe('BWF experimental 5x11/3 counting', function() {
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Alice 11-6 13-12 10-13 2-11 13-10');
+			'Das Spiel wurde gewonnen von Alice 11-6 13-12 10-13 2-11 13-10\n\nBestätigen des Ergebnisses durch Klick.');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\n\n' +
-			'Match won by Alice 11-6 13-12 10-13 2-11 13-10');
+			'Match won by Alice 11-6 13-12 10-13 2-11 13-10\n\nConfirming the result by clicking.');
 
 		presses.push({
 			type: 'postmatch-confirm',
@@ -913,10 +914,10 @@ _describe('BWF experimental 5x11/3 counting', function() {
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Alice 11-6 13-12 10-13 2-11 13-10');
+			'Das Spiel wurde gewonnen von Alice 11-6 13-12 10-13 2-11 13-10\n\nBestätigen des Ergebnisses durch Klick.');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\n\n' +
-			'Match won by Alice 11-6 13-12 10-13 2-11 13-10');
+			'Match won by Alice 11-6 13-12 10-13 2-11 13-10\n\nConfirming the result by clicking.');
 	});
 
 	_it('game_winner helper function', function() {

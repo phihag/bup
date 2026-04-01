@@ -9,12 +9,13 @@ var _it = tutils._it;
 var press_score = tutils.press_score;
 var state_after = tutils.state_after;
 var bup = tutils.bup;
+var set_counting = tutils.set_counting;
 
 
 var DOUBLES_SETUP = bup.utils.deep_copy(tutils.DOUBLES_SETUP);
-DOUBLES_SETUP.counting = '5x11_15~NLA';
+set_counting(DOUBLES_SETUP, '5x11_15~NLA');
 var SINGLES_SETUP = bup.utils.deep_copy(tutils.SINGLES_SETUP);
-SINGLES_SETUP.counting = '5x11_15~NLA';
+set_counting(SINGLES_SETUP, '5x11_15~NLA');
 
 
 _describe('NLA 2019 5x11_15 counting with 120s between games and 60s interval', function() {

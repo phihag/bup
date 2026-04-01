@@ -268,7 +268,7 @@ function init(s, page) {
 				password: password,
 				team_names: JSON.stringify(ev.team_names),
 				matches_json: JSON.stringify(xmatches),
-				max_game_count: calc.max_game_count(ev.matches[0].setup.counting),
+				max_game_count: calc.max_game_count(ev.matches[0].setup),
 			}),
 		}, function(data_json) {
 			var data = utils.parse_json(data_json);
@@ -307,7 +307,7 @@ function init(s, page) {
 						password: password,
 						team_names: JSON.stringify(ev.team_names),
 						matches_json: JSON.stringify(xmatches),
-						max_game_count: calc.max_game_count(ev.matches[0].setup.counting),
+						max_game_count: calc.max_game_count(ev.matches[0].setup),
 						extra_fields_json: JSON.stringify(extra_fields),
 					}),
 				}, function(data_json, xhr) {

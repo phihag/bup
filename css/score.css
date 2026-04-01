@@ -108,19 +108,19 @@ table[data-game-count="5"] .score_future-game {
 	padding-left: 1.5vh;
 }
 
-.score_counting_tr,
-.score_counting_td {
+.score_scoring_format_tr,
+.score_scoring_format_td {
 	height: 0;
 	max-height: 0;
 	margin: 0;
 	padding: 0;
 }
-.score_counting_container {
+.score_scoring_format_container {
 	position: relative;
 	width: 100%;
 	height: 0;
 }
-.score_counting {
+.score_scoring_format {
 	position: absolute;
 	color: #888;
 	padding: 1vh 0;

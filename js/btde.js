@@ -209,13 +209,18 @@ function _get_league_key(liga_code) {
 }
 
 function _get_counting(league_key, event_data) {
+	var scoring_format = _get_scoring_format(league_key, event_data);
+	return scoring_format ? scoring_format.name : undefined;
+}
+
+function _get_scoring_format(league_key, event_data) {
 	if (league_key) {
-		var league_counting = eventutils.default_counting(league_key);
-		if (league_counting) {
-			return league_counting;
+		var league_scoring_format = eventutils.default_scoring_format(league_key);
+		if (league_scoring_format) {
+			return league_scoring_format;
 		}
 	}
-	return (event_data.gews == 2) ? '3x21' : '5x11_15^90';
+	return calc.scoring_format_from_counting((event_data.gews == 2) ? '3x21' : '5x11_15^90');
 }
 
 function _parse_event(s, doc, now) {
@@ -232,10 +237,12 @@ function _parse_event(s, doc, now) {
 	}
 
 	var counting;
+	var scoring_format;
 	var league_key;
 	var team_competition = true;
 	if (event_data.league === 'Turnier') {
-		counting = '3x21';
+		scoring_format = calc.scoring_format_from_counting('3x21');
+		counting = scoring_format.name;
 		team_competition = false;
 	} else {
 		if (event_data.league) {
@@ -248,7 +255,8 @@ function _parse_event(s, doc, now) {
 			report_problem.silent_error('btde: league key missing');
 			league_key = (doc.fixtures.length === 8) ? 'RLW-2016' : '1BL-2020';
 		}
-		counting = _get_counting(league_key, event_data);
+		scoring_format = _get_scoring_format(league_key, event_data);
+		counting = scoring_format ? scoring_format.name : undefined;
 		// Fallback: if everything goes wrong, go for 1BL
 		if (! league_key && (counting == '5x11_15^90')) {
 			league_key = '1BL-2020';
@@ -302,6 +310,7 @@ function _parse_event(s, doc, now) {
 
 		var setup = {
 			counting: counting,
+			scoring_format: scoring_format || calc.scoring_format_from_counting(counting),
 			eventsheet_id: eventsheet_id,
 			match_name: match.dis,
 			is_doubles: is_doubles,
@@ -547,6 +556,7 @@ return {
 	// Testing only
 	/*@DEV*/
 	_get_counting: _get_counting,
+	_get_scoring_format: _get_scoring_format,
 	_get_league_key: _get_league_key,
 	_parse_event: _parse_event,
 	_calc_send_data: _calc_send_data,

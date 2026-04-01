@@ -214,7 +214,7 @@ function list_matches(s, cb) {
 
 		// CourtSpot sometimes set the fourth game to 0 for 3x21. Clamp network_score
 		event.matches.forEach(function(m) {
-			var max_game_count = calc.max_game_count(m.setup.counting);
+			var max_game_count = calc.max_game_count(m.setup);
 			if (m.network_score.length > max_game_count) {
 				m.network_score = m.network_score.slice(0, max_game_count);
 			}

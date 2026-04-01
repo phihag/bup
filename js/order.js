@@ -665,6 +665,7 @@ function ui_render() {
 			var setup = {
 				is_doubles: (p1_players.length === 2),
 				counting: '3x21',
+				scoring_format: calc.scoring_format_from_counting('3x21'),
 				match_name: discipline.value,
 				match_id: match_id,
 				teams: [{

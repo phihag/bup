@@ -36,6 +36,7 @@ const SINGLES_SETUP = {
 	}],
 	is_doubles: false,
 	counting: '3x21',
+	scoring_format: bup.calc.scoring_format_from_counting('3x21'),
 };
 var SINGLES_TEAM_SETUP = bup.utils.deep_copy(SINGLES_SETUP);
 SINGLES_TEAM_SETUP.teams[0].name = 'A team';
@@ -43,8 +44,14 @@ SINGLES_TEAM_SETUP.teams[1].name = 'B team';
 SINGLES_TEAM_SETUP.team_competition = true;
 var SINGLES_TEAM_SETUP_AWAY_FIRST = bup.utils.deep_copy(SINGLES_TEAM_SETUP);
 SINGLES_TEAM_SETUP_AWAY_FIRST.away_first = true;
+
+function set_counting(setup, counting) {
+	setup.counting = counting;
+	setup.scoring_format = bup.calc.scoring_format_from_counting(counting);
+	return setup;
+}
 var SINGLES_SETUP_5x11 = bup.utils.deep_copy(SINGLES_SETUP);
-SINGLES_SETUP_5x11.counting = '5x11_15';
+set_counting(SINGLES_SETUP_5x11, '5x11_15');
 
 var DOUBLES_SETUP = {
 	teams: [{
@@ -54,6 +61,7 @@ var DOUBLES_SETUP = {
 	}],
 	is_doubles: true,
 	counting: '3x21',
+	scoring_format: bup.calc.scoring_format_from_counting('3x21'),
 };
 var DOUBLES_TEAM_SETUP = bup.utils.deep_copy(DOUBLES_SETUP);
 DOUBLES_TEAM_SETUP.teams[0].name = 'A team';
@@ -62,7 +70,7 @@ DOUBLES_TEAM_SETUP.team_competition = true;
 var DOUBLES_TEAM_SETUP_AWAY_FIRST = bup.utils.deep_copy(DOUBLES_TEAM_SETUP);
 DOUBLES_TEAM_SETUP_AWAY_FIRST.away_first = true;
 var DOUBLES_SETUP_5x11 = bup.utils.deep_copy(DOUBLES_SETUP);
-DOUBLES_SETUP_5x11.counting = '5x11_15';
+set_counting(DOUBLES_SETUP_5x11, '5x11_15');
 
 
 var DOUBLES_SETUP_EN = bup.utils.deep_copy(DOUBLES_SETUP);
@@ -232,4 +240,5 @@ module.exports = {
 	state_after,
 	state_at,
 	find_object,
+	set_counting,
 };

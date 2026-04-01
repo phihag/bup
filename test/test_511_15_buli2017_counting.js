@@ -9,12 +9,13 @@ var _it = tutils._it;
 var press_score = tutils.press_score;
 var state_after = tutils.state_after;
 var bup = tutils.bup;
+var set_counting = tutils.set_counting;
 
 
 var DOUBLES_SETUP = bup.utils.deep_copy(tutils.DOUBLES_SETUP);
-DOUBLES_SETUP.counting = '5x11_15^90';
+set_counting(DOUBLES_SETUP, '5x11_15^90');
 var SINGLES_SETUP = bup.utils.deep_copy(tutils.SINGLES_SETUP);
-SINGLES_SETUP.counting = '5x11_15^90';
+set_counting(SINGLES_SETUP, '5x11_15^90');
 
 
 _describe('Bundesliga 2017 5x11_15 counting with 90s intervals', function() {
@@ -559,10 +560,10 @@ _describe('Bundesliga 2017 5x11_15 counting with 90s intervals', function() {
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Alice 11-6 15-14 11-5');
+			'Das Spiel wurde gewonnen von Alice 11-6 15-14 11-5\n\nBestätigen des Ergebnisses durch Klick.');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\n\n' +
-			'Match won by Alice 11-6 15-14 11-5');
+			'Match won by Alice 11-6 15-14 11-5\n\nConfirming the result by clicking.');
 
 		alt_presses.push({
 			type: 'postmatch-confirm',
@@ -582,10 +583,10 @@ _describe('Bundesliga 2017 5x11_15 counting with 90s intervals', function() {
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Alice 11-6 15-14 11-5');
+			'Das Spiel wurde gewonnen von Alice 11-6 15-14 11-5\n\nBestätigen des Ergebnisses durch Klick.');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\n\n' +
-			'Match won by Alice 11-6 15-14 11-5');
+			'Match won by Alice 11-6 15-14 11-5\n\nConfirming the result by clicking.');
 
 		press_score(presses, 0, 6);
 		s = state_after(presses, SINGLES_SETUP);
@@ -907,10 +908,10 @@ _describe('Bundesliga 2017 5x11_15 counting with 90s intervals', function() {
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Bob 6-11 14-15 12-10 11-2 11-9');
+			'Das Spiel wurde gewonnen von Bob 6-11 14-15 12-10 11-2 11-9\n\nBestätigen des Ergebnisses durch Klick.');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\n\n' +
-			'Match won by Bob 6-11 14-15 12-10 11-2 11-9');
+			'Match won by Bob 6-11 14-15 12-10 11-2 11-9\n\nConfirming the result by clicking.');
 
 		press_score(presses, 0, 1);
 		s = state_after(presses, SINGLES_SETUP);
@@ -1002,10 +1003,10 @@ _describe('Bundesliga 2017 5x11_15 counting with 90s intervals', function() {
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Bob 6-11 14-15 12-10 11-2 15-14');
+			'Das Spiel wurde gewonnen von Bob 6-11 14-15 12-10 11-2 15-14\n\nBestätigen des Ergebnisses durch Klick.');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\n\n' +
-			'Match won by Bob 6-11 14-15 12-10 11-2 15-14');
+			'Match won by Bob 6-11 14-15 12-10 11-2 15-14\n\nConfirming the result by clicking.');
 
 		press_score(presses, 0, 1);
 		s = state_after(presses, SINGLES_SETUP);
@@ -1024,10 +1025,10 @@ _describe('Bundesliga 2017 5x11_15 counting with 90s intervals', function() {
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Alice 11-6 15-14 10-12 2-11 15-14');
+			'Das Spiel wurde gewonnen von Alice 11-6 15-14 10-12 2-11 15-14\n\nBestätigen des Ergebnisses durch Klick.');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\n\n' +
-			'Match won by Alice 11-6 15-14 10-12 2-11 15-14');
+			'Match won by Alice 11-6 15-14 10-12 2-11 15-14\n\nConfirming the result by clicking.');
 
 		presses.push({
 			type: 'postmatch-confirm',
@@ -1048,10 +1049,10 @@ _describe('Bundesliga 2017 5x11_15 counting with 90s intervals', function() {
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_de(s),
 			'Satz.\n\n' +
-			'Das Spiel wurde gewonnen von Alice 11-6 15-14 10-12 2-11 15-14');
+			'Das Spiel wurde gewonnen von Alice 11-6 15-14 10-12 2-11 15-14\n\nBestätigen des Ergebnisses durch Klick.');
 		assert.strictEqual(pronounce_en(s),
 			'Game.\n\n' +
-			'Match won by Alice 11-6 15-14 10-12 2-11 15-14');
+			'Match won by Alice 11-6 15-14 10-12 2-11 15-14\n\nConfirming the result by clicking.');
 	});
 
 	_it('game_winner helper function', function() {

@@ -9,12 +9,13 @@ var _it = tutils._it;
 var press_score = tutils.press_score;
 var state_after = tutils.state_after;
 var bup = tutils.bup;
+var set_counting = tutils.set_counting;
 
 
 var DOUBLES_SETUP = bup.utils.deep_copy(tutils.DOUBLES_SETUP);
-DOUBLES_SETUP.counting = '2x21+11';
+set_counting(DOUBLES_SETUP, '2x21+11');
 var SINGLES_SETUP = bup.utils.deep_copy(tutils.SINGLES_SETUP);
-SINGLES_SETUP.counting = '2x21+11';
+set_counting(SINGLES_SETUP, '2x21+11');
 
 
 _describe('2x21+11 counting', function() {

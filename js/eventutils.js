@@ -162,6 +162,8 @@ function annotate(s, event) {
 		event.event_name = event.team_names[0] + ' - ' + event.team_names[1];
 	}
 
+	var scoring_format = event.scoring_format || calc.scoring_format_from_counting(event.counting) || default_scoring_format(league_key);
+	var counting = event.counting || (scoring_format && scoring_format.name);
 	var props = {
 		league_key: league_key,
 		tournament_name: event.tournament_name,
@@ -169,14 +171,15 @@ function annotate(s, event) {
 		team_competition: event.team_competition,
 		nation_competition: event.nation_competition,
 		away_first: event.away_first,
-		counting: event.counting,
+		counting: counting,
+		scoring_format: scoring_format,
 		date: event.date,
 	};
-	if (league_key && !event.counting) {
-		props.counting = default_counting(league_key);
-	}
 	event.matches.forEach(function(m) {
 		var setup = m.setup;
+		if (!setup.scoring_format && setup.counting) {
+			setup.scoring_format = calc.scoring_format_from_counting(setup.counting);
+		}
 		for (var key in props) {
 			var val = props[key];
 			if (val === undefined) {
@@ -185,7 +188,7 @@ function annotate(s, event) {
 
 			/*@DEV*/
 			if (setup[key] === val) {
-				if (key !== 'counting') { // counting is very important, and in btde it's dynamic
+				if ((key !== 'counting') && (key !== 'scoring_format')) { // counting is very important, and in btde it's dynamic
 					report_problem.silent_error('Redundant key ' + key + ' in ' + setup.match_id);
 				}
 			}
@@ -513,6 +516,19 @@ function default_counting(league_key) {
 	}
 }
 
+function default_scoring_format(league_key) {
+	var counting = default_counting(league_key);
+	return calc.scoring_format_from_counting(counting);
+}
+
+function default_setup(league_key) {
+	var scoring_format = default_scoring_format(league_key) || calc.scoring_format_from_counting('3x21');
+	return {
+		counting: scoring_format && scoring_format.name,
+		scoring_format: scoring_format,
+	};
+}
+
 function umpire_pay(league_key) {
 	if (is_bundesliga(league_key)) {
 		return { // §3.2 BLO
@@ -567,7 +583,9 @@ function make_empty_matches(league_key, event_id) {
 			{name: 'GD', is_doubles: true},
 			{name: '2.HE', is_doubles: false},
 		];
-		var counting = default_counting(league_key);
+		var setup_defaults = default_setup(league_key);
+		var counting = setup_defaults.counting;
+		var scoring_format = setup_defaults.scoring_format
 
 		return rawdef.map(function(rd) {
 			return {
@@ -575,6 +593,7 @@ function make_empty_matches(league_key, event_id) {
 					match_name: rd.name,
 					match_id: event_id + '_' + rd.name,
 					counting: counting,
+					scoring_format: scoring_format || calc.scoring_format_from_counting(counting),
 					is_doubles: rd.is_doubles,
 					teams: [{players: []}, {players: []}],
 				},
@@ -644,6 +663,8 @@ return {
 	set_not_before: set_not_before,
 	setups_eq: setups_eq,
 	default_counting: default_counting,
+	default_scoring_format: default_scoring_format,
+	default_setup: default_setup,
 	umpire_pay: umpire_pay,
 	name_by_league: name_by_league,
 	is_german8: is_german8,

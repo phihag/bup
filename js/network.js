@@ -173,6 +173,10 @@ function enter_match(match) {
 		netw.prepare_match(state.settings, match);
 	}
 
+	if (state.initialized && state.metadata && (state.metadata.id === match.setup.match_id)) {
+		return;
+	}
+
 	settings.hide(true);
 	control.start_match_dialog(state, match.setup);
 
@@ -190,7 +194,7 @@ function enter_match(match) {
 
 	var netscore = match.network_score;
 	if (netscore) {
-		var mwinner = calc.match_winner(match.setup.counting, netscore);
+		var mwinner = calc.match_winner(match.setup, netscore);
 
 		var on_cancel = function() {
 			control.stop_match(state);
@@ -717,11 +721,10 @@ function ui_init(s, hash_query) {
 	} else if (hash_query.btsh_e !== undefined) {
 		networks.btsh = btsh(null, hash_query.btsh_e);
 	} else if (hash_query.mo !== undefined) {
-		networks.mo = staticnet({
-			staticnet_message: 'none',
-			matches: [],
-			counting: '3x21',
-		});
+		var mo_event = calc.setup_from_scoring_format(calc.scoring_format_from_counting('3x21'));
+		mo_event.staticnet_message = 'none';
+		mo_event.matches = [];
+		networks.mo = staticnet(mo_event);
 	} else if (hash_query.import_url) {
 		networks.imported = staticnet(null, hash_query.import_url, function(s, url, cb) {
 			urlimport.import_url(s, url, function(errmsg, event) {

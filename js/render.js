@@ -38,19 +38,19 @@ function _score_display_init(s) {
 	});
 	score_table.setAttribute('data-game-count', s.match.max_games);
 
-	var counting_tr = uiu.el(score_table, 'tr', {
-		'class': 'score_counting_tr',
+	var scoring_format_tr = uiu.el(score_table, 'tr', {
+		'class': 'score_scoring_format_tr',
 	});
-	var counting_td = uiu.el(counting_tr, 'td', {
+	var scoring_format_td = uiu.el(scoring_format_tr, 'td', {
 		colspan: 2,
-		'class': 'score_counting_td',
+		'class': 'score_scoring_format_td',
 	});
-	var counting_container = uiu.el(counting_td, 'div', {
-		'class': 'score_counting_container',
+	var scoring_format_container = uiu.el(scoring_format_td, 'div', {
+		'class': 'score_scoring_format_container',
 	});
-	uiu.el(counting_container, 'div', {
-		'class': 'score_counting',
-	}, s.setup.counting);
+	uiu.el(scoring_format_container, 'div', {
+		'class': 'score_scoring_format',
+	}, (s.setup.scoring_format && s.setup.scoring_format.name) || s.setup.counting || '');
 
 	for (var game_index = 0;game_index < s.match.max_games;game_index++) {
 		var tr = uiu.el(score_table, 'tr', {
@@ -169,10 +169,10 @@ function _score_display_set_game(s, game, game_index, is_current) {
 	}
 
 	if (is_current) {
-		var $counting_tr = $('.score_counting_tr');
-		$counting_tr.insertBefore(tr);
+		var $scoring_format_tr = $('.score_scoring_format_tr');
+		$scoring_format_tr.insertBefore(tr);
 		var ann_tr = $('tr.score_announcements');
-		ann_tr.insertBefore($counting_tr);
+		ann_tr.insertBefore($scoring_format_tr);
 
 		var ann_td = ann_tr.children('td');
 		ann_td.empty();
@@ -230,9 +230,9 @@ function render_score_display(s) {
 		}
 	}
 
-	uiu.$visible_qs('.score_counting_container', (
+	uiu.$visible_qs('.score_scoring_format_container', (
 		!s.ui.editmode_active &&
-		s.setup && s.setup.counting &&
+		s.setup && (s.setup.scoring_format || s.setup.counting) &&
 		s.match && (s.match.finished_games.length === 0) &&
 		s.game && (s.game.score[0] <= 0) && (s.game.score[1] <= 0)
 	));

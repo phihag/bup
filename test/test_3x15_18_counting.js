@@ -9,12 +9,13 @@ var _it = tutils._it;
 var press_score = tutils.press_score;
 var state_after = tutils.state_after;
 var bup = tutils.bup;
+var set_counting = tutils.set_counting;
 
 
 var DOUBLES_SETUP = bup.utils.deep_copy(tutils.DOUBLES_SETUP);
-DOUBLES_SETUP.counting = '3x15_18';
+set_counting(DOUBLES_SETUP, '3x15_18');
 var SINGLES_SETUP = bup.utils.deep_copy(tutils.SINGLES_SETUP);
-SINGLES_SETUP.counting = '3x15_18';
+set_counting(SINGLES_SETUP, '3x15_18');
 
 
 _describe('Short Swiss Match (3x15_18)', function() {
@@ -481,10 +482,10 @@ _describe('Short Swiss Match (3x15_18)', function() {
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_dech(s),
 			'Satz.\n\n' +
-			'Spiel gewonnen von Alice 15-6 18-17');
+			'Spiel gewonnen von Alice 15-6 18-17\n\nBest�tigen des Ergebnisses durch Klick.');
 		assert.strictEqual(pronounce_frch(s),
 			'Set.\n\n' +
-			'Match gagné par Alice 15-6 18-17');
+			'Match gagné par Alice 15-6 18-17\n\nConfirmer le résultat en cliquant.');
 
 		presses.push({
 			type: 'score',
@@ -654,10 +655,10 @@ _describe('Short Swiss Match (3x15_18)', function() {
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_dech(s),
 			'Satz.\n\n' +
-			'Spiel gewonnen von Bob 6-15 18-17 15-13');
+			'Spiel gewonnen von Bob 6-15 18-17 15-13\n\nBest\uFFFDtigen des Ergebnisses durch Klick.');
 		assert.strictEqual(pronounce_frch(s),
 			'Set.\n\n' +
-			'Match gagné par Bob 6-15 18-17 15-13');
+			'Match gagné par Bob 6-15 18-17 15-13\n\nConfirmer le résultat en cliquant.');
 
 		press_score(presses, 0, 1);
 		s = state_after(presses, SINGLES_SETUP);
@@ -745,10 +746,10 @@ _describe('Short Swiss Match (3x15_18)', function() {
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_dech(s),
 			'Satz.\n\n' +
-			'Spiel gewonnen von Bob 6-15 18-17 18-17');
+			'Spiel gewonnen von Bob 6-15 18-17 18-17\n\nBest\uFFFDtigen des Ergebnisses durch Klick.');
 		assert.strictEqual(pronounce_frch(s),
 			'Set.\n\n' +
-			'Match gagné par Bob 6-15 18-17 18-17');
+			'Match gagné par Bob 6-15 18-17 18-17\n\nConfirmer le résultat en cliquant.');
 
 
 		press_score(presses, 0, 1);
@@ -768,10 +769,10 @@ _describe('Short Swiss Match (3x15_18)', function() {
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_dech(s),
 			'Satz.\n\n' +
-			'Spiel gewonnen von Alice 15-6 17-18 18-17');
+			'Spiel gewonnen von Alice 15-6 17-18 18-17\n\nBest\uFFFDtigen des Ergebnisses durch Klick.');
 		assert.strictEqual(pronounce_frch(s),
 			'Set.\n\n' +
-			'Match gagné par Alice 15-6 17-18 18-17');
+			'Match gagné par Alice 15-6 17-18 18-17\n\nConfirmer le résultat en cliquant.');
 
 		presses.push({
 			type: 'postmatch-confirm',
@@ -792,10 +793,10 @@ _describe('Short Swiss Match (3x15_18)', function() {
 		assert.deepStrictEqual(s.timer, false);
 		assert.strictEqual(pronounce_dech(s),
 			'Satz.\n\n' +
-			'Spiel gewonnen von Alice 15-6 17-18 18-17');
+			'Spiel gewonnen von Alice 15-6 17-18 18-17\n\nBest\uFFFDtigen des Ergebnisses durch Klick.');
 		assert.strictEqual(pronounce_frch(s),
 			'Set.\n\n' +
-			'Match gagné par Alice 15-6 17-18 18-17');
+			'Match gagné par Alice 15-6 17-18 18-17\n\nConfirmer le résultat en cliquant.');
 	});
 
 	_it('game_winner helper function', function() {

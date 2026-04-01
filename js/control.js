@@ -3,11 +3,13 @@ var control = (function() {
 
 function demo_match_start(setup) {
 	if (! setup) {
-		setup = {
-			counting: '3x21',
-			team_competition: true,
-		};
+		setup = calc.setup_from_scoring_format(calc.scoring_format_from_counting('3x21'));
+		setup.team_competition = true;
 	}
+	if ((! setup.scoring_format) && setup.counting) {
+		setup.scoring_format = calc.scoring_format_from_counting(setup.counting);
+	}
+
 	utils.obj_update(setup, {
 		is_doubles: true,
 		teams: [{
@@ -35,8 +37,8 @@ function demo_match_start(setup) {
 }
 
 function empty_match_start(counting) {
-	var setup = {
-		counting: counting,
+	var setup = calc.setup_from_scoring_format(calc.scoring_format_from_counting(counting));
+	utils.obj_update(setup, {
 		is_doubles: false,
 		date: ' ',
 		teams: [{
@@ -49,7 +51,7 @@ function empty_match_start(counting) {
 			}],
 		}],
 		team_competition: false,
-	};
+	});
 
 	settings.hide(true);
 	start_match(state, setup, [], {

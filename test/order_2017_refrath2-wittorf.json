@@ -26,8 +26,8 @@
                                 },
                                 {
                                     "firstname": "Lukas",
-                                    "lastname": "M\u00fchlhaus",
-                                    "name": "Lukas M\u00fchlhaus"
+                                    "lastname": "Mühlhaus",
+                                    "name": "Lukas Mühlhaus"
                                 }
                             ]
                         },
@@ -46,7 +46,24 @@
                             ]
                         }
                     ],
-                    "match_id": "btde_2017-10-08_HD1_TV Refrath 2-Blau-Weiss Wittorf-NMS"
+                    "match_id": "btde_2017-10-08_HD1_TV Refrath 2-Blau-Weiss Wittorf-NMS",
+                    "scoring_format": {
+                        "numSets": 5,
+                        "set_points": {
+                            "end_points": 11,
+                            "max_points": 15,
+                            "interval_at": null,
+                            "interval_duration_ms": null,
+                            "break_before_set_duration_ms": 90000
+                        },
+                        "last_set_points": {
+                            "end_points": 11,
+                            "max_points": 15,
+                            "interval_at": 6,
+                            "interval_duration_ms": 90000,
+                            "break_before_set_duration_ms": 90000
+                        }
+                    }
                 }
             },
             {
@@ -65,8 +82,8 @@
                                 },
                                 {
                                     "firstname": "Runa",
-                                    "lastname": "Pl\u00fctzer",
-                                    "name": "Runa Pl\u00fctzer"
+                                    "lastname": "Plützer",
+                                    "name": "Runa Plützer"
                                 }
                             ]
                         },
@@ -79,13 +96,30 @@
                                 },
                                 {
                                     "firstname": "Petra",
-                                    "lastname": "Schl\u00fcter",
-                                    "name": "Petra Schl\u00fcter"
+                                    "lastname": "Schlüter",
+                                    "name": "Petra Schlüter"
                                 }
                             ]
                         }
                     ],
-                    "match_id": "btde_2017-10-08_DD_TV Refrath 2-Blau-Weiss Wittorf-NMS"
+                    "match_id": "btde_2017-10-08_DD_TV Refrath 2-Blau-Weiss Wittorf-NMS",
+                    "scoring_format": {
+                        "numSets": 5,
+                        "set_points": {
+                            "end_points": 11,
+                            "max_points": 15,
+                            "interval_at": null,
+                            "interval_duration_ms": null,
+                            "break_before_set_duration_ms": 90000
+                        },
+                        "last_set_points": {
+                            "end_points": 11,
+                            "max_points": 15,
+                            "interval_at": 6,
+                            "interval_duration_ms": 90000,
+                            "break_before_set_duration_ms": 90000
+                        }
+                    }
                 }
             },
             {
@@ -113,8 +147,8 @@
                             "players": [
                                 {
                                     "firstname": "Sebastian",
-                                    "lastname": "Sch\u00f6ttler",
-                                    "name": "Sebastian Sch\u00f6ttler"
+                                    "lastname": "Schöttler",
+                                    "name": "Sebastian Schöttler"
                                 },
                                 {
                                     "firstname": "Lucas",
@@ -124,7 +158,24 @@
                             ]
                         }
                     ],
-                    "match_id": "btde_2017-10-08_HD2_TV Refrath 2-Blau-Weiss Wittorf-NMS"
+                    "match_id": "btde_2017-10-08_HD2_TV Refrath 2-Blau-Weiss Wittorf-NMS",
+                    "scoring_format": {
+                        "numSets": 5,
+                        "set_points": {
+                            "end_points": 11,
+                            "max_points": 15,
+                            "interval_at": null,
+                            "interval_duration_ms": null,
+                            "break_before_set_duration_ms": 90000
+                        },
+                        "last_set_points": {
+                            "end_points": 11,
+                            "max_points": 15,
+                            "interval_at": 6,
+                            "interval_duration_ms": 90000,
+                            "break_before_set_duration_ms": 90000
+                        }
+                    }
                 }
             },
             {
@@ -147,13 +198,30 @@
                             "players": [
                                 {
                                     "firstname": "Sebastian",
-                                    "lastname": "Sch\u00f6ttler",
-                                    "name": "Sebastian Sch\u00f6ttler"
+                                    "lastname": "Schöttler",
+                                    "name": "Sebastian Schöttler"
                                 }
                             ]
                         }
                     ],
-                    "match_id": "btde_2017-10-08_HE1_TV Refrath 2-Blau-Weiss Wittorf-NMS"
+                    "match_id": "btde_2017-10-08_HE1_TV Refrath 2-Blau-Weiss Wittorf-NMS",
+                    "scoring_format": {
+                        "numSets": 5,
+                        "set_points": {
+                            "end_points": 11,
+                            "max_points": 15,
+                            "interval_at": null,
+                            "interval_duration_ms": null,
+                            "break_before_set_duration_ms": 90000
+                        },
+                        "last_set_points": {
+                            "end_points": 11,
+                            "max_points": 15,
+                            "interval_at": 6,
+                            "interval_duration_ms": 90000,
+                            "break_before_set_duration_ms": 90000
+                        }
+                    }
                 }
             },
             {
@@ -176,13 +244,30 @@
                             "players": [
                                 {
                                     "firstname": "Petra",
-                                    "lastname": "Schl\u00fcter",
-                                    "name": "Petra Schl\u00fcter"
+                                    "lastname": "Schlüter",
+                                    "name": "Petra Schlüter"
                                 }
                             ]
                         }
                     ],
-                    "match_id": "btde_2017-10-08_DE_TV Refrath 2-Blau-Weiss Wittorf-NMS"
+                    "match_id": "btde_2017-10-08_DE_TV Refrath 2-Blau-Weiss Wittorf-NMS",
+                    "scoring_format": {
+                        "numSets": 5,
+                        "set_points": {
+                            "end_points": 11,
+                            "max_points": 15,
+                            "interval_at": null,
+                            "interval_duration_ms": null,
+                            "break_before_set_duration_ms": 90000
+                        },
+                        "last_set_points": {
+                            "end_points": 11,
+                            "max_points": 15,
+                            "interval_at": 6,
+                            "interval_duration_ms": 90000,
+                            "break_before_set_duration_ms": 90000
+                        }
+                    }
                 }
             },
             {
@@ -201,8 +286,8 @@
                                 },
                                 {
                                     "firstname": "Runa",
-                                    "lastname": "Pl\u00fctzer",
-                                    "name": "Runa Pl\u00fctzer"
+                                    "lastname": "Plützer",
+                                    "name": "Runa Plützer"
                                 }
                             ]
                         },
@@ -221,7 +306,24 @@
                             ]
                         }
                     ],
-                    "match_id": "btde_2017-10-08_GD_TV Refrath 2-Blau-Weiss Wittorf-NMS"
+                    "match_id": "btde_2017-10-08_GD_TV Refrath 2-Blau-Weiss Wittorf-NMS",
+                    "scoring_format": {
+                        "numSets": 5,
+                        "set_points": {
+                            "end_points": 11,
+                            "max_points": 15,
+                            "interval_at": null,
+                            "interval_duration_ms": null,
+                            "break_before_set_duration_ms": 90000
+                        },
+                        "last_set_points": {
+                            "end_points": 11,
+                            "max_points": 15,
+                            "interval_at": 6,
+                            "interval_duration_ms": 90000,
+                            "break_before_set_duration_ms": 90000
+                        }
+                    }
                 }
             },
             {
@@ -250,10 +352,26 @@
                             ]
                         }
                     ],
-                    "match_id": "btde_2017-10-08_HE2_TV Refrath 2-Blau-Weiss Wittorf-NMS"
+                    "match_id": "btde_2017-10-08_HE2_TV Refrath 2-Blau-Weiss Wittorf-NMS",
+                    "scoring_format": {
+                        "numSets": 5,
+                        "set_points": {
+                            "end_points": 11,
+                            "max_points": 15,
+                            "interval_at": null,
+                            "interval_duration_ms": null,
+                            "break_before_set_duration_ms": 90000
+                        },
+                        "last_set_points": {
+                            "end_points": 11,
+                            "max_points": 15,
+                            "interval_at": 6,
+                            "interval_duration_ms": 90000,
+                            "break_before_set_duration_ms": 90000
+                        }
+                    }
                 }
             }
         ]
     }
 }
-

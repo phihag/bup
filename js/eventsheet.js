@@ -171,10 +171,10 @@ function _player_names(match, team_id) {
 	}
 }
 
-function calc_gamescore(counting, netscore) {
+function calc_gamescore(setup, netscore) {
 	var scores = [0, 0];
 	netscore.forEach(function(game_score, game_idx) {
-		var winner = calc.game_winner(counting, game_idx, game_score[0], game_score[1]);
+		var winner = calc.game_winner(setup, game_idx, game_score[0], game_score[1]);
 		if (winner == 'left') {
 			scores[0]++;
 		} else if (winner == 'right') {
@@ -184,8 +184,8 @@ function calc_gamescore(counting, netscore) {
 	return scores;
 }
 
-function calc_matchscore(counting, netscore) {
-	var winner = calc.match_winner(counting, netscore);
+function calc_matchscore(setup, netscore) {
+	var winner = calc.match_winner(setup, netscore);
 	if (winner == 'left') {
 		return [1, 0];
 	} else if (winner == 'right') {
@@ -335,8 +335,8 @@ function save_bundesliga(ev, es_key, ui8r, extra_data) {
 				points[0] += game_score[0];
 				points[1] += game_score[1];
 			});
-			games = calc_gamescore(m.setup.counting, netscore);
-			matches = calc_matchscore(m.setup.counting, netscore);
+			games = calc_gamescore(m.setup, netscore);
+			matches = calc_matchscore(m.setup, netscore);
 		}
 		scores.push(points[0]);
 		scores.push(points[1]);
@@ -670,13 +670,13 @@ var render_nla = _svg_func(function(svg, ev) {
 		}
 
 		if (netscore && (netscore.length > 0) && ((netscore[0][0] > 0) || (netscore[0][1] > 0))) {
-			var games = calc_gamescore(match.setup.counting, netscore);
+			var games = calc_gamescore(match.setup, netscore);
 			sum_games[0] += games[0];
 			sum_games[1] += games[1];
 			_svg_text(svg, eid + '_games0', games[0]);
 			_svg_text(svg, eid + '_games1', games[1]);
 
-			var matches_score = calc_matchscore(match.setup.counting, netscore);
+			var matches_score = calc_matchscore(match.setup, netscore);
 			if (matches_score[0] !== undefined) {
 				sum_matches[0] += matches_score[0];
 				sum_matches[1] += matches_score[1];
@@ -1124,13 +1124,13 @@ var render_basic_eventsheet = _svg_func(function(svg, ev, es_key, extra_data) {
 			_svg_text(svg, 'match' + match_id + '_points0', points[0]);
 			_svg_text(svg, 'match' + match_id + '_points1', points[1]);
 
-			var games = calc_gamescore(match.setup.counting, netscore);
+			var games = calc_gamescore(match.setup, netscore);
 			sum_games[0] += games[0];
 			sum_games[1] += games[1];
 			_svg_text(svg, 'match' + match_id + '_games0', games[0]);
 			_svg_text(svg, 'match' + match_id + '_games1', games[1]);
 
-			var matches_score = calc_matchscore(match.setup.counting, netscore);
+			var matches_score = calc_matchscore(match.setup, netscore);
 			if (matches_score[0] !== undefined) {
 				sum_matches[0] += matches_score[0];
 				sum_matches[1] += matches_score[1];
@@ -1228,7 +1228,7 @@ function calc_sums(match) {
 		res.p[0] += ngame[0];
 		res.p[1] += ngame[1];
 
-		var winner = calc.game_winner(match.setup.counting, game_idx, ngame[0], ngame[1]);
+		var winner = calc.game_winner(match.setup, game_idx, ngame[0], ngame[1]);
 		if (winner === 'left') {
 			res.g[0]++;
 		} else if (winner === 'right') {
@@ -1236,7 +1236,7 @@ function calc_sums(match) {
 		}
 	});
 
-	var mwinner = calc.match_winner(match.setup.counting, netscore);
+	var mwinner = calc.match_winner(match.setup, netscore);
 	if (mwinner === 'left') {
 		res.m = [1, 0];
 	} else if (mwinner === 'right') {
@@ -1742,8 +1742,8 @@ function save_obl(ev, es_key, ui8r, extra_data) {
 				}
 
 				var netscore = m.network_score || [];
-				var counting = m.setup.counting;
-				var mwinner = calc.match_winner(counting, netscore);
+				var setup = m.setup;
+				var mwinner = calc.match_winner(setup, netscore);
 				var teams = m.setup.teams;
 				var ID_COLS = ['B', 'J'];
 
