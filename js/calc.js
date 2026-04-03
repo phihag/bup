@@ -695,7 +695,7 @@ function calc_press(s, press) {
 	case 'pick_side':
 		// Manuel Lappe reported a mysterious error where team1_left seems to have been not boolean
 		if (typeof press.team1_left != 'boolean') {
-			report_problem.silent_error('pick_side value not boolean, but ' + (typeof press.team1_left));
+			if (typeof report_problem !== "undefined" && report_problem && report_problem.silent_error) { report_problem.silent_error('pick_side value not boolean, but ' + (typeof press.team1_left)); }
 		}
 
 		s.game.start_team1_left = press.team1_left;
@@ -746,12 +746,12 @@ function calc_press(s, press) {
 		// Report by Manuel Lappe: It is possible to get into a state where both presses effect the same side.
 		var side_type = typeof s.game.team1_left;
 		if (side_type != 'boolean') {
-			report_problem.silent_error('Unclear sides while scoring, type ' + side_type);
+			if (typeof report_problem !== "undefined" && report_problem && report_problem.silent_error) { report_problem.silent_error('Unclear sides while scoring, type ' + side_type); }
 		}
 
 		// This should not be possible in the UI, but could be caused by a race condition or invalid data
 		if (s.game.finished) {
-			report_problem.silent_error('Ignoring score press: Game is already finished');
+			if (typeof report_problem !== "undefined" && report_problem && report_problem.silent_error) { report_problem.silent_error('Ignoring score press: Game is already finished'); }
 			break;
 		}
 

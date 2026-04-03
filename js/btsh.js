@@ -317,8 +317,10 @@ function btsh(baseurl, tournament_key) {
 					bts_update_courts_callback(null, state.btsh_courts);
 				}
 				if(state.settings.devicemode == "umpire") {
-					settings.show();
-					settings.on_mode_change(state);
+					if (!state.initialized || !state.match || state.match.finish_confirmed) {
+						settings.show();
+						settings.on_mode_change(state);
+					}
 				} else {
 					settings.hide_displaymode();
 				}

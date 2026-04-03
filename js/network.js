@@ -173,7 +173,9 @@ function enter_match(match) {
 		netw.prepare_match(state.settings, match);
 	}
 
-	if (state.initialized && state.metadata && (state.metadata.id === match.setup.match_id)) {
+	if (state.initialized && state.metadata && (String(state.metadata.id) === String(match.setup.match_id))) {
+		settings.hide(true);
+		render.show();
 		return;
 	}
 
