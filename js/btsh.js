@@ -264,9 +264,32 @@ function btsh(baseurl, tournament_key) {
 	function default_change_handler(c) {
 		switch (c.ctype) {
 			case 'score-update':
+				console.log('[bup] score-update received', {
+					ts: Date.now(),
+					court_id: state && state.settings ? state.settings.court_id : null,
+					match_states: c.val && c.val.event && c.val.event.matches ? c.val.event.matches.map(function(match) {
+						return {
+							match_id: match && match.setup ? match.setup.match_id : null,
+							state: match && match.setup ? match.setup.state : null,
+							now_on_court: match && match.setup ? match.setup.now_on_court : null,
+							called_timestamp: match && match.setup ? match.setup.called_timestamp : null,
+							end_ts: match ? match.end_ts : null,
+						};
+					}) : [],
+				});
 				if (bts_update_callback != null) {
 					bts_update_callback(null, state, c.val.event);
-					if (state.settings.court_id != '' && c.val.event.matches[0] && c.val.event.matches[0].end_ts != null) {
+					if (
+						state.settings.court_id != '' &&
+						c.val.event.matches[0] &&
+						c.val.event.matches[0].end_ts != null
+					) {
+						console.log('[bup] score-update scheduling reload_match_information', {
+							ts: Date.now(),
+							court_id: state && state.settings ? state.settings.court_id : null,
+							first_match_id: c.val.event.matches[0] && c.val.event.matches[0].setup ? c.val.event.matches[0].setup.match_id : null,
+							first_match_end_ts: c.val.event.matches[0] ? c.val.event.matches[0].end_ts : null,
+						});
 						setTimeout(reload_match_information, 60000);
 					}
 				} else {

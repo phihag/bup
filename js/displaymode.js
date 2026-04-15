@@ -4217,6 +4217,20 @@ function update(err, s, event) {
 
 	// Also update general state
 	network.update_event(s, event);
+	console.log('[bup] displaymode update', {
+		ts: Date.now(),
+		court_id: s && s.settings ? s.settings.court_id : null,
+		err: err ? (err.msg || err.errtype || String(err)) : null,
+		match_states: event && event.matches ? event.matches.map(function(match) {
+			return {
+				match_id: match && match.setup ? match.setup.match_id : null,
+				state: match && match.setup ? match.setup.state : null,
+				now_on_court: match && match.setup ? match.setup.now_on_court : null,
+				called_timestamp: match && match.setup ? match.setup.called_timestamp : null,
+				end_ts: match ? match.end_ts : null,
+			};
+		}) : [],
+	});
 
 	// If nothing has changed we can skip painting
 	var cur_event_hash = hash(s.settings, event);
