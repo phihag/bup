@@ -1917,7 +1917,15 @@ function render_teamcourt(s, container, event, court, match, colors) {
 			style: 'margin-right:1ch',
 		});
 	}
-	uiu.el(match_name_container, 'div', {}, match.setup.match_name);
+	var setup = match.setup;
+	var match_name = setup.match_name;
+	if (! setup.team_competition && !setup.nation_competition) {
+		// More space for the event
+		if (setup.event_name) {
+			match_name = setup.event_name + ' ' + match_name;
+		}
+	}
+	uiu.el(match_name_container, 'div', {}, match_name);
 
 	match.setup.teams.forEach(function(team, team_id) {
 		var col = colors[team_id];
