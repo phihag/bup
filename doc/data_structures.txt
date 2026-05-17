@@ -128,6 +128,18 @@ setup*        All properties that don't change during the match. A Setup object.
 presses       Array of Press, contains all button presses in the match so far.
 incomplete    Boolean. If set then the match is not yet ready to be started,
               for instance because no players have been assigned yet.
+match_control_color Color used by match control to indicate something about this match.
+              Any RGB code, like "#00ff00".
+              Magic values for tournament management systems with limited color choices:
+              "yellow": #ffd838
+              "pink": #ff79ab
+              "orange": #fbad4b
+              "lightblue": #1dace6
+              "cyan": "#5ce1b8"
+              "purple": "#c56bff"
+              null for no color.
+match_control_note A note from match control, e.g. "major's speech&hand shake with players before game start".
+match_control_printed Boolean: true to indicate that the scoresheet has been printed.
 
 The following properties of a match are only relevant for network communication:
 
