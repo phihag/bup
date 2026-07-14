@@ -190,7 +190,7 @@ var IOC_TABLE = {
 	'TRI': 'Trinidad and Tobago',
 	'TTO': 'Trinidad and Tobago',
 	'TUN': 'Tunisia',
-	'TUR': 'Turkey',
+	'TUR': 'Türkiye',
 	'TUV': 'Tuvalu',
 	'UAE': 'United Arab Emirates',
 	'UGA': 'Uganda',
