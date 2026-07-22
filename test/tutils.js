@@ -113,12 +113,17 @@ function state_at(network_score, setup, settings) {
 /**
 * Guaranteed to switch in the form left-right-left-right-...
 */
-function press_score(presses, left_score, right_score) {
+function press_score(presses, left_score, right_score, {timestamp=undefined} = {}) {
+	const timestampParams = {};
+	if (timestamp !== undefined) {
+		timestampParams.timestamp = timestamp;
+	}
 	while ((left_score > 0) || (right_score > 0)) {
 		if (left_score > 0) {
 			presses.push({
 				type: 'score',
 				side: 'left',
+				...timestampParams
 			});
 			left_score--;
 		}
@@ -126,6 +131,7 @@ function press_score(presses, left_score, right_score) {
 			presses.push({
 				type: 'score',
 				side: 'right',
+				...timestampParams
 			});
 			right_score--;
 		}
@@ -208,6 +214,47 @@ async function assert_snapshot(test_name, actual, {dirname=__dirname} = {}) {
 	}
 }
 
+function assert_flags(s, expected) {
+	const ALL_FLAGS = [
+		'interval',
+		'change_sides',
+		'gamepoint',
+		'matchpoint',
+		'game',
+		'finished',
+	];
+	const flags = [];
+	for (const flag of ALL_FLAGS) {
+		if (s.game[flag]) {
+			flags.push(flag);
+		}
+	}
+	if (s.match.finished) {
+		flags.push('match_finished');
+	}
+
+	function _null_flag(name, v) {
+		if (v === null) return; // no flag
+
+		if (v === true) {
+			flags.push(name);
+		} else {
+			assert.strictEqual(v, false);
+			flags.push(`!${name}`);
+		}
+	}
+
+	_null_flag('team1_won', s.game.team1_won);
+	_null_flag('match_team1_won', s.match.team1_won);
+	if (s.timer) {
+		flags.push('timer');
+	} else {
+		assert.strictEqual(s.timer, false);
+	}
+
+	assert.deepStrictEqual(flags, expected);
+}
+
 module.exports = {
 	DOUBLES_SETUP,
 	SINGLES_SETUP,
@@ -225,6 +272,7 @@ module.exports = {
 	_after,
 	bup,
 
+	assert_flags,
 	assert_u8r_eq,
 	assert_snapshot,
 	press_score,

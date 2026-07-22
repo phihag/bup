@@ -6,8 +6,7 @@ var tutils = require('./tutils');
 var _describe = tutils._describe;
 var _it = tutils._it;
 
-var press_score = tutils.press_score;
-var state_after = tutils.state_after;
+const {press_score, state_after, assert_flags } = tutils;
 var bup = tutils.bup;
 
 
@@ -33,31 +32,13 @@ _describe('3x11_15 counting', function() {
 		var s = state_after(presses, SINGLES_SETUP);
 		assert.deepStrictEqual(s.game.score, [9, 9]);
 		assert.strictEqual(s.game.team1_left, true);
-		assert.strictEqual(s.game.interval, false);
-		assert.strictEqual(s.game.change_sides, false);
-		assert.strictEqual(s.game.matchpoint, false);
-		assert.strictEqual(s.game.gamepoint, false);
-		assert.strictEqual(s.game.game, false);
-		assert.strictEqual(s.game.finished, false);
-		assert.strictEqual(s.match.finished, false);
-		assert.strictEqual(s.game.team1_won, null);
-		assert.strictEqual(s.match.team1_won, null);
-		assert.deepStrictEqual(s.timer, false);
+		assert_flags(s, []);
 
 		press_score(presses, 1, 0);
 		s = state_after(presses, SINGLES_SETUP);
 		assert.deepStrictEqual(s.game.score, [10, 9]);
 		assert.strictEqual(s.game.team1_left, true);
-		assert.strictEqual(s.game.interval, false);
-		assert.strictEqual(s.game.change_sides, false);
-		assert.strictEqual(s.game.matchpoint, false);
-		assert.strictEqual(s.game.gamepoint, true);
-		assert.strictEqual(s.game.game, false);
-		assert.strictEqual(s.game.finished, false);
-		assert.strictEqual(s.match.finished, false);
-		assert.strictEqual(s.game.team1_won, null);
-		assert.strictEqual(s.match.team1_won, null);
-		assert.deepStrictEqual(s.timer, false);
+		assert_flags(s, ['gamepoint']);
 
 		presses.push({
 			type: 'score',
@@ -67,15 +48,7 @@ _describe('3x11_15 counting', function() {
 		s = state_after(presses, SINGLES_SETUP);
 		assert.deepStrictEqual(s.game.score, [11, 9]);
 		assert.strictEqual(s.game.team1_left, true);
-		assert.strictEqual(s.game.interval, false);
-		assert.strictEqual(s.game.change_sides, false);
-		assert.strictEqual(s.game.matchpoint, false);
-		assert.strictEqual(s.game.gamepoint, false);
-		assert.strictEqual(s.game.game, true);
-		assert.strictEqual(s.game.finished, true);
-		assert.strictEqual(s.match.finished, false);
-		assert.strictEqual(s.game.team1_won, true);
-		assert.strictEqual(s.match.team1_won, null);
+		assert_flags(s, ['game', 'finished', 'team1_won', 'timer']);
 		assert.deepStrictEqual(s.timer, {
 			duration: 120000,
 			exigent: 25000,
