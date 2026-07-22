@@ -54,6 +54,7 @@ counting        Default counting scheme. Implicitly set by league_key.
                 Set this for events without league_key.
                 Available values:
                   "3x21"       BWF since 2016
+                  "3x15"       BWF since 2027 (3x15 up to 21)
                   "5x11_15"    BWF 2016 Experiment Option 1 (5x11 until max. 15)
                   "5x11/3"     BWF 2016 Experiment Option 2 (5x11 with 3 point challenge)
                   "5x11_15^90" German Bundesliga 2017- (5x11 until max. 15, 90s intervals)

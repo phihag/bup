@@ -52,6 +52,13 @@ function _is_winner(counting, game_idx, candidate, other) {
 			((candidate == 13) && (other >= 10) && (other < 13))
 		);
 	}
+	if (counting === '3x15') {
+		return (
+			((candidate == 15) && (other < 14)) ||
+			((candidate > 15) && (candidate <= 20) && (other == candidate - 2)) ||
+			(candidate >= 21)
+		);
+	}
 	if (counting === '3x15_18') {
 		return (
 			((candidate == 15) && (other < 14)) ||
@@ -237,6 +244,7 @@ function winning_game_count(counting) {
 	case '5x11_11':
 		return 3;
 	case '3x21':
+	case '3x15':
 	case '2x21+11':
 	case '3x11_15':
 	case '3x15_18':
@@ -258,6 +266,7 @@ function max_game_count(counting) {
 	case '5x11_11':
 		return 5;
 	case '3x21':
+	case '3x15':
 	case '3x11_15':
 	case '3x15_18':
 	case '2x21+11':
@@ -438,7 +447,7 @@ function recalc_after_score(s, team_id, press) {
 			is_interval = (
 				(s.game.score[team_id] === 11) && (s.game.score[1 - team_id] < 11)
 			);
-		} else if (counting === '3x15_18') {
+		} else if (counting === '3x15_18' || counting == '3x15') {
 			is_interval = (
 				(s.game.score[team_id] === 8) && (s.game.score[1 - team_id] < 8)
 			);
@@ -486,6 +495,7 @@ function recalc_after_score(s, team_id, press) {
 			rest_duration = 60000;
 			break;
 		case '3x21':
+		case '3x15':
 		case '3x11_15':
 		case '3x15_18':
 		case '2x21+11':
@@ -898,6 +908,20 @@ function state(s) {
 					s.game.matchpoint = true;
 				}
 			} else if ((!s.game.team1_serving) && (((s.game.score[1] === 20) && (s.game.score[0] < 20)) || (s.game.score[1] == 29))) {
+				if (s.match.game_score[1] === 0) {
+					s.game.gamepoint = true;
+				} else {
+					s.game.matchpoint = true;
+				}
+			}
+		} else if (counting === '3x15') {
+			if ((s.game.team1_serving) && (((s.game.score[0] === 14) && (s.game.score[1] < 14)) || (s.game.score[0] == 20))) {
+				if (s.match.game_score[0] === 0) {
+					s.game.gamepoint = true;
+				} else {
+					s.game.matchpoint = true;
+				}
+			} else if ((!s.game.team1_serving) && (((s.game.score[1] === 14) && (s.game.score[0] < 14)) || (s.game.score[1] == 20))) {
 				if (s.match.game_score[1] === 0) {
 					s.game.gamepoint = true;
 				} else {

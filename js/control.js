@@ -4,7 +4,7 @@ var control = (function() {
 function demo_match_start(setup) {
 	if (! setup) {
 		setup = {
-			counting: '3x21',
+			counting: '3x15',
 			team_competition: true,
 		};
 	}
