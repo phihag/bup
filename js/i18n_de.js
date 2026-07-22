@@ -152,7 +152,7 @@ var i18n_de = {
 
 'demo:team1': 'TV Refrath',
 'demo:player1.1': 'Jan Colin Völker',
-'demo:player1.2': 'Kilasu Ostermeyer',
+'demo:player1.2': 'Leona Michalski',
 'demo:team2': '1.BC Sbr.-Bischmisheim',
 'demo:player2.1': 'Marvin Seidel',
 'demo:player2.2': 'Isabel Lohau',
