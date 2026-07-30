@@ -1,0 +1,46 @@
+{
+  "type": "bup-export",
+  "version": 2,
+  "event": {
+    "staticnet_message": "Demo 3x55 BWF Team Match",
+    "courts": [
+      {
+        "court_id": 1,
+        "description": "1",
+        "match_id": "55demo"
+      }
+    ],
+    "matches": [
+      {
+        "setup": {
+          "match_name": "Match",
+          "teams": [
+            {
+              "players": [
+                {
+                  "name": "FC Shuttle"
+                }
+              ]
+            },
+            {
+              "players": [
+                {
+                  "name": "RC Racket"
+                }
+              ]
+            }
+          ],
+          "is_doubles": false,
+          "counting": "team3x55",
+          "match_id": "55demo"
+        }
+      }
+    ],
+    "id": "55demo",
+    "team_names": [
+      "FC Shuttle",
+      "RC Racket"
+    ],
+    "team_competition": true
+  }
+}

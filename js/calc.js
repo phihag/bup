@@ -76,6 +76,9 @@ function _is_winner(counting, game_idx, candidate, other) {
 	if (counting === '5x11_11') {
 		return (candidate === 11) && (other < 11);
 	}
+	if (counting === 'team3x55') {
+		return candidate >= 55;
+	}
 
 	throw new Error('Invalid counting scheme ' + counting);
 }
@@ -248,6 +251,7 @@ function winning_game_count(counting) {
 	case '2x21+11':
 	case '3x11_15':
 	case '3x15_18':
+	case 'team3x55':
 		return 2;
 	case '1x21':
 	case '1x11_15':
@@ -270,6 +274,7 @@ function max_game_count(counting) {
 	case '3x11_15':
 	case '3x15_18':
 	case '2x21+11':
+	case 'team3x55':
 		return 3;
 	case '1x21':
 	case '1x11_15':
@@ -441,26 +446,38 @@ function recalc_after_score(s, team_id, press) {
 		s.game.team1_serving = team_id === 0;
 	}
 
+	var server_score = s.game.score[team_id];
+	var receiver_score = s.game.score[1 - team_id];
 	var is_interval = null;
 	if (team_id !== null) {
 		if ((counting === '3x21') || (counting === '1x21') || ((counting === '2x21+11') && (game_idx < 2))) {
 			is_interval = (
-				(s.game.score[team_id] === 11) && (s.game.score[1 - team_id] < 11)
+				(server_score === 11) && (receiver_score < 11)
 			);
 		} else if (counting === '3x15_18' || counting == '3x15') {
 			is_interval = (
-				(s.game.score[team_id] === 8) && (s.game.score[1 - team_id] < 8)
+				(server_score === 8) && (receiver_score < 8)
 			);
 		} else if (counting === '3x11_15') {
 			is_interval = (
-				(s.game.score[team_id] === 6) && (s.game.score[1 - team_id] < 6)
+				(server_score === 6) && (receiver_score < 6)
 			);
 		} else if ((counting === '1x11_15') || (((counting === '5x11_15') || (counting === '5x11_15^90') || (counting === '5x11_15~NLA') || (counting === '5x11/3') || (counting === '5x11_11')) && (game_idx === 4)) || ((counting === '2x21+11') && (game_idx === 2))) {
 			is_interval = (
-				(s.game.score[team_id] === 6) && (s.game.score[1 - team_id] < 6)
+				(server_score === 6) && (receiver_score < 6)
 			);
 		} else if ((counting === '5x11_15') || (counting === '5x11_15^90') || (counting === '5x11_15~NLA') || (counting === '5x11/3') || (counting === '5x11_11')) {
 			is_interval = false;
+		} else if (counting === 'team3x55') {
+			var TEAM3x55_INTERVAL_SCORES = [6, 11, 17, 22, 28, 33, 39, 44, 50];
+			is_interval = false;
+			for (var i = 0;i < TEAM3x55_INTERVAL_SCORES.length;i++) {
+				var test_score = TEAM3x55_INTERVAL_SCORES[i];
+				if ((server_score === test_score) && (receiver_score < test_score)) {
+					is_interval = true;
+					break;
+				}
+			}
 		} else {
 			throw new Error('Invalid counting scheme ' + s.setup.counting);
 		}
@@ -472,9 +489,17 @@ function recalc_after_score(s, team_id, press) {
 			if (press.type == 'red-card') {
 				s.game.interval_marks.push(press);
 			}
+			var interval_duration = 60000;
+			if (counting === '5x11_15^90') {
+				interval_duration = 90000;
+			}
+			if (counting === 'team3x55' && server_score % 11 === 0) {
+				interval_duration = 120000;
+			}
+
 			s.timer = {
 				start: press.timestamp,
-				duration: (counting === '5x11_15^90' ? 90000 : 60000),
+				duration: interval_duration,
 				exigent: 25000,
 			};
 		}
@@ -501,6 +526,9 @@ function recalc_after_score(s, team_id, press) {
 		case '2x21+11':
 		case '5x11_15~NLA':
 			rest_duration = 120000;
+			break;
+		case 'team3x55':
+			rest_duration = 180000;
 			break;
 		case '1x21':
 		case '1x11_15':
@@ -532,7 +560,14 @@ function score(s, team_id, press) {
 
 	recalc_after_score(s, team_id, press);
 
-	s.game.change_sides = (s.game.interval && (s.match.finished_games.length === s.match.max_games - 1));
+	var change_sides = (s.game.interval && (s.match.finished_games.length === s.match.max_games - 1));
+	if (change_sides && s.setup.counting === 'team3x55') {
+		if (s.game.score[team_id] % 11 === 0) {
+			change_sides = false; // Interval/minigame end but no changing sides
+		}
+	}
+	s.game.change_sides = change_sides;
+
 	if (s.game.change_sides) {
 		s.game.team1_left = ! s.game.team1_left;
 	}
@@ -990,6 +1025,15 @@ function state(s) {
 			team_id = s.game.team1_serving ? 0 : 1;
 			if (s.game.score[team_id] === 10) {
 				if (s.match.game_score[team_id] < 2) {
+					s.game.gamepoint = true;
+				} else {
+					s.game.matchpoint = true;
+				}
+			}
+		} else if (counting === 'team3x55') {
+			team_id = s.game.team1_serving ? 0 : 1;
+			if (s.game.score[team_id] === 54) {
+				if (s.match.game_score[team_id] < 1) {
 					s.game.gamepoint = true;
 				} else {
 					s.game.matchpoint = true;

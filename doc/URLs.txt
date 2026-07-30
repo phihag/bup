@@ -32,6 +32,7 @@ tdemo     Tournament demo
 txdemo    Demo for transmission to turnier.de
 vdemo     Demo of an event (in progress)
 wdmudemo  Youth tournament demo (with lots of finals on Sunday)
+team55demo  3x55 Team competition (Work in progress)
 
 There is also:
 
