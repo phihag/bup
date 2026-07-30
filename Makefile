@@ -48,6 +48,8 @@ dist: cleandist ## Create distribution files
 	node div/minify_json.js div/nrwdemo.json dist/bup/div/nrwdemo.json
 	node div/minify_json.js div/tdemo.json dist/bup/div/tdemo.json
 	node div/minify_json.js div/rlmdemo.json dist/bup/div/rlmdemo.json
+	node div/minify_json.js div/team55demo.json dist/bup/div/team55demo.json
+
 	cp -R div/courtspot --target-directory dist/bup/div/
 	cp -R http_proxy --target-directory dist/bup/
 	mkdir -p dist/bup/div/scoresheet
