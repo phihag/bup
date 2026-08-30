@@ -210,6 +210,7 @@ var i18n_frch = {
 'settings:import from URL': 'Importer de l\'URL',
 'settings:import_url-placeholder': 'https://www.turnier.de/...',
 'settings:counting': 'Système de score:',
+'settings:counting|3x15': 'BWF depuis 2027 (3x15)',
 'settings:counting|3x21': 'BWF (3x21)',
 'settings:counting|2x21+11': '2x21, 3è set à 11',
 'settings:counting|5x11_15': 'BWF 2016 Experiment Option 1 (5x11 jusqu\'à au plus 15)',
