@@ -166,10 +166,11 @@ function convert_css(css_files, cssdist_fn, sources_dir, cb) {
 	], cb);
 }
 
-function transform_html(html) {
+function transform_html(html, version) {
 	html = html.replace(/<!--@DEV-->[\s\S]*?<!--\/@DEV-->/g, '');
 	html = html.replace(/<!--@PRODUCTION([\s\S]*?)-->/g, function(m, m1) {return m1;});
 	html = html.replace(/PRODUCTIONATTR-/g, '');
+	html = html.replace(/\{\{\s*VERSION\s*\}\}/g, encodeURIComponent(version));
 	return html;
 }
 
@@ -193,11 +194,6 @@ async function main() {
 	const version_fn = path.join(dist_dir, 'VERSION');
 	const version2_fn = path.join(dist_dir, 'VERSION.txt');
 
-	await (promisify(transform_file))(html_in_fn, html_out_fn, transform_html);
-	await (promisify(transform_file))(html_in_fn, html_out_fn2, transform_html);
-	await (promisify(uglify))([path.join(dev_dir, 'cachesw.js')], path.join(dist_dir, 'cachesw.js'));
-	await (promisify(ensure_mkdir))(sources_dir);
-
 	let version = args.version;
 	if (!version) {
 		const rev = process.env.BUP_DIST_GIT_REVISION || (await git_rev());
@@ -210,6 +206,12 @@ async function main() {
 		);
 		version = version_date + rev;
 	}
+
+	const transform_with_version = fn => transform_html(fn, version);
+	await (promisify(transform_file))(html_in_fn, html_out_fn, transform_with_version);
+	await (promisify(transform_file))(html_in_fn, html_out_fn2, transform_with_version);
+	await (promisify(uglify))([path.join(dev_dir, 'cachesw.js')], path.join(dist_dir, 'cachesw.js'));
+	await (promisify(ensure_mkdir))(sources_dir);
 
 	await fs.promises.writeFile(version_fn, version, {encoding: 'utf8'});
 	await fs.promises.writeFile(version2_fn, version, {encoding: 'utf8'});
